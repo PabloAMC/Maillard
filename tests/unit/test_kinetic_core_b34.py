@@ -56,16 +56,25 @@ def test_the_bundle_cites_the_right_authors_and_says_the_pdf_is_on_disk():
     # The buffer note's old "SOURCE PAPER NOT ON DISK" claim is kept as the audit record, and must
     # be LABELLED superseded rather than deleted -- the repo's standing practice for a corrected note.
     note = bench["conditions"]["buffer"]["provenance_note"]
-    assert note.startswith("WAVE B34") and "THE SOURCE IS ON DISK" in note
-    assert "SUPERSEDED 2026-09-11 AND RETAINED AS THE AUDIT RECORD" in note
-    assert note.index("THE SOURCE IS ON DISK") < note.index("SUPERSEDED")
+    # RE-PINNED 2026-11-06 (M0 data corrections, batch 1; CF-128): the B34 note claimed a printed '4.4-5.2' pH range
+    # that Table 3 does not print; it is superseded in turn, by the same practice, and kept whole after the new note.
+    assert note.startswith("M0 DATA CORRECTIONS, BATCH 1")
+    assert "SUPERSEDED 2026-11-06 AND RETAINED AS THE AUDIT RECORD: WAVE B34" in note
+    b34 = note[note.index("WAVE B34"):]
+    assert "THE SOURCE IS ON DISK" in b34 and "SUPERSEDED 2026-09-11 AND RETAINED AS THE AUDIT RECORD" in b34
+    assert b34.index("THE SOURCE IS ON DISK") < b34.index("SUPERSEDED")
 
 
 @pytest.mark.parametrize("compound,fold", [
     # RE-PINNED BY WAVE B41 (2026-09-11): 1.11 -> 1.27, 1.28 -> 1.01, 11.93 -> 9.31, 32.43 -> 6.63. The fed
     # 3-deoxy triangle and the formic-acid exit's pH term, fitted on pots this bundle is not in.
-    ("3-deoxyglucosone", 1.27), ("methylglyoxal", 1.01), ("5-Hydroxymethylfurfural (HMF)", 9.31),
-    ("3,4-dideoxyglucosone", 6.63), ("glyoxal", 34.83), ("glucosone", 62.99),
+    # RE-PINNED 2026-11-06 (M0 data corrections, batch 1; CF-128): Leitzen's Table 6 unheated levels are now declared
+    # as carried (GO 1000, MGO 900, glucosone 100, HMF 100 ppb) and the pot starts at its printed pH 4.98, not the end
+    # pH 4.36. glyoxal 34.83 -> 4.82, glucosone 62.99 -> 34.24, MGO 1.01 -> 1.33 (now over), HMF 9.31 -> 8.89 (all
+    # the carried levels); 3-DG 1.27 -> 1.26 and 3,4-DGE 6.63 -> 6.69 from the start pH (amine-free entries carry no pH
+    # term, so it moves almost nothing).
+    ("3-deoxyglucosone", 1.26), ("methylglyoxal", 1.33), ("5-Hydroxymethylfurfural (HMF)", 8.89),
+    ("3,4-dideoxyglucosone", 6.69), ("glyoxal", 4.82), ("glucosone", 34.24),
 ])
 def test_the_six_observables_score_where_the_prereg_said(compound, fold):
     scores = json.loads(SCORES.read_text())
@@ -88,5 +97,7 @@ def test_the_entry_is_right_and_the_step_after_it_is_not():
     # still outside threefold, no longer the deficit this test was written about.
     assert f["3-deoxyglucosone"] < 1.5 and 3.0 < f["3,4-dideoxyglucosone"] < 10.0
     assert f["methylglyoxal"] < 1.5
-    # and the two that are structurally absent in an amine-free pot, with a measured size
-    assert f["glucosone"] > 30.0 and f["glyoxal"] > 30.0
+    # and the two that are structurally absent in an amine-free pot, with a measured size.
+    # RE-PINNED 2026-11-06 (CF-128): glyoxal 34.8x -> 4.8x once Table 6's unheated 1.0 ug/mL is declared as carried --
+    # most of the glyoxal deficit was a pot-definition artefact. The glucosone deficit stands (63x -> 34x).
+    assert f["glucosone"] > 30.0 and 3.0 < f["glyoxal"] < 10.0

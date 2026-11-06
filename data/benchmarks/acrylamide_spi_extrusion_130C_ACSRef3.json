@@ -6,19 +6,22 @@
   "source_doi": "10.3390/ijms25168668",
   "precursors": {
     "Soy protein isolate": {
-      "concentration_mM": 50.0
+      "concentration_mM": null,
+      "concentration_note": "WITHDRAWN 2026-11-06 (was 50.0 mM): Ma 2024 does not print it. Secs. 3.1-3.2 name soy protein isolate and corn starch (9:1 w/w) as the only extrusion materials -- no asparagine or glucose is added -- and Table 1 prints water, protein and total amino acids only: no free asparagine, no reducing sugar, no molarity. The key is kept, null, so the gap stays visible (value_withdrawal; CF-131)."
     },
     "L-Asparagine": {
-      "concentration_mM": 42.0
+      "concentration_mM": null,
+      "concentration_note": "WITHDRAWN 2026-11-06 (was 42.0 mM): Ma 2024 does not print it. Secs. 3.1-3.2 name soy protein isolate and corn starch (9:1 w/w) as the only extrusion materials -- no asparagine or glucose is added -- and Table 1 prints water, protein and total amino acids only: no free asparagine, no reducing sugar, no molarity. The key is kept, null, so the gap stays visible (value_withdrawal; CF-131)."
     },
     "D-Glucose": {
-      "concentration_mM": 42.0
+      "concentration_mM": null,
+      "concentration_note": "WITHDRAWN 2026-11-06 (was 42.0 mM): Ma 2024 does not print it. Secs. 3.1-3.2 name soy protein isolate and corn starch (9:1 w/w) as the only extrusion materials -- no asparagine or glucose is added -- and Table 1 prints water, protein and total amino acids only: no free asparagine, no reducing sugar, no molarity. The key is kept, null, so the gap stays visible (value_withdrawal; CF-131)."
     }
   },
   "conditions": {
     "temp_C": 130,
     "ph": 6.0,
-    "water_activity": 0.35,
+    "water_activity": null,
     "time_min": 0.4167,
     "vessel": {
       "fill_mL": null,
@@ -29,9 +32,10 @@
       "stirred": null,
       "provenance_class": "primary_source_pdf",
       "provenance_note": "WAVE B36 (2026-09-11): THE SOURCE IS ON DISK -- Ma, Fu, Cheng & Liu 2024 (Int. J. Mol. Sci. 25:8668), data/articles/Ma2024.pdf, dossier ma2024_extraction.md. Read from the print, sec. 3.2: a pilot twin-screw extruder with ten heating zones; the first five at 80, 80, 85, 90 and 100 C; this bundle's 130 C is arm (1) of the temperature series, which sets the last five to 110, 120, 130, 130 and 130 C; screw speed 150 rpm; feed 6.0 kg/h raw material plus 2.57 kg/h water; 30 % moisture; soy protein isolate : corn starch 9:1 (w/w). THE PAPER PRINTS NO RESIDENCE TIME: the 25 s below is not in the source and is an assumption, kept because a bundle is an isothermal hold and this fit row's report is frozen. B45 (2026-09-11): THE ASSUMPTION NOW HAS A MEASURED BRACKET. Unlu & Faller 2002 (J. Food Eng. 53:115, unlu2002_extraction.md) measure a twin-screw residence time distribution at THIS pot's screw speed (150 rpm) and feed rate (8.55 against 8.57 kg/h) on a machine of nearly this L/D (38.7 against 40:1): GMRT 123 s whole-barrel, one standard deviation 87-174 s. Three of Ma's ten zones are at 130 C, so on an equal-zone-length assumption the 130 C portion is about 37 s against the 25 s carried here -- the right order, about 1.5x, NOT the fourfold the reading list feared. It is an estimate and not a transfer: Unlu's feed is degermed cornmeal at 25 % moisture, not a 90 %-protein melt at 30 %, and melt viscosity sets barrel fill. The 25 s therefore STAYS, now bracketed rather than merely flagged.Figure 2D, read as an image: 130 C bar ~150 ug/kg (the scored value), 150 C ~120, 170 C ~82, and the UNEXTRUDED CONTROL ~38 ug/kg -- a starting level this bundle does not declare (named in the dossier, not acted on). ||| PRIOR NOTE, SUPERSEDED 2026-09-11 AND RETAINED AS THE AUDIT RECORD: Ma et al. 2024, Int. J. Mol. Sci. 25:8668, twin-screw extrusion of SPI + corn starch at 30 % moisture (die-zone 130 C; the bundle's 25 s is the residence time). NOT ON DISK as a PDF; the repo carries its Europe PMC full text for the directional panel (second-hand). An extruder has no fixed headspace: oxygen access is process-specific (continuous_process). Water source not applicable to a melt."
-    }
+    },
+    "water_activity_note": "WITHDRAWN 2026-11-06 (was 0.35): Ma 2024 prints no water activity. Table 1 gives the 130 C product's water as 25.0 % and the feed was 30 % moisture (sec. 3.2); a_w 0.35 follows from neither (value_withdrawal).",
+    "ph_note": "NOT IN THE SOURCE (2026-11-06): Ma 2024 prints no pH of the extrusion material (the only pH values in the paper are the amino-acid hydrolysate's 6-8 and an assay buffer's 7). The 6.0 is unsourced and is NOT withdrawn only because the benchmark schema requires a number here (a nullable pH is a schema change, a separate decision). No prediction reads it: the charge is withdrawn and the row is refused."
   },
-  "sme_kj_per_kg": 250.0,
   "moisture_regime": "lme",
   "metadata": {
     "tier": "PRIMARY",
@@ -67,7 +71,8 @@
   "measured_volatiles": {
     "acrylamide": {
       "conc_ppb": 150,
-      "uncertainty_pct": 20
+      "uncertainty_pct": 20,
+      "scoring_refused": "precursor charge not printed. Ma 2024 (secs. 3.1-3.2, Table 1) adds no asparagine or glucose and prints no free asparagine, reducing sugar, pH or water activity, so the pot the row was integrated at (SPI 50, Asn 42, Glc 42 mM, pH 6.0, a_w 0.35) is not the paper's. The charge was withdrawn 2026-11-06 (value_withdrawal; CF-131). The measured 150 ug/kg (Fig. 2D, 130 C arm) is kept as the datum."
     }
   },
   "content_verification": {
@@ -77,5 +82,25 @@
     "quoted_values": "Acrylamide (ug/kg) appears only in Figure 2 (A-D); the text says 'The lowest and highest acrylamide content were found in PBMAs extruded by 20% moisture and 130 C, respectively' and gives no number.",
     "quantification_verdict": "Isotope-dilution UPLC-MS/MS; the bundle's 150 ug/kg is a read-off of Figure 2D, not a tabulated value.",
     "verified_on": "2026-09-03"
+  },
+  "value_withdrawal": {
+    "date": "2026-11-06",
+    "rule": "owner 2026-11-02: a value that is not in the cited paper is withdrawn; coordinator ruling 2026-11-06 (M0 data corrections, batch 1): withdraw the charge, pH and a_w, refuse the row, keep the datum",
+    "withdrawn": [
+      "precursors.Soy protein isolate.concentration_mM 50.0",
+      "precursors.L-Asparagine.concentration_mM 42.0",
+      "precursors.D-Glucose.concentration_mM 42.0",
+      "conditions.water_activity 0.35",
+      "sme_kj_per_kg 250.0 (withdrawn 2026-11-06 on the coordinator's review of PR #88: Ma 2024 prints no specific mechanical energy -- no kJ/kg value anywhere in the text, tables or figures; secs. 2-3 discuss SME only qualitatively)"
+    ],
+    "not_withdrawn_schema": "conditions.ph 6.0 is not printed either; the schema requires a number, so it stays with conditions.ph_note saying so. Withdrawing it needs a nullable pH (schema decision).",
+    "also_unprinted_not_acted_on": [
+      "conditions.time_min 0.4167 (25 s): no residence time is printed; already labelled an assumption with the Unlu & Faller 2002 bracket (vessel provenance_note)"
+    ],
+    "kept": "measured_volatiles.acrylamide 150 ug/kg (Fig. 2D, 130 C bar, letter a), re-read by the second reader 2026-11-06 from the rendered figure",
+    "origin": "the pre-DOI 'ACSRef3' intake (benchmark_intake_registry acs_ref3_spi_acrylamide_fast_kinetics), whose sister value 62.62 ppb already matched nothing in the paper",
+    "basis": "First reader: results/validation/m0_integrity_batch1_other_lanes.md (draft PR #84), MF-39. Second reader (2026-11-06): Ma 2024 secs. 3.1 (materials), 3.2 (extrusion), 3.3 and Table 1 re-read from the PDF; 'water activity' and any free-Asn or reducing-sugar content occur nowhere in the text. Dossier: ma2024_extraction.md.",
+    "consequence": "the row is REFUSED on the panel (scoring_refused). The frozen B3 fit report still records it in its objective at the withdrawn charge: CF-131 (open).",
+    "consumers_of_the_withdrawn_sme": "none on the core: panel.core_spec does not read sme_kj_per_kg, and the row is refused. The legacy src/extrusion.py SME surface read it until the SMILES lane retired; model_change_note below is that lane's audit record and still quotes the 250 kJ/kg."
   }
 }

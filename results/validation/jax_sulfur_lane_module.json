@@ -1,0 +1,1404 @@
+{
+ "artifact": "jax_sulfur_lane_module",
+ "generated_by": "scripts/generators/build_jax_sulfur_lane_module.py",
+ "env": "maillard-jax",
+ "jax_version": "0.12.0.1",
+ "uptime_start": "23:29  up 4 days,  6:39, 1 user, load averages: 11.60 14.73 16.70",
+ "structure": {
+  "reactions": 132,
+  "species": 62,
+  "reactions_equal_engine_order": true,
+  "stoichiometry_equal": true,
+  "coordinates": 164,
+  "hand_ported": [
+   "ch_oligomer_fft",
+   "ch_oligomer_mft",
+   "ch_thioether_release",
+   "ch_thioether_release_fft",
+   "r_amadori",
+   "r_cama_dpo",
+   "r_cama_form",
+   "r_cama_tdp",
+   "r_cys_h2s",
+   "r_dpo_aa",
+   "r_dpo_ddp_h2s",
+   "r_gsh_h2s",
+   "r_mgo_cys_h2s",
+   "r_mgo_cys_strecker",
+   "r_nf_decay_oh",
+   "r_nf_decay_oh_mgo",
+   "r_odg_dpo",
+   "r_pama_dpo",
+   "r_pama_dpo_n",
+   "r_pama_tdp",
+   "r_pama_tdp_n",
+   "r_pent_amine",
+   "r_pent_mgo",
+   "r_tdp_cys_trap",
+   "r_tdp_mgo",
+   "r_thi_h2s",
+   "r_ttca_form"
+  ],
+  "off": [
+   "r_ttca_form",
+   "r_cama_form",
+   "r_cama_dpo",
+   "r_cama_tdp",
+   "r_dpo_ddp_h2s",
+   "r_nf_decay_oh",
+   "r_nf_decay_oh_mgo",
+   "r_tdp_mgo",
+   "r_pent_mgo",
+   "r_mgo_cys_strecker",
+   "r_mgo_cys_h2s",
+   "r_tdp_cys_trap",
+   "r_odg_dpo",
+   "r_pent_amine",
+   "r_pama_dpo",
+   "r_pama_tdp",
+   "r_pama_dpo_n",
+   "r_pama_tdp_n",
+   "r_dpo_aa",
+   "ch_oligomer_mft",
+   "ch_oligomer_fft"
+  ],
+  "engine_custom": [
+   "ch_oligomer_fft",
+   "ch_oligomer_mft",
+   "ch_thioether_release",
+   "ch_thioether_release_fft",
+   "r_amadori",
+   "r_cama_dpo",
+   "r_cama_form",
+   "r_cama_tdp",
+   "r_cys_h2s",
+   "r_dpo_aa",
+   "r_dpo_ddp_h2s",
+   "r_gsh_h2s",
+   "r_mgo_cys_h2s",
+   "r_mgo_cys_strecker",
+   "r_nf_decay_oh",
+   "r_nf_decay_oh_mgo",
+   "r_odg_dpo",
+   "r_pama_dpo",
+   "r_pama_dpo_n",
+   "r_pama_tdp",
+   "r_pama_tdp_n",
+   "r_pent_amine",
+   "r_pent_mgo",
+   "r_tdp_cys_trap",
+   "r_tdp_mgo",
+   "r_thi_h2s",
+   "r_ttca_form"
+  ],
+  "problems": [],
+  "linear_coordinates": [
+   "k_ref:k_nf_shet",
+   "k_ref:k_dmhf_h2s",
+   "k_ref:k_ox_supply",
+   "k_ref:k_cys_ox",
+   "k_ref:k_red_ox",
+   "k_ref:k_dimer_release",
+   "k_ref:k_mele_site",
+   "k_ref:k_add",
+   "k_ref:k_redox_mp3p"
+  ],
+  "titratable_groups": [
+   "formic",
+   "acetic",
+   "cysteine",
+   "arp",
+   "ttca",
+   "buffer_phosphate",
+   "buffer_citrate",
+   "buffer_acetic",
+   "buffer_pyrophosphate",
+   "buffer_phthalate"
+  ]
+ },
+ "stage_seconds": {
+  "structure": 4.807800582959317,
+  "rates": 2.171610999968834,
+  "balance": 124.4034237920423,
+  "panel": 659.1866417499841,
+  "draws": 35.62684033298865,
+  "modes": 112.65297579101752,
+  "tight": 24.456572957977187,
+  "gradient": 105.93100691598374,
+  "fit_jacobian": 51.48694725002861
+ },
+ "rates": {
+  "shipped": {
+   "values": 33264,
+   "worst_relative": 3.2047996315842824e-13,
+   "nonzero_where_engine_zero": 0
+  },
+  "draw_11": {
+   "values": 33264,
+   "worst_relative": 3.2047996315842824e-13,
+   "nonzero_where_engine_zero": 0
+  },
+  "draw_29": {
+   "values": 33264,
+   "worst_relative": 3.2047996315842824e-13,
+   "nonzero_where_engine_zero": 0
+  }
+ },
+ "balance": {
+  "states": 66,
+  "sid": 1.0881671096120955e-11,
+  "ph": 4.658007313196322e-10,
+  "ionic_rel": 1.2751686880152774e-10,
+  "cool": 4.658007313196322e-10,
+  "engine_root_tolerance_ph": 1e-09
+ },
+ "uptime_end": "23:40  up 4 days,  6:50, 1 user, load averages: 11.17 11.28 13.41",
+ "wall_s": 659.2083561249892,
+ "panel": {
+  "tolerance": {
+   "rtol": 1e-08,
+   "atol": 1e-14,
+   "dex": 0.0001,
+   "ph": 0.0001
+  },
+  "pots": [
+   {
+    "id": "hofmann1998_c2c3_recombination_145C_20min_pH3",
+    "panel": "trust_loop",
+    "initial": {
+     "HA": 20.0,
+     "MP": 20.0
+    },
+    "max_dex": 1.0309174847122904e-08,
+    "worst_species": "MFT",
+    "max_abs_below_floor": 1.3784273676371687e-14,
+    "floor_mmol_L": 1e-06,
+    "jax_sweeps": [
+     3
+    ],
+    "engine_sweeps": [
+     3
+    ],
+    "max_abs_node_ph": 4.235509720729169e-10,
+    "max_abs_cooled_ph": 4.656608432185294e-10,
+    "jump_side_matched": null,
+    "tie_broken": false,
+    "pass": true,
+    "engine_s": 0.2895602920325473,
+    "jax_steps": 1041,
+    "load": "11.40 14.64 16.66",
+    "final_vs_integrate_program_dex": 7.825362580149431e-10,
+    "jax_k5_s": 0.4278103329706937,
+    "jax_k4_s": 0.3047621250152588,
+    "jax_k4_steps": 780,
+    "k4_max_dex": 6.782682415718e-09,
+    "k4_pass": true,
+    "first_call_s": 4.947794374951627
+   },
+   {
+    "id": "hofmann1998_c2c3_recombination_145C_20min_pH5",
+    "panel": "trust_loop",
+    "initial": {
+     "HA": 20.0,
+     "MP": 20.0
+    },
+    "max_dex": 9.853193816411476e-09,
+    "worst_species": "MFT",
+    "max_abs_below_floor": 1.320775485553769e-14,
+    "floor_mmol_L": 1e-06,
+    "jax_sweeps": [
+     3
+    ],
+    "engine_sweeps": [
+     3
+    ],
+    "max_abs_node_ph": 2.7751489994898293e-10,
+    "max_abs_cooled_ph": 4.65662175486159e-10,
+    "jump_side_matched": {
+     "engine_first_node_cooled_ph": 4.999999999534339,
+     "port_first_node_cooled_ph": 5.000000000000001,
+     "unnudged_max_dex": 9.853193816411476e-09
+    },
+    "tie_broken": false,
+    "pass": true,
+    "engine_s": 0.3039730000309646,
+    "jax_steps": 1149,
+    "load": "10.95 14.44 16.56",
+    "final_vs_integrate_program_dex": 1.262607574048502e-09,
+    "jax_k5_s": 0.47425429202849045,
+    "jax_k4_s": 0.2974153749528341,
+    "jax_k4_steps": 804,
+    "k4_max_dex": 6.798057672341429e-09,
+    "k4_pass": true,
+    "first_call_s": 0.5138051660032943
+   },
+   {
+    "id": "hofmann1998_c2c3_recombination_145C_20min_pH7",
+    "panel": "trust_loop",
+    "initial": {
+     "HA": 20.0,
+     "MP": 20.0
+    },
+    "max_dex": 1.2205553900912491e-08,
+    "worst_species": "MFT",
+    "max_abs_below_floor": 1.1855898457499168e-14,
+    "floor_mmol_L": 1e-06,
+    "jax_sweeps": [
+     3
+    ],
+    "engine_sweeps": [
+     3
+    ],
+    "max_abs_node_ph": 3.724416330896929e-10,
+    "max_abs_cooled_ph": 4.656612873077393e-10,
+    "jump_side_matched": null,
+    "tie_broken": false,
+    "pass": true,
+    "engine_s": 0.3570069579873234,
+    "jax_steps": 1773,
+    "load": "10.95 14.44 16.56",
+    "final_vs_integrate_program_dex": 1.5154325017086023e-09,
+    "jax_k5_s": 0.6865985000040382,
+    "jax_k4_s": 0.358038000005763,
+    "jax_k4_steps": 981,
+    "k4_max_dex": 7.799290102639134e-09,
+    "k4_pass": true,
+    "first_call_s": 0.7130927909747697
+   },
+   {
+    "id": "hofmann1998_fructose_cysteine_145C_20min_pH5",
+    "panel": "trust_loop",
+    "initial": {
+     "Cys": 33.0,
+     "Fru": 100.0
+    },
+    "max_dex": 3.436409263812834e-07,
+    "worst_species": "FUR",
+    "max_abs_below_floor": 6.85456472087059e-13,
+    "floor_mmol_L": 1e-06,
+    "jax_sweeps": [
+     7
+    ],
+    "engine_sweeps": [
+     7
+    ],
+    "max_abs_node_ph": 1.6680981040906318e-09,
+    "max_abs_cooled_ph": 1.3907310858485289e-09,
+    "jump_side_matched": null,
+    "tie_broken": false,
+    "pass": true,
+    "engine_s": 8.436220957955811,
+    "jax_steps": 4594,
+    "load": "10.83 14.23 16.45",
+    "final_vs_integrate_program_dex": 1.4813339621611021e-07,
+    "jax_k5_s": 1.882200542022474,
+    "jax_k4_s": 1.6746153750573285,
+    "jax_k4_steps": 4775,
+    "k4_max_dex": 2.8414750996574867e-08,
+    "k4_pass": true,
+    "first_call_s": 1.8871590410126373
+   },
+   {
+    "id": "hofmann1998_furan2aldehyde_h2s_145C_20min_pH5",
+    "panel": "trust_loop",
+    "initial": {
+     "FUR": 20.0,
+     "H2S": 20.0
+    },
+    "max_dex": 1.9695588893142713e-07,
+    "worst_species": "FUR",
+    "max_abs_below_floor": 2.865701627370617e-13,
+    "floor_mmol_L": 1e-06,
+    "jax_sweeps": [
+     3
+    ],
+    "engine_sweeps": [
+     3
+    ],
+    "max_abs_node_ph": 2.7751489994898293e-10,
+    "max_abs_cooled_ph": 4.65662175486159e-10,
+    "jump_side_matched": {
+     "engine_first_node_cooled_ph": 4.999999999534339,
+     "port_first_node_cooled_ph": 5.000000000000001,
+     "unnudged_max_dex": 1.9695588893142713e-07
+    },
+    "tie_broken": false,
+    "pass": true,
+    "engine_s": 0.3754842079943046,
+    "jax_steps": 4809,
+    "load": "9.70 13.50 16.08",
+    "final_vs_integrate_program_dex": 2.191491432768089e-09,
+    "jax_k5_s": 1.7035908750258386,
+    "jax_k4_s": 1.3758902080007829,
+    "jax_k4_steps": 3999,
+    "k4_max_dex": 2.3705218854530585e-07,
+    "k4_pass": true,
+    "first_call_s": 1.8956725420430303
+   },
+   {
+    "id": "hofmann1998_glucose_cysteine_145C_20min_pH5",
+    "panel": "trust_loop",
+    "initial": {
+     "Cys": 33.0,
+     "Glc": 100.0
+    },
+    "max_dex": 5.388205437384386e-07,
+    "worst_species": "OXV",
+    "max_abs_below_floor": 1.1599709622009885e-12,
+    "floor_mmol_L": 1e-06,
+    "jax_sweeps": [
+     7
+    ],
+    "engine_sweeps": [
+     7
+    ],
+    "max_abs_node_ph": 1.7216486014604016e-09,
+    "max_abs_cooled_ph": 1.909762570306839e-09,
+    "jump_side_matched": null,
+    "tie_broken": false,
+    "pass": true,
+    "engine_s": 9.277234666980803,
+    "jax_steps": 3801,
+    "load": "9.26 13.09 15.85",
+    "final_vs_integrate_program_dex": 4.002943212455534e-07,
+    "jax_k5_s": 1.4805800840258598,
+    "jax_k4_s": 1.8488700409652665,
+    "jax_k4_steps": 4826,
+    "k4_max_dex": 6.965632159960933e-08,
+    "k4_pass": true,
+    "first_call_s": 1.517568749957718
+   },
+   {
+    "id": "hofmann1998_norfuraneol_cysteine_145C_20min_pH5",
+    "panel": "trust_loop",
+    "initial": {
+     "NF": 20.0,
+     "Cys": 20.0
+    },
+    "max_dex": 4.165473108264095e-05,
+    "worst_species": "MFTD",
+    "max_abs_below_floor": 6.0127764505361864e-12,
+    "floor_mmol_L": 1e-06,
+    "jax_sweeps": [
+     5
+    ],
+    "engine_sweeps": [
+     5
+    ],
+    "max_abs_node_ph": 2.8227831403881964e-05,
+    "max_abs_cooled_ph": 2.325988290863279e-10,
+    "tie_broken": true,
+    "unforced_jax_sweeps": [
+     6
+    ],
+    "residual_jax_at_engine_count": 0.0010167292067322364,
+    "residual_engine": 0.0009226364510137586,
+    "jump_side_matched": {
+     "engine_first_node_cooled_ph": 5.000000000465661,
+     "port_first_node_cooled_ph": 4.999999999999997,
+     "unnudged_max_dex": 0.03636863955220804
+    },
+    "pass": true,
+    "engine_s": 1.2568843750050291,
+    "jax_steps": 3273,
+    "load": "9.01 12.49 15.49",
+    "final_vs_integrate_program_dex": 4.165473108264095e-05,
+    "jax_k5_s": 1.546869916957803,
+    "jax_k4_s": 1.1388724169810303,
+    "jax_k4_steps": 3224,
+    "k4_max_dex": 0.03636863955220715,
+    "k4_pass": false,
+    "first_call_s": 1.5031305840238929
+   },
+   {
+    "id": "hofmann1998_norfuraneol_h2s_145C_20min_pH5",
+    "panel": "trust_loop",
+    "initial": {
+     "NF": 20.0,
+     "H2S": 20.0
+    },
+    "max_dex": 1.803226346019926e-08,
+    "worst_species": "OX",
+    "max_abs_below_floor": 5.516057127579364e-15,
+    "floor_mmol_L": 1e-06,
+    "jax_sweeps": [
+     3
+    ],
+    "engine_sweeps": [
+     3
+    ],
+    "max_abs_node_ph": 2.7751489994898293e-10,
+    "max_abs_cooled_ph": 4.65662175486159e-10,
+    "jump_side_matched": {
+     "engine_first_node_cooled_ph": 4.999999999534339,
+     "port_first_node_cooled_ph": 5.000000000000001,
+     "unnudged_max_dex": 1.803226346019926e-08
+    },
+    "tie_broken": false,
+    "pass": true,
+    "engine_s": 0.3217110830009915,
+    "jax_steps": 3246,
+    "load": "8.91 12.30 15.37",
+    "final_vs_integrate_program_dex": 2.7861484230840006e-09,
+    "jax_k5_s": 1.3090021249954589,
+    "jax_k4_s": 1.0494198339874856,
+    "jax_k4_steps": 2970,
+    "k4_max_dex": 3.178782814750036e-08,
+    "k4_pass": true,
+    "first_call_s": 1.3210672499844804
+   },
+   {
+    "id": "hofmann1998_ribose_cysteine_145C_20min_pH5",
+    "panel": "trust_loop",
+    "initial": {
+     "Cys": 33.0,
+     "PENT": 100.0
+    },
+    "max_dex": 5.783820542504259e-06,
+    "worst_species": "PENT",
+    "max_abs_below_floor": 9.315057932409576e-12,
+    "floor_mmol_L": 1e-06,
+    "jax_sweeps": [
+     6
+    ],
+    "engine_sweeps": [
+     6
+    ],
+    "max_abs_node_ph": 6.413475972522065e-08,
+    "max_abs_cooled_ph": 3.0334765366291094e-08,
+    "jump_side_matched": null,
+    "tie_broken": false,
+    "pass": true,
+    "engine_s": 2.4314012499526143,
+    "jax_steps": 7099,
+    "load": "9.09 12.22 15.31",
+    "final_vs_integrate_program_dex": 7.341685765993589e-07,
+    "jax_k5_s": 2.8786292919539846,
+    "jax_k4_s": 2.9106844579800963,
+    "jax_k4_steps": 7635,
+    "k4_max_dex": 1.8431374293470526e-07,
+    "k4_pass": true,
+    "first_call_s": 3.005773874989245
+   },
+   {
+    "id": "resconi_2023_pbma_beef_identity_benchmark",
+    "panel": "trust_loop",
+    "initial": {
+     "Glc": 40.0,
+     "Cys": 10.0
+    },
+    "max_dex": 2.5849608675798663e-07,
+    "worst_species": "FUR",
+    "max_abs_below_floor": 3.1062248447278994e-13,
+    "floor_mmol_L": 1e-06,
+    "jax_sweeps": [
+     8
+    ],
+    "engine_sweeps": [
+     8
+    ],
+    "max_abs_node_ph": 2.4665780529176118e-09,
+    "max_abs_cooled_ph": 6.512426153904016e-10,
+    "jump_side_matched": null,
+    "tie_broken": false,
+    "pass": true,
+    "engine_s": 12.235511166974902,
+    "jax_steps": 6558,
+    "load": "10.00 12.07 15.11",
+    "final_vs_integrate_program_dex": 1.6469210795122535e-07,
+    "jax_k5_s": 2.7601511669927277,
+    "jax_k4_s": 2.7575282919569872,
+    "jax_k4_steps": 7228,
+    "k4_max_dex": 4.290455146715999e-08,
+    "k4_pass": true,
+    "first_call_s": 4.19182120799087
+   },
+   {
+    "id": "thiamine_cys_glucose_120C_Bolton1994",
+    "panel": "trust_loop",
+    "initial": {
+     "THI": 13.7,
+     "Cys": 10.5,
+     "Glc": 46.8
+    },
+    "max_dex": 5.822191786464259e-07,
+    "worst_species": "FFT",
+    "max_abs_below_floor": 9.865951127259446e-13,
+    "floor_mmol_L": 1e-06,
+    "jax_sweeps": [
+     7
+    ],
+    "engine_sweeps": [
+     7
+    ],
+    "max_abs_node_ph": 3.255357761133837e-09,
+    "max_abs_cooled_ph": 3.156968020334716e-10,
+    "jump_side_matched": null,
+    "tie_broken": false,
+    "pass": true,
+    "engine_s": 7.634887665975839,
+    "jax_steps": 3002,
+    "load": "10.72 11.98 14.85",
+    "final_vs_integrate_program_dex": 3.9719003641636164e-07,
+    "jax_k5_s": 1.3951898330124095,
+    "jax_k4_s": 1.830287832999602,
+    "jax_k4_steps": 4307,
+    "k4_max_dex": 4.120277896646485e-08,
+    "k4_pass": true,
+    "first_call_s": 1.292336750018876
+   },
+   {
+    "id": "mp_holdout_arp_glutathione_120C_120min_pH75_Zhou2023c",
+    "panel": "maillard_path_holdout",
+    "initial": {
+     "ARP": 20.0,
+     "GSH": 20.0
+    },
+    "max_dex": 3.0081904478507226e-07,
+    "worst_species": "FUR",
+    "max_abs_below_floor": 1.4971563983114865e-13,
+    "floor_mmol_L": 1e-06,
+    "jax_sweeps": [
+     7
+    ],
+    "engine_sweeps": [
+     7
+    ],
+    "max_abs_node_ph": 2.738274496039139e-09,
+    "max_abs_cooled_ph": 1.025649432051523e-08,
+    "jump_side_matched": null,
+    "tie_broken": false,
+    "pass": true,
+    "engine_s": 2.257937457994558,
+    "jax_steps": 8805,
+    "load": "12.62 12.22 14.80",
+    "final_vs_integrate_program_dex": 2.777800616193815e-07,
+    "jax_k5_s": 3.6183026669896208,
+    "jax_k4_s": 1.9895330000435933,
+    "jax_k4_steps": 5606,
+    "k4_max_dex": 4.017436916470274e-08,
+    "k4_pass": true,
+    "first_call_s": 5.330116750032175
+   },
+   {
+    "id": "mp_holdout_arp_glutathione_120C_30min_pH75_Zhou2023c",
+    "panel": "maillard_path_holdout",
+    "initial": {
+     "ARP": 20.0,
+     "GSH": 20.0
+    },
+    "max_dex": 2.318143970114761e-07,
+    "worst_species": "OXV",
+    "max_abs_below_floor": 3.906497928934507e-13,
+    "floor_mmol_L": 1e-06,
+    "jax_sweeps": [
+     6
+    ],
+    "engine_sweeps": [
+     6
+    ],
+    "max_abs_node_ph": 5.733730823465066e-09,
+    "max_abs_cooled_ph": 1.6472593067362595e-08,
+    "jump_side_matched": null,
+    "tie_broken": false,
+    "pass": true,
+    "engine_s": 1.551252250035759,
+    "jax_steps": 4102,
+    "load": "11.20 11.91 14.62",
+    "final_vs_integrate_program_dex": 7.321912764979288e-08,
+    "jax_k5_s": 1.6755543330218643,
+    "jax_k4_s": 0.8961450419737957,
+    "jax_k4_steps": 2464,
+    "k4_max_dex": 9.850963245128241e-08,
+    "k4_pass": true,
+    "first_call_s": 1.74577604199294
+   },
+   {
+    "id": "mp_holdout_arp_glutathione_120C_60min_pH75_Zhou2023c",
+    "panel": "maillard_path_holdout",
+    "initial": {
+     "ARP": 20.0,
+     "GSH": 20.0
+    },
+    "max_dex": 1.4870149911416775e-07,
+    "worst_species": "FUR",
+    "max_abs_below_floor": 1.2502472926269445e-13,
+    "floor_mmol_L": 1e-06,
+    "jax_sweeps": [
+     6
+    ],
+    "engine_sweeps": [
+     6
+    ],
+    "max_abs_node_ph": 4.407787912441563e-09,
+    "max_abs_cooled_ph": 9.771711440009767e-09,
+    "jump_side_matched": null,
+    "tie_broken": false,
+    "pass": true,
+    "engine_s": 1.8089775829575956,
+    "jax_steps": 5461,
+    "load": "10.50 11.72 14.50",
+    "final_vs_integrate_program_dex": 1.3879451832288225e-07,
+    "jax_k5_s": 2.2761680419789627,
+    "jax_k4_s": 1.245680041029118,
+    "jax_k4_steps": 3268,
+    "k4_max_dex": 2.0326258898251126e-08,
+    "k4_pass": true,
+    "first_call_s": 2.4664478749618866
+   },
+   {
+    "id": "mp_holdout_arp_glutathione_120C_90min_pH75_Zhou2023c",
+    "panel": "maillard_path_holdout",
+    "initial": {
+     "ARP": 20.0,
+     "GSH": 20.0
+    },
+    "max_dex": 2.715786093787642e-07,
+    "worst_species": "FUR",
+    "max_abs_below_floor": 1.7510265160477708e-13,
+    "floor_mmol_L": 1e-06,
+    "jax_sweeps": [
+     7
+    ],
+    "engine_sweeps": [
+     7
+    ],
+    "max_abs_node_ph": 3.88926846284221e-09,
+    "max_abs_cooled_ph": 1.5751977500144676e-09,
+    "jump_side_matched": null,
+    "tie_broken": false,
+    "pass": true,
+    "engine_s": 2.1530665830359794,
+    "jax_steps": 7641,
+    "load": "10.25 11.59 14.39",
+    "final_vs_integrate_program_dex": 2.6431296973328244e-07,
+    "jax_k5_s": 3.2246549159754068,
+    "jax_k4_s": 1.8054284160025418,
+    "jax_k4_steps": 4593,
+    "k4_max_dex": 4.7185978679920026e-08,
+    "k4_pass": true,
+    "first_call_s": 3.7811041669920087
+   },
+   {
+    "id": "mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH3",
+    "panel": "maillard_path_holdout",
+    "initial": {
+     "Cys": 33.0,
+     "Glc": 100.0
+    },
+    "max_dex": 5.248971906013367e-07,
+    "worst_species": "FFTD",
+    "max_abs_below_floor": 1.0686868503973558e-12,
+    "floor_mmol_L": 1e-06,
+    "jax_sweeps": [
+     6
+    ],
+    "engine_sweeps": [
+     6
+    ],
+    "max_abs_node_ph": 7.444689309465957e-10,
+    "max_abs_cooled_ph": 8.921352545598893e-11,
+    "jump_side_matched": null,
+    "tie_broken": false,
+    "pass": true,
+    "engine_s": 5.992137667024508,
+    "jax_steps": 1793,
+    "load": "9.86 11.36 14.21",
+    "final_vs_integrate_program_dex": 4.0720421168316534e-07,
+    "jax_k5_s": 0.7837867500493303,
+    "jax_k4_s": 1.0876611670246348,
+    "jax_k4_steps": 2764,
+    "k4_max_dex": 5.851518203314754e-08,
+    "k4_pass": true,
+    "first_call_s": 0.8082864589523524
+   },
+   {
+    "id": "mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH7",
+    "panel": "maillard_path_holdout",
+    "initial": {
+     "Cys": 33.0,
+     "Glc": 100.0
+    },
+    "max_dex": 4.097585639684098e-07,
+    "worst_species": "FFT",
+    "max_abs_below_floor": 1.350192129241085e-13,
+    "floor_mmol_L": 1e-06,
+    "jax_sweeps": [
+     6
+    ],
+    "engine_sweeps": [
+     6
+    ],
+    "max_abs_node_ph": 3.7926115581399245e-09,
+    "max_abs_cooled_ph": 5.596871410773474e-09,
+    "jump_side_matched": null,
+    "tie_broken": false,
+    "pass": true,
+    "engine_s": 8.935724124952685,
+    "jax_steps": 8484,
+    "load": "11.46 11.51 14.14",
+    "final_vs_integrate_program_dex": 2.541681185519451e-07,
+    "jax_k5_s": 3.486543499981053,
+    "jax_k4_s": 2.082933249999769,
+    "jax_k4_steps": 5143,
+    "k4_max_dex": 4.834123590313766e-08,
+    "k4_pass": true,
+    "first_call_s": 3.794427666987758
+   },
+   {
+    "id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3",
+    "panel": "maillard_path_holdout",
+    "initial": {
+     "Cys": 33.0,
+     "PENT": 100.0
+    },
+    "max_dex": 5.869809118763669e-07,
+    "worst_species": "PENT",
+    "max_abs_below_floor": 3.8145141012125975e-13,
+    "floor_mmol_L": 1e-06,
+    "jax_sweeps": [
+     4
+    ],
+    "engine_sweeps": [
+     4
+    ],
+    "max_abs_node_ph": 4.189133484544527e-10,
+    "max_abs_cooled_ph": 3.559028627364569e-10,
+    "jump_side_matched": null,
+    "tie_broken": false,
+    "pass": true,
+    "engine_s": 1.4907660000026226,
+    "jax_steps": 2277,
+    "load": "10.87 11.30 13.93",
+    "final_vs_integrate_program_dex": 8.888437630361068e-08,
+    "jax_k5_s": 1.0092172080185264,
+    "jax_k4_s": 2.4096420829882845,
+    "jax_k4_steps": 5937,
+    "k4_max_dex": 1.5850692580698933e-07,
+    "k4_pass": true,
+    "first_call_s": 1.045090291008819
+   },
+   {
+    "id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7",
+    "panel": "maillard_path_holdout",
+    "initial": {
+     "Cys": 33.0,
+     "PENT": 100.0
+    },
+    "max_dex": 5.286630724299357e-07,
+    "worst_species": "Cys",
+    "max_abs_below_floor": 9.847381420668882e-13,
+    "floor_mmol_L": 1e-06,
+    "jax_sweeps": [
+     4
+    ],
+    "engine_sweeps": [
+     4
+    ],
+    "max_abs_node_ph": 5.366711519627643e-10,
+    "max_abs_cooled_ph": 2.532392073817391e-10,
+    "jump_side_matched": null,
+    "tie_broken": false,
+    "pass": true,
+    "engine_s": 1.2342501250095665,
+    "jax_steps": 4608,
+    "load": "10.54 11.21 13.85",
+    "final_vs_integrate_program_dex": 3.3970913193570595e-08,
+    "jax_k5_s": 2.085458000015933,
+    "jax_k4_s": 2.5015940410085022,
+    "jax_k4_steps": 6246,
+    "k4_max_dex": 2.48728311724733e-07,
+    "k4_pass": true,
+    "first_call_s": 2.1087087499909103
+   },
+   {
+    "id": "mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5",
+    "panel": "maillard_path_holdout",
+    "initial": {
+     "Cys": 33.0,
+     "PENT": 100.0
+    },
+    "max_dex": 5.783820542504259e-06,
+    "worst_species": "PENT",
+    "max_abs_below_floor": 9.315057932409576e-12,
+    "floor_mmol_L": 1e-06,
+    "jax_sweeps": [
+     6
+    ],
+    "engine_sweeps": [
+     6
+    ],
+    "max_abs_node_ph": 6.413475972522065e-08,
+    "max_abs_cooled_ph": 3.0334765366291094e-08,
+    "jump_side_matched": null,
+    "tie_broken": false,
+    "pass": true,
+    "engine_s": 2.834805625025183,
+    "jax_steps": 7099,
+    "load": "10.53 11.14 13.74",
+    "final_vs_integrate_program_dex": 7.341685765993589e-07,
+    "jax_k5_s": 3.2877249169978313,
+    "jax_k4_s": 2.6918745419825427,
+    "jax_k4_steps": 7635,
+    "k4_max_dex": 1.8431374293470526e-07,
+    "k4_pass": true,
+    "first_call_s": 3.9973890830297023
+   },
+   {
+    "id": "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026",
+    "panel": "maillard_path_holdout",
+    "initial": {
+     "PENT": 25.0,
+     "Cys": 25.0
+    },
+    "max_dex": 1.2136208269453164e-06,
+    "worst_species": "PENT",
+    "max_abs_below_floor": 1.2461879655777759e-12,
+    "floor_mmol_L": 1e-06,
+    "jax_sweeps": [
+     6
+    ],
+    "engine_sweeps": [
+     6
+    ],
+    "max_abs_node_ph": 8.22939592026728e-08,
+    "max_abs_cooled_ph": 3.5642838014382505e-08,
+    "jump_side_matched": null,
+    "tie_broken": false,
+    "pass": true,
+    "engine_s": 2.369173082988709,
+    "jax_steps": 5644,
+    "load": "9.99 10.95 13.58",
+    "final_vs_integrate_program_dex": 1.8403311141668155e-07,
+    "jax_k5_s": 2.3406868330202997,
+    "jax_k4_s": 2.4607635000138544,
+    "jax_k4_steps": 7252,
+    "k4_max_dex": 2.1922440218702377e-07,
+    "k4_pass": true,
+    "first_call_s": 2.4729537500534207
+   },
+   {
+    "id": "mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026",
+    "panel": "maillard_path_holdout",
+    "initial": {
+     "PENT": 25.0,
+     "Cys": 25.0
+    },
+    "max_dex": 1.1634373358049288e-06,
+    "worst_species": "PENT",
+    "max_abs_below_floor": 8.679900937631542e-13,
+    "floor_mmol_L": 1e-06,
+    "jax_sweeps": [
+     6
+    ],
+    "engine_sweeps": [
+     6
+    ],
+    "max_abs_node_ph": 7.301618065724824e-08,
+    "max_abs_cooled_ph": 3.076967303172751e-08,
+    "jump_side_matched": null,
+    "tie_broken": false,
+    "pass": true,
+    "engine_s": 2.2566567500471137,
+    "jax_steps": 5578,
+    "load": "11.12 11.13 13.57",
+    "final_vs_integrate_program_dex": 1.8336794571638393e-07,
+    "jax_k5_s": 2.1636865839827806,
+    "jax_k4_s": 2.154477500007488,
+    "jax_k4_steps": 6951,
+    "k4_max_dex": 1.2807539917503163e-07,
+    "k4_pass": true,
+    "first_call_s": 2.142652666021604
+   },
+   {
+    "id": "mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026",
+    "panel": "maillard_path_holdout",
+    "initial": {
+     "PENT": 25.0,
+     "Cys": 25.0
+    },
+    "max_dex": 1.1005302393840566e-06,
+    "worst_species": "PENT",
+    "max_abs_below_floor": 1.881670719062929e-12,
+    "floor_mmol_L": 1e-06,
+    "jax_sweeps": [
+     6
+    ],
+    "engine_sweeps": [
+     6
+    ],
+    "max_abs_node_ph": 5.650856405026161e-08,
+    "max_abs_cooled_ph": 3.194653963589644e-08,
+    "jump_side_matched": null,
+    "tie_broken": false,
+    "pass": true,
+    "engine_s": 2.213365000032354,
+    "jax_steps": 5658,
+    "load": "10.31 10.95 13.45",
+    "final_vs_integrate_program_dex": 2.3890150435690316e-07,
+    "jax_k5_s": 2.0949628750095144,
+    "jax_k4_s": 2.288340999977663,
+    "jax_k4_steps": 6955,
+    "k4_max_dex": 1.4272225801192917e-07,
+    "k4_pass": true,
+    "first_call_s": 2.1184474590118043
+   },
+   {
+    "id": "mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026",
+    "panel": "maillard_path_holdout",
+    "initial": {
+     "PENT": 25.0,
+     "Cys": 25.0
+    },
+    "max_dex": 1.5801502692980307e-06,
+    "worst_species": "PENT",
+    "max_abs_below_floor": 1.8745260317282227e-12,
+    "floor_mmol_L": 1e-06,
+    "jax_sweeps": [
+     6
+    ],
+    "engine_sweeps": [
+     6
+    ],
+    "max_abs_node_ph": 7.186946948678496e-08,
+    "max_abs_cooled_ph": 3.616115051841007e-08,
+    "jump_side_matched": null,
+    "tie_broken": false,
+    "pass": true,
+    "engine_s": 2.1331203750451095,
+    "jax_steps": 5514,
+    "load": "14.71 11.85 13.70",
+    "final_vs_integrate_program_dex": 3.0808895434830674e-07,
+    "jax_k5_s": 1.9941547089838423,
+    "jax_k4_s": 2.0499122500186786,
+    "jax_k4_steps": 6906,
+    "k4_max_dex": 2.6189569801715606e-07,
+    "k4_pass": true,
+    "first_call_s": 2.031527749961242
+   },
+   {
+    "id": "mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b",
+    "panel": "maillard_path_holdout",
+    "initial": {
+     "Cys": 40.0,
+     "PENT": 40.0
+    },
+    "max_dex": 6.067756741501285e-07,
+    "worst_species": "PENT",
+    "max_abs_below_floor": 6.446357497968104e-13,
+    "floor_mmol_L": 1e-06,
+    "jax_sweeps": [
+     6
+    ],
+    "engine_sweeps": [
+     6
+    ],
+    "max_abs_node_ph": 2.450880032256464e-08,
+    "max_abs_cooled_ph": 1.297116192233716e-09,
+    "jump_side_matched": null,
+    "tie_broken": false,
+    "pass": true,
+    "engine_s": 2.077022166980896,
+    "jax_steps": 7592,
+    "load": "12.44 11.52 13.54",
+    "final_vs_integrate_program_dex": 2.3716405816998076e-07,
+    "jax_k5_s": 2.5486200000159442,
+    "jax_k4_s": 2.1803281669854186,
+    "jax_k4_steps": 7438,
+    "k4_max_dex": 1.188165388299467e-07,
+    "k4_pass": true,
+    "first_call_s": 2.5875936669763178
+   }
+  ]
+ },
+ "draws": {
+  "seeds": [
+   11,
+   29,
+   47
+  ],
+  "rows": [
+   {
+    "seed": 11,
+    "id": "hofmann1998_ribose_cysteine_145C_20min_pH5",
+    "drawn_coordinates": 22,
+    "max_dex": 4.884598701515586e-06,
+    "worst_species": "PENT",
+    "max_abs_below_floor": 5.757023448544253e-12,
+    "floor_mmol_L": 1e-06,
+    "jax_sweeps": [
+     6
+    ],
+    "engine_sweeps": [
+     6
+    ],
+    "max_abs_node_ph": 6.88581369701069e-08,
+    "max_abs_cooled_ph": 3.3781214270334203e-08,
+    "jump_side_matched": null,
+    "tie_broken": false,
+    "pass": true
+   },
+   {
+    "seed": 11,
+    "id": "mp_holdout_arp_glutathione_120C_60min_pH75_Zhou2023c",
+    "drawn_coordinates": 22,
+    "max_dex": 5.343107367661304e-07,
+    "worst_species": "H2S",
+    "max_abs_below_floor": 2.3119793999692797e-13,
+    "floor_mmol_L": 1e-06,
+    "jax_sweeps": [
+     6
+    ],
+    "engine_sweeps": [
+     6
+    ],
+    "max_abs_node_ph": 7.621787645462064e-10,
+    "max_abs_cooled_ph": 1.7165282528708303e-09,
+    "jump_side_matched": null,
+    "tie_broken": false,
+    "pass": true
+   },
+   {
+    "seed": 29,
+    "id": "hofmann1998_ribose_cysteine_145C_20min_pH5",
+    "drawn_coordinates": 22,
+    "max_dex": 6.849909472528282e-06,
+    "worst_species": "PENT",
+    "max_abs_below_floor": 1.123023233825199e-11,
+    "floor_mmol_L": 1e-06,
+    "jax_sweeps": [
+     6
+    ],
+    "engine_sweeps": [
+     6
+    ],
+    "max_abs_node_ph": 8.231486781085096e-08,
+    "max_abs_cooled_ph": 3.5777425466676505e-08,
+    "jump_side_matched": null,
+    "tie_broken": false,
+    "pass": true
+   },
+   {
+    "seed": 29,
+    "id": "mp_holdout_arp_glutathione_120C_60min_pH75_Zhou2023c",
+    "drawn_coordinates": 22,
+    "max_dex": 5.813870735948967e-07,
+    "worst_species": "MFTD",
+    "max_abs_below_floor": 3.5422715222718033e-13,
+    "floor_mmol_L": 1e-06,
+    "jax_sweeps": [
+     6
+    ],
+    "engine_sweeps": [
+     6
+    ],
+    "max_abs_node_ph": 8.65343263711793e-09,
+    "max_abs_cooled_ph": 3.1901961072833274e-08,
+    "jump_side_matched": null,
+    "tie_broken": false,
+    "pass": true
+   },
+   {
+    "seed": 47,
+    "id": "hofmann1998_ribose_cysteine_145C_20min_pH5",
+    "drawn_coordinates": 22,
+    "max_dex": 5.085663850046274e-06,
+    "worst_species": "PENT",
+    "max_abs_below_floor": 9.174811604238633e-12,
+    "floor_mmol_L": 1e-06,
+    "jax_sweeps": [
+     6
+    ],
+    "engine_sweeps": [
+     6
+    ],
+    "max_abs_node_ph": 7.152638126228794e-08,
+    "max_abs_cooled_ph": 2.9803204348866075e-08,
+    "jump_side_matched": null,
+    "tie_broken": false,
+    "pass": true
+   },
+   {
+    "seed": 47,
+    "id": "mp_holdout_arp_glutathione_120C_60min_pH75_Zhou2023c",
+    "drawn_coordinates": 22,
+    "max_dex": 7.207092549421645e-07,
+    "worst_species": "ARP",
+    "max_abs_below_floor": 3.7037179554882076e-13,
+    "floor_mmol_L": 1e-06,
+    "jax_sweeps": [
+     6
+    ],
+    "engine_sweeps": [
+     6
+    ],
+    "max_abs_node_ph": 1.6645422817873623e-08,
+    "max_abs_cooled_ph": 2.3274626670399812e-10,
+    "jump_side_matched": null,
+    "tie_broken": false,
+    "pass": true
+   }
+  ]
+ },
+ "modes": {
+  "rows": [
+   {
+    "id": "synthetic_profile_25_145_100",
+    "coupling": "fixed_point_nodes",
+    "max_dex": 3.4571258833437923e-07,
+    "worst_species": "ACID",
+    "max_abs_below_floor": 8.658409482474862e-13,
+    "floor_mmol_L": 1e-06,
+    "jax_sweeps": [
+     7
+    ],
+    "engine_sweeps": [
+     7
+    ],
+    "max_abs_node_ph": 9.298388725653695e-09,
+    "max_abs_cooled_ph": 9.41660793785104e-09,
+    "jump_side_matched": null,
+    "tie_broken": false,
+    "pass": true
+   },
+   {
+    "id": "synthetic_staircase_100_140",
+    "coupling": "fixed_point_nodes",
+    "max_dex": 7.373886378836403e-06,
+    "worst_species": "PENT",
+    "max_abs_below_floor": 1.5001222530478366e-11,
+    "floor_mmol_L": 1e-06,
+    "jax_sweeps": [
+     6,
+     6
+    ],
+    "engine_sweeps": [
+     6,
+     6
+    ],
+    "max_abs_node_ph": 3.737767686473603e-07,
+    "max_abs_cooled_ph": 3.607044964937245e-07,
+    "jump_side_matched": null,
+    "tie_broken": false,
+    "pass": true
+   },
+   {
+    "id": "synthetic_clamped_pH6_130C",
+    "coupling": "fixed_point_nodes",
+    "max_dex": 5.853657070176155e-08,
+    "worst_species": "DPO",
+    "max_abs_below_floor": 3.3071946780196128e-15,
+    "floor_mmol_L": 1e-06,
+    "jax_sweeps": [
+     0
+    ],
+    "engine_sweeps": [
+     0
+    ],
+    "max_abs_node_ph": 0.0,
+    "max_abs_cooled_ph": 0.0,
+    "jump_side_matched": null,
+    "tie_broken": false,
+    "pass": true
+   },
+   {
+    "id": "hofmann1998_ribose_cysteine_145C_20min_pH5",
+    "coupling": "inline",
+    "max_dex": 6.96576258674142e-07,
+    "worst_species": "DPO",
+    "max_abs_below_floor": 2.11618087387985e-12,
+    "floor_mmol_L": 1e-06,
+    "jax_sweeps": [
+     0
+    ],
+    "engine_sweeps": [
+     0
+    ],
+    "max_abs_node_ph": 3.3007721000899437e-09,
+    "max_abs_cooled_ph": 2.23727880666047e-09,
+    "pass": true
+   },
+   {
+    "id": "mp_holdout_arp_glutathione_120C_60min_pH75_Zhou2023c",
+    "coupling": "inline",
+    "max_dex": 1.1489242224271834e-07,
+    "worst_species": "MFTD",
+    "max_abs_below_floor": 1.0869202906253316e-13,
+    "floor_mmol_L": 1e-06,
+    "jax_sweeps": [
+     0
+    ],
+    "engine_sweeps": [
+     0
+    ],
+    "max_abs_node_ph": 7.469287410799552e-10,
+    "max_abs_cooled_ph": 3.05530711841584e-10,
+    "pass": true
+   },
+   {
+    "id": "synthetic_profile_25_145_100",
+    "coupling": "inline",
+    "max_dex": 9.753562170367047e-06,
+    "worst_species": "DDP",
+    "max_abs_below_floor": 3.3486214962059964e-12,
+    "floor_mmol_L": 1e-06,
+    "jax_sweeps": [
+     0
+    ],
+    "engine_sweeps": [
+     0
+    ],
+    "max_abs_node_ph": 2.5928828861765396e-08,
+    "max_abs_cooled_ph": 2.8008011021540824e-08,
+    "pass": true
+   }
+  ]
+ },
+ "tight": {
+  "tolerance": {
+   "rtol": 1e-10,
+   "atol": 1e-16,
+   "dex": 1e-06
+  },
+  "rows": [
+   {
+    "id": "hofmann1998_ribose_cysteine_145C_20min_pH5",
+    "max_dex": 3.9881637547978244e-08,
+    "worst_species": "PENT",
+    "max_abs_below_floor": 6.478600974952015e-14,
+    "floor_mmol_L": 1e-06,
+    "jax_sweeps": [
+     6
+    ],
+    "engine_sweeps": [
+     6
+    ],
+    "max_abs_node_ph": 6.822649112336876e-10,
+    "max_abs_cooled_ph": 1.9239276838334263e-11,
+    "jump_side_matched": null,
+    "tie_broken": false,
+    "pass": true,
+    "jax_s": 7.269320000021253,
+    "engine_s": 1.901855667005293
+   },
+   {
+    "id": "thiamine_cys_glucose_120C_Bolton1994",
+    "max_dex": 4.794221020176792e-09,
+    "worst_species": "OXV",
+    "max_abs_below_floor": 9.503625494294116e-15,
+    "floor_mmol_L": 1e-06,
+    "jax_sweeps": [
+     7
+    ],
+    "engine_sweeps": [
+     7
+    ],
+    "max_abs_node_ph": 4.674198805787455e-10,
+    "max_abs_cooled_ph": 2.0724932880966662e-10,
+    "jump_side_matched": null,
+    "tie_broken": false,
+    "pass": true,
+    "jax_s": 2.514740874990821,
+    "engine_s": 5.7935457499697804
+   },
+   {
+    "id": "mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b",
+    "max_dex": 6.96536872624165e-09,
+    "worst_species": "PENT",
+    "max_abs_below_floor": 7.48191677375483e-15,
+    "floor_mmol_L": 1e-06,
+    "jax_sweeps": [
+     6
+    ],
+    "engine_sweeps": [
+     6
+    ],
+    "max_abs_node_ph": 4.495603889154154e-10,
+    "max_abs_cooled_ph": 4.306155432232117e-11,
+    "jump_side_matched": null,
+    "tie_broken": false,
+    "pass": true,
+    "jax_s": 4.9634497910155915,
+    "engine_s": 1.9842976249638014
+   }
+  ]
+ },
+ "gradient": {
+  "pot": "mp_holdout_arp_glutathione_120C_30min_pH75_Zhou2023c",
+  "coordinates": [
+   "arp_amine_pka",
+   "acid_yield",
+   "log10_k:k_arp_dpo",
+   "ea:k_arp_dpo",
+   "log10_k:k_nf_mft"
+  ],
+  "steps": [
+   0.001,
+   2e-05,
+   0.0001,
+   0.01,
+   0.0001
+  ],
+  "grad": [
+   -0.422812432339736,
+   -0.34315609955484716,
+   -0.024473363414051957,
+   0.00019439872537789485,
+   0.9053098911609543
+  ],
+  "jacfwd": [
+   -0.4228124323397545,
+   -0.34315609955486714,
+   -0.02447336341404839,
+   0.0001943987253778662,
+   0.9053098911609759
+  ],
+  "central_fd": [
+   -0.4228137392598974,
+   -0.34315610641932887,
+   -0.02447336656441479,
+   0.00019439874678894853,
+   0.9053098906530721
+  ],
+  "rel_grad_vs_fd": [
+   3.0910068431395183e-06,
+   2.0003961977858118e-08,
+   1.2872617354970623e-07,
+   1.1013987502050687e-07,
+   5.610036806175158e-10
+  ],
+  "rel_grad_vs_jacfwd": [
+   4.3850808972514026e-14,
+   5.82359283993997e-14,
+   1.4573358582363064e-13,
+   1.473777114367601e-13,
+   2.3913744015955854e-14
+  ],
+  "finite": true,
+  "grad_first_call_s": 27.806756458012387,
+  "grad_s": 19.16239733301336,
+  "rtol": 1e-10,
+  "atol": 1e-16
+ },
+ "fit_jacobian": {
+  "pot": "mp_holdout_arp_glutathione_120C_30min_pH75_Zhou2023c",
+  "observables": 17,
+  "coordinates": [
+   "arp_amine_pka",
+   "acid_yield",
+   "log10_k:k_arp_dpo",
+   "ea:k_arp_dpo",
+   "log10_k:k_nf_mft"
+  ],
+  "jax_jacobian_s": 4.665058041980956,
+  "jax_jacobian_first_call_s": 13.109813667018898,
+  "jax_solve_s": 1.4735545419971459,
+  "engine_forward_fd_s": 10.885133208008483,
+  "engine_central_fd_s": 14.650350333016831,
+  "engine_runs_forward": 6,
+  "engine_runs_central": 10,
+  "max_col_rel_jax_vs_engine_central": 0.07926572913325079,
+  "max_col_rel_engine_forward_vs_central": 0.06925126396966019,
+  "load": "12.24 15.06 16.86"
+ }
+}
