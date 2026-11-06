@@ -1,11 +1,24 @@
 # Case M4: glucose to MFT; protein and other amines as classes
 
-**READY TO FREEZE as development grade, decider W6: pending the reduced-model power check** (2026-11-06; not
-frozen). Items 1 - 5 are complete under this week's rules. They freeze when three things have happened, in this order:
-1. the reduced forced-input mini-model power check of sec. 5.4 has run (it is specified there, not built);
-2. the demotions it orders are written in;
-3. the independent review (one round plus one confirmation) has answered what remains under "What should block the
-   freeze" (end of this file).
+**FROZEN 2026-11-06: items 1 - 5. Development grade on disk; decider W6 (decisive-measurements entry
+`glucose_mft_carbon_origin`), sized: arm 2 + arm 3, n = 3, 96 heatings.**
+- **Freeze commit:** FREEZE_SHA_PENDING. It is the commit that writes this header; a commit cannot contain its own
+  sha, so it is recorded by the commit that follows it.
+- **Status of each step:**
+  - the reduced-model power check has run (sec. 5.4 results, PR #101) and its demotions are written in;
+  - the premortem was adopted (FM1 - FM9);
+  - the coordinator's rulings are applied.
+- **From here:** items 1 - 5 change only by amendment, declared before any new data are read. Items 6 - 9 are appended
+  later, never edited into this part.
+- **Open on the freeze:**
+  - the power numbers must be re-checked under the revised judge once PR #99 is adopted (sec. 5.4, "a rule problem");
+  - the W6 request is sized from them.
+- **Item 5 tolerances follow sec. 7 item 5 as revised** (branch `judge-revision`, commit 455d8396; adoption pending its
+  confirmation).
+  - Before any scoring, the case's measurement model (sec. 5.1) and the reduced power check (sec. 5.4) are re-checked
+    under the adopted text.
+  - The revised judge also removes the "means differ by more than omega" adequacy escape that the power check flagged.
+  - **No decisive data is read before then.**
 
 No engine was run for this case, on any pot. The changelog is at the end.
 
@@ -1044,6 +1057,89 @@ data only: no measured value of any unit is read, and no engine run on D3's pots
   - P(arm 3 separates the claim from R4') ~0.65;
   - P(arm 2 separates the claim from R2) ~0.6.
 
+
+**Results of the reduced-model power check (2026-11-06; draft PR #101, branch `m4-reduced-power`,
+`results/validation/kinetic_core_m4_reduced_power.md`, commit 6c840545; SYNTHETIC; no measured decisive, reserved or
+TEST value read).** The pre-result checks passed:
+- the hand-computed label table was reproduced exactly;
+- every balance closed (hexose units, carbon, cysteine, sulfide and label positions all < 1e-10 mM);
+- R0's 1:1 mixed share reproduced the binomial 0.5 exactly;
+- step-size error was <= 0.065 dex;
+- the shipped literals matched the engine within 0.5 %.
+
+**Job (a): the on-disk falsifications, by arithmetic.**
+- **C2 + C3 (R0's route and R3) against D3 is falsified.** The route leaves a mixed share of 2q(1 - q) = 0.500 in a
+  1:1 pool, whatever its rate constants (0.495 - 0.500 for q = 0.45 - 0.55). D3's printed mixed cell is <= 1 %, a miss
+  of **49 sd** (~1200 nats).
+  - The largest C2 + C3 share of the hexose MFT still compatible is **f <= 0.059** (1.96 sd).
+  - It holds at every band corner. **One assumption:** the two fragments come from independent molecules (no in-cage
+    recombination of one glucose's own C2 and C3).
+- **R4-as-written is falsified structurally** (D5; no Cys-hexose Amadori species). R4' is not falsified on disk.
+
+**Job (b): D1 / D2, development only (never credited).** P(credit the generating rival), n = 3, floors x0.1 - x10:
+- D1: claim vs R2 1.00; R1 vs R5 0.00; R4' vs claim 0.00.
+- D2: claim vs R2 0.01 - 0.03; R1 vs R5 0.82 - 0.87; R4' vs claim 0.59 - 0.65.
+- D1 + D2: claim vs R2 1.00; R1 vs R5 0.81 - 0.87; R4' vs claim 0.59 - 0.69.
+
+These are a development record under ruling 2. They would have credited the claim over R2 had D1 / D2 been unseen.
+
+**Job (c): the designed experiment, per arm.** Primary = P(separates), the smaller of the two directions. Required
+agreement = the minimum over every declared form at both band ends, with the worst form in brackets. **DEMOTED** where
+that minimum is < 0.5 ("ranks, does not decide").
+
+| design (heatings, n = 3) | R1 vs R5 | claim vs R0 | claim vs R2 | R4' vs claim |
+|---|---|---|---|---|
+| arm 1 (108) | 0.99 -> 0.73 [LOD x10] | 0.96 -> 0.67 [LOD x10] | 0.97 -> 0.73 [LOD x10] | 0.06 -> 0.00 [formation x0.1] **DEMOTED** |
+| arm 2 (24) | 0.99 -> 0.83 [LOD x10] | 0.97 -> 0.83 [LOD x10] | 0.98 -> 0.77 [LOD x10] | 0.00 -> 0.00 **DEMOTED** |
+| arm 3 (72) | 0.86 -> 0.47 [LOD x10] **DEMOTED** | 0.88 -> 0.67 [LOD x10] | 0.16 -> 0.00 [`k_ama_g` ceiling] **DEMOTED** | 0.90 -> 0.60 [LOD x10] |
+| arm 1 + arm 3 (180) | 0.99 -> 0.73 | 0.95 -> 0.83 | 0.97 -> 0.73 | 0.91 -> 0.67 |
+| **arm 2 + arm 3 (96)** | **0.99 -> 0.87** | **0.99 -> 0.87** | **0.98 -> 0.77** | **0.90 -> 0.70** |
+| arm 1 + arm 2 + arm 3 (204) | 0.99 -> 0.87 | 1.00 -> 0.90 | 0.99 -> 0.80 | 0.89 -> 0.67 |
+
+At n = 6 the minimum design's worst pair falls from 0.70 to 0.60 (the entries-floor form). So **n = 6 adds nothing**:
+the limit is the band, not the replicate noise. The full per-form tables, the N2 residual-O2 form, the per-truth table
+and the density diagnostics are in the results file.
+
+**THE MINIMUM DECIDING DESIGN: arm 2 + arm 3 at n = 3, 96 heatings; worst pair 0.70 under required agreement.**
+- It decides all four pairs: claim vs R0, claim vs R2, R1 vs R5, R4' vs claim.
+- Arm 1 (the positional labels, 108 heatings) is not needed for any pair once arms 2 and 3 run. It adds at most
+  +0.03 on the weakest pair.
+
+**Per-arm demotions:**
+- arms 1 and 2 are demoted for **R4' vs claim** (only arm 3's fed-Amadori denominator separates them);
+- arm 3 is demoted for **claim vs R2** (the `k_ama_g` ceiling form) and, at n = 3, for **R1 vs R5** under LOD x10
+  (0.47).
+
+**Declared limits of the check** (from the results file):
+- the densities are self-normalised importance estimates that mostly fail the case's k-hat / ESS rule; M3's SMC was not
+  run;
+- the verdicts rest on structural |d| far beyond the Monte-Carlo error, plus a half-set verdict-flip check (arm 3's
+  claim vs R2 flips 25 %: read as uncertain);
+- the forms ran at R = 30 (half-width up to ~0.18 at 0.5);
+- "f moves with temperature" was not tested separately;
+- the MGO law was not a coordinate (R3 is job (a) only).
+
+**A rule problem the check found: the adequacy escape credits a pure form when the truth is a mixture.** The adequacy
+rule's escape ("or the rivals' means differ by more than omega") lets a unit credit one pure form when the truth is the
+FM4 R1 / R5 mixture (f* ~ U[0, 1]).
+- Arm 2 credits R5 at 0.97; arm 1 credits R1 at 0.94. Both are false credits.
+- The "both inadequate" reading reaches 0.95 - 1.00 for every design but arm 3, so the adequacy test itself catches
+  the mixture. Only the means-differ escape overrides it.
+- Under **strict adequacy** (no escape) the minimum design's primary P(separates) at n = 3 falls to:
+
+  | pair | strict adequacy, n = 3 |
+  |---|---|
+  | R1 vs R5 | 0.94 |
+  | claim vs R0 | 0.75 |
+  | claim vs R2 | 0.75 |
+  | R4' vs claim | 0.76 |
+
+- **The pending judge revision (PR #99: adequacy required on every decisive unit) removes the escape.** When it is
+  adopted, this case's power numbers (job (c) and the minimum design) **must be re-checked under the revised judge**
+  before the W6 request is sent. Until then, the minimum design is sized under the current rule, with the strict
+  numbers above as the expected floor.
+- A mixture truth must read "both pure forms inadequate; the mixture" in item 6, not a pure-form credit.
+
 ### 5.5 The mechanism-signature screen (before any fit; demotions only)
 
 Plug-in runs at band centres and corners, on the one network, on signatures from pots that are already seen or that
@@ -1134,9 +1230,10 @@ entry not identifiable on disk" and the designed experiment goes out.
 
 ## What should block the freeze (for the review and the coordinator)
 
-The coordinator's rulings and the adopted premortem (FM1 - FM9) settled the first rounds. What remains:
-1. **The reduced forced-input mini-model power check (sec. 5.4)** must be built (~1 day) and run, and its demotions
-   written in. It is specified, not built. The full network (W3) is needed for the M4 build, not for the power check.
+**Superseded by the freeze (2026-11-06).** Kept as the record of what was settled before it. The coordinator's rulings
+and the adopted premortem (FM1 - FM9) settled the first rounds. Then:
+1. **Done:** the reduced forced-input mini-model power check ran (sec. 5.4 results, PR #101) and its demotions are
+   written in. The full network (W3) is needed for the M4 build, not for the power check.
 2. **Resolved:**
    - the spent-data rule (ruling 2 as corrected by FM2: spent or seen data falsify constant-free predictions, never
      credit);
@@ -1202,6 +1299,19 @@ To be applied at the freeze by that file's one writer; not applied here. The sam
 - OPD trapping under argon with 1 mM DTPA, post-incubation primary, with sugar + OPD and Amadori + OPD blanks (the
   continuous-trapping glucosone artefact).
 - LOD / LOQ and recovery per assay.
+
+**Sizing (from the reduced-model power check, PR #101; added at the freeze).**
+- **Minimum deciding design: arm 2 + arm 3, n = 3, 96 heatings.**
+  - It decides claim vs R0, claim vs R2, R1 vs R5 and R4' vs claim; worst pair 0.70 under required agreement.
+  - n = 6 adds nothing.
+  - Arm 1 (108 heatings) is optional: it adds <= 0.03 on the weakest pair.
+- **Per-arm demotions** ("ranks, does not decide" for that pair):
+  - arms 1 and 2 for R4' vs claim;
+  - arm 3 for claim vs R2;
+  - arm 3 for R1 vs R5 at n = 3 when the LOD is 10x worse than declared.
+- **Caveat:** sized under the current adequacy rule. Under strict adequacy (the PR #99 judge revision) the design's
+  primary power at n = 3 falls to 0.75 - 0.94. Re-check before the request is sent.
+- **Set `measurement.arms`:** arm 2 and arm 3 required, arm 1 optional; replicates n = 3.
 
 **Outcomes.**
 - "C-1 lost" (unlabelled methyl from [1-13C], labelled from [2-13C]) means R5.
@@ -1349,3 +1459,25 @@ Still before any result of the change; no engine run on any pot. Started from th
   later part-A case.
 - Neither changes "freeze as development grade, decider W6" or "build only the W3 structure plus the reduced-model
   power check".
+
+### Changelog: 2026-11-06, FROZEN (items 1 - 5)
+
+- Sec. 5.4 records the reduced-model power check (PR #101, commit 6c840545).
+  - **Job (a):** C2 + C3 is falsified against D3 by arithmetic (mixed share 0.5 vs <= 1 %, 49 sd). The C2 + C3 share
+    of hexose MFT is f <= 0.059. Assumption: the fragments come from independent molecules. R4-as-written is falsified
+    structurally.
+  - **Job (b):** D1 / D2 are development only.
+  - **Job (c):** the per-arm table, with demotions:
+    - arms 1 / 2 for R4' vs claim;
+    - arm 3 for claim vs R2;
+    - arm 3 for R1 vs R5 at n = 3 under LOD x10.
+  - **Minimum deciding design:** arm 2 + arm 3, n = 3, 96 heatings (worst pair 0.70 under required agreement);
+    n = 6 adds nothing.
+- **The rule problem is recorded.** The adequacy rule's "means differ by more than omega" escape credits a pure form
+  when the truth is the FM4 mixture. The pending judge revision (PR #99: adequacy required on every decisive unit)
+  removes it. The case's power numbers must be re-checked under the revised judge once it is adopted.
+- **Status FROZEN:** "development grade on disk; decider W6 (`glucose_mft_carbon_origin`), sized: arm 2 + arm 3,
+  n = 3, 96 heatings". The freeze commit's sha is recorded by the commit after it.
+- Added at the freeze (coordinator): item 5 tolerances follow sec. 7 item 5 as revised (branch `judge-revision`,
+  455d8396; adoption pending). Before any scoring, the measurement model and the reduced power check are re-checked
+  under the adopted text, which also removes the means-differ adequacy escape. No decisive data is read before then.
