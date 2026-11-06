@@ -3126,11 +3126,16 @@ each wave's pre-registration). Order and status:
   model from measured constants does not beat the table (whole-phase concentration explains
   Pereyra Gonzales and De Vleeschouwer with no fitted constant; molality and universal WLF fail by 4x
   and 10^3). Do: concentration per dry matter + moisture, re-derive the trunk table as a residual,
-  Gordon–Taylor Tg as a warn/refuse gate. Hold-outs: Leahy 1989a Table IV, Pereyra 37 °C, Bell Table 3.
+  Gordon–Taylor Tg as a warn/refuse gate. Hold-outs: Leahy 1989a Table IV (SPENT, recorded 2026-11-06: the
+  pathway atlas's F19#11 cell prints its a_w ratios and nominated the mismatch F19-d, one of the a_w mismatches
+  the M5 case's water-activity part (rivals W-R1 - W-R3) is built on; the case prints it as development data, D9),
+  Pereyra 37 °C, Bell Table 3.
   **Needs:** a pea/soy/gluten sorption isotherm and Tg-vs-moisture curve (Kyomugasho 2021 or similar).
 - [ ] **B55 — activation-energy prior for the single-temperature sulfur constants** (31 constants fitted
   at 145 °C only): a declared prior from the spread of the corpus's measured Ea, so the envelope carries
-  the temperature extrapolation. Hold-out: the Yiltirak ladder.
+  the temperature extrapolation. Hold-out: the Yiltirak ladder (SPENT, recorded 2026-11-06: CF-031's observation
+  prints its buffer-arm MFT / FFT values, and its six within-study folds have been B10 fit rows since 2026-09; the
+  four buffer-arm bundles' fit_holdout_status says so).
 - [ ] **B56 — structural discrepancy in the envelope**: a per-lane model-error term from the fit
   residuals, so the 90 % interval stops covering 19/48.
 - [ ] **B57 — the trunk's acid pool as two named species** (formic, acetic, Martins' measured yields) in

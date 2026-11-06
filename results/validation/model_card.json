@@ -379,7 +379,7 @@
       "verdict": "do-not-use"
     },
     {
-      "basis": "results/validation/kinetic_core_thiol_lolo_nested_tau.json (D2 branch (i)); lifted only by a second independent laboratory's absolute measurements re-scored under H0's rule",
+      "basis": "results/validation/kinetic_core_thiol_lolo_nested_tau.json (D2 branch (i)); lifted only by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')",
       "claim_type": "Absolute concentration (ppb)",
       "evidence": "REFUSED by name: out-of-sample tau_ABS 0.964 dex, U >= 1.60 (leave-two-laboratories-out); absolute thiol evidence from one laboratory",
       "system_class": "thiol-lane observables FFT, FUR, MFT, MFTD, MGO, NF, for a new laboratory [sulfur lane]",

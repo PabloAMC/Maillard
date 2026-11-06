@@ -388,8 +388,9 @@ def build(*, scorecard_path: Path = data_paths.CORE_PANEL_SCORES, profile_path: 
     if abs_refused:
         compounds = sorted({r["compound"].lower(): r["compound"] for r in abs_refused}.values(), key=str.lower)
         unlocked.insert(0, {
-            "if_measured": ("absolute levels of the thiol lane's observables from a second independent laboratory "
-                            "(for example the pending WUR blind-test samples), re-scored under H0's rule (H0')"),
+            "if_measured": ("absolute levels of the thiol lane's observables from at least two new independent "
+                            "laboratories (H0's pre-registered trigger, prereg sec. 9; the pending WUR blind-test "
+                            "samples would be one), re-scored under H0's rule (H0')"),
             "you_could_predict": (
                 f"absolute {', '.join(compounds)} for a new laboratory, if H0' leaves tau_ABS at or below 0.8 dex "
                 f"(today {ruling().tau_abs_dex:.3f}, {ruling().upper_bound_text}; D2's branches (ii) / (iii)); "
@@ -486,8 +487,8 @@ def render_markdown(payload: Mapping[str, Any]) -> str:
     if payload.get("absolute_refused_rows"):
         lines += ["", "The engine also computes these, but the thiol lane ships relative within-laboratory predictions "
                   "only (H0 / EX-059, D2 branch (i)), so their absolute level is refused and they leave the absolute "
-                  "count until a second independent laboratory's absolute measurements, re-scored under H0's rule, "
-                  "say otherwise (section 6):", ""]
+                  "count until absolute measurements from at least two new independent laboratories, re-scored "
+                  "under H0's rule, say otherwise (section 6):", ""]
         for r in payload["absolute_refused_rows"]:
             lines.append(f"- `{r['benchmark_id']}` / {r['compound']} ({r['panel']})")
     lines += ["", "## 3. What the panel asks for that no lane represents", "", "| what | rows | the engine's reason | the hypothesis layer |", "|---|---|---|---|"]

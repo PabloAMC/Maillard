@@ -98,7 +98,10 @@ def test_the_refusal_names_ex059_what_would_lift_it_and_the_transfer():
     text = h0.refusal_text()
     assert text.startswith(h0.ABSOLUTE_REFUSED_TAG) and "EX-059" in text
     assert "0.964" in text and "U >= 1.60" in text and "one laboratory" in text
-    assert "second independent laboratory" in text and "WUR" in text and "H0's rule" in text
+    # RE-PINNED 2026-11-06 (register pass): was "second independent laboratory". H0's prereg sec. 9 triggers the
+    # re-score (H0') on the first batch that keys >= 2 NEW laboratories; the one-laboratory wording promised it early.
+    assert "at least two new independent laboratories" in text and "WUR" in text and "H0's rule" in text
+    assert "at least two new independent laboratories" in h0.short_reason()
     assert "R3En" in text and "B60" in text and "conservative transfer" in text
     assert "EX-059" in h0.short_reason() and "EX-059" in h0.relative_caveat()
     assert "the null is better" in h0.relative_caveat() and "NOT SHOWN BETTER THAN A NULL" in h0.relative_caveat()
