@@ -308,6 +308,31 @@ Then:
    unanswered. The decision and its basis go into the experiment register (an EX entry). A shipped change is reversed
    when later evidence favours another rival.
 
+**Symmetry: the incumbent is not privileged (owner, 2026-11-06).** Items 1 - 9 make a change beat the current model,
+but the current model never had to pass the same test, so when the data cannot decide, its errors persisted by default.
+Four rules close that gap. Each change made under them is still a case (items 1 - 9) with its own adversarial review and
+confirmation.
+
+- **S1. Every shipped constant carries an evidence tier:** measured (a direct measurement of that step under
+  comparable conditions), analogue (a same-class measurement transferred with a declared band), bounded (a measured or
+  physical bound), fitted-identified (a converged fit whose profile pins it), or fitted-unidentified (on a band edge, a
+  flat profile, or never identified). The incumbent evidence audit assigns the tiers and keeps them in one record.
+- **S2. A direct measurement replaces a contradicted fitted constant.** Where a fitted constant (either fitted tier)
+  is contradicted by a direct measurement of its step, beyond the measurement's own noise and the declared transfer
+  band, the measurement replaces it, with its band. The decisive data are the measurement itself. End-point rows do not
+  arbitrate: a fitted value may be compensating for another error, and the rows it now misses go to item 7 with the
+  suspected compensating error registered. A replacement never tightens a prior beyond what the measurement supports.
+- **S3. Undecided rivals are carried, not resolved by default.** When a case ends "cannot decide", every rival not
+  falsified is carried as uncertainty: the envelope spans them, and a prediction on which they disagree by more than
+  the stated tolerance is shown with that spread, or refused. The incumbent's point is no longer the answer by default.
+- **S4. Unidentified constants are bands, never re-pinned to unrelated end points.** A fitted-unidentified constant
+  with no measurement is carried as a band: from measured bounds or a same-class analogue where they exist, otherwise
+  the declared band. An output whose answer moves beyond its tolerance across that band widens or is refused. No new fit
+  may pin it from end points that other errors also move (item 4).
+
+These rules move shipped outputs: intervals widen and some answers become refusals. That is the intended, honest
+consequence. Each such change is listed before / after in its PR.
+
 **Why this resists persuading ourselves.** The ranking of evidence is fixed in advance. The rivals and the decisive
 data are named before results exist. Tolerances come from the measurements. The decision is a comparison, not a
 threshold someone picked. Evidence against must be listed. The reviewer's job is to disagree.
