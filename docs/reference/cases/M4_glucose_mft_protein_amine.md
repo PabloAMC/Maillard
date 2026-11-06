@@ -558,6 +558,27 @@ measurement.
 The chance that any sweep 2 candidate supplies a decisive unit is ~0.1. None sets a band in this case until it is read
 and entered by an amendment registered before any M4 engine result exists.
 
+**Roles confirmed before reading (2026-11-06; committed before either paper or its SI was opened).** The owner has
+obtained two candidates and their supplementary material. No M4 engine result exists. Their roles stand as already
+declared and are not changed after reading:
+- **10.1016/j.foodres.2024.114454** (the fed Cys-glucose ARP volatiles paper; sweep 2's first candidate):
+  - **decisive for D1 in its fed form only if** NF and MFT are both quantified from the fed Cys-glucose ARP with
+    stated recovery, and the laboratory is not one whose pots are M2's TEST (BTBU, CAAS);
+  - **otherwise evidence** for D5 and the arm-3-type question (MFT per mol of fed Amadori; R4' vs the claim);
+  - any computed (DFT) part is excluded;
+  - P(MFT reported) ~0.4, P(decisive) ~0.1.
+
+  Under ruling 2 (falsify, never credit) even a met decisive role could only falsify a constant-free prediction. It
+  could not credit a rival on the basis of a paper read after the case named it.
+- **Wang Y. et al. 2019, 10.1016/j.foodres.2019.05.001** (M0a's candidate, carried into part A; sec. 1):
+  - **decisive for part A (HMF) only if** an Asn + hexose pot carries HMF at >= 2 pH with the lipid held fixed;
+  - otherwise evidence;
+  - part A is structure only (FM7), so a met role feeds a later part-A case, not this one;
+  - P ~0.5.
+
+The SI of each is read under the same role. A dossier for each records whether the role is MET (sec. 2.9 table
+below, once read).
+
 **Held dossiers (2026-11-06 screen).** Open question 7 asked for a screen of every held dossier that names glucose
 with a thiol or a deoxyosone. That screen found 199 such files; 135 were not cited in the 2026-11-05 text. Each was
 screened on its header and on keyword counts by one reader (not two blinded readers, as M1c did). Those that bear on
