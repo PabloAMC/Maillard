@@ -263,6 +263,40 @@ def test_power_and_screen_refuse_a_screen_with_failed_pots(G, monkeypatch):
         G.run_power()
 
 
+def _toy_a1_ensemble(G, hou20, fall, mey, rise):
+    hou = np.array([[hou20, 4.7, 4.3 + fall - 0.75, 4.0, 3.7, 4.3 - 0.75]])
+    hou[:, 5] = hou[:, 2] - fall
+    f = {"C-Hou": hou, "C-Hou-unforced": hou.copy(), "C-Mey-Cys": np.full((1, 5), mey),
+         "C-Zhou-ARP": np.array([[3.0, 3.5, 3.0 + rise]])}
+    return G.Ensemble("toy", "primary", [{}], f, {})
+
+
+def test_a1_signatures_follow_the_amended_noise_term(G):
+    data = G.A1Data(tuple(G.HOU["ph_cooled"]), (True,) * 5, (3.98, 4.11, 4.95))
+    good = _toy_a1_ensemble(G, 5.05, 0.75, 0.0, 1.0)
+    out = G.a1_falsified(good, data, pinned_rise=3.9)
+    assert not out["falsified"] and all(v["n_passing"] == 1 for v in out["per_form"].values())
+    # a Meynier drift of -0.5 against the 0.2 edge (sd sqrt(2) r) kills under every form: falsified
+    bad_mey = _toy_a1_ensemble(G, 5.05, 0.75, -0.5, 1.0)
+    assert G.a1_falsified(bad_mey, data, 3.9)["falsified"]
+    # a Hou 20-min miss of 1.3 pH kills under the primary noise but not under s x 2 (tolerance 1.57): not falsified
+    miss = _toy_a1_ensemble(G, 6.35, 0.75, 0.0, 1.0)
+    res = G.a1_falsified(miss, data, 3.9)
+    assert res["per_form"]["primary"]["killed"] and not res["per_form"]["offset_shape_s_x2"]["killed"]
+    assert not res["falsified"]
+    # sigma-Zhou is a sign toward the data: a rise above B0-pinned's when the data are below it fails
+    assert G.a1_falsified(_toy_a1_ensemble(G, 5.05, 0.75, 0.0, 4.5), data, 3.9)["falsified"]
+
+
+def test_a1_refuses_without_the_confirmation_and_runs_once(G, monkeypatch, tmp_path):
+    prereg = tmp_path / "prereg.md"
+    prereg.write_text("no confirmation here", encoding="utf-8")
+    monkeypatch.setattr(G, "PREREG", prereg)
+    monkeypatch.setattr(G, "read_record", lambda name: {"complete": True} if name in ("screen", "falsification") else {})
+    problems = G.falsification_refusals()
+    assert any("confirmation" in p for p in problems) and any("one re-run" in p for p in problems)
+
+
 def test_the_loader_reads_the_gzipped_draws_file(G, tmp_path):
     import gzip
     import json

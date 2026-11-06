@@ -50,6 +50,7 @@ from __future__ import annotations
 
 import argparse
 import dataclasses
+import functools
 import hashlib
 import json
 import math
@@ -205,6 +206,7 @@ def control_pots() -> List[Pot]:
     return out
 
 
+@functools.lru_cache(maxsize=None)
 def zhou_measured() -> Dict[str, Dict[str, float]]:
     """{pot name: {value, sd}} from the keyed Fig. 2 rows (ph_acid_submodel.yml)."""
     _pots, rows = fit_rows.load(ZHOU_TABLE)
@@ -1685,6 +1687,196 @@ def run_power() -> Dict[str, Any]:
 
 
 # ----------------------------------------------------------------------------------------------------------------
+# --falsification: Amendment A1 (prereg v3.7 sec. 20), falsification only, on the stored screen draws
+# ----------------------------------------------------------------------------------------------------------------
+A1_S_OFF, A1_S_SHAPE = 0.45, 0.16              # sec. 20.2: one lab's repeat (Zhou 2024 vs 2025b), arithmetic
+A1_FAMILIES = ("primary", "offset_shape")
+A1_R = 200
+A1_SEED = 20261107
+A1_CONFIRMATION_MARK = "### 20.7 Confirmation"
+OUT["falsification"] = V / f"{STEM}_falsification.json"
+
+
+@dataclass(frozen=True)
+class A1Form:
+    """One form of sec. 20.3's falsification rule: the meter r, the lab-repeat scale multiplier (None: measurement
+    noise only) and the C-Hou run read."""
+
+    name: str
+    r: float = METER_R
+    s_mult: Optional[float] = None
+    hou_unit: str = "C-Hou"
+
+
+A1_FORMS = (A1Form("primary"), A1Form("offset_shape_s", s_mult=1.0), A1Form("offset_shape_s_x0.5", s_mult=0.5),
+            A1Form("offset_shape_s_x2", s_mult=2.0), A1Form("r_0p02", r=METER_R_SENSITIVITY), A1Form("r_0p10", r=0.10),
+            A1Form("hou_unforced", hou_unit="C-Hou-unforced"))
+
+
+@dataclass(frozen=True)
+class A1Data:
+    """The data the four signatures read: Hou's six cooled pH, Meynier's five outcomes (within the 0.2 edge or not),
+    Zhou's ARP-alone endpoints at labels 6 / 7 / 8."""
+
+    hou: Tuple[float, ...]
+    mey_within: Tuple[bool, ...]
+    zhou_arp: Tuple[float, ...]
+
+
+def a1_measured() -> A1Data:
+    z = zhou_measured()
+    return A1Data(tuple(HOU["ph_cooled"]), (True,) * len(MEYNIER_LABELS),
+                  tuple(z[f"zhou_arp_pH{x:g}"]["value"] for x in ZHOU_LABELS))
+
+
+def a1_signatures(ens: Ensemble, data: A1Data, form: A1Form, pinned_rise: float) -> Dict[str, np.ndarray]:
+    """Per draw, the four signatures of sec. 20.3 under one form (the noise term only differs from sec. 3.5)."""
+    from scipy.stats import norm
+
+    meas = HOU["read_ph"]
+    off = 0.0 if form.s_mult is None else (form.s_mult * A1_S_OFF) ** 2
+    shp = 0.0 if form.s_mult is None else (form.s_mult * A1_S_SHAPE) ** 2
+    f = ens.f[form.hou_unit]
+    i60, i120 = HOU["times_min"].index(60.0), HOU["times_min"].index(120.0)
+    level = np.abs(f[:, 0] - data.hou[0]) <= pdens.Z_90 * math.sqrt(meas ** 2 + shp + off)
+    shape = (np.abs((f[:, i60] - f[:, i120]) - (data.hou[i60] - data.hou[i120]))
+             <= pdens.Z_90 * math.sqrt(2.0 * meas ** 2 + 2.0 * shp))
+    d = ens.f["C-Mey-Cys"]
+    s = math.sqrt(2.0) * form.r
+    p_in = norm.cdf((MEYNIER_BOUND - d) / s) - norm.cdf((-MEYNIER_BOUND - d) / s)
+    w = np.asarray(data.mey_within, dtype=bool)[None, :]
+    p_obs = np.where(w, p_in, 1.0 - p_in)
+    mey = np.all(p_obs > ADEQUACY_P, axis=1)
+    rise = ens.f["C-Zhou-ARP"][:, -1] - ens.f["C-Zhou-ARP"][:, 0]
+    target = np.sign((data.zhou_arp[-1] - data.zhou_arp[0]) - pinned_rise)
+    zhou = np.sign(rise - pinned_rise) == target
+    return {"sigma_hou_level": level, "sigma_hou_shape": shape, "sigma_mey": mey, "sigma_zhou": zhou,
+            "all": level & shape & mey & zhou}
+
+
+def a1_falsified(ens: Ensemble, data: A1Data, pinned_rise: float) -> Dict[str, Any]:
+    """sec. 20.3: falsified iff no draw reproduces all four under the primary term AND under every form."""
+    per = {}
+    for form in A1_FORMS:
+        sig = a1_signatures(ens, data, form, pinned_rise)
+        per[form.name] = {"killed": bool(not sig["all"].any()), "n_passing": int(sig["all"].sum()),
+                          "pass_fraction": {k: float(np.mean(v)) for k, v in sig.items()}}
+    return {"falsified": all(v["killed"] for v in per.values()), "per_form": per}
+
+
+def a1_loglik_primary(ens: Ensemble, data: A1Data) -> np.ndarray:
+    """sec. 20.4's best-draw criterion: C-Mey (Cys) + C-Hou + C-Zhou-ARP under measurement noise only."""
+    meas = HOU["read_ph"]
+    ll = -0.5 * np.sum(((ens.f["C-Hou"] - np.array(data.hou)) / meas) ** 2, axis=1)
+    sd_z = np.array([zhou_measured()[f"zhou_arp_pH{x:g}"]["sd"] for x in ZHOU_LABELS])
+    ll += -0.5 * np.sum(((ens.f["C-Zhou-ARP"] - np.array(data.zhou_arp)) / sd_z) ** 2, axis=1)
+    s = math.sqrt(2.0) * METER_R
+    d = ens.f["C-Mey-Cys"]
+    ll += np.sum(_log_inside((-MEYNIER_BOUND - d) / s, (MEYNIER_BOUND - d) / s), axis=1)
+    return ll
+
+
+def a1_synthetic(truth: Ensemble, s: int, family: str, rng: np.random.Generator) -> A1Data:
+    """One synthetic data set from the truth's stored predictions (sec. 20.4): primary noise, or the offset / shape
+    form (one offset per run: Hou's six points share one, each Zhou label has its own)."""
+    meas = HOU["read_ph"]
+    hou = truth.f["C-Hou"][s] + rng.normal(0.0, meas, 6)
+    sd_z = np.array([zhou_measured()[f"zhou_arp_pH{x:g}"]["sd"] for x in ZHOU_LABELS])
+    zhou = truth.f["C-Zhou-ARP"][s] + rng.normal(0.0, 1.0, 3) * sd_z
+    if family == "offset_shape":
+        hou = hou + rng.normal(0.0, A1_S_OFF) + rng.normal(0.0, A1_S_SHAPE, 6)
+        zhou = zhou + rng.normal(0.0, A1_S_OFF, 3) + rng.normal(0.0, A1_S_SHAPE, 3)
+    d_obs = truth.f["C-Mey-Cys"][s] + rng.normal(0.0, math.sqrt(2.0) * METER_R, len(MEYNIER_LABELS))
+    return A1Data(tuple(map(float, hou)), tuple(bool(x) for x in np.abs(d_obs) <= MEYNIER_BOUND),
+                  tuple(map(float, zhou)))
+
+
+def falsification_refusals() -> List[str]:
+    problems = []
+    if A1_CONFIRMATION_MARK not in PREREG.read_text(encoding="utf-8"):
+        problems.append("the prereg has no recorded confirmation of Amendment A1 (sec. 20.7): no amended number yet")
+    if read_record("falsification"):
+        problems.append("the falsification run has run (A1: one re-run, accepted whatever it is)")
+    s = read_record("screen")
+    if not s.get("complete") or s.get("refused_for_failed_pot_runs"):
+        problems.append("no usable screen record")
+    return problems
+
+
+def run_falsification() -> Dict[str, Any]:
+    problems = falsification_refusals()
+    if problems:
+        raise SystemExit("--falsification refuses:\n  " + "\n  ".join(problems))
+    t0 = time.time()
+    ens = load_screen_ensembles()
+    pinned = ens["B0_pinned"]
+    pinned_rise = float(pinned.f["C-Zhou-ARP"][0, -1] - pinned.f["C-Zhou-ARP"][0, 0])
+    data = a1_measured()
+    measured = {k: a1_falsified(e, data, pinned_rise) for k, e in ens.items()}
+    best = {k: int(np.argmax(a1_loglik_primary(e, data))) for k, e in ens.items() if k != "B0_pinned"}
+    truths = {"B0_pinned": (pinned, 0), **{k: (ens[k], best[k]) for k in RIVAL_NAMES}}
+    rng = np.random.default_rng(A1_SEED)
+    rates: Dict[str, Any] = {}
+    for family in A1_FAMILIES:
+        kills = {k: {} for k in RIVAL_NAMES}
+        for tname, (tens, s) in truths.items():
+            counts = {k: 0 for k in RIVAL_NAMES}
+            for _ in range(A1_R):
+                syn = a1_synthetic(tens, s, family, rng)
+                for k in RIVAL_NAMES:
+                    counts[k] += int(a1_falsified(ens[k], syn, pinned_rise)["falsified"])
+            for k in RIVAL_NAMES:
+                kills[k][tname] = {"killed": counts[k], "rate": counts[k] / A1_R, "wilson_95": wilson(counts[k], A1_R)}
+        fam = {}
+        for k in RIVAL_NAMES:
+            false_kill = kills[k][k]
+            others = {t: v for t, v in kills[k].items() if t != k}
+            kmax = max(v["rate"] for v in others.values())
+            fam[k] = {"false_kill": false_kill, "kill_power": others, "kill_power_max": kmax,
+                      "falsifiable": bool(kmax > false_kill["rate"])}
+        rates[family] = fam
+    verdict = {}
+    for k in RIVAL_NAMES:
+        testable = all(rates[f][k]["falsifiable"] for f in A1_FAMILIES)
+        fal = measured[k]["falsified"]
+        verdict[k] = {"falsified_on_measured": fal, "falsifiable_in_both_families": testable,
+                      "verdict": ("not testable here (unfalsifiable on disk)" if not testable else
+                                  "falsified on the screen's draws, confirmation pending (sec. 3.8 fit)" if fal else
+                                  "not falsified")}
+    rec = {"artifact": f"{STEM}_falsification", "prereg": data_paths.rel(PREREG), "amendment": "A1 (v3.7, sec. 20)",
+           "measured": measured, "b0_pinned_on_measured": measured["B0_pinned"], "best_draws":
+           {k: {"index": best[k], "coordinates": ens[k].draws[best[k]]} for k in best},
+           "kill_power_vs_false_kill": rates, "verdict": verdict, "R": A1_R, "seed": A1_SEED,
+           "pinned_zhou_rise": pinned_rise, "s_off": A1_S_OFF, "s_shape": A1_S_SHAPE,
+           "forms": [dataclasses.asdict(f) for f in A1_FORMS], "engine_runs": 0, "failed_pot_runs": 0,
+           "seconds": round(time.time() - t0, 1), "machine": M1.machine_state(),
+           "provenance": _provenance("falsification"), "complete": True}
+    write_record("falsification", rec, render_falsification(rec))
+    return rec
+
+
+def render_falsification(rec: Mapping[str, Any]) -> str:
+    lines = ["# M1b part (i): Amendment A1, falsification only (prereg v3.7 sec. 20)", "",
+             f"*Generated by `{GENERATED_BY} --falsification` on the stored screen draws (no engine run). R = {rec['R']}"
+             f" synthetic sets per truth and family. The v3.6 records (`_screen`, `_power`) stand beside this one.*", "",
+             "## On the measured data", "", "| rival | falsified | draws passing all four, per form | verdict |",
+             "|---|---|---|---|"]
+    for k, v in rec["measured"].items():
+        n = ", ".join(f"{f} {x['n_passing']}" for f, x in v["per_form"].items())
+        verdict = rec["verdict"].get(k, {}).get("verdict", "(a truth only)")
+        lines.append(f"| {k} | {v['falsified']} | {n} | {verdict} |")
+    for family, fam in rec["kill_power_vs_false_kill"].items():
+        lines += ["", f"## Kill power vs false-kill rate: {family} sets", "",
+                  "| rival | false-kill (95 % CI) | kill power by truth | max | falsifiable |", "|---|---|---|---|---|"]
+        for k, v in fam.items():
+            fk = v["false_kill"]
+            kp = "; ".join(f"{t} {x['rate']:.3f}" for t, x in v["kill_power"].items())
+            lines.append(f"| {k} | {fk['rate']:.3f} ({fk['wilson_95'][0]:.3f} - {fk['wilson_95'][1]:.3f}) | {kp} | "
+                         f"{v['kill_power_max']:.3f} | {v['falsifiable']} |")
+    return "\n".join(lines) + "\n"
+
+
+# ----------------------------------------------------------------------------------------------------------------
 # --score (built and tested; RUN ONCE after the freeze; never run in this build)
 # ----------------------------------------------------------------------------------------------------------------
 SCORE_S0, SCORE_S_MAX = 256, 4096
@@ -2008,6 +2200,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     mode.add_argument("--checks", action="store_true")
     mode.add_argument("--screen", action="store_true")
     mode.add_argument("--power", action="store_true")
+    mode.add_argument("--falsification", action="store_true")
     mode.add_argument("--score", action="store_true")
     mode.add_argument("--fit", metavar="RIVAL")
     ap.add_argument("--start", type=int, default=0)
@@ -2019,6 +2212,8 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         run_checks(args.base)
     elif args.screen:
         run_screen(args.min_free_percent)
+    elif args.falsification:
+        run_falsification()
     elif args.power:
         run_power()
     elif args.score:
