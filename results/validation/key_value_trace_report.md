@@ -55,7 +55,7 @@ digests do not account for them, so their origin is unidentified by this script.
 | `acs_apts_ref24_3dg_arrhenius_anchor` | Yu et al. (2020) | benchmark_intake_registry.json | 4.02, 14.01, 53.45, 81.7 |
 | `acs_foodscitech_2024_hme_firmness_anchor` | Cruz et al. (2025) | benchmark_intake_registry.json | 10.0, 20.0, 25.0, 104.0 |
 | `acs_jafc_3c08432_crosstalk_cleanup_link` | Flores et al. (2024), J. Agric. Food Chem. 72:5334 | benchmark_intake_registry.json | 1.42, 3.82, 15, 28.4, 95.0, 382.0 |
-| `acs_ref3_spi_acrylamide_fast_kinetics` | Ma et al. (2024) | benchmark_intake_registry.json, safety_reference_payloads.json | 22.36, 25.0, 62.62, 112.0, 130.0 |
+| `acs_ref3_spi_acrylamide_fast_kinetics` | Ma et al. (2024) | benchmark_intake_registry.json | 130.0 |
 | `aliani_2005_donor_potency_nucleotide_context` | Aliani & Farmer (2005), J. Agric. Food Chem. 53:6067 | benchmark_intake_registry.json | 1.4, 3.2, 3.8 |
 | `aliani_2005_donor_potency_nucleotide_context_v1` | Aliani & Farmer (2005) | computational_priors.json | 1.4, 3.2, 3.8 |
 | `arsa_2022_pyrazine_pH9_optimum` | Arsa & Puechkamutr (2022), Journal of Food Science and Technology 59:890 | flavor_reference_payloads.json | 26.26 |
