@@ -522,3 +522,18 @@ have no null answer): counting it as a difference of 0 pulls the mean to zero an
 - **Rule:** stop a job by its own handle: its PID (`$!` at launch, or the PID the harness reports), or the harness's
   stop tool for a background task. Never by a command pattern that other agents' jobs can share. A killed run
   (exit 143 / 144) is neither a pass nor a failure: rerun it.
+
+## 2026-11-06 — Regenerate generated files only after the conflicts are staged
+- **What happened:**
+  - On PR #77 I took `--theirs` for a conflicted `data_wishlist.json`, then regenerated `results/README.md` before `git add`.
+  - The index still held the file once per conflict stage, so `git ls-files` (which the README generator reads) counted 984 tracked files instead of 982.
+  - My local `--check` ran in the same dirty state, so it passed; CI failed.
+- **Rule:**
+  1. Resolve every conflicted path.
+  2. `git add` each one; `git diff --name-only --diff-filter=U` must come back empty.
+  3. Run the generators.
+  4. Run their `--check`s.
+
+## 2026-11-06 — Never redirect a bare `cat >>` without input
+- **What happened:** a stray `cat >> file` with no heredoc waited on stdin and hung the command.
+- **Rule:** every `cat >>` in a command needs its own heredoc or input file.
