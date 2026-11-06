@@ -374,3 +374,35 @@ def test_a_failed_pot_is_counted_not_raised(G, monkeypatch):
     assert len(failures) == 2 and all("failed" in r for r in out)
     ens = G.assemble("B0_pinned", "primary", [{}], out)
     assert ens.failed == 2
+
+
+# --- A2 (prereg sec. 21.2): the ledger contradiction's opt-in fix --------------------------------------------------
+
+def test_retained_steps_ship_empty_and_refuse_a_non_cysteine_step():
+    assert config.Config.shipped()["ph.amine_survival"].retained_steps == ()
+    with pytest.raises(ValueError):
+        pbr.AmineSurvival(True, 0.0, 0.0, ("r_arp_dpo",))
+
+
+def test_retained_steps_keep_the_amine_of_the_named_steps_only():
+    keep = ("r_cys_thermal", "ch_cys_ox")
+    cfg = config.Config.shipped().replace({"ph.amine_survival": pbr.AmineSurvival(True, 0.0, 0.0, keep)})
+    with config.applied(cfg):
+        s, sets = pbr.augmented_stoichiometry()
+    row = s[sets["tracker_index"]["NH4_CYS"]]
+    for k, j in zip(sulfur.FULL_REACTION_KEYS, range(len(sulfur.FULL_REACTION_KEYS))):
+        assert row[j] == (1.0 if k in keep else 0.0), k
+    # the shipped ledger still declares both amines destroyed (the default is not flipped here)
+    assert sulfur.CENTRE_LEDGER["r_cys_thermal"]["amine"] == -1
+    assert sulfur.CENTRE_LEDGER["ch_cys_ox"]["amine"] == -1
+
+
+def test_retaining_r_cys_thermal_amine_removes_its_acid(shipped):
+    """Cysteine alone: with the amine kept (the step's own chemistry) the pot ends less acid than the shipped
+    encoding, which carries the carboxyl and destroys the amine."""
+    init = {"Cys": 20.0, "OX": 1.0}
+    _, b0 = _run({"ph.amine_survival": pbr.AmineSurvival(True, 0.0, 0.0)}, shipped, initial=init)
+    _, kept = _run({"ph.amine_survival": pbr.AmineSurvival(True, 0.0, 0.0, ("r_cys_thermal", "ch_cys_ox"))},
+                   shipped, initial=init)
+    assert kept[0] == pytest.approx(b0[0], abs=1e-9)
+    assert kept[-1] > b0[-1] + 0.05

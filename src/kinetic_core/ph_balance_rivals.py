@@ -88,15 +88,25 @@ def _check_fraction(name: str, value: float) -> None:
 
 @dataclass(frozen=True)
 class AmineSurvival:
-    """B1: the surviving fraction of the amine the ledger destroys, per step family (sec. 3.1)."""
+    """B1: the surviving fraction of the amine the ledger destroys, per step family (sec. 3.1).
+
+    ``retained_steps`` (A2, prereg sec. 21.2): cysteine steps whose amine survives in FULL (fraction 1, whatever
+    ``phi_cys`` is). It is the chemically right encoding of a step whose own chemistry keeps the amine: ``r_cys_thermal``
+    (its lump's largest member is cystine, which keeps both centres) and ``ch_cys_ox`` (autoxidation to cystine). The
+    shipped ledger declares both amines destroyed (``sulfur.CENTRE_LEDGER``); flipping that default moves shipped
+    outputs, so the right encoding is opt-in here and the flip is a separate case."""
 
     enabled: bool = False
     phi_cys: float = 0.0
     phi_arp: float = 0.0
+    retained_steps: Tuple[str, ...] = ()
 
     def __post_init__(self) -> None:
         _check_fraction("phi_cys", self.phi_cys)
         _check_fraction("phi_arp", self.phi_arp)
+        bad = [k for k in self.retained_steps if k not in CYSTEINE_AMINE_STEPS]
+        if bad:
+            raise ValueError(f"retained_steps {bad}: only cysteine amine steps {CYSTEINE_AMINE_STEPS}")
 
 
 @dataclass(frozen=True)
@@ -222,8 +232,8 @@ def augmented_stoichiometry() -> Tuple[np.ndarray, Dict[str, Any]]:
     t = {k: n + i for i, k in enumerate(TRACKERS)}
     idx = _s.SULFUR_INDEX
     if AMINE_SURVIVAL.enabled:
-        for j in _indices(CYSTEINE_AMINE_STEPS, keys):
-            s[t["NH4_CYS"], j] += float(AMINE_SURVIVAL.phi_cys)
+        for k, j in zip(CYSTEINE_AMINE_STEPS, _indices(CYSTEINE_AMINE_STEPS, keys)):
+            s[t["NH4_CYS"], j] += 1.0 if k in AMINE_SURVIVAL.retained_steps else float(AMINE_SURVIVAL.phi_cys)
         for j in _indices(AMADORI_AMINE_STEPS, keys):
             s[t["NH4_ARP"], j] += float(AMINE_SURVIVAL.phi_arp)
     if ACID_LAG.enabled:
