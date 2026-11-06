@@ -11,7 +11,7 @@ regenerates (`core-scores`, `core-directional`, `core-envelope`, `model-card`, .
 (`scripts/generators/WAVES.md`: not re-run, a change is a new wave). Every live artifact carries a
 `provenance` block (git head, date, input hashes: `src/provenance.py`).
 
-Tracked files: **975**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
+Tracked files: **978**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
 
 ## `results`
 
@@ -210,6 +210,7 @@ Tracked files: **975**. Local-only (gitignored): scratch runs under `results/qui
 | `literature_backlog.*` (2): `literature_backlog.json`, `literature_backlog.md` | Encoded / ready / wet-lab queues over the intake registry (`src/literature_intake_registry.py`). |
 | `literature_metadata_check_*` (2): `literature_metadata_check_2026-11-05.json`, `literature_metadata_check_2026-11-05.md` | Plan W1.4 (2026-11-05): every DOI in data/keys/papers.yml checked against OpenAlex (resolves, retracted, registry first author and year vs the record), written by `scripts/tools/openalex.py verify` (docs/guides/LITERATURE_TOOLING.md). Advisory flags for a person to read; nothing under data/ changes from it. Dated, no provenance block (the source is a live web index). Read by people. |
 | `literature_metadata_triage_2026-11-05.md` | Hand triage (2026-11-05) of the 41 flags of the OpenAlex `verify` run on 713 DOIs (PR #70's `literature_metadata_check_2026-11-05`): one row per flagged entry with its class (wrong DOI, wrong citation label, false positive, year, unresolved), the evidence, the source fix and the model rows it touches. Read by people; the fixes live in the cited records. |
+| `m0_checks_batch2*` (3): `m0_checks_batch2.json`, `m0_checks_batch2.md`, `m0_checks_batch2_diagnostics.json` | Misfit protocol, cheapest checks on seen data, batch 2 (2026-11-06; the misfit inventory's CK-23, CK-34, CK-42, CK-42b and CK-56): the selection with its exclusions against the open cases' decisive data, each pass rule written before computing, every outcome, the candidates nominated or retired for a sec. 7 case and proposed CF texts. Hand-written record (`.md`, `.json` one object per check); the numbers in `m0_checks_batch2_diagnostics.json`, written by `scripts/diagnostics/m0_checks_batch2.py` (read-only engine variants and arithmetic). |
 | `matrix_family_coverage.*` (2): `matrix_family_coverage.json`, `matrix_family_coverage.md` | Matrix families: explicit vs indirect support (`src/matrix_family_coverage.py`; alias `matrix-family-coverage`). |
 | `matrix_family_next_action.*` (2): `matrix_family_next_action.json`, `matrix_family_next_action.md` | Which bounded matrix family advances next (`src/matrix_family_next_action.py`; alias `family-next-action`). |
 | `matrix_family_priority_ranking.*` (2): `matrix_family_priority_ranking.json`, `matrix_family_priority_ranking.md` | The seven matrix families ranked by scope priority, impact and how closable the gap is, each with its primary blocker and the next action (`generate_matrix_family_priority_ranking.py`). Written for the first time on 2026-09-09: its generator was in the repository and had never been run, so the ranking existed only as code. |
