@@ -8,9 +8,9 @@ layer's Table 2 pots (ARP-Phe 0.1 M, phosphate 0.5 M pH 7, 100 C, 120 min, close
 with one shared piece swapped at a time for constants taken from cited literature on disk, and asks whether the
 argon median comes within the layer's own noise of the measured 0.09 mM.
 
-IMPORT. The layer is ``src/m3_strecker_layer.py`` on branch ``m3-phase1-build`` (not yet merged). Until the M3 PR
-merges this script loads it BY PATH from ``$MAILLARD_M3_LAYER``; once merged it should import
-``from src import m3_strecker_layer as L`` (tried first). The layer's sha256 is written into the record.
+IMPORT. The layer is ``src/m3_strecker_layer.py`` (merged with PR #85). The record was produced from the layer as
+it stood on branch ``m3-phase1-build`` before that PR's last docstring edits; its sha256 is written into the record,
+so a rerun against today's file is reproducible but carries a different hash.
 
 DATA (seen development data only). hofmann2000 Tables 3 - 4 and hofmann2000b Tables 2 - 3 and Fig. 1, through the
 layer's own ``load_data`` (EX-049's calibration inputs), and the fed-dicarbonyl / fed-Amadori decay constants of the
@@ -32,8 +32,7 @@ A partial reduction is reported as the fraction of the log gap closed: (log m_ba
 log 0.09) per rival, m the median over that rival's feasible draws (the same Sobol draws in every scenario).
 
 Run (wrapper, threads pinned, niced):
-    MAILLARD_M3_LAYER=<path to m3_strecker_layer.py> OMP_NUM_THREADS=1 nice -n 10 \
-        ./scripts/docker_maillard.sh run "python scripts/diagnostics/m3_argon_strecker_diagnostic.py"
+    OMP_NUM_THREADS=1 nice -n 10 ./scripts/docker_maillard.sh run "python scripts/diagnostics/m3_argon_strecker_diagnostic.py"
 """
 from __future__ import annotations
 
@@ -41,7 +40,6 @@ import argparse
 import contextlib
 import copy
 import hashlib
-import importlib.util
 import json
 import math
 import os
@@ -92,19 +90,8 @@ M03 = {"k1": 0.0057, "k2": 0.0156, "k3": 0.0155, "k4": 0.0794, "k10": 0.0707, "k
 
 
 def load_layer():
-    try:
-        from src import m3_strecker_layer as L  # noqa: F401  (after the M3 PR merges)
-        return L, Path(L.__file__)
-    except ImportError:
-        pass
-    path = os.environ.get("MAILLARD_M3_LAYER")
-    if not path or not Path(path).is_file():
-        raise SystemExit("src.m3_strecker_layer not importable and $MAILLARD_M3_LAYER unset: point it at the layer")
-    spec = importlib.util.spec_from_file_location("m3_strecker_layer_by_path", path)
-    L = importlib.util.module_from_spec(spec)
-    sys.modules[spec.name] = L
-    spec.loader.exec_module(L)
-    return L, Path(path)
+    from src import m3_strecker_layer as L
+    return L, Path(L.__file__)
 
 
 # ================================================================================================= noise bands
