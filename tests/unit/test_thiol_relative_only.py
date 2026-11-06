@@ -8,6 +8,7 @@ scope itself is re-derived here from H0's own rows and the engine's own envelope
 """
 from __future__ import annotations
 
+import dataclasses
 import json
 import math
 
@@ -16,7 +17,7 @@ import pytest
 from src import api, data_paths
 from src.comparative_cli import render_compare_core_text, render_predict_core_text, spec_to_core, validate_spec
 from src.kinetic_core import thiol_relative_only as h0
-from src.kinetic_core.calibration import Calibration, ResponseFactor
+from src.kinetic_core.calibration import PAYLOAD_CHECKSUM_FIELD, Calibration, ResponseFactor
 from src.kinetic_core.engine import SULFUR, TARGET_ALIASES, declare_envelope, predict
 from src.report_html import render_compare_report, render_predict_report
 
@@ -36,12 +37,17 @@ def _core(spec):
 
 
 def _calibration(**overrides):
+    """A calibration as ``calibrate`` writes it (its provenance and its payload checksum), unless the test passes
+    its own ``provenance``."""
     fields = dict(lab="test_lab", base_wave="b60", created="2026-11-05", matrix="water",
                   response_factors={MFT: ResponseFactor(MFT, 0.5, 0.1, 4)}, overrides=(),
-                  fit_records=("fit_1", "fit_2"), validate_records=(),
-                  provenance={"generated_by": h0.CALIBRATE_GENERATOR})
+                  fit_records=("fit_1", "fit_2"), validate_records=())
     fields.update(overrides)
-    return Calibration(**fields)
+    calibration = Calibration(**fields)
+    if "provenance" in overrides:
+        return calibration
+    return dataclasses.replace(calibration, provenance={"generated_by": h0.CALIBRATE_GENERATOR,
+                                                        PAYLOAD_CHECKSUM_FIELD: calibration.payload_checksum()})
 
 
 # --- the scope ----------------------------------------------------------------------------------------------------
@@ -197,6 +203,7 @@ def test_a_calibration_made_by_calibrate_is_answered_with_a_two_row_ratio_interv
     {"response_factors": {MFT: ResponseFactor(MFT, 0.0, 0.0, 3)}},       # no sigma
     {"fit_records": ()},                                                 # no fit records
     {"provenance": {}},                                                  # not made by calibrate
+    {"provenance": {"generated_by": h0.CALIBRATE_GENERATOR}},            # calibrate's provenance, no checksum
     {"response_factors": {}},                                            # empty
 ])
 def test_a_hand_written_or_empty_calibration_does_not_rescue_a_level(change):

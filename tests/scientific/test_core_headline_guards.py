@@ -513,24 +513,27 @@ def test_core_scores_17_of_26_independent_directional_claims():
     # RE-PINNED 2026-10-28 (B60 ships; Amendment 45's 16 blind rows and 27 claims scored for the first time): 17/31 -> 21/38.
     # RE-PINNED 2026-10-29 (the noise-aware rule, B60 lineage: a claim whose measured contrast is within the source's noise is not
     # evaluable): 21/38 -> 20/33; excluding pH / aw 15/27 -> 14/22; not evaluable 37 -> 42.
-    assert s["headline"] == [20, 33]
+    # RE-PINNED 2026-11-05 (the trunk's a_w term gained its measured window, a_w 0.33-1.00, its lower edge from Pereyra Gonzales 2010
+    # Table 1; owner sign-off pending): AW-03 (El Hosry 2025, arms a_w 0.25 / 0.65 / 0.95) moves a_w with an arm below
+    # the window and is refused by the engine, not an agree: 20/33 -> 19/32; pH / aw 6/11 -> 5/10; not evaluable 42 -> 43.
+    assert s["headline"] == [19, 32]
     ind = s["independent"]
     assert (ind["excluding_ph_aw"]["agree"], ind["excluding_ph_aw"]["evaluable"]) == (14, 22)
-    assert (ind["ph_aw"]["agree"], ind["ph_aw"]["evaluable"]) == (6, 11)
-    assert ind["total"]["not_evaluable"] == 42
+    assert (ind["ph_aw"]["agree"], ind["ph_aw"]["evaluable"]) == (5, 10)
+    assert ind["total"]["not_evaluable"] == 43
     assert ind["total"]["mechanism_absent"] == 0
     assert s["not_evaluable_reasons"]["refused by the engine"] >= 2
     cats = {k: (v["agree"], v["evaluable"]) for k, v in ind["by_category"].items()}
     assert cats["sugar_identity"] == (4, 8)  # 2026-10-29: noise-aware rule (DIC-03 and two more not evaluable)  # was (5, 11):  # 2026-10-28: B60 + Amendment 45  # B15/B16: DIC-01 and DIC-03 miss; B51: SUG-09 flips (the hexose entry)
     assert cats["temperature"] == (5, 8)  # 2026-10-29: noise-aware rule (was (5, 9))     # 2026-10-27 audit: TEMP-03 retired; WANG22 shapes retired; B51 +1
     assert cats["ph"] == (5, 10)               # B51 + PH-04/PH-05 retired (Cerny 2015 read in full); MOT-01 agrees with its pyrophosphate: MOT02-PH-01/02 and PH-03 not independent; arms of PH-01/02 set to Meynier & Mottram 1995
-    assert cats["moisture_aw"] == (1, 1)      # 2026-10-27 audit: AW-01 retired (source mismatch)
+    assert cats["moisture_aw"] == (0, 0)      # 2026-11-05: AW-03 refused (trunk a_w window); 2026-10-27 audit: AW-01 retired (source mismatch)
     assert cats["additive_cysteine"] == (1, 1)  # 2026-10-27 audit: CYS-01 tautology, CYS-02 retired
     assert cats["time"] == (2, 3)             # 2026-10-27 audit: TIME-01 and the WANG22 time shapes retired; B51 +1
     readme = _doc_text(README)
-    _assert_quoted(readme, "20 of 33", "README.md", "the core's directional headline")
+    _assert_quoted(readme, "19 of 32", "README.md", "the core's directional headline")
     _assert_quoted(readme, "14 of 22", "README.md", "the directional count excluding pH and water activity")
-    _assert_quoted(readme, "6 of 11", "README.md", "the directional count on pH and water activity")
+    _assert_quoted(readme, "5 of 10", "README.md", "the directional count on pH and water activity")
 
 
 def test_directional_scorecard_is_not_stale():

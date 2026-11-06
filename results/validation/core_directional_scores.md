@@ -2,11 +2,11 @@
 
 Panel `docs/validation/directional_claims_panel.yml` (119 claims, flat tolerance 5 %). Nothing in the core was tuned to this panel.
 
-* **headline (strictly independent, evaluable): 20/33 (61%)**; 42 independent claims not evaluable
-* independent, excluding pH and water activity: 14/22 (64%); pH and water activity alone: 6/11 (55%)
-* all claims (independent + fit-adjacent + fit-system overlap): 30/56 (54%); 63 not evaluable
+* **headline (strictly independent, evaluable): 19/32 (59%)**; 43 independent claims not evaluable
+* independent, excluding pH and water activity: 14/22 (64%); pH and water activity alone: 5/10 (50%)
+* all claims (independent + fit-adjacent + fit-system overlap): 29/55 (53%); 64 not evaluable
 * misses where the lane carries no term for the moved axis (identical predictions): 3
-* not evaluable, by reason: the claim carries no runnable conditions (prose-only) (39); a predicted concentration is zero; no direction is defined (6); refused by the engine (3); the measured contrast (glycine + D-glucose, 165 C 8 min 333, glycine + D-fructos (1); arm 'hydrolysate + xylose (no cysteine), 120 C' refused (1); the measured contrast (cysteine + D-fructose, 145 C 20 min pH 5.0 2.5, cysteine  (1); the measured contrast (cysteine + D-fructose, 145 C 20 min pH 5.0 3.2, cysteine  (1); the measured contrast (MFT, cysteine + ribose, phosphate pH 5.6 2230, FFT, cyste (1); the measured contrast (120 C / 1 h 1.68, 100 C / 4 h 1.28) is within measurement (1); the verdict depends on the unstated input ph (disagree at ph 5, agree at ph 7, a (1); the measured contrast (3-deoxyglucosone 52.2, glucosone 7.5, glyoxal 5.6, methyl (1); arm 'lysine 1x (40 mM)' refused (1); a predicted concentration is zero; no ranking is defined (1); arm 'glucose + glutathione' refused (1); arm 'cysteine alone' refused (1); arm 'beef triglyceride alone' refused (1); arm 'egg PC alone' refused (1); arm 'methionine alone' refused (1)
+* not evaluable, by reason: the claim carries no runnable conditions (prose-only) (39); a predicted concentration is zero; no direction is defined (6); refused by the engine (4); the measured contrast (glycine + D-glucose, 165 C 8 min 333, glycine + D-fructos (1); arm 'hydrolysate + xylose (no cysteine), 120 C' refused (1); the measured contrast (cysteine + D-fructose, 145 C 20 min pH 5.0 2.5, cysteine  (1); the measured contrast (cysteine + D-fructose, 145 C 20 min pH 5.0 3.2, cysteine  (1); the measured contrast (MFT, cysteine + ribose, phosphate pH 5.6 2230, FFT, cyste (1); the measured contrast (120 C / 1 h 1.68, 100 C / 4 h 1.28) is within measurement (1); the verdict depends on the unstated input ph (disagree at ph 5, agree at ph 7, a (1); the measured contrast (3-deoxyglucosone 52.2, glucosone 7.5, glyoxal 5.6, methyl (1); arm 'lysine 1x (40 mM)' refused (1); a predicted concentration is zero; no ranking is defined (1); arm 'glucose + glutathione' refused (1); arm 'cysteine alone' refused (1); arm 'beef triglyceride alone' refused (1); arm 'egg PC alone' refused (1); arm 'methionine alone' refused (1)
 
 ## Per category (strictly independent claims)
 
@@ -16,7 +16,7 @@ Panel `docs/validation/directional_claims_panel.yml` (119 claims, flat tolerance
 | additive_cysteine | 1 | 1 | 1.00 | 4 | - |
 | lipid_lane | 0 | 0 | - | 3 | - |
 | matrix_identity | 0 | 0 | - | 1 | - |
-| moisture_aw | 1 | 1 | 1.00 | 3 | - |
+| moisture_aw | 0 | 0 | - | 4 | - |
 | ph | 5 | 10 | 0.50 | 5 | PH-07, HOX-03, CER07-PH-01, CER07-PH-02, MOD08-PH-01 |
 | process_heating | 0 | 0 | - | 1 | - |
 | ranking | 0 | 0 | - | 4 | - |
@@ -34,7 +34,7 @@ Panel `docs/validation/directional_claims_panel.yml` (119 claims, flat tolerance
 | additive_cysteine | 2 | 3 | 0.67 | 5 |
 | lipid_lane | 0 | 1 | 0.00 | 5 |
 | matrix_identity | 0 | 2 | 0.00 | 1 |
-| moisture_aw | 1 | 1 | 1.00 | 6 |
+| moisture_aw | 0 | 0 | - | 7 |
 | ph | 10 | 17 | 0.59 | 8 |
 | process_heating | 0 | 0 | - | 4 |
 | ranking | 1 | 3 | 0.33 | 4 |
@@ -92,7 +92,7 @@ Panel `docs/validation/directional_claims_panel.yml` (119 claims, flat tolerance
 | TEMP-04 | temperature | independent | 2,5-Dimethylpyrazine | A>B | **agree** | trunk | 0.00159, 4.37e-06 |  |
 | TEMP-05 | temperature | independent | HMF | increasing | **disagree** | trunk | 1.1e+03, 726, 651 |  |
 | TEMP-06 | temperature | independent | Furfural | A>B | **agree** | sulfur | 17.5, 0.000551 |  |
-| AW-03 | moisture_aw | independent | HMF | peak | **agree** | trunk | 1.3e+03, 1.47e+03, 760 |  |
+| AW-03 | moisture_aw | independent | HMF | peak | **not_evaluable** | - | - | refused by the engine: REFUSED -- the two arms differ in WATER ACTIVITY (0.25 vs 0.65) and the trunk lane's a_w term is measured only inside 0.33-1.00 (lower ed |
 | CYS-03 | additive_cysteine | independent | MFT | A>B | **agree** | sulfur | 104, 0 |  |
 | CYS-04 | additive_cysteine | independent | 2,5-Dimethylpyrazine | A>B | **not_evaluable** | - | - | arm 'hydrolysate + xylose (no cysteine), 120 C' refused: PYRAZINE TARGETS '2,5-Dimethylpyrazine' (wave B18) run on the trunk lane only: the sulfur lane's networ |
 | LIP-04 | lipid_lane | retired | Hexanal | A>B | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |

@@ -2995,7 +2995,19 @@ PH_TERM_WINDOWS = {ACRYLAMIDE: acrylamide_conditions.PH_WINDOW}
 #: Lanes that carry a water-activity term (B12: the trunk's declared multiplier).
 AW_TERM_LANES = frozenset({TRUNK, ACRYLAMIDE})
 #: B14: lanes whose a_w term exists only inside a measured window (outside it the axis is refused).
-AW_TERM_WINDOWS = {ACRYLAMIDE: acrylamide_conditions.AW_WINDOW}
+#: 2026-11-05 (H0 follow-up, owner-approved): the trunk's too, a_w 0.33-1.00 (trunk_conditions.AW_WINDOW: the
+#: lower edge is the driest row its multiplier was built on, the upper edge the base constants' solution state).
+#: Only COMPARISONS are refused: a single-pot prediction outside a window is still answered, with its declaration,
+#: on both lanes (a known limitation; owner, 2026-11-05).
+AW_TERM_WINDOWS = {ACRYLAMIDE: acrylamide_conditions.AW_WINDOW, TRUNK: trunk_conditions.AW_WINDOW}
+#: Per window: the basis of its edges, and what the lane does outside it (both named in the refusal).
+AW_TERM_WINDOW_SOURCES = {
+    ACRYLAMIDE: ("De Vleeschouwer 2008, B14", "outside it the lane carries no term and would return identical arms"),
+    TRUNK: (trunk_conditions.AW_WINDOW_SOURCE,
+            "below it the multiplier is held at the lowest measured point and the glass collapse is not sized, so "
+            "the arms' difference would be an extrapolation (a single recipe there is still answered, with the held "
+            "multiplier and a glass warning)"),
+}
 
 
 def _lanes_of(declaration) -> Tuple[str, ...]:
@@ -3010,9 +3022,15 @@ def axis_refusal(spec_a, spec_b, declaration_a, declaration_b) -> Optional[str]:
     2026-09-03 (owner decision, step 5): a comparison that moves an axis the resolved
     lane carries no term for is REFUSED, not answered with two identical numbers.
 
-    * water activity differs between the arms: NO lane carries an a_w term.
+    * water activity differs between the arms: the sulfur and lipid lanes carry no a_w term; the trunk
+      (B12) and acrylamide (B14/B15) lanes carry one only inside AW_TERM_WINDOWS, and a comparison with
+      an arm outside its lane's window is refused.
     * pH differs and every resolved lane is trunk / acrylamide / lipid: those lanes are
       homogeneous in pH by declaration; only the sulfur lane carries a pH trajectory.
+
+    Only comparisons are refused here. A single-pot prediction outside an a_w window is still
+    answered, with the lane's declaration (trunk: the multiplier held at 0.33 and a glass warning;
+    acrylamide: no central term): a known limitation (owner, 2026-11-05; a register item to file).
 
     Returns the refusal reason, or None when the comparison is answerable.
     """
@@ -3025,16 +3043,17 @@ def axis_refusal(spec_a, spec_b, declaration_a, declaration_b) -> Optional[str]:
                 f"REFUSED -- the two arms differ in WATER ACTIVITY and the resolved lane(s) "
                 f"({', '.join(sorted(lanes)) or 'none'}) carry no a_w term; the model would return "
                 "identical arms and call it a comparison. The trunk lane carries a declared a_w term "
-                "(B12) and the acrylamide lane a declared flat one inside a_w 0.88-0.99 (B14). Hold "
-                "a_w fixed, or bring a measurement."
+                f"inside a_w {AW_TERM_WINDOWS[TRUNK][0]:.2f}-{AW_TERM_WINDOWS[TRUNK][1]:.2f} (B12) and the "
+                f"acrylamide lane a declared flat one inside a_w {AW_TERM_WINDOWS[ACRYLAMIDE][0]:.2f}-"
+                f"{AW_TERM_WINDOWS[ACRYLAMIDE][1]:.2f} (B14/B15). Hold a_w fixed, or bring a measurement."
             )
         for lane_name, (lo, hi) in AW_TERM_WINDOWS.items():
             if lane_name in lanes and not all(lo - 1e-9 <= float(a) <= hi + 1e-9 for a in (aw_a, aw_b)):
+                source, outside = AW_TERM_WINDOW_SOURCES[lane_name]
                 return (
                     f"REFUSED -- the two arms differ in WATER ACTIVITY ({float(aw_a):.2f} vs {float(aw_b):.2f}) "
                     f"and the {lane_name} lane's a_w term is measured only inside {lo:.2f}-{hi:.2f} "
-                    f"(De Vleeschouwer 2008, B14): outside it the lane carries no term and would return "
-                    "identical arms. Keep both arms inside the window, or bring a measurement."
+                    f"({source}): {outside}. Keep both arms inside the window, or bring a measurement."
                 )
     if abs(float(pa.ph) - float(pb.ph)) > 1e-9:
         if lanes and lanes <= NO_PH_TERM_LANES:
@@ -3181,7 +3200,7 @@ def compare(
     if relative_only:
         out["relative_caveat"] = thiol_relative_only.relative_caveat()
     if withheld:
-        out["absolute_refused"] = {c: thiol_relative_only.refusal_text() for c in sorted(withheld)}
+        out["absolute_refused"] = {c: thiol_relative_only.refusal_text(calibration, c) for c in sorted(withheld)}
     return out
 
 
@@ -3329,6 +3348,7 @@ __all__ = [
     "axis_refusal",
     "AW_TERM_LANES",
     "AW_TERM_WINDOWS",
+    "AW_TERM_WINDOW_SOURCES",
     "PH_TERM_WINDOWS",
     "NO_PH_TERM_LANES",
     "TRUNK",
