@@ -2,11 +2,11 @@
   "artifact": "sulfur_reaction_evidence",
   "provenance": {
     "artifact": "sulfur_reaction_evidence",
-    "generated_on": "2026-11-05",
+    "generated_on": "2026-11-06",
     "git": {
-      "commit": "35d8ed272204797182b384cf6d468f1f1b67c23f",
-      "short": "35d8ed27",
-      "branch": "lit-2026-11-05-m4-candidates",
+      "commit": "5decf9ad0cac5535a38bb3f4f43acd44cd3ed16c",
+      "short": "5decf9ad",
+      "branch": "m0-data-corrections-batch1",
       "dirty": true
     },
     "generated_by": "scripts/generators/build_sulfur_reaction_evidence.py",
@@ -29,7 +29,7 @@
       },
       {
         "path": "docs/reference/conflicts_register.yml",
-        "sha256": "06f90c9f4eab26bda5510ff09f428692d409c2a8a59cca570c2615da0782ad0f"
+        "sha256": "cf5f93310c43151aebcd327096e4e9c5d609ffd7e55ec1cbec81c3e5c8fed494"
       },
       {
         "path": "src/kinetic_core/sulfur.py",
