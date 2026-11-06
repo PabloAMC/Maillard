@@ -60,11 +60,12 @@ def test_the_tracked_record_loads_and_every_citation_resolves():
     assert all(e["status"] in dm.STATUSES for e in entries)
 
 
-def test_every_entry_is_open_since_m3_phase1_closed_undecidable():
-    # M3 phase 1 closed undecidable on disk (2026-11-05, PR #85), so strecker_routes is no longer provisional
+def test_strecker_routes_is_open_since_m3_phase1_closed_undecidable():
+    # M3 phase 1 closed undecidable on disk (2026-11-05, PR #85), so strecker_routes is no longer provisional.
+    # Only this entry's status is pinned: other entries may legitimately become provisional or decided later.
     entries = {e["id"]: e for e in dm.load()[0]}
     assert entries["strecker_routes"]["status"] == "open"
-    assert {e["status"] for e in entries.values()} == {"open"}
+    assert "status_note" not in entries["strecker_routes"]
 
 
 def test_the_registers_are_read_by_prefix():
