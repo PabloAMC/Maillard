@@ -289,8 +289,37 @@ laboratories before any work) and the owner-approval step.
    the mechanism: route shares from labelling, branching ratios, ratios that cancel scale, the sign of a within-study
    contrast. End-point levels that other errors also move are not decisive. If the rivals predict the same thing on
    every available measurement, the data cannot decide, and the case says so.
-5. **Tolerances from the data.** Each comparison uses the measurement's own reported noise; across laboratories, the
-   between-laboratory spread (H0). No round-number thresholds.
+5. **Tolerances from the data** (revised 2026-11-06 after the judge calibration, PR #99, an independent review and a
+   confirmation run). Each comparison uses the noise of the measurement at the level at which the compared value
+   varies: the SD of independent runs where printed, integrated over its sampling uncertainty (n - 1 df); else the
+   same laboratory class's measured run-to-run reproducibility of the same observable on a repeated design (a run
+   offset and a per-point term where the repeat shows both); an instrument's repeatability or a reading error is a
+   floor, never the whole noise of a reaction-system observable. A model-discrepancy term is a variance component (per
+   point, or shared within a run where its estimate shows that structure), estimated on the same observable and
+   laboratory class from rows on which no shared constant was fitted, integrated over its estimation uncertainty, the
+   same for every rival, and redrawn in the calibration. Where none exists, zero is not assumed: only values in which a
+   run-level term cancels (within-run ratios, shapes, signs of within-study contrasts) are decisive for credit, and
+   absolute levels are falsification-only or reported. Across laboratories: the measured between-laboratory spread of
+   the same observable and value basis (H0's tau for thiol-lane absolute levels; else the S1 record's); with none, a
+   cross-laboratory comparison is not decisive. No term estimated on another observable is transferred, and no bound is
+   used as a standard deviation. No round-number thresholds.
+
+   **The decision statistic (M1.1).** Rivals a and b (either may be the incumbent) are compared by ONE pre-declared
+   statistic T: the pooled log predictive density difference over the decisive units, each density conditioned on the
+   spent rows (p(y_dec | y_spent); the spent rows' own likelihood ratio never enters T). a is credited only if T exceeds
+   the 95th percentile of T under b as truth AND a is adequate on every decisive unit (posterior-predictive p >= 0.05
+   after Holm); b by the mirror rule; otherwise the pair is undecided and both are carried (S3). A rival falsified under
+   S3 is neither credited nor used as a null. Each null is a parametric bootstrap from the null rival's spent-conditioned
+   posterior, its truths drawn outside the scoring ensemble, redrawing the decisive data, the conditioning rows, the
+   forced inputs, the replicate SDs, the discrepancy component and the form index, with >= 1000 replicates and the
+   threshold's Monte Carlo error reported; the power check also reports false credit under a generator that adds the
+   same-observable reproducibility term (else the lane's within-laboratory term), and if that exceeds 0.05 plus Monte
+   Carlo error the case cannot credit. Forms: an uncertain experimental fact is a discrete nuisance coordinate; an
+   unsourced modelling choice keeps required agreement; forms that only hedged omega are dropped. Unit contributions and
+   leave-one-unit-out verdicts are printed; a credit resting on one unit stands only if that unit alone meets item 4.
+   **A verdict needs resolved densities:** an unresolved density is re-estimated (larger draw sets, or the reusable SMC
+   estimator), never read as a tie; every power check reports which cells are computable and the cost of making the
+   rest computable, before the run. This does not reopen M1b part (i) (its amendment A1 is frozen).
 
 Then:
 
