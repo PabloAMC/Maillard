@@ -308,30 +308,67 @@ Then:
    unanswered. The decision and its basis go into the experiment register (an EX entry). A shipped change is reversed
    when later evidence favours another rival.
 
-**Symmetry: the incumbent is not privileged (owner, 2026-11-06).** Items 1 - 9 make a change beat the current model,
-but the current model never had to pass the same test, so when the data cannot decide, its errors persisted by default.
-Four rules close that gap. Each change made under them is still a case (items 1 - 9) with its own adversarial review and
-confirmation.
+**Symmetry: the incumbent is not privileged (owner, 2026-11-06; revised after an independent review the same day).**
+Items 1 - 9 make a change beat the current model, but the current model never had to pass the same test, so when the
+data could not decide, its errors persisted by default. Rules S1 - S4 close that gap. Order: S1's record must exist
+before S2 or S4 is applied to any constant. Every S-rule change is a case with its own adversarial review and
+confirmation (item 8), respects existing owner-first clauses, and never upgrades a prior without an artifact in
+`results/validation/` (AGENTS.md).
 
-- **S1. Every shipped constant carries an evidence tier:** measured (a direct measurement of that step under
-  comparable conditions), analogue (a same-class measurement transferred with a declared band), bounded (a measured or
-  physical bound), fitted-identified (a converged fit whose profile pins it), or fitted-unidentified (on a band edge, a
-  flat profile, or never identified). The incumbent evidence audit assigns the tiers and keeps them in one record.
-- **S2. A direct measurement replaces a contradicted fitted constant.** Where a fitted constant (either fitted tier)
-  is contradicted by a direct measurement of its step, beyond the measurement's own noise and the declared transfer
-  band, the measurement replaces it, with its band. The decisive data are the measurement itself. End-point rows do not
-  arbitrate: a fitted value may be compensating for another error, and the rows it now misses go to item 7 with the
-  suspected compensating error registered. A replacement never tightens a prior beyond what the measurement supports.
-- **S3. Undecided rivals are carried, not resolved by default.** When a case ends "cannot decide", every rival not
-  falsified is carried as uncertainty: the envelope spans them, and a prediction on which they disagree by more than
-  the stated tolerance is shown with that spread, or refused. The incumbent's point is no longer the answer by default.
-- **S4. Unidentified constants are bands, never re-pinned to unrelated end points.** A fitted-unidentified constant
-  with no measurement is carried as a band: from measured bounds or a same-class analogue where they exist, otherwise
-  the declared band. An output whose answer moves beyond its tolerance across that band widens or is refused. No new fit
-  may pin it from end points that other errors also move (item 4).
+- **S1. Evidence tiers, per coordinate** (log k_ref and Ea separately), in one hand-kept record with a citation per
+  row (paper key, ledger row or fit report): measured (a direct measurement of the step: every channel the engine's
+  constant lumps present in the measured system, at the engine's rate law and concentration regime, under comparable
+  conditions); analogue (a same-class measurement transferred through a measured law, with its band); bounded
+  (one- or two-sided, stated; a measurement of a SUBSET of a lumped step's channels is a one-sided bound, not a
+  value); fitted-identified (a converged fit whose marginal profile is pinned with every other unidentified coordinate
+  profiled over its band; any band-edge, flat-profile or band-spanning-CI criterion overrides a reported stderr;
+  re-derived after any structural change); fitted-unidentified; structural (a declared structural assumption);
+  physical constant; conflicting measurements; withdrawn. The record also lists the incumbent's structural choices
+  that never had a case. The existing vocabularies (`provenance_tier`, the sulfur evidence `grade`) are mapped onto it
+  or retired. Upgrades need an artifact and a second reader; downgrades are free. A CI gate fails on a shipped
+  coordinate without a tier.
+- **S2. A direct measurement replaces a contradicted fitted constant, under strict conditions.** It applies only when
+  (a) the measurement is "of the step" in S1's sense (all lumped channels; the engine's rate-law order and
+  concentration range at the outputs it serves; otherwise the measurement defines a rival structure, items 1 - 9, or a
+  band, S4); (b) the contradiction exceeds a comparison band SET BY RULE, not declared: the largest of the reported
+  noise, the within-lab between-paper spread where one exists, and a between-lab term (the measured spread of that step
+  or its reaction class where >= 2 laboratories measured it, else a single-lab term with its source); a transfer
+  across T, pH, buffer, O2, concentration or matrix adds a term only through a measured law; if a condition the step
+  depends on is unstated, the band is undefined and the measurement enters under S4, not S2; (c) the case lists EVERY
+  measurement of the step, agreeing ones included, pooled with the between-lab term; one laboratory's contradiction
+  among agreeing laboratories does not trigger S2; contradictions found in one audit pass are judged together (Holm,
+  as in M1.1) and the number expected by chance is reported; (d) the measurement was read from the source by two
+  readers, passes OpenAlex `verify`, and is neither a quote of a quote nor an inferred bound (patents count as bounds
+  only). S2 is an explicit exception to item 2's spent-data rule (a direct measurement of the parameter was not tuned
+  to it). Side effects: (e) the named compensating error is a specific step, and a forward run shows that moving it
+  within its own tier band restores the lost rows' sign and rough size; if no such step exists, S2 waits; (f) rows
+  lost beyond omega that are decisive-type data (within-study ratios, shapes, label shares, multi-laboratory) DO
+  arbitrate and block; (g) every constant co-fitted with the replaced one drops to fitted-unidentified until
+  re-derived; (h) replacements in one lane ship in one batch case with one before / after. Conflicting measurements
+  of one step (e.g. Kanzler 2021 vs 2026) are carried as a band spanning both, with a CF entry.
+- **S3. Undecided rivals are carried, not resolved by default.** A rival is carried if it was named in a case before
+  results and has a mechanism with at least one evidence kind from item 2's list; it is falsified when its converged
+  best fit is inadequate (posterior-predictive p < 0.05, M1.1) on any data, spent included. The envelope is the union
+  of the carried rivals' own envelopes, unweighted ("never credit"). Tolerance: omega for within-laboratory relative
+  outputs, tau for absolute ones. Rivals that disagree in sign make the lever's direction refused; rivals that agree
+  in sign show its size with the spread. If the incumbent itself is falsified with no rival credited (e.g. C2 + C3
+  recombination as the hexose MFT route, M4), the outputs that depend on it are refused, never shown at the
+  incumbent's point. The reviewer (item 8) checks both missing and padded rivals. Carried rivals must be runnable for
+  prediction: until W3 runs them in JAX, they run in the NumPy engine behind their switches, and the cost is stated.
+- **S4. Unidentified coordinates are bands, and fits may move them only on decisive-type evidence.** A band comes from
+  measured bounds, a same-class analogue, or the reaction-class distribution of measured constants (as B55's
+  `ea_class_prior`); a search bound is never a band; with no class, the output is refused rather than computed over an
+  invented band. Bands are sampled jointly within the region the decisive-type data allow (common random numbers
+  across the arms of a contrast); held-out coverage is reported before and after (over-coverage flags an inflated
+  band). A fit (the joint refit, M2, H4) may move a fitted-unidentified coordinate only if every other error its rows
+  also move is a free coordinate in the same fit (CF-107's logic) and the coordinate's prior-to-posterior contraction
+  survives profiling those coordinates and comes from decisive-type rows (item 4); every fit reports per-coordinate
+  contraction, and a coordinate contracted only by level rows stays a band.
 
-These rules move shipped outputs: intervals widen and some answers become refusals. That is the intended, honest
-consequence. Each such change is listed before / after in its PR.
+For S3 / S4 changes, items 6 and 9 are replaced by: band sources verified; before / after listed; held-out coverage
+reported; review. These rules move shipped outputs: intervals widen and some answers become refusals (on current
+shares, S4 will likely widen or refuse most absolute thiol outputs and may reach relative ones). That is the intended,
+honest consequence; sec. 8's odds and W5.4 are re-estimated in the PR that first applies them.
 
 **Why this resists persuading ourselves.** The ranking of evidence is fixed in advance. The rivals and the decisive
 data are named before results exist. Tolerances come from the measurements. The decision is a comparison, not a
