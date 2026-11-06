@@ -4218,9 +4218,9 @@
     "generated_on": "2026-11-06",
     "git": {
       "branch": "m0-data-corrections-batch1",
-      "commit": "c6315219fc15e8d432908f20e175c23b570b3cf6",
+      "commit": "56861a85a4256a0043a4fff666d3dc4cc7bfda79",
       "dirty": true,
-      "short": "c6315219"
+      "short": "56861a85"
     },
     "inputs": [
       {
@@ -5124,7 +5124,7 @@
       "reduced_chi_square": 1.8711697851956615
     },
     "unsampled_lanes": [],
-    "wall_seconds": 996.3,
-    "workers": 2
+    "wall_seconds": 971.0,
+    "workers": 1
   }
 }

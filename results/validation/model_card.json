@@ -15,8 +15,8 @@
       "studies": 5
     },
     "directional": [
-      20,
-      33
+      19,
+      32
     ],
     "oos_within_3x": [
       10,
@@ -96,8 +96,8 @@
         0
       ],
       "moisture_aw": [
-        1,
-        1
+        0,
+        0
       ],
       "ph": [
         5,
@@ -138,8 +138,8 @@
       22
     ],
     "headline": [
-      20,
-      33
+      19,
+      32
     ],
     "mechanism_absent_misses": 0,
     "misses": {
@@ -165,11 +165,11 @@
         "Z23C-T-01"
       ]
     },
-    "not_evaluable": 42,
+    "not_evaluable": 43,
     "path": "results/validation/core_directional_scores.json",
     "ph_aw": [
-      6,
-      11
+      5,
+      10
     ]
   },
   "exposed_assumptions": [
@@ -224,7 +224,7 @@
   "generated_by": "scripts/generators/generate_model_card.py",
   "headline_sentences": [
     "**Absolute concentrations are unreliable.** On the union panel the kinetic core lands 10/24 rows within 3x (median fold error 4.62x, worst 1.76e+03x); out of sample -- every row a core fit read removed -- 10/24 (median 4.62x). Nothing in this repository licenses a ppb number as a specification. The core's 90% Monte-Carlo interval covers 12/23 evaluable literature rows (1 not evaluable: the no lane carries no sampled uncertainty), 12/23 out of sample.",
-    "**Directional and ranking claims are the product, and on the kinetic core they score 20/33 on strictly independent literature claims** (42 independent claims not evaluable: refused arms, prose-only claims, observables the core does not represent) -- 14/22 once pH and water activity are set aside, and 6/11 on pH and water activity themselves, 0 of the misses being identical predictions across an axis the lane carries no term for. A coin scores ~0.5 on binary orderings; read the per-axis rows below, not the aggregate.",
+    "**Directional and ranking claims are the product, and on the kinetic core they score 19/32 on strictly independent literature claims** (43 independent claims not evaluable: refused arms, prose-only claims, observables the core does not represent) -- 14/22 once pH and water activity are set aside, and 5/10 on pH and water activity themselves, 0 of the misses being identical predictions across an axis the lane carries no term for. A coin scores ~0.5 on binary orderings; read the per-axis rows below, not the aggregate.",
     "**The sulfur branch has 8 absolute literature anchors, and the model lands no scored anchor rows within 3x to report: since 2026-11-05 the thiol lane ships relative within-laboratory predictions only (H0 / EX-059, D2 branch (i)), so every anchor row is refused for its level, kept only for the within-study contrasts, and the branch has no scored absolute anchor.** They are the primary-source-verified stable-isotope-dilution rows in hofmann1998_c2c3_recombination_145C_20min_pH3, hofmann1998_c2c3_recombination_145C_20min_pH5, hofmann1998_c2c3_recombination_145C_20min_pH7, hofmann1998_fructose_cysteine_145C_20min_pH5, hofmann1998_furan2aldehyde_h2s_145C_20min_pH5, hofmann1998_glucose_cysteine_145C_20min_pH5, hofmann1998_norfuraneol_cysteine_145C_20min_pH5, hofmann1998_ribose_cysteine_145C_20min_pH5. A further 1 primary-source-verified sulfur row(s) are on the panel and are NOT counted here, because a constant was selected by looking at them (hofmann1998_norfuraneol_h2s_145C_20min_pH5): agreement on a fitted row is not evidence about the model. The previously shipped claim of ZERO anchors was corrected on 2026-08-28 when the full text behind them was obtained; the retired benchmark (cys_ribose_140C_Hofmann1998, two values derived inside the repository, never measured) was deleted on 2026-10-27. Absolute agreement is poor and the DIRECTION is a separate question."
   ],
   "no_verifiable_source": {
@@ -451,9 +451,9 @@
     {
       "basis": "",
       "claim_type": "Direction / ranking on `moisture_aw`",
-      "evidence": "1/1 on the directional panel (independent claims)",
+      "evidence": "no evaluable independent claim on the core",
       "system_class": "any (water activity moved)",
-      "verdict": "caution"
+      "verdict": "do-not-use"
     },
     {
       "basis": "",
