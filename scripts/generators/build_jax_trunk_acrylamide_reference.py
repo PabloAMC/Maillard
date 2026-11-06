@@ -7,7 +7,8 @@ results/validation/.
 
 The pots: every panel bundle the engine routes to the acrylamide lane and answers (``panel.panel_bundles`` ->
 ``engine.declare_envelope`` with the bundle's own targets; 6 on 2026-11-05: the SPI extrusion pot and five
-maillard-path hold-outs), each at its point and at two corners of the lane's sampled declared bands (every condition
+maillard-path hold-outs; 5 since 2026-11-06, when the SPI pot's unsourced charge was withdrawn and its inputs became
+the SYNTHETIC short-isothermal numerics pot ``SHORT``, also run at its point and two corners), each at its point and at two corners of the lane's sampled declared bands (every condition
 coordinate at its band's low / high end together: the formation a_w scale, the elimination deficit scale, both pH
 exponents, and the CF-039 Ea draws of k_int1_acr and k_asn_glc, the latter at its 95 % CI), plus one SYNTHETIC
 staircase profile (not a benchmark): glucose, fructose, asparagine, glycine and all four competitors, 25 -> 180 C in
@@ -69,8 +70,20 @@ PROFILE = {"id": "synthetic_profile_acrylamide_all_steps_25_180_100",
            "initial": {"Glc": 40.0, "Fru": 10.0, "Asn": 20.0, "Gly": 5.0, "Cys": 2.0, "Gln": 5.0, "Lys": 5.0,
                        "Ala": 5.0},
            "points": ((0.0, 25.0), (8.0, 180.0), (20.0, 180.0), (26.0, 100.0)), "ph": 5.0, "water_activity": 0.80}
-JACOBIAN_POTS = ("mp_holdout_glucose_asparagine_180C_30min_Chang2021", "acrylamide_spi_extrusion_130C_ACSRef3",
-                 PROFILE["id"])
+#: 2026-11-06 (M0 data corrections, batch 1; CF-131): the extruded-SPI pot left the acrylamide panel -- Ma 2024 prints
+#: no asparagine / glucose charge, pH or a_w, so the bundle's charge was withdrawn and the engine refuses the pot. It
+#: was this record's SHORT-ISOTHERMAL numerics case (point, two corners, a Jacobian, a timing pot), so the same inputs
+#: are kept as a SYNTHETIC numerics pot: a test input for the port, not a benchmark and not a measurement.
+SHORT = {"id": "synthetic_short_isothermal_acrylamide_130C_25s", "panel": "synthetic_numerics",
+         "initial": {"Asn": 42.0, "Glc": 42.0}, "temp_C": 130.0, "time_min": 0.4167, "ph": 6.0,
+         "water_activity": 0.35}
+JACOBIAN_POTS = ("mp_holdout_glucose_asparagine_180C_30min_Chang2021", SHORT["id"], PROFILE["id"])
+
+
+def short_process():
+    """The synthetic short-isothermal pot's process: a hold, no buffer, no vessel."""
+    return engine.ProcessSpec(thermal=engine.ThermalProgram.isothermal(SHORT["temp_C"], SHORT["time_min"]),
+                              ph=SHORT["ph"], water_activity=SHORT["water_activity"])
 #: the interior point of the Jacobians: the shipped parameters, the condition coordinates off-centre
 THETA_STAR_CONDITIONS = {"aw_scale": 1.1, "aw_elimination_scale": 0.8, "ph_exponent_formation": 0.2,
                          "ph_exponent_elimination": 0.14}
@@ -365,6 +378,13 @@ def main(argv=None) -> int:
             pots_out.append(pot_record(pot["id"], pot["panel"], pot["initial"], proc, pot["segments"], parameters,
                                        draw, variant))
         print(f"  {pot['id']}: 3 records, {time.perf_counter() - t_start:.0f} s")
+    short_proc = short_process()
+    short_segments = [list(map(float, s)) for s in short_proc.thermal.segments]
+    pots_out.append(pot_record(SHORT["id"], SHORT["panel"], SHORT["initial"], short_proc, short_segments, parameters,
+                               None, "point"))
+    for variant, draw in corners.items():
+        pots_out.append(pot_record(SHORT["id"], SHORT["panel"], SHORT["initial"], short_proc, short_segments,
+                                   parameters, draw, variant))
     program = engine.ThermalProgram.from_profile(PROFILE["points"])
     profile_proc = engine.ProcessSpec(thermal=program, ph=PROFILE["ph"], water_activity=PROFILE["water_activity"])
     profile_segments = [list(map(float, s)) for s in program.segments]
@@ -381,7 +401,8 @@ def main(argv=None) -> int:
         rec = next(p for p in pots_out if p["id"] == pot_id and p["variant"] == "point")
         n = len(rec["refined_segments"])
         rows = list(range(n)) if len(rec["segments"]) == 1 else [n // 4, n // 2, n - 1]
-        proc = by_id[pot_id]["spec"].process if pot_id in by_id else profile_proc
+        proc = (by_id[pot_id]["spec"].process if pot_id in by_id
+                else short_proc if pot_id == SHORT["id"] else profile_proc)
         jac[pot_id] = central_jacobian(rec["initial"], proc, rec["refined_segments"], rows)
         print(f"  jacobian {pot_id}: {jac[pot_id]['seconds']:.0f} s")
     report["jacobian_central_fd"] = jac

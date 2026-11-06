@@ -58,6 +58,7 @@ from .panel import (
     bundle_targets,
     core_native_value,
     core_spec,
+    data_refusal,
     limiting_precursor_molar,
     load_bundle,
     measured_value,
@@ -214,7 +215,12 @@ def score_benchmark(
         run = predict(spec, [compound])
         declaration = run.declaration
         reason = None
-        if not run.answered:
+        data_refused = data_refusal(target_spec)
+        if data_refused is not None:
+            # 2026-11-06 (M0 data corrections, batch 1): the bundle itself withdraws the row; checked first, so
+            # no number, not even the engine's, is scored against it.
+            reason = data_refused
+        elif not run.answered:
             reason = " | ".join(declaration.reasons) or "out of envelope"
         elif unit != "ppb" and unit not in RATIO_UNIT_FACTORS:
             reason = f"target unit {unit!r} has no core conversion"
@@ -239,6 +245,7 @@ def score_benchmark(
                     "envelope_state": declaration.state, "lane": declaration.lane,
                     "unidentified_route": reason.startswith("NOT EVALUABLE: HEXOSE"),
                     "absolute_refused": absolute_refused,
+                    "data_refused": data_refused is not None,
                     # ... but what the lane DOES ship, a ratio between two pots of one study, still needs both
                     # numbers: the within-study contrast diagnostic (build_contrast_scores.py) reads them, and
                     # nothing that counts an absolute does.
