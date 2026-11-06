@@ -436,7 +436,7 @@ def _pot_task(item) -> Dict[str, Any]:
     t0 = time.time()
     fallback = None
     try:
-        run = integrate_with_fallback(pot, drift)
+        run = integrate_with_fallback(pot, drift, PRIMARY_METHOD[0])
         fallback = run.metadata.get("m1b_solver_fallback")
     except M1._Timeout as exc:
         return {"tag": tag, "pot": pot_name, "failed": str(exc), "timeout": True}
@@ -481,6 +481,8 @@ def _pot_task(item) -> Dict[str, Any]:
 #: re-integrated ONCE with BDF under the same alarm; the fallback is recorded per pot and counted per part; a pot
 #: that fails both is a failed pot run (the part refuses). --checks' V-solver measures LSODA vs BDF agreement.
 FALLBACK_METHOD = "BDF"
+#: the first method a pot task tries (A2, prereg sec. 21.2: BDF directly; LSODA everywhere before A2)
+PRIMARY_METHOD = ["LSODA"]
 
 
 def integrate_with_fallback(pot: Pot, drift: PhDrift, method: str = "LSODA"):
@@ -2369,6 +2371,713 @@ def render_power(rec: Mapping[str, Any]) -> str:
 
 
 # ----------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------
+# --a2-noise / --a2-attribution / --a2-s3: Amendment A2 (prereg v3.8 sec. 21)
+# ----------------------------------------------------------------------------------------------------------------
+A2_MARK = "## 21. Amendment A2"
+A2_SEED = 20261108
+A2_MC_SETS = 1_000_000
+A2_STATEMENT_POTS = 20                 # Meynier 1995: 4 amino acids x 5 labels, "no change of more than 0.2"
+A2_GRID = 0.001
+A2_EDGES = (MEYNIER_BOUND, 0.25)       # sec. 21.1 item 1: the statement's edge, and the 0.1-resolution reading
+A2_SD_FIXED = (math.sqrt(2.0) * METER_R, 0.100)
+A2_BETA_MULTS = (0.5, 1.0, 2.0)
+A2_SHAPE_UNSCALED = (1.0, 2.0)         # the review's forms (sd 0.237, 0.458): printed, never in D
+A2_WORKERS = 2
+A2_MIN_FREE = 35.0
+A2_MC_PREDICTIVE = 200_000
+KANG_A_PER_MIN, KANG_EA = 8.0e4, 55.1  # KANG_CYS_ANCHOR: free-cysteine depletion, pH 7, A and Ea
+OUT["a2"] = V / f"{STEM}_a2.json"
+OUT["a2_attribution_fit"] = V / f"{STEM}_a2_attribution_fit.json"
+OUT["a2_s3"] = V / f"{STEM}_a2_s3.json"
+RETAINED = ("r_cys_thermal", "ch_cys_ox")
+
+
+@dataclass(frozen=True)
+class A2Choice:
+    """One sigma-Mey noise choice of sec. 21.1: a per-label sd (5 values) and the censoring edge; in_d: inside D."""
+
+    name: str
+    sd: Tuple[float, ...]
+    edge: float
+    in_d: bool
+    basis: str
+
+
+def a2_sigma_max(edge: float, n_pots: int = A2_STATEMENT_POTS, sets: int = A2_MC_SETS, seed: int = A2_SEED
+                 ) -> Dict[str, Any]:
+    """sec. 21.1 item 1: the largest sigma (on a 0.001 grid) with P(all n |e_i| <= edge) >= 0.05, e ~ N(0, sigma^2),
+    by Monte Carlo with common random numbers (every sigma reads the same 10^6 sets: all within iff max |z| <=
+    edge / sigma), checked against the closed form."""
+    from scipy.stats import norm
+
+    rng = np.random.default_rng(seed)
+    m = np.empty(sets)
+    chunk = 100_000
+    for i in range(0, sets, chunk):
+        m[i:i + chunk] = np.max(np.abs(rng.standard_normal((min(chunk, sets - i), n_pots))), axis=1)
+    m.sort()
+    grid = np.round(np.arange(0.01, 1.0 + A2_GRID / 2, A2_GRID), 6)
+    p_mc = np.searchsorted(m, edge / grid, side="right") / sets
+    ok = grid[p_mc >= 0.05]
+    sigma_mc = float(ok.max())
+    closed = float(edge / norm.ppf(0.5 * (1.0 + 0.05 ** (1.0 / n_pots))))
+    return {"edge": edge, "n_pots": n_pots, "sets": sets, "seed": seed, "grid": A2_GRID, "sigma_max": sigma_mc,
+            "p_at_sigma_max": float(p_mc[grid == sigma_mc][0]), "closed_form_sigma": closed,
+            "agrees_with_closed_form": bool(abs(sigma_mc - closed) <= A2_GRID)}
+
+
+def _beta_and_ionic(state: Mapping[str, float], sid: float, drift: PhDrift, spec: BufferSpec) -> Dict[str, float]:
+    inv = ph_state.titratable_inventory(state, drift, spec)
+    ph, i_m = ph_state.solve_ph_and_ionic_strength(LABEL_TEMPERATURE_K, sid, inv)
+    b0 = ph_state.buffer_capacity_mmol_per_ph(state, LABEL_TEMPERATURE_K, ph, drift, spec)
+    bi = ph_state.buffer_capacity_mmol_per_ph(state, LABEL_TEMPERATURE_K, ph, drift, spec, ionic_strength_m=i_m)
+    return {"ph_cooled": float(ph), "ionic_strength_m": float(i_m), "beta_i0": float(b0), "beta_davies": float(bi)}
+
+
+def a2_betas(breakpoints) -> Dict[str, Any]:
+    """sec. 21.1 item 2: Meynier's cysteine pots at t = 0 and Zhou's ARP-alone label-8 pot at B0-pinned's 60-min
+    state, cooled, at the solved ionic strength (Davies) and at I = 0 (CF-084's reading)."""
+    _init_pots()
+    drift = b0_pinned_drift()
+    mey = {}
+    for lab in MEYNIER_LABELS:
+        pot = POTS_BY_NAME[f"mey_cys_pH{lab:g}"]
+        st0 = pot.initial_map()
+        sid = ph_state.strong_ion_difference(lab, st0, drift, pot.buffer)
+        mey[f"{lab:g}"] = _beta_and_ionic(st0, sid, drift, pot.buffer)
+    pot = POTS_BY_NAME["zhou_arp_pH8"]
+    run, cooled, drift_p, sid = _run_single("B0_pinned", {}, pot, breakpoints)
+    ref = _beta_and_ionic(state_at(run, len(pot.times) - 1), sid, drift_p, pot.buffer)
+    ref["t_min"] = float(pot.times[-1])
+    return {"meynier_cys_t0": mey, "zhou_arp_pH8_b0_pinned_60min": ref}
+
+
+def a2_choices(sig_max: Mapping[float, Mapping[str, Any]], betas: Mapping[str, Any]) -> List[A2Choice]:
+    smax, smax25 = sig_max[A2_EDGES[0]]["sigma_max"], sig_max[A2_EDGES[1]]["sigma_max"]
+    n = len(MEYNIER_LABELS)
+    out = [A2Choice(f"sd_{sd:.3f}", (sd,) * n, A2_EDGES[0], sd <= smax + 1e-12,
+                    "meter only (A1)" if sd < 0.08 else "a point inside D") for sd in A2_SD_FIXED]
+    out.append(A2Choice("sigma_max", (smax,) * n, A2_EDGES[0], True, "Meynier's 20-pot statement, edge 0.2"))
+    out.append(A2Choice("sigma_max_edge0.25", (smax25,) * n, A2_EDGES[1], True,
+                        "Meynier's statement read at 0.1 resolution, edge 0.25"))
+    b_ref = betas["zhou_arp_pH8_b0_pinned_60min"]["beta_davies"]
+    for m in A2_BETA_MULTS:
+        sd = tuple(math.sqrt(2.0 * METER_R ** 2 + 2.0 * (m * A1_S_SHAPE * b_ref / betas["meynier_cys_t0"][f"{lab:g}"][
+            "beta_davies"]) ** 2) for lab in MEYNIER_LABELS)
+        out.append(A2Choice(f"beta_s_x{m:g}", sd, A2_EDGES[0], max(sd) <= smax + 1e-12,
+                            "A1's shape term through the Davies buffer-capacity ratio"))
+    for m in A2_SHAPE_UNSCALED:
+        sd = math.sqrt(2.0 * METER_R ** 2 + 2.0 * (m * A1_S_SHAPE) ** 2)
+        out.append(A2Choice(f"shape_unscaled_s_x{m:g}", (sd,) * n, A2_EDGES[0], sd <= smax + 1e-12,
+                            "the review's form: A1's shape term put on Meynier unscaled"))
+    return out
+
+
+def a2_mey_pass(d: np.ndarray, within: Sequence[bool], choice: A2Choice) -> np.ndarray:
+    from scipy.stats import norm
+
+    sd = np.asarray(choice.sd, dtype=float)[None, :]
+    p_in = norm.cdf((choice.edge - d) / sd) - norm.cdf((-choice.edge - d) / sd)
+    w = np.asarray(within, dtype=bool)[None, :]
+    return np.all(np.where(w, p_in, 1.0 - p_in) > ADEQUACY_P, axis=1)
+
+
+def a2_signatures(ens: Ensemble, data: A1Data, form: A1Form, choice: A2Choice, pinned_rise: float
+                  ) -> Dict[str, np.ndarray]:
+    """sec. 21.1 item 4: A1's signatures, sigma-Mey's sd and edge replaced by the A2 choice."""
+    sig = a1_signatures(ens, data, form, pinned_rise)
+    sig["sigma_mey"] = a2_mey_pass(ens.f["C-Mey-Cys"], data.mey_within, choice)
+    sig["all"] = sig["sigma_hou_level"] & sig["sigma_hou_shape"] & sig["sigma_mey"] & sig["sigma_zhou"]
+    return sig
+
+
+SIGNATURES = ("sigma_hou_level", "sigma_hou_shape", "sigma_mey", "sigma_zhou")
+
+
+def a2_reading(ens: Ensemble, data: A1Data, choice: A2Choice, pinned_rise: float) -> Dict[str, Any]:
+    """Under one A2 choice: killed iff no draw passes all four in every A1 form; and, per signature, killed by that
+    signature alone iff it fails at every draw in every A1 form."""
+    per, by_sig = {}, {k: True for k in SIGNATURES}
+    for form in A1_FORMS:
+        sig = a2_signatures(ens, data, form, choice, pinned_rise)
+        per[form.name] = int(sig["all"].sum())
+        for k in SIGNATURES:
+            by_sig[k] = by_sig[k] and not bool(sig[k].any())
+    return {"killed": all(v == 0 for v in per.values()), "n_passing_per_form": per, "killed_by_signature": by_sig}
+
+
+def a2_synthetic(truth: Ensemble, s: int, family: str, rng: np.random.Generator, choice: A2Choice) -> A1Data:
+    """A1's synthetic set (sec. 20.4) with Meynier's outcome drawn at the A2 choice's sd and edge (sec. 21.4)."""
+    base = a1_synthetic(truth, s, family, rng)
+    d_obs = truth.f["C-Mey-Cys"][s] + rng.normal(0.0, 1.0, len(MEYNIER_LABELS)) * np.asarray(choice.sd)
+    return A1Data(base.hou, tuple(bool(x) for x in np.abs(d_obs) <= choice.edge), base.zhou_arp)
+
+
+def a2_refusals(name: str) -> List[str]:
+    problems = []
+    if A2_MARK not in PREREG.read_text(encoding="utf-8"):
+        problems.append("the prereg has no Amendment A2 (sec. 21): no A2 number yet")
+    if read_record(name):
+        problems.append(f"the A2 record {name} exists (each A2 step runs once; its record stands)")
+    if not read_record("falsification").get("complete"):
+        problems.append("A1's falsification record is missing")
+    return problems
+
+
+def run_a2_noise() -> Dict[str, Any]:
+    """sec. 21.1 and 21.4 on the stored draws: sigma_max, the betas, the verdict per choice, per-signature rates."""
+    problems = a2_refusals("a2")
+    if problems:
+        raise SystemExit("--a2-noise refuses:\n  " + "\n  ".join(problems))
+    t0 = time.time()
+    sig_max = {e: a2_sigma_max(e) for e in A2_EDGES}
+    br = tuple(read_record("checks")["davidek_breakpoints_in_situ"])
+    betas = a2_betas(br)
+    choices = a2_choices(sig_max, betas)
+    ens = load_screen_ensembles()
+    pinned = ens["B0_pinned"]
+    pinned_rise = float(pinned.f["C-Zhou-ARP"][0, -1] - pinned.f["C-Zhou-ARP"][0, 0])
+    data = a1_measured()
+    fal = read_record("falsification")
+    measured: Dict[str, Any] = {}
+    for k, e in ens.items():
+        cells = {c.name: a2_reading(e, data, c, pinned_rise) for c in choices}
+        in_d = [cells[c.name]["killed"] for c in choices if c.in_d]
+        verdict = ("falsified on the screen's draws (A2: killed at every choice in D)" if all(in_d) else
+                   "not falsified (A2: passes at every choice in D)" if not any(in_d) else
+                   "conflicting / undecided (A2: the kill holds at some choices in D, not at others)")
+        measured[k] = {"per_choice": cells, "killed_at_every_choice_in_D": all(in_d),
+                       "killed_at_no_choice_in_D": not any(in_d), "verdict": verdict,
+                       "a1_testable": None if k == "B0_pinned" else
+                       fal["verdict"][k]["falsifiable_in_both_families"]}
+    # sec. 21.4: per-signature false-kill and kill power, A1's truths, generation at the meter sd and at sigma_max
+    best = {k: int(fal["best_draws"][k]["index"]) for k in RIVAL_NAMES}
+    truths = {"B0_pinned": (pinned, 0), **{k: (ens[k], best[k]) for k in RIVAL_NAMES}}
+    gen = [c for c in choices if c.name in ("sd_0.071", "sigma_max")]
+    rng = np.random.default_rng(A2_SEED)
+    rates: Dict[str, Any] = {}
+    for c in gen:
+        for family in A1_FAMILIES:
+            tab: Dict[str, Any] = {k: {} for k in RIVAL_NAMES}
+            for tname, (tens, s) in truths.items():
+                counts = {k: {sg: 0 for sg in SIGNATURES + ("all_four",)} for k in RIVAL_NAMES}
+                within_all = 0
+                for _ in range(A1_R):
+                    syn = a2_synthetic(tens, s, family, rng, c)
+                    within_all += int(all(syn.mey_within))
+                    for k in RIVAL_NAMES:
+                        rd = a2_reading(ens[k], syn, c, pinned_rise)
+                        for sg in SIGNATURES:
+                            counts[k][sg] += int(rd["killed_by_signature"][sg])
+                        counts[k]["all_four"] += int(rd["killed"])
+                for k in RIVAL_NAMES:
+                    tab[k][tname] = {sg: {"rate": n / A1_R, "wilson_95": wilson(n, A1_R)} for sg, n in counts[k].items()}
+                    tab[k][tname]["meynier_all_within_fraction"] = within_all / A1_R
+            rates[f"{c.name}|{family}"] = {k: {"false_kill": tab[k][k],
+                                               "kill_power": {t: v for t, v in tab[k].items() if t != k}}
+                                           for k in RIVAL_NAMES}
+    rec = {"artifact": f"{STEM}_a2", "prereg": data_paths.rel(PREREG), "amendment": "A2 (v3.8, sec. 21)",
+           "sigma_max": {str(e): v for e, v in sig_max.items()}, "betas": betas,
+           "choices": [dataclasses.asdict(c) for c in choices], "measured": measured,
+           "per_signature_rates": rates, "R": A1_R, "seed": A2_SEED, "pinned_zhou_rise": pinned_rise,
+           "engine_runs": 1, "seconds": round(time.time() - t0, 1), "machine": M1.machine_state(),
+           "provenance": _provenance("a2"), "complete": True}
+    write_record("a2", rec, render_a2(rec))
+    return rec
+
+
+def render_a2(rec: Mapping[str, Any]) -> str:
+    L = ["# M1b part (i): Amendment A2 on the stored draws (prereg v3.8 secs. 21.1, 21.4)", "",
+         "*`scripts/generators/fit_m1b_ph_balance.py --a2-noise`: the buffered-pot noise term, the verdict per choice, "
+         "per-signature false-kill rates. One engine run (beta_ref). A1's records stand beside it.*", "",
+         "## sigma_max from Meynier's 20-pot statement", "",
+         "| edge | sigma_max (MC) | P(all 20 within) there | closed form |", "|---|---|---|---|"]
+    for e, v in rec["sigma_max"].items():
+        L.append(f"| {e} | {v['sigma_max']:.3f} | {v['p_at_sigma_max']:.4f} | {v['closed_form_sigma']:.4f} |")
+    b = rec["betas"]
+    L += ["", "## Buffer capacities (cooled, mmol/L per pH)", "", "| pot | pH | I (M) | beta, I = 0 | beta, Davies |",
+          "|---|---|---|---|---|"]
+    for lab, v in b["meynier_cys_t0"].items():
+        L.append(f"| Meynier Cys label {lab}, t = 0 | {v['ph_cooled']:.2f} | {v['ionic_strength_m']:.3f} | "
+                 f"{v['beta_i0']:.1f} | {v['beta_davies']:.1f} |")
+    r = b["zhou_arp_pH8_b0_pinned_60min"]
+    L.append(f"| Zhou ARP label 8, B0-pinned 60 min (beta_ref) | {r['ph_cooled']:.2f} | {r['ionic_strength_m']:.3f} | "
+             f"{r['beta_i0']:.2f} | {r['beta_davies']:.2f} |")
+    L += ["", "## The choices", "", "| choice | sd per label (4.5 .. 6.5) | edge | in D | basis |", "|---|---|---|---|---|"]
+    for c in rec["choices"]:
+        L.append(f"| {c['name']} | {' / '.join(f'{x:.3f}' for x in c['sd'])} | {c['edge']} | {c['in_d']} | {c['basis']} |")
+    L += ["", "## On the measured data: draws passing all four (minimum over A1's seven forms)", ""]
+    names = [c["name"] for c in rec["choices"]]
+    L.append("| rival | " + " | ".join(names) + " | verdict |")
+    L.append("|---|" + "---|" * (len(names) + 1))
+    for k, v in rec["measured"].items():
+        cells = [str(min(v["per_choice"][n]["n_passing_per_form"].values())) for n in names]
+        L.append(f"| {k} | " + " | ".join(cells) + f" | {v['verdict']} |")
+    L += ["", "## Per-signature false-kill rate (sets from the rival's own best draw)", "",
+          "| generation \\| family | rival | Hou level | Hou shape | Mey | Zhou | all four | Mey all within |",
+          "|---|---|---|---|---|---|---|---|"]
+    for key, fam in rec["per_signature_rates"].items():
+        for k, v in fam.items():
+            fk = v["false_kill"]
+            L.append(f"| {key} | {k} | " + " | ".join(f"{fk[s]['rate']:.3f}" for s in SIGNATURES + ("all_four",))
+                     + f" | {fk['meynier_all_within_fraction']:.3f} |")
+    L += ["", "## Per-signature kill power (max over the other truths)", "",
+          "| generation \\| family | rival | Hou level | Hou shape | Mey | Zhou | all four |", "|---|---|---|---|---|---|---|"]
+    for key, fam in rec["per_signature_rates"].items():
+        for k, v in fam.items():
+            kp = v["kill_power"]
+            L.append(f"| {key} | {k} | " + " | ".join(f"{max(t[s]['rate'] for t in kp.values()):.3f}"
+                                                   for s in SIGNATURES + ("all_four",)) + " |")
+    return "\n".join(L) + "\n"
+
+
+# --- F-A, the attribution fit (sec. 21.2 item 4) -----------------------------------------------------------------
+_ORIGINAL_CYS_THERMOLYSIS_K = sulfur.cysteine_thermolysis_k
+_H2S_LOG10 = [0.0]
+
+
+def _scaled_cysteine_thermolysis_k(ph: float, temperature_k: float) -> float:
+    return float(_ORIGINAL_CYS_THERMOLYSIS_K(ph, temperature_k)) * 10.0 ** _H2S_LOG10[0]
+
+
+class h2s_multiplier:
+    """mu_h2s in force (sec. 21.2): Zheng & Ho's operative rate x 10^mu, every pH and temperature. Installed on the
+    sulfur module's name for the duration (forked workers inherit it); 0 is the shipped engine, bit for bit."""
+
+    def __init__(self, log10_mu: float):
+        self.mu = float(log10_mu)
+
+    def __enter__(self):
+        self.saved = _H2S_LOG10[0]
+        _H2S_LOG10[0] = self.mu
+        sulfur.cysteine_thermolysis_k = _scaled_cysteine_thermolysis_k
+        return self
+
+    def __exit__(self, *exc):
+        _H2S_LOG10[0] = self.saved
+        sulfur.cysteine_thermolysis_k = _ORIGINAL_CYS_THERMOLYSIS_K
+        return False
+
+
+R_KJ = 8.314462618e-3
+
+
+def kang_total_k(temperature_k: float) -> float:
+    return KANG_A_PER_MIN * math.exp(-KANG_EA / (R_KJ * temperature_k))
+
+
+def a2_bands() -> Dict[str, Any]:
+    """sec. 21.2 item 4: the bands of log10 k_cys_thermal (145 C, /min) and mu_h2s, from their stated formulas."""
+    from src.kinetic_core import parameters_sulfur as PS
+    from src.kinetic_core.ea_class_prior import SULFUR_CLASS
+
+    t_mey = float(meynier_conditions()["meynier1995_gly_ribose_pH4p5"]["t_c"]) + CELSIUS
+    t_ref = float(PS.T_REF_S_K)
+    k7 = PS.cysteine_thermolysis_k(7.0, t_mey)
+    rho = min(PS.cysteine_thermolysis_k(lab, t_mey) / k7 for lab in MEYNIER_LABELS)
+    upper_kt = math.log10(kang_total_k(t_ref))
+    ea7 = PS.cysteine_thermolysis_arrhenius(7.0)[1]
+    ea_min = float(min(class_values()[SULFUR_CLASS]))
+    t_edge = 110.0 + CELSIUS
+    mu_lo = -(ea7 - ea_min) / R_KJ * (1.0 / t_edge - 1.0 / t_mey) / math.log(10.0)
+    mu_hi = min(0.0, math.log10(kang_total_k(t_mey) / k7))
+    return {"k_cys_thermal": {"lower": upper_kt + math.log10(rho), "upper": upper_kt, "t_ref_k": t_ref,
+                              "kang_total_at_t_ref_per_min": kang_total_k(t_ref), "rho_zheng_ph_law": rho,
+                              "rho_at_t_k": t_mey},
+            "mu_h2s": {"lower": mu_lo, "upper": mu_hi, "ea_zheng_ph7": ea7, "ea_sulfur_class_min": ea_min,
+                       "kang_total_at_meynier_t": kang_total_k(t_mey), "zheng_ph7_at_meynier_t": k7}}
+
+
+def _mey_drift_job(item) -> Dict[str, Any]:
+    """One Meynier cysteine pot at a parameter vector (BDF, the screen's tolerances): its 60-min drift."""
+    lab, x, drift_values, mu, extra = item
+    pot = POTS_BY_NAME[f"mey_cys_pH{lab:g}"]
+    drift = PhDrift(**drift_values)
+    params = B23.build_parameters(np.asarray(x, dtype=float))
+    changes = {"ph.coupling": "inline", **(extra or {})}
+    try:
+        with h2s_multiplier(mu), config.applied(config.Config.shipped().replace(changes)):
+            run = M1.with_alarm(POT_SECONDS, lambda: sulfur.integrate_sulfur(
+                params, pot.t_c + CELSIUS, pot.initial_map(), np.array(pot.times, dtype=float), ph=pot.label_ph,
+                buffer_spec=pot.buffer, ph_drift=drift, rtol=SCORE_RTOL, atol=ATOL, method=FALLBACK_METHOD))
+    except Exception as exc:  # noqa: BLE001 - counted by the caller
+        return {"label": lab, "failed": f"{type(exc).__name__}: {exc}"[:200]}
+    sid = float(run.metadata["strong_ion_difference_mmol_L"])
+    st = state_at(run, len(pot.times) - 1)
+    return {"label": lab, "drift": float(observations.ph_cooled(st, sid, drift, pot.buffer)) - pot.label_ph,
+            "cys_left": float(st.get("Cys", 0.0)), "nh4": float(st.get("NH4", 0.0))}
+
+
+def meynier_drifts(x, drift: PhDrift, mu: float, extra: Optional[Mapping[str, Any]] = None,
+                   failures: Optional[List[Dict[str, Any]]] = None) -> List[Dict[str, Any]]:
+    _init_pots()
+    items = [(lab, tuple(map(float, x)), dataclasses.asdict(drift), float(mu), dict(extra or {}))
+             for lab in MEYNIER_LABELS]
+    out = parallel.map_ordered(_mey_drift_job, items, n_workers=A2_WORKERS)
+    if failures is not None:
+        failures.extend(r for r in out if "failed" in r)
+    return out
+
+
+def mey_deviance(drifts: Sequence[float], sd: float, edge: float = MEYNIER_BOUND) -> np.ndarray:
+    d = np.asarray(drifts, dtype=float)
+    lp = _log_inside((-edge - d) / sd, (edge - d) / sd)
+    return np.sqrt(np.clip(-2.0 * lp, 0.0, None))
+
+
+class AttributionObjective(ConfirmObjective):
+    """F-A (sec. 21.2 item 4): B0's confirmation objective, k_cys_thermal in its band, mu_h2s free in its band, and
+    Meynier's five cysteine pots as deviance residuals at sigma_max."""
+
+    def __init__(self, numerics, fit_side, breakpoints, bands, sigma_mey: float):
+        super().__init__("B0", numerics, fit_side, breakpoints)
+        i = self.keys.index("k_cys_thermal")      # B0 has no rival coordinates: keys = the base block
+        self.lower[i], self.upper[i] = bands["k_cys_thermal"]["lower"], bands["k_cys_thermal"]["upper"]
+        self.keys = self.keys + ("mu_h2s",)
+        self.kinds = self.kinds + ("log10k",)
+        self.lower = np.concatenate([self.lower, [bands["mu_h2s"]["lower"]]])
+        self.upper = np.concatenate([self.upper, [bands["mu_h2s"]["upper"]]])
+        self.sigma_mey = float(sigma_mey)
+        self.row_labels = tuple(self.row_labels) + tuple(f"meynier_cys:pH{lab:g}" for lab in MEYNIER_LABELS)
+        self.last: Dict[str, Any] = {}
+
+    def split(self, theta):
+        theta = np.asarray(theta, dtype=float)
+        return theta[:self.n_base], {}
+
+    def mu(self, theta) -> float:
+        return float(np.asarray(theta, dtype=float)[self.n_base])
+
+    def residuals(self, theta, rows=None):
+        with h2s_multiplier(self.mu(theta)):
+            head = ConfirmObjective.residuals(self, theta)
+            point = self.base_point(self.split(theta)[0])
+            vals = self.rival_values(theta)
+            failures: List[Dict[str, Any]] = []
+            out = meynier_drifts(point.x(), PhDrift(acid_yield=vals["acid_yield"], arp_amine_pka=vals["arp_amine_pka"]),
+                                 self.mu(theta), failures=failures)
+        M1.FAILURES.extend(failures)
+        if failures:
+            tail = np.full(len(MEYNIER_LABELS), 25.0)
+        else:
+            tail = mey_deviance([r["drift"] for r in out], self.sigma_mey)
+        self.last = {"drifts": [r.get("drift") for r in out]}
+        return np.concatenate([head, tail])
+
+
+def attribution_start(obj: AttributionObjective, bands) -> np.ndarray:
+    conf = json.loads(confirm_path("B0").read_text(encoding="utf-8"))
+    base = [conf["theta"][k] for k in obj.keys[:-1]]
+    mu0 = min(max(0.0, bands["mu_h2s"]["lower"]), bands["mu_h2s"]["upper"])
+    return np.clip(np.array(base + [mu0], dtype=float), obj.lower, obj.upper)
+
+
+def b60_cost_of(obj: ConfirmObjective, r: np.ndarray) -> float:
+    n = obj.n_b60 + (1 if obj.fit_side.prior.enabled else 0)
+    head = np.asarray(r, dtype=float)[:n]
+    return 0.5 * float(head @ head)
+
+
+def run_a2_attribution(budget: int = M1.BUDGET) -> Dict[str, Any]:
+    problems = a2_refusals("a2_attribution_fit")
+    if not read_record("a2").get("complete"):
+        problems.append("run --a2-noise first (F-A's Meynier sd is sigma_max)")
+    if problems:
+        raise SystemExit("--a2-attribution refuses:\n  " + "\n  ".join(problems))
+    gate = memory_gate(A2_MIN_FREE)
+    t0 = time.time()
+    os.environ["MAILLARD_WORKERS"] = str(A2_WORKERS)
+    PRIMARY_METHOD[0] = FALLBACK_METHOD
+    a2 = read_record("a2")
+    sigma_max = float(a2["sigma_max"][str(MEYNIER_BOUND)]["sigma_max"])
+    bands = a2_bands()
+    m1 = json.loads(M1_CHECKS.read_text(encoding="utf-8"))
+    numerics, fit_side = M1.numerics_for_fits(m1), M1.fit_side_from_checks(m1)
+    br = tuple(read_record("checks")["davidek_breakpoints_in_situ"])
+    obj = AttributionObjective(numerics, fit_side, br, bands, sigma_max)
+    theta0 = attribution_start(obj, bands)
+    segments = []
+    theta = theta0
+    for seg in range(M1.MAX_SEGMENTS):
+        del M1.FAILURES[:]
+        f = fitting.fit(obj.problem(), theta, budget=budget)
+        segments.append({"status": int(f.status), "cost": float(f.cost), "evaluations": int(f.evaluations),
+                         "failed_pot_runs": len(M1.FAILURES), "theta": dict(zip(obj.keys, map(float, f.theta))),
+                         "seconds": float(f.seconds)})
+        theta = np.asarray(f.theta, dtype=float)
+        if int(f.status) > 0:
+            break
+    r_fit = obj.residuals(theta)
+    r_start = obj.residuals(theta0)
+    vals = obj.rival_values(theta)
+    point = obj.base_point(obj.split(theta)[0])
+    mu = obj.mu(theta)
+    drift = PhDrift(acid_yield=vals["acid_yield"], arp_amine_pka=vals["arp_amine_pka"])
+    fails: List[Dict[str, Any]] = []
+    at_fit = meynier_drifts(point.x(), drift, mu, failures=fails)
+    kept = meynier_drifts(point.x(), drift, mu, {"ph.amine_survival": pbr.AmineSurvival(True, 0.0, 0.0, RETAINED)},
+                          failures=fails)
+    conf = json.loads(confirm_path("B0").read_text(encoding="utf-8"))
+    cobj = ConfirmObjective("B0", numerics, fit_side, br)
+    ctheta = np.array([conf["theta"][k] for k in cobj.keys])
+    cpt = cobj.base_point(cobj.split(ctheta)[0])
+    cvals = cobj.rival_values(ctheta)
+    cdrift = PhDrift(acid_yield=cvals["acid_yield"], arp_amine_pka=cvals["arp_amine_pka"])
+    kept_conf = meynier_drifts(cpt.x(), cdrift, 0.0,
+                               {"ph.amine_survival": pbr.AmineSurvival(True, 0.0, 0.0, RETAINED)}, failures=fails)
+    choices = [A2Choice(**{**c, "sd": tuple(c["sd"])}) for c in a2["choices"]]
+    d_fit = np.array([[r.get("drift", np.nan) for r in at_fit]])
+    mey_pass = {c.name: bool(a2_mey_pass(d_fit, (True,) * 5, c)[0]) for c in choices}
+    edges = {k: {"lower": bool(t - lo <= 1e-3 * (hi - lo)), "upper": bool(hi - t <= 1e-3 * (hi - lo))}
+             for k, t, lo, hi in zip(obj.keys, theta, obj.lower, obj.upper)}
+    converged = int(segments[-1]["status"]) > 0
+    failed_all = sum(s["failed_pot_runs"] for s in segments) + len(fails)
+    rec = {"artifact": f"{STEM}_a2_attribution_fit", "prereg": data_paths.rel(PREREG), "amendment": "A2 sec. 21.2",
+           "bands": bands, "sigma_mey": sigma_max, "start_theta": dict(zip(obj.keys, map(float, theta0))),
+           "segments": segments, "status": segments[-1]["status"], "converged": converged,
+           "theta": dict(zip(obj.keys, map(float, theta))), "rival_values_at_fit": vals, "mu_h2s": mu,
+           "cost_total": 0.5 * float(r_fit @ r_fit), "b60_cost_at_fit": b60_cost_of(obj, r_fit),
+           "b60_cost_at_start": b60_cost_of(obj, r_start), "b60_cost_confirmation_fit": float(conf["cost"]),
+           "b60_cost_change_from_confirmation": b60_cost_of(obj, r_fit) - float(conf["cost"]),
+           "meynier_at_fit": at_fit, "meynier_pass_by_choice": mey_pass,
+           "meets_meynier_at_sigma_max": mey_pass.get("sigma_max"),
+           "band_edges_active": {k: v for k, v in edges.items() if v["lower"] or v["upper"]},
+           "diagnostic_retained_steps": {"steps": list(RETAINED), "at_fit": kept, "at_confirmation_fit": kept_conf},
+           "failed_pot_runs_all": failed_all, "usable": bool(converged and failed_all == 0),
+           "numerics": dataclasses.asdict(numerics), "workers": A2_WORKERS, "memory_gate": gate,
+           "seconds": round(time.time() - t0, 1), "machine": M1.machine_state(),
+           "provenance": _provenance("a2_attribution_fit")}
+    write_record("a2_attribution_fit", rec, render_attribution(rec))
+    return rec
+
+
+def render_attribution(rec: Mapping[str, Any]) -> str:
+    b = rec["bands"]
+    L = ["# M1b part (i): A2's attribution fit F-A (prereg v3.8 sec. 21.2)", "",
+         f"Status {rec['status']} (converged {rec['converged']}), failed pot runs {rec['failed_pot_runs_all']}, "
+         f"{sum(s['evaluations'] for s in rec['segments'])} evaluations in {len(rec['segments'])} segment(s), "
+         f"{rec['seconds']:.0f} s.", "",
+         "## Bands", "",
+         f"- log10 k_cys_thermal (145 C, /min): [{b['k_cys_thermal']['lower']:.3f}, {b['k_cys_thermal']['upper']:.3f}] "
+         f"(Kang's total {b['k_cys_thermal']['kang_total_at_t_ref_per_min']:.3e} /min; rho {b['k_cys_thermal']['rho_zheng_ph_law']:.3f})",
+         f"- mu_h2s: [{b['mu_h2s']['lower']:.3f}, {b['mu_h2s']['upper']:.3f}] (Zheng pH 7 at 140 C "
+         f"{b['mu_h2s']['zheng_ph7_at_meynier_t']:.3e} vs Kang's total {b['mu_h2s']['kang_total_at_meynier_t']:.3e} /min; "
+         f"class Ea min {b['mu_h2s']['ea_sulfur_class_min']:.1f} kJ/mol)", "",
+         "## Result", "",
+         f"- k_cys_thermal at fit {rec['theta']['k_cys_thermal']:.3f}; mu_h2s {rec['mu_h2s']:.3f}; lumped yield "
+         f"{rec['rival_values_at_fit']['acid_yield']:.3g}; ARP pKa {rec['rival_values_at_fit']['arp_amine_pka']:.2f}",
+         f"- Meynier cysteine drifts at fit (4.5 .. 6.5): "
+         + " / ".join(f"{r.get('drift', float('nan')):+.3f}" for r in rec["meynier_at_fit"]),
+         f"- meets Meynier at sigma_max ({rec['sigma_mey']:.3f}): **{rec['meets_meynier_at_sigma_max']}**; by choice: "
+         + ", ".join(f"{k} {v}" for k, v in rec["meynier_pass_by_choice"].items()),
+         f"- B60 cost (52 rows + prior): {rec['b60_cost_at_fit']:.4f} at F-A vs {rec['b60_cost_confirmation_fit']:.4f} at the "
+         f"confirmation fit (change {rec['b60_cost_change_from_confirmation']:+.4f})",
+         f"- band edges active: {sorted(rec['band_edges_active'])}", "",
+         "## Diagnostic (no verdict): r_cys_thermal and ch_cys_ox with their amine kept", "",
+         "- at F-A: " + " / ".join(f"{r.get('drift', float('nan')):+.3f}" for r in rec["diagnostic_retained_steps"]["at_fit"]),
+         "- at the confirmation fit: " + " / ".join(f"{r.get('drift', float('nan')):+.3f}"
+                                                   for r in rec["diagnostic_retained_steps"]["at_confirmation_fit"])]
+    return "\n".join(L) + "\n"
+
+
+# --- S3's posterior-predictive test (sec. 21.3) -------------------------------------------------------------------
+S3_POTS = tuple(f"mey_cys_pH{x:g}" for x in MEYNIER_LABELS) + ("hou_forced", "hou_unforced") + tuple(
+    f"zhou_arp_pH{x:g}" for x in ZHOU_LABELS)
+#: the prediction vector: Meynier's 5 drifts, Hou forced 6, Hou unforced 6, Zhou ARP alone 3
+S3_INDEX = {"C-Mey-Cys": slice(0, 5), "C-Hou": slice(5, 11), "C-Hou-unforced": slice(11, 17), "C-Zhou-ARP": slice(17, 20)}
+
+
+def _prediction_job(item) -> Dict[str, Any]:
+    tag, pot_name, x, rival, values, mu, br = item
+    pot = POTS_BY_NAME[pot_name]
+    changes, drift = rival_changes(rival, "primary", values, pot.forced, br)
+    params = B23.build_parameters(np.asarray(x, dtype=float))
+    try:
+        with h2s_multiplier(mu), config.applied(config.Config.shipped().replace(changes)):
+            run = M1.with_alarm(POT_SECONDS, lambda: sulfur.integrate_sulfur(
+                params, pot.t_c + CELSIUS, pot.initial_map(), np.array(pot.times, dtype=float), ph=pot.label_ph,
+                buffer_spec=pot.buffer, ph_drift=drift, rtol=SCORE_RTOL, atol=ATOL, method=FALLBACK_METHOD))
+    except Exception as exc:  # noqa: BLE001 - counted by the caller
+        return {"tag": tag, "pot": pot_name, "failed": f"{type(exc).__name__}: {exc}"[:200]}
+    sid = float(run.metadata["strong_ion_difference_mmol_L"])
+    ph = [float(observations.ph_cooled(state_at(run, i), sid, drift, pot.buffer)) for i, t in enumerate(pot.times)
+          if t > 0.0]
+    if pot.unit.startswith("C-Mey"):
+        ph = [v - pot.label_ph for v in ph]
+    return {"tag": tag, "pot": pot_name, "values": ph}
+
+
+def s3_predictions(points: Sequence[Tuple[np.ndarray, Dict[str, float], float]], rival: str, br,
+                   failures: List[Dict[str, Any]]) -> List[np.ndarray]:
+    """The 20-vector of S3_INDEX at each (x, rival values, mu), all pots of all points in one parallel batch."""
+    _init_pots()
+    items = [(i, p, tuple(map(float, x)), rival, dict(v), float(mu), tuple(br)) for i, (x, v, mu) in enumerate(points)
+             for p in S3_POTS]
+    res = parallel.map_ordered(_prediction_job, items, n_workers=A2_WORKERS)
+    out = [dict() for _ in points]
+    for r in res:
+        if "failed" in r:
+            failures.append(r)
+        else:
+            out[r["tag"]][r["pot"]] = r["values"]
+    vecs = []
+    for o in out:
+        vecs.append(np.array([v for p in S3_POTS for v in o.get(p, [np.nan] * (len(POTS_BY_NAME[p].times) - 1))],
+                             dtype=float))
+    return vecs
+
+
+def s3_point(obj: ConfirmObjective, theta: np.ndarray) -> Tuple[np.ndarray, Dict[str, float], float]:
+    x = obj.base_point(obj.split(theta)[0]).x()
+    mu = obj.mu(theta) if isinstance(obj, AttributionObjective) else 0.0
+    return np.asarray(x, dtype=float), obj.rival_values(theta), mu
+
+
+def s3_pvalues(pred: np.ndarray, cov: np.ndarray, form: A1Form, choice: A2Choice, rng: np.random.Generator
+               ) -> Dict[str, float]:
+    """sec. 21.3: one posterior-predictive p per signature under one (A1 form, A2 choice) cell."""
+    from scipy.stats import norm
+
+    meas = HOU["read_ph"]
+    m = 0.0 if form.s_mult is None else form.s_mult
+    s_off2, s_shp2 = (m * A1_S_OFF) ** 2, (m * A1_S_SHAPE) ** 2
+    hou = S3_INDEX[form.hou_unit]
+    i60, i120 = HOU["times_min"].index(60.0), HOU["times_min"].index(120.0)
+
+    def lin(c):
+        return float(c @ pred), float(c @ cov @ c)
+
+    n = len(pred)
+    e = np.eye(n)
+    lev_mu, lev_v = lin(e[hou.start])
+    p_level = 2.0 * norm.sf(abs(HOU["ph_cooled"][0] - lev_mu) / math.sqrt(meas ** 2 + lev_v + s_shp2 + s_off2))
+    c = e[hou.start + i60] - e[hou.start + i120]
+    sh_mu, sh_v = lin(c)
+    obs = HOU["ph_cooled"][i60] - HOU["ph_cooled"][i120]
+    p_shape = 2.0 * norm.sf(abs(obs - sh_mu) / math.sqrt(2.0 * meas ** 2 + sh_v + 2.0 * s_shp2))
+    z = S3_INDEX["C-Zhou-ARP"]
+    c = e[z.stop - 1] - e[z.start]
+    zr_mu, zr_v = lin(c)
+    zm = zhou_measured()
+    obs = zm[f"zhou_arp_pH{ZHOU_LABELS[-1]:g}"]["value"] - zm[f"zhou_arp_pH{ZHOU_LABELS[0]:g}"]["value"]
+    sd2 = zm[f"zhou_arp_pH{ZHOU_LABELS[-1]:g}"]["sd"] ** 2 + zm[f"zhou_arp_pH{ZHOU_LABELS[0]:g}"]["sd"] ** 2
+    p_zhou = 2.0 * norm.sf(abs(obs - zr_mu) / math.sqrt(sd2 + zr_v + 2.0 * (s_off2 + s_shp2)))
+    mey = S3_INDEX["C-Mey-Cys"]
+    pm = cov[mey, mey]
+    w, v = np.linalg.eigh(0.5 * (pm + pm.T))
+    root = v * np.sqrt(np.clip(w, 0.0, None))
+    d = pred[mey][None, :] + rng.standard_normal((A2_MC_PREDICTIVE, 5)) @ root.T
+    d = d + rng.standard_normal((A2_MC_PREDICTIVE, 5)) * np.asarray(choice.sd)[None, :]
+    p_mey = float(np.mean(np.all(np.abs(d) <= choice.edge, axis=1)))
+    return {"sigma_hou_level": float(p_level), "sigma_hou_shape": float(p_shape), "sigma_mey": p_mey,
+            "sigma_zhou": float(p_zhou)}
+
+
+def s3_for_fit(name: str, obj: ConfirmObjective, theta: np.ndarray, rival: str, br, choices: Sequence[A2Choice],
+               seed: int) -> Dict[str, Any]:
+    t0 = time.time()
+    del M1.FAILURES[:]
+    mu = obj.mu(theta) if isinstance(obj, AttributionObjective) else 0.0
+    with h2s_multiplier(mu):
+        lap = fitting.laplace(obj.problem(), theta, covariance=True)
+    cov_theta = np.asarray(lap["covariance"], dtype=float)
+    lap_failures = len(M1.FAILURES)
+    lower, upper = obj.lower, obj.upper
+    pts, plan = [s3_point(obj, theta)], []
+    for j, kind in enumerate(obj.kinds):
+        h = fitting._step(kind)
+        up, down = theta[j] + h <= upper[j], theta[j] - h >= lower[j]
+        tp, tm = theta.copy(), theta.copy()
+        tp[j] += h
+        tm[j] -= h
+        plan.append((h, len(pts) if up else None, len(pts) + up if (down or not up) else None))
+        pts += ([s3_point(obj, tp)] if up else []) + ([s3_point(obj, tm)] if (down or not up) else [])
+    failures: List[Dict[str, Any]] = []
+    vecs = s3_predictions(pts, rival, br, failures)
+    pred = vecs[0]
+    jac = np.zeros((len(pred), len(theta)))
+    for j, (h, iu, idn) in enumerate(plan):
+        if iu is not None and idn is not None:
+            jac[:, j] = (vecs[iu] - vecs[idn]) / (2 * h)
+        elif iu is not None:
+            jac[:, j] = (vecs[iu] - pred) / h
+        else:
+            jac[:, j] = (pred - vecs[idn]) / h
+    cov = jac @ cov_theta @ jac.T
+    rng = np.random.default_rng(seed)
+    cells = {}
+    for form in A1_FORMS:
+        for c in choices:
+            p = s3_pvalues(pred, cov, form, c, rng)
+            h = pdens.holm(p)
+            cells[f"{form.name}|{c.name}"] = {"p": p, "holm": h, "in_d": c.in_d,
+                                              "inadequate": any(v["rejected"] for v in h.values())}
+    in_d = [v["inadequate"] for v in cells.values() if v["in_d"]]
+    reading = ("falsified under S3 (inadequate after Holm in every cell in D)" if all(in_d) else
+               "adequate under S3 in every cell in D" if not any(in_d) else
+               "conflicting / undecided under S3 (inadequate in some cells in D, not in others)")
+    usable = bool(not failures and lap_failures == 0 and np.all(np.isfinite(pred)))
+    return {"fit": name, "rival": rival, "theta": dict(zip(obj.keys, map(float, theta))), "mu_h2s": mu,
+            "prediction": pred.tolist(), "predictive_sd": np.sqrt(np.clip(np.diag(cov), 0, None)).tolist(),
+            "laplace_chi2_red": lap["chi2_red"], "laplace_unidentified": sorted(k for k, v in lap["sigma"].items()
+                                                                                 if not math.isfinite(v)),
+            "cells": cells, "reading": reading if usable else "REFUSED: failed pot runs or non-finite predictions",
+            "failed_pot_runs": len(failures) + lap_failures, "seconds": round(time.time() - t0, 1)}
+
+
+def run_a2_s3() -> Dict[str, Any]:
+    problems = a2_refusals("a2_s3")
+    if not read_record("a2_attribution_fit"):
+        problems.append("run --a2-attribution first (S3's decisive fit is F-A)")
+    if problems:
+        raise SystemExit("--a2-s3 refuses:\n  " + "\n  ".join(problems))
+    gate = memory_gate(A2_MIN_FREE)
+    t0 = time.time()
+    os.environ["MAILLARD_WORKERS"] = str(A2_WORKERS)
+    PRIMARY_METHOD[0] = FALLBACK_METHOD
+    a2, fa = read_record("a2"), read_record("a2_attribution_fit")
+    choices = [A2Choice(**{**c, "sd": tuple(c["sd"])}) for c in a2["choices"]]
+    m1 = json.loads(M1_CHECKS.read_text(encoding="utf-8"))
+    numerics, fit_side = M1.numerics_for_fits(m1), M1.fit_side_from_checks(m1)
+    br = tuple(read_record("checks")["davidek_breakpoints_in_situ"])
+    fits = {}
+    obj = AttributionObjective(numerics, fit_side, br, fa["bands"], fa["sigma_mey"])
+    fits["B0_attribution_fit"] = s3_for_fit("B0_attribution_fit", obj, np.array([fa["theta"][k] for k in obj.keys]),
+                                            "B0", br, choices, A2_SEED)
+    for i, rival in enumerate(("B0", "B2", "B3")):
+        conf = json.loads(confirm_path(rival).read_text(encoding="utf-8"))
+        cobj = ConfirmObjective(rival, numerics, fit_side, br)
+        theta = np.clip(np.array([conf["theta"][k] for k in cobj.keys]), cobj.lower, cobj.upper)
+        fits[f"{rival}_confirmation_fit"] = s3_for_fit(f"{rival}_confirmation_fit", cobj, theta, rival, br, choices,
+                                                       A2_SEED + 1 + i)
+    rec = {"artifact": f"{STEM}_a2_s3", "prereg": data_paths.rel(PREREG), "amendment": "A2 sec. 21.3",
+           "decisive": "B0_attribution_fit", "fits": fits, "mc_draws": A2_MC_PREDICTIVE, "workers": A2_WORKERS,
+           "memory_gate": gate, "seconds": round(time.time() - t0, 1), "machine": M1.machine_state(),
+           "provenance": _provenance("a2_s3")}
+    write_record("a2_s3", rec, render_s3(rec))
+    return rec
+
+
+def render_s3(rec: Mapping[str, Any]) -> str:
+    L = ["# M1b part (i): S3's posterior-predictive test (prereg v3.8 sec. 21.3)", "",
+         "*p per signature at the converged fit (Laplace predictive), Holm across the four (alpha 0.05). Decisive: "
+         "B0 at F-A. Shown: the primary A1 form and the offset / shape form at s, per A2 choice.*", ""]
+    for name, f in rec["fits"].items():
+        L += [f"## {name}: {f['reading']}", "",
+              f"Laplace chi2_red {f['laplace_chi2_red']:.3f}; unidentified (infinite sigma, not propagated): "
+              f"{', '.join(f['laplace_unidentified']) or 'none'}; failed pot runs {f['failed_pot_runs']}.", "",
+              "| cell | in D | Hou level | Hou shape | Mey | Zhou | rejected after Holm |", "|---|---|---|---|---|---|---|"]
+        for cell, v in f["cells"].items():
+            if not (cell.startswith("primary|") or cell.startswith("offset_shape_s|")):
+                continue
+            rej = [k for k, h in v["holm"].items() if h["rejected"]]
+            L.append(f"| {cell} | {v['in_d']} | " + " | ".join(f"{v['p'][s]:.3g}" for s in SIGNATURES)
+                     + f" | {', '.join(rej) or '-'} |")
+        L.append("")
+    return "\n".join(L) + "\n"
+
+
 def main(argv: Optional[Sequence[str]] = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     mode = ap.add_mutually_exclusive_group(required=True)
@@ -2379,6 +3088,9 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     mode.add_argument("--confirm", metavar="RIVAL")
     mode.add_argument("--score", action="store_true")
     mode.add_argument("--fit", metavar="RIVAL")
+    mode.add_argument("--a2-noise", action="store_true")
+    mode.add_argument("--a2-attribution", action="store_true")
+    mode.add_argument("--a2-s3", action="store_true")
     ap.add_argument("--start", type=int, default=0)
     ap.add_argument("--freeze-commit", default="")
     ap.add_argument("--base", default=None, help="--checks: the base commit of the bit-identity check")
@@ -2396,6 +3108,12 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         run_power()
     elif args.score:
         run_score(args.freeze_commit, args.min_free_percent)
+    elif args.a2_noise:
+        run_a2_noise()
+    elif args.a2_attribution:
+        run_a2_attribution()
+    elif args.a2_s3:
+        run_a2_s3()
     else:
         run_fit(args.fit, args.start, args.freeze_commit)
     return 0

@@ -406,3 +406,28 @@ def test_retaining_r_cys_thermal_amine_removes_its_acid(shipped):
                    shipped, initial=init)
     assert kept[0] == pytest.approx(b0[0], abs=1e-9)
     assert kept[-1] > b0[-1] + 0.05
+
+
+# --- A2's generator pieces (prereg sec. 21) -----------------------------------------------------------------------
+
+def test_a2_sigma_max_matches_its_closed_form():
+    import fit_m1b_ph_balance as G
+
+    r = G.a2_sigma_max(0.2, sets=50_000)
+    assert r["agrees_with_closed_form"] and abs(r["sigma_max"] - 0.135) <= 0.002
+
+
+def test_a2_h2s_multiplier_scales_and_restores():
+    import fit_m1b_ph_balance as G
+
+    k = sulfur.cysteine_thermolysis_k(6.0, 413.15)
+    with G.h2s_multiplier(-1.0):
+        assert sulfur.cysteine_thermolysis_k(6.0, 413.15) == pytest.approx(0.1 * k, rel=1e-12)
+    assert sulfur.cysteine_thermolysis_k is G._ORIGINAL_CYS_THERMOLYSIS_K
+
+
+def test_a2_meynier_deviance_is_smallest_inside_the_edge():
+    import fit_m1b_ph_balance as G
+
+    r = G.mey_deviance([0.0, -0.2, -0.5, -1.0], 0.135)
+    assert np.all(np.diff(r) > 0)

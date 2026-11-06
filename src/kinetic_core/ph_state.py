@@ -1032,14 +1032,23 @@ def buffer_capacity_mmol_per_ph(
     buffer_spec: BufferSpec,
     *,
     delta: float = 0.01,
+    ionic_strength_m: float = 0.0,
 ) -> float:
     """
     The van Slyke buffer capacity, mmol/L of strong base per pH unit, computed
     by finite difference on the charge balance. Reported, never fitted.
+
+    ``ionic_strength_m`` (M1b prereg sec. 21.6, 2026-11-06): the pKa and
+    activity corrections at that ionic strength (Davies, as the balance's own
+    solve). The default 0 is the historical I = 0 reading every existing
+    caller keeps. At 0.2 M pyrophosphate the I = 0 value understates the
+    buffer capacity at pH 4.5 (the M1b review: CF-084's 5.4 against about 12
+    mmol/L per pH with Davies; A2's record prints the value).
     """
     inventory = titratable_inventory(concentrations, drift, buffer_spec)
-    up = _charge_residual(ph + delta, temperature_k, 0.0, inventory)
-    down = _charge_residual(ph - delta, temperature_k, 0.0, inventory)
+    i_m = float(ionic_strength_m)
+    up = _charge_residual(ph + delta, temperature_k, 0.0, inventory, i_m)
+    down = _charge_residual(ph - delta, temperature_k, 0.0, inventory, i_m)
     return float((down - up) / (2.0 * delta))
 
 
