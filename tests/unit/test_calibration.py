@@ -211,5 +211,10 @@ def test_a_factors_sigma_widens_the_calibrated_interval():
     plain_w = math.log10(plain.hi_ug_per_l / plain.lo_ug_per_l)
     wide_w = math.log10(wide.hi_ug_per_l / wide.lo_ug_per_l)
     assert wide_w > plain_w
-    # 1.645 * 0.3 decades half-width added in quadrature to the band's own half-width
-    assert abs(wide_w / 2 - math.hypot(plain_w / 2, 1.645 * 0.3)) < 1e-6
+    # 1.645 * 0.3 decades half-width added in quadrature to the band's own half-width; 2026-11-05 (H0 / EX-059):
+    # MFT is a thiol-lane observable, so its calibrated level also carries one row's omega, in the same quadrature
+    from src.kinetic_core import thiol_relative_only as h0
+
+    extra = h0.calibrated_extra_decades(0.3, 4)   # sigma, omega and omega / sqrt(4) (review M2)
+    assert extra == pytest.approx(h0.Z90 * math.sqrt(0.3 ** 2 + h0.ruling().omega_dex ** 2 * (1 + 1 / 4)), rel=1e-12)
+    assert abs(wide_w / 2 - math.hypot(plain_w / 2, extra)) < 1e-6

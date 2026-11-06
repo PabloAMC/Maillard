@@ -107,6 +107,7 @@ CONSTANTS = {
         'predictive_densities': 'ESS_MIN FLOOR_DATA_RTOL K_HAT_MAX OMEGA_DEX Z_90',
         'scoring': 'PASS_BAND_LEVEL',
         'thermal_history': 'DEFAULT_START_C',
+        'thiol_relative_only': 'Z90',
         'trunk_conditions': 'AW_TABLE_FLOOR PH_EXPONENT_DECADES_PER_UNIT REFERENCE_AW REFERENCE_PH',
         'uncertainty': (
             'B1_T_REF_C B3_T_REF_C B8_T_REF_C CI_LEVEL_PCT MIN_EVALUABLE_CI_WIDTH_LOG10 '
@@ -232,6 +233,7 @@ CONSTANTS = {
             'SULFUR_STOICHIOMETRY TERMINAL_POOLS TRUNK_REACTIONS'
         ),
         'thermal_history': 'TIME_CONVENTIONS',
+        'thiol_relative_only': 'RELATIVE_ONLY_SPECIES',
         'trunk_conditions': (
             'ATMOSPHERE_FACTORS ATMOSPHERE_VALUES AW_MULTIPLIER_TABLE AW_SCALE_BAND AW_STEPS '
             'OXIDATIVE_ENTRY_STEPS PH_EXPONENT_BAND PH_MEASURED_WINDOW PH_STEPS'
@@ -268,6 +270,7 @@ CONSTANTS = {
         'parallel': 'POOL_MODES',
         'ph_balance_rivals': 'BRANCH_FORMS',
         'predictive_densities': 'BASES PH_SCALES VALUE_BASES',
+        'thiol_relative_only': 'ABSOLUTE_REFUSED_TAG CALIBRATE_GENERATOR',
         'trunk_conditions': 'ATMOSPHERE_REFERENCE',
         'uncertainty': (
             'ACRYLAMIDE DEFINITIONAL_BAND EMPIRICAL_CLASS FROZEN_NOT_FREE LAPLACE_SAMPLED LIPID '
@@ -280,6 +283,7 @@ CONSTANTS = {
         'directional': 'PANEL_PATH',
         'fit_rows': 'FIT_ROWS_DIR LABORATORIES',
         'fit_targets': 'RECORD_GLOB',
+        'thiol_relative_only': 'H0_RECORD NOISE_RECORD',
         'uncertainty': 'DISCREPANCY_PATH LAPLACE_PATH PROFILE_PATH',
         'user_scoring': 'USER_RESULTS_DIR',
     },

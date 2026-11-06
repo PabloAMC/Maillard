@@ -309,6 +309,15 @@ mechanism (no species in the model and no labelled-cysteine test); the LC-TOF as
 disulfides (not reported; the method is blind to them); DMDS/DMTS (sources unassigned, and in a
 pot with thiamine the model's MeSH is thiamine-only anyway).
 
+**Backlog item withdrawn in part (2026-11-05, owner rule of 2026-11-02).** The research-backlog item
+"Wang, Z. et al. (2012)" claimed "MFT 2.25×, bis(furyl)disulfide 4.4×; SIDA". None is in the paper:
+no pot pair in Table 2 gives 2.25 for MFT, and GSH against free Cys (A/B) is 0.26 (§6), the
+opposite of an uplift; no bis(furyl) disulfide is reported; one internal standard, no stable-isotope
+dilution. The three were deleted from the item (its `value_withdrawal`), the scraped citation went
+to `closed_citations`, and the item was kept because the paper is real. Its values are the ledger
+rows `wang2012_table2_*`, `wang2012_table3_*` and `wang2012_table4_*` (`sulfur.yml`, `lipid.yml`),
+read from the PDF.
+
 ---
 
 ## 8. CAVEATS

@@ -277,34 +277,6 @@
       "comment": "Use as a process-state calibration for fermentation-mediated donor release rather than as a direct flavor benchmark."
     },
     {
-      "id": "hrncirik_2014_coconut_oil_thermal_profile",
-      "kind": "lipid_co_matrix_thermal_profile",
-      "protein_type": "plant_protein_generic",
-      "source_citation": "Hrncirik & Zeelenberg (2014)",
-      "doi": "10.1016/j.foodchem.2013.11.082",
-      "provenance_tier": "direct_measurement",
-      "conditions": {
-        "matrix_label": "coconut oil thermal model",
-        "process_state": "heated_matrix",
-        "temperature_variable": true,
-        "comparative_reference": "pufa_rich_oils"
-      },
-      "numeric_anchors": {
-        "delta_decalactone_oav_reported": true,
-        "coconut_oil_relative_thermal_stability_reported": true,
-        "comparative_to_pufa_oils": true
-      },
-      "what_it_supports": [
-        "Coconut-oil thermal stability context for lipid-rich co-matrix calibration",
-        "Bounded lactone support via delta-decalactone odor-activity reporting"
-      ],
-      "what_it_does_not_support": [
-        "Exact volatile concentration closure in a plant-protein matrix",
-        "A full lipid degradation mechanism outside coconut-oil-like systems"
-      ],
-      "comment": "Use as a co-matrix thermal-profile anchor for coconut-oil-rich systems so lipid-rich plant formulations are not forced onto PUFA-heavy oxidation assumptions."
-    },
-    {
       "id": "wageningen_ref9_hme_rework_hydration_collapse",
       "kind": "hme_rework_hydration_state",
       "protein_type": "plant_protein_generic",

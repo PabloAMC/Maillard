@@ -40,7 +40,7 @@ NOISE_DEX = math.log10(1.4)
 def _pairs(rows: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     groups: Dict[tuple, List[Dict[str, Any]]] = defaultdict(list)
     for r in rows:
-        if r["engine"] and r["engine"] > 0:
+        if (r["engine"] and r["engine"] > 0) or r.get("engine_centred_log10") is not None:
             groups[(r["study"], r["compound"])].append(r)
     out = []
     for (study, compound), members in sorted(groups.items()):
@@ -50,7 +50,10 @@ def _pairs(rows: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
             out.append({
                 "study": study, "compound": compound, "lane": a["lane"], "a": a["benchmark"], "b": b["benchmark"],
                 "measured_dex": math.log10(a["measured"] / b["measured"]),
-                "engine_dex": math.log10(a["engine"] / b["engine"]),
+                # 2026-11-05 (H0 / EX-059): a thiol-lane row carries its centred log level, not a ppb level;
+                # the difference of two centred values IS the log ratio (one group, one mean)
+                "engine_dex": (math.log10(a["engine"] / b["engine"]) if a.get("engine") and b.get("engine")
+                               else a["engine_centred_log10"] - b["engine_centred_log10"]),
                 "out_of_sample": a["out_of_sample"] and b["out_of_sample"],
             })
     return out
@@ -74,7 +77,7 @@ def _score(pairs: List[Dict[str, Any]]) -> Dict[str, Any]:
 
 
 def main() -> int:
-    rows, _excluded = NULL._rows()
+    rows, _excluded = NULL._rows(include_relative_only=True)   # 2026-11-05: ratios of the thiol lane ship (H0 / EX-059)
     pairs = _pairs(rows)
     scores = {"all_pairs": _score(pairs), "out_of_sample": _score([p for p in pairs if p["out_of_sample"]])}
     by_lane = {lane: _score([p for p in pairs if p["lane"] == lane]) for lane in sorted({p["lane"] for p in pairs})}

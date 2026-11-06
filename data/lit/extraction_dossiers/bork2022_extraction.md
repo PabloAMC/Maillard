@@ -180,7 +180,7 @@ conversion of both as an equimolar reaction [Q].
     status: digitised_in_dossier
     quant_class: calibrated
     simulable: true
-    read_by: "first reader 2026-11-05; second reader pending"
+    read_by: "first reader 2026-11-05; second reader 2026-11-05 AGREES (NF series, SDs, k; see Second reader section)"
     condition_quote: "heated separately or as mixtures in sealed ampoules at 130 C after adjusting the pH to 5.0"
     flags: [ph_start_only, unbuffered, o2_not_stated, no_lod, same_lab_repeat_differs_bork2023]
     note: "First-order k 4.8-5.1e-3 1/min over 0-300 min (dossier 4.3). x3.4 engine pH-free r_nf_decay at 130 C; x16 B61 hydroxide term at pH 5."
@@ -303,3 +303,52 @@ independent series. [!] The three plots of the same means carry different error 
 **Nothing in this SI bears on the O2 status, the pH drift or the temperature dependence of NF loss.** Model-relevant
 additions: the replicate SDs of the NF-alone series (via the vol. 395 SI), a DA-alone k at pH 5 / 130 °C, and the
 induction-then-acceleration shape of NF loss with DA.
+
+## Second reader (2026-11-05)
+
+**Independent second reading** of the values a preregistered design may use as bands, by a second agent
+(`agent-second-reader-2026-11-05`) that read the PDF and the SI before opening this dossier. Source: `data/articles/bork2022b.pdf`
+(Food Chem. 380:131852; the crossed file name of sec. 0 confirmed on p. 1), its SI `bork2022b_supplementary.docx` (Fig. S-2,
+`word/media/image2.png`, 1384 × 688 px) and, for the larger replicate SDs, the vol. 395 SI `bork2022_supplementary.docx`
+(Fig. S-2A-E, `word/media/image2.tiff`, 1323 × 1940 px). Fig. 1D digitised from a 600 dpi crop of p. 4; axes calibrated on
+the tick marks (6.37 px per mol %; 2.84 / 2.86 px per mol % in the two SI images); open-square centres from the box
+edges (orange mask), error bars from their caps. **Read error ±0.7 mol %** (marker centring; tick calibration < 0.2 %).
+Verdict rule: AGREE when the two readings differ by less than the larger read error; otherwise `[!] DISAGREE`.
+
+**Conditions re-read (sec. 2.2, p. 2):** NF 57 mg in 25 mL water (0.50 mmol, **20.0 mM**), heated alone in **sealed ampoules
+at 130 °C** "after adjusting the pH to 5.0 ± 0.1" (no buffer named; initial pH only), samples at 0 / 30 / 60 / 120 / 180 /
+300 min, freezer quench, triplicate, mean ± SD. **AGREE** with sec. 2.
+
+| item | location | first reader | second reader | verdict |
+|---|---|---|---|---|
+| NF alone, 0 min | Fig. 1D p. 4 | 100 | 100 | AGREE |
+| NF alone, 30 min | Fig. 1D | 85.9 | **85.4** | AGREE (Δ 0.5) |
+| NF alone, 60 min | Fig. 1D | 75.1 | **74.9** | AGREE |
+| NF alone, 120 min | Fig. 1D | 59.2 | **59.0** | AGREE |
+| NF alone, 180 min | Fig. 1D | 42.2 | **42.1** | AGREE |
+| NF alone, 300 min | Fig. 1D | 20.0 | **19.9** | AGREE |
+| SD at 120 min, Fig. 1D | Fig. 1D, caps 55.6 / 62.2 | ±3 | **±3.3** | AGREE (within ±0.7) |
+| SD at 30 min, Fig. 1D and vol. 380 SI Fig. S-2B | | hidden by marker | **hidden: < 2.4 (Fig. 1D box half-height) / < 2.1 (S-2B)**; the bar visible above the NF box in S-2B at 30 min is diacetyl's | AGREE |
+| SD at 120 min, vol. 380 SI Fig. S-2B | caps 55.5 / 62.5 | ±3.5 | **±3.5** (mean 59.0) | AGREE |
+| **SD at 30 min, vol. 395 SI Fig. S-2 (A-E)** | caps 79.4 / 91.3, panel A | ±6 | **±5.9** (mean 85.3) | AGREE |
+| **SD at 120 min, vol. 395 SI Fig. S-2 (A-E)** | caps 54.2 / 63.6, panel A | ±4.7 | **±4.7** (mean 59.0) | AGREE |
+
+The vol. 380 SI Fig. S-2B NF-alone means (85.4 / 74.9 / 59.0 / ... ) equal Fig. 1D to < 0.5 mol %: the same series, as sec. 8.2
+says. **The three plots of the same means carry different bars at 120 min (3.3 / 3.5 / 4.7)** — confirmed; using the largest
+(vol. 395) as the replicate SD, as sec. 8.2 does, is the conservative choice.
+
+**First-order k, recomputed from my own reading** (ln(C/C0) vs t, unweighted):
+
+| window | through 100 % at t = 0 | free intercept |
+|---|---|---|
+| 0-60 min | 4.91 × 10⁻³ min⁻¹ | 4.82 × 10⁻³ (C0 99.6 %) |
+| 0-120 min | 4.52 × 10⁻³ | 4.35 × 10⁻³ (C0 98.5 %) |
+| 0-180 min | 4.70 × 10⁻³ | 4.68 × 10⁻³ (C0 99.7 %) |
+| **0-300 min** | **5.13 × 10⁻³ min⁻¹ (8.6 × 10⁻⁵ s⁻¹; t½ 135 min)** | 5.30 × 10⁻³ (C0 103.4 %) |
+
+Pointwise −ln(C/C0)/t: 5.26 / 4.82 / 4.40 / 4.81 / 5.38 × 10⁻³ min⁻¹ at 30 / 60 / 120 / 180 / 300 min (first reader 5.07 /
+4.77 / 4.37 / 4.79 / 5.36: the only visible difference is at 30 min, where a 0.5 % read moves the one-point k by 4 %). A
+±0.7 % shift of every point moves the 0-300 min k by ±2 %. **Verdict: AGREE** with the quoted **4.9 (± 0.4) × 10⁻³ min⁻¹,
+window 0-300 min** — my unweighted 5.13 sits inside it next to the first reader's unweighted 5.1; my 0-180 min value (4.70)
+matches the first reader's 4.75. Not separately re-derived: the SD-weighted 4.91 (it uses the same SDs I confirm above). Both
+readers see the same shape (pointwise k dips at 120 min and rises again at 300 min); within the vol. 395 SDs it is first order.

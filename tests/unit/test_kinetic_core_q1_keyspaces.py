@@ -204,7 +204,11 @@ def test_a_compare_arm_draws_the_same_interval_as_a_predict_of_that_arm():
     payload = core_compare(spec, _lipid_spec("other", cysteine=1.0), targets)
     assert payload["comparable"] is True
 
-    solo = {r["compound"]: r["interval_ug_per_l"] for r in run.interval_rows()}
+    # 2026-11-05 (H0 / EX-059): a compare arm withholds the thiol lane's absolute levels (MFT here), which the
+    # engine-level predict still computes; the rest must agree exactly.
+    withheld = set(run.declaration.absolute_refused_targets)
+    assert withheld == {"2-methyl-3-furanthiol (MFT)"}
+    solo = {r["compound"]: r["interval_ug_per_l"] for r in run.interval_rows() if r["compound"] not in withheld}
     in_compare = {r["compound"]: r["interval_ug_per_l"] for r in payload["rows_a"]}
     assert solo and solo.keys() == in_compare.keys()
     for compound, interval in solo.items():

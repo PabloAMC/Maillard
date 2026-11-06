@@ -186,8 +186,12 @@ def test_a_spec_from_the_box_validates_and_the_sulfur_arm_answers():
     mid = {p: (r.lo_mM * r.hi_mM) ** 0.5 for p, r in BOX["cultivated_muscle"].items()}
     arm = run_arm(mid, 100.0, 20.0, "midpoint")
     assert arm.answered, arm.refusals
-    assert arm.metric is not None and arm.metric > 0
-    assert set(arm.oav) == {"2-methyl-3-furanthiol", "2-furfurylthiol", "furfural"}
+    # 2026-11-05 (H0 / EX-059, D2 branch (i)): the metric is a summed OAV of three thiol-lane observables, whose
+    # absolute levels are now refused by name, so the arm answers with no metric and says why
+    assert arm.metric is None and arm.oav == {}
+    for compound in ("2-methyl-3-furanthiol", "2-furfurylthiol", "furfural"):
+        assert f"absolute level refused (H0 / EX-059): {compound}" in arm.refusals
+        assert compound not in arm.ug_per_l
 
 
 def test_write_targets_only_the_results_directory(tmp_path, monkeypatch):

@@ -15,10 +15,10 @@ give the aroma you want — and see exactly why the model refuses to answer when
 
 | you ask | command | it answers with | it refuses when |
 |---|---|---|---|
-| which of two recipes gives more of a compound | `compare` | the ratio between the two, per compound, with what was assumed | the two differ in water activity on the thiol or fat path (no water term), or outside 0.34 to 0.99 on the acrylamide path; they differ in pH on the fat path, or outside pH 4 to 8 on the acrylamide path |
-| how much of a compound one recipe gives | `predict` | a level with an interval and the caveats | the compound is not in the model (2-pentylfuran, nonanal, CML), the thiols are asked from glucose or fructose with cysteine (no route), or a dicarbonyl is asked off the sugar path |
+| which of two recipes gives more of a compound | `compare` | the ratio between the two, per compound, with what was assumed; on the thiol path (MFT, FFT, the MFT disulfide, furfural, norfuraneol, and methylglyoxal from a sulfur pot) a 90 % interval carrying the within-laboratory shape error and the measurement noise (resolved only when it excludes 1), and the caveat that this relative prediction has not been shown better than a null, and in one of H0's two sets the null is better (H0 / EX-059) | the two differ in water activity on the thiol or fat path (no water term), or outside 0.34 to 0.99 on the acrylamide path; they differ in pH on the fat path, or outside pH 4 to 8 on the acrylamide path |
+| how much of a compound one recipe gives | `predict` | a level with an interval and the caveats | the compound is not in the model (2-pentylfuran, nonanal, CML), the thiols are asked from glucose or fructose with cysteine (no route), a dicarbonyl is asked off the sugar path, or the compound is on the thiol path (MFT, FFT, the MFT disulfide, furfural, norfuraneol, and methylglyoxal from a sulfur pot): since 2026-11-05 the thiol path ships ratios only, because its levels for a new laboratory are about tenfold off (H0 / EX-059); a calibration made by `calibrate` from your own measured levels of the compound is answered |
 | where a compound comes from in this model | `explain` | the steps, their rates and the papers behind them, then the steps the literature draws that the model lacks ("possible, not modelled") | never |
-| how good the model is on your own measurements | `score` | the same scorecard the panel gets; nothing is refitted | the rows the panel would refuse |
+| how good the model is on your own measurements | `score` | the same scorecard the panel gets; nothing is refitted | the rows the panel would refuse, the thiol path's levels included (your measurement is kept in the record) |
 | what to measure next | `wishlist`, `rank` | the measurements that would free the most predictions | never |
 | how much CML and CEL a cook makes on my isolate | `predict` with `protein_g_per_l` and a matrix on file (or `protein_sites`), targets `CML`, `CEL`, `fructosyl-lysine` | the bound-lysine glycation arm, with the site-availability band as its interval | no protein loading is stated (free lysine is not the substrate), or the request is on the thiol or acrylamide path |
 | calibrate the model to my laboratory | `calibrate` | a per-laboratory file: response factors from your levels, the few rate constants your contrasts can identify, and the hold-out before and after; apply it with `--calibration` | fewer than one fit record; it never moves the shipped model |
@@ -236,7 +236,7 @@ own measurement, it goes in the spec and the answer names it. Pre-registered in
 | `./scripts/docker_maillard.sh gates` | Run the seven CI gates (incl. artifact freshness) |
 | `./scripts/docker_maillard.sh data-readme` | Regenerate `data/README.md` |
 | `./scripts/docker_maillard.sh experiment-value-ranking` | Rank experiments by value of information |
-| `./scripts/docker_maillard.sh wishlist` | Regenerate the data wishlist (what to measure next) |
+| `./scripts/docker_maillard.sh wishlist-build` | Regenerate the data wishlist (what to measure next); `wishlist` alone reads it through the front door |
 | `./scripts/docker_maillard.sh deep-research-audit` | Literature backlog audit |
 | `./scripts/docker_maillard.sh run "python scripts/reading_audit.py"` | Which papers on this machine have been read into a dossier, and which have not |
 | `python scripts/maillard.py {compare,predict,explain,score,rank,wishlist}` | The front door |

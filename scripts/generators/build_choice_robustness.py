@@ -53,7 +53,7 @@ def _headlines(scores: Dict[str, Any], band: float) -> Dict[str, Any]:
     by_lane: Dict[str, int] = {}
     for lane, fold in oos:
         by_lane[lane] = by_lane.get(lane, 0) + int(fold < band)
-    pairs = [p for p in CONTRASTS._pairs(NULL._rows(scores)[0]) if p["out_of_sample"]]
+    pairs = [p for p in CONTRASTS._pairs(NULL._rows(scores, include_relative_only=True)[0]) if p["out_of_sample"]]
     contrast = CONTRASTS._score(pairs)
     return {"oos_rows": len(oos), "oos_within": sum(f < band for _, f in oos),
             "oos_median_fold": statistics.median(f for _, f in oos) if oos else None, "by_lane_within": by_lane,

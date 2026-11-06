@@ -2,10 +2,10 @@
   "artifact": "sulfur_reaction_evidence",
   "provenance": {
     "artifact": "sulfur_reaction_evidence",
-    "generated_on": "2026-11-05",
+    "generated_on": "2026-11-06",
     "git": {
-      "commit": "0226cbc02b037f4884733f15d91b777b019cca30",
-      "short": "0226cbc0",
+      "commit": "0dbc31f075c49e5113ecddf9feb2e9f07ee4e4b5",
+      "short": "0dbc31f0",
       "branch": "m1b-part-i-build",
       "dirty": true
     },
@@ -13,7 +13,7 @@
     "inputs": [
       {
         "path": "results/validation/sulfur_flux_attribution.json",
-        "sha256": "f0dff3c0679fe31be4885086514919f8391f0225a319d32522467b6e3ca4b0da"
+        "sha256": "9ae0f5bf60f2a8c96c82ab1fad2389eba83456d5bb965446376bb03179b956bc"
       },
       {
         "path": "results/validation/kinetic_core_b60_laplace_covariance.json",
@@ -25,11 +25,11 @@
       },
       {
         "path": "results/validation/core_prediction_uncertainty.json",
-        "sha256": "26a4a6852d54fe93a76780f6c42c45f619b3b8f151166a3daa4031db15de182b"
+        "sha256": "c87f0608229a283115286fde2f58dcc43224c02ae283a71f393f8915fd18224c"
       },
       {
         "path": "docs/reference/conflicts_register.yml",
-        "sha256": "cabc7e97f0b798ab28b160a2647ab1ab02963a98c0324d303c4940a701696a96"
+        "sha256": "06f90c9f4eab26bda5510ff09f428692d409c2a8a59cca570c2615da0782ad0f"
       },
       {
         "path": "src/kinetic_core/sulfur.py",
@@ -2024,10 +2024,13 @@
       "species_measured_over_time": [
         "NF"
       ],
-      "conflicts": [],
+      "conflicts": [
+        "CF-112"
+      ],
       "unclear": true,
       "why_unclear": [
-        "fitted, B2.3 log10k unidentified, frozen since"
+        "fitted, B2.3 log10k unidentified, frozen since",
+        "conflicts: CF-112"
       ]
     },
     {
@@ -2570,9 +2573,13 @@
       "species_measured_over_time": [
         "MGO"
       ],
-      "conflicts": [],
-      "unclear": false,
-      "why_unclear": []
+      "conflicts": [
+        "CF-122"
+      ],
+      "unclear": true,
+      "why_unclear": [
+        "conflicts: CF-122"
+      ]
     },
     {
       "reaction": "r_nf_mp3p",
@@ -5188,11 +5195,13 @@
         "TTCA"
       ],
       "conflicts": [
-        "CF-107"
+        "CF-107",
+        "CF-108",
+        "CF-110"
       ],
       "unclear": true,
       "why_unclear": [
-        "conflicts: CF-107"
+        "conflicts: CF-107, CF-108, CF-110"
       ]
     },
     {
