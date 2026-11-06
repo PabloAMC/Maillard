@@ -33,6 +33,7 @@ import numpy as np
 jax.config.update("jax_enable_x64", True)
 
 from .lane import UnsupportedConfiguration  # noqa: E402  (one refusal type for every port)
+from .ph_coupling import build_table  # noqa: E402
 
 CELSIUS = 273.15
 #: the elements every reaction must balance (the engine's carbon / nitrogen / sulfur invariants)
@@ -47,7 +48,9 @@ class RateCtx(NamedTuple):
 
     In pH mode "prescribed" (contract v2 sec. 2.4) ``ph_label`` is the pot's DECLARED pH, read from the pot data
     (``pot["ph_label"]``) and constant over the programme -- the engine's declared-pH factors (trunk B12 / B40,
-    acrylamide B15) -- and ``ph`` stays None. ``aw`` is the pot's declared water activity (``pot["aw"]``). Both are
+    acrylamide B15) -- and ``ph`` stays None. (v2.3) In an inline-pH network ``ph`` is the in-situ pH of the current
+    state, ``ionic_m`` its ionic strength and ``ph_label`` its COOLED (25 C label-scale) pH; in a clamped pot both
+    ``ph`` and ``ph_label`` are the declared label pH and ``ionic_m`` is 0 (the engine's clamped path). ``aw`` is the pot's declared water activity (``pot["aw"]``). Both are
     NaN where the engine's value is None; a module reads them only if it lists them in ``Module.pot_inputs``."""
 
     t_c: Any
@@ -90,19 +93,54 @@ class Module:
     #: (v2.2) species owned by ANOTHER module that this module's reactions consume, declared (contract sec. 4,
     #: "declared competition"); ``compose(competition="refuse")`` refuses an undeclared one
     competes: Tuple[str, ...] = ()
-    #: (v2.2) this module's titratable pools (a typed stub: merged and checked by ``compose``; the ONE charge-closure
-    #: check needs the sulfur port's inventory, ``charge_closure``)
+    #: (v2.2) this module's titratable pools; (v2.3) with dH, dCp, the acid-yield coupling, pK coordinates and
+    #: pot-supplied (buffer) pools, merged by ``compose`` into ``Network.charge``, the ONE table the network's pH solve
+    #: and the charge-closure check both read
     titratables: Tuple["Titratable", ...] = ()
+    #: (v2.3) the solvent and the pH coupling's numerics (``ph_coupling.PhModel``): one per inline-pH network
+    ph_model: Any = None
+    #: (v2.3) per reaction of this module that moves titratable centres: {kind: delta, "basis": why} (the engine's
+    #: ``CENTRE_LEDGER``); ``charge_closure`` checks it against the movement the merged table implies
+    centre_ledger: Mapping[str, Mapping[str, Any]] = field(default_factory=dict)
 
 
 class Titratable(NamedTuple):
-    """One titratable pool for the merged table (contract sec. 4 / 6.3): its pKa values at 25 C, the charge of each
-    protonation state (most protonated first, one more than the pKa values), and where they come from."""
+    """One titratable pool of the merged table (contract sec. 2.3 / 2.4; v2.3 carries the engine's whole inventory).
+
+    ``species`` is the pool's KEY: a species name for a one-species pool (the v2.2 form), else a group key (``formic``:
+    fed by FA at full strength, by CBX at its share of the organic-acid mix and by the lumped ACID at that share times
+    the acid yield). ``pka_25c`` are the successive pK of the fully protonated state at 25 C, ``charges`` the charge of
+    each state (most protonated first, one more than the pKa values, each one less than the last), ``dh_kj_mol`` /
+    ``dcp_j_mol_k`` the ionisation enthalpies and heat capacities per step (empty = zero), ``weights`` mmol/L of pool
+    per mmol/L of each species (None = {species: 1}), ``yield_weights`` the same per unit of the declaring module's
+    coordinate ``yield_coordinate`` (the acid-yield coupling), ``pka_coordinates`` per step a coordinate of the
+    declaring module that replaces that step's pK at 25 C (None = fixed; the ARP amine pK), ``source`` "state" or
+    "pot" (a buffer: mmol/L read from the pot's ``buffer`` vector, row named ``pot_key``), and ``centres`` the
+    titratable centres per unit of pool by kind (the engine's ``TITRATABLE_CENTRES``: {"carboxyl": 1, "amine": 1}),
+    which the charge-closure check reads (empty = one centre of kind "titratable")."""
 
     species: str
     pka_25c: Tuple[float, ...]
-    charges: Tuple[int, ...]
+    charges: Tuple[float, ...]
     basis: str = ""
+    dh_kj_mol: Tuple[float, ...] = ()
+    dcp_j_mol_k: Tuple[float, ...] = ()
+    weights: Optional[Mapping[str, float]] = None
+    yield_weights: Optional[Mapping[str, float]] = None
+    yield_coordinate: Optional[str] = None
+    pka_coordinates: Tuple[Optional[str], ...] = ()
+    source: str = "state"
+    pot_key: Optional[str] = None
+    centres: Optional[Mapping[str, float]] = None
+
+    def pool_weights(self) -> Mapping[str, float]:
+        """mmol/L of pool per mmol/L of each species (a pot-supplied pool has none)."""
+        if self.source == "pot":
+            return {}
+        return {self.species: 1.0} if self.weights is None else dict(self.weights)
+
+    def species_read(self) -> Tuple[str, ...]:
+        return tuple(dict.fromkeys(list(self.pool_weights()) + list(self.yield_weights or {})))
 
 
 #: the pot scalars a module may read (``pot[name]``, NaN for the engine's None)
@@ -134,6 +172,10 @@ class Network:
     #: (v2.2) species consumed by a module that does not own it -> (owner, consumers...), and the undeclared pairs
     competition: Mapping[str, Tuple[str, ...]] = field(default_factory=dict)
     undeclared_competition: Tuple[Tuple[str, str], ...] = ()
+    #: (v2.3) the merged titratable table as arrays (``ph_coupling.ChargeTable``; None when no pool is declared) and
+    #: the network's one PhModel (None for a pH-free network)
+    charge: Any = None
+    ph_model: Any = None
 
     @property
     def n_species(self) -> int:
@@ -165,7 +207,7 @@ class Network:
 
 
 def compose(modules: Sequence[Module], *, layout: Optional[Sequence[str]] = None,
-            solver: str = "Kvaerno5", competition: str = "report") -> Network:
+            solver: str = "Kvaerno5", competition: str = "report", check_closure: bool = True) -> Network:
     """One Network from modules. Refuses (ValueError): a duplicate module name, a missing ``requires``, a species or
     reaction key defined twice, a reaction touching a species no module owns, and any reaction that does not balance
     C / N / S to 1e-9. ``layout`` pins a species order (a permutation of the owned species); ``solver`` names the
@@ -175,7 +217,12 @@ def compose(modules: Sequence[Module], *, layout: Optional[Sequence[str]] = None
     module that does not own it must be in that module's ``competes``. ``competition="report"`` (the default: the
     ported trunk-lane / acrylamide modules predate the declaration) lists the undeclared pairs on
     ``Network.undeclared_competition``; ``"refuse"`` raises. The merged titratable table refuses a pool declared twice
-    or by a module that neither owns nor requires its species."""
+    or by a module that neither owns nor requires its species.
+
+    (v2.3) A network that declares any titratable pool must close its charge ledger (``charge_closure(strict=True)``)
+    or is refused; ``check_closure=False`` is the declared escape, to build one in order to inspect what fails. An
+    inline-pH network refuses a declared-pH module, a module that reads ``aw``, and pools declared by a pH-free
+    module."""
     if solver not in ("Kvaerno3", "Kvaerno4", "Kvaerno5"):
         raise ValueError(f"solver {solver!r} is not a declared choice")
     if competition not in COMPETITION_MODES:
@@ -241,15 +288,24 @@ def compose(modules: Sequence[Module], *, layout: Optional[Sequence[str]] = None
             raise ValueError(f"reaction {reactions[j]} does not balance: "
                              + ", ".join(f"{e} {imbalance[i, j]:+.3g}" for i, e in enumerate(ELEMENTS) if bad[i]))
     coordinates = tuple((m.name, k) for m in modules for k in m.params)
+    ph_model = _merge_ph_models(modules)
+    titratables = _merge_titratables(modules, owner)
     shared, undeclared = _competition(modules, owner)
     if undeclared and competition == "refuse":
         raise ValueError("undeclared shared consumption (declare it in Module.competes): "
                          + ", ".join(f"{m} consumes {s} (owned by {owner[s]})" for s, m in undeclared))
-    return Network(modules=tuple(modules), species=species, reactions=tuple(reactions), index=index,
-                   stoichiometry=stoich, reactant_index=r_idx, reactant_power=r_pow, element_matrix=elements,
-                   coordinates=coordinates, needs_ph=any(m.needs_ph for m in modules), solver=solver,
-                   titratables=_merge_titratables(modules, owner), competition=shared,
-                   undeclared_competition=undeclared)
+    net = Network(modules=tuple(modules), species=species, reactions=tuple(reactions), index=index,
+                  stoichiometry=stoich, reactant_index=r_idx, reactant_power=r_pow, element_matrix=elements,
+                  coordinates=coordinates, needs_ph=any(m.needs_ph for m in modules), solver=solver,
+                  titratables=titratables, competition=shared, undeclared_competition=undeclared,
+                  charge=build_table(modules, index), ph_model=ph_model)
+    if net.charge is not None and check_closure:
+        # (v2.3) a network that titrates anything closes its charge ledger, or is refused (``check_closure=False``
+        # is the declared escape, for building a network in order to inspect what does not close)
+        from .ph_coupling import closure
+
+        closure(net, strict=True)
+    return net
 
 
 def _competition(modules: Sequence[Module], owner: Mapping[str, str]):
@@ -273,29 +329,85 @@ def _competition(modules: Sequence[Module], owner: Mapping[str, str]):
 def _merge_titratables(modules: Sequence[Module], owner: Mapping[str, str]) -> Tuple[Titratable, ...]:
     table: Dict[str, Titratable] = {}
     names = {m.name: m for m in modules}
+    pot_keys: Dict[str, str] = {}
     for m in modules:
         reach = set(m.species) | {s for r in m.requires for s in names[r].species}
         for t in m.titratables:
             if t.species in table:
                 raise ValueError(f"titratable {t.species!r} is declared twice")
-            if t.species not in reach:
-                raise ValueError(f"{m.name} declares titratable {t.species!r}, which it neither owns nor requires")
+            if t.source not in ("state", "pot"):
+                raise ValueError(f"titratable {t.species!r}: source {t.source!r} is 'state' or 'pot'")
+            if t.source == "pot":
+                if t.weights or t.yield_weights or not t.pot_key:
+                    raise ValueError(f"titratable {t.species!r}: a pot-supplied pool names its pot_key and reads no "
+                                     "species")
+                if t.pot_key in pot_keys:
+                    raise ValueError(f"pot pool {t.pot_key!r} is declared twice")
+                pot_keys[t.pot_key] = t.species
+            stray = [s for s in t.species_read() if s not in reach]
+            if stray:
+                raise ValueError(f"{m.name} declares titratable {t.species!r} on {stray}, which it neither owns nor "
+                                 "requires")
             if len(t.charges) != len(t.pka_25c) + 1:
                 raise ValueError(f"titratable {t.species!r}: {len(t.pka_25c)} pKa values need "
                                  f"{len(t.pka_25c) + 1} charge states")
+            if any(abs(float(a) - float(b) - 1.0) > 1e-12 for a, b in zip(t.charges[:-1], t.charges[1:])):
+                raise ValueError(f"titratable {t.species!r}: each state carries one charge less than the last "
+                                 f"(got {t.charges})")
+            for name, values in (("dh_kj_mol", t.dh_kj_mol), ("dcp_j_mol_k", t.dcp_j_mol_k),
+                                 ("pka_coordinates", t.pka_coordinates)):
+                if values and len(values) != len(t.pka_25c):
+                    raise ValueError(f"titratable {t.species!r}: {name} needs one entry per pKa")
+            coords = [c for c in tuple(t.pka_coordinates) + (t.yield_coordinate,) if c is not None]
+            missing = [c for c in coords if c not in m.params]
+            if missing:
+                raise ValueError(f"titratable {t.species!r}: coordinates {missing} are not {m.name}'s")
+            if (t.yield_coordinate is None) != (not t.yield_weights):
+                raise ValueError(f"titratable {t.species!r}: yield_weights and yield_coordinate come together")
             table[t.species] = t
     return tuple(table.values())
 
 
-def charge_closure(net: Network):
-    """The ONE charge-closure check over the merged titratable table (contract sec. 4 / 6.3; it closes v1's Gly /
-    AMA / SB / PAMA gap). A TYPED STUB: it needs, per reaction, the charge each titratable reactant and product
-    carries at the network's pH, i.e. the inline charge balance and the titratable inventory that only the sulfur
-    lane carries today (``ph_state.titratable_inventory`` / ``TITRATABLE_CENTRES``, the bake-off's
-    ``model.make_ph_solver``). It lands with the sulfur port."""
-    raise UnsupportedConfiguration(
-        "charge closure over the merged titratable table needs the sulfur port's inline charge balance and "
-        f"titratable inventory ({len(net.titratables)} pools declared); not ported")
+def _merge_ph_models(modules: Sequence[Module]):
+    """The network's PhModel: every declared one must be equal. A module that reads the DECLARED pH (``"ph_label"`` in
+    ``pot_inputs``, pH mode "prescribed") cannot share a network with an inline-pH module: ``RateCtx.ph_label`` is the
+    declared pH in one and the cooled pH of the current state in the other. Merging the two conventions is a new
+    behaviour (A2b, contract sec. 6.3), behind its own config key, so it is refused here."""
+    models = {m.ph_model for m in modules if m.ph_model is not None}
+    if len(models) > 1:
+        raise ValueError("modules declare different PhModels: "
+                         + ", ".join(m.name for m in modules if m.ph_model is not None))
+    if any(m.needs_ph for m in modules):
+        inline = [m.name for m in modules if m.needs_ph]
+        prescribed = [m.name for m in modules if "ph_label" in m.pot_inputs]
+        if prescribed:
+            raise UnsupportedConfiguration(
+                f"{prescribed} read the declared pH (pH mode 'prescribed') and {inline} solve it inline: "
+                "RateCtx.ph_label would mean two things (contract sec. 2.4; merging the conventions is A2b's, "
+                "sec. 6.3)")
+        reads_aw = [m.name for m in modules if "aw" in m.pot_inputs]
+        if reads_aw:
+            raise UnsupportedConfiguration(
+                f"{reads_aw} read the pot's a_w, which the inline-pH integrator does not carry (ph_coupling.POT_KEYS, "
+                "RateCtx.aw): not ported beside an inline pH")
+        foreign = [m.name for m in modules if m.titratables and not m.needs_ph]
+        if foreign:
+            raise UnsupportedConfiguration(
+                f"{foreign} declare titratable pools but solve no pH: putting a pH-free module's pools into an "
+                "inline balance changes the lanes' numbers (the trunk solutes in the balance), which is A2b's "
+                "(contract sec. 6.3)")
+    return next(iter(models)) if models else None
+
+
+def charge_closure(net: Network, theta=None, *, ph: Optional[float] = None, t_c: float = 25.0,
+                   strict: bool = False) -> Dict[str, Any]:
+    """The ONE charge-closure check over the merged titratable table (contract sec. 2.3; it closes v1's Gly / AMA /
+    SB / PAMA gap): each reaction's movement of titratable centres, computed from the same pool weights the pH solve
+    titrates, against the modules' ``centre_ledger`` with the engine's three failure modes; with ``ph``, the charge
+    each step moves at that pH. ``ph_coupling.closure`` has the details."""
+    from .ph_coupling import closure
+
+    return closure(net, theta, ph=ph, t_c=t_c, strict=strict)
 
 
 # --------------------------------------------------------------------------- the parameter vector
@@ -358,9 +470,49 @@ def mass_action(y, net: Network):
 
 
 class Run(NamedTuple):
-    ys: Any          # (S, n_species): the state at the END of each segment
+    ys: Any          # (S, n_species): the state at the END of each segment; inline pH: (S * N, n), every pH node
     num_steps: Any   # (S,): accepted + rejected steps per segment
     failed: Any      # (S,): True where diffrax did not succeed (only reachable with ``throw=False``)
+    ph: Any = None   # (v2.3) inline pH: the ``ph_coupling.PhRun`` (node pH, I, cooled pH, sweeps, SID)
+
+
+def pot_arrays(net: Network, pot: Mapping[str, Any]) -> Dict[str, Any]:
+    """The numeric part of a pot, what the compiled solve takes: every entry for a pH-free network (as before), the
+    ``ph_coupling.POT_KEYS`` for an inline-pH one (whose pot also carries static entries: ``mode``, the node minutes)."""
+    if net.needs_ph:
+        from .ph_coupling import pot_arrays as ph_arrays
+
+        return ph_arrays(pot)
+    return {k: jnp.asarray(v, dtype=jnp.float64) for k, v in pot.items()}
+
+
+def pot_mode(net: Network, pot: Mapping[str, Any]) -> Optional[str]:
+    """An inline-pH pot's static mode ("dynamic" | "clamped"); None for a pH-free network."""
+    if not net.needs_ph:
+        return None
+    from .ph_coupling import pot_mode as ph_mode
+
+    return ph_mode(pot)
+
+
+def n_rows(net: Network, pot: Mapping[str, Any]) -> int:
+    """How many rows ``integrate`` (or ``forcing.integrate_forced``) returns for this pot: S segment ends (a plain
+    pot's ``segments``; a forced pot's ``durations``), or S * N pH nodes (an inline-pH pot)."""
+    if net.needs_ph:
+        s, n = np.shape(pot["node_s"])
+        return int(s * n)
+    for key in ("segments", "durations"):
+        if key in pot:
+            return int(np.shape(pot[key])[0])
+    raise ValueError("a pot carries 'segments' (plain), 'durations' (forced) or 'node_s' (inline pH)")
+
+
+def segment_end_rows(net: Network, pot: Mapping[str, Any]) -> List[int]:
+    """The rows of ``integrate(...).ys`` that hold each segment's end state (an Observation's ``row``)."""
+    if not net.needs_ph:
+        return list(range(int(np.shape(pot["segments"])[0])))
+    s, n = np.shape(pot["node_s"])
+    return [i * n + n - 1 for i in range(s)]
 
 
 def _solver_of(net: Network):
@@ -370,20 +522,37 @@ def _solver_of(net: Network):
 
 
 def integrate(net: Network, theta, pot: Mapping[str, Any], *, solver=None, rtol: float = 1e-8, atol: float = 1e-14,
-              adjoint=None, max_steps: int = 100_000, throw: bool = True) -> Run:
+              adjoint=None, max_steps: Optional[int] = None, throw: bool = True, mode: Optional[str] = None,
+              **ph_kw) -> Run:
     """One pot (``{"y0": (n,), "segments": (S, 2)}``, plus the scalars in ``net.pot_inputs``) through its thermal
     program.
 
     Rate constants are evaluated once per segment (temperature is constant on it, and so are the declared pot
     scalars; a network without inline pH has no state dependence in its constants). ``throw=False`` flags a failed
     pot (``Run.failed``) instead of raising, which is what a fit over many pots needs (XLA cannot be interrupted by
-    a signal)."""
+    a signal).
+
+    (v2.3) A network with a ``needs_ph`` module solves its pH here (``ph_coupling.integrate``: the merged titratable
+    table, the network's PhModel, the coupling "fixed_point_nodes" or "inline", the clamped mode). Its pot is a
+    ``ph_coupling.pot_from_program`` pot; ``Run.ys`` then holds every pH node of every segment, (S * N, n)
+    segment-major (``segment_end_rows``), and ``Run.ph`` the node pH, I, cooled pH, sweeps and SID. ``mode`` (static)
+    overrides the pot's "dynamic" / "clamped"; ``ph_kw`` passes ``force_sweeps`` / ``reverse``."""
     import diffrax
 
     if net.needs_ph:
-        raise UnsupportedConfiguration(
-            "the composed network's pH coupling (charge balance inside the RHS, contract v2 sec. 2.4) is not ported "
-            "yet; the sulfur lane's module carries it in its own driver (sulfur_lane.integrate)")
+        from . import ph_coupling
+
+        run = ph_coupling.integrate(net, theta, pot, solver=solver, rtol=rtol, atol=atol, adjoint=adjoint,
+                                    max_steps=200_000 if max_steps is None else max_steps, throw=throw, mode=mode,
+                                    **ph_kw)
+        s, n_nodes, n = run.ys.shape
+        # an unconverged fixed point (residual above PhModel.flag) is a failed pot, as the engine's guards treat
+        # ph_fixed_point_converged = False
+        return Run(ys=run.ys.reshape(s * n_nodes, n), num_steps=run.num_steps, failed=run.failed | run.unconverged,
+                   ph=run)
+    if ph_kw or mode is not None:
+        raise ValueError(f"{sorted(ph_kw) + (['mode'] if mode else [])} apply to an inline-pH network only")
+    max_steps = 100_000 if max_steps is None else max_steps
     missing = [x for x in net.pot_inputs if x not in pot]
     if missing:
         raise ValueError(f"the pot lacks {missing}, which the network's modules read (NaN stands for None)")

@@ -244,11 +244,11 @@ def draw(seed: int):
 class Harness:
     """One lane, its compiled solves (cached per pot shape, mode and tolerance) and the pots."""
 
-    def __init__(self, cfg=None, solver: str = "Kvaerno5"):
+    def __init__(self, cfg=None, solver: str = "Kvaerno5", lane=None):
         from src.kinetic_core_jax import sulfur_lane as sl
 
         self.sl = sl
-        self.lane = sl.build(cfg, solver=solver)
+        self.lane = sl.build(cfg, solver=solver) if lane is None else lane
         self._compiled: Dict[Tuple, Any] = {}
 
     def prepare(self, pot: Dict[str, Any]) -> Dict[str, Any]:
@@ -407,8 +407,10 @@ def stage_balance(h: Harness) -> Dict[str, Any]:
 
     pots = [h.prepare(p) for p in panel_pots() if p["id"] in DRAW_POTS]
     drift = engine.core_ph_drift()
-    bal = h.sl.PhSolver(h.lane.balance)
-    th = h.lane.theta0()[h.sl.NAME]
+    from src.kinetic_core_jax import ph_coupling
+
+    bal = ph_coupling.solver_of(h.lane.network)     # the network's own solver (2026-11-06; was the lane's)
+    th = h.lane.theta0()
     worst = {"sid": 0.0, "ph": 0.0, "ionic_rel": 0.0, "cool": 0.0}
     n = 0
     for pot in pots:

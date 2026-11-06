@@ -200,6 +200,7 @@ def test_unported_switches_and_pots_are_refused(g, h):
                     engine.ProcessSpec(thermal=engine.ThermalProgram.isothermal(120.0, 10.0), ph=6.0))
     import src.kinetic_core_jax.network as network
 
-    with pytest.raises(UnsupportedConfiguration):
+    # (2026-11-06) the network integrates a pH network itself; a pH-free pot is refused, not run without its pH
+    with pytest.raises(ValueError, match="inline-pH pot"):
         network.integrate(h.lane.network, h.lane.theta0(), {"y0": jnp.zeros(h.lane.network.n_species),
                                                             "segments": np.array([[1.0, 100.0]])})
