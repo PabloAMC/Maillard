@@ -1236,4 +1236,122 @@ confirmer"**. History is not rewritten; this line is the correction.
 
 ### 21.8 Results and the proposed S3 application
 
-*(appended after the run)*
+*Appended 2026-11-06 after the three A2 runs; nothing above is edited. Records: `kinetic_core_m1b_part_i_a2`,
+`..._a2_attribution_fit`, `..._a2_s3` (the S3 p-values sit in their own record rather than in `_a2` as sec. 21.7
+said: a split of the record, not of the method).*
+
+#### 21.8.1 The noise term and the verdict on the stored draws (sec. 21.1)
+
+- **sigma_max = 0.135** (edge 0.2) and **0.168** (edge 0.25); the Monte Carlo agrees with the closed form. So D is
+  [0.071, 0.135] (edge 0.2) or [0.071, 0.168] (edge 0.25).
+- **Davies buffer capacities** of Meynier's cysteine pots at t = 0: 13.2 / 33.4 / 74.5 / 113.6 / 107.8 mmol/L per pH
+  at labels 4.5 - 6.5 (I = 0.62 - 1.00 M; at I = 0: 5.6 / 9.4 / 25.1 / 62.6 / 110.1). CF-084's beta = 5.4 at label
+  4.5 is the I = 0 reading; Davies gives 13.2 (the review estimated ~12). Davies above ~0.5 M is an approximation.
+  beta_ref (Zhou ARP label 8, B0-pinned 60 min) is 2.4. So A1's shape term carried through the buffer ratio is
+  0.071 - 0.108 per drift: inside D at every multiplier.
+- **Verdict** (draws passing all four, most in any A1 form):
+
+| rival | every choice in D | unscaled s x 1 (0.237, outside D) | unscaled s x 2 (0.458, outside D) | A2 reading |
+|---|---|---|---|---|
+| B0 | 0 | 0 | 74 | falsified on the screen's draws |
+| B2 | 0 | 0 | 15 | falsified on the screen's draws |
+| B3 | 0 | 0 | 640 | falsified on the screen's draws |
+| B1 | 49 - 95 | 119 | 197 | not falsified (and "not testable here", A1) |
+| B13 | 172 - 255 | 273 | 350 | not falsified (and "not testable here", A1) |
+
+- **The verdict does not flip within D.** It flips only at the review's unscaled s x 2 form, which puts sd 0.458 on a
+  drift. Under that sd, P(all 20 of Meynier's pots read within 0.2) is ~4e-10 even if no pot drifted at all, so the
+  form is contradicted by the statement it is applied to.
+
+#### 21.8.2 Attribution (sec. 21.2)
+
+- **The ledger finding:** the docstring is right; the shipped `r_cys_thermal` and `ch_cys_ox` encodings destroy an
+  amine their own chemistry keeps (sec. 21.2 item 1). Fixed as an opt-in switch, commit c26a4a27; the shipped default
+  is unchanged.
+- **F-A converged** (status 2, 258 evaluations, 0 failed pot runs). Bands: log10 k_cys_thermal [-2.818, -1.980]
+  (Kang's total 1.05e-2 /min at 145 C; rho 0.145), mu_h2s [-1.048, -0.083]. Zheng's extrapolated pH-7 rate at 140 C
+  (1.05e-2 /min) exceeds Kang's measured total loss (8.6e-3 /min), so the shipped H2S route is above its own bound
+  there, as the review suspected.
+- **B0 + the sinks cannot meet Meynier:** drifts at F-A -0.50 / -0.64 / -0.55 / -0.37 / -0.36, failing at every choice
+  in D. k_cys_thermal sits at its lower band edge and mu_h2s at -0.22. The attempt costs B60 +6.20 (21.883 -> 28.086)
+  and degrades Hou's shape (sec. 21.8.3).
+- **Diagnostic, no verdict:** with `r_cys_thermal` and `ch_cys_ox` keeping their amine, the drifts are -0.26 / -0.52 /
+  -0.51 / -0.36 / -0.35 at F-A and +0.07 / -0.37 / -0.49 / -0.36 / -0.35 at the confirmation fit. The ledger error
+  carries the label-4.5 drift. Most of the drift at labels 5 - 6.5 comes from the other cysteine amine routes, which
+  are B1's phi_cys question.
+- **So the kill stands as "B0 + the shipped cysteine sinks, with the sinks' constants free in their bands":** P ~ 0.9
+  that this structure cannot reproduce Meynier. The attribution to the amine fate at release is stronger than the
+  review's P ~ 0.70: the lumped acid yield fits to 0, the glycine pots do not drift, and keeping the amine (B1, B13,
+  or the ledger's own chemistry) removes most of it. P ~ 0.85.
+
+#### 21.8.3 S3's test (sec. 21.3)
+
+| fit | cells in D inadequate after Holm | sigma-Mey p (range over D) | other rejections |
+|---|---|---|---|
+| B0 at F-A (decisive) | 49 / 49 | 5e-5 - 9e-4 | Hou shape (42 / 49; p 4.9e-9 primary) |
+| B0 at its confirmation fit | 49 / 49 | 7.6e-4 - 3.0e-3 | Hou shape, Zhou (42 / 49 each) |
+| B2 at its confirmation fit | 49 / 49 | 0 - 3e-4 | none |
+| B3 at its confirmation fit | 49 / 49 | 0 - 1e-5 | Hou shape (42 / 49) |
+
+- **B0, B2 and B3 are falsified under S3**, on sigma-Mey in every cell, with the Laplace predictive spread included
+  (no coordinate unidentified). sigma-Mey stays rejected even under the out-of-D unscaled s x 2 form (p 4e-4 at F-A).
+  The reason: S3 asks for all five pots within jointly at the fit, while A1's screen read each pot separately over the
+  band-integrated draws.
+
+#### 21.8.4 Per-signature false-kill rates (sec. 21.4)
+
+- B0's false-kill rate (0.21 primary / 0.45 offset-shape at either generation sd) comes **entirely from sigma-Zhou**.
+  sigma-Mey's false-kill rate is 0.000 for B0 and B2 and <= 0.065 for B3, and its kill power is 0.98 - 1.00.
+- Synthetic sets from B0's own best draw never read Meynier "all within" (fraction 0.000). That is because B0's best
+  draw drifts -0.4 to -0.9: an unreproducible truth reads "within" at no realistic noise. It is not a defect of the
+  check. B1's and B13's own sets read all within 0.14 - 0.34 of the time.
+- Hou level and Hou shape kill nothing alone (kill power <= 0.005): the kills are sigma-Mey's and sigma-Zhou's, as sec.
+  20.3 foresaw.
+
+#### 21.8.5 The record correction (sec. 21.5)
+
+8eda72ef's "blind confirmer" reads "an independent, partially un-blinded confirmer" (sec. 20.7); recorded in sec. 21.5.
+
+#### 21.8.6 Which shipped path follows (proposed S3 application, for a separate PR; nothing moves here)
+
+- **Status.** The incumbent B0, with the shipped cysteine sinks, is falsified under S3, and so are B2 and B3. B1 and
+  B13 are not falsified. They are S3-carried, since both were named in this case before results with a mechanism of a
+  listed evidence kind (B1: Sohn & Ho's measured NH3 yields; B13: Davidek 2006a's acetic yields plus B1). A1 records
+  them as "not testable here", so they gain nothing: carried, not credited.
+- **S3's text reads two ways here.**
+  - The envelope clause: the output is the union of the carried rivals' envelopes, here B1 u B13.
+  - The refusal clause: "if the incumbent itself is falsified with no rival credited ... the outputs that depend on it
+    are refused". Carried rivals are never credited, so read literally this clause always applies.
+  - Both readings agree on one thing: B0's point must not be shown. They differ on whether B1 u B13 may replace it.
+    That is for the S3-application review to settle (flagged to the coordinator).
+- **Decision: refuse now; the B1 u B13 envelope only through its own reviewed case.**
+- **Are B1 and B13 runnable today?**
+  - Yes, in the NumPy engine, behind `ph.amine_survival` / `ph.acid_supply`, on the inline coupling only. The shipped
+    `fixed_point_nodes` coupling refuses them, and `engine.predict` runs neither by default. They are not in JAX (W3).
+  - Their coordinates are bands (phi_cys, phi_arp [0, 1]; y5, y6, y_hi, k_iso), so an envelope is a band-integrated
+    ensemble. The screen's 640 draws per rival over ~17 pots took ~6.4 h at up to 4 workers, i.e. roughly 1 - 3 s per
+    pot per draw. At 8 workers, a prediction envelope over 2 x 640 draws is ~5 - 10 min per pot.
+- **Proposed (the separate PR):**
+  1. **Immediately: refuse the balance-dependent outputs** (below) at B0's point. The falsified incumbent's point must
+     not be shown, and the envelope is not yet built or reviewed.
+  2. **Then: ship the B1 u B13 envelope** for those outputs, built by the separate PR on the inline coupling, its cost
+     stated, with held-out coverage before / after and an independent review (S3 / S4's replacement of items 6 and 9).
+     Where B1's and B13's envelopes disagree in sign on a lever, the lever's direction is refused (S3).
+  3. **The ledger default flip** (`r_cys_thermal`, `ch_cys_ox`: amine kept) is listed for S1 as a never-cased
+     structural choice. Under the envelope it is subsumed: B1 at phi_cys = 1 keeps every cysteine amine. As a change
+     to the incumbent it needs its own S2 / S4 case; it is not made here.
+- **Outputs affected (first pass; the separate PR computes the exact set).** Only the sulfur lane runs the dynamic
+  balance (`engine.py`: the trunk-only, acrylamide and lipid lanes do not). Within it, an output is balance-dependent
+  where its sensitivity to the B0 -> B1 / B13 switch exceeds the lane's within-lab term (omega 0.419 dex) for relative
+  outputs, or tau for absolute ones. First pass, ordered by expected sensitivity:
+  1. the predicted pH trajectory itself (cooled and in situ) in every unbuffered or weakly buffered pot (Amadori /
+     ARP pots, Kang-type cysteine pots, pyrophosphate at labels 4.5 - 5.0 where beta is 13 - 33 mmol/L per pH);
+  2. the thiols MFT and FFT and the H2S pool in those pots. Every pH-resolved sink and source reads the balance's pH:
+     the thiolate loss (Kumazawa), Zheng & Ho's pH-resolved H2S law, TTCA formation and opening, and the Strecker /
+     trap steps' pH terms;
+  3. ratio outputs across pH ladders (e.g. Meynier's MFT fall from pH 4.5 to 6.5), whose arms drift differently under
+     the rivals;
+  4. strongly buffered pots (beta >= ~60 mmol/L per pH: 0.2 M pyrophosphate at labels 6.0 - 6.5, phosphate near its
+     pKa2). Expected to stay below omega and keep their point predictions; listed so the separate PR checks them, not
+     assumed.
+- **What remains open:** CF-084 stays open; sec. 20.6 (`ph_species_discrepancy`) is unchanged; part (ii) is untouched.

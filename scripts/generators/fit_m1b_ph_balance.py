@@ -2607,12 +2607,13 @@ def render_a2(rec: Mapping[str, Any]) -> str:
     L += ["", "## The choices", "", "| choice | sd per label (4.5 .. 6.5) | edge | in D | basis |", "|---|---|---|---|---|"]
     for c in rec["choices"]:
         L.append(f"| {c['name']} | {' / '.join(f'{x:.3f}' for x in c['sd'])} | {c['edge']} | {c['in_d']} | {c['basis']} |")
-    L += ["", "## On the measured data: draws passing all four (minimum over A1's seven forms)", ""]
+    L += ["", "## On the measured data: draws passing all four (the most in any of A1's seven forms; killed only "
+          "if 0)", ""]
     names = [c["name"] for c in rec["choices"]]
     L.append("| rival | " + " | ".join(names) + " | verdict |")
     L.append("|---|" + "---|" * (len(names) + 1))
     for k, v in rec["measured"].items():
-        cells = [str(min(v["per_choice"][n]["n_passing_per_form"].values())) for n in names]
+        cells = [str(max(v["per_choice"][n]["n_passing_per_form"].values())) for n in names]
         L.append(f"| {k} | " + " | ".join(cells) + f" | {v['verdict']} |")
     L += ["", "## Per-signature false-kill rate (sets from the rival's own best draw)", "",
           "| generation \\| family | rival | Hou level | Hou shape | Mey | Zhou | all four | Mey all within |",

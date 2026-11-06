@@ -34,16 +34,16 @@
 | shape_unscaled_s_x1 | 0.237 / 0.237 / 0.237 / 0.237 / 0.237 | 0.2 | False | the review's form: A1's shape term put on Meynier unscaled |
 | shape_unscaled_s_x2 | 0.458 / 0.458 / 0.458 / 0.458 / 0.458 | 0.2 | False | the review's form: A1's shape term put on Meynier unscaled |
 
-## On the measured data: draws passing all four (minimum over A1's seven forms)
+## On the measured data: draws passing all four (the most in any of A1's seven forms; killed only if 0)
 
 | rival | sd_0.071 | sd_0.100 | sigma_max | sigma_max_edge0.25 | beta_s_x0.5 | beta_s_x1 | beta_s_x2 | shape_unscaled_s_x1 | shape_unscaled_s_x2 | verdict |
 |---|---|---|---|---|---|---|---|---|---|---|
 | B0_pinned | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | falsified on the screen's draws (A2: killed at every choice in D) |
-| B0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | falsified on the screen's draws (A2: killed at every choice in D) |
-| B1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | not falsified (A2: passes at every choice in D) |
-| B2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | falsified on the screen's draws (A2: killed at every choice in D) |
-| B3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | falsified on the screen's draws (A2: killed at every choice in D) |
-| B13 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | not falsified (A2: passes at every choice in D) |
+| B0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 74 | falsified on the screen's draws (A2: killed at every choice in D) |
+| B1 | 49 | 57 | 69 | 95 | 49 | 49 | 51 | 119 | 197 | not falsified (A2: passes at every choice in D) |
+| B2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 15 | falsified on the screen's draws (A2: killed at every choice in D) |
+| B3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 640 | falsified on the screen's draws (A2: killed at every choice in D) |
+| B13 | 172 | 193 | 220 | 255 | 173 | 173 | 177 | 273 | 350 | not falsified (A2: passes at every choice in D) |
 
 ## Per-signature false-kill rate (sets from the rival's own best draw)
 
