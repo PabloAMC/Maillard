@@ -531,6 +531,18 @@ entries:
       - "Wang 2022's lipid co-substrate as an extra thiol sink."
     tests:
       - "root-cause analysis 2026-10-29 (conflict_analyses/CF-013.md): temperature plus precursor supply (0.75): within both 'falling' laboratories the lower temperatures rise. US 10,076,126's labelled standards, added before heating, survived it: the engine's MFT sink is at least 5x too fast (sub-model 4, k_mft_decay)."
+      - >-
+        M0 checks batch 2, CK-23 (2026-11-06; results/validation/m0_checks_batch2.md sec. 2): the co-heated [2H3]-MFT
+        standard bounds the in-pot MFT loss at 110 C to lambda <= ln(1 / f_min) / 240 min = 0.019 - 0.058 /min for a
+        declared f_min of 1e-2 - 1e-6 (the patent prints no standard amount, recovery or LOD). The shipped engine loses a
+        lone standard at 0.107 /min (k_mft_decay 0.095 of it), 1.9 - 5.6x too fast. The earlier ">= 5x" used the
+        patent's 4 h level (the B59b-held-out shape) and holds only at the tight corner. FFT (0.022 /min) is within the
+        bound at the loose corner. On Schieberle 2000 no pot-independent sink inside the bound fits the shape and keeps
+        B60's 145 C fed rows: the zero-sink limit gives 360/30 -0.03 and 720/30 +0.06 dex but moves 7 rows out. The
+        fast-sink rows are cysteine-free and the slow-sink pots cysteine-rich (Grosch 0 / 0.65 mM Cys: 0.044 / 0.034
+        /min; Schieberle 33 mM: <~0.003 under the shipped supply; patent 250 mM: <= 0.019 - 0.058), which points to
+        M1's C2 (a loss that free cysteine slows); a nomination conditional on the shipped supply, not a size. A
+        temperature-only law needs an apparent Ea of ~176 kJ/mol, outside Gigl 2021's measured 7 - 102.
     status: explained
     remedy: >-
       Pending: the B59b hold-outs declared in the plan (US 10,076,126 shape, Schieberle 2000 100 C) test the first two
@@ -1923,6 +1935,16 @@ entries:
     tests:
       - "Cluster 3 (2026-11-01, cf065_speciation.py, engine B51 as shipped): in-situ pH 5.34 (Hofmann, 145 C, 0.5 M phosphate) vs 6.33 (Zhai, 120 C; the 20 mM NH4+ buffers it down from the 7.0 label); HS- 9.6 % vs 47 % of dissolved sulfide (4.9x, not ~50x); dissolved sulfide 15-24 % (Vg/Vl 3) vs 34-70 %. Implied second-order gap log10(Zhai / Hofmann) at 120 C after temperature, headspace and speciation: FFT +1.38 [0.94, 1.83] dex, MFT +2.52 [1.96, 3.07] (median [5-95 %]); the condition corrections remove ~1.1 dex. P(gap <= 0.5 dex) = 0 for both. The residual differs between the thiols by 1.1 dex, so one common Zhai scale factor cannot be the whole residual. Negative controls pass (Hofmann T7 1 vs 2 mmol: operator 2.00x, measured 2.22x)."
       - "Munich cluster (2026-11-03, docs/history/conflict_resolution_2026-11-03/munich_sulfur/results.md, pre-registered; munch1997.pdf Table 5 and hofmann1998.pdf Table 10 read on the page). (1) Order in H2S from Munch T5 expts 2 / 3: n = 1.04 [0.90, 1.18]; FFT is linear in sulfide up to 20 mM (no saturation, no threshold; fixed sink <= 1.8 % of the dose), the yield scales with the H2S charge; rate-limited and H2S-limited (complete conversion then loss) structures both predict 3.7-4.1, so this excludes a saturating yield, not the low-conversion assumption behind cluster 3's transfer (red team 2026-11-03). Shipped B60 engine: 3.95 vs 4.23 (-0.03 dex). (2) 0.11-0.48 % of the furfural (0.46-0.48 % of the H2S) ends as FFT: below 1 %, so formation is rate-limited if FFT survives. (3) Cysteine-over-H2S contrasts at 1 mmol each, 50 mL: FFT from furfural 0.046 (Munch T5 1 / 3), inside the Zheng-thermolysis donor band 0.028-0.075 at pH 5.0-5.34; MFT from NF 0.24 (Hofmann T10), 0.5-0.9 dex above it, so cysteine does more than release H2S on the NF route (reductant or MFT protection). (4) The shipped engine predicts the furfural contrast 0.234 (+0.71 dex; absolute +0.94 dex): it reaches Hofmann's 0.48 % by converting ~all furfural to FFT within ~15 s and destroying ~99 % of it (r_fur_fft_hs + r_fur_fft 19.5 mM, 97.7 % of the furfural; closure 0.1 % on a 20001-point grid; 0.83 vs 2.8 mol % is the fitted pH drift 5.0 -> 5.34 vs a pH-5.0 clamp, the parameter sets are identical). The contrast is governed in the engine by furfural's lifetime in the Cys arm: k_fur_decay x3 gives R 0.023 with Hofmann's 0.48 % unchanged; slow formation with a surviving product gives 0.0055 under the engine's furfural sink. It constrains furfural lifetime x k_cys_h2s x FFT survival jointly and does not discriminate product loss. Closing it via k_cys_h2s needs ~8x (P 0.15); a furfural-Cys adduct at HMF-like rates is negligible (red team, munich_sulfur/redteam.md)."
+      - >-
+        M0 checks batch 2, CK-34 (2026-11-06; results/validation/m0_checks_batch2.md sec. 2): the remedy's proposed H2S
+        vessel partition (Kaw(145 C) 2.18, pK1 6.49, in-situ pH 5.34; phi 0.141 at Vg/Vl 3, 0.330 at 1), applied to
+        every H2S-consuming step, moves Munch's cysteine-over-H2S FFT contrast only from 0.234 to 0.147 - 0.157 (+0.51
+        to +0.53 dex against the measured 0.046; refutation line 0.20 dex); the H2S dose ratio stays in band (3.70 -
+        3.75 vs 4.23). Furfural is fully consumed in both arms. Restoring fed_furfural_h2s_FFT under the partition needs
+        k_fur_fft / k_fur_fft_hs x10^0.84 (~1 / phi), which returns the contrast to +0.71; k_nf_mft's bias is +0.23 dex,
+        not 0.6 - 0.8. The partition is a correct conditions term that the fitted furfural constants already absorb; it
+        does not explain the contrast. Nominated instead: the furfural lifetime in the cysteine arm (k_fur_decay) and FFT
+        survival in the hold, i.e. deciders (ii) and (iii).
     status: open
     remedy: >-
       Explained in part (conditions ~1.1 dex, with the second-order law now checked on Munch's H2S dose); the residual
@@ -1944,6 +1966,12 @@ entries:
       charge 20 mM H2S as fully dissolved, while at Hofmann's Vg/Vl = 3 and 145 C only 15-24 % is dissolved, so
       k_fur_fft_hs and k_nf_mft are biased low by 0.6-0.8 dex against small-headspace pots; add an H2S vessel-partition
       operator (Kaw(T) from henry_constants.yml, Vg/Vl per pot, declared band when unstated).
+      [Amended 2026-11-06 (register pass; M0 checks batch 2, CK-34): the partition does not explain the
+      cysteine-over-H2S contrast. It is a conditions term the fitted furfural constants absorb (x10^0.84, ~1 / phi), so
+      the bias above holds for k_fur_fft / k_fur_fft_hs (0.84 dex) and not for k_nf_mft (+0.23 dex). Carry the operator
+      in any refit that mixes vessels, refitted together with k_mgo_mp and the ribose + H2S route (three in-sample rows
+      shift by more than 1 sigma under it); it is not a stand-alone engine change. The contrast's candidates are the
+      furfural lifetime and FFT survival, decided by (ii) and (iii).]
     affects:
       - hofmann1998_t3_fft_c5_h2s
       - hofmann1998_t4_mft_ribose_nf_h2s
@@ -2582,6 +2610,22 @@ entries:
       pH units and move buffered cysteine pots the wrong way. Use a measured-trajectory operator instead (cluster 3
       sec. 7: invert the cooled charge balance for net acid equivalents where a cooled pH is measured; a class law with
       a leave-one-pot-out band where none is; pass rules cooled-pH RMS <= 0.3 per class and Meynier within 0.2).
+      [Added 2026-11-06 (register pass), two notes. (1) Proposed 2026-11-05 (PR #78, its item 11): the 0.3 and 0.2
+      above (and the 0.3 tolerance in the observation) are round-number thresholds; STATUS_AND_PLAN sec. 7 item 5
+      requires each comparison's tolerance from the measurement's own reported noise, so whoever judges a rival on
+      these controls restates them from Meynier's, Hou's and Zhou's stated pH noise first. (2) M1b part (i) (PR #94;
+      results/validation/kinetic_core_m1b_ph_balance_pentose_steps_prereg.md secs. 18.1 and 20, on that PR's branch
+      until it merges): the v3.6 error term on these controls was a mis-transfer. It applied +-omega corners (omega
+      0.419 dex, H0's between-pot scatter of thiol CONCENTRATIONS) to every produced titratable pool independently,
+      acids up and bases down together. That breaks the stoichiometry the pools share (Meynier's cysteine pots would
+      carry ~98 mM of cysteine carboxyl, 37.6 mM x 2.62, from 50 mM of cysteine charged), and it used a joint worst-case
+      bound as a 1-sd scale: delta-pH 0.4 - 3.8 pH against a meter repeatability of 0.05 pH. Part (i) is closed for
+      shipping ("balance not identified; the measured-trajectory operator stays"). These controls are spent (they
+      nominated every rival), so they can falsify a rival, never credit one. Amendment A1 (v3.7) replaces the term with
+      the measured quantity's own noise: per-point meter noise (r = 0.05 pH; Meynier's drift, a difference of two
+      readings, sqrt(2) r) and, for the unbuffered Amadori controls only, a run-level offset s_off 0.45 pH and a
+      per-point shape term s_shape 0.16 pH from one laboratory's repeat of one design (Zhou 2024 Fig. 3b vs Zhou 2025b
+      Fig. 3d, the AX-ARP-alone pot; CF-060), both scaled x0.5 / x2 as the sensitivity.]
     affects:
       - meynier1995_table3_cys_ribose_ph_ladder
       - zhou2023_fig2_final_ph
@@ -2740,7 +2784,19 @@ entries:
       - "Cysteine dose: Grosch's own dose series (Table III, thiamine 30 umol + ribose 670 umol, Cys 0-2720 umol) peaks at 170-325 umol (Cys : thiamine ~6-11) and falls to 2.0 ug at 2720 umol (~91x), below the cysteine-free 5.2: at Arnold's ratio (~70x) Grosch also sees less thiamine-MFT."
       - "Detection: thiamine-MFT is a small fraction of the thiamine (33 ug MFT = ~0.29 umol, ~1 % of 30 umol), so Grosch's x7 needs only ~1 % of the thiamine to degrade, likely within the resolution of Arnold's colorimetric duplicate assay ('no thiamine lost')."
       - "Time and medium: 30 min in phosphate (Arnold) vs 2 h in pyrophosphate (Grosch)."
-    tests: []
+    tests:
+      - >-
+        M0 checks batch 2, CK-42 and CK-42b (2026-11-06; results/validation/m0_checks_batch2.md sec. 2), engine-free on
+        Grosch Tables II, III, VI, VIII. (1) Cysteine's x7 on thiamine-MFT (Table II no. 4, with no ribose) is not its
+        H2S release: 0.65 mM Cys releases 2.0 - 3.1 uM sulfide in 2 h at 100 C at Zheng & Ho's rate, >= 17x less than
+        the Table VI arm's dissolved sulfide (at its loosest corner, 0.1 % of 26.8 mmol in 500 mL), which gave only x3.2.
+        (2) The dose optimum sits at 170 - 340 umol cysteine at both 30 and 6 umol thiamine: a concentration law, not a
+        Cys : thiamine ratio law (the ratio law puts the 6 umol optimum at 34 - 65 umol, below the first printed point).
+        (3) A total-thiol concentration law built on Table III predicts the GSH pots out of construction within their
+        SDs (no. 7 -0.11 dex, no. 8 +0.11 dex). (4) A first-order cysteine capture cannot make the high-dose fall (its
+        ceiling is the cysteine ratio, x8.37, against x9.5); a second-order term is refuted at the central values and
+        survives only at lambda0 0.035 /min, the lower edge of Table VIII's band. The
+        pH shift from Cys.HCl is -0.13 (retired as the cause).
     status: open
     remedy: >-
       The engine's thiamine route (sulfur.py "THE THIAMINE ROUTE") is first order in thiamine with no cysteine term,
@@ -2748,6 +2804,11 @@ entries:
       measured is on disk, treat the cysteine effect on the thiamine route as dose-dependent and unmodelled: do not fit
       a cysteine-free thiamine constant to cysteine-rich pots without a declared band, and score Grosch's Table III shape
       (optimum then fall) as a directional check, not a level.
+      [Added 2026-11-06 (register pass; M0 checks batch 2, CK-42 / CK-42b): when it is modelled, the cysteine effect
+      on the thiamine route is a factor g(total free thiol) on the thiamine -> MFT steps, with GSH counted as a thiol,
+      not an H2S term and not a Cys : thiamine ratio. Grosch is spent (it nominated the form). Size g by a designed
+      series with thiamine measured and a non-amine thiol arm (e.g. N-acetylcysteine or 2-mercaptoethanol) at the
+      optimum concentration, which separates a thiol role from an amine role.]
     affects:
       - arnold1971_figs2_3_thiamine_loss_ph_time
       - {file: src/kinetic_core/sulfur.py, symbol: "THE THIAMINE ROUTE"}
@@ -3077,6 +3138,14 @@ entries:
       - "Water-phase glucose concentration not proportional to dry-basis glucose (dissolution / glass / moisture shifts at 125 C)."
     tests:
       - "Wolf 1977a findings (docs/history/conflict_resolution_2026-11-01/wolf1977a/findings.md sec. 1; the E centre upheld on the page image by the red team, resolve2_pyrbuf/redteam.md sec. 5)."
+      - >-
+        M0 checks batch 2, CK-56 (2026-11-06; results/validation/m0_checks_batch2.md sec. 2): explanation 1
+        (plateau-capped 80 C end points) is refuted. The plateau-free pair, the measured 105 C phase-one k (0.024 /
+        0.026 /min) and the response surface's 125 C k, gives E 154 - 196 kJ/mol across the four surface readings, above
+        the published 137.7 and far above the engine's 96.8 (by more than four bands). The 80 -> 105 C segment is lower
+        (115 - 126 kJ/mol), so the apparent barrier rises with temperature: the opposite of what a plateau-capped 80 C
+        point would give, and the signature of explanation 3 (water-phase glucose / glass). Explanation 2 alone predicts
+        one E across 80 - 125 C, which the two segments contradict unless the 80 C point is itself biased.
     status: open
     remedy: "Decider: any soy or pea glycation TIME COURSE at >= 3 temperatures, 80 - 130 C, with moisture printed and the plateau excluded from the rate fit. No engine change."
     affects:
@@ -3643,7 +3712,7 @@ entries:
       - "Concentration: Kanzler's 100 mM MGO pots are second-order dominated; the trunk's pots are ~1000x more dilute."
     tests: []
     status: open
-    remedy: "No engine change. Kanzler is a band source for any MGO-sink rival (order and amine dependence measured, Ea apparent). Ledger rows proposed in the kanzler2026 dossier sec. 7, not written. Decider: MGO loss at <= 1 mM with and without an amino acid at three temperatures, pH held."
+    remedy: "No engine change. Kanzler is a band source for any MGO-sink rival (order and amine dependence measured, Ea apparent). Ledger rows proposed in the kanzler2026 dossier sec. 7, not written. Decider: MGO loss at <= 1 mM with and without an amino acid at three temperatures, pH held, in a second laboratory (added 2026-11-06: Kanzler 2021 vs Kanzler 2026 differ by 0.5 dex in the MGO-alone k2 within one laboratory, x3.2, so one more series from that laboratory carries the same between-paper spread)."
     affects:
       - {file: src/kinetic_core/parameters.py, symbol: k_mgo_mel}
       - {file: src/kinetic_core/parameters.py, symbol: FITTED_EA_BOUNDS}

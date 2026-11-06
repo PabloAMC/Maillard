@@ -4,8 +4,8 @@
   "artifact": "incumbent_evidence_tiers",
   "generated_on": "2026-11-06",
   "git": {
-   "commit": "067480323a0fd3b433e36fa8655b8184f29e64cc",
-   "short": "06748032",
+   "commit": "67911f3949d009e6c4fc96ab6a87e100d4526462",
+   "short": "67911f39",
    "branch": "m1b-part-i-build",
    "dirty": true
   },
@@ -65,15 +65,15 @@
    },
    {
     "path": "results/validation/core_prediction_uncertainty.json",
-    "sha256": "b77f94272b0582b076024fd90f12db59738652b9b5c32910bfc2d705c680cdaf"
+    "sha256": "5c2c3c8b9c7dc8a772cce134952fb29a0a7fa7c59e25f47e234aa528ed9ad6c0"
    },
    {
     "path": "results/validation/sulfur_reaction_evidence.json",
-    "sha256": "c11374a5521d36a386027b9de96e3900d39159a9743c58153e799acd7daa39d2"
+    "sha256": "730bdb6cc339a169a35491ef6e5c1d8cd3233dcbb1db6f5b41e737d8d73ba3ce"
    },
    {
     "path": "results/validation/data_wishlist.json",
-    "sha256": "339cc809c024d0ba679867763fc85b64348b78fec91566ef512c100084355846"
+    "sha256": "b7db438fbab3387c3c5416eafbdb3d0555d6aae2445149b3a940c468f2e7a583"
    },
    {
     "path": "docs/reference/unpinned_constants.yml",
@@ -81,7 +81,7 @@
    },
    {
     "path": "docs/reference/conflicts_register.yml",
-    "sha256": "c495b0c9502d01483b9c12fc766361dca7934e86bba9fa7fc6bc8593d9aecc36"
+    "sha256": "9a92dc64e51ad866c65f0708d1ab71bd79f102044cf955d8c920fcd2ed227dc6"
    },
    {
     "path": "docs/reference/choices_register.yml",
@@ -8021,7 +8021,13 @@
     "reason": "unidentified_in_the_fit: sampled across its declared band",
     "note": "the envelope samples the fit's SEARCH bounds: under S4 a search bound is never a band"
    },
-   "conflicts_named": [],
+   "conflicts_named": [
+    {
+     "id": "CF-065",
+     "kind": "conflict",
+     "status": "open"
+    }
+   ],
    "sensitivity": {
     "species_of_its_steps": [
      "FFT",
@@ -8093,7 +8099,13 @@
     "width_dex": 1.556512120610871,
     "reason": "B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIRICAL distribution of the measured barriers of its reaction class, k(145 C) held"
    },
-   "conflicts_named": [],
+   "conflicts_named": [
+    {
+     "id": "CF-065",
+     "kind": "conflict",
+     "status": "open"
+    }
+   ],
    "sensitivity": {
     "species_of_its_steps": [
      "FFT",
@@ -8469,7 +8481,13 @@
     "reason": "laplace_covariance_at_b8_optimum",
     "note": "the envelope samples the fit's SEARCH bounds: under S4 a search bound is never a band"
    },
-   "conflicts_named": [],
+   "conflicts_named": [
+    {
+     "id": "CF-065",
+     "kind": "conflict",
+     "status": "open"
+    }
+   ],
    "sensitivity": {
     "species_of_its_steps": [
      "H2S",
@@ -8541,7 +8559,13 @@
     "width_dex": 1.556512120610871,
     "reason": "B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIRICAL distribution of the measured barriers of its reaction class, k(145 C) held"
    },
-   "conflicts_named": [],
+   "conflicts_named": [
+    {
+     "id": "CF-065",
+     "kind": "conflict",
+     "status": "open"
+    }
+   ],
    "sensitivity": {
     "species_of_its_steps": [
      "H2S",

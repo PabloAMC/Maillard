@@ -4,8 +4,8 @@
   "artifact": "s4_band_sources",
   "generated_on": "2026-11-06",
   "git": {
-   "commit": "067480323a0fd3b433e36fa8655b8184f29e64cc",
-   "short": "06748032",
+   "commit": "67911f3949d009e6c4fc96ab6a87e100d4526462",
+   "short": "67911f39",
    "branch": "m1b-part-i-build",
    "dirty": true
   },
@@ -13,7 +13,7 @@
   "inputs": [
    {
     "path": "results/validation/incumbent_evidence_tiers.json",
-    "sha256": "36fccf874a71167111ef6df51b4f9ed371c163bb97a7d70ed9e83ffc95cbc9c0"
+    "sha256": "1cb645ac376be039bb4a01a9f2d8a3b120495ddba6946a2fd15be3257a20f7cb"
    },
    {
     "path": "src/kinetic_core/ea_class_prior.py",

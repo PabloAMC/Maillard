@@ -4,8 +4,8 @@
     "artifact": "data_wishlist",
     "generated_on": "2026-11-06",
     "git": {
-      "commit": "cb7a888ea9269d1668c1687af64d19f122b2a0c0",
-      "short": "cb7a888e",
+      "commit": "67911f3949d009e6c4fc96ab6a87e100d4526462",
+      "short": "67911f39",
       "branch": "m1b-part-i-build",
       "dirty": true
     },
@@ -13,7 +13,7 @@
     "inputs": [
       {
         "path": "results/validation/core_panel_scores.json",
-        "sha256": "85d525b15fe7944c2405e9771d74a8decfdba39efd10a7d7f8a2209dfdb7c8ed"
+        "sha256": "5ce9814c694e0af2bd79386edc283ac85bff34f1a7a45ae788c434f88a951e8c"
       },
       {
         "path": "results/validation/kinetic_core_b60_profile.json",
@@ -41,7 +41,7 @@
       },
       {
         "path": "docs/reference/decisive_measurements.yml",
-        "sha256": "d3fed4b025409b2f718c98ec9f338359612ace3f3f6151cb9f4e6f1a5ad7416a"
+        "sha256": "57490a4c531ebde0d22145634ecb95041939e65e0a1070c7db108424fbcec89e"
       }
     ]
   },
@@ -951,7 +951,7 @@
   ],
   "what_you_could_predict": [
     {
-      "if_measured": "absolute levels of the thiol lane's observables from a second independent laboratory (for example the pending WUR blind-test samples), re-scored under H0's rule (H0')",
+      "if_measured": "absolute levels of the thiol lane's observables from at least two new independent laboratories (H0's pre-registered trigger, prereg sec. 9; the pending WUR blind-test samples would be one), re-scored under H0's rule (H0')",
       "you_could_predict": "absolute 2-Furfurylthiol (FFT), 2-Methyl-3-furanthiol (MFT), Bis(2-methyl-3-furyl) disulfide, Furfural for a new laboratory, if H0' leaves tau_ABS at or below 0.8 dex (today 0.964, U >= 1.60; D2's branches (ii) / (iii)); 39 panel rows now refused for their absolute level would return to the scorecard"
     },
     {
@@ -1408,7 +1408,7 @@
       "disagreements": [
         {
           "about": "how many new laboratories lift the refusal",
-          "note": "H0's prereg triggers H0' on the first batch that keys >= 2 NEW laboratories with ABS-class rows; the plan's W1.2 row, the engine's refusal text and the wishlist's section 6 say 'a second independent laboratory'. The pre-registered condition is the prereg's; read literally, the one-laboratory wording would trigger H0' a laboratory early."
+          "note": "H0's prereg triggers H0' on the first batch that keys >= 2 NEW laboratories with ABS-class rows; the plan's W1.2 row, the engine's refusal text and the wishlist's section 6 say 'a second independent laboratory'. The pre-registered condition is the prereg's; read literally, the one-laboratory wording would trigger H0' a laboratory early. Aligned 2026-11-06 (register pass): the plan's W1.2 row, the engine's refusal text and short reason, the model card and the wishlist's section 6 now say \"at least two new laboratories\", the prereg's condition."
         }
       ],
       "added": "2026-11-05"
@@ -1451,7 +1451,7 @@
       "disagreements": [
         {
           "about": "whether a second laboratory is part of the decisive design",
-          "note": "CF-122's decider (written before Kanzler 2021 was read) asks for three temperatures but no second laboratory; the M4 sweep sought one (Pfeifer 2013, which proved the same lineage), and Kanzler 2021 shows a 0.5 dex within-laboratory spread in the MGO-alone k2. PR #76 notes that CF-122 will be updated after PR #75 merges."
+          "note": "CF-122's decider (written before Kanzler 2021 was read) asks for three temperatures but no second laboratory; the M4 sweep sought one (Pfeifer 2013, which proved the same lineage), and Kanzler 2021 shows a 0.5 dex within-laboratory spread in the MGO-alone k2. PR #76 notes that CF-122 will be updated after PR #75 merges. Resolved 2026-11-06 (register pass): CF-122's decider now reads \"... pH held, in a second laboratory\"."
         }
       ],
       "added": "2026-11-05"
