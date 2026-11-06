@@ -172,6 +172,18 @@ SOURCE_PINS: Mapping[Tuple[str, str], str] = {
     ('src/kinetic_core/ph_state.py', 'strong_ion_difference'): 'c84701bd17961d7f',
     ('src/kinetic_core/ph_state.py', 'ph_of_state'): '1561f4b9067f1523',
     ('src/kinetic_core/ph_state.py', 'ph_and_ionic_strength_of_state'): 'a4f7d5ae751936f9',
+    ('src/kinetic_core/engine.py', '_integrate_program'): '884a9296c6caec61',
+    ('src/kinetic_core/ph_state.py', '_bisect_ph'): '12224b744f760d13',
+    ('src/kinetic_core/ph_state.py', '_residual_at_fixed_conditions'): 'ea1af468c594b165',
+    ('src/kinetic_core/sulfur.py', 'integrate_sulfur._with_profile_nodes'): '373cfc3f5dbdd4a8',
+    ('src/kinetic_core/sulfur.py', 'integrate_sulfur._node_temperatures'): '31c55785a0d63473',
+    ('src/kinetic_core/sulfur.py', '_trunk_ph_exponents'): '7ac0aca3ff6bdc7a',
+    ('src/kinetic_core/parameters_sulfur.py', 'NfHydroxideDecay.k_ph5'): 'd2ad2e42775f4b8b',
+    ('src/kinetic_core/parameters_sulfur.py', 'PentoseAmineEntry.aa_ph_factor'): 'd809efb1ed12b5aa',
+    ('src/kinetic_core/parameters_sulfur.py', 'CysAmadoriRoute.k_form'): '19206aa91e96245e',
+    ('src/kinetic_core/parameters_sulfur.py', 'CysAmadoriRoute.k_decay_at_ref'): 'b71885158f2c6c42',
+    ('src/kinetic_core/parameters_sulfur.py', 'CysAmadoriRoute.k_decay'): 'b2d77e103a4410ef',
+    ('src/kinetic_core/parameters_sulfur.py', 'CysAmadoriRoute.dpo_share_at'): '865b486820759aa0',
 }
 
 
@@ -187,8 +199,8 @@ def _strip_docstrings(node: ast.AST) -> ast.AST:
     return node
 
 
-def source_hash(path: str, qualname: str) -> str:
-    """sha256 (16 hex) of one function's (or method's) AST, docstrings removed, comments ignored."""
+def _pinned_node(path: str, qualname: str) -> ast.AST:
+    """One function's (or method's, or a function nested in a function's) AST, docstrings removed."""
     tree = ast.parse((ROOT / path).read_text(encoding="utf-8"))
     node: Any = tree
     for part in qualname.split("."):
@@ -197,8 +209,50 @@ def source_hash(path: str, qualname: str) -> str:
         if not found:
             raise KeyError(f"{path}: no {qualname!r}")
         node = found[-1]
-    node = _strip_docstrings(ast.parse(ast.unparse(node)))
+    return _strip_docstrings(ast.parse(ast.unparse(node)))
+
+
+def source_hash(path: str, qualname: str) -> str:
+    """sha256 (16 hex) of one function's (or method's) AST, docstrings removed, comments ignored."""
+    node = _pinned_node(path, qualname)
     return hashlib.sha256(ast.dump(node, annotate_fields=True, include_attributes=False).encode()).hexdigest()[:16]
+
+
+def pinned_source(path: str, qualname: str) -> str:
+    """The pinned function as source (``ast.unparse``, docstrings removed): what ``PINNED_SOURCE_FILE`` stores, so a
+    failing pin prints a diff of the logic that moved."""
+    return ast.unparse(_pinned_node(path, qualname))
+
+
+#: the unparsed source of every pinned function at its pin (written by ``write_pinned_sources``; JSON, not data/)
+PINNED_SOURCE_FILE = Path(__file__).with_name("sulfur_structure_pins.json")
+
+
+def write_pinned_sources() -> Path:
+    """Record the current source of every pinned function (run ONLY when re-pinning, with SOURCE_PINS updated in the
+    same edit): ``python -m src.kinetic_core_jax.sulfur_structure --write-pins``."""
+    import json
+
+    record = {f"{p}::{q}": {"hash": source_hash(p, q), "source": pinned_source(p, q)} for p, q in PINNED_FUNCTIONS}
+    PINNED_SOURCE_FILE.write_text(json.dumps(record, indent=1, sort_keys=True) + "\n", encoding="utf-8")
+    return PINNED_SOURCE_FILE
+
+
+def pin_diff(path: str, qualname: str, max_lines: int = 60) -> str:
+    """A unified diff from the recorded source of a pinned function to its source now ('' when none is recorded)."""
+    import difflib
+    import json
+
+    if not PINNED_SOURCE_FILE.exists():
+        return ""
+    entry = json.loads(PINNED_SOURCE_FILE.read_text(encoding="utf-8")).get(f"{path}::{qualname}")
+    if entry is None:
+        return ""
+    lines = list(difflib.unified_diff(entry["source"].splitlines(), pinned_source(path, qualname).splitlines(),
+                                      fromfile=f"pinned {qualname}", tofile=f"now {qualname}", lineterm=""))
+    if len(lines) > max_lines:
+        lines = lines[:max_lines] + [f"... ({len(lines) - max_lines} more lines)"]
+    return "\n".join(lines)
 
 
 #: the engine functions whose LOGIC the port re-implements (everything else it reads as data)
@@ -246,6 +300,20 @@ PINNED_FUNCTIONS: Tuple[Tuple[str, str], ...] = (
     ("src/kinetic_core/ph_state.py", "strong_ion_difference"),
     ("src/kinetic_core/ph_state.py", "ph_of_state"),
     ("src/kinetic_core/ph_state.py", "ph_and_ionic_strength_of_state"),
+    # (2026-11-06, review of PR #93) the pot prelude, the root's own bisection and residual, the profile node grid
+    # and node temperatures, the trunk pH exponents, and the off-route constants the port refuses on
+    ("src/kinetic_core/engine.py", "_integrate_program"),
+    ("src/kinetic_core/ph_state.py", "_bisect_ph"),
+    ("src/kinetic_core/ph_state.py", "_residual_at_fixed_conditions"),
+    ("src/kinetic_core/sulfur.py", "integrate_sulfur._with_profile_nodes"),
+    ("src/kinetic_core/sulfur.py", "integrate_sulfur._node_temperatures"),
+    ("src/kinetic_core/sulfur.py", "_trunk_ph_exponents"),
+    ("src/kinetic_core/parameters_sulfur.py", "NfHydroxideDecay.k_ph5"),
+    ("src/kinetic_core/parameters_sulfur.py", "PentoseAmineEntry.aa_ph_factor"),
+    ("src/kinetic_core/parameters_sulfur.py", "CysAmadoriRoute.k_form"),
+    ("src/kinetic_core/parameters_sulfur.py", "CysAmadoriRoute.k_decay_at_ref"),
+    ("src/kinetic_core/parameters_sulfur.py", "CysAmadoriRoute.k_decay"),
+    ("src/kinetic_core/parameters_sulfur.py", "CysAmadoriRoute.dpo_share_at"),
 )
 
 
@@ -410,8 +478,24 @@ def structure_problems(*, numeric: bool = True) -> List[str]:
                    f"{SHIPPED_HELD_DIGEST}): {HELD}")
     for key, pin in current_pins().items():
         if SOURCE_PINS.get(key) != pin:
-            out.append(f"{key[0]}::{key[1]} changed (AST {pin}, pinned {SOURCE_PINS.get(key)})")
+            diff = pin_diff(*key)
+            out.append(f"{key[0]}::{key[1]} changed (AST {pin}, pinned {SOURCE_PINS.get(key)})"
+                       + (f"\n{diff}\n" if diff else ""))
     return [f"{p} -- {UPDATE}" for p in out]
+
+
+if __name__ == "__main__":
+    import sys
+
+    if sys.argv[1:] == ["--write-pins"]:
+        missing = {k: source_hash(*k) for k in PINNED_FUNCTIONS if SOURCE_PINS.get(k) != source_hash(*k)}
+        if missing:
+            print("update SOURCE_PINS first (and the JAX lane):\n" + "\n".join(f"    {k!r}: {v!r}," for k, v in
+                                                                         missing.items()))
+            sys.exit(1)
+        print(f"wrote {write_pinned_sources()}")
+    else:
+        print("usage: python -m src.kinetic_core_jax.sulfur_structure --write-pins")
 
 
 def nan_safe(value) -> float:

@@ -1,17 +1,22 @@
 """
 src/kinetic_core_jax/sulfur_lane.py -- the sulfur lane (``sulfur.FULL_REACTIONS``: the trunk's 26 steps, the fed
-3-deoxy triangle and the 103 sulfur steps; 62 species) as an A2 contract module, with its dynamic pH (plan step
-A2 + H3, docs/guides/A2_MODULE_CONTRACT.md v2.2 sec. 6.2.2; 2026-11-05). The last lane of A2 + H3.
+3-deoxy triangle and the 103 sulfur steps; 62 species) as A2 contract modules, with its dynamic pH (plan step
+A2 + H3, docs/guides/A2_MODULE_CONTRACT.md v2.3 sec. 6.2.2; 2026-11-05, onto the network's own pH solve 2026-11-06).
 
-    lane = sulfur_lane.build(cfg)                    # Module + Network + charge balance + the Config's pH numerics
+    lane = sulfur_lane.build(cfg)                    # ONE module "sulfur" + its Network (the parity form)
+    lane = sulfur_lane.build_composed(cfg)           # the SAME lane as three composed modules (sec. 6.2.2)
     pot = sulfur_lane.make_pot(lane, initial, process)   # the engine's sulfur prelude, nodes, SID inputs
-    run = sulfur_lane.integrate(lane, theta, pot)        # the engine's pH coupling, in JAX
+    run = sulfur_lane.integrate(lane, theta, pot)        # = network.integrate(lane.network, ...).ph
 
-ONE MODULE, NOT THREE. The engine's sulfur lane is one recipe with its OWN copy of the trunk (its 26 steps run on
-``core_parameters("sulfur")``, under ``sulfur_rate_constants_at``'s generic rule, beside the lane's pH machinery), so
-the port is one module, ``sulfur``, owning all 62 species. Composing it with ``trunk`` / ``fed_3deoxy`` (one owner per
-species: Glc, Gly, MGO, ..., DGAL) is A2b's union network, which changes numbers and is judged by evidence
-(contract sec. 6.3), not by identity with this lane.
+TWO FORMS, ONE CODE PATH. The engine's sulfur lane is one recipe with its OWN copy of the trunk (its 26 steps run on
+``core_parameters("sulfur")``, under ``sulfur_rate_constants_at``'s generic rule, beside the lane's pH machinery).
+``build`` ports it as one module, ``sulfur``, owning all 62 species (PR #83's form; the parity test runs it).
+``build_composed`` builds the same reactions as three modules -- ``sulfur_trunk`` (the trunk's 26 steps under the
+lane's rule; owns Glc, Gly, FA, AA, ...), ``sulfur_fed_3deoxy`` (3 steps; owns DGAL) and ``sulfur`` (103 steps; owns
+the rest, declares its consumption of the trunk's species and the lane's whole titratable table) -- composed by
+``network.compose`` with declared competition refused. Both forms come from ``_block_module``, so their rate constants
+are the same arithmetic. Composing ``sulfur`` with the DECLARED-pH trunk (``trunk.py``, the acrylamide lane's) is
+A2b's union network, which changes numbers; ``compose`` refuses it (two pH conventions in one ``RateCtx.ph_label``).
 
 DERIVED, NEVER RETYPED (``sulfur_structure.derive`` and ``build``; an edit to the engine's data carries over):
 species and C / N / S, the 132 reactions in FULL_REACTIONS order, stoichiometry and mass-action orders, each
@@ -20,10 +25,11 @@ reaction's parameter key and pH-factor kind (``REACTION_PH_FACTOR``), every para
 (``parameters_furanic.TEMPERATURE_CAP_K``), the gas constant, the speciation pK tables (``PKA_GKL_CYSTEINE``,
 ``PKA_REFERENCE_T_K``, ``PH_NORMALISATION``), Zheng & Ho's cysteine set and its mechanism boundary, the glutathione
 refit, the thiamine share points and floor, Stack's adduct equilibrium and dH, the Amadori split, the titratable
-groups (pK, dH, dCp, z_max) of ``ph_state`` and the buffer groups (from ``BufferSpec.groups``), the water density and
-pKw tables, the label temperature, the pot prelude's constants (``OX_AMBIENT_MMOL_L``, ``oxygen_reservoir_units``,
-the matrix sites), the drift calibration (``engine.core_ph_drift``) and ``integrate_sulfur``'s node and sweep
-defaults (read off its signature).
+groups (pK, dH, dCp, z_max) of ``ph_state`` and the buffer groups (from ``BufferSpec.groups``), their centres
+(``ph_state.TITRATABLE_CENTRES``) and the lane's ``sulfur.CENTRE_LEDGER``, the water density and pKw tables, the label
+temperature, the pot prelude's constants (``OX_AMBIENT_MMOL_L``, ``oxygen_reservoir_units``, the matrix sites), the
+drift calibration (``engine.core_ph_drift``) and ``integrate_sulfur``'s node and sweep defaults (read off its
+signature).
 
 HAND-PORTED (each pinned: ``sulfur_structure.SOURCE_PINS`` hashes the engine function's AST, and
 tests/scientific/test_jax_sulfur_parity.py compares the numbers):
@@ -33,39 +39,29 @@ tests/scientific/test_jax_sulfur_parity.py compares the numbers):
 * the derived constants (``sulfur_structure.HAND_PORTED``): Zheng & Ho's cysteine and glutathione thermolysis on the
   label-scale pH, the thiamine H2S share (B50), the thioether release k_forward / K_adduct(T), the Amadori pin; and
   the 21 steps the shipped configuration holds at zero (their routes are off; the port refuses them on);
-* the charge balance (``ph_state.titratable_inventory`` as a linear map of the state; ``_charge_residual``,
-  ``ionic_strength_of``, ``strong_ion_difference``), solved for (pH, I) by bisection then Newton, differentiated by
-  the implicit-function theorem (the bake-off's solver, ``model.make_ph_solver``, with the drift's pK a coordinate);
-* the pH COUPLING of ``integrate_sulfur``: "fixed_point_nodes" (shipped: rate vectors at ~81 nodes, piecewise linear
-  in time between them, the pH recomputed from the states at the nodes and relaxed, sweep after sweep, with the
-  engine's stopping rule) and "inline" (the charge balance inside the right-hand side), the node grids
-  (``ph_node_times``, ``profile_node_times``), the clamped pH (a ``BufferSpec("clamped")``), the SID carried across
-  segments (B51), and a recorded temperature PROFILE (B64: one integration, nodes every ``profile_node_step_k``);
+* the titratable inventory (``ph_state.titratable_inventory``) as ``network.Titratable`` pools: the organic-acid mix
+  fed by CBX at full strength and by ACID x the ``acid_yield`` coordinate, FA, AA, cysteine, the ARP class (ARP and
+  CAMA, its amine pK the ``arp_amine_pka`` coordinate), TTCA, and the buffer groups as pot-supplied pools. The charge
+  balance, its (pH, I) root, the couplings ("fixed_point_nodes", shipped, and "inline"), the clamped pH and the node
+  grids are the NETWORK's (``ph_coupling``), moved there from this file unchanged;
 * the engine's sulfur prelude of ``_integrate_program`` (ambient OX, the protein disulfide pool, the headspace
   reservoir, OXV, MET / PRO / PYRL recorded and dropped).
 
 THE COORDINATES (``Module.params``): ``log10_k:<key>`` (log10 of k_ref at its T_ref) or, where the engine carries the
 key at exactly zero, a LINEAR ``k_ref:<key>``; ``ea:<key>`` where the key has an Ea (a held, Ea-less key has none);
-and the drift's ``acid_yield`` and ``arp_amine_pka`` (``engine.core_ph_drift``), which enter the charge balance.
+and the drift's ``acid_yield`` and ``arp_amine_pka`` (``engine.core_ph_drift``), which enter the charge balance only.
 
 SWITCHES (``sulfur_structure.CONFIG_HANDLING``): the pH numerics are ported at every value; every rival route, B51
 off, the trunk pH terms and the trunk solutes in the balance are HELD at their shipped values and refused otherwise
 (they stay NumPy-only while M1b(i) / M1c reshape them). A pot-level ``ph_drift`` and a prescribed pH line (no drift)
 are refused at the pot.
-
-DIFFERENTIATION. The fixed point's sweep loop is a ``lax.while_loop`` (forward mode and ``vmap``) or, with
-``reverse=True``, a ``lax.scan`` over ``max_sweeps`` whose finished sweeps are skipped by ``lax.cond`` (reverse mode,
-``jax.grad``). The sweep count is the engine's discrete stopping rule; a perturbation that changes it is a jump the
-derivative does not see (the run reports the count). ``network.integrate`` still refuses a pH network: the merged
-titratable table (``Module.titratables``) cannot yet carry this inventory's dH / dCp / acid yield, so the pH solver
-lives here until the charge-closure step moves it there.
 """
 from __future__ import annotations
 
 import inspect
 import math
 from dataclasses import dataclass
-from typing import Any, Dict, List, Mapping, NamedTuple, Optional, Sequence, Tuple
+from typing import Any, Dict, List, Mapping, Optional, Sequence, Tuple
 
 import jax
 import jax.numpy as jnp
@@ -73,46 +69,31 @@ import numpy as np
 
 jax.config.update("jax_enable_x64", True)
 
+from . import ph_coupling  # noqa: E402
 from . import sulfur_structure as structure  # noqa: E402
 from .lane import UnsupportedConfiguration  # noqa: E402
-from .network import CELSIUS, Module, Network, RateCtx, compose, mass_action  # noqa: E402
+from .network import CELSIUS, Module, Network, RateCtx, Titratable, compose  # noqa: E402
+from .ph_coupling import (COUPLINGS, FIXED_POINTS, FIXED_SWEEPS_STOP, NODE_GRIDS, PhModel, PhRun,  # noqa: E402,F401
+                          PhSolver, davies, davies_a, jump_grid, node_times, pk_at)
 from .trunk import observables_for  # noqa: E402
 
 NAME = structure.NAME
+#: the composed form's modules, in order (each requires the ones before it)
+COMPOSED = ("sulfur_trunk", "sulfur_fed_3deoxy", NAME)
 #: parameters_sulfur.ph_factor's kinds as integer codes (0 = no factor)
 KIND_CODES = {"": 0, "acid": 1, "base": 2, "neutral_h2s": 3, "hs_anion": 4, "thiolate": 5, "hydroxide": 6}
 DRIFT_COORDINATES = ("acid_yield", "arp_amine_pka")
-LN10 = math.log(10.0)
-PAD_PK = 1.0e3          # a padded protonation step that never ionises
-GROUP_WIDTH = 4
-BISECTION_STEPS = 14    # (-1, 15) to 1e-3 pH, then Newton (the bake-off's solve)
-NEWTON_STEPS = 6
-SID_SWEEPS = 60
-COUPLINGS = ("fixed_point_nodes", "inline")
-NODE_GRIDS = ("uniform", "log_and_linear")
-FIXED_POINTS = ("relaxed_converged", "fixed_sweeps")
-#: integrate_sulfur's stopping threshold under "fixed_sweeps" (a literal in its loop; pinned through its AST)
-FIXED_SWEEPS_STOP = 1e-4
+#: the hand-ported terms that read another reaction's constant: term -> the reactions it reads (same module only)
+TERM_READS = {"r_thi_h2s": ("r_thi_hmp", "r_thi_mesh"), "ch_thioether_release": ("ch_thioether_mft",),
+              "ch_thioether_release_fft": ("ch_thioether_fft",), "r_amadori": ("r_schiff",),
+              "r_cys_h2s": (), "r_gsh_h2s": ()}
+#: PR #83's name for the pH numerics (now the network's PhModel)
+Settings = PhModel
+SulfurRun = PhRun
 
 
 # --------------------------------------------------------------------------- the Config
-@dataclass(frozen=True)
-class Settings:
-    """The pH numerics a Config sets (every value ported), and integrate_sulfur's own defaults."""
-
-    coupling: str
-    node_grid: str
-    fixed_point: str
-    relaxation: float
-    tolerance: float
-    max_sweeps: int
-    flag: float
-    profile_node_step_k: float
-    ph_nodes: int
-    ph_iterations: int
-
-
-def config_values(cfg=None) -> Tuple[Settings, str]:
+def config_values(cfg=None) -> Tuple[Dict[str, Any], str]:
     """The Config's pH numerics, after refusing every held key away from its shipped value (in the Config AND in the
     process, whose engine tables and ``core_parameters`` the build reads)."""
     from src.kinetic_core import config, sulfur
@@ -128,62 +109,59 @@ def config_values(cfg=None) -> Tuple[Settings, str]:
             raise UnsupportedConfiguration(f"{key}: the process has {here[key]!r} installed, and the build reads the "
                                            "engine's tables and core_parameters in-process; build in a shipped process")
     defaults = inspect.signature(sulfur.integrate_sulfur).parameters
-    s = Settings(coupling=str(cfg["ph.coupling"]), node_grid=str(cfg["ph.node_grid"]),
-                 fixed_point=str(cfg["ph.fixed_point"]), relaxation=float(cfg["ph.fixed_point.relaxation"]),
-                 tolerance=float(cfg["ph.fixed_point.tolerance"]), max_sweeps=int(cfg["ph.fixed_point.max_sweeps"]),
-                 flag=float(cfg["ph.fixed_point.flag"]), profile_node_step_k=float(cfg["sulfur.profile_node_step_k"]),
-                 ph_nodes=int(defaults["ph_nodes"].default), ph_iterations=int(defaults["ph_iterations"].default))
-    for value, allowed in ((s.coupling, COUPLINGS), (s.node_grid, NODE_GRIDS), (s.fixed_point, FIXED_POINTS)):
+    s = dict(coupling=str(cfg["ph.coupling"]), node_grid=str(cfg["ph.node_grid"]),
+             fixed_point=str(cfg["ph.fixed_point"]), relaxation=float(cfg["ph.fixed_point.relaxation"]),
+             tolerance=float(cfg["ph.fixed_point.tolerance"]), max_sweeps=int(cfg["ph.fixed_point.max_sweeps"]),
+             flag=float(cfg["ph.fixed_point.flag"]), profile_node_step_k=float(cfg["sulfur.profile_node_step_k"]),
+             ph_nodes=int(defaults["ph_nodes"].default), ph_iterations=int(defaults["ph_iterations"].default))
+    for value, allowed in ((s["coupling"], COUPLINGS), (s["node_grid"], NODE_GRIDS), (s["fixed_point"], FIXED_POINTS)):
         if value not in allowed:
             raise UnsupportedConfiguration(f"{value!r}: not one of {allowed}")
     return s, cfg.digest()
 
 
-# --------------------------------------------------------------------------- the charge balance (static half)
-@dataclass(frozen=True)
-class ChargeBalance:
-    """``ph_state.titratable_inventory`` as a linear map of the state: per titratable group (row), its pK / dH / dCp
-    at 25 C (padded to GROUP_WIDTH steps), z_max, its mmol/L per mmol/L of each species (``weights``; the lumped acid
-    pool's share in ``acid_weights``, scaled by the ``acid_yield`` coordinate), where the ``arp_amine_pka`` coordinate
-    sits (``arp_slot``), and the buffer's own rows (``buffer_rows``: group key -> row; the pot's mmol/L)."""
-
-    names: Tuple[str, ...]
-    pk25: np.ndarray
-    dh: np.ndarray
-    dcp: np.ndarray
-    zmax: np.ndarray
-    weights: np.ndarray
-    acid_weights: np.ndarray
-    arp_slot: np.ndarray
-    buffer_rows: Mapping[str, int]
-    const: Mapping[str, Any]
-
-    def buffer_vector(self, spec) -> np.ndarray:
-        out = np.zeros(len(self.names))
-        for group, mmol in spec.groups():
-            out[self.buffer_rows[group.key]] += float(mmol)
-        return out
-
-
-def _charge_balance(index: Mapping[str, int]) -> ChargeBalance:
+def ph_model(cfg=None) -> PhModel:
+    """The network's PhModel for this lane: the Config's numerics and ``ph_state``'s solvent tables."""
     from src.kinetic_core import ph_state as ph
 
-    n = len(index)
-    rows: Dict[Any, List[Any]] = {}
+    numerics, _ = config_values(cfg)
+    return PhModel(**numerics, r_kj=float(ph.R_KJ), pka_ref_t_k=float(ph.PKA_REFERENCE_T_K),
+                   label_t_k=float(ph.LABEL_TEMPERATURE_K),
+                   pkw_table_k=tuple(c + CELSIUS for c, _ in ph.PKW_TABLE_C),
+                   pkw_table=tuple(p for _, p in ph.PKW_TABLE_C),
+                   rho_table_c=tuple(c for c, _ in ph._WATER_DENSITY_C),
+                   rho_table=tuple(r for _, r in ph._WATER_DENSITY_C),
+                   basis="ph_state (R, PKA_REFERENCE_T_K, LABEL_TEMPERATURE_K, PKW_TABLE_C, _WATER_DENSITY_C); the "
+                         "Config's ph.* keys; integrate_sulfur's ph_nodes / ph_iterations defaults")
 
-    def row(key, group):
-        if key not in rows:
-            rows[key] = [group, np.zeros(n), np.zeros(n)]
-        return rows[key]
+
+# --------------------------------------------------------------------------- the titratable table
+def titratables() -> Tuple[Titratable, ...]:
+    """``ph_state.titratable_inventory`` at the shipped configuration as pools, in the order the engine sums them
+    (the organic-acid mix, formic and acetic, cysteine, the ARP class, TTCA; then every buffer group a
+    ``BufferSpec`` can carry, pot-supplied). The ARP class's amine pK is the ``arp_amine_pka`` coordinate; the lumped
+    acid pool enters at ``acid_yield`` per mmol. Centres per unit of pool from ``ph_state.TITRATABLE_CENTRES``."""
+    from src.kinetic_core import ph_state as ph
+
+    pools: Dict[Any, Dict[str, Any]] = {}
+
+    def pool(group, key=None, **extra):
+        k = key or group
+        if k not in pools:
+            pools[k] = {"group": group, "weights": {}, "yield": {}, **extra}
+        return pools[k]
 
     def add(group, species, weight=0.0, acid=0.0):
-        r = row(("solute", group), group)
-        r[1][index[species]] += weight
-        r[2][index[species]] += acid
+        p = pool(group)
+        if weight:
+            p["weights"][species] = p["weights"].get(species, 0.0) + float(weight)
+        if acid:
+            p["yield"][species] = p["yield"].get(species, 0.0) + float(acid)
+        p.setdefault("species", []).append(species)
 
     for group, share in ph.ORGANIC_ACID_MIX:           # the lumped pool (x acid yield) and the carried carboxyls
-        add(group, "ACID", acid=float(share))
-        add(group, "CBX", weight=float(share))
+        add(group, "ACID", acid=share)
+        add(group, "CBX", weight=share)
     add(ph.FORMIC, "FA", 1.0)
     add(ph.ACETIC, "AA", 1.0)
     add(ph.cysteine_group(), "Cys", 1.0)
@@ -195,195 +173,50 @@ def _charge_balance(index: Mapping[str, int]) -> ChargeBalance:
     add(template, "ARP", 1.0)
     add(template, "CAMA", 1.0)
     add(ph.TTCA_GROUP, "TTCA", 1.0)
-    buffer_rows: Dict[str, int] = {}
-    kinds = [k for k in ph.BufferSpec._KINDS if k not in ("none", "clamped")]
-    for kind in kinds:
+    out: List[Titratable] = []
+    for p in pools.values():
+        g = p["group"]
+        centres = [dict(ph.TITRATABLE_CENTRES.get(s, {})) for s in p["species"]]
+        if any(c != centres[0] for c in centres):
+            raise UnsupportedConfiguration(f"pool {g.key}: its species carry different centres {centres}")
+        k = len(g.pkas)
+        out.append(Titratable(
+            species=g.key, pka_25c=tuple(float(x) for x in g.pkas),
+            charges=tuple(float(g.z_max) - i for i in range(k + 1)), basis=f"ph_state {g.key}: {g.source}"[:200],
+            dh_kj_mol=tuple(float(x) for x in g.delta_h_kj_mol),
+            dcp_j_mol_k=tuple(float(x) for x in (g.delta_cp_j_mol_k or (0.0,) * k)),
+            weights=dict(p["weights"]), yield_weights=dict(p["yield"]) or None,
+            yield_coordinate="acid_yield" if p["yield"] else None,
+            pka_coordinates=tuple("arp_amine_pka" if (g.key == template.key and i == slots[0]) else None
+                                  for i in range(k)),
+            centres={kk: float(v) for kk, v in centres[0].items()}))
+    seen = set()
+    for kind in [k for k in ph.BufferSpec._KINDS if k not in ("none", "clamped")]:
         spec = ph.BufferSpec(kind=kind, phosphate_mol_l=1.0, citrate_mol_l=1.0, acetate_mol_l=1.0,
                              pyrophosphate_mol_l=1.0, phthalate_mol_l=1.0)
-        for group, _ in spec.groups():
-            row(("buffer", group.key), group)
-    keys = list(rows)
-    names, g = [], len(keys)
-    pk = np.full((g, GROUP_WIDTH), PAD_PK)
-    dh = np.zeros((g, GROUP_WIDTH))
-    dcp = np.zeros((g, GROUP_WIDTH))
-    zmax = np.zeros(g)
-    w = np.zeros((g, n))
-    wa = np.zeros((g, n))
-    arp = np.zeros((g, GROUP_WIDTH), dtype=bool)
-    for r, key in enumerate(keys):
-        group, weights, acid = rows[key]
-        k = len(group.pkas)
-        if k > GROUP_WIDTH:
-            raise UnsupportedConfiguration(f"group {group.key} has {k} protonation steps")
-        pk[r, :k] = group.pkas
-        dh[r, :k] = group.delta_h_kj_mol
-        dcp[r, :k] = group.delta_cp_j_mol_k or (0.0,) * k
-        zmax[r] = float(group.z_max)
-        w[r], wa[r] = weights, acid
-        if key[0] == "buffer":
-            buffer_rows[key[1]] = r
-            names.append(f"buffer_{key[1]}")
-        else:
-            names.append(group.key)
-            if group.key == template.key:
-                arp[r, slots[0]] = True
-    const = {"R_KJ": float(ph.R_KJ), "pka_ref_t_k": float(ph.PKA_REFERENCE_T_K),
-             "label_t_k": float(ph.LABEL_TEMPERATURE_K),
-             "pkw_table_k": tuple(c + CELSIUS for c, _ in ph.PKW_TABLE_C), "pkw_table": tuple(p for _, p in ph.PKW_TABLE_C),
-             "rho_table_c": tuple(c for c, _ in ph._WATER_DENSITY_C), "rho_table": tuple(r for _, r in ph._WATER_DENSITY_C)}
-    return ChargeBalance(names=tuple(names), pk25=pk, dh=dh, dcp=dcp, zmax=zmax, weights=w, acid_weights=wa,
-                         arp_slot=arp, buffer_rows=buffer_rows, const=const)
-
-
-# --------------------------------------------------------------------------- the charge balance (JAX)
-def pk_at(pk25, dh, dcp, t_k, r_kj, t0):
-    """ph_state.pk_at with B51's heat-capacity term."""
-    out = pk25 + dh / (r_kj * LN10) * (1.0 / t_k - 1.0 / t0)
-    return out - (1e-3 * dcp / (r_kj * LN10)) * (jnp.log(t_k / t0) + t0 / t_k - 1.0)
-
-
-def davies_a(t_k, c):
-    t_c = t_k - CELSIUS
-    eps = 87.740 - 0.40008 * t_c + 9.398e-4 * t_c ** 2 - 1.410e-6 * t_c ** 3
-    rho = jnp.interp(t_c, jnp.asarray(c["rho_table_c"]), jnp.asarray(c["rho_table"]))
-    return 1.82483e6 * jnp.sqrt(rho) / (eps * t_k) ** 1.5
-
-
-def davies(ionic_m, a):
-    safe = jnp.maximum(ionic_m, 1e-300)
-    s = jnp.sqrt(safe)
-    return jnp.where(ionic_m > 0.0, a * (s / (1.0 + s) - 0.3 * safe), 0.0)
-
-
-def pkw_at(t_k, c):
-    x = 1.0 / jnp.asarray(c["pkw_table_k"])[::-1]
-    return jnp.interp(1.0 / t_k, x, jnp.asarray(c["pkw_table"])[::-1])
-
-
-class PhSolver:
-    """(pH, I) of an inventory at (T, SID): bisection at I = 0, one ionic sweep, Newton on the coupled (pH, I); the
-    derivative by the implicit function (a 2 x 2 solve), so forward and reverse mode both see the exact root."""
-
-    def __init__(self, balance: ChargeBalance):
-        self.b = balance
-        # numpy only: a jnp array made here (inside a trace) would be a tracer the custom JVP closes over
-        self.zmax = np.asarray(balance.zmax, dtype=float)
-        c = balance.const
-
-        @jax.custom_jvp
-        def solve_tt(tt, sid, conc):
-            return self._forward(jax.lax.stop_gradient(tt), jax.lax.stop_gradient(sid), jax.lax.stop_gradient(conc))
-
-        @solve_tt.defjvp
-        def _jvp(primals, tangents):
-            tt, sid, conc = primals
-            u = solve_tt(tt, sid, conc)
-            jac_u = jax.jacfwd(lambda uu: self._equations(uu, tt, sid, conc))(u)
-            _, d_f = jax.jvp(lambda t, s, cc: self._equations(u, t, s, cc), (tt, sid, conc), tangents)
-            return u, -jnp.linalg.solve(jac_u, d_f)
-
-        self._solve_tt = solve_tt
-        self.c = c
-
-    def pk25(self, theta):
-        return jnp.where(jnp.asarray(self.b.arp_slot), theta["arp_amine_pka"], jnp.asarray(self.b.pk25))
-
-    def temperature_terms(self, t_k, pk25):
-        c = self.c
-        pk0 = pk_at(pk25, jnp.asarray(self.b.dh), jnp.asarray(self.b.dcp), t_k, c["R_KJ"], c["pka_ref_t_k"])
-        return {"pk0": pk0, "pkw": pkw_at(t_k, c), "a": davies_a(t_k, c)}
-
-    def _group_pk(self, ionic_m, tt):
-        af = davies(ionic_m, tt["a"])
-        return tt["pk0"] + af * (2.0 * (jnp.asarray(self.zmax)[:, None] - jnp.arange(float(GROUP_WIDTH))) - 1.0), af
-
-    def _group_terms(self, ph, pk):
-        log_w = jnp.concatenate([jnp.zeros((pk.shape[0], 1)), jnp.cumsum(ph - pk, axis=1)], axis=1)
-        w = 10.0 ** (log_w - jnp.max(log_w, axis=1, keepdims=True))
-        w = w / jnp.sum(w, axis=1, keepdims=True)
-        i = jnp.arange(GROUP_WIDTH + 1.0)
-        z = jnp.asarray(self.zmax)
-        return z - jnp.sum(i * w, axis=1), jnp.sum(w * (z[:, None] - i) ** 2, axis=1)
-
-    def _residual_given(self, ph, pk, af, pkw, sid, conc):
-        charge, ionic = self._group_terms(ph, pk)
-        inv_g = 10.0 ** af
-        h = 1000.0 * 10.0 ** (-ph) * inv_g
-        oh = 1000.0 * 10.0 ** (ph - pkw) * inv_g
-        res = sid + h - oh + jnp.sum(conc * charge)
-        i_new = 0.5 * (jnp.abs(sid) + h + oh + jnp.sum(conc * ionic)) / 1000.0
-        return res, i_new
-
-    def residual(self, ph, ionic_m, tt, sid, conc):
-        """SID + [H+] - [OH-] + SUM c z (mmol/L) and the ionic strength it implies (mol/L)."""
-        pk, af = self._group_pk(ionic_m, tt)
-        return self._residual_given(ph, pk, af, tt["pkw"], sid, conc)
-
-    def _equations(self, u, tt, sid, conc):
-        res, i_new = self.residual(u[0], u[1], tt, sid, conc)
-        return jnp.stack([res, u[1] - i_new])
-
-    def _forward(self, tt, sid, conc):
-        pk, af = self._group_pk(0.0, tt)
-
-        def bisect(_, bounds):
-            lo, hi = bounds
-            mid = 0.5 * (lo + hi)
-            up = self._residual_given(mid, pk, af, tt["pkw"], sid, conc)[0] > 0.0
-            return jnp.where(up, mid, lo), jnp.where(up, hi, mid)
-
-        lo, hi = jax.lax.fori_loop(0, BISECTION_STEPS, bisect, (jnp.asarray(-1.0), jnp.asarray(15.0)))
-        ph0 = 0.5 * (lo + hi)
-        u = jnp.stack([ph0, self.residual(ph0, 0.0, tt, sid, conc)[1]])
-
-        def newton(_, u):
-            f = self._equations(u, tt, sid, conc)
-            jac = jax.jacfwd(lambda uu: self._equations(uu, tt, sid, conc))(u)
-            step = jnp.linalg.solve(jac, f)
-            return jnp.stack([u[0] - jnp.clip(step[0], -1.0, 1.0), jnp.maximum(u[1] - step[1], 0.1 * u[1])])
-
-        return jax.lax.fori_loop(0, NEWTON_STEPS, newton, u)
-
-    def solve(self, t_k, sid, conc, pk25):
-        """(pH, I) at ``t_k``."""
-        return self._solve_tt(self.temperature_terms(t_k, pk25), sid, conc)
-
-    def inventory(self, y, theta, buffer):
-        w = jnp.asarray(self.b.weights) + theta["acid_yield"] * jnp.asarray(self.b.acid_weights)
-        return w @ jnp.maximum(y, 0.0) + buffer
-
-    def state(self, y, t_k, sid, theta, buffer):
-        """(in-situ pH, I, cooled label pH) of a state: the engine's ``_node_state``."""
-        conc = self.inventory(y, theta, buffer)
-        pk25 = self.pk25(theta)
-        hot = self.solve(t_k, sid, conc, pk25)
-        cool = self.solve(jnp.asarray(self.c["label_t_k"]), sid, conc, pk25)
-        return hot[0], hot[1], cool[0]
-
-    def strong_ion_difference(self, label_ph, y0, theta, buffer):
-        """ph_state.strong_ion_difference: the SID that balances the declared label pH at 25 C, I solved with it."""
-        conc = self.inventory(y0, theta, buffer)
-        tt = self.temperature_terms(jnp.asarray(self.c["label_t_k"]), self.pk25(theta))
-        sid = -self.residual(label_ph, 0.0, tt, 0.0, conc)[0]
-
-        def body(_, state):
-            sid, _ionic = state
-            fresh = self.residual(label_ph, _ionic, tt, sid, conc)[1]
-            return -self.residual(label_ph, fresh, tt, 0.0, conc)[0], fresh
-
-        return jax.lax.fori_loop(0, SID_SWEEPS, body, (sid, jnp.asarray(0.0)))[0]
+        for g, _ in spec.groups():
+            if g.key in seen:
+                continue
+            seen.add(g.key)
+            k = len(g.pkas)
+            out.append(Titratable(
+                species=f"buffer_{g.key}", pka_25c=tuple(float(x) for x in g.pkas),
+                charges=tuple(float(g.z_max) - i for i in range(k + 1)), basis=f"buffer {g.key}: {g.source}"[:200],
+                dh_kj_mol=tuple(float(x) for x in g.delta_h_kj_mol),
+                dcp_j_mol_k=tuple(float(x) for x in (g.delta_cp_j_mol_k or (0.0,) * k)),
+                source="pot", pot_key=g.key, centres={}))
+    return tuple(out)
 
 
 # --------------------------------------------------------------------------- the rate constants
-def _rate_static(derived: Mapping[str, Any], parameters: Mapping[str, Any]) -> Dict[str, Any]:
-    """Per generic parameter key: k_ref, Ea (None = held), 1 / T_ref, its cap; per reaction: its parameter's index
-    (-1 for a hand-ported step) and its pH-factor kind."""
+def _rate_static(derived: Mapping[str, Any], parameters: Mapping[str, Any], reactions: Sequence[str]) -> Dict[str, Any]:
+    """For a block of reactions: per generic parameter key (first appearance in the block): k_ref, Ea (None = held),
+    1 / T_ref, its cap; per reaction: its parameter's index (-1 for a hand-ported step) and its pH-factor kind."""
     from src.kinetic_core import parameters as trunk_parameters
     from src.kinetic_core.parameters import KineticParameter
     from src.kinetic_core.parameters_furanic import TEMPERATURE_CAP_K
 
-    keys = derived["generic_parameter_keys"]
+    keys = tuple(dict.fromkeys(derived["parameter_key"][r] for r in reactions if r not in structure.HAND_PORTED))
     k_ref, ea, inv_t_ref, cap, linear = [], [], [], [], []
     for key in keys:
         p = parameters[key]
@@ -400,9 +233,9 @@ def _rate_static(derived: Mapping[str, Any], parameters: Mapping[str, Any]) -> D
         cap.append(float(TEMPERATURE_CAP_K[key]) if key in TEMPERATURE_CAP_K else np.inf)
         linear.append(float(p.k_ref) == 0.0)
     pidx = np.array([keys.index(derived["parameter_key"][r]) if r not in structure.HAND_PORTED else -1
-                     for r in derived["reactions"]])
-    kind = np.array([KIND_CODES[derived["kind"][r]] for r in derived["reactions"]])
-    return {"keys": tuple(keys), "k_ref": k_ref, "ea": ea, "inv_t_ref": np.asarray(inv_t_ref),
+                     for r in reactions])
+    kind = np.array([KIND_CODES[derived["kind"][r]] for r in reactions])
+    return {"keys": keys, "k_ref": k_ref, "ea": ea, "inv_t_ref": np.asarray(inv_t_ref),
             "cap": np.asarray(cap), "linear": tuple(linear), "pidx": pidx, "kind": kind,
             "has_ea": np.asarray([e is not None for e in ea])}
 
@@ -492,7 +325,10 @@ def thiamine_h2s_share(ph_label, c):
     return jnp.where(ph_label < c["thi_share_floor"], 0.0, jnp.where(ph_label >= p1, f1, mid))
 
 
-def _make_rate_constants(static, c, balance_const, reaction_index):
+def _make_rate_constants(static, c, solvent, reactions: Sequence[str]):
+    """The rate function of a block of reactions (the whole lane, or one of the composed modules): the generic rule on
+    the block's own coordinates, then the hand-ported terms the block holds (each reading only its block's
+    constants, ``TERM_READS``), then its held-at-zero steps."""
     keys, linear = static["keys"], static["linear"]
     has_ea = jnp.asarray(static["has_ea"])
     inv_t_ref = jnp.asarray(static["inv_t_ref"])
@@ -501,8 +337,17 @@ def _make_rate_constants(static, c, balance_const, reaction_index):
     safe = jnp.asarray(np.where(pidx >= 0, pidx, 0))
     generic = jnp.asarray(pidx >= 0)
     kind = jnp.asarray(static["kind"])
-    ix = reaction_index
-    off = jnp.asarray([ix[r] for r in structure.OFF])
+    ix = {r: j for j, r in enumerate(reactions)}
+    terms = sorted(t for t in TERM_READS if t in ix)
+    for t in terms:
+        stray = [r for r in TERM_READS[t] if r not in ix]
+        if stray:
+            raise UnsupportedConfiguration(f"{t} reads {stray}, which another module owns: keep them in one module")
+    unknown = sorted(r for r in reactions if r in structure.HAND_PORTED and r not in TERM_READS
+                     and r not in structure.OFF)
+    if unknown:
+        raise UnsupportedConfiguration(f"hand-ported steps with no JAX term: {unknown}")
+    off = [ix[r] for r in structure.OFF if r in ix]
     r_kj = c["R_KJ"]
 
     def rate_constants(theta: Mapping[str, Any], ctx: RateCtx):
@@ -517,27 +362,33 @@ def _make_rate_constants(static, c, balance_const, reaction_index):
                         for k, e in zip(keys, static["ea"])])
         t_eff = jnp.minimum(t_k, cap)
         k_par = jnp.where(has_ea, k_ref * jnp.exp(-(ea / r_kj) * (1.0 / t_eff - inv_t_ref)), k_ref)
-        a = davies_a(t_k, balance_const)
+        a = davies_a(t_k, solvent)
         k = jnp.where(generic, k_par[safe], 0.0) * ph_factors(ph, t_k, ionic, c, a)[kind]
-        share = thiamine_h2s_share(label, c)
-        k_adduct = c["adduct_k_ref"] * jnp.exp(-(c["adduct_dh"] / r_kj) * (1.0 / t_k - 1.0 / c["adduct_t_k"]))
+        def k_adduct():
+            return c["adduct_k_ref"] * jnp.exp(-(c["adduct_dh"] / r_kj) * (1.0 / t_k - 1.0 / c["adduct_t_k"]))
+
+        def thiamine():
+            share = thiamine_h2s_share(label, c)
+            return jnp.where(share > 0.0, share / (1.0 - share), 0.0) * (k[ix["r_thi_hmp"]] + k[ix["r_thi_mesh"]])
+
+        # every hand-ported term, evaluated only where this block holds the reaction (a term reads its own block's
+        # constants, TERM_READS); tests/unit/test_jax_sulfur_structure.py reads this table's keys from the source
         derived = {
-            "r_cys_h2s": cysteine_thermolysis_k(label, t_k, c),
-            "r_gsh_h2s": glutathione_thermolysis_k(label, t_k, c),
-            "r_thi_h2s": jnp.where(share > 0.0, share / (1.0 - share), 0.0) * (k[ix["r_thi_hmp"]]
-                                                                               + k[ix["r_thi_mesh"]]),
-            "ch_thioether_release": k[ix["ch_thioether_mft"]] / k_adduct,
-            "ch_thioether_release_fft": k[ix["ch_thioether_fft"]] / k_adduct,
-            "r_amadori": c["amadori_factor"] * k[ix["r_schiff"]],
+            "r_cys_h2s": lambda: cysteine_thermolysis_k(label, t_k, c),
+            "r_gsh_h2s": lambda: glutathione_thermolysis_k(label, t_k, c),
+            "r_thi_h2s": thiamine,
+            "ch_thioether_release": lambda: k[ix["ch_thioether_mft"]] / k_adduct(),
+            "ch_thioether_release_fft": lambda: k[ix["ch_thioether_fft"]] / k_adduct(),
+            "r_amadori": lambda: c["amadori_factor"] * k[ix["r_schiff"]],
         }
-        names = sorted(derived)
-        k = k.at[jnp.asarray([ix[n] for n in names])].set(jnp.stack([derived[n] for n in names]))
-        return k.at[off].set(0.0)
+        if terms:
+            k = k.at[jnp.asarray([ix[n] for n in terms])].set(jnp.stack([derived[n]() for n in terms]))
+        return k.at[jnp.asarray(off, dtype=jnp.int32)].set(0.0) if off else k
 
     return rate_constants
 
 
-# --------------------------------------------------------------------------- the module
+# --------------------------------------------------------------------------- the modules
 def _bands(module_params: Mapping[str, float], parameters: Mapping[str, Any]):
     """Declared bands: the shipped wave's fit bounds (the Laplace file's ``bounds``) for the fitted log10 k_ref at
     145 C and the drift; an Ea's printed CI95 where it has one; None otherwise (no band invented here)."""
@@ -569,23 +420,79 @@ def _bands(module_params: Mapping[str, float], parameters: Mapping[str, Any]):
                 basis[name] = f"Ea of {key}; band = its printed 95 % CI ({src})"
             else:
                 basis[name] = f"Ea of {key}; no band declared ({src})"
-    bands["acid_yield"] = tuple(float(x) for x in ph.ACID_YIELD_BOUNDS)
-    bands["arp_amine_pka"] = tuple(float(x) for x in ph.ARP_AMINE_PKA_BOUNDS)
-    basis["acid_yield"] = "engine.core_ph_drift() acid yield per sink event (B2.2 frozen); band ph_state.ACID_YIELD_BOUNDS"
-    basis["arp_amine_pka"] = ("engine.core_ph_drift() ARP secondary-ammonium pK (B2.2 frozen); band "
-                              "ph_state.ARP_AMINE_PKA_BOUNDS")
+    if "acid_yield" in module_params:
+        bands["acid_yield"] = tuple(float(x) for x in ph.ACID_YIELD_BOUNDS)
+        bands["arp_amine_pka"] = tuple(float(x) for x in ph.ARP_AMINE_PKA_BOUNDS)
+        basis["acid_yield"] = ("engine.core_ph_drift() acid yield per sink event (B2.2 frozen); band "
+                               "ph_state.ACID_YIELD_BOUNDS")
+        basis["arp_amine_pka"] = ("engine.core_ph_drift() ARP secondary-ammonium pK (B2.2 frozen); band "
+                                  "ph_state.ARP_AMINE_PKA_BOUNDS")
     return bands, basis
+
+
+def _block_module(name: str, reactions: Sequence[str], species: Sequence[str], requires: Tuple[str, ...], *,
+                  derived, parameters, c, model: PhModel, digest: str, charge: bool, competes: Tuple[str, ...] = ()
+                  ) -> Module:
+    """One module of the lane: ``reactions`` (in FULL_REACTIONS order), the ``species`` it owns; ``charge`` makes it
+    the module that declares the lane's titratable table, the drift's coordinates and the PhModel."""
+    from src.kinetic_core import engine, sulfur
+
+    static = _rate_static(derived, parameters, reactions)
+    params: Dict[str, float] = {}
+    for key, lin, e in zip(static["keys"], static["linear"], static["ea"]):
+        if lin:
+            params[f"k_ref:{key}"] = 0.0
+        else:
+            params[f"log10_k:{key}"] = math.log10(float(parameters[key].k_ref))
+        if e is not None:
+            params[f"ea:{key}"] = float(e)
+    if charge:
+        drift = engine.core_ph_drift()
+        params["acid_yield"] = float(drift.acid_yield)
+        params["arp_amine_pka"] = float(drift.arp_amine_pka)
+    bands, basis = _bands(params, parameters)
+    hand = sorted(r for r in reactions if r in structure.HAND_PORTED)
+    pools = titratables() if charge else ()
+    ledger = {r: dict(e) for r, e in sulfur.CENTRE_LEDGER.items() if r in reactions}
+    rset = set(reactions)
+    return Module(
+        name=name, species=tuple(species), elements={k: derived["elements"][k] for k in species},
+        reactions=tuple(reactions), stoichiometry={r: derived["stoichiometry"][r] for r in reactions},
+        reactants={r: derived["reactants"][r] for r in reactions}, params=params, bands=bands, basis=basis,
+        rate_constants=_make_rate_constants(static, c, model.const, reactions),
+        observables=observables_for(species), requires=requires, needs_ph=True, config_digest=digest,
+        notes=(f"pH coupling {model.coupling}; node grid {model.node_grid}; fixed point {model.fixed_point} "
+               f"(relaxation {model.relaxation}, tolerance {model.tolerance}, max sweeps {model.max_sweeps})",
+               f"hand-ported reactions ({len(hand)}): {hand}",
+               f"held at zero (route off at the shipped configuration): {[r for r in structure.OFF if r in rset]}",
+               f"linear (zero k_ref) parameters: {[k for k, lin in zip(static['keys'], static['linear']) if lin]}",
+               f"titratable pools: {[t.species for t in pools]}"),
+        breakpoints=({"ph_label": (float(c["zheng_boundary"]), float(c["zheng_ph"][2]), float(c["zheng_ph"][3]), 7.0,
+                                   9.0, float(c["thi_share_floor"]), float(c["thi_share_points"][1][0]))}
+                     if rset & {"r_cys_h2s", "r_gsh_h2s", "r_thi_h2s"} else {}),
+        competes=competes, titratables=pools, ph_model=model if charge else None, centre_ledger=ledger)
 
 
 @dataclass(frozen=True)
 class SulfurLane:
-    """The sulfur Module, its one-module Network, the charge balance and the Config's pH numerics."""
+    """The sulfur lane's module(s), their Network and the PhModel (``settings``, PR #83's name)."""
 
-    module: Module
+    modules: Tuple[Module, ...]
     network: Network
-    balance: ChargeBalance
-    settings: Settings
+    settings: PhModel
     parameters: Mapping[str, Any]
+
+    @property
+    def module(self) -> Module:
+        """The one module of the ``build`` form."""
+        if len(self.modules) != 1:
+            raise ValueError(f"the composed lane has {len(self.modules)} modules: use .modules")
+        return self.modules[0]
+
+    @property
+    def balance(self):
+        """The merged titratable table (``ph_coupling.ChargeTable``)."""
+        return self.network.charge
 
     @property
     def species(self):
@@ -599,95 +506,105 @@ class SulfurLane:
         return self.network.theta0()
 
 
-def build_module(cfg=None) -> Tuple[Module, ChargeBalance, Settings, Dict[str, Any]]:
-    """The sulfur Module for an engine Config (shipped values only on the held keys)."""
+def _inputs(cfg):
     from src.kinetic_core import engine
 
-    settings, digest = config_values(cfg)
+    model = ph_model(cfg)
+    _, digest = config_values(cfg)
     derived = structure.derive()
     problems = [p for p in structure.structure_problems(numeric=False)]
     if problems:
         raise UnsupportedConfiguration("the NumPy sulfur lane moved under the port:\n" + "\n".join(problems))
-    parameters = dict(engine.core_parameters(engine.SULFUR))
-    static = _rate_static(derived, parameters)
-    c = _term_constants()
-    index = {s: i for i, s in enumerate(derived["species"])}
-    balance = _charge_balance(index)
-    rix = {r: j for j, r in enumerate(derived["reactions"])}
-    rate_constants = _make_rate_constants(static, c, balance.const, rix)
-    params: Dict[str, float] = {}
-    for key, lin, e in zip(static["keys"], static["linear"], static["ea"]):
-        if lin:
-            params[f"k_ref:{key}"] = 0.0
-        else:
-            params[f"log10_k:{key}"] = math.log10(float(parameters[key].k_ref))
-        if e is not None:
-            params[f"ea:{key}"] = float(e)
-    drift = engine.core_ph_drift()
-    params["acid_yield"] = float(drift.acid_yield)
-    params["arp_amine_pka"] = float(drift.arp_amine_pka)
-    bands, basis = _bands(params, parameters)
-    hand = sorted(structure.HAND_PORTED)
-    module = Module(
-        name=NAME, species=derived["species"], elements=derived["elements"], reactions=derived["reactions"],
-        stoichiometry=derived["stoichiometry"], reactants=derived["reactants"], params=params, bands=bands,
-        basis=basis, rate_constants=rate_constants, observables=observables_for(derived["species"]),
-        needs_ph=True, config_digest=digest,
-        notes=(f"pH coupling {settings.coupling}; node grid {settings.node_grid}; fixed point {settings.fixed_point} "
-               f"(relaxation {settings.relaxation}, tolerance {settings.tolerance}, max sweeps {settings.max_sweeps})",
-               f"hand-ported reactions ({len(hand)}): {hand}",
-               f"held at zero (route off at the shipped configuration): {list(structure.OFF)}",
-               f"linear (zero k_ref) parameters: {[k for k, lin in zip(static['keys'], static['linear']) if lin]}",
-               f"titratable groups: {list(balance.names)}"),
-        breakpoints={"ph_label": (float(c["zheng_boundary"]), float(c["zheng_ph"][2]), float(c["zheng_ph"][3]), 7.0,
-                                  9.0, float(c["thi_share_floor"]), float(c["thi_share_points"][1][0]))})
-    return module, balance, settings, parameters
+    return model, digest, derived, dict(engine.core_parameters(engine.SULFUR)), _term_constants()
+
+
+def build_module(cfg=None) -> Tuple[Module, PhModel, Dict[str, Any]]:
+    """The ONE-module sulfur lane for an engine Config (shipped values only on the held keys)."""
+    model, digest, derived, parameters, c = _inputs(cfg)
+    module = _block_module(NAME, derived["reactions"], derived["species"], (), derived=derived, parameters=parameters,
+                           c=c, model=model, digest=digest, charge=True)
+    return module, model, parameters
 
 
 def build(cfg=None, *, solver: str = "Kvaerno5") -> SulfurLane:
-    module, balance, settings, parameters = build_module(cfg)
-    return SulfurLane(module=module, network=compose([module], solver=solver), balance=balance, settings=settings,
+    module, model, parameters = build_module(cfg)
+    return SulfurLane(modules=(module,), network=compose([module], solver=solver), settings=model,
                       parameters=parameters)
+
+
+def composed_blocks(derived) -> List[Tuple[str, Tuple[str, ...], Tuple[str, ...]]]:
+    """(module, reactions, owned species) of the composed form: the engine's own blocks of FULL_REACTIONS
+    (``network.REACTIONS``, ``network.FED_3DEOXY_REACTIONS``, the sulfur block), each species owned by the first block
+    whose reactions touch it (an untouched one by the sulfur module)."""
+    from src.kinetic_core import network as engine_network
+
+    trunk = tuple(r.key for r in engine_network.REACTIONS)
+    fed = tuple(r.key for r in engine_network.FED_3DEOXY_REACTIONS)
+    full = tuple(derived["reactions"])
+    if full[:len(trunk)] != trunk or full[len(trunk):len(trunk) + len(fed)] != fed:
+        raise UnsupportedConfiguration("FULL_REACTIONS is no longer REACTIONS + FED_3DEOXY_REACTIONS + the sulfur "
+                                       "block: the composed form's blocks do not hold")
+    blocks = [(COMPOSED[0], trunk), (COMPOSED[1], fed), (COMPOSED[2], full[len(trunk) + len(fed):])]
+    owner: Dict[str, str] = {}
+    for name, rs in blocks:
+        for r in rs:
+            for s in list(derived["reactants"][r]) + list(derived["stoichiometry"][r]):
+                owner.setdefault(s, name)
+    out = []
+    for name, rs in blocks:
+        own = tuple(s for s in derived["species"] if owner.get(s, COMPOSED[2]) == name)
+        out.append((name, rs, own))
+    return out
+
+
+def build_composed(cfg=None, *, solver: str = "Kvaerno5") -> SulfurLane:
+    """The same lane as three modules composed by ``network.compose`` (``competition="refuse"``; the species order
+    pinned to the engine's ``SULFUR_STATE_KEYS``). ``sulfur`` declares the titratable table (it reads FA / AA, which
+    ``sulfur_trunk`` owns) and its consumption of the trunk's species. Coordinates: each block's own keys (no
+    parameter key is shared between blocks: checked), the drift's in ``sulfur``."""
+    model, digest, derived, parameters, c = _inputs(cfg)
+    blocks = composed_blocks(derived)
+    keys = [set(_rate_static(derived, parameters, rs)["keys"]) for _, rs, _ in blocks]
+    shared = [(blocks[i][0], blocks[j][0], sorted(keys[i] & keys[j])) for i in range(3) for j in range(i + 1, 3)
+              if keys[i] & keys[j]]
+    if shared:
+        raise UnsupportedConfiguration(f"parameter keys shared between blocks: {shared}")
+    modules: List[Module] = []
+    owned: Dict[str, str] = {s: name for name, _, own in blocks for s in own}
+    for i, (name, rs, own) in enumerate(blocks):
+        foreign = tuple(dict.fromkeys(s for r in rs for s in derived["reactants"][r]
+                                      if owned[s] != name and derived["stoichiometry"][r].get(s, 0.0) < 0.0))
+        modules.append(_block_module(name, rs, own, tuple(COMPOSED[:i]), derived=derived, parameters=parameters, c=c,
+                                     model=model, digest=digest, charge=(name == NAME), competes=foreign))
+    net = compose(modules, layout=derived["species"], solver=solver, competition="refuse")
+    return SulfurLane(modules=tuple(modules), network=net, settings=model, parameters=parameters)
 
 
 def theta_from(lane: SulfurLane, parameters: Optional[Mapping[str, Any]] = None, drift=None) -> Dict[str, Any]:
     """theta for an engine parameter dict (``k_ref``, ``ea_kj_mol``) and a PhDrift, the rest at shipped values."""
-    out = dict(lane.module.params)
-    for name in out:
-        kind, _, key = name.partition(":")
-        if parameters is None or key not in parameters:
-            continue
-        p = parameters[key]
-        if kind == "log10_k":
-            if not float(p.k_ref) > 0.0:
-                raise UnsupportedConfiguration(f"{key}: k_ref {p.k_ref!r} on a log10 coordinate")
-            out[name] = math.log10(float(p.k_ref))
-        elif kind == "k_ref":
-            out[name] = float(p.k_ref)
-        elif kind == "ea":
-            out[name] = float(p.ea_kj_mol)
-    if drift is not None:
-        out["acid_yield"], out["arp_amine_pka"] = float(drift.acid_yield), float(drift.arp_amine_pka)
-    return {NAME: {k: jnp.asarray(float(v)) for k, v in out.items()}}
+    out: Dict[str, Any] = {}
+    for m in lane.modules:
+        th = dict(m.params)
+        for name in th:
+            kind, _, key = name.partition(":")
+            if parameters is None or key not in parameters:
+                continue
+            p = parameters[key]
+            if kind == "log10_k":
+                if not float(p.k_ref) > 0.0:
+                    raise UnsupportedConfiguration(f"{key}: k_ref {p.k_ref!r} on a log10 coordinate")
+                th[name] = math.log10(float(p.k_ref))
+            elif kind == "k_ref":
+                th[name] = float(p.k_ref)
+            elif kind == "ea":
+                th[name] = float(p.ea_kj_mol)
+        if drift is not None and "acid_yield" in th:
+            th["acid_yield"], th["arp_amine_pka"] = float(drift.acid_yield), float(drift.arp_amine_pka)
+        out[m.name] = {k: jnp.asarray(float(v)) for k, v in th.items()}
+    return out
 
 
 # --------------------------------------------------------------------------- the pot
-def node_times(settings: Settings, duration: float, profile: Optional[Tuple[np.ndarray, np.ndarray]] = None):
-    """sulfur.ph_node_times (and, along a profile, profile_node_times at the Config's step)."""
-    n = max(int(settings.ph_nodes), 5)
-    linear = np.linspace(0.0, duration, n)
-    nodes = linear if settings.node_grid == "uniform" else np.unique(np.concatenate(
-        [linear, np.geomspace(duration * 1e-5, duration, n)]))
-    if profile is not None:
-        times, temps = profile
-        out = [np.array([0.0, duration])]
-        for t0, t1, c0, c1 in zip(times[:-1], times[1:], temps[:-1], temps[1:]):
-            k = max(1, int(np.ceil(abs(c1 - c0) / settings.profile_node_step_k - 1e-12)))
-            out.append(np.linspace(t0, t1, k + 1))
-        nodes = np.unique(np.concatenate([nodes, np.unique(np.clip(np.concatenate(out), 0.0, duration))]))
-    return nodes
-
-
 def engine_prelude(initial: Mapping[str, float], process) -> Tuple[Dict[str, float], Dict[str, float]]:
     """``engine._integrate_program``'s sulfur prelude: ambient OX, PROT_SS from the matrix sites, the headspace
     reservoir OXR, OXV; MET / PRO / PYRL recorded and dropped. Returns (state, dropped)."""
@@ -709,9 +626,8 @@ def engine_prelude(initial: Mapping[str, float], process) -> Tuple[Dict[str, flo
 
 def make_pot(lane: SulfurLane, initial: Mapping[str, float], process, *, prelude: bool = True) -> Dict[str, Any]:
     """A pot from the engine's ``ProcessSpec`` (thermal programme or profile, declared label pH, buffer) and its
-    charged species. Arrays: y0 (n,), label_ph, buffer (G,), durations (S,), node_s / node_tc (S, N) (the pH nodes as
-    fractions of each segment and their temperatures), knot_s / knot_tc (S, K) (the temperature course inside a
-    segment, for the inline coupling), and ``mode`` ("dynamic" | "clamped", static)."""
+    charged species: ``ph_coupling.pot_from_program``'s arrays and ``mode`` (static), plus ``dropped`` and
+    ``buffer_spec`` (what the engine's path needs to reproduce it)."""
     from src.kinetic_core import ph_state as ph
 
     if getattr(process, "ph_drift", None) is not None:
@@ -728,222 +644,42 @@ def make_pot(lane: SulfurLane, initial: Mapping[str, float], process, *, prelude
     spec = process.buffer if getattr(process, "buffer", None) is not None else ph.DEFAULT_BUFFER
     mode = "clamped" if spec.is_clamped else "dynamic"
     thermal = process.thermal
-    if mode == "clamped" and thermal.profile is not None:
-        raise UnsupportedConfiguration("a clamped pH along a temperature profile (the engine's node-interpolated "
-                                       "constants at T(t)) is not ported")
     if mode == "clamped" and process.ph_final is not None and float(process.ph_final) != float(process.ph):
         raise UnsupportedConfiguration("a prescribed pH line between two measured endpoints (B2.1) is not ported")
     if thermal.profile is not None:
-        times = np.array([t for t, _ in thermal.profile], dtype=float)
-        temps = np.array([c for _, c in thermal.profile], dtype=float)
-        duration = float(thermal.total_minutes)
-        nodes = node_times(lane.settings, duration, (times, temps + CELSIUS))
-        segments = [(duration, nodes, np.interp(nodes, times, temps), times, temps)]
+        pot = ph_coupling.pot_from_program(lane.network, y0, float(process.ph), lane.balance.buffer_vector(spec),
+                                           profile=[(float(t), float(c)) for t, c in thermal.profile], mode=mode,
+                                           duration=float(thermal.total_minutes))
     else:
-        segments = []
-        for d, t_c in thermal.segments:
-            nodes = node_times(lane.settings, float(d))
-            segments.append((float(d), nodes, np.full(len(nodes), float(t_c)), np.array([0.0, float(d)]),
-                             np.array([float(t_c), float(t_c)])))
-    widths = {len(s[1]) for s in segments}
-    if len(widths) != 1:
-        raise UnsupportedConfiguration("segments with different node counts (a profile inside a staircase)")
-    k_width = max(len(s[3]) for s in segments)
-
-    def pad(a, n):
-        return np.concatenate([a, np.full(n - len(a), a[-1])])
-
-    return {"y0": y0, "label_ph": float(process.ph), "buffer": lane.balance.buffer_vector(spec), "mode": mode,
-            "durations": np.array([s[0] for s in segments]),
-            "node_s": np.stack([s[1] / s[0] for s in segments]), "node_tc": np.stack([s[2] for s in segments]),
-            "knot_s": np.stack([pad(s[3] / s[0], k_width) for s in segments]),
-            "knot_tc": np.stack([pad(s[4], k_width) for s in segments]),
-            "label_nudge": np.zeros((len(segments), len(segments[0][1]))),
-            "jump_s": np.stack([_jump_grid(s[1] / s[0]) for s in segments]),
-            "node_minutes": [s[1] for s in segments], "dropped": dropped, "buffer_spec": spec}
+        pot = ph_coupling.pot_from_program(lane.network, y0, float(process.ph), lane.balance.buffer_vector(spec),
+                                           segments=[(float(d), float(t)) for d, t in thermal.segments], mode=mode)
+    pot.update({"dropped": dropped, "buffer_spec": spec})
+    return pot
 
 
-#: nodes closer than this (as a fraction of the segment) are one kink of the rate vector for the step controller
-JUMP_MERGE = 1e-12
-
-
-def _jump_grid(node_s: np.ndarray) -> np.ndarray:
-    """The nodes as diffrax ``jump_ts``, with near-coincident nodes merged onto their predecessor. ``np.unique`` keeps
-    two nodes 1.8e-15 min apart where a linspace and a geomspace node meet in floating point (9.0 and
-    9.000000000000002 on a 90 min run); a jump that narrow stalls the step clipping. The rate vector between them
-    changes by nothing, so the merged grid is the same kink set; the nodes themselves (saved states, interpolation)
-    are untouched."""
-    out = np.asarray(node_s, dtype=float).copy()
-    for i in range(1, len(out)):
-        if out[i] - out[i - 1] < JUMP_MERGE:
-            out[i] = out[i - 1]
-    return out
-
-
-def pot_arrays(pot: Mapping[str, Any]) -> Dict[str, Any]:
-    """The numeric part of a pot (the compiled functions' argument). ``label_nudge`` (S, N; zero) is added to the
-    nodes' cooled pH where the measured tables read it -- only a parity check sets it, to put a node whose cooled pH
-    sits ON a table's jump (a pot declared at exactly label pH 5.0, Zheng & Ho's boundary) on the engine's side of
-    the jump, which there is decided by the root-finders' last digits."""
-    return {k: jnp.asarray(pot[k], dtype=jnp.float64) for k in ("y0", "label_ph", "buffer", "durations", "node_s",
-                                                                  "node_tc", "knot_s", "knot_tc", "label_nudge", "jump_s")}
+pot_arrays = ph_coupling.pot_arrays
 
 
 # --------------------------------------------------------------------------- integration
-class SulfurRun(NamedTuple):
-    ys: Any          # (S, N, n): the state at every pH node of every segment (clipped at 0, as the engine reports)
-    ph: Any          # (S, N): the in-situ pH at the nodes (fixed point: the relaxed node values the run ended on)
-    ionic: Any       # (S, N): the ionic strength at the nodes, mol/L
-    ph_cool: Any     # (S, N): the cooled (25 C label) pH of the node states
-    sweeps: Any      # (S,): fixed-point sweeps (0 for inline / clamped)
-    residual: Any    # (S,): the last sweep's max |fresh - node pH|
-    num_steps: Any   # (S,): integrator steps in the segment (all sweeps)
-    failed: Any      # (S,)
-    sid: Any         # the strong-ion difference, mmol/L
-
-
-def _interp_rows(s, grid, rows):
-    """rows (N, R) linear in s between grid (N,) nodes, as sulfur.rate_vector_at."""
-    n = grid.shape[0]
-    lo = jnp.clip(jnp.searchsorted(grid, s, side="right") - 1, 0, n - 2)
-    span = grid[lo + 1] - grid[lo]
-    w = jnp.where(span > 0.0, jnp.clip((s - grid[lo]) / jnp.where(span > 0.0, span, 1.0), 0.0, 1.0), 0.0)
-    return rows[lo] * (1.0 - w) + rows[lo + 1] * w
-
-
-def _solve(net: Network, rhs_k, data, y0, duration, save_s, jumps, *, rtol, atol, solver, adjoint, max_steps,
-           throw):
-    """One solve on s in [0, 1] (the right-hand side scaled by ``duration``), the rate constants ``rhs_k(s, y, data)``.
-    Every traced number reaches the vector field through diffrax's ``args`` (``data``, ``duration``), never by
-    closure, so the discrete adjoint can differentiate it."""
-    import diffrax
-
-    stoich = jnp.asarray(net.stoichiometry)
-
-    def f(s, y, args):
-        data_, duration_ = args
-        return duration_ * (stoich @ (rhs_k(s, y, data_) * mass_action(y, net)))
-
-    controller = diffrax.ClipStepSizeController(diffrax.PIDController(rtol=rtol, atol=atol), jump_ts=jumps)
-    sol = diffrax.diffeqsolve(diffrax.ODETerm(f), solver, t0=0.0, t1=1.0, dt0=None, y0=y0, args=(data, duration),
-                              saveat=diffrax.SaveAt(ts=save_s), stepsize_controller=controller,
-                              max_steps=max_steps, adjoint=adjoint, throw=throw)
-    return sol.ys, sol.stats["num_steps"], sol.result != diffrax.RESULTS.successful
-
-
 def integrate(lane: SulfurLane, theta, pot: Mapping[str, Any], *, rtol: float = 1e-8, atol: float = 1e-14,
-              solver=None, adjoint=None, reverse: bool = False, max_steps: int = 200_000,
-              throw: bool = True, force_sweeps: Optional[int] = None) -> SulfurRun:
-    """One pot through its programme with the Config's pH coupling (``pot["mode"]`` "clamped" holds the declared pH).
-    ``reverse=True`` runs the fixed point's sweeps as a scan (``jax.grad``); otherwise a while loop (forward mode,
-    ``vmap``). ``adjoint`` defaults to diffrax's discrete adjoint (``diffrax.ForwardMode()`` for ``jax.jacfwd``).
-    ``force_sweeps`` replaces the stopping rule by a fixed sweep count (every segment): for a parity check on a pot
-    whose last residual sits at the tolerance, where solver noise alone decides one sweep more or less."""
-    import diffrax
+              solver=None, adjoint=None, reverse: Optional[bool] = None, max_steps: int = 200_000,
+              throw: bool = True, force_sweeps: Optional[int] = None) -> PhRun:
+    """One pot through its programme: ``network.integrate`` on the lane's network (the network's own pH solve), as
+    the node-resolved ``PhRun``. ``reverse=True`` keeps PR #83's scan over the sweeps; by default the sweep loop
+    follows the adjoint (``ph_coupling.loop_kind``: ``jax.grad`` needs no flag)."""
+    from . import network
 
-    net, bal, st = lane.network, PhSolver(lane.balance), lane.settings
-    solver = solver or getattr(diffrax, net.solver)()
-    adjoint = adjoint or diffrax.RecursiveCheckpointAdjoint()
-    a = pot_arrays(pot)
-    th = theta[NAME]
-    mode = pot.get("mode", "dynamic")
-    kw = dict(rtol=rtol, atol=atol, solver=solver, adjoint=adjoint, max_steps=max_steps, throw=throw)
-    y0 = a["y0"]
-    sid = bal.strong_ion_difference(a["label_ph"], y0, th, a["buffer"])
-
-    def rates(t_k, ph, ionic, cool):
-        return net.rate_constants(theta, RateCtx(t_c=t_k - CELSIUS, t_k=t_k, ph=ph, ph_label=cool, ionic_m=ionic))
-
-    def node_states(ys, node_tk):
-        return jax.vmap(lambda y, t: bal.state(y, t, sid, th, a["buffer"]))(ys, node_tk)
-
-    min_sweeps = max(int(st.ph_iterations), 1)
-    relaxed = st.fixed_point == "relaxed_converged"
-    max_sweeps = max(min_sweeps, int(st.max_sweeps)) if relaxed else min_sweeps
-    if force_sweeps is not None:
-        if not 1 <= int(force_sweeps) <= max_sweeps:
-            raise ValueError(f"force_sweeps must lie in [1, {max_sweeps}]")
-        min_sweeps = max_sweeps = int(force_sweeps)
-
-    def segment(y_start, seg):
-        duration, node_s, node_tc, knot_s, knot_tc, nudge, jump_s = seg
-        node_tk = node_tc + CELSIUS
-        if mode == "clamped":
-            t_k = knot_tc[0] + CELSIUS
-            k0 = rates(t_k, a["label_ph"], 0.0, jnp.nan)
-            ys, steps, bad = _solve(net, lambda s, y, k: k, k0, y_start, duration, node_s, jump_s, **kw)
-            ys = jnp.maximum(ys, 0.0)
-            n = node_s.shape[0]
-            return ys[-1], (ys, jnp.full(n, a["label_ph"]), jnp.zeros(n), jnp.full(n, a["label_ph"]),
-                            jnp.asarray(0), jnp.asarray(0.0), steps, bad)
-        if st.coupling == "inline":
-            def rhs_k(s, y, d):
-                theta_, sid_, buffer_, knot_s_, knot_tc_ = d
-                t_k = jnp.interp(s, knot_s_, knot_tc_) + CELSIUS
-                ph, ionic, cool = bal.state(y, t_k, sid_, theta_[NAME], buffer_)
-                return net.rate_constants(theta_, RateCtx(t_c=t_k - CELSIUS, t_k=t_k, ph=ph, ph_label=cool,
-                                                          ionic_m=ionic))
-
-            ys, steps, bad = _solve(net, rhs_k, (theta, sid, a["buffer"], knot_s, knot_tc), y_start, duration,
-                                    node_s, knot_s, **kw)
-            ys = jnp.maximum(ys, 0.0)
-            ph, ionic, cool = node_states(ys, node_tk)
-            return ys[-1], (ys, ph, ionic, cool, jnp.asarray(0), jnp.asarray(0.0), steps, bad)
-        # fixed_point_nodes (shipped): B64's per-node starts (identical at every node of an isothermal segment)
-        p0, i0, c0 = node_states(jnp.broadcast_to(y_start, (node_s.shape[0],) + y_start.shape), node_tk)
-
-        # every traced number enters the sweep as an OPERAND, never by closure: lax.cond's reverse-mode lowering
-        # cannot carry a closed-over tracer (the branch would hold it as a constant)
-        data = (theta, sid, a["buffer"], y_start, duration, node_s, node_tk, nudge, jump_s)
-
-        def sweep(carry, d):
-            theta_, sid_, buffer_, y_start_, duration_, node_s_, node_tk_, nudge_, jump_s_ = d
-            count, node_ph, node_i, node_cool, _ys, _res, _done, steps, bad = carry
-            k_nodes = jax.vmap(lambda t, p, i, c: net.rate_constants(
-                theta_, RateCtx(t_c=t - CELSIUS, t_k=t, ph=p, ph_label=c, ionic_m=i)))(node_tk_, node_ph, node_i,
-                                                                                         node_cool + nudge_)
-            ys, n_steps, failed = _solve(net, lambda s, y, dd: _interp_rows(s, dd[0], dd[1]), (node_s_, k_nodes),
-                                         y_start_, duration_, node_s_, jump_s_, **kw)
-            ys = jnp.maximum(ys, 0.0)
-            fresh, fi, fc = jax.vmap(lambda y, t: bal.state(y, t, sid_, theta_[NAME], buffer_))(ys, node_tk_)
-            res = jnp.max(jnp.abs(fresh - node_ph))
-            count = count + 1
-            if relaxed:
-                new_ph = node_ph + st.relaxation * (fresh - node_ph)
-                done = ((res < st.tolerance) & (count >= min_sweeps)) | (count >= max_sweeps)
-            else:
-                new_ph = fresh
-                done = (res < FIXED_SWEEPS_STOP) | (count >= max_sweeps)
-            if force_sweeps is not None:
-                done = count >= max_sweeps
-            return (count, new_ph, fi, fc, ys, res, done, steps + n_steps, bad | failed)
-
-        n = node_s.shape[0]
-        init = (jnp.asarray(0), p0, i0, c0, jnp.zeros((n,) + y_start.shape), jnp.asarray(jnp.inf),
-                jnp.asarray(False), jnp.asarray(0), jnp.asarray(False))
-        if reverse:
-            def body(carry, _):
-                return jax.lax.cond(carry[6], lambda c, d: c, sweep, carry, data), None
-
-            out, _ = jax.lax.scan(body, init, None, length=max_sweeps)
-        else:
-            out = jax.lax.while_loop(lambda c: ~c[6], lambda c: sweep(c, data), init)
-        count, node_ph, node_i, node_cool, ys, res, _, steps, bad = out
-        return ys[-1], (ys, node_ph, node_i, node_cool, count, res, steps, bad)
-
-    segs = (a["durations"], a["node_s"], a["node_tc"], a["knot_s"], a["knot_tc"], a["label_nudge"], a["jump_s"])
-    _, (ys, ph, ionic, cool, count, res, steps, bad) = jax.lax.scan(segment, y0, segs)
-    return SulfurRun(ys=ys, ph=ph, ionic=ionic, ph_cool=cool, sweeps=count, residual=res, num_steps=steps,
-                     failed=bad, sid=sid)
+    return network.integrate(lane.network, theta, pot, rtol=rtol, atol=atol, solver=solver, adjoint=adjoint,
+                             max_steps=max_steps, throw=throw, reverse=reverse, force_sweeps=force_sweeps).ph
 
 
 def compiled(lane: SulfurLane, pot_template: Mapping[str, Any], **kw):
-    """``f(theta, arrays) -> SulfurRun``, jit-compiled once per lane, mode and pot shape."""
+    """``f(theta, arrays) -> PhRun``, jit-compiled once per lane, mode and pot shape."""
     mode = pot_template.get("mode", "dynamic")
     return jax.jit(lambda theta, arrays: integrate(lane, theta, dict(arrays, mode=mode), **kw))
 
 
-def observe(lane: SulfurLane, run: SulfurRun, species: Sequence[str], rows: Sequence[int], *,
+def observe(lane: SulfurLane, run: PhRun, species: Sequence[str], rows: Sequence[int], *,
             floor: float = 1e-300):
     """log10 mmol/L of ``species`` at node ``rows`` of the LAST segment, then the cooled pH at the end."""
     ys = run.ys[-1]
@@ -954,7 +690,8 @@ def observe(lane: SulfurLane, run: SulfurRun, species: Sequence[str], rows: Sequ
 
 
 def jacobian(lane: SulfurLane, pot_template, coordinates: Sequence[str], species, rows, **kw):
-    """``f(theta, arrays) -> (observables, d observables / d coordinates)``, exact, forward mode."""
+    """``f(theta, arrays) -> (observables, d observables / d coordinates)``, exact, forward mode (coordinates of the
+    one-module form, ``theta[NAME]``)."""
     import diffrax
 
     mode = pot_template.get("mode", "dynamic")

@@ -124,3 +124,26 @@ def test_the_registry_module_needs_no_jax():
 def test_every_held_key_names_what_the_port_implements(key):
     how, what = ss.CONFIG_HANDLING[key]
     assert how == "held" and what
+
+
+def test_every_pin_has_its_source_recorded_and_a_moved_pin_prints_a_diff(tmp_path, monkeypatch):
+    """(2026-11-06) ``sulfur_structure_pins.json`` holds the unparsed source of every pinned function at its pin, so a
+    failing pin shows WHAT moved, not only that a hash changed."""
+    import json
+
+    record = json.loads(ss.PINNED_SOURCE_FILE.read_text(encoding="utf-8"))
+    assert set(record) == {f"{p}::{q}" for p, q in ss.PINNED_FUNCTIONS}
+    assert all(record[f"{p}::{q}"]["hash"] == ss.SOURCE_PINS[(p, q)] for p, q in ss.PINNED_FUNCTIONS)
+    key = ("src/kinetic_core/engine.py", "_integrate_program")
+    moved = dict(record)
+    moved[f"{key[0]}::{key[1]}"] = {"hash": "0" * 16, "source": record[f"{key[0]}::{key[1]}"]["source"]
+                                    + "\nreturn_value_that_moved = 1"}
+    fake = tmp_path / "pins.json"
+    fake.write_text(json.dumps(moved), encoding="utf-8")
+    monkeypatch.setattr(ss, "PINNED_SOURCE_FILE", fake)
+    pins = dict(ss.SOURCE_PINS)
+    pins[key] = "0" * 16
+    monkeypatch.setattr(ss, "SOURCE_PINS", pins)
+    problems = ss.structure_problems(numeric=False)
+    hit = [p for p in problems if "_integrate_program changed" in p]
+    assert hit and "-return_value_that_moved = 1" in hit[0], problems
