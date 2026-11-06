@@ -91,6 +91,12 @@ The engine also computes these, but the thiol lane ships relative within-laborat
 | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE 'furfural'. The charge declares only a matrix/lipid carrier, which is not  | 1 | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE 'furfural'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so ever | no cited rule reaches it from any reference charge |
 | UNREPRESENTED TARGETS: 1-hexanol | 1 | UNREPRESENTED TARGETS: 1-hexanol -- The lipid lane exists and forms the SIX products Frankel 1989 measured, but 1-hexanol is not one of them and NO aldehyde-reduction step is measured anywhere in the corpus -- in a thermally processed extrudate the reductant p | no cited rule reaches it from any reference charge |
 
+Also refused, by the curated DATA rather than by a lane (`scoring_refused`; each reason names its conflicts-register entry and says what would reinstate the row):
+
+- `acrylamide_spi_extrusion_130C_ACSRef3` / acrylamide: REFUSED BY THE DATA: precursor charge not printed. Ma 2024 (secs. 3.1-3.2, Table 1) adds no asparagine or glucose and prints no free asparagine, reducing sugar, pH or water activity, so the pot the row was integrated at (SPI 50, Asn 42, Glc 42 mM, pH 6.0, a_w 
+- `mp_holdout_fructose_asparagine_180C_Lin2022` / 5-Hydroxymethylfurfural (HMF): REFUSED BY THE DATA: within-source conflict (CF-127): the prose prints 12.28 ppm citing Fig. 4A, but Fig. 4A's asparagine + fructose 30-min bar (water) reads ~5.0 ppm (SD to ~6) on an axis checked against the printed 91.56 ppm fructose-only bar; no bar is near
+- `external_validation_bi_2020_roasted_pea_hexanal` / hexanal: REFUSED BY THE DATA: net loss of a carried level (CF-129): raw peas carry 1260 +/- 114 ug/kg hexanal and the roasted peas measure 324 +/- 34.3 (Bi 2020 Table 4), a 3.9x loss on roasting. The lipid lane adds a carried level and forms more; it has no loss term (
+
 ## 4. Directional axes below 'trust'
 
 | axis | agree / evaluable | not evaluable | verdict | Wilson lower | agreeing claims to reach trust |
@@ -115,14 +121,14 @@ The engine also computes these, but the thiol lane ships relative within-laborat
 |---|---|---|---|---|---|
 | 1 | `external_validation_li_2026_spi_wg_hme_control` | 2-pentylfuran | 10.09 | 1.57 | missing_positive_flavor_anchor |
 | 2 | `mp_holdout_glucose_alanine_130C_2h_pH80_Schibilsky2019` | DMHF | 6.00 | 1.99 | missing_absolute_anchor |
-| 3 | `acrylamide_spi_extrusion_130C_ACSRef3` | acrylamide | 4.58 | 3.25 | missing_absolute_anchor |
-| 4 | `mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b` | 2-Acetylthiazole | 4.00 | 2.40 | free_precursor_sulfur_yield |
-| 5 | `mp_holdout_glucose_asparagine_180C_10min_Chang2021` | Acrylamide | 3.03 | 1.74 | missing_absolute_anchor |
-| 6 | `mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019` | DMHF | 2.89 | 1.28 | missing_absolute_anchor |
-| 7 | `mp_holdout_glucose_only_autoclave_121C_Steinhagen2021` | glucosone | 2.80 | 1.80 | missing_absolute_anchor |
-| 8 | `mp_holdout_glucose_only_autoclave_121C_Steinhagen2021` | glyoxal | 2.46 | 1.44 | missing_absolute_anchor |
-| 9 | `mp_holdout_glucose_only_autoclave_121C_Steinhagen2021` | 5-Hydroxymethylfurfural (HMF) | 1.89 | 0.60 | missing_absolute_anchor |
-| 10 | `mp_holdout_fructose_asparagine_180C_Lin2022` | Acrylamide | 1.77 | 0.48 | missing_absolute_anchor |
+| 3 | `mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b` | 2-Acetylthiazole | 4.00 | 2.40 | free_precursor_sulfur_yield |
+| 4 | `mp_holdout_glucose_asparagine_180C_10min_Chang2021` | Acrylamide | 3.03 | 1.74 | missing_absolute_anchor |
+| 5 | `mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019` | DMHF | 2.89 | 1.28 | missing_absolute_anchor |
+| 6 | `mp_holdout_glucose_only_autoclave_121C_Steinhagen2021` | glucosone | 2.53 | 1.53 | missing_absolute_anchor |
+| 7 | `mp_holdout_glucose_only_autoclave_121C_Steinhagen2021` | 5-Hydroxymethylfurfural (HMF) | 1.86 | 0.59 | missing_absolute_anchor |
+| 8 | `mp_holdout_fructose_asparagine_180C_Lin2022` | Acrylamide | 1.77 | 0.48 | missing_absolute_anchor |
+| 9 | `external_validation_li_2026_spi_wg_hme_control` | hexanal | 1.75 | 0.00 | missing_positive_flavor_anchor |
+| 10 | `mp_holdout_glucose_only_autoclave_121C_Steinhagen2021` | 3,4-dideoxyglucosone | 1.73 | 0.44 | missing_absolute_anchor |
 
 ## 6. What you could predict if you had it
 

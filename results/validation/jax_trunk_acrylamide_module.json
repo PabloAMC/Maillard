@@ -221,34 +221,6 @@
    }
   }
  },
- "findings": [
-  "## Findings",
-  "",
-  "1. **Match: yes, at the contract's bar with margin.**",
-  "   - Rates equal the engine's functions to ~1e-15 relative: 81 648 values on the composed acrylamide lane (every condition term on and off, a perturbed parameter set and draw), 75 816 on the trunk lane's declared terms.",
-  "   - Every acrylamide panel pot, at its point and both band corners, matches to <= 2.2e-9 dex at rtol 1e-10 (Kvaerno5; Kvaerno4 1.4e-9); acrylamide and HMF to <= 1.9e-11. The staircase profile with all 42 steps: 3.3e-9. The worst species is a trace pool (glucose formed from fructose in the Lin pot, cysteine in the profile).",
-  "   - Panel predictions at the fits' tolerances equal `engine.predict`'s to <= 3e-9 dex at rtol 1e-8 and <= 6e-8 dex at rtol 1e-6, against the contract's 1e-4; so rtol 1e-6 is licensed for fits on this lane.",
-  "   - C / N / S close to ~5e-15 relative on every pot.",
-  "2. **Exact Jacobian: correct.** On 3 pots x 84 coordinates (every log10 k_ref and Ea, and the four condition coordinates), forward mode equals the port's own central differences to <= 1.3e-6 relative on the columns that matter and <= 1e-9 dex per unit everywhere. Against the engine's central differences it is <= 8e-5 relative / 3.3e-7 absolute, and the JAX-FD-vs-engine-FD column shows the same numbers: that is the engine's LSODA noise (rtol 1e-12, step 1e-5), not the port. Unlike the lipid lane, the engine here is an ODE solve, so its differences are not noise-free; the contract's \"the port's own otherwise\" applies.",
-  "3. **Kvaerno4 vs Kvaerno5: Kvaerno4 here.** On this network Kvaerno4 takes ~0.6x the steps at every tolerance (20 030 vs 33 368 on the panel at rtol 1e-8) at equal or better accuracy. The timing below is Kvaerno5 (the contract default); the composed union decides on its own pots.",
-  "4. **atol drives the step count.** On the 30-min Chang pot at rtol 1e-8, Kvaerno5 takes 2248 steps at atol 1e-14, 947 at 1e-10 and 410 at 1e-8, with acrylamide within 1.4e-10 / 5.9e-10 dex of the engine at the last two (Kvaerno4: 1328 / 709 / 462). Several pools stay at exactly zero or are depleted far below 1e-14. The smallest scored species here (acrylamide, ~1e-4 mmol/L at 10 ppb) licenses atol ~1e-10 for fits: a further 2 - 3x on the solve and the Jacobian.",
-  "5. **Cost (provisional, Kvaerno5, rtol 1e-8, atol 1e-14, one core, load ~4 - 5).**",
-  "   - One solve: 0.6 - 0.8x the engine's time on the short extrusion pot and the staircase profile, ~3x slower on the isothermal 30-min holds (LSODA is very good at one long stiff segment).",
-  "   - The Jacobian in all 84 coordinates: 2.8 - 2.9x faster than the engine's forward differences on the holds, 11x on the profile, 15x on the short pot. With atol 1e-10 and Kvaerno4 (findings 3 - 4) the holds should gain another ~3x.",
-  "   - Compile: 1 - 2.4 s per solve, 2.5 - 5.4 s per Jacobian, once per configuration and segment count.",
-  "6. **What is and is not ported.**",
-  "   - Ported for every value: the acrylamide lane's terms (formation and elimination a_w, both pH factors with the window hold, the CF-039 Ea draws, the CF-104 band outside the window), `panel.thermal_history` (the programme is pot data), and on the trunk lane `trunk.three_deoxy_exit_ph_term` (on / off) and `trunk.three_deoxy_exit_ph` for steps in this module.",
-  "   - Refused (`UnsupportedConfiguration`): a programme peaking in (60, 120) C (CF-106, as the engine); a charged species the network does not carry; an exit term on a step outside `network.REACTIONS`; a non-air atmosphere on the trunk lane; a non-unit statistical factor on a trunk step (the two engine paths disagree there).",
-  "   - Not ported: the trunk LANE's seven extra blocks (55 - 26 steps), its pyrazine / methionine / proline pH terms and the atmosphere factor (they act on those blocks), and the engine's convention of folding MET / PRO into Gly on the trunk lane. So the trunk lane's own trajectories are not yet accepted; its terms on these 26 steps are, at the rate level.",
-  "   - Composition: the acrylamide module owns Cys, CBX, FRAG_N and FRAG_S, so `compose` refuses it with a sulfur module (as `engine.resolve_lanes` refuses the two lanes); declared Cys competition is A2b's.",
-  "7. **Effort.** The two modules, the contract's pot scalars, the two generators and the tests took ~1.5 h of agent work against the 13 - 23 h estimated: no pH state, a pure Arrhenius rate law with two derived steps, and a reference path that is the engine's own per-segment functions. Remaining A2 + H3, revised:",
-  "   - the trunk lane's seven blocks and their terms (dicarbonyl, pyrazine, glycation, glyoxal, methionine, proline, fed 3-deoxy; the Gly folding; the atmosphere factor): 3 - 6 h;",
-  "   - sulfur (every remaining switch, the pH solver in `integrate`, profile mode): 12 - 20 h;",
-  "   - network infrastructure (merged titratable table and charge closure, declared competition, forced inputs including the trajectory form of `prescribed`, the fit driver): 15 - 25 h;",
-  "   - the pH-root performance step: 8 - 15 h.",
-  "   - Total remaining ~40 - 65 h (p ~0.6 of landing inside). The pH-coupled sulfur lane and the merge carry most of the uncertainty; the pH-free ports have each come in far under estimate.",
-  ""
- ],
  "trajectories": {
   "dex_floor_share_of_max_initial": 1e-09,
   "rows": [
@@ -270,7 +242,7 @@
     "max_dex_scored_products": 1.6307843964114e-11,
     "max_rel_element_drift": 5.547781120048831e-15,
     "max_abs_below_floor_share_of_y0": 4.868168587528183e-18,
-    "wall_s_all_pots_after_jit": 8.91416870802641
+    "wall_s_all_pots_after_jit": 7.774321584729478
    },
    {
     "solver": "Kvaerno4",
@@ -290,7 +262,7 @@
     "max_dex_scored_products": 1.141309269314661e-12,
     "max_rel_element_drift": 3.157967714489334e-15,
     "max_abs_below_floor_share_of_y0": 3.4685713644731205e-18,
-    "wall_s_all_pots_after_jit": 1.0087755830027163
+    "wall_s_all_pots_after_jit": 0.9659597919671796
    },
    {
     "solver": "Kvaerno4",
@@ -310,7 +282,7 @@
     "max_dex_scored_products": 1.6141115111167892e-09,
     "max_rel_element_drift": 3.552713678800501e-15,
     "max_abs_below_floor_share_of_y0": 4.539137696231032e-16,
-    "wall_s_all_pots_after_jit": 2.5125657089811284
+    "wall_s_all_pots_after_jit": 2.2941952510154806
    },
    {
     "solver": "Kvaerno4",
@@ -330,7 +302,7 @@
     "max_dex_scored_products": 4.5042414242857376e-11,
     "max_rel_element_drift": 2.4424906541753444e-15,
     "max_abs_below_floor_share_of_y0": 3.032159544055818e-16,
-    "wall_s_all_pots_after_jit": 0.411666999978479
+    "wall_s_all_pots_after_jit": 0.3112170420354232
    },
    {
     "solver": "Kvaerno4",
@@ -350,7 +322,7 @@
     "max_dex_scored_products": 1.4558578431689284e-07,
     "max_rel_element_drift": 1.7070095753996403e-15,
     "max_abs_below_floor_share_of_y0": 3.625399925865535e-14,
-    "wall_s_all_pots_after_jit": 0.8262716669996735
+    "wall_s_all_pots_after_jit": 0.6776417079963721
    },
    {
     "solver": "Kvaerno4",
@@ -370,7 +342,7 @@
     "max_dex_scored_products": 5.105738054567155e-09,
     "max_rel_element_drift": 9.86864910777917e-16,
     "max_abs_below_floor_share_of_y0": 2.7404170120016767e-14,
-    "wall_s_all_pots_after_jit": 0.149289332999615
+    "wall_s_all_pots_after_jit": 0.12686658301390707
    },
    {
     "solver": "Kvaerno5",
@@ -390,7 +362,7 @@
     "max_dex_scored_products": 1.9396040329411335e-11,
     "max_rel_element_drift": 2.9872667569493703e-15,
     "max_abs_below_floor_share_of_y0": 1.3260060074739769e-17,
-    "wall_s_all_pots_after_jit": 13.33386458386667
+    "wall_s_all_pots_after_jit": 11.65450929175131
    },
    {
     "solver": "Kvaerno5",
@@ -410,7 +382,7 @@
     "max_dex_scored_products": 3.9102054927298013e-13,
     "max_rel_element_drift": 2.565848768022584e-15,
     "max_abs_below_floor_share_of_y0": 8.02173784582692e-18,
-    "wall_s_all_pots_after_jit": 0.921139874990331
+    "wall_s_all_pots_after_jit": 0.7300991659867577
    },
    {
     "solver": "Kvaerno5",
@@ -430,7 +402,7 @@
     "max_dex_scored_products": 1.4786563085067428e-09,
     "max_rel_element_drift": 2.13376196924955e-15,
     "max_abs_below_floor_share_of_y0": 9.370386136927545e-16,
-    "wall_s_all_pots_after_jit": 5.36496775096748
+    "wall_s_all_pots_after_jit": 4.5297207909752615
    },
    {
     "solver": "Kvaerno5",
@@ -450,7 +422,7 @@
     "max_dex_scored_products": 2.3656188119502986e-11,
     "max_rel_element_drift": 3.3306690738754696e-16,
     "max_abs_below_floor_share_of_y0": 6.815321938137136e-16,
-    "wall_s_all_pots_after_jit": 0.3389258749957662
+    "wall_s_all_pots_after_jit": 0.31523862498579547
    },
    {
     "solver": "Kvaerno5",
@@ -470,7 +442,7 @@
     "max_dex_scored_products": 9.946011747530292e-08,
     "max_rel_element_drift": 1.3276741141997201e-15,
     "max_abs_below_floor_share_of_y0": 5.355605486832183e-14,
-    "wall_s_all_pots_after_jit": 1.7166511249379255
+    "wall_s_all_pots_after_jit": 1.5588056230335496
    },
    {
     "solver": "Kvaerno5",
@@ -490,331 +462,7 @@
     "max_dex_scored_products": 8.697080833286464e-10,
     "max_rel_element_drift": 2.220446049250313e-16,
     "max_abs_below_floor_share_of_y0": 4.8562909504459696e-14,
-    "wall_s_all_pots_after_jit": 0.15307137498166412
-   }
-  ]
- },
- "residuals": {
-  "rows": [
-   {
-    "solver": "Kvaerno4",
-    "tolerance": "fit_tol_1e-8",
-    "n_rows": 8,
-    "max_abs_diff_dex": 2.950446109650784e-09,
-    "rows": [
-     {
-      "pot": "acrylamide_spi_extrusion_130C_ACSRef3",
-      "compound": "acrylamide",
-      "engine": 0.015573753616558966,
-      "jax": 0.015573753639534815,
-      "measured": 150.0,
-      "engine_residual_dex": -3.983697959365597,
-      "abs_diff_dex": 6.407114838680172e-10
-     },
-     {
-      "pot": "mp_holdout_fructose_asparagine_180C_Lin2022",
-      "compound": "Acrylamide",
-      "engine": 203.1941777160473,
-      "jax": 203.19417838584295,
-      "measured": 1859.0,
-      "engine_residual_dex": -0.9613681301660169,
-      "abs_diff_dex": 1.4315788554597475e-09
-     },
-     {
-      "pot": "mp_holdout_fructose_asparagine_180C_Lin2022",
-      "compound": "5-Hydroxymethylfurfural (HMF)",
-      "engine": 1966.1162014102977,
-      "jax": 1966.1162013758249,
-      "measured": 12280.0,
-      "engine_residual_dex": -0.7955891848756942,
-      "abs_diff_dex": 7.614797681299024e-12
-     },
-     {
-      "pot": "mp_holdout_glucose_asparagine_180C_10min_Chang2021",
-      "compound": "Acrylamide",
-      "engine": 6110.035826794892,
-      "jax": 6110.035867541132,
-      "measured": 28.0,
-      "engine_residual_dex": 2.33888572543613,
-      "abs_diff_dex": 2.89619661586471e-09
-     },
-     {
-      "pot": "mp_holdout_glucose_asparagine_180C_30min_Chang2021",
-      "compound": "Acrylamide",
-      "engine": 3679.889173314099,
-      "jax": 3679.889198018491,
-      "measured": 1459.0,
-      "engine_residual_dex": 0.40177944739340554,
-      "abs_diff_dex": 2.9155717840012585e-09
-     },
-     {
-      "pot": "mp_holdout_glucose_asparagine_180C_30min_water_Chang2021",
-      "compound": "Acrylamide",
-      "engine": 3679.889173314099,
-      "jax": 3679.889198018491,
-      "measured": 832.0,
-      "engine_residual_dex": 0.6457114129961332,
-      "abs_diff_dex": 2.9155717840012585e-09
-     },
-     {
-      "pot": "mp_holdout_glucose_asparagine_180C_30min_water_Chang2021",
-      "compound": "5-Hydroxymethylfurfural (HMF)",
-      "engine": 2551.2480597809717,
-      "jax": 2551.248058456619,
-      "measured": 7000.0,
-      "engine_residual_dex": -0.438345352570086,
-      "abs_diff_dex": 2.2544233146959414e-10
-     },
-     {
-      "pot": "mp_holdout_glucose_asparagine_180C_Ye2024",
-      "compound": "Acrylamide",
-      "engine": 99573.48999758331,
-      "jax": 99573.49067405115,
-      "measured": 140.58,
-      "engine_residual_dex": 2.850220190203801,
-      "abs_diff_dex": 2.950446109650784e-09
-     }
-    ]
-   },
-   {
-    "solver": "Kvaerno4",
-    "tolerance": "loose_1e-6",
-    "n_rows": 8,
-    "max_abs_diff_dex": 5.8309452155569375e-08,
-    "rows": [
-     {
-      "pot": "acrylamide_spi_extrusion_130C_ACSRef3",
-      "compound": "acrylamide",
-      "engine": 0.015573753616558966,
-      "jax": 0.01557375570752982,
-      "measured": 150.0,
-      "engine_residual_dex": -3.983697959365597,
-      "abs_diff_dex": 5.8309452155569375e-08
-     },
-     {
-      "pot": "mp_holdout_fructose_asparagine_180C_Lin2022",
-      "compound": "Acrylamide",
-      "engine": 203.1941777160473,
-      "jax": 203.1941826367894,
-      "measured": 1859.0,
-      "engine_residual_dex": -0.9613681301660169,
-      "abs_diff_dex": 1.051728482082126e-08
-     },
-     {
-      "pot": "mp_holdout_fructose_asparagine_180C_Lin2022",
-      "compound": "5-Hydroxymethylfurfural (HMF)",
-      "engine": 1966.1162014102977,
-      "jax": 1966.1162012855093,
-      "measured": 12280.0,
-      "engine_residual_dex": -0.7955891848756942,
-      "abs_diff_dex": 2.7564173166183537e-11
-     },
-     {
-      "pot": "mp_holdout_glucose_asparagine_180C_10min_Chang2021",
-      "compound": "Acrylamide",
-      "engine": 6110.035826794892,
-      "jax": 6110.036038135279,
-      "measured": 28.0,
-      "engine_residual_dex": 2.33888572543613,
-      "abs_diff_dex": 1.5021837107553893e-08
-     },
-     {
-      "pot": "mp_holdout_glucose_asparagine_180C_30min_Chang2021",
-      "compound": "Acrylamide",
-      "engine": 3679.889173314099,
-      "jax": 3679.8893001068295,
-      "measured": 1459.0,
-      "engine_residual_dex": 0.40177944739340554,
-      "abs_diff_dex": 1.4963869698902954e-08
-     },
-     {
-      "pot": "mp_holdout_glucose_asparagine_180C_30min_water_Chang2021",
-      "compound": "Acrylamide",
-      "engine": 3679.889173314099,
-      "jax": 3679.8893001068295,
-      "measured": 832.0,
-      "engine_residual_dex": 0.6457114129961332,
-      "abs_diff_dex": 1.4963869698902954e-08
-     },
-     {
-      "pot": "mp_holdout_glucose_asparagine_180C_30min_water_Chang2021",
-      "compound": "5-Hydroxymethylfurfural (HMF)",
-      "engine": 2551.2480597809717,
-      "jax": 2551.2480532953714,
-      "measured": 7000.0,
-      "engine_residual_dex": -0.438345352570086,
-      "abs_diff_dex": 1.1040324210398467e-09
-     },
-     {
-      "pot": "mp_holdout_glucose_asparagine_180C_Ye2024",
-      "compound": "Acrylamide",
-      "engine": 99573.48999758331,
-      "jax": 99573.49365699066,
-      "measured": 140.58,
-      "engine_residual_dex": 2.850220190203801,
-      "abs_diff_dex": 1.5960677224313713e-08
-     }
-    ]
-   },
-   {
-    "solver": "Kvaerno5",
-    "tolerance": "fit_tol_1e-8",
-    "n_rows": 8,
-    "max_abs_diff_dex": 2.8807853880152834e-09,
-    "rows": [
-     {
-      "pot": "acrylamide_spi_extrusion_130C_ACSRef3",
-      "compound": "acrylamide",
-      "engine": 0.015573753616558966,
-      "jax": 0.01557375361132479,
-      "measured": 150.0,
-      "engine_residual_dex": -3.983697959365597,
-      "abs_diff_dex": 1.4596190922588903e-10
-     },
-     {
-      "pot": "mp_holdout_fructose_asparagine_180C_Lin2022",
-      "compound": "Acrylamide",
-      "engine": 203.1941777160473,
-      "jax": 203.19417834445105,
-      "measured": 1859.0,
-      "engine_residual_dex": -0.9613681301660169,
-      "abs_diff_dex": 1.343110511697887e-09
-     },
-     {
-      "pot": "mp_holdout_fructose_asparagine_180C_Lin2022",
-      "compound": "5-Hydroxymethylfurfural (HMF)",
-      "engine": 1966.1162014102977,
-      "jax": 1966.116201376005,
-      "measured": 12280.0,
-      "engine_residual_dex": -0.7955891848756942,
-      "abs_diff_dex": 7.574829652412518e-12
-     },
-     {
-      "pot": "mp_holdout_glucose_asparagine_180C_10min_Chang2021",
-      "compound": "Acrylamide",
-      "engine": 6110.035826794892,
-      "jax": 6110.035866289195,
-      "measured": 28.0,
-      "engine_residual_dex": 2.33888572543613,
-      "abs_diff_dex": 2.8072104640841644e-09
-     },
-     {
-      "pot": "mp_holdout_glucose_asparagine_180C_30min_Chang2021",
-      "compound": "Acrylamide",
-      "engine": 3679.889173314099,
-      "jax": 3679.8891972586475,
-      "measured": 1459.0,
-      "engine_residual_dex": 0.40177944739340554,
-      "abs_diff_dex": 2.8258964057670255e-09
-     },
-     {
-      "pot": "mp_holdout_glucose_asparagine_180C_30min_water_Chang2021",
-      "compound": "Acrylamide",
-      "engine": 3679.889173314099,
-      "jax": 3679.8891972586475,
-      "measured": 832.0,
-      "engine_residual_dex": 0.6457114129961332,
-      "abs_diff_dex": 2.8258964057670255e-09
-     },
-     {
-      "pot": "mp_holdout_glucose_asparagine_180C_30min_water_Chang2021",
-      "compound": "5-Hydroxymethylfurfural (HMF)",
-      "engine": 2551.2480597809717,
-      "jax": 2551.2480584926743,
-      "measured": 7000.0,
-      "engine_residual_dex": -0.438345352570086,
-      "abs_diff_dex": 2.1930457450025642e-10
-     },
-     {
-      "pot": "mp_holdout_glucose_asparagine_180C_Ye2024",
-      "compound": "Acrylamide",
-      "engine": 99573.48999758331,
-      "jax": 99573.49065807957,
-      "measured": 140.58,
-      "engine_residual_dex": 2.850220190203801,
-      "abs_diff_dex": 2.8807853880152834e-09
-     }
-    ]
-   },
-   {
-    "solver": "Kvaerno5",
-    "tolerance": "loose_1e-6",
-    "n_rows": 8,
-    "max_abs_diff_dex": 7.064562046465994e-09,
-    "rows": [
-     {
-      "pot": "acrylamide_spi_extrusion_130C_ACSRef3",
-      "compound": "acrylamide",
-      "engine": 0.015573753616558966,
-      "jax": 0.015573753363224528,
-      "measured": 150.0,
-      "engine_residual_dex": -3.983697959365597,
-      "abs_diff_dex": 7.064562046465994e-09
-     },
-     {
-      "pot": "mp_holdout_fructose_asparagine_180C_Lin2022",
-      "compound": "Acrylamide",
-      "engine": 203.1941777160473,
-      "jax": 203.19417813002187,
-      "measured": 1859.0,
-      "engine_residual_dex": -0.9613681301660169,
-      "abs_diff_dex": 8.848028976160549e-10
-     },
-     {
-      "pot": "mp_holdout_fructose_asparagine_180C_Lin2022",
-      "compound": "5-Hydroxymethylfurfural (HMF)",
-      "engine": 1966.1162014102977,
-      "jax": 1966.116201355279,
-      "measured": 12280.0,
-      "engine_residual_dex": -0.7955891848756942,
-      "abs_diff_dex": 1.2152945316756814e-11
-     },
-     {
-      "pot": "mp_holdout_glucose_asparagine_180C_10min_Chang2021",
-      "compound": "Acrylamide",
-      "engine": 6110.035826794892,
-      "jax": 6110.035867768683,
-      "measured": 28.0,
-      "engine_residual_dex": 2.33888572543613,
-      "abs_diff_dex": 2.9123707889766592e-09
-     },
-     {
-      "pot": "mp_holdout_glucose_asparagine_180C_30min_Chang2021",
-      "compound": "Acrylamide",
-      "engine": 3679.889173314099,
-      "jax": 3679.889197933887,
-      "measured": 1459.0,
-      "engine_residual_dex": 0.40177944739340554,
-      "abs_diff_dex": 2.9055868822069897e-09
-     },
-     {
-      "pot": "mp_holdout_glucose_asparagine_180C_30min_water_Chang2021",
-      "compound": "Acrylamide",
-      "engine": 3679.889173314099,
-      "jax": 3679.889197933887,
-      "measured": 832.0,
-      "engine_residual_dex": 0.6457114129961332,
-      "abs_diff_dex": 2.9055868822069897e-09
-     },
-     {
-      "pot": "mp_holdout_glucose_asparagine_180C_30min_water_Chang2021",
-      "compound": "5-Hydroxymethylfurfural (HMF)",
-      "engine": 2551.2480597809717,
-      "jax": 2551.2480583950173,
-      "measured": 7000.0,
-      "engine_residual_dex": -0.438345352570086,
-      "abs_diff_dex": 2.3592860998178367e-10
-     },
-     {
-      "pot": "mp_holdout_glucose_asparagine_180C_Ye2024",
-      "compound": "Acrylamide",
-      "engine": 99573.48999758331,
-      "jax": 99573.49066922383,
-      "measured": 140.58,
-      "engine_residual_dex": 2.850220190203801,
-      "abs_diff_dex": 2.9293918402117924e-09
-     }
-    ]
+    "wall_s_all_pots_after_jit": 0.14476129197282717
    }
   ]
  },
@@ -1638,7 +1286,7 @@
     "ph_exponent_elimination": 0.8463726703561465
    }
   },
-  "acrylamide_spi_extrusion_130C_ACSRef3": {
+  "synthetic_short_isothermal_acrylamide_130C_25s": {
    "rows": [
     0,
     1,
@@ -3246,124 +2894,440 @@
    }
   }
  },
+ "residuals": {
+  "rows": [
+   {
+    "solver": "Kvaerno4",
+    "tolerance": "fit_tol_1e-8",
+    "n_rows": 7,
+    "max_abs_diff_dex": 2.950446109650784e-09,
+    "rows": [
+     {
+      "pot": "mp_holdout_fructose_asparagine_180C_Lin2022",
+      "compound": "Acrylamide",
+      "engine": 203.1941777160473,
+      "jax": 203.19417838584295,
+      "measured": 1859.0,
+      "engine_residual_dex": -0.9613681301660169,
+      "abs_diff_dex": 1.4315788554597475e-09
+     },
+     {
+      "pot": "mp_holdout_fructose_asparagine_180C_Lin2022",
+      "compound": "5-Hydroxymethylfurfural (HMF)",
+      "engine": 1966.1162014102977,
+      "jax": 1966.1162013758249,
+      "measured": 12280.0,
+      "engine_residual_dex": -0.7955891848756942,
+      "abs_diff_dex": 7.614797681299024e-12
+     },
+     {
+      "pot": "mp_holdout_glucose_asparagine_180C_10min_Chang2021",
+      "compound": "Acrylamide",
+      "engine": 6110.035826794892,
+      "jax": 6110.035867541132,
+      "measured": 28.0,
+      "engine_residual_dex": 2.33888572543613,
+      "abs_diff_dex": 2.89619661586471e-09
+     },
+     {
+      "pot": "mp_holdout_glucose_asparagine_180C_30min_Chang2021",
+      "compound": "Acrylamide",
+      "engine": 3679.889173314099,
+      "jax": 3679.889198018491,
+      "measured": 1459.0,
+      "engine_residual_dex": 0.40177944739340554,
+      "abs_diff_dex": 2.9155717840012585e-09
+     },
+     {
+      "pot": "mp_holdout_glucose_asparagine_180C_30min_water_Chang2021",
+      "compound": "Acrylamide",
+      "engine": 3679.889173314099,
+      "jax": 3679.889198018491,
+      "measured": 832.0,
+      "engine_residual_dex": 0.6457114129961332,
+      "abs_diff_dex": 2.9155717840012585e-09
+     },
+     {
+      "pot": "mp_holdout_glucose_asparagine_180C_30min_water_Chang2021",
+      "compound": "5-Hydroxymethylfurfural (HMF)",
+      "engine": 2551.2480597809717,
+      "jax": 2551.248058456619,
+      "measured": 7000.0,
+      "engine_residual_dex": -0.438345352570086,
+      "abs_diff_dex": 2.2544233146959414e-10
+     },
+     {
+      "pot": "mp_holdout_glucose_asparagine_180C_Ye2024",
+      "compound": "Acrylamide",
+      "engine": 99573.48999758331,
+      "jax": 99573.49067405115,
+      "measured": 140.58,
+      "engine_residual_dex": 2.850220190203801,
+      "abs_diff_dex": 2.950446109650784e-09
+     }
+    ]
+   },
+   {
+    "solver": "Kvaerno4",
+    "tolerance": "loose_1e-6",
+    "n_rows": 7,
+    "max_abs_diff_dex": 1.5960677224313713e-08,
+    "rows": [
+     {
+      "pot": "mp_holdout_fructose_asparagine_180C_Lin2022",
+      "compound": "Acrylamide",
+      "engine": 203.1941777160473,
+      "jax": 203.1941826367894,
+      "measured": 1859.0,
+      "engine_residual_dex": -0.9613681301660169,
+      "abs_diff_dex": 1.051728482082126e-08
+     },
+     {
+      "pot": "mp_holdout_fructose_asparagine_180C_Lin2022",
+      "compound": "5-Hydroxymethylfurfural (HMF)",
+      "engine": 1966.1162014102977,
+      "jax": 1966.1162012855093,
+      "measured": 12280.0,
+      "engine_residual_dex": -0.7955891848756942,
+      "abs_diff_dex": 2.7564173166183537e-11
+     },
+     {
+      "pot": "mp_holdout_glucose_asparagine_180C_10min_Chang2021",
+      "compound": "Acrylamide",
+      "engine": 6110.035826794892,
+      "jax": 6110.036038135279,
+      "measured": 28.0,
+      "engine_residual_dex": 2.33888572543613,
+      "abs_diff_dex": 1.5021837107553893e-08
+     },
+     {
+      "pot": "mp_holdout_glucose_asparagine_180C_30min_Chang2021",
+      "compound": "Acrylamide",
+      "engine": 3679.889173314099,
+      "jax": 3679.8893001068295,
+      "measured": 1459.0,
+      "engine_residual_dex": 0.40177944739340554,
+      "abs_diff_dex": 1.4963869698902954e-08
+     },
+     {
+      "pot": "mp_holdout_glucose_asparagine_180C_30min_water_Chang2021",
+      "compound": "Acrylamide",
+      "engine": 3679.889173314099,
+      "jax": 3679.8893001068295,
+      "measured": 832.0,
+      "engine_residual_dex": 0.6457114129961332,
+      "abs_diff_dex": 1.4963869698902954e-08
+     },
+     {
+      "pot": "mp_holdout_glucose_asparagine_180C_30min_water_Chang2021",
+      "compound": "5-Hydroxymethylfurfural (HMF)",
+      "engine": 2551.2480597809717,
+      "jax": 2551.2480532953714,
+      "measured": 7000.0,
+      "engine_residual_dex": -0.438345352570086,
+      "abs_diff_dex": 1.1040324210398467e-09
+     },
+     {
+      "pot": "mp_holdout_glucose_asparagine_180C_Ye2024",
+      "compound": "Acrylamide",
+      "engine": 99573.48999758331,
+      "jax": 99573.49365699066,
+      "measured": 140.58,
+      "engine_residual_dex": 2.850220190203801,
+      "abs_diff_dex": 1.5960677224313713e-08
+     }
+    ]
+   },
+   {
+    "solver": "Kvaerno5",
+    "tolerance": "fit_tol_1e-8",
+    "n_rows": 7,
+    "max_abs_diff_dex": 2.8807853880152834e-09,
+    "rows": [
+     {
+      "pot": "mp_holdout_fructose_asparagine_180C_Lin2022",
+      "compound": "Acrylamide",
+      "engine": 203.1941777160473,
+      "jax": 203.19417834445105,
+      "measured": 1859.0,
+      "engine_residual_dex": -0.9613681301660169,
+      "abs_diff_dex": 1.343110511697887e-09
+     },
+     {
+      "pot": "mp_holdout_fructose_asparagine_180C_Lin2022",
+      "compound": "5-Hydroxymethylfurfural (HMF)",
+      "engine": 1966.1162014102977,
+      "jax": 1966.116201376005,
+      "measured": 12280.0,
+      "engine_residual_dex": -0.7955891848756942,
+      "abs_diff_dex": 7.574829652412518e-12
+     },
+     {
+      "pot": "mp_holdout_glucose_asparagine_180C_10min_Chang2021",
+      "compound": "Acrylamide",
+      "engine": 6110.035826794892,
+      "jax": 6110.035866289195,
+      "measured": 28.0,
+      "engine_residual_dex": 2.33888572543613,
+      "abs_diff_dex": 2.8072104640841644e-09
+     },
+     {
+      "pot": "mp_holdout_glucose_asparagine_180C_30min_Chang2021",
+      "compound": "Acrylamide",
+      "engine": 3679.889173314099,
+      "jax": 3679.8891972586475,
+      "measured": 1459.0,
+      "engine_residual_dex": 0.40177944739340554,
+      "abs_diff_dex": 2.8258964057670255e-09
+     },
+     {
+      "pot": "mp_holdout_glucose_asparagine_180C_30min_water_Chang2021",
+      "compound": "Acrylamide",
+      "engine": 3679.889173314099,
+      "jax": 3679.8891972586475,
+      "measured": 832.0,
+      "engine_residual_dex": 0.6457114129961332,
+      "abs_diff_dex": 2.8258964057670255e-09
+     },
+     {
+      "pot": "mp_holdout_glucose_asparagine_180C_30min_water_Chang2021",
+      "compound": "5-Hydroxymethylfurfural (HMF)",
+      "engine": 2551.2480597809717,
+      "jax": 2551.2480584926743,
+      "measured": 7000.0,
+      "engine_residual_dex": -0.438345352570086,
+      "abs_diff_dex": 2.1930457450025642e-10
+     },
+     {
+      "pot": "mp_holdout_glucose_asparagine_180C_Ye2024",
+      "compound": "Acrylamide",
+      "engine": 99573.48999758331,
+      "jax": 99573.49065807957,
+      "measured": 140.58,
+      "engine_residual_dex": 2.850220190203801,
+      "abs_diff_dex": 2.8807853880152834e-09
+     }
+    ]
+   },
+   {
+    "solver": "Kvaerno5",
+    "tolerance": "loose_1e-6",
+    "n_rows": 7,
+    "max_abs_diff_dex": 2.9293918402117924e-09,
+    "rows": [
+     {
+      "pot": "mp_holdout_fructose_asparagine_180C_Lin2022",
+      "compound": "Acrylamide",
+      "engine": 203.1941777160473,
+      "jax": 203.19417813002187,
+      "measured": 1859.0,
+      "engine_residual_dex": -0.9613681301660169,
+      "abs_diff_dex": 8.848028976160549e-10
+     },
+     {
+      "pot": "mp_holdout_fructose_asparagine_180C_Lin2022",
+      "compound": "5-Hydroxymethylfurfural (HMF)",
+      "engine": 1966.1162014102977,
+      "jax": 1966.116201355279,
+      "measured": 12280.0,
+      "engine_residual_dex": -0.7955891848756942,
+      "abs_diff_dex": 1.2152945316756814e-11
+     },
+     {
+      "pot": "mp_holdout_glucose_asparagine_180C_10min_Chang2021",
+      "compound": "Acrylamide",
+      "engine": 6110.035826794892,
+      "jax": 6110.035867768683,
+      "measured": 28.0,
+      "engine_residual_dex": 2.33888572543613,
+      "abs_diff_dex": 2.9123707889766592e-09
+     },
+     {
+      "pot": "mp_holdout_glucose_asparagine_180C_30min_Chang2021",
+      "compound": "Acrylamide",
+      "engine": 3679.889173314099,
+      "jax": 3679.889197933887,
+      "measured": 1459.0,
+      "engine_residual_dex": 0.40177944739340554,
+      "abs_diff_dex": 2.9055868822069897e-09
+     },
+     {
+      "pot": "mp_holdout_glucose_asparagine_180C_30min_water_Chang2021",
+      "compound": "Acrylamide",
+      "engine": 3679.889173314099,
+      "jax": 3679.889197933887,
+      "measured": 832.0,
+      "engine_residual_dex": 0.6457114129961332,
+      "abs_diff_dex": 2.9055868822069897e-09
+     },
+     {
+      "pot": "mp_holdout_glucose_asparagine_180C_30min_water_Chang2021",
+      "compound": "5-Hydroxymethylfurfural (HMF)",
+      "engine": 2551.2480597809717,
+      "jax": 2551.2480583950173,
+      "measured": 7000.0,
+      "engine_residual_dex": -0.438345352570086,
+      "abs_diff_dex": 2.3592860998178367e-10
+     },
+     {
+      "pot": "mp_holdout_glucose_asparagine_180C_Ye2024",
+      "compound": "Acrylamide",
+      "engine": 99573.48999758331,
+      "jax": 99573.49066922383,
+      "measured": 140.58,
+      "engine_residual_dex": 2.850220190203801,
+      "abs_diff_dex": 2.9293918402117924e-09
+     }
+    ]
+   }
+  ]
+ },
  "timing": {
   "rows": [
    {
-    "class": "short isothermal (extrusion, 0.42 min at 130 C)",
-    "pot": "acrylamide_spi_extrusion_130C_ACSRef3",
+    "class": "short isothermal (synthetic, 0.42 min at 130 C)",
+    "pot": "synthetic_short_isothermal_acrylamide_130C_25s",
     "n_segments": 1,
     "engine": {
-     "lane_run_median_s": 0.002929728987510316,
-     "forward_fd_jacobian_s": 0.24902696393837687,
+     "lane_run_median_s": 0.004509395512286574,
+     "forward_fd_jacobian_s": 0.38329861854435876,
      "fd_runs": 85
     },
     "jax": {
      "fit_tol_1e-8": {
-      "solve_median_s": 0.0017626250046305358,
-      "solve_compile_s": 1.0355387080053333,
+      "solve_median_s": 0.0028124169912189245,
+      "solve_compile_s": 1.6513279170030728,
       "steps": 19,
-      "jacobian_median_s": 0.016422665998106822,
-      "jacobian_compile_s": 2.5299069579923525,
+      "jacobian_median_s": 0.028670333966147155,
+      "jacobian_compile_s": 3.4757620000164025,
       "n_coordinates": 84
      },
      "loose_1e-6": {
-      "solve_median_s": 0.0011397080088499933,
-      "solve_compile_s": 1.4132177499996033,
+      "solve_median_s": 0.0016229579923674464,
+      "solve_compile_s": 1.6900104169617407,
       "steps": 10,
-      "jacobian_median_s": 0.008954791992437094,
-      "jacobian_compile_s": 2.222053292003693,
+      "jacobian_median_s": 0.01557308400515467,
+      "jacobian_compile_s": 2.75439679203555,
       "n_coordinates": 84
      }
     },
-    "uptime": "13:59  up 3 days, 21:08, 1 user, load averages: 4.59 5.16 6.41"
+    "uptime": "2:36  up 4 days,  9:45, 1 user, load averages: 16.56 20.67 17.36"
    },
    {
     "class": "isothermal hold (30 min at 180 C)",
     "pot": "mp_holdout_glucose_asparagine_180C_30min_Chang2021",
     "n_segments": 1,
     "engine": {
-     "lane_run_median_s": 0.0695114375121193,
-     "forward_fd_jacobian_s": 5.908472188530141,
+     "lane_run_median_s": 0.11258900002576411,
+     "forward_fd_jacobian_s": 9.57006500218995,
      "fd_runs": 85
     },
     "jax": {
      "fit_tol_1e-8": {
-      "solve_median_s": 0.22117075001006015,
-      "solve_compile_s": 1.5363722080073785,
+      "solve_median_s": 0.3011533330427483,
+      "solve_compile_s": 1.9335665830294602,
       "steps": 2248,
-      "jacobian_median_s": 2.1425476250005886,
-      "jacobian_compile_s": 4.682340208004462,
+      "jacobian_median_s": 3.288210333965253,
+      "jacobian_compile_s": 6.899622166994959,
       "n_coordinates": 84
      },
      "loose_1e-6": {
-      "solve_median_s": 0.08506575002684258,
-      "solve_compile_s": 1.3782752080005594,
+      "solve_median_s": 0.10675983299734071,
+      "solve_compile_s": 1.9226720409933478,
       "steps": 790,
-      "jacobian_median_s": 0.7387762079888489,
-      "jacobian_compile_s": 3.0060081249976065,
+      "jacobian_median_s": 1.1362663750187494,
+      "jacobian_compile_s": 3.9920683330274187,
       "n_coordinates": 84
      }
     },
-    "uptime": "13:59  up 3 days, 21:09, 1 user, load averages: 4.50 5.10 6.36"
+    "uptime": "2:36  up 4 days,  9:46, 1 user, load averages: 17.73 20.53 17.42"
    },
    {
     "class": "dense isothermal (200 mM, 30 min at 180 C)",
     "pot": "mp_holdout_glucose_asparagine_180C_Ye2024",
     "n_segments": 1,
     "engine": {
-     "lane_run_median_s": 0.10316468800010625,
-     "forward_fd_jacobian_s": 8.768998480009031,
+     "lane_run_median_s": 0.1357514789851848,
+     "forward_fd_jacobian_s": 11.538875713740708,
      "fd_runs": 85
     },
     "jax": {
      "fit_tol_1e-8": {
-      "solve_median_s": 0.3061099589976948,
-      "solve_compile_s": 2.081435166997835,
+      "solve_median_s": 0.4142110829707235,
+      "solve_compile_s": 2.20471608400112,
       "steps": 3125,
-      "jacobian_median_s": 3.0416692910075653,
-      "jacobian_compile_s": 5.427348458004417,
+      "jacobian_median_s": 4.446474542026408,
+      "jacobian_compile_s": 7.19988337502582,
       "n_coordinates": 84
      },
      "loose_1e-6": {
-      "solve_median_s": 0.11150212498614565,
-      "solve_compile_s": 1.5361574580019806,
+      "solve_median_s": 0.14785904198652133,
+      "solve_compile_s": 2.7025070829549804,
       "steps": 1130,
-      "jacobian_median_s": 1.0685256669821683,
-      "jacobian_compile_s": 3.216329582995968,
+      "jacobian_median_s": 1.6027400000020862,
+      "jacobian_compile_s": 4.388635625015013,
       "n_coordinates": 84
      }
     },
-    "uptime": "14:00  up 3 days, 21:09, 1 user, load averages: 4.86 5.14 6.32"
+    "uptime": "2:37  up 4 days,  9:46, 1 user, load averages: 15.83 19.67 17.24"
    },
    {
     "class": "staircase profile (all 42 steps)",
     "pot": "synthetic_profile_acrylamide_all_steps_25_180_100",
     "n_segments": 119,
     "engine": {
-     "lane_run_median_s": 0.2838075625040801,
-     "forward_fd_jacobian_s": 24.12364281284681,
+     "lane_run_median_s": 0.3953541250084527,
+     "forward_fd_jacobian_s": 33.60510062571848,
      "fd_runs": 85
     },
     "jax": {
      "fit_tol_1e-8": {
-      "solve_median_s": 0.2292610419972334,
-      "solve_compile_s": 2.4321875409805216,
+      "solve_median_s": 0.2882839580415748,
+      "solve_compile_s": 2.303510957979597,
       "steps": 2299,
-      "jacobian_median_s": 2.0963696250109933,
-      "jacobian_compile_s": 4.746731457998976,
+      "jacobian_median_s": 3.289371667022351,
+      "jacobian_compile_s": 5.917334708967246,
       "n_coordinates": 84
      },
      "loose_1e-6": {
-      "solve_median_s": 0.09195129098952748,
-      "solve_compile_s": 1.4128372079867404,
+      "solve_median_s": 0.14816799998516217,
+      "solve_compile_s": 2.1542201249976642,
       "steps": 1085,
-      "jacobian_median_s": 0.9299211659817956,
-      "jacobian_compile_s": 3.2935794160002843,
+      "jacobian_median_s": 1.6299397500115447,
+      "jacobian_compile_s": 5.818032583978493,
       "n_coordinates": 84
      }
     },
-    "uptime": "14:00  up 3 days, 21:10, 1 user, load averages: 4.21 4.96 6.23"
+    "uptime": "2:38  up 4 days,  9:47, 1 user, load averages: 15.33 18.90 17.06"
    }
   ]
- }
+ },
+ "findings": [
+  "## Findings",
+  "",
+  "1. **Match: yes, at the contract's bar with margin.**",
+  "   - Rates equal the engine's functions to ~1e-15 relative: 81 648 values on the composed acrylamide lane (every condition term on and off, a perturbed parameter set and draw), 75 816 on the trunk lane's declared terms.",
+  "   - Every acrylamide panel pot, at its point and both band corners, matches to <= 2.2e-9 dex at rtol 1e-10 (Kvaerno5; Kvaerno4 1.4e-9); acrylamide and HMF to <= 1.9e-11. The staircase profile with all 42 steps: 3.3e-9. The worst species is a trace pool (glucose formed from fructose in the Lin pot, cysteine in the profile).",
+  "   - Panel predictions at the fits' tolerances equal `engine.predict`'s to <= 3e-9 dex at rtol 1e-8 and <= 6e-8 dex at rtol 1e-6, against the contract's 1e-4; so rtol 1e-6 is licensed for fits on this lane.",
+  "   - C / N / S close to ~5e-15 relative on every pot.",
+  "2. **Exact Jacobian: correct.** On 3 pots x 84 coordinates (every log10 k_ref and Ea, and the four condition coordinates), forward mode equals the port's own central differences to <= 1.3e-6 relative on the columns that matter and <= 1e-9 dex per unit everywhere. Against the engine's central differences it is <= 8e-5 relative / 3.3e-7 absolute, and the JAX-FD-vs-engine-FD column shows the same numbers: that is the engine's LSODA noise (rtol 1e-12, step 1e-5), not the port. Unlike the lipid lane, the engine here is an ODE solve, so its differences are not noise-free; the contract's \"the port's own otherwise\" applies.",
+  "3. **Kvaerno4 vs Kvaerno5: Kvaerno4 here.** On this network Kvaerno4 takes ~0.6x the steps at every tolerance (20 030 vs 33 368 on the panel at rtol 1e-8) at equal or better accuracy. The timing below is Kvaerno5 (the contract default); the composed union decides on its own pots.",
+  "4. **atol drives the step count.** On the 30-min Chang pot at rtol 1e-8, Kvaerno5 takes 2248 steps at atol 1e-14, 947 at 1e-10 and 410 at 1e-8, with acrylamide within 1.4e-10 / 5.9e-10 dex of the engine at the last two (Kvaerno4: 1328 / 709 / 462). Several pools stay at exactly zero or are depleted far below 1e-14. The smallest scored species here (acrylamide, ~1e-4 mmol/L at 10 ppb) licenses atol ~1e-10 for fits: a further 2 - 3x on the solve and the Jacobian.",
+  "5. **Cost (provisional, Kvaerno5, rtol 1e-8, atol 1e-14, one core, load ~4 - 5).**",
+  "   - One solve: 0.6 - 0.8x the engine's time on the short isothermal pot and the staircase profile, ~3x slower on the isothermal 30-min holds (LSODA is very good at one long stiff segment).",
+  "   - The Jacobian in all 84 coordinates: 2.8 - 2.9x faster than the engine's forward differences on the holds, 11x on the profile, 15x on the short pot. With atol 1e-10 and Kvaerno4 (findings 3 - 4) the holds should gain another ~3x.",
+  "   - Compile: 1 - 2.4 s per solve, 2.5 - 5.4 s per Jacobian, once per configuration and segment count.",
+  "6. **What is and is not ported.**",
+  "   - Ported for every value: the acrylamide lane's terms (formation and elimination a_w, both pH factors with the window hold, the CF-039 Ea draws, the CF-104 band outside the window), `panel.thermal_history` (the programme is pot data), and on the trunk lane `trunk.three_deoxy_exit_ph_term` (on / off) and `trunk.three_deoxy_exit_ph` for steps in this module.",
+  "   - Refused (`UnsupportedConfiguration`): a programme peaking in (60, 120) C (CF-106, as the engine); a charged species the network does not carry; an exit term on a step outside `network.REACTIONS`; a non-air atmosphere on the trunk lane; a non-unit statistical factor on a trunk step (the two engine paths disagree there).",
+  "   - Not ported: the trunk LANE's seven extra blocks (55 - 26 steps), its pyrazine / methionine / proline pH terms and the atmosphere factor (they act on those blocks), and the engine's convention of folding MET / PRO into Gly on the trunk lane. So the trunk lane's own trajectories are not yet accepted; its terms on these 26 steps are, at the rate level.",
+  "   - Composition: the acrylamide module owns Cys, CBX, FRAG_N and FRAG_S, so `compose` refuses it with a sulfur module (as `engine.resolve_lanes` refuses the two lanes); declared Cys competition is A2b's.",
+  "7. **Effort.** The two modules, the contract's pot scalars, the two generators and the tests took ~1.5 h of agent work against the 13 - 23 h estimated: no pH state, a pure Arrhenius rate law with two derived steps, and a reference path that is the engine's own per-segment functions. Remaining A2 + H3, revised:",
+  "   - the trunk lane's seven blocks and their terms (dicarbonyl, pyrazine, glycation, glyoxal, methionine, proline, fed 3-deoxy; the Gly folding; the atmosphere factor): 3 - 6 h;",
+  "   - sulfur (every remaining switch, the pH solver in `integrate`, profile mode): 12 - 20 h;",
+  "   - network infrastructure (merged titratable table and charge closure, declared competition, forced inputs including the trajectory form of `prescribed`, the fit driver): 15 - 25 h;",
+  "   - the pH-root performance step: 8 - 15 h.",
+  "   - Total remaining ~40 - 65 h (p ~0.6 of landing inside). The pH-coupled sulfur lane and the merge carry most of the uncertainty; the pH-free ports have each come in far under estimate.",
+  ""
+ ]
 }

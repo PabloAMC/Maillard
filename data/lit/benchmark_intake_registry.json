@@ -1476,8 +1476,8 @@
       "eligibility": "benchmark_eligible",
       "status": "encoded",
       "what_it_supports": [
-        "Short-residence acrylamide benchmark for SPI extrusion with SME-aware effective temperature",
-        "22.36 -> 62.62 ug/kg increase in 20-30 s at 130 C as a fast-kinetics closure point"
+        "Short-residence acrylamide benchmark for SPI extrusion (the SME the bundle carried, 250 kJ/kg, is not in the paper and was withdrawn 2026-11-06)",
+        "Acrylamide in twin-screw extruded SPI : corn starch (9:1, 30 % moisture), highest in the 130 C arm (~150 ug/kg, Fig. 2D read-off; unextruded control ~38): the panel bundle's datum, refused on the panel because the paper prints no precursor charge (CF-131)"
       ],
       "what_it_does_not_support": [
         "Raw-flour baseline reconstruction inside the same mechanistic solver",
@@ -1485,12 +1485,9 @@
       ],
       "key_values": {
         "temp_C": 130.0,
-        "time_seconds": 25.0,
-        "acrylamide_start_ug_per_kg": 22.36,
-        "acrylamide_end_ug_per_kg": 62.62,
         "moisture_regime": "lme"
       },
-      "repo_next_action": "Keep encoded as the fastest extrusion acrylamide closure point and route through effective extrusion temperature.",
+      "repo_next_action": "None until the paper's precursor charge or residence time is known: the benchmark row is refused (CF-131) and the frozen B3 report still carries it.",
       "runtime_artifacts": [
         {
           "artifact_type": "benchmark",
@@ -1499,11 +1496,18 @@
         }
       ],
       "requires_primary_data": false,
-      "citation_aliases": [
-        "ACS Food Sci. Tech. 2022 (Ref. 3)",
-        "ACS ResearchGate (2024)",
-        "ACS ResearchGate ref. 3"
-      ]
+      "value_withdrawal": {
+        "date": "2026-11-06",
+        "rule": "owner 2026-11-02: a value that is not in the cited paper is withdrawn; the record is kept because the paper is real (Ma, Fu, Cheng & Liu 2024, Int. J. Mol. Sci. 25:8668); coordinator review of PR #88",
+        "withdrawn": [
+          "key_values.time_seconds 25.0 (no residence time is printed; the bundle keeps 25 s as a labelled assumption)",
+          "key_values.acrylamide_start_ug_per_kg 22.36",
+          "key_values.acrylamide_end_ug_per_kg 62.62",
+          "what_it_supports '22.36 -> 62.62 ug/kg increase in 20-30 s at 130 C as a fast-kinetics closure point'",
+          "citation_aliases 'ACS Food Sci. Tech. 2022 (Ref. 3)', 'ACS ResearchGate (2024)', 'ACS ResearchGate ref. 3' (they name no real venue for this paper; closed in closed_citations)"
+        ],
+        "basis": "Ma 2024 read from the PDF on 2026-11-06 (second reader, PR #88): acrylamide appears only in Fig. 2 (no table, no number in the text); Fig. 2D reads ~150 (130 C), ~120 (150 C), ~82 (170 C) and ~38 (control) ug/kg; no 22.36, no 62.62, no residence time. The 62.62 was already shown to match no bar on 2026-08-27 (Wave K). Dossier: ma2024_extraction.md."
+      }
     },
     {
       "id": "foods_2023_cml_cel_proxy_benchmark",
@@ -9129,7 +9133,10 @@
       "Hrncirik & Zeelenberg (2013), J. Am. Oil Chem. Soc. 91:591",
       "Kocadağlı & Gökmen (2016)",
       "Kaspchak, Toci, Menezes, Igarashi-Mafra & Mafra (2022), Food Chem. 394:133518",
-      "Wang, Z. et al. (2012)"
+      "Wang, Z. et al. (2012)",
+      "ACS Food Sci. Tech. 2022 (Ref. 3)",
+      "ACS ResearchGate (2024)",
+      "ACS ResearchGate ref. 3"
     ]
   }
 }

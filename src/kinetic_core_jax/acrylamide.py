@@ -134,6 +134,8 @@ def build(cfg=None) -> Module:
         stoichiometry=stoich, reactants=reactants, params=params, bands=bands, basis=basis,
         rate_constants=rate_constants, observables=obs, requires=("trunk",), needs_ph=False,
         config_digest=cfg.digest(), pot_inputs=("ph_label", "aw"),
+        # the a_w window's edges (a jump) and the elimination table's knots; the pH window's edges (held outside)
+        breakpoints={"aw": tuple(sorted({w_lo, w_hi} | {float(a) for a in table_a})), "ph_label": (p_lo, p_hi)},
         notes=("acrylamide_conditions B14 / B15 / CF-039 / CF-104 ported; CF-106 refused at the pot",
                "owns Cys, CBX, FRAG_N, FRAG_S: refuses to compose with a sulfur module (engine.resolve_lanes)"))
 
