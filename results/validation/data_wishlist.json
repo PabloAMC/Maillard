@@ -4,8 +4,8 @@
     "artifact": "data_wishlist",
     "generated_on": "2026-11-06",
     "git": {
-      "commit": "06830fd78b48e16bd49dfec4a69c1e75028ddb36",
-      "short": "06830fd7",
+      "commit": "107ade8355ef6139956f20b9c4b66316a81e7645",
+      "short": "107ade83",
       "branch": "register-pass-2026-11-06",
       "dirty": true
     },
@@ -41,7 +41,7 @@
       },
       {
         "path": "docs/reference/decisive_measurements.yml",
-        "sha256": "2a47ad0f97ac5a75a314793fdeca44b105922ef6eeafab77c545aca6acc1c718"
+        "sha256": "57490a4c531ebde0d22145634ecb95041939e65e0a1070c7db108424fbcec89e"
       }
     ]
   },
@@ -1249,10 +1249,11 @@
         "R3: routes A + B with a pot-specific k_d (EX-049's optima)",
         "R4: R1 with k_d moving with pH, buffer and order"
       ],
-      "measurement": "Two fed pots, neither requested yet: ARP-Phe with the ARP itself measured under argon and under air with the headspace stated; and 1-DG fed with Phe, whose design is not yet written.",
-      "measurement_source": "M3 prereg sec. 19 ('W6 candidates', coordinator: not requested now) and sec. 17; case M3 secs. 4 (D3, D4)",
+      "measurement": "Three fed pots, none requested yet: (a) ARP-Phe with the ARP itself measured under argon and under air, the vial scale, the headspace / liquid ratio and the deoxygenation method stated; (b) a trapped fed-ARP-Phe pot under argon with MGO and GO quantified beside the three osones, with a post-incubation-trap control; and 1-DG fed with Phe, whose design is not yet written.",
+      "measurement_source": "M3 prereg secs. 19 and 23 (the W6 designs; coordinator: not requested now); case M3 secs. 4 (D3, D4); case M3b (parked) and PR #87's proposal for arm (a)'s scale, headspace and deoxygenation and for arm (b); CK-50 (m0_integrity_batch1_strecker_sulfur) for the headspace / liquid ratio and scale",
       "arms": [
-        "fed ARP-Phe, the ARP measured per atmosphere: Fed ARP-Phe at the claim's conditions (100 C, label pH 7.0, 0.5 M phosphate: M3 prereg sec. 1.1, the class of Hofmann 2000b Table 2's closed-vial pot); the ARP measured over time, headspace stated; pH 7.0 (label_25C); temperatures 100 C; O2 argon vs air, headspace stated; replicates not stated in the records",
+        "(a) fed ARP-Phe, the ARP measured per atmosphere: Fed ARP-Phe 0.1 M, 0.5 M phosphate, 0 - 120 min (the claim's conditions, M3 prereg sec. 1.1: the class of Hofmann 2000b Table 2's closed-vial pot); ARP-Phe itself measured over time; the vial scale and the headspace / liquid volume ratio stated (CK-50: they decide R2's O2 feasibility); the deoxygenation method of the argon arm stated; pH 7.0 (label_25C); temperatures 100 C; O2 argon vs air; vial scale, headspace / liquid ratio and deoxygenation method stated; replicates not stated in the records",
+        "(b) trapped fed ARP-Phe under argon, MGO and GO quantified: Fed ARP-Phe at the Table 2 charge (0.1 M, 0.5 M phosphate); in-situ OPD at a stated concentration, plus a post-incubation-trap control for OPD-made osone (the continuous-OPD artefact, M3b sec. 3.2); MGO and GO quantified beside 1-DG, 3-DG and glucosone, per ARP decayed (M3b secs. 3.1, 4.3); pH 7.0 (label_25C); temperatures 100 C; O2 argon; replicates not stated in the records",
         "fed 1-DG + Phe: design not yet written: the records name only 'a fed 1-DG + Phe pot' (prereg sec. 19); the comparison it serves (case D4) is against Hofmann 2000 Table 4's fed donors (0.1 M donor + Phe, pH 7, 98 C, 60 min, argon / air)."
       ],
       "design_written": false,
@@ -1272,59 +1273,94 @@
         {
           "outcome": "the fed decay stays at the fed designs' ~0.006 - 0.010 /min under air and argon",
           "means": "the decay does not transfer (R3), or is O2- / vessel-limited (EX-051's reading)"
+        },
+        {
+          "outcome": "(a): the stated scale and headspace / liquid ratio r give an air-arm O2 budget below R2's need (r < 2.9)",
+          "means": "R2 refuted under air in that vessel; R1 is feasible at any r >= 0.06 (CK-50)"
+        },
+        {
+          "outcome": "(b): the trapped osones and fragment MGO / GO per ARP decayed under argon at 100 C",
+          "means": "the anoxic exit split and the fragment-MGO share measured at the scored temperature: fragment MGO is ~22 - 25 % of the layer's argon over-prediction and unmeasured by Figs. 2 - 3 (M3b sec. 4.3), and the 85 -> 100 C split transfer is removed (M3b premortem item 2)"
+        },
+        {
+          "outcome": "(b): the in-situ trapped osones exceed the post-incubation-trapped control",
+          "means": "a share of the trapped osone is OPD-made, which biases trapped-osone units up (against an inert bypass; M3b sec. 4.3)"
         }
       ],
       "unlocks": [
         "a phase-1 Strecker layer for DFA's design class, relative within-laboratory only (no engine change)",
         "phase 2, which feeds the layer from the network and moves shipped pyrazines (owner sign-off)",
-        "outcome row 4 ('dicarbonyl only'), for which the prereg names these pots"
+        "outcome row 4 ('dicarbonyl only'), for which the prereg names these pots",
+        "M3b's question (the argon over-prediction every M3 rival shares, MF-29) without spending hofmann2000b Figs. 2 - 3"
       ],
       "existing_data_route": "W6 lists DFA's raw Table 4 and Quest's recovery (CF-073) as existing-data requests for M3; no record says either would separate R1 from R2",
-      "status": "provisional",
-      "status_note": "The M3 prereg is a v2.1 DRAFT awaiting its pre-freeze power check, and EX-067's freeze checklist (Wietstock 2016's third O2 route) is open; the decisive pots may change with the freeze.",
+      "status": "open",
+      "status_note": null,
       "disagreements": [],
       "added": "2026-11-05"
     },
     {
       "id": "glucose_mft_carbon_origin",
-      "plan_step": "M4",
-      "question": "Which glucose carbon does MFT lose (C-6, keeping C-1 as its methyl, as R1 and R2 both require; or C-1 through a 3-DG-side C5), and does glucose MFT pass through norfuraneol (R1) or bypass it (R2)?",
+      "plan_step": "M4 (development grade on disk, decider W6)",
+      "question": "The claim is restated as a hexose C5 entry into 1-DPO with its carbon origin undecided: does glucose MFT keep C-1 as its methyl (C-6 lost through 1-DG: R1, or R2 below norfuraneol on the same supply) or lose C-1 as formic acid through glucosone (R5); and does the cysteine-hexose Amadori pool feed the C5 entry or act only as a cysteine sink (R4')?",
       "rivals": [
-        "R0: the current engine (~0 MFT, refused)",
-        "R1 (the claim): Glc + Cys -> Cys-hexose Amadori -> 1-DG + Cys -> 1-DPO + C1 (C-6 lost) -> the pentose steps",
+        "R0: the current engine (~0 MFT, refused); its C2 + C3 route is falsified as the hexose MFT route",
+        "R1 (the claim, C-1-retained form): Glc + Cys -> Cys-hexose Amadori -> 1-DG + Cys -> 1-DPO + C1 (C-6 lost; MFT's methyl = glucose C-1) -> the pentose steps",
+        "R5 (the claim, C-1-lost form): the oxidative route, Cys-hexose Amadori -> glucosone -> beta-cleavage (C-1 lost as formic acid) -> 1-DPO -> the pentose steps (Glomb 2010; MFT's methyl = glucose C-2)",
         "R2: the same supply entering below norfuraneol (1-DG + amino acid -> a 1,4-dideoxy C6 -> a 1,4-dideoxy C5 -> MFT)",
-        "R3: C2 + C3 recombination (rejected by Du 2023 / Zhao 2019b's measured label share)",
-        "R4: the hexose -> C5 entry alone on the amine-free 1-DG supply",
-        "unlisted: a route through a C-1-lost C5 (no source on disk proposes it; the positional arm would expose it)"
+        "R3: C2 + C3 recombination, a declared-failing control (falsified by Du 2023 / Zhao 2019b's measured label share)",
+        "R4 (as written; the band-now record only): the hexose -> C5 entry alone on the amine-free 1-DG supply, no Cys-hexose pool; falsified by D5",
+        "R4': the Cys-hexose pool exists as a cysteine sink only; the C5 entry is fed by cysteine-catalysed or amine-free enolisation, not through the pool"
       ],
-      "measurement": "One laboratory, three arms (n = 3 independent heatings per cell, sealed with stated fill and headspace, pH stated cooled on every sample and in situ where possible, LOD / LOQ and recovery, SIDA for MFT, FFT and NF): Hofmann's glucose + Cys pot with positional glucose labels; fed 1-DG; fed Cys-hexose Amadori compound.",
-      "measurement_source": "case M4 sec. 4.4 (the designed experiment, W6), as refreshed 2026-11-05 on branch m4-case-refresh (8660c005, not frozen)",
+      "measurement": "One laboratory, three arms (n = 3 independent heatings per cell, sealed with stated fill and headspace, pH stated cooled on every sample and in situ where possible, LOD / LOQ and recovery per assay, SIDA for MFT, FFT and NF). Levels come from unlabelled replicate pots; labelled pots report isotopologue shares only and carry no d3-MFT standard (d3 collides with 13C-MFT's M+3 channel; use a 13C / 34S standard with no channel overlap). OPD trapping under argon with 1 mM DTPA, post-incubation trapping primary, with sugar + OPD and Amadori + OPD blanks (the continuous-trapping glucosone artefact). Arms: Hofmann's glucose + Cys pot with positional and methyl-locating glucose labels; fed 1-DG vs fed glucosone; fed Cys-hexose Amadori compound beside a matched glucose + Cys pot.",
+      "measurement_source": "case M4 sec. 4.4 (the designed experiment, W6) and its proposed update to this entry, as on branch m4-case-ready (PR #90: ready to freeze as development grade, decider W6, not frozen; main carries the 2026-11-04 text)",
       "arms": [
-        "Arm 1: which carbon: Hofmann's design: Cys 33 + glucose 100 mM, 0.5 M phosphate, 20 min; glucose as [1-13C], [6-13C], 1:1 [13C6] / [12C6] and unlabelled; pH 3, 5, 7 (label_25C, cooled, in_situ); temperatures 145 C; O2 sealed, stated fill and headspace; replicates n = 3 independent heatings per cell",
-        "Arm 2: fed 1-DG: synthetic 1-DG (Glomb 2000 route) 2 mM + Na2S or Cys 6 mM, +-glycine 33 mM, 0.5 M phosphate, 2 - 20 min; pH 5, 7 (label_25C, cooled, in_situ); temperatures 145 C; O2 N2 and air arms, stated headspace; replicates n = 3 independent heatings per cell",
-        "Arm 3: fed Cys-hexose Amadori compound: synthetic D-fructose-L-cysteine (de Roos's preparation) 10 mM, 0.5 M phosphate, 0 - 60 min; pH 3, 5, 7 (label_25C, cooled, in_situ); temperatures 100 C, 145 C; O2 sealed, stated fill and headspace; replicates n = 3 independent heatings per cell"
+        "Arm 1: which carbon: Hofmann's design: Cys 33 + glucose 100 mM, 0.5 M phosphate, 20 min; glucose as [1-13C], [6-13C], [2-13C] or [1,2-13C2] (the methyl-locating label, read through an MFT fragment that keeps the methyl carbon), 1:1 [13C6] / [12C6] and unlabelled; each under air and under N2; at 145 C at pH 3 / 5 / 7, and a second temperature, 120 C, for the [1-13C] and [2-13C] glucose cells with the N2 / air pair at pH 5; pH 3, 5, 7 at 145 C; 5 at 120 C (label_25C, cooled, in_situ); temperatures 120 C, 145 C; O2 air and N2 arms, degassed with argon headspace; replicates n = 3 independent heatings per cell",
+        "Arm 2: fed C6 dicarbonyls (1-DG vs glucosone): synthetic 1-DG (Glomb 2000 route) or synthetic glucosone, 2 mM, + Na2S or Cys 6 mM, +-glycine 33 mM, 0.5 M phosphate, 2 - 20 min; pH 5, 7 (label_25C, cooled, in_situ); temperatures 145 C; O2 N2 primary, air as a secondary arm; replicates n = 3 independent heatings per cell",
+        "Arm 3: fed Cys-hexose Amadori compound beside a matched sugar pot: synthetic D-fructose-L-cysteine (de Roos's preparation) 10 mM, 0.5 M phosphate, 0 - 60 min; beside a glucose + Cys pot at matched Cys, pH and temperature; pH 3, 5, 7 (label_25C, cooled, in_situ); temperatures 100 C, 145 C; O2 N2 and air; replicates n = 3 independent heatings per cell"
       ],
       "design_written": true,
       "decides": [
         {
-          "outcome": "Arm 1: MFT's methyl from C-1 with C-6 lost",
-          "means": "R1 or R2 (both keep C-1); C-1 lost means an unlisted 3-DG-side route; a mixed pattern means R3"
+          "outcome": "Arm 1: [1-13C] gives a labelled MFT methyl and [6-13C] unlabelled MFT (C-1 retained, C-6 lost)",
+          "means": "R1 or R2"
+        },
+        {
+          "outcome": "Arm 1: C-1 lost (an unlabelled methyl from [1-13C], a labelled one from [2-13C])",
+          "means": "R5"
+        },
+        {
+          "outcome": "Arm 1: ~50 % labelled from both positional labels",
+          "means": "C-1 / C-6 equilibration (Tressl 1999 Fig. 14); the methyl-locating label decides: [2-13C] in the methyl means R5, [2-13C] in the ring with a C-1 methyl means R1 / R2 (the N2 / air contrast is secondary: O2 drains 1-DG too)"
+        },
+        {
+          "outcome": "Arm 1: the R1 / R5 share shifts between 120 and 145 C",
+          "means": "a temperature-dependent R1 / R5 mixture"
         },
         {
           "outcome": "Arm 1: norfuraneol's label pattern equals MFT's, or is independent of it",
-          "means": "R1 (through norfuraneol) or R2 (bypass); also D1 and D2 in a second laboratory"
+          "means": "R1 or R5 (through norfuraneol) or R2 (bypass); a mixed pattern means R3; read at pH 3 / 5 / 7 it also gives D1 and D2 in a second laboratory"
         },
         {
-          "outcome": "Arm 2: MFT forms without the amino acid, through 1-DPO and norfuraneol",
-          "means": "R1; MFT needs the amino acid with a 1,4-dideoxy quinoxaline and no norfuraneol means R2; amine-free 1-DG only means R4"
+          "outcome": "Arm 2: MFT forms from fed 1-DG without the amino acid, through 1-DPO and norfuraneol",
+          "means": "R1; MFT needing the amino acid, with a 1,4-dideoxy quinoxaline and no norfuraneol, means R2"
+        },
+        {
+          "outcome": "Arm 2 under N2: MFT and C-1-lost 1-DPO form from fed glucosone; or fed 1-DG gives 1-DPO and MFT and fed glucosone does not",
+          "means": "R5; or R1 (fed 1-DG vs fed glucosone under N2 is the cleanest R1 / R5 split)"
+        },
+        {
+          "outcome": "Arm 3: MFT per mol of fed Amadori compound consumed far below the sugar pot's MFT per mol of glucose-bound Cys",
+          "means": "R4' (the pool is a cysteine sink); comparable or more means R1 / R5 (the pool feeds 1-DPO)"
         },
         {
           "outcome": "Arm 3: the Amadori compound's decay, Cys return and 1-DG / 3-DG over pH",
-          "means": "part G's supply constants and the mechanism of the glucose MFT pH maximum (D2)"
+          "means": "part G's supply constants (formation, decay, Cys return, oxidative exit) and the mechanism of the glucose MFT pH maximum (D2)"
         }
       ],
       "unlocks": [
-        "M4 part G beyond development grade ('R1 or R2, not R0, R3 or R4')",
+        "M4 part G beyond development grade: on disk it records only falsifications ('C2 + C3 falsified as the hexose MFT route; R4-as-written falsified; no rival credited')",
+        "M4 items 6 - 9, which wait for designed data (plan M4 row); W3 carries R1 / R2 / R5 as declared-zero steps until then",
         "the route behind section 2's hexose rows ('HEXOSE ENTRY UNIDENTIFIED'); their absolute levels would still fall under H0"
       ],
       "existing_data_route": "W6: the BTBU / CAAS MFT yields per glucose consumed would give D4 a second laboratory (case M4, open questions for the build, item 8); no record says they would settle which carbon is lost",
@@ -1333,7 +1369,7 @@
       "disagreements": [
         {
           "about": "the positional evidence on disk",
-          "note": "Tressl 1994 (C-1 lost, no equilibration, for the furfuryl skeleton) and Tressl & Rewicki 1999 Fig. 14 (C-1 / C-6 equilibrated, 50 % labelled) disagree within one laboratory. The plan's M4 row and the case on main say no positional glucose label exists on disk; the refreshed case counts Tressl 1994 as one, but not on MFT. Neither changes the decisive design (Arm 1 is Tressl's design with MFT and norfuraneol measured)."
+          "note": "Tressl 1994 (C-1 lost, no equilibration, for the furfuryl skeleton) and Tressl & Rewicki 1999 Fig. 14 (C-1 / C-6 equilibrated, 50 % labelled) disagree within one laboratory. The plan's M4 row and the case on main say no positional glucose label exists on disk; the case on PR #90 counts Tressl 1994 as one, but not on MFT, and Glomb 2010 (50 C) labels a C-1-lost hexose 1-DPO. None changes the decisive design: Arm 1 carries a methyl-locating label so that it is not hostage to C-1 / C-6 equilibration."
         }
       ],
       "added": "2026-11-05"
@@ -1415,7 +1451,7 @@
       "disagreements": [
         {
           "about": "whether a second laboratory is part of the decisive design",
-          "note": "CF-122's decider (written before Kanzler 2021 was read) asks for three temperatures but no second laboratory; the M4 sweep sought one (Pfeifer 2013, which proved the same lineage), and Kanzler 2021 shows a 0.5 dex within-laboratory spread in the MGO-alone k2. PR #76 notes that CF-122 will be updated after PR #75 merges."
+          "note": "CF-122's decider (written before Kanzler 2021 was read) asks for three temperatures but no second laboratory; the M4 sweep sought one (Pfeifer 2013, which proved the same lineage), and Kanzler 2021 shows a 0.5 dex within-laboratory spread in the MGO-alone k2. PR #76 notes that CF-122 will be updated after PR #75 merges. Resolved 2026-11-06 (register pass): CF-122's decider now reads \"... pH held, in a second laboratory\"."
         }
       ],
       "added": "2026-11-05"
@@ -1452,6 +1488,226 @@
       "status_note": null,
       "disagreements": [],
       "added": "2026-11-05"
+    },
+    {
+      "id": "ph_law_outside_trunk",
+      "plan_step": "M0a (parked 2026-11-06; folded into M4 part A and the one network, W3)",
+      "question": "Does the trunk's measured pH law (Martins 2003 Part II on the Amadori-decay steps; B40 / B41 on 3-DG -> formic) hold for hexose pots whose amino acid routes outside the trunk (Ala, Asn, Lys, Gln), and does the amine enter it through an Amadori chain (R2), a sugar-side law (R3) or an amine-specific slope (R5)?",
+      "rivals": [
+        "R0: pH-flat outside the trunk (incumbent)",
+        "R1: the trunk's law as is (option (a); only k_tdg_fa carries flux there)",
+        "R2 / R2b: the competitor amine's Amadori chain with an amine-class factor (1 for R2b, CF-133 option (b))",
+        "R3: a sugar-side (enolisation / fragmentation) pH law",
+        "R5: an amine-specific pH slope"
+      ],
+      "measurement": "One laboratory: glucose 0.25 M + L-alanine, + L-asparagine, + glycine (control) 0.25 M, and glucose alone; 0.2 M phosphate held at pH 5.0 / 6.5 / 8.0; 130 C, 2 h, sealed with stated fill; HMF, DMHF, MGO, 3-DG / 1-DG (OPD), acrylamide (Asn arm), glucose; label and cooled pH; n = 3 independent heatings per cell (36 pots).",
+      "measurement_source": "case M0a sec. 4 (design not yet reviewed; the case is parked and folded into M4 part A)",
+      "arms": [
+        "glucose + amine (Ala and Asn: acrylamide lane; Gly: trunk lane): glucose 0.25 M + L-alanine 0.25 M, the same with L-asparagine, and a glycine control; 0.2 M phosphate held at each pH; 2 h; sealed with stated fill (27 pots); pH 5.0, 6.5, 8.0 (label_25C, cooled); temperatures 130 C; O2 not stated in the records (sealed, stated fill); replicates n = 3 independent heatings per cell",
+        "glucose alone (separates R3): glucose 0.25 M alone, 0.2 M phosphate held at the same three pH, 2 h, sealed with stated fill (9 pots); pH 5.0, 6.5, 8.0 (label_25C, cooled); temperatures 130 C; O2 not stated in the records (sealed, stated fill); replicates n = 3 independent heatings per cell"
+      ],
+      "design_written": true,
+      "decides": [
+        {
+          "outcome": "HMF / DMHF / MGO in the Ala and Asn pots flat in pH",
+          "means": "R0 (flat exactly); flat or falling (3-DG leaving faster to formic acid at high pH) means R1"
+        },
+        {
+          "outcome": "the Ala / Asn pots rise with pH, their ratio to the Gly arm constant in pH, the sugar-alone pot flat",
+          "means": "R2 (R2b if the ratio is 1)"
+        },
+        {
+          "outcome": "the amine pots rise with an amine-independent slope and the sugar-alone pot rises too",
+          "means": "R3 (a sugar-side law)"
+        },
+        {
+          "outcome": "the ratio to the Gly arm moves with pH",
+          "means": "R5 (an amine-specific slope)"
+        }
+      ],
+      "unlocks": [
+        "a pH law for the acrylamide lane's HMF / DMHF beyond development grade, for M4 part A's amine classes and the one pH module across lanes (W3)",
+        "CF-133's choice of option on HMF / DMHF; shipped acrylamide-lane HMF / DMHF move, so the owner decides before any engine change (case M0a sec. 6)"
+      ],
+      "existing_data_route": "The case's citation sweep (sec. 2.9) lists six candidates by title and abstract, first Wang Y. 2019 (P decisive ~0.5); case M4 on PR #90 has since read it as met in form but confounded (pH and a 0.4 M acetate change together, and the cooled pH converges)",
+      "status": "open",
+      "status_note": null,
+      "disagreements": [],
+      "added": "2026-11-06"
+    },
+    {
+      "id": "thiol_loss_cysteine_dependence",
+      "plan_step": "joint M1c + M2 refit (M1's C2, entering its rival set by amendment before its freeze); M0 CK-23 (MF-01)",
+      "question": "Is the in-pot loss of MFT a pot-independent first-order sink (the shipped k_mft_decay), a temperature-only law, or a loss that free cysteine slows (M1's C2)?",
+      "rivals": [
+        "the shipped pot-independent first-order k_mft_decay (a lone standard lost at 0.107 /min at 110 C): refuted as too fast by the co-heated-standard bound (CK-23) and retired as the sole answer",
+        "a temperature-only law (0.003 /min at 100 C, 1.36 at 145 C): needs an apparent Ea ~176 kJ/mol, outside Gigl's measured 7 - 102, so not admissible with cited constants",
+        "M1's C2: a loss that free cysteine slows (EX-050's form), nominated by CK-23 as a reading, not a size, conditional on the shipped instant supply"
+      ],
+      "measurement": "[2H3]-MFT charged before heating in sister vials at 0 and >= 30 mM cysteine, same pentose, at 100 and 120 C, which separates C2 from a temperature-only law; and labelled MFT spiked mid-cook (atlas E12).",
+      "measurement_source": "CK-23's decisive data (m0_checks_batch2 sec. 2); CF-013's designed protocol (conflict analysis CF-013 sec. 4: a before-heating isotope standard in sister vials); atlas E12 (ENGINE_VS_LITERATURE, designed experiments)",
+      "arms": [
+        "[2H3]-MFT charged before heating, two cysteine levels: CF-013's protocol: one free-sugar pentose + Cys pot, 0 - 160 min, one vial set per temperature with [2H3]-MFT / [2H2]-FFT charged before heating and after-cooling standards in sister vials; cysteine 0 and >= 30 mM, the same pentose; pH not stated in the records (not_stated); temperatures 100 C, 120 C; O2 not stated in the records; replicates not stated in the records",
+        "atlas E12: labelled MFT spiked mid-cook: labelled MFT spiked mid-cook, Cys 0 - 150 mM, with the disulfide measured (cluster 4 E3); pH not stated in the records (not_stated); temperatures 110 - 140; O2 argon vs air; replicates not stated in the records"
+      ],
+      "design_written": true,
+      "decides": [
+        {
+          "outcome": "the before-heating standard is lost more slowly at >= 30 mM cysteine than at 0, at both temperatures",
+          "means": "M1's C2 (a loss that free cysteine slows)"
+        },
+        {
+          "outcome": "the standard's loss is the same at 0 and >= 30 mM cysteine and moves only with temperature",
+          "means": "a temperature-only law, its barrier then measured against Gigl's 7 - 102 kJ/mol"
+        },
+        {
+          "outcome": "the before-heating and after-cooling standards in sister vials",
+          "means": "formation and loss measured separately (CF-013's analysis: the single most informative test)"
+        },
+        {
+          "outcome": "E12: the mid-cook loss vs cysteine, argon vs air, with the disulfide",
+          "means": "the loss law, O2 and reversibility at process temperature"
+        }
+      ],
+      "unlocks": [
+        "M1's C2 in the joint refit's rival set with a measured cysteine dependence, rather than a nomination conditional on instant supply",
+        "CF-013's engine sink (k_mft_decay), 1.9 - 5.6x too fast at 110 C under the bound"
+      ],
+      "existing_data_route": null,
+      "status": "open",
+      "status_note": null,
+      "disagreements": [
+        {
+          "about": "how much too fast the shipped MFT sink is",
+          "note": "CF-013's register test line (2026-10-29) says the engine's MFT sink is at least 5x too fast, from the patent's 4 h level (its B59b-held-out shape). CK-23 bounds it at 1.9 - 5.6x without that shape, so '>= 5x' holds only at the tight corner; the CF text CK-23 proposes is not yet applied."
+        }
+      ],
+      "added": "2026-11-06"
+    },
+    {
+      "id": "thiamine_route_thiol_role",
+      "plan_step": "M0 nomination (MF-15; CK-42, CK-42b); no sec. 7 case written",
+      "question": "How does cysteine raise MFT from thiamine: as a thiol (a factor of the total free-thiol concentration, through a reductant on a thiamine-derived disulfide or oxofuranone, or through thiol-catalysed ring opening) or as an amine?",
+      "rivals": [
+        "the shipped thiamine route: first order in thiamine, no cysteine term (CF-089)",
+        "g(c_SH) through a thiol reductant on a thiamine-derived disulfide or oxofuranone ([P], Grosch's 'SH-group replacement' equilibrium)",
+        "g(c_SH) through thiol-catalysed ring opening ([P])",
+        "an amine role of cysteine, not a thiol role"
+      ],
+      "measurement": "A designed cysteine x thiamine series with thiamine measured, plus a non-amine thiol arm at the optimum concentration; the records fix no levels, pH, temperature, atmosphere or replicates.",
+      "measurement_source": "CF-089's remedy (a cysteine x thiamine series with thiamine measured) and CK-42b's decisive data (m0_checks_batch2 sec. 2)",
+      "arms": [
+        "cysteine x thiamine series with a non-amine thiol arm: design not yet written: the records ask for a cysteine x thiamine series with thiamine measured (CF-089), plus a non-amine thiol arm (e.g. N-acetylcysteine or 2-mercaptoethanol) at the optimum concentration (CK-42: 170 - 340 umol cysteine in Grosch's design), thiamine measured (CK-42b)"
+      ],
+      "design_written": false,
+      "decides": [
+        {
+          "outcome": "the non-amine thiol reproduces cysteine's effect on thiamine-MFT at the optimum",
+          "means": "a thiol role (g of the total free thiol), not an amine role"
+        },
+        {
+          "outcome": "only cysteine raises thiamine-MFT",
+          "means": "an amine role"
+        },
+        {
+          "outcome": "thiamine loss and MFT measured across the cysteine dose",
+          "means": "g(c_SH) sized rather than unmodelled (CF-089's remedy as CK-42b amends it)"
+        }
+      ],
+      "unlocks": [
+        "a cysteine term on the engine's thiamine route (sulfur.py 'THE THIAMINE ROUTE'; none today)",
+        "thiamine constants fitted to cysteine-rich pots, which CF-089 forbids today without a declared band"
+      ],
+      "existing_data_route": null,
+      "status": "open",
+      "status_note": null,
+      "disagreements": [],
+      "added": "2026-11-06"
+    },
+    {
+      "id": "furfural_fft_cysteine_contrast",
+      "plan_step": "M0 nomination (MF-13; CK-34, CF-065)",
+      "question": "Why does the engine over-predict Munch 1997's cysteine-over-H2S FFT contrast (0.234 vs 0.046, +0.71 dex): furfural's lifetime in the cysteine arm, or FFT's survival in Hofmann's 20 min hold at 145 C?",
+      "rivals": [
+        "R0, the shipped engine: Hofmann's 0.48 % reached by converting ~all furfural to FFT within ~15 s and destroying ~99 % of it",
+        "(a) an H2S vessel partition: retired as the cause (phi 0.141 moves the contrast only +0.71 -> +0.51 dex, and the fitted furfural constants absorb it); kept as a conditions term",
+        "(b) furfural's lifetime in the cysteine arm (k_fur_decay, clipped on its upper bound at B60)",
+        "(c) FFT survival in the hold (product loss)"
+      ],
+      "measurement": "Residual free furfural and H2S at 20 min in Hofmann's fed furfural + H2S pot, and authentic FFT heated alone with and without H2S, by SIDA.",
+      "measurement_source": "CF-065's deciders (ii) and (iii) (register remedy), named by CK-34 (m0_checks_batch2 sec. 2)",
+      "arms": [
+        "(ii) residual furfural and H2S in Hofmann's fed pot: Hofmann & Schieberle 1998 Table 3's pot: furfural + H2S 20 mM each, 0.5 M phosphate, sampled at 20 min; pH 5 (label_25C); temperatures 145 C; O2 not stated in the records; replicates not stated in the records",
+        "(iii) authentic FFT heated alone: authentic FFT 20 mM, 0.5 M phosphate, 20 min, with and without H2S, by SIDA; pH 5 (label_25C); temperatures 145 C; O2 not stated in the records; replicates not stated in the records"
+      ],
+      "design_written": true,
+      "decides": [
+        {
+          "outcome": "(ii): furfural and H2S ~0 at 20 min",
+          "means": "the engine's fast conversion stands, and the contrast turns on what destroys the FFT and on furfural's lifetime in the cysteine arm"
+        },
+        {
+          "outcome": "(ii): > 90 % of the furfural left at 20 min",
+          "means": "slow, rate-limited formation with a surviving product (CF-065), against the engine's ~15 s conversion"
+        },
+        {
+          "outcome": "(iii): authentic FFT largely lost in 20 min at 145 C, with or without H2S",
+          "means": "(c) product loss in the hold, sized"
+        },
+        {
+          "outcome": "(iii): authentic FFT survives",
+          "means": "(c) retired; the contrast's candidate is (b)"
+        }
+      ],
+      "unlocks": [
+        "the Munch cysteine-over-H2S ratio, a held-out diagnostic until the engine's fed-pot FFT turnover is examined (CF-065)",
+        "k_fur_decay (clipped on its upper bound at B60) and an FFT survival term; CF-065 allows no tuning of k_fft_decay or k_cys_h2s on today's evidence"
+      ],
+      "existing_data_route": null,
+      "status": "open",
+      "status_note": null,
+      "disagreements": [
+        {
+          "about": "the size of the H2S partition bias on the fitted constants",
+          "note": "CF-065's register remedy says k_fur_fft_hs and k_nf_mft are biased low by 0.6 - 0.8 dex against small-headspace pots; CK-34 finds the bias 0.84 dex for the furfural constants and 0.23 dex for k_nf_mft. The amended CF text CK-34 proposes is not yet applied."
+        }
+      ],
+      "added": "2026-11-06"
+    },
+    {
+      "id": "glycation_barrier_low_moisture",
+      "plan_step": "M0 nomination (MF-27; CK-56, CF-100)",
+      "question": "Why does the soy glycation barrier in Wolf 1977a (137.7 kJ/mol at the design centre; 154 - 196 kJ/mol plateau-free, rising with temperature) sit far above the engine's 96.8 kJ/mol: water-phase glucose (dissolution, the glass, moisture) changing with temperature, or a genuine barrier difference between free glycine and protein-bound lysine?",
+      "rivals": [
+        "the engine's k_glyc: Ea 96.8 kJ/mol (free glycine, Martins 2005) on water-phase glucose",
+        "(a) plateau-capped 80 C / 360 min end points inflate Wolf's E: retired by CK-56",
+        "(b) a genuine barrier difference between free glycine and protein-bound lysine in a low-moisture solid (alone it predicts one E across 80 - 125 C)",
+        "(c) the water-phase glucose changing with temperature (dissolution, the glass, moisture shifts): an apparent E that rises with temperature (nominated)"
+      ],
+      "measurement": "A soy or pea glycation time course at >= 3 temperatures in 80 - 130 C, moisture printed and the plateau excluded from the rate fit; a glass-transition temperature (or a_w / moisture at each temperature) separates (c) from (b).",
+      "measurement_source": "CF-100's decider (register remedy), with CK-56's addition (m0_checks_batch2 sec. 2)",
+      "arms": [
+        "soy or pea glycation time course: soy or pea glycation, a time course at each temperature, moisture printed, the plateau excluded from the rate fit; the glass-transition temperature, or a_w / moisture, at each temperature; pH not stated in the records (not_stated); temperatures >= 3 in 80 - 130; O2 not stated in the records; replicates not stated in the records"
+      ],
+      "design_written": true,
+      "decides": [
+        {
+          "outcome": "the apparent barrier rises with temperature, tracking the glass transition or the moisture shift",
+          "means": "(c) water-phase glucose / glass"
+        },
+        {
+          "outcome": "one barrier across 80 - 130 C, above the engine's 96.8, with the water phase unchanged",
+          "means": "(b) a free-glycine vs protein-lysine barrier difference"
+        }
+      ],
+      "unlocks": [
+        "EA_GLYC_KJ_MOL (parameters_glycation.py: 96.8, ~5 SE below Wolf's centre) and the over-prediction at 80 - 100 C (+0.24 to +0.7 dex); CF-100 makes no engine change today"
+      ],
+      "existing_data_route": null,
+      "status": "open",
+      "status_note": null,
+      "disagreements": [],
+      "added": "2026-11-06"
     }
   ],
   "summary": {
@@ -1462,8 +1718,8 @@
     "data_refused_rows": 3,
     "axes_below_trust": 13,
     "lanes_that_cannot_support_a_trend": 3,
-    "structural_questions": 8,
-    "structural_questions_open": 7,
+    "structural_questions": 13,
+    "structural_questions_open": 13,
     "trust_rule": "rate >= 0.8 on >= 3 claims and Wilson lower bound > 0.5"
   }
 }

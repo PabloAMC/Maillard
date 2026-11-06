@@ -241,6 +241,48 @@ jobs:
           if-no-files-found: warn
 
   # ---------------------------------------------------------------------------
+  # Tier 2b (2026-11-05, A2 + H3): the JAX sulfur lane against the NumPy sulfur lane, LIVE, in the separate
+  # maillard-jax env (environment-jax.yml = environment.yml's package set plus JAX). This is the enforcement of
+  # docs/guides/A2_MODULE_CONTRACT.md sec. 6.2.2: an edit of src/kinetic_core/sulfur.py that the JAX lane
+  # (src/kinetic_core_jax/sulfur_lane.py) does not follow fails here. The structural half also runs in the core
+  # env's unit tier (tests/unit/test_jax_sulfur_structure.py).
+  # ---------------------------------------------------------------------------
+  tests-jax-sulfur:
+    name: JAX sulfur lane parity
+    if: github.event_name != 'pull_request' || github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache conda packages
+        uses: actions/cache@v4
+        env:
+          CACHE_EPOCH: 1
+        with:
+          path: ~/conda_pkgs_dir
+          key: conda-jax-${{ runner.os }}-${{ env.CACHE_EPOCH }}-${{ hashFiles('environment-jax.yml') }}
+
+      - name: Install conda (Miniforge)
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          miniforge-version: latest
+          activate-environment: maillard-jax
+          python-version: "3.12"
+          auto-activate-base: false
+          pkgs-dirs: ~/conda_pkgs_dir
+
+      - name: Build the maillard-jax environment
+        run: conda env update -n maillard-jax --file environment-jax.yml
+
+      - name: JAX sulfur lane against the NumPy lane
+        run: python -m pytest tests/unit/test_jax_sulfur_structure.py tests/scientific/test_jax_sulfur_parity.py -q
+
+      - name: data/ untouched by the JAX parity tier
+        if: always()
+        run: python scripts/ci/data_readonly_gate.py
+
+  # ---------------------------------------------------------------------------
   # Advisory: DOI liveness. Never blocks a PR.
   # ---------------------------------------------------------------------------
   citation-liveness:
