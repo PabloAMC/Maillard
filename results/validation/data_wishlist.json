@@ -4,16 +4,16 @@
     "artifact": "data_wishlist",
     "generated_on": "2026-11-06",
     "git": {
-      "commit": "56861a85a4256a0043a4fff666d3dc4cc7bfda79",
-      "short": "56861a85",
-      "branch": "m0-data-corrections-batch1",
+      "commit": "06830fd78b48e16bd49dfec4a69c1e75028ddb36",
+      "short": "06830fd7",
+      "branch": "register-pass-2026-11-06",
       "dirty": true
     },
     "generated_by": "src/data_wishlist.py",
     "inputs": [
       {
         "path": "results/validation/core_panel_scores.json",
-        "sha256": "85d525b15fe7944c2405e9771d74a8decfdba39efd10a7d7f8a2209dfdb7c8ed"
+        "sha256": "5ce9814c694e0af2bd79386edc283ac85bff34f1a7a45ae788c434f88a951e8c"
       },
       {
         "path": "results/validation/kinetic_core_b60_profile.json",
@@ -41,7 +41,7 @@
       },
       {
         "path": "docs/reference/decisive_measurements.yml",
-        "sha256": "cbf6cfc659fcef1056462d11dee8a349e49b21883d86f56f078e7b8a26b9177e"
+        "sha256": "2a47ad0f97ac5a75a314793fdeca44b105922ef6eeafab77c545aca6acc1c718"
       }
     ]
   },
@@ -951,7 +951,7 @@
   ],
   "what_you_could_predict": [
     {
-      "if_measured": "absolute levels of the thiol lane's observables from a second independent laboratory (for example the pending WUR blind-test samples), re-scored under H0's rule (H0')",
+      "if_measured": "absolute levels of the thiol lane's observables from at least two new independent laboratories (H0's pre-registered trigger, prereg sec. 9; the pending WUR blind-test samples would be one), re-scored under H0's rule (H0')",
       "you_could_predict": "absolute 2-Furfurylthiol (FFT), 2-Methyl-3-furanthiol (MFT), Bis(2-methyl-3-furyl) disulfide, Furfural for a new laboratory, if H0' leaves tau_ABS at or below 0.8 dex (today 0.964, U >= 1.60; D2's branches (ii) / (iii)); 39 panel rows now refused for their absolute level would return to the scorecard"
     },
     {
@@ -1372,7 +1372,7 @@
       "disagreements": [
         {
           "about": "how many new laboratories lift the refusal",
-          "note": "H0's prereg triggers H0' on the first batch that keys >= 2 NEW laboratories with ABS-class rows; the plan's W1.2 row, the engine's refusal text and the wishlist's section 6 say 'a second independent laboratory'. The pre-registered condition is the prereg's; read literally, the one-laboratory wording would trigger H0' a laboratory early."
+          "note": "H0's prereg triggers H0' on the first batch that keys >= 2 NEW laboratories with ABS-class rows; the plan's W1.2 row, the engine's refusal text and the wishlist's section 6 say 'a second independent laboratory'. The pre-registered condition is the prereg's; read literally, the one-laboratory wording would trigger H0' a laboratory early. Aligned 2026-11-06 (register pass): the plan's W1.2 row, the engine's refusal text and short reason, the model card and the wishlist's section 6 now say \"at least two new laboratories\", the prereg's condition."
         }
       ],
       "added": "2026-11-05"

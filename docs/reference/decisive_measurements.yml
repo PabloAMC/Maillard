@@ -524,7 +524,9 @@ entries:
           H0's prereg triggers H0' on the first batch that keys >= 2 NEW laboratories with ABS-class rows; the plan's
           W1.2 row, the engine's refusal text and the wishlist's section 6 say 'a second independent laboratory'. The
           pre-registered condition is the prereg's; read literally, the one-laboratory wording would trigger H0' a
-          laboratory early.
+          laboratory early. Aligned 2026-11-06 (register pass): the plan's W1.2 row, the engine's refusal text and
+          short reason, the model card and the wishlist's section 6 now say "at least two new laboratories", the
+          prereg's condition.
 
   - id: methylglyoxal_self_loss
     plan_step: "M4 (R3's MGO loss band); trunk k_mgo_mel"
