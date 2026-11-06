@@ -84,10 +84,31 @@ class Module:
     #: pot scalars the rate function reads through ``RateCtx`` (a subset of ``POT_INPUTS``); ``integrate`` refuses a
     #: pot that lacks one. "ph_label" makes the network's pH mode "prescribed" (a declared, constant pH).
     pot_inputs: Tuple[str, ...] = ()
+    #: (v2.2) values of a RateCtx input ("t_c", "ph_label", "aw") where the rate function jumps or kinks: a forced
+    #: linear course gets a knot where it crosses one (``forcing.forced_pot``), so the jump sits on a segment boundary
+    breakpoints: Mapping[str, Tuple[float, ...]] = field(default_factory=dict)
+    #: (v2.2) species owned by ANOTHER module that this module's reactions consume, declared (contract sec. 4,
+    #: "declared competition"); ``compose(competition="refuse")`` refuses an undeclared one
+    competes: Tuple[str, ...] = ()
+    #: (v2.2) this module's titratable pools (a typed stub: merged and checked by ``compose``; the ONE charge-closure
+    #: check needs the sulfur port's inventory, ``charge_closure``)
+    titratables: Tuple["Titratable", ...] = ()
+
+
+class Titratable(NamedTuple):
+    """One titratable pool for the merged table (contract sec. 4 / 6.3): its pKa values at 25 C, the charge of each
+    protonation state (most protonated first, one more than the pKa values), and where they come from."""
+
+    species: str
+    pka_25c: Tuple[float, ...]
+    charges: Tuple[int, ...]
+    basis: str = ""
 
 
 #: the pot scalars a module may read (``pot[name]``, NaN for the engine's None)
 POT_INPUTS = ("ph_label", "aw")
+#: ``compose``'s competition modes: "report" lists undeclared shared consumption on the Network, "refuse" raises
+COMPETITION_MODES = ("report", "refuse")
 
 
 @dataclass(frozen=True)
@@ -108,6 +129,11 @@ class Network:
     #: neither dominates -- Kvaerno4 on the sulfur pot (no rejections, ~25 % faster), Kvaerno5 on the lipid pots
     #: (5x fewer steps once a pool is depleted far below atol: 158 vs 794 on the 160 C / 30 min pot)
     solver: str = "Kvaerno5"
+    #: (v2.2) the merged titratable table (one entry per species), in module order
+    titratables: Tuple[Titratable, ...] = ()
+    #: (v2.2) species consumed by a module that does not own it -> (owner, consumers...), and the undeclared pairs
+    competition: Mapping[str, Tuple[str, ...]] = field(default_factory=dict)
+    undeclared_competition: Tuple[Tuple[str, str], ...] = ()
 
     @property
     def n_species(self) -> int:
@@ -139,13 +165,21 @@ class Network:
 
 
 def compose(modules: Sequence[Module], *, layout: Optional[Sequence[str]] = None,
-            solver: str = "Kvaerno5") -> Network:
+            solver: str = "Kvaerno5", competition: str = "report") -> Network:
     """One Network from modules. Refuses (ValueError): a duplicate module name, a missing ``requires``, a species or
     reaction key defined twice, a reaction touching a species no module owns, and any reaction that does not balance
     C / N / S to 1e-9. ``layout`` pins a species order (a permutation of the owned species); ``solver`` names the
-    diffrax integrator ``integrate`` uses unless given one."""
+    diffrax integrator ``integrate`` uses unless given one.
+
+    (v2.2) Declared competition: a species CONSUMED (a mass-action reactant with a negative net coefficient) by a
+    module that does not own it must be in that module's ``competes``. ``competition="report"`` (the default: the
+    ported trunk-lane / acrylamide modules predate the declaration) lists the undeclared pairs on
+    ``Network.undeclared_competition``; ``"refuse"`` raises. The merged titratable table refuses a pool declared twice
+    or by a module that neither owns nor requires its species."""
     if solver not in ("Kvaerno3", "Kvaerno4", "Kvaerno5"):
         raise ValueError(f"solver {solver!r} is not a declared choice")
+    if competition not in COMPETITION_MODES:
+        raise ValueError(f"competition must be one of {COMPETITION_MODES}")
     names = [m.name for m in modules]
     if len(set(names)) != len(names):
         raise ValueError(f"duplicate module names: {names}")
@@ -207,9 +241,61 @@ def compose(modules: Sequence[Module], *, layout: Optional[Sequence[str]] = None
             raise ValueError(f"reaction {reactions[j]} does not balance: "
                              + ", ".join(f"{e} {imbalance[i, j]:+.3g}" for i, e in enumerate(ELEMENTS) if bad[i]))
     coordinates = tuple((m.name, k) for m in modules for k in m.params)
+    shared, undeclared = _competition(modules, owner)
+    if undeclared and competition == "refuse":
+        raise ValueError("undeclared shared consumption (declare it in Module.competes): "
+                         + ", ".join(f"{m} consumes {s} (owned by {owner[s]})" for s, m in undeclared))
     return Network(modules=tuple(modules), species=species, reactions=tuple(reactions), index=index,
                    stoichiometry=stoich, reactant_index=r_idx, reactant_power=r_pow, element_matrix=elements,
-                   coordinates=coordinates, needs_ph=any(m.needs_ph for m in modules), solver=solver)
+                   coordinates=coordinates, needs_ph=any(m.needs_ph for m in modules), solver=solver,
+                   titratables=_merge_titratables(modules, owner), competition=shared,
+                   undeclared_competition=undeclared)
+
+
+def _competition(modules: Sequence[Module], owner: Mapping[str, str]):
+    consumers: Dict[str, List[str]] = {}
+    for m in modules:
+        for r in m.reactions:
+            for s in m.reactants[r]:
+                if float(m.stoichiometry[r].get(s, 0.0)) < 0.0 and owner.get(s) != m.name:
+                    if m.name not in consumers.setdefault(s, []):
+                        consumers[s].append(m.name)
+    declared = {m.name: set(m.competes) for m in modules}
+    for m in modules:
+        stray = sorted(set(m.competes) - set(owner))
+        if stray:
+            raise ValueError(f"module {m.name} declares competition for {stray}, which no module owns")
+    shared = {s: (owner[s],) + tuple(c) for s, c in consumers.items()}
+    undeclared = tuple((s, c) for s, cs in consumers.items() for c in cs if s not in declared[c])
+    return shared, undeclared
+
+
+def _merge_titratables(modules: Sequence[Module], owner: Mapping[str, str]) -> Tuple[Titratable, ...]:
+    table: Dict[str, Titratable] = {}
+    names = {m.name: m for m in modules}
+    for m in modules:
+        reach = set(m.species) | {s for r in m.requires for s in names[r].species}
+        for t in m.titratables:
+            if t.species in table:
+                raise ValueError(f"titratable {t.species!r} is declared twice")
+            if t.species not in reach:
+                raise ValueError(f"{m.name} declares titratable {t.species!r}, which it neither owns nor requires")
+            if len(t.charges) != len(t.pka_25c) + 1:
+                raise ValueError(f"titratable {t.species!r}: {len(t.pka_25c)} pKa values need "
+                                 f"{len(t.pka_25c) + 1} charge states")
+            table[t.species] = t
+    return tuple(table.values())
+
+
+def charge_closure(net: Network):
+    """The ONE charge-closure check over the merged titratable table (contract sec. 4 / 6.3; it closes v1's Gly /
+    AMA / SB / PAMA gap). A TYPED STUB: it needs, per reaction, the charge each titratable reactant and product
+    carries at the network's pH, i.e. the inline charge balance and the titratable inventory that only the sulfur
+    lane carries today (``ph_state.titratable_inventory`` / ``TITRATABLE_CENTRES``, the bake-off's
+    ``model.make_ph_solver``). It lands with the sulfur port."""
+    raise UnsupportedConfiguration(
+        "charge closure over the merged titratable table needs the sulfur port's inline charge balance and "
+        f"titratable inventory ({len(net.titratables)} pools declared); not ported")
 
 
 # --------------------------------------------------------------------------- the parameter vector

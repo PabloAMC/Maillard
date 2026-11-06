@@ -1,0 +1,704 @@
+{
+ "artifact": "jax_network_infra",
+ "generated_by": "scripts/generators/build_jax_network_infra.py",
+ "env": "maillard-jax",
+ "jax_version": "0.12.0.1",
+ "diffrax_version": "0.7.2",
+ "forced": {
+  "constant_equals_prescribed": {
+   "max_dex": 0.0,
+   "max_abs_rel": 0.0
+  },
+  "lipid_constant_temperature_equals_segments": {
+   "max_dex": 0.0
+  },
+  "staircase_vs_engine": {
+   "max_dex": 4.3559100770806936e-11,
+   "segments": 5,
+   "ph": [
+    7.6,
+    7.1,
+    6.5,
+    5.9,
+    5.4
+   ],
+   "temperatures_c": [
+    110.0,
+    120.0,
+    130.0,
+    130.0,
+    120.0
+   ],
+   "engine_tolerance": {
+    "atol": 1e-20,
+    "rtol": 1e-12
+   },
+   "jax_tolerance": {
+    "rtol": 1e-10,
+    "atol": 1e-16
+   }
+  },
+  "linear_ph_vs_midpoint_staircase": {
+   "errors": [
+    {
+     "n_sub": 2,
+     "max_dex": 0.0924644537837449
+    },
+    {
+     "n_sub": 4,
+     "max_dex": 0.013079622067651897
+    },
+    {
+     "n_sub": 8,
+     "max_dex": 0.0021791042145684614
+    },
+    {
+     "n_sub": 16,
+     "max_dex": 0.0005682187899286317
+    },
+    {
+     "n_sub": 32,
+     "max_dex": 0.000142876615670251
+    }
+   ],
+   "ratios": [
+    7.069352104020271,
+    6.002293043264165,
+    3.8349738748381705,
+    3.976989427297466
+   ],
+   "crossings": [
+    [
+     "ph_label",
+     7.0,
+     10.909090909090907
+    ]
+   ]
+  },
+  "linear_temperature_vs_midpoint_staircase": {
+   "errors": [
+    {
+     "n_sub": 2,
+     "max_dex": 0.2323128413979969
+    },
+    {
+     "n_sub": 4,
+     "max_dex": 0.08077554184024205
+    },
+    {
+     "n_sub": 8,
+     "max_dex": 0.022745798453696953
+    },
+    {
+     "n_sub": 16,
+     "max_dex": 0.0058417753003818795
+    },
+    {
+     "n_sub": 32,
+     "max_dex": 0.0014690706674160836
+    }
+   ],
+   "ratios": [
+    2.876029502314766,
+    3.551229120607693,
+    3.8936448740522507,
+    3.976510749245883
+   ],
+   "crossings": []
+  },
+  "lipid_ramp_across_window_vs_midpoint_staircase": {
+   "errors": [
+    {
+     "n_sub": 2,
+     "max_dex": 0.0012960417316594253
+    },
+    {
+     "n_sub": 4,
+     "max_dex": 0.004415781569999666
+    },
+    {
+     "n_sub": 8,
+     "max_dex": 0.0013363224321096823
+    },
+    {
+     "n_sub": 16,
+     "max_dex": 0.0009220949444483928
+    },
+    {
+     "n_sub": 32,
+     "max_dex": 0.00019565867823700955
+    }
+   ],
+   "ratios": [
+    0.2935022285668725,
+    3.3044282307140294,
+    1.4492243343868292,
+    4.71277304312268
+   ],
+   "crossings": [
+    [
+     "t_c",
+     100.0,
+     8.0
+    ]
+   ]
+  },
+  "forced_species": {
+   "constant_vs_row_removed_max_dex": 2.6645352591003757e-15,
+   "closure_constant_max": 9.160925986049863e-16,
+   "closure_linear_course_max": 8.006294040439701e-16,
+   "ledger_linear_course_mmol_per_l": [
+    -2.1425873627742797,
+    -2.9558546577450424
+   ],
+   "forced_values_at_rows": [
+    42.0,
+    30.0
+   ]
+  },
+  "jacobian_through_forced_course": {
+   "max_relative_column_error": 6.7547069106419275e-09,
+   "per_column": [
+    2.908742556883399e-09,
+    2.899860980409577e-09,
+    6.7547069106419275e-09,
+    6.815666860127822e-10,
+    1.1258763277328816e-09
+   ],
+   "steps": [
+    0.00012047629188234982,
+    0.01370697507645905,
+    0.00012215738689191834,
+    0.0004482913391153737,
+    0.0001157131054527732
+   ],
+   "crossings": [
+    [
+     "ph_label",
+     7.0,
+     10.909090909090907
+    ]
+   ],
+   "coordinates": [
+    "trunk.log10_k:k_ama_tdg",
+    "trunk.ea:k_ama_tdg",
+    "trunk.ph_exponent",
+    "trunk_lane.pyrazine_ph_slope_above_knot",
+    "trunk_lane.pyrazine_ph_slope_below_knot"
+   ]
+  }
+ },
+ "fit": {
+  "trunk": {
+   "engine": {
+    "theta": [
+     -1.6845518119465983,
+     86.58857761879044,
+     -1.6268854844449692,
+     -7.2336330158790165,
+     0.8174734068282676
+    ],
+    "cost": 2.6711342619009284,
+    "wall_seconds": 27.10151287500048,
+    "residual_evaluations": 79,
+    "seconds_per_residual_evaluation": 0.34284817719098204,
+    "status": 2,
+    "polish": "polished",
+    "forward_only_cost": 2.6712788038376316,
+    "forward_only_theta": [
+     -1.6859069978873071,
+     86.69497964522654,
+     -1.6268958073689317,
+     -7.233616141739211,
+     0.8168209357653118
+    ],
+    "forward_only_wall_seconds": 11.239107375004096
+   },
+   "keys": [
+    "trunk.log10_k:k_ama_tdg",
+    "trunk.ea:k_ama_tdg",
+    "trunk.log10_k:k_ddg_hmf",
+    "trunk_lane.log10_k:k_mgo_ak",
+    "trunk.ph_exponent"
+   ],
+   "truth": [
+    -1.7046770212133426,
+    89.0,
+    -1.6503764398702185,
+    -7.229714282148093,
+    0.8
+   ],
+   "start": [
+    -1.9546770212133426,
+    97.0,
+    -1.4503764398702186,
+    -7.529714282148093,
+    0.69
+   ],
+   "vmap": {
+    "theta": {
+     "trunk.log10_k:k_ama_tdg": -1.6845316821861065,
+     "trunk.ea:k_ama_tdg": 86.58680199401536,
+     "trunk.log10_k:k_ddg_hmf": -1.6268844017789479,
+     "trunk_lane.log10_k:k_mgo_ak": -7.233633399208497,
+     "trunk.ph_exponent": 0.8174742945502649
+    },
+    "cost": 2.6711343472335476,
+    "start_cost": 243.0122591545753,
+    "start": {
+     "trunk.log10_k:k_ama_tdg": -1.9546770212133426,
+     "trunk.ea:k_ama_tdg": 97.0,
+     "trunk.log10_k:k_ddg_hmf": -1.4503764398702186,
+     "trunk_lane.log10_k:k_mgo_ak": -7.529714282148093,
+     "trunk.ph_exponent": 0.69
+    },
+    "status": 2,
+    "message": "`ftol` termination condition is satisfied.",
+    "nfev": 6,
+    "njev": 6,
+    "budget": 200,
+    "seconds": 49.566,
+    "compile_seconds": {
+     "residual": 6.875242834008532,
+     "jacobian": 15.802174375014147
+    },
+    "failed_pots": [],
+    "converged": null,
+    "wall_seconds_with_compile": 50.16611895902315,
+    "wall_seconds_warm_refit": 26.33209166699089,
+    "warm_refit_cost": 2.6711343472335476,
+    "sigma": [
+     0.09007624627693635,
+     7.6360091443347855,
+     0.030658138124625672,
+     0.014574826117117723,
+     0.04525956158454835
+    ],
+    "sigma_chi2_scaled": [
+     0.03739317107748715,
+     3.169921128878978,
+     0.012727051261514338,
+     0.0060504182728311085,
+     0.018788510835807484
+    ],
+    "reduced_chi2": 0.17233124820861598,
+    "delta_theta_vs_engine": [
+     2.012976049181603e-05,
+     -0.0017756247750781995,
+     1.082666021279266e-06,
+     -3.833294801580678e-07,
+     8.877219972447392e-07
+    ],
+    "max_delta_in_sigma": 0.00023253308652669037,
+    "max_delta_in_chi2_scaled_sigma": 0.0005601479351967781,
+    "cost_relative_difference": 3.194621116957286e-08
+   },
+   "jax_residuals_at_engine_optimum_max_diff": 2.1140501793581734e-07,
+   "fd_check_at_optimum": {
+    "max_relative_column_error": 3.9889470933986623e-10,
+    "per_column": [
+     1.011918560644667e-10,
+     1.003937145092564e-10,
+     1.5462337914295278e-10,
+     3.9889470933986623e-10,
+     1.9464748956348064e-10
+    ],
+    "steps": [
+     6.134790911001801e-06,
+     0.00050498057486532,
+     5.193538774621512e-06,
+     2.7722107057076927e-06,
+     6.902469478466681e-06
+    ]
+   },
+   "rtol_check": {
+    "rtol_loose": 1e-06,
+    "rtol_tight": 1e-08,
+    "max_move": 1.785935788145565e-09,
+    "passes": true
+   },
+   "loop": {
+    "theta": {
+     "trunk.log10_k:k_ama_tdg": -1.684531682186107,
+     "trunk.ea:k_ama_tdg": 86.58680199401543,
+     "trunk.log10_k:k_ddg_hmf": -1.6268844017789479,
+     "trunk_lane.log10_k:k_mgo_ak": -7.233633399208497,
+     "trunk.ph_exponent": 0.8174742945502657
+    },
+    "cost": 2.671134347233533,
+    "start_cost": 243.01225915457658,
+    "start": {
+     "trunk.log10_k:k_ama_tdg": -1.9546770212133426,
+     "trunk.ea:k_ama_tdg": 97.0,
+     "trunk.log10_k:k_ddg_hmf": -1.4503764398702186,
+     "trunk_lane.log10_k:k_mgo_ak": -7.529714282148093,
+     "trunk.ph_exponent": 0.69
+    },
+    "status": 2,
+    "message": "`ftol` termination condition is satisfied.",
+    "nfev": 6,
+    "njev": 6,
+    "budget": 200,
+    "seconds": 35.885,
+    "compile_seconds": {
+     "residual": 6.345254540996393,
+     "jacobian": 8.82730108400574
+    },
+    "failed_pots": [],
+    "converged": null,
+    "wall_seconds_with_compile": 35.885769375017844,
+    "wall_seconds_warm_refit": 27.37816629197914,
+    "warm_refit_cost": 2.671134347233533,
+    "sigma": [
+     0.09007624627601005,
+     7.636009144247798,
+     0.03065813812462537,
+     0.014574826117117717,
+     0.04525956158437152
+    ],
+    "sigma_chi2_scaled": [
+     0.037393171077102515,
+     3.1699211288428586,
+     0.012727051261514178,
+     0.00605041827283109,
+     0.018788510835734025
+    ],
+    "reduced_chi2": 0.17233124820861503,
+    "delta_theta_vs_engine": [
+     2.012976049137194e-05,
+     -0.0017756247750071452,
+     1.082666021279266e-06,
+     -3.833294801580678e-07,
+     8.877219980218953e-07
+    ],
+    "max_delta_in_sigma": 0.00023253308652003416,
+    "max_delta_in_chi2_scaled_sigma": 0.0005601479351807455,
+    "cost_relative_difference": 3.1946205683160536e-08
+   }
+  },
+  "lipid": {
+   "engine": {
+    "theta": [
+     0.3036526665733812,
+     40.19378357156519,
+     0.15403456566940793,
+     0.29087927417516685
+    ],
+    "cost": 2.0469750867340184,
+    "wall_seconds": 0.450721415982116,
+    "residual_evaluations": 67,
+    "seconds_per_residual_evaluation": 0.006434582731140944,
+    "status": 3,
+    "polish": "polished",
+    "forward_only_cost": 2.0469773893423744,
+    "forward_only_theta": [
+     0.30369676274916696,
+     40.19817625152317,
+     0.1540710344267418,
+     0.29086485231998316
+    ],
+    "forward_only_wall_seconds": 0.34236204100307077
+   },
+   "keys": [
+    "lipid.log10_k_decadienal",
+    "lipid.ea_decadienal_kj_mol",
+    "lipid.share_hexanal_from_decadienal",
+    "lipid.donor"
+   ],
+   "truth": [
+    0.3,
+    40.0,
+    0.2,
+    0.3
+   ],
+   "start": [
+    0.0,
+    26.6,
+    0.1154,
+    0.0
+   ],
+   "vmap": {
+    "theta": {
+     "lipid.log10_k_decadienal": 0.303655232725206,
+     "lipid.ea_decadienal_kj_mol": 40.19401443717593,
+     "lipid.share_hexanal_from_decadienal": 0.15403455815975567,
+     "lipid.donor": 0.2908789309279356
+    },
+    "cost": 2.0469751614194043,
+    "start_cost": 273.2686544177855,
+    "start": {
+     "lipid.log10_k_decadienal": 0.0,
+     "lipid.ea_decadienal_kj_mol": 26.6,
+     "lipid.share_hexanal_from_decadienal": 0.1154,
+     "lipid.donor": 0.0
+    },
+    "status": 2,
+    "message": "`ftol` termination condition is satisfied.",
+    "nfev": 7,
+    "njev": 7,
+    "budget": 200,
+    "seconds": 12.128,
+    "compile_seconds": {
+     "residual": 3.9413875410100445,
+     "jacobian": 7.284098834003089
+    },
+    "failed_pots": [],
+    "converged": null,
+    "wall_seconds_with_compile": 12.128849958011415,
+    "wall_seconds_warm_refit": 1.0839505839976482,
+    "warm_refit_cost": 2.0469751614194043,
+    "sigma": [
+     0.023319076076813036,
+     2.2562749784113234,
+     0.04659358408849933,
+     0.028898388345319385
+    ],
+    "sigma_chi2_scaled": [
+     0.008340798594007555,
+     0.8070274785174748,
+     0.0166656560223479,
+     0.01033641453399581
+    ],
+    "reduced_chi2": 0.12793594758871277,
+    "delta_theta_vs_engine": [
+     2.566151824812124e-06,
+     0.0002308656107388174,
+     -7.509652261150634e-09,
+     -3.4324723124923295e-07
+    ],
+    "max_delta_in_sigma": 0.00011004517573334466,
+    "max_delta_in_chi2_scaled_sigma": 0.0003076626051917589,
+    "cost_relative_difference": 3.6485732708599183e-08
+   },
+   "jax_residuals_at_engine_optimum_max_diff": 9.86223438470546e-07,
+   "fd_check_at_optimum": {
+    "max_relative_column_error": 2.149281507939632e-09,
+    "per_column": [
+     2.149281507939632e-09,
+     1.4667351141430672e-09,
+     1.3977794238653203e-10,
+     9.536946057595526e-11
+    ],
+    "steps": [
+     1.5306809809935623e-06,
+     0.0001355705939476233,
+     9.493370655797093e-06,
+     8.164058013866684e-06
+    ]
+   },
+   "rtol_check": {
+    "rtol_loose": 1e-06,
+    "rtol_tight": 1e-08,
+    "max_move": 4.352142595198671e-06,
+    "passes": true
+   },
+   "loop": {
+    "theta": {
+     "lipid.log10_k_decadienal": 0.3036552327252057,
+     "lipid.ea_decadienal_kj_mol": 40.19401443717589,
+     "lipid.share_hexanal_from_decadienal": 0.15403455815975617,
+     "lipid.donor": 0.29087893092793593
+    },
+    "cost": 2.046975161419412,
+    "start_cost": 273.26865441778546,
+    "start": {
+     "lipid.log10_k_decadienal": 0.0,
+     "lipid.ea_decadienal_kj_mol": 26.6,
+     "lipid.share_hexanal_from_decadienal": 0.1154,
+     "lipid.donor": 0.0
+    },
+    "status": 2,
+    "message": "`ftol` termination condition is satisfied.",
+    "nfev": 7,
+    "njev": 7,
+    "budget": 200,
+    "seconds": 5.93,
+    "compile_seconds": {
+     "residual": 2.374294750014087,
+     "jacobian": 2.8918816249934025
+    },
+    "failed_pots": [],
+    "converged": null,
+    "wall_seconds_with_compile": 5.930225666001206,
+    "wall_seconds_warm_refit": 0.7892360840050969,
+    "warm_refit_cost": 2.046975161419412,
+    "sigma": [
+     0.023319076076795963,
+     2.25627497840896,
+     0.046593584088499354,
+     0.02889838834531902
+    ],
+    "sigma_chi2_scaled": [
+     0.008340798594001464,
+     0.8070274785166309,
+     0.01666565602234794,
+     0.010336414533995699
+    ],
+    "reduced_chi2": 0.12793594758871324,
+    "delta_theta_vs_engine": [
+     2.5661518245345682e-06,
+     0.00023086561069618483,
+     -7.509651761550273e-09,
+     -3.4324723091616605e-07
+    ],
+    "max_delta_in_sigma": 0.00011004517572152271,
+    "max_delta_in_chi2_scaled_sigma": 0.00030766260515870667,
+    "cost_relative_difference": 3.648573639673228e-08
+   }
+  }
+ },
+ "draws": {
+  "pot": "toy_glucose_glycine_120C_pH6",
+  "keys": [
+   "trunk.log10_k:k_ama_tdg",
+   "trunk.ea:k_ama_tdg",
+   "trunk.log10_k:k_ddg_hmf",
+   "trunk_lane.log10_k:k_mgo_ak",
+   "trunk.ph_exponent"
+  ],
+  "n_rows": 12,
+  "chunk": 512,
+  "rows": [
+   {
+    "rtol": 1e-08,
+    "atol": 1e-14,
+    "draws": 64,
+    "chunk": 64,
+    "seconds": 13.248609250003938,
+    "draws_per_second": 4.8306957200040435,
+    "failed": 0,
+    "compile_and_first_chunk_seconds": 104.12615004199324,
+    "uptime": "17:42  up 4 days, 52 mins, 1 user, load averages: 36.64 18.36 12.25"
+   },
+   {
+    "rtol": 1e-08,
+    "atol": 1e-14,
+    "draws": 512,
+    "chunk": 512,
+    "seconds": 104.82298866700148,
+    "draws_per_second": 4.88442474795778,
+    "failed": 0,
+    "compile_and_first_chunk_seconds": 104.12615004199324,
+    "uptime": "17:44  up 4 days, 53 mins, 1 user, load averages: 26.56 21.31 14.20"
+   },
+   {
+    "rtol": 1e-08,
+    "atol": 1e-14,
+    "draws": 2048,
+    "chunk": 512,
+    "seconds": 398.8528317089949,
+    "draws_per_second": 5.134725987088469,
+    "failed": 0,
+    "compile_and_first_chunk_seconds": 104.12615004199324,
+    "uptime": "17:51  up 4 days, 1 hr, 1 user, load averages: 34.08 24.37 17.74"
+   },
+   {
+    "rtol": 1e-06,
+    "atol": 1e-12,
+    "draws": 64,
+    "chunk": 64,
+    "seconds": 3.49412137499894,
+    "draws_per_second": 18.31647877430114,
+    "failed": 0,
+    "compile_and_first_chunk_seconds": 36.31953741700272,
+    "uptime": "17:51  up 4 days,  1:01, 1 user, load averages: 25.99 23.70 17.87"
+   },
+   {
+    "rtol": 1e-06,
+    "atol": 1e-12,
+    "draws": 512,
+    "chunk": 512,
+    "seconds": 43.08721233299002,
+    "draws_per_second": 11.882875968932984,
+    "failed": 0,
+    "compile_and_first_chunk_seconds": 36.31953741700272,
+    "uptime": "17:52  up 4 days,  1:02, 1 user, load averages: 34.82 26.09 19.03"
+   },
+   {
+    "rtol": 1e-06,
+    "atol": 1e-12,
+    "draws": 2048,
+    "chunk": 512,
+    "seconds": 132.34975887500332,
+    "draws_per_second": 15.474149839095796,
+    "failed": 0,
+    "compile_and_first_chunk_seconds": 36.31953741700272,
+    "uptime": "17:54  up 4 days,  1:04, 1 user, load averages: 32.64 28.15 20.88"
+   }
+  ],
+  "engine": {
+   "load_after": "17:32  up 4 days, 42 mins, 1 user, load averages: 9.58 5.85 6.62",
+   "load_before": "17:32  up 4 days, 41 mins, 1 user, load averages: 9.50 5.70 6.58",
+   "pot": "toy_glucose_glycine_120C_pH6",
+   "rows": [
+    {
+     "draws": 64,
+     "draws_per_second": 6.020521936939702,
+     "seconds": 10.630307583021931
+    }
+   ],
+   "tolerance": {
+    "atol": 1e-14,
+    "rtol": 1e-08
+   }
+  },
+  "batch_equals_single_solves_max_dex": 1.3322676295501878e-15,
+  "log_likelihoods_vs_gaussian_log_density_max_abs": 3.552713678800501e-15
+ },
+ "findings": [
+  "**The forced-input driver is exact where the engine can be compared and convergent where it cannot.** A forced constant pH or temperature is bit-identical to the prescribed / segment mode (0 dex). A 'previous' pH + temperature course reproduces the engine's per-segment staircase run (the only pH trajectory the engine can run) to 4e-11 dex. Linear courses converge on midpoint staircases at second order (ratios -> 4), once the course ends on a hold: at the end of a ramp the quasi-steady pools (1-DG, AF) track the current rate constants and a staircase's last step is half a step off, a first-order endpoint error (ratios 2.0 - 2.5 before the hold was added). The lipid ramp across the 100 C window converges erratically, as it must: the staircase misplaces the jump by up to half a step, while the forced course has a knot exactly at the crossing.",
+  "**A forced species leaves the state cleanly.** A clamped constant glycine equals the network with glycine's row removed (3e-15 dex), and the forced-exchange ledger closes C / N / S to 1e-15 of E . y0 on a falling course. The exact Jacobian through a linear pH course crossing B18's knot equals column-scaled central differences to 7e-9: with the crossing a data-fixed knot there is no missing term.",
+  "**The fit driver reaches the engine's polished optimum.** Trunk-lane toy (55 steps, 3 pots, 5 coordinates): cost 3e-8 relative, theta within 2.3e-4 Laplace sigma (5.6e-4 of the chi-square-scaled sigma); lipid toy (4 coordinates): 4e-8, 1.1e-4 sigma. Both batch modes agree. The exact Jacobian equals central differences to <= 2e-9 at the optimum and the residuals move <= 4e-6 dex between rtol 1e-6 and 1e-8 (sec. 2.6's rule passes). One trf run on the exact Jacobian ends where the engine's forward fit plus its central polish ends. On these well-conditioned toys the engine's forward fit alone was already close (0.015 sigma short on the trunk toy, 0.002 on the lipid one), so they do not show the polish's stiff-pot case.",
+  "**It is not faster on these toys (paired, same load).** One JAX forward solve of the 3 trunk pots costs ~3x LSODA's; the exact 5-coordinate Jacobian costs about 1.6x the forward-difference one and about 0.9x the central one. The JAX fit needs 6 iterations against the engine's 79 evaluations, and lands at about 1.2x the engine's polished wall time (warm; compile adds ~23 s once per structure). On the lipid toy the engine's closed form wins outright (0.5 s against 0.8 - 1.1 s warm). The bake-off's 2.5 - 6.6x was at 16 coordinates on the stiff sulfur pot: forward mode's advantage grows with the coordinate count and with how poor the forward-difference Jacobian is, and 5 well-conditioned coordinates are its worst case.",
+  "**Draws: no CPU gain at equal tolerance, about 2.4x at rtol 1e-6.** Paired: the engine 9.0 draws/s on the trunk toy pot, the Predictor 7.5 (rtol 1e-8) and 21 (rtol 1e-6). Unpaired, under loads of 25 - 36: 4.8 - 5.1 draws/s at 64, 512 and 2048 draws, flat in the batch size as the contract predicted (vmap removes dispatch overhead only). The density bridge's value on CPU is exactness and one code path, not speed; at rtol 1e-6 (allowed where the residual check passes) it is about 2.4x.",
+  "**What remains before sulfur:** nothing blocking. The charge-closure check is a typed stub that needs the sulfur port's inventory; declared competition defaults to report (the ported modules carry undeclared pairs) and becomes refuse with the sulfur port; the in-situ pH scale, the clamped mode and the sulfur profile mode come with that port."
+ ],
+ "paired": {
+  "uptime_before": "18:00  up 4 days,  1:09, 1 user, load averages: 27.96 26.14 22.02",
+  "engine_draws": [
+   {
+    "draws": 64,
+    "seconds": 7.14282712500426,
+    "draws_per_second": 8.960037654552899
+   }
+  ],
+  "jax_draws": [
+   {
+    "rtol": 1e-08,
+    "draws": 64,
+    "seconds": 8.53857637499459,
+    "draws_per_second": 7.495394687506153
+   },
+   {
+    "rtol": 1e-06,
+    "draws": 64,
+    "seconds": 3.030418834008742,
+    "draws_per_second": 21.11919292533521
+   }
+  ],
+  "uptime_mid": "18:00  up 4 days,  1:10, 1 user, load averages: 30.55 26.97 22.51",
+  "engine_fit": {
+   "forward_only": {
+    "wall_seconds": 11.93522233402473,
+    "evaluations": 44,
+    "cost": 2.6712788038376316
+   },
+   "polished": {
+    "wall_seconds": 21.6538226249977,
+    "evaluations": 79,
+    "cost": 2.6711342619009284
+   }
+  },
+  "jax_fit_warm": {
+   "wall_seconds": 25.840261749981437,
+   "nfev": 6,
+   "njev": 6,
+   "cost": 2.6711343472335476
+  },
+  "jax_residual_seconds": 0.8576418750162702,
+  "jax_jacobian_seconds": 2.601550625025993,
+  "engine_seconds_per_residual": 0.27397076216602956,
+  "uptime_after": "18:02  up 4 days,  1:11, 1 user, load averages: 48.81 36.16 26.68",
+  "seconds": 139.6177594579931
+ }
+}
