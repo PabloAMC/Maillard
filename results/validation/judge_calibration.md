@@ -321,3 +321,126 @@ posterior mode, the argon CF candidate's misfit); R = 200 per truth; tie replica
 reproduction (baseline judge, omega world, the power record's own truth draws) gives 0 power in all five M1b pairs, as
 recorded.
 
+
+## Confirmation run: the REVISED item 5 / M1.1, scored as worded
+
+*Coordinator's brief, 2026-11-06, after an independent review ("adopt with fixes"). The rule scored, verbatim:*
+
+> REVISED item 5: noise at the level the compared value varies: SD of independent runs where printed, integrated over n-1 df; else the same lab class's measured run-to-run reproducibility of the same observable on a repeated design (run offset + per-point term where shown); instrument repeatability / reading error is a floor, never the whole noise of a reaction-system observable. A discrepancy term is a variance component (per point, or shared within a run), estimated on the same observable and lab class from rows on which no shared constant was fitted, integrated over its estimation uncertainty, the same for every rival, redrawn in calibration; where none exists, zero is NOT assumed: only values in which a run-level term cancels (within-run ratios, shapes, signs of within-study contrasts) can credit; absolute levels falsification-only. Across labs: the measured between-lab spread of the same observable and basis, else not decisive. No transfer from another observable; no bound as an SD. REVISED M1.1: one statistic T = pooled lppd difference over decisive units, each density p(y_dec | y_spent). a is credited iff T > the 95th percentile of T under b as truth AND a is adequate on every decisive unit (posterior-predictive p >= 0.05 after Holm); b by the mirror rule; else undecided, both carried (S3). A rival falsified under S3 is neither credited nor a null. Each null: parametric bootstrap from the null rival's spent-conditioned posterior, truths outside the ensemble, redrawing decisive data, conditioning rows, forced inputs, replicate SDs, the discrepancy component and the form index; >= 1000 replicates where affordable (else state the count and its MC error). Forms: uncertain experimental facts as discrete nuisance coordinates; unsourced modelling choices keep required agreement; omega hedges dropped. Print unit contributions and leave-one-unit-out verdicts; a credit resting on one unit stands only if that unit alone meets item 4.
+
+Readings needed to compute it are declared in the script (block "the REVISED rule"). Truths come from the null rival's spent-conditioned posterior OUTSIDE the scoring ensemble. Thresholds are per synthetic set (the bootstrap pool reweighted by that set's spent rows). A set with any unresolved density (PSIS k-hat >= 0.7 or ESS < 100, on any rival, form, numerator or denominator) is **not computable** under the rule. The "estimated" columns are a labelled DIAGNOSTIC: the same rule with every importance estimate read as estimated. They are NOT the rule and credit nothing.
+
+### M1b part (i) REVISED: R = 200 sets per truth, bootstrap pool 2048 per null rival, 0.18 h on one core
+
+| pair | world | rule: credit a power / false | rule: credit b power / false | not computable (of 2R) | estimated (diagnostic): credit a power / false [Wilson 95 %] | credit b power / false | diagnostic false credit <= 0.05 (exact test, both sides) | threshold MC SE, nats, rule-computable sets (ESS) |
+|---|---|---|---|---|---|---|---|---|
+| B1_vs_B0 | own | 0.000 / 0.000 | 0.000 / 0.000 | 400 | 0.000 / 0.020 [0.008, 0.050] | 0.000 / 0.010 | True | -- (--) |
+| B1_vs_B0 | reproducibility | 0.000 / 0.000 | 0.000 / 0.000 | 400 | 0.000 / 0.020 [0.008, 0.050] | 0.000 / 0.005 | True | -- (--) |
+| B1_vs_B0 | omega | 0.000 / 0.000 | 0.000 / 0.000 | 400 | 0.000 / 0.000 [0.000, 0.019] | 0.000 / 0.000 | True | -- (--) |
+| B2_vs_B0 | own | 0.000 / 0.000 | 0.000 / 0.000 | 400 | 0.115 / 0.020 [0.008, 0.050] | 0.000 / 0.000 | True | -- (--) |
+| B2_vs_B0 | reproducibility | 0.000 / 0.000 | 0.000 / 0.000 | 400 | 0.020 / 0.005 [0.001, 0.028] | 0.005 / 0.010 | True | -- (--) |
+| B2_vs_B0 | omega | 0.000 / 0.000 | 0.000 / 0.000 | 397 | 0.000 / 0.000 [0.000, 0.019] | 0.000 / 0.000 | True | 0.712 (1420) |
+| B3_vs_B0 | own | 0.005 / 0.000 | 0.005 / 0.000 | 367 | 0.010 / 0.015 [0.005, 0.043] | 0.025 / 0.000 | True | 0.0738 (849) |
+| B3_vs_B0 | reproducibility | 0.000 / 0.000 | 0.010 / 0.000 | 245 | 0.000 / 0.000 [0.000, 0.019] | 0.005 / 0.005 | True | 0.0828 (1366) |
+| B3_vs_B0 | omega | 0.005 / 0.000 | 0.000 / 0.000 | 289 | 0.000 / 0.000 [0.000, 0.019] | 0.000 / 0.000 | True | 0.0871 (1346) |
+| B13_vs_B0 | own | 0.000 / 0.000 | 0.000 / 0.000 | 400 | 0.070 / 0.000 [0.000, 0.019] | 0.020 / 0.000 | True | -- (--) |
+| B13_vs_B0 | reproducibility | 0.000 / 0.000 | 0.000 / 0.000 | 400 | 0.010 / 0.005 [0.001, 0.028] | 0.000 / 0.000 | True | -- (--) |
+| B13_vs_B0 | omega | 0.000 / 0.000 | 0.000 / 0.000 | 400 | 0.025 / 0.000 [0.000, 0.019] | 0.000 / 0.000 | True | -- (--) |
+| B13_vs_B3 | own | 0.000 / 0.000 | 0.000 / 0.000 | 400 | 0.165 / 0.000 [0.000, 0.019] | 0.130 / 0.035 | True | -- (--) |
+| B13_vs_B3 | reproducibility | 0.000 / 0.000 | 0.000 / 0.000 | 400 | 0.060 / 0.020 [0.008, 0.050] | 0.015 / 0.005 | True | -- (--) |
+| B13_vs_B3 | omega | 0.000 / 0.000 | 0.000 / 0.000 | 400 | 0.005 / 0.005 [0.001, 0.028] | 0.000 / 0.000 | True | -- (--) |
+
+Leave-one-unit-out and unit contributions (estimated diagnostic, reproducibility world): for each unit, among the sets where T crossed its threshold, how often the crossing rests on that unit, and of those how often the unit alone crosses its own null (item 4 for that unit alone); median T_u per truth.
+
+- **B1_vs_B0**: a|mey: 0 / 4 rest on it, 0 alone; a|hou_shape: 4 / 4 rest on it, 4 alone; a|zhou_signs: 0 / 4 rest on it, 0 alone; b|mey: 0 / 1 rest on it, 0 alone; b|hou_shape: 1 / 1 rest on it, 1 alone; b|zhou_signs: 0 / 1 rest on it, 0 alone. Median contributions: truth B1: mey -0.00, hou_shape -1.25, zhou_signs +0.01; truth B0: mey -0.00, hou_shape +1.88, zhou_signs +0.01.
+  - bootstrap pools resolved: B1 0.000, B0 0.000; compute 99 s (pools 22 s)
+- **B2_vs_B0**: a|mey: 0 / 6 rest on it, 0 alone; a|hou_shape: 6 / 6 rest on it, 6 alone; a|zhou_signs: 0 / 6 rest on it, 0 alone; b|mey: 0 / 5 rest on it, 0 alone; b|hou_shape: 4 / 5 rest on it, 4 alone; b|zhou_signs: 1 / 5 rest on it, 1 alone. Median contributions: truth B2: mey +0.01, hou_shape -1.01, zhou_signs +0.02; truth B0: mey +0.01, hou_shape +0.65, zhou_signs +0.02.
+  - bootstrap pools resolved: B2 0.002, B0 0.003; compute 190 s (pools 24 s)
+- **B3_vs_B0**: b|mey: 1 / 4 rest on it, 0 alone; b|hou_shape: 3 / 4 rest on it, 2 alone; b|zhou_signs: 1 / 4 rest on it, 1 alone. Median contributions: truth B3: mey -0.09, hou_shape -0.10, zhou_signs +0.01; truth B0: mey -0.09, hou_shape +0.83, zhou_signs +0.01.
+  - bootstrap pools resolved: B3 0.143, B0 0.203; compute 128 s (pools 20 s)
+- **B13_vs_B0**: a|mey: 0 / 7 rest on it, 0 alone; a|hou_shape: 5 / 7 rest on it, 5 alone; a|zhou_signs: 2 / 7 rest on it, 2 alone; b|mey: 2 / 3 rest on it, 0 alone; b|hou_shape: 3 / 3 rest on it, 1 alone; b|zhou_signs: 0 / 3 rest on it, 0 alone. Median contributions: truth B13: mey -0.35, hou_shape -0.11, zhou_signs -0.01; truth B0: mey -0.39, hou_shape +0.09, zhou_signs -0.01.
+  - bootstrap pools resolved: B13 0.000, B0 0.000; compute 122 s (pools 19 s)
+- **B13_vs_B3**: a|mey: 2 / 17 rest on it, 2 alone; a|hou_shape: 14 / 17 rest on it, 14 alone; a|zhou_signs: 0 / 17 rest on it, 0 alone; b|mey: 1 / 5 rest on it, 0 alone; b|hou_shape: 5 / 5 rest on it, 4 alone; b|zhou_signs: 0 / 5 rest on it, 0 alone. Median contributions: truth B13: mey -0.28, hou_shape +0.18, zhou_signs -0.01; truth B3: mey -0.28, hou_shape -0.03, zhou_signs -0.01.
+  - bootstrap pools resolved: B13 0.000, B3 0.000; compute 114 s (pools 15 s)
+
+Forced inputs: Hou's measured ARP(t) forcing is NOT redrawn: each redraw is a re-integration of the forced pot for every scoring draw (~640 draws x 2 rivals x ~1 - 2 s per bootstrap replicate, i.e. ~0.5 h per replicate): not computable here
+
+### M3 phase 1 REVISED: R = 200 sets per truth, bootstrap pool 2000 per null rival, 0.25 h on one core
+
+| pair | world | rule: credit a power / false | rule: credit b power / false | not computable (of 2R) | estimated (diagnostic): credit a power / false [Wilson 95 %] | credit b power / false | diagnostic false credit <= 0.05 (exact test, both sides) | threshold MC SE, nats, rule-computable sets (ESS) |
+|---|---|---|---|---|---|---|---|---|
+| route | own | 0.000 / 0.000 | 0.000 / 0.000 | 400 | 0.855 / 0.000 [0.000, 0.019] | 0.900 / 0.005 | True | -- (--) |
+| route | reproducibility | 0.000 / 0.000 | 0.000 / 0.000 | 400 | 0.700 / 0.005 [0.001, 0.028] | 0.760 / 0.010 | True | -- (--) |
+| route | omega | 0.000 / 0.000 | 0.000 / 0.000 | 400 | 0.000 / 0.000 [0.000, 0.019] | 0.000 / 0.000 | True | -- (--) |
+| transfer | own | 0.000 / 0.000 | 0.000 / 0.000 | 400 | 0.000 / 0.000 [0.000, 0.019] | 0.040 / 0.000 | True | -- (--) |
+| transfer | reproducibility | 0.000 / 0.000 | 0.000 / 0.000 | 400 | 0.000 / 0.005 [0.001, 0.028] | 0.025 / 0.010 | True | -- (--) |
+| transfer | omega | 0.000 / 0.000 | 0.000 / 0.000 | 400 | 0.000 / 0.000 [0.000, 0.019] | 0.000 / 0.000 | True | -- (--) |
+| decay_law | own | 0.000 / 0.000 | 0.000 / 0.000 | 400 | 0.000 / 0.000 [0.000, 0.019] | 0.000 / 0.000 | True | -- (--) |
+| decay_law | reproducibility | 0.000 / 0.000 | 0.000 / 0.000 | 400 | 0.005 / 0.000 [0.000, 0.019] | 0.000 / 0.000 | True | -- (--) |
+| decay_law | omega | 0.000 / 0.000 | 0.000 / 0.000 | 400 | 0.000 / 0.000 [0.000, 0.019] | 0.000 / 0.000 | True | -- (--) |
+
+Leave-one-unit-out and unit contributions (estimated diagnostic, reproducibility world): for each unit, among the sets where T crossed its threshold, how often the crossing rests on that unit, and of those how often the unit alone crosses its own null (item 4 for that unit alone); median T_u per truth.
+
+- **route**: a|U4: 52 / 174 rest on it, 47 alone; a|U1e: 21 / 174 rest on it, 16 alone; a|U3b: 11 / 174 rest on it, 7 alone; b|U4: 67 / 192 rest on it, 46 alone; b|U1e: 40 / 192 rest on it, 21 alone; b|U3b: 14 / 192 rest on it, 5 alone. Median contributions: truth R1: U4 +4.55, U1e +1.50, U3b +0.88; truth R2: U4 -2.38, U1e -1.70, U3b -1.34.
+  - bootstrap pools resolved: R1 0.000, R2 0.000; compute 214 s (pools 163 s)
+- **transfer**: a|U5a_PA_shape: 20 / 30 rest on it, 12 alone; a|U5b_PA_shape: 11 / 30 rest on it, 3 alone; a|UARP: 4 / 30 rest on it, 3 alone; b|U5a_PA_shape: 29 / 54 rest on it, 15 alone; b|U5b_PA_shape: 21 / 54 rest on it, 7 alone; b|UARP: 14 / 54 rest on it, 9 alone. Median contributions: truth R1: U5a_PA_shape +0.12, U5b_PA_shape +0.07, UARP -0.00; truth R3: U5a_PA_shape +0.07, U5b_PA_shape -0.06, UARP +0.03.
+  - bootstrap pools resolved: R1 0.000, R3 0.000; compute 317 s (pools 240 s)
+- **decay_law**: a|U3b: 5 / 25 rest on it, 3 alone; a|U5a_PA_shape: 12 / 25 rest on it, 9 alone; a|U5b_PA_shape: 5 / 25 rest on it, 1 alone; a|UARP: 6 / 25 rest on it, 2 alone; b|U3b: 30 / 47 rest on it, 4 alone; b|U5a_PA_shape: 20 / 47 rest on it, 12 alone; b|U5b_PA_shape: 12 / 47 rest on it, 7 alone; b|UARP: 17 / 47 rest on it, 9 alone. Median contributions: truth R4: U3b +0.28, U5a_PA_shape +0.39, U5b_PA_shape +0.20, UARP -1.76; truth R1drift: U3b -0.06, U5a_PA_shape -1.05, U5b_PA_shape -0.78, UARP -1.91.
+  - bootstrap pools resolved: R4 0.000, R1drift 0.000; compute 359 s (pools 268 s)
+
+Forced inputs: the measured dicarbonyl / ARP-Phe courses forcing the layer are NOT redrawn: each redraw re-evaluates the layer for every scoring draw (~2.5 min per 4 096-draw set and form, 16 sets per replicate: ~40 min per bootstrap replicate): not computable here
+
+### Reading of the confirmation run
+
+*Written after the numbers (not blind).*
+
+**1. As worded, the revised rule is NOT COMPUTABLE on the cases' draw ensembles.** M1b: 400 of 400 sets per pair and
+world are not computable in four of five pairs; B3 vs B0 is computable in 33 - 155 of 400, with rule power 0.000 - 0.010
+and false credit 0.000. M3: 400 of 400 in every pair and world. The bootstrap pools are 0 - 20 % resolved. The cause is
+the one this record found in round one, now without omega to hide it. At the noise item 5 prescribes, the decisive
+likelihoods are sharp relative to the prior draw ensembles: joint ESS 2 - 25 of 320 - 4 096 draws (M3 route: spent ESS
+~2 000, joint 4 - 13). In M1b, conditioning on the three spent C-Zhou-Cys rows already leaves B1 / B13 / B2 an ESS of
+3 - 90. The gate is right to refuse: at ESS ~4 the estimates are biased, not just noisy. For example, the TRUE B1 loses
+its own C-Hou shape (median contribution -0.84 to -1.25 nats).
+
+**2. Cost of re-estimating (the rule's alternative to "not computable").**
+- Per set, every rival, form, numerator and denominator needs a density with ESS >= 100.
+- M3: the layer is cheap, but tuned per-set densities (the reusable SMC, 4.5 - 10 min each, 16 per set) cost ~1 - 3 h
+  per set, i.e. ~4 000 - 8 000 core-hours per pair at R = 200 plus pools of 1 000.
+- M3, the affordable route: one-time, ~10 - 20x larger draw sets per rival and form (~40 000 - 80 000 feasible draws;
+  ~2.5 min per 4 096) cost ~10 - 20 core-hours for all 20 rival-form sets. That would lift joint ESS to ~50 - 250, so
+  most sets should become computable (not shown here).
+- M1b: engine-bound. The screen cost ~29 core-s per draw. A ~10x larger ensemble is ~250 core-hours, and B1 / B13
+  need ~30x for their spent conditioning alone. Spent-conditioned proposals would need new engine runs per synthetic
+  set (~5 core-hours each). On one machine this is not computable for the confirmation.
+- Forced inputs (Hou's ARP(t); M3's measured courses) are not redrawn in either case: each redraw re-runs the engine or
+  the layer for every scoring draw.
+
+**3. The same rule with every estimate read as estimated (a DIAGNOSTIC, not the rule; it credits nothing).**
+- **False credit is controlled everywhere.** Reproducibility world: max 0.020 (M1b) and 0.010 (M3). Own world: max
+  0.035. Omega world: <= 0.005. Across all worlds every exact one-sided p >= 0.88 against 0.05. The per-set
+  calibrated threshold with the Holm adequacy gate holds false credit at or below 0.05 + MC error, even under
+  H0-sized misspecification, where every round-one configuration failed (0.155 - 0.545).
+- **Power** (reproducibility world):
+  - M3 route: 0.70 (crediting R1) and 0.76 (crediting R2); own world 0.86 / 0.90.
+  - M3 transfer: <= 0.04. M3 decay law: <= 0.005.
+  - M1b: <= 0.06 in every pair (own world <= 0.17).
+  - Omega world: <= 0.025 everywhere. The rule stays silent rather than crediting. Which gate silences it (the
+    threshold or the adequacy test) is not separated here.
+- **Threshold MC error** (rule-computable sets only): ~0.07 - 0.09 nats in M1b B3 vs B0 (weights' ESS ~850 - 1 400,
+  pool 2 048); 0.71 nats in B2 vs B0's three computable omega-world sets.
+- **Leave-one-unit-out.**
+  - M1b: C-Zhou-ARP's dominance is gone. Restricted by item 5 to the signs of its within-study contrasts, it
+    contributes ~0.01 nats. Almost every crossing rests on C-Hou's within-run shape; C-Mey's drift adds
+    |T_u| <= 0.4 nats (reproducibility world).
+  - M3 route: U4 carries 25 - 35 % of the crossings, and in 69 - 90 % of those U4 alone crosses its own null. U1e
+    carries 9 - 21 %, U3b 2 - 7 % (own and reproducibility worlds).
+
+**4. What this means for the proposal.** The revised judge is calibrated: its false credit holds in every world tested,
+including misspecification. Its power is real where the data are informative (M3 route ~0.7 - 0.9) and honest where
+they are not (M1b, M3 transfer and decay law ~0). But no verdict can be issued under it until the density estimator
+resolves at item 5's noise. For M3 that is a bounded, affordable step (bigger draw sets). For M1b it is not affordable
+on one machine, and the M1b confirmation stands at "not computable", not at a power figure. The diagnostic numbers
+bound what a resolved estimator should give; they must be re-confirmed with resolved densities before any use. Nothing
+here reopens M1b part (i) (A1) or applies to any case.
+

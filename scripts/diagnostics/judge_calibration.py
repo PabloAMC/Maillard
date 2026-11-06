@@ -69,7 +69,8 @@ RUN (one core, niced, threads pinned; each case in its own process because the M
     OMP_NUM_THREADS=1 nice -n 10 ./scripts/docker_maillard.sh run "python scripts/diagnostics/judge_calibration.py \
         --case m1b --m1b-root <PR #94 worktree> --part-out <scratch>/m1b.json"
     ... --case m3 --m3-cache <draw-set cache> --part-out <scratch>/m3.json
-    ... --merge <scratch>/m1b.json <scratch>/m3.json     # writes results/validation/judge_calibration.{json,md}
+    ... --case m1b --revised ... / --case m3 --revised ...   # the confirmation run of the REVISED rule (see that block)
+    ... --merge <scratch>/m1b.json <scratch>/m3.json [<revised parts>]   # writes results/validation/judge_calibration.*
 
 WHAT THIS IS NOT. Not a rule change. Any revision it suggests must be frozen by principle (sec. 7 item 5: "the
 measurement's own reported noise") and confirmed independently BEFORE it is applied to any case, and the amended
@@ -898,6 +899,771 @@ def run_m3(args) -> Dict[str, Any]:
     return out
 
 
+# ================================================================================================ the REVISED rule
+#
+# The confirmation run (coordinator, 2026-11-06, after an independent review of this record's proposal: "adopt with
+# fixes"). It scores the revised sec. 7 item 5 and M1.1 EXACTLY as worded in REVISED_RULE_TEXT, on synthetic data in
+# three generator worlds, and fixes this record's own flaws: truths come from the null rival's spent-conditioned
+# posterior OUTSIDE the scoring ensemble; thresholds are computed per synthetic set; an unresolved estimate is never
+# read as resolved (the set is "not computable", with the cost of re-estimating it).
+#
+# DECLARED READINGS (where the wording needs a reading to be computed; each is printed in the record)
+# - The null distribution of T for one synthetic set is the parametric bootstrap from the null rival's posterior given
+#   THAT set's spent rows. It is computed by importance-reweighting one bootstrap pool per (pair, null rival): pool
+#   element j has a truth theta_j drawn uniformly from the null rival's held-out draws and its own redrawn data (decisive,
+#   spent, replicate SDs, noise components, discrete nuisance index), with T_j computed exactly as on the set; a set's
+#   null is the pool weighted by p(y_spent(set) | theta_j). This is exact up to Monte Carlo error, which is reported per
+#   set (weighted-quantile SE from the weights' ESS).
+# - "Outside the ensemble": M1b's screen ensembles are split by draw parity (even: truths; odd: scoring); M3's truths
+#   come from its separate truth sets (other Sobol seeds). Forced inputs are NOT redrawn (each redraw is a new engine
+#   run per draw: not computable here; stated per case).
+# - Required agreement: M1b, the forced / unforced C-Hou (a modelling choice); M3, o_Ar 0.1, the Cu law and the 20 mL
+#   headspace (the prereg's "unsourced choices"), each form's T against its own null, data from the primary form.
+#   Discrete nuisance: M1b's meter repeatability r in {0.02, 0.05, 0.10} pH (A1's set), equal prior weights, mixed in the
+#   density. Omega forms dropped. B0-pinned (a separate pairing) is not run.
+# - M1b noise (revised item 5): C-Zhou rows: the printed SD of n = 3 independent runs, the mean's scale s / sqrt 3,
+#   Student-t with n - 1 = 2 df, floored at max(read error, r). C-Hou: no printed SD, so A1's same-observable run-to-run
+#   reproducibility (run offset 0.447 pH, chi-square 1 df; per-point shape 0.162 pH, 3 df), each integrated over its
+#   estimation uncertainty (scaled inverse chi-square, 4-point quantile quadrature), floored per point at max(read
+#   0.05, r). C-Mey: a within-run drift (the offset cancels), sqrt(2) r. No same-observable model-discrepancy estimate
+#   exists, so absolute levels are falsification-only: T credits on C-Mey's drift, C-Hou's within-run shape (y_t -
+#   y_20) and the signs of C-Zhou-ARP's within-study contrasts (7 - 6, 8 - 7; each as a t_2 difference, the two
+#   treated as independent); C-Hou's and C-Zhou-ARP's absolute values enter only the adequacy (falsification) test.
+#   Spent rows: C-Zhou-Cys.
+# - M3 noise: the measurement's own terms plus the lane's within-lab run scatter (sigma_run 0.075 dex as the run
+#   offset, and per point: the "between points" form), no omega; sigma_run's estimation uncertainty is not on disk, so
+#   it is not integrated (stated). No discrepancy estimate: T credits on within-run ratios and shapes only (route: U4,
+#   U1e, U3b; transfer: U5a / U5b PA shapes, U-ARPglc; decay law: U3b, the PA shapes, U-ARPglc); absolute levels (U3,
+#   U3a, U5a, U5b) enter the adequacy test only. Spent rows: route U1l; transfer and decay law U4, U1e, U1l.
+# - Adequacy: posterior-predictive p of each decisive unit (absolute form included) under the rival's posterior given
+#   the spent and decisive data (M1b: Monte Carlo on -log p_pred, 200 replicates; M3: the layer's Gaussian Mahalanobis
+#   p; U-ARPglc, censored, has none), Holm at 0.05 across the units; computed only where T crosses its threshold.
+# - Leave-one-unit-out: where removing unit u drops T below the null quantile of T without u, the credit rests on u and
+#   stands only if T_u alone exceeds the null quantile of T_u (item 4 for that unit alone).
+# - Generator worlds: "own" (measurement noise only, r = 0.05), "reproducibility" (adds the same-observable run-to-run
+#   term at its point estimate: M1b A1's offset and shape on the unbuffered C-Hou and C-Zhou rows; M3 sigma_run between
+#   points), "omega" (adds H0's omega as before). The scorer is the same in every world.
+
+REVISED_RULE_TEXT = (
+    "REVISED item 5: noise at the level the compared value varies: SD of independent runs where printed, integrated "
+    "over n-1 df; else the same lab class's measured run-to-run reproducibility of the same observable on a repeated "
+    "design (run offset + per-point term where shown); instrument repeatability / reading error is a floor, never the "
+    "whole noise of a reaction-system observable. A discrepancy term is a variance component (per point, or shared "
+    "within a run), estimated on the same observable and lab class from rows on which no shared constant was fitted, "
+    "integrated over its estimation uncertainty, the same for every rival, redrawn in calibration; where none exists, "
+    "zero is NOT assumed: only values in which a run-level term cancels (within-run ratios, shapes, signs of "
+    "within-study contrasts) can credit; absolute levels falsification-only. Across labs: the measured between-lab "
+    "spread of the same observable and basis, else not decisive. No transfer from another observable; no bound as an "
+    "SD. REVISED M1.1: one statistic T = pooled lppd difference over decisive units, each density p(y_dec | y_spent). "
+    "a is credited iff T > the 95th percentile of T under b as truth AND a is adequate on every decisive unit "
+    "(posterior-predictive p >= 0.05 after Holm); b by the mirror rule; else undecided, both carried (S3). A rival "
+    "falsified under S3 is neither credited nor a null. Each null: parametric bootstrap from the null rival's "
+    "spent-conditioned posterior, truths outside the ensemble, redrawing decisive data, conditioning rows, forced "
+    "inputs, replicate SDs, the discrepancy component and the form index; >= 1000 replicates where affordable (else "
+    "state the count and its MC error). Forms: uncertain experimental facts as discrete nuisance coordinates; "
+    "unsourced modelling choices keep required agreement; omega hedges dropped. Print unit contributions and "
+    "leave-one-unit-out verdicts; a credit resting on one unit stands only if that unit alone meets item 4.")
+
+REV_WORLDS = ("own", "reproducibility", "omega")
+REV_POOL = int(os.environ.get("JUDGE_REV_POOL", "2048"))
+REV_R = int(os.environ.get("JUDGE_REV_R", "200"))
+REV_PPC = 200
+A1_OFF, A1_OFF_DF = 0.447, 1          # M1b prereg v3.7 sec. 20.2: one pair of Zhou 2024 / 2025b runs
+A1_SH, A1_SH_DF = 0.162, 3            # the sd (n - 1 = 3) of the four differences, / sqrt 2
+R_METER_SET = (0.02, 0.05, 0.10)      # A1's r, its sensitivity 0.02 and the confirmer's 0.10
+ZHOU_N = 3                            # ph_acid_submodel.yml sd_basis: "mean +- SD, n = 3"
+QUAD_K = 4
+
+
+def invchi2_quad(s: float, nu: int, k: int = QUAD_K) -> np.ndarray:
+    """K variances at the (i - 1/2) / K quantiles of the scaled inverse chi-square posterior of sigma^2 (estimate s,
+    nu df): the declared quadrature for 'integrated over its estimation uncertainty'."""
+    from scipy.stats import chi2
+    u = (np.arange(k) + 0.5) / k
+    return nu * s ** 2 / chi2.ppf(1.0 - u, nu)
+
+
+def invchi2_draw(s: float, nu: int, rng, size=None):
+    return nu * s ** 2 / rng.chisquare(nu, size)
+
+
+def weighted_quantile(x: np.ndarray, w: np.ndarray, q: float) -> Tuple[float, float, float]:
+    """(quantile, its Monte Carlo SE, ESS) of a weighted sample; SE = sqrt(q (1 - q) / ESS) / f(quantile), f a weighted
+    Gaussian kernel density (Silverman bandwidth)."""
+    ok = np.isfinite(x) & (w > 0)
+    x, w = x[ok], w[ok]
+    if x.size == 0:
+        return float("nan"), float("nan"), 0.0
+    w = w / w.sum()
+    o = np.argsort(x)
+    xs, cw = x[o], np.cumsum(w[o])
+    qv = float(xs[min(np.searchsorted(cw, q), xs.size - 1)])
+    ess = float(1.0 / np.sum(w ** 2))
+    mu = float(w @ x)
+    sd = float(np.sqrt(max(w @ (x - mu) ** 2, 1e-300)))
+    h = 1.06 * sd * max(ess, 2.0) ** (-0.2)
+    dens = float(w @ np.exp(-0.5 * ((x - qv) / h) ** 2)) / (h * math.sqrt(2 * math.pi)) if h > 0 else float("nan")
+    se = math.sqrt(q * (1 - q) / max(ess, 1.0)) / dens if dens > 0 else float("inf")
+    return qv, float(se), ess
+
+
+LAST_ESS: List[float] = []
+
+
+def resolved_rows(log_w: np.ndarray, k_max: float = 0.7, ess_min: float = 100.0) -> Tuple[np.ndarray, np.ndarray]:
+    """Per row of a (n, S) matrix of log importance weights: PSIS k-hat < k_max and ESS >= ess_min (M1.1's rule,
+    predictive_densities.K_HAT_MAX / ESS_MIN). Returns (resolved, k-hat)."""
+    from src.kinetic_core import predictive_densities as pdens
+    lw = np.atleast_2d(log_w)
+    res, ks = np.zeros(lw.shape[0], bool), np.zeros(lw.shape[0])
+    for i, row in enumerate(lw):
+        fin = np.isfinite(row)
+        if fin.sum() < 10:
+            ks[i] = float("inf")
+            continue
+        sm, k = pdens.psis(row[fin] - np.max(row[fin]))
+        w = np.exp(sm - np.max(sm))
+        ess = float(w.sum() ** 2 / np.sum(w ** 2))
+        ks[i] = k
+        LAST_ESS.append(ess)
+        res[i] = (k < k_max) and (ess >= ess_min)
+    return res, ks
+
+
+def _verdicts(T: Mapping[str, Mapping[str, float]], null_a, null_b, units: Sequence[str], forms: Sequence[str],
+              adequate_a, adequate_b) -> Dict[str, Any]:
+    """The revised M1.1 verdict of one set. T[form]['full' | '-u' | 'u'] the observed statistics; null_x(form, key)
+    -> the (quantile, se, ess) of that key's null when x is the truth (for crediting a: the 95th percentile under b;
+    for b: the 5th percentile under a). adequate_x(form) -> bool (Holm-adjusted). Returns the credit, the
+    leave-one-unit-out readings and the threshold MC errors."""
+    out: Dict[str, Any] = {"credit": "none", "loo": {}, "thr_se": []}
+    for side in ("a", "b"):
+        ok_all = True
+        loo_side = {}
+        for f in forms:
+            if side == "a":
+                q, se, ess = null_b(f, "full", 0.95)
+                hit = T[f]["full"] > q
+            else:
+                q, se, ess = null_a(f, "full", 0.05)
+                hit = T[f]["full"] < q
+            out["thr_se"].append(se)
+            if not (np.isfinite(q) and hit):
+                ok_all = False
+                break
+            if not (adequate_a(f) if side == "a" else adequate_b(f)):
+                ok_all = False
+                out[f"inadequate_{side}"] = True
+                break
+            for u in units:
+                if side == "a":
+                    qm = null_b(f, f"-{u}", 0.95)[0]
+                    rests = not (T[f][f"-{u}"] > qm)
+                    alone = T[f][u] > null_b(f, u, 0.95)[0]
+                else:
+                    qm = null_a(f, f"-{u}", 0.05)[0]
+                    rests = not (T[f][f"-{u}"] < qm)
+                    alone = T[f][u] < null_a(f, u, 0.05)[0]
+                loo_side[f"{f}|{u}"] = {"rests_on": bool(rests), "alone_credits": bool(alone)}
+                if rests and not alone:
+                    ok_all = False
+        out["loo"][side] = loo_side
+        if ok_all:
+            out["credit"] = side
+            break
+    return out
+
+
+# ------------------------------------------------------------------------------------------------ M1b, revised
+
+def run_revised_m1b(args) -> Dict[str, Any]:
+    m1b_root = Path(args.m1b_root).resolve()
+    for p in (str(m1b_root / "scripts" / "generators"), str(m1b_root)):
+        if p not in sys.path:
+            sys.path.insert(0, p)
+    import fit_m1b_ph_balance as G
+    from src.kinetic_core import predictive_densities as pdens  # noqa: F401  (resolved_rows imports it too)
+    from scipy.stats import t as tdist
+    from scipy.special import log_ndtr
+    if Path(G.__file__).resolve().parents[2] != m1b_root:
+        raise SystemExit("the M1b generator did not import from --m1b-root")
+    draws_path = m1b_root / "results" / "validation" / "kinetic_core_m1b_part_i_screen_draws.json.gz"
+    ens = G.load_screen_ensembles(draws_path)
+    t0 = time.time()
+    raw = G.measured_units()
+    zc_real_y = np.array(raw["C-Zhou-Cys"].y, float)                       # SPENT rows only
+    zmeas = G.zhou_measured()
+    zc_sd = np.array([zmeas[f"zhou_cys_pH{x:g}"]["sd"] for x in G.ZHOU_LABELS], float)
+    za_sd = np.array([zmeas[f"zhou_arp_pH{x:g}"]["sd"] for x in G.ZHOU_LABELS], float)
+    zread = 0.02
+    hou_read = float(G.HOU["read_ph"])
+    del raw
+    sh_var = invchi2_quad(A1_SH, A1_SH_DF)
+    off_var = invchi2_quad(A1_OFF, A1_OFF_DF)
+    r_set = np.array(R_METER_SET)
+    lw_r = np.log(np.full(len(r_set), 1.0 / len(r_set)))
+    FORMS = ("forced", "unforced")
+    HOU_UNIT = {"forced": "C-Hou", "unforced": "C-Hou-unforced"}
+    UNITS = ("mey", "hou_shape", "zhou_signs")
+    A_SH = np.zeros((5, 6))
+    for k in range(5):
+        A_SH[k, k + 1], A_SH[k, 0] = 1.0, -1.0
+
+    # ---- scorer densities, vectorised: data with a leading set axis (n, ...), predictions (S, ...) -> (n, S)
+    def ll_mey(within: np.ndarray, f: np.ndarray) -> np.ndarray:
+        comps = []
+        for r in r_set:
+            s = math.sqrt(2.0) * r
+            hi, lo = (G.MEYNIER_BOUND - f) / s, (-G.MEYNIER_BOUND - f) / s
+            lin = G._log_inside(lo, hi)
+            lout = G._log_outside(lo, hi)
+            w = within.astype(float)
+            comps.append(w @ lin.T + (1.0 - w) @ lout.T)
+        return lse(np.stack(comps, 0) + lw_r[:, None, None], axis=0)
+
+    def ll_hou_shape(y: np.ndarray, f: np.ndarray) -> np.ndarray:
+        z = y @ A_SH.T
+        fz = f @ A_SH.T
+        res = z[:, None, :] - fz[None, :, :]
+        s1, s2 = np.sum(res ** 2, axis=2), np.sum(res, axis=2) ** 2
+        q = s1 - s2 / 6.0
+        comps = []
+        for ri, r in enumerate(r_set):
+            meas2 = max(hou_read, r) ** 2
+            for v_sh in sh_var:
+                v = meas2 + v_sh
+                comps.append(-0.5 * (q / v + 5 * math.log(v) + math.log(6.0) + 5 * math.log(2 * math.pi))
+                             + lw_r[ri] - math.log(len(sh_var)))
+        return lse(np.stack(comps, 0), axis=0)
+
+    def ll_hou_abs(y: np.ndarray, f: np.ndarray) -> np.ndarray:
+        res = y[:, None, :] - f[None, :, :]
+        s1, s2 = np.sum(res ** 2, axis=2), np.sum(res, axis=2) ** 2
+        comps = []
+        for ri, r in enumerate(r_set):
+            meas2 = max(hou_read, r) ** 2
+            for v_sh in sh_var:
+                for o in off_var:
+                    v = meas2 + v_sh
+                    q = (s1 - o / (v + 6 * o) * s2) / v
+                    comps.append(-0.5 * (q + 5 * math.log(v) + math.log(v + 6 * o) + 6 * math.log(2 * math.pi))
+                                 + lw_r[ri] - math.log(len(sh_var) * len(off_var)))
+        return lse(np.stack(comps, 0), axis=0)
+
+    def zscale(s_rep: np.ndarray, r: float) -> np.ndarray:
+        return np.maximum(np.maximum(s_rep / math.sqrt(ZHOU_N), zread), r)
+
+    def ll_zhou_abs(y: np.ndarray, s_rep: np.ndarray, f: np.ndarray) -> np.ndarray:
+        comps = []
+        for ri, r in enumerate(r_set):
+            c = zscale(s_rep, r)                                          # (n, 3)
+            x = (y[:, None, :] - f[None, :, :]) / c[:, None, :]
+            comps.append(np.sum(tdist.logpdf(x, ZHOU_N - 1) - np.log(c)[:, None, :], axis=2) + lw_r[ri])
+        return lse(np.stack(comps, 0), axis=0)
+
+    PAIRS_C = ((1, 0), (2, 1))
+
+    def ll_zhou_signs(y: np.ndarray, s_rep: np.ndarray, f: np.ndarray) -> np.ndarray:
+        comps = []
+        for ri, r in enumerate(r_set):
+            c = zscale(s_rep, r)
+            tot = 0.0
+            for hi_, lo_ in PAIRS_C:
+                sg = np.sign(y[:, hi_] - y[:, lo_])[:, None]
+                sd = np.sqrt(c[:, hi_] ** 2 + c[:, lo_] ** 2)[:, None]
+                df_ = (f[:, hi_] - f[:, lo_])[None, :]
+                tot = tot + tdist.logcdf(sg * df_ / sd, ZHOU_N - 1)
+            comps.append(tot + lw_r[ri])
+        return lse(np.stack(comps, 0), axis=0)
+
+    # ---- data generators: world "own" / "reproducibility" / "omega", and "scorer" (the bootstrap's own model)
+    def gen(E, idx: np.ndarray, world: str, rng) -> Dict[str, np.ndarray]:
+        n = idx.size
+        out: Dict[str, np.ndarray] = {}
+        if world == "scorer":
+            r = rng.choice(r_set, size=n)
+            v_sh = invchi2_draw(A1_SH, A1_SH_DF, rng, n)
+            v_off = invchi2_draw(A1_OFF, A1_OFF_DF, rng, n)
+        else:
+            r = np.full(n, 0.05)
+        # C-Mey
+        f = E.f["C-Mey-Cys"][idx]
+        var = 2.0 * r[:, None] ** 2 + (E.delta["C-Mey-Cys"]["primary"][idx] ** 2 if world == "omega" else 0.0)
+        out["within"] = np.abs(f + rng.standard_normal(f.shape) * np.sqrt(var)) <= G.MEYNIER_BOUND
+        # C-Hou (forced run's predictions; the unforced form is scored on the same data)
+        f = E.f["C-Hou"][idx]
+        meas = np.maximum(hou_read, r)[:, None]
+        y = f + rng.standard_normal(f.shape) * meas
+        if world == "scorer":
+            y = y + rng.standard_normal(f.shape) * np.sqrt(v_sh)[:, None] + rng.standard_normal((n, 1)) * np.sqrt(v_off)[:, None]
+        elif world == "reproducibility":
+            y = y + rng.standard_normal(f.shape) * A1_SH + rng.standard_normal((n, 1)) * A1_OFF
+        elif world == "omega":
+            y = y + rng.standard_normal(f.shape) * E.delta["C-Hou"]["primary"][idx]
+        out["hou"] = y
+        # C-Zhou rows: the mean of n = 3 independent runs; the printed SD redrawn
+        for key, unit, sd_print in (("za", "C-Zhou-ARP", za_sd), ("zc", "C-Zhou-Cys", zc_sd)):
+            f = E.f[unit][idx]
+            if world == "scorer":
+                sig2 = invchi2_draw(1.0, ZHOU_N - 1, rng, f.shape) * sd_print[None, :] ** 2
+            else:
+                sig2 = np.broadcast_to(sd_print[None, :] ** 2, f.shape)
+            y = f + rng.standard_normal(f.shape) * np.sqrt(sig2 / ZHOU_N)
+            if world == "reproducibility":
+                y = y + rng.standard_normal(f.shape) * A1_SH + rng.standard_normal(f.shape) * A1_OFF
+            elif world == "omega":
+                y = y + rng.standard_normal(f.shape) * E.delta[unit]["primary"][idx]
+            out[key] = y
+            out[key + "_s"] = np.sqrt(sig2 * rng.chisquare(ZHOU_N - 1, f.shape) / (ZHOU_N - 1))
+        return out
+
+    def take(d: Mapping[str, np.ndarray], i) -> Dict[str, np.ndarray]:
+        return {k: v[i] for k, v in d.items()}
+
+    def stats(dat: Mapping[str, np.ndarray], Ea, Eb) -> Dict[str, Any]:
+        """T and its leave-one-out / alone variants per form, and the resolution of every density, for n sets."""
+        lls = {}
+        for side, E in (("a", Ea), ("b", Eb)):
+            spent = ll_zhou_abs(dat["zc"], dat["zc_s"], E.f["C-Zhou-Cys"])
+            per = {"mey": ll_mey(dat["within"], E.f["C-Mey-Cys"]),
+                   "zhou_signs": ll_zhou_signs(dat["za"], dat["za_s"], E.f["C-Zhou-ARP"])}
+            for form in FORMS:
+                per[f"hou_shape|{form}"] = ll_hou_shape(dat["hou"], E.f[HOU_UNIT[form]])
+            lls[side] = (spent, per)
+        out: Dict[str, Any] = {"T": {}, "resolved": None, "contrib": {}, "diag": {}}
+        res_all = None
+        for form in FORMS:
+            tf = {}
+            for side in ("a", "b"):
+                spent, per = lls[side]
+                u_ll = {"mey": per["mey"], "hou_shape": per[f"hou_shape|{form}"], "zhou_signs": per["zhou_signs"]}
+                den = lse(spent, axis=1)
+                tot = spent + sum(u_ll.values())
+                full = lse(tot, axis=1) - den
+                vals = {"full": full}
+                for u in UNITS:
+                    vals[f"-{u}"] = lse(tot - u_ll[u], axis=1) - den
+                    vals[u] = lse(spent + u_ll[u], axis=1) - den
+                del LAST_ESS[:]
+                rs, ks_ = resolved_rows(tot)
+                ess_tot = list(LAST_ESS)
+                del LAST_ESS[:]
+                rd, kd_ = resolved_rows(spent)
+                ess_den = list(LAST_ESS)
+                out["diag"][f"{form}|{side}"] = {"k_tot_median": float(np.median(ks_)), "ess_tot_median":
+                                                 float(np.median(ess_tot)), "k_spent_median": float(np.median(kd_)),
+                                                 "ess_spent_median": float(np.median(ess_den)),
+                                                 "resolved_fraction": float(np.mean(rs & rd))}
+                r_ = rs & rd
+                res_all = r_ if res_all is None else (res_all & r_)
+                tf[side] = vals
+            out["T"][form] = {k: tf["a"][k] - tf["b"][k] for k in tf["a"]}
+        out["resolved"] = res_all
+        out["lls"] = lls
+        return out
+
+    def spent_ll_over(E, idx_pool: np.ndarray, zc: np.ndarray, zc_s: np.ndarray) -> np.ndarray:
+        """log p(spent | theta) for one set's spent rows over the truth draws idx_pool."""
+        return ll_zhou_abs(zc[None, :], zc_s[None, :], E.f["C-Zhou-Cys"][idx_pool])[0]
+
+    def adequacy(side_E, dat_one: Mapping[str, np.ndarray], lls_side, i: int, form: str, rng) -> Tuple[bool, Dict]:
+        """Holm-adjusted posterior-predictive adequacy on the decisive units (absolute forms included), Monte Carlo
+        on -log p_pred with REV_PPC replicates, under the rival's posterior given the spent and decisive data."""
+        spent, per = lls_side
+        logw = spent[i] + per["mey"][i] + per[f"hou_shape|{form}"][i] + per["zhou_signs"][i]
+        w = np.exp(logw - np.max(logw))
+        w = w / w.sum()
+        S = w.size
+        draws = rng.choice(S, size=REV_PPC, p=w)
+        sel = {"mey": ("C-Mey-Cys",), "hou": (HOU_UNIT[form],), "za": ("C-Zhou-ARP",)}
+        ps = {}
+        # replicate data from the scorer's model at the posterior draws
+        fake = type("E", (), {})()
+        fake.f = {k: side_E.f[k] for k in ("C-Mey-Cys", "C-Hou", "C-Zhou-ARP", "C-Zhou-Cys")}
+        fake.f["C-Hou"] = side_E.f[HOU_UNIT[form]]
+        fake.delta = side_E.delta
+        rep = gen(fake, draws, "scorer", rng)
+        lw = np.log(np.maximum(w, 1e-300))
+        for u in ("mey", "hou", "za"):
+            if u == "mey":
+                obs = lse(lw[None, :] + ll_mey(dat_one["within"][None, :], side_E.f["C-Mey-Cys"]), axis=1)
+                r_ = lse(lw[None, :] + ll_mey(rep["within"], side_E.f["C-Mey-Cys"]), axis=1)
+            elif u == "hou":
+                obs = lse(lw[None, :] + ll_hou_abs(dat_one["hou"][None, :], side_E.f[HOU_UNIT[form]]), axis=1)
+                r_ = lse(lw[None, :] + ll_hou_abs(rep["hou"], side_E.f[HOU_UNIT[form]]), axis=1)
+            else:
+                obs = lse(lw[None, :] + ll_zhou_abs(dat_one["za"][None, :], dat_one["za_s"][None, :],
+                                                    side_E.f["C-Zhou-ARP"]), axis=1)
+                r_ = lse(lw[None, :] + ll_zhou_abs(rep["za"], rep["za_s"], side_E.f["C-Zhou-ARP"]), axis=1)
+            ps[u] = float(np.mean(r_ <= obs[0]))         # P(log p_pred(y_rep) <= log p_pred(y_obs))
+        rej = holm_reject(ps)
+        return (not any(rej.values())), ps
+
+    rng = np.random.default_rng(M1B_SEED + 101)
+    halves = {}
+    for rv in G.RIVAL_NAMES:
+        S = ens[rv].size
+        halves[rv] = {"truth": np.arange(0, S, 2), "score": np.arange(1, S, 2)}
+    score_E = {rv: ens[rv].subset(halves[rv]["score"]) for rv in G.RIVAL_NAMES}
+    full_E = ens
+
+    # real spent rows -> each rival's evaluation-truth weights over its held-out draws
+    def truth_weights(rv: str) -> np.ndarray:
+        lw = spent_ll_over(full_E[rv], halves[rv]["truth"], zc_real_y, zc_sd)
+        w = np.exp(lw - np.max(lw))
+        return w / w.sum()
+
+    results: Dict[str, Any] = {}
+    want = [x for x in args.m1b_pairs.split(",") if x]
+    for a, b in G.PAIRS:
+        key = f"{a}_vs_{b}"
+        if want and key not in want:
+            continue
+        t1 = time.time()
+        Ea, Eb = score_E[a], score_E[b]
+        # ---- bootstrap pools (the scorer's own model), one per null rival
+        pools = {}
+        for null in (a, b):
+            tidx = halves[null]["truth"]
+            pick = rng.integers(0, tidx.size, REV_POOL)
+            dat = gen(full_E[null], tidx[pick], "scorer", rng)
+            st = stats(dat, Ea, Eb)
+            pools[null] = {"pick": pick, "T": st["T"], "resolved": st["resolved"]}
+        cost_pool = time.time() - t1
+
+        def null_fn(null: str, spent_lw_over_truth: np.ndarray, resolved_only: bool = True):
+            P = pools[null]
+            w = np.exp(spent_lw_over_truth - np.max(spent_lw_over_truth))[P["pick"]]
+            if resolved_only:
+                w = w * P["resolved"]
+
+            def f(form, k, q):
+                return weighted_quantile(P["T"][form][k], w, q)
+            return f
+
+        world_out = {}
+        diag_w: Dict[str, Any] = {}
+        for world in REV_WORLDS:
+            rows = []
+            for truth in (a, b):
+                tw = truth_weights(truth)
+                tidx = halves[truth]["truth"][rng.choice(halves[truth]["truth"].size, size=REV_R, p=tw)]
+                dat = gen(full_E[truth], tidx, world, rng)
+                st = stats(dat, Ea, Eb)
+                diag_w[f"{world}|truth_{truth}"] = st["diag"]
+                print(f"  resolution {world} truth {truth}: {json.dumps(st['diag'])}", flush=True)
+                for i in range(REV_R):
+                    row: Dict[str, Any] = {"truth": truth}
+                    T_i = {form: {k: float(v[i]) for k, v in st["T"][form].items()} for form in FORMS}
+                    la = spent_ll_over(full_E[a], halves[a]["truth"], dat["zc"][i], dat["zc_s"][i])
+                    lb = spent_ll_over(full_E[b], halves[b]["truth"], dat["zc"][i], dat["zc_s"][i])
+                    one = take(dat, i)
+                    ad_a = lambda form, one=one, i=i: adequacy(Ea, one, st["lls"]["a"], i, form, rng)[0]  # noqa: E731
+                    ad_b = lambda form, one=one, i=i: adequacy(Eb, one, st["lls"]["b"], i, form, rng)[0]  # noqa: E731
+                    v_est = _verdicts(T_i, null_fn(a, la, False), null_fn(b, lb, False), UNITS, FORMS, ad_a, ad_b)
+                    row["credit_est"] = v_est["credit"]
+                    row["loo_est"] = v_est["loo"]
+                    row["contrib_all"] = {u: T_i["forced"][u] for u in UNITS}
+                    if not st["resolved"][i]:
+                        row["credit"] = "not computable"
+                        rows.append(row)
+                        continue
+                    v = _verdicts(T_i, null_fn(a, la), null_fn(b, lb), UNITS, FORMS, ad_a, ad_b)
+                    row.update({"credit": v["credit"], "T": T_i["forced"]["full"],
+                                "contrib": {u: T_i["forced"][u] for u in UNITS},
+                                "loo": v["loo"], "thr_se": [x for x in v["thr_se"] if np.isfinite(x)],
+                                "thr_ess": weighted_quantile(pools[b]["T"]["forced"]["full"],
+                                                             np.exp(lb - lb.max())[pools[b]["pick"]], 0.95)[2]})
+                    rows.append(row)
+            world_out[world] = summarise_revised(rows, a, b, UNITS)
+            world_out[world]["estimated_diagnostic"] = summarise_revised(rows, a, b, UNITS, key="credit_est")
+            print(f"m1b revised {key} {world}: credit {a} power {world_out[world]['credit_a']['power']:.3f} false "
+                  f"{world_out[world]['credit_a']['false_credit']:.3f}; not computable "
+                  f"{world_out[world]['not_computable']} ({time.time() - t1:.0f} s)", flush=True)
+        results[key] = {"a": a, "b": b, "worlds": world_out, "resolution": diag_w,
+                        "pool": {n: {"size": REV_POOL, "resolved_fraction": float(np.mean(p["resolved"]))}
+                                 for n, p in pools.items()},
+                        "seconds": round(time.time() - t1, 1), "pool_seconds": round(cost_pool, 1)}
+    return {"case": "M1b part (i) REVISED", "pairs": results, "R": REV_R, "pool": REV_POOL, "ppc": REV_PPC,
+            "seconds": round(time.time() - t0, 1),
+            "split": "screen ensembles by draw parity: even = truth pool, odd = scoring ensemble",
+            "forced_inputs": ("Hou's measured ARP(t) forcing is NOT redrawn: each redraw is a re-integration of the "
+                              "forced pot for every scoring draw (~640 draws x 2 rivals x ~1 - 2 s per bootstrap "
+                              "replicate, i.e. ~0.5 h per replicate): not computable here"),
+            "noise": {"A1_offset": [A1_OFF, A1_OFF_DF], "A1_shape": [A1_SH, A1_SH_DF], "quadrature_K": QUAD_K,
+                      "r_set": list(R_METER_SET), "zhou_n": ZHOU_N},
+            "inputs": {"draws_sha256": sha256_file(draws_path), "generator_sha256": sha256_file(Path(G.__file__))}}
+
+
+def summarise_revised(rows: Sequence[Mapping[str, Any]], a: str, b: str, units: Sequence[str],
+                      key: str = "credit") -> Dict[str, Any]:
+    out: Dict[str, Any] = {}
+    for side, hit, other in (("a", a, b), ("b", b, a)):
+        ka = sum(1 for r in rows if r["truth"] == hit and r.get(key) == side)
+        kb = sum(1 for r in rows if r["truth"] == other and r.get(key) == side)
+        na = sum(1 for r in rows if r["truth"] == hit)
+        nb = sum(1 for r in rows if r["truth"] == other)
+        out[f"credit_{side}"] = {"rival": hit, "power": ka / na, "power_k": ka, "n": na, "power_wilson95": wilson(ka, na),
+                                 "false_credit": kb / nb, "false_k": kb, "false_wilson95": wilson(kb, nb),
+                                 "p_false_above_nominal": binom_above(kb, nb)}
+    out["not_computable"] = sum(1 for r in rows if r.get(key) == "not computable")
+    loo_key, con_key = ("loo", "contrib") if key == "credit" else ("loo_est", "contrib_all")
+    se = [x for r in rows for x in r.get("thr_se", [])]
+    out["threshold_mc_se"] = {"median": float(np.median(se)) if se else None,
+                              "q90": float(np.quantile(se, 0.9)) if se else None}
+    ess = [r["thr_ess"] for r in rows if "thr_ess" in r]
+    out["threshold_ess_median"] = float(np.median(ess)) if ess else None
+    loo = {}
+    for side in ("a", "b"):
+        for u in units:
+            # every set where T crossed the side's threshold and the unit-removal was examined
+            ex = [r for r in rows if r.get(loo_key) and r[loo_key].get(side)]
+            rests = [r for r in ex if any(v["rests_on"] for k, v in r[loo_key][side].items() if k.endswith(f"|{u}"))]
+            alone = [r for r in rests if all(v["alone_credits"] for k, v in r[loo_key][side].items()
+                                             if k.endswith(f"|{u}") and v["rests_on"])]
+            loo[f"{side}|{u}"] = {"examined": len(ex), "rests_on_it": len(rests), "of_which_it_alone_credits": len(alone)}
+    out["leave_one_unit_out"] = loo
+    for t in (a, b):
+        sel = [r for r in rows if r["truth"] == t and r.get(con_key)]
+        out[f"contrib_median_truth_{t}"] = ({u: float(np.median([r[con_key][u] for r in sel])) for u in units}
+                                            if sel else {})
+    return out
+
+
+# ------------------------------------------------------------------------------------------------ M3, revised
+
+def _load_m3(args):
+    if str(ROOT) not in sys.path:
+        sys.path.insert(0, str(ROOT))
+    gen_dir = str(ROOT / "scripts" / "generators")
+    if gen_dir not in sys.path:
+        sys.path.insert(0, gen_dir)
+    import fit_m3_strecker_layer as G
+    from src import m3_strecker_layer as L
+    data = L.load_data()
+    real = G.real_obs(data)
+    rec_sets = json.loads((ROOT / "results" / "validation" / "kinetic_core_m3_phase1_power.json").read_text())["draw_sets"]
+    spec_args = argparse.Namespace(score_feasible=M3_SCORE_FEASIBLE, truth_feasible=M3_TRUTH_FEASIBLE, seed=M3_SET_SEED)
+    specs = G.power_set_specs(spec_args, tuple(G.POWER_RIVALS))
+
+    class _U(pickle.Unpickler):
+        def find_class(self, module, name):
+            if name == "DrawSet" and module in ("__main__", "fit_m3_strecker_layer"):
+                return G.DrawSet
+            return super().find_class(module, name)
+
+    loaded = []
+    for p in sorted(Path(args.m3_cache).glob("drawset_*.pkl")):
+        with p.open("rb") as fh:
+            loaded.append(_U(fh).load())
+    sets = {}
+    for sp in specs:
+        hit = [ds for ds in loaded if ds.rival == sp["rival"] and ds.seed == sp["seed"] and ds.form == sp["form"]]
+        name, fname = sp["key"]
+        want = rec_sets[f"{name}|{fname}"]
+        if len(hit) != 1 or (hit[0].n, hit[0].n_drawn) != (want["feasible"], want["drawn"]):
+            raise SystemExit(f"draw set {sp['key']} does not match the record")
+        sets[(name, fname)] = hit[0]
+    return G, L, data, real, sets
+
+
+def run_revised_m3(args) -> Dict[str, Any]:
+    from dataclasses import replace
+    G, L, data, real, sets = _load_m3(args)
+    t0 = time.time()
+    FORMS = tuple(G.POWER_FORMS)
+    PAIRS = {"route": ("R1", "R2"), "transfer": ("R1", "R3"), "decay_law": ("R4", "R1drift")}
+    SPENT = {"route": ("U1l",), "transfer": ("U4", "U1e", "U1l"), "decay_law": ("U4", "U1e", "U1l")}
+    CRED = {"route": ("U4", "U1e", "U3b"), "transfer": ("U5a_PA_shape", "U5b_PA_shape", "UARP"),
+            "decay_law": ("U3b", "U5a_PA_shape", "U5b_PA_shape", "UARP")}
+    ADEQ = {"route": ("U4", "U1e", "U3b", "U3a"), "transfer": ("U5a", "U5b", "U5a_PA_shape", "U5b_PA_shape"),
+            "decay_law": ("U3", "U5a", "U5b", "U3b")}
+    pool_n = int(os.environ.get("JUDGE_REV_POOL_M3", "1000"))
+
+    def scorer_form(fname: str):
+        return replace(G.POWER_FORMS[fname], omega_scale=0.0, run_between_points=True)
+
+    WORLD_FORM = {"own": (replace(L.PRIMARY, run_between_points=False), True),
+                  "reproducibility": (replace(L.PRIMARY, run_between_points=True), True),
+                  "omega": (L.PRIMARY, False)}
+
+    def point_cov(unit, world):
+        fw, mo = WORLD_FORM[world]
+        return L.unit_covariance(replace(unit, design=np.eye(unit.design.shape[1])), fw, measurement_only=mo)
+
+    # consistency of shared points (U1e / U1l are U4's Fig. 1 PA points; the PA shapes are U5's PA points)
+    ts = sets[("R1", "truth")]
+    assert np.allclose(ts.points["U1e"], ts.points["U4"][:, 6:13]), "U1 points are not U4's Fig. 1 PA points"
+    for u5, sh in (("U5a", "U5a_PA_shape"), ("U5b", "U5b_PA_shape")):
+        assert np.allclose(ts.points[sh], ts.points[u5][:, :ts.points[sh].shape[1]]), f"{sh} is not {u5}'s PA"
+
+    def uarp_synth(k_1min, rng, world):
+        y = G.synth_uarp(data, k_1min, rng)
+        if world == "reproducibility":
+            y = y + L.SIGMA_RUN_DEX * math.log(10.0) * math.sqrt(2.0) * rng.standard_normal(y.shape)
+        return y
+
+    def make_obs(tset, j, rng, world):
+        units = dict(real.units)
+        u4 = real.units["U4"]
+        p4 = rng.multivariate_normal(tset.points["U4"][j], point_cov(u4, world))
+        units["U4"] = replace(u4, y=u4.design @ p4)
+        for u in ("U1e", "U1l"):
+            units[u] = replace(real.units[u], y=real.units[u].design @ p4[6:13])
+        for u5, sh in (("U5a", "U5a_PA_shape"), ("U5b", "U5b_PA_shape")):
+            uu = real.units[u5]
+            p5 = rng.multivariate_normal(tset.points[u5][j], point_cov(uu, world))
+            units[u5] = replace(uu, y=p5)
+            n_t = real.units[sh].design.shape[1]
+            units[sh] = replace(real.units[sh], y=real.units[sh].design @ p5[:n_t])
+        f3 = tset.points["U3"][j]
+        fw, mo = WORLD_FORM[world]
+        cov3 = L.unit_covariance(L.u3_unit(10.0 ** f3), fw, measurement_only=mo)
+        u3 = L.u3_unit(10.0 ** (f3 + rng.multivariate_normal(np.zeros(f3.size), cov3)))
+        y_lin = np.where(u3.censored, 0.5 * L.U3_CENSOR, 10.0 ** u3.y)
+        err = data.arp_t2_err["argon"][0]
+        sd = math.sqrt(err ** 2 + L.S_REP_DEX ** 2 + L.SIGMA_RUN_DEX ** 2
+                       + (L.OMEGA_DEX ** 2 if world == "omega" else 0.0)
+                       + (L.SIGMA_RUN_DEX ** 2 if world == "reproducibility" else 0.0))
+        pa = 10.0 ** (tset.points["U4"][j][0] + sd * rng.standard_normal())
+        units.update({"U3": u3, "U3a": L.u3a_unit(y_lin, pa, err), "U3b": L.u3b_unit(y_lin)})
+        return G.Obs(units, uarp_synth(tset.k_glc[j], rng, world))
+
+    def ll(ds, unit, obs, fv):
+        return G.loglik(ds, unit, obs, fv, data)
+
+    def stats_one(cname, a_name, b_name, obs) -> Dict[str, Any]:
+        out: Dict[str, Any] = {"T": {}, "resolved": True, "skipped_forms": [], "lw": {}, "diag": {}}
+        for fname in FORMS:
+            fv = scorer_form(fname)
+            A, B = sets[(a_name, fname)], sets[(b_name, fname)]
+            if A.n == 0 or B.n == 0:
+                out["skipped_forms"].append(fname)
+                continue
+            tf, keep = {}, {}
+            for side, ds in (("a", A), ("b", B)):
+                spent = sum(ll(ds, u, obs, fv) for u in SPENT[cname])
+                lu = {u: ll(ds, u, obs, fv) for u in CRED[cname]}
+                tot = spent + sum(lu.values())
+                den = G.lse(spent)
+                vals = {"full": G.lse(tot) - den}
+                for u in CRED[cname]:
+                    vals[f"-{u}"] = G.lse(tot - lu[u]) - den
+                    vals[u] = G.lse(spent + lu[u]) - den
+                del LAST_ESS[:]
+                r1, k1 = resolved_rows(tot[None, :])
+                r2, k2 = resolved_rows(spent[None, :])
+                e1, e2 = (LAST_ESS + [float("nan"), float("nan")])[:2]
+                out["diag"][f"{fname}|{side}"] = [round(float(k1[0]), 3), round(e1, 1), round(float(k2[0]), 3),
+                                                  round(e2, 1)]
+                out["resolved"] = bool(out["resolved"] and r1[0] and r2[0])
+                tf[side] = vals
+                keep[side] = tot
+            out["T"][fname] = {k: tf["a"][k] - tf["b"][k] for k in tf["a"]}
+            out["lw"][fname] = keep
+        return out
+
+    def adequate(cname, ds, obs, fname, lw_post) -> bool:
+        fv = scorer_form(fname)
+        ps = {}
+        for u in ADEQ[cname]:
+            uo = obs.units[u]
+            mu, cov = G.predictive_moments(ds, uo, ds.points[u], lw_post, fv)
+            ps[u] = G.adequacy_p(uo, mu, cov)
+        return not any(holm_reject(ps).values())
+
+    rng = np.random.default_rng(M3_SEED + 101)
+    out: Dict[str, Any] = {}
+    contrasts = [c for c in args.m3_contrasts.split(",") if c]
+    for cname in contrasts:
+        t1 = time.time()
+        a_name, b_name = PAIRS[cname]
+        fv0 = scorer_form("primary")
+        pools = {}
+        for null in (a_name, b_name):
+            tset = sets[(null, "truth")]
+            pick = rng.integers(0, tset.n, pool_n)
+            Ts, res = [], []
+            for j in pick:
+                st = stats_one(cname, a_name, b_name, make_obs(tset, int(j), rng, "reproducibility"))
+                Ts.append(st["T"])
+                res.append(st["resolved"])
+            pools[null] = {"pick": pick, "resolved": np.array(res, bool),
+                           "T": {f: {k: np.array([t[f][k] for t in Ts]) for k in Ts[0][f]} for f in Ts[0]}}
+            print(f"m3 revised {cname}: pool {null} {pool_n} ({time.time() - t1:.0f} s), resolved "
+                  f"{np.mean(res):.3f}", flush=True)
+        pool_s = time.time() - t1
+
+        def null_fn(null, obs, resolved_only=True):
+            tset = sets[(null, "truth")]
+            lw = sum(ll(tset, u, obs, fv0) for u in SPENT[cname])
+            P = pools[null]
+            w = np.exp(lw - np.max(lw))[P["pick"]]
+            if resolved_only:
+                w = w * P["resolved"]
+
+            def f(form, k, q):
+                return weighted_quantile(P["T"][form][k], w, q)
+            return f
+
+        world_out = {}
+        for world in REV_WORLDS:
+            rows = []
+            for truth in (a_name, b_name):
+                tset = sets[(truth, "truth")]
+                lw_real = sum(ll(tset, u, real, fv0) for u in SPENT[cname])
+                tw = np.exp(lw_real - np.max(lw_real))
+                tw = tw / tw.sum()
+                for i in range(args.m3_reps):
+                    j = int(rng.choice(tset.n, p=tw))
+                    obs = make_obs(tset, j, rng, world)
+                    st = stats_one(cname, a_name, b_name, obs)
+                    row: Dict[str, Any] = {"truth": truth, "diag": st["diag"]}
+                    if i < 2:
+                        print(f"  diag {cname} {world} {truth} [k_tot, ess_tot, k_spent, ess_spent]: "
+                              f"{json.dumps(st['diag'])}", flush=True)
+                    forms = list(st["T"])
+                    ad_a = lambda f, st=st, obs=obs: adequate(cname, sets[(a_name, f)], obs, f, st["lw"][f]["a"])  # noqa
+                    ad_b = lambda f, st=st, obs=obs: adequate(cname, sets[(b_name, f)], obs, f, st["lw"][f]["b"])  # noqa
+                    v_est = _verdicts(st["T"], null_fn(a_name, obs, False), null_fn(b_name, obs, False), CRED[cname],
+                                      forms, ad_a, ad_b)
+                    row["credit_est"] = v_est["credit"]
+                    row["loo_est"] = v_est["loo"]
+                    row["contrib_all"] = {u: st["T"]["primary"][u] for u in CRED[cname]} if "primary" in st["T"] else {}
+                    if not st["resolved"]:
+                        row["credit"] = "not computable"
+                        row["contrib_est"] = {u: st["T"]["primary"][u] for u in CRED[cname]} if "primary" in st["T"] else {}
+                        rows.append(row)
+                        continue
+                    na_, nb_ = null_fn(a_name, obs), null_fn(b_name, obs)
+                    v = _verdicts(st["T"], na_, nb_, CRED[cname], forms, ad_a, ad_b)
+                    row.update({"credit": v["credit"], "T": st["T"]["primary"]["full"],
+                                "contrib": {u: st["T"]["primary"][u] for u in CRED[cname]}, "loo": v["loo"],
+                                "thr_se": [x for x in v["thr_se"] if np.isfinite(x)],
+                                "skipped_forms": st["skipped_forms"]})
+                    rows.append(row)
+            world_out[world] = summarise_revised(rows, a_name, b_name, CRED[cname])
+            world_out[world]["estimated_diagnostic"] = summarise_revised(rows, a_name, b_name, CRED[cname],
+                                                                         key="credit_est")
+            world_out[world]["skipped_forms"] = sorted({f for r in rows for f in r.get("skipped_forms", [])})
+            print(f"m3 revised {cname} {world}: credit {a_name} power {world_out[world]['credit_a']['power']:.3f} "
+                  f"false {world_out[world]['credit_a']['false_credit']:.3f}; credit {b_name} power "
+                  f"{world_out[world]['credit_b']['power']:.3f} false {world_out[world]['credit_b']['false_credit']:.3f};"
+                  f" not computable {world_out[world]['not_computable']} ({time.time() - t1:.0f} s)", flush=True)
+        out[cname] = {"pair": [a_name, b_name], "worlds": world_out, "seconds": round(time.time() - t1, 1),
+                      "pool_seconds": round(pool_s, 1),
+                      "pool": {n: {"size": pool_n, "resolved_fraction": float(np.mean(p["resolved"]))}
+                               for n, p in pools.items()},
+                      "units": {"spent": SPENT[cname], "credit": CRED[cname], "adequacy": ADEQ[cname]}}
+    return {"case": "M3 phase 1 REVISED", "pairs": out, "R": args.m3_reps, "pool": pool_n,
+            "seconds": round(time.time() - t0, 1),
+            "forced_inputs": ("the measured dicarbonyl / ARP-Phe courses forcing the layer are NOT redrawn: each redraw "
+                              "re-evaluates the layer for every scoring draw (~2.5 min per 4 096-draw set and form, "
+                              "16 sets per replicate: ~40 min per bootstrap replicate): not computable here"),
+            "noise": ("measurement + sigma_run 0.075 dex as run offset and per point (between-points form), no omega; "
+                      "sigma_run not integrated (its estimation uncertainty is not on disk)")}
+
+
 # ================================================================================================ the record
 
 def _row(t: Mapping[str, Any]) -> str:
@@ -957,12 +1723,12 @@ def merge(paths: Sequence[str], out_dir: Optional[str] = None) -> int:
                            "src/kinetic_core change; nothing ships)", "nominal_false_credit": NOMINAL,
                            "components": COMPONENT_LABEL, "cases": {}}
     for p in parts:
-        key = "m1b" if p["case"].startswith("M1b") else "m3"
+        key = ("m1b" if p["case"].startswith("M1b") else "m3") + ("_revised" if p["case"].endswith("REVISED") else "")
         rec["cases"][key] = p
     # attribution and control
     findings: Dict[str, Any] = {}
     if "m1b" in rec["cases"]:
-        for pair, v in rec["cases"]["m1b"]["pairs"].items():
+        for pair, v in rec["cases"]["m1b"]["pairs"].items():  # first-round parts only (the revised are rendered apart)
             tab = v["worlds"]["own"]["table"]
             om = v["worlds"]["omega"]["table"]
             findings[f"m1b|{pair}"] = {
@@ -971,7 +1737,7 @@ def merge(paths: Sequence[str], out_dir: Optional[str] = None) -> int:
                 "all_false_credit_ok_omega_world": om["all"]["p_false_above_nominal"] >= NOMINAL}
     if "m3" in rec["cases"]:
         for cname, v in rec["cases"]["m3"]["pairs"].items():
-            a_name, b_name = v["worlds"]["own"]["pair"]
+            a_name, b_name = v["worlds"]["own"]["pair"]  # first round
             for hit in (a_name, b_name):
                 sfx = f"|credit_{hit}"
                 tab = {k: x for k, x in v["worlds"]["own"]["table"].items() if k.endswith(sfx)}
@@ -989,6 +1755,61 @@ def merge(paths: Sequence[str], out_dir: Optional[str] = None) -> int:
     print(f"wrote {out} and .md")
     return 0
 
+
+#: the confirmation run's reading, written AFTER its numbers (not blind)
+REVISED_READING = """\
+*Written after the numbers (not blind).*
+
+**1. As worded, the revised rule is NOT COMPUTABLE on the cases' draw ensembles.** M1b: 400 of 400 sets per pair and
+world are not computable in four of five pairs; B3 vs B0 is computable in 33 - 155 of 400, with rule power 0.000 - 0.010
+and false credit 0.000. M3: 400 of 400 in every pair and world. The bootstrap pools are 0 - 20 % resolved. The cause is
+the one this record found in round one, now without omega to hide it. At the noise item 5 prescribes, the decisive
+likelihoods are sharp relative to the prior draw ensembles: joint ESS 2 - 25 of 320 - 4 096 draws (M3 route: spent ESS
+~2 000, joint 4 - 13). In M1b, conditioning on the three spent C-Zhou-Cys rows already leaves B1 / B13 / B2 an ESS of
+3 - 90. The gate is right to refuse: at ESS ~4 the estimates are biased, not just noisy. For example, the TRUE B1 loses
+its own C-Hou shape (median contribution -0.84 to -1.25 nats).
+
+**2. Cost of re-estimating (the rule's alternative to "not computable").**
+- Per set, every rival, form, numerator and denominator needs a density with ESS >= 100.
+- M3: the layer is cheap, but tuned per-set densities (the reusable SMC, 4.5 - 10 min each, 16 per set) cost ~1 - 3 h
+  per set, i.e. ~4 000 - 8 000 core-hours per pair at R = 200 plus pools of 1 000.
+- M3, the affordable route: one-time, ~10 - 20x larger draw sets per rival and form (~40 000 - 80 000 feasible draws;
+  ~2.5 min per 4 096) cost ~10 - 20 core-hours for all 20 rival-form sets. That would lift joint ESS to ~50 - 250, so
+  most sets should become computable (not shown here).
+- M1b: engine-bound. The screen cost ~29 core-s per draw. A ~10x larger ensemble is ~250 core-hours, and B1 / B13
+  need ~30x for their spent conditioning alone. Spent-conditioned proposals would need new engine runs per synthetic
+  set (~5 core-hours each). On one machine this is not computable for the confirmation.
+- Forced inputs (Hou's ARP(t); M3's measured courses) are not redrawn in either case: each redraw re-runs the engine or
+  the layer for every scoring draw.
+
+**3. The same rule with every estimate read as estimated (a DIAGNOSTIC, not the rule; it credits nothing).**
+- **False credit is controlled everywhere.** Reproducibility world: max 0.020 (M1b) and 0.010 (M3). Own world: max
+  0.035. Omega world: <= 0.005. Across all worlds every exact one-sided p >= 0.88 against 0.05. The per-set
+  calibrated threshold with the Holm adequacy gate holds false credit at or below 0.05 + MC error, even under
+  H0-sized misspecification, where every round-one configuration failed (0.155 - 0.545).
+- **Power** (reproducibility world):
+  - M3 route: 0.70 (crediting R1) and 0.76 (crediting R2); own world 0.86 / 0.90.
+  - M3 transfer: <= 0.04. M3 decay law: <= 0.005.
+  - M1b: <= 0.06 in every pair (own world <= 0.17).
+  - Omega world: <= 0.025 everywhere. The rule stays silent rather than crediting. Which gate silences it (the
+    threshold or the adequacy test) is not separated here.
+- **Threshold MC error** (rule-computable sets only): ~0.07 - 0.09 nats in M1b B3 vs B0 (weights' ESS ~850 - 1 400,
+  pool 2 048); 0.71 nats in B2 vs B0's three computable omega-world sets.
+- **Leave-one-unit-out.**
+  - M1b: C-Zhou-ARP's dominance is gone. Restricted by item 5 to the signs of its within-study contrasts, it
+    contributes ~0.01 nats. Almost every crossing rests on C-Hou's within-run shape; C-Mey's drift adds
+    |T_u| <= 0.4 nats (reproducibility world).
+  - M3 route: U4 carries 25 - 35 % of the crossings, and in 69 - 90 % of those U4 alone crosses its own null. U1e
+    carries 9 - 21 %, U3b 2 - 7 % (own and reproducibility worlds).
+
+**4. What this means for the proposal.** The revised judge is calibrated: its false credit holds in every world tested,
+including misspecification. Its power is real where the data are informative (M3 route ~0.7 - 0.9) and honest where
+they are not (M1b, M3 transfer and decay law ~0). But no verdict can be issued under it until the density estimator
+resolves at item 5's noise. For M3 that is a bounded, affordable step (bigger draw sets). For M1b it is not affordable
+on one machine, and the M1b confirmation stands at "not computable", not at a power figure. The diagnostic numbers
+bound what a resolved estimator should give; they must be re-confirmed with resolved densities before any use. Nothing
+here reopens M1b part (i) (A1) or applies to any case.
+"""
 
 #: written AFTER the numbers (not blind); the record's interpretation and the proposed principled revision
 READING = """\
@@ -1067,6 +1888,61 @@ it suggests must be frozen BY PRINCIPLE (plan sec. 7 item 5: "each comparison us
 noise; across laboratories, the between-laboratory spread (H0)"), confirmed independently (a reviewer who re-derives
 the judge's calibration without this record's conclusion) BEFORE it is applied to any case, and the amended judge's
 power must then be accepted whatever it is, including "undecidable on disk"."""
+
+
+def render_revised(rec: Mapping[str, Any]) -> List[str]:
+    """The confirmation run's section of the record."""
+    cases = [(k, rec["cases"][k]) for k in ("m1b_revised", "m3_revised") if k in rec["cases"]]
+    if not cases:
+        return []
+    L_ = ["## Confirmation run: the REVISED item 5 / M1.1, scored as worded", "",
+          "*Coordinator's brief, 2026-11-06, after an independent review (\"adopt with fixes\"). The rule scored, "
+          "verbatim:*", "", "> " + REVISED_RULE_TEXT, "",
+          "Readings needed to compute it are declared in the script (block \"the REVISED rule\"). Truths come from "
+          "the null rival's spent-conditioned posterior OUTSIDE the scoring ensemble. Thresholds are per synthetic "
+          "set (the bootstrap pool reweighted by that set's spent rows). A set with any unresolved density (PSIS "
+          "k-hat >= 0.7 or ESS < 100, on any rival, form, numerator or denominator) is **not computable** under the "
+          "rule. The \"estimated\" columns are a labelled DIAGNOSTIC: the same rule with every importance estimate "
+          "read as estimated. They are NOT the rule and credit nothing.", ""]
+    for key, c in cases:
+        L_ += [f"### {c['case']}: R = {c['R']} sets per truth, bootstrap pool {c['pool']} per null rival, "
+               f"{c['seconds'] / 3600:.2f} h on one core", ""]
+        L_ += ["| pair | world | rule: credit a power / false | rule: credit b power / false | not computable (of "
+               "2R) | estimated (diagnostic): credit a power / false [Wilson 95 %] | credit b power / false | "
+               "diagnostic false credit <= 0.05 (exact test, both sides) | threshold MC SE, nats, rule-computable "
+               "sets (ESS) |", "|---|---|---|---|---|---|---|---|---|"]
+        for pair, v in c["pairs"].items():
+            for world in REV_WORLDS:
+                w = v["worlds"][world]
+                ra, rb = w["credit_a"], w["credit_b"]
+                ea, eb = w["estimated_diagnostic"]["credit_a"], w["estimated_diagnostic"]["credit_b"]
+                se = w["threshold_mc_se"]["median"]
+                L_.append(f"| {pair} | {world} | {ra['power']:.3f} / {ra['false_credit']:.3f} | {rb['power']:.3f} / "
+                          f"{rb['false_credit']:.3f} | {w['not_computable']} | {ea['power']:.3f} / "
+                          f"{ea['false_credit']:.3f} [{ea['false_wilson95'][0]:.3f}, {ea['false_wilson95'][1]:.3f}] | "
+                          f"{eb['power']:.3f} / {eb['false_credit']:.3f} | "
+                          f"{ea['p_false_above_nominal'] >= NOMINAL and eb['p_false_above_nominal'] >= NOMINAL} | "
+                          f"{'--' if se is None else f'{se:.3g}'} "
+                          f"({'--' if w.get('threshold_ess_median') is None else round(w['threshold_ess_median'])}) |")
+        L_ += ["", "Leave-one-unit-out and unit contributions (estimated diagnostic, reproducibility world): for each "
+               "unit, among the sets where T crossed its threshold, how often the crossing rests on that unit, and of "
+               "those how often the unit alone crosses its own null (item 4 for that unit alone); median T_u per "
+               "truth.", ""]
+        for pair, v in c["pairs"].items():
+            w = v["worlds"]["reproducibility"]["estimated_diagnostic"]
+            loo = "; ".join(f"{k}: {x['rests_on_it']} / {x['examined']} rest on it, {x['of_which_it_alone_credits']} "
+                            f"alone" for k, x in w["leave_one_unit_out"].items() if x["examined"])
+            con = "; ".join(f"truth {k.split('_truth_')[1]}: " + ", ".join(f"{u} {x:+.2f}" for u, x in m.items())
+                            for k, m in w.items() if k.startswith("contrib_median_truth_") and m)
+            L_.append(f"- **{pair}**: {loo or 'no threshold crossings'}. Median contributions: {con}.")
+            res = v.get("resolution") or {}
+            pool = v.get("pool", {})
+            L_.append(f"  - bootstrap pools resolved: " + ", ".join(f"{n} {x['resolved_fraction']:.3f}"
+                                                                   for n, x in pool.items())
+                      + f"; compute {v['seconds']:.0f} s (pools {v['pool_seconds']:.0f} s)")
+        L_ += ["", f"Forced inputs: {c['forced_inputs']}", ""]
+    L_ += ["### Reading of the confirmation run", "", REVISED_READING, ""]
+    return L_
 
 
 def render(rec: Mapping[str, Any]) -> str:
@@ -1165,6 +2041,7 @@ def render(rec: Mapping[str, Any]) -> str:
                   f"{f['all_false_credit_ok_omega_world']} |")
     L_ += ["", "## Reading", "", rec.get("reading", "(see the PR body; the reading is written after the numbers)"),
            ""]
+    L_ += render_revised(rec)
     return "\n".join(L_)
 
 
@@ -1181,13 +2058,17 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     ap.add_argument("--m3-band-check", type=int, default=0, help="sets for the fixed-band check (0: skip)")
     ap.add_argument("--part-out", help="where a case writes its part (scratch; never under data/)")
     ap.add_argument("--merge", nargs="+", help="merge parts into results/validation/judge_calibration.{json,md}")
+    ap.add_argument("--revised", action="store_true", help="score the REVISED item 5 / M1.1 (the confirmation run)")
     ap.add_argument("--out-dir", help="--merge: write the record here instead (a dry run; default results/validation)")
     args = ap.parse_args(argv)
     if args.merge:
         return merge(args.merge, args.out_dir)
     mem = memory_free_pct()
     t0 = time.time()
-    part = run_m1b(args) if args.case == "m1b" else run_m3(args)
+    if args.revised:
+        part = run_revised_m1b(args) if args.case == "m1b" else run_revised_m3(args)
+    else:
+        part = run_m1b(args) if args.case == "m1b" else run_m3(args)
     part["memory_free_pct_at_launch"] = mem
     part["wall_s"] = round(time.time() - t0, 1)
     Path(args.part_out).write_text(json.dumps(_jsonable(part)) + "\n")
