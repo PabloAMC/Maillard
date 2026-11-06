@@ -624,8 +624,15 @@ def ph_species_discrepancy(resolve: Callable[[Mapping[str, float]], float], prod
 # - Mirror rule: b is credited when T < the 5th percentile of T under a as truth (i.e. -T exceeds the 95th percentile
 #   of -T under a).
 # - "Resolved" applies to every density the verdict reads: each rival's numerator for T, T_u and T_-u and the shared
-#   denominator p(y_spent), in every scored form and experimental-fact component; and to every replicate of each null
-#   (an unresolved replicate is never dropped or read as estimated: the null is then incomplete).
+#   denominator p(y_spent), in every scored form and experimental-fact component. An unresolved OBSERVED density makes
+#   the pair "not computable". An unresolved bootstrap REPLICATE (any of its densities, in any form) is re-estimated
+#   once when the caller supplies a retry draw set (``build_null_pool(retry_draws=...)``); one still unresolved is
+#   never dropped or read as estimated but bounded (PR #105): in testing a's credit its T, T_u and T_-u are +inf in
+#   BOTH nulls, in testing b's -inf, and a credit stands only if it survives the bound. +inf raises null b's upper
+#   thresholds (harder for a) and null a's lower ones (easier for b to qualify too, which blocks a): the bound always
+#   works against the credit tested. The crossing is strict in the null's weighted tail (a: W(T_null >= T) < alpha),
+#   so a null whose weighted unresolved fraction reaches alpha cannot credit.
+# - A credit needs the power check (``misspecified_false_credit``) supplied and passing: without it no credit.
 # - ">= 1000 replicates" is the null's effective count: the Kish ESS of its weights (the replicate count when the
 #   replicates are unweighted). A re-weighted null also needs the weights' PSIS k-hat < 0.7.
 # - Adequacy family: every unit whose role is "credit" or "falsification_only" (an absolute level that cannot credit
@@ -692,6 +699,72 @@ def weighted_quantile(x: np.ndarray, w: Optional[np.ndarray], q: float) -> Tuple
     dens = float(w @ np.exp(-0.5 * ((x - qv) / h) ** 2)) / (h * math.sqrt(2 * math.pi)) if h > 0 else float("nan")
     se = math.sqrt(q * (1 - q) / max(ess, 1.0)) / dens if dens > 0 else float("inf")
     return qv, float(se), ess
+
+
+_TAIL_TOL = 1e-12
+
+
+def null_tail_test(x: Any, w: Optional[Any], t_obs: float, alpha: float, side: str) -> Dict[str, Any]:
+    """The crossing test of an observed statistic against a weighted null that KEEPS +-inf (a bounded, unresolved
+    replicate), unlike ``weighted_quantile``, which drops them.
+
+    side "upper" (a's credit): crosses iff the null's weighted tail W(x >= t_obs) < alpha, i.e. t_obs > threshold with
+    threshold = min{x_i : W(x > x_i) < alpha}; side "lower" (b's credit) the mirror (W(x <= t_obs) < alpha). The
+    inequality is strict (the prototype's quantile crosses at a tail of exactly alpha), so an infinite mass >= alpha
+    puts the threshold at +-inf and nothing crosses. Returns the threshold, its Monte Carlo SE (kernel density at the
+    threshold over the finite part, Silverman bandwidth), the weights' ESS, the observed tail weight and its MC SE
+    sqrt(p (1 - p) / ESS), the infinite mass, and ``crosses``. NaN in a weighted replicate is refused."""
+    if side not in ("upper", "lower"):
+        raise MeasurementModelRefusal("side must be 'upper' or 'lower'")
+    x = np.asarray(x, dtype=float).ravel()
+    w = np.ones_like(x) if w is None else np.asarray(w, dtype=float).ravel()
+    if w.shape != x.shape:
+        raise MeasurementModelRefusal("null weights and replicates differ in length")
+    live = w > 0
+    x, w = x[live], w[live]
+    if x.size == 0:
+        return {"threshold": float("nan"), "threshold_mc_se": float("nan"), "ess": 0.0, "tail_weight": float("nan"),
+                "tail_weight_mc_se": float("nan"), "infinite_mass": float("nan"), "crosses": False}
+    if np.any(np.isnan(x)):
+        raise MeasurementModelRefusal("a null replicate is NaN: bound it (+-inf) or resolve it, never drop it")
+    w = w / w.sum()
+    ess = float(1.0 / np.sum(w ** 2))
+    s = 1.0 if side == "upper" else -1.0
+    z, t = s * x, s * float(t_obs)                       # the upper-tail problem on z
+    uv, inv = np.unique(z, return_inverse=True)
+    wu = np.bincount(inv, weights=w, minlength=uv.size)
+    above = np.concatenate([np.cumsum(wu[::-1])[::-1][1:], [0.0]])     # W(z > uv_j)
+    j = int(np.argmax(above < alpha - _TAIL_TOL))
+    thr_z = float(uv[j])
+    tail = min(1.0, max(0.0, float(np.sum(w[z >= t]))))
+    inf_mass = float(np.sum(w[np.isinf(z)]))
+    crosses = bool(tail < alpha - _TAIL_TOL)
+    fin = np.isfinite(z)
+    se = float("nan")
+    if math.isfinite(thr_z) and fin.sum() >= 2:
+        wf = w[fin] / w[fin].sum()
+        zf = z[fin]
+        mu = float(wf @ zf)
+        sd = float(np.sqrt(max(wf @ (zf - mu) ** 2, 1e-300)))
+        h = 1.06 * sd * max(ess, 2.0) ** (-0.2)
+        dens = (1.0 - inf_mass) * float(wf @ np.exp(-0.5 * ((zf - thr_z) / h) ** 2)) / (h * math.sqrt(2 * math.pi))
+        q = 1.0 - alpha
+        se = math.sqrt(q * (1 - q) / max(ess, 1.0)) / dens if dens > 0 else float("inf")
+    return {"threshold": s * thr_z, "threshold_mc_se": se, "ess": ess, "tail_weight": tail,
+            "tail_weight_mc_se": math.sqrt(tail * (1 - tail) / max(ess, 1.0)), "infinite_mass": inf_mass,
+            "crosses": crosses}
+
+
+def require_precision_ess(precision_ess: Any) -> float:
+    """The density estimator's precision requirement, declared by the caller (e.g. ``tie_band_precision_ess``): no
+    default, and 0 is refused (a silent 0 would accept any ESS >= 100 whatever the tie band needs)."""
+    if precision_ess is None:
+        raise MeasurementModelRefusal("declare precision_ess (tie_band_precision_ess); there is no default")
+    v = float(precision_ess)
+    if not (math.isfinite(v) and v > 0):
+        raise MeasurementModelRefusal(f"precision_ess must be finite and > 0 (got {precision_ess!r}); a default of 0 "
+                                      "is refused")
+    return v
 
 
 def wilson_interval(k: int, n: int, z: float = 1.959963984540054) -> Tuple[float, float]:
@@ -1143,11 +1216,12 @@ RivalEnsemble = Mapping[str, Mapping[str, RivalDraws]]
 # ---- the spent-conditioned predictive density -----------------------------------------------------------------------
 
 def conditioned_lppd(log_lik_decisive: Any, log_lik_spent: Optional[Any] = None,
-                     log_prior_ratio: Optional[Any] = None, precision_ess: float = 0.0) -> DensityEstimate:
+                     log_prior_ratio: Optional[Any] = None, *, precision_ess: float) -> DensityEstimate:
     """log p(y_dec | y_spent) from draws theta_s ~ q: log E_q[r L_dec L_spent] - log E_q[r L_spent] (r = p / q), the
     numerator and the denominator each through ``importance_lppd`` (PSIS) and each accepted only under the shared rule
     (k-hat < 0.7, ESS >= max(100, ``precision_ess``)). With no spent rows and draws from the prior the denominator is
-    exactly 0."""
+    exactly 0. ``precision_ess`` has no default (``require_precision_ess``)."""
+    precision_ess = require_precision_ess(precision_ess)
     ld = np.asarray(log_lik_decisive, dtype=float)
     s = ld.size
     lpr = np.zeros(s) if log_prior_ratio is None else np.asarray(log_prior_ratio, dtype=float)
@@ -1183,9 +1257,12 @@ def _mix(per_fact: Mapping[str, Tuple[DensityEstimate, DensityEstimate]], weight
 
 def _score_form(y: Mapping[str, Any], design: MeasurementDesign, rival: Mapping[str, RivalDraws],
                 weights: Mapping[str, float], credit: Sequence[str], adequacy: Sequence[str],
-                noise: Optional[Mapping[Tuple[str, str], UnitNoiseModel]] = None, precision_ess: float = 0.0,
-                rng: Optional[np.random.Generator] = None, ppc_reps: int = 0) -> Dict[str, Any]:
-    """One rival, one scored form: the densities of T's keys and (with ``ppc_reps``) the adequacy p's."""
+                noise: Optional[Mapping[Tuple[str, str], UnitNoiseModel]] = None,
+                precision_ess: Optional[float] = None, rng: Optional[np.random.Generator] = None,
+                ppc_reps: int = 0) -> Dict[str, Any]:
+    """One rival, one scored form: the densities of T's keys and (with ``ppc_reps``) the adequacy p's with their
+    Monte Carlo SE."""
+    precision_ess = require_precision_ess(precision_ess)
     def nm(k, u):
         return noise[(k, u)] if noise is not None and (k, u) in noise else design.noise_for(k, u)
 
@@ -1225,9 +1302,10 @@ def _score_form(y: Mapping[str, Any], design: MeasurementDesign, rival: Mapping[
         flat = np.concatenate([logpost[k] for k in ks])
         w = np.exp(flat - np.max(flat[np.isfinite(flat)])) if np.any(np.isfinite(flat)) else np.zeros_like(flat)
         w = np.where(np.isfinite(flat), w, 0.0)
-        out["adequacy_p"] = {}
+        out["adequacy_p"], out["adequacy_mc_se"] = {}, {}
         if w.sum() <= 0:
             out["adequacy_p"] = {u: 0.0 for u in adequacy}
+            out["adequacy_mc_se"] = {u: 0.0 for u in adequacy}
             return out
         w = w / w.sum()
         offs = np.cumsum([0] + [rival[k].n for k in ks])
@@ -1249,7 +1327,9 @@ def _score_form(y: Mapping[str, Any], design: MeasurementDesign, rival: Mapping[
                 if sel.any():
                     reps[sel] = nm(k, u).sample(rival[k].pred(u)[pick[sel] - offs[i]], rng)
             d_rep = neg_log_pred(reps)
-            out["adequacy_p"][u] = float((1 + np.sum(d_rep >= d_obs)) / (int(ppc_reps) + 1))
+            p_u = float((1 + np.sum(d_rep >= d_obs)) / (int(ppc_reps) + 1))
+            out["adequacy_p"][u] = p_u
+            out["adequacy_mc_se"][u] = math.sqrt(p_u * (1.0 - p_u) / int(ppc_reps))
     return out
 
 
@@ -1257,17 +1337,19 @@ def _score_form(y: Mapping[str, Any], design: MeasurementDesign, rival: Mapping[
 class FormObservation:
     """One scored form's evidence on the observed data: ``lppd[rival][key]`` the density of each key of T ("full",
     "-u" and "u" per credit unit when there are several) and ``adequacy_p[rival][unit]`` each adequacy unit's
-    posterior-predictive p under p(y_u | y_spent). Rivals are keyed "a" and "b"."""
+    posterior-predictive p under p(y_u | y_spent), with ``adequacy_mc_se`` its Monte Carlo SE (sqrt(p (1 - p) / R) for
+    R predictive replicates; None when the caller's estimator did not report it). Rivals are keyed "a" and "b"."""
 
     lppd: Mapping[str, Mapping[str, DensityEstimate]]
     adequacy_p: Mapping[str, Mapping[str, float]]
+    adequacy_mc_se: Optional[Mapping[str, Mapping[str, float]]] = None
 
     def T(self) -> Dict[str, float]:
         return {k: float(self.lppd["a"][k].lppd - self.lppd["b"][k].lppd) for k in self.lppd["a"]}
 
 
 def score_from_draws(y: Mapping[str, Any], design: MeasurementDesign, draws_a: RivalEnsemble, draws_b: RivalEnsemble,
-                     rng: np.random.Generator, ppc_reps: int = 400, precision_ess: float = 0.0
+                     rng: np.random.Generator, ppc_reps: int = 400, *, precision_ess: float
                      ) -> Dict[str, FormObservation]:
     """The observed data's evidence per scored form: every density and every adequacy p the verdict reads."""
     cls = design.form_classes
@@ -1283,7 +1365,8 @@ def score_from_draws(y: Mapping[str, Any], design: MeasurementDesign, draws_a: R
         sb = _score_form(y, design, draws_b[f], cls["fact_weights"], credit, adequacy, None, precision_ess, rng,
                          ppc_reps)
         out[f] = FormObservation({"a": sa["lppd"], "b": sb["lppd"]},
-                                 {"a": sa.get("adequacy_p", {}), "b": sb.get("adequacy_p", {})})
+                                 {"a": sa.get("adequacy_p", {}), "b": sb.get("adequacy_p", {})},
+                                 {"a": sa.get("adequacy_mc_se", {}), "b": sb.get("adequacy_mc_se", {})})
     return out
 
 
@@ -1316,8 +1399,29 @@ class NullDistribution:
         return float(w.sum() ** 2 / np.sum(w ** 2)) if w.sum() > 0 else 0.0
 
     def quantile(self, form: str, key: str, q: float) -> Tuple[float, float, float]:
-        return weighted_quantile(np.asarray(self.stats[form][key], float),
-                                 None if self.weights is None else np.asarray(self.weights, float), q)
+        """The prototype's quantile of the RESOLVED, finite replicates (unresolved ones dropped): a diagnostic only;
+        the verdict reads ``bounded`` through ``null_tail_test``."""
+        x = np.asarray(self.stats[form][key], float)
+        w = np.ones(x.size) if self.weights is None else np.asarray(self.weights, float)
+        return weighted_quantile(x, np.where(self.resolved_mask(), w, 0.0), q)
+
+    def resolved_mask(self) -> np.ndarray:
+        n = self.n_replicates
+        return np.ones(n, bool) if self.resolved is None else np.asarray(self.resolved, bool).reshape(n)
+
+    @property
+    def unresolved_fraction(self) -> float:
+        """The weighted fraction of replicates with an unresolved density (the share the bound sets to +-inf)."""
+        n = self.n_replicates
+        w = np.ones(n) if self.weights is None else np.asarray(self.weights, float)
+        tot = float(w.sum())
+        return float(np.sum(w[~self.resolved_mask()]) / tot) if tot > 0 else float("nan")
+
+    def bounded(self, form: str, key: str, sign: float) -> np.ndarray:
+        """The replicates of ``key`` with every unresolved (or non-finite) one set to ``sign`` x inf: never dropped,
+        never read as estimated (M1.1, PR #105)."""
+        x = np.asarray(self.stats[form][key], float)
+        return np.where(self.resolved_mask() & np.isfinite(x), x, math.copysign(math.inf, sign))
 
 
 @dataclass(frozen=True)
@@ -1334,22 +1438,36 @@ class NullPool:
     truth_index: np.ndarray
     truths: Mapping[str, RivalDraws]
     design: MeasurementDesign
+    extra: Dict[str, Any] = field(default_factory=dict)
 
 
 def _same_draws(x: RivalDraws, y: RivalDraws) -> bool:
-    for u in x.predictions:
-        if u in y.predictions:
-            a, b = np.asarray(x.predictions[u]), np.asarray(y.predictions[u])
-            if np.shares_memory(a, b) or (a.shape == b.shape and np.array_equal(a, b)):
-                return True
-    return False
+    """Whether truth draws ``x`` overlap the scoring draws ``y``: a shared buffer, an identical array, or ANY draw of
+    ``x`` whose predictions on every common unit equal one draw of ``y`` (truths copied row by row, or a subset).
+    Rival draws whose predictions do not depend on theta at all are flagged too (conservative: they have no truth
+    outside the ensemble to draw)."""
+    common = [u for u in x.predictions if u in y.predictions]
+    for u in common:
+        a, b = np.asarray(x.predictions[u]), np.asarray(y.predictions[u])
+        if np.shares_memory(a, b) or (a.shape == b.shape and np.array_equal(a, b)):
+            return True
+    cols = [u for u in common if x.pred(u).shape[1] == y.pred(u).shape[1]]
+    if not cols:
+        return False
+
+    def rows(d: RivalDraws) -> List[bytes]:
+        m = np.ascontiguousarray(np.hstack([d.pred(u) for u in cols]) + 0.0, dtype=np.float64)   # -0.0 -> 0.0
+        return [r.tobytes() for r in m]
+
+    seen = set(rows(y))
+    return any(r in seen for r in rows(x))
 
 
 def build_null_pool(truth: str, truths: Mapping[str, RivalDraws], design: MeasurementDesign, draws_a: RivalEnsemble,
-                    draws_b: RivalEnsemble, n: int, rng: np.random.Generator, precision_ess: float = 0.0,
+                    draws_b: RivalEnsemble, n: int, rng: np.random.Generator, *, precision_ess: float,
                     redraw_forced: Optional[Callable[[np.random.Generator, str, int],
                                                      Tuple[RivalEnsemble, RivalEnsemble, Mapping[str, np.ndarray]]]]
-                    = None) -> NullPool:
+                    = None, retry_draws: Optional[Tuple[RivalEnsemble, RivalEnsemble]] = None) -> NullPool:
     """The parametric bootstrap of T under rival ``truth`` ("a" or "b") as truth.
 
     ``truths`` holds the truth rival's HELD-OUT draws per experimental-fact form (outside the scoring ensemble:
@@ -1359,7 +1477,15 @@ def build_null_pool(truth: str, truths: Mapping[str, RivalDraws], design: Measur
     component); its T (every key) is scored exactly as the observed data. Forced inputs are redrawn only through
     ``redraw_forced(rng, form, index) -> (draws_a, draws_b, truth predictions {unit: values})``; without it a case that
     declares forced inputs gets a pool that does not redraw them (an incomplete null: the verdict is "not
-    computable")."""
+    computable").
+
+    Re-estimation (M1.1, PR #105): a replicate with any unresolved density is re-scored ONCE, on the same replicate
+    data and re-drawn noise, with ``retry_draws = (draws_a, draws_b)``: a larger, independently drawn ensemble per rival
+    (also checked to lie outside the truths). Limitation: the draws are the caller's, so without ``retry_draws`` there
+    is no re-estimation, and a replicate whose forced inputs were redrawn (``redraw_forced``) is not retried (its
+    ensembles are the replicate's own). A replicate still unresolved stays ``resolved = False`` and the verdict bounds
+    it (``judge_pair``). ``extra`` records the counts."""
+    precision_ess = require_precision_ess(precision_ess)
     if truth not in ("a", "b"):
         raise MeasurementModelRefusal("truth must be 'a' or 'b'")
     cls = design.form_classes
@@ -1367,7 +1493,8 @@ def build_null_pool(truth: str, truths: Mapping[str, RivalDraws], design: Measur
     if set(truths) != set(weights):
         raise MeasurementModelRefusal(f"truth draws {sorted(truths)} differ from the experimental-fact forms "
                                       f"{sorted(weights)}")
-    outside = not any(_same_draws(truths[k], ens[f][k]) for ens in (draws_a, draws_b)
+    ensembles = (draws_a, draws_b) + (tuple(retry_draws) if retry_draws is not None else ())
+    outside = not any(_same_draws(truths[k], ens[f][k]) for ens in ensembles
                       for f in cls["scored_forms"] for k in weights if f in ens and k in ens[f])
     roles = design.units_by_role()
     credit = roles["credit"]
@@ -1377,6 +1504,20 @@ def build_null_pool(truth: str, truths: Mapping[str, RivalDraws], design: Measur
     stats: Dict[str, Dict[str, List[float]]] = {}
     resolved = np.zeros(int(n), bool)
     tf, ti = np.empty(int(n), dtype=object), np.zeros(int(n), int)
+    n_retried = n_rescued = 0
+
+    def score_replicate(y, rep_noise, da, db):
+        vals: Dict[str, Dict[str, float]] = {}
+        ok = True
+        for f in cls["scored_forms"]:
+            sa = _score_form(y, design, da[f], weights, credit, [], rep_noise, precision_ess)
+            sb = _score_form(y, design, db[f], weights, credit, [], rep_noise, precision_ess)
+            vals[f] = {}
+            for key in sa["lppd"]:
+                vals[f][key] = float(sa["lppd"][key].lppd - sb["lppd"][key].lppd)
+                ok = ok and sa["lppd"][key].accepted and sb["lppd"][key].accepted
+        return vals, ok
+
     for i in range(int(n)):
         k = ks[int(rng.choice(len(ks), p=pk))]
         td = truths[k]
@@ -1396,22 +1537,28 @@ def build_null_pool(truth: str, truths: Mapping[str, RivalDraws], design: Measur
             for kk in ks:          # the replicate's re-drawn estimates hold for every experimental-fact component
                 base = design.noise_for(kk, u)
                 rep_noise[(kk, u)] = replace(base, terms=tuple(_align_terms(base, m)))
-        ok = True
-        for f in cls["scored_forms"]:
-            sa = _score_form(y, design, da[f], weights, credit, [], rep_noise, precision_ess)
-            sb = _score_form(y, design, db[f], weights, credit, [], rep_noise, precision_ess)
+        vals, ok = score_replicate(y, rep_noise, da, db)
+        forced_here = redraw_forced is not None and design.forced_inputs_present
+        if not ok and retry_draws is not None and not forced_here:
+            n_retried += 1
+            vals2, ok2 = score_replicate(y, rep_noise, retry_draws[0], retry_draws[1])
+            if ok2:
+                vals, ok, n_rescued = vals2, True, n_rescued + 1
+        for f, d in vals.items():
             sf = stats.setdefault(f, {})
-            for key in sa["lppd"]:
-                sf.setdefault(key, []).append(float(sa["lppd"][key].lppd - sb["lppd"][key].lppd))
-                ok = ok and sa["lppd"][key].accepted and sb["lppd"][key].accepted
+            for key, v in d.items():
+                sf.setdefault(key, []).append(v)
         resolved[i] = ok
     redrawn = {"decisive_data", "replicate_sds", "discrepancy_component", "form_index"}
     if design.spent_units:
         redrawn.add("conditioning_rows")
     if design.forced_inputs_present and redraw_forced is not None:
         redrawn.add("forced_inputs")
+    extra = {"reestimation": "retry_draws" if retry_draws is not None else "none (no retry draw set supplied)",
+             "n_retried": int(n_retried), "n_rescued_by_retry": int(n_rescued),
+             "n_unresolved_after_retry": int(np.sum(~resolved))}
     return NullPool(truth, {f: {k: np.asarray(v) for k, v in d.items()} for f, d in stats.items()}, resolved,
-                    frozenset(redrawn), bool(outside), tf, ti, truths, design)
+                    frozenset(redrawn), bool(outside), tf, ti, truths, design, extra)
 
 
 def _align_terms(base: UnitNoiseModel, redrawn: UnitNoiseModel) -> List[NoiseTerm]:
@@ -1433,7 +1580,8 @@ def null_from_pool(pool: NullPool, y_spent: Optional[Mapping[str, Any]] = None) 
     and PSIS k-hat."""
     d = pool.design
     extra: Dict[str, Any] = {"pool_size": int(pool.resolved.size),
-                             "pool_resolved_fraction": float(np.mean(pool.resolved)) if pool.resolved.size else 0.0}
+                             "pool_resolved_fraction": float(np.mean(pool.resolved)) if pool.resolved.size else 0.0,
+                             **pool.extra}
     if not d.spent_units:
         return NullDistribution(pool.truth, pool.stats, pool.redrawn, pool.truths_outside_scoring_ensemble,
                                 pool.resolved, None, extra)
@@ -1496,12 +1644,10 @@ def _null_problems(null: Optional[NullDistribution], name: str, forms: Sequence[
     k_w = null.extra.get("weights_k_hat")
     if null.weights is not None and not (k_w is not None and k_w < K_HAT_MAX):
         out.append(f"null under {name}: re-weighting k-hat {k_w} >= {K_HAT_MAX}")
-    if null.resolved is not None:
-        res = np.asarray(null.resolved, bool)
-        live = res if null.weights is None else res | (np.asarray(null.weights, float) <= 0)
-        if not np.all(live):
-            out.append(f"null under {name}: {int(np.sum(~live))} replicates with an unresolved density (never read as "
-                       "estimated)")
+    if null.resolved is not None and np.asarray(null.resolved).size != null.n_replicates:
+        out.append(f"null under {name}: {np.asarray(null.resolved).size} resolution flags for {null.n_replicates} "
+                   "replicates")
+    # an unresolved replicate no longer makes the null incomplete: the verdict bounds it (PR #105)
     return out
 
 
@@ -1518,13 +1664,18 @@ def judge_pair(observed: Mapping[str, FormObservation], null_a: Optional[NullDis
     ``null_a`` / ``null_b``: the null of every key of T under a / b as truth. ``units``: the declared noise models of the
     decisive units (decide each unit's role). ``case_inputs``: for EVERY input in NULL_INPUTS, whether this case has it
     (the null must redraw each present one). ``falsified``: S3 falsification of a / b. ``misspecified_false_credit``:
-    the power check's (k, n) false credit under the reproducibility generator.
+    the power check's (k, n) false credit under the reproducibility generator: REQUIRED for a credit (without it, or
+    failing, a qualifying rival is not credited).
 
-    Order: forms and roles (no credit unit: "not_decisive"); S3 falsification ("both_falsified", or
-    "carried_sole_survivor": the survivor is carried, not credited); resolution and the null's completeness ("not
-    computable", carried undecided); then a qualifies iff in EVERY scored form T > q95(T | b), a is adequate on every
-    adequacy unit after Holm, and every leave-one-unit-out reading stands; b by the mirror rule (T < q05(T | a)); both:
-    "neither_credited_both_qualify"; one: "credited" unless the power-check gate fails; none: "undecided"."""
+    Order: S3 falsification first ("both_falsified", or "carried_sole_survivor": the survivor is carried, not
+    credited), so a falsified rival is never returned as carried; forms and roles (no credit unit: "not_decisive");
+    resolution of the observed densities and the null's completeness ("not computable", carried undecided); then a
+    qualifies iff in EVERY scored form T crosses its null's upper 5 % tail under b (strictly: W(T_null >= T) < alpha),
+    a is adequate on every adequacy unit after Holm, and every leave-one-unit-out reading stands; b by the mirror rule
+    under a. Unresolved bootstrap replicates are bounded: a is credited iff a qualifies and b does not with them at
+    +inf in both nulls; b iff b qualifies and a does not with them at -inf. Both qualify (each under the bound against
+    it): "neither_credited_both_qualify"; one credit: "credited" only with the power-check gate supplied and passing;
+    otherwise "undecided". Each null's weighted unresolved fraction is reported."""
     a_name, b_name = names
     details: Dict[str, Any] = {"rivals": {"a": a_name, "b": b_name}, "alpha": alpha}
     missing_inputs = sorted(set(NULL_INPUTS) - set(case_inputs))
@@ -1552,9 +1703,7 @@ def judge_pair(observed: Mapping[str, FormObservation], null_a: Optional[NullDis
     def verdict(outcome, credited=None, carried=(), reasons=()):
         return RevisedVerdict(outcome, credited, tuple(carried), tuple(reasons), details)
 
-    if not credit:
-        return verdict("not_decisive", carried=("a", "b"),
-                       reasons=["no unit can credit under item 5: the data cannot decide"])
+    # S3 falsification first (D1): a falsified rival is never returned as carried, whatever the units' roles
     if fals["a"] and fals["b"]:
         return verdict("both_falsified", reasons=["both rivals falsified under S3: neither credited nor a null"])
     if fals["a"] or fals["b"]:
@@ -1566,6 +1715,9 @@ def judge_pair(observed: Mapping[str, FormObservation], null_a: Optional[NullDis
                       "on it")
         details["s3_refusal_applies"] = incumbent == dead
         return verdict("carried_sole_survivor", carried=(surv,), reasons=rs)
+    if not credit:
+        return verdict("not_decisive", carried=("a", "b"),
+                       reasons=["no unit can credit under item 5: the data cannot decide"])
 
     keys = ["full"] + ([f"-{u}" for u in credit] + list(credit) if len(credit) > 1 else [])
     problems = []
@@ -1592,72 +1744,107 @@ def judge_pair(observed: Mapping[str, FormObservation], null_a: Optional[NullDis
                                       "redrawn": sorted(nl.redrawn),
                                       "truths_outside_scoring_ensemble": nl.truths_outside_scoring_ensemble,
                                       **nl.extra}
+            if nl.resolved is None or np.asarray(nl.resolved).size == nl.n_replicates:
+                details[f"null_{nm_}"].update({
+                    "unresolved_fraction": nl.unresolved_fraction,
+                    "unresolved_count": int(np.sum(~nl.resolved_mask()))})
     if problems:
         return verdict("not_computable", carried=("a", "b"),
                        reasons=["a verdict needs resolved densities and a complete null"] + problems)
 
-    per_form: Dict[str, Any] = {}
-    qualifies = {"a": True, "b": True}
-    for f in cls["scored_forms"]:
-        ob = observed[f]
-        T = ob.T()
-        rec: Dict[str, Any] = {"T": T["full"], "unit_contributions": {u: T[u] for u in credit} if len(credit) > 1
-                               else {credit[0]: T["full"]}}
-        for side, null, q, cmp in (("a", null_b, 1.0 - alpha, lambda x, t: x > t),
-                                   ("b", null_a, alpha, lambda x, t: x < t)):
-            thr, se, ess = null.quantile(f, "full", q)
-            crosses = bool(np.isfinite(thr) and cmp(T["full"], thr))
-            hp = holm({u: float(ob.adequacy_p[side][u]) for u in adequacy}, alpha)
-            adequate = all(v["p_holm"] >= alpha for v in hp.values())
-            loo: Dict[str, Any] = {}
-            loo_ok = True
-            for u in credit:
-                if len(credit) == 1:
-                    loo[u] = {"rests_on": True, "T_u": T["full"], "threshold_u": thr, "alone_credits": crosses}
-                    loo_ok = loo_ok and crosses
-                    continue
-                t_m, _, _ = null.quantile(f, f"-{u}", q)
-                t_u, _, _ = null.quantile(f, u, q)
-                rests = not cmp(T[f"-{u}"], t_m)
-                alone = bool(cmp(T[u], t_u))
-                loo[u] = {"T_minus_u": T[f"-{u}"], "threshold_minus_u": t_m, "rests_on": bool(rests),
-                          "T_u": T[u], "threshold_u": t_u, "alone_credits": alone}
-                if rests and not alone:
-                    loo_ok = False
-            ok = crosses and adequate and loo_ok
-            rec[side] = {"threshold": thr, "threshold_mc_se": se, "threshold_ess": ess,
-                         "threshold_quantile": q, "crosses": crosses,
-                         "adequacy": {u: {"p": v["p"], "p_holm": v["p_holm"]} for u, v in hp.items()},
-                         "adequate": adequate, "leave_one_unit_out": loo, "loo_stands": loo_ok, "qualifies": ok}
-            qualifies[side] = qualifies[side] and ok
-        per_form[f] = rec
+    def weights(nl):
+        return None if nl.weights is None else np.asarray(nl.weights, float)
+
+    def conditions(sign: float) -> Tuple[Dict[str, Any], Dict[str, bool]]:
+        """Every scored form's conditions with each null's unresolved replicates at ``sign`` x inf."""
+        per_form: Dict[str, Any] = {}
+        qual = {"a": True, "b": True}
+        for f in cls["scored_forms"]:
+            ob = observed[f]
+            T = ob.T()
+            rec: Dict[str, Any] = {"T": T["full"], "unit_contributions": {u: T[u] for u in credit}
+                                   if len(credit) > 1 else {credit[0]: T["full"]}}
+            for side, null, q, tail in (("a", null_b, 1.0 - alpha, "upper"), ("b", null_a, alpha, "lower")):
+                def test(key, t):
+                    return null_tail_test(null.bounded(f, key, sign), weights(null), t, alpha, tail)
+                full = test("full", T["full"])
+                crosses = full["crosses"]
+                hp = holm({u: float(ob.adequacy_p[side][u]) for u in adequacy}, alpha)
+                adequate = all(v["p_holm"] >= alpha for v in hp.values())
+                se_ad = (ob.adequacy_mc_se or {}).get(side, {})
+                loo: Dict[str, Any] = {}
+                loo_ok = True
+                for u in credit:
+                    if len(credit) == 1:
+                        loo[u] = {"rests_on": True, "T_u": T["full"], "threshold_u": full["threshold"],
+                                  "alone_credits": crosses}
+                        loo_ok = loo_ok and crosses
+                        continue
+                    tm, tu = test(f"-{u}", T[f"-{u}"]), test(u, T[u])
+                    rests = not tm["crosses"]
+                    alone = tu["crosses"]
+                    loo[u] = {"T_minus_u": T[f"-{u}"], "threshold_minus_u": tm["threshold"], "rests_on": bool(rests),
+                              "T_u": T[u], "threshold_u": tu["threshold"], "alone_credits": bool(alone)}
+                    if rests and not alone:
+                        loo_ok = False
+                ok = crosses and adequate and loo_ok
+                rec[side] = {"threshold": full["threshold"], "threshold_mc_se": full["threshold_mc_se"],
+                             "threshold_ess": full["ess"], "threshold_quantile": q,
+                             "null_tail_weight": full["tail_weight"], "null_tail_weight_mc_se": full["tail_weight_mc_se"],
+                             "null_infinite_mass": full["infinite_mass"], "crosses": crosses,
+                             "adequacy": {u: {"p": v["p"], "p_holm": v["p_holm"], "p_mc_se": se_ad.get(u)}
+                                          for u, v in hp.items()},
+                             "adequate": adequate, "leave_one_unit_out": loo, "loo_stands": loo_ok, "qualifies": ok}
+                qual[side] = qual[side] and ok
+            per_form[f] = rec
+        return per_form, qual
+
+    # testing a's credit: unresolved at +inf in both nulls; testing b's: at -inf (identical when none is unresolved)
+    pf_a, q_plus = conditions(+1.0)
+    pf_b, q_minus = conditions(-1.0)
+    per_form = {f: {"T": pf_a[f]["T"], "unit_contributions": pf_a[f]["unit_contributions"], "a": pf_a[f]["a"],
+                    "b": pf_b[f]["b"]} for f in cls["scored_forms"]}
     details["per_form"] = per_form
-    details["qualifies"] = dict(qualifies)
+    details["qualifies"] = {"a": q_plus["a"], "b": q_minus["b"]}
+    details["qualifies_under_bound"] = {"testing_a_unresolved_plus_inf": dict(q_plus),
+                                        "testing_b_unresolved_minus_inf": dict(q_minus)}
+    details["bound_differs"] = q_plus != q_minus
+    credit_ok = {"a": q_plus["a"] and not q_plus["b"], "b": q_minus["b"] and not q_minus["a"]}
     gate = None
     if misspecified_false_credit is not None:
         gate = misspecified_false_credit_gate(*misspecified_false_credit, alpha=alpha)
     details["power_check_gate"] = gate if gate is not None else "not supplied"
-    if qualifies["a"] and qualifies["b"]:
-        return verdict("neither_credited_both_qualify", carried=("a", "b"),
-                       reasons=["both rivals meet their conditions: neither is credited"])
-    if qualifies["a"] or qualifies["b"]:
-        side = "a" if qualifies["a"] else "b"
-        if gate is not None and not gate["passes"]:
+    if credit_ok["a"] or credit_ok["b"]:
+        side = "a" if credit_ok["a"] else "b"
+        if gate is None:
+            return verdict("undecided", carried=("a", "b"),
+                           reasons=[f"{side} qualifies but the case cannot credit: a credit requires the power check "
+                                    "(false credit under the reproducibility generator, misspecified_false_credit) "
+                                    "supplied and passing; it was not supplied"])
+        if not gate["passes"]:
             return verdict("undecided", carried=("a", "b"),
                            reasons=[f"{side} qualifies but the case cannot credit: the power check's false credit "
                                     f"under the reproducibility generator has Wilson lower end "
                                     f"{gate['wilson95'][0]:.3f} > {alpha}"])
         return verdict("credited", credited=side,
                        reasons=[f"{side} credited in every scored form ({', '.join(cls['scored_forms'])})"])
-    return verdict("undecided", carried=("a", "b"), reasons=["neither rival meets its conditions: both carried (S3)"])
+    if q_plus["a"] and q_minus["b"]:
+        return verdict("neither_credited_both_qualify", carried=("a", "b"),
+                       reasons=["both rivals meet their conditions: neither is credited"])
+    rs = ["neither rival meets its conditions: both carried (S3)"]
+    for side, fav in (("a", q_minus), ("b", q_plus)):
+        if fav[side] and not fav["b" if side == "a" else "a"]:
+            rs.append(f"{side} would be credited were the unresolved replicates read in its favour: the credit does "
+                      "not survive the bound")
+    return verdict("undecided", carried=("a", "b"), reasons=rs)
 
 
 def judge_from_draws(y: Mapping[str, Any], design: MeasurementDesign, draws_a: RivalEnsemble, draws_b: RivalEnsemble,
                      pool_a: Optional[NullPool], pool_b: Optional[NullPool], rng: np.random.Generator,
-                     ppc_reps: int = 400, precision_ess: float = 0.0, **judge_kwargs) -> RevisedVerdict:
+                     ppc_reps: int = 400, *, precision_ess: float, **judge_kwargs) -> RevisedVerdict:
     """``score_from_draws`` + ``null_from_pool`` for both rivals + ``judge_pair``. ``pool_a`` / ``pool_b`` are the
     bootstrap pools under a / b as truth (``build_null_pool``; reuse them across synthetic sets in a power check)."""
-    obs = score_from_draws(y, design, draws_a, draws_b, rng, ppc_reps, precision_ess)
+    obs = score_from_draws(y, design, draws_a, draws_b, rng, ppc_reps, precision_ess=precision_ess)
     y_spent = {u: y[u] for u in design.spent_units}
     na = null_from_pool(pool_a, y_spent) if pool_a is not None else None
     nb = null_from_pool(pool_b, y_spent) if pool_b is not None else None
