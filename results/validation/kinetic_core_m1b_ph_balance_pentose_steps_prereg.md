@@ -962,8 +962,11 @@ number under the noise below has been computed.
   - Differences: 0.91 / 0.73 / 0.47 / 0.42, with mean 0.6325 and sd (n - 1) 0.2296.
   - For a difference of two runs, each run's offset sd is mean / sqrt(2) = 0.447, and the per-point shape sd is
     sd / sqrt(2) = 0.162.
-  - **These are closer to upper bounds than to estimates.** There is one pair of runs, from two papers (so anything
-    that differs between the papers is included), and a single pair's mean difference is used as an offset scale.
+  - The offset scale is a one-pair maximum-likelihood estimate. Its chi-square(1) 90 % interval is roughly 0.23 -
+    7 pH, so it is neither an upper bound nor precise. Differences between the papers are part of what it measures,
+    which is appropriate: each control is itself a single run in another paper. The shape term includes both papers'
+    read noise, so adding meas^2 double-counts about 0.05^2 (negligible). The x0.5 / x2 range does not cover the
+    one-pair uncertainty upward.
 - **Sensitivities.** s_off and s_shape are scaled together by 0.5 and by 2; these replace omega x 0.5 / x 2. r = 0.02
   is kept, as written. The omega = 0.390 sensitivity is dropped.
 
@@ -984,8 +987,13 @@ All four are read on the decisive forced C-Hou run, with the unforced run printe
 
 **Falsification rule.**
 - A rival is **falsified on CF-084's controls** only if the kill holds under the primary term AND under every
-  required-agreement form: the offset / shape form at s, s x 0.5 and s x 2; r = 0.02; and the unforced C-Hou.
+  required-agreement form: the offset / shape form at s, s x 0.5 and s x 2; r = 0.02; **r = 0.10 (r x 2; the
+  confirmer's edit 3, on sec. 15's rule that an unsourced choice must not decide the verdict: sigma-Mey has no offset
+  form)**; and the unforced C-Hou.
 - A kill that fails under any form reads "not falsified".
+- **Noted openly (from the confirmer).** Under s x 2 the sigma-Hou-level tolerance (Z_90 x sqrt(0.05^2 + 0.32^2 +
+  0.90^2) = 1.57 pH) exceeds B0's CF-084 miss (1.30 pH). So in practice a kill can come only from sigma-Mey or
+  sigma-Zhou.
 - **Confirmation at one fit (sec. 3.8) is kept**, but it is an engine run, so it waits for the coordinator. Until it
   runs, a kill reads "falsified on the screen's draws, confirmation pending".
 
@@ -1007,6 +1015,9 @@ All four are read on the decisive forced C-Hou run, with the unforced run printe
 - **Demotion.** A rival whose maximum kill power does not exceed its false-kill rate is **"unfalsifiable on disk"**.
   Its verdict on the measured data is reported as "not testable here".
 - The confirmation fit of sec. 20.3 is not part of the power check.
+- **(The confirmer's edit 1.)** Kill power and false-kill rate are reported separately for the primary-noise sets and
+  for the offset / shape sets. On each set the full sec. 20.3 rule is applied (all forms). A rival is "unfalsifiable on
+  disk" if its maximum kill power does not exceed its false-kill rate (point estimates, as sec. 7) in either family.
 
 ### 20.5 No new engine runs; records
 
@@ -1030,3 +1041,12 @@ before M1c's or part (ii)'s pH units freeze. If it is kept:
 - co-produced species are scaled together, by their source reaction;
 - every scaled amount is capped at the precursor charged;
 - the size comes from pH data, never from omega.
+
+### 20.7 Confirmation (2026-11-06)
+
+An independent confirmer returned **CONFIRMED WITH EDITS (text only)**. Its three edits are applied above, in secs.
+20.2, 20.3 and 20.4.
+- The confirmer disclosed partial un-blinding: it read sec. 18.1 and sec. 20.0's v3.6 figures.
+- All three edits make kills harder or clearer, never easier.
+- With this, the single falsification run of sec. 20.5 has the coordinator's go, as does the sec. 3.8 confirmation fit
+  if a would-be kill appears.
