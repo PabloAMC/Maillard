@@ -28,10 +28,30 @@ paper's references for the backward sweep, the text layer of PDF pp. 4304 - 4305
 reference column, one sentence of the mechanism discussion and the bare label "Figure 2.". No figure content, axis or
 plotted value was shown.
 
-**Not opened:** hofmann2000b Figs. 2 - 3 (the PDF figures), the keying directory, the local branch
-`key-hofmann2000b-fig2-fig3` (sha256 1b1907cb...), any keyed Fig. 2 - 3 row. No engine, layer or fit was run. The only
-computation is the band arithmetic marked **[dry]** (sec. 4.2; scratchpad script `m3b_dry_bands.py`, run through the
-wrapper). It reads no data, only the declared bands, and no band, start or tolerance comes from it.
+**Not opened:** hofmann2000b Figs. 2 - 3 (the PDF figures), the keying directory, and any keyed Fig. 2 - 3 value. No
+engine, layer or fit was run. The only computation is the band arithmetic marked **[dry]** (sec. 4.2; scratchpad
+scripts `m3b_dry_bands.py` and `m3b_dry_bands_ktr03.py`, run through the wrapper). It reads no data, only the
+declared bands, and no band, start or tolerance comes from it.
+
+**Design metadata read from the keyed file (2026-11-06, at the coordinator's request; no value read).**
+- **What was looked at.** On the local branch `key-hofmann2000b-fig2-fig3`, `git diff --name-only` against main lists
+  the file names. Header and rows share one file, `data/lit/fit_rows/strecker_hofmann2000b_fig2_fig3.yml`, so it was
+  not displayed. `git show` wrote it to a scratchpad file that was never printed.
+- **The filters**, both through the wrapper:
+  - one printed only the key paths and value TYPES;
+  - one (`design_only.py`) printed only the pots' design fields (source_figure, atmosphere, metal, trap, t_c,
+    value_basis, concentration_basis, the stated and plotted sampling times, vessel, analysis) and the set of
+    (pot, species) cells with their plotted times and units.
+- **Never printed:** `value`, `read_error`, `share`, the readers' y readings, the notes, the origin-cluster
+  (near-zero) points, any flag count. The scratchpad copy was deleted afterwards.
+- **What it says:**
+  - **Both figures plot five series: ARP-Phe, Phe, 1-DG, 3-DG and glucosone.** **MGO and GO are not plotted.**
+  - Arms: Fig. 2 argon (no metal; deoxygenation not stated); Fig. 3 air + Cu(II) 0.05 mmol (25 mmol/L; salt not named;
+    headspace not stated). Both at 85 C, OPD 1.2 mmol in situ.
+  - Times: stated 20 / 40 / 80 / 160 / 320 min, but plotted (keyed) **0 (ARP-Phe only), 20, 40, 80, 180, 320 min**.
+  - y axis "amount [mmol/mmol ARP-Phe]", 0 - 1.00, no error bars; keyed as mmol/L = share x 500 (1.0 mmol in 2 mL;
+    ~430 - 450 mmol/L if solids' volume or purity is counted).
+- The rest of this case uses only these design facts (secs. 4.1, 4.4).
 
 **Spent (development evidence, never decisive here)** under the sec. 7 spent-data rule:
 - hofmann2000 Tables 3 - 4 (the fed-donor calibrations), hofmann2000 Fig. 2;
@@ -42,8 +62,11 @@ wrapper). It reads no data, only the declared bands, and no band, start or toler
   Kanzler 2026 sec. 4.7; Granvogl 2006 (the s_DG1 band);
 - the M3 phase-1 checks, screen and power records, and the regression in the M3 prereg sec. 23;
 - the text-level Fig. 2 - 3 statements above: the qualitative ordering and the Phe end point at 320 min. CF-121 already
-  used the end point. **The Figs. 2 - 3 data that remain blind are the plotted yields at 20 - 160 min, the absolute
-  320-min yields of each species, and Phe at 20 - 160 min.**
+  used the end point. **The Figs. 2 - 3 data that remain blind are:**
+  - the plotted yields at 20 - 180 min;
+  - the absolute 320-min yields of each osone;
+  - Phe at 20 - 180 min;
+  - **the whole ARP-Phe series** in both arms; no ARP-Phe value is quoted in any text the author read.
 
 > **CK-01 / CK-50 (integrity re-read of Table 2 and its Methods): result folded in 2026-11-06.** Source: draft PR #86,
 > `results/validation/m0_integrity_batch1_strecker_sulfur.md` on branch `m0-integrity-batch1-ss` (read here as the
@@ -81,7 +104,7 @@ that change, all inside the standalone layer (nothing in `src/kinetic_core/`, no
 
 | part | step (M3 prereg sec. 3.2) | the layer as built | M3b |
 |---|---|---|---|
-| anoxic exits | e1, e3, eF at a1, a3, aF ~ Dirichlet(1, 1, 1); k_anox = k_d (1 - sigma_ox) | every anoxic exit yields a Strecker-active donor (MGO at fraction m ~ U[0, 1]) | + eI at share a_I, renormalising (a1, a3, aF, a_I). Two physical forms, which differ on the decisive data: **Rb1 bypass** (Phe released, no free C6 osone made) and **Rb2 via free 1-DG** (the measured exit split; 1-DG made, then beta-cleaved to acetic acid + C4 faster than its Strecker step) |
+| anoxic exits | e1, e3, eF at a1, a3, aF ~ Dirichlet(1, 1, 1); k_anox = k_d (1 - sigma_ox) | every anoxic exit yields a Strecker-active donor (MGO at fraction m ~ U[0, 1]) | + eI at share a_I, renormalising (a1, a3, aF, a_I). Two physical forms, which differ on the decisive data: **Rb1 bypass** (Phe released, no free C6 osone made) and **Rb2 via free 1-DG** (the measured exit split; 1-DG made, then beta-cleaved to acetic acid + C4 faster than its Strecker step). Rb2 alone fails on development data (sec. 3.1); the measured form is carried as **Rab2**, Rb2 at Ra's slower anoxic decay |
 | 1-DG fate | s_DG1 log-uniform [s_G, s_MGO x 10^0.82]; k0_DG1 [0.07, 1] /min (upper end numerical) | 1-DG a Strecker donor up to 6.6x MGO's efficiency | Rb2: k0_DG1 at Martins 2003's k9 (1.909 /min, a fit), with Davidek's measured acetic-acid yields as the check |
 | trapped pot (85 C, OPD) | the sub-model of sec. 3.2: eps_X = k_tr / (k_tr + k_loss,X) | -- | eI makes no trappable osone (Rb1); in Rb2, 1-DG is trapped in competition with its beta-cleavage |
 | glucose + Phe pot | 1-DG and FOX computed from the forced ARP | -- | eI lowers the 1-DG computed from the ARP (Rb1, Rb2) |
@@ -250,7 +273,8 @@ M4 sweep of 2026-11-05 (Voigt 2009, Davidek 2006a and Deng 2021 were seeds there
 | **R0** | **the M3 layer as built** (R1 host; R4 form) | -- | **fails**: median 0.39 - 0.48 vs 0.09 mM; 5.7 % of R1 draws within 2x |
 | **Ra** | **a slower anoxic ARP-Phe decay under argon** | k_anox from the fed designs' own measured-class rate (CF-121: ~0.006 - 0.010 /min at 100 C), not from the transfer-class band [0.0113, 0.132] x (1 - sigma_ox). Form: an O2 / metal-accelerated decay, k_d = k_anox + k_O2 [O2], so an O2-limited reflux pot decays slower | short: the floor form removes ~2x of 5x (M3 prereg sec. 23) |
 | **Rb1** (the claim, bypass form) | an explicit Strecker-inert anoxic exit, inert **before** any free C6 osone; Phe released | + eI, a_I in [0, 0.9] (definitional; **no measured share on disk**; required agreement at both ends) | meets the datum by construction at a_I ~0.75 - 0.8 (full decay), ~0.6 combined with Ra (arithmetic from the 5x) |
-| **Rb2** (the claim, measured form) | the anoxic decay follows the measured fed-DFG chemistry: a small 3-DG share and a large 1-DG share, with 1-DG beta-cleaved to acetic acid + C4 faster than its Strecker step | (a1, a3, aF, reversion) at Martins 2003 col. C (0.40 / 0.047 / 0.42 / 0.13; enaminol form 3-DG 0.15); k0_DG1 = 1.909 /min (Martins k9); s_DG1 from Voigt 2010 (~1 %, a transfer); fragment MGO from Martins | **[dry] likely still high**: Martins' ~0.29 MGO per DFG (120 C) x MGO's 15.8 umol/mmol x ~0.5 (Phe ~50 vs 100 mM) is ~2.3 umol/mmol from fragment MGO alone, against 0.9 measured. A 100 C MGO yield is not on disk |
+| Rb2 (**a declared-failing control**, not a carried rival) | the anoxic decay follows the measured fed-DFG chemistry: a small 3-DG share and a large 1-DG share, with 1-DG beta-cleaved to acetic acid + C4 faster than its Strecker step | (a1, a3, aF, reversion) at Martins 2003 col. C (0.40 / 0.047 / 0.42 / 0.13; enaminol form 3-DG 0.15); k0_DG1 = 1.909 /min (Martins k9); s_DG1 from Voigt 2010 (~1 %, a transfer); fragment MGO at Martins' 100 C yield | **fails on development data** (sec. 3.1): fragment MGO alone gives ~0.10 - 0.14 mM against 0.09 measured, and the total is ~0.16 - 0.36 mM |
+| **Rab2** (the claim, measured form, carried) | **Ra and Rb2 together**: the measured anoxic chemistry, at the fed designs' own slower anoxic decay | Rb2's constants plus Ra's k_anox (~0.006 - 0.010 /min at 100 C) | **[dry] reaches the datum only at its low end**: ~0.09 - 0.29 mM (sec. 3.1). Every constant is a measurement or a fit of one; nothing is free |
 | Rb-ret (form of Rb1) | the inert exit **keeps Phe** (amine-bound products) | eI releases no Phe | as Rb1 on Table 2; differs on Figs. 2 - 3 (sec. 4) |
 | Ra+b (form) | Ra and Rb1 together | both | as Rb1 at the lower a_I |
 | **Rc** | **a first-order loss of the ARP-made donors**, carried into the fed calibration | k0 for 3-DG (Ghiron; Martins k5 + k6), MGO (Kanzler) and 1-DG (Martins k9), in the ARP pot AND in the Table 4 inversion | **fails**: 14 - 20 % of the log gap (`H1_max_consistent`) |
@@ -264,64 +288,149 @@ Considered and not carried:
 
 Both are kept in the record as members of the "downstream efficiency" class with Rc and Rd.
 
+### 3.1 Rb2 on Martins' 100 C methylglyoxal (development data; pre-freeze step 3)
+
+**The datum.** Martins 2003b Fig. 4 (dossier `martins2003b_extraction.md` sec. 8, digitised, +-0.08 mmol/L; DFG from
+its Fig. 1, sec. 5, +-0.3 mmol/L) gives, for fed DFG 9.6 mM at 100 C, pH 6.8:
+
+| t (min) | MG (mM) | DFG decayed (mM) | MG per DFG decayed |
+|---|---|---|---|
+| 30 | ~1.0 | ~5.2 | 0.19 |
+| 60 | ~1.5 | ~7.7 | 0.19 |
+| 120 | ~2.0 | ~9.4 | 0.21 |
+
+MG accumulates ("no decrease in its amount was observed"). The authors find pH 5.5 -> 6.8 has "almost no influence".
+At 120 C, pH 6.8 it is ~0.33 per DFG (3.2 / 9.8). **Fragment MGO is ~0.20 per ARP decayed at 100 C**, against the
+incumbent's prior mean aF x m = 1/3 x 1/2 = 0.17.
+
+**[dry] Rb2's argon total, by rescaling the diagnostic's baseline anatomy** (median argon total 0.39 - 0.48 mM; shares
+3-DG 42 - 55 %, fragment MGO 22 - 25 %, 1-DG 6 - 14 %, the rest 6 - 30 %):
+- fragment MGO x 0.20 / 0.17 = x1.2, i.e. 26 - 30 % of baseline: **0.10 - 0.14 mM, alone at or above the 0.09 mM
+  datum** and near the 2 s band's top (0.139 mM);
+- 3-DG x 0.047 / 0.33 = x0.14: 6 - 8 %;
+- 1-DG beta-cleaved at Martins' k9: at most x0.5, so <= 3 - 7 %;
+- the rest unchanged.
+- **Total ~0.41 - 0.75 of baseline, ~0.16 - 0.36 mM: 1.8 - 4x high.**
+
+**Verdict on development data: Rb2 alone does not survive.** It is kept as a **declared-failing control**: scored
+beside the rivals, reported, never credited. Figs. 2 - 3 can still show its signature (D1 ~0.06), and that would
+locate the 3-DG share whatever the argon datum says.
+
+**The composite Rab2 (Ra + Rb2) is carried instead.** Ra's slower anoxic decay (~0.006 - 0.010 /min at 100 C, the
+fed designs' own rate, CF-121) leaves 51 - 70 % decayed by 120 min instead of 87 - 99 %, x0.55 - 0.8. That gives
+**~0.09 - 0.29 mM**, which reaches the datum only at the slow end of Ra with the fragment-MGO share at its measured
+value. This is a rescaling of medians, not a run, and it assumes the anatomy's shares scale linearly. The comparison
+(item 6) replaces it.
+
+### 3.2 The OPD trap rate k_tr: a floor from Gobert 2009 / Glomb 2010 (pre-freeze step 2)
+
+**The datum (held dossiers).** Glucose + Lys 42 mM, 0.1 M phosphate pH 7.4, 50 C, 7 d, deaerated. 1-DG trapped with
+5 mM OPD present throughout (continuous) is **23.5 mmol/mol glucose** (`gobert2009_extraction.md` sec. 2;
+`glomb2010_extraction.md` gives the same as 2.4 mol %). The standing 1-DG at 7 d, OPD added only at sampling, is **0.2
+mmol/mol**. Fed 1-DG's half-life there is 0.5 h (Glomb 2010), so k_loss,DG1(50 C) ~0.023 /min.
+
+**Arithmetic.**
+- With a constant formation rate F over T = 10 080 min, the 1-DG formed is F T and the standing level is F /
+  k_loss. Their ratio is k_loss T ~ 230.
+- The trap captures eps1 F T, so trapped / standing = eps1 x 230. Measured: 23.5 / 0.2 = 117, so **eps1(5 mM OPD,
+  50 C) ~0.5**, i.e. k_tr(5 mM, 50 C) ~ k_loss ~0.023 /min.
+- Three biases push this estimate UP, so the floor is set well below it:
+  - formation falls over 7 d (lysine fell 30 %), so the day-7 standing level under-states the mean and the true
+    ratio is larger, giving a smaller eps1;
+  - the authors warn that continuous OPD makes "false" osone from the Amadori product, inflating the trapped amount;
+  - a short post-incubation trap may under-recover the standing 1-DG.
+  **Allowing a factor 5 for them, eps1(5 mM, 50 C) >= 0.1**, so k_tr(5 mM, 50 C) >= ~0.0026 /min, and a second-order
+  OPD constant >= ~0.5 /(M min).
+- Hofmann's trap is 0.6 M OPD at 85 C. Linear in OPD (x120), with an Ea of the condensation >= 0 (x >= 1 from 50 to
+  85 C), this gives **k_tr >= ~0.3 /min**. With a typical condensation Ea of 40 - 60 kJ/mol it would be x4 - 9 higher.
+
+**Decision.**
+- **k_tr band: [0.3, 10] /min primary**, a declared transfer (50 -> 85 C, 5 mM -> 0.6 M, glucose-Lys -> ARP-Phe).
+- [0.1, 0.3) is a sensitivity labelled "below the Gobert floor". A verdict that needs it does not ship.
+- The upper end, 10, stays numerical.
+- Consequence: eps1 >= 0.45 at the layer's k0_DG1 band (<= 0.36 /min at 85 C) and >= 0.30 at Martins' k9 (0.69 /min
+  at 85 C). The 1-DG trap confound shrinks from ~1 dex to <= 0.5 dex.
+- The [dry] band arithmetic re-run on [0.3, 10] (`m3b_dry_bands_ktr03.py`) moves the predictions by <= 0.06 (sec.
+  4.2).
+- **Caveat carried into sec. 4.3:** the same "false osone from the Amadori product" artefact, at 0.6 M OPD against 0.5
+  M ARP-Phe, can raise the trapped osones of Figs. 2 - 3 themselves.
+
 ## 4. The decisive data
 
 ### 4.1 What Figs. 2 - 3 measure, and the units
 
 hofmann2000b Figs. 2 (argon) and 3 (air + Cu 25 mM): ARP-Phe 1.0 mmol + OPD 1.2 mmol in 2 mL phosphate pH 7 (0.5 M
-ARP), 85 C, aliquots at 20, 40, 80, 160, 320 min. The quinoxalines of 1-DG, 3-DG and glucosone, and Phe liberated, are
-plotted (dossier). Whether ARP-Phe itself or MGO / GO are plotted is unknown to the author (open question 1). "Per ARP
-decayed" is measured as **per Phe liberated**. That is exact for exits that release Phe, and biased for any exit that
-keeps it (Rb-ret, the layer's eF at r_F < 1) or for free Phe in the ~10 % impurity.
+ARP), 85 C. **Design (from the keyed file's metadata, sec. 0):**
+- five series in each arm: ARP-Phe, Phe, and the quinoxalines of 1-DG, 3-DG and glucosone;
+- plotted at 20, 40, 80, 180 and 320 min, plus ARP-Phe at 0;
+- y in mmol/mmol ARP-Phe charged, axis 0 - 1.00;
+- **MGO and GO not plotted.**
+
+Because **ARP-Phe itself is plotted**, "per ARP decayed" is measured directly, and Phe liberated per ARP decayed
+becomes a unit of its own (D6).
 
 | # | unit (argon unless stated) | basis | why |
 |---|---|---|---|
-| **D1** | **Y3(t) = trapped 3-DG / Phe liberated**, t = 20 - 160 min (320 min as a form: its denominator is seen) | within-run ratio of two analytes (sigma_run cancels; the calibration coordinates do not) | the most robust unit. 3-DG leaves slowly, so its trap efficiency eps3 is 0.70 - 1.0 over the whole k_tr band. It measures a3, the anoxic exit that carries 42 - 55 % of the baseline argon total |
-| **D2** | **Yos(t) = (1-DG + 3-DG + glucosone) / Phe liberated** | as D1 | bounds the free-C6-osone flux, and so the room for a bypass (Rb1). Confounded with 1-DG's trap efficiency eps1 = k_tr / (k_tr + k0_DG1(85)), k_tr unsourced [0.1, 10] /min |
+| **D1** | **Y3(t) = trapped 3-DG / ARP-Phe decayed**, t = 20 - 180 min (320 min as a form; per Phe liberated as a second form) | within-run ratio of two analytes (sigma_run cancels; the calibration coordinates do not) | the most robust unit. 3-DG leaves slowly, so its trap efficiency eps3 is 0.70 - 1.0 over the whole k_tr band. It measures a3, the anoxic exit that carries 42 - 55 % of the baseline argon total |
+| **D2** | **Yos(t) = (1-DG + 3-DG + glucosone) / ARP-Phe decayed** | as D1 | bounds the free-C6-osone flux, and so the room for a bypass (Rb1). Confounded with 1-DG's trap efficiency eps1 = k_tr / (k_tr + k0_DG1(85)), now >= 0.30 - 0.45 with k_tr in [0.3, 10] (sec. 3.2) |
 | **D3** | **Y1 / Y3** | ratio of two quinoxalines (1-DG N(0, 0.20), 3-DG N(0, 0.10)) | the split a1 : a3 x eps1 / eps3. The seen ordering (1-DG main) already fixes its sign, so only its size is blind |
-| **D4** | **Phe(t) / Phe(320), t = 20 - 160** | within-run shape (the seen 320-min point is the reference) | the anoxic decay law (Ra, Rb-ret). Confounded with Ea (85 -> 100 C), order (0.5 vs 0.1 M) and the acid load (0.07 - 0.7 dex, worse under the "0.5 mmol/L" print) |
-| **D5** | **[Y1 + Y3](air + Cu) / [Y1 + Y3](argon)** at each t | cross-run double ratio (each arm keeps its sigma_run) | the anoxic share of Phe release under O2 + Cu (Ra). Confounded with the Cu law (5 -> 25 mM, saturated or linear) |
+| **D4** | **ARP-Phe(t) / ARP-Phe(0), t = 20 - 320** (blind in full) | within-run course, one analyte (the calibration cancels; the analyser CV does not) | **the anoxic decay itself** (Ra vs R0). Confounded with Ea (85 -> 100 C), order (0.5 vs 0.1 M) and the acid load (0.07 - 0.7 dex, worse under the "0.5 mmol/L" print) |
+| **D5** | **ARP-Phe decayed (air + Cu) / ARP-Phe decayed (argon)** at each t | cross-run ratio (each arm keeps its sigma_run) | the O2 / Cu acceleration of the decay (Ra's O2-accelerated form). Confounded with the Cu law (5 -> 25 mM, saturated or linear) |
+| **D6** | **Phe liberated / ARP-Phe decayed** (argon; air + Cu as a second arm) | within-run ratio, one analyser (ninhydrin, two channels) | **amine return**: Rb-ret predicts < 1 by its share; Rb1, Rab2 and R0 predict ~1 minus (1 - r_F) aF. Free Phe in the ~10 % impurity biases it up early (imp_Phe). The 320-min Phe point is seen, its ARP partner is not |
 | guard | glucosone / Phe in air + Cu (M3's U3b) | -- | M3's route unit. Shared blinding. M3b may not move it outside its band |
 
 ### 4.2 What each rival predicts (without reading the data)
 
-The **[dry]** numbers are the declared bands pushed through the trap competition alone: Dirichlet shares, r_F, k_tr
-and k0_DG1 as the M3 prereg declares, eps at 85 C (Ea 75 kJ/mol). No kinetics, no conditioning on Table 2, median and
-5 - 95 %. The real power check (sec. 4.4) replaces them.
+The **[dry]** numbers are the declared bands pushed through the trap competition alone, per ARP decayed:
+- the Dirichlet shares, r_F and k0_DG1 as the M3 prereg declares;
+- k_tr on [0.3, 10] (sec. 3.2);
+- eps at 85 C (Ea 75 kJ/mol).
 
-| rival | D1 Y3 | D2 Y1 + Y3 | D3 Y1 / Y3 | D4 Phe shape | D5 | Table 2 argon (spent) |
-|---|---|---|---|---|---|---|
-| R0 as built | 0.36 (0.03 - 0.83). Conditioned on the seen ordering (Y1 > Y3): 0.16 (0.015 - 0.40) | 0.77 (0.30 - 0.97) | any (P(Y1 > Y3) 0.46 before conditioning) | first order at k_anox(85) = 0.36 x k_d (1 - sigma_ox), k_d in the transfer band | per sigma_ox and the Cu law | fails |
-| Ra | as R0 (shares unchanged) | as R0 | as R0 | **slower than R0** at the same Ea; a lag-free first-order or O2-depletion shape | **smaller than R0** (a smaller anoxic share of the Phe released under air + Cu) | short ~2.5x |
-| Rb1 | 0.14 (0.01 - 0.57) | **0.33 (0.07 - 0.79)**, low for any k_tr | as R0 | as R0 | as R0 | met by a_I |
-| Rb-ret | as R0 per Phe | as R0 per Phe | as R0 | **slower** (Phe lags the ARP); same as Ra unless ARP-Phe is plotted | as R0 | met by a_I |
-| Rb2 | **0.058 (0.046 - 0.077)**; enaminol form ~0.15 - 0.26 | 0.36 (0.13 - 0.61) | **large** (~5 - 8 x eps1 / eps3) | as R0 (Davidek 2002's rate at 90 C is inside R0's band) | as R0 | likely still high (fragment MGO) |
-| Rc | as R0 (the trap outcompetes a first-order loss: eps3 >= 0.70) | as R0, slightly lower | as R0 | as R0 | as R0 | fails |
-| Rd | as R0 | as R0 | as R0 | as R0 | as R0 | met only as a low single vial (CK-01 found no integrity error) |
+There are no kinetics and no conditioning on Table 2. Values are the median with 5 - 95 % in brackets. The real power
+check (sec. 4.4) replaces them. Script: `m3b_dry_bands_perARP.py`.
+
+| rival | D1 Y3 | D2 Y1 + Y3 | D3 Y1 / Y3 | D4 ARP-Phe decay (argon) | D5 | D6 Phe / ARP decayed | Table 2 argon (spent) |
+|---|---|---|---|---|---|---|---|
+| R0 as built | 0.29 (0.025 - 0.77); 0.14 (0.012 - 0.37) once conditioned on the seen ordering (Y1 > Y3) | 0.67 (0.21 - 0.94) | any (P(Y1 > Y3) 0.48 before conditioning) | first order at k_anox(85) = 0.36 x k_d (1 - sigma_ox), k_d in the transfer band | per sigma_ox and the Cu law | 0.89 (0.48 - 1.0): the eF exit releases Phe only at r_F ~ U[0, 1] | fails |
+| Ra | as R0 (shares unchanged) | as R0 | as R0 | **slower than R0** at the same Ea; first order, or an O2-depletion shape | **larger than R0** (O2 / Cu accelerate the decay) | as R0 | short ~2.5x |
+| Rb1 | 0.13 (0.01 - 0.53) | **0.31 (0.07 - 0.75)**, low for any k_tr | as R0 | as R0 | as R0 | 0.95 (0.68 - 1.0) | met by a_I |
+| Rb-ret | as Rb1 | as Rb1 | as R0 | as R0 | as R0 | **0.44 (0.11 - 0.87)** | met by a_I |
+| **Rab2** | **0.047 (0.044 - 0.047)**; enaminol form ~0.15 | 0.33 (0.18 - 0.42) at Martins' k9 | **large** (~6 x eps1 / eps3) | **as Ra** (slower than R0) | as Ra | 0.79 (0.60 - 0.98) | reaches it only at its low end (sec. 3.1) |
+| Rb2 (control) | as Rab2 | as Rab2 | as Rab2 | as R0 (Davidek 2002's rate at 90 C is inside R0's band) | as R0 | as Rab2 | fails (sec. 3.1) |
+| Rc | as R0 (the trap outcompetes a first-order loss: eps3 >= 0.70) | as R0, slightly lower | as R0 | as R0 | as R0 | as R0 | fails |
+| Rd | as R0 | as R0 | as R0 | as R0 | as R0 | as R0 | met only as a low single vial (CK-01 found no integrity error) |
 
 Read as classes, the rivals separate on Figs. 2 - 3 like this:
-- **Supply (Rb1, Rb2): low D2.** They split on D1 / D3: Rb2 has a tiny 3-DG share and much 1-DG; Rb1 scales every
+- **Supply (Rb1, Rab2): low D2.** They split on D1 / D3: Rab2 has a tiny 3-DG share and much 1-DG; Rb1 scales every
   osone down.
-- **Decay (Ra, Rb-ret): D4 and D5.** Osone per Phe as R0.
+- **Decay (Ra, Rab2): D4 and D5.** Now measured on the ARP-Phe series itself.
+- **Amine retention (Rb-ret): D6.** R0's free r_F overlaps its lower half.
 - **Downstream efficiency (Rc, Rd, the two not carried): indistinguishable from R0** on every unit.
 
 ### 4.3 Can Figs. 2 - 3 decide? What they can and cannot
 
 - **They can test the supply class against the downstream class.** D1 is nearly free of the trap confound. If the
-  trapped C6 osones per Phe liberated are high (D2 near R0's 0.77), there is no room for an inert bypass: Rb1 is
-  refuted, and the misfit's cause is downstream of the osone (Rc, Rd, the 1-DG fate in Rb2) or in the decay (Ra). If
-  D1 is ~0.05, Rb2's measured split is favoured over R0's Dirichlet prior.
+  trapped C6 osones per ARP decayed are high (D2 near R0's 0.67), there is no room for an inert bypass: Rb1 is
+  refuted, and the misfit's cause is downstream of the osone (Rc, Rd, 1-DG's fate) or in the decay (Ra). If D1 is
+  ~0.05, the measured split (Rab2) is favoured over R0's Dirichlet prior.
+- **The decay is now measured, not inferred (ARP-Phe is plotted, and its series is blind).** D4 tests Ra / Rab2 against
+  R0 on the anoxic decay itself, and D6 tests Rb-ret on the amine return. The seen 320-min Phe point (~55 %) becomes a
+  lower bound on ARP decayed under any rival that releases Phe. The Ea, order and acid-load transfers still sit between
+  85 C, 0.5 M and 100 C, 0.1 M.
 - **They cannot confirm Rb1 against R0 itself.** R0's own freedoms contain an inert corner: aF large with m small, or
   a1 large with k0_DG1 at its end. Conditioned on the spent argon datum, R0 moves there (the M3 prereg sec. 23
-  regression: the closest draws have a3 ~0.06, m ~0.07). The fragments are not trapped, and MGO / GO are probably not
-  plotted. So "Phe released and nothing trapped" reads the same whether the untrapped carbon is Strecker-inert (Rb1) or
-  inert fragments (R0's corner). Their difference on Figs. 2 - 3 is prior mass, not mechanism. **P(Rb1 vs R0 ends
-  "not separated") ~0.85.**
-- **Fragment MGO, the second-largest piece of the misfit (22 - 25 % of the baseline argon total), is not measured** by
-  Figs. 2 - 3 unless MGO is plotted. Martins (120 C) puts it large.
-- **Ra vs R0 is mostly spent.** The 320-min Phe point is seen and already implies ~0.006 - 0.008 /min at 100 C
-  (CF-121). What remains blind is the shape (D4) and D5, each confounded with a transfer (Ea, order, acid load, Cu
-  law) that the trapped pot cannot separate from the decay itself.
+  regression: the closest draws have a3 ~0.06, m ~0.07). The fragments are not trapped, and **MGO / GO are not plotted**
+  (design, sec. 0). So "ARP decayed, Phe released and nothing trapped" reads the same whether the untrapped carbon is
+  Strecker-inert (Rb1) or inert fragments (R0's corner). Their difference on Figs. 2 - 3 is prior mass, not mechanism.
+  **P(Rb1 vs R0 ends "not separated") ~0.85.**
+- **Fragment MGO is not measured** by Figs. 2 - 3. It is the second-largest piece of the misfit (22 - 25 % of the
+  baseline argon total), and Martins puts it at ~0.20 per ARP decayed at 100 C (sec. 3.1). This is now the case's main
+  unmeasured piece. It is also why Rb2 fails on development data while Rab2 survives only at its low end.
+- **The trap may make osone (new caveat, sec. 3.2).** Glomb's group warns that continuous OPD produces "false"
+  glucosone from the Amadori product. At 0.6 M OPD against 0.5 M ARP-Phe, part of the trapped osones (glucosone
+  surely; 1-DG / 3-DG possibly) may be OPD-made, not ARP exits. This biases D2 up, i.e. against Rb1 (a spurious
+  refutation), and biases M3's U3b. No size is on disk. It must enter the power check as a form: an OPD-induced osone
+  flux proportional to [OPD][ARP], from 0 up to the Gobert-floor bias allowance (factor 5).
 - **Rc vs R0 and Rd vs R0 cannot be separated** on any unit (identical predictions). Rc is already disfavoured on
   spent data (14 - 20 % closed). CK-01 found no integrity error, so Rd is left as an untestable low vial; Figs. 2 - 3 cannot speak to it.
 - **Every transfer is from 85 C, 0.5 M ARP, 0.6 M OPD, a falling pH and 25 mM Cu to 100 C, 0.1 M ARP, pH 7.0 and 5
@@ -329,16 +438,22 @@ Read as classes, the rivals separate on Figs. 2 - 3 like this:
   6.8; Deng: 3-DG ~7 % at pH 5.5 vs <= 1.8 % at pH 7.5). So **a3 at 85 C under acidification is not a3 at 100 C,
   pH 7.**
 - Under M1.1's omega (0.419 dex per printed value; a ratio carries 2 omega^2, 0.59 dex), the largest [dry] separation
-  is ~0.8 dex (Rb2 vs unconditioned R0 on D1) and the conditioned ones ~0.4 dex. With five correlated points per arm,
-  **the expected power is low** (the M3 power record found the same for U4 under omega).
+  is ~0.8 dex (Rab2 vs unconditioned R0 on D1). The conditioned ones are ~0.4 dex, and D6 (Rb-ret vs the rest) ~0.3
+  dex. With five correlated points per arm, **the expected power is low** (the M3 power record found the same for U4
+  under omega).
 
-**Overall: P(Figs. 2 - 3 decide between at least one pair of carried rivals at usable power) ~0.25. P(they decide the
-claim, Rb against R0) ~0.1.** The pairs most likely to clear the power check are Rb2 vs R0 on D1 and Rb1 vs R0 on D2,
-and only in the form that does not condition R0 on the argon datum.
+**Overall (revised 2026-11-06 after the design read, the k_tr floor and Martins' 100 C MGO):**
+- **P(at least one pair of carried rivals separates at usable power) ~0.4**, up from ~0.25. Reasons: ARP-Phe is
+  plotted, so D4 and D6 exist; the trap confound is narrower.
+- **P(they decide the claim against R0) ~0.15**, up from ~0.1. Rab2 vs R0 (D1 with D4) ~0.3; Rb1 vs R0 ~0.1.
+- P(Ra vs R0 separates on D4) ~0.25: the transfers dominate.
+- P(Rb-ret vs the rest on D6) ~0.3.
+- The pairs most likely to clear the power check are Rab2 vs R0 on D1 + D4 and Rb1 vs R0 on D2, and only in the form
+  that does not condition R0 on the argon datum.
 
 ### 4.4 What the power check must simulate (before the freeze)
 
-1. **Truths per rival** (R0, Ra, Rb1, Rb-ret, Rb2, Rc; R1 host, R4 form): draws from each rival's bands **conditioned
+1. **Truths per rival** (R0, Ra, Rb1, Rb-ret, Rab2, Rc, and Rb2 as the failing control; R1 host, R4 form): draws from each rival's bands **conditioned
    on the development set only**:
    - Table 2 (every arm), Fig. 1, Table 3, hofmann2000 Tables 3 - 4;
    - the seen text constraints on Figs. 2 - 3, since a truth that contradicts seen text is not a possible world: 1-DG
@@ -349,8 +464,9 @@ and only in the form that does not condition R0 on the argon datum.
 2. **The trapped pot as the M3 prereg sec. 3.2 - 3.4 builds it**:
    - 85 C via the exits' Ea [65, 85];
    - 0.5 M ARP with the order n [1, 2] (R4 host);
-   - OPD trapping, k_tr over its band with both ends as required agreement (a verdict that depends on k_tr's ends
-     does not ship);
+   - OPD trapping, k_tr on [0.3, 10] /min (sec. 3.2) with both ends as required agreement, and [0.1, 0.3) as a
+     sensitivity (a verdict that depends on k_tr's ends does not ship);
+   - the OPD artefact form: an OPD-induced osone flux from the ARP, from 0 up to the factor-5 bias allowance of sec. 3.2;
    - eps_X per species (3-DG with Ghiron's and Martins' losses; 1-DG with k0_DG1 [0.07, 1] and Martins' 1.909);
    - the in-situ pH from the acid load, y_acid [0.4, 1.1], under **both phosphate prints** (0.5 M and an unbuffered
      form), with the exit split's pH dependence (Rb2: Martins' pH 5.5 vs 6.8 columns as the two ends);
@@ -359,8 +475,8 @@ and only in the form that does not condition R0 on the argon datum.
      budget of the air / air + Cu arms that set sigma_ox, c_Cu5 and so k_anox; both ends required agreement;
    - the Cu law (5 -> 25 mM saturated or linear);
    - arp0 [90, 100] % and imp_Phe [0, 1] (free Phe at t = 0 inflates early Phe liberated).
-3. **The measurement model on the keyed design** (the times, series and axis resolution from the keying record's
-   header, obtained by the coordinator without reading values):
+3. **The measurement model on the keyed design** (sec. 0: five series per arm, ARP-Phe, Phe, 1-DG, 3-DG and glucosone;
+   20 / 40 / 80 / 180 / 320 min, ARP-Phe also at 0; y 0 - 1.00 mmol/mmol; no MGO / GO):
    - read error at the Fig. 1 keying level (<= 0.011 umol/mmol plus 0.03 dex), replaced at scoring by the adjudicated
      per-point error;
    - left-censoring at the axis resolution (~0.003 - 0.005 mmol/mmol; the x2 form);
@@ -369,17 +485,23 @@ and only in the form that does not condition R0 on the argon datum.
    - sigma_run 0.075 dex per arm, plus the between-points form;
    - **omega 0.419 per printed value in the primary covariance (M1.1), with the measurement-only covariance reported
      beside it**;
-   - **both designs: with and without an ARP-Phe series** (if ARP-Phe is plotted, D2 can be per ARP decayed and Rb-ret
-     separates from Ra).
-4. **The pairs:** Rb1 vs R0 (D2), Rb2 vs R0 (D1, D3), Rb1 vs Rb2 (D1, D3), Ra vs R0 (D4, D5), Rb-ret vs Ra (D2 with
-   an ARP series), Rc vs R0 (expected 0: a negative control for the check itself).
+   - the ARP-Phe series with the analyser CV and the purity coordinates (arp0, the ~430 - 500 mmol/L charge reading).
+4. **The pairs and controls:**
+   - Rb1 vs R0 (D2);
+   - Rab2 vs R0 (D1, D3, D4);
+   - Rb1 vs Rab2 (D1, D3);
+   - Ra vs R0 (D4, D5);
+   - Rb-ret vs Rb1 and vs R0 (D6);
+   - Rc vs R0, expected 0: a negative control for the check itself;
+   - Rb2 scored as the declared-failing control.
 5. **Scoring:** R = 200 synthetic sets per truth. The densities use M3 v2.1's estimator (reweighting, then the
    validated adaptive-tempering SMC). An unresolved density reads as a tie. Then the binomial demotion rule of M3
    prereg sec. 12.2: power must beat false credit by a one-sided exact test at 0.05, and power below 0.5 is labelled
    low.
-6. **The bound profile:** k_tr's ends, k0_DG1's ends, a_I's ends, the Cu law, and the conditioning form.
+6. **The bound profile:** k_tr's ends, k0_DG1's ends, a_I's ends, the Cu law, the OPD artefact form, and the
+   conditioning form.
 
-**Compute:** ~1 - 2 h work to adapt the M3 power harness. At 1 core, ~3 - 6 h unattended for six truths x R = 200
+**Compute:** ~1 - 2 h work to adapt the M3 power harness. At 1 core, ~3.5 - 7 h unattended for seven truths x R = 200
 under the primary and three forms, by the M3 record's per-density cost. It cannot run before PR #85's layer is
 importable.
 
@@ -387,8 +509,8 @@ importable.
 
 | comparison | noise as the source states it | where stated |
 |---|---|---|
-| D1 - D5 read error | two blind readers, adjudicated by a third: per point mean(A, B), error max(err_A, err_B, abs(A - B) / 2); axis read resolution sets the censoring level | M3 prereg sec. 7 (the rule; values unknown until scoring) |
-| D1 - D5 calibration | quinoxalines without a printed response factor: 3-DG, glucosone N(0, 0.10) dex; 1-DG N(0, 0.20), form 0.30; Phe by the amino-acid analyser N(0, 0.05) plus CV [2, 10] % | M3 prereg sec. 6 |
+| D1 - D6 read error | two blind readers, adjudicated by a third: per point mean(A, B), error max(err_A, err_B, abs(A - B) / 2); the axis read resolution on a 0 - 1.00 mmol/mmol axis sets the censoring level | M3 prereg sec. 7 (the rule; values unknown until scoring); axis from the design read (sec. 0) |
+| D1 - D6 calibration | quinoxalines without a printed response factor: 3-DG, glucosone N(0, 0.10) dex; 1-DG N(0, 0.20), form 0.30; Phe and ARP-Phe by the same amino-acid analyser N(0, 0.05) each plus CV [2, 10] % (in D6 the shared analyser scale partly cancels: declared form rho 0.5) | M3 prereg sec. 6 |
 | replicates | none printed (hofmann2000b: "not stated; no uncertainties printed") | dossier sec. 2 |
 | run to run (D5 and every cross-pot use) | sigma_run 0.075 dex per arm: the 7 - 18 % run scatter of this recipe (Table 2 vs Fig. 1 at 120 min) | CF-074, CF-075 |
 | model discrepancy | omega 0.419 dex per printed value (H0 EX-059 warm set; 0.390 sensitivity), the M1.1 rule | EX-059; M1.1 |
@@ -407,8 +529,8 @@ The protocol's best evidence for a mechanism is that it predicts beyond the misf
 | member | what it is | rival that speaks to it | direction | reading |
 |---|---|---|---|---|
 | **MF-32** (G11) | fed ARP-Phe decays slower (~0.006 - 0.010) than in-pot (>= 0.0126); the fed early / late shape drifts (early k 0.014, late 0.0078) | **Ra in its O2-accelerated form** | a 0.1 M ARP reflux pot (Fig. 1) and the argon trapped pot have less O2 per ARP than the ~5 mM ARP glucose pot, so they decay slower (right sign); O2 depletion in the fed reflux pot gives early-fast, late-slow (right sign) | **the only cross-misfit prediction found, and not unique.** The acid load (G1, MF-32 cand. (b)) predicts both signs too. A second-order law (R4) predicts the drift but the wrong sign for fed vs in-pot (the dilute glucose pot would decay slower). It does not decide Ra; it is why Ra is carried |
-| **MF-06** (G11 / G1) | cooled pH too acidic (buffered Cys pots); wrong shape in unbuffered ARP pots; cand. (a) the amine is returned | Rb-ret vs Rb1 / Rb2 | they differ on the amine returned per ARP decayed, the quantity cand. (a) turns on: Rb1 / Rb2 return it (Deng 0.88, Davidek 0.46 - 0.88); Rb-ret keeps it (Hou 0.25 - 0.40) | speaks to the same quantity, but the sources conflict by ~0.4 dex and MF-06's pH data need the CK-12 machinery (a run). No direction can be checked here. Rb2's acetic-acid exit adds acid per ARP, against MF-06's "too acidic" unless the amine return offsets it |
-| MF-29 itself | -- | Rb1 by construction; Ra short; Rb2 short on fragment MGO; Rc fails | -- | the nomination (spent) |
+| **MF-06** (G11 / G1) | cooled pH too acidic (buffered Cys pots); wrong shape in unbuffered ARP pots; cand. (a) the amine is returned | Rb-ret vs Rb1 / Rb2 | they differ on the amine returned per ARP decayed, the quantity cand. (a) turns on: Rb1 / Rb2 return it (Deng 0.88, Davidek 0.46 - 0.88); Rb-ret keeps it (Hou 0.25 - 0.40) | speaks to the same quantity, but the sources conflict by ~0.4 dex and MF-06's pH data need the CK-12 machinery (a run). No direction can be checked on seen data. **New:** D6 (Phe liberated per ARP-Phe decayed, blind) measures that quantity in a fed hexose ARP. Whatever it shows also bears on MF-06 cand. (a), but only for the DFA trapped pot, so a cross-misfit claim needs CK-12. Rb2's acetic-acid exit adds acid per ARP, against MF-06's "too acidic" unless the amine return offsets it |
+| MF-29 itself | -- | Rb1 by construction; Ra short; Rb2 fails on fragment MGO (sec. 3.1); Rab2 only at its low end; Rc fails | -- | the nomination (spent) |
 | **MF-30** (G8) | the B18 Strecker constant ~2.3 dex low; glucose-pot PA lag | Rb1 / Rb2 lower the 1-DG computed from the ARP in the layer's glucose pot | lowers late PA a little; the sign of the effect on the lag needs a run | no seen-data test without a run. A run would spend nothing new (hofmann2000 Fig. 2 is spent) and could be a development diagnostic |
 | **MF-34** (G8) | total pyrazines ~2.9 dex low: a supply deficit | every M3b rival lowers the ARP-made donor supply | **opposite sign**: carried into the network (phase 2), it would deepen the deficit | G8's deficits cannot share M3b's piece. They need another (amine identity, the CF-095 adduct sink, the B18 constant) |
 | **MF-12** (G8) | glucose + Cys gives almost no MFT; cand. (a) a Glc + Cys -> 1-DG step | Rb2 (1-DG the dominant anoxic osone) is consistent in spirit; Rb1 (bypass) is against | qualitative; another amine (Cys forms thiazolidines) | no test |
@@ -421,19 +543,17 @@ trunk's glucose MGO, not an ARP-made donor, and it is not counted.
 
 ## 7. Open questions before the freeze
 
-1. **Which series do Figs. 2 - 3 plot (ARP-Phe? MGO / GO?)**, and on what basis and with what axis resolution. The
-   coordinator should get this from the keying record's header without reading values; the power check needs the
-   design. If MGO is plotted, the fragment-MGO share becomes measurable and sec. 4.3's main gap closes.
+1. **Which series Figs. 2 - 3 plot: done** (sec. 0). ARP-Phe, Phe, 1-DG, 3-DG and glucosone are plotted; MGO and GO
+   are not. The fragment-MGO gap stays open. The cheapest design that would close it is a W6 trapped-ARP pot with MGO
+   quantified.
 2. **CK-01 / CK-50: done** (sec. 0). Table 2 holds; Rd is demoted. The scale, headspace and phosphate prints stay open
    and are carried as declared uncertainty.
-3. **A sourced floor for k_tr.** Gobert 2009's continuous vs post-incubation contrast (1-DG 23.5 vs 0.2 mmol/mol at 5
-   mM OPD, 50 C) implies the trap outcompetes 1-DG's own loss there. Carried to 0.6 M OPD at 85 C as a declared
-   transfer, it would put eps1 near 1 and make D2 and D3 informative. This must be decided before the power check.
+3. **k_tr floor: decided** (sec. 3.2). k_tr in [0.3, 10] /min primary, [0.1, 0.3) a sensitivity. It brings in a new
+   form, the OPD artefact.
 4. **The 1-DG Strecker efficiency.** Voigt 2010's ~10 mmol/mol (50 C, Ala) is an on-disk analogue that the diagnostic
    did not use. The M3 layer's s_DG1 band (up to MGO x 10^0.82) should be re-examined in the M3 record, not here.
-5. **Rb2's fragment-MGO share at 100 C.** Martins' Fig. 6 (100 C, pH 6.8) is in the dossier only as a caption. A read
-   of its MG panel (Martins is development, not decisive) would settle whether Rb2 can meet the spent argon datum at
-   all. It should be done before the freeze, so that Rb2 is not carried as a rival already known to fail.
+5. **Rb2's fragment-MGO share at 100 C: done** (sec. 3.1). Martins 2003b Fig. 4 gives ~0.20 MG per DFG decayed. Rb2
+   alone fails on development data and is kept as a declared-failing control. The composite Rab2 is carried.
 6. **Merge order.** The layer (PR #85) and the diagnostic (PR #81) are unmerged. This case cites them by branch.
 7. **CF entry.** No CF exists for MF-29 (inventory sec. 7). The register session should file the "every M3 rival
    over-predicts argon PA + PAA" conflict, citing this case (one writer per register; not filed here).
