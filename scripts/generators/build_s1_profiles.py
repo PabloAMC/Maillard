@@ -716,6 +716,8 @@ def markdown(p: Dict[str, Any]) -> str:
         out += [f"Conditional, no upgrade proposed ({CONDITIONAL_B0}): " + ", ".join(s["conditional_no_upgrade"]), ""]
     for f in p.get("findings", []):
         out.append(f"- **Finding.** {f}")
+    for name, nr in (p.get("not_run") or {}).items():
+        out.append(f"- **Not run: {name}.** {nr['reason']} Measured: {nr['measured']} Projection: {nr['projection']}")
     out += ["", "## Fits", "", "| fit | rows | free | dof | S in its report | S at frozen now | reproduced | S refit | "
             "S min | chi2_red | refit converged | Delta thresholds (raw / scaled / F) | wall s |",
             "|---|---:|---:|---:|---:|---:|---|---:|---:|---:|---|---|---:|"]
@@ -773,6 +775,21 @@ def markdown(p: Dict[str, Any]) -> str:
     out.append("")
     return "\n".join(out)
 
+
+#: fits whose profile was timed and not run (task brief: stop after the first three lanes when the sulfur lane would
+#: take more than ~6 h wall). Run ``--fit B60 --workers 4`` to compute them; the record then replaces this entry.
+NOT_RUN: Dict[str, Dict[str, str]] = {
+    "B60": {"coordinates": "the 10 sulfur rate constants and b8.ph_drift.arp_secondary_ammonium_pKa",
+            "reason": ("the sulfur-lane profiles (" + CONDITIONAL_B0 + ") would take far more than the ~6 h wall "
+                       "budget, so the run stopped after the trunk, acrylamide and b18 lanes."),
+            "measured": ("one profile point (22 coordinates re-optimised at one value of k_arp_tdp, B60's quick "
+                         "setting, 2 pot workers) had not finished after 34 min of wall time and was stopped; B60's "
+                         "own fit spent 7601 s on 246 evaluations (31 s each), so one forward Jacobian (23 columns) "
+                         "costs about 12 min."),
+            "projection": ("about 18 points per coordinate x 11 coordinates = ~200 points at >= 34 min each: >= 110 h "
+                           "serial, >= 28 h wall on 4 chains, plus the full refit. Porting B60's objective to the JAX "
+                           "fit path (the network carries sulfur since A2 + H3) is the route to a feasible run.")},
+}
 
 METHOD = {
     "what": ("For each coordinate, on the fit that froze its shipped value and that fit's own residual function, rows, "
@@ -840,6 +857,7 @@ def finalize(p: Dict[str, Any]) -> Dict[str, Any]:
                             f"{fb['refit']['S_at_frozen']:.3f}, S_min {fb['S_min']:.3f}; coordinates moved > 1e-3: "
                             f"{', '.join(moved) or 'none'}); the profile is around today's optimum.")
     p["findings"] = findings
+    p["not_run"] = {k: v for k, v in NOT_RUN.items() if k not in p["fits"]}
     p["summary"] = summary(p)
     p["coordinates"] = {c: p["coordinates"][c] for c in COORDINATES if c in p["coordinates"]}
     return p

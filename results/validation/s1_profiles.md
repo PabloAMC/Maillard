@@ -15,7 +15,7 @@ Judgement: meets the profile requirement = the scaled interval closes on BOTH si
 | work group | coordinates | profiled | meet the requirement | flat or one-sided | not profiled |
 |---|---:|---:|---|---|---|
 | trunk | 13 | 13 | k_mgo_mel.log10_k_ref, k_tdg_ddg.log10_k_ref, k_ddg_tdg.log10_k_ref, k_ddg_dgal.log10_k_ref, k_dgal_ddg.log10_k_ref, k_ddg_hmf.log10_k_ref, k_mgo_ak.log10_k_ref, k_glyc.log10_k_ref, k_flp_cml.log10_k_ref, k_flp_cel.log10_k_ref, k_flp_decay.log10_k_ref, k_cml_loss.log10_k_ref | — | — |
-| acrylamide | 2 | 0 | — | — | k_acr_dp.log10_k_ref, k_acr_dp.ea_kj_mol |
+| acrylamide | 2 | 2 | k_acr_dp.log10_k_ref, k_acr_dp.ea_kj_mol | — | — |
 | b18 | 2 | 0 | — | — | b18.ph_slope_above_7_decades_per_unit, b18.ph_slope_below_7_decades_per_unit |
 | sulfur | 11 | 0 | — | — | k_arp_tdp.log10_k_ref, k_tdp_fur.log10_k_ref, k_nf_mft.log10_k_ref, k_nf_mp3p.log10_k_ref, k_mgo_mp.log10_k_ref, k_fft_decay.log10_k_ref, k_osone_decay.log10_k_ref, k_pent_caramel.log10_k_ref, k_cys_thermal.log10_k_ref, k_thiolate_loss.log10_k_ref, b8.ph_drift.arp_secondary_ammonium_pKa |
 
@@ -34,6 +34,7 @@ Proposed upgrades (each needs a second reader before it enters the register): k_
 | B1 | 354 | 8 | 346 | 3979.877 | 5025.874 | no | 4943.031 | 4943.031 | 14.286 | yes | 3.84 / 54.88 / 55.27 | 189 |
 | B18 | 10 | 6 | 4 | 2.644 | 295.068 | no | 75.252 | 75.252 | 18.813 | yes | 3.84 / 72.27 / 145.02 | 511 |
 | B41 | 12 | 5 | 7 | 0.811 | 0.811 | yes | 0.764 | 0.764 | 0.109 | yes | 3.84 / 3.84 / — | 639 |
+| B3 | 30 | 11 | 19 | 105.302 | 105.416 | yes | 105.410 | 105.410 | 5.548 | yes | 3.84 / 21.31 / 24.30 | 2517 |
 
 Held fixed by each fit (not profiled; for the second reader):
 
@@ -41,6 +42,7 @@ Held fixed by each fit (not profiled; for the second reader):
 - **B1** (results/validation/kinetic_core_b1_fit_report.json (variant_A)): Martins & van Boekel 2005's ten measured trunk steps (incl. the melanoidin step 9), fixed at their measured values.
 - **B18** (results/validation/kinetic_core_b18_fit_report.json): the declared aminoketone condensation (K_COND); every trunk constant at its B1-operative value (incl. B1's fitted k_mgo_mel, which consumes MGO in the fed-MGO pots).
 - **B41** (results/validation/kinetic_core_b41_fit_report.json): k_tdg_fa (a B1 fit row, Martins), k_tdg_mgo (Kocadagli), k_glc_tdg (the glucose entry); the declared barrier of the three new steps; every other trunk constant at its shipped value. the S1 record names B39; the shipped values are B41's optimum (parameters_dicarbonyl.SHIPPING_FIT_REPORT).
+- **B3** (results/validation/kinetic_core_b3_fit_report.json): B1's four trunk fits (inherited frozen, incl. k_mgo_mel and k_aa_frag); the measured acrylamide constants; the scavenging channels' measured Ea_E2. the SPI extrusion row (spi_extrusion_130C_acrylamide_ppb) is withdrawn in the S1 record (CF-131) but is in B3's frozen objective; the profile is of the objective as frozen.
 
 ## Coordinates
 
@@ -59,8 +61,8 @@ Held fixed by each fit (not profiled; for the second reader):
 | k_flp_cel.log10_k_ref | B20 | -3.652 | -3.652 | 0.219 | [-3.871, -3.433] | [-3.770, -3.534] | [-3.939, -3.365] | pinned | yes | — | yes | **yes** | fit rows flagged in the S1 record: B20: every B20 row (Nguyen 2016 rate table) (fitted under a network the source contradicts; CF-072) / no S4 band: no band on record / not proposed |
 | k_flp_decay.log10_k_ref | B20 | -1.856 | -1.856 | 0.298 | [-2.154, -1.558] | [-2.017, -1.695] | [-2.247, -1.465] | pinned | yes | — | yes | **yes** | fit rows flagged in the S1 record: B20: every B20 row (Nguyen 2016 rate table) (fitted under a network the source contradicts; CF-072) / no S4 band: no band on record / not proposed |
 | k_cml_loss.log10_k_ref | B20 | -0.983 | -0.983 | 0.495 | [-1.478, -0.488] | [-1.250, -0.716] | [-1.632, -0.333] | pinned | yes | — | yes | **yes** | fit rows flagged in the S1 record: B20: every B20 row (Nguyen 2016 rate table) (fitted under a network the source contradicts; CF-072) / no S4 band: no band on record / not proposed |
-| k_acr_dp.log10_k_ref | B3 | | | | not profiled | | | | | | | | |
-| k_acr_dp.ea_kj_mol | B3 | | | | not profiled | | | | | | | | |
+| k_acr_dp.log10_k_ref | B3 | -0.898 | -0.898 | 0.445 | [-1.355, -0.472] | [-1.088, -0.715] | [-1.386, -0.443] | pinned | yes | — | yes | **yes** | fit rows flagged in the S1 record: B3: spi_extrusion_130C_acrylamide_ppb (withdrawn charge; CF-131) / no S4 band: envelope prior b3.k_acr_dp.log10_k_ref_160C: sigma 0.2273 is the fit's own Laplace sigma (a fit output, not a measured or class band) / not proposed |
+| k_acr_dp.ea_kj_mol | B3 | 136.109 | 136.150 | 48.105 | [92.225, 182.422] | [116.953, 155.554] | [89.348, 185.686] | pinned | yes | — | yes | **yes** | fit rows flagged in the S1 record: B3: spi_extrusion_130C_acrylamide_ppb (withdrawn charge; CF-131) / no S4 band: envelope prior b3.Ea_acr_dp: sigma 24.54 is the fit's own Laplace sigma (a fit output, not a measured or class band) / not proposed |
 | b18.ph_slope_above_7_decades_per_unit | B18 | | | | not profiled | | | | | | | | |
 | b18.ph_slope_below_7_decades_per_unit | B18 | | | | not profiled | | | | | | | | |
 | k_arp_tdp.log10_k_ref | B60 | | | | not profiled | | | | | | | | |
@@ -92,3 +94,5 @@ Delta = S_p(psi) - S_min (S = r . r on the fit's own rows); c = the others' fit 
 - **k_flp_cel.log10_k_ref** (B20 `log10_k_flp_cel_100C`, search bounds [-5.652, -1.652]): -4.090: 52.88; -4.003: 33.84; -3.915: 19.04; -3.827: 8.46; -3.740: 2.12; -3.652: 0.00; -3.564: 2.12; -3.477: 8.46; -3.389: 19.04; -3.302: 33.84; -3.214: 52.88
 - **k_flp_decay.log10_k_ref** (B20 `log10_k_flp_decay_100C`, search bounds [-3.856, 0.144]): -2.452: 52.88; -2.333: 33.84; -2.214: 19.04; -2.094: 8.46; -1.975: 2.12; -1.856: 0.00; -1.737: 2.12; -1.618: 8.46; -1.499: 19.04; -1.379: 33.84; -1.260: 52.88
 - **k_cml_loss.log10_k_ref** (B20 `log10_k_cml_loss_100C`, search bounds [-2.983, 1.017]): -1.973: 52.88; -1.775: 33.84; -1.577: 19.04; -1.379: 8.46; -1.181: 2.12; -0.983: 0.00; -0.785: 2.12; -0.587: 8.46; -0.389: 19.04; -0.190: 33.84; 0.008: 52.88
+- **k_acr_dp.log10_k_ref** (B3 `k_acr_dp`, search bounds [-4.000, 1.000]): -1.610: 51.75; -1.432: 29.08; -1.254: 12.94; -1.076: 3.37; -0.898: 0.00; -0.720: 3.64; -0.541: 14.83; -0.363: 33.74; -0.185: 60.34
+- **k_acr_dp.ea_kj_mol** (B3 `Ea_acr_dp`, search bounds [20.000, 260.000]): 59.182: 64.01; 78.424: 37.45; 97.666: 16.19; 116.908: 3.86; 136.150: 0.00; 155.392: 3.78; 174.634: 14.97; 193.876: 32.68; 213.118: 56.45

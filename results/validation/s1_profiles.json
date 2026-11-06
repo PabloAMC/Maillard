@@ -406,6 +406,138 @@
         "F": null
       },
       "seconds": 639.2
+    },
+    "B3": {
+      "fit": "B3",
+      "report": "results/validation/kinetic_core_b3_fit_report.json",
+      "generator": "scripts/generators/generate_kinetic_core_b3_fit.py residuals (quick=True, the setting the frozen fit ran at)",
+      "objective": "B3's 30 declared fit rows (Claeys 2005, De Vleeschouwer 2009, Knol 2005, the SPI extrusion benchmark): log10 rate / ppb rows, linear Ea rows, one-sided ceiling",
+      "held_fixed": "B1's four trunk fits (inherited frozen, incl. k_mgo_mel and k_aa_frag); the measured acrylamide constants; the scavenging channels' measured Ea_E2",
+      "rows_withdrawn_note": "the SPI extrusion row (spi_extrusion_130C_acrylamide_ppb) is withdrawn in the S1 record (CF-131) but is in B3's frozen objective; the profile is of the objective as frozen",
+      "keys": [
+        "k_int1_mel",
+        "k_acr_dp",
+        "k_gln_glc",
+        "k_lys_glc",
+        "k_ala_glc",
+        "k_acr_gln",
+        "k_acr_lys",
+        "k_acr_ala",
+        "Ea_int1_mel",
+        "Ea_acr_dp",
+        "Ea_competitor_sugar"
+      ],
+      "kinds": [
+        "log10k",
+        "log10k",
+        "log10k",
+        "log10k",
+        "log10k",
+        "log10k",
+        "log10k",
+        "log10k",
+        "Ea",
+        "Ea",
+        "Ea"
+      ],
+      "lower": [
+        -6.0,
+        -4.0,
+        -9.0,
+        -9.0,
+        -9.0,
+        -9.0,
+        -9.0,
+        -9.0,
+        20.0,
+        20.0,
+        20.0
+      ],
+      "upper": [
+        2.0,
+        1.0,
+        -1.0,
+        -1.0,
+        -1.0,
+        0.0,
+        0.0,
+        0.0,
+        260.0,
+        260.0,
+        260.0
+      ],
+      "n_rows": 30,
+      "n_free": 11,
+      "dof": 19,
+      "driver": {
+        "fit": "src.kinetic_core.fitting.fit",
+        "settings": {
+          "method": "trf",
+          "x_scale": "jac",
+          "ftol": 1e-06,
+          "xtol": 1e-08
+        },
+        "jacobian": "forward differences, absolute per-kind steps (fitting.STEPS / EXTRA_STEPS)",
+        "central_polish_calls": 2,
+        "budget_per_fit": 2000,
+        "workers": 4
+      },
+      "refit": {
+        "status": 2,
+        "converged": true,
+        "evaluations": 146,
+        "polish_flagged": false,
+        "polish": {
+          "carried": "polished",
+          "exhausted": false,
+          "raised_cost": false,
+          "forward_cost": 52.704979080865726,
+          "polished_cost": 52.70490323644749
+        },
+        "converged_profile": true,
+        "x": [
+          -4.386821330580736,
+          -0.8977357250094384,
+          -8.80617643539384,
+          -2.6462032932900046,
+          -8.723696533136772,
+          -1.8933984959321395,
+          -2.5086813240602153,
+          -8.999828623468275,
+          259.99968600809854,
+          136.15012821410755,
+          20.000000000626894
+        ],
+        "S": 105.40980647289499,
+        "failed_rows": 0,
+        "seconds": 268.88,
+        "x_frozen": [
+          -4.49609939573632,
+          -0.8978334423341812,
+          -7.8355036696571805,
+          -2.595910646804505,
+          -6.8723102887066405,
+          -1.894602070316578,
+          -2.4915117796873094,
+          -8.82499890965576,
+          259.9995034093972,
+          136.10927178572982,
+          20.000000000000007
+        ],
+        "S_at_frozen": 105.41588373230645
+      },
+      "S_reported_at_freeze": 105.30228565562297,
+      "frozen_objective_reproduced": true,
+      "S_refit": 105.40980647289499,
+      "S_min": 105.40980647289499,
+      "lower_optimum_found_by_profile": false,
+      "chi2_red": 5.547884551204999,
+      "thresholds_delta": {
+        "raw": 3.841458820694124,
+        "scaled": 21.311970045419105,
+        "F": 24.30389354078362
+      },
+      "seconds": 2517.0
     }
   },
   "coordinates": {
@@ -5231,14 +5363,672 @@
         ]
       },
       "spent_data": "identification only, never credit: the profile is on the fit's own rows (item 2, spent data)"
+    },
+    "k_acr_dp.log10_k_ref": {
+      "id": "k_acr_dp.log10_k_ref",
+      "lane": "acrylamide",
+      "group": "acrylamide",
+      "fit": "B3",
+      "fit_coordinate": "k_acr_dp",
+      "shipped_value": -0.8978334423341812,
+      "s1_fit_named": "B3",
+      "laplace_ci95_halfwidth": 0.44541374813828943,
+      "x_frozen": -0.8978334423341812,
+      "x_hat": -0.8977357250094384,
+      "h0": 0.17816549925531577,
+      "grid": [
+        -1.6103977220307015,
+        -1.4322322227753856,
+        -1.25406672352007,
+        -1.0759012242647543,
+        -0.8977357250094384,
+        -0.7195702257541227,
+        -0.5414047264988069,
+        -0.3632392272434911,
+        -0.18507372798817534
+      ],
+      "profile": [
+        {
+          "value": -1.6103977220307015,
+          "S": 157.16072603991256,
+          "delta": 51.750919567017576,
+          "converged": true,
+          "driver_converged": true,
+          "status": 2,
+          "evaluations": 183,
+          "failed_rows": 0,
+          "polish": {
+            "carried": "polished",
+            "exhausted": false,
+            "raised_cost": false,
+            "forward_cost": 78.58065357613557,
+            "polished_cost": 78.58036301995628
+          },
+          "retried": null,
+          "others": {
+            "k_int1_mel": -4.012635,
+            "k_gln_glc": -2.626129,
+            "k_lys_glc": -1.628764,
+            "k_ala_glc": -3.060373,
+            "k_acr_gln": -1.720717,
+            "k_acr_lys": -1.572511,
+            "k_acr_ala": -9.0,
+            "Ea_int1_mel": 260.0,
+            "Ea_acr_dp": 137.756535,
+            "Ea_competitor_sugar": 20.0
+          }
+        },
+        {
+          "value": -1.4322322227753856,
+          "S": 134.48651965300138,
+          "delta": 29.076713180106395,
+          "converged": true,
+          "driver_converged": true,
+          "status": 2,
+          "evaluations": 158,
+          "failed_rows": 0,
+          "polish": {
+            "carried": "polished",
+            "exhausted": false,
+            "raised_cost": false,
+            "forward_cost": 67.24345157955257,
+            "polished_cost": 67.24325982650069
+          },
+          "retried": null,
+          "others": {
+            "k_int1_mel": -4.118591,
+            "k_gln_glc": -3.075575,
+            "k_lys_glc": -1.779432,
+            "k_ala_glc": -9.0,
+            "k_acr_gln": -1.796317,
+            "k_acr_lys": -1.729386,
+            "k_acr_ala": -9.0,
+            "Ea_int1_mel": 260.0,
+            "Ea_acr_dp": 138.481196,
+            "Ea_competitor_sugar": 20.0
+          }
+        },
+        {
+          "value": -1.25406672352007,
+          "S": 118.3469977735105,
+          "delta": 12.93719130061551,
+          "converged": true,
+          "driver_converged": true,
+          "status": 2,
+          "evaluations": 207,
+          "failed_rows": 0,
+          "polish": {
+            "carried": "polished",
+            "exhausted": false,
+            "raised_cost": false,
+            "forward_cost": 59.17365869995168,
+            "polished_cost": 59.17349888675525
+          },
+          "retried": null,
+          "others": {
+            "k_int1_mel": -4.208492,
+            "k_gln_glc": -8.668225,
+            "k_lys_glc": -1.963595,
+            "k_ala_glc": -9.0,
+            "k_acr_gln": -1.850153,
+            "k_acr_lys": -1.903876,
+            "k_acr_ala": -9.0,
+            "Ea_int1_mel": 260.0,
+            "Ea_acr_dp": 138.448838,
+            "Ea_competitor_sugar": 20.0
+          }
+        },
+        {
+          "value": -1.0759012242647543,
+          "S": 108.78168435069526,
+          "delta": 3.371877877800273,
+          "converged": true,
+          "driver_converged": true,
+          "status": 2,
+          "evaluations": 196,
+          "failed_rows": 0,
+          "polish": {
+            "carried": "polished",
+            "exhausted": false,
+            "raised_cost": false,
+            "forward_cost": 54.39096575770326,
+            "polished_cost": 54.39084217534763
+          },
+          "retried": null,
+          "others": {
+            "k_int1_mel": -4.284151,
+            "k_gln_glc": -8.997669,
+            "k_lys_glc": -2.205356,
+            "k_ala_glc": -8.999714,
+            "k_acr_gln": -1.870349,
+            "k_acr_lys": -2.126556,
+            "k_acr_ala": -8.997389,
+            "Ea_int1_mel": 260.0,
+            "Ea_acr_dp": 137.59316,
+            "Ea_competitor_sugar": 20.0
+          }
+        },
+        {
+          "value": -0.8977357250094384,
+          "S": 105.40980647289499,
+          "delta": 0.0,
+          "converged": true,
+          "driver_converged": true,
+          "status": 2,
+          "evaluations": 146,
+          "failed_rows": 0,
+          "others": null
+        },
+        {
+          "value": -0.7195702257541227,
+          "S": 109.05316312626265,
+          "delta": 3.643356653367661,
+          "converged": true,
+          "driver_converged": true,
+          "status": 2,
+          "evaluations": 181,
+          "failed_rows": 0,
+          "polish": {
+            "carried": "polished",
+            "exhausted": false,
+            "raised_cost": false,
+            "forward_cost": 54.526853162483675,
+            "polished_cost": 54.52658156313132
+          },
+          "retried": null,
+          "others": {
+            "k_int1_mel": -4.489029,
+            "k_gln_glc": -8.999915,
+            "k_lys_glc": -3.846257,
+            "k_ala_glc": -8.996543,
+            "k_acr_gln": -1.92454,
+            "k_acr_lys": -3.631311,
+            "k_acr_ala": -8.999997,
+            "Ea_int1_mel": 260.0,
+            "Ea_acr_dp": 134.437832,
+            "Ea_competitor_sugar": 20.0
+          }
+        },
+        {
+          "value": -0.5414047264988069,
+          "S": 120.2378304183276,
+          "delta": 14.82802394543262,
+          "converged": true,
+          "driver_converged": true,
+          "status": 2,
+          "evaluations": 113,
+          "failed_rows": 0,
+          "polish": {
+            "carried": "polished",
+            "exhausted": false,
+            "raised_cost": false,
+            "forward_cost": 60.118941348548795,
+            "polished_cost": 60.1189152091638
+          },
+          "retried": null,
+          "others": {
+            "k_int1_mel": -4.492805,
+            "k_gln_glc": -8.961161,
+            "k_lys_glc": -4.339006,
+            "k_ala_glc": -6.185519,
+            "k_acr_gln": -1.954236,
+            "k_acr_lys": -6.850976,
+            "k_acr_ala": -9.0,
+            "Ea_int1_mel": 260.0,
+            "Ea_acr_dp": 133.820146,
+            "Ea_competitor_sugar": 20.0
+          }
+        },
+        {
+          "value": -0.3632392272434911,
+          "S": 139.1471347857593,
+          "delta": 33.73732831286432,
+          "converged": true,
+          "driver_converged": true,
+          "status": 2,
+          "evaluations": 79,
+          "failed_rows": 0,
+          "polish": {
+            "carried": "polished",
+            "exhausted": false,
+            "raised_cost": false,
+            "forward_cost": 69.57363351689969,
+            "polished_cost": 69.57356739287965
+          },
+          "retried": null,
+          "others": {
+            "k_int1_mel": -4.494297,
+            "k_gln_glc": -8.999393,
+            "k_lys_glc": -4.610486,
+            "k_ala_glc": -8.906129,
+            "k_acr_gln": -2.002069,
+            "k_acr_lys": -7.491537,
+            "k_acr_ala": -8.788814,
+            "Ea_int1_mel": 260.0,
+            "Ea_acr_dp": 133.347425,
+            "Ea_competitor_sugar": 20.0
+          }
+        },
+        {
+          "value": -0.18507372798817534,
+          "S": 165.7534246216997,
+          "delta": 60.34361814880472,
+          "converged": true,
+          "driver_converged": true,
+          "status": 2,
+          "evaluations": 89,
+          "failed_rows": 0,
+          "polish": {
+            "carried": "polished",
+            "exhausted": false,
+            "raised_cost": false,
+            "forward_cost": 82.87671786164728,
+            "polished_cost": 82.87671231084985
+          },
+          "retried": null,
+          "others": {
+            "k_int1_mel": -4.492534,
+            "k_gln_glc": -8.999996,
+            "k_lys_glc": -4.158144,
+            "k_ala_glc": -8.999341,
+            "k_acr_gln": -2.083443,
+            "k_acr_lys": -8.994167,
+            "k_acr_ala": -8.999276,
+            "Ea_int1_mel": 260.0,
+            "Ea_acr_dp": 132.950114,
+            "Ea_competitor_sugar": 20.0
+          }
+        }
+      ],
+      "intervals": {
+        "raw": {
+          "threshold_delta": 3.841458820694124,
+          "lower": -1.0884190742428097,
+          "upper": -0.714872310572727,
+          "closed_lower": true,
+          "closed_upper": true,
+          "half_width": 0.18677338183504133
+        },
+        "scaled": {
+          "threshold_delta": 21.311970045419105,
+          "lower": -1.3552489946394883,
+          "upper": -0.47171254650409605,
+          "closed_lower": true,
+          "closed_upper": true,
+          "half_width": 0.4417682240676961
+        },
+        "F": {
+          "threshold_delta": 24.30389354078362,
+          "lower": -1.3863490571259427,
+          "upper": -0.4431894778327837,
+          "closed_lower": true,
+          "closed_upper": true,
+          "half_width": 0.47157978964657954
+        }
+      },
+      "verdict": {
+        "shape": "pinned",
+        "pinned_both_sides_by_likelihood": true,
+        "inside_s4_band": null,
+        "s4_band": null,
+        "s4_band_note": "envelope prior b3.k_acr_dp.log10_k_ref_160C: sigma 0.2273 is the fit's own Laplace sigma (a fit output, not a measured or class band)",
+        "ci_spans_s4_band": null,
+        "refit_converged": true,
+        "shipped_value_inside_interval": true,
+        "converged_inside_interval": true,
+        "non_converged_points": [],
+        "driver_flagged_points_polish_raised_cost": [],
+        "points_with_failed_pots": [],
+        "meets_profile_requirement": true,
+        "conditional": null,
+        "fit_rows_flagged_in_s1_record": [
+          "B3: spi_extrusion_130C_acrylamide_ppb (withdrawn charge; CF-131)"
+        ],
+        "fit_objective_reproduced": true,
+        "proposed_upgrade": false,
+        "search_bounds": [
+          -4.0,
+          1.0
+        ]
+      },
+      "spent_data": "identification only, never credit: the profile is on the fit's own rows (item 2, spent data)"
+    },
+    "k_acr_dp.ea_kj_mol": {
+      "id": "k_acr_dp.ea_kj_mol",
+      "lane": "acrylamide",
+      "group": "acrylamide",
+      "fit": "B3",
+      "fit_coordinate": "Ea_acr_dp",
+      "shipped_value": 136.10927178572982,
+      "s1_fit_named": "B3",
+      "laplace_ci95_halfwidth": 48.10517217087043,
+      "x_frozen": 136.10927178572982,
+      "x_hat": 136.15012821410755,
+      "h0": 19.242068868348174,
+      "grid": [
+        59.18185274071486,
+        78.42392160906303,
+        97.66599047741121,
+        116.90805934575938,
+        136.15012821410755,
+        155.39219708245574,
+        174.6342659508039,
+        193.87633481915208,
+        213.11840368750023
+      ],
+      "profile": [
+        {
+          "value": 59.18185274071486,
+          "S": 169.4162184558662,
+          "delta": 64.0064119829712,
+          "converged": true,
+          "driver_converged": true,
+          "status": 2,
+          "evaluations": 439,
+          "failed_rows": 0,
+          "polish": {
+            "carried": "polished",
+            "exhausted": false,
+            "raised_cost": false,
+            "forward_cost": 84.70970802400836,
+            "polished_cost": 84.7081092279331
+          },
+          "retried": null,
+          "others": {
+            "k_int1_mel": -3.941502,
+            "k_acr_dp": -0.964723,
+            "k_gln_glc": -2.512787,
+            "k_lys_glc": -1.491044,
+            "k_ala_glc": -2.902018,
+            "k_acr_gln": -1.744387,
+            "k_acr_lys": -1.286344,
+            "k_acr_ala": -8.997465,
+            "Ea_int1_mel": 259.999979,
+            "Ea_competitor_sugar": 20.0
+          }
+        },
+        {
+          "value": 78.42392160906303,
+          "S": 142.86152013346214,
+          "delta": 37.45171366056715,
+          "converged": true,
+          "driver_converged": true,
+          "status": 2,
+          "evaluations": 144,
+          "failed_rows": 0,
+          "polish": {
+            "carried": "polished",
+            "exhausted": false,
+            "raised_cost": false,
+            "forward_cost": 71.43092399568695,
+            "polished_cost": 71.43076006673107
+          },
+          "retried": null,
+          "others": {
+            "k_int1_mel": -4.492376,
+            "k_acr_dp": -0.883898,
+            "k_gln_glc": -8.98018,
+            "k_lys_glc": -4.359759,
+            "k_ala_glc": -8.984955,
+            "k_acr_gln": -2.368494,
+            "k_acr_lys": -8.999839,
+            "k_acr_ala": -8.99995,
+            "Ea_int1_mel": 259.999242,
+            "Ea_competitor_sugar": 20.0
+          }
+        },
+        {
+          "value": 97.66599047741121,
+          "S": 121.60092987821007,
+          "delta": 16.191123405315082,
+          "converged": true,
+          "driver_converged": true,
+          "status": 2,
+          "evaluations": 172,
+          "failed_rows": 0,
+          "polish": {
+            "carried": "polished",
+            "exhausted": false,
+            "raised_cost": false,
+            "forward_cost": 60.800620646740846,
+            "polished_cost": 60.800464939105034
+          },
+          "retried": null,
+          "others": {
+            "k_int1_mel": -4.493772,
+            "k_acr_dp": -0.881472,
+            "k_gln_glc": -8.292215,
+            "k_lys_glc": -4.414968,
+            "k_ala_glc": -8.576351,
+            "k_acr_gln": -2.280035,
+            "k_acr_lys": -8.986058,
+            "k_acr_ala": -8.999069,
+            "Ea_int1_mel": 259.995999,
+            "Ea_competitor_sugar": 20.0
+          }
+        },
+        {
+          "value": 116.90805934575938,
+          "S": 109.26937135136653,
+          "delta": 3.859564878471545,
+          "converged": true,
+          "driver_converged": true,
+          "status": 2,
+          "evaluations": 181,
+          "failed_rows": 0,
+          "polish": {
+            "carried": "polished",
+            "exhausted": false,
+            "raised_cost": false,
+            "forward_cost": 54.63479577945208,
+            "polished_cost": 54.634685675683265
+          },
+          "retried": null,
+          "others": {
+            "k_int1_mel": -4.494926,
+            "k_acr_dp": -0.884652,
+            "k_gln_glc": -8.494527,
+            "k_lys_glc": -4.461946,
+            "k_ala_glc": -8.962399,
+            "k_acr_gln": -2.064753,
+            "k_acr_lys": -8.867795,
+            "k_acr_ala": -9.0,
+            "Ea_int1_mel": 259.995483,
+            "Ea_competitor_sugar": 20.0
+          }
+        },
+        {
+          "value": 136.15012821410755,
+          "S": 105.40980647289499,
+          "delta": 0.0,
+          "converged": true,
+          "driver_converged": true,
+          "status": 2,
+          "evaluations": 146,
+          "failed_rows": 0,
+          "others": null
+        },
+        {
+          "value": 155.39219708245574,
+          "S": 109.18809428769893,
+          "delta": 3.778287814803946,
+          "converged": true,
+          "driver_converged": true,
+          "status": 2,
+          "evaluations": 159,
+          "failed_rows": 0,
+          "polish": {
+            "carried": "polished",
+            "exhausted": false,
+            "raised_cost": false,
+            "forward_cost": 54.59415036843229,
+            "polished_cost": 54.594047143849465
+          },
+          "retried": null,
+          "others": {
+            "k_int1_mel": -4.369422,
+            "k_acr_dp": -0.913303,
+            "k_gln_glc": -8.944623,
+            "k_lys_glc": -2.560755,
+            "k_ala_glc": -6.100744,
+            "k_acr_gln": -1.760259,
+            "k_acr_lys": -2.133183,
+            "k_acr_ala": -9.0,
+            "Ea_int1_mel": 260.0,
+            "Ea_competitor_sugar": 20.0
+          }
+        },
+        {
+          "value": 174.6342659508039,
+          "S": 120.37660104339716,
+          "delta": 14.966794570502174,
+          "converged": true,
+          "driver_converged": true,
+          "status": 2,
+          "evaluations": 153,
+          "failed_rows": 0,
+          "polish": {
+            "carried": "polished",
+            "exhausted": false,
+            "raised_cost": false,
+            "forward_cost": 60.18832681091087,
+            "polished_cost": 60.18830052169858
+          },
+          "retried": null,
+          "others": {
+            "k_int1_mel": -4.391319,
+            "k_acr_dp": -0.929646,
+            "k_gln_glc": -8.92927,
+            "k_lys_glc": -2.667035,
+            "k_ala_glc": -6.392276,
+            "k_acr_gln": -1.649975,
+            "k_acr_lys": -1.953008,
+            "k_acr_ala": -3.528961,
+            "Ea_int1_mel": 260.0,
+            "Ea_competitor_sugar": 20.0
+          }
+        },
+        {
+          "value": 193.87633481915208,
+          "S": 138.0860062401813,
+          "delta": 32.676199767286306,
+          "converged": true,
+          "driver_converged": true,
+          "status": 2,
+          "evaluations": 110,
+          "failed_rows": 0,
+          "polish": {
+            "carried": "polished",
+            "exhausted": false,
+            "raised_cost": false,
+            "forward_cost": 69.04300980080204,
+            "polished_cost": 69.04300312009065
+          },
+          "retried": null,
+          "others": {
+            "k_int1_mel": -4.432979,
+            "k_acr_dp": -0.950784,
+            "k_gln_glc": -8.99963,
+            "k_lys_glc": -2.919619,
+            "k_ala_glc": -8.844758,
+            "k_acr_gln": -1.555988,
+            "k_acr_lys": -1.83772,
+            "k_acr_ala": -2.710076,
+            "Ea_int1_mel": 260.0,
+            "Ea_competitor_sugar": 20.0
+          }
+        },
+        {
+          "value": 213.11840368750023,
+          "S": 161.85587557274593,
+          "delta": 56.446069099850945,
+          "converged": true,
+          "driver_converged": true,
+          "status": 2,
+          "evaluations": 180,
+          "failed_rows": 0,
+          "polish": {
+            "carried": "polished",
+            "exhausted": false,
+            "raised_cost": false,
+            "forward_cost": 80.92811795271683,
+            "polished_cost": 80.92793778637296
+          },
+          "retried": null,
+          "others": {
+            "k_int1_mel": -4.498458,
+            "k_acr_dp": -0.974372,
+            "k_gln_glc": -9.0,
+            "k_lys_glc": -4.465623,
+            "k_ala_glc": -8.998001,
+            "k_acr_gln": -1.469814,
+            "k_acr_lys": -1.757996,
+            "k_acr_ala": -2.429883,
+            "Ea_int1_mel": 260.0,
+            "Ea_competitor_sugar": 20.0
+          }
+        }
+      ],
+      "intervals": {
+        "raw": {
+          "threshold_delta": 3.841458820694124,
+          "lower": 116.95324676786672,
+          "upper": 155.55395929164138,
+          "closed_lower": true,
+          "closed_upper": true,
+          "half_width": 19.30035626188733
+        },
+        "scaled": {
+          "threshold_delta": 21.311970045419105,
+          "lower": 92.22496089487184,
+          "upper": 182.42220445635982,
+          "closed_lower": true,
+          "closed_upper": true,
+          "half_width": 45.09862178074399
+        },
+        "F": {
+          "threshold_delta": 24.30389354078362,
+          "lower": 89.34769486713151,
+          "upper": 185.68621497470448,
+          "closed_lower": true,
+          "closed_upper": true,
+          "half_width": 48.16926005378649
+        }
+      },
+      "verdict": {
+        "shape": "pinned",
+        "pinned_both_sides_by_likelihood": true,
+        "inside_s4_band": null,
+        "s4_band": null,
+        "s4_band_note": "envelope prior b3.Ea_acr_dp: sigma 24.54 is the fit's own Laplace sigma (a fit output, not a measured or class band)",
+        "ci_spans_s4_band": null,
+        "refit_converged": true,
+        "shipped_value_inside_interval": true,
+        "converged_inside_interval": true,
+        "non_converged_points": [],
+        "driver_flagged_points_polish_raised_cost": [],
+        "points_with_failed_pots": [],
+        "meets_profile_requirement": true,
+        "conditional": null,
+        "fit_rows_flagged_in_s1_record": [
+          "B3: spi_extrusion_130C_acrylamide_ppb (withdrawn charge; CF-131)"
+        ],
+        "fit_objective_reproduced": true,
+        "proposed_upgrade": false,
+        "search_bounds": [
+          20.0,
+          260.0
+        ]
+      },
+      "spent_data": "identification only, never credit: the profile is on the fit's own rows (item 2, spent data)"
     }
   },
   "provenance": {
     "artifact": "s1_profiles",
     "generated_on": "2026-11-06",
     "git": {
-      "commit": "934ea81d60e8849897ffc31873c39041ffe521b2",
-      "short": "934ea81d",
+      "commit": "313af1677dcea823a0984ebc267aae09e6196cc4",
+      "short": "313af167",
       "branch": "s1-profile-run",
       "dirty": true
     },
@@ -5259,6 +6049,10 @@
       {
         "path": "results/validation/kinetic_core_b20_fit_report.json",
         "sha256": "8697f869c45101926c27be9ba336575768bceaa1ca0d521bfa6f5c592de44b3c"
+      },
+      {
+        "path": "results/validation/kinetic_core_b3_fit_report.json",
+        "sha256": "0263e84f19094f100ec562df30bf9945b49be6a0fd1f293f10a47840e46aabf6"
       },
       {
         "path": "results/validation/kinetic_core_b41_fit_report.json",
@@ -5311,13 +6105,13 @@
       },
       "acrylamide": {
         "coordinates": 2,
-        "profiled": 0,
-        "meet_requirement": [],
-        "flat_or_one_sided": [],
-        "not_profiled": [
+        "profiled": 2,
+        "meet_requirement": [
           "k_acr_dp.log10_k_ref",
           "k_acr_dp.ea_kj_mol"
-        ]
+        ],
+        "flat_or_one_sided": [],
+        "not_profiled": []
       },
       "b18": {
         "coordinates": 2,
@@ -5353,6 +6147,10 @@
       "trunk": {
         "profiled": 13,
         "meet_requirement": 12
+      },
+      "acrylamide": {
+        "profiled": 2,
+        "meet_requirement": 2
       }
     },
     "proposed_upgrades": [
