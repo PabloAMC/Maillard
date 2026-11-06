@@ -1523,8 +1523,11 @@ def run_screen(min_free: float) -> Dict[str, Any]:
            "declared_readings": __doc__.split("DECLARED READINGS")[1].split('"""')[0].strip(),
            "demotions_implied": [], "seconds": round(time.time() - t0, 1), "machine": M1.machine_state(),
            "provenance": _provenance("screen")}
-    (V / f"{STEM}_screen_draws.json").write_text(json.dumps(_jsonable(ens_json)) + "\n", encoding="utf-8")
-    rec["draws_file"] = data_paths.rel(V / f"{STEM}_screen_draws.json")
+    import gzip
+
+    with gzip.open(DRAWS_FILE, "wt", encoding="utf-8") as fh:
+        fh.write(json.dumps(_jsonable(ens_json)) + "\n")
+    rec["draws_file"] = data_paths.rel(DRAWS_FILE)
     write_record("screen", rec, render_screen(rec))
     SCREEN_PARTIAL.unlink(missing_ok=True)
     return rec
@@ -1539,11 +1542,17 @@ def _quantiles(x: np.ndarray) -> Dict[str, float]:
     return dict(zip(("min", "q05", "median", "q95", "max"), map(float, q)))
 
 
-def load_screen_ensembles() -> Dict[str, Ensemble]:
-    p = V / f"{STEM}_screen_draws.json"
+#: the screen's draw ensembles, gzipped (coordinator, 2026-11-06: frozen evidence of a non-reproducible 6.4 h run)
+DRAWS_FILE = V / f"{STEM}_screen_draws.json.gz"
+
+
+def load_screen_ensembles(path: Optional[Path] = None) -> Dict[str, Ensemble]:
+    import gzip
+
+    p = Path(path) if path is not None else DRAWS_FILE
     if not p.exists():
         raise SystemExit("no screen draws on disk (run --screen first)")
-    raw = json.loads(p.read_text(encoding="utf-8"))
+    raw = json.loads(gzip.open(p, "rt", encoding="utf-8").read())
     return {k: ensemble_from_json(v) for k, v in raw.items()}
 
 

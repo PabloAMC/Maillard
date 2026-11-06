@@ -263,6 +263,23 @@ def test_power_and_screen_refuse_a_screen_with_failed_pots(G, monkeypatch):
         G.run_power()
 
 
+def test_the_loader_reads_the_gzipped_draws_file(G, tmp_path):
+    import gzip
+    import json
+
+    ens = G.Ensemble("B0", "primary", [{"acid_yield": 0.1, "arp_amine_pka": 7.5}],
+                     {"C-Hou": np.array([[5.0, 4.5]])}, {"C-Hou": {"primary": np.array([[0.3, 0.2]])}},
+                     {"hou_arp_forced": np.array([[3.2, 2.2]])}, 0, [{"pot": "mey_cys_pH5.5", "to": "BDF"}])
+    path = tmp_path / "draws.json.gz"
+    with gzip.open(path, "wt", encoding="utf-8") as fh:
+        fh.write(json.dumps({"B0": G.ensemble_to_json(ens)}))
+    got = G.load_screen_ensembles(path)["B0"]
+    assert got.draws == ens.draws and got.fallbacks == ens.fallbacks
+    assert np.array_equal(got.f["C-Hou"], ens.f["C-Hou"])
+    assert np.array_equal(got.delta["C-Hou"]["primary"], ens.delta["C-Hou"]["primary"])
+    assert G.DRAWS_FILE.name.endswith(".json.gz")
+
+
 def test_an_lsoda_failure_is_retried_once_with_bdf_and_recorded(G, monkeypatch):
     G._init_pots()
     real = G.sulfur.integrate_sulfur
