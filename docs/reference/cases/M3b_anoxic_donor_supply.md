@@ -1,10 +1,17 @@
 # Case M3b: the anoxic donor supply of ARP-Phe
 
-**Status: DRAFT, NOT FROZEN (2026-11-06).** Items 1 - 5 of [STATUS_AND_PLAN sec. 7](../../guides/STATUS_AND_PLAN.md)
-(the text of PR #80, branch `plan-update-2026-11-05`, with its spent-data sentence), written before any result of the
-change exists. Nothing is frozen here. Before the freeze, two things must happen: the power check of sec. 4.4 runs, and an
-independent premortem is done. The integrity re-read CK-01 / CK-50 has landed and is folded into sec. 0. After the power
-check only demotions are allowed. Items 6 - 9 are appended later and never edited into this part.
+**Status: PARKED, NOT FROZEN (coordinator decision, 2026-11-06, after the independent premortem of sec. 8).** The power
+check is not run, and Figs. 2 - 3 stay blind under the NO-UNBLIND rule of sec. 9.
+
+The case reopens only after four band-narrowing sweep candidates have been read: Kaufmann 2016, Robert 2005, Wu 2022
+and Kawakishi 1991 (download queued). It is then reconsidered as **one joint M3 + M3b estimation spend** of the
+figures.
+
+Items 1 - 5 of [STATUS_AND_PLAN sec. 7](../../guides/STATUS_AND_PLAN.md) (the text of PR #80, branch
+`plan-update-2026-11-05`, with its spent-data sentence) were written before any result of the change existed. The
+integrity re-read CK-01 / CK-50 is folded into sec. 0. The premortem's fixes (sec. 8) are recorded but not yet
+applied to secs. 3 - 5. Applying them is the first step on reopening. Items 6 - 9 are appended later and never edited
+into this part.
 
 *Plan step: an M0 nomination (misfit MF-29 of the misfit inventory, `docs/reference/misfit_inventory.md` on branch
 `misfit-inventory`, draft PR #82) on the M3
@@ -51,6 +58,10 @@ declared bands, and no band, start or tolerance comes from it.
   - Times: stated 20 / 40 / 80 / 160 / 320 min, but plotted (keyed) **0 (ARP-Phe only), 20, 40, 80, 180, 320 min**.
   - y axis "amount [mmol/mmol ARP-Phe]", 0 - 1.00, no error bars; keyed as mmol/L = share x 500 (1.0 mmol in 2 mL;
     ~430 - 450 mmol/L if solids' volume or purity is counted).
+- **Completeness of the cells.** Every (arm, species) cell has all five plotted times (20 / 40 / 80 / 180 / 320; ARP-Phe
+  also at 0), so no cell is missing a time.
+- **Per-cell flags were not read.** The filter never printed `disagreement_flag`, the reader counts or the
+  origin-cluster entries. So none appeared, but their absence is not attested.
 - The rest of this case uses only these design facts (secs. 4.1, 4.4).
 
 **Spent (development evidence, never decisive here)** under the sec. 7 spent-data rule:
@@ -176,6 +187,7 @@ carry no ARP and no donor.
 | source | factor -> result | bears on |
 |---|---|---|
 | hofmann2000b Table 2 (SPENT) | argon / air / air + Cu: ARP PA 0.6 / 5.5 / 13.8 | the misfit and the air excess that sigma_ox carries |
+| **hofmann2000b Table 2, fed ARP-Phe vs glucose + Phe (SPENT)** | ARP-Phe over the glucose pot, PA: **1.5x under argon**, 3.9x in air, 5.3x in air + Cu (PAA 1.5 / 1.7 / 1.9x) | under argon, the fed ARP gives barely more aldehyde than the sugar pot that makes ARP only transiently (<= 4.8 mol %). Its anoxic donor supply per mol is far below what the layer's R0 gives it. Development evidence for the supply class; added after the premortem |
 | Davidek 2006b | argon / air / 18O2: acetic acid unchanged | Rb2's sink is anoxic; weakly against Ra |
 | Gobert 2009 | deaerated / aerated (DTPA rides with deaeration) | the anoxic osone pattern |
 | Voigt 2009 / 2010, Smuda 2010 | aerated / deaerated (DTPA confound) | the 1-DG chemistry |
@@ -559,3 +571,32 @@ trunk's glucose MGO, not an ARP-made donor, and it is not counted.
    over-predicts argon PA + PAA" conflict, citing this case (one writer per register; not filed here).
 
 **Owner-level decisions: none.** M3b changes only the standalone layer and moves no shipped prediction.
+
+## 8. Premortem (2026-11-06)
+
+An independent premortem, run on this case after pre-freeze steps 1 - 3, gave the ranked failure modes below. The
+coordinator parked the case on them. Each fix is to be applied to secs. 3 - 5 on reopening, before any power check.
+
+| # | failure mode | fix |
+|---|---|---|
+| 1 | **The carried rivals are nested in R0.** Rb1, Rb-ret, Rc and Rd equal corners of R0 on D1 - D6. Conditioning on Table 2's argon cell collapses R0 toward Rab2 | declare those pairs **"cannot decide"**. Keep **one primary pair, Rab2 vs R0 conditioned on the argon cell**, with Holm across the rest. Add prior-sensitivity forms. Prefer an **estimation framing**: R0's posterior over a3, the inert share and k_anox, rather than a rival verdict |
+| 2 | **One exit Ea carries the 85 C split to 100 C.** Martins' k4 / k7 (0.37 at 100 C vs 3.9 at 120 C, pH 6.8) implies ~x7 in the split between 100 and 85 C, and Deng's pH dependence (3-DG up at lower pH) runs the other way under the trapped pot's acidification | band the split's temperature and pH dependence for every rival, not only Rb2. Redo the [dry] bands |
+| 3 | **OPD side effects.** The OPD artefact must scale like k_tr (x120 from 5 mM to 0.6 M). OPD may catch pre-osone flux, biasing D2 against Rb1. Cu / OPD / phosphate interactions confound D5 | make D1 and D2 one-sided; make D5 report-only; split Rb1 by where its inert branch leaves (before or after a trappable intermediate); add an OPD-perturbed decay form |
+| 4 | **Double counting.** Ra's k_anox band comes partly from this trapped pot (CF-121, the seen Phe end point) | condition every scoring density on the seen text as numbers (ordering; Phe ~55 % at 320 min); drop the 320-min points from D4 and D6 |
+| 5 | **Early points are poorly read.** At 20 - 40 min the yields sit near the axis floor: ~50 - 200 % relative error. The plotted time is 180 where the Methods say 160, and t = 0 normalises ARP-Phe | forms for 160 vs 180 min and for the t = 0 normalisation (the keyed 0-min ARP vs the nominal charge); read error relative near the floor |
+| 6 | **The power-check spec was optimistic** | Holm; misspecified truths; a prior-mass negative control (Rb1 vs R0's inert corner); SMC conditioning wherever ESS < 100; simulate every required-agreement form; never count infeasibility as credit. Realistic cost **10 - 20 h** (not 3.5 - 7 h) |
+| 7 | **Opportunity cost** | P(the primary pair passes after these fixes) **~0.15 - 0.2**. Spending blind data on that is poor value alone; hence the joint M3 + M3b spend (status line) |
+| 8 | **Rd was demoted too far** | keep **Rd >= 0.10**. A result "R0 favoured" reads as "the downstream class or Rd", never as "R0 confirmed" |
+| 9 | **Noise forms** | D6's shared-analyser rho 0.5 becomes required agreement (rho 0 and 0.5); an HPLC CV band for the quinoxalines; power reported under omega and under a DFA-internal discrepancy term |
+| 10 | **Evidence and design attestations** | Table 2's glucose + Phe argon contrast added as spent development evidence (sec. 2.6). Every (arm, species) cell is complete in time; per-cell flags were not read (sec. 0) |
+
+**What the premortem changes in sec. 4.3's estimates:** P(primary pair passes) ~0.15 - 0.2 replaces the per-pair
+figures, which counted nested pairs as separable.
+
+## 9. The NO-UNBLIND rule (pre-declared, 2026-11-06)
+
+**hofmann2000b Figs. 2 - 3 stay blind** unless the fixed primary pair (Rab2 vs R0 conditioned on Table 2's argon cell,
+after the sec. 8 fixes) passes a power check that simulates **every** required-agreement form of secs. 4.4 and 8. That
+check must apply the binomial demotion rule, Holm, and never count infeasibility as credit. If it does not pass, the
+case closes **"undecidable on disk"** and the figures stay unspent for a later use (the joint M3 + M3b estimation, or a
+W6 design). No unit, form or pair may be added after the power check to rescue it.
