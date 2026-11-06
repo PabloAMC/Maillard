@@ -98,6 +98,37 @@ def test_ea_class_band_and_consequences():
     assert none["proposal"]["route"] == "refused"
 
 
+def test_joint_check_reports_the_shipped_pair_at_the_bounds_temperature():
+    src = {"relation": "upper", "value": 1e-3, "temperature_c": 120.0, "terms": {}}
+    j = G.joint_check(src, factor=1.0, shipped_k=-1.0, shipped_ea=64.08, t_ref_c=145.0, between_lab=0.964)
+    at_120 = -1.0 + G.arrhenius_shift_dex(64.08, 145.0, 120.0)
+    assert j["shipped_log10_k_at_T"] == pytest.approx(at_120)
+    assert j["upper"]["excess_dex"] == pytest.approx(at_120 + 3.0)
+    assert j["upper"]["violates_raw"] is True and j["upper"]["violates_95"] is False
+    # an engine pH factor > 1 in the measured pot tightens the bound on k_ref by log10(factor)
+    j10 = G.joint_check(src, factor=10.0, shipped_k=-1.0, shipped_ea=64.08, t_ref_c=145.0, between_lab=0.964)
+    assert j10["upper"]["excess_dex"] == pytest.approx(j["upper"]["excess_dex"] + 1.0)
+
+
+def test_engine_factor_takes_the_loose_end_of_the_ph_window():
+    f, note = G.engine_factor({"factors": {"s": ("acid", (4.15, 4.56), 363.15)}}, "s")
+    assert f == pytest.approx(10 ** (5 - 4.56)) and "acid" in note
+    assert G.engine_factor({}, "s") == (1.0, None)
+
+
+def test_heldout_rows_are_never_band_sources_and_rulings_hold():
+    for sid, s in G.SOURCES.items():
+        if s.get("heldout"):
+            assert not s["usable"], sid
+    assert not G.SOURCES["sedehi2013_gly"]["usable"]
+    assert not G.SOURCES["grosch1992_mft_inpot"]["usable"]  # S1 second reading A3
+    assert G.SOURCES["bork_nf_alone"]["relation"] == "lower"  # A1: the subset rule
+    assert "assay" not in G.SOURCES["bork_nf_alone"]["terms"]  # CF-113's x1.4 counted once
+    for c in G.CLASS_RULING_COORDINATES:
+        assert G.COORDINATES[c]["ea_class"] == G.SULF
+    assert G.ACRYLAMIDE_ELIMINATION_BETWEEN_LAB_DEX == pytest.approx(0.10, abs=0.005)
+
+
 def test_curated_tables_are_consistent():
     for cid, spec in {**G.COORDINATES, **G.EXTRA}.items():
         for s in spec.get("sources", []):
@@ -121,7 +152,14 @@ def test_committed_artifact_matches_its_record():
     assert listed == sorted(G.COORDINATES)
     payload = json.loads(G.OUT.read_text(encoding="utf-8"))
     assert sorted(e["coordinate"] for e in payload["coordinates"]) == listed
+    # the class ruling moves one B55 member (Zhang 2026 k16) from carbohydrate to sulfur; ranges unchanged
+    assert payload["classes"]["carbohydrate"]["n"] == payload["b55_classes"]["carbohydrate"]["n"] - 1
+    assert payload["classes"]["sulfur"]["n"] == payload["b55_classes"]["sulfur"]["n"] + 1
+    for k in ("carbohydrate", "sulfur"):
+        assert (payload["classes"][k]["lo"], payload["classes"][k]["hi"]) == \
+            (payload["b55_classes"][k]["lo"], payload["b55_classes"][k]["hi"])
     for e in payload["coordinates"]:
+        assert e["second_reading"]["verdict"] in ("agreed", "corrected and applied")
         if e["coordinate_kind"] == "ea_kj_mol" and e["proposal"]["route"] == "class_distribution":
             c = payload["classes"][e["proposal"]["class"]]
             assert (e["proposal"]["lo"], e["proposal"]["hi"]) == (c["lo"], c["hi"])
