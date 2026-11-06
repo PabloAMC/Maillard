@@ -12,6 +12,7 @@ the default is the real engine under :func:`calibration.predict_calibrated`.
 """
 from __future__ import annotations
 
+import dataclasses
 import math
 from dataclasses import dataclass, field
 from typing import Any, Callable, Dict, List, Mapping, Optional, Sequence, Set, Tuple
@@ -19,6 +20,7 @@ from typing import Any, Callable, Dict, List, Mapping, Optional, Sequence, Set, 
 import numpy as np
 
 from src.kinetic_core import calibration as C
+from src.kinetic_core import thiol_relative_only
 from src.kinetic_core.user_scoring import systems_of
 
 #: Below this the log10 sigma of a measured level is floored: a laboratory does not know its own
@@ -52,6 +54,9 @@ class Record:
 class Prediction:
     values: Mapping[str, float]   # predicted ug/L per compound answered
     lane: Optional[str]
+    #: 2026-11-05 (H0 / EX-059): answered compounds whose ABSOLUTE level is not shown under this calibration (the
+    #: thiol lane's, unless the calibration rescues them). The values stay: the response factors are made from them.
+    absolute_refused: Tuple[str, ...] = ()
 
 
 PredictFn = Callable[[Mapping[str, Any], Sequence[str], Optional[C.Calibration]], Prediction]
@@ -63,7 +68,9 @@ def engine_predict(spec: Mapping[str, Any], compounds: Sequence[str], calibratio
     run = C.predict_calibrated(spec_to_core(spec), list(compounds), calibration)
     if not run.answered:
         return Prediction({}, None)
-    return Prediction({c: float(v) for c, v in run.concentrations_ug_per_l.items()}, run.declaration.lane)
+    refused = tuple(c for c in run.concentrations_ug_per_l
+                    if thiol_relative_only.refused_for(run.declaration, c, calibration))
+    return Prediction({c: float(v) for c, v in run.concentrations_ug_per_l.items()}, run.declaration.lane, refused)
 
 
 @dataclass(frozen=True)
@@ -289,6 +296,12 @@ class Fitter:
             p = preds[r.name]
             for compound, m in r.measured.items():
                 pv = p.values.get(compound)
+                if compound in p.absolute_refused:
+                    # 2026-11-05 (H0 / EX-059): the shipped model's absolute level of a thiol-lane observable is
+                    # not shown, and so is not scored against yours; a calibrated level is (calibration_rescues)
+                    rows.append({"record": r.name, "compound": compound, "measured_ppb": m["value"], "predicted_ppb": None,
+                                 "fold_error": None, "refused": thiol_relative_only.ABSOLUTE_REFUSED_TAG})
+                    continue
                 if pv is None or pv <= 0 or m["value"] <= 0:
                     rows.append({"record": r.name, "compound": compound, "measured_ppb": m["value"], "predicted_ppb": pv, "fold_error": None})
                     continue
@@ -325,9 +338,11 @@ def calibrate(document: Mapping[str, Any], lab: str, *, predict_fn: PredictFn = 
     try:
         prov = provenance.provenance_block("maillard_calibration", generated_by="src/kinetic_core/user_fit.py")
     except Exception:  # noqa: BLE001 - provenance is informative, never blocking
-        prov = {}
-    cal = C.Calibration(lab, partial.base_wave, partial.created, partial.matrix, factors, tuple(overrides),
-                        partial.fit_records, partial.validate_records, tuple(notes), prov)
+        prov = {"generated_by": "src/kinetic_core/user_fit.py"}   # what thiol_relative_only.calibration_rescues reads
+    unsigned = C.Calibration(lab, partial.base_wave, partial.created, partial.matrix, factors, tuple(overrides),
+                             partial.fit_records, partial.validate_records, tuple(notes))
+    # 2026-11-05 (H0 follow-up): the content checksum the rescue rule verifies (thiol_relative_only.calibration_rescues)
+    cal = dataclasses.replace(unsigned, provenance={**prov, C.PAYLOAD_CHECKSUM_FIELD: unsigned.payload_checksum()})
     after = fitter.holdout_scores(cal) if validate else None
     card = {
         "artifact": "maillard_calibration_card",
@@ -376,14 +391,25 @@ def render_card(card: Mapping[str, Any]) -> str:
         out.append("    none held out: the calibration is unvalidated")
     else:
         b, a = h["before"], h["after"]
-        out.append(f"    median fold error   shipped {b['median_fold']:.3g}   calibrated {a['median_fold']:.3g}   (within 3x: {b['within_3x']}/{b['n']} -> {a['within_3x']}/{a['n']})")
+        def med(x):   # None when every shipped row is refused (H0 / EX-059)
+            return "-" if x is None else f"{x:.3g}"
+
+        out.append(f"    median fold error   shipped {med(b['median_fold'])}   calibrated {med(a['median_fold'])}   (within 3x: {b['within_3x']}/{b['n']} -> {a['within_3x']}/{a['n']})")
         for rb, ra in zip(b["rows"], a["rows"]):
-            fb = f"{rb['fold_error']:.3g}x" if rb["fold_error"] else "refused"
-            fa = f"{ra['fold_error']:.3g}x" if ra["fold_error"] else "refused"
+            fb = f"{rb['fold_error']:.3g}x" if rb["fold_error"] else ("H0 refused" if rb.get("refused") else "refused")
+            fa = f"{ra['fold_error']:.3g}x" if ra["fold_error"] else ("H0 refused" if ra.get("refused") else "refused")
             out.append(f"      {rb['record']:<28} {rb['compound']:<26} measured {rb['measured_ppb']:.3g}   shipped {fb:>9}   calibrated {fa:>9}")
+        if any(r.get("refused") for r in b["rows"]):
+            out.append(_wrap_note("H0 refused: " + thiol_relative_only.short_reason()))
     out.append("")
     for n in card["notes"]:
         out.append(f"  note: {n}")
     out.append("")
     out.append("  The shipped parameters are untouched. Apply this file with --calibration on compare, predict or score.")
     return "\n".join(out)
+
+
+def _wrap_note(text: str) -> str:
+    import textwrap
+
+    return "\n".join(textwrap.wrap(text, width=92, initial_indent="      ", subsequent_indent="      "))

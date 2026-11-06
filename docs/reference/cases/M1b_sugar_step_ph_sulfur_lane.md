@@ -63,8 +63,8 @@ contrast). In v1 every cell below is DEVELOPMENT unless marked.
 |---|---|---|---|
 | Martins & van Boekel 2003 Part II (martins2003 dossier; `trunk_conditions.PH_SOURCE`) | fed DFG (glucose-glycine Amadori), 100 / 120 C x pH 5.5 / 6.8: Table 3 constants with 95 % HPD; k(6.8) / k(5.5) 3.0 / 15.6 / 8.6 (100 C), 8.0 / 7.3 / 9.8 (120 C) | parts H and rival R4 (hexose) | DEV (Wageningen); cal. input |
 | Martins 2003b (F06#5, F07#10) | same fed DFG: standing 3-DG : 1-DG ~12 at pH 5.5, 1.2 (figure) or 3.2 (text) at pH 6.8 | split vs pH, standing levels | DEV |
-| Davidek 2006a (F07#5, #6, #9) | fed DFG, 120 C: acetic 4 / 28 / 56 mol % at pH 4 / 6 / 8; fed amine-free 1-DG 0.20 / 0.56 / 0.80 - 0.84 mol / mol; 1-DG lifetime < ~2 min at pH >= 6 | the 1-DG cleavage's own pH law (the B7a-2 saturating law) | DEV |
-| Mikami 2017 (F15#7, F13#8; B61 prereg) | fed norfuraneol alone, 0.2 M phosphate, 100 C: 0.032 /min at pH 8 (+- 10 %). At pH 7 and 6 only the xylose + lysine pot bounds it (>= 1.8e-3 /min at pH 7; no net loss at pH 6), so those two are not fixed-supply measurements | rival R3: NF loss at fixed supply | DEV (Ochanomizu); cal. input |
+| Davidek 2006a (F07#5, #6, #9) | fed DFG, 120 C: acetic 4 / 28 / 56 mol % at pH 4 / 6 / 8; fed amine-free 1-DG 0.20 / 0.56 / 0.80 - 0.84 mol / mol at pH 5 / 6 / 6.5 - 8 (60 min, flat above 6.5; corrected 2026-11-05: its grid is not 4 / 6 / 8); 1-DG lifetime < ~2 min at pH >= 6 | the 1-DG cleavage's own pH law (the B7a-2 saturating law) | DEV |
+| Mikami 2017 (F15#7, F13#8; B61 prereg) | fed norfuraneol alone, 0.2 M phosphate, 100 C: 0.032 /min at pH 8 (+- 10 %). At pH 7 and 6 only the xylose + lysine pot bounds it (>= 1.8e-3 /min at pH 7; no net loss at pH 6), so those two are not fixed-supply measurements. B61's anchor (`NF_HYDROXIDE_DECAY` is set from this point), so it cannot be decisive for E16 (it bears on D1 below only as the calibration point; corrected 2026-11-05) | rival R3: NF loss at fixed supply | DEV (Ochanomizu); cal. input |
 | Nakamura 2020 (F15#8) | fed NF, pH 8, 100 C: decay suppressed by degassing and by DTPA | R3's O2 and metal dependence (couples to case M1 part B) | DEV |
 | Deng 2021 (F06#6, F07#11) | fed hexose ARP (Met-glucose), unbuffered, initial pH 5.5 vs 7.5: 3-DG peak ~7 vs <= 1.8 mol %; 1-DG standing lower at 7.5 | Amadori decay and split vs pH, drifting pH | DEV (ho_network) |
 | Hou 2026 (F06#8, F07#13; CF-083) | fed GX-ARP (glycine-xylose Amadori), 120 C, unbuffered: standing 3-DX / 1-DX 2.6 -> 10.9 while the measured pH falls 5.05 -> 3.55 | the pentose + glycine analogue closest to the prompting pots | DEV (ho_network) |
@@ -107,7 +107,7 @@ contrast). In v1 every cell below is DEVELOPMENT unless marked.
 | Zhou 2023 | initial pH 6 / 7 / 8 (see 2.2) | furfural vs pH | DEV |
 | Davidek 2008 (F07#8) | pH 6 vs 8 (see 2.1) | 1-DX route | DEV |
 | Mikami 2017 (F13#8) | pH ladder (see 2.4) | NF vs pH | DEV |
-| Martins 2005b (F06#13, F07#15) | initial pH 4.8 -> 7.5, glucose + glycine: k4 +0.35, k7 +0.60 dec / pH (wide CI on k7) | E2, hexose | DEV (Wageningen) |
+| Martins 2005b (F06#13, F07#15) | initial pH 4.8 -> 7.5, glucose + glycine: k1 (glucose + glycine -> DFG) +0.50 +- 0.14, k4 +0.35, k7 +0.60 dec / pH (wide CI on k7). Every Martins slope in this case (secs. 1, 2.2, 2.6) is regressed on the initial label pH of drifting pots; on the time-averaged pH they move (CF-118; corrected 2026-11-05) | E2, hexose | DEV (Wageningen) |
 | Davidek 2002 (davidek2002 dossier; sulfur.py comment at `TRUNK_PH_TERMS`) | pH-stat: acid 3 vs 79 mmol/L at pH 5 vs 8 | the acid supply that drives the drift | DEV (Nestle) |
 | Blank 1997 (F13#11) | water vs phosphate vs malonate: HDMF x43, x4.3 | buffer (E5), not pH | DEV |
 | Rizzi 2010 (F15#2) | amine-free pentoses, phosphate pH 7.1 | the amine-free route's size at one pH | DEV |
@@ -148,7 +148,7 @@ at 37 C) are outside the regime. The furfural barrier question (B62, E11) is tem
 
 | id | explanation | furfural vs pH (pentose pot) | norfuraneol vs pH | 3-DX / 1-DX vs pH |
 |---|---|---|---|---|
-| R0 | **current model** | flat (glycine); falls ~1 dec / pH (cysteine, `acid` factor) | flat (glycine); rises (cysteine, `base` factor) | flat (glycine); rises in Jiangnan's pots (EX-033) |
+| R0 | **current model** | flat (glycine); falls ~1 dec / pH (cysteine, `acid` factor) | flat (glycine); rises (cysteine, `base` factor) | flat (glycine); rises in Jiangnan's pots (EX-033, scored on R3En, not B60; corrected 2026-11-05) |
 | R1 | **M1b as the plan words it** (part H) | as R0 in every pentose-only pot | as R0 | as R0 |
 | R2 | the enolisation split moves with pH (E2), carried to the pentose steps | falls | rises (more 1-DX) | falls |
 | R3 | base-catalysed norfuraneol decay (E16, `NF_HYDROXIDE_DECAY`) | unchanged | falls above ~pH 6 - 7 at 100 C; at 140 C set by an unmeasured barrier | unchanged |
@@ -165,7 +165,7 @@ All development; Meynier excluded.
 |---|---|---|---|---|---|---|---|
 | D1 | NF loss at fixed supply vs pH: Mikami 2017 fed NF alone at pH 8 (100 C), with the pH 6 / 7 bounds from its xylose + lysine pot; Nakamura 2020 degassed / DTPA arms | pH-free, ~700x slower than measured at pH 8 (F13-a) | as R0 | ~1 dec / pH, O2- and metal-dependent | as R0 | as R0 | R3 from all. Decides R3's existence at 100 C, pH 8; NOT its size at 120 - 145 C or pH <= 7 (no fed NF there) |
 | D2 | in-situ trapped split vs pH: Beck 1988, Nedvidek 1992 (hexose) | cysteine pots: steeper than measured (Hofmann pots: 0.4 / 40 / 89 % of pentose to DPO at pH 3 / 5 / 7, SULFUR_FLUX_MAP sec. 5); glycine pots: flat | moves (~0.44 dec / pH in Beck) | no change | no change | **no change** (removal acts after the trap) | R2 from R5 for HEXOSE. One school, n = 1. No pentose in-situ trap across pH exists |
-| D3 | standing 3-DX / 1-DX vs pH inside one pentose study: Zhai 2021 (label 5.5 - 8), Hou 2026 (in-pot 5.05 -> 3.55) | rises with pH (wrong sign, EX-033) | falls | no change | no change | falls | R0 / R1 / R3 / R4 from R2 / R5. R2 vs R5 **not separable** on standing levels (EX-036, EX-046, EX-053) |
+| D3 | standing 3-DX / 1-DX vs pH inside one pentose study: Zhai 2021 (label 5.5 - 8), Hou 2026 (in-pot 5.05 -> 3.55) | rises with pH (wrong sign, EX-033: an R3En result, not B60's; corrected 2026-11-05) | falls | no change | no change | falls | R0 / R1 / R3 / R4 from R2 / R5. R2 vs R5 **not separable** on standing levels (EX-036, EX-046, EX-053) |
 | D4 | furfural vs norfuraneol inside one pentose study across pH | -- | furfural / NF falls | furfural / NF rises | flat | furfural / NF falls | **No development study prints both across pH.** Desclaux 2006 has both at pH 6 only. Proxy: FFT / MFT inside Hofmann 1998 T2 (pH 3 / 5 / 7), confounded by H2S speciation and by E6 (MFT runs through NF in the engine) |
 | D5 | Amadori decay at fixed charge vs pH: Martins 2003 Part II Table 3 (hexose); Deng 2021 (fed ARP, drifting) | hexose trunk in the sulfur lane pH-free | -- | -- | faster at higher pH, per step | -- | R4's size for hexose. For a pentose ARP no fixed-pH decay ladder exists on disk |
 | D6 | acetic acid from the 1-deoxyosone vs pH: Davidek 2008 (xylose + Gly), Davidek 2006a (fed DFG, fed 1-DG) | -- | rises (more 1-DX) | no change | rises (more supply) | no change | R2 / R4 from R5; R2 vs R4 needs the sugar consumed (Davidek 2008 prints xylose) |

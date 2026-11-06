@@ -29,6 +29,11 @@ COORD = "b8.k_fft_decay.log10_k_ref_145C"
 TRUE_SHIFT = -0.2          # about two shipped sigmas; the prior pulls back, the posterior must still cover the truth
 TRUE_FACTOR = 3.0
 SHIFTED = FFT               # the compound the shifted coordinate acts on, and the one that gets the factor
+#: 2026-11-05 (H0 / EX-059): the shipped model's absolute MFT / FFT are refused, so the hold-out's "before" has no
+#: thiol level to beat. 2-acetylthiazole, which H0 did not score, is measured beside them with its own factor and
+#: carries the improvement test; the thiol rows must read "H0 refused".
+ACTZ = "2-acetylthiazole"
+ACTZ_FACTOR = 2.0
 
 pytestmark = pytest.mark.slow
 
@@ -48,10 +53,11 @@ def _synthetic_document():
     for i, (T, t) in enumerate(grid):
         spec = {"name": f"pot_{i}", "precursors": {"L-Cysteine": 33.0, "D-Ribose": 100.0}, "temp_C": T, "time_min": t,
                 "ph": 5.0, "aw": 0.98, "matrix": "water", "buffer": {"kind": "phosphate", "phosphate_mol_l": 0.5}}
-        p = F.engine_predict(spec, [MFT, FFT], truth)
-        assert p.values.get(MFT) and p.values.get(FFT), (i, p)
+        p = F.engine_predict(spec, [MFT, FFT, ACTZ], truth)
+        assert p.values.get(MFT) and p.values.get(FFT) and p.values.get(ACTZ), (i, p)
         systems.append({**spec, "measured": {MFT: {"value": p.values[MFT], "uncertainty_pct": 10},
-                                             FFT: {"value": p.values[FFT] * TRUE_FACTOR, "uncertainty_pct": 10}},
+                                             FFT: {"value": p.values[FFT] * TRUE_FACTOR, "uncertainty_pct": 10},
+                                             ACTZ: {"value": p.values[ACTZ] * ACTZ_FACTOR, "uncertainty_pct": 10}},
                         "quantification_class": "stable_isotope_dilution_gcms", "source": {"lab": "synthetic"}})
     return {"systems": systems}
 
@@ -72,6 +78,7 @@ def test_t2_the_factor_is_recovered_on_the_engine(synthetic):
     cal, card = synthetic
     assert abs(cal.response_factors[FFT].log10 - math.log10(TRUE_FACTOR)) < 0.1, (card["response_factors"], card["diagnostics"], card["overrides"])
     assert abs(cal.response_factors[MFT].log10) < 0.1, (card["response_factors"], card["diagnostics"], card["overrides"])
+    assert abs(cal.response_factors[ACTZ].log10 - math.log10(ACTZ_FACTOR)) < 0.1, card["response_factors"]
 
 
 def test_t2_the_shifted_coordinate_is_recovered_when_named(synthetic_named):
@@ -93,10 +100,27 @@ def test_t2_the_unrestricted_run_reports_its_aliasing(synthetic):
     assert cal.overrides
 
 
+def _assert_thiols_refused(before):
+    """H0 / EX-059: the shipped model shows no absolute MFT / FFT, so the 'before' rows carry neither a level nor a
+    fold for them, and say why."""
+    thiol = [r for r in before["rows"] if r["compound"] in (MFT, FFT)]
+    assert thiol
+    for r in thiol:
+        assert r["refused"] == "ABSOLUTE LEVEL REFUSED (H0 / EX-059)" and r["predicted_ppb"] is None and r["fold_error"] is None, r
+
+
 def test_t2_the_holdout_improves_on_the_engine(synthetic):
+    # 2026-11-05: was `after["median_fold"] < before["median_fold"]` over MFT and FFT; the shipped thiol levels are
+    # refused now (H0 / EX-059), so the like-for-like comparison is on 2-acetylthiazole, row by row, and the thiol
+    # rows are asserted refused.
     _, card = synthetic
     before, after = card["holdout"]["before"], card["holdout"]["after"]
-    assert after["median_fold"] < before["median_fold"], (before["median_fold"], after["median_fold"])
+    _assert_thiols_refused(before)
+    pairs = [(b["fold_error"], a["fold_error"]) for b, a in zip(before["rows"], after["rows"]) if b["compound"] == ACTZ]
+    assert pairs and all(fb is not None and fa is not None for fb, fa in pairs), pairs
+    assert all(fa < fb for fb, fa in pairs), pairs
+    # and the calibrated thiol levels are answered (the calibration rescues them: calibrate made it from data)
+    assert all(r["fold_error"] is not None for r in after["rows"] if r["compound"] in (MFT, FFT))
 
 
 def test_t3_no_validate_record_was_read_during_the_fit(synthetic):
@@ -137,11 +161,26 @@ def yiltirak():
 
 
 def test_t5_a_real_ladder_as_a_pretend_laboratory(yiltirak):
+    # 2026-11-05 (H0 / EX-059): was `after["n"] == before["n"] > 0` and `after["median_fold"] < before["median_fold"]`.
+    # The shipped MFT / FFT levels are refused, so the card's "before" rows carry none. No real ladder in the repo
+    # measures an out-of-scope compound one condition at a time (Yiltirak prints only MFT and FFT; Schibilsky 2019 is
+    # two pH arms; Chang 2021's three acrylamide pots are two times and a preparation, where a response factor cannot
+    # help), so the closest honest test keeps this ladder: the calibrated hold-out must beat the shipped engine's
+    # level, computed here and never shown, on the same rows; and the card's thiol rows must read "H0 refused".
     cal, card = yiltirak
     assert set(cal.validate_records) == {"yiltirak_110C", "yiltirak_130C"}
     before, after = card["holdout"]["before"], card["holdout"]["after"]
-    assert before and after and after["n"] == before["n"] > 0
-    assert after["median_fold"] < before["median_fold"], (before["median_fold"], after["median_fold"])
+    assert before and after and after["n"] > 0 and before["n"] == 0
+    _assert_thiols_refused(before)
+    held = {s["name"]: s for s in _yiltirak_document()["systems"] if s["role"] == "validate"}
+    shipped_folds = []
+    for r in after["rows"]:
+        spec = held[r["record"]]
+        shipped = F.engine_predict(spec, [r["compound"]], None).values[r["compound"]]
+        shipped_folds.append(max(shipped / r["measured_ppb"], r["measured_ppb"] / shipped))
+    shipped_median = sorted(shipped_folds)[len(shipped_folds) // 2] if len(shipped_folds) % 2 else (
+        sum(sorted(shipped_folds)[len(shipped_folds) // 2 - 1:len(shipped_folds) // 2 + 1]) / 2)
+    assert after["median_fold"] < shipped_median, (shipped_median, after["median_fold"])
     # the card must state a factor for both thiols: the pretend laboratory's levels sit far below the model's
     assert cal.response_factors[MFT].log10 < 0 and cal.response_factors[FFT].log10 < 0
 

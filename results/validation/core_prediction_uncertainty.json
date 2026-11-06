@@ -85,29 +85,8 @@
       "bench_file": "data/benchmarks/hofmann1998_c2c3_recombination_145C_20min_pH3.json",
       "benchmark_id": "hofmann1998_c2c3_recombination_145C_20min_pH3",
       "buffer_applied": true,
-      "compounds": [
-        {
-          "ci_width_log10": 0.12453487498558433,
-          "compound": "2-Methyl-3-furanthiol (MFT)",
-          "envelope_state": "in_envelope",
-          "in_core_fit": true,
-          "inside_ci": false,
-          "lane": "sulfur",
-          "measured": 310.0,
-          "measured_ppb": 310.0,
-          "n_finite_samples": 200,
-          "observable_multipliers_applied": false,
-          "predicted_mean": 3887.0276813282308,
-          "predicted_p5": 3052.7521660117973,
-          "predicted_p50": 4029.790505857933,
-          "predicted_p95": 4066.5528702675774,
-          "predicted_point": 4030.203757362508,
-          "predicted_std": 392.565278630186,
-          "shared_with": null,
-          "target_unit": "ppb"
-        }
-      ],
-      "coverage_rate": 1.0,
+      "compounds": [],
+      "coverage_rate": 0.0,
       "evidence_role": "predictive",
       "execution_path": "free_precursor",
       "fit_target_of": {
@@ -119,41 +98,29 @@
         ]
       },
       "fitted_row": false,
-      "matched_compounds": 1,
+      "matched_compounds": 0,
       "panel": "trust_loop",
       "protein_type": "free",
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
-      "refused_compounds": [],
+      "refused_compounds": [
+        {
+          "benchmark_id": "hofmann1998_c2c3_recombination_145C_20min_pH3",
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "envelope_state": "in_envelope",
+          "lane": "sulfur",
+          "panel": "trust_loop",
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+        }
+      ],
       "signal_origin": "external_literature"
     },
     {
       "bench_file": "data/benchmarks/hofmann1998_c2c3_recombination_145C_20min_pH5.json",
       "benchmark_id": "hofmann1998_c2c3_recombination_145C_20min_pH5",
       "buffer_applied": true,
-      "compounds": [
-        {
-          "ci_width_log10": 0.21347666748271688,
-          "compound": "2-Methyl-3-furanthiol (MFT)",
-          "envelope_state": "in_envelope",
-          "in_core_fit": true,
-          "inside_ci": false,
-          "lane": "sulfur",
-          "measured": 5362.0,
-          "measured_ppb": 5362.0,
-          "n_finite_samples": 200,
-          "observable_multipliers_applied": false,
-          "predicted_mean": 2903.181050674761,
-          "predicted_p5": 2110.390821739567,
-          "predicted_p50": 2958.6990342911067,
-          "predicted_p95": 3450.1625509723794,
-          "predicted_point": 2919.6509380246657,
-          "predicted_std": 392.1601634629879,
-          "shared_with": null,
-          "target_unit": "ppb"
-        }
-      ],
-      "coverage_rate": 1.0,
+      "compounds": [],
+      "coverage_rate": 0.0,
       "evidence_role": "predictive",
       "execution_path": "free_precursor",
       "fit_target_of": {
@@ -165,41 +132,29 @@
         ]
       },
       "fitted_row": false,
-      "matched_compounds": 1,
+      "matched_compounds": 0,
       "panel": "trust_loop",
       "protein_type": "free",
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
-      "refused_compounds": [],
+      "refused_compounds": [
+        {
+          "benchmark_id": "hofmann1998_c2c3_recombination_145C_20min_pH5",
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "envelope_state": "in_envelope",
+          "lane": "sulfur",
+          "panel": "trust_loop",
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+        }
+      ],
       "signal_origin": "external_literature"
     },
     {
       "bench_file": "data/benchmarks/hofmann1998_c2c3_recombination_145C_20min_pH7.json",
       "benchmark_id": "hofmann1998_c2c3_recombination_145C_20min_pH7",
       "buffer_applied": true,
-      "compounds": [
-        {
-          "ci_width_log10": 0.5102966648157877,
-          "compound": "2-Methyl-3-furanthiol (MFT)",
-          "envelope_state": "in_envelope",
-          "in_core_fit": true,
-          "inside_ci": false,
-          "lane": "sulfur",
-          "measured": 6230.0,
-          "measured_ppb": 6230.0,
-          "n_finite_samples": 200,
-          "observable_multipliers_applied": false,
-          "predicted_mean": 1174.0183923735797,
-          "predicted_p5": 537.2113829418448,
-          "predicted_p50": 1178.696766185014,
-          "predicted_p95": 1739.5698469106094,
-          "predicted_point": 1146.475919744765,
-          "predicted_std": 348.6047692482962,
-          "shared_with": null,
-          "target_unit": "ppb"
-        }
-      ],
-      "coverage_rate": 1.0,
+      "compounds": [],
+      "coverage_rate": 0.0,
       "evidence_role": "predictive",
       "execution_path": "free_precursor",
       "fit_target_of": {
@@ -211,12 +166,21 @@
         ]
       },
       "fitted_row": false,
-      "matched_compounds": 1,
+      "matched_compounds": 0,
       "panel": "trust_loop",
       "protein_type": "free",
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
-      "refused_compounds": [],
+      "refused_compounds": [
+        {
+          "benchmark_id": "hofmann1998_c2c3_recombination_145C_20min_pH7",
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "envelope_state": "in_envelope",
+          "lane": "sulfur",
+          "panel": "trust_loop",
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+        }
+      ],
       "signal_origin": "external_literature"
     },
     {
@@ -261,29 +225,8 @@
       "bench_file": "data/benchmarks/hofmann1998_furan2aldehyde_h2s_145C_20min_pH5.json",
       "benchmark_id": "hofmann1998_furan2aldehyde_h2s_145C_20min_pH5",
       "buffer_applied": true,
-      "compounds": [
-        {
-          "ci_width_log10": 3.7718170937389695,
-          "compound": "2-Furfurylthiol (FFT)",
-          "envelope_state": "in_envelope",
-          "in_core_fit": true,
-          "inside_ci": true,
-          "lane": "sulfur",
-          "measured": 11016.0,
-          "measured_ppb": 11016.0,
-          "n_finite_samples": 200,
-          "observable_multipliers_applied": false,
-          "predicted_mean": 15231.471870327354,
-          "predicted_p5": 9.26070039483525,
-          "predicted_p50": 7073.639712917745,
-          "predicted_p95": 54759.68329810715,
-          "predicted_point": 17014.105990845805,
-          "predicted_std": 23374.81772186392,
-          "shared_with": null,
-          "target_unit": "ppb"
-        }
-      ],
-      "coverage_rate": 1.0,
+      "compounds": [],
+      "coverage_rate": 0.0,
       "evidence_role": "predictive",
       "execution_path": "free_precursor",
       "fit_target_of": {
@@ -295,12 +238,21 @@
         ]
       },
       "fitted_row": false,
-      "matched_compounds": 1,
+      "matched_compounds": 0,
       "panel": "trust_loop",
       "protein_type": "free",
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
-      "refused_compounds": [],
+      "refused_compounds": [
+        {
+          "benchmark_id": "hofmann1998_furan2aldehyde_h2s_145C_20min_pH5",
+          "compound": "2-Furfurylthiol (FFT)",
+          "envelope_state": "in_envelope",
+          "lane": "sulfur",
+          "panel": "trust_loop",
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+        }
+      ],
       "signal_origin": "external_literature"
     },
     {
@@ -345,29 +297,8 @@
       "bench_file": "data/benchmarks/hofmann1998_norfuraneol_cysteine_145C_20min_pH5.json",
       "benchmark_id": "hofmann1998_norfuraneol_cysteine_145C_20min_pH5",
       "buffer_applied": true,
-      "compounds": [
-        {
-          "ci_width_log10": 0.598496248139727,
-          "compound": "2-Methyl-3-furanthiol (MFT)",
-          "envelope_state": "in_envelope",
-          "in_core_fit": true,
-          "inside_ci": true,
-          "lane": "sulfur",
-          "measured": 1016.0,
-          "measured_ppb": 1016.0,
-          "n_finite_samples": 200,
-          "observable_multipliers_applied": false,
-          "predicted_mean": 1079.6612693909758,
-          "predicted_p5": 471.481360596753,
-          "predicted_p50": 1067.6874200778955,
-          "predicted_p95": 1870.5131955728075,
-          "predicted_point": 1074.1357801881684,
-          "predicted_std": 426.6513347779577,
-          "shared_with": null,
-          "target_unit": "ppb"
-        }
-      ],
-      "coverage_rate": 1.0,
+      "compounds": [],
+      "coverage_rate": 0.0,
       "evidence_role": "predictive",
       "execution_path": "free_precursor",
       "fit_target_of": {
@@ -379,41 +310,29 @@
         ]
       },
       "fitted_row": false,
-      "matched_compounds": 1,
+      "matched_compounds": 0,
       "panel": "trust_loop",
       "protein_type": "free",
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
-      "refused_compounds": [],
+      "refused_compounds": [
+        {
+          "benchmark_id": "hofmann1998_norfuraneol_cysteine_145C_20min_pH5",
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "envelope_state": "in_envelope",
+          "lane": "sulfur",
+          "panel": "trust_loop",
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+        }
+      ],
       "signal_origin": "external_literature"
     },
     {
       "bench_file": "data/benchmarks/hofmann1998_norfuraneol_h2s_145C_20min_pH5.json",
       "benchmark_id": "hofmann1998_norfuraneol_h2s_145C_20min_pH5",
       "buffer_applied": true,
-      "compounds": [
-        {
-          "ci_width_log10": 0.3855791120205521,
-          "compound": "2-Methyl-3-furanthiol (MFT)",
-          "envelope_state": "in_envelope",
-          "in_core_fit": true,
-          "inside_ci": true,
-          "lane": "sulfur",
-          "measured": 4224.0,
-          "measured_ppb": 4224.0,
-          "n_finite_samples": 200,
-          "observable_multipliers_applied": false,
-          "predicted_mean": 6819.138222480343,
-          "predicted_p5": 3731.4180024725274,
-          "predicted_p50": 7074.028798281504,
-          "predicted_p95": 9066.778675217636,
-          "predicted_point": 8269.39995364794,
-          "predicted_std": 1694.1285807218735,
-          "shared_with": null,
-          "target_unit": "ppb"
-        }
-      ],
-      "coverage_rate": 1.0,
+      "compounds": [],
+      "coverage_rate": 0.0,
       "evidence_role": "predictive",
       "execution_path": "free_precursor",
       "fit_target_of": {
@@ -425,61 +344,29 @@
         ]
       },
       "fitted_row": false,
-      "matched_compounds": 1,
+      "matched_compounds": 0,
       "panel": "trust_loop",
       "protein_type": "free",
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
-      "refused_compounds": [],
+      "refused_compounds": [
+        {
+          "benchmark_id": "hofmann1998_norfuraneol_h2s_145C_20min_pH5",
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "envelope_state": "in_envelope",
+          "lane": "sulfur",
+          "panel": "trust_loop",
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+        }
+      ],
       "signal_origin": "external_literature"
     },
     {
       "bench_file": "data/benchmarks/hofmann1998_ribose_cysteine_145C_20min_pH5.json",
       "benchmark_id": "hofmann1998_ribose_cysteine_145C_20min_pH5",
       "buffer_applied": true,
-      "compounds": [
-        {
-          "ci_width_log10": 1.8693792573471626,
-          "compound": "2-Furfurylthiol (FFT)",
-          "envelope_state": "in_envelope",
-          "in_core_fit": true,
-          "inside_ci": true,
-          "lane": "sulfur",
-          "measured": 121.0,
-          "measured_ppb": 121.0,
-          "n_finite_samples": 200,
-          "observable_multipliers_applied": false,
-          "predicted_mean": 346.3626506688256,
-          "predicted_p5": 16.447154740131317,
-          "predicted_p50": 177.97566995041709,
-          "predicted_p95": 1217.5029881001801,
-          "predicted_point": 346.61680335656604,
-          "predicted_std": 438.1736829738136,
-          "shared_with": null,
-          "target_unit": "ppb"
-        },
-        {
-          "ci_width_log10": 0.7718616062695719,
-          "compound": "2-Methyl-3-furanthiol (MFT)",
-          "envelope_state": "in_envelope",
-          "in_core_fit": true,
-          "inside_ci": true,
-          "lane": "sulfur",
-          "measured": 198.0,
-          "measured_ppb": 198.0,
-          "n_finite_samples": 200,
-          "observable_multipliers_applied": false,
-          "predicted_mean": 104.74876175773794,
-          "predicted_p5": 37.126575803167,
-          "predicted_p50": 95.9212672973722,
-          "predicted_p95": 219.5566027453515,
-          "predicted_point": 93.63341996131116,
-          "predicted_std": 60.740621074575685,
-          "shared_with": null,
-          "target_unit": "ppb"
-        }
-      ],
-      "coverage_rate": 1.0,
+      "compounds": [],
+      "coverage_rate": 0.0,
       "evidence_role": "predictive",
       "execution_path": "free_precursor",
       "fit_target_of": {
@@ -491,12 +378,29 @@
         ]
       },
       "fitted_row": false,
-      "matched_compounds": 2,
+      "matched_compounds": 0,
       "panel": "trust_loop",
       "protein_type": "free",
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
-      "refused_compounds": [],
+      "refused_compounds": [
+        {
+          "benchmark_id": "hofmann1998_ribose_cysteine_145C_20min_pH5",
+          "compound": "2-Furfurylthiol (FFT)",
+          "envelope_state": "in_envelope",
+          "lane": "sulfur",
+          "panel": "trust_loop",
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+        },
+        {
+          "benchmark_id": "hofmann1998_ribose_cysteine_145C_20min_pH5",
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "envelope_state": "in_envelope",
+          "lane": "sulfur",
+          "panel": "trust_loop",
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+        }
+      ],
       "signal_origin": "external_literature"
     },
     {
@@ -668,29 +572,8 @@
       "bench_file": "data/benchmarks/resconi_2023_pbma_beef_identity_benchmark.json",
       "benchmark_id": "resconi_2023_pbma_beef_identity_benchmark",
       "buffer_applied": true,
-      "compounds": [
-        {
-          "ci_width_log10": 11.808847799720667,
-          "compound": "furfural",
-          "envelope_state": "in_envelope_extrapolated",
-          "in_core_fit": false,
-          "inside_ci": true,
-          "lane": "sulfur",
-          "measured": 715.22,
-          "measured_ppb": 715.22,
-          "n_finite_samples": 200,
-          "observable_multipliers_applied": true,
-          "predicted_mean": 1493.6963785485602,
-          "predicted_p5": 1.6654571304857085e-08,
-          "predicted_p50": 24.151610923015436,
-          "predicted_p95": 10724.60382493478,
-          "predicted_point": 46.45268582053923,
-          "predicted_std": 5041.0836067473065,
-          "shared_with": null,
-          "target_unit": "ppb"
-        }
-      ],
-      "coverage_rate": 1.0,
+      "compounds": [],
+      "coverage_rate": 0.0,
       "evidence_role": "predictive",
       "execution_path": "free_precursor",
       "fit_target_of": {
@@ -698,12 +581,21 @@
         "index": []
       },
       "fitted_row": false,
-      "matched_compounds": 1,
+      "matched_compounds": 0,
       "panel": "trust_loop",
       "protein_type": "",
       "quantification_family": "headspace",
       "quantification_source": "quantification_class='hs_spme_gcms_internal_standard_calibration_curve'",
-      "refused_compounds": [],
+      "refused_compounds": [
+        {
+          "benchmark_id": "resconi_2023_pbma_beef_identity_benchmark",
+          "compound": "furfural",
+          "envelope_state": "in_envelope_extrapolated",
+          "lane": "sulfur",
+          "panel": "trust_loop",
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+        }
+      ],
       "signal_origin": "external_literature"
     },
     {
@@ -748,29 +640,8 @@
       "bench_file": "data/benchmarks/thiamine_cys_glucose_120C_Bolton1994.json",
       "benchmark_id": "thiamine_cys_glucose_120C_Bolton1994",
       "buffer_applied": true,
-      "compounds": [
-        {
-          "ci_width_log10": 1.2974780550227984,
-          "compound": "2-Methyl-3-furanthiol (MFT)",
-          "envelope_state": "in_envelope_extrapolated",
-          "in_core_fit": false,
-          "inside_ci": false,
-          "lane": "sulfur",
-          "measured": 11.7,
-          "measured_ppb": 11.7,
-          "n_finite_samples": 200,
-          "observable_multipliers_applied": false,
-          "predicted_mean": 115.75285800470523,
-          "predicted_p5": 19.570223877411138,
-          "predicted_p50": 82.88230423097369,
-          "predicted_p95": 388.2163740067447,
-          "predicted_point": 232.9157132486124,
-          "predicted_std": 109.7847339930697,
-          "shared_with": null,
-          "target_unit": "ppb"
-        }
-      ],
-      "coverage_rate": 1.0,
+      "compounds": [],
+      "coverage_rate": 0.0,
       "evidence_role": "predictive",
       "execution_path": "free_precursor",
       "fit_target_of": {
@@ -778,81 +649,29 @@
         "index": []
       },
       "fitted_row": false,
-      "matched_compounds": 1,
+      "matched_compounds": 0,
       "panel": "trust_loop",
       "protein_type": "",
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='internal_standard_gcms_sim'",
-      "refused_compounds": [],
+      "refused_compounds": [
+        {
+          "benchmark_id": "thiamine_cys_glucose_120C_Bolton1994",
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "envelope_state": "in_envelope_extrapolated",
+          "lane": "sulfur",
+          "panel": "trust_loop",
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+        }
+      ],
       "signal_origin": "external_literature"
     },
     {
       "bench_file": "data/benchmarks/external_validation/maillard_path/mp_holdout_arp_glutathione_120C_120min_pH75_Zhou2023c.json",
       "benchmark_id": "mp_holdout_arp_glutathione_120C_120min_pH75_Zhou2023c",
       "buffer_applied": true,
-      "compounds": [
-        {
-          "ci_width_log10": 2.3084199374747576,
-          "compound": "2-Methyl-3-furanthiol (MFT)",
-          "envelope_state": "in_envelope",
-          "in_core_fit": false,
-          "inside_ci": false,
-          "lane": "sulfur",
-          "measured": 8.1,
-          "measured_ppb": 8.1,
-          "n_finite_samples": 200,
-          "observable_multipliers_applied": true,
-          "predicted_mean": 945.8966928811585,
-          "predicted_p5": 18.89854400302857,
-          "predicted_p50": 322.5413384658138,
-          "predicted_p95": 3844.574523081949,
-          "predicted_point": 1305.955247122756,
-          "predicted_std": 1895.8372133880919,
-          "shared_with": null,
-          "target_unit": "ppb"
-        },
-        {
-          "ci_width_log10": 4.5171152959487735,
-          "compound": "2-Furfurylthiol (FFT)",
-          "envelope_state": "in_envelope",
-          "in_core_fit": false,
-          "inside_ci": true,
-          "lane": "sulfur",
-          "measured": 116.0,
-          "measured_ppb": 116.0,
-          "n_finite_samples": 200,
-          "observable_multipliers_applied": true,
-          "predicted_mean": 131.47451869788122,
-          "predicted_p5": 0.018926500200444972,
-          "predicted_p50": 5.192905173900785,
-          "predicted_p95": 622.5663019451285,
-          "predicted_point": 129.54014850126148,
-          "predicted_std": 443.86114966316455,
-          "shared_with": null,
-          "target_unit": "ppb"
-        },
-        {
-          "ci_width_log10": 4.5623570528714605,
-          "compound": "Furfural",
-          "envelope_state": "in_envelope",
-          "in_core_fit": false,
-          "inside_ci": false,
-          "lane": "sulfur",
-          "measured": 716.0,
-          "measured_ppb": 716.0,
-          "n_finite_samples": 200,
-          "observable_multipliers_applied": true,
-          "predicted_mean": 100.83692616095135,
-          "predicted_p5": 0.010586462205999665,
-          "predicted_p50": 4.736468961468281,
-          "predicted_p95": 386.4629852519866,
-          "predicted_point": 24.13759670405366,
-          "predicted_std": 462.54223791328116,
-          "shared_with": null,
-          "target_unit": "ppb"
-        }
-      ],
-      "coverage_rate": 1.0,
+      "compounds": [],
+      "coverage_rate": 0.0,
       "evidence_role": "external_holdout",
       "execution_path": "free_precursor",
       "fit_target_of": {
@@ -860,81 +679,45 @@
         "index": []
       },
       "fitted_row": false,
-      "matched_compounds": 3,
+      "matched_compounds": 0,
       "panel": "maillard_path_holdout",
       "protein_type": "free",
       "quantification_family": "headspace",
       "quantification_source": "quantification_class='hs_spme_gcms_internal_standard_calibration_curve'",
-      "refused_compounds": [],
+      "refused_compounds": [
+        {
+          "benchmark_id": "mp_holdout_arp_glutathione_120C_120min_pH75_Zhou2023c",
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "envelope_state": "in_envelope",
+          "lane": "sulfur",
+          "panel": "maillard_path_holdout",
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+        },
+        {
+          "benchmark_id": "mp_holdout_arp_glutathione_120C_120min_pH75_Zhou2023c",
+          "compound": "2-Furfurylthiol (FFT)",
+          "envelope_state": "in_envelope",
+          "lane": "sulfur",
+          "panel": "maillard_path_holdout",
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+        },
+        {
+          "benchmark_id": "mp_holdout_arp_glutathione_120C_120min_pH75_Zhou2023c",
+          "compound": "Furfural",
+          "envelope_state": "in_envelope",
+          "lane": "sulfur",
+          "panel": "maillard_path_holdout",
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+        }
+      ],
       "signal_origin": "external_literature"
     },
     {
       "bench_file": "data/benchmarks/external_validation/maillard_path/mp_holdout_arp_glutathione_120C_30min_pH75_Zhou2023c.json",
       "benchmark_id": "mp_holdout_arp_glutathione_120C_30min_pH75_Zhou2023c",
       "buffer_applied": true,
-      "compounds": [
-        {
-          "ci_width_log10": 2.1374795443267463,
-          "compound": "2-Methyl-3-furanthiol (MFT)",
-          "envelope_state": "in_envelope",
-          "in_core_fit": false,
-          "inside_ci": true,
-          "lane": "sulfur",
-          "measured": 59.1,
-          "measured_ppb": 59.1,
-          "n_finite_samples": 200,
-          "observable_multipliers_applied": true,
-          "predicted_mean": 461.25835346638473,
-          "predicted_p5": 12.449492879362772,
-          "predicted_p50": 188.36229553342633,
-          "predicted_p95": 1708.563819289501,
-          "predicted_point": 844.8615542046919,
-          "predicted_std": 842.6235541082665,
-          "shared_with": null,
-          "target_unit": "ppb"
-        },
-        {
-          "ci_width_log10": 3.8883590337506395,
-          "compound": "2-Furfurylthiol (FFT)",
-          "envelope_state": "in_envelope",
-          "in_core_fit": false,
-          "inside_ci": true,
-          "lane": "sulfur",
-          "measured": 124.0,
-          "measured_ppb": 124.0,
-          "n_finite_samples": 200,
-          "observable_multipliers_applied": true,
-          "predicted_mean": 42.870216331121235,
-          "predicted_p5": 0.02403855727497674,
-          "predicted_p50": 1.9273993089831205,
-          "predicted_p95": 185.8948818641165,
-          "predicted_point": 25.670765152881717,
-          "predicted_std": 172.88115090948202,
-          "shared_with": null,
-          "target_unit": "ppb"
-        },
-        {
-          "ci_width_log10": 3.3995535715349896,
-          "compound": "Furfural",
-          "envelope_state": "in_envelope",
-          "in_core_fit": false,
-          "inside_ci": false,
-          "lane": "sulfur",
-          "measured": 113.0,
-          "measured_ppb": 113.0,
-          "n_finite_samples": 200,
-          "observable_multipliers_applied": true,
-          "predicted_mean": 24.62525461149617,
-          "predicted_p5": 0.027800221896556523,
-          "predicted_p50": 1.726598602523732,
-          "predicted_p95": 69.75925501067555,
-          "predicted_point": 4.594963993856148,
-          "predicted_std": 112.2071821295359,
-          "shared_with": null,
-          "target_unit": "ppb"
-        }
-      ],
-      "coverage_rate": 1.0,
+      "compounds": [],
+      "coverage_rate": 0.0,
       "evidence_role": "external_holdout",
       "execution_path": "free_precursor",
       "fit_target_of": {
@@ -942,81 +725,45 @@
         "index": []
       },
       "fitted_row": false,
-      "matched_compounds": 3,
+      "matched_compounds": 0,
       "panel": "maillard_path_holdout",
       "protein_type": "free",
       "quantification_family": "headspace",
       "quantification_source": "quantification_class='hs_spme_gcms_internal_standard_calibration_curve'",
-      "refused_compounds": [],
+      "refused_compounds": [
+        {
+          "benchmark_id": "mp_holdout_arp_glutathione_120C_30min_pH75_Zhou2023c",
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "envelope_state": "in_envelope",
+          "lane": "sulfur",
+          "panel": "maillard_path_holdout",
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+        },
+        {
+          "benchmark_id": "mp_holdout_arp_glutathione_120C_30min_pH75_Zhou2023c",
+          "compound": "2-Furfurylthiol (FFT)",
+          "envelope_state": "in_envelope",
+          "lane": "sulfur",
+          "panel": "maillard_path_holdout",
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+        },
+        {
+          "benchmark_id": "mp_holdout_arp_glutathione_120C_30min_pH75_Zhou2023c",
+          "compound": "Furfural",
+          "envelope_state": "in_envelope",
+          "lane": "sulfur",
+          "panel": "maillard_path_holdout",
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+        }
+      ],
       "signal_origin": "external_literature"
     },
     {
       "bench_file": "data/benchmarks/external_validation/maillard_path/mp_holdout_arp_glutathione_120C_60min_pH75_Zhou2023c.json",
       "benchmark_id": "mp_holdout_arp_glutathione_120C_60min_pH75_Zhou2023c",
       "buffer_applied": true,
-      "compounds": [
-        {
-          "ci_width_log10": 2.332905307813224,
-          "compound": "2-Methyl-3-furanthiol (MFT)",
-          "envelope_state": "in_envelope",
-          "in_core_fit": false,
-          "inside_ci": true,
-          "lane": "sulfur",
-          "measured": 64.1,
-          "measured_ppb": 64.1,
-          "n_finite_samples": 200,
-          "observable_multipliers_applied": true,
-          "predicted_mean": 853.1920394034024,
-          "predicted_p5": 18.27793625683664,
-          "predicted_p50": 324.8549128535835,
-          "predicted_p95": 3933.982885590519,
-          "predicted_point": 1748.8198103287987,
-          "predicted_std": 1751.974617250491,
-          "shared_with": null,
-          "target_unit": "ppb"
-        },
-        {
-          "ci_width_log10": 4.257835633914714,
-          "compound": "2-Furfurylthiol (FFT)",
-          "envelope_state": "in_envelope",
-          "in_core_fit": false,
-          "inside_ci": true,
-          "lane": "sulfur",
-          "measured": 383.0,
-          "measured_ppb": 383.0,
-          "n_finite_samples": 200,
-          "observable_multipliers_applied": true,
-          "predicted_mean": 92.13012807660724,
-          "predicted_p5": 0.024604079679354088,
-          "predicted_p50": 4.560447122505626,
-          "predicted_p95": 445.49492266111275,
-          "predicted_point": 73.48805571848523,
-          "predicted_std": 333.7011258441672,
-          "shared_with": null,
-          "target_unit": "ppb"
-        },
-        {
-          "ci_width_log10": 3.81413657756079,
-          "compound": "Furfural",
-          "envelope_state": "in_envelope",
-          "in_core_fit": false,
-          "inside_ci": false,
-          "lane": "sulfur",
-          "measured": 397.0,
-          "measured_ppb": 397.0,
-          "n_finite_samples": 200,
-          "observable_multipliers_applied": true,
-          "predicted_mean": 49.82108145290382,
-          "predicted_p5": 0.0298783672697416,
-          "predicted_p50": 3.3862539953573343,
-          "predicted_p95": 194.75716269781975,
-          "predicted_point": 8.835422550184978,
-          "predicted_std": 209.93392386725208,
-          "shared_with": null,
-          "target_unit": "ppb"
-        }
-      ],
-      "coverage_rate": 1.0,
+      "compounds": [],
+      "coverage_rate": 0.0,
       "evidence_role": "external_holdout",
       "execution_path": "free_precursor",
       "fit_target_of": {
@@ -1024,81 +771,45 @@
         "index": []
       },
       "fitted_row": false,
-      "matched_compounds": 3,
+      "matched_compounds": 0,
       "panel": "maillard_path_holdout",
       "protein_type": "free",
       "quantification_family": "headspace",
       "quantification_source": "quantification_class='hs_spme_gcms_internal_standard_calibration_curve'",
-      "refused_compounds": [],
+      "refused_compounds": [
+        {
+          "benchmark_id": "mp_holdout_arp_glutathione_120C_60min_pH75_Zhou2023c",
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "envelope_state": "in_envelope",
+          "lane": "sulfur",
+          "panel": "maillard_path_holdout",
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+        },
+        {
+          "benchmark_id": "mp_holdout_arp_glutathione_120C_60min_pH75_Zhou2023c",
+          "compound": "2-Furfurylthiol (FFT)",
+          "envelope_state": "in_envelope",
+          "lane": "sulfur",
+          "panel": "maillard_path_holdout",
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+        },
+        {
+          "benchmark_id": "mp_holdout_arp_glutathione_120C_60min_pH75_Zhou2023c",
+          "compound": "Furfural",
+          "envelope_state": "in_envelope",
+          "lane": "sulfur",
+          "panel": "maillard_path_holdout",
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+        }
+      ],
       "signal_origin": "external_literature"
     },
     {
       "bench_file": "data/benchmarks/external_validation/maillard_path/mp_holdout_arp_glutathione_120C_90min_pH75_Zhou2023c.json",
       "benchmark_id": "mp_holdout_arp_glutathione_120C_90min_pH75_Zhou2023c",
       "buffer_applied": true,
-      "compounds": [
-        {
-          "ci_width_log10": 2.282227573138739,
-          "compound": "2-Methyl-3-furanthiol (MFT)",
-          "envelope_state": "in_envelope",
-          "in_core_fit": false,
-          "inside_ci": true,
-          "lane": "sulfur",
-          "measured": 57.1,
-          "measured_ppb": 57.1,
-          "n_finite_samples": 200,
-          "observable_multipliers_applied": true,
-          "predicted_mean": 966.5388373765938,
-          "predicted_p5": 20.615055870702825,
-          "predicted_p50": 348.9260750836693,
-          "predicted_p95": 3948.3176867362604,
-          "predicted_point": 1645.1264207712672,
-          "predicted_std": 2006.0564852657933,
-          "shared_with": null,
-          "target_unit": "ppb"
-        },
-        {
-          "ci_width_log10": 4.386545424045636,
-          "compound": "2-Furfurylthiol (FFT)",
-          "envelope_state": "in_envelope",
-          "in_core_fit": false,
-          "inside_ci": true,
-          "lane": "sulfur",
-          "measured": 270.0,
-          "measured_ppb": 270.0,
-          "n_finite_samples": 200,
-          "observable_multipliers_applied": true,
-          "predicted_mean": 120.3847867028815,
-          "predicted_p5": 0.023670551123622707,
-          "predicted_p50": 4.762258789346279,
-          "predicted_p95": 576.4395809775649,
-          "predicted_point": 110.83672146422113,
-          "predicted_std": 416.07208308166173,
-          "shared_with": null,
-          "target_unit": "ppb"
-        },
-        {
-          "ci_width_log10": 4.1904370814108765,
-          "compound": "Furfural",
-          "envelope_state": "in_envelope",
-          "in_core_fit": false,
-          "inside_ci": false,
-          "lane": "sulfur",
-          "measured": 575.0,
-          "measured_ppb": 575.0,
-          "n_finite_samples": 200,
-          "observable_multipliers_applied": true,
-          "predicted_mean": 76.08580680177288,
-          "predicted_p5": 0.021002469055237147,
-          "predicted_p50": 4.111525131456114,
-          "predicted_p95": 325.61727306495186,
-          "predicted_point": 16.17151955873745,
-          "predicted_std": 323.0128506818659,
-          "shared_with": null,
-          "target_unit": "ppb"
-        }
-      ],
-      "coverage_rate": 1.0,
+      "compounds": [],
+      "coverage_rate": 0.0,
       "evidence_role": "external_holdout",
       "execution_path": "free_precursor",
       "fit_target_of": {
@@ -1106,12 +817,37 @@
         "index": []
       },
       "fitted_row": false,
-      "matched_compounds": 3,
+      "matched_compounds": 0,
       "panel": "maillard_path_holdout",
       "protein_type": "free",
       "quantification_family": "headspace",
       "quantification_source": "quantification_class='hs_spme_gcms_internal_standard_calibration_curve'",
-      "refused_compounds": [],
+      "refused_compounds": [
+        {
+          "benchmark_id": "mp_holdout_arp_glutathione_120C_90min_pH75_Zhou2023c",
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "envelope_state": "in_envelope",
+          "lane": "sulfur",
+          "panel": "maillard_path_holdout",
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+        },
+        {
+          "benchmark_id": "mp_holdout_arp_glutathione_120C_90min_pH75_Zhou2023c",
+          "compound": "2-Furfurylthiol (FFT)",
+          "envelope_state": "in_envelope",
+          "lane": "sulfur",
+          "panel": "maillard_path_holdout",
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+        },
+        {
+          "benchmark_id": "mp_holdout_arp_glutathione_120C_90min_pH75_Zhou2023c",
+          "compound": "Furfural",
+          "envelope_state": "in_envelope",
+          "lane": "sulfur",
+          "panel": "maillard_path_holdout",
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+        }
+      ],
       "signal_origin": "external_literature"
     },
     {
@@ -1728,49 +1464,8 @@
       "bench_file": "data/benchmarks/external_validation/maillard_path/mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3.json",
       "benchmark_id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3",
       "buffer_applied": true,
-      "compounds": [
-        {
-          "ci_width_log10": 2.08125461165956,
-          "compound": "2-Furfurylthiol (FFT)",
-          "envelope_state": "in_envelope",
-          "in_core_fit": false,
-          "inside_ci": true,
-          "lane": "sulfur",
-          "measured": 229.0,
-          "measured_ppb": 229.0,
-          "n_finite_samples": 200,
-          "observable_multipliers_applied": false,
-          "predicted_mean": 1811.9783627029444,
-          "predicted_p5": 56.234508131223905,
-          "predicted_p50": 710.5904663295307,
-          "predicted_p95": 6780.434305110867,
-          "predicted_point": 1523.2707418838477,
-          "predicted_std": 3342.0156083095776,
-          "shared_with": "hofmann_ribose_pH3_FFT",
-          "target_unit": "ppb"
-        },
-        {
-          "ci_width_log10": 0.8987733058360288,
-          "compound": "2-Methyl-3-furanthiol (MFT)",
-          "envelope_state": "in_envelope",
-          "in_core_fit": false,
-          "inside_ci": false,
-          "lane": "sulfur",
-          "measured": 553.0,
-          "measured_ppb": 553.0,
-          "n_finite_samples": 200,
-          "observable_multipliers_applied": false,
-          "predicted_mean": 29.579104929698346,
-          "predicted_p5": 8.919860233329922,
-          "predicted_p50": 25.378308656611424,
-          "predicted_p95": 70.65312169883398,
-          "predicted_point": 24.707237554782857,
-          "predicted_std": 20.759945646422537,
-          "shared_with": "hofmann_ribose_pH3_MFT",
-          "target_unit": "ppb"
-        }
-      ],
-      "coverage_rate": 1.0,
+      "compounds": [],
+      "coverage_rate": 0.0,
       "evidence_role": "external_holdout",
       "execution_path": "free_precursor",
       "fit_target_of": {
@@ -1778,61 +1473,37 @@
         "index": []
       },
       "fitted_row": false,
-      "matched_compounds": 2,
+      "matched_compounds": 0,
       "panel": "maillard_path_holdout",
       "protein_type": "free",
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
-      "refused_compounds": [],
+      "refused_compounds": [
+        {
+          "benchmark_id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3",
+          "compound": "2-Furfurylthiol (FFT)",
+          "envelope_state": "in_envelope",
+          "lane": "sulfur",
+          "panel": "maillard_path_holdout",
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+        },
+        {
+          "benchmark_id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3",
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "envelope_state": "in_envelope",
+          "lane": "sulfur",
+          "panel": "maillard_path_holdout",
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+        }
+      ],
       "signal_origin": "external_literature"
     },
     {
       "bench_file": "data/benchmarks/external_validation/maillard_path/mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7.json",
       "benchmark_id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7",
       "buffer_applied": true,
-      "compounds": [
-        {
-          "ci_width_log10": 2.0121997350808467,
-          "compound": "2-Furfurylthiol (FFT)",
-          "envelope_state": "in_envelope",
-          "in_core_fit": false,
-          "inside_ci": false,
-          "lane": "sulfur",
-          "measured": 12.0,
-          "measured_ppb": 12.0,
-          "n_finite_samples": 200,
-          "observable_multipliers_applied": false,
-          "predicted_mean": 0.1080135383258391,
-          "predicted_p5": 0.0031928000245466295,
-          "predicted_p50": 0.07450989848383996,
-          "predicted_p95": 0.32837603390953435,
-          "predicted_point": 0.16959779562439883,
-          "predicted_std": 0.11431497367859624,
-          "shared_with": "hofmann_ribose_pH7_FFT",
-          "target_unit": "ppb"
-        },
-        {
-          "ci_width_log10": 2.808899968740431,
-          "compound": "2-Methyl-3-furanthiol (MFT)",
-          "envelope_state": "in_envelope",
-          "in_core_fit": false,
-          "inside_ci": false,
-          "lane": "sulfur",
-          "measured": 25.0,
-          "measured_ppb": 25.0,
-          "n_finite_samples": 200,
-          "observable_multipliers_applied": false,
-          "predicted_mean": 0.006729811559047267,
-          "predicted_p5": 3.279691078729418e-05,
-          "predicted_p50": 0.004293098785557212,
-          "predicted_p95": 0.021121896356017706,
-          "predicted_point": 0.005096217562612314,
-          "predicted_std": 0.0074745605785953035,
-          "shared_with": "hofmann_ribose_pH7_MFT",
-          "target_unit": "ppb"
-        }
-      ],
-      "coverage_rate": 1.0,
+      "compounds": [],
+      "coverage_rate": 0.0,
       "evidence_role": "external_holdout",
       "execution_path": "free_precursor",
       "fit_target_of": {
@@ -1840,61 +1511,37 @@
         "index": []
       },
       "fitted_row": false,
-      "matched_compounds": 2,
+      "matched_compounds": 0,
       "panel": "maillard_path_holdout",
       "protein_type": "free",
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
-      "refused_compounds": [],
+      "refused_compounds": [
+        {
+          "benchmark_id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7",
+          "compound": "2-Furfurylthiol (FFT)",
+          "envelope_state": "in_envelope",
+          "lane": "sulfur",
+          "panel": "maillard_path_holdout",
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+        },
+        {
+          "benchmark_id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7",
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "envelope_state": "in_envelope",
+          "lane": "sulfur",
+          "panel": "maillard_path_holdout",
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+        }
+      ],
       "signal_origin": "external_literature"
     },
     {
       "bench_file": "data/benchmarks/external_validation/maillard_path/mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5.json",
       "benchmark_id": "mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5",
       "buffer_applied": true,
-      "compounds": [
-        {
-          "ci_width_log10": 1.8693792573471626,
-          "compound": "2-Furfurylthiol (FFT)",
-          "envelope_state": "in_envelope",
-          "in_core_fit": true,
-          "inside_ci": true,
-          "lane": "sulfur",
-          "measured": 96.0,
-          "measured_ppb": 96.0,
-          "n_finite_samples": 200,
-          "observable_multipliers_applied": false,
-          "predicted_mean": 346.3626506688256,
-          "predicted_p5": 16.447154740131317,
-          "predicted_p50": 177.97566995041709,
-          "predicted_p95": 1217.5029881001801,
-          "predicted_point": 346.61680335656604,
-          "predicted_std": 438.1736829738136,
-          "shared_with": null,
-          "target_unit": "ppb"
-        },
-        {
-          "ci_width_log10": 0.7718616062695719,
-          "compound": "2-Methyl-3-furanthiol (MFT)",
-          "envelope_state": "in_envelope",
-          "in_core_fit": true,
-          "inside_ci": true,
-          "lane": "sulfur",
-          "measured": 143.0,
-          "measured_ppb": 143.0,
-          "n_finite_samples": 200,
-          "observable_multipliers_applied": false,
-          "predicted_mean": 104.74876175773794,
-          "predicted_p5": 37.126575803167,
-          "predicted_p50": 95.9212672973722,
-          "predicted_p95": 219.5566027453515,
-          "predicted_point": 93.63341996131116,
-          "predicted_std": 60.740621074575685,
-          "shared_with": null,
-          "target_unit": "ppb"
-        }
-      ],
-      "coverage_rate": 1.0,
+      "compounds": [],
+      "coverage_rate": 0.0,
       "evidence_role": "external_holdout",
       "execution_path": "free_precursor",
       "fit_target_of": {
@@ -1906,61 +1553,37 @@
         ]
       },
       "fitted_row": false,
-      "matched_compounds": 2,
+      "matched_compounds": 0,
       "panel": "maillard_path_holdout",
       "protein_type": "free",
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
-      "refused_compounds": [],
+      "refused_compounds": [
+        {
+          "benchmark_id": "mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5",
+          "compound": "2-Furfurylthiol (FFT)",
+          "envelope_state": "in_envelope",
+          "lane": "sulfur",
+          "panel": "maillard_path_holdout",
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+        },
+        {
+          "benchmark_id": "mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5",
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "envelope_state": "in_envelope",
+          "lane": "sulfur",
+          "panel": "maillard_path_holdout",
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+        }
+      ],
       "signal_origin": "external_literature"
     },
     {
       "bench_file": "data/benchmarks/external_validation/maillard_path/mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026.json",
       "benchmark_id": "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026",
       "buffer_applied": true,
-      "compounds": [
-        {
-          "ci_width_log10": 2.636034734679415,
-          "compound": "2-Methyl-3-furanthiol (MFT)",
-          "envelope_state": "in_envelope",
-          "in_core_fit": false,
-          "inside_ci": true,
-          "lane": "sulfur",
-          "measured": 6.88,
-          "measured_ppb": 6.88,
-          "n_finite_samples": 200,
-          "observable_multipliers_applied": false,
-          "predicted_mean": 17.138575402340564,
-          "predicted_p5": 0.19403449604822273,
-          "predicted_p50": 3.5686545800315375,
-          "predicted_p95": 83.92931559965037,
-          "predicted_point": 10.3344470370659,
-          "predicted_std": 34.266390699202006,
-          "shared_with": null,
-          "target_unit": "ppb"
-        },
-        {
-          "ci_width_log10": 3.19382482913759,
-          "compound": "2-Furfurylthiol (FFT)",
-          "envelope_state": "in_envelope",
-          "in_core_fit": false,
-          "inside_ci": true,
-          "lane": "sulfur",
-          "measured": 1.28,
-          "measured_ppb": 1.28,
-          "n_finite_samples": 200,
-          "observable_multipliers_applied": false,
-          "predicted_mean": 102.46681573174027,
-          "predicted_p5": 0.270597300643225,
-          "predicted_p50": 12.620984506886735,
-          "predicted_p95": 422.8129583696472,
-          "predicted_point": 299.49868107611667,
-          "predicted_std": 267.3408144863035,
-          "shared_with": null,
-          "target_unit": "ppb"
-        }
-      ],
-      "coverage_rate": 1.0,
+      "compounds": [],
+      "coverage_rate": 0.0,
       "evidence_role": "external_holdout",
       "execution_path": "free_precursor",
       "fit_target_of": {
@@ -1968,61 +1591,37 @@
         "index": []
       },
       "fitted_row": false,
-      "matched_compounds": 2,
+      "matched_compounds": 0,
       "panel": "maillard_path_holdout",
       "protein_type": "free",
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
-      "refused_compounds": [],
+      "refused_compounds": [
+        {
+          "benchmark_id": "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026",
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "envelope_state": "in_envelope",
+          "lane": "sulfur",
+          "panel": "maillard_path_holdout",
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+        },
+        {
+          "benchmark_id": "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026",
+          "compound": "2-Furfurylthiol (FFT)",
+          "envelope_state": "in_envelope",
+          "lane": "sulfur",
+          "panel": "maillard_path_holdout",
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+        }
+      ],
       "signal_origin": "external_literature"
     },
     {
       "bench_file": "data/benchmarks/external_validation/maillard_path/mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026.json",
       "benchmark_id": "mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026",
       "buffer_applied": true,
-      "compounds": [
-        {
-          "ci_width_log10": 2.1081088595812245,
-          "compound": "2-Methyl-3-furanthiol (MFT)",
-          "envelope_state": "in_envelope",
-          "in_core_fit": false,
-          "inside_ci": true,
-          "lane": "sulfur",
-          "measured": 3.29,
-          "measured_ppb": 3.29,
-          "n_finite_samples": 200,
-          "observable_multipliers_applied": false,
-          "predicted_mean": 15.6926613342719,
-          "predicted_p5": 0.5956698470089532,
-          "predicted_p50": 5.518568053182287,
-          "predicted_p95": 76.40371503525763,
-          "predicted_point": 12.015187206643871,
-          "predicted_std": 25.40636064869292,
-          "shared_with": null,
-          "target_unit": "ppb"
-        },
-        {
-          "ci_width_log10": 2.771936424580953,
-          "compound": "2-Furfurylthiol (FFT)",
-          "envelope_state": "in_envelope",
-          "in_core_fit": false,
-          "inside_ci": true,
-          "lane": "sulfur",
-          "measured": 1.46,
-          "measured_ppb": 1.46,
-          "n_finite_samples": 200,
-          "observable_multipliers_applied": false,
-          "predicted_mean": 90.06129479631423,
-          "predicted_p5": 0.6206383138364673,
-          "predicted_p50": 19.016801370936815,
-          "predicted_p95": 367.09207342604236,
-          "predicted_point": 246.54231029249232,
-          "predicted_std": 218.56239572250934,
-          "shared_with": null,
-          "target_unit": "ppb"
-        }
-      ],
-      "coverage_rate": 1.0,
+      "compounds": [],
+      "coverage_rate": 0.0,
       "evidence_role": "external_holdout",
       "execution_path": "free_precursor",
       "fit_target_of": {
@@ -2030,61 +1629,37 @@
         "index": []
       },
       "fitted_row": false,
-      "matched_compounds": 2,
+      "matched_compounds": 0,
       "panel": "maillard_path_holdout",
       "protein_type": "free",
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
-      "refused_compounds": [],
+      "refused_compounds": [
+        {
+          "benchmark_id": "mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026",
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "envelope_state": "in_envelope",
+          "lane": "sulfur",
+          "panel": "maillard_path_holdout",
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+        },
+        {
+          "benchmark_id": "mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026",
+          "compound": "2-Furfurylthiol (FFT)",
+          "envelope_state": "in_envelope",
+          "lane": "sulfur",
+          "panel": "maillard_path_holdout",
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+        }
+      ],
       "signal_origin": "external_literature"
     },
     {
       "bench_file": "data/benchmarks/external_validation/maillard_path/mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026.json",
       "benchmark_id": "mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026",
       "buffer_applied": true,
-      "compounds": [
-        {
-          "ci_width_log10": 1.573917814373042,
-          "compound": "2-Methyl-3-furanthiol (MFT)",
-          "envelope_state": "in_envelope",
-          "in_core_fit": false,
-          "inside_ci": true,
-          "lane": "sulfur",
-          "measured": 2.4,
-          "measured_ppb": 2.4,
-          "n_finite_samples": 200,
-          "observable_multipliers_applied": false,
-          "predicted_mean": 14.064858365264683,
-          "predicted_p5": 1.3893134535687377,
-          "predicted_p50": 7.672264346973642,
-          "predicted_p95": 52.085646085391026,
-          "predicted_point": 12.859461293680834,
-          "predicted_std": 17.112092890024933,
-          "shared_with": null,
-          "target_unit": "ppb"
-        },
-        {
-          "ci_width_log10": 2.23618154711253,
-          "compound": "2-Furfurylthiol (FFT)",
-          "envelope_state": "in_envelope",
-          "in_core_fit": false,
-          "inside_ci": true,
-          "lane": "sulfur",
-          "measured": 1.68,
-          "measured_ppb": 1.68,
-          "n_finite_samples": 200,
-          "observable_multipliers_applied": false,
-          "predicted_mean": 63.57209463466331,
-          "predicted_p5": 1.658157335544285,
-          "predicted_p50": 23.994598912157986,
-          "predicted_p95": 285.6322780895001,
-          "predicted_point": 167.26634676749305,
-          "predicted_std": 113.79250773060384,
-          "shared_with": null,
-          "target_unit": "ppb"
-        }
-      ],
-      "coverage_rate": 1.0,
+      "compounds": [],
+      "coverage_rate": 0.0,
       "evidence_role": "external_holdout",
       "execution_path": "free_precursor",
       "fit_target_of": {
@@ -2092,61 +1667,37 @@
         "index": []
       },
       "fitted_row": false,
-      "matched_compounds": 2,
+      "matched_compounds": 0,
       "panel": "maillard_path_holdout",
       "protein_type": "free",
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
-      "refused_compounds": [],
+      "refused_compounds": [
+        {
+          "benchmark_id": "mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026",
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "envelope_state": "in_envelope",
+          "lane": "sulfur",
+          "panel": "maillard_path_holdout",
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+        },
+        {
+          "benchmark_id": "mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026",
+          "compound": "2-Furfurylthiol (FFT)",
+          "envelope_state": "in_envelope",
+          "lane": "sulfur",
+          "panel": "maillard_path_holdout",
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+        }
+      ],
       "signal_origin": "external_literature"
     },
     {
       "bench_file": "data/benchmarks/external_validation/maillard_path/mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026.json",
       "benchmark_id": "mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026",
       "buffer_applied": true,
-      "compounds": [
-        {
-          "ci_width_log10": 1.1452112629385955,
-          "compound": "2-Methyl-3-furanthiol (MFT)",
-          "envelope_state": "in_envelope",
-          "in_core_fit": false,
-          "inside_ci": false,
-          "lane": "sulfur",
-          "measured": 1.71,
-          "measured_ppb": 1.71,
-          "n_finite_samples": 200,
-          "observable_multipliers_applied": false,
-          "predicted_mean": 13.065383488526649,
-          "predicted_p5": 2.5270289563582327,
-          "predicted_p50": 9.590361576084026,
-          "predicted_p95": 35.303802211053174,
-          "predicted_point": 12.681292014348603,
-          "predicted_std": 11.526454000708142,
-          "shared_with": null,
-          "target_unit": "ppb"
-        },
-        {
-          "ci_width_log10": 1.800965857838498,
-          "compound": "2-Furfurylthiol (FFT)",
-          "envelope_state": "in_envelope",
-          "in_core_fit": false,
-          "inside_ci": false,
-          "lane": "sulfur",
-          "measured": 1.62,
-          "measured_ppb": 1.62,
-          "n_finite_samples": 200,
-          "observable_multipliers_applied": false,
-          "predicted_mean": 41.58627970391496,
-          "predicted_p5": 2.6257065730311444,
-          "predicted_p50": 23.393737293981076,
-          "predicted_p95": 166.03974173619054,
-          "predicted_point": 96.0978747403154,
-          "predicted_std": 55.68517211128967,
-          "shared_with": null,
-          "target_unit": "ppb"
-        }
-      ],
-      "coverage_rate": 1.0,
+      "compounds": [],
+      "coverage_rate": 0.0,
       "evidence_role": "external_holdout",
       "execution_path": "free_precursor",
       "fit_target_of": {
@@ -2154,12 +1705,29 @@
         "index": []
       },
       "fitted_row": false,
-      "matched_compounds": 2,
+      "matched_compounds": 0,
       "panel": "maillard_path_holdout",
       "protein_type": "free",
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
-      "refused_compounds": [],
+      "refused_compounds": [
+        {
+          "benchmark_id": "mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026",
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "envelope_state": "in_envelope",
+          "lane": "sulfur",
+          "panel": "maillard_path_holdout",
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+        },
+        {
+          "benchmark_id": "mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026",
+          "compound": "2-Furfurylthiol (FFT)",
+          "envelope_state": "in_envelope",
+          "lane": "sulfur",
+          "panel": "maillard_path_holdout",
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+        }
+      ],
       "signal_origin": "external_literature"
     },
     {
@@ -2167,66 +1735,6 @@
       "benchmark_id": "mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b",
       "buffer_applied": true,
       "compounds": [
-        {
-          "ci_width_log10": 2.1731368807625127,
-          "compound": "2-Methyl-3-furanthiol (MFT)",
-          "envelope_state": "in_envelope",
-          "in_core_fit": false,
-          "inside_ci": false,
-          "lane": "sulfur",
-          "measured": 22.63,
-          "measured_ppb": 22.63,
-          "n_finite_samples": 200,
-          "observable_multipliers_applied": true,
-          "predicted_mean": 1.0160453390998327,
-          "predicted_p5": 0.02250721860779517,
-          "predicted_p50": 0.33595535229560813,
-          "predicted_p95": 3.3531942280920126,
-          "predicted_point": 0.5097742997445959,
-          "predicted_std": 2.6481834775793582,
-          "shared_with": null,
-          "target_unit": "ppb"
-        },
-        {
-          "ci_width_log10": 2.65387340572683,
-          "compound": "2-Furfurylthiol (FFT)",
-          "envelope_state": "in_envelope",
-          "in_core_fit": false,
-          "inside_ci": true,
-          "lane": "sulfur",
-          "measured": 0.29,
-          "measured_ppb": 0.29,
-          "n_finite_samples": 200,
-          "observable_multipliers_applied": true,
-          "predicted_mean": 1.5223746638336575,
-          "predicted_p5": 0.013975868384265434,
-          "predicted_p50": 0.40551770469656606,
-          "predicted_p95": 6.298718621247323,
-          "predicted_point": 2.4144238888040057,
-          "predicted_std": 3.6772954046705824,
-          "shared_with": null,
-          "target_unit": "ppb"
-        },
-        {
-          "ci_width_log10": 3.577262734307023,
-          "compound": "Bis(2-methyl-3-furyl) disulfide",
-          "envelope_state": "in_envelope",
-          "in_core_fit": false,
-          "inside_ci": false,
-          "lane": "sulfur",
-          "measured": 18.25,
-          "measured_ppb": 18.25,
-          "n_finite_samples": 200,
-          "observable_multipliers_applied": true,
-          "predicted_mean": 0.0039638215841531635,
-          "predicted_p5": 2.9141978656071483e-06,
-          "predicted_p50": 0.0001952900269838426,
-          "predicted_p95": 0.011009859328417072,
-          "predicted_point": 0.0006363094359933459,
-          "predicted_std": 0.018448521060120477,
-          "shared_with": null,
-          "target_unit": "ppb"
-        },
         {
           "ci_width_log10": 1.9994652444923506,
           "compound": "2-Acetylthiazole",
@@ -2248,7 +1756,7 @@
           "target_unit": "ppb"
         }
       ],
-      "coverage_rate": 1.0,
+      "coverage_rate": 0.25,
       "evidence_role": "external_holdout",
       "execution_path": "free_precursor",
       "fit_target_of": {
@@ -2256,12 +1764,37 @@
         "index": []
       },
       "fitted_row": false,
-      "matched_compounds": 4,
+      "matched_compounds": 1,
       "panel": "maillard_path_holdout",
       "protein_type": "free",
       "quantification_family": "headspace",
       "quantification_source": "quantification_class='hs_spme_gcms_semi_quantitative_internal_standard'",
-      "refused_compounds": [],
+      "refused_compounds": [
+        {
+          "benchmark_id": "mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b",
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "envelope_state": "in_envelope",
+          "lane": "sulfur",
+          "panel": "maillard_path_holdout",
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+        },
+        {
+          "benchmark_id": "mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b",
+          "compound": "2-Furfurylthiol (FFT)",
+          "envelope_state": "in_envelope",
+          "lane": "sulfur",
+          "panel": "maillard_path_holdout",
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+        },
+        {
+          "benchmark_id": "mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b",
+          "compound": "Bis(2-methyl-3-furyl) disulfide",
+          "envelope_state": "in_envelope",
+          "lane": "sulfur",
+          "panel": "maillard_path_holdout",
+          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+        }
+      ],
       "signal_origin": "external_literature"
     },
     {
@@ -4718,12 +4251,12 @@
   "provenance": {
     "artifact": "core_prediction_uncertainty",
     "generated_by": "src/kinetic_core/uncertainty.py",
-    "generated_on": "2026-11-03",
+    "generated_on": "2026-11-05",
     "git": {
-      "branch": "acrylamide-envelope-2026-11-03",
-      "commit": "54befe0ad7b4ddc37da3cabccacaa041aad0f755",
+      "branch": "h0-relative-only-thiols",
+      "commit": "8b28d03140bed4224f57749925ed49c019dd7bc3",
       "dirty": true,
-      "short": "54befe0a"
+      "short": "8b28d031"
     },
     "inputs": [
       {
@@ -4938,6 +4471,30 @@
       "reason": "GLYCATION TARGETS 'N\u03b5-(Carboxyethyl)lysine (CEL)' (wave B20) run on the trunk lane only: the acrylamide lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE 'N\u03b5-(Carboxyethyl)lysine (CEL)': in the acrylamide lane's network no chain of reactions leads from what is charged (Glc, Lys) to it, so the integrator would return exactly zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the precursor this compound is made from."
     },
     {
+      "benchmark_id": "hofmann1998_c2c3_recombination_145C_20min_pH3",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "envelope_state": "in_envelope",
+      "lane": "sulfur",
+      "panel": "trust_loop",
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+    },
+    {
+      "benchmark_id": "hofmann1998_c2c3_recombination_145C_20min_pH5",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "envelope_state": "in_envelope",
+      "lane": "sulfur",
+      "panel": "trust_loop",
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+    },
+    {
+      "benchmark_id": "hofmann1998_c2c3_recombination_145C_20min_pH7",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "envelope_state": "in_envelope",
+      "lane": "sulfur",
+      "panel": "trust_loop",
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+    },
+    {
       "benchmark_id": "hofmann1998_fructose_cysteine_145C_20min_pH5",
       "compound": "2-Furfurylthiol (FFT)",
       "envelope_state": "in_envelope_extrapolated",
@@ -4954,6 +4511,14 @@
       "reason": "NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (MFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support."
     },
     {
+      "benchmark_id": "hofmann1998_furan2aldehyde_h2s_145C_20min_pH5",
+      "compound": "2-Furfurylthiol (FFT)",
+      "envelope_state": "in_envelope",
+      "lane": "sulfur",
+      "panel": "trust_loop",
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+    },
+    {
       "benchmark_id": "hofmann1998_glucose_cysteine_145C_20min_pH5",
       "compound": "2-Furfurylthiol (FFT)",
       "envelope_state": "in_envelope_extrapolated",
@@ -4968,6 +4533,38 @@
       "lane": "sulfur",
       "panel": "trust_loop",
       "reason": "NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (MFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support."
+    },
+    {
+      "benchmark_id": "hofmann1998_norfuraneol_cysteine_145C_20min_pH5",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "envelope_state": "in_envelope",
+      "lane": "sulfur",
+      "panel": "trust_loop",
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+    },
+    {
+      "benchmark_id": "hofmann1998_norfuraneol_h2s_145C_20min_pH5",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "envelope_state": "in_envelope",
+      "lane": "sulfur",
+      "panel": "trust_loop",
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+    },
+    {
+      "benchmark_id": "hofmann1998_ribose_cysteine_145C_20min_pH5",
+      "compound": "2-Furfurylthiol (FFT)",
+      "envelope_state": "in_envelope",
+      "lane": "sulfur",
+      "panel": "trust_loop",
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+    },
+    {
+      "benchmark_id": "hofmann1998_ribose_cysteine_145C_20min_pH5",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "envelope_state": "in_envelope",
+      "lane": "sulfur",
+      "panel": "trust_loop",
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
     },
     {
       "benchmark_id": "pea_isolate_40C_PratapSingh2021",
@@ -5010,6 +4607,14 @@
       "reason": "2-ACETYL-1-PYRROLINE TARGETS '2-acetyl-1-pyrroline' (wave B24) run on the trunk lane only: the lipid lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2-acetyl-1-pyrroline'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable."
     },
     {
+      "benchmark_id": "resconi_2023_pbma_beef_identity_benchmark",
+      "compound": "furfural",
+      "envelope_state": "in_envelope_extrapolated",
+      "lane": "sulfur",
+      "panel": "trust_loop",
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+    },
+    {
       "benchmark_id": "soy_isolate_40C_PratapSingh2021",
       "compound": "hexanal",
       "envelope_state": "out_of_envelope",
@@ -5024,6 +4629,110 @@
       "lane": "lipid",
       "panel": "trust_loop",
       "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's source says so, recorded as closure = 'never heated' (its timed block is the headspace incubation of the measurement, not a cook). There is no thermal step here to model, so 2-pentylfuran is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
+    },
+    {
+      "benchmark_id": "thiamine_cys_glucose_120C_Bolton1994",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "envelope_state": "in_envelope_extrapolated",
+      "lane": "sulfur",
+      "panel": "trust_loop",
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+    },
+    {
+      "benchmark_id": "mp_holdout_arp_glutathione_120C_120min_pH75_Zhou2023c",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "envelope_state": "in_envelope",
+      "lane": "sulfur",
+      "panel": "maillard_path_holdout",
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+    },
+    {
+      "benchmark_id": "mp_holdout_arp_glutathione_120C_120min_pH75_Zhou2023c",
+      "compound": "2-Furfurylthiol (FFT)",
+      "envelope_state": "in_envelope",
+      "lane": "sulfur",
+      "panel": "maillard_path_holdout",
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+    },
+    {
+      "benchmark_id": "mp_holdout_arp_glutathione_120C_120min_pH75_Zhou2023c",
+      "compound": "Furfural",
+      "envelope_state": "in_envelope",
+      "lane": "sulfur",
+      "panel": "maillard_path_holdout",
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+    },
+    {
+      "benchmark_id": "mp_holdout_arp_glutathione_120C_30min_pH75_Zhou2023c",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "envelope_state": "in_envelope",
+      "lane": "sulfur",
+      "panel": "maillard_path_holdout",
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+    },
+    {
+      "benchmark_id": "mp_holdout_arp_glutathione_120C_30min_pH75_Zhou2023c",
+      "compound": "2-Furfurylthiol (FFT)",
+      "envelope_state": "in_envelope",
+      "lane": "sulfur",
+      "panel": "maillard_path_holdout",
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+    },
+    {
+      "benchmark_id": "mp_holdout_arp_glutathione_120C_30min_pH75_Zhou2023c",
+      "compound": "Furfural",
+      "envelope_state": "in_envelope",
+      "lane": "sulfur",
+      "panel": "maillard_path_holdout",
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+    },
+    {
+      "benchmark_id": "mp_holdout_arp_glutathione_120C_60min_pH75_Zhou2023c",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "envelope_state": "in_envelope",
+      "lane": "sulfur",
+      "panel": "maillard_path_holdout",
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+    },
+    {
+      "benchmark_id": "mp_holdout_arp_glutathione_120C_60min_pH75_Zhou2023c",
+      "compound": "2-Furfurylthiol (FFT)",
+      "envelope_state": "in_envelope",
+      "lane": "sulfur",
+      "panel": "maillard_path_holdout",
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+    },
+    {
+      "benchmark_id": "mp_holdout_arp_glutathione_120C_60min_pH75_Zhou2023c",
+      "compound": "Furfural",
+      "envelope_state": "in_envelope",
+      "lane": "sulfur",
+      "panel": "maillard_path_holdout",
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+    },
+    {
+      "benchmark_id": "mp_holdout_arp_glutathione_120C_90min_pH75_Zhou2023c",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "envelope_state": "in_envelope",
+      "lane": "sulfur",
+      "panel": "maillard_path_holdout",
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+    },
+    {
+      "benchmark_id": "mp_holdout_arp_glutathione_120C_90min_pH75_Zhou2023c",
+      "compound": "2-Furfurylthiol (FFT)",
+      "envelope_state": "in_envelope",
+      "lane": "sulfur",
+      "panel": "maillard_path_holdout",
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+    },
+    {
+      "benchmark_id": "mp_holdout_arp_glutathione_120C_90min_pH75_Zhou2023c",
+      "compound": "Furfural",
+      "envelope_state": "in_envelope",
+      "lane": "sulfur",
+      "panel": "maillard_path_holdout",
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
     },
     {
       "benchmark_id": "mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019",
@@ -5072,6 +4781,142 @@
       "lane": "sulfur",
       "panel": "maillard_path_holdout",
       "reason": "NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (MFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support."
+    },
+    {
+      "benchmark_id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3",
+      "compound": "2-Furfurylthiol (FFT)",
+      "envelope_state": "in_envelope",
+      "lane": "sulfur",
+      "panel": "maillard_path_holdout",
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+    },
+    {
+      "benchmark_id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "envelope_state": "in_envelope",
+      "lane": "sulfur",
+      "panel": "maillard_path_holdout",
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+    },
+    {
+      "benchmark_id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7",
+      "compound": "2-Furfurylthiol (FFT)",
+      "envelope_state": "in_envelope",
+      "lane": "sulfur",
+      "panel": "maillard_path_holdout",
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+    },
+    {
+      "benchmark_id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "envelope_state": "in_envelope",
+      "lane": "sulfur",
+      "panel": "maillard_path_holdout",
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+    },
+    {
+      "benchmark_id": "mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5",
+      "compound": "2-Furfurylthiol (FFT)",
+      "envelope_state": "in_envelope",
+      "lane": "sulfur",
+      "panel": "maillard_path_holdout",
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+    },
+    {
+      "benchmark_id": "mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "envelope_state": "in_envelope",
+      "lane": "sulfur",
+      "panel": "maillard_path_holdout",
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+    },
+    {
+      "benchmark_id": "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "envelope_state": "in_envelope",
+      "lane": "sulfur",
+      "panel": "maillard_path_holdout",
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+    },
+    {
+      "benchmark_id": "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026",
+      "compound": "2-Furfurylthiol (FFT)",
+      "envelope_state": "in_envelope",
+      "lane": "sulfur",
+      "panel": "maillard_path_holdout",
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+    },
+    {
+      "benchmark_id": "mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "envelope_state": "in_envelope",
+      "lane": "sulfur",
+      "panel": "maillard_path_holdout",
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+    },
+    {
+      "benchmark_id": "mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026",
+      "compound": "2-Furfurylthiol (FFT)",
+      "envelope_state": "in_envelope",
+      "lane": "sulfur",
+      "panel": "maillard_path_holdout",
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+    },
+    {
+      "benchmark_id": "mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "envelope_state": "in_envelope",
+      "lane": "sulfur",
+      "panel": "maillard_path_holdout",
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+    },
+    {
+      "benchmark_id": "mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026",
+      "compound": "2-Furfurylthiol (FFT)",
+      "envelope_state": "in_envelope",
+      "lane": "sulfur",
+      "panel": "maillard_path_holdout",
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+    },
+    {
+      "benchmark_id": "mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "envelope_state": "in_envelope",
+      "lane": "sulfur",
+      "panel": "maillard_path_holdout",
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+    },
+    {
+      "benchmark_id": "mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026",
+      "compound": "2-Furfurylthiol (FFT)",
+      "envelope_state": "in_envelope",
+      "lane": "sulfur",
+      "panel": "maillard_path_holdout",
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+    },
+    {
+      "benchmark_id": "mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "envelope_state": "in_envelope",
+      "lane": "sulfur",
+      "panel": "maillard_path_holdout",
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+    },
+    {
+      "benchmark_id": "mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b",
+      "compound": "2-Furfurylthiol (FFT)",
+      "envelope_state": "in_envelope",
+      "lane": "sulfur",
+      "panel": "maillard_path_holdout",
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
+    },
+    {
+      "benchmark_id": "mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b",
+      "compound": "Bis(2-methyl-3-furyl) disulfide",
+      "envelope_state": "in_envelope",
+      "lane": "sulfur",
+      "panel": "maillard_path_holdout",
+      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by a second independent laboratory's absolute measurements re-scored under H0's rule."
     },
     {
       "benchmark_id": "external_validation_bi_2020_raw_pea_hexanal",
@@ -5153,27 +4998,27 @@
     }
   ],
   "summary": {
-    "benchmark_count": 33,
-    "ci_coverage_hits": 36,
-    "ci_coverage_rate": 0.5454545454545454,
+    "benchmark_count": 13,
+    "ci_coverage_hits": 13,
+    "ci_coverage_rate": 0.48148148148148145,
     "ci_level_pct": 90,
     "fixed_prior_count": 45,
     "honest_literature_coverage": {
       "definition": "External-literature rows only, with fitted rows (constants back-solved from the benchmark) and internal synthetic reproducibility rows removed from BOTH numerator and denominator; computed identically across the trust-loop, maillard_path hold-out and external-matrix panels. Read it together with median_ci_width_log10: a wide interval covering a measurement is a weak claim. The SULFUR lane's identified coordinates are sampled jointly from the shipped wave's Laplace covariance (see priors[]); UNIDENTIFIED ones are drawn uniformly across their declared bands (2026-09-04), narrowed for an activation energy to the prefactor prior and skipped where the bound is definitional rather than measured. THIS DOES NOT CLOSE THE COVERAGE GAP and is not meant to: widening the parameter priors all the way to uncapped moves coverage from 19 % to 21 % against a nominal 90 %. What is left is model-structure error -- systematic per-lane offsets a draw around a wrong centre cannot reproduce -- not parameter uncertainty.",
       "excluded_fitted_rows": 0,
       "excluded_fitted_rows_that_would_have_been_hits": 0,
-      "hits": 36,
-      "median_ci_width_log10": 1.8693792573471626,
+      "hits": 13,
+      "median_ci_width_log10": 1.0149547247229411,
       "not_evaluable": 1,
-      "rate": 0.5538461538461539,
-      "total": 65
+      "rate": 0.5,
+      "total": 26
     },
-    "matched_compound_count": 66,
+    "matched_compound_count": 27,
     "n_samples": 200,
     "observable_multiplier_policy": {
       "rows_by_family": {
-        "extraction": 41,
-        "headspace": 25,
+        "extraction": 18,
+        "headspace": 9,
         "undeclared": 0
       },
       "rule": "the K_aw (+/-0.5 dex) and HS-SPME same-sample dispersion bands multiply a ppb row only when the bundle's quantification_class is a headspace method, or is undeclared (then the core's own absolute_concentration convention is kept and the row says so); extraction-based quantification (SIDA, HPLC, LC-MS/MS) never passed through an air/water partition or a fibre.",
@@ -5181,14 +5026,14 @@
     },
     "out_of_sample_literature_coverage": {
       "definition": "honest_literature_coverage MINUS every row a core fit read (src/kinetic_core/fit_targets.py, from the shipped wave's fit-target record; since the primary-evidence refit only the step-level bundles). The stronger claim.",
-      "hits": 29,
+      "hits": 13,
       "not_evaluable": 1,
       "rows_the_core_fit_read": {
-        "hits": 7,
+        "hits": 0,
         "not_evaluable": 0,
-        "total": 10
+        "total": 0
       },
-      "total": 55
+      "total": 26
     },
     "panel_benchmark_count": 42,
     "panel_split": {
@@ -5200,18 +5045,18 @@
         "total": 4
       },
       "maillard_path_holdout": {
-        "ci_coverage_rate": 0.5,
-        "hits": 23,
-        "median_ci_width_log10": 2.0058324897865987,
+        "ci_coverage_rate": 0.35294117647058826,
+        "hits": 6,
+        "median_ci_width_log10": 0.9704604244386704,
         "not_evaluable": 1,
-        "total": 46
+        "total": 17
       },
       "trust_loop": {
-        "ci_coverage_rate": 0.6666666666666666,
-        "hits": 10,
-        "median_ci_width_log10": 1.2974780550227984,
+        "ci_coverage_rate": 0.8,
+        "hits": 4,
+        "median_ci_width_log10": 1.5426162764006963,
         "not_evaluable": 0,
-        "total": 15
+        "total": 5
       }
     },
     "parameter_sources": [
@@ -5236,20 +5081,20 @@
         "sha256": "4691435ae8bc7802099ebff955fb36af1b3401e200b75486850827cd54a23c04"
       }
     ],
-    "refused_compound_count": 27,
+    "refused_compound_count": 66,
     "sampled_prior_count": 99,
     "seed": 0,
     "shared_with_holdout_panel": {
       "declaration": "The four Hofmann 1998 ribose/cysteine pH-3 and pH-7 rows are the SAME MEASUREMENTS as four rows of the sulfur waves' hold-out panel: NOT independent evidence. Each carries `shared_with`.",
-      "n": 4
+      "n": 0
     },
     "signal_origin_split": {
       "external_literature": {
-        "ci_coverage_rate": 0.5538461538461539,
-        "hits": 36,
-        "median_ci_width_log10": 1.8693792573471626,
+        "ci_coverage_rate": 0.5,
+        "hits": 13,
+        "median_ci_width_log10": 1.0149547247229411,
         "not_evaluable": 1,
-        "total": 65
+        "total": 26
       },
       "fitted_row": {
         "ci_coverage_rate": null,
@@ -5259,11 +5104,11 @@
         "total": 0
       },
       "in_core_fit": {
-        "ci_coverage_rate": 0.7,
-        "hits": 7,
-        "median_ci_width_log10": 0.6851789272046495,
+        "ci_coverage_rate": null,
+        "hits": 0,
+        "median_ci_width_log10": null,
         "not_evaluable": 0,
-        "total": 10
+        "total": 0
       },
       "internal_synthetic": {
         "ci_coverage_rate": null,
@@ -5291,7 +5136,7 @@
       "reduced_chi_square": 1.8711697851956615
     },
     "unsampled_lanes": [],
-    "wall_seconds": 1556.3,
-    "workers": 8
+    "wall_seconds": 461.9,
+    "workers": 5
   }
 }

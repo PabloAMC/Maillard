@@ -136,3 +136,19 @@ in ~3 days (my assumed detection; the paper gives none). Release is thus faster 
 - **Transfer:** same reaction class (thiazolidine-4-carboxylate, aliphatic C-2), different substituents; 30 °C. The
   pH shape transfers better than any magnitude.
 - **Not decisive.** 30 °C, no cysteine-pentose ring, no release rate. Nothing the case would call decisive.
+
+## Second reader (2026-11-05)
+
+**Independent second reading** by `agent-second-reader-2026-11-05`, PDF read before this dossier. Source:
+`data/articles/davis1991.pdf` (J. Chem. Soc. Perkin Trans. 2 1991, 1219); Table 1 checked against a 300 dpi image of p. 1223.
+Printed numbers.
+
+| item | location | first reader | second reader | verdict |
+|---|---|---|---|---|
+| pH-independent plateau, pH 6-12, 30 °C | text p. 1220 and Table 1 (k⁰_obs, diacid 5) | 5.84 × 10⁻⁵ s⁻¹ | **5.84 × 10⁻⁵ s⁻¹** (k⁰_f 4.96 × 10⁻⁵, k⁰_r 8.74 × 10⁻⁶, K⁰ 5.67) | AGREE |
+| acid-side rise | Table 1: k^H_obs / k⁰_obs | ×6.8 | **3.98 × 10⁻⁴ / 5.84 × 10⁻⁵ = 6.82** | AGREE |
+| OH⁻ term (above pH 12.5) | text p. 1221 | 7.60 × 10⁻⁴ M⁻¹ s⁻¹ | **7.60 × 10⁻⁴ dm³ mol⁻¹ s⁻¹** | AGREE |
+| ring-N pKa, 5R / 5S epimer | Table 1 (pK_a^R, pK_a^S) | 5.14 / 4.59 | **5.14 / 4.59** | AGREE |
+| conditions | Experimental p. 1220; Fig. 1 caption | 30 °C, I = 1.0 M KCl, pH meter calibrated at 30 °C | same | AGREE |
+
+Note (both readers): the abstract gives the plateau as pH 6-12 and the text puts the onset of the hydroxide term above pH 12.5.

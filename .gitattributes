@@ -1,0 +1,2 @@
+# Append-only log edited on many branches: keep both sides on merge (2026-11-05)
+tasks/lessons.md merge=union

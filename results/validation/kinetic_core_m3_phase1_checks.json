@@ -1,0 +1,126 @@
+{
+ "artifact": "kinetic_core_m3_phase1_checks",
+ "provenance": {
+  "artifact": "kinetic_core_m3_phase1_checks",
+  "generated_on": "2026-11-05",
+  "git": {"commit": "3483389aff6068acbd008453962630abf4149c81", "short": "3483389a", "branch": "m3-phase1-build", "dirty": true},
+  "generated_by": "scripts/generators/fit_m3_strecker_layer.py --checks",
+  "inputs": [
+   {"path": "src/m3_strecker_layer.py", "sha256": "9eb60ad5ad7dca59f637c65a20783a5dbfb8b675eb912010e306a532dec9b931"},
+   {"path": "scripts/generators/fit_m3_strecker_layer.py", "sha256": "6e2f6a03944056ccd889b4e1bb3de9cc8969069fc26ab9698deaa845581aa0a5"},
+   {"path": "data/lit/fit_rows/strecker_hofmann2000.yml", "sha256": "0f8a8b70ee84ee85fbee129528935148149fb9d087d7fcf80b066bef2dbbeb34"},
+   {"path": "data/lit/fit_rows/strecker_hofmann2000_fig2.yml", "sha256": "806fcb612924ba07057d4639bc72407f7c11fa74bb85297465d8d44dedf01ea3"},
+   {"path": "data/lit/fit_rows/strecker_hofmann2000b.yml", "sha256": "e516886f8c41b8efa630b057aecfcb6826d8a6cc91000425de1f323dbbea01da"},
+   {"path": "data/lit/fit_rows/strecker_hofmann2000b_fig1.yml", "sha256": "b3d154ede5f1f4721e207f94e7875964b20917166f008f187e521b45bb3b9bb3"}
+  ]
+ },
+ "design": "results/validation/kinetic_core_m3_strecker_layer_prereg.md (v2 DRAFT; blob 72b9e6ac4a90)",
+ "memory": {"free_pct_at_launch": 44, "swap_used_mb_at_launch": 8563.06, "threshold_pct": 40, "guard": true},
+ "ph_scale": "label_25C",
+ "v_acid": {
+  "rows": [
+   {"pot": "fed ARP 0.1 M, 120 min, y 0.4 / 1.1", "phosphate_M": 0.5, "acid_mM": [32.4, 89.1], "printed_drop": [0.12, 0.31], "script_drop": [null, 0.31], "layer_drop": [0.1162, 0.3141], "abs_diff": [0.0038, 0.0041], "abs_diff_vs_printed": [0.0038, 0.0041], "exhausted": [false, false]},
+   {"pot": "fed ARP 0.1 M, 500 min, y 0.4 / 1.1", "phosphate_M": 0.5, "acid_mM": [40.0, 110.0], "printed_drop": [0.14, 0.39], "script_drop": [null, 0.39], "layer_drop": [0.1428, 0.3887], "abs_diff": [0.0028, 0.0013], "abs_diff_vs_printed": [0.0028, 0.0013], "exhausted": [false, false]},
+   {"pot": "trapped 0.5 M, 320 min, y 0.4 at 50 %", "phosphate_M": 0.5, "acid_mM": [100.0], "printed_drop": [0.35], "script_drop": [null], "layer_drop": [0.3527], "abs_diff": [0.0027], "abs_diff_vs_printed": [0.0027], "exhausted": [false]},
+   {"pot": "trapped 0.5 M, 320 min, y 1.0 at 50 / 55 %", "phosphate_M": 0.5, "acid_mM": [250.0, 275.0], "printed_drop": [1.1, 1.3], "script_drop": [1.08, 1.34], "layer_drop": [1.0812, 1.3429], "abs_diff": [0.0012, 0.0029], "abs_diff_vs_printed": [0.0188, 0.0429], "exhausted": [false, false]},
+   {"pot": "glucose pot, 120 min, y 0.4 / 1.1 (Phe consumed 49 mM)", "phosphate_M": 0.5, "acid_mM": [19.6, 53.9], "printed_drop": [0.07, 0.19], "script_drop": [null, 0.19], "layer_drop": [0.0709, 0.1913], "abs_diff": [0.0009, 0.0013], "abs_diff_vs_printed": [0.0009, 0.0013], "exhausted": [false, false]},
+   {"pot": "glucose pot, 300 min, y 0.4 / 1.1 (Phe consumed 60 mM)", "phosphate_M": 0.5, "acid_mM": [24.0, 66.0], "printed_drop": [0.09, 0.23], "script_drop": [null, 0.23], "layer_drop": [0.0866, 0.2333], "abs_diff": [0.0034, 0.0033], "abs_diff_vs_printed": [0.0034, 0.0033], "exhausted": [false, false]},
+   {"pot": "trapped 0.5 M, y 1.1 at 55 %", "phosphate_M": 0.5, "acid_mM": [302.5], "printed_drop": ["pH <= ~5"], "layer_ph": 4.929, "pass": true, "exhausted": [false]},
+   {"pot": "Martins fed DFG 10 mM, 0.1 M phosphate pH 6.8, 6.8 mM acids", "phosphate_M": 0.1, "acid_mM": [6.8], "printed_drop": [0.12], "layer_drop": [0.1187], "abs_diff": [0.0013], "exhausted": [false]}
+  ],
+  "max_abs_diff_pH": 0.0041,
+  "tolerance": 0.02,
+  "pass": true
+ },
+ "v1_ex049": {"route_a_calibration_bit_exact": true, "glucose_pot_dicarbonyl_bit_exact": true, "draws": 64},
+ "v2_balance": {
+  "per_rival_form": {
+   "R1|primary": {"phe": 6.55190644813039e-15, "sugar": 6.490730657909038e-15, "o2": 0.0},
+   "R1|headspace_ml=20.0,nu_o2=0.5": {"phe": 6.55190644813039e-15, "sugar": 6.490730657909038e-15, "o2": 3.2693983918824416e-15},
+   "R2|primary": {"phe": 4.754299619745706e-15, "sugar": 6.437882397688094e-15, "o2": 0.0},
+   "R2|headspace_ml=20.0,nu_o2=0.5": {"phe": 4.754299619745706e-15, "sugar": 6.437882397688094e-15, "o2": 4.904097587823662e-15},
+   "R4|primary": {"phe": 4.906173203183625e-15, "sugar": 8.221150870725242e-15, "o2": 0.0},
+   "R4|headspace_ml=20.0,nu_o2=0.5": {"phe": 4.906173203183625e-15, "sugar": 8.221150870725242e-15, "o2": 4.086747989853052e-15}
+  },
+  "tolerance": 1e-09,
+  "pass": true
+ },
+ "v4_r0_pinned": {"log10_k_go_ak": -6.5415452891122525, "log10_k_mgo_ak": -7.529714282148093, "ph_factor_7": 1.30587875822754},
+ "v5_ph_scale": {"scale": "label_25C", "note": "every dpH is on the 25 C label scale from label pH 7.0 (rule 13)"},
+ "v_time": {
+  "R0": {"ms_per_draw": 0.02, "batch": 256, "feasible_share": 1.0, "failed": 0, "coordinates": 2},
+  "R1": {"ms_per_draw": 23.43, "batch": 256, "feasible_share": 0.93359375, "failed": 0, "coordinates": 34, "t2_argon_total_mM_q10_50_90": [0.244, 0.4679, 0.7657], "t2_argon_total_measured_mM": 0.09},
+  "R2": {"ms_per_draw": 23.12, "batch": 256, "feasible_share": 0.1015625, "failed": 0, "coordinates": 32, "t2_argon_total_mM_q10_50_90": [0.1063, 0.4645, 0.805], "t2_argon_total_measured_mM": 0.09},
+  "R3": {"ms_per_draw": 23.98, "batch": 256, "feasible_share": 0.93359375, "failed": 0, "coordinates": 35, "t2_argon_total_mM_q10_50_90": [0.2129, 0.4792, 0.797], "t2_argon_total_measured_mM": 0.09},
+  "R4": {"ms_per_draw": 26.89, "batch": 256, "feasible_share": 0.95703125, "failed": 0, "coordinates": 35, "t2_argon_total_mM_q10_50_90": [0.1688, 0.3867, 0.7057], "t2_argon_total_measured_mM": 0.09}
+ },
+ "r1_drift_in_0.1M_pots": {"draws": 126, "U1_points_dex_median_abs": 0.011696571126073307, "U1_points_dex_max_abs": 0.18920995016995934, "U4_points_dex_median_abs": 0.008931688804020593, "fig1_pH_500_min_median": 6.748493291159297},
+ "v_density": {"lppd_trapezoid_41x41": -0.0866, "lppd_psis": -0.0815, "k_hat": -0.05227077138317778, "ess": 1020.1060499729796, "mc_se": 0.02218669289597125, "lppd_gauss_hermite_20_logit": -0.133, "psis_minus_grid": 0.0051, "gh_minus_grid": -0.0464, "pass": true, "gh_pass": true},
+ "blind_order_stub": {"keyed_file": "data/lit/fit_rows/strecker_hofmann2000b_fig2_fig3.yml", "keyed_file_present_on_disk": false, "refusal": "prereg not frozen: sec. 20 names no freeze commit (v2 is a DRAFT)", "score_refused": true},
+ "v_smc_grid": {"lppd_grid": -0.0866, "smc": {"lppd": -0.1067, "resolved": true, "reason": "", "steps": 1, "evaluations": 1280, "max_k_hat": 0.0862, "min_ess": 241.6785, "final_acceptance": 0.6855, "se": 0.0152}, "smc_minus_grid": -0.0201, "wall_s": 30.6, "pass": true},
+ "v_smc_gaussian_32": {
+  "dimension": 32,
+  "particles": 512,
+  "replicates": 4,
+  "exact_lppd": 12.4021,
+  "smc": {"lppd": 12.94850603364078, "se_replicates": 0.23441509749288575, "replicates": [12.9374, 12.2015, 13.2594, 13.1077], "resolved": true, "reasons": [], "steps": [23, 23, 23, 23], "evaluations": 100352, "max_k_hat": 0.4552744551414181, "min_ess": 256.0, "final_acceptance": [0.315, 0.348, 0.321, 0.337]},
+  "smc_minus_exact": 0.5464,
+  "smc_within_3se": true,
+  "reweighting_8192": {"lppd": -661.8659, "k_hat": 72.51775513274771, "ess": 1.0, "resolved": false},
+  "pass": true
+ },
+ "smc_pilot": {
+  "R2": {
+   "rival": "R2",
+   "dimension": 32,
+   "particles": 256,
+   "unit": "U3 | U4, U1e, U1l (synthetic U3)",
+   "reweighting_1024": {"lppd": -22.055578913826153, "k_hat": 6.06180317666101, "ess": 1.6307300177124449, "resolved": false},
+   "smc": {"lppd": -25.677237861078265, "se_replicates": 0.2556515650468789, "replicates": [-25.4539, -25.9652], "resolved": true, "reasons": [], "steps": [7, 7], "evaluations": 8704, "max_k_hat": 0.3488851188469789, "min_ess": 127.99999999999997, "final_acceptance": [0.268, 0.264]},
+   "wall_s": 532.9,
+   "wall_per_density_s": 532.9,
+   "projection_385_cells_h_one_worker": 57.0,
+   "projection_385_cells_h_four_workers": 14.2
+  },
+  "R3": {
+   "rival": "R3",
+   "dimension": 35,
+   "particles": 256,
+   "unit": "U3 | U4, U1e, U1l (synthetic U3)",
+   "reweighting_1024": {"lppd": -31.72496720169595, "k_hat": 3.0903607639826167, "ess": 2.485657262474488, "resolved": false},
+   "smc": {"lppd": -32.995766028511824, "se_replicates": 0.29577240931404697, "replicates": [-32.7431, -33.3347], "resolved": true, "reasons": [], "steps": [5, 6], "evaluations": 7168, "max_k_hat": 0.11662858909632697, "min_ess": 128.00000000000003, "final_acceptance": [0.279, 0.307]},
+   "wall_s": 273.9,
+   "wall_per_density_s": 273.9,
+   "projection_385_cells_h_one_worker": 29.3,
+   "projection_385_cells_h_four_workers": 7.3
+  },
+  "R4": {
+   "rival": "R4",
+   "dimension": 35,
+   "particles": 256,
+   "unit": "U3 | U4, U1e, U1l (synthetic U3)",
+   "reweighting_1024": {"lppd": -17.759381766710977, "k_hat": 2.2480365352361305, "ess": 9.706841966329744, "resolved": false},
+   "smc": {"lppd": -18.935462004502547, "se_replicates": 0.15244351134712805, "replicates": [-18.7946, -19.0995], "resolved": true, "reasons": [], "steps": [5, 5], "evaluations": 6656, "max_k_hat": -0.05095964182944698, "min_ess": 127.99999999999997, "final_acceptance": [0.291, 0.322]},
+   "wall_s": 267.3,
+   "wall_per_density_s": 267.3,
+   "projection_385_cells_h_one_worker": 28.6,
+   "projection_385_cells_h_four_workers": 7.1
+  }
+ },
+ "v2_psis_pilot": "superseded (v2.1 amendment): the v2 record at commit 5a6a30aa shows the Student-t PSIS pilot unresolved (R2: k-hat 2.5, ESS 1.2 at S = 4096)",
+ "compute_wall_h": 0.333,
+ "declared_choices": [
+  "D-a  Past HPO4^2- exhaustion the pH is floored at 4.76 (acetic acid's pKa: the acids formed buffer there); flagged.",
+  "D-b  The ARP-made donors' sink is kappa_D [D][Phe] (sec. 3.1); the FED-DONOR calibration keeps EX-049's amine-free",
+  "D-c  A donor's Strecker share s_X = k_X / kappa_X. s_min / s_max are the draw's calibrated glucosone / MGO shares",
+  "D-d  phi_FOX is drawn on the measured phi_D range [0.14, 0.30] like phi_DG1; FOX carries omega_C23, 1-DG omega_C6;",
+  "D-e  At 85 C every rate (exits, sinks, k0_DG1, Strecker) carries the exits' Arrhenius factor (one Ea); the",
+  "D-f  In the trapped pot acid comes from osone lost to non-trap channels plus the fragment, FOX and route-B exits:",
+  "D-g  Finite O2 in the trapped pot uses the same headspace per 10 mL of solution as the closed vials.",
+  "D-h  Phe liberated (U3) is the cumulative Phe released by the exits (sec. 3.2), not net of route-A consumption.",
+  "D-i  U3's read error is the prereg's literal 0.011 umol/mmol (1.1e-5 mmol/mmol) plus 0.03 dex."
+ ],
+ "outcome": "NOT FROZEN; UNDECIDABLE ON DISK (coordinator, 2026-11-05): under v2.1 no decisive contrast reaches usable power. The route credits R1 only, at 0.065 vs 0.01 under four-form agreement. Transfer and decay law are demoted. Phase 1 moves to W6 (prereg sec. 23). The keyed hofmann2000b Figs. 2 - 3 rows were never read and remain unused.",
+ "reusable_estimator": "REUSABLE ESTIMATOR: the adaptive-tempering SMC (smc_lppd / smc_replicated; independence MH moves in logit space; k replicates for the stated error) passes V-SMC (a) against an exact grid and V-SMC (b) on a 32-dimension case with a known answer, where reweighting fails. It resolved U3 at 32 - 35 coordinates in 4.5 - 10 min per density, and is reusable for other held-out densities of ~30 - 35 coordinates.",
+ "cf_candidate_argon": "CF CANDIDATE (for the register session; not filed here): every rival over-predicts Table 2's argon PA + PAA. The median is 0.39 - 0.48 mM and q10 0.11 - 0.24 mM, against a measured 0.09 mM. In the 4 096-draw sets only 5.7 % of R1 draws and 15 % of R2 draws come within 2x of it. The cause is shared structure (route A / EX-049's calibration, or the ARP-Phe exits), not the rivals: see prereg sec. 23 for the reading."
+}

@@ -1966,68 +1966,6 @@
       }
     },
     {
-      "id": "hrncirik_2014_coconut_oil_thermal_profile",
-      "citation": "Hrncirik & Zeelenberg (2013), J. Am. Oil Chem. Soc. 91:591",
-      "doi": "10.1007/s11746-013-2401-2",
-      "kind": "calibration_reference",
-      "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
-      "slr_family_source": "02",
-      "payload_role": "benchmark_intake",
-      "observable_panel_tags": [
-        "lipid_oxidation",
-        "lactone_support",
-        "process_state_calibration"
-      ],
-      "process_state_scope": [
-        "heated_matrix"
-      ],
-      "target_modules": [
-        "lipid_oxidation",
-        "matrix_correction",
-        "reporting"
-      ],
-      "matrix_family": "coconut_oil_co_matrix",
-      "eligibility": "benchmark_eligible_parameter",
-      "status": "ready_for_calibration_encoding",
-      "what_it_supports": [
-        "Thermal-stability context for coconut-oil-rich co-matrices against PUFA-rich oils",
-        "Bounded delta-decalactone support for lipid-rich aroma interpretation"
-      ],
-      "what_it_does_not_support": [
-        "Exact plant-matrix volatile concentration closure",
-        "A full lipid degradation mechanism outside coconut-oil-like systems"
-      ],
-      "key_values": {
-        "journal_volume_page": "62:9666",
-        "delta_decalactone_oav_reported": true,
-        "comparative_to_pufa_oils": true
-      },
-      "repo_next_action": "Use as a coconut-oil co-matrix thermal-profile calibration so lipid-rich formulations are not interpreted with PUFA-only oxidation context.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "process_state_calibration",
-          "artifact_id": "hrncirik_2014_coconut_oil_thermal_profile",
-          "path": "data/lit/process_state_calibrations.json"
-        }
-      ],
-      "requires_primary_data": false,
-      "citation_aliases": [
-        "Hrncirik & Zeelenberg (2014)"
-      ],
-      "doi_repair": {
-        "old": "10.1016/j.foodchem.2013.11.082",
-        "new": "10.1007/s11746-013-2401-2",
-        "date": "2026-08-26",
-        "basis": "Repo DOI 10.1016/j.foodchem.2013.11.082 resolves to Mashhadizadeh et al. (2014) on trace-metal SPE. The real Hrncirik & Zeelenberg paper is 'Stability of Essential Fatty Acids and Formation of Nutritionally Undesirable Compounds in Baking and Shallow Frying' (JAOCS, online 2013)."
-      },
-      "citation_repair": {
-        "old": "Hrncirik & Zeelenberg (2014)",
-        "new": "Hrncirik & Zeelenberg (2013), J. Am. Oil Chem. Soc. 91:591",
-        "date": "2026-08-26",
-        "basis": "Relabelled to the authors/year/venue of the repaired DOI."
-      }
-    },
-    {
       "id": "aliani_2005_donor_potency_nucleotide_context",
       "citation": "Aliani & Farmer (2005), J. Agric. Food Chem. 53:6067",
       "doi": "10.1021/jf050085t",
@@ -9124,7 +9062,7 @@
     "instrumentation": "HS-SPME-GC-MS with isotopically labelled internal standard; add acrylamide LC-MS/MS for the high-temperature SPI arm."
   },
   "closed_citations": {
-    "note": "Citations whose records were deleted: searched for and not found (CrossRef sweeps 2026-08-26/27; gap search 2026-10-09), or carrying a value nobody had checked against the paper (2026-10-27). Nothing here is a value. Listed so the deep-research queue never reopens them; reopening one means reading the paper into a dossier first. Reasons are in git history (git log -S'<citation>' -- data/lit/).",
+    "note": "Citations whose records were deleted: searched for and not found (CrossRef sweeps 2026-08-26/27; gap search 2026-10-09), or carrying a value nobody had checked against the paper (2026-10-27). Since 2026-11-05 also a citation whose values were withdrawn from a research-backlog item that was kept, because the paper is real (Wang 2012, Kaspchak 2022). Nothing here is a value. Listed so the deep-research queue never reopens them; reopening one means reading the paper into a dossier first. Reasons are in git history (git log -S'<citation>' -- data/lit/).",
     "citations": [
       "De Leyn & Muylle (2019)",
       "Comunian et al. (2021)",
@@ -9186,7 +9124,12 @@
       "Matoba, Terao & Fujimaki 1988",
       "Kavitha & Modi (2007), LWT 40:1280",
       "Yamaguchi & Ninomiya (2000)",
-      "Hwang, Ismail & Joo (2020), Foods 9:251"
+      "Hwang, Ismail & Joo (2020), Foods 9:251",
+      "Hrncirik & Zeelenberg (2014)",
+      "Hrncirik & Zeelenberg (2013), J. Am. Oil Chem. Soc. 91:591",
+      "Kocadağlı & Gökmen (2016)",
+      "Kaspchak, Toci, Menezes, Igarashi-Mafra & Mafra (2022), Food Chem. 394:133518",
+      "Wang, Z. et al. (2012)"
     ]
   }
 }
