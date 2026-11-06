@@ -914,6 +914,9 @@ must not decide the verdict.)
   cysteine sinks", the ledger contradiction resolved, one attribution fit; S3's posterior-predictive test; per-signature
   false-kill rates; the commit-message correction; the shipped path written after the numbers. Nothing above sec. 21
   is edited except this line.
+- v3.8.1, 2026-11-06 (A2's independent confirmation: CONFIRMED WITH EDITS; sec. 21.9): text and record only. Secs.
+  21.2 and 21.6 are annotated in place (marked), not rewritten. Sec. 21.8 is corrected. CF-134 is new. No fit is
+  re-run and no shipped output moves.
 
 ## 20. Amendment A1 (v3.7, 2026-11-06): part (i), falsification only
 
@@ -1143,7 +1146,9 @@ arguments, fixed before any number, and the verdict is read over its whole defen
      bit-identical when off), with a test;
    - and the default flip is listed in sec. 21.8 as a never-cased structural choice for S1 / S2.
 3. **The claim restated.** A1's kill, where it stands, is a kill of **"B0 + the shipped cysteine sinks"** (their
-   encodings and constants), not of B0's balance alone.
+   encodings and constants), not of B0's balance alone. *[Confirmation edit, sec. 21.9: restated as **"B0 + the shipped
+   centre ledger"**. The ledger's carboxyl routing into CBX (CF-134's CO2) is part of what is killed, not only the
+   sinks' amine fates.]*
 4. **The attribution fit F-A** (one fit, run once).
    - **Rival:** B0, with the shipped encodings.
    - **Free:** the confirmation fit's set (R0's 17 + the lumped yield), with `k_cys_thermal`'s search bound replaced by
@@ -1164,7 +1169,11 @@ arguments, fixed before any number, and the verdict is read over its whole defen
        barrier instead of its own. This is the 30 C extrapolation past Zheng's data, bounded by the class.
    - **Objective:** B60's 52 rows and prior (the confirmation fit's objective), plus Meynier's five cysteine pots,
      each as a deviance residual sqrt(-2 ln P(|d_k + e| <= 0.2)), e ~ N(0, sigma_max^2) (the most permissive
-     defensible choice). The five pots run in-process with BDF at the screen's tolerances (V-solver: BDF and LSODA
+     defensible choice). *[Confirmation edit, sec. 21.9: inaccurate wording. sigma_max is the largest sd in D. That
+     makes it the most permissive pass threshold for a drift beyond the edge, but in the objective it is the weakest
+     pull toward Meynier: a smaller sd penalises the same drift more and would push the fit harder toward the five
+     pots. F-A is therefore not the fit most favourable to B0 on Meynier. k_cys_thermal sits at its band edge, which
+     suggests a harder pull buys little, but no such fit was run.]* The five pots run in-process with BDF at the screen's tolerances (V-solver: BDF and LSODA
      agree to 8e-8 pH).
    - **Start:** B0's converged confirmation-fit point; the two new coordinates at the points of their bands nearest the
      shipped values. M1's optimiser settings and budget, with one continuation of a status-0 segment.
@@ -1216,7 +1225,7 @@ confirmer"**. History is not rewritten; this line is the correction.
 ### 21.6 The shipped path
 
 1. Written after the numbers, as sec. 21.8, for a separate PR. **No shipped output moves in this PR.**
-   - If B0 + the sinks stays falsified: decide between refusing the balance-dependent outputs and a B1 u B13 envelope
+   - If B0 + the sinks (restated: B0 + the shipped centre ledger, sec. 21.9) stays falsified: decide between refusing the balance-dependent outputs and a B1 u B13 envelope
      (S3: the union of the carried rivals' envelopes), and state whether B1 and B13 run in the engine today.
    - If undecided: B0, B1 and B13 are carried as S3's union.
    - Either way, list the outputs affected, and list the ledger's default flip (sec. 21.2) as a structural choice for
@@ -1244,6 +1253,14 @@ said: a split of the record, not of the method).*
 
 - **sigma_max = 0.135** (edge 0.2) and **0.168** (edge 0.25); the Monte Carlo agrees with the closed form. So D is
   [0.071, 0.135] (edge 0.2) or [0.071, 0.168] (edge 0.25).
+- *[Confirmation edit, sec. 21.9:]* **sigma_max rests on independence across the 20 pots** (sec. 21.1 item 1).
+  - A shared error (one meter calibration, one buffer batch, one read-off habit) correlates the e_i. That raises
+    P(all within) at a given sigma, so the bound loosens. Fully shared, it would allow sigma up to ~3.
+  - The bound is therefore an assumption-laden upper end of D, not a measurement. The S3 verdict does not depend on
+    it (sec. 21.8.3): it holds at every sd computed up to 0.458.
+  - A bound from the five cysteine pots alone, still assuming independence, is (2 Phi(0.2 / sigma) - 1)^5 = 0.05, so
+    **sigma_max,5 = 0.2 / Phi^-1((1 + 0.05^(1/5)) / 2) = 0.265** (checked: 0.05^(1/5) = 0.549, Phi^-1(0.775) = 0.755).
+    That still kills (sec. 21.8.3).
 - **Davies buffer capacities** of Meynier's cysteine pots at t = 0: 13.2 / 33.4 / 74.5 / 113.6 / 107.8 mmol/L per pH
   at labels 4.5 - 6.5 (I = 0.62 - 1.00 M; at I = 0: 5.6 / 9.4 / 25.1 / 62.6 / 110.1). CF-084's beta = 5.4 at label
   4.5 is the I = 0 reading; Davies gives 13.2 (the review estimated ~12). Davies above ~0.5 M is an approximation.
@@ -1267,7 +1284,10 @@ said: a split of the record, not of the method).*
 
 - **The ledger finding:** the docstring is right; the shipped `r_cys_thermal` and `ch_cys_ox` encodings destroy an
   amine their own chemistry keeps (sec. 21.2 item 1). Fixed as an opt-in switch, commit c26a4a27; the shipped default
-  is unchanged.
+  is unchanged. *[Confirmation edit, sec. 21.9:]* the opt-in fix is right for pH <= 7 only. It keeps the amine as
+  ammonium (NH4+, pKa 9.25) in B1's pool, whereas cystine's alpha-ammonium pKa are ~8.0 / 8.7, and the ledger ignores
+  the thiol centre the oxidation removes (cysteine's thiol, pKa 8.33 at 25 C). Below pH 7 neither matters (both amine
+  forms are protonated, the thiol mostly so); at Zhou's label 8 both do.
 - **F-A converged** (status 2, 258 evaluations, 0 failed pot runs). Bands: log10 k_cys_thermal [-2.818, -1.980]
   (Kang's total 1.05e-2 /min at 145 C; rho 0.145), mu_h2s [-1.048, -0.083]. Zheng's extrapolated pH-7 rate at 140 C
   (1.05e-2 /min) exceeds Kang's measured total loss (8.6e-3 /min), so the shipped H2S route is above its own bound
@@ -1277,12 +1297,28 @@ said: a split of the record, not of the method).*
   and degrades Hou's shape (sec. 21.8.3).
 - **Diagnostic, no verdict:** with `r_cys_thermal` and `ch_cys_ox` keeping their amine, the drifts are -0.26 / -0.52 /
   -0.51 / -0.36 / -0.35 at F-A and +0.07 / -0.37 / -0.49 / -0.36 / -0.35 at the confirmation fit. The ledger error
-  carries the label-4.5 drift. Most of the drift at labels 5 - 6.5 comes from the other cysteine amine routes, which
-  are B1's phi_cys question.
-- **So the kill stands as "B0 + the shipped cysteine sinks, with the sinks' constants free in their bands":** P ~ 0.9
-  that this structure cannot reproduce Meynier. The attribution to the amine fate at release is stronger than the
-  review's P ~ 0.70: the lumped acid yield fits to 0, the glycine pots do not drift, and keeping the amine (B1, B13,
-  or the ledger's own chemistry) removes most of it. P ~ 0.85.
+  carries the label-4.5 drift.
+- *[Confirmation edit, sec. 21.9: the next sentence was a finding; it is a hypothesis.]* **Hypothesis:** most of the
+  drift at labels 5 - 6.5 comes from the other cysteine routes (B1's phi_cys question, and the CO2 treatment of CF-134).
+  - **What the records show.** A per-step proton budget cannot be computed from the records on disk. The attribution
+    record stores, per Meynier pot, the cysteine left and the ammonium the two retained steps made, not the flux
+    through each step. Taking the pot's 50 mM start, the records give only the split of the cysteine consumed.
+  - At F-A, 10.8 / 20.6 / 32.7 / 37.1 / 38.3 mM of cysteine is consumed at labels 4.5 - 6.5. Of this, 3.2 / 2.4 / 1.4 /
+    1.1 / 1.0 mM (29 / 12 / 4 / 3 / 3 %) passes through `r_cys_thermal` + `ch_cys_ox`. At the confirmation fit the
+    shares are 71 / 45 / 22 / 16 / 14 %.
+  - So at labels 5 - 6.5, 88 - 97 % of the cysteine lost at F-A goes through the other routes. Those routes include the
+    three decarboxylations of CF-134, whose CO2 the ledger counts as a full-strength carboxylate. How the drift splits
+    between their amine fate and their CO2 is not on disk; it needs a per-step engine run, which this edit does not make.
+- **So the kill stands as "B0 + the shipped centre ledger", with the sinks' constants free in their bands.** The
+  centre ledger means `CENTRE_LEDGER`'s amine fates and the carboxyl routing into CBX, including CF-134's CO2.
+  - P ~ 0.85 (the confirmer's; the author wrote ~0.9) that this structure cannot reproduce Meynier.
+  - **P ~ 0.55 on the attribution to the amine fate at release** (the confirmer's; the author wrote 0.85, above the
+    review's 0.70). For the attribution: the lumped acid yield fits to 0, and keeping the amine (B1, B13, or the
+    ledger's own chemistry) removes much of the drift.
+  - Against it: **the glycine pots do drift under B0.** Over the screen's draws the most negative glycine drift per
+    draw has median -0.14 and q05 -0.27 (min -0.28; `kinetic_core_m1b_part_i_screen.md`). That pot has no cysteine
+    amine, so some of B0's acid comes from elsewhere. B3 and B13 drift by less than 0.006 there.
+  - Also against it: the label 5 - 6.5 budget above is not resolved by step, and CF-134's CO2 shares those routes.
 
 #### 21.8.3 S3's test (sec. 21.3)
 
@@ -1297,6 +1333,14 @@ said: a split of the record, not of the method).*
   (no coordinate unidentified). sigma-Mey stays rejected even under the out-of-D unscaled s x 2 form (p 4e-4 at F-A).
   The reason: S3 asks for all five pots within jointly at the fit, while A1's screen read each pot separately over the
   band-integrated draws.
+- *[Confirmation edit, sec. 21.9:]* **The S3 verdict holds over the whole interval [0.071, 0.458]**, not only over D.
+  - At F-A, sigma-Mey is rejected after Holm in every A1 form at every sd computed with edge 0.2: 0.071, 0.100, 0.135,
+    the N-beta sets, 0.237 and 0.458. Its largest p is 4.7e-4 (0.458, offset / shape form); at edge 0.25 it is 9.1e-4.
+    Even Holm's strictest threshold across four tests is 0.0125.
+  - **The five-pot bound (0.265) still kills.** It lies between two computed sds: 0.237 (p <= 4.0e-4) and 0.458
+    (p <= 4.7e-4). The record keeps the predictive sd per pot, not the 5 x 5 covariance, so p at 0.265 itself cannot be
+    recomputed. Under independent pots, P(all within) rises monotonically over [0.071, 0.458] at F-A, which brackets
+    p(0.265) at ~3 - 5e-4. That is more than an order of magnitude below 0.0125.
 
 #### 21.8.4 Per-signature false-kill rates (sec. 21.4)
 
@@ -1307,6 +1351,13 @@ said: a split of the record, not of the method).*
   check. B1's and B13's own sets read all within 0.14 - 0.34 of the time.
 - Hou level and Hou shape kill nothing alone (kill power <= 0.005): the kills are sigma-Mey's and sigma-Zhou's, as sec.
   20.3 foresaw.
+- *[Confirmation edit, sec. 21.9:]* **Calibration flag.** These false-kill rates are screen rates under the test's own
+  noise model: synthetic sets generated by the same likelihood the test reads. They are not calibrated against
+  replicate data, so they bound the test's error only if that noise model is right.
+  - One sign that it is not: at B0's own confirmation fit, Hou's shape p is 2e-11 in the primary form (1.5e-13 for B3),
+    against 3e-5 - 2e-1 once A1's offset / shape terms are added (1e-2 at s).
+  - A p that small at a rival's own best fit suggests the primary form is overconfident. Its rejections are therefore
+    read with the offset / shape cells beside them, which is how sec. 21.3 reads them.
 
 #### 21.8.5 The record correction (sec. 21.5)
 
@@ -1314,7 +1365,8 @@ said: a split of the record, not of the method).*
 
 #### 21.8.6 Which shipped path follows (proposed S3 application, for a separate PR; nothing moves here)
 
-- **Status.** The incumbent B0, with the shipped cysteine sinks, is falsified under S3, and so are B2 and B3. B1 and
+- **Status.** The incumbent B0, with the shipped cysteine sinks (restated: **B0 + the shipped centre ledger**, sec.
+  21.9), is falsified under S3, and so are B2 and B3. B1 and
   B13 are not falsified. They are S3-carried, since both were named in this case before results with a mechanism of a
   listed evidence kind (B1: Sohn & Ho's measured NH3 yields; B13: Davidek 2006a's acetic yields plus B1). A1 records
   them as "not testable here", so they gain nothing: carried, not credited.
@@ -1337,9 +1389,24 @@ said: a split of the record, not of the method).*
   2. **Then: ship the B1 u B13 envelope** for those outputs, built by the separate PR on the inline coupling, its cost
      stated, with held-out coverage before / after and an independent review (S3 / S4's replacement of items 6 and 9).
      Where B1's and B13's envelopes disagree in sign on a lever, the lever's direction is refused (S3).
+     *[Confirmation edit, sec. 21.9:]* Only after converged S3 fits of B1 and B13 (A1 recorded them as "not testable
+     here", so neither has had S3's test at its own best fit) and after the CO2 ledger audit (CF-134), which B1 and
+     B13 inherit.
   3. **The ledger default flip** (`r_cys_thermal`, `ch_cys_ox`: amine kept) is listed for S1 as a never-cased
-     structural choice. Under the envelope it is subsumed: B1 at phi_cys = 1 keeps every cysteine amine. As a change
-     to the incumbent it needs its own S2 / S4 case; it is not made here.
+     structural choice. *[Confirmation edit, sec. 21.9: corrected.]* Under the envelope it is subsumed for these two
+     steps: B1 at phi_cys = 1 keeps the amine of the seven steps in `CYSTEINE_AMINE_STEPS`
+     (`ph_balance_rivals.py`), and both are among them. It does **not** keep every cysteine amine.
+     - Three cysteine-amine steps that `CENTRE_LEDGER` sets to amine -1 lie outside both of B1's sets: `r_ttca_deg`,
+       `r_hmf_cys` and `r_cys_actz`. For `r_cys_actz`, the ring nitrogen's destruction is the step's own chemistry.
+     - `r_tdp_cys_trap` sits under phi_arp.
+     - As a change to the incumbent, the flip needs its own S2 / S4 case; it is not made here.
+  4. *[Confirmation edit, sec. 21.9:]* **The CO2 treatment is listed for S1 as a structural choice** (CF-134).
+     - The decarboxylations `r_cys_actz`, `r_dpo_ddp` and `r_mgo_cys_strecker` route their CO2 into CBX. So does
+       `r_dpo_ddp_h2s` when its switch is on. CBX is titrated as the formic / acetic mixture at full strength (pKa
+       ~4.25, `ph_state.TITRATABLE_CENTRES["CBX"]`), where CO2 / HCO3- has pKa 6.35 and degasses.
+     - At labels 4.5 - 6 the ledger therefore overstates acid by ~0.5 - 1 H+ per event. B1 and B13 inherit it.
+     - Its options: the shipped mixture; carbonic acid at pKa 6.35 retained in solution; carbonic acid with
+       degassing (a headspace partition, sealed vs open). None is cased.
 - **Outputs affected (first pass; the separate PR computes the exact set).** Only the sulfur lane runs the dynamic
   balance (`engine.py`: the trunk-only, acrylamide and lipid lanes do not). Within it, an output is balance-dependent
   where its sensitivity to the B0 -> B1 / B13 switch exceeds the lane's within-lab term (omega 0.419 dex) for relative
@@ -1354,4 +1421,44 @@ said: a split of the record, not of the method).*
   4. strongly buffered pots (beta >= ~60 mmol/L per pH: 0.2 M pyrophosphate at labels 6.0 - 6.5, phosphate near its
      pKa2). Expected to stay below omega and keep their point predictions; listed so the separate PR checks them, not
      assumed.
-- **What remains open:** CF-084 stays open; sec. 20.6 (`ph_species_discrepancy`) is unchanged; part (ii) is untouched.
+- **What remains open:** CF-084 stays open; CF-134 (the CO2 treatment) is open; sec. 20.6 (`ph_species_discrepancy`)
+  is unchanged; part (ii) is untouched.
+
+### 21.9 The independent confirmation of A2 and its edits (2026-11-06)
+
+*Appended after an independent confirmer read secs. 21.0 - 21.8 and the records. Verdict: **A2 CONFIRMED WITH
+EDITS**. P ~ 0.85 that "B0 + the shipped centre ledger" is falsified under S3; P ~ 0.55 on the attribution to the
+amine fate. The edits are applied in place, marked "Confirmation edit, sec. 21.9", and nothing is re-run. No fit and
+no shipped output moves.*
+
+1. **Sec. 21.8.2.**
+   - "The glycine pots do not drift" was wrong. Under B0 they drift: median -0.14, q05 -0.27.
+   - The label 5 - 6.5 attribution is now a hypothesis. The records give the cysteine split, not a per-step proton
+     budget.
+   - The attribution probability is ~0.55.
+2. **CF-134 (new, open; links CF-084).** CO2 from decarboxylations is counted as a full-strength carboxylate.
+   - Verified in the code: `sulfur.py` `r_cys_actz`, `r_dpo_ddp` and `r_mgo_cys_strecker` (and `r_dpo_ddp_h2s`)
+     route it into CBX. `ph_state.titratable_inventory` titrates CBX at full strength as `ORGANIC_ACID_MIX`.
+   - The kill is restated everywhere as "B0 + the shipped centre ledger". The CO2 treatment is an S1 structural choice
+     (sec. 21.8.6 item 4). No code changes.
+3. **Sec. 21.8.6 item 3.** B1 at phi_cys = 1 does not keep every cysteine amine. `r_ttca_deg`, `r_hmf_cys` and
+   `r_cys_actz` lie outside `CYSTEINE_AMINE_STEPS`.
+4. **Secs. 21.8.1 / 21.8.3.**
+   - sigma_max assumes the pots' errors are independent.
+   - The S3 verdict holds over [0.071, 0.458]: at F-A, sigma-Mey's largest p is 4.7e-4, at 0.458.
+   - The five-pot bound is 0.265, and it still kills.
+5. **Sec. 21.2's objective.** sigma_max is the weakest pull toward Meynier, not "the most permissive" choice for the
+   fit.
+6. **Sec. 21.8.4.** The false-kill rates are screen rates under the test's own noise model, not calibrated ones.
+   Hou's shape p of 2e-11 at B0's own fit suggests the primary form is overconfident.
+7. **`fit_m1b_ph_balance.py`.** The S3 step's clip of a stored confirmation optimum to its bounds is now asserted to
+   change nothing (`clip_changes_nothing`; unit test). Checked on the three stored records: it changes nothing, so no
+   record is regenerated.
+8. **The opt-in ledger fix (c26a4a27) is right for pH <= 7 only.** Cystine's amine pKa ~8.0 / 8.7 against NH4+'s 9.25,
+   and the thiol centre the ledger ignores, both matter at Zhou's label 8.
+
+**Follow-ups, each its own PR:**
+- an S3 application PR that refuses the balance-dependent sulfur-lane outputs;
+- a sec. 7 clause on how a refusal is lifted;
+- the B1 u B13 envelope, only after converged S3 fits of B1 and B13 and the CO2 ledger audit (CF-134);
+- a case for flipping the ledger default.
