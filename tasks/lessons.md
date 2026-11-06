@@ -537,3 +537,7 @@ have no null answer): counting it as a difference of 0 pulls the mean to zero an
 ## 2026-11-06 — Never redirect a bare `cat >>` without input
 - **What happened:** a stray `cat >> file` with no heredoc waited on stdin and hung the command.
 - **Rule:** every `cat >>` in a command needs its own heredoc or input file.
+
+## 2026-11-06 — A job started with `&` inside a foreground call dies with it
+- **What happened:** I launched the records branch's regenerate-and-gates run with a trailing `&` in a normal Bash call. The harness ended the shell when the call returned, which killed the job after three steps. No notification came, so I found it only by reading the log.
+- **Rule:** start long jobs only with the tool's background mode (`run_in_background`), never with `&`.
