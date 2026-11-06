@@ -516,3 +516,28 @@ have no null answer): counting it as a difference of 0 pulls the mean to zero an
 - **Rule:** before citing a record that is not on main, check which gates read that kind of citation (dossier paths:
   `dossier_coverage_gate`; register ids: the register gates). Either merge the PR that adds the record first, or keep
   the citation out of gated files until it lands.
+## 2026-11-05 — Never stop your own job with `pkill -f "<pattern>"` while other agents run
+- **What happened:** I stopped my gate run with `pkill -f "docker_maillard.sh gates"`. Five agents shared the machine
+  and several run the same command, so the pattern could kill theirs too; I had to warn each one to rerun.
+- **Rule:** stop a job by its own handle: its PID (`$!` at launch, or the PID the harness reports), or the harness's
+  stop tool for a background task. Never by a command pattern that other agents' jobs can share. A killed run
+  (exit 143 / 144) is neither a pass nor a failure: rerun it.
+
+## 2026-11-06 — Regenerate generated files only after the conflicts are staged
+- **What happened:**
+  - On PR #77 I took `--theirs` for a conflicted `data_wishlist.json`, then regenerated `results/README.md` before `git add`.
+  - The index still held the file once per conflict stage, so `git ls-files` (which the README generator reads) counted 984 tracked files instead of 982.
+  - My local `--check` ran in the same dirty state, so it passed; CI failed.
+- **Rule:**
+  1. Resolve every conflicted path.
+  2. `git add` each one; `git diff --name-only --diff-filter=U` must come back empty.
+  3. Run the generators.
+  4. Run their `--check`s.
+
+## 2026-11-06 — Never redirect a bare `cat >>` without input
+- **What happened:** a stray `cat >> file` with no heredoc waited on stdin and hung the command.
+- **Rule:** every `cat >>` in a command needs its own heredoc or input file.
+
+## 2026-11-06 — A job started with `&` inside a foreground call dies with it
+- **What happened:** I launched the records branch's regenerate-and-gates run with a trailing `&` in a normal Bash call. The harness ended the shell when the call returned, which killed the job after three steps. No notification came, so I found it only by reading the log.
+- **Rule:** start long jobs only with the tool's background mode (`run_in_background`), never with `&`.
