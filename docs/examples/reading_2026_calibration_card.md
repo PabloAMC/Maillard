@@ -1,3 +1,11 @@
+NOTE (2026-11-05): this hand-kept example predates H0's ruling (EX-059, D2 branch (i)). The live `calibrate` no longer
+prints the shipped model's absolute level or fold for in-scope thiols (MFT, FFT, MFT disulfide, furfural, norfuraneol,
+sulfur-lane MGO) for a new laboratory: those "shipped" rows read "H0 refused". The calibrated rows are unchanged in kind.
+The "shipped" column below is kept as a historical example only. Since 2026-11-05 `calibrate` also writes a content
+checksum over the fitted payload (`provenance.payload_sha256`), and only a file whose checksum verifies rescues a thiol
+level; the example `reading_2026_calibration.json` predates it, so it no longer rescues one (the refusal says why).
+Re-running the `calibrate` line in QUICKSTART makes a verifiable file.
+
 ================================================================================================
   CALIBRATION CARD   laboratory: Reading 2026   base: kinetic_core_b9   matrix: water
 ================================================================================================

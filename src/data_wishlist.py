@@ -10,6 +10,11 @@ envelope misses most). This module reads all four and writes ONE artifact,
 Nothing here is a measurement or a fit. Every line is derived from a tracked artifact and says
 which artifact; the "unlocks" sentences are structural (which observables sit downstream of a
 step in the network, which rows leave the not-evaluable list), not forecasts of accuracy.
+
+2026-11-05: one exception, kept apart and labelled. Section 8 (structural questions the literature on disk cannot
+decide, and the measurement that would) is rendered from the hand-kept record
+``docs/reference/decisive_measurements.yml`` through ``src/decisive_measurements.py``, which checks every citation;
+it is curated, not derived, and the section says so.
 """
 from __future__ import annotations
 
@@ -18,7 +23,7 @@ from collections import defaultdict, deque
 from pathlib import Path
 from typing import Any, Dict, List, Mapping, Optional, Sequence, Set, Tuple
 
-from src import data_access, data_paths, provenance
+from src import data_access, data_paths, decisive_measurements, provenance
 from src.directional_reliability import COIN, MIN_EVALUABLE_FOR_TRUST, TRUST_MIN_RATE, VERDICT_TRUST, verdict_for, wilson_lower
 
 # The shipped sulfur wave's slice profile and Laplace covariance, named after the fit report the engine reads.
@@ -194,11 +199,17 @@ def not_evaluable_rows(scorecard: Mapping[str, Any]) -> List[Dict[str, Any]]:
     return [{"benchmark_id": r["benchmark_id"], "compound": r["compound"], "panel": r["panel"]} for r in rows]
 
 
+def absolute_refused_rows(scorecard: Mapping[str, Any]) -> List[Dict[str, Any]]:
+    """Rows the engine answers but whose ABSOLUTE level the thiol lane does not ship (H0 / EX-059, D2 branch (i))."""
+    rows = [r for r in scorecard.get("refused_compounds", []) if r.get("absolute_refused")]
+    return [{"benchmark_id": r["benchmark_id"], "compound": r["compound"], "panel": r["panel"]} for r in rows]
+
+
 def refused_targets(scorecard: Mapping[str, Any]) -> List[Dict[str, Any]]:
     """What the panel asks for that no lane can represent, grouped by the engine's own reason."""
     groups: Dict[str, Dict[str, Any]] = {}
     for r in scorecard.get("refused_compounds", []):
-        if r.get("unidentified_route"):
+        if r.get("unidentified_route") or r.get("absolute_refused"):
             continue
         reason = str(r.get("reason", ""))
         head = reason.split(" -- ")[0][:120]
@@ -262,7 +273,8 @@ def thin_axes(directional: Mapping[str, Any]) -> List[Dict[str, Any]]:
             "wilson_lower_bound": round(wilson_lower(agree, evaluable), 3) if evaluable else None,
             "additional_agreeing_claims_to_trust": _claims_to_trust(agree, evaluable),
             "structural_block": (
-                "only the trunk lane carries a water-activity term (a declared multiplier, wave B12); "
+                "only the trunk lane carries a water-activity term (a declared multiplier, wave B12), and only "
+                "inside a_w 0.33-1.00 (a comparison with an arm below 0.33 is refused; a single recipe there is still answered); "
                 "the acrylamide, sulfur and lipid lanes carry none and the engine refuses their a_w "
                 "comparisons, so claims on those lanes cannot help until a moisture-dependent step is "
                 "measured and fitted there (De Vleeschouwer 2009 is the acrylamide lane's source)"
@@ -337,22 +349,46 @@ def build(*, scorecard_path: Path = data_paths.CORE_PANEL_SCORES, profile_path: 
     reactions = sulfur_reactions(sulfur_source)
     coords = unidentified_coordinates(profile, laplace, reactions)
     nev = not_evaluable_rows(scorecard)
+    abs_refused = absolute_refused_rows(scorecard)
     refused = refused_targets(scorecard)
     axes = thin_axes(directional)
     misses = largest_misses(ranking)
     offsets = data_access.load_json(LANE_OFFSETS_PATH, missing_ok=True)
     design_gaps = lane_design_gaps(offsets)
+    structural = structural_questions()
     unlocked = []
+    from src.kinetic_core.thiol_relative_only import RELATIVE_ONLY_SPECIES, ruling
+
     for c in coords:
         if c["unlocks_observables"]:
+            # 2026-11-05 (H0 / EX-059): a fitted rate gives the thiol lane's observables a fitted SHAPE; their absolute
+            # level stays refused for a new laboratory whatever the rate, so the sentence must not promise one.
+            absolute = [o for o in c["unlocks_observables"] if o not in RELATIVE_ONLY_SPECIES]
+            relative = [o for o in c["unlocks_observables"] if o in RELATIVE_ONLY_SPECIES]
+            what = "; ".join(x for x in (
+                f"absolute {', '.join(absolute)}" if absolute else "",
+                f"within-study ratios and shapes of {', '.join(relative)} (their absolute levels stay refused, H0 / EX-059)"
+                if relative else "",
+            ) if x)
             unlocked.append({
                 "if_measured": c["key"],
                 "you_could_predict": (
-                    f"absolute {', '.join(c['unlocks_observables'])} from charges containing "
+                    f"{what} from charges containing "
                     f"{', '.join(c['unlocks_from_charges']) or 'its reactants'}, as a fitted value instead of a band artefact"
                     + (f"; {len(nev)} panel rows now NOT EVALUABLE would return to the scorecard" if c["key"] == "k_glc_ha" and nev else "")
                 ),
             })
+    if abs_refused:
+        compounds = sorted({r["compound"].lower(): r["compound"] for r in abs_refused}.values(), key=str.lower)
+        unlocked.insert(0, {
+            "if_measured": ("absolute levels of the thiol lane's observables from a second independent laboratory "
+                            "(for example the pending WUR blind-test samples), re-scored under H0's rule (H0')"),
+            "you_could_predict": (
+                f"absolute {', '.join(compounds)} for a new laboratory, if H0' leaves tau_ABS at or below 0.8 dex "
+                f"(today {ruling().tau_abs_dex:.3f}, {ruling().upper_bound_text}; D2's branches (ii) / (iii)); "
+                f"{len(abs_refused)} panel rows now refused for their absolute level would return to the scorecard"
+            ),
+        })
     for a in axes:
         if a["additional_agreeing_claims_to_trust"] is not None and not a["structural_block"]:
             unlocked.append({
@@ -364,7 +400,7 @@ def build(*, scorecard_path: Path = data_paths.CORE_PANEL_SCORES, profile_path: 
         "provenance": provenance.provenance_block(
             "data_wishlist", generated_by="src/data_wishlist.py",
             inputs=[scorecard_path, profile_path, laplace_path, directional_path, ranking_path,
-                    LANE_OFFSETS_PATH, SULFUR_MODULE],
+                    LANE_OFFSETS_PATH, SULFUR_MODULE, decisive_measurements.RECORD_PATH],
         ),
         "how_to_read": (
             "Sections in order of leverage. 1: fitted coordinates the primary evidence does not pin -- one "
@@ -373,21 +409,28 @@ def build(*, scorecard_path: Path = data_paths.CORE_PANEL_SCORES, profile_path: 
             "4: directional axes below 'trust' and how many agreeing claims would lift them. 5: where the "
             "envelope misses most (value of information). 6: what each measurement would let you predict. "
             "7: lanes whose benchmark rows cannot support a trend statement at all -- a gap in the "
-            "PORTFOLIO rather than in the model, and one no amount of modelling closes."
+            "PORTFOLIO rather than in the model, and one no amount of modelling closes. 8: structural questions "
+            "(which rival mechanism holds) that the literature on disk cannot decide, and the measurement that would "
+            "-- curated by hand in docs/reference/decisive_measurements.yml, not derived."
         ),
         "unidentified_coordinates": coords,
         "not_evaluable_rows": nev,
+        "absolute_refused_rows": abs_refused,
         "refused_targets": refused,
         "thin_axes": axes,
         "largest_misses": misses,
         "what_you_could_predict": unlocked,
         "lane_design_gaps": design_gaps,
+        "structural_questions": structural,
         "summary": {
             "unidentified_coordinates": len(coords),
             "not_evaluable_rows": len(nev),
+            "absolute_refused_rows": len(abs_refused),
             "refused_row_count": sum(g["row_count"] for g in refused),
             "axes_below_trust": len(axes),
             "lanes_that_cannot_support_a_trend": len(design_gaps),
+            "structural_questions": len(structural),
+            "structural_questions_open": sum(1 for q in structural if q["status"] == "open"),
             "trust_rule": f"rate >= {TRUST_MIN_RATE} on >= {MIN_EVALUABLE_FOR_TRUST} claims and Wilson lower bound > {COIN}",
         },
     }
@@ -400,13 +443,16 @@ def render_markdown(payload: Mapping[str, Any]) -> str:
         "# Data wishlist — what to measure next, and what it would unlock",
         "",
         f"> Generated by `src/data_wishlist.py` from the tracked scorecard, slice profile, Laplace covariance, "
-        f"directional scorecard and value-of-information ranking ({payload['provenance']['generated_on']}). "
-        "Regenerate with `./scripts/docker_maillard.sh wishlist`; read with `python scripts/maillard.py wishlist`.",
+        f"directional scorecard and value-of-information ranking, and section 8 from the hand-kept "
+        f"decisive-measurements record ({payload['provenance']['generated_on']}). "
+        "Regenerate with `./scripts/docker_maillard.sh wishlist-build`; read with `python scripts/maillard.py wishlist`.",
         "",
         payload["how_to_read"],
         "",
         f"**At a glance:** {s['unidentified_coordinates']} fitted coordinates unidentified by primary evidence · "
-        f"{s['not_evaluable_rows']} panel rows answered but not evaluable · {s['refused_row_count']} panel rows refused "
+        f"{s['not_evaluable_rows']} panel rows answered but not evaluable · "
+        f"{s.get('absolute_refused_rows', 0)} panel rows whose absolute level is refused (H0 / EX-059) · "
+        f"{s['refused_row_count']} panel rows refused "
         f"(targets no lane represents) · {s['axes_below_trust']} directional axes below 'trust' ({s['trust_rule']}).",
         "",
         "## 1. Fitted coordinates the data do not identify",
@@ -428,6 +474,13 @@ def render_markdown(payload: Mapping[str, Any]) -> str:
             lines.append(f"- `{r['benchmark_id']}` / {r['compound']} ({r['panel']})")
     else:
         lines.append("None.")
+    if payload.get("absolute_refused_rows"):
+        lines += ["", "The engine also computes these, but the thiol lane ships relative within-laboratory predictions "
+                  "only (H0 / EX-059, D2 branch (i)), so their absolute level is refused and they leave the absolute "
+                  "count until a second independent laboratory's absolute measurements, re-scored under H0's rule, "
+                  "say otherwise (section 6):", ""]
+        for r in payload["absolute_refused_rows"]:
+            lines.append(f"- `{r['benchmark_id']}` / {r['compound']} ({r['panel']})")
     lines += ["", "## 3. What the panel asks for that no lane represents", "", "| what | rows | the engine's reason | the hypothesis layer |", "|---|---|---|---|"]
     for g in payload["refused_targets"]:
         lines.append(f"| {g['what']} | {g['row_count']} | {g['reason'][:260]} | {g.get('hypothesis_layer', '')} |")
@@ -447,10 +500,12 @@ def render_markdown(payload: Mapping[str, Any]) -> str:
         lines.append(f"- **If** `{u['if_measured']}` were measured: {u['you_could_predict']}.")
     lines += ["", "Nothing above is a forecast of accuracy: 'unlocks' means the observable sits downstream of the step in the network, so a measured rate would replace a band artefact with a fitted value. Whether the fitted value lands within 3x of a measurement is what the next pre-registered wave finds out (`scripts/generators/WAVES.md`)."]
     lines += _render_lane_design_gaps(payload)
+    lines += _render_structural_questions(payload)
     return "\n".join(lines) + "\n"
 
 
-__all__ = ["OUTPUT_JSON", "build", "render_markdown", "sulfur_reactions", "downstream_observables", "upstream_charges"]
+__all__ = ["OUTPUT_JSON", "build", "render_markdown", "sulfur_reactions", "downstream_observables", "upstream_charges",
+           "structural_questions"]
 
 
 def _render_lane_design_gaps(payload: Mapping[str, Any]) -> List[str]:
@@ -471,4 +526,58 @@ def _render_lane_design_gaps(payload: Mapping[str, Any]) -> List[str]:
                      f"{g['what_is_blocked']} |")
     lines += ["", "**The measurement, in each case:** " + gaps[0]["measurement"].split(";")[0] + ", for the "
               "lane concerned. One pot per level, the other conditions held.", ""]
+    return lines
+
+
+# ---------------------------------------------------------------------------- section 8 (curated)
+STRUCTURAL_SECTION_TITLE = "## 8. Structural questions the literature on disk cannot decide"
+
+
+def structural_questions(path: Optional[Path] = None) -> List[Dict[str, Any]]:
+    """Section 8, from the hand-kept record ``docs/reference/decisive_measurements.yml`` (2026-11-05).
+
+    CURATED, not derived: sections 1 - 7 read fit and scoring artifacts and can only see fitted coordinates; which
+    rival MECHANISM holds is a question no fit artifact states, so a person keeps that record and the loader checks it
+    (every cited CF / EX / CR id and path exists). A malformed record raises here, so the generator and the
+    freshness gate fail rather than render it."""
+    entries, _warnings = decisive_measurements.load(path or decisive_measurements.RECORD_PATH)
+    return decisive_measurements.summarise(entries)
+
+
+def _cell(text: Any) -> str:
+    return " ".join(str(text).split()).replace("|", "/")
+
+
+def _render_structural_questions(payload: Mapping[str, Any]) -> List[str]:
+    """Section 8: one row per structural question, then each design arm by arm and where the records disagree."""
+    rows = payload.get("structural_questions") or []
+    if not rows:
+        return []
+    lines = ["", STRUCTURAL_SECTION_TITLE, "",
+             "**Curated, not derived.** Sections 1 - 7 are computed from fit and scoring artifacts. This section is "
+             "rendered from a hand-kept record, `docs/reference/decisive_measurements.yml`: one entry per open "
+             "structural question (which rival mechanism holds), with the blockers that keep it undecidable on disk, "
+             "each citing its record, and the minimal design that would decide it, taken from the case, prereg or "
+             "register entry that names one (\"design not yet written\" where none does). Designed experiments stay "
+             "the plan's last resort (W6); the record says which measurement they would be.", "",
+             "| question | step | measurement | unlocks | status |",
+             "|---|---|---|---|---|"]
+    for q in rows:
+        status = q["status"] + (f" ({q['status_note']})" if q.get("status_note") else "")
+        lines.append(f"| {_cell(q['question'])} | {_cell(q['plan_step'])} | {_cell(q['measurement'])} "
+                     f"Source: {_cell(q['measurement_source'])}. | {_cell('; '.join(q['unlocks']))} | {_cell(status)} |")
+    lines += ["", "**The designs, arm by arm** (as the records write them; pH basis tags: cooled, label_25C, in_situ, "
+              "not_stated):", ""]
+    for q in rows:
+        lines.append(f"- `{q['id']}` ({q['plan_step']}):")
+        for arm in q["arms"]:
+            lines.append(f"  - {arm}")
+        if q.get("existing_data_route"):
+            lines.append(f"  - Existing-data route: {q['existing_data_route']}")
+    disagreements = [(q, d) for q in rows for d in q.get("disagreements") or []]
+    if disagreements:
+        lines += ["", "**Where the records disagree about the decisive design or its evidence:**", ""]
+        for q, d in disagreements:
+            lines.append(f"- `{q['id']}`, {d['about']}: {d['note']}")
+    lines.append("")
     return lines

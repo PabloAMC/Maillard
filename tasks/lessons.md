@@ -465,6 +465,22 @@ have no null answer): counting it as a difference of 0 pulls the mean to zero an
 - **Pattern:** M1's frozen prereg passed two independent design reviews, yet its verdict ("not separated") rested on a linearisation artefact. Three measurement-model choices did it: (1) detection floors set at measured values (the 30- and 50-min data points) flattened one rival to a zero-width line at a datum; (2) H0's between-laboratory tau (~1 dex, from absolute thiol levels) was applied to a C/C0-normalised series where a calibration offset cancels, hiding the incumbent's main failure; (3) the floor sensitivities used a linearised density where the rival's prediction is strongly non-linear (exact lppd -746 vs linearised -175), and the MC check ran only on the primary setting.
 - **Rule:** before freezing, for each decisive series state its value basis (absolute, ratio, C/C0) and apply a between-lab offset only where the basis keeps one; set floors from the assay (LOD / LOQ, calibration range), never from a measured point; and run the exact (or adequately sampled MC) density on EVERY form that can flip a sign, not only the primary. A reviewer should check the deciding number's density form, not only the rule's logic.
 
+## 2026-11-05 — A brief must not ask for a band that contains the scored datum; screen structures before designing a fit around them
+- **Pattern:** briefing the M1 + M2 prereg, I asked for the reservoir's release-rate band to be "wide enough to include" Zhang 2025b's measured timescale. Zhang's pot was a decisive unit, so the band would have been set by the test it is scored on (the 2026-10-31 lesson). The drafter caught it. The same draft built a whole design around a pH-dependent exchange that a 1 h plug-in screen then showed cannot reproduce Zhai 2021's pH series or Zhang's mass balance; the design's supply axis emptied.
+- **Rule:** in a brief, name where a band comes from (a source that is not scored), never which value it must reach. Before drafting a fit design around a structure, run the mechanism-signature screen (plug-in runs on the signatures the evidence names) and design only around the structures that pass; record which pots the screen has seen, since they cannot be decisive afterwards.
+
+## 2026-11-05 — Compare a pH on the scale it was measured on (cooled vs in situ)
+- **Pattern:** a screen reported that the engine's pH in Cao 2017's pot "starts at 3.86 where Cao measures 4.67" and barely drifts. I carried it into the plan, an agent brief and the owner's summary as an upstream fault that justified a re-sequence. The 3.86 was the engine's in-situ pH at 90 C; Cao read pH after cooling. On the cooled scale (`observations.ph_cooled`) the engine starts at 5.50 like Cao and misses by ~0.2, all of it one known allocation (CF-084). A ~1-unit in-situ / cooled split is expected chemistry here, not a fault.
+- **Rule:** every pH number in a record, plan line or brief names its scale (cooled / label 25 C, or in situ at T). Compare the engine to a measurement only on the measurement's scale, using the observable the probe scores. Before acting on a surprising residual, reproduce it on the scored observable.
+
+## 2026-11-05 — Never wait on a job with `until ! pgrep -f "<pattern>"`
+- **Pattern:** subagents waited for the gates with `until ! pgrep -f "docker_maillard.sh gates" >/dev/null; do sleep 10; done`. `pgrep -f` matches full command lines, and the waiting shell's own line contains the pattern, so the loop could never end. Six such waiters (one on a log line that a finished job never wrote) hung for ~11 h, and the H0-application agent sat "waiting on its own background work" the whole time.
+- **Rule:** run long commands in the background and wait for the completion notification; or wait on a known PID (`while kill -0 $PID`) or a file the job is sure to write, with a timeout. If a pattern match is unavoidable, use the bracket trick (`pgrep -f "[d]ocker_maillard.sh gates"`). Every subagent brief that may wait on a job says so.
+
+## 2026-11-05 — Blind keying may run early, but its commit lands on top of the frozen design
+- **Pattern:** to save time I had two blind readers digitise Hofmann 2000b Figs. 2–3 while M3's prereg was still a draft, and told the reconciling agent to commit and push the keyed rows. The M3 review then required that the frozen design be an ANCESTOR of the keyed-data commit (otherwise git cannot show the design was fixed before the data existed in the repo). I stopped the push in time.
+- **Rule:** digitising early is fine if the readers are blind and the output stays outside the repo (scratchpad, hash recorded). The keyed file is committed only on a branch descended from the design's freeze commit, and the scorer checks that ancestry plus the file hash. Design authors are told not to open the scratch readings.
+
 ## 2026-11-05 — `bootstrap` upgrades every unpinned package; a unit-tuned proposal at a kinked peak is too narrow
 - **Pattern (env):** adding arviz to `environment.yml` and running `./scripts/docker_maillard.sh bootstrap` (`conda env update`) also upgraded numpy 2.5.3 -> 2.5.4, numba, scipy's build, networkx, pytest, pip, setuptools, pyyaml's build and coverage: the numbers in `results/validation/` come from the old set. Reverted by reinstalling the exact previous builds (`conda list --export` before and after, diffed).
 - **Rule:** before `bootstrap`, export the env (`conda list --export > before.txt`); install the new package first with `conda install -n maillard <pkg>=<ver>` and check the plan lists only NEW packages; after `bootstrap`, diff the export and restore any upgraded build. Only add, never upgrade. Since M1.1 the packages that moved are pinned in `environment.yml` (versions; scipy and pyyaml also their build numbers), and a bootstrap leaves the env unchanged (export diff empty); unpinned ones can still move.
@@ -485,3 +501,45 @@ have no null answer): counting it as a difference of 0 pulls the mean to zero an
 - **Rule:** a vector stored as a dict is read back BY NAME, in the order of the problem's own key list (`[d[k] for k in keys]`), never by `.values()`.
 - **Pattern (convergence):** a linear pH course against midpoint staircases converged at first order (ratios 2.0 - 2.5), not the second order the rule should give. The cause was not the driver: at the end of a RAMP the quasi-steady pools (1-DG, AF) track the current rate constants, and a staircase's last value lies half a step off the course. With a 10-min hold at the end the ratios went to 4.
 - **Rule:** a convergence check of a time discretisation compares at a point where the fast pools have relaxed (end on a hold), or compares only slow, cumulative species; name which.
+## 2026-11-05 — Generated READMEs go stale when main moves under an open PR
+- **Pattern:** two PRs (#60, #63) failed their unit tests on `data/README.md` / `results/README.md` being stale. CI tests the PR merged into main; other PRs had merged new dossiers and results files meanwhile, and `data/README.md` counts committed files, so regenerating it before the commit that adds them leaves it one step behind.
+- **Rule:** last step before pushing any branch that touches `data/`, `results/` or the registries: merge `origin/main`, regenerate `build_paper_registry.py`, `build_data_readme.py` and `build_results_readme.py`, commit, then run each with `--check` (they must print "current"). Re-do it whenever a sibling PR merges first.
+- **And when merging:** merge PRs that touch `data/` or `results/` one at a time. Before each merge, confirm the PR branch contains the current `origin/main` (`git merge-base --is-ancestor origin/main origin/<branch>`); if not, update it and wait for CI. On 2026-11-05 #63 and #65 merged minutes apart, each regenerated without the other, and main itself went stale (fixed in #67). In shell commands, never put backticked text inside double quotes: the shell runs it.
+## 2026-11-05 — Never write an author or file key that was not read from the record
+- **Pattern:** a side session named Lopez et al. 2019 "Zhou 2019" (and queued `zhou2019_mushroom.pdf`) from a title-only OpenAlex row; the PDF's first page shows Lopez, Kerley, Jenkinson, Luckett & Munafo.
+- **Rule:** author names and paper keys come from the authorship record (OpenAlex / Crossref authorships) or the PDF's first page, never from a title or memory. `openalex.py verify` (W1.4) checks every `papers.yml` entry.
+## 2026-11-05 — Run a literature search against the question, not the topic
+- **Pattern:** Round 3 read Vauthey 2000 for mechanism, filed it as "microemulsion", and skipped it. A forward-citation sweep keyed to H0's question (a second laboratory's absolute MFT / FFT) found it as the best lead on disk for lifting H0's refusal.
+- **Rule:** a case's sweep is keyed to its own decisive criterion (sec. 7 item 2). A source skipped for one question gets re-screened for another; record the skip reason with the question it answered.
+## 2026-11-05 — "Out of scope" must cite the envelope rule, or say it is a judgement
+- **Pattern:** an extraction agent called Bork 2024 / 2024b "outside the model's scope", and I relayed it. Asked why, the engine's envelope said otherwise for half the data: the phenolic arms are refused by rule (reactants not in any lane), but the single-compound dry controls are engine species that no rule refuses (the trunk's a_w term has no window). They were outside the validated domain, and are W5.2 (crust) data.
+- **Rule:** a scope claim names its basis: the `declare_envelope` rule that refuses it, or "judgement: outside the validated domain because …". Never drop data as "out of scope" without naming the plan step it could serve.
+## 2026-11-05 — A "pending" citation must pass every gate that reads citations, not only its own loader
+- **What happened:** PR #79's record let citations to unmerged records through as `pending_records`, and its own
+  loader accepted them. `dossier_coverage_gate` reads every dossier path cited anywhere and failed CI on three
+  dossiers that only existed on PR #76.
+- **Rule:** before citing a record that is not on main, check which gates read that kind of citation (dossier paths:
+  `dossier_coverage_gate`; register ids: the register gates). Either merge the PR that adds the record first, or keep
+  the citation out of gated files until it lands.
+## 2026-11-05 — Never stop your own job with `pkill -f "<pattern>"` while other agents run
+- **What happened:** I stopped my gate run with `pkill -f "docker_maillard.sh gates"`. Five agents shared the machine
+  and several run the same command, so the pattern could kill theirs too; I had to warn each one to rerun.
+- **Rule:** stop a job by its own handle: its PID (`$!` at launch, or the PID the harness reports), or the harness's
+  stop tool for a background task. Never by a command pattern that other agents' jobs can share. A killed run
+  (exit 143 / 144) is neither a pass nor a failure: rerun it.
+## 2026-11-06 — Regenerate generated files only after the conflicts are staged
+- **What happened:**
+  - On PR #77 I took `--theirs` for a conflicted `data_wishlist.json`, then regenerated `results/README.md` before `git add`.
+  - The index still held the file once per conflict stage, so `git ls-files` (which the README generator reads) counted 984 tracked files instead of 982.
+  - My local `--check` ran in the same dirty state, so it passed; CI failed.
+- **Rule:**
+  1. Resolve every conflicted path.
+  2. `git add` each one; `git diff --name-only --diff-filter=U` must come back empty.
+  3. Run the generators.
+  4. Run their `--check`s.
+## 2026-11-06 — Never redirect a bare `cat >>` without input
+- **What happened:** a stray `cat >> file` with no heredoc waited on stdin and hung the command.
+- **Rule:** every `cat >>` in a command needs its own heredoc or input file.
+## 2026-11-06 — A job started with `&` inside a foreground call dies with it
+- **What happened:** I launched the records branch's regenerate-and-gates run with a trailing `&` in a normal Bash call. The harness ended the shell when the call returned, which killed the job after three steps. No notification came, so I found it only by reading the log.
+- **Rule:** start long jobs only with the tool's background mode (`run_in_background`), never with `&`.

@@ -100,9 +100,11 @@ def test_water_activity_is_never_trusted_and_ph_is_tagged_by_the_standing_rule()
     assert dr.MIN_EVALUABLE_FOR_TRUST == 3
     # RE-PINNED 2026-10-27 (claim audit): AW-01 retired as a source mismatch, so the a_w axis is 1/1, not 1/2.
     # One agreeing claim is below MIN_EVALUABLE_FOR_TRUST: 'caution' under the standing rule, never 'trust'.
+    # RE-PINNED 2026-11-05 (the trunk's a_w window, 0.33-1.00; its lower edge from Pereyra Gonzales 2010 Table 1): AW-03's 0.25 arm is
+    # below it, so the engine refuses that comparison: 1/1 -> 0/0, and an axis with no evaluable claim is 'do-not-use'.
     aw = dr.reliability_for_axis("moisture_aw", counts)
-    assert (aw.agree, aw.evaluable) == (1, 1)
-    assert aw.verdict == dr.VERDICT_CAUTION != dr.VERDICT_TRUST
+    assert (aw.agree, aw.evaluable) == (0, 0)
+    assert aw.verdict == dr.VERDICT_DO_NOT_USE != dr.VERDICT_TRUST
     ph = dr.reliability_for_axis("ph", counts)
     # RE-PINNED 2026-09-07 (thiol pH reads: Cerny 2007, Mottram 2002 claims): 4/5 -> 7/9, still below 0.80: 'caution'.
     # RE-PINNED 2026-09-08 (B18: PH-06, 2,5-dimethylpyrazine rising with pH, now evaluable and agrees): 7/9 -> 8/10;
@@ -531,9 +533,14 @@ def test_one_refused_target_does_not_sink_the_others():
     listed by name with its own reason."""
     spec = {"name": "partial", "precursors": {"D-Ribose": 50.0, "L-Cysteine": 10.0, "L-Methionine": 10.0},
             "temp_C": 150.0, "time_min": 10.0, "ph": 6.0, "aw": 0.98}
-    targets = ["2-Methyl-3-furanthiol (MFT)", "2-Furfurylthiol (FFT)", "Methional (3-(methylthio)propanal)"]
+    # 2026-11-05 (H0 / EX-059): MFT and FFT are now refused by name too, for their absolute level; the
+    # out-of-scope 2-acetylthiazole carries the "answered together" half of the test.
+    targets = ["2-Methyl-3-furanthiol (MFT)", "2-Furfurylthiol (FFT)", "2-acetylthiazole",
+               "Methional (3-(methylthio)propanal)"]
     payload = comparative_cli.predict_core(spec, targets=targets)
     assert payload["answered"]
-    assert {r["compound"] for r in payload["rows"]} >= {"2-Methyl-3-furanthiol (MFT)", "2-Furfurylthiol (FFT)"}
-    refused = {r["target"] for r in payload["refused_targets"]}
-    assert len(refused) == 1 and "methional" in next(iter(refused)).lower()
+    assert {r["compound"] for r in payload["rows"]} == {"2-acetylthiazole"}
+    refused = {r["target"]: r for r in payload["refused_targets"]}
+    assert set(refused) == {"2-Methyl-3-furanthiol (MFT)", "2-Furfurylthiol (FFT)", "Methional (3-(methylthio)propanal)"}
+    assert not refused["Methional (3-(methylthio)propanal)"].get("absolute_refused")
+    assert refused["2-Methyl-3-furanthiol (MFT)"]["absolute_refused"] and refused["2-Furfurylthiol (FFT)"]["absolute_refused"]

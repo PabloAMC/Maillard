@@ -228,7 +228,7 @@ def trace():
             "all_vals": list(vals),
             "unmatched_vals": list(unmatched_vals),
             "matches": matches,
-            "sources": list(info["sources"])
+            "sources": sorted(info["sources"])
         }
 
     # 4. Generate the MD Report

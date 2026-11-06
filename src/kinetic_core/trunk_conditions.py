@@ -78,6 +78,24 @@ AW_BAND_HIGH_FACTOR = 1.2
 #: Pereyra Gonzales's 37 C point (0.018x) and Bell's glass (0.2x) say the collapse is real and
 #: temperature-dependent, and nothing here sizes it.
 AW_TABLE_FLOOR = 0.33
+#: The WINDOW of the a_w term (2026-11-05, H0 follow-up; owner-approved 2026-11-05):
+#:   LOWER EDGE 0.33 -- the driest row the multiplier table was built from, Pereyra Gonzales 2010 Table 1
+#:     (`pereyragonzales2010_extraction.md` sec. 3), a_w 0.33: k x 10^3 h^-1 7.14 +/- 0.51 (50 C), 17.46 +/- 0.93
+#:     (60 C). Read from the table, not chosen. The column is the nominal saturated-salt a_w; the paper labels the
+#:     same samples up to 0.05 differently elsewhere (dossier sec. 3.2), so the edge carries that uncertainty.
+#:   UPPER EDGE 1.00 -- the trunk's base constants were measured in SOLUTION (Martins 2005, 0.1 M phosphate,
+#:     a_w ~0.98-1.0), and the table's wettest row (a_w 0.98: 1.89 +/- 0.13, 7.54 +/- 0.58) is normalised to that
+#:     state, so a dilute arm is the constants' own regime, not an extrapolation (owner, 2026-11-05).
+#: A comparison that moves a_w with an arm below the window is refused (engine.AW_TERM_WINDOWS), as on the
+#: acrylamide lane: there the multiplier is held at the 0.33 value and the glass collapse is not sized. A SINGLE-POT
+#: prediction below it is still answered, with the held multiplier and the glass warning, as on the acrylamide
+#: lane: a known limitation (owner, 2026-11-05; to be filed as a register item).
+AW_WINDOW: Tuple[float, float] = (AW_MULTIPLIER_TABLE[0][0], 1.0)
+AW_WINDOW_SOURCE = (
+    "lower edge: Pereyra Gonzales 2010 Table 1, row a_w 0.33 at 50 / 60 C (nominal salt a_w; the paper labels "
+    "its samples up to 0.05 differently); upper edge: the base constants' own solution state, Martins 2005, "
+    "a_w ~0.98-1.0 (B12)"
+)
 #: The steps the multiplier scales: the amine-sugar condensation is what lysine loss measures.
 AW_STEPS: Tuple[str, ...] = ("k_schiff",)
 AW_SOURCE = (
@@ -381,7 +399,7 @@ def apply(
 
 __all__ = [
     "AW_BAND_HIGH_FACTOR", "AW_BAND_LOW_MULTIPLIER", "AW_SCALE_BAND", "AW_MULTIPLIER_TABLE", "AW_SOURCE", "AW_STEPS",
-    "AW_TABLE_FLOOR", "PH_EXPONENT_BAND", "PH_EXPONENT_DECADES_PER_UNIT", "PH_MEASURED_WINDOW",
+    "AW_TABLE_FLOOR", "AW_WINDOW", "AW_WINDOW_SOURCE", "PH_EXPONENT_BAND", "PH_EXPONENT_DECADES_PER_UNIT", "PH_MEASURED_WINDOW",
     "PH_SOURCE", "PH_STEPS", "REFERENCE_AW", "REFERENCE_PH", "apply", "aw_band", "aw_multiplier", "pyrazine_factor",
     "ATMOSPHERE_FACTORS", "ATMOSPHERE_REFERENCE", "ATMOSPHERE_SOURCE", "ATMOSPHERE_TRANSFER",
     "ATMOSPHERE_VALUES", "OXIDATIVE_ENTRY_STEPS", "atmosphere_factor",

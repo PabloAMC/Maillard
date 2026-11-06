@@ -13,7 +13,7 @@
 - `r_osone_decay_ddp` (DDP -> ACID + FRAG_C): no species of the step is measured over time in the corpus; conflicts: CF-107
 - `r_dpo_nf` (DPO -> NF): fitted, B2.3 log10k unidentified, frozen since
 - `r_pent_caramel` (PENT -> TDP): conflicts: CF-107
-- `r_nf_decay` (NF -> FRAG_C): fitted, B2.3 log10k unidentified, frozen since
+- `r_nf_decay` (NF -> FRAG_C): fitted, B2.3 log10k unidentified, frozen since; conflicts: CF-112
 - `r_h2s_loss` (H2S -> FRAG_S): fitted, B2.3 log10k unidentified, frozen since
 - `r_fur_fft_hs` (FUR + H2S -> FFT): fitted, B2.3 log10k unidentified, frozen since; conflicts: CF-065
 - `ch_mft_decay` (MFT -> FRAG_C + FRAG_S): fitted, B2.3 log10k unidentified, frozen since; conflicts: CF-107
@@ -67,7 +67,7 @@ Fitted but not identified (by B60, or by B2.3 for a constant frozen since), on a
 | `r_cys_thermal` | Cys -> CBX + FRAG_C + FRAG_N + FRAG_S | fitted | log10k identified | 10.9% (cao2017) | 0%  | Cys | — |
 | `r_pent_caramel` | PENT -> TDP | fitted | log10k identified | 4.2% (hofmann1998) | 0%  | PENT, TDP | conflicts: CF-107 |
 | `r_cys_h2s` | Cys -> H2S + CBX + FRAG_C + FRAG_N | measured |  | 1.9% (food) | 100% H2S made (hofmann1998) | Cys, H2S | — |
-| `r_nf_decay` | NF -> FRAG_C | fitted | B2.3 log10k unidentified, frozen since | 1.4% (hofmann1998) | 100% NF used (hofmann1998) | NF | fitted, B2.3 log10k unidentified, frozen since |
+| `r_nf_decay` | NF -> FRAG_C | fitted | B2.3 log10k unidentified, frozen since | 1.4% (hofmann1998) | 100% NF used (hofmann1998) | NF | fitted, B2.3 log10k unidentified, frozen since; conflicts: CF-112 |
 
 ## Odorant-path steps (below 1 % of the bulk flux, above 1 % of an odorant-path species)
 

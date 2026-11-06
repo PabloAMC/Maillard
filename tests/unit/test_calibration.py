@@ -9,6 +9,7 @@ both, with a pure level offset going to the factor and never to the coordinate.
 from __future__ import annotations
 
 import ast
+import json
 import math
 from pathlib import Path
 
@@ -140,6 +141,71 @@ def test_the_calibration_round_trips_through_json(result, tmp_path):
     assert path.parent == tmp_path / "stand-in_lab"
 
 
+# --- the payload checksum the thiol rescue rule verifies (2026-11-05, H0 follow-up) ----------------------------------
+THIOL_POT = {"name": "ribose_cysteine", "precursors": {"L-Cysteine": 10.0, "D-Ribose": 10.0},
+             "temp_C": 145.0, "time_min": 20.0, "ph": 5.0, "aw": 0.98}
+
+
+def _rescued(calibration) -> bool:
+    from src import api
+
+    payload = api.predict(THIOL_POT, targets=[MFT], calibration=calibration)
+    return [r["compound"] for r in payload["rows"]] == [MFT]
+
+
+def test_a_genuine_calibration_file_carries_a_checksum_and_rescues(result, tmp_path):
+    from src.kinetic_core import thiol_relative_only as h0
+
+    cal, _ = result
+    assert cal.provenance[C.PAYLOAD_CHECKSUM_FIELD] == cal.payload_checksum()
+    back = C.Calibration.load(cal.save(tmp_path))                  # through the file, as a user passes it
+    assert back.checksum_problem() is None and h0.calibration_rescues(back, MFT)
+    assert _rescued(back)
+
+
+def test_a_forged_file_with_a_copied_provenance_block_does_not_rescue(result, tmp_path):
+    from src import api
+    from src.kinetic_core import thiol_relative_only as h0
+
+    genuine = result[0].as_dict()
+    forged = {"artifact": "maillard_calibration", "lab": "forger", "base_wave": genuine["base_wave"],
+              "created": "2026-11-05", "matrix": "water",
+              "response_factors": {MFT: {"log10": 0.0, "factor": 1.0, "sigma_log10": 0.1, "n_rows": 3}},
+              "overrides": [], "fit_records": ["pot_0"], "validate_records": [],
+              "provenance": dict(genuine["provenance"])}            # generated_by AND the genuine checksum
+    path = tmp_path / "forged.json"
+    path.write_text(json.dumps(forged), encoding="utf-8")
+    cal = C.Calibration.load(path)
+    assert cal.provenance["generated_by"] == h0.CALIBRATE_GENERATOR
+    assert "does not match" in cal.checksum_problem() and not h0.calibration_rescues(cal, MFT)
+    assert not _rescued(cal)
+    reason = api.predict(THIOL_POT, targets=[MFT], calibration=cal)["refused_targets"][0]["reasons"][0]
+    assert "DOES NOT RESCUE" in reason and "does not match" in reason
+
+
+def test_an_edited_factor_does_not_rescue(result, tmp_path):
+    from src.kinetic_core import thiol_relative_only as h0
+
+    edited = result[0].as_dict()
+    edited["response_factors"][MFT]["log10"] += 0.5
+    path = tmp_path / "edited.json"
+    path.write_text(json.dumps(edited), encoding="utf-8")
+    cal = C.Calibration.load(path)
+    assert "does not match" in cal.checksum_problem() and not h0.calibration_rescues(cal, MFT)
+    assert not _rescued(cal)
+
+
+def test_a_file_without_a_checksum_refuses_and_says_why():
+    """The tracked example (2026-09-08) predates the checksum: it cannot be verified, so it does not rescue, and
+    the refusal says so."""
+    from src import api
+
+    cal = C.Calibration.load(ROOT / "docs" / "examples" / "reading_2026_calibration.json")
+    assert C.PAYLOAD_CHECKSUM_FIELD not in cal.provenance and "no content checksum" in cal.checksum_problem()
+    payload = api.predict(THIOL_POT, targets=[MFT], calibration=cal)
+    assert payload["rows"] == [] and "no content checksum" in payload["refused_targets"][0]["reasons"][0]
+
+
 def test_overlay_writes_only_the_moved_coordinates():
     from src.kinetic_core.engine import SULFUR, frozen_parameters
 
@@ -211,5 +277,10 @@ def test_a_factors_sigma_widens_the_calibrated_interval():
     plain_w = math.log10(plain.hi_ug_per_l / plain.lo_ug_per_l)
     wide_w = math.log10(wide.hi_ug_per_l / wide.lo_ug_per_l)
     assert wide_w > plain_w
-    # 1.645 * 0.3 decades half-width added in quadrature to the band's own half-width
-    assert abs(wide_w / 2 - math.hypot(plain_w / 2, 1.645 * 0.3)) < 1e-6
+    # 1.645 * 0.3 decades half-width added in quadrature to the band's own half-width; 2026-11-05 (H0 / EX-059):
+    # MFT is a thiol-lane observable, so its calibrated level also carries one row's omega, in the same quadrature
+    from src.kinetic_core import thiol_relative_only as h0
+
+    extra = h0.calibrated_extra_decades(0.3, 4)   # sigma, omega and omega / sqrt(4) (review M2)
+    assert extra == pytest.approx(h0.Z90 * math.sqrt(0.3 ** 2 + h0.ruling().omega_dex ** 2 * (1 + 1 / 4)), rel=1e-12)
+    assert abs(wide_w / 2 - math.hypot(plain_w / 2, extra)) < 1e-6

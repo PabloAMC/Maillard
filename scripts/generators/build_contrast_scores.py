@@ -22,7 +22,7 @@ import statistics
 import sys
 from collections import defaultdict
 from pathlib import Path
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Tuple
 
 ROOT = Path(__file__).resolve().parents[2]
 for p in (ROOT, ROOT / "scripts" / "generators"):
@@ -37,23 +37,40 @@ BAND_DEX = math.log10(3.0)
 NOISE_DEX = math.log10(1.4)
 
 
-def _pairs(rows: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+def _absolute(r: Dict[str, Any]) -> bool:
+    """True for a row with a shipped absolute level; False for a relative-only row (centred log level only)."""
+    return bool(r.get("engine")) and r["engine"] > 0
+
+
+def _pairs(rows: List[Dict[str, Any]]) -> Tuple[List[Dict[str, Any]], int]:
+    """The within-study pairs, and the number of MIXED pairs skipped.
+
+    A mixed pair holds one row with an absolute level and one with only a centred log level (2026-11-05, H0
+    follow-up), e.g. MGO measured in a trunk pot and in a sulfur pot of one study. The centred value is relative
+    to the mean of the study's refused rows only, so no ratio with an absolute level exists: the pair is skipped
+    and counted, never scored."""
     groups: Dict[tuple, List[Dict[str, Any]]] = defaultdict(list)
     for r in rows:
-        if r["engine"] and r["engine"] > 0:
+        if _absolute(r) or r.get("engine_centred_log10") is not None:
             groups[(r["study"], r["compound"])].append(r)
-    out = []
+    out, mixed = [], 0
     for (study, compound), members in sorted(groups.items()):
         for a, b in itertools.combinations(sorted(members, key=lambda r: r["benchmark"]), 2):
             if a["benchmark"] == b["benchmark"]:
                 continue
+            if _absolute(a) != _absolute(b):
+                mixed += 1
+                continue
             out.append({
                 "study": study, "compound": compound, "lane": a["lane"], "a": a["benchmark"], "b": b["benchmark"],
                 "measured_dex": math.log10(a["measured"] / b["measured"]),
-                "engine_dex": math.log10(a["engine"] / b["engine"]),
+                # 2026-11-05 (H0 / EX-059): a thiol-lane row carries its centred log level, not a ppb level;
+                # the difference of two centred values IS the log ratio (one group, one mean)
+                "engine_dex": (math.log10(a["engine"] / b["engine"]) if _absolute(a)
+                               else a["engine_centred_log10"] - b["engine_centred_log10"]),
                 "out_of_sample": a["out_of_sample"] and b["out_of_sample"],
             })
-    return out
+    return out, mixed
 
 
 def _score(pairs: List[Dict[str, Any]]) -> Dict[str, Any]:
@@ -74,8 +91,8 @@ def _score(pairs: List[Dict[str, Any]]) -> Dict[str, Any]:
 
 
 def main() -> int:
-    rows, _excluded = NULL._rows()
-    pairs = _pairs(rows)
+    rows, _excluded = NULL._rows(include_relative_only=True)   # 2026-11-05: ratios of the thiol lane ship (H0 / EX-059)
+    pairs, mixed = _pairs(rows)
     scores = {"all_pairs": _score(pairs), "out_of_sample": _score([p for p in pairs if p["out_of_sample"]])}
     by_lane = {lane: _score([p for p in pairs if p["lane"] == lane]) for lane in sorted({p["lane"] for p in pairs})}
     payload = {
@@ -83,7 +100,10 @@ def main() -> int:
         "provenance": provenance.provenance_block(
             "contrast_scores", generated_by="scripts/generators/build_contrast_scores.py", inputs=[NULL.SCORES]),
         "definition": __doc__.split("    python")[0].strip(),
-        "scores": scores, "by_lane": by_lane, "pairs": pairs,
+        "scores": scores, "by_lane": by_lane,
+        # one absolute row and one relative-only row: no ratio exists, skipped (2026-11-05, H0 follow-up)
+        "mixed_pairs_skipped": mixed,
+        "pairs": pairs,
     }
     artifact_io.write_artifact(payload, OUT, render=render)
     o = scores["out_of_sample"]
@@ -108,6 +128,8 @@ def render(payload: Dict[str, Any]) -> str:
         lines.append(f"| {label.replace('_', ' ')} | {s['pairs']} ({s['studies']}) | {s['resolved_pairs']} | "
                      f"{e['median_error_dex']:.2f} dex | {e['within_3x']} | {e['sign_agreement_on_resolved']}/{s['resolved_pairs']} | "
                      f"{n['median_error_dex']:.2f} dex | {n['within_3x']} |")
+    lines += ["", "Mixed pairs skipped (one row with an absolute level, one relative-only; no ratio exists): "
+              f"{payload.get('mixed_pairs_skipped', 0)}."]
     return "\n".join(lines) + "\n"
 
 
