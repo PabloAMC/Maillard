@@ -2,10 +2,10 @@
   "artifact": "sulfur_flux_attribution",
   "provenance": {
     "artifact": "sulfur_flux_attribution",
-    "generated_on": "2026-11-05",
+    "generated_on": "2026-11-06",
     "git": {
-      "commit": "0226cbc02b037f4884733f15d91b777b019cca30",
-      "short": "0226cbc0",
+      "commit": "cb7a888ea9269d1668c1687af64d19f122b2a0c0",
+      "short": "cb7a888e",
       "branch": "m1b-part-i-build",
       "dirty": true
     },
@@ -17,7 +17,7 @@
       },
       {
         "path": "src/kinetic_core/sulfur.py",
-        "sha256": "27f01227400d0bae49f14f0eb91ee3d4ba055048ee0890128a87470e2fb8b1a3"
+        "sha256": "31d5d49b849f02444c47f78c0fbd0085e86c41eaa7cb4cdd46ccc9c9b333161e"
       }
     ]
   },
