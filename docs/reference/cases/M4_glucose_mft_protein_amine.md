@@ -2,8 +2,9 @@
 
 **FROZEN 2026-11-06: items 1 - 5. Development grade on disk; decider W6 (decisive-measurements entry
 `glucose_mft_carbon_origin`), sized: arm 2 + arm 3, n = 3, 96 heatings.**
-- **Freeze commit:** FREEZE_SHA_PENDING. It is the commit that writes this header; a commit cannot contain its own
-  sha, so it is recorded by the commit that follows it.
+- **Freeze commit:** **c7c2bf2537cf384d701267f67d913b3a9c0a533d** (c7c2bf25). It is the commit that froze items 1 - 5.
+  A commit cannot contain its own sha, so this line was written by the commit that follows it. That commit changes
+  nothing else.
 - **Status of each step:**
   - the reduced-model power check has run (sec. 5.4 results, PR #101) and its demotions are written in;
   - the premortem was adopted (FM1 - FM9);
