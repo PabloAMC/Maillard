@@ -1855,6 +1855,169 @@ def run_falsification() -> Dict[str, Any]:
     return rec
 
 
+#: sec. 3.8 / A1 sec. 20.3: the would-be kill's confirmation fit. Free: M1's R0 set (16 + k_mft_decay) plus the
+#: rival's own coordinates, from band centres (start 0); the lumped yield is free where the rival integrates it (B0,
+#: B2) and 0 where it does not (B3, B13); B2's lag barrier stays at the class median (an integrated coordinate the
+#: start-0 fit does not move).
+CONFIRM_EXTRA = {"B0": (), "B1": ("phi_cys", "phi_arp"), "B2": ("f_ret", "k_lag"),
+                 "B3": ("y5", "y6", "y_hi", "k_iso"), "B13": ("y5", "y6", "y_hi", "k_iso", "phi_cys", "phi_arp")}
+YIELD_KEY, PKA_KEY = "ph_acid_yield_per_sink_event", "ph_arp_secondary_ammonium_pKa"
+EA_LAG_MEDIAN = 103.7
+
+
+class ConfirmObjective(M1.Objective):
+    """M1's R0 objective with one rival's switches on: R0's 17 (+ the lumped yield for B0 / B2) in B60's vector, and
+    the rival's own coordinates in its Config (log10 for the rate constants)."""
+
+    def __init__(self, rival: str, numerics, fit_side, breakpoints):
+        integrates_yield = rival in ("B0", "B1", "B2")
+        keys = M1.RIVALS["R0"].keys + ((YIELD_KEY,) if integrates_yield else ())
+        x = list(M1.b60_point().x_full)
+        if not integrates_yield:
+            x[M1.all_index(YIELD_KEY)] = 0.0
+        super().__init__(M1.Rival(f"R0+{rival}", keys, False), numerics, fit_side,
+                         base=M1.Point(tuple(x), False))
+        self.rival_name, self.breakpoints = rival, tuple(breakpoints)
+        self.extra = CONFIRM_EXTRA[rival]
+        bands = {c.name: (c.lo, c.hi) for c in coordinates(rival)}
+        self.n_base = len(self.keys)
+        self.keys = self.keys + self.extra
+        self.kinds = self.kinds + tuple("log10k" if k in ("k_lag", "k_iso") else "acid_yield" for k in self.extra)
+        self.lower = np.concatenate([self.lower, [bands[k][0] for k in self.extra]])
+        self.upper = np.concatenate([self.upper, [bands[k][1] for k in self.extra]])
+
+    def split(self, theta) -> Tuple[np.ndarray, Dict[str, float]]:
+        theta = np.asarray(theta, dtype=float)
+        values = dict(zip(self.extra, map(float, theta[self.n_base:])))
+        if "y5" in values:                     # the order y5 <= y6 <= y_hi, kept by clamping
+            values["y6"] = max(values["y6"], values["y5"])
+            values["y_hi"] = max(values["y_hi"], values["y6"])
+        for k in ("k_iso", "k_lag"):
+            if k in values:
+                values[k] = 10.0 ** values[k]
+        return theta[:self.n_base], values
+
+    def base_point(self, base_theta) -> M1.Point:
+        keys, self.keys = self.keys, self.keys[:self.n_base]
+        try:
+            return M1.Objective.point(self, base_theta)
+        finally:
+            self.keys = keys
+
+    def rival_values(self, theta) -> Dict[str, float]:
+        base, values = self.split(theta)
+        x = self.base_point(base).x()
+        values.update(acid_yield=float(x[M1.all_index(YIELD_KEY)]), arp_amine_pka=float(x[M1.all_index(PKA_KEY)]))
+        values.setdefault("ea_lag", EA_LAG_MEDIAN)
+        return values
+
+    def config(self, theta) -> config.Config:
+        point = self.base_point(self.split(theta)[0])
+        changes, _ = rival_changes(self.rival_name, "primary", self.rival_values(theta), False, self.breakpoints)
+        changes.pop("ph.coupling", None)
+        return M1.config_of(point, self.numerics, self.fit_side).replace(changes)
+
+    def residuals(self, theta, rows=None):
+        point = self.base_point(self.split(theta)[0])
+        failures: List[Dict[str, Any]] = []
+        with config.applied(self.config(theta)), M1.b60_runner(self.numerics, failures):
+            parts = [np.asarray(B60.residual_vector(point.x(), self.numerics.quick), dtype=float)]
+            if self.fit_side.prior.enabled:
+                parts.append(np.array([self.fit_side.prior.residual(M1.prior_log10_rate(point.x(),
+                                                                                         self.fit_side.prior))]))
+        M1.FAILURES.extend(failures)
+        return np.concatenate(parts)
+
+    def residuals_many(self, points, rows=None):
+        return [self.residuals(t) for t in points]
+
+    def start0(self) -> np.ndarray:
+        """sec. 3.8 start 0: M1's carried R0 optimum, the new coordinates at their band centres."""
+        base_keys = self.keys[:self.n_base]
+        b0 = np.array([self.base.x_full[M1.all_index(k)] for k in base_keys])
+        carried = M1.lowest_converged("R0")
+        if carried is not None:
+            b0 = np.array([carried["theta"].get(k, v) for k, v in zip(base_keys, b0)])
+        if YIELD_KEY in base_keys:
+            i = base_keys.index(YIELD_KEY)
+            b0[i] = 0.5 * (self.lower[i] + self.upper[i])
+        centre = np.array([0.5 * (lo + hi) for lo, hi in zip(self.lower[self.n_base:], self.upper[self.n_base:])])
+        return np.clip(np.concatenate([b0, centre]), self.lower, self.upper)
+
+
+def confirm_path(rival: str) -> Path:
+    return V / f"{STEM}_confirm_{rival}.json"
+
+
+def confirm_refusals(rival: str) -> List[str]:
+    problems = []
+    fal = read_record("falsification")
+    if not fal.get("complete"):
+        problems.append("A1's falsification run has not run")
+    elif not (fal.get("verdict", {}).get(rival, {}).get("falsified_on_measured")):
+        problems.append(f"{rival} is not a would-be kill in the falsification record: no confirmation fit")
+    if confirm_path(rival).exists():
+        problems.append(f"{rival}'s confirmation fit has run (once): its record stands")
+    return problems
+
+
+def run_confirm(rival: str, budget: int = M1.BUDGET) -> Dict[str, Any]:
+    """sec. 3.8 / A1 sec. 20.3: one fit (start 0) of a would-be kill on M1's R0 objective, then the four
+    signatures re-read at the fitted point under every A1 form. The kill is confirmed iff the fitted point is still
+    falsified. A fit with failed pot runs, or one that did not converge, confirms nothing (its record says so)."""
+    problems = confirm_refusals(rival)
+    if problems:
+        raise SystemExit("--confirm refuses:\n  " + "\n  ".join(problems))
+    t0 = time.time()
+    m1 = json.loads(M1_CHECKS.read_text(encoding="utf-8"))
+    numerics, fit_side = M1.numerics_for_fits(m1), M1.fit_side_from_checks(m1)
+    br = tuple(read_record("checks")["davidek_breakpoints_in_situ"])
+    obj = ConfirmObjective(rival, numerics, fit_side, br)
+    theta0 = obj.start0()
+    del M1.FAILURES[:]
+    fit_ = fitting.fit(obj.problem(), theta0, budget=budget)
+    fit_failures = list(M1.FAILURES)
+    theta = np.asarray(fit_.theta, dtype=float)
+    point = obj.base_point(obj.split(theta)[0])
+    values = obj.rival_values(theta)
+    x_fit = point.x()
+    # the control pots at the fitted point: B60's vector replaced by the fit's, the rival's coordinates as fitted
+    _init_pots()
+    _CACHE["b60"] = (x_fit, B23.build_parameters(x_fit), B23.unpack(x_fit)[3])
+    pot_failures: List[Dict[str, Any]] = []
+    res = run_jobs(build_tasks(rival, "primary", [values], br, pots_for("primary", rival)), pot_failures)
+    ens = assemble(rival, "primary", [values], res)
+    ens_all = load_screen_ensembles()
+    pinned = ens_all["B0_pinned"]
+    pinned_rise = float(pinned.f["C-Zhou-ARP"][0, -1] - pinned.f["C-Zhou-ARP"][0, 0])
+    reread = a1_falsified(ens, a1_measured(), pinned_rise) if not pot_failures else None
+    converged = int(fit_.status) > 0
+    usable = converged and not fit_failures and not pot_failures
+    rec = {"artifact": confirm_path(rival).stem, "rival": rival, "prereg": data_paths.rel(PREREG),
+           "start": 0, "start_theta": dict(zip(obj.keys, map(float, theta0))),
+           "status": int(fit_.status), "converged": converged, "cost": float(fit_.cost),
+           "evaluations": int(fit_.evaluations), "theta": dict(zip(obj.keys, map(float, theta))),
+           "rival_values_at_fit": values, "fit_failed_pot_runs": len(fit_failures),
+           "control_pot_failed_runs": len(pot_failures), "failures_sample": (fit_failures + pot_failures)[:20],
+           "predictions_at_fit": {u: a[0].tolist() for u, a in ens.f.items()},
+           "solver_fallbacks": ens.fallbacks, "reread": reread,
+           "confirmed": bool(usable and reread is not None and reread["falsified"]),
+           "verdict": ("REFUSED: failed pot runs or no convergence; nothing confirmed" if not usable else
+                       "kill confirmed: falsified at its start-0 fit" if reread["falsified"] else
+                       "kill NOT confirmed: the fitted point reproduces the signatures under some form"),
+           "numerics": dataclasses.asdict(numerics), "seconds": round(time.time() - t0, 1),
+           "machine": M1.machine_state(), "provenance": _provenance(f"confirm_{rival}")}
+    confirm_path(rival).write_text(provenance.dumps_compact(_jsonable(rec), default=float) + "\n", encoding="utf-8")
+    confirm_path(rival).with_suffix(".md").write_text(
+        f"# M1b part (i): {rival}'s confirmation fit (sec. 3.8, A1 sec. 20.3)\n\n"
+        f"Status {rec['status']} (converged {converged}), cost {rec['cost']:.4f}, {rec['evaluations']} evaluations, "
+        f"failed pot runs {len(fit_failures)} (fit) / {len(pot_failures)} (control pots).\n\n**{rec['verdict']}**\n\n"
+        + ("" if reread is None else "\n".join(f"- {f}: killed {v['killed']}; pass {v['pass_fraction']}"
+                                               for f, v in reread["per_form"].items())) + "\n", encoding="utf-8")
+    print(f"{confirm_path(rival).name}: {rec['verdict']}", flush=True)
+    return rec
+
+
 def render_falsification(rec: Mapping[str, Any]) -> str:
     lines = ["# M1b part (i): Amendment A1, falsification only (prereg v3.7 sec. 20)", "",
              f"*Generated by `{GENERATED_BY} --falsification` on the stored screen draws (no engine run). R = {rec['R']}"
@@ -2201,6 +2364,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     mode.add_argument("--screen", action="store_true")
     mode.add_argument("--power", action="store_true")
     mode.add_argument("--falsification", action="store_true")
+    mode.add_argument("--confirm", metavar="RIVAL")
     mode.add_argument("--score", action="store_true")
     mode.add_argument("--fit", metavar="RIVAL")
     ap.add_argument("--start", type=int, default=0)
@@ -2212,6 +2376,8 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         run_checks(args.base)
     elif args.screen:
         run_screen(args.min_free_percent)
+    elif args.confirm:
+        run_confirm(args.confirm)
     elif args.falsification:
         run_falsification()
     elif args.power:

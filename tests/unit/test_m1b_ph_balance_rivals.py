@@ -297,6 +297,31 @@ def test_a1_refuses_without_the_confirmation_and_runs_once(G, monkeypatch, tmp_p
     assert any("confirmation" in p for p in problems) and any("one re-run" in p for p in problems)
 
 
+def test_the_confirmation_fit_refuses_a_non_kill_and_a_second_run(G, monkeypatch, tmp_path):
+    rec = {"complete": True, "verdict": {"B1": {"falsified_on_measured": False},
+                                         "B3": {"falsified_on_measured": True}}}
+    monkeypatch.setattr(G, "read_record", lambda name: rec if name == "falsification" else {})
+    monkeypatch.setattr(G, "confirm_path", lambda rival: tmp_path / f"confirm_{rival}.json")
+    assert any("not a would-be kill" in p for p in G.confirm_refusals("B1"))
+    assert G.confirm_refusals("B3") == []
+    (tmp_path / "confirm_B3.json").write_text("{}")
+    assert any("has run" in p for p in G.confirm_refusals("B3"))
+
+
+def test_the_confirmation_objective_frees_the_rival_coordinates_and_keeps_b3_order(G):
+    import json
+    m1 = json.loads(G.M1_CHECKS.read_text(encoding="utf-8"))
+    obj = G.ConfirmObjective("B3", G.M1.numerics_for_fits(m1), G.M1.fit_side_from_checks(m1), BREAKPOINTS)
+    assert obj.keys[-4:] == ("y5", "y6", "y_hi", "k_iso") and G.YIELD_KEY not in obj.keys
+    th = obj.start0()
+    th[-4:] = [0.5, 0.3, 0.2, -1.0]                       # out of order: clamped up
+    _, values = obj.split(th)
+    assert values["y5"] <= values["y6"] <= values["y_hi"] and values["k_iso"] == pytest.approx(0.1)
+    assert obj.rival_values(th)["acid_yield"] == 0.0      # B3 carries no lumped acid
+    b0 = G.ConfirmObjective("B0", G.M1.numerics_for_fits(m1), G.M1.fit_side_from_checks(m1), BREAKPOINTS)
+    assert b0.keys[-1] == G.YIELD_KEY and len(b0.keys) == 18
+
+
 def test_the_loader_reads_the_gzipped_draws_file(G, tmp_path):
     import gzip
     import json
