@@ -11,7 +11,7 @@ regenerates (`core-scores`, `core-directional`, `core-envelope`, `model-card`, .
 (`scripts/generators/WAVES.md`: not re-run, a change is a new wave). Every live artifact carries a
 `provenance` block (git head, date, input hashes: `src/provenance.py`).
 
-Tracked files: **984**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
+Tracked files: **982**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
 
 ## `results`
 
@@ -55,7 +55,7 @@ Tracked files: **984**. Local-only (gitignored): scratch runs under `results/qui
 | `cutover_final_exam.*` (2): `cutover_final_exam.json`, `cutover_final_exam.md` | FROZEN 2026-09-03 cutover exam (core vs legacy lane, 34 answered / 3 within band). Its generator was deleted at B5b; kept as the record of the cutover decision. |
 | `cutover_prereg.md` | Pre-registration of the cutover exam; pinned by `tests/unit/test_kinetic_core_b5_cutover.py`. |
 | `d1_exam_panel_reconciliation.*` (2): `d1_exam_panel_reconciliation.json`, `d1_exam_panel_reconciliation.md` | Reconciliation of exam vs panel scoring (D1); read by the B8 and B2.3 report generators. |
-| `data_wishlist.*` (4): `data_wishlist.json`, `data_wishlist.json`, `data_wishlist.json`, `data_wishlist.md` | THE DATA WISHLIST: what to measure next and what each measurement would unlock, derived from the scorecard, the slice profile, the Laplace covariance, the directional scorecard and the value-of-information ranking (`src/data_wishlist.py`; alias `wishlist`; read with `maillard wishlist`); its last section, the structural questions the literature on disk cannot decide, is rendered from the hand-kept record `docs/reference/decisive_measurements.yml` (`src/decisive_measurements.py`). Regenerated and compared by the freshness gate. |
+| `data_wishlist.*` (2): `data_wishlist.json`, `data_wishlist.md` | THE DATA WISHLIST: what to measure next and what each measurement would unlock, derived from the scorecard, the slice profile, the Laplace covariance, the directional scorecard and the value-of-information ranking (`src/data_wishlist.py`; alias `wishlist`; read with `maillard wishlist`); its last section, the structural questions the literature on disk cannot decide, is rendered from the hand-kept record `docs/reference/decisive_measurements.yml` (`src/decisive_measurements.py`). Regenerated and compared by the freshness gate. |
 | `deep_research_runtime_queue.*` (2): `deep_research_runtime_queue.json`, `deep_research_runtime_queue.md` | Which mined citations are queued for runtime encoding (`src/deep_research_runtime_queue.py`). |
 | `env_b34_ship_rule.*` (2): `env_b34_ship_rule.json`, `env_b34_ship_rule.md` | ENV-B34's ship rule: prior rows for the 3-deoxyglucosone limb and the amine-free sugar entries, banded on Kocadagli 2016's printed 95 % HPD, judged on widths against the MEASURED Monte-Carlo noise floor with both sides of the comparison frozen (`generate_env_b34_ship_rule.py`). |
 | `env_prior_ship_rule.*` (2): `env_prior_ship_rule.json`, `env_prior_ship_rule.md` | ENV-B18 and ENV-B13 evaluated together: whether the two new blocks of Monte-Carlo prior rows widened the intervals they should and left the rest alone, against a noise floor MEASURED from two seeds of identical priors rather than assumed (`generate_env_prior_ship_rule.py`). |
