@@ -10,6 +10,11 @@ frozen. Every falsification is now a posterior-predictive p after Holm (sec. 4.0
 consequences for shipped outputs. **The late-November slot is scoped to the power check (sec. 5.3) and the S3
 consequence computation (sec. 4.5).** The two-phase and O2-per-phase network builds wait until a decider exists.
 
+**Independent confirmation (2026-11-06): "CONFIRMED WITH EDITS".** All edits are applied; still not frozen. The
+largest change is to the noise model. Replicate means now carry their SE with a studentized reference (sec. 4.0), and
+under it **the claim's own linear form R1 survives only narrowly** (Holm 0.07 - 0.17, falsified under pooled
+variance).
+
 **The spent-data rule as applied here (coordinator refinement, 2026-11-06; the same rule as M4's FM2).** Spent or
 seen data may **falsify** a rival whose prediction there is constant-free (structural: a ratio fixed at 1, a sign, a
 bound that holds for every value of the rival's free constants). They never **credit** a rival. The rule applies to
@@ -357,86 +362,110 @@ blocker).
 | R1 | **the claim**: linear-with-intercept factor per resolved step, kappa by step and buffer species (Davidek's [H2PO4-] reading); hyperbolic on lumped steps (CF-093) | **the plan's claim**: oil-water partition of MFT, FFT and their disulfides (fast equilibrium, reactions in water), phi from the printed oil volume, K_oil/water a declared band | B54: whole-phase concentration, residual table, Tg gate |
 | R2 | a saturating factor (Michaelis) on every step; **split by K**: R2a K <= 0.1 M (Kallen's 17 - 29 mM), R2b K 0.3 M, R2c K >= 0.5 M (indistinguishable from linear below 0.2 M) | lipid-electrophile capture of the MFT pool, first order in MFT and lipid-carbonyl load, MFT-selective (CF-031's candidate) | concentration only, no residual table, no gate |
 | R3 | merged into R0 (id kept so the references stay stable) | partition + capture | step-specific terms (the dehydration-limited condensation; a low-water exit), no shared factor |
-| R4 | step-specific: Amadori decay and 2,3-enolisation only, not 1,2-enolisation, furfural or free-sugar steps | supply-side: lipid carbonyls take Cys and H2S (Zhao 2017b; thiophenes), thiols fall through their precursors (first order in H2S on both thiol routes, the engine's form). Tested **as written, at the B60 route structure**; re-test after M1c | **added 2026-11-06:** a solubility-capped concentration basis (the dissolved sugar / amino acid stops rising at its solubility; crystallisation, as of lactose, sets the maximum without a Tg gate) |
+| R4 | step-specific: Amadori decay and 2,3-enolisation only, not 1,2-enolisation, furfural or free-sugar steps; **dose form declared (M2): R1's linear form with its intercept band on those steps**. Falsified as written on Bell (no factor on the condensation). **R4'** adds the condensation (Amadori formation) and keeps furfural and free-sugar steps out | supply-side: lipid carbonyls take Cys and H2S (Zhao 2017b; thiophenes), thiols fall through their precursors (first order in H2S on both thiol routes, the engine's form). Tested **as written, at the B60 route structure**; re-test after M1c | **added 2026-11-06:** a solubility-capped concentration basis (the dissolved sugar / amino acid stops rising at its solubility; crystallisation, as of lactose, sets the maximum without a Tg gate) |
 | R5 | -- | measurement: Yiltirak's 30 uL aliquot from a creaming oil arm under-samples a lipophilic thiol (CF-031 (c), P 0.25). A measurement-model alternative scored beside every F rival on Yiltirak, not a mechanism | -- |
 | R6 | -- | **added 2026-11-06 (CK-37, G9):** oil-phase oxidation: thiols partitioned into the oil meet its O2 and hydroperoxides; MFT is lost faster than FFT. First order in the oil's oxidant load and in MFT; zero under N2 with peroxide-free oil. Products: disulfide, mixed disulfides, over-oxidised sulfur; no thioether (sec. 4.2) | -- |
 | R7 | **added 2026-11-06:** saturating at K ~2 mM plus linear (a fast-saturating catalysed path on top of a linear one); explains a ladder intercept far above an inert-buffer rate (Zyzak's HEPES) | -- | -- |
-| R8 | **added 2026-11-06:** ionic strength, not buffer species, sets the factor (I co-varies with buffer in Potman, Bell, Guan) | -- | -- |
+| R8 | **added 2026-11-06, falsified in its pure form (confirmation B3):** ionic strength, not buffer species, sets the factor. Bell's citrate arms (I up to ~3 M, rate ~0), Bell's citrate add-back (x1.14) and Guan's carboxylates (~ water) contradict it. A "species x I" variant is not carried (no band) | -- | -- |
 | R9 | -- | **added 2026-11-06, measurement:** SPME fibre competition in Elmore's two-fibre room-temperature SPME (lipid volatiles crowd the fibre), handled by normalising to sulfur-free markers | -- |
 
 ## 4. The decisive data
 
-### 4.0 How a falsification is stated (premortem fix 4)
+### 4.0 How a falsification is stated (premortem fix 4; confirmation B1)
 
 Every falsification below is stated as a posterior-predictive p, with Holm applied across the datasets on which that
-rival was tested (S3 on PR #96; M1.1). [dry] The p is the chi2 (or normal) tail of the rival's best non-negative fit
-to the printed values. This is the posterior-predictive p under flat priors and Gaussian noise; item 6 recomputes it
-under the full measurement model. A rival is falsified when its smallest Holm-adjusted p is < 0.05. Noise choices
-that decide a verdict are disclosed in the row.
+rival was tested (S3 on PR #96; M1.1). A rival is falsified when its smallest Holm-adjusted p is < 0.05. [dry]
+arithmetic on printed values; item 6 recomputes every p under the full measurement model.
+
+**One measurement model for all replicate means (confirmation B1).**
+- A mean of n separate reactions carries its standard error, SD / sqrt(n).
+- Its reference distribution is studentized, because each SD has only n - 1 degrees of freedom.
+- For fitted ladders this is a parametric bootstrap that re-estimates each point's SE from its n replicates and
+  refits the rival, so the A >= 0 boundary of a non-negative fit is respected.
+- For contrasts it is a Welch-Satterthwaite t on the log ratio.
+- The model is applied to Zyzak, Elmore and Yiltirak alike.
+
+Zyzak's Table I footnote ("triplicate experiments") and the Fig. 2 caption ("three separate experiments") make its
+three replicates separate reactions, so the SE is the right scale. The 2026-11-06 premortem revision used the SD
+because the SE falsified R1. **Choosing a noise model by the verdict it gives would be circular. That is why the SE
+is used here, whatever it does to R1.** Two truths are bootstrapped: the per-point relative SD as printed, and the
+pooled one. Their spread is reported as a range. The pooled-variance F statistic is the disclosed sensitivity.
 
 ### 4.1 Part B (buffer): DEVELOPMENT GRADE on disk
 
 Every buffer datum on disk is spent (sec. 2.10). The units below test constant-free predictions only.
 
-| unit | measurement and its noise | R0 (no buffer term; incl. the pH-only reading, ex-R3) | R2 (Michaelis, any k0, A >= 0) | R1 (linear), R7 (saturating + linear) | reading |
+| unit | measurement and its noise | R0 (no buffer term; incl. the pH-only reading, ex-R3) | R2 (Michaelis, any k0, A >= 0) | R1 (linear), R4 (R1's form on its own steps), R7 (saturating + linear) | reading |
 |---|---|---|---|---|---|
-| FU-B1 (D1) Davidek 2002 | k_P / k_W at pH-stat 5 / 6 / 7 / 8, low ends of the method band: 2.79 / 3.35 / 1.94 / 1.24. One reaction run per cell, so the run-to-run CV is unknown; **taken as >= 20 %** per k (sigma_ln of the ratio 0.28) | predicts 1: p = 3e-4 / 2e-5 / **0.019** / 0.45 at pH 5 / 6 / 7 / 8 | > 1, size fitted | > 1, size fitted | **R0 falsified at pH 5 - 7 by Davidek alone** (pH 7 is the weakest cell, p 0.019); **not at pH 8**. This is the only unit that tests the pH-only reading at a measured held pH |
-| FU-B2 (D2) Bell 1997, glycine loss (lumped condensation), 25 C, pH 6.86 - 7.05 printed | four rates, 95 % CL (sigma = CL / 1.96); one vial per time point | flat: chi2 47.3 on 3 dof, p 3e-10 | sup k(0.5) / k(0.2) = 1.136 / 1.25 / 1.56 at K 0.05 / 0.1 / 0.3 M. Best fit p: K 0.05 **0.007**; K 0.1 0.12; K 0.3 0.66; K 0.5 0.93 | linear p 0.50; R7 (K 2 mM) p 0.28 | K = 0.05 M falsified on Bell; K = 0.1 M not |
-| FU-B3 (D2) Zyzak 1995, fFL decay (the Amadori decay step), 37 C, pH 7.4, N2 + chelators | t1/2 +- SD of triplicates; **sigma_k / k = SD / t1/2 (SD, not SE)**. With the SE (÷√3) every two-parameter law fails, linear included (chi2 8.4 on 2 dof here and 21 on the air ladder), so the SE understates the scatter. The SD choice is what keeps R1 alive | flat: p ~1e-85 (not used for the pH-only reading: the ladder's pH is set, not shown held) | K 0.05: 3e-16; K 0.1: **1e-9**; K 0.3: **0.0014**; K 0.5: 0.019 | linear p 0.25; R7 (K 2 mM) p 0.094 | -- |
-| FU-B3' Zyzak 1995 air ladder (no chelator), t1/2 10.7 / 9.8 / 5.8 / 4.2 d | as FU-B3 | flat: p ~1e-139 | chi2 (2 dof): K 0.1: **17.6** (p 1.5e-4); K 0.3: 7.27 (p 0.026); K 0.5: 5.60 (p 0.061) | linear chi2 **6.99** (p 0.030); R7 (K 2 mM) p 0.011 | the air ladder is tight at 10 and 100 mM (SD 2 %), so every smooth law is strained |
-| HEPES sensitivity (R1 with the HEPES point as the buffer-free rate) | HEPES t1/2 ~200 d (N2), ~56 d (air), figure labels with no SD (sigma taken as 20 % of k) | -- | K 0.5 with HEPES: p 6e-14 (N2) | **linear with HEPES as k_u: p 3e-16 (N2), 5e-61 (air): falsified.** R7 (K 2 mM) with HEPES: p 0.086 (N2), 0.035 (air) | R1's intercept (0.0105 /d) sits 0.48 dex above HEPES (0.0035 /d). R1 survives only with an intercept band (sec. 4.5) or as R7. HEPES itself may not be inert |
+| FU-B1 (D1) Davidek 2002, 90 C | k_P / k_W at pH-stat 5 / 6 / 7 / 8, low ends of the method band: 2.79 / 3.35 / 1.94 / 1.24. One reaction run per cell. **Run-to-run CV per k taken from Zyzak's same-class replicate reactions: ~6 % (range 2 - 12 %)**; 20 % kept as a sensitivity | predicts 1. p at pH 5 / 6 / 7 / 8: at 6 %: ~1e-33 / ~1e-46 / 6e-15 / 0.011; at 12 %: 2e-9 / 1e-12 / 9e-5 / 0.20; at 20 %: 3e-4 / 2e-5 / 0.019 / 0.45 | > 1, size fitted | > 1, size fitted | **R0 falsified at pH 5 - 7 for any CV up to ~20 %** (Holm across R0's five tests). **pH 8 undetermined:** falsified at 6 % (Holm 0.011), not at >= ~8 % (0.057 at 8 %, 0.20 at 12 %) |
+| FU-B2 (D2) Bell 1997, glycine loss (the lumped condensation), 25 C, pH 6.86 - 7.05 printed | four rates, 95 % CL (sigma = CL / 1.96), one vial per time point; plus the same run-to-run term (0 / 6 / 12 / 20 %) in quadrature | flat: p 3e-10 / 1e-8 / 5e-6 / 1e-3 | K 0.05: **0.007 / 0.013 / 0.041** / 0.14; K 0.1: 0.12 - 0.46; K 0.3: 0.66 - 0.88 | linear 0.50 - 0.84. **R4 predicts flat here** (the condensation is not an R4 step; Amadori decay releasing glycine could only lower the net loss): p as R0's | K = 0.05 M falsified on Bell up to a 12 % run-to-run CV; **R4 as written falsified** (its steps exclude the condensation) |
+| FU-B3 Zyzak 1995, fFL decay (the Amadori decay step), 37 C, pH 7.4, N2 + chelators | t1/2 +- SD of three separate reactions; SE = SD / sqrt 3; studentized bootstrap | flat: falsified (chi2 ~1200 on 3 dof) | bootstrap p (pooled / printed truth): K 0.1 < 0.001 / 0.002; K 0.3 0.007 / 0.013; K 0.5 0.019 / 0.034 | linear chi2 8.4: p 0.11 / 0.15 | -- |
+| FU-B3' Zyzak 1995 air ladder (no chelator), t1/2 10.7 / 9.8 / 5.8 / 4.2 d | as FU-B3 | flat: falsified | K 0.1 0.004 / 0.019; K 0.3 0.024 / 0.049; K 0.5 0.033 / 0.076 | linear chi2 21.0: p **0.022 / 0.054**; R7 (K 2 - 5 mM) 0.009 - 0.024 | the air ladder is tight at 10 and 100 mM (SD 2 %), so every smooth law is strained |
+| HEPES (c = 0) as a sensitivity on R1 | HEPES t1/2 ~200 d (N2), ~56 d (air), figure labels, no SD | -- | -- | R1's ladder intercept sits **0.48 dex (N2) and 0.68 dex (air)** above the HEPES rate; with HEPES as k_u (sigma 20 - 100 % of k) linear is falsified on both ladders (p <= 0.006) | R1 survives only with an intercept band bounded by the two measurements (sec. 4.5), or HEPES is not inert |
 | FU-B4 (D3) Mottram 2002 | MFT x2.2 - 2.6, FFT unchanged, ribose-only furfural 107 vs 103 (CV ~22 %) | the unbuffered arm drifts 5.6 -> 3.9: not constant-free | one shared factor on every sugar step predicts FFT and furfural up | R4 predicts MFT up, FFT flat; R1's split depends on the step set (CK-54) | development only |
-| FU-B5 Rizzi 2004 | ribose-alone A420 x87 from 0 to 0.10 M phosphate, pH 7.3 | -- | -- | R4 as written predicts ~no change | development only (browning is not a step, P 0.7) |
+| FU-B5 Rizzi 2004 | ribose-alone A420 x87 from 0 to 0.10 M phosphate, pH 7.3 | -- | -- | R4 predicts ~no change | development only (browning is not a step, P 0.7) |
+| FU-B6 Bell 1997 citrate arms and add-back; Guan 2012 carboxylates | citrate 0.02 - 0.5 M (ionic strength up to ~3 M at pH 7): glycine loss not different from zero; citrate added back to phosphate: x1.14 (0.00193 vs 0.00170 M/day); Guan: citrate / acetate +34 / +16 % vs phosphate x~4 at 0.1 M | -- | -- | -- | **R8 in its pure form (ionic strength, not species, sets the factor) falsified**: a monotone I-law predicts citrate >= phosphate at higher I. A sign on spent data; Bell's non-detects carry no printed floor, so no formal p |
 
-**Holm across the datasets tested** (smallest adjusted p; falsified if < 0.05):
+**Holm across the datasets tested** (smallest adjusted p; falsified if < 0.05; ranges span the two bootstrap truths):
 
 | rival | datasets | smallest Holm p | verdict |
 |---|---|---|---|
-| R0 (incl. the pH-only reading) | Davidek pH 7 (CV 20 %), Bell | 6e-10 (Bell); Davidek alone 0.019 | **falsified at pH 5 - 7**; not tested at pH >= 8 |
-| R2, K <= 0.05 M | Bell, Zyzak N2, Zyzak air | 9e-16 | falsified |
-| R2a, K = 0.1 M | same | 4e-9 (N2), 3e-4 (air); Bell 0.12 | **falsified on Amadori decay at 37 C (both Zyzak ladders)**; K = 0.05 M on Bell's condensation at 25 C |
-| R2b, K = 0.3 M | same | 0.004 (N2); air 0.053; Bell 0.66 | **falsified only anoxically at 37 C** |
-| R2c, K = 0.5 M | same | 0.057 | not falsified |
-| R1 (linear, free intercept) | same | 0.091 (air ladder, raw p 0.030) | not falsified; falsified if its intercept must equal the HEPES rate |
-| R7 (saturating at K ~2 mM + linear) | same; + HEPES | 0.031 at K = 2 mM without HEPES (air ladder); 0.07 with HEPES. With K free it has as many constants as a four-point ladder has points | carried (not testable at its best fit on disk) |
-| R8 (ionic strength, not species) | none on disk: I co-varies with buffer in Potman, Bell and Guan; only Kallen held I | -- | carried, untested |
+| R0 (incl. the pH-only reading) | Davidek pH 5, 6, 7, 8; Bell | pH 7: 2e-14 (6 %), 2e-4 (12 %), 0.038 (20 %); breakpoint ~20.5 % | **falsified at pH 5 - 7** at 25 C (Bell) and 90 C (Davidek); **pH 8 undetermined** |
+| R2, K <= 0.1 M | Bell, Zyzak N2, Zyzak air | 0.001 - 0.006 (K 0.1) | **falsified on Amadori decay at 37 C (Zyzak); K = 0.05 M also on glycine loss at 25 C (Bell)** |
+| R2b, K = 0.3 M | same | **0.022 - 0.039** | falsified (the anoxic ladder carries it; the air ladder alone 0.024 - 0.049) |
+| R2c, K = 0.5 M | same | 0.058 - 0.101 | not falsified |
+| R1 (linear, free intercept) | same | **0.067 - 0.163** (my bootstrap; the confirmation's 0.075 - 0.17) | **survives, fragile.** Sensitivity: pooled-variance F gives Holm **0.010 - 0.013: falsified** |
+| R4 as written (Amadori decay, 2,3-enolisation; R1's dose form, M2) | Bell, Zyzak N2, air | 1e-3 or below (Bell flat, at any CV up to 20 %) | **falsified** (no factor on the condensation). R4' (R4 plus the condensation, without the furfural / free-sugar steps) scores as R1 on these ladders: carried as R1 is |
+| R7 (saturating at K 2 - 5 mM + linear; R1 is its A = 0 case) | same | 0.028 - 0.072 (boundary-respecting bootstrap) | **fragile like R1**: falsified under the pooled truth, not under the printed truth. It is not "carried" on its own: it stands or falls with R1 in item 6 |
+| R8 pure (ionic strength sets the factor) | Bell citrate, Bell add-back, Guan carboxylates | sign | **falsified**. A "species x I" variant is not carried (no band on disk; Kallen, the one I-held design, is TEST) |
 
-**Restated (premortem fix 2):** R2 with K <= 0.1 M is falsified on Amadori decay at 25 - 37 C (both Zyzak ladders;
-K = 0.05 M on Bell). K = 0.3 M is falsified only anoxically at 37 C. K = 0.5 M is not falsified. The transfer of
-any of these to 90 - 140 C is not shown.
+**Restated (premortem fix 2, as corrected by M1):** R2 with K <= 0.1 M is falsified on Amadori decay at 37 C
+(Zyzak), and K = 0.05 M also on glycine loss at 25 C (Bell). K = 0.3 M is falsified (Holm 0.022 - 0.039, carried by
+the anoxic ladder). K = 0.5 M is not falsified. The transfer of any of these to 90 - 140 C is not shown.
 
-**What is left on disk:** R1, R2c, R4, R7 and R8, none credited. R0 (and with it the pH-only reading) is falsified at
-pH 5 - 7 only. The spent TEST set agrees (Potman's I(0.5) / I(0.1) = 5.7 against <= 1.67 for K <= 0.1 M; EX-058), and
-is falsify-only.
+**What is left on disk:** R1 (fragile), R2c, R4' and R7 (fragile with R1), none credited. R0 (with the pH-only
+reading) is falsified at pH 5 - 7. The spent TEST set agrees (Potman's I(0.5) / I(0.1) = 5.7 against <= 1.67 for
+K <= 0.1 M; EX-058) and is falsify-only.
 
 ### 4.2 Part F (fat): DEVELOPMENT GRADE on disk
 
-Measurement models carried beside every rival: **R5** (Yiltirak's 30 uL aliquot from a creaming oil arm) and **R9**
-(SPME fibre competition, for Elmore: a two-fibre room-temperature SPME of a pot whose lipid volatiles compete for
-fibre sites lowers every analyte's signal, so Elmore's contrasts are normalised by sulfur-free Maillard markers).
+Measurement models carried beside every rival:
+- **R5:** Yiltirak's 30 uL aliquot drawn from a creaming oil arm.
+- **R9:** SPME fibre competition, for Elmore. A two-fibre room-temperature SPME of a pot whose lipid volatiles
+  compete for fibre sites lowers every analyte's signal, so Elmore's contrasts are normalised by sulfur-free Maillard
+  markers that the lipid itself does not make.
+
+All F p values are Welch-Satterthwaite t on log ratios (studentized; B1).
 
 | unit | measurement and its noise | R0 | R1 alone (partition) | R4 as written (supply, at the B60 route structure) | R2, R3, R6 | reading |
 |---|---|---|---|---|---|---|
-| FU-F1 (D5) Elmore 2002, 18:2 | MFT 807 (508) -> 58 (71), FFT 92 (54) -> 87 (32), n = 4; MFT / FFT 8.8 -> 0.67 (1.12 dex) | no change: p 4e-5 | **not used** (the earlier "falsified at any log K in [1.0, 2.5]" was wrong: at the wide band partition reaches 0.52 dex, and the rest is within noise and fibre competition). FU-F2 carries partition alone | both thiols first order in the same H2S / Cys: the ratio stays: p 4e-4 | MFT-selective by construction | R0 and R4 as written falsified |
-| FU-F2 (D6) Elmore 2002, 18:3 vs 18:2 at equal ester amount | FFT 87 (32) -> 17 (5): 0.71 dex, SE 0.10. **Fibre-competition normalisation (R9):** the sulfur-free markers fall too (2-methylfuran 170 -> 128, 1-hydroxy-2-propanone 43 -> 28, 2-butanone 24 -> 10). Normalised FFT contrast: 0.59 dex (SE 0.14, by 2-methylfuran), 0.52 (0.15, by hydroxypropanone), 0.33 (0.15, by 2-butanone); by the mean of the three 0.48 dex (SE 0.12) | -- | equal ester volume and near-equal ester polarity: no difference. p 2e-5 / 4e-4 / 0.026 by marker; **4.5e-5 by the mean**. Holm over the two units that test it (FU-F2, FU-F3): 9e-5 | not constant-free | scale with unsaturation or oxidant load | **partition alone falsified after normalisation and Holm.** On the 2-butanone normaliser alone it is marginal (Holm 0.051) |
-| FU-F3 (D5) Yiltirak 2026, 100 C / 4 h, fresh canola 10 % | MFT 6.88 +- 0.98 -> 0.72 +- 0.10, FFT 1.28 +- 0.08 -> 1.19 +- 0.06 (n = 3): selectivity 0.95 dex (SE ~0.05) | p ~1e-86 | the bound is 0.42 dex for log K in [1.5, 2.0], 0.89 dex when log K_MFT exceeds log K_FFT by 1.0, 1.21 dex across [1.0, 2.5]: **not falsified at the declared band** | p ~1e-69 | R2 needs a carbonyl load fresh oil may not carry (CK-29); R6 does not; R5 explains the fall without either | R0 and R4 as written falsified; partition alone undecided here |
+| FU-F1 (D5) Elmore 2002, 18:2 | MFT 807 (508) -> 58 (71), FFT 92 (54) -> 87 (32), n = 4; MFT / FFT 8.8 -> 0.67 (1.12 dex) | no change: t 4.7, dof 4.9, **p 0.0055** | **not used** (partition reaches 0.52 dex at the wide K band; the rest is within noise and fibre competition). FU-F2 carries partition alone | the ratio stays: t 4.0, dof 8.0, **p 0.004** | MFT-selective by construction | R0 and R4 as written falsified |
+| FU-F2 (D6) Elmore 2002, 18:3 vs 18:2 at equal ester amount | FFT 87 (32) -> 17 (5): 0.71 dex. **Fibre-competition normalisation (R9)** by sulfur-free markers not made by the lipid: 1-hydroxy-2-propanone 43 -> 28; 2-methylfuran 170 -> 128 with the 18:3-alone pot's 30 (4) subtracted. 2-butanone is dropped (the 18:3 ester alone makes 11 (4), Table 2) | -- | equal ester volume and near-equal ester polarity predict no difference. Normalised: 0.52 dex by hydroxypropanone (studentized bootstrap **p 0.005**, Welch 0.004), 0.47 dex by corrected 2-methylfuran (**p 0.011**, Welch 0.008). Holm over FU-F2 and FU-F3: **0.010 / 0.022** | not constant-free | scale with unsaturation or oxidant load | **partition alone falsified on either normaliser, after Holm** |
+| FU-F3 (D5) Yiltirak 2026, 100 C / 4 h, fresh canola 10 % | MFT 6.88 +- 0.98 -> 0.72 +- 0.10, FFT 1.28 +- 0.08 -> 1.19 +- 0.06 (n = 3): selectivity 0.95 dex | MFT: t 19.7, dof 4.0, **p 4e-5** | the bound is 0.42 dex for log K in [1.5, 2.0], 0.89 dex when log K_MFT exceeds log K_FFT by 1.0, 1.21 dex across [1.0, 2.5]: not falsified at the declared band | selectivity: t 17.7, dof 5.3, **p 7e-6** | R2 needs a carbonyl load fresh oil may not carry (CK-29); R6 does not; R5 explains the fall without either | R0 and R4 as written falsified; partition alone undecided here |
 | FU-F4 Yiltirak, emulsion vs buffer + oil (same oil volume) | MFT 3.73 vs 0.72 at 100 C | -- | equal at equilibrium **if both arms are sampled alike** | -- | the interface's role is in no rival | R1 vs R5 only (CF-031 author question) |
-| FU-F6 Elmore 2002 Table 2, the reverse flow | 18:3 pot vs 18:3 + Cys + ribose: (E)-2-butenal 497 -> nd (> 250x), 2-propenal 132 -> nd, (E)-2-pentenal 437 -> tr (> 44x), (E,E)-2,4-heptadienal 3083 (972) -> 297 (126) (x10.4, p 4e-19), (E,Z)-2,4-heptadienal 646 -> 43 (x15) | **the direct sum predicts the lipid aldehydes unchanged by Cys + ribose: falsified in reverse** | -- | consumes the enals as H2S / Cys sinks: consistent | R2 consumes them by capture; R6 does not require it | R0's direct sum is falsified in both directions |
+| FU-F6 Elmore 2002 Table 2, the reverse flow | 18:3 pot vs 18:3 + Cys + ribose: (E)-2-butenal 497 -> nd (> 250x), 2-propenal 132 -> nd, (E)-2-pentenal 437 -> tr (> 44x), (E,E)-2,4-heptadienal 3083 (972) -> 297 (126) (x10.4; t 9.2, dof 5.6, **p 1.4e-4**), (E,Z)-2,4-heptadienal 646 -> 43 (x15) | **the direct sum predicts the lipid aldehydes unchanged by Cys + ribose: falsified in reverse** | -- | consumes the enals as H2S / Cys sinks: consistent | R2 consumes them by capture; R6 does not require it | R0's direct sum is falsified in both directions |
 | FU-F5 Whitfield 1988 lecithin | MFT x1/3.0, FFT x1/2.0, methylpyrazine x1/2.1 (n = 3) | falsified | not decisive | the sulfur-free methylpyrazine falls too | -- | development only |
 | D7 Zhang 2022 | phase-resolved, no n / SD | -- | the oil holds both species | -- | the water-phase pool falls | development only |
 
-**Holm:** R0 smallest p 9e-86 (Yiltirak; Elmore MFT 4e-5; the reverse flow 8e-19): falsified. Partition alone 9e-5
-(FU-F2, normalised): falsified. R4 as written 2e-69 (Yiltirak; Elmore 4e-4): falsified **as written, at the B60 route
-structure** (both thiol routes first order in the shared H2S). It is to be re-tested after M1c, whose supply structure
-can change which pools the lipid drains.
+**Holm:**
+- **R0:** smallest p 1.2e-4 (Yiltirak MFT 4e-5 x 3; Elmore MFT 0.0055; the reverse flow 1.4e-4). Falsified.
+- **Partition alone:** Holm 0.010 / 0.022 (FU-F2). Falsified. **The K_oil/water band decides no verdict while FU-F2
+  holds.** It only matters for FU-F3, which is not used to falsify.
+- **R4 as written:** Holm 1.3e-5 (Yiltirak; Elmore 0.004). Falsified as written, at the B60 route structure (both
+  thiol routes first order in the shared H2S). It is re-tested after M1c, whose supply structure can change which
+  pools the lipid drains.
 
-**R6's product predictions (premortem fix 5).** Oil-phase oxidation loses MFT to bis(2-methyl-3-furyl) disulfide, to
-mixed disulfides (with Cys, with FFT) and to over-oxidised sulfur (sulfinic / sulfonic forms, not GC-volatile). The
-oil's hydroperoxides fall as the matching hydroxy esters rise. It forms no thiol-enal thioether. It needs O2 or a
-printed PV: zero loss under N2 with peroxide-free oil. Capture (R2) instead forms 3-(2-methyl-3-furylthio)alkanals and
-other thiol-enal Michael adducts, and consumes the enals. It needs an enal, whether dosed or formed in situ (which needs
-O2 when the oil is fresh). Elmore's pool fall (free + disulfide x1/17) is consistent with both, since over-oxidation
-and mixed disulfides also remove the pool.
+**R6's product predictions (premortem fix 5).**
+- Oil-phase oxidation loses MFT to bis(2-methyl-3-furyl) disulfide, to mixed disulfides (with Cys, with FFT) and to
+  over-oxidised sulfur (sulfinic / sulfonic forms, not GC-volatile).
+- The oil's hydroperoxides fall, and the matching hydroxy esters rise.
+- It forms no thiol-enal thioether.
+- It needs O2 or a printed PV: zero loss under N2 with peroxide-free oil.
+
+Capture (R2) instead forms 3-(2-methyl-3-furylthio)alkanals and other thiol-enal Michael adducts, and consumes the
+enals. It needs an enal, either dosed or formed in situ; with fresh oil, forming one in situ needs O2. Elmore's pool
+fall (free + disulfide x1/17) is consistent with both, because over-oxidation and mixed disulfides also remove the
+pool.
 
 **What is left on disk:** R2, R3 and R6, with R5 and R9 as measurement models. None is credited.
 
@@ -462,20 +491,20 @@ acceptance rule's adequacy test. W-R1 cannot run without a protein isotherm and 
 
 | part | survivors | the decisive measurement | record that writes it | proposed decisive-measurements entry |
 |---|---|---|---|---|
-| B | R1, R2c, R4, R7, R8 | xylose + Gly and glucose + Gly at held in-situ pH (pH-stat), phosphate 0 / 0.005 / 0.05 / 0.2 / 0.5 M, 0.2 M citrate and an NaCl arm at matched ionic strength (R8), an inert-buffer zero (to anchor the intercept against HEPES), at two pH values (5.5 and 7.0, for the species), reading Amadori decay, 1-DG / 3-DG trapped and, with Cys, MFT and FFT in the same pots | ENGINE_VS_LITERATURE sec. 3.1 E5 row; CF-011 buffer arm C with CF-094's citrate arm; CF-120's decider; the 5 mM, NaCl and inert-zero arms are added here (design not yet written) | `buffer_step_specificity` (PR body) |
-| F | R2, R3, R6 (R5, R9 measurement models) | Cys + ribose pH 5.5, 120 C, free + disulfide (or TCEP-reduced) MFT and FFT read in **both phases**, with: (a) buffer vs fresh oil under **air and N2**; (b) **an enal dosed without oil** (C-F1's design); (c) **PV-spiked oil under N2 vs the enal dosed into oil under N2**; (d) the products read in both phases: thiol-enal thioether adducts (R2) vs disulfide and oxidised MFT (R6); (e) K_oil/water of MFT, FFT and the disulfide | ENGINE_VS_LITERATURE sec. 3.1 E7 row; CF-031 remedy; arms (a) - (e) added here (design not yet written) | `lipid_thiol_loss_route` (PR body) |
+| B | R1, R2c, R4', R7 | xylose + Gly and glucose + Gly at held in-situ pH (pH-stat), phosphate 0 / 0.005 / 0.05 / 0.2 / 0.5 M, 0.2 M citrate, an inert-buffer zero (to anchor the intercept against HEPES), at two pH values (5.5 and 7.0, for the species) and with replicate reactions (n >= 3, for the run-to-run CV), reading Amadori formation and decay, 1-DG / 3-DG trapped and, with Cys, MFT and FFT in the same pots | ENGINE_VS_LITERATURE sec. 3.1 E5 row; CF-011 buffer arm C with CF-094's citrate arm; CF-120's decider; the 5 mM, inert-zero, second-pH and replicate requirements are added here (design not yet written) | `buffer_step_specificity` (PR body) |
+| F | R2, R3, R6 (R5, R9 measurement models) | Cys + ribose pH 5.5, 120 C, free + disulfide (or TCEP-reduced) MFT and FFT read in **both phases**, with: (a) buffer vs **peroxide-free oil with its PV printed**, under **air and N2**; (b) **an enal dosed without oil** (C-F1's design); (c) **PV-spiked oil under N2 vs the enal dosed into oil under N2**; (d) the products read in both phases: thiol-enal thioether adducts (R2) vs disulfide and oxidised MFT (R6); (e) K_oil/water of MFT, FFT and the disulfide | ENGINE_VS_LITERATURE sec. 3.1 E7 row; CF-031 remedy; arms (a) - (e) added here (design not yet written) | `lipid_thiol_loss_route` (PR body) |
 | W | R0, R1, R3, R4 | acrylamide + Asn in one food matrix at >= 3 moistures spanning 10 - 70 % wb, a_w at temperature estimated (CF-104's decider); a pea / soy / gluten sorption isotherm, Tg-moisture curve and sugar solubility (B54; R4); a calibrated MFT / FFT series over >= 3 a_w in one defined matrix (design not yet written) | CF-104; B54 (backlog) | `water_activity_basis` (PR body) |
 
-**What the F arms decide (corrected mapping).**
-- Arm (a), the N2 arm with fresh oil, separates **{R2, R6} from {R1, R5}**. Both chemical routes need O2 (R6 directly;
-  R2 for enals formed in situ from fresh oil), while partition and the aliquot artefact do not. It does **not**
-  separate R2 from R6.
-- R2 vs R6 is separated by:
+**What the F arms decide (corrected mapping, confirmation F2).**
+- **Arm (a)**, the N2 arm with peroxide-free oil, separates **{R2, R3, R6} from {R1, R5}**. Every chemical route needs
+  O2 (R6 directly; R2, and R3's capture part, for enals formed in situ from fresh oil). Partition alone and the aliquot
+  artefact do not. It does **not** separate R2, R3 and R6 from one another.
+- **R2 vs R6** is separated by three arms:
   - (b) an enal without oil: R2 lowers MFT, R6 does not;
-  - (c) PV-spiked oil under N2 vs an enal in oil under N2: R6 responds to the first, R2 to the second, with the aldehydes
+  - (c) PV-spiked oil under N2 vs an enal in oil under N2: R6 responds to the first, R2 to the second. The aldehydes are
     read to catch peroxides decomposing into enals;
   - (d) the products: thioethers mean R2, disulfide / oxidised MFT means R6.
-- R3 vs R2 needs (e) and both phases.
+- **R3 vs R2** needs (e) and both phases.
 
 **The plan's decisive data, checked.**
 - "Potman and Kallen (E5 TEST)": spent by EX-058 (inventory MF-26), so falsify-only. Their falsifications agree with
@@ -484,19 +513,20 @@ acceptance rule's adequacy test. W-R1 cannot run without a protein isotherm and 
   lipid Strecker / epoxyalkenal browning chemistry (E20, F18), not thiol loss, so they could not decide F's rivals even
   if they were development data.
 - The plan row's evidence column needs these corrections, proposed for the plan's writer:
-  - Davidek's x2.8 - 3.6 holds at pH 5 - 6; at pH 7 it is x1.9 - 2.2, and at pH 8 the buffer effect is not resolved.
-  - Bell's 1.74 does not reject K = 0.1 M (p 0.12). K <= 0.1 M is falsified on Amadori decay by both Zyzak ladders;
-    K = 0.3 M only anoxically.
+  - Davidek's x2.8 - 3.6 holds at pH 5 - 6. At pH 7 it is x1.9 - 2.2. At pH 8 it is undetermined: it depends on the
+    run-to-run CV.
+  - Bell's 1.74 does not reject K = 0.1 M (p 0.12). K <= 0.1 M is falsified on Amadori decay at 37 C (Zyzak), and
+    K = 0.05 M on glycine loss at 25 C (Bell). The linear form itself survives only narrowly (Holm 0.07 - 0.17).
   - "The data favour capture" rests on spent data. On disk they falsify the direct sum (both directions), partition
-    alone and supply as written; capture, oil-phase oxidation and partition + capture stay undecided.
+    alone and supply as written. Capture, oil-phase oxidation and partition + capture stay undecided.
 
 ### 4.5 S3 consequences: what the falsifications do to shipped outputs (premortem fix 1)
 
 Under S3 (PR #96, not merged), a falsified incumbent with no rival credited means refusing the outputs that depend on
 it: those whose sensitivity to the falsified structure's switch exceeds the lane's within-laboratory term. Where every
-carried rival agrees in sign, the direction is shown and the size comes from the union of the rivals' envelopes, or is
-refused under S4 when a rival has no band. This section declares the consequences. It does not apply them: the
-application is its own S3 case, with its review.
+carried rival agrees in sign, the direction is shown and the size comes from the union of the rivals' envelopes. The
+size is refused under S4 when a rival has no band. This section declares the consequences; it does not apply them.
+The application is its own S3 case, with its review.
 
 | part | output family | scope (pH, T, composition) | consequence | basis |
 |---|---|---|---|---|
@@ -504,24 +534,30 @@ application is its own S3 case, with its review.
 | F | the same with free fatty acids or a structured-lipid mesophase | GSH + glucose 145 C (Du 2025: MFT +19 - 30 %); the Nestle mesophase (US 8,920,862, x10 up, a viewed TEST carried failure) | **direction refused** (signs disagree across lipid forms) | CF-031 |
 | F | lipid-aldehyde outputs (alkenals, dienals) in recipes with Cys + sugar | pH ~5.5, 140 C (Elmore Table 2) | **direction shown** (lowered, 10 - > 250x in Elmore); size refused (no band) | the reverse flow, FU-F6 |
 | F | thiol and lipid-aldehyde outputs in fat-free recipes | all | unchanged | -- |
-| B | outputs whose constants came from 0.5 M phosphate pots (the sulfur lane's Hofmann-fitted constants; M3's `k_d`), served in unbuffered or carboxylate-buffered foods | **pH 5 - 7 only**, 90 - 140 C | **widened**: the union of R1 / R2c / R4 / R7 / R8 envelopes; refused where the step set matters and rivals give zero vs a fall at a sensitivity above the within-lab term (FFT and furfural under R1 vs R4) | R0 falsified at pH 5 - 7 (FU-B1) |
-| B | the same at **pH >= 8** (the alkaline pyrazine outputs, Leahy's pH 9 borate pots) | pH >= 8 | **unchanged**: R0 is not falsified at pH 8 (Davidek p 0.45 at CV 20 %) | FU-B1 |
+| B | outputs whose constants came from 0.5 M phosphate pots (the sulfur lane's Hofmann-fitted constants; M3's `k_d`), served in unbuffered or carboxylate-buffered foods | **pH 5 - 7.** R0's constant-free falsification is at **25 C (Bell) and 90 C (Davidek)**; 90 - 140 C is a declared transfer through Guan (development evidence) | **widened** by the union of R1 / R2c / R4' / R7 envelopes, each with its band (R4' on R1's linear form, M2). Where rivals give zero vs a fall at a sensitivity above the within-lab term (FFT and furfural, R1 vs R4'), the union spans zero: size widened, direction shown only where all agree | R0 falsified at pH 5 - 7 (FU-B1, FU-B2) |
+| B | the same at **pH >= 8** (the alkaline pyrazine outputs, Leahy's pH 9 borate pots) | pH >= 8 | **undetermined**: R0 is falsified at pH 8 at a 6 % run-to-run CV, not at >= 8 %. Until a replicate-reaction measurement fixes the CV, these outputs are **widened by the pH 5 - 7 bands as a sensitivity, not refused**, and flagged undetermined | FU-B1 |
 | B | outputs from 0.1 M phosphate constants (Martins 2005, Knol 2005) in unbuffered foods | pH 5 - 7 | widened by the same union, scaled to 0.1 M | FU-B1 |
 | W | acrylamide formation contrasts crossing a_w ~0.9, and acrylamide levels above a_w ~0.9 (high-moisture plant matrices, 55 - 70 % water) | 140 - 200 C | **contrasts refused; levels widened** (the formation band's low edge to x0.28, CF-104's proposed edge) | R0's acrylamide lane falsified on FU-W1 with common random numbers |
 | W | trunk outputs inside a_w 0.33 - 1.00; acrylamide below a_w ~0.9 | -- | unchanged (no constant-free test fails) | -- |
 | W | sulfur, lipid and pyrazine a_w comparisons | -- | unchanged: already refused (PR #77) | -- |
 
 **Declared bands for the buffer widening.**
-- **kappa(T), bounded.** The phosphate rate factor (1 + kappa c, at Guan's 0.1 M) falls by a factor in
+- **kappa(T), bounded, provisional.** The phosphate rate factor (1 + kappa c, at Guan's 0.1 M) falls by a factor in
   **[1.5, 2.6] from 110 to 130 C**. Guan 2012's two readings bracket it: x~4 -> x~2.5 in the dossier (1.6) and
   x3.8 -> x1.5 in sec. 2.2's row (2.5). On kappa itself the second reading is a fall of x5.6, so the band is declared
-  on the factor, not on kappa. The factor is held at its 90 - 110 C value below 110 C (Davidek, Guan) and carried with
-  the full fall above 130 C. Nothing beyond 140 C is evaluated.
-- **The zero-buffer intercept, 0.5 dex.** The phosphate ladder's extrapolated intercept (Zyzak N2, 0.0105 /d) sits
-  0.48 dex above the HEPES rate (0.0035 /d). The buffer-free k_u of a re-referenced constant therefore carries a 0.5 dex
-  band (one-sided, downward). This band is what lets R1 survive the HEPES sensitivity.
-- **pH scope.** R0 is falsified at pH 5 - 7, not at pH >= 8. No buffer consequence is applied at pH >= 8, so the
-  alkaline pyrazine outputs are unaffected.
+  on the factor.
+  - **Guan's read error added (confirmation):** DFP +-1e-4 mmol/L on a t0 of 0.0041, i.e. +-2.4 % of the initial.
+    At 60 min phosphate leaves 3.2 % (110 C) and 2.3 % (130 C), so the 130 C end point is within ~1 read error of zero,
+    and the end-point factor has no upper bound at 130 C.
+  - The band therefore becomes an S4 measured bound only once it is rebuilt from Guan's early time points (Fig. 5A,
+    10 - 20 min) with that read error. Until then it is a declared band.
+  - Below 110 C the factor is held at its 90 - 110 C value (Davidek, Guan); above 130 C it carries the full fall.
+    Nothing beyond 140 C is evaluated.
+- **The zero-buffer intercept, bounded by two measurements per condition (confirmation B4).** The band runs from the
+  inert-buffer (HEPES) rate up to the phosphate ladder's extrapolated intercept: **0.48 dex anoxic** (0.0035 vs
+  0.0105 /d), **0.68 dex oxic** (0.0124 vs 0.059 /d). Use 0.5 dex for anoxic pots and **0.7 dex for oxic pots**
+  (one-sided, downward from the ladder intercept). This band is what lets R1 survive the HEPES sensitivity.
+- **pH scope.** R0 is falsified at pH 5 - 7. pH >= 8 is undetermined (above).
 
 **The sensitivity computation and its cost.** S3 requires carried rivals to be runnable. Until W3 runs them in JAX,
 they run in the NumPy engine behind switches.
@@ -529,11 +565,11 @@ they run in the NumPy engine behind switches.
   two-phase or oxidation switch is built for S3.
 - **Water:** no run is needed. The refusal and widening are declared over an a_w region.
 - **Buffer:** one switch is needed in the NumPy engine: the per-step factor table on the steps each rival names. Work
-  about 0.5 day. Each B output in scope is then run under R0 and the five carried buffer rivals (six settings) over S4's
-  joint draws, with common random numbers across settings. Its sensitivity to the switch is compared with the lane's
-  within-lab term.
+  about 0.5 day. Each B output in scope is then run under R0 and the four carried buffer rivals (R1, R2c, R4', R7;
+  five settings) over S4's joint draws, with common random numbers across settings. Its sensitivity to the switch is
+  compared with the lane's within-lab term.
 - **Cost:** the per-pot cost of a draw is not on record. The first step is therefore one timed setting on the
-  affected rows (one core, niced). The full cost (about 6x that) is stated before the full run, capped at 8 of 10
+  affected rows (one core, niced). The full cost (about 5x that) is stated before the full run, capped at 8 of 10
   cores.
 
 **Scope of the late-November slot (coordinator, 2026-11-06).** The slot holds two things: the power check (sec. 5.3),
@@ -546,13 +582,13 @@ network builds (sec. 6) are **deferred until a decider exists** (a candidate rea
 
 | comparison | noise as the source states it | where stated |
 |---|---|---|
-| FU-B1 Davidek 2002 | "All samples analyzed in duplicate", no error bars; CV < 10 % above 1.5 mmol/L (analytical); one reaction run per cell, so the run-to-run CV is unknown and is **taken as >= 20 %** per k for the falsification; the method band (min-max of the dossier's fitting methods (a) - (c)) is reported beside it | davidek2002 dossier secs. 4.3 - 4.4 |
-| FU-B2 Bell 1997 | Table 1 95 % CL per rate (sigma = CL / 1.96); one sample per time point, the CLs from regression scatter | bell1997 dossier |
-| FU-B3, B3' Zyzak 1995 | t1/2 +- SD, triplicates (N2 and air ladders); sigma_k / k = SD / t1/2. **The SD, not the SE, is used**: with the SE every two-parameter law fails, linear included (chi2 8.4 N2, 21 air, 2 dof). The choice keeps R1 alive and is disclosed as such. HEPES half-lives are figure labels with no SD (20 % assumed in the sensitivity) | zyzak1995 dossier |
+| FU-B1 Davidek 2002 | "All samples analyzed in duplicate", no error bars; CV < 10 % above 1.5 mmol/L (analytical); one reaction run per cell, so the run-to-run CV is not printed. It is **sourced from Zyzak's same-class replicate reactions (Amadori decay): ~6 %, range 2 - 12 %**, with 20 % as a sensitivity. The method band (min-max of the dossier's fitting methods (a) - (c)) is reported beside it. Breakpoints: pH 7 falsified for CV <= ~20.5 %; pH 8 falsified only for CV <= ~8 % | davidek2002 dossier secs. 4.3 - 4.4 |
+| FU-B2 Bell 1997 | Table 1 95 % CL per rate (sigma = CL / 1.96); one sample per time point, the CLs from regression scatter; the same run-to-run term as FU-B1 added in quadrature (0 / 6 / 12 / 20 %) | bell1997 dossier |
+| FU-B3, B3' Zyzak 1995 | t1/2 +- SD of three separate reactions (Table I footnote a; Fig. 2 caption), N2 and air ladders; **SE = SD / sqrt 3, with a studentized reference** (a parametric bootstrap re-estimating each point's SE from three replicates, two truths: printed and pooled relative SD). The pooled-variance F is the disclosed sensitivity. Choosing the noise model by its verdict would be circular (sec. 4.0). HEPES half-lives are figure labels with no SD (20 - 100 % assumed in the sensitivity) | zyzak1995 dossier |
 | D2, D4 Guan 2012 | figure read errors (+-5 g/L glucose; DFP +-1e-4 mmol/L) | guan2012 dossier |
 | FU-B4 Mottram 2002 | triplicate; mean CV ~22 %, no compound > 40 %; RF 1 (ratios only) | mottram2002 dossier |
-| FU-F1, F2, F6 Elmore 2002 | four replicates; mean (SD) per compound; SE of the mean used; two-fibre SPME at room temperature, so contrasts are normalised by sulfur-free markers (R9) and the normaliser is reported | elmore2002 dossier; CF-031 |
-| FU-F3, F4 Yiltirak 2026 | triplicate cooks, mean +- SD (Table S3), SIDA with deuterated standards | yiltirak2026 dossier |
+| FU-F1, F2, F6 Elmore 2002 | four replicates; mean (SD) per compound; SE of the mean with a studentized reference (Welch-Satterthwaite t; bootstrap for FU-F2); two-fibre SPME at room temperature, so contrasts are normalised by sulfur-free markers (R9) and the normaliser is reported | elmore2002 dossier; CF-031 |
+| FU-F3, F4 Yiltirak 2026 | triplicate cooks, mean +- SD (Table S3), SIDA with deuterated standards; SE with a Welch-Satterthwaite t | yiltirak2026 dossier |
 | FU-F5 Whitfield 1988 | n = 3, external standards | whitfield1988 dossier |
 | D6 Farmer 1992 | n = 4, mean + SD | farmer1992 dossier |
 | D7 Zhang 2022 | n and SD not printed; HS-SPME RF 1 | zhang2022 dossier |
@@ -560,7 +596,7 @@ network builds (sec. 6) are **deferred until a decider exists** (a candidate rea
 | FU-W2 Leahy 1989a (development) | duplicates early, triplicates later; per initial dry weight from a purged powder | leahy1989a dossier |
 | FU-W3 Hofmann 1998 | triplicates within 10 % | hofmann1998 ledger |
 | FU-W4 Modi 2008 | peak areas, mean +- SD, n = 4; no calibration | modi2008 dossier |
-| K_oil/water (F-R1) | **no measurement on disk**: a declared band, log K in [1.0, 2.5] for MFT, FFT and the disulfide (the case's log K_ow 1.5 - 2.0, widened by 0.5 for oil vs octanol). An unsourced width, so it needs the reviewer's agreement. Since fix 4 no falsification depends on it | -- |
+| K_oil/water (F-R1) | **no measurement on disk**: a declared band, log K in [1.0, 2.5] for MFT, FFT and the disulfide (the case's log K_ow 1.5 - 2.0, widened by 0.5 for oil vs octanol). An unsourced width, so it needs the reviewer's agreement. It decides no verdict while FU-F2 holds | -- |
 | across laboratories | H0's between-laboratory term (EX-059) on absolute levels only; no M5 unit uses it | -- |
 
 ### 5.2 Bands the comparison needs (declared, unscored sources)
@@ -568,9 +604,12 @@ network builds (sec. 6) are **deferred until a decider exists** (a candidate rea
 - **kappa_P** [5, 40] /M at pH 5 - 7.4 (DEV: Guan, Davidek, Zyzak, Bell); its temperature fall bounded as in sec. 4.5
   (the factor falls x1.5 - x2.6 from 110 to 130 C); by species, Davidek's [H2PO4-] reading at an assumed pKa2 6.8 -
   7.2.
-- **The zero-buffer intercept**: a 0.5 dex one-sided band (sec. 4.5).
+- **The zero-buffer intercept**: bounded by two measurements per condition, [HEPES rate, ladder intercept]: 0.48 dex
+  anoxic, 0.68 dex oxic; 0.5 / 0.7 dex used (sec. 4.5).
+- **The run-to-run CV of a single-run pot**: ~6 % (2 - 12 %) from Zyzak's replicate reactions, 20 % as a sensitivity.
 - **carboxylates** on Amadori steps [0, ~4] /M; free-sugar steps rho x kappa_P, rho [0.1, 1] (CF-094).
-- **R7's K** in [1, 5] mM (a declared width around the ~2 mM that the HEPES point implies; needs agreement).
+- **R7's K** in [1, 5] mM (a declared width around the ~2 mM that the HEPES point implies; needs agreement). R7
+  contains R1 as its A = 0 case.
 - **F-R2's capture constant**: no measurement at process temperature on disk (Charles-Bernard's 25 C slowing is the
   only kinetic anchor). No band, so under S4 any size it sets is refused.
 - **F-R6's oxidant load**: the printed PV of the oil where printed; otherwise refused.
@@ -583,12 +622,14 @@ M4 mini-model's harness. Sizing ~1 day for all three parts (work), < 1 h of sing
 not a comparison, so it does not wait on M1's verdict. It must simulate:
 
 - **B.** One aqueous pot: sugar, amine, Amadori pool, 1-DG / 3-DG, a pentose-to-furfural branch and an MFT branch
-  (with Cys). Rivals R0 (the charge balance only), R1 (by total phosphate and by [H2PO4-]), R2a / b / c, R4, R7 and R8
-  (ionic strength from the pot's salts). Noise per unit as sec. 5.1. Jobs:
-  - (a) the falsifications of sec. 4.1 hold at every band corner, with the probability that a TRUE R1 is falsified
-    by FU-B2's one-vial design or by Zyzak's SD choice (false falsification) reported;
-  - (b) the designed decider (sec. 4.4) at n = 3 and n = 6 per cell: P(R1 vs R4), P(R1 vs R2c), P(R1 vs R7),
-    P(R8 vs species), P(total vs species kappa) separated. R2c vs R1 needs a >= 0.5 M arm, and the check says whether
+  (with Cys). Rivals R0 (the charge balance only), R1 (by total phosphate and by [H2PO4-]), R2a / b / c, R4 and R4', R7.
+  Ionic strength is carried as a confound of the design, not a rival (R8 pure is falsified). Noise per unit as sec.
+  5.1, with the studentized reference of sec. 4.0. Jobs:
+  - (a) the falsifications of sec. 4.1 hold at every band corner. Report the probability that a TRUE R1 is falsified
+    (false falsification): by FU-B2's one-vial design, by the run-to-run CV assumed for Davidek, and by Zyzak's
+    three-replicate SEs;
+  - (b) the designed decider (sec. 4.4) at n = 3 and n = 6 per cell: P(R1 vs R4'), P(R1 vs R2c), P(R1 vs R7),
+    P(total vs species kappa) separated. R2c vs R1 needs a >= 0.5 M arm, and the check says whether
     1.0 M is needed. R7 needs the 5 mM and inert-zero arms;
   - (c) the concentrated-matrix ceiling as a separate factor, so a ceiling is not read as saturation.
 - **F.** Two phases (water, oil at phi), fast partition per species (MFT, FFT, disulfide, H2S) with K in its band,
@@ -612,8 +653,8 @@ Calibrated by judgement; every number is to be revised by the power check.
 
 | part | falsifications on disk hold (Holm p < 0.05; spent, falsify-only) | survivors separated by data on disk | with the sweep candidates read under fixed roles | by the designed decider (sec. 4.4) |
 |---|---|---|---|---|
-| B | R0 at pH 5 - 7: 0.85 (Davidek's run-to-run CV is assumed); R2 with K <= 0.1 M on Amadori decay at 37 C: 0.85; K = 0.3 M (anoxic only): 0.6 | **0.05** (nothing unspent) | 0.15 (C-B1 / C-B2 / C-B3 bear on species, ceiling and step set, not on R1 vs R4 at held pH) | ~0.5 (more rivals now: R7, R8) |
-| F | R0 (both directions): 0.95; partition alone (FU-F2, normalised): 0.75; R4 as written: 0.7 | **0.05** | 0.25 (R2 vs R6 via C-F1, if quantified: P ~0.4 that it is); R2 vs R3: < 0.1 | ~0.55 (arms (a) - (e), with K measured) |
+| B | R0 at pH 5 - 7: 0.9 (holds for any CV up to ~20 %); R2 with K <= 0.1 M on Amadori decay at 37 C: 0.85; K = 0.3 M: 0.6; R4 as written: 0.8; R8 pure: 0.8. And P(R1 itself is falsified in item 6) ~0.4 (Holm 0.07 - 0.17; 0.01 under pooled variance) | **0.05** (nothing unspent) | 0.15 (C-B1 / C-B2 / C-B3 bear on species, ceiling and step set, not on R1 vs R4' at held pH) | ~0.5 (rivals R1, R2c, R4', R7) |
+| F | R0 (both directions): 0.95; partition alone (FU-F2, normalised, Holm 0.010 / 0.022): 0.7; R4 as written: 0.7 | **0.05** | 0.25 (R2 vs R6 via C-F1, if quantified: P ~0.4 that it is); R2 vs R3: < 0.1 | ~0.55 (arms (a) - (e), with K measured) |
 | W | R0's acrylamide lane and R2 above a_w ~0.9: 0.75 (FU-W1; basis-independent) | **0.05** | 0.15 (C-W1 / C-W2: trunk, 25 C) | ~0.5 (trunk and acrylamide); sulfur lane: no design written |
 
 **P(M5 ships any term over R0 on data on disk) ~0.05.** The late-November slot holds the power check and the S3
@@ -628,7 +669,7 @@ the buffer switch of sec. 4.5 is built now, in the NumPy engine.
 - **Buffer as a composition, not a label:** each buffer species with its concentration and pK (already in
   `ph_state` for the charge balance), and a per-step catalytic coefficient table keyed by (step, buffer species) as
   `ConfigKey`s with bands; a hyperbolic form available for lumped steps; the species fraction from the in-situ pH (so
-  Davidek's [H2PO4-] reading is expressible); the ionic strength of the pot (R8). The acrylamide lane's
+  Davidek's [H2PO4-] reading is expressible); the ionic strength of the pot as a recorded confound. The acrylamide lane's
   phosphate-for-every-buffer law (MF-37 (b)) is replaced by the same table.
 - **Constants re-referenced to buffer-free values** at compose time from each calibration pot's stated buffer, with
   the 0.5 dex intercept band, so the joint refit sees one convention (sulfur constants at 0.5 M; M3's `k_d`; M1c's
@@ -650,7 +691,8 @@ the buffer switch of sec. 4.5 is built now, in the NumPy engine.
 ## Open questions for the build
 
 1. **Choose the buffer form on DEV data first** (D2). On disk, R2 with K <= 0.1 M is falsified on Amadori decay at
-   37 C. K = 0.3 M is falsified only anoxically. R1, R2c, R7 and R8 are open. Read Potman, Kallen and Thornalley in
+   37 C (Zyzak), K = 0.05 M on glycine loss at 25 C (Bell), K = 0.3 M at Holm 0.022 - 0.039. R1 (fragile), R2c,
+   R4' and R7 are open. Read Potman, Kallen and Thornalley in
    item 7 with the form fixed. The plan row's "settled" form is provisional.
 2. **Which steps get kappa.** The 2,3-branch / Amadori steps exist in the sulfur lane only as `r_pent_dpo`,
    `r_arp_dpo` or, if M1's C1 ships, `r_cama_dpo`. Decide after M1's verdict (CK-54 runs inside the prereg).
@@ -670,25 +712,35 @@ the buffer switch of sec. 4.5 is built now, in the NumPy engine.
 ## What should block the freeze (for the review and the coordinator)
 
 1. **The reduced power check (sec. 5.3)** must be built (~1 day) and run, and its demotions written in.
-2. **Unsourced widths needing agreement:** the K_oil/water band (no falsification depends on it any longer), R7's K
-   band, the >= 20 % run-to-run CV assumed for Davidek, the 20 % on Zyzak's HEPES labels, the kappa(T) band.
+2. **Unsourced widths needing agreement:**
+   - the K_oil/water band (it decides no verdict while FU-F2 holds);
+   - R7's K band;
+   - the HEPES labels' unprinted SD;
+   - the kappa(T) band, until it is rebuilt from Guan's early time points with the read error.
+
+   Davidek's run-to-run CV is now sourced from Zyzak (~6 %), with 20 % as a sensitivity.
 3. **How a refusing R0 is scored** on W's units (FU-W2 - W4). Proposed: units R0 refuses are scored among the other
    rivals only, and a term that answers there ships through the acceptance rule's adequacy test, not by "beating" R0.
    This is a coordinator / owner call.
 4. **PR #88 (CF-129, CF-130) and PR #96 (S1 - S4) are not merged.** This case cites them as pending. Sec. 4.5 depends
    on S3 / S4. Sec. 2.11's load rule depends on CF-130.
-5. **The premortem's confirmation round** on these ten fixes (the M4 precedent: one round plus one confirmation).
+5. **R1's fragility.** The claim's own linear form survives at Holm 0.07 - 0.17 and is falsified (0.010 - 0.013) under
+   the pooled-variance alternative. Item 6 decides with one declared measurement model. If R1 falls there, R7 falls
+   with it, and part B's survivors are R2c and R4' (on R1's form with its band).
 6. **Candidates:** the owner decides on downloads (sec. 2.9). A candidate read before the freeze is folded in under its
    fixed role; one read after enters by amendment.
 7. **Stale hold-out tags** (Leahy 1989a Table IV; the Yiltirak buffer arms) go to the coordinator's next data PR
    (sec. 4.3); no data file is edited here.
 8. **Not blockers, but the owner should know:**
    - On disk, M5 credits no term in any part. It records falsifications only:
-     - buffer: R0 (with the pH-only reading) at pH 5 - 7; R2 with K <= 0.1 M on Amadori decay;
+     - buffer: R0 (with the pH-only reading) at pH 5 - 7; R2 with K <= 0.1 M on Amadori decay at 37 C and
+       K = 0.05 M on glycine loss at 25 C; K = 0.3 M; R4 as written; R8 pure;
      - fat: the direct sum, in both directions; partition alone; supply as written;
      - water: the acrylamide lane's flat band and concentration-only above a_w ~0.9.
-   - Sec. 4.5's S3 consequences would refuse or widen shipped outputs once S3 applies: fat-thiol sizes, high-moisture
-     acrylamide contrasts, and phosphate-referenced sulfur outputs in unbuffered foods at pH 5 - 7.
+   - Once S3 applies, sec. 4.5's consequences would refuse or widen shipped outputs:
+     - fat-thiol sizes;
+     - high-moisture acrylamide contrasts;
+     - phosphate-referenced sulfur outputs in unbuffered foods at pH 5 - 7 (pH >= 8 undetermined).
    - The deciders are designed experiments, which come last by the owner's ruling (2026-11-05).
 
 Seen by the author: as stated at the top. No engine output on any row named in sec. 4 was computed for this case.
@@ -723,37 +775,72 @@ Still before any result of the change; no engine run on any pot.
 
 ### Changelog: 2026-11-06 (later), independent premortem "freeze after fixes": ten fixes applied; still READY TO FREEZE, not frozen
 
-Still before any result of the change; no engine run. [dry] arithmetic on printed values only.
+Still before any result of the change; no engine run. [dry] arithmetic on printed values only. (Numbers in items 2, 4
+and 9 were revised by the confirmation round below; this entry records them as corrected.)
 1. **S3 consequences** (new sec. 4.5): per output family refused / widened / unchanged, scoped by pH, temperature and
    composition. Fat: thiol direction shown, size refused; the reverse flow added. Buffer: phosphate-referenced outputs
-   in unbuffered foods are widened at pH 5 - 7 and unchanged at pH >= 8. Water: R0's acrylamide lane is falsified above
-   a_w ~0.9 with common random numbers. Declared: a bounded kappa(T) band, a 0.5 dex zero-buffer intercept band, the
-   pH scope, and the sensitivity computation (NumPy switches; cost measured on one timed setting first).
-2. **R2 rescoped.** K <= 0.1 M is falsified on Amadori decay at 25 - 37 C (both Zyzak ladders; K = 0.05 M on Bell).
-   K = 0.3 M is falsified only anoxically. Further changes:
-   - Zyzak's air ladder reported (linear 6.99, K 0.3 M 7.27, K 0.1 M 17.6).
-   - The SD-vs-SE choice disclosed.
-   - R1 scored with the HEPES point as a sensitivity: falsified if its intercept must equal HEPES.
+   in unbuffered foods widened at pH 5 - 7. Water: R0's acrylamide lane falsified above a_w ~0.9 with common random
+   numbers. Declared: a kappa(T) band, a zero-buffer intercept band, the pH scope, and the sensitivity computation
+   (NumPy switches; cost measured on one timed setting first).
+2. **R2 rescoped:** K <= 0.1 M falsified on Amadori decay at 37 C (Zyzak), and K = 0.05 M on glycine loss at 25 C (Bell).
+   - Zyzak's air ladder reported.
+   - R1 scored with the HEPES point as a sensitivity.
    - Rival R7 (saturating at ~2 mM plus linear) added.
    - "pH held at every concentration" dropped for Zyzak: Davidek alone falsifies the pH-only reading.
 3. **FU-W2 (Leahy) demoted** to development evidence (nonfat dry milk, lactose crystallisation, a per-dry-weight
    recovery basis). Leahy 1989a Table IV and the Yiltirak buffer arms are recorded as stale hold-out tags.
 4. **FU-F1's partition claim dropped**; FU-F2 carries partition alone. Every falsification is restated as a
-   posterior-predictive p after Holm (sec. 4.0), e.g. Bell at K 0.1 M p 0.12 (not falsified), Zyzak at K 0.5 M Holm
-   0.057 (not falsified), Davidek at pH 7 with a run-to-run CV of 20 % p 0.019.
-5. **R6's product predictions written.** The E7 mapping is corrected: the N2 arm separates {R2, R6} from {R1, R5}, not R2
-   from R6. The R2 / R6 separators are added (an enal without oil; PV-spiked oil vs an enal in oil, both under N2;
-   thioethers vs disulfide / oxidised MFT in both phases).
+   posterior-predictive p after Holm (sec. 4.0).
+5. **R6's product predictions written**; the R2 / R6 separators added; the E7 mapping corrected (made final in F2 below).
 6. **R4 labelled** "as written, at the B60 route structure"; re-test after M1c.
 7. **Rivals:**
    - R3 (buffer) merged into R0.
-   - Added R7 (saturating plus linear) and R8 (ionic strength).
+   - Added R7 (saturating plus linear) and R8 (ionic strength; falsified in its pure form, B3 below).
    - Added R9, SPME fibre competition, as a measurement model for Elmore.
    - Added W-R4, a solubility-capped concentration basis.
 8. **FU-W1 stated as basis-independent:** wet basis x2.60 at the wet arm; per-water basis x1.52 at the wet arm but ~x5
    at the dry arm.
-9. **FU-F2 normalised for fibre competition.** By 2-methylfuran / hydroxypropanone 0.59 / 0.52 dex (~4 / 3.5 SE). By
-   the mean of three markers 0.48 dex, Holm p 9e-5: still falsified. By 2-butanone alone it is marginal (Holm 0.051).
+9. **FU-F2 normalised for fibre competition** (normalisers and p values as corrected in F1 below).
 10. **The CF-130 rule widened** to ANY pot. Yiltirak's 10 % canola would be charged ~10x and Elmore's ester ~130x.
 - **Slot scope:** the late-November slot is the power check plus the S3 consequence computation. The two-phase and
   O2-per-phase builds are deferred until a decider exists.
+
+### Changelog: 2026-11-06 (later still), independent confirmation "CONFIRMED WITH EDITS": all applied; still READY TO FREEZE, not frozen
+
+The reviewer's scratch arithmetic was re-derived with independent code (own bootstrap, own seed, Welch-Satterthwaite
+on log ratios). It reproduced, within bootstrap noise:
+- R1 Holm 0.067 - 0.163 (the reviewer's 0.075 - 0.17); pooled-variance 0.010 (0.013);
+- K 0.3 M 0.022 - 0.039 (0.023 - 0.045); K 0.5 M 0.058 - 0.101 (0.061 - 0.098);
+- FU-F2 0.005 / 0.011;
+- Yiltirak selectivity t 17.7, dof 5.3, p 7e-6.
+
+One difference: Yiltirak's MFT-only test (R0) gives t 19.7, dof 4.0, p 4e-5. The confirmation's t 17.6 / dof 5.3 is the
+selectivity statistic, which is R4's.
+
+The edits:
+- **B1.** Zyzak's SE with a studentized reference replaces the SD. The circularity of choosing noise by its verdict is
+  stated. R1 survives, fragile (Holm 0.07 - 0.17; 0.010 - 0.013 under pooled variance, falsified). K 0.3 M is
+  falsified (0.022 - 0.039). K 0.5 M is not (0.058 - 0.10). The same studentized treatment is applied to Elmore and
+  Yiltirak.
+- **B2.** R7 is scored on a boundary-respecting bootstrap (A >= 0; R1 is its A = 0 case): Holm 0.028 - 0.072. It
+  stands or falls with R1 and is no longer called "carried" by itself.
+- **B3.** R8 in its pure form is falsified (Bell's citrate arms and add-back; Guan's carboxylates). No "species x I"
+  variant is carried.
+- **B4.** The intercept band is bounded by [HEPES, ladder intercept]: 0.48 dex anoxic, 0.68 dex oxic, so 0.5 / 0.7 dex.
+- **B5.** Davidek's CV is sourced from Zyzak (~6 %, 2 - 12 %; 20 % kept as a sensitivity), with Holm across R0's five
+  tests. pH 7 is falsified for CV <= ~20.5 %. pH 8 is falsified only for CV <= ~8 %, so it is undetermined; this is
+  propagated to sec. 4.5. Bell is given the same run-to-run term: K 0.05 M at 0.007 / 0.013 / 0.041 / 0.14.
+- **B6.** Sec. 4.5's buffer row is scoped: the constant-free falsification is at 25 C and 90 C; 90 - 140 C is a declared
+  transfer through Guan. R4' has a band (R1's form); R8 is not carried.
+- **F1.** FU-F2 drops 2-butanone (the 18:3 ester alone makes it) and subtracts the 18:3-alone 2-methylfuran. Results:
+  hydroxypropanone p 0.005 (Holm 0.010), corrected 2-methylfuran p 0.011 (Holm 0.022). The "marginal" sentence is gone.
+- **F2.** Sec. 4.4 arm (a) separates {R2, R3, R6} from {R1, R5} and requires peroxide-free oil with its PV printed.
+- **F3.** Yiltirak's p values are studentized (above), replacing 1e-86 / 1e-69.
+- **M1.** "Amadori decay at 37 C (Zyzak); K = 0.05 M on glycine loss at 25 C (Bell)" in the restated block, this log
+  and the PR body.
+- **M2.** R4's dose form is declared as R1's linear form on its steps. Scored on Bell, R4 as written is falsified (it
+  has no factor on the condensation). R4' (R4 plus the condensation) is carried.
+- **Also:**
+  - kappa(T) becomes an S4 measured bound only once rebuilt from Guan's early points with the read error added. The
+    60-min end point at 130 C is within one read error of zero.
+  - K_oil/water decides no verdict while FU-F2 holds.
