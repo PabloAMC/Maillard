@@ -4,10 +4,10 @@
   "artifact": "incumbent_evidence_tiers",
   "generated_on": "2026-11-06",
   "git": {
-   "commit": "d264a832c29886880ee22bcbe516f675a47af245",
-   "short": "d264a832",
+   "commit": "9a67a098e0c934f52c87c85451fea945b2932565",
+   "short": "9a67a098",
    "branch": "incumbent-evidence-tiers",
-   "dirty": true
+   "dirty": false
   },
   "generated_by": "scripts/generators/build_evidence_tiers.py",
   "inputs": [
@@ -65,15 +65,15 @@
    },
    {
     "path": "results/validation/core_prediction_uncertainty.json",
-    "sha256": "c87f0608229a283115286fde2f58dcc43224c02ae283a71f393f8915fd18224c"
+    "sha256": "b77f94272b0582b076024fd90f12db59738652b9b5c32910bfc2d705c680cdaf"
    },
    {
     "path": "results/validation/sulfur_reaction_evidence.json",
-    "sha256": "cb1e6d9523cfd40052bc4c917526a1bb7830fe3f54c706cc43fd0f08bc4ad1f8"
+    "sha256": "4aa950551f9c69c4d426dae65f918d607182860bfa4d00de386144efeea8718e"
    },
    {
     "path": "results/validation/data_wishlist.json",
-    "sha256": "e426a852f326e0006cf1687aabe845836c348df2c340861cdfeed8ffe9f4a945"
+    "sha256": "f7aa111d3984aae699dfd6cfbe1993fa17103d143f86c20a6f9076f326f6f91a"
    },
    {
     "path": "docs/reference/unpinned_constants.yml",
@@ -81,7 +81,7 @@
    },
    {
     "path": "docs/reference/conflicts_register.yml",
-    "sha256": "06f90c9f4eab26bda5510ff09f428692d409c2a8a59cca570c2615da0782ad0f"
+    "sha256": "c73bba8a2e7662626832421c40a58c70d5436658ed953a7ab0ac762a8cee3060"
    },
    {
     "path": "docs/reference/choices_register.yml",
@@ -9266,7 +9266,13 @@
     "width_dex": null,
     "reason": "frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded)"
    },
-   "conflicts_named": [],
+   "conflicts_named": [
+    {
+     "id": "CF-009",
+     "kind": "self_contradiction",
+     "status": "open"
+    }
+   ],
    "sensitivity": {
     "species_of_its_steps": [
      "ACTZ",
@@ -9333,7 +9339,13 @@
     "width_dex": 1.556512120610871,
     "reason": "B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIRICAL distribution of the measured barriers of its reaction class, k(145 C) held"
    },
-   "conflicts_named": [],
+   "conflicts_named": [
+    {
+     "id": "CF-009",
+     "kind": "self_contradiction",
+     "status": "open"
+    }
+   ],
    "sensitivity": {
     "species_of_its_steps": [
      "ACTZ",
@@ -12924,6 +12936,11 @@
      "id": "CF-039",
      "kind": "conflict",
      "status": "open"
+    },
+    {
+     "id": "CF-133",
+     "kind": "code_mismatch",
+     "status": "open"
     }
    ],
    "sensitivity": {
@@ -12975,6 +12992,11 @@
     {
      "id": "CF-039",
      "kind": "conflict",
+     "status": "open"
+    },
+    {
+     "id": "CF-133",
+     "kind": "code_mismatch",
      "status": "open"
     }
    ],
@@ -13694,7 +13716,13 @@
     "width_dex": 0.747658791517843,
     "reason": "identified in the fit report (ci95_halfwidth below the identified_threshold)"
    },
-   "conflicts_named": [],
+   "conflicts_named": [
+    {
+     "id": "CF-133",
+     "kind": "code_mismatch",
+     "status": "open"
+    }
+   ],
    "sensitivity": {
     "species_of_its_steps": [
      "ACR"
@@ -13755,7 +13783,13 @@
     "width_dex": 1.216406389947645,
     "reason": "identified in the fit report (ci95_halfwidth below the identified_threshold)"
    },
-   "conflicts_named": [],
+   "conflicts_named": [
+    {
+     "id": "CF-133",
+     "kind": "code_mismatch",
+     "status": "open"
+    }
+   ],
    "sensitivity": {
     "species_of_its_steps": [
      "ACR"
