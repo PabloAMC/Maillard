@@ -295,8 +295,10 @@ BUNDLE_BASELINES = {
     # RE-BASELINED 2026-11-06 (M0 data corrections, batch 1; CF-129), and the guard was right to fire: the raw-pea
     # levels Table 4 prints (hexanal 1260, nonanal 69.8) were declared as carried_volatiles and the hexanal row is
     # REFUSED (scoring_refused: a net loss of a carried level). Measured values untouched. Previous: 430c4423a31594c63e3b7a579980f4fbfc82fd8256ca6453ea75e3e1b8548e8a
+    # RE-BASELINED AGAIN 2026-11-06 (PR #88 review): the raw column's "_" cells (furaneol, 2,5-dimethylpyrazine,
+    # furfural) recorded as carried_volatiles_not_reported_raw, and the anchor text says so. Previous: 90634ce8b50d9e105414a2a52b5a797543cdc4f93f30eb2bd7e3dbad6d904067
     "external_validation_bi_2020_roasted_pea_hexanal":
-        "90634ce8b50d9e105414a2a52b5a797543cdc4f93f30eb2bd7e3dbad6d904067",
+        "2553c90c3c0c2c06fde68ee762b56067ab38aa8bd4dd53cc71ef71ddd7f4676e",
     # re-pinned 2026-09-03: quantification_class + quantification_note added (measured block untouched)
     # re-pinned 2026-09-03: content_verification block from the PMC full text added
     # RE-BASELINED BY WAVE B36 (2026-09-11), and the guard was RIGHT to fire: not a condition
