@@ -149,9 +149,16 @@ def test_exact_jacobian_equals_central_differences(setup):
 
 
 def test_panel_predictions_at_fit_tolerance_equal_the_engine(setup):
-    out = setup["bk"].stage_residuals(setup["reference"], setup["net"])
+    bk, reference = setup["bk"], setup["reference"]
+    out = bk.stage_residuals(reference, setup["net"])
+    # Every scored row the engine predicts is compared; the count follows the panel (M0 batch 1 refused Ma 2024's row,
+    # 8 -> 7), so it is read from the reference rather than pinned, with a floor so an empty comparison cannot pass.
+    expected = sum(1 for p in reference["panel_predictions"] for row in p["rows"]
+                   if row["predicted"] is not None and row["species"] in bk.OBSERVABLE_OF
+                   and any(r["variant"] == "point" and r["id"] == p["id"] for r in reference["pots"]))
+    assert expected >= 7
     for row in out["rows"]:
-        assert row["n_rows"] == 8
+        assert row["n_rows"] == expected
         assert row["max_abs_diff_dex"] < 1e-4, row
 
 

@@ -147,7 +147,7 @@ refer to the ranked errors in ENGINE_VS_LITERATURE sec. 3 (and its amendments in
 |---|---|---|---|---|---|
 | **M0** | **Misfit inventory and seen-data checks** (added 2026-11-05: the misfit protocol, [OPERATING_PROCEDURE](OPERATING_PROCEDURE.md) sec. 4, applied across the whole model instead of case by case) | One hand-kept inventory (`docs/reference/misfit_inventory.md`, draft PR) of every open structural misfit: size and sign, the protocol step reached (integrity, conditions, measurement, mechanism, unresolved), candidate mechanisms already on record, the shared structure it touches, the cheapest check on already-seen data, the data that check spends, and its leverage on the lever table. Misfits are grouped by shared structure (one piece explaining >= 2 misfits is the protocol's best test of a mechanism: it predicts beyond the misfit it came from). Every misfit's leading candidate mechanisms are checked (owner, 2026-11-05), in the compute waits, cheapest discriminating check first and grouped so one check tests a shared piece once; the first is the M3 argon diagnostic (every Strecker rival ~5x high on Hofmann 2000b Table 2's argon PA + PAA). **A check never ships anything:** it nominates rivals for a sec. 7 case, tested on data the check did not spend (sec. 7, item 2). Each check writes its pass rule before computing, and every outcome is recorded, failures included (no selective reporting across many checks). Expected yield: most checks narrow the candidates rather than settle them (P ~0.25 that a given check leaves one clear candidate); P ~0.5 that at least one shared piece explains >= 2 misfits. Its output orders and shapes the M4 - M6 cases and the joint refit | The registers' engine misfits (CF-012 residual, CF-084, CF-095, CF-122, the Bork norfuraneol decay, ...), the diagnostics report, the scorecards, the slice profile, the M1 / M1c / M3 records | -- (a triage, not a verdict) | inventory ~3 h; ~1 - 2 h per check |
 | **M1** | **Thiol supply and loss, judged as combinations** (E10, E12; rescoped 2026-11-04 from its [case](../reference/cases/M1_thiol_loss_oxidant_ph_drift.md) and CF-107) | **M1 run (EX-061, 2026-11-05): NOT SEPARATED** under the frozen rule, but artefact-driven (a linearised floor sensitivity; evaluated exactly the reservoir favours C1). The data: a reservoir is real (the incumbent loses ~99 % of cysteine and pentose within 5 min at 120 C), C1's is 3 - 5x too slow and loses the FFT shape; before M2 fix the measurement model (no between-lab tau on C/C0 series, floors from the assay, exact densities) and free the reservoir's release rate ([review](../../results/validation/kinetic_core_m1_results_review.md)). **Then (2026-11-05) the supply screen** (`kinetic_core_supply_structure_signature_screen.md`; plug-in runs, no fits): no supply structure (C1; a pH-dependent exchange, whose slope Cao's drift bounds at m <= 0.18; a flat K plus a 1:1 drain) reproduces Zhai 2021 Fig. 4b (TTCA lost ~10x faster at pH 7 - 8 than at 5.5) or Zhang 2025b's mass balance (~19 mM of each reactant in no measured pool); a base-favoured TTCA exit passes the first, nothing inside non-Zhang bands the second. Supply moves to **M1c**; no Cys / Xyl label swap in Zhang 2025b (checked on the PDF). **M1.0 done (EX-060, 2026-11-04):** G1 holds at B60, more strongly than at B9 (at most 0.009 % of the oxidant used; phi = 1 adds at most 0.08 %), so no oxidant source enters M1. In Cao 2017 free cysteine and xylose fall within 30 min to a plateau (free Cys 0.06 - 0.08 of 0.4 mol/L, 15 - 20 % of the charge; corrected 2026-11-05) but the TTCA / cysteine-Amadori reservoir still holds about all of both after 5 h (1.06 / 1.09 of the charge), where R0 has no reservoir and burns the pentose in 1.8 s: the measured intermediates require C1. On Schieberle 2000, R0's MFT 360 / 30 and 720 / 30 ratios miss by -1.09 and -1.42 dex (peak at 2.6 h). **M1.0 as planned:** does B27's gate G1 still hold at B60 (the dimer step uses < 1 % of the oxidant, so no oxidant SOURCE can move the disulfide share; P ~0.85 it holds); the engine at B60 on the decisive data below. Then three combinations, each with `k_ttca_cys` in the structure (Cao 2017's K, not frozen) and the frozen pot-independent sink `k_mft_decay` freed or banded: **C1** slow cysteine-Amadori / TTCA supply (B59b); **C2** C1 + a loss that free cysteine slows (EX-050's form); **C3** C2 + the disulfide side: Guth's release declared, not fitted, and the deoxypentosones as an oxidant POOL with a declared pH law (not B27's source). Out, with reasons: B17a (Stack's measured K(T) makes it inert at process temperature); B27 as built (G1 arithmetic); B11's O2 (no within-study O2 arm at process temperature; Xu 2010 at 140 C finds air vs N2 changes neither thiol nor disulfide) | CF-107: four refused sink waves (B16, B17b, B17a, B25) are one fit optimum in a degenerate state, 77 % of its cost from TTCA rows on the frozen `k_ttca_cys`, best starts unconverged; against instant supply and a frozen fast sink, every added sink structure was switched off. Whole-model refusals are therefore not evidence against C1 - C3. B16 with its barrier ceiling lifted (converged) still turns MFT over at 6 h: the 100 C rise is a supply problem. Guth 1995 measures disulfide release far faster than B17b's fitted floor | Schieberle 2000's own ratios (MFT 360 / 30 and 720 / 360 min; measured still rising) separate the incumbent from C1 - C3; free cysteine and sugar over time (Cao 2017, Zhang 2025b, Zhai 2019) separate C1 from C2; the disulfide share's pH slope inside Zhou 2023, Zhang 2024's cystine vs cysteine arms and Whitfield 1999's fed pots judge C3 | M1.0 ~3 - 4 h; C1 - C3 2 - 3 days |
-| **M1.1** | **Measurement model and fit driver, before any thiol refit** (new 2026-11-05, from M1's review and the premortem of the re-sequence) | No between-lab tau on C/C0 or ratio series (tau on absolute levels only); floors from each assay's reported LOD / LOQ, never a data point (only Zhai 2021 prints one: elsewhere a declared transfer, run as a sensitivity); H0's within-lab omega (0.419 dex: the worse of H0's two sets governs, prereg sec. 3.6 / D2 and A1 item 3; the reset set gives 0.390) in every unit's primary covariance; exact or Monte-Carlo densities on every form that can flip a sign (PSIS k-hat < 0.7, ESS >= 100); a unit favours or vetoes only where the favoured rival is adequate (posterior-predictive p > 0.05) or the means differ by more than omega, else "both inadequate"; Holm across guard groups; unidentified coordinates integrated over their band; central-difference polish (the forward-difference Jacobian is up to 7 % off, bake-off); asserted convergence. The Cao 2017 pot-input audit is done (2026-11-05): the keying is correct (free-base cysteine, Na phosphate set before mixing, 25 C label); a reported 0.8-unit gap compared the engine's in-situ (90 C) pH with Cao's cooled readings. On the cooled scale the engine starts at 5.50 like Cao and, under C1, reads ~0.2 low at 30 min, all of it 7.9 mM of cysteine carboxyl with its amine declared destroyed (CF-084 explanation 1); Cao stays a descriptive cross-check, not a control. Every pH comparison states its scale (cooled or in situ) | M1's results review (three MAJOR findings); the M2 draft's adversarial review (BLOCKER 1); the JAX bake-off's gradient check | -- (infrastructure: tested against M1's records, which it must reproduce under the old settings) | 8 - 12 h |
+| **M1.1** | **Measurement model and fit driver, before any thiol refit** (new 2026-11-05, from M1's review and the premortem of the re-sequence) | **Superseded in part by sec. 7 item 5 (2026-11-06):** omega leaves the units' covariance; units no longer favour or veto one by one (one pooled T); 'means differ by more than omega' no longer substitutes for adequacy; the rest stands. The parked M2 prereg must conform before it freezes. No between-lab tau on C/C0 or ratio series (tau on absolute levels only); floors from each assay's reported LOD / LOQ, never a data point (only Zhai 2021 prints one: elsewhere a declared transfer, run as a sensitivity); H0's within-lab omega (0.419 dex: the worse of H0's two sets governs, prereg sec. 3.6 / D2 and A1 item 3; the reset set gives 0.390) in every unit's primary covariance; exact or Monte-Carlo densities on every form that can flip a sign (PSIS k-hat < 0.7, ESS >= 100); a unit favours or vetoes only where the favoured rival is adequate (posterior-predictive p > 0.05) or the means differ by more than omega, else "both inadequate"; Holm across guard groups; unidentified coordinates integrated over their band; central-difference polish (the forward-difference Jacobian is up to 7 % off, bake-off); asserted convergence. The Cao 2017 pot-input audit is done (2026-11-05): the keying is correct (free-base cysteine, Na phosphate set before mixing, 25 C label); a reported 0.8-unit gap compared the engine's in-situ (90 C) pH with Cao's cooled readings. On the cooled scale the engine starts at 5.50 like Cao and, under C1, reads ~0.2 low at 30 min, all of it 7.9 mM of cysteine carboxyl with its amine declared destroyed (CF-084 explanation 1); Cao stays a descriptive cross-check, not a control. Every pH comparison states its scale (cooled or in situ) | M1's results review (three MAJOR findings); the M2 draft's adversarial review (BLOCKER 1); the JAX bake-off's gradient check | -- (infrastructure: tested against M1's records, which it must reproduce under the old settings) | 8 - 12 h |
 | **M1c** | **Thiol supply structure** (new 2026-11-05, from the supply screen) | A base-favoured TTCA exit, plus an account of Zhang 2025b's ~19 mM pool (open-chain or Schiff-base TTCA, cystine, the cysteine Amadori compound onward). Pool members enter only with a measured or same-class constant or a declared band, never a free pool sized to the gap (that would be CF-107 again). Items 1 - 5 frozen before any newly found paper is read: the screen's pots (Cao 2017, Zhai 2021, Zhang 2025b) are declared seen, so the decisive data must be others, or the verdict is development-grade and the decider is designed data (W6). Screened first on four signatures: (a) Cao's flat K under drift, (b) Zhai's pH series, (c) Zhang's mass balance, (d) the FFT shape (Schieberle; B60's FFT rows; C1 lost it). Runs at the measured pH trajectory where one exists, whatever M1b(i) finds. **Stop rule:** if no structure passes (a), (b) and (d) within ~25 h, supply is "not identifiable on disk": the R0 / C1 envelope stays under H0's relative-only ruling, and the designed-data request goes out | The screen record; Cao 2017 (K, pool closure, drift); Zhai 2021 Fig. 4b; Zhang 2025b (development data now: its blank pot was seen under the engine on 2026-11-05); M1's review; the literature search of 2026-11-05 (ring-chain pH law; norfuraneol decay at pH 5 - 6.5; the missing pool; assay LODs) | To be named in the case before the search's papers are read; P ~0.6 that nothing unseen and decisive exists on disk | case 3 - 4 h; build + screen 10 - 18 h; fit 4 - 6 h + 6 - 12 h compute |
 | **M1b** | **pH: the pot's balance (CF-084) and the pentose-side steps** (E16, E2; rescoped 2026-11-04 from its [case](../reference/cases/M1b_sugar_step_ph_sulfur_lane.md)) | **Re-sequenced 2026-11-05:** part (i) runs first and on its own, timeboxed at ~14 h, judged on CF-084's own controls (Meynier, Hou, Zhou; Cao's trajectory is NOT a control, since TTCA and the cysteine Amadori compound are titratable and their budget is M1c's question); it does not gate M1c; its stop rule: if neither rival passes both controls, "balance not identified" and the measured-trajectory operator stays; shipping it moves pH everywhere, so the owner signs off first. Part (ii)'s chosen rival enters the joint refit (its norfuraneol decay and 3-deoxypentosone removal move M2's decisive pot-D share), or is declared deferred with that effect stated. **E16 (2026-11-05): undecidable on disk**, four blockers (the O2 status; unbuffered pH drift; no temperature series for norfuraneol alone; norfuraneol self-reaction with its own fragments at 20 mM). Bork 2022 / 2023 (Kanzler group, a new laboratory) set the joint refit's acid-pH decay band (4.4 - 6.1e-3 /min at 130 C, ~20 mM, unbuffered, initial pH 5, O2 not stated) and show the shipped pH-free decay 3.1 - 4.3x too slow there (a CF candidate). Bork 2024 / 2024b and Kanzler 2026 are being extracted (P ~0.15 they make E16 decidable: they would need norfuraneol alone at a second temperature or a known O2 status); Wietstock 2016 bears on M3's O2 budget. (i) The charge-balance pH scores pots only once its two controls pass, with CF-084's two rivals built and compared: the released ammonia survives (less acid), or the acid forms after the Amadori product is gone. (ii) pH laws on the pentose-side steps for the rival the data need: base-catalysed norfuraneol decay (E16; B61's prereg, its fit stopped and owed on B64), the enolisation split carried to pentoses (E2), a pH-dependent pentose + amine entry, or a base-favoured 3-deoxypentosone removal (EX-045, EX-046). Not built: `ph.trunk_terms` on its own, which slopes only the three hexose Amadori steps and is inert in pentose pots; E2's hexose part waits with E2 | The shipped engine's norfuraneol and furfural are pH-free in glycine-pentose pots (identical to 14 digits on Meynier's ladder; the pentose + amine entry is off, the amine-free pentose steps and the norfuraneol decay carry no pH). CF-084: the balance fails both controls. EX-001 - EX-003: Martins' slopes on the acids (acetic transferred, formic did not) | For E16, fed norfuraneol loss vs pH does not exist on disk: each laboratory fed it at one pH (Mikami 2017 and Nakamura 2020, one laboratory, pH 8, 100 C, and Mikami is B61's anchor; Bork 2022 / 2023, initial pH 5, 130 C) (corrected 2026-11-05); the 3- / 1-deoxypentosone ratio vs pH inside Zhai 2021 and Hou 2026 (R3En, the structure scored in EX-033, has the wrong sign; an R3En result, not B60's; corrected 2026-11-05); acetic acid vs pH (Davidek 2006a, 2008); the pH controls (Meynier's drift <= 0.2, Hou's trajectory). Meynier's norfuraneol ladder stays held-out (item 7 only). The split and the removal rivals cannot be separated without an in-situ pentose trap across pH (W6) | 2 - 3 days |
 | **M2** | **MFT route shares** (E6 + E11), in ONE refit with M1c's supply structure and M1b(ii)'s chosen rival | Per-route barriers bounded by measured classes, fitted together with the supply structure the data favour (the steps share rows, and their errors stack). **Never at instant supply** (half of CF-107's compensator; the drafted design put P(anything ships) at ~0.1 there). The route design is drafted and parked (`kinetic_core_m1m2_supply_routes_refit_prereg.md`, v2: it supersedes the 2026-11-01 route prereg, moves Cerny 2007's 145 C labelled shares in-sample, holds the furfural barriers at the shipped values in every rival, and needs a synthetic power check before it freezes: under omega the shipped engine misses pot D by 6.9 sd but Hofmann by only 0.6 sd) | labelling in one laboratory (Cerny, Nestlé); fed-intermediate comparisons in two (de Roos 2005 / Laarhoven at Givaudan, reported only: `simulable: false`; Hofmann) (corrected 2026-11-05) | Cerny pot D norfuraneol share (measured 0.07, engine 0.98) and MP3P share; Hofmann 145 C fed pots; Zhai 2021's fed-TTCA 140 C MFT time-course shapes (E11; shared 120 C denominators with B60 declared) | 2 days + ~1 day on >= 8 cores |
@@ -289,14 +289,61 @@ laboratories before any work) and the owner-approval step.
    the mechanism: route shares from labelling, branching ratios, ratios that cancel scale, the sign of a within-study
    contrast. End-point levels that other errors also move are not decisive. If the rivals predict the same thing on
    every available measurement, the data cannot decide, and the case says so.
-5. **Tolerances from the data.** Each comparison uses the measurement's own reported noise; across laboratories, the
-   between-laboratory spread (H0). No round-number thresholds.
+5. **Tolerances from the data** (revised 2026-11-06 after the judge calibration, PR #99, an independent review and a
+   confirmation run). Each comparison uses the noise of the measurement at the level at which the compared value
+   varies: the SD of independent runs where printed, integrated over its sampling uncertainty (n - 1 df; an SD whose replicate level is unstated counts as
+   repeatability, a floor; an unstated n is taken as 2); else the
+   same laboratory class's measured run-to-run reproducibility of the same observable on a repeated design (a run
+   offset and a per-point term where the repeat shows both); an instrument's repeatability or a reading error is a
+   floor, never the whole noise of a reaction-system observable. A model-discrepancy term is a variance component (per
+   point, or shared within a run where its estimate shows that structure), estimated on the same observable and
+   laboratory class from rows that are neither decisive nor fitted with a shared constant, as the residual variance
+   pooled over the rivals' fits, integrated over its estimation uncertainty, the
+   same for every rival, and redrawn in the calibration. Where no run-to-run noise (a printed run SD or a same-observable reproducibility) or no such discrepancy
+   estimate exists, zero is not assumed: only values in which a
+   run-level term cancels (within-run ratios, shapes, signs of within-study contrasts) are decisive for credit, and
+   absolute levels are falsification-only or reported; a falsification on them stands only under the largest noise any
+   listed source supports, at least the lane's within-laboratory term (S1 - S4 preamble). A within-run value's per-point
+   term is the printed within-run replicate SD or a same-observable within-run repeat; with only an instrument floor, it
+   is a variance component integrated over a prior declared with items 1 - 5 and bounded below by the floor, and the
+   false-credit check below decides whether it can credit. Across laboratories: the measured between-laboratory spread of
+   the same observable and value basis (H0's tau for thiol-lane absolute levels; else a measured spread of that same observable listed in the S1 record); with none, a
+   cross-laboratory comparison is not decisive. No term estimated on another observable is transferred, and no bound is
+   used as a standard deviation. No round-number thresholds. Item 5 governs the comparisons of items 6, 9 and M1.1; the lane
+   terms of S2 (b), S3 and S4 are those rules' own declared terms.
+
+   **The decision statistic (M1.1).** Rivals a and b (either may be the incumbent) are compared by ONE pre-declared
+   statistic T: the pooled log predictive density difference over the decisive units, each density conditioned on the
+   spent rows (p(y_dec | y_spent); the spent rows' own likelihood ratio never enters T). a is credited only if T exceeds
+   the 95th percentile of T under b as truth AND a is adequate on every decisive unit (posterior-predictive p >= 0.05
+   after Holm across the decisive units, each p under p(y_dec,u | y_spent)); b by the mirror rule; if both meet their
+   conditions, neither is credited; otherwise the pair is undecided and both are carried (S3). A rival falsified under
+   S3 is neither credited nor used as a null. A rival left with no unfalsified rival to serve as its null is carried, not
+   credited (a falsification, above all on spent data, never credits the survivor), and S3's refusal clause applies to
+   outputs that depended on a falsified incumbent. Each null is a parametric bootstrap from the null rival's spent-conditioned
+   posterior, its truths drawn outside the scoring ensemble, redrawing the decisive data, the conditioning rows, the
+   forced inputs, the replicate SDs, the discrepancy component and the form index, with >= 1000 replicates and the
+   threshold's Monte Carlo error reported; the power check also reports false credit under a generator that adds, beyond the
+   noise the scoring model uses, the same-observable reproducibility term (else the lane's within-laboratory term), and if the lower end of its 95 % Wilson
+   interval exceeds 0.05 the case cannot credit. Forms: an uncertain experimental fact is a discrete nuisance coordinate; an
+   unsourced modelling choice keeps required agreement; forms that only hedged omega are dropped; each form's kind, and a nuisance coordinate's weights (equal
+   unless sourced), are declared with items 1 - 5. Unit contributions and
+   leave-one-unit-out verdicts are printed; a credit rests on a unit when leaving that unit out drops T below its recalibrated threshold; such a credit
+   stands only if that unit's own T_u exceeds the 95th percentile of T_u under the null rival.
+   **A verdict needs resolved densities and a complete null:** a density is resolved when the shared estimator accepts it
+   (`src/kinetic_core/predictive_densities.py`: k-hat < 0.7, ESS >= max(100, its precision requirement)); a null that does
+   not redraw every listed input is not the rule's null; a pair lacking either is 'not computable', reported so and
+   carried undecided (S3); an unresolved density is re-estimated (larger draw sets, or the reusable SMC
+   estimator), never read as a tie; every power check reports which cells are computable and the cost of making the
+   rest computable, before the run. This does not reopen M1b part (i) (its amendment A1 is frozen); A1's would-be kills enter S3 as falsifications only once their sec. 3.8 confirmation fits
+   pass S3's test.
 
 Then:
 
 6. **The comparison.** Every rival is scored the same way, on the same data, under the same measurement model.
    Constants come from measurements or same-class analogues where they exist. Only converged fits count. The result
-   is a comparison between rivals (likelihood on the decisive data), not a pass mark.
+   is a comparison between rivals (likelihood on the decisive data), not a pass mark (item 5's adequacy gate is a
+   condition on credit).
 7. **The side effects.** The full held-out benchmark, before and after, every row. A row that gets worse is expected
    when the old model relied on a compensating error. The case names the suspected compensating error and registers it
    (a CF entry). A loss does not block shipping. A large loss with no candidate explanation is a reason to look
@@ -304,9 +351,89 @@ Then:
 8. **The adversarial review.** An independent reviewer whose task is to build the strongest case AGAINST the change.
    The reviewer sees the evidence and the data, not the author's conclusion. Every objection is answered in the record,
    or the change waits.
-9. **The decision.** The change ships if the decisive data favour it over every rival and no objection is left
+9. **The decision.** The change ships if it is credited under M1.1 against every rival not falsified under S3 (at
+   least one) and no objection is left
    unanswered. The decision and its basis go into the experiment register (an EX entry). A shipped change is reversed
    when later evidence favours another rival.
+
+**Symmetry: the incumbent is not privileged (owner, 2026-11-06; revised after an independent review the same day).**
+Items 1 - 9 make a change beat the current model, but the current model never had to pass the same test, so when the
+data could not decide, its errors persisted by default. Rules S1 - S4 close that gap. Order: S1's record must exist
+before S2 or S4 is applied to any constant. Every S-rule change is a case with its own adversarial review and
+confirmation (item 8), and never upgrades a prior without an artifact in `results/validation/` (AGENTS.md). The
+owner-first clauses that still apply are: amendments to H0's tau, E4 (the pyrazine pH band), W6 (outreach), numbers
+already sent outside, and deleting scripts; otherwise S-applications ship under item 9's authority ("the working session
+applies this rule and ships"). The lane's within-lab / between-lab terms below are, for the thiol lane, H0's omega
+(0.419 dex) / tau_ABS (0.964 dex); a lane without H0 uses the pooled between-laboratory spread of the reaction class in
+the S1 record, and its absolute outputs are refused as in the thiol lane until that lane has its own H0.
+
+- **S1. Evidence tiers, per coordinate** (log k_ref and Ea separately), in one hand-kept record with a citation per
+  row (paper key, ledger row or fit report): measured (a direct measurement of the step: every channel the engine's
+  constant lumps present in the measured system, at the engine's rate law and concentration regime, under comparable
+  conditions); analogue (a same-class measurement transferred through a measured law, with its band); bounded
+  (one- or two-sided, stated; a measurement of a SUBSET of a lumped step's channels is a one-sided bound, not a
+  value: a lower bound on the lumped constant when the channels add); fitted-identified (a converged fit whose marginal profile is pinned with every other unidentified coordinate
+  profiled over its band; any band-edge, flat-profile or band-spanning-CI criterion overrides a reported stderr;
+  re-derived for the coordinates whose rows a structural change moves); fitted-unidentified; structural (a declared structural assumption);
+  physical constant; conflicting measurements; withdrawn. The record also lists the incumbent's structural choices
+  that never had a case. The existing vocabularies (`provenance_tier`, the sulfur evidence `grade`) are mapped onto it
+  or retired. Upgrades need an artifact and a second reader; downgrades need a citation, and a downgrade that moves a
+  shipped output ships as an S4 change, review included. A CI gate fails on a shipped coordinate without a tier; the
+  record is complete (the gate green) before any S2 / S4 application, and the record file and the gate are named in the
+  PR that creates them. Each never-cased structural choice the record lists either gets a case scheduled in sec. 6 or a
+  named rival carried under S3.
+- **S2. A direct measurement replaces a contradicted fitted-identified constant, under strict conditions** (a
+  fitted-unidentified coordinate has no point to contradict: it is carried under S4). It applies only when
+  (a) the measurement is "of the step" in S1's sense (all lumped channels; the engine's rate-law order and
+  concentration range at the outputs it serves; otherwise the measurement defines a rival structure, items 1 - 9, or a
+  band, S4 — a rival when it implies a different rate law or species, a band when it only constrains the value);
+  (b) the 95 % interval of (measurement minus fitted value) excludes zero, with the reported noise, the within-lab
+  between-paper spread, the between-lab term and the fitted coordinate's own profile interval combined in quadrature;
+  the between-lab term is the measured spread of that step or its reaction class where >= 2 laboratories measured it,
+  else the lane's between-lab term (above); no other source; a transfer
+  across T, pH, buffer, O2, concentration or matrix adds a term only through a measured law; if a condition the step
+  depends on is unstated, the band is undefined and the measurement enters under S4, not S2; (c) the case lists EVERY
+  measurement of the step, agreeing ones included, pooled with the between-lab term; one laboratory's contradiction
+  among agreeing laboratories does not trigger S2; an audit pass covers every coordinate tiered fitted-* in the S1
+  record for the lane, each contradiction's z is converted to a two-sided p, all are judged together (Holm, as in M1.1)
+  with the number expected by chance reported, and no coordinate enters S2 outside a full-lane pass; (d) the measurement was read from the source by two
+  readers, passes OpenAlex `verify`, and is neither a quote of a quote nor an inferred bound (patents count as bounds
+  only). S2 is an explicit exception to item 2's spent-data rule (a direct measurement of the parameter was not tuned
+  to it). Side effects: (e) if any held-out row is lost beyond the lane's within-lab term, the named compensating error is a
+  specific step, and a forward run shows that moving it
+  within its own tier band restores the lost rows' sign and rough size; if no such step exists, S2 waits; (f) rows
+  lost beyond the lane's within-lab term that are decisive-type data (within-study ratios, shapes, label shares, multi-laboratory) DO
+  arbitrate and block; (g) every constant co-fitted with the replaced one drops to fitted-unidentified until
+  re-derived; (h) replacements in one lane ship in one batch case with one before / after. If S2 waits under (e) or is
+  blocked under (f), the coordinate's tier becomes "conflicting", a CF entry is opened, and it is carried under S4 as
+  a band spanning the fitted value and the measurement's interval: it never ships at the fitted point alone.
+  Measurements of one step are "conflicting" when they disagree beyond (b)'s band among themselves (e.g. Kanzler 2021
+  vs 2026), else they are pooled under (c); a conflict band spans the measurements' own intervals, with a CF entry.
+- **S3. Undecided rivals are carried, not resolved by default.** A rival is carried if it was named in a case before
+  results and has a mechanism with at least one evidence kind from item 2's list above "fitted time courses", or uses
+  only measured / analogue-tier constants; it is falsified when its converged best fit is inadequate
+  (posterior-predictive p < 0.05 after Holm across the datasets tested, M1.1) on any data, spent included. The envelope is the union
+  of the carried rivals' own envelopes, unweighted ("never credit"). Tolerance: the lane's within-laboratory term for
+  relative outputs, its between-laboratory term for absolute ones. Rivals that disagree in sign make the lever's direction refused; rivals that agree
+  in sign show its size with the spread. If the incumbent itself is falsified with no rival credited (e.g. C2 + C3
+  recombination as the hexose MFT route, M4), the outputs that depend on it (those whose sensitivity to the
+  falsified structure's switch exceeds the lane's within-lab term) are refused, never shown at the incumbent's point. The reviewer (item 8) checks both missing and padded rivals. Carried rivals must be runnable for
+  prediction: until W3 runs them in JAX, they run in the NumPy engine behind their switches, and the cost is stated.
+- **S4. Unidentified coordinates are bands, and fits may move them only on decisive-type evidence.** A band comes from
+  measured bounds, a same-class analogue, or the reaction-class distribution of measured constants (as B55's
+  `ea_class_prior`); a search bound is never a band; with no class, the output is refused rather than computed over an
+  invented band. Bands are sampled jointly within the region the decisive-type data allow (common random numbers
+  across the arms of a contrast); held-out coverage is reported before and after (over-coverage flags an inflated
+  band; an over-coverage flag sends the band back to its source for review). A fit (the joint refit, M2, H4) may move a fitted-unidentified coordinate only if every coordinate whose sensitivity
+  on those rows is not negligible next to the lane's within-lab term is free in the same fit (CF-107's logic), and
+  its contraction counts only if the profile interval from a refit on the decisive-type rows alone (item 4) lies
+  inside the band; M2 v2's held furfural barriers are checked against this before M2 freezes; every fit reports per-coordinate
+  contraction, and a coordinate contracted only by level rows stays a band.
+
+For S3 / S4 changes, items 6 and 9 are replaced by: band sources verified; before / after listed; held-out coverage
+reported; review. These rules move shipped outputs: intervals widen and some answers become refusals (on current
+shares, S4 will likely widen or refuse most absolute thiol outputs and may reach relative ones). That is the intended,
+honest consequence; sec. 8's odds and W5.4 are re-estimated in the PR that first applies them.
 
 **Why this resists persuading ourselves.** The ranking of evidence is fixed in advance. The rivals and the decisive
 data are named before results exist. Tolerances come from the measurements. The decision is a comparison, not a
