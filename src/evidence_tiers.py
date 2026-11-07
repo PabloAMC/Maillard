@@ -1327,21 +1327,29 @@ def build_record() -> dict:
 
 def note_fit_drift(rows: List[dict], allowlist: Iterable[Mapping[str, Any]]) -> int:
     """Sec. 7 S1: a coordinate whose fit no longer reproduces at its frozen point says so in its identification (the
-    allow-list's MATERIAL entries, which the drift gate holds to today's engine). Text only: no tier moves.
-    Returns the number of coordinates noted."""
-    material = {e["fit"]: e for e in allowlist if e.get("class") == "MATERIAL"}
+    allow-list's UNRESOLVED and MATERIAL entries, which the drift gate holds to today's engine). Text only: no tier
+    moves. A value HELD inside another fit's objective (``held_in``: B2.3's 25 keys and its lumped Ea, held in B60,
+    which reproduces) says that instead of 'no current objective'. Returns the number of coordinates noted."""
+    drifted = {e["fit"]: e for e in allowlist if e.get("class") in ("UNRESOLVED", "MATERIAL")}
     n = 0
     for row in rows:
         ident = row.get("identification")
-        entry = material.get(FIT_OF_IDENTIFICATION_LABEL.get((ident or {}).get("fit")))
+        entry = drifted.get(FIT_OF_IDENTIFICATION_LABEL.get((ident or {}).get("fit")))
         if entry is None:
             continue
-        cite = entry.get("cf") or f"PR #{entry.get('pr')}"
-        note = (f"{entry['fit']}'s objective no longer reproduces at its frozen point (S = r . r {float(entry['S']):.6g} "
-                f"today; MATERIAL drift, {cite}; frozen_fit_reproducibility.md): no current objective supports this value")
+        fit, cls, cite, held = entry["fit"], entry["class"], entry.get("cf") or f"PR #{entry.get('pr')}", entry.get("held_in")
+        head = (f"{fit}'s objective no longer reproduces at its frozen point (S = r . r {float(entry['S']):.6g} today; "
+                f"DRIFTED-{cls}, {cite}; frozen_fit_reproducibility.md)")
+        if held:
+            note = (f"{head}; the value is held at {fit}'s frozen value inside {held}'s objective, which reproduces, "
+                    f"but was never free there, so neither fit identifies it today")
+        elif cls == "UNRESOLVED":
+            note = f"{head}: near-optimality is not shown, so no current objective is shown to support this value"
+        else:
+            note = f"{head}: no current objective supports this value"
         ident["fit_reproduces"] = False
-        ident["fit_drift"] = {"fit": entry["fit"], "class": "MATERIAL", "S_today": float(entry["S"]),
-                              "cf": entry.get("cf"), "pr": entry.get("pr"), "note": note,
+        ident["fit_drift"] = {"fit": fit, "class": f"DRIFTED-{cls}", "S_today": float(entry["S"]),
+                              "cf": entry.get("cf"), "pr": entry.get("pr"), "held_in": held, "note": note,
                               "record": "results/validation/frozen_fit_reproducibility.json"}
         row["basis"] = f"{note}. {row['basis']}"
         n += 1

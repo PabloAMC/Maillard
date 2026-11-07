@@ -14,7 +14,7 @@ install module state at import; nothing is duplicated here). FAIL when
 1. S = r . r moved beyond the fit's tolerance (|S_today - S_recorded| > tol x max(1, S_recorded), tol the fit's
    record's, else 1 %) or its row set changed (row ids where the report keeps rows, else the count), UNLESS
    docs/reference/frozen_fit_drift_allowlist.yml names the fit with its exact current S (to its stated precision), its
-   row count, its class (BENIGN / MATERIAL) and a CF id or PR;
+   row count, its class (BENIGN / UNRESOLVED / MATERIAL) and a CF id (a PR alone suffices only for BENIGN);
 2. an allow-list entry is stale: its S no longer matches (the drift moved again), or the fit reproduces again;
 3. an entry is malformed: an unknown fit or class, a CF id not in docs/reference/conflicts_register.yml, or a class
    and S that results/validation/frozen_fit_reproducibility.json does not give the fit (the class is judged there, by
@@ -51,7 +51,9 @@ REGISTER = ROOT / "docs" / "reference" / "conflicts_register.yml"
 RECORD = ROOT / "results" / "validation" / "frozen_fit_reproducibility.json"
 SLOW_FITS = ("B2.3", "B60")
 #: allow-list class -> the reproducibility record's class
-CLASSES = {"BENIGN": "DRIFTED-BENIGN", "MATERIAL": "DRIFTED-MATERIAL"}
+CLASSES = {"BENIGN": "DRIFTED-BENIGN", "UNRESOLVED": "DRIFTED-UNRESOLVED", "MATERIAL": "DRIFTED-MATERIAL"}
+#: classes whose entry must name a conflicts-register entry (a PR alone is not a record of the drift's cause)
+NEEDS_CF = ("UNRESOLVED", "MATERIAL")
 #: an entry must name S at least this tightly (the loosest fit tolerance is 1 %: an entry must not approach it)
 MAX_PRECISION = 1e-3
 CF_ID = re.compile(r"^CF-\d{3}$")
@@ -118,6 +120,16 @@ def allowlist_problems(entries: Sequence[Mapping[str, Any]], fits: Sequence[str]
         cf, pr = e.get("cf"), e.get("pr")
         if not cf and not pr:
             problems.append(f"{tag}: names neither a CF id nor a PR")
+        elif cls in NEEDS_CF and not cf:
+            problems.append(f"{tag}: a {cls} entry must name its conflicts-register entry (cf), not only a PR")
+        held = e.get("held_in")
+        if held is not None:
+            held_rec = rec_fits.get(held)
+            if held not in fits:
+                problems.append(f"{tag}: held_in {held!r} is not a fit")
+            elif held_rec is None or held_rec["verdict"]["class"] != "REPRODUCES":
+                problems.append(f"{tag}: held_in {held} but the reproducibility record does not class {held} "
+                                "REPRODUCES")
         if cf and (not CF_ID.match(str(cf)) or cf not in register_ids):
             problems.append(f"{tag}: {cf} is not an entry of docs/reference/conflicts_register.yml")
         if pr is not None and (not isinstance(pr, int) or pr <= 0):

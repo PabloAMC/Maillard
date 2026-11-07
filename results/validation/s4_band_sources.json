@@ -4,8 +4,8 @@
   "artifact": "s4_band_sources",
   "generated_on": "2026-11-07",
   "git": {
-   "commit": "9b2ca19411349a4c43de7efee1df42a727486830",
-   "short": "9b2ca194",
+   "commit": "3a7926106831de554c92c9d21a37ac37527f8e52",
+   "short": "3a792610",
    "branch": "frozen-fit-reproducibility",
    "dirty": true
   },
@@ -13,7 +13,7 @@
   "inputs": [
    {
     "path": "results/validation/incumbent_evidence_tiers.json",
-    "sha256": "17eff1270b175caeaf7dcfdae14313dd75337aaefecc0f8b2e42d1cea4a59532"
+    "sha256": "f0098a6810623c5eb243c886f1cbcc421f1f34037514841d552c6cbd0cdf6a86"
    },
    {
     "path": "src/kinetic_core/ea_class_prior.py",

@@ -117,7 +117,8 @@ def test_markdown_renders_and_check_round_trips(tmp_path, monkeypatch):
 
 def test_a_failed_quadratic_model_cannot_certify_benign():
     """Strongly curved r: the Gauss-Newton step overshoots, the trust ratio falls below 1/4, and a drift whose
-    joint and marginal tests pass on the quadratic model is still not certified near-optimal."""
+    joint and marginal tests pass on the quadratic model is still not certified near-optimal: DRIFTED-UNRESOLVED
+    (near-optimality not shown), not BENIGN, and not MATERIAL either (no test says the point is off)."""
     def res(x):
         x = np.asarray(x, dtype=float)
         return np.array([x[0] ** 3 - 1.0, 0.1 * x[0]])
@@ -130,4 +131,18 @@ def test_a_failed_quadratic_model_cannot_certify_benign():
     rho = F.trust_ratio(opt)
     assert rho is not None and rho < F.MIN_TRUST_RATIO
     v = F.classify(0.5 * float(r0 @ r0), float(r0 @ r0), 2, 2, 0.01, opt, 1)
-    assert v["class"] == "DRIFTED-MATERIAL" and not v["local_model_valid"]
+    assert v["class"] == "DRIFTED-UNRESOLVED" and not v["local_model_valid"]
+    assert v["joint_near_optimal"] and not v["coordinates_outside_local_95"]
+
+
+def test_marginals_are_bonferroni_adjusted_and_both_verdicts_reported():
+    """m = 8 coordinates: a Delta between the unadjusted chi2_1(0.95) = 3.84 and the Bonferroni chi2_1(1 - 0.05 / 8)
+    = 7.48 (s2 = 1) is outside unadjusted, inside adjusted; the class follows the adjusted test."""
+    coords = {f"c{i}": {"indices": [i], "delta_quadratic": 0.1, "threshold": F.chi2_95(1)} for i in range(8)}
+    coords["c0"]["delta_quadratic"] = 5.0
+    opt = {"coordinates": coords, "s2": 1.0}
+    mt = F.marginal_tests(opt)
+    assert mt["unadjusted_outside"] == ["c0"] and mt["bonferroni_outside"] == []
+    assert abs(mt["per_coordinate"]["c0"]["threshold_bonferroni"] - 7.48) < 0.02
+    coords["c0"]["delta_quadratic"] = 8.0
+    assert F.marginal_tests(opt)["bonferroni_outside"] == ["c0"]

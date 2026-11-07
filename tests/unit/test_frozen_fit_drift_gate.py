@@ -106,14 +106,29 @@ def test_entry_for_a_fit_that_reproduces_again_fails(world):
     (_entry(25.0, precision=0.05), ("DRIFTED-MATERIAL", 25.0, 2), "S_rel_precision"),
     (_entry(25.0), ("DRIFTED-MATERIAL", 24.0, 2), "not judged at this S"),
     (_entry(25.0), None, "has no audit of T2"),
+    ({**_entry(25.0, cf=None), "pr": 107}, ("DRIFTED-MATERIAL", 25.0, 2), "must name its conflicts-register entry"),
+    ({**_entry(25.0, cls="UNRESOLVED", cf=None), "pr": 107}, ("DRIFTED-UNRESOLVED", 25.0, 2),
+     "must name its conflicts-register entry"),
+    ({**_entry(25.0), "held_in": "T1"}, ("DRIFTED-MATERIAL", 25.0, 2), None),
+    ({**_entry(25.0), "held_in": "T9"}, ("DRIFTED-MATERIAL", 25.0, 2), "held_in 'T9' is not a fit"),
 ])
 def test_malformed_or_unjudged_entries_fail(world, entry, record_t2, needle):
     rec = {"T1": ("REPRODUCES", 10.05, 2)}
     if record_t2 is not None:
         rec["T2"] = record_t2
     code, problems = world({"T1": REPRODUCING, "T2": _probe("T2", 25.0)}, [entry], _record(rec))
+    if needle is None:  # the control: a well-formed entry passes
+        assert (code, problems) == (0, [])
+        return
     assert code == 1
     assert any(needle in p for p in problems), problems
+
+
+def test_benign_entry_may_cite_a_pr_alone(world):
+    code, problems = world({"T1": REPRODUCING, "T2": _probe("T2", 25.0)},
+                           [{**_entry(25.0, cls="BENIGN", cf=None), "pr": 107}],
+                           _record({"T1": ("REPRODUCES", 10.05, 2), "T2": ("DRIFTED-BENIGN", 25.0, 2)}))
+    assert (code, problems) == (0, [])
 
 
 def test_record_drift_without_an_entry_fails_even_when_not_evaluated(world, monkeypatch):

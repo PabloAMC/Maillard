@@ -29,8 +29,14 @@ fitted-* rows, plus the analogue-tier rows whose value is a fit's output, B21), 
      delta_S' C_SS^-1 delta_S <= chi2_|S|(0.95) x s2, delta the Gauss-Newton step, C = (J'J)^+);
      and the local quadratic model those tests rest on holds at the evaluated step (trust ratio, evaluated over
      predicted decrease, >= 0.25);
-   * ``DRIFTED-MATERIAL``: any of the three fails: the shipped constants it froze are not supported by any current
-     objective (a failed trust ratio: near-optimality cannot be shown, which is no support).
+   * ``DRIFTED-UNRESOLVED``: the joint and marginal tests pass but the trust ratio fails: near-optimality is NOT
+     SHOWN (the quadratic model the tests rest on does not hold at the step), which is no support, but not evidence
+     against the frozen point either;
+   * ``DRIFTED-MATERIAL``: the joint test or a marginal fails: the shipped constants it froze are not supported by
+     any current objective.
+   The marginal tests are Bonferroni-adjusted over the fit's shipped coordinates (chi2_|S|(1 - 0.05 / m)); the
+   unadjusted 95 % verdicts are reported beside them. Where a fit's frozen setting does not converge (B2.3's quick
+   pH fixed point), S is reproduced at the frozen setting and near-optimality is judged at the converged one.
    s2 = max(1, chi2_red AT THE FREEZE): the fit's own variance scaling when it froze. Today's chi2_red is not used,
    because a drift that inflates the misfit would otherwise widen its own tolerance.
 
@@ -79,7 +85,7 @@ DEFAULT_REL_TOL = 0.01
 #: forward-difference steps per coordinate kind: the fitting module's (B8's) absolute steps, plus a logit step for
 #: B6's unconstrained simplex logits
 STEPS: Dict[str, float] = {"Ea": 2.0, "log10k": 0.05, "acid_yield": 0.01, "pka": 0.1, "ph_slope": 0.05, "logit": 0.05}
-CLASSES = ("REPRODUCES", "DRIFTED-BENIGN", "DRIFTED-MATERIAL")
+CLASSES = ("REPRODUCES", "DRIFTED-BENIGN", "DRIFTED-UNRESOLVED", "DRIFTED-MATERIAL")
 
 
 # =====================================================================================================================
@@ -87,9 +93,36 @@ CLASSES = ("REPRODUCES", "DRIFTED-BENIGN", "DRIFTED-MATERIAL")
 # =====================================================================================================================
 
 def chi2_95(dof: int) -> float:
+    return chi2_quantile(dof, 0.95)
+
+
+def chi2_quantile(dof: int, q: float) -> float:
     from scipy.stats import chi2
 
-    return float(chi2.ppf(0.95, max(1, int(dof))))
+    return float(chi2.ppf(q, max(1, int(dof))))
+
+
+#: the family-wise level of the per-coordinate marginal tests (Bonferroni over a fit's shipped coordinates)
+FAMILY_ALPHA = 0.05
+
+
+def marginal_tests(opt: Mapping[str, Any]) -> Dict[str, Any]:
+    """Each shipped coordinate's quadratic marginal against its unadjusted 95 % threshold and against the
+    Bonferroni threshold chi2_|S|(1 - 0.05 / m) x s2, m = the fit's tested coordinates (read off the stored record, so
+    a re-render needs no evaluation). The Bonferroni test is the one the class uses."""
+    coords = opt.get("coordinates") or {}
+    m = max(1, len(coords))
+    q = 1.0 - FAMILY_ALPHA / m
+    out = {"m": len(coords), "quantile": q, "unadjusted_outside": [], "bonferroni_outside": [], "per_coordinate": {}}
+    for cid, c in coords.items():
+        thr_b = chi2_quantile(len(c["indices"]), q) * float(opt["s2"])
+        out["per_coordinate"][cid] = {"delta": c["delta_quadratic"], "threshold_unadjusted": c["threshold"],
+                                      "threshold_bonferroni": thr_b}
+        if c["delta_quadratic"] > c["threshold"]:
+            out["unadjusted_outside"].append(cid)
+        if c["delta_quadratic"] > thr_b:
+            out["bonferroni_outside"].append(cid)
+    return out
 
 
 def forward_jacobian(residuals: Callable[[np.ndarray], np.ndarray], x: np.ndarray, r0: np.ndarray,
@@ -204,12 +237,14 @@ def trust_ratio(opt: Mapping[str, Any]) -> Optional[float]:
 
 def classify(s_recorded: float, s_today: float, n_then: Optional[int], n_now: int, rel_tol: float,
              opt: Optional[Mapping[str, Any]], n_free: int) -> Dict[str, Any]:
-    """REPRODUCES / DRIFTED-BENIGN / DRIFTED-MATERIAL (see the module docstring)."""
+    """REPRODUCES / DRIFTED-BENIGN / DRIFTED-UNRESOLVED / DRIFTED-MATERIAL (see the module docstring)."""
     diff = s_today - s_recorded
     reproduced = bool(abs(diff) <= rel_tol * max(1.0, abs(s_recorded)) and (n_then is None or n_then == n_now))
     joint_thr = None if opt is None else chi2_95(n_free) * float(opt["s2"])
     joint_ok = None if opt is None else bool(opt["one_step_decrease"] <= joint_thr)
-    outside = [] if opt is None else [c for c, m in opt["coordinates"].items() if not m["inside_local_95"]]
+    mt = None if opt is None else marginal_tests(opt)
+    outside_unadj = [] if mt is None else mt["unadjusted_outside"]
+    outside = [] if mt is None else mt["bonferroni_outside"]
     rho = None if opt is None else trust_ratio(opt)
     model_ok = rho is None or rho >= MIN_TRUST_RATIO
     reasons = []
@@ -223,15 +258,20 @@ def classify(s_recorded: float, s_today: float, n_then: Optional[int], n_now: in
             reasons.append(f"one evaluated step lowers S by {opt['one_step_decrease']:.3g}, beyond the joint "
                            f"threshold {joint_thr:.3g}")
         if outside:
-            reasons.append("shipped coordinates outside today's local 95 % region: " + ", ".join(outside))
+            reasons.append(f"shipped coordinates outside today's local 95 % region (Bonferroni over {mt['m']}): "
+                           + ", ".join(outside))
         if not model_ok:
             reasons.append(f"the local quadratic model fails at the step (trust ratio {rho:.2f} < {MIN_TRUST_RATIO}), "
                            "so near-optimality cannot be shown")
-        cls = "DRIFTED-BENIGN" if not reasons else "DRIFTED-MATERIAL"
+        # near-optimality NOT SHOWN is not the same finding as a step or a coordinate that leaves the region: when
+        # the trust ratio is the only failure, the class says so (2026-11-07 review of #107)
+        only_model = bool(reasons) and joint_ok and not outside and not model_ok
+        cls = "DRIFTED-BENIGN" if not reasons else ("DRIFTED-UNRESOLVED" if only_model else "DRIFTED-MATERIAL")
     return {"class": cls, "reproduced": reproduced, "S_change": diff,
             "S_change_rel": diff / max(1.0, abs(s_recorded)), "rel_tol": rel_tol,
             "joint_threshold": joint_thr, "joint_near_optimal": joint_ok,
-            "coordinates_outside_local_95": outside, "trust_ratio": rho, "local_model_valid": model_ok,
+            "coordinates_outside_local_95": outside, "coordinates_outside_local_95_unadjusted": outside_unadj,
+            "marginal_tests": mt, "trust_ratio": rho, "local_model_valid": model_ok,
             "material_reasons": reasons}
 
 
@@ -309,6 +349,10 @@ class FitSpec:
     #: attribution probes: each {label, cite, apply} where apply() installs one post-freeze change's reversal and
     #: returns its undo; S is evaluated once under each (diagnostic, never a fit)
     attribution: List[Dict[str, Any]] = field(default_factory=list)
+    #: the residual function the near-optimality tests (Jacobian, step) use, when it differs from the one S is
+    #: reproduced with (B2.3: S at the frozen quick setting, near-optimality at the converged careful setting)
+    near_optimality_residuals: Optional[Callable[[np.ndarray], np.ndarray]] = None
+    near_optimality_setting: Optional[str] = None
 
 
 def _load(stem: str, alias: Optional[str] = None):
@@ -731,12 +775,17 @@ def spec_b21() -> FitSpec:
 
 
 def _b39_like(name: str) -> FitSpec:
+    from src.kinetic_core import config
+
     if name == "B41":
-        from src.kinetic_core import config
         from src.kinetic_core import trunk_conditions as TC
 
         config.update({"trunk.three_deoxy_exit_ph_term": True,
                        "trunk.three_deoxy_exit_ph": {"k_tdg_fa": TC.THREE_DEOXY_EXIT_PH["k_tdg_fa"]}})
+    else:
+        # B39 is, by definition, B41's term-off ablation: its objective is the one with the 3-DG exit's pH term OFF
+        # (the term defaults on since B41 ships, fb0dbd30), so it is evaluated that way (2026-11-07 review of #107)
+        config.update({"trunk.three_deoxy_exit_ph_term": False})
     rep_stem = "kinetic_core_b41_fit" if name == "B41" else "kinetic_core_b39_fit"
     m = _load("generate_kinetic_core_b39_fit")
     rep = _report(rep_stem + "_report")
@@ -751,17 +800,14 @@ def _b39_like(name: str) -> FitSpec:
     meta = {"report": f"results/validation/{rep_stem}_report.json",
             "generator": "scripts/generators/generate_kinetic_core_b39_fit.py residuals (quick=False, as frozen)"
                          + (", run as generate_kinetic_core_b41_fit.py runs it (the formic-acid exit's pH term on)"
-                            if name == "B41" else ""),
+                            if name == "B41" else ", the 3-DG exit's pH term off (B39's own physics)"),
             "objective": "B39's twelve decisive rows (Mittelmaier 2011 fed maxima, times of maximum and shares; "
                          "Zhang 2021 within-study ratios), log10(pred/target)/sigma"}
     if name == "B39":
         meta["attribution_note"] = ("the S1 record names B39 for the fed 3-deoxy triangle, but the shipped values are "
                                     "B41's optimum (parameters_dicarbonyl.SHIPPING_FIT_REPORT): B39 froze no shipped "
                                     "coordinate and is audited as the record's attribution")
-    probes = ([] if name == "B41" else
-              [{"label": "the 3-DG exit's pH term off (B39's own physics)",
-                "cite": "B41, fb0dbd30 (2026-09-11): trunk.three_deoxy_exit_ph_term defaults on since B41 ships",
-                "apply": _config_probe({"trunk.three_deoxy_exit_ph_term": False})}])
+    probes: List[Dict[str, Any]] = []
     return FitSpec(name, tuple(m.KEYS), ("log10k",) * len(m.KEYS), lower, upper, x,
                    lambda v: m.residuals(np.asarray(v, dtype=float), False), rows_now, rows_then, float(s_rec),
                    len(rows_then), float(rep["laplace"].get("chi2_reduced", s_rec / max(1, len(rows_then) - len(m.KEYS)))),
@@ -852,6 +898,10 @@ def spec_b23() -> FitSpec:
                    lambda v: m.residuals(np.asarray(v, dtype=float), True), rows_now, rows_then,
                    2.0 * float(o["final_cost"]), int(o["n_rows"]), float(o["reduced_chi_square"]),
                    coordinate_keys=coords, attribution=probes,
+                   near_optimality_residuals=lambda v: m.residuals(np.asarray(v, dtype=float), False),
+                   near_optimality_setting=("careful (41 pH nodes, 4 sweeps, rtol 1e-8; the setting B2.3's report is "
+                                            "regenerated with): at the quick 9-node / 2-sweep setting the relaxed pH "
+                                            "fixed point does not converge, which pollutes the Jacobian"),
                    meta={"report": "results/validation/kinetic_core_b2_3_fit_report.json",
                          "generator": "scripts/generators/generate_kinetic_core_b2_3_fit.py residuals (quick=True, the "
                                       "setting the optimiser ran at), loaded alone (no later wave installed)",
@@ -938,9 +988,14 @@ def audit_fit(spec: FitSpec, shipped_ids: Sequence[str], workers: int = 1) -> Di
     now = {rid: {**spec.rows_now[rid], "r": float(v)} for rid, v in zip(ids, r0)}
     changes = row_changes(spec.rows_then, now) if spec.rows_then is not None else None
     groups = spec.groups(r0) if spec.groups is not None else None
-    os.environ["MAILLARD_WORKERS"] = str(max(1, int(workers)))
+    res_opt, r0_opt = spec.residuals, r0
     t1 = time.time()
-    jac, steps = forward_jacobian(spec.residuals, x0, r0, spec.lower, spec.upper, spec.kinds,
+    if spec.near_optimality_residuals is not None:
+        res_opt = spec.near_optimality_residuals
+        r0_opt = np.asarray(res_opt(x0), dtype=float)
+    t_eval_opt = time.time() - t1
+    os.environ["MAILLARD_WORKERS"] = str(max(1, int(workers)))
+    jac, steps = forward_jacobian(res_opt, x0, r0_opt, spec.lower, spec.upper, spec.kinds,
                                   _map_parallel if workers > 1 else None)
     os.environ["MAILLARD_WORKERS"] = "1"
     t_jac = time.time() - t1
@@ -948,8 +1003,10 @@ def audit_fit(spec: FitSpec, shipped_ids: Sequence[str], workers: int = 1) -> Di
     coord_idx = {cid: [spec.keys.index(k) for k in spec.coordinate_keys.get(cid, []) if k in spec.keys]
                  for cid in shipped_ids}
     t2 = time.time()
-    opt = near_optimality(spec.residuals, x0, r0, jac, spec.lower, spec.upper, s2,
+    opt = near_optimality(res_opt, x0, r0_opt, jac, spec.lower, spec.upper, s2,
                           {c: i for c, i in coord_idx.items() if i})
+    if spec.near_optimality_setting:
+        opt["setting"] = spec.near_optimality_setting
     t_step = time.time() - t2
     verdict = classify(spec.s_recorded, s_today, spec.n_rows_then, len(r0), spec.rel_tol, opt, len(spec.keys))
     t3 = time.time()
@@ -966,7 +1023,8 @@ def audit_fit(spec: FitSpec, shipped_ids: Sequence[str], workers: int = 1) -> Di
             "shipped_coordinates": list(shipped_ids), "shipped_coordinates_unmapped": unmapped,
             "row_changes": changes, "groups": groups, "attribution": attribution, "jacobian_steps": steps,
             "near_optimality": opt, "verdict": verdict,
-            "seconds": {"one_evaluation": round(t_eval, 2), "jacobian": round(t_jac, 1),
+            "seconds": {"one_evaluation": round(t_eval, 2), "one_evaluation_near_optimality": round(t_eval_opt, 2),
+                        "jacobian": round(t_jac, 1),
                         "step": round(t_step, 1), "attribution": round(t_attr, 1),
                         "total": round(time.time() - t0, 1)},
             "workers": workers}
@@ -1024,8 +1082,9 @@ WHY: Dict[str, str] = {
             "2.64 -> 15.4 at the fit commit); with every probed change reversed S is 5.6, so ~3 of the 292 are not "
             "attributed by these probes. CF-077 already flags the frozen pH slopes conditional; this record adds that "
             "B21 moved them more."),
-    "B39": ("a model change by design: the 3-DG exit's pH term (B41, fb0dbd30) now defaults on, and B39 is B41's "
-            "term-off ablation; switching it off recovers B39's recorded S exactly. B39 froze no shipped coordinate."),
+    "B39": ("B39 is B41's term-off ablation, so it is evaluated with the 3-DG exit's pH term off (that term defaults on "
+            "since B41, fb0dbd30; evaluated with it on, S was 3.207, a drift by construction, CF-138 withdrawn). "
+            "B39 froze no shipped coordinate."),
     "B3": ("+0.11 %: the Claeys rate and Ea rows move by <= 0.04 sigma (model change). The SPI extrusion row withdrawn "
            "under CF-131 (branch m0-data-corrections-batch1, not yet on main) is still in the generator's rows, so the "
            "row count is 30 then and now; when CF-131 lands, B3's objective loses a row with r = -3.98 (r^2 15.8, 15 % "
@@ -1047,6 +1106,9 @@ IMPLICATION = {
     "DRIFTED-BENIGN": "re-derive the fit's report on today's rows when next touched (S1 're-derived for the "
                       "coordinates whose rows a structural change moves'); the shipped point is still inside today's "
                       "local 95 % region, so no shipped output moves.",
+    "DRIFTED-UNRESOLVED": "near-optimality is not shown either way: the shipped coordinates it froze have no current "
+                          "objective shown to support them, so under S1 they stay fitted-unidentified (S4 bands) until "
+                          "the fit is re-derived or a converged evaluation resolves the class; no tier moves.",
     "DRIFTED-MATERIAL": "the shipped coordinates it froze rest on no current objective: under S1 they cannot be "
                         "fitted-identified until re-derived, so they stay fitted-unidentified and are carried under S4 "
                         "as bands (a measured or class band, else refused), or the fit is re-run through a case "
@@ -1089,9 +1151,13 @@ METHOD = {
                 "below chi2_p(0.95) x s2 (p = the fit's free coordinates) AND every shipped coordinate's quadratic "
                 "marginal Delta_j = d_S' C_SS^-1 d_S <= chi2_|S|(0.95) x s2 (d the Gauss-Newton step, C = (J'J)^+), "
                 "AND the quadratic model those tests use holds at the evaluated step (trust ratio = evaluated / "
-                "predicted decrease >= 0.25). DRIFTED-MATERIAL: any of the three fails (a failed trust ratio means "
-                "near-optimality cannot be shown, which S1 treats as no support). s2 = max(1, chi2_red at the freeze), never today's chi2_red (a drift "
-                "must not widen its own tolerance)."),
+                "predicted decrease >= 0.25). The marginal tests are Bonferroni-adjusted over the fit's m shipped "
+                "coordinates (threshold chi2_|S|(1 - 0.05 / m) x s2; the unadjusted 95 % verdicts are reported too). "
+                "DRIFTED-UNRESOLVED: the joint and marginal tests pass but the trust ratio fails (near-optimality not "
+                "shown: no support, but no evidence against). DRIFTED-MATERIAL: the joint test or a marginal fails. "
+                "s2 = max(1, chi2_red at the freeze), never today's chi2_red (a drift must not widen its own "
+                "tolerance). Where the fit's frozen setting does not converge (B2.3's quick pH fixed point), S is "
+                "reproduced at the frozen setting and the Jacobian and step are evaluated at the converged one."),
     "limits": ("Local: the one-step decrease is a LOWER bound on S_frozen - S_min (a material verdict on it is "
                "certain), while a benign verdict rests on the quadratic model at the frozen point, which a strongly "
                "curved objective can understate; the S1 profile run's refits (PR #106) are the global check where "
@@ -1104,6 +1170,7 @@ METHOD = {
 def summary(p: Dict[str, Any]) -> Dict[str, Any]:
     by_class: Dict[str, List[str]] = {c: [] for c in CLASSES}
     material_coords: Dict[str, List[str]] = {}
+    unresolved_coords: Dict[str, List[str]] = {}
     for name in FIT_ORDER:
         f = p["fits"].get(name)
         if f is None:
@@ -1111,9 +1178,13 @@ def summary(p: Dict[str, Any]) -> Dict[str, Any]:
         by_class[f["verdict"]["class"]].append(name)
         if f["verdict"]["class"] == "DRIFTED-MATERIAL":
             material_coords[name] = list(f["shipped_coordinates"])
+        if f["verdict"]["class"] == "DRIFTED-UNRESOLVED":
+            unresolved_coords[name] = list(f["shipped_coordinates"])
     return {"by_class": by_class, "not_run": [n for n in FIT_ORDER if n not in p["fits"]],
             "shipped_coordinates_on_material_fits": material_coords,
-            "n_shipped_coordinates_on_material_fits": sum(len(v) for v in material_coords.values())}
+            "n_shipped_coordinates_on_material_fits": sum(len(v) for v in material_coords.values()),
+            "shipped_coordinates_on_unresolved_fits": unresolved_coords,
+            "n_shipped_coordinates_on_unresolved_fits": sum(len(v) for v in unresolved_coords.values())}
 
 
 def _f(x, nd=3):
@@ -1143,9 +1214,12 @@ def markdown(p: Dict[str, Any]) -> str:
     if s["not_run"]:
         out.append(f"- not run: {', '.join(s['not_run'])}")
     out += ["", f"Shipped coordinates resting on DRIFTED-MATERIAL fits: **{s['n_shipped_coordinates_on_material_fits']}**"
-            + "".join(f"; {k}: {len(v)}" for k, v in s["shipped_coordinates_on_material_fits"].items()), "",
+            + "".join(f"; {k}: {len(v)}" for k, v in s["shipped_coordinates_on_material_fits"].items())
+            + f"; on DRIFTED-UNRESOLVED fits: **{s.get('n_shipped_coordinates_on_unresolved_fits', 0)}**"
+            + "".join(f"; {k}: {len(v)}" for k, v in (s.get("shipped_coordinates_on_unresolved_fits") or {}).items()),
+            "",
             "| fit | class | rows then / now | S recorded | S today | change | tol | one-step decrease | joint thr. "
-            "| shipped coords | outside local 95 % | grad norm | eval s | wall s |",
+            "| shipped coords | outside local 95 % (Bonferroni; unadjusted) | grad norm | eval s | wall s |",
             "|---|---|---|---:|---:|---:|---:|---:|---:|---:|---|---:|---:|---:|"]
     for name in FIT_ORDER:
         f = p["fits"].get(name)
@@ -1155,7 +1229,8 @@ def markdown(p: Dict[str, Any]) -> str:
         out.append(f"| {name} | **{v['class']}** | {_f(f['n_rows_then'])} / {f['n_rows_now']} | {_f(f['S_recorded'])} | "
                    f"{_f(f['S_today'])} | {100 * v['S_change_rel']:+.1f} % | {100 * v['rel_tol']:.0f} % | "
                    f"{_f(o['one_step_decrease'])} | {_f(v['joint_threshold'], 2)} | {len(f['shipped_coordinates'])} | "
-                   f"{', '.join(v['coordinates_outside_local_95']) or '—'} | {_f(o['gradient_norm'], 2)} | "
+                   f"{', '.join(v['coordinates_outside_local_95']) or '—'}; "
+                   f"{', '.join(v.get('coordinates_outside_local_95_unadjusted') or []) or '—'} | {_f(o['gradient_norm'], 2)} | "
                    f"{_f(f['seconds']['one_evaluation'], 1)} | {_f(f['seconds']['total'], 0)} |")
     out += ["", "What each class implies (plan sec. 7 S1 / S4; nothing here moves a tier):", ""]
     for c in CLASSES:
@@ -1183,8 +1258,16 @@ def markdown(p: Dict[str, Any]) -> str:
                    f"(unbounded), {_f(o['gn_predicted_decrease_bounded'])} (bounded step, predicted); evaluated one-step "
                    f"decrease {_f(o['one_step_decrease'])} at scale {_f(o['one_step_scale'], 2)} against the joint threshold "
                    f"{_f(v['joint_threshold'], 2)} (chi2_{f['n_free']}(0.95) x s2); trust ratio {_f(v.get('trust_ratio'), 2)}")
+        if o.get("setting"):
+            out.append(f"- near-optimality evaluated at the {o['setting']}; S there {_f(o['S_frozen'])}")
+        mt = v.get("marginal_tests") or {}
+        if mt.get("per_coordinate"):
+            flagged = [f"{c} {_f(q['delta'], 2)} vs {_f(q['threshold_unadjusted'], 2)} / {_f(q['threshold_bonferroni'], 2)}"
+                       for c, q in mt["per_coordinate"].items() if q["delta"] > q["threshold_unadjusted"]]
+            out.append(f"- marginals, Delta vs the unadjusted 95 % / the Bonferroni threshold (over {mt['m']}): "
+                       + ("; ".join(flagged) if flagged else "every shipped coordinate inside both"))
         for reason in v.get("material_reasons") or []:
-            out.append(f"- material: {reason}")
+            out.append(f"- {'unresolved' if v['class'] == 'DRIFTED-UNRESOLVED' else 'material'}: {reason}")
         if WHY.get(name) or f.get("why"):
             out.append(f"- why: {f.get('why') or WHY[name]}")
         if f.get("attribution"):

@@ -6,14 +6,17 @@
 # own objective once at its frozen point on every run and FAILS when S = r . r moves beyond the fit's tolerance (its
 # record's, else 1 %) or its row set changes, UNLESS an entry here names:
 #   fit           -- the fit (a name in build_frozen_fit_reproducibility.SPECS)
-#   class         -- BENIGN or MATERIAL: the class results/validation/frozen_fit_reproducibility.json gives the fit
-#                    (DRIFTED-BENIGN / DRIFTED-MATERIAL), judged at this same S (the record's S_today must match too,
+#   class         -- BENIGN, UNRESOLVED or MATERIAL: the class results/validation/frozen_fit_reproducibility.json
+#                    gives the fit (DRIFTED-BENIGN / -UNRESOLVED / -MATERIAL), judged at this same S (the record's S_today must match too,
 #                    so a new S needs a re-audit: build_frozen_fit_reproducibility.py --fit <fit>)
 #   S             -- the exact current S = r . r at the frozen point
 #   S_rel_precision -- how exactly S is named: |S_today - S| <= S_rel_precision x max(1, |S|)
 #   n_rows        -- the row count today
-#   cf            -- the conflicts-register entry that records the drift and its cause (docs/reference/conflicts_register.yml),
-#   pr            -- and/or the PR that records it (at least one of the two)
+#   cf            -- the conflicts-register entry that records the drift and its cause (docs/reference/conflicts_register.yml):
+#                    REQUIRED for UNRESOLVED and MATERIAL; a BENIGN entry may cite only
+#   pr            -- the PR that records it
+#   held_in       -- optional: the fit whose objective the shipped values now sit in, held (B2.3's 25 keys and its
+#                    lumped Ea sit in B60's); that fit must REPRODUCE in the record. The S1 record's note says so.
 # An entry whose S no longer matches is STALE and fails (the drift moved again: re-audit and re-name it); an entry for
 # a fit that reproduces again fails too (remove it). The entry is not a licence: a MATERIAL fit's shipped coordinates
 # stay fitted-unidentified under plan sec. 7 S1 until the fit is re-derived, and the S1 record says so on each.
@@ -38,18 +41,15 @@ entries:
     pr: 107
 
   - fit: B2.3
-    class: MATERIAL
+    # near-optimality not shown: the joint test and every marginal pass, the trust ratio fails at the converged
+    # careful setting too (0.15; the full Gauss-Newton step goes to S 5500), so the class is UNRESOLVED (CF-137)
+    class: UNRESOLVED
     S: 112.894055
     # the relaxed pH fixed point does not converge at B2.3's quick setting (CF-137): named less tightly
     S_rel_precision: 1.0e-4
     n_rows: 58
     cf: CF-137
     pr: 107
+    held_in: B60
 
-  - fit: B39
-    class: BENIGN
-    S: 3.206815
-    S_rel_precision: 1.0e-5
-    n_rows: 12
-    cf: CF-138
-    pr: 107
+# B39 left 2026-11-07: evaluated with its own physics (the 3-DG exit's pH term off) it reproduces (CF-138, withdrawn).
