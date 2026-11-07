@@ -52,6 +52,8 @@ aliases:
   Yiltirak2026-supplementary: yiltirak2026
   Zhang2025_supplementary: zhang2025
   brehm2020_supplementary: brehm2020
+  lei2024_supplementary: lei2024             # Lei 2024 SI (Table SM, DFT rate constants only; excluded), read 2026-11-06 into lei2024_extraction.md
+  wang2019_supplementary: wang2019           # Wang 2019 SI (Tables S1 - S8, Figs. S1 - S3), read 2026-11-06 into wang2019_extraction.md
   zhou2023b_supporting: zhou2023
   wei2022_supplementary: wei2022             # Wei 2022 SI (Fig. S3), read 2026-11-01 into wei2022_extraction.md
   zhai2021_supplementary: zhai2021           # Zhai 2021 SI, read 2026-11-01 into zhai2021_extraction.md
