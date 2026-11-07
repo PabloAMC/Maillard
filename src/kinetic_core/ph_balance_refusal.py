@@ -174,10 +174,11 @@ class Verdict:
                 "ph_spread": dict(self.ph_spread), "ph_refused": self.ph_refused, "failure": self.failure}
 
 
-#: A rival run longer than this is stopped and the pot's outputs refused (its independence is not shown). The
-#: sensitivity run met inline integrations that ground past 300 s (Chen 2002's pH 5 ribose + cysteine pots); the
-#: limit, the sensitivity generator's per-point limit, holds only in the main thread (SIGALRM).
-RIVAL_TIMEOUT_S = 300
+#: A rival run longer than this is stopped and the pot's outputs refused (its independence is not shown). In the
+#: sensitivity run every rival point that finished took at most 49.5 s (median 0.43 s; Xu 2007's pH 8 arm), and eight
+#: ground past the generator's 300 s limit (Chen 2000 / 2002's pH 5 ribose + cysteine pots, 180 C): 120 s separates the
+#: two with room and gives every recorded pot the record's verdict. Held only in the main thread (SIGALRM).
+RIVAL_TIMEOUT_S = 120
 
 
 @contextlib.contextmanager
@@ -190,7 +191,7 @@ def _time_limit(seconds: int):
         return
 
     def _raise(signum, frame):
-        raise TimeoutError(f"a carried rival's integration ran longer than {seconds} s")
+        raise TimeoutError("a carried rival's integration ran past RIVAL_TIMEOUT_S")
 
     previous = signal.signal(signal.SIGALRM, _raise)
     signal.alarm(int(seconds))
