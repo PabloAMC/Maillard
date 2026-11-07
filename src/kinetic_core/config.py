@@ -229,6 +229,10 @@ KEYS: Tuple[ConfigKey, ...] = (
        "forms)"),
     _k("ph.arp_forcing", "ph_balance_rivals", "ARP_FORCING", _pbr.ArpForcing(), "rate",
        "M1b prereg sec. 3.3, C-Hou: Hou 2026's measured ARP(t) as an input"),
+    _k("ph.balance_refusal", "ph_balance_refusal", "ENABLED", True, "rate",
+       "the S3 application of M1b part (i) (2026-11-07): engine.predict refuses the outputs that depend on the "
+       "falsified pH balance. Off only where the model's own numbers are computed, not shipped: a fit's objective "
+       "(build_frozen_fit_reproducibility.py) and the S3 sensitivity run"),
     # --- the sulfur lane's integration and flux budget (sulfur.py)
     _k("sulfur.flux_budget", "sulfur", "FLUX_BUDGET", "closed", "solver",
        "B60; frozen waves set linear_rederived", choices=("closed", "linear_rederived")),

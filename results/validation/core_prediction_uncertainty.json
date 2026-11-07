@@ -378,7 +378,7 @@
           "envelope_state": "in_envelope",
           "lane": "sulfur",
           "panel": "trust_loop",
-          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
+          "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause)."
         },
         {
           "benchmark_id": "hofmann1998_ribose_cysteine_145C_20min_pH5",
@@ -386,7 +386,7 @@
           "envelope_state": "in_envelope",
           "lane": "sulfur",
           "panel": "trust_loop",
-          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
+          "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause)."
         }
       ],
       "signal_origin": "external_literature"
@@ -695,7 +695,7 @@
           "envelope_state": "in_envelope",
           "lane": "sulfur",
           "panel": "maillard_path_holdout",
-          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
+          "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause)."
         }
       ],
       "signal_origin": "external_literature"
@@ -741,7 +741,7 @@
           "envelope_state": "in_envelope",
           "lane": "sulfur",
           "panel": "maillard_path_holdout",
-          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
+          "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause)."
         }
       ],
       "signal_origin": "external_literature"
@@ -787,7 +787,7 @@
           "envelope_state": "in_envelope",
           "lane": "sulfur",
           "panel": "maillard_path_holdout",
-          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
+          "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause)."
         }
       ],
       "signal_origin": "external_literature"
@@ -833,7 +833,7 @@
           "envelope_state": "in_envelope",
           "lane": "sulfur",
           "panel": "maillard_path_holdout",
-          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
+          "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause)."
         }
       ],
       "signal_origin": "external_literature"
@@ -1500,7 +1500,7 @@
           "envelope_state": "in_envelope",
           "lane": "sulfur",
           "panel": "maillard_path_holdout",
-          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
+          "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause)."
         },
         {
           "benchmark_id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7",
@@ -1508,7 +1508,7 @@
           "envelope_state": "in_envelope",
           "lane": "sulfur",
           "panel": "maillard_path_holdout",
-          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
+          "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause)."
         }
       ],
       "signal_origin": "external_literature"
@@ -1542,7 +1542,7 @@
           "envelope_state": "in_envelope",
           "lane": "sulfur",
           "panel": "maillard_path_holdout",
-          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
+          "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause)."
         },
         {
           "benchmark_id": "mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5",
@@ -1550,7 +1550,7 @@
           "envelope_state": "in_envelope",
           "lane": "sulfur",
           "panel": "maillard_path_holdout",
-          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
+          "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause)."
         }
       ],
       "signal_origin": "external_literature"
@@ -1711,29 +1711,8 @@
       "bench_file": "data/benchmarks/external_validation/maillard_path/mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b.json",
       "benchmark_id": "mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b",
       "buffer_applied": true,
-      "compounds": [
-        {
-          "ci_width_log10": 1.9994652444923506,
-          "compound": "2-Acetylthiazole",
-          "envelope_state": "in_envelope",
-          "in_core_fit": false,
-          "inside_ci": false,
-          "lane": "sulfur",
-          "measured": 114.13,
-          "measured_ppb": 114.13,
-          "n_finite_samples": 200,
-          "observable_multipliers_applied": true,
-          "predicted_mean": 0.1220628224065727,
-          "predicted_p5": 0.004552268289753977,
-          "predicted_p50": 0.04902559117723297,
-          "predicted_p95": 0.45466664400316287,
-          "predicted_point": 0.06495568477187712,
-          "predicted_std": 0.2762034644215473,
-          "shared_with": null,
-          "target_unit": "ppb"
-        }
-      ],
-      "coverage_rate": 0.25,
+      "compounds": [],
+      "coverage_rate": 0.0,
       "evidence_role": "external_holdout",
       "execution_path": "free_precursor",
       "fit_target_of": {
@@ -1741,7 +1720,7 @@
         "index": []
       },
       "fitted_row": false,
-      "matched_compounds": 1,
+      "matched_compounds": 0,
       "panel": "maillard_path_holdout",
       "protein_type": "free",
       "quantification_family": "headspace",
@@ -1753,7 +1732,7 @@
           "envelope_state": "in_envelope",
           "lane": "sulfur",
           "panel": "maillard_path_holdout",
-          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
+          "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause)."
         },
         {
           "benchmark_id": "mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b",
@@ -1769,7 +1748,15 @@
           "envelope_state": "in_envelope",
           "lane": "sulfur",
           "panel": "maillard_path_holdout",
-          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
+          "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause)."
+        },
+        {
+          "benchmark_id": "mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b",
+          "compound": "2-Acetylthiazole",
+          "envelope_state": "in_envelope",
+          "lane": "sulfur",
+          "panel": "maillard_path_holdout",
+          "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause)."
         }
       ],
       "signal_origin": "external_literature"
@@ -4215,12 +4202,12 @@
   "provenance": {
     "artifact": "core_prediction_uncertainty",
     "generated_by": "src/kinetic_core/uncertainty.py",
-    "generated_on": "2026-11-06",
+    "generated_on": "2026-11-07",
     "git": {
-      "branch": "register-pass-2026-11-06",
-      "commit": "06830fd78b48e16bd49dfec4a69c1e75028ddb36",
+      "branch": "s3-ph-balance-refusal",
+      "commit": "210b7ff478d70726de0e67aacde2119aabd8d691",
       "dirty": true,
-      "short": "06830fd7"
+      "short": "210b7ff4"
     },
     "inputs": [
       {
@@ -4528,7 +4515,7 @@
       "envelope_state": "in_envelope",
       "lane": "sulfur",
       "panel": "trust_loop",
-      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
+      "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause)."
     },
     {
       "benchmark_id": "hofmann1998_ribose_cysteine_145C_20min_pH5",
@@ -4536,7 +4523,7 @@
       "envelope_state": "in_envelope",
       "lane": "sulfur",
       "panel": "trust_loop",
-      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
+      "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause)."
     },
     {
       "benchmark_id": "pea_isolate_40C_PratapSingh2021",
@@ -4632,7 +4619,7 @@
       "envelope_state": "in_envelope",
       "lane": "sulfur",
       "panel": "maillard_path_holdout",
-      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
+      "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause)."
     },
     {
       "benchmark_id": "mp_holdout_arp_glutathione_120C_30min_pH75_Zhou2023c",
@@ -4656,7 +4643,7 @@
       "envelope_state": "in_envelope",
       "lane": "sulfur",
       "panel": "maillard_path_holdout",
-      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
+      "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause)."
     },
     {
       "benchmark_id": "mp_holdout_arp_glutathione_120C_60min_pH75_Zhou2023c",
@@ -4680,7 +4667,7 @@
       "envelope_state": "in_envelope",
       "lane": "sulfur",
       "panel": "maillard_path_holdout",
-      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
+      "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause)."
     },
     {
       "benchmark_id": "mp_holdout_arp_glutathione_120C_90min_pH75_Zhou2023c",
@@ -4704,7 +4691,7 @@
       "envelope_state": "in_envelope",
       "lane": "sulfur",
       "panel": "maillard_path_holdout",
-      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
+      "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause)."
     },
     {
       "benchmark_id": "mp_holdout_fructose_asparagine_180C_Lin2022",
@@ -4784,7 +4771,7 @@
       "envelope_state": "in_envelope",
       "lane": "sulfur",
       "panel": "maillard_path_holdout",
-      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
+      "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause)."
     },
     {
       "benchmark_id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7",
@@ -4792,7 +4779,7 @@
       "envelope_state": "in_envelope",
       "lane": "sulfur",
       "panel": "maillard_path_holdout",
-      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
+      "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause)."
     },
     {
       "benchmark_id": "mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5",
@@ -4800,7 +4787,7 @@
       "envelope_state": "in_envelope",
       "lane": "sulfur",
       "panel": "maillard_path_holdout",
-      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
+      "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause)."
     },
     {
       "benchmark_id": "mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5",
@@ -4808,7 +4795,7 @@
       "envelope_state": "in_envelope",
       "lane": "sulfur",
       "panel": "maillard_path_holdout",
-      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
+      "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause)."
     },
     {
       "benchmark_id": "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026",
@@ -4880,7 +4867,7 @@
       "envelope_state": "in_envelope",
       "lane": "sulfur",
       "panel": "maillard_path_holdout",
-      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
+      "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause)."
     },
     {
       "benchmark_id": "mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b",
@@ -4896,7 +4883,15 @@
       "envelope_state": "in_envelope",
       "lane": "sulfur",
       "panel": "maillard_path_holdout",
-      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
+      "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause)."
+    },
+    {
+      "benchmark_id": "mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b",
+      "compound": "2-Acetylthiazole",
+      "envelope_state": "in_envelope",
+      "lane": "sulfur",
+      "panel": "maillard_path_holdout",
+      "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause)."
     },
     {
       "benchmark_id": "external_validation_bi_2020_raw_pea_hexanal",
@@ -4986,9 +4981,9 @@
     }
   ],
   "summary": {
-    "benchmark_count": 11,
+    "benchmark_count": 10,
     "ci_coverage_hits": 12,
-    "ci_coverage_rate": 0.5,
+    "ci_coverage_rate": 0.5217391304347826,
     "ci_level_pct": 90,
     "fixed_prior_count": 45,
     "honest_literature_coverage": {
@@ -4996,17 +4991,17 @@
       "excluded_fitted_rows": 0,
       "excluded_fitted_rows_that_would_have_been_hits": 0,
       "hits": 12,
-      "median_ci_width_log10": 0.9953630386243943,
+      "median_ci_width_log10": 0.994248176293911,
       "not_evaluable": 1,
-      "rate": 0.5217391304347826,
-      "total": 23
+      "rate": 0.5454545454545454,
+      "total": 22
     },
-    "matched_compound_count": 24,
+    "matched_compound_count": 23,
     "n_samples": 200,
     "observable_multiplier_policy": {
       "rows_by_family": {
         "extraction": 16,
-        "headspace": 8,
+        "headspace": 7,
         "undeclared": 0
       },
       "rule": "the K_aw (+/-0.5 dex) and HS-SPME same-sample dispersion bands multiply a ppb row only when the bundle's quantification_class is a headspace method, or is undeclared (then the core's own absolute_concentration convention is kept and the row says so); extraction-based quantification (SIDA, HPLC, LC-MS/MS) never passed through an air/water partition or a fibre.",
@@ -5021,7 +5016,7 @@
         "not_evaluable": 0,
         "total": 0
       },
-      "total": 23
+      "total": 22
     },
     "panel_benchmark_count": 42,
     "panel_split": {
@@ -5033,11 +5028,11 @@
         "total": 3
       },
       "maillard_path_holdout": {
-        "ci_coverage_rate": 0.375,
+        "ci_coverage_rate": 0.4,
         "hits": 6,
-        "median_ci_width_log10": 0.9789807078829749,
+        "median_ci_width_log10": 0.9696304221207196,
         "not_evaluable": 1,
-        "total": 16
+        "total": 15
       },
       "trust_loop": {
         "ci_coverage_rate": 1.0,
@@ -5069,7 +5064,7 @@
         "sha256": "4691435ae8bc7802099ebff955fb36af1b3401e200b75486850827cd54a23c04"
       }
     ],
-    "refused_compound_count": 69,
+    "refused_compound_count": 70,
     "sampled_prior_count": 99,
     "seed": 0,
     "shared_with_holdout_panel": {
@@ -5078,11 +5073,11 @@
     },
     "signal_origin_split": {
       "external_literature": {
-        "ci_coverage_rate": 0.5217391304347826,
+        "ci_coverage_rate": 0.5454545454545454,
         "hits": 12,
-        "median_ci_width_log10": 0.9953630386243943,
+        "median_ci_width_log10": 0.994248176293911,
         "not_evaluable": 1,
-        "total": 23
+        "total": 22
       },
       "fitted_row": {
         "ci_coverage_rate": null,
@@ -5124,7 +5119,7 @@
       "reduced_chi_square": 1.8711697851956615
     },
     "unsampled_lanes": [],
-    "wall_seconds": 1256.4,
-    "workers": 1
+    "wall_seconds": 655.2,
+    "workers": 4
   }
 }

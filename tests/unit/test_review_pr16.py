@@ -48,7 +48,7 @@ def test_2b_a_pentose_is_not_a_sulfur_source():
 
 def test_2c_a_mixed_request_answers_what_it_can_and_names_the_rest():
     spec = _pot({"ribose": 100, "cysteine": 33}, t=145.0)
-    run = predict(spec, ["2-methyl-3-furanthiol", "methanethiol"])
+    run = predict(spec, ["2-methyl-3-furanthiol", "methanethiol"], balance_refusal=False)   # 2026-11-07 (S3, ph_balance_refusal)
     assert run.answered
     assert "2-methyl-3-furanthiol" in run.concentrations_ug_per_l
     assert "methanethiol" not in run.concentrations_ug_per_l

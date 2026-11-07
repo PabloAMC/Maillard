@@ -917,6 +917,9 @@ must not decide the verdict.)
 - v3.8.1, 2026-11-06 (A2's independent confirmation: CONFIRMED WITH EDITS; sec. 21.9): text and record only. Secs.
   21.2 and 21.6 are annotated in place (marked), not rewritten. Sec. 21.8 is corrected. CF-134 is new. No fit is
   re-run and no shipped output moves.
+- v3.8.2, 2026-11-07 (the S3 application, its own PR; sec. 21.10): a record of what shipped, appended; revised the same
+  day after the review of #108 with the coordinator's rulings R1 - R3. Nothing above sec. 21.10 is edited except this
+  line.
 
 ## 20. Amendment A1 (v3.7, 2026-11-06): part (i), falsification only
 
@@ -1462,3 +1465,68 @@ no shipped output moves.*
 - a sec. 7 clause on how a refusal is lifted;
 - the B1 u B13 envelope, only after converged S3 fits of B1 and B13 and the CO2 ledger audit (CF-134);
 - a case for flipping the ledger default.
+
+### 21.10 The S3 application (2026-11-07; its own PR, `s3-ph-balance-refusal`, #108)
+
+*Appended by the session that built the application, revised after the independent review of #108 (MERGE WITH FIXES)
+and the coordinator's rulings R1 - R3 of the same day. Nothing above is edited. The sec. 7 lift clause it implements is
+"pending independent confirmation".*
+
+**R1. Which term judges which output (coordinator's ruling).** Each output's spread over B0 and the carried rivals is
+compared with the uncertainty the output is SHIPPED with: tau = 0.964 dex (H0's tau_ABS(all); sec. 21.8.6, confirmed)
+for an absolute concentration shipped as a level, and omega = 0.419 dex for a within-laboratory relative output (a
+ratio between pots, a within-study contrast, a direction), with S3's sign rule. The argument: S3 refuses an output that
+DEPENDS on the falsified structure, and its tolerance sentence already assigns the within-laboratory term to relative
+outputs and the between-laboratory term to absolute ones. A level is shown with an interval that carries tau; a rival
+spread inside it moves the level by less than the uncertainty it is shown with, so the output does not depend on the
+falsified choice beyond what it already shows. A ratio is shown with omega in its interval (H0's ratio interval), so
+omega judges it. The first build used omega for every output (the refusal clause's parenthesis read alone); R1 reads
+the parenthesis with the tolerance sentence. omega on absolute levels is reported as a sensitivity.
+
+**R2. pH levels.** The cooled and in-situ pH the balance solves are levels, judged in every pot by the pH-level term,
+A1's run offset and per-point shape in quadrature, sqrt(0.45^2 + 0.16^2) = 0.478 pH (sec. 20.2). The 0.135 pH of sec.
+21.8.1 is the sd of a DRIFT (a difference of two readings) and rests on the independence of Meynier's twenty pots (sec.
+21.9: "assumption-laden"), so it never judges a level; the five-pot bound sigma_max,5 = 0.265 pH is reported as a
+sensitivity.
+
+**R3. The rivals' representation.** Each carried rival is represented by its screen draws that pass all four
+signatures in at least one (A1 form x A2 choice in D) cell of sec. 21.1 (B1: 95 of 640; B13: 255 of 640,
+the counts sec. 21.8.1 reports), through the passing draw that holds the minimum and the one that holds the maximum of
+each free coordinate, plus the rival's best draw (B1: 8 points over 4 coordinates; B13: 15 over 7;
+`results/validation/ph_balance_s3_rival_points.json`). An output is refused on the largest spread over B0 and all of
+them. Why the extremes represent the band: the rival coordinates enter the charge balance as supplies that move the pH
+one way each (more surviving ammonium, phi_cys / phi_arp, raises it; more lumped or acetic acid, acid_yield / y / k_iso,
+lowers it; a higher ARP pKa holds more base), and every pH-resolved rate reads that pH, so an output is expected to be
+monotone in each coordinate across the passing box and its extremes sit at the box's edges. **Checked** on the record's
+pots (8 pots, 24 further passing draws per rival, seed 20261107): **the premise fails.** 23 of 58 outputs' spreads widen beyond B0 + the extremes when further passing draws are added (largest widening 2.05 pH units, the cooled pH of cysteine + ribose + glycine in 0.2 M acetate at pH 7.5, 0.71 -> 2.76), though no verdict changed in that sample: the coordinates act jointly, so a corner of the box can lie beyond every one-coordinate extreme. Run against EVERY passing draw (B1 95, B13 255) on the same pots (`draws_needed` in the record): the extremes reach within 0.05 of the all-draws spread in 0.76 of the 58 outputs and give the all-draws verdict in 57 of 58 (the one miss: the MFT disulfide of the ARP + cysteine pot in 0.2 M phosphate, 0.94 against 0.998 dex at tau 0.964, a level H0 refuses anyway). Random subsets need more than 80 draws per rival to reach 0.95 (0.34 / 0.43 / 0.54 / 0.68 / 0.83 at 5 / 10 / 20 / 40 / 80; verdicts agree in 0.92 - 0.98). **So the band is bounded only by all 350 passing draws per pot** (~0.4 s each: a median of ~140 s per pot in the NumPy engine, against ~10 s for the 23 extremes). The engine ships the extremes as R3 rules; that they under-cover the band, and the cost of using every passing draw, are open for the coordinator (the envelope case of sec. 21.8.6 item 2 would carry the draws anyway).
+
+**Fix 1 (the review's main issue).** A level refused under R1 stays in the arm, withheld by name as H0 withholds a thiol
+level (`absolute_refused_targets`, with `balance_refused_targets` for the reason; no calibration rescues it), so every
+ratio, contrast and direction is judged by the ratio rule (omega and the sign) and never by its arms' levels. compare's
+state vectors drop the refused species (fix 2).
+
+**Fix 4.** A rival integration is stopped after a deterministic budget of right-hand-side and Jacobian evaluations
+(`ph_balance_rivals.RIVAL_RHS_BUDGET` = 200 000; every finished rival point needs at most ~38 000 on the slowest pots
+probed), not a wall clock; a pot whose rival exceeds it is refused with that reason. In the record: five arms are refused for want of a rival: Chen 2000 / 2002's four pH 5 ribose + cysteine arms (180 C, 2 h) and Hofmann's dry-heated 180 C / 6 min ribose + cysteine (HOF-03).
+
+**What the record shows** (`results/validation/ph_balance_s3_sensitivity.md`, 809 recipes: 26 sulfur-lane panel pots,
+165 arms of 65 directional claims, 618 grid recipes incl. 88 clamped controls and 2 lipid co-integrations):
+
+| class (balance-solved pots) | refused / decided | at the sensitivity term |
+|---|---|---|
+| absolute concentrations (tau 0.964 dex) | 1155 / 3522 (33 %) | omega 0.419: 1885 (54 %) |
+| cooled + in-situ pH (0.478 pH) | 671 / 1396 (48 %) | 0.265 pH: 813 (58 %) |
+| ratios, pH lever (omega, sign) | 1201 / 2603 (382 sign flips) | - |
+| ratios, buffer lever | 1697 / 2499 (585) | - |
+| ratios, dose / sugar / thermal | 285 / 374, 129 / 607, 337 / 1759 | - |
+| within-study panel pairs | 57 / 102 (19) | - |
+| directional claims (sulfur lane) | 27 / 45 (12 direction flips) | - |
+| clamped controls | 0 / 882 | - |
+
+Under fix 1 SUG-04 comes back (its step stands under the ratio rule); Z23C-GSH-01 stays refused (its step's spread is 1.07 dex, beyond omega).
+
+**Not refused.** A clamped (held, measured) pH: the balance is not solved (the measured-trajectory path); the trunk,
+acrylamide and lipid lanes. The WUR blind-test predictions of 2026-10-20 ran with `BufferSpec(kind="clamped")` (pH 6.4
+held, their assumption A4): they did not depend on the balance and are not re-scored.
+
+**Cost.** One recipe at all 25 points timed at 11.9 s projected 0.67 h for the 809 recipes at 4 workers; the run took 2.03 h (directional arms with long programmes run 70 - 900 s of rivals each). The live rule costs a median 9.6 s of rival integrations per balance-solved pot (23 points, ~0.4 s each; max 910 s, a Wang 2012 sweep arm), the directional generator about an hour at 4 workers.

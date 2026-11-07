@@ -49,8 +49,8 @@ Shipped calibration B60. Numbers from `results/validation/core_panel_scores.md`,
 
 | question | today |
 |---|---|
-| absolute level within 3x, out of sample | 14 / 56 rows (median miss 11.8x); the "typical yield" baseline does better (15 rows, 8.1x) |
-| ratio between two pots of one study | median error 0.31 dex against 0.28 for "no change"; direction right 12 / 25 |
+| absolute level within 3x, out of sample | 10 / 23 rows (median miss 4.4x; the thiol levels refused by H0 and the levels the falsified pH balance moves by S3 are out of the count); the "typical yield" baseline does better on the rows both answer (5 / 8 against 4 / 8) |
+| ratio between two pots of one study | LOSES to "no change": 19 out-of-sample pairs in 4 studies, median error 0.30 dex against 0.15 for "no change", direction right 2 / 10 (after the S3 refusal of 2026-11-07; 37 pairs, 0.31 against 0.28, 12 / 25 before) |
 | meaty sulfur odorants | 10 / 40 rows within 3x; thiol leave-one-lab-out NOT ADEQUATE (90 % intervals cover 0.34) |
 | acrylamide, lipid aldehydes | the null model wins |
 | pyrazines | about 3 orders of magnitude too low |
@@ -426,7 +426,13 @@ the S1 record, and its absolute outputs are refused as in the thiol lane until t
   relative outputs, its between-laboratory term for absolute ones. Rivals that disagree in sign make the lever's direction refused; rivals that agree
   in sign show its size with the spread. If the incumbent itself is falsified with no rival credited (e.g. C2 + C3
   recombination as the hexose MFT route, M4), the outputs that depend on it (those whose sensitivity to the
-  falsified structure's switch exceeds the lane's within-lab term) are refused, never shown at the incumbent's point. The reviewer (item 8) checks both missing and padded rivals. Carried rivals must be runnable for
+  falsified structure's switch exceeds the lane's within-lab term) are refused, never shown at the incumbent's point.
+  The refusal is lifted only by an S3 change of its own (items 6 and 9 replaced as below) that ships the unweighted
+  union of the remaining carried rivals' envelopes. A rival enters the union only if its converged best fit has passed
+  this rule's test on the data that falsified the incumbent; the union credits no rival. Until then the refusal stands.
+  *(Lift clause added 2026-11-07. Its wording follows M1b part (i) prereg sec. 21.8.6 item 2 (the B1 u B13 envelope
+  "only through its own reviewed case") and that item's confirmation edit, sec. 21.9 (only after converged S3 fits of
+  B1 and B13); pending independent confirmation.)* The reviewer (item 8) checks both missing and padded rivals. Carried rivals must be runnable for
   prediction: until W3 runs them in JAX, they run in the NumPy engine behind their switches, and the cost is stated.
 - **S4. Unidentified coordinates are bands, and fits may move them only on decisive-type evidence.** A band comes from
   measured bounds, a same-class analogue, or the reaction-class distribution of measured constants (as B55's
@@ -471,6 +477,16 @@ Other odds (lowered 2026-11-04: six earlier sink structures were refused, B11 - 
 supply structure on disk passes the screen, and P ~0.6 that no unseen decisive supply data exist): M1c + M2 noticeably
 improve the sulfur lane out of sample, ~0.25. The sulfur lane beats both null models after M1 + M2, ~0.3. Ranked relative predictions with honest intervals for most levers by the end of January, ~0.35. Absolute levels
 within 3x across laboratories for most rows, ~0.15 (not a goal).
+
+Re-estimated 2026-11-07 with the first S3 application, as sec. 7 asks (the outputs that depend on M1b part (i)'s
+falsified pH balance are refused, per pot: `results/validation/ph_balance_s3_sensitivity.md`; on balance-solved pots,
+33 % of the decided concentration levels move beyond tau, 48 % of the pH levels beyond the pH-level term and 46 % of
+the pH-lever ratios beyond omega or in sign, between B0 and the carried rivals' screen-passing extremes; prereg sec.
+21.10). The within-study contrasts that remain lose to "no change" (sec. 2). Until an S3 change ships the union of the carried rivals' envelopes (S3's lift
+clause: B1 and B13 need converged S3 fits on CF-084's controls and the CO2 ledger audit, CF-134), W5.4's pH, buffer and
+dose rows on the sulfur lane are refused wherever the balance moves them; recipes with a held (clamped) pH are
+answered. Ranked relative predictions with honest intervals for most levers by the end of January: ~0.35 -> ~0.3. The
+01-23 checkpoint stays ~0.3 (its lever table already waited on the envelope).
 
 ## 9. Not in the plan
 

@@ -122,7 +122,9 @@ def check_regenerate(failures: List[str]) -> None:
 def check_runners(failures: List[str]) -> None:
     for relative in CHECK_RUNNERS:
         proc = subprocess.run(
-            [sys.executable, relative, "--check"], cwd=str(ROOT), capture_output=True, text=True, timeout=600
+            # 2026-11-07: 1800 s, not 600: the model card's --check re-scores the panel live, and since the S3 refusal
+            # every balance-solved row also runs the carried pH-balance rivals (~10 min serial)
+            [sys.executable, relative, "--check"], cwd=str(ROOT), capture_output=True, text=True, timeout=1800
         )
         if proc.returncode != 0:
             failures.append(f"{relative} --check: " + (proc.stderr.strip() or proc.stdout.strip())[-500:])

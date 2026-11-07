@@ -34,12 +34,22 @@ from src import artifact_io, data_paths, provenance  # noqa: E402
 
 OUT = data_paths.VALIDATION_DIR / "contrast_scores.json"
 BAND_DEX = math.log10(3.0)
+#: pairs refused by S3 (the pH balance; filled by ``_pairs``)
+BALANCE_REFUSED_PAIRS: List[Dict[str, Any]] = []
 NOISE_DEX = math.log10(1.4)
 
 
 def _absolute(r: Dict[str, Any]) -> bool:
     """True for a row with a shipped absolute level; False for a relative-only row (centred log level only)."""
     return bool(r.get("engine")) and r["engine"] > 0
+
+
+def _balance_refused(a: Dict[str, Any], b: Dict[str, Any], engine_dex: float) -> bool:
+    """2026-11-07 (S3 application of M1b part (i)): the pair's ratio is refused when B0 and the carried pH-balance
+    rivals disagree on its sign or spread it beyond omega (``ph_balance_refusal.offsets_ratio_refusal``)."""
+    from src.kinetic_core.ph_balance_refusal import offsets_ratio_refusal
+
+    return offsets_ratio_refusal(engine_dex, a.get("balance_s3_offsets_dex"), b.get("balance_s3_offsets_dex")) is not None
 
 
 def _pairs(rows: List[Dict[str, Any]]) -> Tuple[List[Dict[str, Any]], int]:
@@ -49,6 +59,7 @@ def _pairs(rows: List[Dict[str, Any]]) -> Tuple[List[Dict[str, Any]], int]:
     follow-up), e.g. MGO measured in a trunk pot and in a sulfur pot of one study. The centred value is relative
     to the mean of the study's refused rows only, so no ratio with an absolute level exists: the pair is skipped
     and counted, never scored."""
+    BALANCE_REFUSED_PAIRS.clear()
     groups: Dict[tuple, List[Dict[str, Any]]] = defaultdict(list)
     for r in rows:
         if _absolute(r) or r.get("engine_centred_log10") is not None:
@@ -61,13 +72,18 @@ def _pairs(rows: List[Dict[str, Any]]) -> Tuple[List[Dict[str, Any]], int]:
             if _absolute(a) != _absolute(b):
                 mixed += 1
                 continue
+            # 2026-11-05 (H0 / EX-059): a thiol-lane row carries its centred log level, not a ppb level; the
+            # difference of two centred values IS the log ratio (one group, one mean)
+            engine_dex = (math.log10(a["engine"] / b["engine"]) if _absolute(a)
+                          else a["engine_centred_log10"] - b["engine_centred_log10"])
+            if _balance_refused(a, b, engine_dex):
+                BALANCE_REFUSED_PAIRS.append({"study": study, "compound": compound, "a": a["benchmark"],
+                                              "b": b["benchmark"]})
+                continue
             out.append({
                 "study": study, "compound": compound, "lane": a["lane"], "a": a["benchmark"], "b": b["benchmark"],
                 "measured_dex": math.log10(a["measured"] / b["measured"]),
-                # 2026-11-05 (H0 / EX-059): a thiol-lane row carries its centred log level, not a ppb level;
-                # the difference of two centred values IS the log ratio (one group, one mean)
-                "engine_dex": (math.log10(a["engine"] / b["engine"]) if _absolute(a)
-                               else a["engine_centred_log10"] - b["engine_centred_log10"]),
+                "engine_dex": engine_dex,
                 "out_of_sample": a["out_of_sample"] and b["out_of_sample"],
             })
     return out, mixed
@@ -103,6 +119,8 @@ def main() -> int:
         "scores": scores, "by_lane": by_lane,
         # one absolute row and one relative-only row: no ratio exists, skipped (2026-11-05, H0 follow-up)
         "mixed_pairs_skipped": mixed,
+        # 2026-11-07 (S3, ph_balance_refusal): pairs whose ratio the falsified pH balance moves beyond omega or in sign
+        "balance_refused_pairs": list(BALANCE_REFUSED_PAIRS),
         "pairs": pairs,
     }
     artifact_io.write_artifact(payload, OUT, render=render)

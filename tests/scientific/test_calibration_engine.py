@@ -52,7 +52,9 @@ def _synthetic_document():
     grid = [(145.0, 5.0), (145.0, 10.0), (145.0, 20.0), (145.0, 40.0), (145.0, 60.0), (145.0, 90.0)]
     for i, (T, t) in enumerate(grid):
         spec = {"name": f"pot_{i}", "precursors": {"L-Cysteine": 33.0, "D-Ribose": 100.0}, "temp_C": T, "time_min": t,
-                "ph": 5.0, "aw": 0.98, "matrix": "water", "buffer": {"kind": "phosphate", "phosphate_mol_l": 0.5}}
+                # 2026-11-07 (S3, ph_balance_refusal): a held pH; in 0.5 M phosphate these pots' outputs move beyond
+                # omega with the falsified balance and are refused, and the calibration machinery is what is tested
+                "ph": 5.0, "aw": 0.98, "matrix": "water", "buffer": {"kind": "clamped"}}
         p = F.engine_predict(spec, [MFT, FFT, ACTZ], truth)
         assert p.values.get(MFT) and p.values.get(FFT) and p.values.get(ACTZ), (i, p)
         systems.append({**spec, "measured": {MFT: {"value": p.values[MFT], "uncertainty_pct": 10},

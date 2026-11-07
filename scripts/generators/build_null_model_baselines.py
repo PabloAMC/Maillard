@@ -79,6 +79,8 @@ def _rows(scores: Optional[Dict[str, Any]] = None, *,
                 "limiting_mM": float(limiting) * 1000.0,  # limiting_precursor_molar returns mol/L
                 "measured": float(r["measured"]), "engine": r.get("predicted"),
                 "engine_centred_log10": r.get("log10_predicted_minus_study_mean"),
+                # 2026-11-07 (S3, ph_balance_refusal): the carried rivals' values relative to B0 (no absolute level)
+                "balance_s3_offsets_dex": r.get("balance_s3_offsets_dex"),
                 "out_of_sample": bool(literature and not r["in_core_fit"]), "literature": bool(literature),
             })
     return rows, dict(excluded)

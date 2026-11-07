@@ -4,9 +4,9 @@
   "artifact": "incumbent_evidence_tiers",
   "generated_on": "2026-11-07",
   "git": {
-   "commit": "7cc5214c3abd968723080458719a4d06429accf2",
-   "short": "7cc5214c",
-   "branch": "frozen-fit-reproducibility",
+   "commit": "210b7ff478d70726de0e67aacde2119aabd8d691",
+   "short": "210b7ff4",
+   "branch": "s3-ph-balance-refusal",
    "dirty": true
   },
   "generated_by": "scripts/generators/build_evidence_tiers.py",
@@ -69,15 +69,15 @@
    },
    {
     "path": "results/validation/core_prediction_uncertainty.json",
-    "sha256": "5c2c3c8b9c7dc8a772cce134952fb29a0a7fa7c59e25f47e234aa528ed9ad6c0"
+    "sha256": "22ea829cc617db6275305299f65d974acb4d9d8ef3e4e2917013e08bcafefe69"
    },
    {
     "path": "results/validation/sulfur_reaction_evidence.json",
-    "sha256": "aaa5f85092d4a6596120cdb7b46dc1662ef3b86001b70fee098d01999dc4057c"
+    "sha256": "939903505221dc5b5d04cd790f889d7720fdb6574b2970136fe34092cbe4a4ba"
    },
    {
     "path": "results/validation/data_wishlist.json",
-    "sha256": "b7db438fbab3387c3c5416eafbdb3d0555d6aae2445149b3a940c468f2e7a583"
+    "sha256": "d91f0fd039f4eb166e9e0f757b7322c82a9001ce277c252b5729d8b1dfabb29c"
    },
    {
     "path": "docs/reference/unpinned_constants.yml",

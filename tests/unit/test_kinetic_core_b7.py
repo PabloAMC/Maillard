@@ -293,7 +293,7 @@ def test_norfuraneol_dominates_dmhf_at_the_deoxypentosone_fork():
                               declared=True, source="Blank 1997"),
         ),
     )
-    run = predict(spec, ["norfuraneol", "DMHF"])
+    run = predict(spec, ["norfuraneol", "DMHF"], balance_refusal=False)   # 2026-11-07 (S3, ph_balance_refusal): the fork itself
     assert run.answered
     assert run.species_mmol_per_l["NF"] > run.species_mmol_per_l["DMHF"]
 

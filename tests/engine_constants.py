@@ -102,11 +102,12 @@ CONSTANTS = {
             'THIOL_ADDITION_DEFAULT_EA_KJ_MOL THIOL_QUINONE_EQUILIBRIUM_USED_L_PER_MMOL '
             'ZHANG_EA_THIOL_TO_DISULFIDE_KJ_MOL ZHENG_MECHANISM_BOUNDARY_PH'
         ),
-        'ph_balance_rivals': 'ADDED_SINK_Y_CAP',
+        'ph_balance_rivals': 'ADDED_SINK_Y_CAP RIVAL_RHS_BUDGET',
         'ph_state': 'ARP_CARBOXYL_DH ARP_CARBOXYL_PKA',
         'predictive_densities': 'ESS_MIN FLOOR_DATA_RTOL K_HAT_MAX MAX_QUAD_NODES NOMINAL_ALPHA NULL_REPLICATES_MIN OMEGA_DEX QUAD_K Z_90',
         'scoring': 'PASS_BAND_LEVEL',
         'thermal_history': 'DEFAULT_START_C',
+        'ph_balance_refusal': 'EA_ISO_KJ_MOL SIGN_FLOOR_DEX ZERO_FLOOR_UG_PER_L',
         'thiol_relative_only': 'Z90',
         'trunk_conditions': 'AW_TABLE_FLOOR PH_EXPONENT_DECADES_PER_UNIT REFERENCE_AW REFERENCE_PH',
         'uncertainty': (
@@ -233,6 +234,7 @@ CONSTANTS = {
             'SULFUR_STOICHIOMETRY TERMINAL_POOLS TRUNK_REACTIONS'
         ),
         'thermal_history': 'TIME_CONVENTIONS',
+        'ph_balance_refusal': 'WITHHELD_PH_KEYS',
         'thiol_relative_only': 'RELATIVE_ONLY_SPECIES',
         'trunk_conditions': (
             'ATMOSPHERE_FACTORS ATMOSPHERE_VALUES AW_MULTIPLIER_TABLE AW_SCALE_BAND AW_STEPS '
@@ -242,6 +244,7 @@ CONSTANTS = {
         'vessel': 'THIOL_PRECURSOR_MARKERS',
     },
     'provenance': {
+        'ph_balance_refusal': 'LIFT_TEXT',
         'acrylamide_conditions': 'AW_SOURCE EA_INT1_SOURCE PH_SOURCE',
         'engine': 'BUFFER_ABSENT_WARNING',
         'matrix_oav': 'COVALENT_CEILING_RETIREMENT',
@@ -277,6 +280,7 @@ CONSTANTS = {
             'BASE_FORM BASES FORM_KINDS NOISE_STRUCTURES NOISE_TERM_KINDS NULL_INPUTS PH_SCALES UNIT_ROLES VALUE_BASES '
             'VALUE_LEVELS'
         ),
+        'ph_balance_refusal': 'BALANCE_REFUSED_TAG FAILED',
         'thiol_relative_only': 'ABSOLUTE_REFUSED_TAG CALIBRATE_GENERATOR',
         'trunk_conditions': 'ATMOSPHERE_REFERENCE',
         'uncertainty': (
@@ -290,6 +294,7 @@ CONSTANTS = {
         'directional': 'PANEL_PATH',
         'fit_rows': 'FIT_ROWS_DIR LABORATORIES',
         'fit_targets': 'RECORD_GLOB',
+        'ph_balance_refusal': 'FALSIFICATION_RECORD POINTS_RECORD',
         'thiol_relative_only': 'H0_RECORD NOISE_RECORD',
         'uncertainty': 'DISCREPANCY_PATH LAPLACE_PATH PROFILE_PATH',
         'user_scoring': 'USER_RESULTS_DIR',

@@ -262,8 +262,9 @@ def test_the_shipped_config_is_unchanged_with_every_new_key_at_its_default(M):
     for name in NEW_KEYS:
         assert shipped[name].enabled is False
     # the digest over the keys that existed before M1 is M1.0's (EX-060: configuration digest 40b746476905786c)
-    # keys added after M1 (M1b part (i)'s rivals, all off) are left out with M1's own
-    later = ("ph.amine_survival", "ph.acid_lag", "ph.acid_supply", "ph.arp_forcing")
+    # keys added after M1 (M1b part (i)'s rivals, all off; the S3 refusal switch of 2026-11-07, which changes no number
+    # the M1 digest covers) are left out with M1's own
+    later = ("ph.amine_survival", "ph.acid_lag", "ph.acid_supply", "ph.arp_forcing", "ph.balance_refusal")
     blob = json.dumps([[n, config._canonical(v)] for n, v in shipped.items if n not in NEW_KEYS + later],
                       sort_keys=True, separators=(",", ":"))
     assert hashlib.sha256(blob.encode("utf-8")).hexdigest().startswith("40b746476905786c")

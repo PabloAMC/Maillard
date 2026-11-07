@@ -1607,7 +1607,8 @@ def propagate_panel(
                 )
             elif thiol_relative_only.declared(declaration, compound):
                 # 2026-11-05 (H0 / EX-059, D2 branch (i)): no absolute level of a thiol-lane observable ships
-                reason = "NOT EVALUABLE: " + thiol_relative_only.short_reason()
+                # 2026-11-07: or S3's refusal of a level the falsified pH balance moves beyond tau (same path)
+                reason = "NOT EVALUABLE: " + thiol_relative_only.level_refusal_text(declaration, compound, short=True)
             if reason is not None:
                 item = {
                     "benchmark_id": benchmark_id, "panel": panel_tag,

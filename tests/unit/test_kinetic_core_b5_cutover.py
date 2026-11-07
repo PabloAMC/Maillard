@@ -82,7 +82,8 @@ def test_sulfur_request_is_in_envelope_and_routes_to_the_sulfur_lane():
     the same pot answered unbuffered and answered at Hofmann's declared 0.5 M
     phosphate differs by up to ~15x in predicted thiol.
     """
-    run = predict(_sulfur_spec(), [MFT, FFT])
+    # 2026-11-07 (S3, ph_balance_refusal): the incumbent's envelope flags, read on the unrefused engine
+    run = predict(_sulfur_spec(), [MFT, FFT], balance_refusal=False)
     assert run.answered
     assert run.declaration.lane == SULFUR
     assert run.declaration.state == "in_envelope_extrapolated"
@@ -108,7 +109,7 @@ def test_declaring_the_buffer_removes_the_extrapolation_flag():
                               declared=True, source="Hofmann 1998 Methods"),
         ),
     )
-    run = predict(spec, [MFT, FFT])
+    run = predict(spec, [MFT, FFT], balance_refusal=False)
     assert run.answered
     assert not any("no buffer was declared" in w for w in run.declaration.warnings)
     assert run.declaration.state == "in_envelope"
@@ -292,7 +293,7 @@ def test_aqueous_matrix_aliases_resolve_to_water_but_a_real_matrix_does_not():
 
 
 def test_the_oav_table_is_reachable_and_finds_measured_thresholds():
-    run = predict(_sulfur_spec(), [MFT, FFT])
+    run = predict(_sulfur_spec(), [MFT, FFT], balance_refusal=False)
     table = run.oav()
     per_species = table["per_species"]
     # MFT has a measured water threshold; a None here is the keying bug.
@@ -343,6 +344,7 @@ def test_core_predict_payload_carries_its_declaration_and_no_fast_fields():
             "ph": 5.0,
             "aw": 0.98,
             "protein_type": "free",
+            "buffer": {"kind": "clamped"},   # 2026-11-07 (S3, ph_balance_refusal): a held pH, so the pot is answered
         }
     )
     assert payload["lane"] == "core"

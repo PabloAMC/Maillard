@@ -1,0 +1,488 @@
+{
+  "artifact": "ph_balance_s3_rival_points",
+  "provenance": {
+    "artifact": "ph_balance_s3_rival_points",
+    "generated_on": "2026-11-07",
+    "git": {
+      "commit": "e13fb3608dac64d728d03cb8634650652729287a",
+      "short": "e13fb360",
+      "branch": "s3-ph-balance-refusal",
+      "dirty": true
+    },
+    "generated_by": "scripts/generators/build_ph_balance_s3_sensitivity.py --points",
+    "wave": "S3 application: the pH balance (M1b part (i))",
+    "inputs": [
+      {
+        "path": "results/validation/kinetic_core_m1b_part_i_falsification.json",
+        "sha256": "75f8c73ed3f7b328feb6c342a79911c49466332e52d571b7833a2d9121f2e946"
+      },
+      {
+        "path": "results/validation/kinetic_core_m1b_part_i_screen.json",
+        "sha256": "17841eef4d94aecb5ec49f2356307914751975845dc84989d819eaec2b697847"
+      },
+      {
+        "path": "results/validation/kinetic_core_m1b_part_i_a2.json",
+        "sha256": "457f1a90701e112dcd70f277b1b8945b0b932962ed6b87f20e81f5edbbf16e52"
+      },
+      {
+        "path": "results/validation/kinetic_core_m1b_part_i_screen_draws.json.gz",
+        "sha256": "f44fabd718581c9bdcb50ad3f1638170096ec2172a5b235d3a8f008598854a63"
+      }
+    ]
+  },
+  "definition": "prereg sec. 21.10, R3: each carried rival is represented by the stored screen draws that pass all four signatures in at least one (A1 form x A2 choice in D) cell (sec. 21.1), through the passing draw at the minimum and at the maximum of each free coordinate, plus its best draw",
+  "davidek_breakpoints_in_situ": [
+    5.22011388791725,
+    6.180802797432989,
+    6.676454670261592
+  ],
+  "counts": {
+    "B1": {
+      "stored_draws": 640,
+      "passing": 95,
+      "points": 8,
+      "coordinates": [
+        "acid_yield",
+        "arp_amine_pka",
+        "phi_cys",
+        "phi_arp"
+      ],
+      "passing_box": {
+        "acid_yield": [
+          0.006167735904455185,
+          0.9844388021156192
+        ],
+        "arp_amine_pka": [
+          7.092071345001459,
+          8.178337210956961
+        ],
+        "phi_cys": [
+          0.359266116283834,
+          0.9997267248108983
+        ],
+        "phi_arp": [
+          0.0014234371483325958,
+          0.9884205311536789
+        ]
+      }
+    },
+    "B13": {
+      "stored_draws": 640,
+      "passing": 255,
+      "points": 15,
+      "coordinates": [
+        "arp_amine_pka",
+        "y5",
+        "y6",
+        "y_hi",
+        "k_iso",
+        "phi_cys",
+        "phi_arp"
+      ],
+      "passing_box": {
+        "arp_amine_pka": [
+          7.075413759583608,
+          8.171449894607067
+        ],
+        "y5": [
+          0.10272890944563748,
+          0.556771698538739
+        ],
+        "y6": [
+          0.2821616608363775,
+          0.9560343805778597
+        ],
+        "y_hi": [
+          0.4078437962812799,
+          0.9990812176274724
+        ],
+        "k_iso": [
+          0.025129228263529774,
+          0.23423391847787542
+        ],
+        "phi_cys": [
+          0.2728175614029169,
+          0.9986715046688914
+        ],
+        "phi_arp": [
+          0.002565089613199234,
+          0.8448981400579214
+        ]
+      }
+    }
+  },
+  "rivals": {
+    "B1": [
+      {
+        "name": "B1_d345",
+        "index": 345,
+        "why": [
+          "min arp_amine_pka"
+        ],
+        "passes": true,
+        "coordinates": {
+          "acid_yield": 0.22517193108797073,
+          "arp_amine_pka": 7.092071345001459,
+          "phi_cys": 0.8466604482382536,
+          "phi_arp": 0.016031315550208092
+        }
+      },
+      {
+        "name": "B1_d446",
+        "index": 446,
+        "why": [
+          "min acid_yield"
+        ],
+        "passes": true,
+        "coordinates": {
+          "acid_yield": 0.006167735904455185,
+          "arp_amine_pka": 8.100238928738982,
+          "phi_cys": 0.6214470723643899,
+          "phi_arp": 0.43829820677638054
+        }
+      },
+      {
+        "name": "B1_d460",
+        "index": 460,
+        "why": [
+          "max phi_arp"
+        ],
+        "passes": true,
+        "coordinates": {
+          "acid_yield": 0.6779531836509705,
+          "arp_amine_pka": 8.117116044107824,
+          "phi_cys": 0.7593723069876432,
+          "phi_arp": 0.9884205311536789
+        }
+      },
+      {
+        "name": "B1_d506",
+        "index": 506,
+        "why": [
+          "best draw (falsification record)"
+        ],
+        "passes": true,
+        "coordinates": {
+          "acid_yield": 0.44856409449130297,
+          "arp_amine_pka": 8.09311661830172,
+          "phi_cys": 0.958934361115098,
+          "phi_arp": 0.34022469352930784
+        }
+      },
+      {
+        "name": "B1_d544",
+        "index": 544,
+        "why": [
+          "max acid_yield",
+          "max phi_cys"
+        ],
+        "passes": true,
+        "coordinates": {
+          "acid_yield": 0.9844388021156192,
+          "arp_amine_pka": 7.7879214830603445,
+          "phi_cys": 0.9997267248108983,
+          "phi_arp": 0.5522483661770821
+        }
+      },
+      {
+        "name": "B1_d594",
+        "index": 594,
+        "why": [
+          "min phi_arp"
+        ],
+        "passes": true,
+        "coordinates": {
+          "acid_yield": 0.31296230014413595,
+          "arp_amine_pka": 7.874162483355031,
+          "phi_cys": 0.6352392304688692,
+          "phi_arp": 0.0014234371483325958
+        }
+      },
+      {
+        "name": "B1_d618",
+        "index": 618,
+        "why": [
+          "max arp_amine_pka"
+        ],
+        "passes": true,
+        "coordinates": {
+          "acid_yield": 0.37759798392653465,
+          "arp_amine_pka": 8.178337210956961,
+          "phi_cys": 0.5471027670428157,
+          "phi_arp": 0.38338619749993086
+        }
+      },
+      {
+        "name": "B1_d638",
+        "index": 638,
+        "why": [
+          "min phi_cys"
+        ],
+        "passes": true,
+        "coordinates": {
+          "acid_yield": 0.030557921156287193,
+          "arp_amine_pka": 8.045533833522349,
+          "phi_cys": 0.359266116283834,
+          "phi_arp": 0.08433512318879366
+        }
+      }
+    ],
+    "B13": [
+      {
+        "name": "B13_d40",
+        "index": 40,
+        "why": [
+          "max phi_cys"
+        ],
+        "passes": true,
+        "coordinates": {
+          "arp_amine_pka": 7.3907566205225885,
+          "y5": 0.4025580541159597,
+          "y6": 0.7839529253755991,
+          "y_hi": 0.7923932783922738,
+          "k_iso": 0.029059291514270346,
+          "phi_cys": 0.9986715046688914,
+          "phi_arp": 0.43302356358617544
+        }
+      },
+      {
+        "name": "B13_d66",
+        "index": 66,
+        "why": [
+          "min arp_amine_pka"
+        ],
+        "passes": true,
+        "coordinates": {
+          "arp_amine_pka": 7.075413759583608,
+          "y5": 0.40763803418998723,
+          "y6": 0.5504839949089994,
+          "y_hi": 0.9083752113154776,
+          "k_iso": 0.09941659431098741,
+          "phi_cys": 0.396528547629714,
+          "phi_arp": 0.1976007129997015
+        }
+      },
+      {
+        "name": "B13_d100",
+        "index": 100,
+        "why": [
+          "best draw (falsification record)"
+        ],
+        "passes": true,
+        "coordinates": {
+          "arp_amine_pka": 7.835532278819009,
+          "y5": 0.22159249867738032,
+          "y6": 0.8417821824819759,
+          "y_hi": 0.9848233011402451,
+          "k_iso": 0.02989039703906918,
+          "phi_cys": 0.9409801634028554,
+          "phi_arp": 0.32970662973821163
+        }
+      },
+      {
+        "name": "B13_d115",
+        "index": 115,
+        "why": [
+          "max y6"
+        ],
+        "passes": true,
+        "coordinates": {
+          "arp_amine_pka": 7.24078194834292,
+          "y5": 0.4621138138633619,
+          "y6": 0.9560343805778597,
+          "y_hi": 0.9759974197543283,
+          "k_iso": 0.08289852517163654,
+          "phi_cys": 0.5152272768318653,
+          "phi_arp": 0.13435041066259146
+        }
+      },
+      {
+        "name": "B13_d161",
+        "index": 161,
+        "why": [
+          "max y5"
+        ],
+        "passes": true,
+        "coordinates": {
+          "arp_amine_pka": 7.853969590021297,
+          "y5": 0.556771698538739,
+          "y6": 0.6024149784358073,
+          "y_hi": 0.9793595243650406,
+          "k_iso": 0.19347863652767844,
+          "phi_cys": 0.2870199391618371,
+          "phi_arp": 0.2753625214099884
+        }
+      },
+      {
+        "name": "B13_d218",
+        "index": 218,
+        "why": [
+          "max arp_amine_pka"
+        ],
+        "passes": true,
+        "coordinates": {
+          "arp_amine_pka": 8.171449894607067,
+          "y5": 0.12094980191601094,
+          "y6": 0.3817334696743713,
+          "y_hi": 0.6687206046765747,
+          "k_iso": 0.03711793470740002,
+          "phi_cys": 0.5193866910412908,
+          "phi_arp": 0.13984579592943192
+        }
+      },
+      {
+        "name": "B13_d246",
+        "index": 246,
+        "why": [
+          "min k_iso"
+        ],
+        "passes": true,
+        "coordinates": {
+          "arp_amine_pka": 7.910184725746512,
+          "y5": 0.2028168780702773,
+          "y6": 0.6307204140769627,
+          "y_hi": 0.7858300125237214,
+          "k_iso": 0.025129228263529774,
+          "phi_cys": 0.298654405400157,
+          "phi_arp": 0.3366557005792856
+        }
+      },
+      {
+        "name": "B13_d313",
+        "index": 313,
+        "why": [
+          "min y6"
+        ],
+        "passes": true,
+        "coordinates": {
+          "arp_amine_pka": 7.755944166257978,
+          "y5": 0.16976882430464332,
+          "y6": 0.2821616608363775,
+          "y_hi": 0.8126622781391073,
+          "k_iso": 0.061166404604723563,
+          "phi_cys": 0.45836981013417244,
+          "phi_arp": 0.16198046877980232
+        }
+      },
+      {
+        "name": "B13_d319",
+        "index": 319,
+        "why": [
+          "max k_iso"
+        ],
+        "passes": true,
+        "coordinates": {
+          "arp_amine_pka": 7.384384534172714,
+          "y5": 0.23895670194047397,
+          "y6": 0.6455576293054681,
+          "y_hi": 0.8837266131904631,
+          "k_iso": 0.23423391847787542,
+          "phi_cys": 0.5464902110397816,
+          "phi_arp": 0.18464964721351862
+        }
+      },
+      {
+        "name": "B13_d356",
+        "index": 356,
+        "why": [
+          "min phi_cys"
+        ],
+        "passes": true,
+        "coordinates": {
+          "arp_amine_pka": 7.139855609107763,
+          "y5": 0.30414429761859507,
+          "y6": 0.559961586858287,
+          "y_hi": 0.687367832179534,
+          "k_iso": 0.19968721911090423,
+          "phi_cys": 0.2728175614029169,
+          "phi_arp": 0.09635849762707949
+        }
+      },
+      {
+        "name": "B13_d362",
+        "index": 362,
+        "why": [
+          "min phi_arp"
+        ],
+        "passes": true,
+        "coordinates": {
+          "arp_amine_pka": 7.240176238827408,
+          "y5": 0.2231359175852251,
+          "y6": 0.5824142547931201,
+          "y_hi": 0.9049853942495736,
+          "k_iso": 0.11622636978123939,
+          "phi_cys": 0.9316695053130388,
+          "phi_arp": 0.002565089613199234
+        }
+      },
+      {
+        "name": "B13_d388",
+        "index": 388,
+        "why": [
+          "max phi_arp"
+        ],
+        "passes": true,
+        "coordinates": {
+          "arp_amine_pka": 7.929329507490619,
+          "y5": 0.48802156057698054,
+          "y6": 0.697828706361576,
+          "y_hi": 0.747093011862207,
+          "k_iso": 0.029209561360069403,
+          "phi_cys": 0.4268285930156708,
+          "phi_arp": 0.8448981400579214
+        }
+      },
+      {
+        "name": "B13_d413",
+        "index": 413,
+        "why": [
+          "min y_hi"
+        ],
+        "passes": true,
+        "coordinates": {
+          "arp_amine_pka": 7.803047776799649,
+          "y5": 0.13492812396075105,
+          "y6": 0.3047097151806059,
+          "y_hi": 0.4078437962812799,
+          "k_iso": 0.03421849327698183,
+          "phi_cys": 0.8672029338777065,
+          "phi_arp": 0.1931975530460477
+        }
+      },
+      {
+        "name": "B13_d440",
+        "index": 440,
+        "why": [
+          "max y_hi"
+        ],
+        "passes": true,
+        "coordinates": {
+          "arp_amine_pka": 7.499333954686299,
+          "y5": 0.30285202423183344,
+          "y6": 0.823213215664231,
+          "y_hi": 0.9990812176274724,
+          "k_iso": 0.09232232295795434,
+          "phi_cys": 0.7637551631778479,
+          "phi_arp": 0.007126095704734325
+        }
+      },
+      {
+        "name": "B13_d628",
+        "index": 628,
+        "why": [
+          "min y5"
+        ],
+        "passes": true,
+        "coordinates": {
+          "arp_amine_pka": 7.222951702959835,
+          "y5": 0.10272890944563748,
+          "y6": 0.37644539189663095,
+          "y_hi": 0.732600412075506,
+          "k_iso": 0.14947802351438733,
+          "phi_cys": 0.7911570379510522,
+          "phi_arp": 0.040504153817892075
+        }
+      }
+    ]
+  }
+}

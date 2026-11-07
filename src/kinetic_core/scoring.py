@@ -48,7 +48,7 @@ from src.benchmark_metadata import (
 )
 from src.validation_contract import DEFAULT_VALIDATION_CONTRACT
 
-from . import thiol_relative_only
+from . import ph_balance_refusal, thiol_relative_only
 from .engine import declared_unidentified, engine_metadata, fit_report_paths, predict
 from .fit_targets import core_evidence_role, core_fit_targets, fit_target_of, in_core_fit
 from .vessel import format_o2_to_thiol, oxygen_record
@@ -214,6 +214,9 @@ def score_benchmark(
         measured = measured_value(bench, compound, target_spec)
         run = predict(spec, [compound])
         declaration = run.declaration
+        # 2026-11-07 (S3, ph_balance_refusal): B1's and B13's values relative to B0, which a within-study ratio of two
+        # answered rows needs (build_contrast_scores refuses a pair the balance moves); no absolute level
+        s3_offsets = ph_balance_refusal.offsets_dex(spec, [compound], compound) if run.answered else None
         reason = None
         data_refused = data_refusal(target_spec)
         if data_refused is not None:
@@ -235,9 +238,11 @@ def score_benchmark(
         elif thiol_relative_only.declared(declaration, compound):
             # 2026-11-05 (H0 / EX-059, D2 branch (i)): the thiol lane's absolute levels are refused; the panel
             # scores what the model ships, so the row leaves the absolute count with its reason.
-            reason = "NOT EVALUABLE: " + thiol_relative_only.short_reason()
+            # 2026-11-07: or the S3 refusal of a level the falsified pH balance moves beyond tau (same path)
+            reason = "NOT EVALUABLE: " + thiol_relative_only.level_refusal_text(declaration, compound, short=True)
         if reason is not None:
             absolute_refused = reason.startswith("NOT EVALUABLE: " + thiol_relative_only.ABSOLUTE_REFUSED_TAG)
+            balance_refused = reason.startswith("NOT EVALUABLE: " + ph_balance_refusal.BALANCE_REFUSED_TAG)
             refused.append(
                 {
                     "benchmark_id": benchmark_id, "panel": panel_tag, "compound": compound,
@@ -245,6 +250,7 @@ def score_benchmark(
                     "envelope_state": declaration.state, "lane": declaration.lane,
                     "unidentified_route": reason.startswith("NOT EVALUABLE: HEXOSE"),
                     "absolute_refused": absolute_refused,
+                    "balance_refused": balance_refused,
                     "data_refused": data_refused is not None,
                     # ... but what the lane DOES ship, a ratio between two pots of one study, still needs both
                     # numbers: the within-study contrast diagnostic (build_contrast_scores.py) reads them, and
@@ -257,7 +263,8 @@ def score_benchmark(
                         "study": study_key(bench, str(path)),
                         "in_core_fit": in_core_fit(benchmark_id, compound),
                         "shared_with": SHARED_WITH_HOLDOUT_PANEL.get((benchmark_id, compound)),
-                    }} if absolute_refused else {}),
+                        **({"balance_s3_offsets_dex": s3_offsets} if s3_offsets is not None else {}),
+                    }} if (absolute_refused or balance_refused) else {}),
                 }
             )
             continue
@@ -291,6 +298,7 @@ def score_benchmark(
                 "declaration_warnings": list(declaration.warnings),
                 "shared_with": SHARED_WITH_HOLDOUT_PANEL.get((benchmark_id, compound)),
                 "in_core_fit": in_core_fit(benchmark_id, compound),
+                **({"balance_s3_offsets_dex": s3_offsets} if s3_offsets is not None else {}),
                 **_carried_split(
                     run, carried_declared.get(compound.strip().lower()), compound, unit, predicted, measured,
                 ),
@@ -458,7 +466,11 @@ def score_panel(
     else:
         bundles, skipped = list(bundles), []
 
-    benches = [score_benchmark(path, tag, pass_band=pass_band) for path, tag in bundles]
+    # 2026-11-07 (S3, ph_balance_refusal): every balance-solved row also runs the carried rivals' points, so the
+    # bundles are scored in parallel when MAILLARD_WORKERS asks for it (forked; the result is independent of the count)
+    from . import parallel
+
+    benches = parallel.map_ordered(lambda item: score_benchmark(item[0], item[1], pass_band=pass_band), list(bundles))
     _centre_relative_use_only(benches)
 
     by_panel: Dict[str, Dict[str, Any]] = {}
