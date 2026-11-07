@@ -1,10 +1,12 @@
 # Pre-registration: do the experiments we call decisive shrink the answers a formulator uses?
 
-**Status: DRAFT v2 (2026-11-07), not frozen. DESIGN AND TIMING ONLY.** No simulation has run. The only runs made for
+**Status: DRAFT v3 (2026-11-07), not frozen. DESIGN AND TIMING ONLY.** No simulation has run. The only runs made for
 this file are one timed lever prediction and one timed JAX network update (sec. 9.1), and a declaration-only check of the
 decision recipes (no integration; sec. 2.3).
-- **v2 applies the independent premortem's "freeze with edits"** (edits 1 - 10; changelog at the end).
+- **v2 applied the independent premortem's "freeze with edits"** (edits 1 - 10). **v3 answers the confirmation
+  read of v2 ("not confirmed": the omega term decided the result by construction).** Changelog at the end.
 - It freezes when its review is answered (sec. 10). After the freeze, nothing in secs. 2 - 8 and 12 may change.
+- **Step 0 (sec. 5.0) runs first**, before the early variant and before any design is simulated.
 - A change after any number exists is an amendment, dated, with its reason, and the run reports both versions.
 
 *Plan: [STATUS_AND_PLAN](../../docs/guides/STATUS_AND_PLAN.md) sec. 1 (what formulators need), sec. 5 W5.4 (the lever
@@ -57,10 +59,14 @@ the timed D01 lever (sec. 9.1), whose concentrations were not printed or read.
 - **Q4 (refusals).** Which of today's refusals would each design lift?
 
 The run answers each with the pre-registered verdicts of sec. 7. The author's forecasts are given here so that the run
-scores them too (revised in v2 for the total-interval primary metric):
-- P(the worry is confirmed, sec. 7.1) ~0.85. The omega term alone spans about +-1 dex at 90 % on a ratio, so most
-  levers below ~1 dex cannot be shown by any design;
-- P(the contrast design beats the best on-record design by >= 3 off-grid decisions, sec. 7.2) ~0.35;
+scores them too (revised in v3).
+- **They are informed by seen summaries**, so they are not blind. The plan's sec. 2 gives the median within-study
+  log-ratio error as 0.31 dex in sample and 0.66 dex held out (W1.1). That suggests a ratio discrepancy between ~0.45
+  and ~1 dex, against 0.59 dex under iid omega.
+- **step 0's correlation rho-hat** (sec. 5.0): ~0.2 (90 % range -0.5 to 0.6);
+- P(fewer than 2 decisions are eligible, so the verdict is "CONFIRMED (omega-bound)", sec. 7.1) ~0.7;
+- P(the worry is confirmed, either way) ~0.85;
+- P(Q2 is informative and the contrast design wins, sec. 7.2) ~0.15;
 - P(`rank` validated, sec. 7.3) ~0.05;
 - the effective number of independent decisions (sec. 6 item 5): ~4 (90 % range 2.5 - 7).
 
@@ -173,28 +179,37 @@ yet in the code.
 - **Structural refusals (D17, D19)** cannot lift on data. They are kept as witnesses. Their metrics are "not computable"
   and they are excluded from the denominators of sec. 7.
 
-### 2.4 The off-grid decision set (v2; primary for Q2)
+### 2.4 The off-grid decision set (v2; rebuilt in v3; primary for Q2)
 
-The contrast design G-C (sec. 3.3) is built on the grid of sec. 2.2: the same cysteine, pH, time, phosphate, ROOH and
-GSH steps. Scoring G-C on D01 - D16 would therefore partly score its own cells, which teaches to the test. So Q2 is
-judged on lever steps that **no design in this file runs**. Same outputs and recipe conventions as sec. 2.2.
+**Why it exists.** The contrast design G-C (sec. 3.3) is built on the grid of sec. 2.2: the same cysteine, pH, time,
+phosphate, ROOH and GSH steps. Scoring G-C on D01 - D16 would partly score its own cells, which teaches to the test.
 
-| id | recipe A -> B | output |
-|---|---|---|
-| O01 | BR-S -> cysteine 15 | MFT |
-| O02 | BR-S -> cysteine 15 | FFT |
-| O03 | BR-S -> label pH 6.0 | FFT |
-| O04 | BR-S -> label pH 6.0 | MFT |
-| O05 | BR-S -> 130 C | MFT |
-| O06 | BR-S -> 30 min | MFT |
-| O07 | BR-S at 130 C, 30 min -> the same with glucose for ribose | FFT |
-| O08 | BR-S -> + 0.1 M phosphate, label pH 5.5 | furfural |
-| O09 | BR-S -> + linoleate hydroperoxide 0.5 mM (ROOH lever) | MFT |
-| O10 | BR-S -> + glutathione 1 mM (GSH lever) | MFT |
+**What v3 fixed.** v2's set overstated its claim: arm A of 9 of its 10 decisions was BR-S, itself a G-C cell, and
+its B arms interpolated G-C's grid. v3 therefore uses a base that is no cell of any design.
 
-- O07 is FFT, not MFT, so that no off-grid decision rests on the falsified hexose MFT route (D03 / D04's refusal).
-- Their refusals follow sec. 2.3's rows for the same lever. 130 C sits at M5-B's edge, inside its bounded range.
-- They are added to the ensemble's forward runs (9 extra arms per world, sec. 9.2).
+**BR-X:** L-cysteine 12 + D-ribose 12, pea, unbuffered, label pH 5.8, 125 C, 45 min, a_w 0.98, sealed, air. Neither
+its arms nor any B arm below is a cell of any design in sec. 3.
+
+| id | recipe A -> B | output | relation to G-C's grid |
+|---|---|---|---|
+| O01 | BR-X -> cysteine 18 | MFT | inside the grid's span, off its cells (interpolation) |
+| O02 | BR-X -> cysteine 18 | FFT | interpolation |
+| O03 | BR-X -> label pH 6.3 | FFT | interpolation |
+| O04 | BR-X -> 135 C | MFT | interpolation |
+| O05 | BR-X -> 90 min | MFT | interpolation |
+| O06 | BR-X -> + 0.1 M phosphate, label pH 5.8 | furfural | interpolation (G-C holds 0 and 0.2 M at one point) |
+| O07 | BR-X -> + linoleate hydroperoxide 0.5 mM (ROOH lever) | MFT | interpolation (G-C holds 0 and 1 mM at one point) |
+| O08 | BR-X with cysteine 5 -> cysteine 8 | MFT | outside the grid (below cysteine 10: extrapolation) |
+| O09 | BR-X -> label pH 7.0 | FFT | outside the grid (above pH 6.5) |
+| O10 | BR-X at 100 C, 90 min -> + glutathione 1 mM (GSH lever) | MFT | outside the grid (below 120 C) |
+
+**What this still allows.** The interpolating seven still favour a design whose grid spans the lever space. That is a
+legitimate property of a targeted design, so they are kept and reported apart from the extrapolating three (O08 - O10).
+
+- No off-grid decision rests on the falsified hexose MFT route.
+- Their refusals follow sec. 2.3's rows for the same lever. 135 C lies above M5-B's 130 C edge, so O04 carries D10's
+  refusal.
+- They add 12 distinct arms per world (sec. 9.2).
 - Q1 is also reported on them, as a secondary set.
 
 ## 3. The designs
@@ -274,21 +289,24 @@ One model, shared by the generator (sec. 5.1) and the update (sec. 5.3), per rea
 | term | value | applies to |
 |---|---|---|
 | run-to-run noise | the design's printed or requested CV per independent heating: SIDA 10 % (M4, M1c, G-C); M5-B 8 % (its sizing CV; 15 % sensitivity); M5-F 15 % (25 % sensitivity); M5-W 20 %; HS-SPME ratios 20 % (30 % sensitivity); a design that states none takes the same-class reproducibility its case cites, else 20 % | every level |
-| model discrepancy | omega = 0.419 dex per value, shared by a cell's replicates, independent between cells (H0; 0.390 as a sensitivity). The same for every rival | every level and ratio |
+| model discrepancy delta | omega = 0.419 dex per value (H0; 0.390 a sensitivity), shared by a cell's replicates. **v3: between the cells of one study (every cell of one design, and the two arms of one decision) the correlation is rho, measured at step 0 (sec. 5.0) and integrated over its interval: the primary.** rho = 0 (v1's iid), 0.5 and 0.9 are sensitivities. Between designs, and between a design's cells and a decision's arms (another laboratory), the correlation is 0. The same for every rival | every level and ratio |
 | label shares | +-1 % absolute, plus a 1 % mixed-channel floor; the d3 / M+3 overlap as declared in M4 sec. 5.1 | labelled arms |
 | trapping | the OPD artefact as a blank-subtracted term with its own variance (M4 sec. 5.1; M3b sec. 3.2) | trapped arms |
 | floors | the request's LOD where stated; else a declared transfer of 1 % of the lowest predicted level in that design's table, in required agreement over x0.1 - x10. Censored densities (`censored_gaussian_log_density`) | every level |
 | between laboratories | none: every design is one laboratory. H0's tau is never applied to a ratio | -- |
 | pH | cooled and in-situ scales kept apart (`require_ph_scale`); a measured trajectory enters as data, never as a clamp in the scoring model | pH readouts |
 
-**omega correlation (v2).** The iid omega between cells is implausible: a model that is wrong for one pot is likely
-wrong in the same direction for its neighbour.
-- **Neighbours** are cells of one design that differ in one factor, and the two arms of a decision.
-- **The sensitivity:** an equicorrelation rho in {0.5, 0.9} between neighbours (0 elsewhere), applied in the generator
-  and the update alike.
-- It is reported beside every primary result.
-- A second form also applies rho to the total interval's omega term (sec. 5.3): what the interval would be if the
-  shipping rule adopted it. The shipped rule itself (iid, sqrt 2 x omega on a ratio) is the primary.
+**Why rho decides the answer (v3).** A lever is a ratio, and its discrepancy SD is sqrt(2 (1 - rho)) x omega:
+- 0.59 dex at rho = 0 (iid);
+- 0.42 dex at rho = 0.5;
+- 0.19 dex at rho = 0.9.
+
+At 0.59 dex, a perfect design still shows only levers beyond ~0.98 dex (sec. 5.0). So rho, not the designs, can decide
+whether any experiment helps. v2 assumed iid between cells without a source. v3 measures rho on disk (sec. 5.0), and
+the assumed values become sensitivities.
+
+**The shipped rule** (`thiol_relative_only`, iid omega on a ratio) is reported as the sensitivity "as shipped today".
+Shipping the measured rho would be its own sec. 7 change, not this file's.
 
 **The misspecified generator.** This variant adds the same-observable reproducibility term, else the lane's within-lab
 term, a second time beyond what the update assumes (sec. 7, false-credit check). Every metric is reported under it as a
@@ -301,7 +319,7 @@ sensitivity.
 A truth is one **world**: one rival per structural question, plus every continuous coordinate. Rivals are those carried
 under S3: named in a case before results, and not falsified. The incumbent is a rival only where it is not falsified.
 
-| question | carried rivals (equal weights unless sourced) | falsified, never a truth | decisions it moves (declared from structure, before any run) | runnable today? |
+| question | carried rivals (equal weights, fixed in v3: no sourced rival weight exists on disk) | falsified, never a truth | decisions it moves (declared from structure, before any run) | runnable today? |
 |---|---|---|---|---|
 | Q-ph (M1b part (i), the pot's balance) | B1 (phi_cys = 1), B13 (best draws as PR #108; their S3 bands where they exist) | B0 + the shipped centre ledger (CF-084, CF-134) | D01 - D16 (unbuffered sulfur pots) | yes (NumPy, inline coupling) |
 | Q-sup (M1c, thiol supply) | R0, C1, X, X0, R-rel, R-cal, R-sink, R-K | -- | D01 - D10, D12, D15 | R0, C1 yes; the rest with M1c's build |
@@ -332,7 +350,9 @@ case's declared bands:
 - **fitted-unidentified on a search bound** (26 rows), or a rival constant with no band (M5-F capture, R6's oxidant
   load): the reaction-class distribution where a class exists (B55's `ea_class_prior` for Ea; `reaction_families.yml`
   for log k). Otherwise a **simulation-only range** (the search bound), labelled "truth range not S4-sourced". Decisions
-  whose prior-ensemble total-effect index on such coordinates exceeds 0.1 are flagged and reported separately;
+  whose prior-ensemble total-effect index on such coordinates exceeds 0.1 are flagged. **v3: flagged decisions are
+  excluded from the primary denominators** and reported as a sensitivity. A search bound is not a band (S4), and it
+  widens the lever spread that the oracle ceiling (sec. 5.0) rewards;
 - **conflicting:** the band spanning the measurements' own intervals;
 - **structural, physical constant:** fixed. **Withdrawn:** excluded;
 - **case bands** (M1c, M4 sec. 5.2, M5 sec. 5.2, M3 prereg): as declared there, both ends of every required-agreement
@@ -360,13 +380,112 @@ labelled "reduced operator".
 
 ## 5. Synthetic data, the update and its checks
 
+### 5.0 Step 0: the discrepancy correlation and the oracle ceiling (v3; runs first)
+
+Step 0 has two stages, run in this order, each fixed here before it runs. It comes before the early variant (sec. 12)
+and before any design is simulated.
+
+#### 5.0.1 Stage 0c: the correlation rho of the engine's discrepancy between arms of one study
+
+**What it is.** A noise-model estimate on spent and seen data. It credits nothing, fits no constant, scores no rival
+and moves no shipped output. It sets only the discrepancy model of sec. 3.4.
+
+**The units.** Groups g = (study, compound, lane) with k_g >= 2 arms. Each arm needs both a measured value and a shipped
+(B60) engine value already on disk, and the group's arms must carry one laboratory id in
+`docs/reference/contrast_benchmark/lab_ids.yml`. The sources:
+1. `results/validation/contrast_scores.json`: its 81 within-study pairs. The arms are rebuilt from the pairs' benchmark
+   ids.
+2. `results/validation/core_panel_scores.json`: its multi-arm studies (benchmarks of one study, same compound).
+3. `results/validation/kinetic_core_contrast_benchmark_score_v1.json`: its answered within-study cells.
+
+Duplicate arms are counted once.
+
+**The residual** of an arm is r = log10(engine) - log10(measured), in dex.
+- **Excluded:** censored arms (a non-detect, or an engine value below its floor); arms whose absolute output the engine
+  refuses; and arms with no laboratory id.
+- **Primary:** out-of-sample arms only (`out_of_sample` true, or not a fit row of the shipped calibration by the split
+  files).
+- **In-sample arms** are a sensitivity. Their residuals were shrunk by the fit, which biases rho upward, in favour of
+  the designs.
+
+**The estimator.**
+- The pooled within-group variance: sigma_w^2 = sum_g sum_i (r_gi - mean_g r)^2 / sum_g (k_g - 1). The group mean
+  absorbs the study's offset (tau) and the shared part of the discrepancy.
+- **The measurement part**, sigma_m^2: the pooled per-arm measurement variance, from each source's printed replicate SD
+  (dex = log10(1 + CV)). Where none is printed: SIDA 10 %, HS-SPME 20 %.
+- **The ratio discrepancy:** sigma_r^2 = 2 (sigma_w^2 - sigma_m^2) per pair of arms.
+- **The correlation:** rho-hat = 1 - (sigma_w^2 - sigma_m^2) / omega^2, with omega = 0.419 dex. Reported unclipped,
+  and used clipped to [-1, 1]. A negative rho-hat means that within-study residuals scatter more than H0's omega
+  allows: a ratio is then no better than two absolute values.
+- **Robust sensitivity:** sigma_w from the median absolute deviation of the within-group residuals (x 1.4826).
+- **Lanes:** the primary pools the thiol-lane groups. Other lanes are reported separately.
+- **Fallback:** if fewer than 3 studies give out-of-sample groups, in-sample groups are admitted, flagged with their
+  bias.
+
+**The interval.** A cluster bootstrap over studies: 2000 resamples, the 90 % percentile interval. An independence
+chi-square interval is reported beside it.
+
+**The leave-one-study-out check.**
+- Recompute rho-hat dropping each study in turn, and report each.
+- If any leave-one-out value falls outside the bootstrap interval, the primary becomes the **lowest** leave-one-out
+  value: the largest ratio discrepancy, the conservative choice.
+
+**Its use downstream.**
+- Every simulation draws rho per truth from the bootstrap distribution: the primary noise model of sec. 3.4.
+- rho = 0, 0.5 and 0.9 are sensitivities.
+
+**Cost.** It reads JSON already on disk, with no engine run: < 0.1 core-h of compute and ~2 - 3 h attended.
+
+**Seen by the author before freezing it:** one pair of `contrast_scores.json` (Schibilsky 2019 HMF, pH 5 vs 8),
+printed while inspecting the file's structure. The plan's summary error statistics are in sec. 1.
+
+#### 5.0.2 Stage 0a: the oracle ceiling, per decision
+
+**The oracle** is a perfect design: it reveals each truth's L_d(theta_i) exactly. What remains is the discrepancy of
+the formulator's own lever:
+- **The bench truth:** T_d(i) = L_d(theta_i) + delta_d(i), with delta_d ~ N(0, sigma_r^2) and sigma_r = sqrt(2 (1 -
+  rho)) x omega (rho from stage 0c);
+- **The oracle's interval:** L_d +- 1.645 sigma_r;
+- **Shown** when |L_d| > 1.645 sigma_r (the rival is known, so S3 agrees trivially);
+- **Correct** when sign(L_d) = sign(T_d).
+
+**The ceiling G*_d** is the oracle's net gain of sec. 7 (P_right - P_wrong|worth, given |T_d| >= 0.3 dex), together
+with the oracle's P_wrong.
+
+**Eligible decisions.** A decision is **eligible** when its oracle meets sec. 7's bar: G*_d >= 0.6 and P_wrong <= 0.1.
+- **Only eligible decisions judge the designs** (secs. 7.1 - 7.2).
+- A decision that is not eligible is **omega-bound**: no design can show it, under the current discrepancy.
+
+**Reported per decision:**
+- G*_d and the oracle's P_wrong;
+- **the reduction needed:** sigma*_d, the largest sigma_r at which the oracle meets the bar, and the ratio
+  sigma_r / sigma*_d;
+- for the table, the sigma_r at which >= 2 decisions, and a majority of them, would become eligible.
+
+**When and on what.**
+- At step 0, over a 512-world prior ensemble with the rivals runnable that day (the early variant's set, sec. 12). Its
+  envelope is flagged incomplete where rivals are missing.
+- The full run recomputes it on its own ensemble at no extra forward cost, and **that recomputation sets the full run's
+  eligible set.** The early variant uses step 0's.
+
+**Cost.** 512 worlds x 28 decision arms (16 + 12 off-grid) x 0.42 - 1.5 s = **1.7 - 6.0 core-h** (11.5 at the high 2.9 s): 0.9 - 3 h
+wall at 2 processes, 0.2 - 0.8 h at 8 cores. Attended: ~6 - 8 h, the world sampler and decision runner that the early variant
+reuses.
+
 ### 5.1 Generating the data
 
 - **Ensemble.** N = 2048 worlds (sec. 4).
 - **Truths.** Every world serves as a truth once. Its data are scored against the other N - 1 worlds (leave-one-out),
   so truths are drawn outside the scoring ensemble, as the judge requires.
-- **Per truth i and design g:** y_g(i) = the world's prediction on g's cells + omega discrepancy per cell + run noise
-  per replicate, censored at the floors (sec. 3.4).
+- **Per truth i and design g:** y_g(i) = the world's prediction on g's cells + the discrepancy delta per cell (omega,
+  correlated at rho within the design's study, sec. 3.4) + run noise per replicate, censored at the floors.
+- **The two targets (v3, declared).** The generator's reality is the model plus delta, so two truths exist:
+  - **L_d(theta_i)**, the model's lever: the target of every **model-part** quantity (shrinkage, the model-part
+    interval, A2's model-part coverage);
+  - **T_d(i) = L_d(theta_i) + delta_d(i)**, the formulator's lever at the bench: the target of every **total**
+    quantity (P_right, P_wrong, the total interval's coverage). delta_d is drawn as in sec. 5.0.2, independent of
+    every design's delta. Its arms are another laboratory's pots; that choice is conservative for designs that
+    re-run the decision's own recipe.
   - A union design (G-M5, G-REC, G-C+REC) takes its parts' data from the same truth world, so its likelihood is the
     product of theirs.
   - K = 1 noise draw for the metrics.
@@ -390,15 +509,15 @@ labelled "reduced operator".
 - **The estimate.** The best linear predictor of L_d from y_g:
   - m_BL(y) = E L_d + Cov(L_d, y_g) Cov(y_g)^-1 (y - E y_g);
   - Var_BL(L_d | y_g) = Var(L_d) - Cov(L_d, y_g) Cov(y_g)^-1 Cov(y_g, L_d).
-- **Covariances.** Ledoit-Wolf shrinkage of Cov(y_g); the ridge is chosen by inner cross-validation. Cell means of the
-  replicates are used, so p_g <= ~500 for G-REC.
+- **Covariances.** Ledoit-Wolf shrinkage of Cov(y_g), with its analytic intensity and no tuning (v3: ridge-CV dropped,
+  so there is one choice and no analyst freedom). Cell means of the replicates are used, so p_g <= ~500 for G-REC.
 - **Cross-fitting.** 5-fold: the coefficients are fitted on four folds and applied to the fifth. Each truth's m_BL and
   the reported Var_BL are therefore out-of-fold.
 - **Shrinkage:** s_BL(d, g) = 1 - Var_BL(L_d | y_g) / Var(L_d), with Var_BL the out-of-fold mean squared error.
   - A linear predictor's mean squared error is at least the Bayes posterior's expected variance. So **s_BL is a
     conservative bound on the Bayes shrinkage**, up to Monte Carlo error.
   - Width ratios use sqrt(1 - s_BL).
-- **Its decision rule.** The formulator reads N(m_BL(y), Var_BL + the omega term). The rule is scored empirically over
+- **Its decision rule.** The formulator reads N(m_BL(y), Var_BL + sigma_r^2), the total interval for T_d. The rule is scored empirically over
   the truths (sec. 6), so its P(wrong) is a frequency of that rule, not a model claim.
 - **Limits.** It approximates the mixture posterior (I_post), not the S3 union (I_ship). Credit (sec. 5.4) and the S3
   union are PSIS-only.
@@ -428,12 +547,16 @@ estimator 2.
 - It is never read as estimated, and never counted as relevant or as not relevant.
 - v1's rule (unresolved counts as shrinkage >= 25 %) let the fallback refute the worry. It is removed.
 
-**How the estimators combine, per (d, g) cell.**
-- **Relevant:** the cell meets sec. 7's bar under an estimator that passed its checks (sec. 5.5). For PSIS, this holds
-  only on its resolved truths, and only if they are >= 80 % of all truths.
-- **Not relevant:** every validated estimator misses the bar. For PSIS, that again needs >= 80 % resolved.
-- **UNDECIDED** otherwise.
+**How the estimators combine, per (d, g) cell (v3: BL alone can never make a cell relevant).**
+- **Relevant** only when PSIS is validated (sec. 5.5), resolved on >= 80 % of the truths, and the cell meets sec. 7's
+  bar with S3's every-rival sign agreement.
+- **Not relevant** when:
+  - PSIS is validated and resolved (>= 80 %) and the cell misses the bar; or
+  - PSIS is not validated or not resolved, and the validated BL rule misses the bar. Such a cell is flagged "BL-only".
+- **UNDECIDED** otherwise. That includes a cell where BL meets the bar but PSIS cannot confirm it under S3.
 - A verdict of sec. 7 that UNDECIDED cells could flip is itself UNDECIDED.
+- **Sensitivity:** BL-only cells re-read as UNDECIDED. BL is a conservative bound, so it can miss a bar the Bayes rule
+  meets. This sensitivity shows how much the "not relevant" reading leans on it.
 
 ### 5.3 The posterior quantities
 
@@ -450,13 +573,14 @@ For decision d, design g and truth i:
   - if one rival is credited under M1.1 (sec. 5.4) against every survivor, I_ship is that rival's interval alone.
 - **Both intervals have two parts:**
   - the **model part**, without omega: the only part a design can shrink;
-  - the **total**, which convolves each world's lever with the shipped ratio-interval omega term (`thiol_relative_only`'s
-    rule): what the formulator reads. On a ratio that term alone is sqrt 2 x 0.419 = 0.59 dex, about +-0.98 dex at 90 %.
+  - the **total**, which convolves each world's lever with the ratio discrepancy N(0, sigma_r^2), sigma_r =
+    sqrt(2 (1 - rho)) x omega, rho from step 0 (sec. 5.0): what the formulator reads, and what covers T_d. "As
+    shipped today" (iid, 0.59 dex, about +-0.98 dex at 90 %) is a sensitivity.
 - **"Shown" (v2).** A direction is shown when:
   - the total 90 % interval excludes zero;
   - and, for I_ship, every surviving rival agrees in sign (S3).
 
-  The BL rule (sec. 5.2) uses its own total interval, N(m_BL, Var_BL + omega term).
+  The BL rule (sec. 5.2) uses its own total interval, N(m_BL, Var_BL + sigma_r^2).
 
 ### 5.4 Credit inside the simulation (M1.1)
 
@@ -481,11 +605,11 @@ judge uses p(y_dec | y_spent)). The prior is therefore wider than the judge's.
 | check | what | pass |
 |---|---|---|
 | A1 per update | k-hat and ESS of every (truth, design) PSIS weight set | k-hat < 0.7 and ESS >= 100; the unresolved fraction is reported per design |
-| A2 calibration (simulation-based) | over the truths, the coverage of I_post (model part) for the true L_d, and the uniformity of the truth's rank in its posterior (10 bins, chi-square, Holm across d x g cells) | coverage in [0.85, 0.95] and Holm p >= 0.01, in >= 80 % of cells |
+| A2 calibration (simulation-based) | over the truths: the coverage of I_post's **model part for L_d**, and of its **total for T_d** (v3: each interval against its own target); and the uniformity of the truth's rank in its posterior (10 bins, chi-square, Holm across d x g cells) | coverage in [0.85, 0.95] for both, and Holm p >= 0.01, in >= 80 % of cells |
 | A3 Laplace cross-check (the JAX fit path) | G-C and G-M4; 10 truths each; one rival; a sub-problem of <= 5 coordinates and <= 4 pots, the rest held at the truth. `fit.fit` with the exact Jacobian, then `fit.laplace`, against reweighting a dedicated 1024-draw sub-ensemble on the same sub-problem | posterior mean within 0.25 posterior sd and sd ratio within [0.8, 1.25] in >= 8 of 10 truths per design. A Laplace fit pressed against a band wall is reported, not counted |
 | A4 exact quadrature | a 2-coordinate sub-problem (`quadrature_lppd`) against reweighting | lppd within 0.05 nats |
 | A5 mini-model parity | sec. 5.1 | 0.1 dex |
-| A6 Bayes-linear (v2) | the out-of-fold MSE against the in-fold MSE (overfitting); the coverage of the BL total interval over the truths; s_BL against PSIS's variance shrinkage on the cells where PSIS is resolved (s_BL must not exceed it beyond Monte Carlo error, since BL is the conservative bound) | out-of-fold / in-fold MSE <= 1.25 and coverage in [0.85, 0.95], in >= 80 % of cells; the bound holds in >= 90 % of resolved cells |
+| A6 Bayes-linear (v2; targets fixed in v3) | the out-of-fold MSE against the in-fold MSE (overfitting); the coverage of N(m_BL, Var_BL) for **L_d** and of N(m_BL, Var_BL + sigma_r^2) for **T_d** (never the model part against T_d, nor the total against L_d: v2's window failed exactly when a design was informative); s_BL against PSIS's variance shrinkage on the cells where PSIS is resolved (s_BL must not exceed it beyond Monte Carlo error, since BL is the conservative bound) | out-of-fold / in-fold MSE <= 1.25 and coverage in [0.85, 0.95], in >= 80 % of cells; the bound holds in >= 90 % of resolved cells |
 
 **Validation per estimator (v2).**
 - **PSIS is validated** if A1 (resolved >= 80 % of truths per design), A2, A3 and A4 pass.
@@ -495,8 +619,14 @@ judge uses p(y_dec | y_spent)). The prior is therefore wider than the judge's.
 
 ### 5.6 Run order
 
-0. **Freeze.** This file's commit is recorded. Then **step 0**: the refusal state of every decision in the prior
-   ensemble, under the rules in force that day. PR #108's rule is used if merged, else its draft.
+0. **Freeze.** This file's commit is recorded. Then **step 0**, in this order:
+   - stage 0c (sec. 5.0.1): rho;
+   - stage 0a (sec. 5.0.2): the oracle ceilings and the eligible set;
+   - the refusal state of every decision in the prior ensemble, under the rules in force that day. PR #108's rule
+     is **pinned to commit 5e61fed0** (its head on 2026-11-07, open). If #108's refusal set moves before the run
+     (a new commit, or its merge with changes), step 0's refusal stage reruns at the new commit, and the run
+     reports both.
+   Then the early variant (sec. 12) may run; then the full run's steps 1 - 8.
 1. **Builds and parity.** List what is runnable (sec. 4.1); the parity checks (A5).
 2. **Pilot.** 32 worlds, timed. The cost is re-projected (sec. 9.3).
 3. The ensemble.
@@ -520,7 +650,7 @@ assumption, and it is stated in sec. 1.
 This is the case where the true structure is one nobody carried. It reuses the same forward ensemble at no extra
 forward cost.
 
-**Reported per (d, g):** P(shown and wrong) and P(shown and correct, |L| >= 0.3 dex) under leave-one-rival-out, as the
+**Reported per (d, g):** P_wrong and P_right (against T_d, sec. 6 item 1) under leave-one-rival-out, as the
 worst rival r and the mean over r.
 
 **What it can change.** A cell that is relevant under sec. 7's bar but has P(shown and wrong) > 0.1 under
@@ -533,18 +663,16 @@ leave-one-rival-out is marked **"relevant only in a closed world"**.
 All are means over the truths, with a 90 % bootstrap interval over truths (1000 resamples). "Prior" is the same
 quantity under the ensemble with no data. Each is computed under both estimators where it is defined.
 
-1. **The answer a formulator acts on (v2: the primary metric), on the TOTAL interval.**
-   - **The true lever** is L_d(theta_i). A lever is **worth acting on** when |L_d(theta_i)| >= 0.3 dex (a factor of
-     2).
-   - **P_right(d, g)** = P(shown, and the shown sign is correct | the true lever is worth acting on).
-   - **P_wrong(d, g)** = P(shown, and the shown sign is wrong), over every truth with |L| > 0.01 dex (PR #108's sign
-     resolution).
+1. **The answer a formulator acts on (the primary metric), on the TOTAL interval, against T_d (v3).**
+   - **The bench lever** is T_d(i) (sec. 5.1). It is **worth acting on** when |T_d| >= 0.3 dex (a factor of 2).
+   - **P_right(d, g)** = P(shown, and the shown sign is correct | worth acting on).
+   - **P_wrong|worth(d, g)** = P(shown, and the shown sign is wrong | worth acting on).
+   - **P_wrong(d, g)** = P(shown and wrong) over every truth with |T_d| > 0.01 dex (PR #108's sign resolution).
+   - **The net gain** G(d, g) = P_right - P_wrong|worth (sec. 7 derives the bar from it).
    - P(refused) is reported beside them.
-   - "Shown" is defined in sec. 5.3. With I_ship it is S3's rule plus a total interval that excludes zero; with BL, the
-     BL total interval excludes zero.
-   - Also reported: the **omega-bound** flag, the prior probability that |L_d| exceeds the omega term's 90 %
-     half-width (~0.98 dex). A decision whose levers rarely exceed it cannot be shown by any design. That is a finding
-     about the lever table, not about the designs.
+   - "Shown" is defined in sec. 5.3: with I_ship, S3's rule plus a total interval that excludes zero; with BL, the BL
+     total interval excludes zero.
+   - **The oracle ceiling** G*_d and the eligibility of each decision come from step 0 (sec. 5.0.2).
 2. **Expected shrinkage of the model part (secondary in v2).**
    - PSIS: s(d, g) = E_i[1 - width(I_ship,model | y_g(i)) / width(I_ship,model)], with the median, the I_post version
      and the total-interval version.
@@ -564,7 +692,9 @@ quantity under the ensemble with no data. Each is computed under both estimators
    - (a) **V_rank(g):** the sum of `rank`'s VoI scores over the rows design g targets (frozen mapping, sec. 6.1).
    - (b) The Kendall distance between `rank`'s row ordering recomputed under the prior ensemble's envelope and under
      each posterior. Rows refused under step 0's rules drop, as `rank` drops them.
-   - (c) V_real(g): the number of decisions meeting sec. 7.1's bar, and the mean s_BL over the decisions.
+   - (c) **V_real(g) = the mean s_BL(d, g) over the 17 computable decisions** (v3: one choice). It is continuous and
+     defined whether or not any decision is eligible, so the Spearman of sec. 7.3 cannot be undefined by ties at zero.
+     The count of decisions meeting the bar is reported beside it, not used.
    - (d) The Spearman correlation between V_rank and V_real across designs (sec. 7.3).
 5. **The effective number of independent decisions (v2).** Fifteen of the 17 share BR-S and Q-ph, so they are not
    17 independent tests. Two estimates, both from the prior ensemble:
@@ -580,7 +710,7 @@ quantity under the ensemble with no data. Each is computed under both estimators
 7. **Information per budget unit (v2).** For each design:
    - sum_d s_BL(d, g) per heating;
    - the same per (cell x readout): each readout of each cell counts once;
-   - the number of decisions meeting the bar, per 100 heatings.
+   - the number of eligible decisions meeting the bar, per 100 heatings.
 
 ### 6.1 The frozen `rank` mapping (today's 24 rows, `experiment_value_ranking.md`)
 
@@ -607,80 +737,118 @@ quantity under the ensemble with no data. Each is computed under both estimators
   interval's width in dex, and DR the threshold-anchored relevance.
 - **What it lacks.** It has no notion of a design, of a lever, or of what a measurement would change. V_rank above is
   this file's construction on top of it, so Q3 tests that construction, not a design ranking `rank` makes.
-- **The coverage.** Even so, under the strict rule the construction gives zero value to 7 of the 12 single designs
-  (G-M4, G-M4+, G-M3, G-M1c, G-SPL, G-LOSS, G-FUR). These are the twelve of sec. 3.2 that are not unions: G-M4, G-M4+,
-  G-M5B, G-M5F, G-M5W, G-M3, G-M1c, G-SPL, G-PHL, G-LOSS, G-FUR, G-C. Only one of `rank`'s 24 rows (2-acetylthiazole) is
+- **The design sets (v3: one definition, used everywhere).**
+  - **The on-record singles (11):** G-M4, G-M4+, G-M5B, G-M5F, G-M5W, G-M3, G-M1c, G-SPL, G-PHL, G-LOSS, G-FUR.
+  - **The unions:** G-M5, G-REC, G-C+REC.
+  - **The `rank` set (12):** the 11 on-record singles plus G-C.
+- **The coverage.** Even so, under the strict rule the construction gives zero value to 7 of the 12 designs in the
+  `rank` set (G-M4, G-M4+, G-M3, G-M1c, G-SPL, G-LOSS, G-FUR). Only one of `rank`'s 24 rows (2-acetylthiazole) is
   a meaty thiol-lane row.
 - **The minimal fix** is a follow-up (sec. 11). It is not implemented here.
 
 ## 7. Pre-registered thresholds and verdicts
 
-**The denominator** is the 17 decisions whose lever interval is computable: D01 - D16 and D18. D17 and D19 are
-structural. Every count is reported with n_eff and the per-question count (sec. 6 items 5 - 6).
+**The denominator.**
+- The 17 decisions whose lever interval is computable: D01 - D16 and D18. D17 and D19 are structural.
+- **v3: the designs are judged only on the ELIGIBLE decisions** of step 0 (sec. 5.0.2), E <= 17, with the flagged
+  decisions of sec. 4.2 excluded.
+- Every count is reported with n_eff and the per-question count (sec. 6 items 5 - 6).
 
-**The bar, derived from the primary metric (v2).** A formulator reads the shown direction and runs the lever at the
-bench. The bar is what makes that worth doing.
-- **P_right >= 0.7.** Following the tool must beat a blind first test (P = 0.5 by symmetry) by enough to change what a
-  formulator does: 0.7 makes three first tests in ten fail instead of five.
-- **P_wrong <= 0.1.** At most one shown direction in ten may send the formulator the wrong way. A calibrated 90 %
-  interval that excludes zero errs at most 5 % one-sided; 0.1 allows for miscalibration and no more.
-- **|L| >= 0.3 dex.** Only a lever of a factor of 2 or more counts as worth acting on. Below that, being "right" about
-  the sign is not a decision.
-- **A design is decision-relevant for d** when both P_right and P_wrong meet their bars after the update. A decision
-  already meeting them under the prior counts as relevant only if P_right rises by >= 0.1.
-- **"A majority of the lever table"** is >= 9 of the 17, the owner's statement of the worry. It is reported with n_eff
-  and per question.
+**The bar (v3: re-derived; the threshold is a chosen value, and says why).**
+- **The formulator's choice.** A formulator either runs a lever's first bench test in the direction the tool shows, or,
+  when the tool shows none, runs it blind and is right half the time (v2 treated "not shown" as a failure; it is a
+  coin).
+- **The success rate.** For a lever worth acting on, the first test goes the right way with probability
+  S = P_right + 0.5 x P(not shown | worth) = 0.5 + 0.5 x (P_right - P_wrong|worth) = 0.5 + 0.5 x G.
+- **The bar.**
+  - **G >= 0.6, that is S >= 0.8.** The tool must remove at least 60 % of the failed first tests a blind formulator
+    makes (0.5 -> 0.2). **0.8 is a chosen value**, not a measured one: it is the smallest gain judged worth building a
+    lever table for. Read on P_right alone, it is v2's 0.7 when P_wrong|worth is at its cap of 0.1.
+  - **P_wrong <= 0.1, over all truths.** At most one shown direction in ten may send a formulator the wrong way. A
+    calibrated 90 % interval that excludes zero errs at most 5 % one-sided; 0.1 allows for miscalibration and no
+    more.
+  - **|T_d| >= 0.3 dex** defines "worth acting on": a factor of 2.
+- **A design is decision-relevant for an eligible d** when G and P_wrong meet the bar after the update, and G rises by
+  >= 0.1 over the prior.
+- **"A majority":** >= ceil(E / 2) of the eligible decisions (9 of 17 when all are eligible).
 - **Secondary:** model-part shrinkage s >= 0.25 (a variance ratio of 0.56, ~1.8 times the information held) on either
-  estimator.
+  estimator, over all 17 decisions.
 
 ### 7.1 The worry (Q1)
 
-- **Primary.** The bar of sec. 7 on the total interval, under the combination rule of sec. 5.2.
-- **WORRY CONFIRMED** if every single on-record design (G-M4, G-M4+, G-M5B, G-M5F, G-M5W, G-M5, G-M3, G-M1c, G-SPL,
-  G-PHL, G-LOSS, G-FUR) and the on-record union G-REC are each decision-relevant for **fewer than 9 of the 17**
-  decisions.
-- **WORRY REFUTED** if any of them reaches >= 9.
+The verdict has two layers, read in order.
+
+**Layer 1, the ceiling (step 0, before any design is simulated).** If **fewer than 2 decisions are eligible**, the
+verdict is, verbatim:
+
+> **"CONFIRMED (omega-bound): the lever table cannot show directions under the current discrepancy, whatever the
+> experiments."**
+
+It is reported with:
+- the reduction needed: sigma*, the ratio discrepancy at which >= 2 decisions, and a majority, would become eligible;
+- the factor by which the measured sigma_r would have to fall to reach sigma*.
+
+In that case no design verdict is given. Q2 is "not informative (omega-bound)". The design metrics are reported
+descriptively, and Q3 still runs on s_BL.
+
+**Layer 2, the designs (only if E >= 2).** The primary is sec. 7's bar on the eligible decisions, under the
+combination rule of sec. 5.2.
+- **WORRY CONFIRMED (designs)** if every on-record single (the 11 of sec. 6.1) and both on-record unions (G-M5,
+  G-REC) are decision-relevant for **fewer than ceil(E / 2)** eligible decisions.
+- **WORRY REFUTED** if any of them reaches ceil(E / 2).
 - **UNDECIDED** otherwise. That covers two cases:
   - UNDECIDED cells could flip the verdict (sec. 5.2);
-  - the borderline rule fails: a cell is borderline when the bootstrap interval of P_right spans 0.7 or that of P_wrong
+  - the borderline rule fails: a cell is borderline when the bootstrap interval of G spans 0.6 or that of P_wrong
     spans 0.1, and a verdict stands only if it survives flipping every borderline cell against itself.
-- **Reported beside it, not deciding:**
-  - the per-question count and n_eff;
-  - the closed-world-only cells (sec. 5.7);
-  - the secondary (model-part shrinkage) verdict on both estimators;
-  - the composite: P(the refusal lifts) >= 0.5 for a data-liftable refusal also counts;
-  - the off-grid set;
-  - the complete-envelope decisions;
-  - the misspecified generator;
-  - omega 0.390;
-  - omega correlation rho 0.5 and 0.9.
-- **Harmful.** A design for which P_wrong rises above 0.1 on any decision is listed as harmful there, whatever else it
-  does.
+- **The omega-bound share** (17 - E decisions) is reported with every layer-2 verdict, as the part of the lever table
+  no design can reach.
 
-### 7.2 Targeting (Q2), judged on the off-grid set (v2)
+**Reported beside both layers, not deciding:**
+- the per-question count and n_eff;
+- the closed-world-only cells (sec. 5.7);
+- the BL-only sensitivity (sec. 5.2);
+- the secondary (model-part shrinkage) verdict on both estimators;
+- the composite: P(the refusal lifts) >= 0.5 for a data-liftable refusal also counts;
+- the off-grid set;
+- the complete-envelope decisions;
+- the flagged decisions of sec. 4.2;
+- the misspecified generator;
+- omega 0.390;
+- rho in {0, 0.5, 0.9};
+- "as shipped today" (iid).
 
-- **The primary set** is the 10 off-grid decisions O01 - O10 (sec. 2.4). No design runs their steps, so G-C is not
-  scored on its own cells.
-- **LIST MIS-TARGETED** if G-C is decision-relevant for >= 3 more off-grid decisions than the best single on-record
-  design with a budget <= 96 heatings (G-M4, G-M5 and its parts, G-M3, G-SPL, G-PHL, G-LOSS, G-FUR), and the bootstrap
-  90 % interval of that difference excludes 0. (Three of ten is the off-grid analogue of v1's five of seventeen.)
-- **Not mis-targeted** if the difference is <= 0 with its interval excluding +3. Otherwise inconclusive.
-- **The secondary set** repeats the test on D01 - D16 and D18, flagged "on-grid: partly G-C's own cells".
-- **Reported beside it:**
-  - G-C against G-REC (394 heatings, four times the budget);
-  - what G-REC adds to G-C (G-C+REC vs G-C): the value of the mechanism experiments once the contrasts are known;
-  - the information per heating and per cell x readout of each (sec. 6 item 7).
+**Harmful.** A design for which P_wrong rises above 0.1 on any decision is listed as harmful there, whatever else it
+does.
+
+### 7.2 Targeting (Q2), judged on the eligible off-grid decisions
+
+- **The primary set** is the eligible members of O01 - O10 (sec. 2.4), E_O of them.
+- If **E_O < 2**, Q2 is **"not informative (omega-bound)"**. v2 would have scored 0 - 0 as a tie.
+- **LIST MIS-TARGETED** if G-C is decision-relevant for >= m more eligible off-grid decisions than the best on-record
+  single with a budget <= 96 heatings (G-M4, G-M5B, G-M5F, G-M5W, G-M3, G-SPL, G-PHL, G-LOSS, G-FUR), or the union
+  G-M5, and the bootstrap 90 % interval of that difference excludes 0.
+  - m = max(1, ceil(0.3 x E_O)).
+  - The 0.3 is **the author's choice** (v2's "3 of 10", rescaled; not asked for by the premortem; see the revision
+    log).
+- **Not mis-targeted** if the difference is <= 0 with its interval excluding +m. Otherwise inconclusive.
+- **Reported:**
+  - the interpolating (O01 - O07) and extrapolating (O08 - O10) subsets apart;
+  - the secondary on-grid set (D01 - D16, D18), flagged "on-grid: partly G-C's own cells";
+  - G-C against G-REC (394 heatings);
+  - G-C+REC against G-C;
+  - the information per heating and per cell x readout (sec. 6 item 7).
 
 ### 7.3 `rank`'s first validation (Q3)
 
-- **Coverage.** `rank` scores rows, not designs (sec. 6.1). If V_rank(g) = 0 for at least half of the single designs,
-  the verdict is **`rank` CANNOT VALUE DESIGNS**. By the mapping this is expected; the run confirms it under the system
-  rule too.
-- **Ordering.** The Spearman rho between V_rank and V_real (sec. 6 item 4c) over the 12 single designs, ties at
-  mid-rank.
+- **Coverage.** `rank` scores rows, not designs (sec. 6.1). If V_rank(g) = 0 for at least half of the `rank` set, the
+  verdict is **`rank` CANNOT VALUE DESIGNS**. By the mapping this is expected; the run confirms it under the system rule
+  too.
+- **Ordering.** The Spearman rho between V_rank and V_real = mean s_BL (sec. 6 item 4c) over the 12 designs of the
+  `rank` set, ties at mid-rank. It does not depend on eligibility.
   - **VALIDATED** if rho >= the one-sided 5 % permutation critical value (~0.50 at n = 12).
   - **CONTRADICTED** if rho <= 0 and the design with the largest V_real has V_rank = 0 or the lowest V_rank.
-  - Otherwise **INCONCLUSIVE**.
+  - Otherwise **INCONCLUSIVE**. That includes the case where V_rank or V_real is constant, so that the correlation is
+    undefined.
   - Repeated on the five designs with V_rank > 0 (G-M5B, G-M5F, G-M5W, G-PHL, G-C). At n = 5 only rho >= 0.9 reaches
     one-sided p < 0.05; this is stated so the small-n result is not over-read.
 - **The ordering change** (sec. 6 item 4b) is reported per design, with no threshold.
@@ -746,8 +914,8 @@ NumPy figure and the JAX predictor's.
 ### 9.2 The projection (v2)
 
 Per world:
-- **145 network integrations:**
-  - 25 distinct decision arms: the 16 of sec. 2.2 (D17 and D19 are not run) and 9 off-grid arms (sec. 2.4);
+- **148 network integrations:**
+  - 28 distinct decision arms: the 16 of sec. 2.2 (D17 and D19 are not run) and 12 off-grid arms (sec. 2.4);
   - 11 `rank` benchmark pots (24 rows);
   - 109 network design cells: G-M1c 50, G-SPL 7, G-LOSS 5, G-FUR 3, G-PHL 12, G-C 32;
 - **plus ~60 mini-model cells** (G-M4 32, G-M5 19, G-M3 6) at <= 0.1 s.
@@ -758,17 +926,18 @@ omega-correlation forms are array work on the same forward runs.
 
 | item | central | low | high |
 |---|---|---|---|
-| pilot, 32 worlds | 2.0 | 0.6 | 3.8 |
-| ensemble, 2048 worlds | 127.1 | 38.1 | 242.6 |
-| array work: BL (5-fold, ridge CV), PSIS, nulls, leave-one-rival-out, rho in {0, 0.5, 0.9}, metrics | 4.0 | 4.0 | 4.0 |
+| step 0: stage 0a, 512 worlds x 28 arms (stage 0c: < 0.1) | 6.0 | 1.7 | 11.5 |
+| pilot, 32 worlds | 2.0 | 0.6 | 3.9 |
+| ensemble, 2048 worlds | 129.7 | 38.8 | 247.6 |
+| array work: BL (5-fold, Ledoit-Wolf), PSIS, nulls, leave-one-rival-out, rho in {0, 0.5, 0.9}, metrics | 4.0 | 4.0 | 4.0 |
 | A3 Laplace check: 20 updates of ~4 pots (~3.3 min each) plus a 2 x 1024-draw sub-ensemble | 4.5 | 2.1 | 7.7 |
 | A4 quadrature | 0.2 | 0.2 | 0.2 |
-| contingency (10 %) | 13.8 | 4.5 | 25.8 |
-| **total, core-hours** | **152** | **50** | **284** |
-| **wall-clock at 2 processes** (this task's limit) | **76 h** | **25 h** | **142 h** |
-| **wall-clock at 8 cores** (the owner's standing cap) | **19 h** | **6 h** | **36 h** |
+| contingency (10 %) | 14.6 | 4.7 | 27.5 |
+| **total, core-hours** | **161** | **52** | **302** |
+| **wall-clock at 2 processes** (this task's limit) | **80 h** | **26 h** | **151 h** |
+| **wall-clock at 8 cores** (the owner's standing cap) | **20 h** | **7 h** | **38 h** |
 
-**Attended work: 32 - 45 h.**
+**Attended work: 34 - 48 h** (step 0c adds 2 - 3 h; stage 0a's sampler is counted in the harness).
 - The harness: world sampler from the S1 record and the case bands, rival switch registry, generators per design,
   metrics, `rank` mapping: 14 - 20 h.
 - The two estimators with checks A1 - A6, and the leave-one-rival-out run: 5 - 7 h.
@@ -790,7 +959,7 @@ builds.
 ### 9.3 The pre-declared reductions
 
 - If the pilot projects more than 48 h of wall-clock at the cores granted, N falls to 1024. The central total falls to
-  ~82 core-h: ~10 h at 8 cores, ~41 h at 2.
+  ~90 core-h: ~11 h at 8 cores, ~45 h at 2.
 - Monte Carlo error then grows by ~sqrt 2. It is reported, and the borderline rule of sec. 7.1 absorbs it.
 - Paid Colab (CPU, many cores) is an option to propose to the owner, not to assume: draws only, scored locally. JAX batch
   draws gave no CPU gain at equal tolerance (PR #74), so a GPU is out until a CPU-vs-GPU benchmark says otherwise.
@@ -798,12 +967,13 @@ builds.
 ## 10. Before the freeze
 
 1. **An independent review** whose job is to break this design (sec. 7 item 8). Done for v1 (premortem: "freeze with
-   edits"); v2 applies edits 1 - 10. **A confirmation read of v2** checks that each edit is applied as asked. In
-   particular it checks:
-   - the BL estimator's conservativeness claim and its cross-fitting;
-   - the bar of sec. 7;
-   - the off-grid set;
-   - the early variant's exclusions.
+   edits"); v2 applied edits 1 - 10. The confirmation of v2 returned "not confirmed", and v3 answers its items 1 - 7.
+   **A confirmation read of v3** checks that each item is applied as asked. In particular it checks:
+   - stage 0c's estimator, unit selection and leave-one-study-out rule;
+   - the oracle ceiling and the eligibility rule;
+   - the two targets (L_d and T_d) in A2 and A6;
+   - the BL-cannot-credit rule;
+   - the rebuilt off-grid set.
 2. **Answers to every objection** in this file's revision log.
 3. **The freeze commit recorded here.** Then sec. 5.6's step 0.
 
@@ -821,9 +991,10 @@ builds.
 2. **The scope list of sec. 2.2** (oil type and level, heme, yeast extract, protein amines, cooking method, sulfur a_w,
    Strecker) feeds W5's lever-table scope note.
 
-## 12. The early variant (PARTIAL; pre-registered, v2)
+## 12. The early variant (PARTIAL; pre-registered, v2; v3: after step 0)
 
-**What it is.** A subset that runs before A2b, on rivals that already run in the NumPy engine. It **cannot decide sec.
+**What it is.** A subset that runs before A2b, on rivals that already run in the NumPy engine. **It runs after step 0**
+(sec. 5.0), with step 0's rho and eligible set. It **cannot decide sec.
 7.1**: it lacks every on-record design but three, and eight of the 17 decisions. A2b is needed only for Q-hex (D03 /
 D04); the rest of what it lacks waits on M5's switch, M1c's build and the reduced operator.
 
@@ -841,7 +1012,7 @@ D04); the rest of what it lacks waits on M5's switch, M1c's build and the reduce
   - G-LOSS;
   - G-FUR;
   - G-SPL with its ex-situ OPD arm only, plus B3 (4 cells).
-- **Exclusions inside G-C, declared here (beyond the coordinator's list, with the reason).** Two kinds of readout would
+- **Exclusions inside G-C: the author's own change (v2), not asked for by the premortem; see the revision log.** Two kinds of readout would
   be generated by a structure already falsified, so they are dropped from the synthetic data:
   - the MFT readouts of glucose cells (the hexose MFT route, Q-hex);
   - the thiol readouts of the ROOH cells (Q-fat, whose R0 is falsified and whose rivals are not built).
@@ -857,13 +1028,16 @@ D04); the rest of what it lacks waits on M5's switch, M1c's build and the reduce
 - **Cost.** 1024 x 53 x 0.42 - 1.5 s = **6 - 23 core-h**, plus ~0.5 h of array work: **~1 - 3 h wall at 8 cores**,
   ~3 - 12 h at 2 processes. Attended: ~8 - 12 h, most of it the harness the full run reuses.
 - **What it reports, and the only reading allowed.**
-  - Per-decision P_right, P_wrong, the omega-bound flag and s_BL for its four designs.
+  - Per-decision G, P_right, P_wrong, eligibility and s_BL for its four designs.
   - n_eff on its nine decisions.
   - Whether the estimators pass their checks on real ensemble shapes. That makes it the full run's pilot for A1, A2
     and A6.
-  - **An indicator, never a verdict.** If G-C meets the bar of sec. 7 for 0 of the 9 decisions and the omega-bound flag
-    holds for >= 7 of them, it records: "the full run's Q1 is likely settled by omega". Whether to run the full
-    simulation stays the owner's call.
+  - **An indicator, never a verdict (v3: numeric).** "omega-bound" means not eligible at step 0 (oracle G* < 0.6 or
+    oracle P_wrong > 0.1, sec. 5.0.2).
+    - If **>= 7 of its 9 decisions are omega-bound** and G-C meets the bar for none of the eligible rest, it records:
+      "the full run's Q1 is likely settled by omega".
+    - If **fewer than 2 are eligible**, it records step 0's layer-1 sentence (sec. 7.1) as an early reading.
+    - Whether to run the full simulation stays the owner's call.
 - **Its results cannot amend this file.** The full run's rules stay as frozen.
 
 ## Revision log
@@ -899,5 +1073,46 @@ D04); the rest of what it lacks waits on M5's switch, M1c's build and the reduce
   9. **Budget:** information per heating and per cell x readout (sec. 6 item 7).
   10. **The early variant** (sec. 12), PARTIAL: 9 decisions, NumPy rivals, pH not clamped, 6 - 23 core-h.
 
+  **The author's own changes in v2, not asked for by the premortem** (marked in v3, at the confirmation's request):
+  - **(i) the early variant's dropped readouts**: G-C's glucose-cell MFT and ROOH-cell thiol readouts. They would be
+    generated by falsified structures;
+  - **(ii) Q2's margin of 3 of 10**: v1's 5-of-17 rescaled by the author. v3 rescales it again, to
+    max(1, ceil(0.3 x E_O)).
+
   Also in v2: the cost is re-projected for the off-grid arms and the dropped enrichment (152 core-h central; sec. 9.2),
   and the forecasts of sec. 1 are revised.
+- 2026-11-07, **v3 DRAFT**: the independent confirmation of v2 (d299af43) returned "NOT CONFIRMED". All ten edits were
+  present, but two new defects decided the result by construction. Every item is applied. No simulation; the timings
+  are unchanged.
+  1. **The omega ceiling.**
+     - **(a)** Step 0's oracle ceiling G*_d per decision (sec. 5.0.2), and a separate layer-1 verdict, "CONFIRMED
+       (omega-bound)" (sec. 7.1).
+     - **(b)** The designs are judged only on eligible decisions. If fewer than 2 qualify, layer 1 decides and Q2 is
+       "not informative".
+     - **(c)** NEW stage 0c: rho of the engine's discrepancy between arms of one study, from residuals on disk
+       (sec. 5.0.1). It has its own estimator, a cluster-bootstrap interval and a leave-one-study-out rule, fixed before
+       it runs. It is a noise-model estimate on spent data, not a credit. The measured rho is the primary noise model
+       (sec. 3.4); rho = 0, 0.5 and 0.9 are sensitivities.
+     - **(d)** The verbatim omega-bound sentence and the reduction needed are pre-registered.
+  2. **Target:** declared two targets, L_d for model-part quantities and T_d = L_d + delta_d for total quantities
+     (sec. 5.1). A2 and A6 test each interval against its own target.
+  3. **Estimator rule:** BL alone can no longer make a cell relevant, only "not relevant" (flagged BL-only) or
+     UNDECIDED (sec. 5.2).
+  4. **The bar re-derived:** "not shown" is a 50 % blind test, so S = 0.5 + 0.5 x G. The bar is G >= 0.6 (S >= 0.8, a
+     chosen value with its reason) and P_wrong <= 0.1 (sec. 7).
+  5. **The author's own changes** in v2 are marked in its entry above: the dropped readouts and the 3-of-10 margin.
+  6. **The early variant:** a numeric omega-bound threshold (not eligible at step 0, >= 7 of 9), and step 0 runs first
+     (secs. 5.6, 12).
+  7. **Analyst freedom removed:**
+     - PR #108 is pinned to 5e61fed0, with a rerun if its refusal set moves;
+     - V_real = mean s_BL only;
+     - one set of designs is defined and used everywhere (sec. 6.1);
+     - flagged simulation-only decisions are excluded from the primary;
+     - rival weights are equal, fixed;
+     - the off-grid set is rebuilt on BR-X, a base that is no design's cell, and split into interpolating and
+       extrapolating decisions (sec. 2.4);
+     - Ledoit-Wolf only.
+
+  Also in v3:
+  - the cost is re-projected for 12 off-grid arms and step 0 (161 core-h central; sec. 9.2);
+  - the forecasts of sec. 1 are revised and marked as informed by seen summaries.
