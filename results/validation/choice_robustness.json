@@ -4,8 +4,8 @@
     "artifact": "choice_robustness",
     "generated_on": "2026-11-07",
     "git": {
-      "commit": "dc63a1eee73b1b5f891cb70e51146fe54cf7f2ed",
-      "short": "dc63a1ee",
+      "commit": "210b7ff478d70726de0e67aacde2119aabd8d691",
+      "short": "210b7ff4",
       "branch": "s3-ph-balance-refusal",
       "dirty": true
     },
@@ -17,7 +17,7 @@
       },
       {
         "path": "results/validation/core_panel_scores.json",
-        "sha256": "b2590acb38e19e67adeed4aeeddfe57f93557f98da56e4666bb778506e17188c"
+        "sha256": "a7c8d2db0ade1444a50dbbd6a2e4729f4077af771852fb424589fabb9b8c272b"
       }
     ]
   },
@@ -57,9 +57,9 @@
           "acrylamide": 2,
           "trunk": 2
         },
-        "contrast_median_dex": 0.3784607464344807,
-        "contrast_signs": 3,
-        "contrast_resolved": 14
+        "contrast_median_dex": 0.3043651020350228,
+        "contrast_signs": 2,
+        "contrast_resolved": 10
       },
       "threefold": {
         "oos_rows": 23,
@@ -70,9 +70,9 @@
           "acrylamide": 4,
           "trunk": 2
         },
-        "contrast_median_dex": 0.3784607464344807,
-        "contrast_signs": 3,
-        "contrast_resolved": 14
+        "contrast_median_dex": 0.3043651020350228,
+        "contrast_signs": 2,
+        "contrast_resolved": 10
       },
       "fivefold": {
         "oos_rows": 23,
@@ -83,9 +83,9 @@
           "acrylamide": 5,
           "trunk": 3
         },
-        "contrast_median_dex": 0.3784607464344807,
-        "contrast_signs": 3,
-        "contrast_resolved": 14
+        "contrast_median_dex": 0.3043651020350228,
+        "contrast_signs": 2,
+        "contrast_resolved": 10
       }
     },
     "CR-06": {
@@ -98,9 +98,9 @@
           "acrylamide": 4,
           "trunk": 2
         },
-        "contrast_median_dex": 0.3784607464344807,
-        "contrast_signs": 3,
-        "contrast_resolved": 17
+        "contrast_median_dex": 0.3043651020350228,
+        "contrast_signs": 2,
+        "contrast_resolved": 13
       },
       "two_cv": {
         "oos_rows": 23,
@@ -111,9 +111,9 @@
           "acrylamide": 4,
           "trunk": 2
         },
-        "contrast_median_dex": 0.3784607464344807,
-        "contrast_signs": 3,
-        "contrast_resolved": 14
+        "contrast_median_dex": 0.3043651020350228,
+        "contrast_signs": 2,
+        "contrast_resolved": 10
       },
       "twofold": {
         "oos_rows": 23,
@@ -124,9 +124,9 @@
           "acrylamide": 4,
           "trunk": 2
         },
-        "contrast_median_dex": 0.3784607464344807,
-        "contrast_signs": 2,
-        "contrast_resolved": 10
+        "contrast_median_dex": 0.3043651020350228,
+        "contrast_signs": 1,
+        "contrast_resolved": 7
       }
     },
     "CR-02": {
@@ -139,9 +139,9 @@
           "acrylamide": 4,
           "trunk": 2
         },
-        "contrast_median_dex": 0.3784607464344807,
-        "contrast_signs": 3,
-        "contrast_resolved": 14
+        "contrast_median_dex": 0.3043651020350228,
+        "contrast_signs": 2,
+        "contrast_resolved": 10
       },
       "centre": {
         "oos_rows": 23,
@@ -152,9 +152,9 @@
           "acrylamide": 4,
           "trunk": 2
         },
-        "contrast_median_dex": 0.3784607464344807,
-        "contrast_signs": 3,
-        "contrast_resolved": 14
+        "contrast_median_dex": 0.3043651020350228,
+        "contrast_signs": 2,
+        "contrast_resolved": 10
       },
       "bulk_oil": {
         "oos_rows": 23,
@@ -165,9 +165,9 @@
           "acrylamide": 4,
           "trunk": 2
         },
-        "contrast_median_dex": 0.3784607464344807,
-        "contrast_signs": 3,
-        "contrast_resolved": 14
+        "contrast_median_dex": 0.3043651020350228,
+        "contrast_signs": 2,
+        "contrast_resolved": 10
       }
     }
   }

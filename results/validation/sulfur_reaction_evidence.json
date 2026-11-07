@@ -4,8 +4,8 @@
     "artifact": "sulfur_reaction_evidence",
     "generated_on": "2026-11-07",
     "git": {
-      "commit": "68276aa716cc3d286edaf9a0f191cd8fd6189850",
-      "short": "68276aa7",
+      "commit": "210b7ff478d70726de0e67aacde2119aabd8d691",
+      "short": "210b7ff4",
       "branch": "s3-ph-balance-refusal",
       "dirty": true
     },
@@ -25,7 +25,7 @@
       },
       {
         "path": "results/validation/core_prediction_uncertainty.json",
-        "sha256": "caf0c624e06675a6cedd9a7b21ccafc9d04d50ecb166eb1722422c5f047a2ea1"
+        "sha256": "22ea829cc617db6275305299f65d974acb4d9d8ef3e4e2917013e08bcafefe69"
       },
       {
         "path": "docs/reference/conflicts_register.yml",

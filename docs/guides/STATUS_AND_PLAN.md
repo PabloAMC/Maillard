@@ -49,8 +49,8 @@ Shipped calibration B60. Numbers from `results/validation/core_panel_scores.md`,
 
 | question | today |
 |---|---|
-| absolute level within 3x, out of sample | 14 / 56 rows (median miss 11.8x); the "typical yield" baseline does better (15 rows, 8.1x) |
-| ratio between two pots of one study | median error 0.31 dex against 0.28 for "no change"; direction right 12 / 25 |
+| absolute level within 3x, out of sample | 10 / 23 rows (median miss 4.4x; the thiol levels refused by H0 and the levels the falsified pH balance moves by S3 are out of the count); the "typical yield" baseline does better on the rows both answer (5 / 8 against 4 / 8) |
+| ratio between two pots of one study | LOSES to "no change": 19 out-of-sample pairs in 4 studies, median error 0.30 dex against 0.15 for "no change", direction right 2 / 10 (after the S3 refusal of 2026-11-07; 37 pairs, 0.31 against 0.28, 12 / 25 before) |
 | meaty sulfur odorants | 10 / 40 rows within 3x; thiol leave-one-lab-out NOT ADEQUATE (90 % intervals cover 0.34) |
 | acrylamide, lipid aldehydes | the null model wins |
 | pyrazines | about 3 orders of magnitude too low |
@@ -480,8 +480,9 @@ within 3x across laboratories for most rows, ~0.15 (not a goal).
 
 Re-estimated 2026-11-07 with the first S3 application, as sec. 7 asks (the outputs that depend on M1b part (i)'s
 falsified pH balance are refused, per pot: `results/validation/ph_balance_s3_sensitivity.md`; on balance-solved pots,
-43 % of the decided concentration outputs, 64 % of the pH outputs and 41 % of the pH-lever ratios move beyond their
-term between B0 and the carried rivals). Until an S3 change ships the union of the carried rivals' envelopes (S3's lift
+33 % of the decided concentration levels move beyond tau, 48 % of the pH levels beyond the pH-level term and 46 % of
+the pH-lever ratios beyond omega or in sign, between B0 and the carried rivals' screen-passing extremes; prereg sec.
+21.10). The within-study contrasts that remain lose to "no change" (sec. 2). Until an S3 change ships the union of the carried rivals' envelopes (S3's lift
 clause: B1 and B13 need converged S3 fits on CF-084's controls and the CO2 ledger audit, CF-134), W5.4's pH, buffer and
 dose rows on the sulfur lane are refused wherever the balance moves them; recipes with a held (clamped) pH are
 answered. Ranked relative predictions with honest intervals for most levers by the end of January: ~0.35 -> ~0.3. The

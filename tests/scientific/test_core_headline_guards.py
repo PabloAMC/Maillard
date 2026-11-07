@@ -543,9 +543,10 @@ def test_core_scores_17_of_26_independent_directional_claims():
     # the window and is refused by the engine, not an agree: 20/33 -> 19/32; pH / aw 6/11 -> 5/10; not evaluable 42 -> 43.
     # RE-PINNED 2026-11-07 (S3 application of M1b part (i), ph_balance_refusal): 19/32 -> 9/19; 13 independent claims whose arms or
     # steps move with the falsified pH balance (beyond omega, or in sign) are not evaluable. Not a skill change.
-    assert s["headline"] == [9, 19]
+    # RE-PINNED AGAIN 2026-11-07 (review of #108: fix 1, the ratio rule decides every step): 9/19 -> 10/19 (SUG-04 back).
+    assert s["headline"] == [10, 19]
     ind = s["independent"]
-    assert (ind["excluding_ph_aw"]["agree"], ind["excluding_ph_aw"]["evaluable"]) == (8, 15)   # was (14, 22) before S3
+    assert (ind["excluding_ph_aw"]["agree"], ind["excluding_ph_aw"]["evaluable"]) == (9, 15)   # was (14, 22) before S3
     assert (ind["ph_aw"]["agree"], ind["ph_aw"]["evaluable"]) == (1, 4)   # was (5, 10) before S3
     assert ind["total"]["not_evaluable"] == 56   # was 43 before S3
     assert ind["total"]["mechanism_absent"] == 0
@@ -555,11 +556,11 @@ def test_core_scores_17_of_26_independent_directional_claims():
     assert cats["temperature"] == (4, 7)  # 2026-11-07 (S3): was (5, 8)  # 2026-10-29: noise-aware rule (was (5, 9))     # 2026-10-27 audit: TEMP-03 retired; WANG22 shapes retired; B51 +1
     assert cats["ph"] == (1, 4)  # 2026-11-07 (S3): was (5, 10)               # B51 + PH-04/PH-05 retired (Cerny 2015 read in full); MOT-01 agrees with its pyrophosphate: MOT02-PH-01/02 and PH-03 not independent; arms of PH-01/02 set to Meynier & Mottram 1995
     assert cats["moisture_aw"] == (0, 0)      # 2026-11-05: AW-03 refused (trunk a_w window); 2026-10-27 audit: AW-01 retired (source mismatch)
-    assert cats["additive_cysteine"] == (0, 0)  # 2026-11-07 (S3): was (1, 1)  # 2026-10-27 audit: CYS-01 tautology, CYS-02 retired
-    assert cats["time"] == (1, 2)  # 2026-11-07 (S3): was (2, 3)             # 2026-10-27 audit: TIME-01 and the WANG22 time shapes retired; B51 +1
+    assert cats["additive_cysteine"] == (1, 1)  # 2026-11-07 (S3, after the review's fix 1): unchanged  # 2026-10-27 audit: CYS-01 tautology, CYS-02 retired
+    assert cats["time"] == (1, 1)  # 2026-11-07 (S3): was (2, 3)             # 2026-10-27 audit: TIME-01 and the WANG22 time shapes retired; B51 +1
     readme = _doc_text(README)
-    _assert_quoted(readme, "9 of 19", "README.md", "the core's directional headline")
-    _assert_quoted(readme, "8 of 15", "README.md", "the directional count excluding pH and water activity")
+    _assert_quoted(readme, "10 of 19", "README.md", "the core's directional headline")
+    _assert_quoted(readme, "9 of 15", "README.md", "the directional count excluding pH and water activity")
     _assert_quoted(readme, "1 of 4", "README.md", "the directional count on pH and water activity")
 
 

@@ -4,8 +4,8 @@
   "artifact": "s4_band_sources",
   "generated_on": "2026-11-07",
   "git": {
-   "commit": "68276aa716cc3d286edaf9a0f191cd8fd6189850",
-   "short": "68276aa7",
+   "commit": "210b7ff478d70726de0e67aacde2119aabd8d691",
+   "short": "210b7ff4",
    "branch": "s3-ph-balance-refusal",
    "dirty": true
   },
@@ -13,7 +13,7 @@
   "inputs": [
    {
     "path": "results/validation/incumbent_evidence_tiers.json",
-    "sha256": "9500bfdc4baece3a67377908655b27d0e25c78f6283f3546facb00b6bab8bf6f"
+    "sha256": "95182daa1f712ae56a965bcef2d5f7548da2656831a95639816cc975b8dcdba4"
    },
    {
     "path": "src/kinetic_core/ea_class_prior.py",

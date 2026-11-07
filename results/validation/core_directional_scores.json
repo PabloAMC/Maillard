@@ -43,8 +43,8 @@
     "artifact": "core_directional_scores",
     "generated_on": "2026-11-07",
     "git": {
-      "commit": "81cbca274af0106f86c9f91433fef361e3650217",
-      "short": "81cbca27",
+      "commit": "210b7ff478d70726de0e67aacde2119aabd8d691",
+      "short": "210b7ff4",
       "branch": "s3-ph-balance-refusal",
       "dirty": true
     },
@@ -86,7 +86,7 @@
   },
   "summary": {
     "headline": [
-      9,
+      10,
       19
     ],
     "headline_definition": "strictly independent claims (fit_status == independent) the core could evaluate; refused arms and unrepresented observables are NOT EVALUABLE, identical predictions across a moved axis are MISSES",
@@ -101,12 +101,12 @@
           "rate": null
         },
         "additive_cysteine": {
-          "agree": 0,
-          "evaluable": 0,
-          "not_evaluable": 5,
+          "agree": 1,
+          "evaluable": 1,
+          "not_evaluable": 4,
           "misses": [],
           "mechanism_absent": 0,
-          "rate": null
+          "rate": 1.0
         },
         "lipid_lane": {
           "agree": 0,
@@ -202,17 +202,15 @@
         },
         "time": {
           "agree": 1,
-          "evaluable": 2,
-          "not_evaluable": 3,
-          "misses": [
-            "Z23C-T-01"
-          ],
+          "evaluable": 1,
+          "not_evaluable": 4,
+          "misses": [],
           "mechanism_absent": 0,
-          "rate": 0.5
+          "rate": 1.0
         }
       },
       "total": {
-        "agree": 9,
+        "agree": 10,
         "evaluable": 19,
         "not_evaluable": 56,
         "misses": [
@@ -224,11 +222,10 @@
           "HOX-03",
           "YIL-01",
           "DIC-01",
-          "Z23C-T-01",
           "MOD08-PH-01"
         ],
         "mechanism_absent": 0,
-        "rate": 0.47368421052631576
+        "rate": 0.5263157894736842
       },
       "ph_aw": {
         "agree": 1,
@@ -243,7 +240,7 @@
         "rate": 0.25
       },
       "excluding_ph_aw": {
-        "agree": 8,
+        "agree": 9,
         "evaluable": 15,
         "not_evaluable": 41,
         "misses": [
@@ -252,11 +249,10 @@
           "SUG-12",
           "TEMP-05",
           "YIL-01",
-          "DIC-01",
-          "Z23C-T-01"
+          "DIC-01"
         ],
         "mechanism_absent": 0,
-        "rate": 0.5333333333333333
+        "rate": 0.6
       }
     },
     "all_claims": {
@@ -270,9 +266,9 @@
           "rate": null
         },
         "additive_cysteine": {
-          "agree": 1,
-          "evaluable": 1,
-          "not_evaluable": 7,
+          "agree": 2,
+          "evaluable": 2,
+          "not_evaluable": 6,
           "misses": [],
           "mechanism_absent": 0,
           "rate": 1.0
@@ -347,16 +343,17 @@
           "rate": null
         },
         "sugar_identity": {
-          "agree": 2,
-          "evaluable": 5,
-          "not_evaluable": 17,
+          "agree": 3,
+          "evaluable": 7,
+          "not_evaluable": 15,
           "misses": [
             "SUG-03",
+            "SUG-04",
             "SUG-12",
             "DIC-01"
           ],
           "mechanism_absent": 0,
-          "rate": 0.4
+          "rate": 0.42857142857142855
         },
         "sulfur_donor": {
           "agree": 1,
@@ -380,22 +377,20 @@
         },
         "time": {
           "agree": 2,
-          "evaluable": 4,
-          "not_evaluable": 9,
-          "misses": [
-            "ZHOU22-T-01",
-            "Z23C-T-01"
-          ],
+          "evaluable": 2,
+          "not_evaluable": 11,
+          "misses": [],
           "mechanism_absent": 0,
-          "rate": 0.5
+          "rate": 1.0
         }
       },
       "total": {
-        "agree": 13,
-        "evaluable": 30,
-        "not_evaluable": 89,
+        "agree": 15,
+        "evaluable": 31,
+        "not_evaluable": 88,
         "misses": [
           "SUG-03",
+          "SUG-04",
           "TEMP-01",
           "MAT-02",
           "MAT-03",
@@ -409,12 +404,10 @@
           "YIL-01",
           "DIC-01",
           "WHI-PH-01",
-          "ZHOU22-T-01",
-          "Z23C-T-01",
           "MOD08-PH-01"
         ],
         "mechanism_absent": 3,
-        "rate": 0.43333333333333335
+        "rate": 0.4838709677419355
       },
       "ph_aw": {
         "agree": 2,
@@ -430,11 +423,12 @@
         "rate": 0.3333333333333333
       },
       "excluding_ph_aw": {
-        "agree": 11,
-        "evaluable": 24,
-        "not_evaluable": 63,
+        "agree": 13,
+        "evaluable": 25,
+        "not_evaluable": 62,
         "misses": [
           "SUG-03",
+          "SUG-04",
           "TEMP-01",
           "MAT-02",
           "MAT-03",
@@ -444,29 +438,26 @@
           "TEMP-05",
           "HOX-01",
           "YIL-01",
-          "DIC-01",
-          "ZHOU22-T-01",
-          "Z23C-T-01"
+          "DIC-01"
         ],
         "mechanism_absent": 3,
-        "rate": 0.4583333333333333
+        "rate": 0.52
       }
     },
     "not_evaluable_reasons": {
       "the claim carries no runnable conditions (prose-only)": 39,
       "refused by the engine": 4,
-      "arm 'cysteine + D-ribose' refused": 3,
-      "arm '20 min' refused": 3,
-      "arm 'initial pH 5.0' refused": 3,
-      "arm 'pH 6.5' refused": 2,
-      "arm 'cysteine + D-ribose, 110 C 90 min' refused": 2,
-      "arm 'cysteine + ribose, phosphate buffer pH 5.6, 140 C 30 min' refused": 2,
-      "arm 'pH 5.6' refused": 2,
-      "arm 'initial pH 5.6' refused": 2,
-      "arm 'MFT in cysteine + ribose' refused": 1,
-      "arm 'pH 4.0' refused": 1,
+      "a predicted concentration is zero; no direction is defined": 3,
+      "step 'initial pH 5.0' -> 'initial pH 8.5' refused": 3,
+      "step 'cysteine + D-ribose' -> 'cysteine + D-glucose' refused": 2,
+      "step 'pH 4.5' -> 'pH 6.5' refused": 2,
+      "step 'cysteine + D-ribose, 110 C 90 min' -> 'cysteine + D-glucose, 110 C 90 min'": 2,
+      "step 'cysteine + ribose, phosphate buffer pH 4.2, 140 C 30 min' -> 'cysteine + r": 2,
+      "step 'pH 4' -> 'pH 5' refused": 2,
+      "step 'pH 4.2' -> 'pH 5.6' refused": 2,
+      "step 'initial pH 5.6' -> 'initial pH 7.0' refused": 2,
+      "step 'pH 4.0' -> 'pH 5.5' refused": 1,
       "the measured contrast (glycine + D-glucose, 165 C 8 min 333, glycine + D-fructos": 1,
-      "arm 'hydrolysate + xylose + cysteine, 100 C 60 min' refused": 1,
       "arm 'hydrolysate + xylose (no cysteine), 120 C' refused": 1,
       "the measured contrast (cysteine + D-fructose, 145 C 20 min pH 5.0 2.5, cysteine ": 1,
       "the measured contrast (cysteine + D-fructose, 145 C 20 min pH 5.0 3.2, cysteine ": 1,
@@ -476,22 +467,22 @@
       "the verdict depends on the unstated input ph (disagree at ph 5, not_evaluable at": 1,
       "the verdict depends on the unstated input ph (not_evaluable at ph 5, not_evaluab": 1,
       "the measured contrast (3-deoxyglucosone 52.2, glucosone 7.5, glyoxal 5.6, methyl": 1,
-      "arm '30 min' refused": 1,
-      "arm 'pH 4' refused": 1,
-      "arm 'pH 5' refused": 1,
-      "arm 'lysine 0x' refused": 1,
-      "arm 'ARP + cysteine, 120 min' refused": 1,
-      "arm 'ARP + cysteine 20 mM' refused": 1,
-      "observable 'ribose + cysteine, 180 C, 2 h, pH 5.0 ": 1,
-      "arm 'pot C": 1,
+      "step '20 min' -> '40 min' refused": 1,
+      "step '60 min' -> '360 min' refused": 1,
+      "arm 'lysine 1x (40 mM)' refused": 1,
+      "step '90 min' -> '120 min' refused": 1,
+      "step 'ARP alone, 120 min' -> 'ARP + cysteine, 120 min' refused": 1,
+      "step 'ARP + cysteine 20 mM' -> 'ARP + glutathione 20 mM' refused": 1,
+      "step '60 min' -> '90 min' refused": 1,
+      "a predicted concentration is zero; no ranking is defined": 1,
+      "step 'pot C": 1,
       "arm 'glucose + glutathione' refused": 1,
-      "a predicted concentration is zero; no direction is defined": 1,
       "arm 'cysteine alone' refused": 1,
       "arm 'beef triglyceride alone' refused": 1,
       "arm 'egg PC alone' refused": 1,
       "arm 'methionine alone' refused": 1
     },
-    "wall_seconds": 1596.6
+    "wall_seconds": 1813.4
   },
   "claims": [
     {
@@ -505,8 +496,17 @@
       "fit_status": "fit_adjacent",
       "statement": "With cysteine, pentoses generate much higher 2-methyl-3-furanthiol (MFT) than hexoses.",
       "source": "hofmann1998",
-      "status": "not_evaluable",
-      "reason": "arm 'cysteine + D-ribose' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): MFT (spread 2.00 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pot",
+      "status": "agree",
+      "reason": null,
+      "identical_predictions": false,
+      "mechanism_absent": false,
+      "lane": "sulfur",
+      "values_ug_per_l": [
+        93.63341996131116,
+        0.0
+      ],
+      "log10_ratio_B_over_A": null,
+      "structural_zero": false,
       "arms": [
         {
           "label": "cysteine + D-ribose",
@@ -526,14 +526,12 @@
               "source": "Hofmann & Schieberle 1998 Table 1 footnote a: cysteine 3.3 mmol + carbohydrate 10.0 mmol in 100 mL, pH 5.0, 0.5 M phosphate"
             }
           },
-          "answered": false,
+          "answered": true,
           "lane": "sulfur",
-          "state": "out_of_envelope",
-          "reasons": [
-            "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): MFT (spread 2.00 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pots, Holm p <= 3e-3 across the defensible noise range, independently confirmed (M1b part (i) prereg sec. 21; results/validation/kinetic_core_m1b_part_i_a2_s3.md). No rival is credited; B1 (amine survival) and B13 (B1 + acid supply) are carried. S3 refuses an output whose sensitivity to that switch exceeds the lane's within-laboratory term and never shows it at the incumbent's point: here the spread of the output over B0, B1 (phi_cys = 1) and B13 exceeds omega = 0.419 dex (results/validation/ph_balance_s3_sensitivity.md runs the rule across the recipe space). A pot whose pH is measured or held is answered: state the held pH as a clamped buffer (buffer kind 'clamped'), and the balance is not solved. WHAT WOULD LIFT IT (STATUS_AND_PLAN sec. 7, S3's lift clause, pending independent confirmation): an S3 change of its own (items 6 and 9 replaced as S3 / S4 changes replace them) that ships the unweighted union of the remaining carried rivals' envelopes. A rival enters the union only if its converged best fit has passed S3's test on the data that falsified the incumbent (CF-084's controls); the union credits no rival. For B1 and B13 that also waits on the CO2 ledger audit (CF-134), which both inherit. Until then the refusal stands."
-          ],
+          "state": "in_envelope",
+          "reasons": [],
           "warnings": [],
-          "value_ug_per_l": null
+          "value_ug_per_l": 93.63341996131116
         },
         {
           "label": "cysteine + D-glucose",
@@ -576,7 +574,7 @@
       "statement": "With cysteine, pentoses generate much higher 2-furfurylthiol (FFT) than hexoses.",
       "source": "hofmann1998",
       "status": "not_evaluable",
-      "reason": "arm 'cysteine + D-ribose' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): FFT (spread 2.04 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pot",
+      "reason": "step 'cysteine + D-ribose' -> 'cysteine + D-glucose' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the spread of this log ratio over B0 and the carried rivals (2.48 dex) exceeds omega. REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause).",
       "arms": [
         {
           "label": "cysteine + D-ribose",
@@ -596,14 +594,12 @@
               "source": "Hofmann & Schieberle 1998 Table 1 footnote a: cysteine 3.3 mmol + carbohydrate 10.0 mmol in 100 mL, pH 5.0, 0.5 M phosphate"
             }
           },
-          "answered": false,
+          "answered": true,
           "lane": "sulfur",
-          "state": "out_of_envelope",
-          "reasons": [
-            "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): FFT (spread 2.04 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pots, Holm p <= 3e-3 across the defensible noise range, independently confirmed (M1b part (i) prereg sec. 21; results/validation/kinetic_core_m1b_part_i_a2_s3.md). No rival is credited; B1 (amine survival) and B13 (B1 + acid supply) are carried. S3 refuses an output whose sensitivity to that switch exceeds the lane's within-laboratory term and never shows it at the incumbent's point: here the spread of the output over B0, B1 (phi_cys = 1) and B13 exceeds omega = 0.419 dex (results/validation/ph_balance_s3_sensitivity.md runs the rule across the recipe space). A pot whose pH is measured or held is answered: state the held pH as a clamped buffer (buffer kind 'clamped'), and the balance is not solved. WHAT WOULD LIFT IT (STATUS_AND_PLAN sec. 7, S3's lift clause, pending independent confirmation): an S3 change of its own (items 6 and 9 replaced as S3 / S4 changes replace them) that ships the unweighted union of the remaining carried rivals' envelopes. A rival enters the union only if its converged best fit has passed S3's test on the data that falsified the incumbent (CF-084's controls); the union credits no rival. For B1 and B13 that also waits on the CO2 ledger audit (CF-134), which both inherit. Until then the refusal stands."
-          ],
+          "state": "in_envelope",
+          "reasons": [],
           "warnings": [],
-          "value_ug_per_l": null
+          "value_ug_per_l": 346.61680335656604
         },
         {
           "label": "cysteine + D-glucose",
@@ -715,8 +711,16 @@
       "fit_status": "fit_adjacent",
       "statement": "Conversely, MFT > FFT in the cysteine/pentose system (MFT is 'key' there).",
       "source": "cerny2015",
-      "status": "not_evaluable",
-      "reason": "arm 'MFT in cysteine + ribose' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): MFT (spread 2.00 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pot",
+      "status": "disagree",
+      "reason": null,
+      "identical_predictions": true,
+      "mechanism_absent": false,
+      "lane": "sulfur",
+      "values_ug_per_l": [
+        93.63341996131116,
+        93.63341996131116
+      ],
+      "log10_ratio_B_over_A": 0.0,
       "arms": [
         {
           "label": "MFT in cysteine + ribose",
@@ -736,14 +740,12 @@
               "source": "Hofmann & Schieberle 1998 Table 1 footnote a: cysteine 3.3 mmol + carbohydrate 10.0 mmol in 100 mL, pH 5.0, 0.5 M phosphate"
             }
           },
-          "answered": false,
+          "answered": true,
           "lane": "sulfur",
-          "state": "out_of_envelope",
-          "reasons": [
-            "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): MFT (spread 2.00 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pots, Holm p <= 3e-3 across the defensible noise range, independently confirmed (M1b part (i) prereg sec. 21; results/validation/kinetic_core_m1b_part_i_a2_s3.md). No rival is credited; B1 (amine survival) and B13 (B1 + acid supply) are carried. S3 refuses an output whose sensitivity to that switch exceeds the lane's within-laboratory term and never shows it at the incumbent's point: here the spread of the output over B0, B1 (phi_cys = 1) and B13 exceeds omega = 0.419 dex (results/validation/ph_balance_s3_sensitivity.md runs the rule across the recipe space). A pot whose pH is measured or held is answered: state the held pH as a clamped buffer (buffer kind 'clamped'), and the balance is not solved. WHAT WOULD LIFT IT (STATUS_AND_PLAN sec. 7, S3's lift clause, pending independent confirmation): an S3 change of its own (items 6 and 9 replaced as S3 / S4 changes replace them) that ships the unweighted union of the remaining carried rivals' envelopes. A rival enters the union only if its converged best fit has passed S3's test on the data that falsified the incumbent (CF-084's controls); the union credits no rival. For B1 and B13 that also waits on the CO2 ledger audit (CF-134), which both inherit. Until then the refusal stands."
-          ],
+          "state": "in_envelope",
+          "reasons": [],
           "warnings": [],
-          "value_ug_per_l": null
+          "value_ug_per_l": 93.63341996131116
         },
         {
           "label": "FFT in cysteine + ribose",
@@ -763,14 +765,12 @@
               "source": "Hofmann & Schieberle 1998 Table 1 footnote a: cysteine 3.3 mmol + carbohydrate 10.0 mmol in 100 mL, pH 5.0, 0.5 M phosphate"
             }
           },
-          "answered": false,
+          "answered": true,
           "lane": "sulfur",
-          "state": "out_of_envelope",
-          "reasons": [
-            "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): MFT (spread 2.00 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pots, Holm p <= 3e-3 across the defensible noise range, independently confirmed (M1b part (i) prereg sec. 21; results/validation/kinetic_core_m1b_part_i_a2_s3.md). No rival is credited; B1 (amine survival) and B13 (B1 + acid supply) are carried. S3 refuses an output whose sensitivity to that switch exceeds the lane's within-laboratory term and never shows it at the incumbent's point: here the spread of the output over B0, B1 (phi_cys = 1) and B13 exceeds omega = 0.419 dex (results/validation/ph_balance_s3_sensitivity.md runs the rule across the recipe space). A pot whose pH is measured or held is answered: state the held pH as a clamped buffer (buffer kind 'clamped'), and the balance is not solved. WHAT WOULD LIFT IT (STATUS_AND_PLAN sec. 7, S3's lift clause, pending independent confirmation): an S3 change of its own (items 6 and 9 replaced as S3 / S4 changes replace them) that ships the unweighted union of the remaining carried rivals' envelopes. A rival enters the union only if its converged best fit has passed S3's test on the data that falsified the incumbent (CF-084's controls); the union credits no rival. For B1 and B13 that also waits on the CO2 ledger audit (CF-134), which both inherit. Until then the refusal stands."
-          ],
+          "state": "in_envelope",
+          "reasons": [],
           "warnings": [],
-          "value_ug_per_l": null
+          "value_ug_per_l": 93.63341996131116
         }
       ]
     },
@@ -786,7 +786,7 @@
       "statement": "Furfural is the characteristic dehydration product of pentoses; the model should give more furfural from a pentose than from a hexose under identical conditions.",
       "source": "cerny2015",
       "status": "not_evaluable",
-      "reason": "arm 'cysteine + D-ribose' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): Furfural (spread 0.57 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cystein",
+      "reason": "step 'cysteine + D-ribose' -> 'cysteine + D-glucose' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the DIRECTION of this ratio is refused: B0 and the carried rivals disagree in its sign (S3). REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause).",
       "arms": [
         {
           "label": "cysteine + D-ribose",
@@ -806,14 +806,12 @@
               "source": "Hofmann & Schieberle 1998 Table 1 footnote a: cysteine 3.3 mmol + carbohydrate 10.0 mmol in 100 mL, pH 5.0, 0.5 M phosphate"
             }
           },
-          "answered": false,
+          "answered": true,
           "lane": "sulfur",
-          "state": "out_of_envelope",
-          "reasons": [
-            "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): Furfural (spread 0.57 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pots, Holm p <= 3e-3 across the defensible noise range, independently confirmed (M1b part (i) prereg sec. 21; results/validation/kinetic_core_m1b_part_i_a2_s3.md). No rival is credited; B1 (amine survival) and B13 (B1 + acid supply) are carried. S3 refuses an output whose sensitivity to that switch exceeds the lane's within-laboratory term and never shows it at the incumbent's point: here the spread of the output over B0, B1 (phi_cys = 1) and B13 exceeds omega = 0.419 dex (results/validation/ph_balance_s3_sensitivity.md runs the rule across the recipe space). A pot whose pH is measured or held is answered: state the held pH as a clamped buffer (buffer kind 'clamped'), and the balance is not solved. WHAT WOULD LIFT IT (STATUS_AND_PLAN sec. 7, S3's lift clause, pending independent confirmation): an S3 change of its own (items 6 and 9 replaced as S3 / S4 changes replace them) that ships the unweighted union of the remaining carried rivals' envelopes. A rival enters the union only if its converged best fit has passed S3's test on the data that falsified the incumbent (CF-084's controls); the union credits no rival. For B1 and B13 that also waits on the CO2 ledger audit (CF-134), which both inherit. Until then the refusal stands."
-          ],
+          "state": "in_envelope",
+          "reasons": [],
           "warnings": [],
-          "value_ug_per_l": null
+          "value_ug_per_l": 1380.21899223386
         },
         {
           "label": "cysteine + D-glucose",
@@ -869,7 +867,7 @@
       "statement": "In cysteine/ribose model systems, MFT is drastically reduced at pH 6.5 relative to pH 4.5; thiols are favoured at low pH.",
       "source": "cerny2015",
       "status": "not_evaluable",
-      "reason": "arm 'pH 6.5' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): MFT (spread 1.03 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pot",
+      "reason": "step 'pH 4.5' -> 'pH 6.5' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the spread of this log ratio over B0 and the carried rivals (1.08 dex) exceeds omega. REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause).",
       "arms": [
         {
           "label": "pH 4.5",
@@ -914,14 +912,12 @@
               "source": "Meynier & Mottram 1995: 0.2 M pyrophosphate (B51, 2026-10-27: charged as pyrophosphate; was carried as orthophosphate)"
             }
           },
-          "answered": false,
+          "answered": true,
           "lane": "sulfur",
-          "state": "out_of_envelope",
-          "reasons": [
-            "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): MFT (spread 1.03 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pots, Holm p <= 3e-3 across the defensible noise range, independently confirmed (M1b part (i) prereg sec. 21; results/validation/kinetic_core_m1b_part_i_a2_s3.md). No rival is credited; B1 (amine survival) and B13 (B1 + acid supply) are carried. S3 refuses an output whose sensitivity to that switch exceeds the lane's within-laboratory term and never shows it at the incumbent's point: here the spread of the output over B0, B1 (phi_cys = 1) and B13 exceeds omega = 0.419 dex (results/validation/ph_balance_s3_sensitivity.md runs the rule across the recipe space). A pot whose pH is measured or held is answered: state the held pH as a clamped buffer (buffer kind 'clamped'), and the balance is not solved. WHAT WOULD LIFT IT (STATUS_AND_PLAN sec. 7, S3's lift clause, pending independent confirmation): an S3 change of its own (items 6 and 9 replaced as S3 / S4 changes replace them) that ships the unweighted union of the remaining carried rivals' envelopes. A rival enters the union only if its converged best fit has passed S3's test on the data that falsified the incumbent (CF-084's controls); the union credits no rival. For B1 and B13 that also waits on the CO2 ledger audit (CF-134), which both inherit. Until then the refusal stands."
-          ],
+          "state": "in_envelope",
+          "reasons": [],
           "warnings": [],
-          "value_ug_per_l": null
+          "value_ug_per_l": 7.208247237097681
         }
       ]
     },
@@ -937,7 +933,7 @@
       "statement": "Same pH direction for the corresponding disulfide (bis(2-methyl-3-furyl) disulfide): lower at pH 6.5 than at pH 4.5.",
       "source": "cerny2015",
       "status": "not_evaluable",
-      "reason": "arm 'pH 6.5' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): bis(2-methyl-3-furyl) disulfide (spread 1.82 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier ",
+      "reason": "step 'pH 4.5' -> 'pH 6.5' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the spread of this log ratio over B0 and the carried rivals (2.39 dex) exceeds omega. REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause).",
       "arms": [
         {
           "label": "pH 4.5",
@@ -982,14 +978,12 @@
               "source": "Meynier & Mottram 1995: 0.2 M pyrophosphate (B51, 2026-10-27: charged as pyrophosphate; was carried as orthophosphate)"
             }
           },
-          "answered": false,
+          "answered": true,
           "lane": "sulfur",
-          "state": "out_of_envelope",
-          "reasons": [
-            "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): bis(2-methyl-3-furyl) disulfide (spread 1.82 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pots, Holm p <= 3e-3 across the defensible noise range, independently confirmed (M1b part (i) prereg sec. 21; results/validation/kinetic_core_m1b_part_i_a2_s3.md). No rival is credited; B1 (amine survival) and B13 (B1 + acid supply) are carried. S3 refuses an output whose sensitivity to that switch exceeds the lane's within-laboratory term and never shows it at the incumbent's point: here the spread of the output over B0, B1 (phi_cys = 1) and B13 exceeds omega = 0.419 dex (results/validation/ph_balance_s3_sensitivity.md runs the rule across the recipe space). A pot whose pH is measured or held is answered: state the held pH as a clamped buffer (buffer kind 'clamped'), and the balance is not solved. WHAT WOULD LIFT IT (STATUS_AND_PLAN sec. 7, S3's lift clause, pending independent confirmation): an S3 change of its own (items 6 and 9 replaced as S3 / S4 changes replace them) that ships the unweighted union of the remaining carried rivals' envelopes. A rival enters the union only if its converged best fit has passed S3's test on the data that falsified the incumbent (CF-084's controls); the union credits no rival. For B1 and B13 that also waits on the CO2 ledger audit (CF-134), which both inherit. Until then the refusal stands."
-          ],
+          "state": "in_envelope",
+          "reasons": [],
           "warnings": [],
-          "value_ug_per_l": null
+          "value_ug_per_l": 1.850790161732667
         }
       ]
     },
@@ -1005,7 +999,7 @@
       "statement": "Raising pH from 4 to 7 in a cysteine/xylose/thiamine system SUPPRESSES 2-furanmethanethiol (FFT) formation - FFT is favoured with decreasing pH.",
       "source": "cerny2015",
       "status": "not_evaluable",
-      "reason": "arm 'pH 4.0' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): FFT (spread 0.65 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pot",
+      "reason": "step 'pH 4.0' -> 'pH 5.5' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the spread of this log ratio over B0 and the carried rivals (1.77 dex) exceeds omega. REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause).",
       "arms": [
         {
           "label": "pH 4.0",
@@ -1026,14 +1020,12 @@
               "source": "Cerny & Briffod 2007: 1 mL 0.5 M potassium phosphate"
             }
           },
-          "answered": false,
+          "answered": true,
           "lane": "sulfur",
-          "state": "out_of_envelope",
-          "reasons": [
-            "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): FFT (spread 0.65 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pots, Holm p <= 3e-3 across the defensible noise range, independently confirmed (M1b part (i) prereg sec. 21; results/validation/kinetic_core_m1b_part_i_a2_s3.md). No rival is credited; B1 (amine survival) and B13 (B1 + acid supply) are carried. S3 refuses an output whose sensitivity to that switch exceeds the lane's within-laboratory term and never shows it at the incumbent's point: here the spread of the output over B0, B1 (phi_cys = 1) and B13 exceeds omega = 0.419 dex (results/validation/ph_balance_s3_sensitivity.md runs the rule across the recipe space). A pot whose pH is measured or held is answered: state the held pH as a clamped buffer (buffer kind 'clamped'), and the balance is not solved. WHAT WOULD LIFT IT (STATUS_AND_PLAN sec. 7, S3's lift clause, pending independent confirmation): an S3 change of its own (items 6 and 9 replaced as S3 / S4 changes replace them) that ships the unweighted union of the remaining carried rivals' envelopes. A rival enters the union only if its converged best fit has passed S3's test on the data that falsified the incumbent (CF-084's controls); the union credits no rival. For B1 and B13 that also waits on the CO2 ledger audit (CF-134), which both inherit. Until then the refusal stands."
-          ],
+          "state": "in_envelope",
+          "reasons": [],
           "warnings": [],
-          "value_ug_per_l": null
+          "value_ug_per_l": 3991.7170674795525
         },
         {
           "label": "pH 5.5",
@@ -1054,14 +1046,12 @@
               "source": "Cerny & Briffod 2007: 1 mL 0.5 M potassium phosphate"
             }
           },
-          "answered": false,
+          "answered": true,
           "lane": "sulfur",
-          "state": "out_of_envelope",
-          "reasons": [
-            "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): FFT (spread 0.86 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pots, Holm p <= 3e-3 across the defensible noise range, independently confirmed (M1b part (i) prereg sec. 21; results/validation/kinetic_core_m1b_part_i_a2_s3.md). No rival is credited; B1 (amine survival) and B13 (B1 + acid supply) are carried. S3 refuses an output whose sensitivity to that switch exceeds the lane's within-laboratory term and never shows it at the incumbent's point: here the spread of the output over B0, B1 (phi_cys = 1) and B13 exceeds omega = 0.419 dex (results/validation/ph_balance_s3_sensitivity.md runs the rule across the recipe space). A pot whose pH is measured or held is answered: state the held pH as a clamped buffer (buffer kind 'clamped'), and the balance is not solved. WHAT WOULD LIFT IT (STATUS_AND_PLAN sec. 7, S3's lift clause, pending independent confirmation): an S3 change of its own (items 6 and 9 replaced as S3 / S4 changes replace them) that ships the unweighted union of the remaining carried rivals' envelopes. A rival enters the union only if its converged best fit has passed S3's test on the data that falsified the incumbent (CF-084's controls); the union credits no rival. For B1 and B13 that also waits on the CO2 ledger audit (CF-134), which both inherit. Until then the refusal stands."
-          ],
+          "state": "in_envelope",
+          "reasons": [],
           "warnings": [],
-          "value_ug_per_l": null
+          "value_ug_per_l": 12.148558851512409
         },
         {
           "label": "pH 7.0",
@@ -1082,14 +1072,12 @@
               "source": "Cerny & Briffod 2007: 1 mL 0.5 M potassium phosphate"
             }
           },
-          "answered": false,
+          "answered": true,
           "lane": "sulfur",
-          "state": "out_of_envelope",
-          "reasons": [
-            "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): FFT (spread 3.41 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pots, Holm p <= 3e-3 across the defensible noise range, independently confirmed (M1b part (i) prereg sec. 21; results/validation/kinetic_core_m1b_part_i_a2_s3.md). No rival is credited; B1 (amine survival) and B13 (B1 + acid supply) are carried. S3 refuses an output whose sensitivity to that switch exceeds the lane's within-laboratory term and never shows it at the incumbent's point: here the spread of the output over B0, B1 (phi_cys = 1) and B13 exceeds omega = 0.419 dex (results/validation/ph_balance_s3_sensitivity.md runs the rule across the recipe space). A pot whose pH is measured or held is answered: state the held pH as a clamped buffer (buffer kind 'clamped'), and the balance is not solved. WHAT WOULD LIFT IT (STATUS_AND_PLAN sec. 7, S3's lift clause, pending independent confirmation): an S3 change of its own (items 6 and 9 replaced as S3 / S4 changes replace them) that ships the unweighted union of the remaining carried rivals' envelopes. A rival enters the union only if its converged best fit has passed S3's test on the data that falsified the incumbent (CF-084's controls); the union credits no rival. For B1 and B13 that also waits on the CO2 ledger audit (CF-134), which both inherit. Until then the refusal stands."
-          ],
+          "state": "in_envelope",
+          "reasons": [],
           "warnings": [],
-          "value_ug_per_l": null
+          "value_ug_per_l": 112.82916997569289
         }
       ]
     },
@@ -2048,7 +2036,7 @@
       "statement": "Furfural is produced from pentoses (ribose, xylose) but is NOT DETECTED from hexoses (glucose, fructose) in the same cysteine + protein-hydrolysate system.",
       "source": "ni2021",
       "status": "not_evaluable",
-      "reason": "arm 'cysteine + D-ribose, 110 C 90 min' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): Furfural (spread 1.94 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cystein",
+      "reason": "step 'cysteine + D-ribose, 110 C 90 min' -> 'cysteine + D-glucose, 110 C 90 min' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the spread of this log ratio over B0 and the carried rivals (1.09 dex) exceeds omega. REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause).",
       "arms": [
         {
           "label": "cysteine + D-ribose, 110 C 90 min",
@@ -2063,16 +2051,14 @@
             "ph": 7.0,
             "aw": 0.98
           },
-          "answered": false,
+          "answered": true,
           "lane": "sulfur",
-          "state": "out_of_envelope",
-          "reasons": [
-            "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): Furfural (spread 1.94 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pots, Holm p <= 3e-3 across the defensible noise range, independently confirmed (M1b part (i) prereg sec. 21; results/validation/kinetic_core_m1b_part_i_a2_s3.md). No rival is credited; B1 (amine survival) and B13 (B1 + acid supply) are carried. S3 refuses an output whose sensitivity to that switch exceeds the lane's within-laboratory term and never shows it at the incumbent's point: here the spread of the output over B0, B1 (phi_cys = 1) and B13 exceeds omega = 0.419 dex (results/validation/ph_balance_s3_sensitivity.md runs the rule across the recipe space). A pot whose pH is measured or held is answered: state the held pH as a clamped buffer (buffer kind 'clamped'), and the balance is not solved. WHAT WOULD LIFT IT (STATUS_AND_PLAN sec. 7, S3's lift clause, pending independent confirmation): an S3 change of its own (items 6 and 9 replaced as S3 / S4 changes replace them) that ships the unweighted union of the remaining carried rivals' envelopes. A rival enters the union only if its converged best fit has passed S3's test on the data that falsified the incumbent (CF-084's controls); the union credits no rival. For B1 and B13 that also waits on the CO2 ledger audit (CF-134), which both inherit. Until then the refusal stands."
-          ],
+          "state": "in_envelope_extrapolated",
+          "reasons": [],
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": null
+          "value_ug_per_l": 2396.4913292835163
         },
         {
           "label": "cysteine + D-glucose, 110 C 90 min",
@@ -2087,16 +2073,14 @@
             "ph": 7.0,
             "aw": 0.98
           },
-          "answered": false,
+          "answered": true,
           "lane": "sulfur",
-          "state": "out_of_envelope",
-          "reasons": [
-            "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): Furfural (spread 2.60 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pots, Holm p <= 3e-3 across the defensible noise range, independently confirmed (M1b part (i) prereg sec. 21; results/validation/kinetic_core_m1b_part_i_a2_s3.md). No rival is credited; B1 (amine survival) and B13 (B1 + acid supply) are carried. S3 refuses an output whose sensitivity to that switch exceeds the lane's within-laboratory term and never shows it at the incumbent's point: here the spread of the output over B0, B1 (phi_cys = 1) and B13 exceeds omega = 0.419 dex (results/validation/ph_balance_s3_sensitivity.md runs the rule across the recipe space). A pot whose pH is measured or held is answered: state the held pH as a clamped buffer (buffer kind 'clamped'), and the balance is not solved. WHAT WOULD LIFT IT (STATUS_AND_PLAN sec. 7, S3's lift clause, pending independent confirmation): an S3 change of its own (items 6 and 9 replaced as S3 / S4 changes replace them) that ships the unweighted union of the remaining carried rivals' envelopes. A rival enters the union only if its converged best fit has passed S3's test on the data that falsified the incumbent (CF-084's controls); the union credits no rival. For B1 and B13 that also waits on the CO2 ledger audit (CF-134), which both inherit. Until then the refusal stands."
-          ],
+          "state": "in_envelope_extrapolated",
+          "reasons": [],
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": null
+          "value_ug_per_l": 419.915794443189
         }
       ]
     },
@@ -2111,8 +2095,17 @@
       "fit_status": "independent",
       "statement": "MFT is produced from pentoses but NOT DETECTED from hexoses under identical cysteine loading.",
       "source": "ni2021",
-      "status": "not_evaluable",
-      "reason": "arm 'cysteine + D-ribose, 110 C 90 min' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): MFT (spread 0.78 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pot",
+      "status": "agree",
+      "reason": null,
+      "identical_predictions": false,
+      "mechanism_absent": false,
+      "lane": "sulfur",
+      "values_ug_per_l": [
+        17.719836645583246,
+        0.0
+      ],
+      "log10_ratio_B_over_A": null,
+      "structural_zero": false,
       "arms": [
         {
           "label": "cysteine + D-ribose, 110 C 90 min",
@@ -2127,16 +2120,14 @@
             "ph": 7.0,
             "aw": 0.98
           },
-          "answered": false,
+          "answered": true,
           "lane": "sulfur",
-          "state": "out_of_envelope",
-          "reasons": [
-            "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): MFT (spread 0.78 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pots, Holm p <= 3e-3 across the defensible noise range, independently confirmed (M1b part (i) prereg sec. 21; results/validation/kinetic_core_m1b_part_i_a2_s3.md). No rival is credited; B1 (amine survival) and B13 (B1 + acid supply) are carried. S3 refuses an output whose sensitivity to that switch exceeds the lane's within-laboratory term and never shows it at the incumbent's point: here the spread of the output over B0, B1 (phi_cys = 1) and B13 exceeds omega = 0.419 dex (results/validation/ph_balance_s3_sensitivity.md runs the rule across the recipe space). A pot whose pH is measured or held is answered: state the held pH as a clamped buffer (buffer kind 'clamped'), and the balance is not solved. WHAT WOULD LIFT IT (STATUS_AND_PLAN sec. 7, S3's lift clause, pending independent confirmation): an S3 change of its own (items 6 and 9 replaced as S3 / S4 changes replace them) that ships the unweighted union of the remaining carried rivals' envelopes. A rival enters the union only if its converged best fit has passed S3's test on the data that falsified the incumbent (CF-084's controls); the union credits no rival. For B1 and B13 that also waits on the CO2 ledger audit (CF-134), which both inherit. Until then the refusal stands."
-          ],
+          "state": "in_envelope_extrapolated",
+          "reasons": [],
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": null
+          "value_ug_per_l": 17.719836645583246
         },
         {
           "label": "cysteine + D-glucose, 110 C 90 min",
@@ -2174,16 +2165,8 @@
       "fit_status": "independent",
       "statement": "FFT is produced from pentoses but NOT DETECTED from hexoses under identical cysteine loading.",
       "source": "ni2021",
-      "status": "agree",
-      "reason": null,
-      "identical_predictions": false,
-      "mechanism_absent": false,
-      "lane": "sulfur",
-      "values_ug_per_l": [
-        59.96445772811702,
-        32.00800410762972
-      ],
-      "log10_ratio_B_over_A": -0.2726353165086982,
+      "status": "not_evaluable",
+      "reason": "step 'cysteine + D-ribose, 110 C 90 min' -> 'cysteine + D-glucose, 110 C 90 min' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the spread of this log ratio over B0 and the carried rivals (0.43 dex) exceeds omega. REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause).",
       "arms": [
         {
           "label": "cysteine + D-ribose, 110 C 90 min",
@@ -2913,8 +2896,17 @@
       "fit_status": "independent",
       "statement": "Adding cysteine to a hydrolysate/xylose system switches MFT and FFT from NOT DETECTED to dominant odorants, while simultaneously INHIBITING browning.",
       "source": "chickencys2025",
-      "status": "not_evaluable",
-      "reason": "arm 'hydrolysate + xylose + cysteine, 100 C 60 min' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): MFT (spread 1.85 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pot",
+      "status": "agree",
+      "reason": null,
+      "identical_predictions": false,
+      "mechanism_absent": false,
+      "lane": "sulfur",
+      "values_ug_per_l": [
+        104.04383337362684,
+        0.0
+      ],
+      "log10_ratio_B_over_A": null,
+      "structural_zero": true,
       "arms": [
         {
           "label": "hydrolysate + xylose + cysteine, 100 C 60 min",
@@ -2930,16 +2922,14 @@
             "ph": 6.5,
             "aw": 0.98
           },
-          "answered": false,
+          "answered": true,
           "lane": "sulfur",
-          "state": "out_of_envelope",
-          "reasons": [
-            "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): MFT (spread 1.85 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pots, Holm p <= 3e-3 across the defensible noise range, independently confirmed (M1b part (i) prereg sec. 21; results/validation/kinetic_core_m1b_part_i_a2_s3.md). No rival is credited; B1 (amine survival) and B13 (B1 + acid supply) are carried. S3 refuses an output whose sensitivity to that switch exceeds the lane's within-laboratory term and never shows it at the incumbent's point: here the spread of the output over B0, B1 (phi_cys = 1) and B13 exceeds omega = 0.419 dex (results/validation/ph_balance_s3_sensitivity.md runs the rule across the recipe space). A pot whose pH is measured or held is answered: state the held pH as a clamped buffer (buffer kind 'clamped'), and the balance is not solved. WHAT WOULD LIFT IT (STATUS_AND_PLAN sec. 7, S3's lift clause, pending independent confirmation): an S3 change of its own (items 6 and 9 replaced as S3 / S4 changes replace them) that ships the unweighted union of the remaining carried rivals' envelopes. A rival enters the union only if its converged best fit has passed S3's test on the data that falsified the incumbent (CF-084's controls); the union credits no rival. For B1 and B13 that also waits on the CO2 ledger audit (CF-134), which both inherit. Until then the refusal stands."
-          ],
+          "state": "in_envelope_extrapolated",
+          "reasons": [],
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": null
+          "value_ug_per_l": 104.04383337362684
         },
         {
           "label": "hydrolysate + xylose, no cysteine",
@@ -3333,7 +3323,7 @@
       "statement": "Under DRY-heating (6 min / 180 C on buffered silica gel), the pentose still beats the hexose for FFT, and by a wider margin than in water: ribose 97.2 ug vs glucose 1.4 ug.",
       "source": "hofmann1998",
       "status": "not_evaluable",
-      "reason": "step 'cysteine + D-ribose, dry-heated 180 C 6 min' -> 'cysteine + D-glucose, dry-heated 180 C 6 min' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the DIRECTION of this ratio is refused: B0 and the carried rivals disagree in its sign (S3). REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); this output's spread over B0 and the carried rivals B1 / B13 exceeds omega = 0.419 dex (results/validation/ph_balance_s3_sensitivity.md). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause).",
+      "reason": "step 'cysteine + D-ribose, dry-heated 180 C 6 min' -> 'cysteine + D-glucose, dry-heated 180 C 6 min' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): an arm's carried rivals could not be run, so the ratio's independence from the balance is not shown. REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause).",
       "arms": [
         {
           "label": "cysteine + D-ribose, dry-heated 180 C 6 min",
@@ -3410,7 +3400,7 @@
       "statement": "In phosphate-buffered cysteine/ribose at 140 C, MFT rises as the buffered pH falls from 5.6 to 4.2 (2230 -> 8250 ng/mmol sugar).",
       "source": "mottram2002",
       "status": "not_evaluable",
-      "reason": "arm 'cysteine + ribose, phosphate buffer pH 5.6, 140 C 30 min' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): MFT (spread 0.48 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pot",
+      "reason": "step 'cysteine + ribose, phosphate buffer pH 4.2, 140 C 30 min' -> 'cysteine + ribose, phosphate buffer pH 5.6, 140 C 30 min' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the spread of this log ratio over B0 and the carried rivals (0.68 dex) exceeds omega. REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause).",
       "arms": [
         {
           "label": "cysteine + ribose, phosphate buffer pH 4.2, 140 C 30 min",
@@ -3455,14 +3445,12 @@
               "source": "Mottram & Nobrega 2002 Methods: phosphate buffer = 0.2 M pyrophosphate (disodium + tetrasodium mixed to pH) (B51, 2026-10-27: the arm carried no buffer)"
             }
           },
-          "answered": false,
+          "answered": true,
           "lane": "sulfur",
-          "state": "out_of_envelope",
-          "reasons": [
-            "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): MFT (spread 0.48 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pots, Holm p <= 3e-3 across the defensible noise range, independently confirmed (M1b part (i) prereg sec. 21; results/validation/kinetic_core_m1b_part_i_a2_s3.md). No rival is credited; B1 (amine survival) and B13 (B1 + acid supply) are carried. S3 refuses an output whose sensitivity to that switch exceeds the lane's within-laboratory term and never shows it at the incumbent's point: here the spread of the output over B0, B1 (phi_cys = 1) and B13 exceeds omega = 0.419 dex (results/validation/ph_balance_s3_sensitivity.md runs the rule across the recipe space). A pot whose pH is measured or held is answered: state the held pH as a clamped buffer (buffer kind 'clamped'), and the balance is not solved. WHAT WOULD LIFT IT (STATUS_AND_PLAN sec. 7, S3's lift clause, pending independent confirmation): an S3 change of its own (items 6 and 9 replaced as S3 / S4 changes replace them) that ships the unweighted union of the remaining carried rivals' envelopes. A rival enters the union only if its converged best fit has passed S3's test on the data that falsified the incumbent (CF-084's controls); the union credits no rival. For B1 and B13 that also waits on the CO2 ledger audit (CF-134), which both inherit. Until then the refusal stands."
-          ],
+          "state": "in_envelope",
+          "reasons": [],
           "warnings": [],
-          "value_ug_per_l": null
+          "value_ug_per_l": 45.46127370751524
         }
       ]
     },
@@ -3478,7 +3466,7 @@
       "statement": "Same as MOT-01 for FFT: in phosphate-buffered cysteine/ribose, FFT rises as pH falls from 5.6 to 4.2 (1750 -> 3160 ng/mmol sugar).",
       "source": "mottram2002",
       "status": "not_evaluable",
-      "reason": "arm 'cysteine + ribose, phosphate buffer pH 5.6, 140 C 30 min' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): FFT (spread 0.64 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pot",
+      "reason": "step 'cysteine + ribose, phosphate buffer pH 4.2, 140 C 30 min' -> 'cysteine + ribose, phosphate buffer pH 5.6, 140 C 30 min' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the spread of this log ratio over B0 and the carried rivals (0.71 dex) exceeds omega. REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause).",
       "arms": [
         {
           "label": "cysteine + ribose, phosphate buffer pH 4.2, 140 C 30 min",
@@ -3523,14 +3511,12 @@
               "source": "Mottram & Nobrega 2002 Methods: phosphate buffer = 0.2 M pyrophosphate (disodium + tetrasodium mixed to pH) (B51, 2026-10-27: the arm carried no buffer)"
             }
           },
-          "answered": false,
+          "answered": true,
           "lane": "sulfur",
-          "state": "out_of_envelope",
-          "reasons": [
-            "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): FFT (spread 0.64 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pots, Holm p <= 3e-3 across the defensible noise range, independently confirmed (M1b part (i) prereg sec. 21; results/validation/kinetic_core_m1b_part_i_a2_s3.md). No rival is credited; B1 (amine survival) and B13 (B1 + acid supply) are carried. S3 refuses an output whose sensitivity to that switch exceeds the lane's within-laboratory term and never shows it at the incumbent's point: here the spread of the output over B0, B1 (phi_cys = 1) and B13 exceeds omega = 0.419 dex (results/validation/ph_balance_s3_sensitivity.md runs the rule across the recipe space). A pot whose pH is measured or held is answered: state the held pH as a clamped buffer (buffer kind 'clamped'), and the balance is not solved. WHAT WOULD LIFT IT (STATUS_AND_PLAN sec. 7, S3's lift clause, pending independent confirmation): an S3 change of its own (items 6 and 9 replaced as S3 / S4 changes replace them) that ships the unweighted union of the remaining carried rivals' envelopes. A rival enters the union only if its converged best fit has passed S3's test on the data that falsified the incumbent (CF-084's controls); the union credits no rival. For B1 and B13 that also waits on the CO2 ledger audit (CF-134), which both inherit. Until then the refusal stands."
-          ],
+          "state": "in_envelope",
+          "reasons": [],
           "warnings": [],
-          "value_ug_per_l": null
+          "value_ug_per_l": 214.76885892096806
         }
       ]
     },
@@ -4626,7 +4612,7 @@
       "statement": "In a cysteine-rich cysteine + ribose pot (ribose : cysteine ~ 1 : 12.5 molar, 0.5 M phosphate, pH 5.88) at 168 C, MFT FALLS from 20 to 60 min (1253 -> 760 -> 628 ng).",
       "source": "liu2023b",
       "status": "not_evaluable",
-      "reason": "arm '20 min' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): MFT (spread 1.07 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pot",
+      "reason": "step '20 min' -> '40 min' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the spread of this log ratio over B0 and the carried rivals (0.61 dex) exceeds omega. REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause).",
       "arms": [
         {
           "label": "20 min",
@@ -4646,14 +4632,12 @@
               "source": "Liu 2023 sec. 2.2: 0.5 mol/L tripotassium phosphate"
             }
           },
-          "answered": false,
+          "answered": true,
           "lane": "sulfur",
-          "state": "out_of_envelope",
-          "reasons": [
-            "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): MFT (spread 1.07 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pots, Holm p <= 3e-3 across the defensible noise range, independently confirmed (M1b part (i) prereg sec. 21; results/validation/kinetic_core_m1b_part_i_a2_s3.md). No rival is credited; B1 (amine survival) and B13 (B1 + acid supply) are carried. S3 refuses an output whose sensitivity to that switch exceeds the lane's within-laboratory term and never shows it at the incumbent's point: here the spread of the output over B0, B1 (phi_cys = 1) and B13 exceeds omega = 0.419 dex (results/validation/ph_balance_s3_sensitivity.md runs the rule across the recipe space). A pot whose pH is measured or held is answered: state the held pH as a clamped buffer (buffer kind 'clamped'), and the balance is not solved. WHAT WOULD LIFT IT (STATUS_AND_PLAN sec. 7, S3's lift clause, pending independent confirmation): an S3 change of its own (items 6 and 9 replaced as S3 / S4 changes replace them) that ships the unweighted union of the remaining carried rivals' envelopes. A rival enters the union only if its converged best fit has passed S3's test on the data that falsified the incumbent (CF-084's controls); the union credits no rival. For B1 and B13 that also waits on the CO2 ledger audit (CF-134), which both inherit. Until then the refusal stands."
-          ],
+          "state": "in_envelope",
+          "reasons": [],
           "warnings": [],
-          "value_ug_per_l": null
+          "value_ug_per_l": 2.0635886840747752
         },
         {
           "label": "40 min",
@@ -4673,14 +4657,12 @@
               "source": "Liu 2023 sec. 2.2: 0.5 mol/L tripotassium phosphate"
             }
           },
-          "answered": false,
+          "answered": true,
           "lane": "sulfur",
-          "state": "out_of_envelope",
-          "reasons": [
-            "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): MFT (spread 1.62 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pots, Holm p <= 3e-3 across the defensible noise range, independently confirmed (M1b part (i) prereg sec. 21; results/validation/kinetic_core_m1b_part_i_a2_s3.md). No rival is credited; B1 (amine survival) and B13 (B1 + acid supply) are carried. S3 refuses an output whose sensitivity to that switch exceeds the lane's within-laboratory term and never shows it at the incumbent's point: here the spread of the output over B0, B1 (phi_cys = 1) and B13 exceeds omega = 0.419 dex (results/validation/ph_balance_s3_sensitivity.md runs the rule across the recipe space). A pot whose pH is measured or held is answered: state the held pH as a clamped buffer (buffer kind 'clamped'), and the balance is not solved. WHAT WOULD LIFT IT (STATUS_AND_PLAN sec. 7, S3's lift clause, pending independent confirmation): an S3 change of its own (items 6 and 9 replaced as S3 / S4 changes replace them) that ships the unweighted union of the remaining carried rivals' envelopes. A rival enters the union only if its converged best fit has passed S3's test on the data that falsified the incumbent (CF-084's controls); the union credits no rival. For B1 and B13 that also waits on the CO2 ledger audit (CF-134), which both inherit. Until then the refusal stands."
-          ],
+          "state": "in_envelope",
+          "reasons": [],
           "warnings": [],
-          "value_ug_per_l": null
+          "value_ug_per_l": 0.030990817656702762
         },
         {
           "label": "60 min",
@@ -4700,14 +4682,12 @@
               "source": "Liu 2023 sec. 2.2: 0.5 mol/L tripotassium phosphate"
             }
           },
-          "answered": false,
+          "answered": true,
           "lane": "sulfur",
-          "state": "out_of_envelope",
-          "reasons": [
-            "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): MFT (spread 1.76 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pots, Holm p <= 3e-3 across the defensible noise range, independently confirmed (M1b part (i) prereg sec. 21; results/validation/kinetic_core_m1b_part_i_a2_s3.md). No rival is credited; B1 (amine survival) and B13 (B1 + acid supply) are carried. S3 refuses an output whose sensitivity to that switch exceeds the lane's within-laboratory term and never shows it at the incumbent's point: here the spread of the output over B0, B1 (phi_cys = 1) and B13 exceeds omega = 0.419 dex (results/validation/ph_balance_s3_sensitivity.md runs the rule across the recipe space). A pot whose pH is measured or held is answered: state the held pH as a clamped buffer (buffer kind 'clamped'), and the balance is not solved. WHAT WOULD LIFT IT (STATUS_AND_PLAN sec. 7, S3's lift clause, pending independent confirmation): an S3 change of its own (items 6 and 9 replaced as S3 / S4 changes replace them) that ships the unweighted union of the remaining carried rivals' envelopes. A rival enters the union only if its converged best fit has passed S3's test on the data that falsified the incumbent (CF-084's controls); the union credits no rival. For B1 and B13 that also waits on the CO2 ledger audit (CF-134), which both inherit. Until then the refusal stands."
-          ],
+          "state": "in_envelope",
+          "reasons": [],
           "warnings": [],
-          "value_ug_per_l": null
+          "value_ug_per_l": 0.0013249697160098639
         }
       ]
     },
@@ -4723,7 +4703,7 @@
       "statement": "In the same pot FFT is FLAT from 20 to 60 min at 168 C (175, 198, 170 ng; the 40-min point within SD).",
       "source": "liu2023b",
       "status": "not_evaluable",
-      "reason": "arm '20 min' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): FFT (spread 0.91 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pot",
+      "reason": "a predicted concentration is zero; no direction is defined",
       "arms": [
         {
           "label": "20 min",
@@ -4743,14 +4723,12 @@
               "source": "Liu 2023 sec. 2.2: 0.5 mol/L tripotassium phosphate"
             }
           },
-          "answered": false,
+          "answered": true,
           "lane": "sulfur",
-          "state": "out_of_envelope",
-          "reasons": [
-            "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): FFT (spread 0.91 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pots, Holm p <= 3e-3 across the defensible noise range, independently confirmed (M1b part (i) prereg sec. 21; results/validation/kinetic_core_m1b_part_i_a2_s3.md). No rival is credited; B1 (amine survival) and B13 (B1 + acid supply) are carried. S3 refuses an output whose sensitivity to that switch exceeds the lane's within-laboratory term and never shows it at the incumbent's point: here the spread of the output over B0, B1 (phi_cys = 1) and B13 exceeds omega = 0.419 dex (results/validation/ph_balance_s3_sensitivity.md runs the rule across the recipe space). A pot whose pH is measured or held is answered: state the held pH as a clamped buffer (buffer kind 'clamped'), and the balance is not solved. WHAT WOULD LIFT IT (STATUS_AND_PLAN sec. 7, S3's lift clause, pending independent confirmation): an S3 change of its own (items 6 and 9 replaced as S3 / S4 changes replace them) that ships the unweighted union of the remaining carried rivals' envelopes. A rival enters the union only if its converged best fit has passed S3's test on the data that falsified the incumbent (CF-084's controls); the union credits no rival. For B1 and B13 that also waits on the CO2 ledger audit (CF-134), which both inherit. Until then the refusal stands."
-          ],
+          "state": "in_envelope",
+          "reasons": [],
           "warnings": [],
-          "value_ug_per_l": null
+          "value_ug_per_l": 0.007265359740625675
         },
         {
           "label": "60 min",
@@ -4791,7 +4769,7 @@
       "statement": "In glucose + cysteine (no pentose) in phosphate buffer at pH 5.88 and 168 C, FFT RISES from 20 to 60 min (44.7 -> 107 -> 133 ng), via 2-furfural and 2-furanmethanol from glucose fragmentation.",
       "source": "liu2021",
       "status": "not_evaluable",
-      "reason": "arm '20 min' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): FFT (spread 0.48 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pot",
+      "reason": "a predicted concentration is zero; no direction is defined",
       "arms": [
         {
           "label": "20 min",
@@ -4806,17 +4784,15 @@
             "ph": 5.88,
             "aw": 0.98
           },
-          "answered": false,
+          "answered": true,
           "lane": "sulfur",
-          "state": "out_of_envelope",
-          "reasons": [
-            "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): FFT (spread 0.48 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pots, Holm p <= 3e-3 across the defensible noise range, independently confirmed (M1b part (i) prereg sec. 21; results/validation/kinetic_core_m1b_part_i_a2_s3.md). No rival is credited; B1 (amine survival) and B13 (B1 + acid supply) are carried. S3 refuses an output whose sensitivity to that switch exceeds the lane's within-laboratory term and never shows it at the incumbent's point: here the spread of the output over B0, B1 (phi_cys = 1) and B13 exceeds omega = 0.419 dex (results/validation/ph_balance_s3_sensitivity.md runs the rule across the recipe space). A pot whose pH is measured or held is answered: state the held pH as a clamped buffer (buffer kind 'clamped'), and the balance is not solved. WHAT WOULD LIFT IT (STATUS_AND_PLAN sec. 7, S3's lift clause, pending independent confirmation): an S3 change of its own (items 6 and 9 replaced as S3 / S4 changes replace them) that ships the unweighted union of the remaining carried rivals' envelopes. A rival enters the union only if its converged best fit has passed S3's test on the data that falsified the incumbent (CF-084's controls); the union credits no rival. For B1 and B13 that also waits on the CO2 ledger audit (CF-134), which both inherit. Until then the refusal stands."
-          ],
+          "state": "in_envelope_extrapolated",
+          "reasons": [],
           "warnings": [
             "HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": null
+          "value_ug_per_l": 1.614352653913228
         },
         {
           "label": "60 min",
@@ -4855,7 +4831,7 @@
       "statement": "In the Hofmann 1998 pot (ribose 100 mM + cysteine 33 mM, 0.5 M phosphate pH 5.0) held at 100 C, MFT RISES monotonically 30 -> 60 -> 360 -> 720 min (4.5, 13.8, 156, 179 ug per 100 mL) and FFT likewise (2.0, 3.1, 110, 132).",
       "source": "schieberle2000",
       "status": "not_evaluable",
-      "reason": "arm '30 min' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): MFT (spread 0.92 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pot",
+      "reason": "step '60 min' -> '360 min' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the DIRECTION of this ratio is refused: B0 and the carried rivals disagree in its sign (S3). REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause).",
       "arms": [
         {
           "label": "30 min",
@@ -4875,14 +4851,12 @@
               "source": "Schieberle 2000 Table IV footnote: 100 mL 0.5 mol/L phosphate pH 5.0"
             }
           },
-          "answered": false,
+          "answered": true,
           "lane": "sulfur",
-          "state": "out_of_envelope",
-          "reasons": [
-            "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): MFT (spread 0.92 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pots, Holm p <= 3e-3 across the defensible noise range, independently confirmed (M1b part (i) prereg sec. 21; results/validation/kinetic_core_m1b_part_i_a2_s3.md). No rival is credited; B1 (amine survival) and B13 (B1 + acid supply) are carried. S3 refuses an output whose sensitivity to that switch exceeds the lane's within-laboratory term and never shows it at the incumbent's point: here the spread of the output over B0, B1 (phi_cys = 1) and B13 exceeds omega = 0.419 dex (results/validation/ph_balance_s3_sensitivity.md runs the rule across the recipe space). A pot whose pH is measured or held is answered: state the held pH as a clamped buffer (buffer kind 'clamped'), and the balance is not solved. WHAT WOULD LIFT IT (STATUS_AND_PLAN sec. 7, S3's lift clause, pending independent confirmation): an S3 change of its own (items 6 and 9 replaced as S3 / S4 changes replace them) that ships the unweighted union of the remaining carried rivals' envelopes. A rival enters the union only if its converged best fit has passed S3's test on the data that falsified the incumbent (CF-084's controls); the union credits no rival. For B1 and B13 that also waits on the CO2 ledger audit (CF-134), which both inherit. Until then the refusal stands."
-          ],
+          "state": "in_envelope",
+          "reasons": [],
           "warnings": [],
-          "value_ug_per_l": null
+          "value_ug_per_l": 12.616605057305254
         },
         {
           "label": "60 min",
@@ -4902,14 +4876,12 @@
               "source": "Schieberle 2000 Table IV footnote: 100 mL 0.5 mol/L phosphate pH 5.0"
             }
           },
-          "answered": false,
+          "answered": true,
           "lane": "sulfur",
-          "state": "out_of_envelope",
-          "reasons": [
-            "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): MFT (spread 1.30 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pots, Holm p <= 3e-3 across the defensible noise range, independently confirmed (M1b part (i) prereg sec. 21; results/validation/kinetic_core_m1b_part_i_a2_s3.md). No rival is credited; B1 (amine survival) and B13 (B1 + acid supply) are carried. S3 refuses an output whose sensitivity to that switch exceeds the lane's within-laboratory term and never shows it at the incumbent's point: here the spread of the output over B0, B1 (phi_cys = 1) and B13 exceeds omega = 0.419 dex (results/validation/ph_balance_s3_sensitivity.md runs the rule across the recipe space). A pot whose pH is measured or held is answered: state the held pH as a clamped buffer (buffer kind 'clamped'), and the balance is not solved. WHAT WOULD LIFT IT (STATUS_AND_PLAN sec. 7, S3's lift clause, pending independent confirmation): an S3 change of its own (items 6 and 9 replaced as S3 / S4 changes replace them) that ships the unweighted union of the remaining carried rivals' envelopes. A rival enters the union only if its converged best fit has passed S3's test on the data that falsified the incumbent (CF-084's controls); the union credits no rival. For B1 and B13 that also waits on the CO2 ledger audit (CF-134), which both inherit. Until then the refusal stands."
-          ],
+          "state": "in_envelope",
+          "reasons": [],
           "warnings": [],
-          "value_ug_per_l": null
+          "value_ug_per_l": 30.818638636383607
         },
         {
           "label": "360 min",
@@ -4929,14 +4901,12 @@
               "source": "Schieberle 2000 Table IV footnote: 100 mL 0.5 mol/L phosphate pH 5.0"
             }
           },
-          "answered": false,
+          "answered": true,
           "lane": "sulfur",
-          "state": "out_of_envelope",
-          "reasons": [
-            "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): MFT (spread 4.78 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pots, Holm p <= 3e-3 across the defensible noise range, independently confirmed (M1b part (i) prereg sec. 21; results/validation/kinetic_core_m1b_part_i_a2_s3.md). No rival is credited; B1 (amine survival) and B13 (B1 + acid supply) are carried. S3 refuses an output whose sensitivity to that switch exceeds the lane's within-laboratory term and never shows it at the incumbent's point: here the spread of the output over B0, B1 (phi_cys = 1) and B13 exceeds omega = 0.419 dex (results/validation/ph_balance_s3_sensitivity.md runs the rule across the recipe space). A pot whose pH is measured or held is answered: state the held pH as a clamped buffer (buffer kind 'clamped'), and the balance is not solved. WHAT WOULD LIFT IT (STATUS_AND_PLAN sec. 7, S3's lift clause, pending independent confirmation): an S3 change of its own (items 6 and 9 replaced as S3 / S4 changes replace them) that ships the unweighted union of the remaining carried rivals' envelopes. A rival enters the union only if its converged best fit has passed S3's test on the data that falsified the incumbent (CF-084's controls); the union credits no rival. For B1 and B13 that also waits on the CO2 ledger audit (CF-134), which both inherit. Until then the refusal stands."
-          ],
+          "state": "in_envelope",
+          "reasons": [],
           "warnings": [],
-          "value_ug_per_l": null
+          "value_ug_per_l": 35.19667662571395
         },
         {
           "label": "720 min",
@@ -4956,14 +4926,12 @@
               "source": "Schieberle 2000 Table IV footnote: 100 mL 0.5 mol/L phosphate pH 5.0"
             }
           },
-          "answered": false,
+          "answered": true,
           "lane": "sulfur",
-          "state": "out_of_envelope",
-          "reasons": [
-            "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): MFT (spread 6.39 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pots, Holm p <= 3e-3 across the defensible noise range, independently confirmed (M1b part (i) prereg sec. 21; results/validation/kinetic_core_m1b_part_i_a2_s3.md). No rival is credited; B1 (amine survival) and B13 (B1 + acid supply) are carried. S3 refuses an output whose sensitivity to that switch exceeds the lane's within-laboratory term and never shows it at the incumbent's point: here the spread of the output over B0, B1 (phi_cys = 1) and B13 exceeds omega = 0.419 dex (results/validation/ph_balance_s3_sensitivity.md runs the rule across the recipe space). A pot whose pH is measured or held is answered: state the held pH as a clamped buffer (buffer kind 'clamped'), and the balance is not solved. WHAT WOULD LIFT IT (STATUS_AND_PLAN sec. 7, S3's lift clause, pending independent confirmation): an S3 change of its own (items 6 and 9 replaced as S3 / S4 changes replace them) that ships the unweighted union of the remaining carried rivals' envelopes. A rival enters the union only if its converged best fit has passed S3's test on the data that falsified the incumbent (CF-084's controls); the union credits no rival. For B1 and B13 that also waits on the CO2 ledger audit (CF-134), which both inherit. Until then the refusal stands."
-          ],
+          "state": "in_envelope",
+          "reasons": [],
           "warnings": [],
-          "value_ug_per_l": null
+          "value_ug_per_l": 19.051852645629083
         }
       ]
     },
@@ -5113,7 +5081,7 @@
       "statement": "In xylose 150 mM + cysteine 50 mM + thiamine 50 mM (0.5 M phosphate, 145 C, 20 min) FFT FALLS monotonically from pH 4 to pH 7 (peak areas 431 / 368 / 185 / 0 at pH 4 / 5 / 6 / 7).",
       "source": "cerny2007",
       "status": "not_evaluable",
-      "reason": "arm 'pH 4' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): FFT (spread 0.65 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pot",
+      "reason": "step 'pH 4' -> 'pH 5' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the spread of this log ratio over B0 and the carried rivals (2.45 dex) exceeds omega. REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause).",
       "arms": [
         {
           "label": "pH 4",
@@ -5134,14 +5102,12 @@
               "source": "Cerny & Briffod 2007: 1 mL 0.5 M potassium phosphate"
             }
           },
-          "answered": false,
+          "answered": true,
           "lane": "sulfur",
-          "state": "out_of_envelope",
-          "reasons": [
-            "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): FFT (spread 0.65 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pots, Holm p <= 3e-3 across the defensible noise range, independently confirmed (M1b part (i) prereg sec. 21; results/validation/kinetic_core_m1b_part_i_a2_s3.md). No rival is credited; B1 (amine survival) and B13 (B1 + acid supply) are carried. S3 refuses an output whose sensitivity to that switch exceeds the lane's within-laboratory term and never shows it at the incumbent's point: here the spread of the output over B0, B1 (phi_cys = 1) and B13 exceeds omega = 0.419 dex (results/validation/ph_balance_s3_sensitivity.md runs the rule across the recipe space). A pot whose pH is measured or held is answered: state the held pH as a clamped buffer (buffer kind 'clamped'), and the balance is not solved. WHAT WOULD LIFT IT (STATUS_AND_PLAN sec. 7, S3's lift clause, pending independent confirmation): an S3 change of its own (items 6 and 9 replaced as S3 / S4 changes replace them) that ships the unweighted union of the remaining carried rivals' envelopes. A rival enters the union only if its converged best fit has passed S3's test on the data that falsified the incumbent (CF-084's controls); the union credits no rival. For B1 and B13 that also waits on the CO2 ledger audit (CF-134), which both inherit. Until then the refusal stands."
-          ],
+          "state": "in_envelope",
+          "reasons": [],
           "warnings": [],
-          "value_ug_per_l": null
+          "value_ug_per_l": 3991.7170674795525
         },
         {
           "label": "pH 5",
@@ -5162,14 +5128,12 @@
               "source": "Cerny & Briffod 2007: 1 mL 0.5 M potassium phosphate"
             }
           },
-          "answered": false,
+          "answered": true,
           "lane": "sulfur",
-          "state": "out_of_envelope",
-          "reasons": [
-            "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): FFT (spread 2.50 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pots, Holm p <= 3e-3 across the defensible noise range, independently confirmed (M1b part (i) prereg sec. 21; results/validation/kinetic_core_m1b_part_i_a2_s3.md). No rival is credited; B1 (amine survival) and B13 (B1 + acid supply) are carried. S3 refuses an output whose sensitivity to that switch exceeds the lane's within-laboratory term and never shows it at the incumbent's point: here the spread of the output over B0, B1 (phi_cys = 1) and B13 exceeds omega = 0.419 dex (results/validation/ph_balance_s3_sensitivity.md runs the rule across the recipe space). A pot whose pH is measured or held is answered: state the held pH as a clamped buffer (buffer kind 'clamped'), and the balance is not solved. WHAT WOULD LIFT IT (STATUS_AND_PLAN sec. 7, S3's lift clause, pending independent confirmation): an S3 change of its own (items 6 and 9 replaced as S3 / S4 changes replace them) that ships the unweighted union of the remaining carried rivals' envelopes. A rival enters the union only if its converged best fit has passed S3's test on the data that falsified the incumbent (CF-084's controls); the union credits no rival. For B1 and B13 that also waits on the CO2 ledger audit (CF-134), which both inherit. Until then the refusal stands."
-          ],
+          "state": "in_envelope",
+          "reasons": [],
           "warnings": [],
-          "value_ug_per_l": null
+          "value_ug_per_l": 1178.4438613985187
         },
         {
           "label": "pH 6",
@@ -5190,14 +5154,12 @@
               "source": "Cerny & Briffod 2007: 1 mL 0.5 M potassium phosphate"
             }
           },
-          "answered": false,
+          "answered": true,
           "lane": "sulfur",
-          "state": "out_of_envelope",
-          "reasons": [
-            "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): FFT (spread 1.35 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pots, Holm p <= 3e-3 across the defensible noise range, independently confirmed (M1b part (i) prereg sec. 21; results/validation/kinetic_core_m1b_part_i_a2_s3.md). No rival is credited; B1 (amine survival) and B13 (B1 + acid supply) are carried. S3 refuses an output whose sensitivity to that switch exceeds the lane's within-laboratory term and never shows it at the incumbent's point: here the spread of the output over B0, B1 (phi_cys = 1) and B13 exceeds omega = 0.419 dex (results/validation/ph_balance_s3_sensitivity.md runs the rule across the recipe space). A pot whose pH is measured or held is answered: state the held pH as a clamped buffer (buffer kind 'clamped'), and the balance is not solved. WHAT WOULD LIFT IT (STATUS_AND_PLAN sec. 7, S3's lift clause, pending independent confirmation): an S3 change of its own (items 6 and 9 replaced as S3 / S4 changes replace them) that ships the unweighted union of the remaining carried rivals' envelopes. A rival enters the union only if its converged best fit has passed S3's test on the data that falsified the incumbent (CF-084's controls); the union credits no rival. For B1 and B13 that also waits on the CO2 ledger audit (CF-134), which both inherit. Until then the refusal stands."
-          ],
+          "state": "in_envelope",
+          "reasons": [],
           "warnings": [],
-          "value_ug_per_l": null
+          "value_ug_per_l": 1.1019069954259357
         },
         {
           "label": "pH 7",
@@ -5218,14 +5180,12 @@
               "source": "Cerny & Briffod 2007: 1 mL 0.5 M potassium phosphate"
             }
           },
-          "answered": false,
+          "answered": true,
           "lane": "sulfur",
-          "state": "out_of_envelope",
-          "reasons": [
-            "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): FFT (spread 3.41 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pots, Holm p <= 3e-3 across the defensible noise range, independently confirmed (M1b part (i) prereg sec. 21; results/validation/kinetic_core_m1b_part_i_a2_s3.md). No rival is credited; B1 (amine survival) and B13 (B1 + acid supply) are carried. S3 refuses an output whose sensitivity to that switch exceeds the lane's within-laboratory term and never shows it at the incumbent's point: here the spread of the output over B0, B1 (phi_cys = 1) and B13 exceeds omega = 0.419 dex (results/validation/ph_balance_s3_sensitivity.md runs the rule across the recipe space). A pot whose pH is measured or held is answered: state the held pH as a clamped buffer (buffer kind 'clamped'), and the balance is not solved. WHAT WOULD LIFT IT (STATUS_AND_PLAN sec. 7, S3's lift clause, pending independent confirmation): an S3 change of its own (items 6 and 9 replaced as S3 / S4 changes replace them) that ships the unweighted union of the remaining carried rivals' envelopes. A rival enters the union only if its converged best fit has passed S3's test on the data that falsified the incumbent (CF-084's controls); the union credits no rival. For B1 and B13 that also waits on the CO2 ledger audit (CF-134), which both inherit. Until then the refusal stands."
-          ],
+          "state": "in_envelope",
+          "reasons": [],
           "warnings": [],
-          "value_ug_per_l": null
+          "value_ug_per_l": 112.82916997569289
         }
       ]
     },
@@ -5241,7 +5201,7 @@
       "statement": "In the same pot furfural FALLS from pH 4 to pH 6 (208 / 158 / 0 at pH 4 / 5 / 6): the furfural -> FFT branch is shut by neutral pH.",
       "source": "cerny2007",
       "status": "not_evaluable",
-      "reason": "arm 'pH 5' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): furfural (spread 0.56 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cystein",
+      "reason": "step 'pH 4' -> 'pH 5' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the DIRECTION of this ratio is refused: B0 and the carried rivals disagree in its sign (S3). REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause).",
       "arms": [
         {
           "label": "pH 4",
@@ -5288,14 +5248,12 @@
               "source": "Cerny & Briffod 2007: 1 mL 0.5 M potassium phosphate"
             }
           },
-          "answered": false,
+          "answered": true,
           "lane": "sulfur",
-          "state": "out_of_envelope",
-          "reasons": [
-            "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): furfural (spread 0.56 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pots, Holm p <= 3e-3 across the defensible noise range, independently confirmed (M1b part (i) prereg sec. 21; results/validation/kinetic_core_m1b_part_i_a2_s3.md). No rival is credited; B1 (amine survival) and B13 (B1 + acid supply) are carried. S3 refuses an output whose sensitivity to that switch exceeds the lane's within-laboratory term and never shows it at the incumbent's point: here the spread of the output over B0, B1 (phi_cys = 1) and B13 exceeds omega = 0.419 dex (results/validation/ph_balance_s3_sensitivity.md runs the rule across the recipe space). A pot whose pH is measured or held is answered: state the held pH as a clamped buffer (buffer kind 'clamped'), and the balance is not solved. WHAT WOULD LIFT IT (STATUS_AND_PLAN sec. 7, S3's lift clause, pending independent confirmation): an S3 change of its own (items 6 and 9 replaced as S3 / S4 changes replace them) that ships the unweighted union of the remaining carried rivals' envelopes. A rival enters the union only if its converged best fit has passed S3's test on the data that falsified the incumbent (CF-084's controls); the union credits no rival. For B1 and B13 that also waits on the CO2 ledger audit (CF-134), which both inherit. Until then the refusal stands."
-          ],
+          "state": "in_envelope",
+          "reasons": [],
           "warnings": [],
-          "value_ug_per_l": null
+          "value_ug_per_l": 2069.213605054368
         },
         {
           "label": "pH 6",
@@ -5316,14 +5274,12 @@
               "source": "Cerny & Briffod 2007: 1 mL 0.5 M potassium phosphate"
             }
           },
-          "answered": false,
+          "answered": true,
           "lane": "sulfur",
-          "state": "out_of_envelope",
-          "reasons": [
-            "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): furfural (spread 2.57 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pots, Holm p <= 3e-3 across the defensible noise range, independently confirmed (M1b part (i) prereg sec. 21; results/validation/kinetic_core_m1b_part_i_a2_s3.md). No rival is credited; B1 (amine survival) and B13 (B1 + acid supply) are carried. S3 refuses an output whose sensitivity to that switch exceeds the lane's within-laboratory term and never shows it at the incumbent's point: here the spread of the output over B0, B1 (phi_cys = 1) and B13 exceeds omega = 0.419 dex (results/validation/ph_balance_s3_sensitivity.md runs the rule across the recipe space). A pot whose pH is measured or held is answered: state the held pH as a clamped buffer (buffer kind 'clamped'), and the balance is not solved. WHAT WOULD LIFT IT (STATUS_AND_PLAN sec. 7, S3's lift clause, pending independent confirmation): an S3 change of its own (items 6 and 9 replaced as S3 / S4 changes replace them) that ships the unweighted union of the remaining carried rivals' envelopes. A rival enters the union only if its converged best fit has passed S3's test on the data that falsified the incumbent (CF-084's controls); the union credits no rival. For B1 and B13 that also waits on the CO2 ledger audit (CF-134), which both inherit. Until then the refusal stands."
-          ],
+          "state": "in_envelope",
+          "reasons": [],
           "warnings": [],
-          "value_ug_per_l": null
+          "value_ug_per_l": 339.5379597344533
         }
       ]
     },
@@ -5339,7 +5295,7 @@
       "statement": "Ribose 50 mM + cysteine 50 mM in 0.2 M pyrophosphate buffer at 140 C for 30 min gives 3.7x MORE MFT at pH 4.2 than at pH 5.6.",
       "source": "mottram2002",
       "status": "not_evaluable",
-      "reason": "arm 'pH 5.6' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): MFT (spread 0.48 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pot",
+      "reason": "step 'pH 4.2' -> 'pH 5.6' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the spread of this log ratio over B0 and the carried rivals (0.68 dex) exceeds omega. REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause).",
       "arms": [
         {
           "label": "pH 4.2",
@@ -5384,14 +5340,12 @@
               "source": "Mottram & Nobrega 2002: 0.2 M sodium pyrophosphate (B51, 2026-10-27: charged as pyrophosphate; was carried as orthophosphate)"
             }
           },
-          "answered": false,
+          "answered": true,
           "lane": "sulfur",
-          "state": "out_of_envelope",
-          "reasons": [
-            "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): MFT (spread 0.48 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pots, Holm p <= 3e-3 across the defensible noise range, independently confirmed (M1b part (i) prereg sec. 21; results/validation/kinetic_core_m1b_part_i_a2_s3.md). No rival is credited; B1 (amine survival) and B13 (B1 + acid supply) are carried. S3 refuses an output whose sensitivity to that switch exceeds the lane's within-laboratory term and never shows it at the incumbent's point: here the spread of the output over B0, B1 (phi_cys = 1) and B13 exceeds omega = 0.419 dex (results/validation/ph_balance_s3_sensitivity.md runs the rule across the recipe space). A pot whose pH is measured or held is answered: state the held pH as a clamped buffer (buffer kind 'clamped'), and the balance is not solved. WHAT WOULD LIFT IT (STATUS_AND_PLAN sec. 7, S3's lift clause, pending independent confirmation): an S3 change of its own (items 6 and 9 replaced as S3 / S4 changes replace them) that ships the unweighted union of the remaining carried rivals' envelopes. A rival enters the union only if its converged best fit has passed S3's test on the data that falsified the incumbent (CF-084's controls); the union credits no rival. For B1 and B13 that also waits on the CO2 ledger audit (CF-134), which both inherit. Until then the refusal stands."
-          ],
+          "state": "in_envelope",
+          "reasons": [],
           "warnings": [],
-          "value_ug_per_l": null
+          "value_ug_per_l": 45.46127370751524
         }
       ]
     },
@@ -5407,7 +5361,7 @@
       "statement": "In the same pots FFT is 1.8x higher at pH 4.2 than at pH 5.6, and furfural rises from a trace to 2290 ng per mmol.",
       "source": "mottram2002",
       "status": "not_evaluable",
-      "reason": "arm 'pH 5.6' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): FFT (spread 0.64 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pot",
+      "reason": "step 'pH 4.2' -> 'pH 5.6' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the spread of this log ratio over B0 and the carried rivals (0.71 dex) exceeds omega. REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause).",
       "arms": [
         {
           "label": "pH 4.2",
@@ -5452,14 +5406,12 @@
               "source": "Mottram & Nobrega 2002: 0.2 M sodium pyrophosphate (B51, 2026-10-27: charged as pyrophosphate; was carried as orthophosphate)"
             }
           },
-          "answered": false,
+          "answered": true,
           "lane": "sulfur",
-          "state": "out_of_envelope",
-          "reasons": [
-            "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): FFT (spread 0.64 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pots, Holm p <= 3e-3 across the defensible noise range, independently confirmed (M1b part (i) prereg sec. 21; results/validation/kinetic_core_m1b_part_i_a2_s3.md). No rival is credited; B1 (amine survival) and B13 (B1 + acid supply) are carried. S3 refuses an output whose sensitivity to that switch exceeds the lane's within-laboratory term and never shows it at the incumbent's point: here the spread of the output over B0, B1 (phi_cys = 1) and B13 exceeds omega = 0.419 dex (results/validation/ph_balance_s3_sensitivity.md runs the rule across the recipe space). A pot whose pH is measured or held is answered: state the held pH as a clamped buffer (buffer kind 'clamped'), and the balance is not solved. WHAT WOULD LIFT IT (STATUS_AND_PLAN sec. 7, S3's lift clause, pending independent confirmation): an S3 change of its own (items 6 and 9 replaced as S3 / S4 changes replace them) that ships the unweighted union of the remaining carried rivals' envelopes. A rival enters the union only if its converged best fit has passed S3's test on the data that falsified the incumbent (CF-084's controls); the union credits no rival. For B1 and B13 that also waits on the CO2 ledger audit (CF-134), which both inherit. Until then the refusal stands."
-          ],
+          "state": "in_envelope",
+          "reasons": [],
           "warnings": [],
-          "value_ug_per_l": null
+          "value_ug_per_l": 214.76885892096806
         }
       ]
     },
@@ -5475,7 +5427,7 @@
       "statement": "In cysteine + xylose 40/40 mM (0.2 M phosphate pH 6.5, 120 C, 50 min), MFT PEAKS with added lysine: 22.63 ng/mL with none, 32.56 at lysine 1x cysteine, 0.58 at 16x (Table 2, Duncan b / a / f).",
       "source": "zhang2025b",
       "status": "not_evaluable",
-      "reason": "arm 'lysine 0x' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): MFT (spread 0.60 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pot",
+      "reason": "arm 'lysine 1x (40 mM)' refused: LANE CONFLICT: this request needs both the acrylamide and sulfur lanes at once. They do not compose -- the acrylamide network deliberately omits every sulfur step (acrylamide.OUT_OF_SCOPE), because composing them would spend the same cysteine twice. No single integration can answer it.",
       "arms": [
         {
           "label": "lysine 0x",
@@ -5495,14 +5447,12 @@
               "source": "Zhang 2025b sec. 2.2: 5 mL phosphate buffer 0.2 mol/L, pH 6.5"
             }
           },
-          "answered": false,
+          "answered": true,
           "lane": "sulfur",
-          "state": "out_of_envelope",
-          "reasons": [
-            "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): MFT (spread 0.60 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pots, Holm p <= 3e-3 across the defensible noise range, independently confirmed (M1b part (i) prereg sec. 21; results/validation/kinetic_core_m1b_part_i_a2_s3.md). No rival is credited; B1 (amine survival) and B13 (B1 + acid supply) are carried. S3 refuses an output whose sensitivity to that switch exceeds the lane's within-laboratory term and never shows it at the incumbent's point: here the spread of the output over B0, B1 (phi_cys = 1) and B13 exceeds omega = 0.419 dex (results/validation/ph_balance_s3_sensitivity.md runs the rule across the recipe space). A pot whose pH is measured or held is answered: state the held pH as a clamped buffer (buffer kind 'clamped'), and the balance is not solved. WHAT WOULD LIFT IT (STATUS_AND_PLAN sec. 7, S3's lift clause, pending independent confirmation): an S3 change of its own (items 6 and 9 replaced as S3 / S4 changes replace them) that ships the unweighted union of the remaining carried rivals' envelopes. A rival enters the union only if its converged best fit has passed S3's test on the data that falsified the incumbent (CF-084's controls); the union credits no rival. For B1 and B13 that also waits on the CO2 ledger audit (CF-134), which both inherit. Until then the refusal stands."
-          ],
+          "state": "in_envelope",
+          "reasons": [],
           "warnings": [],
-          "value_ug_per_l": null
+          "value_ug_per_l": 0.5097742997445959
         },
         {
           "label": "lysine 1x (40 mM)",
@@ -5573,22 +5523,8 @@
       "fit_status": "fit_system_overlap",
       "statement": "Ala-xylose ARP 20 mM + cysteine 20 mM (unbuffered, initial pH 7, 120 C): MFT RISES monotonically over 30 / 60 / 90 / 120 min (63.28 -> 202.87 -> 262.91 -> 344.87 ug/L; Duncan a < b < c < d).",
       "source": "zhou2022",
-      "status": "disagree",
-      "reason": null,
-      "identical_predictions": false,
-      "mechanism_absent": false,
-      "lane": "sulfur",
-      "values_ug_per_l": [
-        75.76126222664362,
-        170.23869697069372,
-        192.45590372909317,
-        177.53064005910755
-      ],
-      "log10_steps": [
-        0.35161108482689946,
-        0.05327295146291535,
-        -0.035057919086564394
-      ],
+      "status": "not_evaluable",
+      "reason": "step '90 min' -> '120 min' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the DIRECTION of this ratio is refused: B0 and the carried rivals disagree in its sign (S3). REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause).",
       "arms": [
         {
           "label": "30 min",
@@ -5826,7 +5762,7 @@
       "statement": "At 120 min, cysteine HALVES furfural from the Ala-xylose ARP: 1261.12 ug/L from ARP alone vs 510.92 with 20 mM cysteine (Duncan e vs b; the ratio is 0.41-0.57 at every time).",
       "source": "zhou2022",
       "status": "not_evaluable",
-      "reason": "arm 'ARP + cysteine, 120 min' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): furfural (spread 0.70 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cystein",
+      "reason": "step 'ARP alone, 120 min' -> 'ARP + cysteine, 120 min' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the DIRECTION of this ratio is refused: B0 and the carried rivals disagree in its sign (S3). REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause).",
       "arms": [
         {
           "label": "ARP alone, 120 min",
@@ -5868,14 +5804,12 @@
               "source": "Zhou 2022: aqueous, initial pH 7 set with 3 M NaOH, no buffer"
             }
           },
-          "answered": false,
+          "answered": true,
           "lane": "sulfur",
-          "state": "out_of_envelope",
-          "reasons": [
-            "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): furfural (spread 0.70 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pots, Holm p <= 3e-3 across the defensible noise range, independently confirmed (M1b part (i) prereg sec. 21; results/validation/kinetic_core_m1b_part_i_a2_s3.md). No rival is credited; B1 (amine survival) and B13 (B1 + acid supply) are carried. S3 refuses an output whose sensitivity to that switch exceeds the lane's within-laboratory term and never shows it at the incumbent's point: here the spread of the output over B0, B1 (phi_cys = 1) and B13 exceeds omega = 0.419 dex (results/validation/ph_balance_s3_sensitivity.md runs the rule across the recipe space). A pot whose pH is measured or held is answered: state the held pH as a clamped buffer (buffer kind 'clamped'), and the balance is not solved. WHAT WOULD LIFT IT (STATUS_AND_PLAN sec. 7, S3's lift clause, pending independent confirmation): an S3 change of its own (items 6 and 9 replaced as S3 / S4 changes replace them) that ships the unweighted union of the remaining carried rivals' envelopes. A rival enters the union only if its converged best fit has passed S3's test on the data that falsified the incumbent (CF-084's controls); the union credits no rival. For B1 and B13 that also waits on the CO2 ledger audit (CF-134), which both inherit. Until then the refusal stands."
-          ],
+          "state": "in_envelope",
+          "reasons": [],
           "warnings": [],
-          "value_ug_per_l": null
+          "value_ug_per_l": 797.6114639449061
         }
       ]
     },
@@ -5891,7 +5825,7 @@
       "statement": "With the same Ala-xylose ARP (20 mM, initial pH 7.5, unbuffered, 120 C, 60 min), free cysteine gives ~18x MORE MFT than glutathione at the same molarity: 1.15x10^3 vs 6.41x10^1 ug/L.",
       "source": "zhou2023c",
       "status": "not_evaluable",
-      "reason": "arm 'ARP + cysteine 20 mM' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): MFT (spread 0.51 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pot",
+      "reason": "step 'ARP + cysteine 20 mM' -> 'ARP + glutathione 20 mM' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the spread of this log ratio over B0 and the carried rivals (1.07 dex) exceeds omega. REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause).",
       "arms": [
         {
           "label": "ARP + cysteine 20 mM",
@@ -5910,14 +5844,12 @@
               "source": "Zhou 2023c: aqueous, initial pH 7.5 set with 3 M NaOH, no buffer"
             }
           },
-          "answered": false,
+          "answered": true,
           "lane": "sulfur",
-          "state": "out_of_envelope",
-          "reasons": [
-            "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): MFT (spread 0.51 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pots, Holm p <= 3e-3 across the defensible noise range, independently confirmed (M1b part (i) prereg sec. 21; results/validation/kinetic_core_m1b_part_i_a2_s3.md). No rival is credited; B1 (amine survival) and B13 (B1 + acid supply) are carried. S3 refuses an output whose sensitivity to that switch exceeds the lane's within-laboratory term and never shows it at the incumbent's point: here the spread of the output over B0, B1 (phi_cys = 1) and B13 exceeds omega = 0.419 dex (results/validation/ph_balance_s3_sensitivity.md runs the rule across the recipe space). A pot whose pH is measured or held is answered: state the held pH as a clamped buffer (buffer kind 'clamped'), and the balance is not solved. WHAT WOULD LIFT IT (STATUS_AND_PLAN sec. 7, S3's lift clause, pending independent confirmation): an S3 change of its own (items 6 and 9 replaced as S3 / S4 changes replace them) that ships the unweighted union of the remaining carried rivals' envelopes. A rival enters the union only if its converged best fit has passed S3's test on the data that falsified the incumbent (CF-084's controls); the union credits no rival. For B1 and B13 that also waits on the CO2 ledger audit (CF-134), which both inherit. Until then the refusal stands."
-          ],
+          "state": "in_envelope",
+          "reasons": [],
           "warnings": [],
-          "value_ug_per_l": null
+          "value_ug_per_l": 134.29821876882514
         },
         {
           "label": "ARP + glutathione 20 mM",
@@ -5936,14 +5868,12 @@
               "source": "Zhou 2023c: aqueous, initial pH 7.5 set with 3 M NaOH, no buffer"
             }
           },
-          "answered": false,
+          "answered": true,
           "lane": "sulfur",
-          "state": "out_of_envelope",
-          "reasons": [
-            "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): MFT (spread 0.44 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pots, Holm p <= 3e-3 across the defensible noise range, independently confirmed (M1b part (i) prereg sec. 21; results/validation/kinetic_core_m1b_part_i_a2_s3.md). No rival is credited; B1 (amine survival) and B13 (B1 + acid supply) are carried. S3 refuses an output whose sensitivity to that switch exceeds the lane's within-laboratory term and never shows it at the incumbent's point: here the spread of the output over B0, B1 (phi_cys = 1) and B13 exceeds omega = 0.419 dex (results/validation/ph_balance_s3_sensitivity.md runs the rule across the recipe space). A pot whose pH is measured or held is answered: state the held pH as a clamped buffer (buffer kind 'clamped'), and the balance is not solved. WHAT WOULD LIFT IT (STATUS_AND_PLAN sec. 7, S3's lift clause, pending independent confirmation): an S3 change of its own (items 6 and 9 replaced as S3 / S4 changes replace them) that ships the unweighted union of the remaining carried rivals' envelopes. A rival enters the union only if its converged best fit has passed S3's test on the data that falsified the incumbent (CF-084's controls); the union credits no rival. For B1 and B13 that also waits on the CO2 ledger audit (CF-134), which both inherit. Until then the refusal stands."
-          ],
+          "state": "in_envelope",
+          "reasons": [],
           "warnings": [],
-          "value_ug_per_l": null
+          "value_ug_per_l": 1748.8198103287987
         }
       ]
     },
@@ -5958,22 +5888,8 @@
       "fit_status": "independent",
       "statement": "In ARP + glutathione 20/20 mM (initial pH 7.5, unbuffered, 120 C), FFT PEAKS at 60 min: 124, 383, 270, 116 ug/L at 30 / 60 / 90 / 120 min.",
       "source": "zhou2023c",
-      "status": "disagree",
-      "reason": null,
-      "identical_predictions": false,
-      "mechanism_absent": false,
-      "lane": "sulfur",
-      "values_ug_per_l": [
-        25.670765152881717,
-        73.48805571848523,
-        110.83672146422113,
-        129.54014850126148
-      ],
-      "log10_steps": [
-        0.45677794373930014,
-        0.1784669135708895,
-        0.06772071965540137
-      ],
+      "status": "not_evaluable",
+      "reason": "step '60 min' -> '90 min' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the DIRECTION of this ratio is refused: B0 and the carried rivals disagree in its sign (S3). REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause).",
       "arms": [
         {
           "label": "30 min",
@@ -6086,7 +6002,7 @@
       "statement": "In unbuffered ribose + cysteine heated at 180 C for 2 h (initial pH 5.0, final 4.01), FFT is ~11x MORE abundant than MFT (0.895 vs 0.083 mg/g ribose) -- the inverse of the MFT >= FFT order at 140-145 C.",
       "source": "chen2002",
       "status": "not_evaluable",
-      "reason": "observable 'ribose + cysteine, 180 C, 2 h, pH 5.0 :: FFT' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): FFT: computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pots, Holm p <= 3e-3 ",
+      "reason": "a predicted concentration is zero; no ranking is defined",
       "arms": [
         {
           "label": "ribose + cysteine, 180 C, 2 h, pH 5.0 :: FFT",
@@ -6105,14 +6021,12 @@
               "source": "Chen & Ho 2002: distilled water, pH adjusted to 5.0 before heating, no buffer"
             }
           },
-          "answered": false,
+          "answered": true,
           "lane": "sulfur",
-          "state": "out_of_envelope",
-          "reasons": [
-            "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): FFT: computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pots, Holm p <= 3e-3 across the defensible noise range, independently confirmed (M1b part (i) prereg sec. 21; results/validation/kinetic_core_m1b_part_i_a2_s3.md). No rival is credited; B1 (amine survival) and B13 (B1 + acid supply) are carried. S3 refuses an output whose sensitivity to that switch exceeds the lane's within-laboratory term and never shows it at the incumbent's point: here the spread of the output over B0, B1 (phi_cys = 1) and B13 exceeds omega = 0.419 dex (results/validation/ph_balance_s3_sensitivity.md runs the rule across the recipe space). The carried rivals could not be run on this pot (TimeoutError: a carried rival's integration ran past RIVAL_TIMEOUT_S), so its independence from the balance is not shown. A pot whose pH is measured or held is answered: state the held pH as a clamped buffer (buffer kind 'clamped'), and the balance is not solved. WHAT WOULD LIFT IT (STATUS_AND_PLAN sec. 7, S3's lift clause, pending independent confirmation): an S3 change of its own (items 6 and 9 replaced as S3 / S4 changes replace them) that ships the unweighted union of the remaining carried rivals' envelopes. A rival enters the union only if its converged best fit has passed S3's test on the data that falsified the incumbent (CF-084's controls); the union credits no rival. For B1 and B13 that also waits on the CO2 ledger audit (CF-134), which both inherit. Until then the refusal stands."
-          ],
+          "state": "in_envelope",
+          "reasons": [],
           "warnings": [],
-          "value_ug_per_l": null
+          "value_ug_per_l": 0.0
         },
         {
           "label": "ribose + cysteine, 180 C, 2 h, pH 5.0 :: MFT",
@@ -6131,14 +6045,12 @@
               "source": "Chen & Ho 2002: distilled water, pH adjusted to 5.0 before heating, no buffer"
             }
           },
-          "answered": false,
+          "answered": true,
           "lane": "sulfur",
-          "state": "out_of_envelope",
-          "reasons": [
-            "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): MFT: computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pots, Holm p <= 3e-3 across the defensible noise range, independently confirmed (M1b part (i) prereg sec. 21; results/validation/kinetic_core_m1b_part_i_a2_s3.md). No rival is credited; B1 (amine survival) and B13 (B1 + acid supply) are carried. S3 refuses an output whose sensitivity to that switch exceeds the lane's within-laboratory term and never shows it at the incumbent's point: here the spread of the output over B0, B1 (phi_cys = 1) and B13 exceeds omega = 0.419 dex (results/validation/ph_balance_s3_sensitivity.md runs the rule across the recipe space). The carried rivals could not be run on this pot (TimeoutError: a carried rival's integration ran past RIVAL_TIMEOUT_S), so its independence from the balance is not shown. A pot whose pH is measured or held is answered: state the held pH as a clamped buffer (buffer kind 'clamped'), and the balance is not solved. WHAT WOULD LIFT IT (STATUS_AND_PLAN sec. 7, S3's lift clause, pending independent confirmation): an S3 change of its own (items 6 and 9 replaced as S3 / S4 changes replace them) that ships the unweighted union of the remaining carried rivals' envelopes. A rival enters the union only if its converged best fit has passed S3's test on the data that falsified the incumbent (CF-084's controls); the union credits no rival. For B1 and B13 that also waits on the CO2 ledger audit (CF-134), which both inherit. Until then the refusal stands."
-          ],
+          "state": "in_envelope",
+          "reasons": [],
           "warnings": [],
-          "value_ug_per_l": null
+          "value_ug_per_l": 0.0
         }
       ]
     },
@@ -6154,7 +6066,7 @@
       "statement": "In the same 180 C / 2 h unbuffered ribose + cysteine pot, FFT is ~2.8x HIGHER at initial pH 5.0 than at 8.5 (0.895 vs 0.318 mg/g ribose; final pH 4.01 vs 4.96).",
       "source": "chen2002",
       "status": "not_evaluable",
-      "reason": "arm 'initial pH 5.0' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): FFT: computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pots, Holm p <= 3e-3 ",
+      "reason": "step 'initial pH 5.0' -> 'initial pH 8.5' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): an arm's carried rivals could not be run, so the ratio's independence from the balance is not shown. REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause).",
       "arms": [
         {
           "label": "initial pH 5.0",
@@ -6173,14 +6085,12 @@
               "source": "Chen & Ho 2002: distilled water, pH adjusted before heating, no buffer"
             }
           },
-          "answered": false,
+          "answered": true,
           "lane": "sulfur",
-          "state": "out_of_envelope",
-          "reasons": [
-            "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): FFT: computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pots, Holm p <= 3e-3 across the defensible noise range, independently confirmed (M1b part (i) prereg sec. 21; results/validation/kinetic_core_m1b_part_i_a2_s3.md). No rival is credited; B1 (amine survival) and B13 (B1 + acid supply) are carried. S3 refuses an output whose sensitivity to that switch exceeds the lane's within-laboratory term and never shows it at the incumbent's point: here the spread of the output over B0, B1 (phi_cys = 1) and B13 exceeds omega = 0.419 dex (results/validation/ph_balance_s3_sensitivity.md runs the rule across the recipe space). The carried rivals could not be run on this pot (TimeoutError: a carried rival's integration ran past RIVAL_TIMEOUT_S), so its independence from the balance is not shown. A pot whose pH is measured or held is answered: state the held pH as a clamped buffer (buffer kind 'clamped'), and the balance is not solved. WHAT WOULD LIFT IT (STATUS_AND_PLAN sec. 7, S3's lift clause, pending independent confirmation): an S3 change of its own (items 6 and 9 replaced as S3 / S4 changes replace them) that ships the unweighted union of the remaining carried rivals' envelopes. A rival enters the union only if its converged best fit has passed S3's test on the data that falsified the incumbent (CF-084's controls); the union credits no rival. For B1 and B13 that also waits on the CO2 ledger audit (CF-134), which both inherit. Until then the refusal stands."
-          ],
+          "state": "in_envelope",
+          "reasons": [],
           "warnings": [],
-          "value_ug_per_l": null
+          "value_ug_per_l": 0.0
         },
         {
           "label": "initial pH 8.5",
@@ -6220,7 +6130,7 @@
       "statement": "In the same pots MFT is ~2.1x HIGHER at initial pH 5.0 than at 8.5 (0.083 vs 0.040 mg/g ribose).",
       "source": "chen2002",
       "status": "not_evaluable",
-      "reason": "arm 'initial pH 5.0' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): MFT: computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pots, Holm p <= 3e-3 ",
+      "reason": "step 'initial pH 5.0' -> 'initial pH 8.5' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): an arm's carried rivals could not be run, so the ratio's independence from the balance is not shown. REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause).",
       "arms": [
         {
           "label": "initial pH 5.0",
@@ -6239,14 +6149,12 @@
               "source": "Chen & Ho 2002: distilled water, pH adjusted before heating, no buffer"
             }
           },
-          "answered": false,
+          "answered": true,
           "lane": "sulfur",
-          "state": "out_of_envelope",
-          "reasons": [
-            "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): MFT: computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pots, Holm p <= 3e-3 across the defensible noise range, independently confirmed (M1b part (i) prereg sec. 21; results/validation/kinetic_core_m1b_part_i_a2_s3.md). No rival is credited; B1 (amine survival) and B13 (B1 + acid supply) are carried. S3 refuses an output whose sensitivity to that switch exceeds the lane's within-laboratory term and never shows it at the incumbent's point: here the spread of the output over B0, B1 (phi_cys = 1) and B13 exceeds omega = 0.419 dex (results/validation/ph_balance_s3_sensitivity.md runs the rule across the recipe space). The carried rivals could not be run on this pot (TimeoutError: a carried rival's integration ran past RIVAL_TIMEOUT_S), so its independence from the balance is not shown. A pot whose pH is measured or held is answered: state the held pH as a clamped buffer (buffer kind 'clamped'), and the balance is not solved. WHAT WOULD LIFT IT (STATUS_AND_PLAN sec. 7, S3's lift clause, pending independent confirmation): an S3 change of its own (items 6 and 9 replaced as S3 / S4 changes replace them) that ships the unweighted union of the remaining carried rivals' envelopes. A rival enters the union only if its converged best fit has passed S3's test on the data that falsified the incumbent (CF-084's controls); the union credits no rival. For B1 and B13 that also waits on the CO2 ledger audit (CF-134), which both inherit. Until then the refusal stands."
-          ],
+          "state": "in_envelope",
+          "reasons": [],
           "warnings": [],
-          "value_ug_per_l": null
+          "value_ug_per_l": 0.0
         },
         {
           "label": "initial pH 8.5",
@@ -6286,7 +6194,7 @@
       "statement": "Chen et al. 2000, the same laboratory's earlier run of the same pot (180 C, 2 h, unbuffered ribose + cysteine): FFT 1.55 mg/g ribose at initial pH 5 vs 0.22 at 8.5 (7x; final pH 3.86 vs 6.05).",
       "source": "chen2000",
       "status": "not_evaluable",
-      "reason": "arm 'initial pH 5.0' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): FFT: computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pots, Holm p <= 3e-3 ",
+      "reason": "step 'initial pH 5.0' -> 'initial pH 8.5' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): an arm's carried rivals could not be run, so the ratio's independence from the balance is not shown. REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause).",
       "arms": [
         {
           "label": "initial pH 5.0",
@@ -6305,14 +6213,12 @@
               "source": "Chen et al. 2000: distilled water, pH adjusted before heating, no buffer"
             }
           },
-          "answered": false,
+          "answered": true,
           "lane": "sulfur",
-          "state": "out_of_envelope",
-          "reasons": [
-            "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): FFT: computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pots, Holm p <= 3e-3 across the defensible noise range, independently confirmed (M1b part (i) prereg sec. 21; results/validation/kinetic_core_m1b_part_i_a2_s3.md). No rival is credited; B1 (amine survival) and B13 (B1 + acid supply) are carried. S3 refuses an output whose sensitivity to that switch exceeds the lane's within-laboratory term and never shows it at the incumbent's point: here the spread of the output over B0, B1 (phi_cys = 1) and B13 exceeds omega = 0.419 dex (results/validation/ph_balance_s3_sensitivity.md runs the rule across the recipe space). The carried rivals could not be run on this pot (TimeoutError: a carried rival's integration ran past RIVAL_TIMEOUT_S), so its independence from the balance is not shown. A pot whose pH is measured or held is answered: state the held pH as a clamped buffer (buffer kind 'clamped'), and the balance is not solved. WHAT WOULD LIFT IT (STATUS_AND_PLAN sec. 7, S3's lift clause, pending independent confirmation): an S3 change of its own (items 6 and 9 replaced as S3 / S4 changes replace them) that ships the unweighted union of the remaining carried rivals' envelopes. A rival enters the union only if its converged best fit has passed S3's test on the data that falsified the incumbent (CF-084's controls); the union credits no rival. For B1 and B13 that also waits on the CO2 ledger audit (CF-134), which both inherit. Until then the refusal stands."
-          ],
+          "state": "in_envelope",
+          "reasons": [],
           "warnings": [],
-          "value_ug_per_l": null
+          "value_ug_per_l": 0.0
         },
         {
           "label": "initial pH 8.5",
@@ -6352,7 +6258,7 @@
       "statement": "Ribose + cysteine 50/50 mM in 0.2 M pyrophosphate at 140 C for 1 h: MFT FALLS as the initial pH rises 5.6 -> 7.0 -> 8.0 (16.62 -> 2.63 -> below ~0.07 ng/mL; final pH 5.5 / 6.2 / 6.8).",
       "source": "xu2007",
       "status": "not_evaluable",
-      "reason": "arm 'initial pH 5.6' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): MFT (spread 0.51 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pot",
+      "reason": "step 'initial pH 5.6' -> 'initial pH 7.0' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the spread of this log ratio over B0 and the carried rivals (2.55 dex) exceeds omega. REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause).",
       "arms": [
         {
           "label": "initial pH 5.6",
@@ -6372,14 +6278,12 @@
               "source": "Xu 2008 (online 2007): '0.2 mol/L phosphate buffer' made from sodium pyrophosphate dibasic and tetrabasic"
             }
           },
-          "answered": false,
+          "answered": true,
           "lane": "sulfur",
-          "state": "out_of_envelope",
-          "reasons": [
-            "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): MFT (spread 0.51 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pots, Holm p <= 3e-3 across the defensible noise range, independently confirmed (M1b part (i) prereg sec. 21; results/validation/kinetic_core_m1b_part_i_a2_s3.md). No rival is credited; B1 (amine survival) and B13 (B1 + acid supply) are carried. S3 refuses an output whose sensitivity to that switch exceeds the lane's within-laboratory term and never shows it at the incumbent's point: here the spread of the output over B0, B1 (phi_cys = 1) and B13 exceeds omega = 0.419 dex (results/validation/ph_balance_s3_sensitivity.md runs the rule across the recipe space). A pot whose pH is measured or held is answered: state the held pH as a clamped buffer (buffer kind 'clamped'), and the balance is not solved. WHAT WOULD LIFT IT (STATUS_AND_PLAN sec. 7, S3's lift clause, pending independent confirmation): an S3 change of its own (items 6 and 9 replaced as S3 / S4 changes replace them) that ships the unweighted union of the remaining carried rivals' envelopes. A rival enters the union only if its converged best fit has passed S3's test on the data that falsified the incumbent (CF-084's controls); the union credits no rival. For B1 and B13 that also waits on the CO2 ledger audit (CF-134), which both inherit. Until then the refusal stands."
-          ],
+          "state": "in_envelope",
+          "reasons": [],
           "warnings": [],
-          "value_ug_per_l": null
+          "value_ug_per_l": 45.468256707883356
         },
         {
           "label": "initial pH 7.0",
@@ -6399,14 +6303,12 @@
               "source": "Xu 2008 (online 2007): '0.2 mol/L phosphate buffer' made from sodium pyrophosphate dibasic and tetrabasic"
             }
           },
-          "answered": false,
+          "answered": true,
           "lane": "sulfur",
-          "state": "out_of_envelope",
-          "reasons": [
-            "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): MFT (spread 0.42 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pots, Holm p <= 3e-3 across the defensible noise range, independently confirmed (M1b part (i) prereg sec. 21; results/validation/kinetic_core_m1b_part_i_a2_s3.md). No rival is credited; B1 (amine survival) and B13 (B1 + acid supply) are carried. S3 refuses an output whose sensitivity to that switch exceeds the lane's within-laboratory term and never shows it at the incumbent's point: here the spread of the output over B0, B1 (phi_cys = 1) and B13 exceeds omega = 0.419 dex (results/validation/ph_balance_s3_sensitivity.md runs the rule across the recipe space). A pot whose pH is measured or held is answered: state the held pH as a clamped buffer (buffer kind 'clamped'), and the balance is not solved. WHAT WOULD LIFT IT (STATUS_AND_PLAN sec. 7, S3's lift clause, pending independent confirmation): an S3 change of its own (items 6 and 9 replaced as S3 / S4 changes replace them) that ships the unweighted union of the remaining carried rivals' envelopes. A rival enters the union only if its converged best fit has passed S3's test on the data that falsified the incumbent (CF-084's controls); the union credits no rival. For B1 and B13 that also waits on the CO2 ledger audit (CF-134), which both inherit. Until then the refusal stands."
-          ],
+          "state": "in_envelope",
+          "reasons": [],
           "warnings": [],
-          "value_ug_per_l": null
+          "value_ug_per_l": 0.20353370608553978
         },
         {
           "label": "initial pH 8.0",
@@ -6426,14 +6328,12 @@
               "source": "Xu 2008 (online 2007): '0.2 mol/L phosphate buffer' made from sodium pyrophosphate dibasic and tetrabasic"
             }
           },
-          "answered": false,
+          "answered": true,
           "lane": "sulfur",
-          "state": "out_of_envelope",
-          "reasons": [
-            "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): MFT (spread 0.80 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pots, Holm p <= 3e-3 across the defensible noise range, independently confirmed (M1b part (i) prereg sec. 21; results/validation/kinetic_core_m1b_part_i_a2_s3.md). No rival is credited; B1 (amine survival) and B13 (B1 + acid supply) are carried. S3 refuses an output whose sensitivity to that switch exceeds the lane's within-laboratory term and never shows it at the incumbent's point: here the spread of the output over B0, B1 (phi_cys = 1) and B13 exceeds omega = 0.419 dex (results/validation/ph_balance_s3_sensitivity.md runs the rule across the recipe space). A pot whose pH is measured or held is answered: state the held pH as a clamped buffer (buffer kind 'clamped'), and the balance is not solved. WHAT WOULD LIFT IT (STATUS_AND_PLAN sec. 7, S3's lift clause, pending independent confirmation): an S3 change of its own (items 6 and 9 replaced as S3 / S4 changes replace them) that ships the unweighted union of the remaining carried rivals' envelopes. A rival enters the union only if its converged best fit has passed S3's test on the data that falsified the incumbent (CF-084's controls); the union credits no rival. For B1 and B13 that also waits on the CO2 ledger audit (CF-134), which both inherit. Until then the refusal stands."
-          ],
+          "state": "in_envelope",
+          "reasons": [],
           "warnings": [],
-          "value_ug_per_l": null
+          "value_ug_per_l": 0.003263230108245046
         }
       ]
     },
@@ -6449,7 +6349,7 @@
       "statement": "In the same pots FFT is 22.09 ng/mL at initial pH 5.6 and below detection (~0.07) at pH 7.0.",
       "source": "xu2007",
       "status": "not_evaluable",
-      "reason": "arm 'initial pH 5.6' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): FFT (spread 0.68 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pot",
+      "reason": "step 'initial pH 5.6' -> 'initial pH 7.0' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the spread of this log ratio over B0 and the carried rivals (0.47 dex) exceeds omega. REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause).",
       "arms": [
         {
           "label": "initial pH 5.6",
@@ -6469,14 +6369,12 @@
               "source": "Xu 2008 (online 2007): sodium pyrophosphate 0.2 mol/L"
             }
           },
-          "answered": false,
+          "answered": true,
           "lane": "sulfur",
-          "state": "out_of_envelope",
-          "reasons": [
-            "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): FFT (spread 0.68 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pots, Holm p <= 3e-3 across the defensible noise range, independently confirmed (M1b part (i) prereg sec. 21; results/validation/kinetic_core_m1b_part_i_a2_s3.md). No rival is credited; B1 (amine survival) and B13 (B1 + acid supply) are carried. S3 refuses an output whose sensitivity to that switch exceeds the lane's within-laboratory term and never shows it at the incumbent's point: here the spread of the output over B0, B1 (phi_cys = 1) and B13 exceeds omega = 0.419 dex (results/validation/ph_balance_s3_sensitivity.md runs the rule across the recipe space). A pot whose pH is measured or held is answered: state the held pH as a clamped buffer (buffer kind 'clamped'), and the balance is not solved. WHAT WOULD LIFT IT (STATUS_AND_PLAN sec. 7, S3's lift clause, pending independent confirmation): an S3 change of its own (items 6 and 9 replaced as S3 / S4 changes replace them) that ships the unweighted union of the remaining carried rivals' envelopes. A rival enters the union only if its converged best fit has passed S3's test on the data that falsified the incumbent (CF-084's controls); the union credits no rival. For B1 and B13 that also waits on the CO2 ledger audit (CF-134), which both inherit. Until then the refusal stands."
-          ],
+          "state": "in_envelope",
+          "reasons": [],
           "warnings": [],
-          "value_ug_per_l": null
+          "value_ug_per_l": 72.46269316615137
         },
         {
           "label": "initial pH 7.0",
@@ -6592,7 +6490,7 @@
       "statement": "In the same pots FFT is ~3.5x HIGHER with free cysteine + glycine (pot C, 0.170) than with glutathione (pot A, 0.049).",
       "source": "wang2012",
       "status": "not_evaluable",
-      "reason": "arm 'pot C: xylose + thiamine + cysteine + glycine' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): FFT (spread 0.71 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pot",
+      "reason": "step 'pot C: xylose + thiamine + cysteine + glycine' -> 'pot A: xylose + thiamine + glutathione' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the spread of this log ratio over B0 and the carried rivals (1.05 dex) exceeds omega. REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause).",
       "arms": [
         {
           "label": "pot C: xylose + thiamine + cysteine + glycine",
@@ -6613,14 +6511,12 @@
               "source": "Wang 2012: 25 mL distilled water, pH 4.8, no buffer"
             }
           },
-          "answered": false,
+          "answered": true,
           "lane": "sulfur",
-          "state": "out_of_envelope",
-          "reasons": [
-            "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): FFT (spread 0.71 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pots, Holm p <= 3e-3 across the defensible noise range, independently confirmed (M1b part (i) prereg sec. 21; results/validation/kinetic_core_m1b_part_i_a2_s3.md). No rival is credited; B1 (amine survival) and B13 (B1 + acid supply) are carried. S3 refuses an output whose sensitivity to that switch exceeds the lane's within-laboratory term and never shows it at the incumbent's point: here the spread of the output over B0, B1 (phi_cys = 1) and B13 exceeds omega = 0.419 dex (results/validation/ph_balance_s3_sensitivity.md runs the rule across the recipe space). A pot whose pH is measured or held is answered: state the held pH as a clamped buffer (buffer kind 'clamped'), and the balance is not solved. WHAT WOULD LIFT IT (STATUS_AND_PLAN sec. 7, S3's lift clause, pending independent confirmation): an S3 change of its own (items 6 and 9 replaced as S3 / S4 changes replace them) that ships the unweighted union of the remaining carried rivals' envelopes. A rival enters the union only if its converged best fit has passed S3's test on the data that falsified the incumbent (CF-084's controls); the union credits no rival. For B1 and B13 that also waits on the CO2 ledger audit (CF-134), which both inherit. Until then the refusal stands."
-          ],
+          "state": "in_envelope",
+          "reasons": [],
           "warnings": [],
-          "value_ug_per_l": null
+          "value_ug_per_l": 170.23290206914504
         },
         {
           "label": "pot A: xylose + thiamine + glutathione",
@@ -6640,14 +6536,12 @@
               "source": "Wang 2012: 25 mL distilled water, pH 4.8, no buffer"
             }
           },
-          "answered": false,
+          "answered": true,
           "lane": "sulfur",
-          "state": "out_of_envelope",
-          "reasons": [
-            "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): FFT (spread 0.83 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cysteine pots, Holm p <= 3e-3 across the defensible noise range, independently confirmed (M1b part (i) prereg sec. 21; results/validation/kinetic_core_m1b_part_i_a2_s3.md). No rival is credited; B1 (amine survival) and B13 (B1 + acid supply) are carried. S3 refuses an output whose sensitivity to that switch exceeds the lane's within-laboratory term and never shows it at the incumbent's point: here the spread of the output over B0, B1 (phi_cys = 1) and B13 exceeds omega = 0.419 dex (results/validation/ph_balance_s3_sensitivity.md runs the rule across the recipe space). A pot whose pH is measured or held is answered: state the held pH as a clamped buffer (buffer kind 'clamped'), and the balance is not solved. WHAT WOULD LIFT IT (STATUS_AND_PLAN sec. 7, S3's lift clause, pending independent confirmation): an S3 change of its own (items 6 and 9 replaced as S3 / S4 changes replace them) that ships the unweighted union of the remaining carried rivals' envelopes. A rival enters the union only if its converged best fit has passed S3's test on the data that falsified the incumbent (CF-084's controls); the union credits no rival. For B1 and B13 that also waits on the CO2 ledger audit (CF-134), which both inherit. Until then the refusal stands."
-          ],
+          "state": "in_envelope",
+          "reasons": [],
           "warnings": [],
-          "value_ug_per_l": null
+          "value_ug_per_l": 130.9465593916735
         }
       ]
     },

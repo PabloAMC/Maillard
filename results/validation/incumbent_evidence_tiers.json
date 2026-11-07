@@ -4,8 +4,8 @@
   "artifact": "incumbent_evidence_tiers",
   "generated_on": "2026-11-07",
   "git": {
-   "commit": "68276aa716cc3d286edaf9a0f191cd8fd6189850",
-   "short": "68276aa7",
+   "commit": "210b7ff478d70726de0e67aacde2119aabd8d691",
+   "short": "210b7ff4",
    "branch": "s3-ph-balance-refusal",
    "dirty": true
   },
@@ -69,15 +69,15 @@
    },
    {
     "path": "results/validation/core_prediction_uncertainty.json",
-    "sha256": "caf0c624e06675a6cedd9a7b21ccafc9d04d50ecb166eb1722422c5f047a2ea1"
+    "sha256": "22ea829cc617db6275305299f65d974acb4d9d8ef3e4e2917013e08bcafefe69"
    },
    {
     "path": "results/validation/sulfur_reaction_evidence.json",
-    "sha256": "740a34db00405cc4a4525f0737a1f0f6e7fedd9d207cf6ff3c9a3efb1a59c5e2"
+    "sha256": "939903505221dc5b5d04cd790f889d7720fdb6574b2970136fe34092cbe4a4ba"
    },
    {
     "path": "results/validation/data_wishlist.json",
-    "sha256": "7d2d11efcb729a29cc30a3fa3618a7de9ae864c09ab0888c22c82c6b3fae3387"
+    "sha256": "d91f0fd039f4eb166e9e0f757b7322c82a9001ce277c252b5729d8b1dfabb29c"
    },
    {
     "path": "docs/reference/unpinned_constants.yml",

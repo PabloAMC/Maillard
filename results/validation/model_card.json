@@ -9,13 +9,13 @@
       "engine": 3.4836008093783635
     },
     "contrasts_oos": {
-      "engine_dex": 0.3784607464344807,
-      "no_change_dex": 0.24443950204817655,
-      "pairs": 22,
+      "engine_dex": 0.3043651020350228,
+      "no_change_dex": 0.14721513131945216,
+      "pairs": 19,
       "studies": 4
     },
     "directional": [
-      9,
+      10,
       19
     ],
     "oos_within_3x": [
@@ -79,8 +79,8 @@
         0
       ],
       "additive_cysteine": [
-        0,
-        0
+        1,
+        1
       ],
       "lipid_lane": [
         0,
@@ -124,16 +124,16 @@
       ],
       "time": [
         1,
-        2
+        1
       ]
     },
     "claims": 119,
     "excluding_ph_aw": [
-      8,
+      9,
       15
     ],
     "headline": [
-      9,
+      10,
       19
     ],
     "mechanism_absent_misses": 0,
@@ -152,9 +152,6 @@
         "TEMP-01",
         "TEMP-05",
         "YIL-01"
-      ],
-      "time": [
-        "Z23C-T-01"
       ]
     },
     "not_evaluable": 56,
@@ -216,7 +213,7 @@
   "generated_by": "scripts/generators/generate_model_card.py",
   "headline_sentences": [
     "**Absolute concentrations are unreliable.** On the union panel the kinetic core lands 10/23 rows within 3x (median fold error 4.42x, worst 366x); out of sample -- every row a core fit read removed -- 10/23 (median 4.42x). Nothing in this repository licenses a ppb number as a specification. The core's 90% Monte-Carlo interval covers 12/22 evaluable literature rows (1 not evaluable: the no lane carries no sampled uncertainty), 12/22 out of sample.",
-    "**Directional and ranking claims are the product, and on the kinetic core they score 9/19 on strictly independent literature claims** (56 independent claims not evaluable: refused arms, prose-only claims, observables the core does not represent) -- 8/15 once pH and water activity are set aside, and 1/4 on pH and water activity themselves, 0 of the misses being identical predictions across an axis the lane carries no term for. A coin scores ~0.5 on binary orderings; read the per-axis rows below, not the aggregate.",
+    "**Directional and ranking claims are the product, and on the kinetic core they score 10/19 on strictly independent literature claims** (56 independent claims not evaluable: refused arms, prose-only claims, observables the core does not represent) -- 9/15 once pH and water activity are set aside, and 1/4 on pH and water activity themselves, 0 of the misses being identical predictions across an axis the lane carries no term for. A coin scores ~0.5 on binary orderings; read the per-axis rows below, not the aggregate.",
     "**The sulfur branch has 8 absolute literature anchors, and the model lands no scored anchor rows within 3x to report: since 2026-11-05 the thiol lane ships relative within-laboratory predictions only (H0 / EX-059, D2 branch (i)), so every anchor row is refused for its level, kept only for the within-study contrasts, and the branch has no scored absolute anchor.** They are the primary-source-verified stable-isotope-dilution rows in hofmann1998_c2c3_recombination_145C_20min_pH3, hofmann1998_c2c3_recombination_145C_20min_pH5, hofmann1998_c2c3_recombination_145C_20min_pH7, hofmann1998_fructose_cysteine_145C_20min_pH5, hofmann1998_furan2aldehyde_h2s_145C_20min_pH5, hofmann1998_glucose_cysteine_145C_20min_pH5, hofmann1998_norfuraneol_cysteine_145C_20min_pH5, hofmann1998_ribose_cysteine_145C_20min_pH5. A further 1 primary-source-verified sulfur row(s) are on the panel and are NOT counted here, because a constant was selected by looking at them (hofmann1998_norfuraneol_h2s_145C_20min_pH5): agreement on a fitted row is not evidence about the model. The previously shipped claim of ZERO anchors was corrected on 2026-08-28 when the full text behind them was obtained; the retired benchmark (cys_ribose_140C_Hofmann1998, two values derived inside the repository, never measured) was deleted on 2026-10-27. Absolute agreement is poor and the DIRECTION is a separate question."
   ],
   "no_verifiable_source": {
@@ -394,9 +391,9 @@
     {
       "basis": "",
       "claim_type": "Direction / ranking on `additive_cysteine`",
-      "evidence": "no evaluable independent claim on the core",
+      "evidence": "1/1 on the directional panel (independent claims)",
       "system_class": "free precursor (cysteine present vs absent)",
-      "verdict": "do-not-use"
+      "verdict": "caution"
     },
     {
       "basis": "misses: TEMP-01, TEMP-05, YIL-01",
@@ -406,11 +403,11 @@
       "verdict": "do-not-use"
     },
     {
-      "basis": "misses: Z23C-T-01",
+      "basis": "",
       "claim_type": "Direction / ranking on `time`",
-      "evidence": "1/2 on the directional panel (independent claims)",
+      "evidence": "1/1 on the directional panel (independent claims)",
       "system_class": "any (time moved, everything else held)",
-      "verdict": "do-not-use"
+      "verdict": "caution"
     },
     {
       "basis": "",

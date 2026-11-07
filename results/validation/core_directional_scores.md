@@ -2,18 +2,18 @@
 
 Panel `docs/validation/directional_claims_panel.yml` (119 claims, flat tolerance 5 %). Nothing in the core was tuned to this panel.
 
-* **headline (strictly independent, evaluable): 9/19 (47%)**; 56 independent claims not evaluable
-* independent, excluding pH and water activity: 8/15 (53%); pH and water activity alone: 1/4 (25%)
-* all claims (independent + fit-adjacent + fit-system overlap): 13/30 (43%); 89 not evaluable
+* **headline (strictly independent, evaluable): 10/19 (53%)**; 56 independent claims not evaluable
+* independent, excluding pH and water activity: 9/15 (60%); pH and water activity alone: 1/4 (25%)
+* all claims (independent + fit-adjacent + fit-system overlap): 15/31 (48%); 88 not evaluable
 * misses where the lane carries no term for the moved axis (identical predictions): 3
-* not evaluable, by reason: the claim carries no runnable conditions (prose-only) (39); refused by the engine (4); arm 'cysteine + D-ribose' refused (3); arm '20 min' refused (3); arm 'initial pH 5.0' refused (3); arm 'pH 6.5' refused (2); arm 'cysteine + D-ribose, 110 C 90 min' refused (2); arm 'cysteine + ribose, phosphate buffer pH 5.6, 140 C 30 min' refused (2); arm 'pH 5.6' refused (2); arm 'initial pH 5.6' refused (2); arm 'MFT in cysteine + ribose' refused (1); arm 'pH 4.0' refused (1); the measured contrast (glycine + D-glucose, 165 C 8 min 333, glycine + D-fructos (1); arm 'hydrolysate + xylose + cysteine, 100 C 60 min' refused (1); arm 'hydrolysate + xylose (no cysteine), 120 C' refused (1); the measured contrast (cysteine + D-fructose, 145 C 20 min pH 5.0 2.5, cysteine  (1); the measured contrast (cysteine + D-fructose, 145 C 20 min pH 5.0 3.2, cysteine  (1); step 'cysteine + D-ribose, dry-heated 180 C 6 min' -> 'cysteine + D-glucose, dry (1); the measured contrast (MFT, cysteine + ribose, phosphate pH 5.6 2230, FFT, cyste (1); the measured contrast (120 C / 1 h 1.68, 100 C / 4 h 1.28) is within measurement (1); the verdict depends on the unstated input ph (disagree at ph 5, not_evaluable at (1); the verdict depends on the unstated input ph (not_evaluable at ph 5, not_evaluab (1); the measured contrast (3-deoxyglucosone 52.2, glucosone 7.5, glyoxal 5.6, methyl (1); arm '30 min' refused (1); arm 'pH 4' refused (1); arm 'pH 5' refused (1); arm 'lysine 0x' refused (1); arm 'ARP + cysteine, 120 min' refused (1); arm 'ARP + cysteine 20 mM' refused (1); observable 'ribose + cysteine, 180 C, 2 h, pH 5.0  (1); arm 'pot C (1); arm 'glucose + glutathione' refused (1); a predicted concentration is zero; no direction is defined (1); arm 'cysteine alone' refused (1); arm 'beef triglyceride alone' refused (1); arm 'egg PC alone' refused (1); arm 'methionine alone' refused (1)
+* not evaluable, by reason: the claim carries no runnable conditions (prose-only) (39); refused by the engine (4); a predicted concentration is zero; no direction is defined (3); step 'initial pH 5.0' -> 'initial pH 8.5' refused (3); step 'cysteine + D-ribose' -> 'cysteine + D-glucose' refused (2); step 'pH 4.5' -> 'pH 6.5' refused (2); step 'cysteine + D-ribose, 110 C 90 min' -> 'cysteine + D-glucose, 110 C 90 min' (2); step 'cysteine + ribose, phosphate buffer pH 4.2, 140 C 30 min' -> 'cysteine + r (2); step 'pH 4' -> 'pH 5' refused (2); step 'pH 4.2' -> 'pH 5.6' refused (2); step 'initial pH 5.6' -> 'initial pH 7.0' refused (2); step 'pH 4.0' -> 'pH 5.5' refused (1); the measured contrast (glycine + D-glucose, 165 C 8 min 333, glycine + D-fructos (1); arm 'hydrolysate + xylose (no cysteine), 120 C' refused (1); the measured contrast (cysteine + D-fructose, 145 C 20 min pH 5.0 2.5, cysteine  (1); the measured contrast (cysteine + D-fructose, 145 C 20 min pH 5.0 3.2, cysteine  (1); step 'cysteine + D-ribose, dry-heated 180 C 6 min' -> 'cysteine + D-glucose, dry (1); the measured contrast (MFT, cysteine + ribose, phosphate pH 5.6 2230, FFT, cyste (1); the measured contrast (120 C / 1 h 1.68, 100 C / 4 h 1.28) is within measurement (1); the verdict depends on the unstated input ph (disagree at ph 5, not_evaluable at (1); the verdict depends on the unstated input ph (not_evaluable at ph 5, not_evaluab (1); the measured contrast (3-deoxyglucosone 52.2, glucosone 7.5, glyoxal 5.6, methyl (1); step '20 min' -> '40 min' refused (1); step '60 min' -> '360 min' refused (1); arm 'lysine 1x (40 mM)' refused (1); step '90 min' -> '120 min' refused (1); step 'ARP alone, 120 min' -> 'ARP + cysteine, 120 min' refused (1); step 'ARP + cysteine 20 mM' -> 'ARP + glutathione 20 mM' refused (1); step '60 min' -> '90 min' refused (1); a predicted concentration is zero; no ranking is defined (1); step 'pot C (1); arm 'glucose + glutathione' refused (1); arm 'cysteine alone' refused (1); arm 'beef triglyceride alone' refused (1); arm 'egg PC alone' refused (1); arm 'methionine alone' refused (1)
 
 ## Per category (strictly independent claims)
 
 | category | agree | evaluable | rate | not evaluable | misses |
 |---|---|---|---|---|---|
 | additive_amine | 0 | 0 | - | 2 | - |
-| additive_cysteine | 0 | 0 | - | 5 | - |
+| additive_cysteine | 1 | 1 | 1.00 | 4 | - |
 | lipid_lane | 0 | 0 | - | 3 | - |
 | matrix_identity | 0 | 0 | - | 1 | - |
 | moisture_aw | 0 | 0 | - | 4 | - |
@@ -24,14 +24,14 @@ Panel `docs/validation/directional_claims_panel.yml` (119 claims, flat tolerance
 | sugar_identity | 2 | 5 | 0.40 | 11 | SUG-03, SUG-12, DIC-01 |
 | sulfur_donor | 1 | 1 | 1.00 | 4 | - |
 | temperature | 4 | 7 | 0.57 | 4 | TEMP-01, TEMP-05, YIL-01 |
-| time | 1 | 2 | 0.50 | 3 | Z23C-T-01 |
+| time | 1 | 1 | 1.00 | 4 | - |
 
 ## Per category (all claims)
 
 | category | agree | evaluable | rate | not evaluable |
 |---|---|---|---|---|
 | additive_amine | 0 | 0 | - | 2 |
-| additive_cysteine | 1 | 1 | 1.00 | 7 |
+| additive_cysteine | 2 | 2 | 1.00 | 6 |
 | lipid_lane | 0 | 1 | 0.00 | 5 |
 | matrix_identity | 0 | 2 | 0.00 | 1 |
 | moisture_aw | 0 | 0 | - | 7 |
@@ -39,24 +39,24 @@ Panel `docs/validation/directional_claims_panel.yml` (119 claims, flat tolerance
 | process_heating | 0 | 0 | - | 4 |
 | ranking | 1 | 3 | 0.33 | 4 |
 | scope | 0 | 0 | - | 3 |
-| sugar_identity | 2 | 5 | 0.40 | 17 |
+| sugar_identity | 3 | 7 | 0.43 | 15 |
 | sulfur_donor | 1 | 1 | 1.00 | 5 |
 | temperature | 4 | 7 | 0.57 | 6 |
-| time | 2 | 4 | 0.50 | 9 |
+| time | 2 | 2 | 1.00 | 11 |
 
 ## Claims
 
 | claim | category | fit status | observable | expected | result | lane | predictions (ug/L) | note |
 |---|---|---|---|---|---|---|---|---|
-| SUG-01 | sugar_identity | fit_adjacent | MFT | A>B | **not_evaluable** | - | - | arm 'cysteine + D-ribose' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): MFT (spread 2.00 dex): computed with the sulfur lane's pH s |
-| SUG-02 | sugar_identity | fit_adjacent | FFT | A>B | **not_evaluable** | - | - | arm 'cysteine + D-ribose' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): FFT (spread 2.04 dex): computed with the sulfur lane's pH s |
+| SUG-01 | sugar_identity | fit_adjacent | MFT | A>B | **agree** | sulfur | 93.6, 0 |  |
+| SUG-02 | sugar_identity | fit_adjacent | FFT | A>B | **not_evaluable** | - | - | step 'cysteine + D-ribose' -> 'cysteine + D-glucose' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the spread of this log ratio ove |
 | SUG-03 | sugar_identity | independent | FFT | A>B | **disagree** | sulfur | 55.8, 55.8 | identical predictions |
-| SUG-04 | sugar_identity | fit_adjacent | MFT | A>B | **not_evaluable** | - | - | arm 'MFT in cysteine + ribose' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): MFT (spread 2.00 dex): computed with the sulfur lane's |
-| SUG-05 | sugar_identity | fit_system_overlap | Furfural | A>B | **not_evaluable** | - | - | arm 'cysteine + D-ribose' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): Furfural (spread 0.57 dex): computed with the sulfur lane's |
+| SUG-04 | sugar_identity | fit_adjacent | MFT | A>B | **disagree** | sulfur | 93.6, 93.6 | identical predictions |
+| SUG-05 | sugar_identity | fit_system_overlap | Furfural | A>B | **not_evaluable** | - | - | step 'cysteine + D-ribose' -> 'cysteine + D-glucose' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the DIRECTION of this ratio is r |
 | SUG-06 | sugar_identity | retired | MFT | A>B | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
-| PH-01 | ph | fit_system_overlap | MFT | A>B | **not_evaluable** | - | - | arm 'pH 6.5' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): MFT (spread 1.03 dex): computed with the sulfur lane's pH solved from th |
-| PH-02 | ph | fit_system_overlap | bis(2-methyl-3-furyl) disulfide | A>B | **not_evaluable** | - | - | arm 'pH 6.5' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): bis(2-methyl-3-furyl) disulfide (spread 1.82 dex): computed with the sul |
-| PH-03 | ph | not_independent | FFT | decreasing | **not_evaluable** | - | - | arm 'pH 4.0' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): FFT (spread 0.65 dex): computed with the sulfur lane's pH solved from th |
+| PH-01 | ph | fit_system_overlap | MFT | A>B | **not_evaluable** | - | - | step 'pH 4.5' -> 'pH 6.5' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the spread of this log ratio over B0 and the carried rivals |
+| PH-02 | ph | fit_system_overlap | bis(2-methyl-3-furyl) disulfide | A>B | **not_evaluable** | - | - | step 'pH 4.5' -> 'pH 6.5' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the spread of this log ratio over B0 and the carried rivals |
+| PH-03 | ph | not_independent | FFT | decreasing | **not_evaluable** | - | - | step 'pH 4.0' -> 'pH 5.5' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the spread of this log ratio over B0 and the carried rivals |
 | PH-04 | ph | retired | 2,5-Dimethylpyrazine | increasing | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
 | PH-05 | ph | retired | Furfural | decreasing | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
 | TEMP-01 | temperature | independent | Acrylamide | decreasing | **disagree** | acrylamide | 13.6, 357, 1.04e+03 |  |
@@ -80,9 +80,9 @@ Panel `docs/validation/directional_claims_panel.yml` (119 claims, flat tolerance
 | LIP-01 | lipid_lane | fit_adjacent | Hexanal | A>B | **disagree** | lipid | 22.9, 22.9 | identical predictions; the lane has no term for the moved axis |
 | LIP-02 | lipid_lane | retired | Hexanal | increasing | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
 | LIP-03 | lipid_lane | independent | Hexanal | A>B | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
-| SUG-07 | sugar_identity | independent | Furfural | A>B | **not_evaluable** | - | - | arm 'cysteine + D-ribose, 110 C 90 min' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): Furfural (spread 1.94 dex): computed with the |
-| SUG-08 | sugar_identity | independent | MFT | A>B | **not_evaluable** | - | - | arm 'cysteine + D-ribose, 110 C 90 min' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): MFT (spread 0.78 dex): computed with the sulf |
-| SUG-09 | sugar_identity | independent | FFT | A>B | **agree** | sulfur | 60, 32 |  |
+| SUG-07 | sugar_identity | independent | Furfural | A>B | **not_evaluable** | - | - | step 'cysteine + D-ribose, 110 C 90 min' -> 'cysteine + D-glucose, 110 C 90 min' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the  |
+| SUG-08 | sugar_identity | independent | MFT | A>B | **agree** | sulfur | 17.7, 0 |  |
+| SUG-09 | sugar_identity | independent | FFT | A>B | **not_evaluable** | - | - | step 'cysteine + D-ribose, 110 C 90 min' -> 'cysteine + D-glucose, 110 C 90 min' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the  |
 | SUG-10 | sugar_identity | retired | 2,5-Dimethylpyrazine | decreasing | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
 | SUG-11 | sugar_identity | independent | FFT | A<B | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
 | SUG-12 | sugar_identity | independent | HMF | A>B | **disagree** | trunk | 948, 1.54e+03 |  |
@@ -93,7 +93,7 @@ Panel `docs/validation/directional_claims_panel.yml` (119 claims, flat tolerance
 | TEMP-05 | temperature | independent | HMF | increasing | **disagree** | trunk | 1.1e+03, 726, 651 |  |
 | TEMP-06 | temperature | independent | Furfural | A>B | **agree** | sulfur | 17.5, 0.000551 |  |
 | AW-03 | moisture_aw | independent | HMF | peak | **not_evaluable** | - | - | refused by the engine: REFUSED -- the two arms differ in WATER ACTIVITY (0.25 vs 0.65) and the trunk lane's a_w term is measured only inside 0.33-1.00 (lower ed |
-| CYS-03 | additive_cysteine | independent | MFT | A>B | **not_evaluable** | - | - | arm 'hydrolysate + xylose + cysteine, 100 C 60 min' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): MFT (spread 1.85 dex): computed w |
+| CYS-03 | additive_cysteine | independent | MFT | A>B | **agree** | sulfur | 104, 0 |  |
 | CYS-04 | additive_cysteine | independent | 2,5-Dimethylpyrazine | A>B | **not_evaluable** | - | - | arm 'hydrolysate + xylose (no cysteine), 120 C' refused: PYRAZINE TARGETS '2,5-Dimethylpyrazine' (wave B18) run on the trunk lane only: the sulfur lane's networ |
 | LIP-04 | lipid_lane | retired | Hexanal | A>B | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
 | ACR-01 | temperature | retired | Acrylamide | peak | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
@@ -104,8 +104,8 @@ Panel `docs/validation/directional_claims_panel.yml` (119 claims, flat tolerance
 | HOF-02 | sugar_identity | independent | FFT | A>B | **not_evaluable** | - | - | the measured contrast (cysteine + D-fructose, 145 C 20 min pH 5.0 3.2, cysteine + D-glucose, 145 C 20 min pH 5.0 2.8) is within measurement noise (< 1.4x); no m |
 | HOF-03 | sugar_identity | independent | FFT | A>B | **not_evaluable** | - | - | step 'cysteine + D-ribose, dry-heated 180 C 6 min' -> 'cysteine + D-glucose, dry-heated 180 C 6 min' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), C |
 | HOF-04 | moisture_aw | independent | MFT, FFT | A>B | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
-| MOT-01 | ph | independent | MFT | A>B | **not_evaluable** | - | - | arm 'cysteine + ribose, phosphate buffer pH 5.6, 140 C 30 min' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): MFT (spread 0.48 dex): |
-| MOT-02 | ph | independent | FFT | A>B | **not_evaluable** | - | - | arm 'cysteine + ribose, phosphate buffer pH 5.6, 140 C 30 min' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): FFT (spread 0.64 dex): |
+| MOT-01 | ph | independent | MFT | A>B | **not_evaluable** | - | - | step 'cysteine + ribose, phosphate buffer pH 4.2, 140 C 30 min' -> 'cysteine + ribose, phosphate buffer pH 5.6, 140 C 30 min' refused: REFUSED, FALSIFIED pH BAL |
+| MOT-02 | ph | independent | FFT | A>B | **not_evaluable** | - | - | step 'cysteine + ribose, phosphate buffer pH 4.2, 140 C 30 min' -> 'cysteine + ribose, phosphate buffer pH 5.6, 140 C 30 min' refused: REFUSED, FALSIFIED pH BAL |
 | MOT-03 | ranking | independent | MFT | A>B | **not_evaluable** | - | - | the measured contrast (MFT, cysteine + ribose, phosphate pH 5.6 2230, FFT, cysteine + ribose, phosphate pH 5.6 1750) is within measurement noise (< 1.4x); no mo |
 | MOT-04 | sugar_identity | independent | MFT | A>B | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
 | MOT-05 | sugar_identity | independent | MFT | A>B | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
@@ -127,33 +127,33 @@ Panel `docs/validation/directional_claims_panel.yml` (119 claims, flat tolerance
 | DIC-01 | sugar_identity | independent | 3-deoxyglucosone, glucosone, methylglyoxal, glyoxal, diacetyl | ranking | **disagree** | trunk | 1.54e+04, 12, 978, 38.1, 0.0285 |  |
 | DIC-02 | sugar_identity | independent | glucosone, glyoxal, methylglyoxal, diacetyl | ranking | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
 | DIC-03 | sugar_identity | independent | 3-deoxyglucosone, glucosone, glyoxal, methylglyoxal | ranking | **not_evaluable** | - | - | the measured contrast (3-deoxyglucosone 52.2, glucosone 7.5, glyoxal 5.6, methylglyoxal 2.6) is within measurement noise (< 1.4x); no model, however good, can b |
-| RIB-T-01 | time | independent | MFT | decreasing | **not_evaluable** | - | - | arm '20 min' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): MFT (spread 1.07 dex): computed with the sulfur lane's pH solved from th |
-| RIB-T-02 | time | independent | FFT | flat | **not_evaluable** | - | - | arm '20 min' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): FFT (spread 0.91 dex): computed with the sulfur lane's pH solved from th |
-| HEX-T-01 | time | independent | FFT | increasing | **not_evaluable** | - | - | arm '20 min' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): FFT (spread 0.48 dex): computed with the sulfur lane's pH solved from th |
-| SCH-T-01 | time | fit_system_overlap | MFT | increasing | **not_evaluable** | - | - | arm '30 min' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): MFT (spread 0.92 dex): computed with the sulfur lane's pH solved from th |
+| RIB-T-01 | time | independent | MFT | decreasing | **not_evaluable** | - | - | step '20 min' -> '40 min' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the spread of this log ratio over B0 and the carried rivals |
+| RIB-T-02 | time | independent | FFT | flat | **not_evaluable** | - | - | a predicted concentration is zero; no direction is defined |
+| HEX-T-01 | time | independent | FFT | increasing | **not_evaluable** | - | - | a predicted concentration is zero; no direction is defined |
+| SCH-T-01 | time | fit_system_overlap | MFT | increasing | **not_evaluable** | - | - | step '60 min' -> '360 min' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the DIRECTION of this ratio is refused: B0 and the carried |
 | WANG22-T-01 | time | retired | MFT | increasing | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
 | WANG22-T-02 | time | retired | FFT | increasing | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
 | WANG22-T-03 | time | retired | MFT | peak | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
 | WANG22-T-04 | time | retired | FFT | peak | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
 | WHI-PH-01 | ph | fit_adjacent | MFT | A>B | **disagree** | sulfur | 3.5e+03, 3.64e+03 |  |
-| CER07-PH-01 | ph | independent | FFT | decreasing | **not_evaluable** | - | - | arm 'pH 4' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): FFT (spread 0.65 dex): computed with the sulfur lane's pH solved from the  |
-| CER07-PH-02 | ph | independent | furfural | decreasing | **not_evaluable** | - | - | arm 'pH 5' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): furfural (spread 0.56 dex): computed with the sulfur lane's pH solved from |
-| MOT02-PH-01 | ph | not_independent | MFT | A>B | **not_evaluable** | - | - | arm 'pH 5.6' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): MFT (spread 0.48 dex): computed with the sulfur lane's pH solved from th |
-| MOT02-PH-02 | ph | not_independent | FFT | A>B | **not_evaluable** | - | - | arm 'pH 5.6' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): FFT (spread 0.64 dex): computed with the sulfur lane's pH solved from th |
-| ZHA25-LYS-01 | additive_amine | independent | MFT | peak | **not_evaluable** | - | - | arm 'lysine 0x' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): MFT (spread 0.60 dex): computed with the sulfur lane's pH solved from |
-| ZHOU22-T-01 | time | fit_system_overlap | MFT | increasing | **disagree** | sulfur | 75.8, 170, 192, 178 |  |
+| CER07-PH-01 | ph | independent | FFT | decreasing | **not_evaluable** | - | - | step 'pH 4' -> 'pH 5' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the spread of this log ratio over B0 and the carried rivals (2. |
+| CER07-PH-02 | ph | independent | furfural | decreasing | **not_evaluable** | - | - | step 'pH 4' -> 'pH 5' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the DIRECTION of this ratio is refused: B0 and the carried riva |
+| MOT02-PH-01 | ph | not_independent | MFT | A>B | **not_evaluable** | - | - | step 'pH 4.2' -> 'pH 5.6' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the spread of this log ratio over B0 and the carried rivals |
+| MOT02-PH-02 | ph | not_independent | FFT | A>B | **not_evaluable** | - | - | step 'pH 4.2' -> 'pH 5.6' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the spread of this log ratio over B0 and the carried rivals |
+| ZHA25-LYS-01 | additive_amine | independent | MFT | peak | **not_evaluable** | - | - | arm 'lysine 1x (40 mM)' refused: LANE CONFLICT: this request needs both the acrylamide and sulfur lanes at once. They do not compose -- the acrylamide network d |
+| ZHOU22-T-01 | time | fit_system_overlap | MFT | increasing | **not_evaluable** | - | - | step '90 min' -> '120 min' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the DIRECTION of this ratio is refused: B0 and the carried |
 | ZHOU22-T-02 | time | fit_system_overlap | FFT | increasing | **agree** | sulfur | 38.2, 131, 215, 260 |  |
-| ZHOU22-CYS-01 | additive_cysteine | fit_system_overlap | furfural | A>B | **not_evaluable** | - | - | arm 'ARP + cysteine, 120 min' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): furfural (spread 0.70 dex): computed with the sulfur la |
-| Z23C-GSH-01 | sulfur_donor | fit_system_overlap | MFT | A>B | **not_evaluable** | - | - | arm 'ARP + cysteine 20 mM' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): MFT (spread 0.51 dex): computed with the sulfur lane's pH  |
-| Z23C-T-01 | time | independent | FFT | peak | **disagree** | sulfur | 25.7, 73.5, 111, 130 |  |
-| CHEN02-RANK-01 | ranking | independent | FFT, MFT | ranking | **not_evaluable** | - | - | observable 'ribose + cysteine, 180 C, 2 h, pH 5.0 :: FFT' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): FFT: computed with the sulf |
-| CHEN02-PH-01 | ph | independent | FFT | A>B | **not_evaluable** | - | - | arm 'initial pH 5.0' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): FFT: computed with the sulfur lane's pH solved from the shipped  |
-| CHEN02-PH-02 | ph | independent | MFT | A>B | **not_evaluable** | - | - | arm 'initial pH 5.0' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): MFT: computed with the sulfur lane's pH solved from the shipped  |
-| CHEN00-PH-01 | ph | not_independent | FFT | A>B | **not_evaluable** | - | - | arm 'initial pH 5.0' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): FFT: computed with the sulfur lane's pH solved from the shipped  |
-| XU07-PH-01 | ph | independent | MFT | decreasing | **not_evaluable** | - | - | arm 'initial pH 5.6' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): MFT (spread 0.51 dex): computed with the sulfur lane's pH solved |
-| XU07-PH-02 | ph | independent | FFT | A>B | **not_evaluable** | - | - | arm 'initial pH 5.6' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): FFT (spread 0.68 dex): computed with the sulfur lane's pH solved |
+| ZHOU22-CYS-01 | additive_cysteine | fit_system_overlap | furfural | A>B | **not_evaluable** | - | - | step 'ARP alone, 120 min' -> 'ARP + cysteine, 120 min' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the DIRECTION of this ratio is |
+| Z23C-GSH-01 | sulfur_donor | fit_system_overlap | MFT | A>B | **not_evaluable** | - | - | step 'ARP + cysteine 20 mM' -> 'ARP + glutathione 20 mM' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the spread of this log ratio |
+| Z23C-T-01 | time | independent | FFT | peak | **not_evaluable** | - | - | step '60 min' -> '90 min' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the DIRECTION of this ratio is refused: B0 and the carried  |
+| CHEN02-RANK-01 | ranking | independent | FFT, MFT | ranking | **not_evaluable** | - | - | a predicted concentration is zero; no ranking is defined |
+| CHEN02-PH-01 | ph | independent | FFT | A>B | **not_evaluable** | - | - | step 'initial pH 5.0' -> 'initial pH 8.5' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): an arm's carried rivals could not be run, s |
+| CHEN02-PH-02 | ph | independent | MFT | A>B | **not_evaluable** | - | - | step 'initial pH 5.0' -> 'initial pH 8.5' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): an arm's carried rivals could not be run, s |
+| CHEN00-PH-01 | ph | not_independent | FFT | A>B | **not_evaluable** | - | - | step 'initial pH 5.0' -> 'initial pH 8.5' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): an arm's carried rivals could not be run, s |
+| XU07-PH-01 | ph | independent | MFT | decreasing | **not_evaluable** | - | - | step 'initial pH 5.6' -> 'initial pH 7.0' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the spread of this log ratio over B0 and th |
+| XU07-PH-02 | ph | independent | FFT | A>B | **not_evaluable** | - | - | step 'initial pH 5.6' -> 'initial pH 7.0' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the spread of this log ratio over B0 and th |
 | WANG12-01 | sulfur_donor | independent | MFT | A>B | **agree** | sulfur | 72.4, 42.3 |  |
-| WANG12-02 | sulfur_donor | independent | FFT | A>B | **not_evaluable** | - | - | arm 'pot C: xylose + thiamine + cysteine + glycine' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): FFT (spread 0.71 dex): computed w |
+| WANG12-02 | sulfur_donor | independent | FFT | A>B | **not_evaluable** | - | - | step 'pot C: xylose + thiamine + cysteine + glycine' -> 'pot A: xylose + thiamine + glutathione' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-08 |
 | HIN92-01 | sugar_identity | independent | MFT | A>B | **agree** | sulfur | 1.21e+03, 682 |  |
 | ZHG91-01 | sulfur_donor | independent | 2-acetylthiazole | A>B | **not_evaluable** | - | - | arm 'glucose + glutathione' refused: THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2-acetylthiazole': in the sulfur lane's network no chain of reactions leads  |
 | ZHG91-02 | sulfur_donor | independent | furfural | A<B | **not_evaluable** | - | - | a predicted concentration is zero; no direction is defined |
