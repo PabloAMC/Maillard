@@ -340,8 +340,8 @@ laboratories before any work) and the owner-approval step.
    be below 0.05 (a null whose weighted unresolved fraction reaches 0.05 therefore cannot credit); each null's
    unresolved fraction is reported; the judge calibration's 0.70 - 0.90 power used the prototype's adequacy,
    conditioned on the spent AND decisive rows, so the spent-only adequacy above is uncalibrated except in synthetic
-   worlds (added 2026-11-07, PR #105: pending independent confirmation;
-   applies to no case before it); a pair lacking either is 'not computable', reported so and
+   worlds (added 2026-11-07, PR #105: adversarially reviewed and independently confirmed with edits, 2026-11-07;
+   applies to a case only through that case's power check under this text); a pair lacking either is 'not computable', reported so and
    carried undecided (S3); an unresolved density is re-estimated (larger draw sets, or the reusable SMC
    estimator), never read as a tie; every power check reports which cells are computable and the cost of making the
    rest computable, before the run. This does not reopen M1b part (i) (its amendment A1 is frozen); A1's would-be kills enter S3 as falsifications only once their sec. 3.8 confirmation fits
