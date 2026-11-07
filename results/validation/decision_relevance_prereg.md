@@ -1195,3 +1195,24 @@ D04); the rest of what it lacks waits on M5's switch, M1c's build and the reduce
   **Also in v3.1:** stage 0a's ensemble is declared exactly (sec. 5.0.2): the envelope sampler, B1 / B13 at #108's
   pinned points, its declared departures, and its 12 + 8 computable decisions. The sigma_r sensitivities replace the
   rho ones. The step-0 cost is re-projected (23 arms).
+- 2026-11-07, **post-freeze correction A1 (step 0; recorded, not a change to the frozen text above).** An independent
+  check of step 0 found that stage 0c's sigma_r came from residuals scored under the falsified B0 pH balance. Stage
+  0a's worlds use B1 / B13, so B0's pH failure would be counted twice.
+  - **What A1 does** (declared in `decision_relevance_step0.md` before it ran, commit c8b7be8f):
+    - it re-scores every out-of-sample sulfur-lane pair under PR #108's 23 rival points;
+    - it binds the all-units rival-scored reading, chosen before any number, since a stage-0a world is a B1 / B13
+      engine;
+    - it fixes the generator's source-3 lanes and exposure;
+    - it reports E at sigma_r 0.593, 0.42 and 0.19;
+    - it prints an impossible rho (< -1) as such;
+    - it adds a lever-skill diagnostic.
+  - **The result.** The sulfur sigma_r is 1.27 dex B0-scored and 1.23 dex rival-scored (LOSO 0.85 - 1.43). The two
+    flagged studies miss as much under the rivals (xu2007 2.62, Hofmann 2.58 dex per study) as under B0, so their
+    misses are not B0's.
+  - **The binding step-0 verdict is unchanged:** E = 1 of 12 (D14, trivially), at the point and at both LOSO ends:
+    "CONFIRMED (omega-bound): the lever table cannot show directions under the current discrepancy, whatever the
+    experiments."
+  - **E at the sec. 7.1 sensitivities:**
+    - 1 at sigma_r = 0.593;
+    - 3 (D05, D14, D18) at 0.42;
+    - 7 at 0.19.

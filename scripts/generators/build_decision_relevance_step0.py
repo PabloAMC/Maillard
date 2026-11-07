@@ -843,6 +843,11 @@ def _sigma_table(c: Mapping[str, Any]) -> List[str]:
                  f"{_rho_text(e)} | {e['status']} |")
     L += ["", "Studies per lane: " + "; ".join(
         f"{lane}: {', '.join(e.get('study_names', []))}" for lane, e in c["primary"].items()), ""]
+    s = c["primary"].get("sulfur") or {}
+    if s.get("per_study"):
+        L += ["Per-study sigma_r, sulfur lane (sqrt(2 (v_s - sigma_m^2))): " + "; ".join(
+            f"{st} {math.sqrt(max(2.0 * (v['v'] - s['sigma_m2']), 0.0)):.2f} (df {v['df']})"
+            for st, v in s["per_study"].items()) + ".", ""]
     return L
 
 
@@ -1037,7 +1042,12 @@ def amendment_a1(payload: Mapping[str, Any], workers: int, cache: Optional[Path]
                 "The check reported beta = 0.18 (90 % CI -0.06 to 0.42), 0.37 without the B0-pH studies, and a "
                 "LOSO calibrated contrast of 0.63 vs 0.57 dex no-change (0.50 vs 0.49 without them). The numbers "
                 "above are this generator's own, by the method stated in the table. Read together: out of sample, "
-                "the engine shows no lever skill even after shrinkage. A diagnostic; it decides nothing.")}
+                "the engine shows no lever skill even after shrinkage. A diagnostic; it decides nothing.\n\n"
+                "**What the re-scoring found.** Under B1 / B13 the two flagged studies still miss as much as under "
+                "B0 (per-study sigma_r xu2007 2.78 -> 2.62, Hofmann 2.51 -> 2.58 dex). Their misses are not B0's "
+                "pH-balance failure: xu2007 is a declared-pyrophosphate design, where the balance rivals move little. "
+                "So the check's premise does not hold, and dropping the two studies (which would give ~0.5 dex) has "
+                "no basis in the rule. The binding sulfur sigma_r is the rival-scored 1.23 dex.")}
 
 
 def write(payload):
