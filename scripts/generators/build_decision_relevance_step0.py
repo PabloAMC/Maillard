@@ -193,7 +193,50 @@ def _quant_cv(panel: Mapping[str, Any]) -> Dict[str, float]:
     return out
 
 
-def stage_0c() -> Dict[str, Any]:
+_SC = None
+
+
+def _contrast_scorer():
+    """scripts/generators/score_contrast_benchmark.py, for its pot specs (source 3); imported lazily."""
+    global _SC
+    if _SC is None:
+        gen = str(ROOT / "scripts" / "generators")
+        if gen not in sys.path:
+            sys.path.insert(0, gen)
+        import score_contrast_benchmark as sc   # noqa: E402
+
+        _SC = sc
+    return _SC
+
+
+_TABLES: Dict[str, Any] = {}
+
+
+def source3_spec(table: str, pid: str):
+    sc = _contrast_scorer()
+    if table not in _TABLES:
+        _TABLES[table] = sc.load_table(table)
+    return sc.pot_spec(table, pid, _TABLES[table]["pots"][pid])
+
+
+def source3_lane(table: str, pid: str, species: str) -> str:
+    """Amendment A1, fix (a): the engine lane that integrates `species` in this pot (declaration only, no run);
+    the frozen generator hard-coded "sulfur"."""
+    from src.kinetic_core import engine
+
+    sc = _contrast_scorer()
+    spec, tg = source3_spec(table, pid), sc.target_name(species)
+    if spec is None or tg is None:
+        return "unmapped"
+    d = engine.declare_envelope(spec, [tg])
+    lanes = list(d.lanes or ((d.lane or engine.TRUNK),))
+    return next((ln for ln in lanes if ln in engine.MAILLARD_LANES), lanes[0] if lanes else "unmapped")
+
+
+def collect_pairs(*, as_frozen: bool = False) -> Tuple[List[Dict[str, Any]], Dict[str, float], Dict[str, int]]:
+    """The stage-0c pair units. ``as_frozen`` reproduces the generator as first run (2f1ef226), whose source 3
+    was hard-coded to lane "sulfur" and out_of_sample True; the default applies amendment A1's fix (a): the engine's
+    lane per pot and species, and out of sample when the row's exposure is "clean"."""
     cs = json.loads(CONTRAST_SCORES.read_text())
     panel = json.loads(PANEL_SCORES.read_text())
     cb = json.loads(CONTRAST_BENCHMARK.read_text())
@@ -202,7 +245,8 @@ def stage_0c() -> Dict[str, Any]:
     pairs, seen_arms = [], set()
     for p in cs["pairs"]:
         pairs.append({"study": p["study"], "compound": p["compound"], "lane": p["lane"], "a": p["a"], "b": p["b"],
-                      "e": p["engine_dex"] - p["measured_dex"], "oos": p["out_of_sample"], "source": 1})
+                      "m": p["measured_dex"], "p": p["engine_dex"], "e": p["engine_dex"] - p["measured_dex"],
+                      "oos": p["out_of_sample"], "source": 1})
         seen_arms |= {p["a"], p["b"]}
     n_src3, skipped3 = 0, 0
     for r in cb["primary"]["decision_set"]["rows"]:
@@ -212,14 +256,25 @@ def stage_0c() -> Dict[str, Any]:
         if r.get("sigma_m") is not None:
             for a in (r["a"], r["b"]):
                 arm_var[a] = float(r["sigma_m"]) ** 2 / 2.0
-        pairs.append({"study": r["table"], "compound": r["species"], "lane": "sulfur", "a": r["a"], "b": r["b"],
-                      "e": float(r["p"]) - float(r["m"]), "oos": True, "source": 3})
+        lane = "sulfur" if as_frozen else source3_lane(r["table"], r["a"], r["species"])
+        oos = True if as_frozen else r.get("exposure") == "clean"
+        pairs.append({"study": r["table"], "compound": r["species"], "lane": lane, "a": r["a"], "b": r["b"],
+                      "m": float(r["m"]), "p": float(r["p"]), "e": float(r["p"]) - float(r["m"]), "oos": oos,
+                      "source": 3})
         n_src3 += 1
+    return pairs, arm_var, {"pairs_source1": len(cs["pairs"]), "pairs_source3": n_src3, "source3_skipped": skipped3}
+
+
+def stage_0c(*, as_frozen: bool = False, pairs=None, arm_var=None, counts=None) -> Dict[str, Any]:
+    if pairs is None:
+        pairs, arm_var, counts = collect_pairs(as_frozen=as_frozen)
+    n_src3, skipped3 = counts["pairs_source3"], counts["source3_skipped"]
+    cs_pairs = counts["pairs_source1"]
     groups = groups_from_pairs(pairs, arm_var)
     oos = [g for g in groups if g["out_of_sample"]]
     lanes = sorted({g["lane"] for g in groups})
     result = {
-        "units": {"pairs_source1": len(cs["pairs"]), "pairs_source3": n_src3, "source3_skipped": skipped3,
+        "units": {"pairs_source1": cs_pairs, "pairs_source3": n_src3, "source3_skipped": skipped3,
                   "source2": "no group of its own: contrast_scores.json is built from the same rows "
                              "(build_null_model_baselines._rows) with the same study key, so its groups are source 1's",
                   "groups_all": len(groups), "groups_out_of_sample": len(oos)},
@@ -236,6 +291,199 @@ def stage_0c() -> Dict[str, Any]:
         "groups": groups,
     }
     return result
+
+
+# ====================================================================================================== amendment A1
+#: the two studies whose pH pairs the post-freeze check found scored under the falsified B0 balance
+A1_FLAGGED_STUDIES = ("heldout_xu2007_tab1", "hofmann_schieberle_1998_free_mft_fft")
+_BUNDLE_INDEX: Dict[str, Path] = {}
+
+
+def _bundle_path(bid: str) -> Path:
+    if not _BUNDLE_INDEX:
+        for f in data_paths.BENCHMARKS_DIR.rglob("*.json"):
+            _BUNDLE_INDEX.setdefault(f.stem, f)
+    return _BUNDLE_INDEX[bid]
+
+
+def unit_spec(source: int, study: str, arm: str, compound: str):
+    """(FormulationSpec, engine target) for one arm of a stage-0c pair, built as its own scorer builds it."""
+    from src import compound_keys, data_access
+    from src.kinetic_core import panel
+
+    if source == 3:
+        return source3_spec(study, arm), _contrast_scorer().target_name(compound)
+    bench = data_access.load_json(_bundle_path(arm))
+    targets = list(panel.bundle_targets(bench))
+    tg = next((t for t in targets if compound_keys.canonical_name(t) == compound), compound)
+    return panel.core_spec(bench), tg
+
+
+def _rescore_point(task: Mapping[str, Any]) -> Dict[str, Any]:
+    from src.kinetic_core import config, engine
+
+    changes, drift = ({}, None)
+    if task["rival"] != "B0":
+        points = _W["points"]
+        point = points["rivals"][task["rival"]][task["point_index"]]
+        changes, drift = _rival_changes(task["rival"], point,
+                                        tuple(float(x) for x in points["davidek_breakpoints_in_situ"]))
+    out: Dict[str, Optional[float]] = {}
+    t0 = time.perf_counter()
+    signal.signal(signal.SIGALRM, _alarm)
+    with config.applied(config.Config.shipped().replace(changes)):
+        for u in task["units"]:
+            key = "|".join([str(u["source"]), u["study"], u["arm"], u["compound"]])
+            try:
+                spec, tg = unit_spec(u["source"], u["study"], u["arm"], u["compound"])
+                if spec is None or tg is None:
+                    out[key] = None
+                    continue
+                signal.alarm(ARM_TIMEOUT_S)
+                kw = {} if drift is None else {"draw": engine.CoreDraw(ph_drift=drift)}
+                run = engine.predict(spec, [tg], **kw)
+                signal.alarm(0)
+                mk = run.declaration.mapped_targets.get(tg) if run.answered else None
+                out[key] = None if mk is None else float(run.species_mmol_per_l.get(mk, 0.0))
+            except _Timeout:
+                out[key] = None
+            except Exception:  # noqa: BLE001  (recorded as a missing value and counted)
+                signal.alarm(0)
+                out[key] = None
+    return {"point": task["name"], "rival": task["rival"], "values": out, "seconds": time.perf_counter() - t0}
+
+
+def _init_rescore(points):
+    os.environ.setdefault("OMP_NUM_THREADS", "1")
+    _W["points"] = points
+
+
+def a1_rescore(pairs: Sequence[Mapping[str, Any]], workers: int, studies: Optional[Sequence[str]] = None
+               ) -> Dict[str, Any]:
+    """Re-score the out-of-sample sulfur-lane pairs (of ``studies``, or all) under B0 (a parity check against the
+    on-disk values) and under each of PR #108's rival points at 5e61fed0."""
+    import multiprocessing as mp
+
+    points, sha = pr108_points()
+    sel = [p for p in pairs if p["oos"] and p["lane"] == "sulfur" and (studies is None or p["study"] in studies)]
+    units = sorted({(p["source"], p["study"], arm, p["compound"]) for p in sel for arm in (p["a"], p["b"])})
+    unit_dicts = [{"source": s, "study": st, "arm": a, "compound": c} for s, st, a, c in units]
+    tasks = [{"name": "B0", "rival": "B0", "point_index": None, "units": unit_dicts}]
+    for rival, pts in points["rivals"].items():
+        for k, pt in enumerate(pts):
+            tasks.append({"name": pt["name"], "rival": rival, "point_index": k, "units": unit_dicts})
+    t0 = time.time()
+    with mp.get_context("spawn").Pool(workers, initializer=_init_rescore, initargs=(points,)) as pool:
+        results = list(pool.imap_unordered(_rescore_point, tasks))
+    return {"points_sha256": sha, "pairs": len(sel), "units": len(units), "points": len(tasks) - 1,
+            "wall_hours": (time.time() - t0) / 3600.0, "core_seconds": float(sum(r["seconds"] for r in results)),
+            "results": sorted(results, key=lambda r: (r["rival"] != "B0", r["point"]))}
+
+
+def _pair_p(p: Mapping[str, Any], values: Mapping[str, Optional[float]]) -> Optional[float]:
+    def v(arm):
+        return values.get("|".join([str(p["source"]), p["study"], arm, p["compound"]]))
+
+    va, vb = v(p["a"]), v(p["b"])
+    if not va or not vb or va <= 0 or vb <= 0:
+        return None
+    return math.log10(va / vb)
+
+
+def a1_estimates(pairs, arm_var, counts, rescore, studies: Optional[Sequence[str]]) -> Dict[str, Any]:
+    """sigma_r with the rescored pairs' engine log ratios from each rival point. The rival-scored reading pools,
+    per group, the within-group sum of squares averaged over the 23 points (each stage-0a world is one point),
+    with the other pairs unchanged."""
+    by_point = [r for r in rescore["results"] if r["rival"] != "B0"]
+    b0 = next(r for r in rescore["results"] if r["rival"] == "B0")
+    parity = []
+    target = [p for p in pairs if p["oos"] and p["lane"] == "sulfur" and (studies is None or p["study"] in studies)]
+    for p in target:
+        pb0 = _pair_p(p, b0["values"])
+        if pb0 is not None:
+            parity.append(abs(pb0 - p["p"]))
+    per_point_groups, missing = [], 0
+    for r in by_point:
+        new = []
+        for p in pairs:
+            q = dict(p)
+            if p in target:
+                pr = _pair_p(p, r["values"])
+                if pr is None:
+                    missing += 1
+                    continue
+                q["p"], q["e"] = pr, pr - p["m"]
+            new.append(q)
+        per_point_groups.append(groups_from_pairs(new, arm_var))
+    # average the sums of squares of the same group over the points where it is present
+    acc: Dict[Tuple, Dict[str, Any]] = {}
+    for gs in per_point_groups:
+        for g in gs:
+            key = (g["study"], g["compound"], g["lane"], g["out_of_sample"], g["k"])
+            a = acc.setdefault(key, dict(g, ss_list=[], res_list=[]))
+            a["ss_list"].append(g["ss"])
+            a["res_list"].append(g["residuals"])
+    groups = []
+    for a in acc.values():
+        g = {k: v for k, v in a.items() if k not in ("ss_list", "res_list")}
+        g["ss"] = float(np.mean(a["ss_list"]))
+        g["residuals"] = list(np.mean(np.array(a["res_list"]), axis=0)) if len({len(x) for x in a["res_list"]}) == 1 \
+            else a["residuals"]
+        groups.append(g)
+    oos = [g for g in groups if g["out_of_sample"]]
+    lanes = sorted({g["lane"] for g in groups})
+    mean_p = {}
+    for p in target:
+        ps = [x for x in (_pair_p(p, r["values"]) for r in by_point) if x is not None]
+        if ps:
+            mean_p[(p["study"], p["compound"], p["a"], p["b"])] = float(np.mean(ps))
+    thiol = [g for g in oos if g["lane"] == "sulfur" and is_thiol(g["compound"])]
+    return {"parity_b0_max_abs_dex": max(parity) if parity else None, "parity_b0_n": len(parity),
+            "pairs_rescored": len(target), "pair_point_values_missing": missing,
+            "primary": {lane: sigma_r_estimate([g for g in oos if g["lane"] == lane]) for lane in lanes},
+            "pooled": sigma_r_estimate(oos), "mean_rival_p": {"|".join(k): v for k, v in mean_p.items()},
+            "thiol_only": {"primary": {"sulfur": sigma_r_estimate(thiol)},
+                           "pooled": sigma_r_estimate(thiol + [g for g in oos if g["lane"] != "sulfur"])}}
+
+
+def is_thiol(compound: str) -> bool:
+    """A thiol or its disulfide (MFT, FFT, their dimers, methanethiol), by code or name."""
+    c = str(compound)
+    return c.upper() in {"MFT", "FFT", "MFTD", "FFTD", "MESH"} or any(
+        k in c.lower() for k in ("thiol", "disulfide", "furanthiol"))
+
+
+def calibration_diagnostics(pairs: Sequence[Mapping[str, Any]], drop: Sequence[str] = ()) -> Dict[str, Any]:
+    """Amendment A1, item 3: the slope beta of observed on predicted log ratios (OLS with intercept; a 90 % interval
+    from the study-clustered (CR1) standard error with t on G - 1 df) and the leave-one-study-out calibrated contrast
+    (beta through the origin fitted on the other studies; median |m - beta p| against the no-change median |m|)."""
+    from scipy import stats
+
+    sel = [p for p in pairs if p["oos"] and p["lane"] == "sulfur" and p["study"] not in drop]
+    if len(sel) < 3:
+        return {"pairs": len(sel)}
+    m = np.array([p["m"] for p in sel])
+    x = np.array([p["p"] for p in sel])
+    st = np.array([p["study"] for p in sel])
+    X = np.column_stack([np.ones_like(x), x])
+    beta = np.linalg.lstsq(X, m, rcond=None)[0]
+    res = m - X @ beta
+    bread = np.linalg.inv(X.T @ X)
+    G = len(set(st))
+    meat = sum(np.outer(X[st == s].T @ res[st == s], X[st == s].T @ res[st == s]) for s in set(st))
+    n, k = len(m), 2
+    cr1 = G / (G - 1) * (n - 1) / (n - k) if G > 1 else float("nan")
+    se = math.sqrt(float((bread @ meat @ bread)[1, 1] * cr1)) if G > 1 else float("nan")
+    t = float(stats.t.ppf(0.95, G - 1)) if G > 1 else float("nan")
+    errs, nulls = [], []
+    for s in sorted(set(st)):
+        tr, te = st != s, st == s
+        b = float(np.dot(x[tr], m[tr]) / np.dot(x[tr], x[tr])) if np.dot(x[tr], x[tr]) > 0 else 0.0
+        errs += list(np.abs(m[te] - b * x[te]))
+        nulls += list(np.abs(m[te]))
+    return {"pairs": n, "studies": G, "beta": float(beta[1]), "beta_ci90": [float(beta[1] - t * se),
+                                                                              float(beta[1] + t * se)],
+            "loso_calibrated_median_abs_dex": float(np.median(errs)), "no_change_median_abs_dex": float(np.median(nulls))}
 
 
 def sigma_r_for(lane: str, s0c: Mapping[str, Any]) -> Tuple[Optional[Dict[str, Any]], str]:
@@ -488,8 +736,10 @@ def stage_0a(s0c: Mapping[str, Any], workers: int, n: int = N_WORLDS, cache: Opt
 def summarise_0a(records, s0c, points_sha, wall, n) -> Dict[str, Any]:
     decisions = {}
     sigma_star_list = []
+    levers: Dict[str, np.ndarray] = {}
     for did, a, b, out in DECISIONS:
         L = np.array([v for v in (lever(r, a, b, out) for r in records) if v is not None], float)
+        levers[did] = L
         lane = LANE_OF_OUTPUT[out]
         est, rule = sigma_r_for(lane, s0c)
         row: Dict[str, Any] = {"arms": [a, b], "output": out, "lane": lane, "sigma_r_rule": rule,
@@ -526,6 +776,12 @@ def summarise_0a(records, s0c, points_sha, wall, n) -> Dict[str, Any]:
     majority_k = math.ceil(len(d_rows) / 2)
     e_at = {k: sum(1 for v in d_rows.values() if ((v.get("oracle") or {}).get(k) or {}).get("eligible"))
             for k in ("point", "loso_min", "loso_max")}
+    # prereg sec. 7.1's sensitivities sigma_r in {0.593 (as shipped), 0.42, 0.19} (amendment A1, fix (b))
+    e_fixed = {}
+    for s_fix in (round(SHIPPED_SIGMA_R, 3), 0.42, 0.19):
+        elig = [d for d in d_rows if levers[d].size and oracle(
+            levers[d], s_fix, np.random.default_rng(int(hashlib.sha256(d.encode()).hexdigest()[:8], 16)))["eligible"]]
+        e_fixed[f"{s_fix:.3f}"] = {"E": len(elig), "eligible": elig}
     if undecided_d:
         reading = (f"UNDECIDED: sigma_r is UNDECIDED (fewer than G_min = {G_MIN} studies) for "
                    f"{', '.join(undecided_d)}; step 0 reading (envelope incomplete)")
@@ -550,7 +806,8 @@ def summarise_0a(records, s0c, points_sha, wall, n) -> Dict[str, Any]:
         "decisions": decisions, "not_computable": NOT_COMPUTABLE,
         "eligible": sorted(k for k, v in d_rows.items() if v.get("eligible")),
         "eligible_off_grid": sorted(k for k, v in o_rows.items() if v.get("eligible")),
-        "E_step0": E, "E_at": e_at, "computable_D": len(d_rows), "loso_flips": loso_flip,
+        "E_step0": E, "E_at": e_at, "E_at_fixed_sigma_r": e_fixed, "computable_D": len(d_rows),
+        "loso_flips": loso_flip,
         "sigma_star_for_2_eligible": ss[1] if len(ss) > 1 else None,
         "sigma_star_for_majority": ss[majority_k - 1] if len(ss) >= majority_k else None,
         "layer1_step0_reading": reading,
@@ -562,68 +819,225 @@ def _f(x, p=3):
     return "-" if x is None else (f"{x:.{p}f}" if isinstance(x, float) else str(x))
 
 
+def _rho_text(e: Mapping[str, Any]) -> str:
+    r = e.get("rho_derived")
+    if r is None:
+        return "-"
+    if r < -1.0:
+        return "impossible: omega and sigma_r disagree (the engine over-responds to levers)"
+    return f"{r:.2f}"
+
+
+def _sigma_table(c: Mapping[str, Any]) -> List[str]:
+    L = ["| lane | studies | groups | df | sigma_w^2 | sigma_m^2 | floor | **sigma_r** (dex) | 90 % t-interval | "
+         "LOSO min - max | rho (derived diagnostic) | status |", "|---|---|---|---|---|---|---|---|---|---|---|---|"]
+    for lane, e in list(c["primary"].items()) + [("POOLED", c["pooled"])]:
+        if not e.get("groups"):
+            L.append(f"| {lane} | 0 | 0 | | | | | | | | | {e['status']} |")
+            continue
+        ti = e.get("t_interval_90")
+        L.append(f"| {lane} | {e['studies']} | {e['groups']} | {e['df']} | {_f(e['sigma_w2'])} | "
+                 f"{_f(e['sigma_m2'], 4)} | {_f(e['sigma_floor'])} | **{_f(e['sigma_r'])}**"
+                 f"{' (floor)' if e['floored'] else ''} | {('%.3f - %.3f' % tuple(ti)) if ti else '-'} | "
+                 f"{('%.3f - %.3f' % (e['loso_min'], e['loso_max'])) if 'loso_min' in e else '-'} | "
+                 f"{_rho_text(e)} | {e['status']} |")
+    L += ["", "Studies per lane: " + "; ".join(
+        f"{lane}: {', '.join(e.get('study_names', []))}" for lane, e in c["primary"].items()), ""]
+    return L
+
+
+def _q(q, key):
+    return q.get(key) if key in q else q.get(str(key))
+
+
+def _decision_table(a: Mapping[str, Any]) -> List[str]:
+    L = ["| decision | arms | output | sigma_r rule | worlds | L 5 / 50 / 95 % (dex) | G* (point) | P_wrong | "
+         "eligible | same across LOSO | G* as shipped | sigma* | reduction needed |",
+         "|---|---|---|---|---|---|---|---|---|---|---|---|---|"]
+    for did, r in a["decisions"].items():
+        q = r.get("L_quantiles") or {}
+        o = (r.get("oracle") or {}).get("point") or {}
+        sh = r.get("oracle_as_shipped") or {}
+        status = r.get("status")
+        if did == "D14" and r.get("eligible"):
+            status = "eligible (trivial: adding ROOH makes hexanal)"
+        L.append(f"| {did} | {r['arms'][0]} -> {r['arms'][1]} | {r['output']} | {r['sigma_r_rule']} | "
+                 f"{r['worlds_with_lever']} | {_f(_q(q, 0.05), 2)} / {_f(_q(q, 0.5), 2)} / {_f(_q(q, 0.95), 2)} | "
+                 f"{_f(o.get('G'))} | {_f(o.get('P_wrong'))} | {status} | "
+                 f"{r.get('eligible_agrees_across_loso', '-')} | {_f(sh.get('G'))} | {_f(r.get('sigma_star'))} | "
+                 f"{_f(r.get('reduction_factor_needed'), 2)} |")
+    ef = a.get("E_at_fixed_sigma_r") or {}
+    trivial = " (D14's eligibility is trivial: adding ROOH makes hexanal)" if "D14" in a["eligible"] else ""
+    L += ["", f"Eligible (of the {a['computable_D']} computable D-decisions): {len(a['eligible'])} of "
+              f"{a['computable_D']}: {', '.join(a['eligible']) or 'none'}{trivial}; off-grid eligible: "
+              f"{', '.join(a['eligible_off_grid']) or 'none'}. Eligible at point / LOSO_min / LOSO_max: "
+              f"{a['E_at']['point']} / {a['E_at']['loso_min']} / {a['E_at']['loso_max']}.",
+          "E at the pre-registered sigma_r sensitivities (sec. 7.1): " + "; ".join(
+              f"sigma_r = {k}: E = {v['E']} ({', '.join(v['eligible']) or 'none'})" for k, v in ef.items()) + ".",
+          f"The ratio error at which >= 2 D-decisions would be eligible: {_f(a['sigma_star_for_2_eligible'])} dex; "
+          f"a majority of the computable ones: {_f(a['sigma_star_for_majority'])} dex.", "",
+          f"> Layer 1 (sec. 7.1), step 0 reading (envelope incomplete; the full run's recomputation binds): "
+          f"**{a['layer1_step0_reading']}**", ""]
+    return L
+
+
 def render(payload: Mapping[str, Any]) -> str:
     L = ["# Decision relevance, step 0: the ratio error and the oracle ceiling", "",
          f"*Generated by `scripts/generators/build_decision_relevance_step0.py` under the FROZEN v3.1 pre-registration "
-         f"(`{PREREG}`, frozen in {FREEZE_COMMIT}), sec. 5.0. Step 0 only: no design, early variant or full run is "
-         f"simulated. Stage 0c is a noise-model estimate on spent and seen data; it credits nothing and moves no "
-         f"shipped output.*", ""]
+         f"(`{PREREG}`, frozen in {FREEZE_COMMIT}), sec. 5.0, with its post-freeze amendment A1 (below). Step 0 only: "
+         f"no design, early variant or full run is simulated. Stage 0c is a noise-model estimate on spent and seen "
+         f"data; it credits nothing and moves no shipped output.*", ""]
+    a1 = payload.get("amendment_A1")
+    if a1:
+        b = a1["readings"][a1["binding"]]
+        L += ["## The binding result (amendment A1)", "",
+              f"> **{b['stage_0a']['layer1_step0_reading']}** (binding reading: {a1['binding_label']}; sulfur "
+              f"sigma_r = {_f(b['sigma']['primary']['sulfur']['sigma_r'])} dex, eligible "
+              f"{len(b['stage_0a']['eligible'])} of {b['stage_0a']['computable_D']}: "
+              f"{', '.join(b['stage_0a']['eligible']) or 'none'})", "",
+              "| reading | sulfur sigma_r (dex) | LOSO | pooled | E (point / LOSO_min / LOSO_max) | eligible | layer 1 |",
+              "|---|---|---|---|---|---|---|"]
+        for key, r in a1["readings"].items():
+            s, p = r["sigma"]["primary"]["sulfur"], r["sigma"]["pooled"]
+            z = r["stage_0a"]
+            L.append(f"| {r['label']}{' **(binding)**' if key == a1['binding'] else ''} | {_f(s['sigma_r'])} | "
+                     f"{_f(s.get('loso_min'))} - {_f(s.get('loso_max'))} | {_f(p['sigma_r'])} | "
+                     f"{z['E_at']['point']} / {z['E_at']['loso_min']} / {z['E_at']['loso_max']} | "
+                     f"{', '.join(z['eligible']) or 'none'} | {z['layer1_step0_reading']} |")
+        L += ["", "## Amendment A1 (post-freeze correction, 2026-11-07)", ""] + [f"{x}" for x in a1["declaration"]] + [""]
+        rs = a1["rescore"]
+        L += [f"Re-scoring: {rs['pairs']} out-of-sample sulfur-lane pairs ({rs['units']} arms) under B0 and PR #108's "
+              f"{rs['points']} rival points (sha256 {rs['points_sha256'][:12]}); {rs['core_seconds'] / 3600:.2f} core-h, "
+              f"{rs['wall_hours']:.2f} h wall at 2 processes. B0 parity with the on-disk engine values: max "
+              f"{_f(a1['readings']['rival_all']['parity_b0_max_abs_dex'], 4)} dex over "
+              f"{a1['readings']['rival_all']['parity_b0_n']} pairs.", ""]
+        for key, r in a1["readings"].items():
+            L += [f"### Reading: {r['label']}", ""] + _sigma_table(r["sigma"]) + _decision_table(r["stage_0a"])
+        L += ["### Lever skill out of sample (A1 item 3; sulfur lane, out-of-sample pairs)", "",
+              "| scoring | pairs | studies | slope beta of observed on predicted | 90 % CI (CR1, t on G - 1) | "
+              "LOSO calibrated median abs error | no-change median abs |", "|---|---|---|---|---|---|---|"]
+        for lab, d in a1["calibration"].items():
+            ci = d.get("beta_ci90") or [None, None]
+            L.append(f"| {lab} | {d.get('pairs')} | {d.get('studies', '-')} | {_f(d.get('beta'), 2)} | "
+                     f"{_f(ci[0], 2)} - {_f(ci[1], 2)} | {_f(d.get('loso_calibrated_median_abs_dex'), 2)} | "
+                     f"{_f(d.get('no_change_median_abs_dex'), 2)} |")
+        L += ["", a1["calibration_reading"], ""]
+    c0 = payload.get("stage_0c_as_first_run")
+    if c0:
+        L += ["## As first run (superseded by A1): stage 0c with the frozen generator's source-3 lanes", ""] + \
+             _sigma_table(c0)
+    a = payload.get("stage_0a")
+    if a:
+        L += ["## As first run (superseded by A1): stage 0a", "",
+              f"{a['worlds']} of {a['worlds_planned']} worlds (B1 {a['rivals']['B1']}, B13 {a['rivals']['B13']}; "
+              f"PR #108's points record at {a['points_record']['commit']}, sha256 {a['points_record']['sha256'][:12]}); "
+              f"failed arm runs {a['failed_arm_runs']} of {a['arm_runs']}. Wall-clock {a['wall_hours']:.2f} h at 2 "
+              f"processes ({a['core_seconds'] / 3600:.2f} core-h).", "",
+              "Not computable at step 0: " + "; ".join(f"{k} ({v})" for k, v in a["not_computable"].items()), ""] + \
+             _decision_table(a)
     c = payload.get("stage_0c")
     if c:
-        L += ["## Stage 0c: the ratio error sigma_r (sec. 5.0.1)", "",
+        L += ["## Stage 0c, B0-scored with A1's lane fix (the `--check` reference)", "",
               f"Units: {c['units']['pairs_source1']} pairs from `contrast_scores.json` (source 1), "
               f"{c['units']['pairs_source3']} answered within-study rows from the contrast benchmark (source 3; "
               f"{c['units']['source3_skipped']} censored or duplicate rows skipped); source 2: {c['units']['source2']}. "
               f"{c['units']['groups_out_of_sample']} of {c['units']['groups_all']} groups are out of sample.", "",
-              f"Measurement: {c['measurement_rule']}.", "",
-              "| lane | studies | groups | df | sigma_w^2 | sigma_m^2 | floor | **sigma_r** (dex) | 90 % t-interval | "
-              "LOSO min - max | rho (derived) | status |", "|---|---|---|---|---|---|---|---|---|---|---|---|"]
-        for lane, e in list(c["primary"].items()) + [("POOLED", c["pooled"])]:
-            if not e.get("groups"):
-                L.append(f"| {lane} | 0 | 0 | | | | | | | | | {e['status']} |")
-                continue
-            ti = e.get("t_interval_90")
-            L.append(f"| {lane} | {e['studies']} | {e['groups']} | {e['df']} | {_f(e['sigma_w2'])} | "
-                     f"{_f(e['sigma_m2'], 4)} | {_f(e['sigma_floor'])} | **{_f(e['sigma_r'])}**"
-                     f"{' (floor)' if e['floored'] else ''} | {('%.3f - %.3f' % tuple(ti)) if ti else '-'} | "
-                     f"{('%.3f - %.3f' % (e['loso_min'], e['loso_max'])) if 'loso_min' in e else '-'} | "
-                     f"{_f(e['rho_derived'], 2)} | {e['status']} |")
-        L += ["", "Studies per lane (primary): " + "; ".join(
-            f"{lane}: {', '.join(e.get('study_names', []))}" for lane, e in c["primary"].items()), "",
+              f"Measurement: {c['measurement_rule']}.", ""] + _sigma_table(c) + [
               "Sensitivities (not deciding): with in-sample units, sigma_r = " + ", ".join(
                   f"{lane} {_f(e.get('sigma_r'))} ({e.get('studies', 0)} studies)"
                   for lane, e in c["sensitivity_in_sample_included"].items()) +
               "; robust (MAD) form: " + ", ".join(f"{lane} {_f(e.get('sigma_r'))}"
                                                   for lane, e in c["sensitivity_robust"].items()) + ".", "",
               f"As shipped today (iid omega): sigma_r = sqrt 2 x {OMEGA_DEX} = {SHIPPED_SIGMA_R:.3f} dex.", ""]
-    a = payload.get("stage_0a")
-    if a:
-        L += ["## Stage 0a: the oracle ceiling per decision (sec. 5.0.2)", "",
-              f"{a['worlds']} of {a['worlds_planned']} worlds (B1 {a['rivals']['B1']}, B13 {a['rivals']['B13']}; "
-              f"PR #108's points record at {a['points_record']['commit']}, sha256 {a['points_record']['sha256'][:12]}); "
-              f"failed arm runs {a['failed_arm_runs']} of {a['arm_runs']}. Wall-clock {a['wall_hours']:.2f} h at 2 "
-              f"processes ({a['core_seconds'] / 3600:.2f} core-h).", "",
-              "| decision | arms | output | sigma_r rule | worlds | L 5 / 50 / 95 % (dex) | G* (point) | P_wrong | "
-              "eligible | same across LOSO | G* as shipped | sigma* | reduction needed |",
-              "|---|---|---|---|---|---|---|---|---|---|---|---|---|"]
-        for did, r in a["decisions"].items():
-            q = r.get("L_quantiles") or {}
-            o = (r.get("oracle") or {}).get("point") or {}
-            sh = r.get("oracle_as_shipped") or {}
-            L.append(f"| {did} | {r['arms'][0]} -> {r['arms'][1]} | {r['output']} | {r['sigma_r_rule']} | "
-                     f"{r['worlds_with_lever']} | {_f(q.get(0.05) if 0.05 in q else q.get('0.05'), 2)} / "
-                     f"{_f(q.get(0.5) if 0.5 in q else q.get('0.5'), 2)} / {_f(q.get(0.95) if 0.95 in q else q.get('0.95'), 2)} | "
-                     f"{_f(o.get('G'))} | {_f(o.get('P_wrong'))} | {r.get('status')} | "
-                     f"{r.get('eligible_agrees_across_loso', '-')} | {_f(sh.get('G'))} | {_f(r.get('sigma_star'))} | "
-                     f"{_f(r.get('reduction_factor_needed'), 2)} |")
-        L += ["", "Not computable at step 0: " + "; ".join(f"{k} ({v})" for k, v in a["not_computable"].items()), "",
-              f"Eligible (of the {a['computable_D']} computable D-decisions): "
-              f"{', '.join(a['eligible']) or 'none'}; off-grid eligible: {', '.join(a['eligible_off_grid']) or 'none'}.",
-              f"The ratio error at which >= 2 D-decisions would be eligible: {_f(a['sigma_star_for_2_eligible'])} dex; "
-              f"a majority of the computable ones: {_f(a['sigma_star_for_majority'])} dex.", "",
-              "## Layer 1 (sec. 7.1), step 0 reading (envelope incomplete; the full run's recomputation binds)", "",
-              f"> **{a['layer1_step0_reading']}**", ""]
     return "\n".join(L) + "\n"
+
+
+A1_DECLARATION = (
+    "**Dated 2026-11-07, written before the re-scoring ran. Reason:** an independent check of step 0 found that "
+    "stage 0c took sigma_r from residuals scored by the shipped engine, whose pH balance (B0) M1b part (i) falsified, "
+    "while stage 0a's worlds use the carried balance rivals B1 / B13. The two pH-lever studies whose residuals set the "
+    "sulfur sigma_r (xu2007, pH 5.6 / 7 / 8; Hofmann 1998, pH 3 / 7) were scored under B0. Their misses are therefore "
+    "partly B0's pH failure, which the step-0 worlds have already removed. Counting them in sigma_r counts B0's failure "
+    "twice. The frozen v3.1 text is not edited; this amendment is recorded here and in its revision log.",
+    "",
+    "**What A1 changes:**",
+    "- **(a0) The check's concern, and what the prereg's lanes say.** The check asked that non-thiol species (Meynier "
+    "NF; xu2007 furfural, 2-acetylthiazole) not set the thiol sigma_r. The prereg's lanes are ENGINE lanes "
+    "(\"thiol = sulfur lane\", sec. 5.0.1), and the engine integrates every source-3 row on the sulfur lane, so (a) "
+    "below moves no row. The concern is therefore met by a sensitivity, reported and not binding: \"rival-scored, "
+    "thiol species only\". It takes the sulfur-lane groups of thiols and their disulfides only (MFT, FFT, their dimers, "
+    "methanethiol). Changing the binding lane definition after the freeze would be a change of the frozen rule, which "
+    "this amendment does not make.",
+    "- **(a) A generator fix.** Source 3's rows are given their engine lane (from `declare_envelope` on each pot and "
+    "species, no run) and their own exposure, where the generator as first run hard-coded \"sulfur\" and out of "
+    "sample. The prereg's lanes are engine lanes (sec. 5.0.1).",
+    "- **(b) Reporting fixes.** E is reported at sigma_r in {0.593, 0.42, 0.19}, which sec. 7.1 lists. A derived rho "
+    "below -1 is printed as \"impossible: omega and sigma_r disagree (the engine over-responds to levers)\".",
+    "- **(c) The rival-scored reading.** Every out-of-sample sulfur-lane pair is re-scored under each of PR #108's 23 "
+    "rival points at 5e61fed0, with the shipped constants otherwise. Per group, the within-group sum of squares is "
+    "averaged over the points, since each stage-0a world is one point. sigma_r then follows from sec. 5.0.1's "
+    "estimator unchanged (G_min, floor, t-interval, LOSO).",
+    "- **(d) Two rival-scored variants:**",
+    "  - **\"rival-scored, all sulfur units\":** every out-of-sample sulfur pair re-scored;",
+    "  - **\"rival-scored, xu2007 + Hofmann only\":** the check's variant, with the other studies kept B0-scored.",
+    "- **(e) Which reading binds, chosen before any number:** \"rival-scored, all sulfur units\". A stage-0a world is a "
+    "B1 or B13 engine, so every residual that sets its discrepancy must come from that engine. Re-scoring only the two "
+    "flagged studies would leave the other studies' B0 residuals in. The other two readings are reported beside it.",
+    "  - Stage 0a's eligibility is recomputed under each reading from the same 512 cached worlds, with no new world.",
+    "  - Its point value and both LOSO ends bind (sec. 5.0.1): if they disagree, layer 1 is UNDECIDED.",
+    "- **(f) A diagnostic** (A1 item 3): the slope of observed on predicted log ratios, and the leave-one-study-out "
+    "calibrated contrast against no change. It is reported, and decides nothing.",
+)
+
+
+def amendment_a1(payload: Mapping[str, Any], workers: int, cache: Optional[Path]) -> Dict[str, Any]:
+    """Amendment A1 (see A1_DECLARATION): the rival-scored sigma_r readings and stage 0a's eligibility under each,
+    from the cached 512 worlds (no new world is run)."""
+    if cache is None or not cache.exists():
+        raise SystemExit("amendment A1 recomputes stage 0a from the cached worlds: pass --cache")
+    records = sorted((json.loads(x) for x in cache.read_text().splitlines()), key=lambda r: r["world"])
+    if len(records) != N_WORLDS:
+        raise SystemExit(f"the cache holds {len(records)} worlds, not {N_WORLDS}")
+    points_sha = payload["stage_0a"]["points_record"]["sha256"]
+    pairs, arm_var, counts = collect_pairs()
+    rescore = a1_rescore(pairs, workers)
+    b0_fixed = stage_0c(pairs=pairs, arm_var=arm_var, counts=counts)
+    two = a1_estimates(pairs, arm_var, counts, rescore, A1_FLAGGED_STUDIES)
+    allr = a1_estimates(pairs, arm_var, counts, rescore, None)
+    readings = {
+        "b0_scored": {"label": "B0-scored (A1's lane fix only)", "sigma": b0_fixed},
+        "rival_two_study": {"label": "rival-scored, xu2007 + Hofmann only", "sigma": two},
+        "rival_all": {"label": "rival-scored, all sulfur units", "sigma": allr},
+        "rival_all_thiol_only": {"label": "rival-scored, thiol species only (sensitivity)", "sigma": allr["thiol_only"]},
+    }
+    for r in readings.values():
+        r["stage_0a"] = summarise_0a(records, r["sigma"], points_sha, 0.0, N_WORLDS)
+    readings["rival_two_study"]["parity_b0_max_abs_dex"] = two["parity_b0_max_abs_dex"]
+    readings["rival_all"]["parity_b0_max_abs_dex"] = allr["parity_b0_max_abs_dex"]
+    readings["rival_all"]["parity_b0_n"] = allr["parity_b0_n"]
+    # the lever-skill diagnostic: B0-scored, B0-scored without the two flagged studies, and rival-scored (mean p)
+    rival_pairs = []
+    for p in pairs:
+        q = dict(p)
+        k = "|".join([p["study"], p["compound"], p["a"], p["b"]])
+        if k in allr["mean_rival_p"]:
+            q["p"] = allr["mean_rival_p"][k]
+            q["e"] = q["p"] - q["m"]
+        rival_pairs.append(q)
+    calib = {
+        "B0-scored": calibration_diagnostics(pairs),
+        "B0-scored, without xu2007 and Hofmann": calibration_diagnostics(pairs, drop=A1_FLAGGED_STUDIES),
+        "rival-scored (mean over the 23 points)": calibration_diagnostics(rival_pairs),
+    }
+    return {"date": "2026-11-07", "declaration": list(A1_DECLARATION), "binding": "rival_all",
+            "binding_label": readings["rival_all"]["label"],
+            "rescore": {k: v for k, v in rescore.items() if k != "results"},
+            "rescore_values": rescore["results"], "readings": readings, "calibration": calib,
+            "calibration_reading": (
+                "The check reported beta = 0.18 (90 % CI -0.06 to 0.42), 0.37 without the B0-pH studies, and a "
+                "LOSO calibrated contrast of 0.63 vs 0.57 dex no-change (0.50 vs 0.49 without them). The numbers "
+                "above are this generator's own, by the method stated in the table. Read together: out of sample, "
+                "the engine shows no lever skill even after shrinkage. A diagnostic; it decides nothing.")}
 
 
 def write(payload):
@@ -646,15 +1060,21 @@ def main(argv=None) -> int:
     ap.add_argument("--cache", type=Path, default=None, help="JSON-lines world cache (resumable)")
     ap.add_argument("--render", action="store_true")
     ap.add_argument("--check", action="store_true")
+    ap.add_argument("--amendment", choices=["A1"], help="post-freeze amendment A1 (needs --cache with the 512 worlds)")
     args = ap.parse_args(argv)
     md = OUT.with_suffix(".md")
     if args.check:
         on_disk = json.loads(OUT.read_text())
         fresh = json.loads(json.dumps(stage_0c(), default=float))
         ok = json.loads(json.dumps(on_disk.get("stage_0c"), default=float)) == fresh
+        ok0 = True
+        if "stage_0c_as_first_run" in on_disk:
+            ok0 = json.loads(json.dumps(on_disk["stage_0c_as_first_run"], default=float)) == json.loads(
+                json.dumps(stage_0c(as_frozen=True), default=float))
         ok_md = md.read_text() == render(on_disk)
-        print(f"stage 0c {'current' if ok else 'STALE'}; md {'current' if ok_md else 'STALE'}")
-        return 0 if ok and ok_md else 1
+        print(f"stage 0c {'current' if ok else 'STALE'}; as-first-run 0c {'current' if ok0 else 'STALE'}; "
+              f"md {'current' if ok_md else 'STALE'}")
+        return 0 if ok and ok0 and ok_md else 1
     if args.render:
         md.write_text(render(json.loads(OUT.read_text())))
         return 0
@@ -667,6 +1087,11 @@ def main(argv=None) -> int:
         if "stage_0c" not in payload:
             raise SystemExit("stage 0a needs stage 0c first (sec. 5.6: 0c, then 0a)")
         payload["stage_0a"] = stage_0a(payload["stage_0c"], args.workers, args.worlds, args.cache)
+        write(payload)
+    if args.amendment == "A1":
+        payload["amendment_A1"] = amendment_a1(payload, args.workers, args.cache)
+        payload["stage_0c"] = stage_0c()
+        payload["stage_0c_as_first_run"] = stage_0c(as_frozen=True)
         write(payload)
     return 0
 
