@@ -4,9 +4,9 @@
     "artifact": "data_wishlist",
     "generated_on": "2026-11-06",
     "git": {
-      "commit": "107ade8355ef6139956f20b9c4b66316a81e7645",
-      "short": "107ade83",
-      "branch": "register-pass-2026-11-06",
+      "commit": "67911f3949d009e6c4fc96ab6a87e100d4526462",
+      "short": "67911f39",
+      "branch": "m1b-part-i-build",
       "dirty": true
     },
     "generated_by": "src/data_wishlist.py",
@@ -37,7 +37,7 @@
       },
       {
         "path": "src/kinetic_core/sulfur.py",
-        "sha256": "c64e61c187eaf92acbb5003869f326df4bfed9dc79dc433fe81d728756509832"
+        "sha256": "31d5d49b849f02444c47f78c0fbd0085e86c41eaa7cb4cdd46ccc9c9b333161e"
       },
       {
         "path": "docs/reference/decisive_measurements.yml",

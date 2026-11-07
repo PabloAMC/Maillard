@@ -4,16 +4,16 @@
   "artifact": "s4_band_sources",
   "generated_on": "2026-11-06",
   "git": {
-   "commit": "44ce75dcc91e64ce64da59d3bee98b538f20b192",
-   "short": "44ce75dc",
-   "branch": "register-pass-2026-11-06",
+   "commit": "67911f3949d009e6c4fc96ab6a87e100d4526462",
+   "short": "67911f39",
+   "branch": "m1b-part-i-build",
    "dirty": true
   },
   "generated_by": "scripts/generators/build_s4_band_sources.py",
   "inputs": [
    {
     "path": "results/validation/incumbent_evidence_tiers.json",
-    "sha256": "c69885c0ce3a91948917821a96dce65443d1defb0f2de630d7abf28b92ca9f6b"
+    "sha256": "1cb645ac376be039bb4a01a9f2d8a3b120495ddba6946a2fd15be3257a20f7cb"
    },
    {
     "path": "src/kinetic_core/ea_class_prior.py",

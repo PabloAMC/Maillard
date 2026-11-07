@@ -4,16 +4,16 @@
     "artifact": "sulfur_reaction_evidence",
     "generated_on": "2026-11-06",
     "git": {
-      "commit": "06830fd78b48e16bd49dfec4a69c1e75028ddb36",
-      "short": "06830fd7",
-      "branch": "register-pass-2026-11-06",
+      "commit": "67911f3949d009e6c4fc96ab6a87e100d4526462",
+      "short": "67911f39",
+      "branch": "m1b-part-i-build",
       "dirty": true
     },
     "generated_by": "scripts/generators/build_sulfur_reaction_evidence.py",
     "inputs": [
       {
         "path": "results/validation/sulfur_flux_attribution.json",
-        "sha256": "f0dff3c0679fe31be4885086514919f8391f0225a319d32522467b6e3ca4b0da"
+        "sha256": "57474c7993e9c3d9492bc5d7008782af64546f850bfe25219b471382cdf55c5f"
       },
       {
         "path": "results/validation/kinetic_core_b60_laplace_covariance.json",
@@ -29,11 +29,11 @@
       },
       {
         "path": "docs/reference/conflicts_register.yml",
-        "sha256": "c47a21dc25ae5d4018c29c97e2331f2b375d2499a200773d2eeef9662ee15f05"
+        "sha256": "9a92dc64e51ad866c65f0708d1ab71bd79f102044cf955d8c920fcd2ed227dc6"
       },
       {
         "path": "src/kinetic_core/sulfur.py",
-        "sha256": "c64e61c187eaf92acbb5003869f326df4bfed9dc79dc433fe81d728756509832"
+        "sha256": "31d5d49b849f02444c47f78c0fbd0085e86c41eaa7cb4cdd46ccc9c9b333161e"
       },
       {
         "path": "src/kinetic_core/parameters_sulfur.py",
