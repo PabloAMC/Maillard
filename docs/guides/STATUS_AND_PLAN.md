@@ -332,7 +332,16 @@ laboratories before any work) and the owner-approval step.
    stands only if that unit's own T_u exceeds the 95th percentile of T_u under the null rival.
    **A verdict needs resolved densities and a complete null:** a density is resolved when the shared estimator accepts it
    (`src/kinetic_core/predictive_densities.py`: k-hat < 0.7, ESS >= max(100, its precision requirement)); a null that does
-   not redraw every listed input is not the rule's null; a pair lacking either is 'not computable', reported so and
+   not redraw every listed input is not the rule's null; a bootstrap replicate whose density the estimator does not
+   accept is re-estimated once where fresh draws are supplied (the verdict records whether re-estimation was attempted
+   and how many replicates it retried); any still unresolved is never read as estimated but bounded: in testing a's
+   credit every such replicate's T, T_u and T_-u is set to +infinity in both nulls, in testing b's to -infinity, and a
+   credit stands only if it survives that bound; every crossing above is strict: the null's weight at or beyond T must
+   be below 0.05 (a null whose weighted unresolved fraction reaches 0.05 therefore cannot credit); each null's
+   unresolved fraction is reported; the judge calibration's 0.70 - 0.90 power used the prototype's adequacy,
+   conditioned on the spent AND decisive rows, so the spent-only adequacy above is uncalibrated except in synthetic
+   worlds (added 2026-11-07, PR #105: adversarially reviewed and independently confirmed with edits, 2026-11-07;
+   applies to a case only through that case's power check under this text); a pair lacking either is 'not computable', reported so and
    carried undecided (S3); an unresolved density is re-estimated (larger draw sets, or the reusable SMC
    estimator), never read as a tie; every power check reports which cells are computable and the cost of making the
    rest computable, before the run. This does not reopen M1b part (i) (its amendment A1 is frozen); A1's would-be kills enter S3 as falsifications only once their sec. 3.8 confirmation fits

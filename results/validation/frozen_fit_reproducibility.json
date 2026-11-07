@@ -1,0 +1,7166 @@
+{
+ "artifact": "frozen_fit_reproducibility",
+ "fits": {
+  "B20": {
+   "fit": "B20",
+   "report": "results/validation/kinetic_core_b20_fit_report.json",
+   "generator": "scripts/generators/generate_kinetic_core_b20_fit.py residuals",
+   "objective": "Nguyen 2016 Table 1 (M1)'s ten printed rate constants at 120 / 130 C, log10(pred/target)/sigma; each row one constant through its declared barrier (no integration)",
+   "keys": [
+    "log10_k_glyc_100C",
+    "log10_k_flp_cml_100C",
+    "log10_k_flp_cel_100C",
+    "log10_k_flp_decay_100C",
+    "log10_k_cml_loss_100C"
+   ],
+   "kinds": [
+    "log10k",
+    "log10k",
+    "log10k",
+    "log10k",
+    "log10k"
+   ],
+   "x_frozen": [
+    -4.707341524577862,
+    -3.317402852045118,
+    -3.652055191735323,
+    -1.856048900182166,
+    -0.9827379909354617
+   ],
+   "lower": [
+    -6.707341524577862,
+    -5.317402852045118,
+    -5.6520551917353234,
+    -3.856048900182166,
+    -2.982737990935462
+   ],
+   "upper": [
+    -2.7073415245778616,
+    -1.317402852045118,
+    -1.652055191735323,
+    0.14395109981783394,
+    1.0172620090645383
+   ],
+   "n_free": 5,
+   "S_recorded": 17.205999466614905,
+   "S_today": 17.2059994666149,
+   "n_rows_then": 10,
+   "n_rows_now": 10,
+   "chi2_red_then": 3.441199893322981,
+   "chi2_red_today": 3.44119989332298,
+   "rel_tol": 0.01,
+   "tol_source": "none stated in the record: 1 % (task default)",
+   "shipped_coordinates": [
+    "k_glyc.log10_k_ref",
+    "k_flp_cml.log10_k_ref",
+    "k_flp_cel.log10_k_ref",
+    "k_flp_decay.log10_k_ref",
+    "k_cml_loss.log10_k_ref"
+   ],
+   "shipped_coordinates_unmapped": [],
+   "row_changes": {
+    "counts": {
+     "unchanged": 10
+    },
+    "top": [
+     {
+      "id": "nguyen_k_glyc_130C",
+      "r_then": 1.7320481486002046,
+      "r_now": 1.7320481486002044,
+      "delta_r2": -8.881784197001252e-16,
+      "kind": "unchanged"
+     },
+     {
+      "id": "nguyen_k_flp_cml_120C",
+      "r_then": -1.88107397498564,
+      "r_now": -1.8810739749856398,
+      "delta_r2": -8.881784197001252e-16,
+      "kind": "unchanged"
+     },
+     {
+      "id": "nguyen_k_cml_loss_120C",
+      "r_then": -1.5575630480354437,
+      "r_now": -1.5575630480354439,
+      "delta_r2": 8.881784197001252e-16,
+      "kind": "unchanged"
+     },
+     {
+      "id": "nguyen_k_cml_loss_130C",
+      "r_then": 0.8442196851743671,
+      "r_now": 0.844219685174367,
+      "delta_r2": -2.220446049250313e-16,
+      "kind": "unchanged"
+     },
+     {
+      "id": "nguyen_k_flp_decay_130C",
+      "r_then": -0.23265866644987815,
+      "r_now": -0.23265866644987812,
+      "delta_r2": -1.3877787807814457e-17,
+      "kind": "unchanged"
+     },
+     {
+      "id": "nguyen_k_glyc_120C",
+      "r_then": -2.4511579256026574,
+      "r_now": -2.4511579256026574,
+      "delta_r2": 0.0,
+      "kind": "unchanged"
+     },
+     {
+      "id": "nguyen_k_flp_cml_130C",
+      "r_then": 0.7945894110970577,
+      "r_now": 0.7945894110970577,
+      "delta_r2": 0.0,
+      "kind": "unchanged"
+     },
+     {
+      "id": "nguyen_k_flp_cel_120C",
+      "r_then": -0.7172369620371788,
+      "r_now": -0.7172369620371788,
+      "delta_r2": 0.0,
+      "kind": "unchanged"
+     }
+    ],
+    "all": [
+     {
+      "id": "nguyen_k_glyc_130C",
+      "r_then": 1.7320481486002046,
+      "r_now": 1.7320481486002044,
+      "delta_r2": -8.881784197001252e-16,
+      "kind": "unchanged"
+     },
+     {
+      "id": "nguyen_k_flp_cml_120C",
+      "r_then": -1.88107397498564,
+      "r_now": -1.8810739749856398,
+      "delta_r2": -8.881784197001252e-16,
+      "kind": "unchanged"
+     },
+     {
+      "id": "nguyen_k_cml_loss_120C",
+      "r_then": -1.5575630480354437,
+      "r_now": -1.5575630480354439,
+      "delta_r2": 8.881784197001252e-16,
+      "kind": "unchanged"
+     },
+     {
+      "id": "nguyen_k_cml_loss_130C",
+      "r_then": 0.8442196851743671,
+      "r_now": 0.844219685174367,
+      "delta_r2": -2.220446049250313e-16,
+      "kind": "unchanged"
+     },
+     {
+      "id": "nguyen_k_flp_decay_130C",
+      "r_then": -0.23265866644987815,
+      "r_now": -0.23265866644987812,
+      "delta_r2": -1.3877787807814457e-17,
+      "kind": "unchanged"
+     },
+     {
+      "id": "nguyen_k_glyc_120C",
+      "r_then": -2.4511579256026574,
+      "r_now": -2.4511579256026574,
+      "delta_r2": 0.0,
+      "kind": "unchanged"
+     },
+     {
+      "id": "nguyen_k_flp_cml_130C",
+      "r_then": 0.7945894110970577,
+      "r_now": 0.7945894110970577,
+      "delta_r2": 0.0,
+      "kind": "unchanged"
+     },
+     {
+      "id": "nguyen_k_flp_cel_120C",
+      "r_then": -0.7172369620371788,
+      "r_now": -0.7172369620371788,
+      "delta_r2": 0.0,
+      "kind": "unchanged"
+     },
+     {
+      "id": "nguyen_k_flp_cel_130C",
+      "r_then": 0.08706946923537275,
+      "r_now": 0.08706946923537275,
+      "delta_r2": 0.0,
+      "kind": "unchanged"
+     },
+     {
+      "id": "nguyen_k_flp_decay_120C",
+      "r_then": 0.5596180277690184,
+      "r_now": 0.5596180277690184,
+      "delta_r2": 0.0,
+      "kind": "unchanged"
+     }
+    ]
+   },
+   "groups": null,
+   "jacobian_steps": [
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05
+   ],
+   "near_optimality": {
+    "S_frozen": 17.2059994666149,
+    "gradient_norm": 4.205424029432907e-08,
+    "gradient": [
+     -2.287259893941138e-10,
+     3.4148581638325636e-08,
+     1.610125753511795e-11,
+     4.582523446579234e-10,
+     -2.4539171314118926e-08
+    ],
+    "gn_decrement_unbounded": 5.39974131732143e-18,
+    "gn_step": [
+     2.3882517843246213e-13,
+     -1.527074851015553e-10,
+     -2.9220616158937906e-14,
+     -1.5379460023771232e-12,
+     2.2755369997057894e-10
+    ],
+    "gn_predicted_decrease_bounded": -3.552713678800501e-15,
+    "step_evaluations": [
+     {
+      "scale": 1.0,
+      "S": 17.205999466614905
+     },
+     {
+      "scale": 0.5,
+      "S": 17.205999466614912
+     },
+     {
+      "scale": 0.25,
+      "S": 17.20599946661491
+     }
+    ],
+    "one_step_decrease": 0.0,
+    "one_step_scale": 0.0,
+    "s2": 3.441199893322981,
+    "coordinates": {
+     "k_glyc.log10_k_ref": {
+      "indices": [
+       0
+      ],
+      "gn_displacement": [
+       2.3882517843246213e-13
+      ],
+      "local_sd_scaled": [
+       0.08476548541188277
+      ],
+      "delta_quadratic": 2.7316937928527214e-23,
+      "threshold": 13.219227683977232,
+      "inside_local_95": true
+     },
+     "k_flp_cml.log10_k_ref": {
+      "indices": [
+       1
+      ],
+      "gn_displacement": [
+       -1.527074851015553e-10
+      ],
+      "local_sd_scaled": [
+       0.175434003460553
+      ],
+      "delta_quadratic": 2.6073720285115793e-18,
+      "threshold": 13.219227683977232,
+      "inside_local_95": true
+     },
+     "k_flp_cel.log10_k_ref": {
+      "indices": [
+       2
+      ],
+      "gn_displacement": [
+       -2.9220616158937906e-14
+      ],
+      "local_sd_scaled": [
+       0.11177674544474318
+      ],
+      "delta_quadratic": 2.3517205762086734e-25,
+      "threshold": 13.219227683977232,
+      "inside_local_95": true
+     },
+     "k_flp_decay.log10_k_ref": {
+      "indices": [
+       3
+      ],
+      "gn_displacement": [
+       -1.5379460023771232e-12
+      ],
+      "local_sd_scaled": [
+       0.15198069698495678
+      ],
+      "delta_quadratic": 3.523832138619868e-22,
+      "threshold": 13.219227683977232,
+      "inside_local_95": true
+     },
+     "k_cml_loss.log10_k_ref": {
+      "indices": [
+       4
+      ],
+      "gn_displacement": [
+       2.2755369997057894e-10
+      ],
+      "local_sd_scaled": [
+       0.2526282628547429
+      ],
+      "delta_quadratic": 2.7919898307327745e-18,
+      "threshold": 13.219227683977232,
+      "inside_local_95": true
+     }
+    }
+   },
+   "verdict": {
+    "class": "REPRODUCES",
+    "reproduced": true,
+    "S_change": -3.552713678800501e-15,
+    "S_change_rel": -2.064810989732908e-16,
+    "rel_tol": 0.01,
+    "joint_threshold": 38.09579548196078,
+    "joint_near_optimal": true,
+    "coordinates_outside_local_95": [],
+    "coordinates_outside_local_95_unadjusted": [],
+    "marginal_tests": {
+     "m": 5,
+     "quantile": 0.99,
+     "unadjusted_outside": [],
+     "bonferroni_outside": [],
+     "per_coordinate": {
+      "k_glyc.log10_k_ref": {
+       "delta": 2.7316937928527214e-23,
+       "threshold_unadjusted": 13.219227683977232,
+       "threshold_bonferroni": 22.832005475643214
+      },
+      "k_flp_cml.log10_k_ref": {
+       "delta": 2.6073720285115793e-18,
+       "threshold_unadjusted": 13.219227683977232,
+       "threshold_bonferroni": 22.832005475643214
+      },
+      "k_flp_cel.log10_k_ref": {
+       "delta": 2.3517205762086734e-25,
+       "threshold_unadjusted": 13.219227683977232,
+       "threshold_bonferroni": 22.832005475643214
+      },
+      "k_flp_decay.log10_k_ref": {
+       "delta": 3.523832138619868e-22,
+       "threshold_unadjusted": 13.219227683977232,
+       "threshold_bonferroni": 22.832005475643214
+      },
+      "k_cml_loss.log10_k_ref": {
+       "delta": 2.7919898307327745e-18,
+       "threshold_unadjusted": 13.219227683977232,
+       "threshold_bonferroni": 22.832005475643214
+      }
+     }
+    },
+    "trust_ratio": null,
+    "local_model_valid": true,
+    "material_reasons": []
+   },
+   "seconds": {
+    "one_evaluation": 0.0,
+    "jacobian": 0.0,
+    "step": 1.2,
+    "total": 1.2
+   },
+   "workers": 3
+  },
+  "B21": {
+   "fit": "B21",
+   "report": "results/validation/kinetic_core_b21_fit_report.json",
+   "generator": "scripts/generators/generate_kinetic_core_b21_fit.py residuals",
+   "objective": "Hamzalioglu 2026's six printed first-order constants (110-140 C), log10 residuals; two log10 constants at 100 C free, barriers declared",
+   "keys": [
+    "log10_k_ama_g_100C",
+    "log10_k_g_go_aqueous_100C"
+   ],
+   "kinds": [
+    "log10k",
+    "log10k"
+   ],
+   "x_frozen": [
+    -2.0339128364819725,
+    -0.5104286909031046
+   ],
+   "lower": [
+    -4.0339128364819725,
+    -2.5104286909031046
+   ],
+   "upper": [
+    -0.03391283648197252,
+    1.4895713090968954
+   ],
+   "n_free": 2,
+   "S_recorded": 3.5430222479547213,
+   "S_today": 3.5430222479547218,
+   "n_rows_then": 6,
+   "n_rows_now": 6,
+   "chi2_red_then": 0.8857555619886803,
+   "chi2_red_today": 0.8857555619886804,
+   "rel_tol": 0.01,
+   "tol_source": "none stated in the record: 1 % (task default)",
+   "shipped_coordinates": [
+    "k_g_go.log10_k_ref",
+    "k_ama_g.log10_k_ref"
+   ],
+   "shipped_coordinates_unmapped": [],
+   "row_changes": {
+    "counts": {
+     "unchanged": 6
+    },
+    "top": [
+     {
+      "id": "ham_k_g_go_130C",
+      "r_then": -0.021490112076346605,
+      "r_now": -0.02149011207634661,
+      "delta_r2": 1.6263032587282567e-19,
+      "kind": "unchanged"
+     },
+     {
+      "id": "ham_k_g_go_120C",
+      "r_then": 0.006447033654557539,
+      "r_now": 0.006447033654557538,
+      "delta_r2": -1.3552527156068805e-20,
+      "kind": "unchanged"
+     },
+     {
+      "id": "ham_k_ama_g_110C",
+      "r_then": -0.23571698837438396,
+      "r_now": -0.23571698837438396,
+      "delta_r2": 0.0,
+      "kind": "unchanged"
+     },
+     {
+      "id": "ham_k_ama_g_120C",
+      "r_then": 1.2291907989328503,
+      "r_now": 1.2291907989328503,
+      "delta_r2": 0.0,
+      "kind": "unchanged"
+     },
+     {
+      "id": "ham_k_ama_g_130C",
+      "r_then": 0.7176050013273136,
+      "r_now": 0.7176050013273136,
+      "delta_r2": 0.0,
+      "kind": "unchanged"
+     },
+     {
+      "id": "ham_k_ama_g_140C",
+      "r_then": -1.2087553110846225,
+      "r_now": -1.2087553110846225,
+      "delta_r2": 0.0,
+      "kind": "unchanged"
+     }
+    ],
+    "all": [
+     {
+      "id": "ham_k_g_go_130C",
+      "r_then": -0.021490112076346605,
+      "r_now": -0.02149011207634661,
+      "delta_r2": 1.6263032587282567e-19,
+      "kind": "unchanged"
+     },
+     {
+      "id": "ham_k_g_go_120C",
+      "r_then": 0.006447033654557539,
+      "r_now": 0.006447033654557538,
+      "delta_r2": -1.3552527156068805e-20,
+      "kind": "unchanged"
+     },
+     {
+      "id": "ham_k_ama_g_110C",
+      "r_then": -0.23571698837438396,
+      "r_now": -0.23571698837438396,
+      "delta_r2": 0.0,
+      "kind": "unchanged"
+     },
+     {
+      "id": "ham_k_ama_g_120C",
+      "r_then": 1.2291907989328503,
+      "r_now": 1.2291907989328503,
+      "delta_r2": 0.0,
+      "kind": "unchanged"
+     },
+     {
+      "id": "ham_k_ama_g_130C",
+      "r_then": 0.7176050013273136,
+      "r_now": 0.7176050013273136,
+      "delta_r2": 0.0,
+      "kind": "unchanged"
+     },
+     {
+      "id": "ham_k_ama_g_140C",
+      "r_then": -1.2087553110846225,
+      "r_now": -1.2087553110846225,
+      "delta_r2": 0.0,
+      "kind": "unchanged"
+     }
+    ]
+   },
+   "groups": null,
+   "jacobian_steps": [
+    0.05,
+    0.05
+   ],
+   "near_optimality": {
+    "S_frozen": 3.5430222479547218,
+    "gradient_norm": 1.7575739388426469e-09,
+    "gradient": [
+     -1.706148319047218e-09,
+     4.220474664196061e-10
+    ],
+    "gn_decrement_unbounded": 6.21826328026102e-21,
+    "gn_step": [
+     6.211704436760587e-12,
+     -4.35599804436809e-12
+    ],
+    "gn_predicted_decrease_bounded": 0.0,
+    "step_evaluations": [
+     {
+      "scale": 1.0,
+      "S": 3.5430222479547226
+     },
+     {
+      "scale": 0.5,
+      "S": 3.5430222479547213
+     }
+    ],
+    "one_step_decrease": 4.440892098500626e-16,
+    "one_step_scale": 0.5,
+    "s2": 1.0,
+    "coordinates": {
+     "k_g_go.log10_k_ref": {
+      "indices": [
+       1
+      ],
+      "gn_displacement": [
+       -4.35599804436809e-12
+      ],
+      "local_sd_scaled": [
+       0.1436739427831726
+      ],
+      "delta_quadratic": 9.192197186296502e-22,
+      "threshold": 3.8414588206941205,
+      "inside_local_95": true
+     },
+     "k_ama_g.log10_k_ref": {
+      "indices": [
+       0
+      ],
+      "gn_displacement": [
+       6.211704436760587e-12
+      ],
+      "local_sd_scaled": [
+       0.085332018598286
+      ],
+      "delta_quadratic": 5.299044022661524e-21,
+      "threshold": 3.8414588206941205,
+      "inside_local_95": true
+     }
+    }
+   },
+   "verdict": {
+    "class": "REPRODUCES",
+    "reproduced": true,
+    "S_change": 4.440892098500626e-16,
+    "S_change_rel": 1.2534191962989275e-16,
+    "rel_tol": 0.01,
+    "joint_threshold": 5.99146454710798,
+    "joint_near_optimal": true,
+    "coordinates_outside_local_95": [],
+    "coordinates_outside_local_95_unadjusted": [],
+    "marginal_tests": {
+     "m": 2,
+     "quantile": 0.975,
+     "unadjusted_outside": [],
+     "bonferroni_outside": [],
+     "per_coordinate": {
+      "k_g_go.log10_k_ref": {
+       "delta": 9.192197186296502e-22,
+       "threshold_unadjusted": 3.8414588206941205,
+       "threshold_bonferroni": 5.02388618731489
+      },
+      "k_ama_g.log10_k_ref": {
+       "delta": 5.299044022661524e-21,
+       "threshold_unadjusted": 3.8414588206941205,
+       "threshold_bonferroni": 5.02388618731489
+      }
+     }
+    },
+    "trust_ratio": null,
+    "local_model_valid": true,
+    "material_reasons": []
+   },
+   "seconds": {
+    "one_evaluation": 0.0,
+    "jacobian": 0.0,
+    "step": 1.0,
+    "total": 1.0
+   },
+   "workers": 3
+  },
+  "B6": {
+   "fit": "B6",
+   "report": "results/validation/kinetic_core_b6_fit_report.json",
+   "generator": "src/kinetic_core/lipid.py fit_residuals (B6's own residual function)",
+   "objective": "Frankel 1989's eighteen zero-additive relative-percent values, residuals in percentage points (no sigma: s2 is the fit's own chi2_red, 3 dof)",
+   "frozen_point_note": "the 12 logits are rebuilt from the report's simplex shares and compositions (exact up to the +/-60 logit clip)",
+   "keys": [
+    "logit_13_ct_1",
+    "logit_13_ct_2",
+    "logit_13_tt_1",
+    "logit_13_tt_2",
+    "logit_9_ct_1",
+    "logit_9_ct_2",
+    "logit_9_tt_1",
+    "logit_9_tt_2",
+    "logit_mixed_f13",
+    "logit_mixed_g_tt",
+    "logit_pure_ct_13_f13",
+    "logit_tt_9_13_f13"
+   ],
+   "kinds": [
+    "logit",
+    "logit",
+    "logit",
+    "logit",
+    "logit",
+    "logit",
+    "logit",
+    "logit",
+    "logit",
+    "logit",
+    "logit",
+    "logit"
+   ],
+   "x_frozen": [
+    -0.1302594804150693,
+    0.6526723771256329,
+    2.1594842463602757,
+    2.3671236111399656,
+    0.26808090907170856,
+    -0.25473022993480793,
+    0.8362480242006665,
+    0.6931471805599875,
+    -0.17508320239539843,
+    -60.0,
+    2.013887133998598,
+    -0.8163798209837372
+   ],
+   "lower": [
+    -Infinity,
+    -Infinity,
+    -Infinity,
+    -Infinity,
+    -Infinity,
+    -Infinity,
+    -Infinity,
+    -Infinity,
+    -Infinity,
+    -Infinity,
+    -Infinity,
+    -Infinity
+   ],
+   "upper": [
+    Infinity,
+    Infinity,
+    Infinity,
+    Infinity,
+    Infinity,
+    Infinity,
+    Infinity,
+    Infinity,
+    Infinity,
+    Infinity,
+    Infinity,
+    Infinity
+   ],
+   "n_free": 12,
+   "S_recorded": 38.89047078643796,
+   "S_today": 38.89047078643796,
+   "n_rows_then": 18,
+   "n_rows_now": 18,
+   "chi2_red_then": 12.963490262145987,
+   "chi2_red_today": 6.481745131072993,
+   "rel_tol": 0.01,
+   "tol_source": "none stated in the record: 1 % (task default)",
+   "shipped_coordinates": [
+    "lipid.branch_simplex.13_ct",
+    "lipid.branch_simplex.13_tt",
+    "lipid.branch_simplex.9_ct",
+    "lipid.branch_simplex.9_tt"
+   ],
+   "shipped_coordinates_unmapped": [],
+   "row_changes": {
+    "counts": {
+     "unchanged": 18
+    },
+    "top": [
+     {
+      "id": "mixed_ct_tt_9_13:PENTANE",
+      "r_then": -3.9864013196906978,
+      "r_now": -3.9864013196906978,
+      "delta_r2": 0.0,
+      "kind": "unchanged"
+     },
+     {
+      "id": "mixed_ct_tt_9_13:HEXANAL",
+      "r_then": -0.4536508160448438,
+      "r_now": -0.4536508160448438,
+      "delta_r2": 0.0,
+      "kind": "unchanged"
+     },
+     {
+      "id": "mixed_ct_tt_9_13:ME_OCTANOATE",
+      "r_then": 0.6365120961539041,
+      "r_now": 0.6365120961539041,
+      "delta_r2": 0.0,
+      "kind": "unchanged"
+     },
+     {
+      "id": "mixed_ct_tt_9_13:DECADIENAL",
+      "r_then": 0.0589092482145368,
+      "r_now": 0.0589092482145368,
+      "delta_r2": 0.0,
+      "kind": "unchanged"
+     },
+     {
+      "id": "mixed_ct_tt_9_13:ME_9_OXONONANOATE",
+      "r_then": 0.6705115872048335,
+      "r_now": 0.6705115872048335,
+      "delta_r2": 0.0,
+      "kind": "unchanged"
+     },
+     {
+      "id": "mixed_ct_tt_9_13:ME_13_OXO_TRIDECADIENOATE",
+      "r_then": 3.0741192041622547,
+      "r_now": 3.0741192041622547,
+      "delta_r2": 0.0,
+      "kind": "unchanged"
+     },
+     {
+      "id": "pure_ct_13:PENTANE",
+      "r_then": 2.179544330127346,
+      "r_now": 2.179544330127346,
+      "delta_r2": 0.0,
+      "kind": "unchanged"
+     },
+     {
+      "id": "pure_ct_13:HEXANAL",
+      "r_then": 0.3485712263027807,
+      "r_now": 0.3485712263027807,
+      "delta_r2": 0.0,
+      "kind": "unchanged"
+     }
+    ],
+    "all": [
+     {
+      "id": "mixed_ct_tt_9_13:PENTANE",
+      "r_then": -3.9864013196906978,
+      "r_now": -3.9864013196906978,
+      "delta_r2": 0.0,
+      "kind": "unchanged"
+     },
+     {
+      "id": "mixed_ct_tt_9_13:HEXANAL",
+      "r_then": -0.4536508160448438,
+      "r_now": -0.4536508160448438,
+      "delta_r2": 0.0,
+      "kind": "unchanged"
+     },
+     {
+      "id": "mixed_ct_tt_9_13:ME_OCTANOATE",
+      "r_then": 0.6365120961539041,
+      "r_now": 0.6365120961539041,
+      "delta_r2": 0.0,
+      "kind": "unchanged"
+     },
+     {
+      "id": "mixed_ct_tt_9_13:DECADIENAL",
+      "r_then": 0.0589092482145368,
+      "r_now": 0.0589092482145368,
+      "delta_r2": 0.0,
+      "kind": "unchanged"
+     },
+     {
+      "id": "mixed_ct_tt_9_13:ME_9_OXONONANOATE",
+      "r_then": 0.6705115872048335,
+      "r_now": 0.6705115872048335,
+      "delta_r2": 0.0,
+      "kind": "unchanged"
+     },
+     {
+      "id": "mixed_ct_tt_9_13:ME_13_OXO_TRIDECADIENOATE",
+      "r_then": 3.0741192041622547,
+      "r_now": 3.0741192041622547,
+      "delta_r2": 0.0,
+      "kind": "unchanged"
+     },
+     {
+      "id": "pure_ct_13:PENTANE",
+      "r_then": 2.179544330127346,
+      "r_now": 2.179544330127346,
+      "delta_r2": 0.0,
+      "kind": "unchanged"
+     },
+     {
+      "id": "pure_ct_13:HEXANAL",
+      "r_then": 0.3485712263027807,
+      "r_now": 0.3485712263027807,
+      "delta_r2": 0.0,
+      "kind": "unchanged"
+     },
+     {
+      "id": "pure_ct_13:ME_OCTANOATE",
+      "r_then": -1.1877029186480286,
+      "r_now": -1.1877029186480286,
+      "delta_r2": 0.0,
+      "kind": "unchanged"
+     },
+     {
+      "id": "pure_ct_13:DECADIENAL",
+      "r_then": 1.4843989529709072,
+      "r_now": 1.4843989529709072,
+      "delta_r2": 0.0,
+      "kind": "unchanged"
+     },
+     {
+      "id": "pure_ct_13:ME_9_OXONONANOATE",
+      "r_then": -1.3449910310863253,
+      "r_now": -1.3449910310863253,
+      "delta_r2": 0.0,
+      "kind": "unchanged"
+     },
+     {
+      "id": "pure_ct_13:ME_13_OXO_TRIDECADIENOATE",
+      "r_then": -1.4798205596666776,
+      "r_now": -1.4798205596666776,
+      "delta_r2": 0.0,
+      "kind": "unchanged"
+     },
+     {
+      "id": "tt_9_13:PENTANE",
+      "r_then": 4.267868058960289e-09,
+      "r_now": 4.267868058960289e-09,
+      "delta_r2": 0.0,
+      "kind": "unchanged"
+     },
+     {
+      "id": "tt_9_13:HEXANAL",
+      "r_then": -1.9220678382225742e-09,
+      "r_now": -1.9220678382225742e-09,
+      "delta_r2": 0.0,
+      "kind": "unchanged"
+     },
+     {
+      "id": "tt_9_13:ME_OCTANOATE",
+      "r_then": -1.1013412404281553e-12,
+      "r_now": -1.1013412404281553e-12,
+      "delta_r2": 0.0,
+      "kind": "unchanged"
+     },
+     {
+      "id": "tt_9_13:DECADIENAL",
+      "r_then": -1.1013412404281553e-12,
+      "r_now": -1.1013412404281553e-12,
+      "delta_r2": 0.0,
+      "kind": "unchanged"
+     },
+     {
+      "id": "tt_9_13:ME_9_OXONONANOATE",
+      "r_then": -1.1013412404281553e-12,
+      "r_now": -1.1013412404281553e-12,
+      "delta_r2": 0.0,
+      "kind": "unchanged"
+     },
+     {
+      "id": "tt_9_13:ME_13_OXO_TRIDECADIENOATE",
+      "r_then": -2.3424924222581467e-09,
+      "r_now": -2.3424924222581467e-09,
+      "delta_r2": 0.0,
+      "kind": "unchanged"
+     }
+    ]
+   },
+   "groups": null,
+   "jacobian_steps": [
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05
+   ],
+   "near_optimality": {
+    "S_frozen": 38.89047078643796,
+    "gradient_norm": 0.0002899601220516462,
+    "gradient": [
+     3.2315200945792325e-05,
+     -0.00021898175839504792,
+     -2.1883001066198177e-09,
+     -1.6114336208010496e-08,
+     -8.30314764263613e-05,
+     3.959994673754231e-05,
+     3.899623444433341e-25,
+     7.79520792103195e-26,
+     0.00015196788604064247,
+     0.0,
+     -5.935455325310384e-05,
+     -7.845442096502122e-08
+    ],
+    "gn_decrement_unbounded": 4.398723783856244e-11,
+    "gn_step": [
+     1.1085464066824977e-07,
+     1.6245654812861701e-07,
+     2.9826806766373127e-09,
+     2.9959531028632815e-09,
+     1.2187250015198334e-07,
+     -9.440032367820738e-09,
+     -4.793486380220699e-14,
+     -4.214640801889714e-14,
+     -1.733977686288331e-07,
+     7.806517030969199e-24,
+     3.2243052123990635e-07,
+     -1.5488459663027628e-13
+    ],
+    "gn_predicted_decrease_bounded": 4.39897007709078e-11,
+    "step_evaluations": [
+     {
+      "scale": 1.0,
+      "S": 38.89047078639089
+     }
+    ],
+    "one_step_decrease": 4.7066350816749036e-11,
+    "one_step_scale": 1.0,
+    "s2": 12.963490262145987,
+    "coordinates": {
+     "lipid.branch_simplex.13_ct": {
+      "indices": [
+       0,
+       1
+      ],
+      "gn_displacement": [
+       1.1085464066824977e-07,
+       1.6245654812861701e-07
+      ],
+      "local_sd_scaled": [
+       0.20612567149024283,
+       0.1531645517948704
+      ],
+      "delta_quadratic": 1.478764107572607e-11,
+      "threshold": 77.67029231242721,
+      "inside_local_95": true
+     },
+     "lipid.branch_simplex.13_tt": {
+      "indices": [
+       2,
+       3
+      ],
+      "gn_displacement": [
+       2.9826806766373127e-09,
+       2.9959531028632815e-09
+      ],
+      "local_sd_scaled": [
+       2.2475472580838662,
+       2.244548151943807
+      ],
+      "delta_quadratic": 2.3138399606514313e-17,
+      "threshold": 77.67029231242721,
+      "inside_local_95": true
+     },
+     "lipid.branch_simplex.9_ct": {
+      "indices": [
+       4,
+       5
+      ],
+      "gn_displacement": [
+       1.2187250015198334e-07,
+       -9.440032367820738e-09
+      ],
+      "local_sd_scaled": [
+       0.2495580132964693,
+       0.3208502021978948
+      ],
+      "delta_quadratic": 4.355420006904241e-12,
+      "threshold": 77.67029231242721,
+      "inside_local_95": true
+     },
+     "lipid.branch_simplex.9_tt": {
+      "indices": [
+       6,
+       7
+      ],
+      "gn_displacement": [
+       -4.793486380220699e-14,
+       -4.214640801889714e-14
+      ],
+      "local_sd_scaled": [
+       0.29406684105612885,
+       0.30263471884154114
+      ],
+      "delta_quadratic": 3.4612899429757508e-25,
+      "threshold": 77.67029231242721,
+      "inside_local_95": true
+     }
+    }
+   },
+   "verdict": {
+    "class": "REPRODUCES",
+    "reproduced": true,
+    "S_change": 0.0,
+    "S_change_rel": 0.0,
+    "rel_tol": 0.01,
+    "joint_threshold": 272.5712513301434,
+    "joint_near_optimal": true,
+    "coordinates_outside_local_95": [],
+    "coordinates_outside_local_95_unadjusted": [],
+    "marginal_tests": {
+     "m": 4,
+     "quantile": 0.9875,
+     "unadjusted_outside": [],
+     "bonferroni_outside": [],
+     "per_coordinate": {
+      "lipid.branch_simplex.13_ct": {
+       "delta": 1.478764107572607e-11,
+       "threshold_unadjusted": 77.67029231242721,
+       "threshold_bonferroni": 113.61271921411851
+      },
+      "lipid.branch_simplex.13_tt": {
+       "delta": 2.3138399606514313e-17,
+       "threshold_unadjusted": 77.67029231242721,
+       "threshold_bonferroni": 113.61271921411851
+      },
+      "lipid.branch_simplex.9_ct": {
+       "delta": 4.355420006904241e-12,
+       "threshold_unadjusted": 77.67029231242721,
+       "threshold_bonferroni": 113.61271921411851
+      },
+      "lipid.branch_simplex.9_tt": {
+       "delta": 3.4612899429757508e-25,
+       "threshold_unadjusted": 77.67029231242721,
+       "threshold_bonferroni": 113.61271921411851
+      }
+     }
+    },
+    "trust_ratio": 1.0699402358261993,
+    "local_model_valid": true,
+    "material_reasons": []
+   },
+   "seconds": {
+    "one_evaluation": 0.0,
+    "jacobian": 0.0,
+    "step": 1.0,
+    "total": 1.1
+   },
+   "workers": 3
+  },
+  "B7": {
+   "fit": "B7",
+   "report": "results/validation/kinetic_core_b7_fit_report.json",
+   "generator": "scripts/generators/generate_kinetic_core_b7_fit.py _blank_prediction_ug_per_mmol (Blank 1997's three HDMF cells, sigma log10(1.10))",
+   "objective": "Blank 1997's three pentose/glycine HDMF yields at 90 C, 1 h, pH 6: one prediction (one generic aldopentose) against three cells, log10 residuals",
+   "refusal": null,
+   "keys": [
+    "log10_k_dpo_af"
+   ],
+   "kinds": [
+    "log10k"
+   ],
+   "x_frozen": [
+    -5.394807039760053
+   ],
+   "lower": [
+    -Infinity
+   ],
+   "upper": [
+    Infinity
+   ],
+   "n_free": 1,
+   "S_recorded": 24.993611754475307,
+   "S_today": 24.996319761692728,
+   "n_rows_then": 3,
+   "n_rows_now": 3,
+   "chi2_red_then": 12.496805877237653,
+   "chi2_red_today": 12.498159880846364,
+   "rel_tol": 0.01,
+   "tol_source": "none stated in the record: 1 % (task default)",
+   "shipped_coordinates": [
+    "k_dpo_af.log10_k_ref"
+   ],
+   "shipped_coordinates_unmapped": [],
+   "row_changes": {
+    "counts": {
+     "model change": 3
+    },
+    "top": [
+     {
+      "id": "arabinose/glycine HDMF",
+      "r_then": -3.574419833522038,
+      "r_now": -3.604464277729331,
+      "delta_r2": 0.21568558315111552,
+      "kind": "model change"
+     },
+     {
+      "id": "xylose/glycine HDMF",
+      "r_then": 3.494385367412769,
+      "r_now": 3.464340923205475,
+      "delta_r2": -0.20907106379230989,
+      "kind": "model change"
+     },
+     {
+      "id": "ribose/glycine HDMF",
+      "r_then": 0.08003444390458314,
+      "r_now": 0.04998999969729118,
+      "delta_r2": -0.003906512141380693,
+      "kind": "model change"
+     }
+    ],
+    "all": [
+     {
+      "id": "arabinose/glycine HDMF",
+      "r_then": -3.574419833522038,
+      "r_now": -3.604464277729331,
+      "delta_r2": 0.21568558315111552,
+      "kind": "model change"
+     },
+     {
+      "id": "xylose/glycine HDMF",
+      "r_then": 3.494385367412769,
+      "r_now": 3.464340923205475,
+      "delta_r2": -0.20907106379230989,
+      "kind": "model change"
+     },
+     {
+      "id": "ribose/glycine HDMF",
+      "r_then": 0.08003444390458314,
+      "r_now": 0.04998999969729118,
+      "delta_r2": -0.003906512141380693,
+      "kind": "model change"
+     }
+    ]
+   },
+   "groups": null,
+   "jacobian_steps": [
+    0.05
+   ],
+   "near_optimality": {
+    "S_frozen": 24.996319761692728,
+    "gradient_norm": 4.2580178969932385,
+    "gradient": [
+     -4.2580178969932385
+    ],
+    "gn_decrement_unbounded": 0.0027080072174304167,
+    "gn_step": [
+     0.001271956709877917
+    ],
+    "gn_predicted_decrease_bounded": 0.00270800721743214,
+    "step_evaluations": [
+     {
+      "scale": 1.0,
+      "S": 24.993611758563762
+     }
+    ],
+    "one_step_decrease": 0.002708003128965686,
+    "one_step_scale": 1.0,
+    "s2": 12.496805877237653,
+    "coordinates": {
+     "k_dpo_af.log10_k_ref": {
+      "indices": [
+       0
+      ],
+      "gn_displacement": [
+       0.001271956709877917
+      ],
+      "local_sd_scaled": [
+       0.08640660343160694
+      ],
+      "delta_quadratic": 0.00270800721743039,
+      "threshold": 48.00596516761671,
+      "inside_local_95": true
+     }
+    }
+   },
+   "verdict": {
+    "class": "REPRODUCES",
+    "reproduced": true,
+    "S_change": 0.002708007217421482,
+    "S_change_rel": 0.00010834797483547337,
+    "rel_tol": 0.01,
+    "joint_threshold": 48.00596516761671,
+    "joint_near_optimal": true,
+    "coordinates_outside_local_95": [],
+    "coordinates_outside_local_95_unadjusted": [],
+    "marginal_tests": {
+     "m": 1,
+     "quantile": 0.95,
+     "unadjusted_outside": [],
+     "bonferroni_outside": [],
+     "per_coordinate": {
+      "k_dpo_af.log10_k_ref": {
+       "delta": 0.00270800721743039,
+       "threshold_unadjusted": 48.00596516761671,
+       "threshold_bonferroni": 48.00596516761671
+      }
+     }
+    },
+    "trust_ratio": 0.9999984902305917,
+    "local_model_valid": true,
+    "material_reasons": []
+   },
+   "seconds": {
+    "one_evaluation": 2.81,
+    "jacobian": 1.8,
+    "step": 2.2,
+    "total": 6.9
+   },
+   "workers": 3
+  },
+  "B18": {
+   "fit": "B18",
+   "report": "results/validation/kinetic_core_b18_fit_report.json",
+   "generator": "scripts/generators/generate_kinetic_core_b18_fit.py residuals",
+   "objective": "Zhou 2024's six mean formation rates and Leahy 1989's four within-study pH ratios, log10(pred/target)/sigma",
+   "keys": [
+    "log10_k_go_ak_100C",
+    "ea_go_ak_kj_mol",
+    "log10_k_mgo_ak_100C",
+    "ea_mgo_ak_kj_mol",
+    "ph_slope_above_7_decades_per_unit",
+    "ph_slope_below_7_decades_per_unit"
+   ],
+   "kinds": [
+    "log10k",
+    "Ea",
+    "log10k",
+    "Ea",
+    "ph_slope",
+    "ph_slope"
+   ],
+   "x_frozen": [
+    -6.5415452891122525,
+    103.0999999999812,
+    -7.529714282148093,
+    114.89999999999999,
+    0.19744840125387295,
+    0.5795142879227316
+   ],
+   "lower": [
+    -9.191114581712858,
+    100.59,
+    -10.092961951313706,
+    111.66,
+    0.0,
+    0.0
+   ],
+   "upper": [
+    -5.191114581712858,
+    103.1,
+    -6.092961951313706,
+    114.9,
+    1.5,
+    1.5
+   ],
+   "n_free": 6,
+   "S_recorded": 2.644103944369364,
+   "S_today": 295.0677737490943,
+   "n_rows_then": 10,
+   "n_rows_now": 10,
+   "chi2_red_then": 0.661025986092341,
+   "chi2_red_today": 73.76694343727357,
+   "rel_tol": 0.01,
+   "tol_source": "none stated in the record: 1 % (task default)",
+   "shipped_coordinates": [
+    "k_go_ak.log10_k_ref",
+    "k_go_ak.ea_kj_mol",
+    "k_mgo_ak.log10_k_ref",
+    "k_mgo_ak.ea_kj_mol",
+    "b18.ph_slope_above_7_decades_per_unit",
+    "b18.ph_slope_below_7_decades_per_unit"
+   ],
+   "shipped_coordinates_unmapped": [],
+   "row_changes": {
+    "counts": {
+     "model change": 4,
+     "unchanged": 6
+    },
+    "top": [
+     {
+      "id": "leahy_PZ_k_ph5_over_ph9",
+      "r_then": -0.04593093552397255,
+      "r_now": 12.905056219241901,
+      "delta_r2": 166.53836637095597,
+      "kind": "model change"
+     },
+     {
+      "id": "leahy_PZ_k_ph7_over_ph9",
+      "r_then": 0.8301601651662641,
+      "r_now": 11.17670409668763,
+      "delta_r2": 124.22954856508515,
+      "kind": "model change"
+     },
+     {
+      "id": "leahy_MPZ_k_ph7_over_ph9",
+      "r_then": -0.8646402074621514,
+      "r_now": 1.2957621817325877,
+      "delta_r2": 0.9313969432482034,
+      "kind": "model change"
+     },
+     {
+      "id": "leahy_MPZ_k_ph5_over_ph9",
+      "r_then": 0.09388046266472896,
+      "r_now": 0.8562543236128863,
+      "delta_r2": 0.7243579254356179,
+      "kind": "model change"
+     },
+     {
+      "id": "zhou_DMP_rate_100C",
+      "r_then": 0.7147192480747723,
+      "r_now": 0.7147192480746962,
+      "delta_r2": -1.0869083411080283e-13,
+      "kind": "unchanged"
+     },
+     {
+      "id": "zhou_PZ_rate_110C",
+      "r_then": -0.5099500388490594,
+      "r_now": -0.509950038849098,
+      "delta_r2": 3.930189507173054e-14,
+      "kind": "unchanged"
+     },
+     {
+      "id": "zhou_PZ_rate_120C",
+      "r_then": 0.2611059675092583,
+      "r_now": 0.26110596750931636,
+      "delta_r2": 3.032296636007459e-14,
+      "kind": "unchanged"
+     },
+     {
+      "id": "zhou_DMP_rate_120C",
+      "r_then": -0.48609380203031727,
+      "r_now": -0.4860938020303292,
+      "delta_r2": 1.1601830607332886e-14,
+      "kind": "unchanged"
+     }
+    ],
+    "all": [
+     {
+      "id": "leahy_PZ_k_ph5_over_ph9",
+      "r_then": -0.04593093552397255,
+      "r_now": 12.905056219241901,
+      "delta_r2": 166.53836637095597,
+      "kind": "model change"
+     },
+     {
+      "id": "leahy_PZ_k_ph7_over_ph9",
+      "r_then": 0.8301601651662641,
+      "r_now": 11.17670409668763,
+      "delta_r2": 124.22954856508515,
+      "kind": "model change"
+     },
+     {
+      "id": "leahy_MPZ_k_ph7_over_ph9",
+      "r_then": -0.8646402074621514,
+      "r_now": 1.2957621817325877,
+      "delta_r2": 0.9313969432482034,
+      "kind": "model change"
+     },
+     {
+      "id": "leahy_MPZ_k_ph5_over_ph9",
+      "r_then": 0.09388046266472896,
+      "r_now": 0.8562543236128863,
+      "delta_r2": 0.7243579254356179,
+      "kind": "model change"
+     },
+     {
+      "id": "zhou_DMP_rate_100C",
+      "r_then": 0.7147192480747723,
+      "r_now": 0.7147192480746962,
+      "delta_r2": -1.0869083411080283e-13,
+      "kind": "unchanged"
+     },
+     {
+      "id": "zhou_PZ_rate_110C",
+      "r_then": -0.5099500388490594,
+      "r_now": -0.509950038849098,
+      "delta_r2": 3.930189507173054e-14,
+      "kind": "unchanged"
+     },
+     {
+      "id": "zhou_PZ_rate_120C",
+      "r_then": 0.2611059675092583,
+      "r_now": 0.26110596750931636,
+      "delta_r2": 3.032296636007459e-14,
+      "kind": "unchanged"
+     },
+     {
+      "id": "zhou_DMP_rate_120C",
+      "r_then": -0.48609380203031727,
+      "r_now": -0.4860938020303292,
+      "delta_r2": 1.1601830607332886e-14,
+      "kind": "unchanged"
+     },
+     {
+      "id": "zhou_PZ_rate_100C",
+      "r_then": 0.2487198366385232,
+      "r_now": 0.2487198366385396,
+      "delta_r2": 8.1601392309949e-15,
+      "kind": "unchanged"
+     },
+     {
+      "id": "zhou_DMP_rate_110C",
+      "r_then": -0.24334019520537029,
+      "r_now": -0.24334019520537029,
+      "delta_r2": 0.0,
+      "kind": "unchanged"
+     }
+    ]
+   },
+   "groups": null,
+   "attribution": [
+    {
+     "label": "the 3-DG exit's pH term off",
+     "cite": "B41, fb0dbd30 (2026-09-11): default on since B41 ships",
+     "S": 299.54499194042745,
+     "S_change_vs_today": 4.477218191333179,
+     "recovers_recorded": false
+    },
+    {
+     "label": "the AKG + AKM cross pair back to statistical factor 1",
+     "cite": "CF-077, 19c66e99 (2026-11-01)",
+     "S": 224.60267737832052,
+     "S_change_vs_today": -70.46509637077375,
+     "recovers_recorded": false
+    },
+    {
+     "label": "knock out GLYCATION_REACTIONS (5 constants)",
+     "cite": "B20, efb76fb6 (2026-09-09): the glycation arm",
+     "S": 295.0677737490943,
+     "S_change_vs_today": 0.0,
+     "recovers_recorded": false
+    },
+    {
+     "label": "knock out AQUEOUS_GLYOXAL_REACTIONS (1 constants)",
+     "cite": "B21, 5c5f2857 (2026-09-09): the aqueous glucosone route to glyoxal",
+     "S": 27.190529968834845,
+     "S_change_vs_today": -267.87724378025945,
+     "recovers_recorded": false
+    },
+    {
+     "label": "knock out METHIONINE_REACTIONS (6 constants)",
+     "cite": "B22, 489f9e5f (2026-09-09): the methionine chain",
+     "S": 295.0677737490943,
+     "S_change_vs_today": 0.0,
+     "recovers_recorded": false
+    },
+    {
+     "label": "knock out PROLINE_REACTIONS (4 constants)",
+     "cite": "B24, 62fe149a (2026-09-09): 2-acetyl-1-pyrroline from proline",
+     "S": 295.0677737490943,
+     "S_change_vs_today": 0.0,
+     "recovers_recorded": false
+    },
+    {
+     "label": "knock out FED_3DEOXY_REACTIONS (3 constants)",
+     "cite": "B39 / B41, fb0dbd30 (2026-09-11): the fed 3-deoxyglucosone triangle",
+     "S": 295.07129541959563,
+     "S_change_vs_today": 0.003521670501356766,
+     "recovers_recorded": false
+    },
+    {
+     "label": "all of the above together",
+     "cite": "every post-freeze trunk change probed here",
+     "S": 5.617561006276305,
+     "S_change_vs_today": -289.45021274281794,
+     "recovers_recorded": false
+    }
+   ],
+   "jacobian_steps": [
+    0.05,
+    -2.0,
+    0.05,
+    -2.0,
+    0.05,
+    0.05
+   ],
+   "near_optimality": {
+    "S_frozen": 295.0677737490943,
+    "gradient_norm": 854.8890880697354,
+    "gradient": [
+     -218.01911716710933,
+     0.41904613394449275,
+     231.33225045955817,
+     -0.5222416694683307,
+     -698.5571801516986,
+     -376.5711421101968
+    ],
+    "gn_decrement_unbounded": 220.57921364818023,
+    "gn_step": [
+     -0.5173912727355481,
+     -0.0011954115669402872,
+     -0.5172187550012297,
+     1.4210854715202004e-14,
+     0.457165173099128,
+     0.30133457684335496
+    ],
+    "gn_predicted_decrease_bounded": 219.8393054690173,
+    "step_evaluations": [
+     {
+      "scale": 1.0,
+      "S": 75.46849645231589
+     }
+    ],
+    "one_step_decrease": 219.59927729677838,
+    "one_step_scale": 1.0,
+    "s2": 1.0,
+    "coordinates": {
+     "k_go_ak.log10_k_ref": {
+      "indices": [
+       0
+      ],
+      "gn_displacement": [
+       -0.5173912727355481
+      ],
+      "local_sd_scaled": [
+       0.1409414006239641
+      ],
+      "delta_quadratic": 13.476000908749883,
+      "threshold": 3.8414588206941205,
+      "inside_local_95": false
+     },
+     "k_go_ak.ea_kj_mol": {
+      "indices": [
+       1
+      ],
+      "gn_displacement": [
+       -0.0011954115669402872
+      ],
+      "local_sd_scaled": [
+       19.87152013066034
+      ],
+      "delta_quadratic": 3.618867860600839e-09,
+      "threshold": 3.8414588206941205,
+      "inside_local_95": true
+     },
+     "k_mgo_ak.log10_k_ref": {
+      "indices": [
+       2
+      ],
+      "gn_displacement": [
+       -0.5172187550012297
+      ],
+      "local_sd_scaled": [
+       0.07900786808272153
+      ],
+      "delta_quadratic": 42.85562595698971,
+      "threshold": 3.8414588206941205,
+      "inside_local_95": false
+     },
+     "k_mgo_ak.ea_kj_mol": {
+      "indices": [
+       3
+      ],
+      "gn_displacement": [
+       1.4210854715202004e-14
+      ],
+      "local_sd_scaled": [
+       19.80009281782594
+      ],
+      "delta_quadratic": 5.151170757450183e-31,
+      "threshold": 3.8414588206941205,
+      "inside_local_95": true
+     },
+     "b18.ph_slope_above_7_decades_per_unit": {
+      "indices": [
+       4
+      ],
+      "gn_displacement": [
+       0.457165173099128
+      ],
+      "local_sd_scaled": [
+       0.0737982519338421
+      ],
+      "delta_quadratic": 38.37550708669413,
+      "threshold": 3.8414588206941205,
+      "inside_local_95": false
+     },
+     "b18.ph_slope_below_7_decades_per_unit": {
+      "indices": [
+       5
+      ],
+      "gn_displacement": [
+       0.30133457684335496
+      ],
+      "local_sd_scaled": [
+       0.08128579914675756
+      ],
+      "delta_quadratic": 13.742589573263073,
+      "threshold": 3.8414588206941205,
+      "inside_local_95": false
+     }
+    }
+   },
+   "verdict": {
+    "class": "DRIFTED-MATERIAL",
+    "reproduced": false,
+    "S_change": 292.4236698047249,
+    "S_change_rel": 110.59461956003771,
+    "rel_tol": 0.01,
+    "joint_threshold": 12.591587243743977,
+    "joint_near_optimal": false,
+    "coordinates_outside_local_95": [
+     "k_go_ak.log10_k_ref",
+     "k_mgo_ak.log10_k_ref",
+     "b18.ph_slope_above_7_decades_per_unit",
+     "b18.ph_slope_below_7_decades_per_unit"
+    ],
+    "coordinates_outside_local_95_unadjusted": [
+     "k_go_ak.log10_k_ref",
+     "k_mgo_ak.log10_k_ref",
+     "b18.ph_slope_above_7_decades_per_unit",
+     "b18.ph_slope_below_7_decades_per_unit"
+    ],
+    "marginal_tests": {
+     "m": 6,
+     "quantile": 0.9916666666666667,
+     "unadjusted_outside": [
+      "k_go_ak.log10_k_ref",
+      "k_mgo_ak.log10_k_ref",
+      "b18.ph_slope_above_7_decades_per_unit",
+      "b18.ph_slope_below_7_decades_per_unit"
+     ],
+     "bonferroni_outside": [
+      "k_go_ak.log10_k_ref",
+      "k_mgo_ak.log10_k_ref",
+      "b18.ph_slope_above_7_decades_per_unit",
+      "b18.ph_slope_below_7_decades_per_unit"
+     ],
+     "per_coordinate": {
+      "k_go_ak.log10_k_ref": {
+       "delta": 13.476000908749883,
+       "threshold_unadjusted": 3.8414588206941205,
+       "threshold_bonferroni": 6.960401441052981
+      },
+      "k_go_ak.ea_kj_mol": {
+       "delta": 3.618867860600839e-09,
+       "threshold_unadjusted": 3.8414588206941205,
+       "threshold_bonferroni": 6.960401441052981
+      },
+      "k_mgo_ak.log10_k_ref": {
+       "delta": 42.85562595698971,
+       "threshold_unadjusted": 3.8414588206941205,
+       "threshold_bonferroni": 6.960401441052981
+      },
+      "k_mgo_ak.ea_kj_mol": {
+       "delta": 5.151170757450183e-31,
+       "threshold_unadjusted": 3.8414588206941205,
+       "threshold_bonferroni": 6.960401441052981
+      },
+      "b18.ph_slope_above_7_decades_per_unit": {
+       "delta": 38.37550708669413,
+       "threshold_unadjusted": 3.8414588206941205,
+       "threshold_bonferroni": 6.960401441052981
+      },
+      "b18.ph_slope_below_7_decades_per_unit": {
+       "delta": 13.742589573263073,
+       "threshold_unadjusted": 3.8414588206941205,
+       "threshold_bonferroni": 6.960401441052981
+      }
+     }
+    },
+    "trust_ratio": 0.998908165345015,
+    "local_model_valid": true,
+    "material_reasons": [
+     "one evaluated step lowers S by 220, beyond the joint threshold 12.6",
+     "shipped coordinates outside today's local 95 % region (Bonferroni over 6): k_go_ak.log10_k_ref, k_mgo_ak.log10_k_ref, b18.ph_slope_above_7_decades_per_unit, b18.ph_slope_below_7_decades_per_unit"
+    ]
+   },
+   "seconds": {
+    "one_evaluation": 0.81,
+    "jacobian": 0.8,
+    "step": 0.7,
+    "attribution": 2.3,
+    "total": 4.6
+   },
+   "workers": 3
+  },
+  "B39": {
+   "fit": "B39",
+   "report": "results/validation/kinetic_core_b39_fit_report.json",
+   "generator": "scripts/generators/generate_kinetic_core_b39_fit.py residuals (quick=False, as frozen), the 3-DG exit's pH term off (B39's own physics)",
+   "objective": "B39's twelve decisive rows (Mittelmaier 2011 fed maxima, times of maximum and shares; Zhang 2021 within-study ratios), log10(pred/target)/sigma",
+   "attribution_note": "the S1 record names B39 for the fed 3-deoxy triangle, but the shipped values are B41's optimum (parameters_dicarbonyl.SHIPPING_FIT_REPORT): B39 froze no shipped coordinate and is audited as the record's attribution",
+   "keys": [
+    "log10_k_tdg_ddg_100C",
+    "log10_k_ddg_tdg_100C",
+    "log10_k_ddg_dgal_100C",
+    "log10_k_dgal_ddg_100C",
+    "log10_k_ddg_hmf_100C"
+   ],
+   "kinds": [
+    "log10k",
+    "log10k",
+    "log10k",
+    "log10k",
+    "log10k"
+   ],
+   "x_frozen": [
+    -1.8619670908072206,
+    -1.7399459168992093,
+    -1.855913653444611,
+    -1.6776288506025347,
+    -1.5249426444394498
+   ],
+   "lower": [
+    -4.4275872125713605,
+    -4.4275872125713605,
+    -4.4275872125713605,
+    -4.4275872125713605,
+    -2.924453038607469
+   ],
+   "upper": [
+    -0.4275872125713609,
+    -0.4275872125713609,
+    -0.4275872125713609,
+    -0.4275872125713609,
+    1.0755469613925308
+   ],
+   "n_free": 5,
+   "S_recorded": 4.048192009918087,
+   "S_today": 4.048192009092584,
+   "n_rows_then": 12,
+   "n_rows_now": 12,
+   "chi2_red_then": 0.5783131442740125,
+   "chi2_red_today": 0.5783131441560834,
+   "rel_tol": 0.01,
+   "tol_source": "none stated in the record: 1 % (task default)",
+   "shipped_coordinates": [],
+   "shipped_coordinates_unmapped": [],
+   "row_changes": {
+    "counts": {
+     "unchanged": 12
+    },
+    "top": [
+     {
+      "id": "zhang_ratio_105C",
+      "r_then": 0.1806093307009396,
+      "r_now": 0.18060932793778242,
+      "delta_r2": -9.981039258977198e-10,
+      "kind": "unchanged"
+     },
+     {
+      "id": "zhang_ratio_100C",
+      "r_then": 0.1254803358077699,
+      "r_now": 0.12548033649625423,
+      "delta_r2": 1.7278248970464816e-10,
+      "kind": "unchanged"
+     },
+     {
+      "id": "fedTDG_ddg_max_uM",
+      "r_then": -0.62762735799053,
+      "r_now": -0.6276273579900347,
+      "delta_r2": -6.218359160925502e-13,
+      "kind": "unchanged"
+     },
+     {
+      "id": "zhang_ratio_110C",
+      "r_then": 0.23643796972073466,
+      "r_now": 0.23643796972144213,
+      "delta_r2": 3.345448917890792e-13,
+      "kind": "unchanged"
+     },
+     {
+      "id": "fedTDG_dgal_share_60min",
+      "r_then": 0.763738985005612,
+      "r_now": 0.7637389850056366,
+      "delta_r2": 3.7636560534792807e-14,
+      "kind": "unchanged"
+     },
+     {
+      "id": "fedDGAL_tdg_share_60min",
+      "r_then": -0.6508993330980976,
+      "r_now": -0.6508993330981249,
+      "delta_r2": 3.558264793923627e-14,
+      "kind": "unchanged"
+     },
+     {
+      "id": "fedDDG_dgal_max_uM",
+      "r_then": -0.3903355446957983,
+      "r_now": -0.39033554469583837,
+      "delta_r2": 3.1280533718813786e-14,
+      "kind": "unchanged"
+     },
+     {
+      "id": "zhang_ratio_95C",
+      "r_then": -0.01282576880324026,
+      "r_now": -0.012825768802895654,
+      "delta_r2": -8.839690047654503e-15,
+      "kind": "unchanged"
+     }
+    ],
+    "all": [
+     {
+      "id": "zhang_ratio_105C",
+      "r_then": 0.1806093307009396,
+      "r_now": 0.18060932793778242,
+      "delta_r2": -9.981039258977198e-10,
+      "kind": "unchanged"
+     },
+     {
+      "id": "zhang_ratio_100C",
+      "r_then": 0.1254803358077699,
+      "r_now": 0.12548033649625423,
+      "delta_r2": 1.7278248970464816e-10,
+      "kind": "unchanged"
+     },
+     {
+      "id": "fedTDG_ddg_max_uM",
+      "r_then": -0.62762735799053,
+      "r_now": -0.6276273579900347,
+      "delta_r2": -6.218359160925502e-13,
+      "kind": "unchanged"
+     },
+     {
+      "id": "zhang_ratio_110C",
+      "r_then": 0.23643796972073466,
+      "r_now": 0.23643796972144213,
+      "delta_r2": 3.345448917890792e-13,
+      "kind": "unchanged"
+     },
+     {
+      "id": "fedTDG_dgal_share_60min",
+      "r_then": 0.763738985005612,
+      "r_now": 0.7637389850056366,
+      "delta_r2": 3.7636560534792807e-14,
+      "kind": "unchanged"
+     },
+     {
+      "id": "fedDGAL_tdg_share_60min",
+      "r_then": -0.6508993330980976,
+      "r_now": -0.6508993330981249,
+      "delta_r2": 3.558264793923627e-14,
+      "kind": "unchanged"
+     },
+     {
+      "id": "fedDDG_dgal_max_uM",
+      "r_then": -0.3903355446957983,
+      "r_now": -0.39033554469583837,
+      "delta_r2": 3.1280533718813786e-14,
+      "kind": "unchanged"
+     },
+     {
+      "id": "zhang_ratio_95C",
+      "r_then": -0.01282576880324026,
+      "r_now": -0.012825768802895654,
+      "delta_r2": -8.839690047654503e-15,
+      "kind": "unchanged"
+     },
+     {
+      "id": "fedDDG_tdg_max_uM",
+      "r_then": 0.1642403405830576,
+      "r_now": 0.164240340583074,
+      "delta_r2": 5.388051116383963e-15,
+      "kind": "unchanged"
+     },
+     {
+      "id": "fedDGAL_ddg_max_uM",
+      "r_then": 0.2248780366850643,
+      "r_now": 0.22487803668507617,
+      "delta_r2": 5.342948306008566e-15,
+      "kind": "unchanged"
+     },
+     {
+      "id": "fedTDG_ddg_tmax_min",
+      "r_then": -1.5208449668464241,
+      "r_now": -1.5208449668464241,
+      "delta_r2": 0.0,
+      "kind": "unchanged"
+     },
+     {
+      "id": "fedDGAL_ddg_tmax_min",
+      "r_then": 0.0,
+      "r_now": 0.0,
+      "delta_r2": 0.0,
+      "kind": "unchanged"
+     }
+    ]
+   },
+   "groups": null,
+   "attribution": [],
+   "jacobian_steps": [
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05
+   ],
+   "near_optimality": {
+    "S_frozen": 4.048192009092584,
+    "gradient_norm": 6.516578306657729,
+    "gradient": [
+     3.4032051300539075,
+     3.43372773007521,
+     2.537471209843874,
+     -0.5314732423832504,
+     3.5174248530897616
+    ],
+    "gn_decrement_unbounded": 0.7745172786224969,
+    "gn_step": [
+     -0.1253255929457057,
+     -0.08162350322999894,
+     -0.11809102576821498,
+     -0.07714376007415594,
+     -0.16591690244475765
+    ],
+    "gn_predicted_decrease_bounded": 0.7745172786224948,
+    "step_evaluations": [
+     {
+      "scale": 1.0,
+      "S": 4.264563769951186
+     },
+     {
+      "scale": 0.5,
+      "S": 4.03824950464986
+     }
+    ],
+    "one_step_decrease": 0.00994250444272371,
+    "one_step_scale": 0.5,
+    "s2": 1.0,
+    "coordinates": {}
+   },
+   "verdict": {
+    "class": "REPRODUCES",
+    "reproduced": true,
+    "S_change": -8.255032213355662e-10,
+    "S_change_rel": -2.0391898885059798e-10,
+    "rel_tol": 0.01,
+    "joint_threshold": 11.070497693516351,
+    "joint_near_optimal": true,
+    "coordinates_outside_local_95": [],
+    "coordinates_outside_local_95_unadjusted": [],
+    "marginal_tests": {
+     "m": 0,
+     "quantile": 0.95,
+     "unadjusted_outside": [],
+     "bonferroni_outside": [],
+     "per_coordinate": {}
+    },
+    "trust_ratio": 0.017116044994987974,
+    "local_model_valid": false,
+    "material_reasons": []
+   },
+   "seconds": {
+    "one_evaluation": 0.71,
+    "one_evaluation_near_optimality": 0.0,
+    "jacobian": 1.1,
+    "step": 0.5,
+    "attribution": 0.0,
+    "total": 2.7
+   },
+   "workers": 1,
+   "why": "B39 is B41's term-off ablation, so it is evaluated with the 3-DG exit's pH term off (that term defaults on since B41, fb0dbd30; evaluated with it on, S was 3.207, a drift by construction, CF-138 withdrawn). B39 froze no shipped coordinate."
+  },
+  "B41": {
+   "fit": "B41",
+   "report": "results/validation/kinetic_core_b41_fit_report.json",
+   "generator": "scripts/generators/generate_kinetic_core_b39_fit.py residuals (quick=False, as frozen), run as generate_kinetic_core_b41_fit.py runs it (the formic-acid exit's pH term on)",
+   "objective": "B39's twelve decisive rows (Mittelmaier 2011 fed maxima, times of maximum and shares; Zhang 2021 within-study ratios), log10(pred/target)/sigma",
+   "keys": [
+    "log10_k_tdg_ddg_100C",
+    "log10_k_ddg_tdg_100C",
+    "log10_k_ddg_dgal_100C",
+    "log10_k_dgal_ddg_100C",
+    "log10_k_ddg_hmf_100C"
+   ],
+   "kinds": [
+    "log10k",
+    "log10k",
+    "log10k",
+    "log10k",
+    "log10k"
+   ],
+   "x_frozen": [
+    -1.9325002090039471,
+    -1.9647477052223088,
+    -1.8115924725920176,
+    -1.697993368507553,
+    -1.4503764398702186
+   ],
+   "lower": [
+    -4.4275872125713605,
+    -4.4275872125713605,
+    -4.4275872125713605,
+    -4.4275872125713605,
+    -2.924453038607469
+   ],
+   "upper": [
+    -0.4275872125713609,
+    -0.4275872125713609,
+    -0.4275872125713609,
+    -0.4275872125713609,
+    1.0755469613925308
+   ],
+   "n_free": 5,
+   "S_recorded": 0.8112543069141772,
+   "S_today": 0.8112543163255406,
+   "n_rows_then": 12,
+   "n_rows_now": 12,
+   "chi2_red_then": 0.11589347241631102,
+   "chi2_red_today": 0.11589347376079151,
+   "rel_tol": 0.01,
+   "tol_source": "none stated in the record: 1 % (task default)",
+   "shipped_coordinates": [
+    "k_tdg_ddg.log10_k_ref",
+    "k_ddg_hmf.log10_k_ref",
+    "k_ddg_tdg.log10_k_ref",
+    "k_ddg_dgal.log10_k_ref",
+    "k_dgal_ddg.log10_k_ref"
+   ],
+   "shipped_coordinates_unmapped": [],
+   "row_changes": {
+    "counts": {
+     "unchanged": 12
+    },
+    "top": [
+     {
+      "id": "zhang_ratio_95C",
+      "r_then": -0.3394418959188309,
+      "r_now": -0.3394419072213302,
+      "delta_r2": 7.67308372395803e-09,
+      "kind": "unchanged"
+     },
+     {
+      "id": "zhang_ratio_105C",
+      "r_then": -0.04120881349075051,
+      "r_now": -0.04120883771090097,
+      "delta_r2": 1.9961679128231713e-09,
+      "kind": "unchanged"
+     },
+     {
+      "id": "zhang_ratio_100C",
+      "r_then": -0.1494808029671584,
+      "r_now": -0.14948080175910197,
+      "delta_r2": -3.6116248880446733e-10,
+      "kind": "unchanged"
+     },
+     {
+      "id": "zhang_ratio_110C",
+      "r_then": 0.06987966985563508,
+      "r_now": 0.06987967059318947,
+      "delta_r2": 1.0308011562376596e-10,
+      "kind": "unchanged"
+     },
+     {
+      "id": "fedTDG_ddg_max_uM",
+      "r_then": 0.388361879174488,
+      "r_now": 0.38836187917471116,
+      "delta_r2": 1.7333356971960256e-13,
+      "kind": "unchanged"
+     },
+     {
+      "id": "fedDDG_tdg_max_uM",
+      "r_then": 0.1517717796831276,
+      "r_now": 0.15177177968316785,
+      "delta_r2": 1.2215922717828676e-14,
+      "kind": "unchanged"
+     },
+     {
+      "id": "fedDDG_dgal_max_uM",
+      "r_then": 0.06683887603784062,
+      "r_now": 0.06683887603789403,
+      "delta_r2": 7.138387103644561e-15,
+      "kind": "unchanged"
+     },
+     {
+      "id": "fedTDG_dgal_share_60min",
+      "r_then": 0.1316541701609168,
+      "r_now": 0.13165417016092226,
+      "delta_r2": 1.4398204850607499e-15,
+      "kind": "unchanged"
+     }
+    ],
+    "all": [
+     {
+      "id": "zhang_ratio_95C",
+      "r_then": -0.3394418959188309,
+      "r_now": -0.3394419072213302,
+      "delta_r2": 7.67308372395803e-09,
+      "kind": "unchanged"
+     },
+     {
+      "id": "zhang_ratio_105C",
+      "r_then": -0.04120881349075051,
+      "r_now": -0.04120883771090097,
+      "delta_r2": 1.9961679128231713e-09,
+      "kind": "unchanged"
+     },
+     {
+      "id": "zhang_ratio_100C",
+      "r_then": -0.1494808029671584,
+      "r_now": -0.14948080175910197,
+      "delta_r2": -3.6116248880446733e-10,
+      "kind": "unchanged"
+     },
+     {
+      "id": "zhang_ratio_110C",
+      "r_then": 0.06987966985563508,
+      "r_now": 0.06987967059318947,
+      "delta_r2": 1.0308011562376596e-10,
+      "kind": "unchanged"
+     },
+     {
+      "id": "fedTDG_ddg_max_uM",
+      "r_then": 0.388361879174488,
+      "r_now": 0.38836187917471116,
+      "delta_r2": 1.7333356971960256e-13,
+      "kind": "unchanged"
+     },
+     {
+      "id": "fedDDG_tdg_max_uM",
+      "r_then": 0.1517717796831276,
+      "r_now": 0.15177177968316785,
+      "delta_r2": 1.2215922717828676e-14,
+      "kind": "unchanged"
+     },
+     {
+      "id": "fedDDG_dgal_max_uM",
+      "r_then": 0.06683887603784062,
+      "r_now": 0.06683887603789403,
+      "delta_r2": 7.138387103644561e-15,
+      "kind": "unchanged"
+     },
+     {
+      "id": "fedTDG_dgal_share_60min",
+      "r_then": 0.1316541701609168,
+      "r_now": 0.13165417016092226,
+      "delta_r2": 1.4398204850607499e-15,
+      "kind": "unchanged"
+     },
+     {
+      "id": "fedDGAL_tdg_share_60min",
+      "r_then": -0.42391716597240336,
+      "r_now": -0.4239171659724029,
+      "delta_r2": -3.885780586188048e-16,
+      "kind": "unchanged"
+     },
+     {
+      "id": "fedDGAL_ddg_max_uM",
+      "r_then": 0.25081446549540637,
+      "r_now": 0.250814465495407,
+      "delta_r2": 3.0531133177191805e-16,
+      "kind": "unchanged"
+     },
+     {
+      "id": "fedDGAL_ddg_tmax_min",
+      "r_then": 0.12563385700649646,
+      "r_now": 0.12563385700649649,
+      "delta_r2": 6.938893903907228e-18,
+      "kind": "unchanged"
+     },
+     {
+      "id": "fedTDG_ddg_tmax_min",
+      "r_then": -0.4615736748082781,
+      "r_now": -0.4615736748082781,
+      "delta_r2": 0.0,
+      "kind": "unchanged"
+     }
+    ]
+   },
+   "groups": null,
+   "jacobian_steps": [
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05
+   ],
+   "near_optimality": {
+    "S_frozen": 0.8112543163255406,
+    "gradient_norm": 1.857207329275411,
+    "gradient": [
+     1.3721407995325325,
+     0.4607990369860955,
+     0.5589959366492566,
+     -0.41237100311811603,
+     0.9335880442048266
+    ],
+    "gn_decrement_unbounded": 0.06081457397246305,
+    "gn_step": [
+     -0.04132300934692408,
+     -0.0346354475078747,
+     -0.030108276137571898,
+     -0.015464558664347915,
+     -0.041254718064561775
+    ],
+    "gn_predicted_decrease_bounded": 0.060814573972462926,
+    "step_evaluations": [
+     {
+      "scale": 1.0,
+      "S": 0.7841022749210464
+     }
+    ],
+    "one_step_decrease": 0.02715204140449412,
+    "one_step_scale": 1.0,
+    "s2": 1.0,
+    "coordinates": {
+     "k_tdg_ddg.log10_k_ref": {
+      "indices": [
+       0
+      ],
+      "gn_displacement": [
+       -0.04132300934692408
+      ],
+      "local_sd_scaled": [
+       0.17688258274409102
+      ],
+      "delta_quadratic": 0.05457751291242771,
+      "threshold": 3.8414588206941205,
+      "inside_local_95": true
+     },
+     "k_ddg_hmf.log10_k_ref": {
+      "indices": [
+       4
+      ],
+      "gn_displacement": [
+       -0.041254718064561775
+      ],
+      "local_sd_scaled": [
+       0.19383094638367424
+      ],
+      "delta_quadratic": 0.04530029336721465,
+      "threshold": 3.8414588206941205,
+      "inside_local_95": true
+     },
+     "k_ddg_tdg.log10_k_ref": {
+      "indices": [
+       1
+      ],
+      "gn_displacement": [
+       -0.0346354475078747
+      ],
+      "local_sd_scaled": [
+       0.2030003030502985
+      ],
+      "delta_quadratic": 0.0291104040954624,
+      "threshold": 3.8414588206941205,
+      "inside_local_95": true
+     },
+     "k_ddg_dgal.log10_k_ref": {
+      "indices": [
+       2
+      ],
+      "gn_displacement": [
+       -0.030108276137571898
+      ],
+      "local_sd_scaled": [
+       0.24742546377473415
+      ],
+      "delta_quadratic": 0.014807542746902927,
+      "threshold": 3.8414588206941205,
+      "inside_local_95": true
+     },
+     "k_dgal_ddg.log10_k_ref": {
+      "indices": [
+       3
+      ],
+      "gn_displacement": [
+       -0.015464558664347915
+      ],
+      "local_sd_scaled": [
+       0.24989682778870384
+      ],
+      "delta_quadratic": 0.0038296014102685806,
+      "threshold": 3.8414588206941205,
+      "inside_local_95": true
+     }
+    }
+   },
+   "verdict": {
+    "class": "REPRODUCES",
+    "reproduced": true,
+    "S_change": 9.411363355305014e-09,
+    "S_change_rel": 9.411363355305014e-09,
+    "rel_tol": 0.01,
+    "joint_threshold": 11.070497693516351,
+    "joint_near_optimal": true,
+    "coordinates_outside_local_95": [],
+    "coordinates_outside_local_95_unadjusted": [],
+    "marginal_tests": {
+     "m": 5,
+     "quantile": 0.99,
+     "unadjusted_outside": [],
+     "bonferroni_outside": [],
+     "per_coordinate": {
+      "k_tdg_ddg.log10_k_ref": {
+       "delta": 0.05457751291242771,
+       "threshold_unadjusted": 3.8414588206941205,
+       "threshold_bonferroni": 6.634896601021215
+      },
+      "k_ddg_hmf.log10_k_ref": {
+       "delta": 0.04530029336721465,
+       "threshold_unadjusted": 3.8414588206941205,
+       "threshold_bonferroni": 6.634896601021215
+      },
+      "k_ddg_tdg.log10_k_ref": {
+       "delta": 0.0291104040954624,
+       "threshold_unadjusted": 3.8414588206941205,
+       "threshold_bonferroni": 6.634896601021215
+      },
+      "k_ddg_dgal.log10_k_ref": {
+       "delta": 0.014807542746902927,
+       "threshold_unadjusted": 3.8414588206941205,
+       "threshold_bonferroni": 6.634896601021215
+      },
+      "k_dgal_ddg.log10_k_ref": {
+       "delta": 0.0038296014102685806,
+       "threshold_unadjusted": 3.8414588206941205,
+       "threshold_bonferroni": 6.634896601021215
+      }
+     }
+    },
+    "trust_ratio": 0.4464726073192368,
+    "local_model_valid": true,
+    "material_reasons": []
+   },
+   "seconds": {
+    "one_evaluation": 0.75,
+    "jacobian": 0.7,
+    "step": 0.7,
+    "total": 2.2
+   },
+   "workers": 3
+  },
+  "B1": {
+   "fit": "B1",
+   "report": "results/validation/kinetic_core_b1_fit_report.json (variant_A)",
+   "generator": "scripts/generators/generate_kinetic_core_b1_fit.py (Objective, variant A)",
+   "objective": "Martins 2005's nine responses at 80/100/120 C, log-space residuals with additive floors over the per-species replicate scatter (re-estimated from today's data)",
+   "rows_then_note": "the report keeps per-response summaries, not rows: the comparison is per (species, temperature) group and per-species sigma",
+   "keys": [
+    "log10_k_glc_frag",
+    "log10_k_mgo_mel",
+    "log10_k_fa_frag",
+    "log10_k_aa_frag",
+    "ea_k_glc_frag",
+    "ea_k_mgo_mel",
+    "ea_k_fa_frag",
+    "ea_k_aa_frag"
+   ],
+   "kinds": [
+    "log10k",
+    "log10k",
+    "log10k",
+    "log10k",
+    "Ea",
+    "Ea",
+    "Ea",
+    "Ea"
+   ],
+   "x_frozen": [
+    -7.999985940685075,
+    -1.6434754135093819,
+    -7.460336744485748,
+    -1.9276399911739752,
+    180.69531857985976,
+    20.043206355884948,
+    20.53065919356619,
+    20.000000150449104
+   ],
+   "lower": [
+    -8.0,
+    -6.0,
+    -8.0,
+    -8.0,
+    20.0,
+    20.0,
+    20.0,
+    20.0
+   ],
+   "upper": [
+    -1.0,
+    1.0,
+    0.0,
+    0.0,
+    260.0,
+    260.0,
+    260.0,
+    260.0
+   ],
+   "n_free": 8,
+   "S_recorded": 3979.8768004230633,
+   "S_today": 5025.873532404977,
+   "n_rows_then": 354,
+   "n_rows_now": 354,
+   "chi2_red_then": 11.50253410526897,
+   "chi2_red_today": 14.525646047413227,
+   "rel_tol": 0.01,
+   "tol_source": "none stated in the record: 1 % (task default)",
+   "shipped_coordinates": [
+    "k_glc_frag.log10_k_ref",
+    "k_glc_frag.ea_kj_mol",
+    "k_mgo_mel.log10_k_ref",
+    "k_mgo_mel.ea_kj_mol",
+    "k_fa_frag.log10_k_ref",
+    "k_fa_frag.ea_kj_mol",
+    "k_aa_frag.log10_k_ref",
+    "k_aa_frag.ea_kj_mol"
+   ],
+   "shipped_coordinates_unmapped": [],
+   "row_changes": null,
+   "groups": {
+    "groups": [
+     {
+      "group": "3-DG @ 100 C",
+      "n_then": 12,
+      "n_now": 12,
+      "median_bias_dex_then": 0.03981178823627768,
+      "median_bias_dex_now": -0.051187436922619574,
+      "r2_now": 63.148914381431084,
+      "bias_shift_dex": -0.09099922515889725
+     },
+     {
+      "group": "DFG @ 100 C",
+      "n_then": 15,
+      "n_now": 15,
+      "median_bias_dex_then": 0.006540830489945596,
+      "median_bias_dex_now": -0.06001061413393076,
+      "r2_now": 268.69883172941894,
+      "bias_shift_dex": -0.06655144462387635
+     },
+     {
+      "group": "1-DG @ 100 C",
+      "n_then": 14,
+      "n_now": 14,
+      "median_bias_dex_then": 0.03629216264148388,
+      "median_bias_dex_now": -0.022754357989929384,
+      "r2_now": 33.64139912978317,
+      "bias_shift_dex": -0.05904652063141327
+     },
+     {
+      "group": "3-DG @ 120 C",
+      "n_then": 8,
+      "n_now": 8,
+      "median_bias_dex_then": 0.04326862053397492,
+      "median_bias_dex_now": -0.012616253351665687,
+      "r2_now": 82.12307758776154,
+      "bias_shift_dex": -0.055884873885640604
+     },
+     {
+      "group": "acetic_acid @ 100 C",
+      "n_then": 17,
+      "n_now": 17,
+      "median_bias_dex_then": -0.0248963529595971,
+      "median_bias_dex_now": -0.07945105157521254,
+      "r2_now": 110.20962871856725,
+      "bias_shift_dex": -0.05455469861561544
+     },
+     {
+      "group": "DFG @ 120 C",
+      "n_then": 13,
+      "n_now": 13,
+      "median_bias_dex_then": -0.02683163601855781,
+      "median_bias_dex_now": -0.08024795873772632,
+      "r2_now": 569.3939699020725,
+      "bias_shift_dex": -0.053416322719168505
+     },
+     {
+      "group": "formic_acid @ 100 C",
+      "n_then": 12,
+      "n_now": 12,
+      "median_bias_dex_then": -0.05896957605923638,
+      "median_bias_dex_now": -0.11226427767699987,
+      "r2_now": 202.51666128122608,
+      "bias_shift_dex": -0.053294701617763486
+     },
+     {
+      "group": "methylglyoxal @ 100 C",
+      "n_then": 17,
+      "n_now": 17,
+      "median_bias_dex_then": -0.041249335102834794,
+      "median_bias_dex_now": -0.0844188000763455,
+      "r2_now": 93.82066605331491,
+      "bias_shift_dex": -0.04316946497351071
+     },
+     {
+      "group": "3-DG @ 80 C",
+      "n_then": 16,
+      "n_now": 16,
+      "median_bias_dex_then": 0.07653805748641697,
+      "median_bias_dex_now": 0.03653430769583975,
+      "r2_now": 69.39747509878087,
+      "bias_shift_dex": -0.04000374979057722
+     },
+     {
+      "group": "1-DG @ 120 C",
+      "n_then": 9,
+      "n_now": 9,
+      "median_bias_dex_then": 0.07136776002996241,
+      "median_bias_dex_now": 0.0325417130401238,
+      "r2_now": 29.4374808078857,
+      "bias_shift_dex": -0.03882604698983861
+     },
+     {
+      "group": "methylglyoxal @ 120 C",
+      "n_then": 10,
+      "n_now": 10,
+      "median_bias_dex_then": 0.05980852711494061,
+      "median_bias_dex_now": 0.021615561501160764,
+      "r2_now": 7.400017198648132,
+      "bias_shift_dex": -0.03819296561377985
+     },
+     {
+      "group": "DFG @ 80 C",
+      "n_then": 16,
+      "n_now": 16,
+      "median_bias_dex_then": -0.07195636916278361,
+      "median_bias_dex_now": -0.10883774664260037,
+      "r2_now": 1038.8154370582783,
+      "bias_shift_dex": -0.03688137747981676
+     },
+     {
+      "group": "acetic_acid @ 120 C",
+      "n_then": 13,
+      "n_now": 13,
+      "median_bias_dex_then": 0.015044059824516537,
+      "median_bias_dex_now": -0.02103440345911732,
+      "r2_now": 52.01836921060367,
+      "bias_shift_dex": -0.03607846328363386
+     },
+     {
+      "group": "1-DG @ 80 C",
+      "n_then": 11,
+      "n_now": 11,
+      "median_bias_dex_then": -0.01572740495879439,
+      "median_bias_dex_now": -0.04693552908688658,
+      "r2_now": 20.283391912319857,
+      "bias_shift_dex": -0.031208124128092186
+     },
+     {
+      "group": "formic_acid @ 120 C",
+      "n_then": 11,
+      "n_now": 11,
+      "median_bias_dex_then": -0.31615383320159385,
+      "median_bias_dex_now": -0.3405322803284829,
+      "r2_now": 1212.2643527362222,
+      "bias_shift_dex": -0.024378447126889025
+     },
+     {
+      "group": "fructose @ 120 C",
+      "n_then": 13,
+      "n_now": 13,
+      "median_bias_dex_then": 0.14555567154408944,
+      "median_bias_dex_now": 0.1279322875268179,
+      "r2_now": 126.77611677239733,
+      "bias_shift_dex": -0.017623384017271537
+     },
+     {
+      "group": "fructose @ 100 C",
+      "n_then": 16,
+      "n_now": 16,
+      "median_bias_dex_then": 0.16062358213312797,
+      "median_bias_dex_now": 0.14483457440327138,
+      "r2_now": 105.84571506016593,
+      "bias_shift_dex": -0.015789007729856586
+     },
+     {
+      "group": "acetic_acid @ 80 C",
+      "n_then": 12,
+      "n_now": 12,
+      "median_bias_dex_then": 0.03900668664623514,
+      "median_bias_dex_now": 0.024568331221976054,
+      "r2_now": 33.71751520559018,
+      "bias_shift_dex": -0.014438355424259086
+     },
+     {
+      "group": "glycine @ 100 C",
+      "n_then": 13,
+      "n_now": 13,
+      "median_bias_dex_then": -0.0018806489034795626,
+      "median_bias_dex_now": 0.0037167847188216974,
+      "r2_now": 25.839231313111597,
+      "bias_shift_dex": 0.00559743362230126
+     },
+     {
+      "group": "formic_acid @ 80 C",
+      "n_then": 8,
+      "n_now": 8,
+      "median_bias_dex_then": -0.0179077281167684,
+      "median_bias_dex_now": -0.02313780138154436,
+      "r2_now": 48.040427561659406,
+      "bias_shift_dex": -0.00523007326477596
+     },
+     {
+      "group": "methylglyoxal @ 80 C",
+      "n_then": 10,
+      "n_now": 10,
+      "median_bias_dex_then": 0.05486940536495209,
+      "median_bias_dex_now": 0.051585457268750974,
+      "r2_now": 36.939358047666396,
+      "bias_shift_dex": -0.0032839480962011183
+     },
+     {
+      "group": "glycine @ 120 C",
+      "n_then": 12,
+      "n_now": 12,
+      "median_bias_dex_then": -0.0038712649649116806,
+      "median_bias_dex_now": -0.000738610689216164,
+      "r2_now": 68.51485852181659,
+      "bias_shift_dex": 0.0031326542756955167
+     },
+     {
+      "group": "glucose @ 120 C",
+      "n_then": 12,
+      "n_now": 12,
+      "median_bias_dex_then": -0.02815473204079498,
+      "median_bias_dex_now": -0.02953809264649401,
+      "r2_now": 329.7842152730078,
+      "bias_shift_dex": -0.0013833606056990293
+     },
+     {
+      "group": "fructose @ 80 C",
+      "n_then": 13,
+      "n_now": 13,
+      "median_bias_dex_then": 0.16830676485323298,
+      "median_bias_dex_now": 0.16735980840034703,
+      "r2_now": 121.24508208778744,
+      "bias_shift_dex": -0.0009469564528859498
+     },
+     {
+      "group": "glucose @ 100 C",
+      "n_then": 15,
+      "n_now": 15,
+      "median_bias_dex_then": -0.008093384303658439,
+      "median_bias_dex_now": -0.00882383038366521,
+      "r2_now": 91.83395304939656,
+      "bias_shift_dex": -0.0007304460800067712
+     },
+     {
+      "group": "glycine @ 80 C",
+      "n_then": 19,
+      "n_now": 19,
+      "median_bias_dex_then": -0.010611366045719288,
+      "median_bias_dex_now": -0.010482682603359673,
+      "r2_now": 153.1097294306032,
+      "bias_shift_dex": 0.00012868344235961518
+     },
+     {
+      "group": "glucose @ 80 C",
+      "n_then": 17,
+      "n_now": 17,
+      "median_bias_dex_then": -0.0072953881626470285,
+      "median_bias_dex_now": -0.007303882111726734,
+      "r2_now": 31.057657275459295,
+      "bias_shift_dex": -8.493949079705493e-06
+     }
+    ],
+    "sigmas": [
+     {
+      "species": "1-DG",
+      "sigma_then": 0.11844362624199373,
+      "sigma_now": 0.11844362624199373
+     },
+     {
+      "species": "3-DG",
+      "sigma_then": 0.07570149732498221,
+      "sigma_now": 0.07570149732498221
+     },
+     {
+      "species": "DFG",
+      "sigma_then": 0.03970934421646585,
+      "sigma_now": 0.03970934421646585
+     },
+     {
+      "species": "acetic_acid",
+      "sigma_then": 0.06974088727847977,
+      "sigma_now": 0.06974088727847977
+     },
+     {
+      "species": "formic_acid",
+      "sigma_then": 0.07084710241790487,
+      "sigma_now": 0.07084710241790487
+     },
+     {
+      "species": "fructose",
+      "sigma_then": 0.1393764923316893,
+      "sigma_now": 0.1393764923316893
+     },
+     {
+      "species": "glucose",
+      "sigma_then": 0.015735884250406895,
+      "sigma_now": 0.015735884250406895
+     },
+     {
+      "species": "glycine",
+      "sigma_then": 0.009599485280890531,
+      "sigma_now": 0.009599485280890531
+     },
+     {
+      "species": "methylglyoxal",
+      "sigma_then": 0.1530174121916078,
+      "sigma_now": 0.1530174121916078
+     }
+    ]
+   },
+   "attribution": [
+    {
+     "label": "knock out the base-table steps added after the freeze (11 steps)",
+     "cite": "network.REACTIONS against the B1 report's network.reactions (B7 furanic channels, 92b746d6, 2026-08-29, and later)",
+     "S": 4902.615699151999,
+     "S_change_vs_today": -123.25783325297743,
+     "recovers_recorded": false
+    },
+    {
+     "label": "knock out DICARBONYL_REACTIONS (5 constants)",
+     "cite": "B13, d6e89620 (2026-09-07): glucosone, glyoxal and diacetyl join the trunk",
+     "S": 5025.913714307172,
+     "S_change_vs_today": 0.040181902195399744,
+     "recovers_recorded": false
+    },
+    {
+     "label": "knock out PYRAZINE_REACTIONS (3 constants)",
+     "cite": "B18, 34da5b51 (2026-09-08): the aminoketone pyrazine steps",
+     "S": 5026.032807285499,
+     "S_change_vs_today": 0.15927488052238914,
+     "recovers_recorded": false
+    },
+    {
+     "label": "knock out GLYCATION_REACTIONS (5 constants)",
+     "cite": "B20, efb76fb6 (2026-09-09): the glycation arm",
+     "S": 5025.873532404977,
+     "S_change_vs_today": 0.0,
+     "recovers_recorded": false
+    },
+    {
+     "label": "knock out AQUEOUS_GLYOXAL_REACTIONS (1 constants)",
+     "cite": "B21, 5c5f2857 (2026-09-09): the aqueous glucosone route to glyoxal",
+     "S": 4019.0011306178208,
+     "S_change_vs_today": -1006.8724017871559,
+     "recovers_recorded": true
+    },
+    {
+     "label": "knock out METHIONINE_REACTIONS (6 constants)",
+     "cite": "B22, 489f9e5f (2026-09-09): the methionine chain",
+     "S": 5025.873532404977,
+     "S_change_vs_today": 0.0,
+     "recovers_recorded": false
+    },
+    {
+     "label": "knock out PROLINE_REACTIONS (4 constants)",
+     "cite": "B24, 62fe149a (2026-09-09): 2-acetyl-1-pyrroline from proline",
+     "S": 5025.873532404977,
+     "S_change_vs_today": 0.0,
+     "recovers_recorded": false
+    },
+    {
+     "label": "knock out FED_3DEOXY_REACTIONS (3 constants)",
+     "cite": "B39 / B41, fb0dbd30 (2026-09-11): the fed 3-deoxyglucosone triangle",
+     "S": 5040.33335472513,
+     "S_change_vs_today": 14.459822320153762,
+     "recovers_recorded": false
+    },
+    {
+     "label": "knock out every trunk step added after B1 froze",
+     "cite": "all of the above",
+     "S": 3979.876802046787,
+     "S_change_vs_today": -1045.9967303581898,
+     "recovers_recorded": true
+    }
+   ],
+   "jacobian_steps": [
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    2.0,
+    2.0,
+    2.0,
+    2.0
+   ],
+   "near_optimality": {
+    "S_frozen": 5025.873532404977,
+    "gradient_norm": 781.3411001621057,
+    "gradient": [
+     0.10024635378315203,
+     215.64531091657557,
+     0.003888724198549687,
+     750.9929039334307,
+     0.0006018023577407809,
+     0.38407496512797773,
+     1.0033451027395999e-05,
+     0.7178756586038356
+    ],
+    "gn_decrement_unbounded": 1095.0053444596904,
+    "gn_step": [
+     -1.4059314924708133e-05,
+     -0.1110358661437878,
+     -0.5396632555142524,
+     -0.1915840324961887,
+     -160.69531857985976,
+     -0.04320635588494781,
+     -0.5306591935661906,
+     -1.5044910384176546e-07
+    ],
+    "gn_predicted_decrease_bounded": 84.02543613706166,
+    "step_evaluations": [
+     {
+      "scale": 1.0,
+      "S": 4945.666680208328
+     }
+    ],
+    "one_step_decrease": 80.20685219664847,
+    "one_step_scale": 1.0,
+    "s2": 11.50253410526897,
+    "coordinates": {
+     "k_glc_frag.log10_k_ref": {
+      "indices": [
+       0
+      ],
+      "gn_displacement": [
+       -1.4059314924708133e-05
+      ],
+      "local_sd_scaled": [
+       1814.1968126129993
+      ],
+      "delta_quadratic": 6.908011449080925e-16,
+      "threshold": 44.186511099020436,
+      "inside_local_95": true
+     },
+     "k_glc_frag.ea_kj_mol": {
+      "indices": [
+       4
+      ],
+      "gn_displacement": [
+       -160.69531857985976
+      ],
+      "local_sd_scaled": [
+       43.463537128451975
+      ],
+      "delta_quadratic": 157.23522469358744,
+      "threshold": 44.186511099020436,
+      "inside_local_95": false
+     },
+     "k_mgo_mel.log10_k_ref": {
+      "indices": [
+       1
+      ],
+      "gn_displacement": [
+       -0.1110358661437878
+      ],
+      "local_sd_scaled": [
+       0.10895704295979934
+      ],
+      "delta_quadratic": 11.945641652868082,
+      "threshold": 44.186511099020436,
+      "inside_local_95": true
+     },
+     "k_mgo_mel.ea_kj_mol": {
+      "indices": [
+       5
+      ],
+      "gn_displacement": [
+       -0.04320635588494781
+      ],
+      "local_sd_scaled": [
+       31.39038674523645
+      ],
+      "delta_quadratic": 2.1791918891146972e-05,
+      "threshold": 44.186511099020436,
+      "inside_local_95": true
+     },
+     "k_fa_frag.log10_k_ref": {
+      "indices": [
+       2
+      ],
+      "gn_displacement": [
+       -0.5396632555142524
+      ],
+      "local_sd_scaled": [
+       32663.40237672063
+      ],
+      "delta_quadratic": 3.139904111884188e-09,
+      "threshold": 44.186511099020436,
+      "inside_local_95": true
+     },
+     "k_fa_frag.ea_kj_mol": {
+      "indices": [
+       6
+      ],
+      "gn_displacement": [
+       -0.5306591935661906
+      ],
+      "local_sd_scaled": [
+       2.8607998309462865
+      ],
+      "delta_quadratic": 0.3957764713544322,
+      "threshold": 44.186511099020436,
+      "inside_local_95": true
+     },
+     "k_aa_frag.log10_k_ref": {
+      "indices": [
+       3
+      ],
+      "gn_displacement": [
+       -0.1915840324961887
+      ],
+      "local_sd_scaled": [
+       0.07696511474890307
+      ],
+      "delta_quadratic": 71.27287988751745,
+      "threshold": 44.186511099020436,
+      "inside_local_95": false
+     },
+     "k_aa_frag.ea_kj_mol": {
+      "indices": [
+       7
+      ],
+      "gn_displacement": [
+       -1.5044910384176546e-07
+      ],
+      "local_sd_scaled": [
+       20.934058584367634
+      ],
+      "delta_quadratic": 5.941086417700322e-16,
+      "threshold": 44.186511099020436,
+      "inside_local_95": true
+     }
+    }
+   },
+   "verdict": {
+    "class": "DRIFTED-MATERIAL",
+    "reproduced": false,
+    "S_change": 1045.9967319819134,
+    "S_change_rel": 0.2628213847902838,
+    "rel_tol": 0.01,
+    "joint_threshold": 178.37339730617512,
+    "joint_near_optimal": true,
+    "coordinates_outside_local_95": [
+     "k_glc_frag.ea_kj_mol"
+    ],
+    "coordinates_outside_local_95_unadjusted": [
+     "k_glc_frag.ea_kj_mol",
+     "k_aa_frag.log10_k_ref"
+    ],
+    "marginal_tests": {
+     "m": 8,
+     "quantile": 0.99375,
+     "unadjusted_outside": [
+      "k_glc_frag.ea_kj_mol",
+      "k_aa_frag.log10_k_ref"
+     ],
+     "bonferroni_outside": [
+      "k_glc_frag.ea_kj_mol"
+     ],
+     "per_coordinate": {
+      "k_glc_frag.log10_k_ref": {
+       "delta": 6.908011449080925e-16,
+       "threshold_unadjusted": 44.186511099020436,
+       "threshold_bonferroni": 86.00183252781446
+      },
+      "k_glc_frag.ea_kj_mol": {
+       "delta": 157.23522469358744,
+       "threshold_unadjusted": 44.186511099020436,
+       "threshold_bonferroni": 86.00183252781446
+      },
+      "k_mgo_mel.log10_k_ref": {
+       "delta": 11.945641652868082,
+       "threshold_unadjusted": 44.186511099020436,
+       "threshold_bonferroni": 86.00183252781446
+      },
+      "k_mgo_mel.ea_kj_mol": {
+       "delta": 2.1791918891146972e-05,
+       "threshold_unadjusted": 44.186511099020436,
+       "threshold_bonferroni": 86.00183252781446
+      },
+      "k_fa_frag.log10_k_ref": {
+       "delta": 3.139904111884188e-09,
+       "threshold_unadjusted": 44.186511099020436,
+       "threshold_bonferroni": 86.00183252781446
+      },
+      "k_fa_frag.ea_kj_mol": {
+       "delta": 0.3957764713544322,
+       "threshold_unadjusted": 44.186511099020436,
+       "threshold_bonferroni": 86.00183252781446
+      },
+      "k_aa_frag.log10_k_ref": {
+       "delta": 71.27287988751745,
+       "threshold_unadjusted": 44.186511099020436,
+       "threshold_bonferroni": 86.00183252781446
+      },
+      "k_aa_frag.ea_kj_mol": {
+       "delta": 5.941086417700322e-16,
+       "threshold_unadjusted": 44.186511099020436,
+       "threshold_bonferroni": 86.00183252781446
+      }
+     }
+    },
+    "trust_ratio": 0.9545544288019601,
+    "local_model_valid": true,
+    "material_reasons": [
+     "shipped coordinates outside today's local 95 % region (Bonferroni over 8): k_glc_frag.ea_kj_mol"
+    ]
+   },
+   "seconds": {
+    "one_evaluation": 0.72,
+    "jacobian": 1.1,
+    "step": 0.6,
+    "attribution": 1.1,
+    "total": 3.9
+   },
+   "workers": 3
+  },
+  "B3": {
+   "fit": "B3",
+   "report": "results/validation/kinetic_core_b3_fit_report.json",
+   "generator": "scripts/generators/generate_kinetic_core_b3_fit.py residuals (quick=True, the setting the frozen fit ran at)",
+   "objective": "B3's declared fit rows (Claeys 2005, De Vleeschouwer 2009, Knol 2005, the SPI extrusion benchmark): log10 rate / ppb rows, linear Ea rows, a one-sided ceiling",
+   "cost_convention": "the report's final_cost is 0.5 r . r",
+   "keys": [
+    "k_int1_mel",
+    "k_acr_dp",
+    "k_gln_glc",
+    "k_lys_glc",
+    "k_ala_glc",
+    "k_acr_gln",
+    "k_acr_lys",
+    "k_acr_ala",
+    "Ea_int1_mel",
+    "Ea_acr_dp",
+    "Ea_competitor_sugar"
+   ],
+   "kinds": [
+    "log10k",
+    "log10k",
+    "log10k",
+    "log10k",
+    "log10k",
+    "log10k",
+    "log10k",
+    "log10k",
+    "Ea",
+    "Ea",
+    "Ea"
+   ],
+   "x_frozen": [
+    -4.49609939573632,
+    -0.8978334423341812,
+    -7.8355036696571805,
+    -2.595910646804505,
+    -6.8723102887066405,
+    -1.894602070316578,
+    -2.4915117796873094,
+    -8.82499890965576,
+    259.9995034093972,
+    136.10927178572982,
+    20.000000000000007
+   ],
+   "lower": [
+    -6.0,
+    -4.0,
+    -9.0,
+    -9.0,
+    -9.0,
+    -9.0,
+    -9.0,
+    -9.0,
+    20.0,
+    20.0,
+    20.0
+   ],
+   "upper": [
+    2.0,
+    1.0,
+    -1.0,
+    -1.0,
+    -1.0,
+    0.0,
+    0.0,
+    0.0,
+    260.0,
+    260.0,
+    260.0
+   ],
+   "n_free": 11,
+   "S_recorded": 105.30228565562297,
+   "S_today": 105.41588373230645,
+   "n_rows_then": 30,
+   "n_rows_now": 30,
+   "chi2_red_then": 5.542225560822262,
+   "chi2_red_today": 5.548204406963498,
+   "rel_tol": 0.01,
+   "tol_source": "none stated in the record: 1 % (task default)",
+   "shipped_coordinates": [
+    "k_int1_mel.log10_k_ref",
+    "k_int1_mel.ea_kj_mol",
+    "k_acr_dp.log10_k_ref",
+    "k_acr_dp.ea_kj_mol",
+    "k_gln_glc.log10_k_ref",
+    "k_gln_glc.ea_kj_mol",
+    "k_lys_glc.log10_k_ref",
+    "k_lys_glc.ea_kj_mol",
+    "k_ala_glc.log10_k_ref",
+    "k_ala_glc.ea_kj_mol",
+    "k_acr_gln.log10_k_ref",
+    "k_acr_lys.log10_k_ref",
+    "k_acr_ala.log10_k_ref"
+   ],
+   "shipped_coordinates_unmapped": [
+    "k_gln_glc.ea_kj_mol",
+    "k_lys_glc.ea_kj_mol",
+    "k_ala_glc.ea_kj_mol"
+   ],
+   "row_changes": {
+    "counts": {
+     "model change": 12,
+     "unchanged": 18
+    },
+    "top": [
+     {
+      "id": "claeys_cys_EaF",
+      "r_then": -1.6706028734911376,
+      "r_now": -1.6343587838202074,
+      "delta_r2": -0.11978532666657848,
+      "kind": "model change"
+     },
+     {
+      "id": "claeys_gln_kF_160C",
+      "r_then": -2.6194435445013413,
+      "r_now": -2.6394979959322327,
+      "delta_r2": 0.10546518770052238,
+      "kind": "model change"
+     },
+     {
+      "id": "claeys_lys_kF_160C",
+      "r_then": -1.2282970205920196,
+      "r_now": -1.2471281254220243,
+      "delta_r2": 0.04661499042342032,
+      "kind": "model change"
+     },
+     {
+      "id": "claeys_cys_kF_160C",
+      "r_then": -0.908039837520948,
+      "r_now": -0.9280626673909742,
+      "delta_r2": 0.03676396807978044,
+      "kind": "model change"
+     },
+     {
+      "id": "claeys_ala_kF_160C",
+      "r_then": -0.7948091322145702,
+      "r_now": -0.8148664674639133,
+      "delta_r2": 0.03228580314543883,
+      "kind": "model change"
+     },
+     {
+      "id": "claeys_cys_EaE",
+      "r_then": -2.6052016000972547,
+      "r_now": -2.6112102760392433,
+      "delta_r2": 0.03134372854364553,
+      "kind": "model change"
+     },
+     {
+      "id": "claeys_control_kF_160C",
+      "r_then": -0.7505490318012669,
+      "r_now": -0.7706063905008367,
+      "delta_r2": 0.03051035994290896,
+      "kind": "model change"
+     },
+     {
+      "id": "claeys_lys_EaF",
+      "r_then": -0.42154888090981557,
+      "r_now": -0.3878463975960233,
+      "delta_r2": -0.02727863086810528,
+      "kind": "model change"
+     }
+    ],
+    "all": [
+     {
+      "id": "claeys_cys_EaF",
+      "r_then": -1.6706028734911376,
+      "r_now": -1.6343587838202074,
+      "delta_r2": -0.11978532666657848,
+      "kind": "model change"
+     },
+     {
+      "id": "claeys_gln_kF_160C",
+      "r_then": -2.6194435445013413,
+      "r_now": -2.6394979959322327,
+      "delta_r2": 0.10546518770052238,
+      "kind": "model change"
+     },
+     {
+      "id": "claeys_lys_kF_160C",
+      "r_then": -1.2282970205920196,
+      "r_now": -1.2471281254220243,
+      "delta_r2": 0.04661499042342032,
+      "kind": "model change"
+     },
+     {
+      "id": "claeys_cys_kF_160C",
+      "r_then": -0.908039837520948,
+      "r_now": -0.9280626673909742,
+      "delta_r2": 0.03676396807978044,
+      "kind": "model change"
+     },
+     {
+      "id": "claeys_ala_kF_160C",
+      "r_then": -0.7948091322145702,
+      "r_now": -0.8148664674639133,
+      "delta_r2": 0.03228580314543883,
+      "kind": "model change"
+     },
+     {
+      "id": "claeys_cys_EaE",
+      "r_then": -2.6052016000972547,
+      "r_now": -2.6112102760392433,
+      "delta_r2": 0.03134372854364553,
+      "kind": "model change"
+     },
+     {
+      "id": "claeys_control_kF_160C",
+      "r_then": -0.7505490318012669,
+      "r_now": -0.7706063905008367,
+      "delta_r2": 0.03051035994290896,
+      "kind": "model change"
+     },
+     {
+      "id": "claeys_lys_EaF",
+      "r_then": -0.42154888090981557,
+      "r_now": -0.3878463975960233,
+      "delta_r2": -0.02727863086810528,
+      "kind": "model change"
+     },
+     {
+      "id": "claeys_ala_EaF",
+      "r_then": -0.36086952938406625,
+      "r_now": -0.32454982222831746,
+      "delta_r2": -0.024894230129445,
+      "kind": "model change"
+     },
+     {
+      "id": "claeys_control_EaF",
+      "r_then": -0.1588807889796044,
+      "r_now": -0.12255958121293929,
+      "delta_r2": -0.01022225415969052,
+      "kind": "model change"
+     },
+     {
+      "id": "dv2_cysteine_reduction",
+      "r_then": 6.375565565104147,
+      "r_now": 6.376110440232947,
+      "delta_r2": 0.0069480711058176325,
+      "kind": "unchanged"
+     },
+     {
+      "id": "claeys_lys_EaE",
+      "r_then": -0.6244396739146925,
+      "r_now": -0.6296829531099553,
+      "delta_r2": 0.006575715078586675,
+      "kind": "model change"
+     },
+     {
+      "id": "knol2005_EaF",
+      "r_then": 3.805168108345549,
+      "r_now": 3.80602481157297,
+      "delta_r2": 0.006520533539019269,
+      "kind": "unchanged"
+     },
+     {
+      "id": "claeys_gln_EaF",
+      "r_then": -0.10087911212505901,
+      "r_now": -0.06455930730569548,
+      "delta_r2": -0.006008691103349003,
+      "kind": "model change"
+     },
+     {
+      "id": "claeys_cys_kE_160C",
+      "r_then": -1.03646811387182,
+      "r_now": -1.0360883089866764,
+      "delta_r2": -0.0007871670541372833,
+      "kind": "unchanged"
+     },
+     {
+      "id": "claeys_lys_kE_160C",
+      "r_then": -0.8435814604024167,
+      "r_now": -0.8432816673225959,
+      "delta_r2": -0.0005057098922968128,
+      "kind": "unchanged"
+     },
+     {
+      "id": "spi_extrusion_130C_acrylamide_ppb",
+      "r_then": -3.628049921003789,
+      "r_now": -3.628057368923272,
+      "delta_r2": 5.404290285504487e-05,
+      "kind": "unchanged"
+     },
+     {
+      "id": "claeys_gln_kE_160C",
+      "r_then": -0.11143375858479451,
+      "r_now": -0.11141922724821558,
+      "delta_r2": -3.2383517447574783e-06,
+      "kind": "unchanged"
+     },
+     {
+      "id": "claeys_gln_EaE",
+      "r_then": -0.11404224819883836,
+      "r_now": -0.11404630121181185,
+      "delta_r2": 9.24445849865077e-07,
+      "kind": "unchanged"
+     },
+     {
+      "id": "claeys_ala_EaE",
+      "r_then": -1.3436295117123098,
+      "r_now": -1.3436295117126849,
+      "delta_r2": 1.0078604617547171e-12,
+      "kind": "unchanged"
+     },
+     {
+      "id": "claeys_ala_kE_160C",
+      "r_then": 0.2963598124711746,
+      "r_now": 0.2963598124711856,
+      "delta_r2": 6.50868248186498e-15,
+      "kind": "unchanged"
+     },
+     {
+      "id": "claeys_control_EaE",
+      "r_then": -1.2440291285708065,
+      "r_now": -1.2440291285708076,
+      "delta_r2": 2.6645352591003757e-15,
+      "kind": "unchanged"
+     },
+     {
+      "id": "knol2005_k6_120C",
+      "r_then": -1.5622930039998995,
+      "r_now": -1.5622930039998997,
+      "delta_r2": 4.440892098500626e-16,
+      "kind": "unchanged"
+     },
+     {
+      "id": "dv1_glucose_kE_160C",
+      "r_then": 0.3405551922193933,
+      "r_now": 0.340555192219393,
+      "delta_r2": -1.942890293094024e-16,
+      "kind": "unchanged"
+     },
+     {
+      "id": "claeys_control_kE_160C",
+      "r_then": 0.18817499574983598,
+      "r_now": 0.1881749957498357,
+      "delta_r2": -1.0408340855860843e-16,
+      "kind": "unchanged"
+     },
+     {
+      "id": "dv1_glucose_EaE",
+      "r_then": 0.9163708714291926,
+      "r_now": 0.9163708714291926,
+      "delta_r2": 0.0,
+      "kind": "unchanged"
+     },
+     {
+      "id": "knol2005_k6_140C",
+      "r_then": -0.47030240614934105,
+      "r_now": -0.47030240614934105,
+      "delta_r2": 0.0,
+      "kind": "unchanged"
+     },
+     {
+      "id": "knol2005_k6_160C",
+      "r_then": 0.5239688308458983,
+      "r_now": 0.5239688308458983,
+      "delta_r2": 0.0,
+      "kind": "unchanged"
+     },
+     {
+      "id": "knol2005_k6_180C",
+      "r_then": 1.428805690812918,
+      "r_now": 1.428805690812918,
+      "delta_r2": 0.0,
+      "kind": "unchanged"
+     },
+     {
+      "id": "knol2005_k6_200C",
+      "r_then": 2.256138715601661,
+      "r_now": 2.256138715601661,
+      "delta_r2": 0.0,
+      "kind": "unchanged"
+     }
+    ]
+   },
+   "groups": null,
+   "jacobian_steps": [
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    -2.0,
+    2.0,
+    2.0
+   ],
+   "near_optimality": {
+    "S_frozen": 105.41588373230645,
+    "gradient_norm": 0.21603708664685428,
+    "gradient": [
+     -0.0849559103910999,
+     0.18998499380328693,
+     8.634788421403919e-06,
+     0.053833759469718634,
+     -9.13602890915991e-07,
+     -0.01724799425989254,
+     -0.012338035716210456,
+     7.552360549552727e-06,
+     -0.0009089901701131892,
+     -0.000796650719553039,
+     0.0033110554430334743
+    ],
+    "gn_decrement_unbounded": 3.1706100237816224,
+    "gn_step": [
+     0.10570744548370758,
+     -0.0007714192206642813,
+     -1.1644963303428195,
+     -0.08776234780508735,
+     5.8723102887066405,
+     0.0022649633436495667,
+     -0.008405797252610224,
+     -0.1750010903442405,
+     0.0004965906027791789,
+     0.08593202861290286,
+     -7.105427357601002e-15
+    ],
+    "gn_predicted_decrease_bounded": 0.006950286088681423,
+    "step_evaluations": [
+     {
+      "scale": 1.0,
+      "S": 111.22514263731381
+     },
+     {
+      "scale": 0.5,
+      "S": 105.41260777799917
+     }
+    ],
+    "one_step_decrease": 0.0032759543072842234,
+    "one_step_scale": 0.5,
+    "s2": 5.542225560822262,
+    "coordinates": {
+     "k_int1_mel.log10_k_ref": {
+      "indices": [
+       0
+      ],
+      "gn_displacement": [
+       0.10570744548370758
+      ],
+      "local_sd_scaled": [
+       493.3729101060415
+      ],
+      "delta_quadratic": 2.5441619500789317e-07,
+      "threshold": 21.290231266897095,
+      "inside_local_95": true
+     },
+     "k_int1_mel.ea_kj_mol": {
+      "indices": [
+       8
+      ],
+      "gn_displacement": [
+       0.0004965906027791789
+      ],
+      "local_sd_scaled": [
+       52200.58901718682
+      ],
+      "delta_quadratic": 5.015686503500226e-16,
+      "threshold": 21.290231266897095,
+      "inside_local_95": true
+     },
+     "k_acr_dp.log10_k_ref": {
+      "indices": [
+       1
+      ],
+      "gn_displacement": [
+       -0.0007714192206642813
+      ],
+      "local_sd_scaled": [
+       0.2227704707888836
+      ],
+      "delta_quadratic": 6.645839715282618e-05,
+      "threshold": 21.290231266897095,
+      "inside_local_95": true
+     },
+     "k_acr_dp.ea_kj_mol": {
+      "indices": [
+       9
+      ],
+      "gn_displacement": [
+       0.08593202861290286
+      ],
+      "local_sd_scaled": [
+       23.56271450992614
+      ],
+      "delta_quadratic": 7.371293151706103e-05,
+      "threshold": 21.290231266897095,
+      "inside_local_95": true
+     },
+     "k_gln_glc.log10_k_ref": {
+      "indices": [
+       2
+      ],
+      "gn_displacement": [
+       -1.1644963303428195
+      ],
+      "local_sd_scaled": [
+       191215.7257961907
+      ],
+      "delta_quadratic": 2.055479893962476e-10,
+      "threshold": 21.290231266897095,
+      "inside_local_95": true
+     },
+     "k_lys_glc.log10_k_ref": {
+      "indices": [
+       3
+      ],
+      "gn_displacement": [
+       -0.08776234780508735
+      ],
+      "local_sd_scaled": [
+       12.064418283890411
+      ],
+      "delta_quadratic": 0.000293283675598713,
+      "threshold": 21.290231266897095,
+      "inside_local_95": true
+     },
+     "k_ala_glc.log10_k_ref": {
+      "indices": [
+       4
+      ],
+      "gn_displacement": [
+       5.8723102887066405
+      ],
+      "local_sd_scaled": [
+       72372.82281475919
+      ],
+      "delta_quadratic": 3.648809277343922e-08,
+      "threshold": 21.290231266897095,
+      "inside_local_95": true
+     },
+     "k_acr_gln.log10_k_ref": {
+      "indices": [
+       5
+      ],
+      "gn_displacement": [
+       0.0022649633436495667
+      ],
+      "local_sd_scaled": [
+       1.0508418763842189
+      ],
+      "delta_quadratic": 2.574730691857556e-05,
+      "threshold": 21.290231266897095,
+      "inside_local_95": true
+     },
+     "k_acr_lys.log10_k_ref": {
+      "indices": [
+       6
+      ],
+      "gn_displacement": [
+       -0.008405797252610224
+      ],
+      "local_sd_scaled": [
+       2.4930407926691966
+      ],
+      "delta_quadratic": 6.30061943855895e-05,
+      "threshold": 21.290231266897095,
+      "inside_local_95": true
+     },
+     "k_acr_ala.log10_k_ref": {
+      "indices": [
+       7
+      ],
+      "gn_displacement": [
+       -0.1750010903442405
+      ],
+      "local_sd_scaled": [
+       13435.255033966487
+      ],
+      "delta_quadratic": 9.403161094418578e-10,
+      "threshold": 21.290231266897095,
+      "inside_local_95": true
+     }
+    }
+   },
+   "verdict": {
+    "class": "REPRODUCES",
+    "reproduced": true,
+    "S_change": 0.11359807668348765,
+    "S_change_rel": 0.0010787807308855096,
+    "rel_tol": 0.01,
+    "joint_threshold": 109.04405036801539,
+    "joint_near_optimal": true,
+    "coordinates_outside_local_95": [],
+    "coordinates_outside_local_95_unadjusted": [],
+    "marginal_tests": {
+     "m": 10,
+     "quantile": 0.995,
+     "unadjusted_outside": [],
+     "bonferroni_outside": [],
+     "per_coordinate": {
+      "k_int1_mel.log10_k_ref": {
+       "delta": 2.5441619500789317e-07,
+       "threshold_unadjusted": 21.290231266897095,
+       "threshold_bonferroni": 43.66962588428573
+      },
+      "k_int1_mel.ea_kj_mol": {
+       "delta": 5.015686503500226e-16,
+       "threshold_unadjusted": 21.290231266897095,
+       "threshold_bonferroni": 43.66962588428573
+      },
+      "k_acr_dp.log10_k_ref": {
+       "delta": 6.645839715282618e-05,
+       "threshold_unadjusted": 21.290231266897095,
+       "threshold_bonferroni": 43.66962588428573
+      },
+      "k_acr_dp.ea_kj_mol": {
+       "delta": 7.371293151706103e-05,
+       "threshold_unadjusted": 21.290231266897095,
+       "threshold_bonferroni": 43.66962588428573
+      },
+      "k_gln_glc.log10_k_ref": {
+       "delta": 2.055479893962476e-10,
+       "threshold_unadjusted": 21.290231266897095,
+       "threshold_bonferroni": 43.66962588428573
+      },
+      "k_lys_glc.log10_k_ref": {
+       "delta": 0.000293283675598713,
+       "threshold_unadjusted": 21.290231266897095,
+       "threshold_bonferroni": 43.66962588428573
+      },
+      "k_ala_glc.log10_k_ref": {
+       "delta": 3.648809277343922e-08,
+       "threshold_unadjusted": 21.290231266897095,
+       "threshold_bonferroni": 43.66962588428573
+      },
+      "k_acr_gln.log10_k_ref": {
+       "delta": 2.574730691857556e-05,
+       "threshold_unadjusted": 21.290231266897095,
+       "threshold_bonferroni": 43.66962588428573
+      },
+      "k_acr_lys.log10_k_ref": {
+       "delta": 6.30061943855895e-05,
+       "threshold_unadjusted": 21.290231266897095,
+       "threshold_bonferroni": 43.66962588428573
+      },
+      "k_acr_ala.log10_k_ref": {
+       "delta": 9.403161094418578e-10,
+       "threshold_unadjusted": 21.290231266897095,
+       "threshold_bonferroni": 43.66962588428573
+      }
+     }
+    },
+    "trust_ratio": 0.6292983911170843,
+    "local_model_valid": true,
+    "material_reasons": []
+   },
+   "seconds": {
+    "one_evaluation": 2.4,
+    "jacobian": 11.7,
+    "step": 3.9,
+    "total": 18.1
+   },
+   "workers": 3
+  },
+  "B60": {
+   "fit": "B60",
+   "report": "results/validation/kinetic_core_b60_fit_report.json",
+   "generator": "scripts/generators/generate_kinetic_core_b60_fit.py residual_vector (quick, B60's verified quick setting)",
+   "objective": "B51's objective on B47's 52 corrected rows, B60's pH-node grid",
+   "cost_convention": "the report's final_cost is 0.5 r . r",
+   "rows_then_note": "the report's best member keeps residuals only (no targets or sigmas)",
+   "conditional": "the sulfur lane runs on the sulfur balance B0, falsified under S3 (PR #94, M1b part (i), amendment A2)",
+   "keys": [
+    "k_tdp_fur",
+    "k_nf_mft",
+    "k_nf_mp3p",
+    "k_mgo_mp",
+    "k_glc_ha",
+    "k_dimer_fft",
+    "k_fft_decay",
+    "k_fur_decay",
+    "k_pent_caramel",
+    "k_cys_thermal",
+    "k_thiolate_loss",
+    "ph_acid_yield_per_sink_event",
+    "ph_arp_secondary_ammonium_pKa",
+    "k_fur_fft",
+    "k_osone_decay",
+    "k_dimer_decay",
+    "k_ttca_deg",
+    "k_thiol_decay",
+    "Ea_decay_thiol_sink",
+    "Ea_decay_carbonyl_sink",
+    "k_dimer_mft",
+    "k_arp_dpo",
+    "k_arp_tdp"
+   ],
+   "kinds": [
+    "log10k",
+    "log10k",
+    "log10k",
+    "log10k",
+    "log10k",
+    "log10k",
+    "log10k",
+    "log10k",
+    "log10k",
+    "log10k",
+    "log10k",
+    "acid_yield",
+    "pka",
+    "log10k",
+    "log10k",
+    "log10k",
+    "log10k",
+    "log10k",
+    "Ea",
+    "Ea",
+    "log10k",
+    "log10k",
+    "log10k"
+   ],
+   "x_frozen": [
+    -3.4914200532300073,
+    -2.6655082493288935,
+    -3.792727630551772,
+    -3.9462282911882327,
+    -8.589075847746692,
+    -1.4602353390419023,
+    -0.8284899807292461,
+    -0.4171289631108395,
+    -2.2489393171971805,
+    -2.1237592866138133,
+    -1.5465988309427452,
+    7.50328133349608e-05,
+    7.0679258095802675,
+    -1.6429583696749852,
+    -1.161980743300057,
+    -9.139170990883931,
+    -2.2120207251222017,
+    -7.614397083874737,
+    101.25425582543835,
+    143.53807623187993,
+    0.49999999993490574,
+    -2.6336128580282927,
+    -1.9653087885007845
+   ],
+   "lower": [
+    -10.0,
+    -10.0,
+    -10.0,
+    -10.0,
+    -10.0,
+    -10.0,
+    -10.0,
+    -10.0,
+    -10.0,
+    -10.0,
+    -10.0,
+    0.0,
+    5.0,
+    -10.0,
+    -10.0,
+    -10.0,
+    -10.0,
+    -10.0,
+    7.0,
+    20.0,
+    -10.0,
+    -10.0,
+    -10.0
+   ],
+   "upper": [
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    1.0,
+    11.0,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    102.0,
+    250.0,
+    0.5,
+    0.5,
+    0.5
+   ],
+   "n_free": 23,
+   "S_recorded": 54.26392377067418,
+   "S_today": 54.26389676782849,
+   "n_rows_then": 52,
+   "n_rows_now": 52,
+   "chi2_red_then": 1.8711697851956615,
+   "chi2_red_today": 1.8711688540630513,
+   "rel_tol": 0.01,
+   "tol_source": "none stated in the record: 1 % (task default)",
+   "shipped_coordinates": [
+    "k_arp_dpo.log10_k_ref",
+    "k_arp_tdp.log10_k_ref",
+    "k_tdp_fur.log10_k_ref",
+    "k_fur_fft.log10_k_ref",
+    "k_nf_mft.log10_k_ref",
+    "k_nf_mp3p.log10_k_ref",
+    "k_mgo_mp.log10_k_ref",
+    "k_glc_ha.log10_k_ref",
+    "k_dimer_mft.log10_k_ref",
+    "k_dimer_fft.log10_k_ref",
+    "k_mft_decay.ea_kj_mol",
+    "k_fft_decay.log10_k_ref",
+    "k_fft_decay.ea_kj_mol",
+    "k_dimer_decay.log10_k_ref",
+    "k_nf_decay.ea_kj_mol",
+    "k_fur_decay.log10_k_ref",
+    "k_fur_decay.ea_kj_mol",
+    "k_osone_decay.log10_k_ref",
+    "k_osone_decay.ea_kj_mol",
+    "k_thiol_decay.log10_k_ref",
+    "k_thiol_decay.ea_kj_mol",
+    "k_pent_caramel.log10_k_ref",
+    "k_ttca_deg.log10_k_ref",
+    "k_cys_thermal.log10_k_ref",
+    "k_thiolate_loss.log10_k_ref",
+    "k_thiolate_loss.ea_kj_mol",
+    "b8.ph_drift.acid_yield_per_sink_event",
+    "b8.ph_drift.arp_secondary_ammonium_pKa"
+   ],
+   "shipped_coordinates_unmapped": [],
+   "row_changes": {
+    "counts": {
+     "unchanged": 52
+    },
+    "top": [
+     {
+      "id": "zhang_fig1_cys_dimer_over_MFT",
+      "r_then": -1.9905375356594583,
+      "r_now": -1.9905341485746249,
+      "delta_r2": -1.3484227522564396e-05,
+      "kind": "unchanged"
+     },
+     {
+      "id": "zhai_MFT_fold_120_over_100",
+      "r_then": 2.0306249200140916,
+      "r_now": 2.030623348541796,
+      "delta_r2": -6.382139138949583e-06,
+      "kind": "unchanged"
+     },
+     {
+      "id": "zhou_pH7_dimer_over_MFT",
+      "r_then": -2.7142471267537314,
+      "r_now": -2.714246144859947,
+      "delta_r2": -5.330203802778044e-06,
+      "kind": "unchanged"
+     },
+     {
+      "id": "kang_120C_MFT",
+      "r_then": 2.514217140416016,
+      "r_now": 2.5142161137863166,
+      "delta_r2": -5.162338920783327e-06,
+      "kind": "unchanged"
+     },
+     {
+      "id": "zhang_fig1_cys_MMFT_over_MFT",
+      "r_then": 1.021088291856697,
+      "r_now": 1.02108950533237,
+      "delta_r2": 2.478133076744271e-06,
+      "kind": "unchanged"
+     },
+     {
+      "id": "zhang_fig1_gcys_dimer_over_MFT",
+      "r_then": 0.3948542923873767,
+      "r_now": 0.39485685559461475,
+      "delta_r2": 2.0241933305076287e-06,
+      "kind": "unchanged"
+     },
+     {
+      "id": "kang_100C_MFT",
+      "r_then": 1.7527327956380372,
+      "r_now": 1.7527323583104482,
+      "delta_r2": -1.5330366243127003e-06,
+      "kind": "unchanged"
+     },
+     {
+      "id": "zhou_pH7_MFT_over_FFT",
+      "r_then": -0.8297427819546167,
+      "r_now": -0.8297436852068354,
+      "delta_r2": 1.4989348333660502e-06,
+      "kind": "unchanged"
+     }
+    ],
+    "all": [
+     {
+      "id": "zhang_fig1_cys_dimer_over_MFT",
+      "r_then": -1.9905375356594583,
+      "r_now": -1.9905341485746249,
+      "delta_r2": -1.3484227522564396e-05,
+      "kind": "unchanged"
+     },
+     {
+      "id": "zhai_MFT_fold_120_over_100",
+      "r_then": 2.0306249200140916,
+      "r_now": 2.030623348541796,
+      "delta_r2": -6.382139138949583e-06,
+      "kind": "unchanged"
+     },
+     {
+      "id": "zhou_pH7_dimer_over_MFT",
+      "r_then": -2.7142471267537314,
+      "r_now": -2.714246144859947,
+      "delta_r2": -5.330203802778044e-06,
+      "kind": "unchanged"
+     },
+     {
+      "id": "kang_120C_MFT",
+      "r_then": 2.514217140416016,
+      "r_now": 2.5142161137863166,
+      "delta_r2": -5.162338920783327e-06,
+      "kind": "unchanged"
+     },
+     {
+      "id": "zhang_fig1_cys_MMFT_over_MFT",
+      "r_then": 1.021088291856697,
+      "r_now": 1.02108950533237,
+      "delta_r2": 2.478133076744271e-06,
+      "kind": "unchanged"
+     },
+     {
+      "id": "zhang_fig1_gcys_dimer_over_MFT",
+      "r_then": 0.3948542923873767,
+      "r_now": 0.39485685559461475,
+      "delta_r2": 2.0241933305076287e-06,
+      "kind": "unchanged"
+     },
+     {
+      "id": "kang_100C_MFT",
+      "r_then": 1.7527327956380372,
+      "r_now": 1.7527323583104482,
+      "delta_r2": -1.5330366243127003e-06,
+      "kind": "unchanged"
+     },
+     {
+      "id": "zhou_pH7_MFT_over_FFT",
+      "r_then": -0.8297427819546167,
+      "r_now": -0.8297436852068354,
+      "delta_r2": 1.4989348333660502e-06,
+      "kind": "unchanged"
+     },
+     {
+      "id": "kang_100C_MFT_over_FFT",
+      "r_then": 1.555989406250979,
+      "r_now": 1.5559898594797954,
+      "delta_r2": 1.4104386796276458e-06,
+      "kind": "unchanged"
+     },
+     {
+      "id": "zhou_pH7_FFT",
+      "r_then": -1.52398140421208,
+      "r_now": -1.5239809755368876,
+      "delta_r2": -1.30658585995036e-06,
+      "kind": "unchanged"
+     },
+     {
+      "id": "zhai_FFT_fold_120_over_100",
+      "r_then": 0.7274438631717993,
+      "r_now": 0.72744459668426,
+      "delta_r2": 1.0671788140959038e-06,
+      "kind": "unchanged"
+     },
+     {
+      "id": "vanseeventer_cys_conversion",
+      "r_then": 0.6678392532204342,
+      "r_now": 0.6678384815919524,
+      "delta_r2": -1.0306469828136322e-06,
+      "kind": "unchanged"
+     },
+     {
+      "id": "kang_100C_FFT",
+      "r_then": 0.5862466297890715,
+      "r_now": 0.5862458525398756,
+      "delta_r2": -9.113188390585947e-07,
+      "kind": "unchanged"
+     },
+     {
+      "id": "kang_120C_FFT",
+      "r_then": 0.8590380758289814,
+      "r_now": 0.859037573646951,
+      "delta_r2": -8.627867180699411e-07,
+      "kind": "unchanged"
+     },
+     {
+      "id": "zhou_final_pH_from_pH7",
+      "r_then": 1.2126461703702809,
+      "r_now": 1.2126464032009245,
+      "delta_r2": 5.646824310368004e-07,
+      "kind": "unchanged"
+     },
+     {
+      "id": "zhou_pH7_FUR_arp_alone",
+      "r_then": -1.3842932401814259,
+      "r_now": -1.3842933598354312,
+      "delta_r2": 3.312724758952612e-07,
+      "kind": "unchanged"
+     },
+     {
+      "id": "kang_120C_FUR",
+      "r_then": -0.19163347429928068,
+      "r_now": -0.19163288926094266,
+      "delta_r2": -2.2422551635564725e-07,
+      "kind": "unchanged"
+     },
+     {
+      "id": "zhou_pH7_ACTZ",
+      "r_then": -0.3722796041391448,
+      "r_now": -0.3722794026863407,
+      "delta_r2": -1.499934997317709e-07,
+      "kind": "unchanged"
+     },
+     {
+      "id": "zhou_pH7_MFT",
+      "r_then": -1.9387846480428599,
+      "r_now": -1.9387846709937764,
+      "delta_r2": 8.899376968685146e-08,
+      "kind": "unchanged"
+     },
+     {
+      "id": "kang_100C_FUR",
+      "r_then": 1.3949341075364678,
+      "r_now": 1.3949340864720383,
+      "delta_r2": -5.8766981947400154e-08,
+      "kind": "unchanged"
+     },
+     {
+      "id": "zhou_final_pH_from_pH8",
+      "r_then": 0.03972224298864546,
+      "r_now": 0.03972205672413054,
+      "delta_r2": -1.4797653949405465e-08,
+      "kind": "unchanged"
+     },
+     {
+      "id": "fed_c2c3_MFT_pH7",
+      "r_then": -0.7817101072688156,
+      "r_now": -0.7817100997257119,
+      "delta_r2": -1.1793040766150398e-08,
+      "kind": "unchanged"
+     },
+     {
+      "id": "feng_ARP_conversion_120C",
+      "r_then": 0.06215271863318659,
+      "r_now": 0.06215269409682811,
+      "delta_r2": -3.050002167492849e-09,
+      "kind": "unchanged"
+     },
+     {
+      "id": "cerny_ternary_thiamine_share",
+      "r_then": -0.34413635601325365,
+      "r_now": -0.3441363585488221,
+      "delta_r2": 1.7451625561326622e-09,
+      "kind": "unchanged"
+     },
+     {
+      "id": "zhou_final_pH_from_pH6",
+      "r_then": -0.11688679601997176,
+      "r_now": -0.11688678856939116,
+      "delta_r2": -1.7417489325821656e-09,
+      "kind": "unchanged"
+     },
+     {
+      "id": "hofmann_ribose_NF_insitu",
+      "r_then": 0.6890928146111095,
+      "r_now": 0.689092814370281,
+      "delta_r2": -3.3190633574875505e-10,
+      "kind": "unchanged"
+     },
+     {
+      "id": "hofmann_ribose_FUR_insitu",
+      "r_then": 0.6212283761014815,
+      "r_now": 0.621228375871636,
+      "delta_r2": -2.85573065195166e-10,
+      "kind": "unchanged"
+     },
+     {
+      "id": "whitfield_nf_cys_MFT",
+      "r_then": -0.7344382651408141,
+      "r_now": -0.7344382650191756,
+      "delta_r2": -1.786718550889077e-10,
+      "kind": "unchanged"
+     },
+     {
+      "id": "fed_ribose_h2s_FFT",
+      "r_then": -0.1801628378822102,
+      "r_now": -0.18016283780874934,
+      "delta_r2": -2.6469833269704424e-11,
+      "kind": "unchanged"
+     },
+     {
+      "id": "feng_ARP_conversion_100C",
+      "r_then": 0.1933125018322185,
+      "r_now": 0.19331250189726795,
+      "delta_r2": 2.5149750337849497e-11,
+      "kind": "unchanged"
+     },
+     {
+      "id": "fed_nf_h2s_MFT",
+      "r_then": 0.6353167002674069,
+      "r_now": 0.6353167002847053,
+      "delta_r2": 2.1979917885772693e-11,
+      "kind": "unchanged"
+     },
+     {
+      "id": "whitfield_nf_h2s_MFT",
+      "r_then": -0.8132724932227606,
+      "r_now": -0.8132724932340503,
+      "delta_r2": 1.836308882730009e-11,
+      "kind": "unchanged"
+     },
+     {
+      "id": "whitfield_mercaptoketone_over_MFT",
+      "r_then": -0.05212226707415642,
+      "r_now": -0.052122267014004055,
+      "delta_r2": -6.270555255594168e-12,
+      "kind": "unchanged"
+     },
+     {
+      "id": "fed_ribose_h2s_MFT",
+      "r_then": -0.8270584527871323,
+      "r_now": -0.8270584527904895,
+      "delta_r2": 5.5532245468725705e-12,
+      "kind": "unchanged"
+     },
+     {
+      "id": "fed_thiamine_MFT",
+      "r_then": 0.0974440067506276,
+      "r_now": 0.09744400672318639,
+      "delta_r2": -5.347965126301091e-12,
+      "kind": "unchanged"
+     },
+     {
+      "id": "fed_c2c3_MFT",
+      "r_then": -0.3446456426971634,
+      "r_now": -0.34464564269307624,
+      "delta_r2": -2.817246436137566e-12,
+      "kind": "unchanged"
+     },
+     {
+      "id": "kumazawa_FFT_retention_pH6_0",
+      "r_then": -1.1947875803106496,
+      "r_now": -1.1947875803096946,
+      "delta_r2": -2.2821744494194718e-12,
+      "kind": "unchanged"
+     },
+     {
+      "id": "kumazawa_FFT_retention_pH5_4",
+      "r_then": -0.8328745770813452,
+      "r_now": -0.8328745770823018,
+      "delta_r2": 1.5936141295469497e-12,
+      "kind": "unchanged"
+     },
+     {
+      "id": "fed_mgo_h2s_1to2_MP",
+      "r_then": -0.06381999413629659,
+      "r_now": -0.06381999412908533,
+      "delta_r2": -9.204451437150318e-13,
+      "kind": "unchanged"
+     },
+     {
+      "id": "fed_mgo_h2s_1to1_MP",
+      "r_then": 0.06319059788877594,
+      "r_now": 0.06319059789551214,
+      "delta_r2": 8.513285562616879e-13,
+      "kind": "unchanged"
+     },
+     {
+      "id": "fed_nf_cys_MFT",
+      "r_then": 0.13696382887722292,
+      "r_now": 0.13696382887941627,
+      "delta_r2": 6.008214759045671e-13,
+      "kind": "unchanged"
+     },
+     {
+      "id": "kumazawa_FFT_retention_pH3_0",
+      "r_then": -0.5391725510798837,
+      "r_now": -0.5391725510803078,
+      "delta_r2": 4.573563749943332e-13,
+      "kind": "unchanged"
+     },
+     {
+      "id": "kumazawa_FFT_retention_pH4_0",
+      "r_then": -0.4861975458240325,
+      "r_now": -0.4861975458244903,
+      "delta_r2": 4.4517167729907214e-13,
+      "kind": "unchanged"
+     },
+     {
+      "id": "fed_c2c3_MFT_pH3",
+      "r_then": 1.8648999507160189,
+      "r_now": 1.8648999507159192,
+      "delta_r2": -3.717026686445024e-13,
+      "kind": "unchanged"
+     },
+     {
+      "id": "kumazawa_FFT_retention_pH5_0",
+      "r_then": -0.5828026774313677,
+      "r_now": -0.5828026774315285,
+      "delta_r2": 1.8735013540549517e-13,
+      "kind": "unchanged"
+     },
+     {
+      "id": "kumazawa_FFT_retention_pH6_4",
+      "r_then": 0.20893957747927816,
+      "r_now": 0.2089395774794345,
+      "delta_r2": 6.533662499919046e-14,
+      "kind": "unchanged"
+     },
+     {
+      "id": "fed_tdp_h2s_FFT",
+      "r_then": -0.40270615217434946,
+      "r_now": -0.40270615217431793,
+      "delta_r2": -2.5396351688300456e-14,
+      "kind": "unchanged"
+     },
+     {
+      "id": "fed_furfural_h2s_FFT",
+      "r_then": 0.528845828330797,
+      "r_now": 0.5288458283307902,
+      "delta_r2": -7.16093850883226e-15,
+      "kind": "unchanged"
+     },
+     {
+      "id": "vanseeventer_ribose_conversion",
+      "r_then": 0.41646245536051735,
+      "r_now": 0.41646245536051735,
+      "delta_r2": 0.0,
+      "kind": "unchanged"
+     },
+     {
+      "id": "kang_100C_cys_conversion",
+      "r_then": -0.31361069201809827,
+      "r_now": -0.31361069201809827,
+      "delta_r2": 0.0,
+      "kind": "unchanged"
+     },
+     {
+      "id": "kang_120C_cys_conversion",
+      "r_then": -0.3389626384272789,
+      "r_now": -0.3389626384272789,
+      "delta_r2": 0.0,
+      "kind": "unchanged"
+     },
+     {
+      "id": "kang_free_cys_yield_ceiling",
+      "r_then": 0.0,
+      "r_now": 0.0,
+      "delta_r2": 0.0,
+      "kind": "unchanged"
+     }
+    ]
+   },
+   "groups": null,
+   "jacobian_steps": [
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.01,
+    0.1,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    -2.0,
+    2.0,
+    -0.05,
+    0.05,
+    0.05
+   ],
+   "near_optimality": {
+    "S_frozen": 54.26389676782849,
+    "gradient_norm": 33.18692482592857,
+    "gradient": [
+     -2.4721319706125557,
+     2.4997464197427877,
+     0.15025625766176878,
+     0.0005144783405693111,
+     0.0,
+     0.13171596730865745,
+     -0.13405308354328607,
+     -2.335498664314939,
+     -0.6901108064853568,
+     -1.281252079597903,
+     2.3388577087707776,
+     24.327480725792196,
+     1.9120086268724183,
+     0.015130048826666501,
+     -1.076635472073832,
+     3.9977571922130625e-06,
+     1.363411707319367,
+     -1.0997127266403435e-05,
+     -0.19462261143338563,
+     0.005424810666836588,
+     -21.765997947555203,
+     -0.048631474782022115,
+     -1.9005120779673401
+    ],
+    "gn_decrement_unbounded": 26.611015770752157,
+    "gn_step": [
+     0.07258921084526347,
+     -0.037958683478109836,
+     -0.05981797442422572,
+     -1.9380569075576068e-05,
+     7.044365091246618e-14,
+     -8.539764660958097,
+     -0.0021167022473997208,
+     0.6005701027041429,
+     -0.10492119306801263,
+     0.11107783066830568,
+     0.0482411480207541,
+     -7.50328133349608e-05,
+     -0.2422257586580669,
+     -8.357041630325014,
+     -0.22691391384152612,
+     -0.8608290091160704,
+     -0.7234122405233453,
+     8.114397083874737,
+     0.7457441745616507,
+     5.772058706500953,
+     6.509426331291479e-11,
+     0.37284555254574475,
+     0.5285884338882163
+    ],
+    "gn_predicted_decrease_bounded": 3.273109929552362,
+    "step_evaluations": [
+     {
+      "scale": 1.0,
+      "S": 1488.2968275053577
+     },
+     {
+      "scale": 0.5,
+      "S": 54.391426349038845
+     },
+     {
+      "scale": 0.25,
+      "S": 53.72400570503233
+     }
+    ],
+    "one_step_decrease": 0.5398910627961584,
+    "one_step_scale": 0.25,
+    "s2": 1.8711697851956615,
+    "coordinates": {
+     "k_arp_dpo.log10_k_ref": {
+      "indices": [
+       21
+      ],
+      "gn_displacement": [
+       0.37284555254574475
+      ],
+      "local_sd_scaled": [
+       4.114954034620664
+      ],
+      "delta_quadratic": 0.01536176628254292,
+      "threshold": 7.188021676356197,
+      "inside_local_95": true
+     },
+     "k_arp_tdp.log10_k_ref": {
+      "indices": [
+       22
+      ],
+      "gn_displacement": [
+       0.5285884338882163
+      ],
+      "local_sd_scaled": [
+       0.9512530487777695
+      ],
+      "delta_quadratic": 0.5777718583551262,
+      "threshold": 7.188021676356197,
+      "inside_local_95": true
+     },
+     "k_tdp_fur.log10_k_ref": {
+      "indices": [
+       0
+      ],
+      "gn_displacement": [
+       0.07258921084526347
+      ],
+      "local_sd_scaled": [
+       0.379664778036906
+      ],
+      "delta_quadratic": 0.06840009865027684,
+      "threshold": 7.188021676356197,
+      "inside_local_95": true
+     },
+     "k_fur_fft.log10_k_ref": {
+      "indices": [
+       13
+      ],
+      "gn_displacement": [
+       -8.357041630325014
+      ],
+      "local_sd_scaled": [
+       15.179269138119166
+      ],
+      "delta_quadratic": 0.5671743794469175,
+      "threshold": 7.188021676356197,
+      "inside_local_95": true
+     },
+     "k_nf_mft.log10_k_ref": {
+      "indices": [
+       1
+      ],
+      "gn_displacement": [
+       -0.037958683478109836
+      ],
+      "local_sd_scaled": [
+       0.27119914483864543
+      ],
+      "delta_quadratic": 0.03665716271591575,
+      "threshold": 7.188021676356197,
+      "inside_local_95": true
+     },
+     "k_nf_mp3p.log10_k_ref": {
+      "indices": [
+       2
+      ],
+      "gn_displacement": [
+       -0.05981797442422572
+      ],
+      "local_sd_scaled": [
+       0.5769870808580138
+      ],
+      "delta_quadratic": 0.020111498146999567,
+      "threshold": 7.188021676356197,
+      "inside_local_95": true
+     },
+     "k_mgo_mp.log10_k_ref": {
+      "indices": [
+       3
+      ],
+      "gn_displacement": [
+       -1.9380569075576068e-05
+      ],
+      "local_sd_scaled": [
+       0.39940580199949693
+      ],
+      "delta_quadratic": 4.405726238762377e-09,
+      "threshold": 7.188021676356197,
+      "inside_local_95": true
+     },
+     "k_glc_ha.log10_k_ref": {
+      "indices": [
+       4
+      ],
+      "gn_displacement": [
+       7.044365091246618e-14
+      ],
+      "local_sd_scaled": [
+       4.356203941986763e-06
+      ],
+      "delta_quadratic": 4.893059548786971e-16,
+      "threshold": 7.188021676356197,
+      "inside_local_95": true
+     },
+     "k_dimer_mft.log10_k_ref": {
+      "indices": [
+       20
+      ],
+      "gn_displacement": [
+       6.509426331291479e-11
+      ],
+      "local_sd_scaled": [
+       0.40680437750892207
+      ],
+      "delta_quadratic": 4.791013488621675e-20,
+      "threshold": 7.188021676356197,
+      "inside_local_95": true
+     },
+     "k_dimer_fft.log10_k_ref": {
+      "indices": [
+       5
+      ],
+      "gn_displacement": [
+       -8.539764660958097
+      ],
+      "local_sd_scaled": [
+       64.7687408720004
+      ],
+      "delta_quadratic": 0.0325292531731947,
+      "threshold": 7.188021676356197,
+      "inside_local_95": true
+     },
+     "k_mft_decay.ea_kj_mol": {
+      "indices": [
+       18
+      ],
+      "gn_displacement": [
+       0.7457441745616507
+      ],
+      "local_sd_scaled": [
+       32.7325828738655
+      ],
+      "delta_quadratic": 0.0009712530215106971,
+      "threshold": 7.188021676356197,
+      "inside_local_95": true
+     },
+     "k_fft_decay.log10_k_ref": {
+      "indices": [
+       6
+      ],
+      "gn_displacement": [
+       -0.0021167022473997208
+      ],
+      "local_sd_scaled": [
+       0.298849308022851
+      ],
+      "delta_quadratic": 9.387030495256572e-05,
+      "threshold": 7.188021676356197,
+      "inside_local_95": true
+     },
+     "k_fft_decay.ea_kj_mol": {
+      "indices": [
+       18
+      ],
+      "gn_displacement": [
+       0.7457441745616507
+      ],
+      "local_sd_scaled": [
+       32.7325828738655
+      ],
+      "delta_quadratic": 0.0009712530215106971,
+      "threshold": 7.188021676356197,
+      "inside_local_95": true
+     },
+     "k_dimer_decay.log10_k_ref": {
+      "indices": [
+       15
+      ],
+      "gn_displacement": [
+       -0.8608290091160704
+      ],
+      "local_sd_scaled": [
+       841.3850537343795
+      ],
+      "delta_quadratic": 1.958652529856844e-06,
+      "threshold": 7.188021676356197,
+      "inside_local_95": true
+     },
+     "k_nf_decay.ea_kj_mol": {
+      "indices": [
+       19
+      ],
+      "gn_displacement": [
+       5.772058706500953
+      ],
+      "local_sd_scaled": [
+       141.79567949171383
+      ],
+      "delta_quadratic": 0.003100620963334982,
+      "threshold": 7.188021676356197,
+      "inside_local_95": true
+     },
+     "k_fur_decay.log10_k_ref": {
+      "indices": [
+       7
+      ],
+      "gn_displacement": [
+       0.6005701027041429
+      ],
+      "local_sd_scaled": [
+       0.8912818463228698
+      ],
+      "delta_quadratic": 0.849592150845834,
+      "threshold": 7.188021676356197,
+      "inside_local_95": true
+     },
+     "k_fur_decay.ea_kj_mol": {
+      "indices": [
+       19
+      ],
+      "gn_displacement": [
+       5.772058706500953
+      ],
+      "local_sd_scaled": [
+       141.79567949171383
+      ],
+      "delta_quadratic": 0.003100620963334982,
+      "threshold": 7.188021676356197,
+      "inside_local_95": true
+     },
+     "k_osone_decay.log10_k_ref": {
+      "indices": [
+       14
+      ],
+      "gn_displacement": [
+       -0.22691391384152612
+      ],
+      "local_sd_scaled": [
+       0.5723583954121695
+      ],
+      "delta_quadratic": 0.29410291863122623,
+      "threshold": 7.188021676356197,
+      "inside_local_95": true
+     },
+     "k_osone_decay.ea_kj_mol": {
+      "indices": [
+       19
+      ],
+      "gn_displacement": [
+       5.772058706500953
+      ],
+      "local_sd_scaled": [
+       141.79567949171383
+      ],
+      "delta_quadratic": 0.003100620963334982,
+      "threshold": 7.188021676356197,
+      "inside_local_95": true
+     },
+     "k_thiol_decay.log10_k_ref": {
+      "indices": [
+       17
+      ],
+      "gn_displacement": [
+       8.114397083874737
+      ],
+      "local_sd_scaled": [
+       48449.395888005005
+      ],
+      "delta_quadratic": 5.2486664734921325e-08,
+      "threshold": 7.188021676356197,
+      "inside_local_95": true
+     },
+     "k_thiol_decay.ea_kj_mol": {
+      "indices": [
+       18
+      ],
+      "gn_displacement": [
+       0.7457441745616507
+      ],
+      "local_sd_scaled": [
+       32.7325828738655
+      ],
+      "delta_quadratic": 0.0009712530215106971,
+      "threshold": 7.188021676356197,
+      "inside_local_95": true
+     },
+     "k_pent_caramel.log10_k_ref": {
+      "indices": [
+       8
+      ],
+      "gn_displacement": [
+       -0.10492119306801263
+      ],
+      "local_sd_scaled": [
+       0.839783607804086
+      ],
+      "delta_quadratic": 0.02920820381451314,
+      "threshold": 7.188021676356197,
+      "inside_local_95": true
+     },
+     "k_ttca_deg.log10_k_ref": {
+      "indices": [
+       16
+      ],
+      "gn_displacement": [
+       -0.7234122405233453
+      ],
+      "local_sd_scaled": [
+       1.8243424223060265
+      ],
+      "delta_quadratic": 0.2942199977465717,
+      "threshold": 7.188021676356197,
+      "inside_local_95": true
+     },
+     "k_cys_thermal.log10_k_ref": {
+      "indices": [
+       9
+      ],
+      "gn_displacement": [
+       0.11107783066830568
+      ],
+      "local_sd_scaled": [
+       0.35178553910402127
+      ],
+      "delta_quadratic": 0.18655719756411707,
+      "threshold": 7.188021676356197,
+      "inside_local_95": true
+     },
+     "k_thiolate_loss.log10_k_ref": {
+      "indices": [
+       10
+      ],
+      "gn_displacement": [
+       0.0482411480207541
+      ],
+      "local_sd_scaled": [
+       0.4496332118833072
+      ],
+      "delta_quadratic": 0.021539305673932488,
+      "threshold": 7.188021676356197,
+      "inside_local_95": true
+     },
+     "k_thiolate_loss.ea_kj_mol": {
+      "indices": [
+       18
+      ],
+      "gn_displacement": [
+       0.7457441745616507
+      ],
+      "local_sd_scaled": [
+       32.7325828738655
+      ],
+      "delta_quadratic": 0.0009712530215106971,
+      "threshold": 7.188021676356197,
+      "inside_local_95": true
+     },
+     "b8.ph_drift.acid_yield_per_sink_event": {
+      "indices": [
+       11
+      ],
+      "gn_displacement": [
+       -7.50328133349608e-05
+      ],
+      "local_sd_scaled": [
+       0.5398609156728245
+      ],
+      "delta_quadratic": 3.614530411624974e-08,
+      "threshold": 7.188021676356197,
+      "inside_local_95": true
+     },
+     "b8.ph_drift.arp_secondary_ammonium_pKa": {
+      "indices": [
+       12
+      ],
+      "gn_displacement": [
+       -0.2422257586580669
+      ],
+      "local_sd_scaled": [
+       0.5942448014770175
+      ],
+      "delta_quadratic": 0.3109016760893352,
+      "threshold": 7.188021676356197,
+      "inside_local_95": true
+     }
+    }
+   },
+   "verdict": {
+    "class": "REPRODUCES",
+    "reproduced": true,
+    "S_change": -2.700284569101541e-05,
+    "S_change_rel": -4.976205886830568e-07,
+    "rel_tol": 0.01,
+    "joint_threshold": 65.81364746722416,
+    "joint_near_optimal": true,
+    "coordinates_outside_local_95": [],
+    "coordinates_outside_local_95_unadjusted": [],
+    "marginal_tests": {
+     "m": 28,
+     "quantile": 0.9982142857142857,
+     "unadjusted_outside": [],
+     "bonferroni_outside": [],
+     "per_coordinate": {
+      "k_arp_dpo.log10_k_ref": {
+       "delta": 0.01536176628254292,
+       "threshold_unadjusted": 7.188021676356197,
+       "threshold_bonferroni": 18.25834717018736
+      },
+      "k_arp_tdp.log10_k_ref": {
+       "delta": 0.5777718583551262,
+       "threshold_unadjusted": 7.188021676356197,
+       "threshold_bonferroni": 18.25834717018736
+      },
+      "k_tdp_fur.log10_k_ref": {
+       "delta": 0.06840009865027684,
+       "threshold_unadjusted": 7.188021676356197,
+       "threshold_bonferroni": 18.25834717018736
+      },
+      "k_fur_fft.log10_k_ref": {
+       "delta": 0.5671743794469175,
+       "threshold_unadjusted": 7.188021676356197,
+       "threshold_bonferroni": 18.25834717018736
+      },
+      "k_nf_mft.log10_k_ref": {
+       "delta": 0.03665716271591575,
+       "threshold_unadjusted": 7.188021676356197,
+       "threshold_bonferroni": 18.25834717018736
+      },
+      "k_nf_mp3p.log10_k_ref": {
+       "delta": 0.020111498146999567,
+       "threshold_unadjusted": 7.188021676356197,
+       "threshold_bonferroni": 18.25834717018736
+      },
+      "k_mgo_mp.log10_k_ref": {
+       "delta": 4.405726238762377e-09,
+       "threshold_unadjusted": 7.188021676356197,
+       "threshold_bonferroni": 18.25834717018736
+      },
+      "k_glc_ha.log10_k_ref": {
+       "delta": 4.893059548786971e-16,
+       "threshold_unadjusted": 7.188021676356197,
+       "threshold_bonferroni": 18.25834717018736
+      },
+      "k_dimer_mft.log10_k_ref": {
+       "delta": 4.791013488621675e-20,
+       "threshold_unadjusted": 7.188021676356197,
+       "threshold_bonferroni": 18.25834717018736
+      },
+      "k_dimer_fft.log10_k_ref": {
+       "delta": 0.0325292531731947,
+       "threshold_unadjusted": 7.188021676356197,
+       "threshold_bonferroni": 18.25834717018736
+      },
+      "k_mft_decay.ea_kj_mol": {
+       "delta": 0.0009712530215106971,
+       "threshold_unadjusted": 7.188021676356197,
+       "threshold_bonferroni": 18.25834717018736
+      },
+      "k_fft_decay.log10_k_ref": {
+       "delta": 9.387030495256572e-05,
+       "threshold_unadjusted": 7.188021676356197,
+       "threshold_bonferroni": 18.25834717018736
+      },
+      "k_fft_decay.ea_kj_mol": {
+       "delta": 0.0009712530215106971,
+       "threshold_unadjusted": 7.188021676356197,
+       "threshold_bonferroni": 18.25834717018736
+      },
+      "k_dimer_decay.log10_k_ref": {
+       "delta": 1.958652529856844e-06,
+       "threshold_unadjusted": 7.188021676356197,
+       "threshold_bonferroni": 18.25834717018736
+      },
+      "k_nf_decay.ea_kj_mol": {
+       "delta": 0.003100620963334982,
+       "threshold_unadjusted": 7.188021676356197,
+       "threshold_bonferroni": 18.25834717018736
+      },
+      "k_fur_decay.log10_k_ref": {
+       "delta": 0.849592150845834,
+       "threshold_unadjusted": 7.188021676356197,
+       "threshold_bonferroni": 18.25834717018736
+      },
+      "k_fur_decay.ea_kj_mol": {
+       "delta": 0.003100620963334982,
+       "threshold_unadjusted": 7.188021676356197,
+       "threshold_bonferroni": 18.25834717018736
+      },
+      "k_osone_decay.log10_k_ref": {
+       "delta": 0.29410291863122623,
+       "threshold_unadjusted": 7.188021676356197,
+       "threshold_bonferroni": 18.25834717018736
+      },
+      "k_osone_decay.ea_kj_mol": {
+       "delta": 0.003100620963334982,
+       "threshold_unadjusted": 7.188021676356197,
+       "threshold_bonferroni": 18.25834717018736
+      },
+      "k_thiol_decay.log10_k_ref": {
+       "delta": 5.2486664734921325e-08,
+       "threshold_unadjusted": 7.188021676356197,
+       "threshold_bonferroni": 18.25834717018736
+      },
+      "k_thiol_decay.ea_kj_mol": {
+       "delta": 0.0009712530215106971,
+       "threshold_unadjusted": 7.188021676356197,
+       "threshold_bonferroni": 18.25834717018736
+      },
+      "k_pent_caramel.log10_k_ref": {
+       "delta": 0.02920820381451314,
+       "threshold_unadjusted": 7.188021676356197,
+       "threshold_bonferroni": 18.25834717018736
+      },
+      "k_ttca_deg.log10_k_ref": {
+       "delta": 0.2942199977465717,
+       "threshold_unadjusted": 7.188021676356197,
+       "threshold_bonferroni": 18.25834717018736
+      },
+      "k_cys_thermal.log10_k_ref": {
+       "delta": 0.18655719756411707,
+       "threshold_unadjusted": 7.188021676356197,
+       "threshold_bonferroni": 18.25834717018736
+      },
+      "k_thiolate_loss.log10_k_ref": {
+       "delta": 0.021539305673932488,
+       "threshold_unadjusted": 7.188021676356197,
+       "threshold_bonferroni": 18.25834717018736
+      },
+      "k_thiolate_loss.ea_kj_mol": {
+       "delta": 0.0009712530215106971,
+       "threshold_unadjusted": 7.188021676356197,
+       "threshold_bonferroni": 18.25834717018736
+      },
+      "b8.ph_drift.acid_yield_per_sink_event": {
+       "delta": 3.614530411624974e-08,
+       "threshold_unadjusted": 7.188021676356197,
+       "threshold_bonferroni": 18.25834717018736
+      },
+      "b8.ph_drift.arp_secondary_ammonium_pKa": {
+       "delta": 0.3109016760893352,
+       "threshold_unadjusted": 7.188021676356197,
+       "threshold_bonferroni": 18.25834717018736
+      }
+     }
+    },
+    "trust_ratio": 0.45498048219401777,
+    "local_model_valid": true,
+    "material_reasons": []
+   },
+   "seconds": {
+    "one_evaluation": 34.89,
+    "jacobian": 414.1,
+    "step": 109.4,
+    "total": 558.3
+   },
+   "workers": 3
+  },
+  "B2.3": {
+   "fit": "B2.3",
+   "report": "results/validation/kinetic_core_b2_3_fit_report.json",
+   "generator": "scripts/generators/generate_kinetic_core_b2_3_fit.py residuals (quick=True, the setting the optimiser ran at), loaded alone (no later wave installed)",
+   "objective": "B2.2's 58 sulfur-lane fit rows after the charge-conservation fix, log10 residuals (pH endpoints in pH units, one-sided ceilings)",
+   "cost_convention": "the report's final_cost is 0.5 r . r",
+   "shipped_via": "B60 carries these 25 coordinates frozen at B2.3's values (B60 free_set.frozen_keys); the shipped vector's other coordinates are B60's",
+   "keys": [
+    "k_pent_dpo",
+    "k_pent_tdp",
+    "k_dpo_c2c3",
+    "k_arp_dpo",
+    "k_arp_tdp",
+    "k_dpo_nf",
+    "k_dpo_ptr",
+    "k_dpo_ddp",
+    "k_tdp_fur",
+    "k_ddp_mft",
+    "k_fur_fft",
+    "k_nf_mft",
+    "k_nf_mp3p",
+    "k_mgo_mp",
+    "k_ha_mp_mft",
+    "k_glc_ha",
+    "k_thi_hmp",
+    "k_thi_mesh",
+    "k_hmp_mft",
+    "k_hmp_mp2p",
+    "k_cys_actz",
+    "k_dimer_mft",
+    "k_dimer_fft",
+    "k_mmft",
+    "k_mft_decay",
+    "k_fft_decay",
+    "k_dimer_decay",
+    "k_nf_decay",
+    "k_fur_decay",
+    "k_h2s_loss",
+    "k_osone_decay",
+    "k_thiol_decay",
+    "k_pent_caramel",
+    "k_pent_thermal",
+    "k_glc_fur",
+    "k_arp_tdp_th",
+    "k_arp_dpo_th",
+    "k_ddp_mft_hs",
+    "k_fur_fft_hs",
+    "k_ttca_cys",
+    "k_ttca_deg",
+    "k_cys_thermal",
+    "k_thiolate_loss",
+    "Ea_lumped_formation",
+    "Ea_decay_thiol_sink",
+    "Ea_decay_carbonyl_sink",
+    "ph_acid_yield_per_sink_event",
+    "ph_arp_secondary_ammonium_pKa"
+   ],
+   "kinds": [
+    "log10k",
+    "log10k",
+    "log10k",
+    "log10k",
+    "log10k",
+    "log10k",
+    "log10k",
+    "log10k",
+    "log10k",
+    "log10k",
+    "log10k",
+    "log10k",
+    "log10k",
+    "log10k",
+    "log10k",
+    "log10k",
+    "log10k",
+    "log10k",
+    "log10k",
+    "log10k",
+    "log10k",
+    "log10k",
+    "log10k",
+    "log10k",
+    "log10k",
+    "log10k",
+    "log10k",
+    "log10k",
+    "log10k",
+    "log10k",
+    "log10k",
+    "log10k",
+    "log10k",
+    "log10k",
+    "log10k",
+    "log10k",
+    "log10k",
+    "log10k",
+    "log10k",
+    "log10k",
+    "log10k",
+    "log10k",
+    "log10k",
+    "Ea",
+    "Ea",
+    "Ea",
+    "acid_yield",
+    "pka"
+   ],
+   "x_frozen": [
+    -0.5446463072676107,
+    -0.5022095511358302,
+    -3.0155236916597783,
+    -6.365842545633689,
+    -1.9026714740978425,
+    0.43445392481376577,
+    -4.347247153178998,
+    0.04172302756946337,
+    -3.413717041122994,
+    -6.540581367427349,
+    -0.576110836273603,
+    -2.3044002799931103,
+    -2.831745414168433,
+    -3.9333577110116678,
+    -3.8696667868173487,
+    -0.7096333150593601,
+    -2.5882946400737175,
+    -3.273029275775544,
+    -2.6086953372771946,
+    -3.4372110320564206,
+    -2.9736755938616524,
+    0.49999999999999983,
+    -0.007831112465485762,
+    -1.9837700999787538,
+    0.13411252144508923,
+    -0.753792856071525,
+    -0.3043189303307331,
+    -2.181605124250818,
+    0.49999999713329446,
+    -1.3506222526942775,
+    -8.696040975647769,
+    -5.975827484967645,
+    -2.362780519174183,
+    -3.437313963933767,
+    -4.922868997756941,
+    -4.353715425211875,
+    -1.2902512237780432,
+    -7.69250097808771,
+    -0.009550422129148002,
+    -0.5786517733288119,
+    -6.361281494589123,
+    -2.0328270347369926,
+    -1.0508506768527623,
+    64.0822869313293,
+    216.09556119753833,
+    249.91638817546405,
+    0.9675411608819079,
+    7.495499662405824
+   ],
+   "lower": [
+    -10.0,
+    -10.0,
+    -10.0,
+    -10.0,
+    -10.0,
+    -10.0,
+    -10.0,
+    -10.0,
+    -10.0,
+    -10.0,
+    -10.0,
+    -10.0,
+    -10.0,
+    -10.0,
+    -10.0,
+    -10.0,
+    -10.0,
+    -10.0,
+    -10.0,
+    -10.0,
+    -10.0,
+    -10.0,
+    -10.0,
+    -10.0,
+    -10.0,
+    -10.0,
+    -10.0,
+    -10.0,
+    -10.0,
+    -10.0,
+    -10.0,
+    -10.0,
+    -10.0,
+    -10.0,
+    -10.0,
+    -10.0,
+    -10.0,
+    -10.0,
+    -10.0,
+    -10.0,
+    -10.0,
+    -10.0,
+    -10.0,
+    20.0,
+    20.0,
+    20.0,
+    0.0,
+    5.0
+   ],
+   "upper": [
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    250.0,
+    250.0,
+    250.0,
+    1.0,
+    11.0
+   ],
+   "n_free": 48,
+   "S_recorded": 16.350826817018394,
+   "S_today": 112.89405531857116,
+   "n_rows_then": 58,
+   "n_rows_now": 58,
+   "chi2_red_then": 1.6350826817018393,
+   "chi2_red_today": 11.289405531857117,
+   "rel_tol": 0.01,
+   "tol_source": "none stated in the record: 1 % (task default)",
+   "shipped_coordinates": [
+    "k_pent_dpo.log10_k_ref",
+    "k_pent_dpo.ea_kj_mol",
+    "k_pent_tdp.log10_k_ref",
+    "k_pent_tdp.ea_kj_mol",
+    "k_dpo_c2c3.log10_k_ref",
+    "k_dpo_c2c3.ea_kj_mol",
+    "k_dpo_nf.log10_k_ref",
+    "k_dpo_nf.ea_kj_mol",
+    "k_dpo_ptr.log10_k_ref",
+    "k_dpo_ptr.ea_kj_mol",
+    "k_dpo_ddp.log10_k_ref",
+    "k_dpo_ddp.ea_kj_mol",
+    "k_tdp_fur.ea_kj_mol",
+    "k_ddp_mft.log10_k_ref",
+    "k_ddp_mft.ea_kj_mol",
+    "k_fur_fft.ea_kj_mol",
+    "k_nf_mft.ea_kj_mol",
+    "k_nf_mp3p.ea_kj_mol",
+    "k_mgo_mp.ea_kj_mol",
+    "k_ha_mp_mft.log10_k_ref",
+    "k_ha_mp_mft.ea_kj_mol",
+    "k_glc_ha.ea_kj_mol",
+    "k_thi_hmp.log10_k_ref",
+    "k_thi_hmp.ea_kj_mol",
+    "k_thi_mesh.log10_k_ref",
+    "k_thi_mesh.ea_kj_mol",
+    "k_hmp_mft.log10_k_ref",
+    "k_hmp_mft.ea_kj_mol",
+    "k_hmp_mp2p.log10_k_ref",
+    "k_hmp_mp2p.ea_kj_mol",
+    "k_cys_actz.log10_k_ref",
+    "k_cys_actz.ea_kj_mol",
+    "k_mmft.log10_k_ref",
+    "k_mft_decay.log10_k_ref",
+    "k_dimer_decay.ea_kj_mol",
+    "k_nf_decay.log10_k_ref",
+    "k_h2s_loss.log10_k_ref",
+    "k_h2s_loss.ea_kj_mol",
+    "k_pent_caramel.ea_kj_mol",
+    "k_pent_thermal.log10_k_ref",
+    "k_pent_thermal.ea_kj_mol",
+    "k_glc_fur.log10_k_ref",
+    "k_glc_fur.ea_kj_mol",
+    "k_arp_tdp_th.log10_k_ref",
+    "k_arp_tdp_th.ea_kj_mol",
+    "k_arp_dpo_th.log10_k_ref",
+    "k_arp_dpo_th.ea_kj_mol",
+    "k_ddp_mft_hs.log10_k_ref",
+    "k_ddp_mft_hs.ea_kj_mol",
+    "k_fur_fft_hs.log10_k_ref",
+    "k_fur_fft_hs.ea_kj_mol",
+    "k_ttca_cys.log10_k_ref",
+    "k_ttca_cys.ea_kj_mol",
+    "k_ttca_deg.ea_kj_mol"
+   ],
+   "shipped_coordinates_unmapped": [],
+   "row_changes": {
+    "counts": {
+     "model change": 56,
+     "unchanged": 2
+    },
+    "top": [
+     {
+      "id": "kang_120C_MFT",
+      "r_then": 0.3161469723001132,
+      "r_now": 5.184641233461917,
+      "delta_r2": 26.780555811618985,
+      "kind": "model change"
+     },
+     {
+      "id": "kang_100C_MFT",
+      "r_then": -0.09113814960864501,
+      "r_now": 3.9199588740355553,
+      "delta_r2": 15.35777141181601,
+      "kind": "model change"
+     },
+     {
+      "id": "fed_furfural_h2s_FFT",
+      "r_then": -0.03549754646108567,
+      "r_now": -3.825049654866608,
+      "delta_r2": 14.6297447863904,
+      "kind": "model change"
+     },
+     {
+      "id": "kang_100C_MFT_over_FFT",
+      "r_then": 0.09529915952334357,
+      "r_now": 3.4445583286110057,
+      "delta_r2": 11.85590014939759,
+      "kind": "model change"
+     },
+     {
+      "id": "kang_120C_FFT",
+      "r_then": 0.22181799140744476,
+      "r_now": 2.533243157226516,
+      "delta_r2": 6.368117672322933,
+      "kind": "model change"
+     },
+     {
+      "id": "zhou_pH7_dimer_over_MFT",
+      "r_then": -1.4831989751406571,
+      "r_now": -2.7658938640670248,
+      "delta_r2": 5.450289667425322,
+      "kind": "model change"
+     },
+     {
+      "id": "kumazawa_FFT_retention_pH6_4",
+      "r_then": 0.7896393083122741,
+      "r_now": 2.1011605679359597,
+      "delta_r2": 3.791345495017078,
+      "kind": "model change"
+     },
+     {
+      "id": "zhang_fig1_cys_dimer_over_MFT",
+      "r_then": 0.16592776822925945,
+      "r_now": -1.7449052905137497,
+      "delta_r2": 3.0171624485933304,
+      "kind": "model change"
+     }
+    ],
+    "all": [
+     {
+      "id": "kang_120C_MFT",
+      "r_then": 0.3161469723001132,
+      "r_now": 5.184641233461917,
+      "delta_r2": 26.780555811618985,
+      "kind": "model change"
+     },
+     {
+      "id": "kang_100C_MFT",
+      "r_then": -0.09113814960864501,
+      "r_now": 3.9199588740355553,
+      "delta_r2": 15.35777141181601,
+      "kind": "model change"
+     },
+     {
+      "id": "fed_furfural_h2s_FFT",
+      "r_then": -0.03549754646108567,
+      "r_now": -3.825049654866608,
+      "delta_r2": 14.6297447863904,
+      "kind": "model change"
+     },
+     {
+      "id": "kang_100C_MFT_over_FFT",
+      "r_then": 0.09529915952334357,
+      "r_now": 3.4445583286110057,
+      "delta_r2": 11.85590014939759,
+      "kind": "model change"
+     },
+     {
+      "id": "kang_120C_FFT",
+      "r_then": 0.22181799140744476,
+      "r_now": 2.533243157226516,
+      "delta_r2": 6.368117672322933,
+      "kind": "model change"
+     },
+     {
+      "id": "zhou_pH7_dimer_over_MFT",
+      "r_then": -1.4831989751406571,
+      "r_now": -2.7658938640670248,
+      "delta_r2": 5.450289667425322,
+      "kind": "model change"
+     },
+     {
+      "id": "kumazawa_FFT_retention_pH6_4",
+      "r_then": 0.7896393083122741,
+      "r_now": 2.1011605679359597,
+      "delta_r2": 3.791345495017078,
+      "kind": "model change"
+     },
+     {
+      "id": "zhang_fig1_cys_dimer_over_MFT",
+      "r_then": 0.16592776822925945,
+      "r_now": -1.7449052905137497,
+      "delta_r2": 3.0171624485933304,
+      "kind": "model change"
+     },
+     {
+      "id": "kang_100C_FUR",
+      "r_then": 0.48071367862627984,
+      "r_now": 1.5063145942532024,
+      "delta_r2": 2.0378980160417797,
+      "kind": "model change"
+     },
+     {
+      "id": "kang_100C_FFT",
+      "r_then": -0.16210670024715573,
+      "r_now": 1.3370460239919952,
+      "delta_r2": 1.761413488007782,
+      "kind": "model change"
+     },
+     {
+      "id": "cerny_ternary_thiamine_share",
+      "r_then": -0.2608845922252752,
+      "r_now": -1.2824939061083251,
+      "delta_r2": 1.5767298487444414,
+      "kind": "model change"
+     },
+     {
+      "id": "zhang_fig1_gcys_dimer_over_MFT",
+      "r_then": 1.1465613257648435,
+      "r_now": -0.017491934707709905,
+      "delta_r2": -1.3142969059598169,
+      "kind": "model change"
+     },
+     {
+      "id": "zhou_pH7_MFT_over_FFT",
+      "r_then": 0.10681841295815137,
+      "r_now": 1.148393938407921,
+      "delta_r2": 1.3073984644251575,
+      "kind": "model change"
+     },
+     {
+      "id": "cerny_isomer_split",
+      "r_then": 0.00032604603716168354,
+      "r_now": 1.0775604231362537,
+      "delta_r2": 1.1611363592035635,
+      "kind": "model change"
+     },
+     {
+      "id": "hofmann_glucose_FFT",
+      "r_then": -0.33101378608901133,
+      "r_now": -1.0536518380925508,
+      "delta_r2": 1.0006120693348293,
+      "kind": "model change"
+     },
+     {
+      "id": "hofmann_fructose_MFT",
+      "r_then": -0.8668065586046573,
+      "r_now": -1.1967959974290074,
+      "delta_r2": 0.6809670494220436,
+      "kind": "model change"
+     },
+     {
+      "id": "kumazawa_FFT_retention_pH6_0",
+      "r_then": -0.7581539261197648,
+      "r_now": -0.01220597132278734,
+      "delta_r2": -0.5746483899548811,
+      "kind": "model change"
+     },
+     {
+      "id": "hofmann_ribose_NF_insitu",
+      "r_then": 0.33786323837140153,
+      "r_now": 0.7765583425392525,
+      "delta_r2": 0.48889129152450045,
+      "kind": "model change"
+     },
+     {
+      "id": "zhou_final_pH_from_pH6",
+      "r_then": -0.5767636216431864,
+      "r_now": -0.7919799789041289,
+      "delta_r2": 0.29457601173401965,
+      "kind": "model change"
+     },
+     {
+      "id": "zhou_final_pH_from_pH7",
+      "r_then": 0.6577342876046899,
+      "r_now": 0.8377645105868581,
+      "delta_r2": 0.2692349821079889,
+      "kind": "model change"
+     },
+     {
+      "id": "zhou_pH7_FUR_arp_alone",
+      "r_then": 0.0703124730287136,
+      "r_now": -0.5220266654239459,
+      "delta_r2": 0.2675679955502308,
+      "kind": "model change"
+     },
+     {
+      "id": "hofmann_ribose_MFT",
+      "r_then": -0.18854891944488458,
+      "r_now": -0.5113750619762185,
+      "delta_r2": 0.22595375898734776,
+      "kind": "model change"
+     },
+     {
+      "id": "hofmann_fructose_FFT",
+      "r_then": 0.3304547898959395,
+      "r_now": -0.5363074921637917,
+      "delta_r2": 0.17842535798584597,
+      "kind": "model change"
+     },
+     {
+      "id": "hofmann_glucose_MFT",
+      "r_then": 0.671661581360783,
+      "r_now": 0.5261875101518756,
+      "delta_r2": -0.1742559840362376,
+      "kind": "model change"
+     },
+     {
+      "id": "fed_c2c3_MFT_pH7",
+      "r_then": -1.2408353406926504,
+      "r_now": -1.2979556955950753,
+      "delta_r2": 0.14501664501584988,
+      "kind": "model change"
+     },
+     {
+      "id": "hofmann_ribose_FFT",
+      "r_then": -0.1439405513903692,
+      "r_now": -0.3964926696709344,
+      "delta_r2": 0.1364875547682212,
+      "kind": "model change"
+     },
+     {
+      "id": "fed_ribose_h2s_FFT",
+      "r_then": -0.03378454793034907,
+      "r_now": -0.3497090691951312,
+      "delta_r2": 0.12115503739846699,
+      "kind": "model change"
+     },
+     {
+      "id": "fed_tdp_h2s_FFT",
+      "r_then": 0.35018458649953144,
+      "r_now": -0.0619529810408324,
+      "delta_r2": -0.11879107276200207,
+      "kind": "model change"
+     },
+     {
+      "id": "kumazawa_FFT_retention_pH5_4",
+      "r_then": -0.3861239096691233,
+      "r_now": -0.19146096182757816,
+      "delta_r2": -0.11243437371422796,
+      "kind": "model change"
+     },
+     {
+      "id": "yaghmur_fft_share_ceiling",
+      "r_then": 0.332183289439853,
+      "r_now": 0.0,
+      "delta_r2": -0.11034573778308114,
+      "kind": "model change"
+     },
+     {
+      "id": "fed_c2c3_MFT",
+      "r_then": -0.3384921700730001,
+      "r_now": -0.465598994584011,
+      "delta_r2": 0.10220547455691308,
+      "kind": "model change"
+     },
+     {
+      "id": "fed_nf_cys_MFT",
+      "r_then": 0.3943832108504383,
+      "r_now": 0.2757303489639854,
+      "delta_r2": -0.07951089166090011,
+      "kind": "model change"
+     },
+     {
+      "id": "zhou_pH7_FFT",
+      "r_then": -0.31542164575860127,
+      "r_now": -0.4096754067126566,
+      "delta_r2": 0.06834312425211607,
+      "kind": "model change"
+     },
+     {
+      "id": "fed_thiamine_MFT",
+      "r_then": -0.21367046405522766,
+      "r_now": -0.33617308024763864,
+      "delta_r2": 0.06735727267360896,
+      "kind": "model change"
+     },
+     {
+      "id": "fed_nf_h2s_MFT",
+      "r_then": 0.3594436505116554,
+      "r_now": 0.25014348575769596,
+      "delta_r2": -0.06662797442613443,
+      "kind": "model change"
+     },
+     {
+      "id": "whitfield_nf_cys_MFT",
+      "r_then": -0.5535377395547273,
+      "r_now": -0.5899810352382096,
+      "delta_r2": 0.04167359282939237,
+      "kind": "model change"
+     },
+     {
+      "id": "zhou_pH7_MFT",
+      "r_then": -0.26194429206189107,
+      "r_now": 0.16458970965480788,
+      "delta_r2": -0.04152503961955133,
+      "kind": "model change"
+     },
+     {
+      "id": "hofmann_xylose_MFT",
+      "r_then": 0.2152486596984351,
+      "r_now": -0.1075774828328988,
+      "delta_r2": -0.034759070689310084,
+      "kind": "model change"
+     },
+     {
+      "id": "whitfield_nf_h2s_MFT",
+      "r_then": -0.7592715701654819,
+      "r_now": -0.7377292265029641,
+      "delta_r2": -0.032248905624894575,
+      "kind": "model change"
+     },
+     {
+      "id": "kang_120C_FUR",
+      "r_then": -0.34477986507518965,
+      "r_now": 0.38827668995824227,
+      "delta_r2": 0.03188563260366302,
+      "kind": "model change"
+     },
+     {
+      "id": "vanseeventer_cys_conversion",
+      "r_then": 0.6779263660170443,
+      "r_now": 0.6998760382966803,
+      "delta_r2": 0.03024231124078086,
+      "kind": "model change"
+     },
+     {
+      "id": "fed_ribose_h2s_MFT",
+      "r_then": 1.2387928961379665e-05,
+      "r_now": -0.16666678231888873,
+      "delta_r2": 0.02777781617507106,
+      "kind": "model change"
+     },
+     {
+      "id": "fed_mgo_h2s_1to1_MP",
+      "r_then": 0.17905756437790488,
+      "r_now": 0.09459371749869679,
+      "delta_r2": -0.02311363997072429,
+      "kind": "model change"
+     },
+     {
+      "id": "kumazawa_FFT_retention_pH5_0",
+      "r_then": -0.16212561957809724,
+      "r_now": -0.06522664814109322,
+      "delta_r2": -0.022030200895859928,
+      "kind": "model change"
+     },
+     {
+      "id": "fed_c2c3_MFT_pH3",
+      "r_then": 2.0874909446578256,
+      "r_now": 2.0848577843538054,
+      "delta_r2": -0.010986463047761852,
+      "kind": "model change"
+     },
+     {
+      "id": "zhou_pH7_ACTZ",
+      "r_then": -2.5597551124850308e-05,
+      "r_now": -0.09628804812762222,
+      "delta_r2": 0.00927138755699267,
+      "kind": "model change"
+     },
+     {
+      "id": "whitfield_mercaptoketone_over_MFT",
+      "r_then": -0.22152504565331874,
+      "r_now": -0.20053991162541043,
+      "delta_r2": -0.008857089696977523,
+      "kind": "model change"
+     },
+     {
+      "id": "hofmann_xylose_FFT",
+      "r_then": 0.14324269766728073,
+      "r_now": -0.10930942061328468,
+      "delta_r2": -0.00856992100018801,
+      "kind": "model change"
+     },
+     {
+      "id": "zhou_final_pH_from_pH8",
+      "r_then": -0.06493682108819598,
+      "r_now": -0.10204393856227512,
+      "delta_r2": 0.006196174664261004,
+      "kind": "model change"
+     },
+     {
+      "id": "kang_120C_cys_conversion",
+      "r_then": -0.13504298915663582,
+      "r_now": -0.11724334056917939,
+      "delta_r2": -0.004490608012538673,
+      "kind": "model change"
+     },
+     {
+      "id": "hofmann_ribose_FUR_insitu",
+      "r_then": 0.06424309613626714,
+      "r_now": 0.006434131185488853,
+      "delta_r2": -0.004085777357061581,
+      "kind": "model change"
+     },
+     {
+      "id": "kang_100C_cys_conversion",
+      "r_then": -0.06268446805364071,
+      "r_now": -0.0490253229188559,
+      "delta_r2": -0.0015258602478698054,
+      "kind": "model change"
+     },
+     {
+      "id": "fed_mgo_h2s_1to2_MP",
+      "r_then": 0.05063455949578256,
+      "r_now": -0.032785140528001334,
+      "delta_r2": -0.0014889931758911487,
+      "kind": "model change"
+     },
+     {
+      "id": "kumazawa_FFT_retention_pH4_0",
+      "r_then": -0.03904839907347595,
+      "r_now": -0.021788073692468345,
+      "delta_r2": -0.0010500573149730065,
+      "kind": "model change"
+     },
+     {
+      "id": "kumazawa_FFT_retention_pH3_0",
+      "r_then": -0.0810475618525082,
+      "r_now": -0.07845528201856852,
+      "delta_r2": -0.0004134760056230206,
+      "kind": "model change"
+     },
+     {
+      "id": "zhang_fig1_cys_MMFT_over_MFT",
+      "r_then": 0.012374550033473933,
+      "r_now": -0.011571716007046713,
+      "delta_r2": -1.9224877183208588e-05,
+      "kind": "model change"
+     },
+     {
+      "id": "vanseeventer_ribose_conversion",
+      "r_then": 0.41646245536051735,
+      "r_now": 0.41646245536051735,
+      "delta_r2": 0.0,
+      "kind": "unchanged"
+     },
+     {
+      "id": "kang_free_cys_yield_ceiling",
+      "r_then": 0.0,
+      "r_now": 0.0,
+      "delta_r2": 0.0,
+      "kind": "unchanged"
+     }
+    ]
+   },
+   "groups": null,
+   "attribution": [
+    {
+     "label": "B51's pH-state corrections off (B50 physics)",
+     "cite": "B51 ships 2026-10-27 (ph.b51 defaults all on; kinetic_core_b51_prereg.md)",
+     "S": 128.7612746891826,
+     "S_change_vs_today": 15.867219370611451,
+     "recovers_recorded": false
+    },
+    {
+     "label": "B60's pH-node grid and relaxed fixed point back to uniform / fixed sweeps",
+     "cite": "B60 ships 2026-10-28 (ph.node_grid, ph.fixed_point: 'frozen waves set uniform')",
+     "S": 286.79301033895547,
+     "S_change_vs_today": 173.8989550203843,
+     "recovers_recorded": false
+    },
+    {
+     "label": "B60's closed flux budget back to linear_rederived",
+     "cite": "B60 (sulfur.flux_budget: 'frozen waves set linear_rederived')",
+     "S": 112.90140748581443,
+     "S_change_vs_today": 0.007352167243269037,
+     "recovers_recorded": false
+    },
+    {
+     "label": "all three: the freeze-era pH physics and numerics",
+     "cite": "B51 + B60",
+     "S": 45.11524484230681,
+     "S_change_vs_today": -67.77881047626435,
+     "recovers_recorded": false
+    }
+   ],
+   "jacobian_steps": [
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    -0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    -0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    2.0,
+    2.0,
+    -2.0,
+    0.01,
+    0.1
+   ],
+   "near_optimality": {
+    "S_frozen": 112.46037754531311,
+    "gradient_norm": 142.85400497758897,
+    "gradient": [
+     5.689128295202343,
+     -0.2925049589483457,
+     -0.3009126537150561,
+     0.00013856719144441596,
+     -10.124085666221207,
+     23.994349775998305,
+     -0.0007302262565393475,
+     -27.00380193852685,
+     -9.702157517975808,
+     0.022031016675737064,
+     -10.520622633442594,
+     63.424155052621465,
+     2.986477188648799,
+     -3.2972129423249092,
+     -3.310271946003984,
+     16.52242181630052,
+     -18.613058232790294,
+     0.3156516857834274,
+     -14.897005689298162,
+     -3.681650395543749,
+     1.0607179812292302,
+     -26.389123314043466,
+     -7.461021616568078,
+     0.24890056708830074,
+     -6.734563248664788,
+     73.26933149914072,
+     16.81470763693427,
+     -0.9992029811089722,
+     10.644617115671164,
+     -14.037199656320762,
+     1.0884464040404065e-05,
+     0.00013467828085507187,
+     -1.6294224200427676,
+     -0.7277315344486843,
+     -9.064417654542028,
+     -0.028098138509689653,
+     6.220816329515149,
+     0.022969585558747927,
+     -20.878347185768757,
+     -12.256537169695045,
+     0.0004608459102233937,
+     10.535181404691807,
+     79.08287126287325,
+     -0.24781959448854146,
+     0.3101524029601258,
+     -0.009663934066190765,
+     3.526317601261857e-05,
+     4.194858436197926
+    ],
+    "gn_decrement_unbounded": 106.85810787431865,
+    "gn_step": [
+     0.10932192780586969,
+     1.0022095511358302,
+     -1.4247785294268362,
+     -3.634157454366311,
+     1.083955964157707,
+     -0.9686726668450621,
+     4.847247153178999,
+     -1.3547885070827497,
+     -0.08590656437609502,
+     -3.4594186325726506,
+     -1.2199023685364077,
+     -0.6411110782131162,
+     -0.31091049432000023,
+     0.1427614077441087,
+     -0.43108451935547837,
+     0.37184233071304795,
+     -3.219772465530142,
+     3.773029275775545,
+     3.1086953372771946,
+     3.890802173118174,
+     0.6190898960149903,
+     1.6653345369377348e-16,
+     -0.9066859895940159,
+     -4.5977653835621455,
+     -0.45996474545701815,
+     0.02236236742505018,
+     -1.2259747931117615,
+     2.681605124250818,
+     2.8667056506392896e-09,
+     0.3335751482753931,
+     9.196040975647769,
+     6.4758274849676445,
+     0.09953723662686931,
+     0.3557216468239725,
+     1.5134154801079374,
+     -5.646284574788126,
+     0.6849945233023746,
+     -2.307499021912289,
+     0.509550422129148,
+     1.078651773328812,
+     -3.6387185054108766,
+     -0.09668446579489152,
+     -0.2901957238363581,
+     38.947820364046216,
+     -155.8126678931903,
+     0.08361182453593585,
+     -0.9675411608819079,
+     -0.6995537452402583
+    ],
+    "gn_predicted_decrease_bounded": 79.40068296624219,
+    "step_evaluations": [
+     {
+      "scale": 1.0,
+      "S": 5499.684934813557
+     },
+     {
+      "scale": 0.5,
+      "S": 103.93355999472757
+     }
+    ],
+    "one_step_decrease": 8.526817550585534,
+    "one_step_scale": 0.5,
+    "s2": 1.6350826817018393,
+    "coordinates": {
+     "k_pent_dpo.log10_k_ref": {
+      "indices": [
+       0
+      ],
+      "gn_displacement": [
+       0.10932192780586969
+      ],
+      "local_sd_scaled": [
+       11.793797228539109
+      ],
+      "delta_quadratic": 0.00014049050331672337,
+      "threshold": 6.281102790187727,
+      "inside_local_95": true
+     },
+     "k_pent_dpo.ea_kj_mol": {
+      "indices": [
+       43
+      ],
+      "gn_displacement": [
+       38.947820364046216
+      ],
+      "local_sd_scaled": [
+       266.2812148312092
+      ],
+      "delta_quadratic": 0.03498041648184946,
+      "threshold": 6.281102790187727,
+      "inside_local_95": true
+     },
+     "k_pent_tdp.log10_k_ref": {
+      "indices": [
+       1
+      ],
+      "gn_displacement": [
+       1.0022095511358302
+      ],
+      "local_sd_scaled": [
+       18.82395606224603
+      ],
+      "delta_quadratic": 0.0046348426242279845,
+      "threshold": 6.281102790187727,
+      "inside_local_95": true
+     },
+     "k_pent_tdp.ea_kj_mol": {
+      "indices": [
+       43
+      ],
+      "gn_displacement": [
+       38.947820364046216
+      ],
+      "local_sd_scaled": [
+       266.2812148312092
+      ],
+      "delta_quadratic": 0.03498041648184946,
+      "threshold": 6.281102790187727,
+      "inside_local_95": true
+     },
+     "k_dpo_c2c3.log10_k_ref": {
+      "indices": [
+       2
+      ],
+      "gn_displacement": [
+       -1.4247785294268362
+      ],
+      "local_sd_scaled": [
+       8.657987517358718
+      ],
+      "delta_quadratic": 0.044279278104965215,
+      "threshold": 6.281102790187727,
+      "inside_local_95": true
+     },
+     "k_dpo_c2c3.ea_kj_mol": {
+      "indices": [
+       43
+      ],
+      "gn_displacement": [
+       38.947820364046216
+      ],
+      "local_sd_scaled": [
+       266.2812148312092
+      ],
+      "delta_quadratic": 0.03498041648184946,
+      "threshold": 6.281102790187727,
+      "inside_local_95": true
+     },
+     "k_dpo_nf.log10_k_ref": {
+      "indices": [
+       5
+      ],
+      "gn_displacement": [
+       -0.9686726668450621
+      ],
+      "local_sd_scaled": [
+       7.471046938666045
+      ],
+      "delta_quadratic": 0.02748722386086571,
+      "threshold": 6.281102790187727,
+      "inside_local_95": true
+     },
+     "k_dpo_nf.ea_kj_mol": {
+      "indices": [
+       43
+      ],
+      "gn_displacement": [
+       38.947820364046216
+      ],
+      "local_sd_scaled": [
+       266.2812148312092
+      ],
+      "delta_quadratic": 0.03498041648184946,
+      "threshold": 6.281102790187727,
+      "inside_local_95": true
+     },
+     "k_dpo_ptr.log10_k_ref": {
+      "indices": [
+       6
+      ],
+      "gn_displacement": [
+       4.847247153178999
+      ],
+      "local_sd_scaled": [
+       2455.9705864833873
+      ],
+      "delta_quadratic": 6.36918296185363e-06,
+      "threshold": 6.281102790187727,
+      "inside_local_95": true
+     },
+     "k_dpo_ptr.ea_kj_mol": {
+      "indices": [
+       43
+      ],
+      "gn_displacement": [
+       38.947820364046216
+      ],
+      "local_sd_scaled": [
+       266.2812148312092
+      ],
+      "delta_quadratic": 0.03498041648184946,
+      "threshold": 6.281102790187727,
+      "inside_local_95": true
+     },
+     "k_dpo_ddp.log10_k_ref": {
+      "indices": [
+       7
+      ],
+      "gn_displacement": [
+       -1.3547885070827497
+      ],
+      "local_sd_scaled": [
+       7.415127127049912
+      ],
+      "delta_quadratic": 0.05458150720434159,
+      "threshold": 6.281102790187727,
+      "inside_local_95": true
+     },
+     "k_dpo_ddp.ea_kj_mol": {
+      "indices": [
+       43
+      ],
+      "gn_displacement": [
+       38.947820364046216
+      ],
+      "local_sd_scaled": [
+       266.2812148312092
+      ],
+      "delta_quadratic": 0.03498041648184946,
+      "threshold": 6.281102790187727,
+      "inside_local_95": true
+     },
+     "k_tdp_fur.ea_kj_mol": {
+      "indices": [
+       43
+      ],
+      "gn_displacement": [
+       38.947820364046216
+      ],
+      "local_sd_scaled": [
+       266.2812148312092
+      ],
+      "delta_quadratic": 0.03498041648184946,
+      "threshold": 6.281102790187727,
+      "inside_local_95": true
+     },
+     "k_ddp_mft.log10_k_ref": {
+      "indices": [
+       9
+      ],
+      "gn_displacement": [
+       -3.4594186325726506
+      ],
+      "local_sd_scaled": [
+       3113.6345811298706
+      ],
+      "delta_quadratic": 2.0184159758808017e-06,
+      "threshold": 6.281102790187727,
+      "inside_local_95": true
+     },
+     "k_ddp_mft.ea_kj_mol": {
+      "indices": [
+       43
+      ],
+      "gn_displacement": [
+       38.947820364046216
+      ],
+      "local_sd_scaled": [
+       266.2812148312092
+      ],
+      "delta_quadratic": 0.03498041648184946,
+      "threshold": 6.281102790187727,
+      "inside_local_95": true
+     },
+     "k_fur_fft.ea_kj_mol": {
+      "indices": [
+       43
+      ],
+      "gn_displacement": [
+       38.947820364046216
+      ],
+      "local_sd_scaled": [
+       266.2812148312092
+      ],
+      "delta_quadratic": 0.03498041648184946,
+      "threshold": 6.281102790187727,
+      "inside_local_95": true
+     },
+     "k_nf_mft.ea_kj_mol": {
+      "indices": [
+       43
+      ],
+      "gn_displacement": [
+       38.947820364046216
+      ],
+      "local_sd_scaled": [
+       266.2812148312092
+      ],
+      "delta_quadratic": 0.03498041648184946,
+      "threshold": 6.281102790187727,
+      "inside_local_95": true
+     },
+     "k_nf_mp3p.ea_kj_mol": {
+      "indices": [
+       43
+      ],
+      "gn_displacement": [
+       38.947820364046216
+      ],
+      "local_sd_scaled": [
+       266.2812148312092
+      ],
+      "delta_quadratic": 0.03498041648184946,
+      "threshold": 6.281102790187727,
+      "inside_local_95": true
+     },
+     "k_mgo_mp.ea_kj_mol": {
+      "indices": [
+       43
+      ],
+      "gn_displacement": [
+       38.947820364046216
+      ],
+      "local_sd_scaled": [
+       266.2812148312092
+      ],
+      "delta_quadratic": 0.03498041648184946,
+      "threshold": 6.281102790187727,
+      "inside_local_95": true
+     },
+     "k_ha_mp_mft.log10_k_ref": {
+      "indices": [
+       14
+      ],
+      "gn_displacement": [
+       -0.43108451935547837
+      ],
+      "local_sd_scaled": [
+       1.902042776868868
+      ],
+      "delta_quadratic": 0.08398930994657973,
+      "threshold": 6.281102790187727,
+      "inside_local_95": true
+     },
+     "k_ha_mp_mft.ea_kj_mol": {
+      "indices": [
+       43
+      ],
+      "gn_displacement": [
+       38.947820364046216
+      ],
+      "local_sd_scaled": [
+       266.2812148312092
+      ],
+      "delta_quadratic": 0.03498041648184946,
+      "threshold": 6.281102790187727,
+      "inside_local_95": true
+     },
+     "k_glc_ha.ea_kj_mol": {
+      "indices": [
+       43
+      ],
+      "gn_displacement": [
+       38.947820364046216
+      ],
+      "local_sd_scaled": [
+       266.2812148312092
+      ],
+      "delta_quadratic": 0.03498041648184946,
+      "threshold": 6.281102790187727,
+      "inside_local_95": true
+     },
+     "k_thi_hmp.log10_k_ref": {
+      "indices": [
+       16
+      ],
+      "gn_displacement": [
+       -3.219772465530142
+      ],
+      "local_sd_scaled": [
+       3602.575487898978
+      ],
+      "delta_quadratic": 1.306062329636794e-06,
+      "threshold": 6.281102790187727,
+      "inside_local_95": true
+     },
+     "k_thi_hmp.ea_kj_mol": {
+      "indices": [
+       43
+      ],
+      "gn_displacement": [
+       38.947820364046216
+      ],
+      "local_sd_scaled": [
+       266.2812148312092
+      ],
+      "delta_quadratic": 0.03498041648184946,
+      "threshold": 6.281102790187727,
+      "inside_local_95": true
+     },
+     "k_thi_mesh.log10_k_ref": {
+      "indices": [
+       17
+      ],
+      "gn_displacement": [
+       3.773029275775545
+      ],
+      "local_sd_scaled": [
+       2242.953869680519
+      ],
+      "delta_quadratic": 4.626785707808782e-06,
+      "threshold": 6.281102790187727,
+      "inside_local_95": true
+     },
+     "k_thi_mesh.ea_kj_mol": {
+      "indices": [
+       43
+      ],
+      "gn_displacement": [
+       38.947820364046216
+      ],
+      "local_sd_scaled": [
+       266.2812148312092
+      ],
+      "delta_quadratic": 0.03498041648184946,
+      "threshold": 6.281102790187727,
+      "inside_local_95": true
+     },
+     "k_hmp_mft.log10_k_ref": {
+      "indices": [
+       18
+      ],
+      "gn_displacement": [
+       3.1086953372771946
+      ],
+      "local_sd_scaled": [
+       3601.8123244614576
+      ],
+      "delta_quadratic": 1.218018494355738e-06,
+      "threshold": 6.281102790187727,
+      "inside_local_95": true
+     },
+     "k_hmp_mft.ea_kj_mol": {
+      "indices": [
+       43
+      ],
+      "gn_displacement": [
+       38.947820364046216
+      ],
+      "local_sd_scaled": [
+       266.2812148312092
+      ],
+      "delta_quadratic": 0.03498041648184946,
+      "threshold": 6.281102790187727,
+      "inside_local_95": true
+     },
+     "k_hmp_mp2p.log10_k_ref": {
+      "indices": [
+       19
+      ],
+      "gn_displacement": [
+       3.890802173118174
+      ],
+      "local_sd_scaled": [
+       3603.1721652891074
+      ],
+      "delta_quadratic": 1.9065490828876205e-06,
+      "threshold": 6.281102790187727,
+      "inside_local_95": true
+     },
+     "k_hmp_mp2p.ea_kj_mol": {
+      "indices": [
+       43
+      ],
+      "gn_displacement": [
+       38.947820364046216
+      ],
+      "local_sd_scaled": [
+       266.2812148312092
+      ],
+      "delta_quadratic": 0.03498041648184946,
+      "threshold": 6.281102790187727,
+      "inside_local_95": true
+     },
+     "k_cys_actz.log10_k_ref": {
+      "indices": [
+       20
+      ],
+      "gn_displacement": [
+       0.6190898960149903
+      ],
+      "local_sd_scaled": [
+       3.062797013630352
+      ],
+      "delta_quadratic": 0.06680526958386199,
+      "threshold": 6.281102790187727,
+      "inside_local_95": true
+     },
+     "k_cys_actz.ea_kj_mol": {
+      "indices": [
+       43
+      ],
+      "gn_displacement": [
+       38.947820364046216
+      ],
+      "local_sd_scaled": [
+       266.2812148312092
+      ],
+      "delta_quadratic": 0.03498041648184946,
+      "threshold": 6.281102790187727,
+      "inside_local_95": true
+     },
+     "k_mmft.log10_k_ref": {
+      "indices": [
+       23
+      ],
+      "gn_displacement": [
+       -4.5977653835621455
+      ],
+      "local_sd_scaled": [
+       2190.542874963141
+      ],
+      "delta_quadratic": 7.20327201297753e-06,
+      "threshold": 6.281102790187727,
+      "inside_local_95": true
+     },
+     "k_mft_decay.log10_k_ref": {
+      "indices": [
+       24
+      ],
+      "gn_displacement": [
+       -0.45996474545701815
+      ],
+      "local_sd_scaled": [
+       1.7723082918011233
+      ],
+      "delta_quadratic": 0.11013117476149341,
+      "threshold": 6.281102790187727,
+      "inside_local_95": true
+     },
+     "k_dimer_decay.ea_kj_mol": {
+      "indices": [
+       43
+      ],
+      "gn_displacement": [
+       38.947820364046216
+      ],
+      "local_sd_scaled": [
+       266.2812148312092
+      ],
+      "delta_quadratic": 0.03498041648184946,
+      "threshold": 6.281102790187727,
+      "inside_local_95": true
+     },
+     "k_nf_decay.log10_k_ref": {
+      "indices": [
+       27
+      ],
+      "gn_displacement": [
+       2.681605124250818
+      ],
+      "local_sd_scaled": [
+       16.857562799597414
+      ],
+      "delta_quadratic": 0.04137517082598896,
+      "threshold": 6.281102790187727,
+      "inside_local_95": true
+     },
+     "k_h2s_loss.log10_k_ref": {
+      "indices": [
+       29
+      ],
+      "gn_displacement": [
+       0.3335751482753931
+      ],
+      "local_sd_scaled": [
+       1.9676663909285979
+      ],
+      "delta_quadratic": 0.0469920248509383,
+      "threshold": 6.281102790187727,
+      "inside_local_95": true
+     },
+     "k_h2s_loss.ea_kj_mol": {
+      "indices": [
+       43
+      ],
+      "gn_displacement": [
+       38.947820364046216
+      ],
+      "local_sd_scaled": [
+       266.2812148312092
+      ],
+      "delta_quadratic": 0.03498041648184946,
+      "threshold": 6.281102790187727,
+      "inside_local_95": true
+     },
+     "k_pent_caramel.ea_kj_mol": {
+      "indices": [
+       43
+      ],
+      "gn_displacement": [
+       38.947820364046216
+      ],
+      "local_sd_scaled": [
+       266.2812148312092
+      ],
+      "delta_quadratic": 0.03498041648184946,
+      "threshold": 6.281102790187727,
+      "inside_local_95": true
+     },
+     "k_pent_thermal.log10_k_ref": {
+      "indices": [
+       33
+      ],
+      "gn_displacement": [
+       0.3557216468239725
+      ],
+      "local_sd_scaled": [
+       1.0874922296123155
+      ],
+      "delta_quadratic": 0.17494759720504577,
+      "threshold": 6.281102790187727,
+      "inside_local_95": true
+     },
+     "k_pent_thermal.ea_kj_mol": {
+      "indices": [
+       43
+      ],
+      "gn_displacement": [
+       38.947820364046216
+      ],
+      "local_sd_scaled": [
+       266.2812148312092
+      ],
+      "delta_quadratic": 0.03498041648184946,
+      "threshold": 6.281102790187727,
+      "inside_local_95": true
+     },
+     "k_glc_fur.log10_k_ref": {
+      "indices": [
+       34
+      ],
+      "gn_displacement": [
+       1.5134154801079374
+      ],
+      "local_sd_scaled": [
+       3.3601654672577945
+      ],
+      "delta_quadratic": 0.3316917991010409,
+      "threshold": 6.281102790187727,
+      "inside_local_95": true
+     },
+     "k_glc_fur.ea_kj_mol": {
+      "indices": [
+       43
+      ],
+      "gn_displacement": [
+       38.947820364046216
+      ],
+      "local_sd_scaled": [
+       266.2812148312092
+      ],
+      "delta_quadratic": 0.03498041648184946,
+      "threshold": 6.281102790187727,
+      "inside_local_95": true
+     },
+     "k_arp_tdp_th.log10_k_ref": {
+      "indices": [
+       35
+      ],
+      "gn_displacement": [
+       -5.646284574788126
+      ],
+      "local_sd_scaled": [
+       1875.8849874346877
+      ],
+      "delta_quadratic": 1.4813334474090404e-05,
+      "threshold": 6.281102790187727,
+      "inside_local_95": true
+     },
+     "k_arp_tdp_th.ea_kj_mol": {
+      "indices": [
+       43
+      ],
+      "gn_displacement": [
+       38.947820364046216
+      ],
+      "local_sd_scaled": [
+       266.2812148312092
+      ],
+      "delta_quadratic": 0.03498041648184946,
+      "threshold": 6.281102790187727,
+      "inside_local_95": true
+     },
+     "k_arp_dpo_th.log10_k_ref": {
+      "indices": [
+       36
+      ],
+      "gn_displacement": [
+       0.6849945233023746
+      ],
+      "local_sd_scaled": [
+       4.781065081916818
+      ],
+      "delta_quadratic": 0.03356329622725146,
+      "threshold": 6.281102790187727,
+      "inside_local_95": true
+     },
+     "k_arp_dpo_th.ea_kj_mol": {
+      "indices": [
+       43
+      ],
+      "gn_displacement": [
+       38.947820364046216
+      ],
+      "local_sd_scaled": [
+       266.2812148312092
+      ],
+      "delta_quadratic": 0.03498041648184946,
+      "threshold": 6.281102790187727,
+      "inside_local_95": true
+     },
+     "k_ddp_mft_hs.log10_k_ref": {
+      "indices": [
+       37
+      ],
+      "gn_displacement": [
+       -2.307499021912289
+      ],
+      "local_sd_scaled": [
+       5145.274563815982
+      ],
+      "delta_quadratic": 3.2885591709267446e-07,
+      "threshold": 6.281102790187727,
+      "inside_local_95": true
+     },
+     "k_ddp_mft_hs.ea_kj_mol": {
+      "indices": [
+       43
+      ],
+      "gn_displacement": [
+       38.947820364046216
+      ],
+      "local_sd_scaled": [
+       266.2812148312092
+      ],
+      "delta_quadratic": 0.03498041648184946,
+      "threshold": 6.281102790187727,
+      "inside_local_95": true
+     },
+     "k_fur_fft_hs.log10_k_ref": {
+      "indices": [
+       38
+      ],
+      "gn_displacement": [
+       0.509550422129148
+      ],
+      "local_sd_scaled": [
+       2.057268183699417
+      ],
+      "delta_quadratic": 0.10030722845846352,
+      "threshold": 6.281102790187727,
+      "inside_local_95": true
+     },
+     "k_fur_fft_hs.ea_kj_mol": {
+      "indices": [
+       43
+      ],
+      "gn_displacement": [
+       38.947820364046216
+      ],
+      "local_sd_scaled": [
+       266.2812148312092
+      ],
+      "delta_quadratic": 0.03498041648184946,
+      "threshold": 6.281102790187727,
+      "inside_local_95": true
+     },
+     "k_ttca_cys.log10_k_ref": {
+      "indices": [
+       39
+      ],
+      "gn_displacement": [
+       1.078651773328812
+      ],
+      "local_sd_scaled": [
+       11.358889921414088
+      ],
+      "delta_quadratic": 0.014744513946259676,
+      "threshold": 6.281102790187727,
+      "inside_local_95": true
+     },
+     "k_ttca_cys.ea_kj_mol": {
+      "indices": [
+       43
+      ],
+      "gn_displacement": [
+       38.947820364046216
+      ],
+      "local_sd_scaled": [
+       266.2812148312092
+      ],
+      "delta_quadratic": 0.03498041648184946,
+      "threshold": 6.281102790187727,
+      "inside_local_95": true
+     },
+     "k_ttca_deg.ea_kj_mol": {
+      "indices": [
+       43
+      ],
+      "gn_displacement": [
+       38.947820364046216
+      ],
+      "local_sd_scaled": [
+       266.2812148312092
+      ],
+      "delta_quadratic": 0.03498041648184946,
+      "threshold": 6.281102790187727,
+      "inside_local_95": true
+     }
+    },
+    "setting": "careful (41 pH nodes, 4 sweeps, rtol 1e-8; the setting B2.3's report is regenerated with): at the quick 9-node / 2-sweep setting the relaxed pH fixed point does not converge, which pollutes the Jacobian"
+   },
+   "verdict": {
+    "class": "DRIFTED-UNRESOLVED",
+    "reproduced": false,
+    "S_change": 96.54322850155276,
+    "S_change_rel": 5.904486028869678,
+    "rel_tol": 0.01,
+    "joint_threshold": 106.55959558741978,
+    "joint_near_optimal": true,
+    "coordinates_outside_local_95": [],
+    "coordinates_outside_local_95_unadjusted": [],
+    "marginal_tests": {
+     "m": 54,
+     "quantile": 0.9990740740740741,
+     "unadjusted_outside": [],
+     "bonferroni_outside": [],
+     "per_coordinate": {
+      "k_pent_dpo.log10_k_ref": {
+       "delta": 0.00014049050331672337,
+       "threshold_unadjusted": 6.281102790187727,
+       "threshold_bonferroni": 17.937058844941035
+      },
+      "k_pent_dpo.ea_kj_mol": {
+       "delta": 0.03498041648184946,
+       "threshold_unadjusted": 6.281102790187727,
+       "threshold_bonferroni": 17.937058844941035
+      },
+      "k_pent_tdp.log10_k_ref": {
+       "delta": 0.0046348426242279845,
+       "threshold_unadjusted": 6.281102790187727,
+       "threshold_bonferroni": 17.937058844941035
+      },
+      "k_pent_tdp.ea_kj_mol": {
+       "delta": 0.03498041648184946,
+       "threshold_unadjusted": 6.281102790187727,
+       "threshold_bonferroni": 17.937058844941035
+      },
+      "k_dpo_c2c3.log10_k_ref": {
+       "delta": 0.044279278104965215,
+       "threshold_unadjusted": 6.281102790187727,
+       "threshold_bonferroni": 17.937058844941035
+      },
+      "k_dpo_c2c3.ea_kj_mol": {
+       "delta": 0.03498041648184946,
+       "threshold_unadjusted": 6.281102790187727,
+       "threshold_bonferroni": 17.937058844941035
+      },
+      "k_dpo_nf.log10_k_ref": {
+       "delta": 0.02748722386086571,
+       "threshold_unadjusted": 6.281102790187727,
+       "threshold_bonferroni": 17.937058844941035
+      },
+      "k_dpo_nf.ea_kj_mol": {
+       "delta": 0.03498041648184946,
+       "threshold_unadjusted": 6.281102790187727,
+       "threshold_bonferroni": 17.937058844941035
+      },
+      "k_dpo_ptr.log10_k_ref": {
+       "delta": 6.36918296185363e-06,
+       "threshold_unadjusted": 6.281102790187727,
+       "threshold_bonferroni": 17.937058844941035
+      },
+      "k_dpo_ptr.ea_kj_mol": {
+       "delta": 0.03498041648184946,
+       "threshold_unadjusted": 6.281102790187727,
+       "threshold_bonferroni": 17.937058844941035
+      },
+      "k_dpo_ddp.log10_k_ref": {
+       "delta": 0.05458150720434159,
+       "threshold_unadjusted": 6.281102790187727,
+       "threshold_bonferroni": 17.937058844941035
+      },
+      "k_dpo_ddp.ea_kj_mol": {
+       "delta": 0.03498041648184946,
+       "threshold_unadjusted": 6.281102790187727,
+       "threshold_bonferroni": 17.937058844941035
+      },
+      "k_tdp_fur.ea_kj_mol": {
+       "delta": 0.03498041648184946,
+       "threshold_unadjusted": 6.281102790187727,
+       "threshold_bonferroni": 17.937058844941035
+      },
+      "k_ddp_mft.log10_k_ref": {
+       "delta": 2.0184159758808017e-06,
+       "threshold_unadjusted": 6.281102790187727,
+       "threshold_bonferroni": 17.937058844941035
+      },
+      "k_ddp_mft.ea_kj_mol": {
+       "delta": 0.03498041648184946,
+       "threshold_unadjusted": 6.281102790187727,
+       "threshold_bonferroni": 17.937058844941035
+      },
+      "k_fur_fft.ea_kj_mol": {
+       "delta": 0.03498041648184946,
+       "threshold_unadjusted": 6.281102790187727,
+       "threshold_bonferroni": 17.937058844941035
+      },
+      "k_nf_mft.ea_kj_mol": {
+       "delta": 0.03498041648184946,
+       "threshold_unadjusted": 6.281102790187727,
+       "threshold_bonferroni": 17.937058844941035
+      },
+      "k_nf_mp3p.ea_kj_mol": {
+       "delta": 0.03498041648184946,
+       "threshold_unadjusted": 6.281102790187727,
+       "threshold_bonferroni": 17.937058844941035
+      },
+      "k_mgo_mp.ea_kj_mol": {
+       "delta": 0.03498041648184946,
+       "threshold_unadjusted": 6.281102790187727,
+       "threshold_bonferroni": 17.937058844941035
+      },
+      "k_ha_mp_mft.log10_k_ref": {
+       "delta": 0.08398930994657973,
+       "threshold_unadjusted": 6.281102790187727,
+       "threshold_bonferroni": 17.937058844941035
+      },
+      "k_ha_mp_mft.ea_kj_mol": {
+       "delta": 0.03498041648184946,
+       "threshold_unadjusted": 6.281102790187727,
+       "threshold_bonferroni": 17.937058844941035
+      },
+      "k_glc_ha.ea_kj_mol": {
+       "delta": 0.03498041648184946,
+       "threshold_unadjusted": 6.281102790187727,
+       "threshold_bonferroni": 17.937058844941035
+      },
+      "k_thi_hmp.log10_k_ref": {
+       "delta": 1.306062329636794e-06,
+       "threshold_unadjusted": 6.281102790187727,
+       "threshold_bonferroni": 17.937058844941035
+      },
+      "k_thi_hmp.ea_kj_mol": {
+       "delta": 0.03498041648184946,
+       "threshold_unadjusted": 6.281102790187727,
+       "threshold_bonferroni": 17.937058844941035
+      },
+      "k_thi_mesh.log10_k_ref": {
+       "delta": 4.626785707808782e-06,
+       "threshold_unadjusted": 6.281102790187727,
+       "threshold_bonferroni": 17.937058844941035
+      },
+      "k_thi_mesh.ea_kj_mol": {
+       "delta": 0.03498041648184946,
+       "threshold_unadjusted": 6.281102790187727,
+       "threshold_bonferroni": 17.937058844941035
+      },
+      "k_hmp_mft.log10_k_ref": {
+       "delta": 1.218018494355738e-06,
+       "threshold_unadjusted": 6.281102790187727,
+       "threshold_bonferroni": 17.937058844941035
+      },
+      "k_hmp_mft.ea_kj_mol": {
+       "delta": 0.03498041648184946,
+       "threshold_unadjusted": 6.281102790187727,
+       "threshold_bonferroni": 17.937058844941035
+      },
+      "k_hmp_mp2p.log10_k_ref": {
+       "delta": 1.9065490828876205e-06,
+       "threshold_unadjusted": 6.281102790187727,
+       "threshold_bonferroni": 17.937058844941035
+      },
+      "k_hmp_mp2p.ea_kj_mol": {
+       "delta": 0.03498041648184946,
+       "threshold_unadjusted": 6.281102790187727,
+       "threshold_bonferroni": 17.937058844941035
+      },
+      "k_cys_actz.log10_k_ref": {
+       "delta": 0.06680526958386199,
+       "threshold_unadjusted": 6.281102790187727,
+       "threshold_bonferroni": 17.937058844941035
+      },
+      "k_cys_actz.ea_kj_mol": {
+       "delta": 0.03498041648184946,
+       "threshold_unadjusted": 6.281102790187727,
+       "threshold_bonferroni": 17.937058844941035
+      },
+      "k_mmft.log10_k_ref": {
+       "delta": 7.20327201297753e-06,
+       "threshold_unadjusted": 6.281102790187727,
+       "threshold_bonferroni": 17.937058844941035
+      },
+      "k_mft_decay.log10_k_ref": {
+       "delta": 0.11013117476149341,
+       "threshold_unadjusted": 6.281102790187727,
+       "threshold_bonferroni": 17.937058844941035
+      },
+      "k_dimer_decay.ea_kj_mol": {
+       "delta": 0.03498041648184946,
+       "threshold_unadjusted": 6.281102790187727,
+       "threshold_bonferroni": 17.937058844941035
+      },
+      "k_nf_decay.log10_k_ref": {
+       "delta": 0.04137517082598896,
+       "threshold_unadjusted": 6.281102790187727,
+       "threshold_bonferroni": 17.937058844941035
+      },
+      "k_h2s_loss.log10_k_ref": {
+       "delta": 0.0469920248509383,
+       "threshold_unadjusted": 6.281102790187727,
+       "threshold_bonferroni": 17.937058844941035
+      },
+      "k_h2s_loss.ea_kj_mol": {
+       "delta": 0.03498041648184946,
+       "threshold_unadjusted": 6.281102790187727,
+       "threshold_bonferroni": 17.937058844941035
+      },
+      "k_pent_caramel.ea_kj_mol": {
+       "delta": 0.03498041648184946,
+       "threshold_unadjusted": 6.281102790187727,
+       "threshold_bonferroni": 17.937058844941035
+      },
+      "k_pent_thermal.log10_k_ref": {
+       "delta": 0.17494759720504577,
+       "threshold_unadjusted": 6.281102790187727,
+       "threshold_bonferroni": 17.937058844941035
+      },
+      "k_pent_thermal.ea_kj_mol": {
+       "delta": 0.03498041648184946,
+       "threshold_unadjusted": 6.281102790187727,
+       "threshold_bonferroni": 17.937058844941035
+      },
+      "k_glc_fur.log10_k_ref": {
+       "delta": 0.3316917991010409,
+       "threshold_unadjusted": 6.281102790187727,
+       "threshold_bonferroni": 17.937058844941035
+      },
+      "k_glc_fur.ea_kj_mol": {
+       "delta": 0.03498041648184946,
+       "threshold_unadjusted": 6.281102790187727,
+       "threshold_bonferroni": 17.937058844941035
+      },
+      "k_arp_tdp_th.log10_k_ref": {
+       "delta": 1.4813334474090404e-05,
+       "threshold_unadjusted": 6.281102790187727,
+       "threshold_bonferroni": 17.937058844941035
+      },
+      "k_arp_tdp_th.ea_kj_mol": {
+       "delta": 0.03498041648184946,
+       "threshold_unadjusted": 6.281102790187727,
+       "threshold_bonferroni": 17.937058844941035
+      },
+      "k_arp_dpo_th.log10_k_ref": {
+       "delta": 0.03356329622725146,
+       "threshold_unadjusted": 6.281102790187727,
+       "threshold_bonferroni": 17.937058844941035
+      },
+      "k_arp_dpo_th.ea_kj_mol": {
+       "delta": 0.03498041648184946,
+       "threshold_unadjusted": 6.281102790187727,
+       "threshold_bonferroni": 17.937058844941035
+      },
+      "k_ddp_mft_hs.log10_k_ref": {
+       "delta": 3.2885591709267446e-07,
+       "threshold_unadjusted": 6.281102790187727,
+       "threshold_bonferroni": 17.937058844941035
+      },
+      "k_ddp_mft_hs.ea_kj_mol": {
+       "delta": 0.03498041648184946,
+       "threshold_unadjusted": 6.281102790187727,
+       "threshold_bonferroni": 17.937058844941035
+      },
+      "k_fur_fft_hs.log10_k_ref": {
+       "delta": 0.10030722845846352,
+       "threshold_unadjusted": 6.281102790187727,
+       "threshold_bonferroni": 17.937058844941035
+      },
+      "k_fur_fft_hs.ea_kj_mol": {
+       "delta": 0.03498041648184946,
+       "threshold_unadjusted": 6.281102790187727,
+       "threshold_bonferroni": 17.937058844941035
+      },
+      "k_ttca_cys.log10_k_ref": {
+       "delta": 0.014744513946259676,
+       "threshold_unadjusted": 6.281102790187727,
+       "threshold_bonferroni": 17.937058844941035
+      },
+      "k_ttca_cys.ea_kj_mol": {
+       "delta": 0.03498041648184946,
+       "threshold_unadjusted": 6.281102790187727,
+       "threshold_bonferroni": 17.937058844941035
+      },
+      "k_ttca_deg.ea_kj_mol": {
+       "delta": 0.03498041648184946,
+       "threshold_unadjusted": 6.281102790187727,
+       "threshold_bonferroni": 17.937058844941035
+      }
+     }
+    },
+    "trust_ratio": 0.14690703357743584,
+    "local_model_valid": false,
+    "material_reasons": [
+     "the local quadratic model fails at the step (trust ratio 0.15 < 0.25), so near-optimality cannot be shown"
+    ]
+   },
+   "seconds": {
+    "one_evaluation": 22.75,
+    "one_evaluation_near_optimality": 73.77,
+    "jacobian": 2171.2,
+    "step": 128.2,
+    "attribution": 45.2,
+    "total": 2367.4
+   },
+   "workers": 2,
+   "why": "a model change, no data change (56 of 58 rows moved, none withdrawn or re-targeted): B2.3's generator now integrates under the pH physics and numerics shipped after it froze, B51's pH-state corrections (2026-10-27) and B60's log-and-linear node grid with a relaxed fixed point (2026-10-28), which it never sets back; at B2.3's quick 9-node / 2-sweep setting the relaxed fixed point does not converge (residual 0.05 pH, flagged). Reversing all three probes takes S 112.9 -> 45.1, not to 16.35: the rest is the measured sulfur barriers and channels shipped since (B8 onward), not probed here. The Kang MFT / FFT and Hofmann 1998 furfural + H2S rows move most (+2 to +5 sigma). The shipped vector is not B2.3's point: B60 re-fitted 23 of its 48 coordinates and carries the other 25 frozen at B2.3's values, so B60's objective (which reproduces) is the one these 25 now sit in, held, never free."
+  }
+ },
+ "provenance": {
+  "artifact": "frozen_fit_reproducibility",
+  "generated_on": "2026-11-07",
+  "git": {
+   "commit": "79291bb29723718062f3777438bd65fbde37d79c",
+   "short": "79291bb2",
+   "branch": "frozen-fit-reproducibility",
+   "dirty": false
+  },
+  "generated_by": "scripts/generators/build_frozen_fit_reproducibility.py",
+  "inputs": [
+   {
+    "path": "results/validation/incumbent_evidence_tiers.json",
+    "sha256": "6ebd244d5d4f3d635d2adaa55ea5562b80872eed1559cbd6afd68ef33ff98e2d"
+   },
+   {
+    "path": "results/validation/kinetic_core_b1_fit_report.json",
+    "sha256": "eebfb67971a2c0f604f257e532525dbdfb8b69f2b0f683561a730a99b21f8d3a"
+   },
+   {
+    "path": "results/validation/kinetic_core_b3_fit_report.json",
+    "sha256": "0263e84f19094f100ec562df30bf9945b49be6a0fd1f293f10a47840e46aabf6"
+   },
+   {
+    "path": "results/validation/kinetic_core_b6_fit_report.json",
+    "sha256": "923940a43d2946b5a79afa476578650eb73a11217a80addbf741fff224091a8a"
+   },
+   {
+    "path": "results/validation/kinetic_core_b7_fit_report.json",
+    "sha256": "4691435ae8bc7802099ebff955fb36af1b3401e200b75486850827cd54a23c04"
+   },
+   {
+    "path": "results/validation/kinetic_core_b18_fit_report.json",
+    "sha256": "cc88208cc76d617340f00123c7f3cdd05cad979fc9b719f1e78aedc6f5eb0afe"
+   },
+   {
+    "path": "results/validation/kinetic_core_b20_fit_report.json",
+    "sha256": "8697f869c45101926c27be9ba336575768bceaa1ca0d521bfa6f5c592de44b3c"
+   },
+   {
+    "path": "results/validation/kinetic_core_b21_fit_report.json",
+    "sha256": "30dea0576198068e76cbe231553faca460f319faa27f14c5ee009d2d2645dac6"
+   },
+   {
+    "path": "results/validation/kinetic_core_b39_fit_report.json",
+    "sha256": "e8c8f1b7fc95d6673f76e65ea0ce73a2e749c4aff7f34e2c49e59b30985cffd2"
+   },
+   {
+    "path": "results/validation/kinetic_core_b41_fit_report.json",
+    "sha256": "4d37ce110800d3faa4d9b3144958d8e9a6d78fc7c534ea2860d4b4ad38b1c939"
+   },
+   {
+    "path": "results/validation/kinetic_core_b2_3_fit_report.json",
+    "sha256": "be1f6893bfa93ef52f9be2efc1a023bc9f4b6acdcfb7a3581011ae1b99f83ac8"
+   },
+   {
+    "path": "results/validation/kinetic_core_b60_fit_report.json",
+    "sha256": "8e33492dea4c5d84c36eac4f1f9f4c9a87143597367574b58ff0af5a183215c3"
+   }
+  ]
+ },
+ "method": {
+  "what": "For every fit that froze a shipped coordinate (the S1 record's identification.fit; B41 for the fed 3-deoxy triangle the record names B39; B21 for its two analogue-tier rows), the fit's own residual function imported from its frozen wave generator, at its frozen point: one objective evaluation (S = r . r, rows then and now), the forward-difference Jacobian (one evaluation per free coordinate, absolute per-kind steps: log10 k 0.05, Ea 2 kJ/mol, pH slope 0.05, pKa 0.1, acid yield 0.01, logit 0.05), and one bounded Gauss-Newton step evaluated (backtracked at most twice). No optimiser runs.",
+  "classes": "REPRODUCES: |S_today - S_recorded| <= tol x max(1, S_recorded) (the record's stated tolerance, else 1 %) and the same row count. DRIFTED-BENIGN: not reproduced, but the evaluated one-step decrease is below chi2_p(0.95) x s2 (p = the fit's free coordinates) AND every shipped coordinate's quadratic marginal Delta_j = d_S' C_SS^-1 d_S <= chi2_|S|(0.95) x s2 (d the Gauss-Newton step, C = (J'J)^+), AND the quadratic model those tests use holds at the evaluated step (trust ratio = evaluated / predicted decrease >= 0.25). The marginal tests are Bonferroni-adjusted over the fit's m shipped coordinates (threshold chi2_|S|(1 - 0.05 / m) x s2; the unadjusted 95 % verdicts are reported too). DRIFTED-UNRESOLVED: the joint and marginal tests pass but the trust ratio fails (near-optimality not shown: no support, but no evidence against). DRIFTED-MATERIAL: the joint test or a marginal fails. s2 = max(1, chi2_red at the freeze), never today's chi2_red (a drift must not widen its own tolerance). Where the fit's frozen setting does not converge (B2.3's quick pH fixed point), S is reproduced at the frozen setting and the Jacobian and step are evaluated at the converged one.",
+  "limits": "Local: the one-step decrease is a LOWER bound on S_frozen - S_min (a material verdict on it is certain), while a benign verdict rests on the quadratic model at the frozen point, which a strongly curved objective can understate; the S1 profile run's refits (PR #106) are the global check where they exist. Rows then come from each report's own row table; B1 keeps none (per-response summaries only) and B60 keeps residuals without targets. Identification bookkeeping, never credit; changes no tier, register or constant."
+ },
+ "summary": {
+  "by_class": {
+   "REPRODUCES": [
+    "B3",
+    "B6",
+    "B7",
+    "B20",
+    "B21",
+    "B39",
+    "B41",
+    "B60"
+   ],
+   "DRIFTED-BENIGN": [],
+   "DRIFTED-UNRESOLVED": [
+    "B2.3"
+   ],
+   "DRIFTED-MATERIAL": [
+    "B1",
+    "B18"
+   ]
+  },
+  "not_run": [],
+  "shipped_coordinates_on_material_fits": {
+   "B1": [
+    "k_glc_frag.log10_k_ref",
+    "k_glc_frag.ea_kj_mol",
+    "k_mgo_mel.log10_k_ref",
+    "k_mgo_mel.ea_kj_mol",
+    "k_fa_frag.log10_k_ref",
+    "k_fa_frag.ea_kj_mol",
+    "k_aa_frag.log10_k_ref",
+    "k_aa_frag.ea_kj_mol"
+   ],
+   "B18": [
+    "k_go_ak.log10_k_ref",
+    "k_go_ak.ea_kj_mol",
+    "k_mgo_ak.log10_k_ref",
+    "k_mgo_ak.ea_kj_mol",
+    "b18.ph_slope_above_7_decades_per_unit",
+    "b18.ph_slope_below_7_decades_per_unit"
+   ]
+  },
+  "n_shipped_coordinates_on_material_fits": 14,
+  "shipped_coordinates_on_unresolved_fits": {
+   "B2.3": [
+    "k_pent_dpo.log10_k_ref",
+    "k_pent_dpo.ea_kj_mol",
+    "k_pent_tdp.log10_k_ref",
+    "k_pent_tdp.ea_kj_mol",
+    "k_dpo_c2c3.log10_k_ref",
+    "k_dpo_c2c3.ea_kj_mol",
+    "k_dpo_nf.log10_k_ref",
+    "k_dpo_nf.ea_kj_mol",
+    "k_dpo_ptr.log10_k_ref",
+    "k_dpo_ptr.ea_kj_mol",
+    "k_dpo_ddp.log10_k_ref",
+    "k_dpo_ddp.ea_kj_mol",
+    "k_tdp_fur.ea_kj_mol",
+    "k_ddp_mft.log10_k_ref",
+    "k_ddp_mft.ea_kj_mol",
+    "k_fur_fft.ea_kj_mol",
+    "k_nf_mft.ea_kj_mol",
+    "k_nf_mp3p.ea_kj_mol",
+    "k_mgo_mp.ea_kj_mol",
+    "k_ha_mp_mft.log10_k_ref",
+    "k_ha_mp_mft.ea_kj_mol",
+    "k_glc_ha.ea_kj_mol",
+    "k_thi_hmp.log10_k_ref",
+    "k_thi_hmp.ea_kj_mol",
+    "k_thi_mesh.log10_k_ref",
+    "k_thi_mesh.ea_kj_mol",
+    "k_hmp_mft.log10_k_ref",
+    "k_hmp_mft.ea_kj_mol",
+    "k_hmp_mp2p.log10_k_ref",
+    "k_hmp_mp2p.ea_kj_mol",
+    "k_cys_actz.log10_k_ref",
+    "k_cys_actz.ea_kj_mol",
+    "k_mmft.log10_k_ref",
+    "k_mft_decay.log10_k_ref",
+    "k_dimer_decay.ea_kj_mol",
+    "k_nf_decay.log10_k_ref",
+    "k_h2s_loss.log10_k_ref",
+    "k_h2s_loss.ea_kj_mol",
+    "k_pent_caramel.ea_kj_mol",
+    "k_pent_thermal.log10_k_ref",
+    "k_pent_thermal.ea_kj_mol",
+    "k_glc_fur.log10_k_ref",
+    "k_glc_fur.ea_kj_mol",
+    "k_arp_tdp_th.log10_k_ref",
+    "k_arp_tdp_th.ea_kj_mol",
+    "k_arp_dpo_th.log10_k_ref",
+    "k_arp_dpo_th.ea_kj_mol",
+    "k_ddp_mft_hs.log10_k_ref",
+    "k_ddp_mft_hs.ea_kj_mol",
+    "k_fur_fft_hs.log10_k_ref",
+    "k_fur_fft_hs.ea_kj_mol",
+    "k_ttca_cys.log10_k_ref",
+    "k_ttca_cys.ea_kj_mol",
+    "k_ttca_deg.ea_kj_mol"
+   ]
+  },
+  "n_shipped_coordinates_on_unresolved_fits": 54
+ }
+}

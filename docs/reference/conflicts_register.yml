@@ -4052,3 +4052,140 @@ entries:
       - {file: src/kinetic_core/ph_state.py, symbol: ORGANIC_ACID_MIX}
       - {file: src/kinetic_core/ph_state.py, symbol: "\"CBX\": {\"carboxyl\": 1}"}
       - {file: src/kinetic_core/ph_balance_rivals.py, symbol: CYSTEINE_AMINE_STEPS}
+  # ===================================================================================================================
+  # FROZEN-FIT DRIFT (2026-11-07, PR #107): a frozen fit whose objective today's engine no longer reproduces at its
+  # frozen point (results/validation/frozen_fit_reproducibility.{json,md}). Filed as code_mismatch, the nearest kind:
+  # the shipped number no longer matches the objective it was fitted to. Each live one is allow-listed, at its exact
+  # current S, in docs/reference/frozen_fit_drift_allowlist.yml, which scripts/ci/frozen_fit_drift_gate.py enforces
+  # (CF-138 is withdrawn: B39 reproduces under its own physics).
+  # ===================================================================================================================
+
+  - id: CF-135
+    kind: code_mismatch
+    scope: other_lane
+    sources: [martins2005, hamzalioglu2026]
+    quantity: "B1's objective (Martins 2005's nine responses at 80 / 100 / 120 C, 354 log-space rows, variant A) at its frozen point"
+    observation: >-
+      The frozen-fit reproducibility audit (PR #107) re-evaluated B1's own residual function at its frozen point:
+      S = r . r is 5025.874 today against 3979.877 in its report (+26.3 %; tolerance 1 %), with the same 354 rows,
+      targets and per-species sigmas. A model change, no data change: knocking out every trunk step added after B1
+      froze (2026-08-28) recovers the recorded S exactly; B21's aqueous glucosone step alone (r_ama_g, AMA ->
+      glucosone + Gly, 5c5f2857, 2026-09-09) carries ~96 % of the drift (knocked out: S 4019.0), draining DFG in
+      Martins' glucose-glycine pots and shifting every response's median bias by -0.04 to -0.09 dex. B21's constant is
+      Hamzalioglu 2026's lactulosyl-lysine-in-milk value carried to fructosyl-glycine in water (analogue tier), and B1
+      was never re-derived under it. Class DRIFTED-MATERIAL: one evaluated step lowers S by 80.2 (joint threshold
+      178.4, trust ratio 0.95), and with the marginal tests Bonferroni-adjusted over the 8 shipped coordinates
+      (threshold chi2_1(1 - 0.05/8) x s2 = 86.0, s2 = 11.50) k_glc_frag.ea_kj_mol stays outside today's local 95 %
+      region (Delta 157.2); k_aa_frag.log10_k_ref (Delta 71.3) is outside only unadjusted (44.2) and returns inside
+      under the adjustment (independent review of #107, 2026-11-07). Eight shipped coordinates rest on B1:
+      k_glc_frag, k_mgo_mel, k_fa_frag and k_aa_frag, log10 k_ref and Ea each.
+    explanations:
+      - "B1 was frozen before B21's aqueous glucosone step joined the trunk; nobody re-derived B1 under it (no gate compared a frozen fit's objective with today's engine)."
+    tests:
+      - "Attribution probes (frozen_fit_reproducibility.md, B1): every post-freeze trunk step knocked out recovers S 3979.877; r_ama_g alone 4019.0."
+    status: open
+    remedy: >-
+      Under plan sec. 7 S1 the eight coordinates cannot be fitted-identified until B1 is re-derived on today's
+      network: they stay fitted-unidentified and are carried under S4 as bands, or B1 is re-run through a case on
+      today's rows. Allow-listed MATERIAL at S 5025.874 in docs/reference/frozen_fit_drift_allowlist.yml; the entry
+      goes when B1 is re-derived. The S1 record notes the drift on the eight coordinates; no tier moves.
+    affects:
+      - {file: scripts/generators/generate_kinetic_core_b1_fit.py, symbol: "class Objective"}
+      - {file: src/kinetic_core/network.py, symbol: AQUEOUS_GLYOXAL_REACTIONS}
+      # the four B1 constants whose eight coordinates rest on B1 (named, so every step they drive is marked alike)
+      - {file: src/kinetic_core/parameters.py, symbol: k_glc_frag}
+      - {file: src/kinetic_core/parameters.py, symbol: k_mgo_mel}
+      - {file: src/kinetic_core/parameters.py, symbol: k_fa_frag}
+      - {file: src/kinetic_core/parameters.py, symbol: k_aa_frag}
+      - {file: docs/reference/frozen_fit_drift_allowlist.yml, symbol: CF-135}
+
+  - id: CF-136
+    kind: code_mismatch
+    scope: other_lane
+    sources: [zhou2024, leahy1989a, hamzalioglu2026]
+    quantity: "B18's objective (Zhou 2024's six mean formation rates, Leahy 1989's four within-study pH ratios) at its frozen point"
+    observation: >-
+      The frozen-fit reproducibility audit (PR #107): S = r . r is 295.068 today against 2.644 in B18's report, the same
+      10 rows. A model change on the four Leahy pH-ratio rows (Zhou's six are unchanged): B21's aqueous glucosone step
+      (5c5f2857, 2026-09-09, the day after B18 froze) moves them most (knocked out alone: S 27.2), CF-077's cross-pair
+      factor (19c66e99) most of the rest (reversed alone: S 224.6); with every probed change reversed S is 5.6, so ~3
+      of the 292 are not attributed. Class DRIFTED-MATERIAL: one Gauss-Newton step lowers S by 219.6 against the joint
+      threshold 12.6, and k_go_ak / k_mgo_ak log10_k_ref and both pH slopes lie outside today's local 95 % region, with
+      the marginal tests Bonferroni-adjusted over the 6 shipped coordinates or not (Delta 13.5 / 42.9 / 38.4 / 13.7
+      against 7.0 adjusted, 3.8 unadjusted). CF-077
+      already flags the frozen pH slopes conditional on its factor; this entry records that B21 moved them more.
+      Six shipped coordinates rest on B18.
+    explanations:
+      - "B18 froze one day before B21's aqueous glucosone step and before CF-077's fix; neither change re-derived it."
+    tests:
+      - "Attribution probes (frozen_fit_reproducibility.md, B18): r_ama_g knocked out S 27.2; cross-pair factor 1 S 224.6; all probes reversed S 5.6."
+    status: open
+    remedy: >-
+      Under plan sec. 7 S1 the six coordinates stay fitted-unidentified (S4 bands) until B18 is re-derived on today's
+      network (the re-fit CF-077 already leaves to the owner). Allow-listed MATERIAL at S 295.068 in
+      docs/reference/frozen_fit_drift_allowlist.yml; the entry goes when B18 is re-derived.
+    affects:
+      - {file: scripts/generators/generate_kinetic_core_b18_fit.py, symbol: "def residuals"}
+      - {file: src/kinetic_core/network.py, symbol: CROSS_PAIR_STATISTICAL_FACTOR}
+      - {file: docs/reference/frozen_fit_drift_allowlist.yml, symbol: CF-136}
+
+  - id: CF-137
+    kind: code_mismatch
+    scope: sulfur_rows
+    sources: [kang2026, kang2026_SI, hofmann1998c]
+    quantity: "B2.3's objective (B2.2's 58 sulfur-lane fit rows after the charge-conservation fix) at its frozen point"
+    observation: >-
+      The frozen-fit reproducibility audit (PR #107): S = r . r is 112.894 today against 16.351 in B2.3's report, the
+      same 58 rows (56 moved, none withdrawn or re-targeted). A model change: B2.3's generator now integrates under the
+      pH physics and numerics shipped after it froze, B51's pH-state corrections (2026-10-27) and B60's log-and-linear
+      node grid with a relaxed fixed point (2026-10-28), which it never sets back; at B2.3's quick 9-node / 2-sweep
+      setting the relaxed fixed point does not converge (residual 0.05 pH). Reversing all three probed changes takes S
+      to 45.1, not 16.35; the rest is the measured sulfur barriers and channels shipped since (B8 onward), not probed.
+      The Kang 2026 MFT / FFT rows and Hofmann 1998's furfural + H2S FFT row (T3) move most (+2 to +5 sigma). Class
+      DRIFTED-UNRESOLVED (revised 2026-11-07 after the independent review of #107; first filed MATERIAL): the joint
+      test passes (one evaluated step lowers S by 8.5 against the threshold 106.6) and every shipped coordinate's
+      marginal is inside today's local 95 % region (Bonferroni and unadjusted), but the trust ratio fails, so
+      near-optimality is NOT SHOWN either way. The review suspected a Jacobian polluted by the unconverged quick pH
+      fixed point; re-evaluated at the converged careful setting (41 nodes, 4 sweeps, rtol 1e-8: S 112.46 there, so the
+      drift is not a convergence artifact), the trust ratio is still 0.15 (the full Gauss-Newton step goes to S 5500,
+      the half step to 103.9): the objective is strongly curved at the frozen point. That re-evaluation took 39.5 min
+      on 2 workers (one careful evaluation 74 s; Jacobian 48 evaluations, 36 min). B60 re-fitted 23 of B2.3's 48
+      coordinates and holds the other 25 and the lumped formation Ea at B2.3's values inside B60's objective, which
+      reproduces, never free; 54 shipped coordinates rest on B2.3.
+    explanations:
+      - "B51 and B60 changed the pH physics and numerics every sulfur integration uses; B2.3's frozen generator was never re-run under them."
+    tests:
+      - "Attribution probes (frozen_fit_reproducibility.md, B2.3): B51 off S 128.8; B60 grid back to uniform S 286.8; all three freeze-era settings S 45.1."
+    status: open
+    remedy: >-
+      Under plan sec. 7 S1 the 54 coordinates stay fitted-unidentified (S4 bands) until re-derived on today's engine
+      (a B60-style re-fit freeing the 25 held coordinates, through a case). Allow-listed UNRESOLVED, held_in B60, at
+      S 112.894 in docs/reference/frozen_fit_drift_allowlist.yml (checked weekly: B2.3 is a slow fit, ~22 s per
+      evaluation). The S1 record says on each of the 54 that the value is held inside B60's objective, not free in it.
+    affects:
+      - {file: scripts/generators/generate_kinetic_core_b2_3_fit.py, symbol: "def residuals"}
+      - {file: docs/reference/frozen_fit_drift_allowlist.yml, symbol: CF-137}
+
+  - id: CF-138
+    kind: code_mismatch
+    scope: other_lane
+    sources: [mittelmaier2010, zhang2020]
+    quantity: "B39's objective (Mittelmaier 2011 fed 3-deoxyosone maxima, times of maximum and shares; Zhang 2021 within-study ratios) at its frozen point"
+    observation: >-
+      [WITHDRAWN 2026-11-07, independent review of PR #107; kept so the number is not reused. The register has no
+      "withdrawn" status, so the nearest one, not_an_error, is used.] The first audit evaluated B39 with the 3-DG
+      exit's pH term ON, its default since B41 (fb0dbd30): S = 3.207 against 4.048 recorded, which it classed
+      DRIFTED-BENIGN. But B39 is by definition B41's term-off ablation, so its objective is the one with the term OFF.
+      Evaluated that way (now pinned in build_frozen_fit_reproducibility.spec_b39), S = 4.048, the recorded value:
+      B39 REPRODUCES. There was no drift, only an audit that evaluated the wrong physics. B39 froze no shipped
+      coordinate.
+    explanations:
+      - "The audit's B39 spec inherited the engine default (term on) instead of B39's own physics (term off)."
+    tests:
+      - "frozen_fit_reproducibility.md, B39: REPRODUCES, S 4.048 -> 4.048 with the term pinned off."
+    status: not_an_error
+    remedy: >-
+      Pinned the term off in spec_b39 (scripts/generators/build_frozen_fit_reproducibility.py); removed B39's entry
+      from docs/reference/frozen_fit_drift_allowlist.yml. Nothing else changes.
+    affects:
+      - {file: scripts/generators/build_frozen_fit_reproducibility.py, symbol: "config.update({\"trunk.three_deoxy_exit_ph_term\": False})"}
