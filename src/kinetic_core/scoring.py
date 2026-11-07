@@ -466,7 +466,11 @@ def score_panel(
     else:
         bundles, skipped = list(bundles), []
 
-    benches = [score_benchmark(path, tag, pass_band=pass_band) for path, tag in bundles]
+    # 2026-11-07 (S3, ph_balance_refusal): every balance-solved row also runs the carried rivals' points, so the
+    # bundles are scored in parallel when MAILLARD_WORKERS asks for it (forked; the result is independent of the count)
+    from . import parallel
+
+    benches = parallel.map_ordered(lambda item: score_benchmark(item[0], item[1], pass_band=pass_band), list(bundles))
     _centre_relative_use_only(benches)
 
     by_panel: Dict[str, Dict[str, Any]] = {}
