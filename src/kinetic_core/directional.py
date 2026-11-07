@@ -428,7 +428,13 @@ def _close(bucket: Dict[str, Any]) -> Dict[str, Any]:
 def score_panel(path: Path | str = PANEL_PATH) -> Dict[str, Any]:
     panel = load_panel(path)
     tol_pct = float(panel.get("flat_tolerance_pct", 5.0))
-    rows = [score_claim(claim, flat_tolerance_pct=tol_pct) for claim in panel["panel"]]
+    # 2026-11-07 (S3, ph_balance_refusal): each sulfur arm now runs the carried rivals' points too, so the claims are
+    # scored in parallel when MAILLARD_WORKERS asks for it (forked workers; the result is independent of the count)
+    from functools import partial
+
+    from . import parallel
+
+    rows = parallel.map_ordered(partial(score_claim, flat_tolerance_pct=tol_pct), list(panel["panel"]))
 
     def split(predicate) -> Dict[str, Any]:
         by_cat: Dict[str, Dict[str, Any]] = {}

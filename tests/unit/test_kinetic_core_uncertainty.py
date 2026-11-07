@@ -514,7 +514,7 @@ def test_shared_hofmann_rows_carry_shared_with(small_artifact):
     for key in (("mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7", MFT),
                 ("hofmann1998_ribose_cysteine_145C_20min_pH5", MFT)):
         # 2026-11-07 (S3, ph_balance_refusal): both pots' MFT move beyond omega with the falsified balance, so S3 refuses them first
-        assert refused[key]["reason"].startswith("REFUSED, FALSIFIED pH BALANCE (S3")
+        assert refused[key]["reason"].startswith("NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3")
 
 
 def test_predicted_point_is_the_deterministic_prediction(small_artifact):

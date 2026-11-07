@@ -10,33 +10,26 @@ not S3-tested at a converged fit. S3's refusal clause: the outputs that depend o
 sensitivity to the falsified structure's switch exceeds the lane's within-lab term) are refused, never shown at the
 incumbent's point".
 
-THE RULE, APPLIED PER OUTPUT. Whether an output depends on the balance is a property of the pot: Meynier's cysteine
-pots move by 0.2 - 2 dex between B0 and the rivals, a glycine + glucose pot or a pot buffered far from any titratable
-product by less than 1e-3 (``results/validation/ph_balance_s3_sensitivity.md``, which ran every sulfur-lane panel pot,
-every sulfur-lane directional arm and a stratified grid of CLI recipes). So the rule is not a list of species: on every
-pot whose pH the balance solves (the sulfur lane, any buffer but a clamped one), :func:`assess` runs the two carried
-rivals at their representative points -- B1 at phi_cys = 1 (its other coordinates at its best draw) and B13 at its best
-draw, both from ``kinetic_core_m1b_part_i_falsification.json``, B3's in-situ breakpoints from the screen record, the
-configuration the screen used -- and compares each output with B0's (the shipped point):
+THE RULE (prereg sec. 21.10, rulings R1 - R3), applied per pot, per output. On every pot whose pH the balance solves
+(the sulfur lane, any buffer but a clamped one), :func:`assess` runs the carried rivals beside B0 (the shipped point) at
+their screen-passing draws' extremes: for each rival, the passing draw that holds the minimum and the one that holds
+the maximum of each of its free coordinates, plus its best draw (``results/validation/ph_balance_s3_rival_points.json``,
+written by ``build_ph_balance_s3_sensitivity.py --points`` from the screen's stored draws and A2's noise choices in D).
+Each output is judged by the uncertainty it is shipped with (R1):
 
-* a concentration is refused when its spread over {B0, B1, B13}, log10(max / min), exceeds the lane's within-lab term
-  omega (H0's 0.419 dex; sec. 7, the S1 - S4 preamble). A value below ``ZERO_FLOOR_UG_PER_L`` is a zero: all zero is no
-  spread, a zero beside a number is an infinite one;
-* a ratio between two pots (``engine.compare``; the directional panel's steps) is refused when the spread of its log
-  ratio exceeds omega or the points disagree in sign (S3: "rivals that disagree in sign make the lever's direction
-  refused"), see :func:`ratio_refusal`;
-* the cooled and in-situ pH the balance solves are withheld when their spread exceeds the prereg's pH term:
-  sqrt(s_off^2 + s_shape^2) = 0.478 pH for an unbuffered pot (sec. 20.2), sigma_max = 0.135 pH for a declared buffer
-  (sec. 21.8.1).
+* an ABSOLUTE concentration, shipped as a level: its spread over B0 and every rival point, log10(max / min), against
+  the lane's between-laboratory term tau (H0's 0.964 dex; prereg sec. 21.8.6). Above it the LEVEL is refused by name,
+  as H0 refuses a thiol level: the number is still computed, kept in the arm, and serves ratios;
+* a RELATIVE output (a ratio between two pots: ``compare``, the contrast diagnostic, the directional panel's steps):
+  refused when the spread of its log ratio over the points exceeds the within-laboratory term omega (0.419 dex) or the
+  points disagree in sign (S3), see :func:`ratio_refusal`;
+* the cooled and in-situ pH the balance solves (R2): withheld when its spread exceeds the pH-level term, A1's run offset
+  and per-point shape in quadrature, sqrt(0.45^2 + 0.16^2) = 0.478 pH (sec. 20.2), in any pot.
 
-The rivals run only in the NumPy engine on the inline coupling (not in JAX; W3), at about 0.1 - 15 s per pot. The
-verdict is decided once per (pot, targets), at the shipped centre, and cached; a Monte-Carlo draw reuses it.
-
-HOW IT IS REFUSED, through the machinery the engine already has. A request whose every answerable target is refused
-gets the reason below in ``declaration.reasons`` (``out_of_envelope``: no number, ``CorePrediction.require`` raises;
-the scorecard, the envelope and the directional panel record the row as refused with it; ``compare`` reports "not
-comparable"). A request with some targets refused answers the rest and names the refused ones, as the engine names an
-unreachable target ("NOT ANSWERED, BY NAME", ``run_metadata["refused_targets"]``).
+A value below ``ZERO_FLOOR_UG_PER_L`` is a zero: all zero is no spread, a zero beside a number an infinite one. A rival
+whose integration exceeds the deterministic budget ``ph_balance_rivals.RIVAL_RHS_BUDGET`` cannot show independence, and
+every output of that pot is refused with that reason. The rivals run only in the NumPy engine on the inline coupling
+(not in JAX; W3). The verdict is decided once per (pot, targets), at the shipped centre, and cached; a draw reuses it.
 
 WHAT IS NOT REFUSED. A pot whose pH is stated and held (``BufferSpec(kind="clamped")``: a pH-stat, or a measured pH
 supplied as the held value; the measured-trajectory path) does not solve the balance and is unchanged. Nothing on the
@@ -45,10 +38,10 @@ re-scored (the WUR blind-test predictions of 2026-10-20 ran with a clamped pH).
 """
 from __future__ import annotations
 
-import contextlib
 import math
 from dataclasses import dataclass, field
 from functools import lru_cache
+from statistics import NormalDist
 from typing import Any, Dict, Mapping, Optional, Sequence, Tuple
 
 from src import data_access, data_paths
@@ -60,17 +53,17 @@ ENABLED = True
 FALSIFICATION_RECORD = data_paths.VALIDATION_DIR / "kinetic_core_m1b_part_i_falsification.json"
 SCREEN_RECORD = data_paths.VALIDATION_DIR / "kinetic_core_m1b_part_i_screen.json"
 A2_RECORD = data_paths.VALIDATION_DIR / "kinetic_core_m1b_part_i_a2.json"
+#: The rivals' points (R3): each rival's screen-passing draws' extremes plus its best draw.
+POINTS_RECORD = data_paths.VALIDATION_DIR / "ph_balance_s3_rival_points.json"
 #: The sensitivity record (``build_ph_balance_s3_sensitivity.py``): the rule's audit across the recipe space.
 SENSITIVITY_RECORD = data_paths.VALIDATION_DIR / "ph_balance_s3_sensitivity.json"
 
 #: The prefix every refusal of a balance-dependent output starts with (the scorers match on it).
 BALANCE_REFUSED_TAG = "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134)"
-#: The carried rivals' representative points, in the order they are run.
-RIVAL_POINTS: Tuple[str, ...] = ("B1_phi_cys_1", "B13_best")
 #: B3's latent acetic release barrier: ``ea_dpo_aa_kj_mol`` (Martins 2005's hexose analogue r_odg_aa), as the screen.
 EA_ISO_KJ_MOL = 76.0
 #: A log ratio this small has no sign: it is inside the numerical difference between the shipped fixed-point coupling
-#: (B0) and the inline coupling the rivals run on, at most 0.0061 dex over the sensitivity record's 3523 concentration
+#: (B0) and the inline coupling the rivals run on, at most 0.0061 dex over the sensitivity record's concentration
 #: outputs (``b0_vs_inline``; tests/unit/test_ph_balance_refusal.py keeps the floor above that maximum).
 SIGN_FLOOR_DEX = 0.01
 #: Below this a concentration is zero, not a number (``directional.ZERO_FLOOR_UG_PER_L``).
@@ -78,6 +71,8 @@ ZERO_FLOOR_UG_PER_L = 1e-6
 #: The balance's pH outputs in a run's segment metadata (the in-situ START is the label's temperature shift before any
 #: product exists, the shift the measured-trajectory path also uses, and is kept).
 WITHHELD_PH_KEYS: Tuple[str, ...] = ("ph_in_situ_end", "ph_cooled_end")
+#: What a failed or over-budget arm reads as, in place of its point values (JSON-safe: the scorecard stores it).
+FAILED = "failed"
 
 LIFT_TEXT = (
     "WHAT WOULD LIFT IT (STATUS_AND_PLAN sec. 7, S3's lift clause, pending independent confirmation): an S3 change of "
@@ -89,42 +84,56 @@ LIFT_TEXT = (
 
 
 # ----------------------------------------------------------------------------------------------------------------
-# Thresholds and points, from the records
+# Terms and points, from the records
 # ----------------------------------------------------------------------------------------------------------------
 @lru_cache(maxsize=1)
 def thresholds() -> Dict[str, float]:
-    """omega (H0) for concentrations and ratios; the prereg's pH terms (A1 sec. 20.2, A2 sec. 21.8.1)."""
+    """R1: tau for absolute levels, omega for relative outputs; R2: the pH-level term. With the two sensitivities the
+    record reports (omega on absolute levels; the five-pot bound sigma_max,5 = 0.265 pH on the pH, prereg sec. 21.8.1)."""
     from . import thiol_relative_only
 
+    r = thiol_relative_only.ruling()
     fals = data_access.load_json(FALSIFICATION_RECORD)
-    a2 = data_access.load_json(A2_RECORD)
-    return {"omega_dex": float(thiol_relative_only.ruling().omega_dex),
-            "ph_unbuffered": math.hypot(float(fals["s_off"]), float(fals["s_shape"])),
-            "ph_buffered": float(a2["sigma_max"]["0.2"]["sigma_max"])}
+    five_pot = 0.2 / NormalDist().inv_cdf((1.0 + 0.05 ** (1.0 / 5.0)) / 2.0)
+    return {"tau_dex": float(r.tau_abs_dex), "omega_dex": float(r.omega_dex),
+            "ph_level": math.hypot(float(fals["s_off"]), float(fals["s_shape"])),
+            "ph_five_pot_sensitivity": float(five_pot)}
 
 
 @lru_cache(maxsize=1)
 def rival_points() -> Dict[str, Tuple[Dict[str, Any], Any]]:
-    """{point: (Config changes, PhDrift)} for the two carried rivals, as ``fit_m1b_ph_balance.rival_changes`` builds
-    them (checked equal in tests/unit/test_ph_balance_refusal.py)."""
+    """{point name: (Config changes, PhDrift)}: every rival point of the points record (R3), each built as
+    ``fit_m1b_ph_balance.rival_changes`` builds a screen draw (checked equal in tests/unit/test_ph_balance_refusal.py)."""
     from . import ph_balance_rivals as pbr
     from .ph_state import PhDrift
 
-    best = data_access.load_json(FALSIFICATION_RECORD)["best_draws"]
-    breakpoints = tuple(float(v) for v in data_access.load_json(SCREEN_RECORD)["davidek_breakpoints_in_situ"])
-    b1 = dict(best["B1"]["coordinates"])
-    b13 = dict(best["B13"]["coordinates"])
-    return {
-        "B1_phi_cys_1": (
-            {"ph.coupling": "inline", "ph.amine_survival": pbr.AmineSurvival(True, 1.0, float(b1["phi_arp"]))},
-            PhDrift(acid_yield=float(b1["acid_yield"]), arp_amine_pka=float(b1["arp_amine_pka"]))),
-        "B13_best": (
-            {"ph.coupling": "inline",
-             "ph.amine_survival": pbr.AmineSurvival(True, float(b13["phi_cys"]), float(b13["phi_arp"])),
-             "ph.acid_supply": pbr.AcidSupply(True, float(b13["y5"]), float(b13["y6"]), float(b13["y_hi"]),
-                                              breakpoints, float(b13["k_iso"]), EA_ISO_KJ_MOL, "hold_total")},
-            PhDrift(acid_yield=0.0, arp_amine_pka=float(b13["arp_amine_pka"]))),
-    }
+    record = data_access.load_json(POINTS_RECORD)
+    breakpoints = tuple(float(v) for v in record["davidek_breakpoints_in_situ"])
+    out: Dict[str, Tuple[Dict[str, Any], Any]] = {}
+    for rival, points in record["rivals"].items():
+        for p in points:
+            v = p["coordinates"]
+            changes: Dict[str, Any] = {"ph.coupling": "inline",
+                                       "ph.amine_survival": pbr.AmineSurvival(True, float(v["phi_cys"]),
+                                                                              float(v["phi_arp"]))}
+            if rival == "B13":
+                changes["ph.acid_supply"] = pbr.AcidSupply(True, float(v["y5"]), float(v["y6"]), float(v["y_hi"]),
+                                                           breakpoints, float(v["k_iso"]), EA_ISO_KJ_MOL, "hold_total")
+                drift = PhDrift(acid_yield=0.0, arp_amine_pka=float(v["arp_amine_pka"]))
+            elif rival == "B1":
+                drift = PhDrift(acid_yield=float(v["acid_yield"]), arp_amine_pka=float(v["arp_amine_pka"]))
+            else:
+                raise ValueError(f"{POINTS_RECORD.name}: unknown rival {rival!r}")
+            out[str(p["name"])] = (changes, drift)
+    return out
+
+
+def rival_point_names() -> Tuple[str, ...]:
+    return tuple(rival_points())
+
+
+def all_points() -> Tuple[str, ...]:
+    return ("B0",) + rival_point_names()
 
 
 # ----------------------------------------------------------------------------------------------------------------
@@ -150,21 +159,16 @@ def log_spread(values: Sequence[float]) -> float:
     return math.log10(max(positive) / min(positive))
 
 
-def ph_tolerance(spec: Any) -> float:
-    buffer = getattr(spec.process, "buffer", None)
-    th = thresholds()
-    return th["ph_buffered"] if (buffer is not None and buffer.kind != "none") else th["ph_unbuffered"]
-
-
 @dataclass
 class Verdict:
     """The rule's reading of one (pot, targets) at the shipped centre."""
 
-    #: {point: {compound: ug/L}} for B0 and the rivals (in memory only: never serialised, it holds absolute levels)
+    #: {point: {compound: ug/L}} for B0 and every rival point (in memory only: it holds absolute levels)
     values: Dict[str, Dict[str, float]] = field(default_factory=dict)
     #: {point: {"ph_cooled_end": ..., "ph_in_situ_end": ...}}
     ph: Dict[str, Dict[str, Optional[float]]] = field(default_factory=dict)
     spread_dex: Dict[str, float] = field(default_factory=dict)
+    #: the compounds whose absolute LEVEL is refused (spread above tau, or a failure)
     refused: Tuple[str, ...] = ()
     ph_spread: Dict[str, float] = field(default_factory=dict)
     ph_refused: bool = False
@@ -172,38 +176,11 @@ class Verdict:
 
     def summary(self) -> Dict[str, Any]:
         """What a run's metadata may carry: spreads and verdicts, no level."""
-        return {"rule": "S3 (STATUS_AND_PLAN sec. 7) on the M1b part (i) falsification; ph_balance_refusal",
-                "points": ["B0"] + list(RIVAL_POINTS), "spread_dex": dict(self.spread_dex),
-                "omega_dex": thresholds()["omega_dex"], "refused": list(self.refused),
-                "ph_spread": dict(self.ph_spread), "ph_refused": self.ph_refused, "failure": self.failure}
-
-
-#: A rival run longer than this is stopped and the pot's outputs refused (its independence is not shown). In the
-#: sensitivity run every rival point that finished took at most 49.5 s (median 0.43 s; Xu 2007's pH 8 arm), and eight
-#: ground past the generator's 300 s limit (Chen 2000 / 2002's pH 5 ribose + cysteine pots, 180 C): 120 s separates the
-#: two with room and gives every recorded pot the record's verdict. Held only in the main thread (SIGALRM).
-RIVAL_TIMEOUT_S = 120
-
-
-@contextlib.contextmanager
-def _time_limit(seconds: int):
-    import signal
-    import threading
-
-    if threading.current_thread() is not threading.main_thread() or not hasattr(signal, "SIGALRM"):
-        yield
-        return
-
-    def _raise(signum, frame):
-        raise TimeoutError("a carried rival's integration ran past RIVAL_TIMEOUT_S")
-
-    previous = signal.signal(signal.SIGALRM, _raise)
-    signal.alarm(int(seconds))
-    try:
-        yield
-    finally:
-        signal.alarm(0)
-        signal.signal(signal.SIGALRM, previous)
+        th = thresholds()
+        return {"rule": "S3 (STATUS_AND_PLAN sec. 7) on the M1b part (i) falsification; prereg sec. 21.10",
+                "n_points": 1 + len(rival_point_names()), "spread_dex": dict(self.spread_dex),
+                "tau_dex": th["tau_dex"], "level_refused": list(self.refused), "ph_spread": dict(self.ph_spread),
+                "ph_level_term": th["ph_level"], "ph_refused": self.ph_refused, "failure": self.failure}
 
 
 _CACHE: Dict[Tuple[str, Tuple[str, ...]], Verdict] = {}
@@ -225,7 +202,7 @@ def _ph_of(run) -> Dict[str, Optional[float]]:
 
 def assess(spec: Any, targets: Sequence[str], b0_run: Any = None) -> Verdict:
     """The verdict for ``spec`` asked for ``targets``: B0 (``b0_run`` when the caller already integrated the shipped
-    centre, else integrated here) against the two carried rivals. Cached by (spec, targets)."""
+    centre, else integrated here) against every rival point. Cached by (spec, targets)."""
     key = _key(spec, targets)
     if key in _CACHE:
         return _CACHE[key]
@@ -240,7 +217,7 @@ def assess(spec: Any, targets: Sequence[str], b0_run: Any = None) -> Verdict:
     try:
         base = config.Config.from_globals()
         for point, (changes, drift) in rival_points().items():
-            with config.applied(base.replace(changes)), _time_limit(RIVAL_TIMEOUT_S):
+            with config.applied(base.replace(changes)):
                 run = engine.predict(spec, list(targets), draw=engine.CoreDraw(ph_drift=drift), balance_refusal=False)
             verdict.values[point] = {c: float(v) for c, v in run.concentrations_ug_per_l.items()}
             verdict.ph[point] = _ph_of(run)
@@ -250,18 +227,16 @@ def assess(spec: Any, targets: Sequence[str], b0_run: Any = None) -> Verdict:
         verdict.ph_refused = True
         _store(key, verdict)
         return verdict
-    omega = thresholds()["omega_dex"]
+    th = thresholds()
     for c in names:
-        vals = [verdict.values[p].get(c) for p in ("B0",) + RIVAL_POINTS]
-        spread = math.inf if any(v is None for v in vals) else log_spread(vals)
-        verdict.spread_dex[c] = spread
-    verdict.refused = tuple(c for c in names if verdict.spread_dex[c] > omega)
-    tol = ph_tolerance(spec)
+        vals = [verdict.values[p].get(c) for p in all_points()]
+        verdict.spread_dex[c] = math.inf if any(v is None for v in vals) else log_spread(vals)
+    verdict.refused = tuple(c for c in names if verdict.spread_dex[c] > th["tau_dex"])
     for k in WITHHELD_PH_KEYS:
-        vals = [verdict.ph[p].get(k) for p in ("B0",) + RIVAL_POINTS]
+        vals = [verdict.ph[p].get(k) for p in all_points()]
         if all(v is not None for v in vals):
             verdict.ph_spread[k] = max(vals) - min(vals)
-    verdict.ph_refused = any(s > tol for s in verdict.ph_spread.values())
+    verdict.ph_refused = any(s > th["ph_level"] for s in verdict.ph_spread.values())
     _store(key, verdict)
     return verdict
 
@@ -272,12 +247,15 @@ def _store(key, verdict: Verdict) -> None:
     _CACHE[key] = verdict
 
 
-def point_values(spec: Any, targets: Sequence[str], run: Any, compound: str) -> Optional[Dict[str, float]]:
+def point_values(spec: Any, targets: Sequence[str], run: Any, compound: str) -> Any:
     """{point: ug/L} of ``compound`` in one arm: the cached verdict's values where the balance is solved, else the
-    run's own value at every point (a held pH does not move with the balance). ``None`` when not available."""
+    run's own value at every point (a held pH does not move with the balance). ``FAILED`` for an arm whose rivals could
+    not be run; ``None`` when nothing is available."""
     v = cached_verdict(spec, targets)
     if v is not None:
-        out = {p: v.values.get(p, {}).get(compound) for p in ("B0",) + RIVAL_POINTS}
+        if v.failure:
+            return FAILED
+        out = {p: v.values.get(p, {}).get(compound) for p in all_points()}
         return None if any(x is None for x in out.values()) else {p: float(x) for p, x in out.items()}
     if run is None or compound not in getattr(run, "concentrations_ug_per_l", {}):
         return None
@@ -285,45 +263,53 @@ def point_values(spec: Any, targets: Sequence[str], run: Any, compound: str) -> 
     if balance_solved(spec, lanes):
         return None
     value = float(run.concentrations_ug_per_l[compound])
-    return {p: value for p in ("B0",) + RIVAL_POINTS}
+    return {p: value for p in all_points()}
 
 
-def offsets_dex(spec: Any, targets: Sequence[str], compound: str) -> Optional[Dict[str, float]]:
+def offsets_dex(spec: Any, targets: Sequence[str], compound: str) -> Any:
     """{point: log10(value at point / value at B0)} for ``compound`` on a balance-solved pot whose verdict is cached:
-    the rivals' values RELATIVE to B0, which a within-study ratio needs and which carry no absolute level. ``None``
-    when there is no verdict or a value is zero beside a number; all zero reads 0 at every point."""
+    the rivals' values RELATIVE to B0, which a within-study ratio needs and which carry no absolute level. ``FAILED``
+    when the rivals could not be run; ``None`` when there is no verdict or a value is zero beside a number (the ratio is
+    then decided on zeros, below); all zero reads 0 at every point."""
     v = cached_verdict(spec, targets)
     if v is None:
         return None
-    vals = {p: v.values.get(p, {}).get(compound) for p in ("B0",) + RIVAL_POINTS}
+    if v.failure:
+        return FAILED
+    vals = {p: v.values.get(p, {}).get(compound) for p in all_points()}
     if any(x is None for x in vals.values()):
         return None
     zero = [float(x) <= ZERO_FLOOR_UG_PER_L for x in vals.values()]
     if all(zero):
         return {p: 0.0 for p in vals}
     if any(zero):
-        return None
+        return FAILED
     return {p: math.log10(float(x) / float(vals["B0"])) for p, x in vals.items()}
 
 
-def offsets_ratio_refusal(log_ratio_b0: float, off_a: Optional[Mapping[str, float]],
-                          off_b: Optional[Mapping[str, float]]) -> Optional[str]:
-    """:func:`ratio_refusal` from a B0 log ratio and each arm's :func:`offsets_dex` (``None`` = an arm the balance
-    does not move: zero at every point)."""
-    zero = {p: 0.0 for p in ("B0",) + RIVAL_POINTS}
+def offsets_ratio_refusal(log_ratio_b0: float, off_a: Any, off_b: Any) -> Optional[str]:
+    """:func:`ratio_refusal` from a B0 log ratio and each arm's :func:`offsets_dex` (``None`` = an arm the balance does
+    not move: zero at every point)."""
+    if off_a == FAILED or off_b == FAILED:
+        return f"{BALANCE_REFUSED_TAG}: an arm's carried rivals could not be run or hit a zero. " + short_reason()
+    names = tuple((off_a or off_b or {p: 0.0 for p in all_points()}).keys())
+    zero = {p: 0.0 for p in names}
     a, b = off_a or zero, off_b or zero
-    lin = {p: 10.0 ** (float(log_ratio_b0) + float(a[p]) - float(b[p])) for p in zero}
-    return ratio_refusal(lin, {p: 1.0 for p in zero})
+    lin = {p: 10.0 ** (float(log_ratio_b0) + float(a[p]) - float(b[p])) for p in names}
+    return ratio_refusal(lin, {p: 1.0 for p in names})
 
 
-def ratio_refusal(a: Optional[Mapping[str, float]], b: Optional[Mapping[str, float]]) -> Optional[str]:
-    """Why the a / b ratio is refused, given each arm's {point: value} (:func:`point_values`): the points disagree in
-    sign (S3: the direction is refused) or the log ratio's spread exceeds omega. ``None`` when it stands, or when an arm
-    carries no point values (nothing to compare)."""
+def ratio_refusal(a: Any, b: Any) -> Optional[str]:
+    """Why the a / b ratio is refused, given each arm's {point: value} (:func:`point_values`): an arm's rivals failed,
+    the points disagree in sign (S3: the direction is refused), or the log ratio's spread exceeds omega. ``None`` when
+    it stands, or when an arm carries no point values (nothing to compare)."""
+    if a == FAILED or b == FAILED:
+        return (f"{BALANCE_REFUSED_TAG}: an arm's carried rivals could not be run, so the ratio's independence from the "
+                "balance is not shown. " + short_reason())
     if a is None or b is None:
         return None
     logs = []
-    for point in ("B0",) + RIVAL_POINTS:
+    for point in a:
         x, y = float(a[point]), float(b[point])
         zx, zy = x <= ZERO_FLOOR_UG_PER_L, y <= ZERO_FLOOR_UG_PER_L
         if zx and zy:
@@ -344,6 +330,13 @@ def ratio_refusal(a: Optional[Mapping[str, float]], b: Optional[Mapping[str, flo
     return None
 
 
+def level_refused(declaration: Any, compound: str) -> bool:
+    """Whether ``compound``'s absolute level is refused by this rule on ``declaration`` (a dataclass or its dict)."""
+    names = (declaration.get("balance_refused_targets") if isinstance(declaration, Mapping)
+             else getattr(declaration, "balance_refused_targets", ()))
+    return str(compound) in tuple(names or ())
+
+
 # ----------------------------------------------------------------------------------------------------------------
 # The words
 # ----------------------------------------------------------------------------------------------------------------
@@ -352,15 +345,16 @@ def short_reason() -> str:
     th = thresholds()
     return (
         f"{BALANCE_REFUSED_TAG}: computed on the sulfur lane's pH solved from the shipped charge balance, which S3 "
-        "falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); this output's spread over B0 and "
-        f"the carried rivals B1 / B13 exceeds omega = {th['omega_dex']:.3f} dex "
-        "(results/validation/ph_balance_s3_sensitivity.md). Lifted by an S3 change shipping the union of the carried "
-        "rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause)."
+        "falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried "
+        f"rivals B1 / B13 beyond the term it is shipped with (a level: tau = {th['tau_dex']:.3f} dex; a ratio or "
+        f"direction: omega = {th['omega_dex']:.3f} dex or a sign; the pH: {th['ph_level']:.3f} pH; prereg sec. 21.10). "
+        "Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on "
+        "CF-084's controls (sec. 7, S3's lift clause)."
     )
 
 
 def refusal_text(compounds: Sequence[str] = (), verdict: Optional[Verdict] = None) -> str:
-    """The full reason: what decided it, the spread that refused it, what still answers, and what would lift it."""
+    """The full reason for refused levels: what decided it, the spread, what still answers, and what would lift it."""
     th = thresholds()
     named = ""
     if compounds:
@@ -372,17 +366,17 @@ def refusal_text(compounds: Sequence[str] = (), verdict: Optional[Verdict] = Non
     failure = (f" The carried rivals could not be run on this pot ({verdict.failure}), so its independence from the "
                "balance is not shown." if verdict is not None and verdict.failure else "")
     return (
-        f"{BALANCE_REFUSED_TAG}: {named}computed with the sulfur lane's pH solved from the shipped charge balance, and "
-        "that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 "
-        "included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's "
-        "buffered cysteine pots, Holm p <= 3e-3 across the defensible noise range, independently confirmed (M1b part "
-        "(i) prereg sec. 21; results/validation/kinetic_core_m1b_part_i_a2_s3.md). No rival is credited; B1 (amine "
-        "survival) and B13 (B1 + acid supply) are carried. S3 refuses an output whose sensitivity to that switch "
-        "exceeds the lane's within-laboratory term and never shows it at the incumbent's point: here the spread of the "
-        f"output over B0, B1 (phi_cys = 1) and B13 exceeds omega = {th['omega_dex']:.3f} dex "
-        "(results/validation/ph_balance_s3_sensitivity.md runs the rule across the recipe space)." + failure
-        + " A pot whose pH is measured or held is answered: state the held pH as a clamped buffer (buffer kind "
-        "'clamped'), and the balance is not solved. " + LIFT_TEXT
+        f"{BALANCE_REFUSED_TAG}: {named}the absolute level is computed with the sulfur lane's pH solved from the shipped "
+        "charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing "
+        "into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: "
+        "Meynier 1995's buffered cysteine pots, Holm p <= 3e-3 across the defensible noise range, independently "
+        "confirmed (M1b part (i) prereg sec. 21; results/validation/kinetic_core_m1b_part_i_a2_s3.md). No rival is "
+        "credited; B1 (amine survival) and B13 (B1 + acid supply) are carried. S3 never shows an output that depends "
+        "on the falsified structure at the incumbent's point: this level's spread over B0 and the carried rivals' "
+        f"screen-passing extremes exceeds tau = {th['tau_dex']:.3f} dex, the term a level is shipped with (prereg sec. "
+        "21.10, R1)." + failure + " Ratios of it between pots are answered by `compare` where they stand under omega "
+        "and agree in sign. A pot whose pH is measured or held is answered: state the held pH as a clamped buffer "
+        "(buffer kind 'clamped'), and the balance is not solved. " + LIFT_TEXT
     )
 
 
@@ -390,11 +384,11 @@ def ph_refusal_text() -> str:
     """Why the balance's pH is withheld from a run."""
     th = thresholds()
     return ("the pH solved from the charge balance is withheld: its spread over B0 and the carried rivals exceeds the "
-            f"prereg's pH term ({th['ph_unbuffered']:.3f} pH unbuffered, {th['ph_buffered']:.3f} pH buffered). "
-            + short_reason())
+            f"pH-level term {th['ph_level']:.3f} pH (prereg sec. 20.2; sec. 21.10, R2). " + short_reason())
 
 
-__all__ = ["A2_RECORD", "BALANCE_REFUSED_TAG", "EA_ISO_KJ_MOL", "ENABLED", "FALSIFICATION_RECORD", "LIFT_TEXT", "RIVAL_POINTS",
-           "SCREEN_RECORD", "SENSITIVITY_RECORD", "SIGN_FLOOR_DEX", "Verdict", "WITHHELD_PH_KEYS", "ZERO_FLOOR_UG_PER_L", "assess",
-           "balance_solved", "cached_verdict", "log_spread", "offsets_dex", "offsets_ratio_refusal", "point_values", "ph_refusal_text", "ph_tolerance", "ratio_refusal",
-           "refusal_text", "rival_points", "short_reason", "thresholds"]
+__all__ = ["A2_RECORD", "BALANCE_REFUSED_TAG", "EA_ISO_KJ_MOL", "ENABLED", "FAILED", "FALSIFICATION_RECORD", "LIFT_TEXT",
+           "POINTS_RECORD", "SCREEN_RECORD", "SENSITIVITY_RECORD", "SIGN_FLOOR_DEX", "Verdict", "WITHHELD_PH_KEYS",
+           "ZERO_FLOOR_UG_PER_L", "all_points", "assess", "balance_solved", "cached_verdict", "level_refused",
+           "log_spread", "offsets_dex", "offsets_ratio_refusal", "ph_refusal_text", "point_values", "ratio_refusal",
+           "refusal_text", "rival_point_names", "rival_points", "short_reason", "thresholds"]

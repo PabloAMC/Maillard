@@ -430,8 +430,9 @@ the S1 record, and its absolute outputs are refused as in the thiol lane until t
   The refusal is lifted only by an S3 change of its own (items 6 and 9 replaced as below) that ships the unweighted
   union of the remaining carried rivals' envelopes. A rival enters the union only if its converged best fit has passed
   this rule's test on the data that falsified the incumbent; the union credits no rival. Until then the refusal stands.
-  *(Lift clause added 2026-11-07 from the M1b part (i) A2 confirmation read, prereg sec. 21.9; pending independent
-  confirmation.)* The reviewer (item 8) checks both missing and padded rivals. Carried rivals must be runnable for
+  *(Lift clause added 2026-11-07. Its wording follows M1b part (i) prereg sec. 21.8.6 item 2 (the B1 u B13 envelope
+  "only through its own reviewed case") and that item's confirmation edit, sec. 21.9 (only after converged S3 fits of
+  B1 and B13); pending independent confirmation.)* The reviewer (item 8) checks both missing and padded rivals. Carried rivals must be runnable for
   prediction: until W3 runs them in JAX, they run in the NumPy engine behind their switches, and the cost is stated.
 - **S4. Unidentified coordinates are bands, and fits may move them only on decisive-type evidence.** A band comes from
   measured bounds, a same-class analogue, or the reaction-class distribution of measured constants (as B55's

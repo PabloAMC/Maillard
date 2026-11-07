@@ -238,9 +238,11 @@ def score_benchmark(
         elif thiol_relative_only.declared(declaration, compound):
             # 2026-11-05 (H0 / EX-059, D2 branch (i)): the thiol lane's absolute levels are refused; the panel
             # scores what the model ships, so the row leaves the absolute count with its reason.
-            reason = "NOT EVALUABLE: " + thiol_relative_only.short_reason()
+            # 2026-11-07: or the S3 refusal of a level the falsified pH balance moves beyond tau (same path)
+            reason = "NOT EVALUABLE: " + thiol_relative_only.level_refusal_text(declaration, compound, short=True)
         if reason is not None:
             absolute_refused = reason.startswith("NOT EVALUABLE: " + thiol_relative_only.ABSOLUTE_REFUSED_TAG)
+            balance_refused = reason.startswith("NOT EVALUABLE: " + ph_balance_refusal.BALANCE_REFUSED_TAG)
             refused.append(
                 {
                     "benchmark_id": benchmark_id, "panel": panel_tag, "compound": compound,
@@ -248,6 +250,7 @@ def score_benchmark(
                     "envelope_state": declaration.state, "lane": declaration.lane,
                     "unidentified_route": reason.startswith("NOT EVALUABLE: HEXOSE"),
                     "absolute_refused": absolute_refused,
+                    "balance_refused": balance_refused,
                     "data_refused": data_refused is not None,
                     # ... but what the lane DOES ship, a ratio between two pots of one study, still needs both
                     # numbers: the within-study contrast diagnostic (build_contrast_scores.py) reads them, and
@@ -261,7 +264,7 @@ def score_benchmark(
                         "in_core_fit": in_core_fit(benchmark_id, compound),
                         "shared_with": SHARED_WITH_HOLDOUT_PANEL.get((benchmark_id, compound)),
                         **({"balance_s3_offsets_dex": s3_offsets} if s3_offsets is not None else {}),
-                    }} if absolute_refused else {}),
+                    }} if (absolute_refused or balance_refused) else {}),
                 }
             )
             continue

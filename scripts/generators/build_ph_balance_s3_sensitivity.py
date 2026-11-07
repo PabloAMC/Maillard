@@ -9,14 +9,14 @@ refused, never shown at the incumbent's point". This generator measures that sen
 engine can produce with the sulfur lane's pH solved from the balance, and writes the list the refusal implements.
 
 WHAT IS RUN. Every recipe below is integrated through ``engine.predict`` (the path ``predict``, ``compare``, the
-scorecard, the envelope and the directional panel use) at four points:
+scorecard, the envelope and the directional panel use) at:
 
 * ``B0``: the shipped engine (B60's constants and balance, ``fixed_point_nodes`` coupling): the incumbent's point;
 * ``B0_inline``: the same balance on the inline coupling, a numerics diagnostic only (the rivals run inline);
-* ``B1_phi_cys_1``: B1 at phi_cys = 1, its other coordinates at B1's best draw in the falsification record;
-* ``B13_best``: B13 at its best draw (the falsification record's ``best_draws``), B3's in-situ breakpoints from the
-  screen record. Both rivals are ``ph_balance_refusal.rival_points()``, the configuration the screen built
-  (``fit_m1b_ph_balance.rival_changes``; their equality is a unit test).
+* every rival point of ``results/validation/ph_balance_s3_rival_points.json`` (prereg sec. 21.10, R3; ``--points``):
+  for B1 and for B13, the stored screen draws that pass all four signatures in at least one (A1 form x A2 choice in D)
+  cell of sec. 21.1, represented by the passing draw at the minimum and at the maximum of each free coordinate, plus
+  the rival's best draw (falsification record). These are ``ph_balance_refusal.rival_points()``, the engine's own.
 
 ``predict`` is called with ``balance_refusal=False``: the dependence of an output on the falsified balance can only be
 measured at the falsified point. No shipped surface passes that flag.
@@ -30,21 +30,22 @@ same precursor x pH x thermal cells with a CLAMPED pH (the measured-trajectory i
 the rivals do not apply and the clamped row is a control), and two lipid co-integrations (the lipid lane carries no pH
 term). The whole space is run; no subset is needed (see the record's timing).
 
-THE OUTPUTS AND THE THRESHOLDS (stated exactly; record ``thresholds``):
+THE OUTPUTS AND THE TERMS (prereg sec. 21.10; record ``thresholds``). Each output is judged by the uncertainty it is
+shipped with (R1, R2):
 
-* a concentration (absolute, ug/L): balance-dependent when the spread over {B0, B1_phi_cys_1, B13_best},
-  log10(max / min), exceeds the lane's within-laboratory term omega = H0's 0.419 dex (STATUS_AND_PLAN sec. 7, the
-  S1 - S4 preamble: "for the thiol lane, H0's omega (0.419 dex)"; S3's refusal clause: "exceeds the lane's within-lab
-  term"). The prereg's first pass (sec. 21.8.6) read tau = 0.964 dex for absolute outputs; sec. 7's refusal clause
-  names the within-lab term without that split and governs, so omega is used; the tau reading is reported beside it.
+* an absolute concentration (ug/L): balance-dependent when its spread over B0 and every rival point, log10(max / min),
+  exceeds tau = H0's 0.964 dex, the between-laboratory term a level is shipped with (sec. 21.8.6, confirmed); omega
+  (0.419 dex) is reported as a sensitivity;
 * a ratio between two recipes (``compare``, the contrast scores, the directional claims): the spread of the log ratio
-  over the three points against omega, and the direction refused when the points disagree in sign (S3: "rivals that
-  disagree in sign make the lever's direction refused").
-* the cooled and in-situ pH: the pH within-laboratory terms the prereg gives. Unbuffered pots: A1's lab-repeat
-  run offset and per-point shape in quadrature, sqrt(s_off^2 + s_shape^2) = sqrt(0.45^2 + 0.16^2) = 0.478 pH (sec.
-  20.2); declared-buffer pots: A2's sigma_max = 0.135 pH (sec. 21.8.1, the upper end of the defensible range D at
-  edge 0.2, the most permissive choice).
+  over the points against omega, the within-laboratory term a relative output is shipped with, and the direction
+  refused when the points disagree in sign (S3);
+* the cooled and in-situ pH: A1's run offset and per-point shape in quadrature, sqrt(0.45^2 + 0.16^2) = 0.478 pH (sec.
+  20.2), in every pot; the five-pot bound 0.265 pH (sec. 21.8.1, a drift term) is reported as a sensitivity.
 
+``--extremes-check`` (part of the full run) samples further passing draws on a set of recorded pots and reports whether
+any widens the spread the extremes give (R3's monotonicity premise).
+
+    python scripts/generators/build_ph_balance_s3_sensitivity.py --points     # the rivals' points record
     python scripts/generators/build_ph_balance_s3_sensitivity.py --time-one   # one recipe, all four points, timed
     python scripts/generators/build_ph_balance_s3_sensitivity.py --workers 4  # the full run -> the record
 """
@@ -79,9 +80,6 @@ SCREEN = data_paths.VALIDATION_DIR / "kinetic_core_m1b_part_i_screen.json"
 A2 = data_paths.VALIDATION_DIR / "kinetic_core_m1b_part_i_a2.json"
 S3_RECORD = data_paths.VALIDATION_DIR / "kinetic_core_m1b_part_i_a2_s3.json"
 
-POINTS: Tuple[str, ...] = ("B0", "B0_inline", "B1_phi_cys_1", "B13_best")
-#: the points whose spread decides (B0_inline is a numerics diagnostic only)
-DECIDING: Tuple[str, ...] = ("B0", "B1_phi_cys_1", "B13_best")
 from src.kinetic_core.ph_balance_refusal import SIGN_FLOOR_DEX  # noqa: E402  (a log ratio this small has no sign)
 
 #: a point that runs longer than this is recorded as failed (one directional arm ground for > 20 min on 2026-11-07)
@@ -136,32 +134,96 @@ SUGAR_PAIRS = (("cys50_rib35", "cys50_xyl35"), ("cys50_rib35", "cys50_glc35"))
 # Thresholds, from the records (never typed)
 # ----------------------------------------------------------------------------------------------------------------
 def thresholds() -> Dict[str, Any]:
-    from src.kinetic_core import thiol_relative_only
+    """The engine's own terms (``ph_balance_refusal.thresholds``; prereg sec. 21.10, R1 - R2), with their sources."""
+    from src.kinetic_core import ph_balance_refusal
 
-    r = thiol_relative_only.ruling()
+    th = dict(ph_balance_refusal.thresholds())
     fals = data_access.load_json(FALSIFICATION)
+    th.update({
+        "tau_source": ("R1: H0's tau_ABS(all), the between-laboratory term an absolute level is shipped with (prereg "
+                       "sec. 21.8.6, confirmed): judges absolute concentration outputs"),
+        "omega_source": ("R1: H0's omega(all), the within-laboratory term a relative output is shipped with (STATUS_AND_PLAN "
+                         "sec. 7, S1 - S4 preamble): judges ratios, contrasts and directions, with the sign; reported as a "
+                         "sensitivity on absolute levels"),
+        "ph_level_source": (f"R2: prereg sec. 20.2 (A1), the run-level offset s_off = {float(fals['s_off']):g} and the "
+                            f"per-point shape s_shape = {float(fals['s_shape']):g} pH of one laboratory's repeat, in "
+                            "quadrature: a pH level's within-laboratory term, in every pot"),
+        "ph_five_pot_source": ("sensitivity: sigma_max,5 = 0.2 / Phi^-1((1 + 0.05^(1/5)) / 2), the five-cysteine-pot bound "
+                               "of prereg sec. 21.8.1 (a drift term, assumption-laden: sec. 21.9); never judges a level"),
+    })
+    return th
+
+
+# ----------------------------------------------------------------------------------------------------------------
+# The points (R3): B0, B0 inline (a numerics diagnostic), and each rival's screen-passing draws' extremes + best draw
+# ----------------------------------------------------------------------------------------------------------------
+POINTS_OUT = data_paths.VALIDATION_DIR / "ph_balance_s3_rival_points.json"
+CARRIED = ("B1", "B13")
+
+
+def passing_masks() -> Dict[str, Any]:
+    """Per carried rival, which stored screen draws pass all four signatures in at least one (A1 form x A2 choice in
+    D) cell of prereg sec. 21.1 (the union: a draw some defensible noise choice admits), from the stored draws."""
+    import numpy as np
+
+    import fit_m1b_ph_balance as FM
+
     a2 = data_access.load_json(A2)
-    s_off, s_shape = float(fals["s_off"]), float(fals["s_shape"])
-    return {
-        "omega_dex": r.omega_dex,
-        "omega_source": ("H0's omega(all), the larger set (thiol_relative_only.ruling(); STATUS_AND_PLAN sec. 7, "
-                         "the S1 - S4 preamble: the thiol lane's within-lab term; S3's refusal clause)"),
-        "tau_abs_dex": r.tau_abs_dex,
-        "tau_source": "H0's tau_ABS(all) (the lane's between-lab term); reported beside omega for absolute outputs "
-                      "(prereg sec. 21.8.6's first pass), not used to refuse",
-        "ph_unbuffered": math.hypot(s_off, s_shape),
-        "ph_unbuffered_source": (f"prereg sec. 20.2 (A1): the run-level offset s_off = {s_off:g} and the per-point shape "
-                                 f"s_shape = {s_shape:g} pH of one laboratory's repeat (Zhou 2024 vs 2025b), in "
-                                 "quadrature: a level's within-laboratory term"),
-        "ph_buffered": float(a2["sigma_max"]["0.2"]["sigma_max"]),
-        "ph_buffered_source": ("prereg sec. 21.8.1 (A2): sigma_max at edge 0.2, the upper end of the defensible range D "
-                               "of a buffered pot's pH noise (the most permissive choice)"),
-    }
+    choices = [FM.A2Choice(c["name"], tuple(float(x) for x in c["sd"]), float(c["edge"]), bool(c["in_d"]),
+                           str(c["basis"])) for c in a2["choices"] if c["in_d"]]
+    ens = FM.load_screen_ensembles()
+    pinned = ens["B0_pinned"]
+    pinned_rise = float(pinned.f["C-Zhou-ARP"][0, -1] - pinned.f["C-Zhou-ARP"][0, 0])
+    data = FM.a1_measured()
+    out: Dict[str, Any] = {}
+    for rival in CARRIED:
+        e = ens[rival]
+        mask = np.zeros(e.size, dtype=bool)
+        for form in FM.A1_FORMS:
+            for c in choices:
+                mask |= FM.a2_signatures(e, data, form, c, pinned_rise)["all"]
+        out[rival] = {"draws": e.draws, "mask": mask,
+                      "coordinates": [c.name for c in FM.coordinates(rival, "primary")]}
+    return out
 
 
-# ----------------------------------------------------------------------------------------------------------------
-# The four points
-# ----------------------------------------------------------------------------------------------------------------
+def build_points() -> Dict[str, Any]:
+    """The points record: per carried rival, the passing draw at the min and at the max of each free coordinate, and
+    the best draw of the falsification record (sec. 20.4), de-duplicated by draw index."""
+    import numpy as np
+
+    masks = passing_masks()
+    best = data_access.load_json(FALSIFICATION)["best_draws"]
+    rivals: Dict[str, Any] = {}
+    counts: Dict[str, Any] = {}
+    for rival, m in masks.items():
+        idx = np.flatnonzero(m["mask"])
+        chosen: Dict[int, List[str]] = {}
+        for coord in m["coordinates"]:
+            vals = np.array([m["draws"][i][coord] for i in idx])
+            for tag, j in (("min", int(idx[int(np.argmin(vals))])), ("max", int(idx[int(np.argmax(vals))]))):
+                chosen.setdefault(j, []).append(f"{tag} {coord}")
+        b = int(best[rival]["index"])
+        chosen.setdefault(b, []).append("best draw (falsification record)")
+        rivals[rival] = [{"name": f"{rival}_d{j}", "index": j, "why": why, "passes": bool(m["mask"][j]),
+                          "coordinates": {k: float(v) for k, v in m["draws"][j].items()}}
+                         for j, why in sorted(chosen.items())]
+        counts[rival] = {"stored_draws": int(len(m["draws"])), "passing": int(idx.size), "points": len(rivals[rival]),
+                         "coordinates": m["coordinates"],
+                         "passing_box": {c: [float(min(m["draws"][i][c] for i in idx)),
+                                             float(max(m["draws"][i][c] for i in idx))] for c in m["coordinates"]}}
+    return {"artifact": "ph_balance_s3_rival_points",
+            "provenance": provenance.provenance_block("ph_balance_s3_rival_points", generated_by=GENERATED_BY + " --points",
+                                                      wave="S3 application: the pH balance (M1b part (i))",
+                                                      inputs=[PREREG, FALSIFICATION, SCREEN, A2,
+                                                              data_paths.VALIDATION_DIR / "kinetic_core_m1b_part_i_screen_draws.json.gz"]),
+            "definition": ("prereg sec. 21.10, R3: each carried rival is represented by the stored screen draws that pass "
+                           "all four signatures in at least one (A1 form x A2 choice in D) cell (sec. 21.1), through the "
+                           "passing draw at the minimum and at the maximum of each free coordinate, plus its best draw"),
+            "davidek_breakpoints_in_situ": data_access.load_json(SCREEN)["davidek_breakpoints_in_situ"],
+            "counts": counts, "rivals": rivals}
+
+
 def point_configs() -> Dict[str, Tuple[Dict[str, Any], Any]]:
     """{point: (Config changes, PhDrift or None)}; None drift = the shipped balance constants. The rivals' points are
     the engine's own (``ph_balance_refusal.rival_points``), so the record audits the rule the engine applies."""
@@ -172,13 +234,21 @@ def point_configs() -> Dict[str, Tuple[Dict[str, Any], Any]]:
     return out
 
 
+def deciding(row: Optional[Mapping[str, Any]] = None) -> Tuple[str, ...]:
+    """The points whose spread decides: the row's own (B0 and every rival point it ran; B0_inline is a numerics
+    diagnostic), else the engine's."""
+    if row is not None and row.get("points"):
+        return tuple(p for p in row["points"] if p != "B0_inline")
+    from src.kinetic_core import ph_balance_refusal
+
+    return ph_balance_refusal.all_points()
+
+
 def point_coordinates() -> Dict[str, Any]:
-    best = data_access.load_json(FALSIFICATION)["best_draws"]
-    b1 = dict(best["B1"]["coordinates"])
-    b1["phi_cys"] = 1.0
+    rec = data_access.load_json(POINTS_OUT)
     return {"B0": "shipped (B60 balance constants, fixed_point_nodes)", "B0_inline": "shipped constants, inline",
-            "B1_phi_cys_1": b1, "B13_best": dict(best["B13"]["coordinates"]),
-            "davidek_breakpoints_in_situ": data_access.load_json(SCREEN)["davidek_breakpoints_in_situ"]}
+            "rivals": {r: [{k: p[k] for k in ("name", "index", "why", "passes")} for p in pts]
+                       for r, pts in rec["rivals"].items()}, "counts": rec["counts"]}
 
 
 # ----------------------------------------------------------------------------------------------------------------
@@ -337,10 +407,15 @@ def evaluate_recipe(recipe: Recipe, points: Optional[Mapping[str, Tuple[Dict[str
         row["refused_before_s3"] = list(decl.reasons)
         row["seconds"] = time.time() - t0
         return row
+    rival_failed = False
     for name, (changes, drift) in points.items():
         if clamped and name != "B0":
             # the balance is not solved on a clamped pot, and the rivals run only on the inline dynamic pH
             row["points"][name] = {"not_applicable": "clamped pH: the balance is not solved"}
+            continue
+        if rival_failed and name not in ("B0", "B0_inline"):
+            # the engine refuses the pot at its first failed rival point; the rest would only repeat the budget
+            row["points"][name] = {"failed": "skipped: an earlier rival point failed (the engine refuses at the first)"}
             continue
         t = time.time()
         import signal
@@ -372,6 +447,8 @@ def evaluate_recipe(recipe: Recipe, points: Optional[Mapping[str, Tuple[Dict[str
                 signal.signal(signal.SIGALRM, previous)
         result["seconds"] = round(time.time() - t, 3)
         row["points"][name] = result
+        if result.get("failed") and name not in ("B0", "B0_inline"):
+            rival_failed = True
     row["seconds"] = round(time.time() - t0, 3)
     return row
 
@@ -379,7 +456,8 @@ def evaluate_recipe(recipe: Recipe, points: Optional[Mapping[str, Tuple[Dict[str
 # ----------------------------------------------------------------------------------------------------------------
 # Analysis
 # ----------------------------------------------------------------------------------------------------------------
-def _values(row: Mapping[str, Any], output: str, points: Sequence[str] = DECIDING) -> Optional[List[float]]:
+def _values(row: Mapping[str, Any], output: str, points: Optional[Sequence[str]] = None) -> Optional[List[float]]:
+    points = deciding(row) if points is None else points
     vals = []
     for p in points:
         r = (row.get("points") or {}).get(p) or {}
@@ -406,7 +484,8 @@ def log_spread(vals: Sequence[float]) -> float:
 
 
 def ph_tolerance(row: Mapping[str, Any], th: Mapping[str, Any]) -> float:
-    return float(th["ph_buffered"] if row.get("declared_buffer") else th["ph_unbuffered"])
+    """R2: the pH-level term, buffered or not."""
+    return float(th["ph_level"])
 
 
 def output_entries(rows: Sequence[Mapping[str, Any]], th: Mapping[str, Any]) -> List[Dict[str, Any]]:
@@ -418,7 +497,7 @@ def output_entries(rows: Sequence[Mapping[str, Any]], th: Mapping[str, Any]) -> 
         if row.get("clamped"):
             for t in row["targets"]:
                 out.append({"rid": row["rid"], "source": row["source"], "output": t, "kind": "absolute",
-                            "dependent": False, "spread": 0.0, "tolerance": th["omega_dex"],
+                            "dependent": False, "spread": 0.0, "tolerance": th["tau_dex"],
                             "why": "clamped pH: the balance is not solved (the measured-trajectory path)"})
             continue
         b0_inline = {}
@@ -434,17 +513,18 @@ def output_entries(rows: Sequence[Mapping[str, Any]], th: Mapping[str, Any]) -> 
             if kind == "ph":
                 spread = max(vals) - min(vals)
                 tol = ph_tolerance(row, th)
+                entry["dependent_sensitivity"] = bool(spread > th["ph_five_pot_sensitivity"])
             else:
                 spread = log_spread(vals)
-                tol = th["omega_dex"]
-                entry["exceeds_tau"] = bool(spread > th["tau_abs_dex"])
+                tol = th["tau_dex"]
+                entry["dependent_sensitivity"] = bool(spread > th["omega_dex"])
                 entry["h0_absolute_refused"] = t in (row.get("absolute_refused_h0") or [])
                 entry["hexose_floor"] = bool(row.get("unidentified_hexose"))
             inline = _values(row, t, ("B0", "B0_inline"))
             if inline is not None:
                 b0_inline = (abs(inline[0] - inline[1]) if kind == "ph" else log_spread(inline))
                 entry["b0_vs_inline"] = b0_inline
-            entry.update(values=dict(zip(DECIDING, vals)), spread=spread, tolerance=tol,
+            entry.update(values=dict(zip(deciding(row), vals)), spread=spread, tolerance=tol,
                          dependent=bool(spread > tol))
             out.append(entry)
     return out
@@ -487,7 +567,7 @@ def ratio_entry(lever: str, a: Mapping[str, Any], b: Mapping[str, Any], output: 
                 th: Mapping[str, Any]) -> Optional[Dict[str, Any]]:
     """The log ratio a / b of one output at every deciding point, its spread and its sign verdict."""
     clamped = a.get("clamped") and b.get("clamped")
-    pts = ("B0",) if clamped else DECIDING
+    pts = ("B0",) if clamped else deciding(a)
     va, vb = _values(a, output, pts), _values(b, output, pts)
     if va is None or vb is None:
         return None
@@ -550,13 +630,13 @@ def claim_entries(rows: Sequence[Mapping[str, Any]], claims: Sequence[Mapping[st
         steps_by_point: Dict[str, List[Optional[float]]] = {}
         if c["claim_type"] == "ranking":
             row = arm_rows[0]
-            for p in DECIDING:
+            for p in deciding(arm_rows[0]):
                 vals = [(_values(row, o, (p,)) or [None])[0] for o in c["observables"]]
                 steps_by_point[p] = ([None] * (len(vals) - 1) if any(v is None for v in vals) else
                                      [_log_ratio(vals[i + 1], vals[i]) for i in range(len(vals) - 1)])
         else:
             obs = c["observables"][0]
-            for p in DECIDING:
+            for p in deciding(arm_rows[0]):
                 vals = [(_values(r, obs, (p,)) or [None])[0] for r in arm_rows]
                 steps_by_point[p] = ([None] * (len(vals) - 1) if any(v is None for v in vals) else
                                      [_log_ratio(vals[i + 1], vals[i]) for i in range(len(vals) - 1)])
@@ -566,7 +646,7 @@ def claim_entries(rows: Sequence[Mapping[str, Any]], claims: Sequence[Mapping[st
             entry.update(dependent=False, sign_flip=False, why="every arm clamped: the balance is not solved")
             out.append(entry)
             continue
-        if any(s is None for p in DECIDING for s in steps_by_point[p]):
+        if any(s is None for p in deciding(arm_rows[0]) for s in steps_by_point[p]):
             entry.update(dependent=None, sign_flip=None, why="a step is undefined at some point (zero, refused or failed)")
             out.append(entry)
             continue
@@ -574,7 +654,7 @@ def claim_entries(rows: Sequence[Mapping[str, Any]], claims: Sequence[Mapping[st
         flips = []
         spreads = []
         for i in range(n):
-            vals = [steps_by_point[p][i] for p in DECIDING]
+            vals = [steps_by_point[p][i] for p in deciding(arm_rows[0])]
             nonzero = [v for v in vals if abs(v) > SIGN_FLOOR_DEX]
             flips.append(bool(nonzero) and min(nonzero) < 0.0 < max(nonzero))
             spreads.append(max(vals) - min(vals))
@@ -594,6 +674,7 @@ def _summarise(entries: Sequence[Mapping[str, Any]], key: Callable[[Mapping[str,
         finite = [float(e["spread"]) for e in decided if e.get("spread") is not None and math.isfinite(e["spread"])]
         out.append({"class": list(k), "n": len(es), "n_decided": len(decided),
                     "n_dependent": sum(1 for e in decided if e["dependent"]),
+                    "n_dependent_sensitivity": sum(1 for e in decided if e.get("dependent_sensitivity")),
                     "n_sign_flip": sum(1 for e in decided if e.get("sign_flip")),
                     "n_infinite_spread": sum(1 for e in decided if e.get("spread") == math.inf),
                     "median_spread": statistics.median(finite) if finite else None,
@@ -654,10 +735,11 @@ def render(payload: Mapping[str, Any]) -> str:
         "",
         "## Thresholds",
         "",
-        f"* concentrations and ratios: omega = {th['omega_dex']:.3f} dex ({th['omega_source']}); tau = "
-        f"{th['tau_abs_dex']:.3f} dex reported beside absolute outputs ({th['tau_source']})",
-        f"* pH, unbuffered pots: {th['ph_unbuffered']:.3f} pH ({th['ph_unbuffered_source']})",
-        f"* pH, declared-buffer pots: {th['ph_buffered']:.3f} pH ({th['ph_buffered_source']})",
+        f"* absolute concentrations: tau = {th['tau_dex']:.3f} dex ({th['tau_source']})",
+        f"* ratios, contrasts, directions: omega = {th['omega_dex']:.3f} dex and the sign ({th['omega_source']})",
+        f"* pH levels: {th['ph_level']:.3f} pH ({th['ph_level_source']})",
+        f"* sensitivities: omega on absolute levels; {th['ph_five_pot_sensitivity']:.3f} pH on the pH "
+        f"({th['ph_five_pot_source']})",
         "",
         "## Points",
         "",
@@ -672,11 +754,12 @@ def render(payload: Mapping[str, Any]) -> str:
               f"* failed point runs: {payload['failed_point_runs']}", ""]
 
     def table(title, rows, head):
-        lines.extend([f"## {title}", "", "| " + " | ".join(head) + " | n | decided | dependent | sign flips | "
-                      "median spread | min | max |", "|" + "---|" * (len(head) + 7)])
+        lines.extend([f"## {title}", "", "| " + " | ".join(head) + " | n | decided | dependent | dependent at the "
+                      "sensitivity term | sign flips | median spread | min | max |", "|" + "---|" * (len(head) + 8)])
         for r in rows:
             lines.append("| " + " | ".join(str(c) for c in r["class"]) + f" | {r['n']} | {r['n_decided']} | "
-                         f"{r['n_dependent']} | {r['n_sign_flip']} | {_fmt(r['median_spread'])} | "
+                         f"{r['n_dependent']} | {r.get('n_dependent_sensitivity', '-')} | {r['n_sign_flip']} | "
+                         f"{_fmt(r['median_spread'])} | "
                          f"{_fmt(r['min_spread'])} | {_fmt(r['max_spread'])} |")
         lines.append("")
 
@@ -693,6 +776,17 @@ def render(payload: Mapping[str, Any]) -> str:
               "## Dynamic-pH outputs below the threshold", "",
               f"{len(s['non_dependent_dynamic_outputs'])} of the decided dynamic-pH outputs; "
               f"{s['undecided_dynamic_outputs']} not decided (a point failed or refused).", ""]
+    x = payload.get("extremes_check") or {}
+    if x:
+        lines += ["## R3: do the extremes bound the passing draws?", "", x.get("summary", ""), ""]
+    dn = payload.get("draws_needed") or {}
+    if dn:
+        lines += ["## R3: how many passing draws bound the band", "", dn.get("summary", ""), "",
+                  "| draws per rival | share within the capture | share whose verdict agrees | (output, subset) pairs |",
+                  "|---|---|---|---|"]
+        lines += [f"| {r['draws_per_rival']} | {r['share_within_capture']:.3f} | {r['share_verdict_agrees']:.3f} | {r['n']} |"
+                  for r in dn.get("table", [])]
+        lines.append("")
     lines += ["## The list (the classes the engine's live rule refuses, read off the run)", ""] + [f"* {x}" for x in payload["the_list"]] + [""]
     return "\n".join(lines)
 
@@ -712,6 +806,180 @@ def the_list(analysis: Mapping[str, Any]) -> List[str]:
         out.append(f"directional claims, {r['class'][0]}: {r['n_dependent']} of {r['n_decided']} dependent, "
                    f"{r['n_sign_flip']} direction flips")
     return out
+
+
+#: the recorded pots the extremes check samples (one per precursor class, buffered and unbuffered)
+EXTREMES_RIDS: Tuple[str, ...] = (
+    "grid:cys50_rib35|none|pH5.5|120C_60min", "grid:cys50_rib35|pyrophosphate_0.2M|pH4.5|145C_20min",
+    "grid:arp5|none|pH6.5|120C_60min", "grid:arp20_cys20|phosphate_0.2M|pH5.5|145C_20min",
+    "grid:thi10_rib35|phosphate_0.05M|pH6.5|120C_60min", "grid:cys20_rib20_gly20|acetate_0.2M|pH7.5|145C_20min",
+    "grid:gsh20_rib35|none|pH4.5|120C_60min", "grid:ttca20|phosphate_0.5M|pH5.5|120C_60min")
+EXTREMES_SAMPLES = 24
+EXTREMES_SEED = 20261107
+
+
+def _extremes_task(item) -> Dict[str, Any]:
+    """One recorded pot at a set of extra passing draws (the item carries their configs)."""
+    from src.kinetic_core import config, engine
+
+    recipe, extra = item
+    targets = _answerable_targets(recipe.spec, recipe.targets)
+    base = config.Config.from_globals()
+    out: Dict[str, Any] = {}
+    for name, (changes, drift) in extra.items():
+        try:
+            with config.applied(base.replace(changes)):
+                run = engine.predict(recipe.spec, targets, draw=engine.CoreDraw(ph_drift=drift), balance_refusal=False)
+            seg = (run.run_metadata.get("segments") or [{}])[-1]
+            out[name] = {"concentrations_ug_per_l": dict(run.concentrations_ug_per_l),
+                         "ph_cooled_end": seg.get("ph_cooled_end")}
+        except Exception as exc:  # noqa: BLE001
+            out[name] = {"failed": f"{type(exc).__name__}: {exc}"[:200]}
+    return {"rid": recipe.rid, "targets": targets, "extra": out}
+
+
+def extremes_check(rows: Sequence[Mapping[str, Any]], recipes: Sequence[Recipe], workers: int,
+                   th: Mapping[str, Any]) -> Dict[str, Any]:
+    """R3's premise, checked: on EXTREMES_RIDS, EXTREMES_SAMPLES further passing draws per rival (seeded, not among the
+    points); does any widen an output's spread beyond what B0 + the extremes give, and does any verdict change?"""
+    import numpy as np
+
+    import fit_m1b_ph_balance as FM
+    from src.kinetic_core import parallel
+
+    masks = passing_masks()
+    rec = data_access.load_json(POINTS_OUT)
+    bp = rec["davidek_breakpoints_in_situ"]
+    rng = np.random.default_rng(EXTREMES_SEED)
+    extra: Dict[str, Tuple[Dict[str, Any], Any]] = {}
+    for rival in CARRIED:
+        taken = {int(p["index"]) for p in rec["rivals"][rival]}
+        idx = [int(i) for i in np.flatnonzero(masks[rival]["mask"]) if int(i) not in taken]
+        for j in rng.choice(idx, size=min(EXTREMES_SAMPLES, len(idx)), replace=False):
+            extra[f"{rival}_s{int(j)}"] = FM.rival_changes(rival, "primary", masks[rival]["draws"][int(j)], False, bp)
+    by_rid = {r["rid"]: r for r in rows}
+    items = [(r, extra) for r in recipes if r.rid in EXTREMES_RIDS]
+    t0 = time.time()
+    results = parallel.map_ordered(_extremes_task, items, n_workers=workers)
+    per: List[Dict[str, Any]] = []
+    widened, flips, n = 0, 0, 0
+    worst = 0.0
+    for res in results:
+        row = by_rid[res["rid"]]
+        for t in res["targets"] + ["ph_cooled_end"]:
+            base_vals = _values(row, t)
+            if base_vals is None:
+                continue
+            ex = []
+            for v in res["extra"].values():
+                if v.get("failed"):
+                    continue
+                ex.append(v.get(t) if t == "ph_cooled_end" else (v.get("concentrations_ug_per_l") or {}).get(t))
+            ex = [float(x) for x in ex if x is not None]
+            if t == "ph_cooled_end":
+                sp0 = max(base_vals) - min(base_vals)
+                sp1 = max(base_vals + ex) - min(base_vals + ex)
+                tol = th["ph_level"]
+            else:
+                sp0, sp1, tol = log_spread(base_vals), log_spread(base_vals + ex), th["tau_dex"]
+            n += 1
+            if sp1 > sp0 + 1e-9:
+                widened += 1
+                worst = max(worst, (sp1 - sp0) if math.isfinite(sp1 - sp0) else math.inf)
+            if (sp0 > tol) != (sp1 > tol):
+                flips += 1
+            per.append({"rid": res["rid"], "output": t, "spread_extremes": sp0, "spread_with_samples": sp1,
+                        "tolerance": tol, "verdict_changes": (sp0 > tol) != (sp1 > tol)})
+    summary = (f"{len(items)} recorded pots x {len(extra)} further passing draws ({EXTREMES_SAMPLES} per rival, seed "
+               f"{EXTREMES_SEED}): {widened} of {n} outputs' spreads widen beyond B0 + the extremes (largest widening "
+               f"{_fmt(worst)}); {flips} verdicts change. {time.time() - t0:.0f} s.")
+    return {"summary": summary, "n_outputs": n, "n_widened": widened, "largest_widening": worst,
+            "n_verdict_changes": flips, "samples_per_rival": EXTREMES_SAMPLES, "seed": EXTREMES_SEED,
+            "pots": list(EXTREMES_RIDS), "per_output": per}
+
+
+DRAWS_SIZES: Tuple[int, ...] = (5, 10, 20, 40, 80)
+DRAWS_REPEATS = 200
+#: an output's spread is "captured" when a subset's spread is within this of the all-passing-draws spread (dex or pH)
+DRAWS_CAPTURE = 0.05
+
+
+def draws_needed(rows: Sequence[Mapping[str, Any]], recipes: Sequence[Recipe], workers: int,
+                 th: Mapping[str, Any]) -> Dict[str, Any]:
+    """When the extremes do not bound the band: on EXTREMES_RIDS, EVERY passing draw of both rivals is run, and random
+    subsets of n draws per rival (with B0) are compared with the all-draws spread: the share of (output, subset) within
+    DRAWS_CAPTURE of it, and the share whose verdict agrees, per n; the extremes (+ best draw) beside them."""
+    import numpy as np
+
+    import fit_m1b_ph_balance as FM
+    from src.kinetic_core import parallel
+
+    masks = passing_masks()
+    rec = data_access.load_json(POINTS_OUT)
+    bp = rec["davidek_breakpoints_in_situ"]
+    configs: Dict[str, Tuple[Dict[str, Any], Any]] = {}
+    groups: Dict[str, List[str]] = {}
+    for rival in CARRIED:
+        for j in np.flatnonzero(masks[rival]["mask"]):
+            name = f"{rival}_a{int(j)}"
+            configs[name] = FM.rival_changes(rival, "primary", masks[rival]["draws"][int(j)], False, bp)
+            groups.setdefault(rival, []).append(name)
+    ext = {r: [f"{r}_a{int(p['index'])}" for p in rec["rivals"][r]] for r in CARRIED}
+    by_rid = {r["rid"]: r for r in rows}
+    items = [(r, configs) for r in recipes if r.rid in EXTREMES_RIDS]
+    t0 = time.time()
+    results = parallel.map_ordered(_extremes_task, items, n_workers=workers)
+    rng = np.random.default_rng(EXTREMES_SEED + 1)
+    outputs = []
+    for res in results:
+        row = by_rid[res["rid"]]
+        b0 = (row["points"].get("B0") or {})
+        for t in res["targets"] + ["ph_cooled_end"]:
+            def val(v):
+                if v.get("failed"):
+                    return None
+                return v.get(t) if t == "ph_cooled_end" else (v.get("concentrations_ug_per_l") or {}).get(t)
+            b0v = b0.get(t) if t == "ph_cooled_end" else (b0.get("concentrations_ug_per_l") or {}).get(t)
+            vals = {n: val(v) for n, v in res["extra"].items()}
+            if b0v is None or any(x is None for x in vals.values()):
+                continue
+            outputs.append((res["rid"], t, float(b0v), {n: float(x) for n, x in vals.items()}))
+
+    def spread(t, xs):
+        return (max(xs) - min(xs)) if t == "ph_cooled_end" else log_spread(xs)
+
+    def tol(t):
+        return th["ph_level"] if t == "ph_cooled_end" else th["tau_dex"]
+
+    full = {(rid, t): spread(t, [b0v] + list(v.values())) for rid, t, b0v, v in outputs}
+    table = []
+    for n in DRAWS_SIZES + ("extremes",):
+        captured = agree = total = 0
+        for rid, t, b0v, v in outputs:
+            reps = 1 if n == "extremes" else DRAWS_REPEATS
+            for _ in range(reps):
+                if n == "extremes":
+                    names = ext["B1"] + ext["B13"]
+                else:
+                    names = [x for r in CARRIED for x in rng.choice(groups[r], size=min(n, len(groups[r])), replace=False)]
+                sp = spread(t, [b0v] + [v[x] for x in names if x in v])
+                f = full[(rid, t)]
+                total += 1
+                captured += int((sp >= f - DRAWS_CAPTURE) or (not math.isfinite(f) and not math.isfinite(sp)))
+                agree += int((sp > tol(t)) == (f > tol(t)))
+        table.append({"draws_per_rival": n, "share_within_capture": captured / total, "share_verdict_agrees": agree / total,
+                      "n": total})
+    need = next((r["draws_per_rival"] for r in table if r["draws_per_rival"] != "extremes"
+                 and r["share_within_capture"] >= 0.95), None)
+    summary = (f"every passing draw (B1 {len(groups['B1'])}, B13 {len(groups['B13'])}) on {len(items)} recorded pots, "
+               f"{len(outputs)} outputs: the extremes (+ best draw) reach within {DRAWS_CAPTURE} of the all-draws spread "
+               f"in {table[-1]['share_within_capture']:.2f} of outputs (verdict agrees in "
+               f"{table[-1]['share_verdict_agrees']:.2f}); random subsets reach it in 95 % of (output, subset) at "
+               f"{need if need is not None else 'more than ' + str(DRAWS_SIZES[-1])} draws per rival. "
+               f"{time.time() - t0:.0f} s.")
+    return {"summary": summary, "table": table, "draws_needed_for_95pct": need, "capture": DRAWS_CAPTURE,
+            "repeats": DRAWS_REPEATS, "pots": list(EXTREMES_RIDS),
+            "per_output": [{"rid": rid, "output": t, "spread_all_draws": full[(rid, t)]} for rid, t, _, _ in outputs]}
 
 
 def write_detail(rows: Sequence[Mapping[str, Any]], analysis: Mapping[str, Any]) -> None:
@@ -734,7 +1002,7 @@ def read_detail() -> Dict[str, Any]:
 
 
 def inputs() -> List[Path]:
-    return [PREREG, FALSIFICATION, SCREEN, A2, S3_RECORD,
+    return [PREREG, FALSIFICATION, SCREEN, A2, S3_RECORD, POINTS_OUT,
             ROOT / "src/kinetic_core/ph_balance_rivals.py", ROOT / "src/kinetic_core/ph_state.py",
             ROOT / "src/kinetic_core/sulfur.py", ROOT / "src/kinetic_core/parameters_sulfur.py",
             data_paths.VALIDATION_DIR / "kinetic_core_b60_fit_report.json",
@@ -794,13 +1062,22 @@ def run(recipes: Sequence[Recipe], workers: int, chunk: int = 64, min_free: floa
 def main(argv: Optional[Sequence[str]] = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[1])
     ap.add_argument("--workers", type=int, default=int(os.environ.get("MAILLARD_WORKERS", "1")))
-    ap.add_argument("--time-one", action="store_true", help="time one recipe at all four points and project")
+    ap.add_argument("--time-one", action="store_true", help="time one recipe at every point and project")
+    ap.add_argument("--points", action="store_true", help="write the rivals' points record (R3) and stop")
     ap.add_argument("--limit", type=int, default=None, help="run only the first N recipes (a smoke run; no record)")
     ap.add_argument("--checkpoint", type=Path, default=None, help="JSON-lines file of finished recipes (resume)")
+    ap.add_argument("--draws-needed", action="store_true",
+                    help="run every passing draw on the extremes-check pots and add the convergence table to the record")
     ap.add_argument("--reanalyse", action="store_true",
                     help="re-read the record's own recipe rows and rewrite its analysis (no integration)")
     ap.add_argument("--projected-hours", type=float, default=None, help="the --time-one projection, for the record")
     args = ap.parse_args(argv)
+    if args.points:
+        payload = build_points()
+        artifact_io.write_artifact(payload, POINTS_OUT)
+        print(f"wrote {data_paths.rel(POINTS_OUT)}: " + "; ".join(f"{r}: {c['passing']} of {c['stored_draws']} draws pass, "
+                                                                f"{c['points']} points" for r, c in payload["counts"].items()))
+        return 0
     th = thresholds()
     grid = grid_recipes()
     pan = panel_recipes()
@@ -808,6 +1085,13 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     recipes = pan + dirr + grid
     print(f"recipes: panel {len(pan)}, directional arms {len(dirr)} ({len(claims)} claims), grid {len(grid)}",
           flush=True)
+    if args.draws_needed:
+        record = data_access.load_json(OUT)
+        rows = read_detail()["recipes"]
+        record["draws_needed"] = draws_needed(rows, recipes, args.workers, th)
+        artifact_io.write_artifact(record, OUT, render=render)
+        print(record["draws_needed"]["summary"])
+        return 0
     if args.reanalyse:
         record = data_access.load_json(OUT)
         rows = read_detail()["recipes"] if DETAIL.exists() else record.pop("recipes")
@@ -862,7 +1146,15 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         "summary": analysis["summary"],
         "directional": analysis["directional"],
     }
+    rival_names = set(point_configs()) - {"B0", "B0_inline"}
+    per_recipe = [sum(float(v["seconds"]) for p, v in (r.get("points") or {}).items()
+                      if p in rival_names and v.get("seconds") is not None and not v.get("not_applicable"))
+                  for r in rows if not r.get("clamped") and r.get("targets")]
+    payload["timing"]["rivals_seconds_per_pot"] = ({"median": statistics.median(per_recipe), "max": max(per_recipe),
+                                                    "n_points": len(rival_names)} if per_recipe else None)
     payload["the_list"] = the_list(analysis)
+    if args.limit is None:
+        payload["extremes_check"] = extremes_check(rows, recipes, args.workers, th)
     if args.limit is not None:
         print("smoke run (--limit): no record written")
         print(render(payload)[:6000])
