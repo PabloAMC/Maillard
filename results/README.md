@@ -11,7 +11,7 @@ regenerates (`core-scores`, `core-directional`, `core-envelope`, `model-card`, .
 (`scripts/generators/WAVES.md`: not re-run, a change is a new wave). Every live artifact carries a
 `provenance` block (git head, date, input hashes: `src/provenance.py`).
 
-Tracked files: **1034**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
+Tracked files: **1036**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
 
 ## `results`
 
@@ -64,6 +64,7 @@ Tracked files: **1034**. Local-only (gitignored): scratch runs under `results/qu
 | `family_ingestion_plan.*` (2): `family_ingestion_plan.json`, `family_ingestion_plan.md` | Ingestion order of the SLR families (`src/family_ingestion_plan.py`; alias `family-ingestion-plan`). |
 | `family_strategy_policy.*` (2): `family_strategy_policy.json`, `family_strategy_policy.md` | The family strategy: quantitative trunk vs bounded lanes (`src/family_strategy_policy.py`). |
 | `figure_inputs.json` | The records behind every figure under docs/assets/thiol_sink/ (the three builders' inputs and each PNG's hash), with a provenance block the freshness gate re-hashes: a changed scorecard, ship rule, species table or builder fails CI until the figures are rebuilt. |
+| `frozen_fit_reproducibility.*` (2): `frozen_fit_reproducibility.json`, `frozen_fit_reproducibility.md` | Frozen-fit reproducibility (plan sec. 7 S1, 're-derived for the coordinates whose rows a structural change moves'): for every fit a shipped coordinate rests on (B1, B3, B6, B7, B18, B20, B21, B39 / B41, B2.3, B60), that fit's own residual function at its frozen point on today's engine and data: S = r . r recorded vs today, the row count then and now, the rows that moved most and whether they were withdrawn, corrected or moved by the model, the gradient, the Gauss-Newton decrement and one evaluated bounded step, each shipped coordinate's quadratic marginal against today's local 95 % region, and the class (REPRODUCES / DRIFTED-BENIGN / DRIFTED-MATERIAL). One evaluation plus one Jacobian per fit, no refits; changes no tier, register or constant (`build_frozen_fit_reproducibility.py`). |
 | `gap_heatmap.png` | Heat map of the experiment-value ranking (`generate_gap_heatmap.py`). |
 | `holdout_frozen/` (2 files) | Hong 2020 hold-out rows frozen before B4; read by the B4 fit generator and `parameters_matrix.py`. |
 | `incumbent_evidence_tiers.*` (2): `incumbent_evidence_tiers.json`, `incumbent_evidence_tiers.md` | The incumbent evidence audit (plan sec. 7, rule S1): one evidence tier per shipped coordinate (log10 k_ref and Ea separately, plus every band-carried parameter: measured / analogue / bounded / fitted-identified / fitted-unidentified / structural / physical constant / conflicting measurements / withdrawn), its band, basis citation, identification criteria and label conflicts, the direct measurements that contradict or bound it with the conditions S2 must match and S2 (b)'s 95 % interval, the fit rows later withdrawn, its output sensitivity; the S2 candidates, the S4 sensitive unidentified coordinates, the reconciled unidentified lists, the vocabulary map and the never-cased structural choices (`build_evidence_tiers.py`, reader `src/evidence_tiers.py`). |
