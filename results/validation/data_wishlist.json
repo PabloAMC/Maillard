@@ -4,8 +4,8 @@
     "artifact": "data_wishlist",
     "generated_on": "2026-11-07",
     "git": {
-      "commit": "210b7ff478d70726de0e67aacde2119aabd8d691",
-      "short": "210b7ff4",
+      "commit": "5e61fed0344b8b1cb5f8312085ed42ad63ad3b0b",
+      "short": "5e61fed0",
       "branch": "s3-ph-balance-refusal",
       "dirty": true
     },
@@ -13,7 +13,7 @@
     "inputs": [
       {
         "path": "results/validation/core_panel_scores.json",
-        "sha256": "a7c8d2db0ade1444a50dbbd6a2e4729f4077af771852fb424589fabb9b8c272b"
+        "sha256": "8db2a5a7be824f6ee2b63498bf7e1749a48446c6a122a115c5972161afbbf1d3"
       },
       {
         "path": "results/validation/kinetic_core_b60_profile.json",
@@ -25,7 +25,7 @@
       },
       {
         "path": "results/validation/core_directional_scores.json",
-        "sha256": "2444a230ad70a4b6213590f8e9df139695b9eaa526880e59cb2ac53614ce2a8c"
+        "sha256": "5432480f4b3c7f05591a00f3cec7e196fddaae2433099be4a8838e0e8377ea0d"
       },
       {
         "path": "results/validation/experiment_value_ranking.json",

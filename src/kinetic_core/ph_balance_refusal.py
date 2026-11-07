@@ -83,6 +83,18 @@ LIFT_TEXT = (
 )
 
 
+#: R3d (prereg sec. 21.10): the band every verdict reads is bounded by the carried rivals' screen-passing EXTREMES, which
+#: under-cover it; said with every refused and every kept output until the full-draw re-run replaces them
+BAND_LIMIT_TEXT = (
+    "The band is bounded by the carried rivals' screen-passing extremes (R3: 23 points of B1's 95 and B13's 255 passing "
+    "draws), which under-cover it: they reach the all-draws spread within 0.05 in 0.76 of outputs and its verdict in 57 "
+    "of 58 (miss rate 1.7 %, exact 95 % interval 0.04 - 9.2 %). A re-run on every passing draw replaces them when B1 "
+    "and B13 are ported to the JAX network (prereg sec. 21.10, R3d)."
+)
+BAND_LIMIT_SHORT = ("Band bounded by the carried rivals' screen-passing extremes, pending the full-draw re-run "
+                    "(prereg sec. 21.10, R3d).")
+
+
 # ----------------------------------------------------------------------------------------------------------------
 # Terms and points, from the records
 # ----------------------------------------------------------------------------------------------------------------
@@ -180,7 +192,8 @@ class Verdict:
         return {"rule": "S3 (STATUS_AND_PLAN sec. 7) on the M1b part (i) falsification; prereg sec. 21.10",
                 "n_points": 1 + len(rival_point_names()), "spread_dex": dict(self.spread_dex),
                 "tau_dex": th["tau_dex"], "level_refused": list(self.refused), "ph_spread": dict(self.ph_spread),
-                "ph_level_term": th["ph_level"], "ph_refused": self.ph_refused, "failure": self.failure}
+                "ph_level_term": th["ph_level"], "ph_refused": self.ph_refused, "failure": self.failure,
+                "band": BAND_LIMIT_SHORT}
 
 
 _CACHE: Dict[Tuple[str, Tuple[str, ...]], Verdict] = {}
@@ -349,7 +362,7 @@ def short_reason() -> str:
         f"rivals B1 / B13 beyond the term it is shipped with (a level: tau = {th['tau_dex']:.3f} dex; a ratio or "
         f"direction: omega = {th['omega_dex']:.3f} dex or a sign; the pH: {th['ph_level']:.3f} pH; prereg sec. 21.10). "
         "Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on "
-        "CF-084's controls (sec. 7, S3's lift clause)."
+        "CF-084's controls (sec. 7, S3's lift clause). " + BAND_LIMIT_SHORT
     )
 
 
@@ -376,7 +389,7 @@ def refusal_text(compounds: Sequence[str] = (), verdict: Optional[Verdict] = Non
         f"screen-passing extremes exceeds tau = {th['tau_dex']:.3f} dex, the term a level is shipped with (prereg sec. "
         "21.10, R1)." + failure + " Ratios of it between pots are answered by `compare` where they stand under omega "
         "and agree in sign. A pot whose pH is measured or held is answered: state the held pH as a clamped buffer "
-        "(buffer kind 'clamped'), and the balance is not solved. " + LIFT_TEXT
+        "(buffer kind 'clamped'), and the balance is not solved. " + BAND_LIMIT_TEXT + " " + LIFT_TEXT
     )
 
 
@@ -387,7 +400,7 @@ def ph_refusal_text() -> str:
             f"pH-level term {th['ph_level']:.3f} pH (prereg sec. 20.2; sec. 21.10, R2). " + short_reason())
 
 
-__all__ = ["A2_RECORD", "BALANCE_REFUSED_TAG", "EA_ISO_KJ_MOL", "ENABLED", "FAILED", "FALSIFICATION_RECORD", "LIFT_TEXT",
+__all__ = ["A2_RECORD", "BALANCE_REFUSED_TAG", "BAND_LIMIT_SHORT", "BAND_LIMIT_TEXT", "EA_ISO_KJ_MOL", "ENABLED", "FAILED", "FALSIFICATION_RECORD", "LIFT_TEXT",
            "POINTS_RECORD", "SCREEN_RECORD", "SENSITIVITY_RECORD", "SIGN_FLOOR_DEX", "Verdict", "WITHHELD_PH_KEYS",
            "ZERO_FLOOR_UG_PER_L", "all_points", "assess", "balance_solved", "cached_verdict", "level_refused",
            "log_spread", "offsets_dex", "offsets_ratio_refusal", "ph_refusal_text", "point_values", "ratio_refusal",

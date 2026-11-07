@@ -244,7 +244,7 @@ CONSTANTS = {
         'vessel': 'THIOL_PRECURSOR_MARKERS',
     },
     'provenance': {
-        'ph_balance_refusal': 'LIFT_TEXT',
+        'ph_balance_refusal': 'LIFT_TEXT BAND_LIMIT_TEXT BAND_LIMIT_SHORT',
         'acrylamide_conditions': 'AW_SOURCE EA_INT1_SOURCE PH_SOURCE',
         'engine': 'BUFFER_ABSENT_WARNING',
         'matrix_oav': 'COVALENT_CEILING_RETIREMENT',

@@ -682,6 +682,27 @@ def _validity_domain(card: Mapping[str, Any]) -> List[Dict[str, str]]:
             "−2 SE); shipped by D2 branch (i) with this label until evidence (M1c / M2, H1) earns better",
         )
     )
+    # --- 2026-11-07: S3 refuses what moves with the falsified pH balance (M1b part (i); prereg sec. 21.10) ----------
+    from src.kinetic_core import ph_balance_refusal as s3
+
+    s3_record = _read_json(s3.SENSITIVITY_RECORD)
+    if s3_record:
+        kinds = {e["class"][0]: e for e in s3_record["summary"]["outputs_by_kind"]}
+        th = s3_record["thresholds"]
+        lev, ph = kinds.get("absolute", {}), kinds.get("ph", {})
+        cells.append(
+            DomainCell(
+                "Any output on a pot whose pH the sulfur lane solves from the charge balance",
+                "sulfur lane, any buffer but a clamped (held, measured) pH [sulfur lane]",
+                f"REFUSED where it moves with the carried rivals B1 / B13 beyond the term it ships with: "
+                f"{lev.get('n_dependent')}/{lev.get('n_decided')} levels beyond tau {th['tau_dex']:.3f} dex, "
+                f"{ph.get('n_dependent')}/{ph.get('n_decided')} pH levels beyond {th['ph_level']:.3f} pH; ratios beyond "
+                f"omega {th['omega_dex']:.3f} dex or in sign. Refused and kept outputs alike: {s3.BAND_LIMIT_TEXT}",
+                VERDICT_DO_NOT_USE,
+                f"{data_paths.rel(s3.SENSITIVITY_RECORD)}; S3 (STATUS_AND_PLAN sec. 7) on CF-084 / CF-134; lifted by "
+                "an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test",
+            )
+        )
     if env.get("available"):
         cells.append(
             DomainCell(

@@ -375,6 +375,13 @@
       "verdict": "do-not-use"
     },
     {
+      "basis": "results/validation/ph_balance_s3_sensitivity.json; S3 (STATUS_AND_PLAN sec. 7) on CF-084 / CF-134; lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test",
+      "claim_type": "Any output on a pot whose pH the sulfur lane solves from the charge balance",
+      "evidence": "REFUSED where it moves with the carried rivals B1 / B13 beyond the term it ships with: 1155/3522 levels beyond tau 0.964 dex, 671/1396 pH levels beyond 0.478 pH; ratios beyond omega 0.419 dex or in sign. Refused and kept outputs alike: The band is bounded by the carried rivals' screen-passing extremes (R3: 23 points of B1's 95 and B13's 255 passing draws), which under-cover it: they reach the all-draws spread within 0.05 in 0.76 of outputs and its verdict in 57 of 58 (miss rate 1.7 %, exact 95 % interval 0.04 - 9.2 %). A re-run on every passing draw replaces them when B1 and B13 are ported to the JAX network (prereg sec. 21.10, R3d).",
+      "system_class": "sulfur lane, any buffer but a clamped (held, measured) pH [sulfur lane]",
+      "verdict": "do-not-use"
+    },
+    {
       "basis": "results/validation/core_prediction_uncertainty.json (n=200); the no lane has no sampled uncertainty",
       "claim_type": "Absolute concentration interval (90% CI)",
       "evidence": "12/22 evaluable literature rows inside; 12/22 out of sample; 1 not evaluable",

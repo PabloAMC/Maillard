@@ -378,7 +378,7 @@
           "envelope_state": "in_envelope",
           "lane": "sulfur",
           "panel": "trust_loop",
-          "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause)."
+          "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause). Band bounded by the carried rivals' screen-passing extremes, pending the full-draw re-run (prereg sec. 21.10, R3d)."
         },
         {
           "benchmark_id": "hofmann1998_ribose_cysteine_145C_20min_pH5",
@@ -386,7 +386,7 @@
           "envelope_state": "in_envelope",
           "lane": "sulfur",
           "panel": "trust_loop",
-          "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause)."
+          "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause). Band bounded by the carried rivals' screen-passing extremes, pending the full-draw re-run (prereg sec. 21.10, R3d)."
         }
       ],
       "signal_origin": "external_literature"
@@ -695,7 +695,7 @@
           "envelope_state": "in_envelope",
           "lane": "sulfur",
           "panel": "maillard_path_holdout",
-          "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause)."
+          "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause). Band bounded by the carried rivals' screen-passing extremes, pending the full-draw re-run (prereg sec. 21.10, R3d)."
         }
       ],
       "signal_origin": "external_literature"
@@ -741,7 +741,7 @@
           "envelope_state": "in_envelope",
           "lane": "sulfur",
           "panel": "maillard_path_holdout",
-          "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause)."
+          "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause). Band bounded by the carried rivals' screen-passing extremes, pending the full-draw re-run (prereg sec. 21.10, R3d)."
         }
       ],
       "signal_origin": "external_literature"
@@ -787,7 +787,7 @@
           "envelope_state": "in_envelope",
           "lane": "sulfur",
           "panel": "maillard_path_holdout",
-          "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause)."
+          "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause). Band bounded by the carried rivals' screen-passing extremes, pending the full-draw re-run (prereg sec. 21.10, R3d)."
         }
       ],
       "signal_origin": "external_literature"
@@ -833,7 +833,7 @@
           "envelope_state": "in_envelope",
           "lane": "sulfur",
           "panel": "maillard_path_holdout",
-          "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause)."
+          "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause). Band bounded by the carried rivals' screen-passing extremes, pending the full-draw re-run (prereg sec. 21.10, R3d)."
         }
       ],
       "signal_origin": "external_literature"
@@ -1500,7 +1500,7 @@
           "envelope_state": "in_envelope",
           "lane": "sulfur",
           "panel": "maillard_path_holdout",
-          "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause)."
+          "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause). Band bounded by the carried rivals' screen-passing extremes, pending the full-draw re-run (prereg sec. 21.10, R3d)."
         },
         {
           "benchmark_id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7",
@@ -1508,7 +1508,7 @@
           "envelope_state": "in_envelope",
           "lane": "sulfur",
           "panel": "maillard_path_holdout",
-          "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause)."
+          "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause). Band bounded by the carried rivals' screen-passing extremes, pending the full-draw re-run (prereg sec. 21.10, R3d)."
         }
       ],
       "signal_origin": "external_literature"
@@ -1542,7 +1542,7 @@
           "envelope_state": "in_envelope",
           "lane": "sulfur",
           "panel": "maillard_path_holdout",
-          "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause)."
+          "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause). Band bounded by the carried rivals' screen-passing extremes, pending the full-draw re-run (prereg sec. 21.10, R3d)."
         },
         {
           "benchmark_id": "mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5",
@@ -1550,7 +1550,7 @@
           "envelope_state": "in_envelope",
           "lane": "sulfur",
           "panel": "maillard_path_holdout",
-          "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause)."
+          "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause). Band bounded by the carried rivals' screen-passing extremes, pending the full-draw re-run (prereg sec. 21.10, R3d)."
         }
       ],
       "signal_origin": "external_literature"
@@ -1732,7 +1732,7 @@
           "envelope_state": "in_envelope",
           "lane": "sulfur",
           "panel": "maillard_path_holdout",
-          "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause)."
+          "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause). Band bounded by the carried rivals' screen-passing extremes, pending the full-draw re-run (prereg sec. 21.10, R3d)."
         },
         {
           "benchmark_id": "mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b",
@@ -1748,7 +1748,7 @@
           "envelope_state": "in_envelope",
           "lane": "sulfur",
           "panel": "maillard_path_holdout",
-          "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause)."
+          "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause). Band bounded by the carried rivals' screen-passing extremes, pending the full-draw re-run (prereg sec. 21.10, R3d)."
         },
         {
           "benchmark_id": "mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b",
@@ -1756,7 +1756,7 @@
           "envelope_state": "in_envelope",
           "lane": "sulfur",
           "panel": "maillard_path_holdout",
-          "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause)."
+          "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause). Band bounded by the carried rivals' screen-passing extremes, pending the full-draw re-run (prereg sec. 21.10, R3d)."
         }
       ],
       "signal_origin": "external_literature"
@@ -4205,9 +4205,9 @@
     "generated_on": "2026-11-07",
     "git": {
       "branch": "s3-ph-balance-refusal",
-      "commit": "210b7ff478d70726de0e67aacde2119aabd8d691",
+      "commit": "5e61fed0344b8b1cb5f8312085ed42ad63ad3b0b",
       "dirty": true,
-      "short": "210b7ff4"
+      "short": "5e61fed0"
     },
     "inputs": [
       {
@@ -4515,7 +4515,7 @@
       "envelope_state": "in_envelope",
       "lane": "sulfur",
       "panel": "trust_loop",
-      "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause)."
+      "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause). Band bounded by the carried rivals' screen-passing extremes, pending the full-draw re-run (prereg sec. 21.10, R3d)."
     },
     {
       "benchmark_id": "hofmann1998_ribose_cysteine_145C_20min_pH5",
@@ -4523,7 +4523,7 @@
       "envelope_state": "in_envelope",
       "lane": "sulfur",
       "panel": "trust_loop",
-      "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause)."
+      "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause). Band bounded by the carried rivals' screen-passing extremes, pending the full-draw re-run (prereg sec. 21.10, R3d)."
     },
     {
       "benchmark_id": "pea_isolate_40C_PratapSingh2021",
@@ -4619,7 +4619,7 @@
       "envelope_state": "in_envelope",
       "lane": "sulfur",
       "panel": "maillard_path_holdout",
-      "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause)."
+      "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause). Band bounded by the carried rivals' screen-passing extremes, pending the full-draw re-run (prereg sec. 21.10, R3d)."
     },
     {
       "benchmark_id": "mp_holdout_arp_glutathione_120C_30min_pH75_Zhou2023c",
@@ -4643,7 +4643,7 @@
       "envelope_state": "in_envelope",
       "lane": "sulfur",
       "panel": "maillard_path_holdout",
-      "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause)."
+      "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause). Band bounded by the carried rivals' screen-passing extremes, pending the full-draw re-run (prereg sec. 21.10, R3d)."
     },
     {
       "benchmark_id": "mp_holdout_arp_glutathione_120C_60min_pH75_Zhou2023c",
@@ -4667,7 +4667,7 @@
       "envelope_state": "in_envelope",
       "lane": "sulfur",
       "panel": "maillard_path_holdout",
-      "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause)."
+      "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause). Band bounded by the carried rivals' screen-passing extremes, pending the full-draw re-run (prereg sec. 21.10, R3d)."
     },
     {
       "benchmark_id": "mp_holdout_arp_glutathione_120C_90min_pH75_Zhou2023c",
@@ -4691,7 +4691,7 @@
       "envelope_state": "in_envelope",
       "lane": "sulfur",
       "panel": "maillard_path_holdout",
-      "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause)."
+      "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause). Band bounded by the carried rivals' screen-passing extremes, pending the full-draw re-run (prereg sec. 21.10, R3d)."
     },
     {
       "benchmark_id": "mp_holdout_fructose_asparagine_180C_Lin2022",
@@ -4771,7 +4771,7 @@
       "envelope_state": "in_envelope",
       "lane": "sulfur",
       "panel": "maillard_path_holdout",
-      "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause)."
+      "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause). Band bounded by the carried rivals' screen-passing extremes, pending the full-draw re-run (prereg sec. 21.10, R3d)."
     },
     {
       "benchmark_id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7",
@@ -4779,7 +4779,7 @@
       "envelope_state": "in_envelope",
       "lane": "sulfur",
       "panel": "maillard_path_holdout",
-      "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause)."
+      "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause). Band bounded by the carried rivals' screen-passing extremes, pending the full-draw re-run (prereg sec. 21.10, R3d)."
     },
     {
       "benchmark_id": "mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5",
@@ -4787,7 +4787,7 @@
       "envelope_state": "in_envelope",
       "lane": "sulfur",
       "panel": "maillard_path_holdout",
-      "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause)."
+      "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause). Band bounded by the carried rivals' screen-passing extremes, pending the full-draw re-run (prereg sec. 21.10, R3d)."
     },
     {
       "benchmark_id": "mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5",
@@ -4795,7 +4795,7 @@
       "envelope_state": "in_envelope",
       "lane": "sulfur",
       "panel": "maillard_path_holdout",
-      "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause)."
+      "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause). Band bounded by the carried rivals' screen-passing extremes, pending the full-draw re-run (prereg sec. 21.10, R3d)."
     },
     {
       "benchmark_id": "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026",
@@ -4867,7 +4867,7 @@
       "envelope_state": "in_envelope",
       "lane": "sulfur",
       "panel": "maillard_path_holdout",
-      "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause)."
+      "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause). Band bounded by the carried rivals' screen-passing extremes, pending the full-draw re-run (prereg sec. 21.10, R3d)."
     },
     {
       "benchmark_id": "mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b",
@@ -4883,7 +4883,7 @@
       "envelope_state": "in_envelope",
       "lane": "sulfur",
       "panel": "maillard_path_holdout",
-      "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause)."
+      "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause). Band bounded by the carried rivals' screen-passing extremes, pending the full-draw re-run (prereg sec. 21.10, R3d)."
     },
     {
       "benchmark_id": "mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b",
@@ -4891,7 +4891,7 @@
       "envelope_state": "in_envelope",
       "lane": "sulfur",
       "panel": "maillard_path_holdout",
-      "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause)."
+      "reason": "NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause). Band bounded by the carried rivals' screen-passing extremes, pending the full-draw re-run (prereg sec. 21.10, R3d)."
     },
     {
       "benchmark_id": "external_validation_bi_2020_raw_pea_hexanal",
@@ -5119,7 +5119,7 @@
       "reduced_chi_square": 1.8711697851956615
     },
     "unsampled_lanes": [],
-    "wall_seconds": 655.2,
-    "workers": 4
+    "wall_seconds": 1117.0,
+    "workers": 1
   }
 }
