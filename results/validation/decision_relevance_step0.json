@@ -1,0 +1,2173 @@
+{
+  "artifact": "decision_relevance_step0",
+  "provenance": {
+    "artifact": "decision_relevance_step0",
+    "generated_on": "2026-11-07",
+    "git": {
+      "commit": "9e02ce3a80ae96c10c5aa669aa62179d06f6931f",
+      "short": "9e02ce3a",
+      "branch": "decision-relevance-prereg",
+      "dirty": false
+    },
+    "generated_by": "scripts/generators/build_decision_relevance_step0.py",
+    "inputs": [
+      {
+        "path": "results/validation/contrast_scores.json",
+        "sha256": "2d3398c46091c53055ddce0c16efe0b7136deeb7cfac4b52a0330fa05e0836fb"
+      },
+      {
+        "path": "results/validation/core_panel_scores.json",
+        "sha256": "5ce9814c694e0af2bd79386edc283ac85bff34f1a7a45ae788c434f88a951e8c"
+      },
+      {
+        "path": "results/validation/kinetic_core_contrast_benchmark_score_v1.json",
+        "sha256": "645ad222fdd6b33a352dd5d3b7617d1b26264c8fff4a1fde420faea3e1ae0c07"
+      }
+    ]
+  },
+  "prereg": "results/validation/decision_relevance_prereg.md",
+  "freeze_commit": "9e02ce3a",
+  "stage_0c": {
+    "units": {
+      "pairs_source1": 81,
+      "pairs_source3": 23,
+      "source3_skipped": 16,
+      "source2": "no group of its own: contrast_scores.json is built from the same rows (build_null_model_baselines._rows) with the same study key, so its groups are source 1's",
+      "groups_all": 18,
+      "groups_out_of_sample": 16
+    },
+    "measurement_rule": "no source here prints a per-arm SD: each arm takes the declared per-replicate CV (SIDA 10 % where its benchmark's quantification source is isotope dilution, else 20 %) with the unstated n = 2; a contrast-benchmark row that prints sigma_m (a ratio SD) gives each arm sigma_m^2 / 2",
+    "primary": {
+      "acrylamide": {
+        "studies": 2,
+        "study_names": [
+          "Schibilsky, S. Bildung fluechtiger Verbi",
+          "lin2021"
+        ],
+        "groups": 3,
+        "df": 4,
+        "sigma_w2": 0.6268093590716883,
+        "sigma_m2": 0.0031348348628272506,
+        "sigma_floor": 0.07918124604762482,
+        "sigma_r": 1.1168478179312176,
+        "floored": false,
+        "rho_derived": -2.5524662323002323,
+        "per_study": {
+          "Schibilsky, S. Bildung fluechtiger Verbi": {
+            "df": 2,
+            "v": 0.1404982533797089,
+            "groups": 2
+          },
+          "lin2021": {
+            "df": 2,
+            "v": 1.1131204647636679,
+            "groups": 1
+          }
+        },
+        "t_interval_90": [
+          0.07918124604762482,
+          2.7181324487135976
+        ],
+        "loso": {
+          "Schibilsky, S. Bildung fluechtiger Verbi": 1.4899567979648543,
+          "lin2021": 0.5241439087061522
+        },
+        "loso_min": 0.5241439087061522,
+        "loso_max": 1.4899567979648543,
+        "status": "UNDECIDED (G = 2 < G_min = 5)"
+      },
+      "sulfur": {
+        "studies": 6,
+        "study_names": [
+          "heldout_grosch1992_tab2",
+          "heldout_meynier1995_tab1_2_4",
+          "heldout_xu2007_tab1",
+          "hofmann_schieberle_1998_free_mft_fft",
+          "yiltirak2026",
+          "zhou2023c"
+        ],
+        "groups": 13,
+        "df": 31,
+        "sigma_w2": 0.8112089563673276,
+        "sigma_m2": 0.0030049996985249115,
+        "sigma_floor": 0.07752418588446977,
+        "sigma_r": 1.2713803181336438,
+        "floored": false,
+        "rho_derived": -3.6035506557196797,
+        "per_study": {
+          "heldout_grosch1992_tab2": {
+            "df": 6,
+            "v": 0.13773375289363574,
+            "groups": 2
+          },
+          "heldout_meynier1995_tab1_2_4": {
+            "df": 4,
+            "v": 0.25253919738762853,
+            "groups": 1
+          },
+          "heldout_xu2007_tab1": {
+            "df": 4,
+            "v": 3.875418556758729,
+            "groups": 3
+          },
+          "hofmann_schieberle_1998_free_mft_fft": {
+            "df": 2,
+            "v": 3.155660631509284,
+            "groups": 2
+          },
+          "yiltirak2026": {
+            "df": 6,
+            "v": 0.07915457778396749,
+            "groups": 2
+          },
+          "zhou2023c": {
+            "df": 9,
+            "v": 0.11366615374639297,
+            "groups": 3
+          }
+        },
+        "t_interval_90": [
+          0.07752418588446977,
+          1.9693157783437887
+        ],
+        "loso": {
+          "heldout_grosch1992_tab2": 1.3927225175909872,
+          "heldout_meynier1995_tab1_2_4": 1.334893139459498,
+          "heldout_xu2007_tab1": 0.8417208311940955,
+          "hofmann_schieberle_1998_free_mft_fft": 1.1371170865352604,
+          "yiltirak2026": 1.4027808150447518,
+          "zhou2023c": 1.4788930833044163
+        },
+        "loso_min": 0.8417208311940955,
+        "loso_max": 1.4788930833044163,
+        "status": "ESTIMATED"
+      }
+    },
+    "pooled": {
+      "studies": 8,
+      "study_names": [
+        "Schibilsky, S. Bildung fluechtiger Verbi",
+        "heldout_grosch1992_tab2",
+        "heldout_meynier1995_tab1_2_4",
+        "heldout_xu2007_tab1",
+        "hofmann_schieberle_1998_free_mft_fft",
+        "lin2021",
+        "yiltirak2026",
+        "zhou2023c"
+      ],
+      "groups": 16,
+      "df": 35,
+      "sigma_w2": 0.7901347166763975,
+      "sigma_m2": 0.003022820211272291,
+      "sigma_floor": 0.07775371645487167,
+      "sigma_r": 1.2546807533911766,
+      "floored": false,
+      "rho_derived": -3.4834097348791886,
+      "per_study": {
+        "Schibilsky, S. Bildung fluechtiger Verbi": {
+          "df": 2,
+          "v": 0.1404982533797089,
+          "groups": 2
+        },
+        "heldout_grosch1992_tab2": {
+          "df": 6,
+          "v": 0.13773375289363574,
+          "groups": 2
+        },
+        "heldout_meynier1995_tab1_2_4": {
+          "df": 4,
+          "v": 0.25253919738762853,
+          "groups": 1
+        },
+        "heldout_xu2007_tab1": {
+          "df": 4,
+          "v": 3.875418556758729,
+          "groups": 3
+        },
+        "hofmann_schieberle_1998_free_mft_fft": {
+          "df": 2,
+          "v": 3.155660631509284,
+          "groups": 2
+        },
+        "lin2021": {
+          "df": 2,
+          "v": 1.1131204647636679,
+          "groups": 1
+        },
+        "yiltirak2026": {
+          "df": 6,
+          "v": 0.07915457778396749,
+          "groups": 2
+        },
+        "zhou2023c": {
+          "df": 9,
+          "v": 0.11366615374639297,
+          "groups": 3
+        }
+      },
+      "t_interval_90": [
+        0.07775371645487167,
+        1.847023149698197
+      ],
+      "loso": {
+        "Schibilsky, S. Bildung fluechtiger Verbi": 1.2856778782662406,
+        "heldout_grosch1992_tab2": 1.3580069265016894,
+        "heldout_meynier1995_tab1_2_4": 1.3088002599666009,
+        "heldout_xu2007_tab1": 0.8820552769632302,
+        "hofmann_schieberle_1998_free_mft_fft": 1.1346776542309769,
+        "lin2021": 1.2389810350781436,
+        "yiltirak2026": 1.366902509725048,
+        "zhou2023c": 1.429177449672021
+      },
+      "loso_min": 0.8820552769632302,
+      "loso_max": 1.429177449672021,
+      "status": "ESTIMATED"
+    },
+    "sensitivity_in_sample_included": {
+      "acrylamide": {
+        "studies": 2,
+        "study_names": [
+          "Schibilsky, S. Bildung fluechtiger Verbi",
+          "lin2021"
+        ],
+        "groups": 3,
+        "df": 4,
+        "sigma_w2": 0.6268093590716883,
+        "sigma_m2": 0.0031348348628272506,
+        "sigma_floor": 0.07918124604762482,
+        "sigma_r": 1.1168478179312176,
+        "floored": false,
+        "rho_derived": -2.5524662323002323,
+        "per_study": {
+          "Schibilsky, S. Bildung fluechtiger Verbi": {
+            "df": 2,
+            "v": 0.1404982533797089,
+            "groups": 2
+          },
+          "lin2021": {
+            "df": 2,
+            "v": 1.1131204647636679,
+            "groups": 1
+          }
+        },
+        "t_interval_90": [
+          0.07918124604762482,
+          2.7181324487135976
+        ],
+        "loso": {
+          "Schibilsky, S. Bildung fluechtiger Verbi": 1.4899567979648543,
+          "lin2021": 0.5241439087061522
+        },
+        "loso_min": 0.5241439087061522,
+        "loso_max": 1.4899567979648543,
+        "status": "UNDECIDED (G = 2 < G_min = 5)"
+      },
+      "sulfur": {
+        "studies": 6,
+        "study_names": [
+          "heldout_grosch1992_tab2",
+          "heldout_meynier1995_tab1_2_4",
+          "heldout_xu2007_tab1",
+          "hofmann_schieberle_1998_free_mft_fft",
+          "yiltirak2026",
+          "zhou2023c"
+        ],
+        "groups": 15,
+        "df": 43,
+        "sigma_w2": 1.0326453266165543,
+        "sigma_m2": 0.0024864390935750292,
+        "sigma_floor": 0.07051863716174653,
+        "sigma_r": 1.435380707354658,
+        "floored": false,
+        "rho_derived": -4.867811686667194,
+        "per_study": {
+          "heldout_grosch1992_tab2": {
+            "df": 6,
+            "v": 0.13773375289363574,
+            "groups": 2
+          },
+          "heldout_meynier1995_tab1_2_4": {
+            "df": 4,
+            "v": 0.25253919738762853,
+            "groups": 1
+          },
+          "heldout_xu2007_tab1": {
+            "df": 4,
+            "v": 3.875418556758729,
+            "groups": 3
+          },
+          "hofmann_schieberle_1998_free_mft_fft": {
+            "df": 14,
+            "v": 1.8262566185816602,
+            "groups": 4
+          },
+          "yiltirak2026": {
+            "df": 6,
+            "v": 0.07915457778396749,
+            "groups": 2
+          },
+          "zhou2023c": {
+            "df": 9,
+            "v": 0.11366615374639297,
+            "groups": 3
+          }
+        },
+        "t_interval_90": [
+          0.1625320151634641,
+          2.023417627218568
+        ],
+        "loso": {
+          "heldout_grosch1992_tab2": 1.5331534060633534,
+          "heldout_meynier1995_tab1_2_4": 1.4900803821083612,
+          "heldout_xu2007_tab1": 1.2153949172019702,
+          "hofmann_schieberle_1998_free_mft_fft": 1.1375730260956167,
+          "yiltirak2026": 1.5393368760315531,
+          "zhou2023c": 1.5958809982837387
+        },
+        "loso_min": 1.1375730260956167,
+        "loso_max": 1.5958809982837387,
+        "status": "ESTIMATED"
+      }
+    },
+    "sensitivity_robust": {
+      "acrylamide": {
+        "studies": 2,
+        "study_names": [
+          "Schibilsky, S. Bildung fluechtiger Verbi",
+          "lin2021"
+        ],
+        "groups": 3,
+        "df": 4,
+        "sigma_w2": 0.5517171565251499,
+        "sigma_m2": 0.0031348348628272506,
+        "sigma_floor": 0.07918124604762482,
+        "sigma_r": 1.0474562727506314,
+        "floored": false,
+        "rho_derived": -2.1247391030030736,
+        "per_study": {
+          "Schibilsky, S. Bildung fluechtiger Verbi": {
+            "df": 2,
+            "v": 0.1404982533797089,
+            "groups": 2
+          },
+          "lin2021": {
+            "df": 2,
+            "v": 1.1131204647636679,
+            "groups": 1
+          }
+        },
+        "t_interval_90": [
+          0.07918124604762482,
+          2.703855968607005
+        ],
+        "loso": {
+          "Schibilsky, S. Bildung fluechtiger Verbi": 1.4899567979648543,
+          "lin2021": 0.5241439087061522
+        },
+        "loso_min": 0.5241439087061522,
+        "loso_max": 1.4899567979648543,
+        "status": "UNDECIDED (G = 2 < G_min = 5)"
+      },
+      "sulfur": {
+        "studies": 6,
+        "study_names": [
+          "heldout_grosch1992_tab2",
+          "heldout_meynier1995_tab1_2_4",
+          "heldout_xu2007_tab1",
+          "hofmann_schieberle_1998_free_mft_fft",
+          "yiltirak2026",
+          "zhou2023c"
+        ],
+        "groups": 13,
+        "df": 31,
+        "sigma_w2": 0.29296874657938715,
+        "sigma_m2": 0.0030049996985249115,
+        "sigma_floor": 0.07752418588446977,
+        "sigma_r": 0.761529706421046,
+        "floored": false,
+        "rho_derived": -0.6516410072901284,
+        "per_study": {
+          "heldout_grosch1992_tab2": {
+            "df": 6,
+            "v": 0.13773375289363574,
+            "groups": 2
+          },
+          "heldout_meynier1995_tab1_2_4": {
+            "df": 4,
+            "v": 0.25253919738762853,
+            "groups": 1
+          },
+          "heldout_xu2007_tab1": {
+            "df": 4,
+            "v": 3.875418556758729,
+            "groups": 3
+          },
+          "hofmann_schieberle_1998_free_mft_fft": {
+            "df": 2,
+            "v": 3.155660631509284,
+            "groups": 2
+          },
+          "yiltirak2026": {
+            "df": 6,
+            "v": 0.07915457778396749,
+            "groups": 2
+          },
+          "zhou2023c": {
+            "df": 9,
+            "v": 0.11366615374639297,
+            "groups": 3
+          }
+        },
+        "t_interval_90": [
+          0.07752418588446977,
+          1.6736540251109435
+        ],
+        "loso": {
+          "heldout_grosch1992_tab2": 1.3927225175909872,
+          "heldout_meynier1995_tab1_2_4": 1.334893139459498,
+          "heldout_xu2007_tab1": 0.8417208311940955,
+          "hofmann_schieberle_1998_free_mft_fft": 1.1371170865352604,
+          "yiltirak2026": 1.4027808150447518,
+          "zhou2023c": 1.4788930833044163
+        },
+        "loso_min": 0.8417208311940955,
+        "loso_max": 1.4788930833044163,
+        "status": "ESTIMATED"
+      }
+    },
+    "groups": [
+      {
+        "study": "Schibilsky, S. Bildung fluechtiger Verbi",
+        "compound": "5-Hydroxymethylfurfural (HMF)",
+        "lane": "acrylamide",
+        "out_of_sample": true,
+        "k": 2,
+        "ss": 0.029999525833398807,
+        "df": 1,
+        "residuals": [
+          0.12247351924681268,
+          -0.12247351924681274
+        ],
+        "measurement_var": [
+          0.0031348348628272506,
+          0.0031348348628272506
+        ]
+      },
+      {
+        "study": "Schibilsky, S. Bildung fluechtiger Verbi",
+        "compound": "DMHF",
+        "lane": "acrylamide",
+        "out_of_sample": true,
+        "k": 2,
+        "ss": 0.25099698092601896,
+        "df": 1,
+        "residuals": [
+          0.3542576611211244,
+          -0.35425766112112456
+        ],
+        "measurement_var": [
+          0.0031348348628272506,
+          0.0031348348628272506
+        ]
+      },
+      {
+        "study": "heldout_grosch1992_tab2",
+        "compound": "FFT",
+        "lane": "sulfur",
+        "out_of_sample": true,
+        "k": 2,
+        "ss": 0.09949377590459177,
+        "df": 1,
+        "residuals": [
+          -0.22304010391025164,
+          0.22304010391025178
+        ],
+        "measurement_var": [
+          0.0028940683411690323,
+          0.002414599204057659
+        ]
+      },
+      {
+        "study": "heldout_grosch1992_tab2",
+        "compound": "MFT",
+        "lane": "sulfur",
+        "out_of_sample": true,
+        "k": 6,
+        "ss": 0.7269087414572226,
+        "df": 5,
+        "residuals": [
+          0.3568364009959827,
+          0.3129309154517332,
+          -0.48947554241259095,
+          -0.19094951722027823,
+          -0.3304880041331224,
+          0.34114574731827585
+        ],
+        "measurement_var": [
+          0.0023779426861223513,
+          0.00041758191027591415,
+          0.0009273832852525895,
+          0.0028940683411690323,
+          0.002414599204057659,
+          0.002414599204057659
+        ]
+      },
+      {
+        "study": "heldout_meynier1995_tab1_2_4",
+        "compound": "NF",
+        "lane": "sulfur",
+        "out_of_sample": true,
+        "k": 5,
+        "ss": 1.0101567895505141,
+        "df": 4,
+        "residuals": [
+          -0.6007443150056768,
+          -0.20615794834122714,
+          -0.23051729420067146,
+          0.43066414924594726,
+          0.6067554083016283
+        ],
+        "measurement_var": [
+          0.0028834726268215185,
+          0.002890847626821518,
+          0.0028896326268215192,
+          0.003045832626821519,
+          0.003045832626821519
+        ]
+      },
+      {
+        "study": "heldout_xu2007_tab1",
+        "compound": "ACTZ",
+        "lane": "sulfur",
+        "out_of_sample": true,
+        "k": 3,
+        "ss": 8.56653553929909,
+        "df": 2,
+        "residuals": [
+          2.2230560826811483,
+          -0.3520650668709114,
+          -1.8709910158102363
+        ],
+        "measurement_var": [
+          0.007544491080464556,
+          0.007544477130464557,
+          0.007544477130464557
+        ]
+      },
+      {
+        "study": "heldout_xu2007_tab1",
+        "compound": "FUR",
+        "lane": "sulfur",
+        "out_of_sample": true,
+        "k": 2,
+        "ss": 2.77464589958554,
+        "df": 1,
+        "residuals": [
+          1.1778467429138517,
+          -1.1778467429138524
+        ],
+        "measurement_var": [
+          0.007544491080464556,
+          0.007544477130464557
+        ]
+      },
+      {
+        "study": "heldout_xu2007_tab1",
+        "compound": "MFTD",
+        "lane": "sulfur",
+        "out_of_sample": true,
+        "k": 2,
+        "ss": 4.160492788150286,
+        "df": 1,
+        "residuals": [
+          1.4423059294321514,
+          -1.442305929432152
+        ],
+        "measurement_var": [
+          0.007544491080464556,
+          0.007544477130464557
+        ]
+      },
+      {
+        "study": "hofmann_schieberle_1998_free_mft_fft",
+        "compound": "2-Furfurylthiol (FFT)",
+        "lane": "sulfur",
+        "out_of_sample": false,
+        "k": 5,
+        "ss": 4.6480519424523115,
+        "df": 4,
+        "residuals": [
+          0.1534635259061042,
+          0.42174256158644724,
+          0.7876199373466439,
+          -1.8850827237025238,
+          0.5222566988633291
+        ],
+        "measurement_var": [
+          0.0008566771923039733,
+          0.0008566771923039733,
+          0.0008566771923039733,
+          0.0008566771923039733,
+          0.0008566771923039733
+        ]
+      },
+      {
+        "study": "hofmann_schieberle_1998_free_mft_fft",
+        "compound": "2-Furfurylthiol (FFT)",
+        "lane": "sulfur",
+        "out_of_sample": true,
+        "k": 2,
+        "ss": 3.5716697571896416,
+        "df": 1,
+        "residuals": [
+          1.3363513305245818,
+          -1.3363513305245824
+        ],
+        "measurement_var": [
+          0.0008566771923039733,
+          0.0008566771923039733
+        ]
+      },
+      {
+        "study": "hofmann_schieberle_1998_free_mft_fft",
+        "compound": "2-Methyl-3-furanthiol (MFT)",
+        "lane": "sulfur",
+        "out_of_sample": false,
+        "k": 9,
+        "ss": 14.608219454672366,
+        "df": 8,
+        "residuals": [
+          1.6827398161788985,
+          0.30477862880364465,
+          -0.16634860285809025,
+          0.5929399819567331,
+          0.8605245942183475,
+          0.24354020245963404,
+          -0.7811264339685483,
+          -3.1219175420467233,
+          0.38486935525610255
+        ],
+        "measurement_var": [
+          0.0008566771923039733,
+          0.0008566771923039733,
+          0.0008566771923039733,
+          0.0008566771923039733,
+          0.0008566771923039733,
+          0.0008566771923039733,
+          0.0008566771923039733,
+          0.0008566771923039733,
+          0.0008566771923039733
+        ]
+      },
+      {
+        "study": "hofmann_schieberle_1998_free_mft_fft",
+        "compound": "2-Methyl-3-furanthiol (MFT)",
+        "lane": "sulfur",
+        "out_of_sample": true,
+        "k": 2,
+        "ss": 2.7396515058289266,
+        "df": 1,
+        "residuals": [
+          1.1703955540390876,
+          -1.170395554039088
+        ],
+        "measurement_var": [
+          0.0008566771923039733,
+          0.0008566771923039733
+        ]
+      },
+      {
+        "study": "lin2021",
+        "compound": "Acrylamide",
+        "lane": "acrylamide",
+        "out_of_sample": true,
+        "k": 3,
+        "ss": 2.2262409295273358,
+        "df": 2,
+        "residuals": [
+          1.2100935301609075,
+          -0.7270127478818176,
+          -0.48308078227908985
+        ],
+        "measurement_var": [
+          0.0031348348628272506,
+          0.0031348348628272506,
+          0.0031348348628272506
+        ]
+      },
+      {
+        "study": "yiltirak2026",
+        "compound": "2-Furfurylthiol (FFT)",
+        "lane": "sulfur",
+        "out_of_sample": true,
+        "k": 4,
+        "ss": 0.20565377548062674,
+        "df": 3,
+        "residuals": [
+          0.2771795423968795,
+          0.13553320340502797,
+          -0.09390611221121654,
+          -0.3188066335906908
+        ],
+        "measurement_var": [
+          0.0008566771923039733,
+          0.0008566771923039733,
+          0.0008566771923039733,
+          0.0008566771923039733
+        ]
+      },
+      {
+        "study": "yiltirak2026",
+        "compound": "2-Methyl-3-furanthiol (MFT)",
+        "lane": "sulfur",
+        "out_of_sample": true,
+        "k": 4,
+        "ss": 0.26927369122317824,
+        "df": 3,
+        "residuals": [
+          -0.4079042884180819,
+          -0.022068450157216545,
+          0.14440843979831078,
+          0.2855642987769876
+        ],
+        "measurement_var": [
+          0.0008566771923039733,
+          0.0008566771923039733,
+          0.0008566771923039733,
+          0.0008566771923039733
+        ]
+      },
+      {
+        "study": "zhou2023c",
+        "compound": "2-Furfurylthiol (FFT)",
+        "lane": "sulfur",
+        "out_of_sample": true,
+        "k": 4,
+        "ss": 0.377078345274646,
+        "df": 3,
+        "residuals": [
+          0.48287104636409306,
+          -0.24905822653681423,
+          -0.2820573716039019,
+          0.04824455177662313
+        ],
+        "measurement_var": [
+          0.0031348348628272506,
+          0.0031348348628272506,
+          0.0031348348628272506,
+          0.0031348348628272506
+        ]
+      },
+      {
+        "study": "zhou2023c",
+        "compound": "2-Methyl-3-furanthiol (MFT)",
+        "lane": "sulfur",
+        "out_of_sample": true,
+        "k": 4,
+        "ss": 0.6084571595428523,
+        "df": 3,
+        "residuals": [
+          0.6429203891833246,
+          -0.4093248196755532,
+          -0.12863585186724094,
+          -0.10495971764053043
+        ],
+        "measurement_var": [
+          0.0031348348628272506,
+          0.0031348348628272506,
+          0.0031348348628272506,
+          0.0031348348628272506
+        ]
+      },
+      {
+        "study": "zhou2023c",
+        "compound": "Furfural",
+        "lane": "sulfur",
+        "out_of_sample": true,
+        "k": 4,
+        "ss": 0.03745987890003853,
+        "df": 3,
+        "residuals": [
+          0.04440488524326787,
+          0.12582754993733325,
+          -0.13593930166427165,
+          -0.03429313351632945
+        ],
+        "measurement_var": [
+          0.0031348348628272506,
+          0.0031348348628272506,
+          0.0031348348628272506,
+          0.0031348348628272506
+        ]
+      }
+    ]
+  },
+  "stage_0a": {
+    "worlds": 512,
+    "worlds_planned": 512,
+    "points_record": {
+      "commit": "5e61fed0",
+      "path": "results/validation/ph_balance_s3_rival_points.json",
+      "sha256": "d92af52c4f48d3c96ceb56a45f57ccb7b1faf6cfe2533bd3a904680f2aac1241"
+    },
+    "rivals": {
+      "B1": 256,
+      "B13": 256
+    },
+    "failed_arm_runs": 1,
+    "arm_runs": 11776,
+    "failed_examples": [
+      "timeout"
+    ],
+    "wall_hours": 0.770207918352551,
+    "core_seconds": 5530.947450832871,
+    "decisions": {
+      "D01": {
+        "arms": [
+          "BR_S",
+          "S_cys20"
+        ],
+        "output": "MFT",
+        "lane": "sulfur",
+        "sigma_r_rule": "sulfur (own, 6 studies)",
+        "worlds_with_lever": 512,
+        "worlds_missing": 0,
+        "L_quantiles": {
+          "0.05": -0.004049436599334787,
+          "0.25": 0.04024691800459723,
+          "0.5": 0.07660192432682811,
+          "0.75": 0.13602612607344244,
+          "0.95": 0.23422237884101244
+        },
+        "P_abs_L_over_shipped_halfwidth": 0.0,
+        "oracle": {
+          "point": {
+            "worlds": 512,
+            "G": 0.0,
+            "P_right": 0.0,
+            "P_wrong_worth": 0.0,
+            "P_wrong": 0.0,
+            "P_worth": 0.81459375,
+            "eligible": false,
+            "sigma_r": 1.2713803181336438
+          },
+          "loso_min": {
+            "worlds": 512,
+            "G": 0.0,
+            "P_right": 0.0,
+            "P_wrong_worth": 0.0,
+            "P_wrong": 0.0,
+            "P_worth": 0.725017578125,
+            "eligible": false,
+            "sigma_r": 0.8417208311940955
+          },
+          "loso_max": {
+            "worlds": 512,
+            "G": 0.0,
+            "P_right": 0.0,
+            "P_wrong_worth": 0.0,
+            "P_wrong": 0.0,
+            "P_worth": 0.83991796875,
+            "eligible": false,
+            "sigma_r": 1.4788930833044163
+          }
+        },
+        "eligible": false,
+        "eligible_agrees_across_loso": true,
+        "status": "omega-bound",
+        "oracle_as_shipped": {
+          "worlds": 512,
+          "G": 0.0,
+          "P_right": 0.0,
+          "P_wrong_worth": 0.0,
+          "P_wrong": 0.0,
+          "P_worth": 0.620013671875,
+          "eligible": false,
+          "sigma_r": 0.5925554826343269
+        },
+        "sigma_star": 0.10884039245759082,
+        "reduction_factor_needed": 11.681144191289384
+      },
+      "D02": {
+        "arms": [
+          "BR_S",
+          "S_cys20"
+        ],
+        "output": "FFT",
+        "lane": "sulfur",
+        "sigma_r_rule": "sulfur (own, 6 studies)",
+        "worlds_with_lever": 512,
+        "worlds_missing": 0,
+        "L_quantiles": {
+          "0.05": 0.19467082222074725,
+          "0.25": 0.28322784108742893,
+          "0.5": 0.3239580136007678,
+          "0.75": 0.3960705911092448,
+          "0.95": 0.521079055459473
+        },
+        "P_abs_L_over_shipped_halfwidth": 0.0,
+        "oracle": {
+          "point": {
+            "worlds": 512,
+            "G": 0.0,
+            "P_right": 0.0,
+            "P_wrong_worth": 0.0,
+            "P_wrong": 0.0,
+            "P_worth": 0.82005859375,
+            "eligible": false,
+            "sigma_r": 1.2713803181336438
+          },
+          "loso_min": {
+            "worlds": 512,
+            "G": 0.0,
+            "P_right": 0.0,
+            "P_wrong_worth": 0.0,
+            "P_wrong": 0.0,
+            "P_worth": 0.74395703125,
+            "eligible": false,
+            "sigma_r": 0.8417208311940955
+          },
+          "loso_max": {
+            "worlds": 512,
+            "G": 0.0,
+            "P_right": 0.0,
+            "P_wrong_worth": 0.0,
+            "P_wrong": 0.0,
+            "P_worth": 0.843544921875,
+            "eligible": false,
+            "sigma_r": 1.4788930833044163
+          }
+        },
+        "eligible": false,
+        "eligible_agrees_across_loso": true,
+        "status": "omega-bound",
+        "oracle_as_shipped": {
+          "worlds": 512,
+          "G": 0.0,
+          "P_right": 0.0,
+          "P_wrong_worth": 0.0,
+          "P_wrong": 0.0,
+          "P_worth": 0.66990234375,
+          "eligible": false,
+          "sigma_r": 0.5925554826343269
+        },
+        "sigma_star": 0.19839910325506607,
+        "reduction_factor_needed": 6.408195890377239
+      },
+      "D05": {
+        "arms": [
+          "BR_S",
+          "BR_G"
+        ],
+        "output": "FFT",
+        "lane": "sulfur",
+        "sigma_r_rule": "sulfur (own, 6 studies)",
+        "worlds_with_lever": 512,
+        "worlds_missing": 0,
+        "L_quantiles": {
+          "0.05": -2.042324673077291,
+          "0.25": -1.3857266916249271,
+          "0.5": -0.9604504273419332,
+          "0.75": -0.5305705784307461,
+          "0.95": 0.19941629513062978
+        },
+        "P_abs_L_over_shipped_halfwidth": 0.49609375,
+        "oracle": {
+          "point": {
+            "worlds": 512,
+            "G": 0.04884553665272023,
+            "P_right": 0.04962875771686558,
+            "P_wrong_worth": 0.000783221064145355,
+            "P_wrong": 0.0011163385664564784,
+            "P_worth": 0.867810546875,
+            "eligible": false,
+            "sigma_r": 1.2713803181336438
+          },
+          "loso_min": {
+            "worlds": 512,
+            "G": 0.28098369586365224,
+            "P_right": 0.28370067043121383,
+            "P_wrong_worth": 0.002716974567561567,
+            "P_wrong": 0.005278732790153692,
+            "P_worth": 0.853287109375,
+            "eligible": false,
+            "sigma_r": 0.8417208311940955
+          },
+          "loso_max": {
+            "worlds": 512,
+            "G": 0.031108796203551604,
+            "P_right": 0.03180326847140422,
+            "P_wrong_worth": 0.0006944722678526116,
+            "P_wrong": 0.00092565899271828,
+            "P_worth": 0.87746484375,
+            "eligible": false,
+            "sigma_r": 1.4788930833044163
+          }
+        },
+        "eligible": false,
+        "eligible_agrees_across_loso": true,
+        "status": "omega-bound",
+        "oracle_as_shipped": {
+          "worlds": 512,
+          "G": 0.5545913255900127,
+          "P_right": 0.5568031583233073,
+          "P_wrong_worth": 0.0022118327332946016,
+          "P_wrong": 0.006632874330580102,
+          "P_worth": 0.85389453125,
+          "eligible": false,
+          "sigma_r": 0.5925554826343269
+        },
+        "sigma_star": 0.5474326613584699,
+        "reduction_factor_needed": 2.322441476141882
+      },
+      "D06": {
+        "arms": [
+          "BR_S",
+          "S_ph50"
+        ],
+        "output": "FFT",
+        "lane": "sulfur",
+        "sigma_r_rule": "sulfur (own, 6 studies)",
+        "worlds_with_lever": 512,
+        "worlds_missing": 0,
+        "L_quantiles": {
+          "0.05": -0.026935976901845505,
+          "0.25": 0.003039213714436384,
+          "0.5": 0.020035619279852757,
+          "0.75": 0.06447062676179782,
+          "0.95": 0.1341164743173576
+        },
+        "P_abs_L_over_shipped_halfwidth": 0.0,
+        "oracle": {
+          "point": {
+            "worlds": 512,
+            "G": 0.0,
+            "P_right": 0.0,
+            "P_wrong_worth": 0.0,
+            "P_wrong": 0.0,
+            "P_worth": 0.813591796875,
+            "eligible": false,
+            "sigma_r": 1.2713803181336438
+          },
+          "loso_min": {
+            "worlds": 512,
+            "G": 0.0,
+            "P_right": 0.0,
+            "P_wrong_worth": 0.0,
+            "P_wrong": 0.0,
+            "P_worth": 0.7227421875,
+            "eligible": false,
+            "sigma_r": 0.8417208311940955
+          },
+          "loso_max": {
+            "worlds": 512,
+            "G": 0.0,
+            "P_right": 0.0,
+            "P_wrong_worth": 0.0,
+            "P_wrong": 0.0,
+            "P_worth": 0.83892578125,
+            "eligible": false,
+            "sigma_r": 1.4788930833044163
+          }
+        },
+        "eligible": false,
+        "eligible_agrees_across_loso": true,
+        "status": "omega-bound",
+        "oracle_as_shipped": {
+          "worlds": 512,
+          "G": 0.0,
+          "P_right": 0.0,
+          "P_wrong_worth": 0.0,
+          "P_wrong": 0.0,
+          "P_worth": 0.615505859375,
+          "eligible": false,
+          "sigma_r": 0.5925554826343269
+        },
+        "sigma_star": 0.07834272044560994,
+        "reduction_factor_needed": 16.22844229689866
+      },
+      "D07": {
+        "arms": [
+          "BR_S",
+          "S_ph50"
+        ],
+        "output": "MFT",
+        "lane": "sulfur",
+        "sigma_r_rule": "sulfur (own, 6 studies)",
+        "worlds_with_lever": 512,
+        "worlds_missing": 0,
+        "L_quantiles": {
+          "0.05": -0.13752758970610973,
+          "0.25": -0.0968620593199282,
+          "0.5": -0.07406029954390259,
+          "0.75": -0.03531994568764141,
+          "0.95": 0.017806784094893356
+        },
+        "P_abs_L_over_shipped_halfwidth": 0.0,
+        "oracle": {
+          "point": {
+            "worlds": 512,
+            "G": 0.0,
+            "P_right": 0.0,
+            "P_wrong_worth": 0.0,
+            "P_wrong": 0.0,
+            "P_worth": 0.814078125,
+            "eligible": false,
+            "sigma_r": 1.2713803181336438
+          },
+          "loso_min": {
+            "worlds": 512,
+            "G": 0.0,
+            "P_right": 0.0,
+            "P_wrong_worth": 0.0,
+            "P_wrong": 0.0,
+            "P_worth": 0.72246875,
+            "eligible": false,
+            "sigma_r": 0.8417208311940955
+          },
+          "loso_max": {
+            "worlds": 512,
+            "G": 0.0,
+            "P_right": 0.0,
+            "P_wrong_worth": 0.0,
+            "P_wrong": 0.0,
+            "P_worth": 0.839146484375,
+            "eligible": false,
+            "sigma_r": 1.4788930833044163
+          }
+        },
+        "eligible": false,
+        "eligible_agrees_across_loso": true,
+        "status": "omega-bound",
+        "oracle_as_shipped": {
+          "worlds": 512,
+          "G": 0.0,
+          "P_right": 0.0,
+          "P_wrong_worth": 0.0,
+          "P_wrong": 0.0,
+          "P_worth": 0.615736328125,
+          "eligible": false,
+          "sigma_r": 0.5925554826343269
+        },
+        "sigma_star": 0.0739886924711114,
+        "reduction_factor_needed": 17.18344081604158
+      },
+      "D08": {
+        "arms": [
+          "BR_S",
+          "S_ph65"
+        ],
+        "output": "MFT/FFT",
+        "lane": "sulfur",
+        "sigma_r_rule": "sulfur (own, 6 studies)",
+        "worlds_with_lever": 512,
+        "worlds_missing": 0,
+        "L_quantiles": {
+          "0.05": 0.1857858307957718,
+          "0.25": 0.28044343996306886,
+          "0.5": 0.37222856016179073,
+          "0.75": 0.4625530218359222,
+          "0.95": 0.5759957871845856
+        },
+        "P_abs_L_over_shipped_halfwidth": 0.00390625,
+        "oracle": {
+          "point": {
+            "worlds": 512,
+            "G": 0.0,
+            "P_right": 0.0,
+            "P_wrong_worth": 0.0,
+            "P_wrong": 0.0,
+            "P_worth": 0.821810546875,
+            "eligible": false,
+            "sigma_r": 1.2713803181336438
+          },
+          "loso_min": {
+            "worlds": 512,
+            "G": 0.0,
+            "P_right": 0.0,
+            "P_wrong_worth": 0.0,
+            "P_wrong": 0.0,
+            "P_worth": 0.748517578125,
+            "eligible": false,
+            "sigma_r": 0.8417208311940955
+          },
+          "loso_max": {
+            "worlds": 512,
+            "G": 0.0,
+            "P_right": 0.0,
+            "P_wrong_worth": 0.0,
+            "P_wrong": 0.0,
+            "P_worth": 0.84476953125,
+            "eligible": false,
+            "sigma_r": 1.4788930833044163
+          }
+        },
+        "eligible": false,
+        "eligible_agrees_across_loso": true,
+        "status": "omega-bound",
+        "oracle_as_shipped": {
+          "worlds": 512,
+          "G": 0.005068381559925653,
+          "P_right": 0.005120011932352739,
+          "P_wrong_worth": 5.163037242708644e-05,
+          "P_wrong": 0.0001481118698827349,
+          "P_worth": 0.680921875,
+          "eligible": false,
+          "sigma_r": 0.5925554826343269
+        },
+        "sigma_star": 0.22888795782345392,
+        "reduction_factor_needed": 5.554596800213868
+      },
+      "D09": {
+        "arms": [
+          "BR_S",
+          "S_t120"
+        ],
+        "output": "MFT",
+        "lane": "sulfur",
+        "sigma_r_rule": "sulfur (own, 6 studies)",
+        "worlds_with_lever": 512,
+        "worlds_missing": 0,
+        "L_quantiles": {
+          "0.05": -0.04748698981252361,
+          "0.25": 0.051352600800357084,
+          "0.5": 0.12066057609163217,
+          "0.75": 0.17243200856474095,
+          "0.95": 0.21328209849416088
+        },
+        "P_abs_L_over_shipped_halfwidth": 0.0,
+        "oracle": {
+          "point": {
+            "worlds": 512,
+            "G": 0.0,
+            "P_right": 0.0,
+            "P_wrong_worth": 0.0,
+            "P_wrong": 0.0,
+            "P_worth": 0.815548828125,
+            "eligible": false,
+            "sigma_r": 1.2713803181336438
+          },
+          "loso_min": {
+            "worlds": 512,
+            "G": 0.0,
+            "P_right": 0.0,
+            "P_wrong_worth": 0.0,
+            "P_wrong": 0.0,
+            "P_worth": 0.725732421875,
+            "eligible": false,
+            "sigma_r": 0.8417208311940955
+          },
+          "loso_max": {
+            "worlds": 512,
+            "G": 0.0,
+            "P_right": 0.0,
+            "P_wrong_worth": 0.0,
+            "P_wrong": 0.0,
+            "P_worth": 0.841185546875,
+            "eligible": false,
+            "sigma_r": 1.4788930833044163
+          }
+        },
+        "eligible": false,
+        "eligible_agrees_across_loso": true,
+        "status": "omega-bound",
+        "oracle_as_shipped": {
+          "worlds": 512,
+          "G": 0.0,
+          "P_right": 0.0,
+          "P_wrong_worth": 0.0,
+          "P_wrong": 0.0,
+          "P_worth": 0.621419921875,
+          "eligible": false,
+          "sigma_r": 0.5925554826343269
+        },
+        "sigma_star": 0.10577266607705911,
+        "reduction_factor_needed": 12.019932609124162
+      },
+      "D10": {
+        "arms": [
+          "BR_S",
+          "S_T140"
+        ],
+        "output": "FFT",
+        "lane": "sulfur",
+        "sigma_r_rule": "sulfur (own, 6 studies)",
+        "worlds_with_lever": 512,
+        "worlds_missing": 0,
+        "L_quantiles": {
+          "0.05": -1.9282946645135435,
+          "0.25": -0.6918538026637658,
+          "0.5": -0.11122183588365453,
+          "0.75": 0.3083854007089719,
+          "0.95": 0.8815082370263666
+        },
+        "P_abs_L_over_shipped_halfwidth": 0.21484375,
+        "oracle": {
+          "point": {
+            "worlds": 512,
+            "G": 0.04472078455891718,
+            "P_right": 0.04510055924137692,
+            "P_wrong_worth": 0.0003797746824597358,
+            "P_wrong": 0.0005948758221262393,
+            "P_worth": 0.843427734375,
+            "eligible": false,
+            "sigma_r": 1.2713803181336438
+          },
+          "loso_min": {
+            "worlds": 512,
+            "G": 0.1343760986775303,
+            "P_right": 0.13532756878489646,
+            "P_wrong_worth": 0.0009514701073661488,
+            "P_wrong": 0.0017423624153154837,
+            "P_worth": 0.794412109375,
+            "eligible": false,
+            "sigma_r": 0.8417208311940955
+          },
+          "loso_max": {
+            "worlds": 512,
+            "G": 0.03470345967496583,
+            "P_right": 0.0351552744263769,
+            "P_wrong_worth": 0.0004518147514110697,
+            "P_wrong": 0.0006475730727342301,
+            "P_worth": 0.86024609375,
+            "eligible": false,
+            "sigma_r": 1.4788930833044163
+          }
+        },
+        "eligible": false,
+        "eligible_agrees_across_loso": true,
+        "status": "omega-bound",
+        "oracle_as_shipped": {
+          "worlds": 512,
+          "G": 0.2718283456493483,
+          "P_right": 0.27291840359589664,
+          "P_wrong_worth": 0.0010900579465483225,
+          "P_wrong": 0.002929010400252127,
+          "P_worth": 0.75433203125,
+          "eligible": false,
+          "sigma_r": 0.5925554826343269
+        },
+        "sigma_star": 0.32256906772911204,
+        "reduction_factor_needed": 3.9414204439507112
+      },
+      "D14": {
+        "arms": [
+          "S_ppi",
+          "S_ppi_rooh"
+        ],
+        "output": "HEX",
+        "lane": "lipid",
+        "sigma_r_rule": "pooled (8 studies; lipid's own: 0)",
+        "worlds_with_lever": 512,
+        "worlds_missing": 0,
+        "L_quantiles": {
+          "0.05": 3.3704669729446777,
+          "0.25": 3.754600042921715,
+          "0.5": 4.083145057459165,
+          "0.75": 4.4341704203847065,
+          "0.95": 4.842360860237022
+        },
+        "P_abs_L_over_shipped_halfwidth": 1.0,
+        "oracle": {
+          "point": {
+            "worlds": 512,
+            "G": 0.9991196580360548,
+            "P_right": 0.9995598290180274,
+            "P_wrong_worth": 0.0004401709819725529,
+            "P_wrong": 0.0009805166267884175,
+            "P_worth": 0.998369140625,
+            "eligible": true,
+            "sigma_r": 1.2546807533911766
+          },
+          "loso_min": {
+            "worlds": 512,
+            "G": 0.9999960935821461,
+            "P_right": 0.9999980467910731,
+            "P_wrong_worth": 1.9532089269460797e-06,
+            "P_wrong": 9.765625e-06,
+            "P_worth": 0.99995703125,
+            "eligible": true,
+            "sigma_r": 0.8820552769632302
+          },
+          "loso_max": {
+            "worlds": 512,
+            "G": 0.996784401996808,
+            "P_right": 0.998392200998404,
+            "P_wrong_worth": 0.0016077990015960345,
+            "P_wrong": 0.0029182993385969505,
+            "P_worth": 0.99612109375,
+            "eligible": true,
+            "sigma_r": 1.429177449672021
+          }
+        },
+        "eligible": true,
+        "eligible_agrees_across_loso": true,
+        "status": "eligible",
+        "oracle_as_shipped": {
+          "worlds": 512,
+          "G": 1.0,
+          "P_right": 1.0,
+          "P_wrong_worth": 0.0,
+          "P_wrong": 0.0,
+          "P_worth": 1.0,
+          "eligible": true,
+          "sigma_r": 0.5925554826343269
+        },
+        "sigma_star": 2.386646355290239,
+        "reduction_factor_needed": 0.5257087002479659
+      },
+      "D15": {
+        "arms": [
+          "BR_S",
+          "S_gsh2"
+        ],
+        "output": "MFT",
+        "lane": "sulfur",
+        "sigma_r_rule": "sulfur (own, 6 studies)",
+        "worlds_with_lever": 511,
+        "worlds_missing": 1,
+        "L_quantiles": {
+          "0.05": 0.04071393798444878,
+          "0.25": 0.043850229170874666,
+          "0.5": 0.04986836138496642,
+          "0.75": 0.08362952768235354,
+          "0.95": 0.13684973901174313
+        },
+        "P_abs_L_over_shipped_halfwidth": 0.0,
+        "oracle": {
+          "point": {
+            "worlds": 511,
+            "G": 0.0,
+            "P_right": 0.0,
+            "P_wrong_worth": 0.0,
+            "P_wrong": 0.0,
+            "P_worth": 0.8140254403131115,
+            "eligible": false,
+            "sigma_r": 1.2713803181336438
+          },
+          "loso_min": {
+            "worlds": 511,
+            "G": 0.0,
+            "P_right": 0.0,
+            "P_wrong_worth": 0.0,
+            "P_wrong": 0.0,
+            "P_worth": 0.7232681017612524,
+            "eligible": false,
+            "sigma_r": 0.8417208311940955
+          },
+          "loso_max": {
+            "worlds": 511,
+            "G": 0.0,
+            "P_right": 0.0,
+            "P_wrong_worth": 0.0,
+            "P_wrong": 0.0,
+            "P_worth": 0.8396614481409002,
+            "eligible": false,
+            "sigma_r": 1.4788930833044163
+          }
+        },
+        "eligible": false,
+        "eligible_agrees_across_loso": true,
+        "status": "omega-bound",
+        "oracle_as_shipped": {
+          "worlds": 511,
+          "G": 0.0,
+          "P_right": 0.0,
+          "P_wrong_worth": 0.0,
+          "P_wrong": 0.0,
+          "P_worth": 0.6163913894324853,
+          "eligible": false,
+          "sigma_r": 0.5925554826343269
+        },
+        "sigma_star": 0.08295297080990291,
+        "reduction_factor_needed": 15.326519420831481
+      },
+      "D16": {
+        "arms": [
+          "BR_S",
+          "S_thi2"
+        ],
+        "output": "MFT",
+        "lane": "sulfur",
+        "sigma_r_rule": "sulfur (own, 6 studies)",
+        "worlds_with_lever": 512,
+        "worlds_missing": 0,
+        "L_quantiles": {
+          "0.05": 0.0867621992231945,
+          "0.25": 0.2909549806979772,
+          "0.5": 0.5194301954714096,
+          "0.75": 0.8513480914147453,
+          "0.95": 1.5046609742440704
+        },
+        "P_abs_L_over_shipped_halfwidth": 0.18359375,
+        "oracle": {
+          "point": {
+            "worlds": 512,
+            "G": 0.0,
+            "P_right": 0.0,
+            "P_wrong_worth": 0.0,
+            "P_wrong": 0.0,
+            "P_worth": 0.83819140625,
+            "eligible": false,
+            "sigma_r": 1.2713803181336438
+          },
+          "loso_min": {
+            "worlds": 512,
+            "G": 0.07543328680312782,
+            "P_right": 0.07645612778100332,
+            "P_wrong_worth": 0.0010228409778755049,
+            "P_wrong": 0.0018494653274439012,
+            "P_worth": 0.790537109375,
+            "eligible": false,
+            "sigma_r": 0.8417208311940955
+          },
+          "loso_max": {
+            "worlds": 512,
+            "G": 0.0,
+            "P_right": 0.0,
+            "P_wrong_worth": 0.0,
+            "P_wrong": 0.0,
+            "P_worth": 0.855732421875,
+            "eligible": false,
+            "sigma_r": 1.4788930833044163
+          }
+        },
+        "eligible": false,
+        "eligible_agrees_across_loso": true,
+        "status": "omega-bound",
+        "oracle_as_shipped": {
+          "worlds": 512,
+          "G": 0.2278593117408907,
+          "P_right": 0.22919937205651492,
+          "P_wrong_worth": 0.0013400603156242254,
+          "P_wrong": 0.00343575627985367,
+          "P_worth": 0.7564375,
+          "eligible": false,
+          "sigma_r": 0.5925554826343269
+        },
+        "sigma_star": 0.33670354653243945,
+        "reduction_factor_needed": 3.775963547836149
+      },
+      "D18": {
+        "arms": [
+          "BR_T",
+          "T_ph75"
+        ],
+        "output": "DMP",
+        "lane": "trunk",
+        "sigma_r_rule": "pooled (8 studies; trunk's own: 0)",
+        "worlds_with_lever": 512,
+        "worlds_missing": 0,
+        "L_quantiles": {
+          "0.05": 0.7766991353793682,
+          "0.25": 0.8834665462227222,
+          "0.5": 1.002915828580928,
+          "0.75": 1.1174199390288617,
+          "0.95": 1.2093677301355585
+        },
+        "P_abs_L_over_shipped_halfwidth": 0.560546875,
+        "oracle": {
+          "point": {
+            "worlds": 512,
+            "G": 0.0,
+            "P_right": 0.0,
+            "P_wrong_worth": 0.0,
+            "P_wrong": 0.0,
+            "P_worth": 0.861751953125,
+            "eligible": false,
+            "sigma_r": 1.2546807533911766
+          },
+          "loso_min": {
+            "worlds": 512,
+            "G": 0.0,
+            "P_right": 0.0,
+            "P_wrong_worth": 0.0,
+            "P_wrong": 0.0,
+            "P_worth": 0.856046875,
+            "eligible": false,
+            "sigma_r": 0.8820552769632302
+          },
+          "loso_max": {
+            "worlds": 512,
+            "G": 0.0,
+            "P_right": 0.0,
+            "P_wrong_worth": 0.0,
+            "P_wrong": 0.0,
+            "P_worth": 0.869853515625,
+            "eligible": false,
+            "sigma_r": 1.429177449672021
+          }
+        },
+        "eligible": false,
+        "eligible_agrees_across_loso": true,
+        "status": "omega-bound",
+        "oracle_as_shipped": {
+          "worlds": 512,
+          "G": 0.566968258351854,
+          "P_right": 0.5729913248554508,
+          "P_wrong_worth": 0.006023066503596744,
+          "P_wrong": 0.017646586203720577,
+          "P_worth": 0.89110546875,
+          "eligible": false,
+          "sigma_r": 0.5925554826343269
+        },
+        "sigma_star": 0.5796475450400488,
+        "reduction_factor_needed": 2.1645580389795125
+      },
+      "O01": {
+        "arms": [
+          "BR_X",
+          "X_cys18"
+        ],
+        "output": "MFT",
+        "lane": "sulfur",
+        "sigma_r_rule": "sulfur (own, 6 studies)",
+        "worlds_with_lever": 512,
+        "worlds_missing": 0,
+        "L_quantiles": {
+          "0.05": 0.014215900069030729,
+          "0.25": 0.0339782467269113,
+          "0.5": 0.055132275660894514,
+          "0.75": 0.09153603304651492,
+          "0.95": 0.16072193950516153
+        },
+        "P_abs_L_over_shipped_halfwidth": 0.0,
+        "oracle": {
+          "point": {
+            "worlds": 512,
+            "G": 0.0,
+            "P_right": 0.0,
+            "P_wrong_worth": 0.0,
+            "P_wrong": 0.0,
+            "P_worth": 0.814130859375,
+            "eligible": false,
+            "sigma_r": 1.2713803181336438
+          },
+          "loso_min": {
+            "worlds": 512,
+            "G": 0.0,
+            "P_right": 0.0,
+            "P_wrong_worth": 0.0,
+            "P_wrong": 0.0,
+            "P_worth": 0.722912109375,
+            "eligible": false,
+            "sigma_r": 0.8417208311940955
+          },
+          "loso_max": {
+            "worlds": 512,
+            "G": 0.0,
+            "P_right": 0.0,
+            "P_wrong_worth": 0.0,
+            "P_wrong": 0.0,
+            "P_worth": 0.83949609375,
+            "eligible": false,
+            "sigma_r": 1.4788930833044163
+          }
+        },
+        "eligible": false,
+        "eligible_agrees_across_loso": true,
+        "status": "omega-bound",
+        "oracle_as_shipped": {
+          "worlds": 512,
+          "G": 0.0,
+          "P_right": 0.0,
+          "P_wrong_worth": 0.0,
+          "P_wrong": 0.0,
+          "P_worth": 0.61684375,
+          "eligible": false,
+          "sigma_r": 0.5925554826343269
+        },
+        "sigma_star": 0.0890991505998577,
+        "reduction_factor_needed": 14.269275403571294
+      },
+      "O02": {
+        "arms": [
+          "BR_X",
+          "X_cys18"
+        ],
+        "output": "FFT",
+        "lane": "sulfur",
+        "sigma_r_rule": "sulfur (own, 6 studies)",
+        "worlds_with_lever": 512,
+        "worlds_missing": 0,
+        "L_quantiles": {
+          "0.05": 0.10682969342951627,
+          "0.25": 0.16638050942817584,
+          "0.5": 0.19402059599091048,
+          "0.75": 0.2434528619052525,
+          "0.95": 0.3223477799044863
+        },
+        "P_abs_L_over_shipped_halfwidth": 0.0,
+        "oracle": {
+          "point": {
+            "worlds": 512,
+            "G": 0.0,
+            "P_right": 0.0,
+            "P_wrong_worth": 0.0,
+            "P_wrong": 0.0,
+            "P_worth": 0.8166796875,
+            "eligible": false,
+            "sigma_r": 1.2713803181336438
+          },
+          "loso_min": {
+            "worlds": 512,
+            "G": 0.0,
+            "P_right": 0.0,
+            "P_wrong_worth": 0.0,
+            "P_wrong": 0.0,
+            "P_worth": 0.730302734375,
+            "eligible": false,
+            "sigma_r": 0.8417208311940955
+          },
+          "loso_max": {
+            "worlds": 512,
+            "G": 0.0,
+            "P_right": 0.0,
+            "P_wrong_worth": 0.0,
+            "P_wrong": 0.0,
+            "P_worth": 0.841296875,
+            "eligible": false,
+            "sigma_r": 1.4788930833044163
+          }
+        },
+        "eligible": false,
+        "eligible_agrees_across_loso": true,
+        "status": "omega-bound",
+        "oracle_as_shipped": {
+          "worlds": 512,
+          "G": 0.0,
+          "P_right": 0.0,
+          "P_wrong_worth": 0.0,
+          "P_wrong": 0.0,
+          "P_worth": 0.635623046875,
+          "eligible": false,
+          "sigma_r": 0.5925554826343269
+        },
+        "sigma_star": 0.12920817324975933,
+        "reduction_factor_needed": 9.839782470076923
+      },
+      "O03": {
+        "arms": [
+          "BR_X",
+          "X_ph63"
+        ],
+        "output": "FFT",
+        "lane": "sulfur",
+        "sigma_r_rule": "sulfur (own, 6 studies)",
+        "worlds_with_lever": 512,
+        "worlds_missing": 0,
+        "L_quantiles": {
+          "0.05": -0.33075147242664193,
+          "0.25": -0.24736819700863566,
+          "0.5": -0.09525616627868061,
+          "0.75": -0.03935415515808849,
+          "0.95": 0.008208332238493437
+        },
+        "P_abs_L_over_shipped_halfwidth": 0.0,
+        "oracle": {
+          "point": {
+            "worlds": 512,
+            "G": 0.0,
+            "P_right": 0.0,
+            "P_wrong_worth": 0.0,
+            "P_wrong": 0.0,
+            "P_worth": 0.8155546875,
+            "eligible": false,
+            "sigma_r": 1.2713803181336438
+          },
+          "loso_min": {
+            "worlds": 512,
+            "G": 0.0,
+            "P_right": 0.0,
+            "P_wrong_worth": 0.0,
+            "P_wrong": 0.0,
+            "P_worth": 0.72776171875,
+            "eligible": false,
+            "sigma_r": 0.8417208311940955
+          },
+          "loso_max": {
+            "worlds": 512,
+            "G": 0.0,
+            "P_right": 0.0,
+            "P_wrong_worth": 0.0,
+            "P_wrong": 0.0,
+            "P_worth": 0.84046484375,
+            "eligible": false,
+            "sigma_r": 1.4788930833044163
+          }
+        },
+        "eligible": false,
+        "eligible_agrees_across_loso": true,
+        "status": "omega-bound",
+        "oracle_as_shipped": {
+          "worlds": 512,
+          "G": 0.0,
+          "P_right": 0.0,
+          "P_wrong_worth": 0.0,
+          "P_wrong": 0.0,
+          "P_worth": 0.628357421875,
+          "eligible": false,
+          "sigma_r": 0.5925554826343269
+        },
+        "sigma_star": 0.15121036087260634,
+        "reduction_factor_needed": 8.408023833795177
+      },
+      "O04": {
+        "arms": [
+          "BR_X",
+          "X_T135"
+        ],
+        "output": "MFT",
+        "lane": "sulfur",
+        "sigma_r_rule": "sulfur (own, 6 studies)",
+        "worlds_with_lever": 512,
+        "worlds_missing": 0,
+        "L_quantiles": {
+          "0.05": -0.03587346931297251,
+          "0.25": 0.12167846858127129,
+          "0.5": 0.2694658360010356,
+          "0.75": 0.3895618762999904,
+          "0.95": 0.6036844216606989
+        },
+        "P_abs_L_over_shipped_halfwidth": 0.0,
+        "oracle": {
+          "point": {
+            "worlds": 512,
+            "G": 0.0,
+            "P_right": 0.0,
+            "P_wrong_worth": 0.0,
+            "P_wrong": 0.0,
+            "P_worth": 0.819966796875,
+            "eligible": false,
+            "sigma_r": 1.2713803181336438
+          },
+          "loso_min": {
+            "worlds": 512,
+            "G": 0.0,
+            "P_right": 0.0,
+            "P_wrong_worth": 0.0,
+            "P_wrong": 0.0,
+            "P_worth": 0.740646484375,
+            "eligible": false,
+            "sigma_r": 0.8417208311940955
+          },
+          "loso_max": {
+            "worlds": 512,
+            "G": 0.0,
+            "P_right": 0.0,
+            "P_wrong_worth": 0.0,
+            "P_wrong": 0.0,
+            "P_worth": 0.84355078125,
+            "eligible": false,
+            "sigma_r": 1.4788930833044163
+          }
+        },
+        "eligible": false,
+        "eligible_agrees_across_loso": true,
+        "status": "omega-bound",
+        "oracle_as_shipped": {
+          "worlds": 512,
+          "G": 0.0,
+          "P_right": 0.0,
+          "P_wrong_worth": 0.0,
+          "P_wrong": 0.0,
+          "P_worth": 0.660166015625,
+          "eligible": false,
+          "sigma_r": 0.5925554826343269
+        },
+        "sigma_star": 0.19839910325506607,
+        "reduction_factor_needed": 6.408195890377239
+      },
+      "O05": {
+        "arms": [
+          "BR_X",
+          "X_t90"
+        ],
+        "output": "MFT",
+        "lane": "sulfur",
+        "sigma_r_rule": "sulfur (own, 6 studies)",
+        "worlds_with_lever": 512,
+        "worlds_missing": 0,
+        "L_quantiles": {
+          "0.05": -0.03150649063720112,
+          "0.25": 0.05290650329196567,
+          "0.5": 0.11501013328419774,
+          "0.75": 0.15990286786226748,
+          "0.95": 0.20007190921227302
+        },
+        "P_abs_L_over_shipped_halfwidth": 0.0,
+        "oracle": {
+          "point": {
+            "worlds": 512,
+            "G": 0.0,
+            "P_right": 0.0,
+            "P_wrong_worth": 0.0,
+            "P_wrong": 0.0,
+            "P_worth": 0.815390625,
+            "eligible": false,
+            "sigma_r": 1.2713803181336438
+          },
+          "loso_min": {
+            "worlds": 512,
+            "G": 0.0,
+            "P_right": 0.0,
+            "P_wrong_worth": 0.0,
+            "P_wrong": 0.0,
+            "P_worth": 0.725798828125,
+            "eligible": false,
+            "sigma_r": 0.8417208311940955
+          },
+          "loso_max": {
+            "worlds": 512,
+            "G": 0.0,
+            "P_right": 0.0,
+            "P_wrong_worth": 0.0,
+            "P_wrong": 0.0,
+            "P_worth": 0.8408984375,
+            "eligible": false,
+            "sigma_r": 1.4788930833044163
+          }
+        },
+        "eligible": false,
+        "eligible_agrees_across_loso": true,
+        "status": "omega-bound",
+        "oracle_as_shipped": {
+          "worlds": 512,
+          "G": 0.0,
+          "P_right": 0.0,
+          "P_wrong_worth": 0.0,
+          "P_wrong": 0.0,
+          "P_worth": 0.62254296875,
+          "eligible": false,
+          "sigma_r": 0.5925554826343269
+        },
+        "sigma_star": 0.09847632466195365,
+        "reduction_factor_needed": 12.910517553310374
+      },
+      "O08": {
+        "arms": [
+          "X_cys5",
+          "X_cys8"
+        ],
+        "output": "MFT",
+        "lane": "sulfur",
+        "sigma_r_rule": "sulfur (own, 6 studies)",
+        "worlds_with_lever": 512,
+        "worlds_missing": 0,
+        "L_quantiles": {
+          "0.05": 0.05574333127420559,
+          "0.25": 0.09428211749160842,
+          "0.5": 0.1232096072263793,
+          "0.75": 0.17619178779243927,
+          "0.95": 0.36297793655443616
+        },
+        "P_abs_L_over_shipped_halfwidth": 0.0,
+        "oracle": {
+          "point": {
+            "worlds": 512,
+            "G": 0.0,
+            "P_right": 0.0,
+            "P_wrong_worth": 0.0,
+            "P_wrong": 0.0,
+            "P_worth": 0.815865234375,
+            "eligible": false,
+            "sigma_r": 1.2713803181336438
+          },
+          "loso_min": {
+            "worlds": 512,
+            "G": 0.0,
+            "P_right": 0.0,
+            "P_wrong_worth": 0.0,
+            "P_wrong": 0.0,
+            "P_worth": 0.72791796875,
+            "eligible": false,
+            "sigma_r": 0.8417208311940955
+          },
+          "loso_max": {
+            "worlds": 512,
+            "G": 0.0,
+            "P_right": 0.0,
+            "P_wrong_worth": 0.0,
+            "P_wrong": 0.0,
+            "P_worth": 0.841005859375,
+            "eligible": false,
+            "sigma_r": 1.4788930833044163
+          }
+        },
+        "eligible": false,
+        "eligible_agrees_across_loso": true,
+        "status": "omega-bound",
+        "oracle_as_shipped": {
+          "worlds": 512,
+          "G": 0.0,
+          "P_right": 0.0,
+          "P_wrong_worth": 0.0,
+          "P_wrong": 0.0,
+          "P_worth": 0.628701171875,
+          "eligible": false,
+          "sigma_r": 0.5925554826343269
+        },
+        "sigma_star": 0.12556636975467322,
+        "reduction_factor_needed": 10.125165843510633
+      },
+      "O09": {
+        "arms": [
+          "BR_X",
+          "X_ph70"
+        ],
+        "output": "FFT",
+        "lane": "sulfur",
+        "sigma_r_rule": "sulfur (own, 6 studies)",
+        "worlds_with_lever": 512,
+        "worlds_missing": 0,
+        "L_quantiles": {
+          "0.05": -1.1208621566998775,
+          "0.25": -0.8891627928006013,
+          "0.5": -0.4748345232586837,
+          "0.75": -0.23211941517299173,
+          "0.95": -0.05908545211078313
+        },
+        "P_abs_L_over_shipped_halfwidth": 0.197265625,
+        "oracle": {
+          "point": {
+            "worlds": 512,
+            "G": 0.0,
+            "P_right": 0.0,
+            "P_wrong_worth": 0.0,
+            "P_wrong": 0.0,
+            "P_worth": 0.835087890625,
+            "eligible": false,
+            "sigma_r": 1.2713803181336438
+          },
+          "loso_min": {
+            "worlds": 512,
+            "G": 0.0021576130065401864,
+            "P_right": 0.0022099943627683295,
+            "P_wrong_worth": 5.2381356228143255e-05,
+            "P_wrong": 9.051287348858259e-05,
+            "P_worth": 0.78301953125,
+            "eligible": false,
+            "sigma_r": 0.8417208311940955
+          },
+          "loso_max": {
+            "worlds": 512,
+            "G": 0.0,
+            "P_right": 0.0,
+            "P_wrong_worth": 0.0,
+            "P_wrong": 0.0,
+            "P_worth": 0.85399609375,
+            "eligible": false,
+            "sigma_r": 1.4788930833044163
+          }
+        },
+        "eligible": false,
+        "eligible_agrees_across_loso": true,
+        "status": "omega-bound",
+        "oracle_as_shipped": {
+          "worlds": 512,
+          "G": 0.23630571747910553,
+          "P_right": 0.2392007098751698,
+          "P_wrong_worth": 0.0028949923960642763,
+          "P_wrong": 0.006834475695265106,
+          "P_worth": 0.746169921875,
+          "eligible": false,
+          "sigma_r": 0.5925554826343269
+        },
+        "sigma_star": 0.327213371710453,
+        "reduction_factor_needed": 3.8854778809549146
+      },
+      "O10": {
+        "arms": [
+          "X_100",
+          "X_100_gsh1"
+        ],
+        "output": "MFT",
+        "lane": "sulfur",
+        "sigma_r_rule": "sulfur (own, 6 studies)",
+        "worlds_with_lever": 512,
+        "worlds_missing": 0,
+        "L_quantiles": {
+          "0.05": 0.03374360441711159,
+          "0.25": 0.03553531337995375,
+          "0.5": 0.04117809945619211,
+          "0.75": 0.06117445225474483,
+          "0.95": 0.12221918731448154
+        },
+        "P_abs_L_over_shipped_halfwidth": 0.0,
+        "oracle": {
+          "point": {
+            "worlds": 512,
+            "G": 0.0,
+            "P_right": 0.0,
+            "P_wrong_worth": 0.0,
+            "P_wrong": 0.0,
+            "P_worth": 0.81392578125,
+            "eligible": false,
+            "sigma_r": 1.2713803181336438
+          },
+          "loso_min": {
+            "worlds": 512,
+            "G": 0.0,
+            "P_right": 0.0,
+            "P_wrong_worth": 0.0,
+            "P_wrong": 0.0,
+            "P_worth": 0.72252734375,
+            "eligible": false,
+            "sigma_r": 0.8417208311940955
+          },
+          "loso_max": {
+            "worlds": 512,
+            "G": 0.0,
+            "P_right": 0.0,
+            "P_wrong_worth": 0.0,
+            "P_wrong": 0.0,
+            "P_worth": 0.8396875,
+            "eligible": false,
+            "sigma_r": 1.4788930833044163
+          }
+        },
+        "eligible": false,
+        "eligible_agrees_across_loso": true,
+        "status": "omega-bound",
+        "oracle_as_shipped": {
+          "worlds": 512,
+          "G": 0.0,
+          "P_right": 0.0,
+          "P_wrong_worth": 0.0,
+          "P_wrong": 0.0,
+          "P_worth": 0.61458203125,
+          "eligible": false,
+          "sigma_r": 0.5925554826343269
+        },
+        "sigma_star": 0.08783452153625337,
+        "reduction_factor_needed": 14.47472242003261
+      }
+    },
+    "not_computable": {
+      "D03": "the falsified hexose MFT route; Q-hex not built (A2b)",
+      "D04": "the falsified hexose MFT route; Q-hex not built (A2b)",
+      "D11": "Q-buf: R0 falsified at pH 5 - 7, the buffer switch not built",
+      "D12": "Q-buf: R0 falsified at pH 5 - 7, the buffer switch not built",
+      "D13": "Q-fat: R0 falsified, no rival built",
+      "O06": "Q-buf: R0 falsified at pH 5 - 7, the buffer switch not built",
+      "O07": "Q-fat: R0 falsified, no rival built",
+      "D17": "structural refusal (no a_w term on the sulfur lane)",
+      "D19": "structural refusal (no Strecker species)"
+    },
+    "eligible": [
+      "D14"
+    ],
+    "eligible_off_grid": [],
+    "E_step0": 1,
+    "E_at": {
+      "point": 1,
+      "loso_min": 1,
+      "loso_max": 1
+    },
+    "computable_D": 12,
+    "loso_flips": [],
+    "sigma_star_for_2_eligible": 0.5796475450400488,
+    "sigma_star_for_majority": 0.22888795782345392,
+    "layer1_step0_reading": "CONFIRMED (omega-bound): the lever table cannot show directions under the current discrepancy, whatever the experiments."
+  }
+}
