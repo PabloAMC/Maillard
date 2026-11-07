@@ -104,7 +104,7 @@ CONSTANTS = {
         ),
         'ph_balance_rivals': 'ADDED_SINK_Y_CAP',
         'ph_state': 'ARP_CARBOXYL_DH ARP_CARBOXYL_PKA',
-        'predictive_densities': 'ESS_MIN FLOOR_DATA_RTOL K_HAT_MAX OMEGA_DEX Z_90',
+        'predictive_densities': 'ESS_MIN FLOOR_DATA_RTOL K_HAT_MAX MAX_QUAD_NODES NOMINAL_ALPHA NULL_REPLICATES_MIN OMEGA_DEX QUAD_K Z_90',
         'scoring': 'PASS_BAND_LEVEL',
         'thermal_history': 'DEFAULT_START_C',
         'thiol_relative_only': 'Z90',
@@ -273,7 +273,10 @@ CONSTANTS = {
         ),
         'parallel': 'POOL_MODES',
         'ph_balance_rivals': 'BRANCH_FORMS',
-        'predictive_densities': 'BASES PH_SCALES VALUE_BASES',
+        'predictive_densities': (
+            'BASE_FORM BASES FORM_KINDS NOISE_STRUCTURES NOISE_TERM_KINDS NULL_INPUTS PH_SCALES UNIT_ROLES VALUE_BASES '
+            'VALUE_LEVELS'
+        ),
         'thiol_relative_only': 'ABSOLUTE_REFUSED_TAG CALIBRATE_GENERATOR',
         'trunk_conditions': 'ATMOSPHERE_REFERENCE',
         'uncertainty': (
