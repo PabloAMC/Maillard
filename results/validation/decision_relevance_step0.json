@@ -1,0 +1,805 @@
+{
+  "artifact": "decision_relevance_step0",
+  "provenance": {
+    "artifact": "decision_relevance_step0",
+    "generated_on": "2026-11-07",
+    "git": {
+      "commit": "9e02ce3a80ae96c10c5aa669aa62179d06f6931f",
+      "short": "9e02ce3a",
+      "branch": "decision-relevance-prereg",
+      "dirty": true
+    },
+    "generated_by": "scripts/generators/build_decision_relevance_step0.py",
+    "inputs": [
+      {
+        "path": "results/validation/contrast_scores.json",
+        "sha256": "2d3398c46091c53055ddce0c16efe0b7136deeb7cfac4b52a0330fa05e0836fb"
+      },
+      {
+        "path": "results/validation/core_panel_scores.json",
+        "sha256": "5ce9814c694e0af2bd79386edc283ac85bff34f1a7a45ae788c434f88a951e8c"
+      },
+      {
+        "path": "results/validation/kinetic_core_contrast_benchmark_score_v1.json",
+        "sha256": "645ad222fdd6b33a352dd5d3b7617d1b26264c8fff4a1fde420faea3e1ae0c07"
+      }
+    ]
+  },
+  "prereg": "results/validation/decision_relevance_prereg.md",
+  "freeze_commit": "9e02ce3a",
+  "stage_0c": {
+    "units": {
+      "pairs_source1": 81,
+      "pairs_source3": 23,
+      "source3_skipped": 16,
+      "source2": "no group of its own: contrast_scores.json is built from the same rows (build_null_model_baselines._rows) with the same study key, so its groups are source 1's",
+      "groups_all": 18,
+      "groups_out_of_sample": 16
+    },
+    "measurement_rule": "no source here prints a per-arm SD: each arm takes the declared per-replicate CV (SIDA 10 % where its benchmark's quantification source is isotope dilution, else 20 %) with the unstated n = 2; a contrast-benchmark row that prints sigma_m (a ratio SD) gives each arm sigma_m^2 / 2",
+    "primary": {
+      "acrylamide": {
+        "studies": 2,
+        "study_names": [
+          "Schibilsky, S. Bildung fluechtiger Verbi",
+          "lin2021"
+        ],
+        "groups": 3,
+        "df": 4,
+        "sigma_w2": 0.6268093590716883,
+        "sigma_m2": 0.0031348348628272506,
+        "sigma_floor": 0.07918124604762482,
+        "sigma_r": 1.1168478179312176,
+        "floored": false,
+        "rho_derived": -2.5524662323002323,
+        "per_study": {
+          "Schibilsky, S. Bildung fluechtiger Verbi": {
+            "df": 2,
+            "v": 0.1404982533797089,
+            "groups": 2
+          },
+          "lin2021": {
+            "df": 2,
+            "v": 1.1131204647636679,
+            "groups": 1
+          }
+        },
+        "t_interval_90": [
+          0.07918124604762482,
+          2.7181324487135976
+        ],
+        "loso": {
+          "Schibilsky, S. Bildung fluechtiger Verbi": 1.4899567979648543,
+          "lin2021": 0.5241439087061522
+        },
+        "loso_min": 0.5241439087061522,
+        "loso_max": 1.4899567979648543,
+        "status": "UNDECIDED (G = 2 < G_min = 5)"
+      },
+      "sulfur": {
+        "studies": 6,
+        "study_names": [
+          "heldout_grosch1992_tab2",
+          "heldout_meynier1995_tab1_2_4",
+          "heldout_xu2007_tab1",
+          "hofmann_schieberle_1998_free_mft_fft",
+          "yiltirak2026",
+          "zhou2023c"
+        ],
+        "groups": 13,
+        "df": 31,
+        "sigma_w2": 0.8112089563673276,
+        "sigma_m2": 0.0030049996985249115,
+        "sigma_floor": 0.07752418588446977,
+        "sigma_r": 1.2713803181336438,
+        "floored": false,
+        "rho_derived": -3.6035506557196797,
+        "per_study": {
+          "heldout_grosch1992_tab2": {
+            "df": 6,
+            "v": 0.13773375289363574,
+            "groups": 2
+          },
+          "heldout_meynier1995_tab1_2_4": {
+            "df": 4,
+            "v": 0.25253919738762853,
+            "groups": 1
+          },
+          "heldout_xu2007_tab1": {
+            "df": 4,
+            "v": 3.875418556758729,
+            "groups": 3
+          },
+          "hofmann_schieberle_1998_free_mft_fft": {
+            "df": 2,
+            "v": 3.155660631509284,
+            "groups": 2
+          },
+          "yiltirak2026": {
+            "df": 6,
+            "v": 0.07915457778396749,
+            "groups": 2
+          },
+          "zhou2023c": {
+            "df": 9,
+            "v": 0.11366615374639297,
+            "groups": 3
+          }
+        },
+        "t_interval_90": [
+          0.07752418588446977,
+          1.9693157783437887
+        ],
+        "loso": {
+          "heldout_grosch1992_tab2": 1.3927225175909872,
+          "heldout_meynier1995_tab1_2_4": 1.334893139459498,
+          "heldout_xu2007_tab1": 0.8417208311940955,
+          "hofmann_schieberle_1998_free_mft_fft": 1.1371170865352604,
+          "yiltirak2026": 1.4027808150447518,
+          "zhou2023c": 1.4788930833044163
+        },
+        "loso_min": 0.8417208311940955,
+        "loso_max": 1.4788930833044163,
+        "status": "ESTIMATED"
+      }
+    },
+    "pooled": {
+      "studies": 8,
+      "study_names": [
+        "Schibilsky, S. Bildung fluechtiger Verbi",
+        "heldout_grosch1992_tab2",
+        "heldout_meynier1995_tab1_2_4",
+        "heldout_xu2007_tab1",
+        "hofmann_schieberle_1998_free_mft_fft",
+        "lin2021",
+        "yiltirak2026",
+        "zhou2023c"
+      ],
+      "groups": 16,
+      "df": 35,
+      "sigma_w2": 0.7901347166763975,
+      "sigma_m2": 0.003022820211272291,
+      "sigma_floor": 0.07775371645487167,
+      "sigma_r": 1.2546807533911766,
+      "floored": false,
+      "rho_derived": -3.4834097348791886,
+      "per_study": {
+        "Schibilsky, S. Bildung fluechtiger Verbi": {
+          "df": 2,
+          "v": 0.1404982533797089,
+          "groups": 2
+        },
+        "heldout_grosch1992_tab2": {
+          "df": 6,
+          "v": 0.13773375289363574,
+          "groups": 2
+        },
+        "heldout_meynier1995_tab1_2_4": {
+          "df": 4,
+          "v": 0.25253919738762853,
+          "groups": 1
+        },
+        "heldout_xu2007_tab1": {
+          "df": 4,
+          "v": 3.875418556758729,
+          "groups": 3
+        },
+        "hofmann_schieberle_1998_free_mft_fft": {
+          "df": 2,
+          "v": 3.155660631509284,
+          "groups": 2
+        },
+        "lin2021": {
+          "df": 2,
+          "v": 1.1131204647636679,
+          "groups": 1
+        },
+        "yiltirak2026": {
+          "df": 6,
+          "v": 0.07915457778396749,
+          "groups": 2
+        },
+        "zhou2023c": {
+          "df": 9,
+          "v": 0.11366615374639297,
+          "groups": 3
+        }
+      },
+      "t_interval_90": [
+        0.07775371645487167,
+        1.847023149698197
+      ],
+      "loso": {
+        "Schibilsky, S. Bildung fluechtiger Verbi": 1.2856778782662406,
+        "heldout_grosch1992_tab2": 1.3580069265016894,
+        "heldout_meynier1995_tab1_2_4": 1.3088002599666009,
+        "heldout_xu2007_tab1": 0.8820552769632302,
+        "hofmann_schieberle_1998_free_mft_fft": 1.1346776542309769,
+        "lin2021": 1.2389810350781436,
+        "yiltirak2026": 1.366902509725048,
+        "zhou2023c": 1.429177449672021
+      },
+      "loso_min": 0.8820552769632302,
+      "loso_max": 1.429177449672021,
+      "status": "ESTIMATED"
+    },
+    "sensitivity_in_sample_included": {
+      "acrylamide": {
+        "studies": 2,
+        "study_names": [
+          "Schibilsky, S. Bildung fluechtiger Verbi",
+          "lin2021"
+        ],
+        "groups": 3,
+        "df": 4,
+        "sigma_w2": 0.6268093590716883,
+        "sigma_m2": 0.0031348348628272506,
+        "sigma_floor": 0.07918124604762482,
+        "sigma_r": 1.1168478179312176,
+        "floored": false,
+        "rho_derived": -2.5524662323002323,
+        "per_study": {
+          "Schibilsky, S. Bildung fluechtiger Verbi": {
+            "df": 2,
+            "v": 0.1404982533797089,
+            "groups": 2
+          },
+          "lin2021": {
+            "df": 2,
+            "v": 1.1131204647636679,
+            "groups": 1
+          }
+        },
+        "t_interval_90": [
+          0.07918124604762482,
+          2.7181324487135976
+        ],
+        "loso": {
+          "Schibilsky, S. Bildung fluechtiger Verbi": 1.4899567979648543,
+          "lin2021": 0.5241439087061522
+        },
+        "loso_min": 0.5241439087061522,
+        "loso_max": 1.4899567979648543,
+        "status": "UNDECIDED (G = 2 < G_min = 5)"
+      },
+      "sulfur": {
+        "studies": 6,
+        "study_names": [
+          "heldout_grosch1992_tab2",
+          "heldout_meynier1995_tab1_2_4",
+          "heldout_xu2007_tab1",
+          "hofmann_schieberle_1998_free_mft_fft",
+          "yiltirak2026",
+          "zhou2023c"
+        ],
+        "groups": 15,
+        "df": 43,
+        "sigma_w2": 1.0326453266165543,
+        "sigma_m2": 0.0024864390935750292,
+        "sigma_floor": 0.07051863716174653,
+        "sigma_r": 1.435380707354658,
+        "floored": false,
+        "rho_derived": -4.867811686667194,
+        "per_study": {
+          "heldout_grosch1992_tab2": {
+            "df": 6,
+            "v": 0.13773375289363574,
+            "groups": 2
+          },
+          "heldout_meynier1995_tab1_2_4": {
+            "df": 4,
+            "v": 0.25253919738762853,
+            "groups": 1
+          },
+          "heldout_xu2007_tab1": {
+            "df": 4,
+            "v": 3.875418556758729,
+            "groups": 3
+          },
+          "hofmann_schieberle_1998_free_mft_fft": {
+            "df": 14,
+            "v": 1.8262566185816602,
+            "groups": 4
+          },
+          "yiltirak2026": {
+            "df": 6,
+            "v": 0.07915457778396749,
+            "groups": 2
+          },
+          "zhou2023c": {
+            "df": 9,
+            "v": 0.11366615374639297,
+            "groups": 3
+          }
+        },
+        "t_interval_90": [
+          0.1625320151634641,
+          2.023417627218568
+        ],
+        "loso": {
+          "heldout_grosch1992_tab2": 1.5331534060633534,
+          "heldout_meynier1995_tab1_2_4": 1.4900803821083612,
+          "heldout_xu2007_tab1": 1.2153949172019702,
+          "hofmann_schieberle_1998_free_mft_fft": 1.1375730260956167,
+          "yiltirak2026": 1.5393368760315531,
+          "zhou2023c": 1.5958809982837387
+        },
+        "loso_min": 1.1375730260956167,
+        "loso_max": 1.5958809982837387,
+        "status": "ESTIMATED"
+      }
+    },
+    "sensitivity_robust": {
+      "acrylamide": {
+        "studies": 2,
+        "study_names": [
+          "Schibilsky, S. Bildung fluechtiger Verbi",
+          "lin2021"
+        ],
+        "groups": 3,
+        "df": 4,
+        "sigma_w2": 0.5517171565251499,
+        "sigma_m2": 0.0031348348628272506,
+        "sigma_floor": 0.07918124604762482,
+        "sigma_r": 1.0474562727506314,
+        "floored": false,
+        "rho_derived": -2.1247391030030736,
+        "per_study": {
+          "Schibilsky, S. Bildung fluechtiger Verbi": {
+            "df": 2,
+            "v": 0.1404982533797089,
+            "groups": 2
+          },
+          "lin2021": {
+            "df": 2,
+            "v": 1.1131204647636679,
+            "groups": 1
+          }
+        },
+        "t_interval_90": [
+          0.07918124604762482,
+          2.703855968607005
+        ],
+        "loso": {
+          "Schibilsky, S. Bildung fluechtiger Verbi": 1.4899567979648543,
+          "lin2021": 0.5241439087061522
+        },
+        "loso_min": 0.5241439087061522,
+        "loso_max": 1.4899567979648543,
+        "status": "UNDECIDED (G = 2 < G_min = 5)"
+      },
+      "sulfur": {
+        "studies": 6,
+        "study_names": [
+          "heldout_grosch1992_tab2",
+          "heldout_meynier1995_tab1_2_4",
+          "heldout_xu2007_tab1",
+          "hofmann_schieberle_1998_free_mft_fft",
+          "yiltirak2026",
+          "zhou2023c"
+        ],
+        "groups": 13,
+        "df": 31,
+        "sigma_w2": 0.29296874657938715,
+        "sigma_m2": 0.0030049996985249115,
+        "sigma_floor": 0.07752418588446977,
+        "sigma_r": 0.761529706421046,
+        "floored": false,
+        "rho_derived": -0.6516410072901284,
+        "per_study": {
+          "heldout_grosch1992_tab2": {
+            "df": 6,
+            "v": 0.13773375289363574,
+            "groups": 2
+          },
+          "heldout_meynier1995_tab1_2_4": {
+            "df": 4,
+            "v": 0.25253919738762853,
+            "groups": 1
+          },
+          "heldout_xu2007_tab1": {
+            "df": 4,
+            "v": 3.875418556758729,
+            "groups": 3
+          },
+          "hofmann_schieberle_1998_free_mft_fft": {
+            "df": 2,
+            "v": 3.155660631509284,
+            "groups": 2
+          },
+          "yiltirak2026": {
+            "df": 6,
+            "v": 0.07915457778396749,
+            "groups": 2
+          },
+          "zhou2023c": {
+            "df": 9,
+            "v": 0.11366615374639297,
+            "groups": 3
+          }
+        },
+        "t_interval_90": [
+          0.07752418588446977,
+          1.6736540251109435
+        ],
+        "loso": {
+          "heldout_grosch1992_tab2": 1.3927225175909872,
+          "heldout_meynier1995_tab1_2_4": 1.334893139459498,
+          "heldout_xu2007_tab1": 0.8417208311940955,
+          "hofmann_schieberle_1998_free_mft_fft": 1.1371170865352604,
+          "yiltirak2026": 1.4027808150447518,
+          "zhou2023c": 1.4788930833044163
+        },
+        "loso_min": 0.8417208311940955,
+        "loso_max": 1.4788930833044163,
+        "status": "ESTIMATED"
+      }
+    },
+    "groups": [
+      {
+        "study": "Schibilsky, S. Bildung fluechtiger Verbi",
+        "compound": "5-Hydroxymethylfurfural (HMF)",
+        "lane": "acrylamide",
+        "out_of_sample": true,
+        "k": 2,
+        "ss": 0.029999525833398807,
+        "df": 1,
+        "residuals": [
+          0.12247351924681268,
+          -0.12247351924681274
+        ],
+        "measurement_var": [
+          0.0031348348628272506,
+          0.0031348348628272506
+        ]
+      },
+      {
+        "study": "Schibilsky, S. Bildung fluechtiger Verbi",
+        "compound": "DMHF",
+        "lane": "acrylamide",
+        "out_of_sample": true,
+        "k": 2,
+        "ss": 0.25099698092601896,
+        "df": 1,
+        "residuals": [
+          0.3542576611211244,
+          -0.35425766112112456
+        ],
+        "measurement_var": [
+          0.0031348348628272506,
+          0.0031348348628272506
+        ]
+      },
+      {
+        "study": "heldout_grosch1992_tab2",
+        "compound": "FFT",
+        "lane": "sulfur",
+        "out_of_sample": true,
+        "k": 2,
+        "ss": 0.09949377590459177,
+        "df": 1,
+        "residuals": [
+          -0.22304010391025164,
+          0.22304010391025178
+        ],
+        "measurement_var": [
+          0.0028940683411690323,
+          0.002414599204057659
+        ]
+      },
+      {
+        "study": "heldout_grosch1992_tab2",
+        "compound": "MFT",
+        "lane": "sulfur",
+        "out_of_sample": true,
+        "k": 6,
+        "ss": 0.7269087414572226,
+        "df": 5,
+        "residuals": [
+          0.3568364009959827,
+          0.3129309154517332,
+          -0.48947554241259095,
+          -0.19094951722027823,
+          -0.3304880041331224,
+          0.34114574731827585
+        ],
+        "measurement_var": [
+          0.0023779426861223513,
+          0.00041758191027591415,
+          0.0009273832852525895,
+          0.0028940683411690323,
+          0.002414599204057659,
+          0.002414599204057659
+        ]
+      },
+      {
+        "study": "heldout_meynier1995_tab1_2_4",
+        "compound": "NF",
+        "lane": "sulfur",
+        "out_of_sample": true,
+        "k": 5,
+        "ss": 1.0101567895505141,
+        "df": 4,
+        "residuals": [
+          -0.6007443150056768,
+          -0.20615794834122714,
+          -0.23051729420067146,
+          0.43066414924594726,
+          0.6067554083016283
+        ],
+        "measurement_var": [
+          0.0028834726268215185,
+          0.002890847626821518,
+          0.0028896326268215192,
+          0.003045832626821519,
+          0.003045832626821519
+        ]
+      },
+      {
+        "study": "heldout_xu2007_tab1",
+        "compound": "ACTZ",
+        "lane": "sulfur",
+        "out_of_sample": true,
+        "k": 3,
+        "ss": 8.56653553929909,
+        "df": 2,
+        "residuals": [
+          2.2230560826811483,
+          -0.3520650668709114,
+          -1.8709910158102363
+        ],
+        "measurement_var": [
+          0.007544491080464556,
+          0.007544477130464557,
+          0.007544477130464557
+        ]
+      },
+      {
+        "study": "heldout_xu2007_tab1",
+        "compound": "FUR",
+        "lane": "sulfur",
+        "out_of_sample": true,
+        "k": 2,
+        "ss": 2.77464589958554,
+        "df": 1,
+        "residuals": [
+          1.1778467429138517,
+          -1.1778467429138524
+        ],
+        "measurement_var": [
+          0.007544491080464556,
+          0.007544477130464557
+        ]
+      },
+      {
+        "study": "heldout_xu2007_tab1",
+        "compound": "MFTD",
+        "lane": "sulfur",
+        "out_of_sample": true,
+        "k": 2,
+        "ss": 4.160492788150286,
+        "df": 1,
+        "residuals": [
+          1.4423059294321514,
+          -1.442305929432152
+        ],
+        "measurement_var": [
+          0.007544491080464556,
+          0.007544477130464557
+        ]
+      },
+      {
+        "study": "hofmann_schieberle_1998_free_mft_fft",
+        "compound": "2-Furfurylthiol (FFT)",
+        "lane": "sulfur",
+        "out_of_sample": false,
+        "k": 5,
+        "ss": 4.6480519424523115,
+        "df": 4,
+        "residuals": [
+          0.1534635259061042,
+          0.42174256158644724,
+          0.7876199373466439,
+          -1.8850827237025238,
+          0.5222566988633291
+        ],
+        "measurement_var": [
+          0.0008566771923039733,
+          0.0008566771923039733,
+          0.0008566771923039733,
+          0.0008566771923039733,
+          0.0008566771923039733
+        ]
+      },
+      {
+        "study": "hofmann_schieberle_1998_free_mft_fft",
+        "compound": "2-Furfurylthiol (FFT)",
+        "lane": "sulfur",
+        "out_of_sample": true,
+        "k": 2,
+        "ss": 3.5716697571896416,
+        "df": 1,
+        "residuals": [
+          1.3363513305245818,
+          -1.3363513305245824
+        ],
+        "measurement_var": [
+          0.0008566771923039733,
+          0.0008566771923039733
+        ]
+      },
+      {
+        "study": "hofmann_schieberle_1998_free_mft_fft",
+        "compound": "2-Methyl-3-furanthiol (MFT)",
+        "lane": "sulfur",
+        "out_of_sample": false,
+        "k": 9,
+        "ss": 14.608219454672366,
+        "df": 8,
+        "residuals": [
+          1.6827398161788985,
+          0.30477862880364465,
+          -0.16634860285809025,
+          0.5929399819567331,
+          0.8605245942183475,
+          0.24354020245963404,
+          -0.7811264339685483,
+          -3.1219175420467233,
+          0.38486935525610255
+        ],
+        "measurement_var": [
+          0.0008566771923039733,
+          0.0008566771923039733,
+          0.0008566771923039733,
+          0.0008566771923039733,
+          0.0008566771923039733,
+          0.0008566771923039733,
+          0.0008566771923039733,
+          0.0008566771923039733,
+          0.0008566771923039733
+        ]
+      },
+      {
+        "study": "hofmann_schieberle_1998_free_mft_fft",
+        "compound": "2-Methyl-3-furanthiol (MFT)",
+        "lane": "sulfur",
+        "out_of_sample": true,
+        "k": 2,
+        "ss": 2.7396515058289266,
+        "df": 1,
+        "residuals": [
+          1.1703955540390876,
+          -1.170395554039088
+        ],
+        "measurement_var": [
+          0.0008566771923039733,
+          0.0008566771923039733
+        ]
+      },
+      {
+        "study": "lin2021",
+        "compound": "Acrylamide",
+        "lane": "acrylamide",
+        "out_of_sample": true,
+        "k": 3,
+        "ss": 2.2262409295273358,
+        "df": 2,
+        "residuals": [
+          1.2100935301609075,
+          -0.7270127478818176,
+          -0.48308078227908985
+        ],
+        "measurement_var": [
+          0.0031348348628272506,
+          0.0031348348628272506,
+          0.0031348348628272506
+        ]
+      },
+      {
+        "study": "yiltirak2026",
+        "compound": "2-Furfurylthiol (FFT)",
+        "lane": "sulfur",
+        "out_of_sample": true,
+        "k": 4,
+        "ss": 0.20565377548062674,
+        "df": 3,
+        "residuals": [
+          0.2771795423968795,
+          0.13553320340502797,
+          -0.09390611221121654,
+          -0.3188066335906908
+        ],
+        "measurement_var": [
+          0.0008566771923039733,
+          0.0008566771923039733,
+          0.0008566771923039733,
+          0.0008566771923039733
+        ]
+      },
+      {
+        "study": "yiltirak2026",
+        "compound": "2-Methyl-3-furanthiol (MFT)",
+        "lane": "sulfur",
+        "out_of_sample": true,
+        "k": 4,
+        "ss": 0.26927369122317824,
+        "df": 3,
+        "residuals": [
+          -0.4079042884180819,
+          -0.022068450157216545,
+          0.14440843979831078,
+          0.2855642987769876
+        ],
+        "measurement_var": [
+          0.0008566771923039733,
+          0.0008566771923039733,
+          0.0008566771923039733,
+          0.0008566771923039733
+        ]
+      },
+      {
+        "study": "zhou2023c",
+        "compound": "2-Furfurylthiol (FFT)",
+        "lane": "sulfur",
+        "out_of_sample": true,
+        "k": 4,
+        "ss": 0.377078345274646,
+        "df": 3,
+        "residuals": [
+          0.48287104636409306,
+          -0.24905822653681423,
+          -0.2820573716039019,
+          0.04824455177662313
+        ],
+        "measurement_var": [
+          0.0031348348628272506,
+          0.0031348348628272506,
+          0.0031348348628272506,
+          0.0031348348628272506
+        ]
+      },
+      {
+        "study": "zhou2023c",
+        "compound": "2-Methyl-3-furanthiol (MFT)",
+        "lane": "sulfur",
+        "out_of_sample": true,
+        "k": 4,
+        "ss": 0.6084571595428523,
+        "df": 3,
+        "residuals": [
+          0.6429203891833246,
+          -0.4093248196755532,
+          -0.12863585186724094,
+          -0.10495971764053043
+        ],
+        "measurement_var": [
+          0.0031348348628272506,
+          0.0031348348628272506,
+          0.0031348348628272506,
+          0.0031348348628272506
+        ]
+      },
+      {
+        "study": "zhou2023c",
+        "compound": "Furfural",
+        "lane": "sulfur",
+        "out_of_sample": true,
+        "k": 4,
+        "ss": 0.03745987890003853,
+        "df": 3,
+        "residuals": [
+          0.04440488524326787,
+          0.12582754993733325,
+          -0.13593930166427165,
+          -0.03429313351632945
+        ],
+        "measurement_var": [
+          0.0031348348628272506,
+          0.0031348348628272506,
+          0.0031348348628272506,
+          0.0031348348628272506
+        ]
+      }
+    ]
+  }
+}
