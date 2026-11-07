@@ -1,13 +1,16 @@
 # Pre-registration: do the experiments we call decisive shrink the answers a formulator uses?
 
-**Status: DRAFT v3 (2026-11-07), not frozen. DESIGN AND TIMING ONLY.** No simulation has run. The only runs made for
-this file are one timed lever prediction and one timed JAX network update (sec. 9.1), and a declaration-only check of the
-decision recipes (no integration; sec. 2.3).
-- **v2 applied the independent premortem's "freeze with edits"** (edits 1 - 10). **v3 answers the confirmation
-  read of v2 ("not confirmed": the omega term decided the result by construction).** Changelog at the end.
-- It freezes when its review is answered (sec. 10). After the freeze, nothing in secs. 2 - 8 and 12 may change.
-- **Step 0 (sec. 5.0) runs first**, before the early variant and before any design is simulated.
-- A change after any number exists is an amendment, dated, with its reason, and the run reports both versions.
+**Status: FROZEN v3.1 (2026-11-07).** The freeze commit is the commit that set this header; its sha is recorded in
+PR #110's body, since a commit cannot hold its own sha.
+- **Run so far:** step 0 only (sec. 5.0), in separate commits after the freeze, written to
+  `decision_relevance_step0.{json,md}`.
+- **Not run:** the early variant and the full run.
+- **Before the freeze,** the only runs were one timed lever prediction and one timed JAX network update (sec. 9.1),
+  and a declaration-only check of the decision recipes (sec. 2.3).
+- **History of the text:** v2 applied the premortem's edits 1 - 10. v3 answered the confirmation read of v2. v3.1
+  answers the re-confirmation of v3 ("confirmed with edits", items 1 - 7). The changelog is at the end.
+- **From here on,** nothing in secs. 2 - 8 and 12 may change. A change after any number exists is an amendment,
+  dated, with its reason, and the run reports both versions.
 
 *Plan: [STATUS_AND_PLAN](../../docs/guides/STATUS_AND_PLAN.md) sec. 1 (what formulators need), sec. 5 W5.4 (the lever
 table) and W6 (outside data), sec. 7 (items 4, 5, M1.1, S3, S4), sec. 8 (odds). Designs:
@@ -63,7 +66,8 @@ scores them too (revised in v3).
 - **They are informed by seen summaries**, so they are not blind. The plan's sec. 2 gives the median within-study
   log-ratio error as 0.31 dex in sample and 0.66 dex held out (W1.1). That suggests a ratio discrepancy between ~0.45
   and ~1 dex, against 0.59 dex under iid omega.
-- **step 0's correlation rho-hat** (sec. 5.0): ~0.2 (90 % range -0.5 to 0.6);
+- **step 0's ratio error sigma_r** (sec. 5.0.1), thiol lane: ~0.55 dex (90 % range 0.35 - 0.9). That forecast was
+  made before stage 0c ran;
 - P(fewer than 2 decisions are eligible, so the verdict is "CONFIRMED (omega-bound)", sec. 7.1) ~0.7;
 - P(the worry is confirmed, either way) ~0.85;
 - P(Q2 is informative and the contrast design wins, sec. 7.2) ~0.15;
@@ -289,24 +293,24 @@ One model, shared by the generator (sec. 5.1) and the update (sec. 5.3), per rea
 | term | value | applies to |
 |---|---|---|
 | run-to-run noise | the design's printed or requested CV per independent heating: SIDA 10 % (M4, M1c, G-C); M5-B 8 % (its sizing CV; 15 % sensitivity); M5-F 15 % (25 % sensitivity); M5-W 20 %; HS-SPME ratios 20 % (30 % sensitivity); a design that states none takes the same-class reproducibility its case cites, else 20 % | every level |
-| model discrepancy delta | omega = 0.419 dex per value (H0; 0.390 a sensitivity), shared by a cell's replicates. **v3: between the cells of one study (every cell of one design, and the two arms of one decision) the correlation is rho, measured at step 0 (sec. 5.0) and integrated over its interval: the primary.** rho = 0 (v1's iid), 0.5 and 0.9 are sensitivities. Between designs, and between a design's cells and a decision's arms (another laboratory), the correlation is 0. The same for every rival | every level and ratio |
+| model discrepancy delta (v3.1) | For the arms i of one study: delta_i = u + e_i. **e_i ~ N(0, sigma_r^2 / 2), independent per arm, with sigma_r the ratio error measured at stage 0c (sec. 5.0.1) for the arm's lane: the primary.** u is shared within the study, with variance max(omega^2 - sigma_r^2 / 2, 0) (omega = 0.419, H0); it cancels in every ratio. Sensitivities: sigma_r at stage 0c's leave-one-study-out minimum and maximum; and sigma_r in {0.593 (as shipped: iid omega), 0.42, 0.19}. Between designs, and between a design's cells and a decision's arms (another laboratory), everything is independent. The same for every rival | every level and ratio |
+| laboratory offset (v3.1) | none in the primary. **Sensitivity (pre-registered check for any REFUTED verdict, sec. 7.1):** every design is a new laboratory, so each design's absolute-level readouts get one offset per observable, N(0, tau^2) with tau = 0.964 dex (H0's tau_ABS), shared by all its cells. It cancels in within-design ratios. A REFUTED verdict must hold with it | absolute levels |
 | label shares | +-1 % absolute, plus a 1 % mixed-channel floor; the d3 / M+3 overlap as declared in M4 sec. 5.1 | labelled arms |
 | trapping | the OPD artefact as a blank-subtracted term with its own variance (M4 sec. 5.1; M3b sec. 3.2) | trapped arms |
 | floors | the request's LOD where stated; else a declared transfer of 1 % of the lowest predicted level in that design's table, in required agreement over x0.1 - x10. Censored densities (`censored_gaussian_log_density`) | every level |
 | between laboratories | none: every design is one laboratory. H0's tau is never applied to a ratio | -- |
 | pH | cooled and in-situ scales kept apart (`require_ph_scale`); a measured trajectory enters as data, never as a clamp in the scoring model | pH readouts |
 
-**Why rho decides the answer (v3).** A lever is a ratio, and its discrepancy SD is sqrt(2 (1 - rho)) x omega:
-- 0.59 dex at rho = 0 (iid);
-- 0.42 dex at rho = 0.5;
-- 0.19 dex at rho = 0.9.
+**Why sigma_r decides the answer (v3.1).** A lever is a ratio of two arms of one study, so its discrepancy SD is
+sigma_r. Under iid omega it is sqrt 2 x 0.419 = 0.593 dex, and a perfect design still shows only levers beyond ~0.98
+dex (sec. 5.0.2). So sigma_r, not the designs, can decide whether any experiment helps.
+- v2 assumed iid without a source. v3 measured a correlation rho against H0's omega.
+- **v3.1 measures sigma_r directly** (sec. 5.0.1). omega cancels from it.
+- rho = 1 - sigma_r^2 / (2 omega^2) is reported only as a derived diagnostic. It is not separately identified, since
+  H0's omega is itself a within-group excess estimated on overlapping thiol rows.
 
-At 0.59 dex, a perfect design still shows only levers beyond ~0.98 dex (sec. 5.0). So rho, not the designs, can decide
-whether any experiment helps. v2 assumed iid between cells without a source. v3 measures rho on disk (sec. 5.0), and
-the assumed values become sensitivities.
-
-**The shipped rule** (`thiol_relative_only`, iid omega on a ratio) is reported as the sensitivity "as shipped today".
-Shipping the measured rho would be its own sec. 7 change, not this file's.
+**The shipped rule** (`thiol_relative_only`, iid omega on a ratio, 0.593 dex) is reported as the sensitivity "as
+shipped today". Shipping the measured sigma_r would be its own sec. 7 change, not this file's.
 
 **The misspecified generator.** This variant adds the same-observable reproducibility term, else the lane's within-lab
 term, a second time beyond what the update assumes (sec. 7, false-credit check). Every metric is reported under it as a
@@ -380,110 +384,157 @@ labelled "reduced operator".
 
 ## 5. Synthetic data, the update and its checks
 
-### 5.0 Step 0: the discrepancy correlation and the oracle ceiling (v3; runs first)
+### 5.0 Step 0: the ratio error and the oracle ceiling (v3; rewritten in v3.1; runs first)
 
 Step 0 has two stages, run in this order, each fixed here before it runs. It comes before the early variant (sec. 12)
-and before any design is simulated.
+and before any design is simulated. Its generator writes `results/validation/decision_relevance_step0.{json,md}`.
 
-#### 5.0.1 Stage 0c: the correlation rho of the engine's discrepancy between arms of one study
+#### 5.0.1 Stage 0c: the ratio error sigma_r of the engine, between arms of one study
 
 **What it is.** A noise-model estimate on spent and seen data. It credits nothing, fits no constant, scores no rival
 and moves no shipped output. It sets only the discrepancy model of sec. 3.4.
 
-**The units.** Groups g = (study, compound, lane) with k_g >= 2 arms. Each arm needs both a measured value and a shipped
-(B60) engine value already on disk, and the group's arms must carry one laboratory id in
-`docs/reference/contrast_benchmark/lab_ids.yml`. The sources:
-1. `results/validation/contrast_scores.json`: its 81 within-study pairs. The arms are rebuilt from the pairs' benchmark
-   ids.
-2. `results/validation/core_panel_scores.json`: its multi-arm studies (benchmarks of one study, same compound).
-3. `results/validation/kinetic_core_contrast_benchmark_score_v1.json`: its answered within-study cells.
+**The units.** Groups g = (study, compound, lane) with k_g >= 2 arms, all of one laboratory (`lab_ids.yml`; a group
+whose arms carry no common id is excluded). Sources:
+1. `results/validation/contrast_scores.json`, its within-study pairs (each pair gives e_ab = engine_dex - measured_dex,
+   the ratio residual). Within a group, the arm residuals r_i - mean(r) are recovered from the pairs by least squares
+   on the group's pair graph (exact when the graph is consistent, which the pair definition guarantees). A group with a
+   disconnected graph is split into its connected components.
+2. `results/validation/core_panel_scores.json`: groups of answered rows of one study (benchmarks citing one source),
+   same compound. These are mostly non-thiol: the thiol lane's absolute rows are refused there by H0.
+3. `results/validation/kinetic_core_contrast_benchmark_score_v1.json`, its answered within-study cells, read as ratio
+   residuals as in source 1.
 
-Duplicate arms are counted once.
+An arm seen in two sources is counted once, preferring source 1.
 
-**The residual** of an arm is r = log10(engine) - log10(measured), in dex.
-- **Excluded:** censored arms (a non-detect, or an engine value below its floor); arms whose absolute output the engine
-  refuses; and arms with no laboratory id.
-- **Primary:** out-of-sample arms only (`out_of_sample` true, or not a fit row of the shipped calibration by the split
-  files).
-- **In-sample arms** are a sensitivity. Their residuals were shrunk by the fit, which biases rho upward, in favour of
-  the designs.
+**Inclusion.** The primary takes out-of-sample units only (`out_of_sample` true, or not a fit row of the shipped
+calibration). In-sample units are a sensitivity: their residuals were shrunk by the fit, so they understate sigma_r, in
+favour of the designs. Excluded: censored arms and arms whose engine value is missing.
 
-**The estimator.**
-- The pooled within-group variance: sigma_w^2 = sum_g sum_i (r_gi - mean_g r)^2 / sum_g (k_g - 1). The group mean
-  absorbs the study's offset (tau) and the shared part of the discrepancy.
-- **The measurement part**, sigma_m^2: the pooled per-arm measurement variance, from each source's printed replicate SD
-  (dex = log10(1 + CV)). Where none is printed: SIDA 10 %, HS-SPME 20 %.
-- **The ratio discrepancy:** sigma_r^2 = 2 (sigma_w^2 - sigma_m^2) per pair of arms.
-- **The correlation:** rho-hat = 1 - (sigma_w^2 - sigma_m^2) / omega^2, with omega = 0.419 dex. Reported unclipped,
-  and used clipped to [-1, 1]. A negative rho-hat means that within-study residuals scatter more than H0's omega
-  allows: a ratio is then no better than two absolute values.
+**The estimator, per lane (thiol = sulfur lane; trunk; acrylamide; lipid).**
+- **The pooled within-group variance:** sigma_w^2 = sum_g sum_i (r_gi - mean_g r)^2 / sum_g (k_g - 1).
+- **The measurement part,** sigma_m^2 = the mean over arms of each arm's measurement variance (item 1's rule).
+  - An arm's value is a mean of n replicates, so its variance is SD_rep^2 / n, in dex (log10(1 + CV)).
+  - **A printed SD is read as one replicate's SD (SD_rep)**, unless the source says it is of a mean (an SE). An SE is
+    multiplied by sqrt n to give SD_rep.
+  - An unstated n is 2, as sec. 7 item 5 rules.
+  - With no printed SD, the declared assay CV is taken per replicate: SIDA 10 %, HS-SPME / external standard 20 %.
+  - The step-0 record states, per arm, which of these cases applied.
+- **THE PRIMARY QUANTITY:** the ratio error sigma_r = sqrt(2 (sigma_w^2 - sigma_m^2)), the discrepancy SD of a
+  within-study log ratio. omega does not enter it.
+- **The floor (item 2).** sigma_r is never below sigma_floor = sqrt(2) x sigma_m, the ratio SD that measurement noise
+  alone gives. The floor is sourced: it is the arms' own measurement model, never 0. When sigma_w^2 < 2 sigma_m^2 the
+  floor is used, and the record says so.
+- **Derived diagnostic only:** rho = 1 - sigma_r^2 / (2 omega^2). It is not identified separately from omega (item 1).
 - **Robust sensitivity:** sigma_w from the median absolute deviation of the within-group residuals (x 1.4826).
-- **Lanes:** the primary pools the thiol-lane groups. Other lanes are reported separately.
-- **Fallback:** if fewer than 3 studies give out-of-sample groups, in-sample groups are admitted, flagged with their
-  bias.
 
-**The interval.** A cluster bootstrap over studies: 2000 resamples, the 90 % percentile interval. An independence
-chi-square interval is reported beside it.
+**The minimum number of studies (item 3): G_min = 5 per lane.**
+- With G studies, any interval over study-level estimates has G - 1 degrees of freedom. At G = 5, t_0.95,4 = 2.13;
+  below it the interval is about twice the normal one or wider.
+- Cluster-robust inference is known to over-reject badly with fewer than ~5 clusters, even with small-sample
+  corrections (Cameron, Gelbach & Miller 2008; Cameron & Miller 2015).
+- Five is also the number of scorable laboratories H0 itself rests on.
+- **The author knew, before setting it,** that `contrast_scores.json` holds 5 studies in all (76 sulfur pairs, 5
+  acrylamide), and states that here.
+- **Below G_min,** the lane's sigma_r is **UNDECIDED** and is reported descriptively only.
 
-**The leave-one-study-out check.**
-- Recompute rho-hat dropping each study in turn, and report each.
-- If any leave-one-out value falls outside the bootstrap interval, the primary becomes the **lowest** leave-one-out
-  value: the largest ratio discrepancy, the conservative choice.
+**The interval (item 3: a small-G method).** A t-interval over study-level estimates.
+- For each study s: its own within-group variance v_s, with df_s = sum over its groups of (k_g - 1).
+- **The pooled mean:** v-bar = sum_s df_s v_s / sum_s df_s. Its standard error comes from the df-weighted spread of the
+  v_s about v-bar, and the 90 % interval uses t with G - 1 df.
+- The interval is mapped to sigma_r through sigma_r = sqrt(2 (v - sigma_m^2)), with the floor applied at the lower end.
 
-**Its use downstream.**
-- Every simulation draws rho per truth from the bootstrap distribution: the primary noise model of sec. 3.4.
-- rho = 0, 0.5 and 0.9 are sensitivities.
+**The leave-one-study-out check (item 4: symmetric).** sigma_r is recomputed dropping each study in turn, giving
+LOSO_min and LOSO_max.
+- The layer-1 verdict (sec. 7.1) must be the same at sigma_r = LOSO_min, at the point estimate and at LOSO_max.
+  Otherwise it is **UNDECIDED**.
+- **One choice, no bootstrap draws (item 4):** every later use takes the point estimate sigma_r as fixed; the LOSO
+  bracket is the robustness check. v3's "draw rho from the bootstrap" is withdrawn.
+
+**Which sigma_r a decision uses (item 7).**
+- A decision uses its output's lane's sigma_r when that lane has >= G_min studies.
+- **The pooled rule:** otherwise it uses the sigma_r pooled over every lane (all groups in one sigma_w^2, with every
+  lane's studies counted toward G_min).
+- If the pooled set also has fewer than G_min studies, the decision's eligibility is UNDECIDED.
 
 **Cost.** It reads JSON already on disk, with no engine run: < 0.1 core-h of compute and ~2 - 3 h attended.
 
-**Seen by the author before freezing it:** one pair of `contrast_scores.json` (Schibilsky 2019 HMF, pH 5 vs 8),
-printed while inspecting the file's structure. The plan's summary error statistics are in sec. 1.
+**Seen by the author before freezing it:** one pair of `contrast_scores.json` (Schibilsky 2019 HMF, pH 5 vs 8), and
+that file's study and lane counts, printed while inspecting its structure. The plan's summary error statistics are in
+sec. 1.
 
 #### 5.0.2 Stage 0a: the oracle ceiling, per decision
 
 **The oracle** is a perfect design: it reveals each truth's L_d(theta_i) exactly. What remains is the discrepancy of
 the formulator's own lever:
-- **The bench truth:** T_d(i) = L_d(theta_i) + delta_d(i), with delta_d ~ N(0, sigma_r^2) and sigma_r = sqrt(2 (1 -
-  rho)) x omega (rho from stage 0c);
+- **The bench truth:** T_d(i) = L_d(theta_i) + delta_d(i), with delta_d ~ N(0, sigma_r^2) and sigma_r from stage 0c
+  (the decision's lane, or the pooled rule);
 - **The oracle's interval:** L_d +- 1.645 sigma_r;
 - **Shown** when |L_d| > 1.645 sigma_r (the rival is known, so S3 agrees trivially);
 - **Correct** when sign(L_d) = sign(T_d).
 
-**The ceiling G*_d** is the oracle's net gain of sec. 7 (P_right - P_wrong|worth, given |T_d| >= 0.3 dex), together
-with the oracle's P_wrong.
+**The ceiling.** G*_d is the oracle's net gain of sec. 7: P_right - P_wrong|worth, given |T_d| >= 0.3 dex. It is
+computed with 1000 delta draws per world, from a fixed seed, together with the oracle's P_wrong.
 
 **Eligible decisions.** A decision is **eligible** when its oracle meets sec. 7's bar: G*_d >= 0.6 and P_wrong <= 0.1.
 - **Only eligible decisions judge the designs** (secs. 7.1 - 7.2).
 - A decision that is not eligible is **omega-bound**: no design can show it, under the current discrepancy.
 
 **Reported per decision:**
-- G*_d and the oracle's P_wrong;
-- **the reduction needed:** sigma*_d, the largest sigma_r at which the oracle meets the bar, and the ratio
-  sigma_r / sigma*_d;
+- G*_d and the oracle's P_wrong, at sigma_r's point estimate and at LOSO_min and LOSO_max;
+- **the reduction needed:** sigma*_d, the largest sigma_r at which the oracle meets the bar (bisection on [0.01, 3]
+  dex), and the ratio sigma_r / sigma*_d;
 - for the table, the sigma_r at which >= 2 decisions, and a majority of them, would become eligible.
 
-**When and on what.**
-- At step 0, over a 512-world prior ensemble with the rivals runnable that day (the early variant's set, sec. 12). Its
-  envelope is flagged incomplete where rivals are missing.
-- The full run recomputes it on its own ensemble at no extra forward cost, and **that recomputation sets the full run's
-  eligible set.** The early variant uses step 0's.
+**The step-0 ensemble (v3.1: declared exactly).**
+- **512 worlds.** Each is one draw of the shipped envelope sampler (`uncertainty.sample_draws(512, seed = 20261107)`).
+  That sampler draws the bands the S1 record cites as its own band sources, so it is the S1-band sampler.
+- **One pH-balance rival per world:**
+  - B1 and B13 alternate across the worlds;
+  - within a rival, one of the passing points of PR #108's points record, chosen uniformly;
+  - that point's PhDrift replaces the draw's own drift, and its Config changes (inline coupling, amine survival, and
+    for B13 the acid supply) are applied.
+  - The record is read at the pinned commit 5e61fed0 (`git show`). B0 (falsified) is never used.
+- **Declared departures from sec. 4.2 at step 0:**
+  - the 25 sulfur coordinates whose S1 band is "fixed" stay at the envelope's treatment (held);
+  - 19 bands are normals centred on the shipped fit, so their centre is the incumbent's value; no other band exists on
+    disk for them;
+  - Q-sup, Q-loss, Q-split and Q-fft rivals beyond their bands are not switched in.
+  - All of these narrow the prior spread of L_d. That tends to lower the ceilings, so it biases step 0 toward
+    "omega-bound".
+- **Hence the binding layer-1 verdict is the full run's recomputation**, on its own complete ensemble. Step 0's
+  verdict is reported as "step 0 reading (envelope incomplete)", in the words of sec. 7.1.
+- **Computable at step 0** are the decisions whose rivals run today:
+  - D01, D02, D05, D06, D07, D08, D09, D10, D14, D15, D16, D18 (12 of 17);
+  - O01 - O05 and O08 - O10 (8 of 10).
+- **Not computable at step 0:**
+  - D03 and D04 (the falsified hexose route; Q-hex not built);
+  - D11, D12 and O06 (Q-buf: R0 falsified, the switch not built);
+  - D13 and O07 (Q-fat: R0 falsified, no rivals).
 
-**Cost.** 512 worlds x 28 decision arms (16 + 12 off-grid) x 0.42 - 1.5 s = **1.7 - 6.0 core-h** (11.5 at the high 2.9 s): 0.9 - 3 h
-wall at 2 processes, 0.2 - 0.8 h at 8 cores. Attended: ~6 - 8 h, the world sampler and decision runner that the early variant
-reuses.
+  Each is listed with its reason.
+- **The arms** are the 13 distinct arms of the computable D-decisions and the 10 of the computable O-decisions, 23 in
+  all. They are run through `engine.predict` with the world's draw. Each arm's value is read from the run's internal
+  molar state (`species_mmol_per_l`, through the declaration's `mapped_targets`), so only ratios are used and no
+  absolute level is displayed (H0).
+- **Execution:** nice -n 10, 2 processes, threads pinned to 1, a 300 s limit per arm. A failed arm leaves that world's
+  decision missing; the failed fraction is reported.
+
+**Cost.** 512 worlds x 23 arms x 0.42 - 1.5 s = **1.4 - 4.9 core-h**: 0.7 - 2.5 h wall at 2 processes. Attended:
+~4 - 6 h for the generator and its toy-input unit test.
 
 ### 5.1 Generating the data
 
 - **Ensemble.** N = 2048 worlds (sec. 4).
 - **Truths.** Every world serves as a truth once. Its data are scored against the other N - 1 worlds (leave-one-out),
   so truths are drawn outside the scoring ensemble, as the judge requires.
-- **Per truth i and design g:** y_g(i) = the world's prediction on g's cells + the discrepancy delta per cell (omega,
-  correlated at rho within the design's study, sec. 3.4) + run noise per replicate, censored at the floors.
+- **Per truth i and design g:** y_g(i) = the world's prediction on g's cells + the discrepancy delta per cell (u + e_i,
+  sec. 3.4) + run noise per replicate, censored at the floors.
 - **The two targets (v3, declared).** The generator's reality is the model plus delta, so two truths exist:
   - **L_d(theta_i)**, the model's lever: the target of every **model-part** quantity (shrinkage, the model-part
     interval, A2's model-part coverage);
   - **T_d(i) = L_d(theta_i) + delta_d(i)**, the formulator's lever at the bench: the target of every **total**
-    quantity (P_right, P_wrong, the total interval's coverage). delta_d is drawn as in sec. 5.0.2, independent of
+    quantity (P_right, P_wrong, the total interval's coverage). delta_d ~ N(0, sigma_r^2) as in sec. 5.0.2, independent of
     every design's delta. Its arms are another laboratory's pots; that choice is conservative for designs that
     re-run the decision's own recipe.
   - A union design (G-M5, G-REC, G-C+REC) takes its parts' data from the same truth world, so its likelihood is the
@@ -573,8 +624,8 @@ For decision d, design g and truth i:
   - if one rival is credited under M1.1 (sec. 5.4) against every survivor, I_ship is that rival's interval alone.
 - **Both intervals have two parts:**
   - the **model part**, without omega: the only part a design can shrink;
-  - the **total**, which convolves each world's lever with the ratio discrepancy N(0, sigma_r^2), sigma_r =
-    sqrt(2 (1 - rho)) x omega, rho from step 0 (sec. 5.0): what the formulator reads, and what covers T_d. "As
+  - the **total**, which convolves each world's lever with the ratio discrepancy N(0, sigma_r^2), sigma_r from
+    stage 0c (sec. 5.0.1): what the formulator reads, and what covers T_d. "As
     shipped today" (iid, 0.59 dex, about +-0.98 dex at 90 %) is a sensitivity.
 - **"Shown" (v2).** A direction is shown when:
   - the total 90 % interval excludes zero;
@@ -620,12 +671,13 @@ judge uses p(y_dec | y_spent)). The prior is therefore wider than the judge's.
 ### 5.6 Run order
 
 0. **Freeze.** This file's commit is recorded. Then **step 0**, in this order:
-   - stage 0c (sec. 5.0.1): rho;
+   - stage 0c (sec. 5.0.1): sigma_r per lane;
    - stage 0a (sec. 5.0.2): the oracle ceilings and the eligible set;
    - the refusal state of every decision in the prior ensemble, under the rules in force that day. PR #108's rule
      is **pinned to commit 5e61fed0** (its head on 2026-11-07, open). If #108's refusal set moves before the run
-     (a new commit, or its merge with changes), step 0's refusal stage reruns at the new commit, and the run
-     reports both.
+     (a new commit, or its merge with changes), step 0's refusal stage reruns at the new commit. **The new
+     commit's refusal set is the primary**, as it is the rule the engine will apply; 5e61fed0's is reported beside
+     it.
    Then the early variant (sec. 12) may run; then the full run's steps 1 - 8.
 1. **Builds and parity.** List what is runnable (sec. 4.1); the parity checks (A5).
 2. **Pilot.** 32 worlds, timed. The cost is re-projected (sec. 9.3).
@@ -770,7 +822,8 @@ quantity under the ensemble with no data. Each is computed under both estimators
   - **|T_d| >= 0.3 dex** defines "worth acting on": a factor of 2.
 - **A design is decision-relevant for an eligible d** when G and P_wrong meet the bar after the update, and G rises by
   >= 0.1 over the prior.
-- **"A majority":** >= ceil(E / 2) of the eligible decisions (9 of 17 when all are eligible).
+- **"A majority":** >= ceil(E / 2) of the eligible decisions (9 of 17 when all are eligible). Every verdict is worded
+  "on E of 17" (v3.1).
 - **Secondary:** model-part shrinkage s >= 0.25 (a variance ratio of 0.56, ~1.8 times the information held) on either
   estimator, over all 17 decisions.
 
@@ -778,8 +831,11 @@ quantity under the ensemble with no data. Each is computed under both estimators
 
 The verdict has two layers, read in order.
 
-**Layer 1, the ceiling (step 0, before any design is simulated).** If **fewer than 2 decisions are eligible**, the
-verdict is, verbatim:
+**Layer 1, the ceiling (step 0, before any design is simulated).** It is computed at sigma_r's point estimate, LOSO_min
+and LOSO_max, and must agree at all three (sec. 5.0.1). Otherwise it is UNDECIDED. If any decision's sigma_r is
+UNDECIDED (fewer than G_min studies), layer 1 is UNDECIDED for the decisions it governs. At step 0 it is the "step 0
+reading (envelope incomplete)", on the computable decisions; the full run's recomputation binds. If **fewer than 2
+decisions are eligible**, the verdict is, verbatim:
 
 > **"CONFIRMED (omega-bound): the lever table cannot show directions under the current discrepancy, whatever the
 > experiments."**
@@ -791,11 +847,14 @@ It is reported with:
 In that case no design verdict is given. Q2 is "not informative (omega-bound)". The design metrics are reported
 descriptively, and Q3 still runs on s_BL.
 
-**Layer 2, the designs (only if E >= 2).** The primary is sec. 7's bar on the eligible decisions, under the
+**Layer 2, the designs (only if E >= 2; worded "on E of 17").** The primary is sec. 7's bar on the eligible decisions, under the
 combination rule of sec. 5.2.
 - **WORRY CONFIRMED (designs)** if every on-record single (the 11 of sec. 6.1) and both on-record unions (G-M5,
   G-REC) are decision-relevant for **fewer than ceil(E / 2)** eligible decisions.
-- **WORRY REFUTED** if any of them reaches ceil(E / 2).
+- **WORRY REFUTED** if any of them reaches ceil(E / 2), **with E >= 3**. One decision must never refute: at E = 2 a
+  "majority" would be one decision. **At E = 2, REFUTED is not available** and the outcome is CONFIRMED (designs) or
+  UNDECIDED. **A REFUTED verdict must also hold under the laboratory-offset sensitivity** (sec. 3.4, tau = 0.964 on
+  design absolute levels). If it does not, the verdict is UNDECIDED.
 - **UNDECIDED** otherwise. That covers two cases:
   - UNDECIDED cells could flip the verdict (sec. 5.2);
   - the borderline rule fails: a cell is borderline when the bootstrap interval of G spans 0.6 or that of P_wrong
@@ -814,7 +873,7 @@ combination rule of sec. 5.2.
 - the flagged decisions of sec. 4.2;
 - the misspecified generator;
 - omega 0.390;
-- rho in {0, 0.5, 0.9};
+- sigma_r in {0.593, 0.42, 0.19}, and at the LOSO bracket;
 - "as shipped today" (iid).
 
 **Harmful.** A design for which P_wrong rises above 0.1 on any decision is listed as harmful there, whatever else it
@@ -926,10 +985,10 @@ omega-correlation forms are array work on the same forward runs.
 
 | item | central | low | high |
 |---|---|---|---|
-| step 0: stage 0a, 512 worlds x 28 arms (stage 0c: < 0.1) | 6.0 | 1.7 | 11.5 |
+| step 0: stage 0a, 512 worlds x 23 arms (stage 0c: < 0.1) | 4.9 | 1.4 | 9.5 |
 | pilot, 32 worlds | 2.0 | 0.6 | 3.9 |
 | ensemble, 2048 worlds | 129.7 | 38.8 | 247.6 |
-| array work: BL (5-fold, Ledoit-Wolf), PSIS, nulls, leave-one-rival-out, rho in {0, 0.5, 0.9}, metrics | 4.0 | 4.0 | 4.0 |
+| array work: BL (5-fold, Ledoit-Wolf), PSIS, nulls, leave-one-rival-out, the sigma_r and tau sensitivities, metrics | 4.0 | 4.0 | 4.0 |
 | A3 Laplace check: 20 updates of ~4 pots (~3.3 min each) plus a 2 x 1024-draw sub-ensemble | 4.5 | 2.1 | 7.7 |
 | A4 quadrature | 0.2 | 0.2 | 0.2 |
 | contingency (10 %) | 14.6 | 4.7 | 27.5 |
@@ -994,7 +1053,7 @@ builds.
 ## 12. The early variant (PARTIAL; pre-registered, v2; v3: after step 0)
 
 **What it is.** A subset that runs before A2b, on rivals that already run in the NumPy engine. **It runs after step 0**
-(sec. 5.0), with step 0's rho and eligible set. It **cannot decide sec.
+(sec. 5.0), with step 0's sigma_r and eligible set. It **cannot decide sec.
 7.1**: it lacks every on-record design but three, and eight of the 17 decisions. A2b is needed only for Q-hex (D03 /
 D04); the rest of what it lacks waits on M5's switch, M1c's build and the reduced operator.
 
@@ -1116,3 +1175,23 @@ D04); the rest of what it lacks waits on M5's switch, M1c's build and the reduce
   Also in v3:
   - the cost is re-projected for 12 off-grid arms and step 0 (161 core-h central; sec. 9.2);
   - the forecasts of sec. 1 are revised and marked as informed by seen summaries.
+- 2026-11-07, **v3.1, FROZEN**: the re-confirmation of v3 (ccd02490) returned "confirmed with edits". Every edit is
+  applied, and the file is frozen in the commit that set the header (its sha is in PR #110's body).
+  1. **The estimator.** rho was not identified separately from H0's omega, so the ratio error sigma_r =
+     sqrt(2 (sigma_w^2 - sigma_m^2)) is now the primary quantity, and omega cancels from it. rho is a derived
+     diagnostic. Each printed SD is read as one replicate's (an SE is converted), with an unstated n of 2.
+  2. **The floor.** sigma_r >= sqrt(2) x sigma_m, the measurement-noise ratio SD; never 0.
+  3. **Few clusters.** G_min = 5 studies per lane, justified; below it, UNDECIDED. A t-interval over study-level
+     estimates replaces the bootstrap.
+  4. **LOSO symmetric.** Layer 1 must agree at LOSO_min, the point estimate and LOSO_max. Only the point estimate is
+     used downstream; the bootstrap draws are withdrawn.
+  5. **One decision must not refute.** REFUTED needs E >= 3, and every verdict is worded "on E of 17".
+  6. **The laboratory offset.** A tau = 0.964 sensitivity on design absolute levels; a REFUTED verdict must hold under
+     it.
+  7. **The last choices.**
+     - #108's newer commit is the primary for a rerun.
+     - Non-thiol decisions use their lane's sigma_r at >= G_min studies, else the pooled sigma_r, else UNDECIDED.
+
+  **Also in v3.1:** stage 0a's ensemble is declared exactly (sec. 5.0.2): the envelope sampler, B1 / B13 at #108's
+  pinned points, its declared departures, and its 12 + 8 computable decisions. The sigma_r sensitivities replace the
+  rho ones. The step-0 cost is re-projected (23 arms).
