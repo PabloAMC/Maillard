@@ -131,6 +131,11 @@ HPP 700 0.004 (0.34). Negative = net loss. Model: dC/dt = k(C∞ − C)ⁿ, firs
    commercial standard" for the same lab family; whether that was also HDMF is not checked here (pandit2006.pdf not
    re-opened). If it was, Pandit's
    mg/g plateau (and its 2.4 mol %) carries the same basis question. Flag for the next reader of pandit2006.
+   **Correction 2026-11-05 (register pass, CF-115):** the quote above is incomplete. `pandit2006_extraction.md` (sec. 2)
+   records the standard as commercial M-2 from Givaudan, and pandit2006.pdf (methods, Fig. 2 caption) names it
+   4-hydroxy-5-methyl-3(2H)-furanone, i.e. norfuraneol from another supplier: no shared furaneol basis is evidenced,
+   and Pandit's plateau does not carry Gupta's standard question. Gupta's own methods (furaneol) and its Fig. 1 caption
+   (norfuraneol) still disagree (CF-115).
 2. **Agrees** with Lau 2003's first-order, plateau-type formation and its Ea band (sec. 5).
 3. **SUPPORTS hub direction "NF level falls at high pH"** (Mikami, Nakamura, Meynier 140 °C in the F13 atlas), in a protein
    matrix at 105 °C; does not distinguish lower formation from faster decay.

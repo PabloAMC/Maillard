@@ -1,0 +1,194 @@
+{
+  "artifact": "m0_integrity_batch1_strecker_sulfur.json",
+  "companion": "m0_integrity_batch1_strecker_sulfur.md",
+  "date": "2026-11-06",
+  "branch": "m0-integrity-batch1-ss",
+  "base": "origin/main 4174ed8d",
+  "inventory": "docs/reference/misfit_inventory.md on PR #82 (branch misfit-inventory), batch 0 rows CK-01, CK-02, CK-06, CK-07, CK-10 (via MF-15), CK-50 and sec. 6",
+  "procedure": "OPERATING_PROCEDURE.md sec. 4, step 1 (integrity). Each check's pass rule was written before the check was run; every outcome is recorded, including 'integrity holds'.",
+  "blinding": "Not read: hofmann2000b Figs. 2-3 and the Results text discussing them (the Methods paragraph for the 85 C trapped experiment was read as text only); B59b hold-outs; E7 / E13 / E14 TEST sets; WUR samples.",
+  "engine_calls": "Read-only predict() calls on the shipped engine (native maillard env, 1 core, nice 15): the two Schibilsky bundles at their own pH and at pH 3 / 7 / 10, the same pot with glycine in place of alanine (lane diagnostic), and the Grosch 1992 Table II pots as score_contrast_benchmark.pot_spec builds them. Nothing fitted, nothing written under data/ or src/.",
+  "checks": [
+    {
+      "id": "CK-07",
+      "misfit": "MF-17",
+      "question": "Is the Zhang 2025b ACTZ row behind MF-17 a frozen hold-out (Amendment 45 / the split files) that is being scored on the panel? Plus the CF-009 column sum.",
+      "pass_rule": "Governance bug if the row (a) enters any fit objective or calibration (fit rows, fit-target ledger, B60 / R3En objective, a shipped constant), or (b) was scored before Amendment 45 declared it blind, or (c) sits in a contrast-split TEST partition while being used for development. Being scored on the panel's hold-out section after Amendment 45 is the hold-out's declared test, not a breach.",
+      "outcome": "NO GOVERNANCE BUG. The row is a declared blind hold-out scored as declared; it is now spent.",
+      "evidence": [
+        "Bundle mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b.json added in 0e6e6097 (2026-10-28 01:21, Amendment 45); first scored in ab1fcc55 (2026-10-28 12:31, 'B60 completed ... scorecards on B60'): bundle before score, as the amendment requires ('the first scorecard that reads these rows is their test').",
+        "core_panel_scores.md scores it in panel maillard_path_holdout, tier REFERENCE, class external_holdout (ACTZ 114.13 vs 0.065 ppb, 3.245 dex): the hold-out section, not an objective.",
+        "No fit reads it: k_cys_actz's offset (R3En -2.64) is fitted on Zhou 2023's pH 7 row only (fit_joint_deoxyosone_thiol.py ACTZ_TABLE thiol_zhou2023_actz, ACTZ_FIT_PH 7.0); no ACTZ row of zhang2025b in data/lit/fit_rows, src/kinetic_core/fit_targets.py or kinetic_core_b60_fit_targets.json.",
+        "Contrast splits: split.yml / split_v2_per_change.yml carry zhang2025b only as F04#19 (TTCA paired arms with lysine, DEVELOPMENT); no ACTZ cell. zhang2025b is not a calibration input in split_v2.",
+        "Same-pot sibling rows (Fig. 2 TTCA, CAMA, Cys, Xyl of the SAME blank pot) are read by route_submodel.yml (fit rows of an unshipped sub-model), B58 T1, B59 hold-out diagnosis, B60 verification V2 / V3, the supply signature screen and the M1 / M1M2 preregs; none ships a constant (no src/ reference to route_submodel or zhang2025b).",
+        "CF-009 (Table 2 footnote: 'sums detected from both the DB-WAX and HP-5 MS capillary columns'): at most 2x (0.30 dex) high; it cannot carry a -3.25 dex miss."
+      ],
+      "governance_notes": [
+        "The bundle's fit_holdout_status text ('INDEPENDENT ... checked by grep on 2026-10-28') is stale: since then the same pot's intermediates were used in design and screening (listed above). The ACTZ row's independence from shipped constants still holds; the text should say 'row-independent; same-pot intermediates seen at design' when the coordinator next touches the bundle (a data/ edit; not made here).",
+        "The inventory's MF-17 line 'hold-out status is inconsistent ... yet the ACTZ row is on the panel' should read: 'a declared blind hold-out, scored once as declared (2026-10-28); now SPENT: no ACTZ route candidate (R37 - R39, the NH3 thiazole route) may claim it as out-of-sample confirmation'."
+      ],
+      "proposed_correction": null,
+      "proposed_cf_text": null
+    },
+    {
+      "id": "CK-01",
+      "misfit": "MF-29, MF-33",
+      "question": "Hofmann & Schieberle 2000b Table 2 and Methods vs strecker_hofmann2000b.yml and the dossier: argon total vs PA / PAA split; umol per mmol basis; vial volume and fill; deoxygenation; 'flushing with oxygen' vs air; 0.5 mol/L vs mmol/L phosphate; ARP purity.",
+      "pass_rule": "(inventory) Integrity fails if any keyed cell, basis or condition differs from the page. If the argon cell's basis differs, MF-29 is explained if the corrected datum lies within the rivals' q10 - q90.",
+      "outcome": "INTEGRITY HOLDS. All 12 Table 2 cells, the basis and every condition statement agree with the page; every ambiguity is already declared in the keyed file. MF-29 is not explained by integrity.",
+      "evidence": [
+        "Source: data/articles/hofmann2000b.pdf (laptop only), text layer of pp. 4301-4302 and a 110 dpi render of p. 4302 (Methods, Tables 1-3 only). Text layer and render agree.",
+        "Table 2 (p. 4302), umol/mmol: ARP-Phe PA / PAA argon 0.6 / 0.3, air 5.5 / 3.0, air + Cu 13.8 / 7.6; Glc/Phe 0.4 / 0.2, 1.4 / 1.8, 2.6 / 3.9. Keyed rows = printed / 10 mmol/L: identical.",
+        "Basis: title 'Concentrations (umol/mmol)'; footnote a 'The precursors (1 mmol each) were heated (100 C) in phosphate buffer (10 mL; 0.5 mol/L, pH 7.0) for 120 min in a closed vial under an atmosphere of argon'. 1 umol/mmol = 0.1 mmol/L. Argon total PA + PAA = 0.9 umol/mmol = 0.09 mmol/L, the inventory's datum.",
+        "Scale: Experimental 'Reaction Mixtures' prints 0.1 mmol in 1 mL ('0.5 mmol/L' phosphate), footnotes 1 mmol in 10 mL ('0.5 mol/L'): same 0.1 mol/L, 10x scale apart. Both kept as declared in the keyed file (CF-020 for the phosphate print).",
+        "Vial: 'closed vial'; size, fill and headspace NOT printed.",
+        "Deoxygenation: NOT printed. Footnote a 'under an atmosphere of argon'; text 'reacted under an atmosphere of pure argon'. (The companion hofmann2000 bubbles argon >= 20 min for its dicarbonyl pots; not stated here.)",
+        "Air arm: footnote b 'Argon was replaced by air oxygen'; text p. 4302 'Flushing of the models with oxygen (expt II in Table 2)'; footnote c 'Heating was performed in an air atmosphere and in the presence of copper (II) ions (0.05 mmol CuSO4)'. The Methods use the same phrase for the 85 C experiment: 'under an atmosphere of argon or air oxygen in the presence of copper(II) ions' (text only read), where footnote c's analogue says 'air atmosphere'. 'Air oxygen' is the authors' term for air (German 'Luftsauerstoff'): the AIR reading is supported, P(air) ~0.85 (mine).",
+        "ARP-Phe purity 'about 90%' (p. 4301, 24 mmol, 8 % yield): declared in the keyed file (alternative 90 mmol/L, <= 0.046 dex).",
+        "Quantification: SIDA with [13C2]PA and [13C2]PAA, dilution with 5 mL water, pH 3.0, ether extraction, GC-MS/CI: as keyed."
+      ],
+      "proposed_correction": null,
+      "proposed_cf_text": "CF-new (MF-29; no CF entry exists). kind: open_condition; sources: [hofmann2000b]. 'Hofmann & Schieberle 2000b Table 2, expt I (fed ARP-Phe, argon): PA + PAA 0.9 umol/mmol (0.09 mmol/L) as printed; re-read 2026-11-06 (m0_integrity_batch1_strecker_sulfur): cells, basis and conditions agree with the page. Every M3 rival predicts 0.39 - 0.48 mmol/L (+0.63 to +0.73 dex). Integrity is ruled out. Unprinted conditions that bear on the argon arm: the deoxygenation method (none printed; residual O2 would RAISE the argon datum, so it cannot explain an over-prediction), the vial headspace, and the reaction scale (1 mL Experimental vs 10 mL footnotes). Open explanations: the anoxic exits feeding route A (e1 / e3 / eF) too fast; k_d (CF-121); s_DG1; ARP purity (<= 0.05 dex). Decider: DM:strecker_routes (a) with headspace and deoxygenation stated.'"
+    },
+    {
+      "id": "CK-50",
+      "misfit": "MF-33 (a), MF-29 (d)",
+      "question": "O2 arithmetic: umol O2 available in the closed vial (air vs O2-flushed) against R2's 250 - 700 umol (air arm) / 500 - 1900 umol (air + Cu arm) and R1's 4 - 8 umol, per 1 mmol pot.",
+      "pass_rule": "(inventory) Unit umol O2; error the vial volume's print rounding. Under air, R2 is refuted if available O2 < 250 umol. If the headspace is unprinted, the outcome is the headspace-to-liquid ratio each rival needs.",
+      "outcome": "INCONCLUSIVE on printed data (the headspace is unprinted), but sharpened: R2 needs a headspace / liquid volume ratio r >= 2.9 (air arm, low end) to 8.2 (high end); its copper arm, which footnote c states is AIR, needs r >= 5.8 to 22 whatever the reading of expt II. R1 needs r >= 0.06 (any vial). The O2-flush reading rescues R2's air arm at r >= 0.6 - 1.7 but never its copper arm. At the footnotes' 10 mL scale a common closed vial (<= 30 mL, r <= 2) refutes R2 under air; at the Experimental's 1 mL scale a >= 7 mL vial would not.",
+      "evidence": [
+        "Air at sealing (25 C, 1 atm): 101325 / (8.314 x 298.15) = 40.9 umol gas per mL; x 0.2095 = 8.56 umol O2 per mL headspace. Pure O2: 40.9 umol/mL (4.78x).",
+        "Dissolved at sealing: air-saturated water ~0.26 mmol/L (8.3 mg/L, 25 C), pure-O2-saturated ~1.24 mmol/L; 0.5 M phosphate salts out ~10 - 15 % (upper bounds used).",
+        "Per mmol precursor (0.1 mmol/mL in every reading): available O2 = 85.6 r + 2.6 umol/mmol under air; 409 r + 12.4 under O2 (r = V_headspace / V_liquid).",
+        "R1 (air excess PA + PAA 7.6 umol; Cu 20.5): r >= (7.6 - 2.6) / 85.6 = 0.06; Cu arm r >= 0.21.",
+        "R2 air arm: r >= (250 - 2.6) / 85.6 = 2.89 to (700 - 2.6) / 85.6 = 8.15. O2-flushed: (250 - 12.4) / 409 = 0.58 to (700 - 12.4) / 409 = 1.68.",
+        "R2 copper arm (air, footnote c): r >= (500 - 2.6) / 85.6 = 5.81 to (1900 - 2.6) / 85.6 = 22.2.",
+        "Examples: 10 mL in a 20 mL vial r = 1.0 -> 88 umol/mmol (air); 1 mL in a 4 mL vial r = 3 -> 259; 1 mL in a 10 mL vial r = 9 -> 773.",
+        "Rate flag (assumption-laden, not a verdict): R2's low end consumes 250 umol per 10 mL in 120 min = 0.21 mmol/L/min. Liquid O2 at 100 C under the sealed air headspace (pO2 ~0.26 atm, solubility ~0.75 mmol/L/atm) is ~0.2 mmol/L, so the vessel would need k_L a >= ~1 /min. Unstirred closed vials typically run 1e-4 - 1e-3 /s (0.006 - 0.06 /min). P(R2's O2 demand is transfer-feasible in an unstirred closed vial) ~0.2 (mine). R1's 0.006 mmol/L/min needs nothing."
+      ],
+      "proposed_correction": null,
+      "proposed_cf_text": "Append to MF-33 / M3 open question 11: 'Headspace unprinted (re-read 2026-11-06). R2 is feasible only if V_headspace / V_liquid >= 2.9 (air arm) and >= 5.8 (air + Cu arm, footnote c: air); R1 at any r >= 0.06. The O2-flushed reading of expt II rescues R2's air arm (r >= 0.6) but not its copper arm. A design that states r and the scale decides; under the footnotes' 10 mL scale in a <= 30 mL vial R2 is refuted.'"
+    },
+    {
+      "id": "CK-06",
+      "misfit": "MF-28",
+      "question": "Is the Schibilsky 2019 pot passing pH to the lane at all (identical outputs at pH 5 and 8)? Then the units and basis.",
+      "pass_rule": "(inventory) Explained (pot-definition bug) if the pH is not passed; otherwise the misfit stands as structural. Integrity error: a unit, MW or concentration conversion in the bundle that does not reproduce from its quotes.",
+      "outcome": "pH IS PASSED; the misfit stands as STRUCTURAL, and its location is now exact: L-alanine routes the pot to the acrylamide lane, whose only pH term is on the asparagine steps; the trunk's Amadori-decay pH law is applied only when lane == trunk. Unit / MW / concentration conversions reproduce. The PDF is not on disk, so the source itself was not re-read.",
+      "evidence": [
+        "panel.core_spec passes conditions.ph: spec.process.ph = 5.0 / 8.0; buffer none (declared unbuffered).",
+        "The lane receives it: its B15 declaration prints x0.38 (pH 5) and x1.91 (pH 8) on k_asn_glc and x0.54 / x1.51 on k_acr_dp (acrylamide_conditions.PH_FORMATION_KEYS / PH_ELIMINATION_KEYS). The pot has no asparagine, so these steps carry no flux.",
+        "DMHF 21.84 ug/L and HMF 55409 ug/L at pH 3, 5, 7, 8 and 10 alike (read-only predict on the bundles).",
+        "Routing: engine._PRECURSOR_LANE sends Ala to the acrylamide lane; engine.py applies trunk_conditions (the Martins 2003 pH law on k_ama_tdg / k_ama_odg / k_ama_mgo, B12, and the B40 3-DG exit term) only under `if lane == TRUNK` (declarations ~l. 1568; parameters ~l. 2698). The acrylamide lane's own docstring: 'No pH dependence'.",
+        "Lane diagnostic (glycine in place of alanine, same pot; a stand-in, not a prediction): trunk lane, DMHF 1621 / 5158 ug/L (pH 8 / 5 = 3.18x; measured 1153 / 5894, 5.1x) and HMF 20135 / 41390 (2.06x; measured 57254 / 100636, 1.76x). The acrylamide lane's DMHF is also 74x below the trunk lane's at the same charge.",
+        "Bundle arithmetic: 4.504 g / 180.16 / 0.050 L = 0.500 M glucose, 2.228 g / 89.09 / 0.050 L = 0.500 M alanine, diluted 1:2 = 0.25 M; Furaneol 9 / 46 uM x 128.13 = 1153.17 / 5893.98 ppb; HMF 454 / 798 uM x 126.11 = 57253.94 / 100635.78 ppb; furfural 17 / 25 uM x 96.08 = 1633.36 / 2402.0 ppb: all reproduce.",
+        "Source not on disk: data/articles has no Schibilsky thesis; the bundle says 'SOURCE NOT ON DISK; second-hand' for its conditions. Step 1 (R) stays open for the printed cells until the thesis (DepositOnce, TU Berlin 2019) is on the laptop."
+      ],
+      "spent": "Schibilsky (SEEN). The glycine stand-in diagnostic was compared with Schibilsky's measured pH ratios, so Schibilsky cannot be the decisive test of a change that routes alanine pots to the trunk or gives the acrylamide lane the trunk's pH law.",
+      "proposed_correction": null,
+      "proposed_cf_text": "CF-new (MF-28). kind: engine_structure; sources: [schibilsky2019]. 'The Schibilsky glucose + alanine pots (pH 5 / 8, 130 C, 2 h, unbuffered) pass their pH to the engine, but L-alanine routes them to the acrylamide lane, whose pH factor acts only on k_asn_glc / k_acr_dp (no flux without asparagine); the trunk's measured Amadori-decay pH law (Martins 2003, B12) and the B40 3-DG exit term are applied only in the trunk lane (engine.py, lane == TRUNK). DMHF and HMF are therefore identical at every pH (21.84 / 55409 ug/L). With glycine standing in (trunk lane) the same pot gives DMHF x3.2 and HMF x2.1 from pH 5 to 8 (measured x5.1 / x1.76), and 74x more DMHF. Options: (a) run the trunk's declared terms on the trunk steps inside the acrylamide lane; (b) route a non-asparagine amino acid to the trunk lane; (c) declare the acrylamide lane pH-blind for furanics and refuse. Shipped outputs move (every acrylamide-lane HMF / DMHF): owner first. Schibilsky is spent for this decision (seen at diagnosis); the decider must be another pH pair.'"
+    },
+    {
+      "id": "CK-02",
+      "misfit": "MF-21",
+      "question": "The zhou2025b xylose-alone rows at -16 sigma (R3En): a zero / floor prediction or a keying error?",
+      "pass_rule": "(inventory) Explained (integrity / pot definition) if the -16 sigma comes from a zero prediction or a mis-keyed unit. Integrity error: a keyed value off the plotted marker beyond its read error, a wrong axis unit, or a wrong charge.",
+      "outcome": "NOT EXPLAINED; INTEGRITY HOLDS. The four rows are MGO (not all dicarbonyls); the engine predicts a non-zero MGO, -0.41 dex raw. The -16 sigma is -1.02 dex after the paper-wide free MGO scale (zhou2025b|MGO, one scale per paper x species), which the AX-ARP pots' MGO (+0.86 dex raw) sets; the whitened residual divides by small read errors (0.04 - 0.07 dex). The misfit is a within-paper ratio: the engine's MGO from AX-ARP vs from free xylose is ~1.27 dex too high relative.",
+      "evidence": [
+        "kinetic_core_joint_deoxyosone_thiol_fit_s042_r3en.json: data_set zhou2025b_fig2a_xylose_alone_dicarbonyls | MGO, n 4, raw at optimum -0.407 dex, after scale -1.016 dex, whitened -16.12; scale_of 'free'; zhou2025b_figs1_3_axarp_xylose_120c | MGO raw +0.863, after scale +0.254.",
+        "fit_joint_deoxyosone_thiol.series_of: Zhou's MGO is one free scale per paper x species ('zhou_free'), so the xylose-alone and AX-ARP MGO series share it.",
+        "Zhou2025b.pdf p. 5, Fig. 2a (200 dpi render): axis 'Concentration (mmol/L)' 0 - 0.8; MGO ~0.02 / 0.022 / 0.031 / 0.033 at 30 - 120 min vs keyed 0.0195 / 0.0216 / 0.0308 / 0.0329. GO 120 min keyed 0.1155 vs the text's 'degradation of Xyl itself contributed only 0.12 mmol/L'. Fig. 2e AX-ARP MGO ~0.08 / 0.075 / 0.07 / 0.09 vs keyed 0.0815 / 0.0758 / 0.0719 / 0.0892.",
+        "Charge: xylose 20 mM is not printed for this arm ('identical reaction conditions'); the 120 min dicarbonyls 0.1155 + 0.0883 + 0.0329 = 0.237 mM = 1.18 % of 20 mM vs the printed 'Only 1.1 % of the initial Xyl': consistent (declared in the keyed file).",
+        "Conditions: pH set to 8, no buffer, pressure-resistant flask in an oil bath, 120 C, ice-water quench (Sec. 2.3): as keyed. Derivatisation OPD + HEPES + DTPA, 3,4-hexanedione IS, HPLC-UV 315 nm (Sec. 2.5)."
+      ],
+      "proposed_correction": null,
+      "proposed_cf_text": "Amend MF-21's text: 'the -16 sigma is not a zero or floor prediction (raw -0.41 dex, MGO only, 4 rows) but -1.0 dex after the free MGO scale shared with the same paper's AX-ARP pots (+0.86 dex raw): a within-paper ratio error of ~1.27 dex between MGO from AX-ARP and MGO from free xylose. Integrity holds (re-read 2026-11-06). Candidate: the AX-ARP route to MGO too fast or free-xylose fragmentation to MGO too slow (trunk xylose-alone pathway), not the laboratory scale (CF-060), which cancels inside one paper.'"
+    },
+    {
+      "id": "MF-10-reread",
+      "misfit": "MF-10",
+      "question": "Givaudan (de Roos 2005 Table I; Laarhoven, unpublished) ribose / norfuraneol MFT ratio: conditions, units, analyte, duplicates.",
+      "pass_rule": "Integrity error: a printed cell differing from the keyed / atlas value, a basis that does not cancel in the ratio, an analyte other than 2-methyl-3-furanthiol, or an engine pot that contradicts the printed conditions.",
+      "outcome": "INTEGRITY HOLDS. Ratio 43.5 / 0.9 = 48.3 per mol cysteine (basis cancels; 1 : 1 carbonyl : Cys in both columns). Conditions are uncertain and already flagged (ledger simulable: false, condition_uncertain); the engine-side 100 C / 90 min / ~2 M pot is a declared reading of them.",
+      "evidence": [
+        "deroos2005.pdf p. 124 (150 dpi render; ABBYY text layer agrees): Table 1 'Likens-Nickerson extraction of mixtures of cysteine with carbonyl compounds under optimum conditions for Amadori compound formation', 'Quantity produced (mg/mole of cysteine)': 2-Methylfuran-3-thiol Ribose 43.5, Xylose 36, Glucose < 0.05, Norfuraneol 0.9. Footnote a: 'Cysteine : carbonyl compound : lactate = 1 : 1 : 1.67; water content: 37% (w/w); pH 5.0; boiling for 1.5 h.'",
+        "Text: data from ref. 13 (Laarhoven, Givaudan, unpublished); no SD, no n, no quantification method printed; single run.",
+        "Engine pot (kinetic_core_mft_route_barriers_prereg.md D2): 1 : 1 : 1.67, 37 % water (~2 M declared; 0.3 M sensitivity), pH 5 clamped, 100 C, 90 min. Concentration check: per mol Cys 121 + 150 + 150 g solids at 37 % water -> ~1.5 mol/kg solution, ~1.9 mol/L at density ~1.25: '~2 M' is right. Open conditions (flagged, not errors): the boiling point of a 63 % solids pot (> 100 C) vs an SDE pot diluted to ~100 C; NaOH for pH 5 not counted.",
+        "Ownership: CK-40 is 'owned by M2'; the M1 + M2 prereg v2 (parked) makes Givaudan a 'reported guard', not decisive. This re-read reads only the cells already printed in the atlas (E6: 48) and tests no candidate; it should be listed as SEEN (already SEEN at E6) in M2's item 2."
+      ],
+      "proposed_correction": null,
+      "proposed_cf_text": null
+    },
+    {
+      "id": "MF-15-reread (CK-10)",
+      "misfit": "MF-15",
+      "question": "Grosch & Zeiler-Hilgart 1992 Table II vs heldout_grosch1992_tab2.yml and the engine's pot charges (thiamine, cysteine, ribose, GSH, buffer, reflux).",
+      "pass_rule": "(inventory CK-10) Explained if the pots carry the wrong charges. Integrity error: a keyed cell or reactant amount off the page, or a charge lost between the keyed pot and the engine spec.",
+      "outcome": "INTEGRITY HOLDS; NOT EXPLAINED. Cells and charges agree with the page and reach the engine intact; the engine's MFT is flat in cysteine because the thiamine route has no cysteine / H2S term.",
+      "evidence": [
+        "grosch1992.pdf p. 185 (text layer): Table II MF-SH no. 1 4.7 +- 1.2 (N 3), no. 3 5.2 +- 0.4 (2), no. 4 33 +- 3.7 (4), no. 6 19 +- 2.5 (3), no. 7 23 +- 1.2 (3), no. 8 9.0 +- 2.8 (4) ug; footnote a thiamine.HCl 10.2 mg (30 umol), TPP 13.9 mg (30 umol), D-ribose 100 mg (670 umol), cysteine.HCl 57 mg (325 umol), GSH 71 mg (230 umol); footnote c 'after isolation by method I'. Experimental: Na-pyrophosphate pH 5.7, 0.2 mol/L, 500 mL; Method I reflux 2 h, extracted after cooling; SIDA (d-MF-SH, d-FF-SH, d-MF-S2). All as keyed. Masses reproduce the moles (thiamine.HCl 337.3, cysteine.HCl 175.6, ribose 150.1, GSH 307.3 g/mol: within 1 %).",
+        "Engine specs (score_contrast_benchmark.pot_spec): thiamine 0.06, cysteine 0.65, ribose 1.34, glutathione 0.46 mmol/L; 0.2 M pyrophosphate; 100 C; 120 min; sulfur lane. Engine MFT (ug/L): no. 1 1.0396, no. 3 1.0396, no. 4 1.0398, no. 6 1.1905, no. 7 1.0451, no. 8 1.9201; thiamine left 0.0576 mmol/L in every pot; no. 4 makes H2S (0.0028 mmol/L at 120 min) and keeps 0.565 mmol/L cysteine. Measured no. 4 / no. 1 = 7.0x (-0.85 dex the other way); predicted 1.0002x."
+      ],
+      "proposed_correction": null,
+      "proposed_cf_text": null
+    },
+    {
+      "id": "MF-16-reread",
+      "misfit": "MF-16",
+      "question": "Disulfide share (Zhou 2023 Table 1; Zhang 2024 Fig. 1 cysteine arm): species, the share's basis, units, duplicates.",
+      "pass_rule": "Integrity error: a species other than bis(2-methyl-3-furyl) disulfide, a basis mismatch between target and engine observable (mass vs molar vs thiol equivalents: 0.30 dex), or a keyed value off the page beyond its read error. The inventory's CK-09 threshold: a basis mismatch >= 0.5 dex explains part.",
+      "outcome": "INTEGRITY HOLDS (no basis mismatch: both targets and the engine observable are the molar MFTD / MFT ratio). One immaterial arithmetic slip: the targets take the dimer's MW as 2 x 114.17 = 228.3 instead of 226.3, 0.9 % (0.004 dex) low. A measurement lead, outside step 1: Zhou 2023's disulfide calibration has a large negative intercept.",
+      "evidence": [
+        "Zhou2023b.pdf Table 1 (text layer): bis(2-methyl-3-furyl)disulfide ARP + Cys pH 6 / 7 / 8: 59.70 +- 2.75 / 102.59 +- 4.17 / 50.07 +- 2.15 ug/L; 2-methyl-3-furanthiol 696.99 / 1588.57 / 525.62 ug/L: as keyed. Identification MS, RI, S (authentic standard).",
+        "Zhang2024.pdf p. 4, Fig. 1a (150 dpi): MFT-MFT ('bis (2-methyl-3-furan) disulfides', authentic standard > 98 %, TCI) ~0.115 ng/mL vs MFT ~1.34 (Cys); 1.09 vs 2.01 (GCys): as the dossier reads. Fig. 1 temperature not printed (115 C assumed, flagged in the dossier).",
+        "Engine targets (generate_kinetic_core_b2_3_fit.py; in the B60 objective): zhou_pH7_dimer_over_MFT 0.0323, zhang_fig1_cys 0.0429, zhang_fig1_gcys 0.2711, kind 'ratio' MFTD / MFT (molar). Exact molar ratios with MW 226.32: 0.0326, 0.0433, 0.2736 (+0.004 dex each). The case's 6.5 / 8.6 % are thiol equivalents (2x molar); by-mass and thiol-equivalent shares coincide within 1 % (2 x 114.17 / 226.32 = 1.009), so no 2x slip is possible between Zhang's by-mass and Zhou's thiol-equivalent figures.",
+        "Measurement lead (step 3, not integrity): Zhou 2023 SI Table S1 calibrates the disulfide as y = 0.0208x - 0.7126 (zero response at 34.3 ug/L). With a zero intercept the same responses read 15.8 / 68.3 / 25.4 ug/L at pH 8 / 7 / 6 (-0.50 / -0.18 / -0.37 dex), i.e. the measured share could be LOWER, shrinking the engine's x11 deficit to ~x7 at pH 7. It cannot close it.",
+        "Already recorded, not new: zhou_pH7_dimer_over_MFT and zhang_fig1_cys_dimer_over_MFT are 'declared hold-out, in-sample since B60' (fit_m1_supply_combinations.py TAGS)."
+      ],
+      "proposed_correction": {
+        "file": "scripts/generators/generate_kinetic_core_b2_3_fit.py (and b2_1, b2_2): frozen wave generators, not data/",
+        "rows": "zhou_pH7_dimer_over_MFT 0.0323 -> 0.0326; zhang_fig1_cys_dimer_over_MFT 0.0429 -> 0.0433; zhang_fig1_gcys_dimer_over_MFT 0.2711 -> 0.2736",
+        "source": "Zhou 2023 Table 1 (pH 7); Zhang 2024 Fig. 1a; MW bis(2-methyl-3-furyl) disulfide C10H10O2S2 = 226.32",
+        "recommendation": "Do NOT edit frozen generators (wave manifest). Carry the exact values into the next fit's target definitions. Shipped outputs: none move; the B60 rows shift by 0.004 dex against sigma_log 0.4."
+      },
+      "proposed_cf_text": null
+    },
+    {
+      "id": "MF-30-reread",
+      "misfit": "MF-30",
+      "question": "Hofmann 2000 Fig. 2 (glucose + Phe, PA / PAA time course): axis, units, digitisation, conditions, the early points behind the lag shape.",
+      "pass_rule": "Integrity error: a keyed point off the plotted marker beyond its read error, a wrong axis unit or basis, or a condition (time zero, temperature, atmosphere) mis-stated in a way that moves the 10 - 60 min deficit.",
+      "outcome": "INTEGRITY HOLDS. Points, axis and basis agree with the figure. The lag cannot be a heat-up artefact: a come-up delay would make the measured early points LOWER, which widens, not explains, an engine deficit at 10 min.",
+      "evidence": [
+        "hofmann2000.pdf p. 436, Fig. 2 (150 dpi render): y 'amount [umol/mmol glucose]', x 't (min)' broken 250 / 450; PA (open) ~0.2 / 0.5 / 0.9 / 1.4 / 2.0 / 2.2 and PAA (filled) ~0.1 / 0.3 / 0.8 / 1.8 / 3.2 / 3.5 at 10 / 30 / 60 / 120 / 240 / 500 min vs keyed 0.196 / 0.494 / 0.897 / 1.399 / 2.005 / 2.204 and 0.096 / 0.295 / 0.793 / 1.797 / 3.200 / 3.498.",
+        "Caption states no conditions; the recipe (Experimental p. 435: glucose and Phe 1.0 mmol each in 10 mL phosphate pH 7.0, 'heated at 98 C'; '0.5 mmol/L' vs the footnotes' 0.5 mol/L, CF-020) is declared in the keyed pot, as is the duplicate with hofmann2000b Table 2 expt II at 120 min.",
+        "Time zero / heat-up not printed. The engine is isothermal from t = 0; a real come-up would lower measured PA at 10 min, so the -3.04 dex at 10 min would grow, not shrink. Atmosphere not controlled (reflux / air)."
+      ],
+      "proposed_correction": null,
+      "proposed_cf_text": null
+    },
+    {
+      "id": "MF-33-reread",
+      "misfit": "MF-33",
+      "question": "Hofmann 2000b Table 2 air / argon ratios as used by B29 and M3: printed values, basis, the pots the engine compared.",
+      "pass_rule": "Integrity error: a ratio not reproducing from the printed cells, or an engine pot whose identity differs from the printed one without a declared stand-in.",
+      "outcome": "INTEGRITY HOLDS on the source (PA air / argon 5.5 / 0.6 = 9.17 for ARP-Phe, 1.4 / 0.4 = 3.5 for Glc/Phe; order 2.63x). Two declared conditions, not errors: B29's engine pots are glycine stand-ins (fed DFG; glucose + glycine; observable AKG + AKM), and the 3.5 Glc/Phe ratio may compare a reflux pot with a closed argon vial (keyed duplicate ruling D(i)). The air-arm reading and the O2 arithmetic are CK-01 / CK-50.",
+      "evidence": [
+        "Table 2 cells as in CK-01. PA + PAA air / argon: 8.5 / 0.9 = 9.4 (ARP-Phe).",
+        "kinetic_core_b29_prereg.md sec. 7 table: 'fed Amadori' and 'glucose + glycine' engine pots, model air / argon at the multiplier's floor 2.19 / 2.76 against 9.2 / 3.5.",
+        "No deoxygenation printed for the argon arm: residual O2 would raise the argon cells and lower the measured air / argon, so the anoxic ratio could only be >= 9.2; the engine's ceiling (1 / non-oxidative share ~1.8 - 2.8) is further away, not closer."
+      ],
+      "proposed_correction": null,
+      "proposed_cf_text": null
+    }
+  ],
+  "data_corrections": "None under data/. One immaterial target arithmetic in frozen generators (MF-16 entry): recommended carried forward, not edited.",
+  "summary": {
+    "governance_bug": false,
+    "integrity_errors_in_curated_data": 0,
+    "misfits_explained_by_integrity": [],
+    "misfits_located_structural": ["MF-28 (lane routing: acrylamide lane carries no pH law on the trunk steps)", "MF-21 (within-paper MGO ratio, not a zero prediction)", "MF-15 (no cysteine / H2S term on the thiamine route; charges correct)"],
+    "inconclusive": ["CK-50 (headspace unprinted; R2 needs r >= 2.9 air, >= 5.8 air + Cu)"],
+    "not_rereadable": ["Schibilsky 2019 thesis not on disk (CK-06 source cells)"]
+  }
+}

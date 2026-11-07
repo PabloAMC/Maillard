@@ -148,6 +148,11 @@ def test_priority_summary_flags_53_targets_as_runtime_bound_in_current_repo():
     # See data/benchmarks/quarantined/README.md (Wave I section).
     assert target_summary["spi_hvp_xylose"]["status"] == "REGISTRY_ONLY"
     assert target_summary["wheat_gluten_hvp_xylose"]["status"] == "REGISTRY_ONLY"
-    assert target_summary["acrylamide_fast_kinetics"]["status"] == "RUNTIME_BOUND"
+    # RE-PINNED 2026-11-06 (PR #88, the withdraw-unsourced rule): RUNTIME_BOUND -> BACKLOG. The corpus line's
+    # "22.36 -> 62.62 ug/kg in 25 s" is not in Ma 2024 (acrylamide appears only in Fig. 2D), so those values were
+    # withdrawn from the intake record acs_ref3_spi_acrylamide_fast_kinetics and the wrong-venue aliases that bound
+    # this citation to it ("ACS ResearchGate ref. 3" ...) moved to closed_citations. Same reasoning as the two
+    # REGISTRY_ONLY lines above: asserting RUNTIME_BOUND would assert that an unsourced claim is wired into the runtime.
+    assert target_summary["acrylamide_fast_kinetics"]["status"] == "BACKLOG"
     assert target_summary["cml_cel_commercial_pba_ranges"]["status"] == "RUNTIME_BOUND"
     assert target_summary["furosine_crossover"]["status"] == "RUNTIME_BOUND"

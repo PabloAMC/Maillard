@@ -29,10 +29,14 @@ name: CI
 on:
   push:
     branches: [main]
+  # 2026-11-06: ready_for_review is listed so that marking a draft ready STARTS a run (without `types` it does
+  # not, and re-running the draft's run reuses its draft payload, so the draft-gated jobs skip again)
   pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
   workflow_dispatch:
   schedule:
-    # Weekly DOI liveness sample. Advisory only -- see the citation-liveness job.
+    # Weekly (Mondays): the DOI liveness sample (advisory, see citation-liveness) and the frozen-fit drift gate's
+    # slow fits (blocking for that run, see frozen-fit-drift-slow).
     - cron: "17 6 * * 1"
 
 permissions:
@@ -122,6 +126,11 @@ jobs:
       # signature, diagnosis and probe record is in docs/reference/experiment_register.yml, well-formed.
       - name: Experiment register gate
         run: python scripts/ci/experiment_register_gate.py
+      # 2026-11-06 (plan sec. 7 S1). The evidence-tier record: every row tiered, inputs current, no fitted_identified
+      # without its profile, no tier change without its review. The engine's enumeration of the shipped coordinates
+      # needs numpy, so the full gate runs in the unit tier; this job runs the record-only checks.
+      - name: Evidence tier gate (record only)
+        run: python scripts/ci/evidence_tier_gate.py --record-only
 
   # ---------------------------------------------------------------------------
   # Tier 1: fast test tier.
@@ -176,6 +185,18 @@ jobs:
       # dossier. It imports the engine (numpy), so it runs here, not in the dependency-light gates job.
       - name: Evidence anchor gate
         run: python scripts/ci/evidence_anchor_gate.py
+
+      # 2026-11-06 (plan sec. 7 S1): every shipped coordinate the engine reads has a tier in the evidence-tier record
+      # (plus the record-only checks the gates job runs). Imports the engine, so it runs here.
+      - name: Evidence tier gate
+        run: python scripts/ci/evidence_tier_gate.py
+
+      # 2026-11-07 (PR #107): every cheap frozen fit's objective, evaluated once at its frozen point, still gives its
+      # recorded S and rows, or the drift is allow-listed at its exact current S with its class and CF
+      # (docs/reference/frozen_fit_drift_allowlist.yml). Imports the engine, so it runs here (~10 s); the slow fits
+      # (B2.3, B60) run weekly in frozen-fit-drift-slow.
+      - name: Frozen-fit drift gate
+        run: python scripts/ci/frozen_fit_drift_gate.py
 
       # 2026-09-01: data/ is read-only at runtime. Fails if the tier above wrote,
       # rewrote or deleted anything under data/ (see scripts/ci/data_readonly_gate.py).
@@ -239,6 +260,92 @@ jobs:
           name: pytest-full-log
           path: results/pytest_full.log
           if-no-files-found: warn
+
+  # ---------------------------------------------------------------------------
+  # Tier 2b (2026-11-05, A2 + H3): the JAX sulfur lane against the NumPy sulfur lane, LIVE, in the separate
+  # maillard-jax env (environment-jax.yml = environment.yml's package set plus JAX). This is the enforcement of
+  # docs/guides/A2_MODULE_CONTRACT.md sec. 6.2.2: an edit of src/kinetic_core/sulfur.py that the JAX lane
+  # (src/kinetic_core_jax/sulfur_lane.py) does not follow fails here. The structural half also runs in the core
+  # env's unit tier (tests/unit/test_jax_sulfur_structure.py).
+  # ---------------------------------------------------------------------------
+  tests-jax-sulfur:
+    name: JAX sulfur lane parity
+    if: github.event_name != 'pull_request' || github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache conda packages
+        uses: actions/cache@v4
+        env:
+          CACHE_EPOCH: 1
+        with:
+          path: ~/conda_pkgs_dir
+          key: conda-jax-${{ runner.os }}-${{ env.CACHE_EPOCH }}-${{ hashFiles('environment-jax.yml') }}
+
+      - name: Install conda (Miniforge)
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          miniforge-version: latest
+          activate-environment: maillard-jax
+          python-version: "3.12"
+          auto-activate-base: false
+          pkgs-dirs: ~/conda_pkgs_dir
+
+      - name: Build the maillard-jax environment
+        run: conda env update -n maillard-jax --file environment-jax.yml
+
+      - name: Preflight (the JAX stack imports; a skip below would otherwise test nothing)
+        run: python -c "import jax, diffrax, equinox.internal; jax.config.update('jax_enable_x64', True); print(jax.__version__, diffrax.__version__)"
+
+      - name: Every JAX test (unit and scientific) against the NumPy lanes
+        env:
+          MAILLARD_REQUIRE_NO_SKIPS: "1"   # tests/conftest.py: a skip fails this job
+        run: python -m pytest tests/unit/test_jax_*.py tests/scientific/test_jax_*.py -q -rs
+
+      - name: data/ untouched by the JAX parity tier
+        if: always()
+        run: python scripts/ci/data_readonly_gate.py
+
+  # ---------------------------------------------------------------------------
+  # Weekly (2026-11-07, PR #107): the frozen-fit drift gate with the slow fits (B2.3, B60: 22-35 s per evaluation,
+  # ~1 min in all), which the unit tier skips. Scheduled and manual only.
+  # ---------------------------------------------------------------------------
+  frozen-fit-drift-slow:
+    name: Frozen-fit drift gate, slow fits (weekly)
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache conda packages
+        uses: actions/cache@v4
+        env:
+          CACHE_EPOCH: 1
+        with:
+          path: ~/conda_pkgs_dir
+          key: conda-${{ runner.os }}-${{ env.CACHE_EPOCH }}-${{ hashFiles('environment.yml') }}
+
+      - name: Install conda (Miniforge)
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          miniforge-version: latest
+          activate-environment: maillard
+          python-version: "3.12"
+          auto-activate-base: false
+          pkgs-dirs: ~/conda_pkgs_dir
+
+      - name: Build the maillard environment
+        run: bash scripts/ci/setup_env.sh
+
+      - name: Frozen-fit drift gate (every fit)
+        run: python scripts/ci/frozen_fit_drift_gate.py --slow
+
+      - name: data/ untouched by the drift gate
+        if: always()
+        run: python scripts/ci/data_readonly_gate.py
 
   # ---------------------------------------------------------------------------
   # Advisory: DOI liveness. Never blocks a PR.

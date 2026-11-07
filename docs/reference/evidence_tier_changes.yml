@@ -1,0 +1,114 @@
+# Evidence-tier changes since the incumbent audit (plan sec. 7, rule S1, owner 2026-11-06).
+#
+# The S1 record (results/validation/incumbent_evidence_tiers.json, built by scripts/generators/build_evidence_tiers.py
+# from src/evidence_tiers.py) assigns every shipped coordinate a tier by fixed rules. Its tiers at the audit are frozen
+# in results/validation/incumbent_evidence_tiers_baseline.json (write-once). Sec. 7 S1: "Upgrades need an artifact and
+# a second reader; downgrades need a citation." Every coordinate whose tier differs from the baseline must therefore be
+# explained here, one entry per change, in order; the generator copies each entry onto its row as `tier_changes`, and
+# scripts/ci/evidence_tier_gate.py fails when a row's tier is not the baseline tier carried through its entries.
+#
+# Fields:
+#   coordinate     the row id in the record (e.g. k_schiff.log10_k_ref; a band-carried parameter's key)
+#   from           the tier before the change (null for a coordinate new since the baseline)
+#   to             the tier after
+#   date           ISO date
+#   citation       the paper key, ledger row, fit report or case that justifies it (every change)
+#   artifact       UPGRADES only (into measured / analogue / bounded / fitted_identified): the file under
+#                  results/validation/ that shows it (for fitted_identified, the S1 profile: every other unidentified
+#                  coordinate profiled over its band; the row's identification.profile_artifact names it too)
+#   second_reader  UPGRADES only: who re-read the evidence, independently of the author of the change
+#   case           optional: the sec. 7 case / EX entry
+#
+# A downgrade that moves a shipped output ships as an S4 change, review included (sec. 7 S1).
+
+entries:
+  - coordinate: k_tdg_ddg.log10_k_ref
+    from: fitted_unidentified
+    to: fitted_identified
+    date: 2026-11-06
+    citation: >-
+      B41 (results/validation/kinetic_core_b41_fit_report.json, the fit that froze the shipped value,
+      parameters_dicarbonyl.SHIPPING_FIT_REPORT): S1 profile on B41's twelve rows (Mittelmaier 2011 fed
+      3-DG / 3,4-DGE / 3-DGal pots; Zhang 2021 within-study ratios), the other four free coordinates
+      re-optimised at every grid value; 95 % [-2.370, -1.571] (Wilks chi2_1, chi2_red 0.11 so no
+      inflation), closed on both sides inside the search bounds, every point converged, no failed pot
+    artifact: results/validation/s1_profiles.json
+    second_reader: >-
+      S1 second reading of PR #106 (independent agent, 2026-11-06): B41 attribution confirmed against
+      FROZEN_B39; B41's objective reproduced at its frozen point (S 0.8112543 vs 0.8112543); no other
+      fitted_unidentified coordinate moves B41's rows (all trunk non-measured coordinates probed);
+      optimum robust to the held-fixed exits and declared barriers; no B41 row withdrawn or corrected;
+      identification only (fit rows, never credit); conditional on the declared barriers
+    case: PR #106
+  - coordinate: k_ddg_tdg.log10_k_ref
+    from: fitted_unidentified
+    to: fitted_identified
+    date: 2026-11-06
+    citation: >-
+      B41 (results/validation/kinetic_core_b41_fit_report.json, the fit that froze the shipped value,
+      parameters_dicarbonyl.SHIPPING_FIT_REPORT): S1 profile on B41's twelve rows (Mittelmaier 2011 fed
+      3-DG / 3,4-DGE / 3-DGal pots; Zhang 2021 within-study ratios), the other four free coordinates
+      re-optimised at every grid value; 95 % [-2.415, -1.546] (Wilks chi2_1, chi2_red 0.11 so no
+      inflation), closed on both sides inside the search bounds, every point converged, no failed pot
+    artifact: results/validation/s1_profiles.json
+    second_reader: >-
+      S1 second reading of PR #106 (independent agent, 2026-11-06): B41 attribution confirmed against
+      FROZEN_B39; B41's objective reproduced at its frozen point (S 0.8112543 vs 0.8112543); no other
+      fitted_unidentified coordinate moves B41's rows (all trunk non-measured coordinates probed);
+      optimum robust to the held-fixed exits and declared barriers; no B41 row withdrawn or corrected;
+      identification only (fit rows, never credit); conditional on the declared barriers
+    case: PR #106
+  - coordinate: k_ddg_dgal.log10_k_ref
+    from: fitted_unidentified
+    to: fitted_identified
+    date: 2026-11-06
+    citation: >-
+      B41 (results/validation/kinetic_core_b41_fit_report.json, the fit that froze the shipped value,
+      parameters_dicarbonyl.SHIPPING_FIT_REPORT): S1 profile on B41's twelve rows (Mittelmaier 2011 fed
+      3-DG / 3,4-DGE / 3-DGal pots; Zhang 2021 within-study ratios), the other four free coordinates
+      re-optimised at every grid value; 95 % [-2.302, -1.262] (Wilks chi2_1, chi2_red 0.11 so no
+      inflation), closed on both sides inside the search bounds, every point converged, no failed pot
+    artifact: results/validation/s1_profiles.json
+    second_reader: >-
+      S1 second reading of PR #106 (independent agent, 2026-11-06): B41 attribution confirmed against
+      FROZEN_B39; B41's objective reproduced at its frozen point (S 0.8112543 vs 0.8112543); no other
+      fitted_unidentified coordinate moves B41's rows (all trunk non-measured coordinates probed);
+      optimum robust to the held-fixed exits and declared barriers; no B41 row withdrawn or corrected;
+      identification only (fit rows, never credit); conditional on the declared barriers
+    case: PR #106
+  - coordinate: k_dgal_ddg.log10_k_ref
+    from: fitted_unidentified
+    to: fitted_identified
+    date: 2026-11-06
+    citation: >-
+      B41 (results/validation/kinetic_core_b41_fit_report.json, the fit that froze the shipped value,
+      parameters_dicarbonyl.SHIPPING_FIT_REPORT): S1 profile on B41's twelve rows (Mittelmaier 2011 fed
+      3-DG / 3,4-DGE / 3-DGal pots; Zhang 2021 within-study ratios), the other four free coordinates
+      re-optimised at every grid value; 95 % [-2.154, -1.164] (Wilks chi2_1, chi2_red 0.11 so no
+      inflation), closed on both sides inside the search bounds, every point converged, no failed pot
+    artifact: results/validation/s1_profiles.json
+    second_reader: >-
+      S1 second reading of PR #106 (independent agent, 2026-11-06): B41 attribution confirmed against
+      FROZEN_B39; B41's objective reproduced at its frozen point (S 0.8112543 vs 0.8112543); no other
+      fitted_unidentified coordinate moves B41's rows (all trunk non-measured coordinates probed);
+      optimum robust to the held-fixed exits and declared barriers; no B41 row withdrawn or corrected;
+      identification only (fit rows, never credit); conditional on the declared barriers
+    case: PR #106
+  - coordinate: k_ddg_hmf.log10_k_ref
+    from: fitted_unidentified
+    to: fitted_identified
+    date: 2026-11-06
+    citation: >-
+      B41 (results/validation/kinetic_core_b41_fit_report.json, the fit that froze the shipped value,
+      parameters_dicarbonyl.SHIPPING_FIT_REPORT): S1 profile on B41's twelve rows (Mittelmaier 2011 fed
+      3-DG / 3,4-DGE / 3-DGal pots; Zhang 2021 within-study ratios), the other four free coordinates
+      re-optimised at every grid value; 95 % [-2.047, -1.070] (Wilks chi2_1, chi2_red 0.11 so no
+      inflation), closed on both sides inside the search bounds, every point converged, no failed pot
+    artifact: results/validation/s1_profiles.json
+    second_reader: >-
+      S1 second reading of PR #106 (independent agent, 2026-11-06): B41 attribution confirmed against
+      FROZEN_B39; B41's objective reproduced at its frozen point (S 0.8112543 vs 0.8112543); no other
+      fitted_unidentified coordinate moves B41's rows (all trunk non-measured coordinates probed);
+      optimum robust to the held-fixed exits and declared barriers; no B41 row withdrawn or corrected;
+      identification only (fit rows, never credit); conditional on the declared barriers
+    case: PR #106

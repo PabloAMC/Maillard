@@ -137,8 +137,18 @@ def _relative_labels() -> str:
     return "; ".join(f"{s} {m:+.2f} nats/row ({label})" for s, m, label in ruling().relative_branch)
 
 
-def refusal_text() -> str:
-    """The named refusal of an absolute level: what decided it, and what would lift it."""
+def refusal_text(calibration: Any = None, compound: Optional[str] = None) -> str:
+    """The named refusal of an absolute level: what decided it, and what would lift it. With a ``calibration`` that
+    was passed but does not rescue ``compound``, the text ends with why (:func:`calibration_problem`)."""
+    text = _refusal_text()
+    if calibration is not None and compound is not None:
+        problem = calibration_problem(calibration, compound)
+        if problem:
+            text += f" THE CALIBRATION GIVEN DOES NOT RESCUE {compound}: {problem}."
+    return text
+
+
+def _refusal_text() -> str:
     r = ruling()
     return (
         f"{ABSOLUTE_REFUSED_TAG}: the thiol lane ships relative within-laboratory predictions only. H0 scored the lane "
@@ -150,9 +160,9 @@ def refusal_text() -> str:
         "absolute levels is the conservative transfer. The concentration is computed and refused; between-condition "
         "ratios, ranks and time-course shapes from `compare` are answered, with the within-laboratory shape error "
         f"omega = {r.omega_dex:.2f} dex per arm (borrowed from R3En's scoring) in their interval. WHAT WOULD LIFT "
-        "IT: absolute measurements of these compounds from a second independent laboratory (for example the "
-        "pending WUR blind-test samples), re-scored under H0's rule (H0', "
-        "results/validation/kinetic_core_between_lab_tau_h0_prereg.md). A calibration made by `calibrate` from "
+        "IT: absolute measurements of these compounds from at least two new independent laboratories (H0's "
+        "pre-registered trigger; the pending WUR blind-test samples would be one), re-scored under H0's rule (H0', "
+        "results/validation/kinetic_core_between_lab_tau_h0_prereg.md sec. 9). A calibration made by `calibrate` from "
         "your own measured levels of the compound is answered: its level is then your laboratory's."
     )
 
@@ -162,8 +172,8 @@ def short_reason() -> str:
     r = ruling()
     return (
         f"{ABSOLUTE_REFUSED_TAG}: the thiol lane ships relative predictions only (D2 branch (i): tau_ABS "
-        f"{r.tau_abs_dex:.3f} dex, {r.upper_bound_text}; absolute thiol evidence from one laboratory). Lifted by a "
-        "second independent laboratory's absolute measurements re-scored under H0's rule."
+        f"{r.tau_abs_dex:.3f} dex, {r.upper_bound_text}; absolute thiol evidence from one laboratory). Lifted by "
+        "absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0')."
     )
 
 
@@ -216,19 +226,35 @@ def declared(declaration: Any, compound: str) -> bool:
     return str(compound) in tuple(names or ())
 
 
-def calibration_rescues(calibration: Any, compound: str) -> bool:
-    """A calibration rescues a compound's level only when ``calibrate`` made it from data: a response factor
-    with at least one row and a positive sigma, fit records named, and calibrate's provenance. A hand-written or
-    empty file does not (review M2, 2026-11-05)."""
+def calibration_problem(calibration: Any, compound: str) -> Optional[str]:
+    """Why ``calibration`` does NOT rescue ``compound``'s level, or ``None`` when it does.
+
+    A calibration rescues a level only when ``calibrate`` made it from data: a response factor for the compound with
+    at least one row and a positive sigma, fit records named, calibrate's provenance, and a content checksum over
+    the fitted payload that matches it (``Calibration.checksum_problem``). A hand-written or empty file does not
+    (review M2, 2026-11-05), nor does one that copies a genuine file's provenance onto other numbers, nor an edited
+    one, nor one written before the checksum existed (H0 follow-up, 2026-11-05: it cannot be verified)."""
     if calibration is None:
-        return False
+        return "no calibration was given"
     rf = (getattr(calibration, "response_factors", None) or {}).get(str(compound))
-    if rf is None or int(getattr(rf, "n_rows", 0)) < 1 or not float(getattr(rf, "sigma", 0.0)) > 0.0:
-        return False
+    if rf is None:
+        return f"the calibration has no response factor for {compound}"
+    if int(getattr(rf, "n_rows", 0)) < 1 or not float(getattr(rf, "sigma", 0.0)) > 0.0:
+        return f"the calibration's response factor for {compound} rests on no rows or has no positive sigma"
     if not tuple(getattr(calibration, "fit_records", ()) or ()):
-        return False
+        return "the calibration names no fit records"
     provenance = getattr(calibration, "provenance", None) or {}
-    return str(provenance.get("generated_by", "")) == CALIBRATE_GENERATOR
+    if str(provenance.get("generated_by", "")) != CALIBRATE_GENERATOR:
+        return f"the calibration was not made by `calibrate` (provenance.generated_by is not {CALIBRATE_GENERATOR})"
+    check = getattr(calibration, "checksum_problem", None)
+    if not callable(check):
+        return "the calibration cannot be verified (it is not a Calibration object)"
+    return check()
+
+
+def calibration_rescues(calibration: Any, compound: str) -> bool:
+    """Whether ``calibration`` rescues ``compound``'s absolute level (:func:`calibration_problem` is ``None``)."""
+    return calibration_problem(calibration, compound) is None
 
 
 def refused_for(declaration: Any, compound: str, calibration: Any = None) -> bool:
@@ -238,7 +264,7 @@ def refused_for(declaration: Any, compound: str, calibration: Any = None) -> boo
 
 __all__ = [
     "ABSOLUTE_REFUSED_TAG", "CALIBRATE_GENERATOR", "H0_RECORD", "H0Ruling", "NOISE_RECORD", "RELATIVE_ONLY_SPECIES",
-    "Z90", "calibrated_extra_decades", "calibration_rescues", "declared", "in_scope", "ratio_half_width_dex",
+    "Z90", "calibrated_extra_decades", "calibration_problem", "calibration_rescues", "declared", "in_scope", "ratio_half_width_dex",
     "ratio_interval", "ratio_interval_factor", "refusal_text", "refused_for", "relative_caveat", "ruling",
     "short_reason",
 ]

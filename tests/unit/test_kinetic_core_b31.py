@@ -201,7 +201,12 @@ def test_every_other_row_declares_nothing_and_says_so_with_nulls():
         if c.get("carried_declared_ug_per_l") is not None
     ]
     # B35: four, not three -- (E,E)-2,4-decadienal joined them and is answered at 1.62x.
-    assert len(declared) == 4 and {b for b, _ in declared} == {"pea_isolate_uht_140C_Trikusuma2019"}
+    # RE-PINNED 2026-11-06 (M0 data corrections, batch 1; CF-128): 4 -> 8. Leitzen 2021's Table 6 unheated levels are
+    # declared on its glucose pot (glyoxal, methylglyoxal, glucosone, HMF); Bi 2020's carried hexanal row is refused.
+    assert len(declared) == 8 and {b for b, _ in declared} == {
+        "pea_isolate_uht_140C_Trikusuma2019", "mp_holdout_glucose_only_autoclave_121C_Steinhagen2021"}
+    assert sorted(c for b, c in declared if b.endswith("Steinhagen2021")) == [
+        "5-Hydroxymethylfurfural (HMF)", "glucosone", "glyoxal", "methylglyoxal"]
     for b in scores["benchmarks"]:
         for c in b["compounds"]:
             if c["carried_declared_ug_per_l"] is None:

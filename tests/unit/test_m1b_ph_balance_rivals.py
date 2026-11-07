@@ -1,0 +1,443 @@
+"""Plan step M1b part (i)'s build (src/kinetic_core/ph_balance_rivals.py, scripts/generators/fit_m1b_ph_balance.py;
+prereg results/validation/kinetic_core_m1b_ph_balance_pentose_steps_prereg.md v3.6): every rival off by default and
+never entered then, each rival's direction on a toy pot, the B0 corners, the ARP forcing, B3's branch rule, the pH
+scale guard, the measurement model's pieces and the refusals."""
+from __future__ import annotations
+
+import dataclasses
+import math
+import sys
+from pathlib import Path
+
+import numpy as np
+import pytest
+
+ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT / "scripts" / "generators"))
+
+from src.kinetic_core import config, engine, observations, ph_state, sulfur  # noqa: E402
+from src.kinetic_core import ph_balance_rivals as pbr  # noqa: E402
+from src.kinetic_core import predictive_densities as pdens  # noqa: E402
+from src.kinetic_core.ph_state import BufferSpec  # noqa: E402
+
+NEW_KEYS = ("ph.amine_survival", "ph.acid_lag", "ph.acid_supply", "ph.arp_forcing")
+WATER = BufferSpec(kind="none", declared=True, source="test water")
+TIMES = np.array([0.0, 20.0, 40.0])
+BREAKPOINTS = (5.0, 6.0, 6.5)
+
+
+@pytest.fixture(scope="module")
+def shipped():
+    return engine.core_parameters(engine.SULFUR), engine.core_ph_drift()
+
+
+def _run(changes, shipped, initial=None, drift=None, times=TIMES, label=7.0):
+    params, d0 = shipped
+    cfg = config.Config.shipped().replace({"ph.coupling": "inline", **changes})
+    with config.applied(cfg):
+        run = sulfur.integrate_sulfur(params, 393.15, initial or {"ARP": 5.0, "OX": 1.0}, times, ph=label,
+                                      buffer_spec=WATER, ph_drift=drift or d0, rtol=1e-8, atol=1e-14)
+    sid = run.metadata["strong_ion_difference_mmol_L"]
+    pools = (run.metadata.get("ph_balance_rivals") or {}).get("pools") or {}
+    out = []
+    for i in range(len(times)):
+        st = {k: float(run.series(k)[i]) for k in sulfur.SULFUR_STATE_KEYS}
+        st.update(pbr.balance_pools({k: v[i] for k, v in pools.items()}))
+        out.append(observations.ph_cooled(st, sid, drift or d0, WATER))
+    return run, np.array(out)
+
+
+# --- the shipped default ------------------------------------------------------------------------------------------
+
+def test_the_new_keys_ship_off_and_match_the_module():
+    shipped = config.Config.shipped()
+    for name in NEW_KEYS:
+        value = shipped[name]
+        assert value.enabled is False
+        assert value == getattr(pbr, config.KEY_BY_NAME[name].bindings[0][1])
+    with config.applied(shipped):
+        assert not pbr.any_active()
+
+
+def test_the_default_never_enters_the_rival_path(shipped, monkeypatch):
+    """Bit-identity by construction: with every key off, integrate_sulfur runs the shipped inline code; the rival
+    integrator is not called (it would raise here)."""
+    def boom(*a, **k):
+        raise AssertionError("the rival path was entered with every switch off")
+
+    monkeypatch.setattr(pbr, "integrate_inline", boom)
+    run, ph = _run({}, shipped)
+    assert "ph_balance_rivals" not in run.metadata
+    assert np.all(np.isfinite(ph))
+
+
+def test_the_inventory_without_a_rival_pool_is_unchanged():
+    drift = engine.core_ph_drift()
+    state = {"ARP": 3.0, "CBX": 2.0, "ACID": 1.0, "Cys": 1.0}
+    base = ph_state.titratable_inventory(state, drift, WATER)
+    with_zero = ph_state.titratable_inventory({**state, "NH4": 0.0, "RET_AA": 0.0}, drift, WATER)
+    assert base == with_zero
+    more = ph_state.titratable_inventory({**state, "NH4": 1.0}, drift, WATER)
+    assert more[-1][0] is ph_state.AMMONIUM or any(g is ph_state.AMMONIUM for g, _ in more)
+
+
+# --- each rival's direction on a toy pot (an unbuffered 5 mM ARP pot, 120 C) ----------------------------------------
+
+def test_b1_amine_survival_raises_the_ph(shipped):
+    _, b0 = _run({}, shipped)
+    _, b1 = _run({"ph.amine_survival": pbr.AmineSurvival(True, 0.0, 1.0)}, shipped)
+    assert b1[-1] > b0[-1] + 0.5
+
+
+def test_b1_at_phi_zero_reproduces_b0(shipped):
+    _, b0 = _run({}, shipped)
+    _, b1 = _run({"ph.amine_survival": pbr.AmineSurvival(True, 0.0, 0.0)}, shipped)
+    assert np.max(np.abs(b1 - b0)) <= 1e-6
+
+
+def test_b2_returned_amino_acid_and_lag_make_less_acid(shipped):
+    _, b0 = _run({}, shipped)
+    run, ret = _run({"ph.acid_lag": pbr.AcidLag(True, 1.0, 10.0, 100.0)}, shipped)
+    assert ret[-1] > b0[-1] + 0.3
+    assert run.metadata["ph_balance_rivals"]["pools"]["RET_AA"][-1] > 0.0
+    _, slow = _run({"ph.acid_lag": pbr.AcidLag(True, 0.0, 0.01, 100.0)}, shipped)
+    assert slow[1] > b0[1]          # the acid arrives late
+    _, fast = _run({"ph.acid_lag": pbr.AcidLag(True, 0.0, 1e6, 100.0)}, shipped)
+    assert np.max(np.abs(fast - b0)) <= 1e-6
+
+
+def test_b3_acid_supply_makes_more_acid_and_holds_dpo_total(shipped):
+    d0 = shipped[1]
+    no_lump = ph_state.PhDrift(acid_yield=0.0, arp_amine_pka=d0.arp_amine_pka)
+    off = pbr.AcidSupply(True, 0.0, 0.0, 0.0, BREAKPOINTS, 0.1)
+    on = pbr.AcidSupply(True, 0.8, 0.9, 1.0, BREAKPOINTS, 0.1)
+    _, y0 = _run({"ph.acid_supply": off}, shipped, drift=no_lump)
+    run, y8 = _run({"ph.acid_supply": on}, shipped, drift=no_lump)
+    assert y8[-1] < y0[-1] - 0.1
+    diag = run.metadata["ph_balance_rivals"]["diagnostics"]
+    assert diag["dpo_total_rel_dev_max"] <= 1e-9
+    assert run.metadata["ph_balance_rivals"]["pools"]["LAA"][-1] >= 0.0
+    added = dataclasses.replace(on, branch_form="added_sink", ph_in_situ_breakpoints=(3.0, 4.0, 4.5))
+    run_a, ya = _run({"ph.acid_supply": added}, shipped, drift=no_lump)
+    assert run_a.metadata["ph_balance_rivals"]["diagnostics"]["added_sink_cap_reached"]   # y = 1 above pH 4.5
+    assert np.all(np.isfinite(ya))
+
+
+def test_b3_share_is_linear_in_the_in_situ_ph_and_flat_outside():
+    s = pbr.AcidSupply(True, 0.2, 0.6, 0.9, (5.0, 6.0, 6.5), 0.1)
+    assert s.share(4.0) == pytest.approx(0.2)
+    assert s.share(5.5) == pytest.approx(0.4)
+    assert s.share(6.25) == pytest.approx(0.75)
+    assert s.share(8.0) == pytest.approx(0.9)
+
+
+def test_the_forcing_follows_the_measured_arp(shipped):
+    times = (0.0, 20.0, 40.0)
+    arp = (5.0, 3.2, 2.18)
+    run, _ = _run({"ph.arp_forcing": pbr.ArpForcing(True, times, arp)}, shipped)
+    assert np.allclose(run.series("ARP"), arp, rtol=1e-6)
+    diag = run.metadata["ph_balance_rivals"]["diagnostics"]
+    assert diag["forced_loss_never_negative"] and diag["forced_unresolvable_calls"] == 0
+
+
+# --- refusals --------------------------------------------------------------------------------------------------------
+
+def test_a_rival_runs_only_inline(shipped):
+    params, d0 = shipped
+    cfg = config.Config.shipped().replace({"ph.amine_survival": pbr.AmineSurvival(True, 0.5, 0.5)})
+    with config.applied(cfg), pytest.raises(ValueError, match="inline"):
+        sulfur.integrate_sulfur(params, 393.15, {"ARP": 5.0}, TIMES, ph=7.0, buffer_spec=WATER, ph_drift=d0)
+
+
+def test_undeclared_combinations_and_bad_values_are_refused(shipped):
+    with pytest.raises(ValueError, match="B12"):
+        _run({"ph.acid_lag": pbr.AcidLag(True, 0.5), "ph.amine_survival": pbr.AmineSurvival(True, 0.5, 0.5)}, shipped)
+    with pytest.raises(ValueError, match="order"):
+        pbr.AcidSupply(True, 0.7, 0.6, 0.9, BREAKPOINTS)
+    with pytest.raises(ValueError, match="breakpoints"):
+        pbr.AcidSupply(True, 0.1, 0.6, 0.9, ())
+    with pytest.raises(ValueError, match="monotone"):
+        pbr.ArpForcing(True, (0.0, 20.0), (5.0, 5.5))
+    with pytest.raises(ValueError, match="fraction"):
+        pbr.AmineSurvival(True, 1.5, 0.0)
+    with pytest.raises(ValueError):
+        config.Config.shipped().replace({"ph.acid_lag": pbr.AcidLag(True, 0.5, 1e7)})   # outside its field band
+
+
+def test_a_mixed_ph_scale_comparison_is_refused():
+    with pytest.raises(pdens.MeasurementModelRefusal):
+        pdens.ph_difference(pdens.PhReading(4.0, "in_situ", 120.0), pdens.PhReading(4.0, "cooled", 25.0))
+    assert pdens.ph_difference(pdens.PhReading(4.2, "cooled"), pdens.PhReading(4.0, "cooled")) == pytest.approx(0.2)
+
+
+# --- the generator: measurement model, rule, refusals -----------------------------------------------------------------
+
+@pytest.fixture(scope="module")
+def G():
+    from tests.support import wave_generator
+    with wave_generator("fit_m1b_ph_balance") as module:
+        yield module
+    for name in ("fit_m1b_ph_balance", "fit_m1_supply_combinations", "m1_preflight_checks"):
+        sys.modules.pop(name, None)
+
+
+def test_the_censored_likelihood_is_the_normal_interval(G):
+    data = G.UnitData("C-Mey-Cys", within=(True, False), censored=True)
+    f = np.array([[0.0, 0.5]])
+    dl = np.array([[0.1, 0.1]])
+    s = math.sqrt(2 * 0.05 ** 2 + 0.1 ** 2)
+    from scipy.stats import norm
+    p0 = norm.cdf(0.2 / s) - norm.cdf(-0.2 / s)
+    p1 = 1.0 - (norm.cdf((0.2 - 0.5) / s) - norm.cdf((-0.2 - 0.5) / s))
+    assert G.unit_loglik(data, f, dl)[0] == pytest.approx(math.log(p0) + math.log(p1))
+
+
+def test_the_rule_credits_a_clearly_better_rival_and_refuses_the_reverse(G):
+    rng = np.random.default_rng(1)
+    data = {"C-Mey-Cys": G.UnitData("C-Mey-Cys", within=(True,) * 5, censored=True),
+            "C-Mey-Gly": G.UnitData("C-Mey-Gly", within=(True,) * 5, censored=True),
+            "C-Hou": G.UnitData("C-Hou", (5.0, 4.5), (0.05, 0.05)),
+            "C-Hou-unforced": G.UnitData("C-Hou-unforced", (5.0, 4.5), (0.05, 0.05)),
+            "C-Zhou-ARP": G.UnitData("C-Zhou-ARP", (4.0,), (0.05,)), "C-Zhou-Cys": G.UnitData("C-Zhou-Cys", (3.3,),
+                                                                                              (0.05,))}
+
+    def ens(name, mey, hou, zhou):
+        S = 300
+        j = rng.normal(size=(S, 1)) * 0.01
+        f = {"C-Mey-Cys": np.full((S, 5), mey) + j, "C-Mey-Gly": np.zeros((S, 5)) + j,
+             "C-Hou": np.tile(hou, (S, 1)) + j, "C-Hou-unforced": np.tile(hou, (S, 1)) + j,
+             "C-Zhou-ARP": np.full((S, 1), zhou) + j, "C-Zhou-Cys": np.full((S, 1), 3.3) + j}
+        d = {u: {k: np.full_like(a, 0.05) for k in G.OMEGAS} for u, a in f.items()}
+        return G.Ensemble(name, "primary", [{}] * S, f, d)
+
+    good = ens("B1", 0.0, np.array([5.0, 4.5]), 4.0)
+    bad = ens("B0", -0.7, np.array([6.3, 5.5]), 4.0)
+    e = {"B1": good, "B0": bad}
+    res = G.rule_over_forms("B1", "B0", e, data, rng, require_resolved=False)
+    assert res["favoured"], res["breaking_forms"]
+    rev = G.rule_over_forms("B1", "B0", {"B1": bad, "B0": good}, data, rng, require_resolved=False)
+    assert not rev["favoured"]
+
+
+def test_draws_respect_the_bands_and_b3_order(G):
+    draws = G.draw_coordinates("B3", "primary", 50, 3)
+    assert len(draws) == 50
+    for d in draws:
+        assert d["y5"] <= d["y6"] <= d["y_hi"]
+        assert 0.20 * 10 ** -0.3 - 1e-12 <= d["y5"] <= 0.56
+        assert 0.025 <= d["k_iso"] <= 0.24
+        assert 7.07 <= d["arp_amine_pka"] <= 8.18
+    unwidened = G.draw_coordinates("B3", "delta_t_0", 20, 3)
+    assert min(d["y_hi"] for d in unwidened) >= 0.80
+    sohn = G.draw_coordinates("B1", "sohn_phi_cys", 20, 3)
+    assert min(d["phi_cys"] for d in sohn) >= 0.76
+    logy = G.draw_coordinates("B0", "yield_loguniform", 64, 3)
+    assert min(d["acid_yield"] for d in logy) < 1e-2 and max(d["acid_yield"] for d in logy) <= 1.0
+
+
+def test_score_and_fit_refuse_without_a_freeze_and_records(G, monkeypatch):
+    monkeypatch.setattr(G, "read_record", lambda name: {})
+
+    def no_freeze(commit):
+        raise SystemExit("--freeze-commit is required")
+
+    problems = G.score_refusals("", freeze_check=no_freeze)
+    assert any("freeze" in p for p in problems) and any("screen" in p for p in problems)
+    assert any("power" in p for p in problems)
+    fp = G.fit_refusals("B0", "", freeze_check=no_freeze)
+    assert any("incumbent" in p for p in fp) and any("score" in p for p in fp)
+
+
+def test_score_runs_once(G, monkeypatch):
+    rec = {"checks": {"passed": True}, "screen": {"complete": True}, "power": {"complete": True},
+           "score": {"verdicts": {}}}
+    monkeypatch.setattr(G, "read_record", lambda name: rec.get(name, {}))
+    problems = G.score_refusals("abc", freeze_check=lambda c: c)
+    assert problems == ["the score has run (run once): its record stands"]
+
+
+def test_power_and_screen_refuse_a_screen_with_failed_pots(G, monkeypatch):
+    monkeypatch.setattr(G, "read_record", lambda name: {"complete": True, "refused_for_failed_pot_runs": True,
+                                                        "failed_pot_runs": 3} if name == "screen" else {})
+    with pytest.raises(SystemExit, match="failed pot runs"):
+        G.run_power()
+
+
+def _toy_a1_ensemble(G, hou20, fall, mey, rise):
+    hou = np.array([[hou20, 4.7, 4.3 + fall - 0.75, 4.0, 3.7, 4.3 - 0.75]])
+    hou[:, 5] = hou[:, 2] - fall
+    f = {"C-Hou": hou, "C-Hou-unforced": hou.copy(), "C-Mey-Cys": np.full((1, 5), mey),
+         "C-Zhou-ARP": np.array([[3.0, 3.5, 3.0 + rise]])}
+    return G.Ensemble("toy", "primary", [{}], f, {})
+
+
+def test_a1_signatures_follow_the_amended_noise_term(G):
+    data = G.A1Data(tuple(G.HOU["ph_cooled"]), (True,) * 5, (3.98, 4.11, 4.95))
+    good = _toy_a1_ensemble(G, 5.05, 0.75, 0.0, 1.0)
+    out = G.a1_falsified(good, data, pinned_rise=3.9)
+    assert not out["falsified"] and all(v["n_passing"] == 1 for v in out["per_form"].values())
+    # a Meynier drift of -0.5 against the 0.2 edge (sd sqrt(2) r) kills under every form: falsified
+    bad_mey = _toy_a1_ensemble(G, 5.05, 0.75, -0.5, 1.0)
+    assert G.a1_falsified(bad_mey, data, 3.9)["falsified"]
+    # a Hou 20-min miss of 1.3 pH kills under the primary noise but not under s x 2 (tolerance 1.57): not falsified
+    miss = _toy_a1_ensemble(G, 6.35, 0.75, 0.0, 1.0)
+    res = G.a1_falsified(miss, data, 3.9)
+    assert res["per_form"]["primary"]["killed"] and not res["per_form"]["offset_shape_s_x2"]["killed"]
+    assert not res["falsified"]
+    # sigma-Zhou is a sign toward the data: a rise above B0-pinned's when the data are below it fails
+    assert G.a1_falsified(_toy_a1_ensemble(G, 5.05, 0.75, 0.0, 4.5), data, 3.9)["falsified"]
+
+
+def test_a1_refuses_without_the_confirmation_and_runs_once(G, monkeypatch, tmp_path):
+    prereg = tmp_path / "prereg.md"
+    prereg.write_text("no confirmation here", encoding="utf-8")
+    monkeypatch.setattr(G, "PREREG", prereg)
+    monkeypatch.setattr(G, "read_record", lambda name: {"complete": True} if name in ("screen", "falsification") else {})
+    problems = G.falsification_refusals()
+    assert any("confirmation" in p for p in problems) and any("one re-run" in p for p in problems)
+
+
+def test_the_confirmation_fit_refuses_a_non_kill_and_a_second_run(G, monkeypatch, tmp_path):
+    rec = {"complete": True, "verdict": {"B1": {"falsified_on_measured": False},
+                                         "B3": {"falsified_on_measured": True}}}
+    monkeypatch.setattr(G, "read_record", lambda name: rec if name == "falsification" else {})
+    monkeypatch.setattr(G, "confirm_path", lambda rival: tmp_path / f"confirm_{rival}.json")
+    assert any("not a would-be kill" in p for p in G.confirm_refusals("B1"))
+    assert G.confirm_refusals("B3") == []
+    (tmp_path / "confirm_B3.json").write_text('{"status": 1}')
+    assert any("has run" in p for p in G.confirm_refusals("B3"))
+    (tmp_path / "confirm_B3.json").write_text('{"status": 0}')          # M1's one continuation of a status-0 start
+    assert G.confirm_refusals("B3") == []
+    (tmp_path / "confirm_B3.json").write_text('{"status": 0, "earlier_segments": [{"status": 0}]}')
+    assert any("has run" in p for p in G.confirm_refusals("B3"))
+
+
+def test_the_confirmation_objective_frees_the_rival_coordinates_and_keeps_b3_order(G):
+    import json
+    m1 = json.loads(G.M1_CHECKS.read_text(encoding="utf-8"))
+    obj = G.ConfirmObjective("B3", G.M1.numerics_for_fits(m1), G.M1.fit_side_from_checks(m1), BREAKPOINTS)
+    assert obj.keys[-4:] == ("y5", "y6", "y_hi", "k_iso") and G.YIELD_KEY not in obj.keys
+    th = obj.start0()
+    th[-4:] = [0.5, 0.3, 0.2, -1.0]                       # out of order: clamped up
+    _, values = obj.split(th)
+    assert values["y5"] <= values["y6"] <= values["y_hi"] and values["k_iso"] == pytest.approx(0.1)
+    assert obj.rival_values(th)["acid_yield"] == 0.0      # B3 carries no lumped acid
+    b0 = G.ConfirmObjective("B0", G.M1.numerics_for_fits(m1), G.M1.fit_side_from_checks(m1), BREAKPOINTS)
+    assert b0.keys[-1] == G.YIELD_KEY and len(b0.keys) == 18
+
+
+def test_the_loader_reads_the_gzipped_draws_file(G, tmp_path):
+    import gzip
+    import json
+
+    ens = G.Ensemble("B0", "primary", [{"acid_yield": 0.1, "arp_amine_pka": 7.5}],
+                     {"C-Hou": np.array([[5.0, 4.5]])}, {"C-Hou": {"primary": np.array([[0.3, 0.2]])}},
+                     {"hou_arp_forced": np.array([[3.2, 2.2]])}, 0, [{"pot": "mey_cys_pH5.5", "to": "BDF"}])
+    path = tmp_path / "draws.json.gz"
+    with gzip.open(path, "wt", encoding="utf-8") as fh:
+        fh.write(json.dumps({"B0": G.ensemble_to_json(ens)}))
+    got = G.load_screen_ensembles(path)["B0"]
+    assert got.draws == ens.draws and got.fallbacks == ens.fallbacks
+    assert np.array_equal(got.f["C-Hou"], ens.f["C-Hou"])
+    assert np.array_equal(got.delta["C-Hou"]["primary"], ens.delta["C-Hou"]["primary"])
+    assert G.DRAWS_FILE.name.endswith(".json.gz")
+
+
+def test_an_lsoda_failure_is_retried_once_with_bdf_and_recorded(G, monkeypatch):
+    G._init_pots()
+    real = G.sulfur.integrate_sulfur
+
+    def lsoda_stalls(*a, **k):
+        if k.get("method", "LSODA") == "LSODA":
+            raise RuntimeError("stalled")
+        return real(*a, **k)
+
+    monkeypatch.setattr(G.sulfur, "integrate_sulfur", lsoda_stalls)
+    failures = []
+    pot = G.POTS_BY_NAME["zhou_arp_pH7"]
+    out = G.run_jobs(G.build_tasks("B0_pinned", "primary", [{}], BREAKPOINTS, [pot]), failures)
+    assert not failures and out[0]["solver_fallback"]["to"] == "BDF"
+    ens = G.assemble("B0_pinned", "primary", [{}], out)
+    assert ens.failed == 0 and len(ens.fallbacks) == 1
+
+
+def test_a_failed_pot_is_counted_not_raised(G, monkeypatch):
+    G._init_pots()
+
+    def broken(*a, **k):
+        raise RuntimeError("stiff corner")
+
+    monkeypatch.setattr(G.sulfur, "integrate_sulfur", broken)
+    failures = []
+    jobs = G.build_tasks("B0_pinned", "primary", [{}], BREAKPOINTS, G.pots_for("primary")[:2])
+    out = G.run_jobs(jobs, failures)
+    assert len(failures) == 2 and all("failed" in r for r in out)
+    ens = G.assemble("B0_pinned", "primary", [{}], out)
+    assert ens.failed == 2
+
+
+# --- A2 (prereg sec. 21.2): the ledger contradiction's opt-in fix --------------------------------------------------
+
+def test_retained_steps_ship_empty_and_refuse_a_non_cysteine_step():
+    assert config.Config.shipped()["ph.amine_survival"].retained_steps == ()
+    with pytest.raises(ValueError):
+        pbr.AmineSurvival(True, 0.0, 0.0, ("r_arp_dpo",))
+
+
+def test_retained_steps_keep_the_amine_of_the_named_steps_only():
+    keep = ("r_cys_thermal", "ch_cys_ox")
+    cfg = config.Config.shipped().replace({"ph.amine_survival": pbr.AmineSurvival(True, 0.0, 0.0, keep)})
+    with config.applied(cfg):
+        s, sets = pbr.augmented_stoichiometry()
+    row = s[sets["tracker_index"]["NH4_CYS"]]
+    for k, j in zip(sulfur.FULL_REACTION_KEYS, range(len(sulfur.FULL_REACTION_KEYS))):
+        assert row[j] == (1.0 if k in keep else 0.0), k
+    # the shipped ledger still declares both amines destroyed (the default is not flipped here)
+    assert sulfur.CENTRE_LEDGER["r_cys_thermal"]["amine"] == -1
+    assert sulfur.CENTRE_LEDGER["ch_cys_ox"]["amine"] == -1
+
+
+def test_retaining_r_cys_thermal_amine_removes_its_acid(shipped):
+    """Cysteine alone: with the amine kept (the step's own chemistry) the pot ends less acid than the shipped
+    encoding, which carries the carboxyl and destroys the amine."""
+    init = {"Cys": 20.0, "OX": 1.0}
+    _, b0 = _run({"ph.amine_survival": pbr.AmineSurvival(True, 0.0, 0.0)}, shipped, initial=init)
+    _, kept = _run({"ph.amine_survival": pbr.AmineSurvival(True, 0.0, 0.0, ("r_cys_thermal", "ch_cys_ox"))},
+                   shipped, initial=init)
+    assert kept[0] == pytest.approx(b0[0], abs=1e-9)
+    assert kept[-1] > b0[-1] + 0.05
+
+
+# --- A2's generator pieces (prereg sec. 21) -----------------------------------------------------------------------
+
+def test_a2_sigma_max_matches_its_closed_form():
+    import fit_m1b_ph_balance as G
+
+    r = G.a2_sigma_max(0.2, sets=50_000)
+    assert r["agrees_with_closed_form"] and abs(r["sigma_max"] - 0.135) <= 0.002
+
+
+def test_a2_h2s_multiplier_scales_and_restores():
+    import fit_m1b_ph_balance as G
+
+    k = sulfur.cysteine_thermolysis_k(6.0, 413.15)
+    with G.h2s_multiplier(-1.0):
+        assert sulfur.cysteine_thermolysis_k(6.0, 413.15) == pytest.approx(0.1 * k, rel=1e-12)
+    assert sulfur.cysteine_thermolysis_k is G._ORIGINAL_CYS_THERMOLYSIS_K
+
+
+def test_a2_meynier_deviance_is_smallest_inside_the_edge():
+    import fit_m1b_ph_balance as G
+
+    r = G.mey_deviance([0.0, -0.2, -0.5, -1.0], 0.135)
+    assert np.all(np.diff(r) > 0)
+
+
+def test_a2_s3_clip_changes_nothing_or_refuses():
+    import fit_m1b_ph_balance as G
+
+    keys, lo, hi = ("a", "b"), [0.0, -1.0], [1.0, 1.0]
+    out = G.clip_changes_nothing(keys, [0.0, 1.0], lo, hi, "t")     # on the bounds: unchanged
+    assert out.tolist() == [0.0, 1.0]
+    with pytest.raises(AssertionError, match="'b'"):
+        G.clip_changes_nothing(keys, [0.5, 1.0 + 1e-12], lo, hi, "t")

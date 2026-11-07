@@ -2,18 +2,18 @@
   "artifact": "contrast_scores",
   "provenance": {
     "artifact": "contrast_scores",
-    "generated_on": "2026-11-05",
+    "generated_on": "2026-11-06",
     "git": {
-      "commit": "a4b2504b575e24a4e5b6793c78bc8f530ed586e1",
-      "short": "a4b2504b",
-      "branch": "h0-relative-only-thiols",
+      "commit": "06830fd78b48e16bd49dfec4a69c1e75028ddb36",
+      "short": "06830fd7",
+      "branch": "register-pass-2026-11-06",
       "dirty": true
     },
     "generated_by": "scripts/generators/build_contrast_scores.py",
     "inputs": [
       {
         "path": "results/validation/core_panel_scores.json",
-        "sha256": "d444f932242d9853847d98d1eb9f2954e605044f11a3628a727566619690ed4b"
+        "sha256": "5ce9814c694e0af2bd79386edc283ac85bff34f1a7a45ae788c434f88a951e8c"
       }
     ]
   },
@@ -82,6 +82,7 @@
       }
     }
   },
+  "mixed_pairs_skipped": 0,
   "pairs": [
     {
       "study": "Schibilsky, S. Bildung fluechtiger Verbi",

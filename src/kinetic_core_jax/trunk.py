@@ -8,7 +8,8 @@ WHICH TRUNK (contract v1 sec. 1 found three, all built on this one):
   (``acrylamide.FULL_ACRYLAMIDE_REACTIONS = REACTIONS + ACRYLAMIDE_REACTIONS``). THIS module.
 * ``network.TRUNK_REACTIONS`` (55): the trunk LANE, ``REACTIONS`` plus seven blocks -- dicarbonyl (5), pyrazine (5),
   glycation (5), aqueous glyoxal (1), methionine (6), proline (4) and the fed 3-deoxy triangle (3). Those blocks are
-  later modules that ``require`` this one; they are not ported here.
+  the modules of ``trunk_lane.py`` (``trunk_lane`` and ``fed_3deoxy``), which ``require`` this one;
+  ``trunk_lane.compose_lane`` composes the lane.
 * sulfur's ``REACTIONS + FED_3DEOXY_REACTIONS + SULFUR_REACTIONS`` (132): this core, the fed 3-deoxy block and the
   sulfur steps; its copy of the trunk keeps the sulfur lane's own pH machinery. Ported with the sulfur module.
 
@@ -24,10 +25,10 @@ TWO ENGINE CONTEXTS, chosen by ``build(..., lane=)``:
   steps of this module: the a_w multiplier on ``k_schiff`` (Pereyra Gonzales 2010, scaled by ``aw_scale``), the
   pH factor 10^(e (pH - 6.8)) on the three Amadori-decay steps, and -- while ``trunk.three_deoxy_exit_ph_term`` is on
   -- each ``trunk.three_deoxy_exit_ph`` exit term (k_tdg_fa shipped). They scale k_ref at the pot's DECLARED pH and
-  a_w (no dynamic pH): pH mode "prescribed", with the declared pH constant over the programme. Accepted at the rate
-  level only: the trunk LANE's trajectories also run the seven blocks above, which this module does not carry. The
-  pyrazine / methionine / proline pH terms and the atmosphere factor act on steps outside this module; a non-air
-  atmosphere is refused at the pot (the engine raises there too).
+  a_w (no dynamic pH): pH mode "prescribed", with the declared pH constant over the programme. Accepted on the
+  trunk lane's trajectories with the seven blocks composed (results/validation/jax_trunk_lane_module.md). The
+  pyrazine / methionine / proline pH terms and the atmosphere factor act on steps outside this module (they are
+  ``trunk_lane``'s); a non-air atmosphere is refused at the pot (the engine raises there too).
 
 Free coordinates: ``log10_k:<parameter>`` (log10 of k_ref at T_ref) and ``ea:<parameter>`` (kJ/mol) for each of the
 25 parameters; with ``lane="trunk"`` also ``aw_scale``, ``ph_exponent`` and ``ph_exponent_exit:<parameter>``.
@@ -57,20 +58,30 @@ def _engine():
 class ArrheniusBlock:
     """The static layout of a list of engine ``Reaction``s whose constants are ``parameter.k_at(T)``: per reaction
     the index of its parameter (or -1 for a derived step), per parameter its T_ref. ``k(theta, factors, t_k)`` returns
-    the parameters' constants, ``k_ref x factor x exp(-(Ea / R)(1/T - 1/T_ref))``, in parameter order."""
+    the parameters' constants, ``k_ref x factor x exp(-(Ea / R)(1/T - 1/T_ref))``, in parameter order.
 
-    def __init__(self, reactions, parameters: Mapping[str, Any], t_ref_of, r_kj: float):
+    ``allow_zero`` (the trunk lane's blocks, 2026-11-05): a parameter the engine carries at EXACTLY zero (an unshipped
+    wave's inert steps, B22 / B24; a sink shipped at zero, ``k_da_sink``) has no log10 coordinate, so its coordinate
+    is LINEAR, ``k_ref:<parameter>`` (at 0.0 shipped), beside its ``ea:``. A draw that moves it off zero (ENV-B13's
+    disputed sinks) is then representable, and the derivative at zero is defined."""
+
+    def __init__(self, reactions, parameters: Mapping[str, Any], t_ref_of, r_kj: float, *, allow_zero: bool = False):
         self.reactions = tuple(reactions)
         self.keys: Tuple[str, ...] = tuple(dict.fromkeys(r.parameter_key for r in self.reactions
                                                          if r.parameter_key is not None))
+        zero: List[str] = []
         for key in self.keys:
             p = parameters.get(key)
             if p is None:
                 raise KeyError(f"no engine parameter {key!r}")
             if p.k_ref is None or p.ea_kj_mol is None:
                 raise UnsupportedConfiguration(f"{key}: unpopulated in the engine (it refuses to integrate too)")
-            if not float(p.k_ref) > 0.0:
+            if allow_zero and float(p.k_ref) == 0.0:
+                zero.append(key)
+            elif not float(p.k_ref) > 0.0:
                 raise UnsupportedConfiguration(f"{key}: k_ref {p.k_ref!r} has no log10 coordinate")
+        #: parameters with a LINEAR k_ref coordinate (the engine's value is exactly zero)
+        self.linear: Tuple[str, ...] = tuple(zero)
         self.k_ref = {k: float(parameters[k].k_ref) for k in self.keys}
         self.ea = {k: float(parameters[k].ea_kj_mol) for k in self.keys}
         self.parameters = {k: parameters[k] for k in self.keys}
@@ -83,14 +94,20 @@ class ArrheniusBlock:
     def coordinates(self) -> Dict[str, float]:
         out: Dict[str, float] = {}
         for k in self.keys:
-            out[f"log10_k:{k}"] = math.log10(self.k_ref[k])
+            if k in self.linear:
+                out[f"k_ref:{k}"] = self.k_ref[k]
+            else:
+                out[f"log10_k:{k}"] = math.log10(self.k_ref[k])
             out[f"ea:{k}"] = self.ea[k]
         return out
 
+    def k_ref_vector(self, theta: Mapping[str, Any]):
+        return jnp.stack([jnp.asarray(theta[f"k_ref:{k}"], dtype=jnp.float64) if k in self.linear
+                          else 10.0 ** jnp.asarray(theta[f"log10_k:{k}"], dtype=jnp.float64) for k in self.keys])
+
     def k_params(self, theta: Mapping[str, Any], factor, t_k):
-        log10_k = jnp.stack([jnp.asarray(theta[f"log10_k:{k}"], dtype=jnp.float64) for k in self.keys])
         ea = jnp.stack([jnp.asarray(theta[f"ea:{k}"], dtype=jnp.float64) for k in self.keys])
-        return (10.0 ** log10_k) * factor * jnp.exp(-(ea / self.r_kj) * (1.0 / t_k - self.inv_t_ref))
+        return self.k_ref_vector(theta) * factor * jnp.exp(-(ea / self.r_kj) * (1.0 / t_k - self.inv_t_ref))
 
     def k_reactions(self, k_params):
         """Per reaction, its parameter's constant (0 for a derived step, filled in by the caller)."""
@@ -116,10 +133,15 @@ class ArrheniusBlock:
         for k in self.keys:
             p = self.parameters[k]
             src = f"{p.evidence_class}; {str(p.source_anchor)[:90]}"
-            bounds = (log10_k_bounds or {}).get(k)
-            bands[f"log10_k:{k}"] = tuple(bounds) if bounds is not None else None
-            basis[f"log10_k:{k}"] = f"log10 k_ref of engine parameter {k} ({src})" + (
-                "; band = the fit's search bounds" if bounds is not None else "")
+            if k in self.linear:
+                bands[f"k_ref:{k}"] = None
+                basis[f"k_ref:{k}"] = (f"k_ref of engine parameter {k}, LINEAR because the engine carries it at "
+                                       f"exactly zero ({src})")
+            else:
+                bounds = (log10_k_bounds or {}).get(k)
+                bands[f"log10_k:{k}"] = tuple(bounds) if bounds is not None else None
+                basis[f"log10_k:{k}"] = f"log10 k_ref of engine parameter {k} ({src})" + (
+                    "; band = the fit's search bounds" if bounds is not None else "")
             ci = getattr(p, "ea_ci95_kj_mol", None)
             if ea_band_override and k in ea_band_override:
                 bands[f"ea:{k}"] = tuple(ea_band_override[k])
@@ -207,14 +229,15 @@ def build(cfg=None, *, lane: str = "acrylamide") -> Module:
     bands, basis = block.bands_and_basis()
     notes: List[str] = [f"lane context: {lane}"]
     pot_inputs: Tuple[str, ...] = ()
+    breaks: Dict[str, Tuple[float, ...]] = {}
     n_par = len(block.keys)
     if lane == "trunk":
         exits = {k: v for k, v in values["exit_ph"].items()} if values["exit_term"] else {}
         outside = sorted(set(exits) - set(block.keys))
         if outside:
             raise UnsupportedConfiguration(
-                f"trunk.three_deoxy_exit_ph names {outside}, steps outside network.REACTIONS (a trunk-lane block "
-                "this port does not carry)")
+                f"trunk.three_deoxy_exit_ph names {outside}, steps outside network.REACTIONS: the exit term is "
+                "gated on this module's Amadori pH factor, so the port carries it on this module's steps only")
         aw_table = np.asarray([a for a, _ in tc.AW_MULTIPLIER_TABLE])
         aw_mult = np.asarray([m for _, m in tc.AW_MULTIPLIER_TABLE])
         aw_rows = np.asarray([k in tc.AW_STEPS for k in block.keys])
@@ -234,6 +257,8 @@ def build(cfg=None, *, lane: str = "acrylamide") -> Module:
             basis[f"ph_exponent_exit:{e}"] = f"trunk.three_deoxy_exit_ph ({source[:70]})"
         ref_ph, ref_aw, floor = float(tc.REFERENCE_PH), float(tc.REFERENCE_AW), float(tc.AW_TABLE_FLOOR)
         pot_inputs = ("ph_label", "aw")
+        # the a_w multiplier's kinks: the table's knots, its floor and the reference (1 above it)
+        breaks = {"aw": tuple(sorted({float(a) for a in aw_table} | {floor, ref_aw}))}
         notes += [f"trunk_conditions: a_w on {tc.AW_STEPS}, pH on {tc.PH_STEPS}, exit terms on {exit_keys}",
                   "pH mode prescribed (the declared pH, constant over the programme)"]
 
@@ -265,7 +290,7 @@ def build(cfg=None, *, lane: str = "acrylamide") -> Module:
         name=NAME, species=species, elements=element_table(species), reactions=tuple(r.key for r in reactions),
         stoichiometry=stoich, reactants=reactants, params=params, bands=bands, basis=basis,
         rate_constants=rate_constants, observables=observables_for(species), requires=(), needs_ph=False,
-        config_digest=values["digest"], notes=tuple(notes), pot_inputs=pot_inputs)
+        config_digest=values["digest"], notes=tuple(notes), pot_inputs=pot_inputs, breakpoints=breaks)
 
 
 def theta_from_parameters(module: Module, parameters: Mapping[str, Any]) -> Dict[str, float]:
@@ -275,7 +300,12 @@ def theta_from_parameters(module: Module, parameters: Mapping[str, Any]) -> Dict
     for name in module.params:
         kind, _, key = name.partition(":")
         if kind == "log10_k" and key in parameters:
+            if not float(parameters[key].k_ref) > 0.0:
+                raise UnsupportedConfiguration(f"{key}: k_ref {parameters[key].k_ref!r} on a log10 coordinate "
+                                               "(rebuild the module from a Config that carries it at zero)")
             out[name] = math.log10(float(parameters[key].k_ref))
+        elif kind == "k_ref" and key in parameters:
+            out[name] = float(parameters[key].k_ref)
         elif kind == "ea" and key in parameters:
             out[name] = float(parameters[key].ea_kj_mol)
     return out

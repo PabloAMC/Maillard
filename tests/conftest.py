@@ -30,6 +30,25 @@ def pytest_collection_modifyitems(config, items):
             item.add_marker(pytest.mark.scientific_regression)
 
 
+#: set in the CI job that runs the JAX tests (maillard-jax env): there a skip is a FAILURE, because every JAX test
+#: skips itself when jax / diffrax do not import (``pytest.importorskip``), and a job that silently skipped them all
+#: would pass while testing nothing
+REQUIRE_NO_SKIPS_ENV = "MAILLARD_REQUIRE_NO_SKIPS"
+
+
+def pytest_sessionfinish(session, exitstatus):
+    import os
+
+    if os.environ.get(REQUIRE_NO_SKIPS_ENV, "") != "1":
+        return
+    reporter = session.config.pluginmanager.get_plugin("terminalreporter")
+    skipped = reporter.stats.get("skipped", []) if reporter is not None else []
+    if skipped:
+        names = sorted({str(getattr(r, "nodeid", "") or getattr(r, "fspath", "")) for r in skipped})
+        print(f"\n{REQUIRE_NO_SKIPS_ENV}=1: {len(skipped)} skipped, which fails this job: {names[:20]}")
+        session.exitstatus = pytest.ExitCode.TESTS_FAILED
+
+
 @pytest.fixture(autouse=True)
 def _pristine_engine_switches():
     """Each test starts from the engine's shipped switches, whatever an earlier test imported

@@ -34,7 +34,7 @@ cells:
     dossiers: [low2007_extraction.md, low2006_extraction.md]
     where: "low2007 Table 1 and sec. 1 answer 1; low2006 Table 4"
   - key: {ph: mild_acid, temperature: high, water: dilute}
-    tags: {ph_basis: in_situ, T_C: 120, sugar: pentose, amine: other_free_aa, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, feed: "Ala-xylose Amadori compound 20 mM + 13C5-xylose 20 mM", ph_note: "label 8; in situ 6.04 / 5.05 / 4.66 / 4.50 at 30-120 min (Zhou 2025b Fig. 3d, read in CF-060)"}
+    tags: {ph_basis: label, T_C: 120, sugar: pentose, amine: other_free_aa, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, feed: "Ala-xylose Amadori compound 20 mM + 13C5-xylose 20 mM", ph_note: "label 8; the in-situ 6.04 / 5.05 / 4.66 / 4.50 at 30-120 min (Zhou 2025b Fig. 3d, read in CF-060) is the AX-ARP-ALONE arm's trajectory, not this +13C5-xylose arm's (corrected 2026-11-06); this arm's own pH is not read, and the key's pH bin rests on the sister arm"}
     contrast: "isotopomers over 30-120 min: pyrazine M : M+2 : M+4 close to one well-mixed C2 pool 6-8 % xylose-derived (M+4 3x high at 30 min)"
     status: operating
     quote: "Roughly consistent with one GO pool that is 6-8 % xylose-derived"
@@ -46,7 +46,7 @@ cells:
     conflict: CF-060
   # ---- labelling: nitrogen origin ----------------------------------------------------------------------------------
   - key: {ph: acid, temperature: high, water: dilute}
-    tags: {ph_basis: in_situ, T_C: 120, sugar: pentose, amine: other_free_aa, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, feed: "Ala-xylose Amadori compound 20 mM + 15N-alanine 20 mM", ph_note: "label 8.0; in situ 5.13 / 4.32 / 4.19 / 4.08 at 30-120 min (Zhou 2024 Fig. 3b, read in CF-060)"}
+    tags: {ph_basis: label, T_C: 120, sugar: pentose, amine: other_free_aa, oxygen: not_stated, buffer: none_unbuffered, metals: not_controlled, feed: "Ala-xylose Amadori compound 20 mM + 15N-alanine 20 mM", ph_note: "label 8.0; the in-situ 5.13 / 4.32 / 4.19 / 4.08 at 30-120 min (Zhou 2024 Fig. 3b, read in CF-060) is the AX-ARP-ALONE arm's trajectory, not this +15N-alanine arm's (corrected 2026-11-06); the ARP + Ala model's own pH (Fig. 3) is not read, the text says it falls more slowly with added Ala, so the key's pH bin, which rests on the sister arm, may read this arm too acidic"}
     contrast: "time 30-120 min: pyrazine 15N share flat (54.5 -> 54.3 %); exogenous Ala x1.40 / x1.48 / x1.21 on PZ / MPZ / DMP vs ARP alone"
     status: dominant
     quote: "55% of the formed pyrazine originated from exogenous Ala"

@@ -25,9 +25,11 @@ dependencies:
   - jsonschema
   - rdkit
   # --- the bake-off's additions ---
-  - jax
-  - jaxlib     # CPU build
+  # pinned 2026-11-06 at the versions every results/validation/jax_* record and the JAX tests ran on
+  - jax=0.12.0.1
+  - jaxlib=0.12.0.1     # CPU build
   - pip:
-      - diffrax
-      - equinox
-      - optimistix
+      - diffrax==0.7.2
+      - equinox==0.13.8
+      - lineax==0.1.1
+      - optimistix==0.1.0

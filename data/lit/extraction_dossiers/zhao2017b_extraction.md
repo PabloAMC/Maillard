@@ -202,6 +202,9 @@ Cys-Amadori ± 0.02 mol/L at 3-5 h) is an honest estimate of the between-run + b
    of blank) while they raise A294/A420 — a qualitative constraint on any lipid-aldehyde × sulfur coupling.
 8. Registry: paper absent from `data/keys/papers.yml`; TTCA and Cys-Amadori absent from `compounds.yml`
    (as noted in the Cao dossier).
+9. **Unregistered observation (added 2026-11-05, register pass):** the blank arm's A420 at 5 h is ~80x and its A294
+   ~20x below Cao 2017's for the same recipe (0.94 vs ~78; ~5 vs ~100, sec. 5). No conflicts-register entry records
+   it, and no model value reads either absorbance; register it if a browning or UV-intermediate row ever uses them.
 
 ## Use in the model
 

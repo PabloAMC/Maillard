@@ -1,0 +1,3264 @@
+{
+ "generated_by": "scripts/diagnostics/m5_power_check.py",
+ "seed": 20261106,
+ "nsim": {
+  "B": 24,
+  "B variants": 16,
+  "F": 16,
+  "W": 200
+ },
+ "alpha": 0.05,
+ "rule": "falsified iff p < alpha under BOTH forms (P studentized per point, Q pooled variance)",
+ "synthetic_only": true,
+ "parts": {
+  "B": {
+   "full|cv0.08|n2|truth R1": {
+    "P(falsified)": {
+     "R0": 1.0,
+     "R1": 0.041666666666666664,
+     "R1total": 1.0,
+     "R4p": 1.0,
+     "R2c": 0.9166666666666666,
+     "R7": 0.041666666666666664
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R0": 0.9583333333333334,
+     "R1total": 0.9583333333333334,
+     "R4p": 0.9583333333333334,
+     "R2c": 0.875,
+     "R7": 0.0
+    }
+   },
+   "full|cv0.08|n2|truth R1total": {
+    "P(falsified)": {
+     "R0": 1.0,
+     "R1": 1.0,
+     "R1total": 0.0,
+     "R4p": 1.0,
+     "R2c": 1.0,
+     "R7": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R0": 1.0,
+     "R1": 1.0,
+     "R4p": 1.0,
+     "R2c": 1.0,
+     "R7": 1.0
+    }
+   },
+   "full|cv0.08|n2|truth R4p": {
+    "P(falsified)": {
+     "R0": 1.0,
+     "R1": 0.0,
+     "R1total": 0.7916666666666666,
+     "R4p": 0.0,
+     "R2c": 0.75,
+     "R7": 0.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R0": 1.0,
+     "R1": 0.0,
+     "R1total": 0.7916666666666666,
+     "R2c": 0.75,
+     "R7": 0.0
+    }
+   },
+   "full|cv0.08|n2|truth R2c": {
+    "P(falsified)": {
+     "R0": 1.0,
+     "R1": 0.75,
+     "R1total": 0.9583333333333334,
+     "R4p": 1.0,
+     "R2c": 0.0,
+     "R7": 0.4583333333333333
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R0": 1.0,
+     "R1": 0.75,
+     "R1total": 0.9583333333333334,
+     "R4p": 1.0,
+     "R7": 0.4583333333333333
+    }
+   },
+   "full|cv0.08|n2|truth R7": {
+    "P(falsified)": {
+     "R0": 1.0,
+     "R1": 1.0,
+     "R1total": 1.0,
+     "R4p": 1.0,
+     "R2c": 1.0,
+     "R7": 0.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R0": 1.0,
+     "R1": 1.0,
+     "R1total": 1.0,
+     "R4p": 1.0,
+     "R2c": 1.0
+    }
+   },
+   "full|cv0.08|n3|truth R1": {
+    "P(falsified)": {
+     "R0": 1.0,
+     "R1": 0.041666666666666664,
+     "R1total": 1.0,
+     "R4p": 1.0,
+     "R2c": 1.0,
+     "R7": 0.041666666666666664
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R0": 0.9583333333333334,
+     "R1total": 0.9583333333333334,
+     "R4p": 0.9583333333333334,
+     "R2c": 0.9583333333333334,
+     "R7": 0.0
+    }
+   },
+   "full|cv0.08|n3|truth R1total": {
+    "P(falsified)": {
+     "R0": 1.0,
+     "R1": 1.0,
+     "R1total": 0.041666666666666664,
+     "R4p": 1.0,
+     "R2c": 1.0,
+     "R7": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R0": 0.9583333333333334,
+     "R1": 0.9583333333333334,
+     "R4p": 0.9583333333333334,
+     "R2c": 0.9583333333333334,
+     "R7": 0.9583333333333334
+    }
+   },
+   "full|cv0.08|n3|truth R4p": {
+    "P(falsified)": {
+     "R0": 1.0,
+     "R1": 0.041666666666666664,
+     "R1total": 1.0,
+     "R4p": 0.0,
+     "R2c": 1.0,
+     "R7": 0.041666666666666664
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R0": 1.0,
+     "R1": 0.041666666666666664,
+     "R1total": 1.0,
+     "R2c": 1.0,
+     "R7": 0.041666666666666664
+    }
+   },
+   "full|cv0.08|n3|truth R2c": {
+    "P(falsified)": {
+     "R0": 1.0,
+     "R1": 1.0,
+     "R1total": 1.0,
+     "R4p": 1.0,
+     "R2c": 0.0,
+     "R7": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R0": 1.0,
+     "R1": 1.0,
+     "R1total": 1.0,
+     "R4p": 1.0,
+     "R7": 1.0
+    }
+   },
+   "full|cv0.08|n3|truth R7": {
+    "P(falsified)": {
+     "R0": 1.0,
+     "R1": 1.0,
+     "R1total": 1.0,
+     "R4p": 1.0,
+     "R2c": 1.0,
+     "R7": 0.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R0": 1.0,
+     "R1": 1.0,
+     "R1total": 1.0,
+     "R4p": 1.0,
+     "R2c": 1.0
+    }
+   },
+   "full|cv0.08|n6|truth R1": {
+    "P(falsified)": {
+     "R0": 1.0,
+     "R1": 0.0,
+     "R1total": 1.0,
+     "R4p": 1.0,
+     "R2c": 1.0,
+     "R7": 0.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R0": 1.0,
+     "R1total": 1.0,
+     "R4p": 1.0,
+     "R2c": 1.0,
+     "R7": 0.0
+    }
+   },
+   "full|cv0.08|n6|truth R1total": {
+    "P(falsified)": {
+     "R0": 1.0,
+     "R1": 1.0,
+     "R1total": 0.0,
+     "R4p": 1.0,
+     "R2c": 1.0,
+     "R7": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R0": 1.0,
+     "R1": 1.0,
+     "R4p": 1.0,
+     "R2c": 1.0,
+     "R7": 1.0
+    }
+   },
+   "full|cv0.08|n6|truth R4p": {
+    "P(falsified)": {
+     "R0": 1.0,
+     "R1": 0.0,
+     "R1total": 1.0,
+     "R4p": 0.0,
+     "R2c": 1.0,
+     "R7": 0.041666666666666664
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R0": 1.0,
+     "R1": 0.0,
+     "R1total": 1.0,
+     "R2c": 1.0,
+     "R7": 0.041666666666666664
+    }
+   },
+   "full|cv0.08|n6|truth R2c": {
+    "P(falsified)": {
+     "R0": 1.0,
+     "R1": 1.0,
+     "R1total": 1.0,
+     "R4p": 1.0,
+     "R2c": 0.041666666666666664,
+     "R7": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R0": 0.9583333333333334,
+     "R1": 0.9583333333333334,
+     "R1total": 0.9583333333333334,
+     "R4p": 0.9583333333333334,
+     "R7": 0.9583333333333334
+    }
+   },
+   "full|cv0.08|n6|truth R7": {
+    "P(falsified)": {
+     "R0": 1.0,
+     "R1": 1.0,
+     "R1total": 1.0,
+     "R4p": 1.0,
+     "R2c": 1.0,
+     "R7": 0.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R0": 1.0,
+     "R1": 1.0,
+     "R1total": 1.0,
+     "R4p": 1.0,
+     "R2c": 1.0
+    }
+   },
+   "full|cv0.15|n2|truth R1": {
+    "P(falsified)": {
+     "R0": 1.0,
+     "R1": 0.0,
+     "R1total": 0.5416666666666666,
+     "R4p": 0.8333333333333334,
+     "R2c": 0.2916666666666667,
+     "R7": 0.041666666666666664
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R0": 1.0,
+     "R1total": 0.5416666666666666,
+     "R4p": 0.8333333333333334,
+     "R2c": 0.2916666666666667,
+     "R7": 0.041666666666666664
+    }
+   },
+   "full|cv0.15|n2|truth R1total": {
+    "P(falsified)": {
+     "R0": 1.0,
+     "R1": 0.5,
+     "R1total": 0.0,
+     "R4p": 1.0,
+     "R2c": 0.625,
+     "R7": 0.5833333333333334
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R0": 1.0,
+     "R1": 0.5,
+     "R4p": 1.0,
+     "R2c": 0.625,
+     "R7": 0.5833333333333334
+    }
+   },
+   "full|cv0.15|n2|truth R4p": {
+    "P(falsified)": {
+     "R0": 1.0,
+     "R1": 0.041666666666666664,
+     "R1total": 0.3333333333333333,
+     "R4p": 0.041666666666666664,
+     "R2c": 0.2916666666666667,
+     "R7": 0.041666666666666664
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R0": 0.9583333333333334,
+     "R1": 0.041666666666666664,
+     "R1total": 0.2916666666666667,
+     "R2c": 0.25,
+     "R7": 0.041666666666666664
+    }
+   },
+   "full|cv0.15|n2|truth R2c": {
+    "P(falsified)": {
+     "R0": 1.0,
+     "R1": 0.16666666666666666,
+     "R1total": 0.4166666666666667,
+     "R4p": 0.9583333333333334,
+     "R2c": 0.08333333333333333,
+     "R7": 0.125
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R0": 0.9166666666666666,
+     "R1": 0.08333333333333333,
+     "R1total": 0.375,
+     "R4p": 0.875,
+     "R7": 0.041666666666666664
+    }
+   },
+   "full|cv0.15|n2|truth R7": {
+    "P(falsified)": {
+     "R0": 1.0,
+     "R1": 0.9583333333333334,
+     "R1total": 0.9583333333333334,
+     "R4p": 1.0,
+     "R2c": 0.9166666666666666,
+     "R7": 0.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R0": 1.0,
+     "R1": 0.9583333333333334,
+     "R1total": 0.9583333333333334,
+     "R4p": 1.0,
+     "R2c": 0.9166666666666666
+    }
+   },
+   "full|cv0.15|n3|truth R1": {
+    "P(falsified)": {
+     "R0": 1.0,
+     "R1": 0.0,
+     "R1total": 0.9583333333333334,
+     "R4p": 1.0,
+     "R2c": 0.875,
+     "R7": 0.041666666666666664
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R0": 1.0,
+     "R1total": 0.9583333333333334,
+     "R4p": 1.0,
+     "R2c": 0.875,
+     "R7": 0.041666666666666664
+    }
+   },
+   "full|cv0.15|n3|truth R1total": {
+    "P(falsified)": {
+     "R0": 1.0,
+     "R1": 1.0,
+     "R1total": 0.0,
+     "R4p": 1.0,
+     "R2c": 1.0,
+     "R7": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R0": 1.0,
+     "R1": 1.0,
+     "R4p": 1.0,
+     "R2c": 1.0,
+     "R7": 1.0
+    }
+   },
+   "full|cv0.15|n3|truth R4p": {
+    "P(falsified)": {
+     "R0": 1.0,
+     "R1": 0.041666666666666664,
+     "R1total": 0.875,
+     "R4p": 0.041666666666666664,
+     "R2c": 0.75,
+     "R7": 0.041666666666666664
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R0": 0.9583333333333334,
+     "R1": 0.0,
+     "R1total": 0.8333333333333334,
+     "R2c": 0.7083333333333334,
+     "R7": 0.0
+    }
+   },
+   "full|cv0.15|n3|truth R2c": {
+    "P(falsified)": {
+     "R0": 1.0,
+     "R1": 0.5833333333333334,
+     "R1total": 0.875,
+     "R4p": 1.0,
+     "R2c": 0.0,
+     "R7": 0.5
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R0": 1.0,
+     "R1": 0.5833333333333334,
+     "R1total": 0.875,
+     "R4p": 1.0,
+     "R7": 0.5
+    }
+   },
+   "full|cv0.15|n3|truth R7": {
+    "P(falsified)": {
+     "R0": 1.0,
+     "R1": 1.0,
+     "R1total": 1.0,
+     "R4p": 1.0,
+     "R2c": 1.0,
+     "R7": 0.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R0": 1.0,
+     "R1": 1.0,
+     "R1total": 1.0,
+     "R4p": 1.0,
+     "R2c": 1.0
+    }
+   },
+   "full|cv0.15|n6|truth R1": {
+    "P(falsified)": {
+     "R0": 1.0,
+     "R1": 0.0,
+     "R1total": 1.0,
+     "R4p": 1.0,
+     "R2c": 1.0,
+     "R7": 0.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R0": 1.0,
+     "R1total": 1.0,
+     "R4p": 1.0,
+     "R2c": 1.0,
+     "R7": 0.0
+    }
+   },
+   "full|cv0.15|n6|truth R1total": {
+    "P(falsified)": {
+     "R0": 1.0,
+     "R1": 1.0,
+     "R1total": 0.0,
+     "R4p": 1.0,
+     "R2c": 1.0,
+     "R7": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R0": 1.0,
+     "R1": 1.0,
+     "R4p": 1.0,
+     "R2c": 1.0,
+     "R7": 1.0
+    }
+   },
+   "full|cv0.15|n6|truth R4p": {
+    "P(falsified)": {
+     "R0": 1.0,
+     "R1": 0.0,
+     "R1total": 1.0,
+     "R4p": 0.0,
+     "R2c": 1.0,
+     "R7": 0.08333333333333333
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R0": 1.0,
+     "R1": 0.0,
+     "R1total": 1.0,
+     "R2c": 1.0,
+     "R7": 0.08333333333333333
+    }
+   },
+   "full|cv0.15|n6|truth R2c": {
+    "P(falsified)": {
+     "R0": 1.0,
+     "R1": 1.0,
+     "R1total": 1.0,
+     "R4p": 1.0,
+     "R2c": 0.0,
+     "R7": 0.9583333333333334
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R0": 1.0,
+     "R1": 1.0,
+     "R1total": 1.0,
+     "R4p": 1.0,
+     "R7": 0.9583333333333334
+    }
+   },
+   "full|cv0.15|n6|truth R7": {
+    "P(falsified)": {
+     "R0": 1.0,
+     "R1": 1.0,
+     "R1total": 1.0,
+     "R4p": 1.0,
+     "R2c": 1.0,
+     "R7": 0.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R0": 1.0,
+     "R1": 1.0,
+     "R1total": 1.0,
+     "R4p": 1.0,
+     "R2c": 1.0
+    }
+   },
+   "no 0.5 M arm|cv0.08|n3|truth R1": {
+    "P(falsified)": {
+     "R0": 1.0,
+     "R1": 0.0625,
+     "R1total": 1.0,
+     "R4p": 1.0,
+     "R2c": 0.3125,
+     "R7": 0.0625
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R0": 0.9375,
+     "R1total": 0.9375,
+     "R4p": 0.9375,
+     "R2c": 0.25,
+     "R7": 0.0
+    }
+   },
+   "no 0.5 M arm|cv0.08|n3|truth R1total": {
+    "P(falsified)": {
+     "R0": 1.0,
+     "R1": 1.0,
+     "R1total": 0.0,
+     "R4p": 1.0,
+     "R2c": 1.0,
+     "R7": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R0": 1.0,
+     "R1": 1.0,
+     "R4p": 1.0,
+     "R2c": 1.0,
+     "R7": 1.0
+    }
+   },
+   "no 0.5 M arm|cv0.08|n3|truth R4p": {
+    "P(falsified)": {
+     "R0": 1.0,
+     "R1": 0.0,
+     "R1total": 1.0,
+     "R4p": 0.0,
+     "R2c": 0.3125,
+     "R7": 0.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R0": 1.0,
+     "R1": 0.0,
+     "R1total": 1.0,
+     "R2c": 0.3125,
+     "R7": 0.0
+    }
+   },
+   "no 0.5 M arm|cv0.08|n3|truth R2c": {
+    "P(falsified)": {
+     "R0": 1.0,
+     "R1": 0.5625,
+     "R1total": 1.0,
+     "R4p": 1.0,
+     "R2c": 0.0,
+     "R7": 0.125
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R0": 1.0,
+     "R1": 0.5625,
+     "R1total": 1.0,
+     "R4p": 1.0,
+     "R7": 0.125
+    }
+   },
+   "no 0.5 M arm|cv0.08|n3|truth R7": {
+    "P(falsified)": {
+     "R0": 1.0,
+     "R1": 1.0,
+     "R1total": 1.0,
+     "R4p": 1.0,
+     "R2c": 1.0,
+     "R7": 0.0625
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R0": 0.9375,
+     "R1": 0.9375,
+     "R1total": 0.9375,
+     "R4p": 0.9375,
+     "R2c": 0.9375
+    }
+   },
+   "no 5 mM arm and no inert zero|cv0.08|n3|truth R1": {
+    "P(falsified)": {
+     "R0": 1.0,
+     "R1": 0.0,
+     "R1total": 1.0,
+     "R4p": 1.0,
+     "R2c": 1.0,
+     "R7": 0.125
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R0": 1.0,
+     "R1total": 1.0,
+     "R4p": 1.0,
+     "R2c": 1.0,
+     "R7": 0.125
+    }
+   },
+   "no 5 mM arm and no inert zero|cv0.08|n3|truth R1total": {
+    "P(falsified)": {
+     "R0": 1.0,
+     "R1": 0.875,
+     "R1total": 0.0625,
+     "R4p": 1.0,
+     "R2c": 1.0,
+     "R7": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R0": 0.9375,
+     "R1": 0.8125,
+     "R4p": 0.9375,
+     "R2c": 0.9375,
+     "R7": 0.9375
+    }
+   },
+   "no 5 mM arm and no inert zero|cv0.08|n3|truth R4p": {
+    "P(falsified)": {
+     "R0": 1.0,
+     "R1": 0.0,
+     "R1total": 0.625,
+     "R4p": 0.0,
+     "R2c": 1.0,
+     "R7": 0.0625
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R0": 1.0,
+     "R1": 0.0,
+     "R1total": 0.625,
+     "R2c": 1.0,
+     "R7": 0.0625
+    }
+   },
+   "no 5 mM arm and no inert zero|cv0.08|n3|truth R2c": {
+    "P(falsified)": {
+     "R0": 1.0,
+     "R1": 1.0,
+     "R1total": 0.9375,
+     "R4p": 1.0,
+     "R2c": 0.0,
+     "R7": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R0": 1.0,
+     "R1": 1.0,
+     "R1total": 0.9375,
+     "R4p": 1.0,
+     "R7": 1.0
+    }
+   },
+   "no 5 mM arm and no inert zero|cv0.08|n3|truth R7": {
+    "P(falsified)": {
+     "R0": 1.0,
+     "R1": 0.0,
+     "R1total": 0.875,
+     "R4p": 1.0,
+     "R2c": 0.9375,
+     "R7": 0.125
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R0": 0.875,
+     "R1": 0.0,
+     "R1total": 0.75,
+     "R4p": 0.875,
+     "R2c": 0.8125
+    }
+   },
+   "one pH (7.0)|cv0.08|n3|truth R1": {
+    "P(falsified)": {
+     "R0": 1.0,
+     "R1": 0.0625,
+     "R1total": 0.0625,
+     "R4p": 1.0,
+     "R2c": 1.0,
+     "R7": 0.5
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R0": 0.9375,
+     "R1total": 0.0,
+     "R4p": 0.9375,
+     "R2c": 0.9375,
+     "R7": 0.4375
+    }
+   },
+   "one pH (7.0)|cv0.08|n3|truth R1total": {
+    "P(falsified)": {
+     "R0": 1.0,
+     "R1": 0.0625,
+     "R1total": 0.0625,
+     "R4p": 1.0,
+     "R2c": 1.0,
+     "R7": 0.4375
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R0": 0.9375,
+     "R1": 0.0,
+     "R4p": 0.9375,
+     "R2c": 0.9375,
+     "R7": 0.375
+    }
+   },
+   "one pH (7.0)|cv0.08|n3|truth R4p": {
+    "P(falsified)": {
+     "R0": 1.0,
+     "R1": 0.125,
+     "R1total": 0.125,
+     "R4p": 0.125,
+     "R2c": 0.9375,
+     "R7": 0.5625
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R0": 0.875,
+     "R1": 0.0,
+     "R1total": 0.0,
+     "R2c": 0.8125,
+     "R7": 0.4375
+    }
+   },
+   "one pH (7.0)|cv0.08|n3|truth R2c": {
+    "P(falsified)": {
+     "R0": 1.0,
+     "R1": 0.9375,
+     "R1total": 0.9375,
+     "R4p": 1.0,
+     "R2c": 0.0625,
+     "R7": 0.9375
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R0": 0.9375,
+     "R1": 0.875,
+     "R1total": 0.875,
+     "R4p": 0.9375,
+     "R7": 0.875
+    }
+   },
+   "one pH (7.0)|cv0.08|n3|truth R7": {
+    "P(falsified)": {
+     "R0": 1.0,
+     "R1": 1.0,
+     "R1total": 1.0,
+     "R4p": 1.0,
+     "R2c": 1.0,
+     "R7": 0.125
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R0": 0.875,
+     "R1": 0.875,
+     "R1total": 0.875,
+     "R4p": 0.875,
+     "R2c": 0.875
+    }
+   },
+   "no furfural-branch readout|cv0.08|n3|truth R1": {
+    "P(falsified)": {
+     "R0": 1.0,
+     "R1": 0.0625,
+     "R1total": 1.0,
+     "R4p": 0.0,
+     "R2c": 1.0,
+     "R7": 0.125
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R0": 0.9375,
+     "R1total": 0.9375,
+     "R4p": 0.0,
+     "R2c": 0.9375,
+     "R7": 0.0625
+    }
+   },
+   "no furfural-branch readout|cv0.08|n3|truth R1total": {
+    "P(falsified)": {
+     "R0": 1.0,
+     "R1": 1.0,
+     "R1total": 0.125,
+     "R4p": 1.0,
+     "R2c": 1.0,
+     "R7": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R0": 0.875,
+     "R1": 0.875,
+     "R4p": 0.875,
+     "R2c": 0.875,
+     "R7": 0.875
+    }
+   },
+   "no furfural-branch readout|cv0.08|n3|truth R4p": {
+    "P(falsified)": {
+     "R0": 1.0,
+     "R1": 0.0625,
+     "R1total": 1.0,
+     "R4p": 0.0625,
+     "R2c": 1.0,
+     "R7": 0.1875
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R0": 0.9375,
+     "R1": 0.0,
+     "R1total": 0.9375,
+     "R2c": 0.9375,
+     "R7": 0.125
+    }
+   },
+   "no furfural-branch readout|cv0.08|n3|truth R2c": {
+    "P(falsified)": {
+     "R0": 1.0,
+     "R1": 1.0,
+     "R1total": 1.0,
+     "R4p": 1.0,
+     "R2c": 0.0625,
+     "R7": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R0": 0.9375,
+     "R1": 0.9375,
+     "R1total": 0.9375,
+     "R4p": 0.9375,
+     "R7": 0.9375
+    }
+   },
+   "no furfural-branch readout|cv0.08|n3|truth R7": {
+    "P(falsified)": {
+     "R0": 1.0,
+     "R1": 1.0,
+     "R1total": 1.0,
+     "R4p": 1.0,
+     "R2c": 1.0,
+     "R7": 0.0625
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R0": 0.9375,
+     "R1": 0.9375,
+     "R1total": 0.9375,
+     "R4p": 0.9375,
+     "R2c": 0.9375
+    }
+   }
+  },
+  "F": {
+   "full (a)-(e)|cv0.15|n2|truth R1": {
+    "P(falsified)": {
+     "R1": 0.0,
+     "R2": 1.0,
+     "R3": 0.125,
+     "R6": 0.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 1.0,
+     "R3": 0.125,
+     "R6": 0.0
+    }
+   },
+   "full (a)-(e)|cv0.15|n2|truth R2": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 0.0,
+     "R3": 1.0,
+     "R6": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 1.0,
+     "R3": 1.0,
+     "R6": 1.0
+    }
+   },
+   "full (a)-(e)|cv0.15|n2|truth R3": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R3": 0.0625,
+     "R6": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 0.9375,
+     "R2": 0.9375,
+     "R6": 0.9375
+    }
+   },
+   "full (a)-(e)|cv0.15|n2|truth R6": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R3": 1.0,
+     "R6": 0.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R3": 1.0
+    }
+   },
+   "full (a)-(e)|cv0.15|n3|truth R1": {
+    "P(falsified)": {
+     "R1": 0.0625,
+     "R2": 1.0,
+     "R3": 0.125,
+     "R6": 0.125
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 0.9375,
+     "R3": 0.0625,
+     "R6": 0.0625
+    }
+   },
+   "full (a)-(e)|cv0.15|n3|truth R2": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 0.125,
+     "R3": 1.0,
+     "R6": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 0.875,
+     "R3": 0.875,
+     "R6": 0.875
+    }
+   },
+   "full (a)-(e)|cv0.15|n3|truth R3": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R3": 0.0,
+     "R6": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R6": 1.0
+    }
+   },
+   "full (a)-(e)|cv0.15|n3|truth R6": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R3": 1.0,
+     "R6": 0.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R3": 1.0
+    }
+   },
+   "full (a)-(e)|cv0.15|n6|truth R1": {
+    "P(falsified)": {
+     "R1": 0.0,
+     "R2": 1.0,
+     "R3": 0.0,
+     "R6": 0.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 1.0,
+     "R3": 0.0,
+     "R6": 0.0
+    }
+   },
+   "full (a)-(e)|cv0.15|n6|truth R2": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 0.0625,
+     "R3": 1.0,
+     "R6": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 0.9375,
+     "R3": 0.9375,
+     "R6": 0.9375
+    }
+   },
+   "full (a)-(e)|cv0.15|n6|truth R3": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R3": 0.0625,
+     "R6": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 0.9375,
+     "R2": 0.9375,
+     "R6": 0.9375
+    }
+   },
+   "full (a)-(e)|cv0.15|n6|truth R6": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R3": 1.0,
+     "R6": 0.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R3": 1.0
+    }
+   },
+   "full (a)-(e)|cv0.25|n2|truth R1": {
+    "P(falsified)": {
+     "R1": 0.0,
+     "R2": 1.0,
+     "R3": 0.0625,
+     "R6": 0.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 1.0,
+     "R3": 0.0625,
+     "R6": 0.0
+    }
+   },
+   "full (a)-(e)|cv0.25|n2|truth R2": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 0.0625,
+     "R3": 1.0,
+     "R6": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 0.9375,
+     "R3": 0.9375,
+     "R6": 0.9375
+    }
+   },
+   "full (a)-(e)|cv0.25|n2|truth R3": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R3": 0.0625,
+     "R6": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 0.9375,
+     "R2": 0.9375,
+     "R6": 0.9375
+    }
+   },
+   "full (a)-(e)|cv0.25|n2|truth R6": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R3": 1.0,
+     "R6": 0.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R3": 1.0
+    }
+   },
+   "full (a)-(e)|cv0.25|n3|truth R1": {
+    "P(falsified)": {
+     "R1": 0.0,
+     "R2": 1.0,
+     "R3": 0.0,
+     "R6": 0.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 1.0,
+     "R3": 0.0,
+     "R6": 0.0
+    }
+   },
+   "full (a)-(e)|cv0.25|n3|truth R2": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 0.0,
+     "R3": 1.0,
+     "R6": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 1.0,
+     "R3": 1.0,
+     "R6": 1.0
+    }
+   },
+   "full (a)-(e)|cv0.25|n3|truth R3": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R3": 0.0625,
+     "R6": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 0.9375,
+     "R2": 0.9375,
+     "R6": 0.9375
+    }
+   },
+   "full (a)-(e)|cv0.25|n3|truth R6": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R3": 1.0,
+     "R6": 0.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R3": 1.0
+    }
+   },
+   "full (a)-(e)|cv0.25|n6|truth R1": {
+    "P(falsified)": {
+     "R1": 0.0,
+     "R2": 1.0,
+     "R3": 0.0625,
+     "R6": 0.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 1.0,
+     "R3": 0.0625,
+     "R6": 0.0
+    }
+   },
+   "full (a)-(e)|cv0.25|n6|truth R2": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 0.1875,
+     "R3": 1.0,
+     "R6": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 0.8125,
+     "R3": 0.8125,
+     "R6": 0.8125
+    }
+   },
+   "full (a)-(e)|cv0.25|n6|truth R3": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R3": 0.0,
+     "R6": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R6": 1.0
+    }
+   },
+   "full (a)-(e)|cv0.25|n6|truth R6": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R3": 1.0,
+     "R6": 0.125
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 0.875,
+     "R2": 0.875,
+     "R3": 0.875
+    }
+   },
+   "no products (d)|cv0.15|n2|truth R1": {
+    "P(falsified)": {
+     "R1": 0.0,
+     "R2": 1.0,
+     "R3": 0.125,
+     "R6": 0.0625
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 1.0,
+     "R3": 0.125,
+     "R6": 0.0625
+    }
+   },
+   "no products (d)|cv0.15|n2|truth R2": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 0.0,
+     "R3": 1.0,
+     "R6": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 1.0,
+     "R3": 1.0,
+     "R6": 1.0
+    }
+   },
+   "no products (d)|cv0.15|n2|truth R3": {
+    "P(falsified)": {
+     "R1": 0.875,
+     "R2": 1.0,
+     "R3": 0.0625,
+     "R6": 0.875
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 0.8125,
+     "R2": 0.9375,
+     "R6": 0.8125
+    }
+   },
+   "no products (d)|cv0.15|n2|truth R6": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R3": 1.0,
+     "R6": 0.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R3": 1.0
+    }
+   },
+   "no products (d)|cv0.15|n3|truth R1": {
+    "P(falsified)": {
+     "R1": 0.0,
+     "R2": 1.0,
+     "R3": 0.0625,
+     "R6": 0.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 1.0,
+     "R3": 0.0625,
+     "R6": 0.0
+    }
+   },
+   "no products (d)|cv0.15|n3|truth R2": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 0.0625,
+     "R3": 1.0,
+     "R6": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 0.9375,
+     "R3": 0.9375,
+     "R6": 0.9375
+    }
+   },
+   "no products (d)|cv0.15|n3|truth R3": {
+    "P(falsified)": {
+     "R1": 0.9375,
+     "R2": 1.0,
+     "R3": 0.0,
+     "R6": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 0.9375,
+     "R2": 1.0,
+     "R6": 1.0
+    }
+   },
+   "no products (d)|cv0.15|n3|truth R6": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R3": 1.0,
+     "R6": 0.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R3": 1.0
+    }
+   },
+   "no products (d)|cv0.15|n6|truth R1": {
+    "P(falsified)": {
+     "R1": 0.0625,
+     "R2": 1.0,
+     "R3": 0.1875,
+     "R6": 0.125
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 0.9375,
+     "R3": 0.125,
+     "R6": 0.0625
+    }
+   },
+   "no products (d)|cv0.15|n6|truth R2": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 0.0625,
+     "R3": 1.0,
+     "R6": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 0.9375,
+     "R3": 0.9375,
+     "R6": 0.9375
+    }
+   },
+   "no products (d)|cv0.15|n6|truth R3": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R3": 0.0,
+     "R6": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R6": 1.0
+    }
+   },
+   "no products (d)|cv0.15|n6|truth R6": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R3": 1.0,
+     "R6": 0.0625
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 0.9375,
+     "R2": 0.9375,
+     "R3": 0.9375
+    }
+   },
+   "no products (d)|cv0.25|n2|truth R1": {
+    "P(falsified)": {
+     "R1": 0.0,
+     "R2": 1.0,
+     "R3": 0.1875,
+     "R6": 0.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 1.0,
+     "R3": 0.1875,
+     "R6": 0.0
+    }
+   },
+   "no products (d)|cv0.25|n2|truth R2": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 0.0625,
+     "R3": 1.0,
+     "R6": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 0.9375,
+     "R3": 0.9375,
+     "R6": 0.9375
+    }
+   },
+   "no products (d)|cv0.25|n2|truth R3": {
+    "P(falsified)": {
+     "R1": 0.75,
+     "R2": 1.0,
+     "R3": 0.0,
+     "R6": 0.8125
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 0.75,
+     "R2": 1.0,
+     "R6": 0.8125
+    }
+   },
+   "no products (d)|cv0.25|n2|truth R6": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R3": 1.0,
+     "R6": 0.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R3": 1.0
+    }
+   },
+   "no products (d)|cv0.25|n3|truth R1": {
+    "P(falsified)": {
+     "R1": 0.0625,
+     "R2": 1.0,
+     "R3": 0.125,
+     "R6": 0.125
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 0.9375,
+     "R3": 0.0625,
+     "R6": 0.0625
+    }
+   },
+   "no products (d)|cv0.25|n3|truth R2": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 0.0,
+     "R3": 1.0,
+     "R6": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 1.0,
+     "R3": 1.0,
+     "R6": 1.0
+    }
+   },
+   "no products (d)|cv0.25|n3|truth R3": {
+    "P(falsified)": {
+     "R1": 0.875,
+     "R2": 1.0,
+     "R3": 0.0,
+     "R6": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 0.875,
+     "R2": 1.0,
+     "R6": 1.0
+    }
+   },
+   "no products (d)|cv0.25|n3|truth R6": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R3": 1.0,
+     "R6": 0.0625
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 0.9375,
+     "R2": 0.9375,
+     "R3": 0.9375
+    }
+   },
+   "no products (d)|cv0.25|n6|truth R1": {
+    "P(falsified)": {
+     "R1": 0.125,
+     "R2": 1.0,
+     "R3": 0.125,
+     "R6": 0.125
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 0.875,
+     "R3": 0.0,
+     "R6": 0.0
+    }
+   },
+   "no products (d)|cv0.25|n6|truth R2": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 0.0,
+     "R3": 1.0,
+     "R6": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 1.0,
+     "R3": 1.0,
+     "R6": 1.0
+    }
+   },
+   "no products (d)|cv0.25|n6|truth R3": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R3": 0.125,
+     "R6": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 0.875,
+     "R2": 0.875,
+     "R6": 0.875
+    }
+   },
+   "no products (d)|cv0.25|n6|truth R6": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R3": 1.0,
+     "R6": 0.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R3": 1.0
+    }
+   },
+   "no K (e), no products|cv0.15|n2|truth R1": {
+    "P(falsified)": {
+     "R1": 0.0,
+     "R2": 1.0,
+     "R3": 0.0625,
+     "R6": 0.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 1.0,
+     "R3": 0.0625,
+     "R6": 0.0
+    }
+   },
+   "no K (e), no products|cv0.15|n2|truth R2": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 0.0625,
+     "R3": 1.0,
+     "R6": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 0.9375,
+     "R3": 0.9375,
+     "R6": 0.9375
+    }
+   },
+   "no K (e), no products|cv0.15|n2|truth R3": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R3": 0.0,
+     "R6": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R6": 1.0
+    }
+   },
+   "no K (e), no products|cv0.15|n2|truth R6": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R3": 1.0,
+     "R6": 0.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R3": 1.0
+    }
+   },
+   "no K (e), no products|cv0.15|n3|truth R1": {
+    "P(falsified)": {
+     "R1": 0.0,
+     "R2": 1.0,
+     "R3": 0.0625,
+     "R6": 0.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 1.0,
+     "R3": 0.0625,
+     "R6": 0.0
+    }
+   },
+   "no K (e), no products|cv0.15|n3|truth R2": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 0.0,
+     "R3": 1.0,
+     "R6": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 1.0,
+     "R3": 1.0,
+     "R6": 1.0
+    }
+   },
+   "no K (e), no products|cv0.15|n3|truth R3": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R3": 0.0,
+     "R6": 0.9375
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R6": 0.9375
+    }
+   },
+   "no K (e), no products|cv0.15|n3|truth R6": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R3": 1.0,
+     "R6": 0.0625
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 0.9375,
+     "R2": 0.9375,
+     "R3": 0.9375
+    }
+   },
+   "no K (e), no products|cv0.15|n6|truth R1": {
+    "P(falsified)": {
+     "R1": 0.0,
+     "R2": 1.0,
+     "R3": 0.0625,
+     "R6": 0.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 1.0,
+     "R3": 0.0625,
+     "R6": 0.0
+    }
+   },
+   "no K (e), no products|cv0.15|n6|truth R2": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 0.125,
+     "R3": 1.0,
+     "R6": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 0.875,
+     "R3": 0.875,
+     "R6": 0.875
+    }
+   },
+   "no K (e), no products|cv0.15|n6|truth R3": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R3": 0.0,
+     "R6": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R6": 1.0
+    }
+   },
+   "no K (e), no products|cv0.15|n6|truth R6": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R3": 1.0,
+     "R6": 0.0625
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 0.9375,
+     "R2": 0.9375,
+     "R3": 0.9375
+    }
+   },
+   "no K (e), no products|cv0.25|n2|truth R1": {
+    "P(falsified)": {
+     "R1": 0.0,
+     "R2": 1.0,
+     "R3": 0.0625,
+     "R6": 0.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 1.0,
+     "R3": 0.0625,
+     "R6": 0.0
+    }
+   },
+   "no K (e), no products|cv0.25|n2|truth R2": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 0.0,
+     "R3": 1.0,
+     "R6": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 1.0,
+     "R3": 1.0,
+     "R6": 1.0
+    }
+   },
+   "no K (e), no products|cv0.25|n2|truth R3": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R3": 0.0,
+     "R6": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R6": 1.0
+    }
+   },
+   "no K (e), no products|cv0.25|n2|truth R6": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R3": 1.0,
+     "R6": 0.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R3": 1.0
+    }
+   },
+   "no K (e), no products|cv0.25|n3|truth R1": {
+    "P(falsified)": {
+     "R1": 0.0625,
+     "R2": 1.0,
+     "R3": 0.1875,
+     "R6": 0.125
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 0.9375,
+     "R3": 0.125,
+     "R6": 0.0625
+    }
+   },
+   "no K (e), no products|cv0.25|n3|truth R2": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 0.0625,
+     "R3": 1.0,
+     "R6": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 0.9375,
+     "R3": 0.9375,
+     "R6": 0.9375
+    }
+   },
+   "no K (e), no products|cv0.25|n3|truth R3": {
+    "P(falsified)": {
+     "R1": 0.9375,
+     "R2": 1.0,
+     "R3": 0.0,
+     "R6": 0.875
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 0.9375,
+     "R2": 1.0,
+     "R6": 0.875
+    }
+   },
+   "no K (e), no products|cv0.25|n3|truth R6": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R3": 1.0,
+     "R6": 0.0625
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 0.9375,
+     "R2": 0.9375,
+     "R3": 0.9375
+    }
+   },
+   "no K (e), no products|cv0.25|n6|truth R1": {
+    "P(falsified)": {
+     "R1": 0.0,
+     "R2": 1.0,
+     "R3": 0.0625,
+     "R6": 0.0625
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 1.0,
+     "R3": 0.0625,
+     "R6": 0.0625
+    }
+   },
+   "no K (e), no products|cv0.25|n6|truth R2": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 0.125,
+     "R3": 1.0,
+     "R6": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 0.875,
+     "R3": 0.875,
+     "R6": 0.875
+    }
+   },
+   "no K (e), no products|cv0.25|n6|truth R3": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R3": 0.0625,
+     "R6": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 0.9375,
+     "R2": 0.9375,
+     "R6": 0.9375
+    }
+   },
+   "no K (e), no products|cv0.25|n6|truth R6": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R3": 1.0,
+     "R6": 0.1875
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 0.8125,
+     "R2": 0.8125,
+     "R3": 0.8125
+    }
+   },
+   "arm (a) only: buffer, fresh oil air / N2, no products, no K|cv0.15|n2|truth R1": {
+    "P(falsified)": {
+     "R1": 0.0,
+     "R2": 1.0,
+     "R3": 0.0,
+     "R6": 0.1875
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 1.0,
+     "R3": 0.0,
+     "R6": 0.1875
+    }
+   },
+   "arm (a) only: buffer, fresh oil air / N2, no products, no K|cv0.15|n2|truth R2": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 0.4375,
+     "R3": 0.0,
+     "R6": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 0.5625,
+     "R3": 0.0,
+     "R6": 0.5625
+    }
+   },
+   "arm (a) only: buffer, fresh oil air / N2, no products, no K|cv0.15|n2|truth R3": {
+    "P(falsified)": {
+     "R1": 0.75,
+     "R2": 1.0,
+     "R3": 0.0,
+     "R6": 0.125
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 0.75,
+     "R2": 1.0,
+     "R6": 0.125
+    }
+   },
+   "arm (a) only: buffer, fresh oil air / N2, no products, no K|cv0.15|n2|truth R6": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R3": 0.0,
+     "R6": 0.0625
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 0.9375,
+     "R2": 0.9375,
+     "R3": 0.0
+    }
+   },
+   "arm (a) only: buffer, fresh oil air / N2, no products, no K|cv0.15|n3|truth R1": {
+    "P(falsified)": {
+     "R1": 0.0,
+     "R2": 1.0,
+     "R3": 0.0,
+     "R6": 0.1875
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 1.0,
+     "R3": 0.0,
+     "R6": 0.1875
+    }
+   },
+   "arm (a) only: buffer, fresh oil air / N2, no products, no K|cv0.15|n3|truth R2": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 0.4375,
+     "R3": 0.0,
+     "R6": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 0.5625,
+     "R3": 0.0,
+     "R6": 0.5625
+    }
+   },
+   "arm (a) only: buffer, fresh oil air / N2, no products, no K|cv0.15|n3|truth R3": {
+    "P(falsified)": {
+     "R1": 0.8125,
+     "R2": 1.0,
+     "R3": 0.0,
+     "R6": 0.0625
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 0.8125,
+     "R2": 1.0,
+     "R6": 0.0625
+    }
+   },
+   "arm (a) only: buffer, fresh oil air / N2, no products, no K|cv0.15|n3|truth R6": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R3": 0.0,
+     "R6": 0.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R3": 0.0
+    }
+   },
+   "arm (a) only: buffer, fresh oil air / N2, no products, no K|cv0.15|n6|truth R1": {
+    "P(falsified)": {
+     "R1": 0.0,
+     "R2": 1.0,
+     "R3": 0.0,
+     "R6": 0.125
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 1.0,
+     "R3": 0.0,
+     "R6": 0.125
+    }
+   },
+   "arm (a) only: buffer, fresh oil air / N2, no products, no K|cv0.15|n6|truth R2": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 0.375,
+     "R3": 0.0,
+     "R6": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 0.625,
+     "R3": 0.0,
+     "R6": 0.625
+    }
+   },
+   "arm (a) only: buffer, fresh oil air / N2, no products, no K|cv0.15|n6|truth R3": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R3": 0.0,
+     "R6": 0.25
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R6": 0.25
+    }
+   },
+   "arm (a) only: buffer, fresh oil air / N2, no products, no K|cv0.15|n6|truth R6": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R3": 0.0,
+     "R6": 0.1875
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 0.8125,
+     "R2": 0.8125,
+     "R3": 0.0
+    }
+   },
+   "arm (a) only: buffer, fresh oil air / N2, no products, no K|cv0.25|n2|truth R1": {
+    "P(falsified)": {
+     "R1": 0.0,
+     "R2": 1.0,
+     "R3": 0.0,
+     "R6": 0.0625
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 1.0,
+     "R3": 0.0,
+     "R6": 0.0625
+    }
+   },
+   "arm (a) only: buffer, fresh oil air / N2, no products, no K|cv0.25|n2|truth R2": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 0.4375,
+     "R3": 0.0,
+     "R6": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 0.5625,
+     "R3": 0.0,
+     "R6": 0.5625
+    }
+   },
+   "arm (a) only: buffer, fresh oil air / N2, no products, no K|cv0.25|n2|truth R3": {
+    "P(falsified)": {
+     "R1": 0.5,
+     "R2": 1.0,
+     "R3": 0.0,
+     "R6": 0.125
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 0.5,
+     "R2": 1.0,
+     "R6": 0.125
+    }
+   },
+   "arm (a) only: buffer, fresh oil air / N2, no products, no K|cv0.25|n2|truth R6": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R3": 0.0,
+     "R6": 0.0625
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 0.9375,
+     "R2": 0.9375,
+     "R3": 0.0
+    }
+   },
+   "arm (a) only: buffer, fresh oil air / N2, no products, no K|cv0.25|n3|truth R1": {
+    "P(falsified)": {
+     "R1": 0.0625,
+     "R2": 1.0,
+     "R3": 0.0,
+     "R6": 0.25
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 0.9375,
+     "R3": 0.0,
+     "R6": 0.1875
+    }
+   },
+   "arm (a) only: buffer, fresh oil air / N2, no products, no K|cv0.25|n3|truth R2": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 0.6875,
+     "R3": 0.0,
+     "R6": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 0.3125,
+     "R3": 0.0,
+     "R6": 0.3125
+    }
+   },
+   "arm (a) only: buffer, fresh oil air / N2, no products, no K|cv0.25|n3|truth R3": {
+    "P(falsified)": {
+     "R1": 0.625,
+     "R2": 1.0,
+     "R3": 0.0,
+     "R6": 0.1875
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 0.625,
+     "R2": 1.0,
+     "R6": 0.1875
+    }
+   },
+   "arm (a) only: buffer, fresh oil air / N2, no products, no K|cv0.25|n3|truth R6": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R3": 0.0,
+     "R6": 0.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R3": 0.0
+    }
+   },
+   "arm (a) only: buffer, fresh oil air / N2, no products, no K|cv0.25|n6|truth R1": {
+    "P(falsified)": {
+     "R1": 0.0,
+     "R2": 1.0,
+     "R3": 0.0,
+     "R6": 0.25
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 1.0,
+     "R3": 0.0,
+     "R6": 0.25
+    }
+   },
+   "arm (a) only: buffer, fresh oil air / N2, no products, no K|cv0.25|n6|truth R2": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 0.625,
+     "R3": 0.0,
+     "R6": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 0.375,
+     "R3": 0.0,
+     "R6": 0.375
+    }
+   },
+   "arm (a) only: buffer, fresh oil air / N2, no products, no K|cv0.25|n6|truth R3": {
+    "P(falsified)": {
+     "R1": 0.875,
+     "R2": 1.0,
+     "R3": 0.0,
+     "R6": 0.1875
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 0.875,
+     "R2": 1.0,
+     "R6": 0.1875
+    }
+   },
+   "arm (a) only: buffer, fresh oil air / N2, no products, no K|cv0.25|n6|truth R6": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R3": 0.0,
+     "R6": 0.125
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 0.875,
+     "R2": 0.875,
+     "R3": 0.0
+    }
+   },
+   "arms (a) + (b): + enal without oil, no products, no K|cv0.15|n2|truth R1": {
+    "P(falsified)": {
+     "R1": 0.0,
+     "R2": 1.0,
+     "R3": 0.125,
+     "R6": 0.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 1.0,
+     "R3": 0.125,
+     "R6": 0.0
+    }
+   },
+   "arms (a) + (b): + enal without oil, no products, no K|cv0.15|n2|truth R2": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 0.0,
+     "R3": 1.0,
+     "R6": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 1.0,
+     "R3": 1.0,
+     "R6": 1.0
+    }
+   },
+   "arms (a) + (b): + enal without oil, no products, no K|cv0.15|n2|truth R3": {
+    "P(falsified)": {
+     "R1": 0.9375,
+     "R2": 1.0,
+     "R3": 0.125,
+     "R6": 0.9375
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 0.8125,
+     "R2": 0.875,
+     "R6": 0.8125
+    }
+   },
+   "arms (a) + (b): + enal without oil, no products, no K|cv0.15|n2|truth R6": {
+    "P(falsified)": {
+     "R1": 0.9375,
+     "R2": 1.0,
+     "R3": 1.0,
+     "R6": 0.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 0.9375,
+     "R2": 1.0,
+     "R3": 1.0
+    }
+   },
+   "arms (a) + (b): + enal without oil, no products, no K|cv0.15|n3|truth R1": {
+    "P(falsified)": {
+     "R1": 0.0,
+     "R2": 1.0,
+     "R3": 0.625,
+     "R6": 0.125
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 1.0,
+     "R3": 0.625,
+     "R6": 0.125
+    }
+   },
+   "arms (a) + (b): + enal without oil, no products, no K|cv0.15|n3|truth R2": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 0.1875,
+     "R3": 1.0,
+     "R6": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 0.8125,
+     "R3": 0.8125,
+     "R6": 0.8125
+    }
+   },
+   "arms (a) + (b): + enal without oil, no products, no K|cv0.15|n3|truth R3": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R3": 0.0625,
+     "R6": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 0.9375,
+     "R2": 0.9375,
+     "R6": 0.9375
+    }
+   },
+   "arms (a) + (b): + enal without oil, no products, no K|cv0.15|n3|truth R6": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R3": 1.0,
+     "R6": 0.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R3": 1.0
+    }
+   },
+   "arms (a) + (b): + enal without oil, no products, no K|cv0.15|n6|truth R1": {
+    "P(falsified)": {
+     "R1": 0.0,
+     "R2": 1.0,
+     "R3": 0.75,
+     "R6": 0.25
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 1.0,
+     "R3": 0.75,
+     "R6": 0.25
+    }
+   },
+   "arms (a) + (b): + enal without oil, no products, no K|cv0.15|n6|truth R2": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 0.1875,
+     "R3": 1.0,
+     "R6": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 0.8125,
+     "R3": 0.8125,
+     "R6": 0.8125
+    }
+   },
+   "arms (a) + (b): + enal without oil, no products, no K|cv0.15|n6|truth R3": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R3": 0.125,
+     "R6": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 0.875,
+     "R2": 0.875,
+     "R6": 0.875
+    }
+   },
+   "arms (a) + (b): + enal without oil, no products, no K|cv0.15|n6|truth R6": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R3": 1.0,
+     "R6": 0.0625
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 0.9375,
+     "R2": 0.9375,
+     "R3": 0.9375
+    }
+   },
+   "arms (a) + (b): + enal without oil, no products, no K|cv0.25|n2|truth R1": {
+    "P(falsified)": {
+     "R1": 0.0,
+     "R2": 1.0,
+     "R3": 0.375,
+     "R6": 0.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 1.0,
+     "R3": 0.375,
+     "R6": 0.0
+    }
+   },
+   "arms (a) + (b): + enal without oil, no products, no K|cv0.25|n2|truth R2": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 0.1875,
+     "R3": 1.0,
+     "R6": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 0.8125,
+     "R3": 0.8125,
+     "R6": 0.8125
+    }
+   },
+   "arms (a) + (b): + enal without oil, no products, no K|cv0.25|n2|truth R3": {
+    "P(falsified)": {
+     "R1": 0.8125,
+     "R2": 1.0,
+     "R3": 0.1875,
+     "R6": 0.75
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 0.625,
+     "R2": 0.8125,
+     "R6": 0.5625
+    }
+   },
+   "arms (a) + (b): + enal without oil, no products, no K|cv0.25|n2|truth R6": {
+    "P(falsified)": {
+     "R1": 0.875,
+     "R2": 1.0,
+     "R3": 1.0,
+     "R6": 0.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 0.875,
+     "R2": 1.0,
+     "R3": 1.0
+    }
+   },
+   "arms (a) + (b): + enal without oil, no products, no K|cv0.25|n3|truth R1": {
+    "P(falsified)": {
+     "R1": 0.0625,
+     "R2": 1.0,
+     "R3": 0.4375,
+     "R6": 0.0625
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 0.9375,
+     "R3": 0.375,
+     "R6": 0.0
+    }
+   },
+   "arms (a) + (b): + enal without oil, no products, no K|cv0.25|n3|truth R2": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 0.25,
+     "R3": 1.0,
+     "R6": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 0.75,
+     "R3": 0.75,
+     "R6": 0.75
+    }
+   },
+   "arms (a) + (b): + enal without oil, no products, no K|cv0.25|n3|truth R3": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R3": 0.125,
+     "R6": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 0.875,
+     "R2": 0.875,
+     "R6": 0.875
+    }
+   },
+   "arms (a) + (b): + enal without oil, no products, no K|cv0.25|n3|truth R6": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R3": 1.0,
+     "R6": 0.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R3": 1.0
+    }
+   },
+   "arms (a) + (b): + enal without oil, no products, no K|cv0.25|n6|truth R1": {
+    "P(falsified)": {
+     "R1": 0.0,
+     "R2": 1.0,
+     "R3": 0.6875,
+     "R6": 0.25
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 1.0,
+     "R3": 0.6875,
+     "R6": 0.25
+    }
+   },
+   "arms (a) + (b): + enal without oil, no products, no K|cv0.25|n6|truth R2": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 0.25,
+     "R3": 1.0,
+     "R6": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 0.75,
+     "R3": 0.75,
+     "R6": 0.75
+    }
+   },
+   "arms (a) + (b): + enal without oil, no products, no K|cv0.25|n6|truth R3": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R3": 0.1875,
+     "R6": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 0.8125,
+     "R2": 0.8125,
+     "R6": 0.8125
+    }
+   },
+   "arms (a) + (b): + enal without oil, no products, no K|cv0.25|n6|truth R6": {
+    "P(falsified)": {
+     "R1": 1.0,
+     "R2": 1.0,
+     "R3": 1.0,
+     "R6": 0.125
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R1": 0.875,
+     "R2": 0.875,
+     "R3": 0.875
+    }
+   }
+  },
+  "W": {
+   "5 moistures 10 - 70 % wb|cv0.2|n2|truth R2": {
+    "P(falsified)": {
+     "R2": 0.02,
+     "PW": 0.855,
+     "R4": 0.075,
+     "BAS": 0.02
+    },
+    "P(separated: rival falsified and truth not)": {
+     "PW": 0.835,
+     "R4": 0.07,
+     "BAS": 0.005
+    }
+   },
+   "5 moistures 10 - 70 % wb|cv0.2|n2|truth PW": {
+    "P(falsified)": {
+     "R2": 0.82,
+     "PW": 0.01,
+     "R4": 0.02,
+     "BAS": 0.535
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 0.81,
+     "R4": 0.015,
+     "BAS": 0.525
+    }
+   },
+   "5 moistures 10 - 70 % wb|cv0.2|n2|truth R4": {
+    "P(falsified)": {
+     "R2": 0.275,
+     "PW": 0.475,
+     "R4": 0.015,
+     "BAS": 0.055
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 0.26,
+     "PW": 0.46,
+     "BAS": 0.045
+    }
+   },
+   "5 moistures 10 - 70 % wb|cv0.2|n2|truth BAS": {
+    "P(falsified)": {
+     "R2": 0.415,
+     "PW": 0.475,
+     "R4": 0.06,
+     "BAS": 0.01
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 0.405,
+     "PW": 0.465,
+     "R4": 0.05
+    }
+   },
+   "5 moistures 10 - 70 % wb|cv0.2|n3|truth R2": {
+    "P(falsified)": {
+     "R2": 0.005,
+     "PW": 1.0,
+     "R4": 0.26,
+     "BAS": 0.05
+    },
+    "P(separated: rival falsified and truth not)": {
+     "PW": 0.995,
+     "R4": 0.255,
+     "BAS": 0.05
+    }
+   },
+   "5 moistures 10 - 70 % wb|cv0.2|n3|truth PW": {
+    "P(falsified)": {
+     "R2": 1.0,
+     "PW": 0.015,
+     "R4": 0.015,
+     "BAS": 0.985
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 0.985,
+     "R4": 0.0,
+     "BAS": 0.97
+    }
+   },
+   "5 moistures 10 - 70 % wb|cv0.2|n3|truth R4": {
+    "P(falsified)": {
+     "R2": 0.72,
+     "PW": 0.875,
+     "R4": 0.035,
+     "BAS": 0.3
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 0.685,
+     "PW": 0.84,
+     "BAS": 0.275
+    }
+   },
+   "5 moistures 10 - 70 % wb|cv0.2|n3|truth BAS": {
+    "P(falsified)": {
+     "R2": 0.91,
+     "PW": 0.945,
+     "R4": 0.215,
+     "BAS": 0.02
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 0.89,
+     "PW": 0.925,
+     "R4": 0.205
+    }
+   },
+   "5 moistures 10 - 70 % wb|cv0.2|n4|truth R2": {
+    "P(falsified)": {
+     "R2": 0.015,
+     "PW": 1.0,
+     "R4": 0.53,
+     "BAS": 0.025
+    },
+    "P(separated: rival falsified and truth not)": {
+     "PW": 0.985,
+     "R4": 0.515,
+     "BAS": 0.02
+    }
+   },
+   "5 moistures 10 - 70 % wb|cv0.2|n4|truth PW": {
+    "P(falsified)": {
+     "R2": 1.0,
+     "PW": 0.01,
+     "R4": 0.015,
+     "BAS": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 0.99,
+     "R4": 0.005,
+     "BAS": 0.99
+    }
+   },
+   "5 moistures 10 - 70 % wb|cv0.2|n4|truth R4": {
+    "P(falsified)": {
+     "R2": 0.825,
+     "PW": 0.97,
+     "R4": 0.025,
+     "BAS": 0.535
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 0.8,
+     "PW": 0.945,
+     "BAS": 0.51
+    }
+   },
+   "5 moistures 10 - 70 % wb|cv0.2|n4|truth BAS": {
+    "P(falsified)": {
+     "R2": 1.0,
+     "PW": 1.0,
+     "R4": 0.475,
+     "BAS": 0.03
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 0.97,
+     "PW": 0.97,
+     "R4": 0.45
+    }
+   },
+   "5 moistures 10 - 70 % wb|cv0.2|n6|truth R2": {
+    "P(falsified)": {
+     "R2": 0.02,
+     "PW": 1.0,
+     "R4": 0.84,
+     "BAS": 0.035
+    },
+    "P(separated: rival falsified and truth not)": {
+     "PW": 0.98,
+     "R4": 0.82,
+     "BAS": 0.015
+    }
+   },
+   "5 moistures 10 - 70 % wb|cv0.2|n6|truth PW": {
+    "P(falsified)": {
+     "R2": 1.0,
+     "PW": 0.02,
+     "R4": 0.02,
+     "BAS": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 0.98,
+     "R4": 0.005,
+     "BAS": 0.98
+    }
+   },
+   "5 moistures 10 - 70 % wb|cv0.2|n6|truth R4": {
+    "P(falsified)": {
+     "R2": 0.97,
+     "PW": 1.0,
+     "R4": 0.03,
+     "BAS": 0.69
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 0.94,
+     "PW": 0.97,
+     "BAS": 0.665
+    }
+   },
+   "5 moistures 10 - 70 % wb|cv0.2|n6|truth BAS": {
+    "P(falsified)": {
+     "R2": 1.0,
+     "PW": 1.0,
+     "R4": 0.715,
+     "BAS": 0.035
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 0.965,
+     "PW": 0.965,
+     "R4": 0.685
+    }
+   },
+   "5 moistures 10 - 70 % wb|cv0.3|n2|truth R2": {
+    "P(falsified)": {
+     "R2": 0.01,
+     "PW": 0.535,
+     "R4": 0.03,
+     "BAS": 0.025
+    },
+    "P(separated: rival falsified and truth not)": {
+     "PW": 0.525,
+     "R4": 0.025,
+     "BAS": 0.015
+    }
+   },
+   "5 moistures 10 - 70 % wb|cv0.3|n2|truth PW": {
+    "P(falsified)": {
+     "R2": 0.52,
+     "PW": 0.0,
+     "R4": 0.01,
+     "BAS": 0.225
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 0.52,
+     "R4": 0.01,
+     "BAS": 0.225
+    }
+   },
+   "5 moistures 10 - 70 % wb|cv0.3|n2|truth R4": {
+    "P(falsified)": {
+     "R2": 0.14,
+     "PW": 0.32,
+     "R4": 0.01,
+     "BAS": 0.06
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 0.13,
+     "PW": 0.31,
+     "BAS": 0.05
+    }
+   },
+   "5 moistures 10 - 70 % wb|cv0.3|n2|truth BAS": {
+    "P(falsified)": {
+     "R2": 0.165,
+     "PW": 0.27,
+     "R4": 0.01,
+     "BAS": 0.01
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 0.155,
+     "PW": 0.265,
+     "R4": 0.01
+    }
+   },
+   "5 moistures 10 - 70 % wb|cv0.3|n3|truth R2": {
+    "P(falsified)": {
+     "R2": 0.005,
+     "PW": 0.975,
+     "R4": 0.08,
+     "BAS": 0.005
+    },
+    "P(separated: rival falsified and truth not)": {
+     "PW": 0.97,
+     "R4": 0.08,
+     "BAS": 0.0
+    }
+   },
+   "5 moistures 10 - 70 % wb|cv0.3|n3|truth PW": {
+    "P(falsified)": {
+     "R2": 0.965,
+     "PW": 0.03,
+     "R4": 0.04,
+     "BAS": 0.785
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 0.935,
+     "R4": 0.015,
+     "BAS": 0.755
+    }
+   },
+   "5 moistures 10 - 70 % wb|cv0.3|n3|truth R4": {
+    "P(falsified)": {
+     "R2": 0.4,
+     "PW": 0.73,
+     "R4": 0.035,
+     "BAS": 0.12
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 0.375,
+     "PW": 0.695,
+     "BAS": 0.11
+    }
+   },
+   "5 moistures 10 - 70 % wb|cv0.3|n3|truth BAS": {
+    "P(falsified)": {
+     "R2": 0.605,
+     "PW": 0.705,
+     "R4": 0.095,
+     "BAS": 0.03
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 0.575,
+     "PW": 0.68,
+     "R4": 0.07
+    }
+   },
+   "5 moistures 10 - 70 % wb|cv0.3|n4|truth R2": {
+    "P(falsified)": {
+     "R2": 0.005,
+     "PW": 1.0,
+     "R4": 0.205,
+     "BAS": 0.025
+    },
+    "P(separated: rival falsified and truth not)": {
+     "PW": 0.995,
+     "R4": 0.205,
+     "BAS": 0.025
+    }
+   },
+   "5 moistures 10 - 70 % wb|cv0.3|n4|truth PW": {
+    "P(falsified)": {
+     "R2": 1.0,
+     "PW": 0.025,
+     "R4": 0.025,
+     "BAS": 0.975
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 0.975,
+     "R4": 0.005,
+     "BAS": 0.95
+    }
+   },
+   "5 moistures 10 - 70 % wb|cv0.3|n4|truth R4": {
+    "P(falsified)": {
+     "R2": 0.645,
+     "PW": 0.86,
+     "R4": 0.025,
+     "BAS": 0.245
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 0.62,
+     "PW": 0.835,
+     "BAS": 0.23
+    }
+   },
+   "5 moistures 10 - 70 % wb|cv0.3|n4|truth BAS": {
+    "P(falsified)": {
+     "R2": 0.925,
+     "PW": 0.955,
+     "R4": 0.175,
+     "BAS": 0.005
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 0.92,
+     "PW": 0.95,
+     "R4": 0.175
+    }
+   },
+   "5 moistures 10 - 70 % wb|cv0.3|n6|truth R2": {
+    "P(falsified)": {
+     "R2": 0.015,
+     "PW": 1.0,
+     "R4": 0.425,
+     "BAS": 0.035
+    },
+    "P(separated: rival falsified and truth not)": {
+     "PW": 0.985,
+     "R4": 0.415,
+     "BAS": 0.025
+    }
+   },
+   "5 moistures 10 - 70 % wb|cv0.3|n6|truth PW": {
+    "P(falsified)": {
+     "R2": 1.0,
+     "PW": 0.025,
+     "R4": 0.065,
+     "BAS": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 0.975,
+     "R4": 0.04,
+     "BAS": 0.975
+    }
+   },
+   "5 moistures 10 - 70 % wb|cv0.3|n6|truth R4": {
+    "P(falsified)": {
+     "R2": 0.835,
+     "PW": 0.995,
+     "R4": 0.015,
+     "BAS": 0.43
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 0.82,
+     "PW": 0.98,
+     "BAS": 0.42
+    }
+   },
+   "5 moistures 10 - 70 % wb|cv0.3|n6|truth BAS": {
+    "P(falsified)": {
+     "R2": 1.0,
+     "PW": 1.0,
+     "R4": 0.4,
+     "BAS": 0.045
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 0.955,
+     "PW": 0.955,
+     "R4": 0.355
+    }
+   },
+   "3 moistures (10, 40, 70 % wb)|cv0.2|n2|truth R2": {
+    "P(falsified)": {
+     "R2": 0.035,
+     "PW": 0.78,
+     "R4": 0.08,
+     "BAS": 0.06
+    },
+    "P(separated: rival falsified and truth not)": {
+     "PW": 0.745,
+     "R4": 0.06,
+     "BAS": 0.045
+    }
+   },
+   "3 moistures (10, 40, 70 % wb)|cv0.2|n2|truth PW": {
+    "P(falsified)": {
+     "R2": 0.785,
+     "PW": 0.0,
+     "R4": 0.02,
+     "BAS": 0.62
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 0.785,
+     "R4": 0.02,
+     "BAS": 0.62
+    }
+   },
+   "3 moistures (10, 40, 70 % wb)|cv0.2|n2|truth R4": {
+    "P(falsified)": {
+     "R2": 0.19,
+     "PW": 0.655,
+     "R4": 0.005,
+     "BAS": 0.1
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 0.19,
+     "PW": 0.65,
+     "BAS": 0.1
+    }
+   },
+   "3 moistures (10, 40, 70 % wb)|cv0.2|n2|truth BAS": {
+    "P(falsified)": {
+     "R2": 0.405,
+     "PW": 0.58,
+     "R4": 0.1,
+     "BAS": 0.01
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 0.395,
+     "PW": 0.57,
+     "R4": 0.09
+    }
+   },
+   "3 moistures (10, 40, 70 % wb)|cv0.2|n3|truth R2": {
+    "P(falsified)": {
+     "R2": 0.02,
+     "PW": 1.0,
+     "R4": 0.345,
+     "BAS": 0.035
+    },
+    "P(separated: rival falsified and truth not)": {
+     "PW": 0.98,
+     "R4": 0.33,
+     "BAS": 0.02
+    }
+   },
+   "3 moistures (10, 40, 70 % wb)|cv0.2|n3|truth PW": {
+    "P(falsified)": {
+     "R2": 1.0,
+     "PW": 0.03,
+     "R4": 0.065,
+     "BAS": 0.995
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 0.97,
+     "R4": 0.045,
+     "BAS": 0.965
+    }
+   },
+   "3 moistures (10, 40, 70 % wb)|cv0.2|n3|truth R4": {
+    "P(falsified)": {
+     "R2": 0.63,
+     "PW": 0.945,
+     "R4": 0.015,
+     "BAS": 0.255
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 0.615,
+     "PW": 0.93,
+     "BAS": 0.25
+    }
+   },
+   "3 moistures (10, 40, 70 % wb)|cv0.2|n3|truth BAS": {
+    "P(falsified)": {
+     "R2": 0.885,
+     "PW": 0.99,
+     "R4": 0.325,
+     "BAS": 0.03
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 0.855,
+     "PW": 0.96,
+     "R4": 0.31
+    }
+   },
+   "3 moistures (10, 40, 70 % wb)|cv0.2|n4|truth R2": {
+    "P(falsified)": {
+     "R2": 0.025,
+     "PW": 1.0,
+     "R4": 0.595,
+     "BAS": 0.06
+    },
+    "P(separated: rival falsified and truth not)": {
+     "PW": 0.975,
+     "R4": 0.58,
+     "BAS": 0.045
+    }
+   },
+   "3 moistures (10, 40, 70 % wb)|cv0.2|n4|truth PW": {
+    "P(falsified)": {
+     "R2": 1.0,
+     "PW": 0.005,
+     "R4": 0.04,
+     "BAS": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 0.995,
+     "R4": 0.04,
+     "BAS": 0.995
+    }
+   },
+   "3 moistures (10, 40, 70 % wb)|cv0.2|n4|truth R4": {
+    "P(falsified)": {
+     "R2": 0.76,
+     "PW": 0.995,
+     "R4": 0.04,
+     "BAS": 0.375
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 0.74,
+     "PW": 0.955,
+     "BAS": 0.37
+    }
+   },
+   "3 moistures (10, 40, 70 % wb)|cv0.2|n4|truth BAS": {
+    "P(falsified)": {
+     "R2": 1.0,
+     "PW": 1.0,
+     "R4": 0.495,
+     "BAS": 0.025
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 0.975,
+     "PW": 0.975,
+     "R4": 0.48
+    }
+   },
+   "3 moistures (10, 40, 70 % wb)|cv0.2|n6|truth R2": {
+    "P(falsified)": {
+     "R2": 0.055,
+     "PW": 1.0,
+     "R4": 0.855,
+     "BAS": 0.095
+    },
+    "P(separated: rival falsified and truth not)": {
+     "PW": 0.945,
+     "R4": 0.81,
+     "BAS": 0.065
+    }
+   },
+   "3 moistures (10, 40, 70 % wb)|cv0.2|n6|truth PW": {
+    "P(falsified)": {
+     "R2": 1.0,
+     "PW": 0.05,
+     "R4": 0.075,
+     "BAS": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 0.95,
+     "R4": 0.025,
+     "BAS": 0.95
+    }
+   },
+   "3 moistures (10, 40, 70 % wb)|cv0.2|n6|truth R4": {
+    "P(falsified)": {
+     "R2": 0.925,
+     "PW": 1.0,
+     "R4": 0.035,
+     "BAS": 0.59
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 0.89,
+     "PW": 0.965,
+     "BAS": 0.57
+    }
+   },
+   "3 moistures (10, 40, 70 % wb)|cv0.2|n6|truth BAS": {
+    "P(falsified)": {
+     "R2": 1.0,
+     "PW": 1.0,
+     "R4": 0.84,
+     "BAS": 0.045
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 0.955,
+     "PW": 0.955,
+     "R4": 0.795
+    }
+   },
+   "3 moistures (10, 40, 70 % wb)|cv0.3|n2|truth R2": {
+    "P(falsified)": {
+     "R2": 0.02,
+     "PW": 0.535,
+     "R4": 0.055,
+     "BAS": 0.04
+    },
+    "P(separated: rival falsified and truth not)": {
+     "PW": 0.515,
+     "R4": 0.04,
+     "BAS": 0.025
+    }
+   },
+   "3 moistures (10, 40, 70 % wb)|cv0.3|n2|truth PW": {
+    "P(falsified)": {
+     "R2": 0.565,
+     "PW": 0.015,
+     "R4": 0.03,
+     "BAS": 0.365
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 0.55,
+     "R4": 0.02,
+     "BAS": 0.35
+    }
+   },
+   "3 moistures (10, 40, 70 % wb)|cv0.3|n2|truth R4": {
+    "P(falsified)": {
+     "R2": 0.125,
+     "PW": 0.37,
+     "R4": 0.02,
+     "BAS": 0.06
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 0.105,
+     "PW": 0.35,
+     "BAS": 0.045
+    }
+   },
+   "3 moistures (10, 40, 70 % wb)|cv0.3|n2|truth BAS": {
+    "P(falsified)": {
+     "R2": 0.215,
+     "PW": 0.38,
+     "R4": 0.03,
+     "BAS": 0.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 0.215,
+     "PW": 0.38,
+     "R4": 0.03
+    }
+   },
+   "3 moistures (10, 40, 70 % wb)|cv0.3|n3|truth R2": {
+    "P(falsified)": {
+     "R2": 0.045,
+     "PW": 0.99,
+     "R4": 0.17,
+     "BAS": 0.06
+    },
+    "P(separated: rival falsified and truth not)": {
+     "PW": 0.945,
+     "R4": 0.155,
+     "BAS": 0.04
+    }
+   },
+   "3 moistures (10, 40, 70 % wb)|cv0.3|n3|truth PW": {
+    "P(falsified)": {
+     "R2": 0.985,
+     "PW": 0.03,
+     "R4": 0.055,
+     "BAS": 0.965
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 0.955,
+     "R4": 0.03,
+     "BAS": 0.935
+    }
+   },
+   "3 moistures (10, 40, 70 % wb)|cv0.3|n3|truth R4": {
+    "P(falsified)": {
+     "R2": 0.39,
+     "PW": 0.83,
+     "R4": 0.05,
+     "BAS": 0.165
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 0.35,
+     "PW": 0.78,
+     "BAS": 0.13
+    }
+   },
+   "3 moistures (10, 40, 70 % wb)|cv0.3|n3|truth BAS": {
+    "P(falsified)": {
+     "R2": 0.65,
+     "PW": 0.85,
+     "R4": 0.16,
+     "BAS": 0.025
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 0.625,
+     "PW": 0.83,
+     "R4": 0.16
+    }
+   },
+   "3 moistures (10, 40, 70 % wb)|cv0.3|n4|truth R2": {
+    "P(falsified)": {
+     "R2": 0.02,
+     "PW": 1.0,
+     "R4": 0.29,
+     "BAS": 0.055
+    },
+    "P(separated: rival falsified and truth not)": {
+     "PW": 0.98,
+     "R4": 0.285,
+     "BAS": 0.055
+    }
+   },
+   "3 moistures (10, 40, 70 % wb)|cv0.3|n4|truth PW": {
+    "P(falsified)": {
+     "R2": 0.995,
+     "PW": 0.03,
+     "R4": 0.065,
+     "BAS": 0.995
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 0.965,
+     "R4": 0.04,
+     "BAS": 0.965
+    }
+   },
+   "3 moistures (10, 40, 70 % wb)|cv0.3|n4|truth R4": {
+    "P(falsified)": {
+     "R2": 0.565,
+     "PW": 0.945,
+     "R4": 0.01,
+     "BAS": 0.305
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 0.56,
+     "PW": 0.935,
+     "BAS": 0.295
+    }
+   },
+   "3 moistures (10, 40, 70 % wb)|cv0.3|n4|truth BAS": {
+    "P(falsified)": {
+     "R2": 0.905,
+     "PW": 0.975,
+     "R4": 0.285,
+     "BAS": 0.015
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 0.89,
+     "PW": 0.96,
+     "R4": 0.275
+    }
+   },
+   "3 moistures (10, 40, 70 % wb)|cv0.3|n6|truth R2": {
+    "P(falsified)": {
+     "R2": 0.02,
+     "PW": 1.0,
+     "R4": 0.49,
+     "BAS": 0.09
+    },
+    "P(separated: rival falsified and truth not)": {
+     "PW": 0.98,
+     "R4": 0.485,
+     "BAS": 0.07
+    }
+   },
+   "3 moistures (10, 40, 70 % wb)|cv0.3|n6|truth PW": {
+    "P(falsified)": {
+     "R2": 1.0,
+     "PW": 0.035,
+     "R4": 0.075,
+     "BAS": 1.0
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 0.965,
+     "R4": 0.04,
+     "BAS": 0.965
+    }
+   },
+   "3 moistures (10, 40, 70 % wb)|cv0.3|n6|truth R4": {
+    "P(falsified)": {
+     "R2": 0.78,
+     "PW": 0.99,
+     "R4": 0.03,
+     "BAS": 0.485
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 0.76,
+     "PW": 0.96,
+     "BAS": 0.475
+    }
+   },
+   "3 moistures (10, 40, 70 % wb)|cv0.3|n6|truth BAS": {
+    "P(falsified)": {
+     "R2": 0.99,
+     "PW": 1.0,
+     "R4": 0.465,
+     "BAS": 0.035
+    },
+    "P(separated: rival falsified and truth not)": {
+     "R2": 0.955,
+     "PW": 0.965,
+     "R4": 0.45
+    }
+   }
+  }
+ },
+ "seconds": 4331.8
+}

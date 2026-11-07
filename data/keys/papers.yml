@@ -45,6 +45,7 @@ dossiers_without_printed_doi:
 - data/lit/extraction_dossiers/oroszvari2006_extraction.md
 - data/lit/extraction_dossiers/research_round3_channels.md
 - data/lit/extraction_dossiers/research_round4_nulls.md
+- data/lit/extraction_dossiers/schibilsky2019_extraction.md
 - data/lit/extraction_dossiers/shaoul1987_extraction.md
 - data/lit/extraction_dossiers/sprague2011_extraction.md
 - data/lit/extraction_dossiers/suleimenov1994_extraction.md
@@ -8916,7 +8917,6 @@ papers:
     - acs_ref3_spi_acrylamide_fast_kinetics
     - ma_2024_pbma_extrusion_damage
     data/lit/safety_reference_payloads.json:
-    - acs_ref3_spi_acrylamide_fast_kinetics
     - ma_2024_pbma_extrusion_damage
     results/literature/deep_research_backlog.json:
     - ma_2024_pbma_extrusion_damage
