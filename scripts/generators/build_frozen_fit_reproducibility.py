@@ -41,6 +41,7 @@ Usage (each fit runs in its own process: several generators install module state
     python scripts/generators/build_frozen_fit_reproducibility.py --fit B20 [--workers 3]
     python scripts/generators/build_frozen_fit_reproducibility.py --all [--workers 3]
     python scripts/generators/build_frozen_fit_reproducibility.py --time B60     # seconds for one evaluation
+    python scripts/generators/build_frozen_fit_reproducibility.py --probe B18    # one evaluation + row sets, JSON (the drift gate)
     python scripts/generators/build_frozen_fit_reproducibility.py --render       # markdown from the json
     python scripts/generators/build_frozen_fit_reproducibility.py --check        # exit 1 if the markdown is stale
 """
@@ -65,7 +66,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 GENERATORS = ROOT / "scripts" / "generators"
 
-from src import data_paths, provenance  # noqa: E402
+from src import data_paths, evidence_tiers, provenance  # noqa: E402
 
 V = data_paths.VALIDATION_DIR
 OUT_JSON = V / "frozen_fit_reproducibility.json"
@@ -328,11 +329,10 @@ def _s1_rows() -> List[dict]:
     return json.loads(TIERS_JSON.read_text(encoding="utf-8"))["rows"]
 
 
-#: The S1 record's ``identification.fit`` label -> the fit audited here. The fed 3-deoxy triangle is attributed to B39
-#: by the record, but its shipped values are B41's optimum (parameters_dicarbonyl.SHIPPING_FIT_REPORT), so B41 is
-#: the fit they rest on; B39 is audited too, as the record's attribution.
-S1_FIT_LABEL = {"B1 (variant A)": "B1", "B2.3 (frozen since)": "B2.3", "B60 (free)": "B60", "B3": "B3", "B6": "B6",
-                "B7": "B7", "B18": "B18", "B20": "B20", "B21": "B21", "B39": "B41"}
+#: The S1 record's ``identification.fit`` label -> the fit audited here (kept in src/evidence_tiers.py, which notes a
+#: drifted fit on its coordinates). The fed 3-deoxy triangle is attributed to B39 by the record, but its shipped values
+#: are B41's optimum, so B41 is the fit they rest on; B39 is audited too, as the record's attribution.
+S1_FIT_LABEL = evidence_tiers.FIT_OF_IDENTIFICATION_LABEL
 FIT_ORDER = ("B1", "B3", "B6", "B7", "B18", "B20", "B21", "B39", "B41", "B2.3", "B60")
 
 
@@ -979,12 +979,29 @@ def run_one(name: str, workers: int) -> Dict[str, Any]:
     return audit_fit(spec, ids, workers=workers)
 
 
-def time_one(name: str) -> Dict[str, Any]:
-    spec = SPECS[name]()
+def probe(name: str) -> Dict[str, Any]:
+    """ONE objective evaluation at the frozen point, with the row set then and now: what
+    ``scripts/ci/frozen_fit_drift_gate.py`` judges (no Jacobian, no step, no attribution)."""
     t0 = time.time()
-    r = np.asarray(spec.residuals(np.asarray(spec.x_frozen, dtype=float)))
-    return {"fit": name, "seconds_one_evaluation": round(time.time() - t0, 2), "S_today": float(r @ r),
-            "S_recorded": spec.s_recorded, "n_free": len(spec.keys), "n_rows": len(r)}
+    spec = SPECS[name]()
+    t1 = time.time()
+    r = np.asarray(spec.residuals(np.asarray(spec.x_frozen, dtype=float)), dtype=float)
+    t2 = time.time()
+    return {"fit": name, "S_recorded": spec.s_recorded, "S_today": float(r @ r), "rel_tol": spec.rel_tol,
+            "tol_source": spec.tol_source, "n_free": len(spec.keys), "n_rows_then": spec.n_rows_then,
+            "n_rows_now": len(r), "rows_then": None if spec.rows_then is None else sorted(spec.rows_then),
+            "rows_now": sorted(spec.rows_now),
+            "seconds": {"setup": round(t1 - t0, 2), "one_evaluation": round(t2 - t1, 2)}}
+
+
+#: the line prefix ``--probe`` prints its JSON under (wave generators may print at import)
+PROBE_PREFIX = "FROZEN_FIT_PROBE "
+
+
+def time_one(name: str) -> Dict[str, Any]:
+    p = probe(name)
+    return {"fit": name, "seconds_one_evaluation": p["seconds"]["one_evaluation"], "S_today": p["S_today"],
+            "S_recorded": p["S_recorded"], "n_free": p["n_free"], "n_rows": p["n_rows_now"]}
 
 
 # =====================================================================================================================
@@ -1019,7 +1036,7 @@ WHY: Dict[str, str] = {
              "sets back; at B2.3's quick 9-node / 2-sweep setting the relaxed fixed point does not converge (residual "
              "0.05 pH, flagged). Reversing all three probes takes S 112.9 -> 45.1, not to 16.35: the rest is the "
              "measured sulfur barriers and channels shipped since (B8 onward), not probed here. The Kang MFT / FFT "
-             "and Whitfield furfural + H2S rows move most (+2 to +5 sigma). The shipped vector is not B2.3's point: "
+             "and Hofmann 1998 furfural + H2S rows move most (+2 to +5 sigma). The shipped vector is not B2.3's point: "
              "B60 re-fitted 23 of its 48 coordinates and carries the other 25 frozen at B2.3's values, so B60's "
              "objective (which reproduces) is the one these 25 now sit in, held, never free."),
     "B7": "+0.01 %: the one Blank 1997 prediction moved by 0.001 dex through today's sulfur-lane parameters (B60).",
@@ -1222,6 +1239,7 @@ def main(argv=None) -> int:
     ap.add_argument("--fit", choices=list(SPECS))
     ap.add_argument("--all", action="store_true")
     ap.add_argument("--time", choices=list(SPECS))
+    ap.add_argument("--probe", choices=list(SPECS), help="one evaluation at the frozen point, as JSON (the drift gate)")
     ap.add_argument("--workers", type=int, default=1)
     ap.add_argument("--render", action="store_true")
     ap.add_argument("--check", action="store_true")
@@ -1238,6 +1256,9 @@ def main(argv=None) -> int:
         return 0
     if a.time:
         print(json.dumps(time_one(a.time), indent=1))
+        return 0
+    if a.probe:
+        print(PROBE_PREFIX + json.dumps(probe(a.probe)), flush=True)
         return 0
     if a.all:
         for name in FIT_ORDER:

@@ -91,7 +91,16 @@ INPUTS = {
     "conflicts": data_paths.CONFLICTS_REGISTER,
     "choices": REF / "choices_register.yml",
     "tier_changes": REF / "evidence_tier_changes.yml",
+    "frozen_fit_drift": REF / "frozen_fit_drift_allowlist.yml",
 }
+
+#: The record's ``identification.fit`` label -> the frozen fit whose objective that coordinate's shipped value rests on
+#: (scripts/generators/build_frozen_fit_reproducibility.py audits each; scripts/ci/frozen_fit_drift_gate.py keeps the
+#: drifted ones in docs/reference/frozen_fit_drift_allowlist.yml). The fed 3-deoxy triangle the record attributes to
+#: B39 ships B41's optimum (parameters_dicarbonyl.SHIPPING_FIT_REPORT), so B41 is the fit it rests on.
+FIT_OF_IDENTIFICATION_LABEL: Dict[str, str] = {
+    "B1 (variant A)": "B1", "B2.3 (frozen since)": "B2.3", "B60 (free)": "B60", "B3": "B3", "B6": "B6", "B7": "B7",
+    "B18": "B18", "B20": "B20", "B21": "B21", "B39": "B41"}
 
 # ---------------------------------------------------------------------------------------------------------------------
 # What the record must cover, and how a tier may change (S1: "upgrades need an artifact and a second reader;
@@ -1286,6 +1295,7 @@ def build_record() -> dict:
                 w for wave, ws in withdrawn_by_fit.items() for w in ws if fit == wave or fit.startswith(wave + " ")]
             rows.append(row)
     rows += _extra_rows(unmapped_priors, fits, register)
+    note_fit_drift(rows, _yaml("frozen_fit_drift").get("entries") or [])
     changes: Dict[str, List[dict]] = {}
     for entry in tier_changes():
         changes.setdefault(str(entry.get("coordinate")), []).append(dict(entry))
@@ -1313,6 +1323,29 @@ def build_record() -> dict:
                       "s4_high_sensitivity": "the step matters in the sulfur flux attribution (> 1 % of a pot's flux or "
                                              "of an odorant-path species), or B38's Jacobian column norm >= 1"},
             "inputs": [str(p) for p in INPUTS.values()]}
+
+
+def note_fit_drift(rows: List[dict], allowlist: Iterable[Mapping[str, Any]]) -> int:
+    """Sec. 7 S1: a coordinate whose fit no longer reproduces at its frozen point says so in its identification (the
+    allow-list's MATERIAL entries, which the drift gate holds to today's engine). Text only: no tier moves.
+    Returns the number of coordinates noted."""
+    material = {e["fit"]: e for e in allowlist if e.get("class") == "MATERIAL"}
+    n = 0
+    for row in rows:
+        ident = row.get("identification")
+        entry = material.get(FIT_OF_IDENTIFICATION_LABEL.get((ident or {}).get("fit")))
+        if entry is None:
+            continue
+        cite = entry.get("cf") or f"PR #{entry.get('pr')}"
+        note = (f"{entry['fit']}'s objective no longer reproduces at its frozen point (S = r . r {float(entry['S']):.6g} "
+                f"today; MATERIAL drift, {cite}; frozen_fit_reproducibility.md): no current objective supports this value")
+        ident["fit_reproduces"] = False
+        ident["fit_drift"] = {"fit": entry["fit"], "class": "MATERIAL", "S_today": float(entry["S"]),
+                              "cf": entry.get("cf"), "pr": entry.get("pr"), "note": note,
+                              "record": "results/validation/frozen_fit_reproducibility.json"}
+        row["basis"] = f"{note}. {row['basis']}"
+        n += 1
+    return n
 
 
 def _dossiers(p: Any) -> List[str]:

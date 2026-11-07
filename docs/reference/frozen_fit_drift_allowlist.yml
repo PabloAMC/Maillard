@@ -1,0 +1,55 @@
+# The frozen fits whose objective today's engine knowingly no longer reproduces at the frozen point
+# (2026-11-07, PR #107). Read by scripts/ci/frozen_fit_drift_gate.py.
+#
+# Why it exists: B1, B18 and B2.3 drifted silently for weeks (frozen_fit_reproducibility.md): the trunk and the pH
+# physics changed under them and nothing re-evaluated their objectives. The gate now evaluates every frozen fit's
+# own objective once at its frozen point on every run and FAILS when S = r . r moves beyond the fit's tolerance (its
+# record's, else 1 %) or its row set changes, UNLESS an entry here names:
+#   fit           -- the fit (a name in build_frozen_fit_reproducibility.SPECS)
+#   class         -- BENIGN or MATERIAL: the class results/validation/frozen_fit_reproducibility.json gives the fit
+#                    (DRIFTED-BENIGN / DRIFTED-MATERIAL), judged at this same S (the record's S_today must match too,
+#                    so a new S needs a re-audit: build_frozen_fit_reproducibility.py --fit <fit>)
+#   S             -- the exact current S = r . r at the frozen point
+#   S_rel_precision -- how exactly S is named: |S_today - S| <= S_rel_precision x max(1, |S|)
+#   n_rows        -- the row count today
+#   cf            -- the conflicts-register entry that records the drift and its cause (docs/reference/conflicts_register.yml),
+#   pr            -- and/or the PR that records it (at least one of the two)
+# An entry whose S no longer matches is STALE and fails (the drift moved again: re-audit and re-name it); an entry for
+# a fit that reproduces again fails too (remove it). The entry is not a licence: a MATERIAL fit's shipped coordinates
+# stay fitted-unidentified under plan sec. 7 S1 until the fit is re-derived, and the S1 record says so on each.
+#
+# Slow fits (B2.3, B60: 22-35 s per evaluation) are checked only with --slow (the weekly scheduled CI job).
+
+entries:
+  - fit: B1
+    class: MATERIAL
+    S: 5025.873532
+    S_rel_precision: 1.0e-5
+    n_rows: 354
+    cf: CF-135
+    pr: 107
+
+  - fit: B18
+    class: MATERIAL
+    S: 295.067774
+    S_rel_precision: 1.0e-5
+    n_rows: 10
+    cf: CF-136
+    pr: 107
+
+  - fit: B2.3
+    class: MATERIAL
+    S: 112.894055
+    # the relaxed pH fixed point does not converge at B2.3's quick setting (CF-137): named less tightly
+    S_rel_precision: 1.0e-4
+    n_rows: 58
+    cf: CF-137
+    pr: 107
+
+  - fit: B39
+    class: BENIGN
+    S: 3.206815
+    S_rel_precision: 1.0e-5
+    n_rows: 12
+    cf: CF-138
+    pr: 107

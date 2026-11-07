@@ -2,12 +2,12 @@
  "artifact": "incumbent_evidence_tiers",
  "provenance": {
   "artifact": "incumbent_evidence_tiers",
-  "generated_on": "2026-11-06",
+  "generated_on": "2026-11-07",
   "git": {
-   "commit": "44ce75dcc91e64ce64da59d3bee98b538f20b192",
-   "short": "44ce75dc",
-   "branch": "register-pass-2026-11-06",
-   "dirty": false
+   "commit": "9b2ca19411349a4c43de7efee1df42a727486830",
+   "short": "9b2ca194",
+   "branch": "frozen-fit-reproducibility",
+   "dirty": true
   },
   "generated_by": "scripts/generators/build_evidence_tiers.py",
   "inputs": [
@@ -69,7 +69,7 @@
    },
    {
     "path": "results/validation/sulfur_reaction_evidence.json",
-    "sha256": "44c7fb8c939af208087d3f74af1c5d36b9c7b081b91612f8730bff448ece5aea"
+    "sha256": "c4d6f0405a41256c655a9cd2bc2adcee1020104ecf80d908601cd1579cd8da88"
    },
    {
     "path": "results/validation/data_wishlist.json",
@@ -81,7 +81,7 @@
    },
    {
     "path": "docs/reference/conflicts_register.yml",
-    "sha256": "c47a21dc25ae5d4018c29c97e2331f2b375d2499a200773d2eeef9662ee15f05"
+    "sha256": "f2550f5c44b1d99f4a1c89cb8ff867c169a25a7c5ebd2527ebf63a1f45601eae"
    },
    {
     "path": "docs/reference/choices_register.yml",
@@ -90,6 +90,10 @@
    {
     "path": "docs/reference/evidence_tier_changes.yml",
     "sha256": "0db7f09081d2afa1073b7b9bd35ceb62a2ce9eaf323b3f9808ca1dfe02faab28"
+   },
+   {
+    "path": "docs/reference/frozen_fit_drift_allowlist.yml",
+    "sha256": "4af4e949bcebb9d8d055678aa8804e3652182eaeac2dee37791181d131f2e5c7"
    },
    {
     "path": "src/kinetic_core/parameters.py",
@@ -141,7 +145,7 @@
    },
    {
     "path": "src/evidence_tiers.py",
-    "sha256": "c9a2a4ccac913ddfa437db091388acb7fdf65d5358f1b63f0609c9a329921b23"
+    "sha256": "79f445be475c621dc06011b476f7c88c1050a7484597302815d99c50b6ff61bb"
    },
    {
     "path": "src/kinetic_core/acrylamide_conditions.py",
@@ -1044,10 +1048,20 @@
      "on a declared bound (the fit's record)",
      "no uncertainty reported"
     ],
-    "status": "unidentified"
+    "status": "unidentified",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B1",
+     "class": "MATERIAL",
+     "S_today": 5025.873532,
+     "cf": "CF-135",
+     "pr": 107,
+     "note": "B1's objective no longer reproduces at its frozen point (S = r . r 5025.87 today; MATERIAL drift, CF-135; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B1 (variant A): the fit's own record: not identified; on a declared bound (the fit's record); no uncertainty reported",
+   "basis": "B1's objective no longer reproduces at its frozen point (S = r . r 5025.87 today; MATERIAL drift, CF-135; frozen_fit_reproducibility.md): no current objective supports this value. B1 (variant A): the fit's own record: not identified; on a declared bound (the fit's record); no uncertainty reported",
    "search_bounds_span_dex": 7.0,
    "band_is_search_bound": false,
    "band": {
@@ -1060,7 +1074,13 @@
     "width_dex": null,
     "reason": "unidentified_in_the_fit: no band is declared, still fixed (a recorded gap)"
    },
-   "conflicts_named": [],
+   "conflicts_named": [
+    {
+     "id": "CF-135",
+     "kind": "code_mismatch",
+     "status": "open"
+    }
+   ],
    "sensitivity": {
     "species_of_its_steps": [
      "Glc"
@@ -1104,10 +1124,20 @@
      "the fit's own record: not identified",
      "no uncertainty reported"
     ],
-    "status": "unidentified"
+    "status": "unidentified",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B1",
+     "class": "MATERIAL",
+     "S_today": 5025.873532,
+     "cf": "CF-135",
+     "pr": 107,
+     "note": "B1's objective no longer reproduces at its frozen point (S = r . r 5025.87 today; MATERIAL drift, CF-135; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B1 (variant A): the fit's own record: not identified; no uncertainty reported",
+   "basis": "B1's objective no longer reproduces at its frozen point (S = r . r 5025.87 today; MATERIAL drift, CF-135; frozen_fit_reproducibility.md): no current objective supports this value. B1 (variant A): the fit's own record: not identified; no uncertainty reported",
    "search_bounds_span_dex": 3.615416491135824,
    "band_is_search_bound": false,
    "band": {
@@ -1120,7 +1150,13 @@
     "width_dex": 1.291402606720076,
     "reason": "unidentified_in_the_fit: declared band capped by the prefactor prior"
    },
-   "conflicts_named": [],
+   "conflicts_named": [
+    {
+     "id": "CF-135",
+     "kind": "code_mismatch",
+     "status": "open"
+    }
+   ],
    "sensitivity": {
     "species_of_its_steps": [
      "Glc"
@@ -1162,10 +1198,20 @@
     },
     "criteria": [],
     "status": "locally_pinned_profile_missing",
-    "criteria_profile": "no artifact profiles this coordinate with the other unidentified coordinates profiled over their bands (slice profiles hold them at the optimum; Laplace is local)"
+    "criteria_profile": "no artifact profiles this coordinate with the other unidentified coordinates profiled over their bands (slice profiles hold them at the optimum; Laplace is local)",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B1",
+     "class": "MATERIAL",
+     "S_today": 5025.873532,
+     "cf": "CF-135",
+     "pr": 107,
+     "note": "B1's objective no longer reproduces at its frozen point (S = r . r 5025.87 today; MATERIAL drift, CF-135; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B1 (variant A): every local criterion passes; the profile requirement is unmet",
+   "basis": "B1's objective no longer reproduces at its frozen point (S = r . r 5025.87 today; MATERIAL drift, CF-135; frozen_fit_reproducibility.md): no current objective supports this value. B1 (variant A): every local criterion passes; the profile requirement is unmet",
    "search_bounds_span_dex": 7.0,
    "band_is_search_bound": false,
    "band": {
@@ -1282,10 +1328,20 @@
      "on the band edge (20.04 within 2% of [20, 260])",
      "95 % CI reaches an unphysical sign (lower -41.5 kJ/mol)"
     ],
-    "status": "unidentified"
+    "status": "unidentified",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B1",
+     "class": "MATERIAL",
+     "S_today": 5025.873532,
+     "cf": "CF-135",
+     "pr": 107,
+     "note": "B1's objective no longer reproduces at its frozen point (S = r . r 5025.87 today; MATERIAL drift, CF-135; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B1 (variant A): on the band edge (20.04 within 2% of [20, 260]); 95 % CI reaches an unphysical sign (lower -41.5 kJ/mol)",
+   "basis": "B1's objective no longer reproduces at its frozen point (S = r . r 5025.87 today; MATERIAL drift, CF-135; frozen_fit_reproducibility.md): no current objective supports this value. B1 (variant A): on the band edge (20.04 within 2% of [20, 260]); 95 % CI reaches an unphysical sign (lower -41.5 kJ/mol)",
    "search_bounds_span_dex": 3.615416491135824,
    "band_is_search_bound": true,
    "band": {
@@ -1419,10 +1475,20 @@
      "the fit's own record: not identified",
      "no uncertainty reported"
     ],
-    "status": "unidentified"
+    "status": "unidentified",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B1",
+     "class": "MATERIAL",
+     "S_today": 5025.873532,
+     "cf": "CF-135",
+     "pr": 107,
+     "note": "B1's objective no longer reproduces at its frozen point (S = r . r 5025.87 today; MATERIAL drift, CF-135; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B1 (variant A): the fit's own record: not identified; no uncertainty reported",
+   "basis": "B1's objective no longer reproduces at its frozen point (S = r . r 5025.87 today; MATERIAL drift, CF-135; frozen_fit_reproducibility.md): no current objective supports this value. B1 (variant A): the fit's own record: not identified; no uncertainty reported",
    "search_bounds_span_dex": 8.0,
    "band_is_search_bound": false,
    "band": {
@@ -1480,10 +1546,20 @@
      "on the band edge (20.53 within 2% of [20, 260])",
      "no uncertainty reported"
     ],
-    "status": "unidentified"
+    "status": "unidentified",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B1",
+     "class": "MATERIAL",
+     "S_today": 5025.873532,
+     "cf": "CF-135",
+     "pr": 107,
+     "note": "B1's objective no longer reproduces at its frozen point (S = r . r 5025.87 today; MATERIAL drift, CF-135; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B1 (variant A): the fit's own record: not identified; on the band edge (20.53 within 2% of [20, 260]); no uncertainty reported",
+   "basis": "B1's objective no longer reproduces at its frozen point (S = r . r 5025.87 today; MATERIAL drift, CF-135; frozen_fit_reproducibility.md): no current objective supports this value. B1 (variant A): the fit's own record: not identified; on the band edge (20.53 within 2% of [20, 260]); no uncertainty reported",
    "search_bounds_span_dex": 3.615416491135824,
    "band_is_search_bound": false,
    "band": {
@@ -1538,10 +1614,20 @@
     },
     "criteria": [],
     "status": "locally_pinned_profile_missing",
-    "criteria_profile": "no artifact profiles this coordinate with the other unidentified coordinates profiled over their bands (slice profiles hold them at the optimum; Laplace is local)"
+    "criteria_profile": "no artifact profiles this coordinate with the other unidentified coordinates profiled over their bands (slice profiles hold them at the optimum; Laplace is local)",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B1",
+     "class": "MATERIAL",
+     "S_today": 5025.873532,
+     "cf": "CF-135",
+     "pr": 107,
+     "note": "B1's objective no longer reproduces at its frozen point (S = r . r 5025.87 today; MATERIAL drift, CF-135; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B1 (variant A): every local criterion passes; the profile requirement is unmet",
+   "basis": "B1's objective no longer reproduces at its frozen point (S = r . r 5025.87 today; MATERIAL drift, CF-135; frozen_fit_reproducibility.md): no current objective supports this value. B1 (variant A): every local criterion passes; the profile requirement is unmet",
    "search_bounds_span_dex": 8.0,
    "band_is_search_bound": false,
    "band": {
@@ -1558,6 +1644,11 @@
     {
      "id": "CF-069",
      "kind": "conflict",
+     "status": "open"
+    },
+    {
+     "id": "CF-135",
+     "kind": "code_mismatch",
      "status": "open"
     }
    ],
@@ -1662,10 +1753,20 @@
      "on the band edge (20 within 2% of [20, 260])",
      "95 % CI reaches an unphysical sign (lower -20.9 kJ/mol)"
     ],
-    "status": "unidentified"
+    "status": "unidentified",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B1",
+     "class": "MATERIAL",
+     "S_today": 5025.873532,
+     "cf": "CF-135",
+     "pr": 107,
+     "note": "B1's objective no longer reproduces at its frozen point (S = r . r 5025.87 today; MATERIAL drift, CF-135; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B1 (variant A): on the band edge (20 within 2% of [20, 260]); 95 % CI reaches an unphysical sign (lower -20.9 kJ/mol)",
+   "basis": "B1's objective no longer reproduces at its frozen point (S = r . r 5025.87 today; MATERIAL drift, CF-135; frozen_fit_reproducibility.md): no current objective supports this value. B1 (variant A): on the band edge (20 within 2% of [20, 260]); 95 % CI reaches an unphysical sign (lower -20.9 kJ/mol)",
    "search_bounds_span_dex": 3.615416491135824,
    "band_is_search_bound": true,
    "band": {
@@ -1683,6 +1784,11 @@
     {
      "id": "CF-069",
      "kind": "conflict",
+     "status": "open"
+    },
+    {
+     "id": "CF-135",
+     "kind": "code_mismatch",
      "status": "open"
     }
    ],
@@ -3343,10 +3449,20 @@
     "criteria": [
      "B38 identifiability audit: UNIDENTIFIED"
     ],
-    "status": "unidentified"
+    "status": "unidentified",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B18",
+     "class": "MATERIAL",
+     "S_today": 295.067774,
+     "cf": "CF-136",
+     "pr": 107,
+     "note": "B18's objective no longer reproduces at its frozen point (S = r . r 295.068 today; MATERIAL drift, CF-136; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B18: B38 identifiability audit: UNIDENTIFIED",
+   "basis": "B18's objective no longer reproduces at its frozen point (S = r . r 295.068 today; MATERIAL drift, CF-136; frozen_fit_reproducibility.md): no current objective supports this value. B18: B38 identifiability audit: UNIDENTIFIED",
    "search_bounds_span_dex": 4.0,
    "band_is_search_bound": true,
    "band": {
@@ -3360,7 +3476,13 @@
     "reason": "laplace_covariance_at_b8_optimum",
     "note": "the envelope samples the fit's SEARCH bounds: under S4 a search bound is never a band"
    },
-   "conflicts_named": [],
+   "conflicts_named": [
+    {
+     "id": "CF-136",
+     "kind": "code_mismatch",
+     "status": "open"
+    }
+   ],
    "sensitivity": {
     "species_of_its_steps": [
      "AKG",
@@ -3427,10 +3549,20 @@
      "95 % CI (+/- 31.7) spans the band [100.6, 103.1]",
      "B38 identifiability audit: AT_BOUND"
     ],
-    "status": "unidentified"
+    "status": "unidentified",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B18",
+     "class": "MATERIAL",
+     "S_today": 295.067774,
+     "cf": "CF-136",
+     "pr": 107,
+     "note": "B18's objective no longer reproduces at its frozen point (S = r . r 295.068 today; MATERIAL drift, CF-136; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B18: the fit's own record: not identified; on a declared bound (the fit's record); 95 % CI (+/- 31.7) spans the band [100.6, 103.1]; B38 identifiability audit: AT_BOUND",
+   "basis": "B18's objective no longer reproduces at its frozen point (S = r . r 295.068 today; MATERIAL drift, CF-136; frozen_fit_reproducibility.md): no current objective supports this value. B18: the fit's own record: not identified; on a declared bound (the fit's record); 95 % CI (+/- 31.7) spans the band [100.6, 103.1]; B38 identifiability audit: AT_BOUND",
    "search_bounds_span_dex": 0.03781123080312869,
    "band_is_search_bound": true,
    "band": {
@@ -3444,7 +3576,13 @@
     "reason": "unidentified_direction_flat_across_its_declared_band",
     "note": "the envelope samples the fit's SEARCH bounds: under S4 a search bound is never a band"
    },
-   "conflicts_named": [],
+   "conflicts_named": [
+    {
+     "id": "CF-136",
+     "kind": "code_mismatch",
+     "status": "open"
+    }
+   ],
    "sensitivity": {
     "species_of_its_steps": [
      "AKG",
@@ -3492,10 +3630,20 @@
     },
     "criteria": [],
     "status": "locally_pinned_profile_missing",
-    "criteria_profile": "no artifact profiles this coordinate with the other unidentified coordinates profiled over their bands (slice profiles hold them at the optimum; Laplace is local)"
+    "criteria_profile": "no artifact profiles this coordinate with the other unidentified coordinates profiled over their bands (slice profiles hold them at the optimum; Laplace is local)",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B18",
+     "class": "MATERIAL",
+     "S_today": 295.067774,
+     "cf": "CF-136",
+     "pr": 107,
+     "note": "B18's objective no longer reproduces at its frozen point (S = r . r 295.068 today; MATERIAL drift, CF-136; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B18: every local criterion passes; the profile requirement is unmet",
+   "basis": "B18's objective no longer reproduces at its frozen point (S = r . r 295.068 today; MATERIAL drift, CF-136; frozen_fit_reproducibility.md): no current objective supports this value. B18: every local criterion passes; the profile requirement is unmet",
    "search_bounds_span_dex": 4.0,
    "band_is_search_bound": true,
    "band": {
@@ -3513,6 +3661,11 @@
     {
      "id": "CF-095",
      "kind": "conflict",
+     "status": "open"
+    },
+    {
+     "id": "CF-136",
+     "kind": "code_mismatch",
      "status": "open"
     }
    ],
@@ -3567,10 +3720,20 @@
      "95 % CI (+/- 31.5) spans the band [111.7, 114.9]",
      "B38 identifiability audit: AT_BOUND"
     ],
-    "status": "unidentified"
+    "status": "unidentified",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B18",
+     "class": "MATERIAL",
+     "S_today": 295.067774,
+     "cf": "CF-136",
+     "pr": 107,
+     "note": "B18's objective no longer reproduces at its frozen point (S = r . r 295.068 today; MATERIAL drift, CF-136; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B18: the fit's own record: not identified; on a declared bound (the fit's record); 95 % CI (+/- 31.5) spans the band [111.7, 114.9]; B38 identifiability audit: AT_BOUND",
+   "basis": "B18's objective no longer reproduces at its frozen point (S = r . r 295.068 today; MATERIAL drift, CF-136; frozen_fit_reproducibility.md): no current objective supports this value. B18: the fit's own record: not identified; on a declared bound (the fit's record); 95 % CI (+/- 31.5) spans the band [111.7, 114.9]; B38 identifiability audit: AT_BOUND",
    "search_bounds_span_dex": 0.04880812263033376,
    "band_is_search_bound": true,
    "band": {
@@ -3588,6 +3751,11 @@
     {
      "id": "CF-095",
      "kind": "conflict",
+     "status": "open"
+    },
+    {
+     "id": "CF-136",
+     "kind": "code_mismatch",
      "status": "open"
     }
    ],
@@ -6652,10 +6820,20 @@
      "frozen since B2.3 (not free in B60): B2.3 did not identify it",
      "the fit's own record: not identified"
     ],
-    "status": "unidentified"
+    "status": "unidentified",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B2.3",
+     "class": "MATERIAL",
+     "S_today": 112.894055,
+     "cf": "CF-137",
+     "pr": 107,
+     "note": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B2.3 (frozen since): frozen since B2.3 (not free in B60): B2.3 did not identify it; the fit's own record: not identified",
+   "basis": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value. B2.3 (frozen since): frozen since B2.3 (not free in B60): B2.3 did not identify it; the fit's own record: not identified",
    "search_bounds_span_dex": 10.5,
    "band_is_search_bound": false,
    "band": {
@@ -6720,10 +6898,20 @@
      "frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified)",
      "the fit's own record: not identified"
     ],
-    "status": "unidentified"
+    "status": "unidentified",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B2.3",
+     "class": "MATERIAL",
+     "S_today": 112.894055,
+     "cf": "CF-137",
+     "pr": 107,
+     "note": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B2.3 (frozen since): frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified); the fit's own record: not identified",
+   "basis": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value. B2.3 (frozen since): frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified); the fit's own record: not identified",
    "search_bounds_span_dex": 3.464774137338498,
    "band_is_search_bound": false,
    "band": {
@@ -6788,10 +6976,20 @@
      "frozen since B2.3 (not free in B60): B2.3 did not identify it",
      "the fit's own record: not identified"
     ],
-    "status": "unidentified"
+    "status": "unidentified",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B2.3",
+     "class": "MATERIAL",
+     "S_today": 112.894055,
+     "cf": "CF-137",
+     "pr": 107,
+     "note": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B2.3 (frozen since): frozen since B2.3 (not free in B60): B2.3 did not identify it; the fit's own record: not identified",
+   "basis": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value. B2.3 (frozen since): frozen since B2.3 (not free in B60): B2.3 did not identify it; the fit's own record: not identified",
    "search_bounds_span_dex": 10.5,
    "band_is_search_bound": false,
    "band": {
@@ -6856,10 +7054,20 @@
      "frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified)",
      "the fit's own record: not identified"
     ],
-    "status": "unidentified"
+    "status": "unidentified",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B2.3",
+     "class": "MATERIAL",
+     "S_today": 112.894055,
+     "cf": "CF-137",
+     "pr": 107,
+     "note": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B2.3 (frozen since): frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified); the fit's own record: not identified",
+   "basis": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value. B2.3 (frozen since): frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified); the fit's own record: not identified",
    "search_bounds_span_dex": 3.464774137338498,
    "band_is_search_bound": false,
    "band": {
@@ -6924,10 +7132,20 @@
      "frozen since B2.3 (not free in B60): B2.3 did not identify it",
      "the fit's own record: not identified"
     ],
-    "status": "unidentified"
+    "status": "unidentified",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B2.3",
+     "class": "MATERIAL",
+     "S_today": 112.894055,
+     "cf": "CF-137",
+     "pr": 107,
+     "note": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B2.3 (frozen since): frozen since B2.3 (not free in B60): B2.3 did not identify it; the fit's own record: not identified",
+   "basis": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value. B2.3 (frozen since): frozen since B2.3 (not free in B60): B2.3 did not identify it; the fit's own record: not identified",
    "search_bounds_span_dex": 10.5,
    "band_is_search_bound": false,
    "band": {
@@ -6992,10 +7210,20 @@
      "frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified)",
      "the fit's own record: not identified"
     ],
-    "status": "unidentified"
+    "status": "unidentified",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B2.3",
+     "class": "MATERIAL",
+     "S_today": 112.894055,
+     "cf": "CF-137",
+     "pr": 107,
+     "note": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B2.3 (frozen since): frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified); the fit's own record: not identified",
+   "basis": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value. B2.3 (frozen since): frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified); the fit's own record: not identified",
    "search_bounds_span_dex": 3.464774137338498,
    "band_is_search_bound": false,
    "band": {
@@ -7323,10 +7551,20 @@
      "the fit's own record: not identified",
      "on the band edge (0.4345 within 2% of [-10, 0.5])"
     ],
-    "status": "unidentified"
+    "status": "unidentified",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B2.3",
+     "class": "MATERIAL",
+     "S_today": 112.894055,
+     "cf": "CF-137",
+     "pr": 107,
+     "note": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B2.3 (frozen since): frozen since B2.3 (not free in B60): B2.3 did not identify it; the fit's own record: not identified; on the band edge (0.4345 within 2% of [-10, 0.5])",
+   "basis": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value. B2.3 (frozen since): frozen since B2.3 (not free in B60): B2.3 did not identify it; the fit's own record: not identified; on the band edge (0.4345 within 2% of [-10, 0.5])",
    "search_bounds_span_dex": 10.5,
    "band_is_search_bound": false,
    "band": {
@@ -7390,10 +7628,20 @@
      "frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified)",
      "the fit's own record: not identified"
     ],
-    "status": "unidentified"
+    "status": "unidentified",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B2.3",
+     "class": "MATERIAL",
+     "S_today": 112.894055,
+     "cf": "CF-137",
+     "pr": 107,
+     "note": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B2.3 (frozen since): frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified); the fit's own record: not identified",
+   "basis": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value. B2.3 (frozen since): frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified); the fit's own record: not identified",
    "search_bounds_span_dex": 3.464774137338498,
    "band_is_search_bound": false,
    "band": {
@@ -7457,10 +7705,20 @@
      "frozen since B2.3 (not free in B60): B2.3 did not identify it",
      "the fit's own record: not identified"
     ],
-    "status": "unidentified"
+    "status": "unidentified",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B2.3",
+     "class": "MATERIAL",
+     "S_today": 112.894055,
+     "cf": "CF-137",
+     "pr": 107,
+     "note": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B2.3 (frozen since): frozen since B2.3 (not free in B60): B2.3 did not identify it; the fit's own record: not identified",
+   "basis": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value. B2.3 (frozen since): frozen since B2.3 (not free in B60): B2.3 did not identify it; the fit's own record: not identified",
    "search_bounds_span_dex": 10.5,
    "band_is_search_bound": false,
    "band": {
@@ -7524,10 +7782,20 @@
      "frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified)",
      "the fit's own record: not identified"
     ],
-    "status": "unidentified"
+    "status": "unidentified",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B2.3",
+     "class": "MATERIAL",
+     "S_today": 112.894055,
+     "cf": "CF-137",
+     "pr": 107,
+     "note": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B2.3 (frozen since): frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified); the fit's own record: not identified",
+   "basis": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value. B2.3 (frozen since): frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified); the fit's own record: not identified",
    "search_bounds_span_dex": 3.464774137338498,
    "band_is_search_bound": false,
    "band": {
@@ -7591,10 +7859,20 @@
      "frozen since B2.3 (not free in B60): B2.3 did not identify it",
      "the fit's own record: not identified"
     ],
-    "status": "unidentified"
+    "status": "unidentified",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B2.3",
+     "class": "MATERIAL",
+     "S_today": 112.894055,
+     "cf": "CF-137",
+     "pr": 107,
+     "note": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B2.3 (frozen since): frozen since B2.3 (not free in B60): B2.3 did not identify it; the fit's own record: not identified",
+   "basis": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value. B2.3 (frozen since): frozen since B2.3 (not free in B60): B2.3 did not identify it; the fit's own record: not identified",
    "search_bounds_span_dex": 10.5,
    "band_is_search_bound": false,
    "band": {
@@ -7659,10 +7937,20 @@
      "frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified)",
      "the fit's own record: not identified"
     ],
-    "status": "unidentified"
+    "status": "unidentified",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B2.3",
+     "class": "MATERIAL",
+     "S_today": 112.894055,
+     "cf": "CF-137",
+     "pr": 107,
+     "note": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B2.3 (frozen since): frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified); the fit's own record: not identified",
+   "basis": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value. B2.3 (frozen since): frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified); the fit's own record: not identified",
    "search_bounds_span_dex": 3.464774137338498,
    "band_is_search_bound": false,
    "band": {
@@ -7798,10 +8086,20 @@
      "frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified)",
      "the fit's own record: not identified"
     ],
-    "status": "unidentified"
+    "status": "unidentified",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B2.3",
+     "class": "MATERIAL",
+     "S_today": 112.894055,
+     "cf": "CF-137",
+     "pr": 107,
+     "note": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B2.3 (frozen since): frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified); the fit's own record: not identified",
+   "basis": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value. B2.3 (frozen since): frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified); the fit's own record: not identified",
    "search_bounds_span_dex": 3.464774137338498,
    "band_is_search_bound": false,
    "band": {
@@ -7867,10 +8165,20 @@
      "frozen since B2.3 (not free in B60): B2.3 did not identify it",
      "the fit's own record: not identified"
     ],
-    "status": "unidentified"
+    "status": "unidentified",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B2.3",
+     "class": "MATERIAL",
+     "S_today": 112.894055,
+     "cf": "CF-137",
+     "pr": 107,
+     "note": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B2.3 (frozen since): frozen since B2.3 (not free in B60): B2.3 did not identify it; the fit's own record: not identified",
+   "basis": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value. B2.3 (frozen since): frozen since B2.3 (not free in B60): B2.3 did not identify it; the fit's own record: not identified",
    "search_bounds_span_dex": 10.5,
    "band_is_search_bound": false,
    "band": {
@@ -7935,10 +8243,20 @@
      "frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified)",
      "the fit's own record: not identified"
     ],
-    "status": "unidentified"
+    "status": "unidentified",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B2.3",
+     "class": "MATERIAL",
+     "S_today": 112.894055,
+     "cf": "CF-137",
+     "pr": 107,
+     "note": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B2.3 (frozen since): frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified); the fit's own record: not identified",
+   "basis": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value. B2.3 (frozen since): frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified); the fit's own record: not identified",
    "search_bounds_span_dex": 3.464774137338498,
    "band_is_search_bound": false,
    "band": {
@@ -8083,10 +8401,20 @@
      "frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified)",
      "the fit's own record: not identified"
     ],
-    "status": "unidentified"
+    "status": "unidentified",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B2.3",
+     "class": "MATERIAL",
+     "S_today": 112.894055,
+     "cf": "CF-137",
+     "pr": 107,
+     "note": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B2.3 (frozen since): frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified); the fit's own record: not identified",
+   "basis": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value. B2.3 (frozen since): frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified); the fit's own record: not identified",
    "search_bounds_span_dex": 3.464774137338498,
    "band_is_search_bound": false,
    "band": {
@@ -8242,10 +8570,20 @@
      "frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified)",
      "the fit's own record: not identified"
     ],
-    "status": "unidentified"
+    "status": "unidentified",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B2.3",
+     "class": "MATERIAL",
+     "S_today": 112.894055,
+     "cf": "CF-137",
+     "pr": 107,
+     "note": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B2.3 (frozen since): frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified); the fit's own record: not identified",
+   "basis": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value. B2.3 (frozen since): frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified); the fit's own record: not identified",
    "search_bounds_span_dex": 3.464774137338498,
    "band_is_search_bound": false,
    "band": {
@@ -8395,10 +8733,20 @@
      "frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified)",
      "the fit's own record: not identified"
     ],
-    "status": "unidentified"
+    "status": "unidentified",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B2.3",
+     "class": "MATERIAL",
+     "S_today": 112.894055,
+     "cf": "CF-137",
+     "pr": 107,
+     "note": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B2.3 (frozen since): frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified); the fit's own record: not identified",
+   "basis": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value. B2.3 (frozen since): frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified); the fit's own record: not identified",
    "search_bounds_span_dex": 3.464774137338498,
    "band_is_search_bound": false,
    "band": {
@@ -8543,10 +8891,20 @@
      "frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified)",
      "the fit's own record: not identified"
     ],
-    "status": "unidentified"
+    "status": "unidentified",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B2.3",
+     "class": "MATERIAL",
+     "S_today": 112.894055,
+     "cf": "CF-137",
+     "pr": 107,
+     "note": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B2.3 (frozen since): frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified); the fit's own record: not identified",
+   "basis": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value. B2.3 (frozen since): frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified); the fit's own record: not identified",
    "search_bounds_span_dex": 3.464774137338498,
    "band_is_search_bound": false,
    "band": {
@@ -8619,10 +8977,20 @@
      "frozen since B2.3 (not free in B60): B2.3 did not identify it",
      "the fit's own record: not identified"
     ],
-    "status": "unidentified"
+    "status": "unidentified",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B2.3",
+     "class": "MATERIAL",
+     "S_today": 112.894055,
+     "cf": "CF-137",
+     "pr": 107,
+     "note": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B2.3 (frozen since): frozen since B2.3 (not free in B60): B2.3 did not identify it; the fit's own record: not identified",
+   "basis": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value. B2.3 (frozen since): frozen since B2.3 (not free in B60): B2.3 did not identify it; the fit's own record: not identified",
    "search_bounds_span_dex": 10.5,
    "band_is_search_bound": false,
    "band": {
@@ -8687,10 +9055,20 @@
      "frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified)",
      "the fit's own record: not identified"
     ],
-    "status": "unidentified"
+    "status": "unidentified",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B2.3",
+     "class": "MATERIAL",
+     "S_today": 112.894055,
+     "cf": "CF-137",
+     "pr": 107,
+     "note": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B2.3 (frozen since): frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified); the fit's own record: not identified",
+   "basis": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value. B2.3 (frozen since): frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified); the fit's own record: not identified",
    "search_bounds_span_dex": 3.464774137338498,
    "band_is_search_bound": false,
    "band": {
@@ -8838,10 +9216,20 @@
      "frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified)",
      "the fit's own record: not identified"
     ],
-    "status": "unidentified"
+    "status": "unidentified",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B2.3",
+     "class": "MATERIAL",
+     "S_today": 112.894055,
+     "cf": "CF-137",
+     "pr": 107,
+     "note": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B2.3 (frozen since): frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified); the fit's own record: not identified",
+   "basis": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value. B2.3 (frozen since): frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified); the fit's own record: not identified",
    "search_bounds_span_dex": 3.464774137338498,
    "band_is_search_bound": false,
    "band": {
@@ -8916,10 +9304,20 @@
      "frozen since B2.3 (not free in B60): B2.3 did not identify it",
      "the fit's own record: not identified"
     ],
-    "status": "unidentified"
+    "status": "unidentified",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B2.3",
+     "class": "MATERIAL",
+     "S_today": 112.894055,
+     "cf": "CF-137",
+     "pr": 107,
+     "note": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B2.3 (frozen since): frozen since B2.3 (not free in B60): B2.3 did not identify it; the fit's own record: not identified",
+   "basis": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value. B2.3 (frozen since): frozen since B2.3 (not free in B60): B2.3 did not identify it; the fit's own record: not identified",
    "search_bounds_span_dex": 10.5,
    "band_is_search_bound": false,
    "band": {
@@ -8983,10 +9381,20 @@
      "frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified)",
      "the fit's own record: not identified"
     ],
-    "status": "unidentified"
+    "status": "unidentified",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B2.3",
+     "class": "MATERIAL",
+     "S_today": 112.894055,
+     "cf": "CF-137",
+     "pr": 107,
+     "note": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B2.3 (frozen since): frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified); the fit's own record: not identified",
+   "basis": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value. B2.3 (frozen since): frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified); the fit's own record: not identified",
    "search_bounds_span_dex": 3.464774137338498,
    "band_is_search_bound": false,
    "band": {
@@ -9050,10 +9458,20 @@
      "frozen since B2.3 (not free in B60): B2.3 did not identify it",
      "the fit's own record: not identified"
     ],
-    "status": "unidentified"
+    "status": "unidentified",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B2.3",
+     "class": "MATERIAL",
+     "S_today": 112.894055,
+     "cf": "CF-137",
+     "pr": 107,
+     "note": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B2.3 (frozen since): frozen since B2.3 (not free in B60): B2.3 did not identify it; the fit's own record: not identified",
+   "basis": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value. B2.3 (frozen since): frozen since B2.3 (not free in B60): B2.3 did not identify it; the fit's own record: not identified",
    "search_bounds_span_dex": 10.5,
    "band_is_search_bound": false,
    "band": {
@@ -9117,10 +9535,20 @@
      "frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified)",
      "the fit's own record: not identified"
     ],
-    "status": "unidentified"
+    "status": "unidentified",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B2.3",
+     "class": "MATERIAL",
+     "S_today": 112.894055,
+     "cf": "CF-137",
+     "pr": 107,
+     "note": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B2.3 (frozen since): frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified); the fit's own record: not identified",
+   "basis": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value. B2.3 (frozen since): frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified); the fit's own record: not identified",
    "search_bounds_span_dex": 3.464774137338498,
    "band_is_search_bound": false,
    "band": {
@@ -9184,10 +9612,20 @@
      "frozen since B2.3 (not free in B60): B2.3 did not identify it",
      "the fit's own record: not identified"
     ],
-    "status": "unidentified"
+    "status": "unidentified",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B2.3",
+     "class": "MATERIAL",
+     "S_today": 112.894055,
+     "cf": "CF-137",
+     "pr": 107,
+     "note": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B2.3 (frozen since): frozen since B2.3 (not free in B60): B2.3 did not identify it; the fit's own record: not identified",
+   "basis": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value. B2.3 (frozen since): frozen since B2.3 (not free in B60): B2.3 did not identify it; the fit's own record: not identified",
    "search_bounds_span_dex": 10.5,
    "band_is_search_bound": false,
    "band": {
@@ -9251,10 +9689,20 @@
      "frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified)",
      "the fit's own record: not identified"
     ],
-    "status": "unidentified"
+    "status": "unidentified",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B2.3",
+     "class": "MATERIAL",
+     "S_today": 112.894055,
+     "cf": "CF-137",
+     "pr": 107,
+     "note": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B2.3 (frozen since): frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified); the fit's own record: not identified",
+   "basis": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value. B2.3 (frozen since): frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified); the fit's own record: not identified",
    "search_bounds_span_dex": 3.464774137338498,
    "band_is_search_bound": false,
    "band": {
@@ -9318,10 +9766,20 @@
      "frozen since B2.3 (not free in B60): B2.3 did not identify it",
      "the fit's own record: not identified"
     ],
-    "status": "unidentified"
+    "status": "unidentified",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B2.3",
+     "class": "MATERIAL",
+     "S_today": 112.894055,
+     "cf": "CF-137",
+     "pr": 107,
+     "note": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B2.3 (frozen since): frozen since B2.3 (not free in B60): B2.3 did not identify it; the fit's own record: not identified",
+   "basis": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value. B2.3 (frozen since): frozen since B2.3 (not free in B60): B2.3 did not identify it; the fit's own record: not identified",
    "search_bounds_span_dex": 10.5,
    "band_is_search_bound": false,
    "band": {
@@ -9385,10 +9843,20 @@
      "frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified)",
      "the fit's own record: not identified"
     ],
-    "status": "unidentified"
+    "status": "unidentified",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B2.3",
+     "class": "MATERIAL",
+     "S_today": 112.894055,
+     "cf": "CF-137",
+     "pr": 107,
+     "note": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B2.3 (frozen since): frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified); the fit's own record: not identified",
+   "basis": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value. B2.3 (frozen since): frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified); the fit's own record: not identified",
    "search_bounds_span_dex": 3.464774137338498,
    "band_is_search_bound": false,
    "band": {
@@ -9452,10 +9920,20 @@
      "frozen since B2.3 (not free in B60): B2.3 did not identify it",
      "the fit's own record: not identified"
     ],
-    "status": "unidentified"
+    "status": "unidentified",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B2.3",
+     "class": "MATERIAL",
+     "S_today": 112.894055,
+     "cf": "CF-137",
+     "pr": 107,
+     "note": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B2.3 (frozen since): frozen since B2.3 (not free in B60): B2.3 did not identify it; the fit's own record: not identified",
+   "basis": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value. B2.3 (frozen since): frozen since B2.3 (not free in B60): B2.3 did not identify it; the fit's own record: not identified",
    "search_bounds_span_dex": 10.5,
    "band_is_search_bound": false,
    "band": {
@@ -9526,10 +10004,20 @@
      "frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified)",
      "the fit's own record: not identified"
     ],
-    "status": "unidentified"
+    "status": "unidentified",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B2.3",
+     "class": "MATERIAL",
+     "S_today": 112.894055,
+     "cf": "CF-137",
+     "pr": 107,
+     "note": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B2.3 (frozen since): frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified); the fit's own record: not identified",
+   "basis": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value. B2.3 (frozen since): frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified); the fit's own record: not identified",
    "search_bounds_span_dex": 3.464774137338498,
    "band_is_search_bound": false,
    "band": {
@@ -9877,10 +10365,20 @@
      "frozen since B2.3 (not free in B60): B2.3 did not identify it",
      "the fit's own record: not identified"
     ],
-    "status": "unidentified"
+    "status": "unidentified",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B2.3",
+     "class": "MATERIAL",
+     "S_today": 112.894055,
+     "cf": "CF-137",
+     "pr": 107,
+     "note": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B2.3 (frozen since): frozen since B2.3 (not free in B60): B2.3 did not identify it; the fit's own record: not identified",
+   "basis": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value. B2.3 (frozen since): frozen since B2.3 (not free in B60): B2.3 did not identify it; the fit's own record: not identified",
    "search_bounds_span_dex": 10.5,
    "band_is_search_bound": false,
    "band": {
@@ -9996,10 +10494,20 @@
      "frozen since B2.3 (not free in B60): B2.3 did not identify it",
      "the fit's own record: not identified"
     ],
-    "status": "unidentified"
+    "status": "unidentified",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B2.3",
+     "class": "MATERIAL",
+     "S_today": 112.894055,
+     "cf": "CF-137",
+     "pr": 107,
+     "note": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B2.3 (frozen since): frozen since B2.3 (not free in B60): B2.3 did not identify it; the fit's own record: not identified",
+   "basis": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value. B2.3 (frozen since): frozen since B2.3 (not free in B60): B2.3 did not identify it; the fit's own record: not identified",
    "search_bounds_span_dex": 10.5,
    "band_is_search_bound": false,
    "band": {
@@ -10485,10 +10993,20 @@
      "frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified)",
      "the fit's own record: not identified"
     ],
-    "status": "unidentified"
+    "status": "unidentified",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B2.3",
+     "class": "MATERIAL",
+     "S_today": 112.894055,
+     "cf": "CF-137",
+     "pr": 107,
+     "note": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B2.3 (frozen since): frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified); the fit's own record: not identified",
+   "basis": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value. B2.3 (frozen since): frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified); the fit's own record: not identified",
    "search_bounds_span_dex": 3.464774137338498,
    "band_is_search_bound": false,
    "band": {
@@ -10565,10 +11083,20 @@
      "frozen since B2.3 (not free in B60): B2.3 did not identify it",
      "the fit's own record: not identified"
     ],
-    "status": "unidentified"
+    "status": "unidentified",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B2.3",
+     "class": "MATERIAL",
+     "S_today": 112.894055,
+     "cf": "CF-137",
+     "pr": 107,
+     "note": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B2.3 (frozen since): frozen since B2.3 (not free in B60): B2.3 did not identify it; the fit's own record: not identified",
+   "basis": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value. B2.3 (frozen since): frozen since B2.3 (not free in B60): B2.3 did not identify it; the fit's own record: not identified",
    "search_bounds_span_dex": 10.5,
    "band_is_search_bound": false,
    "band": {
@@ -11008,10 +11536,20 @@
      "frozen since B2.3 (not free in B60): B2.3 did not identify it",
      "the fit's own record: not identified"
     ],
-    "status": "unidentified"
+    "status": "unidentified",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B2.3",
+     "class": "MATERIAL",
+     "S_today": 112.894055,
+     "cf": "CF-137",
+     "pr": 107,
+     "note": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B2.3 (frozen since): frozen since B2.3 (not free in B60): B2.3 did not identify it; the fit's own record: not identified",
+   "basis": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value. B2.3 (frozen since): frozen since B2.3 (not free in B60): B2.3 did not identify it; the fit's own record: not identified",
    "search_bounds_span_dex": 10.5,
    "band_is_search_bound": false,
    "band": {
@@ -11074,10 +11612,20 @@
      "frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified)",
      "the fit's own record: not identified"
     ],
-    "status": "unidentified"
+    "status": "unidentified",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B2.3",
+     "class": "MATERIAL",
+     "S_today": 112.894055,
+     "cf": "CF-137",
+     "pr": 107,
+     "note": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B2.3 (frozen since): frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified); the fit's own record: not identified",
+   "basis": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value. B2.3 (frozen since): frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified); the fit's own record: not identified",
    "search_bounds_span_dex": 3.464774137338498,
    "band_is_search_bound": false,
    "band": {
@@ -11583,10 +12131,20 @@
      "frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified)",
      "the fit's own record: not identified"
     ],
-    "status": "unidentified"
+    "status": "unidentified",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B2.3",
+     "class": "MATERIAL",
+     "S_today": 112.894055,
+     "cf": "CF-137",
+     "pr": 107,
+     "note": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B2.3 (frozen since): frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified); the fit's own record: not identified",
+   "basis": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value. B2.3 (frozen since): frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified); the fit's own record: not identified",
    "search_bounds_span_dex": 3.464774137338498,
    "band_is_search_bound": false,
    "band": {
@@ -11658,10 +12216,20 @@
      "frozen since B2.3 (not free in B60): B2.3 did not identify it",
      "the fit's own record: not identified"
     ],
-    "status": "unidentified"
+    "status": "unidentified",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B2.3",
+     "class": "MATERIAL",
+     "S_today": 112.894055,
+     "cf": "CF-137",
+     "pr": 107,
+     "note": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B2.3 (frozen since): frozen since B2.3 (not free in B60): B2.3 did not identify it; the fit's own record: not identified",
+   "basis": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value. B2.3 (frozen since): frozen since B2.3 (not free in B60): B2.3 did not identify it; the fit's own record: not identified",
    "search_bounds_span_dex": 10.5,
    "band_is_search_bound": false,
    "band": {
@@ -11725,10 +12293,20 @@
      "frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified)",
      "the fit's own record: not identified"
     ],
-    "status": "unidentified"
+    "status": "unidentified",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B2.3",
+     "class": "MATERIAL",
+     "S_today": 112.894055,
+     "cf": "CF-137",
+     "pr": 107,
+     "note": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B2.3 (frozen since): frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified); the fit's own record: not identified",
+   "basis": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value. B2.3 (frozen since): frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified); the fit's own record: not identified",
    "search_bounds_span_dex": 3.464774137338498,
    "band_is_search_bound": false,
    "band": {
@@ -11792,10 +12370,20 @@
      "frozen since B2.3 (not free in B60): B2.3 did not identify it",
      "the fit's own record: not identified"
     ],
-    "status": "unidentified"
+    "status": "unidentified",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B2.3",
+     "class": "MATERIAL",
+     "S_today": 112.894055,
+     "cf": "CF-137",
+     "pr": 107,
+     "note": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B2.3 (frozen since): frozen since B2.3 (not free in B60): B2.3 did not identify it; the fit's own record: not identified",
+   "basis": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value. B2.3 (frozen since): frozen since B2.3 (not free in B60): B2.3 did not identify it; the fit's own record: not identified",
    "search_bounds_span_dex": 10.5,
    "band_is_search_bound": false,
    "band": {
@@ -11859,10 +12447,20 @@
      "frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified)",
      "the fit's own record: not identified"
     ],
-    "status": "unidentified"
+    "status": "unidentified",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B2.3",
+     "class": "MATERIAL",
+     "S_today": 112.894055,
+     "cf": "CF-137",
+     "pr": 107,
+     "note": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B2.3 (frozen since): frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified); the fit's own record: not identified",
+   "basis": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value. B2.3 (frozen since): frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified); the fit's own record: not identified",
    "search_bounds_span_dex": 3.464774137338498,
    "band_is_search_bound": false,
    "band": {
@@ -11926,10 +12524,20 @@
      "frozen since B2.3 (not free in B60): B2.3 did not identify it",
      "the fit's own record: not identified"
     ],
-    "status": "unidentified"
+    "status": "unidentified",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B2.3",
+     "class": "MATERIAL",
+     "S_today": 112.894055,
+     "cf": "CF-137",
+     "pr": 107,
+     "note": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B2.3 (frozen since): frozen since B2.3 (not free in B60): B2.3 did not identify it; the fit's own record: not identified",
+   "basis": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value. B2.3 (frozen since): frozen since B2.3 (not free in B60): B2.3 did not identify it; the fit's own record: not identified",
    "search_bounds_span_dex": 10.5,
    "band_is_search_bound": false,
    "band": {
@@ -11993,10 +12601,20 @@
      "frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified)",
      "the fit's own record: not identified"
     ],
-    "status": "unidentified"
+    "status": "unidentified",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B2.3",
+     "class": "MATERIAL",
+     "S_today": 112.894055,
+     "cf": "CF-137",
+     "pr": 107,
+     "note": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B2.3 (frozen since): frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified); the fit's own record: not identified",
+   "basis": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value. B2.3 (frozen since): frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified); the fit's own record: not identified",
    "search_bounds_span_dex": 3.464774137338498,
    "band_is_search_bound": false,
    "band": {
@@ -12060,10 +12678,20 @@
      "frozen since B2.3 (not free in B60): B2.3 did not identify it",
      "the fit's own record: not identified"
     ],
-    "status": "unidentified"
+    "status": "unidentified",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B2.3",
+     "class": "MATERIAL",
+     "S_today": 112.894055,
+     "cf": "CF-137",
+     "pr": 107,
+     "note": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B2.3 (frozen since): frozen since B2.3 (not free in B60): B2.3 did not identify it; the fit's own record: not identified",
+   "basis": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value. B2.3 (frozen since): frozen since B2.3 (not free in B60): B2.3 did not identify it; the fit's own record: not identified",
    "search_bounds_span_dex": 10.5,
    "band_is_search_bound": false,
    "band": {
@@ -12127,10 +12755,20 @@
      "frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified)",
      "the fit's own record: not identified"
     ],
-    "status": "unidentified"
+    "status": "unidentified",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B2.3",
+     "class": "MATERIAL",
+     "S_today": 112.894055,
+     "cf": "CF-137",
+     "pr": 107,
+     "note": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B2.3 (frozen since): frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified); the fit's own record: not identified",
+   "basis": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value. B2.3 (frozen since): frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified); the fit's own record: not identified",
    "search_bounds_span_dex": 3.464774137338498,
    "band_is_search_bound": false,
    "band": {
@@ -12194,10 +12832,20 @@
      "frozen since B2.3 (not free in B60): B2.3 did not identify it",
      "the fit's own record: not identified"
     ],
-    "status": "unidentified"
+    "status": "unidentified",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B2.3",
+     "class": "MATERIAL",
+     "S_today": 112.894055,
+     "cf": "CF-137",
+     "pr": 107,
+     "note": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B2.3 (frozen since): frozen since B2.3 (not free in B60): B2.3 did not identify it; the fit's own record: not identified",
+   "basis": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value. B2.3 (frozen since): frozen since B2.3 (not free in B60): B2.3 did not identify it; the fit's own record: not identified",
    "search_bounds_span_dex": 10.5,
    "band_is_search_bound": false,
    "band": {
@@ -12262,10 +12910,20 @@
      "frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified)",
      "the fit's own record: not identified"
     ],
-    "status": "unidentified"
+    "status": "unidentified",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B2.3",
+     "class": "MATERIAL",
+     "S_today": 112.894055,
+     "cf": "CF-137",
+     "pr": 107,
+     "note": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B2.3 (frozen since): frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified); the fit's own record: not identified",
+   "basis": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value. B2.3 (frozen since): frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified); the fit's own record: not identified",
    "search_bounds_span_dex": 3.464774137338498,
    "band_is_search_bound": false,
    "band": {
@@ -12330,10 +12988,20 @@
      "frozen since B2.3 (not free in B60): B2.3 did not identify it",
      "the fit's own record: not identified"
     ],
-    "status": "unidentified"
+    "status": "unidentified",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B2.3",
+     "class": "MATERIAL",
+     "S_today": 112.894055,
+     "cf": "CF-137",
+     "pr": 107,
+     "note": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B2.3 (frozen since): frozen since B2.3 (not free in B60): B2.3 did not identify it; the fit's own record: not identified",
+   "basis": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value. B2.3 (frozen since): frozen since B2.3 (not free in B60): B2.3 did not identify it; the fit's own record: not identified",
    "search_bounds_span_dex": 10.5,
    "band_is_search_bound": false,
    "band": {
@@ -12404,10 +13072,20 @@
      "frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified)",
      "the fit's own record: not identified"
     ],
-    "status": "unidentified"
+    "status": "unidentified",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B2.3",
+     "class": "MATERIAL",
+     "S_today": 112.894055,
+     "cf": "CF-137",
+     "pr": 107,
+     "note": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B2.3 (frozen since): frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified); the fit's own record: not identified",
+   "basis": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value. B2.3 (frozen since): frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified); the fit's own record: not identified",
    "search_bounds_span_dex": 3.464774137338498,
    "band_is_search_bound": false,
    "band": {
@@ -12478,10 +13156,20 @@
      "frozen since B2.3 (not free in B60): B2.3 did not identify it",
      "the fit's own record: not identified"
     ],
-    "status": "unidentified"
+    "status": "unidentified",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B2.3",
+     "class": "MATERIAL",
+     "S_today": 112.894055,
+     "cf": "CF-137",
+     "pr": 107,
+     "note": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B2.3 (frozen since): frozen since B2.3 (not free in B60): B2.3 did not identify it; the fit's own record: not identified",
+   "basis": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value. B2.3 (frozen since): frozen since B2.3 (not free in B60): B2.3 did not identify it; the fit's own record: not identified",
    "search_bounds_span_dex": 10.5,
    "band_is_search_bound": false,
    "band": {
@@ -12557,10 +13245,20 @@
      "frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified)",
      "the fit's own record: not identified"
     ],
-    "status": "unidentified"
+    "status": "unidentified",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B2.3",
+     "class": "MATERIAL",
+     "S_today": 112.894055,
+     "cf": "CF-137",
+     "pr": 107,
+     "note": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B2.3 (frozen since): frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified); the fit's own record: not identified",
+   "basis": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value. B2.3 (frozen since): frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified); the fit's own record: not identified",
    "search_bounds_span_dex": 3.464774137338498,
    "band_is_search_bound": false,
    "band": {
@@ -12807,10 +13505,20 @@
      "frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified)",
      "the fit's own record: not identified"
     ],
-    "status": "unidentified"
+    "status": "unidentified",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B2.3",
+     "class": "MATERIAL",
+     "S_today": 112.894055,
+     "cf": "CF-137",
+     "pr": 107,
+     "note": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "tier": "fitted_unidentified",
-   "basis": "B2.3 (frozen since): frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified); the fit's own record: not identified",
+   "basis": "B2.3's objective no longer reproduces at its frozen point (S = r . r 112.894 today; MATERIAL drift, CF-137; frozen_fit_reproducibility.md): no current objective supports this value. B2.3 (frozen since): frozen since B2.3 (B10 tried two route barriers: RE-MERGE, not identified); the fit's own record: not identified",
    "search_bounds_span_dex": 3.464774137338498,
    "band_is_search_bound": false,
    "band": {
@@ -14922,12 +15630,22 @@
     },
     "criteria": [],
     "status": "locally_pinned_profile_missing",
-    "criteria_profile": "no artifact profiles this coordinate with the other unidentified coordinates profiled over their bands (slice profiles hold them at the optimum; Laplace is local)"
+    "criteria_profile": "no artifact profiles this coordinate with the other unidentified coordinates profiled over their bands (slice profiles hold them at the optimum; Laplace is local)",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B18",
+     "class": "MATERIAL",
+     "S_today": 295.067774,
+     "cf": "CF-136",
+     "pr": 107,
+     "note": "B18's objective no longer reproduces at its frozen point (S = r . r 295.068 today; MATERIAL drift, CF-136; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "transformation": "",
    "reference_temperature_c": null,
    "tier": "fitted_unidentified",
-   "basis": "B18: every local criterion passes; the profile requirement is unmet",
+   "basis": "B18's objective no longer reproduces at its frozen point (S = r . r 295.068 today; MATERIAL drift, CF-136; frozen_fit_reproducibility.md): no current objective supports this value. B18: every local criterion passes; the profile requirement is unmet",
    "label_conflicts": [],
    "conflicts_named": [],
    "contradicted_by": [],
@@ -14975,12 +15693,22 @@
     },
     "criteria": [],
     "status": "locally_pinned_profile_missing",
-    "criteria_profile": "no artifact profiles this coordinate with the other unidentified coordinates profiled over their bands (slice profiles hold them at the optimum; Laplace is local)"
+    "criteria_profile": "no artifact profiles this coordinate with the other unidentified coordinates profiled over their bands (slice profiles hold them at the optimum; Laplace is local)",
+    "fit_reproduces": false,
+    "fit_drift": {
+     "fit": "B18",
+     "class": "MATERIAL",
+     "S_today": 295.067774,
+     "cf": "CF-136",
+     "pr": 107,
+     "note": "B18's objective no longer reproduces at its frozen point (S = r . r 295.068 today; MATERIAL drift, CF-136; frozen_fit_reproducibility.md): no current objective supports this value",
+     "record": "results/validation/frozen_fit_reproducibility.json"
+    }
    },
    "transformation": "",
    "reference_temperature_c": null,
    "tier": "fitted_unidentified",
-   "basis": "B18: every local criterion passes; the profile requirement is unmet",
+   "basis": "B18's objective no longer reproduces at its frozen point (S = r . r 295.068 today; MATERIAL drift, CF-136; frozen_fit_reproducibility.md): no current objective supports this value. B18: every local criterion passes; the profile requirement is unmet",
    "label_conflicts": [],
    "conflicts_named": [],
    "contradicted_by": [],

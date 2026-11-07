@@ -2,11 +2,11 @@
   "artifact": "sulfur_reaction_evidence",
   "provenance": {
     "artifact": "sulfur_reaction_evidence",
-    "generated_on": "2026-11-06",
+    "generated_on": "2026-11-07",
     "git": {
-      "commit": "06830fd78b48e16bd49dfec4a69c1e75028ddb36",
-      "short": "06830fd7",
-      "branch": "register-pass-2026-11-06",
+      "commit": "9b2ca19411349a4c43de7efee1df42a727486830",
+      "short": "9b2ca194",
+      "branch": "frozen-fit-reproducibility",
       "dirty": true
     },
     "generated_by": "scripts/generators/build_sulfur_reaction_evidence.py",
@@ -29,7 +29,7 @@
       },
       {
         "path": "docs/reference/conflicts_register.yml",
-        "sha256": "c47a21dc25ae5d4018c29c97e2331f2b375d2499a200773d2eeef9662ee15f05"
+        "sha256": "f2550f5c44b1d99f4a1c89cb8ff867c169a25a7c5ebd2527ebf63a1f45601eae"
       },
       {
         "path": "src/kinetic_core/sulfur.py",
@@ -3865,9 +3865,13 @@
       "species_measured_over_time": [
         "Glc"
       ],
-      "conflicts": [],
-      "unclear": false,
-      "why_unclear": []
+      "conflicts": [
+        "CF-135"
+      ],
+      "unclear": true,
+      "why_unclear": [
+        "conflicts: CF-135"
+      ]
     },
     {
       "reaction": "r_fa_frag",
@@ -3927,9 +3931,13 @@
       "species_measured_over_time": [
         "AA"
       ],
-      "conflicts": [],
-      "unclear": false,
-      "why_unclear": []
+      "conflicts": [
+        "CF-135"
+      ],
+      "unclear": true,
+      "why_unclear": [
+        "conflicts: CF-135"
+      ]
     },
     {
       "reaction": "r_glc_tdg",

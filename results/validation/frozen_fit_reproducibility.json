@@ -6260,18 +6260,18 @@
  },
  "provenance": {
   "artifact": "frozen_fit_reproducibility",
-  "generated_on": "2026-11-06",
+  "generated_on": "2026-11-07",
   "git": {
-   "commit": "db493e5a340977ad1cd2a10d8b4883c19e78318a",
-   "short": "db493e5a",
+   "commit": "9b2ca19411349a4c43de7efee1df42a727486830",
+   "short": "9b2ca194",
    "branch": "frozen-fit-reproducibility",
-   "dirty": false
+   "dirty": true
   },
   "generated_by": "scripts/generators/build_frozen_fit_reproducibility.py",
   "inputs": [
    {
     "path": "results/validation/incumbent_evidence_tiers.json",
-    "sha256": "c69885c0ce3a91948917821a96dce65443d1defb0f2de630d7abf28b92ca9f6b"
+    "sha256": "17eff1270b175caeaf7dcfdae14313dd75337aaefecc0f8b2e42d1cea4a59532"
    },
    {
     "path": "results/validation/kinetic_core_b1_fit_report.json",
