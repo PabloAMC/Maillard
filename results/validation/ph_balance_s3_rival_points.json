@@ -4,18 +4,14 @@
     "artifact": "ph_balance_s3_rival_points",
     "generated_on": "2026-11-07",
     "git": {
-      "commit": "e1b165850493f45d635afb6b56b3af2811e5f82d",
-      "short": "e1b16585",
+      "commit": "e13fb3608dac64d728d03cb8634650652729287a",
+      "short": "e13fb360",
       "branch": "s3-ph-balance-refusal",
       "dirty": true
     },
     "generated_by": "scripts/generators/build_ph_balance_s3_sensitivity.py --points",
     "wave": "S3 application: the pH balance (M1b part (i))",
     "inputs": [
-      {
-        "path": "results/validation/kinetic_core_m1b_ph_balance_pentose_steps_prereg.md",
-        "sha256": "dcb8d668375d7d44da5ef21219f08f465e74a6edbcebe1cad7c6d7724307dab2"
-      },
       {
         "path": "results/validation/kinetic_core_m1b_part_i_falsification.json",
         "sha256": "75f8c73ed3f7b328feb6c342a79911c49466332e52d571b7833a2d9121f2e946"

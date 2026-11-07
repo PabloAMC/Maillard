@@ -215,7 +215,9 @@ def build_points() -> Dict[str, Any]:
     return {"artifact": "ph_balance_s3_rival_points",
             "provenance": provenance.provenance_block("ph_balance_s3_rival_points", generated_by=GENERATED_BY + " --points",
                                                       wave="S3 application: the pH balance (M1b part (i))",
-                                                      inputs=[PREREG, FALSIFICATION, SCREEN, A2,
+                                                      # the points come from the screen records alone; the prereg
+                                                      # reports them (sec. 21.10), so hashing it would be a cycle
+                                                      inputs=[FALSIFICATION, SCREEN, A2,
                                                               data_paths.VALIDATION_DIR / "kinetic_core_m1b_part_i_screen_draws.json.gz"]),
             "definition": ("prereg sec. 21.10, R3: each carried rival is represented by the stored screen draws that pass "
                            "all four signatures in at least one (A1 form x A2 choice in D) cell (sec. 21.1), through the "

@@ -4,8 +4,8 @@
     "artifact": "ph_balance_s3_sensitivity",
     "generated_on": "2026-11-07",
     "git": {
-      "commit": "e1b165850493f45d635afb6b56b3af2811e5f82d",
-      "short": "e1b16585",
+      "commit": "e13fb3608dac64d728d03cb8634650652729287a",
+      "short": "e13fb360",
       "branch": "s3-ph-balance-refusal",
       "dirty": true
     },
@@ -34,7 +34,7 @@
       },
       {
         "path": "results/validation/ph_balance_s3_rival_points.json",
-        "sha256": "61d035b195d4a817cbdeb11b39b983b77b1535a4797cedc2f4af827591d6bc8b"
+        "sha256": "d92af52c4f48d3c96ceb56a45f57ccb7b1faf6cfe2533bd3a904680f2aac1241"
       },
       {
         "path": "src/kinetic_core/ph_balance_rivals.py",
