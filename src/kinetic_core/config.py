@@ -64,6 +64,7 @@ from typing import Any, Dict, Iterator, Literal, Mapping, Optional, Tuple
 from . import parameters_dicarbonyl as _pd
 from . import parameters_lipid as _pl
 from . import parameters_sulfur as _ps
+from . import ph_balance_rivals as _pbr
 from . import ph_state as _ph
 
 Phase = Literal["build", "rate", "solver"]
@@ -182,6 +183,13 @@ _BANDS: Mapping[str, Mapping[str, Tuple[float, float]]] = {
     "sulfur.ttca_formation": {"k_l_per_mmol": (0.019, 0.6)},
     "sulfur.tdp_own_decay": {"k_ref_per_min": (0.0, 0.1), "ea_kj_mol": (30.0, 200.0)},
     "lipid.q10_assumption": {"default": (1.6, 3.3)},
+    # M1b part (i) (kinetic_core_m1b_ph_balance_pentose_steps_prereg.md sec. 3.1): fractions [0, 1]; k_lag from Zhai
+    # 2023's 0.0097 /min to the band's 10 /min, widened to 1e6 for V2's fast-end reproduction; Ea the carbohydrate
+    # class range (B55: 30 - 237 kJ/mol); k_iso [0.025, 0.24] /min at 120 C, widened to [1e-3, 10] for the checks
+    "ph.amine_survival": {"phi_cys": _SHARE, "phi_arp": _SHARE},
+    "ph.acid_lag": {"f_ret": _SHARE, "k_lag_per_min_120c": (1e-3, 1e6), "ea_lag_kj_mol": (0.0, 240.0)},
+    "ph.acid_supply": {"y5": _SHARE, "y6": _SHARE, "y_hi": _SHARE, "k_iso_per_min_120c": (1e-3, 10.0),
+                       "ea_iso_kj_mol": (0.0, 240.0)},
 }
 
 
@@ -211,6 +219,16 @@ KEYS: Tuple[ConfigKey, ...] = (
        "sub-model 1 (2026-10-29): Martins & van Boekel 2003 Part II Table 3 slopes in the sulfur lane"),
     _k("ph.trunk_exponent_override", "sulfur", "TRUNK_PH_EXPONENT_OVERRIDE", (), "rate",
        "sub-model 1 fit slopes by parameter key (fit_ph_acid_submodel.py); empty otherwise", mapping=True),
+    # --- M1b part (i)'s charge-balance rivals (ph_balance_rivals.py): every one OFF; inline dynamic pH only
+    _k("ph.amine_survival", "ph_balance_rivals", "AMINE_SURVIVAL", _pbr.AmineSurvival(), "rate",
+       "M1b prereg sec. 3.1, rival B1 (phi_Cys, phi_ARP)"),
+    _k("ph.acid_lag", "ph_balance_rivals", "ACID_LAG", _pbr.AcidLag(), "rate",
+       "M1b prereg sec. 3.1, rival B2 (f_ret, the latent carboxyl's lag)"),
+    _k("ph.acid_supply", "ph_balance_rivals", "ACID_SUPPLY", _pbr.AcidSupply(), "rate",
+       "M1b prereg secs. 3.1 - 3.1.1, rival B3 (Davidek 2006a's acetic share through a latent step; both branch "
+       "forms)"),
+    _k("ph.arp_forcing", "ph_balance_rivals", "ARP_FORCING", _pbr.ArpForcing(), "rate",
+       "M1b prereg sec. 3.3, C-Hou: Hou 2026's measured ARP(t) as an input"),
     # --- the sulfur lane's integration and flux budget (sulfur.py)
     _k("sulfur.flux_budget", "sulfur", "FLUX_BUDGET", "closed", "solver",
        "B60; frozen waves set linear_rederived", choices=("closed", "linear_rederived")),

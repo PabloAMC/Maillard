@@ -4000,3 +4000,55 @@ entries:
       - {file: src/kinetic_core/engine.py, symbol: "if lane == TRUNK:"}
       - {file: src/kinetic_core/trunk_conditions.py, symbol: PH_EXPONENT_DECADES_PER_UNIT}
       - {file: data/benchmarks/external_validation/maillard_path/mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019.json, symbol: Schibilsky}
+
+  - id: CF-134
+    kind: code_mismatch
+    scope: sulfur_rows
+    sources: [nedvidek1992, meynier1995]
+    quantity: "the acid counted per decarboxylation in the charge balance: the CO2 a step releases, carried into CBX as a full-strength carboxylate"
+    observation: >-
+      Found by the independent confirmer of M1b prereg A2 (sec. 21.9, 2026-11-06). Checked against the code by the
+      register writer (2026-11-06). Three shipped decarboxylations route the CO2 they release into CBX.
+      (a) r_cys_actz (src/kinetic_core/sulfur.py, the reaction near l. 577 - 581, Cys + MGO -> ACTZ + CBX): "a
+      decarboxylation, so the group leaves as CO2 and lands in CBX"; the ledger basis near l. 1146 - 1154 says the same.
+      (b) r_dpo_ddp (reaction near l. 401 - 412; CENTRE_LEDGER basis near l. 1099 - 1104): Nedvidek 1992 Scheme 3 ends
+      "+ RCHO + CO2 + NH3", and the CO2 goes to CBX.
+      (c) r_mgo_cys_strecker (reaction near l. 919 - 923; ledger near l. 1105 - 1107): "the carboxyl as CO2 (CARRIED)".
+      r_dpo_ddp_h2s (B59a, near l. 421 - 430; zero while its switch is off) does the same when on.
+      src/kinetic_core/ph_state.py titrates CBX at full strength (TITRATABLE_CENTRES "CBX" near l. 1103; the inventory
+      near l. 730 - 733) as ORGANIC_ACID_MIX: 1:1 formic (pKa 3.75) and acetic (4.76), effective pKa ~4.25.
+      The chemistry differs. CO2 + H2O <-> HCO3- + H+ has an apparent pKa of 6.35 at 25 C, and CO2 partitions into the
+      headspace and degasses on opening and cooling.
+      Fraction dissociated at the cooled reading (25 C), mixture vs carbonic acid kept in solution: 0.60 vs 0.01 at
+      pH 4.5; 0.79 vs 0.04 at 5.0; 0.91 vs 0.12 at 5.5; 0.97 vs 0.31 at 6.0. So the ledger overstates the acid by
+      ~0.6 - 0.8 H+ per event at labels 4.5 - 6. With full degassing it overstates by ~0.6 - 1.0.
+      This is declared in the code but has never been cased. The r_dpo_ddp docstring calls it "the declared
+      approximation on the CBX species", and ph_state's declared_approximations give "pyruvic 2.49, CO2/carbonic 6.35,
+      acetic 4.76" against the mixture's 4.25, with "No CO2 partition model exists in this corpus". Its size per event
+      has not been quantified, and no S1 structural choice carries it.
+      It bears on CF-084, Meynier's cysteine drifts. A2's attribution (sec. 21.8.2) shows that at F-A, 88 - 97 % of
+      the cysteine lost at labels 5 - 6.5 goes through steps other than r_cys_thermal / ch_cys_ox, and these three are
+      among them. So part of the drift the amine fate was credited with may be this CO2.
+      The rivals B1 and B13 (src/kinetic_core/ph_balance_rivals.py) change the amine and acid supply but not CBX, so
+      they inherit it. The kill of M1b part (i) is restated as "B0 + the shipped centre ledger" for this reason.
+    explanations:
+      - "Ledger encoding: CO2 is carried as a pKa ~4.25 carboxylate at full strength instead of carbonic acid (pKa 6.35), partly or wholly degassed. The acid is overstated by ~0.5 - 1 H+ per decarboxylation at pH 4.5 - 6."
+      - "Defensible as an approximation only where the pot stays below pH ~4, where both forms are nearly undissociated. That holds for none of Meynier's labels."
+    tests: []
+    status: open
+    remedy: >-
+      No code change here (M1b prereg sec. 21.9: a text and record task). The CO2 ledger audit, a separate PR, should
+      list every step that routes CO2 (not a carried carboxyl) into CBX and give each event's proton count under three
+      options: the shipped mixture, carbonic acid at 6.35 kept in solution, and carbonic acid with a declared headspace
+      partition (sealed vs opened). The per-step proton budget for Meynier's pots then goes in its record.
+      The CO2 treatment is listed for S1 as a structural choice (prereg sec. 21.8.6 item 4). A B1 u B13 envelope waits
+      for this audit. Any change to the shipped default needs its own S2 / S4 case, because it moves the dynamic pH of
+      every cysteine and Strecker pot.
+    affects:
+      - meynier1995_table3_cys_ribose_ph_ladder
+      - {file: src/kinetic_core/sulfur.py, symbol: r_cys_actz}
+      - {file: src/kinetic_core/sulfur.py, symbol: r_dpo_ddp}
+      - {file: src/kinetic_core/sulfur.py, symbol: r_mgo_cys_strecker}
+      - {file: src/kinetic_core/ph_state.py, symbol: ORGANIC_ACID_MIX}
+      - {file: src/kinetic_core/ph_state.py, symbol: "\"CBX\": {\"carboxyl\": 1}"}
+      - {file: src/kinetic_core/ph_balance_rivals.py, symbol: CYSTEINE_AMINE_STEPS}

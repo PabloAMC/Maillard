@@ -33,7 +33,7 @@
 | davidek acetic pH 8 / 6 at 240 min | fitted | 0.19 |
 | davidek xylose pH 8 / 6 at 30 min | fitted | 0.05 |
 | zhai MFT +Cys / TTCA, 120 C | fitted | 0.13 |
-| zhai MFT 140 / 120 C, +Cys (hold-out) | held_out | 0.19 |
+| zhai MFT 140 / 120 C, +Cys (hold-out) | held_out | 0.20 |
 | zhai FFT 140 / 120 C, +Cys (hold-out) | held_out | 0.01 |
 
 Groups passed per draw: 0: 34, 1: 69, 2: 54, 3: 33, 4: 7, 5: 3
