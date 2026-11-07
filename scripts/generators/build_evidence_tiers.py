@@ -80,9 +80,14 @@ def markdown(payload: dict) -> str:
          "`conflicting_measurements` (direct measurements disagree beyond their errors), `withdrawn`.", "",
          f"**{s['coordinates']} coordinates.** "
          + ", ".join(f"{t} {s['by_tier'][t]}" for t in tiers if s["by_tier"].get(t)) + ".", "",
-         "**No coordinate is `fitted_identified`.** No artifact on disk profiles a coordinate with the other "
-         "unidentified coordinates profiled over their bands (the B8 / B9 / B51 / B60 slice profiles hold them at the "
-         "optimum; Laplace and B38 are local). Of the fitted coordinates, "
+         (f"**{s['fitted_identification_status'].get('profile_pinned', 0)} coordinates are `fitted_identified`**: "
+          "the S1 profile (`results/validation/s1_profiles.json`, every other free coordinate of the fit that froze "
+          "the shipped value re-optimised at each grid value) pins each on both sides, and each upgrade has a second "
+          "reader in `docs/reference/evidence_tier_changes.yml`. "
+          if s['fitted_identification_status'].get('profile_pinned') else
+          "**No coordinate is `fitted_identified`.** ")
+         + "The B8 / B9 / B51 / B60 slice profiles hold the other coordinates at the optimum, and Laplace and B38 are "
+         "local, so neither identifies. Of the other fitted coordinates, "
          f"{s['fitted_identification_status'].get('unidentified', 0)} fail a local criterion and "
          f"{s['fitted_identification_status'].get('locally_pinned_profile_missing', 0)} pass every local criterion but "
          "lack that profile (`identification.status` = `locally_pinned_profile_missing`): a profile run with the "
