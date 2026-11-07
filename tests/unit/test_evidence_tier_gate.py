@@ -206,4 +206,5 @@ def test_the_baseline_is_write_once(tmp_path, monkeypatch):
 def test_the_gate_passes_on_the_repository():
     problems, stats = gate.check(shipped=et.shipped_coordinate_ids())
     assert problems == []
-    assert stats["shipped"] > 0 and stats["by_tier"].get("fitted_identified", 0) == 0
+    upgraded = {e["coordinate"] for e in et.tier_changes() if e["to"] == "fitted_identified"}
+    assert stats["shipped"] > 0 and stats["by_tier"].get("fitted_identified", 0) == len(upgraded)

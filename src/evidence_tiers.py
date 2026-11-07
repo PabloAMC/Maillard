@@ -48,6 +48,7 @@ from __future__ import annotations
 import json
 import math
 import re
+from pathlib import Path
 from typing import Any, Dict, Iterable, List, Mapping, Optional, Tuple
 
 import yaml
@@ -78,7 +79,12 @@ INPUTS = {
     "b18": V / "kinetic_core_b18_fit_report.json",
     "b20": V / "kinetic_core_b20_fit_report.json",
     "b21": V / "kinetic_core_b21_fit_report.json",
-    "b39": V / "kinetic_core_b39_fit_report.json",
+    # the fed 3-deoxy triangle ships B41's optimum (parameters_dicarbonyl.SHIPPING_FIT_REPORT; B39 fitted it and did
+    # not ship, B41 refitted it with the formic-acid exit's pH term and shipped), asserted in _Fits
+    "b41": V / "kinetic_core_b41_fit_report.json",
+    # the S1 profiles (build_s1_profiles.py): a coordinate whose profile pins it on the fit that froze it is
+    # fitted_identified (_s1_profile_upgrade); the register entry and its second reader are the gate's to check
+    "s1_profiles": V / "s1_profiles.json",
     "b60": V / "kinetic_core_b60_fit_report.json",
     "b60_laplace": V / "kinetic_core_b60_laplace_covariance.json",
     "b60_profile": V / "kinetic_core_b60_profile.json",
@@ -614,7 +620,12 @@ class _Fits:
         self.b18 = _json("b18")
         self.b20 = _json("b20")
         self.b21 = _json("b21")
-        self.b39 = _json("b39")
+        self.b41 = _json("b41")
+        self.s1_profiles = _json("s1_profiles")["coordinates"]
+        from src.kinetic_core import parameters_dicarbonyl as dicarbonyl
+        assert Path(dicarbonyl.SHIPPING_FIT_REPORT).name == INPUTS["b41"].name, dicarbonyl.SHIPPING_FIT_REPORT
+        assert dict(self.b41["frozen_parameters"]["fed_3deoxy"]) == dict(dicarbonyl.FROZEN_B39), \
+            "the fed 3-deoxy triangle's shipped values are not B41's frozen optimum"
         self.b60 = _json("b60")["frozen_parameters"]
         lap = _json("b60_laplace")
         self.lap = {}
@@ -914,6 +925,8 @@ def _coordinate(p: Any, lane: str, coordinate: str, fits: _Fits, priors: Dict[Tu
         tier, basis, ident = _fitted_barrier(p, lane, fits)
     elif fitted:
         tier, basis, ident = _fitted_rate(p, lane, fits)
+    if ident is not None and ident.get("status") == "locally_pinned_profile_missing":
+        tier, basis = _s1_profile_upgrade(row["id"], ident, fits) or (tier, basis)
     if tier is None:
         tier, basis = "unclassified", "no rule fired"
     row.update(tier=tier, basis=basis, identification=ident)
@@ -987,7 +1000,7 @@ def _fitted_rate(p: Any, lane: str, fits: _Fits) -> Tuple[str, str, dict]:
                 "lysine in milk), carried to fructosyl-glycine in water as a declared transfer (+/- 0.5 dex, "
                 "AQUEOUS_TRANSFER_BAND_DECADES)", ident)
     elif "fitted_wave_b39" in flags:
-        ident = fits.wave_coord("B39", fits.b39, "fed_3deoxy", f"log10_{key}_100C")
+        ident = fits.wave_coord("B41", fits.b41, "fed_3deoxy", f"log10_{key}_100C")
     else:
         return "unclassified", "fitted, but no fit artifact is mapped for it", None
     return _fitted_tier(ident)
@@ -1001,6 +1014,30 @@ def _fitted_tier(ident: dict) -> Tuple[str, str, dict]:
     ident["criteria_profile"] = ("no artifact profiles this coordinate with the other unidentified coordinates profiled over "
                                  "their bands (slice profiles hold them at the optimum; Laplace is local)")
     return ("fitted_unidentified", f"{ident['fit']}: every local criterion passes; the profile requirement is unmet", ident)
+
+
+S1_PROFILES_ARTIFACT = "results/validation/s1_profiles.json"
+
+
+def _s1_profile_upgrade(cid: str, ident: dict, fits: _Fits) -> Optional[Tuple[str, str]]:
+    """fitted_identified when the S1 profile (``s1_profiles.json``) pins this coordinate on the fit that froze its
+    shipped value: every local criterion already passes, the profile closes on both sides inside the search bounds
+    with every other free coordinate of that fit re-optimised at each grid value, every point inside the interval
+    converged with no failed pot, the shipped value lies inside, today's engine reproduces the fit's frozen objective,
+    no fit row is flagged withdrawn, and the fit is not conditional on a falsified structure (the artifact's
+    ``proposed_upgrade``). None otherwise. The register entry (with its second reader) is the gate's check."""
+    c = fits.s1_profiles.get(cid)
+    if not c or c.get("fit") != str(ident.get("fit") or "").split(" ")[0] or not c["verdict"].get("proposed_upgrade"):
+        return None
+    iv = c["intervals"]["scaled"]
+    lo, hi = float(iv["lower"]), float(iv["upper"])
+    ident.pop("criteria_profile", None)
+    ident.update(status="profile_pinned", profile_artifact=S1_PROFILES_ARTIFACT, profile_interval_95=[lo, hi],
+                 laplace_ci95_halfwidth=ident.get("ci95_halfwidth"), ci95_halfwidth=0.5 * (hi - lo),
+                 profile_calibration="Wilks chi2_1 (asymptotic), the rows' stated sigmas inflated by max(1, chi2_red); "
+                                     "not checked by simulation")
+    return ("fitted_identified", f"{ident['fit']}: S1 profile pinned on both sides, 95 % [{lo:.3f}, {hi:.3f}] "
+            f"(every other free coordinate of {ident['fit']} re-optimised at each grid value; {S1_PROFILES_ARTIFACT})")
 
 
 def _fitted_barrier(p: Any, lane: str, fits: _Fits) -> Tuple[str, str, Optional[dict]]:

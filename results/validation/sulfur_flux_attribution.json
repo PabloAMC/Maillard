@@ -2,11 +2,11 @@
   "artifact": "sulfur_flux_attribution",
   "provenance": {
     "artifact": "sulfur_flux_attribution",
-    "generated_on": "2026-10-31",
+    "generated_on": "2026-11-06",
     "git": {
-      "commit": "bf9ed087f1a9e1c8829699983a36540f5ded96cf",
-      "short": "bf9ed087",
-      "branch": "b7-deoxyosone-partition",
+      "commit": "cb7a888ea9269d1668c1687af64d19f122b2a0c0",
+      "short": "cb7a888e",
+      "branch": "m1b-part-i-build",
       "dirty": true
     },
     "generated_by": "scripts/generators/build_sulfur_flux_attribution.py",
@@ -17,7 +17,7 @@
       },
       {
         "path": "src/kinetic_core/sulfur.py",
-        "sha256": "c64e61c187eaf92acbb5003869f326df4bfed9dc79dc433fe81d728756509832"
+        "sha256": "31d5d49b849f02444c47f78c0fbd0085e86c41eaa7cb4cdd46ccc9c9b333161e"
       }
     ]
   },

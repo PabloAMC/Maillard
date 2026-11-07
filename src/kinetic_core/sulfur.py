@@ -153,6 +153,7 @@ from .ph_state import (
     validate_charge_closure,
 )
 from . import ph_state as _ph
+from . import ph_balance_rivals as _pbr   # M1b part (i): every rival off by default (never entered then)
 from .species_sulfur import (
     N_SULFUR_STATE,
     SITE_POOLS,
@@ -271,11 +272,18 @@ SULFUR_REACTIONS: Tuple[Reaction, ...] = (
         "B2.3 CHARGE FIX: the products were {FRAG_C 3, FRAG_N 1, FRAG_S 1}. "
         "This step is a LUMP over cystine formation, non-sulfide degradation "
         "and self-condensation, and the largest named member -- cystine -- "
-        "RETAINS both of cysteine's titratable centres, so carrying them is "
-        "the minimally-perturbing encoding as well as the conservative one. "
-        "At pH 5-8 a zwitterion's two centres nearly cancel, so this fix is "
-        "close to charge-neutral by construction; that it is close to neutral "
-        "is precisely why the pair had to move TOGETHER. "
+        "RETAINS both of cysteine's titratable centres. WHAT THE CODE DOES "
+        "(M1b prereg sec. 21.2, 2026-11-06): it carries the CARBOXYL only "
+        "(CBX) and sends the nitrogen to FRAG_N, and CENTRE_LEDGER declares "
+        "the amine destroyed on AMINE_FATE_BASIS. So at pH 4.5-8 the step "
+        "releases ~1 proton per cysteine consumed, NOT the near-neutral "
+        "encoding this note's chemistry calls for. THE CHEMISTRY IS RIGHT AND "
+        "THE SHIPPED ENCODING IS NOT: the source (free cysteine, sugar-free, "
+        "pH 7) names no product, and none of the lump's named members destroys "
+        "the amine while keeping the carboxyl; AMINE_FATE_BASIS rests on "
+        "Maillard partners the measured system lacks. Flipping it moves "
+        "shipped pH, so the chemically right encoding is opt-in "
+        "(ph.amine_survival retained_steps) and the flip is a separate case. "
         "B2.1, NEW, AND IT CARRIES A MEASURED ACTIVATION ENERGY. Kang 2026 SI "
         "Fig. S4 tracks FREE cysteine, 10 mmol/L, pH 7, sealed, and measures "
         "16.2% and 38.7% conversion by 120 min at 100 and 120 C -- the "
@@ -1076,10 +1084,18 @@ CENTRE_LEDGER: Mapping[str, Mapping[str, Any]] = {
         "The carboxyl is CARRIED (CBX, as pyruvate). " + AMINE_FATE_BASIS)},
     "ch_cys_ox": {"amine": -1, "basis": (
         "B11 cysteine autoxidation, routed exactly as r_cys_thermal: the carboxyl is "
-        "CARRIED (CBX), the amine leaves with the fragment nitrogen. " + AMINE_FATE_BASIS)},
+        "CARRIED (CBX), the amine leaves with the fragment nitrogen. CONTRADICTED BY "
+        "ITS OWN CHEMISTRY (M1b prereg sec. 21.2): autoxidation gives cystine, which "
+        "keeps the amine; kept as shipped, the right encoding is opt-in "
+        "(ph.amine_survival retained_steps). " + AMINE_FATE_BASIS)},
     "r_cys_thermal": {"amine": -1, "basis": (
         "Kang's lumped non-sulfide cysteine consumption (cystine formation, "
-        "self-condensation, degradation). Carboxyl CARRIED. " + AMINE_FATE_BASIS)},
+        "self-condensation, degradation). Carboxyl CARRIED. CONTRADICTED BY ITS "
+        "OWN CHEMISTRY (M1b prereg sec. 21.2): cystine and thioether "
+        "self-condensation keep the amine, and the measured system (free "
+        "cysteine, sugar-free) has none of the Maillard partners the shared "
+        "basis rests on; kept as shipped, the right encoding is opt-in "
+        "(ph.amine_survival retained_steps). " + AMINE_FATE_BASIS)},
     "r_dpo_ddp": {"amine": -1, "basis": (
         "Nedvidek 1992 Scheme 3 writes the leaving groups out: '+ RCHO + CO2 "
         "+ NH3'. The CO2 is the carboxyl and it is CARRIED (CBX). The NH3 is "
@@ -1946,6 +1962,13 @@ def integrate_sulfur(
 
     spec = buffer_spec if buffer_spec is not None else DEFAULT_BUFFER
     dynamic = ph_drift is not None and not spec.is_clamped
+    # M1b part (i): a charge-balance rival (ph_balance_rivals, every switch off by default) runs only inline
+    rivals = _pbr.any_active()
+    if rivals and not (dynamic and PH_COUPLING == "inline"):
+        raise ValueError("an M1b charge-balance rival (ph_balance_rivals) runs only on the inline dynamic pH; "
+                         f"this run is {'dynamic' if dynamic else 'clamped or prescribed'} on {PH_COUPLING!r}")
+    rival_pools: Optional[Dict[str, np.ndarray]] = None
+    rival_diagnostics: Optional[Dict[str, Any]] = None
     ph_notes: list = []
     if buffer_spec is None and ph_drift is not None:
         ph_notes.append(BUFFER_ABSENT_WARNING)
@@ -2016,9 +2039,14 @@ def integrate_sulfur(
             else:
                 def temperature_of(t):
                     return float(np.interp(t, profile[0], profile[1]))
-            solution, node_ph, node_i, node_cool, k_nodes = _integrate_inline_ph(
-                parameters, y0, eval_times, duration, temperature_of, sid, ph_drift, spec,
-                method, rtol, atol)
+            if rivals:
+                solution, node_ph, node_i, node_cool, k_nodes, rival_pools, rival_diagnostics = (
+                    _pbr.integrate_inline(parameters, y0, eval_times, duration, temperature_of, sid, ph_drift,
+                                          spec, method, rtol, atol))
+            else:
+                solution, node_ph, node_i, node_cool, k_nodes = _integrate_inline_ph(
+                    parameters, y0, eval_times, duration, temperature_of, sid, ph_drift, spec,
+                    method, rtol, atol)
             node_times = eval_times
             n_nodes = len(node_times)
             ph_convergence = 0.0
@@ -2137,6 +2165,18 @@ def integrate_sulfur(
             key: float(concentrations[-1, SULFUR_INDEX[key]])
             for key in SULFUR_STATE_KEYS
         }
+        if rival_pools is not None:
+            # M1b part (i): the rival's pools, at the requested grid (the network's state matrix never holds them)
+            pool_grid = {k: np.clip(v[keep], 0.0, None) for k, v in rival_pools.items()}
+            final_map.update(_pbr.balance_pools({k: float(v[-1]) for k, v in pool_grid.items()}))
+            metadata["ph_balance_rivals"] = {
+                "switches": _pbr.switches_record(),
+                "pools": {k: [float(x) for x in v] for k, v in pool_grid.items()},
+                "diagnostics": rival_diagnostics,
+                "note": ("the pools are bookkeeping, not network species: read them with the state "
+                         "(ph_balance_rivals.balance_pools) for any pH; LAA's two acetic carbons are outside the "
+                         "element audit while latent; the flux audit (rate_nodes) is the unmodified mass action"),
+            }
         ph_final_cooled = ph_of_state(
             final_map, LABEL_TEMPERATURE_K, float(sid), ph_drift, spec
         )

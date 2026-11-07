@@ -124,7 +124,17 @@ def test_known_readings(record):
     assert rows["k_schiff.log10_k_ref"]["tier"] == "measured"
     assert rows["k_dimer_release.log10_k_ref"]["tier"] == "structural"  # inert arm (B17 not shipped)
     assert rows["k_nf_decay.log10_k_ref"]["identification"]["status"] == "unidentified"
-    assert not any(r["tier"] == "fitted_identified" for r in record["rows"])  # no full profile on disk
+    # fitted_identified only where the S1 profile pins it on the fit that froze the shipped value (the fed 3-deoxy
+    # triangle, B41: the record once read B39's report, which did not ship)
+    triangle = {"k_tdg_ddg", "k_ddg_tdg", "k_ddg_dgal", "k_dgal_ddg", "k_ddg_hmf"}
+    identified = {r["id"] for r in record["rows"] if r["tier"] == "fitted_identified"}
+    assert identified == {f"{k}.log10_k_ref" for k in triangle}
+    for cid in identified:
+        ident = rows[cid]["identification"]
+        assert ident["fit"] == "B41" and ident["status"] == "profile_pinned"
+        assert ident["profile_artifact"] == et.S1_PROFILES_ARTIFACT
+        lo, hi = ident["profile_interval_95"]
+        assert lo < rows[cid]["value"] < hi
     assert record["summary"]["s2_candidates"] == []
     assert rows["k_mgo_mel.log10_k_ref"]["contradicted_by"][0]["s2_status"].startswith("consistent")
     b3 = rows["k_acr_dp.log10_k_ref"]["fit_rows_withdrawn_or_corrected"]

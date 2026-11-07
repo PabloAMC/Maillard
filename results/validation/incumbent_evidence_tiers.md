@@ -4,9 +4,9 @@
 
 **How to read a tier.** `measured`: a direct measurement of that step under comparable conditions. `analogue`: a same-class measurement transferred (its band, or **none** when no band is declared). `bounded`: only a measured or physical bound; one- or two-sided as stated. `fitted_identified`: a converged fit whose MARGINAL profile pins it with every other unidentified coordinate profiled over its band; any one unidentified criterion (band edge, flat or bound-limited slice, a CI spanning the band or reaching an unphysical sign, no uncertainty, frozen since an unidentified fit, B38 UNIDENTIFIED / AT_BOUND) overrides a reported stderr. `fitted_unidentified`: the rest of the fitted coordinates. `structural`: a declared structural assumption (a declared zero, an inert arm, a declared barrier of zero, a declared band with no source). `physical_constant`, `conflicting_measurements` (direct measurements disagree beyond their errors), `withdrawn`.
 
-**306 coordinates.** measured 61, analogue 45, bounded 4, fitted_unidentified 124, structural 60, physical_constant 1, conflicting_measurements 9, withdrawn 2.
+**306 coordinates.** measured 61, analogue 45, bounded 4, fitted_identified 5, fitted_unidentified 119, structural 60, physical_constant 1, conflicting_measurements 9, withdrawn 2.
 
-**No coordinate is `fitted_identified`.** No artifact on disk profiles a coordinate with the other unidentified coordinates profiled over their bands (the B8 / B9 / B51 / B60 slice profiles hold them at the optimum; Laplace and B38 are local). Of the fitted coordinates, 96 fail a local criterion and 28 pass every local criterion but lack that profile (`identification.status` = `locally_pinned_profile_missing`): a profile run with the unidentified coordinates free would decide those.
+**5 coordinates are `fitted_identified`**: the S1 profile (`results/validation/s1_profiles.json`, every other free coordinate of the fit that froze the shipped value re-optimised at each grid value) pins each on both sides, and each upgrade has a second reader in `docs/reference/evidence_tier_changes.yml`. The B8 / B9 / B51 / B60 slice profiles hold the other coordinates at the optimum, and Laplace and B38 are local, so neither identifies. Of the other fitted coordinates, 96 fail a local criterion and 23 pass every local criterion but lack that profile (`identification.status` = `locally_pinned_profile_missing`): a profile run with the unidentified coordinates free would decide those.
 
 ## 1. Tiers by lane
 
@@ -17,11 +17,11 @@
 | matrix | 19 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 |
 | observable | 1 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 |
 | sulfur | 4 | 6 | 1 | 0 | 82 | 21 | 0 | 1 | 0 |
-| trunk | 19 | 31 | 2 | 0 | 25 | 33 | 0 | 5 | 0 |
+| trunk | 19 | 31 | 2 | 5 | 20 | 33 | 0 | 5 | 0 |
 
 | coordinate kind | measured | analogue | bounded | fitted_identified | fitted_unidentified | structural | physical_constant | conflicting_measurements | withdrawn |
 |---|---|---|---|---|---|---|---|---|---|
-| log10_k_ref | 19 | 11 | 2 | 0 | 68 | 21 | 0 | 4 | 0 |
+| log10_k_ref | 19 | 11 | 2 | 5 | 63 | 21 | 0 | 4 | 0 |
 | ea_kj_mol | 17 | 28 | 0 | 0 | 48 | 29 | 0 | 3 | 0 |
 | band / other | 25 | 6 | 2 | 0 | 8 | 10 | 1 | 2 | 2 |
 
@@ -313,7 +313,7 @@ Coordinates whose fit read such a row: 44 — `k_acr_ala.log10_k_ref`, `k_acr_dp
 
 - analogue coordinates with no declared band (26): `k_tdg_mgo.log10_k_ref`, `k_int_hmf.log10_k_ref`, `k_hmf_cys.log10_k_ref`, `k_hmf_cys.ea_kj_mol`, `k_odg_af.log10_k_ref`, `k_g_go.ea_kj_mol`, `k_go_sink.log10_k_ref`, `k_da_sink.ea_kj_mol`, `k_glyc.ea_kj_mol`, `k_flp_cml.ea_kj_mol`, `k_flp_cel.ea_kj_mol`, `k_flp_decay.ea_kj_mol`, `k_ama_g.log10_k_ref`, `k_ama_g.ea_kj_mol`, `k_ddg_tdg.ea_kj_mol`, `k_ddg_dgal.ea_kj_mol`, `k_dgal_ddg.ea_kj_mol`, `k_thioether.ea_kj_mol`, `k_arp_dpo.ea_kj_mol`, `k_arp_tdp.ea_kj_mol`, `k_dimer_mft.ea_kj_mol`, `k_dimer_fft.ea_kj_mol`, `k_cys_thermal.ea_kj_mol`, `k_acr_gln.ea_kj_mol`, `k_acr_lys.ea_kj_mol`, `k_acr_ala.ea_kj_mol`
 - unclassified (0): none
-- tier changes since the frozen baseline (`docs/reference/evidence_tier_changes.yml`; upgrades need an artifact and a second reader, downgrades a citation; `scripts/ci/evidence_tier_gate.py`): none
+- tier changes since the frozen baseline (`docs/reference/evidence_tier_changes.yml`; upgrades need an artifact and a second reader, downgrades a citation; `scripts/ci/evidence_tier_gate.py`): `k_tdg_ddg.log10_k_ref` fitted_unidentified -> fitted_identified, `k_ddg_hmf.log10_k_ref` fitted_unidentified -> fitted_identified, `k_ddg_tdg.log10_k_ref` fitted_unidentified -> fitted_identified, `k_ddg_dgal.log10_k_ref` fitted_unidentified -> fitted_identified, `k_dgal_ddg.log10_k_ref` fitted_unidentified -> fitted_identified
 
 ## 10. Every coordinate
 
@@ -349,9 +349,9 @@ Coordinates whose fit read such a row: 44 — `k_acr_ala.log10_k_ref`, `k_acr_dp
 | `k_aa_frag.ea_kj_mol` | trunk | 20.000 | fitted_unidentified | normal [20.00, 260.00] **= the search bounds, not a band (S4)** (1.03 dex) | B1's objective no longer reproduces at its frozen point (S = r . r 5025.87 today; DRIFTED-MATERIAL, CF-135; frozen_fit_reproducibility.md): no current objective supports this value. B1 (variant A): on the band edge (20 w | CF-069 (open), CF-135 (open) | not on record |
 | `k_glc_tdg.log10_k_ref` | trunk | -5.027 | analogue | uniform_band [-5.41, -4.83] (0.58 dex) | measured in another system and transferred (flag amine_free_glucose_melt): Kocadagli & Gokmen 2016, J. Agric. Food Chem. 10.1021/acs.jafc.6b01862, Table 2 (GLUCOSE system), reparameterised Arrhenius at T_b = 180 C, step  | — | not on record |
 | `k_glc_tdg.ea_kj_mol` | trunk | 107.200 | analogue | uniform_band [54.50, 159.90] (1.59 dex) | measured in another system and transferred (flag amine_free_glucose_melt): Kocadagli & Gokmen 2016, J. Agric. Food Chem. 10.1021/acs.jafc.6b01862, Table 2 (GLUCOSE system), reparameterised Arrhenius at T_b = 180 C, step  | — | not on record |
-| `k_tdg_ddg.log10_k_ref` | trunk | -1.933 | fitted_unidentified | normal_log10 [-4.43, -0.43] **= the search bounds, not a band (S4)** (0.21 dex) | B39: every local criterion passes; the profile requirement is unmet | — | not on record |
+| `k_tdg_ddg.log10_k_ref` | trunk | -1.933 | fitted_identified | normal_log10 [-4.43, -0.43] **= the search bounds, not a band (S4)** (0.21 dex) | B41: S1 profile pinned on both sides, 95 % [-2.370, -1.571] (every other free coordinate of B41 re-optimised at each grid value; results/validation/s1_profiles.json) | — | not on record |
 | `k_tdg_ddg.ea_kj_mol` | trunk | 36.900 | analogue | not sampled +/- 6.300 (0.19 dex), not sampled | the source's measured barrier (+/- 6.3 kJ/mol) in another system (flag amine_free_glucose_melt); the rate is fitted, the barrier is not: Mittelmaier, Funfrocken, Fenn, Berlich & Pischetsrieder 2011, Anal. Bioanal. Chem.  | — | not on record |
-| `k_ddg_hmf.log10_k_ref` | trunk | -1.450 | fitted_unidentified | fixed, not sampled | B39: every local criterion passes; the profile requirement is unmet | — | not on record |
+| `k_ddg_hmf.log10_k_ref` | trunk | -1.450 | fitted_identified | fixed, not sampled | B41: S1 profile pinned on both sides, 95 % [-2.047, -1.070] (every other free coordinate of B41 re-optimised at each grid value; results/validation/s1_profiles.json) | — | not on record |
 | `k_ddg_hmf.ea_kj_mol` | trunk | 0.000 | structural | — | barrier declared zero (flag ea_author_fixed_to_zero) | — | not on record |
 | `k_tdg_mgo.log10_k_ref` | trunk | -2.613 | analogue | **none** | measured in another system and transferred (flag amine_free_glucose_melt): Kocadagli & Gokmen 2016, J. Agric. Food Chem. 10.1021/acs.jafc.6b01862, Table 2 (GLUCOSE system), reparameterised Arrhenius at T_b = 180 C, step  | — | not on record |
 | `k_tdg_mgo.ea_kj_mol` | trunk | 84.800 | analogue | not sampled +/- 6.900 (0.21 dex), not sampled | measured in another system and transferred (flag amine_free_glucose_melt): Kocadagli & Gokmen 2016, J. Agric. Food Chem. 10.1021/acs.jafc.6b01862, Table 2 (GLUCOSE system), reparameterised Arrhenius at T_b = 180 C, step  | — | not on record |
@@ -423,11 +423,11 @@ Coordinates whose fit read such a row: 44 — `k_acr_ala.log10_k_ref`, `k_acr_dp
 | `k_ha_athp.ea_kj_mol` | trunk | 60.200 | structural | — | inert zero: the arm is not shipped (kinetic_core_b24_ship_rule.md / b24b (DO NOT SHIP)) | — | not on record |
 | `k_pyrl_loss.log10_k_ref` | trunk | k = 0 | structural | — | inert zero: the arm is not shipped (kinetic_core_b24_ship_rule.md / b24b (DO NOT SHIP)) | — | not on record |
 | `k_pyrl_loss.ea_kj_mol` | trunk | 60.200 | structural | — | inert zero: the arm is not shipped (kinetic_core_b24_ship_rule.md / b24b (DO NOT SHIP)) | — | not on record |
-| `k_ddg_tdg.log10_k_ref` | trunk | -1.965 | fitted_unidentified | normal_log10 [-4.43, -0.43] **= the search bounds, not a band (S4)** (0.59 dex) | B39: every local criterion passes; the profile requirement is unmet | — | not on record |
+| `k_ddg_tdg.log10_k_ref` | trunk | -1.965 | fitted_identified | normal_log10 [-4.43, -0.43] **= the search bounds, not a band (S4)** (0.59 dex) | B41: S1 profile pinned on both sides, 95 % [-2.415, -1.546] (every other free coordinate of B41 re-optimised at each grid value; results/validation/s1_profiles.json) | — | not on record |
 | `k_ddg_tdg.ea_kj_mol` | trunk | 36.900 | analogue | **none** | a barrier borrowed from another step or system (flag barrier_declared_equal_to_forward); not fitted | — | not on record |
-| `k_ddg_dgal.log10_k_ref` | trunk | -1.812 | fitted_unidentified | normal_log10 [-4.43, -0.43] **= the search bounds, not a band (S4)** (0.80 dex) | B39: every local criterion passes; the profile requirement is unmet | — | not on record |
+| `k_ddg_dgal.log10_k_ref` | trunk | -1.812 | fitted_identified | normal_log10 [-4.43, -0.43] **= the search bounds, not a band (S4)** (0.80 dex) | B41: S1 profile pinned on both sides, 95 % [-2.302, -1.262] (every other free coordinate of B41 re-optimised at each grid value; results/validation/s1_profiles.json) | — | not on record |
 | `k_ddg_dgal.ea_kj_mol` | trunk | 36.900 | analogue | **none** | a barrier borrowed from another step or system (flag barrier_declared_equal_to_forward); not fitted | — | not on record |
-| `k_dgal_ddg.log10_k_ref` | trunk | -1.698 | fitted_unidentified | normal_log10 [-4.43, -0.43] **= the search bounds, not a band (S4)** (0.85 dex) | B39: every local criterion passes; the profile requirement is unmet | — | not on record |
+| `k_dgal_ddg.log10_k_ref` | trunk | -1.698 | fitted_identified | normal_log10 [-4.43, -0.43] **= the search bounds, not a band (S4)** (0.85 dex) | B41: S1 profile pinned on both sides, 95 % [-2.154, -1.164] (every other free coordinate of B41 re-optimised at each grid value; results/validation/s1_profiles.json) | — | not on record |
 | `k_dgal_ddg.ea_kj_mol` | trunk | 36.900 | analogue | **none** | a barrier borrowed from another step or system (flag barrier_declared_equal_to_forward); not fitted | — | not on record |
 | `k_ox_supply.log10_k_ref` | sulfur | k = 0 | structural | — | inert zero: the arm is not shipped (kinetic_core_b11_ship_rule.md (DO NOT SHIP: the consumers ship as declared-inert)) | — | low (odorant 0%, flux 0.0%) |
 | `k_ox_supply.ea_kj_mol` | sulfur | — | structural | — | inert zero: the arm is not shipped (kinetic_core_b11_ship_rule.md (DO NOT SHIP: the consumers ship as declared-inert)) | — | low (odorant 0%, flux 0.0%) |
