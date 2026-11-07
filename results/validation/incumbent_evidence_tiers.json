@@ -4,10 +4,10 @@
   "artifact": "incumbent_evidence_tiers",
   "generated_on": "2026-11-07",
   "git": {
-   "commit": "393ac3756a6f4b8d50763dc5b3089e1b35d5ba3e",
-   "short": "393ac375",
+   "commit": "63dca8d4f2551475cafd048039222d10d83af482",
+   "short": "63dca8d4",
    "branch": "s3-ph-balance-refusal",
-   "dirty": false
+   "dirty": true
   },
   "generated_by": "scripts/generators/build_evidence_tiers.py",
   "inputs": [
@@ -69,7 +69,7 @@
    },
    {
     "path": "results/validation/sulfur_reaction_evidence.json",
-    "sha256": "730bdb6cc339a169a35491ef6e5c1d8cd3233dcbb1db6f5b41e737d8d73ba3ce"
+    "sha256": "7bdc3f07c92bf091816fa3143d77c27605d596a9320e3c653e9d8d0df3b5a95f"
    },
    {
     "path": "results/validation/data_wishlist.json",
