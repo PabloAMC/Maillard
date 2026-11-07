@@ -32,6 +32,7 @@ from src.kinetic_core import config, parallel
 from src.kinetic_core import parameters_dicarbonyl as pd
 from src.kinetic_core import parameters_lipid as pl
 from src.kinetic_core import parameters_sulfur as ps
+from src.kinetic_core import ph_balance_rivals as pbr
 from src.kinetic_core import ph_state
 from tests import engine_constants, support
 
@@ -49,6 +50,10 @@ NOT_SWITCHES = {
 #: A non-default value for EVERY key (the spawn test flips them all; a new key needs one here).
 FLIPPED = {
     "ph.coupling": "inline",
+    "ph.amine_survival": pbr.AmineSurvival(True, 0.5, 0.25),
+    "ph.acid_lag": pbr.AcidLag(False, 0.3, 0.5, 90.0),   # B2 with B1 + B3 is refused: flipped in its fields
+    "ph.acid_supply": pbr.AcidSupply(True, 0.2, 0.5, 0.9, (5.2, 6.2, 6.7), 0.1),
+    "ph.arp_forcing": pbr.ArpForcing(True, (0.0, 20.0), (5.0, 3.2)),
     "ph.node_grid": "uniform",
     "ph.fixed_point": "fixed_sweeps",
     "ph.fixed_point.relaxation": 0.5,

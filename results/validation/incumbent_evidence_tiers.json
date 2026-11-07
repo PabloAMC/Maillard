@@ -2,10 +2,10 @@
  "artifact": "incumbent_evidence_tiers",
  "provenance": {
   "artifact": "incumbent_evidence_tiers",
-  "generated_on": "2026-11-06",
+  "generated_on": "2026-11-07",
   "git": {
-   "commit": "0707cfd0e7424e17b4f4d7d0fcf13c96368b85b3",
-   "short": "0707cfd0",
+   "commit": "efe1601fa4d7e050169db88af5c2573698a50faa",
+   "short": "efe1601f",
    "branch": "s1-second-reader-tmp",
    "dirty": true
   },
@@ -73,11 +73,11 @@
    },
    {
     "path": "results/validation/sulfur_reaction_evidence.json",
-    "sha256": "44c7fb8c939af208087d3f74af1c5d36b9c7b081b91612f8730bff448ece5aea"
+    "sha256": "730bdb6cc339a169a35491ef6e5c1d8cd3233dcbb1db6f5b41e737d8d73ba3ce"
    },
    {
     "path": "results/validation/data_wishlist.json",
-    "sha256": "ff2da8e98066f77e6838a1136a41e18553d9a3091eb845a04daea70291e661c5"
+    "sha256": "b7db438fbab3387c3c5416eafbdb3d0555d6aae2445149b3a940c468f2e7a583"
    },
    {
     "path": "docs/reference/unpinned_constants.yml",
@@ -85,7 +85,7 @@
    },
    {
     "path": "docs/reference/conflicts_register.yml",
-    "sha256": "c47a21dc25ae5d4018c29c97e2331f2b375d2499a200773d2eeef9662ee15f05"
+    "sha256": "9a92dc64e51ad866c65f0708d1ab71bd79f102044cf955d8c920fcd2ed227dc6"
    },
    {
     "path": "docs/reference/choices_register.yml",

@@ -2,10 +2,10 @@
  "artifact": "s4_band_sources",
  "provenance": {
   "artifact": "s4_band_sources",
-  "generated_on": "2026-11-06",
+  "generated_on": "2026-11-07",
   "git": {
-   "commit": "0707cfd0e7424e17b4f4d7d0fcf13c96368b85b3",
-   "short": "0707cfd0",
+   "commit": "efe1601fa4d7e050169db88af5c2573698a50faa",
+   "short": "efe1601f",
    "branch": "s1-second-reader-tmp",
    "dirty": true
   },
@@ -13,7 +13,7 @@
   "inputs": [
    {
     "path": "results/validation/incumbent_evidence_tiers.json",
-    "sha256": "0c626ebc7a6beae6937c54c2b6b9bf15c12a3c8a8d3bf47fc87f106cda64266d"
+    "sha256": "170361dd91e97681cf6ed6bee13e62131a2b6c8fe66bca6ca6a95d2c5aa31df9"
    },
    {
     "path": "src/kinetic_core/ea_class_prior.py",

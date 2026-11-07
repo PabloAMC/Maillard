@@ -127,7 +127,10 @@ SHIPPED_HELD_DIGEST = "e40256046969dff0"
 #: (file, qualified name) -> sha256 (16 hex) of the AST without docstrings: the engine logic the port re-implements
 SOURCE_PINS: Mapping[Tuple[str, str], str] = {
     ('src/kinetic_core/sulfur.py', 'sulfur_rate_constants_at'): '29db02f032049288',
-    ('src/kinetic_core/sulfur.py', 'integrate_sulfur'): 'b856bb5a3fd80c82',
+    # 2026-11-06 (M1b part (i), PR #94): integrate_sulfur gains the switched-off rival branch (ph_balance_rivals:
+    # never entered with every rival off) and titratable_inventory reads the rivals' NH4 / RET_AA pools, which no
+    # network species carries. The shipped path the port re-implements is unchanged; parity re-run in maillard-jax.
+    ('src/kinetic_core/sulfur.py', 'integrate_sulfur'): '8f83d3d17af82783',
     ('src/kinetic_core/sulfur.py', '_integrate_inline_ph'): '3593b6f152b1dabb',
     ('src/kinetic_core/sulfur.py', 'ph_node_times'): '2c9d370551e51d33',
     ('src/kinetic_core/sulfur.py', 'profile_node_times'): '4fafa180d7d9e132',
@@ -162,7 +165,7 @@ SOURCE_PINS: Mapping[Tuple[str, str], str] = {
     ('src/kinetic_core/ph_state.py', 'BufferSpec.groups'): 'c4526eeafd11a1ac',
     ('src/kinetic_core/ph_state.py', 'PhDrift.arp_group'): '9a98e3c5c0ccd2f5',
     ('src/kinetic_core/ph_state.py', 'cysteine_group'): 'b9d8ad380c89c68f',
-    ('src/kinetic_core/ph_state.py', 'titratable_inventory'): '998c74d159d2950a',
+    ('src/kinetic_core/ph_state.py', 'titratable_inventory'): 'c9f7de2247e2be5f',
     ('src/kinetic_core/ph_state.py', '_charge_residual'): '25fd1a380a396e57',
     ('src/kinetic_core/ph_state.py', 'ionic_strength_of'): 'f08e695bd92fc433',
     ('src/kinetic_core/ph_state.py', 'solve_ph_and_ionic_strength'): 'b759286fbe32928b',
