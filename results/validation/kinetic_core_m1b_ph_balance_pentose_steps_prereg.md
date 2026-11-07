@@ -917,6 +917,8 @@ must not decide the verdict.)
 - v3.8.1, 2026-11-06 (A2's independent confirmation: CONFIRMED WITH EDITS; sec. 21.9): text and record only. Secs.
   21.2 and 21.6 are annotated in place (marked), not rewritten. Sec. 21.8 is corrected. CF-134 is new. No fit is
   re-run and no shipped output moves.
+- v3.8.2, 2026-11-07 (the S3 application, its own PR; sec. 21.10): a record of what shipped, appended. Nothing above
+  sec. 21.10 is edited except this line.
 
 ## 20. Amendment A1 (v3.7, 2026-11-06): part (i), falsification only
 
@@ -1462,3 +1464,33 @@ no shipped output moves.*
 - a sec. 7 clause on how a refusal is lifted;
 - the B1 u B13 envelope, only after converged S3 fits of B1 and B13 and the CO2 ledger audit (CF-134);
 - a case for flipping the ledger default.
+
+### 21.10 The S3 application (2026-11-07; its own PR, `s3-ph-balance-refusal`)
+
+*Appended by the session that built the application. Nothing above is edited. The sec. 7 lift clause it implements is
+"pending independent confirmation".*
+
+- **The rule, per output, not a species list.** `results/validation/ph_balance_s3_sensitivity.{json,md}`
+  (`build_ph_balance_s3_sensitivity.py`) ran 809 recipes (26 sulfur-lane panel pots, 165 arms of 65 sulfur-lane
+  directional claims, 618 grid recipes of the CLI's recipe space: 11 precursor sets x 6 declared buffers and a clamped
+  pH x 4 label pH x 2 programmes, 2 lipid co-integrations) at B0 (shipped), B1 at phi_cys = 1 (its other coordinates at
+  its best draw, sec. 20.4) and B13 at its best draw. Dependence varies by pot (e.g. Meynier's own pots: the thiols'
+  spread 0.21 - 0.23 dex, below omega, the cooled pH's 0.93 pH, above the buffered term), so the engine applies the rule
+  live (`src/kinetic_core/ph_balance_refusal.py`): on every pot whose pH the balance solves, the two rivals are run and
+  every output above its term is refused; the record audits the rule across the space.
+- **Terms.** Concentrations and ratios: omega = 0.419 dex (sec. 7's S1 - S4 preamble; S3's refusal clause names the
+  within-lab term for every output, so sec. 21.8.6's tau reading for absolute outputs is reported, not used). Ratios
+  also on sign (a sign is read only beyond 0.01 dex, above the largest fixed-point vs inline coupling difference on
+  record, 0.0061 dex). pH: 0.478 pH unbuffered (sec. 20.2), 0.135 pH with a declared buffer (sec. 21.8.1).
+- **What the record shows.** Dependent: 1513 of 3523 decided concentration outputs, 901 of 1398 pH outputs; ratios by
+  lever buffer 1554 / 2562 (504 sign flips), pH 1085 / 2666 (323), dose 263 / 378, sugar 116 / 616, thermal 219 /
+  1794, within-study panel pairs 43 / 102; 24 of 46 decided sulfur-lane directional claims. Clamped controls: 882
+  outputs, none dependent (by construction). Lipid products in a co-integrated pot: spread 0.
+- **Not refused.** A clamped (held, measured) pH: the balance is not solved (the measured-trajectory path). The trunk,
+  acrylamide and lipid lanes. The WUR blind-test predictions of 2026-10-20 ran with `BufferSpec(kind="clamped")` (pH
+  6.4 held, their assumption A4): they did not depend on the balance and are not re-scored.
+- **Cost.** One evaluation timed at 6.1 s (four points) projected 0.34 h for the space at 4 workers; it took 1.1 h (an
+  interrupted first run of ~0.5 h, whose first 64 recipes were reused, and a resumed 0.64 h run), because four Chen
+  2002 / 2000 arms (ribose + cysteine, pH 5, 180 C, 2 h) ran the inline coupling into the 300 s point limit. The engine
+  refuses such a pot (its independence is not shown). The live rule adds the rivals' cost to every balance-solved
+  predict (median 0.4 s per rival, NumPy engine, inline coupling; not in JAX, W3).

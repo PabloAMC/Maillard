@@ -468,6 +468,15 @@ supply structure on disk passes the screen, and P ~0.6 that no unseen decisive s
 improve the sulfur lane out of sample, ~0.25. The sulfur lane beats both null models after M1 + M2, ~0.3. Ranked relative predictions with honest intervals for most levers by the end of January, ~0.35. Absolute levels
 within 3x across laboratories for most rows, ~0.15 (not a goal).
 
+Re-estimated 2026-11-07 with the first S3 application, as sec. 7 asks (the outputs that depend on M1b part (i)'s
+falsified pH balance are refused, per pot: `results/validation/ph_balance_s3_sensitivity.md`; on balance-solved pots,
+43 % of the decided concentration outputs, 64 % of the pH outputs and 41 % of the pH-lever ratios move beyond their
+term between B0 and the carried rivals). Until an S3 change ships the union of the carried rivals' envelopes (S3's lift
+clause: B1 and B13 need converged S3 fits on CF-084's controls and the CO2 ledger audit, CF-134), W5.4's pH, buffer and
+dose rows on the sulfur lane are refused wherever the balance moves them; recipes with a held (clamped) pH are
+answered. Ranked relative predictions with honest intervals for most levers by the end of January: ~0.35 -> ~0.3. The
+01-23 checkpoint stays ~0.3 (its lever table already waited on the envelope).
+
 ## 9. Not in the plan
 
 - New laboratory experiments and the designed-experiment brief (paused by the owner).
