@@ -2,18 +2,18 @@
   "artifact": "data_wishlist",
   "provenance": {
     "artifact": "data_wishlist",
-    "generated_on": "2026-11-06",
+    "generated_on": "2026-11-07",
     "git": {
-      "commit": "67911f3949d009e6c4fc96ab6a87e100d4526462",
-      "short": "67911f39",
-      "branch": "m1b-part-i-build",
+      "commit": "81cbca274af0106f86c9f91433fef361e3650217",
+      "short": "81cbca27",
+      "branch": "s3-ph-balance-refusal",
       "dirty": true
     },
     "generated_by": "src/data_wishlist.py",
     "inputs": [
       {
         "path": "results/validation/core_panel_scores.json",
-        "sha256": "5ce9814c694e0af2bd79386edc283ac85bff34f1a7a45ae788c434f88a951e8c"
+        "sha256": "b2590acb38e19e67adeed4aeeddfe57f93557f98da56e4666bb778506e17188c"
       },
       {
         "path": "results/validation/kinetic_core_b60_profile.json",
@@ -25,11 +25,11 @@
       },
       {
         "path": "results/validation/core_directional_scores.json",
-        "sha256": "f19ff455440966e84db546634085f0044faa7689ec17544b5283f6225d7665d3"
+        "sha256": "b462e5fec07a13144ec6500b85491bb9ed41c38550a0b7cd74f42708e042d6eb"
       },
       {
         "path": "results/validation/experiment_value_ranking.json",
-        "sha256": "0be167ee84cb7eb190737f29d21ace6290d215de187b784d3b8744303c310aa5"
+        "sha256": "10f11fdf7223b01f1a88749bea1686031d56e915191a43e785c68ebf670301fd"
       },
       {
         "path": "results/validation/lane_offset_diagnostic.json",
@@ -402,38 +402,13 @@
       "panel": "trust_loop"
     },
     {
-      "benchmark_id": "hofmann1998_ribose_cysteine_145C_20min_pH5",
-      "compound": "2-Furfurylthiol (FFT)",
-      "panel": "trust_loop"
-    },
-    {
-      "benchmark_id": "hofmann1998_ribose_cysteine_145C_20min_pH5",
-      "compound": "2-Methyl-3-furanthiol (MFT)",
-      "panel": "trust_loop"
-    },
-    {
-      "benchmark_id": "resconi_2023_pbma_beef_identity_benchmark",
-      "compound": "furfural",
-      "panel": "trust_loop"
-    },
-    {
       "benchmark_id": "thiamine_cys_glucose_120C_Bolton1994",
       "compound": "2-Methyl-3-furanthiol (MFT)",
       "panel": "trust_loop"
     },
     {
       "benchmark_id": "mp_holdout_arp_glutathione_120C_120min_pH75_Zhou2023c",
-      "compound": "2-Methyl-3-furanthiol (MFT)",
-      "panel": "maillard_path_holdout"
-    },
-    {
-      "benchmark_id": "mp_holdout_arp_glutathione_120C_120min_pH75_Zhou2023c",
       "compound": "2-Furfurylthiol (FFT)",
-      "panel": "maillard_path_holdout"
-    },
-    {
-      "benchmark_id": "mp_holdout_arp_glutathione_120C_120min_pH75_Zhou2023c",
-      "compound": "Furfural",
       "panel": "maillard_path_holdout"
     },
     {
@@ -447,38 +422,13 @@
       "panel": "maillard_path_holdout"
     },
     {
-      "benchmark_id": "mp_holdout_arp_glutathione_120C_30min_pH75_Zhou2023c",
-      "compound": "Furfural",
-      "panel": "maillard_path_holdout"
-    },
-    {
-      "benchmark_id": "mp_holdout_arp_glutathione_120C_60min_pH75_Zhou2023c",
-      "compound": "2-Methyl-3-furanthiol (MFT)",
-      "panel": "maillard_path_holdout"
-    },
-    {
       "benchmark_id": "mp_holdout_arp_glutathione_120C_60min_pH75_Zhou2023c",
       "compound": "2-Furfurylthiol (FFT)",
       "panel": "maillard_path_holdout"
     },
     {
-      "benchmark_id": "mp_holdout_arp_glutathione_120C_60min_pH75_Zhou2023c",
-      "compound": "Furfural",
-      "panel": "maillard_path_holdout"
-    },
-    {
-      "benchmark_id": "mp_holdout_arp_glutathione_120C_90min_pH75_Zhou2023c",
-      "compound": "2-Methyl-3-furanthiol (MFT)",
-      "panel": "maillard_path_holdout"
-    },
-    {
       "benchmark_id": "mp_holdout_arp_glutathione_120C_90min_pH75_Zhou2023c",
       "compound": "2-Furfurylthiol (FFT)",
-      "panel": "maillard_path_holdout"
-    },
-    {
-      "benchmark_id": "mp_holdout_arp_glutathione_120C_90min_pH75_Zhou2023c",
-      "compound": "Furfural",
       "panel": "maillard_path_holdout"
     },
     {
@@ -488,26 +438,6 @@
     },
     {
       "benchmark_id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3",
-      "compound": "2-Methyl-3-furanthiol (MFT)",
-      "panel": "maillard_path_holdout"
-    },
-    {
-      "benchmark_id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7",
-      "compound": "2-Furfurylthiol (FFT)",
-      "panel": "maillard_path_holdout"
-    },
-    {
-      "benchmark_id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7",
-      "compound": "2-Methyl-3-furanthiol (MFT)",
-      "panel": "maillard_path_holdout"
-    },
-    {
-      "benchmark_id": "mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5",
-      "compound": "2-Furfurylthiol (FFT)",
-      "panel": "maillard_path_holdout"
-    },
-    {
-      "benchmark_id": "mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5",
       "compound": "2-Methyl-3-furanthiol (MFT)",
       "panel": "maillard_path_holdout"
     },
@@ -549,21 +479,6 @@
     {
       "benchmark_id": "mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026",
       "compound": "2-Furfurylthiol (FFT)",
-      "panel": "maillard_path_holdout"
-    },
-    {
-      "benchmark_id": "mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b",
-      "compound": "2-Methyl-3-furanthiol (MFT)",
-      "panel": "maillard_path_holdout"
-    },
-    {
-      "benchmark_id": "mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b",
-      "compound": "2-Furfurylthiol (FFT)",
-      "panel": "maillard_path_holdout"
-    },
-    {
-      "benchmark_id": "mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b",
-      "compound": "Bis(2-methyl-3-furyl) disulfide",
       "panel": "maillard_path_holdout"
     }
   ],
@@ -609,6 +524,38 @@
       "hypothesis_layer": "no cited rule reaches it from any reference charge"
     },
     {
+      "what": "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): 2-Furfurylthiol (FFT) (spread 2.04 dex): computed with",
+      "reason": "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): 2-Furfurylthiol (FFT) (spread 2.04 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buf",
+      "rows": [
+        {
+          "benchmark_id": "hofmann1998_ribose_cysteine_145C_20min_pH5",
+          "compound": "2-Furfurylthiol (FFT)"
+        },
+        {
+          "benchmark_id": "mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5",
+          "compound": "2-Furfurylthiol (FFT)"
+        }
+      ],
+      "row_count": 2,
+      "hypothesis_layer": "no cited rule reaches it from any reference charge"
+    },
+    {
+      "what": "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): 2-Methyl-3-furanthiol (MFT) (spread 2.00 dex): compute",
+      "reason": "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): 2-Methyl-3-furanthiol (MFT) (spread 2.00 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995",
+      "rows": [
+        {
+          "benchmark_id": "hofmann1998_ribose_cysteine_145C_20min_pH5",
+          "compound": "2-Methyl-3-furanthiol (MFT)"
+        },
+        {
+          "benchmark_id": "mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5",
+          "compound": "2-Methyl-3-furanthiol (MFT)"
+        }
+      ],
+      "row_count": 2,
+      "hypothesis_layer": "no cited rule reaches it from any reference charge"
+    },
+    {
       "what": "PYRAZINE TARGETS '2,5-dimethylpyrazine' (wave B18) run on the trunk lane only: the lipid lane's network keeps the topolo",
       "reason": "PYRAZINE TARGETS '2,5-dimethylpyrazine' (wave B18) run on the trunk lane only: the lipid lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2,5-dimethylpyrazine'. The charge declares only a matrix/lipid carrier, which is not a p",
       "rows": [
@@ -619,6 +566,22 @@
         {
           "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
           "compound": "2,5-dimethylpyrazine"
+        }
+      ],
+      "row_count": 2,
+      "hypothesis_layer": "no cited rule reaches it from any reference charge"
+    },
+    {
+      "what": "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): 2-Methyl-3-furanthiol (MFT) (spread 0.44 dex): compute",
+      "reason": "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): 2-Methyl-3-furanthiol (MFT) (spread 0.44 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995",
+      "rows": [
+        {
+          "benchmark_id": "mp_holdout_arp_glutathione_120C_120min_pH75_Zhou2023c",
+          "compound": "2-Methyl-3-furanthiol (MFT)"
+        },
+        {
+          "benchmark_id": "mp_holdout_arp_glutathione_120C_60min_pH75_Zhou2023c",
+          "compound": "2-Methyl-3-furanthiol (MFT)"
         }
       ],
       "row_count": 2,
@@ -683,6 +646,150 @@
         {
           "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
           "compound": "2-acetyl-1-pyrroline"
+        }
+      ],
+      "row_count": 1,
+      "hypothesis_layer": "no cited rule reaches it from any reference charge"
+    },
+    {
+      "what": "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): furfural (spread 0.47 dex): computed with the sulfur l",
+      "reason": "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): furfural (spread 0.47 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cystein",
+      "rows": [
+        {
+          "benchmark_id": "resconi_2023_pbma_beef_identity_benchmark",
+          "compound": "furfural"
+        }
+      ],
+      "row_count": 1,
+      "hypothesis_layer": "no cited rule reaches it from any reference charge"
+    },
+    {
+      "what": "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): Furfural (spread 1.15 dex): computed with the sulfur l",
+      "reason": "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): Furfural (spread 1.15 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cystein",
+      "rows": [
+        {
+          "benchmark_id": "mp_holdout_arp_glutathione_120C_120min_pH75_Zhou2023c",
+          "compound": "Furfural"
+        }
+      ],
+      "row_count": 1,
+      "hypothesis_layer": "no cited rule reaches it from any reference charge"
+    },
+    {
+      "what": "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): Furfural (spread 0.79 dex): computed with the sulfur l",
+      "reason": "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): Furfural (spread 0.79 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cystein",
+      "rows": [
+        {
+          "benchmark_id": "mp_holdout_arp_glutathione_120C_30min_pH75_Zhou2023c",
+          "compound": "Furfural"
+        }
+      ],
+      "row_count": 1,
+      "hypothesis_layer": "no cited rule reaches it from any reference charge"
+    },
+    {
+      "what": "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): Furfural (spread 1.18 dex): computed with the sulfur l",
+      "reason": "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): Furfural (spread 1.18 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cystein",
+      "rows": [
+        {
+          "benchmark_id": "mp_holdout_arp_glutathione_120C_60min_pH75_Zhou2023c",
+          "compound": "Furfural"
+        }
+      ],
+      "row_count": 1,
+      "hypothesis_layer": "no cited rule reaches it from any reference charge"
+    },
+    {
+      "what": "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): 2-Methyl-3-furanthiol (MFT) (spread 0.47 dex): compute",
+      "reason": "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): 2-Methyl-3-furanthiol (MFT) (spread 0.47 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995",
+      "rows": [
+        {
+          "benchmark_id": "mp_holdout_arp_glutathione_120C_90min_pH75_Zhou2023c",
+          "compound": "2-Methyl-3-furanthiol (MFT)"
+        }
+      ],
+      "row_count": 1,
+      "hypothesis_layer": "no cited rule reaches it from any reference charge"
+    },
+    {
+      "what": "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): Furfural (spread 1.20 dex): computed with the sulfur l",
+      "reason": "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): Furfural (spread 1.20 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered cystein",
+      "rows": [
+        {
+          "benchmark_id": "mp_holdout_arp_glutathione_120C_90min_pH75_Zhou2023c",
+          "compound": "Furfural"
+        }
+      ],
+      "row_count": 1,
+      "hypothesis_layer": "no cited rule reaches it from any reference charge"
+    },
+    {
+      "what": "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): 2-Furfurylthiol (FFT) (spread 0.88 dex): computed with",
+      "reason": "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): 2-Furfurylthiol (FFT) (spread 0.88 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buf",
+      "rows": [
+        {
+          "benchmark_id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7",
+          "compound": "2-Furfurylthiol (FFT)"
+        }
+      ],
+      "row_count": 1,
+      "hypothesis_layer": "no cited rule reaches it from any reference charge"
+    },
+    {
+      "what": "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): 2-Methyl-3-furanthiol (MFT) (spread 1.22 dex): compute",
+      "reason": "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): 2-Methyl-3-furanthiol (MFT) (spread 1.22 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995",
+      "rows": [
+        {
+          "benchmark_id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7",
+          "compound": "2-Methyl-3-furanthiol (MFT)"
+        }
+      ],
+      "row_count": 1,
+      "hypothesis_layer": "no cited rule reaches it from any reference charge"
+    },
+    {
+      "what": "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): 2-Methyl-3-furanthiol (MFT) (spread 0.60 dex): compute",
+      "reason": "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): 2-Methyl-3-furanthiol (MFT) (spread 0.60 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995",
+      "rows": [
+        {
+          "benchmark_id": "mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b",
+          "compound": "2-Methyl-3-furanthiol (MFT)"
+        }
+      ],
+      "row_count": 1,
+      "hypothesis_layer": "no cited rule reaches it from any reference charge"
+    },
+    {
+      "what": "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): 2-Furfurylthiol (FFT) (spread 0.46 dex): computed with",
+      "reason": "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): 2-Furfurylthiol (FFT) (spread 0.46 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buf",
+      "rows": [
+        {
+          "benchmark_id": "mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b",
+          "compound": "2-Furfurylthiol (FFT)"
+        }
+      ],
+      "row_count": 1,
+      "hypothesis_layer": "no cited rule reaches it from any reference charge"
+    },
+    {
+      "what": "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): Bis(2-methyl-3-furyl) disulfide (spread 0.93 dex): com",
+      "reason": "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): Bis(2-methyl-3-furyl) disulfide (spread 0.93 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier ",
+      "rows": [
+        {
+          "benchmark_id": "mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b",
+          "compound": "Bis(2-methyl-3-furyl) disulfide"
+        }
+      ],
+      "row_count": 1,
+      "hypothesis_layer": "no cited rule reaches it from any reference charge"
+    },
+    {
+      "what": "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): 2-Acetylthiazole (spread 0.50 dex): computed with the ",
+      "reason": "REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): 2-Acetylthiazole (spread 0.50 dex): computed with the sulfur lane's pH solved from the shipped charge balance, and that structure, B0 + the shipped centre ledger (its amine fates and its carboxyl routing into CBX, CO2 included: CF-134), is FALSIFIED under STATUS_AND_PLAN sec. 7's rule S3 on CF-084's controls: Meynier 1995's buffered",
+      "rows": [
+        {
+          "benchmark_id": "mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b",
+          "compound": "2-Acetylthiazole"
         }
       ],
       "row_count": 1,
@@ -757,6 +864,16 @@
       "structural_block": null
     },
     {
+      "axis": "additive_cysteine",
+      "agree": 0,
+      "evaluable": 0,
+      "not_evaluable": 5,
+      "verdict": "no evaluable claim",
+      "wilson_lower_bound": null,
+      "additional_agreeing_claims_to_trust": 4,
+      "structural_block": null
+    },
+    {
       "axis": "lipid_lane",
       "agree": 0,
       "evaluable": 0,
@@ -817,7 +934,7 @@
       "structural_block": null
     },
     {
-      "axis": "additive_cysteine",
+      "axis": "sulfur_donor",
       "agree": 1,
       "evaluable": 1,
       "not_evaluable": 4,
@@ -827,53 +944,43 @@
       "structural_block": null
     },
     {
-      "axis": "sulfur_donor",
-      "agree": 2,
+      "axis": "time",
+      "agree": 1,
       "evaluable": 2,
       "not_evaluable": 3,
-      "verdict": "caution",
-      "wilson_lower_bound": 0.342,
-      "additional_agreeing_claims_to_trust": 2,
-      "structural_block": null
-    },
-    {
-      "axis": "time",
-      "agree": 2,
-      "evaluable": 3,
-      "not_evaluable": 2,
-      "verdict": "caution",
-      "wilson_lower_bound": 0.208,
-      "additional_agreeing_claims_to_trust": 5,
-      "structural_block": null
-    },
-    {
-      "axis": "sugar_identity",
-      "agree": 4,
-      "evaluable": 8,
-      "not_evaluable": 8,
       "verdict": "do-not-use",
-      "wilson_lower_bound": 0.215,
-      "additional_agreeing_claims_to_trust": 12,
-      "structural_block": null
-    },
-    {
-      "axis": "temperature",
-      "agree": 5,
-      "evaluable": 8,
-      "not_evaluable": 3,
-      "verdict": "caution",
-      "wilson_lower_bound": 0.306,
-      "additional_agreeing_claims_to_trust": 7,
+      "wilson_lower_bound": 0.095,
+      "additional_agreeing_claims_to_trust": 6,
       "structural_block": null
     },
     {
       "axis": "ph",
-      "agree": 5,
-      "evaluable": 10,
-      "not_evaluable": 5,
+      "agree": 1,
+      "evaluable": 4,
+      "not_evaluable": 11,
       "verdict": "do-not-use",
-      "wilson_lower_bound": 0.237,
-      "additional_agreeing_claims_to_trust": 15,
+      "wilson_lower_bound": 0.046,
+      "additional_agreeing_claims_to_trust": 11,
+      "structural_block": null
+    },
+    {
+      "axis": "sugar_identity",
+      "agree": 2,
+      "evaluable": 5,
+      "not_evaluable": 11,
+      "verdict": "do-not-use",
+      "wilson_lower_bound": 0.118,
+      "additional_agreeing_claims_to_trust": 10,
+      "structural_block": null
+    },
+    {
+      "axis": "temperature",
+      "agree": 4,
+      "evaluable": 7,
+      "not_evaluable": 4,
+      "verdict": "do-not-use",
+      "wilson_lower_bound": 0.25,
+      "additional_agreeing_claims_to_trust": 8,
       "structural_block": null
     }
   ],
@@ -891,13 +998,6 @@
       "voi_score": 6.003466271474533,
       "envelope_miss_log10": 1.990903653836736,
       "template": "missing_absolute_anchor"
-    },
-    {
-      "benchmark_id": "mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b",
-      "compound": "2-Acetylthiazole",
-      "voi_score": 3.9995462966609936,
-      "envelope_miss_log10": 2.3997067233132885,
-      "template": "free_precursor_sulfur_yield"
     },
     {
       "benchmark_id": "mp_holdout_glucose_asparagine_180C_10min_Chang2021",
@@ -947,12 +1047,19 @@
       "voi_score": 1.7344994311824982,
       "envelope_miss_log10": 0.4380001330889292,
       "template": "missing_absolute_anchor"
+    },
+    {
+      "benchmark_id": "mp_holdout_glucose_only_autoclave_121C_Steinhagen2021",
+      "compound": "glyoxal",
+      "voi_score": 1.6712076566854206,
+      "envelope_miss_log10": 0.6671876371301824,
+      "template": "missing_absolute_anchor"
     }
   ],
   "what_you_could_predict": [
     {
       "if_measured": "absolute levels of the thiol lane's observables from at least two new independent laboratories (H0's pre-registered trigger, prereg sec. 9; the pending WUR blind-test samples would be one), re-scored under H0's rule (H0')",
-      "you_could_predict": "absolute 2-Furfurylthiol (FFT), 2-Methyl-3-furanthiol (MFT), Bis(2-methyl-3-furyl) disulfide, Furfural for a new laboratory, if H0' leaves tau_ABS at or below 0.8 dex (today 0.964, U >= 1.60; D2's branches (ii) / (iii)); 39 panel rows now refused for their absolute level would return to the scorecard"
+      "you_could_predict": "absolute 2-Furfurylthiol (FFT), 2-Methyl-3-furanthiol (MFT) for a new laboratory, if H0' leaves tau_ABS at or below 0.8 dex (today 0.964, U >= 1.60; D2's branches (ii) / (iii)); 22 panel rows now refused for their absolute level would return to the scorecard"
     },
     {
       "if_measured": "Ea_decay_thiol_sink",
@@ -983,6 +1090,10 @@
       "you_could_predict": "the direction of a change along additive_amine with a 'trust' tag instead of 'no evaluable claim'"
     },
     {
+      "if_measured": "4 more independent ordering claims on additive_cysteine (all agreeing)",
+      "you_could_predict": "the direction of a change along additive_cysteine with a 'trust' tag instead of 'no evaluable claim'"
+    },
+    {
       "if_measured": "4 more independent ordering claims on lipid_lane (all agreeing)",
       "you_could_predict": "the direction of a change along lipid_lane with a 'trust' tag instead of 'no evaluable claim'"
     },
@@ -1003,28 +1114,24 @@
       "you_could_predict": "the direction of a change along scope with a 'trust' tag instead of 'no evaluable claim'"
     },
     {
-      "if_measured": "3 more independent ordering claims on additive_cysteine (all agreeing)",
-      "you_could_predict": "the direction of a change along additive_cysteine with a 'trust' tag instead of 'caution'"
-    },
-    {
-      "if_measured": "2 more independent ordering claims on sulfur_donor (all agreeing)",
+      "if_measured": "3 more independent ordering claims on sulfur_donor (all agreeing)",
       "you_could_predict": "the direction of a change along sulfur_donor with a 'trust' tag instead of 'caution'"
     },
     {
-      "if_measured": "5 more independent ordering claims on time (all agreeing)",
-      "you_could_predict": "the direction of a change along time with a 'trust' tag instead of 'caution'"
+      "if_measured": "6 more independent ordering claims on time (all agreeing)",
+      "you_could_predict": "the direction of a change along time with a 'trust' tag instead of 'do-not-use'"
     },
     {
-      "if_measured": "12 more independent ordering claims on sugar_identity (all agreeing)",
+      "if_measured": "11 more independent ordering claims on ph (all agreeing)",
+      "you_could_predict": "the direction of a change along ph with a 'trust' tag instead of 'do-not-use'"
+    },
+    {
+      "if_measured": "10 more independent ordering claims on sugar_identity (all agreeing)",
       "you_could_predict": "the direction of a change along sugar_identity with a 'trust' tag instead of 'do-not-use'"
     },
     {
-      "if_measured": "7 more independent ordering claims on temperature (all agreeing)",
-      "you_could_predict": "the direction of a change along temperature with a 'trust' tag instead of 'caution'"
-    },
-    {
-      "if_measured": "15 more independent ordering claims on ph (all agreeing)",
-      "you_could_predict": "the direction of a change along ph with a 'trust' tag instead of 'do-not-use'"
+      "if_measured": "8 more independent ordering claims on temperature (all agreeing)",
+      "you_could_predict": "the direction of a change along temperature with a 'trust' tag instead of 'do-not-use'"
     }
   ],
   "lane_design_gaps": [
@@ -1713,8 +1820,8 @@
   "summary": {
     "unidentified_coordinates": 10,
     "not_evaluable_rows": 8,
-    "absolute_refused_rows": 39,
-    "refused_row_count": 19,
+    "absolute_refused_rows": 22,
+    "refused_row_count": 37,
     "data_refused_rows": 3,
     "axes_below_trust": 13,
     "lanes_that_cannot_support_a_trend": 3,

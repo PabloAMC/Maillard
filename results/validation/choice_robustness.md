@@ -42,22 +42,22 @@ sweeps them. Writes results/validation/choice_robustness.{json,md}.
 
 | alternative | out of sample within band | median fold | by lane | contrast median (dex) | contrast signs |
 | --- | --- | --- | --- | --- | --- |
-| twofold | 6/24 | 4.62x | acrylamide 2, lipid 2, sulfur 0, trunk 2 | 0.31 | 12/25 |
-| threefold | 10/24 | 4.62x | acrylamide 4, lipid 4, sulfur 0, trunk 2 | 0.31 | 12/25 |
-| fivefold | 13/24 | 4.62x | acrylamide 5, lipid 5, sulfur 0, trunk 3 | 0.31 | 12/25 |
+| twofold | 6/23 | 4.42x | acrylamide 2, lipid 2, trunk 2 | 0.38 | 3/14 |
+| threefold | 10/23 | 4.42x | acrylamide 4, lipid 4, trunk 2 | 0.38 | 3/14 |
+| fivefold | 13/23 | 4.42x | acrylamide 5, lipid 5, trunk 3 | 0.38 | 3/14 |
 
 ## CR-06
 
 | alternative | out of sample within band | median fold | by lane | contrast median (dex) | contrast signs |
 | --- | --- | --- | --- | --- | --- |
-| one_cv | 10/24 | 4.62x | acrylamide 4, lipid 4, sulfur 0, trunk 2 | 0.31 | 13/29 |
-| two_cv | 10/24 | 4.62x | acrylamide 4, lipid 4, sulfur 0, trunk 2 | 0.31 | 12/25 |
-| twofold | 10/24 | 4.62x | acrylamide 4, lipid 4, sulfur 0, trunk 2 | 0.31 | 9/18 |
+| one_cv | 10/23 | 4.42x | acrylamide 4, lipid 4, trunk 2 | 0.38 | 3/17 |
+| two_cv | 10/23 | 4.42x | acrylamide 4, lipid 4, trunk 2 | 0.38 | 3/14 |
+| twofold | 10/23 | 4.42x | acrylamide 4, lipid 4, trunk 2 | 0.38 | 2/10 |
 
 ## CR-02
 
 | alternative | out of sample within band | median fold | by lane | contrast median (dex) | contrast signs |
 | --- | --- | --- | --- | --- | --- |
-| moist_matrix | 9/24 | 7.79x | acrylamide 4, lipid 3, sulfur 0, trunk 2 | 0.31 | 12/25 |
-| centre | 10/24 | 4.62x | acrylamide 4, lipid 4, sulfur 0, trunk 2 | 0.31 | 12/25 |
-| bulk_oil | 9/24 | 5.53x | acrylamide 4, lipid 3, sulfur 0, trunk 2 | 0.31 | 12/25 |
+| moist_matrix | 9/23 | 6.69x | acrylamide 4, lipid 3, trunk 2 | 0.38 | 3/14 |
+| centre | 10/23 | 4.42x | acrylamide 4, lipid 4, trunk 2 | 0.38 | 3/14 |
+| bulk_oil | 9/23 | 4.82x | acrylamide 4, lipid 3, trunk 2 | 0.38 | 3/14 |

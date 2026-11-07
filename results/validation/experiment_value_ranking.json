@@ -1,5 +1,5 @@
 {
-  "candidate_count": 24,
+  "candidate_count": 23,
   "candidates": [
     {
       "benchmark_id": "external_validation_li_2026_spi_wg_hme_control",
@@ -38,24 +38,6 @@
       "voi_score": 6.003466271474533
     },
     {
-      "benchmark_id": "mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b",
-      "ci_width_log10": 1.9994652444923506,
-      "compound": "2-Acetylthiazole",
-      "decision_relevance": 1.0,
-      "envelope_miss_log10": 2.3997067233132885,
-      "inside_ci": false,
-      "matrix_family": "free",
-      "measured_ppb": 114.13,
-      "odour_threshold_ug_per_kg": null,
-      "predicted_p5": 0.004552268289753977,
-      "predicted_p50": 0.04902559117723297,
-      "predicted_p95": 0.45466664400316287,
-      "rank": 3,
-      "rationale": "measured outside 90% CI by 2.40 dex; CI width 2.00 dex; critical meaty odorant in a FREE-PRECURSOR system \u2014 the open question is absolute yield vs precursor dose and temperature, not matrix transfer",
-      "suggested_doe_template": "free_precursor_sulfur_yield",
-      "voi_score": 3.9995462966609936
-    },
-    {
       "benchmark_id": "mp_holdout_glucose_asparagine_180C_10min_Chang2021",
       "ci_width_log10": 0.9679398220169054,
       "compound": "Acrylamide",
@@ -68,7 +50,7 @@
       "predicted_p5": 1534.9814644968164,
       "predicted_p50": 4797.035055662774,
       "predicted_p95": 14257.4861240768,
-      "rank": 4,
+      "rank": 3,
       "rationale": "measured outside 90% CI by 1.74 dex; CI width 0.97 dex; safety marker \u2014 needs SIDA-grade absolute anchor",
       "suggested_doe_template": "missing_absolute_anchor",
       "voi_score": 3.0293270508315273
@@ -86,7 +68,7 @@
       "predicted_p5": 6.595085388861532,
       "predicted_p50": 21.186878775953552,
       "predicted_p95": 60.18731977123202,
-      "rank": 5,
+      "rank": 4,
       "rationale": "measured outside 90% CI by 1.28 dex; CI width 0.96 dex; \u22481e+01\u00d7 ODT (decision_relevance=1.12); anchor measurement to constrain prior",
       "suggested_doe_template": "missing_absolute_anchor",
       "voi_score": 2.885033068481987
@@ -104,7 +86,7 @@
       "predicted_p5": 218.92018784430755,
       "predicted_p50": 219.08596522450725,
       "predicted_p95": 219.14138476396963,
-      "rank": 6,
+      "rank": 5,
       "rationale": "measured outside 90% CI by 1.53 dex; CI width 0.00 dex; anchor measurement to constrain prior",
       "suggested_doe_template": "missing_absolute_anchor",
       "voi_score": 2.5344684386034753
@@ -122,7 +104,7 @@
       "predicted_p5": 568.4747176061419,
       "predicted_p50": 1408.4107601097267,
       "predicted_p95": 4476.51019535549,
-      "rank": 7,
+      "rank": 6,
       "rationale": "measured outside 90% CI by 0.59 dex; CI width 0.90 dex; safety marker \u2014 needs SIDA-grade absolute anchor",
       "suggested_doe_template": "missing_absolute_anchor",
       "voi_score": 1.8584781973397067
@@ -140,7 +122,7 @@
       "predicted_p5": 62.851243564400654,
       "predicted_p50": 178.7056483598576,
       "predicted_p95": 621.8375070483567,
-      "rank": 8,
+      "rank": 7,
       "rationale": "measured outside 90% CI by 0.48 dex; CI width 1.00 dex; safety marker \u2014 needs SIDA-grade absolute anchor",
       "suggested_doe_template": "missing_absolute_anchor",
       "voi_score": 1.7742113877484202
@@ -158,7 +140,7 @@
       "predicted_p5": 1.2420930740593907,
       "predicted_p50": 35.47146886709869,
       "predicted_p95": 690.4034468234443,
-      "rank": 9,
+      "rank": 8,
       "rationale": "CI width 2.74 dex; \u22481e+02\u00d7 ODT (decision_relevance=2.13); off-note marker \u2014 focused band quantitation",
       "suggested_doe_template": "missing_positive_flavor_anchor",
       "voi_score": 1.7531768618069796
@@ -176,7 +158,7 @@
       "predicted_p5": 2079.514037629123,
       "predicted_p50": 5739.484131342593,
       "predicted_p95": 20243.83785067483,
-      "rank": 10,
+      "rank": 9,
       "rationale": "measured outside 90% CI by 0.44 dex; CI width 0.99 dex; anchor measurement to constrain prior",
       "suggested_doe_template": "missing_absolute_anchor",
       "voi_score": 1.7344994311824982
@@ -194,7 +176,7 @@
       "predicted_p5": 1168.423611716376,
       "predicted_p50": 1200.1899583092638,
       "predicted_p95": 1205.0370221604098,
-      "rank": 11,
+      "rank": 10,
       "rationale": "measured outside 90% CI by 0.67 dex; CI width 0.01 dex; anchor measurement to constrain prior",
       "suggested_doe_template": "missing_absolute_anchor",
       "voi_score": 1.6712076566854206
@@ -212,7 +194,7 @@
       "predicted_p5": 0.4236564478123579,
       "predicted_p50": 12.070345722617748,
       "predicted_p95": 234.41736942736514,
-      "rank": 12,
+      "rank": 11,
       "rationale": "CI width 2.74 dex; \u22487e+01\u00d7 ODT (decision_relevance=1.87); off-note marker \u2014 focused band quantitation",
       "suggested_doe_template": "missing_positive_flavor_anchor",
       "voi_score": 1.5399597421219988
@@ -230,7 +212,7 @@
       "predicted_p5": 1133.8898845678234,
       "predicted_p50": 3227.8310361889617,
       "predicted_p95": 11161.027929872478,
-      "rank": 13,
+      "rank": 12,
       "rationale": "measured outside 90% CI by 0.13 dex; CI width 0.99 dex; safety marker \u2014 needs SIDA-grade absolute anchor",
       "suggested_doe_template": "missing_absolute_anchor",
       "voi_score": 1.432387548869138
@@ -248,7 +230,7 @@
       "predicted_p5": 2196.3437325793834,
       "predicted_p50": 6208.232477246693,
       "predicted_p95": 19046.553062179973,
-      "rank": 14,
+      "rank": 13,
       "rationale": "measured outside 90% CI by 0.00 dex; CI width 0.94 dex; safety marker \u2014 needs SIDA-grade absolute anchor",
       "suggested_doe_template": "missing_absolute_anchor",
       "voi_score": 1.2814348245476261
@@ -266,7 +248,7 @@
       "predicted_p5": 0.5028307824112885,
       "predicted_p50": 49.524384145230115,
       "predicted_p95": 1425.0450016310308,
-      "rank": 15,
+      "rank": 14,
       "rationale": "CI width 3.45 dex; wide envelope \u2014 time-course narrows the rate-limiting step",
       "suggested_doe_template": "missing_kinetic_dataset",
       "voi_score": 1.035722016785917
@@ -284,7 +266,7 @@
       "predicted_p5": 66.62996829519291,
       "predicted_p50": 370.53252930021654,
       "predicted_p95": 2283.727876220135,
-      "rank": 16,
+      "rank": 15,
       "rationale": "CI width 1.53 dex; \u22482e+02\u00d7 ODT (decision_relevance=2.24); off-note marker \u2014 focused band quantitation",
       "suggested_doe_template": "missing_positive_flavor_anchor",
       "voi_score": 1.031500376885862
@@ -302,7 +284,7 @@
       "predicted_p5": 2.1270813072291537,
       "predicted_p50": 16.258568907304102,
       "predicted_p95": 156.9219403092103,
-      "rank": 17,
+      "rank": 16,
       "rationale": "CI width 1.87 dex; \u22482e+01\u00d7 ODT (decision_relevance=1.38); off-note marker \u2014 focused band quantitation",
       "suggested_doe_template": "missing_positive_flavor_anchor",
       "voi_score": 0.7734287989585028
@@ -320,7 +302,7 @@
       "predicted_p5": 12.069524543842096,
       "predicted_p50": 68.93118173385011,
       "predicted_p95": 421.02359827508644,
-      "rank": 18,
+      "rank": 17,
       "rationale": "CI width 1.54 dex; \u22483e+01\u00d7 ODT (decision_relevance=1.43); off-note marker \u2014 focused band quantitation",
       "suggested_doe_template": "missing_positive_flavor_anchor",
       "voi_score": 0.6636503461986143
@@ -338,7 +320,7 @@
       "predicted_p5": 8909.30438024225,
       "predicted_p50": 32997.46873091926,
       "predicted_p95": 159472.32826378645,
-      "rank": 19,
+      "rank": 18,
       "rationale": "CI width 1.25 dex; safety marker \u2014 needs SIDA-grade absolute anchor",
       "suggested_doe_template": "missing_absolute_anchor",
       "voi_score": 0.3758524614976161
@@ -356,7 +338,7 @@
       "predicted_p5": 8909.30438024225,
       "predicted_p50": 32997.46873091926,
       "predicted_p95": 159472.32826378645,
-      "rank": 20,
+      "rank": 19,
       "rationale": "CI width 1.25 dex; safety marker \u2014 needs SIDA-grade absolute anchor",
       "suggested_doe_template": "missing_absolute_anchor",
       "voi_score": 0.3758524614976161
@@ -374,7 +356,7 @@
       "predicted_p5": 1112.4793371075957,
       "predicted_p50": 2183.87224713064,
       "predicted_p95": 12045.875329916002,
-      "rank": 21,
+      "rank": 20,
       "rationale": "CI width 1.03 dex; safety marker \u2014 needs SIDA-grade absolute anchor",
       "suggested_doe_template": "missing_absolute_anchor",
       "voi_score": 0.31036392324644635
@@ -392,7 +374,7 @@
       "predicted_p5": 1133.8898845678234,
       "predicted_p50": 3227.8310361889617,
       "predicted_p95": 11161.027929872478,
-      "rank": 22,
+      "rank": 21,
       "rationale": "CI width 0.99 dex; safety marker \u2014 needs SIDA-grade absolute anchor",
       "suggested_doe_template": "missing_absolute_anchor",
       "voi_score": 0.29793999418902833
@@ -410,7 +392,7 @@
       "predicted_p5": 16588.003357634836,
       "predicted_p50": 47900.35489003763,
       "predicted_p95": 154676.57136201594,
-      "rank": 23,
+      "rank": 22,
       "rationale": "CI width 0.97 dex; anchor measurement to constrain prior",
       "suggested_doe_template": "missing_absolute_anchor",
       "voi_score": 0.29088912663621586
@@ -428,13 +410,13 @@
       "predicted_p5": 1516.4876801513558,
       "predicted_p50": 2601.5295296483846,
       "predicted_p95": 6438.501868897256,
-      "rank": 24,
+      "rank": 23,
       "rationale": "CI width 0.63 dex; anchor measurement to constrain prior",
       "suggested_doe_template": "missing_absolute_anchor",
       "voi_score": 0.18838378188364382
     }
   ],
   "matrix_filter": null,
-  "miss_count": 12,
+  "miss_count": 11,
   "source": "results/validation/core_prediction_uncertainty.json"
 }

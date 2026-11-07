@@ -17,9 +17,9 @@ Pairs from one study share rows, so they are not independent; the study count is
 
 | subset | pairs (studies) | resolved | engine median error | engine within 3x | engine signs | no-change median error | no-change within 3x |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| all pairs | 81 (5) | 65 | 0.55 dex | 39 | 45/65 | 0.60 dex | 35 |
-| out of sample | 37 (5) | 25 | 0.31 dex | 24 | 12/25 | 0.28 dex | 23 |
+| all pairs | 37 (5) | 27 | 0.56 dex | 17 | 11/27 | 0.34 dex | 21 |
+| out of sample | 22 (4) | 14 | 0.38 dex | 14 | 3/14 | 0.24 dex | 16 |
 | lane: acrylamide | 5 (2) | 5 | 0.71 dex | 2 | 0/5 | 0.71 dex | 2 |
-| lane: sulfur | 76 (3) | 60 | 0.55 dex | 37 | 45/60 | 0.60 dex | 33 |
+| lane: sulfur | 32 (3) | 22 | 0.55 dex | 15 | 11/22 | 0.33 dex | 19 |
 
 Mixed pairs skipped (one row with an absolute level, one relative-only; no ratio exists): 0.
