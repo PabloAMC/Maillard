@@ -1,0 +1,322 @@
+{
+ "artifact": "kinetic_core_m1b_part_i_checks",
+ "prereg": "results/validation/kinetic_core_m1b_ph_balance_pentose_steps_prereg.md",
+ "checks": {
+  "BIT": {
+   "what": "every rival key off: each control pot's state matrix and in-situ pH series (B60 pinned, inline, rtol 1e-8), sha256 with the base commit's src and with this tree's",
+   "base_commit": "5d62fc22433ebba6f92d0dce54f8eee04d15b0e9",
+   "pots": {"mey_cys_pH4.5": true, "mey_gly_pH4.5": true, "mey_cys_pH5": true, "mey_gly_pH5": true, "mey_cys_pH5.5": true, "mey_gly_pH5.5": true, "mey_cys_pH6": true, "mey_gly_pH6": true, "mey_cys_pH6.5": true, "mey_gly_pH6.5": true, "hou_unforced": true, "zhou_arp_pH6": true, "zhou_cys_pH6": true, "zhou_arp_pH7": true, "zhou_cys_pH7": true, "zhou_arp_pH8": true, "zhou_cys_pH8": true},
+   "passed": true,
+   "hashes": {
+    "base": {
+     "mey_cys_pH4.5": "55fe8022c548d93696fee9987fc256612d3ddb4e1696e5ed2319092e8f49920a",
+     "mey_gly_pH4.5": "8c102ee55673667554f6ecbb1ae3f25a9bb1157dfd65671779b137c3e211bbbf",
+     "mey_cys_pH5": "d792a58f358b6992889ad84cea6c82198d7428ad4cc059a16db26e6d78d49072",
+     "mey_gly_pH5": "0bba61ecea9aa9bd36609b47e64af8bad60ba569b2c4d583140abccab446d0b9",
+     "mey_cys_pH5.5": "c73c562fe268584cb0ba22591f70ccac873021a33e516b51adc54aeb5228e490",
+     "mey_gly_pH5.5": "4fca13dffc853deab44fdb90ee60d87ed23a2d25bc99af89d041ec6fdf54171f",
+     "mey_cys_pH6": "ce4c703a9611da04b0cc06eee2c952728f342ed33972c5683cb012d4af8c4138",
+     "mey_gly_pH6": "27d82400678766aab23fb22d81e1e18cf505a4c347d6f9e4eed565ead59c6e10",
+     "mey_cys_pH6.5": "01fbbc55b141cef60e11001e496b97abac3234ed9176182a7ac5b16f5e6a4c73",
+     "mey_gly_pH6.5": "02d5aba54bd541d24aea1d74d6fd4147bdcf08dd2bfe1ac9a3dc4d94d6608ccb",
+     "hou_unforced": "ca311d2e2b42b5e11a9d0c00b25b57aba6d4de13dbc74483fe6d940874b9fe55",
+     "zhou_arp_pH6": "73f71fcd8b7eaa933ce5457ef7410d85e48904e9a706e82e749ed6b26b56c674",
+     "zhou_cys_pH6": "fc3c848e8ed8bce786779528a578b8565644fff7ff50ff61599e284915b9c583",
+     "zhou_arp_pH7": "13eb8c79ab8cafcb97c5c47d41df5cf0cda678328a98db5cfdf07cdbe54709d3",
+     "zhou_cys_pH7": "c64450424e6dc2150f225f1465b18e008404f36dd31f94332fcc0c7621d380cc",
+     "zhou_arp_pH8": "7851261da393c157bcac3b37cec78eee7cfef1e7d07f3d721e5bb8effdc85d24",
+     "zhou_cys_pH8": "da2b8faedb20c241c7ae71e6a51a7f8a9f6c6454f65627cdf8fbb42a31eb241e"
+    },
+    "this_tree": {
+     "mey_cys_pH4.5": "55fe8022c548d93696fee9987fc256612d3ddb4e1696e5ed2319092e8f49920a",
+     "mey_gly_pH4.5": "8c102ee55673667554f6ecbb1ae3f25a9bb1157dfd65671779b137c3e211bbbf",
+     "mey_cys_pH5": "d792a58f358b6992889ad84cea6c82198d7428ad4cc059a16db26e6d78d49072",
+     "mey_gly_pH5": "0bba61ecea9aa9bd36609b47e64af8bad60ba569b2c4d583140abccab446d0b9",
+     "mey_cys_pH5.5": "c73c562fe268584cb0ba22591f70ccac873021a33e516b51adc54aeb5228e490",
+     "mey_gly_pH5.5": "4fca13dffc853deab44fdb90ee60d87ed23a2d25bc99af89d041ec6fdf54171f",
+     "mey_cys_pH6": "ce4c703a9611da04b0cc06eee2c952728f342ed33972c5683cb012d4af8c4138",
+     "mey_gly_pH6": "27d82400678766aab23fb22d81e1e18cf505a4c347d6f9e4eed565ead59c6e10",
+     "mey_cys_pH6.5": "01fbbc55b141cef60e11001e496b97abac3234ed9176182a7ac5b16f5e6a4c73",
+     "mey_gly_pH6.5": "02d5aba54bd541d24aea1d74d6fd4147bdcf08dd2bfe1ac9a3dc4d94d6608ccb",
+     "hou_unforced": "ca311d2e2b42b5e11a9d0c00b25b57aba6d4de13dbc74483fe6d940874b9fe55",
+     "zhou_arp_pH6": "73f71fcd8b7eaa933ce5457ef7410d85e48904e9a706e82e749ed6b26b56c674",
+     "zhou_cys_pH6": "fc3c848e8ed8bce786779528a578b8565644fff7ff50ff61599e284915b9c583",
+     "zhou_arp_pH7": "13eb8c79ab8cafcb97c5c47d41df5cf0cda678328a98db5cfdf07cdbe54709d3",
+     "zhou_cys_pH7": "c64450424e6dc2150f225f1465b18e008404f36dd31f94332fcc0c7621d380cc",
+     "zhou_arp_pH8": "7851261da393c157bcac3b37cec78eee7cfef1e7d07f3d721e5bb8effdc85d24",
+     "zhou_cys_pH8": "da2b8faedb20c241c7ae71e6a51a7f8a9f6c6454f65627cdf8fbb42a31eb241e"
+    }
+   },
+   "seconds": 27.6
+  },
+  "V1": {"what": "every new key off: R0 at B60's vector, inline, fit tolerance, ceiling + prior (M1's V6 reference)", "cost": 27.08412843271383, "m1_v6_reference": 27.08412843271383, "relative_difference": 0.0, "bit_identical": true, "tolerance": 0.001, "passed": true, "failed_pot_runs": 0, "seconds": 7.5},
+  "V2_V3": {
+   "V3_B1_phi0": {
+    "max_abs_diff_ph": 0.0,
+    "per_pot": {"mey_cys_pH4.5": 0.0, "mey_gly_pH4.5": 0.0, "mey_cys_pH5": 0.0, "mey_gly_pH5": 0.0, "mey_cys_pH5.5": 0.0, "mey_gly_pH5.5": 0.0, "mey_cys_pH6": 0.0, "mey_gly_pH6": 0.0, "mey_cys_pH6.5": 0.0, "mey_gly_pH6.5": 0.0, "hou_forced": 0.0, "hou_unforced": 0.0, "zhou_arp_pH6": 0.0, "zhou_cys_pH6": 0.0, "zhou_arp_pH7": 0.0, "zhou_cys_pH7": 0.0, "zhou_arp_pH8": 0.0, "zhou_cys_pH8": 0.0},
+    "passed": true
+   },
+   "V2_B2_fret0_klag1e6": {
+    "max_abs_diff_ph": 7.171183824539185e-08,
+    "per_pot": {
+     "mey_cys_pH4.5": 0.0,
+     "mey_gly_pH4.5": 0.0,
+     "mey_cys_pH5": 0.0,
+     "mey_gly_pH5": 0.0,
+     "mey_cys_pH5.5": 0.0,
+     "mey_gly_pH5.5": 0.0,
+     "mey_cys_pH6": 0.0,
+     "mey_gly_pH6": 0.0,
+     "mey_cys_pH6.5": 0.0,
+     "mey_gly_pH6.5": 0.0,
+     "hou_forced": 5.122274160385132e-08,
+     "hou_unforced": 7.171183824539185e-08,
+     "zhou_arp_pH6": 7.450580596923828e-09,
+     "zhou_cys_pH6": 0.0,
+     "zhou_arp_pH7": 1.955777406692505e-08,
+     "zhou_cys_pH7": 9.313225746154785e-10,
+     "zhou_arp_pH8": 1.4901161193847656e-08,
+     "zhou_cys_pH8": 6.51925802230835e-09
+    },
+    "passed": true
+   },
+   "V2_B2_fret0_klag10_band_end": {
+    "max_abs_diff_ph": 0.007117053493857384,
+    "per_pot": {
+     "mey_cys_pH4.5": 0.0,
+     "mey_gly_pH4.5": 0.0,
+     "mey_cys_pH5": 0.0,
+     "mey_gly_pH5": 0.0,
+     "mey_cys_pH5.5": 0.0,
+     "mey_gly_pH5.5": 0.0,
+     "mey_cys_pH6": 0.0,
+     "mey_gly_pH6": 0.0,
+     "mey_cys_pH6.5": 0.0,
+     "mey_gly_pH6.5": 0.0,
+     "hou_forced": 0.0055326055735349655,
+     "hou_unforced": 0.007117053493857384,
+     "zhou_arp_pH6": 0.00040612462908029556,
+     "zhou_cys_pH6": 1.1230818927288055e-05,
+     "zhou_arp_pH7": 0.0014328397810459137,
+     "zhou_cys_pH7": 0.00032677315175533295,
+     "zhou_arp_pH8": 0.0003179265186190605,
+     "zhou_cys_pH8": 0.0003968076780438423
+    },
+    "passed": null
+   },
+   "V3_B3_y0_yield_B60": {
+    "max_abs_diff_ph": 0.0,
+    "per_pot": {"mey_cys_pH4.5": 0.0, "mey_gly_pH4.5": 0.0, "mey_cys_pH5": 0.0, "mey_gly_pH5": 0.0, "mey_cys_pH5.5": 0.0, "mey_gly_pH5.5": 0.0, "mey_cys_pH6": 0.0, "mey_gly_pH6": 0.0, "mey_cys_pH6.5": 0.0, "mey_gly_pH6.5": 0.0, "hou_forced": 0.0, "hou_unforced": 0.0, "zhou_arp_pH6": 0.0, "zhou_cys_pH6": 0.0, "zhou_arp_pH7": 0.0, "zhou_cys_pH7": 0.0, "zhou_arp_pH8": 0.0, "zhou_cys_pH8": 0.0},
+    "passed": true
+   },
+   "passed": true,
+   "note": "V2's prereg form is 'k_lag at its fast end'; the band's numerical end is 10 /min (lifetime 0.1 min), which leaves a latent carboxyl of ~(ARP loss rate / k_lag) at every time: the 1e-6 test is run at k_lag 1e6 /min and the 10 /min distance printed beside it",
+   "seconds": 68.5
+  },
+  "V4": {
+   "max_abs_insitu_ph_resolve_diff": {"B0": 4.889573190780538e-10, "B1": 4.6565595823722106e-10, "B2": 4.3073011823935303e-10, "B3": 4.889386673312401e-10, "B13": 3.2597213817098236e-10},
+   "passed": true,
+   "what": "the in-situ pH re-solved at the run's single conserved SID from every grid state equals the run's in-situ pH (a mid-band draw of each rival; Meynier Cys pH 5.5, Hou forced, Zhou Cys pH 7)",
+   "seconds": 11.3
+  },
+  "V5": {
+   "comparisons": [
+    {"unit": "C-Mey-Cys", "pot": "mey_cys_pH4.5", "predicted": {"scale": "cooled", "T_C": 25.0, "reaction_T_C": 140.0}, "measured": {"scale": "cooled", "T_C": 25.0}},
+    {"unit": "C-Mey-Cys", "pot": "mey_cys_pH5", "predicted": {"scale": "cooled", "T_C": 25.0, "reaction_T_C": 140.0}, "measured": {"scale": "cooled", "T_C": 25.0}},
+    {"unit": "C-Mey-Cys", "pot": "mey_cys_pH5.5", "predicted": {"scale": "cooled", "T_C": 25.0, "reaction_T_C": 140.0}, "measured": {"scale": "cooled", "T_C": 25.0}},
+    {"unit": "C-Mey-Cys", "pot": "mey_cys_pH6", "predicted": {"scale": "cooled", "T_C": 25.0, "reaction_T_C": 140.0}, "measured": {"scale": "cooled", "T_C": 25.0}},
+    {"unit": "C-Mey-Cys", "pot": "mey_cys_pH6.5", "predicted": {"scale": "cooled", "T_C": 25.0, "reaction_T_C": 140.0}, "measured": {"scale": "cooled", "T_C": 25.0}},
+    {"unit": "C-Mey-Gly", "pot": "mey_gly_pH4.5", "predicted": {"scale": "cooled", "T_C": 25.0, "reaction_T_C": 140.0}, "measured": {"scale": "cooled", "T_C": 25.0}},
+    {"unit": "C-Mey-Gly", "pot": "mey_gly_pH5", "predicted": {"scale": "cooled", "T_C": 25.0, "reaction_T_C": 140.0}, "measured": {"scale": "cooled", "T_C": 25.0}},
+    {"unit": "C-Mey-Gly", "pot": "mey_gly_pH5.5", "predicted": {"scale": "cooled", "T_C": 25.0, "reaction_T_C": 140.0}, "measured": {"scale": "cooled", "T_C": 25.0}},
+    {"unit": "C-Mey-Gly", "pot": "mey_gly_pH6", "predicted": {"scale": "cooled", "T_C": 25.0, "reaction_T_C": 140.0}, "measured": {"scale": "cooled", "T_C": 25.0}},
+    {"unit": "C-Mey-Gly", "pot": "mey_gly_pH6.5", "predicted": {"scale": "cooled", "T_C": 25.0, "reaction_T_C": 140.0}, "measured": {"scale": "cooled", "T_C": 25.0}},
+    {"unit": "C-Hou", "pot": "hou_forced", "predicted": {"scale": "cooled", "T_C": 25.0, "reaction_T_C": 120.0}, "measured": {"scale": "cooled", "T_C": 25.0}},
+    {"unit": "C-Hou-unforced", "pot": "hou_unforced", "predicted": {"scale": "cooled", "T_C": 25.0, "reaction_T_C": 120.0}, "measured": {"scale": "cooled", "T_C": 25.0}},
+    {"unit": "C-Zhou-ARP", "pot": "zhou_arp_pH6", "predicted": {"scale": "cooled", "T_C": 25.0, "reaction_T_C": 120.0}, "measured": {"scale": "cooled", "T_C": 25.0}},
+    {"unit": "C-Zhou-ARP", "pot": "zhou_arp_pH7", "predicted": {"scale": "cooled", "T_C": 25.0, "reaction_T_C": 120.0}, "measured": {"scale": "cooled", "T_C": 25.0}},
+    {"unit": "C-Zhou-ARP", "pot": "zhou_arp_pH8", "predicted": {"scale": "cooled", "T_C": 25.0, "reaction_T_C": 120.0}, "measured": {"scale": "cooled", "T_C": 25.0}},
+    {"unit": "C-Zhou-Cys", "pot": "zhou_cys_pH6", "predicted": {"scale": "cooled", "T_C": 25.0, "reaction_T_C": 120.0}, "measured": {"scale": "cooled", "T_C": 25.0}},
+    {"unit": "C-Zhou-Cys", "pot": "zhou_cys_pH7", "predicted": {"scale": "cooled", "T_C": 25.0, "reaction_T_C": 120.0}, "measured": {"scale": "cooled", "T_C": 25.0}},
+    {"unit": "C-Zhou-Cys", "pot": "zhou_cys_pH8", "predicted": {"scale": "cooled", "T_C": 25.0, "reaction_T_C": 120.0}, "measured": {"scale": "cooled", "T_C": 25.0}}
+   ],
+   "davidek_breakpoints": {
+    "breakpoints": [
+     {"label_ph": 5.0, "label_scale": "label_25C", "label_T_C": 25.0, "in_situ_ph": 5.22011388791725, "in_situ_scale": "in_situ", "in_situ_T_C": 120.0},
+     {"label_ph": 6.0, "label_scale": "label_25C", "label_T_C": 25.0, "in_situ_ph": 6.180802797432989, "in_situ_scale": "in_situ", "in_situ_T_C": 120.0},
+     {"label_ph": 6.5, "label_scale": "label_25C", "label_T_C": 25.0, "in_situ_ph": 6.676454670261592, "in_situ_scale": "in_situ", "in_situ_T_C": 120.0}
+    ],
+    "in_situ": [5.22011388791725, 6.180802797432989, 6.676454670261592]
+   },
+   "mixed_scale_refused": true,
+   "passed": true,
+   "seconds": 0.0
+  },
+  "V6": {
+   "what": "CF-084's numbers re-printed at B60 (B0-pinned: yield 7.5e-05, pKa 7.0679), cooled, inline, rtol 1e-8",
+   "meynier_cys_drift": {"mey_cys_pH4.5": -0.7886898103170097, "mey_cys_pH5": -0.880577031057328, "mey_cys_pH5.5": -0.6519323014654219, "mey_cys_pH6": -0.418543694075197, "mey_cys_pH6.5": -0.3932367633096874},
+   "meynier_gly_drift": {"mey_gly_pH4.5": -2.049701288342476e-05, "mey_gly_pH5": -1.0249670594930649e-05, "mey_gly_pH5.5": -5.307141691446304e-06, "mey_gly_pH6": -3.7946738302707672e-06, "mey_gly_pH6.5": -4.14019450545311e-06},
+   "hou_unforced_cooled": [6.354400484357029, 4.938723737839609, 4.551065009552985, 4.386539727915078, 4.302252386230975, 4.256642365362495],
+   "hou_forced_cooled": [6.40222488110885, 5.137435615528375, 4.59376009600237, 4.5273636360652745, 4.4072187463752925, 4.385350840631872],
+   "hou_residuals_unforced": [1.3044004843570294, 0.2387237378396092, 0.2510650095529856, 0.4165397279150782, 0.5822523862309752, 0.7066423653624954],
+   "hou_residuals_forced": [1.3522248811088504, 0.43743561552837473, 0.2937600960023703, 0.5573636360652743, 0.6872187463752923, 0.8353508406318726],
+   "hou_rms_by_arp_pka_unforced": {"7.07": 0.6841956337866868, "7.6": 0.45319476393769426, "8.18": 0.8393893475753215},
+   "zhou_arp_alone_final": [3.188624656293541, 4.554119401145726, 7.095729323569685],
+   "zhou_arp_cys_final": [3.1616244739852846, 4.026492147240788, 5.090842294041067],
+   "zhou_measured": {"C-Zhou-ARP": [3.982, 4.114, 4.953], "C-Zhou-Cys": [3.227, 3.428, 5.047]},
+   "cao": {
+    "cao2017_blank|R0": [
+     {"t_min": 0.0, "measured": 5.5, "predicted": 5.499999999534339, "scale": "cooled"},
+     {"t_min": 30.0, "measured": 4.679, "predicted": 3.5656661954708397, "scale": "cooled"},
+     {"t_min": 60.0, "measured": 4.559, "predicted": 3.533014860469848, "scale": "cooled"},
+     {"t_min": 120.0, "measured": 4.482, "predicted": 3.477514286059886, "scale": "cooled"},
+     {"t_min": 180.0, "measured": 4.324, "predicted": 3.4315934334881604, "scale": "cooled"},
+     {"t_min": 240.0, "measured": 4.253, "predicted": 3.3925698273815215, "scale": "cooled"},
+     {"t_min": 300.0, "measured": 4.148, "predicted": 3.358740343246609, "scale": "cooled"}
+    ],
+    "cao2017_blank|C1": [
+     {"t_min": 0.0, "measured": 5.5, "predicted": 5.499999999534339, "scale": "cooled"},
+     {"t_min": 30.0, "measured": 4.679, "predicted": 4.4759110934101045, "scale": "cooled"},
+     {"t_min": 60.0, "measured": 4.559, "predicted": 4.364943734835833, "scale": "cooled"},
+     {"t_min": 120.0, "measured": 4.482, "predicted": 4.210145473014563, "scale": "cooled"},
+     {"t_min": 180.0, "measured": 4.324, "predicted": 4.107950021978468, "scale": "cooled"},
+     {"t_min": 240.0, "measured": 4.253, "predicted": 4.030407995451242, "scale": "cooled"},
+     {"t_min": 300.0, "measured": 4.148, "predicted": 3.965681236702949, "scale": "cooled"}
+    ],
+    "cao2017_gly_x1|R0": [
+     {"t_min": 0.0, "measured": 5.43, "predicted": 5.499999999534339, "scale": "cooled"},
+     {"t_min": 30.0, "measured": 4.609, "predicted": 3.5657925461418927, "scale": "cooled"},
+     {"t_min": 60.0, "measured": 4.539, "predicted": 3.533127123955637, "scale": "cooled"},
+     {"t_min": 120.0, "measured": 4.428, "predicted": 3.477605707477778, "scale": "cooled"},
+     {"t_min": 180.0, "measured": 4.309, "predicted": 3.4316702256910503, "scale": "cooled"},
+     {"t_min": 240.0, "measured": 4.184, "predicted": 3.3926358143799007, "scale": "cooled"},
+     {"t_min": 300.0, "measured": 4.136, "predicted": 3.3587980340234935, "scale": "cooled"}
+    ],
+    "cao2017_gly_x1|C1": [
+     {"t_min": 0.0, "measured": 5.43, "predicted": 5.499999999534339, "scale": "cooled"},
+     {"t_min": 30.0, "measured": 4.609, "predicted": 4.476026644464582, "scale": "cooled"},
+     {"t_min": 60.0, "measured": 4.539, "predicted": 4.365184408146888, "scale": "cooled"},
+     {"t_min": 120.0, "measured": 4.428, "predicted": 4.210493303369731, "scale": "cooled"},
+     {"t_min": 180.0, "measured": 4.309, "predicted": 4.108329019043595, "scale": "cooled"},
+     {"t_min": 240.0, "measured": 4.184, "predicted": 4.030796578619629, "scale": "cooled"},
+     {"t_min": 300.0, "measured": 4.136, "predicted": 3.966070437338203, "scale": "cooled"}
+    ]
+   },
+   "sec_3_2_expectations": {
+    "meynier_cys_too_acid_beyond_0p2": {"expected": "drift < -0.2 at three labels (CF-084)", "got": {"mey_cys_pH4.5": -0.789, "mey_cys_pH5": -0.881, "mey_cys_pH5.5": -0.652, "mey_cys_pH6": -0.419, "mey_cys_pH6.5": -0.393}, "n_below_minus_0p2": 5},
+    "hou_too_basic_every_time": {"expected": "pred - meas > 0 at all six times", "unforced": [1.3044004843570294, 0.2387237378396092, 0.2510650095529856, 0.4165397279150782, 0.5822523862309752, 0.7066423653624954], "forced": [1.3522248811088504, 0.43743561552837473, 0.2937600960023703, 0.5573636360652743, 0.6872187463752923, 0.8353508406318726], "unforced_holds": true, "forced_holds": true},
+    "hou_level_fall_0_20": {"expected": "B0 0.65 (measured 1.95)", "unforced": 0.6455995156429708, "forced": 0.5977751188911498},
+    "zhou_spread_6_8": {"expected": "B0 3.90 (measured 1.00)", "got": 3.907104667276144, "measured": 0.9710000000000001}
+   },
+   "signs_that_differ": [],
+   "rows": {
+    "mey_cys_pH4.5": {"label_ph": 4.5, "times": [0.0, 60.0], "cooled_ph": [4.499999999534339, 3.7113101896829903], "scale": "cooled", "T_C_reading": 25.0},
+    "mey_gly_pH4.5": {"label_ph": 4.5, "times": [0.0, 60.0], "cooled_ph": [4.499999999534339, 4.499979502987117], "scale": "cooled", "T_C_reading": 25.0},
+    "mey_cys_pH5": {"label_ph": 5.0, "times": [0.0, 60.0], "cooled_ph": [5.000000000465661, 4.119422968942672], "scale": "cooled", "T_C_reading": 25.0},
+    "mey_gly_pH5": {"label_ph": 5.0, "times": [0.0, 60.0], "cooled_ph": [4.999999999534339, 4.999989750329405], "scale": "cooled", "T_C_reading": 25.0},
+    "mey_cys_pH5.5": {"label_ph": 5.5, "times": [0.0, 60.0], "cooled_ph": [5.500000000465661, 4.848067698534578], "scale": "cooled", "T_C_reading": 25.0},
+    "mey_gly_pH5.5": {"label_ph": 5.5, "times": [0.0, 60.0], "cooled_ph": [5.500000000465661, 5.4999946928583086], "scale": "cooled", "T_C_reading": 25.0},
+    "mey_cys_pH6": {"label_ph": 6.0, "times": [0.0, 60.0], "cooled_ph": [5.999999999534339, 5.581456305924803], "scale": "cooled", "T_C_reading": 25.0},
+    "mey_gly_pH6": {"label_ph": 6.0, "times": [0.0, 60.0], "cooled_ph": [5.999999999534339, 5.99999620532617], "scale": "cooled", "T_C_reading": 25.0},
+    "mey_cys_pH6.5": {"label_ph": 6.5, "times": [0.0, 60.0], "cooled_ph": [6.500000000465661, 6.106763236690313], "scale": "cooled", "T_C_reading": 25.0},
+    "mey_gly_pH6.5": {"label_ph": 6.5, "times": [0.0, 60.0], "cooled_ph": [6.499999999534339, 6.4999958598054945], "scale": "cooled", "T_C_reading": 25.0},
+    "hou_forced": {"label_ph": 7.0, "times": [0.0, 20.0, 40.0, 60.0, 80.0, 100.0, 120.0], "cooled_ph": [6.999999999534339, 6.40222488110885, 5.137435615528375, 4.59376009600237, 4.5273636360652745, 4.4072187463752925, 4.385350840631872], "scale": "cooled", "T_C_reading": 25.0},
+    "hou_unforced": {"label_ph": 7.0, "times": [0.0, 20.0, 40.0, 60.0, 80.0, 100.0, 120.0], "cooled_ph": [6.999999999534339, 6.354400484357029, 4.938723737839609, 4.551065009552985, 4.386539727915078, 4.302252386230975, 4.256642365362495], "scale": "cooled", "T_C_reading": 25.0},
+    "zhou_arp_pH6": {"label_ph": 6.0, "times": [0.0, 60.0], "cooled_ph": [5.999999999534339, 3.188624656293541], "scale": "cooled", "T_C_reading": 25.0},
+    "zhou_cys_pH6": {"label_ph": 6.0, "times": [0.0, 60.0], "cooled_ph": [5.999999999534339, 3.1616244739852846], "scale": "cooled", "T_C_reading": 25.0},
+    "zhou_arp_pH7": {"label_ph": 7.0, "times": [0.0, 60.0], "cooled_ph": [6.999999999534339, 4.554119401145726], "scale": "cooled", "T_C_reading": 25.0},
+    "zhou_cys_pH7": {"label_ph": 7.0, "times": [0.0, 60.0], "cooled_ph": [6.999999999534339, 4.026492147240788], "scale": "cooled", "T_C_reading": 25.0},
+    "zhou_arp_pH8": {"label_ph": 8.0, "times": [0.0, 60.0], "cooled_ph": [7.999999999534339, 7.095729323569685], "scale": "cooled", "T_C_reading": 25.0},
+    "zhou_cys_pH8": {"label_ph": 8.0, "times": [0.0, 60.0], "cooled_ph": [7.999999999534339, 5.090842294041067], "scale": "cooled", "T_C_reading": 25.0}
+   },
+   "b0_pinned_zhou_spread": 3.907104667276144,
+   "seconds": 19.7
+  },
+  "V7": {
+   "B0": {"forced_arp_max_rel_error": 8.286975517566557e-09, "forced_loss_never_negative": true, "forced_unresolvable_calls": 0, "forcing_off_bit_identical_to_unforced": true, "forced_arp": [5.0, 3.1999999962418757, 2.1799999947770505, 1.269999994412236, 1.0999999944166514, 0.749999994364199, 0.6799999943648567], "measured_arp": [5.0, 3.2, 2.18, 1.27, 1.1, 0.75, 0.68]},
+   "B3": {
+    "forced_arp_max_rel_error": 7.962953825735961e-09,
+    "forced_loss_never_negative": true,
+    "forced_unresolvable_calls": 0,
+    "forcing_off_bit_identical_to_unforced": true,
+    "forced_arp": [5.0, 3.2000000063825755, 2.1800000063646507, 1.270000006337715, 1.100000005444329, 0.7500000054118872, 0.6800000054148087],
+    "measured_arp": [5.0, 3.2, 2.18, 1.27, 1.1, 0.75, 0.68],
+    "dpo_total_rel_dev_max": 4.1789669150832813e-16,
+    "dpo_total_rel_dev_max_meynier_pH6.5": 2.138739897139333e-16
+   },
+   "passed": true,
+   "seconds": 8.3
+  },
+  "V_solver": {
+   "per_pot": {
+    "B0_pinned|mey_cys_pH4.5": 9.313225746154785e-10,
+    "B0_pinned|mey_gly_pH4.5": 0.0,
+    "B0_pinned|mey_cys_pH5": 1.0244548320770264e-08,
+    "B0_pinned|mey_gly_pH5": 0.0,
+    "B0_pinned|mey_cys_pH5.5": 5.587935447692871e-09,
+    "B0_pinned|mey_gly_pH5.5": 0.0,
+    "B0_pinned|mey_cys_pH6": 0.0,
+    "B0_pinned|mey_gly_pH6": 0.0,
+    "B0_pinned|mey_cys_pH6.5": 0.0,
+    "B0_pinned|mey_gly_pH6.5": 0.0,
+    "B0_pinned|hou_forced": 2.9802322387695312e-08,
+    "B0_pinned|hou_unforced": 3.632158041000366e-08,
+    "B0_pinned|zhou_arp_pH6": 1.6763806343078613e-08,
+    "B0_pinned|zhou_cys_pH6": 2.7939677238464355e-09,
+    "B0_pinned|zhou_arp_pH7": 9.313225746154785e-10,
+    "B0_pinned|zhou_cys_pH7": 3.725290298461914e-09,
+    "B0_pinned|zhou_arp_pH8": 6.612390279769897e-08,
+    "B0_pinned|zhou_cys_pH8": 7.729977369308472e-08,
+    "B13|mey_cys_pH4.5": 0.0,
+    "B13|mey_gly_pH4.5": 0.0,
+    "B13|mey_cys_pH5": 0.0,
+    "B13|mey_gly_pH5": 0.0,
+    "B13|mey_cys_pH5.5": 0.0,
+    "B13|mey_gly_pH5.5": 0.0,
+    "B13|mey_cys_pH6": 0.0,
+    "B13|mey_gly_pH6": 0.0,
+    "B13|mey_cys_pH6.5": 0.0,
+    "B13|mey_gly_pH6.5": 0.0,
+    "B13|hou_forced": 3.166496753692627e-08,
+    "B13|hou_unforced": 2.60770320892334e-08,
+    "B13|zhou_arp_pH6": 1.210719347000122e-08,
+    "B13|zhou_cys_pH6": 2.7939677238464355e-09,
+    "B13|zhou_arp_pH7": 2.421438694000244e-08,
+    "B13|zhou_cys_pH7": 2.1420419216156006e-08,
+    "B13|zhou_arp_pH8": 4.6566128730773926e-08,
+    "B13|zhou_cys_pH8": 3.818422555923462e-08
+   },
+   "max_abs_lsoda_vs_bdf_ph": 7.729977369308472e-08,
+   "stall_draw": {"rival": "B0", "coordinates": {"acid_yield": 0.3952675089240074, "arp_amine_pka": 7.62728870975785}, "pot": "mey_cys_pH5.5", "cooled_ph": {"BDF": 4.586565264035016, "Radau": 4.586565260309726}, "bdf_vs_radau_ph": 3.725290298461914e-09},
+   "tolerance_ph": 0.0001,
+   "passed": true,
+   "what": "LSODA vs the declared BDF fallback on every control pot (B0-pinned, a mid-band B13 draw); BDF vs Radau at LSODA's stall draw",
+   "seconds": 179.1
+  },
+  "V_density": {"what": "tests/unit/test_predictive_densities.py -k exact_density_of_r0_cys (M1.1's -746 by quadrature from an engine scan; PSIS with a width-scaled proposal agrees)", "returncode": 0, "summary": "1 passed, 21 deselected in 10.32s", "passed": true, "seconds": 13.1}
+ },
+ "davidek_breakpoints_in_situ": [5.22011388791725, 6.180802797432989, 6.676454670261592],
+ "machine": {"load_average_1_5_15": [11.52, 10.21, 11.24], "cpu_count": 10, "free_memory_bytes": 4271570944, "swap": "vm.swapusage: total = 8192.00M  used = 7114.62M  free = 1077.38M  (encrypted)", "workers": 1, "time": "2026-11-05 21:22:52"},
+ "seconds": 335.3,
+ "passed": true,
+ "failed_pot_runs": 0,
+ "provenance": {
+  "artifact": "kinetic_core_m1b_part_i_checks",
+  "generated_on": "2026-11-05",
+  "git": {"commit": "e9df71476d20b71156f3c24b29a80b5a8d0e18bc", "short": "e9df7147", "branch": "m1b-part-i-build", "dirty": true},
+  "generated_by": "scripts/generators/fit_m1b_ph_balance.py",
+  "wave": "M1b part (i)",
+  "inputs": [
+   {"path": "results/validation/kinetic_core_m1b_ph_balance_pentose_steps_prereg.md", "sha256": "c464204af20dd55da68597d6c5b7038a30099a55839de95310e2e9d76126d7e4"},
+   {"path": "results/validation/kinetic_core_b60_fit_report.json", "sha256": "8e33492dea4c5d84c36eac4f1f9f4c9a87143597367574b58ff0af5a183215c3"},
+   {"path": "data/lit/fit_rows/ph_acid_submodel.yml", "sha256": "27db4b0c5a7e4c594d29fb4e3395d15121aac0a7c84b36f06c3641891a3574c9"},
+   {"path": "data/lit/fit_rows/heldout_meynier1995_tab1_2_4.yml", "sha256": "6b67b728bd544fb35a517d76131b2e01b92502bfdbcb68f0b7028dfcf4ed6f65"},
+   {"path": "src/kinetic_core/ph_balance_rivals.py", "sha256": "16fa6e6d3555ebd4ef2f0b964c65a9db35c0ae9d9298671bf5d8a93d54dd717e"},
+   {"path": "src/kinetic_core/ph_state.py", "sha256": "8752aa84378fbba60a418c9206edfef7ce81817abe07958ebc939678fac70ca4"},
+   {"path": "src/kinetic_core/sulfur.py", "sha256": "27f01227400d0bae49f14f0eb91ee3d4ba055048ee0890128a87470e2fb8b1a3"},
+   {"path": "src/kinetic_core/predictive_densities.py", "sha256": "79c4ec45a4e9d34caa01d7607aa473d6dcfe40f16d26313a47df3876575192ec"},
+   {"path": "src/kinetic_core/config.py", "sha256": "7a4e05f299f145acc300dd86be440254390e1fd11307ddbc3e6c2e6af75d75aa"},
+   {"path": "scripts/generators/fit_m1b_ph_balance.py", "sha256": "9e45d403b334cb385b40fe6595847bf0b306f5bdc6cffdb692064bb88a1849a9"}
+  ]
+ }
+}

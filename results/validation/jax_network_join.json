@@ -1,0 +1,506 @@
+{
+ "artifact": "jax_network_join",
+ "generated_by": "scripts/generators/build_jax_network_join.py",
+ "env": "maillard-jax",
+ "jax_version": "0.12.0.1",
+ "uptime_start": "15:31  up 4 days, 22:40, 1 user, load averages: 12.85 22.36 18.83",
+ "structure": {
+  "modules": [
+   {
+    "name": "sulfur_trunk",
+    "species": 18,
+    "reactions": 26,
+    "coordinates": 50,
+    "requires": [],
+    "competes": [],
+    "titratables": 0,
+    "ledger_entries": 5
+   },
+   {
+    "name": "sulfur_fed_3deoxy",
+    "species": 1,
+    "reactions": 3,
+    "coordinates": 6,
+    "requires": [
+     "sulfur_trunk"
+    ],
+    "competes": [
+     "DDG"
+    ],
+    "titratables": 0,
+    "ledger_entries": 0
+   },
+   {
+    "name": "sulfur",
+    "species": 43,
+    "reactions": 103,
+    "coordinates": 108,
+    "requires": [
+     "sulfur_trunk",
+     "sulfur_fed_3deoxy"
+    ],
+    "competes": [
+     "Glc",
+     "MGO",
+     "Gly",
+     "HMF",
+     "DMHF",
+     "ODG"
+    ],
+    "titratables": 10,
+    "ledger_entries": 21
+   }
+  ],
+  "reactions_equal": true,
+  "species_equal": true,
+  "stoichiometry_equal": true,
+  "undeclared_competition": [],
+  "shared_species": 7,
+  "pools": [
+   "formic",
+   "acetic",
+   "cysteine",
+   "arp",
+   "ttca",
+   "buffer_phosphate",
+   "buffer_citrate",
+   "buffer_acetic",
+   "buffer_pyrophosphate",
+   "buffer_phthalate"
+  ],
+  "pot_pools": [
+   "acetic",
+   "citrate",
+   "phosphate",
+   "phthalate",
+   "pyrophosphate"
+  ],
+  "yield_couplings": [
+   [
+    "sulfur",
+    "acid_yield"
+   ]
+  ],
+  "pka_coordinates": [
+   [
+    "sulfur",
+    "arp_amine_pka"
+   ]
+  ],
+  "closure_composed": {
+   "closes": true,
+   "problems": [],
+   "kinds": [
+    "amine",
+    "carboxyl",
+    "titratable"
+   ]
+  },
+  "closure_one_module": {
+   "closes": true,
+   "problems": []
+  },
+  "steps_moving_centres": 26,
+  "movement_equals_engine_centre_delta": true,
+  "species_centres_equal_TITRATABLE_CENTRES": true,
+  "charge_moved_at_label_ph6": {
+   "ph": 6.0,
+   "t_c": 25.0,
+   "per_reaction": {
+    "r_tdg_fa": -0.9944080326911652,
+    "r_odg_aa": -0.946059090701556,
+    "r_fru_acids": -1.9404671233927213,
+    "r_fa_frag": 0.9944080326911652,
+    "r_aa_frag": 0.946059090701556,
+    "r_cys_h2s": -0.9659385034823955,
+    "r_cys_thermal": -0.9659385034823955,
+    "r_arp_dpo": -0.8924428352695037,
+    "r_arp_tdp": -0.8924428352695037,
+    "r_arp_tdp_thermal": -0.8924428352695037,
+    "r_arp_dpo_thermal": -0.8924428352695037,
+    "r_dpo_ddp": -0.9659385034823955,
+    "r_dpo_ddp_h2s": -0.9659385034823955,
+    "r_arp_decay": -0.8925156346232298,
+    "r_osone_decay_dpo": -7.27993537260772e-05,
+    "r_osone_decay_tdp": -7.27993537260772e-05,
+    "r_osone_decay_ddp": -7.27993537260772e-05,
+    "r_ptr_decay": -7.27993537260772e-05,
+    "r_cys_actz": -0.9659385034823955,
+    "r_ttca_cys": 0.36090693094435,
+    "r_ttca_deg": -0.6050315725380455,
+    "r_hmf_cys": -0.9659385034823955,
+    "ch_cys_ox": -0.9659385034823955,
+    "r_ttca_form": -0.36090693094435,
+    "r_mgo_cys_strecker": -0.9659385034823955,
+    "r_tdp_cys_trap": -0.9659385034823955,
+    "r_mgo_cys_h2s": -0.9659385034823955,
+    "r_cama_form": 0.28741126273145823,
+    "r_cama_dpo": 0.07349566821289177,
+    "r_cama_tdp": 0.07349566821289177,
+    "r_dpo_aa": -0.946059090701556
+   }
+  },
+  "ph_mode": "inline"
+ },
+ "stage_seconds": {
+  "structure": 1.681581458018627,
+  "rates": 2.1519217920140363,
+  "composed": 282.2978244170081,
+  "gradient": 187.44740020798054,
+  "fit_jacobian": 142.54681704199174,
+  "densities": 100.24472279200563,
+  "fit_column_diagnostic": 65.34355958295055
+ },
+ "rates": {
+  "shipped": {
+   "values": 33264,
+   "worst_relative": 3.2047996315842824e-13,
+   "nonzero_where_engine_zero": 0
+  },
+  "draw_11": {
+   "values": 33264,
+   "worst_relative": 3.2047996315842824e-13,
+   "nonzero_where_engine_zero": 0
+  }
+ },
+ "uptime_end": "15:36  up 4 days, 22:46, 1 user, load averages: 65.60 40.29 27.00",
+ "composed": {
+  "tolerance": {
+   "rtol": 1e-08,
+   "atol": 1e-14,
+   "dex": 0.0001,
+   "ph": 0.0001
+  },
+  "pots": [
+   {
+    "id": "mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH7",
+    "initial": {
+     "Cys": 33.0,
+     "Glc": 100.0
+    },
+    "max_dex": 4.097585639684098e-07,
+    "worst_species": "FFT",
+    "max_abs_below_floor": 1.350192129241085e-13,
+    "floor_mmol_L": 1e-06,
+    "jax_sweeps": [
+     6
+    ],
+    "engine_sweeps": [
+     6
+    ],
+    "max_abs_node_ph": 3.7926115581399245e-09,
+    "max_abs_cooled_ph": 5.596871410773474e-09,
+    "jump_side_matched": null,
+    "tie_broken": false,
+    "pass": true,
+    "one_module_max_dex": 4.097585639684098e-07,
+    "composed_vs_one_module_max_abs": 0.0,
+    "composed_vs_one_module_max_rel": 0.0,
+    "composed_s": 5.379573124984745,
+    "one_module_s": 5.0559366249945015,
+    "engine_s": 13.088319875008892,
+    "composed_first_call_s": 13.871468957979232,
+    "steps": 8484,
+    "load": "33.95 72.68 59.96"
+   },
+   {
+    "id": "thiamine_cys_glucose_120C_Bolton1994",
+    "initial": {
+     "THI": 13.7,
+     "Cys": 10.5,
+     "Glc": 46.8
+    },
+    "max_dex": 5.822191786464259e-07,
+    "worst_species": "FFT",
+    "max_abs_below_floor": 9.865951127259446e-13,
+    "floor_mmol_L": 1e-06,
+    "jax_sweeps": [
+     7
+    ],
+    "engine_sweeps": [
+     7
+    ],
+    "max_abs_node_ph": 3.255357761133837e-09,
+    "max_abs_cooled_ph": 3.156968020334716e-10,
+    "jump_side_matched": null,
+    "tie_broken": false,
+    "pass": true,
+    "one_module_max_dex": 5.822191786464259e-07,
+    "composed_vs_one_module_max_abs": 0.0,
+    "composed_vs_one_module_max_rel": 0.0,
+    "composed_s": 2.015886874985881,
+    "one_module_s": 2.1124417079845443,
+    "engine_s": 11.033434708951972,
+    "composed_first_call_s": 2.1310635000118054,
+    "steps": 3002,
+    "load": "34.41 66.45 58.35"
+   },
+   {
+    "id": "resconi_2023_pbma_beef_identity_benchmark",
+    "initial": {
+     "Glc": 40.0,
+     "Cys": 10.0
+    },
+    "max_dex": 2.5849608675798663e-07,
+    "worst_species": "FUR",
+    "max_abs_below_floor": 3.1062248447278994e-13,
+    "floor_mmol_L": 1e-06,
+    "jax_sweeps": [
+     8
+    ],
+    "engine_sweeps": [
+     8
+    ],
+    "max_abs_node_ph": 2.4665780529176118e-09,
+    "max_abs_cooled_ph": 6.512426153904016e-10,
+    "jump_side_matched": null,
+    "tie_broken": false,
+    "pass": true,
+    "one_module_max_dex": 2.5849608675798663e-07,
+    "composed_vs_one_module_max_abs": 0.0,
+    "composed_vs_one_module_max_rel": 0.0,
+    "composed_s": 4.291310708038509,
+    "one_module_s": 4.0498539580148645,
+    "engine_s": 16.24732404202223,
+    "composed_first_call_s": 4.528204082977027,
+    "steps": 6558,
+    "load": "27.82 57.18 55.50"
+   },
+   {
+    "id": "mp_holdout_arp_glutathione_120C_30min_pH75_Zhou2023c",
+    "initial": {
+     "ARP": 20.0,
+     "GSH": 20.0
+    },
+    "max_dex": 2.318143970114761e-07,
+    "worst_species": "OXV",
+    "max_abs_below_floor": 3.906497928934507e-13,
+    "floor_mmol_L": 1e-06,
+    "jax_sweeps": [
+     6
+    ],
+    "engine_sweeps": [
+     6
+    ],
+    "max_abs_node_ph": 5.733730823465066e-09,
+    "max_abs_cooled_ph": 1.6472593067362595e-08,
+    "jump_side_matched": null,
+    "tie_broken": false,
+    "pass": true,
+    "one_module_max_dex": 2.318143970114761e-07,
+    "composed_vs_one_module_max_abs": 0.0,
+    "composed_vs_one_module_max_rel": 0.0,
+    "composed_s": 2.5100972080253996,
+    "one_module_s": 2.44238000002224,
+    "engine_s": 2.2456724590156227,
+    "composed_first_call_s": 2.478717875026632,
+    "steps": 4102,
+    "load": "35.25 56.93 55.45"
+   },
+   {
+    "id": "mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b",
+    "initial": {
+     "Cys": 40.0,
+     "PENT": 40.0
+    },
+    "max_dex": 6.067756741501285e-07,
+    "worst_species": "PENT",
+    "max_abs_below_floor": 6.446357497968104e-13,
+    "floor_mmol_L": 1e-06,
+    "jax_sweeps": [
+     6
+    ],
+    "engine_sweeps": [
+     6
+    ],
+    "max_abs_node_ph": 2.450880032256464e-08,
+    "max_abs_cooled_ph": 1.297116192233716e-09,
+    "jump_side_matched": null,
+    "tie_broken": false,
+    "pass": true,
+    "one_module_max_dex": 6.067756741501285e-07,
+    "composed_vs_one_module_max_abs": 0.0,
+    "composed_vs_one_module_max_rel": 0.0,
+    "composed_s": 4.494058875017799,
+    "one_module_s": 4.5782788330107,
+    "engine_s": 3.6477443329640664,
+    "composed_first_call_s": 4.467686250049155,
+    "steps": 7592,
+    "load": "31.70 53.54 54.29"
+   }
+  ]
+ },
+ "gradient": {
+  "pot": "thiamine_cys_glucose_120C_Bolton1994",
+  "coordinates": [
+   "sulfur_trunk.log10_k:k_fru_acids",
+   "sulfur_trunk.ea:k_glc_tdg",
+   "sulfur_fed_3deoxy.log10_k:k_ddg_tdg",
+   "sulfur.log10_k:k_thi_hmp",
+   "sulfur.log10_k:k_hmf_cys"
+  ],
+  "steps": [
+   0.0001,
+   0.01,
+   0.0001,
+   0.0001,
+   0.0001
+  ],
+  "species": [
+   "MFT",
+   "H2S",
+   "HMF",
+   "FFT"
+  ],
+  "grad": [
+   -0.2667225724921857,
+   0.0015948280850104817,
+   -0.03933230829309086,
+   0.9776560943953342,
+   -0.0006564753291519995
+  ],
+  "jacfwd": [
+   -0.2667225724945304,
+   0.001594828085013036,
+   -0.03933230829321922,
+   0.9776560943955285,
+   -0.0006564753291535461
+  ],
+  "central_fd": [
+   -0.26672255732940187,
+   0.0015948282635847022,
+   -0.03933227953778484,
+   0.9776563615537803,
+   -0.0006564936971820146
+  ],
+  "rel_grad_vs_fd": [
+   5.6848524600398846e-08,
+   1.1197081503527472e-07,
+   7.310866890039697e-07,
+   2.7326416177432894e-07,
+   2.7978989126480434e-05
+  ],
+  "rel_grad_vs_jacfwd": [
+   8.790707577125517e-12,
+   1.6016648166457479e-12,
+   3.263543324639177e-12,
+   1.9872936642136775e-13,
+   2.3558709027815223e-12
+  ],
+  "finite": true,
+  "grad_s": 35.41310012497706,
+  "grad_first_call_s": 61.41256191697903,
+  "jacfwd_first_call_s": 30.70874187501613,
+  "rtol": 1e-10,
+  "atol": 1e-16,
+  "adjoint": "RecursiveCheckpointAdjoint (default; no reverse flag)",
+  "load": "8.02 13.94 30.41"
+ },
+ "fit_jacobian": {
+  "pot": "thiamine_cys_glucose_120C_Bolton1994",
+  "observables": 16,
+  "coordinates": [
+   "sulfur_trunk.log10_k:k_fru_acids",
+   "sulfur_trunk.ea:k_glc_tdg",
+   "sulfur_fed_3deoxy.log10_k:k_ddg_tdg",
+   "sulfur.log10_k:k_thi_hmp",
+   "sulfur.log10_k:k_hmf_cys"
+  ],
+  "residual_equals_network_integrate": 0.0,
+  "failed": [],
+  "jax_jacobian_s": 5.650774957961403,
+  "jax_jacobian_first_call_s": 20.530275083961897,
+  "jax_residual_s": 1.830582249967847,
+  "fd_check_max_relative_column_error": 0.0008881782691281205,
+  "fd_check_per_column": [
+   0.0008881782691281205,
+   5.5783363422416e-06,
+   7.8847290432065e-06,
+   2.264634063892094e-07,
+   1.2972895980609254e-05
+  ],
+  "fd_check_sweep_changes": {},
+  "sweeps_seen": [
+   [
+    7
+   ]
+  ],
+  "engine_forward_fd_s": 62.78487191599561,
+  "engine_runs": 6,
+  "engine_steps": [
+   0.001,
+   0.1,
+   0.001,
+   0.001,
+   0.001
+  ],
+  "max_col_rel_jax_vs_engine_forward_fd": 0.7881867541048168,
+  "col_rel_jax_vs_engine_forward_fd": [
+   0.7881867541048168,
+   2.1549375563565815e-05,
+   0.0010044438362393205,
+   2.5536524696693182e-05,
+   0.0019187540730630764
+  ],
+  "col_scale_dex_per_unit": [
+   0.06127851388642306,
+   0.007073317972776561,
+   0.15476885144727853,
+   0.9999978680638645,
+   0.0026052649034412996
+  ],
+  "load": "17.13 20.12 18.45"
+ },
+ "densities": {
+  "draws": 3,
+  "failed": 0,
+  "batch_vs_single_max_dex": 6.683542608243442e-13,
+  "batch_s_first_call": 32.379811083956156,
+  "load": "65.60 40.29 27.00"
+ },
+ "fit_column_diagnostic": {
+  "coordinate": "sulfur_trunk.log10_k:k_fru_acids",
+  "step": 0.001,
+  "rows": [
+   {
+    "shift": -0.001,
+    "engine_sweeps": [
+     7
+    ],
+    "jax_sweeps": [
+     7
+    ],
+    "max_abs_dex_jax_vs_engine": 3.3132360753640455e-05,
+    "worst_observable": "FFT at node 10",
+    "worst_level_mmol_L": 4.396248563205223e-14,
+    "engine_change_dex": 6.122391850071907e-05
+   },
+   {
+    "shift": 0.0,
+    "engine_sweeps": [
+     7
+    ],
+    "jax_sweeps": [
+     7
+    ],
+    "max_abs_dex_jax_vs_engine": 2.0514928182890912e-05,
+    "worst_observable": "FFT at node 10",
+    "worst_level_mmol_L": 4.3963762839185215e-14,
+    "engine_change_dex": 0.0
+   },
+   {
+    "shift": 0.001,
+    "engine_sweeps": [
+     7
+    ],
+    "jax_sweeps": [
+     7
+    ],
+    "max_abs_dex_jax_vs_engine": 6.885494140185244e-05,
+    "worst_observable": "FFT at node 10",
+    "worst_level_mmol_L": 4.39588695962837e-14,
+    "engine_change_dex": 6.133065981384078e-05
+   }
+  ]
+ }
+}

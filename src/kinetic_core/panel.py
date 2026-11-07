@@ -180,6 +180,27 @@ def bundle_targets(bench: Mapping[str, Any]) -> Dict[str, Dict[str, Any]]:
     }
 
 
+#: M0 data corrections, batch 1 (2026-11-06). A target row the CURATED DATA takes off the scored panel, with the
+#: datum kept: a source that contradicts itself (Lin 2022's HMF), a pot whose charge the paper does not print (Ma
+#: 2024), a measured net loss of a carried level that no lane can represent (Bi 2020's hexanal). The engine cannot
+#: see any of these -- they are facts about the source, not about the conditions -- so the bundle states them on the
+#: target entry (``holdout_targets[c]`` or ``measured_volatiles[c]``) and every scorer refuses the row with that
+#: reason, before it reads any number. The reason must name its register entry.
+DATA_REFUSAL_FIELD = "scoring_refused"
+DATA_REFUSAL_TAG = "REFUSED BY THE DATA"
+
+
+def data_refusal(target_spec: Mapping[str, Any]) -> Optional[str]:
+    """The refusal reason a bundle's target entry declares (``scoring_refused``), tagged; ``None`` if none."""
+    reason = target_spec.get(DATA_REFUSAL_FIELD)
+    if reason is None:
+        return None
+    reason = str(reason).strip()
+    if len(reason) < 20:
+        raise ValueError(f"{DATA_REFUSAL_FIELD} must explain itself (>= 20 characters), got {reason!r}")
+    return f"{DATA_REFUSAL_TAG}: {reason}"
+
+
 def limiting_precursor_molar(
     bench: Mapping[str, Any],
 ) -> Tuple[Optional[str], Optional[float]]:
@@ -426,8 +447,11 @@ __all__ = [
     "SHARED_WITH_HOLDOUT_PANEL",
     "SYNTHETIC_SNAPSHOT_SUFFIX",
     "UNSCORED_EVIDENCE_CLASSES",
+    "DATA_REFUSAL_FIELD",
+    "DATA_REFUSAL_TAG",
     "buffer_from_bundle",
     "bundle_targets",
+    "data_refusal",
     "core_native_value",
     "core_spec",
     "is_scored_bundle",

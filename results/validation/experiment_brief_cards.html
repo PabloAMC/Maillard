@@ -615,11 +615,11 @@
                 </div>
                 <div class="header-stats">
                     <div class="stat-badge">
-                        <div class="stat-val">32</div>
+                        <div class="stat-val">15</div>
                         <div class="stat-lbl">Calibration Gaps Displayed</div>
                     </div>
                     <div class="stat-badge">
-                        <div class="stat-val">30</div>
+                        <div class="stat-val">12</div>
                         <div class="stat-lbl">Mismatches (Outside 90% CI)</div>
                     </div>
                 </div>
@@ -670,353 +670,9 @@
 
             <div class="cards-grid">
                 
-        <div class="card gap-card" data-matrix="free" data-template="free_precursor_sulfur_yield" data-class="meaty">
-            <div class="card-header">
-                <div class="card-rank">#1</div>
-                <div class="card-title-group">
-                    <h3>2-Methyl-3-furanthiol (MFT)</h3>
-                    <div class="card-subtitle">Hofmann 1998 (Mp + Holdout + Ribose + Cys + 20min + Ph7, 145°C)</div>
-                </div>
-                <div class="card-voi" title="Value of Information: how much running this experiment reduces model uncertainty, weighted by sensory relevance (ODT proximity). Higher = higher priority.">17.47 VoI</div>
-            </div>
-            
-            <div class="card-body">
-                <div class="badges-row">
-                    <span class="badge badge-matrix">free matrix</span>
-                    <span class="badge badge-danger">OUTSIDE 90% CI</span>
-                    <span class="badge badge-template" title="Gap type: characterises why this experiment is high-priority">free precursor sulfur yield</span>
-                </div>
-                
-                <p class="rationale-text"><strong>Rationale</strong>: measured outside 90% CI by 3.07 dex; CI width 2.81 dex; ≈4e+03× ODT (decision_relevance=3.55); critical meaty odorant in a FREE-PRECURSOR system — the open question is absolute yield vs precursor dose and temperature, not matrix transfer</p>
-                
-                <!-- Chemistry brief section -->
-                <div class="chemistry-brief">
-                    <h4 class="chem-title">Sulfur-Maillard (MFT) Pathway</h4>
-                    <p class="chem-desc">Formed via thiolation of pentose/hexose dehydration intermediates (deoxyosones) with hydrogen sulfide.</p>
-                    <ol class="chem-steps">
-                        <li><strong>Sugar Dehydration</strong>: D-Ribose/D-Glucose &rarr; 3-Deoxyosone + H<sub>2</sub>O</li><li><strong>Cysteine Degradation</strong>: L-Cysteine + H<sub>2</sub>O &rarr; H<sub>2</sub>S + Ammonia + Acetaldehyde + CO<sub>2</sub></li><li><strong>Thiol Addition</strong>: 3-Deoxyosone + H<sub>2</sub>S &rarr; 2-Methyl-3-furanthiol + H<sub>2</sub>O</li>
-                    </ol>
-                </div>
-                
-                
-                <!-- Quantitative bounds grid -->
-                <div class="quant-grid">
-                    <div class="quant-item">
-                        <span class="quant-label">Measured (Lit)</span>
-                        <span class="quant-value">25 ppb</span>
-                    </div>
-                    <div class="quant-item">
-                        <span class="quant-label">Model Median (P50)</span>
-                        <span class="quant-value">0.00429 ppb</span>
-                    </div>
-                    <div class="quant-item">
-                        <span class="quant-label">90% Confidence Interval</span>
-                        <span class="quant-value">3.28e-05 &ndash; 0.0211 ppb</span>
-                    </div>
-                    
-                    <div class="quant-item">
-                        <span class="quant-label">Odour Threshold (ODT)</span>
-                        <span class="quant-value">0.007 ppb</span>
-                    </div>
-            
-                </div>
-        
-                
-                <!-- Log scale visualization bar -->
-                <div class="scale-section">
-                    <div class="scale-header">
-                        <span>Model uncertainty vs. observation (log₁₀ ppb) — band width reflects how well-constrained the prediction is</span>
-                    </div>
-                    <div class="scale-container">
-                        <div class="scale-bounds">
-                            <span>1.64e-05 ppb</span>
-                            <span>0.0286 ppb</span>
-                            <span>50 ppb</span>
-                        </div>
-                        <div class="scale-bar-track">
-                            <div class="scale-bar-ci outside" style="left: 4.642539169772073%; width: 43.319364570582934%;"></div>
-                            <div class="scale-p50" style="left: 37.29033993237763%;" title="Model Median (P50): 0.00429 ppb"></div>
-                            <div class="scale-marker" style="left: 95.35746083022792%;" title="Measured: 25 ppb"></div>
-                        </div>
-                        <div class="scale-legend">
-                            <span class="legend-item"><span class="legend-dot ci-dot outside"></span>90% CI (3.28e-05 - 0.0211 ppb)</span>
-                            <span class="legend-item"><span class="legend-dot p50-dot"></span>Median (0.00429 ppb)</span>
-                            <span class="legend-item"><span class="legend-dot measured-dot"></span>Measured (25 ppb)</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="card-footer">
-                <a href="../../docs/protocols/PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md" class="btn-protocol" target="_blank">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                    View PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md
-                </a>
-            </div>
-        </div>
-        
-
-        <div class="card gap-card" data-matrix="free" data-template="missing_kinetic_dataset" data-class="kinetics">
-            <div class="card-header">
-                <div class="card-rank">#2</div>
-                <div class="card-title-group">
-                    <h3>Bis(2-methyl-3-furyl) disulfide</h3>
-                    <div class="card-subtitle">mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b</div>
-                </div>
-                <div class="card-voi" title="Value of Information: how much running this experiment reduces model uncertainty, weighted by sensory relevance (ODT proximity). Higher = higher priority.">15.67 VoI</div>
-            </div>
-            
-            <div class="card-body">
-                <div class="badges-row">
-                    <span class="badge badge-matrix">free matrix</span>
-                    <span class="badge badge-danger">OUTSIDE 90% CI</span>
-                    <span class="badge badge-template" title="Gap type: characterises why this experiment is high-priority">missing kinetic dataset</span>
-                </div>
-                
-                <p class="rationale-text"><strong>Rationale</strong>: measured outside 90% CI by 3.22 dex; CI width 3.58 dex; ≈9e+02× ODT (decision_relevance=2.96); wide envelope — time-course narrows the rate-limiting step</p>
-                
-                <!-- Chemistry brief section -->
-                <div class="chemistry-brief">
-                    <h4 class="chem-title">MFT Disulfide Dimerization</h4>
-                    <p class="chem-desc">Oxidative dimerization of 2-methyl-3-furanthiol (MFT) monomer in the presence of trace oxygen/catalysts.</p>
-                    <ol class="chem-steps">
-                        <li><strong>MFT Generation</strong>: Pentose + Cysteine &rarr; 2-Methyl-3-furanthiol (MFT)</li><li><strong>Oxidative Dimerization</strong>: 2 MFT + [O] &rarr; Bis(2-methyl-3-furyl) disulfide + H<sub>2</sub>O</li>
-                    </ol>
-                </div>
-                
-                
-                <!-- Quantitative bounds grid -->
-                <div class="quant-grid">
-                    <div class="quant-item">
-                        <span class="quant-label">Measured (Lit)</span>
-                        <span class="quant-value">18.2 ppb</span>
-                    </div>
-                    <div class="quant-item">
-                        <span class="quant-label">Model Median (P50)</span>
-                        <span class="quant-value">0.000195 ppb</span>
-                    </div>
-                    <div class="quant-item">
-                        <span class="quant-label">90% Confidence Interval</span>
-                        <span class="quant-value">2.91e-06 &ndash; 0.011 ppb</span>
-                    </div>
-                    
-                    <div class="quant-item">
-                        <span class="quant-label">Odour Threshold (ODT)</span>
-                        <span class="quant-value">0.02 ppb</span>
-                    </div>
-            
-                </div>
-        
-                
-                <!-- Log scale visualization bar -->
-                <div class="scale-section">
-                    <div class="scale-header">
-                        <span>Model uncertainty vs. observation (log₁₀ ppb) — band width reflects how well-constrained the prediction is</span>
-                    </div>
-                    <div class="scale-container">
-                        <div class="scale-bounds">
-                            <span>1.46e-06 ppb</span>
-                            <span>0.00729 ppb</span>
-                            <span>36.5 ppb</span>
-                        </div>
-                        <div class="scale-bar-track">
-                            <div class="scale-bar-ci outside" style="left: 4.068630589628964%; width: 48.34920372582253%;"></div>
-                            <div class="scale-p50" style="left: 28.75047204678799%;" title="Model Median (P50): 0.000195 ppb"></div>
-                            <div class="scale-marker" style="left: 95.93136941037105%;" title="Measured: 18.2 ppb"></div>
-                        </div>
-                        <div class="scale-legend">
-                            <span class="legend-item"><span class="legend-dot ci-dot outside"></span>90% CI (2.91e-06 - 0.011 ppb)</span>
-                            <span class="legend-item"><span class="legend-dot p50-dot"></span>Median (0.000195 ppb)</span>
-                            <span class="legend-item"><span class="legend-dot measured-dot"></span>Measured (18.2 ppb)</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="card-footer">
-                <a href="../../docs/protocols/PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md" class="btn-protocol" target="_blank">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                    View PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md
-                </a>
-            </div>
-        </div>
-        
-
-        <div class="card gap-card" data-matrix="free" data-template="free_precursor_sulfur_yield" data-class="meaty">
-            <div class="card-header">
-                <div class="card-rank">#3</div>
-                <div class="card-title-group">
-                    <h3>2-Methyl-3-furanthiol (MFT)</h3>
-                    <div class="card-subtitle">Hofmann 1998 (Mp + Holdout + Ribose + Cys + 20min + Ph3, 145°C)</div>
-                </div>
-                <div class="card-voi" title="Value of Information: how much running this experiment reduces model uncertainty, weighted by sensory relevance (ODT proximity). Higher = higher priority.">10.59 VoI</div>
-            </div>
-            
-            <div class="card-body">
-                <div class="badges-row">
-                    <span class="badge badge-matrix">free matrix</span>
-                    <span class="badge badge-danger">OUTSIDE 90% CI</span>
-                    <span class="badge badge-template" title="Gap type: characterises why this experiment is high-priority">free precursor sulfur yield</span>
-                </div>
-                
-                <p class="rationale-text"><strong>Rationale</strong>: measured outside 90% CI by 0.89 dex; CI width 0.90 dex; ≈8e+04× ODT (decision_relevance=4.90); critical meaty odorant in a FREE-PRECURSOR system — the open question is absolute yield vs precursor dose and temperature, not matrix transfer</p>
-                
-                <!-- Chemistry brief section -->
-                <div class="chemistry-brief">
-                    <h4 class="chem-title">Sulfur-Maillard (MFT) Pathway</h4>
-                    <p class="chem-desc">Formed via thiolation of pentose/hexose dehydration intermediates (deoxyosones) with hydrogen sulfide.</p>
-                    <ol class="chem-steps">
-                        <li><strong>Sugar Dehydration</strong>: D-Ribose/D-Glucose &rarr; 3-Deoxyosone + H<sub>2</sub>O</li><li><strong>Cysteine Degradation</strong>: L-Cysteine + H<sub>2</sub>O &rarr; H<sub>2</sub>S + Ammonia + Acetaldehyde + CO<sub>2</sub></li><li><strong>Thiol Addition</strong>: 3-Deoxyosone + H<sub>2</sub>S &rarr; 2-Methyl-3-furanthiol + H<sub>2</sub>O</li>
-                    </ol>
-                </div>
-                
-                
-                <!-- Quantitative bounds grid -->
-                <div class="quant-grid">
-                    <div class="quant-item">
-                        <span class="quant-label">Measured (Lit)</span>
-                        <span class="quant-value">553 ppb</span>
-                    </div>
-                    <div class="quant-item">
-                        <span class="quant-label">Model Median (P50)</span>
-                        <span class="quant-value">25.4 ppb</span>
-                    </div>
-                    <div class="quant-item">
-                        <span class="quant-label">90% Confidence Interval</span>
-                        <span class="quant-value">8.92 &ndash; 70.7 ppb</span>
-                    </div>
-                    
-                    <div class="quant-item">
-                        <span class="quant-label">Odour Threshold (ODT)</span>
-                        <span class="quant-value">0.007 ppb</span>
-                    </div>
-            
-                </div>
-        
-                
-                <!-- Log scale visualization bar -->
-                <div class="scale-section">
-                    <div class="scale-header">
-                        <span>Model uncertainty vs. observation (log₁₀ ppb) — band width reflects how well-constrained the prediction is</span>
-                    </div>
-                    <div class="scale-container">
-                        <div class="scale-bounds">
-                            <span>4.46 ppb</span>
-                            <span>70.2 ppb</span>
-                            <span>1.11e+03 ppb</span>
-                        </div>
-                        <div class="scale-bar-track">
-                            <div class="scale-bar-ci outside" style="left: 12.572109588529656%; width: 37.536048430298145%;"></div>
-                            <div class="scale-p50" style="left: 31.537173538038747%;" title="Model Median (P50): 25.4 ppb"></div>
-                            <div class="scale-marker" style="left: 87.42789041147033%;" title="Measured: 553 ppb"></div>
-                        </div>
-                        <div class="scale-legend">
-                            <span class="legend-item"><span class="legend-dot ci-dot outside"></span>90% CI (8.92 - 70.7 ppb)</span>
-                            <span class="legend-item"><span class="legend-dot p50-dot"></span>Median (25.4 ppb)</span>
-                            <span class="legend-item"><span class="legend-dot measured-dot"></span>Measured (553 ppb)</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="card-footer">
-                <a href="../../docs/protocols/PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md" class="btn-protocol" target="_blank">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                    View PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md
-                </a>
-            </div>
-        </div>
-        
-
-        <div class="card gap-card" data-matrix="free" data-template="free_precursor_sulfur_yield" data-class="meaty">
-            <div class="card-header">
-                <div class="card-rank">#4</div>
-                <div class="card-title-group">
-                    <h3>2-Methyl-3-furanthiol (MFT)</h3>
-                    <div class="card-subtitle">Hofmann 1998 (C2c3 + Recombination + 20min + Ph3, 145°C)</div>
-                </div>
-                <div class="card-voi" title="Value of Information: how much running this experiment reduces model uncertainty, weighted by sensory relevance (ODT proximity). Higher = higher priority.">10.15 VoI</div>
-            </div>
-            
-            <div class="card-body">
-                <div class="badges-row">
-                    <span class="badge badge-matrix">free matrix</span>
-                    <span class="badge badge-danger">OUTSIDE 90% CI</span>
-                    <span class="badge badge-template" title="Gap type: characterises why this experiment is high-priority">free precursor sulfur yield</span>
-                </div>
-                
-                <p class="rationale-text"><strong>Rationale</strong>: measured outside 90% CI by 0.99 dex; CI width 0.12 dex; ≈6e+05× ODT (decision_relevance=5.00); critical meaty odorant in a FREE-PRECURSOR system — the open question is absolute yield vs precursor dose and temperature, not matrix transfer</p>
-                
-                <!-- Chemistry brief section -->
-                <div class="chemistry-brief">
-                    <h4 class="chem-title">Sulfur-Maillard (MFT) Pathway</h4>
-                    <p class="chem-desc">Formed via thiolation of pentose/hexose dehydration intermediates (deoxyosones) with hydrogen sulfide.</p>
-                    <ol class="chem-steps">
-                        <li><strong>Sugar Dehydration</strong>: D-Ribose/D-Glucose &rarr; 3-Deoxyosone + H<sub>2</sub>O</li><li><strong>Cysteine Degradation</strong>: L-Cysteine + H<sub>2</sub>O &rarr; H<sub>2</sub>S + Ammonia + Acetaldehyde + CO<sub>2</sub></li><li><strong>Thiol Addition</strong>: 3-Deoxyosone + H<sub>2</sub>S &rarr; 2-Methyl-3-furanthiol + H<sub>2</sub>O</li>
-                    </ol>
-                </div>
-                
-                
-                <!-- Quantitative bounds grid -->
-                <div class="quant-grid">
-                    <div class="quant-item">
-                        <span class="quant-label">Measured (Lit)</span>
-                        <span class="quant-value">310 ppb</span>
-                    </div>
-                    <div class="quant-item">
-                        <span class="quant-label">Model Median (P50)</span>
-                        <span class="quant-value">4.03e+03 ppb</span>
-                    </div>
-                    <div class="quant-item">
-                        <span class="quant-label">90% Confidence Interval</span>
-                        <span class="quant-value">3.05e+03 &ndash; 4.07e+03 ppb</span>
-                    </div>
-                    
-                    <div class="quant-item">
-                        <span class="quant-label">Odour Threshold (ODT)</span>
-                        <span class="quant-value">0.007 ppb</span>
-                    </div>
-            
-                </div>
-        
-                
-                <!-- Log scale visualization bar -->
-                <div class="scale-section">
-                    <div class="scale-header">
-                        <span>Model uncertainty vs. observation (log₁₀ ppb) — band width reflects how well-constrained the prediction is</span>
-                    </div>
-                    <div class="scale-container">
-                        <div class="scale-bounds">
-                            <span>155 ppb</span>
-                            <span>1.12e+03 ppb</span>
-                            <span>8.13e+03 ppb</span>
-                        </div>
-                        <div class="scale-bar-track">
-                            <div class="scale-bar-ci outside" style="left: 75.25677341758308%; width: 7.240716613845393%;"></div>
-                            <div class="scale-p50" style="left: 82.26818036117606%;" title="Model Median (P50): 4.03e+03 ppb"></div>
-                            <div class="scale-marker" style="left: 17.502509968571527%;" title="Measured: 310 ppb"></div>
-                        </div>
-                        <div class="scale-legend">
-                            <span class="legend-item"><span class="legend-dot ci-dot outside"></span>90% CI (3.05e+03 - 4.07e+03 ppb)</span>
-                            <span class="legend-item"><span class="legend-dot p50-dot"></span>Median (4.03e+03 ppb)</span>
-                            <span class="legend-item"><span class="legend-dot measured-dot"></span>Measured (310 ppb)</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="card-footer">
-                <a href="../../docs/protocols/PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md" class="btn-protocol" target="_blank">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                    View PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md
-                </a>
-            </div>
-        </div>
-        
-
         <div class="card gap-card" data-matrix="soy_iso" data-template="missing_positive_flavor_anchor" data-class="off-notes">
             <div class="card-header">
-                <div class="card-rank">#5</div>
+                <div class="card-rank">#1</div>
                 <div class="card-title-group">
                     <h3>2-pentylfuran</h3>
                     <div class="card-subtitle">Control 2026 (External + Li + SPI + Wg + Hme + Control)</div>
@@ -1100,525 +756,9 @@
         </div>
         
 
-        <div class="card gap-card" data-matrix="free" data-template="free_precursor_sulfur_yield" data-class="meaty">
-            <div class="card-header">
-                <div class="card-rank">#6</div>
-                <div class="card-title-group">
-                    <h3>2-Furfurylthiol (FFT)</h3>
-                    <div class="card-subtitle">Hofmann 1998 (Mp + Holdout + Ribose + Cys + 20min + Ph7, 145°C)</div>
-                </div>
-                <div class="card-voi" title="Value of Information: how much running this experiment reduces model uncertainty, weighted by sensory relevance (ODT proximity). Higher = higher priority.">9.75 VoI</div>
-            </div>
-            
-            <div class="card-body">
-                <div class="badges-row">
-                    <span class="badge badge-matrix">free matrix</span>
-                    <span class="badge badge-danger">OUTSIDE 90% CI</span>
-                    <span class="badge badge-template" title="Gap type: characterises why this experiment is high-priority">free precursor sulfur yield</span>
-                </div>
-                
-                <p class="rationale-text"><strong>Rationale</strong>: measured outside 90% CI by 1.56 dex; CI width 2.01 dex; ≈1e+03× ODT (decision_relevance=3.08); critical meaty odorant in a FREE-PRECURSOR system — the open question is absolute yield vs precursor dose and temperature, not matrix transfer</p>
-                
-                <!-- Chemistry brief section -->
-                <div class="chemistry-brief">
-                    <h4 class="chem-title">Furanthiol (FFT) Pathway</h4>
-                    <p class="chem-desc">Formed via nucleophilic addition of hydrogen sulfide to furfural under reducing conditions.</p>
-                    <ol class="chem-steps">
-                        <li><strong>Sugar Dehydration</strong>: D-Ribose &rarr; Furfural + 3 H<sub>2</sub>O</li><li><strong>Cysteine Degradation</strong>: L-Cysteine + H<sub>2</sub>O &rarr; H<sub>2</sub>S + Ammonia + Acetaldehyde + CO<sub>2</sub></li><li><strong>Thiol Addition (Reduction)</strong>: Furfural + H<sub>2</sub>S + [H] &rarr; 2-Furfurylthiol + H<sub>2</sub>O</li>
-                    </ol>
-                </div>
-                
-                
-                <!-- Quantitative bounds grid -->
-                <div class="quant-grid">
-                    <div class="quant-item">
-                        <span class="quant-label">Measured (Lit)</span>
-                        <span class="quant-value">12 ppb</span>
-                    </div>
-                    <div class="quant-item">
-                        <span class="quant-label">Model Median (P50)</span>
-                        <span class="quant-value">0.0745 ppb</span>
-                    </div>
-                    <div class="quant-item">
-                        <span class="quant-label">90% Confidence Interval</span>
-                        <span class="quant-value">0.00319 &ndash; 0.328 ppb</span>
-                    </div>
-                    
-                    <div class="quant-item">
-                        <span class="quant-label">Odour Threshold (ODT)</span>
-                        <span class="quant-value">0.01 ppb</span>
-                    </div>
-            
-                </div>
-        
-                
-                <!-- Log scale visualization bar -->
-                <div class="scale-section">
-                    <div class="scale-header">
-                        <span>Model uncertainty vs. observation (log₁₀ ppb) — band width reflects how well-constrained the prediction is</span>
-                    </div>
-                    <div class="scale-container">
-                        <div class="scale-bounds">
-                            <span>0.0016 ppb</span>
-                            <span>0.196 ppb</span>
-                            <span>24 ppb</span>
-                        </div>
-                        <div class="scale-bar-track">
-                            <div class="scale-bar-ci outside" style="left: 7.206726971526672%; width: 48.17252204691532%;"></div>
-                            <div class="scale-p50" style="left: 39.957971528736124%;" title="Model Median (P50): 0.0745 ppb"></div>
-                            <div class="scale-marker" style="left: 92.79327302847332%;" title="Measured: 12 ppb"></div>
-                        </div>
-                        <div class="scale-legend">
-                            <span class="legend-item"><span class="legend-dot ci-dot outside"></span>90% CI (0.00319 - 0.328 ppb)</span>
-                            <span class="legend-item"><span class="legend-dot p50-dot"></span>Median (0.0745 ppb)</span>
-                            <span class="legend-item"><span class="legend-dot measured-dot"></span>Measured (12 ppb)</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="card-footer">
-                <a href="../../docs/protocols/PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md" class="btn-protocol" target="_blank">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                    View PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md
-                </a>
-            </div>
-        </div>
-        
-
-        <div class="card gap-card" data-matrix="free" data-template="free_precursor_sulfur_yield" data-class="meaty">
-            <div class="card-header">
-                <div class="card-rank">#7</div>
-                <div class="card-title-group">
-                    <h3>2-Methyl-3-furanthiol (MFT)</h3>
-                    <div class="card-subtitle">mp_holdout_arp_glutathione_120C_120min_pH75_Zhou2023c</div>
-                </div>
-                <div class="card-voi" title="Value of Information: how much running this experiment reduces model uncertainty, weighted by sensory relevance (ODT proximity). Higher = higher priority.">9.61 VoI</div>
-            </div>
-            
-            <div class="card-body">
-                <div class="badges-row">
-                    <span class="badge badge-matrix">free matrix</span>
-                    <span class="badge badge-danger">OUTSIDE 90% CI</span>
-                    <span class="badge badge-template" title="Gap type: characterises why this experiment is high-priority">free precursor sulfur yield</span>
-                </div>
-                
-                <p class="rationale-text"><strong>Rationale</strong>: measured outside 90% CI by 0.37 dex; CI width 2.31 dex; ≈5e+04× ODT (decision_relevance=4.66); critical meaty odorant in a FREE-PRECURSOR system — the open question is absolute yield vs precursor dose and temperature, not matrix transfer</p>
-                
-                <!-- Chemistry brief section -->
-                <div class="chemistry-brief">
-                    <h4 class="chem-title">Sulfur-Maillard (MFT) Pathway</h4>
-                    <p class="chem-desc">Formed via thiolation of pentose/hexose dehydration intermediates (deoxyosones) with hydrogen sulfide.</p>
-                    <ol class="chem-steps">
-                        <li><strong>Sugar Dehydration</strong>: D-Ribose/D-Glucose &rarr; 3-Deoxyosone + H<sub>2</sub>O</li><li><strong>Cysteine Degradation</strong>: L-Cysteine + H<sub>2</sub>O &rarr; H<sub>2</sub>S + Ammonia + Acetaldehyde + CO<sub>2</sub></li><li><strong>Thiol Addition</strong>: 3-Deoxyosone + H<sub>2</sub>S &rarr; 2-Methyl-3-furanthiol + H<sub>2</sub>O</li>
-                    </ol>
-                </div>
-                
-                
-                <!-- Quantitative bounds grid -->
-                <div class="quant-grid">
-                    <div class="quant-item">
-                        <span class="quant-label">Measured (Lit)</span>
-                        <span class="quant-value">8.1 ppb</span>
-                    </div>
-                    <div class="quant-item">
-                        <span class="quant-label">Model Median (P50)</span>
-                        <span class="quant-value">323 ppb</span>
-                    </div>
-                    <div class="quant-item">
-                        <span class="quant-label">90% Confidence Interval</span>
-                        <span class="quant-value">18.9 &ndash; 3.84e+03 ppb</span>
-                    </div>
-                    
-                    <div class="quant-item">
-                        <span class="quant-label">Odour Threshold (ODT)</span>
-                        <span class="quant-value">0.007 ppb</span>
-                    </div>
-            
-                </div>
-        
-                
-                <!-- Log scale visualization bar -->
-                <div class="scale-section">
-                    <div class="scale-header">
-                        <span>Model uncertainty vs. observation (log₁₀ ppb) — band width reflects how well-constrained the prediction is</span>
-                    </div>
-                    <div class="scale-container">
-                        <div class="scale-bounds">
-                            <span>4.05 ppb</span>
-                            <span>176 ppb</span>
-                            <span>7.69e+03 ppb</span>
-                        </div>
-                        <div class="scale-bar-track">
-                            <div class="scale-bar-ci outside" style="left: 20.405337285982814%; width: 70.41250494649245%;"></div>
-                            <div class="scale-p50" style="left: 57.98916772164591%;" title="Model Median (P50): 323 ppb"></div>
-                            <div class="scale-marker" style="left: 9.182157767524735%;" title="Measured: 8.1 ppb"></div>
-                        </div>
-                        <div class="scale-legend">
-                            <span class="legend-item"><span class="legend-dot ci-dot outside"></span>90% CI (18.9 - 3.84e+03 ppb)</span>
-                            <span class="legend-item"><span class="legend-dot p50-dot"></span>Median (323 ppb)</span>
-                            <span class="legend-item"><span class="legend-dot measured-dot"></span>Measured (8.1 ppb)</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="card-footer">
-                <a href="../../docs/protocols/PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md" class="btn-protocol" target="_blank">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                    View PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md
-                </a>
-            </div>
-        </div>
-        
-
-        <div class="card gap-card" data-matrix="free" data-template="free_precursor_sulfur_yield" data-class="meaty">
-            <div class="card-header">
-                <div class="card-rank">#8</div>
-                <div class="card-title-group">
-                    <h3>2-Methyl-3-furanthiol (MFT)</h3>
-                    <div class="card-subtitle">mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b</div>
-                </div>
-                <div class="card-voi" title="Value of Information: how much running this experiment reduces model uncertainty, weighted by sensory relevance (ODT proximity). Higher = higher priority.">8.71 VoI</div>
-            </div>
-            
-            <div class="card-body">
-                <div class="badges-row">
-                    <span class="badge badge-matrix">free matrix</span>
-                    <span class="badge badge-danger">OUTSIDE 90% CI</span>
-                    <span class="badge badge-template" title="Gap type: characterises why this experiment is high-priority">free precursor sulfur yield</span>
-                </div>
-                
-                <p class="rationale-text"><strong>Rationale</strong>: measured outside 90% CI by 0.83 dex; CI width 2.17 dex; ≈3e+03× ODT (decision_relevance=3.51); critical meaty odorant in a FREE-PRECURSOR system — the open question is absolute yield vs precursor dose and temperature, not matrix transfer</p>
-                
-                <!-- Chemistry brief section -->
-                <div class="chemistry-brief">
-                    <h4 class="chem-title">Sulfur-Maillard (MFT) Pathway</h4>
-                    <p class="chem-desc">Formed via thiolation of pentose/hexose dehydration intermediates (deoxyosones) with hydrogen sulfide.</p>
-                    <ol class="chem-steps">
-                        <li><strong>Sugar Dehydration</strong>: D-Ribose/D-Glucose &rarr; 3-Deoxyosone + H<sub>2</sub>O</li><li><strong>Cysteine Degradation</strong>: L-Cysteine + H<sub>2</sub>O &rarr; H<sub>2</sub>S + Ammonia + Acetaldehyde + CO<sub>2</sub></li><li><strong>Thiol Addition</strong>: 3-Deoxyosone + H<sub>2</sub>S &rarr; 2-Methyl-3-furanthiol + H<sub>2</sub>O</li>
-                    </ol>
-                </div>
-                
-                
-                <!-- Quantitative bounds grid -->
-                <div class="quant-grid">
-                    <div class="quant-item">
-                        <span class="quant-label">Measured (Lit)</span>
-                        <span class="quant-value">22.6 ppb</span>
-                    </div>
-                    <div class="quant-item">
-                        <span class="quant-label">Model Median (P50)</span>
-                        <span class="quant-value">0.336 ppb</span>
-                    </div>
-                    <div class="quant-item">
-                        <span class="quant-label">90% Confidence Interval</span>
-                        <span class="quant-value">0.0225 &ndash; 3.35 ppb</span>
-                    </div>
-                    
-                    <div class="quant-item">
-                        <span class="quant-label">Odour Threshold (ODT)</span>
-                        <span class="quant-value">0.007 ppb</span>
-                    </div>
-            
-                </div>
-        
-                
-                <!-- Log scale visualization bar -->
-                <div class="scale-section">
-                    <div class="scale-header">
-                        <span>Model uncertainty vs. observation (log₁₀ ppb) — band width reflects how well-constrained the prediction is</span>
-                    </div>
-                    <div class="scale-container">
-                        <div class="scale-bounds">
-                            <span>0.0113 ppb</span>
-                            <span>0.714 ppb</span>
-                            <span>45.3 ppb</span>
-                        </div>
-                        <div class="scale-bar-track">
-                            <div class="scale-bar-ci outside" style="left: 8.35168401081311%; width: 60.29084410787893%;"></div>
-                            <div class="scale-p50" style="left: 40.9216633880211%;" title="Model Median (P50): 0.336 ppb"></div>
-                            <div class="scale-marker" style="left: 91.64831598918688%;" title="Measured: 22.6 ppb"></div>
-                        </div>
-                        <div class="scale-legend">
-                            <span class="legend-item"><span class="legend-dot ci-dot outside"></span>90% CI (0.0225 - 3.35 ppb)</span>
-                            <span class="legend-item"><span class="legend-dot p50-dot"></span>Median (0.336 ppb)</span>
-                            <span class="legend-item"><span class="legend-dot measured-dot"></span>Measured (22.6 ppb)</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="card-footer">
-                <a href="../../docs/protocols/PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md" class="btn-protocol" target="_blank">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                    View PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md
-                </a>
-            </div>
-        </div>
-        
-
-        <div class="card gap-card" data-matrix="free" data-template="free_precursor_sulfur_yield" data-class="meaty">
-            <div class="card-header">
-                <div class="card-rank">#9</div>
-                <div class="card-title-group">
-                    <h3>2-Methyl-3-furanthiol (MFT)</h3>
-                    <div class="card-subtitle">Hofmann 1998 (C2c3 + Recombination + 20min + Ph7, 145°C)</div>
-                </div>
-                <div class="card-voi" title="Value of Information: how much running this experiment reduces model uncertainty, weighted by sensory relevance (ODT proximity). Higher = higher priority.">8.54 VoI</div>
-            </div>
-            
-            <div class="card-body">
-                <div class="badges-row">
-                    <span class="badge badge-matrix">free matrix</span>
-                    <span class="badge badge-danger">OUTSIDE 90% CI</span>
-                    <span class="badge badge-template" title="Gap type: characterises why this experiment is high-priority">free precursor sulfur yield</span>
-                </div>
-                
-                <p class="rationale-text"><strong>Rationale</strong>: measured outside 90% CI by 0.55 dex; CI width 0.51 dex; ≈9e+05× ODT (decision_relevance=5.00); critical meaty odorant in a FREE-PRECURSOR system — the open question is absolute yield vs precursor dose and temperature, not matrix transfer</p>
-                
-                <!-- Chemistry brief section -->
-                <div class="chemistry-brief">
-                    <h4 class="chem-title">Sulfur-Maillard (MFT) Pathway</h4>
-                    <p class="chem-desc">Formed via thiolation of pentose/hexose dehydration intermediates (deoxyosones) with hydrogen sulfide.</p>
-                    <ol class="chem-steps">
-                        <li><strong>Sugar Dehydration</strong>: D-Ribose/D-Glucose &rarr; 3-Deoxyosone + H<sub>2</sub>O</li><li><strong>Cysteine Degradation</strong>: L-Cysteine + H<sub>2</sub>O &rarr; H<sub>2</sub>S + Ammonia + Acetaldehyde + CO<sub>2</sub></li><li><strong>Thiol Addition</strong>: 3-Deoxyosone + H<sub>2</sub>S &rarr; 2-Methyl-3-furanthiol + H<sub>2</sub>O</li>
-                    </ol>
-                </div>
-                
-                
-                <!-- Quantitative bounds grid -->
-                <div class="quant-grid">
-                    <div class="quant-item">
-                        <span class="quant-label">Measured (Lit)</span>
-                        <span class="quant-value">6.23e+03 ppb</span>
-                    </div>
-                    <div class="quant-item">
-                        <span class="quant-label">Model Median (P50)</span>
-                        <span class="quant-value">1.18e+03 ppb</span>
-                    </div>
-                    <div class="quant-item">
-                        <span class="quant-label">90% Confidence Interval</span>
-                        <span class="quant-value">537 &ndash; 1.74e+03 ppb</span>
-                    </div>
-                    
-                    <div class="quant-item">
-                        <span class="quant-label">Odour Threshold (ODT)</span>
-                        <span class="quant-value">0.007 ppb</span>
-                    </div>
-            
-                </div>
-        
-                
-                <!-- Log scale visualization bar -->
-                <div class="scale-section">
-                    <div class="scale-header">
-                        <span>Model uncertainty vs. observation (log₁₀ ppb) — band width reflects how well-constrained the prediction is</span>
-                    </div>
-                    <div class="scale-container">
-                        <div class="scale-bounds">
-                            <span>269 ppb</span>
-                            <span>1.83e+03 ppb</span>
-                            <span>1.25e+04 ppb</span>
-                        </div>
-                        <div class="scale-bar-track">
-                            <div class="scale-bar-ci outside" style="left: 18.06465939364934%; width: 30.62264748494442%;"></div>
-                            <div class="scale-p50" style="left: 38.54331432669104%;" title="Model Median (P50): 1.18e+03 ppb"></div>
-                            <div class="scale-marker" style="left: 81.93534060635069%;" title="Measured: 6.23e+03 ppb"></div>
-                        </div>
-                        <div class="scale-legend">
-                            <span class="legend-item"><span class="legend-dot ci-dot outside"></span>90% CI (537 - 1.74e+03 ppb)</span>
-                            <span class="legend-item"><span class="legend-dot p50-dot"></span>Median (1.18e+03 ppb)</span>
-                            <span class="legend-item"><span class="legend-dot measured-dot"></span>Measured (6.23e+03 ppb)</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="card-footer">
-                <a href="../../docs/protocols/PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md" class="btn-protocol" target="_blank">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                    View PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md
-                </a>
-            </div>
-        </div>
-        
-
-        <div class="card gap-card" data-matrix="free" data-template="free_precursor_sulfur_yield" data-class="meaty">
-            <div class="card-header">
-                <div class="card-rank">#10</div>
-                <div class="card-title-group">
-                    <h3>2-Methyl-3-furanthiol (MFT)</h3>
-                    <div class="card-subtitle">Bolton 1994 (Thiamine + Cys + Glucose, 120°C)</div>
-                </div>
-                <div class="card-voi" title="Value of Information: how much running this experiment reduces model uncertainty, weighted by sensory relevance (ODT proximity). Higher = higher priority.">6.57 VoI</div>
-            </div>
-            
-            <div class="card-body">
-                <div class="badges-row">
-                    <span class="badge badge-matrix">free matrix</span>
-                    <span class="badge badge-danger">OUTSIDE 90% CI</span>
-                    <span class="badge badge-template" title="Gap type: characterises why this experiment is high-priority">free precursor sulfur yield</span>
-                </div>
-                
-                <p class="rationale-text"><strong>Rationale</strong>: measured outside 90% CI by 0.22 dex; CI width 1.30 dex; ≈1e+04× ODT (decision_relevance=4.07); critical meaty odorant in a FREE-PRECURSOR system — the open question is absolute yield vs precursor dose and temperature, not matrix transfer</p>
-                
-                <!-- Chemistry brief section -->
-                <div class="chemistry-brief">
-                    <h4 class="chem-title">Sulfur-Maillard (MFT) Pathway</h4>
-                    <p class="chem-desc">Formed via thiolation of pentose/hexose dehydration intermediates (deoxyosones) with hydrogen sulfide.</p>
-                    <ol class="chem-steps">
-                        <li><strong>Sugar Dehydration</strong>: D-Ribose/D-Glucose &rarr; 3-Deoxyosone + H<sub>2</sub>O</li><li><strong>Cysteine Degradation</strong>: L-Cysteine + H<sub>2</sub>O &rarr; H<sub>2</sub>S + Ammonia + Acetaldehyde + CO<sub>2</sub></li><li><strong>Thiol Addition</strong>: 3-Deoxyosone + H<sub>2</sub>S &rarr; 2-Methyl-3-furanthiol + H<sub>2</sub>O</li>
-                    </ol>
-                </div>
-                
-                
-                <!-- Quantitative bounds grid -->
-                <div class="quant-grid">
-                    <div class="quant-item">
-                        <span class="quant-label">Measured (Lit)</span>
-                        <span class="quant-value">11.7 ppb</span>
-                    </div>
-                    <div class="quant-item">
-                        <span class="quant-label">Model Median (P50)</span>
-                        <span class="quant-value">82.9 ppb</span>
-                    </div>
-                    <div class="quant-item">
-                        <span class="quant-label">90% Confidence Interval</span>
-                        <span class="quant-value">19.6 &ndash; 388 ppb</span>
-                    </div>
-                    
-                    <div class="quant-item">
-                        <span class="quant-label">Odour Threshold (ODT)</span>
-                        <span class="quant-value">0.007 ppb</span>
-                    </div>
-            
-                </div>
-        
-                
-                <!-- Log scale visualization bar -->
-                <div class="scale-section">
-                    <div class="scale-header">
-                        <span>Model uncertainty vs. observation (log₁₀ ppb) — band width reflects how well-constrained the prediction is</span>
-                    </div>
-                    <div class="scale-container">
-                        <div class="scale-bounds">
-                            <span>5.85 ppb</span>
-                            <span>67.4 ppb</span>
-                            <span>776 ppb</span>
-                        </div>
-                        <div class="scale-bar-track">
-                            <div class="scale-bar-ci outside" style="left: 24.70338101146608%; width: 61.116808709885404%;"></div>
-                            <div class="scale-p50" style="left: 54.231472559810086%;" title="Model Median (P50): 82.9 ppb"></div>
-                            <div class="scale-marker" style="left: 14.179810278648521%;" title="Measured: 11.7 ppb"></div>
-                        </div>
-                        <div class="scale-legend">
-                            <span class="legend-item"><span class="legend-dot ci-dot outside"></span>90% CI (19.6 - 388 ppb)</span>
-                            <span class="legend-item"><span class="legend-dot p50-dot"></span>Median (82.9 ppb)</span>
-                            <span class="legend-item"><span class="legend-dot measured-dot"></span>Measured (11.7 ppb)</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="card-footer">
-                <a href="../../docs/protocols/PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md" class="btn-protocol" target="_blank">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                    View PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md
-                </a>
-            </div>
-        </div>
-        
-
-        <div class="card gap-card" data-matrix="free" data-template="free_precursor_sulfur_yield" data-class="meaty">
-            <div class="card-header">
-                <div class="card-rank">#11</div>
-                <div class="card-title-group">
-                    <h3>2-Methyl-3-furanthiol (MFT)</h3>
-                    <div class="card-subtitle">Hofmann 1998 (C2c3 + Recombination + 20min + Ph5, 145°C)</div>
-                </div>
-                <div class="card-voi" title="Value of Information: how much running this experiment reduces model uncertainty, weighted by sensory relevance (ODT proximity). Higher = higher priority.">6.28 VoI</div>
-            </div>
-            
-            <div class="card-body">
-                <div class="badges-row">
-                    <span class="badge badge-matrix">free matrix</span>
-                    <span class="badge badge-danger">OUTSIDE 90% CI</span>
-                    <span class="badge badge-template" title="Gap type: characterises why this experiment is high-priority">free precursor sulfur yield</span>
-                </div>
-                
-                <p class="rationale-text"><strong>Rationale</strong>: measured outside 90% CI by 0.19 dex; CI width 0.21 dex; ≈8e+05× ODT (decision_relevance=5.00); critical meaty odorant in a FREE-PRECURSOR system — the open question is absolute yield vs precursor dose and temperature, not matrix transfer</p>
-                
-                <!-- Chemistry brief section -->
-                <div class="chemistry-brief">
-                    <h4 class="chem-title">Sulfur-Maillard (MFT) Pathway</h4>
-                    <p class="chem-desc">Formed via thiolation of pentose/hexose dehydration intermediates (deoxyosones) with hydrogen sulfide.</p>
-                    <ol class="chem-steps">
-                        <li><strong>Sugar Dehydration</strong>: D-Ribose/D-Glucose &rarr; 3-Deoxyosone + H<sub>2</sub>O</li><li><strong>Cysteine Degradation</strong>: L-Cysteine + H<sub>2</sub>O &rarr; H<sub>2</sub>S + Ammonia + Acetaldehyde + CO<sub>2</sub></li><li><strong>Thiol Addition</strong>: 3-Deoxyosone + H<sub>2</sub>S &rarr; 2-Methyl-3-furanthiol + H<sub>2</sub>O</li>
-                    </ol>
-                </div>
-                
-                
-                <!-- Quantitative bounds grid -->
-                <div class="quant-grid">
-                    <div class="quant-item">
-                        <span class="quant-label">Measured (Lit)</span>
-                        <span class="quant-value">5.36e+03 ppb</span>
-                    </div>
-                    <div class="quant-item">
-                        <span class="quant-label">Model Median (P50)</span>
-                        <span class="quant-value">2.96e+03 ppb</span>
-                    </div>
-                    <div class="quant-item">
-                        <span class="quant-label">90% Confidence Interval</span>
-                        <span class="quant-value">2.11e+03 &ndash; 3.45e+03 ppb</span>
-                    </div>
-                    
-                    <div class="quant-item">
-                        <span class="quant-label">Odour Threshold (ODT)</span>
-                        <span class="quant-value">0.007 ppb</span>
-                    </div>
-            
-                </div>
-        
-                
-                <!-- Log scale visualization bar -->
-                <div class="scale-section">
-                    <div class="scale-header">
-                        <span>Model uncertainty vs. observation (log₁₀ ppb) — band width reflects how well-constrained the prediction is</span>
-                    </div>
-                    <div class="scale-container">
-                        <div class="scale-bounds">
-                            <span>1.94e+03 ppb</span>
-                            <span>3.36e+03 ppb</span>
-                            <span>5.83e+03 ppb</span>
-                        </div>
-                        <div class="scale-bar-track">
-                            <div class="scale-bar-ci outside" style="left: 7.561739681850494%; width: 44.74264463614119%;"></div>
-                            <div class="scale-p50" style="left: 38.31658430303277%;" title="Model Median (P50): 2.96e+03 ppb"></div>
-                            <div class="scale-marker" style="left: 92.43826031814952%;" title="Measured: 5.36e+03 ppb"></div>
-                        </div>
-                        <div class="scale-legend">
-                            <span class="legend-item"><span class="legend-dot ci-dot outside"></span>90% CI (2.11e+03 - 3.45e+03 ppb)</span>
-                            <span class="legend-item"><span class="legend-dot p50-dot"></span>Median (2.96e+03 ppb)</span>
-                            <span class="legend-item"><span class="legend-dot measured-dot"></span>Measured (5.36e+03 ppb)</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="card-footer">
-                <a href="../../docs/protocols/PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md" class="btn-protocol" target="_blank">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                    View PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md
-                </a>
-            </div>
-        </div>
-        
-
         <div class="card gap-card" data-matrix="free" data-template="missing_absolute_anchor" data-class="kinetics">
             <div class="card-header">
-                <div class="card-rank">#12</div>
+                <div class="card-rank">#2</div>
                 <div class="card-title-group">
                     <h3>DMHF</h3>
                     <div class="card-subtitle">Schibilsky 2019 (Mp + Holdout + Glucose + Alanine + 2h + Ph80, 130°C)</div>
@@ -1680,9 +820,9 @@
                             <span>1.18e+04 ppb</span>
                         </div>
                         <div class="scale-bar-track">
-                            <div class="scale-bar-ci outside" style="left: 8.471966395424696%; width: 27.025541697432217%;"></div>
-                            <div class="scale-p50" style="left: 22.736282492371984%;" title="Model Median (P50): 21.2 ppb"></div>
-                            <div class="scale-marker" style="left: 91.52803360457531%;" title="Measured: 5.89e+03 ppb"></div>
+                            <div class="scale-bar-ci outside" style="left: 8.471966395083559%; width: 27.025541700404215%;"></div>
+                            <div class="scale-p50" style="left: 22.736282495594658%;" title="Model Median (P50): 21.2 ppb"></div>
+                            <div class="scale-marker" style="left: 91.52803360491646%;" title="Measured: 5.89e+03 ppb"></div>
                         </div>
                         <div class="scale-legend">
                             <span class="legend-item"><span class="legend-dot ci-dot outside"></span>90% CI (6.6 - 60.2 ppb)</span>
@@ -1704,432 +844,7 @@
 
         <div class="card gap-card" data-matrix="free" data-template="free_precursor_sulfur_yield" data-class="meaty">
             <div class="card-header">
-                <div class="card-rank">#13</div>
-                <div class="card-title-group">
-                    <h3>2-Furfurylthiol (FFT)</h3>
-                    <div class="card-subtitle">Yiltirak 2026 (Mp + Holdout + Ribose + Cys + Buffer + 30min, 130°C)</div>
-                </div>
-                <div class="card-voi" title="Value of Information: how much running this experiment reduces model uncertainty, weighted by sensory relevance (ODT proximity). Higher = higher priority.">5.90 VoI</div>
-            </div>
-            
-            <div class="card-body">
-                <div class="badges-row">
-                    <span class="badge badge-matrix">free matrix</span>
-                    <span class="badge badge-danger">OUTSIDE 90% CI</span>
-                    <span class="badge badge-template" title="Gap type: characterises why this experiment is high-priority">free precursor sulfur yield</span>
-                </div>
-                
-                <p class="rationale-text"><strong>Rationale</strong>: measured outside 90% CI by 0.21 dex; CI width 1.80 dex; ≈2e+03× ODT (decision_relevance=3.37); critical meaty odorant in a FREE-PRECURSOR system — the open question is absolute yield vs precursor dose and temperature, not matrix transfer</p>
-                
-                <!-- Chemistry brief section -->
-                <div class="chemistry-brief">
-                    <h4 class="chem-title">Furanthiol (FFT) Pathway</h4>
-                    <p class="chem-desc">Formed via nucleophilic addition of hydrogen sulfide to furfural under reducing conditions.</p>
-                    <ol class="chem-steps">
-                        <li><strong>Sugar Dehydration</strong>: D-Ribose &rarr; Furfural + 3 H<sub>2</sub>O</li><li><strong>Cysteine Degradation</strong>: L-Cysteine + H<sub>2</sub>O &rarr; H<sub>2</sub>S + Ammonia + Acetaldehyde + CO<sub>2</sub></li><li><strong>Thiol Addition (Reduction)</strong>: Furfural + H<sub>2</sub>S + [H] &rarr; 2-Furfurylthiol + H<sub>2</sub>O</li>
-                    </ol>
-                </div>
-                
-                
-                <!-- Quantitative bounds grid -->
-                <div class="quant-grid">
-                    <div class="quant-item">
-                        <span class="quant-label">Measured (Lit)</span>
-                        <span class="quant-value">1.62 ppb</span>
-                    </div>
-                    <div class="quant-item">
-                        <span class="quant-label">Model Median (P50)</span>
-                        <span class="quant-value">23.4 ppb</span>
-                    </div>
-                    <div class="quant-item">
-                        <span class="quant-label">90% Confidence Interval</span>
-                        <span class="quant-value">2.63 &ndash; 166 ppb</span>
-                    </div>
-                    
-                    <div class="quant-item">
-                        <span class="quant-label">Odour Threshold (ODT)</span>
-                        <span class="quant-value">0.01 ppb</span>
-                    </div>
-            
-                </div>
-        
-                
-                <!-- Log scale visualization bar -->
-                <div class="scale-section">
-                    <div class="scale-header">
-                        <span>Model uncertainty vs. observation (log₁₀ ppb) — band width reflects how well-constrained the prediction is</span>
-                    </div>
-                    <div class="scale-container">
-                        <div class="scale-bounds">
-                            <span>0.81 ppb</span>
-                            <span>16.4 ppb</span>
-                            <span>332 ppb</span>
-                        </div>
-                        <div class="scale-bar-track">
-                            <div class="scale-bar-ci outside" style="left: 19.548743621989832%; width: 68.92971064409244%;"></div>
-                            <div class="scale-p50" style="left: 55.90319249653862%;" title="Model Median (P50): 23.4 ppb"></div>
-                            <div class="scale-marker" style="left: 11.52154573391773%;" title="Measured: 1.62 ppb"></div>
-                        </div>
-                        <div class="scale-legend">
-                            <span class="legend-item"><span class="legend-dot ci-dot outside"></span>90% CI (2.63 - 166 ppb)</span>
-                            <span class="legend-item"><span class="legend-dot p50-dot"></span>Median (23.4 ppb)</span>
-                            <span class="legend-item"><span class="legend-dot measured-dot"></span>Measured (1.62 ppb)</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="card-footer">
-                <a href="../../docs/protocols/PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md" class="btn-protocol" target="_blank">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                    View PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md
-                </a>
-            </div>
-        </div>
-        
-
-        <div class="card gap-card" data-matrix="free" data-template="free_precursor_sulfur_yield" data-class="meaty">
-            <div class="card-header">
-                <div class="card-rank">#14</div>
-                <div class="card-title-group">
-                    <h3>2-Furfurylthiol (FFT)</h3>
-                    <div class="card-subtitle">mp_holdout_arp_glutathione_120C_60min_pH75_Zhou2023c</div>
-                </div>
-                <div class="card-voi" title="Value of Information: how much running this experiment reduces model uncertainty, weighted by sensory relevance (ODT proximity). Higher = higher priority.">5.85 VoI</div>
-            </div>
-            
-            <div class="card-body">
-                <div class="badges-row">
-                    <span class="badge badge-matrix">free matrix</span>
-                    <span class="badge badge-success">Inside 90% CI</span>
-                    <span class="badge badge-template" title="Gap type: characterises why this experiment is high-priority">free precursor sulfur yield</span>
-                </div>
-                
-                <p class="rationale-text"><strong>Rationale</strong>: CI width 4.26 dex; ≈4e+04× ODT (decision_relevance=4.58); critical meaty odorant in a FREE-PRECURSOR system — the open question is absolute yield vs precursor dose and temperature, not matrix transfer</p>
-                
-                <!-- Chemistry brief section -->
-                <div class="chemistry-brief">
-                    <h4 class="chem-title">Furanthiol (FFT) Pathway</h4>
-                    <p class="chem-desc">Formed via nucleophilic addition of hydrogen sulfide to furfural under reducing conditions.</p>
-                    <ol class="chem-steps">
-                        <li><strong>Sugar Dehydration</strong>: D-Ribose &rarr; Furfural + 3 H<sub>2</sub>O</li><li><strong>Cysteine Degradation</strong>: L-Cysteine + H<sub>2</sub>O &rarr; H<sub>2</sub>S + Ammonia + Acetaldehyde + CO<sub>2</sub></li><li><strong>Thiol Addition (Reduction)</strong>: Furfural + H<sub>2</sub>S + [H] &rarr; 2-Furfurylthiol + H<sub>2</sub>O</li>
-                    </ol>
-                </div>
-                
-                
-                <!-- Quantitative bounds grid -->
-                <div class="quant-grid">
-                    <div class="quant-item">
-                        <span class="quant-label">Measured (Lit)</span>
-                        <span class="quant-value">383 ppb</span>
-                    </div>
-                    <div class="quant-item">
-                        <span class="quant-label">Model Median (P50)</span>
-                        <span class="quant-value">4.56 ppb</span>
-                    </div>
-                    <div class="quant-item">
-                        <span class="quant-label">90% Confidence Interval</span>
-                        <span class="quant-value">0.0246 &ndash; 445 ppb</span>
-                    </div>
-                    
-                    <div class="quant-item">
-                        <span class="quant-label">Odour Threshold (ODT)</span>
-                        <span class="quant-value">0.01 ppb</span>
-                    </div>
-            
-                </div>
-        
-                
-                <!-- Log scale visualization bar -->
-                <div class="scale-section">
-                    <div class="scale-header">
-                        <span>Model uncertainty vs. observation (log₁₀ ppb) — band width reflects how well-constrained the prediction is</span>
-                    </div>
-                    <div class="scale-container">
-                        <div class="scale-bounds">
-                            <span>0.0123 ppb</span>
-                            <span>3.31 ppb</span>
-                            <span>891 ppb</span>
-                        </div>
-                        <div class="scale-bar-track">
-                            <div class="scale-bar-ci inside" style="left: 6.194165860279139%; width: 87.61166827944172%;"></div>
-                            <div class="scale-p50" style="left: 52.86184094268963%;" title="Model Median (P50): 4.56 ppb"></div>
-                            <div class="scale-marker" style="left: 92.45510585648596%;" title="Measured: 383 ppb"></div>
-                        </div>
-                        <div class="scale-legend">
-                            <span class="legend-item"><span class="legend-dot ci-dot inside"></span>90% CI (0.0246 - 445 ppb)</span>
-                            <span class="legend-item"><span class="legend-dot p50-dot"></span>Median (4.56 ppb)</span>
-                            <span class="legend-item"><span class="legend-dot measured-dot"></span>Measured (383 ppb)</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="card-footer">
-                <a href="../../docs/protocols/PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md" class="btn-protocol" target="_blank">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                    View PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md
-                </a>
-            </div>
-        </div>
-        
-
-        <div class="card gap-card" data-matrix="free" data-template="free_precursor_sulfur_yield" data-class="meaty">
-            <div class="card-header">
-                <div class="card-rank">#15</div>
-                <div class="card-title-group">
-                    <h3>2-Furfurylthiol (FFT)</h3>
-                    <div class="card-subtitle">mp_holdout_arp_glutathione_120C_90min_pH75_Zhou2023c</div>
-                </div>
-                <div class="card-voi" title="Value of Information: how much running this experiment reduces model uncertainty, weighted by sensory relevance (ODT proximity). Higher = higher priority.">5.83 VoI</div>
-            </div>
-            
-            <div class="card-body">
-                <div class="badges-row">
-                    <span class="badge badge-matrix">free matrix</span>
-                    <span class="badge badge-success">Inside 90% CI</span>
-                    <span class="badge badge-template" title="Gap type: characterises why this experiment is high-priority">free precursor sulfur yield</span>
-                </div>
-                
-                <p class="rationale-text"><strong>Rationale</strong>: CI width 4.39 dex; ≈3e+04× ODT (decision_relevance=4.43); critical meaty odorant in a FREE-PRECURSOR system — the open question is absolute yield vs precursor dose and temperature, not matrix transfer</p>
-                
-                <!-- Chemistry brief section -->
-                <div class="chemistry-brief">
-                    <h4 class="chem-title">Furanthiol (FFT) Pathway</h4>
-                    <p class="chem-desc">Formed via nucleophilic addition of hydrogen sulfide to furfural under reducing conditions.</p>
-                    <ol class="chem-steps">
-                        <li><strong>Sugar Dehydration</strong>: D-Ribose &rarr; Furfural + 3 H<sub>2</sub>O</li><li><strong>Cysteine Degradation</strong>: L-Cysteine + H<sub>2</sub>O &rarr; H<sub>2</sub>S + Ammonia + Acetaldehyde + CO<sub>2</sub></li><li><strong>Thiol Addition (Reduction)</strong>: Furfural + H<sub>2</sub>S + [H] &rarr; 2-Furfurylthiol + H<sub>2</sub>O</li>
-                    </ol>
-                </div>
-                
-                
-                <!-- Quantitative bounds grid -->
-                <div class="quant-grid">
-                    <div class="quant-item">
-                        <span class="quant-label">Measured (Lit)</span>
-                        <span class="quant-value">270 ppb</span>
-                    </div>
-                    <div class="quant-item">
-                        <span class="quant-label">Model Median (P50)</span>
-                        <span class="quant-value">4.76 ppb</span>
-                    </div>
-                    <div class="quant-item">
-                        <span class="quant-label">90% Confidence Interval</span>
-                        <span class="quant-value">0.0237 &ndash; 576 ppb</span>
-                    </div>
-                    
-                    <div class="quant-item">
-                        <span class="quant-label">Odour Threshold (ODT)</span>
-                        <span class="quant-value">0.01 ppb</span>
-                    </div>
-            
-                </div>
-        
-                
-                <!-- Log scale visualization bar -->
-                <div class="scale-section">
-                    <div class="scale-header">
-                        <span>Model uncertainty vs. observation (log₁₀ ppb) — band width reflects how well-constrained the prediction is</span>
-                    </div>
-                    <div class="scale-container">
-                        <div class="scale-bounds">
-                            <span>0.0118 ppb</span>
-                            <span>3.69 ppb</span>
-                            <span>1.15e+03 ppb</span>
-                        </div>
-                        <div class="scale-bar-track">
-                            <div class="scale-bar-ci inside" style="left: 6.034351699500712%; width: 87.93129660099856%;"></div>
-                            <div class="scale-p50" style="left: 52.21167843606825%;" title="Model Median (P50): 4.76 ppb"></div>
-                            <div class="scale-marker" style="left: 87.36280036554757%;" title="Measured: 270 ppb"></div>
-                        </div>
-                        <div class="scale-legend">
-                            <span class="legend-item"><span class="legend-dot ci-dot inside"></span>90% CI (0.0237 - 576 ppb)</span>
-                            <span class="legend-item"><span class="legend-dot p50-dot"></span>Median (4.76 ppb)</span>
-                            <span class="legend-item"><span class="legend-dot measured-dot"></span>Measured (270 ppb)</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="card-footer">
-                <a href="../../docs/protocols/PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md" class="btn-protocol" target="_blank">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                    View PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md
-                </a>
-            </div>
-        </div>
-        
-
-        <div class="card gap-card" data-matrix="soy_iso" data-template="missing_absolute_anchor" data-class="safety">
-            <div class="card-header">
-                <div class="card-rank">#18</div>
-                <div class="card-title-group">
-                    <h3>acrylamide</h3>
-                    <div class="card-subtitle">ACSRef3 (SPI Extrusion, 130°C)</div>
-                </div>
-                <div class="card-voi" title="Value of Information: how much running this experiment reduces model uncertainty, weighted by sensory relevance (ODT proximity). Higher = higher priority.">4.93 VoI</div>
-            </div>
-            
-            <div class="card-body">
-                <div class="badges-row">
-                    <span class="badge badge-matrix">soy_iso matrix</span>
-                    <span class="badge badge-danger">OUTSIDE 90% CI</span>
-                    <span class="badge badge-template" title="Gap type: characterises why this experiment is high-priority">missing absolute anchor</span>
-                </div>
-                
-                <p class="rationale-text"><strong>Rationale</strong>: measured outside 90% CI by 3.77 dex; CI width 0.54 dex; safety marker — needs SIDA-grade absolute anchor</p>
-                
-                <!-- Chemistry brief section -->
-                <div class="chemistry-brief">
-                    <h4 class="chem-title">Asparagine-Maillard Pathway</h4>
-                    <p class="chem-desc">Formed from the condensation of L-asparagine with reducing sugars followed by decarboxylation.</p>
-                    <ol class="chem-steps">
-                        <li><strong>Schiff Base Formation</strong>: L-Asparagine + Glucose &rarr; Schiff Base + H<sub>2</sub>O</li><li><strong>Decarboxylation & Elimination</strong>: Schiff Base &rarr; Acrylamide + CO<sub>2</sub> + other fragments</li>
-                    </ol>
-                </div>
-                
-                
-                <!-- Quantitative bounds grid -->
-                <div class="quant-grid">
-                    <div class="quant-item">
-                        <span class="quant-label">Measured (Lit)</span>
-                        <span class="quant-value">150 ppb</span>
-                    </div>
-                    <div class="quant-item">
-                        <span class="quant-label">Model Median (P50)</span>
-                        <span class="quant-value">0.0155 ppb</span>
-                    </div>
-                    <div class="quant-item">
-                        <span class="quant-label">90% Confidence Interval</span>
-                        <span class="quant-value">0.00741 &ndash; 0.0255 ppb</span>
-                    </div>
-                    
-                </div>
-        
-                
-                <!-- Log scale visualization bar -->
-                <div class="scale-section">
-                    <div class="scale-header">
-                        <span>Model uncertainty vs. observation (log₁₀ ppb) — band width reflects how well-constrained the prediction is</span>
-                    </div>
-                    <div class="scale-container">
-                        <div class="scale-bounds">
-                            <span>0.0037 ppb</span>
-                            <span>1.05 ppb</span>
-                            <span>300 ppb</span>
-                        </div>
-                        <div class="scale-bar-track">
-                            <div class="scale-bar-ci outside" style="left: 6.1328629491977695%; width: 10.925142952103556%;"></div>
-                            <div class="scale-p50" style="left: 12.687612211456615%;" title="Model Median (P50): 0.0155 ppb"></div>
-                            <div class="scale-marker" style="left: 93.86713705080223%;" title="Measured: 150 ppb"></div>
-                        </div>
-                        <div class="scale-legend">
-                            <span class="legend-item"><span class="legend-dot ci-dot outside"></span>90% CI (0.00741 - 0.0255 ppb)</span>
-                            <span class="legend-item"><span class="legend-dot p50-dot"></span>Median (0.0155 ppb)</span>
-                            <span class="legend-item"><span class="legend-dot measured-dot"></span>Measured (150 ppb)</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="card-footer">
-                <a href="../../docs/protocols/PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md" class="btn-protocol" target="_blank">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                    View PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md
-                </a>
-            </div>
-        </div>
-        
-
-        <div class="card gap-card" data-matrix="free" data-template="free_precursor_sulfur_yield" data-class="meaty">
-            <div class="card-header">
-                <div class="card-rank">#20</div>
-                <div class="card-title-group">
-                    <h3>2-Methyl-3-furanthiol (MFT)</h3>
-                    <div class="card-subtitle">Yiltirak 2026 (Mp + Holdout + Ribose + Cys + Buffer + 30min, 130°C)</div>
-                </div>
-                <div class="card-voi" title="Value of Information: how much running this experiment reduces model uncertainty, weighted by sensory relevance (ODT proximity). Higher = higher priority.">4.75 VoI</div>
-            </div>
-            
-            <div class="card-body">
-                <div class="badges-row">
-                    <span class="badge badge-matrix">free matrix</span>
-                    <span class="badge badge-danger">OUTSIDE 90% CI</span>
-                    <span class="badge badge-template" title="Gap type: characterises why this experiment is high-priority">free precursor sulfur yield</span>
-                </div>
-                
-                <p class="rationale-text"><strong>Rationale</strong>: measured outside 90% CI by 0.17 dex; CI width 1.15 dex; ≈1e+03× ODT (decision_relevance=3.14); critical meaty odorant in a FREE-PRECURSOR system — the open question is absolute yield vs precursor dose and temperature, not matrix transfer</p>
-                
-                <!-- Chemistry brief section -->
-                <div class="chemistry-brief">
-                    <h4 class="chem-title">Sulfur-Maillard (MFT) Pathway</h4>
-                    <p class="chem-desc">Formed via thiolation of pentose/hexose dehydration intermediates (deoxyosones) with hydrogen sulfide.</p>
-                    <ol class="chem-steps">
-                        <li><strong>Sugar Dehydration</strong>: D-Ribose/D-Glucose &rarr; 3-Deoxyosone + H<sub>2</sub>O</li><li><strong>Cysteine Degradation</strong>: L-Cysteine + H<sub>2</sub>O &rarr; H<sub>2</sub>S + Ammonia + Acetaldehyde + CO<sub>2</sub></li><li><strong>Thiol Addition</strong>: 3-Deoxyosone + H<sub>2</sub>S &rarr; 2-Methyl-3-furanthiol + H<sub>2</sub>O</li>
-                    </ol>
-                </div>
-                
-                
-                <!-- Quantitative bounds grid -->
-                <div class="quant-grid">
-                    <div class="quant-item">
-                        <span class="quant-label">Measured (Lit)</span>
-                        <span class="quant-value">1.71 ppb</span>
-                    </div>
-                    <div class="quant-item">
-                        <span class="quant-label">Model Median (P50)</span>
-                        <span class="quant-value">9.59 ppb</span>
-                    </div>
-                    <div class="quant-item">
-                        <span class="quant-label">90% Confidence Interval</span>
-                        <span class="quant-value">2.53 &ndash; 35.3 ppb</span>
-                    </div>
-                    
-                    <div class="quant-item">
-                        <span class="quant-label">Odour Threshold (ODT)</span>
-                        <span class="quant-value">0.007 ppb</span>
-                    </div>
-            
-                </div>
-        
-                
-                <!-- Log scale visualization bar -->
-                <div class="scale-section">
-                    <div class="scale-header">
-                        <span>Model uncertainty vs. observation (log₁₀ ppb) — band width reflects how well-constrained the prediction is</span>
-                    </div>
-                    <div class="scale-container">
-                        <div class="scale-bounds">
-                            <span>0.855 ppb</span>
-                            <span>7.77 ppb</span>
-                            <span>70.6 ppb</span>
-                        </div>
-                        <div class="scale-bar-track">
-                            <div class="scale-bar-ci outside" style="left: 24.552543042964615%; width: 59.74333601211083%;"></div>
-                            <div class="scale-p50" style="left: 54.769517635594184%;" title="Model Median (P50): 9.59 ppb"></div>
-                            <div class="scale-marker" style="left: 15.70412094492455%;" title="Measured: 1.71 ppb"></div>
-                        </div>
-                        <div class="scale-legend">
-                            <span class="legend-item"><span class="legend-dot ci-dot outside"></span>90% CI (2.53 - 35.3 ppb)</span>
-                            <span class="legend-item"><span class="legend-dot p50-dot"></span>Median (9.59 ppb)</span>
-                            <span class="legend-item"><span class="legend-dot measured-dot"></span>Measured (1.71 ppb)</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="card-footer">
-                <a href="../../docs/protocols/PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md" class="btn-protocol" target="_blank">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                    View PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md
-                </a>
-            </div>
-        </div>
-        
-
-        <div class="card gap-card" data-matrix="free" data-template="free_precursor_sulfur_yield" data-class="meaty">
-            <div class="card-header">
-                <div class="card-rank">#21</div>
+                <div class="card-rank">#3</div>
                 <div class="card-title-group">
                     <h3>2-Acetylthiazole</h3>
                     <div class="card-subtitle">mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b</div>
@@ -2210,12 +925,12 @@
 
         <div class="card gap-card" data-matrix="free" data-template="missing_absolute_anchor" data-class="safety">
             <div class="card-header">
-                <div class="card-rank">#24</div>
+                <div class="card-rank">#4</div>
                 <div class="card-title-group">
                     <h3>Acrylamide</h3>
                     <div class="card-subtitle">Chang 2021 (Mp + Holdout + Glucose + Asparagine + 10min, 180°C)</div>
                 </div>
-                <div class="card-voi" title="Value of Information: how much running this experiment reduces model uncertainty, weighted by sensory relevance (ODT proximity). Higher = higher priority.">3.10 VoI</div>
+                <div class="card-voi" title="Value of Information: how much running this experiment reduces model uncertainty, weighted by sensory relevance (ODT proximity). Higher = higher priority.">3.03 VoI</div>
             </div>
             
             <div class="card-body">
@@ -2225,7 +940,7 @@
                     <span class="badge badge-template" title="Gap type: characterises why this experiment is high-priority">missing absolute anchor</span>
                 </div>
                 
-                <p class="rationale-text"><strong>Rationale</strong>: measured outside 90% CI by 1.84 dex; CI width 0.86 dex; safety marker — needs SIDA-grade absolute anchor</p>
+                <p class="rationale-text"><strong>Rationale</strong>: measured outside 90% CI by 1.74 dex; CI width 0.97 dex; safety marker — needs SIDA-grade absolute anchor</p>
                 
                 <!-- Chemistry brief section -->
                 <div class="chemistry-brief">
@@ -2245,11 +960,11 @@
                     </div>
                     <div class="quant-item">
                         <span class="quant-label">Model Median (P50)</span>
-                        <span class="quant-value">5.68e+03 ppb</span>
+                        <span class="quant-value">4.8e+03 ppb</span>
                     </div>
                     <div class="quant-item">
                         <span class="quant-label">90% Confidence Interval</span>
-                        <span class="quant-value">1.94e+03 &ndash; 1.42e+04 ppb</span>
+                        <span class="quant-value">1.53e+03 &ndash; 1.43e+04 ppb</span>
                     </div>
                     
                 </div>
@@ -2263,17 +978,17 @@
                     <div class="scale-container">
                         <div class="scale-bounds">
                             <span>14 ppb</span>
-                            <span>631 ppb</span>
-                            <span>2.84e+04 ppb</span>
+                            <span>632 ppb</span>
+                            <span>2.85e+04 ppb</span>
                         </div>
                         <div class="scale-bar-track">
-                            <div class="scale-bar-ci outside" style="left: 64.76284062478206%; width: 26.13673744666052%;"></div>
-                            <div class="scale-p50" style="left: 78.84015890765029%;" title="Model Median (P50): 5.68e+03 ppb"></div>
-                            <div class="scale-marker" style="left: 9.100421928557449%;" title="Measured: 28 ppb"></div>
+                            <div class="scale-bar-ci outside" style="left: 61.650319080793984%; width: 29.252219245986943%;"></div>
+                            <div class="scale-p50" style="left: 76.60583417589858%;" title="Model Median (P50): 4.8e+03 ppb"></div>
+                            <div class="scale-marker" style="left: 9.097461673219064%;" title="Measured: 28 ppb"></div>
                         </div>
                         <div class="scale-legend">
-                            <span class="legend-item"><span class="legend-dot ci-dot outside"></span>90% CI (1.94e+03 - 1.42e+04 ppb)</span>
-                            <span class="legend-item"><span class="legend-dot p50-dot"></span>Median (5.68e+03 ppb)</span>
+                            <span class="legend-item"><span class="legend-dot ci-dot outside"></span>90% CI (1.53e+03 - 1.43e+04 ppb)</span>
+                            <span class="legend-item"><span class="legend-dot p50-dot"></span>Median (4.8e+03 ppb)</span>
                             <span class="legend-item"><span class="legend-dot measured-dot"></span>Measured (28 ppb)</span>
                         </div>
                     </div>
@@ -2291,7 +1006,7 @@
 
         <div class="card gap-card" data-matrix="free" data-template="missing_absolute_anchor" data-class="kinetics">
             <div class="card-header">
-                <div class="card-rank">#27</div>
+                <div class="card-rank">#5</div>
                 <div class="card-title-group">
                     <h3>DMHF</h3>
                     <div class="card-subtitle">Schibilsky 2019 (Mp + Holdout + Glucose + Alanine + 2h + Ph50, 130°C)</div>
@@ -2353,9 +1068,9 @@
                             <span>2.31e+03 ppb</span>
                         </div>
                         <div class="scale-bar-track">
-                            <div class="scale-bar-ci outside" style="left: 10.582012647032686%; width: 33.75658149323911%;"></div>
-                            <div class="scale-p50" style="left: 28.39903012489785%;" title="Model Median (P50): 21.2 ppb"></div>
-                            <div class="scale-marker" style="left: 89.41798735296732%;" title="Measured: 1.15e+03 ppb"></div>
+                            <div class="scale-bar-ci outside" style="left: 10.58201264650046%; width: 33.75658149661278%;"></div>
+                            <div class="scale-p50" style="left: 28.399030128638362%;" title="Model Median (P50): 21.2 ppb"></div>
+                            <div class="scale-marker" style="left: 89.41798735349954%;" title="Measured: 1.15e+03 ppb"></div>
                         </div>
                         <div class="scale-legend">
                             <span class="legend-item"><span class="legend-dot ci-dot outside"></span>90% CI (6.6 - 60.2 ppb)</span>
@@ -2377,12 +1092,12 @@
 
         <div class="card gap-card" data-matrix="free" data-template="missing_absolute_anchor" data-class="kinetics">
             <div class="card-header">
-                <div class="card-rank">#29</div>
+                <div class="card-rank">#6</div>
                 <div class="card-title-group">
                     <h3>glucosone</h3>
                     <div class="card-subtitle">Steinhagen 2021 (Mp + Holdout + Glucose + Autoclave, 121°C)</div>
                 </div>
-                <div class="card-voi" title="Value of Information: how much running this experiment reduces model uncertainty, weighted by sensory relevance (ODT proximity). Higher = higher priority.">2.80 VoI</div>
+                <div class="card-voi" title="Value of Information: how much running this experiment reduces model uncertainty, weighted by sensory relevance (ODT proximity). Higher = higher priority.">2.53 VoI</div>
             </div>
             
             <div class="card-body">
@@ -2392,7 +1107,7 @@
                     <span class="badge badge-template" title="Gap type: characterises why this experiment is high-priority">missing absolute anchor</span>
                 </div>
                 
-                <p class="rationale-text"><strong>Rationale</strong>: measured outside 90% CI by 1.80 dex; CI width 0.00 dex; anchor measurement to constrain prior</p>
+                <p class="rationale-text"><strong>Rationale</strong>: measured outside 90% CI by 1.53 dex; CI width 0.00 dex; anchor measurement to constrain prior</p>
                 
                 <!-- Chemistry brief section -->
                 <div class="chemistry-brief">
@@ -2412,11 +1127,11 @@
                     </div>
                     <div class="quant-item">
                         <span class="quant-label">Model Median (P50)</span>
-                        <span class="quant-value">119 ppb</span>
+                        <span class="quant-value">219 ppb</span>
                     </div>
                     <div class="quant-item">
                         <span class="quant-label">90% Confidence Interval</span>
-                        <span class="quant-value">119 &ndash; 119 ppb</span>
+                        <span class="quant-value">219 &ndash; 219 ppb</span>
                     </div>
                     
                 </div>
@@ -2429,100 +1144,19 @@
                     </div>
                     <div class="scale-container">
                         <div class="scale-bounds">
-                            <span>59.5 ppb</span>
-                            <span>944 ppb</span>
+                            <span>109 ppb</span>
+                            <span>1.28e+03 ppb</span>
                             <span>1.5e+04 ppb</span>
                         </div>
                         <div class="scale-bar-track">
-                            <div class="scale-bar-ci outside" style="left: 12.533173660726193%; width: 1.0%;"></div>
-                            <div class="scale-p50" style="left: 12.558362311680783%;" title="Model Median (P50): 119 ppb"></div>
-                            <div class="scale-marker" style="left: 87.4668263392738%;" title="Measured: 7.5e+03 ppb"></div>
+                            <div class="scale-bar-ci outside" style="left: 14.087654559739219%; width: 1.0%;"></div>
+                            <div class="scale-p50" style="left: 14.103039234159416%;" title="Model Median (P50): 219 ppb"></div>
+                            <div class="scale-marker" style="left: 85.91234544026078%;" title="Measured: 7.5e+03 ppb"></div>
                         </div>
                         <div class="scale-legend">
-                            <span class="legend-item"><span class="legend-dot ci-dot outside"></span>90% CI (119 - 119 ppb)</span>
-                            <span class="legend-item"><span class="legend-dot p50-dot"></span>Median (119 ppb)</span>
+                            <span class="legend-item"><span class="legend-dot ci-dot outside"></span>90% CI (219 - 219 ppb)</span>
+                            <span class="legend-item"><span class="legend-dot p50-dot"></span>Median (219 ppb)</span>
                             <span class="legend-item"><span class="legend-dot measured-dot"></span>Measured (7.5e+03 ppb)</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="card-footer">
-                <a href="../../docs/protocols/PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md" class="btn-protocol" target="_blank">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                    View PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md
-                </a>
-            </div>
-        </div>
-        
-
-        <div class="card gap-card" data-matrix="free" data-template="missing_absolute_anchor" data-class="kinetics">
-            <div class="card-header">
-                <div class="card-rank">#31</div>
-                <div class="card-title-group">
-                    <h3>glyoxal</h3>
-                    <div class="card-subtitle">Steinhagen 2021 (Mp + Holdout + Glucose + Autoclave, 121°C)</div>
-                </div>
-                <div class="card-voi" title="Value of Information: how much running this experiment reduces model uncertainty, weighted by sensory relevance (ODT proximity). Higher = higher priority.">2.46 VoI</div>
-            </div>
-            
-            <div class="card-body">
-                <div class="badges-row">
-                    <span class="badge badge-matrix">free matrix</span>
-                    <span class="badge badge-danger">OUTSIDE 90% CI</span>
-                    <span class="badge badge-template" title="Gap type: characterises why this experiment is high-priority">missing absolute anchor</span>
-                </div>
-                
-                <p class="rationale-text"><strong>Rationale</strong>: measured outside 90% CI by 1.44 dex; CI width 0.09 dex; anchor measurement to constrain prior</p>
-                
-                <!-- Chemistry brief section -->
-                <div class="chemistry-brief">
-                    <h4 class="chem-title">glyoxal Synthesis pathway</h4>
-                    <p class="chem-desc">Formed via thermal Maillard precursor interaction in the free matrix.</p>
-                    <ol class="chem-steps">
-                        <li><strong>Precursor Activation</strong>: Matrix components and thermal energy trigger reactive cascades.</li><li><strong>Product Condensation</strong>: Intermediates react to yield target glyoxal.</li>
-                    </ol>
-                </div>
-                
-                
-                <!-- Quantitative bounds grid -->
-                <div class="quant-grid">
-                    <div class="quant-item">
-                        <span class="quant-label">Measured (Lit)</span>
-                        <span class="quant-value">5.6e+03 ppb</span>
-                    </div>
-                    <div class="quant-item">
-                        <span class="quant-label">Model Median (P50)</span>
-                        <span class="quant-value">200 ppb</span>
-                    </div>
-                    <div class="quant-item">
-                        <span class="quant-label">90% Confidence Interval</span>
-                        <span class="quant-value">168 &ndash; 205 ppb</span>
-                    </div>
-                    
-                </div>
-        
-                
-                <!-- Log scale visualization bar -->
-                <div class="scale-section">
-                    <div class="scale-header">
-                        <span>Model uncertainty vs. observation (log₁₀ ppb) — band width reflects how well-constrained the prediction is</span>
-                    </div>
-                    <div class="scale-container">
-                        <div class="scale-bounds">
-                            <span>84.2 ppb</span>
-                            <span>971 ppb</span>
-                            <span>1.12e+04 ppb</span>
-                        </div>
-                        <div class="scale-bar-track">
-                            <div class="scale-bar-ci outside" style="left: 14.173821050385431%; width: 4.022389014271841%;"></div>
-                            <div class="scale-p50" style="left: 17.707003153963925%;" title="Model Median (P50): 200 ppb"></div>
-                            <div class="scale-marker" style="left: 85.82617894961453%;" title="Measured: 5.6e+03 ppb"></div>
-                        </div>
-                        <div class="scale-legend">
-                            <span class="legend-item"><span class="legend-dot ci-dot outside"></span>90% CI (168 - 205 ppb)</span>
-                            <span class="legend-item"><span class="legend-dot p50-dot"></span>Median (200 ppb)</span>
-                            <span class="legend-item"><span class="legend-dot measured-dot"></span>Measured (5.6e+03 ppb)</span>
                         </div>
                     </div>
                 </div>
@@ -2539,12 +1173,12 @@
 
         <div class="card gap-card" data-matrix="free" data-template="missing_absolute_anchor" data-class="safety">
             <div class="card-header">
-                <div class="card-rank">#36</div>
+                <div class="card-rank">#7</div>
                 <div class="card-title-group">
                     <h3>5-Hydroxymethylfurfural (HMF)</h3>
                     <div class="card-subtitle">Steinhagen 2021 (Mp + Holdout + Glucose + Autoclave, 121°C)</div>
                 </div>
-                <div class="card-voi" title="Value of Information: how much running this experiment reduces model uncertainty, weighted by sensory relevance (ODT proximity). Higher = higher priority.">1.89 VoI</div>
+                <div class="card-voi" title="Value of Information: how much running this experiment reduces model uncertainty, weighted by sensory relevance (ODT proximity). Higher = higher priority.">1.86 VoI</div>
             </div>
             
             <div class="card-body">
@@ -2554,7 +1188,7 @@
                     <span class="badge badge-template" title="Gap type: characterises why this experiment is high-priority">missing absolute anchor</span>
                 </div>
                 
-                <p class="rationale-text"><strong>Rationale</strong>: measured outside 90% CI by 0.60 dex; CI width 0.97 dex; safety marker — needs SIDA-grade absolute anchor</p>
+                <p class="rationale-text"><strong>Rationale</strong>: measured outside 90% CI by 0.59 dex; CI width 0.90 dex; safety marker — needs SIDA-grade absolute anchor</p>
                 
                 <!-- Chemistry brief section -->
                 <div class="chemistry-brief">
@@ -2574,11 +1208,11 @@
                     </div>
                     <div class="quant-item">
                         <span class="quant-label">Model Median (P50)</span>
-                        <span class="quant-value">1.32e+03 ppb</span>
+                        <span class="quant-value">1.41e+03 ppb</span>
                     </div>
                     <div class="quant-item">
                         <span class="quant-label">90% Confidence Interval</span>
-                        <span class="quant-value">472 &ndash; 4.41e+03 ppb</span>
+                        <span class="quant-value">568 &ndash; 4.48e+03 ppb</span>
                     </div>
                     
                 </div>
@@ -2591,18 +1225,18 @@
                     </div>
                     <div class="scale-container">
                         <div class="scale-bounds">
-                            <span>236 ppb</span>
-                            <span>2.86e+03 ppb</span>
+                            <span>284 ppb</span>
+                            <span>3.15e+03 ppb</span>
                             <span>3.48e+04 ppb</span>
                         </div>
                         <div class="scale-bar-track">
-                            <div class="scale-bar-ci outside" style="left: 13.878858570490697%; width: 44.74266077483207%;"></div>
-                            <div class="scale-p50" style="left: 34.44236713330585%;" title="Model Median (P50): 1.32e+03 ppb"></div>
-                            <div class="scale-marker" style="left: 86.12114142950931%;" title="Measured: 1.74e+04 ppb"></div>
+                            <div class="scale-bar-ci outside" style="left: 14.417849119434626%; width: 42.92491236896932%;"></div>
+                            <div class="scale-p50" style="left: 33.28937271540542%;" title="Model Median (P50): 1.41e+03 ppb"></div>
+                            <div class="scale-marker" style="left: 85.58215088056537%;" title="Measured: 1.74e+04 ppb"></div>
                         </div>
                         <div class="scale-legend">
-                            <span class="legend-item"><span class="legend-dot ci-dot outside"></span>90% CI (472 - 4.41e+03 ppb)</span>
-                            <span class="legend-item"><span class="legend-dot p50-dot"></span>Median (1.32e+03 ppb)</span>
+                            <span class="legend-item"><span class="legend-dot ci-dot outside"></span>90% CI (568 - 4.48e+03 ppb)</span>
+                            <span class="legend-item"><span class="legend-dot p50-dot"></span>Median (1.41e+03 ppb)</span>
                             <span class="legend-item"><span class="legend-dot measured-dot"></span>Measured (1.74e+04 ppb)</span>
                         </div>
                     </div>
@@ -2620,12 +1254,12 @@
 
         <div class="card gap-card" data-matrix="free" data-template="missing_absolute_anchor" data-class="safety">
             <div class="card-header">
-                <div class="card-rank">#38</div>
+                <div class="card-rank">#8</div>
                 <div class="card-title-group">
                     <h3>Acrylamide</h3>
                     <div class="card-subtitle">Lin 2022 (Mp + Holdout + Fructose + Asparagine, 180°C)</div>
                 </div>
-                <div class="card-voi" title="Value of Information: how much running this experiment reduces model uncertainty, weighted by sensory relevance (ODT proximity). Higher = higher priority.">1.79 VoI</div>
+                <div class="card-voi" title="Value of Information: how much running this experiment reduces model uncertainty, weighted by sensory relevance (ODT proximity). Higher = higher priority.">1.77 VoI</div>
             </div>
             
             <div class="card-body">
@@ -2635,7 +1269,7 @@
                     <span class="badge badge-template" title="Gap type: characterises why this experiment is high-priority">missing absolute anchor</span>
                 </div>
                 
-                <p class="rationale-text"><strong>Rationale</strong>: measured outside 90% CI by 0.52 dex; CI width 0.91 dex; safety marker — needs SIDA-grade absolute anchor</p>
+                <p class="rationale-text"><strong>Rationale</strong>: measured outside 90% CI by 0.48 dex; CI width 1.00 dex; safety marker — needs SIDA-grade absolute anchor</p>
                 
                 <!-- Chemistry brief section -->
                 <div class="chemistry-brief">
@@ -2655,11 +1289,11 @@
                     </div>
                     <div class="quant-item">
                         <span class="quant-label">Model Median (P50)</span>
-                        <span class="quant-value">200 ppb</span>
+                        <span class="quant-value">179 ppb</span>
                     </div>
                     <div class="quant-item">
                         <span class="quant-label">90% Confidence Interval</span>
-                        <span class="quant-value">69 &ndash; 565 ppb</span>
+                        <span class="quant-value">62.9 &ndash; 622 ppb</span>
                     </div>
                     
                 </div>
@@ -2672,18 +1306,18 @@
                     </div>
                     <div class="scale-container">
                         <div class="scale-bounds">
-                            <span>34.5 ppb</span>
-                            <span>358 ppb</span>
+                            <span>31.4 ppb</span>
+                            <span>342 ppb</span>
                             <span>3.72e+03 ppb</span>
                         </div>
                         <div class="scale-bar-track">
-                            <div class="scale-bar-ci outside" style="left: 14.810730739768214%; width: 44.94670796275368%;"></div>
-                            <div class="scale-p50" style="left: 37.499494046289115%;" title="Model Median (P50): 200 ppb"></div>
-                            <div class="scale-marker" style="left: 85.18926926023178%;" title="Measured: 1.86e+03 ppb"></div>
+                            <div class="scale-bar-ci outside" style="left: 14.521287595170836%; width: 48.01499237173002%;"></div>
+                            <div class="scale-p50" style="left: 36.41317475086974%;" title="Model Median (P50): 179 ppb"></div>
+                            <div class="scale-marker" style="left: 85.47871240482917%;" title="Measured: 1.86e+03 ppb"></div>
                         </div>
                         <div class="scale-legend">
-                            <span class="legend-item"><span class="legend-dot ci-dot outside"></span>90% CI (69 - 565 ppb)</span>
-                            <span class="legend-item"><span class="legend-dot p50-dot"></span>Median (200 ppb)</span>
+                            <span class="legend-item"><span class="legend-dot ci-dot outside"></span>90% CI (62.9 - 622 ppb)</span>
+                            <span class="legend-item"><span class="legend-dot p50-dot"></span>Median (179 ppb)</span>
                             <span class="legend-item"><span class="legend-dot measured-dot"></span>Measured (1.86e+03 ppb)</span>
                         </div>
                     </div>
@@ -2699,31 +1333,31 @@
         </div>
         
 
-        <div class="card gap-card" data-matrix="free" data-template="missing_absolute_anchor" data-class="safety">
+        <div class="card gap-card" data-matrix="soy_iso" data-template="missing_positive_flavor_anchor" data-class="off-notes">
             <div class="card-header">
-                <div class="card-rank">#39</div>
+                <div class="card-rank">#9</div>
                 <div class="card-title-group">
-                    <h3>5-Hydroxymethylfurfural (HMF)</h3>
-                    <div class="card-subtitle">Lin 2022 (Mp + Holdout + Fructose + Asparagine, 180°C)</div>
+                    <h3>hexanal</h3>
+                    <div class="card-subtitle">Control 2026 (External + Li + SPI + Wg + Hme + Control)</div>
                 </div>
-                <div class="card-voi" title="Value of Information: how much running this experiment reduces model uncertainty, weighted by sensory relevance (ODT proximity). Higher = higher priority.">1.77 VoI</div>
+                <div class="card-voi" title="Value of Information: how much running this experiment reduces model uncertainty, weighted by sensory relevance (ODT proximity). Higher = higher priority.">1.75 VoI</div>
             </div>
             
             <div class="card-body">
                 <div class="badges-row">
-                    <span class="badge badge-matrix">free matrix</span>
-                    <span class="badge badge-danger">OUTSIDE 90% CI</span>
-                    <span class="badge badge-template" title="Gap type: characterises why this experiment is high-priority">missing absolute anchor</span>
+                    <span class="badge badge-matrix">soy_iso matrix</span>
+                    <span class="badge badge-success">Inside 90% CI</span>
+                    <span class="badge badge-template" title="Gap type: characterises why this experiment is high-priority">missing positive flavor anchor</span>
                 </div>
                 
-                <p class="rationale-text"><strong>Rationale</strong>: measured outside 90% CI by 0.65 dex; CI width 0.39 dex; safety marker — needs SIDA-grade absolute anchor</p>
+                <p class="rationale-text"><strong>Rationale</strong>: CI width 2.74 dex; ≈1e+02× ODT (decision_relevance=2.13); off-note marker — focused band quantitation</p>
                 
                 <!-- Chemistry brief section -->
                 <div class="chemistry-brief">
-                    <h4 class="chem-title">Hexose Dehydration Pathway</h4>
-                    <p class="chem-desc">Direct thermal dehydration of hexose sugars (glucose, fructose).</p>
+                    <h4 class="chem-title">Lipid Autoxidation Pathway</h4>
+                    <p class="chem-desc">Formed via homolytic beta-cleavage of linoleic acid 13-hydroperoxide.</p>
                     <ol class="chem-steps">
-                        <li><strong>Hexose Enolization</strong>: D-Glucose &rarr; 1,2-Enediol</li><li><strong>Triple Dehydration</strong>: 1,2-Enediol &rarr; 3-Deoxyosone &rarr; HMF + 3 H<sub>2</sub>O</li>
+                        <li><strong>Lipid Peroxidation</strong>: Linoleic Acid + O<sub>2</sub> &rarr; Linoleic Acid 13-Hydroperoxide</li><li><strong>Homolytic Cleavage</strong>: 13-Hydroperoxide &rarr; Hexanal + 12-Oxo-9-dodecenoic acid</li>
                     </ol>
                 </div>
                 
@@ -2732,17 +1366,22 @@
                 <div class="quant-grid">
                     <div class="quant-item">
                         <span class="quant-label">Measured (Lit)</span>
-                        <span class="quant-value">1.23e+04 ppb</span>
+                        <span class="quant-value">606 ppb</span>
                     </div>
                     <div class="quant-item">
                         <span class="quant-label">Model Median (P50)</span>
-                        <span class="quant-value">1.88e+03 ppb</span>
+                        <span class="quant-value">35.5 ppb</span>
                     </div>
                     <div class="quant-item">
                         <span class="quant-label">90% Confidence Interval</span>
-                        <span class="quant-value">1.1e+03 &ndash; 2.73e+03 ppb</span>
+                        <span class="quant-value">1.24 &ndash; 690 ppb</span>
                     </div>
                     
+                    <div class="quant-item">
+                        <span class="quant-label">Odour Threshold (ODT)</span>
+                        <span class="quant-value">4.5 ppb</span>
+                    </div>
+            
                 </div>
         
                 
@@ -2753,19 +1392,19 @@
                     </div>
                     <div class="scale-container">
                         <div class="scale-bounds">
-                            <span>549 ppb</span>
-                            <span>3.67e+03 ppb</span>
-                            <span>2.46e+04 ppb</span>
+                            <span>0.621 ppb</span>
+                            <span>29.3 ppb</span>
+                            <span>1.38e+03 ppb</span>
                         </div>
                         <div class="scale-bar-track">
-                            <div class="scale-bar-ci outside" style="left: 18.235371921436872%; width: 23.92332902922046%;"></div>
-                            <div class="scale-p50" style="left: 32.34043754115229%;" title="Model Median (P50): 1.88e+03 ppb"></div>
-                            <div class="scale-marker" style="left: 81.76462807856312%;" title="Measured: 1.23e+04 ppb"></div>
+                            <div class="scale-bar-ci inside" style="left: 8.994000717170005%; width: 82.01199856566%;"></div>
+                            <div class="scale-p50" style="left: 52.487314264387116%;" title="Model Median (P50): 35.5 ppb"></div>
+                            <div class="scale-marker" style="left: 89.30546343750319%;" title="Measured: 606 ppb"></div>
                         </div>
                         <div class="scale-legend">
-                            <span class="legend-item"><span class="legend-dot ci-dot outside"></span>90% CI (1.1e+03 - 2.73e+03 ppb)</span>
-                            <span class="legend-item"><span class="legend-dot p50-dot"></span>Median (1.88e+03 ppb)</span>
-                            <span class="legend-item"><span class="legend-dot measured-dot"></span>Measured (1.23e+04 ppb)</span>
+                            <span class="legend-item"><span class="legend-dot ci-dot inside"></span>90% CI (1.24 - 690 ppb)</span>
+                            <span class="legend-item"><span class="legend-dot p50-dot"></span>Median (35.5 ppb)</span>
+                            <span class="legend-item"><span class="legend-dot measured-dot"></span>Measured (606 ppb)</span>
                         </div>
                     </div>
                 </div>
@@ -2782,7 +1421,7 @@
 
         <div class="card gap-card" data-matrix="free" data-template="missing_absolute_anchor" data-class="kinetics">
             <div class="card-header">
-                <div class="card-rank">#42</div>
+                <div class="card-rank">#10</div>
                 <div class="card-title-group">
                     <h3>3,4-dideoxyglucosone</h3>
                     <div class="card-subtitle">Steinhagen 2021 (Mp + Holdout + Glucose + Autoclave, 121°C)</div>
@@ -2797,7 +1436,7 @@
                     <span class="badge badge-template" title="Gap type: characterises why this experiment is high-priority">missing absolute anchor</span>
                 </div>
                 
-                <p class="rationale-text"><strong>Rationale</strong>: measured outside 90% CI by 0.43 dex; CI width 0.99 dex; anchor measurement to constrain prior</p>
+                <p class="rationale-text"><strong>Rationale</strong>: measured outside 90% CI by 0.44 dex; CI width 0.99 dex; anchor measurement to constrain prior</p>
                 
                 <!-- Chemistry brief section -->
                 <div class="chemistry-brief">
@@ -2817,11 +1456,11 @@
                     </div>
                     <div class="quant-item">
                         <span class="quant-label">Model Median (P50)</span>
-                        <span class="quant-value">5.79e+03 ppb</span>
+                        <span class="quant-value">5.74e+03 ppb</span>
                     </div>
                     <div class="quant-item">
                         <span class="quant-label">90% Confidence Interval</span>
-                        <span class="quant-value">2.1e+03 &ndash; 2.04e+04 ppb</span>
+                        <span class="quant-value">2.08e+03 &ndash; 2.02e+04 ppb</span>
                     </div>
                     
                 </div>
@@ -2834,19 +1473,186 @@
                     </div>
                     <div class="scale-container">
                         <div class="scale-bounds">
-                            <span>1.05e+03 ppb</span>
-                            <span>1.08e+04 ppb</span>
+                            <span>1.04e+03 ppb</span>
+                            <span>1.07e+04 ppb</span>
                             <span>1.11e+05 ppb</span>
                         </div>
                         <div class="scale-bar-track">
-                            <div class="scale-bar-ci outside" style="left: 14.871629227737774%; width: 48.81804903372672%;"></div>
-                            <div class="scale-p50" style="left: 36.644926527763005%;" title="Model Median (P50): 5.79e+03 ppb"></div>
-                            <div class="scale-marker" style="left: 85.12837077226223%;" title="Measured: 5.55e+04 ppb"></div>
+                            <div class="scale-bar-ci outside" style="left: 14.840825962183189%; width: 48.72487287311034%;"></div>
+                            <div class="scale-p50" style="left: 36.57780751175021%;" title="Model Median (P50): 5.74e+03 ppb"></div>
+                            <div class="scale-marker" style="left: 85.15917403781681%;" title="Measured: 5.55e+04 ppb"></div>
                         </div>
                         <div class="scale-legend">
-                            <span class="legend-item"><span class="legend-dot ci-dot outside"></span>90% CI (2.1e+03 - 2.04e+04 ppb)</span>
-                            <span class="legend-item"><span class="legend-dot p50-dot"></span>Median (5.79e+03 ppb)</span>
+                            <span class="legend-item"><span class="legend-dot ci-dot outside"></span>90% CI (2.08e+03 - 2.02e+04 ppb)</span>
+                            <span class="legend-item"><span class="legend-dot p50-dot"></span>Median (5.74e+03 ppb)</span>
                             <span class="legend-item"><span class="legend-dot measured-dot"></span>Measured (5.55e+04 ppb)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card-footer">
+                <a href="../../docs/protocols/PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md" class="btn-protocol" target="_blank">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                    View PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md
+                </a>
+            </div>
+        </div>
+        
+
+        <div class="card gap-card" data-matrix="free" data-template="missing_absolute_anchor" data-class="kinetics">
+            <div class="card-header">
+                <div class="card-rank">#11</div>
+                <div class="card-title-group">
+                    <h3>glyoxal</h3>
+                    <div class="card-subtitle">Steinhagen 2021 (Mp + Holdout + Glucose + Autoclave, 121°C)</div>
+                </div>
+                <div class="card-voi" title="Value of Information: how much running this experiment reduces model uncertainty, weighted by sensory relevance (ODT proximity). Higher = higher priority.">1.67 VoI</div>
+            </div>
+            
+            <div class="card-body">
+                <div class="badges-row">
+                    <span class="badge badge-matrix">free matrix</span>
+                    <span class="badge badge-danger">OUTSIDE 90% CI</span>
+                    <span class="badge badge-template" title="Gap type: characterises why this experiment is high-priority">missing absolute anchor</span>
+                </div>
+                
+                <p class="rationale-text"><strong>Rationale</strong>: measured outside 90% CI by 0.67 dex; CI width 0.01 dex; anchor measurement to constrain prior</p>
+                
+                <!-- Chemistry brief section -->
+                <div class="chemistry-brief">
+                    <h4 class="chem-title">glyoxal Synthesis pathway</h4>
+                    <p class="chem-desc">Formed via thermal Maillard precursor interaction in the free matrix.</p>
+                    <ol class="chem-steps">
+                        <li><strong>Precursor Activation</strong>: Matrix components and thermal energy trigger reactive cascades.</li><li><strong>Product Condensation</strong>: Intermediates react to yield target glyoxal.</li>
+                    </ol>
+                </div>
+                
+                
+                <!-- Quantitative bounds grid -->
+                <div class="quant-grid">
+                    <div class="quant-item">
+                        <span class="quant-label">Measured (Lit)</span>
+                        <span class="quant-value">5.6e+03 ppb</span>
+                    </div>
+                    <div class="quant-item">
+                        <span class="quant-label">Model Median (P50)</span>
+                        <span class="quant-value">1.2e+03 ppb</span>
+                    </div>
+                    <div class="quant-item">
+                        <span class="quant-label">90% Confidence Interval</span>
+                        <span class="quant-value">1.17e+03 &ndash; 1.21e+03 ppb</span>
+                    </div>
+                    
+                </div>
+        
+                
+                <!-- Log scale visualization bar -->
+                <div class="scale-section">
+                    <div class="scale-header">
+                        <span>Model uncertainty vs. observation (log₁₀ ppb) — band width reflects how well-constrained the prediction is</span>
+                    </div>
+                    <div class="scale-container">
+                        <div class="scale-bounds">
+                            <span>584 ppb</span>
+                            <span>2.56e+03 ppb</span>
+                            <span>1.12e+04 ppb</span>
+                        </div>
+                        <div class="scale-bar-track">
+                            <div class="scale-bar-ci outside" style="left: 23.46942166240216%; width: 1.0447190799584405%;"></div>
+                            <div class="scale-p50" style="left: 24.37767294428324%;" title="Model Median (P50): 1.2e+03 ppb"></div>
+                            <div class="scale-marker" style="left: 76.5305783375978%;" title="Measured: 5.6e+03 ppb"></div>
+                        </div>
+                        <div class="scale-legend">
+                            <span class="legend-item"><span class="legend-dot ci-dot outside"></span>90% CI (1.17e+03 - 1.21e+03 ppb)</span>
+                            <span class="legend-item"><span class="legend-dot p50-dot"></span>Median (1.2e+03 ppb)</span>
+                            <span class="legend-item"><span class="legend-dot measured-dot"></span>Measured (5.6e+03 ppb)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card-footer">
+                <a href="../../docs/protocols/PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md" class="btn-protocol" target="_blank">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                    View PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md
+                </a>
+            </div>
+        </div>
+        
+
+        <div class="card gap-card" data-matrix="soy_iso" data-template="missing_positive_flavor_anchor" data-class="off-notes">
+            <div class="card-header">
+                <div class="card-rank">#12</div>
+                <div class="card-title-group">
+                    <h3>nonanal</h3>
+                    <div class="card-subtitle">Control 2026 (External + Li + SPI + Wg + Hme + Control)</div>
+                </div>
+                <div class="card-voi" title="Value of Information: how much running this experiment reduces model uncertainty, weighted by sensory relevance (ODT proximity). Higher = higher priority.">1.54 VoI</div>
+            </div>
+            
+            <div class="card-body">
+                <div class="badges-row">
+                    <span class="badge badge-matrix">soy_iso matrix</span>
+                    <span class="badge badge-success">Inside 90% CI</span>
+                    <span class="badge badge-template" title="Gap type: characterises why this experiment is high-priority">missing positive flavor anchor</span>
+                </div>
+                
+                <p class="rationale-text"><strong>Rationale</strong>: CI width 2.74 dex; ≈7e+01× ODT (decision_relevance=1.87); off-note marker — focused band quantitation</p>
+                
+                <!-- Chemistry brief section -->
+                <div class="chemistry-brief">
+                    <h4 class="chem-title">Lipid Autoxidation Pathway</h4>
+                    <p class="chem-desc">Formed via cleavage of oleic acid 9-hydroperoxide.</p>
+                    <ol class="chem-steps">
+                        <li><strong>Lipid Peroxidation</strong>: Oleic Acid + O<sub>2</sub> &rarr; Oleic Acid 9-Hydroperoxide</li><li><strong>Homolytic Cleavage</strong>: 9-Hydroperoxide &rarr; Nonanal + other cleavage products</li>
+                    </ol>
+                </div>
+                
+                
+                <!-- Quantitative bounds grid -->
+                <div class="quant-grid">
+                    <div class="quant-item">
+                        <span class="quant-label">Measured (Lit)</span>
+                        <span class="quant-value">74.4 ppb</span>
+                    </div>
+                    <div class="quant-item">
+                        <span class="quant-label">Model Median (P50)</span>
+                        <span class="quant-value">12.1 ppb</span>
+                    </div>
+                    <div class="quant-item">
+                        <span class="quant-label">90% Confidence Interval</span>
+                        <span class="quant-value">0.424 &ndash; 234 ppb</span>
+                    </div>
+                    
+                    <div class="quant-item">
+                        <span class="quant-label">Odour Threshold (ODT)</span>
+                        <span class="quant-value">1 ppb</span>
+                    </div>
+            
+                </div>
+        
+                
+                <!-- Log scale visualization bar -->
+                <div class="scale-section">
+                    <div class="scale-header">
+                        <span>Model uncertainty vs. observation (log₁₀ ppb) — band width reflects how well-constrained the prediction is</span>
+                    </div>
+                    <div class="scale-container">
+                        <div class="scale-bounds">
+                            <span>0.212 ppb</span>
+                            <span>9.97 ppb</span>
+                            <span>469 ppb</span>
+                        </div>
+                        <div class="scale-bar-track">
+                            <div class="scale-bar-ci inside" style="left: 8.999305220086969%; width: 82.00138955982605%;"></div>
+                            <div class="scale-p50" style="left: 52.48780300704172%;" title="Model Median (P50): 12.1 ppb"></div>
+                            <div class="scale-marker" style="left: 76.09526438305913%;" title="Measured: 74.4 ppb"></div>
+                        </div>
+                        <div class="scale-legend">
+                            <span class="legend-item"><span class="legend-dot ci-dot inside"></span>90% CI (0.424 - 234 ppb)</span>
+                            <span class="legend-item"><span class="legend-dot p50-dot"></span>Median (12.1 ppb)</span>
+                            <span class="legend-item"><span class="legend-dot measured-dot"></span>Measured (74.4 ppb)</span>
                         </div>
                     </div>
                 </div>
@@ -2863,12 +1669,12 @@
 
         <div class="card gap-card" data-matrix="free" data-template="missing_absolute_anchor" data-class="safety">
             <div class="card-header">
-                <div class="card-rank">#44</div>
+                <div class="card-rank">#13</div>
                 <div class="card-title-group">
                     <h3>Acrylamide</h3>
                     <div class="card-subtitle">Chang 2021 (Mp + Holdout + Glucose + Asparagine + 30min + Water, 180°C)</div>
                 </div>
-                <div class="card-voi" title="Value of Information: how much running this experiment reduces model uncertainty, weighted by sensory relevance (ODT proximity). Higher = higher priority.">1.45 VoI</div>
+                <div class="card-voi" title="Value of Information: how much running this experiment reduces model uncertainty, weighted by sensory relevance (ODT proximity). Higher = higher priority.">1.43 VoI</div>
             </div>
             
             <div class="card-body">
@@ -2878,7 +1684,7 @@
                     <span class="badge badge-template" title="Gap type: characterises why this experiment is high-priority">missing absolute anchor</span>
                 </div>
                 
-                <p class="rationale-text"><strong>Rationale</strong>: measured outside 90% CI by 0.18 dex; CI width 0.91 dex; safety marker — needs SIDA-grade absolute anchor</p>
+                <p class="rationale-text"><strong>Rationale</strong>: measured outside 90% CI by 0.13 dex; CI width 0.99 dex; safety marker — needs SIDA-grade absolute anchor</p>
                 
                 <!-- Chemistry brief section -->
                 <div class="chemistry-brief">
@@ -2898,11 +1704,11 @@
                     </div>
                     <div class="quant-item">
                         <span class="quant-label">Model Median (P50)</span>
-                        <span class="quant-value">3.62e+03 ppb</span>
+                        <span class="quant-value">3.23e+03 ppb</span>
                     </div>
                     <div class="quant-item">
                         <span class="quant-label">90% Confidence Interval</span>
-                        <span class="quant-value">1.25e+03 &ndash; 1.03e+04 ppb</span>
+                        <span class="quant-value">1.13e+03 &ndash; 1.12e+04 ppb</span>
                     </div>
                     
                 </div>
@@ -2916,104 +1722,18 @@
                     <div class="scale-container">
                         <div class="scale-bounds">
                             <span>416 ppb</span>
-                            <span>2.92e+03 ppb</span>
-                            <span>2.06e+04 ppb</span>
+                            <span>3.05e+03 ppb</span>
+                            <span>2.23e+04 ppb</span>
                         </div>
                         <div class="scale-bar-track">
-                            <div class="scale-bar-ci outside" style="left: 28.221376332888813%; width: 54.00572648204604%;"></div>
-                            <div class="scale-p50" style="left: 55.46473214696323%;" title="Model Median (P50): 3.62e+03 ppb"></div>
-                            <div class="scale-marker" style="left: 17.772897185065144%;" title="Measured: 832 ppb"></div>
+                            <div class="scale-bar-ci outside" style="left: 25.177339436307403%; width: 57.41846974982957%;"></div>
+                            <div class="scale-p50" style="left: 51.44521519254882%;" title="Model Median (P50): 3.23e+03 ppb"></div>
+                            <div class="scale-marker" style="left: 17.40419081386303%;" title="Measured: 832 ppb"></div>
                         </div>
                         <div class="scale-legend">
-                            <span class="legend-item"><span class="legend-dot ci-dot outside"></span>90% CI (1.25e+03 - 1.03e+04 ppb)</span>
-                            <span class="legend-item"><span class="legend-dot p50-dot"></span>Median (3.62e+03 ppb)</span>
+                            <span class="legend-item"><span class="legend-dot ci-dot outside"></span>90% CI (1.13e+03 - 1.12e+04 ppb)</span>
+                            <span class="legend-item"><span class="legend-dot p50-dot"></span>Median (3.23e+03 ppb)</span>
                             <span class="legend-item"><span class="legend-dot measured-dot"></span>Measured (832 ppb)</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="card-footer">
-                <a href="../../docs/protocols/PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md" class="btn-protocol" target="_blank">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                    View PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md
-                </a>
-            </div>
-        </div>
-        
-
-        <div class="card gap-card" data-matrix="free" data-template="missing_kinetic_dataset" data-class="kinetics">
-            <div class="card-header">
-                <div class="card-rank">#46</div>
-                <div class="card-title-group">
-                    <h3>Furfural</h3>
-                    <div class="card-subtitle">mp_holdout_arp_glutathione_120C_120min_pH75_Zhou2023c</div>
-                </div>
-                <div class="card-voi" title="Value of Information: how much running this experiment reduces model uncertainty, weighted by sensory relevance (ODT proximity). Higher = higher priority.">1.32 VoI</div>
-            </div>
-            
-            <div class="card-body">
-                <div class="badges-row">
-                    <span class="badge badge-matrix">free matrix</span>
-                    <span class="badge badge-danger">OUTSIDE 90% CI</span>
-                    <span class="badge badge-template" title="Gap type: characterises why this experiment is high-priority">missing kinetic dataset</span>
-                </div>
-                
-                <p class="rationale-text"><strong>Rationale</strong>: measured outside 90% CI by 0.27 dex; CI width 4.56 dex; ≈0.2× ODT (decision_relevance=0.50); wide envelope — time-course narrows the rate-limiting step</p>
-                
-                <!-- Chemistry brief section -->
-                <div class="chemistry-brief">
-                    <h4 class="chem-title">Pentose Dehydration Pathway</h4>
-                    <p class="chem-desc">Direct acid-catalyzed thermal dehydration of pentose sugars.</p>
-                    <ol class="chem-steps">
-                        <li><strong>Pentose Enolization</strong>: D-Ribose/D-Xylose &rarr; 1,2-Enediol</li><li><strong>Triple Dehydration</strong>: 1,2-Enediol &rarr; 3-Deoxyosone &rarr; Furfural + 3 H<sub>2</sub>O</li>
-                    </ol>
-                </div>
-                
-                
-                <!-- Quantitative bounds grid -->
-                <div class="quant-grid">
-                    <div class="quant-item">
-                        <span class="quant-label">Measured (Lit)</span>
-                        <span class="quant-value">716 ppb</span>
-                    </div>
-                    <div class="quant-item">
-                        <span class="quant-label">Model Median (P50)</span>
-                        <span class="quant-value">4.74 ppb</span>
-                    </div>
-                    <div class="quant-item">
-                        <span class="quant-label">90% Confidence Interval</span>
-                        <span class="quant-value">0.0106 &ndash; 386 ppb</span>
-                    </div>
-                    
-                    <div class="quant-item">
-                        <span class="quant-label">Odour Threshold (ODT)</span>
-                        <span class="quant-value">3e+03 ppb</span>
-                    </div>
-            
-                </div>
-        
-                
-                <!-- Log scale visualization bar -->
-                <div class="scale-section">
-                    <div class="scale-header">
-                        <span>Model uncertainty vs. observation (log₁₀ ppb) — band width reflects how well-constrained the prediction is</span>
-                    </div>
-                    <div class="scale-container">
-                        <div class="scale-bounds">
-                            <span>0.00529 ppb</span>
-                            <span>2.75 ppb</span>
-                            <span>1.43e+03 ppb</span>
-                        </div>
-                        <div class="scale-bar-track">
-                            <div class="scale-bar-ci outside" style="left: 5.541562673140413%; width: 83.9869378796144%;"></div>
-                            <div class="scale-p50" style="left: 54.33750225565371%;" title="Model Median (P50): 4.74 ppb"></div>
-                            <div class="scale-marker" style="left: 94.4584373268596%;" title="Measured: 716 ppb"></div>
-                        </div>
-                        <div class="scale-legend">
-                            <span class="legend-item"><span class="legend-dot ci-dot outside"></span>90% CI (0.0106 - 386 ppb)</span>
-                            <span class="legend-item"><span class="legend-dot p50-dot"></span>Median (4.74 ppb)</span>
-                            <span class="legend-item"><span class="legend-dot measured-dot"></span>Measured (716 ppb)</span>
                         </div>
                     </div>
                 </div>
@@ -3030,12 +1750,12 @@
 
         <div class="card gap-card" data-matrix="free" data-template="missing_absolute_anchor" data-class="safety">
             <div class="card-header">
-                <div class="card-rank">#48</div>
+                <div class="card-rank">#14</div>
                 <div class="card-title-group">
                     <h3>Acrylamide</h3>
                     <div class="card-subtitle">Ye 2024 (Mp + Holdout + Glucose + Asparagine, 180°C)</div>
                 </div>
-                <div class="card-voi" title="Value of Information: how much running this experiment reduces model uncertainty, weighted by sensory relevance (ODT proximity). Higher = higher priority.">1.27 VoI</div>
+                <div class="card-voi" title="Value of Information: how much running this experiment reduces model uncertainty, weighted by sensory relevance (ODT proximity). Higher = higher priority.">1.28 VoI</div>
             </div>
             
             <div class="card-body">
@@ -3045,7 +1765,7 @@
                     <span class="badge badge-template" title="Gap type: characterises why this experiment is high-priority">missing absolute anchor</span>
                 </div>
                 
-                <p class="rationale-text"><strong>Rationale</strong>: measured outside 90% CI by 0.00 dex; CI width 0.90 dex; safety marker — needs SIDA-grade absolute anchor</p>
+                <p class="rationale-text"><strong>Rationale</strong>: measured outside 90% CI by 0.00 dex; CI width 0.94 dex; safety marker — needs SIDA-grade absolute anchor</p>
                 
                 <!-- Chemistry brief section -->
                 <div class="chemistry-brief">
@@ -3065,11 +1785,11 @@
                     </div>
                     <div class="quant-item">
                         <span class="quant-label">Model Median (P50)</span>
-                        <span class="quant-value">6.84e+03 ppb</span>
+                        <span class="quant-value">6.21e+03 ppb</span>
                     </div>
                     <div class="quant-item">
                         <span class="quant-label">90% Confidence Interval</span>
-                        <span class="quant-value">2.43e+03 &ndash; 1.94e+04 ppb</span>
+                        <span class="quant-value">2.2e+03 &ndash; 1.9e+04 ppb</span>
                     </div>
                     
                 </div>
@@ -3082,18 +1802,18 @@
                     </div>
                     <div class="scale-container">
                         <div class="scale-bounds">
-                            <span>1.21e+03 ppb</span>
-                            <span>6.86e+03 ppb</span>
-                            <span>3.88e+04 ppb</span>
+                            <span>1.1e+03 ppb</span>
+                            <span>6.47e+03 ppb</span>
+                            <span>3.81e+04 ppb</span>
                         </div>
                         <div class="scale-bar-track">
-                            <div class="scale-bar-ci outside" style="left: 20.011252490831808%; width: 59.977495018336384%;"></div>
-                            <div class="scale-p50" style="left: 49.903131830136324%;" title="Model Median (P50): 6.84e+03 ppb"></div>
+                            <div class="scale-bar-ci outside" style="left: 19.545167653958377%; width: 60.909664692083254%;"></div>
+                            <div class="scale-p50" style="left: 48.8449126731122%;" title="Model Median (P50): 6.21e+03 ppb"></div>
                             <div class="scale-marker" style="left: 0.0%;" title="Measured: 0 ppb"></div>
                         </div>
                         <div class="scale-legend">
-                            <span class="legend-item"><span class="legend-dot ci-dot outside"></span>90% CI (2.43e+03 - 1.94e+04 ppb)</span>
-                            <span class="legend-item"><span class="legend-dot p50-dot"></span>Median (6.84e+03 ppb)</span>
+                            <span class="legend-item"><span class="legend-dot ci-dot outside"></span>90% CI (2.2e+03 - 1.9e+04 ppb)</span>
+                            <span class="legend-item"><span class="legend-dot p50-dot"></span>Median (6.21e+03 ppb)</span>
                             <span class="legend-item"><span class="legend-dot measured-dot"></span>Measured (0 ppb)</span>
                         </div>
                     </div>
@@ -3109,31 +1829,31 @@
         </div>
         
 
-        <div class="card gap-card" data-matrix="free" data-template="missing_kinetic_dataset" data-class="kinetics">
+        <div class="card gap-card" data-matrix="pea_iso" data-template="missing_kinetic_dataset" data-class="kinetics">
             <div class="card-header">
-                <div class="card-rank">#49</div>
+                <div class="card-rank">#15</div>
                 <div class="card-title-group">
-                    <h3>Furfural</h3>
-                    <div class="card-subtitle">mp_holdout_arp_glutathione_120C_90min_pH75_Zhou2023c</div>
+                    <h3>(E,E)-2,4-decadienal</h3>
+                    <div class="card-subtitle">Trikusuma 2019 (Pea Isolate UHT, 140°C)</div>
                 </div>
-                <div class="card-voi" title="Value of Information: how much running this experiment reduces model uncertainty, weighted by sensory relevance (ODT proximity). Higher = higher priority.">1.25 VoI</div>
+                <div class="card-voi" title="Value of Information: how much running this experiment reduces model uncertainty, weighted by sensory relevance (ODT proximity). Higher = higher priority.">1.04 VoI</div>
             </div>
             
             <div class="card-body">
                 <div class="badges-row">
-                    <span class="badge badge-matrix">free matrix</span>
-                    <span class="badge badge-danger">OUTSIDE 90% CI</span>
+                    <span class="badge badge-matrix">pea_iso matrix</span>
+                    <span class="badge badge-success">Inside 90% CI</span>
                     <span class="badge badge-template" title="Gap type: characterises why this experiment is high-priority">missing kinetic dataset</span>
                 </div>
                 
-                <p class="rationale-text"><strong>Rationale</strong>: measured outside 90% CI by 0.25 dex; CI width 4.19 dex; ≈0.2× ODT (decision_relevance=0.50); wide envelope — time-course narrows the rate-limiting step</p>
+                <p class="rationale-text"><strong>Rationale</strong>: CI width 3.45 dex; wide envelope — time-course narrows the rate-limiting step</p>
                 
                 <!-- Chemistry brief section -->
                 <div class="chemistry-brief">
-                    <h4 class="chem-title">Pentose Dehydration Pathway</h4>
-                    <p class="chem-desc">Direct acid-catalyzed thermal dehydration of pentose sugars.</p>
+                    <h4 class="chem-title"> Synthesis pathway</h4>
+                    <p class="chem-desc">Formed via thermal Maillard precursor interaction in the pea_iso matrix.</p>
                     <ol class="chem-steps">
-                        <li><strong>Pentose Enolization</strong>: D-Ribose/D-Xylose &rarr; 1,2-Enediol</li><li><strong>Triple Dehydration</strong>: 1,2-Enediol &rarr; 3-Deoxyosone &rarr; Furfural + 3 H<sub>2</sub>O</li>
+                        <li><strong>Precursor Activation</strong>: Matrix components and thermal energy trigger reactive cascades.</li><li><strong>Product Condensation</strong>: Intermediates react to yield target .</li>
                     </ol>
                 </div>
                 
@@ -3142,22 +1862,17 @@
                 <div class="quant-grid">
                     <div class="quant-item">
                         <span class="quant-label">Measured (Lit)</span>
-                        <span class="quant-value">575 ppb</span>
+                        <span class="quant-value">46.9 ppb</span>
                     </div>
                     <div class="quant-item">
                         <span class="quant-label">Model Median (P50)</span>
-                        <span class="quant-value">4.11 ppb</span>
+                        <span class="quant-value">49.5 ppb</span>
                     </div>
                     <div class="quant-item">
                         <span class="quant-label">90% Confidence Interval</span>
-                        <span class="quant-value">0.021 &ndash; 326 ppb</span>
+                        <span class="quant-value">0.503 &ndash; 1.43e+03 ppb</span>
                     </div>
                     
-                    <div class="quant-item">
-                        <span class="quant-label">Odour Threshold (ODT)</span>
-                        <span class="quant-value">3e+03 ppb</span>
-                    </div>
-            
                 </div>
         
                 
@@ -3168,191 +1883,19 @@
                     </div>
                     <div class="scale-container">
                         <div class="scale-bounds">
-                            <span>0.0105 ppb</span>
-                            <span>3.48 ppb</span>
-                            <span>1.15e+03 ppb</span>
+                            <span>0.251 ppb</span>
+                            <span>26.8 ppb</span>
+                            <span>2.85e+03 ppb</span>
                         </div>
                         <div class="scale-bar-track">
-                            <div class="scale-bar-ci outside" style="left: 5.9734603816928455%; width: 83.15254359257732%;"></div>
-                            <div class="scale-p50" style="left: 51.449240245502146%;" title="Model Median (P50): 4.11 ppb"></div>
-                            <div class="scale-marker" style="left: 94.02653961830715%;" title="Measured: 575 ppb"></div>
+                            <div class="scale-bar-ci inside" style="left: 7.424650808660341%; width: 85.15069838267931%;"></div>
+                            <div class="scale-p50" style="left: 56.590111218036355%;" title="Model Median (P50): 49.5 ppb"></div>
+                            <div class="scale-marker" style="left: 56.0068966406723%;" title="Measured: 46.9 ppb"></div>
                         </div>
                         <div class="scale-legend">
-                            <span class="legend-item"><span class="legend-dot ci-dot outside"></span>90% CI (0.021 - 326 ppb)</span>
-                            <span class="legend-item"><span class="legend-dot p50-dot"></span>Median (4.11 ppb)</span>
-                            <span class="legend-item"><span class="legend-dot measured-dot"></span>Measured (575 ppb)</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="card-footer">
-                <a href="../../docs/protocols/PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md" class="btn-protocol" target="_blank">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                    View PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md
-                </a>
-            </div>
-        </div>
-        
-
-        <div class="card gap-card" data-matrix="free" data-template="missing_kinetic_dataset" data-class="kinetics">
-            <div class="card-header">
-                <div class="card-rank">#51</div>
-                <div class="card-title-group">
-                    <h3>Furfural</h3>
-                    <div class="card-subtitle">mp_holdout_arp_glutathione_120C_60min_pH75_Zhou2023c</div>
-                </div>
-                <div class="card-voi" title="Value of Information: how much running this experiment reduces model uncertainty, weighted by sensory relevance (ODT proximity). Higher = higher priority.">1.23 VoI</div>
-            </div>
-            
-            <div class="card-body">
-                <div class="badges-row">
-                    <span class="badge badge-matrix">free matrix</span>
-                    <span class="badge badge-danger">OUTSIDE 90% CI</span>
-                    <span class="badge badge-template" title="Gap type: characterises why this experiment is high-priority">missing kinetic dataset</span>
-                </div>
-                
-                <p class="rationale-text"><strong>Rationale</strong>: measured outside 90% CI by 0.31 dex; CI width 3.81 dex; ≈0.1× ODT (decision_relevance=0.50); wide envelope — time-course narrows the rate-limiting step</p>
-                
-                <!-- Chemistry brief section -->
-                <div class="chemistry-brief">
-                    <h4 class="chem-title">Pentose Dehydration Pathway</h4>
-                    <p class="chem-desc">Direct acid-catalyzed thermal dehydration of pentose sugars.</p>
-                    <ol class="chem-steps">
-                        <li><strong>Pentose Enolization</strong>: D-Ribose/D-Xylose &rarr; 1,2-Enediol</li><li><strong>Triple Dehydration</strong>: 1,2-Enediol &rarr; 3-Deoxyosone &rarr; Furfural + 3 H<sub>2</sub>O</li>
-                    </ol>
-                </div>
-                
-                
-                <!-- Quantitative bounds grid -->
-                <div class="quant-grid">
-                    <div class="quant-item">
-                        <span class="quant-label">Measured (Lit)</span>
-                        <span class="quant-value">397 ppb</span>
-                    </div>
-                    <div class="quant-item">
-                        <span class="quant-label">Model Median (P50)</span>
-                        <span class="quant-value">3.39 ppb</span>
-                    </div>
-                    <div class="quant-item">
-                        <span class="quant-label">90% Confidence Interval</span>
-                        <span class="quant-value">0.0299 &ndash; 195 ppb</span>
-                    </div>
-                    
-                    <div class="quant-item">
-                        <span class="quant-label">Odour Threshold (ODT)</span>
-                        <span class="quant-value">3e+03 ppb</span>
-                    </div>
-            
-                </div>
-        
-                
-                <!-- Log scale visualization bar -->
-                <div class="scale-section">
-                    <div class="scale-header">
-                        <span>Model uncertainty vs. observation (log₁₀ ppb) — band width reflects how well-constrained the prediction is</span>
-                    </div>
-                    <div class="scale-container">
-                        <div class="scale-bounds">
-                            <span>0.0149 ppb</span>
-                            <span>3.44 ppb</span>
-                            <span>794 ppb</span>
-                        </div>
-                        <div class="scale-bar-track">
-                            <div class="scale-bar-ci outside" style="left: 6.370339668332313%; width: 80.71403478208256%;"></div>
-                            <div class="scale-p50" style="left: 49.8443727961215%;" title="Model Median (P50): 3.39 ppb"></div>
-                            <div class="scale-marker" style="left: 93.6296603316677%;" title="Measured: 397 ppb"></div>
-                        </div>
-                        <div class="scale-legend">
-                            <span class="legend-item"><span class="legend-dot ci-dot outside"></span>90% CI (0.0299 - 195 ppb)</span>
-                            <span class="legend-item"><span class="legend-dot p50-dot"></span>Median (3.39 ppb)</span>
-                            <span class="legend-item"><span class="legend-dot measured-dot"></span>Measured (397 ppb)</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="card-footer">
-                <a href="../../docs/protocols/PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md" class="btn-protocol" target="_blank">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                    View PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md
-                </a>
-            </div>
-        </div>
-        
-
-        <div class="card gap-card" data-matrix="free" data-template="missing_kinetic_dataset" data-class="kinetics">
-            <div class="card-header">
-                <div class="card-rank">#52</div>
-                <div class="card-title-group">
-                    <h3>Furfural</h3>
-                    <div class="card-subtitle">mp_holdout_arp_glutathione_120C_30min_pH75_Zhou2023c</div>
-                </div>
-                <div class="card-voi" title="Value of Information: how much running this experiment reduces model uncertainty, weighted by sensory relevance (ODT proximity). Higher = higher priority.">1.11 VoI</div>
-            </div>
-            
-            <div class="card-body">
-                <div class="badges-row">
-                    <span class="badge badge-matrix">free matrix</span>
-                    <span class="badge badge-danger">OUTSIDE 90% CI</span>
-                    <span class="badge badge-template" title="Gap type: characterises why this experiment is high-priority">missing kinetic dataset</span>
-                </div>
-                
-                <p class="rationale-text"><strong>Rationale</strong>: measured outside 90% CI by 0.21 dex; CI width 3.40 dex; ≈0.04× ODT (decision_relevance=0.50); wide envelope — time-course narrows the rate-limiting step</p>
-                
-                <!-- Chemistry brief section -->
-                <div class="chemistry-brief">
-                    <h4 class="chem-title">Pentose Dehydration Pathway</h4>
-                    <p class="chem-desc">Direct acid-catalyzed thermal dehydration of pentose sugars.</p>
-                    <ol class="chem-steps">
-                        <li><strong>Pentose Enolization</strong>: D-Ribose/D-Xylose &rarr; 1,2-Enediol</li><li><strong>Triple Dehydration</strong>: 1,2-Enediol &rarr; 3-Deoxyosone &rarr; Furfural + 3 H<sub>2</sub>O</li>
-                    </ol>
-                </div>
-                
-                
-                <!-- Quantitative bounds grid -->
-                <div class="quant-grid">
-                    <div class="quant-item">
-                        <span class="quant-label">Measured (Lit)</span>
-                        <span class="quant-value">113 ppb</span>
-                    </div>
-                    <div class="quant-item">
-                        <span class="quant-label">Model Median (P50)</span>
-                        <span class="quant-value">1.73 ppb</span>
-                    </div>
-                    <div class="quant-item">
-                        <span class="quant-label">90% Confidence Interval</span>
-                        <span class="quant-value">0.0278 &ndash; 69.8 ppb</span>
-                    </div>
-                    
-                    <div class="quant-item">
-                        <span class="quant-label">Odour Threshold (ODT)</span>
-                        <span class="quant-value">3e+03 ppb</span>
-                    </div>
-            
-                </div>
-        
-                
-                <!-- Log scale visualization bar -->
-                <div class="scale-section">
-                    <div class="scale-header">
-                        <span>Model uncertainty vs. observation (log₁₀ ppb) — band width reflects how well-constrained the prediction is</span>
-                    </div>
-                    <div class="scale-container">
-                        <div class="scale-bounds">
-                            <span>0.0139 ppb</span>
-                            <span>1.77 ppb</span>
-                            <span>226 ppb</span>
-                        </div>
-                        <div class="scale-bar-track">
-                            <div class="scale-bar-ci outside" style="left: 7.148505098176607%; width: 80.7285864786999%;"></div>
-                            <div class="scale-p50" style="left: 49.729951926741265%;" title="Model Median (P50): 1.73 ppb"></div>
-                            <div class="scale-marker" style="left: 92.85149490182339%;" title="Measured: 113 ppb"></div>
-                        </div>
-                        <div class="scale-legend">
-                            <span class="legend-item"><span class="legend-dot ci-dot outside"></span>90% CI (0.0278 - 69.8 ppb)</span>
-                            <span class="legend-item"><span class="legend-dot p50-dot"></span>Median (1.73 ppb)</span>
-                            <span class="legend-item"><span class="legend-dot measured-dot"></span>Measured (113 ppb)</span>
+                            <span class="legend-item"><span class="legend-dot ci-dot inside"></span>90% CI (0.503 - 1.43e+03 ppb)</span>
+                            <span class="legend-item"><span class="legend-dot p50-dot"></span>Median (49.5 ppb)</span>
+                            <span class="legend-item"><span class="legend-dot measured-dot"></span>Measured (46.9 ppb)</span>
                         </div>
                     </div>
                 </div>
@@ -3525,7 +2068,7 @@
                 <div class="chemistry-brief" style="margin-top: 1rem;">
                     <h4 class="chem-title">Missing Kinetic Benchmarks (Protein Damage Markers)</h4>
                     <ul class="chem-steps">
-                        <li><strong>Amadori oxidative cleavage (CML/CEL)</strong>: Thermal degradation of lysine Schiff bases yielding N&epsilon;-(carboxymethyl)lysine (CML) and N&epsilon;-(carboxyethyl)lysine (CEL) (commercial PBMA range: 16&ndash;110 mg/kg; Foods 2023, PMC12451096).</li><li><strong>Extrusion lysine loss</strong>: Shearing and thermal degradation causing reactive lysine availability loss: 31.4% in SPI vs 15.4% in PPI under sterilization conditions (125.5&deg;C, 26 min) (ACS foodscitech.2c00242).</li><li><strong>Non-monotonic furosine crossover</strong>: Amadori acid hydrolysis marker peaking at 8.7 mg/100g protein at 140&deg;C, followed by degradation/crossover above 150&deg;C (Ram&iacute;rez-Jim&eacute;nez 2000).</li><li><strong>Acrylamide extrusion kinetics</strong>: Fast-residence asparagine-glucose Schiff-base elimination increasing acrylamide from 22.36 to 62.62 &mu;g/kg in 25 seconds at 130&deg;C (ACS ResearchGate ref. 3).</li>
+                        <li><strong>Amadori oxidative cleavage (CML/CEL)</strong>: Thermal degradation of lysine Schiff bases yielding N&epsilon;-(carboxymethyl)lysine (CML) and N&epsilon;-(carboxyethyl)lysine (CEL) (commercial PBMA range: 16&ndash;110 mg/kg; Foods 2023, PMC12451096).</li><li><strong>Extrusion lysine loss</strong>: Shearing and thermal degradation causing reactive lysine availability loss: 31.4% in SPI vs 15.4% in PPI under sterilization conditions (125.5&deg;C, 26 min) (ACS foodscitech.2c00242).</li><li><strong>Non-monotonic furosine crossover</strong>: Amadori acid hydrolysis marker peaking at 8.7 mg/100g protein at 140&deg;C, followed by degradation/crossover above 150&deg;C (Ram&iacute;rez-Jim&eacute;nez 2000).</li><li><strong>Acrylamide in extrusion</strong>: twin-screw extruded SPI : corn starch (9:1, 30% moisture) carries the most acrylamide in the 130&deg;C arm (~150 &mu;g/kg, a Fig. 2D read-off; unextruded control ~38); the precursor charge and residence time are not printed (Ma et al. 2024, Int. J. Mol. Sci. 25:8668).</li>
                     </ul>
                 </div>
             
