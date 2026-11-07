@@ -1037,6 +1037,15 @@ def run_one(name: str, workers: int) -> Dict[str, Any]:
     return audit_fit(spec, ids, workers=workers)
 
 
+def _fit_objectives_unrefused() -> None:
+    """2026-11-07 (the S3 application of M1b part (i)): a fit's objective is the model's own numbers, not a shipped
+    output, so the S3 refusal of outputs that depend on the falsified pH balance (config key ``ph.balance_refusal``)
+    is off here. B7's objective (Blank 1997's xylose + glycine pot) is one that the refusal would otherwise take."""
+    from src.kinetic_core import config
+
+    config.update({"ph.balance_refusal": False})
+
+
 def probe(name: str) -> Dict[str, Any]:
     """ONE objective evaluation at the frozen point, with the row set then and now: what
     ``scripts/ci/frozen_fit_drift_gate.py`` judges (no Jacobian, no step, no attribution)."""
@@ -1327,6 +1336,7 @@ def main(argv=None) -> int:
     ap.add_argument("--render", action="store_true")
     ap.add_argument("--check", action="store_true")
     a = ap.parse_args(argv)
+    _fit_objectives_unrefused()
     if a.check:
         p = _load_payload()
         ok = OUT_MD.exists() and OUT_MD.read_text(encoding="utf-8") == markdown(p)

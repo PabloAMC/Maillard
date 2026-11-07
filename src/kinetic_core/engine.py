@@ -2740,7 +2740,7 @@ def predict(
     parameters: Optional[Mapping[str, Any]] = None,
     draw: Optional[CoreDraw] = None,
     size_declared_bands: bool = True,
-    balance_refusal: bool = True,
+    balance_refusal: Optional[bool] = None,
 ) -> CorePrediction:
     """
     THE ENTRY POINT. Map ``spec`` onto a lane, integrate, emit B4 objects.
@@ -2762,6 +2762,8 @@ def predict(
     lane's within-lab term is refused (all of them: ``out_of_envelope`` with the reason; some: named and dropped) and
     the balance's end pH is withheld when its spread exceeds the prereg's pH term. ``False`` skips that, and exists
     for the S3 sensitivity generator and the rule's own integrations, which must compute the falsified point.
+    ``None`` reads the switch ``ph_balance_refusal.ENABLED`` (config key ``ph.balance_refusal``, shipped True; a frozen
+    fit's objective runs with it off).
     """
     if parameters is not None and draw is not None and draw.maillard is not None:
         raise ValueError(
@@ -2769,6 +2771,10 @@ def predict(
             "space `draw.maillard`, not both: they would silently shadow each "
             "other."
         )
+    if balance_refusal is None:
+        from . import ph_balance_refusal as _s3_switch
+
+        balance_refusal = bool(_s3_switch.ENABLED)
     declaration = declare_envelope(spec, targets)
     if not declaration.is_answerable:
         return CorePrediction(spec=spec, declaration=declaration)

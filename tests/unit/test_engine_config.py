@@ -54,6 +54,7 @@ FLIPPED = {
     "ph.acid_lag": pbr.AcidLag(False, 0.3, 0.5, 90.0),   # B2 with B1 + B3 is refused: flipped in its fields
     "ph.acid_supply": pbr.AcidSupply(True, 0.2, 0.5, 0.9, (5.2, 6.2, 6.7), 0.1),
     "ph.arp_forcing": pbr.ArpForcing(True, (0.0, 20.0), (5.0, 3.2)),
+    "ph.balance_refusal": False,   # 2026-11-07: the S3 refusal of outputs that depend on the falsified pH balance
     "ph.node_grid": "uniform",
     "ph.fixed_point": "fixed_sweeps",
     "ph.fixed_point.relaxation": 0.5,

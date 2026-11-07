@@ -53,6 +53,10 @@ from typing import Any, Dict, Mapping, Optional, Sequence, Tuple
 
 from src import data_access, data_paths
 
+#: THE SWITCH (config key ``ph.balance_refusal``): ``engine.predict``'s default. True ships; False only where the
+#: model's own numbers are computed rather than shown (a frozen fit's objective, the sensitivity run).
+ENABLED = True
+
 FALSIFICATION_RECORD = data_paths.VALIDATION_DIR / "kinetic_core_m1b_part_i_falsification.json"
 SCREEN_RECORD = data_paths.VALIDATION_DIR / "kinetic_core_m1b_part_i_screen.json"
 A2_RECORD = data_paths.VALIDATION_DIR / "kinetic_core_m1b_part_i_a2.json"
@@ -390,7 +394,7 @@ def ph_refusal_text() -> str:
             + short_reason())
 
 
-__all__ = ["A2_RECORD", "BALANCE_REFUSED_TAG", "EA_ISO_KJ_MOL", "FALSIFICATION_RECORD", "LIFT_TEXT", "RIVAL_POINTS",
+__all__ = ["A2_RECORD", "BALANCE_REFUSED_TAG", "EA_ISO_KJ_MOL", "ENABLED", "FALSIFICATION_RECORD", "LIFT_TEXT", "RIVAL_POINTS",
            "SCREEN_RECORD", "SENSITIVITY_RECORD", "SIGN_FLOOR_DEX", "Verdict", "WITHHELD_PH_KEYS", "ZERO_FLOOR_UG_PER_L", "assess",
            "balance_solved", "cached_verdict", "log_spread", "offsets_dex", "offsets_ratio_refusal", "point_values", "ph_refusal_text", "ph_tolerance", "ratio_refusal",
            "refusal_text", "rival_points", "short_reason", "thresholds"]
