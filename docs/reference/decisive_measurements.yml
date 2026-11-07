@@ -1024,3 +1024,68 @@ entries:
       - "EA_GLYC_KJ_MOL (parameters_glycation.py: 96.8, ~5 SE below Wolf's centre) and the over-prediction at 80 - 100 C (+0.24 to +0.7 dex); CF-100 makes no engine change today"
     existing_data_route: null
     status: open
+
+  - id: amadori_glucosone_route_share
+    plan_step: "B21 analogue case (CF-135 / CF-136 remedy); trunk k_ama_g"
+    added: "2026-11-07"
+    question: >-
+      What share of a fed Amadori compound's (fructosyl-glycine's) loss in water goes to glucosone, and how does it
+      depend on O2 and pH? The shipped r_ama_g is a milk lactulosyl-lysine constant carried to water, pH- and O2-flat,
+      and B1 / B18 cannot be re-derived until it is settled.
+    rivals_from: [docs/reference/cases/B21_glucosone_analogue_transfer.md]
+    rivals:
+      - "R0: the analogue as shipped (k 9.25e-3 /min at 100 C, Ea 75.9 kJ/mol, pH- and O2-flat; Hamzalioglu 2026, milk)"
+      - "R2: an S4 band from measured bounds, 0 to the fed-DFG total loss at the pot's pH and T (Davidek 2002, Martins 2003)"
+      - "R3: the step absent (glucosone only from the dry-glass glucose entry), B1's and B18's original physics"
+    why_not_on_disk:
+      - blocker: >-
+          No source measures glucosone formed per Amadori compound lost in water: the only Amadori -> glucosone constant
+          is Hamzalioglu 2026's multiresponse fit in milk, resolved only jointly with its sink (dossier flag 2).
+        cites: [docs/reference/cases/B21_glucosone_analogue_transfer.md, data/lit/extraction_dossiers/hamzalioglu2026_extraction.md]
+      - blocker: >-
+          The fed-DFG kinetics (Martins 2003, Davidek 2002) measure the total loss only, a one-sided bound; neither
+          quantifies glucosone, and neither states the atmosphere.
+        cites: [data/lit/extraction_dossiers/martins2003_extraction.md, data/lit/extraction_dossiers/davidek2002_extraction.md]
+      - blocker: >-
+          The route is oxidative and metal-catalysed (glucosone very low under argon, x 2 - 8 lower deaerated), so its
+          rate depends on an O2 / metal state that no kinetic source on disk states.
+        cites: [data/lit/extraction_dossiers/hofmann2000b_extraction.md, data/lit/extraction_dossiers/gobert2009_extraction.md]
+    measurement:
+      source: "docs/reference/cases/B21_glucosone_analogue_transfer.md sec. 5"
+      summary: >-
+        Fed DFG in phosphate at two pH values and two temperatures, air vs argon + DTPA inside one study, glucosone and
+        1-DG quantified against authentic standards after sampling, with a fed-glucosone arm for its loss.
+      arms:
+        - name: "fed DFG, air vs argon + DTPA"
+          design_written: true
+          conditions: >-
+            DFG 10 mM in 0.1 M phosphate, sealed tubes with a stated headspace; air vs argon + 1 mM DTPA; derivatisation
+            after sampling (not in-situ OPD); DFG, glycine, 3-DG, glucose + mannose also measured
+          species: [glucosone, 1-deoxyglucosone, DFG, glycine, 3-deoxyglucosone]
+          ph_values: "5.5 and 6.8 (initial, as prepared)"
+          ph_basis: [label_25C]
+          temperatures_C: [100, 120]
+          o2: "air vs argon + 1 mM DTPA (one factor varied inside the study)"
+          replicates: "independent runs on separate days (a run-to-run SD)"
+        - name: "fed glucosone loss"
+          design_written: true
+          conditions: "glucosone alone in the same buffer and atmospheres, to correct the formed glucosone for its loss"
+          species: [glucosone]
+          ph_values: "5.5 and 6.8 (initial, as prepared)"
+          ph_basis: [label_25C]
+          temperatures_C: [100, 120]
+          o2: "air vs argon + 1 mM DTPA"
+          replicates: "independent runs on separate days"
+    decides:
+      - outcome: "glucosone formed / DFG lost, corrected for glucosone loss"
+        means: "the route share (scale cancels): R0 vs a point inside R2's band vs R3"
+      - outcome: "that share, air vs argon"
+        means: "whether the step is oxidative in these pots (R3 is the anoxic limit)"
+      - outcome: "that share, pH 5.5 vs 6.8"
+        means: "the sign of its pH law (R0 is pH-flat)"
+    unlocks:
+      - "k_ama_g's first S1 'measured' value, and with it the re-derivation of the 14 B1 / B18 coordinates (CF-135, CF-136) on a measured step"
+    existing_data_route: >-
+      Luo 2023's Supporting Information Table S1 (glucosone in fed DFG, pH 3 - 9, 100 - 160 C) and two unread fed-Amadori
+      papers (Greifenhagen 2015, Staempfli 1994) may already hold the share; they are read by amendment first.
+    status: open
