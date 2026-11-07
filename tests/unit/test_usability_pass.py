@@ -41,7 +41,7 @@ def test_a_hexose_only_arm_yields_no_ratio_for_the_thiols():
     from src.comparative_cli import spec_to_core
     from src.kinetic_core import engine
 
-    base = {"temp_C": 140.0, "time_min": 30.0, "ph": 5.0, "aw": 0.98}
+    base = {"temp_C": 140.0, "time_min": 30.0, "ph": 5.0, "aw": 0.98, "buffer": {"kind": "clamped"}}   # 2026-11-07 (S3, ph_balance_refusal)
     ribose = spec_to_core({"name": "ribose", "precursors": {"cysteine": 10.0, "ribose": 10.0}, **base})
     glucose = spec_to_core({"name": "glucose", "precursors": {"cysteine": 10.0, "glucose": 10.0}, **base})
     out = engine.compare(ribose, glucose, ["2-methyl-3-furanthiol", "2-furfurylthiol", "furfural"])

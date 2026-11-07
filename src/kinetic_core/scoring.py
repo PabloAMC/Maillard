@@ -48,7 +48,7 @@ from src.benchmark_metadata import (
 )
 from src.validation_contract import DEFAULT_VALIDATION_CONTRACT
 
-from . import thiol_relative_only
+from . import ph_balance_refusal, thiol_relative_only
 from .engine import declared_unidentified, engine_metadata, fit_report_paths, predict
 from .fit_targets import core_evidence_role, core_fit_targets, fit_target_of, in_core_fit
 from .vessel import format_o2_to_thiol, oxygen_record
@@ -214,6 +214,9 @@ def score_benchmark(
         measured = measured_value(bench, compound, target_spec)
         run = predict(spec, [compound])
         declaration = run.declaration
+        # 2026-11-07 (S3, ph_balance_refusal): B1's and B13's values relative to B0, which a within-study ratio of two
+        # answered rows needs (build_contrast_scores refuses a pair the balance moves); no absolute level
+        s3_offsets = ph_balance_refusal.offsets_dex(spec, [compound], compound) if run.answered else None
         reason = None
         data_refused = data_refusal(target_spec)
         if data_refused is not None:
@@ -257,6 +260,7 @@ def score_benchmark(
                         "study": study_key(bench, str(path)),
                         "in_core_fit": in_core_fit(benchmark_id, compound),
                         "shared_with": SHARED_WITH_HOLDOUT_PANEL.get((benchmark_id, compound)),
+                        **({"balance_s3_offsets_dex": s3_offsets} if s3_offsets is not None else {}),
                     }} if absolute_refused else {}),
                 }
             )
@@ -291,6 +295,7 @@ def score_benchmark(
                 "declaration_warnings": list(declaration.warnings),
                 "shared_with": SHARED_WITH_HOLDOUT_PANEL.get((benchmark_id, compound)),
                 "in_core_fit": in_core_fit(benchmark_id, compound),
+                **({"balance_s3_offsets_dex": s3_offsets} if s3_offsets is not None else {}),
                 **_carried_split(
                     run, carried_declared.get(compound.strip().lower()), compound, unit, predicted, measured,
                 ),

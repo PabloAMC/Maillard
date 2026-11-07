@@ -60,7 +60,9 @@ def test_rows_are_scored_like_the_panel_scorecard():
     system = scored["systems"][0]
     assert system["scored"] == 1 and [r["compound"] for r in system["rows"]] == ["2-acetylthiazole"]
     assert {r["compound"] for r in system["refused"]} == {"2-methyl-3-furanthiol", "2-furfurylthiol"}
-    assert all(r["absolute_refused"] and r["measured_ppb"] > 0 for r in system["refused"])
+    # 2026-11-07 (S3, ph_balance_refusal): or refused by S3 first, where the falsified balance moves the row beyond omega
+    assert all((r.get("absolute_refused") or "FALSIFIED pH BALANCE" in r.get("reason", "")) and r["measured_ppb"] > 0
+               for r in system["refused"])
     from src.comparative_cli import spec_to_core
     spec = us.systems_of(document)[0]
     for row in system["rows"]:

@@ -214,5 +214,9 @@ def test_the_declaration_carries_the_tag_and_the_scorers_read_it():
     ribose = score_benchmark(data_paths.bundle_path("hofmann1998_ribose_cysteine_145C_20min_pH5"), "trust_loop")
     # 2026-11-05 (H0 / EX-059): the pentose pot's thiols are refused for their absolute level, not for the route
     assert ribose["refused_compounds"] and not any(r.get("unidentified_route") for r in ribose["refused_compounds"])
-    assert all(r["absolute_refused"] and r["relative_use_only"]["log10_predicted"] is not None
-               and "predicted" not in r["relative_use_only"] for r in ribose["refused_compounds"])
+    # 2026-11-07 (S3, ph_balance_refusal): a row the falsified balance moves beyond omega is refused by S3 first, and carries no level at all
+    from src.kinetic_core.ph_balance_refusal import BALANCE_REFUSED_TAG
+    assert all((r["absolute_refused"] and r["relative_use_only"]["log10_predicted"] is not None
+                and "predicted" not in r["relative_use_only"])
+               or (r["reason"].startswith(BALANCE_REFUSED_TAG) and "relative_use_only" not in r)
+               for r in ribose["refused_compounds"])

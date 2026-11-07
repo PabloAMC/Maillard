@@ -225,7 +225,9 @@ def test_shared_hofmann_rows_carry_shared_with(small):
     by_id = {b["benchmark_id"]: b for b in small["benchmarks"]}
     # 2026-11-05 (H0 / EX-059): the shared MFT row is refused for its absolute level; the link travels with it
     rows = {r["compound"]: r for r in by_id["mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7"]["refused_compounds"]}
-    assert rows[MFT]["absolute_refused"] and rows[MFT]["relative_use_only"]["shared_with"] == "hofmann_ribose_pH7_MFT"
+    # 2026-11-07 (S3, ph_balance_refusal): the pH 7 pot's MFT moves 1.22 dex between B0 and the carried rivals, so S3 refuses it before H0 does
+    from src.kinetic_core.ph_balance_refusal import BALANCE_REFUSED_TAG
+    assert rows[MFT]["reason"].startswith(BALANCE_REFUSED_TAG) and not rows[MFT]["absolute_refused"]
 
 
 def test_coverage_splits_are_consistent(small):

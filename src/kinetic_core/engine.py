@@ -2740,6 +2740,7 @@ def predict(
     parameters: Optional[Mapping[str, Any]] = None,
     draw: Optional[CoreDraw] = None,
     size_declared_bands: bool = True,
+    balance_refusal: bool = True,
 ) -> CorePrediction:
     """
     THE ENTRY POINT. Map ``spec`` onto a lane, integrate, emit B4 objects.
@@ -2755,6 +2756,12 @@ def predict(
     not ALSO price them by re-integration. ``parameters`` is still the raw
     operative override and cannot be combined with ``draw.maillard``. With
     the defaults the output is byte-identical to the pre-B2 engine.
+
+    ``balance_refusal`` (2026-11-07, the S3 application of M1b part (i); ``ph_balance_refusal``): on a pot whose pH
+    the falsified charge balance solves, every output whose spread over B0 and the two carried rivals exceeds the
+    lane's within-lab term is refused (all of them: ``out_of_envelope`` with the reason; some: named and dropped) and
+    the balance's end pH is withheld when its spread exceeds the prereg's pH term. ``False`` skips that, and exists
+    for the S3 sensitivity generator and the rule's own integrations, which must compute the falsified point.
     """
     if parameters is not None and draw is not None and draw.maillard is not None:
         raise ValueError(
@@ -2972,13 +2979,65 @@ def predict(
         for name in declaration.unreachable_targets:
             concentrations.pop(name, None)
 
-    return CorePrediction(
+    shipped = CorePrediction(
         spec=spec,
         declaration=declaration,
         concentrations_ug_per_l=concentrations,
         species_mmol_per_l=final_state,
         run_metadata=metadata,
     )
+    if balance_refusal and maillard_lane == SULFUR:
+        return _apply_balance_refusal(shipped, targets, centre=(parameters is None and (draw is None or draw.is_centre)))
+    return shipped
+
+
+def _apply_balance_refusal(run: CorePrediction, targets: Sequence[str], *, centre: bool) -> CorePrediction:
+    """2026-11-07 (S3 application of M1b part (i); ``ph_balance_refusal``): refuse the outputs of ``run`` that depend
+    on the falsified pH balance, through the declaration (all refused) or by name (some refused)."""
+    from dataclasses import replace
+
+    from . import ph_balance_refusal as s3
+    from . import ph_balance_rivals
+
+    spec, declaration = run.spec, run.declaration
+    if not s3.balance_solved(spec, declaration.lanes or (declaration.lane,)):
+        return run
+    if ph_balance_rivals.any_active():
+        raise ValueError("a carried pH-balance rival (ph_balance_rivals) is switched on, so this run is not the shipped "
+                         "balance and S3's refusal does not read it: pass balance_refusal=False to run a rival")
+    verdict = s3.assess(spec, list(targets), b0_run=run if centre else None)
+    metadata = dict(run.run_metadata)
+    metadata["balance_s3"] = verdict.summary()
+    refused = [c for c in run.concentrations_ug_per_l if c in verdict.refused]
+    if refused and len(refused) == len(run.concentrations_ug_per_l):
+        refused_declaration = replace(
+            declaration, state="out_of_envelope",
+            reasons=tuple(declaration.reasons) + (s3.refusal_text(refused, verdict),),
+            absolute_refused_targets=(), unreachable_targets=())
+        return CorePrediction(spec=spec, declaration=refused_declaration, run_metadata={"balance_s3": verdict.summary()})
+    concentrations = dict(run.concentrations_ug_per_l)
+    if refused:
+        for name in refused:
+            concentrations.pop(name, None)
+        metadata["refused_targets"] = dict(metadata.get("refused_targets") or {},
+                                           **{name: s3.short_reason() for name in refused})
+        declaration = replace(
+            declaration, state="in_envelope_extrapolated",
+            warnings=tuple(declaration.warnings) + (
+                "NOT ANSWERED, BY NAME: " + ", ".join(repr(c) for c in refused) + " -- " + s3.refusal_text(refused, verdict)
+                + " The other targets are answered.",),
+            absolute_refused_targets=tuple(n for n in declaration.absolute_refused_targets if n not in refused))
+    if verdict.ph_refused:
+        segments = []
+        for segment in metadata.get("segments") or []:
+            segment = dict(segment)
+            for key in s3.WITHHELD_PH_KEYS:
+                if key in segment:
+                    segment[key] = None
+            segment["ph_refused"] = s3.ph_refusal_text()
+            segments.append(segment)
+        metadata["segments"] = segments
+    return replace(run, declaration=declaration, concentrations_ug_per_l=concentrations, run_metadata=metadata)
 
 
 # ---------------------------------------------------------------------------
@@ -3158,6 +3217,22 @@ def compare(
                 "band-floor artefact, so no ratio is claimed; the model supports the ordering "
                 "'pentose above hexose' structurally, not a magnitude"
             )
+    # 2026-11-07 (S3 application of M1b part (i); ph_balance_refusal): a ratio whose arms sit on the falsified pH
+    # balance is refused when B0 and the carried rivals disagree on its sign, or spread it beyond omega.
+    from . import ph_balance_refusal as _s3
+
+    for row in payload.get("rows", []):
+        if row.get("direction") == "undefined":
+            continue
+        compound = str(row["compound"])
+        why = _s3.ratio_refusal(_s3.point_values(spec_a, targets, run_a, compound),
+                                _s3.point_values(spec_b, targets, run_b, compound))
+        if why:
+            row["ratio_a_over_b"] = None
+            row["direction"] = "undefined"
+            row["within_reliability_band"] = False
+            row["balance_refused"] = True
+            row["note"] = why
     # 2026-11-05 (H0 / EX-059, D2 branch (i)): a ratio of a thiol-lane observable is what the lane ships, with
     # the within-laboratory shape error omega in each arm -- added HERE and nowhere else, since no other interval
     # carries it -- and the owner's caveat that the relative branch has not been shown better than a null.

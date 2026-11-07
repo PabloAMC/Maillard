@@ -15,7 +15,9 @@ HEX = "hexanal"
 
 
 def _spec(**extra):
-    base = {"name": "x", "precursors": {"L-Cysteine": 10.0, "D-Ribose": 10.0}, "temp_C": 145.0, "time_min": 20.0, "ph": 5.0, "aw": 0.98}
+    # 2026-11-07 (S3, ph_balance_refusal): a held pH, so the matrix layer is read without the falsified balance's refusal
+    base = {"name": "x", "precursors": {"L-Cysteine": 10.0, "D-Ribose": 10.0}, "temp_C": 145.0, "time_min": 20.0, "ph": 5.0, "aw": 0.98,
+            "buffer": {"kind": "clamped"}}
     base.update(extra)
     return base
 

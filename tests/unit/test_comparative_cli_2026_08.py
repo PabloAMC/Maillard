@@ -531,8 +531,9 @@ def test_one_refused_target_does_not_sink_the_others():
     """2026-10-27. MFT + FFT + methional used to return nothing because methional has no route
     (B22); the two thiols are answered alone. Now they are answered together and methional is
     listed by name with its own reason."""
+    # 2026-11-07 (S3, ph_balance_refusal): a held pH, so the falsified balance's refusal does not take the thiols first
     spec = {"name": "partial", "precursors": {"D-Ribose": 50.0, "L-Cysteine": 10.0, "L-Methionine": 10.0},
-            "temp_C": 150.0, "time_min": 10.0, "ph": 6.0, "aw": 0.98}
+            "temp_C": 150.0, "time_min": 10.0, "ph": 6.0, "aw": 0.98, "buffer": {"kind": "clamped"}}
     # 2026-11-05 (H0 / EX-059): MFT and FFT are now refused by name too, for their absolute level; the
     # out-of-scope 2-acetylthiazole carries the "answered together" half of the test.
     targets = ["2-Methyl-3-furanthiol (MFT)", "2-Furfurylthiol (FFT)", "2-acetylthiazole",
