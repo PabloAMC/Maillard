@@ -4,8 +4,8 @@
     "artifact": "contrast_scores",
     "generated_on": "2026-11-07",
     "git": {
-      "commit": "210b7ff478d70726de0e67aacde2119aabd8d691",
-      "short": "210b7ff4",
+      "commit": "b8ba234edfc17900ca3c60f4afa5abb5844ce9db",
+      "short": "b8ba234e",
       "branch": "s3-ph-balance-refusal",
       "dirty": true
     },
@@ -13,7 +13,7 @@
     "inputs": [
       {
         "path": "results/validation/core_panel_scores.json",
-        "sha256": "a7c8d2db0ade1444a50dbbd6a2e4729f4077af771852fb424589fabb9b8c272b"
+        "sha256": "8db2a5a7be824f6ee2b63498bf7e1749a48446c6a122a115c5972161afbbf1d3"
       }
     ]
   },

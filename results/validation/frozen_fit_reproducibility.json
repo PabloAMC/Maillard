@@ -6998,8 +6998,8 @@
   "artifact": "frozen_fit_reproducibility",
   "generated_on": "2026-11-07",
   "git": {
-   "commit": "210b7ff478d70726de0e67aacde2119aabd8d691",
-   "short": "210b7ff4",
+   "commit": "b8ba234edfc17900ca3c60f4afa5abb5844ce9db",
+   "short": "b8ba234e",
    "branch": "s3-ph-balance-refusal",
    "dirty": true
   },
@@ -7007,7 +7007,7 @@
   "inputs": [
    {
     "path": "results/validation/incumbent_evidence_tiers.json",
-    "sha256": "95182daa1f712ae56a965bcef2d5f7548da2656831a95639816cc975b8dcdba4"
+    "sha256": "da5739affea8c18e726672727d9d01de3773191ce459f4f80083ba762943feae"
    },
    {
     "path": "results/validation/kinetic_core_b1_fit_report.json",
