@@ -1,0 +1,306 @@
+source: zhou2023c
+pdf: data/articles/zhou2023c.pdf
+reader: resolved
+scope_note: Thiols only in the Fig. 1 heat map (values printed in the cells, not digitised); no unit printed on Fig. 1 (Table
+  1 of the study is ug/L). Cells printed '0' keyed nd_no_limit with value null (LOD list in Methods not attributable compound
+  by compound). ARP-alone time series (all 0) not keyed; GSH-vs-none at 30/90/120 min not keyed (main-result time 60 min).
+  Cys concentration in Fig. 1 not printed ('same conditions').
+contrasts:
+- id: zhou2023c-1
+  resolution: re-read
+  odorant: 2-Methyl-3-furanthiol (MFT)
+  lever_class: sulfur source
+  lever: 'added sulfur compound: none vs GSH vs Cys (with ARP)'
+  focal: false
+  location: Fig. 1
+  digitised: false
+  unit: unstated (heat-map cells; calibrated against standards)
+  quant_type: absolute
+  time_course_rule: main result time
+  arms:
+  - label: ARP-60 min
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        ARP: 20 mmol/L
+      buffer: none (pH set with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: ARP+GSH-60 min
+    lever_value: glutathione
+    value: 64.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        ARP: 20 mmol/L
+        GSH: 20 mmol/L
+      buffer: none (pH set with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: ARP+Cys-60 min
+    lever_value: cysteine
+    value: 1150
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        ARP: 20 mmol/L
+        Cys: unstated
+      buffer: none (pH set with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+- id: zhou2023c-2
+  resolution: re-read
+  odorant: 2-Furfurylthiol (FFT)
+  lever_class: sulfur source
+  lever: 'added sulfur compound: none vs GSH vs Cys (with ARP)'
+  focal: false
+  location: Fig. 1
+  digitised: false
+  unit: unstated (heat-map cells; calibrated against standards)
+  quant_type: absolute
+  time_course_rule: main result time
+  arms:
+  - label: ARP-60 min
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        ARP: 20 mmol/L
+      buffer: none (pH set with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: ARP+GSH-60 min
+    lever_value: glutathione
+    value: 383
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        ARP: 20 mmol/L
+        GSH: 20 mmol/L
+      buffer: none (pH set with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: ARP+Cys-60 min
+    lever_value: cysteine
+    value: 511
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        ARP: 20 mmol/L
+        Cys: unstated
+      buffer: none (pH set with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+- id: zhou2023c-3
+  resolution: agreed
+  odorant: 2-Methyl-3-furanthiol (MFT)
+  lever_class: time
+  lever: heating time of ARP+GSH at 120 C
+  focal: false
+  location: Fig. 1
+  digitised: false
+  unit: unstated (heat-map cells; calibrated against standards)
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: ARP+GSH-30 min
+    lever_value: 30
+    value: 59.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 30
+      precursors:
+        ARP: 20 mmol/L
+        GSH: 20 mmol/L
+      buffer: none (pH set with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: ARP+GSH-60 min
+    lever_value: 60
+    value: 64.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        ARP: 20 mmol/L
+        GSH: 20 mmol/L
+      buffer: none (pH set with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: ARP+GSH-90 min
+    lever_value: 90
+    value: 57.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 90
+      precursors:
+        ARP: 20 mmol/L
+        GSH: 20 mmol/L
+      buffer: none (pH set with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: ARP+GSH-120 min
+    lever_value: 120
+    value: 8.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        ARP: 20 mmol/L
+        GSH: 20 mmol/L
+      buffer: none (pH set with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+- id: zhou2023c-4
+  resolution: agreed
+  odorant: 2-Furfurylthiol (FFT)
+  lever_class: time
+  lever: heating time of ARP+GSH at 120 C
+  focal: false
+  location: Fig. 1
+  digitised: false
+  unit: unstated (heat-map cells; calibrated against standards)
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: ARP+GSH-30 min
+    lever_value: 30
+    value: 124
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 30
+      precursors:
+        ARP: 20 mmol/L
+        GSH: 20 mmol/L
+      buffer: none (pH set with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: ARP+GSH-60 min
+    lever_value: 60
+    value: 383
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        ARP: 20 mmol/L
+        GSH: 20 mmol/L
+      buffer: none (pH set with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: ARP+GSH-90 min
+    lever_value: 90
+    value: 270
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 90
+      precursors:
+        ARP: 20 mmol/L
+        GSH: 20 mmol/L
+      buffer: none (pH set with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: ARP+GSH-120 min
+    lever_value: 120
+    value: 116
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        ARP: 20 mmol/L
+        GSH: 20 mmol/L
+      buffer: none (pH set with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
