@@ -272,6 +272,9 @@ def observations(sources, labs) -> Tuple[List[Dict[str, Any]], Dict[str, int]]:
             if key is None:
                 raise SystemExit(f"{src} {c.get('id')}: odorant {c.get('odorant')!r} does not resolve "
                                  "(src/compound_keys.py); fix the name or add the alias")
+            if str(c.get("quantity") or "amount") != "amount":
+                skipped["rates, half-lives or storage losses (PREREG amendment A1)"] += 1
+                continue
             if lc == "mixed":
                 skipped["mixed-lever contrasts (no single-lever cell)"] += 1
                 continue
