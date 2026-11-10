@@ -59,6 +59,12 @@ SEEDS: List[Dict[str, Any]] = [
     # --- molecules that the species YAML does not carry -------------------------
     dict(id="2_3_butanedione", display_name="2,3-Butanedione", kind="molecule", smiles="CC(=O)C(C)=O", aliases=["diacetyl"]),
     dict(id="2_acetylfuran", display_name="2-Acetylfuran", kind="molecule", smiles="CC(=O)c1ccco1"),
+    # the lever table's thiol disulfides (docs/reference/lever_table/PREREG.md, 2026-11-10)
+    dict(id="bis_2_furfuryl_disulfide", display_name="Bis(2-furfuryl) disulfide", kind="molecule", smiles="C(SSCc1ccco1)c1ccco1",
+         aliases=["difurfuryl disulfide", "bis(2-furylmethyl) disulfide", "2,2'-dithiobismethylenedifuran", "fft disulfide"]),
+    dict(id="2_methyl_3_furfuryldithio_furan", display_name="2-Methyl-3-(2-furfuryldithio)furan", kind="molecule",
+         smiles="Cc1occc1SSCc1ccco1", aliases=["2-methyl-3-(2-furylmethyldithio)furan", "2-furfuryl 2-methyl-3-furyl disulfide",
+                                                "mft-fft mixed disulfide", "2-methyl-3-furyl 2-furfuryl disulfide"]),
     dict(id="2_methyltetrahydrofuran_3_one", display_name="2-Methyltetrahydrofuran-3-one", kind="molecule", smiles="CC1OCCC1=O"),
     # 3_isobutyl_2_methoxypyrazine was seeded here until 2026-09-09. It is now a species
     # in off_flavour_targets.yml, which carries its CAS and InChI as well; its class and
@@ -212,7 +218,7 @@ SPECIES_IDS = {
 EXTRA_ALIASES = {
     "3_isobutyl_2_methoxypyrazine": ["ibmp", "2-isobutyl-3-methoxypyrazine", "isobutyl methoxypyrazine"],
     "2_methyl_3_furanthiol": ["2-methyl-3-furylthiol", "2-methylfuran-3-thiol", "2methylfuran3thiol", "2methyl3furylthiol"],
-    "2_furfurylthiol": ["2-furylmethanethiol", "2furylmethanethiol", "furfuryl mercaptan"],
+    "2_furfurylthiol": ["2-furylmethanethiol", "2furylmethanethiol", "furfuryl mercaptan", "2-furanmethanethiol", "furfurylthiol"],
     "bis_2_methyl_3_furyl_disulfide": ["2-methyl-3-furyl 2-methyl-3-furyl disulfide", "mft disulfide", "bis(2-methyl-3-furyl) disulphide"],
     "methional": ["3-(methylthio)propanal", "3methylthiopropanal"],
     "3_methylbutanal": ["isovaleraldehyde"],
