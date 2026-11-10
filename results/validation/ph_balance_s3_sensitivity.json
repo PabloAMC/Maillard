@@ -4,8 +4,8 @@
     "artifact": "ph_balance_s3_sensitivity",
     "generated_on": "2026-11-10",
     "git": {
-      "commit": "b4a84d4d03f886d428f65fa1a45d1e4568227819",
-      "short": "b4a84d4d",
+      "commit": "8e764d384143c1f933671a0bf9bdd558592cefbf",
+      "short": "8e764d38",
       "branch": "s3-ph-balance-refusal",
       "dirty": true
     },
@@ -39,6 +39,14 @@
       {
         "path": "src/kinetic_core/ph_state.py",
         "sha256": "286d23c94b2ec7421b7e6e88670b402eb0347a3a969ed65a1fe89a4725cea468"
+      },
+      {
+        "path": "src/kinetic_core/ph_balance_refusal.py",
+        "sha256": "c10aa8d59cf72fb217e1ebf1dd22dbfc7cb09b455d5daba150fe131b0998c1f2"
+      },
+      {
+        "path": "results/validation/kinetic_core_thiol_lolo_nested_tau.json",
+        "sha256": "be8fcc6208cd4183f2303fa88eb1614ada625f2c40ba9e8afa7cf6b12ff9b17d"
       },
       {
         "path": "src/kinetic_core/sulfur.py",

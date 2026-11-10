@@ -1008,6 +1008,9 @@ def inputs() -> List[Path]:
     # the rules it states are implemented in src/kinetic_core/ph_balance_refusal.py, which the refusal reads
     return [FALSIFICATION, SCREEN, A2, S3_RECORD, POINTS_OUT,
             ROOT / "src/kinetic_core/ph_balance_rivals.py", ROOT / "src/kinetic_core/ph_state.py",
+            # where tau, omega and the pH level term come from (confirmation read of PR #108)
+            ROOT / "src/kinetic_core/ph_balance_refusal.py",
+            data_paths.VALIDATION_DIR / "kinetic_core_thiol_lolo_nested_tau.json",
             ROOT / "src/kinetic_core/sulfur.py", ROOT / "src/kinetic_core/parameters_sulfur.py",
             data_paths.VALIDATION_DIR / "kinetic_core_b60_fit_report.json",
             ROOT / "docs/validation/directional_claims_panel.yml"]

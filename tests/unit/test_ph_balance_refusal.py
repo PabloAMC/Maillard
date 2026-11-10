@@ -208,3 +208,19 @@ def test_the_sensitivity_generator_on_a_toy_pot():
     assert by_output["ph_cooled_end"]["dependent_sensitivity"] is True    # > 0.265
     assert by_output[MFT]["dependent_sensitivity"] is False        # 0.097 < omega
     assert gen.log_spread([1.0, 0.0]) == float("inf") and gen.log_spread([0.0, 0.0]) == 0.0
+
+
+def test_a_thiol_refused_on_both_grounds_keeps_h0s_interval_when_its_ratio_stands():
+    """Confirmation read of PR #108: an H0 thiol whose level the balance ALSO refuses must keep H0's ratio treatment
+    (the omega interval, the relative caveat, the not-resolved check) whenever its ratio stands under S3."""
+    a = {"name": "A", "precursors": {"cysteine": 50.0, "ribose": 35.0}, "temp_C": 145.0, "time_min": 20.0, "ph": 6.5,
+         "aw": 0.98, "buffer": {"kind": "pyrophosphate", "pyrophosphate_mol_l": 0.2}}
+    b = dict(a, name="B", temp_C=120.0, time_min=60.0)
+    cmp = compare_core(a, b, targets=[MFT, FFT])["comparison"]
+    checked = 0
+    for row in cmp["ratios"]["rows"]:
+        if row.get("direction") == "undefined" or row.get("balance_refused"):
+            continue
+        assert "interval_90_ratio_a_over_b" in row and row.get("relative_caveat"), row["compound"]
+        checked += 1
+    assert checked >= 1

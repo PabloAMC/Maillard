@@ -794,6 +794,13 @@ def render_compare_core_text(payload: Mapping[str, Any]) -> str:
             out.append(f"  arm {label}:")
             _render_declaration(declaration, out)
             out.append("")
+    # R3d (PR #108): outputs KEPT on a balance-solved pot carry the band's limit too, not only the refused ones
+    if any(((comparison.get(f"run_{arm}") or {}).get("run_metadata") or {}).get("balance_s3") for arm in ("a", "b")):
+        from src.kinetic_core.ph_balance_refusal import BAND_LIMIT_SHORT
+
+        out.append(_wrap("pH balance (S3): the outputs kept below were judged against the carried rival balances. "
+                         + BAND_LIMIT_SHORT, indent="  ~ "))
+        out.append("")
 
     reliability = payload.get("reliability") or {}
     if reliability.get("available"):

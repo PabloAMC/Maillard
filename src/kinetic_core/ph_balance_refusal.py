@@ -269,12 +269,13 @@ def point_values(spec: Any, targets: Sequence[str], run: Any, compound: str) -> 
         if v.failure:
             return FAILED
         out = {p: v.values.get(p, {}).get(compound) for p in all_points()}
-        return None if any(x is None for x in out.values()) else {p: float(x) for p, x in out.items()}
+        # fail closed: a balance-solved arm without every point's value cannot show the ratio's independence
+        return FAILED if any(x is None for x in out.values()) else {p: float(x) for p, x in out.items()}
     if run is None or compound not in getattr(run, "concentrations_ug_per_l", {}):
         return None
     lanes = run.declaration.lanes or (run.declaration.lane,)
     if balance_solved(spec, lanes):
-        return None
+        return FAILED      # a balance-solved pot with no cached verdict: fail closed (review, PR #108)
     value = float(run.concentrations_ug_per_l[compound])
     return {p: value for p in all_points()}
 

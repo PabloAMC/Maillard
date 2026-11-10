@@ -3032,9 +3032,11 @@ def _apply_balance_refusal(run: CorePrediction, targets: Sequence[str], *, centr
             balance_refused_targets=refused)
     if verdict.ph_refused:
         segments = []
-        for segment in metadata.get("segments") or []:
+        for i, segment in enumerate(metadata.get("segments") or []):
             segment = dict(segment)
-            for key in s3.WITHHELD_PH_KEYS:
+            # a later segment's in-situ START is the balance's pH at the boundary, not the label's shift
+            # (confirmation read of PR #108): withheld too; only segment 0's start is the label's
+            for key in s3.WITHHELD_PH_KEYS + (("ph_in_situ_start",) if i > 0 else ()):
                 if key in segment:
                     segment[key] = None
             segment["ph_refused"] = s3.ph_refusal_text()
@@ -3240,8 +3242,14 @@ def compare(
     # the within-laboratory shape error omega in each arm -- added HERE and nowhere else, since no other interval
     # carries it -- and the owner's caveat that the relative branch has not been shown better than a null.
     # A ratio inside that interval is not resolved, whatever the dispersion band says (review m1).
-    relative_only = ((set(run_a.declaration.absolute_refused_targets) - set(run_a.declaration.balance_refused_targets))
-                     | (set(run_b.declaration.absolute_refused_targets) - set(run_b.declaration.balance_refused_targets)))
+    # A level refused by the balance only (S3) is not a relative-only H0 output; a level refused by BOTH (an H0
+    # thiol on a balance-solved pot) keeps H0's ratio treatment when its ratio stands (confirmation read of PR #108).
+    def _relative_only(decl) -> set:
+        h0 = {t for t in decl.balance_refused_targets
+              if thiol_relative_only.in_scope(decl.mapped_targets.get(t))}
+        return (set(decl.absolute_refused_targets) - set(decl.balance_refused_targets)) | h0
+
+    relative_only = _relative_only(run_a.declaration) | _relative_only(run_b.declaration)
     for row in payload.get("rows", []):
         if str(row["compound"]) not in relative_only or row.get("direction") == "undefined":
             continue
@@ -3257,6 +3265,10 @@ def compare(
     rows_ = payload.get("rows", [])
     payload["n_undefined"] = sum(1 for r in rows_ if r.get("direction") == "undefined")
     payload["n_resolved"] = sum(1 for r in rows_ if r.get("direction") != "undefined" and not r.get("within_reliability_band"))
+    # the ranking is recomputed AFTER the refusals, so a refused or undefined ratio is never ordered (review, PR #108)
+    payload["ranking_by_ratio"] = [r["compound"] for r in sorted(
+        (r for r in rows_ if r.get("direction") != "undefined" and isinstance(r.get("ratio_a_over_b"), (int, float))),
+        key=lambda r: r["ratio_a_over_b"], reverse=True)]
     out = {
         "comparable": True,
         "ratios": payload,
