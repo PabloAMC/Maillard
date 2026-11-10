@@ -137,21 +137,36 @@ ratio between two arms of one study (sigma_r), with the carried pH-balance rival
 that pin constants or settle route shares (the sized M3 - M6 designs) cannot make the lever table useful while
 sigma_r is ~1.2 dex. Settling them stays worth recording, but it no longer leads.
 
+**sigma_r is mostly two studies.** xu2007 (2.62 dex, a pyrophosphate design whose buffer switch is not built) and
+Hofmann pH 3 / 7 (2.58 dex, df 2; pH 3 is likely outside the engine's scope) carry it; the other four studies sit
+at ~0.43 - 0.57 dex and STILL show no lever skill (slope 0.36, CI includes 0; calibrated contrasts 0.36 vs 0.33 for
+"no change"). So fixing the two outliers alone (sigma_r ~0.50) changes no decision; the target is <= 0.42 dex.
+
+**Spent data (sec. 7 item 2 holds).** The six studies that nominate culprits cannot credit the fixes. Before any
+per-pair residual is read for P1, a **sigma_r TEST set is sealed**: at least 5 sulfur-lane paired-arm studies from
+NEW laboratories (from the keying queue's untriaged ranks and unused ledger entries), keyed blind by two readers,
+its file list's sha256 recorded here. It is scored once per batch of fixes, at most 3 looks before 01-23. The current
+six studies become development data.
+
 **The redirect, in priority order.**
 
 | # | what | why | done means |
 |---|---|---|---|
-| P1 | **Contrast-discrepancy decomposition** (resumed): attribute each out-of-sample within-study miss to mechanism steps (exact JAX gradients where ported), with and without the B0-pH-dependent pairs | names the structures behind the ~2.6 dex misses (xu2007, Hofmann) and the rest | a ranked list of 5 - 10 culprit structures, each with the evidence that would fix it |
-| P2 | **Structure fixes on P1's culprits**, each through a sec. 7 case | the only route that lowers sigma_r | sigma_r (step 0's estimator, leave-one-study-out) becomes the PRIMARY yardstick of chemistry work, beside the contrast benchmark; a fix ships only if it lowers sigma_r out of sample |
-| P3 | **Hybrid route:** a statistical layer (W4's hierarchical model) over the kinetic structure, fitted on ONE designed within-laboratory factorial lever study (cysteine x sugar x pH x time in a pea-protein matrix, GC-MS plus GC-O, the decision-relevance prereg's contrast design) | sidesteps the structural discrepancy inside one matrix and one laboratory, and feeds the perception layer | the study designed and sized with the decision-relevance machinery; the request drafted. **W6 moves earlier for this one study** (the evidence now says designed lever data is the bottleneck); sending it stays the owner's action |
-| P4 | **Narrow the shipped scope:** a lever direction is shown only where step 0's oracle ceiling allows it; everything else ships as a refusal or a range | honesty: today only very large levers can be shown | the lever table's first version says which levers it can answer and which it cannot |
+| P0 | **Empirical meta-analysis of the literature's within-study lever contrasts** (hierarchical, by lever class x odorant): directions with intervals from data alone (~10 - 15 h) | the cheapest honest answer to formulators' questions; P4's rival; the fallback if P3 never runs | a lever table from data, with its scope |
+| P1b | **Missing-structure screen**, before any gradient: regress residuals and the over-response (slope 0.21) on lever class (pH, dose, sugar, temperature, time, buffer); cross against the atlas's 20 ranked errors, the M0 inventory and the labelling route shares (R1: MFT 99.9 % vs ~7 %) | gradients cannot see a missing pathway (xu2007's buffer switch, Hofmann's pH 3) | the lever classes and absent structures behind the over-response |
+| P1 | **Gradient decomposition** (resumed): attribute each development-set miss to mechanism steps (exact JAX gradients where ported), with and without the B0-pH pairs | names the culprits inside the existing structure | a ranked list of 5 - 10 culprit structures, each with the evidence that would fix it |
+| P2 | **Structure fixes on P1 / P1b's culprits**, each through a sec. 7 case; the M5 buffer switch is un-paused (xu2007's miss likely sits there) | the only route that lowers sigma_r | sigma_r on the sealed TEST set is the PRIMARY yardstick of chemistry work, beside the contrast benchmark. Scope exclusions count as gains only if P4 narrows the shipped scope identically |
+| P3 | **Hybrid route:** a statistical layer over the kinetic structure, fitted on ONE designed within-laboratory factorial lever study (2^4 plus centre points, replicated: cysteine x sugar x pH x time in a pea-protein matrix, GC-MS plus GC-O), plus one replicate block in a second matrix (soy). The hybrid ships only if it beats a pure empirical response surface (Gaussian process or quadratic) on held-out cells; otherwise the surface ships | sidesteps the structural discrepancy inside one matrix and one laboratory; feeds the perception layer | the study designed, sized and its request drafted. **Honest scope:** interpolation of one laboratory's response surface for one isolate and base recipe, NOT transfer to users' recipes. W6 moves earlier for this one study; sending it stays the owner's action |
+| P4 | **Narrow the shipped scope:** a lever direction is shown only where step 0's oracle ceiling allows it AND it agrees with P0's meta-analysis AND it beats "no change"; everything else ships as a refusal or a range | honesty: today only very large levers can be shown | the lever table's first version says which levers it can answer and which it cannot |
 
 **Paused (resumable; work kept in their branches):** the M3 route power check (also blocked by the judge-bound
 artefact found in the M6 premortem), the M6 rework, the judge-bound fix (needed only when a case can credit again),
-and the JAX port of B1 / B13 (needed to re-run #108 on every passing draw and to lift its refusal; it returns when
-P2 touches the pH balance). Merged work (governance, S1 / S4, the drift gate, M1b(i), M4, M5) stands.
+the JAX port of B1 / B13 (needed to re-run #108 on every passing draw and to lift its refusal; it returns when
+P2 touches the pH balance), and H4 / W4's posterior on the current structure (a posterior of a slope-0.2 engine is
+wasted). Merged work (governance, S1 / S4, the drift gate, M1b(i), M4, M5) stands.
 
-**Not changed:** sec. 7 (how a change ships), the owner-first clauses, and the cases already frozen.
+**Not changed:** sec. 7 (how a change ships; item 2's spent-data rule is why the TEST set is sealed), the owner-first
+clauses, and the cases already frozen. Premortem: adopted with edits (2026-11-10), all folded in.
 
 ## 5. The workstreams
 
@@ -240,6 +255,9 @@ validated on a plant-based product.
 | **W5.4** | **The lever table: the deliverable.** Per odorant and per lever (cysteine or yeast extract, sugar type, thiamine, pH, fat, temperature and time, cooking method): direction, size with interval, and whether the held-out benchmark supports it | JR, H4 (Laplace intervals as the fallback) | 2 - 3 days |
 
 ### W6. Outside data, without a laboratory (owner)
+
+**Moved earlier for ONE item (redirect, sec. 4.1 P3, 2026-11-10):** the designed factorial lever study, drafted and
+sized now; sending it stays the owner's action. Everything else in W6 keeps its place.
 
 - Send the 5 drafted author data requests (`data/articles/OUTREACH_DRAFTS.md`, laptop only).
 - Add requests for existing data that would test a W2 step (ENGINE_VS_LITERATURE sec. 3.1, the "Or" alternatives):
@@ -514,18 +532,21 @@ leads; under the redirect they are superseded by:
 
 | by | done means | P |
 |---|---|---|
-| 11-21 | P1's ranked culprit list; the factorial lever study designed, sized and its request drafted (P3) | ~0.6 |
-| 12-19 | P2's first structure fix judged on sigma_r out of sample | ~0.35 |
-| 01-23 | sigma_r <= 0.6 dex on the sulfur lane (leave-one-study-out), or a stated reason why not; the lever table's first, narrowed version (P4) | ~0.2 |
+| 11-24 | the sigma_r TEST set sealed; P0's meta-analysis done; P1b's screen done | ~0.55 |
+| 12-05 | P1's ranked culprit list; the factorial lever study designed, sized and its request drafted (P3) | ~0.45 |
+| 12-19 | P2's first structure fix judged on the TEST set (judged ~0.35; passes ~0.15) | ~0.35 |
+| 01-23 | sigma_r <= 0.42 dex on the sealed TEST set (no escape clause); the lever table's first, narrowed version (P4) | ~0.07 (target); ~0.6 (narrowed table) |
 
 Odds after step 0: ranked relative predictions with honest intervals for MOST levers by the end of January, ~0.1
-(was ~0.35); for the few levers large enough to show, ~0.5. With the factorial study's data in hand (P3), the
-hybrid route's odds of most levers within one matrix and laboratory are ~0.35, conditional on the data arriving by
-early January.
+(was ~0.35); for the few levers large enough to show, ~0.5. P3's data arriving by early January, unconditionally,
+~0.05 (the WUR blind test has no data after three weeks); the hybrid route delivering most levers within one matrix
+and laboratory by 01-23, unconditionally, ~0.02. The redirect improving the tool's usefulness by the end of January,
+~0.35 (mostly from P0 and P4's honest narrowing).
 
 ## 9. Not in the plan
 
-- New laboratory experiments and the designed-experiment brief (paused by the owner).
+- New laboratory experiments and the designed-experiment brief (paused by the owner), EXCEPT the one factorial
+  lever study of sec. 4.1 P3, which the redirect (owner-delegated, 2026-11-10) moves earlier.
 - Broad literature searches and the consolidation wave V. Reading is limited to the papers named above and W6.
 - New engine switches without a case (sec. 7).
 - The E6 + E11 refit queue on its own branch as a separate exercise: it becomes M2.
