@@ -564,3 +564,13 @@ have no null answer): counting it as a difference of 0 pulls the mean to zero an
   replicates, meter repeatability, a same-design repeat), never transferred from another observable. Before freezing,
   check that the term respects the model's conservation laws and that its size is comparable with the measurement's
   noise.
+## 2026-11-10 — A pooled error is not a verdict on every lever: split it by lever class and predicted effect first
+- **What happened:** step 0 of the decision-relevance prereg pooled the sulfur lane's ratio error into one sigma_r
+  (1.23 dex) and read it as "no experiment can make the lever table useful", which redirected the plan. Split by
+  lever class and by predicted effect (the step-0 addendum), the error sits in 7 pairs where the engine predicts
+  > 1 dex for a pH step (2.7 dex); in the other four studies sigma_r is 0.51 and the engine mostly predicts no
+  change at all. The frozen verdict was computed correctly; its generalisation ("structure, not parameters",
+  "whatever the experiments") had not been tested.
+- **Rule:** before a pooled residual statistic drives a plan decision, report it by lever class, by bin of predicted
+  effect, with and without its most influential studies, and with sign accuracy; and propagate the parameter bands
+  onto the same residuals before calling the error structural.
