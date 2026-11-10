@@ -1,0 +1,189 @@
+source: "mizutani1960"
+pdf: "data/articles/mizutani1960.pdf"
+reader: "resolved"
+scope_note: "Table I only (Table II is ammonia). Heated (120 C oil bath) aqueous solutions of cysteine-aldehyde thiazolidines, no sugar; values are cumulative H2S swept out of the flask by CO2. Sulfur-source contrast at 6 h (longest time; no main time stated); it omits L-cysteine-furfural (II), which differs from (I) only by >1 month storage and has no 6 h value. The '-' printed for n-butyraldehyde at 0.5 h is keyed nd_no_limit; the '-' for furfural (II) at 6 h follows a cumulative 723 ug at 3 h, so it means not measured, and that arm is omitted (not a censored arm)."
+contrasts:
+  - id: "mizutani1960-1"
+    odorant: "Hydrogen Sulfide"
+    lever_class: "sulfur source"
+    lever: "sulfur compound heated (equal sulfur, 32 mg S), H2S liberated after 6 h"
+    focal: true
+    location: "Table I, p. 384"
+    digitised: false
+    unit: "ug H2S liberated"
+    quant_type: "absolute"
+    time_course_rule: "longest time"
+    resolution: "re-read"
+    arms:
+      - {label: "L-cystine, 6 h", lever_value: "cystine", value: 475, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 360, precursors: {"L-cystine": "containing 32 mg S"}, buffer: "none", matrix: "water (10 ml)", headspace: "inert (CO2 gas current through flask)"}}
+      - {label: "L-cysteine, 6 h", lever_value: "cysteine", value: 325, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 360, precursors: {"L-cysteine": "containing 32 mg S"}, buffer: "none", matrix: "water (10 ml)", headspace: "inert (CO2 gas current through flask)"}}
+      - {label: "L-cysteine-formaldehyde, 6 h", lever_value: "cysteine-formaldehyde", value: 264, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 360, precursors: {"L-cysteine-formaldehyde": "containing 32 mg S"}, buffer: "none", matrix: "water (10 ml)", headspace: "inert (CO2 gas current through flask)"}}
+      - {label: "L-cysteine-acetaldehyde, 6 h", lever_value: "cysteine-acetaldehyde", value: 232.5, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 360, precursors: {"L-cysteine-acetaldehyde": "containing 32 mg S"}, buffer: "none", matrix: "water (10 ml)", headspace: "inert (CO2 gas current through flask)"}}
+      - {label: "L-cysteine-n-butyraldehyde, 6 h", lever_value: "cysteine-n-butyraldehyde", value: 97, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 360, precursors: {"L-cysteine-n-butyraldehyde": "containing 32 mg S"}, buffer: "none", matrix: "water (10 ml)", headspace: "inert (CO2 gas current through flask)"}}
+      - {label: "L-cysteine-benzaldehyde, 6 h", lever_value: "cysteine-benzaldehyde", value: 195, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 360, precursors: {"L-cysteine-benzaldehyde": "containing 32 mg S"}, buffer: "none", matrix: "water (10 ml)", headspace: "inert (CO2 gas current through flask)"}}
+      - {label: "L-cysteine-furfural (I), 6 h", lever_value: "cysteine-furfural (i)", value: 700, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 360, precursors: {"L-cysteine-furfural (I)": "containing 32 mg S"}, buffer: "none", matrix: "water (10 ml)", headspace: "inert (CO2 gas current through flask)"}}
+  - id: "mizutani1960-2"
+    odorant: "Hydrogen Sulfide"
+    lever_class: "time"
+    lever: "heating time at 120 C (0.5, 1, 3, 6 h), L-cystine; cumulative H2S"
+    focal: false
+    location: "Table I, p. 384"
+    digitised: false
+    unit: "ug H2S liberated"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    resolution: "agreed"
+    arms:
+      - {label: "L-cystine, 0.5 h", lever_value: 30, value: 8.5, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 30, precursors: {"L-cystine": "containing 32 mg S"}, buffer: "none", matrix: "water (10 ml)", headspace: "inert (CO2 gas current through flask)"}}
+      - {label: "L-cystine, 1 h", lever_value: 60, value: 29, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 60, precursors: {"L-cystine": "containing 32 mg S"}, buffer: "none", matrix: "water (10 ml)", headspace: "inert (CO2 gas current through flask)"}}
+      - {label: "L-cystine, 3 h", lever_value: 180, value: 172, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 180, precursors: {"L-cystine": "containing 32 mg S"}, buffer: "none", matrix: "water (10 ml)", headspace: "inert (CO2 gas current through flask)"}}
+      - {label: "L-cystine, 6 h", lever_value: 360, value: 475, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 360, precursors: {"L-cystine": "containing 32 mg S"}, buffer: "none", matrix: "water (10 ml)", headspace: "inert (CO2 gas current through flask)"}}
+  - id: "mizutani1960-3"
+    odorant: "Hydrogen Sulfide"
+    lever_class: "time"
+    lever: "heating time at 120 C (0.5, 1, 3, 6 h), L-cysteine; cumulative H2S"
+    focal: false
+    location: "Table I, p. 384"
+    digitised: false
+    unit: "ug H2S liberated"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    resolution: "agreed"
+    arms:
+      - {label: "L-cysteine, 0.5 h", lever_value: 30, value: 19, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 30, precursors: {"L-cysteine": "containing 32 mg S"}, buffer: "none", matrix: "water (10 ml)", headspace: "inert (CO2 gas current through flask)"}}
+      - {label: "L-cysteine, 1 h", lever_value: 60, value: 47, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 60, precursors: {"L-cysteine": "containing 32 mg S"}, buffer: "none", matrix: "water (10 ml)", headspace: "inert (CO2 gas current through flask)"}}
+      - {label: "L-cysteine, 3 h", lever_value: 180, value: 121, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 180, precursors: {"L-cysteine": "containing 32 mg S"}, buffer: "none", matrix: "water (10 ml)", headspace: "inert (CO2 gas current through flask)"}}
+      - {label: "L-cysteine, 6 h", lever_value: 360, value: 325, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 360, precursors: {"L-cysteine": "containing 32 mg S"}, buffer: "none", matrix: "water (10 ml)", headspace: "inert (CO2 gas current through flask)"}}
+  - id: "mizutani1960-4"
+    odorant: "Hydrogen Sulfide"
+    lever_class: "time"
+    lever: "heating time at 120 C (0.5, 1, 3, 6 h), L-cysteine-formaldehyde; cumulative H2S"
+    focal: false
+    location: "Table I, p. 384"
+    digitised: false
+    unit: "ug H2S liberated"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    resolution: "agreed"
+    arms:
+      - {label: "L-cysteine-formaldehyde, 0.5 h", lever_value: 30, value: 10, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 30, precursors: {"L-cysteine-formaldehyde": "containing 32 mg S"}, buffer: "none", matrix: "water (10 ml)", headspace: "inert (CO2 gas current through flask)"}}
+      - {label: "L-cysteine-formaldehyde, 1 h", lever_value: 60, value: 20, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 60, precursors: {"L-cysteine-formaldehyde": "containing 32 mg S"}, buffer: "none", matrix: "water (10 ml)", headspace: "inert (CO2 gas current through flask)"}}
+      - {label: "L-cysteine-formaldehyde, 3 h", lever_value: 180, value: 90, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 180, precursors: {"L-cysteine-formaldehyde": "containing 32 mg S"}, buffer: "none", matrix: "water (10 ml)", headspace: "inert (CO2 gas current through flask)"}}
+      - {label: "L-cysteine-formaldehyde, 6 h", lever_value: 360, value: 264, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 360, precursors: {"L-cysteine-formaldehyde": "containing 32 mg S"}, buffer: "none", matrix: "water (10 ml)", headspace: "inert (CO2 gas current through flask)"}}
+  - id: "mizutani1960-5"
+    odorant: "Hydrogen Sulfide"
+    lever_class: "time"
+    lever: "heating time at 120 C (0.5, 1, 3, 6 h), L-cysteine-acetaldehyde; cumulative H2S"
+    focal: false
+    location: "Table I, p. 384"
+    digitised: false
+    unit: "ug H2S liberated"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    resolution: "agreed"
+    arms:
+      - {label: "L-cysteine-acetaldehyde, 0.5 h", lever_value: 30, value: 8, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 30, precursors: {"L-cysteine-acetaldehyde": "containing 32 mg S"}, buffer: "none", matrix: "water (10 ml)", headspace: "inert (CO2 gas current through flask)"}}
+      - {label: "L-cysteine-acetaldehyde, 1 h", lever_value: 60, value: 19, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 60, precursors: {"L-cysteine-acetaldehyde": "containing 32 mg S"}, buffer: "none", matrix: "water (10 ml)", headspace: "inert (CO2 gas current through flask)"}}
+      - {label: "L-cysteine-acetaldehyde, 3 h", lever_value: 180, value: 84, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 180, precursors: {"L-cysteine-acetaldehyde": "containing 32 mg S"}, buffer: "none", matrix: "water (10 ml)", headspace: "inert (CO2 gas current through flask)"}}
+      - {label: "L-cysteine-acetaldehyde, 6 h", lever_value: 360, value: 232.5, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 360, precursors: {"L-cysteine-acetaldehyde": "containing 32 mg S"}, buffer: "none", matrix: "water (10 ml)", headspace: "inert (CO2 gas current through flask)"}}
+  - id: "mizutani1960-6"
+    odorant: "Hydrogen Sulfide"
+    lever_class: "time"
+    lever: "heating time at 120 C (0.5, 1, 3, 6 h), L-cysteine-n-butyraldehyde; cumulative H2S"
+    focal: false
+    location: "Table I, p. 384"
+    digitised: false
+    unit: "ug H2S liberated"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    resolution: "agreed"
+    arms:
+      - {label: "L-cysteine-n-butyraldehyde, 0.5 h", lever_value: 30, value: null, censor: nd_no_limit, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 30, precursors: {"L-cysteine-n-butyraldehyde": "containing 32 mg S"}, buffer: "none", matrix: "water (10 ml)", headspace: "inert (CO2 gas current through flask)"}}
+      - {label: "L-cysteine-n-butyraldehyde, 1 h", lever_value: 60, value: 7, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 60, precursors: {"L-cysteine-n-butyraldehyde": "containing 32 mg S"}, buffer: "none", matrix: "water (10 ml)", headspace: "inert (CO2 gas current through flask)"}}
+      - {label: "L-cysteine-n-butyraldehyde, 3 h", lever_value: 180, value: 29, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 180, precursors: {"L-cysteine-n-butyraldehyde": "containing 32 mg S"}, buffer: "none", matrix: "water (10 ml)", headspace: "inert (CO2 gas current through flask)"}}
+      - {label: "L-cysteine-n-butyraldehyde, 6 h", lever_value: 360, value: 97, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 360, precursors: {"L-cysteine-n-butyraldehyde": "containing 32 mg S"}, buffer: "none", matrix: "water (10 ml)", headspace: "inert (CO2 gas current through flask)"}}
+  - id: "mizutani1960-7"
+    odorant: "Hydrogen Sulfide"
+    lever_class: "time"
+    lever: "heating time at 120 C (0.5, 1, 3, 6 h), L-cysteine-benzaldehyde; cumulative H2S"
+    focal: false
+    location: "Table I, p. 384"
+    digitised: false
+    unit: "ug H2S liberated"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    resolution: "agreed"
+    arms:
+      - {label: "L-cysteine-benzaldehyde, 0.5 h", lever_value: 30, value: 7, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 30, precursors: {"L-cysteine-benzaldehyde": "containing 32 mg S"}, buffer: "none", matrix: "water (10 ml)", headspace: "inert (CO2 gas current through flask)"}}
+      - {label: "L-cysteine-benzaldehyde, 1 h", lever_value: 60, value: 15, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 60, precursors: {"L-cysteine-benzaldehyde": "containing 32 mg S"}, buffer: "none", matrix: "water (10 ml)", headspace: "inert (CO2 gas current through flask)"}}
+      - {label: "L-cysteine-benzaldehyde, 3 h", lever_value: 180, value: 60, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 180, precursors: {"L-cysteine-benzaldehyde": "containing 32 mg S"}, buffer: "none", matrix: "water (10 ml)", headspace: "inert (CO2 gas current through flask)"}}
+      - {label: "L-cysteine-benzaldehyde, 6 h", lever_value: 360, value: 195, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 360, precursors: {"L-cysteine-benzaldehyde": "containing 32 mg S"}, buffer: "none", matrix: "water (10 ml)", headspace: "inert (CO2 gas current through flask)"}}
+  - id: "mizutani1960-8"
+    odorant: "Hydrogen Sulfide"
+    lever_class: "time"
+    lever: "heating time at 120 C (0.5, 1, 3, 6 h), L-cysteine-furfural (I); cumulative H2S"
+    focal: false
+    location: "Table I, p. 384"
+    digitised: false
+    unit: "ug H2S liberated"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    resolution: "agreed"
+    arms:
+      - {label: "L-cysteine-furfural (I), 0.5 h", lever_value: 30, value: 32, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 30, precursors: {"L-cysteine-furfural (I)": "containing 32 mg S"}, buffer: "none", matrix: "water (10 ml)", headspace: "inert (CO2 gas current through flask)"}}
+      - {label: "L-cysteine-furfural (I), 1 h", lever_value: 60, value: 68, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 60, precursors: {"L-cysteine-furfural (I)": "containing 32 mg S"}, buffer: "none", matrix: "water (10 ml)", headspace: "inert (CO2 gas current through flask)"}}
+      - {label: "L-cysteine-furfural (I), 3 h", lever_value: 180, value: 237, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 180, precursors: {"L-cysteine-furfural (I)": "containing 32 mg S"}, buffer: "none", matrix: "water (10 ml)", headspace: "inert (CO2 gas current through flask)"}}
+      - {label: "L-cysteine-furfural (I), 6 h", lever_value: 360, value: 700, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 360, precursors: {"L-cysteine-furfural (I)": "containing 32 mg S"}, buffer: "none", matrix: "water (10 ml)", headspace: "inert (CO2 gas current through flask)"}}
+  - id: "mizutani1960-9"
+    odorant: "Hydrogen Sulfide"
+    lever_class: "time"
+    lever: "heating time at 120 C (0.5, 1, 3 h; 6 h not measured), L-cysteine-furfural (II); cumulative H2S"
+    focal: false
+    location: "Table I, p. 384"
+    digitised: false
+    unit: "ug H2S liberated"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    resolution: "re-read"
+    arms:
+      - {label: "L-cysteine-furfural (II), 0.5 h", lever_value: 30, value: 106, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 30, precursors: {"L-cysteine-furfural (II)": "containing 32 mg S"}, buffer: "none", matrix: "water (10 ml)", headspace: "inert (CO2 gas current through flask)"}}
+      - {label: "L-cysteine-furfural (II), 1 h", lever_value: 60, value: 195, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 60, precursors: {"L-cysteine-furfural (II)": "containing 32 mg S"}, buffer: "none", matrix: "water (10 ml)", headspace: "inert (CO2 gas current through flask)"}}
+      - {label: "L-cysteine-furfural (II), 3 h", lever_value: 180, value: 723, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 180, precursors: {"L-cysteine-furfural (II)": "containing 32 mg S"}, buffer: "none", matrix: "water (10 ml)", headspace: "inert (CO2 gas current through flask)"}}

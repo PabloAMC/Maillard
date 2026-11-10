@@ -1,0 +1,728 @@
+source: obata1960
+pdf: data/articles/obata1960.pdf
+reader: b
+scope_note: No sugar; thermal H2S release from cysteine mercaptals/mercaptoles in water (100 ml, vs 10 ml in Part III, so
+  values are not comparable across the two papers); 6 h used for the sulfur-source contrast.
+contrasts:
+- id: obata1960-1
+  odorant: hydrogen sulfide
+  lever_class: time
+  lever: heating time at 120 C (oil bath), L-cystine
+  focal: false
+  location: Table I, p. 564
+  digitised: false
+  unit: ug H2S liberated per sample (32 mg S)
+  quant_type: absolute
+  time_course_rule: whole series (lever is time)
+  arms:
+  - label: L-cystine, 1 h
+    lever_value: 60
+    value: 21
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        L-cystine: amount containing 32 mg S
+      buffer: none; hydrochlorides neutralised with 6 N NaOH
+      matrix: water (100 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+  - label: L-cystine, 3 h
+    lever_value: 180
+    value: 248
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 180
+      precursors:
+        L-cystine: amount containing 32 mg S
+      buffer: none; hydrochlorides neutralised with 6 N NaOH
+      matrix: water (100 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+  - label: L-cystine, 6 h
+    lever_value: 360
+    value: 660
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 360
+      precursors:
+        L-cystine: amount containing 32 mg S
+      buffer: none; hydrochlorides neutralised with 6 N NaOH
+      matrix: water (100 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+- id: obata1960-2
+  odorant: hydrogen sulfide
+  lever_class: time
+  lever: heating time at 120 C (oil bath), L-cysteine
+  focal: false
+  location: Table I, p. 564
+  digitised: false
+  unit: ug H2S liberated per sample (32 mg S)
+  quant_type: absolute
+  time_course_rule: whole series (lever is time)
+  arms:
+  - label: L-cysteine, 1 h
+    lever_value: 60
+    value: 52
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        L-cysteine: amount containing 32 mg S
+      buffer: none; hydrochlorides neutralised with 6 N NaOH
+      matrix: water (100 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+  - label: L-cysteine, 3 h
+    lever_value: 180
+    value: 186
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 180
+      precursors:
+        L-cysteine: amount containing 32 mg S
+      buffer: none; hydrochlorides neutralised with 6 N NaOH
+      matrix: water (100 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+  - label: L-cysteine, 6 h
+    lever_value: 360
+    value: 450
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 360
+      precursors:
+        L-cysteine: amount containing 32 mg S
+      buffer: none; hydrochlorides neutralised with 6 N NaOH
+      matrix: water (100 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+- id: obata1960-3
+  odorant: hydrogen sulfide
+  lever_class: time
+  lever: heating time at 120 C (oil bath), djenkolic acid
+  focal: false
+  location: Table I, p. 564
+  digitised: false
+  unit: ug H2S liberated per sample (32 mg S)
+  quant_type: absolute
+  time_course_rule: whole series (lever is time)
+  arms:
+  - label: djenkolic acid, 1 h
+    lever_value: 60
+    value: 61
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        djenkolic acid: amount containing 32 mg S
+      buffer: none; hydrochlorides neutralised with 6 N NaOH
+      matrix: water (100 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+  - label: djenkolic acid, 3 h
+    lever_value: 180
+    value: 187
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 180
+      precursors:
+        djenkolic acid: amount containing 32 mg S
+      buffer: none; hydrochlorides neutralised with 6 N NaOH
+      matrix: water (100 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+  - label: djenkolic acid, 6 h
+    lever_value: 360
+    value: 338
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 360
+      precursors:
+        djenkolic acid: amount containing 32 mg S
+      buffer: none; hydrochlorides neutralised with 6 N NaOH
+      matrix: water (100 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+- id: obata1960-4
+  odorant: hydrogen sulfide
+  lever_class: time
+  lever: heating time at 120 C (oil bath), L-cysteine mercaptal of acetaldehyde
+  focal: false
+  location: Table I, p. 564
+  digitised: false
+  unit: ug H2S liberated per sample (32 mg S)
+  quant_type: absolute
+  time_course_rule: whole series (lever is time)
+  arms:
+  - label: L-cysteine mercaptal of acetaldehyde, 1 h
+    lever_value: 60
+    value: 54
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        L-cysteine mercaptal of acetaldehyde: amount containing 32 mg S
+      buffer: none; hydrochlorides neutralised with 6 N NaOH
+      matrix: water (100 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+  - label: L-cysteine mercaptal of acetaldehyde, 3 h
+    lever_value: 180
+    value: 175
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 180
+      precursors:
+        L-cysteine mercaptal of acetaldehyde: amount containing 32 mg S
+      buffer: none; hydrochlorides neutralised with 6 N NaOH
+      matrix: water (100 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+  - label: L-cysteine mercaptal of acetaldehyde, 6 h
+    lever_value: 360
+    value: 315
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 360
+      precursors:
+        L-cysteine mercaptal of acetaldehyde: amount containing 32 mg S
+      buffer: none; hydrochlorides neutralised with 6 N NaOH
+      matrix: water (100 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+- id: obata1960-5
+  odorant: hydrogen sulfide
+  lever_class: time
+  lever: heating time at 120 C (oil bath), L-cysteine mercaptal of n-butyraldehyde
+  focal: false
+  location: Table I, p. 564
+  digitised: false
+  unit: ug H2S liberated per sample (32 mg S)
+  quant_type: absolute
+  time_course_rule: whole series (lever is time)
+  arms:
+  - label: L-cysteine mercaptal of n-butyraldehyde, 1 h
+    lever_value: 60
+    value: 41
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        L-cysteine mercaptal of n-butyraldehyde: amount containing 32 mg S
+      buffer: none; hydrochlorides neutralised with 6 N NaOH
+      matrix: water (100 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+  - label: L-cysteine mercaptal of n-butyraldehyde, 3 h
+    lever_value: 180
+    value: 129
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 180
+      precursors:
+        L-cysteine mercaptal of n-butyraldehyde: amount containing 32 mg S
+      buffer: none; hydrochlorides neutralised with 6 N NaOH
+      matrix: water (100 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+  - label: L-cysteine mercaptal of n-butyraldehyde, 6 h
+    lever_value: 360
+    value: 240
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 360
+      precursors:
+        L-cysteine mercaptal of n-butyraldehyde: amount containing 32 mg S
+      buffer: none; hydrochlorides neutralised with 6 N NaOH
+      matrix: water (100 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+- id: obata1960-6
+  odorant: hydrogen sulfide
+  lever_class: time
+  lever: heating time at 120 C (oil bath), L-cysteine mercaptal of benzaldehyde
+  focal: false
+  location: Table I, p. 564
+  digitised: false
+  unit: ug H2S liberated per sample (32 mg S)
+  quant_type: absolute
+  time_course_rule: whole series (lever is time)
+  arms:
+  - label: L-cysteine mercaptal of benzaldehyde, 1 h
+    lever_value: 60
+    value: 75
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        L-cysteine mercaptal of benzaldehyde: amount containing 32 mg S
+      buffer: none; hydrochlorides neutralised with 6 N NaOH
+      matrix: water (100 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+  - label: L-cysteine mercaptal of benzaldehyde, 3 h
+    lever_value: 180
+    value: 308
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 180
+      precursors:
+        L-cysteine mercaptal of benzaldehyde: amount containing 32 mg S
+      buffer: none; hydrochlorides neutralised with 6 N NaOH
+      matrix: water (100 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+  - label: L-cysteine mercaptal of benzaldehyde, 6 h
+    lever_value: 360
+    value: 620
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 360
+      precursors:
+        L-cysteine mercaptal of benzaldehyde: amount containing 32 mg S
+      buffer: none; hydrochlorides neutralised with 6 N NaOH
+      matrix: water (100 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+- id: obata1960-7
+  odorant: hydrogen sulfide
+  lever_class: time
+  lever: heating time at 120 C (oil bath), L-cysteine mercaptal of furfural
+  focal: false
+  location: Table I, p. 564
+  digitised: false
+  unit: ug H2S liberated per sample (32 mg S)
+  quant_type: absolute
+  time_course_rule: whole series (lever is time)
+  arms:
+  - label: L-cysteine mercaptal of furfural, 1 h
+    lever_value: 60
+    value: 137.5
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        L-cysteine mercaptal of furfural: amount containing 32 mg S
+      buffer: none; hydrochlorides neutralised with 6 N NaOH
+      matrix: water (100 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+  - label: L-cysteine mercaptal of furfural, 3 h
+    lever_value: 180
+    value: 450
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 180
+      precursors:
+        L-cysteine mercaptal of furfural: amount containing 32 mg S
+      buffer: none; hydrochlorides neutralised with 6 N NaOH
+      matrix: water (100 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+  - label: L-cysteine mercaptal of furfural, 6 h
+    lever_value: 360
+    value: 900
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 360
+      precursors:
+        L-cysteine mercaptal of furfural: amount containing 32 mg S
+      buffer: none; hydrochlorides neutralised with 6 N NaOH
+      matrix: water (100 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+- id: obata1960-8
+  odorant: hydrogen sulfide
+  lever_class: time
+  lever: heating time at 120 C (oil bath), L-cysteine mercaptole of pyruvic acid
+  focal: false
+  location: Table I, p. 564
+  digitised: false
+  unit: ug H2S liberated per sample (32 mg S)
+  quant_type: absolute
+  time_course_rule: whole series (lever is time)
+  arms:
+  - label: L-cysteine mercaptole of pyruvic acid, 1 h
+    lever_value: 60
+    value: 105
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        L-cysteine mercaptole of pyruvic acid: amount containing 32 mg S
+      buffer: none; hydrochlorides neutralised with 6 N NaOH
+      matrix: water (100 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+  - label: L-cysteine mercaptole of pyruvic acid, 3 h
+    lever_value: 180
+    value: 274
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 180
+      precursors:
+        L-cysteine mercaptole of pyruvic acid: amount containing 32 mg S
+      buffer: none; hydrochlorides neutralised with 6 N NaOH
+      matrix: water (100 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+  - label: L-cysteine mercaptole of pyruvic acid, 6 h
+    lever_value: 360
+    value: 412.5
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 360
+      precursors:
+        L-cysteine mercaptole of pyruvic acid: amount containing 32 mg S
+      buffer: none; hydrochlorides neutralised with 6 N NaOH
+      matrix: water (100 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+- id: obata1960-9
+  odorant: hydrogen sulfide
+  lever_class: time
+  lever: heating time at 120 C (oil bath), L-cysteine mercaptole of levulinic acid
+  focal: false
+  location: Table I, p. 564
+  digitised: false
+  unit: ug H2S liberated per sample (32 mg S)
+  quant_type: absolute
+  time_course_rule: whole series (lever is time)
+  arms:
+  - label: L-cysteine mercaptole of levulinic acid, 1 h
+    lever_value: 60
+    value: 98
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        L-cysteine mercaptole of levulinic acid: amount containing 32 mg S
+      buffer: none; hydrochlorides neutralised with 6 N NaOH
+      matrix: water (100 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+  - label: L-cysteine mercaptole of levulinic acid, 3 h
+    lever_value: 180
+    value: 250
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 180
+      precursors:
+        L-cysteine mercaptole of levulinic acid: amount containing 32 mg S
+      buffer: none; hydrochlorides neutralised with 6 N NaOH
+      matrix: water (100 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+  - label: L-cysteine mercaptole of levulinic acid, 6 h
+    lever_value: 360
+    value: 403
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 360
+      precursors:
+        L-cysteine mercaptole of levulinic acid: amount containing 32 mg S
+      buffer: none; hydrochlorides neutralised with 6 N NaOH
+      matrix: water (100 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+- id: obata1960-10
+  odorant: hydrogen sulfide
+  lever_class: sulfur source
+  lever: sulfur-containing precursor (cystine, cysteine, cysteine-aldehyde/ketoacid adducts) at equal sulfur (32 mg S)
+  focal: true
+  location: Table I, p. 564
+  digitised: false
+  unit: ug H2S liberated per sample (32 mg S)
+  quant_type: absolute
+  time_course_rule: longest time (6 h; no main time stated)
+  arms:
+  - label: L-cystine, 6 h
+    lever_value: L-cystine
+    value: 660
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 360
+      precursors:
+        L-cystine: amount containing 32 mg S
+      buffer: none; hydrochlorides neutralised with 6 N NaOH
+      matrix: water (100 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+  - label: L-cysteine, 6 h
+    lever_value: L-cysteine
+    value: 450
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 360
+      precursors:
+        L-cysteine: amount containing 32 mg S
+      buffer: none; hydrochlorides neutralised with 6 N NaOH
+      matrix: water (100 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+  - label: djenkolic acid, 6 h
+    lever_value: djenkolic acid
+    value: 338
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 360
+      precursors:
+        djenkolic acid: amount containing 32 mg S
+      buffer: none; hydrochlorides neutralised with 6 N NaOH
+      matrix: water (100 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+  - label: L-cysteine mercaptal of acetaldehyde, 6 h
+    lever_value: L-cysteine mercaptal of acetaldehyde
+    value: 315
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 360
+      precursors:
+        L-cysteine mercaptal of acetaldehyde: amount containing 32 mg S
+      buffer: none; hydrochlorides neutralised with 6 N NaOH
+      matrix: water (100 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+  - label: L-cysteine mercaptal of n-butyraldehyde, 6 h
+    lever_value: L-cysteine mercaptal of n-butyraldehyde
+    value: 240
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 360
+      precursors:
+        L-cysteine mercaptal of n-butyraldehyde: amount containing 32 mg S
+      buffer: none; hydrochlorides neutralised with 6 N NaOH
+      matrix: water (100 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+  - label: L-cysteine mercaptal of benzaldehyde, 6 h
+    lever_value: L-cysteine mercaptal of benzaldehyde
+    value: 620
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 360
+      precursors:
+        L-cysteine mercaptal of benzaldehyde: amount containing 32 mg S
+      buffer: none; hydrochlorides neutralised with 6 N NaOH
+      matrix: water (100 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+  - label: L-cysteine mercaptal of furfural, 6 h
+    lever_value: L-cysteine mercaptal of furfural
+    value: 900
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 360
+      precursors:
+        L-cysteine mercaptal of furfural: amount containing 32 mg S
+      buffer: none; hydrochlorides neutralised with 6 N NaOH
+      matrix: water (100 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+  - label: L-cysteine mercaptole of pyruvic acid, 6 h
+    lever_value: L-cysteine mercaptole of pyruvic acid
+    value: 412.5
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 360
+      precursors:
+        L-cysteine mercaptole of pyruvic acid: amount containing 32 mg S
+      buffer: none; hydrochlorides neutralised with 6 N NaOH
+      matrix: water (100 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+  - label: L-cysteine mercaptole of levulinic acid, 6 h
+    lever_value: L-cysteine mercaptole of levulinic acid
+    value: 403
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 360
+      precursors:
+        L-cysteine mercaptole of levulinic acid: amount containing 32 mg S
+      buffer: none; hydrochlorides neutralised with 6 N NaOH
+      matrix: water (100 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
