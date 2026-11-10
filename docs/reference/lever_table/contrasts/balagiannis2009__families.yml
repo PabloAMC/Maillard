@@ -1,0 +1,301 @@
+source: "balagiannis2009"
+pdf: "data/articles/balagiannis2009.pdf"
+reader: "resolved"
+scope_note: "Resolved from readers A and B. All values digitised (no table prints the aldehyde data). The 130 C panels of Fig. 5 reprint Fig. 1e,f: batches 1-3 at 130 C keyed once, from Fig. 1e,f; batch 2 at 140 C and batch 4 at 120 C from Fig. 5. Time ladders start at 20 min: the 5-15 min points of most series overlap on the axis (lag phase) and cannot be read; batch 2 is sampled at 140/190 min, batches 1 and 3 at 120/180 min. Liver-extract batches differ in initial glucose and free amino acids (no single controlled lever): batch comparisons keyed mixed. Table 1 rate constants are fitted model parameters, no contrast. At least two replicates per time; pH unstated."
+contrasts:
+  - id: "balagiannis2009-1"
+    odorant: "3-Methylbutanal"
+    lever_class: "time"
+    lever: "heating time, batch 1 at 130 C"
+    focal: true
+    location: "Fig. 1e, p. 9918"
+    digitised: true
+    unit: "mmol/kg"
+    quant_type: "absolute"
+    quantity: amount
+    resolution: "re-read"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "20 min", lever_value: 20, value: 0.0095, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 130, time_min: 20, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 1)", headspace: "sealed, unstated"}}
+      - {label: "40 min", lever_value: 40, value: 0.035, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 130, time_min: 40, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 1)", headspace: "sealed, unstated"}}
+      - {label: "60 min", lever_value: 60, value: 0.063, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 130, time_min: 60, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 1)", headspace: "sealed, unstated"}}
+      - {label: "90 min", lever_value: 90, value: 0.066, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 130, time_min: 90, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 1)", headspace: "sealed, unstated"}}
+      - {label: "120 min", lever_value: 120, value: 0.068, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 130, time_min: 120, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 1)", headspace: "sealed, unstated"}}
+      - {label: "180 min", lever_value: 180, value: 0.073, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 130, time_min: 180, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 1)", headspace: "sealed, unstated"}}
+      - {label: "240 min", lever_value: 240, value: 0.063, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 130, time_min: 240, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 1)", headspace: "sealed, unstated"}}
+  - id: "balagiannis2009-2"
+    odorant: "3-Methylbutanal"
+    lever_class: "time"
+    lever: "heating time, batch 2 at 130 C"
+    focal: true
+    location: "Fig. 1e, p. 9918"
+    digitised: true
+    unit: "mmol/kg"
+    quant_type: "absolute"
+    quantity: amount
+    resolution: "re-read"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "20 min", lever_value: 20, value: 0.04, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 130, time_min: 20, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 2)", headspace: "sealed, unstated"}}
+      - {label: "40 min", lever_value: 40, value: 0.073, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 130, time_min: 40, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 2)", headspace: "sealed, unstated"}}
+      - {label: "60 min", lever_value: 60, value: 0.084, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 130, time_min: 60, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 2)", headspace: "sealed, unstated"}}
+      - {label: "90 min", lever_value: 90, value: 0.119, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 130, time_min: 90, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 2)", headspace: "sealed, unstated"}}
+      - {label: "140 min", lever_value: 140, value: 0.102, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 130, time_min: 140, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 2)", headspace: "sealed, unstated"}}
+      - {label: "190 min", lever_value: 190, value: 0.106, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 130, time_min: 190, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 2)", headspace: "sealed, unstated"}}
+      - {label: "240 min", lever_value: 240, value: 0.084, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 130, time_min: 240, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 2)", headspace: "sealed, unstated"}}
+  - id: "balagiannis2009-3"
+    odorant: "3-Methylbutanal"
+    lever_class: "time"
+    lever: "heating time, batch 3 at 130 C"
+    focal: true
+    location: "Fig. 1e, p. 9918"
+    digitised: true
+    unit: "mmol/kg"
+    quant_type: "absolute"
+    quantity: amount
+    resolution: "re-read"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "20 min", lever_value: 20, value: 0.02, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 130, time_min: 20, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 3)", headspace: "sealed, unstated"}}
+      - {label: "40 min", lever_value: 40, value: 0.051, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 130, time_min: 40, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 3)", headspace: "sealed, unstated"}}
+      - {label: "60 min", lever_value: 60, value: 0.088, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 130, time_min: 60, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 3)", headspace: "sealed, unstated"}}
+      - {label: "90 min", lever_value: 90, value: 0.089, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 130, time_min: 90, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 3)", headspace: "sealed, unstated"}}
+      - {label: "120 min", lever_value: 120, value: 0.113, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 130, time_min: 120, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 3)", headspace: "sealed, unstated"}}
+      - {label: "180 min", lever_value: 180, value: 0.125, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 130, time_min: 180, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 3)", headspace: "sealed, unstated"}}
+      - {label: "240 min", lever_value: 240, value: 0.116, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 130, time_min: 240, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 3)", headspace: "sealed, unstated"}}
+  - id: "balagiannis2009-4"
+    odorant: "2-Methylbutanal"
+    lever_class: "time"
+    lever: "heating time, batch 1 at 130 C"
+    focal: true
+    location: "Fig. 1f, p. 9918"
+    digitised: true
+    unit: "mmol/kg"
+    quant_type: "absolute"
+    quantity: amount
+    resolution: "re-read"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "20 min", lever_value: 20, value: 0.008, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 130, time_min: 20, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 1)", headspace: "sealed, unstated"}}
+      - {label: "40 min", lever_value: 40, value: 0.017, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 130, time_min: 40, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 1)", headspace: "sealed, unstated"}}
+      - {label: "60 min", lever_value: 60, value: 0.03, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 130, time_min: 60, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 1)", headspace: "sealed, unstated"}}
+      - {label: "90 min", lever_value: 90, value: 0.034, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 130, time_min: 90, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 1)", headspace: "sealed, unstated"}}
+      - {label: "120 min", lever_value: 120, value: 0.038, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 130, time_min: 120, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 1)", headspace: "sealed, unstated"}}
+      - {label: "180 min", lever_value: 180, value: 0.04, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 130, time_min: 180, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 1)", headspace: "sealed, unstated"}}
+      - {label: "240 min", lever_value: 240, value: 0.039, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 130, time_min: 240, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 1)", headspace: "sealed, unstated"}}
+  - id: "balagiannis2009-5"
+    odorant: "2-Methylbutanal"
+    lever_class: "time"
+    lever: "heating time, batch 2 at 130 C"
+    focal: true
+    location: "Fig. 1f, p. 9918"
+    digitised: true
+    unit: "mmol/kg"
+    quant_type: "absolute"
+    quantity: amount
+    resolution: "re-read"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "20 min", lever_value: 20, value: 0.01, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 130, time_min: 20, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 2)", headspace: "sealed, unstated"}}
+      - {label: "40 min", lever_value: 40, value: 0.036, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 130, time_min: 40, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 2)", headspace: "sealed, unstated"}}
+      - {label: "60 min", lever_value: 60, value: 0.053, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 130, time_min: 60, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 2)", headspace: "sealed, unstated"}}
+      - {label: "90 min", lever_value: 90, value: 0.071, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 130, time_min: 90, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 2)", headspace: "sealed, unstated"}}
+      - {label: "140 min", lever_value: 140, value: 0.059, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 130, time_min: 140, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 2)", headspace: "sealed, unstated"}}
+      - {label: "190 min", lever_value: 190, value: 0.085, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 130, time_min: 190, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 2)", headspace: "sealed, unstated"}}
+      - {label: "240 min", lever_value: 240, value: 0.069, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 130, time_min: 240, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 2)", headspace: "sealed, unstated"}}
+  - id: "balagiannis2009-6"
+    odorant: "2-Methylbutanal"
+    lever_class: "time"
+    lever: "heating time, batch 3 at 130 C"
+    focal: true
+    location: "Fig. 1f, p. 9918"
+    digitised: true
+    unit: "mmol/kg"
+    quant_type: "absolute"
+    quantity: amount
+    resolution: "re-read"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "20 min", lever_value: 20, value: 0.009, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 130, time_min: 20, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 3)", headspace: "sealed, unstated"}}
+      - {label: "40 min", lever_value: 40, value: 0.025, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 130, time_min: 40, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 3)", headspace: "sealed, unstated"}}
+      - {label: "60 min", lever_value: 60, value: 0.044, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 130, time_min: 60, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 3)", headspace: "sealed, unstated"}}
+      - {label: "90 min", lever_value: 90, value: 0.049, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 130, time_min: 90, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 3)", headspace: "sealed, unstated"}}
+      - {label: "120 min", lever_value: 120, value: 0.067, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 130, time_min: 120, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 3)", headspace: "sealed, unstated"}}
+      - {label: "180 min", lever_value: 180, value: 0.086, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 130, time_min: 180, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 3)", headspace: "sealed, unstated"}}
+      - {label: "240 min", lever_value: 240, value: 0.087, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 130, time_min: 240, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 3)", headspace: "sealed, unstated"}}
+  - id: "balagiannis2009-7"
+    odorant: "3-Methylbutanal"
+    lever_class: "time"
+    lever: "heating time, batch 2 at 140 C"
+    focal: true
+    location: "Fig. 5 (batch 2 at 140 C), p. 9921"
+    digitised: true
+    unit: "mmol/kg"
+    quant_type: "absolute"
+    quantity: amount
+    resolution: "re-read"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "20 min", lever_value: 20, value: 0.051, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 140, time_min: 20, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 2)", headspace: "sealed, unstated"}}
+      - {label: "40 min", lever_value: 40, value: 0.103, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 140, time_min: 40, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 2)", headspace: "sealed, unstated"}}
+      - {label: "60 min", lever_value: 60, value: 0.094, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 140, time_min: 60, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 2)", headspace: "sealed, unstated"}}
+      - {label: "90 min", lever_value: 90, value: 0.087, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 140, time_min: 90, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 2)", headspace: "sealed, unstated"}}
+      - {label: "140 min", lever_value: 140, value: 0.089, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 140, time_min: 140, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 2)", headspace: "sealed, unstated"}}
+      - {label: "190 min", lever_value: 190, value: 0.073, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 140, time_min: 190, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 2)", headspace: "sealed, unstated"}}
+      - {label: "240 min", lever_value: 240, value: 0.064, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 140, time_min: 240, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 2)", headspace: "sealed, unstated"}}
+  - id: "balagiannis2009-8"
+    odorant: "2-Methylbutanal"
+    lever_class: "time"
+    lever: "heating time, batch 2 at 140 C"
+    focal: true
+    location: "Fig. 5 (batch 2 at 140 C), p. 9921"
+    digitised: true
+    unit: "mmol/kg"
+    quant_type: "absolute"
+    quantity: amount
+    resolution: "re-read"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "20 min", lever_value: 20, value: 0.025, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 140, time_min: 20, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 2)", headspace: "sealed, unstated"}}
+      - {label: "40 min", lever_value: 40, value: 0.065, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 140, time_min: 40, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 2)", headspace: "sealed, unstated"}}
+      - {label: "60 min", lever_value: 60, value: 0.062, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 140, time_min: 60, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 2)", headspace: "sealed, unstated"}}
+      - {label: "90 min", lever_value: 90, value: 0.065, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 140, time_min: 90, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 2)", headspace: "sealed, unstated"}}
+      - {label: "140 min", lever_value: 140, value: 0.077, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 140, time_min: 140, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 2)", headspace: "sealed, unstated"}}
+      - {label: "190 min", lever_value: 190, value: 0.078, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 140, time_min: 190, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 2)", headspace: "sealed, unstated"}}
+      - {label: "240 min", lever_value: 240, value: 0.069, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 140, time_min: 240, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 2)", headspace: "sealed, unstated"}}
+  - id: "balagiannis2009-9"
+    odorant: "3-Methylbutanal"
+    lever_class: "time"
+    lever: "heating time, batch 4 at 120 C"
+    focal: true
+    location: "Fig. 5 (batch 4 at 120 C), p. 9921"
+    digitised: true
+    unit: "mmol/kg"
+    quant_type: "absolute"
+    quantity: amount
+    resolution: "re-read"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "20 min", lever_value: 20, value: 0.008, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 120, time_min: 20, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 4)", headspace: "sealed, unstated"}}
+      - {label: "40 min", lever_value: 40, value: 0.019, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 120, time_min: 40, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 4)", headspace: "sealed, unstated"}}
+      - {label: "60 min", lever_value: 60, value: 0.0215, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 120, time_min: 60, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 4)", headspace: "sealed, unstated"}}
+      - {label: "90 min", lever_value: 90, value: 0.033, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 120, time_min: 90, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 4)", headspace: "sealed, unstated"}}
+      - {label: "140 min", lever_value: 140, value: 0.035, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 120, time_min: 140, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 4)", headspace: "sealed, unstated"}}
+      - {label: "190 min", lever_value: 190, value: 0.058, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 120, time_min: 190, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 4)", headspace: "sealed, unstated"}}
+      - {label: "240 min", lever_value: 240, value: 0.066, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 120, time_min: 240, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 4)", headspace: "sealed, unstated"}}
+  - id: "balagiannis2009-10"
+    odorant: "2-Methylbutanal"
+    lever_class: "time"
+    lever: "heating time, batch 4 at 120 C"
+    focal: true
+    location: "Fig. 5 (batch 4 at 120 C), p. 9921"
+    digitised: true
+    unit: "mmol/kg"
+    quant_type: "absolute"
+    quantity: amount
+    resolution: "re-read"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "20 min", lever_value: 20, value: 0.0024, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 120, time_min: 20, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 4)", headspace: "sealed, unstated"}}
+      - {label: "40 min", lever_value: 40, value: 0.006, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 120, time_min: 40, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 4)", headspace: "sealed, unstated"}}
+      - {label: "60 min", lever_value: 60, value: 0.007, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 120, time_min: 60, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 4)", headspace: "sealed, unstated"}}
+      - {label: "90 min", lever_value: 90, value: 0.0136, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 120, time_min: 90, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 4)", headspace: "sealed, unstated"}}
+      - {label: "140 min", lever_value: 140, value: 0.018, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 120, time_min: 140, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 4)", headspace: "sealed, unstated"}}
+      - {label: "190 min", lever_value: 190, value: 0.0315, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 120, time_min: 190, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 4)", headspace: "sealed, unstated"}}
+      - {label: "240 min", lever_value: 240, value: 0.037, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 120, time_min: 240, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 4)", headspace: "sealed, unstated"}}
+  - id: "balagiannis2009-11"
+    odorant: "3-Methylbutanal"
+    lever_class: "temperature"
+    lever: "130 vs 140 C, batch 2 (same extract split)"
+    focal: true
+    location: "Fig. 5, p. 9921"
+    digitised: true
+    unit: "mmol/kg"
+    quant_type: "absolute"
+    quantity: amount
+    resolution: "agreed"
+    time_course_rule: "longest time"
+    arms:
+      - {label: "batch 2 at 130 C, 240 min", lever_value: 130, value: 0.083, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 130, time_min: 240, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 2)", headspace: "sealed, unstated"}}
+      - {label: "batch 2 at 140 C, 240 min", lever_value: 140, value: 0.065, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 140, time_min: 240, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 2)", headspace: "sealed, unstated"}}
+  - id: "balagiannis2009-12"
+    odorant: "2-Methylbutanal"
+    lever_class: "temperature"
+    lever: "130 vs 140 C, batch 2 (same extract split)"
+    focal: true
+    location: "Fig. 5, p. 9921"
+    digitised: true
+    unit: "mmol/kg"
+    quant_type: "absolute"
+    quantity: amount
+    resolution: "agreed"
+    time_course_rule: "longest time"
+    arms:
+      - {label: "batch 2 at 130 C, 240 min", lever_value: 130, value: 0.069, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 130, time_min: 240, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 2)", headspace: "sealed, unstated"}}
+      - {label: "batch 2 at 140 C, 240 min", lever_value: 140, value: 0.07, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 140, time_min: 240, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 2)", headspace: "sealed, unstated"}}
+  - id: "balagiannis2009-13"
+    odorant: "3-Methylbutanal"
+    lever_class: "mixed"
+    lever: "liver extract batch 1 / 2 / 3 at 130 C (initial glucose and free amino acids both differ)"
+    focal: false
+    location: "Fig. 1e, p. 9918"
+    digitised: true
+    unit: "mmol/kg"
+    quant_type: "absolute"
+    quantity: amount
+    resolution: "re-read"
+    time_course_rule: "longest time"
+    arms:
+      - {label: "batch 1, 240 min", lever_value: "batch 1", value: 0.063, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 130, time_min: 240, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 1)", headspace: "sealed, unstated"}}
+      - {label: "batch 2, 240 min", lever_value: "batch 2", value: 0.084, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 130, time_min: 240, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 2)", headspace: "sealed, unstated"}}
+      - {label: "batch 3, 240 min", lever_value: "batch 3", value: 0.116, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 130, time_min: 240, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 3)", headspace: "sealed, unstated"}}
+  - id: "balagiannis2009-14"
+    odorant: "2-Methylbutanal"
+    lever_class: "mixed"
+    lever: "liver extract batch 1 / 2 / 3 at 130 C (initial glucose and free amino acids both differ)"
+    focal: false
+    location: "Fig. 1f, p. 9918"
+    digitised: true
+    unit: "mmol/kg"
+    quant_type: "absolute"
+    quantity: amount
+    resolution: "re-read"
+    time_course_rule: "longest time"
+    arms:
+      - {label: "batch 1, 240 min", lever_value: "batch 1", value: 0.039, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 130, time_min: 240, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 1)", headspace: "sealed, unstated"}}
+      - {label: "batch 2, 240 min", lever_value: "batch 2", value: 0.069, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 130, time_min: 240, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 2)", headspace: "sealed, unstated"}}
+      - {label: "batch 3, 240 min", lever_value: "batch 3", value: 0.087, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 130, time_min: 240, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 3)", headspace: "sealed, unstated"}}
+  - id: "balagiannis2009-15"
+    odorant: "3-Methylbutanal"
+    lever_class: "mixed"
+    lever: "extract batch and temperature: batches 1-3 at 130 C vs batch 4 at 120 C"
+    focal: false
+    location: "Fig. 1e and Fig. 5, pp. 9918, 9921"
+    digitised: true
+    unit: "mmol/kg"
+    quant_type: "absolute"
+    quantity: amount
+    resolution: "re-read"
+    time_course_rule: "longest time"
+    arms:
+      - {label: "batch 1 at 130 C, 240 min", lever_value: "batch 1, 130 c", value: 0.063, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 130, time_min: 240, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 1)", headspace: "sealed, unstated"}}
+      - {label: "batch 2 at 130 C, 240 min", lever_value: "batch 2, 130 c", value: 0.084, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 130, time_min: 240, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 2)", headspace: "sealed, unstated"}}
+      - {label: "batch 3 at 130 C, 240 min", lever_value: "batch 3, 130 c", value: 0.116, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 130, time_min: 240, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 3)", headspace: "sealed, unstated"}}
+      - {label: "batch 4 at 120 C, 240 min", lever_value: "batch 4, 120 c", value: 0.066, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 120, time_min: 240, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 4)", headspace: "sealed, unstated"}}
+  - id: "balagiannis2009-16"
+    odorant: "2-Methylbutanal"
+    lever_class: "mixed"
+    lever: "extract batch and temperature: batches 1-3 at 130 C vs batch 4 at 120 C"
+    focal: false
+    location: "Fig. 1f and Fig. 5, pp. 9918, 9921"
+    digitised: true
+    unit: "mmol/kg"
+    quant_type: "absolute"
+    quantity: amount
+    resolution: "re-read"
+    time_course_rule: "longest time"
+    arms:
+      - {label: "batch 1 at 130 C, 240 min", lever_value: "batch 1, 130 c", value: 0.039, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 130, time_min: 240, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 1)", headspace: "sealed, unstated"}}
+      - {label: "batch 2 at 130 C, 240 min", lever_value: "batch 2, 130 c", value: 0.069, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 130, time_min: 240, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 2)", headspace: "sealed, unstated"}}
+      - {label: "batch 3 at 130 C, 240 min", lever_value: "batch 3, 130 c", value: 0.087, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 130, time_min: 240, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 3)", headspace: "sealed, unstated"}}
+      - {label: "batch 4 at 120 C, 240 min", lever_value: "batch 4, 120 c", value: 0.037, censor: none, limit: null, n: null, sd: null, conditions: {ph: null, ph_basis: unstated, temp_C: 120, time_min: 240, precursors: {}, buffer: none, matrix: "other (aqueous beef liver extract, batch 4)", headspace: "sealed, unstated"}}

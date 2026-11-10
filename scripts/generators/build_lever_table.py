@@ -278,8 +278,9 @@ def observations(sources, labs) -> Tuple[List[Dict[str, Any]], Dict[str, int]]:
                                  "(src/compound_keys.py); fix the name or add the alias")
             q = str(c.get("quantity") or "amount")
             if q != "amount":
-                skipped["shares of a total (PREREG amendment A1)" if q == "share" else
-                        "rates, half-lives or storage losses (PREREG amendment A1)"] += 1
+                skipped[{"share": "shares of a total (PREREG amendment A1)",
+                         "fd_factor": "flavour-dilution factors, an odour potency not an amount (PREREG amendment A1)"}
+                        .get(q, "rates, half-lives or storage losses (PREREG amendment A1)")] += 1
                 continue
             if lc == "mixed":
                 skipped["mixed-lever contrasts (no single-lever cell)"] += 1

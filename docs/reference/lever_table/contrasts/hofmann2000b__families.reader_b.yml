@@ -1,0 +1,605 @@
+source: "hofmann2000b"
+pdf: "data/articles/hofmann2000b.pdf"
+reader: "b"
+scope_note: "Table 2 expt II vs III (copper ions alone) not keyed (copper is not a lever class); Fig. 1 temperature unstated (reflux); Figs. 2-3 are dicarbonyls; Fig. 1 open square at 10 min overlaps the filled square (approximate)."
+contrasts:
+  - id: "hofmann2000b-1"
+    odorant: "phenylacetaldehyde"
+    lever_class: "sugar identity"
+    lever: "precursor form: Amadori compound ARP-Phe vs glucose/phenylalanine (expt I)"
+    focal: true
+    location: "Table 2"
+    digitised: false
+    unit: "umol/mmol"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "expt I ARP-Phe"
+        lever_value: "ARP-Phe"
+        value: 0.6
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 100
+          time_min: 120
+          precursors: {"N-(1-deoxy-D-fructosyl)-L-phenylalanine": "1 mmol", "volume": "10 mL"}
+          buffer: "phosphate 0.5 mol/L"
+          matrix: "buffer"
+          headspace: "inert"
+      - label: "expt I Glc/Phe"
+        lever_value: "glucose/phenylalanine"
+        value: 0.4
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 100
+          time_min: 120
+          precursors: {"D-glucose": "1 mmol", "L-phenylalanine": "1 mmol", "volume": "10 mL"}
+          buffer: "phosphate 0.5 mol/L"
+          matrix: "buffer"
+          headspace: "inert"
+  - id: "hofmann2000b-2"
+    odorant: "phenylacetaldehyde"
+    lever_class: "sugar identity"
+    lever: "precursor form: Amadori compound ARP-Phe vs glucose/phenylalanine (expt II)"
+    focal: true
+    location: "Table 2"
+    digitised: false
+    unit: "umol/mmol"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "expt II ARP-Phe"
+        lever_value: "ARP-Phe"
+        value: 5.5
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 100
+          time_min: 120
+          precursors: {"N-(1-deoxy-D-fructosyl)-L-phenylalanine": "1 mmol", "volume": "10 mL"}
+          buffer: "phosphate 0.5 mol/L"
+          matrix: "buffer"
+          headspace: "air"
+      - label: "expt II Glc/Phe"
+        lever_value: "glucose/phenylalanine"
+        value: 1.4
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 100
+          time_min: 120
+          precursors: {"D-glucose": "1 mmol", "L-phenylalanine": "1 mmol", "volume": "10 mL"}
+          buffer: "phosphate 0.5 mol/L"
+          matrix: "buffer"
+          headspace: "air"
+  - id: "hofmann2000b-3"
+    odorant: "phenylacetaldehyde"
+    lever_class: "sugar identity"
+    lever: "precursor form: Amadori compound ARP-Phe vs glucose/phenylalanine (expt III)"
+    focal: true
+    location: "Table 2"
+    digitised: false
+    unit: "umol/mmol"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "expt III ARP-Phe"
+        lever_value: "ARP-Phe"
+        value: 13.8
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 100
+          time_min: 120
+          precursors: {"N-(1-deoxy-D-fructosyl)-L-phenylalanine": "1 mmol", "volume": "10 mL", "CuSO4": "0.05 mmol"}
+          buffer: "phosphate 0.5 mol/L"
+          matrix: "buffer"
+          headspace: "air"
+      - label: "expt III Glc/Phe"
+        lever_value: "glucose/phenylalanine"
+        value: 2.6
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 100
+          time_min: 120
+          precursors: {"D-glucose": "1 mmol", "L-phenylalanine": "1 mmol", "volume": "10 mL", "CuSO4": "0.05 mmol"}
+          buffer: "phosphate 0.5 mol/L"
+          matrix: "buffer"
+          headspace: "air"
+  - id: "hofmann2000b-4"
+    odorant: "phenylacetaldehyde"
+    lever_class: "oxygen"
+    lever: "argon (expt I) vs air oxygen (expt II), ARP-Phe"
+    focal: true
+    location: "Table 2"
+    digitised: false
+    unit: "umol/mmol"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "expt I ARP-Phe"
+        lever_value: "argon"
+        value: 0.6
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 100
+          time_min: 120
+          precursors: {"N-(1-deoxy-D-fructosyl)-L-phenylalanine": "1 mmol", "volume": "10 mL"}
+          buffer: "phosphate 0.5 mol/L"
+          matrix: "buffer"
+          headspace: "inert"
+      - label: "expt II ARP-Phe"
+        lever_value: "air"
+        value: 5.5
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 100
+          time_min: 120
+          precursors: {"N-(1-deoxy-D-fructosyl)-L-phenylalanine": "1 mmol", "volume": "10 mL"}
+          buffer: "phosphate 0.5 mol/L"
+          matrix: "buffer"
+          headspace: "air"
+  - id: "hofmann2000b-5"
+    odorant: "phenylacetaldehyde"
+    lever_class: "oxygen"
+    lever: "argon (expt I) vs air oxygen (expt II), Glc/Phe"
+    focal: true
+    location: "Table 2"
+    digitised: false
+    unit: "umol/mmol"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "expt I Glc/Phe"
+        lever_value: "argon"
+        value: 0.4
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 100
+          time_min: 120
+          precursors: {"D-glucose": "1 mmol", "L-phenylalanine": "1 mmol", "volume": "10 mL"}
+          buffer: "phosphate 0.5 mol/L"
+          matrix: "buffer"
+          headspace: "inert"
+      - label: "expt II Glc/Phe"
+        lever_value: "air"
+        value: 1.4
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 100
+          time_min: 120
+          precursors: {"D-glucose": "1 mmol", "L-phenylalanine": "1 mmol", "volume": "10 mL"}
+          buffer: "phosphate 0.5 mol/L"
+          matrix: "buffer"
+          headspace: "air"
+  - id: "hofmann2000b-6"
+    odorant: "phenylacetaldehyde"
+    lever_class: "mixed"
+    lever: "argon (expt I) vs air plus copper(II) ions (expt III), ARP-Phe: oxygen and copper"
+    focal: true
+    location: "Table 2"
+    digitised: false
+    unit: "umol/mmol"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "expt I ARP-Phe"
+        lever_value: "argon, no copper"
+        value: 0.6
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 100
+          time_min: 120
+          precursors: {"N-(1-deoxy-D-fructosyl)-L-phenylalanine": "1 mmol", "volume": "10 mL"}
+          buffer: "phosphate 0.5 mol/L"
+          matrix: "buffer"
+          headspace: "inert"
+      - label: "expt III ARP-Phe"
+        lever_value: "air + CuSO4 0.05 mmol"
+        value: 13.8
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 100
+          time_min: 120
+          precursors: {"N-(1-deoxy-D-fructosyl)-L-phenylalanine": "1 mmol", "volume": "10 mL", "CuSO4": "0.05 mmol"}
+          buffer: "phosphate 0.5 mol/L"
+          matrix: "buffer"
+          headspace: "air"
+  - id: "hofmann2000b-7"
+    odorant: "phenylacetaldehyde"
+    lever_class: "mixed"
+    lever: "argon (expt I) vs air plus copper(II) ions (expt III), Glc/Phe: oxygen and copper"
+    focal: true
+    location: "Table 2"
+    digitised: false
+    unit: "umol/mmol"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "expt I Glc/Phe"
+        lever_value: "argon, no copper"
+        value: 0.4
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 100
+          time_min: 120
+          precursors: {"D-glucose": "1 mmol", "L-phenylalanine": "1 mmol", "volume": "10 mL"}
+          buffer: "phosphate 0.5 mol/L"
+          matrix: "buffer"
+          headspace: "inert"
+      - label: "expt III Glc/Phe"
+        lever_value: "air + CuSO4 0.05 mmol"
+        value: 2.6
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 100
+          time_min: 120
+          precursors: {"D-glucose": "1 mmol", "L-phenylalanine": "1 mmol", "volume": "10 mL", "CuSO4": "0.05 mmol"}
+          buffer: "phosphate 0.5 mol/L"
+          matrix: "buffer"
+          headspace: "air"
+  - id: "hofmann2000b-8"
+    odorant: "phenylacetaldehyde"
+    lever_class: "time"
+    lever: "heating time, ARP-Phe"
+    focal: false
+    location: "Fig. 1"
+    digitised: true
+    unit: "umol/mmol starting material"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "10 min"
+        lever_value: 10
+        value: 1.05
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: null
+          time_min: 10
+          precursors: {"N-(1-deoxy-D-fructosyl)-L-phenylalanine": "0.1 mmol", "volume": "1 mL"}
+          buffer: "phosphate 0.5 mmol/L (as printed)"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "30 min"
+        lever_value: 30
+        value: 2.64
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: null
+          time_min: 30
+          precursors: {"N-(1-deoxy-D-fructosyl)-L-phenylalanine": "0.1 mmol", "volume": "1 mL"}
+          buffer: "phosphate 0.5 mmol/L (as printed)"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "60 min"
+        lever_value: 60
+        value: 4.23
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: null
+          time_min: 60
+          precursors: {"N-(1-deoxy-D-fructosyl)-L-phenylalanine": "0.1 mmol", "volume": "1 mL"}
+          buffer: "phosphate 0.5 mmol/L (as printed)"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "120 min"
+        lever_value: 120
+        value: 6.25
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: null
+          time_min: 120
+          precursors: {"N-(1-deoxy-D-fructosyl)-L-phenylalanine": "0.1 mmol", "volume": "1 mL"}
+          buffer: "phosphate 0.5 mmol/L (as printed)"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "240 min"
+        lever_value: 240
+        value: 8.53
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: null
+          time_min: 240
+          precursors: {"N-(1-deoxy-D-fructosyl)-L-phenylalanine": "0.1 mmol", "volume": "1 mL"}
+          buffer: "phosphate 0.5 mmol/L (as printed)"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "300 min"
+        lever_value: 300
+        value: 9.23
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: null
+          time_min: 300
+          precursors: {"N-(1-deoxy-D-fructosyl)-L-phenylalanine": "0.1 mmol", "volume": "1 mL"}
+          buffer: "phosphate 0.5 mmol/L (as printed)"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "500 min"
+        lever_value: 500
+        value: 10.02
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: null
+          time_min: 500
+          precursors: {"N-(1-deoxy-D-fructosyl)-L-phenylalanine": "0.1 mmol", "volume": "1 mL"}
+          buffer: "phosphate 0.5 mmol/L (as printed)"
+          matrix: "buffer"
+          headspace: "unstated"
+  - id: "hofmann2000b-9"
+    odorant: "phenylacetaldehyde"
+    lever_class: "time"
+    lever: "heating time, glucose/phenylalanine"
+    focal: false
+    location: "Fig. 1"
+    digitised: true
+    unit: "umol/mmol starting material"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "10 min"
+        lever_value: 10
+        value: 0.2
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: null
+          time_min: 10
+          precursors: {"D-glucose": "0.1 mmol", "L-phenylalanine": "0.1 mmol", "volume": "1 mL"}
+          buffer: "phosphate 0.5 mmol/L (as printed)"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "30 min"
+        lever_value: 30
+        value: 0.45
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: null
+          time_min: 30
+          precursors: {"D-glucose": "0.1 mmol", "L-phenylalanine": "0.1 mmol", "volume": "1 mL"}
+          buffer: "phosphate 0.5 mmol/L (as printed)"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "60 min"
+        lever_value: 60
+        value: 0.65
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: null
+          time_min: 60
+          precursors: {"D-glucose": "0.1 mmol", "L-phenylalanine": "0.1 mmol", "volume": "1 mL"}
+          buffer: "phosphate 0.5 mmol/L (as printed)"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "120 min"
+        lever_value: 120
+        value: 1.25
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: null
+          time_min: 120
+          precursors: {"D-glucose": "0.1 mmol", "L-phenylalanine": "0.1 mmol", "volume": "1 mL"}
+          buffer: "phosphate 0.5 mmol/L (as printed)"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "240 min"
+        lever_value: 240
+        value: 2.15
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: null
+          time_min: 240
+          precursors: {"D-glucose": "0.1 mmol", "L-phenylalanine": "0.1 mmol", "volume": "1 mL"}
+          buffer: "phosphate 0.5 mmol/L (as printed)"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "300 min"
+        lever_value: 300
+        value: 2.54
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: null
+          time_min: 300
+          precursors: {"D-glucose": "0.1 mmol", "L-phenylalanine": "0.1 mmol", "volume": "1 mL"}
+          buffer: "phosphate 0.5 mmol/L (as printed)"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "500 min"
+        lever_value: 500
+        value: 2.83
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: null
+          time_min: 500
+          precursors: {"D-glucose": "0.1 mmol", "L-phenylalanine": "0.1 mmol", "volume": "1 mL"}
+          buffer: "phosphate 0.5 mmol/L (as printed)"
+          matrix: "buffer"
+          headspace: "unstated"
+  - id: "hofmann2000b-10"
+    odorant: "phenylacetaldehyde"
+    lever_class: "sugar identity"
+    lever: "precursor form: glucose/phenylalanine vs ARP-Phe (Fig. 1)"
+    focal: true
+    location: "Fig. 1"
+    digitised: true
+    unit: "umol/mmol starting material"
+    quant_type: "absolute"
+    time_course_rule: "longest time"
+    quantity: "amount"
+    arms:
+      - label: "Glc/Phe (open squares), 500 min"
+        lever_value: "glucose/phenylalanine"
+        value: 2.83
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: null
+          time_min: 500
+          precursors: {"D-glucose": "0.1 mmol", "L-phenylalanine": "0.1 mmol", "volume": "1 mL"}
+          buffer: "phosphate 0.5 mmol/L (as printed)"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "ARP-Phe (open circles), 500 min"
+        lever_value: "ARP-Phe"
+        value: 10.02
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: null
+          time_min: 500
+          precursors: {"N-(1-deoxy-D-fructosyl)-L-phenylalanine": "0.1 mmol", "volume": "1 mL"}
+          buffer: "phosphate 0.5 mmol/L (as printed)"
+          matrix: "buffer"
+          headspace: "unstated"
