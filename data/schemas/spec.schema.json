@@ -5,7 +5,6 @@
   "description": "One system. Precursors in millimolar; temperature in Celsius; time in minutes; pH; water activity. No condition is defaulted: a defaulted temperature is a silent chemistry claim.",
   "type": "object",
   "required": [
-    "precursors",
     "temp_C",
     "time_min",
     "ph",
@@ -128,7 +127,29 @@
     "atmosphere": {
       "type": "string",
       "description": "the pot's headspace atmosphere for the sugar path's oxidative entries; 'air' is the reference and the only answered value today, anything else is refused rather than silently scored as air"
+    },
+    "ingredients": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "number",
+        "exclusiveMinimum": 0,
+        "maximum": 100
+      },
+      "description": "ingredient name -> percent w/w of the pot (data/species/ingredients.yml); mapped to precursors in mM at 1 kg/L, added to any precursors given"
     }
   },
-  "additionalProperties": true
+  "additionalProperties": true,
+  "anyOf": [
+    {
+      "required": [
+        "precursors"
+      ]
+    },
+    {
+      "required": [
+        "ingredients"
+      ]
+    }
+  ]
 }

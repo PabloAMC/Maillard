@@ -118,7 +118,8 @@ def _schema_errors(spec: Mapping[str, Any]) -> List[str]:
 def validate_spec(spec: Mapping[str, Any], *, label: str) -> Dict[str, Any]:
     if not isinstance(spec, Mapping):
         raise SpecError(f"{label}: must be a mapping")
-    missing = [key for key in REQUIRED_SPEC_KEYS if spec.get(key) is None]
+    missing = [key for key in REQUIRED_SPEC_KEYS if spec.get(key) is None
+               and not (key == "precursors" and spec.get("ingredients"))]
     if missing:
         raise SpecError(
             f"{label}: missing required key(s) {', '.join(missing)}. Every one of "
@@ -131,10 +132,19 @@ def validate_spec(spec: Mapping[str, Any], *, label: str) -> Dict[str, Any]:
     problems = _schema_errors(spec)
     if problems:
         raise SpecError(f"{label}: " + "; ".join(problems[:6]) + " (data/schemas/spec.schema.json)")
+    # sec. 0 step 3: ingredients in % w/w become precursors in mM, with a report of what was and was not mapped
+    from src import ingredients as _ingredients
+
+    try:
+        spec, ingredient_report = _ingredients.expand(spec)
+    except _ingredients.IngredientError as exc:
+        raise SpecError(f"{label}: {exc}") from exc
     precursors = spec.get("precursors")
     if not isinstance(precursors, Mapping) or not precursors:
         raise SpecError(f"{label}: 'precursors' must be a non-empty mapping of name -> mM")
     resolved = dict(spec)
+    if ingredient_report:
+        resolved["ingredient_report"] = ingredient_report
     resolved["name"] = str(spec.get("name") or label)
     resolved["precursors"] = {str(k): float(v) for k, v in precursors.items()}
     for key in ("temp_C", "time_min", "ph", "aw"):
@@ -589,12 +599,22 @@ def compare_core(
 
     core_a, core_b = spec_to_core(spec_a), spec_to_core(spec_b)
     requested = _core_targets(spec_a, targets) or _core_targets(spec_b, targets)
-    payload = core_compare(core_a, core_b, requested, predict_fn=predict_fn, calibration=calibration) if requested else {
-        "comparable": False,
-        "reason": "no precursor in either arm maps to a core species",
-        "declaration_a": {},
-        "declaration_b": {},
-    }
+    if requested:
+        payload = core_compare(core_a, core_b, requested, predict_fn=predict_fn, calibration=calibration)
+    else:
+        # No default target could be chosen. Say WHY, per arm, from the engine's own declaration on the meaty
+        # thiols (the question most specs are asking), instead of a generic line: a real recipe usually fails on
+        # unmapped precursors or a lane conflict, and the formulator needs to see which.
+        from src.kinetic_core.engine import declare_envelope
+
+        probe = ["2-Methyl-3-furanthiol (MFT)", "2-Furfurylthiol (FFT)"]
+        payload = {
+            "comparable": False,
+            "reason": "no default target could be chosen for these arms; the engine's declarations on the meaty "
+                      "thiols follow",
+            "declaration_a": declare_envelope(core_a, probe).as_dict(),
+            "declaration_b": declare_envelope(core_b, probe).as_dict(),
+        }
     return {
         "artifact": "maillard_compare_core",
         "lane": "core",
@@ -708,12 +728,37 @@ def envelope_error_text(declaration: Mapping[str, Any]) -> str:
     return "\n".join(lines)
 
 
+def _render_ingredients(spec: Mapping[str, Any], out: List[str], label: str = "") -> None:
+    """What each ingredient mapped to, from which source, and what it did NOT map (sec. 0 step 3)."""
+    report = spec.get("ingredient_report") or {}
+    if not report:
+        return
+    out.append(f"  INGREDIENTS{(' ' + label) if label else ''}  ({report['basis']}; bands are the sources' spread, "
+               "shown, not propagated)")
+    for name, rec in report["ingredients"].items():
+        out.append(f"    {name} {rec['percent_w_w']:g} % w/w = {rec['g_per_l']:g} g/L")
+        for pre, m in rec["mapped"].items():
+            out.append(f"      -> {pre:<24} {_fmt(m['mM'], 3):>9} mM  (band {_fmt(m['band_mM'][0], 3)} to "
+                       f"{_fmt(m['band_mM'][1], 3)})")
+            if m.get("caveat"):
+                out.append(_wrap(f"caveat: {m['caveat']}", indent="           "))
+        if rec.get("protein_g_per_l") is not None:
+            out.append(f"      -> protein {rec['protein_g_per_l']:.3g} g/L (band {rec['protein_band_g_per_l'][0]:.3g} to "
+                       f"{rec['protein_band_g_per_l'][1]:.3g}); sites from data/species/protein_matrices.yml")
+        for what, why in (rec.get("not_mapped") or {}).items():
+            out.append(_wrap(f"NOT MAPPED: {what} -- {why}", indent="      ! "))
+    out.append(_wrap("sources: data/species/ingredients.yml (every value names its dossier); not validated on a "
+                     "plant-based product.", indent="    "))
+    out.append("")
+
+
 def render_predict_core_text(payload: Mapping[str, Any]) -> str:
     out: List[str] = []
     out.append("=" * 96)
     out.append(f"  PREDICT [KINETIC CORE]   {payload['system']['name']}")
     out.append("=" * 96)
     out.append("")
+    _render_ingredients(payload["system"].get("spec") or {}, out)
     _render_declaration(payload.get("declaration") or {}, out)
     out.append("")
     for refused in payload.get("refused_targets") or []:
@@ -729,7 +774,13 @@ def render_predict_core_text(payload: Mapping[str, Any]) -> str:
 
     out.append(f"  {'compound':<38} {'ug/L (= ppb in water)':>24}  {'OAV':>14}")
     out.append("  " + "-" * 82)
-    for row in payload["rows"]:
+    from src import notes as _notes
+
+    heading = None
+    for row in sorted(payload["rows"], key=lambda r: _notes.order_key(str(r["compound"]))):
+        if _notes.note_of(str(row["compound"])) != heading:
+            heading = _notes.note_of(str(row["compound"]))
+            out.append(f"  [{heading}]")
         oav = row.get("oav") or {}
         oav_text = (
             f"{oav['oav']:.3g}" if oav.get("available") and oav.get("oav") is not None
@@ -769,6 +820,8 @@ def render_compare_core_text(payload: Mapping[str, Any]) -> str:
     out.append(f"  COMPARE [KINETIC CORE]   A = {a_name}   vs   B = {b_name}")
     out.append("=" * 96)
     out.append("")
+    _render_ingredients(payload["a"].get("spec") or {}, out, "(arm A)")
+    _render_ingredients(payload["b"].get("spec") or {}, out, "(arm B)")
     comparison = payload.get("comparison") or {}
     if not comparison.get("comparable"):
         out.append("  NOT COMPARABLE.")
@@ -836,7 +889,13 @@ def render_compare_core_text(payload: Mapping[str, Any]) -> str:
     out.append("")
     out.append(f"  {'compound':<38} {'A/B':>12} {'direction':<14} resolved")
     out.append("  " + "-" * 88)
-    for row in rows:
+    from src import notes as _notes
+
+    heading = None
+    for row in sorted(rows, key=lambda r: _notes.order_key(str(r.get("compound", "")))):
+        if _notes.note_of(str(row.get("compound", ""))) != heading:
+            heading = _notes.note_of(str(row.get("compound", "")))
+            out.append(f"  [{heading}]")
         ratio = row.get("ratio_a_over_b")
         if row.get("unidentified_arm"):
             ratio_text = f"{str(row['unidentified_arm']).upper()} unidentified"
