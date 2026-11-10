@@ -1,0 +1,4804 @@
+source: leahy1989
+pdf: data/articles/leahy1989.pdf
+reader: resolved
+scope_note: 'Resolved from readers A and B. Table I zero-order rate constants (k, ppm/hr; quantity rate, enter no cell) keyed
+  as temperature ladders per sugar-amino acid system, and as sugar identity and amino acid identity contrasts at each temperature;
+  Table III (95 C, 2 h) keyed as shares for single pyrazines (% of total, quantity share) and as amounts for total pyrazines
+  (ppm); cysteine-glucose arm from text p. 85 (no pyrazines detected). Not keyed: Table II activation energies, Figs. 2-3
+  (replot Tables I/III), text ppb values for 2,3-dimethylpyrazine. n in Table I is regression points, not replicates.'
+contrasts:
+- id: leahy1989-1
+  odorant: Unsubstituted pyrazine
+  lever_class: temperature
+  lever: reaction temperature
+  focal: false
+  location: Table I, pp. 83-84
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: re-read
+  arms:
+  - label: lysine-glucose 75 C
+    lever_value: 75
+    value: 0.214
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 75
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine-glucose 85 C
+    lever_value: 85
+    value: 0.49
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine-glucose 95 C
+    lever_value: 95
+    value: 3.596
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-2
+  odorant: 2-Methylpyrazine
+  lever_class: temperature
+  lever: reaction temperature
+  focal: false
+  location: Table I, pp. 83-84
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: re-read
+  arms:
+  - label: lysine-glucose 75 C
+    lever_value: 75
+    value: 0.159
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 75
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine-glucose 85 C
+    lever_value: 85
+    value: 0.422
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine-glucose 95 C
+    lever_value: 95
+    value: 2.837
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-3
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: temperature
+  lever: reaction temperature
+  focal: false
+  location: Table I, pp. 83-84
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: re-read
+  arms:
+  - label: lysine-glucose 75 C
+    lever_value: 75
+    value: 0.00668
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 75
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine-glucose 85 C
+    lever_value: 85
+    value: 0.0247
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine-glucose 95 C
+    lever_value: 95
+    value: 0.186
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-4
+  odorant: 2,3-Dimethylpyrazine
+  lever_class: temperature
+  lever: reaction temperature
+  focal: false
+  location: Table I, pp. 83-84
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: re-read
+  arms:
+  - label: lysine-glucose 75 C
+    lever_value: 75
+    value: 0.000677
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 75
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine-glucose 85 C
+    lever_value: 85
+    value: 0.00309
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine-glucose 95 C
+    lever_value: 95
+    value: 0.0229
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-5
+  odorant: Unsubstituted pyrazine
+  lever_class: temperature
+  lever: reaction temperature
+  focal: false
+  location: Table I, pp. 83-84
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: re-read
+  arms:
+  - label: lysine-fructose 75 C
+    lever_value: 75
+    value: 0.134
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 75
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine-fructose 85 C
+    lever_value: 85
+    value: 0.395
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine-fructose 95 C
+    lever_value: 95
+    value: 1.359
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-6
+  odorant: 2-Methylpyrazine
+  lever_class: temperature
+  lever: reaction temperature
+  focal: false
+  location: Table I, pp. 83-84
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: re-read
+  arms:
+  - label: lysine-fructose 75 C
+    lever_value: 75
+    value: 0.116
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 75
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine-fructose 85 C
+    lever_value: 85
+    value: 0.388
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine-fructose 95 C
+    lever_value: 95
+    value: 1.105
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-7
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: temperature
+  lever: reaction temperature
+  focal: false
+  location: Table I, pp. 83-84
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: re-read
+  arms:
+  - label: lysine-fructose 75 C
+    lever_value: 75
+    value: 0.00779
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 75
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine-fructose 85 C
+    lever_value: 85
+    value: 0.0376
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine-fructose 95 C
+    lever_value: 95
+    value: 0.175
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-8
+  odorant: 2,3-Dimethylpyrazine
+  lever_class: temperature
+  lever: reaction temperature
+  focal: false
+  location: Table I, pp. 83-84
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: re-read
+  arms:
+  - label: lysine-fructose 85 C
+    lever_value: 85
+    value: 0.117
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine-fructose 95 C
+    lever_value: 95
+    value: 0.0441
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-9
+  odorant: Unsubstituted pyrazine
+  lever_class: temperature
+  lever: reaction temperature
+  focal: false
+  location: Table I, pp. 83-84
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: re-read
+  arms:
+  - label: lysine-ribose 75 C
+    lever_value: 75
+    value: 0.31
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 75
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        ribose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine-ribose 85 C
+    lever_value: 85
+    value: 0.992
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        ribose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine-ribose 95 C
+    lever_value: 95
+    value: 3.488
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        ribose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-10
+  odorant: 2-Methylpyrazine
+  lever_class: temperature
+  lever: reaction temperature
+  focal: false
+  location: Table I, pp. 83-84
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: re-read
+  arms:
+  - label: lysine-ribose 75 C
+    lever_value: 75
+    value: 0.44
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 75
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        ribose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine-ribose 85 C
+    lever_value: 85
+    value: 1.768
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        ribose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine-ribose 95 C
+    lever_value: 95
+    value: 5.364
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        ribose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-11
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: temperature
+  lever: reaction temperature
+  focal: false
+  location: Table I, pp. 83-84
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: re-read
+  arms:
+  - label: lysine-ribose 75 C
+    lever_value: 75
+    value: 0.0128
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 75
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        ribose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine-ribose 85 C
+    lever_value: 85
+    value: 0.044
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        ribose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine-ribose 95 C
+    lever_value: 95
+    value: 0.152
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        ribose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-12
+  odorant: 2,3-Dimethylpyrazine
+  lever_class: temperature
+  lever: reaction temperature
+  focal: false
+  location: Table I, pp. 83-84
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: re-read
+  arms:
+  - label: lysine-ribose 85 C
+    lever_value: 85
+    value: 0.00427
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        ribose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine-ribose 95 C
+    lever_value: 95
+    value: 0.0166
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        ribose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-13
+  odorant: Unsubstituted pyrazine
+  lever_class: temperature
+  lever: reaction temperature
+  focal: false
+  location: Table I, pp. 83-84
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: re-read
+  arms:
+  - label: asparagine-glucose 75 C
+    lever_value: 75
+    value: 0.00981
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 75
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: asparagine-glucose 85 C
+    lever_value: 85
+    value: 0.0422
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: asparagine-glucose 95 C
+    lever_value: 95
+    value: 0.103
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-14
+  odorant: 2-Methylpyrazine
+  lever_class: temperature
+  lever: reaction temperature
+  focal: false
+  location: Table I, pp. 83-84
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: re-read
+  arms:
+  - label: asparagine-glucose 75 C
+    lever_value: 75
+    value: 0.0343
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 75
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: asparagine-glucose 85 C
+    lever_value: 85
+    value: 0.179
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: asparagine-glucose 95 C
+    lever_value: 95
+    value: 0.442
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-15
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: temperature
+  lever: reaction temperature
+  focal: false
+  location: Table I, pp. 83-84
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: re-read
+  arms:
+  - label: asparagine-glucose 75 C
+    lever_value: 75
+    value: 0.00455
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 75
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: asparagine-glucose 85 C
+    lever_value: 85
+    value: 0.0202
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: asparagine-glucose 95 C
+    lever_value: 95
+    value: 0.0871
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-16
+  odorant: 2,6-Dimethylpyrazine
+  lever_class: temperature
+  lever: reaction temperature
+  focal: false
+  location: Table I, pp. 83-84
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: re-read
+  arms:
+  - label: asparagine-glucose 85 C
+    lever_value: 85
+    value: 0.0188
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: asparagine-glucose 95 C
+    lever_value: 95
+    value: 0.0997
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-17
+  odorant: Unsubstituted pyrazine
+  lever_class: temperature
+  lever: reaction temperature
+  focal: false
+  location: Table I, pp. 83-84
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: re-read
+  arms:
+  - label: asparagine-fructose 75 C
+    lever_value: 75
+    value: 0.00266
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 75
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: asparagine-fructose 85 C
+    lever_value: 85
+    value: 0.00653
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: asparagine-fructose 95 C
+    lever_value: 95
+    value: 0.0227
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-18
+  odorant: 2-Methylpyrazine
+  lever_class: temperature
+  lever: reaction temperature
+  focal: false
+  location: Table I, pp. 83-84
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: re-read
+  arms:
+  - label: asparagine-fructose 75 C
+    lever_value: 75
+    value: 0.0374
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 75
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: asparagine-fructose 85 C
+    lever_value: 85
+    value: 0.163
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: asparagine-fructose 95 C
+    lever_value: 95
+    value: 0.632
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-19
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: temperature
+  lever: reaction temperature
+  focal: false
+  location: Table I, pp. 83-84
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: re-read
+  arms:
+  - label: asparagine-fructose 75 C
+    lever_value: 75
+    value: 0.0261
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 75
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: asparagine-fructose 85 C
+    lever_value: 85
+    value: 0.122
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: asparagine-fructose 95 C
+    lever_value: 95
+    value: 0.487
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-20
+  odorant: 2,6-Dimethylpyrazine
+  lever_class: temperature
+  lever: reaction temperature
+  focal: false
+  location: Table I, pp. 83-84
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: re-read
+  arms:
+  - label: asparagine-fructose 75 C
+    lever_value: 75
+    value: 0.0356
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 75
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: asparagine-fructose 85 C
+    lever_value: 85
+    value: 0.152
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: asparagine-fructose 95 C
+    lever_value: 95
+    value: 0.541
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-21
+  odorant: Unsubstituted pyrazine
+  lever_class: sugar identity
+  lever: sugar (with lysine) at 95 C
+  focal: true
+  location: Table I, pp. 83-84
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: re-read
+  arms:
+  - label: lysine-glucose
+    lever_value: glucose
+    value: 3.596
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine-fructose
+    lever_value: fructose
+    value: 1.359
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine-ribose
+    lever_value: ribose
+    value: 3.488
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        ribose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-22
+  odorant: Unsubstituted pyrazine
+  lever_class: sugar identity
+  lever: sugar (with lysine) at 85 C
+  focal: true
+  location: Table I, pp. 83-84
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: re-read
+  arms:
+  - label: lysine-glucose
+    lever_value: glucose
+    value: 0.49
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine-fructose
+    lever_value: fructose
+    value: 0.395
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine-ribose
+    lever_value: ribose
+    value: 0.992
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        ribose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-23
+  odorant: Unsubstituted pyrazine
+  lever_class: sugar identity
+  lever: sugar (with lysine) at 75 C
+  focal: true
+  location: Table I, pp. 83-84
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: re-read
+  arms:
+  - label: lysine-glucose
+    lever_value: glucose
+    value: 0.214
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 75
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine-fructose
+    lever_value: fructose
+    value: 0.134
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 75
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine-ribose
+    lever_value: ribose
+    value: 0.31
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 75
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        ribose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-24
+  odorant: 2-Methylpyrazine
+  lever_class: sugar identity
+  lever: sugar (with lysine) at 95 C
+  focal: true
+  location: Table I, pp. 83-84
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: re-read
+  arms:
+  - label: lysine-glucose
+    lever_value: glucose
+    value: 2.837
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine-fructose
+    lever_value: fructose
+    value: 1.105
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine-ribose
+    lever_value: ribose
+    value: 5.364
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        ribose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-25
+  odorant: 2-Methylpyrazine
+  lever_class: sugar identity
+  lever: sugar (with lysine) at 85 C
+  focal: true
+  location: Table I, pp. 83-84
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: re-read
+  arms:
+  - label: lysine-glucose
+    lever_value: glucose
+    value: 0.422
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine-fructose
+    lever_value: fructose
+    value: 0.388
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine-ribose
+    lever_value: ribose
+    value: 1.768
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        ribose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-26
+  odorant: 2-Methylpyrazine
+  lever_class: sugar identity
+  lever: sugar (with lysine) at 75 C
+  focal: true
+  location: Table I, pp. 83-84
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: re-read
+  arms:
+  - label: lysine-glucose
+    lever_value: glucose
+    value: 0.159
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 75
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine-fructose
+    lever_value: fructose
+    value: 0.116
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 75
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine-ribose
+    lever_value: ribose
+    value: 0.44
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 75
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        ribose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-27
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: sugar identity
+  lever: sugar (with lysine) at 95 C
+  focal: true
+  location: Table I, pp. 83-84
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: re-read
+  arms:
+  - label: lysine-glucose
+    lever_value: glucose
+    value: 0.186
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine-fructose
+    lever_value: fructose
+    value: 0.175
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine-ribose
+    lever_value: ribose
+    value: 0.152
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        ribose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-28
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: sugar identity
+  lever: sugar (with lysine) at 85 C
+  focal: true
+  location: Table I, pp. 83-84
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: re-read
+  arms:
+  - label: lysine-glucose
+    lever_value: glucose
+    value: 0.0247
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine-fructose
+    lever_value: fructose
+    value: 0.0376
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine-ribose
+    lever_value: ribose
+    value: 0.044
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        ribose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-29
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: sugar identity
+  lever: sugar (with lysine) at 75 C
+  focal: true
+  location: Table I, pp. 83-84
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: re-read
+  arms:
+  - label: lysine-glucose
+    lever_value: glucose
+    value: 0.00668
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 75
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine-fructose
+    lever_value: fructose
+    value: 0.00779
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 75
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine-ribose
+    lever_value: ribose
+    value: 0.0128
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 75
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        ribose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-30
+  odorant: 2,3-Dimethylpyrazine
+  lever_class: sugar identity
+  lever: sugar (with lysine) at 95 C
+  focal: true
+  location: Table I, pp. 83-84
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: re-read
+  arms:
+  - label: lysine-glucose
+    lever_value: glucose
+    value: 0.0229
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine-fructose
+    lever_value: fructose
+    value: 0.0441
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine-ribose
+    lever_value: ribose
+    value: 0.0166
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        ribose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-31
+  odorant: 2,3-Dimethylpyrazine
+  lever_class: sugar identity
+  lever: sugar (with lysine) at 85 C
+  focal: true
+  location: Table I, pp. 83-84
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: re-read
+  arms:
+  - label: lysine-glucose
+    lever_value: glucose
+    value: 0.00309
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine-fructose
+    lever_value: fructose
+    value: 0.117
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine-ribose
+    lever_value: ribose
+    value: 0.00427
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        ribose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-32
+  odorant: Unsubstituted pyrazine
+  lever_class: sugar identity
+  lever: sugar (with asparagine) at 95 C
+  focal: true
+  location: Table I, pp. 83-84
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: re-read
+  arms:
+  - label: asparagine-glucose
+    lever_value: glucose
+    value: 0.103
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: asparagine-fructose
+    lever_value: fructose
+    value: 0.0227
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-33
+  odorant: Unsubstituted pyrazine
+  lever_class: sugar identity
+  lever: sugar (with asparagine) at 85 C
+  focal: true
+  location: Table I, pp. 83-84
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: re-read
+  arms:
+  - label: asparagine-glucose
+    lever_value: glucose
+    value: 0.0422
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: asparagine-fructose
+    lever_value: fructose
+    value: 0.00653
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-34
+  odorant: Unsubstituted pyrazine
+  lever_class: sugar identity
+  lever: sugar (with asparagine) at 75 C
+  focal: true
+  location: Table I, pp. 83-84
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: re-read
+  arms:
+  - label: asparagine-glucose
+    lever_value: glucose
+    value: 0.00981
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 75
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: asparagine-fructose
+    lever_value: fructose
+    value: 0.00266
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 75
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-35
+  odorant: 2-Methylpyrazine
+  lever_class: sugar identity
+  lever: sugar (with asparagine) at 95 C
+  focal: true
+  location: Table I, pp. 83-84
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: re-read
+  arms:
+  - label: asparagine-glucose
+    lever_value: glucose
+    value: 0.442
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: asparagine-fructose
+    lever_value: fructose
+    value: 0.632
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-36
+  odorant: 2-Methylpyrazine
+  lever_class: sugar identity
+  lever: sugar (with asparagine) at 85 C
+  focal: true
+  location: Table I, pp. 83-84
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: re-read
+  arms:
+  - label: asparagine-glucose
+    lever_value: glucose
+    value: 0.179
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: asparagine-fructose
+    lever_value: fructose
+    value: 0.163
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-37
+  odorant: 2-Methylpyrazine
+  lever_class: sugar identity
+  lever: sugar (with asparagine) at 75 C
+  focal: true
+  location: Table I, pp. 83-84
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: re-read
+  arms:
+  - label: asparagine-glucose
+    lever_value: glucose
+    value: 0.0343
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 75
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: asparagine-fructose
+    lever_value: fructose
+    value: 0.0374
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 75
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-38
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: sugar identity
+  lever: sugar (with asparagine) at 95 C
+  focal: true
+  location: Table I, pp. 83-84
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: re-read
+  arms:
+  - label: asparagine-glucose
+    lever_value: glucose
+    value: 0.0871
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: asparagine-fructose
+    lever_value: fructose
+    value: 0.487
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-39
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: sugar identity
+  lever: sugar (with asparagine) at 85 C
+  focal: true
+  location: Table I, pp. 83-84
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: re-read
+  arms:
+  - label: asparagine-glucose
+    lever_value: glucose
+    value: 0.0202
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: asparagine-fructose
+    lever_value: fructose
+    value: 0.122
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-40
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: sugar identity
+  lever: sugar (with asparagine) at 75 C
+  focal: true
+  location: Table I, pp. 83-84
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: re-read
+  arms:
+  - label: asparagine-glucose
+    lever_value: glucose
+    value: 0.00455
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 75
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: asparagine-fructose
+    lever_value: fructose
+    value: 0.0261
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 75
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-41
+  odorant: 2,6-Dimethylpyrazine
+  lever_class: sugar identity
+  lever: sugar (with asparagine) at 95 C
+  focal: true
+  location: Table I, pp. 83-84
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: re-read
+  arms:
+  - label: asparagine-glucose
+    lever_value: glucose
+    value: 0.0997
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: asparagine-fructose
+    lever_value: fructose
+    value: 0.541
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-42
+  odorant: 2,6-Dimethylpyrazine
+  lever_class: sugar identity
+  lever: sugar (with asparagine) at 85 C
+  focal: true
+  location: Table I, pp. 83-84
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: re-read
+  arms:
+  - label: asparagine-glucose
+    lever_value: glucose
+    value: 0.0188
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: asparagine-fructose
+    lever_value: fructose
+    value: 0.152
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-43
+  odorant: Unsubstituted pyrazine
+  lever_class: amino acid identity
+  lever: amino acid (with glucose) at 95 C
+  focal: true
+  location: Table I, pp. 83-84
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: re-read
+  arms:
+  - label: lysine-glucose
+    lever_value: lysine
+    value: 3.596
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: asparagine-glucose
+    lever_value: asparagine
+    value: 0.103
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-44
+  odorant: Unsubstituted pyrazine
+  lever_class: amino acid identity
+  lever: amino acid (with glucose) at 85 C
+  focal: true
+  location: Table I, pp. 83-84
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: re-read
+  arms:
+  - label: lysine-glucose
+    lever_value: lysine
+    value: 0.49
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: asparagine-glucose
+    lever_value: asparagine
+    value: 0.0422
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-45
+  odorant: Unsubstituted pyrazine
+  lever_class: amino acid identity
+  lever: amino acid (with glucose) at 75 C
+  focal: true
+  location: Table I, pp. 83-84
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: re-read
+  arms:
+  - label: lysine-glucose
+    lever_value: lysine
+    value: 0.214
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 75
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: asparagine-glucose
+    lever_value: asparagine
+    value: 0.00981
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 75
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-46
+  odorant: 2-Methylpyrazine
+  lever_class: amino acid identity
+  lever: amino acid (with glucose) at 95 C
+  focal: true
+  location: Table I, pp. 83-84
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: re-read
+  arms:
+  - label: lysine-glucose
+    lever_value: lysine
+    value: 2.837
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: asparagine-glucose
+    lever_value: asparagine
+    value: 0.442
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-47
+  odorant: 2-Methylpyrazine
+  lever_class: amino acid identity
+  lever: amino acid (with glucose) at 85 C
+  focal: true
+  location: Table I, pp. 83-84
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: re-read
+  arms:
+  - label: lysine-glucose
+    lever_value: lysine
+    value: 0.422
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: asparagine-glucose
+    lever_value: asparagine
+    value: 0.179
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-48
+  odorant: 2-Methylpyrazine
+  lever_class: amino acid identity
+  lever: amino acid (with glucose) at 75 C
+  focal: true
+  location: Table I, pp. 83-84
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: re-read
+  arms:
+  - label: lysine-glucose
+    lever_value: lysine
+    value: 0.159
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 75
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: asparagine-glucose
+    lever_value: asparagine
+    value: 0.0343
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 75
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-49
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: amino acid identity
+  lever: amino acid (with glucose) at 95 C
+  focal: true
+  location: Table I, pp. 83-84
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: re-read
+  arms:
+  - label: lysine-glucose
+    lever_value: lysine
+    value: 0.186
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: asparagine-glucose
+    lever_value: asparagine
+    value: 0.0871
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-50
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: amino acid identity
+  lever: amino acid (with glucose) at 85 C
+  focal: true
+  location: Table I, pp. 83-84
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: re-read
+  arms:
+  - label: lysine-glucose
+    lever_value: lysine
+    value: 0.0247
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: asparagine-glucose
+    lever_value: asparagine
+    value: 0.0202
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-51
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: amino acid identity
+  lever: amino acid (with glucose) at 75 C
+  focal: true
+  location: Table I, pp. 83-84
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: re-read
+  arms:
+  - label: lysine-glucose
+    lever_value: lysine
+    value: 0.00668
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 75
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: asparagine-glucose
+    lever_value: asparagine
+    value: 0.00455
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 75
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-52
+  odorant: 2,3-Dimethylpyrazine
+  lever_class: amino acid identity
+  lever: amino acid (with glucose) at 95 C
+  focal: true
+  location: Table I, pp. 83-84
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: re-read
+  arms:
+  - label: lysine-glucose
+    lever_value: lysine
+    value: 0.0229
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: asparagine-glucose
+    lever_value: asparagine
+    value: 0.00231
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-53
+  odorant: Unsubstituted pyrazine
+  lever_class: amino acid identity
+  lever: amino acid (with fructose) at 95 C
+  focal: true
+  location: Table I, pp. 83-84
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: re-read
+  arms:
+  - label: lysine-fructose
+    lever_value: lysine
+    value: 1.359
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: asparagine-fructose
+    lever_value: asparagine
+    value: 0.0227
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-54
+  odorant: Unsubstituted pyrazine
+  lever_class: amino acid identity
+  lever: amino acid (with fructose) at 85 C
+  focal: true
+  location: Table I, pp. 83-84
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: re-read
+  arms:
+  - label: lysine-fructose
+    lever_value: lysine
+    value: 0.395
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: asparagine-fructose
+    lever_value: asparagine
+    value: 0.00653
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-55
+  odorant: Unsubstituted pyrazine
+  lever_class: amino acid identity
+  lever: amino acid (with fructose) at 75 C
+  focal: true
+  location: Table I, pp. 83-84
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: re-read
+  arms:
+  - label: lysine-fructose
+    lever_value: lysine
+    value: 0.134
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 75
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: asparagine-fructose
+    lever_value: asparagine
+    value: 0.00266
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 75
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-56
+  odorant: 2-Methylpyrazine
+  lever_class: amino acid identity
+  lever: amino acid (with fructose) at 95 C
+  focal: true
+  location: Table I, pp. 83-84
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: re-read
+  arms:
+  - label: lysine-fructose
+    lever_value: lysine
+    value: 1.105
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: asparagine-fructose
+    lever_value: asparagine
+    value: 0.632
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-57
+  odorant: 2-Methylpyrazine
+  lever_class: amino acid identity
+  lever: amino acid (with fructose) at 85 C
+  focal: true
+  location: Table I, pp. 83-84
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: re-read
+  arms:
+  - label: lysine-fructose
+    lever_value: lysine
+    value: 0.388
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: asparagine-fructose
+    lever_value: asparagine
+    value: 0.163
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-58
+  odorant: 2-Methylpyrazine
+  lever_class: amino acid identity
+  lever: amino acid (with fructose) at 75 C
+  focal: true
+  location: Table I, pp. 83-84
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: re-read
+  arms:
+  - label: lysine-fructose
+    lever_value: lysine
+    value: 0.116
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 75
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: asparagine-fructose
+    lever_value: asparagine
+    value: 0.0374
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 75
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-59
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: amino acid identity
+  lever: amino acid (with fructose) at 95 C
+  focal: true
+  location: Table I, pp. 83-84
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: re-read
+  arms:
+  - label: lysine-fructose
+    lever_value: lysine
+    value: 0.175
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: asparagine-fructose
+    lever_value: asparagine
+    value: 0.487
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-60
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: amino acid identity
+  lever: amino acid (with fructose) at 85 C
+  focal: true
+  location: Table I, pp. 83-84
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: re-read
+  arms:
+  - label: lysine-fructose
+    lever_value: lysine
+    value: 0.0376
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: asparagine-fructose
+    lever_value: asparagine
+    value: 0.122
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-61
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: amino acid identity
+  lever: amino acid (with fructose) at 75 C
+  focal: true
+  location: Table I, pp. 83-84
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: re-read
+  arms:
+  - label: lysine-fructose
+    lever_value: lysine
+    value: 0.00779
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 75
+      time_min: 1440
+      precursors:
+        lysine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: asparagine-fructose
+    lever_value: asparagine
+    value: 0.0261
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 75
+      time_min: 1440
+      precursors:
+        asparagine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-62
+  odorant: Unsubstituted pyrazine
+  lever_class: sugar identity
+  lever: sugar (with lysine)
+  focal: true
+  location: Table III, p. 87
+  digitised: false
+  unit: '% of total pyrazines'
+  quant_type: relative
+  quantity: share
+  time_course_rule: main result time (2 h at 95 C, stated for the yield/distribution comparison)
+  resolution: agreed
+  arms:
+  - label: lysine-glucose
+    lever_value: glucose
+    value: 55.8
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        lysine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine-fructose
+    lever_value: fructose
+    value: 42.3
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        lysine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine-ribose
+    lever_value: ribose
+    value: 36.8
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        lysine: 0.1 M
+        ribose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-63
+  odorant: 2-Methylpyrazine
+  lever_class: sugar identity
+  lever: sugar (with lysine)
+  focal: true
+  location: Table III, p. 87
+  digitised: false
+  unit: '% of total pyrazines'
+  quant_type: relative
+  quantity: share
+  time_course_rule: main result time (2 h at 95 C, stated for the yield/distribution comparison)
+  resolution: agreed
+  arms:
+  - label: lysine-glucose
+    lever_value: glucose
+    value: 41.5
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        lysine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine-fructose
+    lever_value: fructose
+    value: 48.6
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        lysine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine-ribose
+    lever_value: ribose
+    value: 61.1
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        lysine: 0.1 M
+        ribose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-64
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: sugar identity
+  lever: sugar (with lysine)
+  focal: true
+  location: Table III, p. 87
+  digitised: false
+  unit: '% of total pyrazines'
+  quant_type: relative
+  quantity: share
+  time_course_rule: main result time (2 h at 95 C, stated for the yield/distribution comparison)
+  resolution: agreed
+  arms:
+  - label: lysine-glucose
+    lever_value: glucose
+    value: 2.4
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        lysine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine-fructose
+    lever_value: fructose
+    value: 7.3
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        lysine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine-ribose
+    lever_value: ribose
+    value: 1.6
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        lysine: 0.1 M
+        ribose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-65
+  odorant: 2,6-Dimethylpyrazine
+  lever_class: sugar identity
+  lever: sugar (with lysine)
+  focal: true
+  location: Table III, p. 87
+  digitised: false
+  unit: '% of total pyrazines'
+  quant_type: relative
+  quantity: share
+  time_course_rule: main result time (2 h at 95 C, stated for the yield/distribution comparison)
+  resolution: agreed
+  arms:
+  - label: lysine-glucose
+    lever_value: glucose
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        lysine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine-fructose
+    lever_value: fructose
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        lysine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine-ribose
+    lever_value: ribose
+    value: 0.3
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        lysine: 0.1 M
+        ribose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-66
+  odorant: 2,3-Dimethylpyrazine
+  lever_class: sugar identity
+  lever: sugar (with lysine)
+  focal: true
+  location: Table III, p. 87
+  digitised: false
+  unit: '% of total pyrazines'
+  quant_type: relative
+  quantity: share
+  time_course_rule: main result time (2 h at 95 C, stated for the yield/distribution comparison)
+  resolution: agreed
+  arms:
+  - label: lysine-glucose
+    lever_value: glucose
+    value: 0.3
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        lysine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine-fructose
+    lever_value: fructose
+    value: 1.8
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        lysine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine-ribose
+    lever_value: ribose
+    value: 0.2
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        lysine: 0.1 M
+        ribose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-67
+  odorant: Pyrazines
+  lever_class: sugar identity
+  lever: sugar (with lysine)
+  focal: true
+  location: Table III, p. 87
+  digitised: false
+  unit: ppm
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: main result time (2 h at 95 C, stated for the yield/distribution comparison)
+  resolution: agreed
+  arms:
+  - label: lysine-glucose
+    lever_value: glucose
+    value: 13.1
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        lysine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine-fructose
+    lever_value: fructose
+    value: 5.7
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        lysine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine-ribose
+    lever_value: ribose
+    value: 19.9
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        lysine: 0.1 M
+        ribose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-68
+  odorant: Unsubstituted pyrazine
+  lever_class: sugar identity
+  lever: sugar (with asparagine)
+  focal: true
+  location: Table III, p. 87
+  digitised: false
+  unit: '% of total pyrazines'
+  quant_type: relative
+  quantity: share
+  time_course_rule: main result time (2 h at 95 C, stated for the yield/distribution comparison)
+  resolution: agreed
+  arms:
+  - label: asparagine-glucose
+    lever_value: glucose
+    value: 18.7
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        asparagine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: asparagine-fructose
+    lever_value: fructose
+    value: 1.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        asparagine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-69
+  odorant: 2-Methylpyrazine
+  lever_class: sugar identity
+  lever: sugar (with asparagine)
+  focal: true
+  location: Table III, p. 87
+  digitised: false
+  unit: '% of total pyrazines'
+  quant_type: relative
+  quantity: share
+  time_course_rule: main result time (2 h at 95 C, stated for the yield/distribution comparison)
+  resolution: agreed
+  arms:
+  - label: asparagine-glucose
+    lever_value: glucose
+    value: 58.8
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        asparagine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: asparagine-fructose
+    lever_value: fructose
+    value: 29.1
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        asparagine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-70
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: sugar identity
+  lever: sugar (with asparagine)
+  focal: true
+  location: Table III, p. 87
+  digitised: false
+  unit: '% of total pyrazines'
+  quant_type: relative
+  quantity: share
+  time_course_rule: main result time (2 h at 95 C, stated for the yield/distribution comparison)
+  resolution: agreed
+  arms:
+  - label: asparagine-glucose
+    lever_value: glucose
+    value: 17.3
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        asparagine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: asparagine-fructose
+    lever_value: fructose
+    value: 37.6
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        asparagine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-71
+  odorant: 2,6-Dimethylpyrazine
+  lever_class: sugar identity
+  lever: sugar (with asparagine)
+  focal: true
+  location: Table III, p. 87
+  digitised: false
+  unit: '% of total pyrazines'
+  quant_type: relative
+  quantity: share
+  time_course_rule: main result time (2 h at 95 C, stated for the yield/distribution comparison)
+  resolution: agreed
+  arms:
+  - label: asparagine-glucose
+    lever_value: glucose
+    value: 4.8
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        asparagine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: asparagine-fructose
+    lever_value: fructose
+    value: 32.3
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        asparagine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-72
+  odorant: 2,3-Dimethylpyrazine
+  lever_class: sugar identity
+  lever: sugar (with asparagine)
+  focal: true
+  location: Table III, p. 87
+  digitised: false
+  unit: '% of total pyrazines'
+  quant_type: relative
+  quantity: share
+  time_course_rule: main result time (2 h at 95 C, stated for the yield/distribution comparison)
+  resolution: agreed
+  arms:
+  - label: asparagine-glucose
+    lever_value: glucose
+    value: 0.4
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        asparagine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: asparagine-fructose
+    lever_value: fructose
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        asparagine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-73
+  odorant: Pyrazines
+  lever_class: sugar identity
+  lever: sugar (with asparagine)
+  focal: true
+  location: Table III, p. 87
+  digitised: false
+  unit: ppm
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: main result time (2 h at 95 C, stated for the yield/distribution comparison)
+  resolution: agreed
+  arms:
+  - label: asparagine-glucose
+    lever_value: glucose
+    value: 0.74
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        asparagine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: asparagine-fructose
+    lever_value: fructose
+    value: 2.2
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        asparagine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-74
+  odorant: Unsubstituted pyrazine
+  lever_class: amino acid identity
+  lever: amino acid (with glucose)
+  focal: true
+  location: Table III, p. 87
+  digitised: false
+  unit: '% of total pyrazines'
+  quant_type: relative
+  quantity: share
+  time_course_rule: main result time (2 h at 95 C, stated for the yield/distribution comparison)
+  resolution: agreed
+  arms:
+  - label: lysine-glucose
+    lever_value: lysine
+    value: 55.8
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        lysine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: asparagine-glucose
+    lever_value: asparagine
+    value: 18.7
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        asparagine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-75
+  odorant: 2-Methylpyrazine
+  lever_class: amino acid identity
+  lever: amino acid (with glucose)
+  focal: true
+  location: Table III, p. 87
+  digitised: false
+  unit: '% of total pyrazines'
+  quant_type: relative
+  quantity: share
+  time_course_rule: main result time (2 h at 95 C, stated for the yield/distribution comparison)
+  resolution: agreed
+  arms:
+  - label: lysine-glucose
+    lever_value: lysine
+    value: 41.5
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        lysine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: asparagine-glucose
+    lever_value: asparagine
+    value: 58.8
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        asparagine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-76
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: amino acid identity
+  lever: amino acid (with glucose)
+  focal: true
+  location: Table III, p. 87
+  digitised: false
+  unit: '% of total pyrazines'
+  quant_type: relative
+  quantity: share
+  time_course_rule: main result time (2 h at 95 C, stated for the yield/distribution comparison)
+  resolution: agreed
+  arms:
+  - label: lysine-glucose
+    lever_value: lysine
+    value: 2.4
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        lysine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: asparagine-glucose
+    lever_value: asparagine
+    value: 17.3
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        asparagine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-77
+  odorant: 2,6-Dimethylpyrazine
+  lever_class: amino acid identity
+  lever: amino acid (with glucose)
+  focal: true
+  location: Table III, p. 87
+  digitised: false
+  unit: '% of total pyrazines'
+  quant_type: relative
+  quantity: share
+  time_course_rule: main result time (2 h at 95 C, stated for the yield/distribution comparison)
+  resolution: agreed
+  arms:
+  - label: lysine-glucose
+    lever_value: lysine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        lysine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: asparagine-glucose
+    lever_value: asparagine
+    value: 4.8
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        asparagine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-78
+  odorant: 2,3-Dimethylpyrazine
+  lever_class: amino acid identity
+  lever: amino acid (with glucose)
+  focal: true
+  location: Table III, p. 87
+  digitised: false
+  unit: '% of total pyrazines'
+  quant_type: relative
+  quantity: share
+  time_course_rule: main result time (2 h at 95 C, stated for the yield/distribution comparison)
+  resolution: agreed
+  arms:
+  - label: lysine-glucose
+    lever_value: lysine
+    value: 0.3
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        lysine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: asparagine-glucose
+    lever_value: asparagine
+    value: 0.4
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        asparagine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-79
+  odorant: Pyrazines
+  lever_class: amino acid identity
+  lever: amino acid (with glucose)
+  focal: true
+  location: Table III, p. 87; cysteine arm from text p. 85
+  digitised: false
+  unit: ppm
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: main result time (2 h at 95 C, stated for the yield/distribution comparison)
+  resolution: re-read
+  arms:
+  - label: lysine-glucose
+    lever_value: lysine
+    value: 13.1
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        lysine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: asparagine-glucose
+    lever_value: asparagine
+    value: 0.74
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        asparagine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 'cysteine-glucose (text p. 85: no pyrazines detected)'
+    lever_value: cysteine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        cysteine: 0.1 M
+        glucose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-80
+  odorant: Unsubstituted pyrazine
+  lever_class: amino acid identity
+  lever: amino acid (with fructose)
+  focal: true
+  location: Table III, p. 87
+  digitised: false
+  unit: '% of total pyrazines'
+  quant_type: relative
+  quantity: share
+  time_course_rule: main result time (2 h at 95 C, stated for the yield/distribution comparison)
+  resolution: agreed
+  arms:
+  - label: lysine-fructose
+    lever_value: lysine
+    value: 42.3
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        lysine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: asparagine-fructose
+    lever_value: asparagine
+    value: 1.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        asparagine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-81
+  odorant: 2-Methylpyrazine
+  lever_class: amino acid identity
+  lever: amino acid (with fructose)
+  focal: true
+  location: Table III, p. 87
+  digitised: false
+  unit: '% of total pyrazines'
+  quant_type: relative
+  quantity: share
+  time_course_rule: main result time (2 h at 95 C, stated for the yield/distribution comparison)
+  resolution: agreed
+  arms:
+  - label: lysine-fructose
+    lever_value: lysine
+    value: 48.6
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        lysine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: asparagine-fructose
+    lever_value: asparagine
+    value: 29.1
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        asparagine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-82
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: amino acid identity
+  lever: amino acid (with fructose)
+  focal: true
+  location: Table III, p. 87
+  digitised: false
+  unit: '% of total pyrazines'
+  quant_type: relative
+  quantity: share
+  time_course_rule: main result time (2 h at 95 C, stated for the yield/distribution comparison)
+  resolution: agreed
+  arms:
+  - label: lysine-fructose
+    lever_value: lysine
+    value: 7.3
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        lysine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: asparagine-fructose
+    lever_value: asparagine
+    value: 37.6
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        asparagine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-83
+  odorant: 2,6-Dimethylpyrazine
+  lever_class: amino acid identity
+  lever: amino acid (with fructose)
+  focal: true
+  location: Table III, p. 87
+  digitised: false
+  unit: '% of total pyrazines'
+  quant_type: relative
+  quantity: share
+  time_course_rule: main result time (2 h at 95 C, stated for the yield/distribution comparison)
+  resolution: agreed
+  arms:
+  - label: lysine-fructose
+    lever_value: lysine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        lysine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: asparagine-fructose
+    lever_value: asparagine
+    value: 32.3
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        asparagine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-84
+  odorant: 2,3-Dimethylpyrazine
+  lever_class: amino acid identity
+  lever: amino acid (with fructose)
+  focal: true
+  location: Table III, p. 87
+  digitised: false
+  unit: '% of total pyrazines'
+  quant_type: relative
+  quantity: share
+  time_course_rule: main result time (2 h at 95 C, stated for the yield/distribution comparison)
+  resolution: agreed
+  arms:
+  - label: lysine-fructose
+    lever_value: lysine
+    value: 1.8
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        lysine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: asparagine-fructose
+    lever_value: asparagine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        asparagine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989-85
+  odorant: Pyrazines
+  lever_class: amino acid identity
+  lever: amino acid (with fructose)
+  focal: true
+  location: Table III, p. 87
+  digitised: false
+  unit: ppm
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: main result time (2 h at 95 C, stated for the yield/distribution comparison)
+  resolution: agreed
+  arms:
+  - label: lysine-fructose
+    lever_value: lysine
+    value: 5.7
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        lysine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: asparagine-fructose
+    lever_value: asparagine
+    value: 2.2
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        asparagine: 0.1 M
+        fructose: 0.1 M
+      buffer: 0.1 M borate, pH 9.0
+      matrix: buffer
+      headspace: sealed, unstated

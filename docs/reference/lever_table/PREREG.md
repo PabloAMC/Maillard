@@ -166,3 +166,10 @@ are made from a named amino acid, and their studies vary WHICH amino acid is pre
 ...); sec. 4's table has no row for that lever, so these contrasts would fall into no cell. *Rule:* a categorical
 lever **amino acid identity**, reference **glycine**, estimated as a network like the other categorical levers.
 
+**A3 (2026-11-11, before any table of the second round is generated).** *Reason:* some categorical cells contain no
+study with the declared reference level (e.g. amino-acid studies built as "glycine alone vs glycine + X"), so every
+level would read "not connected" and the cell's data would be lost. *Rule:* where no level of a cell's network
+connects to the declared reference, the cell is reported against its most-connected level (most contrasts; ties by
+name), and the output names that level as the reference. Compounds keyed with `odorant_unlisted: true` (in a family
+but not on the declared list) are counted and enter no cell.
+

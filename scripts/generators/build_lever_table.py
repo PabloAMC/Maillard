@@ -269,12 +269,17 @@ def observations(sources, labs) -> Tuple[List[Dict[str, Any]], Dict[str, int]]:
             skipped["source without a laboratory (counted as its own TEST laboratory)"] += 1
         for c in doc["contrasts"] or []:
             lc = c.get("lever_class")
+            if c.get("odorant_unlisted"):
+                skipped["odorants outside the declared lists (PREREG amendment A3)"] += 1
+                continue
             key = compound_keys.resolve(str(c.get("odorant", "")))
             if key is None:
                 raise SystemExit(f"{src} {c.get('id')}: odorant {c.get('odorant')!r} does not resolve "
                                  "(src/compound_keys.py); fix the name or add the alias")
-            if str(c.get("quantity") or "amount") != "amount":
-                skipped["rates, half-lives or storage losses (PREREG amendment A1)"] += 1
+            q = str(c.get("quantity") or "amount")
+            if q != "amount":
+                skipped["shares of a total (PREREG amendment A1)" if q == "share" else
+                        "rates, half-lives or storage losses (PREREG amendment A1)"] += 1
                 continue
             if lc == "mixed":
                 skipped["mixed-lever contrasts (no single-lever cell)"] += 1
@@ -294,6 +299,8 @@ def observations(sources, labs) -> Tuple[List[Dict[str, Any]], Dict[str, int]]:
             if o.get("kind") == "excluded":
                 skipped[f"sugar-identity contrasts whose levels are not sugars (fed intermediates)"] += 1
                 continue
+            if c.get("system") == "fed_odorant":      # stability of an added odorant, not its formation
+                o["band"] = f"{o['band']}, fed odorant (stability)"
             o.update({"source": src, "contrast": c.get("id"), "compound": key.display_name, "lever_class": lc,
                       "lab": lab, "partition": part, "focal": bool(c.get("focal")),
                       "peak_area": c.get("quant_type") != "absolute",
@@ -403,7 +410,12 @@ def categorical_fit(rows, reference, scale):
             if nb not in comp:
                 comp.add(nb); todo.append(nb)
     if reference not in levels:
-        return {"connected": False, "levels": {lv: {"reading": "not connected"} for lv in levels}}
+        # PREREG amendment A3: no study carries the declared reference; report against the most-connected level
+        counts = {lv: sum(1 for _, p in pairs if lv in (p["level"], p["against"])) for lv in levels}
+        fallback = sorted(levels, key=lambda lv: (-counts[lv], lv))[0]
+        out = categorical_fit(rows, fallback, scale)
+        out["reference_fallback"] = {"declared": reference, "used": fallback}
+        return out
     pairs = [(r, p) for r, p in pairs if p["level"] in comp]
     cols = [lv for lv in levels if lv in comp and lv != reference]
     n = len(pairs)
@@ -502,8 +514,11 @@ def cell_table(obs: Sequence[Mapping[str, Any]]) -> List[Dict[str, Any]]:
             base["lolo"] = lolo(rows)
         else:
             ref = CATEGORICAL_REFERENCE[lc]
-            base["reference"] = ref
             f = categorical_fit(rows, ref, PRIOR_SCALE)
+            base["reference"] = f.get("reference", ref)
+            if f.get("reference_fallback"):
+                base["reference_note"] = (f"declared reference {ref!r} absent from every study of this cell; reported "
+                                          f"against {base['reference']!r} (PREREG amendment A3)")
             for lv, s in f["levels"].items():
                 if "estimate" in s:
                     s["reading"] = reading(s["labs"], s)
