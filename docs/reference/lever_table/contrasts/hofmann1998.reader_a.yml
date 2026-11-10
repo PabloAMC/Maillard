@@ -1,0 +1,1729 @@
+source: hofmann1998
+pdf: data/articles/hofmann1998.pdf
+reader: a
+scope_note: Aqueous conditions (0.5 M phosphate, 145 C, 20 min, autoclave) taken from Methods for all tables; pH basis not
+  stated. Table 5 FFT/MFT reprint Table 1 (not re-keyed); Table 2 pH 5.0 aqueous column equals Table 1 (its sugar contrast
+  keyed once via Table 1). Tables 3 and 4 vary the carbonyl precursor (not only sugars) and are keyed as sugar identity for
+  want of a precursor-identity class. Table 10 hydroxyacetaldehyde/mercapto-2-propanone and thiamin arms differ in more than
+  one lever, not keyed.
+contrasts:
+- id: hofmann1998-1
+  odorant: FFT
+  lever_class: sugar identity
+  lever: carbohydrate reacted with cysteine
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ug (per reaction)
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: ribose
+    lever_value: ribose
+    value: 12.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        cysteine: 3.3 mmol in 100 mL
+        ribose: 10.0 mmol in 100 mL
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: xylose
+    lever_value: xylose
+    value: 9.6
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        cysteine: 3.3 mmol in 100 mL
+        xylose: 10.0 mmol in 100 mL
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: fructose
+    lever_value: fructose
+    value: 3.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        cysteine: 3.3 mmol in 100 mL
+        fructose: 10.0 mmol in 100 mL
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: glucose
+    lever_value: glucose
+    value: 2.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        cysteine: 3.3 mmol in 100 mL
+        glucose: 10.0 mmol in 100 mL
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: glucose-6-phosphate
+    lever_value: glucose-6-phosphate
+    value: 0.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        cysteine: 3.3 mmol in 100 mL
+        glucose-6-phosphate: 10.0 mmol in 100 mL
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: rhamnose
+    lever_value: rhamnose
+    value: 0.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        cysteine: 3.3 mmol in 100 mL
+        rhamnose: 10.0 mmol in 100 mL
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: maltose
+    lever_value: maltose
+    value: 0.6
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        cysteine: 3.3 mmol in 100 mL
+        maltose: 10.0 mmol in 100 mL
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: hofmann1998-2
+  odorant: MFT
+  lever_class: sugar identity
+  lever: carbohydrate reacted with cysteine
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ug (per reaction)
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: ribose
+    lever_value: ribose
+    value: 19.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        cysteine: 3.3 mmol in 100 mL
+        ribose: 10.0 mmol in 100 mL
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: xylose
+    lever_value: xylose
+    value: 14.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        cysteine: 3.3 mmol in 100 mL
+        xylose: 10.0 mmol in 100 mL
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: fructose
+    lever_value: fructose
+    value: 2.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        cysteine: 3.3 mmol in 100 mL
+        fructose: 10.0 mmol in 100 mL
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: glucose
+    lever_value: glucose
+    value: 1.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        cysteine: 3.3 mmol in 100 mL
+        glucose: 10.0 mmol in 100 mL
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: glucose-6-phosphate
+    lever_value: glucose-6-phosphate
+    value: 0.6
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        cysteine: 3.3 mmol in 100 mL
+        glucose-6-phosphate: 10.0 mmol in 100 mL
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: rhamnose
+    lever_value: rhamnose
+    value: 0.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        cysteine: 3.3 mmol in 100 mL
+        rhamnose: 10.0 mmol in 100 mL
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: maltose
+    lever_value: maltose
+    value: 0.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        cysteine: 3.3 mmol in 100 mL
+        maltose: 10.0 mmol in 100 mL
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: hofmann1998-3
+  odorant: FFT
+  lever_class: pH
+  lever: reaction pH (phosphate buffer), cysteine/ribose
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ug (per reaction)
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: ribose, pH 3.0
+    lever_value: 3.0
+    value: 22.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        cysteine: 3.3 mmol in 100 mL
+        ribose: 10.0 mmol in 100 mL
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: ribose, pH 5.0
+    lever_value: 5.0
+    value: 12.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        cysteine: 3.3 mmol in 100 mL
+        ribose: 10.0 mmol in 100 mL
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: ribose, pH 7.0
+    lever_value: 7.0
+    value: 1.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        cysteine: 3.3 mmol in 100 mL
+        ribose: 10.0 mmol in 100 mL
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: hofmann1998-4
+  odorant: MFT
+  lever_class: pH
+  lever: reaction pH (phosphate buffer), cysteine/ribose
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ug (per reaction)
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: ribose, pH 3.0
+    lever_value: 3.0
+    value: 55.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        cysteine: 3.3 mmol in 100 mL
+        ribose: 10.0 mmol in 100 mL
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: ribose, pH 5.0
+    lever_value: 5.0
+    value: 19.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        cysteine: 3.3 mmol in 100 mL
+        ribose: 10.0 mmol in 100 mL
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: ribose, pH 7.0
+    lever_value: 7.0
+    value: 2.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        cysteine: 3.3 mmol in 100 mL
+        ribose: 10.0 mmol in 100 mL
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: hofmann1998-5
+  odorant: FFT
+  lever_class: pH
+  lever: reaction pH (phosphate buffer), cysteine/glucose
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ug (per reaction)
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: glucose, pH 3.0
+    lever_value: 3.0
+    value: 0.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        cysteine: 3.3 mmol in 100 mL
+        glucose: 10.0 mmol in 100 mL
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: glucose, pH 5.0
+    lever_value: 5.0
+    value: 2.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        cysteine: 3.3 mmol in 100 mL
+        glucose: 10.0 mmol in 100 mL
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: glucose, pH 7.0
+    lever_value: 7.0
+    value: 0.6
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        cysteine: 3.3 mmol in 100 mL
+        glucose: 10.0 mmol in 100 mL
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: hofmann1998-6
+  odorant: MFT
+  lever_class: pH
+  lever: reaction pH (phosphate buffer), cysteine/glucose
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ug (per reaction)
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: glucose, pH 3.0
+    lever_value: 3.0
+    value: 0.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        cysteine: 3.3 mmol in 100 mL
+        glucose: 10.0 mmol in 100 mL
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: glucose, pH 5.0
+    lever_value: 5.0
+    value: 1.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        cysteine: 3.3 mmol in 100 mL
+        glucose: 10.0 mmol in 100 mL
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: glucose, pH 7.0
+    lever_value: 7.0
+    value: 0.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        cysteine: 3.3 mmol in 100 mL
+        glucose: 10.0 mmol in 100 mL
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: hofmann1998-7
+  odorant: FFT
+  lever_class: pH
+  lever: reaction pH (phosphate buffer), cysteine/rhamnose
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ug (per reaction)
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: rhamnose, pH 3.0
+    lever_value: 3.0
+    value: 0.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        cysteine: 3.3 mmol in 100 mL
+        rhamnose: 10.0 mmol in 100 mL
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: rhamnose, pH 5.0
+    lever_value: 5.0
+    value: 0.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        cysteine: 3.3 mmol in 100 mL
+        rhamnose: 10.0 mmol in 100 mL
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: rhamnose, pH 7.0
+    lever_value: 7.0
+    value: 0.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        cysteine: 3.3 mmol in 100 mL
+        rhamnose: 10.0 mmol in 100 mL
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: hofmann1998-8
+  odorant: MFT
+  lever_class: pH
+  lever: reaction pH (phosphate buffer), cysteine/rhamnose
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ug (per reaction)
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: rhamnose, pH 3.0
+    lever_value: 3.0
+    value: 0.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        cysteine: 3.3 mmol in 100 mL
+        rhamnose: 10.0 mmol in 100 mL
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: rhamnose, pH 5.0
+    lever_value: 5.0
+    value: 0.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        cysteine: 3.3 mmol in 100 mL
+        rhamnose: 10.0 mmol in 100 mL
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: rhamnose, pH 7.0
+    lever_value: 7.0
+    value: 0.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        cysteine: 3.3 mmol in 100 mL
+        rhamnose: 10.0 mmol in 100 mL
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: hofmann1998-9
+  odorant: FFT
+  lever_class: mixed
+  lever: aqueous vs dry-heated (water, temperature and time differ together)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ug (per reaction)
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: ribose, aqueous pH 5.0
+    lever_value: aqueous, 145 C, 20 min
+    value: 12.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        cysteine: 3.3 mmol in 100 mL
+        ribose: 10.0 mmol in 100 mL
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: ribose, dry-heated pH 5.0 (footnote c)
+    lever_value: dry-heated on silica gel, 180 C, 6 min
+    value: 97.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: unstated
+      temp_C: 180
+      time_min: 6
+      precursors:
+        cysteine: 3.3 mmol in 100 mL
+        ribose: 10.0 mmol in 100 mL
+      buffer: phosphate buffer pH 5.0 (300 uL on 3.0 g silica gel)
+      matrix: other (silica gel, dry-heated)
+      headspace: sealed, unstated
+- id: hofmann1998-10
+  odorant: MFT
+  lever_class: mixed
+  lever: aqueous vs dry-heated (water, temperature and time differ together)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ug (per reaction)
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: ribose, aqueous pH 5.0
+    lever_value: aqueous, 145 C, 20 min
+    value: 19.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        cysteine: 3.3 mmol in 100 mL
+        ribose: 10.0 mmol in 100 mL
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: ribose, dry-heated pH 5.0 (footnote c)
+    lever_value: dry-heated on silica gel, 180 C, 6 min
+    value: 25.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: unstated
+      temp_C: 180
+      time_min: 6
+      precursors:
+        cysteine: 3.3 mmol in 100 mL
+        ribose: 10.0 mmol in 100 mL
+      buffer: phosphate buffer pH 5.0 (300 uL on 3.0 g silica gel)
+      matrix: other (silica gel, dry-heated)
+      headspace: sealed, unstated
+- id: hofmann1998-11
+  odorant: FFT
+  lever_class: mixed
+  lever: aqueous vs dry-heated (water, temperature and time differ together)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ug (per reaction)
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: glucose, aqueous pH 5.0
+    lever_value: aqueous, 145 C, 20 min
+    value: 2.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        cysteine: 3.3 mmol in 100 mL
+        glucose: 10.0 mmol in 100 mL
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: glucose, dry-heated pH 5.0 (footnote c)
+    lever_value: dry-heated on silica gel, 180 C, 6 min
+    value: 1.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: unstated
+      temp_C: 180
+      time_min: 6
+      precursors:
+        cysteine: 3.3 mmol in 100 mL
+        glucose: 10.0 mmol in 100 mL
+      buffer: phosphate buffer pH 5.0 (300 uL on 3.0 g silica gel)
+      matrix: other (silica gel, dry-heated)
+      headspace: sealed, unstated
+- id: hofmann1998-12
+  odorant: MFT
+  lever_class: mixed
+  lever: aqueous vs dry-heated (water, temperature and time differ together)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ug (per reaction)
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: glucose, aqueous pH 5.0
+    lever_value: aqueous, 145 C, 20 min
+    value: 1.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        cysteine: 3.3 mmol in 100 mL
+        glucose: 10.0 mmol in 100 mL
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: glucose, dry-heated pH 5.0 (footnote c)
+    lever_value: dry-heated on silica gel, 180 C, 6 min
+    value: 4.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: unstated
+      temp_C: 180
+      time_min: 6
+      precursors:
+        cysteine: 3.3 mmol in 100 mL
+        glucose: 10.0 mmol in 100 mL
+      buffer: phosphate buffer pH 5.0 (300 uL on 3.0 g silica gel)
+      matrix: other (silica gel, dry-heated)
+      headspace: sealed, unstated
+- id: hofmann1998-13
+  odorant: FFT
+  lever_class: mixed
+  lever: aqueous vs dry-heated (water, temperature and time differ together)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ug (per reaction)
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: rhamnose, aqueous pH 5.0
+    lever_value: aqueous, 145 C, 20 min
+    value: 0.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        cysteine: 3.3 mmol in 100 mL
+        rhamnose: 10.0 mmol in 100 mL
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: rhamnose, dry-heated pH 5.0 (footnote c)
+    lever_value: dry-heated on silica gel, 180 C, 6 min
+    value: 0.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: unstated
+      temp_C: 180
+      time_min: 6
+      precursors:
+        cysteine: 3.3 mmol in 100 mL
+        rhamnose: 10.0 mmol in 100 mL
+      buffer: phosphate buffer pH 5.0 (300 uL on 3.0 g silica gel)
+      matrix: other (silica gel, dry-heated)
+      headspace: sealed, unstated
+- id: hofmann1998-14
+  odorant: MFT
+  lever_class: mixed
+  lever: aqueous vs dry-heated (water, temperature and time differ together)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ug (per reaction)
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: rhamnose, aqueous pH 5.0
+    lever_value: aqueous, 145 C, 20 min
+    value: 0.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        cysteine: 3.3 mmol in 100 mL
+        rhamnose: 10.0 mmol in 100 mL
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: rhamnose, dry-heated pH 5.0 (footnote c)
+    lever_value: dry-heated on silica gel, 180 C, 6 min
+    value: 3.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: unstated
+      temp_C: 180
+      time_min: 6
+      precursors:
+        cysteine: 3.3 mmol in 100 mL
+        rhamnose: 10.0 mmol in 100 mL
+      buffer: phosphate buffer pH 5.0 (300 uL on 3.0 g silica gel)
+      matrix: other (silica gel, dry-heated)
+      headspace: sealed, unstated
+- id: hofmann1998-15
+  odorant: FFT
+  lever_class: sugar identity
+  lever: carbohydrate reacted with cysteine, at pH 3.0
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ug (per reaction)
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: ribose, pH 3.0
+    lever_value: ribose
+    value: 22.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        cysteine: 3.3 mmol in 100 mL
+        ribose: 10.0 mmol in 100 mL
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: glucose, pH 3.0
+    lever_value: glucose
+    value: 0.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        cysteine: 3.3 mmol in 100 mL
+        glucose: 10.0 mmol in 100 mL
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: rhamnose, pH 3.0
+    lever_value: rhamnose
+    value: 0.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        cysteine: 3.3 mmol in 100 mL
+        rhamnose: 10.0 mmol in 100 mL
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: hofmann1998-16
+  odorant: MFT
+  lever_class: sugar identity
+  lever: carbohydrate reacted with cysteine, at pH 3.0
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ug (per reaction)
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: ribose, pH 3.0
+    lever_value: ribose
+    value: 55.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        cysteine: 3.3 mmol in 100 mL
+        ribose: 10.0 mmol in 100 mL
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: glucose, pH 3.0
+    lever_value: glucose
+    value: 0.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        cysteine: 3.3 mmol in 100 mL
+        glucose: 10.0 mmol in 100 mL
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: rhamnose, pH 3.0
+    lever_value: rhamnose
+    value: 0.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        cysteine: 3.3 mmol in 100 mL
+        rhamnose: 10.0 mmol in 100 mL
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: hofmann1998-17
+  odorant: FFT
+  lever_class: sugar identity
+  lever: carbohydrate reacted with cysteine, at pH 7.0
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ug (per reaction)
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: ribose, pH 7.0
+    lever_value: ribose
+    value: 1.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        cysteine: 3.3 mmol in 100 mL
+        ribose: 10.0 mmol in 100 mL
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: glucose, pH 7.0
+    lever_value: glucose
+    value: 0.6
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        cysteine: 3.3 mmol in 100 mL
+        glucose: 10.0 mmol in 100 mL
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: rhamnose, pH 7.0
+    lever_value: rhamnose
+    value: 0.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        cysteine: 3.3 mmol in 100 mL
+        rhamnose: 10.0 mmol in 100 mL
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: hofmann1998-18
+  odorant: MFT
+  lever_class: sugar identity
+  lever: carbohydrate reacted with cysteine, at pH 7.0
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ug (per reaction)
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: ribose, pH 7.0
+    lever_value: ribose
+    value: 2.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        cysteine: 3.3 mmol in 100 mL
+        ribose: 10.0 mmol in 100 mL
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: glucose, pH 7.0
+    lever_value: glucose
+    value: 0.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        cysteine: 3.3 mmol in 100 mL
+        glucose: 10.0 mmol in 100 mL
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: rhamnose, pH 7.0
+    lever_value: rhamnose
+    value: 0.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        cysteine: 3.3 mmol in 100 mL
+        rhamnose: 10.0 mmol in 100 mL
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: hofmann1998-19
+  odorant: FFT
+  lever_class: sugar identity
+  lever: carbohydrate reacted with cysteine, at dry-heated pH 5.0
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ug (per reaction)
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: ribose, dry-heated pH 5.0
+    lever_value: ribose
+    value: 97.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: unstated
+      temp_C: 180
+      time_min: 6
+      precursors:
+        cysteine: 3.3 mmol in 100 mL
+        ribose: 10.0 mmol in 100 mL
+      buffer: phosphate buffer pH 5.0 (300 uL on 3.0 g silica gel)
+      matrix: other (silica gel, dry-heated)
+      headspace: sealed, unstated
+  - label: glucose, dry-heated pH 5.0
+    lever_value: glucose
+    value: 1.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: unstated
+      temp_C: 180
+      time_min: 6
+      precursors:
+        cysteine: 3.3 mmol in 100 mL
+        glucose: 10.0 mmol in 100 mL
+      buffer: phosphate buffer pH 5.0 (300 uL on 3.0 g silica gel)
+      matrix: other (silica gel, dry-heated)
+      headspace: sealed, unstated
+  - label: rhamnose, dry-heated pH 5.0
+    lever_value: rhamnose
+    value: 0.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: unstated
+      temp_C: 180
+      time_min: 6
+      precursors:
+        cysteine: 3.3 mmol in 100 mL
+        rhamnose: 10.0 mmol in 100 mL
+      buffer: phosphate buffer pH 5.0 (300 uL on 3.0 g silica gel)
+      matrix: other (silica gel, dry-heated)
+      headspace: sealed, unstated
+- id: hofmann1998-20
+  odorant: MFT
+  lever_class: sugar identity
+  lever: carbohydrate reacted with cysteine, at dry-heated pH 5.0
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ug (per reaction)
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: ribose, dry-heated pH 5.0
+    lever_value: ribose
+    value: 25.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: unstated
+      temp_C: 180
+      time_min: 6
+      precursors:
+        cysteine: 3.3 mmol in 100 mL
+        ribose: 10.0 mmol in 100 mL
+      buffer: phosphate buffer pH 5.0 (300 uL on 3.0 g silica gel)
+      matrix: other (silica gel, dry-heated)
+      headspace: sealed, unstated
+  - label: glucose, dry-heated pH 5.0
+    lever_value: glucose
+    value: 4.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: unstated
+      temp_C: 180
+      time_min: 6
+      precursors:
+        cysteine: 3.3 mmol in 100 mL
+        glucose: 10.0 mmol in 100 mL
+      buffer: phosphate buffer pH 5.0 (300 uL on 3.0 g silica gel)
+      matrix: other (silica gel, dry-heated)
+      headspace: sealed, unstated
+  - label: rhamnose, dry-heated pH 5.0
+    lever_value: rhamnose
+    value: 3.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: unstated
+      temp_C: 180
+      time_min: 6
+      precursors:
+        cysteine: 3.3 mmol in 100 mL
+        rhamnose: 10.0 mmol in 100 mL
+      buffer: phosphate buffer pH 5.0 (300 uL on 3.0 g silica gel)
+      matrix: other (silica gel, dry-heated)
+      headspace: sealed, unstated
+- id: hofmann1998-21
+  odorant: FFT
+  lever_class: sugar identity
+  lever: 'carbonyl precursor reacted with H2S: ribose vs 3-deoxyribosulose vs furan-2-aldehyde (precursor identity, not only
+    sugars)'
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug (per reaction)
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: ribose
+    lever_value: ribose
+    value: 9.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        hydrogen sulfide: 1 mmol in 50 mL
+        ribose: 1 mmol in 50 mL
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 3-deoxyribosulose
+    lever_value: 3-deoxyribosulose
+    value: 78.6
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        hydrogen sulfide: 1 mmol in 50 mL
+        3-deoxyribosulose: 1 mmol in 50 mL
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: furan-2-aldehyde
+    lever_value: furan-2-aldehyde
+    value: 550.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        hydrogen sulfide: 1 mmol in 50 mL
+        furan-2-aldehyde: 1 mmol in 50 mL
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: hofmann1998-22
+  odorant: MFT
+  lever_class: sugar identity
+  lever: 'carbonyl precursor reacted with H2S: ribose vs NF (precursor identity, not only sugars)'
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: ug (per reaction)
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: ribose
+    lever_value: ribose
+    value: 15.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        hydrogen sulfide: 1 mmol in 50 mL
+        ribose: 1 mmol
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: NF (4-hydroxy-5-methyl-3(2H)-furanone)
+    lever_value: NF (4-hydroxy-5-methyl-3(2H)-furanone)
+    value: 211.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        hydrogen sulfide: 1 mmol in 50 mL
+        NF (4-hydroxy-5-methyl-3(2H)-furanone): 1 mmol
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: hofmann1998-23
+  odorant: FFT
+  lever_class: pH
+  lever: reaction pH, hydroxyacetaldehyde/mercapto-2-propanone
+  focal: true
+  location: Table 8
+  digitised: false
+  unit: ug (per reaction)
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: expt 1, pH 3.0
+    lever_value: 3.0
+    value: 26.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        hydroxyacetaldehyde: 1 mmol in 50 mL
+        mercapto-2-propanone: 1 mmol in 50 mL
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: expt 2, pH 5.0
+    lever_value: 5.0
+    value: 40.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        hydroxyacetaldehyde: 1 mmol in 50 mL
+        mercapto-2-propanone: 1 mmol in 50 mL
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: expt 3, pH 7.0
+    lever_value: 7.0
+    value: 58.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        hydroxyacetaldehyde: 1 mmol in 50 mL
+        mercapto-2-propanone: 1 mmol in 50 mL
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: hofmann1998-24
+  odorant: MFT
+  lever_class: pH
+  lever: reaction pH, hydroxyacetaldehyde/mercapto-2-propanone
+  focal: true
+  location: Table 8
+  digitised: false
+  unit: ug (per reaction)
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: expt 1, pH 3.0
+    lever_value: 3.0
+    value: 15.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        hydroxyacetaldehyde: 1 mmol in 50 mL
+        mercapto-2-propanone: 1 mmol in 50 mL
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: expt 2, pH 5.0
+    lever_value: 5.0
+    value: 268.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        hydroxyacetaldehyde: 1 mmol in 50 mL
+        mercapto-2-propanone: 1 mmol in 50 mL
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: expt 3, pH 7.0
+    lever_value: 7.0
+    value: 311.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        hydroxyacetaldehyde: 1 mmol in 50 mL
+        mercapto-2-propanone: 1 mmol in 50 mL
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: hofmann1998-25
+  odorant: FFT
+  lever_class: mixed
+  lever: aqueous vs dry-heated (water, temperature and time differ together)
+  focal: true
+  location: Table 8
+  digitised: false
+  unit: ug (per reaction)
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: expt 2, aqueous pH 5.0
+    lever_value: aqueous, 145 C, 20 min
+    value: 40.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        hydroxyacetaldehyde: 1 mmol in 50 mL
+        mercapto-2-propanone: 1 mmol in 50 mL
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: expt 4, dry-heated pH 5.0 (footnote c)
+    lever_value: dry-heated on silica gel, 180 C, 6 min
+    value: 51.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: unstated
+      temp_C: 180
+      time_min: 6
+      precursors:
+        hydroxyacetaldehyde: 1 mmol in 50 mL
+        mercapto-2-propanone: 1 mmol in 50 mL
+      buffer: phosphate buffer pH 5.0 (300 uL on 3.0 g silica gel)
+      matrix: other (silica gel, dry-heated)
+      headspace: sealed, unstated
+- id: hofmann1998-26
+  odorant: MFT
+  lever_class: mixed
+  lever: aqueous vs dry-heated (water, temperature and time differ together)
+  focal: true
+  location: Table 8
+  digitised: false
+  unit: ug (per reaction)
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: expt 2, aqueous pH 5.0
+    lever_value: aqueous, 145 C, 20 min
+    value: 268.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        hydroxyacetaldehyde: 1 mmol in 50 mL
+        mercapto-2-propanone: 1 mmol in 50 mL
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: expt 4, dry-heated pH 5.0 (footnote c)
+    lever_value: dry-heated on silica gel, 180 C, 6 min
+    value: 1553.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: unstated
+      temp_C: 180
+      time_min: 6
+      precursors:
+        hydroxyacetaldehyde: 1 mmol in 50 mL
+        mercapto-2-propanone: 1 mmol in 50 mL
+      buffer: phosphate buffer pH 5.0 (300 uL on 3.0 g silica gel)
+      matrix: other (silica gel, dry-heated)
+      headspace: sealed, unstated
+- id: hofmann1998-27
+  odorant: MFT
+  lever_class: sulfur source
+  lever: 'sulfur source reacted with NF: H2S vs cysteine'
+  focal: true
+  location: Table 10
+  digitised: false
+  unit: ug (per reaction)
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: NF/H2S
+    lever_value: hydrogen sulfide
+    value: 211.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        NF: 1.0 mmol in 50 mL
+        hydrogen sulfide: 1.0 mmol in 50 mL
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: NF/cysteine
+    lever_value: cysteine
+    value: 50.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: unstated
+      temp_C: 145
+      time_min: 20
+      precursors:
+        NF: 1.0 mmol in 50 mL
+        cysteine: 1.0 mmol in 50 mL
+      buffer: 0.5 mol/L phosphate
+      matrix: buffer
+      headspace: sealed, unstated

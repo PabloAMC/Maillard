@@ -1,0 +1,35 @@
+# One file per source and reader: <source>.reader_a.yml / <source>.reader_b.yml; the resolved file is <source>.yml.
+# Rules: docs/reference/lever_table/PREREG.md secs. 3 - 4. Key what the source prints; do not judge it.
+source: ""            # the paper key, e.g. hofmann1998
+pdf: ""               # the file read, e.g. data/articles/hofmann1998.pdf
+reader: ""            # a | b | resolved
+scope_note: ""        # anything the reader could not key, and why (one line)
+contrasts:
+  - id: ""            # <source>-<n>, numbered in reading order
+    odorant: ""       # as printed (MFT, 2-furfurylthiol, hydrogen sulfide, bis(2-methyl-3-furyl) disulfide, ...)
+    lever_class: ""   # pH | temperature | time | precursor dose | sugar identity | sulfur source | buffer
+                      # | lipid | water | oxygen | matrix | mixed
+    lever: ""         # what varies, in words (e.g. "initial pH", "ribose vs xylose", "cysteine concentration")
+    focal: true       # true if the lever and this odorant are the paper's stated question
+    location: ""      # Table 2 / Fig. 3a / p. 1234
+    digitised: false  # true only if read off a figure because no table prints the value
+    unit: ""          # as printed (ug/kg, mg/mol precursor, ng, peak area, % of total, ...)
+    quant_type: ""    # absolute (calibrated or isotope dilution) | peak_area | relative
+    time_course_rule: ""  # "main result time" | "longest time" | "not a time course"
+    arms:
+      - label: ""     # as printed
+        lever_value: ""   # the lever's value for this arm (number or level name)
+        value: null   # number as printed; null if censored with no number
+        censor: none  # none | nd_with_limit | nd_no_limit | trace | below_value
+        limit: null   # the printed LOD / LOQ, or the "<x" value
+        n: null       # replicates, if printed
+        sd: null      # SD as printed (same unit), if printed
+        conditions:
+          ph: null
+          ph_basis: ""      # initial | final | held | label | unstated
+          temp_C: null
+          time_min: null
+          precursors: {}    # name: concentration with unit as printed, e.g. {cysteine: "0.1 M", ribose: "0.1 M"}
+          buffer: ""        # e.g. "0.5 M phosphate", "none", "unstated"
+          matrix: ""        # buffer | water | meat | plant protein (name it) | yeast extract | other (name it)
+          headspace: ""     # air | inert | sealed, unstated | unstated

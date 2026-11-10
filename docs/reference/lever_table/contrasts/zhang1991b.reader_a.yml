@@ -1,0 +1,8 @@
+# Reader a, blind double-keying (PREREG secs. 3 - 4).
+source: zhang1991b
+pdf: data/articles/zhang1991b.pdf
+reader: a
+scope_note: 'No qualifying contrast: Table I (glucose with cysteine vs glutathione, pH 7.5, 180 C) lists no MFT,
+  FFT, H2S or their disulfides; the text states no sulfur-containing furans were detected; Table II is class totals
+  only.'
+contrasts: []

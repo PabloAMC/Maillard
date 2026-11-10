@@ -1,0 +1,213 @@
+# Reader a, blind double-keying (PREREG secs. 3 - 4).
+source: tai1998
+pdf: data/articles/tai1998.pdf
+reader: a
+scope_note: Quantities are tridecane internal-standard normalised (no response factors), keyed peak_area; 2-furfurylthiol
+  absent from Table 2 keyed nd_no_limit; 5-methyl-2-furfurylthiol and other S-volatiles are outside the thiol set.
+contrasts:
+- id: tai1998-1
+  odorant: 2-furfurylthiol
+  lever_class: pH
+  lever: initial pH (glutathione/glucose)
+  focal: false
+  location: Table 1, p. 2262
+  digitised: false
+  unit: mg/mol
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: pH 8.0
+    lever_value: 8.0
+    value: 11.9
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.0
+      ph_basis: initial
+      temp_C: 160
+      time_min: 120
+      precursors:
+        glutathione: 0.0012 mol in 50 mL
+        alpha-D-glucose: amount unstated
+      buffer: none (distilled water, pH adjusted)
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 6.0
+    lever_value: 6.0
+    value: 14.7
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: initial
+      temp_C: 160
+      time_min: 120
+      precursors:
+        glutathione: 0.0012 mol in 50 mL
+        alpha-D-glucose: amount unstated
+      buffer: none (distilled water, pH adjusted)
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 3.0
+    lever_value: 3.0
+    value: 9.1
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: initial
+      temp_C: 160
+      time_min: 120
+      precursors:
+        glutathione: 0.0012 mol in 50 mL
+        alpha-D-glucose: amount unstated
+      buffer: none (distilled water, pH adjusted)
+      matrix: water
+      headspace: sealed, unstated
+- id: tai1998-2
+  odorant: 2-furfurylthiol
+  lever_class: sulfur source
+  lever: glutathione vs glutathionesulfonic acid (with glucose, pH 8.0)
+  focal: false
+  location: Table 1 vs Table 2, pp. 2262 and 2264
+  digitised: false
+  unit: mg/mol
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: glutathione/glucose pH 8.0
+    lever_value: glutathione
+    value: 11.9
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.0
+      ph_basis: initial
+      temp_C: 160
+      time_min: 120
+      precursors:
+        glutathione: 0.0012 mol in 50 mL
+        alpha-D-glucose: amount unstated
+      buffer: none (distilled water, pH adjusted)
+      matrix: water
+      headspace: sealed, unstated
+  - label: glutathionesulfonic acid/glucose pH 8.0
+    lever_value: glutathionesulfonic acid
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.0
+      ph_basis: initial
+      temp_C: 160
+      time_min: 120
+      precursors:
+        glutathionesulfonic acid: 0.0012 mol in 50 mL
+        alpha-D-glucose: amount unstated
+      buffer: none (distilled water, pH adjusted)
+      matrix: water
+      headspace: sealed, unstated
+- id: tai1998-3
+  odorant: 2-furfurylthiol
+  lever_class: sulfur source
+  lever: glutathione vs glutathionesulfonic acid (with glucose, pH 6.0)
+  focal: false
+  location: Table 1 vs Table 2, pp. 2262 and 2264
+  digitised: false
+  unit: mg/mol
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: glutathione/glucose pH 6.0
+    lever_value: glutathione
+    value: 14.7
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: initial
+      temp_C: 160
+      time_min: 120
+      precursors:
+        glutathione: 0.0012 mol in 50 mL
+        alpha-D-glucose: amount unstated
+      buffer: none (distilled water, pH adjusted)
+      matrix: water
+      headspace: sealed, unstated
+  - label: glutathionesulfonic acid/glucose pH 6.0
+    lever_value: glutathionesulfonic acid
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: initial
+      temp_C: 160
+      time_min: 120
+      precursors:
+        glutathionesulfonic acid: 0.0012 mol in 50 mL
+        alpha-D-glucose: amount unstated
+      buffer: none (distilled water, pH adjusted)
+      matrix: water
+      headspace: sealed, unstated
+- id: tai1998-4
+  odorant: 2-furfurylthiol
+  lever_class: sulfur source
+  lever: glutathione vs glutathionesulfonic acid (with glucose, pH 3.0)
+  focal: false
+  location: Table 1 vs Table 2, pp. 2262 and 2264
+  digitised: false
+  unit: mg/mol
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: glutathione/glucose pH 3.0
+    lever_value: glutathione
+    value: 9.1
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: initial
+      temp_C: 160
+      time_min: 120
+      precursors:
+        glutathione: 0.0012 mol in 50 mL
+        alpha-D-glucose: amount unstated
+      buffer: none (distilled water, pH adjusted)
+      matrix: water
+      headspace: sealed, unstated
+  - label: glutathionesulfonic acid/glucose pH 3.0
+    lever_value: glutathionesulfonic acid
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: initial
+      temp_C: 160
+      time_min: 120
+      precursors:
+        glutathionesulfonic acid: 0.0012 mol in 50 mL
+        alpha-D-glucose: amount unstated
+      buffer: none (distilled water, pH adjusted)
+      matrix: water
+      headspace: sealed, unstated

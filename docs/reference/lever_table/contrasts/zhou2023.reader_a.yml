@@ -1,0 +1,240 @@
+source: "zhou2023"
+pdf: "data/articles/Zhou2023b.pdf"
+reader: "a"
+scope_note: "Table 1 only (Fig. 3 Cys+MGO model has no thiols). ARP-alone pH ladders not keyed: every ARP-alone thiol/disulfide arm is ND. Difurfuryl disulfide Cys-vs-none at pH 8 not keyed (both arms ND). di-2-furfuryl sulfide (monosulfide) out of scope. ND has no printed LOD."
+contrasts:
+  # ---- pH ladders, ARP + Cys ----
+  - id: "zhou2023-1"
+    odorant: "2-methyl-3-furanthiol"
+    lever_class: "pH"
+    lever: "initial pH (6, 7, 8), ARP + Cys"
+    focal: true
+    location: "Table 1, p. 2475"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "pH 6 ARP + Cys", lever_value: 6, value: 696.99, censor: none, limit: null, n: 3, sd: 17.44,
+         conditions: {ph: 6, ph_basis: "initial", temp_C: 120, time_min: 60, precursors: {ARP: "20 mmol/L", L-cysteine: "20 mmol/L"}, buffer: "none (pH adjusted with 3 mol/L NaOH)", matrix: "water", headspace: "unstated"}}
+      - {label: "pH 7 ARP + Cys", lever_value: 7, value: 1588.57, censor: none, limit: null, n: 3, sd: 21.24,
+         conditions: {ph: 7, ph_basis: "initial", temp_C: 120, time_min: 60, precursors: {ARP: "20 mmol/L", L-cysteine: "20 mmol/L"}, buffer: "none (pH adjusted with 3 mol/L NaOH)", matrix: "water", headspace: "unstated"}}
+      - {label: "pH 8 ARP + Cys", lever_value: 8, value: 525.62, censor: none, limit: null, n: 3, sd: 16.88,
+         conditions: {ph: 8, ph_basis: "initial", temp_C: 120, time_min: 60, precursors: {ARP: "20 mmol/L", L-cysteine: "20 mmol/L"}, buffer: "none (pH adjusted with 3 mol/L NaOH)", matrix: "water", headspace: "unstated"}}
+  - id: "zhou2023-2"
+    odorant: "2-furfurylthiol"
+    lever_class: "pH"
+    lever: "initial pH (6, 7, 8), ARP + Cys"
+    focal: true
+    location: "Table 1, p. 2475"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "pH 6 ARP + Cys", lever_value: 6, value: 813.65, censor: none, limit: null, n: 3, sd: 13.37,
+         conditions: {ph: 6, ph_basis: "initial", temp_C: 120, time_min: 60, precursors: {ARP: "20 mmol/L", L-cysteine: "20 mmol/L"}, buffer: "none (pH adjusted with 3 mol/L NaOH)", matrix: "water", headspace: "unstated"}}
+      - {label: "pH 7 ARP + Cys", lever_value: 7, value: 757.965, censor: none, limit: null, n: 3, sd: 13.03,
+         conditions: {ph: 7, ph_basis: "initial", temp_C: 120, time_min: 60, precursors: {ARP: "20 mmol/L", L-cysteine: "20 mmol/L"}, buffer: "none (pH adjusted with 3 mol/L NaOH)", matrix: "water", headspace: "unstated"}}
+      - {label: "pH 8 ARP + Cys", lever_value: 8, value: 325.22, censor: none, limit: null, n: 3, sd: 14.61,
+         conditions: {ph: 8, ph_basis: "initial", temp_C: 120, time_min: 60, precursors: {ARP: "20 mmol/L", L-cysteine: "20 mmol/L"}, buffer: "none (pH adjusted with 3 mol/L NaOH)", matrix: "water", headspace: "unstated"}}
+  - id: "zhou2023-3"
+    odorant: "bis(2-methyl-3-furyl) disulfide"
+    lever_class: "pH"
+    lever: "initial pH (6, 7, 8), ARP + Cys"
+    focal: true
+    location: "Table 1, p. 2475"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "pH 6 ARP + Cys", lever_value: 6, value: 59.70, censor: none, limit: null, n: 3, sd: 2.75,
+         conditions: {ph: 6, ph_basis: "initial", temp_C: 120, time_min: 60, precursors: {ARP: "20 mmol/L", L-cysteine: "20 mmol/L"}, buffer: "none (pH adjusted with 3 mol/L NaOH)", matrix: "water", headspace: "unstated"}}
+      - {label: "pH 7 ARP + Cys", lever_value: 7, value: 102.59, censor: none, limit: null, n: 3, sd: 4.17,
+         conditions: {ph: 7, ph_basis: "initial", temp_C: 120, time_min: 60, precursors: {ARP: "20 mmol/L", L-cysteine: "20 mmol/L"}, buffer: "none (pH adjusted with 3 mol/L NaOH)", matrix: "water", headspace: "unstated"}}
+      - {label: "pH 8 ARP + Cys", lever_value: 8, value: 50.07, censor: none, limit: null, n: 3, sd: 2.15,
+         conditions: {ph: 8, ph_basis: "initial", temp_C: 120, time_min: 60, precursors: {ARP: "20 mmol/L", L-cysteine: "20 mmol/L"}, buffer: "none (pH adjusted with 3 mol/L NaOH)", matrix: "water", headspace: "unstated"}}
+  - id: "zhou2023-4"
+    odorant: "bis(2-furfuryl) disulfide"
+    lever_class: "pH"
+    lever: "initial pH (6, 7, 8), ARP + Cys"
+    focal: true
+    location: "Table 1, p. 2475"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "pH 6 ARP + Cys", lever_value: 6, value: 35.31, censor: none, limit: null, n: 3, sd: 1.63,
+         conditions: {ph: 6, ph_basis: "initial", temp_C: 120, time_min: 60, precursors: {ARP: "20 mmol/L", L-cysteine: "20 mmol/L"}, buffer: "none (pH adjusted with 3 mol/L NaOH)", matrix: "water", headspace: "unstated"}}
+      - {label: "pH 7 ARP + Cys", lever_value: 7, value: 17.68, censor: none, limit: null, n: 3, sd: 0.76,
+         conditions: {ph: 7, ph_basis: "initial", temp_C: 120, time_min: 60, precursors: {ARP: "20 mmol/L", L-cysteine: "20 mmol/L"}, buffer: "none (pH adjusted with 3 mol/L NaOH)", matrix: "water", headspace: "unstated"}}
+      - {label: "pH 8 ARP + Cys", lever_value: 8, value: null, censor: nd_no_limit, limit: null, n: 3, sd: null,
+         conditions: {ph: 8, ph_basis: "initial", temp_C: 120, time_min: 60, precursors: {ARP: "20 mmol/L", L-cysteine: "20 mmol/L"}, buffer: "none (pH adjusted with 3 mol/L NaOH)", matrix: "water", headspace: "unstated"}}
+  # ---- sulfur source: ARP alone vs ARP + Cys, per pH ----
+  - id: "zhou2023-5"
+    odorant: "2-methyl-3-furanthiol"
+    lever_class: "sulfur source"
+    lever: "none vs L-cysteine (20 mmol/L) added to ARP, pH 6"
+    focal: true
+    location: "Table 1, p. 2475"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "pH 6 ARP", lever_value: "none", value: null, censor: nd_no_limit, limit: null, n: 3, sd: null,
+         conditions: {ph: 6, ph_basis: "initial", temp_C: 120, time_min: 60, precursors: {ARP: "20 mmol/L"}, buffer: "none (pH adjusted with 3 mol/L NaOH)", matrix: "water", headspace: "unstated"}}
+      - {label: "pH 6 ARP + Cys", lever_value: "L-cysteine", value: 696.99, censor: none, limit: null, n: 3, sd: 17.44,
+         conditions: {ph: 6, ph_basis: "initial", temp_C: 120, time_min: 60, precursors: {ARP: "20 mmol/L", L-cysteine: "20 mmol/L"}, buffer: "none (pH adjusted with 3 mol/L NaOH)", matrix: "water", headspace: "unstated"}}
+  - id: "zhou2023-6"
+    odorant: "2-methyl-3-furanthiol"
+    lever_class: "sulfur source"
+    lever: "none vs L-cysteine (20 mmol/L) added to ARP, pH 7"
+    focal: true
+    location: "Table 1, p. 2475"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "pH 7 ARP", lever_value: "none", value: null, censor: nd_no_limit, limit: null, n: 3, sd: null,
+         conditions: {ph: 7, ph_basis: "initial", temp_C: 120, time_min: 60, precursors: {ARP: "20 mmol/L"}, buffer: "none (pH adjusted with 3 mol/L NaOH)", matrix: "water", headspace: "unstated"}}
+      - {label: "pH 7 ARP + Cys", lever_value: "L-cysteine", value: 1588.57, censor: none, limit: null, n: 3, sd: 21.24,
+         conditions: {ph: 7, ph_basis: "initial", temp_C: 120, time_min: 60, precursors: {ARP: "20 mmol/L", L-cysteine: "20 mmol/L"}, buffer: "none (pH adjusted with 3 mol/L NaOH)", matrix: "water", headspace: "unstated"}}
+  - id: "zhou2023-7"
+    odorant: "2-methyl-3-furanthiol"
+    lever_class: "sulfur source"
+    lever: "none vs L-cysteine (20 mmol/L) added to ARP, pH 8"
+    focal: true
+    location: "Table 1, p. 2475"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "pH 8 ARP", lever_value: "none", value: null, censor: nd_no_limit, limit: null, n: 3, sd: null,
+         conditions: {ph: 8, ph_basis: "initial", temp_C: 120, time_min: 60, precursors: {ARP: "20 mmol/L"}, buffer: "none (pH adjusted with 3 mol/L NaOH)", matrix: "water", headspace: "unstated"}}
+      - {label: "pH 8 ARP + Cys", lever_value: "L-cysteine", value: 525.62, censor: none, limit: null, n: 3, sd: 16.88,
+         conditions: {ph: 8, ph_basis: "initial", temp_C: 120, time_min: 60, precursors: {ARP: "20 mmol/L", L-cysteine: "20 mmol/L"}, buffer: "none (pH adjusted with 3 mol/L NaOH)", matrix: "water", headspace: "unstated"}}
+  - id: "zhou2023-8"
+    odorant: "2-furfurylthiol"
+    lever_class: "sulfur source"
+    lever: "none vs L-cysteine (20 mmol/L) added to ARP, pH 6"
+    focal: true
+    location: "Table 1, p. 2475"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "pH 6 ARP", lever_value: "none", value: null, censor: nd_no_limit, limit: null, n: 3, sd: null,
+         conditions: {ph: 6, ph_basis: "initial", temp_C: 120, time_min: 60, precursors: {ARP: "20 mmol/L"}, buffer: "none (pH adjusted with 3 mol/L NaOH)", matrix: "water", headspace: "unstated"}}
+      - {label: "pH 6 ARP + Cys", lever_value: "L-cysteine", value: 813.65, censor: none, limit: null, n: 3, sd: 13.37,
+         conditions: {ph: 6, ph_basis: "initial", temp_C: 120, time_min: 60, precursors: {ARP: "20 mmol/L", L-cysteine: "20 mmol/L"}, buffer: "none (pH adjusted with 3 mol/L NaOH)", matrix: "water", headspace: "unstated"}}
+  - id: "zhou2023-9"
+    odorant: "2-furfurylthiol"
+    lever_class: "sulfur source"
+    lever: "none vs L-cysteine (20 mmol/L) added to ARP, pH 7"
+    focal: true
+    location: "Table 1, p. 2475"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "pH 7 ARP", lever_value: "none", value: null, censor: nd_no_limit, limit: null, n: 3, sd: null,
+         conditions: {ph: 7, ph_basis: "initial", temp_C: 120, time_min: 60, precursors: {ARP: "20 mmol/L"}, buffer: "none (pH adjusted with 3 mol/L NaOH)", matrix: "water", headspace: "unstated"}}
+      - {label: "pH 7 ARP + Cys", lever_value: "L-cysteine", value: 757.965, censor: none, limit: null, n: 3, sd: 13.03,
+         conditions: {ph: 7, ph_basis: "initial", temp_C: 120, time_min: 60, precursors: {ARP: "20 mmol/L", L-cysteine: "20 mmol/L"}, buffer: "none (pH adjusted with 3 mol/L NaOH)", matrix: "water", headspace: "unstated"}}
+  - id: "zhou2023-10"
+    odorant: "2-furfurylthiol"
+    lever_class: "sulfur source"
+    lever: "none vs L-cysteine (20 mmol/L) added to ARP, pH 8"
+    focal: true
+    location: "Table 1, p. 2475"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "pH 8 ARP", lever_value: "none", value: null, censor: nd_no_limit, limit: null, n: 3, sd: null,
+         conditions: {ph: 8, ph_basis: "initial", temp_C: 120, time_min: 60, precursors: {ARP: "20 mmol/L"}, buffer: "none (pH adjusted with 3 mol/L NaOH)", matrix: "water", headspace: "unstated"}}
+      - {label: "pH 8 ARP + Cys", lever_value: "L-cysteine", value: 325.22, censor: none, limit: null, n: 3, sd: 14.61,
+         conditions: {ph: 8, ph_basis: "initial", temp_C: 120, time_min: 60, precursors: {ARP: "20 mmol/L", L-cysteine: "20 mmol/L"}, buffer: "none (pH adjusted with 3 mol/L NaOH)", matrix: "water", headspace: "unstated"}}
+  - id: "zhou2023-11"
+    odorant: "bis(2-methyl-3-furyl) disulfide"
+    lever_class: "sulfur source"
+    lever: "none vs L-cysteine (20 mmol/L) added to ARP, pH 6"
+    focal: true
+    location: "Table 1, p. 2475"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "pH 6 ARP", lever_value: "none", value: null, censor: nd_no_limit, limit: null, n: 3, sd: null,
+         conditions: {ph: 6, ph_basis: "initial", temp_C: 120, time_min: 60, precursors: {ARP: "20 mmol/L"}, buffer: "none (pH adjusted with 3 mol/L NaOH)", matrix: "water", headspace: "unstated"}}
+      - {label: "pH 6 ARP + Cys", lever_value: "L-cysteine", value: 59.70, censor: none, limit: null, n: 3, sd: 2.75,
+         conditions: {ph: 6, ph_basis: "initial", temp_C: 120, time_min: 60, precursors: {ARP: "20 mmol/L", L-cysteine: "20 mmol/L"}, buffer: "none (pH adjusted with 3 mol/L NaOH)", matrix: "water", headspace: "unstated"}}
+  - id: "zhou2023-12"
+    odorant: "bis(2-methyl-3-furyl) disulfide"
+    lever_class: "sulfur source"
+    lever: "none vs L-cysteine (20 mmol/L) added to ARP, pH 7"
+    focal: true
+    location: "Table 1, p. 2475"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "pH 7 ARP", lever_value: "none", value: null, censor: nd_no_limit, limit: null, n: 3, sd: null,
+         conditions: {ph: 7, ph_basis: "initial", temp_C: 120, time_min: 60, precursors: {ARP: "20 mmol/L"}, buffer: "none (pH adjusted with 3 mol/L NaOH)", matrix: "water", headspace: "unstated"}}
+      - {label: "pH 7 ARP + Cys", lever_value: "L-cysteine", value: 102.59, censor: none, limit: null, n: 3, sd: 4.17,
+         conditions: {ph: 7, ph_basis: "initial", temp_C: 120, time_min: 60, precursors: {ARP: "20 mmol/L", L-cysteine: "20 mmol/L"}, buffer: "none (pH adjusted with 3 mol/L NaOH)", matrix: "water", headspace: "unstated"}}
+  - id: "zhou2023-13"
+    odorant: "bis(2-methyl-3-furyl) disulfide"
+    lever_class: "sulfur source"
+    lever: "none vs L-cysteine (20 mmol/L) added to ARP, pH 8"
+    focal: true
+    location: "Table 1, p. 2475"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "pH 8 ARP", lever_value: "none", value: null, censor: nd_no_limit, limit: null, n: 3, sd: null,
+         conditions: {ph: 8, ph_basis: "initial", temp_C: 120, time_min: 60, precursors: {ARP: "20 mmol/L"}, buffer: "none (pH adjusted with 3 mol/L NaOH)", matrix: "water", headspace: "unstated"}}
+      - {label: "pH 8 ARP + Cys", lever_value: "L-cysteine", value: 50.07, censor: none, limit: null, n: 3, sd: 2.15,
+         conditions: {ph: 8, ph_basis: "initial", temp_C: 120, time_min: 60, precursors: {ARP: "20 mmol/L", L-cysteine: "20 mmol/L"}, buffer: "none (pH adjusted with 3 mol/L NaOH)", matrix: "water", headspace: "unstated"}}
+  - id: "zhou2023-14"
+    odorant: "bis(2-furfuryl) disulfide"
+    lever_class: "sulfur source"
+    lever: "none vs L-cysteine (20 mmol/L) added to ARP, pH 6"
+    focal: true
+    location: "Table 1, p. 2475"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "pH 6 ARP", lever_value: "none", value: null, censor: nd_no_limit, limit: null, n: 3, sd: null,
+         conditions: {ph: 6, ph_basis: "initial", temp_C: 120, time_min: 60, precursors: {ARP: "20 mmol/L"}, buffer: "none (pH adjusted with 3 mol/L NaOH)", matrix: "water", headspace: "unstated"}}
+      - {label: "pH 6 ARP + Cys", lever_value: "L-cysteine", value: 35.31, censor: none, limit: null, n: 3, sd: 1.63,
+         conditions: {ph: 6, ph_basis: "initial", temp_C: 120, time_min: 60, precursors: {ARP: "20 mmol/L", L-cysteine: "20 mmol/L"}, buffer: "none (pH adjusted with 3 mol/L NaOH)", matrix: "water", headspace: "unstated"}}
+  - id: "zhou2023-15"
+    odorant: "bis(2-furfuryl) disulfide"
+    lever_class: "sulfur source"
+    lever: "none vs L-cysteine (20 mmol/L) added to ARP, pH 7"
+    focal: true
+    location: "Table 1, p. 2475"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "pH 7 ARP", lever_value: "none", value: null, censor: nd_no_limit, limit: null, n: 3, sd: null,
+         conditions: {ph: 7, ph_basis: "initial", temp_C: 120, time_min: 60, precursors: {ARP: "20 mmol/L"}, buffer: "none (pH adjusted with 3 mol/L NaOH)", matrix: "water", headspace: "unstated"}}
+      - {label: "pH 7 ARP + Cys", lever_value: "L-cysteine", value: 17.68, censor: none, limit: null, n: 3, sd: 0.76,
+         conditions: {ph: 7, ph_basis: "initial", temp_C: 120, time_min: 60, precursors: {ARP: "20 mmol/L", L-cysteine: "20 mmol/L"}, buffer: "none (pH adjusted with 3 mol/L NaOH)", matrix: "water", headspace: "unstated"}}

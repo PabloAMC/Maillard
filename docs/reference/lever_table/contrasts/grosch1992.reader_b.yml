@@ -1,0 +1,2171 @@
+source: grosch1992
+pdf: data/articles/grosch1992.pdf
+reader: b
+scope_note: 'Temperature not printed (boiling/reflux). Only single-lever pairs keyed from Table II plus the paper''s own no.
+  4 vs no. 8 (mixed); other two-lever pairs not keyed. Table VII (meat cuts) has no lever. MF-S2 pairs with an n.a. arm dropped.
+  | grosch1992-1: Isotope dilution (deuterated standards), Method I (reflux 2 h). Temperature not printed (boiling). ''n.d.''
+  has no printed limit. | grosch1992-2: Isotope dilution (deuterated standards), Method I (reflux 2 h). Temperature not printed
+  (boiling). ''n.d.'' has no printed limit. | grosch1992-3: Isotope dilution (deuterated standards), Method I (reflux 2 h).
+  Temperature not printed (boiling). ''n.d.'' has no printed limit. | grosch1992-4: Isotope dilution (deuterated standards),
+  Method I (reflux 2 h). Temperature not printed (boiling). ''n.d.'' has no printed limit. | grosch1992-5: Isotope dilution
+  (deuterated standards), Method I (reflux 2 h). Temperature not printed (boiling). ''n.d.'' has no printed limit. | grosch1992-6:
+  Isotope dilution (deuterated standards), Method I (reflux 2 h). Temperature not printed (boiling). ''n.d.'' has no printed
+  limit. | grosch1992-7: Isotope dilution (deuterated standards), Method I (reflux 2 h). Temperature not printed (boiling).
+  ''n.d.'' has no printed limit. | grosch1992-8: Isotope dilution (deuterated standards), Method I (reflux 2 h). Temperature
+  not printed (boiling). ''n.d.'' has no printed limit. | grosch1992-9: Isotope dilution (deuterated standards), Method I
+  (reflux 2 h). Temperature not printed (boiling). ''n.d.'' has no printed limit. | grosch1992-10: Isotope dilution (deuterated
+  standards), Method I (reflux 2 h). Temperature not printed (boiling). ''n.d.'' has no printed limit. | grosch1992-11: Isotope
+  dilution (deuterated standards), Method I (reflux 2 h). Temperature not printed (boiling). ''n.d.'' has no printed limit.
+  | grosch1992-12: Isotope dilution (deuterated standards), Method I (reflux 2 h). Temperature not printed (boiling). ''n.d.''
+  has no printed limit. | grosch1992-13: Isotope dilution (deuterated standards), Method I (reflux 2 h). Temperature not printed
+  (boiling). ''n.d.'' has no printed limit. | grosch1992-14: Isotope dilution (deuterated standards), Method I (reflux 2 h).
+  Temperature not printed (boiling). ''n.d.'' has no printed limit. | grosch1992-15: Isotope dilution (deuterated standards),
+  Method I (reflux 2 h). Temperature not printed (boiling). ''n.d.'' has no printed limit. | grosch1992-16: Isotope dilution
+  (deuterated standards), Method I (reflux 2 h). Temperature not printed (boiling). ''n.d.'' has no printed limit. | grosch1992-17:
+  Isotope dilution (deuterated standards), Method I (reflux 2 h). Temperature not printed (boiling). ''n.d.'' has no printed
+  limit. | grosch1992-18: Isotope dilution (deuterated standards), Method I (reflux 2 h). Temperature not printed (boiling).
+  ''n.d.'' has no printed limit. | grosch1992-19: Isotope dilution (deuterated standards), Method I (reflux 2 h). Temperature
+  not printed (boiling). ''n.d.'' has no printed limit. | grosch1992-20: Isotope dilution (deuterated standards), Method I
+  (reflux 2 h). Temperature not printed (boiling). ''n.d.'' has no printed limit. | grosch1992-21: Isotope dilution (deuterated
+  standards), Method I (reflux 2 h). Temperature not printed (boiling). ''n.d.'' has no printed limit. | grosch1992-22: Isotope
+  dilution (deuterated standards), Method I (reflux 2 h). Temperature not printed (boiling). ''n.d.'' has no printed limit.
+  | grosch1992-23: Isotope dilution (deuterated standards), Method I (reflux 2 h). Temperature not printed (boiling). ''n.d.''
+  has no printed limit. | grosch1992-24: Isotope dilution (deuterated standards), Method I (reflux 2 h). Temperature not printed
+  (boiling). ''n.d.'' has no printed limit. | grosch1992-25: Isotope dilution (deuterated standards), Method I (reflux 2 h).
+  Temperature not printed (boiling). ''n.d.'' has no printed limit. | grosch1992-26: Isotope dilution (deuterated standards),
+  Method I (reflux 2 h). Temperature not printed (boiling). ''n.d.'' has no printed limit. | grosch1992-27: Non-monotone (max
+  at 170-325 umol). n and SD not printed. Arm 325 umol equals Table II no. 6 (19 ug). | grosch1992-28: Other cysteine levels
+  printed n.a. Non-monotone (max at 340 umol). | grosch1992-33: buffer concentration lever; 0.2 mol/L arms reprint Table III
+  values. | grosch1992-34: buffer concentration lever; 0.2 mol/L arms reprint Table III values. | grosch1992-35: buffer concentration
+  lever; 0.2 mol/L arms reprint Table III values. | grosch1992-36: The 0.2 mol/L ladder duplicates Table III and is not keyed
+  again. | grosch1992-37: Differs in more than two levers. Means of 3 (No. 1) and 2 (No. 2) trials. MF-S2 n.d. in both, not
+  keyed. | grosch1992-38: Differs in more than two levers. Means of 3 (No. 1) and 2 (No. 2) trials. MF-S2 n.d. in both, not
+  keyed. | grosch1992-39: Thiamine row (30 umol; 15 +- 7 ug, n=4) is a different precursor class and is not keyed in this
+  sugar contrast. The H2S-vs-no-H2S comparison for thiamine is across tables (VI vs II) and not keyed. | grosch1992-40: n
+  ''at least two''. Method I column reprints Table II (nos. 1, 4) and is not keyed again; ribose+cysteine row is a precursor
+  swap vs thiamine, not keyed.'
+contrasts:
+- id: grosch1992-1
+  odorant: 2-methyl-3-furanthiol (MF-SH)
+  lever_class: sulfur source
+  lever: thiamine vs thiamine pyrophosphate
+  focal: true
+  location: Table II, p. 185
+  digitised: false
+  unit: ug
+  quant_type: absolute
+  time_course_rule: not a time course (single 2 h boil)
+  arms:
+  - label: No. 1 Thiamine
+    lever_value: thiamine
+    value: 4.7
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.2
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol (thiamine.HCl 10.2 mg)
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+  - label: No. 2 Thiamine pyrophosphate
+    lever_value: thiamine pyrophosphate
+    value: null
+    censor: below_value
+    limit: 0.5
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        TPP: 30 umol (13.9 mg)
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+- id: grosch1992-2
+  odorant: 2-furfurylthiol (FF-SH)
+  lever_class: sulfur source
+  lever: thiamine vs thiamine pyrophosphate
+  focal: true
+  location: Table II, p. 185
+  digitised: false
+  unit: ug
+  quant_type: absolute
+  time_course_rule: not a time course (single 2 h boil)
+  arms:
+  - label: No. 1 Thiamine
+    lever_value: thiamine
+    value: 1.9
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.4
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol (thiamine.HCl 10.2 mg)
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+  - label: No. 2 Thiamine pyrophosphate
+    lever_value: thiamine pyrophosphate
+    value: null
+    censor: below_value
+    limit: 0.5
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        TPP: 30 umol (13.9 mg)
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+- id: grosch1992-3
+  odorant: bis(2-methyl-3-furyl) disulfide (MF-S2)
+  lever_class: sulfur source
+  lever: thiamine vs thiamine pyrophosphate
+  focal: true
+  location: Table II, p. 185
+  digitised: false
+  unit: ug
+  quant_type: absolute
+  time_course_rule: not a time course (single 2 h boil)
+  arms:
+  - label: No. 1 Thiamine
+    lever_value: thiamine
+    value: null
+    censor: below_value
+    limit: 0.2
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol (thiamine.HCl 10.2 mg)
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+  - label: No. 2 Thiamine pyrophosphate
+    lever_value: thiamine pyrophosphate
+    value: null
+    censor: below_value
+    limit: 0.2
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        TPP: 30 umol (13.9 mg)
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+- id: grosch1992-4
+  odorant: 2-methyl-3-furanthiol (MF-SH)
+  lever_class: precursor dose
+  lever: ribose added (0 vs 670 umol) to thiamine
+  focal: true
+  location: Table II, p. 185
+  digitised: false
+  unit: ug
+  quant_type: absolute
+  time_course_rule: not a time course (single 2 h boil)
+  arms:
+  - label: No. 1 Thiamine
+    lever_value: '0'
+    value: 4.7
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.2
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol (thiamine.HCl 10.2 mg)
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+  - label: No. 3 Thiamine + ribose
+    lever_value: 670 umol
+    value: 5.2
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.4
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol (thiamine.HCl 10.2 mg)
+        ribose: 670 umol (100 mg)
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+- id: grosch1992-5
+  odorant: 2-furfurylthiol (FF-SH)
+  lever_class: precursor dose
+  lever: ribose added (0 vs 670 umol) to thiamine
+  focal: true
+  location: Table II, p. 185
+  digitised: false
+  unit: ug
+  quant_type: absolute
+  time_course_rule: not a time course (single 2 h boil)
+  arms:
+  - label: No. 1 Thiamine
+    lever_value: '0'
+    value: 1.9
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.4
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol (thiamine.HCl 10.2 mg)
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+  - label: No. 3 Thiamine + ribose
+    lever_value: 670 umol
+    value: null
+    censor: below_value
+    limit: 1.5
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol (thiamine.HCl 10.2 mg)
+        ribose: 670 umol (100 mg)
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+- id: grosch1992-6
+  odorant: 2-methyl-3-furanthiol (MF-SH)
+  lever_class: precursor dose
+  lever: cysteine added (0 vs 325 umol) to thiamine
+  focal: true
+  location: Table II, p. 185
+  digitised: false
+  unit: ug
+  quant_type: absolute
+  time_course_rule: not a time course (single 2 h boil)
+  arms:
+  - label: No. 1 Thiamine
+    lever_value: '0'
+    value: 4.7
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.2
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol (thiamine.HCl 10.2 mg)
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+  - label: No. 4 Thiamine + cysteine
+    lever_value: 325 umol
+    value: 33.0
+    censor: none
+    limit: null
+    n: 3
+    sd: 3.7
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol (thiamine.HCl 10.2 mg)
+        cysteine: 325 umol (cysteine.HCl 57 mg)
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+- id: grosch1992-7
+  odorant: 2-furfurylthiol (FF-SH)
+  lever_class: precursor dose
+  lever: cysteine added (0 vs 325 umol) to thiamine
+  focal: true
+  location: Table II, p. 185
+  digitised: false
+  unit: ug
+  quant_type: absolute
+  time_course_rule: not a time course (single 2 h boil)
+  arms:
+  - label: No. 1 Thiamine
+    lever_value: '0'
+    value: 1.9
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.4
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol (thiamine.HCl 10.2 mg)
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+  - label: No. 4 Thiamine + cysteine
+    lever_value: 325 umol
+    value: null
+    censor: below_value
+    limit: 1.5
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol (thiamine.HCl 10.2 mg)
+        cysteine: 325 umol (cysteine.HCl 57 mg)
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+- id: grosch1992-8
+  odorant: bis(2-methyl-3-furyl) disulfide (MF-S2)
+  lever_class: precursor dose
+  lever: cysteine added (0 vs 325 umol) to thiamine
+  focal: true
+  location: Table II, p. 185
+  digitised: false
+  unit: ug
+  quant_type: absolute
+  time_course_rule: not a time course (single 2 h boil)
+  arms:
+  - label: No. 1 Thiamine
+    lever_value: '0'
+    value: null
+    censor: below_value
+    limit: 0.2
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol (thiamine.HCl 10.2 mg)
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+  - label: No. 4 Thiamine + cysteine
+    lever_value: 325 umol
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol (thiamine.HCl 10.2 mg)
+        cysteine: 325 umol (cysteine.HCl 57 mg)
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+- id: grosch1992-9
+  odorant: 2-methyl-3-furanthiol (MF-SH)
+  lever_class: precursor dose
+  lever: cysteine added (0 vs 325 umol) to thiamine pyrophosphate
+  focal: true
+  location: Table II, p. 185
+  digitised: false
+  unit: ug
+  quant_type: absolute
+  time_course_rule: not a time course (single 2 h boil)
+  arms:
+  - label: No. 2 Thiamine pyrophosphate
+    lever_value: '0'
+    value: null
+    censor: below_value
+    limit: 0.5
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        TPP: 30 umol (13.9 mg)
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+  - label: No. 5 Thiamine pyrophosphate + cysteine
+    lever_value: 325 umol
+    value: null
+    censor: below_value
+    limit: 0.5
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        TPP: 30 umol (13.9 mg)
+        cysteine: 325 umol (cysteine.HCl 57 mg)
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+- id: grosch1992-10
+  odorant: 2-furfurylthiol (FF-SH)
+  lever_class: precursor dose
+  lever: cysteine added (0 vs 325 umol) to thiamine pyrophosphate
+  focal: true
+  location: Table II, p. 185
+  digitised: false
+  unit: ug
+  quant_type: absolute
+  time_course_rule: not a time course (single 2 h boil)
+  arms:
+  - label: No. 2 Thiamine pyrophosphate
+    lever_value: '0'
+    value: null
+    censor: below_value
+    limit: 0.5
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        TPP: 30 umol (13.9 mg)
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+  - label: No. 5 Thiamine pyrophosphate + cysteine
+    lever_value: 325 umol
+    value: null
+    censor: below_value
+    limit: 0.5
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        TPP: 30 umol (13.9 mg)
+        cysteine: 325 umol (cysteine.HCl 57 mg)
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+- id: grosch1992-11
+  odorant: bis(2-methyl-3-furyl) disulfide (MF-S2)
+  lever_class: precursor dose
+  lever: cysteine added (0 vs 325 umol) to thiamine pyrophosphate
+  focal: true
+  location: Table II, p. 185
+  digitised: false
+  unit: ug
+  quant_type: absolute
+  time_course_rule: not a time course (single 2 h boil)
+  arms:
+  - label: No. 2 Thiamine pyrophosphate
+    lever_value: '0'
+    value: null
+    censor: below_value
+    limit: 0.2
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        TPP: 30 umol (13.9 mg)
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+  - label: No. 5 Thiamine pyrophosphate + cysteine
+    lever_value: 325 umol
+    value: null
+    censor: below_value
+    limit: 0.2
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        TPP: 30 umol (13.9 mg)
+        cysteine: 325 umol (cysteine.HCl 57 mg)
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+- id: grosch1992-12
+  odorant: 2-methyl-3-furanthiol (MF-SH)
+  lever_class: precursor dose
+  lever: ribose added (0 vs 670 umol) to thiamine + cysteine
+  focal: true
+  location: Table II, p. 185
+  digitised: false
+  unit: ug
+  quant_type: absolute
+  time_course_rule: not a time course (single 2 h boil)
+  arms:
+  - label: No. 4 Thiamine + cysteine
+    lever_value: '0'
+    value: 33.0
+    censor: none
+    limit: null
+    n: 3
+    sd: 3.7
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol (thiamine.HCl 10.2 mg)
+        cysteine: 325 umol (cysteine.HCl 57 mg)
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+  - label: No. 6 Thiamine + cysteine + ribose
+    lever_value: 670 umol
+    value: 19.0
+    censor: none
+    limit: null
+    n: 3
+    sd: 2.5
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol (thiamine.HCl 10.2 mg)
+        cysteine: 325 umol (cysteine.HCl 57 mg)
+        ribose: 670 umol (100 mg)
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+- id: grosch1992-13
+  odorant: 2-furfurylthiol (FF-SH)
+  lever_class: precursor dose
+  lever: ribose added (0 vs 670 umol) to thiamine + cysteine
+  focal: true
+  location: Table II, p. 185
+  digitised: false
+  unit: ug
+  quant_type: absolute
+  time_course_rule: not a time course (single 2 h boil)
+  arms:
+  - label: No. 4 Thiamine + cysteine
+    lever_value: '0'
+    value: null
+    censor: below_value
+    limit: 1.5
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol (thiamine.HCl 10.2 mg)
+        cysteine: 325 umol (cysteine.HCl 57 mg)
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+  - label: No. 6 Thiamine + cysteine + ribose
+    lever_value: 670 umol
+    value: 1.2
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.1
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol (thiamine.HCl 10.2 mg)
+        cysteine: 325 umol (cysteine.HCl 57 mg)
+        ribose: 670 umol (100 mg)
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+- id: grosch1992-14
+  odorant: bis(2-methyl-3-furyl) disulfide (MF-S2)
+  lever_class: precursor dose
+  lever: ribose added (0 vs 670 umol) to thiamine + cysteine
+  focal: true
+  location: Table II, p. 185
+  digitised: false
+  unit: ug
+  quant_type: absolute
+  time_course_rule: not a time course (single 2 h boil)
+  arms:
+  - label: No. 4 Thiamine + cysteine
+    lever_value: '0'
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol (thiamine.HCl 10.2 mg)
+        cysteine: 325 umol (cysteine.HCl 57 mg)
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+  - label: No. 6 Thiamine + cysteine + ribose
+    lever_value: 670 umol
+    value: null
+    censor: below_value
+    limit: 0.2
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol (thiamine.HCl 10.2 mg)
+        cysteine: 325 umol (cysteine.HCl 57 mg)
+        ribose: 670 umol (100 mg)
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+- id: grosch1992-15
+  odorant: 2-methyl-3-furanthiol (MF-SH)
+  lever_class: precursor dose
+  lever: cysteine added (0 vs 325 umol) to thiamine + ribose
+  focal: true
+  location: Table II, p. 185
+  digitised: false
+  unit: ug
+  quant_type: absolute
+  time_course_rule: not a time course (single 2 h boil)
+  arms:
+  - label: No. 3 Thiamine + ribose
+    lever_value: '0'
+    value: 5.2
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.4
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol (thiamine.HCl 10.2 mg)
+        ribose: 670 umol (100 mg)
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+  - label: No. 6 Thiamine + cysteine + ribose
+    lever_value: 325 umol
+    value: 19.0
+    censor: none
+    limit: null
+    n: 3
+    sd: 2.5
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol (thiamine.HCl 10.2 mg)
+        cysteine: 325 umol (cysteine.HCl 57 mg)
+        ribose: 670 umol (100 mg)
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+- id: grosch1992-16
+  odorant: 2-furfurylthiol (FF-SH)
+  lever_class: precursor dose
+  lever: cysteine added (0 vs 325 umol) to thiamine + ribose
+  focal: true
+  location: Table II, p. 185
+  digitised: false
+  unit: ug
+  quant_type: absolute
+  time_course_rule: not a time course (single 2 h boil)
+  arms:
+  - label: No. 3 Thiamine + ribose
+    lever_value: '0'
+    value: null
+    censor: below_value
+    limit: 1.5
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol (thiamine.HCl 10.2 mg)
+        ribose: 670 umol (100 mg)
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+  - label: No. 6 Thiamine + cysteine + ribose
+    lever_value: 325 umol
+    value: 1.2
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.1
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol (thiamine.HCl 10.2 mg)
+        cysteine: 325 umol (cysteine.HCl 57 mg)
+        ribose: 670 umol (100 mg)
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+- id: grosch1992-17
+  odorant: 2-methyl-3-furanthiol (MF-SH)
+  lever_class: sulfur source
+  lever: cysteine (325 umol) replaced by GSH (230 umol) in thiamine + ribose
+  focal: true
+  location: Table II, p. 185
+  digitised: false
+  unit: ug
+  quant_type: absolute
+  time_course_rule: not a time course (single 2 h boil)
+  arms:
+  - label: No. 6 Thiamine + cysteine + ribose
+    lever_value: cysteine 325 umol
+    value: 19.0
+    censor: none
+    limit: null
+    n: 3
+    sd: 2.5
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol (thiamine.HCl 10.2 mg)
+        cysteine: 325 umol (cysteine.HCl 57 mg)
+        ribose: 670 umol (100 mg)
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+  - label: No. 7 Thiamine + GSH + ribose
+    lever_value: GSH 230 umol
+    value: 23.0
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.2
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol (thiamine.HCl 10.2 mg)
+        GSH: 230 umol (71 mg)
+        ribose: 670 umol (100 mg)
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+- id: grosch1992-18
+  odorant: 2-furfurylthiol (FF-SH)
+  lever_class: sulfur source
+  lever: cysteine (325 umol) replaced by GSH (230 umol) in thiamine + ribose
+  focal: true
+  location: Table II, p. 185
+  digitised: false
+  unit: ug
+  quant_type: absolute
+  time_course_rule: not a time course (single 2 h boil)
+  arms:
+  - label: No. 6 Thiamine + cysteine + ribose
+    lever_value: cysteine 325 umol
+    value: 1.2
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.1
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol (thiamine.HCl 10.2 mg)
+        cysteine: 325 umol (cysteine.HCl 57 mg)
+        ribose: 670 umol (100 mg)
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+  - label: No. 7 Thiamine + GSH + ribose
+    lever_value: GSH 230 umol
+    value: null
+    censor: below_value
+    limit: 1.7
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol (thiamine.HCl 10.2 mg)
+        GSH: 230 umol (71 mg)
+        ribose: 670 umol (100 mg)
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+- id: grosch1992-19
+  odorant: bis(2-methyl-3-furyl) disulfide (MF-S2)
+  lever_class: sulfur source
+  lever: cysteine (325 umol) replaced by GSH (230 umol) in thiamine + ribose
+  focal: true
+  location: Table II, p. 185
+  digitised: false
+  unit: ug
+  quant_type: absolute
+  time_course_rule: not a time course (single 2 h boil)
+  arms:
+  - label: No. 6 Thiamine + cysteine + ribose
+    lever_value: cysteine 325 umol
+    value: null
+    censor: below_value
+    limit: 0.2
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol (thiamine.HCl 10.2 mg)
+        cysteine: 325 umol (cysteine.HCl 57 mg)
+        ribose: 670 umol (100 mg)
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+  - label: No. 7 Thiamine + GSH + ribose
+    lever_value: GSH 230 umol
+    value: null
+    censor: below_value
+    limit: 0.2
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol (thiamine.HCl 10.2 mg)
+        GSH: 230 umol (71 mg)
+        ribose: 670 umol (100 mg)
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+- id: grosch1992-20
+  odorant: 2-methyl-3-furanthiol (MF-SH)
+  lever_class: precursor dose
+  lever: cysteine added (0 vs 325 umol) to thiamine + GSH + ribose
+  focal: true
+  location: Table II, p. 185
+  digitised: false
+  unit: ug
+  quant_type: absolute
+  time_course_rule: not a time course (single 2 h boil)
+  arms:
+  - label: No. 7 Thiamine + GSH + ribose
+    lever_value: '0'
+    value: 23.0
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.2
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol (thiamine.HCl 10.2 mg)
+        GSH: 230 umol (71 mg)
+        ribose: 670 umol (100 mg)
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+  - label: No. 8 Thiamine + GSH + cysteine + ribose
+    lever_value: 325 umol
+    value: 9.0
+    censor: none
+    limit: null
+    n: 4
+    sd: 2.8
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol (thiamine.HCl 10.2 mg)
+        GSH: 230 umol (71 mg)
+        cysteine: 325 umol (cysteine.HCl 57 mg)
+        ribose: 670 umol (100 mg)
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+- id: grosch1992-21
+  odorant: 2-furfurylthiol (FF-SH)
+  lever_class: precursor dose
+  lever: cysteine added (0 vs 325 umol) to thiamine + GSH + ribose
+  focal: true
+  location: Table II, p. 185
+  digitised: false
+  unit: ug
+  quant_type: absolute
+  time_course_rule: not a time course (single 2 h boil)
+  arms:
+  - label: No. 7 Thiamine + GSH + ribose
+    lever_value: '0'
+    value: null
+    censor: below_value
+    limit: 1.7
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol (thiamine.HCl 10.2 mg)
+        GSH: 230 umol (71 mg)
+        ribose: 670 umol (100 mg)
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+  - label: No. 8 Thiamine + GSH + cysteine + ribose
+    lever_value: 325 umol
+    value: 2.3
+    censor: none
+    limit: null
+    n: 4
+    sd: 1.0
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol (thiamine.HCl 10.2 mg)
+        GSH: 230 umol (71 mg)
+        cysteine: 325 umol (cysteine.HCl 57 mg)
+        ribose: 670 umol (100 mg)
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+- id: grosch1992-22
+  odorant: bis(2-methyl-3-furyl) disulfide (MF-S2)
+  lever_class: precursor dose
+  lever: cysteine added (0 vs 325 umol) to thiamine + GSH + ribose
+  focal: true
+  location: Table II, p. 185
+  digitised: false
+  unit: ug
+  quant_type: absolute
+  time_course_rule: not a time course (single 2 h boil)
+  arms:
+  - label: No. 7 Thiamine + GSH + ribose
+    lever_value: '0'
+    value: null
+    censor: below_value
+    limit: 0.2
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol (thiamine.HCl 10.2 mg)
+        GSH: 230 umol (71 mg)
+        ribose: 670 umol (100 mg)
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+  - label: No. 8 Thiamine + GSH + cysteine + ribose
+    lever_value: 325 umol
+    value: 1.6
+    censor: none
+    limit: null
+    n: 4
+    sd: 1.2
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol (thiamine.HCl 10.2 mg)
+        GSH: 230 umol (71 mg)
+        cysteine: 325 umol (cysteine.HCl 57 mg)
+        ribose: 670 umol (100 mg)
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+- id: grosch1992-23
+  odorant: 2-methyl-3-furanthiol (MF-SH)
+  lever_class: precursor dose
+  lever: GSH added (0 vs 230 umol) to thiamine + cysteine + ribose
+  focal: true
+  location: Table II, p. 185
+  digitised: false
+  unit: ug
+  quant_type: absolute
+  time_course_rule: not a time course (single 2 h boil)
+  arms:
+  - label: No. 6 Thiamine + cysteine + ribose
+    lever_value: '0'
+    value: 19.0
+    censor: none
+    limit: null
+    n: 3
+    sd: 2.5
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol (thiamine.HCl 10.2 mg)
+        cysteine: 325 umol (cysteine.HCl 57 mg)
+        ribose: 670 umol (100 mg)
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+  - label: No. 8 Thiamine + GSH + cysteine + ribose
+    lever_value: 230 umol
+    value: 9.0
+    censor: none
+    limit: null
+    n: 4
+    sd: 2.8
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol (thiamine.HCl 10.2 mg)
+        GSH: 230 umol (71 mg)
+        cysteine: 325 umol (cysteine.HCl 57 mg)
+        ribose: 670 umol (100 mg)
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+- id: grosch1992-24
+  odorant: 2-furfurylthiol (FF-SH)
+  lever_class: precursor dose
+  lever: GSH added (0 vs 230 umol) to thiamine + cysteine + ribose
+  focal: true
+  location: Table II, p. 185
+  digitised: false
+  unit: ug
+  quant_type: absolute
+  time_course_rule: not a time course (single 2 h boil)
+  arms:
+  - label: No. 6 Thiamine + cysteine + ribose
+    lever_value: '0'
+    value: 1.2
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.1
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol (thiamine.HCl 10.2 mg)
+        cysteine: 325 umol (cysteine.HCl 57 mg)
+        ribose: 670 umol (100 mg)
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+  - label: No. 8 Thiamine + GSH + cysteine + ribose
+    lever_value: 230 umol
+    value: 2.3
+    censor: none
+    limit: null
+    n: 4
+    sd: 1.0
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol (thiamine.HCl 10.2 mg)
+        GSH: 230 umol (71 mg)
+        cysteine: 325 umol (cysteine.HCl 57 mg)
+        ribose: 670 umol (100 mg)
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+- id: grosch1992-25
+  odorant: bis(2-methyl-3-furyl) disulfide (MF-S2)
+  lever_class: precursor dose
+  lever: GSH added (0 vs 230 umol) to thiamine + cysteine + ribose
+  focal: true
+  location: Table II, p. 185
+  digitised: false
+  unit: ug
+  quant_type: absolute
+  time_course_rule: not a time course (single 2 h boil)
+  arms:
+  - label: No. 6 Thiamine + cysteine + ribose
+    lever_value: '0'
+    value: null
+    censor: below_value
+    limit: 0.2
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol (thiamine.HCl 10.2 mg)
+        cysteine: 325 umol (cysteine.HCl 57 mg)
+        ribose: 670 umol (100 mg)
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+  - label: No. 8 Thiamine + GSH + cysteine + ribose
+    lever_value: 230 umol
+    value: 1.6
+    censor: none
+    limit: null
+    n: 4
+    sd: 1.2
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol (thiamine.HCl 10.2 mg)
+        GSH: 230 umol (71 mg)
+        cysteine: 325 umol (cysteine.HCl 57 mg)
+        ribose: 670 umol (100 mg)
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+- id: grosch1992-26
+  odorant: 2-methyl-3-furanthiol (MF-SH)
+  lever_class: mixed
+  lever: ribose and GSH both added to thiamine + cysteine (paper's own comparison, '27 %')
+  focal: true
+  location: Table II, p. 185
+  digitised: false
+  unit: ug
+  quant_type: absolute
+  time_course_rule: not a time course (single 2 h boil)
+  arms:
+  - label: No. 4 Thiamine + cysteine
+    lever_value: thiamine + cysteine
+    value: 33.0
+    censor: none
+    limit: null
+    n: 3
+    sd: 3.7
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol (thiamine.HCl 10.2 mg)
+        cysteine: 325 umol (cysteine.HCl 57 mg)
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+  - label: No. 8 Thiamine + GSH + cysteine + ribose
+    lever_value: + ribose + GSH
+    value: 9.0
+    censor: none
+    limit: null
+    n: 4
+    sd: 2.8
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol (thiamine.HCl 10.2 mg)
+        GSH: 230 umol (71 mg)
+        cysteine: 325 umol (cysteine.HCl 57 mg)
+        ribose: 670 umol (100 mg)
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+- id: grosch1992-27
+  odorant: 2-methyl-3-furanthiol (MF-SH)
+  lever_class: precursor dose
+  lever: cysteine amount (0 - 2720 umol) at thiamine 30 umol
+  focal: true
+  location: Table III, p. 186
+  digitised: false
+  unit: ug
+  quant_type: absolute
+  time_course_rule: not a time course (single 2 h boil)
+  arms:
+  - label: cysteine 0 umol, thiamine 30 umol
+    lever_value: 0
+    value: 5.2
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol
+        ribose: 670 umol (100 mg)
+        cysteine: 0 umol
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+  - label: cysteine 85 umol, thiamine 30 umol
+    lever_value: 85
+    value: 14
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol
+        ribose: 670 umol (100 mg)
+        cysteine: 85 umol
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+  - label: cysteine 170 umol, thiamine 30 umol
+    lever_value: 170
+    value: 18
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol
+        ribose: 670 umol (100 mg)
+        cysteine: 170 umol
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+  - label: cysteine 255 umol, thiamine 30 umol
+    lever_value: 255
+    value: 18
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol
+        ribose: 670 umol (100 mg)
+        cysteine: 255 umol
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+  - label: cysteine 325 umol, thiamine 30 umol
+    lever_value: 325
+    value: 19
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol
+        ribose: 670 umol (100 mg)
+        cysteine: 325 umol
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+  - label: cysteine 340 umol, thiamine 30 umol
+    lever_value: 340
+    value: 14
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol
+        ribose: 670 umol (100 mg)
+        cysteine: 340 umol
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+  - label: cysteine 680 umol, thiamine 30 umol
+    lever_value: 680
+    value: 10
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol
+        ribose: 670 umol (100 mg)
+        cysteine: 680 umol
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+  - label: cysteine 1360 umol, thiamine 30 umol
+    lever_value: 1360
+    value: 4.8
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol
+        ribose: 670 umol (100 mg)
+        cysteine: 1360 umol
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+  - label: cysteine 2720 umol, thiamine 30 umol
+    lever_value: 2720
+    value: 2.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol
+        ribose: 670 umol (100 mg)
+        cysteine: 2720 umol
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+- id: grosch1992-28
+  odorant: 2-methyl-3-furanthiol (MF-SH)
+  lever_class: precursor dose
+  lever: cysteine amount (170 - 1360 umol) at thiamine 6 umol
+  focal: true
+  location: Table III, p. 186
+  digitised: false
+  unit: ug
+  quant_type: absolute
+  time_course_rule: not a time course (single 2 h boil)
+  arms:
+  - label: cysteine 170 umol, thiamine 6 umol
+    lever_value: 170
+    value: 2.1
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 6 umol
+        ribose: 670 umol (100 mg)
+        cysteine: 170 umol
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+  - label: cysteine 340 umol, thiamine 6 umol
+    lever_value: 340
+    value: 2.8
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 6 umol
+        ribose: 670 umol (100 mg)
+        cysteine: 340 umol
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+  - label: cysteine 680 umol, thiamine 6 umol
+    lever_value: 680
+    value: 1.6
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 6 umol
+        ribose: 670 umol (100 mg)
+        cysteine: 680 umol
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+  - label: cysteine 1360 umol, thiamine 6 umol
+    lever_value: 1360
+    value: 0.5
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 6 umol
+        ribose: 670 umol (100 mg)
+        cysteine: 1360 umol
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+- id: grosch1992-29
+  odorant: 2-methyl-3-furanthiol (MF-SH)
+  lever_class: precursor dose
+  lever: thiamine amount (6 vs 30 umol) at cysteine 170 umol
+  focal: true
+  location: Table III, p. 186
+  digitised: false
+  unit: ug
+  quant_type: absolute
+  time_course_rule: not a time course (single 2 h boil)
+  arms:
+  - label: thiamine 30 umol, cysteine 170 umol
+    lever_value: 30 umol
+    value: 18
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol
+        ribose: 670 umol (100 mg)
+        cysteine: 170 umol
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+  - label: thiamine 6 umol, cysteine 170 umol
+    lever_value: 6 umol
+    value: 2.1
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 6 umol
+        ribose: 670 umol (100 mg)
+        cysteine: 170 umol
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+- id: grosch1992-30
+  odorant: 2-methyl-3-furanthiol (MF-SH)
+  lever_class: precursor dose
+  lever: thiamine amount (6 vs 30 umol) at cysteine 340 umol
+  focal: true
+  location: Table III, p. 186
+  digitised: false
+  unit: ug
+  quant_type: absolute
+  time_course_rule: not a time course (single 2 h boil)
+  arms:
+  - label: thiamine 30 umol, cysteine 340 umol
+    lever_value: 30 umol
+    value: 14
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol
+        ribose: 670 umol (100 mg)
+        cysteine: 340 umol
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+  - label: thiamine 6 umol, cysteine 340 umol
+    lever_value: 6 umol
+    value: 2.8
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 6 umol
+        ribose: 670 umol (100 mg)
+        cysteine: 340 umol
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+- id: grosch1992-31
+  odorant: 2-methyl-3-furanthiol (MF-SH)
+  lever_class: precursor dose
+  lever: thiamine amount (6 vs 30 umol) at cysteine 680 umol
+  focal: true
+  location: Table III, p. 186
+  digitised: false
+  unit: ug
+  quant_type: absolute
+  time_course_rule: not a time course (single 2 h boil)
+  arms:
+  - label: thiamine 30 umol, cysteine 680 umol
+    lever_value: 30 umol
+    value: 10
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol
+        ribose: 670 umol (100 mg)
+        cysteine: 680 umol
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+  - label: thiamine 6 umol, cysteine 680 umol
+    lever_value: 6 umol
+    value: 1.6
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 6 umol
+        ribose: 670 umol (100 mg)
+        cysteine: 680 umol
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+- id: grosch1992-32
+  odorant: 2-methyl-3-furanthiol (MF-SH)
+  lever_class: precursor dose
+  lever: thiamine amount (6 vs 30 umol) at cysteine 1360 umol
+  focal: true
+  location: Table III, p. 186
+  digitised: false
+  unit: ug
+  quant_type: absolute
+  time_course_rule: not a time course (single 2 h boil)
+  arms:
+  - label: thiamine 30 umol, cysteine 1360 umol
+    lever_value: 30 umol
+    value: 4.8
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol
+        ribose: 670 umol (100 mg)
+        cysteine: 1360 umol
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+  - label: thiamine 6 umol, cysteine 1360 umol
+    lever_value: 6 umol
+    value: 0.5
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 6 umol
+        ribose: 670 umol (100 mg)
+        cysteine: 1360 umol
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+- id: grosch1992-33
+  odorant: 2-methyl-3-furanthiol (MF-SH)
+  lever_class: buffer
+  lever: pyrophosphate concentration (0.2 vs 0.1 mol/L) at cysteine 325 umol
+  focal: false
+  location: Table IV, p. 187
+  digitised: false
+  unit: ug
+  quant_type: absolute
+  time_course_rule: not a time course (single 2 h boil)
+  arms:
+  - label: pyrophosphate 0.2 mol/L
+    lever_value: 0.2 mol/L
+    value: 19
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol (10.2 mg)
+        ribose: 670 umol (100 mg)
+        cysteine: 325 umol
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+  - label: pyrophosphate 0.1 mol/L
+    lever_value: 0.1 mol/L
+    value: 8.8
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol (10.2 mg)
+        ribose: 670 umol (100 mg)
+        cysteine: 325 umol
+      buffer: 0.1 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+- id: grosch1992-34
+  odorant: 2-methyl-3-furanthiol (MF-SH)
+  lever_class: buffer
+  lever: pyrophosphate concentration (0.2 vs 0.1 mol/L) at cysteine 340 umol
+  focal: false
+  location: Table IV, p. 187
+  digitised: false
+  unit: ug
+  quant_type: absolute
+  time_course_rule: not a time course (single 2 h boil)
+  arms:
+  - label: pyrophosphate 0.2 mol/L
+    lever_value: 0.2 mol/L
+    value: 14
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol (10.2 mg)
+        ribose: 670 umol (100 mg)
+        cysteine: 340 umol
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+  - label: pyrophosphate 0.1 mol/L
+    lever_value: 0.1 mol/L
+    value: 7.2
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol (10.2 mg)
+        ribose: 670 umol (100 mg)
+        cysteine: 340 umol
+      buffer: 0.1 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+- id: grosch1992-35
+  odorant: 2-methyl-3-furanthiol (MF-SH)
+  lever_class: buffer
+  lever: pyrophosphate concentration (0.2 vs 0.1 mol/L) at cysteine 680 umol
+  focal: false
+  location: Table IV, p. 187
+  digitised: false
+  unit: ug
+  quant_type: absolute
+  time_course_rule: not a time course (single 2 h boil)
+  arms:
+  - label: pyrophosphate 0.2 mol/L
+    lever_value: 0.2 mol/L
+    value: 10
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol (10.2 mg)
+        ribose: 670 umol (100 mg)
+        cysteine: 680 umol
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+  - label: pyrophosphate 0.1 mol/L
+    lever_value: 0.1 mol/L
+    value: 3.5
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol (10.2 mg)
+        ribose: 670 umol (100 mg)
+        cysteine: 680 umol
+      buffer: 0.1 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+- id: grosch1992-36
+  odorant: 2-methyl-3-furanthiol (MF-SH)
+  lever_class: precursor dose
+  lever: cysteine amount (325, 340, 680 umol) at pyrophosphate 0.1 mol/L
+  focal: true
+  location: Table IV, p. 187
+  digitised: false
+  unit: ug
+  quant_type: absolute
+  time_course_rule: not a time course (single 2 h boil)
+  arms:
+  - label: cysteine 325 umol, 0.1 mol/L
+    lever_value: 325
+    value: 8.8
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol (10.2 mg)
+        ribose: 670 umol (100 mg)
+        cysteine: 325 umol
+      buffer: 0.1 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+  - label: cysteine 340 umol, 0.1 mol/L
+    lever_value: 340
+    value: 7.2
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol (10.2 mg)
+        ribose: 670 umol (100 mg)
+        cysteine: 340 umol
+      buffer: 0.1 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+  - label: cysteine 680 umol, 0.1 mol/L
+    lever_value: 680
+    value: 3.5
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol (10.2 mg)
+        ribose: 670 umol (100 mg)
+        cysteine: 680 umol
+      buffer: 0.1 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux, Method I)
+- id: grosch1992-37
+  odorant: 2-methyl-3-furanthiol (MF-SH)
+  lever_class: mixed
+  lever: 'ribose/cysteine at meat-like conditions (No. 1) vs Farmer & Mottram conditions (No. 2): concentrations, buffer,
+    pH, temperature, time all differ'
+  focal: false
+  location: Table V, p. 187
+  digitised: false
+  unit: ug
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: No. 1
+    lever_value: meat-level, reflux 2 h
+    value: null
+    censor: below_value
+    limit: 0.1
+    n: 3
+    sd: null
+    conditions: &id001
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        ribose: 1.34 umol/mL
+        cysteine: 0.64 umol/mL
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (reflux)
+  - label: No. 2
+    lever_value: Farmer & Mottram, 140 C 1 h
+    value: 0.6
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions: &id002
+      ph: 5.6
+      ph_basis: label
+      temp_C: 140
+      time_min: 60
+      precursors:
+        ribose: 30 umol/mL
+        cysteine: 41 umol/mL
+      buffer: 0.5 mol/L Na-phosphate, 2 mL
+      matrix: buffer
+      headspace: sealed, unstated
+- id: grosch1992-38
+  odorant: 2-furfurylthiol (FF-SH)
+  lever_class: mixed
+  lever: 'ribose/cysteine at meat-like conditions (No. 1) vs Farmer & Mottram conditions (No. 2): concentrations, buffer,
+    pH, temperature, time all differ'
+  focal: false
+  location: Table V, p. 187
+  digitised: false
+  unit: ug
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: No. 1
+    lever_value: meat-level, reflux 2 h
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions: *id001
+  - label: No. 2
+    lever_value: Farmer & Mottram, 140 C 1 h
+    value: 0.4
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions: *id002
+- id: grosch1992-39
+  odorant: 2-methyl-3-furanthiol (MF-SH)
+  lever_class: sugar identity
+  lever: 'ribose source under H2S: ribose vs ribose-5-phosphate vs ribulose vs 5''-IMP'
+  focal: true
+  location: Table VI, p. 188
+  digitised: false
+  unit: ug
+  quant_type: absolute
+  time_course_rule: not a time course (single 2 h boil)
+  arms:
+  - label: Ribose
+    lever_value: Ribose
+    value: null
+    censor: below_value
+    limit: 0.2
+    n: null
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        Ribose: 670 umol
+        H2S: flushed (200 mL each, at start, 30 and 90 min; 26.8 mmol total)
+      buffer: Na-pyrophosphate (pH 5.7)
+      matrix: buffer
+      headspace: H2S-flushed (reflux)
+  - label: Ribose-5-phosphate
+    lever_value: Ribose-5-phosphate
+    value: 0.4
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        Ribose-5-phosphate: 670 umol
+        H2S: flushed (200 mL each, at start, 30 and 90 min; 26.8 mmol total)
+      buffer: Na-pyrophosphate (pH 5.7)
+      matrix: buffer
+      headspace: H2S-flushed (reflux)
+  - label: Ribulose
+    lever_value: Ribulose
+    value: null
+    censor: below_value
+    limit: 0.2
+    n: null
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        Ribulose: 670 umol
+        H2S: flushed (200 mL each, at start, 30 and 90 min; 26.8 mmol total)
+      buffer: Na-pyrophosphate (pH 5.7)
+      matrix: buffer
+      headspace: H2S-flushed (reflux)
+  - label: 5'-Inosinic acid
+    lever_value: 5'-Inosinic acid
+    value: 0.2
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        5'-Inosinic acid: 670 umol
+        H2S: flushed (200 mL each, at start, 30 and 90 min; 26.8 mmol total)
+      buffer: Na-pyrophosphate (pH 5.7)
+      matrix: buffer
+      headspace: H2S-flushed (reflux)
+- id: grosch1992-40
+  odorant: 2-methyl-3-furanthiol (MF-SH)
+  lever_class: precursor dose
+  lever: cysteine added (0 vs 325 umol) to thiamine 30 umol, Method II (SDE)
+  focal: true
+  location: Table VIII, p. 190
+  digitised: false
+  unit: ug
+  quant_type: absolute
+  time_course_rule: not a time course (single 2 h SDE)
+  arms:
+  - label: No. 1 Thiamine
+    lever_value: '0'
+    value: 25
+    censor: none
+    limit: null
+    n: null
+    sd: 5
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol (thiamine.HCl 10.2 mg)
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (SDE, Method II)
+  - label: No. 2 Thiamine + cysteine
+    lever_value: 325 umol
+    value: 136
+    censor: none
+    limit: null
+    n: null
+    sd: 0
+    conditions:
+      ph: 5.7
+      ph_basis: label
+      temp_C: null
+      time_min: 120
+      precursors:
+        thiamine: 30 umol (thiamine.HCl 10.2 mg)
+        cysteine: 325 umol (cysteine.HCl 57 mg)
+      buffer: 0.2 mol/L Na-pyrophosphate, 500 mL
+      matrix: buffer
+      headspace: unstated (SDE, Method II)

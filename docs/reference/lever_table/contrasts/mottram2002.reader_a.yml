@@ -1,0 +1,2988 @@
+source: mottram2002
+pdf: data/articles/mottram2002.pdf
+reader: a
+scope_note: 'Approximate headspace quantities vs 1,2-dichlorobenzene IS with response factor 1: peak_area. tr = <0.5 ng/mmol
+  (trace, limit 0.5); ''-'' = below detection limit ~0.1 ng/mmol (nd_with_limit); ''+'' = present, unquantified (value null,
+  censor none). Unbuffered arms drift in pH on heating (final pH in each label). ''Phosphate'' buffer is pyrophosphate per
+  Methods. 2-methyl-3-(2-furylmethyldithio)furan keyed as the MFT-FFT mixed disulfide.'
+contrasts:
+- id: mottram2002-1
+  odorant: 2-methyl-3-furanthiol
+  lever_class: sugar identity
+  lever: form of ribose (ribose 5-phosphate vs ribose vs IMP), unbuffered
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ng/mmol of sugar (approximate, headspace)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: unbuffered, Rib-PO4 (final pH 4.2)
+    lever_value: ribose 5-phosphate
+    value: 2940
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose 5-phosphate: 0.3 mmol in 6 mL
+      buffer: none (water)
+      matrix: water
+      headspace: sealed, unstated
+  - label: unbuffered, ribose (final pH 3.9)
+    lever_value: ribose
+    value: 1010
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose: 0.3 mmol in 6 mL
+      buffer: none (water)
+      matrix: water
+      headspace: sealed, unstated
+  - label: unbuffered, IMP (final pH 5.7)
+    lever_value: inosine 5'-monophosphate
+    value: 97
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        inosine 5'-monophosphate: 0.3 mmol in 6 mL
+      buffer: none (water)
+      matrix: water
+      headspace: sealed, unstated
+- id: mottram2002-2
+  odorant: 2-methyl-3-furanthiol
+  lever_class: sugar identity
+  lever: form of ribose (ribose 5-phosphate vs ribose vs IMP), phosphate buffer, pH 5.6
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ng/mmol of sugar (approximate, headspace)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: phosphate buffer, pH 5.6, Rib-PO4 (final pH 5.5)
+    lever_value: ribose 5-phosphate
+    value: 2050
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose 5-phosphate: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: phosphate buffer, pH 5.6, ribose (final pH 5.5)
+    lever_value: ribose
+    value: 2230
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: phosphate buffer, pH 5.6, IMP (final pH 5.7)
+    lever_value: inosine 5'-monophosphate
+    value: 67
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        inosine 5'-monophosphate: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+- id: mottram2002-3
+  odorant: 2-methyl-3-furanthiol
+  lever_class: sugar identity
+  lever: form of ribose (ribose 5-phosphate vs ribose vs IMP), phthalate buffer, pH 5.6
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ng/mmol of sugar (approximate, headspace)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: phthalate buffer, pH 5.6, Rib-PO4 (final pH 5.4)
+    lever_value: ribose 5-phosphate
+    value: 2960
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose 5-phosphate: 0.3 mmol in 6 mL
+      buffer: 0.3 M potassium hydrogen phthalate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: phthalate buffer, pH 5.6, ribose (final pH 5.3)
+    lever_value: ribose
+    value: 2620
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose: 0.3 mmol in 6 mL
+      buffer: 0.3 M potassium hydrogen phthalate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: phthalate buffer, pH 5.6, IMP (final pH 5.4)
+    lever_value: inosine 5'-monophosphate
+    value: 143
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        inosine 5'-monophosphate: 0.3 mmol in 6 mL
+      buffer: 0.3 M potassium hydrogen phthalate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: mottram2002-4
+  odorant: 2-methyl-3-furanthiol
+  lever_class: sugar identity
+  lever: form of ribose (ribose 5-phosphate vs ribose vs IMP), phosphate buffer, pH 4.2
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ng/mmol of sugar (approximate, headspace)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: phosphate buffer, pH 4.2, Rib-PO4 (final pH 3.9)
+    lever_value: ribose 5-phosphate
+    value: 10230
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.2
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose 5-phosphate: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: phosphate buffer, pH 4.2, ribose (final pH 3.9)
+    lever_value: ribose
+    value: 8250
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.2
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: phosphate buffer, pH 4.2, IMP (final pH 4.5)
+    lever_value: inosine 5'-monophosphate
+    value: 1867
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.2
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        inosine 5'-monophosphate: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+- id: mottram2002-5
+  odorant: 2-methyl-3-furanthiol
+  lever_class: buffer
+  lever: 'buffer at initial pH 5.6: none vs phosphate vs phthalate, Rib-PO4'
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ng/mmol of sugar (approximate, headspace)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: unbuffered, Rib-PO4 (final pH 4.2)
+    lever_value: none (water)
+    value: 2940
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose 5-phosphate: 0.3 mmol in 6 mL
+      buffer: none (water)
+      matrix: water
+      headspace: sealed, unstated
+  - label: phosphate buffer, pH 5.6, Rib-PO4 (final pH 5.5)
+    lever_value: 0.2 M pyrophosphate ('phosphate')
+    value: 2050
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose 5-phosphate: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: phthalate buffer, pH 5.6, Rib-PO4 (final pH 5.4)
+    lever_value: 0.3 M potassium hydrogen phthalate
+    value: 2960
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose 5-phosphate: 0.3 mmol in 6 mL
+      buffer: 0.3 M potassium hydrogen phthalate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: mottram2002-6
+  odorant: 2-methyl-3-furanthiol
+  lever_class: buffer
+  lever: 'buffer at initial pH 5.6: none vs phosphate vs phthalate, ribose'
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ng/mmol of sugar (approximate, headspace)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: unbuffered, ribose (final pH 3.9)
+    lever_value: none (water)
+    value: 1010
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose: 0.3 mmol in 6 mL
+      buffer: none (water)
+      matrix: water
+      headspace: sealed, unstated
+  - label: phosphate buffer, pH 5.6, ribose (final pH 5.5)
+    lever_value: 0.2 M pyrophosphate ('phosphate')
+    value: 2230
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: phthalate buffer, pH 5.6, ribose (final pH 5.3)
+    lever_value: 0.3 M potassium hydrogen phthalate
+    value: 2620
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose: 0.3 mmol in 6 mL
+      buffer: 0.3 M potassium hydrogen phthalate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: mottram2002-7
+  odorant: 2-methyl-3-furanthiol
+  lever_class: buffer
+  lever: 'buffer at initial pH 5.6: none vs phosphate vs phthalate, IMP'
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ng/mmol of sugar (approximate, headspace)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: unbuffered, IMP (final pH 5.7)
+    lever_value: none (water)
+    value: 97
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        inosine 5'-monophosphate: 0.3 mmol in 6 mL
+      buffer: none (water)
+      matrix: water
+      headspace: sealed, unstated
+  - label: phosphate buffer, pH 5.6, IMP (final pH 5.7)
+    lever_value: 0.2 M pyrophosphate ('phosphate')
+    value: 67
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        inosine 5'-monophosphate: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: phthalate buffer, pH 5.6, IMP (final pH 5.4)
+    lever_value: 0.3 M potassium hydrogen phthalate
+    value: 143
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        inosine 5'-monophosphate: 0.3 mmol in 6 mL
+      buffer: 0.3 M potassium hydrogen phthalate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: mottram2002-8
+  odorant: 2-methyl-3-furanthiol
+  lever_class: pH
+  lever: pH of phosphate buffer, 5.6 vs 4.2, Rib-PO4
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ng/mmol of sugar (approximate, headspace)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: phosphate buffer, pH 5.6, Rib-PO4 (final pH 5.5)
+    lever_value: 5.6
+    value: 2050
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose 5-phosphate: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: phosphate buffer, pH 4.2, Rib-PO4 (final pH 3.9)
+    lever_value: 4.2
+    value: 10230
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.2
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose 5-phosphate: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+- id: mottram2002-9
+  odorant: 2-methyl-3-furanthiol
+  lever_class: pH
+  lever: pH of phosphate buffer, 5.6 vs 4.2, ribose
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ng/mmol of sugar (approximate, headspace)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: phosphate buffer, pH 5.6, ribose (final pH 5.5)
+    lever_value: 5.6
+    value: 2230
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: phosphate buffer, pH 4.2, ribose (final pH 3.9)
+    lever_value: 4.2
+    value: 8250
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.2
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+- id: mottram2002-10
+  odorant: 2-methyl-3-furanthiol
+  lever_class: pH
+  lever: pH of phosphate buffer, 5.6 vs 4.2, IMP
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ng/mmol of sugar (approximate, headspace)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: phosphate buffer, pH 5.6, IMP (final pH 5.7)
+    lever_value: 5.6
+    value: 67
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        inosine 5'-monophosphate: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: phosphate buffer, pH 4.2, IMP (final pH 4.5)
+    lever_value: 4.2
+    value: 1867
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.2
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        inosine 5'-monophosphate: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+- id: mottram2002-11
+  odorant: 2-furanmethanethiol
+  lever_class: sugar identity
+  lever: form of ribose (ribose 5-phosphate vs ribose vs IMP), unbuffered
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ng/mmol of sugar (approximate, headspace)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: unbuffered, Rib-PO4 (final pH 4.2)
+    lever_value: ribose 5-phosphate
+    value: 3310
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose 5-phosphate: 0.3 mmol in 6 mL
+      buffer: none (water)
+      matrix: water
+      headspace: sealed, unstated
+  - label: unbuffered, ribose (final pH 3.9)
+    lever_value: ribose
+    value: 2610
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose: 0.3 mmol in 6 mL
+      buffer: none (water)
+      matrix: water
+      headspace: sealed, unstated
+  - label: unbuffered, IMP (final pH 5.7)
+    lever_value: inosine 5'-monophosphate
+    value: 13
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        inosine 5'-monophosphate: 0.3 mmol in 6 mL
+      buffer: none (water)
+      matrix: water
+      headspace: sealed, unstated
+- id: mottram2002-12
+  odorant: 2-furanmethanethiol
+  lever_class: sugar identity
+  lever: form of ribose (ribose 5-phosphate vs ribose vs IMP), phosphate buffer, pH 5.6
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ng/mmol of sugar (approximate, headspace)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: phosphate buffer, pH 5.6, Rib-PO4 (final pH 5.5)
+    lever_value: ribose 5-phosphate
+    value: 496
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose 5-phosphate: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: phosphate buffer, pH 5.6, ribose (final pH 5.5)
+    lever_value: ribose
+    value: 1750
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: phosphate buffer, pH 5.6, IMP (final pH 5.7)
+    lever_value: inosine 5'-monophosphate
+    value: 23
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        inosine 5'-monophosphate: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+- id: mottram2002-13
+  odorant: 2-furanmethanethiol
+  lever_class: sugar identity
+  lever: form of ribose (ribose 5-phosphate vs ribose vs IMP), phthalate buffer, pH 5.6
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ng/mmol of sugar (approximate, headspace)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: phthalate buffer, pH 5.6, Rib-PO4 (final pH 5.4)
+    lever_value: ribose 5-phosphate
+    value: 840
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose 5-phosphate: 0.3 mmol in 6 mL
+      buffer: 0.3 M potassium hydrogen phthalate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: phthalate buffer, pH 5.6, ribose (final pH 5.3)
+    lever_value: ribose
+    value: 3540
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose: 0.3 mmol in 6 mL
+      buffer: 0.3 M potassium hydrogen phthalate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: phthalate buffer, pH 5.6, IMP (final pH 5.4)
+    lever_value: inosine 5'-monophosphate
+    value: 47
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        inosine 5'-monophosphate: 0.3 mmol in 6 mL
+      buffer: 0.3 M potassium hydrogen phthalate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: mottram2002-14
+  odorant: 2-furanmethanethiol
+  lever_class: sugar identity
+  lever: form of ribose (ribose 5-phosphate vs ribose vs IMP), phosphate buffer, pH 4.2
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ng/mmol of sugar (approximate, headspace)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: phosphate buffer, pH 4.2, Rib-PO4 (final pH 3.9)
+    lever_value: ribose 5-phosphate
+    value: 2360
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.2
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose 5-phosphate: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: phosphate buffer, pH 4.2, ribose (final pH 3.9)
+    lever_value: ribose
+    value: 3160
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.2
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: phosphate buffer, pH 4.2, IMP (final pH 4.5)
+    lever_value: inosine 5'-monophosphate
+    value: 5000
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.2
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        inosine 5'-monophosphate: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+- id: mottram2002-15
+  odorant: 2-furanmethanethiol
+  lever_class: buffer
+  lever: 'buffer at initial pH 5.6: none vs phosphate vs phthalate, Rib-PO4'
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ng/mmol of sugar (approximate, headspace)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: unbuffered, Rib-PO4 (final pH 4.2)
+    lever_value: none (water)
+    value: 3310
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose 5-phosphate: 0.3 mmol in 6 mL
+      buffer: none (water)
+      matrix: water
+      headspace: sealed, unstated
+  - label: phosphate buffer, pH 5.6, Rib-PO4 (final pH 5.5)
+    lever_value: 0.2 M pyrophosphate ('phosphate')
+    value: 496
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose 5-phosphate: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: phthalate buffer, pH 5.6, Rib-PO4 (final pH 5.4)
+    lever_value: 0.3 M potassium hydrogen phthalate
+    value: 840
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose 5-phosphate: 0.3 mmol in 6 mL
+      buffer: 0.3 M potassium hydrogen phthalate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: mottram2002-16
+  odorant: 2-furanmethanethiol
+  lever_class: buffer
+  lever: 'buffer at initial pH 5.6: none vs phosphate vs phthalate, ribose'
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ng/mmol of sugar (approximate, headspace)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: unbuffered, ribose (final pH 3.9)
+    lever_value: none (water)
+    value: 2610
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose: 0.3 mmol in 6 mL
+      buffer: none (water)
+      matrix: water
+      headspace: sealed, unstated
+  - label: phosphate buffer, pH 5.6, ribose (final pH 5.5)
+    lever_value: 0.2 M pyrophosphate ('phosphate')
+    value: 1750
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: phthalate buffer, pH 5.6, ribose (final pH 5.3)
+    lever_value: 0.3 M potassium hydrogen phthalate
+    value: 3540
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose: 0.3 mmol in 6 mL
+      buffer: 0.3 M potassium hydrogen phthalate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: mottram2002-17
+  odorant: 2-furanmethanethiol
+  lever_class: buffer
+  lever: 'buffer at initial pH 5.6: none vs phosphate vs phthalate, IMP'
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ng/mmol of sugar (approximate, headspace)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: unbuffered, IMP (final pH 5.7)
+    lever_value: none (water)
+    value: 13
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        inosine 5'-monophosphate: 0.3 mmol in 6 mL
+      buffer: none (water)
+      matrix: water
+      headspace: sealed, unstated
+  - label: phosphate buffer, pH 5.6, IMP (final pH 5.7)
+    lever_value: 0.2 M pyrophosphate ('phosphate')
+    value: 23
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        inosine 5'-monophosphate: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: phthalate buffer, pH 5.6, IMP (final pH 5.4)
+    lever_value: 0.3 M potassium hydrogen phthalate
+    value: 47
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        inosine 5'-monophosphate: 0.3 mmol in 6 mL
+      buffer: 0.3 M potassium hydrogen phthalate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: mottram2002-18
+  odorant: 2-furanmethanethiol
+  lever_class: pH
+  lever: pH of phosphate buffer, 5.6 vs 4.2, Rib-PO4
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ng/mmol of sugar (approximate, headspace)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: phosphate buffer, pH 5.6, Rib-PO4 (final pH 5.5)
+    lever_value: 5.6
+    value: 496
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose 5-phosphate: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: phosphate buffer, pH 4.2, Rib-PO4 (final pH 3.9)
+    lever_value: 4.2
+    value: 2360
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.2
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose 5-phosphate: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+- id: mottram2002-19
+  odorant: 2-furanmethanethiol
+  lever_class: pH
+  lever: pH of phosphate buffer, 5.6 vs 4.2, ribose
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ng/mmol of sugar (approximate, headspace)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: phosphate buffer, pH 5.6, ribose (final pH 5.5)
+    lever_value: 5.6
+    value: 1750
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: phosphate buffer, pH 4.2, ribose (final pH 3.9)
+    lever_value: 4.2
+    value: 3160
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.2
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+- id: mottram2002-20
+  odorant: 2-furanmethanethiol
+  lever_class: pH
+  lever: pH of phosphate buffer, 5.6 vs 4.2, IMP
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ng/mmol of sugar (approximate, headspace)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: phosphate buffer, pH 5.6, IMP (final pH 5.7)
+    lever_value: 5.6
+    value: 23
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        inosine 5'-monophosphate: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: phosphate buffer, pH 4.2, IMP (final pH 4.5)
+    lever_value: 4.2
+    value: 5000
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.2
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        inosine 5'-monophosphate: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+- id: mottram2002-21
+  odorant: bis(2-methyl-3-furyl) disulfide
+  lever_class: sugar identity
+  lever: form of ribose (ribose 5-phosphate vs ribose vs IMP), unbuffered
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ng/mmol of sugar (approximate, headspace)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: unbuffered, Rib-PO4 (final pH 4.2)
+    lever_value: ribose 5-phosphate
+    value: 77
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose 5-phosphate: 0.3 mmol in 6 mL
+      buffer: none (water)
+      matrix: water
+      headspace: sealed, unstated
+  - label: unbuffered, ribose (final pH 3.9)
+    lever_value: ribose
+    value: 56
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose: 0.3 mmol in 6 mL
+      buffer: none (water)
+      matrix: water
+      headspace: sealed, unstated
+  - label: unbuffered, IMP (final pH 5.7)
+    lever_value: inosine 5'-monophosphate
+    value: 7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        inosine 5'-monophosphate: 0.3 mmol in 6 mL
+      buffer: none (water)
+      matrix: water
+      headspace: sealed, unstated
+- id: mottram2002-22
+  odorant: bis(2-methyl-3-furyl) disulfide
+  lever_class: sugar identity
+  lever: form of ribose (ribose 5-phosphate vs ribose vs IMP), phosphate buffer, pH 5.6
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ng/mmol of sugar (approximate, headspace)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: phosphate buffer, pH 5.6, Rib-PO4 (final pH 5.5)
+    lever_value: ribose 5-phosphate
+    value: 33
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose 5-phosphate: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: phosphate buffer, pH 5.6, ribose (final pH 5.5)
+    lever_value: ribose
+    value: 87
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: phosphate buffer, pH 5.6, IMP (final pH 5.7) [tr]
+    lever_value: inosine 5'-monophosphate
+    value: null
+    censor: trace
+    limit: 0.5
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        inosine 5'-monophosphate: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+- id: mottram2002-23
+  odorant: bis(2-methyl-3-furyl) disulfide
+  lever_class: sugar identity
+  lever: form of ribose (ribose 5-phosphate vs ribose vs IMP), phthalate buffer, pH 5.6
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ng/mmol of sugar (approximate, headspace)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: phthalate buffer, pH 5.6, Rib-PO4 (final pH 5.4)
+    lever_value: ribose 5-phosphate
+    value: 240
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose 5-phosphate: 0.3 mmol in 6 mL
+      buffer: 0.3 M potassium hydrogen phthalate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: phthalate buffer, pH 5.6, ribose (final pH 5.3)
+    lever_value: ribose
+    value: 55
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose: 0.3 mmol in 6 mL
+      buffer: 0.3 M potassium hydrogen phthalate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: phthalate buffer, pH 5.6, IMP (final pH 5.4) [tr]
+    lever_value: inosine 5'-monophosphate
+    value: null
+    censor: trace
+    limit: 0.5
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        inosine 5'-monophosphate: 0.3 mmol in 6 mL
+      buffer: 0.3 M potassium hydrogen phthalate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: mottram2002-24
+  odorant: bis(2-methyl-3-furyl) disulfide
+  lever_class: sugar identity
+  lever: form of ribose (ribose 5-phosphate vs ribose vs IMP), phosphate buffer, pH 4.2
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ng/mmol of sugar (approximate, headspace)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: phosphate buffer, pH 4.2, Rib-PO4 (final pH 3.9)
+    lever_value: ribose 5-phosphate
+    value: 167
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.2
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose 5-phosphate: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: phosphate buffer, pH 4.2, ribose (final pH 3.9)
+    lever_value: ribose
+    value: 319
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.2
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: phosphate buffer, pH 4.2, IMP (final pH 4.5)
+    lever_value: inosine 5'-monophosphate
+    value: 63
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.2
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        inosine 5'-monophosphate: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+- id: mottram2002-25
+  odorant: bis(2-methyl-3-furyl) disulfide
+  lever_class: buffer
+  lever: 'buffer at initial pH 5.6: none vs phosphate vs phthalate, Rib-PO4'
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ng/mmol of sugar (approximate, headspace)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: unbuffered, Rib-PO4 (final pH 4.2)
+    lever_value: none (water)
+    value: 77
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose 5-phosphate: 0.3 mmol in 6 mL
+      buffer: none (water)
+      matrix: water
+      headspace: sealed, unstated
+  - label: phosphate buffer, pH 5.6, Rib-PO4 (final pH 5.5)
+    lever_value: 0.2 M pyrophosphate ('phosphate')
+    value: 33
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose 5-phosphate: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: phthalate buffer, pH 5.6, Rib-PO4 (final pH 5.4)
+    lever_value: 0.3 M potassium hydrogen phthalate
+    value: 240
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose 5-phosphate: 0.3 mmol in 6 mL
+      buffer: 0.3 M potassium hydrogen phthalate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: mottram2002-26
+  odorant: bis(2-methyl-3-furyl) disulfide
+  lever_class: buffer
+  lever: 'buffer at initial pH 5.6: none vs phosphate vs phthalate, ribose'
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ng/mmol of sugar (approximate, headspace)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: unbuffered, ribose (final pH 3.9)
+    lever_value: none (water)
+    value: 56
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose: 0.3 mmol in 6 mL
+      buffer: none (water)
+      matrix: water
+      headspace: sealed, unstated
+  - label: phosphate buffer, pH 5.6, ribose (final pH 5.5)
+    lever_value: 0.2 M pyrophosphate ('phosphate')
+    value: 87
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: phthalate buffer, pH 5.6, ribose (final pH 5.3)
+    lever_value: 0.3 M potassium hydrogen phthalate
+    value: 55
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose: 0.3 mmol in 6 mL
+      buffer: 0.3 M potassium hydrogen phthalate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: mottram2002-27
+  odorant: bis(2-methyl-3-furyl) disulfide
+  lever_class: buffer
+  lever: 'buffer at initial pH 5.6: none vs phosphate vs phthalate, IMP'
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ng/mmol of sugar (approximate, headspace)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: unbuffered, IMP (final pH 5.7)
+    lever_value: none (water)
+    value: 7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        inosine 5'-monophosphate: 0.3 mmol in 6 mL
+      buffer: none (water)
+      matrix: water
+      headspace: sealed, unstated
+  - label: phosphate buffer, pH 5.6, IMP (final pH 5.7) [tr]
+    lever_value: 0.2 M pyrophosphate ('phosphate')
+    value: null
+    censor: trace
+    limit: 0.5
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        inosine 5'-monophosphate: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: phthalate buffer, pH 5.6, IMP (final pH 5.4) [tr]
+    lever_value: 0.3 M potassium hydrogen phthalate
+    value: null
+    censor: trace
+    limit: 0.5
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        inosine 5'-monophosphate: 0.3 mmol in 6 mL
+      buffer: 0.3 M potassium hydrogen phthalate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: mottram2002-28
+  odorant: bis(2-methyl-3-furyl) disulfide
+  lever_class: pH
+  lever: pH of phosphate buffer, 5.6 vs 4.2, Rib-PO4
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ng/mmol of sugar (approximate, headspace)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: phosphate buffer, pH 5.6, Rib-PO4 (final pH 5.5)
+    lever_value: 5.6
+    value: 33
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose 5-phosphate: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: phosphate buffer, pH 4.2, Rib-PO4 (final pH 3.9)
+    lever_value: 4.2
+    value: 167
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.2
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose 5-phosphate: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+- id: mottram2002-29
+  odorant: bis(2-methyl-3-furyl) disulfide
+  lever_class: pH
+  lever: pH of phosphate buffer, 5.6 vs 4.2, ribose
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ng/mmol of sugar (approximate, headspace)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: phosphate buffer, pH 5.6, ribose (final pH 5.5)
+    lever_value: 5.6
+    value: 87
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: phosphate buffer, pH 4.2, ribose (final pH 3.9)
+    lever_value: 4.2
+    value: 319
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.2
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+- id: mottram2002-30
+  odorant: bis(2-methyl-3-furyl) disulfide
+  lever_class: pH
+  lever: pH of phosphate buffer, 5.6 vs 4.2, IMP
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ng/mmol of sugar (approximate, headspace)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: phosphate buffer, pH 5.6, IMP (final pH 5.7) [tr]
+    lever_value: 5.6
+    value: null
+    censor: trace
+    limit: 0.5
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        inosine 5'-monophosphate: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: phosphate buffer, pH 4.2, IMP (final pH 4.5)
+    lever_value: 4.2
+    value: 63
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.2
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        inosine 5'-monophosphate: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+- id: mottram2002-31
+  odorant: 2-methyl-3-(2-furylmethyldithio)furan
+  lever_class: sugar identity
+  lever: form of ribose (ribose 5-phosphate vs ribose vs IMP), unbuffered
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ng/mmol of sugar (approximate, headspace)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: unbuffered, Rib-PO4 (final pH 4.2)
+    lever_value: ribose 5-phosphate
+    value: 47
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose 5-phosphate: 0.3 mmol in 6 mL
+      buffer: none (water)
+      matrix: water
+      headspace: sealed, unstated
+  - label: unbuffered, ribose (final pH 3.9)
+    lever_value: ribose
+    value: 47
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose: 0.3 mmol in 6 mL
+      buffer: none (water)
+      matrix: water
+      headspace: sealed, unstated
+  - label: unbuffered, IMP (final pH 5.7) [- below detection limit]
+    lever_value: inosine 5'-monophosphate
+    value: null
+    censor: nd_with_limit
+    limit: 0.1
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        inosine 5'-monophosphate: 0.3 mmol in 6 mL
+      buffer: none (water)
+      matrix: water
+      headspace: sealed, unstated
+- id: mottram2002-32
+  odorant: 2-methyl-3-(2-furylmethyldithio)furan
+  lever_class: sugar identity
+  lever: form of ribose (ribose 5-phosphate vs ribose vs IMP), phosphate buffer, pH 5.6
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ng/mmol of sugar (approximate, headspace)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: phosphate buffer, pH 5.6, Rib-PO4 (final pH 5.5) [+ present, quantification confounded by adjacent peak]
+    lever_value: ribose 5-phosphate
+    value: null
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose 5-phosphate: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: phosphate buffer, pH 5.6, ribose (final pH 5.5) [+ present, quantification confounded by adjacent peak]
+    lever_value: ribose
+    value: null
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: phosphate buffer, pH 5.6, IMP (final pH 5.7) [- below detection limit]
+    lever_value: inosine 5'-monophosphate
+    value: null
+    censor: nd_with_limit
+    limit: 0.1
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        inosine 5'-monophosphate: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+- id: mottram2002-33
+  odorant: 2-methyl-3-(2-furylmethyldithio)furan
+  lever_class: sugar identity
+  lever: form of ribose (ribose 5-phosphate vs ribose vs IMP), phthalate buffer, pH 5.6
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ng/mmol of sugar (approximate, headspace)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: phthalate buffer, pH 5.6, Rib-PO4 (final pH 5.4)
+    lever_value: ribose 5-phosphate
+    value: 18
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose 5-phosphate: 0.3 mmol in 6 mL
+      buffer: 0.3 M potassium hydrogen phthalate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: phthalate buffer, pH 5.6, ribose (final pH 5.3)
+    lever_value: ribose
+    value: 148
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose: 0.3 mmol in 6 mL
+      buffer: 0.3 M potassium hydrogen phthalate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: phthalate buffer, pH 5.6, IMP (final pH 5.4) [- below detection limit]
+    lever_value: inosine 5'-monophosphate
+    value: null
+    censor: nd_with_limit
+    limit: 0.1
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        inosine 5'-monophosphate: 0.3 mmol in 6 mL
+      buffer: 0.3 M potassium hydrogen phthalate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: mottram2002-34
+  odorant: 2-methyl-3-(2-furylmethyldithio)furan
+  lever_class: sugar identity
+  lever: form of ribose (ribose 5-phosphate vs ribose vs IMP), phosphate buffer, pH 4.2
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ng/mmol of sugar (approximate, headspace)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: phosphate buffer, pH 4.2, Rib-PO4 (final pH 3.9)
+    lever_value: ribose 5-phosphate
+    value: 14
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.2
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose 5-phosphate: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: phosphate buffer, pH 4.2, ribose (final pH 3.9)
+    lever_value: ribose
+    value: 32
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.2
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: phosphate buffer, pH 4.2, IMP (final pH 4.5) [tr]
+    lever_value: inosine 5'-monophosphate
+    value: null
+    censor: trace
+    limit: 0.5
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.2
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        inosine 5'-monophosphate: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+- id: mottram2002-35
+  odorant: 2-methyl-3-(2-furylmethyldithio)furan
+  lever_class: buffer
+  lever: 'buffer at initial pH 5.6: none vs phosphate vs phthalate, Rib-PO4'
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ng/mmol of sugar (approximate, headspace)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: unbuffered, Rib-PO4 (final pH 4.2)
+    lever_value: none (water)
+    value: 47
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose 5-phosphate: 0.3 mmol in 6 mL
+      buffer: none (water)
+      matrix: water
+      headspace: sealed, unstated
+  - label: phosphate buffer, pH 5.6, Rib-PO4 (final pH 5.5) [+ present, quantification confounded by adjacent peak]
+    lever_value: 0.2 M pyrophosphate ('phosphate')
+    value: null
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose 5-phosphate: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: phthalate buffer, pH 5.6, Rib-PO4 (final pH 5.4)
+    lever_value: 0.3 M potassium hydrogen phthalate
+    value: 18
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose 5-phosphate: 0.3 mmol in 6 mL
+      buffer: 0.3 M potassium hydrogen phthalate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: mottram2002-36
+  odorant: 2-methyl-3-(2-furylmethyldithio)furan
+  lever_class: buffer
+  lever: 'buffer at initial pH 5.6: none vs phosphate vs phthalate, ribose'
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ng/mmol of sugar (approximate, headspace)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: unbuffered, ribose (final pH 3.9)
+    lever_value: none (water)
+    value: 47
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose: 0.3 mmol in 6 mL
+      buffer: none (water)
+      matrix: water
+      headspace: sealed, unstated
+  - label: phosphate buffer, pH 5.6, ribose (final pH 5.5) [+ present, quantification confounded by adjacent peak]
+    lever_value: 0.2 M pyrophosphate ('phosphate')
+    value: null
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: phthalate buffer, pH 5.6, ribose (final pH 5.3)
+    lever_value: 0.3 M potassium hydrogen phthalate
+    value: 148
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose: 0.3 mmol in 6 mL
+      buffer: 0.3 M potassium hydrogen phthalate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: mottram2002-37
+  odorant: 2-methyl-3-(2-furylmethyldithio)furan
+  lever_class: buffer
+  lever: 'buffer at initial pH 5.6: none vs phosphate vs phthalate, IMP'
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ng/mmol of sugar (approximate, headspace)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: unbuffered, IMP (final pH 5.7) [- below detection limit]
+    lever_value: none (water)
+    value: null
+    censor: nd_with_limit
+    limit: 0.1
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        inosine 5'-monophosphate: 0.3 mmol in 6 mL
+      buffer: none (water)
+      matrix: water
+      headspace: sealed, unstated
+  - label: phosphate buffer, pH 5.6, IMP (final pH 5.7) [- below detection limit]
+    lever_value: 0.2 M pyrophosphate ('phosphate')
+    value: null
+    censor: nd_with_limit
+    limit: 0.1
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        inosine 5'-monophosphate: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: phthalate buffer, pH 5.6, IMP (final pH 5.4) [- below detection limit]
+    lever_value: 0.3 M potassium hydrogen phthalate
+    value: null
+    censor: nd_with_limit
+    limit: 0.1
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        inosine 5'-monophosphate: 0.3 mmol in 6 mL
+      buffer: 0.3 M potassium hydrogen phthalate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: mottram2002-38
+  odorant: 2-methyl-3-(2-furylmethyldithio)furan
+  lever_class: pH
+  lever: pH of phosphate buffer, 5.6 vs 4.2, Rib-PO4
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ng/mmol of sugar (approximate, headspace)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: phosphate buffer, pH 5.6, Rib-PO4 (final pH 5.5) [+ present, quantification confounded by adjacent peak]
+    lever_value: 5.6
+    value: null
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose 5-phosphate: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: phosphate buffer, pH 4.2, Rib-PO4 (final pH 3.9)
+    lever_value: 4.2
+    value: 14
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.2
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose 5-phosphate: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+- id: mottram2002-39
+  odorant: 2-methyl-3-(2-furylmethyldithio)furan
+  lever_class: pH
+  lever: pH of phosphate buffer, 5.6 vs 4.2, ribose
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ng/mmol of sugar (approximate, headspace)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: phosphate buffer, pH 5.6, ribose (final pH 5.5) [+ present, quantification confounded by adjacent peak]
+    lever_value: 5.6
+    value: null
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: phosphate buffer, pH 4.2, ribose (final pH 3.9)
+    lever_value: 4.2
+    value: 32
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.2
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+- id: mottram2002-40
+  odorant: 2-methyl-3-(2-furylmethyldithio)furan
+  lever_class: pH
+  lever: pH of phosphate buffer, 5.6 vs 4.2, IMP
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ng/mmol of sugar (approximate, headspace)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: phosphate buffer, pH 5.6, IMP (final pH 5.7) [- below detection limit]
+    lever_value: 5.6
+    value: null
+    censor: nd_with_limit
+    limit: 0.1
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        inosine 5'-monophosphate: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: phosphate buffer, pH 4.2, IMP (final pH 4.5) [tr]
+    lever_value: 4.2
+    value: null
+    censor: trace
+    limit: 0.5
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.2
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        inosine 5'-monophosphate: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+- id: mottram2002-41
+  odorant: bis(2-furylmethyl) disulfide
+  lever_class: sugar identity
+  lever: form of ribose (ribose 5-phosphate vs ribose vs IMP), unbuffered
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ng/mmol of sugar (approximate, headspace)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: unbuffered, Rib-PO4 (final pH 4.2)
+    lever_value: ribose 5-phosphate
+    value: 43
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose 5-phosphate: 0.3 mmol in 6 mL
+      buffer: none (water)
+      matrix: water
+      headspace: sealed, unstated
+  - label: unbuffered, ribose (final pH 3.9)
+    lever_value: ribose
+    value: 80
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose: 0.3 mmol in 6 mL
+      buffer: none (water)
+      matrix: water
+      headspace: sealed, unstated
+  - label: unbuffered, IMP (final pH 5.7) [- below detection limit]
+    lever_value: inosine 5'-monophosphate
+    value: null
+    censor: nd_with_limit
+    limit: 0.1
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        inosine 5'-monophosphate: 0.3 mmol in 6 mL
+      buffer: none (water)
+      matrix: water
+      headspace: sealed, unstated
+- id: mottram2002-42
+  odorant: bis(2-furylmethyl) disulfide
+  lever_class: sugar identity
+  lever: form of ribose (ribose 5-phosphate vs ribose vs IMP), phosphate buffer, pH 5.6
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ng/mmol of sugar (approximate, headspace)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: phosphate buffer, pH 5.6, Rib-PO4 (final pH 5.5) [- below detection limit]
+    lever_value: ribose 5-phosphate
+    value: null
+    censor: nd_with_limit
+    limit: 0.1
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose 5-phosphate: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: phosphate buffer, pH 5.6, ribose (final pH 5.5)
+    lever_value: ribose
+    value: 20
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: phosphate buffer, pH 5.6, IMP (final pH 5.7) [- below detection limit]
+    lever_value: inosine 5'-monophosphate
+    value: null
+    censor: nd_with_limit
+    limit: 0.1
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        inosine 5'-monophosphate: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+- id: mottram2002-43
+  odorant: bis(2-furylmethyl) disulfide
+  lever_class: sugar identity
+  lever: form of ribose (ribose 5-phosphate vs ribose vs IMP), phthalate buffer, pH 5.6
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ng/mmol of sugar (approximate, headspace)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: phthalate buffer, pH 5.6, Rib-PO4 (final pH 5.4) [- below detection limit]
+    lever_value: ribose 5-phosphate
+    value: null
+    censor: nd_with_limit
+    limit: 0.1
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose 5-phosphate: 0.3 mmol in 6 mL
+      buffer: 0.3 M potassium hydrogen phthalate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: phthalate buffer, pH 5.6, ribose (final pH 5.3)
+    lever_value: ribose
+    value: 68
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose: 0.3 mmol in 6 mL
+      buffer: 0.3 M potassium hydrogen phthalate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: phthalate buffer, pH 5.6, IMP (final pH 5.4) [- below detection limit]
+    lever_value: inosine 5'-monophosphate
+    value: null
+    censor: nd_with_limit
+    limit: 0.1
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        inosine 5'-monophosphate: 0.3 mmol in 6 mL
+      buffer: 0.3 M potassium hydrogen phthalate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: mottram2002-44
+  odorant: bis(2-furylmethyl) disulfide
+  lever_class: sugar identity
+  lever: form of ribose (ribose 5-phosphate vs ribose vs IMP), phosphate buffer, pH 4.2
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ng/mmol of sugar (approximate, headspace)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: phosphate buffer, pH 4.2, Rib-PO4 (final pH 3.9) [tr]
+    lever_value: ribose 5-phosphate
+    value: null
+    censor: trace
+    limit: 0.5
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.2
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose 5-phosphate: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: phosphate buffer, pH 4.2, ribose (final pH 3.9)
+    lever_value: ribose
+    value: 7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.2
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: phosphate buffer, pH 4.2, IMP (final pH 4.5) [tr]
+    lever_value: inosine 5'-monophosphate
+    value: null
+    censor: trace
+    limit: 0.5
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.2
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        inosine 5'-monophosphate: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+- id: mottram2002-45
+  odorant: bis(2-furylmethyl) disulfide
+  lever_class: buffer
+  lever: 'buffer at initial pH 5.6: none vs phosphate vs phthalate, Rib-PO4'
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ng/mmol of sugar (approximate, headspace)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: unbuffered, Rib-PO4 (final pH 4.2)
+    lever_value: none (water)
+    value: 43
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose 5-phosphate: 0.3 mmol in 6 mL
+      buffer: none (water)
+      matrix: water
+      headspace: sealed, unstated
+  - label: phosphate buffer, pH 5.6, Rib-PO4 (final pH 5.5) [- below detection limit]
+    lever_value: 0.2 M pyrophosphate ('phosphate')
+    value: null
+    censor: nd_with_limit
+    limit: 0.1
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose 5-phosphate: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: phthalate buffer, pH 5.6, Rib-PO4 (final pH 5.4) [- below detection limit]
+    lever_value: 0.3 M potassium hydrogen phthalate
+    value: null
+    censor: nd_with_limit
+    limit: 0.1
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose 5-phosphate: 0.3 mmol in 6 mL
+      buffer: 0.3 M potassium hydrogen phthalate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: mottram2002-46
+  odorant: bis(2-furylmethyl) disulfide
+  lever_class: buffer
+  lever: 'buffer at initial pH 5.6: none vs phosphate vs phthalate, ribose'
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ng/mmol of sugar (approximate, headspace)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: unbuffered, ribose (final pH 3.9)
+    lever_value: none (water)
+    value: 80
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose: 0.3 mmol in 6 mL
+      buffer: none (water)
+      matrix: water
+      headspace: sealed, unstated
+  - label: phosphate buffer, pH 5.6, ribose (final pH 5.5)
+    lever_value: 0.2 M pyrophosphate ('phosphate')
+    value: 20
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: phthalate buffer, pH 5.6, ribose (final pH 5.3)
+    lever_value: 0.3 M potassium hydrogen phthalate
+    value: 68
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose: 0.3 mmol in 6 mL
+      buffer: 0.3 M potassium hydrogen phthalate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: mottram2002-47
+  odorant: bis(2-furylmethyl) disulfide
+  lever_class: buffer
+  lever: 'buffer at initial pH 5.6: none vs phosphate vs phthalate, IMP'
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ng/mmol of sugar (approximate, headspace)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: unbuffered, IMP (final pH 5.7) [- below detection limit]
+    lever_value: none (water)
+    value: null
+    censor: nd_with_limit
+    limit: 0.1
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        inosine 5'-monophosphate: 0.3 mmol in 6 mL
+      buffer: none (water)
+      matrix: water
+      headspace: sealed, unstated
+  - label: phosphate buffer, pH 5.6, IMP (final pH 5.7) [- below detection limit]
+    lever_value: 0.2 M pyrophosphate ('phosphate')
+    value: null
+    censor: nd_with_limit
+    limit: 0.1
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        inosine 5'-monophosphate: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: phthalate buffer, pH 5.6, IMP (final pH 5.4) [- below detection limit]
+    lever_value: 0.3 M potassium hydrogen phthalate
+    value: null
+    censor: nd_with_limit
+    limit: 0.1
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        inosine 5'-monophosphate: 0.3 mmol in 6 mL
+      buffer: 0.3 M potassium hydrogen phthalate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: mottram2002-48
+  odorant: bis(2-furylmethyl) disulfide
+  lever_class: pH
+  lever: pH of phosphate buffer, 5.6 vs 4.2, Rib-PO4
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ng/mmol of sugar (approximate, headspace)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: phosphate buffer, pH 5.6, Rib-PO4 (final pH 5.5) [- below detection limit]
+    lever_value: 5.6
+    value: null
+    censor: nd_with_limit
+    limit: 0.1
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose 5-phosphate: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: phosphate buffer, pH 4.2, Rib-PO4 (final pH 3.9) [tr]
+    lever_value: 4.2
+    value: null
+    censor: trace
+    limit: 0.5
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.2
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose 5-phosphate: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+- id: mottram2002-49
+  odorant: bis(2-furylmethyl) disulfide
+  lever_class: pH
+  lever: pH of phosphate buffer, 5.6 vs 4.2, ribose
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ng/mmol of sugar (approximate, headspace)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: phosphate buffer, pH 5.6, ribose (final pH 5.5)
+    lever_value: 5.6
+    value: 20
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: phosphate buffer, pH 4.2, ribose (final pH 3.9)
+    lever_value: 4.2
+    value: 7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.2
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        ribose: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+- id: mottram2002-50
+  odorant: bis(2-furylmethyl) disulfide
+  lever_class: pH
+  lever: pH of phosphate buffer, 5.6 vs 4.2, IMP
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ng/mmol of sugar (approximate, headspace)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: phosphate buffer, pH 5.6, IMP (final pH 5.7) [- below detection limit]
+    lever_value: 5.6
+    value: null
+    censor: nd_with_limit
+    limit: 0.1
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        inosine 5'-monophosphate: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: phosphate buffer, pH 4.2, IMP (final pH 4.5) [tr]
+    lever_value: 4.2
+    value: null
+    censor: trace
+    limit: 0.5
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.2
+      ph_basis: held
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.3 mmol in 6 mL
+        inosine 5'-monophosphate: 0.3 mmol in 6 mL
+      buffer: 0.2 M pyrophosphate ('phosphate')
+      matrix: buffer
+      headspace: sealed, unstated

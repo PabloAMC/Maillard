@@ -1,0 +1,187 @@
+source: "obata1960"
+pdf: "data/articles/obata1960.pdf"
+reader: "a"
+scope_note: "Table I only. Sulfur-source contrast at 6 h (longest; no main time stated). Values are cumulative H2S swept out of the flask. 100 ml water here vs 10 ml in mizutani1960, so cystine/cysteine arms are not duplicates."
+contrasts:
+  - id: "obata1960-1"
+    odorant: "hydrogen sulfide"
+    lever_class: "sulfur source"
+    lever: "sulfur compound heated (equal sulfur, 32 mg S), H2S liberated after 6 h"
+    focal: true
+    location: "Table I, p. 564"
+    digitised: false
+    unit: "ug H2S liberated"
+    quant_type: "absolute"
+    time_course_rule: "longest time"
+    arms:
+      - {label: "L-cystine, 6 h", lever_value: "L-cystine", value: 660, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 360, precursors: {"L-cystine": "as sulfur 32 mg"}, buffer: "none (hydrochlorides neutralized with 6 N NaOH)", matrix: "water (100 ml)", headspace: "inert (CO2 gas current through flask)"}}
+      - {label: "L-cysteine, 6 h", lever_value: "L-cysteine", value: 450, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 360, precursors: {"L-cysteine": "as sulfur 32 mg"}, buffer: "none (hydrochlorides neutralized with 6 N NaOH)", matrix: "water (100 ml)", headspace: "inert (CO2 gas current through flask)"}}
+      - {label: "djenkolic acid, 6 h", lever_value: "djenkolic acid", value: 338, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 360, precursors: {"djenkolic acid": "as sulfur 32 mg"}, buffer: "none (hydrochlorides neutralized with 6 N NaOH)", matrix: "water (100 ml)", headspace: "inert (CO2 gas current through flask)"}}
+      - {label: "L-cysteine mercaptal of acetaldehyde, 6 h", lever_value: "L-cysteine mercaptal of acetaldehyde", value: 315, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 360, precursors: {"L-cysteine mercaptal of acetaldehyde": "as sulfur 32 mg"}, buffer: "none (hydrochlorides neutralized with 6 N NaOH)", matrix: "water (100 ml)", headspace: "inert (CO2 gas current through flask)"}}
+      - {label: "L-cysteine mercaptal of n-butyraldehyde, 6 h", lever_value: "L-cysteine mercaptal of n-butyraldehyde", value: 240, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 360, precursors: {"L-cysteine mercaptal of n-butyraldehyde": "as sulfur 32 mg"}, buffer: "none (hydrochlorides neutralized with 6 N NaOH)", matrix: "water (100 ml)", headspace: "inert (CO2 gas current through flask)"}}
+      - {label: "L-cysteine mercaptal of benzaldehyde, 6 h", lever_value: "L-cysteine mercaptal of benzaldehyde", value: 620, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 360, precursors: {"L-cysteine mercaptal of benzaldehyde": "as sulfur 32 mg"}, buffer: "none (hydrochlorides neutralized with 6 N NaOH)", matrix: "water (100 ml)", headspace: "inert (CO2 gas current through flask)"}}
+      - {label: "L-cysteine mercaptal of furfural, 6 h", lever_value: "L-cysteine mercaptal of furfural", value: 900, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 360, precursors: {"L-cysteine mercaptal of furfural": "as sulfur 32 mg"}, buffer: "none (hydrochlorides neutralized with 6 N NaOH)", matrix: "water (100 ml)", headspace: "inert (CO2 gas current through flask)"}}
+      - {label: "L-cysteine mercaptole of pyruvic acid, 6 h", lever_value: "L-cysteine mercaptole of pyruvic acid", value: 412.5, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 360, precursors: {"L-cysteine mercaptole of pyruvic acid": "as sulfur 32 mg"}, buffer: "none (hydrochlorides neutralized with 6 N NaOH)", matrix: "water (100 ml)", headspace: "inert (CO2 gas current through flask)"}}
+      - {label: "L-cysteine mercaptole of levulinic acid, 6 h", lever_value: "L-cysteine mercaptole of levulinic acid", value: 403, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 360, precursors: {"L-cysteine mercaptole of levulinic acid": "as sulfur 32 mg"}, buffer: "none (hydrochlorides neutralized with 6 N NaOH)", matrix: "water (100 ml)", headspace: "inert (CO2 gas current through flask)"}}
+  - id: "obata1960-2"
+    odorant: "hydrogen sulfide"
+    lever_class: "time"
+    lever: "heating time at 120 C (1, 3, 6 h), L-cystine; cumulative H2S"
+    focal: false
+    location: "Table I, p. 564"
+    digitised: false
+    unit: "ug H2S liberated"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "L-cystine, 1 h", lever_value: 60, value: 21, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 60, precursors: {"L-cystine": "as sulfur 32 mg"}, buffer: "none (hydrochlorides neutralized with 6 N NaOH)", matrix: "water (100 ml)", headspace: "inert (CO2 gas current through flask)"}}
+      - {label: "L-cystine, 3 h", lever_value: 180, value: 248, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 180, precursors: {"L-cystine": "as sulfur 32 mg"}, buffer: "none (hydrochlorides neutralized with 6 N NaOH)", matrix: "water (100 ml)", headspace: "inert (CO2 gas current through flask)"}}
+      - {label: "L-cystine, 6 h", lever_value: 360, value: 660, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 360, precursors: {"L-cystine": "as sulfur 32 mg"}, buffer: "none (hydrochlorides neutralized with 6 N NaOH)", matrix: "water (100 ml)", headspace: "inert (CO2 gas current through flask)"}}
+  - id: "obata1960-3"
+    odorant: "hydrogen sulfide"
+    lever_class: "time"
+    lever: "heating time at 120 C (1, 3, 6 h), L-cysteine; cumulative H2S"
+    focal: false
+    location: "Table I, p. 564"
+    digitised: false
+    unit: "ug H2S liberated"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "L-cysteine, 1 h", lever_value: 60, value: 52, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 60, precursors: {"L-cysteine": "as sulfur 32 mg"}, buffer: "none (hydrochlorides neutralized with 6 N NaOH)", matrix: "water (100 ml)", headspace: "inert (CO2 gas current through flask)"}}
+      - {label: "L-cysteine, 3 h", lever_value: 180, value: 186, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 180, precursors: {"L-cysteine": "as sulfur 32 mg"}, buffer: "none (hydrochlorides neutralized with 6 N NaOH)", matrix: "water (100 ml)", headspace: "inert (CO2 gas current through flask)"}}
+      - {label: "L-cysteine, 6 h", lever_value: 360, value: 450, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 360, precursors: {"L-cysteine": "as sulfur 32 mg"}, buffer: "none (hydrochlorides neutralized with 6 N NaOH)", matrix: "water (100 ml)", headspace: "inert (CO2 gas current through flask)"}}
+  - id: "obata1960-4"
+    odorant: "hydrogen sulfide"
+    lever_class: "time"
+    lever: "heating time at 120 C (1, 3, 6 h), djenkolic acid; cumulative H2S"
+    focal: false
+    location: "Table I, p. 564"
+    digitised: false
+    unit: "ug H2S liberated"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "djenkolic acid, 1 h", lever_value: 60, value: 61, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 60, precursors: {"djenkolic acid": "as sulfur 32 mg"}, buffer: "none (hydrochlorides neutralized with 6 N NaOH)", matrix: "water (100 ml)", headspace: "inert (CO2 gas current through flask)"}}
+      - {label: "djenkolic acid, 3 h", lever_value: 180, value: 187, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 180, precursors: {"djenkolic acid": "as sulfur 32 mg"}, buffer: "none (hydrochlorides neutralized with 6 N NaOH)", matrix: "water (100 ml)", headspace: "inert (CO2 gas current through flask)"}}
+      - {label: "djenkolic acid, 6 h", lever_value: 360, value: 338, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 360, precursors: {"djenkolic acid": "as sulfur 32 mg"}, buffer: "none (hydrochlorides neutralized with 6 N NaOH)", matrix: "water (100 ml)", headspace: "inert (CO2 gas current through flask)"}}
+  - id: "obata1960-5"
+    odorant: "hydrogen sulfide"
+    lever_class: "time"
+    lever: "heating time at 120 C (1, 3, 6 h), L-cysteine mercaptal of acetaldehyde; cumulative H2S"
+    focal: false
+    location: "Table I, p. 564"
+    digitised: false
+    unit: "ug H2S liberated"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "L-cysteine mercaptal of acetaldehyde, 1 h", lever_value: 60, value: 54, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 60, precursors: {"L-cysteine mercaptal of acetaldehyde": "as sulfur 32 mg"}, buffer: "none (hydrochlorides neutralized with 6 N NaOH)", matrix: "water (100 ml)", headspace: "inert (CO2 gas current through flask)"}}
+      - {label: "L-cysteine mercaptal of acetaldehyde, 3 h", lever_value: 180, value: 175, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 180, precursors: {"L-cysteine mercaptal of acetaldehyde": "as sulfur 32 mg"}, buffer: "none (hydrochlorides neutralized with 6 N NaOH)", matrix: "water (100 ml)", headspace: "inert (CO2 gas current through flask)"}}
+      - {label: "L-cysteine mercaptal of acetaldehyde, 6 h", lever_value: 360, value: 315, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 360, precursors: {"L-cysteine mercaptal of acetaldehyde": "as sulfur 32 mg"}, buffer: "none (hydrochlorides neutralized with 6 N NaOH)", matrix: "water (100 ml)", headspace: "inert (CO2 gas current through flask)"}}
+  - id: "obata1960-6"
+    odorant: "hydrogen sulfide"
+    lever_class: "time"
+    lever: "heating time at 120 C (1, 3, 6 h), L-cysteine mercaptal of n-butyraldehyde; cumulative H2S"
+    focal: false
+    location: "Table I, p. 564"
+    digitised: false
+    unit: "ug H2S liberated"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "L-cysteine mercaptal of n-butyraldehyde, 1 h", lever_value: 60, value: 41, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 60, precursors: {"L-cysteine mercaptal of n-butyraldehyde": "as sulfur 32 mg"}, buffer: "none (hydrochlorides neutralized with 6 N NaOH)", matrix: "water (100 ml)", headspace: "inert (CO2 gas current through flask)"}}
+      - {label: "L-cysteine mercaptal of n-butyraldehyde, 3 h", lever_value: 180, value: 129, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 180, precursors: {"L-cysteine mercaptal of n-butyraldehyde": "as sulfur 32 mg"}, buffer: "none (hydrochlorides neutralized with 6 N NaOH)", matrix: "water (100 ml)", headspace: "inert (CO2 gas current through flask)"}}
+      - {label: "L-cysteine mercaptal of n-butyraldehyde, 6 h", lever_value: 360, value: 240, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 360, precursors: {"L-cysteine mercaptal of n-butyraldehyde": "as sulfur 32 mg"}, buffer: "none (hydrochlorides neutralized with 6 N NaOH)", matrix: "water (100 ml)", headspace: "inert (CO2 gas current through flask)"}}
+  - id: "obata1960-7"
+    odorant: "hydrogen sulfide"
+    lever_class: "time"
+    lever: "heating time at 120 C (1, 3, 6 h), L-cysteine mercaptal of benzaldehyde; cumulative H2S"
+    focal: false
+    location: "Table I, p. 564"
+    digitised: false
+    unit: "ug H2S liberated"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "L-cysteine mercaptal of benzaldehyde, 1 h", lever_value: 60, value: 75, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 60, precursors: {"L-cysteine mercaptal of benzaldehyde": "as sulfur 32 mg"}, buffer: "none (hydrochlorides neutralized with 6 N NaOH)", matrix: "water (100 ml)", headspace: "inert (CO2 gas current through flask)"}}
+      - {label: "L-cysteine mercaptal of benzaldehyde, 3 h", lever_value: 180, value: 308, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 180, precursors: {"L-cysteine mercaptal of benzaldehyde": "as sulfur 32 mg"}, buffer: "none (hydrochlorides neutralized with 6 N NaOH)", matrix: "water (100 ml)", headspace: "inert (CO2 gas current through flask)"}}
+      - {label: "L-cysteine mercaptal of benzaldehyde, 6 h", lever_value: 360, value: 620, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 360, precursors: {"L-cysteine mercaptal of benzaldehyde": "as sulfur 32 mg"}, buffer: "none (hydrochlorides neutralized with 6 N NaOH)", matrix: "water (100 ml)", headspace: "inert (CO2 gas current through flask)"}}
+  - id: "obata1960-8"
+    odorant: "hydrogen sulfide"
+    lever_class: "time"
+    lever: "heating time at 120 C (1, 3, 6 h), L-cysteine mercaptal of furfural; cumulative H2S"
+    focal: false
+    location: "Table I, p. 564"
+    digitised: false
+    unit: "ug H2S liberated"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "L-cysteine mercaptal of furfural, 1 h", lever_value: 60, value: 137.5, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 60, precursors: {"L-cysteine mercaptal of furfural": "as sulfur 32 mg"}, buffer: "none (hydrochlorides neutralized with 6 N NaOH)", matrix: "water (100 ml)", headspace: "inert (CO2 gas current through flask)"}}
+      - {label: "L-cysteine mercaptal of furfural, 3 h", lever_value: 180, value: 450, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 180, precursors: {"L-cysteine mercaptal of furfural": "as sulfur 32 mg"}, buffer: "none (hydrochlorides neutralized with 6 N NaOH)", matrix: "water (100 ml)", headspace: "inert (CO2 gas current through flask)"}}
+      - {label: "L-cysteine mercaptal of furfural, 6 h", lever_value: 360, value: 900, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 360, precursors: {"L-cysteine mercaptal of furfural": "as sulfur 32 mg"}, buffer: "none (hydrochlorides neutralized with 6 N NaOH)", matrix: "water (100 ml)", headspace: "inert (CO2 gas current through flask)"}}
+  - id: "obata1960-9"
+    odorant: "hydrogen sulfide"
+    lever_class: "time"
+    lever: "heating time at 120 C (1, 3, 6 h), L-cysteine mercaptole of pyruvic acid; cumulative H2S"
+    focal: false
+    location: "Table I, p. 564"
+    digitised: false
+    unit: "ug H2S liberated"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "L-cysteine mercaptole of pyruvic acid, 1 h", lever_value: 60, value: 105, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 60, precursors: {"L-cysteine mercaptole of pyruvic acid": "as sulfur 32 mg"}, buffer: "none (hydrochlorides neutralized with 6 N NaOH)", matrix: "water (100 ml)", headspace: "inert (CO2 gas current through flask)"}}
+      - {label: "L-cysteine mercaptole of pyruvic acid, 3 h", lever_value: 180, value: 274, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 180, precursors: {"L-cysteine mercaptole of pyruvic acid": "as sulfur 32 mg"}, buffer: "none (hydrochlorides neutralized with 6 N NaOH)", matrix: "water (100 ml)", headspace: "inert (CO2 gas current through flask)"}}
+      - {label: "L-cysteine mercaptole of pyruvic acid, 6 h", lever_value: 360, value: 412.5, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 360, precursors: {"L-cysteine mercaptole of pyruvic acid": "as sulfur 32 mg"}, buffer: "none (hydrochlorides neutralized with 6 N NaOH)", matrix: "water (100 ml)", headspace: "inert (CO2 gas current through flask)"}}
+  - id: "obata1960-10"
+    odorant: "hydrogen sulfide"
+    lever_class: "time"
+    lever: "heating time at 120 C (1, 3, 6 h), L-cysteine mercaptole of levulinic acid; cumulative H2S"
+    focal: false
+    location: "Table I, p. 564"
+    digitised: false
+    unit: "ug H2S liberated"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "L-cysteine mercaptole of levulinic acid, 1 h", lever_value: 60, value: 98, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 60, precursors: {"L-cysteine mercaptole of levulinic acid": "as sulfur 32 mg"}, buffer: "none (hydrochlorides neutralized with 6 N NaOH)", matrix: "water (100 ml)", headspace: "inert (CO2 gas current through flask)"}}
+      - {label: "L-cysteine mercaptole of levulinic acid, 3 h", lever_value: 180, value: 250, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 180, precursors: {"L-cysteine mercaptole of levulinic acid": "as sulfur 32 mg"}, buffer: "none (hydrochlorides neutralized with 6 N NaOH)", matrix: "water (100 ml)", headspace: "inert (CO2 gas current through flask)"}}
+      - {label: "L-cysteine mercaptole of levulinic acid, 6 h", lever_value: 360, value: 403, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: null, ph_basis: "unstated", temp_C: 120, time_min: 360, precursors: {"L-cysteine mercaptole of levulinic acid": "as sulfur 32 mg"}, buffer: "none (hydrochlorides neutralized with 6 N NaOH)", matrix: "water (100 ml)", headspace: "inert (CO2 gas current through flask)"}}

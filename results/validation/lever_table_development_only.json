@@ -1,0 +1,6392 @@
+{
+  "artifact": "lever_table",
+  "title": "The lever table from data, DEVELOPMENT laboratories only (step 5's rival)",
+  "prereg": "docs/reference/lever_table/PREREG.md",
+  "split": {
+    "split_sha256": "022d0cab5a53ececb27a1fc6837ff275fbab177cf2161ae1f8a4ed0341f273a7",
+    "new_labs": 0
+  },
+  "skipped": {
+    "mixed-lever contrasts (no single-lever cell)": 31,
+    "fewer than two usable arms": 47,
+    "sugar-identity contrasts whose levels are not sugars (fed intermediates)": 2,
+    "rates, half-lives or storage losses (PREREG amendment A1)": 42
+  },
+  "counts": {
+    "sources": 17,
+    "observations": 147,
+    "labs": 7
+  },
+  "cells": [
+    {
+      "compound": "2-Furfurylthiol (FFT)",
+      "lever_class": "buffer",
+      "band": "all",
+      "contrasts": 3,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "reading_mottram_parker"
+      ],
+      "peak_area_share": 1.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "buffer",
+        "water"
+      ],
+      "temperature_range_C": [
+        140.0,
+        140.0
+      ],
+      "rows": [
+        {
+          "source": "mottram2002",
+          "contrast": "mottram2002-18",
+          "lab": "reading_mottram_parker",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "phosphate",
+              "against": "none",
+              "y": -0.8243463172855212,
+              "v": 0.006269669725654501
+            },
+            {
+              "level": "phthalate",
+              "against": "none",
+              "y": -0.5955487077138373,
+              "v": 0.006269669725654501
+            }
+          ],
+          "focal": true,
+          "peak_area": true
+        },
+        {
+          "source": "mottram2002",
+          "contrast": "mottram2002-19",
+          "lab": "reading_mottram_parker",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "phosphate",
+              "against": "none",
+              "y": -0.17360245865198642,
+              "v": 0.006269669725654501
+            },
+            {
+              "level": "phthalate",
+              "against": "none",
+              "y": 0.1323627546875068,
+              "v": 0.006269669725654501
+            }
+          ],
+          "focal": true,
+          "peak_area": true
+        },
+        {
+          "source": "mottram2002",
+          "contrast": "mottram2002-20",
+          "lab": "reading_mottram_parker",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "phosphate",
+              "against": "none",
+              "y": 0.24778448371075612,
+              "v": 0.006269669725654501
+            },
+            {
+              "level": "phthalate",
+              "against": "none",
+              "y": 0.5581545056288808,
+              "v": 0.006269669725654501
+            }
+          ],
+          "focal": true,
+          "peak_area": true
+        }
+      ],
+      "reference": "phosphate",
+      "fit": {
+        "connected": true,
+        "reference": "phosphate",
+        "levels": {
+          "none": {
+            "estimate": 0.2472207321235818,
+            "ci90": [
+              -0.20644468539409566,
+              0.697863847983318
+            ],
+            "new_lab_pi90": [
+              -0.6541672782467419,
+              1.1455466784985127
+            ],
+            "p_same_sign_new_lab": 0.6933040308445059,
+            "new_lab_pi90_width": 1.7997139567452547,
+            "labs": 1,
+            "contrasts": 6,
+            "reading": "too few laboratories"
+          },
+          "phthalate": {
+            "estimate": 0.2787609102901445,
+            "ci90": [
+              -0.1749779002907101,
+              0.7293302446088991
+            ],
+            "new_lab_pi90": [
+              -0.6226629772353739,
+              1.176990403767606
+            ],
+            "p_same_sign_new_lab": 0.7149260785876893,
+            "new_lab_pi90_width": 1.79965338100298,
+            "labs": 1,
+            "contrasts": 3,
+            "reading": "too few laboratories"
+          }
+        },
+        "reml_scales": [
+          0.4481404746557168
+        ]
+      },
+      "reading": "per level"
+    },
+    {
+      "compound": "2-Furfurylthiol (FFT)",
+      "lever_class": "lipid",
+      "band": "all",
+      "contrasts": 2,
+      "studies": 2,
+      "labs": 1,
+      "lab_names": [
+        "reading_mottram_parker"
+      ],
+      "peak_area_share": 1.0,
+      "focal_share": 0.0,
+      "matrices": [
+        "buffer"
+      ],
+      "temperature_range_C": [
+        140.0,
+        140.0
+      ],
+      "rows": [
+        {
+          "source": "elmore2002",
+          "contrast": "elmore2002-2",
+          "lab": "reading_mottram_parker",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "methyl linoleate",
+              "against": "none",
+              "y": -0.024268574726936887,
+              "v": 0.022624285959219177
+            },
+            {
+              "level": "methyl alpha-linolenate",
+              "against": "none",
+              "y": -0.7333389059672815,
+              "v": 0.020324001883007942
+            }
+          ],
+          "focal": false,
+          "peak_area": true
+        },
+        {
+          "source": "farmer1990",
+          "contrast": "farmer1990-1",
+          "lab": "reading_mottram_parker",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "beef triglyceride",
+              "against": "none",
+              "y": -0.1769572503334551,
+              "v": 0.0012881530664152238
+            },
+            {
+              "level": "beef phospholipid",
+              "against": "none",
+              "y": -0.20101663452661622,
+              "v": 0.0034299292069250816
+            },
+            {
+              "level": "egg phosphatidylcholine",
+              "against": "none",
+              "y": -0.20934202331074658,
+              "v": 0.001056677730271446
+            },
+            {
+              "level": "egg phosphatidylethanolamine",
+              "against": "none",
+              "y": -0.14560926856670076,
+              "v": 0.002612399806631644
+            }
+          ],
+          "focal": false,
+          "peak_area": true
+        }
+      ],
+      "reference": "none",
+      "fit": {
+        "connected": true,
+        "reference": "none",
+        "levels": {
+          "beef phospholipid": {
+            "estimate": -0.20029777541827762,
+            "ci90": [
+              -0.5001916221800415,
+              0.11125960481196155
+            ],
+            "new_lab_pi90": [
+              -0.6224758704432449,
+              0.23380832152612557
+            ],
+            "p_same_sign_new_lab": 0.885611422560147,
+            "new_lab_pi90_width": 0.8562841919693704,
+            "labs": 1,
+            "contrasts": 1,
+            "reading": "too few laboratories"
+          },
+          "beef triglyceride": {
+            "estimate": -0.17644340337850678,
+            "ci90": [
+              -0.4701190851920763,
+              0.1291615584785048
+            ],
+            "new_lab_pi90": [
+              -0.5943812929247131,
+              0.2534519103324314
+            ],
+            "p_same_sign_new_lab": 0.8774373165402765,
+            "new_lab_pi90_width": 0.8478332032571445,
+            "labs": 1,
+            "contrasts": 1,
+            "reading": "too few laboratories"
+          },
+          "egg phosphatidylcholine": {
+            "estimate": -0.20883178040110179,
+            "ci90": [
+              -0.5015767619902544,
+              0.09637387763762341
+            ],
+            "new_lab_pi90": [
+              -0.6261093709297278,
+              0.22093717868363658
+            ],
+            "p_same_sign_new_lab": 0.8937072838843433,
+            "new_lab_pi90_width": 0.8470465496133645,
+            "labs": 1,
+            "contrasts": 1,
+            "reading": "too few laboratories"
+          },
+          "egg phosphatidylethanolamine": {
+            "estimate": -0.14499826987805703,
+            "ci90": [
+              -0.44278219651817774,
+              0.16392874958694825
+            ],
+            "new_lab_pi90": [
+              -0.5659458760753793,
+              0.2871411500546212
+            ],
+            "p_same_sign_new_lab": 0.8518346336759975,
+            "new_lab_pi90_width": 0.8530870261300005,
+            "labs": 1,
+            "contrasts": 1,
+            "reading": "too few laboratories"
+          },
+          "methyl alpha-linolenate": {
+            "estimate": -0.7300115504603378,
+            "ci90": [
+              -1.0920872301060895,
+              -0.3556335976531799
+            ],
+            "new_lab_pi90": [
+              -1.1883684056786235,
+              -0.25608721477503277
+            ],
+            "p_same_sign_new_lab": 0.9756507368720714,
+            "new_lab_pi90_width": 0.9322811909035906,
+            "labs": 1,
+            "contrasts": 1,
+            "reading": "too few laboratories"
+          },
+          "methyl linoleate": {
+            "estimate": -0.022028655545080662,
+            "ci90": [
+              -0.3962311141008519,
+              0.3581191054999358
+            ],
+            "new_lab_pi90": [
+              -0.4903290314987207,
+              0.4538782030668669
+            ],
+            "p_same_sign_new_lab": 0.543241840501305,
+            "new_lab_pi90_width": 0.9442072345655876,
+            "labs": 1,
+            "contrasts": 1,
+            "reading": "too few laboratories"
+          }
+        },
+        "reml_scales": [
+          0.0
+        ]
+      },
+      "reading": "per level"
+    },
+    {
+      "compound": "2-Furfurylthiol (FFT)",
+      "lever_class": "matrix",
+      "band": "all",
+      "contrasts": 1,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "nestle_rc_and_cerny_firmenich"
+      ],
+      "peak_area_share": 0.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "buffer",
+        "other (choline chloride/glycerol 1:1 molar)",
+        "other (glycerol)"
+      ],
+      "temperature_range_C": [
+        110.0,
+        110.0
+      ],
+      "rows": [
+        {
+          "source": "us10076126",
+          "contrast": "us10076126-2",
+          "lab": "nestle_rc_and_cerny_firmenich",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "glycerol",
+              "against": "choline chloride/glycerol",
+              "y": 0.2402356632939977,
+              "v": 0.011269669725654501
+            },
+            {
+              "level": "buffer",
+              "against": "choline chloride/glycerol",
+              "y": -1.5030965726888468,
+              "v": 0.011269669725654501
+            }
+          ],
+          "focal": true,
+          "peak_area": false
+        }
+      ],
+      "reference": "buffer",
+      "fit": {
+        "connected": true,
+        "reference": "buffer",
+        "levels": {
+          "choline chloride/glycerol": {
+            "estimate": 1.4955049360170016,
+            "ci90": [
+              1.120556406688638,
+              1.8141654441398332
+            ],
+            "new_lab_pi90": [
+              0.9988193495010813,
+              1.9290983253552352
+            ],
+            "p_same_sign_new_lab": 0.9942089508336032,
+            "new_lab_pi90_width": 0.9302789758541539,
+            "labs": 1,
+            "contrasts": 2,
+            "reading": "too few laboratories"
+          },
+          "glycerol": {
+            "estimate": 1.7353478601549595,
+            "ci90": [
+              1.3586061595309185,
+              2.052866795102252
+            ],
+            "new_lab_pi90": [
+              1.2368803876492926,
+              2.1673586919086025
+            ],
+            "p_same_sign_new_lab": 0.9962559126018986,
+            "new_lab_pi90_width": 0.9304783042593099,
+            "labs": 1,
+            "contrasts": 1,
+            "reading": "too few laboratories"
+          }
+        },
+        "reml_scales": [
+          0.0
+        ]
+      },
+      "reading": "per level"
+    },
+    {
+      "compound": "2-Furfurylthiol (FFT)",
+      "lever_class": "pH",
+      "band": "pH 4.5-6, held",
+      "contrasts": 4,
+      "studies": 2,
+      "labs": 1,
+      "lab_names": [
+        "reading_mottram_parker"
+      ],
+      "peak_area_share": 1.0,
+      "focal_share": 0.75,
+      "matrices": [
+        "buffer"
+      ],
+      "temperature_range_C": [
+        140.0,
+        140.0
+      ],
+      "rows": [
+        {
+          "source": "meynier1995",
+          "contrast": "meynier1995-2",
+          "lab": "reading_mottram_parker",
+          "y": -0.4337283542800144,
+          "v": 0.0012539339451309002,
+          "range": [
+            4.5,
+            6.5
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": true
+        },
+        {
+          "source": "mottram2002",
+          "contrast": "mottram2002-21",
+          "lab": "reading_mottram_parker",
+          "y": -0.48387880462850663,
+          "v": 0.0031988110845176053,
+          "range": [
+            4.2,
+            5.6
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true
+        },
+        {
+          "source": "mottram2002",
+          "contrast": "mottram2002-23",
+          "lab": "reading_mottram_parker",
+          "y": -0.1833207385229354,
+          "v": 0.0031988110845176053,
+          "range": [
+            4.2,
+            5.6
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true
+        },
+        {
+          "source": "mottram2002",
+          "contrast": "mottram2002-25",
+          "lab": "reading_mottram_parker",
+          "y": -1.669458691656019,
+          "v": 0.0031988110845176053,
+          "range": [
+            4.2,
+            5.6
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true
+        }
+      ],
+      "step": "+1 pH unit",
+      "fit": {
+        "estimate": -0.6832848884233574,
+        "ci90": [
+          -1.2905697422192042,
+          -0.06142654268068283
+        ],
+        "new_lab_pi90": [
+          -1.9313947298264746,
+          0.5782605946912279
+        ],
+        "p_same_sign_new_lab": 0.8337205119510979,
+        "new_lab_pi90_width": 2.5096553245177025,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.6332026601426078
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": -0.6868739916807506,
+            "new_lab_pi90": [
+              -1.615056318414468,
+              0.24479043610507886
+            ]
+          },
+          "1.0": {
+            "estimate": -0.6779399322392808,
+            "new_lab_pi90": [
+              -2.304820442672771,
+              0.9928184334631609
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 0
+        },
+        "incidental_only": {
+          "contrasts": 1,
+          "estimate": -0.43233350118583286,
+          "ci90": [
+            -0.9249758665887334,
+            0.08242023743669313
+          ]
+        },
+        "non_monotone_contrasts": 0
+      },
+      "reading": "too few laboratories",
+      "lolo": null
+    },
+    {
+      "compound": "2-Furfurylthiol (FFT)",
+      "lever_class": "pH",
+      "band": "pH 4.5-6, initial or label",
+      "contrasts": 4,
+      "studies": 3,
+      "labs": 3,
+      "lab_names": [
+        "dfa_garching",
+        "ho_network",
+        "nestle_rc_and_cerny_firmenich"
+      ],
+      "peak_area_share": 0.5,
+      "focal_share": 0.75,
+      "matrices": [
+        "buffer",
+        "water"
+      ],
+      "temperature_range_C": [
+        145.0,
+        160.0
+      ],
+      "rows": [
+        {
+          "source": "cerny2007",
+          "contrast": "cerny2007-2",
+          "lab": "nestle_rc_and_cerny_firmenich",
+          "y": -0.15557925716296214,
+          "v": 0.0014330673658638864,
+          "range": [
+            4.0,
+            6.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true
+        },
+        {
+          "source": "hofmann1998",
+          "contrast": "hofmann1998-3",
+          "lab": "dfa_garching",
+          "y": -0.32016355907306576,
+          "v": 0.0003918543578534064,
+          "range": [
+            3.0,
+            7.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": false
+        },
+        {
+          "source": "hofmann1998",
+          "contrast": "hofmann1998-23",
+          "lab": "dfa_garching",
+          "y": 0.08707061932790189,
+          "v": 0.0003918543578534064,
+          "range": [
+            3.0,
+            7.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": false
+        },
+        {
+          "source": "tai1998",
+          "contrast": "tai1998-1",
+          "lab": "ho_network",
+          "y": 0.06942531414236082,
+          "v": 0.0006966299695171669,
+          "range": [
+            3.0,
+            6.0
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": false,
+          "peak_area": true
+        }
+      ],
+      "step": "+1 pH unit",
+      "fit": {
+        "estimate": -0.07762731211991322,
+        "ci90": [
+          -0.31586159099532085,
+          0.16243198724327865
+        ],
+        "new_lab_pi90": [
+          -0.596979759664633,
+          0.44341110715206083
+        ],
+        "p_same_sign_new_lab": 0.6211951821683601,
+        "new_lab_pi90_width": 1.040390866816694,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.18883946770417823
+        ],
+        "prior_dominated": false,
+        "sensitivity": {
+          "0.25": {
+            "estimate": -0.07774818506496534,
+            "new_lab_pi90": [
+              -0.509722771907518,
+              0.3552925324478963
+            ]
+          },
+          "1.0": {
+            "estimate": -0.07755596695659932,
+            "new_lab_pi90": [
+              -0.6603478010865346,
+              0.5074140011379965
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 2,
+          "estimate": -0.11565647883062163,
+          "ci90": [
+            -0.6611048101016155,
+            0.4336915652321324
+          ]
+        },
+        "incidental_only": {
+          "contrasts": 1,
+          "estimate": 0.06921738523650997,
+          "ci90": [
+            -0.43501312383967916,
+            0.5698732839994282
+          ]
+        },
+        "non_monotone_contrasts": 1
+      },
+      "reading": "direction unclear",
+      "lolo": null
+    },
+    {
+      "compound": "2-Furfurylthiol (FFT)",
+      "lever_class": "pH",
+      "band": "pH 6-7.5, initial or label",
+      "contrasts": 1,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "ho_network"
+      ],
+      "peak_area_share": 0.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "water"
+      ],
+      "temperature_range_C": [
+        120.0,
+        120.0
+      ],
+      "rows": [
+        {
+          "source": "zhou2023",
+          "contrast": "zhou2023-2",
+          "lab": "ho_network",
+          "y": -0.11432916408841304,
+          "v": 2.2123144923095834e-05,
+          "range": [
+            6.0,
+            8.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": false
+        }
+      ],
+      "step": "+1 pH unit",
+      "fit": {
+        "estimate": -0.11403298865199599,
+        "ci90": [
+          -0.612289927501206,
+          0.3901894274521169
+        ],
+        "new_lab_pi90": [
+          -0.8252042846170557,
+          0.6031446251199462
+        ],
+        "p_same_sign_new_lab": 0.731975506896287,
+        "new_lab_pi90_width": 1.428348909737002,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.0
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": -0.11417623520564736,
+            "new_lab_pi90": [
+              -0.5174548442877074,
+              0.2906832918346125
+            ]
+          },
+          "1.0": {
+            "estimate": -0.11374115326616702,
+            "new_lab_pi90": [
+              -1.3431129351418163,
+              1.1342153463179607
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 1,
+          "estimate": -0.11403298865199599,
+          "ci90": [
+            -0.612289927501206,
+            0.3901894274521169
+          ]
+        },
+        "incidental_only": {
+          "contrasts": 0
+        },
+        "non_monotone_contrasts": 0
+      },
+      "reading": "too few laboratories",
+      "lolo": null
+    },
+    {
+      "compound": "2-Furfurylthiol (FFT)",
+      "lever_class": "pH",
+      "band": "pH <4.5, initial or label",
+      "contrasts": 2,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "dfa_garching"
+      ],
+      "peak_area_share": 0.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "buffer"
+      ],
+      "temperature_range_C": [
+        145.0,
+        145.0
+      ],
+      "rows": [
+        {
+          "source": "hofmann1998",
+          "contrast": "hofmann1998-5",
+          "lab": "dfa_garching",
+          "y": 0.3010299956639812,
+          "v": 0.0015674174314136255,
+          "range": [
+            3.0,
+            5.0
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": true,
+          "peak_area": false
+        },
+        {
+          "source": "hofmann1998",
+          "contrast": "hofmann1998-7",
+          "lab": "dfa_garching",
+          "y": 0.3010299956639812,
+          "v": 0.0015674174314136255,
+          "range": [
+            3.0,
+            5.0
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": true,
+          "peak_area": false
+        }
+      ],
+      "step": "+1 pH unit",
+      "fit": {
+        "estimate": 0.3006133607555277,
+        "ci90": [
+          -0.042904553409213016,
+          0.6346746368774336
+        ],
+        "new_lab_pi90": [
+          -0.1985849788339188,
+          0.7904044651192575
+        ],
+        "p_same_sign_new_lab": 0.9078299060249411,
+        "new_lab_pi90_width": 0.9889894439531763,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.0
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": 0.30080310342744326,
+            "new_lab_pi90": [
+              -0.0009827593334023282,
+              0.599878601099149
+            ]
+          },
+          "1.0": {
+            "estimate": 0.3002823790091426,
+            "new_lab_pi90": [
+              -0.5271348041243293,
+              1.0984078374461332
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 2,
+          "estimate": 0.3006133607555277,
+          "ci90": [
+            -0.042904553409213016,
+            0.6346746368774336
+          ]
+        },
+        "incidental_only": {
+          "contrasts": 0
+        },
+        "non_monotone_contrasts": 2
+      },
+      "reading": "too few laboratories",
+      "lolo": null
+    },
+    {
+      "compound": "2-Furfurylthiol (FFT)",
+      "lever_class": "sugar identity",
+      "band": "all",
+      "contrasts": 8,
+      "studies": 2,
+      "labs": 2,
+      "lab_names": [
+        "dfa_garching",
+        "reading_mottram_parker"
+      ],
+      "peak_area_share": 0.5,
+      "focal_share": 1.0,
+      "matrices": [
+        "buffer",
+        "other (silica gel, dry-heated)",
+        "water"
+      ],
+      "temperature_range_C": [
+        140.0,
+        180.0
+      ],
+      "rows": [
+        {
+          "source": "hofmann1998",
+          "contrast": "hofmann1998-1",
+          "lab": "dfa_garching",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "xylose",
+              "against": "ribose",
+              "y": -0.10051413727688163,
+              "v": 0.006269669725654501
+            },
+            {
+              "level": "fructose",
+              "against": "ribose",
+              "y": -0.577635391996544,
+              "v": 0.006269669725654501
+            },
+            {
+              "level": "glucose",
+              "against": "ribose",
+              "y": -0.6356273389742308,
+              "v": 0.006269669725654501
+            },
+            {
+              "level": "glucose-6-phosphate",
+              "against": "ribose",
+              "y": -1.128542860877125,
+              "v": 0.006269669725654501
+            },
+            {
+              "level": "rhamnose",
+              "against": "ribose",
+              "y": -1.1796953833245065,
+              "v": 0.006269669725654501
+            },
+            {
+              "level": "maltose",
+              "against": "ribose",
+              "y": -1.3046341199328064,
+              "v": 0.006269669725654501
+            }
+          ],
+          "focal": true,
+          "peak_area": false
+        },
+        {
+          "source": "hofmann1998",
+          "contrast": "hofmann1998-15",
+          "lab": "dfa_garching",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "glucose",
+              "against": "ribose",
+              "y": -1.514737442325631,
+              "v": 0.006269669725654501
+            },
+            {
+              "level": "rhamnose",
+              "against": "ribose",
+              "y": -2.0588054866759067,
+              "v": 0.006269669725654501
+            }
+          ],
+          "focal": true,
+          "peak_area": false
+        },
+        {
+          "source": "hofmann1998",
+          "contrast": "hofmann1998-17",
+          "lab": "dfa_garching",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "glucose",
+              "against": "ribose",
+              "y": -0.3010299956639812,
+              "v": 0.006269669725654501
+            },
+            {
+              "level": "rhamnose",
+              "against": "ribose",
+              "y": -1.0791812460476249,
+              "v": 0.006269669725654501
+            }
+          ],
+          "focal": true,
+          "peak_area": false
+        },
+        {
+          "source": "hofmann1998",
+          "contrast": "hofmann1998-19",
+          "lab": "dfa_garching",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "glucose",
+              "against": "ribose",
+              "y": -1.8415382292480367,
+              "v": 0.006269669725654501
+            },
+            {
+              "level": "rhamnose",
+              "against": "ribose",
+              "y": -2.385606273598312,
+              "v": 0.006269669725654501
+            }
+          ],
+          "focal": true,
+          "peak_area": false
+        },
+        {
+          "source": "mottram2002",
+          "contrast": "mottram2002-14",
+          "lab": "reading_mottram_parker",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "ribose",
+              "against": "ribose 5-phosphate",
+              "y": -0.10318748643743803,
+              "v": 0.006269669725654501
+            },
+            {
+              "level": "inosine 5'-monophosphate",
+              "against": "ribose 5-phosphate",
+              "y": -2.405884641468882,
+              "v": 0.006269669725654501
+            }
+          ],
+          "focal": true,
+          "peak_area": true
+        },
+        {
+          "source": "mottram2002",
+          "contrast": "mottram2002-15",
+          "lab": "reading_mottram_parker",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "ribose",
+              "against": "ribose 5-phosphate",
+              "y": 0.5475563721960968,
+              "v": 0.006269669725654501
+            },
+            {
+              "level": "inosine 5'-monophosphate",
+              "against": "ribose 5-phosphate",
+              "y": -1.3337538404726048,
+              "v": 0.006269669725654501
+            }
+          ],
+          "focal": true,
+          "peak_area": true
+        },
+        {
+          "source": "mottram2002",
+          "contrast": "mottram2002-16",
+          "lab": "reading_mottram_parker",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "ribose",
+              "against": "ribose 5-phosphate",
+              "y": 0.624723975963906,
+              "v": 0.006269669725654501
+            },
+            {
+              "level": "inosine 5'-monophosphate",
+              "against": "ribose 5-phosphate",
+              "y": -1.252181428126164,
+              "v": 0.006269669725654501
+            }
+          ],
+          "focal": true,
+          "peak_area": true
+        },
+        {
+          "source": "mottram2002",
+          "contrast": "mottram2002-17",
+          "lab": "reading_mottram_parker",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "ribose",
+              "against": "ribose 5-phosphate",
+              "y": 0.12677507964829715,
+              "v": 0.006269669725654501
+            },
+            {
+              "level": "inosine 5'-monophosphate",
+              "against": "ribose 5-phosphate",
+              "y": 0.326058001365912,
+              "v": 0.006269669725654501
+            }
+          ],
+          "focal": true,
+          "peak_area": true
+        }
+      ],
+      "reference": "glucose",
+      "fit": {
+        "connected": true,
+        "reference": "glucose",
+        "levels": {
+          "fructose": {
+            "estimate": 0.17461969572193642,
+            "ci90": [
+              -0.8520207674099483,
+              1.1984552016964118
+            ],
+            "new_lab_pi90": [
+              -1.4194628760512937,
+              1.7657902042353466
+            ],
+            "p_same_sign_new_lab": 0.5743410162149902,
+            "new_lab_pi90_width": 3.1852530802866403,
+            "labs": 1,
+            "contrasts": 1,
+            "reading": "too few laboratories"
+          },
+          "glucose-6-phosphate": {
+            "estimate": -0.36059285951837555,
+            "ci90": [
+              -1.3847941324589494,
+              0.6656664771500405
+            ],
+            "new_lab_pi90": [
+              -1.9521809797241654,
+              1.2331053946014527
+            ],
+            "p_same_sign_new_lab": 0.6503881253639575,
+            "new_lab_pi90_width": 3.185286374325618,
+            "labs": 1,
+            "contrasts": 1,
+            "reading": "too few laboratories"
+          },
+          "inosine 5'-monophosphate": {
+            "estimate": -0.4071471825986101,
+            "ci90": [
+              -1.2469446856859185,
+              0.4283036154769588
+            ],
+            "new_lab_pi90": [
+              -1.8882306666371476,
+              1.0694591179392676
+            ],
+            "p_same_sign_new_lab": 0.6807461309578073,
+            "new_lab_pi90_width": 2.957689784576415,
+            "labs": 1,
+            "contrasts": 4,
+            "reading": "too few laboratories"
+          },
+          "maltose": {
+            "estimate": -0.5316674064815939,
+            "ci90": [
+              -1.5551088178163412,
+              0.4953861027601662
+            ],
+            "new_lab_pi90": [
+              -2.1224468735099067,
+              1.0628410006866107
+            ],
+            "p_same_sign_new_lab": 0.7150164999688527,
+            "new_lab_pi90_width": 3.1852878741965176,
+            "labs": 1,
+            "contrasts": 1,
+            "reading": "too few laboratories"
+          },
+          "rhamnose": {
+            "estimate": -0.6033737861107528,
+            "ci90": [
+              -1.2030909252183433,
+              -0.0037342996694327917
+            ],
+            "new_lab_pi90": [
+              -1.9617008413278676,
+              0.7548790076855454
+            ],
+            "p_same_sign_new_lab": 0.7747290875679342,
+            "new_lab_pi90_width": 2.7165798490134128,
+            "labs": 1,
+            "contrasts": 4,
+            "reading": "too few laboratories"
+          },
+          "ribose": {
+            "estimate": 1.0577458929565897,
+            "ci90": [
+              0.46285265324738306,
+              1.6479757966413682
+            ],
+            "new_lab_pi90": [
+              -0.29982981819433197,
+              2.4105105110575358
+            ],
+            "p_same_sign_new_lab": 0.9034590871789139,
+            "new_lab_pi90_width": 2.710340329251868,
+            "labs": 2,
+            "contrasts": 16,
+            "reading": "too few laboratories"
+          },
+          "ribose 5-phosphate": {
+            "estimate": 0.750780784880412,
+            "ci90": [
+              -0.09043497462337294,
+              1.5849375931234728
+            ],
+            "new_lab_pi90": [
+              -0.731748606406652,
+              2.2260352989029077
+            ],
+            "p_same_sign_new_lab": 0.8046587231356028,
+            "new_lab_pi90_width": 2.95778390530956,
+            "labs": 1,
+            "contrasts": 8,
+            "reading": "too few laboratories"
+          },
+          "xylose": {
+            "estimate": 0.6381481942041834,
+            "ci90": [
+              -0.3906730481103834,
+              1.6599520912386103
+            ],
+            "new_lab_pi90": [
+              -0.9581524925726759,
+              2.227220476030032
+            ],
+            "p_same_sign_new_lab": 0.7517895427588851,
+            "new_lab_pi90_width": 3.1853729686027075,
+            "labs": 1,
+            "contrasts": 1,
+            "reading": "too few laboratories"
+          }
+        },
+        "reml_scales": [
+          0.7526741679588419
+        ]
+      },
+      "reading": "per level"
+    },
+    {
+      "compound": "2-Furfurylthiol (FFT)",
+      "lever_class": "sulfur source",
+      "band": "all",
+      "contrasts": 9,
+      "studies": 4,
+      "labs": 2,
+      "lab_names": [
+        "dfa_garching",
+        "ho_network"
+      ],
+      "peak_area_share": 0.1111111111111111,
+      "focal_share": 0.7777777777777778,
+      "matrices": [
+        "buffer",
+        "water"
+      ],
+      "temperature_range_C": [
+        100.0,
+        180.0
+      ],
+      "rows": [
+        {
+          "source": "feng2022",
+          "contrast": "feng2022-6",
+          "lab": "ho_network",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "glutathione",
+              "against": "none",
+              "y": 0.6300952023092741,
+              "v": 0.00010024315880388682
+            }
+          ],
+          "focal": true,
+          "peak_area": false
+        },
+        {
+          "source": "feng2022",
+          "contrast": "feng2022-8",
+          "lab": "ho_network",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "glutathione",
+              "against": "none",
+              "y": 0.33493126025005715,
+              "v": 0.002195116464364918
+            }
+          ],
+          "focal": true,
+          "peak_area": false
+        },
+        {
+          "source": "grosch1992",
+          "contrast": "grosch1992-8",
+          "lab": "dfa_garching",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "cysteine",
+              "against": "none",
+              "y": -0.09691001300805642,
+              "v": 0.055963574072098746
+            },
+            {
+              "level": "glutathione",
+              "against": "none",
+              "y": 0.054357662322592676,
+              "v": 0.006269669725654501
+            },
+            {
+              "level": "glutathione + cysteine",
+              "against": "none",
+              "y": 0.1856365769619116,
+              "v": 0.012048431129916755
+            }
+          ],
+          "focal": true,
+          "peak_area": false
+        },
+        {
+          "source": "grosch1992",
+          "contrast": "grosch1992-9",
+          "lab": "dfa_garching",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "cysteine",
+              "against": "none",
+              "y": -0.10266234189714768,
+              "v": 0.005921341928557465
+            }
+          ],
+          "focal": true,
+          "peak_area": false
+        },
+        {
+          "source": "grosch1992",
+          "contrast": "grosch1992-10",
+          "lab": "dfa_garching",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "cysteine",
+              "against": "none",
+              "y": 0.0,
+              "v": 0.006269669725654501
+            }
+          ],
+          "focal": true,
+          "peak_area": false
+        },
+        {
+          "source": "grosch1992",
+          "contrast": "grosch1992-11",
+          "lab": "dfa_garching",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "thiamine pyrophosphate",
+              "against": "thiamine",
+              "y": -0.5797835966168101,
+              "v": 0.005921341928557465
+            }
+          ],
+          "focal": true,
+          "peak_area": false
+        },
+        {
+          "source": "grosch1992",
+          "contrast": "grosch1992-12",
+          "lab": "dfa_garching",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "thiamine pyrophosphate",
+              "against": "thiamine",
+              "y": -0.47712125471966244,
+              "v": 0.006269669725654501
+            }
+          ],
+          "focal": true,
+          "peak_area": false
+        },
+        {
+          "source": "zhang1991",
+          "contrast": "zhang1991-2",
+          "lab": "ho_network",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "glutathione",
+              "against": "cysteine",
+              "y": -0.3283641266851367,
+              "v": 0.006269669725654501
+            }
+          ],
+          "focal": false,
+          "peak_area": true
+        },
+        {
+          "source": "zhou2023c",
+          "contrast": "zhou2023c-2",
+          "lab": "ho_network",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "cysteine",
+              "against": "glutathione",
+              "y": 0.12522212616608996,
+              "v": 0.006269669725654501
+            }
+          ],
+          "focal": false,
+          "peak_area": false
+        }
+      ],
+      "reference": "cysteine",
+      "fit": {
+        "connected": true,
+        "reference": "cysteine",
+        "levels": {
+          "glutathione": {
+            "estimate": 0.043852201765184014,
+            "ci90": [
+              -0.23566455436331388,
+              0.327612683359144
+            ],
+            "new_lab_pi90": [
+              -0.5551420278962108,
+              0.647395071632525
+            ],
+            "p_same_sign_new_lab": 0.5531932060881204,
+            "new_lab_pi90_width": 1.2025370995287359,
+            "labs": 2,
+            "contrasts": 5,
+            "reading": "too few laboratories"
+          },
+          "glutathione + cysteine": {
+            "estimate": 0.13592869545583874,
+            "ci90": [
+              -0.36573808964275134,
+              0.6516947019737872
+            ],
+            "new_lab_pi90": [
+              -0.5918890781247598,
+              0.878969494207661
+            ],
+            "p_same_sign_new_lab": 0.6304117650929536,
+            "new_lab_pi90_width": 1.4708585723324208,
+            "labs": 1,
+            "contrasts": 1,
+            "reading": "too few laboratories"
+          },
+          "none": {
+            "estimate": -0.1529460680127868,
+            "ci90": [
+              -0.4286737828702138,
+              0.13499017412010805
+            ],
+            "new_lab_pi90": [
+              -0.7478559461577363,
+              0.45490958316357016
+            ],
+            "p_same_sign_new_lab": 0.6779522611058024,
+            "new_lab_pi90_width": 1.2027655293213064,
+            "labs": 2,
+            "contrasts": 7,
+            "reading": "too few laboratories"
+          },
+          "thiamine": {
+            "reading": "not connected"
+          },
+          "thiamine pyrophosphate": {
+            "reading": "not connected"
+          }
+        },
+        "reml_scales": [
+          0.3171652579277238
+        ]
+      },
+      "reading": "per level"
+    },
+    {
+      "compound": "2-Furfurylthiol (FFT)",
+      "lever_class": "temperature",
+      "band": "time >120 min",
+      "contrasts": 2,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "ho_network"
+      ],
+      "peak_area_share": 0.0,
+      "focal_share": 0.0,
+      "matrices": [
+        "water"
+      ],
+      "temperature_range_C": [
+        100.0,
+        120.0
+      ],
+      "rows": [
+        {
+          "source": "feng2022",
+          "contrast": "feng2022-2",
+          "lab": "ho_network",
+          "y": 0.15812015320629702,
+          "v": 2.4395113893988807e-05,
+          "range": [
+            100.0,
+            120.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false
+        },
+        {
+          "source": "feng2022",
+          "contrast": "feng2022-4",
+          "lab": "ho_network",
+          "y": 0.30570212423590554,
+          "v": 0.0005494447918982124,
+          "range": [
+            100.0,
+            120.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false
+        }
+      ],
+      "step": "+10 C",
+      "fit": {
+        "estimate": 0.22787381688065506,
+        "ci90": [
+          -0.1889418497930644,
+          0.6408604698975919
+        ],
+        "new_lab_pi90": [
+          -0.418111582972981,
+          0.8703704587069598
+        ],
+        "p_same_sign_new_lab": 0.8144586759434151,
+        "new_lab_pi90_width": 1.288482041679941,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.11243458629672394
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": 0.22787335027815994,
+            "new_lab_pi90": [
+              -0.18779010991015502,
+              0.6456442570428386
+            ]
+          },
+          "1.0": {
+            "estimate": 0.22748693863970926,
+            "new_lab_pi90": [
+              -0.781069743706861,
+              1.2168876627728602
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 2,
+          "estimate": 0.22787381688065506,
+          "ci90": [
+            -0.1889418497930644,
+            0.6408604698975919
+          ]
+        },
+        "incidental_only": {
+          "contrasts": 2,
+          "estimate": 0.22787381688065506,
+          "ci90": [
+            -0.1889418497930644,
+            0.6408604698975919
+          ]
+        },
+        "non_monotone_contrasts": 0
+      },
+      "reading": "too few laboratories",
+      "lolo": null
+    },
+    {
+      "compound": "2-Furfurylthiol (FFT)",
+      "lever_class": "time",
+      "band": "T 100-130 C",
+      "contrasts": 6,
+      "studies": 3,
+      "labs": 2,
+      "lab_names": [
+        "ho_network",
+        "nestle_rc_and_cerny_firmenich"
+      ],
+      "peak_area_share": 0.0,
+      "focal_share": 0.0,
+      "matrices": [
+        "buffer",
+        "other (choline chloride/glycerol 1:1 molar)",
+        "other (glycerol)",
+        "water"
+      ],
+      "temperature_range_C": [
+        110.0,
+        120.0
+      ],
+      "rows": [
+        {
+          "source": "feng2022",
+          "contrast": "feng2022-10",
+          "lab": "ho_network",
+          "y": 0.11914746859676001,
+          "v": 6.72612340927724e-05,
+          "range": [
+            30.000000000000004,
+            120.00000000000001
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false
+        },
+        {
+          "source": "feng2022",
+          "contrast": "feng2022-12",
+          "lab": "ho_network",
+          "y": 0.20180503431664729,
+          "v": 7.425209310978085e-06,
+          "range": [
+            30.000000000000004,
+            120.00000000000001
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false
+        },
+        {
+          "source": "us10076126",
+          "contrast": "us10076126-6",
+          "lab": "nestle_rc_and_cerny_firmenich",
+          "y": 0.3472302079029999,
+          "v": 0.0011269669725654501,
+          "range": [
+            30.000000000000004,
+            240.00000000000003
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false
+        },
+        {
+          "source": "us10076126",
+          "contrast": "us10076126-7",
+          "lab": "nestle_rc_and_cerny_firmenich",
+          "y": 0.4814887159040392,
+          "v": 0.0011269669725654501,
+          "range": [
+            30.000000000000004,
+            240.00000000000003
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false
+        },
+        {
+          "source": "us10076126",
+          "contrast": "us10076126-8",
+          "lab": "nestle_rc_and_cerny_firmenich",
+          "y": 0.5611079391364134,
+          "v": 0.0028174174314136253,
+          "range": [
+            60.00000000000001,
+            240.00000000000003
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false
+        },
+        {
+          "source": "zhou2023c",
+          "contrast": "zhou2023c-4",
+          "lab": "ho_network",
+          "y": -0.5017297517884355,
+          "v": 0.006209900456089848,
+          "range": [
+            60.00000000000001,
+            120.00000000000001
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false
+        }
+      ],
+      "step": "a doubling of time",
+      "fit": {
+        "estimate": 0.20609117354508913,
+        "ci90": [
+          -0.1759288877537757,
+          0.5843695398124832
+        ],
+        "new_lab_pi90": [
+          -0.6224146519344848,
+          1.0302601199000738
+        ],
+        "p_same_sign_new_lab": 0.6827331069268165,
+        "new_lab_pi90_width": 1.6526747718345587,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.3171652579277238,
+          0.26682181158053636
+        ],
+        "prior_dominated": false,
+        "sensitivity": {
+          "0.25": {
+            "estimate": 0.20727011475651583,
+            "new_lab_pi90": [
+              -0.45328932167494485,
+              0.864833056712845
+            ]
+          },
+          "1.0": {
+            "estimate": 0.20545369351555434,
+            "new_lab_pi90": [
+              -0.7939677690260089,
+              1.1973536081790843
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 6,
+          "estimate": 0.20609117354508913,
+          "ci90": [
+            -0.1759288877537757,
+            0.5843695398124832
+          ]
+        },
+        "incidental_only": {
+          "contrasts": 6,
+          "estimate": 0.20609117354508913,
+          "ci90": [
+            -0.1759288877537757,
+            0.5843695398124832
+          ]
+        },
+        "non_monotone_contrasts": 1
+      },
+      "reading": "too few laboratories",
+      "lolo": null
+    },
+    {
+      "compound": "2-Methyl-3-(2-furfuryldithio)furan",
+      "lever_class": "buffer",
+      "band": "all",
+      "contrasts": 3,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "reading_mottram_parker"
+      ],
+      "peak_area_share": 1.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "buffer",
+        "water"
+      ],
+      "temperature_range_C": [
+        140.0,
+        140.0
+      ],
+      "rows": [
+        {
+          "source": "mottram2002",
+          "contrast": "mottram2002-44",
+          "lab": "reading_mottram_parker",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "phthalate",
+              "against": "none",
+              "y": -0.4168253528324115,
+              "v": 0.006269669725654501
+            }
+          ],
+          "focal": true,
+          "peak_area": true
+        },
+        {
+          "source": "mottram2002",
+          "contrast": "mottram2002-45",
+          "lab": "reading_mottram_parker",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "phthalate",
+              "against": "none",
+              "y": 0.49816385745923997,
+              "v": 0.006269669725654501
+            }
+          ],
+          "focal": true,
+          "peak_area": true
+        },
+        {
+          "source": "mottram2002",
+          "contrast": "mottram2002-46",
+          "lab": "reading_mottram_parker",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "phosphate",
+              "against": "none",
+              "y": 0.0,
+              "v": 0.006269669725654501
+            },
+            {
+              "level": "phthalate",
+              "against": "none",
+              "y": 0.0,
+              "v": 0.006269669725654501
+            }
+          ],
+          "focal": true,
+          "peak_area": true
+        }
+      ],
+      "reference": "phosphate",
+      "fit": {
+        "connected": true,
+        "reference": "phosphate",
+        "levels": {
+          "none": {
+            "estimate": -0.013512009199006917,
+            "ci90": [
+              -0.7014733895150023,
+              0.6745176272991458
+            ],
+            "new_lab_pi90": [
+              -1.0396226502356107,
+              1.0126683407028558
+            ],
+            "p_same_sign_new_lab": 0.510362348862634,
+            "new_lab_pi90_width": 2.0522909909384666,
+            "labs": 1,
+            "contrasts": 4,
+            "reading": "too few laboratories"
+          },
+          "phthalate": {
+            "estimate": 0.013512009199006894,
+            "ci90": [
+              -0.6745176272991469,
+              0.7014733895150016
+            ],
+            "new_lab_pi90": [
+              -1.0126683407028567,
+              1.0396226502356098
+            ],
+            "p_same_sign_new_lab": 0.510362348862634,
+            "new_lab_pi90_width": 2.0522909909384666,
+            "labs": 1,
+            "contrasts": 3,
+            "reading": "too few laboratories"
+          }
+        },
+        "reml_scales": [
+          0.4481404746557168
+        ]
+      },
+      "reading": "per level"
+    },
+    {
+      "compound": "2-Methyl-3-(2-furfuryldithio)furan",
+      "lever_class": "lipid",
+      "band": "all",
+      "contrasts": 1,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "reading_mottram_parker"
+      ],
+      "peak_area_share": 1.0,
+      "focal_share": 0.0,
+      "matrices": [
+        "buffer"
+      ],
+      "temperature_range_C": [
+        140.0,
+        140.0
+      ],
+      "rows": [
+        {
+          "source": "elmore2002",
+          "contrast": "elmore2002-4",
+          "lab": "reading_mottram_parker",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "methyl alpha-linolenate",
+              "against": "none",
+              "y": -1.2900346113625178,
+              "v": 0.04111138463916306
+            }
+          ],
+          "focal": false,
+          "peak_area": true
+        }
+      ],
+      "reference": "none",
+      "fit": {
+        "connected": true,
+        "reference": "none",
+        "levels": {
+          "methyl alpha-linolenate": {
+            "estimate": -1.280478033065424,
+            "ci90": [
+              -1.725019034935147,
+              -0.8172753793612217
+            ],
+            "new_lab_pi90": [
+              -1.8080409765320515,
+              -0.7294324256932074
+            ],
+            "p_same_sign_new_lab": 0.9913062972050493,
+            "new_lab_pi90_width": 1.078608550838844,
+            "labs": 1,
+            "contrasts": 1,
+            "reading": "too few laboratories"
+          }
+        },
+        "reml_scales": [
+          0.0
+        ]
+      },
+      "reading": "per level"
+    },
+    {
+      "compound": "2-Methyl-3-(2-furfuryldithio)furan",
+      "lever_class": "sugar identity",
+      "band": "all",
+      "contrasts": 3,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "reading_mottram_parker"
+      ],
+      "peak_area_share": 1.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "buffer",
+        "water"
+      ],
+      "temperature_range_C": [
+        140.0,
+        140.0
+      ],
+      "rows": [
+        {
+          "source": "mottram2002",
+          "contrast": "mottram2002-40",
+          "lab": "reading_mottram_parker",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "ribose",
+              "against": "ribose 5-phosphate",
+              "y": 0.0,
+              "v": 0.006269669725654501
+            },
+            {
+              "level": "inosine 5'-monophosphate",
+              "against": "ribose 5-phosphate",
+              "y": -2.6720978579357175,
+              "v": 0.006269669725654501
+            }
+          ],
+          "focal": true,
+          "peak_area": true
+        },
+        {
+          "source": "mottram2002",
+          "contrast": "mottram2002-42",
+          "lab": "reading_mottram_parker",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "ribose",
+              "against": "ribose 5-phosphate",
+              "y": 0.9149892102916515,
+              "v": 0.006269669725654501
+            },
+            {
+              "level": "inosine 5'-monophosphate",
+              "against": "ribose 5-phosphate",
+              "y": -2.255272505103306,
+              "v": 0.006269669725654501
+            }
+          ],
+          "focal": true,
+          "peak_area": true
+        },
+        {
+          "source": "mottram2002",
+          "contrast": "mottram2002-43",
+          "lab": "reading_mottram_parker",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "ribose",
+              "against": "ribose 5-phosphate",
+              "y": 0.3590219426416681,
+              "v": 0.006269669725654501
+            }
+          ],
+          "focal": true,
+          "peak_area": true
+        }
+      ],
+      "reference": "glucose",
+      "fit": {
+        "connected": false,
+        "levels": {
+          "inosine 5'-monophosphate": {
+            "reading": "not connected"
+          },
+          "ribose": {
+            "reading": "not connected"
+          },
+          "ribose 5-phosphate": {
+            "reading": "not connected"
+          }
+        }
+      },
+      "reading": "per level"
+    },
+    {
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lever_class": "buffer",
+      "band": "all",
+      "contrasts": 6,
+      "studies": 2,
+      "labs": 2,
+      "lab_names": [
+        "dfa_garching",
+        "reading_mottram_parker"
+      ],
+      "peak_area_share": 0.5,
+      "focal_share": 0.5,
+      "matrices": [
+        "buffer",
+        "water"
+      ],
+      "temperature_range_C": [
+        100.0,
+        140.0
+      ],
+      "rows": [
+        {
+          "source": "grosch1992",
+          "contrast": "grosch1992-28",
+          "lab": "dfa_garching",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "0.1",
+              "against": "0.2",
+              "y": -0.3342709288026602,
+              "v": 0.006269669725654501
+            }
+          ],
+          "focal": false,
+          "peak_area": false
+        },
+        {
+          "source": "grosch1992",
+          "contrast": "grosch1992-29",
+          "lab": "dfa_garching",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "0.1",
+              "against": "0.2",
+              "y": -0.28879553924696943,
+              "v": 0.006269669725654501
+            }
+          ],
+          "focal": false,
+          "peak_area": false
+        },
+        {
+          "source": "grosch1992",
+          "contrast": "grosch1992-30",
+          "lab": "dfa_garching",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "0.1",
+              "against": "0.2",
+              "y": -0.45593195564972433,
+              "v": 0.006269669725654501
+            }
+          ],
+          "focal": false,
+          "peak_area": false
+        },
+        {
+          "source": "mottram2002",
+          "contrast": "mottram2002-5",
+          "lab": "reading_mottram_parker",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "phosphate",
+              "against": "none",
+              "y": -0.15659346935640306,
+              "v": 0.006269669725654501
+            },
+            {
+              "level": "phthalate",
+              "against": "none",
+              "y": 0.002944380646781486,
+              "v": 0.006269669725654501
+            }
+          ],
+          "focal": true,
+          "peak_area": true
+        },
+        {
+          "source": "mottram2002",
+          "contrast": "mottram2002-6",
+          "lab": "reading_mottram_parker",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "phosphate",
+              "against": "none",
+              "y": 0.343983489265518,
+              "v": 0.006269669725654501
+            },
+            {
+              "level": "phthalate",
+              "against": "none",
+              "y": 0.4139799175371026,
+              "v": 0.006269669725654501
+            }
+          ],
+          "focal": true,
+          "peak_area": true
+        },
+        {
+          "source": "mottram2002",
+          "contrast": "mottram2002-7",
+          "lab": "reading_mottram_parker",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "phosphate",
+              "against": "none",
+              "y": -0.1606969315654183,
+              "v": 0.006269669725654501
+            },
+            {
+              "level": "phthalate",
+              "against": "none",
+              "y": 0.1685643031988171,
+              "v": 0.006269669725654501
+            }
+          ],
+          "focal": true,
+          "peak_area": true
+        }
+      ],
+      "reference": "phosphate",
+      "fit": {
+        "connected": true,
+        "reference": "phosphate",
+        "levels": {
+          "none": {
+            "estimate": -0.009059282423805224,
+            "ci90": [
+              -0.24830888388235028,
+              0.2299375581810096
+            ],
+            "new_lab_pi90": [
+              -0.4708074095740506,
+              0.4523877585685054
+            ],
+            "p_same_sign_new_lab": 0.5158482256700216,
+            "new_lab_pi90_width": 0.923195168142556,
+            "labs": 1,
+            "contrasts": 6,
+            "reading": "too few laboratories"
+          },
+          "phthalate": {
+            "estimate": 0.18591595041512196,
+            "ci90": [
+              -0.05350903527031483,
+              0.42473159017107914
+            ],
+            "new_lab_pi90": [
+              -0.2759916304378849,
+              0.6471817753260761
+            ],
+            "p_same_sign_new_lab": 0.7807351403470163,
+            "new_lab_pi90_width": 0.923173405763961,
+            "labs": 1,
+            "contrasts": 3,
+            "reading": "too few laboratories"
+          },
+          "0.1": {
+            "reading": "not connected"
+          },
+          "0.2": {
+            "reading": "not connected"
+          }
+        },
+        "reml_scales": [
+          0.18883946770417823
+        ]
+      },
+      "reading": "per level"
+    },
+    {
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lever_class": "lipid",
+      "band": "all",
+      "contrasts": 2,
+      "studies": 2,
+      "labs": 1,
+      "lab_names": [
+        "reading_mottram_parker"
+      ],
+      "peak_area_share": 1.0,
+      "focal_share": 0.0,
+      "matrices": [
+        "buffer"
+      ],
+      "temperature_range_C": [
+        140.0,
+        140.0
+      ],
+      "rows": [
+        {
+          "source": "elmore2002",
+          "contrast": "elmore2002-1",
+          "lab": "reading_mottram_parker",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "methyl linoleate",
+              "against": "none",
+              "y": -1.1434455411591329,
+              "v": 0.08934412469532203
+            }
+          ],
+          "focal": false,
+          "peak_area": true
+        },
+        {
+          "source": "farmer1990",
+          "contrast": "farmer1990-2",
+          "lab": "reading_mottram_parker",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "beef triglyceride",
+              "against": "none",
+              "y": -0.3958163150421816,
+              "v": 0.005037262343671717
+            },
+            {
+              "level": "beef phospholipid",
+              "against": "none",
+              "y": -0.8099430848074944,
+              "v": 0.004650179249520826
+            },
+            {
+              "level": "egg phosphatidylcholine",
+              "against": "none",
+              "y": -0.5697942147844639,
+              "v": 0.0013923701352849594
+            },
+            {
+              "level": "egg phosphatidylethanolamine",
+              "against": "none",
+              "y": -0.6265831291870487,
+              "v": 0.006587773704466463
+            }
+          ],
+          "focal": false,
+          "peak_area": true
+        }
+      ],
+      "reference": "none",
+      "fit": {
+        "connected": true,
+        "reference": "none",
+        "levels": {
+          "beef phospholipid": {
+            "estimate": -0.80714270339471,
+            "ci90": [
+              -1.1008239410170797,
+              -0.4730533884778169
+            ],
+            "new_lab_pi90": [
+              -1.2230596912214213,
+              -0.34970197244938667
+            ],
+            "p_same_sign_new_lab": 0.9794939789341863,
+            "new_lab_pi90_width": 0.8733577187720347,
+            "labs": 1,
+            "contrasts": 1,
+            "reading": "too few laboratories"
+          },
+          "beef triglyceride": {
+            "estimate": -0.39344766696878997,
+            "ci90": [
+              -0.6909708314362123,
+              -0.0614080383182371
+            ],
+            "new_lab_pi90": [
+              -0.812887179544563,
+              0.06162171167811711
+            ],
+            "p_same_sign_new_lab": 0.9399964789491372,
+            "new_lab_pi90_width": 0.8745088912226802,
+            "labs": 1,
+            "contrasts": 1,
+            "reading": "too few laboratories"
+          },
+          "egg phosphatidylcholine": {
+            "estimate": -0.5680959182288782,
+            "ci90": [
+              -0.8525947752854435,
+              -0.24366235616270573
+            ],
+            "new_lab_pi90": [
+              -0.9782886814147659,
+              -0.11777949320922208
+            ],
+            "p_same_sign_new_lab": 0.9636901083312888,
+            "new_lab_pi90_width": 0.8605091882055438,
+            "labs": 1,
+            "contrasts": 1,
+            "reading": "too few laboratories"
+          },
+          "egg phosphatidylethanolamine": {
+            "estimate": -0.6236377012799237,
+            "ci90": [
+              -0.9251951912402124,
+              -0.2858397703354111
+            ],
+            "new_lab_pi90": [
+              -1.0450322896381012,
+              -0.16416900910433938
+            ],
+            "p_same_sign_new_lab": 0.9679035631102503,
+            "new_lab_pi90_width": 0.8808632805337618,
+            "labs": 1,
+            "contrasts": 1,
+            "reading": "too few laboratories"
+          },
+          "methyl linoleate": {
+            "estimate": -1.1284519047730073,
+            "ci90": [
+              -1.705360937872151,
+              -0.5403104379496958
+            ],
+            "new_lab_pi90": [
+              -1.7710659838789127,
+              -0.4727653448061523
+            ],
+            "p_same_sign_new_lab": 0.9876584517325664,
+            "new_lab_pi90_width": 1.2983006390727603,
+            "labs": 1,
+            "contrasts": 1,
+            "reading": "too few laboratories"
+          }
+        },
+        "reml_scales": [
+          0.0
+        ]
+      },
+      "reading": "per level"
+    },
+    {
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lever_class": "matrix",
+      "band": "all",
+      "contrasts": 1,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "nestle_rc_and_cerny_firmenich"
+      ],
+      "peak_area_share": 0.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "buffer",
+        "other (choline chloride/glycerol 1:1 molar)",
+        "other (glycerol)"
+      ],
+      "temperature_range_C": [
+        110.0,
+        110.0
+      ],
+      "rows": [
+        {
+          "source": "us10076126",
+          "contrast": "us10076126-1",
+          "lab": "nestle_rc_and_cerny_firmenich",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "glycerol",
+              "against": "choline chloride/glycerol",
+              "y": -0.0389180660303694,
+              "v": 0.011269669725654501
+            },
+            {
+              "level": "buffer",
+              "against": "choline chloride/glycerol",
+              "y": -0.2383429274779143,
+              "v": 0.011269669725654501
+            }
+          ],
+          "focal": true,
+          "peak_area": false
+        }
+      ],
+      "reference": "buffer",
+      "fit": {
+        "connected": true,
+        "reference": "buffer",
+        "levels": {
+          "choline chloride/glycerol": {
+            "estimate": 0.2372660740430629,
+            "ci90": [
+              -0.10853247775428254,
+              0.5751923592451291
+            ],
+            "new_lab_pi90": [
+              -0.227142456780012,
+              0.6928221916605515
+            ],
+            "p_same_sign_new_lab": 0.8836261358833266,
+            "new_lab_pi90_width": 0.9199646484405635,
+            "labs": 1,
+            "contrasts": 2,
+            "reading": "too few laboratories"
+          },
+          "glycerol": {
+            "estimate": 0.19841220154231445,
+            "ci90": [
+              -0.14709233317307685,
+              0.5365978532633058
+            ],
+            "new_lab_pi90": [
+              -0.2657248048158075,
+              0.6541919896370696
+            ],
+            "p_same_sign_new_lab": 0.8557644794099327,
+            "new_lab_pi90_width": 0.9199167944528771,
+            "labs": 1,
+            "contrasts": 1,
+            "reading": "too few laboratories"
+          }
+        },
+        "reml_scales": [
+          0.0
+        ]
+      },
+      "reading": "per level"
+    },
+    {
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lever_class": "pH",
+      "band": "pH 4.5-6, held",
+      "contrasts": 4,
+      "studies": 2,
+      "labs": 1,
+      "lab_names": [
+        "reading_mottram_parker"
+      ],
+      "peak_area_share": 1.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "buffer"
+      ],
+      "temperature_range_C": [
+        140.0,
+        140.0
+      ],
+      "rows": [
+        {
+          "source": "meynier1995",
+          "contrast": "meynier1995-1",
+          "lab": "reading_mottram_parker",
+          "y": -0.8228844783819251,
+          "v": 0.0025078678902618005,
+          "range": [
+            4.5,
+            6.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true
+        },
+        {
+          "source": "mottram2002",
+          "contrast": "mottram2002-8",
+          "lab": "reading_mottram_parker",
+          "y": -0.49865840904029024,
+          "v": 0.0031988110845176053,
+          "range": [
+            4.2,
+            5.6
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true
+        },
+        {
+          "source": "mottram2002",
+          "contrast": "mottram2002-10",
+          "lab": "reading_mottram_parker",
+          "y": -0.4058207753584033,
+          "v": 0.0031988110845176053,
+          "range": [
+            4.2,
+            5.6
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true
+        },
+        {
+          "source": "mottram2002",
+          "contrast": "mottram2002-12",
+          "lab": "reading_mottram_parker",
+          "y": -1.0321925108916088,
+          "v": 0.0031988110845176053,
+          "range": [
+            4.2,
+            5.6
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true
+        }
+      ],
+      "step": "+1 pH unit",
+      "fit": {
+        "estimate": -0.6868493751849407,
+        "ci90": [
+          -1.1081896874273722,
+          -0.24880283587135774
+        ],
+        "new_lab_pi90": [
+          -1.472667947284449,
+          0.11419868911401393
+        ],
+        "p_same_sign_new_lab": 0.9308017338138237,
+        "new_lab_pi90_width": 1.586866636398463,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.26682181158053636
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": -0.6883255749625826,
+            "new_lab_pi90": [
+              -1.2738286421270875,
+              -0.09847518757828369
+            ]
+          },
+          "1.0": {
+            "estimate": -0.6847280891202157,
+            "new_lab_pi90": [
+              -1.734870136135394,
+              0.4152969010980665
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 0
+        },
+        "incidental_only": {
+          "contrasts": 0
+        },
+        "non_monotone_contrasts": 0
+      },
+      "reading": "too few laboratories",
+      "lolo": null
+    },
+    {
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lever_class": "pH",
+      "band": "pH 4.5-6, initial or label",
+      "contrasts": 3,
+      "studies": 2,
+      "labs": 2,
+      "lab_names": [
+        "dfa_garching",
+        "nestle_rc_and_cerny_firmenich"
+      ],
+      "peak_area_share": 0.3333333333333333,
+      "focal_share": 1.0,
+      "matrices": [
+        "buffer"
+      ],
+      "temperature_range_C": [
+        145.0,
+        145.0
+      ],
+      "rows": [
+        {
+          "source": "cerny2007",
+          "contrast": "cerny2007-1",
+          "lab": "nestle_rc_and_cerny_firmenich",
+          "y": 0.20524948779689464,
+          "v": 0.006269669725654502,
+          "range": [
+            5.0,
+            6.0
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true
+        },
+        {
+          "source": "hofmann1998",
+          "contrast": "hofmann1998-4",
+          "lab": "dfa_garching",
+          "y": -0.3361962806581652,
+          "v": 0.0003918543578534064,
+          "range": [
+            3.0,
+            7.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": false
+        },
+        {
+          "source": "hofmann1998",
+          "contrast": "hofmann1998-24",
+          "lab": "dfa_garching",
+          "y": 0.32578158820622427,
+          "v": 0.0003918543578534064,
+          "range": [
+            3.0,
+            7.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": false
+        }
+      ],
+      "step": "+1 pH unit",
+      "fit": {
+        "estimate": 0.06553568778059075,
+        "ci90": [
+          -0.37181125004456594,
+          0.5103905755896967
+        ],
+        "new_lab_pi90": [
+          -0.7878005207433558,
+          0.9257571499596089
+        ],
+        "p_same_sign_new_lab": 0.5624476258580737,
+        "new_lab_pi90_width": 1.7135576707029647,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.37700741270170407
+        ],
+        "prior_dominated": false,
+        "sensitivity": {
+          "0.25": {
+            "estimate": 0.06424100079151698,
+            "new_lab_pi90": [
+              -0.5734246031657997,
+              0.707240111875754
+            ]
+          },
+          "1.0": {
+            "estimate": 0.06613741825903335,
+            "new_lab_pi90": [
+              -1.0296529592028012,
+              1.1699578173452279
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 2,
+          "estimate": -0.0051433325377446245,
+          "ci90": [
+            -0.6528046753221666,
+            0.6427301740805544
+          ]
+        },
+        "incidental_only": {
+          "contrasts": 0
+        },
+        "non_monotone_contrasts": 1
+      },
+      "reading": "too few laboratories",
+      "lolo": null
+    },
+    {
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lever_class": "pH",
+      "band": "pH 6-7.5, initial or label",
+      "contrasts": 1,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "ho_network"
+      ],
+      "peak_area_share": 0.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "water"
+      ],
+      "temperature_range_C": [
+        120.0,
+        120.0
+      ],
+      "rows": [
+        {
+          "source": "zhou2023",
+          "contrast": "zhou2023-1",
+          "lab": "ho_network",
+          "y": 0.3577798095364914,
+          "v": 5.06023276818605e-05,
+          "range": [
+            6.0,
+            7.0
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": true,
+          "peak_area": false
+        }
+      ],
+      "step": "+1 pH unit",
+      "fit": {
+        "estimate": 0.356954942113507,
+        "ci90": [
+          -0.1539146978262712,
+          0.8489527677198273
+        ],
+        "new_lab_pi90": [
+          -0.3668558843034046,
+          1.0618261092045118
+        ],
+        "p_same_sign_new_lab": 0.8776805056316016,
+        "new_lab_pi90_width": 1.4286819935079165,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.0
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": 0.3574202606940037,
+            "new_lab_pi90": [
+              -0.04946511824822771,
+              0.7589026850375975
+            ]
+          },
+          "1.0": {
+            "estimate": 0.3560210468536955,
+            "new_lab_pi90": [
+              -0.9126928893515898,
+              1.5662584572963483
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 1,
+          "estimate": 0.356954942113507,
+          "ci90": [
+            -0.1539146978262712,
+            0.8489527677198273
+          ]
+        },
+        "incidental_only": {
+          "contrasts": 0
+        },
+        "non_monotone_contrasts": 1
+      },
+      "reading": "too few laboratories",
+      "lolo": null
+    },
+    {
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lever_class": "pH",
+      "band": "pH <4.5, initial or label",
+      "contrasts": 2,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "dfa_garching"
+      ],
+      "peak_area_share": 0.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "buffer"
+      ],
+      "temperature_range_C": [
+        145.0,
+        145.0
+      ],
+      "rows": [
+        {
+          "source": "hofmann1998",
+          "contrast": "hofmann1998-6",
+          "lab": "dfa_garching",
+          "y": 0.4008161731165833,
+          "v": 0.0015674174314136255,
+          "range": [
+            3.0,
+            5.0
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": true,
+          "peak_area": false
+        },
+        {
+          "source": "hofmann1998",
+          "contrast": "hofmann1998-8",
+          "lab": "dfa_garching",
+          "y": 0.45154499349597177,
+          "v": 0.0015674174314136255,
+          "range": [
+            3.0,
+            5.0
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": true,
+          "peak_area": false
+        }
+      ],
+      "step": "+1 pH unit",
+      "fit": {
+        "estimate": 0.4255537522592391,
+        "ci90": [
+          0.07422974476525765,
+          0.7634359912157274
+        ],
+        "new_lab_pi90": [
+          -0.0870503721244482,
+          0.9246853922970519
+        ],
+        "p_same_sign_new_lab": 0.9358133269920361,
+        "new_lab_pi90_width": 1.0117357644215001,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.0
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": 0.4258382764895102,
+            "new_lab_pi90": [
+              0.11496265261589826,
+              0.7328113835105161
+            ]
+          },
+          "1.0": {
+            "estimate": 0.42505929526332487,
+            "new_lab_pi90": [
+              -0.42294849274906354,
+              1.2314777197522024
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 2,
+          "estimate": 0.4255537522592391,
+          "ci90": [
+            0.07422974476525765,
+            0.7634359912157274
+          ]
+        },
+        "incidental_only": {
+          "contrasts": 0
+        },
+        "non_monotone_contrasts": 2
+      },
+      "reading": "too few laboratories",
+      "lolo": null
+    },
+    {
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lever_class": "precursor dose",
+      "band": "all",
+      "contrasts": 9,
+      "studies": 2,
+      "labs": 2,
+      "lab_names": [
+        "btbu_beijing",
+        "dfa_garching"
+      ],
+      "peak_area_share": 0.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "buffer"
+      ],
+      "temperature_range_C": [
+        100.0,
+        115.0
+      ],
+      "rows": [
+        {
+          "source": "Zhang2024",
+          "contrast": "Zhang2024-3",
+          "lab": "btbu_beijing",
+          "y": 0.1760537054491339,
+          "v": 0.00013098012054160295,
+          "range": [
+            0.5,
+            62.5
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": true,
+          "peak_area": false
+        },
+        {
+          "source": "Zhang2024",
+          "contrast": "Zhang2024-4",
+          "lab": "btbu_beijing",
+          "y": 0.35406191909869067,
+          "v": 0.00015412152076342426,
+          "range": [
+            0.5,
+            49.999999999999986
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": true,
+          "peak_area": false
+        },
+        {
+          "source": "grosch1992",
+          "contrast": "grosch1992-21",
+          "lab": "dfa_garching",
+          "y": -0.2943947136056944,
+          "v": 0.0004504320325905948,
+          "range": [
+            324.99999999999983,
+            2720.000000000002
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": true,
+          "peak_area": false
+        },
+        {
+          "source": "grosch1992",
+          "contrast": "grosch1992-22",
+          "lab": "dfa_garching",
+          "y": -0.3740940135031002,
+          "v": 0.0015674174314136255,
+          "range": [
+            340.0000000000002,
+            1360.000000000001
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": true,
+          "peak_area": false
+        },
+        {
+          "source": "grosch1992",
+          "contrast": "grosch1992-23",
+          "lab": "dfa_garching",
+          "y": 0.401844145141217,
+          "v": 0.0011629127463711672,
+          "range": [
+            6.0,
+            30.000000000000004
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": false
+        },
+        {
+          "source": "grosch1992",
+          "contrast": "grosch1992-24",
+          "lab": "dfa_garching",
+          "y": 0.3010299956639812,
+          "v": 0.0011629127463711672,
+          "range": [
+            6.0,
+            30.000000000000004
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": false
+        },
+        {
+          "source": "grosch1992",
+          "contrast": "grosch1992-25",
+          "lab": "dfa_garching",
+          "y": 0.3427668665091387,
+          "v": 0.0011629127463711672,
+          "range": [
+            6.0,
+            30.000000000000004
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": false
+        },
+        {
+          "source": "grosch1992",
+          "contrast": "grosch1992-26",
+          "lab": "dfa_garching",
+          "y": 0.4230411937399891,
+          "v": 0.0011629127463711672,
+          "range": [
+            6.0,
+            30.000000000000004
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": false
+        },
+        {
+          "source": "grosch1992",
+          "contrast": "grosch1992-27",
+          "lab": "dfa_garching",
+          "y": -0.34854322699598467,
+          "v": 0.004397371981026854,
+          "range": [
+            324.99999999999983,
+            680.0000000000005
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": false
+        }
+      ],
+      "step": "a doubling of dose",
+      "fit": {
+        "estimate": 0.11822864415340502,
+        "ci90": [
+          -0.14166399207040067,
+          0.3943279701873658
+        ],
+        "new_lab_pi90": [
+          -0.5908859461131846,
+          0.8377603703657186
+        ],
+        "p_same_sign_new_lab": 0.6204234141979827,
+        "new_lab_pi90_width": 1.4286463164789032,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.3171652579277238
+        ],
+        "prior_dominated": false,
+        "sensitivity": {
+          "0.25": {
+            "estimate": 0.11750632507779095,
+            "new_lab_pi90": [
+              -0.4982502021387649,
+              0.7391561463328032
+            ]
+          },
+          "1.0": {
+            "estimate": 0.11870291738974116,
+            "new_lab_pi90": [
+              -0.661098039984374,
+              0.9132062072276161
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 9,
+          "estimate": 0.11822864415340502,
+          "ci90": [
+            -0.14166399207040067,
+            0.3943279701873658
+          ]
+        },
+        "incidental_only": {
+          "contrasts": 0
+        },
+        "non_monotone_contrasts": 4
+      },
+      "reading": "too few laboratories",
+      "lolo": null
+    },
+    {
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lever_class": "sugar identity",
+      "band": "all",
+      "contrasts": 10,
+      "studies": 4,
+      "labs": 2,
+      "lab_names": [
+        "dfa_garching",
+        "reading_mottram_parker"
+      ],
+      "peak_area_share": 0.5,
+      "focal_share": 1.0,
+      "matrices": [
+        "buffer",
+        "other (silica gel, dry-heated)",
+        "water"
+      ],
+      "temperature_range_C": [
+        100.0,
+        180.0
+      ],
+      "rows": [
+        {
+          "source": "grosch1992",
+          "contrast": "grosch1992-34",
+          "lab": "dfa_garching",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "ribose 5-phosphate",
+              "against": "ribose",
+              "y": 0.30102999566398114,
+              "v": 0.006269669725654501
+            },
+            {
+              "level": "inosine 5'-monophosphate",
+              "against": "ribose",
+              "y": 0.0,
+              "v": 0.006269669725654501
+            }
+          ],
+          "focal": true,
+          "peak_area": false
+        },
+        {
+          "source": "hincelin1992",
+          "contrast": "hincelin1992-2",
+          "lab": "reading_mottram_parker",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "xylose",
+              "against": "none",
+              "y": 0.8450980400142567,
+              "v": 0.006269669725654501
+            }
+          ],
+          "focal": true,
+          "peak_area": true
+        },
+        {
+          "source": "hofmann1998",
+          "contrast": "hofmann1998-2",
+          "lab": "dfa_garching",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "xylose",
+              "against": "ribose",
+              "y": -0.1413291527964693,
+              "v": 0.006269669725654501
+            },
+            {
+              "level": "fructose",
+              "against": "ribose",
+              "y": -0.8987251815894935,
+              "v": 0.006269669725654501
+            },
+            {
+              "level": "glucose",
+              "against": "ribose",
+              "y": -1.0179115893087023,
+              "v": 0.006269669725654501
+            },
+            {
+              "level": "glucose-6-phosphate",
+              "against": "ribose",
+              "y": -1.5185139398778875,
+              "v": 0.006269669725654501
+            },
+            {
+              "level": "rhamnose",
+              "against": "ribose",
+              "y": -1.3935752032695876,
+              "v": 0.006269669725654501
+            },
+            {
+              "level": "maltose",
+              "against": "ribose",
+              "y": -1.8195439355418688,
+              "v": 0.006269669725654501
+            }
+          ],
+          "focal": true,
+          "peak_area": false
+        },
+        {
+          "source": "hofmann1998",
+          "contrast": "hofmann1998-16",
+          "lab": "dfa_garching",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "glucose",
+              "against": "ribose",
+              "y": -2.265603876585036,
+              "v": 0.006269669725654501
+            },
+            {
+              "level": "rhamnose",
+              "against": "ribose",
+              "y": -2.7427251313046983,
+              "v": 0.006269669725654501
+            }
+          ],
+          "focal": true,
+          "peak_area": false
+        },
+        {
+          "source": "hofmann1998",
+          "contrast": "hofmann1998-18",
+          "lab": "dfa_garching",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "glucose",
+              "against": "ribose",
+              "y": -0.7958800173440752,
+              "v": 0.006269669725654501
+            },
+            {
+              "level": "rhamnose",
+              "against": "ribose",
+              "y": -1.3979400086720375,
+              "v": 0.006269669725654501
+            }
+          ],
+          "focal": true,
+          "peak_area": false
+        },
+        {
+          "source": "hofmann1998",
+          "contrast": "hofmann1998-20",
+          "lab": "dfa_garching",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "glucose",
+              "against": "ribose",
+              "y": -0.7764244310831377,
+              "v": 0.006269669725654501
+            },
+            {
+              "level": "rhamnose",
+              "against": "ribose",
+              "y": -0.9083120276467656,
+              "v": 0.006269669725654501
+            }
+          ],
+          "focal": true,
+          "peak_area": false
+        },
+        {
+          "source": "mottram2002",
+          "contrast": "mottram2002-1",
+          "lab": "reading_mottram_parker",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "ribose",
+              "against": "ribose 5-phosphate",
+              "y": -0.4640259566295146,
+              "v": 0.006269669725654501
+            },
+            {
+              "level": "inosine 5'-monophosphate",
+              "against": "ribose 5-phosphate",
+              "y": -1.4815755961459125,
+              "v": 0.006269669725654501
+            }
+          ],
+          "focal": true,
+          "peak_area": true
+        },
+        {
+          "source": "mottram2002",
+          "contrast": "mottram2002-2",
+          "lab": "reading_mottram_parker",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "ribose",
+              "against": "ribose 5-phosphate",
+              "y": 0.03655100199240646,
+              "v": 0.006269669725654501
+            },
+            {
+              "level": "inosine 5'-monophosphate",
+              "against": "ribose 5-phosphate",
+              "y": -1.4856790583549278,
+              "v": 0.006269669725654501
+            }
+          ],
+          "focal": true,
+          "peak_area": true
+        },
+        {
+          "source": "mottram2002",
+          "contrast": "mottram2002-3",
+          "lab": "reading_mottram_parker",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "ribose",
+              "against": "ribose 5-phosphate",
+              "y": -0.052990419739193495,
+              "v": 0.006269669725654501
+            },
+            {
+              "level": "inosine 5'-monophosphate",
+              "against": "ribose 5-phosphate",
+              "y": -1.3159556735938769,
+              "v": 0.006269669725654501
+            }
+          ],
+          "focal": true,
+          "peak_area": true
+        },
+        {
+          "source": "mottram2002",
+          "contrast": "mottram2002-4",
+          "lab": "reading_mottram_parker",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "ribose",
+              "against": "ribose 5-phosphate",
+              "y": -0.09342168516223515,
+              "v": 0.006269669725654501
+            },
+            {
+              "level": "inosine 5'-monophosphate",
+              "against": "ribose 5-phosphate",
+              "y": -0.7387313157630819,
+              "v": 0.006269669725654501
+            }
+          ],
+          "focal": true,
+          "peak_area": true
+        }
+      ],
+      "reference": "glucose",
+      "fit": {
+        "connected": true,
+        "reference": "glucose",
+        "levels": {
+          "fructose": {
+            "estimate": 0.165757534644629,
+            "ci90": [
+              -0.5981442588826553,
+              0.9260389113322439
+            ],
+            "new_lab_pi90": [
+              -1.0067884595858625,
+              1.3346653971086921
+            ],
+            "p_same_sign_new_lab": 0.5957794164408315,
+            "new_lab_pi90_width": 2.341453856694555,
+            "labs": 1,
+            "contrasts": 1,
+            "reading": "too few laboratories"
+          },
+          "glucose-6-phosphate": {
+            "estimate": -0.44442878748468756,
+            "ci90": [
+              -1.2067053896175328,
+              0.31741906450973467
+            ],
+            "new_lab_pi90": [
+              -1.6153564164636918,
+              0.7260925021588341
+            ],
+            "p_same_sign_new_lab": 0.7410524035133288,
+            "new_lab_pi90_width": 2.341448918622526,
+            "labs": 1,
+            "contrasts": 1,
+            "reading": "too few laboratories"
+          },
+          "inosine 5'-monophosphate": {
+            "estimate": 0.297635540945299,
+            "ci90": [
+              -0.2981308820863487,
+              0.8847800235657719
+            ],
+            "new_lab_pi90": [
+              -0.7742987212892456,
+              1.3607718363916395
+            ],
+            "p_same_sign_new_lab": 0.6829795246912116,
+            "new_lab_pi90_width": 2.1350705576808853,
+            "labs": 2,
+            "contrasts": 5,
+            "reading": "too few laboratories"
+          },
+          "maltose": {
+            "estimate": -0.7407948705779817,
+            "ci90": [
+              -1.5022927602855047,
+              0.021850776457122002
+            ],
+            "new_lab_pi90": [
+              -1.9109441306535884,
+              0.43048883439703517
+            ],
+            "p_same_sign_new_lab": 0.8567126556611376,
+            "new_lab_pi90_width": 2.3414329650506236,
+            "labs": 1,
+            "contrasts": 1,
+            "reading": "too few laboratories"
+          },
+          "none": {
+            "estimate": 0.06343864078879302,
+            "ci90": [
+              -1.0835688189299075,
+              1.2026927430787477
+            ],
+            "new_lab_pi90": [
+              -1.3884960170899328,
+              1.5074805852684134
+            ],
+            "p_same_sign_new_lab": 0.5298714845344131,
+            "new_lab_pi90_width": 2.8959766023583464,
+            "labs": 1,
+            "contrasts": 1,
+            "reading": "too few laboratories"
+          },
+          "rhamnose": {
+            "estimate": -0.40446665397167525,
+            "ci90": [
+              -0.8489812282661959,
+              0.03761587549079381
+            ],
+            "new_lab_pi90": [
+              -1.3988662468805493,
+              0.587430745576718
+            ],
+            "p_same_sign_new_lab": 0.7561753910873225,
+            "new_lab_pi90_width": 1.9862969924572673,
+            "labs": 1,
+            "contrasts": 4,
+            "reading": "too few laboratories"
+          },
+          "ribose": {
+            "estimate": 1.1933727434370418,
+            "ci90": [
+              0.7495574157387735,
+              1.6305350875206952
+            ],
+            "new_lab_pi90": [
+              0.1980595771001675,
+              2.181837105587391
+            ],
+            "p_same_sign_new_lab": 0.9737392445137917,
+            "new_lab_pi90_width": 1.9837775284872237,
+            "labs": 2,
+            "contrasts": 18,
+            "reading": "too few laboratories"
+          },
+          "ribose 5-phosphate": {
+            "estimate": 1.35888471179185,
+            "ci90": [
+              0.7624887955651312,
+              1.9455137681175563
+            ],
+            "new_lab_pi90": [
+              0.2863258191775682,
+              2.421472375939863
+            ],
+            "p_same_sign_new_lab": 0.9791186557793709,
+            "new_lab_pi90_width": 2.1351465567622947,
+            "labs": 2,
+            "contrasts": 9,
+            "reading": "too few laboratories"
+          },
+          "xylose": {
+            "estimate": 0.9104570049396811,
+            "ci90": [
+              0.1530465520381145,
+              1.6603447008868328
+            ],
+            "new_lab_pi90": [
+              -0.25864120558783443,
+              2.0718684267816543
+            ],
+            "p_same_sign_new_lab": 0.9034492661143626,
+            "new_lab_pi90_width": 2.3305096323694885,
+            "labs": 2,
+            "contrasts": 2,
+            "reading": "too few laboratories"
+          }
+        },
+        "reml_scales": [
+          0.532694791291947
+        ]
+      },
+      "reading": "per level"
+    },
+    {
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lever_class": "sulfur source",
+      "band": "all",
+      "contrasts": 11,
+      "studies": 5,
+      "labs": 3,
+      "lab_names": [
+        "btbu_beijing",
+        "dfa_garching",
+        "ho_network"
+      ],
+      "peak_area_share": 0.0,
+      "focal_share": 0.9090909090909091,
+      "matrices": [
+        "buffer",
+        "water"
+      ],
+      "temperature_range_C": [
+        100.0,
+        145.0
+      ],
+      "rows": [
+        {
+          "source": "Zhang2024",
+          "contrast": "Zhang2024-1",
+          "lab": "btbu_beijing",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "cysteine",
+              "against": "none",
+              "y": 1.2820067583505508,
+              "v": 0.006370606971379688
+            },
+            {
+              "level": "glutathione",
+              "against": "none",
+              "y": 1.1760912590556811,
+              "v": 0.006288775314425541
+            },
+            {
+              "level": "cystine",
+              "against": "none",
+              "y": 1.458098017406232,
+              "v": 0.006307971386413
+            }
+          ],
+          "focal": true,
+          "peak_area": false
+        },
+        {
+          "source": "feng2022",
+          "contrast": "feng2022-5",
+          "lab": "ho_network",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "glutathione",
+              "against": "none",
+              "y": 0.6486437796906018,
+              "v": 0.00024809959149449146
+            }
+          ],
+          "focal": true,
+          "peak_area": false
+        },
+        {
+          "source": "feng2022",
+          "contrast": "feng2022-7",
+          "lab": "ho_network",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "glutathione",
+              "against": "none",
+              "y": 0.3357159966952926,
+              "v": 0.00018041656028526602
+            }
+          ],
+          "focal": true,
+          "peak_area": false
+        },
+        {
+          "source": "grosch1992",
+          "contrast": "grosch1992-1",
+          "lab": "dfa_garching",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "cysteine",
+              "against": "none",
+              "y": 0.5627502573180296,
+              "v": 0.0016465020947745747
+            },
+            {
+              "level": "glutathione",
+              "against": "none",
+              "y": 0.6457244923827936,
+              "v": 0.0007291638205518283
+            },
+            {
+              "level": "glutathione + cysteine",
+              "against": "none",
+              "y": 0.23823916580452564,
+              "v": 0.005121960132010909
+            }
+          ],
+          "focal": true,
+          "peak_area": false
+        },
+        {
+          "source": "grosch1992",
+          "contrast": "grosch1992-2",
+          "lab": "dfa_garching",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "cysteine",
+              "against": "none",
+              "y": 0.84641608194217,
+              "v": 0.004691165372244702
+            }
+          ],
+          "focal": true,
+          "peak_area": false
+        },
+        {
+          "source": "grosch1992",
+          "contrast": "grosch1992-3",
+          "lab": "dfa_garching",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "cysteine",
+              "against": "none",
+              "y": 0.0,
+              "v": 0.006269669725654501
+            }
+          ],
+          "focal": true,
+          "peak_area": false
+        },
+        {
+          "source": "grosch1992",
+          "contrast": "grosch1992-4",
+          "lab": "dfa_garching",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "thiamine pyrophosphate",
+              "against": "thiamine",
+              "y": -0.9731278535996988,
+              "v": 0.0072332329871176385
+            }
+          ],
+          "focal": true,
+          "peak_area": false
+        },
+        {
+          "source": "grosch1992",
+          "contrast": "grosch1992-5",
+          "lab": "dfa_garching",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "thiamine pyrophosphate",
+              "against": "thiamine",
+              "y": -1.8195439355418688,
+              "v": 0.0037276021107815653
+            }
+          ],
+          "focal": true,
+          "peak_area": false
+        },
+        {
+          "source": "grosch1992",
+          "contrast": "grosch1992-36",
+          "lab": "dfa_garching",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "cysteine",
+              "against": "none",
+              "y": 0.7355988996981797,
+              "v": 0.006907068803059529
+            }
+          ],
+          "focal": true,
+          "peak_area": false
+        },
+        {
+          "source": "hofmann1998",
+          "contrast": "hofmann1998-27",
+          "lab": "dfa_garching",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "cysteine",
+              "against": "hydrogen sulfide",
+              "y": -0.6188302015778553,
+              "v": 0.006269669725654501
+            }
+          ],
+          "focal": true,
+          "peak_area": false
+        },
+        {
+          "source": "zhou2023c",
+          "contrast": "zhou2023c-1",
+          "lab": "ho_network",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "cysteine",
+              "against": "glutathione",
+              "y": 1.2538398108347943,
+              "v": 0.006269669725654501
+            }
+          ],
+          "focal": false,
+          "peak_area": false
+        }
+      ],
+      "reference": "cysteine",
+      "fit": {
+        "connected": true,
+        "reference": "cysteine",
+        "levels": {
+          "cystine": {
+            "estimate": 0.27699279435473984,
+            "ci90": [
+              -0.4657220962554115,
+              1.0188077393958188
+            ],
+            "new_lab_pi90": [
+              -0.8670412514600525,
+              1.4201134093158445
+            ],
+            "p_same_sign_new_lab": 0.664244307750349,
+            "new_lab_pi90_width": 2.2871546607758972,
+            "labs": 1,
+            "contrasts": 1,
+            "reading": "too few laboratories"
+          },
+          "glutathione": {
+            "estimate": -0.28873147792312576,
+            "ci90": [
+              -0.7112567116989587,
+              0.13560990812732254
+            ],
+            "new_lab_pi90": [
+              -1.2553739461622795,
+              0.6797056157014849
+            ],
+            "p_same_sign_new_lab": 0.6991920278793565,
+            "new_lab_pi90_width": 1.9350795618637644,
+            "labs": 3,
+            "contrasts": 5,
+            "reading": "direction unclear"
+          },
+          "glutathione + cysteine": {
+            "estimate": -0.509999947993831,
+            "ci90": [
+              -1.25116538988644,
+              0.23826054845899095
+            ],
+            "new_lab_pi90": [
+              -1.651549166928964,
+              0.6387872459875654
+            ],
+            "p_same_sign_new_lab": 0.7794906457896293,
+            "new_lab_pi90_width": 2.2903364129165293,
+            "labs": 1,
+            "contrasts": 1,
+            "reading": "too few laboratories"
+          },
+          "hydrogen sulfide": {
+            "estimate": 0.6012903449314924,
+            "ci90": [
+              -0.2671347095425599,
+              1.4602624556663442
+            ],
+            "new_lab_pi90": [
+              -0.6294142805227176,
+              1.8223473246169473
+            ],
+            "p_same_sign_new_lab": 0.8009729278367508,
+            "new_lab_pi90_width": 2.451761605139665,
+            "labs": 1,
+            "contrasts": 1,
+            "reading": "too few laboratories"
+          },
+          "none": {
+            "estimate": -0.7757786918453319,
+            "ci90": [
+              -1.1396149396980617,
+              -0.4093372653265014
+            ],
+            "new_lab_pi90": [
+              -1.717948509671547,
+              0.1690332401285018
+            ],
+            "p_same_sign_new_lab": 0.9160186382067356,
+            "new_lab_pi90_width": 1.8869817498000487,
+            "labs": 3,
+            "contrasts": 11,
+            "reading": "answered by the literature"
+          },
+          "thiamine": {
+            "reading": "not connected"
+          },
+          "thiamine pyrophosphate": {
+            "reading": "not connected"
+          }
+        },
+        "reml_scales": [
+          0.532694791291947
+        ]
+      },
+      "reading": "per level"
+    },
+    {
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lever_class": "temperature",
+      "band": "time >120 min",
+      "contrasts": 2,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "ho_network"
+      ],
+      "peak_area_share": 0.0,
+      "focal_share": 0.0,
+      "matrices": [
+        "water"
+      ],
+      "temperature_range_C": [
+        100.0,
+        120.0
+      ],
+      "rows": [
+        {
+          "source": "feng2022",
+          "contrast": "feng2022-1",
+          "lab": "ho_network",
+          "y": 0.10803633866375888,
+          "v": 9.784717339406519e-05,
+          "range": [
+            100.0,
+            120.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false
+        },
+        {
+          "source": "feng2022",
+          "contrast": "feng2022-3",
+          "lab": "ho_network",
+          "y": 0.2645002301614135,
+          "v": 9.281864550874182e-06,
+          "range": [
+            100.0,
+            120.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false
+        }
+      ],
+      "step": "+10 C",
+      "fit": {
+        "estimate": 0.18619450638130364,
+        "ci90": [
+          -0.2394192295269714,
+          0.6051333242769514
+        ],
+        "new_lab_pi90": [
+          -0.4757735938566953,
+          0.8415711433988946
+        ],
+        "p_same_sign_new_lab": 0.7719782448036995,
+        "new_lab_pi90_width": 1.31734473725559,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.11243458629672394
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": 0.1865194303439918,
+            "new_lab_pi90": [
+              -0.24274109613012332,
+              0.6132961190443535
+            ]
+          },
+          "1.0": {
+            "estimate": 0.18571742830022228,
+            "new_lab_pi90": [
+              -0.8408437735041627,
+              1.1932343404239263
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 2,
+          "estimate": 0.18619450638130364,
+          "ci90": [
+            -0.2394192295269714,
+            0.6051333242769514
+          ]
+        },
+        "incidental_only": {
+          "contrasts": 2,
+          "estimate": 0.18619450638130364,
+          "ci90": [
+            -0.2394192295269714,
+            0.6051333242769514
+          ]
+        },
+        "non_monotone_contrasts": 0
+      },
+      "reading": "too few laboratories",
+      "lolo": null
+    },
+    {
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lever_class": "time",
+      "band": "T 100-130 C",
+      "contrasts": 6,
+      "studies": 3,
+      "labs": 2,
+      "lab_names": [
+        "ho_network",
+        "nestle_rc_and_cerny_firmenich"
+      ],
+      "peak_area_share": 0.0,
+      "focal_share": 0.0,
+      "matrices": [
+        "buffer",
+        "other (choline chloride/glycerol 1:1 molar)",
+        "other (glycerol)",
+        "water"
+      ],
+      "temperature_range_C": [
+        110.0,
+        120.0
+      ],
+      "rows": [
+        {
+          "source": "feng2022",
+          "contrast": "feng2022-9",
+          "lab": "ho_network",
+          "y": 0.09683382044776359,
+          "v": 0.00014245665588211883,
+          "range": [
+            30.000000000000004,
+            120.00000000000001
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false
+        },
+        {
+          "source": "feng2022",
+          "contrast": "feng2022-11",
+          "lab": "ho_network",
+          "y": 0.2267351013336861,
+          "v": 1.3018523564425553e-05,
+          "range": [
+            30.000000000000004,
+            120.00000000000001
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false
+        },
+        {
+          "source": "us10076126",
+          "contrast": "us10076126-3",
+          "lab": "nestle_rc_and_cerny_firmenich",
+          "y": 0.36389646863277664,
+          "v": 0.0011269669725654501,
+          "range": [
+            30.000000000000004,
+            240.00000000000003
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false
+        },
+        {
+          "source": "us10076126",
+          "contrast": "us10076126-4",
+          "lab": "nestle_rc_and_cerny_firmenich",
+          "y": 0.45399857822109274,
+          "v": 0.0011269669725654501,
+          "range": [
+            30.000000000000004,
+            240.00000000000003
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false
+        },
+        {
+          "source": "us10076126",
+          "contrast": "us10076126-5",
+          "lab": "nestle_rc_and_cerny_firmenich",
+          "y": 0.6795406851264327,
+          "v": 0.0011269669725654501,
+          "range": [
+            30.000000000000004,
+            240.00000000000003
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false
+        },
+        {
+          "source": "zhou2023c",
+          "contrast": "zhou2023c-3",
+          "lab": "ho_network",
+          "y": -0.8450435670786769,
+          "v": 0.006209900456089848,
+          "range": [
+            60.00000000000001,
+            120.00000000000001
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false
+        }
+      ],
+      "step": "a doubling of time",
+      "fit": {
+        "estimate": 0.16619917212989826,
+        "ci90": [
+          -0.28338627664814436,
+          0.6119458069080386
+        ],
+        "new_lab_pi90": [
+          -0.8732282197366362,
+          1.2016571631347688
+        ],
+        "p_same_sign_new_lab": 0.616027569787976,
+        "new_lab_pi90_width": 2.074885382871405,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.37700741270170407,
+          0.4481404746557168
+        ],
+        "prior_dominated": false,
+        "sensitivity": {
+          "0.25": {
+            "estimate": 0.16781487421338356,
+            "new_lab_pi90": [
+              -0.6540430116710256,
+              0.9869516130136669
+            ]
+          },
+          "1.0": {
+            "estimate": 0.16529681091372825,
+            "new_lab_pi90": [
+              -1.0862971572875897,
+              1.4101000784467967
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 6,
+          "estimate": 0.16619917212989826,
+          "ci90": [
+            -0.28338627664814436,
+            0.6119458069080386
+          ]
+        },
+        "incidental_only": {
+          "contrasts": 6,
+          "estimate": 0.16619917212989826,
+          "ci90": [
+            -0.28338627664814436,
+            0.6119458069080386
+          ]
+        },
+        "non_monotone_contrasts": 1
+      },
+      "reading": "too few laboratories",
+      "lolo": null
+    },
+    {
+      "compound": "Bis(2-furfuryl) disulfide",
+      "lever_class": "buffer",
+      "band": "all",
+      "contrasts": 3,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "reading_mottram_parker"
+      ],
+      "peak_area_share": 1.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "buffer",
+        "water"
+      ],
+      "temperature_range_C": [
+        140.0,
+        140.0
+      ],
+      "rows": [
+        {
+          "source": "mottram2002",
+          "contrast": "mottram2002-57",
+          "lab": "reading_mottram_parker",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "phosphate",
+              "against": "none",
+              "y": -2.633468455579586,
+              "v": 0.006269669725654501
+            },
+            {
+              "level": "phthalate",
+              "against": "none",
+              "y": -2.633468455579586,
+              "v": 0.006269669725654501
+            }
+          ],
+          "focal": true,
+          "peak_area": true
+        },
+        {
+          "source": "mottram2002",
+          "contrast": "mottram2002-58",
+          "lab": "reading_mottram_parker",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "phosphate",
+              "against": "none",
+              "y": -0.6020599913279623,
+              "v": 0.006269669725654501
+            },
+            {
+              "level": "phthalate",
+              "against": "none",
+              "y": -0.07058107428570715,
+              "v": 0.006269669725654501
+            }
+          ],
+          "focal": true,
+          "peak_area": true
+        },
+        {
+          "source": "mottram2002",
+          "contrast": "mottram2002-59",
+          "lab": "reading_mottram_parker",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "phosphate",
+              "against": "none",
+              "y": 0.0,
+              "v": 0.006269669725654501
+            },
+            {
+              "level": "phthalate",
+              "against": "none",
+              "y": 0.0,
+              "v": 0.006269669725654501
+            }
+          ],
+          "focal": true,
+          "peak_area": true
+        }
+      ],
+      "reference": "phosphate",
+      "fit": {
+        "connected": true,
+        "reference": "phosphate",
+        "levels": {
+          "none": {
+            "estimate": 1.0448788040876742,
+            "ci90": [
+              0.16792902770223447,
+              1.905973024556278
+            ],
+            "new_lab_pi90": [
+              -0.7261103470608111,
+              2.7996747054741715
+            ],
+            "p_same_sign_new_lab": 0.8435055040824353,
+            "new_lab_pi90_width": 3.5257850525349825,
+            "labs": 1,
+            "contrasts": 6,
+            "reading": "too few laboratories"
+          },
+          "phthalate": {
+            "estimate": 0.15688140540731169,
+            "ci90": [
+              -0.7165958195613535,
+              1.0209946517661734
+            ],
+            "new_lab_pi90": [
+              -1.610657385552842,
+              1.9148457785981576
+            ],
+            "p_same_sign_new_lab": 0.5617560983679977,
+            "new_lab_pi90_width": 3.525503164151,
+            "labs": 1,
+            "contrasts": 3,
+            "reading": "too few laboratories"
+          }
+        },
+        "reml_scales": [
+          1.2641536195715461
+        ]
+      },
+      "reading": "per level"
+    },
+    {
+      "compound": "Bis(2-furfuryl) disulfide",
+      "lever_class": "pH",
+      "band": "pH 4.5-6, held",
+      "contrasts": 1,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "reading_mottram_parker"
+      ],
+      "peak_area_share": 1.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "buffer"
+      ],
+      "temperature_range_C": [
+        140.0,
+        140.0
+      ],
+      "rows": [
+        {
+          "source": "mottram2002",
+          "contrast": "mottram2002-62",
+          "lab": "reading_mottram_parker",
+          "y": 0.32566568260694617,
+          "v": 0.0031988110845176053,
+          "range": [
+            4.2,
+            5.6
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true
+        }
+      ],
+      "step": "+1 pH unit",
+      "fit": {
+        "estimate": 0.3243770511713977,
+        "ci90": [
+          -0.19084110961395037,
+          0.8234244177207799
+        ],
+        "new_lab_pi90": [
+          -0.4020369853902916,
+          1.0346155983263596
+        ],
+        "p_same_sign_new_lab": 0.8640010255569277,
+        "new_lab_pi90_width": 1.4366525837166513,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.0
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": 0.32502641594911974,
+            "new_lab_pi90": [
+              -0.0888396342706973,
+              0.7344703625166176
+            ]
+          },
+          "1.0": {
+            "estimate": 0.32308218961183904,
+            "new_lab_pi90": [
+              -0.9440126939399243,
+              1.5387957750139134
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 0
+        },
+        "incidental_only": {
+          "contrasts": 0
+        },
+        "non_monotone_contrasts": 0
+      },
+      "reading": "too few laboratories",
+      "lolo": null
+    },
+    {
+      "compound": "Bis(2-furfuryl) disulfide",
+      "lever_class": "pH",
+      "band": "pH 6-7.5, initial or label",
+      "contrasts": 1,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "ho_network"
+      ],
+      "peak_area_share": 0.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "water"
+      ],
+      "temperature_range_C": [
+        120.0,
+        120.0
+      ],
+      "rows": [
+        {
+          "source": "zhou2023",
+          "contrast": "zhou2023-4",
+          "lab": "ho_network",
+          "y": -0.3004154568860429,
+          "v": 0.00025015033251840494,
+          "range": [
+            6.0,
+            7.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": false
+        }
+      ],
+      "step": "+1 pH unit",
+      "fit": {
+        "estimate": -0.2996430902799019,
+        "ci90": [
+          -0.7935354947796726,
+          0.2099652427186452
+        ],
+        "new_lab_pi90": [
+          -1.006358592299085,
+          0.42280796899552003
+        ],
+        "p_same_sign_new_lab": 0.8563412323510131,
+        "new_lab_pi90_width": 1.429166561294605,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.0
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": -0.3000669584053268,
+            "new_lab_pi90": [
+              -0.7024650400085789,
+              0.10682306476499501
+            ]
+          },
+          "1.0": {
+            "estimate": -0.2987927069311287,
+            "new_lab_pi90": [
+              -1.5137318436099332,
+              0.9649579463268617
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 1,
+          "estimate": -0.2996430902799019,
+          "ci90": [
+            -0.7935354947796726,
+            0.2099652427186452
+          ]
+        },
+        "incidental_only": {
+          "contrasts": 0
+        },
+        "non_monotone_contrasts": 0
+      },
+      "reading": "too few laboratories",
+      "lolo": null
+    },
+    {
+      "compound": "Bis(2-furfuryl) disulfide",
+      "lever_class": "sugar identity",
+      "band": "all",
+      "contrasts": 3,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "reading_mottram_parker"
+      ],
+      "peak_area_share": 1.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "buffer",
+        "water"
+      ],
+      "temperature_range_C": [
+        140.0,
+        140.0
+      ],
+      "rows": [
+        {
+          "source": "mottram2002",
+          "contrast": "mottram2002-53",
+          "lab": "reading_mottram_parker",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "ribose",
+              "against": "ribose 5-phosphate",
+              "y": 0.2696215314123571,
+              "v": 0.006269669725654501
+            },
+            {
+              "level": "inosine 5'-monophosphate",
+              "against": "ribose 5-phosphate",
+              "y": -2.633468455579586,
+              "v": 0.006269669725654501
+            }
+          ],
+          "focal": true,
+          "peak_area": true
+        },
+        {
+          "source": "mottram2002",
+          "contrast": "mottram2002-54",
+          "lab": "reading_mottram_parker",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "ribose",
+              "against": "ribose 5-phosphate",
+              "y": 2.3010299956639813,
+              "v": 0.006269669725654501
+            },
+            {
+              "level": "inosine 5'-monophosphate",
+              "against": "ribose 5-phosphate",
+              "y": 0.0,
+              "v": 0.006269669725654501
+            }
+          ],
+          "focal": true,
+          "peak_area": true
+        },
+        {
+          "source": "mottram2002",
+          "contrast": "mottram2002-55",
+          "lab": "reading_mottram_parker",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "ribose",
+              "against": "ribose 5-phosphate",
+              "y": 2.8325089127062366,
+              "v": 0.006269669725654501
+            },
+            {
+              "level": "inosine 5'-monophosphate",
+              "against": "ribose 5-phosphate",
+              "y": 0.0,
+              "v": 0.006269669725654501
+            }
+          ],
+          "focal": true,
+          "peak_area": true
+        }
+      ],
+      "reference": "glucose",
+      "fit": {
+        "connected": false,
+        "levels": {
+          "inosine 5'-monophosphate": {
+            "reading": "not connected"
+          },
+          "ribose": {
+            "reading": "not connected"
+          },
+          "ribose 5-phosphate": {
+            "reading": "not connected"
+          }
+        }
+      },
+      "reading": "per level"
+    },
+    {
+      "compound": "Bis(2-furfuryl) disulfide",
+      "lever_class": "sulfur source",
+      "band": "all",
+      "contrasts": 1,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "ho_network"
+      ],
+      "peak_area_share": 1.0,
+      "focal_share": 0.0,
+      "matrices": [
+        "water"
+      ],
+      "temperature_range_C": [
+        180.0,
+        180.0
+      ],
+      "rows": [
+        {
+          "source": "zhang1991",
+          "contrast": "zhang1991-4",
+          "lab": "ho_network",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "glutathione",
+              "against": "cysteine",
+              "y": 0.33159874497372765,
+              "v": 0.006269669725654501
+            }
+          ],
+          "focal": false,
+          "peak_area": true
+        }
+      ],
+      "reference": "cysteine",
+      "fit": {
+        "connected": true,
+        "reference": "cysteine",
+        "levels": {
+          "glutathione": {
+            "estimate": 0.33081516716576187,
+            "ci90": [
+              -0.0028922269015553706,
+              0.6553434011593939
+            ],
+            "new_lab_pi90": [
+              -0.12881769600136256,
+              0.7809150591567708
+            ],
+            "p_same_sign_new_lab": 0.925692247765903,
+            "new_lab_pi90_width": 0.9097327551581333,
+            "labs": 1,
+            "contrasts": 1,
+            "reading": "too few laboratories"
+          }
+        },
+        "reml_scales": [
+          0.0
+        ]
+      },
+      "reading": "per level"
+    },
+    {
+      "compound": "Bis(2-methyl-3-furyl) disulfide",
+      "lever_class": "buffer",
+      "band": "all",
+      "contrasts": 2,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "reading_mottram_parker"
+      ],
+      "peak_area_share": 1.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "buffer",
+        "water"
+      ],
+      "temperature_range_C": [
+        140.0,
+        140.0
+      ],
+      "rows": [
+        {
+          "source": "mottram2002",
+          "contrast": "mottram2002-31",
+          "lab": "reading_mottram_parker",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "phosphate",
+              "against": "none",
+              "y": -0.3679767852945943,
+              "v": 0.006269669725654501
+            },
+            {
+              "level": "phthalate",
+              "against": "none",
+              "y": 0.4937205165391241,
+              "v": 0.006269669725654501
+            }
+          ],
+          "focal": true,
+          "peak_area": true
+        },
+        {
+          "source": "mottram2002",
+          "contrast": "mottram2002-32",
+          "lab": "reading_mottram_parker",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "phosphate",
+              "against": "none",
+              "y": 0.191331225612418,
+              "v": 0.006269669725654501
+            },
+            {
+              "level": "phthalate",
+              "against": "none",
+              "y": -0.007825337511956576,
+              "v": 0.006269669725654501
+            }
+          ],
+          "focal": true,
+          "peak_area": true
+        }
+      ],
+      "reference": "phosphate",
+      "fit": {
+        "connected": true,
+        "reference": "phosphate",
+        "levels": {
+          "none": {
+            "estimate": 0.08531248903747835,
+            "ci90": [
+              -0.5119891647821373,
+              0.6782733699307145
+            ],
+            "new_lab_pi90": [
+              -0.9489138286177138,
+              1.1151242732416615
+            ],
+            "p_same_sign_new_lab": 0.5637391575719016,
+            "new_lab_pi90_width": 2.064038101859375,
+            "labs": 1,
+            "contrasts": 4,
+            "reading": "too few laboratories"
+          },
+          "phthalate": {
+            "estimate": 0.32678468777542186,
+            "ci90": [
+              -0.2716306840743444,
+              0.9186664370923414
+            ],
+            "new_lab_pi90": [
+              -0.7085577641037715,
+              1.3554819600910575
+            ],
+            "p_same_sign_new_lab": 0.7258478658579125,
+            "new_lab_pi90_width": 2.0640397241948287,
+            "labs": 1,
+            "contrasts": 2,
+            "reading": "too few laboratories"
+          }
+        },
+        "reml_scales": [
+          0.532694791291947
+        ]
+      },
+      "reading": "per level"
+    },
+    {
+      "compound": "Bis(2-methyl-3-furyl) disulfide",
+      "lever_class": "lipid",
+      "band": "all",
+      "contrasts": 1,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "reading_mottram_parker"
+      ],
+      "peak_area_share": 1.0,
+      "focal_share": 0.0,
+      "matrices": [
+        "buffer"
+      ],
+      "temperature_range_C": [
+        140.0,
+        140.0
+      ],
+      "rows": [
+        {
+          "source": "elmore2002",
+          "contrast": "elmore2002-3",
+          "lab": "reading_mottram_parker",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "methyl alpha-linolenate",
+              "against": "none",
+              "y": -2.0043213737826426,
+              "v": 0.05556305318529509
+            }
+          ],
+          "focal": false,
+          "peak_area": true
+        }
+      ],
+      "reference": "none",
+      "fit": {
+        "connected": true,
+        "reference": "none",
+        "levels": {
+          "methyl alpha-linolenate": {
+            "estimate": -1.9858066765582536,
+            "ci90": [
+              -2.472546750615373,
+              -1.4729597701240134
+            ],
+            "new_lab_pi90": [
+              -2.5485177728501283,
+              -1.3911649202808687
+            ],
+            "p_same_sign_new_lab": 0.9974966935127074,
+            "new_lab_pi90_width": 1.1573528525692596,
+            "labs": 1,
+            "contrasts": 1,
+            "reading": "too few laboratories"
+          }
+        },
+        "reml_scales": [
+          0.0
+        ]
+      },
+      "reading": "per level"
+    },
+    {
+      "compound": "Bis(2-methyl-3-furyl) disulfide",
+      "lever_class": "pH",
+      "band": "pH 4.5-6, held",
+      "contrasts": 2,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "reading_mottram_parker"
+      ],
+      "peak_area_share": 1.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "buffer"
+      ],
+      "temperature_range_C": [
+        140.0,
+        140.0
+      ],
+      "rows": [
+        {
+          "source": "mottram2002",
+          "contrast": "mottram2002-34",
+          "lab": "reading_mottram_parker",
+          "y": -0.5030018080497829,
+          "v": 0.0031988110845176053,
+          "range": [
+            4.2,
+            5.6
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true
+        },
+        {
+          "source": "mottram2002",
+          "contrast": "mottram2002-36",
+          "lab": "reading_mottram_parker",
+          "y": -0.4030510217418305,
+          "v": 0.0031988110845176053,
+          "range": [
+            4.2,
+            5.6
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true
+        }
+      ],
+      "step": "+1 pH unit",
+      "fit": {
+        "estimate": -0.4521442874895817,
+        "ci90": [
+          -0.8063000265473622,
+          -0.08378927887047041
+        ],
+        "new_lab_pi90": [
+          -0.9809420452330521,
+          0.09067642117008672
+        ],
+        "p_same_sign_new_lab": 0.9353139056709177,
+        "new_lab_pi90_width": 1.0716184664031387,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.03985788443006656
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": -0.45253710252972096,
+            "new_lab_pi90": [
+              -0.7822690120488275,
+              -0.11862855965932796
+            ]
+          },
+          "1.0": {
+            "estimate": -0.4514680474738157,
+            "new_lab_pi90": [
+              -1.293927569696981,
+              0.4350170290565892
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 0
+        },
+        "incidental_only": {
+          "contrasts": 0
+        },
+        "non_monotone_contrasts": 0
+      },
+      "reading": "too few laboratories",
+      "lolo": null
+    },
+    {
+      "compound": "Bis(2-methyl-3-furyl) disulfide",
+      "lever_class": "pH",
+      "band": "pH 6-7.5, initial or label",
+      "contrasts": 1,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "ho_network"
+      ],
+      "peak_area_share": 0.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "water"
+      ],
+      "temperature_range_C": [
+        120.0,
+        120.0
+      ],
+      "rows": [
+        {
+          "source": "zhou2023",
+          "contrast": "zhou2023-3",
+          "lab": "ho_network",
+          "y": 0.23513069868661085,
+          "v": 0.00023727715120661124,
+          "range": [
+            6.0,
+            7.0
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": true,
+          "peak_area": false
+        }
+      ],
+      "step": "+1 pH unit",
+      "fit": {
+        "estimate": 0.2345212430891409,
+        "ci90": [
+          -0.2732827718216256,
+          0.7300696628497906
+        ],
+        "new_lab_pi90": [
+          -0.48612362928373565,
+          0.9428449903081981
+        ],
+        "p_same_sign_new_lab": 0.8252358694949871,
+        "new_lab_pi90_width": 1.4289686195919338,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.0
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": 0.23485386745545692,
+            "new_lab_pi90": [
+              -0.17145866142869368,
+              0.637749376494234
+            ]
+          },
+          "1.0": {
+            "estimate": 0.2338537285898453,
+            "new_lab_pi90": [
+              -1.0243257056998163,
+              1.453864365958339
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 1,
+          "estimate": 0.2345212430891409,
+          "ci90": [
+            -0.2732827718216256,
+            0.7300696628497906
+          ]
+        },
+        "incidental_only": {
+          "contrasts": 0
+        },
+        "non_monotone_contrasts": 1
+      },
+      "reading": "too few laboratories",
+      "lolo": null
+    },
+    {
+      "compound": "Bis(2-methyl-3-furyl) disulfide",
+      "lever_class": "precursor dose",
+      "band": "all",
+      "contrasts": 2,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "btbu_beijing"
+      ],
+      "peak_area_share": 0.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "buffer"
+      ],
+      "temperature_range_C": [
+        115.0,
+        115.0
+      ],
+      "rows": [
+        {
+          "source": "Zhang2024",
+          "contrast": "Zhang2024-5",
+          "lab": "btbu_beijing",
+          "y": 0.14998171065131743,
+          "v": 0.00015412152076342426,
+          "range": [
+            0.5,
+            49.999999999999986
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": true,
+          "peak_area": false
+        },
+        {
+          "source": "Zhang2024",
+          "contrast": "Zhang2024-6",
+          "lab": "btbu_beijing",
+          "y": 0.29761904166713543,
+          "v": 0.00015412152076342426,
+          "range": [
+            0.5,
+            49.999999999999986
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": true,
+          "peak_area": false
+        }
+      ],
+      "step": "a doubling of dose",
+      "fit": {
+        "estimate": 0.22313435435358792,
+        "ci90": [
+          -0.19665023480281776,
+          0.6356369508088806
+        ],
+        "new_lab_pi90": [
+          -0.42726323623625284,
+          0.8663162989992563
+        ],
+        "p_same_sign_new_lab": 0.8085038470459516,
+        "new_lab_pi90_width": 1.293579535235509,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.11243458629672394
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": 0.22344252964555314,
+            "new_lab_pi90": [
+              -0.19641220093294937,
+              0.6413015357067599
+            ]
+          },
+          "1.0": {
+            "estimate": 0.222620296422708,
+            "new_lab_pi90": [
+              -0.7905767919908399,
+              1.213622199203562
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 2,
+          "estimate": 0.22313435435358792,
+          "ci90": [
+            -0.19665023480281776,
+            0.6356369508088806
+          ]
+        },
+        "incidental_only": {
+          "contrasts": 0
+        },
+        "non_monotone_contrasts": 2
+      },
+      "reading": "too few laboratories",
+      "lolo": null
+    },
+    {
+      "compound": "Bis(2-methyl-3-furyl) disulfide",
+      "lever_class": "sugar identity",
+      "band": "all",
+      "contrasts": 4,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "reading_mottram_parker"
+      ],
+      "peak_area_share": 1.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "buffer",
+        "water"
+      ],
+      "temperature_range_C": [
+        140.0,
+        140.0
+      ],
+      "rows": [
+        {
+          "source": "mottram2002",
+          "contrast": "mottram2002-27",
+          "lab": "reading_mottram_parker",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "ribose",
+              "against": "ribose 5-phosphate",
+              "y": -0.13830269816628138,
+              "v": 0.006269669725654501
+            },
+            {
+              "level": "inosine 5'-monophosphate",
+              "against": "ribose 5-phosphate",
+              "y": -1.041392685158225,
+              "v": 0.006269669725654501
+            }
+          ],
+          "focal": true,
+          "peak_area": true
+        },
+        {
+          "source": "mottram2002",
+          "contrast": "mottram2002-28",
+          "lab": "reading_mottram_parker",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "ribose",
+              "against": "ribose 5-phosphate",
+              "y": 0.42100531274073094,
+              "v": 0.006269669725654501
+            }
+          ],
+          "focal": true,
+          "peak_area": true
+        },
+        {
+          "source": "mottram2002",
+          "contrast": "mottram2002-29",
+          "lab": "reading_mottram_parker",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "ribose",
+              "against": "ribose 5-phosphate",
+              "y": -0.639848552217362,
+              "v": 0.006269669725654501
+            }
+          ],
+          "focal": true,
+          "peak_area": true
+        },
+        {
+          "source": "mottram2002",
+          "contrast": "mottram2002-30",
+          "lab": "reading_mottram_parker",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "ribose",
+              "against": "ribose 5-phosphate",
+              "y": 0.2810742119095977,
+              "v": 0.006269669725654501
+            },
+            {
+              "level": "inosine 5'-monophosphate",
+              "against": "ribose 5-phosphate",
+              "y": -0.4233759216940016,
+              "v": 0.006269669725654501
+            }
+          ],
+          "focal": true,
+          "peak_area": true
+        }
+      ],
+      "reference": "glucose",
+      "fit": {
+        "connected": false,
+        "levels": {
+          "inosine 5'-monophosphate": {
+            "reading": "not connected"
+          },
+          "ribose": {
+            "reading": "not connected"
+          },
+          "ribose 5-phosphate": {
+            "reading": "not connected"
+          }
+        }
+      },
+      "reading": "per level"
+    },
+    {
+      "compound": "Bis(2-methyl-3-furyl) disulfide",
+      "lever_class": "sulfur source",
+      "band": "all",
+      "contrasts": 4,
+      "studies": 2,
+      "labs": 2,
+      "lab_names": [
+        "btbu_beijing",
+        "dfa_garching"
+      ],
+      "peak_area_share": 0.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "buffer"
+      ],
+      "temperature_range_C": [
+        100.0,
+        100.0
+      ],
+      "rows": [
+        {
+          "source": "Zhang2024",
+          "contrast": "Zhang2024-2",
+          "lab": "btbu_beijing",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "cysteine",
+              "against": "none",
+              "y": 0.4393326938302625,
+              "v": 0.008654426314649879
+            },
+            {
+              "level": "glutathione",
+              "against": "none",
+              "y": 0.24303804868629442,
+              "v": 0.011269669725654501
+            },
+            {
+              "level": "cystine",
+              "against": "none",
+              "y": 1.4313637641589871,
+              "v": 0.008221077065393146
+            }
+          ],
+          "focal": true,
+          "peak_area": false
+        },
+        {
+          "source": "grosch1992",
+          "contrast": "grosch1992-15",
+          "lab": "dfa_garching",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "glutathione",
+              "against": "cysteine",
+              "y": 0.0,
+              "v": 0.006269669725654501
+            },
+            {
+              "level": "glutathione + cysteine",
+              "against": "cysteine",
+              "y": 0.9030899869919435,
+              "v": 0.029658354755085443
+            }
+          ],
+          "focal": true,
+          "peak_area": false
+        },
+        {
+          "source": "grosch1992",
+          "contrast": "grosch1992-17",
+          "lab": "dfa_garching",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "cysteine",
+              "against": "none",
+              "y": 0.0,
+              "v": 0.006269669725654501
+            }
+          ],
+          "focal": true,
+          "peak_area": false
+        },
+        {
+          "source": "grosch1992",
+          "contrast": "grosch1992-18",
+          "lab": "dfa_garching",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "thiamine pyrophosphate",
+              "against": "thiamine",
+              "y": 0.0,
+              "v": 0.006269669725654501
+            }
+          ],
+          "focal": true,
+          "peak_area": false
+        }
+      ],
+      "reference": "cysteine",
+      "fit": {
+        "connected": true,
+        "reference": "cysteine",
+        "levels": {
+          "cystine": {
+            "estimate": 1.107790634807659,
+            "ci90": [
+              0.7204369518085387,
+              1.4877067108294524
+            ],
+            "new_lab_pi90": [
+              0.5386854700130407,
+              1.6691926967633302
+            ],
+            "p_same_sign_new_lab": 0.9913591015528065,
+            "new_lab_pi90_width": 1.1305072267502894,
+            "labs": 1,
+            "contrasts": 1,
+            "reading": "too few laboratories"
+          },
+          "glutathione": {
+            "estimate": -0.04866278614714591,
+            "ci90": [
+              -0.3489226583863241,
+              0.24566953411123668
+            ],
+            "new_lab_pi90": [
+              -0.5623531977317462,
+              0.45879220245088154
+            ],
+            "p_same_sign_new_lab": 0.5925461931171975,
+            "new_lab_pi90_width": 1.0211454001826277,
+            "labs": 2,
+            "contrasts": 2,
+            "reading": "too few laboratories"
+          },
+          "glutathione + cysteine": {
+            "estimate": 0.8723494015207391,
+            "ci90": [
+              0.39602937908488517,
+              1.3380705337858572
+            ],
+            "new_lab_pi90": [
+              0.2410380905372689,
+              1.4913159834660545
+            ],
+            "p_same_sign_new_lab": 0.9783854247656927,
+            "new_lab_pi90_width": 1.2502778929287857,
+            "labs": 1,
+            "contrasts": 1,
+            "reading": "too few laboratories"
+          },
+          "none": {
+            "estimate": -0.19812312062567264,
+            "ci90": [
+              -0.5048137932542929,
+              0.09029735915297518
+            ],
+            "new_lab_pi90": [
+              -0.718287553829113,
+              0.30315068241953463
+            ],
+            "p_same_sign_new_lab": 0.8021808969842392,
+            "new_lab_pi90_width": 1.0214382362486476,
+            "labs": 2,
+            "contrasts": 4,
+            "reading": "too few laboratories"
+          },
+          "thiamine": {
+            "reading": "not connected"
+          },
+          "thiamine pyrophosphate": {
+            "reading": "not connected"
+          }
+        },
+        "reml_scales": [
+          0.2244693495128745
+        ]
+      },
+      "reading": "per level"
+    },
+    {
+      "compound": "Hydrogen Sulfide",
+      "lever_class": "oxygen",
+      "band": "all",
+      "contrasts": 3,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "nebraska_lincoln_arnold"
+      ],
+      "peak_area_share": 0.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "buffer"
+      ],
+      "temperature_range_C": [
+        100.0,
+        100.0
+      ],
+      "rows": [
+        {
+          "source": "arnold1971",
+          "contrast": "arnold1971-5",
+          "lab": "nebraska_lincoln_arnold",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "inert",
+              "against": "air",
+              "y": -0.2174839442139062,
+              "v": 0.011269669725654501
+            }
+          ],
+          "focal": true,
+          "peak_area": false
+        },
+        {
+          "source": "arnold1971",
+          "contrast": "arnold1971-6",
+          "lab": "nebraska_lincoln_arnold",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "inert",
+              "against": "air",
+              "y": -0.19061751225227763,
+              "v": 0.011269669725654501
+            }
+          ],
+          "focal": true,
+          "peak_area": false
+        },
+        {
+          "source": "arnold1971",
+          "contrast": "arnold1971-7",
+          "lab": "nebraska_lincoln_arnold",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "inert",
+              "against": "air",
+              "y": 0.06633207688551757,
+              "v": 0.011269669725654501
+            }
+          ],
+          "focal": true,
+          "peak_area": false
+        }
+      ],
+      "reference": "inert",
+      "fit": {
+        "connected": true,
+        "reference": "inert",
+        "levels": {
+          "air": {
+            "estimate": 0.11383013609312008,
+            "ci90": [
+              -0.03973473832495055,
+              0.2671869900797106
+            ],
+            "new_lab_pi90": [
+              -0.14008678464987467,
+              0.36730788510437834
+            ],
+            "p_same_sign_new_lab": 0.8459479359249147,
+            "new_lab_pi90_width": 0.5073946697542531,
+            "labs": 1,
+            "contrasts": 3,
+            "reading": "too few laboratories"
+          }
+        },
+        "reml_scales": [
+          0.11243458629672394
+        ]
+      },
+      "reading": "per level"
+    },
+    {
+      "compound": "Hydrogen Sulfide",
+      "lever_class": "pH",
+      "band": "pH 6-7.5, initial or label",
+      "contrasts": 4,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "nebraska_lincoln_arnold"
+      ],
+      "peak_area_share": 0.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "buffer"
+      ],
+      "temperature_range_C": [
+        100.0,
+        120.0
+      ],
+      "rows": [
+        {
+          "source": "arnold1971",
+          "contrast": "arnold1971-1",
+          "lab": "nebraska_lincoln_arnold",
+          "y": 1.2639586842883987,
+          "v": 0.011269669725654501,
+          "range": [
+            6.0,
+            7.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": false
+        },
+        {
+          "source": "arnold1971",
+          "contrast": "arnold1971-2",
+          "lab": "nebraska_lincoln_arnold",
+          "y": 1.896709890354168,
+          "v": 0.011269669725654501,
+          "range": [
+            6.0,
+            7.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": false
+        },
+        {
+          "source": "arnold1971",
+          "contrast": "arnold1971-3",
+          "lab": "nebraska_lincoln_arnold",
+          "y": 1.5477747053878224,
+          "v": 0.011269669725654501,
+          "range": [
+            6.0,
+            7.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": false
+        },
+        {
+          "source": "arnold1971",
+          "contrast": "arnold1971-4",
+          "lab": "nebraska_lincoln_arnold",
+          "y": 1.0023879982523802,
+          "v": 0.0045078678902618005,
+          "range": [
+            5.5,
+            7.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": false
+        }
+      ],
+      "step": "+1 pH unit",
+      "fit": {
+        "estimate": 1.4103642051104144,
+        "ci90": [
+          0.9164292184299956,
+          1.8774907488600463
+        ],
+        "new_lab_pi90": [
+          0.4854337462092686,
+          2.3114166159857032
+        ],
+        "p_same_sign_new_lab": 0.984658064442443,
+        "new_lab_pi90_width": 1.8259828697764346,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.37700741270170407
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": 1.4124292097826385,
+            "new_lab_pi90": [
+              0.7369689082593648,
+              2.0856598621141886
+            ]
+          },
+          "1.0": {
+            "estimate": 1.4052989116585346,
+            "new_lab_pi90": [
+              0.1363631788706626,
+              2.5815872919873213
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 4,
+          "estimate": 1.4103642051104144,
+          "ci90": [
+            0.9164292184299956,
+            1.8774907488600463
+          ]
+        },
+        "incidental_only": {
+          "contrasts": 0
+        },
+        "non_monotone_contrasts": 0
+      },
+      "reading": "too few laboratories",
+      "lolo": null
+    },
+    {
+      "compound": "Hydrogen Sulfide",
+      "lever_class": "precursor dose",
+      "band": "all",
+      "contrasts": 1,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "tokyo_kobayasi_fujimaki"
+      ],
+      "peak_area_share": 0.0,
+      "focal_share": 0.0,
+      "matrices": [
+        "water"
+      ],
+      "temperature_range_C": [
+        100.0,
+        100.0
+      ],
+      "rows": [
+        {
+          "source": "kobayasi1965",
+          "contrast": "kobayasi1965-1",
+          "lab": "tokyo_kobayasi_fujimaki",
+          "y": 0.2792328665691367,
+          "v": 0.006269669725654496,
+          "range": [
+            9.999999999999998,
+            20.000000000000004
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false
+        }
+      ],
+      "step": "a doubling of dose",
+      "fit": {
+        "estimate": 0.27788872020353883,
+        "ci90": [
+          -0.2415377858116927,
+          0.7839847477909316
+        ],
+        "new_lab_pi90": [
+          -0.45113703557983864,
+          0.9933090374237403
+        ],
+        "p_same_sign_new_lab": 0.8406303042592793,
+        "new_lab_pi90_width": 1.4444460730035789,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.0
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": 0.27852722332266877,
+            "new_lab_pi90": [
+              -0.14243886479630236,
+              0.6960818902282491
+            ]
+          },
+          "1.0": {
+            "estimate": 0.27662027647250137,
+            "new_lab_pi90": [
+              -0.9882951917598848,
+              1.4982683543255262
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 1,
+          "estimate": 0.27788872020353883,
+          "ci90": [
+            -0.2415377858116927,
+            0.7839847477909316
+          ]
+        },
+        "incidental_only": {
+          "contrasts": 1,
+          "estimate": 0.27788872020353883,
+          "ci90": [
+            -0.2415377858116927,
+            0.7839847477909316
+          ]
+        },
+        "non_monotone_contrasts": 0
+      },
+      "reading": "too few laboratories",
+      "lolo": null
+    },
+    {
+      "compound": "Hydrogen Sulfide",
+      "lever_class": "sugar identity",
+      "band": "all",
+      "contrasts": 1,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "reading_mottram_parker"
+      ],
+      "peak_area_share": 1.0,
+      "focal_share": 0.0,
+      "matrices": [
+        "water"
+      ],
+      "temperature_range_C": [
+        100.0,
+        100.0
+      ],
+      "rows": [
+        {
+          "source": "hincelin1992",
+          "contrast": "hincelin1992-1",
+          "lab": "reading_mottram_parker",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "xylose",
+              "against": "none",
+              "y": 0.47712125471966244,
+              "v": 0.006269669725654501
+            }
+          ],
+          "focal": false,
+          "peak_area": true
+        }
+      ],
+      "reference": "glucose",
+      "fit": {
+        "connected": false,
+        "levels": {
+          "none": {
+            "reading": "not connected"
+          },
+          "xylose": {
+            "reading": "not connected"
+          }
+        }
+      },
+      "reading": "per level"
+    },
+    {
+      "compound": "Hydrogen Sulfide",
+      "lever_class": "temperature",
+      "band": "time 30-120 min",
+      "contrasts": 3,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "nebraska_lincoln_arnold"
+      ],
+      "peak_area_share": 0.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "buffer"
+      ],
+      "temperature_range_C": [
+        100.0,
+        120.0
+      ],
+      "rows": [
+        {
+          "source": "arnold1971",
+          "contrast": "arnold1971-9",
+          "lab": "nebraska_lincoln_arnold",
+          "y": 0.7870156338638595,
+          "v": 0.0028174174314136253,
+          "range": [
+            100.0,
+            120.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": false
+        },
+        {
+          "source": "arnold1971",
+          "contrast": "arnold1971-10",
+          "lab": "nebraska_lincoln_arnold",
+          "y": 0.4710040265111566,
+          "v": 0.0028174174314136253,
+          "range": [
+            100.0,
+            120.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": false
+        },
+        {
+          "source": "arnold1971",
+          "contrast": "arnold1971-11",
+          "lab": "nebraska_lincoln_arnold",
+          "y": 0.1325785071349258,
+          "v": 0.0028174174314136253,
+          "range": [
+            100.0,
+            120.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": false
+        }
+      ],
+      "step": "+10 C",
+      "fit": {
+        "estimate": 0.4603608995722855,
+        "ci90": [
+          -0.041754516803857784,
+          0.9503940657369624
+        ],
+        "new_lab_pi90": [
+          -0.4267378718922858,
+          1.3358907221673226
+        ],
+        "p_same_sign_new_lab": 0.8433991137608476,
+        "new_lab_pi90_width": 1.7626285940596085,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.3171652579277238
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": 0.4617273616990963,
+            "new_lab_pi90": [
+              -0.1703486324142777,
+              1.0906349589096627
+            ]
+          },
+          "1.0": {
+            "estimate": 0.45830375824793246,
+            "new_lab_pi90": [
+              -0.7843140432810487,
+              1.6645263923566835
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 3,
+          "estimate": 0.4603608995722855,
+          "ci90": [
+            -0.041754516803857784,
+            0.9503940657369624
+          ]
+        },
+        "incidental_only": {
+          "contrasts": 0
+        },
+        "non_monotone_contrasts": 0
+      },
+      "reading": "too few laboratories",
+      "lolo": null
+    },
+    {
+      "compound": "Hydrogen Sulfide",
+      "lever_class": "time",
+      "band": "T 100-130 C",
+      "contrasts": 4,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "nebraska_lincoln_arnold"
+      ],
+      "peak_area_share": 0.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "buffer"
+      ],
+      "temperature_range_C": [
+        100.0,
+        120.0
+      ],
+      "rows": [
+        {
+          "source": "arnold1971",
+          "contrast": "arnold1971-12",
+          "lab": "nebraska_lincoln_arnold",
+          "y": 0.2887688775426688,
+          "v": 0.0016582575022564643,
+          "range": [
+            4.999999999999999,
+            30.000000000000004
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": false
+        },
+        {
+          "source": "arnold1971",
+          "contrast": "arnold1971-13",
+          "lab": "nebraska_lincoln_arnold",
+          "y": 0.020140798438892233,
+          "v": 0.0016582575022564643,
+          "range": [
+            4.999999999999999,
+            30.000000000000004
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": false
+        },
+        {
+          "source": "arnold1971",
+          "contrast": "arnold1971-14",
+          "lab": "nebraska_lincoln_arnold",
+          "y": 0.3796575302915223,
+          "v": 0.0024400113338679387,
+          "range": [
+            4.999999999999999,
+            15.000000000000002
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": false
+        },
+        {
+          "source": "arnold1971",
+          "contrast": "arnold1971-15",
+          "lab": "nebraska_lincoln_arnold",
+          "y": 0.45809511369534256,
+          "v": 0.0024400113338679387,
+          "range": [
+            4.999999999999999,
+            15.000000000000002
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": false
+        }
+      ],
+      "step": "a doubling of time",
+      "fit": {
+        "estimate": 0.2838402421514736,
+        "ci90": [
+          -0.09474213753602276,
+          0.6564121981595625
+        ],
+        "new_lab_pi90": [
+          -0.36818205888051536,
+          0.9308297123944534
+        ],
+        "p_same_sign_new_lab": 0.8226347009628316,
+        "new_lab_pi90_width": 1.299011771274969,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.18883946770417823
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": 0.2840019560771581,
+            "new_lab_pi90": [
+              -0.18873340875615358,
+              0.7565031318386364
+            ]
+          },
+          "1.0": {
+            "estimate": 0.28332749561662296,
+            "new_lab_pi90": [
+              -0.6459310211397201,
+              1.1916037175468948
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 4,
+          "estimate": 0.2838402421514736,
+          "ci90": [
+            -0.09474213753602276,
+            0.6564121981595625
+          ]
+        },
+        "incidental_only": {
+          "contrasts": 0
+        },
+        "non_monotone_contrasts": 0
+      },
+      "reading": "too few laboratories",
+      "lolo": null
+    }
+  ],
+  "provenance": {
+    "artifact": "lever_table_development_only",
+    "generated_on": "2026-11-10",
+    "git": {
+      "commit": "777d5235e0ae1f9f1abc76dff76b8b547f8a1fb9",
+      "short": "777d5235",
+      "branch": "lever-table-keying",
+      "dirty": true
+    },
+    "generated_by": "scripts/generators/build_lever_table.py",
+    "inputs": [
+      {
+        "path": "docs/reference/lever_table/contrasts/Zhang2024.yml",
+        "sha256": "3ab67b0ca88bebe134d5aa54764e689d12243a44a7376643be81f319be95fa1c"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/adams2001.yml",
+        "sha256": "382e917f924eac837e679501a647ea3df5d46097cf93af2af46ed0814e7b0890"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/arnold1971.yml",
+        "sha256": "b7b6f953251fddf900cea0706e65f7b1727a6769b11645aedf54d29ed51c3584"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/cerny2007.yml",
+        "sha256": "79440bc09e637af4d7dc9fd6add50e3aa52933cc97da9d94c324aa8441e08842"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/elmore2002.yml",
+        "sha256": "72d12c2e6887c7d66693b88e85e0daaed19aedf896598a3243de989d431f398a"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/farmer1990.yml",
+        "sha256": "9bdd916ed84b09e2aa9c0d5df0682e7bbaa0f1a63843e2411f1757d321362d30"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/feng2022.yml",
+        "sha256": "7122d8df4eccb64a96f7c853e2371f3f19f7483b6ce78c87cc40d49627120877"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/grosch1992.yml",
+        "sha256": "e09d4a48c11445e141058b55c222b06e7715b792088aefa583cb011b7e4a1d39"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/hartman1984b.yml",
+        "sha256": "c4d4b43ba2c0a3d1b37f2c35dc9e3044206fbd10013f60234610fb32ddc2f138"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/hincelin1992.yml",
+        "sha256": "831d2d054e56b6b23e477eb8b1111e9e7b93f6516d6043962ff1d41da1ab7a76"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/hofmann1998.yml",
+        "sha256": "a11a08104d2f92c89a8507fda499868f150d7f1b935921776d35c34b939d29c2"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/kobayasi1965.yml",
+        "sha256": "e9eca2f0073ed90b413b314d15eff84bc18c1ff65d3253eedc40440e5946617e"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/kumazawa2003.yml",
+        "sha256": "7c198e7ca6adb684585453e2ff503332ec81f209df8cdbe20ad56bca79967904"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/meynier1995.yml",
+        "sha256": "55cc4c0568aab56174c676c43965991573f3362e549140a3f5fa1f4a353fb979"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/mizutani1960.yml",
+        "sha256": "36b5461c1c8bf9bb829192c1481118b46bcaabf7689f555bbdb5a1cbf8842821"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/mottram2002.yml",
+        "sha256": "d9858cc2fd75a60ebc63ae4ed49b7293a8577bbdbee5b2cbcf0a3444f1060c98"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/obata1960.yml",
+        "sha256": "7e1339147e9ad3a0ebec9e114c3040059f84f2e4be30b4ae6f837cbab2c1d5c6"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/shu1985.yml",
+        "sha256": "38ed130813edfa52e60595fedf907f1634bb56f26984c229a34c9482fe970007"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/tai1997.yml",
+        "sha256": "b65a9d2692b0b094bb687d4a81080ed289dc5590733899b8a2467c40afefce86"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/tai1998.yml",
+        "sha256": "423d75015439d6c4f344291ada8b48fa99e799dec7a4a505c559997002f47c3e"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/thomas2014.yml",
+        "sha256": "a4feee4e1cc32a02e410e75de89967c483ca8fd004cfc490fb2594f1a44b3566"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/us10076126.yml",
+        "sha256": "0ab75b3b0d25c98c1f98848835bc945148d36b868e6132d4b43f66781b399a4a"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/vanseeventer2001.yml",
+        "sha256": "1ac09daa2c684da5348845aa1ed873b54acb5f5b3f2a9ddfefcc54b4ac5c676e"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zhang1988.yml",
+        "sha256": "d8d59114cfbaaafda8446e95267f546a68ab3af5db7fca6a4675b84f9aee92f8"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zhang1991.yml",
+        "sha256": "47d142c1d6ee57d654dc4096276a4eb8b487ffc3ad8cbb1e724c5b4dcef792c5"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zhang1991b.yml",
+        "sha256": "3d5e5b4d5f951b2e6f67b4512d6c00e5eb268515019ca50af75b1d4003e884bc"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zheng1994.yml",
+        "sha256": "f092b3a0a3d1a755d10fb484799d8ef8d68177d68df172c013b58591772f9be3"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zhou2023.yml",
+        "sha256": "6a0e93487ef6ae9dfa23956f8388a5869e598f7f3d5129d5c3250b91c6204ee8"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zhou2023c.yml",
+        "sha256": "85182525c3b45952be61e1341a78a7af8be334345200d6438dc39cca29a0e498"
+      },
+      {
+        "path": "docs/reference/contrast_benchmark/split.yml",
+        "sha256": "1098b4b420330aa737497f6c855454c732dc394ce2007be6fd94dd9933cb36ac"
+      }
+    ]
+  }
+}

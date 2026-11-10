@@ -1,0 +1,219 @@
+source: meynier1995
+pdf: data/articles/meynier1995.pdf
+reader: b
+scope_note: Only the cysteine/ribose system (Table 3) contains listed thiols; glycine, lysine, methionine tables (1, 2, 4)
+  have none. pH labelled as set; paper states pH changed by no more than 0.2 unit on heating (keyed as held). tr printed as
+  <0.1 ug/10 mg ribose. Sulfur source across Tables 3/4 not keyed (MFT/FFT absent from Table 4).
+contrasts:
+- id: meynier1995-1
+  odorant: 2-methyl-3-furanthiol
+  lever_class: pH
+  lever: pH (4.5 - 6.5), cysteine + ribose, pyrophosphate buffer
+  focal: true
+  location: Table 3, p. 364
+  digitised: false
+  unit: ug/10 mg ribose (approximate, vs internal standard, no response factors)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: pH 4.5
+    lever_value: 4.5
+    value: 15.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        D-ribose: 70 mM
+        volume: 50 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5.0
+    lever_value: 5.0
+    value: 6.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        D-ribose: 70 mM
+        volume: 50 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5.5
+    lever_value: 5.5
+    value: 1.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        D-ribose: 70 mM
+        volume: 50 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 6.0
+    lever_value: 6.0
+    value: 1.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        D-ribose: 70 mM
+        volume: 50 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 6.5 (tr)
+    lever_value: 6.5
+    value: null
+    censor: trace
+    limit: 0.1
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        D-ribose: 70 mM
+        volume: 50 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: meynier1995-2
+  odorant: 2-furylmethanethiol
+  lever_class: pH
+  lever: pH (4.5 - 6.5), cysteine + ribose, pyrophosphate buffer
+  focal: false
+  location: Table 3, p. 364
+  digitised: false
+  unit: ug/10 mg ribose (approximate, vs internal standard, no response factors)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: pH 4.5
+    lever_value: 4.5
+    value: 8.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        D-ribose: 70 mM
+        volume: 50 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5.0
+    lever_value: 5.0
+    value: 6.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        D-ribose: 70 mM
+        volume: 50 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5.5
+    lever_value: 5.5
+    value: 3.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        D-ribose: 70 mM
+        volume: 50 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 6.0
+    lever_value: 6.0
+    value: 1.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        D-ribose: 70 mM
+        volume: 50 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 6.5
+    lever_value: 6.5
+    value: 1.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        D-ribose: 70 mM
+        volume: 50 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated

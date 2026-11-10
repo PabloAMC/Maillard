@@ -1,0 +1,951 @@
+source: Zhang2024
+pdf: data/articles/Zhang2024.pdf
+reader: resolved
+scope_note: No table prints thiol values; all arms digitised (Fig. 1a bars; Fig. 2d, 2f points). Fig. 2d/2f re-read at 600
+  dpi from marker centroids; points at 0.5-10 mg/mL sit on the baseline and overlap (+-0.05 ng/mL, near the digitising floor).
+  Fig. 2 ladders are non-monotone (peak near 50-62.5 mg/mL). Fig. 1 simple-model temperature not printed (sec. 2.2 gives only
+  60 min); Fig. 2 pH 4.9 phosphate from sec. 2.3. Cys vs GSH at matched dose not keyed separately (same arms as the ladders).
+  MMFT (methyl disulfide) not a listed odorant; supplement not read.
+contrasts:
+- id: Zhang2024-1
+  resolution: agreed
+  odorant: 2-Methyl-3-furanthiol (MFT)
+  lever_class: sulfur source
+  lever: 'additive to VB1-Xyl: none vs Cys vs GSH vs GCys (cystine)'
+  focal: true
+  location: Fig. 1a
+  digitised: true
+  unit: ng/mL
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: VB1-Xyl
+    lever_value: none
+    value: 0.07
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: 4.9
+      ph_basis: label
+      temp_C: null
+      time_min: 60
+      precursors:
+        VB1: 15.0 mg/mL
+        Xyl: 15.0 mg/mL
+      buffer: phosphate, pH 4.9
+      matrix: buffer
+      headspace: unstated
+  - label: VB1-Xyl-Cys
+    lever_value: cysteine
+    value: 1.34
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.05
+    conditions:
+      ph: 4.9
+      ph_basis: label
+      temp_C: null
+      time_min: 60
+      precursors:
+        VB1: 15.0 mg/mL
+        Xyl: 15.0 mg/mL
+        Cys: 15.0 mg/mL (equal weight)
+      buffer: phosphate, pH 4.9
+      matrix: buffer
+      headspace: unstated
+  - label: VB1-Xyl-GSH
+    lever_value: glutathione
+    value: 1.05
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: 4.9
+      ph_basis: label
+      temp_C: null
+      time_min: 60
+      precursors:
+        VB1: 15.0 mg/mL
+        Xyl: 15.0 mg/mL
+        GSH: 15.0 mg/mL (equal weight)
+      buffer: phosphate, pH 4.9
+      matrix: buffer
+      headspace: unstated
+  - label: VB1-Xyl-GCys
+    lever_value: cystine
+    value: 2.01
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.04
+    conditions:
+      ph: 4.9
+      ph_basis: label
+      temp_C: null
+      time_min: 60
+      precursors:
+        VB1: 15.0 mg/mL
+        Xyl: 15.0 mg/mL
+        GCys: 15.0 mg/mL (equal weight)
+      buffer: phosphate, pH 4.9
+      matrix: buffer
+      headspace: unstated
+- id: Zhang2024-2
+  resolution: agreed
+  odorant: Bis(2-methyl-3-furyl) disulfide
+  lever_class: sulfur source
+  lever: 'additive to VB1-Xyl: none vs Cys vs GSH vs GCys (cystine)'
+  focal: true
+  location: Fig. 1a
+  digitised: true
+  unit: ng/mL
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: VB1-Xyl
+    lever_value: none
+    value: 0.04
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.9
+      ph_basis: label
+      temp_C: null
+      time_min: 60
+      precursors:
+        VB1: 15.0 mg/mL
+        Xyl: 15.0 mg/mL
+      buffer: phosphate, pH 4.9
+      matrix: buffer
+      headspace: unstated
+  - label: VB1-Xyl-Cys
+    lever_value: cysteine
+    value: 0.11
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: 4.9
+      ph_basis: label
+      temp_C: null
+      time_min: 60
+      precursors:
+        VB1: 15.0 mg/mL
+        Xyl: 15.0 mg/mL
+        Cys: 15.0 mg/mL (equal weight)
+      buffer: phosphate, pH 4.9
+      matrix: buffer
+      headspace: unstated
+  - label: VB1-Xyl-GSH
+    lever_value: glutathione
+    value: 0.07
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.9
+      ph_basis: label
+      temp_C: null
+      time_min: 60
+      precursors:
+        VB1: 15.0 mg/mL
+        Xyl: 15.0 mg/mL
+        GSH: 15.0 mg/mL (equal weight)
+      buffer: phosphate, pH 4.9
+      matrix: buffer
+      headspace: unstated
+  - label: VB1-Xyl-GCys
+    lever_value: cystine
+    value: 1.08
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.04
+    conditions:
+      ph: 4.9
+      ph_basis: label
+      temp_C: null
+      time_min: 60
+      precursors:
+        VB1: 15.0 mg/mL
+        Xyl: 15.0 mg/mL
+        GCys: 15.0 mg/mL (equal weight)
+      buffer: phosphate, pH 4.9
+      matrix: buffer
+      headspace: unstated
+- id: Zhang2024-3
+  resolution: re-read
+  odorant: 2-Methyl-3-furanthiol (MFT)
+  lever_class: precursor dose
+  lever: cysteine concentration (Met:VB1:Xyl 1:3:3 ternary model)
+  focal: true
+  location: Fig. 2d
+  digitised: true
+  unit: ng/mL
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: Cys 0.5
+    lever_value: 0.5
+    value: 0.45
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.9
+      ph_basis: label
+      temp_C: 115
+      time_min: 60
+      precursors:
+        Met:VB1:Xyl: 1:3:3 (w/w)
+        Cys: 0.5 mg/mL
+      buffer: phosphate, pH 4.9
+      matrix: buffer
+      headspace: unstated
+  - label: Cys 2.5
+    lever_value: 2.5
+    value: 0.75
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.9
+      ph_basis: label
+      temp_C: 115
+      time_min: 60
+      precursors:
+        Met:VB1:Xyl: 1:3:3 (w/w)
+        Cys: 2.5 mg/mL
+      buffer: phosphate, pH 4.9
+      matrix: buffer
+      headspace: unstated
+  - label: Cys 5.0
+    lever_value: 5.0
+    value: 1.41
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.9
+      ph_basis: label
+      temp_C: 115
+      time_min: 60
+      precursors:
+        Met:VB1:Xyl: 1:3:3 (w/w)
+        Cys: 5.0 mg/mL
+      buffer: phosphate, pH 4.9
+      matrix: buffer
+      headspace: unstated
+  - label: Cys 10.0
+    lever_value: 10.0
+    value: 1.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.9
+      ph_basis: label
+      temp_C: 115
+      time_min: 60
+      precursors:
+        Met:VB1:Xyl: 1:3:3 (w/w)
+        Cys: 10.0 mg/mL
+      buffer: phosphate, pH 4.9
+      matrix: buffer
+      headspace: unstated
+  - label: Cys 20.0
+    lever_value: 20.0
+    value: 2.45
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.9
+      ph_basis: label
+      temp_C: 115
+      time_min: 60
+      precursors:
+        Met:VB1:Xyl: 1:3:3 (w/w)
+        Cys: 20.0 mg/mL
+      buffer: phosphate, pH 4.9
+      matrix: buffer
+      headspace: unstated
+  - label: Cys 30.0
+    lever_value: 30.0
+    value: 2.56
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.9
+      ph_basis: label
+      temp_C: 115
+      time_min: 60
+      precursors:
+        Met:VB1:Xyl: 1:3:3 (w/w)
+        Cys: 30.0 mg/mL
+      buffer: phosphate, pH 4.9
+      matrix: buffer
+      headspace: unstated
+  - label: Cys 40.0
+    lever_value: 40.0
+    value: 4.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.9
+      ph_basis: label
+      temp_C: 115
+      time_min: 60
+      precursors:
+        Met:VB1:Xyl: 1:3:3 (w/w)
+        Cys: 40.0 mg/mL
+      buffer: phosphate, pH 4.9
+      matrix: buffer
+      headspace: unstated
+  - label: Cys 50.0
+    lever_value: 50.0
+    value: 5.69
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.9
+      ph_basis: label
+      temp_C: 115
+      time_min: 60
+      precursors:
+        Met:VB1:Xyl: 1:3:3 (w/w)
+        Cys: 50.0 mg/mL
+      buffer: phosphate, pH 4.9
+      matrix: buffer
+      headspace: unstated
+  - label: Cys 62.5
+    lever_value: 62.5
+    value: 10.96
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.9
+      ph_basis: label
+      temp_C: 115
+      time_min: 60
+      precursors:
+        Met:VB1:Xyl: 1:3:3 (w/w)
+        Cys: 62.5 mg/mL
+      buffer: phosphate, pH 4.9
+      matrix: buffer
+      headspace: unstated
+  - label: Cys 75.0
+    lever_value: 75.0
+    value: 10.92
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.9
+      ph_basis: label
+      temp_C: 115
+      time_min: 60
+      precursors:
+        Met:VB1:Xyl: 1:3:3 (w/w)
+        Cys: 75.0 mg/mL
+      buffer: phosphate, pH 4.9
+      matrix: buffer
+      headspace: unstated
+- id: Zhang2024-4
+  resolution: re-read
+  odorant: 2-Methyl-3-furanthiol (MFT)
+  lever_class: precursor dose
+  lever: glutathione concentration (Met:VB1:Xyl 1:3:3 ternary model)
+  focal: true
+  location: Fig. 2d
+  digitised: true
+  unit: ng/mL
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: GSH 0.5
+    lever_value: 0.5
+    value: 0.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.9
+      ph_basis: label
+      temp_C: 115
+      time_min: 60
+      precursors:
+        Met:VB1:Xyl: 1:3:3 (w/w)
+        GSH: 0.5 mg/mL
+      buffer: phosphate, pH 4.9
+      matrix: buffer
+      headspace: unstated
+  - label: GSH 2.5
+    lever_value: 2.5
+    value: 0.26
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.9
+      ph_basis: label
+      temp_C: 115
+      time_min: 60
+      precursors:
+        Met:VB1:Xyl: 1:3:3 (w/w)
+        GSH: 2.5 mg/mL
+      buffer: phosphate, pH 4.9
+      matrix: buffer
+      headspace: unstated
+  - label: GSH 5.0
+    lever_value: 5.0
+    value: 0.86
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.9
+      ph_basis: label
+      temp_C: 115
+      time_min: 60
+      precursors:
+        Met:VB1:Xyl: 1:3:3 (w/w)
+        GSH: 5.0 mg/mL
+      buffer: phosphate, pH 4.9
+      matrix: buffer
+      headspace: unstated
+  - label: GSH 10.0
+    lever_value: 10.0
+    value: 1.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.9
+      ph_basis: label
+      temp_C: 115
+      time_min: 60
+      precursors:
+        Met:VB1:Xyl: 1:3:3 (w/w)
+        GSH: 10.0 mg/mL
+      buffer: phosphate, pH 4.9
+      matrix: buffer
+      headspace: unstated
+  - label: GSH 20.0
+    lever_value: 20.0
+    value: 4.34
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.9
+      ph_basis: label
+      temp_C: 115
+      time_min: 60
+      precursors:
+        Met:VB1:Xyl: 1:3:3 (w/w)
+        GSH: 20.0 mg/mL
+      buffer: phosphate, pH 4.9
+      matrix: buffer
+      headspace: unstated
+  - label: GSH 30.0
+    lever_value: 30.0
+    value: 6.33
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.9
+      ph_basis: label
+      temp_C: 115
+      time_min: 60
+      precursors:
+        Met:VB1:Xyl: 1:3:3 (w/w)
+        GSH: 30.0 mg/mL
+      buffer: phosphate, pH 4.9
+      matrix: buffer
+      headspace: unstated
+  - label: GSH 40.0
+    lever_value: 40.0
+    value: 12.19
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.9
+      ph_basis: label
+      temp_C: 115
+      time_min: 60
+      precursors:
+        Met:VB1:Xyl: 1:3:3 (w/w)
+        GSH: 40.0 mg/mL
+      buffer: phosphate, pH 4.9
+      matrix: buffer
+      headspace: unstated
+  - label: GSH 50.0
+    lever_value: 50.0
+    value: 23.54
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.9
+      ph_basis: label
+      temp_C: 115
+      time_min: 60
+      precursors:
+        Met:VB1:Xyl: 1:3:3 (w/w)
+        GSH: 50.0 mg/mL
+      buffer: phosphate, pH 4.9
+      matrix: buffer
+      headspace: unstated
+  - label: GSH 62.5
+    lever_value: 62.5
+    value: 19.53
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.9
+      ph_basis: label
+      temp_C: 115
+      time_min: 60
+      precursors:
+        Met:VB1:Xyl: 1:3:3 (w/w)
+        GSH: 62.5 mg/mL
+      buffer: phosphate, pH 4.9
+      matrix: buffer
+      headspace: unstated
+  - label: GSH 75.0
+    lever_value: 75.0
+    value: 18.18
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.9
+      ph_basis: label
+      temp_C: 115
+      time_min: 60
+      precursors:
+        Met:VB1:Xyl: 1:3:3 (w/w)
+        GSH: 75.0 mg/mL
+      buffer: phosphate, pH 4.9
+      matrix: buffer
+      headspace: unstated
+- id: Zhang2024-5
+  resolution: re-read
+  odorant: Bis(2-methyl-3-furyl) disulfide
+  lever_class: precursor dose
+  lever: cysteine concentration (Met:VB1:Xyl 1:3:3 ternary model)
+  focal: true
+  location: Fig. 2f
+  digitised: true
+  unit: ng/mL
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: Cys 0.5
+    lever_value: 0.5
+    value: 0.06
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.9
+      ph_basis: label
+      temp_C: 115
+      time_min: 60
+      precursors:
+        Met:VB1:Xyl: 1:3:3 (w/w)
+        Cys: 0.5 mg/mL
+      buffer: phosphate, pH 4.9
+      matrix: buffer
+      headspace: unstated
+  - label: Cys 2.5
+    lever_value: 2.5
+    value: 0.06
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.9
+      ph_basis: label
+      temp_C: 115
+      time_min: 60
+      precursors:
+        Met:VB1:Xyl: 1:3:3 (w/w)
+        Cys: 2.5 mg/mL
+      buffer: phosphate, pH 4.9
+      matrix: buffer
+      headspace: unstated
+  - label: Cys 5.0
+    lever_value: 5.0
+    value: 0.06
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.9
+      ph_basis: label
+      temp_C: 115
+      time_min: 60
+      precursors:
+        Met:VB1:Xyl: 1:3:3 (w/w)
+        Cys: 5.0 mg/mL
+      buffer: phosphate, pH 4.9
+      matrix: buffer
+      headspace: unstated
+  - label: Cys 10.0
+    lever_value: 10.0
+    value: 0.06
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.9
+      ph_basis: label
+      temp_C: 115
+      time_min: 60
+      precursors:
+        Met:VB1:Xyl: 1:3:3 (w/w)
+        Cys: 10.0 mg/mL
+      buffer: phosphate, pH 4.9
+      matrix: buffer
+      headspace: unstated
+  - label: Cys 20.0
+    lever_value: 20.0
+    value: 0.07
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.9
+      ph_basis: label
+      temp_C: 115
+      time_min: 60
+      precursors:
+        Met:VB1:Xyl: 1:3:3 (w/w)
+        Cys: 20.0 mg/mL
+      buffer: phosphate, pH 4.9
+      matrix: buffer
+      headspace: unstated
+  - label: Cys 30.0
+    lever_value: 30.0
+    value: 0.11
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.9
+      ph_basis: label
+      temp_C: 115
+      time_min: 60
+      precursors:
+        Met:VB1:Xyl: 1:3:3 (w/w)
+        Cys: 30.0 mg/mL
+      buffer: phosphate, pH 4.9
+      matrix: buffer
+      headspace: unstated
+  - label: Cys 40.0
+    lever_value: 40.0
+    value: 0.58
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.9
+      ph_basis: label
+      temp_C: 115
+      time_min: 60
+      precursors:
+        Met:VB1:Xyl: 1:3:3 (w/w)
+        Cys: 40.0 mg/mL
+      buffer: phosphate, pH 4.9
+      matrix: buffer
+      headspace: unstated
+  - label: Cys 50.0
+    lever_value: 50.0
+    value: 1.06
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.9
+      ph_basis: label
+      temp_C: 115
+      time_min: 60
+      precursors:
+        Met:VB1:Xyl: 1:3:3 (w/w)
+        Cys: 50.0 mg/mL
+      buffer: phosphate, pH 4.9
+      matrix: buffer
+      headspace: unstated
+  - label: Cys 62.5
+    lever_value: 62.5
+    value: 0.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.9
+      ph_basis: label
+      temp_C: 115
+      time_min: 60
+      precursors:
+        Met:VB1:Xyl: 1:3:3 (w/w)
+        Cys: 62.5 mg/mL
+      buffer: phosphate, pH 4.9
+      matrix: buffer
+      headspace: unstated
+  - label: Cys 75.0
+    lever_value: 75.0
+    value: 0.59
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.9
+      ph_basis: label
+      temp_C: 115
+      time_min: 60
+      precursors:
+        Met:VB1:Xyl: 1:3:3 (w/w)
+        Cys: 75.0 mg/mL
+      buffer: phosphate, pH 4.9
+      matrix: buffer
+      headspace: unstated
+- id: Zhang2024-6
+  resolution: re-read
+  odorant: Bis(2-methyl-3-furyl) disulfide
+  lever_class: precursor dose
+  lever: glutathione concentration (Met:VB1:Xyl 1:3:3 ternary model)
+  focal: true
+  location: Fig. 2f
+  digitised: true
+  unit: ng/mL
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: GSH 0.5
+    lever_value: 0.5
+    value: 0.06
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.9
+      ph_basis: label
+      temp_C: 115
+      time_min: 60
+      precursors:
+        Met:VB1:Xyl: 1:3:3 (w/w)
+        GSH: 0.5 mg/mL
+      buffer: phosphate, pH 4.9
+      matrix: buffer
+      headspace: unstated
+  - label: GSH 2.5
+    lever_value: 2.5
+    value: 0.06
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.9
+      ph_basis: label
+      temp_C: 115
+      time_min: 60
+      precursors:
+        Met:VB1:Xyl: 1:3:3 (w/w)
+        GSH: 2.5 mg/mL
+      buffer: phosphate, pH 4.9
+      matrix: buffer
+      headspace: unstated
+  - label: GSH 5.0
+    lever_value: 5.0
+    value: 0.06
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.9
+      ph_basis: label
+      temp_C: 115
+      time_min: 60
+      precursors:
+        Met:VB1:Xyl: 1:3:3 (w/w)
+        GSH: 5.0 mg/mL
+      buffer: phosphate, pH 4.9
+      matrix: buffer
+      headspace: unstated
+  - label: GSH 10.0
+    lever_value: 10.0
+    value: 0.08
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.9
+      ph_basis: label
+      temp_C: 115
+      time_min: 60
+      precursors:
+        Met:VB1:Xyl: 1:3:3 (w/w)
+        GSH: 10.0 mg/mL
+      buffer: phosphate, pH 4.9
+      matrix: buffer
+      headspace: unstated
+  - label: GSH 20.0
+    lever_value: 20.0
+    value: 0.38
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.9
+      ph_basis: label
+      temp_C: 115
+      time_min: 60
+      precursors:
+        Met:VB1:Xyl: 1:3:3 (w/w)
+        GSH: 20.0 mg/mL
+      buffer: phosphate, pH 4.9
+      matrix: buffer
+      headspace: unstated
+  - label: GSH 30.0
+    lever_value: 30.0
+    value: 1.27
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.9
+      ph_basis: label
+      temp_C: 115
+      time_min: 60
+      precursors:
+        Met:VB1:Xyl: 1:3:3 (w/w)
+        GSH: 30.0 mg/mL
+      buffer: phosphate, pH 4.9
+      matrix: buffer
+      headspace: unstated
+  - label: GSH 40.0
+    lever_value: 40.0
+    value: 2.08
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.9
+      ph_basis: label
+      temp_C: 115
+      time_min: 60
+      precursors:
+        Met:VB1:Xyl: 1:3:3 (w/w)
+        GSH: 40.0 mg/mL
+      buffer: phosphate, pH 4.9
+      matrix: buffer
+      headspace: unstated
+  - label: GSH 50.0
+    lever_value: 50.0
+    value: 5.74
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.9
+      ph_basis: label
+      temp_C: 115
+      time_min: 60
+      precursors:
+        Met:VB1:Xyl: 1:3:3 (w/w)
+        GSH: 50.0 mg/mL
+      buffer: phosphate, pH 4.9
+      matrix: buffer
+      headspace: unstated
+  - label: GSH 62.5
+    lever_value: 62.5
+    value: 4.64
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.9
+      ph_basis: label
+      temp_C: 115
+      time_min: 60
+      precursors:
+        Met:VB1:Xyl: 1:3:3 (w/w)
+        GSH: 62.5 mg/mL
+      buffer: phosphate, pH 4.9
+      matrix: buffer
+      headspace: unstated
+  - label: GSH 75.0
+    lever_value: 75.0
+    value: 4.88
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.9
+      ph_basis: label
+      temp_C: 115
+      time_min: 60
+      precursors:
+        Met:VB1:Xyl: 1:3:3 (w/w)
+        GSH: 75.0 mg/mL
+      buffer: phosphate, pH 4.9
+      matrix: buffer
+      headspace: unstated

@@ -1,0 +1,50 @@
+source: "kobayasi1965"
+pdf: "data/articles/kobayasi1965.pdf"
+reader: "resolved"
+scope_note: "One H2S dose pair printed in the text (p. 698-699): 10 mmol cysteine boiled 1 h at 100 C with 10 vs 20 mmol glucosamine (printed 'mM' with gram amounts, i.e. millimoles; volume not stated) gave 14.3 vs 27.2 mg H2S. Reader A missed this pair; re-read confirms it. Ninhydrin, ascorbic acid, cystine, methionine and protein arms print no H2S numbers and are not keyed."
+contrasts:
+  - id: "kobayasi1965-1"
+    odorant: "Hydrogen Sulfide"
+    lever_class: "precursor dose"
+    lever: "glucosamine amount (10 vs 20 mmol) with 10 mmol cysteine"
+    focal: false
+    location: "p. 698-699, text"
+    digitised: false
+    unit: "mg"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: amount
+    resolution: "re-read"
+    arms:
+      - label: "1.79 g (10 mM) glucosamine"
+        lever_value: 10
+        value: 14.3
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 100
+          time_min: 60
+          precursors: {cysteine: "1.21 g (10 mM)", glucosamine: "1.79 g (10 mM)"}
+          buffer: "none"
+          matrix: "water"
+          headspace: "unstated"
+      - label: "3.58 g (20 mM) glucosamine"
+        lever_value: 20
+        value: 27.2
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 100
+          time_min: 60
+          precursors: {cysteine: "1.21 g (10 mM)", glucosamine: "3.58 g (20 mM)"}
+          buffer: "none"
+          matrix: "water"
+          headspace: "unstated"

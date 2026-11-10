@@ -1,0 +1,1992 @@
+# Reader a, blind double-keying (PREREG secs. 3 - 4).
+source: zheng1994
+pdf: data/articles/zheng1994.pdf
+reader: a
+scope_note: Only first-order rate constants of H2S release are printed (fitted to electrode data sampled 0-180 min,
+  duplicate tubes), no H2S amounts; keyed K as the response; cysteine pH ladder at 100 C is non-monotone (pH 3 >
+  pH 5); Figs. 1-4 (ln Ct/C0) and activation energies (Table V) not keyed.
+contrasts:
+- id: zheng1994-1
+  odorant: hydrogen sulfide
+  lever_class: pH
+  lever: buffer pH (cysteine, 80 C)
+  focal: true
+  location: Table I, p. 143
+  digitised: false
+  unit: min^-1 (first-order rate constant of H2S release)
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: pH 3.0
+    lever_value: 3.0
+    value: 1.87e-06
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 80
+      time_min: null
+      precursors:
+        cysteine: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: pH 5.0
+    lever_value: 5.0
+    value: 2.02e-06
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 80
+      time_min: null
+      precursors:
+        cysteine: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: pH 7.0
+    lever_value: 7.0
+    value: 9.71e-06
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: label
+      temp_C: 80
+      time_min: null
+      precursors:
+        cysteine: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: pH 9.0
+    lever_value: 9.0
+    value: 2.95e-05
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: label
+      temp_C: 80
+      time_min: null
+      precursors:
+        cysteine: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+- id: zheng1994-2
+  odorant: hydrogen sulfide
+  lever_class: pH
+  lever: buffer pH (cysteine, 90 C)
+  focal: true
+  location: Table I, p. 143
+  digitised: false
+  unit: min^-1 (first-order rate constant of H2S release)
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: pH 3.0
+    lever_value: 3.0
+    value: 8.3e-06
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 90
+      time_min: null
+      precursors:
+        cysteine: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: pH 5.0
+    lever_value: 5.0
+    value: 1.24e-05
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 90
+      time_min: null
+      precursors:
+        cysteine: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: pH 7.0
+    lever_value: 7.0
+    value: 5.99e-05
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: label
+      temp_C: 90
+      time_min: null
+      precursors:
+        cysteine: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: pH 9.0
+    lever_value: 9.0
+    value: 0.000133
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: label
+      temp_C: 90
+      time_min: null
+      precursors:
+        cysteine: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+- id: zheng1994-3
+  odorant: hydrogen sulfide
+  lever_class: pH
+  lever: buffer pH (cysteine, 100 C)
+  focal: true
+  location: Table I, p. 143
+  digitised: false
+  unit: min^-1 (first-order rate constant of H2S release)
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: pH 3.0
+    lever_value: 3.0
+    value: 4.15e-05
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 100
+      time_min: null
+      precursors:
+        cysteine: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: pH 5.0
+    lever_value: 5.0
+    value: 2.65e-05
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 100
+      time_min: null
+      precursors:
+        cysteine: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: pH 7.0
+    lever_value: 7.0
+    value: 0.00023
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: label
+      temp_C: 100
+      time_min: null
+      precursors:
+        cysteine: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: pH 9.0
+    lever_value: 9.0
+    value: 0.000453
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: label
+      temp_C: 100
+      time_min: null
+      precursors:
+        cysteine: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+- id: zheng1994-4
+  odorant: hydrogen sulfide
+  lever_class: pH
+  lever: buffer pH (cysteine, 110 C)
+  focal: true
+  location: Table I, p. 143
+  digitised: false
+  unit: min^-1 (first-order rate constant of H2S release)
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: pH 3.0
+    lever_value: 3.0
+    value: 5.23e-05
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 110
+      time_min: null
+      precursors:
+        cysteine: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: pH 5.0
+    lever_value: 5.0
+    value: 7.97e-05
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 110
+      time_min: null
+      precursors:
+        cysteine: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: pH 7.0
+    lever_value: 7.0
+    value: 0.000335
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: label
+      temp_C: 110
+      time_min: null
+      precursors:
+        cysteine: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: pH 9.0
+    lever_value: 9.0
+    value: 0.000745
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: label
+      temp_C: 110
+      time_min: null
+      precursors:
+        cysteine: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+- id: zheng1994-5
+  odorant: hydrogen sulfide
+  lever_class: pH
+  lever: buffer pH (glutathione, 80 C)
+  focal: true
+  location: Table III, p. 144
+  digitised: false
+  unit: min^-1 (first-order rate constant of H2S release)
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: pH 3.0
+    lever_value: 3.0
+    value: 4.04e-06
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 80
+      time_min: null
+      precursors:
+        glutathione: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: pH 5.0
+    lever_value: 5.0
+    value: 4.11e-06
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 80
+      time_min: null
+      precursors:
+        glutathione: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: pH 7.0
+    lever_value: 7.0
+    value: 3.25e-05
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: label
+      temp_C: 80
+      time_min: null
+      precursors:
+        glutathione: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: pH 9.0
+    lever_value: 9.0
+    value: 0.000134
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: label
+      temp_C: 80
+      time_min: null
+      precursors:
+        glutathione: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+- id: zheng1994-6
+  odorant: hydrogen sulfide
+  lever_class: pH
+  lever: buffer pH (glutathione, 90 C)
+  focal: true
+  location: Table III, p. 144
+  digitised: false
+  unit: min^-1 (first-order rate constant of H2S release)
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: pH 3.0
+    lever_value: 3.0
+    value: 1.17e-05
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 90
+      time_min: null
+      precursors:
+        glutathione: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: pH 5.0
+    lever_value: 5.0
+    value: 1.57e-05
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 90
+      time_min: null
+      precursors:
+        glutathione: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: pH 7.0
+    lever_value: 7.0
+    value: 7.69e-05
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: label
+      temp_C: 90
+      time_min: null
+      precursors:
+        glutathione: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: pH 9.0
+    lever_value: 9.0
+    value: 0.000244
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: label
+      temp_C: 90
+      time_min: null
+      precursors:
+        glutathione: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+- id: zheng1994-7
+  odorant: hydrogen sulfide
+  lever_class: pH
+  lever: buffer pH (glutathione, 100 C)
+  focal: true
+  location: Table III, p. 144
+  digitised: false
+  unit: min^-1 (first-order rate constant of H2S release)
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: pH 3.0
+    lever_value: 3.0
+    value: 2.28e-05
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 100
+      time_min: null
+      precursors:
+        glutathione: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: pH 5.0
+    lever_value: 5.0
+    value: 4.94e-05
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 100
+      time_min: null
+      precursors:
+        glutathione: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: pH 7.0
+    lever_value: 7.0
+    value: 0.000226
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: label
+      temp_C: 100
+      time_min: null
+      precursors:
+        glutathione: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: pH 9.0
+    lever_value: 9.0
+    value: 0.000774
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: label
+      temp_C: 100
+      time_min: null
+      precursors:
+        glutathione: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+- id: zheng1994-8
+  odorant: hydrogen sulfide
+  lever_class: pH
+  lever: buffer pH (glutathione, 110 C)
+  focal: true
+  location: Table III, p. 144
+  digitised: false
+  unit: min^-1 (first-order rate constant of H2S release)
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: pH 3.0
+    lever_value: 3.0
+    value: 4.57e-05
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 110
+      time_min: null
+      precursors:
+        glutathione: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: pH 5.0
+    lever_value: 5.0
+    value: 7.46e-05
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 110
+      time_min: null
+      precursors:
+        glutathione: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: pH 7.0
+    lever_value: 7.0
+    value: 0.000389
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: label
+      temp_C: 110
+      time_min: null
+      precursors:
+        glutathione: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: pH 9.0
+    lever_value: 9.0
+    value: 0.00109
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: label
+      temp_C: 110
+      time_min: null
+      precursors:
+        glutathione: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+- id: zheng1994-9
+  odorant: hydrogen sulfide
+  lever_class: temperature
+  lever: incubation temperature (cysteine, pH 3.0)
+  focal: true
+  location: Table I, p. 143
+  digitised: false
+  unit: min^-1 (first-order rate constant of H2S release)
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: 80 C
+    lever_value: 80
+    value: 1.87e-06
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 80
+      time_min: null
+      precursors:
+        cysteine: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: 90 C
+    lever_value: 90
+    value: 8.3e-06
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 90
+      time_min: null
+      precursors:
+        cysteine: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: 100 C
+    lever_value: 100
+    value: 4.15e-05
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 100
+      time_min: null
+      precursors:
+        cysteine: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: 110 C
+    lever_value: 110
+    value: 5.23e-05
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 110
+      time_min: null
+      precursors:
+        cysteine: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+- id: zheng1994-10
+  odorant: hydrogen sulfide
+  lever_class: temperature
+  lever: incubation temperature (cysteine, pH 5.0)
+  focal: true
+  location: Table I, p. 143
+  digitised: false
+  unit: min^-1 (first-order rate constant of H2S release)
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: 80 C
+    lever_value: 80
+    value: 2.02e-06
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 80
+      time_min: null
+      precursors:
+        cysteine: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: 90 C
+    lever_value: 90
+    value: 1.24e-05
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 90
+      time_min: null
+      precursors:
+        cysteine: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: 100 C
+    lever_value: 100
+    value: 2.65e-05
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 100
+      time_min: null
+      precursors:
+        cysteine: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: 110 C
+    lever_value: 110
+    value: 7.97e-05
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 110
+      time_min: null
+      precursors:
+        cysteine: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+- id: zheng1994-11
+  odorant: hydrogen sulfide
+  lever_class: temperature
+  lever: incubation temperature (cysteine, pH 7.0)
+  focal: true
+  location: Table I, p. 143
+  digitised: false
+  unit: min^-1 (first-order rate constant of H2S release)
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: 80 C
+    lever_value: 80
+    value: 9.71e-06
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: label
+      temp_C: 80
+      time_min: null
+      precursors:
+        cysteine: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: 90 C
+    lever_value: 90
+    value: 5.99e-05
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: label
+      temp_C: 90
+      time_min: null
+      precursors:
+        cysteine: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: 100 C
+    lever_value: 100
+    value: 0.00023
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: label
+      temp_C: 100
+      time_min: null
+      precursors:
+        cysteine: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: 110 C
+    lever_value: 110
+    value: 0.000335
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: label
+      temp_C: 110
+      time_min: null
+      precursors:
+        cysteine: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+- id: zheng1994-12
+  odorant: hydrogen sulfide
+  lever_class: temperature
+  lever: incubation temperature (cysteine, pH 9.0)
+  focal: true
+  location: Table I, p. 143
+  digitised: false
+  unit: min^-1 (first-order rate constant of H2S release)
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: 80 C
+    lever_value: 80
+    value: 2.95e-05
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: label
+      temp_C: 80
+      time_min: null
+      precursors:
+        cysteine: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: 90 C
+    lever_value: 90
+    value: 0.000133
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: label
+      temp_C: 90
+      time_min: null
+      precursors:
+        cysteine: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: 100 C
+    lever_value: 100
+    value: 0.000453
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: label
+      temp_C: 100
+      time_min: null
+      precursors:
+        cysteine: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: 110 C
+    lever_value: 110
+    value: 0.000745
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: label
+      temp_C: 110
+      time_min: null
+      precursors:
+        cysteine: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+- id: zheng1994-13
+  odorant: hydrogen sulfide
+  lever_class: temperature
+  lever: incubation temperature (glutathione, pH 3.0)
+  focal: true
+  location: Table III, p. 144
+  digitised: false
+  unit: min^-1 (first-order rate constant of H2S release)
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: 80 C
+    lever_value: 80
+    value: 4.04e-06
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 80
+      time_min: null
+      precursors:
+        glutathione: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: 90 C
+    lever_value: 90
+    value: 1.17e-05
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 90
+      time_min: null
+      precursors:
+        glutathione: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: 100 C
+    lever_value: 100
+    value: 2.28e-05
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 100
+      time_min: null
+      precursors:
+        glutathione: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: 110 C
+    lever_value: 110
+    value: 4.57e-05
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 110
+      time_min: null
+      precursors:
+        glutathione: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+- id: zheng1994-14
+  odorant: hydrogen sulfide
+  lever_class: temperature
+  lever: incubation temperature (glutathione, pH 5.0)
+  focal: true
+  location: Table III, p. 144
+  digitised: false
+  unit: min^-1 (first-order rate constant of H2S release)
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: 80 C
+    lever_value: 80
+    value: 4.11e-06
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 80
+      time_min: null
+      precursors:
+        glutathione: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: 90 C
+    lever_value: 90
+    value: 1.57e-05
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 90
+      time_min: null
+      precursors:
+        glutathione: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: 100 C
+    lever_value: 100
+    value: 4.94e-05
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 100
+      time_min: null
+      precursors:
+        glutathione: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: 110 C
+    lever_value: 110
+    value: 7.46e-05
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 110
+      time_min: null
+      precursors:
+        glutathione: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+- id: zheng1994-15
+  odorant: hydrogen sulfide
+  lever_class: temperature
+  lever: incubation temperature (glutathione, pH 7.0)
+  focal: true
+  location: Table III, p. 144
+  digitised: false
+  unit: min^-1 (first-order rate constant of H2S release)
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: 80 C
+    lever_value: 80
+    value: 3.25e-05
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: label
+      temp_C: 80
+      time_min: null
+      precursors:
+        glutathione: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: 90 C
+    lever_value: 90
+    value: 7.69e-05
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: label
+      temp_C: 90
+      time_min: null
+      precursors:
+        glutathione: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: 100 C
+    lever_value: 100
+    value: 0.000226
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: label
+      temp_C: 100
+      time_min: null
+      precursors:
+        glutathione: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: 110 C
+    lever_value: 110
+    value: 0.000389
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: label
+      temp_C: 110
+      time_min: null
+      precursors:
+        glutathione: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+- id: zheng1994-16
+  odorant: hydrogen sulfide
+  lever_class: temperature
+  lever: incubation temperature (glutathione, pH 9.0)
+  focal: true
+  location: Table III, p. 144
+  digitised: false
+  unit: min^-1 (first-order rate constant of H2S release)
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: 80 C
+    lever_value: 80
+    value: 0.000134
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: label
+      temp_C: 80
+      time_min: null
+      precursors:
+        glutathione: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: 90 C
+    lever_value: 90
+    value: 0.000244
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: label
+      temp_C: 90
+      time_min: null
+      precursors:
+        glutathione: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: 100 C
+    lever_value: 100
+    value: 0.000774
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: label
+      temp_C: 100
+      time_min: null
+      precursors:
+        glutathione: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: 110 C
+    lever_value: 110
+    value: 0.00109
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: label
+      temp_C: 110
+      time_min: null
+      precursors:
+        glutathione: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+- id: zheng1994-17
+  odorant: hydrogen sulfide
+  lever_class: sulfur source
+  lever: cysteine vs glutathione (80 C, pH 3.0)
+  focal: true
+  location: Table I vs Table III, pp. 143-144
+  digitised: false
+  unit: min^-1 (first-order rate constant of H2S release)
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: cysteine, 80 C, pH 3.0
+    lever_value: cysteine
+    value: 1.87e-06
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 80
+      time_min: null
+      precursors:
+        cysteine: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: glutathione, 80 C, pH 3.0
+    lever_value: glutathione
+    value: 4.04e-06
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 80
+      time_min: null
+      precursors:
+        glutathione: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+- id: zheng1994-18
+  odorant: hydrogen sulfide
+  lever_class: sulfur source
+  lever: cysteine vs glutathione (80 C, pH 5.0)
+  focal: true
+  location: Table I vs Table III, pp. 143-144
+  digitised: false
+  unit: min^-1 (first-order rate constant of H2S release)
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: cysteine, 80 C, pH 5.0
+    lever_value: cysteine
+    value: 2.02e-06
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 80
+      time_min: null
+      precursors:
+        cysteine: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: glutathione, 80 C, pH 5.0
+    lever_value: glutathione
+    value: 4.11e-06
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 80
+      time_min: null
+      precursors:
+        glutathione: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+- id: zheng1994-19
+  odorant: hydrogen sulfide
+  lever_class: sulfur source
+  lever: cysteine vs glutathione (80 C, pH 7.0)
+  focal: true
+  location: Table I vs Table III, pp. 143-144
+  digitised: false
+  unit: min^-1 (first-order rate constant of H2S release)
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: cysteine, 80 C, pH 7.0
+    lever_value: cysteine
+    value: 9.71e-06
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: label
+      temp_C: 80
+      time_min: null
+      precursors:
+        cysteine: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: glutathione, 80 C, pH 7.0
+    lever_value: glutathione
+    value: 3.25e-05
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: label
+      temp_C: 80
+      time_min: null
+      precursors:
+        glutathione: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+- id: zheng1994-20
+  odorant: hydrogen sulfide
+  lever_class: sulfur source
+  lever: cysteine vs glutathione (80 C, pH 9.0)
+  focal: true
+  location: Table I vs Table III, pp. 143-144
+  digitised: false
+  unit: min^-1 (first-order rate constant of H2S release)
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: cysteine, 80 C, pH 9.0
+    lever_value: cysteine
+    value: 2.95e-05
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: label
+      temp_C: 80
+      time_min: null
+      precursors:
+        cysteine: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: glutathione, 80 C, pH 9.0
+    lever_value: glutathione
+    value: 0.000134
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: label
+      temp_C: 80
+      time_min: null
+      precursors:
+        glutathione: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+- id: zheng1994-21
+  odorant: hydrogen sulfide
+  lever_class: sulfur source
+  lever: cysteine vs glutathione (90 C, pH 3.0)
+  focal: true
+  location: Table I vs Table III, pp. 143-144
+  digitised: false
+  unit: min^-1 (first-order rate constant of H2S release)
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: cysteine, 90 C, pH 3.0
+    lever_value: cysteine
+    value: 8.3e-06
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 90
+      time_min: null
+      precursors:
+        cysteine: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: glutathione, 90 C, pH 3.0
+    lever_value: glutathione
+    value: 1.17e-05
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 90
+      time_min: null
+      precursors:
+        glutathione: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+- id: zheng1994-22
+  odorant: hydrogen sulfide
+  lever_class: sulfur source
+  lever: cysteine vs glutathione (90 C, pH 5.0)
+  focal: true
+  location: Table I vs Table III, pp. 143-144
+  digitised: false
+  unit: min^-1 (first-order rate constant of H2S release)
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: cysteine, 90 C, pH 5.0
+    lever_value: cysteine
+    value: 1.24e-05
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 90
+      time_min: null
+      precursors:
+        cysteine: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: glutathione, 90 C, pH 5.0
+    lever_value: glutathione
+    value: 1.57e-05
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 90
+      time_min: null
+      precursors:
+        glutathione: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+- id: zheng1994-23
+  odorant: hydrogen sulfide
+  lever_class: sulfur source
+  lever: cysteine vs glutathione (90 C, pH 7.0)
+  focal: true
+  location: Table I vs Table III, pp. 143-144
+  digitised: false
+  unit: min^-1 (first-order rate constant of H2S release)
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: cysteine, 90 C, pH 7.0
+    lever_value: cysteine
+    value: 5.99e-05
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: label
+      temp_C: 90
+      time_min: null
+      precursors:
+        cysteine: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: glutathione, 90 C, pH 7.0
+    lever_value: glutathione
+    value: 7.69e-05
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: label
+      temp_C: 90
+      time_min: null
+      precursors:
+        glutathione: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+- id: zheng1994-24
+  odorant: hydrogen sulfide
+  lever_class: sulfur source
+  lever: cysteine vs glutathione (90 C, pH 9.0)
+  focal: true
+  location: Table I vs Table III, pp. 143-144
+  digitised: false
+  unit: min^-1 (first-order rate constant of H2S release)
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: cysteine, 90 C, pH 9.0
+    lever_value: cysteine
+    value: 0.000133
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: label
+      temp_C: 90
+      time_min: null
+      precursors:
+        cysteine: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: glutathione, 90 C, pH 9.0
+    lever_value: glutathione
+    value: 0.000244
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: label
+      temp_C: 90
+      time_min: null
+      precursors:
+        glutathione: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+- id: zheng1994-25
+  odorant: hydrogen sulfide
+  lever_class: sulfur source
+  lever: cysteine vs glutathione (100 C, pH 3.0)
+  focal: true
+  location: Table I vs Table III, pp. 143-144
+  digitised: false
+  unit: min^-1 (first-order rate constant of H2S release)
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: cysteine, 100 C, pH 3.0
+    lever_value: cysteine
+    value: 4.15e-05
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 100
+      time_min: null
+      precursors:
+        cysteine: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: glutathione, 100 C, pH 3.0
+    lever_value: glutathione
+    value: 2.28e-05
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 100
+      time_min: null
+      precursors:
+        glutathione: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+- id: zheng1994-26
+  odorant: hydrogen sulfide
+  lever_class: sulfur source
+  lever: cysteine vs glutathione (100 C, pH 5.0)
+  focal: true
+  location: Table I vs Table III, pp. 143-144
+  digitised: false
+  unit: min^-1 (first-order rate constant of H2S release)
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: cysteine, 100 C, pH 5.0
+    lever_value: cysteine
+    value: 2.65e-05
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 100
+      time_min: null
+      precursors:
+        cysteine: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: glutathione, 100 C, pH 5.0
+    lever_value: glutathione
+    value: 4.94e-05
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 100
+      time_min: null
+      precursors:
+        glutathione: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+- id: zheng1994-27
+  odorant: hydrogen sulfide
+  lever_class: sulfur source
+  lever: cysteine vs glutathione (100 C, pH 7.0)
+  focal: true
+  location: Table I vs Table III, pp. 143-144
+  digitised: false
+  unit: min^-1 (first-order rate constant of H2S release)
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: cysteine, 100 C, pH 7.0
+    lever_value: cysteine
+    value: 0.00023
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: label
+      temp_C: 100
+      time_min: null
+      precursors:
+        cysteine: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: glutathione, 100 C, pH 7.0
+    lever_value: glutathione
+    value: 0.000226
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: label
+      temp_C: 100
+      time_min: null
+      precursors:
+        glutathione: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+- id: zheng1994-28
+  odorant: hydrogen sulfide
+  lever_class: sulfur source
+  lever: cysteine vs glutathione (100 C, pH 9.0)
+  focal: true
+  location: Table I vs Table III, pp. 143-144
+  digitised: false
+  unit: min^-1 (first-order rate constant of H2S release)
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: cysteine, 100 C, pH 9.0
+    lever_value: cysteine
+    value: 0.000453
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: label
+      temp_C: 100
+      time_min: null
+      precursors:
+        cysteine: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: glutathione, 100 C, pH 9.0
+    lever_value: glutathione
+    value: 0.000774
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: label
+      temp_C: 100
+      time_min: null
+      precursors:
+        glutathione: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+- id: zheng1994-29
+  odorant: hydrogen sulfide
+  lever_class: sulfur source
+  lever: cysteine vs glutathione (110 C, pH 3.0)
+  focal: true
+  location: Table I vs Table III, pp. 143-144
+  digitised: false
+  unit: min^-1 (first-order rate constant of H2S release)
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: cysteine, 110 C, pH 3.0
+    lever_value: cysteine
+    value: 5.23e-05
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 110
+      time_min: null
+      precursors:
+        cysteine: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: glutathione, 110 C, pH 3.0
+    lever_value: glutathione
+    value: 4.57e-05
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 110
+      time_min: null
+      precursors:
+        glutathione: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+- id: zheng1994-30
+  odorant: hydrogen sulfide
+  lever_class: sulfur source
+  lever: cysteine vs glutathione (110 C, pH 5.0)
+  focal: true
+  location: Table I vs Table III, pp. 143-144
+  digitised: false
+  unit: min^-1 (first-order rate constant of H2S release)
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: cysteine, 110 C, pH 5.0
+    lever_value: cysteine
+    value: 7.97e-05
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 110
+      time_min: null
+      precursors:
+        cysteine: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: glutathione, 110 C, pH 5.0
+    lever_value: glutathione
+    value: 7.46e-05
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 110
+      time_min: null
+      precursors:
+        glutathione: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+- id: zheng1994-31
+  odorant: hydrogen sulfide
+  lever_class: sulfur source
+  lever: cysteine vs glutathione (110 C, pH 7.0)
+  focal: true
+  location: Table I vs Table III, pp. 143-144
+  digitised: false
+  unit: min^-1 (first-order rate constant of H2S release)
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: cysteine, 110 C, pH 7.0
+    lever_value: cysteine
+    value: 0.000335
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: label
+      temp_C: 110
+      time_min: null
+      precursors:
+        cysteine: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: glutathione, 110 C, pH 7.0
+    lever_value: glutathione
+    value: 0.000389
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: label
+      temp_C: 110
+      time_min: null
+      precursors:
+        glutathione: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+- id: zheng1994-32
+  odorant: hydrogen sulfide
+  lever_class: sulfur source
+  lever: cysteine vs glutathione (110 C, pH 9.0)
+  focal: true
+  location: Table I vs Table III, pp. 143-144
+  digitised: false
+  unit: min^-1 (first-order rate constant of H2S release)
+  quant_type: absolute
+  time_course_rule: not a time course
+  arms:
+  - label: cysteine, 110 C, pH 9.0
+    lever_value: cysteine
+    value: 0.000745
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: label
+      temp_C: 110
+      time_min: null
+      precursors:
+        cysteine: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert
+  - label: glutathione, 110 C, pH 9.0
+    lever_value: glutathione
+    value: 0.00109
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: label
+      temp_C: 110
+      time_min: null
+      precursors:
+        glutathione: 0.1 M
+      buffer: 0.1 M citrate-phosphate or 0.1 M phosphate-sodium hydroxide (which per pH unstated)
+      matrix: buffer
+      headspace: inert

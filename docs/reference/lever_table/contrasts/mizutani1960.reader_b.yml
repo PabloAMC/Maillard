@@ -1,0 +1,769 @@
+source: mizutani1960
+pdf: data/articles/mizutani1960.pdf
+reader: b
+scope_note: No sugar; thermal H2S release from cysteine-aldehyde thiazolidines in water. Cysteine-furfural (II) (stored >1
+  month, coloured) kept only in its own time series and excluded from the 6 h sulfur-source contrast (it differs by storage);
+  two cells printed as an em dash (undefined) keyed as nd_no_limit; Table II (ammonia) not a thiol.
+contrasts:
+- id: mizutani1960-1
+  odorant: hydrogen sulfide
+  lever_class: time
+  lever: heating time at 120 C (oil bath), L-cystine
+  focal: false
+  location: Table I, p. 384
+  digitised: false
+  unit: ug H2S liberated per sample (32 mg S)
+  quant_type: absolute
+  time_course_rule: whole series (lever is time)
+  arms:
+  - label: L-cystine, 0.5 h
+    lever_value: 30
+    value: 8.5
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 30
+      precursors:
+        L-cystine: amount containing 32 mg S
+      buffer: none
+      matrix: water (10 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+  - label: L-cystine, 1 h
+    lever_value: 60
+    value: 29
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        L-cystine: amount containing 32 mg S
+      buffer: none
+      matrix: water (10 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+  - label: L-cystine, 3 h
+    lever_value: 180
+    value: 172
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 180
+      precursors:
+        L-cystine: amount containing 32 mg S
+      buffer: none
+      matrix: water (10 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+  - label: L-cystine, 6 h
+    lever_value: 360
+    value: 475
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 360
+      precursors:
+        L-cystine: amount containing 32 mg S
+      buffer: none
+      matrix: water (10 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+- id: mizutani1960-2
+  odorant: hydrogen sulfide
+  lever_class: time
+  lever: heating time at 120 C (oil bath), L-cysteine
+  focal: false
+  location: Table I, p. 384
+  digitised: false
+  unit: ug H2S liberated per sample (32 mg S)
+  quant_type: absolute
+  time_course_rule: whole series (lever is time)
+  arms:
+  - label: L-cysteine, 0.5 h
+    lever_value: 30
+    value: 19
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 30
+      precursors:
+        L-cysteine: amount containing 32 mg S
+      buffer: none
+      matrix: water (10 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+  - label: L-cysteine, 1 h
+    lever_value: 60
+    value: 47
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        L-cysteine: amount containing 32 mg S
+      buffer: none
+      matrix: water (10 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+  - label: L-cysteine, 3 h
+    lever_value: 180
+    value: 121
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 180
+      precursors:
+        L-cysteine: amount containing 32 mg S
+      buffer: none
+      matrix: water (10 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+  - label: L-cysteine, 6 h
+    lever_value: 360
+    value: 325
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 360
+      precursors:
+        L-cysteine: amount containing 32 mg S
+      buffer: none
+      matrix: water (10 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+- id: mizutani1960-3
+  odorant: hydrogen sulfide
+  lever_class: time
+  lever: heating time at 120 C (oil bath), L-cysteine-formaldehyde compound
+  focal: false
+  location: Table I, p. 384
+  digitised: false
+  unit: ug H2S liberated per sample (32 mg S)
+  quant_type: absolute
+  time_course_rule: whole series (lever is time)
+  arms:
+  - label: L-cysteine-formaldehyde compound, 0.5 h
+    lever_value: 30
+    value: 10
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 30
+      precursors:
+        L-cysteine-formaldehyde compound: amount containing 32 mg S
+      buffer: none
+      matrix: water (10 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+  - label: L-cysteine-formaldehyde compound, 1 h
+    lever_value: 60
+    value: 20
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        L-cysteine-formaldehyde compound: amount containing 32 mg S
+      buffer: none
+      matrix: water (10 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+  - label: L-cysteine-formaldehyde compound, 3 h
+    lever_value: 180
+    value: 90
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 180
+      precursors:
+        L-cysteine-formaldehyde compound: amount containing 32 mg S
+      buffer: none
+      matrix: water (10 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+  - label: L-cysteine-formaldehyde compound, 6 h
+    lever_value: 360
+    value: 264
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 360
+      precursors:
+        L-cysteine-formaldehyde compound: amount containing 32 mg S
+      buffer: none
+      matrix: water (10 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+- id: mizutani1960-4
+  odorant: hydrogen sulfide
+  lever_class: time
+  lever: heating time at 120 C (oil bath), L-cysteine-acetaldehyde compound
+  focal: false
+  location: Table I, p. 384
+  digitised: false
+  unit: ug H2S liberated per sample (32 mg S)
+  quant_type: absolute
+  time_course_rule: whole series (lever is time)
+  arms:
+  - label: L-cysteine-acetaldehyde compound, 0.5 h
+    lever_value: 30
+    value: 8
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 30
+      precursors:
+        L-cysteine-acetaldehyde compound: amount containing 32 mg S
+      buffer: none
+      matrix: water (10 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+  - label: L-cysteine-acetaldehyde compound, 1 h
+    lever_value: 60
+    value: 19
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        L-cysteine-acetaldehyde compound: amount containing 32 mg S
+      buffer: none
+      matrix: water (10 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+  - label: L-cysteine-acetaldehyde compound, 3 h
+    lever_value: 180
+    value: 84
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 180
+      precursors:
+        L-cysteine-acetaldehyde compound: amount containing 32 mg S
+      buffer: none
+      matrix: water (10 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+  - label: L-cysteine-acetaldehyde compound, 6 h
+    lever_value: 360
+    value: 232.5
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 360
+      precursors:
+        L-cysteine-acetaldehyde compound: amount containing 32 mg S
+      buffer: none
+      matrix: water (10 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+- id: mizutani1960-5
+  odorant: hydrogen sulfide
+  lever_class: time
+  lever: heating time at 120 C (oil bath), L-cysteine-n-butyraldehyde compound
+  focal: false
+  location: Table I, p. 384
+  digitised: false
+  unit: ug H2S liberated per sample (32 mg S)
+  quant_type: absolute
+  time_course_rule: whole series (lever is time)
+  arms:
+  - label: L-cysteine-n-butyraldehyde compound, 0.5 h (printed as an em dash, undefined)
+    lever_value: 30
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 30
+      precursors:
+        L-cysteine-n-butyraldehyde compound: amount containing 32 mg S
+      buffer: none
+      matrix: water (10 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+  - label: L-cysteine-n-butyraldehyde compound, 1 h
+    lever_value: 60
+    value: 7
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        L-cysteine-n-butyraldehyde compound: amount containing 32 mg S
+      buffer: none
+      matrix: water (10 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+  - label: L-cysteine-n-butyraldehyde compound, 3 h
+    lever_value: 180
+    value: 29
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 180
+      precursors:
+        L-cysteine-n-butyraldehyde compound: amount containing 32 mg S
+      buffer: none
+      matrix: water (10 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+  - label: L-cysteine-n-butyraldehyde compound, 6 h
+    lever_value: 360
+    value: 97
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 360
+      precursors:
+        L-cysteine-n-butyraldehyde compound: amount containing 32 mg S
+      buffer: none
+      matrix: water (10 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+- id: mizutani1960-6
+  odorant: hydrogen sulfide
+  lever_class: time
+  lever: heating time at 120 C (oil bath), L-cysteine-benzaldehyde compound
+  focal: false
+  location: Table I, p. 384
+  digitised: false
+  unit: ug H2S liberated per sample (32 mg S)
+  quant_type: absolute
+  time_course_rule: whole series (lever is time)
+  arms:
+  - label: L-cysteine-benzaldehyde compound, 0.5 h
+    lever_value: 30
+    value: 7
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 30
+      precursors:
+        L-cysteine-benzaldehyde compound: amount containing 32 mg S
+      buffer: none
+      matrix: water (10 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+  - label: L-cysteine-benzaldehyde compound, 1 h
+    lever_value: 60
+    value: 15
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        L-cysteine-benzaldehyde compound: amount containing 32 mg S
+      buffer: none
+      matrix: water (10 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+  - label: L-cysteine-benzaldehyde compound, 3 h
+    lever_value: 180
+    value: 60
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 180
+      precursors:
+        L-cysteine-benzaldehyde compound: amount containing 32 mg S
+      buffer: none
+      matrix: water (10 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+  - label: L-cysteine-benzaldehyde compound, 6 h
+    lever_value: 360
+    value: 195
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 360
+      precursors:
+        L-cysteine-benzaldehyde compound: amount containing 32 mg S
+      buffer: none
+      matrix: water (10 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+- id: mizutani1960-7
+  odorant: hydrogen sulfide
+  lever_class: time
+  lever: heating time at 120 C (oil bath), L-cysteine-furfural compound (I)
+  focal: false
+  location: Table I, p. 384
+  digitised: false
+  unit: ug H2S liberated per sample (32 mg S)
+  quant_type: absolute
+  time_course_rule: whole series (lever is time)
+  arms:
+  - label: L-cysteine-furfural compound (I), 0.5 h
+    lever_value: 30
+    value: 32
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 30
+      precursors:
+        L-cysteine-furfural compound (I): amount containing 32 mg S
+      buffer: none
+      matrix: water (10 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+  - label: L-cysteine-furfural compound (I), 1 h
+    lever_value: 60
+    value: 68
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        L-cysteine-furfural compound (I): amount containing 32 mg S
+      buffer: none
+      matrix: water (10 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+  - label: L-cysteine-furfural compound (I), 3 h
+    lever_value: 180
+    value: 237
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 180
+      precursors:
+        L-cysteine-furfural compound (I): amount containing 32 mg S
+      buffer: none
+      matrix: water (10 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+  - label: L-cysteine-furfural compound (I), 6 h
+    lever_value: 360
+    value: 700
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 360
+      precursors:
+        L-cysteine-furfural compound (I): amount containing 32 mg S
+      buffer: none
+      matrix: water (10 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+- id: mizutani1960-8
+  odorant: hydrogen sulfide
+  lever_class: time
+  lever: heating time at 120 C (oil bath), L-cysteine-furfural compound (II)
+  focal: false
+  location: Table I, p. 384
+  digitised: false
+  unit: ug H2S liberated per sample (32 mg S)
+  quant_type: absolute
+  time_course_rule: whole series (lever is time)
+  arms:
+  - label: L-cysteine-furfural compound (II), 0.5 h
+    lever_value: 30
+    value: 106
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 30
+      precursors:
+        L-cysteine-furfural compound (II): amount containing 32 mg S
+      buffer: none
+      matrix: water (10 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+  - label: L-cysteine-furfural compound (II), 1 h
+    lever_value: 60
+    value: 195
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        L-cysteine-furfural compound (II): amount containing 32 mg S
+      buffer: none
+      matrix: water (10 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+  - label: L-cysteine-furfural compound (II), 3 h
+    lever_value: 180
+    value: 723
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 180
+      precursors:
+        L-cysteine-furfural compound (II): amount containing 32 mg S
+      buffer: none
+      matrix: water (10 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+  - label: L-cysteine-furfural compound (II), 6 h (printed as an em dash, undefined)
+    lever_value: 360
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 360
+      precursors:
+        L-cysteine-furfural compound (II): amount containing 32 mg S
+      buffer: none
+      matrix: water (10 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+- id: mizutani1960-9
+  odorant: hydrogen sulfide
+  lever_class: sulfur source
+  lever: sulfur-containing precursor (cystine, cysteine, cysteine-aldehyde/ketoacid adducts) at equal sulfur (32 mg S)
+  focal: true
+  location: Table I, p. 384
+  digitised: false
+  unit: ug H2S liberated per sample (32 mg S)
+  quant_type: absolute
+  time_course_rule: longest time (6 h; no main time stated)
+  arms:
+  - label: L-cystine, 6 h
+    lever_value: L-cystine
+    value: 475
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 360
+      precursors:
+        L-cystine: amount containing 32 mg S
+      buffer: none
+      matrix: water (10 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+  - label: L-cysteine, 6 h
+    lever_value: L-cysteine
+    value: 325
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 360
+      precursors:
+        L-cysteine: amount containing 32 mg S
+      buffer: none
+      matrix: water (10 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+  - label: L-cysteine-formaldehyde compound, 6 h
+    lever_value: L-cysteine-formaldehyde compound
+    value: 264
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 360
+      precursors:
+        L-cysteine-formaldehyde compound: amount containing 32 mg S
+      buffer: none
+      matrix: water (10 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+  - label: L-cysteine-acetaldehyde compound, 6 h
+    lever_value: L-cysteine-acetaldehyde compound
+    value: 232.5
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 360
+      precursors:
+        L-cysteine-acetaldehyde compound: amount containing 32 mg S
+      buffer: none
+      matrix: water (10 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+  - label: L-cysteine-n-butyraldehyde compound, 6 h
+    lever_value: L-cysteine-n-butyraldehyde compound
+    value: 97
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 360
+      precursors:
+        L-cysteine-n-butyraldehyde compound: amount containing 32 mg S
+      buffer: none
+      matrix: water (10 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+  - label: L-cysteine-benzaldehyde compound, 6 h
+    lever_value: L-cysteine-benzaldehyde compound
+    value: 195
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 360
+      precursors:
+        L-cysteine-benzaldehyde compound: amount containing 32 mg S
+      buffer: none
+      matrix: water (10 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
+  - label: L-cysteine-furfural compound (I), 6 h
+    lever_value: L-cysteine-furfural compound (I)
+    value: 700
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 360
+      precursors:
+        L-cysteine-furfural compound (I): amount containing 32 mg S
+      buffer: none
+      matrix: water (10 ml)
+      headspace: CO2 gas stream (inert carrier); HCl added after heating before final 30 min sweep
