@@ -116,6 +116,43 @@ Read it as three lines of work that meet at the end:
 - **the engine and uncertainty line** (one network, fast engine, hierarchical posterior);
 - **the product line** (ingredients, cooking, the lever table).
 
+### 4.1 Redirect after the decision-relevance step 0 (2026-11-10; owner: "do as you think is best long term")
+
+**The evidence.** The decision-relevance pre-registration (PR #110, frozen v3.1, amendment A1) asked whether ANY
+experiment could let the lever table show directions. Its step 0 measured the engine's out-of-sample error on a
+ratio between two arms of one study (sigma_r), with the carried pH-balance rivals in place of the falsified B0:
+
+- sulfur lane sigma_r = 1.23 dex (leave-one-study-out 0.85 - 1.43; 6 studies). It is not B0's pH failure: the two
+  worst studies (xu2007, Hofmann pH 3/7) miss as much under B1 / B13 as under B0.
+- The engine over-responds to levers: the slope of observed on predicted log ratios is 0.21 (90 % CI -0.06 to 0.48).
+  Calibrated contrasts (slope times prediction) still lose to "no change" out of sample (0.39 vs 0.34 dex).
+- Even a perfect experiment could show a direction for 1 of the 12 computable decisions, and that one is trivial (a
+  hydroperoxide charge makes hexanal). Pre-registered verdict: **CONFIRMED (omega-bound): the lever table cannot
+  show directions under the current discrepancy, whatever the experiments.** The bar would need sigma_r <= 0.42 dex
+  for 3 decisions, <= 0.19 for 7.
+- Consistent with PR #108: after the falsified balance's outputs are refused, the remaining out-of-sample contrasts
+  lose to "no change" (0.30 vs 0.15 dex).
+
+**What it means.** The bottleneck is model STRUCTURE (the contrast discrepancy), not parameter uncertainty. Experiments
+that pin constants or settle route shares (the sized M3 - M6 designs) cannot make the lever table useful while
+sigma_r is ~1.2 dex. Settling them stays worth recording, but it no longer leads.
+
+**The redirect, in priority order.**
+
+| # | what | why | done means |
+|---|---|---|---|
+| P1 | **Contrast-discrepancy decomposition** (resumed): attribute each out-of-sample within-study miss to mechanism steps (exact JAX gradients where ported), with and without the B0-pH-dependent pairs | names the structures behind the ~2.6 dex misses (xu2007, Hofmann) and the rest | a ranked list of 5 - 10 culprit structures, each with the evidence that would fix it |
+| P2 | **Structure fixes on P1's culprits**, each through a sec. 7 case | the only route that lowers sigma_r | sigma_r (step 0's estimator, leave-one-study-out) becomes the PRIMARY yardstick of chemistry work, beside the contrast benchmark; a fix ships only if it lowers sigma_r out of sample |
+| P3 | **Hybrid route:** a statistical layer (W4's hierarchical model) over the kinetic structure, fitted on ONE designed within-laboratory factorial lever study (cysteine x sugar x pH x time in a pea-protein matrix, GC-MS plus GC-O, the decision-relevance prereg's contrast design) | sidesteps the structural discrepancy inside one matrix and one laboratory, and feeds the perception layer | the study designed and sized with the decision-relevance machinery; the request drafted. **W6 moves earlier for this one study** (the evidence now says designed lever data is the bottleneck); sending it stays the owner's action |
+| P4 | **Narrow the shipped scope:** a lever direction is shown only where step 0's oracle ceiling allows it; everything else ships as a refusal or a range | honesty: today only very large levers can be shown | the lever table's first version says which levers it can answer and which it cannot |
+
+**Paused (resumable; work kept in their branches):** the M3 route power check (also blocked by the judge-bound
+artefact found in the M6 premortem), the M6 rework, the judge-bound fix (needed only when a case can credit again),
+and the JAX port of B1 / B13 (needed to re-run #108 on every passing draw and to lift its refusal; it returns when
+P2 touches the pH balance). Merged work (governance, S1 / S4, the drift gate, M1b(i), M4, M5) stands.
+
+**Not changed:** sec. 7 (how a change ships), the owner-first clauses, and the cases already frozen.
+
 ## 5. The workstreams
 
 ### W1. Yardstick: know whether a change helps
@@ -471,6 +508,20 @@ Other odds (lowered 2026-11-04: six earlier sink structures were refused, B11 - 
 supply structure on disk passes the screen, and P ~0.6 that no unseen decisive supply data exist): M1c + M2 noticeably
 improve the sulfur lane out of sample, ~0.25. The sulfur lane beats both null models after M1 + M2, ~0.3. Ranked relative predictions with honest intervals for most levers by the end of January, ~0.35. Absolute levels
 within 3x across laboratories for most rows, ~0.15 (not a goal).
+
+**Re-dated by the redirect (sec. 4.1, 2026-11-10).** The rows above from 12-05 onward assume the chemistry line
+leads; under the redirect they are superseded by:
+
+| by | done means | P |
+|---|---|---|
+| 11-21 | P1's ranked culprit list; the factorial lever study designed, sized and its request drafted (P3) | ~0.6 |
+| 12-19 | P2's first structure fix judged on sigma_r out of sample | ~0.35 |
+| 01-23 | sigma_r <= 0.6 dex on the sulfur lane (leave-one-study-out), or a stated reason why not; the lever table's first, narrowed version (P4) | ~0.2 |
+
+Odds after step 0: ranked relative predictions with honest intervals for MOST levers by the end of January, ~0.1
+(was ~0.35); for the few levers large enough to show, ~0.5. With the factorial study's data in hand (P3), the
+hybrid route's odds of most levers within one matrix and laboratory are ~0.35, conditional on the data arriving by
+early January.
 
 ## 9. Not in the plan
 
