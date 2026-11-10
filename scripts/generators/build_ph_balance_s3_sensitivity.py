@@ -1004,7 +1004,9 @@ def read_detail() -> Dict[str, Any]:
 
 
 def inputs() -> List[Path]:
-    return [PREREG, FALSIFICATION, SCREEN, A2, S3_RECORD, POINTS_OUT,
+    # the prereg REPORTS this record (sec. 21.10), so hashing it is a cycle (as for the points record, 5e61fed0);
+    # the rules it states are implemented in src/kinetic_core/ph_balance_refusal.py, which the refusal reads
+    return [FALSIFICATION, SCREEN, A2, S3_RECORD, POINTS_OUT,
             ROOT / "src/kinetic_core/ph_balance_rivals.py", ROOT / "src/kinetic_core/ph_state.py",
             ROOT / "src/kinetic_core/sulfur.py", ROOT / "src/kinetic_core/parameters_sulfur.py",
             data_paths.VALIDATION_DIR / "kinetic_core_b60_fit_report.json",
