@@ -541,6 +541,12 @@ def render(payload: Mapping[str, Any]) -> str:
         flags = (" (prior-dominated)" if s.get("prior_dominated") else "") + \
                 (f" ({s['non_monotone_contrasts']} non-monotone)" if s.get("non_monotone_contrasts") else "")
         lo = c.get("lolo")
+        if c["reading"] == "too few laboratories":      # PREREG sec. 5: listed, nothing pooled
+            raw = ", ".join(f"{r['y']:+.2f}" for r in c["rows"])
+            L.append(f"| {c['compound']} | {c['lever_class']} ({c['step']}) | {c['band']} | {c['reading']} | "
+                     f"not pooled; per contrast: {raw} | - | - | {c['labs']} / {c['studies']} / {c['contrasts']} | "
+                     f"{c['peak_area_share']:.0%} | {', '.join(c['matrices'])} | - |")
+            continue
         L.append(f"| {c['compound']} | {c['lever_class']} ({c['step']}) | {c['band']} | {c['reading']}{flags} | "
                  f"{_f(s['estimate'])} ({_f(s['ci90'][0])} to {_f(s['ci90'][1])}) | "
                  f"{_f(s['new_lab_pi90'][0])} to {_f(s['new_lab_pi90'][1])} | {s['p_same_sign_new_lab']:.2f} | "
@@ -557,6 +563,11 @@ def render(payload: Mapping[str, Any]) -> str:
             if "estimate" not in s:
                 L.append(f"| {c['compound']} | {c['lever_class']} | {lv} vs {c['reference']} | not connected to "
                          f"the reference | - | - | - | - |")
+                continue
+            if s["reading"] == "too few laboratories":
+                L.append(f"| {c['compound']} | {c['lever_class']} | {lv} vs {c['reference']} | too few laboratories | "
+                         f"not pooled (network estimate {_f(s['estimate'])}, shown for orientation only) | - | - | "
+                         f"{s['labs']} / {s['contrasts']} |")
                 continue
             L.append(f"| {c['compound']} | {c['lever_class']} | {lv} vs {c['reference']} | {s['reading']} | "
                      f"{_f(s['estimate'])} ({_f(s['ci90'][0])} to {_f(s['ci90'][1])}) | "

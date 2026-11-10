@@ -5714,12 +5714,6 @@
           "id": null
         },
         {
-          "smiles": "Cc1occc1SSCc1ccco1",
-          "first_depth": 1,
-          "kind": "new",
-          "id": null
-        },
-        {
           "smiles": "NC(=O)CCSCc1ccco1",
           "first_depth": 1,
           "kind": "new",
@@ -5840,6 +5834,12 @@
           "id": "acetaldehyde"
         },
         {
+          "smiles": "Cc1occc1SSCc1ccco1",
+          "first_depth": 1,
+          "kind": "registry",
+          "id": "2_methyl_3_furfuryldithio_furan"
+        },
+        {
           "smiles": "CC(=O)CN",
           "first_depth": 1,
           "kind": "species",
@@ -5920,8 +5920,8 @@
         },
         "products": {
           "species": 12,
-          "new": 57,
-          "registry": 1
+          "new": 56,
+          "registry": 2
         }
       }
     }
@@ -5936,8 +5936,8 @@
     },
     "products_by_kind": {
       "species": 72,
-      "new": 200,
-      "registry": 8
+      "new": 199,
+      "registry": 9
     }
   }
 }
