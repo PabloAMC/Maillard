@@ -153,4 +153,10 @@ against "no change". A cell whose coverage falls below 0.7 is flagged: its inter
 
 ## Amendments
 
-*(none)*
+**A1 (2026-11-10, after batches 1 - 3 were keyed; no table had been read).** *Reason:* two sources report rates, not
+amounts (first-order H2S release rate constants; storage-loss rates in % per day at 50 C). Sec. 1's question is how
+much odorant a heated system holds; a ratio of rates is a different quantity and would pool silently with amounts.
+*Rule:* the keyed quantity is the amount of the odorant present after heating (a concentration, a yield per mol of
+precursor, or a peak area). Rate constants, half-lives and storage losses are keyed (`quantity: rate`) but enter no
+cell; each cell's output counts them. The generator applies this through the contrast's `quantity` field (default
+`amount`).

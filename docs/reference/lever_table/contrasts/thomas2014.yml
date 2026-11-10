@@ -1,0 +1,615 @@
+source: thomas2014
+pdf: data/articles/thomas2014.pdf
+reader: resolved
+scope_note: 'All values digitised from Fig. 2 (no table prints them); medians of triplicates, min-max bars not keyed as SD.
+  Digitising resolution near the zero baseline is about +/-0.15 a.u. (x 10000), i.e. 0.1-0.2 dex for the 0.3-1.8 arms. Arms
+  whose marker sits on the zero baseline (all C+F and C+X arms, and the T 0 disulfide arm) are present-but-not-quantified:
+  nd_no_limit, value null; the four cysteine ladders therefore enter no estimate. The T 0 arm of the MFT thiamine ladder was
+  keyed 0.2 by both readers (agreed, copied) although it also sits on the baseline; treat it as a floor value. Not keyed:
+  thiamine vs cysteine or fructose vs xylose between ladders (different doses/co-precursors, baseline values only); 2-methyl-3-(methyldithio)furan
+  (not on the odorant list); Table 1 hydrogen sulfide (commercial ham only, no contrast). Cooking: 40-69 C ramp at 0.1 C/min
+  then 120 min hold at 69 C; time_min records the hold.'
+contrasts:
+- id: thomas2014-1
+  odorant: 2-Methyl-3-furanthiol (MFT)
+  lever_class: precursor dose
+  lever: thiamine added to brine (0, 8, 80, 800, 8000 mg/100 g brine)
+  focal: true
+  location: Fig. 2 (top left), p. 211
+  digitised: true
+  unit: chromatographic area (a.u., x 10000), ion m/z 114
+  quant_type: peak_area
+  time_course_rule: not a time course
+  resolution: re-read
+  arms:
+  - label: T 0
+    lever_value: 0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 69
+      time_min: 120
+      precursors:
+        thiamine: 0 mg/100 g brine
+      buffer: brine 100 g per kg meat (18 g curing salt with 0.6% nitrite in 82 g water)
+      matrix: meat (pork M. semimembranosus model ham)
+      headspace: inert (closed glass jars under vacuum)
+    note: on the zero line in Fig. 2 (resolver re-read at 1000 dpi); censored like the other zero-line arms
+  - label: T 8
+    lever_value: 8
+    value: 0.75
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 69
+      time_min: 120
+      precursors:
+        thiamine: 8 mg/100 g brine
+      buffer: brine 100 g per kg meat (18 g curing salt with 0.6% nitrite in 82 g water)
+      matrix: meat (pork M. semimembranosus model ham)
+      headspace: inert (closed glass jars under vacuum)
+  - label: T 80
+    lever_value: 80
+    value: 1.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 69
+      time_min: 120
+      precursors:
+        thiamine: 80 mg/100 g brine
+      buffer: brine 100 g per kg meat (18 g curing salt with 0.6% nitrite in 82 g water)
+      matrix: meat (pork M. semimembranosus model ham)
+      headspace: inert (closed glass jars under vacuum)
+  - label: T 800
+    lever_value: 800
+    value: 1.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 69
+      time_min: 120
+      precursors:
+        thiamine: 800 mg/100 g brine
+      buffer: brine 100 g per kg meat (18 g curing salt with 0.6% nitrite in 82 g water)
+      matrix: meat (pork M. semimembranosus model ham)
+      headspace: inert (closed glass jars under vacuum)
+  - label: T 8000
+    lever_value: 8000
+    value: 40.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 69
+      time_min: 120
+      precursors:
+        thiamine: 8000 mg/100 g brine
+      buffer: brine 100 g per kg meat (18 g curing salt with 0.6% nitrite in 82 g water)
+      matrix: meat (pork M. semimembranosus model ham)
+      headspace: inert (closed glass jars under vacuum)
+- id: thomas2014-2
+  odorant: Bis(2-methyl-3-furyl) disulfide
+  lever_class: precursor dose
+  lever: thiamine added to brine (0, 8, 80, 800, 8000 mg/100 g brine)
+  focal: true
+  location: Fig. 2 (bottom left), p. 211
+  digitised: true
+  unit: chromatographic area (a.u., x 10000), ion m/z 113
+  quant_type: peak_area
+  time_course_rule: not a time course
+  resolution: re-read
+  arms:
+  - label: T 0 (marker on the zero baseline)
+    lever_value: 0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 69
+      time_min: 120
+      precursors:
+        thiamine: 0 mg/100 g brine
+      buffer: brine 100 g per kg meat (18 g curing salt with 0.6% nitrite in 82 g water)
+      matrix: meat (pork M. semimembranosus model ham)
+      headspace: inert (closed glass jars under vacuum)
+  - label: T 8
+    lever_value: 8
+    value: 0.35
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 69
+      time_min: 120
+      precursors:
+        thiamine: 8 mg/100 g brine
+      buffer: brine 100 g per kg meat (18 g curing salt with 0.6% nitrite in 82 g water)
+      matrix: meat (pork M. semimembranosus model ham)
+      headspace: inert (closed glass jars under vacuum)
+  - label: T 80
+    lever_value: 80
+    value: 0.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 69
+      time_min: 120
+      precursors:
+        thiamine: 80 mg/100 g brine
+      buffer: brine 100 g per kg meat (18 g curing salt with 0.6% nitrite in 82 g water)
+      matrix: meat (pork M. semimembranosus model ham)
+      headspace: inert (closed glass jars under vacuum)
+  - label: T 800
+    lever_value: 800
+    value: 0.75
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 69
+      time_min: 120
+      precursors:
+        thiamine: 800 mg/100 g brine
+      buffer: brine 100 g per kg meat (18 g curing salt with 0.6% nitrite in 82 g water)
+      matrix: meat (pork M. semimembranosus model ham)
+      headspace: inert (closed glass jars under vacuum)
+  - label: T 8000
+    lever_value: 8000
+    value: 27.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 69
+      time_min: 120
+      precursors:
+        thiamine: 8000 mg/100 g brine
+      buffer: brine 100 g per kg meat (18 g curing salt with 0.6% nitrite in 82 g water)
+      matrix: meat (pork M. semimembranosus model ham)
+      headspace: inert (closed glass jars under vacuum)
+- id: thomas2014-3
+  odorant: 2-Methyl-3-furanthiol (MFT)
+  lever_class: precursor dose
+  lever: cysteine added to brine with 3 g fructose/100 g brine (0, 100, 1000, 3000, 10000 mg/100 g brine)
+  focal: true
+  location: Fig. 2 (top left, C+F), p. 211
+  digitised: true
+  unit: chromatographic area (a.u., x 10000), ion m/z 114
+  quant_type: peak_area
+  time_course_rule: not a time course
+  resolution: re-read
+  arms:
+  - label: C+F 0 (marker on the zero baseline)
+    lever_value: 0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 69
+      time_min: 120
+      precursors:
+        cysteine: 0 mg/100 g brine
+        fructose: 3 g/100 g brine
+      buffer: brine 100 g per kg meat (18 g curing salt with 0.6% nitrite in 82 g water)
+      matrix: meat (pork M. semimembranosus model ham)
+      headspace: inert (closed glass jars under vacuum)
+  - label: C+F 100 (marker on the zero baseline)
+    lever_value: 100
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 69
+      time_min: 120
+      precursors:
+        cysteine: 100 mg/100 g brine
+        fructose: 3 g/100 g brine
+      buffer: brine 100 g per kg meat (18 g curing salt with 0.6% nitrite in 82 g water)
+      matrix: meat (pork M. semimembranosus model ham)
+      headspace: inert (closed glass jars under vacuum)
+  - label: C+F 1000 (marker on the zero baseline)
+    lever_value: 1000
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 69
+      time_min: 120
+      precursors:
+        cysteine: 1000 mg/100 g brine
+        fructose: 3 g/100 g brine
+      buffer: brine 100 g per kg meat (18 g curing salt with 0.6% nitrite in 82 g water)
+      matrix: meat (pork M. semimembranosus model ham)
+      headspace: inert (closed glass jars under vacuum)
+  - label: C+F 3000 (marker on the zero baseline)
+    lever_value: 3000
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 69
+      time_min: 120
+      precursors:
+        cysteine: 3000 mg/100 g brine
+        fructose: 3 g/100 g brine
+      buffer: brine 100 g per kg meat (18 g curing salt with 0.6% nitrite in 82 g water)
+      matrix: meat (pork M. semimembranosus model ham)
+      headspace: inert (closed glass jars under vacuum)
+  - label: C+F 10000 (marker on the zero baseline)
+    lever_value: 10000
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 69
+      time_min: 120
+      precursors:
+        cysteine: 10000 mg/100 g brine
+        fructose: 3 g/100 g brine
+      buffer: brine 100 g per kg meat (18 g curing salt with 0.6% nitrite in 82 g water)
+      matrix: meat (pork M. semimembranosus model ham)
+      headspace: inert (closed glass jars under vacuum)
+- id: thomas2014-4
+  odorant: 2-Methyl-3-furanthiol (MFT)
+  lever_class: precursor dose
+  lever: cysteine added to brine with 3 g xylose/100 g brine (0, 100, 1000, 3000, 10000 mg/100 g brine)
+  focal: true
+  location: Fig. 2 (top left, C+X), p. 211
+  digitised: true
+  unit: chromatographic area (a.u., x 10000), ion m/z 114
+  quant_type: peak_area
+  time_course_rule: not a time course
+  resolution: re-read
+  arms:
+  - label: C+X 0 (marker on the zero baseline)
+    lever_value: 0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 69
+      time_min: 120
+      precursors:
+        cysteine: 0 mg/100 g brine
+        xylose: 3 g/100 g brine
+      buffer: brine 100 g per kg meat (18 g curing salt with 0.6% nitrite in 82 g water)
+      matrix: meat (pork M. semimembranosus model ham)
+      headspace: inert (closed glass jars under vacuum)
+  - label: C+X 100 (marker on the zero baseline)
+    lever_value: 100
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 69
+      time_min: 120
+      precursors:
+        cysteine: 100 mg/100 g brine
+        xylose: 3 g/100 g brine
+      buffer: brine 100 g per kg meat (18 g curing salt with 0.6% nitrite in 82 g water)
+      matrix: meat (pork M. semimembranosus model ham)
+      headspace: inert (closed glass jars under vacuum)
+  - label: C+X 1000 (marker on the zero baseline)
+    lever_value: 1000
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 69
+      time_min: 120
+      precursors:
+        cysteine: 1000 mg/100 g brine
+        xylose: 3 g/100 g brine
+      buffer: brine 100 g per kg meat (18 g curing salt with 0.6% nitrite in 82 g water)
+      matrix: meat (pork M. semimembranosus model ham)
+      headspace: inert (closed glass jars under vacuum)
+  - label: C+X 3000 (marker on the zero baseline)
+    lever_value: 3000
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 69
+      time_min: 120
+      precursors:
+        cysteine: 3000 mg/100 g brine
+        xylose: 3 g/100 g brine
+      buffer: brine 100 g per kg meat (18 g curing salt with 0.6% nitrite in 82 g water)
+      matrix: meat (pork M. semimembranosus model ham)
+      headspace: inert (closed glass jars under vacuum)
+  - label: C+X 10000 (marker on the zero baseline)
+    lever_value: 10000
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 69
+      time_min: 120
+      precursors:
+        cysteine: 10000 mg/100 g brine
+        xylose: 3 g/100 g brine
+      buffer: brine 100 g per kg meat (18 g curing salt with 0.6% nitrite in 82 g water)
+      matrix: meat (pork M. semimembranosus model ham)
+      headspace: inert (closed glass jars under vacuum)
+- id: thomas2014-5
+  odorant: Bis(2-methyl-3-furyl) disulfide
+  lever_class: precursor dose
+  lever: cysteine added to brine with 3 g fructose/100 g brine (0, 100, 1000, 3000, 10000 mg/100 g brine)
+  focal: true
+  location: Fig. 2 (bottom left, C+F), p. 211
+  digitised: true
+  unit: chromatographic area (a.u., x 10000), ion m/z 113
+  quant_type: peak_area
+  time_course_rule: not a time course
+  resolution: re-read
+  arms:
+  - label: C+F 0 (marker on the zero baseline)
+    lever_value: 0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 69
+      time_min: 120
+      precursors:
+        cysteine: 0 mg/100 g brine
+        fructose: 3 g/100 g brine
+      buffer: brine 100 g per kg meat (18 g curing salt with 0.6% nitrite in 82 g water)
+      matrix: meat (pork M. semimembranosus model ham)
+      headspace: inert (closed glass jars under vacuum)
+  - label: C+F 100 (marker on the zero baseline)
+    lever_value: 100
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 69
+      time_min: 120
+      precursors:
+        cysteine: 100 mg/100 g brine
+        fructose: 3 g/100 g brine
+      buffer: brine 100 g per kg meat (18 g curing salt with 0.6% nitrite in 82 g water)
+      matrix: meat (pork M. semimembranosus model ham)
+      headspace: inert (closed glass jars under vacuum)
+  - label: C+F 1000 (marker on the zero baseline)
+    lever_value: 1000
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 69
+      time_min: 120
+      precursors:
+        cysteine: 1000 mg/100 g brine
+        fructose: 3 g/100 g brine
+      buffer: brine 100 g per kg meat (18 g curing salt with 0.6% nitrite in 82 g water)
+      matrix: meat (pork M. semimembranosus model ham)
+      headspace: inert (closed glass jars under vacuum)
+  - label: C+F 3000 (marker on the zero baseline)
+    lever_value: 3000
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 69
+      time_min: 120
+      precursors:
+        cysteine: 3000 mg/100 g brine
+        fructose: 3 g/100 g brine
+      buffer: brine 100 g per kg meat (18 g curing salt with 0.6% nitrite in 82 g water)
+      matrix: meat (pork M. semimembranosus model ham)
+      headspace: inert (closed glass jars under vacuum)
+  - label: C+F 10000 (marker on the zero baseline)
+    lever_value: 10000
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 69
+      time_min: 120
+      precursors:
+        cysteine: 10000 mg/100 g brine
+        fructose: 3 g/100 g brine
+      buffer: brine 100 g per kg meat (18 g curing salt with 0.6% nitrite in 82 g water)
+      matrix: meat (pork M. semimembranosus model ham)
+      headspace: inert (closed glass jars under vacuum)
+- id: thomas2014-6
+  odorant: Bis(2-methyl-3-furyl) disulfide
+  lever_class: precursor dose
+  lever: cysteine added to brine with 3 g xylose/100 g brine (0, 100, 1000, 3000, 10000 mg/100 g brine)
+  focal: true
+  location: Fig. 2 (bottom left, C+X), p. 211
+  digitised: true
+  unit: chromatographic area (a.u., x 10000), ion m/z 113
+  quant_type: peak_area
+  time_course_rule: not a time course
+  resolution: re-read
+  arms:
+  - label: C+X 0 (marker on the zero baseline)
+    lever_value: 0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 69
+      time_min: 120
+      precursors:
+        cysteine: 0 mg/100 g brine
+        xylose: 3 g/100 g brine
+      buffer: brine 100 g per kg meat (18 g curing salt with 0.6% nitrite in 82 g water)
+      matrix: meat (pork M. semimembranosus model ham)
+      headspace: inert (closed glass jars under vacuum)
+  - label: C+X 100 (marker on the zero baseline)
+    lever_value: 100
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 69
+      time_min: 120
+      precursors:
+        cysteine: 100 mg/100 g brine
+        xylose: 3 g/100 g brine
+      buffer: brine 100 g per kg meat (18 g curing salt with 0.6% nitrite in 82 g water)
+      matrix: meat (pork M. semimembranosus model ham)
+      headspace: inert (closed glass jars under vacuum)
+  - label: C+X 1000 (marker on the zero baseline)
+    lever_value: 1000
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 69
+      time_min: 120
+      precursors:
+        cysteine: 1000 mg/100 g brine
+        xylose: 3 g/100 g brine
+      buffer: brine 100 g per kg meat (18 g curing salt with 0.6% nitrite in 82 g water)
+      matrix: meat (pork M. semimembranosus model ham)
+      headspace: inert (closed glass jars under vacuum)
+  - label: C+X 3000 (marker on the zero baseline)
+    lever_value: 3000
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 69
+      time_min: 120
+      precursors:
+        cysteine: 3000 mg/100 g brine
+        xylose: 3 g/100 g brine
+      buffer: brine 100 g per kg meat (18 g curing salt with 0.6% nitrite in 82 g water)
+      matrix: meat (pork M. semimembranosus model ham)
+      headspace: inert (closed glass jars under vacuum)
+  - label: C+X 10000 (marker on the zero baseline)
+    lever_value: 10000
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 69
+      time_min: 120
+      precursors:
+        cysteine: 10000 mg/100 g brine
+        xylose: 3 g/100 g brine
+      buffer: brine 100 g per kg meat (18 g curing salt with 0.6% nitrite in 82 g water)
+      matrix: meat (pork M. semimembranosus model ham)
+      headspace: inert (closed glass jars under vacuum)

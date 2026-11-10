@@ -1,0 +1,634 @@
+source: thomas2014
+pdf: data/articles/thomas2014.pdf
+reader: b
+scope_note: Values digitised from Fig. 2 (no table); C+F and C+X series lie on the zero baseline and overlap, so their arms
+  (and the fructose-vs-xylose sugar-identity contrasts at each cysteine dose) carry no readable number; thiamine series x10000
+  a.u. read at ~0.1-0.5 resolution; H2S appears only in Table 1 (commercial ham, no contrast); cooking 40-69 C at 0.1 C/min
+  then 120 min at 69 C (time_min 410 = ramp + hold).
+contrasts:
+- id: thomas2014-1
+  odorant: 2-methyl-3-furanthiol
+  lever_class: precursor dose
+  lever: added thiamine (mg/100 g brine)
+  focal: true
+  location: Fig. 2, p. 211
+  digitised: true
+  unit: chromatographic area, a.u. x 10000 (median, n = 3; DHS-GC-MS SIM)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: T 0 mg/100 g brine
+    lever_value: 0
+    value: 0.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 69
+      time_min: 410
+      precursors:
+        brine: 100 g per 1 kg chopped pork (18 g curing salt with 0.6% nitrite in 82 g water)
+        thiamine: 0 mg per 100 g brine
+      buffer: none
+      matrix: meat (model cooked ham, pork M. semimembranosus)
+      headspace: vacuum, closed glass jars
+  - label: T 8 mg/100 g brine
+    lever_value: 8
+    value: 0.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 69
+      time_min: 410
+      precursors:
+        brine: 100 g per 1 kg chopped pork (18 g curing salt with 0.6% nitrite in 82 g water)
+        thiamine: 8 mg per 100 g brine
+      buffer: none
+      matrix: meat (model cooked ham, pork M. semimembranosus)
+      headspace: vacuum, closed glass jars
+  - label: T 80 mg/100 g brine
+    lever_value: 80
+    value: 0.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 69
+      time_min: 410
+      precursors:
+        brine: 100 g per 1 kg chopped pork (18 g curing salt with 0.6% nitrite in 82 g water)
+        thiamine: 80 mg per 100 g brine
+      buffer: none
+      matrix: meat (model cooked ham, pork M. semimembranosus)
+      headspace: vacuum, closed glass jars
+  - label: T 800 mg/100 g brine
+    lever_value: 800
+    value: 1.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 69
+      time_min: 410
+      precursors:
+        brine: 100 g per 1 kg chopped pork (18 g curing salt with 0.6% nitrite in 82 g water)
+        thiamine: 800 mg per 100 g brine
+      buffer: none
+      matrix: meat (model cooked ham, pork M. semimembranosus)
+      headspace: vacuum, closed glass jars
+  - label: T 8000 mg/100 g brine
+    lever_value: 8000
+    value: 40.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 69
+      time_min: 410
+      precursors:
+        brine: 100 g per 1 kg chopped pork (18 g curing salt with 0.6% nitrite in 82 g water)
+        thiamine: 8000 mg per 100 g brine
+      buffer: none
+      matrix: meat (model cooked ham, pork M. semimembranosus)
+      headspace: vacuum, closed glass jars
+- id: thomas2014-2
+  odorant: bis(2-methyl-3-furyl)disulphide
+  lever_class: precursor dose
+  lever: added thiamine (mg/100 g brine)
+  focal: true
+  location: Fig. 2, p. 211
+  digitised: true
+  unit: chromatographic area, a.u. x 10000 (median, n = 3; DHS-GC-MS SIM)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: T 0 mg/100 g brine (on the zero baseline at figure resolution; series overlap; not digitisable)
+    lever_value: 0
+    value: null
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 69
+      time_min: 410
+      precursors:
+        brine: 100 g per 1 kg chopped pork (18 g curing salt with 0.6% nitrite in 82 g water)
+        thiamine: 0 mg per 100 g brine
+      buffer: none
+      matrix: meat (model cooked ham, pork M. semimembranosus)
+      headspace: vacuum, closed glass jars
+  - label: T 8 mg/100 g brine
+    lever_value: 8
+    value: 0.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 69
+      time_min: 410
+      precursors:
+        brine: 100 g per 1 kg chopped pork (18 g curing salt with 0.6% nitrite in 82 g water)
+        thiamine: 8 mg per 100 g brine
+      buffer: none
+      matrix: meat (model cooked ham, pork M. semimembranosus)
+      headspace: vacuum, closed glass jars
+  - label: T 80 mg/100 g brine
+    lever_value: 80
+    value: 0.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 69
+      time_min: 410
+      precursors:
+        brine: 100 g per 1 kg chopped pork (18 g curing salt with 0.6% nitrite in 82 g water)
+        thiamine: 80 mg per 100 g brine
+      buffer: none
+      matrix: meat (model cooked ham, pork M. semimembranosus)
+      headspace: vacuum, closed glass jars
+  - label: T 800 mg/100 g brine
+    lever_value: 800
+    value: 0.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 69
+      time_min: 410
+      precursors:
+        brine: 100 g per 1 kg chopped pork (18 g curing salt with 0.6% nitrite in 82 g water)
+        thiamine: 800 mg per 100 g brine
+      buffer: none
+      matrix: meat (model cooked ham, pork M. semimembranosus)
+      headspace: vacuum, closed glass jars
+  - label: T 8000 mg/100 g brine
+    lever_value: 8000
+    value: 27.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 69
+      time_min: 410
+      precursors:
+        brine: 100 g per 1 kg chopped pork (18 g curing salt with 0.6% nitrite in 82 g water)
+        thiamine: 8000 mg per 100 g brine
+      buffer: none
+      matrix: meat (model cooked ham, pork M. semimembranosus)
+      headspace: vacuum, closed glass jars
+- id: thomas2014-3
+  odorant: 2-methyl-3-furanthiol
+  lever_class: precursor dose
+  lever: added cysteine (mg/100 g brine) with 3 g fructose
+  focal: true
+  location: Fig. 2, p. 211
+  digitised: true
+  unit: chromatographic area, a.u. x 10000 (median, n = 3; DHS-GC-MS SIM)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: C+F 0 mg cysteine/100 g brine (on the zero baseline at figure resolution; series overlap; not digitisable)
+    lever_value: 0
+    value: null
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 69
+      time_min: 410
+      precursors:
+        brine: 100 g per 1 kg chopped pork (18 g curing salt with 0.6% nitrite in 82 g water)
+        cysteine: 0 mg per 100 g brine
+        fructose: 3 g per 100 g brine
+      buffer: none
+      matrix: meat (model cooked ham, pork M. semimembranosus)
+      headspace: vacuum, closed glass jars
+  - label: C+F 100 mg cysteine/100 g brine (on the zero baseline at figure resolution; series overlap; not digitisable)
+    lever_value: 100
+    value: null
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 69
+      time_min: 410
+      precursors:
+        brine: 100 g per 1 kg chopped pork (18 g curing salt with 0.6% nitrite in 82 g water)
+        cysteine: 100 mg per 100 g brine
+        fructose: 3 g per 100 g brine
+      buffer: none
+      matrix: meat (model cooked ham, pork M. semimembranosus)
+      headspace: vacuum, closed glass jars
+  - label: C+F 1000 mg cysteine/100 g brine (on the zero baseline at figure resolution; series overlap; not digitisable)
+    lever_value: 1000
+    value: null
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 69
+      time_min: 410
+      precursors:
+        brine: 100 g per 1 kg chopped pork (18 g curing salt with 0.6% nitrite in 82 g water)
+        cysteine: 1000 mg per 100 g brine
+        fructose: 3 g per 100 g brine
+      buffer: none
+      matrix: meat (model cooked ham, pork M. semimembranosus)
+      headspace: vacuum, closed glass jars
+  - label: C+F 3000 mg cysteine/100 g brine (on the zero baseline at figure resolution; series overlap; not digitisable)
+    lever_value: 3000
+    value: null
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 69
+      time_min: 410
+      precursors:
+        brine: 100 g per 1 kg chopped pork (18 g curing salt with 0.6% nitrite in 82 g water)
+        cysteine: 3000 mg per 100 g brine
+        fructose: 3 g per 100 g brine
+      buffer: none
+      matrix: meat (model cooked ham, pork M. semimembranosus)
+      headspace: vacuum, closed glass jars
+  - label: C+F 10000 mg cysteine/100 g brine (on the zero baseline at figure resolution; series overlap; not digitisable)
+    lever_value: 10000
+    value: null
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 69
+      time_min: 410
+      precursors:
+        brine: 100 g per 1 kg chopped pork (18 g curing salt with 0.6% nitrite in 82 g water)
+        cysteine: 10000 mg per 100 g brine
+        fructose: 3 g per 100 g brine
+      buffer: none
+      matrix: meat (model cooked ham, pork M. semimembranosus)
+      headspace: vacuum, closed glass jars
+- id: thomas2014-4
+  odorant: bis(2-methyl-3-furyl)disulphide
+  lever_class: precursor dose
+  lever: added cysteine (mg/100 g brine) with 3 g fructose
+  focal: true
+  location: Fig. 2, p. 211
+  digitised: true
+  unit: chromatographic area, a.u. x 10000 (median, n = 3; DHS-GC-MS SIM)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: C+F 0 mg cysteine/100 g brine (on the zero baseline at figure resolution; series overlap; not digitisable)
+    lever_value: 0
+    value: null
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 69
+      time_min: 410
+      precursors:
+        brine: 100 g per 1 kg chopped pork (18 g curing salt with 0.6% nitrite in 82 g water)
+        cysteine: 0 mg per 100 g brine
+        fructose: 3 g per 100 g brine
+      buffer: none
+      matrix: meat (model cooked ham, pork M. semimembranosus)
+      headspace: vacuum, closed glass jars
+  - label: C+F 100 mg cysteine/100 g brine (on the zero baseline at figure resolution; series overlap; not digitisable)
+    lever_value: 100
+    value: null
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 69
+      time_min: 410
+      precursors:
+        brine: 100 g per 1 kg chopped pork (18 g curing salt with 0.6% nitrite in 82 g water)
+        cysteine: 100 mg per 100 g brine
+        fructose: 3 g per 100 g brine
+      buffer: none
+      matrix: meat (model cooked ham, pork M. semimembranosus)
+      headspace: vacuum, closed glass jars
+  - label: C+F 1000 mg cysteine/100 g brine (on the zero baseline at figure resolution; series overlap; not digitisable)
+    lever_value: 1000
+    value: null
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 69
+      time_min: 410
+      precursors:
+        brine: 100 g per 1 kg chopped pork (18 g curing salt with 0.6% nitrite in 82 g water)
+        cysteine: 1000 mg per 100 g brine
+        fructose: 3 g per 100 g brine
+      buffer: none
+      matrix: meat (model cooked ham, pork M. semimembranosus)
+      headspace: vacuum, closed glass jars
+  - label: C+F 3000 mg cysteine/100 g brine (on the zero baseline at figure resolution; series overlap; not digitisable)
+    lever_value: 3000
+    value: null
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 69
+      time_min: 410
+      precursors:
+        brine: 100 g per 1 kg chopped pork (18 g curing salt with 0.6% nitrite in 82 g water)
+        cysteine: 3000 mg per 100 g brine
+        fructose: 3 g per 100 g brine
+      buffer: none
+      matrix: meat (model cooked ham, pork M. semimembranosus)
+      headspace: vacuum, closed glass jars
+  - label: C+F 10000 mg cysteine/100 g brine (on the zero baseline at figure resolution; series overlap; not digitisable)
+    lever_value: 10000
+    value: null
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 69
+      time_min: 410
+      precursors:
+        brine: 100 g per 1 kg chopped pork (18 g curing salt with 0.6% nitrite in 82 g water)
+        cysteine: 10000 mg per 100 g brine
+        fructose: 3 g per 100 g brine
+      buffer: none
+      matrix: meat (model cooked ham, pork M. semimembranosus)
+      headspace: vacuum, closed glass jars
+- id: thomas2014-5
+  odorant: 2-methyl-3-furanthiol
+  lever_class: precursor dose
+  lever: added cysteine (mg/100 g brine) with 3 g xylose
+  focal: true
+  location: Fig. 2, p. 211
+  digitised: true
+  unit: chromatographic area, a.u. x 10000 (median, n = 3; DHS-GC-MS SIM)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: C+X 0 mg cysteine/100 g brine (on the zero baseline at figure resolution; series overlap; not digitisable)
+    lever_value: 0
+    value: null
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 69
+      time_min: 410
+      precursors:
+        brine: 100 g per 1 kg chopped pork (18 g curing salt with 0.6% nitrite in 82 g water)
+        cysteine: 0 mg per 100 g brine
+        xylose: 3 g per 100 g brine
+      buffer: none
+      matrix: meat (model cooked ham, pork M. semimembranosus)
+      headspace: vacuum, closed glass jars
+  - label: C+X 100 mg cysteine/100 g brine (on the zero baseline at figure resolution; series overlap; not digitisable)
+    lever_value: 100
+    value: null
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 69
+      time_min: 410
+      precursors:
+        brine: 100 g per 1 kg chopped pork (18 g curing salt with 0.6% nitrite in 82 g water)
+        cysteine: 100 mg per 100 g brine
+        xylose: 3 g per 100 g brine
+      buffer: none
+      matrix: meat (model cooked ham, pork M. semimembranosus)
+      headspace: vacuum, closed glass jars
+  - label: C+X 1000 mg cysteine/100 g brine (on the zero baseline at figure resolution; series overlap; not digitisable)
+    lever_value: 1000
+    value: null
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 69
+      time_min: 410
+      precursors:
+        brine: 100 g per 1 kg chopped pork (18 g curing salt with 0.6% nitrite in 82 g water)
+        cysteine: 1000 mg per 100 g brine
+        xylose: 3 g per 100 g brine
+      buffer: none
+      matrix: meat (model cooked ham, pork M. semimembranosus)
+      headspace: vacuum, closed glass jars
+  - label: C+X 3000 mg cysteine/100 g brine (on the zero baseline at figure resolution; series overlap; not digitisable)
+    lever_value: 3000
+    value: null
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 69
+      time_min: 410
+      precursors:
+        brine: 100 g per 1 kg chopped pork (18 g curing salt with 0.6% nitrite in 82 g water)
+        cysteine: 3000 mg per 100 g brine
+        xylose: 3 g per 100 g brine
+      buffer: none
+      matrix: meat (model cooked ham, pork M. semimembranosus)
+      headspace: vacuum, closed glass jars
+  - label: C+X 10000 mg cysteine/100 g brine (on the zero baseline at figure resolution; series overlap; not digitisable)
+    lever_value: 10000
+    value: null
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 69
+      time_min: 410
+      precursors:
+        brine: 100 g per 1 kg chopped pork (18 g curing salt with 0.6% nitrite in 82 g water)
+        cysteine: 10000 mg per 100 g brine
+        xylose: 3 g per 100 g brine
+      buffer: none
+      matrix: meat (model cooked ham, pork M. semimembranosus)
+      headspace: vacuum, closed glass jars
+- id: thomas2014-6
+  odorant: bis(2-methyl-3-furyl)disulphide
+  lever_class: precursor dose
+  lever: added cysteine (mg/100 g brine) with 3 g xylose
+  focal: true
+  location: Fig. 2, p. 211
+  digitised: true
+  unit: chromatographic area, a.u. x 10000 (median, n = 3; DHS-GC-MS SIM)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: C+X 0 mg cysteine/100 g brine (on the zero baseline at figure resolution; series overlap; not digitisable)
+    lever_value: 0
+    value: null
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 69
+      time_min: 410
+      precursors:
+        brine: 100 g per 1 kg chopped pork (18 g curing salt with 0.6% nitrite in 82 g water)
+        cysteine: 0 mg per 100 g brine
+        xylose: 3 g per 100 g brine
+      buffer: none
+      matrix: meat (model cooked ham, pork M. semimembranosus)
+      headspace: vacuum, closed glass jars
+  - label: C+X 100 mg cysteine/100 g brine (on the zero baseline at figure resolution; series overlap; not digitisable)
+    lever_value: 100
+    value: null
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 69
+      time_min: 410
+      precursors:
+        brine: 100 g per 1 kg chopped pork (18 g curing salt with 0.6% nitrite in 82 g water)
+        cysteine: 100 mg per 100 g brine
+        xylose: 3 g per 100 g brine
+      buffer: none
+      matrix: meat (model cooked ham, pork M. semimembranosus)
+      headspace: vacuum, closed glass jars
+  - label: C+X 1000 mg cysteine/100 g brine (on the zero baseline at figure resolution; series overlap; not digitisable)
+    lever_value: 1000
+    value: null
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 69
+      time_min: 410
+      precursors:
+        brine: 100 g per 1 kg chopped pork (18 g curing salt with 0.6% nitrite in 82 g water)
+        cysteine: 1000 mg per 100 g brine
+        xylose: 3 g per 100 g brine
+      buffer: none
+      matrix: meat (model cooked ham, pork M. semimembranosus)
+      headspace: vacuum, closed glass jars
+  - label: C+X 3000 mg cysteine/100 g brine (on the zero baseline at figure resolution; series overlap; not digitisable)
+    lever_value: 3000
+    value: null
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 69
+      time_min: 410
+      precursors:
+        brine: 100 g per 1 kg chopped pork (18 g curing salt with 0.6% nitrite in 82 g water)
+        cysteine: 3000 mg per 100 g brine
+        xylose: 3 g per 100 g brine
+      buffer: none
+      matrix: meat (model cooked ham, pork M. semimembranosus)
+      headspace: vacuum, closed glass jars
+  - label: C+X 10000 mg cysteine/100 g brine (on the zero baseline at figure resolution; series overlap; not digitisable)
+    lever_value: 10000
+    value: null
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 69
+      time_min: 410
+      precursors:
+        brine: 100 g per 1 kg chopped pork (18 g curing salt with 0.6% nitrite in 82 g water)
+        cysteine: 10000 mg per 100 g brine
+        xylose: 3 g per 100 g brine
+      buffer: none
+      matrix: meat (model cooked ham, pork M. semimembranosus)
+      headspace: vacuum, closed glass jars

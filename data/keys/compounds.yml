@@ -294,6 +294,7 @@ compounds:
   cas: 98-02-2
   class: sulfur_positives
   aliases:
+  - 2-furanmethanethiol
   - 2-Furfurylthiol
   - 2-furfurylthiol
   - 2-furylmethanethiol
@@ -303,6 +304,7 @@ compounds:
   - FFT
   - fft
   - furfuryl mercaptan
+  - furfurylthiol
   seen_in:
   - benchmarks:holdout_targets
   - benchmarks:measured_volatiles
@@ -358,6 +360,19 @@ compounds:
   - panel:key
   - species:desirable_targets.yml
   identity_source: data/species/desirable_targets.yml
+- id: 2_methyl_3_furfuryldithio_furan
+  display_name: 2-Methyl-3-(2-furfuryldithio)furan
+  kind: molecule
+  smiles: Cc1occc1SSCc1ccco1
+  inchikey: FVCZDGBJCOHRKY-UHFFFAOYSA-N
+  canonical_smiles: Cc1occc1SSCc1ccco1
+  aliases:
+  - 2-furfuryl 2-methyl-3-furyl disulfide
+  - 2-methyl-3-(2-furylmethyldithio)furan
+  - 2-methyl-3-furyl 2-furfuryl disulfide
+  - mft-fft mixed disulfide
+  seen_in: []
+  identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
 - id: 2_methylbutanal
   display_name: 2-Methylbutanal
   kind: molecule
@@ -654,6 +669,19 @@ compounds:
   - beta-ionone
   seen_in:
   - flavor:off_note_reference_anchors
+  identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
+- id: bis_2_furfuryl_disulfide
+  display_name: Bis(2-furfuryl) disulfide
+  kind: molecule
+  smiles: C(SSCc1ccco1)c1ccco1
+  inchikey: CBJPZHSWLMJQRI-UHFFFAOYSA-N
+  canonical_smiles: c1coc(CSSCc2ccco2)c1
+  aliases:
+  - 2,2'-dithiobismethylenedifuran
+  - bis(2-furylmethyl) disulfide
+  - difurfuryl disulfide
+  - fft disulfide
+  seen_in: []
   identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
 - id: bis_2_methyl_3_furyl_disulfide
   display_name: Bis(2-methyl-3-furyl) disulfide

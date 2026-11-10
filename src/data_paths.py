@@ -140,6 +140,11 @@ DIRECTIONAL_ACCURACY_REPORT: Path = DOCS_ROOT / "validation" / "directional_accu
 PRIMARY_BENCHMARK_PROTOCOL_MD: Path = DOCS_ROOT / "protocols" / "PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md"
 SCIENTIFIC_REFERENCE_MD: Path = DOCS_ROOT / "reference" / "SCIENTIFIC_REFERENCE.md"
 EXAMPLES_DIR: Path = DOCS_ROOT / "examples"
+# The lever table from data (STATUS_AND_PLAN sec. 0 step 2; rules in LEVER_TABLE_DIR / "PREREG.md").
+LEVER_TABLE_DIR: Path = DOCS_ROOT / "reference" / "lever_table"
+LEVER_TABLE_CONTRASTS_DIR: Path = LEVER_TABLE_DIR / "contrasts"
+LEVER_TABLE_NEW_LABS: Path = LEVER_TABLE_DIR / "new_labs.yml"
+CONTRAST_SPLIT: Path = DOCS_ROOT / "reference" / "contrast_benchmark" / "split.yml"
 INGEST_TEMPLATES_DIR: Path = DOCS_ROOT / "templates"
 # Figures and HTML the generators publish for the docs site (results copied here).
 DOCS_ASSETS_DIR: Path = DOCS_ROOT / "assets"

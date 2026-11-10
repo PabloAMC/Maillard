@@ -1,0 +1,48 @@
+source: "kobayasi1965"
+pdf: "data/articles/kobayasi1965.pdf"
+reader: "b"
+scope_note: "One H2S dose pair in text (glucosamine 10 vs 20 mM with cysteine 10 mM); ninhydrin, ascorbic acid ('very small amount') and cystine/methionine/protein arms print no H2S numbers and were not keyed. Volume of the glucosamine runs not stated."
+contrasts:
+  - id: "kobayasi1965-1"
+    odorant: "hydrogen sulfide"
+    lever_class: "precursor dose"
+    lever: "glucosamine amount (10 vs 20 mM) with 10 mM cysteine"
+    focal: false
+    location: "p. 698-699, text"
+    digitised: false
+    unit: "mg"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "1.79 g (10 mM) glucosamine"
+        lever_value: "10 mM"
+        value: 14.3
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 100
+          time_min: 60
+          precursors: {cysteine: "1.21 g (10 mM)", glucosamine: "1.79 g (10 mM)"}
+          buffer: "none"
+          matrix: "water"
+          headspace: "unstated"
+      - label: "3.58 g (20 mM) glucosamine"
+        lever_value: "20 mM"
+        value: 27.2
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 100
+          time_min: 60
+          precursors: {cysteine: "1.21 g (10 mM)", glucosamine: "3.58 g (20 mM)"}
+          buffer: "none"
+          matrix: "water"
+          headspace: "unstated"

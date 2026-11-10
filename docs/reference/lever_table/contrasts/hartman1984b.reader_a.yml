@@ -1,0 +1,5 @@
+source: "hartman1984b"
+pdf: "data/articles/hartman1984b.pdf"
+reader: "a"
+scope_note: "The only target odorant is 2-methyl-3-furanthiol (RT 40.47, Table 1) in Fig. 6 (water-activity ladder, ppm as tetramethylpyrazine). Not keyed: the overlapping curves of Fig. 6 cannot be traced to a unique series for RT 40.47 (only its end point near aw 0.75, ~2.6 ppm, is labelled), and no table prints the values. No H2S, FFT or disulfide values."
+contrasts: []

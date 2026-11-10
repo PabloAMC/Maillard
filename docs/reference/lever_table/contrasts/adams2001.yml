@@ -1,0 +1,50 @@
+source: "adams2001"
+pdf: "data/articles/adams2001.pdf"
+reader: "resolved"
+scope_note: "Only FFT (2-furanmethanethiol, Table 3, GC-MS) qualifies; 2-furfuryl methyl disulfide and the alkyl/allyl disulfides are not target compounds; Tables 1-2 and Figs 1, 3, 4 carry no target odorant. The two arms differ in matrix (water vs 1% ovalbumin) AND pH (protein adjusted to pH 8.0 with NaOH; water blank pH not stated or adjusted), so keyed 'mixed' (PREREG sec. 3). Whether the water blank was heated is not stated. The water arm is ND with no limit and no quantified FFT in the water column, so the contrast is keyed but enters no estimate. FFT here comes from thiol-disulfide interchange of an added disulfide with protein, not from sugar-amine chemistry."
+contrasts:
+  - id: "adams2001-1"
+    odorant: "2-Furfurylthiol (FFT)"
+    lever_class: "mixed"
+    lever: "water blank vs 1% heat-denatured ovalbumin adjusted to pH 8.0 (disulfides added before heating); matrix and pH both differ"
+    focal: false
+    location: "Table 3, p. 4335"
+    digitised: false
+    unit: "amount relative to internal standard propyl propanoate (=100)"
+    quant_type: "peak_area"
+    time_course_rule: "not a time course"
+    quantity: amount
+    resolution: "re-read"
+    arms:
+      - label: "water"
+        lever_value: "water"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: null
+          time_min: null
+          precursors: {"diethyl, dipropyl, dibutyl, diallyl and 2-furfuryl methyl disulfide": "100 ug/L each"}
+          buffer: "none"
+          matrix: "water"
+          headspace: "sealed, unstated"
+      - label: "protein (pH 8.0, disulfides added before heating); CV 3%"
+        lever_value: "1% ovalbumin, pH 8.0"
+        value: 9
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 8.0
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 10
+          precursors: {"diethyl, dipropyl, dibutyl, diallyl and 2-furfuryl methyl disulfide": "100 ug/L each", ovalbumin: "1%"}
+          buffer: "none (pH adjusted with 0.1 M NaOH)"
+          matrix: "other (1% ovalbumin solution)"
+          headspace: "sealed, unstated"
