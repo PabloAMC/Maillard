@@ -1,0 +1,263 @@
+source: "hincelin1992"
+pdf: "data/articles/hincelin1992.pdf"
+reader: "b"
+scope_note: "Table 1 RA (% of total isolate, blank-corrected); '-' keyed nd_no_limit, 'tr' trace. Sugar contrasts = thiamine vs xylose/thiamine; sulfur-source contrasts = xylose vs xylose/thiamine. Heating temperature not stated (Likens-Nickerson SDE, 1 h, pH held at 7)."
+contrasts:
+  - id: "hincelin1992-1"
+    odorant: "hydrogen sulphide"
+    lever_class: "sugar identity"
+    lever: "xylose added vs no sugar (thiamine alone)"
+    focal: false
+    location: "Table 1"
+    digitised: false
+    unit: "RA, % of total isolate"
+    quant_type: "relative"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Thiamine"
+        lever_value: "none"
+        value: 1
+        censor: none
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "held"
+          temp_C: null
+          time_min: 60
+          precursors: {"thiamine hydrochloride": "0.05 mol in 250 ml water"}
+          buffer: "none (pH held with 3 M NaOH)"
+          matrix: "water"
+          headspace: "unstated"
+      - label: "Xylose/thiamine"
+        lever_value: "xylose"
+        value: 3
+        censor: none
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "held"
+          temp_C: null
+          time_min: 60
+          precursors: {"thiamine hydrochloride": "0.05 mol in 250 ml water", "xylose": "1 mol in 250 ml water"}
+          buffer: "none (pH held with 3 M NaOH)"
+          matrix: "water"
+          headspace: "unstated"
+  - id: "hincelin1992-2"
+    odorant: "2-methylfuran-3-thiol"
+    lever_class: "sugar identity"
+    lever: "xylose added vs no sugar (thiamine alone)"
+    focal: true
+    location: "Table 1"
+    digitised: false
+    unit: "RA, % of total isolate"
+    quant_type: "relative"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Thiamine"
+        lever_value: "none"
+        value: 2
+        censor: none
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "held"
+          temp_C: null
+          time_min: 60
+          precursors: {"thiamine hydrochloride": "0.05 mol in 250 ml water"}
+          buffer: "none (pH held with 3 M NaOH)"
+          matrix: "water"
+          headspace: "unstated"
+      - label: "Xylose/thiamine"
+        lever_value: "xylose"
+        value: 14
+        censor: none
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "held"
+          temp_C: null
+          time_min: 60
+          precursors: {"thiamine hydrochloride": "0.05 mol in 250 ml water", "xylose": "1 mol in 250 ml water"}
+          buffer: "none (pH held with 3 M NaOH)"
+          matrix: "water"
+          headspace: "unstated"
+  - id: "hincelin1992-3"
+    odorant: "bis-(2-methyl-3-furyl) disulphide"
+    lever_class: "sugar identity"
+    lever: "xylose added vs no sugar (thiamine alone)"
+    focal: false
+    location: "Table 1"
+    digitised: false
+    unit: "RA, % of total isolate"
+    quant_type: "relative"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Thiamine"
+        lever_value: "none"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "held"
+          temp_C: null
+          time_min: 60
+          precursors: {"thiamine hydrochloride": "0.05 mol in 250 ml water"}
+          buffer: "none (pH held with 3 M NaOH)"
+          matrix: "water"
+          headspace: "unstated"
+      - label: "Xylose/thiamine"
+        lever_value: "xylose"
+        value: null
+        censor: trace
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "held"
+          temp_C: null
+          time_min: 60
+          precursors: {"thiamine hydrochloride": "0.05 mol in 250 ml water", "xylose": "1 mol in 250 ml water"}
+          buffer: "none (pH held with 3 M NaOH)"
+          matrix: "water"
+          headspace: "unstated"
+  - id: "hincelin1992-4"
+    odorant: "hydrogen sulphide"
+    lever_class: "sulfur source"
+    lever: "thiamine added vs none (xylose alone)"
+    focal: false
+    location: "Table 1"
+    digitised: false
+    unit: "RA, % of total isolate"
+    quant_type: "relative"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Xylose"
+        lever_value: "none"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "held"
+          temp_C: null
+          time_min: 60
+          precursors: {"xylose": "1 mol in 250 ml water"}
+          buffer: "none (pH held with 3 M NaOH)"
+          matrix: "water"
+          headspace: "unstated"
+      - label: "Xylose/thiamine"
+        lever_value: "thiamine"
+        value: 3
+        censor: none
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "held"
+          temp_C: null
+          time_min: 60
+          precursors: {"thiamine hydrochloride": "0.05 mol in 250 ml water", "xylose": "1 mol in 250 ml water"}
+          buffer: "none (pH held with 3 M NaOH)"
+          matrix: "water"
+          headspace: "unstated"
+  - id: "hincelin1992-5"
+    odorant: "2-methylfuran-3-thiol"
+    lever_class: "sulfur source"
+    lever: "thiamine added vs none (xylose alone)"
+    focal: false
+    location: "Table 1"
+    digitised: false
+    unit: "RA, % of total isolate"
+    quant_type: "relative"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Xylose"
+        lever_value: "none"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "held"
+          temp_C: null
+          time_min: 60
+          precursors: {"xylose": "1 mol in 250 ml water"}
+          buffer: "none (pH held with 3 M NaOH)"
+          matrix: "water"
+          headspace: "unstated"
+      - label: "Xylose/thiamine"
+        lever_value: "thiamine"
+        value: 14
+        censor: none
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "held"
+          temp_C: null
+          time_min: 60
+          precursors: {"thiamine hydrochloride": "0.05 mol in 250 ml water", "xylose": "1 mol in 250 ml water"}
+          buffer: "none (pH held with 3 M NaOH)"
+          matrix: "water"
+          headspace: "unstated"
+  - id: "hincelin1992-6"
+    odorant: "bis-(2-methyl-3-furyl) disulphide"
+    lever_class: "sulfur source"
+    lever: "thiamine added vs none (xylose alone)"
+    focal: false
+    location: "Table 1"
+    digitised: false
+    unit: "RA, % of total isolate"
+    quant_type: "relative"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Xylose"
+        lever_value: "none"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "held"
+          temp_C: null
+          time_min: 60
+          precursors: {"xylose": "1 mol in 250 ml water"}
+          buffer: "none (pH held with 3 M NaOH)"
+          matrix: "water"
+          headspace: "unstated"
+      - label: "Xylose/thiamine"
+        lever_value: "thiamine"
+        value: null
+        censor: trace
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "held"
+          temp_C: null
+          time_min: 60
+          precursors: {"thiamine hydrochloride": "0.05 mol in 250 ml water", "xylose": "1 mol in 250 ml water"}
+          buffer: "none (pH held with 3 M NaOH)"
+          matrix: "water"
+          headspace: "unstated"

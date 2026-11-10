@@ -1,0 +1,225 @@
+source: "arnold1971"
+pdf: "data/articles/arnold1971.pdf"
+reader: "a"
+scope_note: "Figs 4-5 digitised (no table prints them); Table I (pH 7, open air and N2 purge, 5-15 min) keyed from the table, so Fig 5 is digitised only for sealed tube and autoclave. Fig 4 shows no markers at pH 5.0 (curves leave the axis near pH 5.3); pH 5.5 points for open air / N2 / sealed tube lie on the baseline and are keyed as 0. Oxidant (ferricyanide, permanganate) and cysteine arms: no H2S numbers printed. Sealed tube vs open air/N2 differs in apparatus and headspace, not keyed. Fig 5 30-min points duplicate Fig 4 pH 7 and are not keyed again."
+contrasts:
+  - id: "arnold1971-1"
+    odorant: "hydrogen sulfide"
+    lever_class: "pH"
+    lever: "buffered pH of thiamine solution (heating in open air, 30 min)"
+    focal: true
+    location: "Fig. 4, p. 925"
+    digitised: true
+    unit: "mmol/mol thiamine"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "pH 5.5", lever_value: 5.5, value: 0.3, censor: none, limit: null, n: 2, sd: null, conditions: {ph: 5.5, ph_basis: "label", temp_C: 100, time_min: 30, precursors: {thiamine HCl: "0.04 mg/ml (1.2e-4 M)"}, buffer: "0.1 M phosphate", matrix: "buffer", headspace: "air"}}
+      - {label: "pH 6.0", lever_value: 6.0, value: 3.1, censor: none, limit: null, n: 2, sd: null, conditions: {ph: 6.0, ph_basis: "label", temp_C: 100, time_min: 30, precursors: {thiamine HCl: "0.04 mg/ml (1.2e-4 M)"}, buffer: "0.1 M phosphate", matrix: "buffer", headspace: "air"}}
+      - {label: "pH 6.5", lever_value: 6.5, value: 7.5, censor: none, limit: null, n: 2, sd: null, conditions: {ph: 6.5, ph_basis: "label", temp_C: 100, time_min: 30, precursors: {thiamine HCl: "0.04 mg/ml (1.2e-4 M)"}, buffer: "0.1 M phosphate", matrix: "buffer", headspace: "air"}}
+      - {label: "pH 7.0", lever_value: 7.0, value: 60.4, censor: none, limit: null, n: 2, sd: null, conditions: {ph: 7.0, ph_basis: "label", temp_C: 100, time_min: 30, precursors: {thiamine HCl: "0.04 mg/ml (1.2e-4 M)"}, buffer: "0.1 M phosphate", matrix: "buffer", headspace: "air"}}
+  - id: "arnold1971-2"
+    odorant: "hydrogen sulfide"
+    lever_class: "pH"
+    lever: "buffered pH of thiamine solution (heating in sealed tube, boiling water, 30 min)"
+    focal: true
+    location: "Fig. 4, p. 925"
+    digitised: true
+    unit: "mmol/mol thiamine"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "pH 5.5", lever_value: 5.5, value: 0.0, censor: none, limit: null, n: 2, sd: null, conditions: {ph: 5.5, ph_basis: "label", temp_C: 100, time_min: 30, precursors: {thiamine HCl: "0.04 mg/ml (1.2e-4 M)"}, buffer: "0.1 M phosphate", matrix: "buffer", headspace: "sealed, unstated"}}
+      - {label: "pH 6.0", lever_value: 6.0, value: 0.4, censor: none, limit: null, n: 2, sd: null, conditions: {ph: 6.0, ph_basis: "label", temp_C: 100, time_min: 30, precursors: {thiamine HCl: "0.04 mg/ml (1.2e-4 M)"}, buffer: "0.1 M phosphate", matrix: "buffer", headspace: "sealed, unstated"}}
+      - {label: "pH 6.5", lever_value: 6.5, value: 3.1, censor: none, limit: null, n: 2, sd: null, conditions: {ph: 6.5, ph_basis: "label", temp_C: 100, time_min: 30, precursors: {thiamine HCl: "0.04 mg/ml (1.2e-4 M)"}, buffer: "0.1 M phosphate", matrix: "buffer", headspace: "sealed, unstated"}}
+      - {label: "pH 7.0", lever_value: 7.0, value: 47.1, censor: none, limit: null, n: 2, sd: null, conditions: {ph: 7.0, ph_basis: "label", temp_C: 100, time_min: 30, precursors: {thiamine HCl: "0.04 mg/ml (1.2e-4 M)"}, buffer: "0.1 M phosphate", matrix: "buffer", headspace: "sealed, unstated"}}
+  - id: "arnold1971-3"
+    odorant: "hydrogen sulfide"
+    lever_class: "pH"
+    lever: "buffered pH of thiamine solution (heating under nitrogen purge, 30 min)"
+    focal: true
+    location: "Fig. 4, p. 925"
+    digitised: true
+    unit: "mmol/mol thiamine"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "pH 5.5", lever_value: 5.5, value: 0.0, censor: none, limit: null, n: 2, sd: null, conditions: {ph: 5.5, ph_basis: "label", temp_C: 100, time_min: 30, precursors: {thiamine HCl: "0.04 mg/ml (1.2e-4 M)"}, buffer: "0.1 M phosphate", matrix: "buffer", headspace: "inert"}}
+      - {label: "pH 6.0", lever_value: 6.0, value: 1.6, censor: none, limit: null, n: 2, sd: null, conditions: {ph: 6.0, ph_basis: "label", temp_C: 100, time_min: 30, precursors: {thiamine HCl: "0.04 mg/ml (1.2e-4 M)"}, buffer: "0.1 M phosphate", matrix: "buffer", headspace: "inert"}}
+      - {label: "pH 6.5", lever_value: 6.5, value: 4.7, censor: none, limit: null, n: 2, sd: null, conditions: {ph: 6.5, ph_basis: "label", temp_C: 100, time_min: 30, precursors: {thiamine HCl: "0.04 mg/ml (1.2e-4 M)"}, buffer: "0.1 M phosphate", matrix: "buffer", headspace: "inert"}}
+      - {label: "pH 7.0", lever_value: 7.0, value: 70.4, censor: none, limit: null, n: 2, sd: null, conditions: {ph: 7.0, ph_basis: "label", temp_C: 100, time_min: 30, precursors: {thiamine HCl: "0.04 mg/ml (1.2e-4 M)"}, buffer: "0.1 M phosphate", matrix: "buffer", headspace: "inert"}}
+  - id: "arnold1971-4"
+    odorant: "hydrogen sulfide"
+    lever_class: "pH"
+    lever: "buffered pH of thiamine solution (autoclaving in sealed tube, 120 C, 30 min)"
+    focal: true
+    location: "Fig. 4, p. 925"
+    digitised: true
+    unit: "mmol/mol thiamine"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "pH 5.5", lever_value: 5.5, value: 2.0, censor: none, limit: null, n: 2, sd: null, conditions: {ph: 5.5, ph_basis: "label", temp_C: 120, time_min: 30, precursors: {thiamine HCl: "0.04 mg/ml (1.2e-4 M)"}, buffer: "0.1 M phosphate", matrix: "buffer", headspace: "sealed, unstated"}}
+      - {label: "pH 6.0", lever_value: 6.0, value: 22.4, censor: none, limit: null, n: 2, sd: null, conditions: {ph: 6.0, ph_basis: "label", temp_C: 120, time_min: 30, precursors: {thiamine HCl: "0.04 mg/ml (1.2e-4 M)"}, buffer: "0.1 M phosphate", matrix: "buffer", headspace: "sealed, unstated"}}
+      - {label: "pH 6.5", lever_value: 6.5, value: 27.8, censor: none, limit: null, n: 2, sd: null, conditions: {ph: 6.5, ph_basis: "label", temp_C: 120, time_min: 30, precursors: {thiamine HCl: "0.04 mg/ml (1.2e-4 M)"}, buffer: "0.1 M phosphate", matrix: "buffer", headspace: "sealed, unstated"}}
+      - {label: "pH 7.0", lever_value: 7.0, value: 87.1, censor: none, limit: null, n: 2, sd: null, conditions: {ph: 7.0, ph_basis: "label", temp_C: 120, time_min: 30, precursors: {thiamine HCl: "0.04 mg/ml (1.2e-4 M)"}, buffer: "0.1 M phosphate", matrix: "buffer", headspace: "sealed, unstated"}}
+  - id: "arnold1971-5"
+    odorant: "hydrogen sulfide"
+    lever_class: "time"
+    lever: "heating time, open air, boiling water, pH 7"
+    focal: true
+    location: "Table I, p. 925"
+    digitised: false
+    unit: "ug/100 ml (actual yield)"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "Open air, boiling water, 5 min", lever_value: 5, value: 6.1, censor: none, limit: null, n: 2, sd: null, conditions: {ph: 7.0, ph_basis: "label", temp_C: 100, time_min: 5, precursors: {thiamine HCl: "0.04 mg/ml (1.2e-4 M)"}, buffer: "0.1 M phosphate", matrix: "buffer", headspace: "air"}}
+      - {label: "Open air, boiling water, 10 min", lever_value: 10, value: 13.1, censor: none, limit: null, n: 2, sd: null, conditions: {ph: 7.0, ph_basis: "label", temp_C: 100, time_min: 10, precursors: {thiamine HCl: "0.04 mg/ml (1.2e-4 M)"}, buffer: "0.1 M phosphate", matrix: "buffer", headspace: "air"}}
+      - {label: "Open air, boiling water, 15 min", lever_value: 15, value: 24.9, censor: none, limit: null, n: 2, sd: null, conditions: {ph: 7.0, ph_basis: "label", temp_C: 100, time_min: 15, precursors: {thiamine HCl: "0.04 mg/ml (1.2e-4 M)"}, buffer: "0.1 M phosphate", matrix: "buffer", headspace: "air"}}
+  - id: "arnold1971-6"
+    odorant: "hydrogen sulfide"
+    lever_class: "time"
+    lever: "heating time, nitrogen purge, boiling water, pH 7"
+    focal: true
+    location: "Table I, p. 925"
+    digitised: false
+    unit: "ug/100 ml (actual yield)"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "Nitrogen purge, boiling water, 5 min", lever_value: 5, value: 3.5, censor: none, limit: null, n: 2, sd: null, conditions: {ph: 7.0, ph_basis: "label", temp_C: 100, time_min: 5, precursors: {thiamine HCl: "0.04 mg/ml (1.2e-4 M)"}, buffer: "0.1 M phosphate", matrix: "buffer", headspace: "inert"}}
+      - {label: "Nitrogen purge, boiling water, 10 min", lever_value: 10, value: 7.7, censor: none, limit: null, n: 2, sd: null, conditions: {ph: 7.0, ph_basis: "label", temp_C: 100, time_min: 10, precursors: {thiamine HCl: "0.04 mg/ml (1.2e-4 M)"}, buffer: "0.1 M phosphate", matrix: "buffer", headspace: "inert"}}
+      - {label: "Nitrogen purge, boiling water, 15 min", lever_value: 15, value: 19.6, censor: none, limit: null, n: 2, sd: null, conditions: {ph: 7.0, ph_basis: "label", temp_C: 100, time_min: 15, precursors: {thiamine HCl: "0.04 mg/ml (1.2e-4 M)"}, buffer: "0.1 M phosphate", matrix: "buffer", headspace: "inert"}}
+  - id: "arnold1971-7"
+    odorant: "hydrogen sulfide"
+    lever_class: "time"
+    lever: "heating time, sealed tube, boiling water, pH 7"
+    focal: true
+    location: "Fig. 5, p. 925"
+    digitised: true
+    unit: "mmol/mol thiamine"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "5 min", lever_value: 5, value: 8.2, censor: none, limit: null, n: 2, sd: null, conditions: {ph: 7.0, ph_basis: "label", temp_C: 100, time_min: 5, precursors: {thiamine HCl: "0.04 mg/ml (1.2e-4 M)"}, buffer: "0.1 M phosphate", matrix: "buffer", headspace: "sealed, unstated"}}
+      - {label: "15 min", lever_value: 15, value: 18.9, censor: none, limit: null, n: 2, sd: null, conditions: {ph: 7.0, ph_basis: "label", temp_C: 100, time_min: 15, precursors: {thiamine HCl: "0.04 mg/ml (1.2e-4 M)"}, buffer: "0.1 M phosphate", matrix: "buffer", headspace: "sealed, unstated"}}
+      - {label: "30 min", lever_value: 30, value: 47.4, censor: none, limit: null, n: 2, sd: null, conditions: {ph: 7.0, ph_basis: "label", temp_C: 100, time_min: 30, precursors: {thiamine HCl: "0.04 mg/ml (1.2e-4 M)"}, buffer: "0.1 M phosphate", matrix: "buffer", headspace: "sealed, unstated"}}
+  - id: "arnold1971-8"
+    odorant: "hydrogen sulfide"
+    lever_class: "time"
+    lever: "heating time, autoclaving in sealed tube 120 C, pH 7"
+    focal: true
+    location: "Fig. 5, p. 925"
+    digitised: true
+    unit: "mmol/mol thiamine"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "5 min", lever_value: 5, value: 78.3, censor: none, limit: null, n: 2, sd: null, conditions: {ph: 7.0, ph_basis: "label", temp_C: 120, time_min: 5, precursors: {thiamine HCl: "0.04 mg/ml (1.2e-4 M)"}, buffer: "0.1 M phosphate", matrix: "buffer", headspace: "sealed, unstated"}}
+      - {label: "15 min", lever_value: 15, value: 87.7, censor: none, limit: null, n: 2, sd: null, conditions: {ph: 7.0, ph_basis: "label", temp_C: 120, time_min: 15, precursors: {thiamine HCl: "0.04 mg/ml (1.2e-4 M)"}, buffer: "0.1 M phosphate", matrix: "buffer", headspace: "sealed, unstated"}}
+      - {label: "30 min", lever_value: 30, value: 87.7, censor: none, limit: null, n: 2, sd: null, conditions: {ph: 7.0, ph_basis: "label", temp_C: 120, time_min: 30, precursors: {thiamine HCl: "0.04 mg/ml (1.2e-4 M)"}, buffer: "0.1 M phosphate", matrix: "buffer", headspace: "sealed, unstated"}}
+  - id: "arnold1971-9"
+    odorant: "hydrogen sulfide"
+    lever_class: "oxygen"
+    lever: "open air vs nitrogen purge (reflux trap, boiling water, pH 7)"
+    focal: true
+    location: "Table I, p. 925"
+    digitised: false
+    unit: "ug/100 ml (actual yield)"
+    quant_type: "absolute"
+    time_course_rule: "longest time"
+    arms:
+      - {label: "Open air, boiling water, 15 min", lever_value: "air", value: 24.9, censor: none, limit: null, n: 2, sd: null, conditions: {ph: 7.0, ph_basis: "label", temp_C: 100, time_min: 15, precursors: {thiamine HCl: "0.04 mg/ml (1.2e-4 M)"}, buffer: "0.1 M phosphate", matrix: "buffer", headspace: "air"}}
+      - {label: "Nitrogen purge, boiling water, 15 min", lever_value: "inert", value: 19.6, censor: none, limit: null, n: 2, sd: null, conditions: {ph: 7.0, ph_basis: "label", temp_C: 100, time_min: 15, precursors: {thiamine HCl: "0.04 mg/ml (1.2e-4 M)"}, buffer: "0.1 M phosphate", matrix: "buffer", headspace: "inert"}}
+  - id: "arnold1971-10"
+    odorant: "hydrogen sulfide"
+    lever_class: "oxygen"
+    lever: "open air vs nitrogen purge (boiling water, 30 min), pH 6.0"
+    focal: true
+    location: "Fig. 4, p. 925"
+    digitised: true
+    unit: "mmol/mol thiamine"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "heating in open air", lever_value: "air", value: 3.1, censor: none, limit: null, n: 2, sd: null, conditions: {ph: 6.0, ph_basis: "label", temp_C: 100, time_min: 30, precursors: {thiamine HCl: "0.04 mg/ml (1.2e-4 M)"}, buffer: "0.1 M phosphate", matrix: "buffer", headspace: "air"}}
+      - {label: "heating in nitrogen", lever_value: "inert", value: 1.6, censor: none, limit: null, n: 2, sd: null, conditions: {ph: 6.0, ph_basis: "label", temp_C: 100, time_min: 30, precursors: {thiamine HCl: "0.04 mg/ml (1.2e-4 M)"}, buffer: "0.1 M phosphate", matrix: "buffer", headspace: "inert"}}
+  - id: "arnold1971-11"
+    odorant: "hydrogen sulfide"
+    lever_class: "oxygen"
+    lever: "open air vs nitrogen purge (boiling water, 30 min), pH 6.5"
+    focal: true
+    location: "Fig. 4, p. 925"
+    digitised: true
+    unit: "mmol/mol thiamine"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "heating in open air", lever_value: "air", value: 7.5, censor: none, limit: null, n: 2, sd: null, conditions: {ph: 6.5, ph_basis: "label", temp_C: 100, time_min: 30, precursors: {thiamine HCl: "0.04 mg/ml (1.2e-4 M)"}, buffer: "0.1 M phosphate", matrix: "buffer", headspace: "air"}}
+      - {label: "heating in nitrogen", lever_value: "inert", value: 4.7, censor: none, limit: null, n: 2, sd: null, conditions: {ph: 6.5, ph_basis: "label", temp_C: 100, time_min: 30, precursors: {thiamine HCl: "0.04 mg/ml (1.2e-4 M)"}, buffer: "0.1 M phosphate", matrix: "buffer", headspace: "inert"}}
+  - id: "arnold1971-12"
+    odorant: "hydrogen sulfide"
+    lever_class: "oxygen"
+    lever: "open air vs nitrogen purge (boiling water, 30 min), pH 7.0"
+    focal: true
+    location: "Fig. 4, p. 925"
+    digitised: true
+    unit: "mmol/mol thiamine"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "heating in open air", lever_value: "air", value: 60.4, censor: none, limit: null, n: 2, sd: null, conditions: {ph: 7.0, ph_basis: "label", temp_C: 100, time_min: 30, precursors: {thiamine HCl: "0.04 mg/ml (1.2e-4 M)"}, buffer: "0.1 M phosphate", matrix: "buffer", headspace: "air"}}
+      - {label: "heating in nitrogen", lever_value: "inert", value: 70.4, censor: none, limit: null, n: 2, sd: null, conditions: {ph: 7.0, ph_basis: "label", temp_C: 100, time_min: 30, precursors: {thiamine HCl: "0.04 mg/ml (1.2e-4 M)"}, buffer: "0.1 M phosphate", matrix: "buffer", headspace: "inert"}}
+  - id: "arnold1971-13"
+    odorant: "hydrogen sulfide"
+    lever_class: "temperature"
+    lever: "sealed tube in boiling water vs autoclaved sealed tube 120 C (30 min), pH 5.5"
+    focal: true
+    location: "Fig. 4, p. 925"
+    digitised: true
+    unit: "mmol/mol thiamine"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "heating in sealed tube", lever_value: 100, value: 0.0, censor: none, limit: null, n: 2, sd: null, conditions: {ph: 5.5, ph_basis: "label", temp_C: 100, time_min: 30, precursors: {thiamine HCl: "0.04 mg/ml (1.2e-4 M)"}, buffer: "0.1 M phosphate", matrix: "buffer", headspace: "sealed, unstated"}}
+      - {label: "autoclaving in sealed tube (120 C)", lever_value: 120, value: 2.0, censor: none, limit: null, n: 2, sd: null, conditions: {ph: 5.5, ph_basis: "label", temp_C: 120, time_min: 30, precursors: {thiamine HCl: "0.04 mg/ml (1.2e-4 M)"}, buffer: "0.1 M phosphate", matrix: "buffer", headspace: "sealed, unstated"}}
+  - id: "arnold1971-14"
+    odorant: "hydrogen sulfide"
+    lever_class: "temperature"
+    lever: "sealed tube in boiling water vs autoclaved sealed tube 120 C (30 min), pH 6.0"
+    focal: true
+    location: "Fig. 4, p. 925"
+    digitised: true
+    unit: "mmol/mol thiamine"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "heating in sealed tube", lever_value: 100, value: 0.4, censor: none, limit: null, n: 2, sd: null, conditions: {ph: 6.0, ph_basis: "label", temp_C: 100, time_min: 30, precursors: {thiamine HCl: "0.04 mg/ml (1.2e-4 M)"}, buffer: "0.1 M phosphate", matrix: "buffer", headspace: "sealed, unstated"}}
+      - {label: "autoclaving in sealed tube (120 C)", lever_value: 120, value: 22.4, censor: none, limit: null, n: 2, sd: null, conditions: {ph: 6.0, ph_basis: "label", temp_C: 120, time_min: 30, precursors: {thiamine HCl: "0.04 mg/ml (1.2e-4 M)"}, buffer: "0.1 M phosphate", matrix: "buffer", headspace: "sealed, unstated"}}
+  - id: "arnold1971-15"
+    odorant: "hydrogen sulfide"
+    lever_class: "temperature"
+    lever: "sealed tube in boiling water vs autoclaved sealed tube 120 C (30 min), pH 6.5"
+    focal: true
+    location: "Fig. 4, p. 925"
+    digitised: true
+    unit: "mmol/mol thiamine"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "heating in sealed tube", lever_value: 100, value: 3.1, censor: none, limit: null, n: 2, sd: null, conditions: {ph: 6.5, ph_basis: "label", temp_C: 100, time_min: 30, precursors: {thiamine HCl: "0.04 mg/ml (1.2e-4 M)"}, buffer: "0.1 M phosphate", matrix: "buffer", headspace: "sealed, unstated"}}
+      - {label: "autoclaving in sealed tube (120 C)", lever_value: 120, value: 27.8, censor: none, limit: null, n: 2, sd: null, conditions: {ph: 6.5, ph_basis: "label", temp_C: 120, time_min: 30, precursors: {thiamine HCl: "0.04 mg/ml (1.2e-4 M)"}, buffer: "0.1 M phosphate", matrix: "buffer", headspace: "sealed, unstated"}}
+  - id: "arnold1971-16"
+    odorant: "hydrogen sulfide"
+    lever_class: "temperature"
+    lever: "sealed tube in boiling water vs autoclaved sealed tube 120 C (30 min), pH 7.0"
+    focal: true
+    location: "Fig. 4, p. 925"
+    digitised: true
+    unit: "mmol/mol thiamine"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "heating in sealed tube", lever_value: 100, value: 47.1, censor: none, limit: null, n: 2, sd: null, conditions: {ph: 7.0, ph_basis: "label", temp_C: 100, time_min: 30, precursors: {thiamine HCl: "0.04 mg/ml (1.2e-4 M)"}, buffer: "0.1 M phosphate", matrix: "buffer", headspace: "sealed, unstated"}}
+      - {label: "autoclaving in sealed tube (120 C)", lever_value: 120, value: 87.1, censor: none, limit: null, n: 2, sd: null, conditions: {ph: 7.0, ph_basis: "label", temp_C: 120, time_min: 30, precursors: {thiamine HCl: "0.04 mg/ml (1.2e-4 M)"}, buffer: "0.1 M phosphate", matrix: "buffer", headspace: "sealed, unstated"}}
