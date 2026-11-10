@@ -11,7 +11,7 @@ regenerates (`core-scores`, `core-directional`, `core-envelope`, `model-card`, .
 (`scripts/generators/WAVES.md`: not re-run, a change is a new wave). Every live artifact carries a
 `provenance` block (git head, date, input hashes: `src/provenance.py`).
 
-Tracked files: **1045**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
+Tracked files: **1047**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
 
 ## `results`
 
@@ -62,6 +62,7 @@ Tracked files: **1045**. Local-only (gitignored): scratch runs under `results/qu
 | `env_b34_ship_rule.*` (2): `env_b34_ship_rule.json`, `env_b34_ship_rule.md` | ENV-B34's ship rule: prior rows for the 3-deoxyglucosone limb and the amine-free sugar entries, banded on Kocadagli 2016's printed 95 % HPD, judged on widths against the MEASURED Monte-Carlo noise floor with both sides of the comparison frozen (`generate_env_b34_ship_rule.py`). |
 | `env_prior_ship_rule.*` (2): `env_prior_ship_rule.json`, `env_prior_ship_rule.md` | ENV-B18 and ENV-B13 evaluated together: whether the two new blocks of Monte-Carlo prior rows widened the intervals they should and left the rest alone, against a noise floor MEASURED from two seeds of identical priors rather than assumed (`generate_env_prior_ship_rule.py`). |
 | `experiment_brief_cards.html` | One card per ranked experiment (`generate_gap_heatmap.py`). |
+| `experiment_map.*` (2): `experiment_map.json`, `experiment_map.md` | The experiment map (STATUS_AND_PLAN sec. 0 step 4): for every lever a formulator asks about x odorant family, one reading (answered by the literature / needs experiment / not yet keyed; the engine column is blank in v1), the evidence behind it, and for every gap a one-line smallest design (levels, replicates from the cell's own spread, the laboratories the three-laboratory rule still needs, a pea-isolate matrix wherever the keyed record has none). Written by `scripts/generators/build_experiment_map.py` from `lever_table.json` and the frozen split. |
 | `experiment_value_ranking.*` (2): `experiment_value_ranking.json`, `experiment_value_ranking.md` | `rank-experiments`: value-of-information ranking of the model's largest envelope misses. Written by `experiment-value-ranking`; read by `generate_gap_heatmap.py`. |
 | `family_ingestion_plan.*` (2): `family_ingestion_plan.json`, `family_ingestion_plan.md` | Ingestion order of the SLR families (`src/family_ingestion_plan.py`; alias `family-ingestion-plan`). |
 | `family_strategy_policy.*` (2): `family_strategy_policy.json`, `family_strategy_policy.md` | The family strategy: quantitative trunk vs bounded lanes (`src/family_strategy_policy.py`). |
