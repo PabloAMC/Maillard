@@ -53,6 +53,12 @@ NUMERIC = {"pH": ("+1 pH unit", lambda x: x),
            "buffer concentration": ("a doubling of concentration", math.log2)}
 CATEGORICAL_REFERENCE = {"sugar identity": "glucose", "sulfur source": "cysteine", "buffer": "phosphate",
                          "lipid": "none", "oxygen": "inert", "matrix": "buffer"}
+#: PREREG sec. 4, "sugar identity: the named sugar": the levels that are sugars or sugar sources a formulator adds
+#: (phosphorylated pentoses and IMP release ribose). A fed intermediate (furfural, a deoxyosone, norfuraneol) is not
+#: a sugar level and is excluded from the cell, counted.
+SUGAR_LEVELS = {"glucose", "fructose", "ribose", "xylose", "arabinose", "rhamnose", "galactose", "mannose", "maltose",
+                "lactose", "sucrose", "ribose 5-phosphate", "glucose-6-phosphate", "glucose 6-phosphate",
+                "inosine 5'-monophosphate", "imp", "guanosine 5'-monophosphate", "gmp", "none"}
 PH_BANDS = ((-math.inf, 4.5), (4.5, 6.0), (6.0, 7.5), (7.5, math.inf))
 TIME_BANDS = ((-math.inf, 30.0), (30.0, 120.0), (120.0, math.inf))       # for temperature contrasts
 TEMP_BANDS = ((-math.inf, 100.0), (100.0, 130.0), (130.0, math.inf))     # for time contrasts
@@ -152,7 +158,11 @@ def _band(bands, value) -> Optional[str]:
         return None
     for lo, hi in bands:
         if lo <= value < hi:
-            return f"{'' if lo == -math.inf else f'{lo:g}'}-{'' if hi == math.inf else f'{hi:g}'}"
+            if lo == -math.inf:
+                return f"<{hi:g}"
+            if hi == math.inf:
+                return f">{lo:g}"
+            return f"{lo:g}-{hi:g}"
     return None
 
 
@@ -235,6 +245,11 @@ def categorical_observation(c: Mapping[str, Any], arms: List[Dict[str, Any]]) ->
             vals.append((_level(a.get("lever_value") or a.get("label")), ly, var, censor))
     if len(vals) < 2:
         return None
+    if c["lever_class"] == "sugar identity":
+        dropped = [v for v in vals if v[0] not in SUGAR_LEVELS]
+        vals = [v for v in vals if v[0] in SUGAR_LEVELS]
+        if len(vals) < 2:
+            return {"kind": "excluded", "reason": "levels are not sugars (fed intermediates)", "n": len(dropped)}
     ref = vals[0]
     pairs = [{"level": v[0], "against": ref[0], "y": v[1] - ref[1], "v": v[2] + ref[2]} for v in vals[1:]
              if v[0] != ref[0]]
@@ -271,6 +286,9 @@ def observations(sources, labs) -> Tuple[List[Dict[str, Any]], Dict[str, int]]:
                 continue
             if o is None:
                 skipped["fewer than two usable arms"] += 1
+                continue
+            if o.get("kind") == "excluded":
+                skipped[f"sugar-identity contrasts whose levels are not sugars (fed intermediates)"] += 1
                 continue
             o.update({"source": src, "contrast": c.get("id"), "compound": key.display_name, "lever_class": lc,
                       "lab": lab, "partition": part, "focal": bool(c.get("focal")),
