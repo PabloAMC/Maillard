@@ -1,0 +1,50 @@
+# One file per source and reader. Rules: docs/reference/lever_table/PREREG.md secs. 3 - 4. Key what the source prints.
+source: "elmore1997"
+pdf: "data/articles/elmore1997.pdf"
+reader: "a"
+scope_note: "Tables 1-2 list only 3-thiazolines, thiazoles and pyridines (not on the list); listed aldehydes are reactants, not measured products. Only keyable values are in text p. 3601: tetramethylpyrazine 16 % ((E)-2-nonenal) vs 30 % ((E,E)-2,4-nonadienal), both with 3-hydroxy-2-butanone. Tetramethylpyrazine ranges '12-30 %' (3-hydroxy-2-butanone mixtures) and '0.3-2.0 %' (2,3-butanedione mixtures) are pooled across aldehydes, no per-arm values: not keyed."
+contrasts:
+  - id: "elmore1997-1"
+    odorant: "tetramethylpyrazine"
+    lever_class: "lipid"
+    lever: "lipid-derived aldehyde identity ((E)-2-nonenal vs (E,E)-2,4-nonadienal)"
+    focal: false
+    location: "text, p. 3601 (Other Compounds)"
+    digitised: false
+    unit: "% of total chromatogram peak area"
+    quant_type: "relative"
+    quantity: amount
+    time_course_rule: "not a time course"
+    arms:
+      - label: "(E)-2-nonenal + 3-hydroxy-2-butanone + ammonium sulfide"
+        lever_value: "(E)-2-nonenal"
+        value: 16
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 140
+          time_min: 30
+          precursors: {ammonium sulfide: "0.1 M, 50 mL", "(E)-2-nonenal": "0.005 mol", 3-hydroxy-2-butanone: "0.005 mol"}
+          buffer: "none"
+          matrix: "water"
+          headspace: "sealed, unstated (100 mL screw-top jar, PTFE-lined cap)"
+      - label: "(E,E)-2,4-nonadienal + 3-hydroxy-2-butanone + ammonium sulfide"
+        lever_value: "(E,E)-2,4-nonadienal"
+        value: 30
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 140
+          time_min: 30
+          precursors: {ammonium sulfide: "0.1 M, 50 mL", "(E,E)-2,4-nonadienal": "0.005 mol", 3-hydroxy-2-butanone: "0.005 mol"}
+          buffer: "none"
+          matrix: "water"
+          headspace: "sealed, unstated (100 mL screw-top jar, PTFE-lined cap)"
