@@ -160,3 +160,9 @@ much odorant a heated system holds; a ratio of rates is a different quantity and
 precursor, or a peak area). Rate constants, half-lives and storage losses are keyed (`quantity: rate`) but enter no
 cell; each cell's output counts them. The generator applies this through the contrast's `quantity` field (default
 `amount`).
+
+**A2 (2026-11-11, before any value of the second keying round is read).** *Reason:* Strecker aldehydes and pyrazines
+are made from a named amino acid, and their studies vary WHICH amino acid is present (glycine vs alanine vs leucine
+...); sec. 4's table has no row for that lever, so these contrasts would fall into no cell. *Rule:* a categorical
+lever **amino acid identity**, reference **glycine**, estimated as a network like the other categorical levers.
+

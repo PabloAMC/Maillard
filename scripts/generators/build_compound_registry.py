@@ -59,6 +59,17 @@ SEEDS: List[Dict[str, Any]] = [
     # --- molecules that the species YAML does not carry -------------------------
     dict(id="2_3_butanedione", display_name="2,3-Butanedione", kind="molecule", smiles="CC(=O)C(C)=O", aliases=["diacetyl"]),
     dict(id="2_acetylfuran", display_name="2-Acetylfuran", kind="molecule", smiles="CC(=O)c1ccco1"),
+    # the lever table's other odorant families (docs/reference/lever_table/PREREG.md, 2026-11-11)
+    dict(id="pyrazine_unsubstituted", display_name="Unsubstituted pyrazine", kind="molecule", smiles="c1cnccn1",
+         aliases=["1,4-diazine"]),
+    dict(id="2_ethyl_3_6_dimethylpyrazine", display_name="2-Ethyl-3,6-dimethylpyrazine", kind="molecule",
+         smiles="CCc1nc(C)cnc1C", aliases=["3-ethyl-2,5-dimethylpyrazine"]),
+    dict(id="e_2_nonenal", display_name="(E)-2-Nonenal", kind="molecule", smiles="CCCCCC/C=C/C=O",
+         aliases=["trans-2-nonenal", "2-nonenal", "(e)-non-2-enal"]),
+    dict(id="pentanal", display_name="Pentanal", kind="molecule", smiles="CCCCC=O", aliases=["valeraldehyde"]),
+    dict(id="octanal", display_name="Octanal", kind="molecule", smiles="CCCCCCCC=O", aliases=["caprylaldehyde"]),
+    dict(id="phenylacetic_acid", display_name="Phenylacetic acid", kind="molecule", smiles="OC(=O)Cc1ccccc1",
+         aliases=["benzeneacetic acid"]),
     # the lever table's thiol disulfides (docs/reference/lever_table/PREREG.md, 2026-11-10)
     dict(id="bis_2_furfuryl_disulfide", display_name="Bis(2-furfuryl) disulfide", kind="molecule", smiles="C(SSCc1ccco1)c1ccco1",
          aliases=["difurfuryl disulfide", "bis(2-furylmethyl) disulfide", "2,2'-dithiobismethylenedifuran", "fft disulfide"]),
@@ -106,7 +117,7 @@ SEEDS: List[Dict[str, Any]] = [
     dict(id="methylpyrazine", display_name="2-Methylpyrazine", kind="molecule", smiles="Cc1cnccn1", class_="pyrazines"),
     dict(id="tetramethylpyrazine", display_name="Tetramethylpyrazine", kind="molecule", smiles="Cc1nc(C)c(C)nc1C", class_="pyrazines"),
     dict(id="2_6_dimethylpyrazine", display_name="2,6-Dimethylpyrazine", kind="molecule", smiles="Cc1cncc(C)n1", class_="pyrazines"),
-    dict(id="2_ethylpyrazine", display_name="2-Ethylpyrazine", kind="molecule", smiles="CCc1cnccn1", class_="pyrazines"),
+    dict(id="2_ethylpyrazine", display_name="2-Ethylpyrazine", kind="molecule", smiles="CCc1cnccn1", class_="pyrazines", aliases=["ethylpyrazine"]),
     dict(id="trimethylpyrazine", display_name="Trimethylpyrazine", kind="molecule", smiles="Cc1cnc(C)c(C)n1", class_="pyrazines"),
     dict(id="mercapto_2_propanone", display_name="Mercapto-2-propanone", kind="molecule", smiles="CC(=O)CS", aliases=["1-mercapto-2-propanone", "mercaptoacetone"]),
     dict(id="methanethiol", display_name="Methanethiol", kind="molecule", smiles="CS"),

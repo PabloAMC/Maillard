@@ -51,7 +51,8 @@ NUMERIC = {"pH": ("+1 pH unit", lambda x: x),
            "precursor dose": ("a doubling of dose", math.log2),
            "water": ("+0.1 a_w", lambda x: x / 0.1),
            "buffer concentration": ("a doubling of concentration", math.log2)}
-CATEGORICAL_REFERENCE = {"sugar identity": "glucose", "sulfur source": "cysteine", "buffer": "phosphate",
+CATEGORICAL_REFERENCE = {"amino acid identity": "glycine",   # PREREG amendment A2
+                         "sugar identity": "glucose", "sulfur source": "cysteine", "buffer": "phosphate",
                          "lipid": "none", "oxygen": "inert", "matrix": "buffer"}
 #: PREREG sec. 4, "sugar identity: the named sugar": the levels that are sugars or sugar sources a formulator adds
 #: (phosphorylated pentoses and IMP release ribose). A fed intermediate (furfural, a deoxyosone, norfuraneol) is not
