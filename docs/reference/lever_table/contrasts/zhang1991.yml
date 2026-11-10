@@ -1,0 +1,203 @@
+# Resolved (third read) from reader_a / reader_b, PREREG secs. 3 - 4 and amendment A1.
+source: zhang1991
+pdf: data/articles/zhang1991.pdf
+reader: resolved
+scope_note: Tridecane internal-standard quantities (no response factors), keyed peak_area; blank cells in the IMP-GSH
+  column keyed nd_no_limit; initial pH was measured (2.3 vs 2.2), not set.
+contrasts:
+- id: zhang1991-1
+  odorant: 2-Methyl-3-furanthiol (MFT)
+  lever_class: sulfur source
+  lever: cysteine vs glutathione (with IMP)
+  focal: true
+  location: Table I, p. 1146
+  digitised: false
+  unit: mg/mol (per mol cysteine or glutathione)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  resolution: agreed
+  arms:
+  - label: IMP-Cys
+    lever_value: cysteine
+    value: 9.6
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 2.3
+      ph_basis: initial
+      temp_C: 180
+      time_min: 60
+      precursors:
+        inosine 5'-monophosphate: 0.005 mol in 100 mL
+        cysteine: 0.005 mol in 100 mL
+      buffer: none (distilled water, pH measured not adjusted)
+      matrix: water
+      headspace: sealed, unstated
+  - label: IMP-GSH
+    lever_value: glutathione
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 2.2
+      ph_basis: initial
+      temp_C: 180
+      time_min: 60
+      precursors:
+        inosine 5'-monophosphate: 0.005 mol in 100 mL
+        glutathione: 0.005 mol in 100 mL
+      buffer: none (distilled water, pH measured not adjusted)
+      matrix: water
+      headspace: sealed, unstated
+- id: zhang1991-2
+  odorant: 2-Furfurylthiol (FFT)
+  lever_class: sulfur source
+  lever: cysteine vs glutathione (with IMP)
+  focal: false
+  location: Table I, p. 1146
+  digitised: false
+  unit: mg/mol (per mol cysteine or glutathione)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  resolution: agreed
+  arms:
+  - label: IMP-Cys
+    lever_value: cysteine
+    value: 384.43
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 2.3
+      ph_basis: initial
+      temp_C: 180
+      time_min: 60
+      precursors:
+        inosine 5'-monophosphate: 0.005 mol in 100 mL
+        cysteine: 0.005 mol in 100 mL
+      buffer: none (distilled water, pH measured not adjusted)
+      matrix: water
+      headspace: sealed, unstated
+  - label: IMP-GSH
+    lever_value: glutathione
+    value: 180.49
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 2.2
+      ph_basis: initial
+      temp_C: 180
+      time_min: 60
+      precursors:
+        inosine 5'-monophosphate: 0.005 mol in 100 mL
+        glutathione: 0.005 mol in 100 mL
+      buffer: none (distilled water, pH measured not adjusted)
+      matrix: water
+      headspace: sealed, unstated
+- id: zhang1991-3
+  odorant: 2-Methyl-3-(2-furfuryldithio)furan
+  lever_class: sulfur source
+  lever: cysteine vs glutathione (with IMP)
+  focal: false
+  location: Table I, p. 1146
+  digitised: false
+  unit: mg/mol (per mol cysteine or glutathione)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  resolution: agreed
+  arms:
+  - label: IMP-Cys
+    lever_value: cysteine
+    value: 3.11
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 2.3
+      ph_basis: initial
+      temp_C: 180
+      time_min: 60
+      precursors:
+        inosine 5'-monophosphate: 0.005 mol in 100 mL
+        cysteine: 0.005 mol in 100 mL
+      buffer: none (distilled water, pH measured not adjusted)
+      matrix: water
+      headspace: sealed, unstated
+  - label: IMP-GSH
+    lever_value: glutathione
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 2.2
+      ph_basis: initial
+      temp_C: 180
+      time_min: 60
+      precursors:
+        inosine 5'-monophosphate: 0.005 mol in 100 mL
+        glutathione: 0.005 mol in 100 mL
+      buffer: none (distilled water, pH measured not adjusted)
+      matrix: water
+      headspace: sealed, unstated
+- id: zhang1991-4
+  odorant: Bis(2-furfuryl) disulfide
+  lever_class: sulfur source
+  lever: cysteine vs glutathione (with IMP)
+  focal: false
+  location: Table I, p. 1146
+  digitised: false
+  unit: mg/mol (per mol cysteine or glutathione)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  resolution: agreed
+  arms:
+  - label: IMP-Cys
+    lever_value: cysteine
+    value: 15.29
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 2.3
+      ph_basis: initial
+      temp_C: 180
+      time_min: 60
+      precursors:
+        inosine 5'-monophosphate: 0.005 mol in 100 mL
+        cysteine: 0.005 mol in 100 mL
+      buffer: none (distilled water, pH measured not adjusted)
+      matrix: water
+      headspace: sealed, unstated
+  - label: IMP-GSH
+    lever_value: glutathione
+    value: 32.81
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 2.2
+      ph_basis: initial
+      temp_C: 180
+      time_min: 60
+      precursors:
+        inosine 5'-monophosphate: 0.005 mol in 100 mL
+        glutathione: 0.005 mol in 100 mL
+      buffer: none (distilled water, pH measured not adjusted)
+      matrix: water
+      headspace: sealed, unstated

@@ -1,0 +1,75 @@
+source: "us10076126"
+pdf: "data/articles/US10076126.pdf"
+reader: "b"
+scope_note: "Example 1 only (Figs. 1-2, digitised, no table); time course 0.5-4 h with no stated main time, so 4 h keyed; FFT in aqueous buffer sits on the baseline of a 0-30000 axis, so its value is approximate. Examples 2-3 report no thiol values."
+contrasts:
+  - id: "us10076126-1"
+    odorant: "2-methyl-3-furanthiol"
+    lever_class: "matrix"
+    lever: "reaction solvent: choline chloride/glycerol 1:1 vs glycerol vs aqueous phosphate buffer pH 5.5"
+    focal: true
+    location: "Fig. 1, Example 1"
+    digitised: true
+    unit: "ng/g reaction mixture"
+    quant_type: "absolute"
+    time_course_rule: "longest time"
+    arms:
+      - label: "choline chloride/glycerol"
+        lever_value: "choline chloride/glycerol 1:1 molar"
+        value: 3200
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions: {ph: null, ph_basis: unstated, temp_C: 110, time_min: 240, precursors: {xylose: "75 mg in 2.0 g solvent", L-cysteine: "60 mg in 2.0 g solvent"}, buffer: "none", matrix: "other (choline chloride/glycerol deep eutectic solvent)", headspace: "sealed, unstated"}
+      - label: "glycerol"
+        lever_value: "glycerol"
+        value: 2950
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions: {ph: null, ph_basis: unstated, temp_C: 110, time_min: 240, precursors: {xylose: "75 mg in 2.0 g solvent", L-cysteine: "60 mg in 2.0 g solvent"}, buffer: "none", matrix: "other (glycerol)", headspace: "sealed, unstated"}
+      - label: "aqueous buffer"
+        lever_value: "aqueous phosphate buffer pH 5.5"
+        value: 1850
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions: {ph: 5.5, ph_basis: label, temp_C: 110, time_min: 240, precursors: {xylose: "75 mg in 2.0 g solvent", L-cysteine: "60 mg in 2.0 g solvent"}, buffer: "phosphate, concentration unstated", matrix: buffer, headspace: "sealed, unstated"}
+  - id: "us10076126-2"
+    odorant: "2-furfurylthiol"
+    lever_class: "matrix"
+    lever: "reaction solvent: choline chloride/glycerol 1:1 vs glycerol vs aqueous phosphate buffer pH 5.5"
+    focal: true
+    location: "Fig. 2, Example 1"
+    digitised: true
+    unit: "ng/g reaction mixture"
+    quant_type: "absolute"
+    time_course_rule: "longest time"
+    arms:
+      - label: "choline chloride/glycerol"
+        lever_value: "choline chloride/glycerol 1:1 molar"
+        value: 16500
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions: {ph: null, ph_basis: unstated, temp_C: 110, time_min: 240, precursors: {xylose: "75 mg in 2.0 g solvent", L-cysteine: "60 mg in 2.0 g solvent"}, buffer: "none", matrix: "other (choline chloride/glycerol deep eutectic solvent)", headspace: "sealed, unstated"}
+      - label: "glycerol"
+        lever_value: "glycerol"
+        value: 29500
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions: {ph: null, ph_basis: unstated, temp_C: 110, time_min: 240, precursors: {xylose: "75 mg in 2.0 g solvent", L-cysteine: "60 mg in 2.0 g solvent"}, buffer: "none", matrix: "other (glycerol)", headspace: "sealed, unstated"}
+      - label: "aqueous buffer"
+        lever_value: "aqueous phosphate buffer pH 5.5"
+        value: 200
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions: {ph: 5.5, ph_basis: label, temp_C: 110, time_min: 240, precursors: {xylose: "75 mg in 2.0 g solvent", L-cysteine: "60 mg in 2.0 g solvent"}, buffer: "phosphate, concentration unstated", matrix: buffer, headspace: "sealed, unstated"}

@@ -1,0 +1,255 @@
+source: "vanseeventer2001"
+pdf: "data/articles/vanseeventer2001.pdf"
+reader: "b"
+scope_note: "Storage stability at 50 C, not formation: the printed quantity is the decrease in concentration (% per day, zero-order fit over 0-24 h), keyed as printed. '>90' cells have no template censor code (they are lower bounds on a loss); keyed censor above_value, limit 90. Fig. 1 cysteine ladder digitised (no table); its 0 and 150 mM points may be the same experiments as Table 1 entries 2 and 4 but the values differ (FFT 46 vs 39), so both are keyed. Air vs argon stated 'data not presented', not keyable."
+contrasts:
+  - id: "vanseeventer2001-1"
+    odorant: "2-methyl-3-furanthiol (MFT)"
+    lever_class: "mixed"
+    lever: "aqueous model process flavouring (with its residual cysteine 15 mM / ribose 25 mM, thiols ~5 uM) vs reconstituted mixture in buffer (thiols 50 uM, no addition)"
+    focal: false
+    location: "Table 1, entries 1 vs 2"
+    digitised: false
+    unit: "% decrease per day"
+    quant_type: "relative"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "1 model process flavoring"
+        lever_value: "process flavouring"
+        value: 59
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions: {ph: 5.0, ph_basis: label, temp_C: 50, time_min: 1440, precursors: {ribose: "100 mM before heating (130 C, 20 min); residual 25 mM", cysteine: "33 mM before heating; residual 15 mM"}, buffer: "0.5 M phosphate", matrix: "other (heated ribose/cysteine process flavouring)", headspace: "air (closed bottles)"}
+      - label: "2 no addition"
+        lever_value: "reconstituted, no addition"
+        value: 90
+        censor: above_value
+        limit: 90
+        n: 2
+        sd: null
+        conditions: {ph: 5.0, ph_basis: label, temp_C: 50, time_min: 1440, precursors: {thiols_and_furanones: "50 uM each"}, buffer: "0.5 M phosphate", matrix: buffer, headspace: "air (closed glass containers)"}
+  - id: "vanseeventer2001-2"
+    odorant: "2-methyl-3-furanthiol (MFT)"
+    lever_class: "precursor dose"
+    lever: "added ribose 0 vs 250 mM"
+    focal: true
+    location: "Table 1, entries 2 vs 3"
+    digitised: false
+    unit: "% decrease per day"
+    quant_type: "relative"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "2 no addition"
+        lever_value: 0
+        value: 90
+        censor: above_value
+        limit: 90
+        n: 2
+        sd: null
+        conditions: {ph: 5.0, ph_basis: label, temp_C: 50, time_min: 1440, precursors: {thiols_and_furanones: "50 uM each"}, buffer: "0.5 M phosphate", matrix: buffer, headspace: "air (closed glass containers)"}
+      - label: "3 + 250 mM ribose"
+        lever_value: 250
+        value: 90
+        censor: above_value
+        limit: 90
+        n: 2
+        sd: null
+        conditions: {ph: 5.0, ph_basis: label, temp_C: 50, time_min: 1440, precursors: {thiols_and_furanones: "50 uM each", ribose: "250 mM"}, buffer: "0.5 M phosphate", matrix: buffer, headspace: "air (closed glass containers)"}
+  - id: "vanseeventer2001-3"
+    odorant: "2-methyl-3-furanthiol (MFT)"
+    lever_class: "precursor dose"
+    lever: "added cysteine 0 vs 150 mM"
+    focal: true
+    location: "Table 1, entries 2 vs 4"
+    digitised: false
+    unit: "% decrease per day"
+    quant_type: "relative"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "2 no addition"
+        lever_value: 0
+        value: 90
+        censor: above_value
+        limit: 90
+        n: 2
+        sd: null
+        conditions: {ph: 5.0, ph_basis: label, temp_C: 50, time_min: 1440, precursors: {thiols_and_furanones: "50 uM each"}, buffer: "0.5 M phosphate", matrix: buffer, headspace: "air (closed glass containers)"}
+      - label: "4 + 150 mM cysteine"
+        lever_value: 150
+        value: 69
+        censor: none
+        limit: null
+        n: 2
+        sd: null
+        conditions: {ph: 5.0, ph_basis: label, temp_C: 50, time_min: 1440, precursors: {thiols_and_furanones: "50 uM each", cysteine: "150 mM"}, buffer: "0.5 M phosphate", matrix: buffer, headspace: "air (closed glass containers)"}
+  - id: "vanseeventer2001-4"
+    odorant: "2-methyl-3-furanthiol (MFT)"
+    lever_class: "precursor dose"
+    lever: "added ribose 0 vs 250 mM, with 150 mM cysteine"
+    focal: true
+    location: "Table 1, entries 4 vs 5"
+    digitised: false
+    unit: "% decrease per day"
+    quant_type: "relative"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "4 + 150 mM cysteine"
+        lever_value: 0
+        value: 69
+        censor: none
+        limit: null
+        n: 2
+        sd: null
+        conditions: {ph: 5.0, ph_basis: label, temp_C: 50, time_min: 1440, precursors: {thiols_and_furanones: "50 uM each", cysteine: "150 mM"}, buffer: "0.5 M phosphate", matrix: buffer, headspace: "air (closed glass containers)"}
+      - label: "5 + 150 mM cysteine + 250 mM ribose"
+        lever_value: 250
+        value: 42
+        censor: none
+        limit: null
+        n: 2
+        sd: null
+        conditions: {ph: 5.0, ph_basis: label, temp_C: 50, time_min: 1440, precursors: {thiols_and_furanones: "50 uM each", cysteine: "150 mM", ribose: "250 mM"}, buffer: "0.5 M phosphate", matrix: buffer, headspace: "air (closed glass containers)"}
+  - id: "vanseeventer2001-5"
+    odorant: "2-furfurylthiol (FFT)"
+    lever_class: "mixed"
+    lever: "aqueous model process flavouring (with its residual cysteine 15 mM / ribose 25 mM, thiols ~5 uM) vs reconstituted mixture in buffer (thiols 50 uM, no addition)"
+    focal: false
+    location: "Table 1, entries 1 vs 2"
+    digitised: false
+    unit: "% decrease per day"
+    quant_type: "relative"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "1 model process flavoring"
+        lever_value: "process flavouring"
+        value: 28
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions: {ph: 5.0, ph_basis: label, temp_C: 50, time_min: 1440, precursors: {ribose: "100 mM before heating (130 C, 20 min); residual 25 mM", cysteine: "33 mM before heating; residual 15 mM"}, buffer: "0.5 M phosphate", matrix: "other (heated ribose/cysteine process flavouring)", headspace: "air (closed bottles)"}
+      - label: "2 no addition"
+        lever_value: "reconstituted, no addition"
+        value: 90
+        censor: above_value
+        limit: 90
+        n: 2
+        sd: null
+        conditions: {ph: 5.0, ph_basis: label, temp_C: 50, time_min: 1440, precursors: {thiols_and_furanones: "50 uM each"}, buffer: "0.5 M phosphate", matrix: buffer, headspace: "air (closed glass containers)"}
+  - id: "vanseeventer2001-6"
+    odorant: "2-furfurylthiol (FFT)"
+    lever_class: "precursor dose"
+    lever: "added ribose 0 vs 250 mM"
+    focal: true
+    location: "Table 1, entries 2 vs 3"
+    digitised: false
+    unit: "% decrease per day"
+    quant_type: "relative"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "2 no addition"
+        lever_value: 0
+        value: 90
+        censor: above_value
+        limit: 90
+        n: 2
+        sd: null
+        conditions: {ph: 5.0, ph_basis: label, temp_C: 50, time_min: 1440, precursors: {thiols_and_furanones: "50 uM each"}, buffer: "0.5 M phosphate", matrix: buffer, headspace: "air (closed glass containers)"}
+      - label: "3 + 250 mM ribose"
+        lever_value: 250
+        value: 90
+        censor: above_value
+        limit: 90
+        n: 2
+        sd: null
+        conditions: {ph: 5.0, ph_basis: label, temp_C: 50, time_min: 1440, precursors: {thiols_and_furanones: "50 uM each", ribose: "250 mM"}, buffer: "0.5 M phosphate", matrix: buffer, headspace: "air (closed glass containers)"}
+  - id: "vanseeventer2001-7"
+    odorant: "2-furfurylthiol (FFT)"
+    lever_class: "precursor dose"
+    lever: "added cysteine 0 vs 150 mM"
+    focal: true
+    location: "Table 1, entries 2 vs 4"
+    digitised: false
+    unit: "% decrease per day"
+    quant_type: "relative"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "2 no addition"
+        lever_value: 0
+        value: 90
+        censor: above_value
+        limit: 90
+        n: 2
+        sd: null
+        conditions: {ph: 5.0, ph_basis: label, temp_C: 50, time_min: 1440, precursors: {thiols_and_furanones: "50 uM each"}, buffer: "0.5 M phosphate", matrix: buffer, headspace: "air (closed glass containers)"}
+      - label: "4 + 150 mM cysteine"
+        lever_value: 150
+        value: 39
+        censor: none
+        limit: null
+        n: 2
+        sd: null
+        conditions: {ph: 5.0, ph_basis: label, temp_C: 50, time_min: 1440, precursors: {thiols_and_furanones: "50 uM each", cysteine: "150 mM"}, buffer: "0.5 M phosphate", matrix: buffer, headspace: "air (closed glass containers)"}
+  - id: "vanseeventer2001-8"
+    odorant: "2-furfurylthiol (FFT)"
+    lever_class: "precursor dose"
+    lever: "added ribose 0 vs 250 mM, with 150 mM cysteine"
+    focal: true
+    location: "Table 1, entries 4 vs 5"
+    digitised: false
+    unit: "% decrease per day"
+    quant_type: "relative"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "4 + 150 mM cysteine"
+        lever_value: 0
+        value: 39
+        censor: none
+        limit: null
+        n: 2
+        sd: null
+        conditions: {ph: 5.0, ph_basis: label, temp_C: 50, time_min: 1440, precursors: {thiols_and_furanones: "50 uM each", cysteine: "150 mM"}, buffer: "0.5 M phosphate", matrix: buffer, headspace: "air (closed glass containers)"}
+      - label: "5 + 150 mM cysteine + 250 mM ribose"
+        lever_value: 250
+        value: 43
+        censor: none
+        limit: null
+        n: 2
+        sd: null
+        conditions: {ph: 5.0, ph_basis: label, temp_C: 50, time_min: 1440, precursors: {thiols_and_furanones: "50 uM each", cysteine: "150 mM", ribose: "250 mM"}, buffer: "0.5 M phosphate", matrix: buffer, headspace: "air (closed glass containers)"}
+  - id: "vanseeventer2001-9"
+    odorant: "2-methyl-3-furanthiol (MFT)"
+    lever_class: "precursor dose"
+    lever: "added cysteine concentration ladder 0-200 mM (non-monotone)"
+    focal: true
+    location: "Fig. 1, p. 4294"
+    digitised: true
+    unit: "% decrease per day"
+    quant_type: "relative"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "0 mM", lever_value: 0, value: 97, censor: none, limit: null, n: 2, sd: null, conditions: {ph: 5.0, ph_basis: label, temp_C: 50, time_min: 1440, precursors: {thiols: "50 uM each (MB, FFT, MFT)", cysteine: "0 mM"}, buffer: "0.5 M phosphate", matrix: buffer, headspace: "air (closed glass containers)"}}
+      - {label: "25 mM", lever_value: 25, value: 62, censor: none, limit: null, n: 2, sd: null, conditions: {ph: 5.0, ph_basis: label, temp_C: 50, time_min: 1440, precursors: {thiols: "50 uM each (MB, FFT, MFT)", cysteine: "25 mM"}, buffer: "0.5 M phosphate", matrix: buffer, headspace: "air (closed glass containers)"}}
+      - {label: "50 mM", lever_value: 50, value: 50, censor: none, limit: null, n: 2, sd: null, conditions: {ph: 5.0, ph_basis: label, temp_C: 50, time_min: 1440, precursors: {thiols: "50 uM each (MB, FFT, MFT)", cysteine: "50 mM"}, buffer: "0.5 M phosphate", matrix: buffer, headspace: "air (closed glass containers)"}}
+      - {label: "100 mM", lever_value: 100, value: 59, censor: none, limit: null, n: 2, sd: null, conditions: {ph: 5.0, ph_basis: label, temp_C: 50, time_min: 1440, precursors: {thiols: "50 uM each (MB, FFT, MFT)", cysteine: "100 mM"}, buffer: "0.5 M phosphate", matrix: buffer, headspace: "air (closed glass containers)"}}
+      - {label: "150 mM", lever_value: 150, value: 70, censor: none, limit: null, n: 2, sd: null, conditions: {ph: 5.0, ph_basis: label, temp_C: 50, time_min: 1440, precursors: {thiols: "50 uM each (MB, FFT, MFT)", cysteine: "150 mM"}, buffer: "0.5 M phosphate", matrix: buffer, headspace: "air (closed glass containers)"}}
+      - {label: "200 mM", lever_value: 200, value: 88, censor: none, limit: null, n: 2, sd: null, conditions: {ph: 5.0, ph_basis: label, temp_C: 50, time_min: 1440, precursors: {thiols: "50 uM each (MB, FFT, MFT)", cysteine: "200 mM"}, buffer: "0.5 M phosphate", matrix: buffer, headspace: "air (closed glass containers)"}}
+  - id: "vanseeventer2001-10"
+    odorant: "2-furfurylthiol (FFT)"
+    lever_class: "precursor dose"
+    lever: "added cysteine concentration ladder 0-200 mM (non-monotone)"
+    focal: true
+    location: "Fig. 1, p. 4294"
+    digitised: true
+    unit: "% decrease per day"
+    quant_type: "relative"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "0 mM", lever_value: 0, value: 97, censor: none, limit: null, n: 2, sd: null, conditions: {ph: 5.0, ph_basis: label, temp_C: 50, time_min: 1440, precursors: {thiols: "50 uM each (MB, FFT, MFT)", cysteine: "0 mM"}, buffer: "0.5 M phosphate", matrix: buffer, headspace: "air (closed glass containers)"}}
+      - {label: "25 mM", lever_value: 25, value: 61, censor: none, limit: null, n: 2, sd: null, conditions: {ph: 5.0, ph_basis: label, temp_C: 50, time_min: 1440, precursors: {thiols: "50 uM each (MB, FFT, MFT)", cysteine: "25 mM"}, buffer: "0.5 M phosphate", matrix: buffer, headspace: "air (closed glass containers)"}}
+      - {label: "50 mM", lever_value: 50, value: 67, censor: none, limit: null, n: 2, sd: null, conditions: {ph: 5.0, ph_basis: label, temp_C: 50, time_min: 1440, precursors: {thiols: "50 uM each (MB, FFT, MFT)", cysteine: "50 mM"}, buffer: "0.5 M phosphate", matrix: buffer, headspace: "air (closed glass containers)"}}
+      - {label: "100 mM", lever_value: 100, value: 53, censor: none, limit: null, n: 2, sd: null, conditions: {ph: 5.0, ph_basis: label, temp_C: 50, time_min: 1440, precursors: {thiols: "50 uM each (MB, FFT, MFT)", cysteine: "100 mM"}, buffer: "0.5 M phosphate", matrix: buffer, headspace: "air (closed glass containers)"}}
+      - {label: "150 mM", lever_value: 150, value: 46, censor: none, limit: null, n: 2, sd: null, conditions: {ph: 5.0, ph_basis: label, temp_C: 50, time_min: 1440, precursors: {thiols: "50 uM each (MB, FFT, MFT)", cysteine: "150 mM"}, buffer: "0.5 M phosphate", matrix: buffer, headspace: "air (closed glass containers)"}}
+      - {label: "200 mM", lever_value: 200, value: 49, censor: none, limit: null, n: 2, sd: null, conditions: {ph: 5.0, ph_basis: label, temp_C: 50, time_min: 1440, precursors: {thiols: "50 uM each (MB, FFT, MFT)", cysteine: "200 mM"}, buffer: "0.5 M phosphate", matrix: buffer, headspace: "air (closed glass containers)"}}

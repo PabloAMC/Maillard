@@ -1,0 +1,113 @@
+source: "zhang1991"
+pdf: "data/articles/zhang1991.pdf"
+reader: "b"
+scope_note: "Table I, IMP-Cys vs IMP-GSH; blank cells keyed nd_no_limit; mg/mol is an internal-standard (tridecane) estimate, keyed peak_area; the two arms' measured pH differ slightly (2.3 vs 2.2) as printed; bis(2-methyl-3-furyl) disulfide and H2S not reported."
+contrasts:
+  - id: "zhang1991-1"
+    odorant: "2-methyl-3-furanthiol"
+    lever_class: "sulfur source"
+    lever: "cysteine vs glutathione, with IMP"
+    focal: true
+    location: "Table I, p. 1146"
+    digitised: false
+    unit: "mg/mol"
+    quant_type: "peak_area"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "IMP-Cys"
+        lever_value: "cysteine"
+        value: 9.60
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions: {ph: 2.3, ph_basis: initial, temp_C: 180, time_min: 60, precursors: {IMP: "0.005 mol in 100 mL", cysteine: "0.005 mol in 100 mL"}, buffer: "none", matrix: water, headspace: "sealed, unstated"}
+      - label: "IMP-GSH"
+        lever_value: "glutathione"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: null
+        sd: null
+        conditions: {ph: 2.2, ph_basis: initial, temp_C: 180, time_min: 60, precursors: {IMP: "0.005 mol in 100 mL", glutathione: "0.005 mol in 100 mL"}, buffer: "none", matrix: water, headspace: "sealed, unstated"}
+  - id: "zhang1991-2"
+    odorant: "furfurylthiol"
+    lever_class: "sulfur source"
+    lever: "cysteine vs glutathione, with IMP"
+    focal: false
+    location: "Table I, p. 1146"
+    digitised: false
+    unit: "mg/mol"
+    quant_type: "peak_area"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "IMP-Cys"
+        lever_value: "cysteine"
+        value: 384.43
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions: {ph: 2.3, ph_basis: initial, temp_C: 180, time_min: 60, precursors: {IMP: "0.005 mol in 100 mL", cysteine: "0.005 mol in 100 mL"}, buffer: "none", matrix: water, headspace: "sealed, unstated"}
+      - label: "IMP-GSH"
+        lever_value: "glutathione"
+        value: 180.49
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions: {ph: 2.2, ph_basis: initial, temp_C: 180, time_min: 60, precursors: {IMP: "0.005 mol in 100 mL", glutathione: "0.005 mol in 100 mL"}, buffer: "none", matrix: water, headspace: "sealed, unstated"}
+  - id: "zhang1991-3"
+    odorant: "2-furfuryl 2-methyl-3-furyl disulfide"
+    lever_class: "sulfur source"
+    lever: "cysteine vs glutathione, with IMP"
+    focal: false
+    location: "Table I, p. 1146"
+    digitised: false
+    unit: "mg/mol"
+    quant_type: "peak_area"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "IMP-Cys"
+        lever_value: "cysteine"
+        value: 3.11
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions: {ph: 2.3, ph_basis: initial, temp_C: 180, time_min: 60, precursors: {IMP: "0.005 mol in 100 mL", cysteine: "0.005 mol in 100 mL"}, buffer: "none", matrix: water, headspace: "sealed, unstated"}
+      - label: "IMP-GSH"
+        lever_value: "glutathione"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: null
+        sd: null
+        conditions: {ph: 2.2, ph_basis: initial, temp_C: 180, time_min: 60, precursors: {IMP: "0.005 mol in 100 mL", glutathione: "0.005 mol in 100 mL"}, buffer: "none", matrix: water, headspace: "sealed, unstated"}
+  - id: "zhang1991-4"
+    odorant: "di-2-furfuryl disulfide"
+    lever_class: "sulfur source"
+    lever: "cysteine vs glutathione, with IMP"
+    focal: false
+    location: "Table I, p. 1146"
+    digitised: false
+    unit: "mg/mol"
+    quant_type: "peak_area"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "IMP-Cys"
+        lever_value: "cysteine"
+        value: 15.29
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions: {ph: 2.3, ph_basis: initial, temp_C: 180, time_min: 60, precursors: {IMP: "0.005 mol in 100 mL", cysteine: "0.005 mol in 100 mL"}, buffer: "none", matrix: water, headspace: "sealed, unstated"}
+      - label: "IMP-GSH"
+        lever_value: "glutathione"
+        value: 32.81
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions: {ph: 2.2, ph_basis: initial, temp_C: 180, time_min: 60, precursors: {IMP: "0.005 mol in 100 mL", glutathione: "0.005 mol in 100 mL"}, buffer: "none", matrix: water, headspace: "sealed, unstated"}
