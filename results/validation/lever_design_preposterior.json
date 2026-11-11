@@ -1,0 +1,1470 @@
+{
+  "artifact": "lever_design_preposterior",
+  "settings": {
+    "sims": 200,
+    "within_lab_sd": 0.1,
+    "sida_cv": 0.1,
+    "other_cv": 0.2,
+    "prior_sd": 0.5,
+    "analytes": [
+      "2-Methyl-3-furanthiol (MFT)",
+      "2-Furfurylthiol (FFT)",
+      "Bis(2-methyl-3-furyl) disulfide",
+      "Hydrogen Sulfide",
+      "2-Methylbutanal",
+      "3-Methylbutanal",
+      "Phenylacetaldehyde",
+      "Methional (3-(methylthio)propanal)",
+      "2,5-Dimethylpyrazine",
+      "Trimethylpyrazine",
+      "2-Ethyl-3,5-dimethylpyrazine",
+      "Pyrazines",
+      "Hexanal",
+      "Nonanal",
+      "2-Pentylfuran",
+      "1-Octen-3-ol",
+      "DMHF",
+      "Norfuraneol (NF)",
+      "Furfural"
+    ]
+  },
+  "results": [
+    {
+      "design": "P3: one laboratory, 2^4 x 2 (as drafted)",
+      "pots": 36,
+      "new_labs": 1,
+      "matrix_shift_sd": 0.0,
+      "keying": "main_effect",
+      "sims": 200,
+      "cells_keyed": 57,
+      "newly_answered": {
+        "mean": 4.345,
+        "q05": 3.0,
+        "q95": 5.0,
+        "p_ge_1": 1.0,
+        "p_ge_3": 0.995
+      },
+      "newly_answered_with_literature": {
+        "mean": 4.345,
+        "p_ge_1": 1.0
+      },
+      "map_cells_newly_answered": {
+        "mean": 3.36,
+        "p_ge_1": 1.0
+      },
+      "answered_lost_mean": 0.0,
+      "step5_cells_two_test_labs": {
+        "before": 0,
+        "after": 2
+      },
+      "levers_feeding_no_cell": [
+        "yeast extract"
+      ],
+      "top_cells": [
+        {
+          "cell": "2-Methyl-3-furanthiol (MFT), sugar identity, all, ribose vs glucose",
+          "p_answered": 1.0
+        },
+        {
+          "cell": "2-Furfurylthiol (FFT), sugar identity, all, ribose vs glucose",
+          "p_answered": 0.985
+        },
+        {
+          "cell": "DMHF, pH, pH 6-7.5, initial or label",
+          "p_answered": 0.895
+        },
+        {
+          "cell": "Phenylacetaldehyde, pH, pH 6-7.5, initial or label",
+          "p_answered": 0.745
+        },
+        {
+          "cell": "2-Furfurylthiol (FFT), pH, pH 6-7.5, initial or label",
+          "p_answered": 0.72
+        }
+      ]
+    },
+    {
+      "design": "P3: one laboratory, 2^4 x 2 (as drafted)",
+      "pots": 36,
+      "new_labs": 1,
+      "matrix_shift_sd": 0.3,
+      "keying": "main_effect",
+      "sims": 200,
+      "cells_keyed": 57,
+      "newly_answered": {
+        "mean": 4.105,
+        "q05": 3.0,
+        "q95": 5.0,
+        "p_ge_1": 1.0,
+        "p_ge_3": 0.98
+      },
+      "newly_answered_with_literature": {
+        "mean": 4.105,
+        "p_ge_1": 1.0
+      },
+      "map_cells_newly_answered": {
+        "mean": 3.135,
+        "p_ge_1": 1.0
+      },
+      "answered_lost_mean": 0.0,
+      "step5_cells_two_test_labs": {
+        "before": 0,
+        "after": 2
+      },
+      "levers_feeding_no_cell": [
+        "yeast extract"
+      ],
+      "top_cells": [
+        {
+          "cell": "2-Methyl-3-furanthiol (MFT), sugar identity, all, ribose vs glucose",
+          "p_answered": 1.0
+        },
+        {
+          "cell": "2-Furfurylthiol (FFT), sugar identity, all, ribose vs glucose",
+          "p_answered": 0.97
+        },
+        {
+          "cell": "DMHF, pH, pH 6-7.5, initial or label",
+          "p_answered": 0.79
+        },
+        {
+          "cell": "2-Furfurylthiol (FFT), pH, pH 6-7.5, initial or label",
+          "p_answered": 0.7
+        },
+        {
+          "cell": "Phenylacetaldehyde, pH, pH 6-7.5, initial or label",
+          "p_answered": 0.645
+        }
+      ]
+    },
+    {
+      "design": "P3: one laboratory, 2^4 x 2 (as drafted)",
+      "pots": 36,
+      "new_labs": 1,
+      "matrix_shift_sd": 0.3,
+      "keying": "per_pair",
+      "sims": 200,
+      "cells_keyed": 57,
+      "newly_answered": {
+        "mean": 3.765,
+        "q05": 2.0,
+        "q95": 5.0,
+        "p_ge_1": 1.0,
+        "p_ge_3": 0.915
+      },
+      "newly_answered_with_literature": {
+        "mean": 3.765,
+        "p_ge_1": 1.0
+      },
+      "map_cells_newly_answered": {
+        "mean": 3.07,
+        "p_ge_1": 1.0
+      },
+      "answered_lost_mean": 0.0,
+      "step5_cells_two_test_labs": {
+        "before": 0,
+        "after": 2
+      },
+      "levers_feeding_no_cell": [
+        "yeast extract"
+      ],
+      "top_cells": [
+        {
+          "cell": "2-Methyl-3-furanthiol (MFT), sugar identity, all, ribose vs glucose",
+          "p_answered": 0.925
+        },
+        {
+          "cell": "DMHF, pH, pH 6-7.5, initial or label",
+          "p_answered": 0.775
+        },
+        {
+          "cell": "2-Furfurylthiol (FFT), sugar identity, all, ribose vs glucose",
+          "p_answered": 0.755
+        },
+        {
+          "cell": "2-Furfurylthiol (FFT), pH, pH 6-7.5, initial or label",
+          "p_answered": 0.655
+        },
+        {
+          "cell": "Phenylacetaldehyde, pH, pH 6-7.5, initial or label",
+          "p_answered": 0.655
+        }
+      ]
+    },
+    {
+      "design": "two laboratories, 2^3 x 2 each (no yeast extract)",
+      "pots": 36,
+      "new_labs": 2,
+      "matrix_shift_sd": 0.0,
+      "keying": "main_effect",
+      "sims": 200,
+      "cells_keyed": 57,
+      "newly_answered": {
+        "mean": 10.79,
+        "q05": 8.0,
+        "q95": 14.0,
+        "p_ge_1": 1.0,
+        "p_ge_3": 1.0
+      },
+      "newly_answered_with_literature": {
+        "mean": 7.66,
+        "p_ge_1": 1.0
+      },
+      "map_cells_newly_answered": {
+        "mean": 6.68,
+        "p_ge_1": 1.0
+      },
+      "answered_lost_mean": 0.0,
+      "step5_cells_two_test_labs": {
+        "before": 0,
+        "after": 57
+      },
+      "levers_feeding_no_cell": [],
+      "top_cells": [
+        {
+          "cell": "2-Methyl-3-furanthiol (MFT), sugar identity, all, ribose vs glucose",
+          "p_answered": 1.0
+        },
+        {
+          "cell": "Pyrazines, pH, pH 6-7.5, initial or label",
+          "p_answered": 1.0
+        },
+        {
+          "cell": "Hydrogen Sulfide, pH, pH 6-7.5, initial or label",
+          "p_answered": 1.0
+        },
+        {
+          "cell": "2-Furfurylthiol (FFT), sugar identity, all, ribose vs glucose",
+          "p_answered": 0.955
+        },
+        {
+          "cell": "DMHF, pH, pH 6-7.5, initial or label",
+          "p_answered": 0.835
+        },
+        {
+          "cell": "2-Furfurylthiol (FFT), pH, pH 6-7.5, initial or label",
+          "p_answered": 0.67
+        },
+        {
+          "cell": "Norfuraneol (NF), sugar identity, all, ribose vs glucose",
+          "p_answered": 0.67
+        },
+        {
+          "cell": "DMHF, sugar identity, all, ribose vs glucose",
+          "p_answered": 0.65
+        },
+        {
+          "cell": "2-Methyl-3-furanthiol (MFT), pH, pH 6-7.5, initial or label",
+          "p_answered": 0.63
+        },
+        {
+          "cell": "2-Furfurylthiol (FFT), sulfur source, all, thiamine vs cysteine",
+          "p_answered": 0.625
+        },
+        {
+          "cell": "Bis(2-methyl-3-furyl) disulfide, sulfur source, all, thiamine vs cysteine",
+          "p_answered": 0.605
+        },
+        {
+          "cell": "Phenylacetaldehyde, pH, pH 6-7.5, initial or label",
+          "p_answered": 0.585
+        }
+      ]
+    },
+    {
+      "design": "two laboratories, 2^3 x 2 each (no yeast extract)",
+      "pots": 36,
+      "new_labs": 2,
+      "matrix_shift_sd": 0.3,
+      "keying": "main_effect",
+      "sims": 200,
+      "cells_keyed": 57,
+      "newly_answered": {
+        "mean": 11.225,
+        "q05": 8.0,
+        "q95": 14.0,
+        "p_ge_1": 1.0,
+        "p_ge_3": 1.0
+      },
+      "newly_answered_with_literature": {
+        "mean": 7.675,
+        "p_ge_1": 1.0
+      },
+      "map_cells_newly_answered": {
+        "mean": 6.735,
+        "p_ge_1": 1.0
+      },
+      "answered_lost_mean": 0.005,
+      "step5_cells_two_test_labs": {
+        "before": 0,
+        "after": 57
+      },
+      "levers_feeding_no_cell": [],
+      "top_cells": [
+        {
+          "cell": "2-Methyl-3-furanthiol (MFT), sugar identity, all, ribose vs glucose",
+          "p_answered": 1.0
+        },
+        {
+          "cell": "Hydrogen Sulfide, pH, pH 6-7.5, initial or label",
+          "p_answered": 0.995
+        },
+        {
+          "cell": "Pyrazines, pH, pH 6-7.5, initial or label",
+          "p_answered": 0.975
+        },
+        {
+          "cell": "2-Furfurylthiol (FFT), sugar identity, all, ribose vs glucose",
+          "p_answered": 0.92
+        },
+        {
+          "cell": "DMHF, sugar identity, all, ribose vs glucose",
+          "p_answered": 0.785
+        },
+        {
+          "cell": "Norfuraneol (NF), sugar identity, all, ribose vs glucose",
+          "p_answered": 0.74
+        },
+        {
+          "cell": "2-Furfurylthiol (FFT), pH, pH 6-7.5, initial or label",
+          "p_answered": 0.705
+        },
+        {
+          "cell": "DMHF, pH, pH 6-7.5, initial or label",
+          "p_answered": 0.7
+        },
+        {
+          "cell": "2-Furfurylthiol (FFT), sulfur source, all, thiamine vs cysteine",
+          "p_answered": 0.635
+        },
+        {
+          "cell": "Phenylacetaldehyde, pH, pH 6-7.5, initial or label",
+          "p_answered": 0.625
+        },
+        {
+          "cell": "2-Methyl-3-furanthiol (MFT), pH, pH 6-7.5, initial or label",
+          "p_answered": 0.62
+        },
+        {
+          "cell": "Bis(2-methyl-3-furyl) disulfide, sulfur source, all, thiamine vs cysteine",
+          "p_answered": 0.61
+        }
+      ]
+    },
+    {
+      "design": "two laboratories, 2^3 x 2 each (no yeast extract)",
+      "pots": 36,
+      "new_labs": 2,
+      "matrix_shift_sd": 0.3,
+      "keying": "per_pair",
+      "sims": 200,
+      "cells_keyed": 57,
+      "newly_answered": {
+        "mean": 12.525,
+        "q05": 10.0,
+        "q95": 16.0,
+        "p_ge_1": 1.0,
+        "p_ge_3": 1.0
+      },
+      "newly_answered_with_literature": {
+        "mean": 8.05,
+        "p_ge_1": 1.0
+      },
+      "map_cells_newly_answered": {
+        "mean": 7.11,
+        "p_ge_1": 1.0
+      },
+      "answered_lost_mean": 0.025,
+      "step5_cells_two_test_labs": {
+        "before": 0,
+        "after": 57
+      },
+      "levers_feeding_no_cell": [],
+      "top_cells": [
+        {
+          "cell": "Hydrogen Sulfide, pH, pH 6-7.5, initial or label",
+          "p_answered": 0.985
+        },
+        {
+          "cell": "2-Methyl-3-furanthiol (MFT), sugar identity, all, ribose vs glucose",
+          "p_answered": 0.97
+        },
+        {
+          "cell": "Pyrazines, pH, pH 6-7.5, initial or label",
+          "p_answered": 0.965
+        },
+        {
+          "cell": "DMHF, sugar identity, all, ribose vs glucose",
+          "p_answered": 0.8
+        },
+        {
+          "cell": "Norfuraneol (NF), sugar identity, all, ribose vs glucose",
+          "p_answered": 0.795
+        },
+        {
+          "cell": "2-Furfurylthiol (FFT), sugar identity, all, ribose vs glucose",
+          "p_answered": 0.79
+        },
+        {
+          "cell": "Bis(2-methyl-3-furyl) disulfide, sulfur source, all, thiamine vs cysteine",
+          "p_answered": 0.775
+        },
+        {
+          "cell": "2-Furfurylthiol (FFT), sulfur source, all, thiamine vs cysteine",
+          "p_answered": 0.695
+        },
+        {
+          "cell": "Pyrazines, sugar identity, all, ribose vs glucose",
+          "p_answered": 0.68
+        },
+        {
+          "cell": "2-Furfurylthiol (FFT), pH, pH 6-7.5, initial or label",
+          "p_answered": 0.675
+        },
+        {
+          "cell": "DMHF, pH, pH 6-7.5, initial or label",
+          "p_answered": 0.645
+        },
+        {
+          "cell": "Bis(2-methyl-3-furyl) disulfide, sugar identity, all, ribose vs glucose",
+          "p_answered": 0.645
+        }
+      ]
+    },
+    {
+      "design": "three laboratories, 2^3 x 1 each (no yeast extract)",
+      "pots": 36,
+      "new_labs": 3,
+      "matrix_shift_sd": 0.0,
+      "keying": "main_effect",
+      "sims": 200,
+      "cells_keyed": 57,
+      "newly_answered": {
+        "mean": 33.59,
+        "q05": 27.950000000000003,
+        "q95": 40.0,
+        "p_ge_1": 1.0,
+        "p_ge_3": 1.0
+      },
+      "newly_answered_with_literature": {
+        "mean": 7.97,
+        "p_ge_1": 1.0
+      },
+      "map_cells_newly_answered": {
+        "mean": 18.33,
+        "p_ge_1": 1.0
+      },
+      "answered_lost_mean": 0.005,
+      "step5_cells_two_test_labs": {
+        "before": 0,
+        "after": 57
+      },
+      "levers_feeding_no_cell": [],
+      "top_cells": [
+        {
+          "cell": "Hydrogen Sulfide, pH, pH 6-7.5, initial or label",
+          "p_answered": 1.0
+        },
+        {
+          "cell": "2-Methyl-3-furanthiol (MFT), sugar identity, all, ribose vs glucose",
+          "p_answered": 1.0
+        },
+        {
+          "cell": "Pyrazines, pH, pH 6-7.5, initial or label",
+          "p_answered": 1.0
+        },
+        {
+          "cell": "2-Furfurylthiol (FFT), sugar identity, all, ribose vs glucose",
+          "p_answered": 0.925
+        },
+        {
+          "cell": "DMHF, pH, pH 6-7.5, initial or label",
+          "p_answered": 0.745
+        },
+        {
+          "cell": "2-Furfurylthiol (FFT), pH, pH 6-7.5, initial or label",
+          "p_answered": 0.715
+        },
+        {
+          "cell": "Norfuraneol (NF), sugar identity, all, ribose vs glucose",
+          "p_answered": 0.71
+        },
+        {
+          "cell": "Norfuraneol (NF), sulfur source, all, thiamine vs cysteine",
+          "p_answered": 0.7
+        },
+        {
+          "cell": "2,5-Dimethylpyrazine, pH, pH 6-7.5, initial or label",
+          "p_answered": 0.665
+        },
+        {
+          "cell": "1-Octen-3-ol, sugar identity, all, ribose vs glucose",
+          "p_answered": 0.66
+        },
+        {
+          "cell": "DMHF, sugar identity, all, ribose vs glucose",
+          "p_answered": 0.645
+        },
+        {
+          "cell": "2-Methylbutanal, sulfur source, all, thiamine vs cysteine",
+          "p_answered": 0.645
+        }
+      ]
+    },
+    {
+      "design": "three laboratories, 2^3 x 1 each (no yeast extract)",
+      "pots": 36,
+      "new_labs": 3,
+      "matrix_shift_sd": 0.3,
+      "keying": "main_effect",
+      "sims": 200,
+      "cells_keyed": 57,
+      "newly_answered": {
+        "mean": 35.78,
+        "q05": 30.0,
+        "q95": 41.0,
+        "p_ge_1": 1.0,
+        "p_ge_3": 1.0
+      },
+      "newly_answered_with_literature": {
+        "mean": 8.15,
+        "p_ge_1": 1.0
+      },
+      "map_cells_newly_answered": {
+        "mean": 18.465,
+        "p_ge_1": 1.0
+      },
+      "answered_lost_mean": 0.0,
+      "step5_cells_two_test_labs": {
+        "before": 0,
+        "after": 57
+      },
+      "levers_feeding_no_cell": [],
+      "top_cells": [
+        {
+          "cell": "Hydrogen Sulfide, pH, pH 6-7.5, initial or label",
+          "p_answered": 0.995
+        },
+        {
+          "cell": "2-Methyl-3-furanthiol (MFT), sugar identity, all, ribose vs glucose",
+          "p_answered": 0.99
+        },
+        {
+          "cell": "Pyrazines, pH, pH 6-7.5, initial or label",
+          "p_answered": 0.98
+        },
+        {
+          "cell": "2-Furfurylthiol (FFT), sugar identity, all, ribose vs glucose",
+          "p_answered": 0.94
+        },
+        {
+          "cell": "Norfuraneol (NF), sugar identity, all, ribose vs glucose",
+          "p_answered": 0.725
+        },
+        {
+          "cell": "DMHF, pH, pH 6-7.5, initial or label",
+          "p_answered": 0.715
+        },
+        {
+          "cell": "Hydrogen Sulfide, sulfur source, all, thiamine vs cysteine",
+          "p_answered": 0.7
+        },
+        {
+          "cell": "Nonanal, sulfur source, all, thiamine vs cysteine",
+          "p_answered": 0.695
+        },
+        {
+          "cell": "DMHF, sugar identity, all, ribose vs glucose",
+          "p_answered": 0.69
+        },
+        {
+          "cell": "Hexanal, sugar identity, all, ribose vs glucose",
+          "p_answered": 0.69
+        },
+        {
+          "cell": "Phenylacetaldehyde, sugar identity, all, ribose vs glucose",
+          "p_answered": 0.675
+        },
+        {
+          "cell": "Methional (3-(methylthio)propanal), sugar identity, all, ribose vs glucose",
+          "p_answered": 0.675
+        }
+      ]
+    },
+    {
+      "design": "three laboratories, 2^3 x 1 each (no yeast extract)",
+      "pots": 36,
+      "new_labs": 3,
+      "matrix_shift_sd": 0.3,
+      "keying": "per_pair",
+      "sims": 200,
+      "cells_keyed": 57,
+      "newly_answered": {
+        "mean": 38.15,
+        "q05": 32.0,
+        "q95": 43.04999999999998,
+        "p_ge_1": 1.0,
+        "p_ge_3": 1.0
+      },
+      "newly_answered_with_literature": {
+        "mean": 8.19,
+        "p_ge_1": 1.0
+      },
+      "map_cells_newly_answered": {
+        "mean": 18.66,
+        "p_ge_1": 1.0
+      },
+      "answered_lost_mean": 0.03,
+      "step5_cells_two_test_labs": {
+        "before": 0,
+        "after": 57
+      },
+      "levers_feeding_no_cell": [],
+      "top_cells": [
+        {
+          "cell": "Pyrazines, pH, pH 6-7.5, initial or label",
+          "p_answered": 0.98
+        },
+        {
+          "cell": "2-Methyl-3-furanthiol (MFT), sugar identity, all, ribose vs glucose",
+          "p_answered": 0.975
+        },
+        {
+          "cell": "Hydrogen Sulfide, pH, pH 6-7.5, initial or label",
+          "p_answered": 0.97
+        },
+        {
+          "cell": "2-Furfurylthiol (FFT), sugar identity, all, ribose vs glucose",
+          "p_answered": 0.86
+        },
+        {
+          "cell": "Phenylacetaldehyde, sulfur source, all, thiamine vs cysteine",
+          "p_answered": 0.74
+        },
+        {
+          "cell": "2-Pentylfuran, sulfur source, all, thiamine vs cysteine",
+          "p_answered": 0.735
+        },
+        {
+          "cell": "Norfuraneol (NF), sugar identity, all, ribose vs glucose",
+          "p_answered": 0.73
+        },
+        {
+          "cell": "2-Ethyl-3,5-dimethylpyrazine, sulfur source, all, thiamine vs cysteine",
+          "p_answered": 0.725
+        },
+        {
+          "cell": "2,5-Dimethylpyrazine, sugar identity, all, ribose vs glucose",
+          "p_answered": 0.72
+        },
+        {
+          "cell": "Hydrogen Sulfide, sulfur source, all, thiamine vs cysteine",
+          "p_answered": 0.72
+        },
+        {
+          "cell": "Nonanal, sugar identity, all, ribose vs glucose",
+          "p_answered": 0.72
+        },
+        {
+          "cell": "2-Furfurylthiol (FFT), sulfur source, all, thiamine vs cysteine",
+          "p_answered": 0.715
+        }
+      ]
+    },
+    {
+      "design": "three laboratories, targeted replication (sugar x sulfur source 2 x 3, x 2)",
+      "pots": 36,
+      "new_labs": 3,
+      "matrix_shift_sd": 0.0,
+      "keying": "main_effect",
+      "sims": 200,
+      "cells_keyed": 57,
+      "newly_answered": {
+        "mean": 28.665,
+        "q05": 23.0,
+        "q95": 34.0,
+        "p_ge_1": 1.0,
+        "p_ge_3": 1.0
+      },
+      "newly_answered_with_literature": {
+        "mean": 5.92,
+        "p_ge_1": 1.0
+      },
+      "map_cells_newly_answered": {
+        "mean": 8.77,
+        "p_ge_1": 1.0
+      },
+      "answered_lost_mean": 0.025,
+      "step5_cells_two_test_labs": {
+        "before": 0,
+        "after": 57
+      },
+      "levers_feeding_no_cell": [],
+      "top_cells": [
+        {
+          "cell": "2-Methyl-3-furanthiol (MFT), sugar identity, all, ribose vs glucose",
+          "p_answered": 1.0
+        },
+        {
+          "cell": "Hexanal, sulfur source, all, glutathione vs cysteine",
+          "p_answered": 0.975
+        },
+        {
+          "cell": "2-Furfurylthiol (FFT), sugar identity, all, ribose vs glucose",
+          "p_answered": 0.965
+        },
+        {
+          "cell": "Furfural, sulfur source, all, none vs cysteine",
+          "p_answered": 0.835
+        },
+        {
+          "cell": "DMHF, sugar identity, all, ribose vs glucose",
+          "p_answered": 0.665
+        },
+        {
+          "cell": "3-Methylbutanal, sugar identity, all, ribose vs glucose",
+          "p_answered": 0.65
+        },
+        {
+          "cell": "Norfuraneol (NF), sugar identity, all, ribose vs glucose",
+          "p_answered": 0.63
+        },
+        {
+          "cell": "DMHF, sulfur source, all, glutathione vs cysteine",
+          "p_answered": 0.61
+        },
+        {
+          "cell": "2-Pentylfuran, sulfur source, all, none vs cysteine",
+          "p_answered": 0.61
+        },
+        {
+          "cell": "2-Methylbutanal, sugar identity, all, ribose vs glucose",
+          "p_answered": 0.605
+        },
+        {
+          "cell": "1-Octen-3-ol, sugar identity, all, ribose vs glucose",
+          "p_answered": 0.595
+        },
+        {
+          "cell": "Nonanal, sugar identity, all, ribose vs glucose",
+          "p_answered": 0.585
+        }
+      ]
+    },
+    {
+      "design": "three laboratories, targeted replication (sugar x sulfur source 2 x 3, x 2)",
+      "pots": 36,
+      "new_labs": 3,
+      "matrix_shift_sd": 0.3,
+      "keying": "main_effect",
+      "sims": 200,
+      "cells_keyed": 57,
+      "newly_answered": {
+        "mean": 30.71,
+        "q05": 25.0,
+        "q95": 36.0,
+        "p_ge_1": 1.0,
+        "p_ge_3": 1.0
+      },
+      "newly_answered_with_literature": {
+        "mean": 6.025,
+        "p_ge_1": 1.0
+      },
+      "map_cells_newly_answered": {
+        "mean": 8.86,
+        "p_ge_1": 1.0
+      },
+      "answered_lost_mean": 0.07,
+      "step5_cells_two_test_labs": {
+        "before": 0,
+        "after": 57
+      },
+      "levers_feeding_no_cell": [],
+      "top_cells": [
+        {
+          "cell": "2-Methyl-3-furanthiol (MFT), sugar identity, all, ribose vs glucose",
+          "p_answered": 0.995
+        },
+        {
+          "cell": "2-Furfurylthiol (FFT), sugar identity, all, ribose vs glucose",
+          "p_answered": 0.925
+        },
+        {
+          "cell": "Hexanal, sulfur source, all, glutathione vs cysteine",
+          "p_answered": 0.885
+        },
+        {
+          "cell": "Norfuraneol (NF), sugar identity, all, ribose vs glucose",
+          "p_answered": 0.765
+        },
+        {
+          "cell": "Furfural, sulfur source, all, none vs cysteine",
+          "p_answered": 0.705
+        },
+        {
+          "cell": "DMHF, sugar identity, all, ribose vs glucose",
+          "p_answered": 0.695
+        },
+        {
+          "cell": "Hydrogen Sulfide, sugar identity, all, ribose vs glucose",
+          "p_answered": 0.68
+        },
+        {
+          "cell": "2-Pentylfuran, sugar identity, all, ribose vs glucose",
+          "p_answered": 0.67
+        },
+        {
+          "cell": "Nonanal, sugar identity, all, ribose vs glucose",
+          "p_answered": 0.655
+        },
+        {
+          "cell": "Trimethylpyrazine, sugar identity, all, ribose vs glucose",
+          "p_answered": 0.65
+        },
+        {
+          "cell": "Hexanal, sugar identity, all, ribose vs glucose",
+          "p_answered": 0.645
+        },
+        {
+          "cell": "3-Methylbutanal, sugar identity, all, ribose vs glucose",
+          "p_answered": 0.64
+        }
+      ]
+    },
+    {
+      "design": "three laboratories, targeted replication (sugar x sulfur source 2 x 3, x 2)",
+      "pots": 36,
+      "new_labs": 3,
+      "matrix_shift_sd": 0.3,
+      "keying": "per_pair",
+      "sims": 200,
+      "cells_keyed": 57,
+      "newly_answered": {
+        "mean": 33.665,
+        "q05": 27.0,
+        "q95": 40.0,
+        "p_ge_1": 1.0,
+        "p_ge_3": 1.0
+      },
+      "newly_answered_with_literature": {
+        "mean": 6.79,
+        "p_ge_1": 1.0
+      },
+      "map_cells_newly_answered": {
+        "mean": 8.885,
+        "p_ge_1": 1.0
+      },
+      "answered_lost_mean": 0.12,
+      "step5_cells_two_test_labs": {
+        "before": 0,
+        "after": 57
+      },
+      "levers_feeding_no_cell": [],
+      "top_cells": [
+        {
+          "cell": "2-Methyl-3-furanthiol (MFT), sugar identity, all, ribose vs glucose",
+          "p_answered": 0.98
+        },
+        {
+          "cell": "2-Furfurylthiol (FFT), sugar identity, all, ribose vs glucose",
+          "p_answered": 0.875
+        },
+        {
+          "cell": "Hexanal, sulfur source, all, glutathione vs cysteine",
+          "p_answered": 0.865
+        },
+        {
+          "cell": "Norfuraneol (NF), sugar identity, all, ribose vs glucose",
+          "p_answered": 0.775
+        },
+        {
+          "cell": "2-Methylbutanal, sugar identity, all, ribose vs glucose",
+          "p_answered": 0.755
+        },
+        {
+          "cell": "Furfural, sulfur source, all, none vs cysteine",
+          "p_answered": 0.745
+        },
+        {
+          "cell": "2,5-Dimethylpyrazine, sugar identity, all, ribose vs glucose",
+          "p_answered": 0.715
+        },
+        {
+          "cell": "2-Pentylfuran, sugar identity, all, ribose vs glucose",
+          "p_answered": 0.71
+        },
+        {
+          "cell": "Hydrogen Sulfide, sugar identity, all, ribose vs glucose",
+          "p_answered": 0.7
+        },
+        {
+          "cell": "Furfural, sulfur source, all, glutathione vs cysteine",
+          "p_answered": 0.7
+        },
+        {
+          "cell": "3-Methylbutanal, sugar identity, all, ribose vs glucose",
+          "p_answered": 0.695
+        },
+        {
+          "cell": "Hexanal, sugar identity, all, ribose vs glucose",
+          "p_answered": 0.695
+        }
+      ]
+    },
+    {
+      "design": "reference: P3 in two laboratories (72 pots)",
+      "pots": 72,
+      "new_labs": 2,
+      "matrix_shift_sd": 0.0,
+      "keying": "main_effect",
+      "sims": 200,
+      "cells_keyed": 57,
+      "newly_answered": {
+        "mean": 11.11,
+        "q05": 8.0,
+        "q95": 14.0,
+        "p_ge_1": 1.0,
+        "p_ge_3": 1.0
+      },
+      "newly_answered_with_literature": {
+        "mean": 7.875,
+        "p_ge_1": 1.0
+      },
+      "map_cells_newly_answered": {
+        "mean": 6.8,
+        "p_ge_1": 1.0
+      },
+      "answered_lost_mean": 0.0,
+      "step5_cells_two_test_labs": {
+        "before": 0,
+        "after": 57
+      },
+      "levers_feeding_no_cell": [
+        "yeast extract"
+      ],
+      "top_cells": [
+        {
+          "cell": "2-Methyl-3-furanthiol (MFT), sugar identity, all, ribose vs glucose",
+          "p_answered": 1.0
+        },
+        {
+          "cell": "Hydrogen Sulfide, pH, pH 6-7.5, initial or label",
+          "p_answered": 1.0
+        },
+        {
+          "cell": "Pyrazines, pH, pH 6-7.5, initial or label",
+          "p_answered": 0.995
+        },
+        {
+          "cell": "2-Furfurylthiol (FFT), sugar identity, all, ribose vs glucose",
+          "p_answered": 0.975
+        },
+        {
+          "cell": "DMHF, pH, pH 6-7.5, initial or label",
+          "p_answered": 0.775
+        },
+        {
+          "cell": "2-Furfurylthiol (FFT), pH, pH 6-7.5, initial or label",
+          "p_answered": 0.725
+        },
+        {
+          "cell": "DMHF, sugar identity, all, ribose vs glucose",
+          "p_answered": 0.695
+        },
+        {
+          "cell": "Norfuraneol (NF), sugar identity, all, ribose vs glucose",
+          "p_answered": 0.68
+        },
+        {
+          "cell": "Phenylacetaldehyde, pH, pH 6-7.5, initial or label",
+          "p_answered": 0.66
+        },
+        {
+          "cell": "Bis(2-methyl-3-furyl) disulfide, sulfur source, all, thiamine vs cysteine",
+          "p_answered": 0.645
+        },
+        {
+          "cell": "2-Methyl-3-furanthiol (MFT), pH, pH 6-7.5, initial or label",
+          "p_answered": 0.635
+        },
+        {
+          "cell": "Pyrazines, sugar identity, all, ribose vs glucose",
+          "p_answered": 0.535
+        }
+      ]
+    },
+    {
+      "design": "reference: P3 in two laboratories (72 pots)",
+      "pots": 72,
+      "new_labs": 2,
+      "matrix_shift_sd": 0.3,
+      "keying": "main_effect",
+      "sims": 200,
+      "cells_keyed": 57,
+      "newly_answered": {
+        "mean": 11.15,
+        "q05": 8.0,
+        "q95": 14.0,
+        "p_ge_1": 1.0,
+        "p_ge_3": 1.0
+      },
+      "newly_answered_with_literature": {
+        "mean": 7.75,
+        "p_ge_1": 1.0
+      },
+      "map_cells_newly_answered": {
+        "mean": 6.75,
+        "p_ge_1": 1.0
+      },
+      "answered_lost_mean": 0.0,
+      "step5_cells_two_test_labs": {
+        "before": 0,
+        "after": 57
+      },
+      "levers_feeding_no_cell": [
+        "yeast extract"
+      ],
+      "top_cells": [
+        {
+          "cell": "2-Methyl-3-furanthiol (MFT), sugar identity, all, ribose vs glucose",
+          "p_answered": 1.0
+        },
+        {
+          "cell": "Hydrogen Sulfide, pH, pH 6-7.5, initial or label",
+          "p_answered": 0.99
+        },
+        {
+          "cell": "Pyrazines, pH, pH 6-7.5, initial or label",
+          "p_answered": 0.98
+        },
+        {
+          "cell": "2-Furfurylthiol (FFT), sugar identity, all, ribose vs glucose",
+          "p_answered": 0.945
+        },
+        {
+          "cell": "DMHF, pH, pH 6-7.5, initial or label",
+          "p_answered": 0.765
+        },
+        {
+          "cell": "Norfuraneol (NF), sugar identity, all, ribose vs glucose",
+          "p_answered": 0.725
+        },
+        {
+          "cell": "2-Furfurylthiol (FFT), pH, pH 6-7.5, initial or label",
+          "p_answered": 0.69
+        },
+        {
+          "cell": "DMHF, sugar identity, all, ribose vs glucose",
+          "p_answered": 0.685
+        },
+        {
+          "cell": "Bis(2-methyl-3-furyl) disulfide, sulfur source, all, thiamine vs cysteine",
+          "p_answered": 0.64
+        },
+        {
+          "cell": "2-Methyl-3-furanthiol (MFT), pH, pH 6-7.5, initial or label",
+          "p_answered": 0.595
+        },
+        {
+          "cell": "Phenylacetaldehyde, pH, pH 6-7.5, initial or label",
+          "p_answered": 0.555
+        },
+        {
+          "cell": "Pyrazines, sugar identity, all, ribose vs glucose",
+          "p_answered": 0.535
+        }
+      ]
+    },
+    {
+      "design": "reference: P3 in two laboratories (72 pots)",
+      "pots": 72,
+      "new_labs": 2,
+      "matrix_shift_sd": 0.3,
+      "keying": "per_pair",
+      "sims": 200,
+      "cells_keyed": 57,
+      "newly_answered": {
+        "mean": 12.865,
+        "q05": 10.0,
+        "q95": 16.0,
+        "p_ge_1": 1.0,
+        "p_ge_3": 1.0
+      },
+      "newly_answered_with_literature": {
+        "mean": 8.15,
+        "p_ge_1": 1.0
+      },
+      "map_cells_newly_answered": {
+        "mean": 7.09,
+        "p_ge_1": 1.0
+      },
+      "answered_lost_mean": 0.03,
+      "step5_cells_two_test_labs": {
+        "before": 0,
+        "after": 57
+      },
+      "levers_feeding_no_cell": [
+        "yeast extract"
+      ],
+      "top_cells": [
+        {
+          "cell": "Pyrazines, pH, pH 6-7.5, initial or label",
+          "p_answered": 0.98
+        },
+        {
+          "cell": "Hydrogen Sulfide, pH, pH 6-7.5, initial or label",
+          "p_answered": 0.975
+        },
+        {
+          "cell": "2-Methyl-3-furanthiol (MFT), sugar identity, all, ribose vs glucose",
+          "p_answered": 0.94
+        },
+        {
+          "cell": "2-Furfurylthiol (FFT), sugar identity, all, ribose vs glucose",
+          "p_answered": 0.845
+        },
+        {
+          "cell": "Norfuraneol (NF), sugar identity, all, ribose vs glucose",
+          "p_answered": 0.79
+        },
+        {
+          "cell": "DMHF, sugar identity, all, ribose vs glucose",
+          "p_answered": 0.79
+        },
+        {
+          "cell": "2-Furfurylthiol (FFT), pH, pH 6-7.5, initial or label",
+          "p_answered": 0.735
+        },
+        {
+          "cell": "2-Furfurylthiol (FFT), sulfur source, all, thiamine vs cysteine",
+          "p_answered": 0.73
+        },
+        {
+          "cell": "Bis(2-methyl-3-furyl) disulfide, sulfur source, all, thiamine vs cysteine",
+          "p_answered": 0.715
+        },
+        {
+          "cell": "Bis(2-methyl-3-furyl) disulfide, sugar identity, all, ribose vs glucose",
+          "p_answered": 0.7
+        },
+        {
+          "cell": "Pyrazines, sugar identity, all, ribose vs glucose",
+          "p_answered": 0.675
+        },
+        {
+          "cell": "DMHF, pH, pH 6-7.5, initial or label",
+          "p_answered": 0.66
+        }
+      ]
+    }
+  ],
+  "provenance": {
+    "artifact": "lever_design_preposterior",
+    "generated_on": "2026-11-11",
+    "git": {
+      "commit": "eb5a0f14f8883a988e1854d671ea8420f9e2585e",
+      "short": "eb5a0f14",
+      "branch": "lever-keying-round3",
+      "dirty": false
+    },
+    "generated_by": "scripts/generators/build_lever_design_preposterior.py",
+    "inputs": [
+      {
+        "path": "docs/reference/lever_table/contrasts/Zhang2024.yml",
+        "sha256": "3ab67b0ca88bebe134d5aa54764e689d12243a44a7376643be81f319be95fa1c"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/adams2001.yml",
+        "sha256": "382e917f924eac837e679501a647ea3df5d46097cf93af2af46ed0814e7b0890"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/arnold1971.yml",
+        "sha256": "b7b6f953251fddf900cea0706e65f7b1727a6769b11645aedf54d29ed51c3584"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/balagiannis2009__families.yml",
+        "sha256": "08090421c50731d84a4d045118296e48d39272ea1fc5c659bd595a59abc18992"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/blank1997__families.yml",
+        "sha256": "8887cd21dba55dd33ef236926254dda160ea770691a3b63729103e855b758aa8"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/cerny2007.yml",
+        "sha256": "79440bc09e637af4d7dc9fd6add50e3aa52933cc97da9d94c324aa8441e08842"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/cerny2007__families.yml",
+        "sha256": "c393054bee91e33be719cb52793e8198597f872ae0493c0cadeb9a5d3accfe1b"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/chan1994b__families.yml",
+        "sha256": "88b2457b03d7844912a2e7db41709a95673fa04f69363a5c5b7a45374c9f476d"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/du2023__families.yml",
+        "sha256": "9914b6a6d289e6790d0d46a4b8ef2ac4dd6a19278a50d92bf00a894d17637b99"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/du2025__families.yml",
+        "sha256": "012ca89304ae5642aa9d645f54ea80456023e221ca73d4db3904343dc54d6784"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/elmore1997__families.yml",
+        "sha256": "805fb646c248fbf89ee29dec14f2a5d821de2ba3547b2716273b7d735f7ff02f"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/elmore2002.yml",
+        "sha256": "72d12c2e6887c7d66693b88e85e0daaed19aedf896598a3243de989d431f398a"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/elmore2002__families.yml",
+        "sha256": "cbd7f9e190dbb785b27f3ee8e86b1e4c69ab14c7d90c10009cd50f71fe469a99"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/farmer1990.yml",
+        "sha256": "9bdd916ed84b09e2aa9c0d5df0682e7bbaa0f1a63843e2411f1757d321362d30"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/farmer1992__families.yml",
+        "sha256": "6c2f8a485d0377b612119b6ace49b1ccffc5d34592edaf92ef82af6cdb0ae6f7"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/feng2022.yml",
+        "sha256": "7122d8df4eccb64a96f7c853e2371f3f19f7483b6ce78c87cc40d49627120877"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/granvogl2006__families.yml",
+        "sha256": "c1dc74790cfedd9dce7a05a1149e242f62e6a98d259598ee30fcf03107ae4aa3"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/grosch1992.yml",
+        "sha256": "e09d4a48c11445e141058b55c222b06e7715b792088aefa583cb011b7e4a1d39"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/haleva1999__families.yml",
+        "sha256": "bc875461bbbfce43ad5b8ee8c836ee34586029b79c2a7e3c64287650aad34389"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/hartman1984b.yml",
+        "sha256": "c4d4b43ba2c0a3d1b37f2c35dc9e3044206fbd10013f60234610fb32ddc2f138"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/hidalgo1993__families.yml",
+        "sha256": "01787f01adea48e5521c4cf3dfb91e8127847eeb71fe7a30c548c4e808d7d344"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/hidalgo2013__families.yml",
+        "sha256": "202e59df36c3ecfc902d2192b7bc1a291244f340e80862492d1ed638c5ae7fb0"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/hincelin1992.yml",
+        "sha256": "831d2d054e56b6b23e477eb8b1111e9e7b93f6516d6043962ff1d41da1ab7a76"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/hofmann1998.yml",
+        "sha256": "a11a08104d2f92c89a8507fda499868f150d7f1b935921776d35c34b939d29c2"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/hofmann2000__families.yml",
+        "sha256": "ff5cc1c1767a7396935aa03f4c21a409617e6d5f94273a447d24a4fdec05252b"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/hofmann2000b__families.yml",
+        "sha256": "3a6e5a8c51bed9c05fbd1f4a2fbfaf369d5f291db2d105873dbb3365e597b7b3"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/hwang1995__families.yml",
+        "sha256": "56186a354b7a2664d806cc7d4112a7f746d49f37136dfc84416d3966c57fcc4b"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/hwang1995b__families.yml",
+        "sha256": "607e5a900e8f18723008a15853b8265139816477605d83280303ebf00ab8321d"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/kobayasi1965.yml",
+        "sha256": "e9eca2f0073ed90b413b314d15eff84bc18c1ff65d3253eedc40440e5946617e"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/kumazawa2003.yml",
+        "sha256": "d70f831f68f08d2f079083436cfe2ee8232f6c9f36c9722f0de6a8f0d8039471"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/leahy1989__families.yml",
+        "sha256": "506a543d43532f5f2eeef4a5a1e5a750058c3531230237bc08086661bb86edef"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/leahy1989a__families.yml",
+        "sha256": "83ce385ebe5713e4e36a0de0f28875cafea71b89e25c201112d14ee2a44b9e7b"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/mandin1999__families.yml",
+        "sha256": "109c67f04f9378fc5be29b9472df49d169d46d324452c522034d67ea1bb3a54d"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/martin2001__families.yml",
+        "sha256": "451bfdec8b569cacadb3f91ef45492d3ded6288c920e66680f426104bdf2c7b3"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/meynier1995.yml",
+        "sha256": "55cc4c0568aab56174c676c43965991573f3362e549140a3f5fa1f4a353fb979"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/meynier1995__families.yml",
+        "sha256": "aa61e5c6aee5c83cc98a0ea9895c2093e297979e9e964737d3ef825ae97c205c"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/meynier2004__families.yml",
+        "sha256": "6c1474ff6d1610503ad95f6511ac0db301067c53ff031ba07f5ee561464eee61"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/mikami2017__families.yml",
+        "sha256": "28faacbf0b852eeab9759a1cb9580056ba69c64f17367b51ae414fc50755804d"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/mizutani1960.yml",
+        "sha256": "36b5461c1c8bf9bb829192c1481118b46bcaabf7689f555bbdb5a1cbf8842821"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/monforte2021__families.yml",
+        "sha256": "8ed92a2f514aacfb85653585afd0e920c2375f1031ceea84c922e873fec8fdb5"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/mottram2002.yml",
+        "sha256": "d9858cc2fd75a60ebc63ae4ed49b7293a8577bbdbee5b2cbcf0a3444f1060c98"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/mottram2002__families.yml",
+        "sha256": "bd26da477256cc123ac7ab1699d258f8ebd52db4eb029a287c762abf6aeb30c6"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/obata1960.yml",
+        "sha256": "7e1339147e9ad3a0ebec9e114c3040059f84f2e4be30b4ae6f837cbab2c1d5c6"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/scalone2015__families.yml",
+        "sha256": "467d1c1c1173b1b5ccea0cdb8cf94ecd09da673e4c49d456d3f485f55c817045"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/schirle1992__families.yml",
+        "sha256": "812d753d360d5560bf7d6f967626320c7e96ee602bf7c7d5b33247e57b1ac098"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/shibamoto1977__families.yml",
+        "sha256": "fa55f8d209a461fd2bdc90e3be0e4a7ad7b06cfcf2877bfa22a6fda7e5d2bdb1"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/shu1985.yml",
+        "sha256": "38ed130813edfa52e60595fedf907f1634bb56f26984c229a34c9482fe970007"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/tai1997.yml",
+        "sha256": "b65a9d2692b0b094bb687d4a81080ed289dc5590733899b8a2467c40afefce86"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/tai1998.yml",
+        "sha256": "423d75015439d6c4f344291ada8b48fa99e799dec7a4a505c559997002f47c3e"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/thomas2014.yml",
+        "sha256": "a4feee4e1cc32a02e410e75de89967c483ca8fd004cfc490fb2594f1a44b3566"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/us10076126.yml",
+        "sha256": "0ab75b3b0d25c98c1f98848835bc945148d36b868e6132d4b43f66781b399a4a"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/vanlancker2010__families.yml",
+        "sha256": "ed48dbd0b0ffe57c042d86b50bc7e9dda705937f0d74ba39b64cecab8e41327e"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/vanlancker2012__families.yml",
+        "sha256": "2972c678e0c78fc3299315b379dde822969fd12af722bcc4f240ba15ce66781a"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/vanseeventer2001.yml",
+        "sha256": "1ac09daa2c684da5348845aa1ed873b54acb5f5b3f2a9ddfefcc54b4ac5c676e"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/weenen2001__families.yml",
+        "sha256": "0b675e7aaac4882a000a90f5d61c9a2010d4397bf75a5b952f0ba51711e4781f"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/whitfield1988__families.yml",
+        "sha256": "1a38054047a832773531ffd7b8ec450c96b9a591faf6cbf9ae5e331fffa6970c"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/xu2011__families.yml",
+        "sha256": "0991efd64bc0594bb7821ff51ca069d132681bbc24092d63dd3e64501b4dc35c"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/yiltirak2026__families.yml",
+        "sha256": "9dfb9debb42279bb1294ad7e08448b13b8adc2ada5409003e891493d5776877c"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zamora2006__families.yml",
+        "sha256": "a52844390176d8a4b58514cd72a1d0fa73c20f2a9ca1057f3b7f3cdf685d3be9"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zamora2007__families.yml",
+        "sha256": "bdaf5d603b5589f903df99cdb12e6857de97772b2209facc53bd7ab93ef028d5"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zamora2008__families.yml",
+        "sha256": "988bfada65606280dfc3958cb502455fede510aba30082584270b5b8b5a662ac"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zamora2013__families.yml",
+        "sha256": "0f712c5aadd503242f258bb9f6ce509ccf369b266d908c62302f32a5d3dae3d4"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zamora2015__families.yml",
+        "sha256": "d5058ce2634ec774095822f7c6ab9430e49d4c61d2704fe0d4eeedf66eb704dc"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zamora2020__families.yml",
+        "sha256": "d9c95b20a334171ab54d9b42396efe18b7b89d413da0a45b616e3ed02e4420c2"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zhang1988.yml",
+        "sha256": "d8d59114cfbaaafda8446e95267f546a68ab3af5db7fca6a4675b84f9aee92f8"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zhang1989__families.yml",
+        "sha256": "b17d1a5d8c8ba9ad44e3e59ef590c81e1e74db0f68c932b18942defc9df635d8"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zhang1991.yml",
+        "sha256": "47d142c1d6ee57d654dc4096276a4eb8b487ffc3ad8cbb1e724c5b4dcef792c5"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zhang1991b.yml",
+        "sha256": "3d5e5b4d5f951b2e6f67b4512d6c00e5eb268515019ca50af75b1d4003e884bc"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zheng1994.yml",
+        "sha256": "f092b3a0a3d1a755d10fb484799d8ef8d68177d68df172c013b58591772f9be3"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zhou2022__families.yml",
+        "sha256": "e8f5ffb28ba3ddb5bd20c9b0df2697777e61105eaf33e1b79e60d48df367cb79"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zhou2023.yml",
+        "sha256": "6a0e93487ef6ae9dfa23956f8388a5869e598f7f3d5129d5c3250b91c6204ee8"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zhou2023c.yml",
+        "sha256": "85182525c3b45952be61e1341a78a7af8be334345200d6438dc39cca29a0e498"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zhou2023c__families.yml",
+        "sha256": "5f251761746b3d7c5ee24f540d5e788bf88d6d0f616603757e11d511c7f6a90a"
+      },
+      {
+        "path": "docs/reference/contrast_benchmark/split.yml",
+        "sha256": "1098b4b420330aa737497f6c855454c732dc394ce2007be6fd94dd9933cb36ac"
+      }
+    ]
+  }
+}
