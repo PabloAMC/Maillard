@@ -238,14 +238,17 @@ def assess(spec: Any, targets: Sequence[str], b0_run: Any = None) -> Verdict:
     verdict.ph["B0"] = _ph_of(b0_run)
     try:
         # the rival points are independent integrations, each under its own Config: run through ``parallel`` (forked
-        # per call, bit-identical to the serial loop; MAILLARD_WORKERS workers, serial by default and inside a worker)
+        # per call, bit-identical to the serial loop; MAILLARD_WORKERS workers, serial by default and inside a worker).
+        # 2026-11-12: lazily (``imap_ordered``), so the first failing point stops the rest as the serial loop does; a
+        # collect-all map ran every point of a pot whose second point had already refused it (CI's unit tier stalled
+        # ~5 - 16 min on one 250 C predict: 23 points x up to RIVAL_RHS_BUDGET evaluations, 4 of them over budget).
         from . import parallel
 
         base = config.Config.from_globals()
         points = rival_points()
         jobs = [parallel.Configured((spec, tuple(targets), drift), base.replace(changes))
                 for changes, drift in points.values()]
-        for point, (values, ph) in zip(points, parallel.map_ordered(_rival_values, jobs)):
+        for point, (values, ph) in zip(points, parallel.imap_ordered(_rival_values, jobs)):
             verdict.values[point] = values
             verdict.ph[point] = ph
     except Exception as exc:  # noqa: BLE001 - a rival that cannot be run cannot show independence: refuse
