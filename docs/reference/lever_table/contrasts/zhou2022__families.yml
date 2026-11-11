@@ -1,0 +1,2340 @@
+# Resolved (third read) from reader_a / reader_b; rows the comparison listed were re-read in the PDF.
+source: zhou2022
+pdf: data/articles/zhou2022.pdf
+reader: resolved
+scope_note: Pyrazine and methylpyrazine in AX-ARP alone are ND at all times (no time series keyed for them); 2-propionylfuran,
+  2,3-butanedione and the thiols are not on the list. Quantified with standard curves vs internal standard (absolute). Table
+  3 pH 7 '20 ARP' and '20 ARP + 20 Cys' columns reprint the Table 1 60-min values (shared arms). The all-ND pH 7 2,5-dimethylpyrazine
+  dose ladder (Table 3) is kept, entering no estimate.
+contrasts:
+- id: zhou2022-1
+  odorant: Unsubstituted pyrazine
+  lever_class: precursor dose
+  lever: cysteine added to 20 mmol/L AX-ARP (0, 6, 14, 20 mmol/L), initial pH 7
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: not a time course
+  resolution: agreed
+  arms:
+  - label: 20 ARP, pH 7
+    lever_value: 0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: 20 ARP + 6 Cys, pH 7
+    lever_value: 6
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+        L-cysteine: 6 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: 20 ARP + 14 Cys, pH 7
+    lever_value: 14
+    value: 4.01
+    censor: none
+    limit: null
+    n: null
+    sd: 0.29
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+        L-cysteine: 14 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: 20 ARP + 20 Cys, pH 7
+    lever_value: 20
+    value: 11.97
+    censor: none
+    limit: null
+    n: null
+    sd: 1.18
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+        L-cysteine: 20 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+- id: zhou2022-2
+  odorant: Unsubstituted pyrazine
+  lever_class: precursor dose
+  lever: cysteine added to 20 mmol/L AX-ARP (0, 6, 14, 20 mmol/L), initial pH 8
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: not a time course
+  resolution: agreed
+  arms:
+  - label: 20 ARP, pH 8
+    lever_value: 0
+    value: 5.02
+    censor: none
+    limit: null
+    n: null
+    sd: 0.67
+    conditions:
+      ph: 8
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: 20 ARP + 6 Cys, pH 8
+    lever_value: 6
+    value: 19.5
+    censor: none
+    limit: null
+    n: null
+    sd: 2.76
+    conditions:
+      ph: 8
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+        L-cysteine: 6 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: 20 ARP + 14 Cys, pH 8
+    lever_value: 14
+    value: 144.45
+    censor: none
+    limit: null
+    n: null
+    sd: 9.74
+    conditions:
+      ph: 8
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+        L-cysteine: 14 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: 20 ARP + 20 Cys, pH 8
+    lever_value: 20
+    value: 169.13
+    censor: none
+    limit: null
+    n: null
+    sd: 12.59
+    conditions:
+      ph: 8
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+        L-cysteine: 20 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+- id: zhou2022-3
+  odorant: Unsubstituted pyrazine
+  lever_class: pH
+  lever: initial pH 7 vs 8, 20 mmol/L AX-ARP + 0 mmol/L Cys
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: not a time course
+  resolution: agreed
+  arms:
+  - label: 20 ARP, pH 7
+    lever_value: 7
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: 20 ARP, pH 8
+    lever_value: 8
+    value: 5.02
+    censor: none
+    limit: null
+    n: null
+    sd: 0.67
+    conditions:
+      ph: 8
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+- id: zhou2022-4
+  odorant: Unsubstituted pyrazine
+  lever_class: pH
+  lever: initial pH 7 vs 8, 20 mmol/L AX-ARP + 6 mmol/L Cys
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: not a time course
+  resolution: agreed
+  arms:
+  - label: 20 ARP + 6 Cys, pH 7
+    lever_value: 7
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+        L-cysteine: 6 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: 20 ARP + 6 Cys, pH 8
+    lever_value: 8
+    value: 19.5
+    censor: none
+    limit: null
+    n: null
+    sd: 2.76
+    conditions:
+      ph: 8
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+        L-cysteine: 6 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+- id: zhou2022-5
+  odorant: Unsubstituted pyrazine
+  lever_class: pH
+  lever: initial pH 7 vs 8, 20 mmol/L AX-ARP + 14 mmol/L Cys
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: not a time course
+  resolution: agreed
+  arms:
+  - label: 20 ARP + 14 Cys, pH 7
+    lever_value: 7
+    value: 4.01
+    censor: none
+    limit: null
+    n: null
+    sd: 0.29
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+        L-cysteine: 14 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: 20 ARP + 14 Cys, pH 8
+    lever_value: 8
+    value: 144.45
+    censor: none
+    limit: null
+    n: null
+    sd: 9.74
+    conditions:
+      ph: 8
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+        L-cysteine: 14 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+- id: zhou2022-6
+  odorant: Unsubstituted pyrazine
+  lever_class: pH
+  lever: initial pH 7 vs 8, 20 mmol/L AX-ARP + 20 mmol/L Cys
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: not a time course
+  resolution: agreed
+  arms:
+  - label: 20 ARP + 20 Cys, pH 7
+    lever_value: 7
+    value: 11.97
+    censor: none
+    limit: null
+    n: null
+    sd: 1.18
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+        L-cysteine: 20 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: 20 ARP + 20 Cys, pH 8
+    lever_value: 8
+    value: 169.13
+    censor: none
+    limit: null
+    n: null
+    sd: 12.59
+    conditions:
+      ph: 8
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+        L-cysteine: 20 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+- id: zhou2022-7
+  odorant: 2-Methylpyrazine
+  lever_class: precursor dose
+  lever: cysteine added to 20 mmol/L AX-ARP (0, 6, 14, 20 mmol/L), initial pH 7
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: not a time course
+  resolution: agreed
+  arms:
+  - label: 20 ARP, pH 7
+    lever_value: 0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: 20 ARP + 6 Cys, pH 7
+    lever_value: 6
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+        L-cysteine: 6 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: 20 ARP + 14 Cys, pH 7
+    lever_value: 14
+    value: 0.88
+    censor: none
+    limit: null
+    n: null
+    sd: 0.13
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+        L-cysteine: 14 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: 20 ARP + 20 Cys, pH 7
+    lever_value: 20
+    value: 1.12
+    censor: none
+    limit: null
+    n: null
+    sd: 0.11
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+        L-cysteine: 20 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+- id: zhou2022-8
+  odorant: 2-Methylpyrazine
+  lever_class: precursor dose
+  lever: cysteine added to 20 mmol/L AX-ARP (0, 6, 14, 20 mmol/L), initial pH 8
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: not a time course
+  resolution: agreed
+  arms:
+  - label: 20 ARP, pH 8
+    lever_value: 0
+    value: 3.66
+    censor: none
+    limit: null
+    n: null
+    sd: 0.59
+    conditions:
+      ph: 8
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: 20 ARP + 6 Cys, pH 8
+    lever_value: 6
+    value: 18.3
+    censor: none
+    limit: null
+    n: null
+    sd: 2.72
+    conditions:
+      ph: 8
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+        L-cysteine: 6 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: 20 ARP + 14 Cys, pH 8
+    lever_value: 14
+    value: 77.87
+    censor: none
+    limit: null
+    n: null
+    sd: 2.52
+    conditions:
+      ph: 8
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+        L-cysteine: 14 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: 20 ARP + 20 Cys, pH 8
+    lever_value: 20
+    value: 96.3
+    censor: none
+    limit: null
+    n: null
+    sd: 5.41
+    conditions:
+      ph: 8
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+        L-cysteine: 20 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+- id: zhou2022-9
+  odorant: 2-Methylpyrazine
+  lever_class: pH
+  lever: initial pH 7 vs 8, 20 mmol/L AX-ARP + 0 mmol/L Cys
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: not a time course
+  resolution: agreed
+  arms:
+  - label: 20 ARP, pH 7
+    lever_value: 7
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: 20 ARP, pH 8
+    lever_value: 8
+    value: 3.66
+    censor: none
+    limit: null
+    n: null
+    sd: 0.59
+    conditions:
+      ph: 8
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+- id: zhou2022-10
+  odorant: 2-Methylpyrazine
+  lever_class: pH
+  lever: initial pH 7 vs 8, 20 mmol/L AX-ARP + 6 mmol/L Cys
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: not a time course
+  resolution: agreed
+  arms:
+  - label: 20 ARP + 6 Cys, pH 7
+    lever_value: 7
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+        L-cysteine: 6 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: 20 ARP + 6 Cys, pH 8
+    lever_value: 8
+    value: 18.3
+    censor: none
+    limit: null
+    n: null
+    sd: 2.72
+    conditions:
+      ph: 8
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+        L-cysteine: 6 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+- id: zhou2022-11
+  odorant: 2-Methylpyrazine
+  lever_class: pH
+  lever: initial pH 7 vs 8, 20 mmol/L AX-ARP + 14 mmol/L Cys
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: not a time course
+  resolution: agreed
+  arms:
+  - label: 20 ARP + 14 Cys, pH 7
+    lever_value: 7
+    value: 0.88
+    censor: none
+    limit: null
+    n: null
+    sd: 0.13
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+        L-cysteine: 14 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: 20 ARP + 14 Cys, pH 8
+    lever_value: 8
+    value: 77.87
+    censor: none
+    limit: null
+    n: null
+    sd: 2.52
+    conditions:
+      ph: 8
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+        L-cysteine: 14 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+- id: zhou2022-12
+  odorant: 2-Methylpyrazine
+  lever_class: pH
+  lever: initial pH 7 vs 8, 20 mmol/L AX-ARP + 20 mmol/L Cys
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: not a time course
+  resolution: agreed
+  arms:
+  - label: 20 ARP + 20 Cys, pH 7
+    lever_value: 7
+    value: 1.12
+    censor: none
+    limit: null
+    n: null
+    sd: 0.11
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+        L-cysteine: 20 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: 20 ARP + 20 Cys, pH 8
+    lever_value: 8
+    value: 96.3
+    censor: none
+    limit: null
+    n: null
+    sd: 5.41
+    conditions:
+      ph: 8
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+        L-cysteine: 20 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+- id: zhou2022-13
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: precursor dose
+  lever: cysteine added to 20 mmol/L AX-ARP (0, 6, 14, 20 mmol/L), initial pH 7
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: not a time course
+  resolution: re-read
+  arms:
+  - label: 20 ARP, pH 7
+    lever_value: 0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: 20 ARP + 6 Cys, pH 7
+    lever_value: 6
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+        L-cysteine: 6 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: 20 ARP + 14 Cys, pH 7
+    lever_value: 14
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+        L-cysteine: 14 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: 20 ARP + 20 Cys, pH 7
+    lever_value: 20
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+        L-cysteine: 20 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  note: 're-read: Table 3 prints ND for 2,5-dimethylpyrazine in all four pH 7 columns; keyed, enters no estimate (PREREG sec.
+    3)'
+- id: zhou2022-14
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: precursor dose
+  lever: cysteine added to 20 mmol/L AX-ARP (0, 6, 14, 20 mmol/L), initial pH 8
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: not a time course
+  resolution: agreed
+  arms:
+  - label: 20 ARP, pH 8
+    lever_value: 0
+    value: 0.34
+    censor: none
+    limit: null
+    n: null
+    sd: 0.11
+    conditions:
+      ph: 8
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: 20 ARP + 6 Cys, pH 8
+    lever_value: 6
+    value: 9.05
+    censor: none
+    limit: null
+    n: null
+    sd: 0.43
+    conditions:
+      ph: 8
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+        L-cysteine: 6 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: 20 ARP + 14 Cys, pH 8
+    lever_value: 14
+    value: 17.19
+    censor: none
+    limit: null
+    n: null
+    sd: 1.6
+    conditions:
+      ph: 8
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+        L-cysteine: 14 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: 20 ARP + 20 Cys, pH 8
+    lever_value: 20
+    value: 23.18
+    censor: none
+    limit: null
+    n: null
+    sd: 2.1
+    conditions:
+      ph: 8
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+        L-cysteine: 20 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+- id: zhou2022-15
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: pH
+  lever: initial pH 7 vs 8, 20 mmol/L AX-ARP + 0 mmol/L Cys
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: not a time course
+  resolution: agreed
+  arms:
+  - label: 20 ARP, pH 7
+    lever_value: 7
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: 20 ARP, pH 8
+    lever_value: 8
+    value: 0.34
+    censor: none
+    limit: null
+    n: null
+    sd: 0.11
+    conditions:
+      ph: 8
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+- id: zhou2022-16
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: pH
+  lever: initial pH 7 vs 8, 20 mmol/L AX-ARP + 6 mmol/L Cys
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: not a time course
+  resolution: agreed
+  arms:
+  - label: 20 ARP + 6 Cys, pH 7
+    lever_value: 7
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+        L-cysteine: 6 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: 20 ARP + 6 Cys, pH 8
+    lever_value: 8
+    value: 9.05
+    censor: none
+    limit: null
+    n: null
+    sd: 0.43
+    conditions:
+      ph: 8
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+        L-cysteine: 6 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+- id: zhou2022-17
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: pH
+  lever: initial pH 7 vs 8, 20 mmol/L AX-ARP + 14 mmol/L Cys
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: not a time course
+  resolution: agreed
+  arms:
+  - label: 20 ARP + 14 Cys, pH 7
+    lever_value: 7
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+        L-cysteine: 14 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: 20 ARP + 14 Cys, pH 8
+    lever_value: 8
+    value: 17.19
+    censor: none
+    limit: null
+    n: null
+    sd: 1.6
+    conditions:
+      ph: 8
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+        L-cysteine: 14 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+- id: zhou2022-18
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: pH
+  lever: initial pH 7 vs 8, 20 mmol/L AX-ARP + 20 mmol/L Cys
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: not a time course
+  resolution: agreed
+  arms:
+  - label: 20 ARP + 20 Cys, pH 7
+    lever_value: 7
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+        L-cysteine: 20 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: 20 ARP + 20 Cys, pH 8
+    lever_value: 8
+    value: 23.18
+    censor: none
+    limit: null
+    n: null
+    sd: 2.1
+    conditions:
+      ph: 8
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+        L-cysteine: 20 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+- id: zhou2022-19
+  odorant: Furfural
+  lever_class: precursor dose
+  lever: AX-ARP alone vs AX-ARP + 20 mmol/L cysteine, 120 C, initial pH 7
+  focal: false
+  location: Table 1
+  digitised: false
+  unit: ug/L
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: main result time (120 min, the time quoted in the abstract)
+  resolution: agreed
+  arms:
+  - label: ARP, 120 min
+    lever_value: 0
+    value: 1261.12
+    censor: none
+    limit: null
+    n: null
+    sd: 118.93
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: ARP + Cys, 120 min
+    lever_value: 20
+    value: 510.92
+    censor: none
+    limit: null
+    n: null
+    sd: 36.03
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+        L-cysteine: 20 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+- id: zhou2022-20
+  odorant: Furfural
+  lever_class: time
+  lever: heating time 30-120 min at 120 C, AX-ARP alone, initial pH 7
+  focal: false
+  location: Table 1
+  digitised: false
+  unit: ug/L
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: whole series (lever is time)
+  resolution: agreed
+  arms:
+  - label: AX-ARP alone, 30 min
+    lever_value: 30
+    value: 442.78
+    censor: none
+    limit: null
+    n: null
+    sd: 27.7
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 30
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: AX-ARP alone, 60 min
+    lever_value: 60
+    value: 828.66
+    censor: none
+    limit: null
+    n: null
+    sd: 91.83
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: AX-ARP alone, 90 min
+    lever_value: 90
+    value: 1046.54
+    censor: none
+    limit: null
+    n: null
+    sd: 85.39
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 90
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: AX-ARP alone, 120 min
+    lever_value: 120
+    value: 1261.12
+    censor: none
+    limit: null
+    n: null
+    sd: 118.93
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+- id: zhou2022-21
+  odorant: Furfural
+  lever_class: time
+  lever: heating time 30-120 min at 120 C, AX-ARP + 20 mmol/L Cys, initial pH 7
+  focal: false
+  location: Table 1
+  digitised: false
+  unit: ug/L
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: whole series (lever is time)
+  resolution: agreed
+  arms:
+  - label: AX-ARP + 20 mmol/L Cys, 30 min
+    lever_value: 30
+    value: 252.49
+    censor: none
+    limit: null
+    n: null
+    sd: 18.08
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 30
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+        L-cysteine: 20 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: AX-ARP + 20 mmol/L Cys, 60 min
+    lever_value: 60
+    value: 434.91
+    censor: none
+    limit: null
+    n: null
+    sd: 13.71
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+        L-cysteine: 20 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: AX-ARP + 20 mmol/L Cys, 90 min
+    lever_value: 90
+    value: 524.77
+    censor: none
+    limit: null
+    n: null
+    sd: 38.71
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 90
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+        L-cysteine: 20 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: AX-ARP + 20 mmol/L Cys, 120 min
+    lever_value: 120
+    value: 510.92
+    censor: none
+    limit: null
+    n: null
+    sd: 36.03
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+        L-cysteine: 20 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+- id: zhou2022-22
+  odorant: 2-Acetylfuran
+  lever_class: precursor dose
+  lever: AX-ARP alone vs AX-ARP + 20 mmol/L cysteine, 120 C, initial pH 7
+  focal: false
+  location: Table 1
+  digitised: false
+  unit: ug/L
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: main result time (120 min, the time quoted in the abstract)
+  resolution: agreed
+  arms:
+  - label: ARP, 120 min
+    lever_value: 0
+    value: 92.04
+    censor: none
+    limit: null
+    n: null
+    sd: 6.85
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: ARP + Cys, 120 min
+    lever_value: 20
+    value: 8.6
+    censor: none
+    limit: null
+    n: null
+    sd: 0.73
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+        L-cysteine: 20 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+- id: zhou2022-23
+  odorant: 2-Acetylfuran
+  lever_class: time
+  lever: heating time 30-120 min at 120 C, AX-ARP alone, initial pH 7
+  focal: false
+  location: Table 1
+  digitised: false
+  unit: ug/L
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: whole series (lever is time)
+  resolution: agreed
+  arms:
+  - label: AX-ARP alone, 30 min
+    lever_value: 30
+    value: 8.63
+    censor: none
+    limit: null
+    n: null
+    sd: 0.65
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 30
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: AX-ARP alone, 60 min
+    lever_value: 60
+    value: 33.47
+    censor: none
+    limit: null
+    n: null
+    sd: 3.49
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: AX-ARP alone, 90 min
+    lever_value: 90
+    value: 53.14
+    censor: none
+    limit: null
+    n: null
+    sd: 8.84
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 90
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: AX-ARP alone, 120 min
+    lever_value: 120
+    value: 92.04
+    censor: none
+    limit: null
+    n: null
+    sd: 6.85
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+- id: zhou2022-24
+  odorant: 2-Acetylfuran
+  lever_class: time
+  lever: heating time 30-120 min at 120 C, AX-ARP + 20 mmol/L Cys, initial pH 7
+  focal: false
+  location: Table 1
+  digitised: false
+  unit: ug/L
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: whole series (lever is time)
+  resolution: agreed
+  arms:
+  - label: AX-ARP + 20 mmol/L Cys, 30 min
+    lever_value: 30
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 30
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+        L-cysteine: 20 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: AX-ARP + 20 mmol/L Cys, 60 min
+    lever_value: 60
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+        L-cysteine: 20 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: AX-ARP + 20 mmol/L Cys, 90 min
+    lever_value: 90
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 90
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+        L-cysteine: 20 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: AX-ARP + 20 mmol/L Cys, 120 min
+    lever_value: 120
+    value: 8.6
+    censor: none
+    limit: null
+    n: null
+    sd: 0.73
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+        L-cysteine: 20 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+- id: zhou2022-25
+  odorant: Unsubstituted pyrazine
+  lever_class: precursor dose
+  lever: AX-ARP alone vs AX-ARP + 20 mmol/L cysteine, 120 C, initial pH 7
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ug/L
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: main result time (120 min, the time quoted in the abstract)
+  resolution: agreed
+  arms:
+  - label: ARP, 120 min
+    lever_value: 0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: ARP + Cys, 120 min
+    lever_value: 20
+    value: 14.81
+    censor: none
+    limit: null
+    n: null
+    sd: 0.95
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+        L-cysteine: 20 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+- id: zhou2022-26
+  odorant: Unsubstituted pyrazine
+  lever_class: time
+  lever: heating time 30-120 min at 120 C, AX-ARP + 20 mmol/L Cys, initial pH 7
+  focal: false
+  location: Table 1
+  digitised: false
+  unit: ug/L
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: whole series (lever is time)
+  resolution: agreed
+  arms:
+  - label: AX-ARP + 20 mmol/L Cys, 30 min
+    lever_value: 30
+    value: 6.63
+    censor: none
+    limit: null
+    n: null
+    sd: 0.53
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 30
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+        L-cysteine: 20 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: AX-ARP + 20 mmol/L Cys, 60 min
+    lever_value: 60
+    value: 11.97
+    censor: none
+    limit: null
+    n: null
+    sd: 1.18
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+        L-cysteine: 20 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: AX-ARP + 20 mmol/L Cys, 90 min
+    lever_value: 90
+    value: 12.31
+    censor: none
+    limit: null
+    n: null
+    sd: 0.87
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 90
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+        L-cysteine: 20 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: AX-ARP + 20 mmol/L Cys, 120 min
+    lever_value: 120
+    value: 14.81
+    censor: none
+    limit: null
+    n: null
+    sd: 0.95
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+        L-cysteine: 20 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+- id: zhou2022-27
+  odorant: 2-Methylpyrazine
+  lever_class: precursor dose
+  lever: AX-ARP alone vs AX-ARP + 20 mmol/L cysteine, 120 C, initial pH 7
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ug/L
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: main result time (120 min, the time quoted in the abstract)
+  resolution: agreed
+  arms:
+  - label: ARP, 120 min
+    lever_value: 0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: ARP + Cys, 120 min
+    lever_value: 20
+    value: 1.67
+    censor: none
+    limit: null
+    n: null
+    sd: 0.07
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+        L-cysteine: 20 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+- id: zhou2022-28
+  odorant: 2-Methylpyrazine
+  lever_class: time
+  lever: heating time 30-120 min at 120 C, AX-ARP + 20 mmol/L Cys, initial pH 7
+  focal: false
+  location: Table 1
+  digitised: false
+  unit: ug/L
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: whole series (lever is time)
+  resolution: agreed
+  arms:
+  - label: AX-ARP + 20 mmol/L Cys, 30 min
+    lever_value: 30
+    value: 0.93
+    censor: none
+    limit: null
+    n: null
+    sd: 0.11
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 30
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+        L-cysteine: 20 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: AX-ARP + 20 mmol/L Cys, 60 min
+    lever_value: 60
+    value: 1.12
+    censor: none
+    limit: null
+    n: null
+    sd: 0.11
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+        L-cysteine: 20 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: AX-ARP + 20 mmol/L Cys, 90 min
+    lever_value: 90
+    value: 1.39
+    censor: none
+    limit: null
+    n: null
+    sd: 0.17
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 90
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+        L-cysteine: 20 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: AX-ARP + 20 mmol/L Cys, 120 min
+    lever_value: 120
+    value: 1.67
+    censor: none
+    limit: null
+    n: null
+    sd: 0.07
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+        L-cysteine: 20 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+- id: zhou2022-29
+  odorant: 2-Acetylthiazole
+  lever_class: precursor dose
+  lever: AX-ARP alone vs AX-ARP + 20 mmol/L cysteine, 120 C, initial pH 7
+  focal: false
+  location: Table 1
+  digitised: false
+  unit: ug/L
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: main result time (120 min, the time quoted in the abstract)
+  resolution: agreed
+  arms:
+  - label: ARP, 120 min
+    lever_value: 0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: ARP + Cys, 120 min
+    lever_value: 20
+    value: 11.71
+    censor: none
+    limit: null
+    n: null
+    sd: 0.8
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+        L-cysteine: 20 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+- id: zhou2022-30
+  odorant: 2-Acetylthiazole
+  lever_class: time
+  lever: heating time 30-120 min at 120 C, AX-ARP + 20 mmol/L Cys, initial pH 7
+  focal: false
+  location: Table 1
+  digitised: false
+  unit: ug/L
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: whole series (lever is time)
+  resolution: agreed
+  arms:
+  - label: AX-ARP + 20 mmol/L Cys, 30 min
+    lever_value: 30
+    value: 5.83
+    censor: none
+    limit: null
+    n: null
+    sd: 0.55
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 30
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+        L-cysteine: 20 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: AX-ARP + 20 mmol/L Cys, 60 min
+    lever_value: 60
+    value: 8.28
+    censor: none
+    limit: null
+    n: null
+    sd: 0.99
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+        L-cysteine: 20 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: AX-ARP + 20 mmol/L Cys, 90 min
+    lever_value: 90
+    value: 9.76
+    censor: none
+    limit: null
+    n: null
+    sd: 0.47
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 90
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+        L-cysteine: 20 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+  - label: AX-ARP + 20 mmol/L Cys, 120 min
+    lever_value: 120
+    value: 11.71
+    censor: none
+    limit: null
+    n: null
+    sd: 0.8
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        AX-ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine): 20 mmol/L
+        L-cysteine: 20 mmol/L
+      buffer: none (pH adjusted with 3 mol/L NaOH)
+      matrix: water
+      headspace: sealed, unstated
+- id: zhou2022-31
+  odorant: 2,3-Dimethylpyrazine
+  lever_class: time
+  lever: pre-degradation time of cysteine at 160 C, pH 5 (0-120 min) before 60 min at 120 C with 2,3-butanedione
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ug/L
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: whole series (lever is Cys pre-degradation time; reaction time fixed at 60 min)
+  note: lever is the heating time of the cysteine precursor, not of the reaction mixture
+  resolution: agreed
+  arms:
+  - label: Cys degraded 0 min
+    lever_value: 0
+    value: 5.03
+    censor: none
+    limit: null
+    n: null
+    sd: 1.01
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        2,3-butanedione: 20 mmol/L
+        L-cysteine: 20 mmol/L, pre-heated 0 min at 160 C, pH 5
+      buffer: none (pH adjusted)
+      matrix: water
+      headspace: sealed, unstated
+  - label: Cys degraded 30 min
+    lever_value: 30
+    value: 13.15
+    censor: none
+    limit: null
+    n: null
+    sd: 1.58
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        2,3-butanedione: 20 mmol/L
+        L-cysteine: 20 mmol/L, pre-heated 30 min at 160 C, pH 5
+      buffer: none (pH adjusted)
+      matrix: water
+      headspace: sealed, unstated
+  - label: Cys degraded 60 min
+    lever_value: 60
+    value: 26.62
+    censor: none
+    limit: null
+    n: null
+    sd: 1.32
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        2,3-butanedione: 20 mmol/L
+        L-cysteine: 20 mmol/L, pre-heated 60 min at 160 C, pH 5
+      buffer: none (pH adjusted)
+      matrix: water
+      headspace: sealed, unstated
+  - label: Cys degraded 90 min
+    lever_value: 90
+    value: 24.35
+    censor: none
+    limit: null
+    n: null
+    sd: 1.3
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        2,3-butanedione: 20 mmol/L
+        L-cysteine: 20 mmol/L, pre-heated 90 min at 160 C, pH 5
+      buffer: none (pH adjusted)
+      matrix: water
+      headspace: sealed, unstated
+  - label: Cys degraded 120 min
+    lever_value: 120
+    value: 31.35
+    censor: none
+    limit: null
+    n: null
+    sd: 1.12
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        2,3-butanedione: 20 mmol/L
+        L-cysteine: 20 mmol/L, pre-heated 120 min at 160 C, pH 5
+      buffer: none (pH adjusted)
+      matrix: water
+      headspace: sealed, unstated
+- id: zhou2022-32
+  odorant: Trimethylpyrazine
+  lever_class: time
+  lever: pre-degradation time of cysteine at 160 C, pH 5 (0-120 min) before 60 min at 120 C with 2,3-butanedione
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ug/L
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: whole series (lever is Cys pre-degradation time; reaction time fixed at 60 min)
+  note: lever is the heating time of the cysteine precursor, not of the reaction mixture
+  resolution: agreed
+  arms:
+  - label: Cys degraded 0 min
+    lever_value: 0
+    value: 2.54
+    censor: none
+    limit: null
+    n: null
+    sd: 0.08
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        2,3-butanedione: 20 mmol/L
+        L-cysteine: 20 mmol/L, pre-heated 0 min at 160 C, pH 5
+      buffer: none (pH adjusted)
+      matrix: water
+      headspace: sealed, unstated
+  - label: Cys degraded 30 min
+    lever_value: 30
+    value: 3.39
+    censor: none
+    limit: null
+    n: null
+    sd: 0.33
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        2,3-butanedione: 20 mmol/L
+        L-cysteine: 20 mmol/L, pre-heated 30 min at 160 C, pH 5
+      buffer: none (pH adjusted)
+      matrix: water
+      headspace: sealed, unstated
+  - label: Cys degraded 60 min
+    lever_value: 60
+    value: 4.24
+    censor: none
+    limit: null
+    n: null
+    sd: 0.21
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        2,3-butanedione: 20 mmol/L
+        L-cysteine: 20 mmol/L, pre-heated 60 min at 160 C, pH 5
+      buffer: none (pH adjusted)
+      matrix: water
+      headspace: sealed, unstated
+  - label: Cys degraded 90 min
+    lever_value: 90
+    value: 4.09
+    censor: none
+    limit: null
+    n: null
+    sd: 0.7
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        2,3-butanedione: 20 mmol/L
+        L-cysteine: 20 mmol/L, pre-heated 90 min at 160 C, pH 5
+      buffer: none (pH adjusted)
+      matrix: water
+      headspace: sealed, unstated
+  - label: Cys degraded 120 min
+    lever_value: 120
+    value: 4.82
+    censor: none
+    limit: null
+    n: null
+    sd: 0.15
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        2,3-butanedione: 20 mmol/L
+        L-cysteine: 20 mmol/L, pre-heated 120 min at 160 C, pH 5
+      buffer: none (pH adjusted)
+      matrix: water
+      headspace: sealed, unstated
+- id: zhou2022-33
+  odorant: Tetramethylpyrazine
+  lever_class: time
+  lever: pre-degradation time of cysteine at 160 C, pH 5 (0-120 min) before 60 min at 120 C with 2,3-butanedione
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ug/L
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: whole series (lever is Cys pre-degradation time; reaction time fixed at 60 min)
+  note: lever is the heating time of the cysteine precursor, not of the reaction mixture
+  resolution: agreed
+  arms:
+  - label: Cys degraded 0 min
+    lever_value: 0
+    value: 125.88
+    censor: none
+    limit: null
+    n: null
+    sd: 11.73
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        2,3-butanedione: 20 mmol/L
+        L-cysteine: 20 mmol/L, pre-heated 0 min at 160 C, pH 5
+      buffer: none (pH adjusted)
+      matrix: water
+      headspace: sealed, unstated
+  - label: Cys degraded 30 min
+    lever_value: 30
+    value: 274.1
+    censor: none
+    limit: null
+    n: null
+    sd: 27.51
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        2,3-butanedione: 20 mmol/L
+        L-cysteine: 20 mmol/L, pre-heated 30 min at 160 C, pH 5
+      buffer: none (pH adjusted)
+      matrix: water
+      headspace: sealed, unstated
+  - label: Cys degraded 60 min
+    lever_value: 60
+    value: 447.69
+    censor: none
+    limit: null
+    n: null
+    sd: 21.19
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        2,3-butanedione: 20 mmol/L
+        L-cysteine: 20 mmol/L, pre-heated 60 min at 160 C, pH 5
+      buffer: none (pH adjusted)
+      matrix: water
+      headspace: sealed, unstated
+  - label: Cys degraded 90 min
+    lever_value: 90
+    value: 454.07
+    censor: none
+    limit: null
+    n: null
+    sd: 17.5
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        2,3-butanedione: 20 mmol/L
+        L-cysteine: 20 mmol/L, pre-heated 90 min at 160 C, pH 5
+      buffer: none (pH adjusted)
+      matrix: water
+      headspace: sealed, unstated
+  - label: Cys degraded 120 min
+    lever_value: 120
+    value: 530.46
+    censor: none
+    limit: null
+    n: null
+    sd: 24.11
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        2,3-butanedione: 20 mmol/L
+        L-cysteine: 20 mmol/L, pre-heated 120 min at 160 C, pH 5
+      buffer: none (pH adjusted)
+      matrix: water
+      headspace: sealed, unstated
+- id: zhou2022-34
+  odorant: 2-Acetylthiazole
+  lever_class: time
+  lever: pre-degradation time of cysteine at 160 C, pH 5 (0-120 min) before 60 min at 120 C with 2,3-butanedione
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ug/L
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: whole series (lever is Cys pre-degradation time; reaction time fixed at 60 min)
+  note: lever is the heating time of the cysteine precursor, not of the reaction mixture
+  resolution: agreed
+  arms:
+  - label: Cys degraded 0 min
+    lever_value: 0
+    value: 25.11
+    censor: none
+    limit: null
+    n: null
+    sd: 1.56
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        2,3-butanedione: 20 mmol/L
+        L-cysteine: 20 mmol/L, pre-heated 0 min at 160 C, pH 5
+      buffer: none (pH adjusted)
+      matrix: water
+      headspace: sealed, unstated
+  - label: Cys degraded 30 min
+    lever_value: 30
+    value: 40.18
+    censor: none
+    limit: null
+    n: null
+    sd: 4.21
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        2,3-butanedione: 20 mmol/L
+        L-cysteine: 20 mmol/L, pre-heated 30 min at 160 C, pH 5
+      buffer: none (pH adjusted)
+      matrix: water
+      headspace: sealed, unstated
+  - label: Cys degraded 60 min
+    lever_value: 60
+    value: 41.78
+    censor: none
+    limit: null
+    n: null
+    sd: 1.44
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        2,3-butanedione: 20 mmol/L
+        L-cysteine: 20 mmol/L, pre-heated 60 min at 160 C, pH 5
+      buffer: none (pH adjusted)
+      matrix: water
+      headspace: sealed, unstated
+  - label: Cys degraded 90 min
+    lever_value: 90
+    value: 28.69
+    censor: none
+    limit: null
+    n: null
+    sd: 0.88
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        2,3-butanedione: 20 mmol/L
+        L-cysteine: 20 mmol/L, pre-heated 90 min at 160 C, pH 5
+      buffer: none (pH adjusted)
+      matrix: water
+      headspace: sealed, unstated
+  - label: Cys degraded 120 min
+    lever_value: 120
+    value: 45.85
+    censor: none
+    limit: null
+    n: null
+    sd: 2.1
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 120
+      time_min: 60
+      precursors:
+        2,3-butanedione: 20 mmol/L
+        L-cysteine: 20 mmol/L, pre-heated 120 min at 160 C, pH 5
+      buffer: none (pH adjusted)
+      matrix: water
+      headspace: sealed, unstated

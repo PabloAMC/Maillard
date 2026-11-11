@@ -1,0 +1,207 @@
+# Resolved (third read) from reader_a / reader_b; rows the comparison listed were re-read in the PDF.
+source: zhang1989
+pdf: data/articles/zhang1989.pdf
+reader: resolved
+scope_note: Single pair (cysteine vs glutathione). The PDF's last page belongs to a different paper (Kuo et al. 1989, pyrazine
+  purge-and-trap); not keyed. Both readers agreed on all four contrasts.
+contrasts:
+- id: zhang1989-1
+  odorant: Hexanal
+  lever_class: sulfur source
+  lever: cysteine vs glutathione (equimolar), with 2,4-decadienal
+  focal: true
+  location: Table I
+  digitised: false
+  unit: mg/mol (per mol cysteine or glutathione)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  note: quantified against an internal standard without response factors; also Table III (same values, keyed once)
+  resolution: agreed
+  arms:
+  - label: cysteine
+    lever_value: cysteine
+    value: 278.6
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 180
+      time_min: 60
+      precursors:
+        2,4-decadienal: 200 mg (0.001 mol) in 100 mL water
+        cysteine: 0.005 mol in 100 mL water
+      buffer: none (adjusted with 1 N NaOH or HCl)
+      matrix: water
+      headspace: sealed, unstated
+  - label: glutathione
+    lever_value: glutathione
+    value: 45.4
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 180
+      time_min: 60
+      precursors:
+        2,4-decadienal: 200 mg (0.001 mol) in 100 mL water
+        glutathione: 0.005 mol in 100 mL water
+      buffer: none (adjusted with 1 N NaOH or HCl)
+      matrix: water
+      headspace: sealed, unstated
+- id: zhang1989-2
+  odorant: Benzaldehyde
+  lever_class: sulfur source
+  lever: cysteine vs glutathione (equimolar), with 2,4-decadienal
+  focal: false
+  location: Table I
+  digitised: false
+  unit: mg/mol (per mol cysteine or glutathione)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  note: quantified against an internal standard without response factors
+  resolution: agreed
+  arms:
+  - label: cysteine
+    lever_value: cysteine
+    value: 31.8
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 180
+      time_min: 60
+      precursors:
+        2,4-decadienal: 200 mg (0.001 mol) in 100 mL water
+        cysteine: 0.005 mol in 100 mL water
+      buffer: none (adjusted with 1 N NaOH or HCl)
+      matrix: water
+      headspace: sealed, unstated
+  - label: glutathione
+    lever_value: glutathione
+    value: 20.6
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 180
+      time_min: 60
+      precursors:
+        2,4-decadienal: 200 mg (0.001 mol) in 100 mL water
+        glutathione: 0.005 mol in 100 mL water
+      buffer: none (adjusted with 1 N NaOH or HCl)
+      matrix: water
+      headspace: sealed, unstated
+- id: zhang1989-3
+  odorant: 2-Pentylfuran
+  lever_class: sulfur source
+  lever: cysteine vs glutathione (equimolar), with 2,4-decadienal
+  focal: false
+  location: Table I
+  digitised: false
+  unit: mg/mol (per mol cysteine or glutathione)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  note: quantified against an internal standard without response factors
+  resolution: agreed
+  arms:
+  - label: cysteine
+    lever_value: cysteine
+    value: 6.4
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 180
+      time_min: 60
+      precursors:
+        2,4-decadienal: 200 mg (0.001 mol) in 100 mL water
+        cysteine: 0.005 mol in 100 mL water
+      buffer: none (adjusted with 1 N NaOH or HCl)
+      matrix: water
+      headspace: sealed, unstated
+  - label: glutathione
+    lever_value: glutathione
+    value: null
+    censor: trace
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 180
+      time_min: 60
+      precursors:
+        2,4-decadienal: 200 mg (0.001 mol) in 100 mL water
+        glutathione: 0.005 mol in 100 mL water
+      buffer: none (adjusted with 1 N NaOH or HCl)
+      matrix: water
+      headspace: sealed, unstated
+- id: zhang1989-4
+  odorant: 2-Acetylthiazole
+  lever_class: sulfur source
+  lever: cysteine vs glutathione (equimolar), with 2,4-decadienal
+  focal: false
+  location: Table I
+  digitised: false
+  unit: mg/mol (per mol cysteine or glutathione)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  note: quantified against an internal standard without response factors
+  resolution: agreed
+  arms:
+  - label: cysteine
+    lever_value: cysteine
+    value: 2.2
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 180
+      time_min: 60
+      precursors:
+        2,4-decadienal: 200 mg (0.001 mol) in 100 mL water
+        cysteine: 0.005 mol in 100 mL water
+      buffer: none (adjusted with 1 N NaOH or HCl)
+      matrix: water
+      headspace: sealed, unstated
+  - label: glutathione
+    lever_value: glutathione
+    value: 3.8
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 180
+      time_min: 60
+      precursors:
+        2,4-decadienal: 200 mg (0.001 mol) in 100 mL water
+        glutathione: 0.005 mol in 100 mL water
+      buffer: none (adjusted with 1 N NaOH or HCl)
+      matrix: water
+      headspace: sealed, unstated
