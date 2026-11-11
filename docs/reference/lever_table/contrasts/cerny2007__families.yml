@@ -1,0 +1,224 @@
+source: cerny2007
+pdf: data/articles/cerny2007.pdf
+reader: resolved
+scope_note: 'Table 2 (unlabelled xylose, trials E-I, GC-TIC peak areas, triplicate means, SD stated only as <= 23%): furfural
+  and 4,5-dihydro-2-methyl-3(2H)-furanone (unlisted furanone) over the phosphate-buffer pH ladder 4.0-7.0. Printed 0 keyed
+  nd_no_limit (text: no traceable amounts). Sulfur volatiles and thiols not keyed; Tables 3-5 are isotopomer proportions.'
+contrasts:
+- id: cerny2007-1
+  odorant: Furfural
+  lever_class: pH
+  lever: initial buffer pH 4.0 - 7.0
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: GC-TIC peak area x 10^6
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: E (pH 4.0)
+    lever_value: 4.0
+    value: 208
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.0
+      ph_basis: initial
+      temp_C: 145
+      time_min: 20
+      precursors:
+        cysteine: 6.25 mg/mL
+        xylose (unlabelled): 22.50 mg/mL
+        thiamin hydrochloride: 16.85 mg/mL
+      buffer: 0.5 M potassium phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: F (pH 5.0)
+    lever_value: 5.0
+    value: 158
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      temp_C: 145
+      time_min: 20
+      precursors:
+        cysteine: 6.25 mg/mL
+        xylose (unlabelled): 22.50 mg/mL
+        thiamin hydrochloride: 16.85 mg/mL
+      buffer: 0.5 M potassium phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: G (pH 5.5)
+    lever_value: 5.5
+    value: 165
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 145
+      time_min: 20
+      precursors:
+        cysteine: 6.25 mg/mL
+        xylose (unlabelled): 22.50 mg/mL
+        thiamin hydrochloride: 16.85 mg/mL
+      buffer: 0.5 M potassium phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: H (pH 6.0)
+    lever_value: 6.0
+    value: 0
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: initial
+      temp_C: 145
+      time_min: 20
+      precursors:
+        cysteine: 6.25 mg/mL
+        xylose (unlabelled): 22.50 mg/mL
+        thiamin hydrochloride: 16.85 mg/mL
+      buffer: 0.5 M potassium phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: I (pH 7.0)
+    lever_value: 7.0
+    value: 0
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 145
+      time_min: 20
+      precursors:
+        cysteine: 6.25 mg/mL
+        xylose (unlabelled): 22.50 mg/mL
+        thiamin hydrochloride: 16.85 mg/mL
+      buffer: 0.5 M potassium phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: agreed
+- id: cerny2007-2
+  odorant: 4,5-dihydro-2-methyl-3(2H)-furanone
+  odorant_unlisted: true
+  lever_class: pH
+  lever: initial buffer pH 4.0 - 7.0
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: GC-TIC peak area x 10^6
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: E (pH 4.0)
+    lever_value: 4.0
+    value: 17
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.0
+      ph_basis: initial
+      temp_C: 145
+      time_min: 20
+      precursors:
+        cysteine: 6.25 mg/mL
+        xylose (unlabelled): 22.50 mg/mL
+        thiamin hydrochloride: 16.85 mg/mL
+      buffer: 0.5 M potassium phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: F (pH 5.0)
+    lever_value: 5.0
+    value: 18
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      temp_C: 145
+      time_min: 20
+      precursors:
+        cysteine: 6.25 mg/mL
+        xylose (unlabelled): 22.50 mg/mL
+        thiamin hydrochloride: 16.85 mg/mL
+      buffer: 0.5 M potassium phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: G (pH 5.5)
+    lever_value: 5.5
+    value: 18
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 145
+      time_min: 20
+      precursors:
+        cysteine: 6.25 mg/mL
+        xylose (unlabelled): 22.50 mg/mL
+        thiamin hydrochloride: 16.85 mg/mL
+      buffer: 0.5 M potassium phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: H (pH 6.0)
+    lever_value: 6.0
+    value: 94
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: initial
+      temp_C: 145
+      time_min: 20
+      precursors:
+        cysteine: 6.25 mg/mL
+        xylose (unlabelled): 22.50 mg/mL
+        thiamin hydrochloride: 16.85 mg/mL
+      buffer: 0.5 M potassium phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: I (pH 7.0)
+    lever_value: 7.0
+    value: 104
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 145
+      time_min: 20
+      precursors:
+        cysteine: 6.25 mg/mL
+        xylose (unlabelled): 22.50 mg/mL
+        thiamin hydrochloride: 16.85 mg/mL
+      buffer: 0.5 M potassium phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read

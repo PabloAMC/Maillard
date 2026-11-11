@@ -1,0 +1,83 @@
+source: "cerny2007"
+pdf: "data/articles/cerny2007.pdf"
+reader: "b"
+scope_note: "Only Table 2 (unlabeled xylose, GC-TIC peak areas, triplicate means, SD <= 23% stated globally) carries listed odorants: 2-furaldehyde (furfural) over the pH ladder; 4,5-dihydro-2-methyl-3(2H)-furanone keyed as unlisted. Printed '0' keyed as nd_no_limit (text: 'no traceable amounts'). 2-methyl-3-(methylthio)furan and thiols not keyed (sulfur compounds / thiols excluded). Tables 3-5 are isotopomer proportions, not amounts."
+contrasts:
+  - id: "cerny2007-1"
+    odorant: "2-furaldehyde"
+    lever_class: "pH"
+    lever: "buffer pH (phosphate buffers of pH 4.0 - 7.0)"
+    focal: false
+    quantity: amount
+    location: "Table 2 (reactions E - I of Table 1), p. 1553"
+    digitised: false
+    unit: "GC-TIC peak area x 10^6"
+    quant_type: "peak_area"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "pH 4.0"
+        lever_value: "4.0"
+        value: 208
+        censor: none
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.0
+          ph_basis: "label"
+          temp_C: 145
+          time_min: 20
+          precursors: {xylose: "22.50 mg (150 umol) in 1.00 mL", cysteine: "6.25 mg (50 umol) in 1.00 mL", "thiamin hydrochloride": "16.85 mg (50 umol) in 1.00 mL"}
+          buffer: "0.5 M potassium phosphate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "pH 5.0"
+        lever_value: "5.0"
+        value: 158
+        censor: none
+        limit: null
+        n: 3
+        sd: null
+        conditions: {ph: 5.0, ph_basis: "label", temp_C: 145, time_min: 20, precursors: {xylose: "22.50 mg (150 umol) in 1.00 mL", cysteine: "6.25 mg (50 umol) in 1.00 mL", "thiamin hydrochloride": "16.85 mg (50 umol) in 1.00 mL"}, buffer: "0.5 M potassium phosphate", matrix: "buffer", headspace: "sealed, unstated"}
+      - label: "pH 5.5"
+        lever_value: "5.5"
+        value: 165
+        censor: none
+        limit: null
+        n: 3
+        sd: null
+        conditions: {ph: 5.5, ph_basis: "label", temp_C: 145, time_min: 20, precursors: {xylose: "22.50 mg (150 umol) in 1.00 mL", cysteine: "6.25 mg (50 umol) in 1.00 mL", "thiamin hydrochloride": "16.85 mg (50 umol) in 1.00 mL"}, buffer: "0.5 M potassium phosphate", matrix: "buffer", headspace: "sealed, unstated"}
+      - label: "pH 6.0"
+        lever_value: "6.0"
+        value: 0
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions: {ph: 6.0, ph_basis: "label", temp_C: 145, time_min: 20, precursors: {xylose: "22.50 mg (150 umol) in 1.00 mL", cysteine: "6.25 mg (50 umol) in 1.00 mL", "thiamin hydrochloride": "16.85 mg (50 umol) in 1.00 mL"}, buffer: "0.5 M potassium phosphate", matrix: "buffer", headspace: "sealed, unstated"}
+      - label: "pH 7.0"
+        lever_value: "7.0"
+        value: 0
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions: {ph: 7.0, ph_basis: "label", temp_C: 145, time_min: 20, precursors: {xylose: "22.50 mg (150 umol) in 1.00 mL", cysteine: "6.25 mg (50 umol) in 1.00 mL", "thiamin hydrochloride": "16.85 mg (50 umol) in 1.00 mL"}, buffer: "0.5 M potassium phosphate", matrix: "buffer", headspace: "sealed, unstated"}
+  - id: "cerny2007-2"
+    odorant: "4,5-dihydro-2-methyl-3(2H)-furanone"
+    odorant_unlisted: true
+    lever_class: "pH"
+    lever: "buffer pH (phosphate buffers of pH 4.0 - 7.0)"
+    focal: false
+    quantity: amount
+    location: "Table 2 (reactions E - I of Table 1), p. 1553"
+    digitised: false
+    unit: "GC-TIC peak area x 10^6"
+    quant_type: "peak_area"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "pH 4.0", lever_value: "4.0", value: 17, censor: none, limit: null, n: 3, sd: null, conditions: {ph: 4.0, ph_basis: "label", temp_C: 145, time_min: 20, precursors: {xylose: "150 umol in 1.00 mL", cysteine: "50 umol in 1.00 mL", "thiamin hydrochloride": "50 umol in 1.00 mL"}, buffer: "0.5 M potassium phosphate", matrix: "buffer", headspace: "sealed, unstated"}}
+      - {label: "pH 5.0", lever_value: "5.0", value: 18, censor: none, limit: null, n: 3, sd: null, conditions: {ph: 5.0, ph_basis: "label", temp_C: 145, time_min: 20, precursors: {xylose: "150 umol in 1.00 mL", cysteine: "50 umol in 1.00 mL", "thiamin hydrochloride": "50 umol in 1.00 mL"}, buffer: "0.5 M potassium phosphate", matrix: "buffer", headspace: "sealed, unstated"}}
+      - {label: "pH 5.5", lever_value: "5.5", value: 18, censor: none, limit: null, n: 3, sd: null, conditions: {ph: 5.5, ph_basis: "label", temp_C: 145, time_min: 20, precursors: {xylose: "150 umol in 1.00 mL", cysteine: "50 umol in 1.00 mL", "thiamin hydrochloride": "50 umol in 1.00 mL"}, buffer: "0.5 M potassium phosphate", matrix: "buffer", headspace: "sealed, unstated"}}
+      - {label: "pH 6.0", lever_value: "6.0", value: 94, censor: none, limit: null, n: 3, sd: null, conditions: {ph: 6.0, ph_basis: "label", temp_C: 145, time_min: 20, precursors: {xylose: "150 umol in 1.00 mL", cysteine: "50 umol in 1.00 mL", "thiamin hydrochloride": "50 umol in 1.00 mL"}, buffer: "0.5 M potassium phosphate", matrix: "buffer", headspace: "sealed, unstated"}}
+      - {label: "pH 7.0", lever_value: "7.0", value: 104, censor: none, limit: null, n: 3, sd: null, conditions: {ph: 7.0, ph_basis: "label", temp_C: 145, time_min: 20, precursors: {xylose: "150 umol in 1.00 mL", cysteine: "50 umol in 1.00 mL", "thiamin hydrochloride": "50 umol in 1.00 mL"}, buffer: "0.5 M potassium phosphate", matrix: "buffer", headspace: "sealed, unstated"}}
