@@ -10,7 +10,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        job: [sug01-score]
+        job: [sug01-score, sug01-reps, s3-subset]
     steps:
       - uses: actions/checkout@v4
       - uses: conda-incubator/setup-miniconda@v3
@@ -34,7 +34,7 @@ jobs:
         env:
           OUT: /tmp/s3_subset.jsonl
           WORKERS: "4"
-          SUBSET_EVERY: "6"
+          SUBSET_EVERY: "1000"
         run: python scripts/tmp_probe/s3_subset_compare.py
       - if: matrix.job == 'sug01-score'
         shell: bash -el {0}

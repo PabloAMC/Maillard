@@ -129,6 +129,7 @@ def _wrapped(*a, **k):
         raise
     diag = out[-1]
     _LOG.append({"evaluations": diag.get("evaluations"), "rhs": diag.get("rhs_calls"),
+                 "method": diag.get("method"), "fallback": diag.get("solver_fallback"),
                  "seconds": round(time.time() - t, 2), **_trace_summary()})
     return out
 
@@ -177,6 +178,7 @@ for name, diag, vals, ph, err in res:
 import collections
 print("ERRKINDS", collections.Counter((r[4] or "")[:60] for r in res if r[4]))
 print("EVALS median/max", float(np.median([r[1].get("evaluations") or 0 for r in res if not r[4]])), max((r[1].get("evaluations") or 0) for r in res))
+print("FALLBACKS", sum(1 for r in res if r[1].get("fallback")), [r[0] for r in res if r[1].get("fallback")])
 print("STALLS", MODE, sum(1 for r in res if r[4]), "of", len(res))
 print("wall", round(time.time() - t0, 1), "max evals", max((r[1].get("evaluations") or 0) for r in res),
       "failures", [r[0] for r in res if r[4]])
