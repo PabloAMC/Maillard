@@ -334,6 +334,7 @@ def test_readme_carries_the_model_card_markers():
     assert readme.index(model_card.README_BEGIN) < readme.index(model_card.README_END)
 
 
+@pytest.mark.artifact_rebuild
 def test_the_readme_model_card_is_not_stale():
     """The README's validity domain must equal what the artifacts currently say.
 

@@ -46,6 +46,11 @@ env:
   # Belt and braces: conda >=25.3 refuses the `defaults` channel non-interactively until
   # its terms are accepted; environment.yml uses conda-forge only, so this should never fire.
   CONDA_PLUGINS_AUTO_ACCEPT_TOS: "yes"
+  # The hosted runner has 4 vCPUs. src/kinetic_core/parallel.py forks this many workers for independent pots (the
+  # directional panel's claims, the S3 refusal's 23 carried rival points); results are bit-identical to the serial
+  # loop (tests/unit/test_parallel.py, test_ph_balance_refusal.py). Without it the S3 rivals ran serially and both
+  # test jobs hit their timeouts on main (2026-11-11, after PR #108).
+  MAILLARD_WORKERS: "4"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -140,7 +145,7 @@ jobs:
     # Draft PRs skip the expensive tiers; gates still run.
     if: github.event_name != 'pull_request' || github.event.pull_request.draft == false
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 90  # 60 until 2026-11-11: the S3 refusal integrates 23 rival points per balance-solved pot
     steps:
       - uses: actions/checkout@v4
 
@@ -179,7 +184,8 @@ jobs:
         # NOTE: neither pytest-timeout nor pytest-xdist is in environment.yml, so
         # do not add --timeout or -n here; the job-level timeout-minutes is the
         # runaway guard.
-        run: python -m pytest tests/unit -q
+        # -m "not artifact_rebuild": see the tests-full job; the freshness gate rebuilds those artifacts once.
+        run: python -m pytest tests/unit -q -m "not artifact_rebuild" --durations=15
 
       # 2026-10-29. Every rate constant's evidence anchor resolves and every measured constant cites its paper's
       # dossier. It imports the engine (numpy), so it runs here, not in the dependency-light gates job.
@@ -240,14 +246,13 @@ jobs:
         run: bash scripts/ci/setup_env.sh
 
       - name: Scientific and integration tests
+        # pipefail: without it the step's status is tee's, and a failing test would leave the job green (2026-11-11).
+        # -m "not artifact_rebuild": the tests that rebuild a tracked artifact the freshness gate also rebuilds and
+        # compares (stricter: the whole payload) run in the artifact-freshness job instead, not twice (pytest.ini).
         run: |
+          set -o pipefail
           mkdir -p results
-          python -m pytest tests/scientific -q 2>&1 | tee results/pytest_full.log
-
-      - name: Artifact freshness gate
-        # Every tracked artifact under results/validation equals what its generator
-        # produces from the tracked inputs (modulo date and git head).
-        run: python scripts/ci/artifact_freshness_gate.py
+          python -m pytest tests/scientific -q -m "not artifact_rebuild" --durations=15 2>&1 | tee results/pytest_full.log
 
       - name: data/ untouched by the full tier
         if: always()
@@ -260,6 +265,50 @@ jobs:
           name: pytest-full-log
           path: results/pytest_full.log
           if-no-files-found: warn
+
+  # ---------------------------------------------------------------------------
+  # Artifact freshness (2026-11-11): its own job, concurrent with the test tiers. Since the S3 refusal (PR #108) every
+  # balance-solved pot also integrates 23 carried rival points, so rebuilding the directional and panel scorecards and
+  # the model card costs tens of minutes; run inside the scientific job (and again as pytest staleness tests) it
+  # pushed both test jobs past their timeouts. The gate compares the whole payload; the pytest tests marked
+  # artifact_rebuild check a subset of the same thing and are deselected in CI.
+  # ---------------------------------------------------------------------------
+  artifact-freshness:
+    name: Artifact freshness gate
+    if: github.event_name != 'pull_request' || github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache conda packages
+        uses: actions/cache@v4
+        env:
+          CACHE_EPOCH: 1
+        with:
+          path: ~/conda_pkgs_dir
+          key: conda-${{ runner.os }}-${{ env.CACHE_EPOCH }}-${{ hashFiles('environment.yml') }}
+
+      - name: Install conda (Miniforge)
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          miniforge-version: latest
+          activate-environment: maillard
+          python-version: "3.12"
+          auto-activate-base: false
+          pkgs-dirs: ~/conda_pkgs_dir
+
+      - name: Build the maillard environment
+        run: bash scripts/ci/setup_env.sh
+
+      - name: Artifact freshness gate
+        # Every tracked artifact under results/validation equals what its generator
+        # produces from the tracked inputs (modulo date and git head).
+        run: python scripts/ci/artifact_freshness_gate.py
+
+      - name: data/ untouched by the gate
+        if: always()
+        run: python scripts/ci/data_readonly_gate.py
 
   # ---------------------------------------------------------------------------
   # Tier 2b (2026-11-05, A2 + H3): the JAX sulfur lane against the NumPy sulfur lane, LIVE, in the separate

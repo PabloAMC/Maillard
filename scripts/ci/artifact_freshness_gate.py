@@ -157,7 +157,11 @@ FROZEN_RECORD_GENERATOR = re.compile(
 #: items record, re-derived and checked by the scorer itself before every use, and the named M1 scores): the v1 score
 #: is the benchmark's run-once "before" record (prereg v6), pinned by the commit it was written at. And the
 #: rescore_* records (held-out re-scores, each run at a commit and quoted in its prereg) are pinned by the pattern above.
-FROZEN_RECORD_FILES = frozenset({"results/validation/kinetic_core_contrast_benchmark_score_v1.json"})
+#: 2026-11-11: so is decision-relevance step 0 (build_decision_relevance_step0.py, run once under its pre-registration,
+#: results/validation/decision_relevance_prereg.md sec. 5.0, frozen in 9e02ce3a; read in STATUS_AND_PLAN sec. 4.1): its inputs (the contrast and panel
+#: scores) moved with PR #108's S3 refusal after it was run; re-running it would replace a frozen verdict.
+FROZEN_RECORD_FILES = frozenset({"results/validation/kinetic_core_contrast_benchmark_score_v1.json",
+                                 "results/validation/decision_relevance_step0.json"})
 
 
 #: 2026-10-30 (owner: "I am not sure regenerating the figure is needed until we have the engine finished"; strategy

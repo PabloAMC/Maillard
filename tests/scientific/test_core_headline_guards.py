@@ -564,6 +564,7 @@ def test_core_scores_17_of_26_independent_directional_claims():
     _assert_quoted(readme, "1 of 4", "README.md", "the directional count on pH and water activity")
 
 
+@pytest.mark.artifact_rebuild
 def test_directional_scorecard_is_not_stale():
     """The tracked artifact must be what the code scores today (~90 s)."""
     from src.kinetic_core import directional
