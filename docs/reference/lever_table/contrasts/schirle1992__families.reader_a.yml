@@ -1,0 +1,1694 @@
+source: schirle1992
+pdf: data/articles/schirle1992.pdf
+reader: a
+scope_note: 'Carbon-channel (AED) data used, the channel the paper uses for kinetics; oxygen-channel series not keyed. Table
+  1 zero-order k keyed as rate (furfurol row blank at 100 C as printed); first-order k not keyed. Time series digitised from
+  Figs. 3-5 (low resolution, approximate). No temperature contrast on amounts: sampling times differ by temperature. HMF and
+  di(H)di(OH)-6-Me-pyranone out of scope.'
+contrasts:
+- id: schirle1992-1
+  odorant: furfural
+  lever_class: temperature
+  lever: heating temperature (zero-order formation rate constant)
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: UNA hr-1 (units of normalized area per hour)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: rate
+  arms:
+  - label: Temperature 100°C
+    lever_value: 100
+    value: 1692.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: null
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: Temperature 120°C
+    lever_value: 120
+    value: 50300.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: null
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: Temperature 150°C
+    lever_value: 150
+    value: 682900.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 150
+      time_min: null
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+- id: schirle1992-2
+  odorant: furfurol
+  lever_class: temperature
+  lever: heating temperature (zero-order formation rate constant)
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: UNA hr-1 (units of normalized area per hour)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: rate
+  arms:
+  - label: Temperature 120°C
+    lever_value: 120
+    value: 42170.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: null
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: Temperature 150°C
+    lever_value: 150
+    value: 615900.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 150
+      time_min: null
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+- id: schirle1992-3
+  odorant: 2-acetyl furan
+  lever_class: temperature
+  lever: heating temperature (zero-order formation rate constant)
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: UNA hr-1 (units of normalized area per hour)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: rate
+  arms:
+  - label: Temperature 100°C
+    lever_value: 100
+    value: 4151.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: null
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: Temperature 120°C
+    lever_value: 120
+    value: 194500.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: null
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: Temperature 150°C
+    lever_value: 150
+    value: 1165000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 150
+      time_min: null
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+- id: schirle1992-4
+  odorant: 5-Me furfural
+  lever_class: temperature
+  lever: heating temperature (zero-order formation rate constant)
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: UNA hr-1 (units of normalized area per hour)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: rate
+  arms:
+  - label: Temperature 100°C
+    lever_value: 100
+    value: 48660.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: null
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: Temperature 120°C
+    lever_value: 120
+    value: 253700.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: null
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: Temperature 150°C
+    lever_value: 150
+    value: 3878000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 150
+      time_min: null
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+- id: schirle1992-5
+  odorant: furfural
+  lever_class: time
+  lever: heating time at 100°C (t = 0 when the reactor reached temperature)
+  focal: true
+  location: Fig. 3
+  digitised: true
+  unit: normalized area (vs internal standard)
+  quant_type: peak_area
+  time_course_rule: whole time series (lever is time)
+  quantity: amount
+  arms:
+  - label: 100°C, 0 min
+    lever_value: 0
+    value: 1000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 0
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: 100°C, 120 min
+    lever_value: 120
+    value: 1000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: 100°C, 240 min
+    lever_value: 240
+    value: 1000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 240
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: 100°C, 360 min
+    lever_value: 360
+    value: 7000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 360
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: 100°C, 480 min
+    lever_value: 480
+    value: 8500.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 480
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: 100°C, 600 min
+    lever_value: 600
+    value: 14000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 600
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+- id: schirle1992-6
+  odorant: furfurol
+  lever_class: time
+  lever: heating time at 100°C (t = 0 when the reactor reached temperature)
+  focal: true
+  location: Fig. 3
+  digitised: true
+  unit: normalized area (vs internal standard)
+  quant_type: peak_area
+  time_course_rule: whole time series (lever is time)
+  quantity: amount
+  arms:
+  - label: 100°C, 0 min
+    lever_value: 0
+    value: 1000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 0
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: 100°C, 120 min
+    lever_value: 120
+    value: 1000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: 100°C, 240 min
+    lever_value: 240
+    value: 1000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 240
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: 100°C, 360 min
+    lever_value: 360
+    value: 1500.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 360
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: 100°C, 480 min
+    lever_value: 480
+    value: 2000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 480
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: 100°C, 600 min
+    lever_value: 600
+    value: 4000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 600
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+- id: schirle1992-7
+  odorant: 2-acetyl furan
+  lever_class: time
+  lever: heating time at 100°C (t = 0 when the reactor reached temperature)
+  focal: true
+  location: Fig. 3
+  digitised: true
+  unit: normalized area (vs internal standard)
+  quant_type: peak_area
+  time_course_rule: whole time series (lever is time)
+  quantity: amount
+  arms:
+  - label: 100°C, 0 min
+    lever_value: 0
+    value: 1000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 0
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: 100°C, 120 min
+    lever_value: 120
+    value: 1000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: 100°C, 240 min
+    lever_value: 240
+    value: 1000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 240
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: 100°C, 360 min
+    lever_value: 360
+    value: 1000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 360
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: 100°C, 480 min
+    lever_value: 480
+    value: 2000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 480
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: 100°C, 600 min
+    lever_value: 600
+    value: 3000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 600
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+- id: schirle1992-8
+  odorant: 5-Me furfural
+  lever_class: time
+  lever: heating time at 100°C (t = 0 when the reactor reached temperature)
+  focal: true
+  location: Fig. 3
+  digitised: true
+  unit: normalized area (vs internal standard)
+  quant_type: peak_area
+  time_course_rule: whole time series (lever is time)
+  quantity: amount
+  arms:
+  - label: 100°C, 0 min
+    lever_value: 0
+    value: 1000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 0
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: 100°C, 120 min
+    lever_value: 120
+    value: 1000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: 100°C, 240 min
+    lever_value: 240
+    value: 1000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 240
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: 100°C, 360 min
+    lever_value: 360
+    value: 2000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 360
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: 100°C, 480 min
+    lever_value: 480
+    value: 3500.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 480
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: 100°C, 600 min
+    lever_value: 600
+    value: 21500.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 600
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+- id: schirle1992-9
+  odorant: furfural
+  lever_class: time
+  lever: heating time at 120°C (t = 0 when the reactor reached temperature)
+  focal: true
+  location: Fig. 4 (carbon signal)
+  digitised: true
+  unit: normalized area (vs internal standard)
+  quant_type: peak_area
+  time_course_rule: whole time series (lever is time)
+  quantity: amount
+  arms:
+  - label: 120°C, 0 min
+    lever_value: 0
+    value: 10000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 0
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: 120°C, 120 min
+    lever_value: 120
+    value: 70000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 120
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: 120°C, 240 min
+    lever_value: 240
+    value: 125000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 240
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: 120°C, 360 min
+    lever_value: 360
+    value: 255000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 360
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: 120°C, 480 min
+    lever_value: 480
+    value: 360000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 480
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: 120°C, 600 min
+    lever_value: 600
+    value: 450000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 600
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+- id: schirle1992-10
+  odorant: furfurol
+  lever_class: time
+  lever: heating time at 120°C (t = 0 when the reactor reached temperature)
+  focal: true
+  location: Fig. 4 (carbon signal)
+  digitised: true
+  unit: normalized area (vs internal standard)
+  quant_type: peak_area
+  time_course_rule: whole time series (lever is time)
+  quantity: amount
+  arms:
+  - label: 120°C, 0 min
+    lever_value: 0
+    value: 10000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 0
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: 120°C, 120 min
+    lever_value: 120
+    value: 25000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 120
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: 120°C, 240 min
+    lever_value: 240
+    value: 40000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 240
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: 120°C, 360 min
+    lever_value: 360
+    value: 130000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 360
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: 120°C, 480 min
+    lever_value: 480
+    value: 240000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 480
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: 120°C, 600 min
+    lever_value: 600
+    value: 440000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 600
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+- id: schirle1992-11
+  odorant: 2-acetyl furan
+  lever_class: time
+  lever: heating time at 120°C (t = 0 when the reactor reached temperature)
+  focal: true
+  location: Fig. 4 (carbon signal)
+  digitised: true
+  unit: normalized area (vs internal standard)
+  quant_type: peak_area
+  time_course_rule: whole time series (lever is time)
+  quantity: amount
+  arms:
+  - label: 120°C, 0 min
+    lever_value: 0
+    value: 10000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 0
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: 120°C, 120 min
+    lever_value: 120
+    value: 20000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 120
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: 120°C, 240 min
+    lever_value: 240
+    value: 35000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 240
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: 120°C, 360 min
+    lever_value: 360
+    value: 70000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 360
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: 120°C, 480 min
+    lever_value: 480
+    value: 115000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 480
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: 120°C, 600 min
+    lever_value: 600
+    value: 170000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 600
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+- id: schirle1992-12
+  odorant: 5-Me furfural
+  lever_class: time
+  lever: heating time at 120°C (t = 0 when the reactor reached temperature)
+  focal: true
+  location: Fig. 4 (carbon signal)
+  digitised: true
+  unit: normalized area (vs internal standard)
+  quant_type: peak_area
+  time_course_rule: whole time series (lever is time)
+  quantity: amount
+  arms:
+  - label: 120°C, 0 min
+    lever_value: 0
+    value: 10000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 0
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: 120°C, 120 min
+    lever_value: 120
+    value: 65000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 120
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: 120°C, 240 min
+    lever_value: 240
+    value: 190000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 240
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: 120°C, 360 min
+    lever_value: 360
+    value: 235000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 360
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: 120°C, 480 min
+    lever_value: 480
+    value: 265000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 480
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: 120°C, 600 min
+    lever_value: 600
+    value: 290000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 600
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+- id: schirle1992-13
+  odorant: furfural
+  lever_class: time
+  lever: heating time at 150°C (t = 0 when the reactor reached temperature)
+  focal: true
+  location: Fig. 5 (carbon signal)
+  digitised: true
+  unit: normalized area (vs internal standard)
+  quant_type: peak_area
+  time_course_rule: whole time series (lever is time)
+  quantity: amount
+  arms:
+  - label: 150°C, 0 min
+    lever_value: 0
+    value: 500000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 150
+      time_min: 0
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: 150°C, 20 min
+    lever_value: 20
+    value: 800000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 150
+      time_min: 20
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: 150°C, 40 min
+    lever_value: 40
+    value: 1500000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 150
+      time_min: 40
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: 150°C, 60 min
+    lever_value: 60
+    value: 2300000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 150
+      time_min: 60
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: 150°C, 80 min
+    lever_value: 80
+    value: 3000000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 150
+      time_min: 80
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: 150°C, 100 min
+    lever_value: 100
+    value: 4300000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 150
+      time_min: 100
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+- id: schirle1992-14
+  odorant: furfurol
+  lever_class: time
+  lever: heating time at 150°C (t = 0 when the reactor reached temperature)
+  focal: true
+  location: Fig. 5 (carbon signal)
+  digitised: true
+  unit: normalized area (vs internal standard)
+  quant_type: peak_area
+  time_course_rule: whole time series (lever is time)
+  quantity: amount
+  arms:
+  - label: 150°C, 0 min
+    lever_value: 0
+    value: 500000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 150
+      time_min: 0
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: 150°C, 20 min
+    lever_value: 20
+    value: 700000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 150
+      time_min: 20
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: 150°C, 40 min
+    lever_value: 40
+    value: 1300000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 150
+      time_min: 40
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: 150°C, 60 min
+    lever_value: 60
+    value: 2200000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 150
+      time_min: 60
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: 150°C, 80 min
+    lever_value: 80
+    value: 2900000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 150
+      time_min: 80
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: 150°C, 100 min
+    lever_value: 100
+    value: 3800000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 150
+      time_min: 100
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+- id: schirle1992-15
+  odorant: 2-acetyl furan
+  lever_class: time
+  lever: heating time at 150°C (t = 0 when the reactor reached temperature)
+  focal: true
+  location: Fig. 5 (carbon signal)
+  digitised: true
+  unit: normalized area (vs internal standard)
+  quant_type: peak_area
+  time_course_rule: whole time series (lever is time)
+  quantity: amount
+  arms:
+  - label: 150°C, 0 min
+    lever_value: 0
+    value: 500000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 150
+      time_min: 0
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: 150°C, 20 min
+    lever_value: 20
+    value: 1000000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 150
+      time_min: 20
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: 150°C, 40 min
+    lever_value: 40
+    value: 2800000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 150
+      time_min: 40
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: 150°C, 60 min
+    lever_value: 60
+    value: 5000000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 150
+      time_min: 60
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: 150°C, 80 min
+    lever_value: 80
+    value: 5200000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 150
+      time_min: 80
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: 150°C, 100 min
+    lever_value: 100
+    value: 6300000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 150
+      time_min: 100
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+- id: schirle1992-16
+  odorant: 5-Me furfural
+  lever_class: time
+  lever: heating time at 150°C (t = 0 when the reactor reached temperature)
+  focal: true
+  location: Fig. 5 (carbon signal)
+  digitised: true
+  unit: normalized area (vs internal standard)
+  quant_type: peak_area
+  time_course_rule: whole time series (lever is time)
+  quantity: amount
+  arms:
+  - label: 150°C, 0 min
+    lever_value: 0
+    value: 500000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 150
+      time_min: 0
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: 150°C, 20 min
+    lever_value: 20
+    value: 3200000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 150
+      time_min: 20
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: 150°C, 40 min
+    lever_value: 40
+    value: 10500000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 150
+      time_min: 40
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: 150°C, 60 min
+    lever_value: 60
+    value: 16000000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 150
+      time_min: 60
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: 150°C, 80 min
+    lever_value: 80
+    value: 16800000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 150
+      time_min: 80
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)
+  - label: 150°C, 100 min
+    lever_value: 100
+    value: 20500000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 150
+      time_min: 100
+      precursors:
+        glucose: 0.5 mole in 400 ml
+        cysteine: 0.1 mole in 400 ml
+      buffer: none
+      matrix: water
+      headspace: sealed pressure reactor (nitrogen added after each sampling)

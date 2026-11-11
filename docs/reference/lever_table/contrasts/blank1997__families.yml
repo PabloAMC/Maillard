@@ -1,0 +1,1872 @@
+source: blank1997
+pdf: data/articles/blank1997.pdf
+reader: resolved
+scope_note: 'Resolved from readers A and B (A''s structure kept; B differed mainly in odorant naming). HDMF keyed as DMHF,
+  EHMF (homofuraneol) as HEMF. All values IDA means of >= 2 assays, max SD <= 10 %, ug/mmol sugar; n and sd null. Table 1
+  xylose arms are the same pots as Table 3 phosphate, so the xylose amino-acid contrast (with the no-amino-acid control, footnote
+  c, ''<0.01'') is keyed once from Table 3. Table 2: amino acid added to xylose/4-aminobutyric acid (none, glycine, alanine).
+  Table 3 water arms: no buffer (''none''), pH 6 at the start but not controlled during heating, so the buffer contrast also
+  carries pH drift. Table 5 precursor dose levels are the amino-acid-to-xylose molar ratio (1, 2, 4).'
+contrasts:
+- id: blank1997-1
+  odorant: DMHF
+  lever_class: sugar identity
+  lever: pentose (arabinose vs xylose vs ribose), with glycine
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ug/mmol of sugar
+  quant_type: absolute
+  quantity: amount
+  resolution: agreed
+  time_course_rule: not a time course
+  arms:
+  - label: arabinose/glycine
+    lever_value: arabinose
+    value: 5.1
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        arabinose: equimolar
+        glycine: equimolar
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: xylose/glycine
+    lever_value: xylose
+    value: 2.6
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: equimolar
+        glycine: equimolar
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: ribose/glycine
+    lever_value: ribose
+    value: 3.6
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        ribose: equimolar
+        glycine: equimolar
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+- id: blank1997-2
+  odorant: DMHF
+  lever_class: sugar identity
+  lever: pentose (arabinose vs xylose vs ribose), with L-alanine
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ug/mmol of sugar
+  quant_type: absolute
+  quantity: amount
+  resolution: agreed
+  time_course_rule: not a time course
+  arms:
+  - label: arabinose/L-alanine
+    lever_value: arabinose
+    value: 1.2
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        arabinose: equimolar
+        L-alanine: equimolar
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: xylose/L-alanine
+    lever_value: xylose
+    value: 0.9
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: equimolar
+        L-alanine: equimolar
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: ribose/L-alanine
+    lever_value: ribose
+    value: 1.6
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        ribose: equimolar
+        L-alanine: equimolar
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+- id: blank1997-3
+  odorant: DMHF
+  lever_class: amino acid identity
+  lever: glycine vs L-alanine, with arabinose
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ug/mmol of sugar
+  quant_type: absolute
+  quantity: amount
+  resolution: agreed
+  time_course_rule: not a time course
+  arms:
+  - label: arabinose/glycine
+    lever_value: glycine
+    value: 5.1
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        arabinose: equimolar
+        glycine: equimolar
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: arabinose/L-alanine
+    lever_value: alanine
+    value: 1.2
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        arabinose: equimolar
+        L-alanine: equimolar
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+- id: blank1997-4
+  odorant: DMHF
+  lever_class: amino acid identity
+  lever: glycine vs L-alanine, with ribose
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ug/mmol of sugar
+  quant_type: absolute
+  quantity: amount
+  resolution: agreed
+  time_course_rule: not a time course
+  arms:
+  - label: ribose/glycine
+    lever_value: glycine
+    value: 3.6
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        ribose: equimolar
+        glycine: equimolar
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: ribose/L-alanine
+    lever_value: alanine
+    value: 1.6
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        ribose: equimolar
+        L-alanine: equimolar
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+- id: blank1997-5
+  odorant: HEMF
+  lever_class: sugar identity
+  lever: pentose (arabinose vs xylose vs ribose), with glycine
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ug/mmol of sugar
+  quant_type: absolute
+  quantity: amount
+  resolution: re-read
+  time_course_rule: not a time course
+  arms:
+  - label: arabinose/glycine
+    lever_value: arabinose
+    value: 1.3
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        arabinose: equimolar
+        glycine: equimolar
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: xylose/glycine
+    lever_value: xylose
+    value: 0.3
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: equimolar
+        glycine: equimolar
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: ribose/glycine
+    lever_value: ribose
+    value: 0.7
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        ribose: equimolar
+        glycine: equimolar
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+- id: blank1997-6
+  odorant: HEMF
+  lever_class: sugar identity
+  lever: pentose (arabinose vs xylose vs ribose), with L-alanine
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ug/mmol of sugar
+  quant_type: absolute
+  quantity: amount
+  resolution: re-read
+  time_course_rule: not a time course
+  arms:
+  - label: arabinose/L-alanine
+    lever_value: arabinose
+    value: 6.8
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        arabinose: equimolar
+        L-alanine: equimolar
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: xylose/L-alanine
+    lever_value: xylose
+    value: 7.5
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: equimolar
+        L-alanine: equimolar
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: ribose/L-alanine
+    lever_value: ribose
+    value: 10.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        ribose: equimolar
+        L-alanine: equimolar
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+- id: blank1997-7
+  odorant: HEMF
+  lever_class: amino acid identity
+  lever: glycine vs L-alanine, with arabinose
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ug/mmol of sugar
+  quant_type: absolute
+  quantity: amount
+  resolution: re-read
+  time_course_rule: not a time course
+  arms:
+  - label: arabinose/glycine
+    lever_value: glycine
+    value: 1.3
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        arabinose: equimolar
+        glycine: equimolar
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: arabinose/L-alanine
+    lever_value: alanine
+    value: 6.8
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        arabinose: equimolar
+        L-alanine: equimolar
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+- id: blank1997-8
+  odorant: HEMF
+  lever_class: amino acid identity
+  lever: glycine vs L-alanine, with ribose
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ug/mmol of sugar
+  quant_type: absolute
+  quantity: amount
+  resolution: re-read
+  time_course_rule: not a time course
+  arms:
+  - label: ribose/glycine
+    lever_value: glycine
+    value: 0.7
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        ribose: equimolar
+        glycine: equimolar
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: ribose/L-alanine
+    lever_value: alanine
+    value: 10.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        ribose: equimolar
+        L-alanine: equimolar
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+- id: blank1997-9
+  odorant: DMHF
+  lever_class: amino acid identity
+  lever: second amino acid added to xylose/4-aminobutyric acid (none vs glycine vs L-alanine)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ug/mmol of sugar
+  quant_type: absolute
+  quantity: amount
+  resolution: agreed
+  time_course_rule: not a time course
+  arms:
+  - label: xylose/4-aminobutyric acid
+    lever_value: none
+    value: 0.4
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: equimolar
+        4-aminobutyric acid: equimolar
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: xylose/4-aminobutyric acid/glycine
+    lever_value: glycine
+    value: 1.5
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: equimolar
+        4-aminobutyric acid: equimolar
+        glycine: equimolar
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: xylose/4-aminobutyric acid/L-alanine
+    lever_value: alanine
+    value: 0.7
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: equimolar
+        4-aminobutyric acid: equimolar
+        L-alanine: equimolar
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+- id: blank1997-10
+  odorant: HEMF
+  lever_class: amino acid identity
+  lever: second amino acid added to xylose/4-aminobutyric acid (none vs glycine vs L-alanine)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ug/mmol of sugar
+  quant_type: absolute
+  quantity: amount
+  resolution: re-read
+  time_course_rule: not a time course
+  arms:
+  - label: xylose/4-aminobutyric acid
+    lever_value: none
+    value: 0.1
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: equimolar
+        4-aminobutyric acid: equimolar
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: xylose/4-aminobutyric acid/glycine
+    lever_value: glycine
+    value: 0.2
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: equimolar
+        4-aminobutyric acid: equimolar
+        glycine: equimolar
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: xylose/4-aminobutyric acid/L-alanine
+    lever_value: alanine
+    value: 3.2
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: equimolar
+        4-aminobutyric acid: equimolar
+        L-alanine: equimolar
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+- id: blank1997-11
+  odorant: DMHF
+  lever_class: buffer
+  lever: reaction medium (water vs phosphate vs malonate), xylose
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/mmol of sugar
+  quant_type: absolute
+  quantity: amount
+  resolution: agreed
+  time_course_rule: not a time course
+  arms:
+  - label: xylose water
+    lever_value: none
+    value: null
+    censor: below_value
+    limit: 0.01
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: initial
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: equimolar
+      buffer: none (pH not controlled)
+      matrix: water
+      headspace: unstated
+  - label: xylose phosphate
+    lever_value: phosphate
+    value: null
+    censor: below_value
+    limit: 0.01
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: equimolar
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+- id: blank1997-12
+  odorant: DMHF
+  lever_class: buffer
+  lever: reaction medium (water vs phosphate vs malonate), xylose/glycine
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/mmol of sugar
+  quant_type: absolute
+  quantity: amount
+  resolution: agreed
+  time_course_rule: not a time course
+  arms:
+  - label: xylose/glycine water
+    lever_value: none
+    value: 0.06
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: initial
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: equimolar
+        glycine: equimolar
+      buffer: none (pH not controlled)
+      matrix: water
+      headspace: unstated
+  - label: xylose/glycine phosphate
+    lever_value: phosphate
+    value: 2.6
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: equimolar
+        glycine: equimolar
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: xylose/glycine malonate
+    lever_value: malonate
+    value: 0.6
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: equimolar
+        glycine: equimolar
+      buffer: 0.2 M malonate
+      matrix: buffer
+      headspace: unstated
+- id: blank1997-13
+  odorant: DMHF
+  lever_class: buffer
+  lever: reaction medium (water vs phosphate vs malonate), xylose/L-alanine
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/mmol of sugar
+  quant_type: absolute
+  quantity: amount
+  resolution: agreed
+  time_course_rule: not a time course
+  arms:
+  - label: xylose/L-alanine water
+    lever_value: none
+    value: 0.02
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: initial
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: equimolar
+        L-alanine: equimolar
+      buffer: none (pH not controlled)
+      matrix: water
+      headspace: unstated
+  - label: xylose/L-alanine phosphate
+    lever_value: phosphate
+    value: 0.9
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: equimolar
+        L-alanine: equimolar
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: xylose/L-alanine malonate
+    lever_value: malonate
+    value: 0.3
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: equimolar
+        L-alanine: equimolar
+      buffer: 0.2 M malonate
+      matrix: buffer
+      headspace: unstated
+- id: blank1997-14
+  odorant: DMHF
+  lever_class: amino acid identity
+  lever: amino acid with xylose (none vs glycine vs L-alanine), water
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/mmol of sugar
+  quant_type: absolute
+  quantity: amount
+  resolution: re-read
+  time_course_rule: not a time course
+  arms:
+  - label: xylose water
+    lever_value: none
+    value: null
+    censor: below_value
+    limit: 0.01
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: initial
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: equimolar
+      buffer: none (pH not controlled)
+      matrix: water
+      headspace: unstated
+  - label: xylose/glycine water
+    lever_value: glycine
+    value: 0.06
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: initial
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: equimolar
+        glycine: equimolar
+      buffer: none (pH not controlled)
+      matrix: water
+      headspace: unstated
+  - label: xylose/L-alanine water
+    lever_value: alanine
+    value: 0.02
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: initial
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: equimolar
+        L-alanine: equimolar
+      buffer: none (pH not controlled)
+      matrix: water
+      headspace: unstated
+- id: blank1997-15
+  odorant: DMHF
+  lever_class: amino acid identity
+  lever: amino acid with xylose (none vs glycine vs L-alanine), phosphate
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/mmol of sugar
+  quant_type: absolute
+  quantity: amount
+  resolution: re-read
+  time_course_rule: not a time course
+  arms:
+  - label: xylose phosphate
+    lever_value: none
+    value: null
+    censor: below_value
+    limit: 0.01
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: equimolar
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: xylose/glycine phosphate
+    lever_value: glycine
+    value: 2.6
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: equimolar
+        glycine: equimolar
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: xylose/L-alanine phosphate
+    lever_value: alanine
+    value: 0.9
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: equimolar
+        L-alanine: equimolar
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+- id: blank1997-16
+  odorant: DMHF
+  lever_class: amino acid identity
+  lever: amino acid with xylose (none vs glycine vs L-alanine), malonate
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/mmol of sugar
+  quant_type: absolute
+  quantity: amount
+  resolution: re-read
+  time_course_rule: not a time course
+  arms:
+  - label: xylose/glycine malonate
+    lever_value: glycine
+    value: 0.6
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: equimolar
+        glycine: equimolar
+      buffer: 0.2 M malonate
+      matrix: buffer
+      headspace: unstated
+  - label: xylose/L-alanine malonate
+    lever_value: alanine
+    value: 0.3
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: equimolar
+        L-alanine: equimolar
+      buffer: 0.2 M malonate
+      matrix: buffer
+      headspace: unstated
+- id: blank1997-17
+  odorant: HEMF
+  lever_class: buffer
+  lever: reaction medium (water vs phosphate vs malonate), xylose
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/mmol of sugar
+  quant_type: absolute
+  quantity: amount
+  resolution: re-read
+  time_course_rule: not a time course
+  arms:
+  - label: xylose water
+    lever_value: none
+    value: null
+    censor: below_value
+    limit: 0.01
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: initial
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: equimolar
+      buffer: none (pH not controlled)
+      matrix: water
+      headspace: unstated
+  - label: xylose phosphate
+    lever_value: phosphate
+    value: null
+    censor: below_value
+    limit: 0.01
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: equimolar
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+- id: blank1997-18
+  odorant: HEMF
+  lever_class: buffer
+  lever: reaction medium (water vs phosphate vs malonate), xylose/glycine
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/mmol of sugar
+  quant_type: absolute
+  quantity: amount
+  resolution: re-read
+  time_course_rule: not a time course
+  arms:
+  - label: xylose/glycine water
+    lever_value: none
+    value: null
+    censor: below_value
+    limit: 0.01
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: initial
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: equimolar
+        glycine: equimolar
+      buffer: none (pH not controlled)
+      matrix: water
+      headspace: unstated
+  - label: xylose/glycine phosphate
+    lever_value: phosphate
+    value: 0.3
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: equimolar
+        glycine: equimolar
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: xylose/glycine malonate
+    lever_value: malonate
+    value: 0.1
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: equimolar
+        glycine: equimolar
+      buffer: 0.2 M malonate
+      matrix: buffer
+      headspace: unstated
+- id: blank1997-19
+  odorant: HEMF
+  lever_class: buffer
+  lever: reaction medium (water vs phosphate vs malonate), xylose/L-alanine
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/mmol of sugar
+  quant_type: absolute
+  quantity: amount
+  resolution: re-read
+  time_course_rule: not a time course
+  arms:
+  - label: xylose/L-alanine water
+    lever_value: none
+    value: 0.05
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: initial
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: equimolar
+        L-alanine: equimolar
+      buffer: none (pH not controlled)
+      matrix: water
+      headspace: unstated
+  - label: xylose/L-alanine phosphate
+    lever_value: phosphate
+    value: 7.5
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: equimolar
+        L-alanine: equimolar
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: xylose/L-alanine malonate
+    lever_value: malonate
+    value: 0.8
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: equimolar
+        L-alanine: equimolar
+      buffer: 0.2 M malonate
+      matrix: buffer
+      headspace: unstated
+- id: blank1997-20
+  odorant: HEMF
+  lever_class: amino acid identity
+  lever: amino acid with xylose (none vs glycine vs L-alanine), water
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/mmol of sugar
+  quant_type: absolute
+  quantity: amount
+  resolution: re-read
+  time_course_rule: not a time course
+  arms:
+  - label: xylose water
+    lever_value: none
+    value: null
+    censor: below_value
+    limit: 0.01
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: initial
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: equimolar
+      buffer: none (pH not controlled)
+      matrix: water
+      headspace: unstated
+  - label: xylose/glycine water
+    lever_value: glycine
+    value: null
+    censor: below_value
+    limit: 0.01
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: initial
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: equimolar
+        glycine: equimolar
+      buffer: none (pH not controlled)
+      matrix: water
+      headspace: unstated
+  - label: xylose/L-alanine water
+    lever_value: alanine
+    value: 0.05
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: initial
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: equimolar
+        L-alanine: equimolar
+      buffer: none (pH not controlled)
+      matrix: water
+      headspace: unstated
+- id: blank1997-21
+  odorant: HEMF
+  lever_class: amino acid identity
+  lever: amino acid with xylose (none vs glycine vs L-alanine), phosphate
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/mmol of sugar
+  quant_type: absolute
+  quantity: amount
+  resolution: re-read
+  time_course_rule: not a time course
+  arms:
+  - label: xylose phosphate
+    lever_value: none
+    value: null
+    censor: below_value
+    limit: 0.01
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: equimolar
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: xylose/glycine phosphate
+    lever_value: glycine
+    value: 0.3
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: equimolar
+        glycine: equimolar
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: xylose/L-alanine phosphate
+    lever_value: alanine
+    value: 7.5
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: equimolar
+        L-alanine: equimolar
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+- id: blank1997-22
+  odorant: HEMF
+  lever_class: amino acid identity
+  lever: amino acid with xylose (none vs glycine vs L-alanine), malonate
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/mmol of sugar
+  quant_type: absolute
+  quantity: amount
+  resolution: re-read
+  time_course_rule: not a time course
+  arms:
+  - label: xylose/glycine malonate
+    lever_value: glycine
+    value: 0.1
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: equimolar
+        glycine: equimolar
+      buffer: 0.2 M malonate
+      matrix: buffer
+      headspace: unstated
+  - label: xylose/L-alanine malonate
+    lever_value: alanine
+    value: 0.8
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: equimolar
+        L-alanine: equimolar
+      buffer: 0.2 M malonate
+      matrix: buffer
+      headspace: unstated
+- id: blank1997-23
+  odorant: DMHF
+  lever_class: pH
+  lever: pH (5, 6, 7), xylose/glycine
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: ug/mmol of sugar
+  quant_type: absolute
+  quantity: amount
+  resolution: agreed
+  time_course_rule: not a time course
+  arms:
+  - label: xylose/glycine pH 5
+    lever_value: 5
+    value: 2.6
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: equimolar
+        glycine: equimolar
+      buffer: 0.2 mol/L phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: xylose/glycine pH 6
+    lever_value: 6
+    value: 2.6
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: equimolar
+        glycine: equimolar
+      buffer: 0.2 mol/L phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: xylose/glycine pH 7
+    lever_value: 7
+    value: 3.1
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: equimolar
+        glycine: equimolar
+      buffer: 0.2 mol/L phosphate
+      matrix: buffer
+      headspace: unstated
+- id: blank1997-24
+  odorant: DMHF
+  lever_class: pH
+  lever: pH (5, 6, 7), xylose/L-alanine
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: ug/mmol of sugar
+  quant_type: absolute
+  quantity: amount
+  resolution: agreed
+  time_course_rule: not a time course
+  arms:
+  - label: xylose/L-alanine pH 5
+    lever_value: 5
+    value: 0.3
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: equimolar
+        L-alanine: equimolar
+      buffer: 0.2 mol/L phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: xylose/L-alanine pH 6
+    lever_value: 6
+    value: 0.9
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: equimolar
+        L-alanine: equimolar
+      buffer: 0.2 mol/L phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: xylose/L-alanine pH 7
+    lever_value: 7
+    value: 2.5
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: equimolar
+        L-alanine: equimolar
+      buffer: 0.2 mol/L phosphate
+      matrix: buffer
+      headspace: unstated
+- id: blank1997-25
+  odorant: HEMF
+  lever_class: pH
+  lever: pH (5, 6, 7), xylose/glycine
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: ug/mmol of sugar
+  quant_type: absolute
+  quantity: amount
+  resolution: re-read
+  time_course_rule: not a time course
+  arms:
+  - label: xylose/glycine pH 5
+    lever_value: 5
+    value: 0.3
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: equimolar
+        glycine: equimolar
+      buffer: 0.2 mol/L phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: xylose/glycine pH 6
+    lever_value: 6
+    value: 0.3
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: equimolar
+        glycine: equimolar
+      buffer: 0.2 mol/L phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: xylose/glycine pH 7
+    lever_value: 7
+    value: 0.7
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: equimolar
+        glycine: equimolar
+      buffer: 0.2 mol/L phosphate
+      matrix: buffer
+      headspace: unstated
+- id: blank1997-26
+  odorant: HEMF
+  lever_class: pH
+  lever: pH (5, 6, 7), xylose/L-alanine
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: ug/mmol of sugar
+  quant_type: absolute
+  quantity: amount
+  resolution: re-read
+  time_course_rule: not a time course
+  arms:
+  - label: xylose/L-alanine pH 5
+    lever_value: 5
+    value: 2.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: equimolar
+        L-alanine: equimolar
+      buffer: 0.2 mol/L phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: xylose/L-alanine pH 6
+    lever_value: 6
+    value: 7.5
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: equimolar
+        L-alanine: equimolar
+      buffer: 0.2 mol/L phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: xylose/L-alanine pH 7
+    lever_value: 7
+    value: 13.5
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: equimolar
+        L-alanine: equimolar
+      buffer: 0.2 mol/L phosphate
+      matrix: buffer
+      headspace: unstated
+- id: blank1997-27
+  odorant: DMHF
+  lever_class: precursor dose
+  lever: molar ratio xylose/glycine (1:1, 1:2, 1:4); lever_value = amino acid per xylose (mol/mol), xylose fixed
+  focal: true
+  location: Table 5
+  digitised: false
+  unit: ug/mmol of sugar
+  quant_type: absolute
+  quantity: amount
+  resolution: agreed
+  time_course_rule: not a time course
+  arms:
+  - label: xylose/glycine 1:1
+    lever_value: 1
+    value: 2.6
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: 1 (molar ratio)
+        glycine: 1 (molar ratio)
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: xylose/glycine 1:2
+    lever_value: 2
+    value: 3.2
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: 1 (molar ratio)
+        glycine: 2 (molar ratio)
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: xylose/glycine 1:4
+    lever_value: 4
+    value: 4.2
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: 1 (molar ratio)
+        glycine: 4 (molar ratio)
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+- id: blank1997-28
+  odorant: DMHF
+  lever_class: precursor dose
+  lever: molar ratio xylose/L-alanine (1:1, 1:2, 1:4); lever_value = amino acid per xylose (mol/mol), xylose fixed
+  focal: true
+  location: Table 5
+  digitised: false
+  unit: ug/mmol of sugar
+  quant_type: absolute
+  quantity: amount
+  resolution: agreed
+  time_course_rule: not a time course
+  arms:
+  - label: xylose/L-alanine 1:1
+    lever_value: 1
+    value: 0.9
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: 1 (molar ratio)
+        L-alanine: 1 (molar ratio)
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: xylose/L-alanine 1:2
+    lever_value: 2
+    value: 1.2
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: 1 (molar ratio)
+        L-alanine: 2 (molar ratio)
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: xylose/L-alanine 1:4
+    lever_value: 4
+    value: 1.6
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: 1 (molar ratio)
+        L-alanine: 4 (molar ratio)
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+- id: blank1997-29
+  odorant: HEMF
+  lever_class: precursor dose
+  lever: molar ratio xylose/glycine (1:1, 1:2, 1:4); lever_value = amino acid per xylose (mol/mol), xylose fixed
+  focal: true
+  location: Table 5
+  digitised: false
+  unit: ug/mmol of sugar
+  quant_type: absolute
+  quantity: amount
+  resolution: re-read
+  time_course_rule: not a time course
+  arms:
+  - label: xylose/glycine 1:1
+    lever_value: 1
+    value: 0.3
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: 1 (molar ratio)
+        glycine: 1 (molar ratio)
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: xylose/glycine 1:2
+    lever_value: 2
+    value: 0.4
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: 1 (molar ratio)
+        glycine: 2 (molar ratio)
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: xylose/glycine 1:4
+    lever_value: 4
+    value: 0.5
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: 1 (molar ratio)
+        glycine: 4 (molar ratio)
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+- id: blank1997-30
+  odorant: HEMF
+  lever_class: precursor dose
+  lever: molar ratio xylose/L-alanine (1:1, 1:2, 1:4); lever_value = amino acid per xylose (mol/mol), xylose fixed
+  focal: true
+  location: Table 5
+  digitised: false
+  unit: ug/mmol of sugar
+  quant_type: absolute
+  quantity: amount
+  resolution: re-read
+  time_course_rule: not a time course
+  arms:
+  - label: xylose/L-alanine 1:1
+    lever_value: 1
+    value: 7.5
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: 1 (molar ratio)
+        L-alanine: 1 (molar ratio)
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: xylose/L-alanine 1:2
+    lever_value: 2
+    value: 12.5
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: 1 (molar ratio)
+        L-alanine: 2 (molar ratio)
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: xylose/L-alanine 1:4
+    lever_value: 4
+    value: 20.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 90
+      time_min: 60
+      precursors:
+        xylose: 1 (molar ratio)
+        L-alanine: 4 (molar ratio)
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
