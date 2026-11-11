@@ -41,11 +41,11 @@
   },
   "provenance": {
     "artifact": "core_panel_scores",
-    "generated_on": "2026-11-11",
+    "generated_on": "2026-11-07",
     "git": {
-      "commit": "9c3c96f27dc7b26e3c22e670edfe3f188b8236c6",
-      "short": "9c3c96f2",
-      "branch": "rival-bdf-retry",
+      "commit": "5e61fed0344b8b1cb5f8312085ed42ad63ad3b0b",
+      "short": "5e61fed0",
+      "branch": "s3-ph-balance-refusal",
       "dirty": true
     },
     "generated_by": "src/kinetic_core/scoring.py",
@@ -475,7 +475,7 @@
       "total": 16
     },
     "shared_with_holdout_panel": 0,
-    "wall_seconds": 269.5
+    "wall_seconds": 1052.3
   },
   "benchmarks": [
     {

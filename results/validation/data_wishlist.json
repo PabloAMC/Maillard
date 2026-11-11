@@ -2,11 +2,11 @@
   "artifact": "data_wishlist",
   "provenance": {
     "artifact": "data_wishlist",
-    "generated_on": "2026-11-07",
+    "generated_on": "2026-11-11",
     "git": {
-      "commit": "5e61fed0344b8b1cb5f8312085ed42ad63ad3b0b",
-      "short": "5e61fed0",
-      "branch": "s3-ph-balance-refusal",
+      "commit": "c21806bf6756e31dbfaf751d91438e2633db8916",
+      "short": "c21806bf",
+      "branch": "rival-bdf-retry",
       "dirty": true
     },
     "generated_by": "src/data_wishlist.py",
@@ -25,7 +25,7 @@
       },
       {
         "path": "results/validation/core_directional_scores.json",
-        "sha256": "5432480f4b3c7f05591a00f3cec7e196fddaae2433099be4a8838e0e8377ea0d"
+        "sha256": "2bff5e085927aec1de08a4b71779e71f9aaec0626551079697bab8c0ab489c46"
       },
       {
         "path": "results/validation/experiment_value_ranking.json",
