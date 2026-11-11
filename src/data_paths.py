@@ -45,6 +45,8 @@ SPECIES_STRUCTURES: Path = SPECIES_DIR / "structures.yml"
 LITERATURE_STRUCTURES: Path = SPECIES_DIR / "literature_structures.yml"
 #: 2026-09-08: reactive-site densities per gram of protein for the matrices a dossier states (the matrix layer).
 PROTEIN_MATRICES: Path = SPECIES_DIR / "protein_matrices.yml"
+#: Ingredients in % w/w -> precursors, each value with its dossier (STATUS_AND_PLAN sec. 0 step 3).
+INGREDIENTS: Path = SPECIES_DIR / "ingredients.yml"
 BENCHMARKS_DIR: Path = DATA_ROOT / "benchmarks"
 PROTOCOLS_DIR: Path = DATA_ROOT / "protocols"
 TIMESERIES_DIR: Path = LIT_DIR / "timeseries"
@@ -138,6 +140,11 @@ DIRECTIONAL_ACCURACY_REPORT: Path = DOCS_ROOT / "validation" / "directional_accu
 PRIMARY_BENCHMARK_PROTOCOL_MD: Path = DOCS_ROOT / "protocols" / "PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md"
 SCIENTIFIC_REFERENCE_MD: Path = DOCS_ROOT / "reference" / "SCIENTIFIC_REFERENCE.md"
 EXAMPLES_DIR: Path = DOCS_ROOT / "examples"
+# The lever table from data (STATUS_AND_PLAN sec. 0 step 2; rules in LEVER_TABLE_DIR / "PREREG.md").
+LEVER_TABLE_DIR: Path = DOCS_ROOT / "reference" / "lever_table"
+LEVER_TABLE_CONTRASTS_DIR: Path = LEVER_TABLE_DIR / "contrasts"
+LEVER_TABLE_NEW_LABS: Path = LEVER_TABLE_DIR / "new_labs.yml"
+CONTRAST_SPLIT: Path = DOCS_ROOT / "reference" / "contrast_benchmark" / "split.yml"
 INGEST_TEMPLATES_DIR: Path = DOCS_ROOT / "templates"
 # Figures and HTML the generators publish for the docs site (results copied here).
 DOCS_ASSETS_DIR: Path = DOCS_ROOT / "assets"

@@ -1,0 +1,217 @@
+source: farmer1990
+pdf: data/articles/farmer1990.pdf
+reader: b
+scope_note: 'Disulfides and H2S not reported in Table 2 (selected compounds only); only MFT and FFT keyed. | farmer1990-1:
+  n from text (quadruplicate; cysteine+ribose alone n=5). Values >1000 printed to three significant figures. | farmer1990-2:
+  n from text (quadruplicate; cysteine+ribose alone n=5). Values >1000 printed to three significant figures.'
+contrasts:
+- id: farmer1990-1
+  odorant: 2-furanmethanethiol
+  lever_class: lipid
+  lever: 'lipid added: none vs beef triglyceride vs beef phospholipid vs egg PC vs egg PE'
+  focal: false
+  location: Table 2, p. 512
+  digitised: false
+  unit: relative peak area (1 ng 1,2-dichlorobenzene = 100)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: Alone
+    lever_value: none
+    value: 50200
+    censor: none
+    limit: null
+    n: 5
+    sd: 7090
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 mg/mL
+        ribose: 4.5 mg/mL
+      buffer: 0.5 M phosphate (pH 5.6)
+      matrix: buffer
+      headspace: inert (N2-flushed, flame-sealed ampoule)
+  - label: +BTG
+    lever_value: beef triglyceride
+    value: 33400
+    censor: none
+    limit: null
+    n: 4
+    sd: 3560
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 mg/mL
+        ribose: 4.5 mg/mL
+        beef triglyceride: 30 mg per 2 mL
+      buffer: 0.5 M phosphate (pH 5.6)
+      matrix: buffer
+      headspace: inert (N2-flushed, flame-sealed ampoule)
+  - label: +BPL
+    lever_value: beef phospholipid
+    value: 31600
+    censor: none
+    limit: null
+    n: 4
+    sd: 7530
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 mg/mL
+        ribose: 4.5 mg/mL
+        beef phospholipid: 30 mg per 2 mL
+      buffer: 0.5 M phosphate (pH 5.6)
+      matrix: buffer
+      headspace: inert (N2-flushed, flame-sealed ampoule)
+  - label: +PC
+    lever_value: egg phosphatidylcholine
+    value: 31000
+    censor: none
+    limit: null
+    n: 4
+    sd: 2490
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 mg/mL
+        ribose: 4.5 mg/mL
+        egg PC: 30 mg per 2 mL
+      buffer: 0.5 M phosphate (pH 5.6)
+      matrix: buffer
+      headspace: inert (N2-flushed, flame-sealed ampoule)
+  - label: +PE
+    lever_value: egg phosphatidylethanolamine
+    value: 35900
+    censor: none
+    limit: null
+    n: 4
+    sd: 7130
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 mg/mL
+        ribose: 4.5 mg/mL
+        egg PE: 30 mg per 2 mL
+      buffer: 0.5 M phosphate (pH 5.6)
+      matrix: buffer
+      headspace: inert (N2-flushed, flame-sealed ampoule)
+- id: farmer1990-2
+  odorant: 2-methyl-3-furanthiol
+  lever_class: lipid
+  lever: 'lipid added: none vs beef triglyceride vs beef phospholipid vs egg PC vs egg PE'
+  focal: false
+  location: Table 2, p. 512
+  digitised: false
+  unit: relative peak area (1 ng 1,2-dichlorobenzene = 100)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  arms:
+  - label: Alone
+    lever_value: none
+    value: 30600
+    censor: none
+    limit: null
+    n: 5
+    sd: 3650
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 mg/mL
+        ribose: 4.5 mg/mL
+      buffer: 0.5 M phosphate (pH 5.6)
+      matrix: buffer
+      headspace: inert (N2-flushed, flame-sealed ampoule)
+  - label: +BTG
+    lever_value: beef triglyceride
+    value: 12300
+    censor: none
+    limit: null
+    n: 4
+    sd: 3800
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 mg/mL
+        ribose: 4.5 mg/mL
+        beef triglyceride: 30 mg per 2 mL
+      buffer: 0.5 M phosphate (pH 5.6)
+      matrix: buffer
+      headspace: inert (N2-flushed, flame-sealed ampoule)
+  - label: +BPL
+    lever_value: beef phospholipid
+    value: 4740
+    censor: none
+    limit: null
+    n: 4
+    sd: 1400
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 mg/mL
+        ribose: 4.5 mg/mL
+        beef phospholipid: 30 mg per 2 mL
+      buffer: 0.5 M phosphate (pH 5.6)
+      matrix: buffer
+      headspace: inert (N2-flushed, flame-sealed ampoule)
+  - label: +PC
+    lever_value: egg phosphatidylcholine
+    value: 8240
+    censor: none
+    limit: null
+    n: 4
+    sd: 1110
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 mg/mL
+        ribose: 4.5 mg/mL
+        egg PC: 30 mg per 2 mL
+      buffer: 0.5 M phosphate (pH 5.6)
+      matrix: buffer
+      headspace: inert (N2-flushed, flame-sealed ampoule)
+  - label: +PE
+    lever_value: egg phosphatidylethanolamine
+    value: 7230
+    censor: none
+    limit: null
+    n: 4
+    sd: 2590
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 mg/mL
+        ribose: 4.5 mg/mL
+        egg PE: 30 mg per 2 mL
+      buffer: 0.5 M phosphate (pH 5.6)
+      matrix: buffer
+      headspace: inert (N2-flushed, flame-sealed ampoule)

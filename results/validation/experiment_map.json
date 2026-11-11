@@ -1,0 +1,662 @@
+{
+  "artifact": "experiment_map",
+  "lever_table": "results/validation/lever_table.json",
+  "rows": [
+    {
+      "family": "meaty thiols",
+      "lever": "pH",
+      "reading": "needs experiment",
+      "why": "keyed: best cell '2-Furfurylthiol (FFT), pH 4.5-6, initial or label' reads direction unclear (4 laboratories)",
+      "plant_protein_evidence": false,
+      "design": "pH: pH 5.0 / 6.0 / 7.0; 5 replicate pots per arm; in a 15 % pea-isolate matrix; from 1 new laboratory(ies) to reach 3; measure MFT, FFT, H2S and the disulfides by SIDA",
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "meaty thiols",
+      "lever": "temperature",
+      "reading": "needs experiment",
+      "why": "keyed: best cell '2-Furfurylthiol (FFT), time >120 min' reads too few laboratories (1 laboratories)",
+      "plant_protein_evidence": false,
+      "design": "temperature: 120 / 140 / 160 C; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 2 new laboratory(ies) to reach 3; measure MFT, FFT, H2S and the disulfides by SIDA",
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "meaty thiols",
+      "lever": "time",
+      "reading": "needs experiment",
+      "why": "keyed: best cell '2-Furfurylthiol (FFT), T 100-130 C' reads too few laboratories (2 laboratories)",
+      "plant_protein_evidence": false,
+      "design": "time: 5 / 10 / 20 / 40 min; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 1 new laboratory(ies) to reach 3; measure MFT, FFT, H2S and the disulfides by SIDA",
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "meaty thiols",
+      "lever": "precursor dose",
+      "reading": "needs experiment",
+      "why": "keyed: best cell '2-Methyl-3-furanthiol (MFT), all' reads direction unclear (3 laboratories)",
+      "plant_protein_evidence": false,
+      "design": "precursor dose: 0 / 0.5x / 1x / 2x of the base dose; 6 replicate pots per arm; in a 15 % pea-isolate matrix; from 1 new laboratory(ies) to reach 3; measure MFT, FFT, H2S and the disulfides by SIDA",
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "meaty thiols",
+      "lever": "sugar identity",
+      "reading": "needs experiment",
+      "why": "keyed: best cell '2-Furfurylthiol (FFT), ribose vs glucose' reads too few laboratories (2 laboratories)",
+      "plant_protein_evidence": false,
+      "design": "sugar identity: ribose vs glucose (vs xylose); 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 1 new laboratory(ies) to reach 3; measure MFT, FFT, H2S and the disulfides by SIDA",
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "meaty thiols",
+      "lever": "sulfur source",
+      "reading": "answered by the literature",
+      "why": "2-Methyl-3-furanthiol (MFT), none vs cysteine: -0.78 dex (new laboratory -1.72 to +0.17)",
+      "plant_protein_evidence": false,
+      "design": null,
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "meaty thiols",
+      "lever": "yeast extract",
+      "reading": "needs experiment",
+      "why": "no atlas contrast on disk (the measurement ledger may hold unkeyed ones)",
+      "plant_protein_evidence": false,
+      "design": "yeast extract: 0 / 0.5 / 1 / 2 % w/w; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 3 new laboratory(ies) to reach 3; measure MFT, FFT, H2S and the disulfides by SIDA",
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "meaty thiols",
+      "lever": "thiamine",
+      "reading": "needs experiment",
+      "why": "keyed in grosch1992, hincelin1992 but no usable estimate: the no-thiamine arm is 'not detected' without a limit, or thiamine is compared only with thiamine pyrophosphate and never connects to cysteine",
+      "plant_protein_evidence": false,
+      "design": "thiamine: 0 / 0.05 / 0.1 % w/w; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 3 new laboratory(ies) to reach 3; measure MFT, FFT, H2S and the disulfides by SIDA",
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "meaty thiols",
+      "lever": "lipid",
+      "reading": "needs experiment",
+      "why": "keyed: best cell '2-Furfurylthiol (FFT), beef phospholipid vs none' reads too few laboratories (1 laboratories)",
+      "plant_protein_evidence": false,
+      "design": "lipid: 0 / 2 / 5 % sunflower oil; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 2 new laboratory(ies) to reach 3; measure MFT, FFT, H2S and the disulfides by SIDA",
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "meaty thiols",
+      "lever": "water",
+      "reading": "needs experiment",
+      "why": "7 atlas contrasts, none keyed as usable for this lever",
+      "plant_protein_evidence": false,
+      "design": "water: a_w 0.95 / 0.85 / 0.75; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 3 new laboratory(ies) to reach 3; measure MFT, FFT, H2S and the disulfides by SIDA",
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "meaty thiols",
+      "lever": "buffer",
+      "reading": "needs experiment",
+      "why": "keyed: best cell '2-Furfurylthiol (FFT), none vs phosphate' reads too few laboratories (1 laboratories)",
+      "plant_protein_evidence": false,
+      "design": "buffer: phosphate 0 / 0.1 / 0.2 M; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 2 new laboratory(ies) to reach 3; measure MFT, FFT, H2S and the disulfides by SIDA",
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "meaty thiols",
+      "lever": "heme / iron",
+      "reading": "needs experiment",
+      "why": "2 atlas contrasts, none keyed as usable for this lever",
+      "plant_protein_evidence": false,
+      "design": "heme / iron: 0 / 0.2 / 0.5 % leghemoglobin or FeSO4 equivalent; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 3 new laboratory(ies) to reach 3; measure MFT, FFT, H2S and the disulfides by SIDA",
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "meaty thiols",
+      "lever": "matrix",
+      "reading": "needs experiment",
+      "why": "keyed: best cell '2-Furfurylthiol (FFT), choline chloride/glycerol vs buffer' reads too few laboratories (1 laboratories)",
+      "plant_protein_evidence": false,
+      "design": "matrix: buffer vs 15 % pea isolate; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 2 new laboratory(ies) to reach 3; measure MFT, FFT, H2S and the disulfides by SIDA",
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "meaty thiols",
+      "lever": "cooking method",
+      "reading": "needs experiment",
+      "why": "no atlas contrast on disk (the measurement ledger may hold unkeyed ones)",
+      "plant_protein_evidence": false,
+      "design": "cooking method: sealed 140 C vs pan 180 C surface; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 3 new laboratory(ies) to reach 3; measure MFT, FFT, H2S and the disulfides by SIDA",
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "Strecker aldehydes, methional",
+      "lever": "pH",
+      "reading": "not yet keyed",
+      "why": "8 atlas contrasts from 4 laboratories await keying (step 2)",
+      "plant_protein_evidence": false,
+      "design": null,
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "Strecker aldehydes, methional",
+      "lever": "temperature",
+      "reading": "not yet keyed",
+      "why": "3 atlas contrasts from 3 laboratories await keying (step 2)",
+      "plant_protein_evidence": false,
+      "design": null,
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "Strecker aldehydes, methional",
+      "lever": "time",
+      "reading": "needs experiment",
+      "why": "no atlas contrast on disk (the measurement ledger may hold unkeyed ones)",
+      "plant_protein_evidence": false,
+      "design": "time: 5 / 10 / 20 / 40 min; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 3 new laboratory(ies) to reach 3; measure Strecker aldehydes, methional",
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "Strecker aldehydes, methional",
+      "lever": "precursor dose",
+      "reading": "needs experiment",
+      "why": "no atlas contrast on disk (the measurement ledger may hold unkeyed ones)",
+      "plant_protein_evidence": false,
+      "design": "precursor dose: 0 / 0.5x / 1x / 2x of the base dose; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 3 new laboratory(ies) to reach 3; measure Strecker aldehydes, methional",
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "Strecker aldehydes, methional",
+      "lever": "sugar identity",
+      "reading": "not yet keyed",
+      "why": "5 atlas contrasts from 4 laboratories await keying (step 2)",
+      "plant_protein_evidence": false,
+      "design": null,
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "Strecker aldehydes, methional",
+      "lever": "sulfur source",
+      "reading": "not yet keyed",
+      "why": "6 atlas contrasts from 4 laboratories await keying (step 2)",
+      "plant_protein_evidence": false,
+      "design": null,
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "Strecker aldehydes, methional",
+      "lever": "yeast extract",
+      "reading": "needs experiment",
+      "why": "no atlas contrast on disk (the measurement ledger may hold unkeyed ones)",
+      "plant_protein_evidence": false,
+      "design": "yeast extract: 0 / 0.5 / 1 / 2 % w/w; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 3 new laboratory(ies) to reach 3; measure Strecker aldehydes, methional",
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "Strecker aldehydes, methional",
+      "lever": "thiamine",
+      "reading": "needs experiment",
+      "why": "no atlas contrast on disk (the measurement ledger may hold unkeyed ones)",
+      "plant_protein_evidence": false,
+      "design": "thiamine: 0 / 0.05 / 0.1 % w/w; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 3 new laboratory(ies) to reach 3; measure Strecker aldehydes, methional",
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "Strecker aldehydes, methional",
+      "lever": "lipid",
+      "reading": "not yet keyed",
+      "why": "1 atlas contrasts from 1 laboratories await keying (step 2)",
+      "plant_protein_evidence": false,
+      "design": null,
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "Strecker aldehydes, methional",
+      "lever": "water",
+      "reading": "not yet keyed",
+      "why": "1 atlas contrasts from 1 laboratories await keying (step 2)",
+      "plant_protein_evidence": false,
+      "design": null,
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "Strecker aldehydes, methional",
+      "lever": "buffer",
+      "reading": "not yet keyed",
+      "why": "1 atlas contrasts from 1 laboratories await keying (step 2)",
+      "plant_protein_evidence": false,
+      "design": null,
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "Strecker aldehydes, methional",
+      "lever": "heme / iron",
+      "reading": "not yet keyed",
+      "why": "1 atlas contrasts from 1 laboratories await keying (step 2)",
+      "plant_protein_evidence": false,
+      "design": null,
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "Strecker aldehydes, methional",
+      "lever": "matrix",
+      "reading": "needs experiment",
+      "why": "no atlas contrast on disk (the measurement ledger may hold unkeyed ones)",
+      "plant_protein_evidence": false,
+      "design": "matrix: buffer vs 15 % pea isolate; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 3 new laboratory(ies) to reach 3; measure Strecker aldehydes, methional",
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "Strecker aldehydes, methional",
+      "lever": "cooking method",
+      "reading": "needs experiment",
+      "why": "no atlas contrast on disk (the measurement ledger may hold unkeyed ones)",
+      "plant_protein_evidence": false,
+      "design": "cooking method: sealed 140 C vs pan 180 C surface; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 3 new laboratory(ies) to reach 3; measure Strecker aldehydes, methional",
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "pyrazines",
+      "lever": "pH",
+      "reading": "not yet keyed",
+      "why": "3 atlas contrasts from 2 laboratories await keying (step 2)",
+      "plant_protein_evidence": false,
+      "design": null,
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "pyrazines",
+      "lever": "temperature",
+      "reading": "needs experiment",
+      "why": "no atlas contrast on disk (the measurement ledger may hold unkeyed ones)",
+      "plant_protein_evidence": false,
+      "design": "temperature: 120 / 140 / 160 C; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 3 new laboratory(ies) to reach 3; measure pyrazines",
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "pyrazines",
+      "lever": "time",
+      "reading": "needs experiment",
+      "why": "no atlas contrast on disk (the measurement ledger may hold unkeyed ones)",
+      "plant_protein_evidence": false,
+      "design": "time: 5 / 10 / 20 / 40 min; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 3 new laboratory(ies) to reach 3; measure pyrazines",
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "pyrazines",
+      "lever": "precursor dose",
+      "reading": "needs experiment",
+      "why": "no atlas contrast on disk (the measurement ledger may hold unkeyed ones)",
+      "plant_protein_evidence": false,
+      "design": "precursor dose: 0 / 0.5x / 1x / 2x of the base dose; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 3 new laboratory(ies) to reach 3; measure pyrazines",
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "pyrazines",
+      "lever": "sugar identity",
+      "reading": "not yet keyed",
+      "why": "1 atlas contrasts from 1 laboratories await keying (step 2)",
+      "plant_protein_evidence": false,
+      "design": null,
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "pyrazines",
+      "lever": "sulfur source",
+      "reading": "not yet keyed",
+      "why": "10 atlas contrasts from 3 laboratories await keying (step 2)",
+      "plant_protein_evidence": false,
+      "design": null,
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "pyrazines",
+      "lever": "yeast extract",
+      "reading": "needs experiment",
+      "why": "no atlas contrast on disk (the measurement ledger may hold unkeyed ones)",
+      "plant_protein_evidence": false,
+      "design": "yeast extract: 0 / 0.5 / 1 / 2 % w/w; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 3 new laboratory(ies) to reach 3; measure pyrazines",
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "pyrazines",
+      "lever": "thiamine",
+      "reading": "needs experiment",
+      "why": "no atlas contrast on disk (the measurement ledger may hold unkeyed ones)",
+      "plant_protein_evidence": false,
+      "design": "thiamine: 0 / 0.05 / 0.1 % w/w; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 3 new laboratory(ies) to reach 3; measure pyrazines",
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "pyrazines",
+      "lever": "lipid",
+      "reading": "needs experiment",
+      "why": "no atlas contrast on disk (the measurement ledger may hold unkeyed ones)",
+      "plant_protein_evidence": false,
+      "design": "lipid: 0 / 2 / 5 % sunflower oil; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 3 new laboratory(ies) to reach 3; measure pyrazines",
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "pyrazines",
+      "lever": "water",
+      "reading": "not yet keyed",
+      "why": "1 atlas contrasts from 1 laboratories await keying (step 2)",
+      "plant_protein_evidence": false,
+      "design": null,
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "pyrazines",
+      "lever": "buffer",
+      "reading": "not yet keyed",
+      "why": "1 atlas contrasts from 1 laboratories await keying (step 2)",
+      "plant_protein_evidence": false,
+      "design": null,
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "pyrazines",
+      "lever": "heme / iron",
+      "reading": "not yet keyed",
+      "why": "1 atlas contrasts from 1 laboratories await keying (step 2)",
+      "plant_protein_evidence": false,
+      "design": null,
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "pyrazines",
+      "lever": "matrix",
+      "reading": "needs experiment",
+      "why": "no atlas contrast on disk (the measurement ledger may hold unkeyed ones)",
+      "plant_protein_evidence": false,
+      "design": "matrix: buffer vs 15 % pea isolate; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 3 new laboratory(ies) to reach 3; measure pyrazines",
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "pyrazines",
+      "lever": "cooking method",
+      "reading": "needs experiment",
+      "why": "no atlas contrast on disk (the measurement ledger may hold unkeyed ones)",
+      "plant_protein_evidence": false,
+      "design": "cooking method: sealed 140 C vs pan 180 C surface; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 3 new laboratory(ies) to reach 3; measure pyrazines",
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "lipid aldehydes (off-notes)",
+      "lever": "pH",
+      "reading": "not yet keyed",
+      "why": "6 atlas contrasts from 4 laboratories await keying (step 2)",
+      "plant_protein_evidence": false,
+      "design": null,
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "lipid aldehydes (off-notes)",
+      "lever": "temperature",
+      "reading": "needs experiment",
+      "why": "no atlas contrast on disk (the measurement ledger may hold unkeyed ones)",
+      "plant_protein_evidence": false,
+      "design": "temperature: 120 / 140 / 160 C; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 3 new laboratory(ies) to reach 3; measure lipid aldehydes (off-notes)",
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "lipid aldehydes (off-notes)",
+      "lever": "time",
+      "reading": "needs experiment",
+      "why": "no atlas contrast on disk (the measurement ledger may hold unkeyed ones)",
+      "plant_protein_evidence": false,
+      "design": "time: 5 / 10 / 20 / 40 min; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 3 new laboratory(ies) to reach 3; measure lipid aldehydes (off-notes)",
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "lipid aldehydes (off-notes)",
+      "lever": "precursor dose",
+      "reading": "needs experiment",
+      "why": "no atlas contrast on disk (the measurement ledger may hold unkeyed ones)",
+      "plant_protein_evidence": false,
+      "design": "precursor dose: 0 / 0.5x / 1x / 2x of the base dose; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 3 new laboratory(ies) to reach 3; measure lipid aldehydes (off-notes)",
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "lipid aldehydes (off-notes)",
+      "lever": "sugar identity",
+      "reading": "not yet keyed",
+      "why": "5 atlas contrasts from 3 laboratories await keying (step 2)",
+      "plant_protein_evidence": false,
+      "design": null,
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "lipid aldehydes (off-notes)",
+      "lever": "sulfur source",
+      "reading": "not yet keyed",
+      "why": "4 atlas contrasts from 2 laboratories await keying (step 2)",
+      "plant_protein_evidence": false,
+      "design": null,
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "lipid aldehydes (off-notes)",
+      "lever": "yeast extract",
+      "reading": "needs experiment",
+      "why": "no atlas contrast on disk (the measurement ledger may hold unkeyed ones)",
+      "plant_protein_evidence": false,
+      "design": "yeast extract: 0 / 0.5 / 1 / 2 % w/w; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 3 new laboratory(ies) to reach 3; measure lipid aldehydes (off-notes)",
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "lipid aldehydes (off-notes)",
+      "lever": "thiamine",
+      "reading": "needs experiment",
+      "why": "no atlas contrast on disk (the measurement ledger may hold unkeyed ones)",
+      "plant_protein_evidence": false,
+      "design": "thiamine: 0 / 0.05 / 0.1 % w/w; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 3 new laboratory(ies) to reach 3; measure lipid aldehydes (off-notes)",
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "lipid aldehydes (off-notes)",
+      "lever": "lipid",
+      "reading": "not yet keyed",
+      "why": "5 atlas contrasts from 3 laboratories await keying (step 2)",
+      "plant_protein_evidence": false,
+      "design": null,
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "lipid aldehydes (off-notes)",
+      "lever": "water",
+      "reading": "needs experiment",
+      "why": "no atlas contrast on disk (the measurement ledger may hold unkeyed ones)",
+      "plant_protein_evidence": false,
+      "design": "water: a_w 0.95 / 0.85 / 0.75; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 3 new laboratory(ies) to reach 3; measure lipid aldehydes (off-notes)",
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "lipid aldehydes (off-notes)",
+      "lever": "buffer",
+      "reading": "not yet keyed",
+      "why": "6 atlas contrasts from 4 laboratories await keying (step 2)",
+      "plant_protein_evidence": false,
+      "design": null,
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "lipid aldehydes (off-notes)",
+      "lever": "heme / iron",
+      "reading": "needs experiment",
+      "why": "no atlas contrast on disk (the measurement ledger may hold unkeyed ones)",
+      "plant_protein_evidence": false,
+      "design": "heme / iron: 0 / 0.2 / 0.5 % leghemoglobin or FeSO4 equivalent; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 3 new laboratory(ies) to reach 3; measure lipid aldehydes (off-notes)",
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "lipid aldehydes (off-notes)",
+      "lever": "matrix",
+      "reading": "needs experiment",
+      "why": "no atlas contrast on disk (the measurement ledger may hold unkeyed ones)",
+      "plant_protein_evidence": false,
+      "design": "matrix: buffer vs 15 % pea isolate; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 3 new laboratory(ies) to reach 3; measure lipid aldehydes (off-notes)",
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "lipid aldehydes (off-notes)",
+      "lever": "cooking method",
+      "reading": "needs experiment",
+      "why": "no atlas contrast on disk (the measurement ledger may hold unkeyed ones)",
+      "plant_protein_evidence": false,
+      "design": "cooking method: sealed 140 C vs pan 180 C surface; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 3 new laboratory(ies) to reach 3; measure lipid aldehydes (off-notes)",
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "furanones, furfural",
+      "lever": "pH",
+      "reading": "not yet keyed",
+      "why": "6 atlas contrasts from 4 laboratories await keying (step 2)",
+      "plant_protein_evidence": false,
+      "design": null,
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "furanones, furfural",
+      "lever": "temperature",
+      "reading": "not yet keyed",
+      "why": "1 atlas contrasts from 1 laboratories await keying (step 2)",
+      "plant_protein_evidence": false,
+      "design": null,
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "furanones, furfural",
+      "lever": "time",
+      "reading": "needs experiment",
+      "why": "no atlas contrast on disk (the measurement ledger may hold unkeyed ones)",
+      "plant_protein_evidence": false,
+      "design": "time: 5 / 10 / 20 / 40 min; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 3 new laboratory(ies) to reach 3; measure furanones, furfural",
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "furanones, furfural",
+      "lever": "precursor dose",
+      "reading": "needs experiment",
+      "why": "no atlas contrast on disk (the measurement ledger may hold unkeyed ones)",
+      "plant_protein_evidence": false,
+      "design": "precursor dose: 0 / 0.5x / 1x / 2x of the base dose; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 3 new laboratory(ies) to reach 3; measure furanones, furfural",
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "furanones, furfural",
+      "lever": "sugar identity",
+      "reading": "not yet keyed",
+      "why": "1 atlas contrasts from 1 laboratories await keying (step 2)",
+      "plant_protein_evidence": false,
+      "design": null,
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "furanones, furfural",
+      "lever": "sulfur source",
+      "reading": "not yet keyed",
+      "why": "2 atlas contrasts from 2 laboratories await keying (step 2)",
+      "plant_protein_evidence": false,
+      "design": null,
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "furanones, furfural",
+      "lever": "yeast extract",
+      "reading": "needs experiment",
+      "why": "no atlas contrast on disk (the measurement ledger may hold unkeyed ones)",
+      "plant_protein_evidence": false,
+      "design": "yeast extract: 0 / 0.5 / 1 / 2 % w/w; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 3 new laboratory(ies) to reach 3; measure furanones, furfural",
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "furanones, furfural",
+      "lever": "thiamine",
+      "reading": "needs experiment",
+      "why": "no atlas contrast on disk (the measurement ledger may hold unkeyed ones)",
+      "plant_protein_evidence": false,
+      "design": "thiamine: 0 / 0.05 / 0.1 % w/w; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 3 new laboratory(ies) to reach 3; measure furanones, furfural",
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "furanones, furfural",
+      "lever": "lipid",
+      "reading": "needs experiment",
+      "why": "no atlas contrast on disk (the measurement ledger may hold unkeyed ones)",
+      "plant_protein_evidence": false,
+      "design": "lipid: 0 / 2 / 5 % sunflower oil; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 3 new laboratory(ies) to reach 3; measure furanones, furfural",
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "furanones, furfural",
+      "lever": "water",
+      "reading": "not yet keyed",
+      "why": "1 atlas contrasts from 1 laboratories await keying (step 2)",
+      "plant_protein_evidence": false,
+      "design": null,
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "furanones, furfural",
+      "lever": "buffer",
+      "reading": "not yet keyed",
+      "why": "3 atlas contrasts from 2 laboratories await keying (step 2)",
+      "plant_protein_evidence": false,
+      "design": null,
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "furanones, furfural",
+      "lever": "heme / iron",
+      "reading": "needs experiment",
+      "why": "no atlas contrast on disk (the measurement ledger may hold unkeyed ones)",
+      "plant_protein_evidence": false,
+      "design": "heme / iron: 0 / 0.2 / 0.5 % leghemoglobin or FeSO4 equivalent; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 3 new laboratory(ies) to reach 3; measure furanones, furfural",
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "furanones, furfural",
+      "lever": "matrix",
+      "reading": "needs experiment",
+      "why": "no atlas contrast on disk (the measurement ledger may hold unkeyed ones)",
+      "plant_protein_evidence": false,
+      "design": "matrix: buffer vs 15 % pea isolate; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 3 new laboratory(ies) to reach 3; measure furanones, furfural",
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "furanones, furfural",
+      "lever": "cooking method",
+      "reading": "needs experiment",
+      "why": "no atlas contrast on disk (the measurement ledger may hold unkeyed ones)",
+      "plant_protein_evidence": false,
+      "design": "cooking method: sealed 140 C vs pan 180 C surface; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 3 new laboratory(ies) to reach 3; measure furanones, furfural",
+      "engine": "blank in v1 (step 5 adds)"
+    }
+  ],
+  "counts": {
+    "needs experiment": 44,
+    "answered by the literature": 1,
+    "not yet keyed": 25
+  },
+  "provenance": {
+    "artifact": "experiment_map",
+    "generated_on": "2026-11-10",
+    "git": {
+      "commit": "40d4150d3a63e8bebbc1d1b92e777a1def5b6bb9",
+      "short": "40d4150d",
+      "branch": "lever-table-keying",
+      "dirty": false
+    },
+    "generated_by": "scripts/generators/build_experiment_map.py",
+    "inputs": [
+      {
+        "path": "results/validation/lever_table.json",
+        "sha256": "f82ab64109d676c5cb656cc25151ae697a089e5d7d0adb77e92d42790f1b3202"
+      },
+      {
+        "path": "docs/reference/contrast_benchmark/split.yml",
+        "sha256": "1098b4b420330aa737497f6c855454c732dc394ce2007be6fd94dd9933cb36ac"
+      }
+    ]
+  }
+}

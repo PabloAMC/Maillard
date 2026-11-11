@@ -1,0 +1,721 @@
+# Reader a, blind double-keying (PREREG secs. 3 - 4).
+source: vanseeventer2001
+pdf: data/articles/vanseeventer2001.pdf
+reader: a
+scope_note: Response is the % loss per day during 50 C storage (stability, not formation), from IS-normalised relative
+  areas; '> 90' (right-censored, no censor code) keyed value null, limit 90, censor none; air vs argon stated 'almost
+  no difference' but data not presented, not keyable; Fig. 1 ladder digitised for the levels Table 1 does not print
+  and may share the 0 and 150 mM pots with Table 1.
+contrasts:
+- id: vanseeventer2001-1
+  odorant: 2-methyl-3-furanthiol (MFT)
+  lever_class: precursor dose
+  lever: added cysteine, 0 vs 150 mM
+  focal: true
+  location: Table 1, entries 2 vs 4, p. 4293
+  digitised: false
+  unit: '% decrease in concentration per day'
+  quant_type: relative
+  time_course_rule: not a time course
+  arms:
+  - label: entry 2, no addition (> 90)
+    lever_value: 0 mM
+    value: null
+    censor: none
+    limit: 90
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 50
+      time_min: 1440
+      precursors:
+        2-methyl-3-furanthiol: 50 uM (added)
+        2-furfurylthiol: 50 uM (added)
+        2-mercapto-3-butanone: 50 uM (added)
+        HDF: 50 uM (added)
+        sotolone: 50 uM (added)
+      buffer: 0.5 M phosphate, pH 5.0
+      matrix: buffer
+      headspace: air
+  - label: entry 4, + 150 mM cysteine
+    lever_value: 150 mM
+    value: 69
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 50
+      time_min: 1440
+      precursors:
+        2-methyl-3-furanthiol: 50 uM (added)
+        2-furfurylthiol: 50 uM (added)
+        2-mercapto-3-butanone: 50 uM (added)
+        HDF: 50 uM (added)
+        sotolone: 50 uM (added)
+        L-cysteine: 150 mM (added)
+      buffer: 0.5 M phosphate, pH 5.0
+      matrix: buffer
+      headspace: air
+- id: vanseeventer2001-2
+  odorant: 2-furfurylthiol (FFT)
+  lever_class: precursor dose
+  lever: added cysteine, 0 vs 150 mM
+  focal: true
+  location: Table 1, entries 2 vs 4, p. 4293
+  digitised: false
+  unit: '% decrease in concentration per day'
+  quant_type: relative
+  time_course_rule: not a time course
+  arms:
+  - label: entry 2, no addition (> 90)
+    lever_value: 0 mM
+    value: null
+    censor: none
+    limit: 90
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 50
+      time_min: 1440
+      precursors:
+        2-methyl-3-furanthiol: 50 uM (added)
+        2-furfurylthiol: 50 uM (added)
+        2-mercapto-3-butanone: 50 uM (added)
+        HDF: 50 uM (added)
+        sotolone: 50 uM (added)
+      buffer: 0.5 M phosphate, pH 5.0
+      matrix: buffer
+      headspace: air
+  - label: entry 4, + 150 mM cysteine
+    lever_value: 150 mM
+    value: 39
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 50
+      time_min: 1440
+      precursors:
+        2-methyl-3-furanthiol: 50 uM (added)
+        2-furfurylthiol: 50 uM (added)
+        2-mercapto-3-butanone: 50 uM (added)
+        HDF: 50 uM (added)
+        sotolone: 50 uM (added)
+        L-cysteine: 150 mM (added)
+      buffer: 0.5 M phosphate, pH 5.0
+      matrix: buffer
+      headspace: air
+- id: vanseeventer2001-3
+  odorant: 2-methyl-3-furanthiol (MFT)
+  lever_class: precursor dose
+  lever: added ribose, 0 vs 250 mM (no cysteine)
+  focal: true
+  location: Table 1, entries 2 vs 3, p. 4293
+  digitised: false
+  unit: '% decrease in concentration per day'
+  quant_type: relative
+  time_course_rule: not a time course
+  arms:
+  - label: entry 2, no addition (> 90)
+    lever_value: 0 mM
+    value: null
+    censor: none
+    limit: 90
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 50
+      time_min: 1440
+      precursors:
+        2-methyl-3-furanthiol: 50 uM (added)
+        2-furfurylthiol: 50 uM (added)
+        2-mercapto-3-butanone: 50 uM (added)
+        HDF: 50 uM (added)
+        sotolone: 50 uM (added)
+      buffer: 0.5 M phosphate, pH 5.0
+      matrix: buffer
+      headspace: air
+  - label: entry 3, + 250 mM ribose (> 90)
+    lever_value: 250 mM
+    value: null
+    censor: none
+    limit: 90
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 50
+      time_min: 1440
+      precursors:
+        2-methyl-3-furanthiol: 50 uM (added)
+        2-furfurylthiol: 50 uM (added)
+        2-mercapto-3-butanone: 50 uM (added)
+        HDF: 50 uM (added)
+        sotolone: 50 uM (added)
+        D-ribose: 250 mM (added)
+      buffer: 0.5 M phosphate, pH 5.0
+      matrix: buffer
+      headspace: air
+- id: vanseeventer2001-4
+  odorant: 2-furfurylthiol (FFT)
+  lever_class: precursor dose
+  lever: added ribose, 0 vs 250 mM (no cysteine)
+  focal: true
+  location: Table 1, entries 2 vs 3, p. 4293
+  digitised: false
+  unit: '% decrease in concentration per day'
+  quant_type: relative
+  time_course_rule: not a time course
+  arms:
+  - label: entry 2, no addition (> 90)
+    lever_value: 0 mM
+    value: null
+    censor: none
+    limit: 90
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 50
+      time_min: 1440
+      precursors:
+        2-methyl-3-furanthiol: 50 uM (added)
+        2-furfurylthiol: 50 uM (added)
+        2-mercapto-3-butanone: 50 uM (added)
+        HDF: 50 uM (added)
+        sotolone: 50 uM (added)
+      buffer: 0.5 M phosphate, pH 5.0
+      matrix: buffer
+      headspace: air
+  - label: entry 3, + 250 mM ribose (> 90)
+    lever_value: 250 mM
+    value: null
+    censor: none
+    limit: 90
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 50
+      time_min: 1440
+      precursors:
+        2-methyl-3-furanthiol: 50 uM (added)
+        2-furfurylthiol: 50 uM (added)
+        2-mercapto-3-butanone: 50 uM (added)
+        HDF: 50 uM (added)
+        sotolone: 50 uM (added)
+        D-ribose: 250 mM (added)
+      buffer: 0.5 M phosphate, pH 5.0
+      matrix: buffer
+      headspace: air
+- id: vanseeventer2001-5
+  odorant: 2-methyl-3-furanthiol (MFT)
+  lever_class: precursor dose
+  lever: added ribose, 0 vs 250 mM (with 150 mM cysteine)
+  focal: true
+  location: Table 1, entries 4 vs 5, p. 4293
+  digitised: false
+  unit: '% decrease in concentration per day'
+  quant_type: relative
+  time_course_rule: not a time course
+  arms:
+  - label: entry 4, + 150 mM cysteine
+    lever_value: 0 mM
+    value: 69
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 50
+      time_min: 1440
+      precursors:
+        2-methyl-3-furanthiol: 50 uM (added)
+        2-furfurylthiol: 50 uM (added)
+        2-mercapto-3-butanone: 50 uM (added)
+        HDF: 50 uM (added)
+        sotolone: 50 uM (added)
+        L-cysteine: 150 mM (added)
+      buffer: 0.5 M phosphate, pH 5.0
+      matrix: buffer
+      headspace: air
+  - label: entry 5, + 150 mM cysteine + 250 mM ribose
+    lever_value: 250 mM
+    value: 42
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 50
+      time_min: 1440
+      precursors:
+        2-methyl-3-furanthiol: 50 uM (added)
+        2-furfurylthiol: 50 uM (added)
+        2-mercapto-3-butanone: 50 uM (added)
+        HDF: 50 uM (added)
+        sotolone: 50 uM (added)
+        L-cysteine: 150 mM (added)
+        D-ribose: 250 mM (added)
+      buffer: 0.5 M phosphate, pH 5.0
+      matrix: buffer
+      headspace: air
+- id: vanseeventer2001-6
+  odorant: 2-furfurylthiol (FFT)
+  lever_class: precursor dose
+  lever: added ribose, 0 vs 250 mM (with 150 mM cysteine)
+  focal: true
+  location: Table 1, entries 4 vs 5, p. 4293
+  digitised: false
+  unit: '% decrease in concentration per day'
+  quant_type: relative
+  time_course_rule: not a time course
+  arms:
+  - label: entry 4, + 150 mM cysteine
+    lever_value: 0 mM
+    value: 39
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 50
+      time_min: 1440
+      precursors:
+        2-methyl-3-furanthiol: 50 uM (added)
+        2-furfurylthiol: 50 uM (added)
+        2-mercapto-3-butanone: 50 uM (added)
+        HDF: 50 uM (added)
+        sotolone: 50 uM (added)
+        L-cysteine: 150 mM (added)
+      buffer: 0.5 M phosphate, pH 5.0
+      matrix: buffer
+      headspace: air
+  - label: entry 5, + 150 mM cysteine + 250 mM ribose
+    lever_value: 250 mM
+    value: 43
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 50
+      time_min: 1440
+      precursors:
+        2-methyl-3-furanthiol: 50 uM (added)
+        2-furfurylthiol: 50 uM (added)
+        2-mercapto-3-butanone: 50 uM (added)
+        HDF: 50 uM (added)
+        sotolone: 50 uM (added)
+        L-cysteine: 150 mM (added)
+        D-ribose: 250 mM (added)
+      buffer: 0.5 M phosphate, pH 5.0
+      matrix: buffer
+      headspace: air
+- id: vanseeventer2001-7
+  odorant: 2-methyl-3-furanthiol (MFT)
+  lever_class: precursor dose
+  lever: cysteine concentration ladder 0-200 mM
+  focal: true
+  location: Fig. 1, p. 4294
+  digitised: true
+  unit: '% decrease in concentration per day'
+  quant_type: relative
+  time_course_rule: not a time course
+  arms:
+  - label: 0 mM cysteine
+    lever_value: 0
+    value: 100
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 50
+      time_min: 1440
+      precursors:
+        2-methyl-3-furanthiol: 50 uM (added)
+        2-furfurylthiol: 50 uM (added)
+        2-mercapto-3-butanone: 50 uM (added)
+        HDF: 50 uM (added)
+        sotolone: 50 uM (added)
+      buffer: 0.5 M phosphate, pH 5.0
+      matrix: buffer
+      headspace: air
+  - label: 25 mM cysteine
+    lever_value: 25
+    value: 60.3
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 50
+      time_min: 1440
+      precursors:
+        2-methyl-3-furanthiol: 50 uM (added)
+        2-furfurylthiol: 50 uM (added)
+        2-mercapto-3-butanone: 50 uM (added)
+        HDF: 50 uM (added)
+        sotolone: 50 uM (added)
+        L-cysteine: 25 mM (added)
+      buffer: 0.5 M phosphate, pH 5.0
+      matrix: buffer
+      headspace: air
+  - label: 50 mM cysteine
+    lever_value: 50
+    value: 49.8
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 50
+      time_min: 1440
+      precursors:
+        2-methyl-3-furanthiol: 50 uM (added)
+        2-furfurylthiol: 50 uM (added)
+        2-mercapto-3-butanone: 50 uM (added)
+        HDF: 50 uM (added)
+        sotolone: 50 uM (added)
+        L-cysteine: 50 mM (added)
+      buffer: 0.5 M phosphate, pH 5.0
+      matrix: buffer
+      headspace: air
+  - label: 100 mM cysteine
+    lever_value: 100
+    value: 58.8
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 50
+      time_min: 1440
+      precursors:
+        2-methyl-3-furanthiol: 50 uM (added)
+        2-furfurylthiol: 50 uM (added)
+        2-mercapto-3-butanone: 50 uM (added)
+        HDF: 50 uM (added)
+        sotolone: 50 uM (added)
+        L-cysteine: 100 mM (added)
+      buffer: 0.5 M phosphate, pH 5.0
+      matrix: buffer
+      headspace: air
+  - label: 150 mM cysteine
+    lever_value: 150
+    value: 69.9
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 50
+      time_min: 1440
+      precursors:
+        2-methyl-3-furanthiol: 50 uM (added)
+        2-furfurylthiol: 50 uM (added)
+        2-mercapto-3-butanone: 50 uM (added)
+        HDF: 50 uM (added)
+        sotolone: 50 uM (added)
+        L-cysteine: 150 mM (added)
+      buffer: 0.5 M phosphate, pH 5.0
+      matrix: buffer
+      headspace: air
+  - label: 200 mM cysteine
+    lever_value: 200
+    value: 88.5
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 50
+      time_min: 1440
+      precursors:
+        2-methyl-3-furanthiol: 50 uM (added)
+        2-furfurylthiol: 50 uM (added)
+        2-mercapto-3-butanone: 50 uM (added)
+        HDF: 50 uM (added)
+        sotolone: 50 uM (added)
+        L-cysteine: 200 mM (added)
+      buffer: 0.5 M phosphate, pH 5.0
+      matrix: buffer
+      headspace: air
+- id: vanseeventer2001-8
+  odorant: 2-furfurylthiol (FFT)
+  lever_class: precursor dose
+  lever: cysteine concentration ladder 0-200 mM
+  focal: true
+  location: Fig. 1, p. 4294
+  digitised: true
+  unit: '% decrease in concentration per day'
+  quant_type: relative
+  time_course_rule: not a time course
+  arms:
+  - label: 0 mM cysteine
+    lever_value: 0
+    value: 96
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 50
+      time_min: 1440
+      precursors:
+        2-methyl-3-furanthiol: 50 uM (added)
+        2-furfurylthiol: 50 uM (added)
+        2-mercapto-3-butanone: 50 uM (added)
+        HDF: 50 uM (added)
+        sotolone: 50 uM (added)
+      buffer: 0.5 M phosphate, pH 5.0
+      matrix: buffer
+      headspace: air
+  - label: 25 mM cysteine
+    lever_value: 25
+    value: 61.8
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 50
+      time_min: 1440
+      precursors:
+        2-methyl-3-furanthiol: 50 uM (added)
+        2-furfurylthiol: 50 uM (added)
+        2-mercapto-3-butanone: 50 uM (added)
+        HDF: 50 uM (added)
+        sotolone: 50 uM (added)
+        L-cysteine: 25 mM (added)
+      buffer: 0.5 M phosphate, pH 5.0
+      matrix: buffer
+      headspace: air
+  - label: 50 mM cysteine
+    lever_value: 50
+    value: 66.7
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 50
+      time_min: 1440
+      precursors:
+        2-methyl-3-furanthiol: 50 uM (added)
+        2-furfurylthiol: 50 uM (added)
+        2-mercapto-3-butanone: 50 uM (added)
+        HDF: 50 uM (added)
+        sotolone: 50 uM (added)
+        L-cysteine: 50 mM (added)
+      buffer: 0.5 M phosphate, pH 5.0
+      matrix: buffer
+      headspace: air
+  - label: 100 mM cysteine
+    lever_value: 100
+    value: 53.7
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 50
+      time_min: 1440
+      precursors:
+        2-methyl-3-furanthiol: 50 uM (added)
+        2-furfurylthiol: 50 uM (added)
+        2-mercapto-3-butanone: 50 uM (added)
+        HDF: 50 uM (added)
+        sotolone: 50 uM (added)
+        L-cysteine: 100 mM (added)
+      buffer: 0.5 M phosphate, pH 5.0
+      matrix: buffer
+      headspace: air
+  - label: 150 mM cysteine
+    lever_value: 150
+    value: 46.1
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 50
+      time_min: 1440
+      precursors:
+        2-methyl-3-furanthiol: 50 uM (added)
+        2-furfurylthiol: 50 uM (added)
+        2-mercapto-3-butanone: 50 uM (added)
+        HDF: 50 uM (added)
+        sotolone: 50 uM (added)
+        L-cysteine: 150 mM (added)
+      buffer: 0.5 M phosphate, pH 5.0
+      matrix: buffer
+      headspace: air
+  - label: 200 mM cysteine
+    lever_value: 200
+    value: 48.5
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 50
+      time_min: 1440
+      precursors:
+        2-methyl-3-furanthiol: 50 uM (added)
+        2-furfurylthiol: 50 uM (added)
+        2-mercapto-3-butanone: 50 uM (added)
+        HDF: 50 uM (added)
+        sotolone: 50 uM (added)
+        L-cysteine: 200 mM (added)
+      buffer: 0.5 M phosphate, pH 5.0
+      matrix: buffer
+      headspace: air
+- id: vanseeventer2001-9
+  odorant: 2-methyl-3-furanthiol (MFT)
+  lever_class: mixed
+  lever: heated ribose/cysteine process flavoring (thiols formed, ~5 uM) vs reconstituted buffer (50 uM added)
+  focal: false
+  location: Table 1, entries 1 vs 2, p. 4293
+  digitised: false
+  unit: '% decrease in concentration per day'
+  quant_type: relative
+  time_course_rule: not a time course
+  arms:
+  - label: entry 1, model process flavoring
+    lever_value: process flavoring
+    value: 59
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 50
+      time_min: 1440
+      precursors:
+        D-ribose: 100 mM (heated 130 C, 20 min)
+        L-cysteine: 33 mM (heated 130 C, 20 min)
+      buffer: 0.5 M phosphate, pH 5.0
+      matrix: other (heated ribose/cysteine model process flavoring)
+      headspace: air
+  - label: entry 2, no addition (> 90)
+    lever_value: reconstituted buffer
+    value: null
+    censor: none
+    limit: 90
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 50
+      time_min: 1440
+      precursors:
+        2-methyl-3-furanthiol: 50 uM (added)
+        2-furfurylthiol: 50 uM (added)
+        2-mercapto-3-butanone: 50 uM (added)
+        HDF: 50 uM (added)
+        sotolone: 50 uM (added)
+      buffer: 0.5 M phosphate, pH 5.0
+      matrix: buffer
+      headspace: air
+- id: vanseeventer2001-10
+  odorant: 2-furfurylthiol (FFT)
+  lever_class: mixed
+  lever: heated ribose/cysteine process flavoring (thiols formed, ~5 uM) vs reconstituted buffer (50 uM added)
+  focal: false
+  location: Table 1, entries 1 vs 2, p. 4293
+  digitised: false
+  unit: '% decrease in concentration per day'
+  quant_type: relative
+  time_course_rule: not a time course
+  arms:
+  - label: entry 1, model process flavoring
+    lever_value: process flavoring
+    value: 28
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 50
+      time_min: 1440
+      precursors:
+        D-ribose: 100 mM (heated 130 C, 20 min)
+        L-cysteine: 33 mM (heated 130 C, 20 min)
+      buffer: 0.5 M phosphate, pH 5.0
+      matrix: other (heated ribose/cysteine model process flavoring)
+      headspace: air
+  - label: entry 2, no addition (> 90)
+    lever_value: reconstituted buffer
+    value: null
+    censor: none
+    limit: 90
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 50
+      time_min: 1440
+      precursors:
+        2-methyl-3-furanthiol: 50 uM (added)
+        2-furfurylthiol: 50 uM (added)
+        2-mercapto-3-butanone: 50 uM (added)
+        HDF: 50 uM (added)
+        sotolone: 50 uM (added)
+      buffer: 0.5 M phosphate, pH 5.0
+      matrix: buffer
+      headspace: air

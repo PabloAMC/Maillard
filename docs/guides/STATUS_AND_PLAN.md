@@ -6,6 +6,7 @@ refined on 2026-11-02. The previous text is kept verbatim in
 "STATUS_AND_PLAN sec. 5", "rule (a)", "B0", "roadmap row 2" or "triage item 3" refer to that file.*
 
 **Contents.**
+0. Where we are and what to do next (read this first)
 1. Who this is for and what they need
 2. Where the model stands
 3. Why it fails: five root problems
@@ -18,6 +19,57 @@ refined on 2026-11-02. The previous text is kept verbatim in
 10. Glossary of codes
 
 ---
+
+## 0. Where we are and what to do next (2026-11-10)
+
+*Read this first. It is the whole active plan on one page; secs. 2 - 6 are background and record. One step is
+active at a time. Reasons and evidence are in sec. 4.1. Premortem: adopted with edits (2026-11-10), all folded in.*
+
+**Goal (owner, 2026-11-10).** The most useful tool for alternative-protein scientists; where the tool cannot answer,
+it says explicitly which experiment would.
+
+**State.** Asked a formulator's question (pea isolate + yeast extract, ribose vs glucose, pH 5.5 vs 7, pan-fried),
+the tool resolves nothing: yeast extract is not mapped to precursors, the front door takes mM of pure compounds in
+an isothermal pot, and thiol ratios carry intervals of about 100x. The engine has no demonstrated out-of-sample
+lever skill in the sulfur lane; the other lanes have never been tested on paired arms. Useful today: the sourced
+pathway atlas, the refusal map, and `calibrate`'s response factors.
+
+**The product is three layers:**
+1. a **lever table from the literature's own within-study contrasts** (direction and size with an interval, per
+   lever class x odorant, from data alone);
+2. an **experiment map**: every cell of that table reads "answered by the literature", "answered by the engine" or
+   "needs this experiment";
+3. the **kinetic engine**, displayed in a cell only where held-out data show it beats layer 1 there. **On the data
+   on disk this is almost nowhere:** the frozen split (`docs/reference/contrast_benchmark/split.yml`) holds 26 TEST
+   paired arms from 16 laboratories, 5 of them on thiols or H2S: thiols x pH, x sugar and x temperature have at most
+   one TEST laboratory, and only x amine or sulfur source and x dose reach two (three contrasts between them). The
+   engine's lever skill can in practice be shown only on data from new laboratories, so the experiment map and the owner's row below are
+   the engine's route to the product, not an extra.
+
+**Steps, in order.** Hours are working hours. A step that reaches its cap stops, records what is left, and the next
+step starts.
+
+| # | step | done means | cap |
+|---|---|---|---|
+| 0 | **Close first.** (a) Merge PR #110 (the step-0 record) as a record: the frozen text is not edited and its "not run" parts (the early variant, the full run) are NOT run. (b) PR #108 (refuse the outputs that rest on the falsified pH balance): its review fixes are done; ruling R3 is settled (R3d): ship on the rivals' extremes and state their limit with every refused and kept output (the extremes give the full verdict on 57 of 58 outputs); the all-draws bound is NOT run and waits for the JAX port of B1 / B13. Two R3d commits (b8ba234e, b4a84d4d) sit unpushed in the worktree of branch `s3-ph-balance-refusal`: check that worktree's gates (if freshness fails, the sensitivity record hashes the prereg that reports it), push, one independent confirmation read, then merge. (c) Commit the untracked `scripts/generators/build_contrast_discrepancy_decomposition.py` in the worktree of branch `contrast-discrepancy-decomposition` to that branch | `main` holds the evidence this plan cites and refuses what it has falsified. **Done:** 0a (#110) and 0c on 2026-11-10; 0b (#108) on 2026-11-11, after an independent confirmation read (CONFIRM WITH EDITS, all six applied: an H0 thiol refused on both grounds keeps its ratio interval, refusals fail closed, the band limit shows on kept outputs) | (a) 1 h; (b) 6 h, else leave it open and go on; (c) minutes |
+| 1 | **Step-0 addendum by lever class** (was P1b): error against predicted effect, per lever class; sign accuracy; the result with and without the two pH studies; the parameter-band envelope applied to the residual pairs. A new record beside the frozen one, development data only. **Done 2026-11-10** (`results/validation/decision_relevance_step0_addendum.md`): the read is reproduced; the pH error is structural (no within-band world fixes it), the time and precursor errors are not shown to be | the independent read's recomputations (sec. 4.1) reproduced by a generator, or corrected | 4 h |
+| 2 | **Lever table from data** (was P0). **2a, before any value is keyed:** (i) record the TEST membership of every atlas contrast from `split.yml` (v1) and its sha256 here; the split is never redrawn; (ii) pre-register the estimand: the log10 ratio per declared lever step (per pH unit, per 10 C, per doubling of dose; a categorical swap as it is), the baseline arm, ladders kept as ladders (a non-monotone ladder is not reduced to a slope), censored arms as bounds, a flag for peak areas vs absolute levels, the matrix, and a per-cell note that published contrasts are a selected sample. **2b:** key the contrasts as numbers, two readers blind to each other and to every engine prediction, in this order: thiols x pH, x sulfur source, x sugar; then the other cells. **2c:** a hierarchical model per cell, validated leave-one-laboratory-out, generated twice: on all data (the product) and on DEVELOPMENT only (step 5's rival) | a generated table with intervals and each cell's study and laboratory counts; cells not reached stay empty and say so. **2a done 2026-11-10:** [lever_table/PREREG.md](../reference/lever_table/PREREG.md) (premortemed; it refines 2a - 2c: ladders as one slope, bands, categorical levers as a network, a 28 h keying budget, the two readers as separate subagents). **2b + 2c, first three thiol cells, done 2026-11-10:** 29 sources keyed blind by two readers and resolved; 172 usable contrasts from 10 laboratories (`results/validation/lever_table.md`). One cell is answered (leaving out cysteine lowers MFT, -0.78 dex, 3 laboratories); 4 read "direction unclear"; every other thiol cell has fewer than three laboratories. The literature on disk is thin by laboratory, not by contrast: that is the experiment map's input | 2a 4 h; 2b + 2c 40 h for the first three cells, then a new estimate before going on |
+| 3 | **The user's inputs and outputs** (W5.1 pulled forward). Inputs: ingredients in % w/w mapped to precursors from sourced composition only (the yeast-extract and isolate dossiers on disk; a value not in a dossier is not estimated: the ingredient is refused by name and its papers go to the owner's download list). Outputs: per-compound results grouped under note headings (meaty, roasted, off-notes); **no summed note score**, and an odour-activity weight only where the level is shipped and the threshold has a citation and a stated matrix (`desirable_targets.yml` marks its thresholds uncited today) | the sec. 0 question can be written as a spec; it moves no shipped constant; every output says it is not validated on a plant-based product. **Done 2026-11-10:** `ingredients:` in % w/w (`data/species/ingredients.yml`: yeast extract, pea and soy isolate, every value with its dossier; ribose and nucleotides in yeast extract are NOT mapped and say so), outputs grouped under note headings (`src/notes.py`). The sec. 0 question now runs and is REFUSED by name: seven yeast-extract components are in no core lane, and the sulfur and acrylamide lanes do not compose (R4, W3). The refusal is honest; the literature table and the experiment map carry that question | 30 h |
+| 4 | **Lever table v1 with the experiment map** (was P4, W5.4). Ships with the engine's cells blank; step 5 only adds. A "needs experiment" cell gets one line: the factor, its levels, and the replicate number implied by the cell's own interval; no simulation per cell | every lever x odorant cell carries one of the three readings. **v1 done 2026-11-10** (`results/validation/experiment_map.md`): 70 cells (14 levers x 5 odorant families); 1 answered by the literature, 44 need an experiment (each with a one-line design), 25 await keying (Strecker, pyrazines, lipid, furanones: step 2 continued). No keyed cell has a heated plant-protein contrast; one 32-pot factorial in pea isolate (P3) adds a laboratory to eight thiol cells at once | 15 h |
+| 5 | **Engine lever sensitivities** (was P2), pH first: per step 1, pH is a STRUCTURE change through a sec. 7 case (the pentose-side pH laws of M1b(ii), and the thiol over-response at large pH steps), not a constant refit. **Runs only for a cell that has TEST contrasts from at least two laboratories** (one laboratory cannot separate a lever effect from that laboratory's offset); today, among thiol cells, only x amine or sulfur source and x dose have, with three contrasts between them. New TEST data come only from the owner's row or from keying-queue papers of new laboratories listed before they are keyed. Then: a sec. 7 case, items 1 - 5 frozen first, changing only the constants it names, fitted on DEVELOPMENT contrasts, in a session that has not opened step 2's all-data table | **a display rule, not a sec. 7 credit:** the engine is displayed in a cell where, on that cell's TEST contrasts, its log-ratio error is below both "no change" and step 2's DEVELOPMENT-only prediction, the 90 % interval of each difference excluding zero. Shipping a constant still needs sec. 7 item 9 | sized in its case |
+| owner | **Outside data.** Ask the blind-test partner for any data they can share; draft the factorial lever study (P3) for a partner laboratory, its factors taken from the experiment map's empty cells. Sending is the owner's action. **Drafted 2026-11-11:** [FACTORIAL_LEVER_STUDY.md](FACTORIAL_LEVER_STUDY.md) (2^4 in 15 % pea isolate: sugar x sulfur source x yeast extract x pH, 2 replicates + 4 checks = 36 pots; detects 0.15 dex main effects and interactions; adds a laboratory and the missing matrix to every family's sugar, pH, sulfur-source and yeast-extract cells) | -- | -- |
+
+**Rules for whoever picks this up.**
+- Start from a worktree on `origin/main`; the main checkout may sit on an old branch. The source PDFs are on the
+  owner's laptop only.
+- Sec. 7 is frozen as written. No new governance text, judge revisions or register passes unless a step above cannot
+  proceed without one.
+- **Do not refit the trunk fits B1 or B18** until the glucosone-step case (PR #109) is settled: both no longer
+  reproduce (CF-135, CF-136), mostly through that one transferred constant. The sulfur lane is not blocked.
+- The engine is not run on a TEST contrast, and no engine residual on one is read, outside a step-5 scoring look
+  (at most 3 before 01-23).
+- Parked work (PRs #91, #109, #111, the judge-bound fix, the M3 power check, H4) is not finished because it is
+  open. It resumes only when a step above needs it.
 
 ## 1. Who this is for and what they need
 
@@ -42,6 +94,10 @@ Absolute levels that hold across laboratories within 3x are NOT a near-term goal
 
 **Owner decisions, 2026-11-02.** Work continues without new laboratory data; the designed-experiment brief is paused.
 The plan's priority is mechanisms that make the model better, not more process.
+
+**Owner, 2026-11-10.** The goal is the most useful tool for these users; where it cannot answer, it names the
+experiment that would (sec. 0). The one-line designs of the experiment map are part of the product; the long
+designed-experiment brief stays paused.
 
 ## 2. Where the model stands
 
@@ -111,10 +167,104 @@ graph TD
     W3 --> W5a --> LT
 ```
 
-Read it as three lines of work that meet at the end:
+**Superseded as the order of work by sec. 0 (2026-11-10);** kept as the map of how the chemistry steps depend on
+one another. Read it as three lines of work that meet at the end:
 - **the chemistry line** (M1 - M6, then one joint refit);
 - **the engine and uncertainty line** (one network, fast engine, hierarchical posterior);
 - **the product line** (ingredients, cooking, the lever table).
+
+### 4.1 Redirect after the decision-relevance step 0 (2026-11-10; owner: "do as you think is best long term")
+
+**The evidence.** The decision-relevance pre-registration (PR #110, frozen v3.1, amendment A1) asked whether ANY
+experiment could let the lever table show directions. Its step 0 measured the engine's out-of-sample error on a
+ratio between two arms of one study (sigma_r), with the carried pH-balance rivals in place of the falsified B0:
+
+- sulfur lane sigma_r = 1.23 dex (leave-one-study-out 0.85 - 1.43; 6 studies). It is not B0's pH failure: the two
+  worst studies (xu2007, Hofmann pH 3/7) miss as much under B1 / B13 as under B0.
+- The engine over-responds to levers: the slope of observed on predicted log ratios is 0.21 (90 % CI -0.06 to 0.48).
+  Calibrated contrasts (slope times prediction) still lose to "no change" out of sample (0.39 vs 0.34 dex).
+- Even a perfect experiment could show a direction for 1 of the 12 computable decisions, and that one is trivial (a
+  hydroperoxide charge makes hexanal). Pre-registered verdict: **CONFIRMED (omega-bound): the lever table cannot
+  show directions under the current discrepancy, whatever the experiments.** The bar would need sigma_r <= 0.42 dex
+  for 3 decisions, <= 0.19 for 7.
+- Consistent with PR #108: after the falsified balance's outputs are refused, the remaining out-of-sample contrasts
+  lose to "no change" (0.30 vs 0.15 dex).
+
+**What it means.** The bottleneck is model STRUCTURE (the contrast discrepancy), not parameter uncertainty. Experiments
+that pin constants or settle route shares (the sized M3 - M6 designs) cannot make the lever table useful while
+sigma_r is ~1.2 dex. Settling them stays worth recording, but it no longer leads.
+
+**sigma_r is mostly two studies.** xu2007 (2.62 dex, a pyrophosphate design whose buffer switch is not built) and
+Hofmann pH 3 / 7 (2.58 dex, df 2; pH 3 is likely outside the engine's scope) carry it; the other four studies sit
+at ~0.43 - 0.57 dex and STILL show no lever skill (slope 0.36, CI includes 0; calibrated contrasts 0.36 vs 0.33 for
+"no change"). So fixing the two outliers alone (sigma_r ~0.50) changes no decision; the target is <= 0.42 dex.
+
+**Independent read of step 0 (2026-11-10; a read-only recomputation, to be reproduced by a generator in sec. 0
+step 1 before anything rests on it).** The verdict is correctly computed under its frozen rule. Three of its
+readings above do not follow from it, and the plan no longer leans on them:
+
+- **"Structure, not parameters" was not tested.** Residuals were scored at the shipped constants; only the
+  pH-balance rival was varied. The parameter-band envelope was never applied to the residual pairs.
+- **A flat sigma_r is the wrong error model.** The two pH studies supply about 85 % of the sum of squares from 6 of
+  31 degrees of freedom: there the engine predicts 2.3 - 3.9 dex against 0.3 - 1.3 observed, an over-response to
+  pH. In the other four studies it predicts almost nothing (17 of 48 pairs below 0.05 dex) and loses to "no change"
+  by under-responding. The error scales with the predicted effect and with the lever class.
+- **The ceiling tests the decision set as much as the engine.** Five of the 12 decisions have a predicted effect of
+  0.12 dex or less, unshowable at any realistic error. "Whatever the experiments" holds by construction: the oracle
+  takes sigma_r as irreducible.
+
+Also unreported: sign accuracy. Other lanes have no paired arms in the set; hexanal and dimethylpyrazine borrowed
+the sulfur value.
+
+**The addendum (sec. 0 step 1, done 2026-11-10; `results/validation/decision_relevance_step0_addendum.md`)**
+reproduces this read from step 0's pinned inputs and adds the parameter test:
+- The 7 pairs predicted above 1 dex carry the error (2.69 dex). Below 1 dex sigma_r is 0.38 - 0.57 dex.
+- Sign accuracy where |p| >= 0.3: 11 / 17 (p 0.33).
+- The shipped envelope, 64 worlds on the same pairs: world sigma_r 5 / 50 / 95 % 1.20 / 1.34 / 1.69 dex, so no
+  within-band world comes close.
+- The measured ratio falls inside the parameter band for pH 0 / 17 pairs, time 15 / 18, precursor identity 1 / 8.
+- **The pH response is wrong in structure, both ways.** Meynier's norfuraneol (0.4 - 1.2 dex measured across
+  pH 4.5 - 6.5) has no pH response in any world, since the pentose-side steps carry no pH law (M1b(ii), E16). The
+  thiols, furfural and acetylthiazole of xu2007 and Hofmann over-respond by 2 - 4 dex in every world.
+- Time and precursor-identity errors sit inside or near the parameter bands: not shown to be structural.
+
+Confidence: ~0.85 that the sulfur lane has no demonstrated lever skill out of sample; ~0.85 that the pH defect is
+structural (conditional on honest bands); ~0.4 that within-band parameters explain the time-lever errors.
+
+**What changes (the order is sec. 0's).** The lever table from data becomes the product, not the fallback. The
+single sigma_r <= 0.42 dex target is replaced by a per-cell display rule (sec. 0 step 5); 0.42 stays a reported
+number, not a goal. The user's inputs and outputs (ingredients, notes) are pulled forward: they do not depend on
+engine skill. Every cell the tool cannot answer names its experiment.
+
+**Spent data (sec. 7 item 2 holds).** The six studies that nominate culprits cannot credit the fixes; they are
+development data. TEST membership is the frozen split's (`split.yml`, v1), recorded with its sha256 BEFORE any
+contrast is keyed (sec. 0 step 2a); the split is never redrawn. The literature table is generated on all data (the
+product) and on DEVELOPMENT only; only the second is step 5's rival and the only one a step-5 session opens. The
+engine is scored on a cell's TEST contrasts once per batch of fixes, at most 3 looks before 01-23. On disk the
+TEST side is 26 paired arms from 16 laboratories, 5 of them on thiols or H2S: thiols x pH, x sugar and x temperature
+have at most one TEST laboratory, so there "answered by the engine" waits for new-laboratory data and the cell
+reads "needs experiment".
+
+**The redirect's items** (codes kept for the records that cite them; **the order of work is sec. 0's**, which
+supersedes this table's order, P0's hours and P2's target).
+
+| # | what | why | done means |
+|---|---|---|---|
+| P0 | **Empirical meta-analysis of the literature's within-study lever contrasts** (hierarchical, by lever class x odorant): directions with intervals from data alone (30 - 50 h: the contrasts must first be keyed as numbers). Coverage on disk (heuristic lever tags): thiols x pH 18 studies / 6 laboratories, x sulfur source 23 / 10, x sugar 11 / 5, x buffer 11 / 5; thin for pyrazines, temperature and time; none for yeast extract, heme or cooking method | the cheapest honest answer to formulators' questions; the product's first layer | a lever table from data, with its scope |
+| P1b | **Missing-structure screen**, before any gradient: regress residuals and the over-response (slope 0.21) on lever class (pH, dose, sugar, temperature, time, buffer); cross against the atlas's 20 ranked errors, the M0 inventory and the labelling route shares (R1: MFT 99.9 % vs ~7 %) | gradients cannot see a missing pathway (xu2007's buffer switch, Hofmann's pH 3) | the lever classes and absent structures behind the over-response |
+| P1 | **Gradient decomposition** (resumed): attribute each development-set miss to mechanism steps (exact JAX gradients where ported), with and without the B0-pH pairs | names the culprits inside the existing structure | a ranked list of 5 - 10 culprit structures, each with the evidence that would fix it |
+| P2 | **Structure fixes on P1 / P1b's culprits**, each through a sec. 7 case; the M5 buffer switch is un-paused (xu2007's miss likely sits there) | the only route that lowers sigma_r | the per-cell comparison of sec. 0 step 5 on the sealed TEST contrasts is the PRIMARY yardstick of chemistry work, beside the contrast benchmark; sigma_r is reported. Scope exclusions count as gains only if P4 narrows the shipped scope identically. The first fix is the engine's pH response, fitted on development contrasts |
+| P3 | **Hybrid route:** a statistical layer over the kinetic structure, fitted on ONE designed within-laboratory factorial lever study (2^4 plus centre points, replicated: cysteine x sugar x pH x time in a pea-protein matrix, GC-MS plus GC-O), plus one replicate block in a second matrix (soy). The hybrid ships only if it beats a pure empirical response surface (Gaussian process or quadratic) on held-out cells; otherwise the surface ships | sidesteps the structural discrepancy inside one matrix and one laboratory; feeds the perception layer | the study designed, sized and its request drafted for a partner laboratory; its factors are chosen from the experiment map's empty cells (yeast extract and thiamine before a fourth model-system factor). **Honest scope:** interpolation of one laboratory's response surface for one isolate and base recipe, NOT transfer to users' recipes. W6 moves earlier for this one study; sending it stays the owner's action |
+| P4 | **The lever table's first version, with the experiment map:** each lever x odorant cell reads "answered by the literature" (P0), "answered by the engine" (only where it beats P0 and "no change" on that cell's sealed contrasts) or "needs this experiment" | honesty, and the owner's goal: a tool that says what it cannot answer and what would answer it | every cell carries one of the three readings; a "needs experiment" cell names the smallest design |
+
+**Paused (resumable; work kept in their branches):** the M3 route power check (also blocked by the judge-bound
+artefact found in the M6 premortem), the M6 rework, the judge-bound fix (needed only when a case can credit again),
+the JAX port of B1 / B13 (needed to re-run #108 on every passing draw and to lift its refusal; it returns when
+P2 touches the pH balance), and H4 / W4's posterior on the current structure (a posterior of a slope-0.2 engine is
+wasted). Merged work (governance, S1 / S4, the drift gate, M1b(i), M4, M5) stands.
+
+**Not changed:** sec. 7 (how a change ships; item 2's spent-data rule is why the TEST set is sealed), the owner-first
+clauses, and the cases already frozen. Premortem: adopted with edits (2026-11-10), all folded in.
 
 ## 5. The workstreams
 
@@ -204,6 +354,9 @@ validated on a plant-based product.
 
 ### W6. Outside data, without a laboratory (owner)
 
+**Moved earlier for ONE item (redirect, sec. 4.1 P3, 2026-11-10):** the designed factorial lever study, drafted and
+sized now; sending it stays the owner's action. Before it, the owner asks the blind-test partner for any data they can share (sec. 0). Everything else in W6 keeps its place.
+
 - Send the 5 drafted author data requests (`data/articles/OUTREACH_DRAFTS.md`, laptop only).
 - Add requests for existing data that would test a W2 step (ENGINE_VS_LITERATURE sec. 3.1, the "Or" alternatives):
   Cerny's raw 145 C isotopologue data (M2); DFA's raw Table 4 and Quest's recovery (M3, CF-073); Zhou 2024's
@@ -234,7 +387,8 @@ improve the sulfur lane fall from ~0.25 to ~0.15. A reply that arrives later re-
 
 ## 6. Timeline: what runs in parallel
 
-Each row is a span of calendar days, sized from the effort column at about 5 working days a week; no holiday time is
+**Superseded from 2026-11-10 by sec. 0 and sec. 8's re-dated table;** the rows below are the record of the earlier
+sequence. Each row is a span of calendar days, sized from the effort column at about 5 working days a week; no holiday time is
 assumed. Columns are workstreams. Cells in one row run in parallel. Re-sequenced 2026-11-04: M4 needs the one network,
 so it now follows A2 + H3 instead of running beside it, and the M1 / M1b / M2 block takes its full ~8 working days.
 Re-sequenced again 2026-11-05, after M1's verdict, the supply screen and an independent premortem: M1.1 (measurement
@@ -488,10 +642,32 @@ dose rows on the sulfur lane are refused wherever the balance moves them; recipe
 answered. Ranked relative predictions with honest intervals for most levers by the end of January: ~0.35 -> ~0.3. The
 01-23 checkpoint stays ~0.3 (its lever table already waited on the envelope).
 
+**Re-dated by the redirect (sec. 4.1, 2026-11-10).** The rows above from 12-05 onward assume the chemistry line
+leads; under the redirect they are superseded by:
+
+| by | done means (steps of sec. 0) | P |
+|---|---|---|
+| 11-17 | step 0 closed (PRs #110 and #108 merged); step 1's addendum done | ~0.6 |
+| 12-08 | step 2: TEST membership recorded and the estimand pre-registered; thiols x pH, x sulfur source and x sugar keyed; the table generated for them | ~0.5 |
+| 12-15 | step 3: the sec. 0 question can be written as a recipe and read as notes | ~0.55 |
+| 12-22 | step 4: lever table v1 with the experiment map, the engine's cells blank | ~0.45 |
+| 01-23 | the same, as the fallback date; step 5: the engine displayed in at least one cell | ~0.65 (table and map); ~0.03 (engine, one cell: on disk two thiol cells reach two TEST laboratories, with three contrasts between them; ~0.3 if a partner's lever data arrive by mid-December) |
+
+Odds after step 0 and its independent read: ranked relative predictions with honest intervals for MOST levers by
+the end of January, ~0.1 from the engine (was ~0.35); from the literature table, for the cells with at least
+three laboratories, ~0.5. sigma_r <= 0.42 dex on sealed contrasts by 01-23, ~0.07 (reported, no longer the
+target). P3's data arriving by early January, unconditionally,
+~0.05 (the WUR blind test has no data after three weeks); the hybrid route delivering most levers within one matrix
+and laboratory by 01-23, unconditionally, ~0.02. The plan improving the tool's usefulness to a formulator by the end
+of January, ~0.5 (from the literature table, the ingredient inputs and the experiment map; was ~0.35).
+
 ## 9. Not in the plan
 
-- New laboratory experiments and the designed-experiment brief (paused by the owner).
-- Broad literature searches and the consolidation wave V. Reading is limited to the papers named above and W6.
+- New laboratory experiments and the designed-experiment brief (paused by the owner), EXCEPT the one factorial
+  lever study of sec. 4.1 P3, which the redirect (owner-delegated, 2026-11-10) moves earlier.
+- Broad literature searches and the consolidation wave V. Reading is limited to the papers named above, W6, and
+  (2026-11-10) the sources of the atlas contrasts keyed in sec. 0 step 2 and the composition dossiers of step 3;
+  neither is a new search.
 - New engine switches without a case (sec. 7).
 - The E6 + E11 refit queue on its own branch as a separate exercise: it becomes M2.
 
