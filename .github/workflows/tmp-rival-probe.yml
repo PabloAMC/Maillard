@@ -4,13 +4,13 @@ on:
     branches: [rival-linux-robustness]
 jobs:
   probe:
-    name: TEMP probe ${{ matrix.mode }}
+    name: TEMP ${{ matrix.job }}
     runs-on: ubuntu-latest
-    timeout-minutes: 75
+    timeout-minutes: 120
     strategy:
       fail-fast: false
       matrix:
-        mode: [baseline, coldph, bdf, rtol8]
+        job: [sug01-reps, s3-subset]
     steps:
       - uses: actions/checkout@v4
       - uses: conda-incubator/setup-miniconda@v3
@@ -20,12 +20,19 @@ jobs:
           python-version: "3.12"
           auto-activate-base: false
       - run: bash scripts/ci/setup_env.sh
-      - shell: bash -el {0}
+      - if: matrix.job == 'sug01-reps'
+        shell: bash -el {0}
         env:
-          PROBE_MODE: ${{ matrix.mode }}
-          PROBE_BUDGET: "1500000"
+          PROBE_MODE: baseline
+          PROBE_BUDGET: "200000"
           PROBE_WORKERS: "4"
-        run: |
-          python -c "import numpy, scipy, platform; print(numpy.__version__, scipy.__version__, platform.machine()); numpy.show_config()" | head -60
-          python -c "from src.kinetic_core import ph_kernel; print('numba compiled', ph_kernel.COMPILED)"
-          python scripts/tmp_probe/probe_sug01.py
+          PROBE_REPS: "20"
+          PROBE_PERTURB: "3e-8"
+        run: python scripts/tmp_probe/probe_sug01.py
+      - if: matrix.job == 's3-subset'
+        shell: bash -el {0}
+        env:
+          OUT: /tmp/s3_subset.jsonl
+          WORKERS: "4"
+          SUBSET_EVERY: "6"
+        run: python scripts/tmp_probe/s3_subset_compare.py

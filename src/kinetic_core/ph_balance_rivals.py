@@ -85,17 +85,6 @@ ADDED_SINK_Y_CAP = 1.0 - 1e-6
 #: need at most ~38 000 (0.5 M phosphate, pH 7.5, 145 C; 2026-11-07 probe); Chen 2000 / 2002's pH 5 ribose + cysteine
 #: pots at 180 C passed 500 000 without finishing. Off for no run that finishes inside it: it changes no number.
 RIVAL_RHS_BUDGET = 200_000
-#: 2026-11-11 (platform robustness): the rival's pH is solved HISTORY-FREE and to near machine precision at every
-#: right-hand-side call: from the fixed start ``RIVAL_PH_START`` (pH) and I = 0, bisected to ``RIVAL_PH_TOL`` pH, the
-#: ionic strength iterated to ``RIVAL_IONIC_TOL_M``. The shipped inline solve (warm-started from the previous call, to
-#: 1e-10 pH and 1e-9 M) makes the right-hand side a quantised, call-history-dependent function of (t, y); in the first
-#: ~1e-7 min, where LSODA runs Adams steps of ~1e-11 min, that noise can lock LSODA into order-1 Adams steps of ~1e-13
-#: min that never switch to BDF (no Jacobian call; the Jacobian's eigenvalues are >= -200 /min there), so the run
-#: exhausts the budget at t ~ 1e-7 min. Which pot is caught depended on the platform's last-bit arithmetic (SUG-01's
-#: glucose arm, B1_d345, on ubuntu x86-64; none on macOS arm64) and on 1e-8 perturbations of the precursors.
-RIVAL_PH_START = 7.0
-RIVAL_PH_TOL = 1e-14
-RIVAL_IONIC_TOL_M = 1e-14
 
 
 class RivalBudgetExceeded(RuntimeError):
@@ -301,22 +290,27 @@ def integrate_inline(parameters, y0, eval_times, duration, temperature_of, sid, 
 
     from . import ph_kernel
     from . import sulfur as _s
-    from .ph_state import (LABEL_TEMPERATURE_K, solve_ph_and_ionic_strength_compiled,
+    from .ph_state import (LABEL_TEMPERATURE_K, solve_ph_and_ionic_strength, solve_ph_and_ionic_strength_compiled,
                            solve_ph_and_ionic_strength_warm, titratable_inventory)
     from . import ph_state as _ph
 
     check_combination()
-    solver = solve_ph_and_ionic_strength_compiled if ph_kernel.COMPILED else solve_ph_and_ionic_strength_warm
-
-    def exact_solve(temperature, sid_, inventory):
-        """History-free and precise (``RIVAL_PH_START``): the same (pH, I) for the same state, whatever came before."""
-        return solver(temperature, sid_, inventory, RIVAL_PH_START, 0.0, tol=RIVAL_PH_TOL, ionic_tol=RIVAL_IONIC_TOL_M)
+    # 2026-11-11 (platform robustness): a rival's inline integration runs on BDF, whatever method the caller asks for.
+    # On LSODA, with the pH re-solved inside the right-hand side, ~1 % of runs of a pH 5 pot lock in the first ~1e-6 min
+    # into order-1 Adams steps of ~1e-13 min that never switch to BDF (no Jacobian call; the Jacobian's eigenvalues there
+    # are > -1e4 /min, so the cap is not the problem's stiffness) and exhaust the budget. Which run is caught is chaotic in
+    # the last bits: 1e-8 relative changes of a precursor, or the platform's arithmetic, move it (SUG-01's glucose arm,
+    # B1_d345, on ubuntu x86-64 and none on macOS arm64; 8 of 920 runs of SUG-01's arms under 3e-8 to 6e-7 perturbations
+    # on macOS). BDF (Newton on the mass-action Jacobian) has no Adams phase: 0 of 920 on the same runs.
+    method = "BDF"
+    warm_solve = solve_ph_and_ionic_strength_compiled if ph_kernel.COMPILED else solve_ph_and_ionic_strength_warm
     s_aug, sets = augmented_stoichiometry()
     n, n_rx, tix = sets["n"], sets["n_rx"], sets["tracker_index"]
     keys = _s._TITRATABLE_KEYS + (_s._TRUNK_SOLUTE_KEYS if _ph.TRUNK_SOLUTES_IN_BALANCE else ())
     index = [_s.SULFUR_INDEX[k] for k in keys]
     use_label = bool(_ph.B51.label_scale_tables)
-    diag ={"rhs_calls": 0, "forced_scale_min": float("inf"), "forced_scale_max": 0.0, "forced_unresolvable_calls": 0,
+    memo = {"ph": None, "i": 0.0, "cool": None}
+    diag = {"rhs_calls": 0, "forced_scale_min": float("inf"), "forced_scale_max": 0.0, "forced_unresolvable_calls": 0,
             "dpo_total_rel_dev_max": 0.0, "added_sink_cap_reached": False, "supply_share_min": float("inf"),
             "supply_share_max": float("-inf")}
     supply, lag, forcing = ACID_SUPPLY, ACID_LAG, ARP_FORCING
@@ -333,8 +327,15 @@ def integrate_inline(parameters, y0, eval_times, duration, temperature_of, sid, 
         conc = {k: float(max(y[i], 0.0)) for k, i in zip(keys, index)}
         conc.update(pools(y))
         inventory = titratable_inventory(conc, drift, spec)
-        ph, ionic = exact_solve(temperature, sid, inventory)
-        cool = exact_solve(LABEL_TEMPERATURE_K, sid, inventory)[0] if use_label else None
+        if memo["ph"] is None:
+            ph, ionic = solve_ph_and_ionic_strength(temperature, sid, inventory)
+        else:
+            ph, ionic = warm_solve(temperature, sid, inventory, memo["ph"], memo["i"])
+        cool = None
+        if use_label:
+            guess = memo["cool"] if memo["cool"] is not None else ph
+            cool = warm_solve(LABEL_TEMPERATURE_K, sid, inventory, guess, ionic)[0]
+        memo.update(ph=ph, i=ionic, cool=cool)
         return ph, ionic, cool
 
     def evaluate(t, y, want_jac):
@@ -415,6 +416,7 @@ def integrate_inline(parameters, y0, eval_times, duration, temperature_of, sid, 
     if not sol.success:
         raise RuntimeError(f"sulfur-network integration (M1b rival) failed: {sol.message}")
     states = np.clip(sol.y.T, 0.0, None)
+    memo.update(ph=None, i=0.0, cool=None)
     ph_hot, ionic, ph_cool, k_rows = [], [], [], []
     for t, y in zip(eval_times, states):
         temperature = temperature_of(float(t))

@@ -28,6 +28,18 @@ if MODE in ("tightph", "coldtight"):
     ph_state.solve_ph_and_ionic_strength_compiled = lambda T, sid, inv, g, i=0.0, **k: _c0(T, sid, inv, g, i, tol=1e-14)
     ph_state.solve_ph_and_ionic_strength_warm = lambda T, sid, inv, g, i=0.0, **k: _w0(T, sid, inv, g, i, tol=1e-14)
 _FROZEN = {}
+if MODE == "boundary45":
+    from src.kinetic_core import parameters_sulfur as _psu
+    _psu.ZHENG_MECHANISM_BOUNDARY_PH = 4.5
+if MODE.startswith("snap"):
+    from src.kinetic_core import sulfur as _S
+    _kat = _S.sulfur_rate_constants_at
+    _DEC = int(MODE[4:] or 9)
+
+    def _kat_snap(parameters, temperature_k, ph, ph_label=None, **kw):
+        return _kat(parameters, temperature_k, ph, ph_label=None if ph_label is None else round(float(ph_label), _DEC), **kw)
+
+    _S.sulfur_rate_constants_at = _kat_snap
 if MODE == "frozenph":
     _c1 = ph_state.solve_ph_and_ionic_strength_compiled
 
@@ -69,6 +81,10 @@ def _traced_solve_ivp(fun, t_span, y0, **kw):
         kw["jac"] = j
     if MODE in ("bdf", "radau"):
         kw["method"] = MODE.upper() if MODE == "bdf" else "Radau"
+    if MODE.startswith("first"):
+        kw["first_step"] = 10.0 ** (-int(MODE[5:]))
+    if MODE == "atol12":
+        kw["atol"] = 1e-12
     if MODE == "rtol8":
         kw["rtol"] = 1e-8
     return _solve_ivp(f, t_span, y0, **kw)
@@ -158,6 +174,9 @@ res = parallel.map_ordered(job, items, n_workers=int(os.environ.get("PROBE_WORKE
 print("MODE", MODE, "budget", pbr.RIVAL_RHS_BUDGET, "perturb", perturb)
 for name, diag, vals, ph, err in res:
     print("ROW " + json.dumps({"name": name, "diag": diag, "vals": vals, "ph": ph, "err": err}), flush=True)
+import collections
+print("ERRKINDS", collections.Counter((r[4] or "")[:60] for r in res if r[4]))
+print("EVALS median/max", float(np.median([r[1].get("evaluations") or 0 for r in res if not r[4]])), max((r[1].get("evaluations") or 0) for r in res))
 print("STALLS", MODE, sum(1 for r in res if r[4]), "of", len(res))
 print("wall", round(time.time() - t0, 1), "max evals", max((r[1].get("evaluations") or 0) for r in res),
       "failures", [r[0] for r in res if r[4]])

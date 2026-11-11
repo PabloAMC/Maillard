@@ -937,7 +937,6 @@ def solve_ph_and_ionic_strength_warm(
     ionic_guess: float = 0.0,
     *,
     tol: float = 1e-10,
-    ionic_tol: Optional[float] = None,
 ) -> Tuple[float, float]:
     """
     ``solve_ph_and_ionic_strength`` from a guess: Brent's method on the same monotone residual in a
@@ -970,13 +969,12 @@ def solve_ph_and_ionic_strength_warm(
         ph = root(0.0, ph_guess)
         return ph, ionic_strength_of(ph, temperature_k, sid_mmol_l, inventory, 0.0)
     ionic = float(ionic_guess)
-    ionic_tol = IONIC_STRENGTH_TOL_M if ionic_tol is None else float(ionic_tol)
     ph = root(ionic, ph_guess)
     for _ in range(IONIC_STRENGTH_SWEEPS):
         fresh = ionic_strength_of(ph, temperature_k, sid_mmol_l, inventory, ionic)
         ph = root(fresh, ph)
         moved, ionic = abs(fresh - ionic), fresh
-        if moved < ionic_tol:
+        if moved < IONIC_STRENGTH_TOL_M:
             break
     return ph, ionic_strength_of(ph, temperature_k, sid_mmol_l, inventory, ionic)
 
@@ -989,7 +987,6 @@ def solve_ph_and_ionic_strength_compiled(
     ionic_guess: float = 0.0,
     *,
     tol: float = 1e-10,
-    ionic_tol: Optional[float] = None,
 ) -> Tuple[float, float]:
     """
     ``solve_ph_and_ionic_strength_warm`` through ``ph_kernel`` (numba when installed): the same residual,
@@ -1012,8 +1009,7 @@ def solve_ph_and_ionic_strength_compiled(
         npk[row], zmax[row], conc[row] = len(group.pkas), float(group.z_max), float(concentration)
     return ph_kernel.solve(pk, npk, zmax, conc, float(sid_mmol_l), pkw_at(temperature_k),
                            davies_a(temperature_k), bool(B51.ionic_strength), float(ph_guess),
-                           float(ionic_guess), float(tol),
-                           IONIC_STRENGTH_TOL_M if ionic_tol is None else float(ionic_tol), IONIC_STRENGTH_SWEEPS)
+                           float(ionic_guess), float(tol), IONIC_STRENGTH_TOL_M, IONIC_STRENGTH_SWEEPS)
 
 
 def ph_and_ionic_strength_of_state(
