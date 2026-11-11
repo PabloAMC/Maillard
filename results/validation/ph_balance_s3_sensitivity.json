@@ -2,11 +2,11 @@
   "artifact": "ph_balance_s3_sensitivity",
   "provenance": {
     "artifact": "ph_balance_s3_sensitivity",
-    "generated_on": "2026-11-10",
+    "generated_on": "2026-11-11",
     "git": {
-      "commit": "8e764d384143c1f933671a0bf9bdd558592cefbf",
-      "short": "8e764d38",
-      "branch": "s3-ph-balance-refusal",
+      "commit": "9344557b7529f60a524d92b085b31da447ff9020",
+      "short": "9344557b",
+      "branch": "s3-refusal-speed",
       "dirty": true
     },
     "generated_by": "scripts/generators/build_ph_balance_s3_sensitivity.py",
@@ -42,7 +42,7 @@
       },
       {
         "path": "src/kinetic_core/ph_balance_refusal.py",
-        "sha256": "c10aa8d59cf72fb217e1ebf1dd22dbfc7cb09b455d5daba150fe131b0998c1f2"
+        "sha256": "dad8a09a04a2898e0fa29b6bacd1ce7280eb699752754b6a8e225830143b89b4"
       },
       {
         "path": "results/validation/kinetic_core_thiol_lolo_nested_tau.json",
