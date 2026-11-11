@@ -585,3 +585,11 @@ have no null answer): counting it as a difference of 0 pulls the mean to zero an
   merge to main put the next PR into conflict, and one resolution briefly dropped a row edit from main.
 - **Rule:** resolve by marker lines and verify row by row against `origin/main` (one diff per row) before committing;
   or keep progress notes for parallel work out of the shared table until the last PR merges.
+## 2026-11-11 — `gh pr checks --watch` exit code is not a merge gate; a cancelled (timed-out) job slipped through
+- **What happened:** the watch-then-merge for PR #108 took `rc` from `gh pr checks --watch --fail-fast` and merged on
+  rc 0, while "Scientific and integration tests" had been cancelled at its 90-minute timeout (listed as `fail`). The
+  PR had doubled test time (the S3 refusal integrates ~23 carried rivals per balance-solved pot); main's next run
+  then timed out in both test jobs.
+- **Rule:** after the watch, merge only if the parsed check list has no `fail`/`cancel` line
+  (`gh pr checks N | awk '$2!="pass" && $2!="skipping"'` is empty). And compare the PR's job durations with main's
+  last run: a job that takes 2x longer is a finding, not noise.
