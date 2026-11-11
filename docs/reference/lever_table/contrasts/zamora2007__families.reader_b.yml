@@ -1,0 +1,1700 @@
+source: "zamora2007"
+pdf: "data/articles/zamora2007.pdf"
+reader: "b"
+scope_note: "All values digitised from figures; air vs inert comparison reported as data not shown (not keyed); pH ladders cross three buffers and duplicate points at pH 6 and 8 cannot be assigned, so no buffer contrast; Fig. 4B symbols are diamonds although hexanal is assigned to decadienal"
+contrasts:
+  - id: "zamora2007-1"
+    odorant: "phenylacetaldehyde"
+    lever_class: "pH"
+    lever: "reaction pH (2,4-decadienal/Phe)"
+    focal: true
+    location: "Fig. 2A"
+    digitised: true
+    unit: "umol aldehyde/mmol Phe"
+    quant_type: "absolute"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    note: "buffer changes along the ladder (citrate 2.15-6, phosphate 6-8 and 11-12, borate 8-10); duplicate points at pH 6 and 8 not assigned to a buffer in the figure"
+    arms:
+      - label: "pH 2.15"
+        lever_value: 2.15
+        value: 74.6
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 2.15
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "2,4-decadienal": "0.05 mmol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium citrate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "pH 3"
+        lever_value: 3
+        value: 81.5
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "2,4-decadienal": "0.05 mmol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium citrate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "pH 4"
+        lever_value: 4
+        value: 44.3
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 4
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "2,4-decadienal": "0.05 mmol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium citrate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "pH 5"
+        lever_value: 5
+        value: 30.0
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 5
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "2,4-decadienal": "0.05 mmol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium citrate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "pH 6"
+        lever_value: 6
+        value: 26.3
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 6
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "2,4-decadienal": "0.05 mmol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium citrate or phosphate (not distinguished); acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "pH 6"
+        lever_value: 6
+        value: 20.0
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 6
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "2,4-decadienal": "0.05 mmol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium citrate or phosphate (not distinguished); acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "pH 7"
+        lever_value: 7
+        value: 3.9
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "2,4-decadienal": "0.05 mmol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium phosphate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "pH 8"
+        lever_value: 8
+        value: 15.7
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 8
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "2,4-decadienal": "0.05 mmol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium phosphate or borate (not distinguished); acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "pH 8"
+        lever_value: 8
+        value: 12.2
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 8
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "2,4-decadienal": "0.05 mmol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium phosphate or borate (not distinguished); acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "pH 9"
+        lever_value: 9
+        value: 9.1
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 9
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "2,4-decadienal": "0.05 mmol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium borate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "pH 10"
+        lever_value: 10
+        value: 6.3
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 10
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "2,4-decadienal": "0.05 mmol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium borate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "pH 11"
+        lever_value: 11
+        value: 4.3
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 11
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "2,4-decadienal": "0.05 mmol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium phosphate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "pH 12"
+        lever_value: 12
+        value: 8.9
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 12
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "2,4-decadienal": "0.05 mmol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium phosphate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+  - id: "zamora2007-2"
+    odorant: "phenylacetaldehyde"
+    lever_class: "pH"
+    lever: "reaction pH (methyl 13-oxooctadeca-9,11-dienoate/Phe)"
+    focal: true
+    location: "Fig. 2A"
+    digitised: true
+    unit: "umol aldehyde/mmol Phe"
+    quant_type: "absolute"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    note: "buffer changes along the ladder (citrate 2.15-6, phosphate 6-8 and 11-12, borate 8-10); duplicate points at pH 6 and 8 not assigned to a buffer in the figure"
+    arms:
+      - label: "pH 2.15"
+        lever_value: 2.15
+        value: 19.1
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 2.15
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "methyl 13-oxooctadeca-9,11-dienoate": "0.05 mmol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium citrate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "pH 3"
+        lever_value: 3
+        value: 25.5
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "methyl 13-oxooctadeca-9,11-dienoate": "0.05 mmol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium citrate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "pH 4"
+        lever_value: 4
+        value: 22.4
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 4
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "methyl 13-oxooctadeca-9,11-dienoate": "0.05 mmol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium citrate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "pH 5"
+        lever_value: 5
+        value: 18.5
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 5
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "methyl 13-oxooctadeca-9,11-dienoate": "0.05 mmol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium citrate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "pH 6"
+        lever_value: 6
+        value: 15.8
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 6
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "methyl 13-oxooctadeca-9,11-dienoate": "0.05 mmol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium citrate or phosphate (not distinguished); acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "pH 6"
+        lever_value: 6
+        value: 15.2
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 6
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "methyl 13-oxooctadeca-9,11-dienoate": "0.05 mmol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium citrate or phosphate (not distinguished); acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "pH 7"
+        lever_value: 7
+        value: 14.5
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "methyl 13-oxooctadeca-9,11-dienoate": "0.05 mmol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium phosphate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "pH 8"
+        lever_value: 8
+        value: 12.4
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 8
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "methyl 13-oxooctadeca-9,11-dienoate": "0.05 mmol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium phosphate or borate (not distinguished); acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "pH 8"
+        lever_value: 8
+        value: 10.7
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 8
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "methyl 13-oxooctadeca-9,11-dienoate": "0.05 mmol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium phosphate or borate (not distinguished); acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "pH 9"
+        lever_value: 9
+        value: 12.3
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 9
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "methyl 13-oxooctadeca-9,11-dienoate": "0.05 mmol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium borate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "pH 10"
+        lever_value: 10
+        value: 6.4
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 10
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "methyl 13-oxooctadeca-9,11-dienoate": "0.05 mmol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium borate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "pH 11"
+        lever_value: 11
+        value: 6.2
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 11
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "methyl 13-oxooctadeca-9,11-dienoate": "0.05 mmol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium phosphate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "pH 12"
+        lever_value: 12
+        value: 7.1
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 12
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "methyl 13-oxooctadeca-9,11-dienoate": "0.05 mmol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium phosphate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+  - id: "zamora2007-3"
+    odorant: "hexanal"
+    lever_class: "pH"
+    lever: "reaction pH (2,4-decadienal/Phe)"
+    focal: false
+    location: "Fig. 2B"
+    digitised: true
+    unit: "umol aldehyde/mmol Phe"
+    quant_type: "absolute"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    note: "buffer changes along the ladder (citrate 2.15-6, phosphate 6-8 and 11-12, borate 8-10); duplicate points at pH 6 and 8 not assigned to a buffer in the figure"
+    arms:
+      - label: "pH 2.15"
+        lever_value: 2.15
+        value: 79.7
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 2.15
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "2,4-decadienal": "0.05 mmol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium citrate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "pH 3"
+        lever_value: 3
+        value: 96.7
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "2,4-decadienal": "0.05 mmol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium citrate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "pH 4"
+        lever_value: 4
+        value: 97.2
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 4
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "2,4-decadienal": "0.05 mmol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium citrate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "pH 5"
+        lever_value: 5
+        value: 77.2
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 5
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "2,4-decadienal": "0.05 mmol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium citrate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "pH 6"
+        lever_value: 6
+        value: 81.6
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 6
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "2,4-decadienal": "0.05 mmol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium citrate or phosphate (not distinguished); acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "pH 6"
+        lever_value: 6
+        value: 60.3
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 6
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "2,4-decadienal": "0.05 mmol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium citrate or phosphate (not distinguished); acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "pH 7"
+        lever_value: 7
+        value: 50.8
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "2,4-decadienal": "0.05 mmol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium phosphate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "pH 8"
+        lever_value: 8
+        value: 64.0
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 8
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "2,4-decadienal": "0.05 mmol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium phosphate or borate (not distinguished); acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "pH 8"
+        lever_value: 8
+        value: 53.6
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 8
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "2,4-decadienal": "0.05 mmol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium phosphate or borate (not distinguished); acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "pH 9"
+        lever_value: 9
+        value: 54.1
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 9
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "2,4-decadienal": "0.05 mmol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium borate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "pH 10"
+        lever_value: 10
+        value: 60.6
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 10
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "2,4-decadienal": "0.05 mmol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium borate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "pH 11"
+        lever_value: 11
+        value: 48.4
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 11
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "2,4-decadienal": "0.05 mmol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium phosphate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "pH 12"
+        lever_value: 12
+        value: 98.7
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 12
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "2,4-decadienal": "0.05 mmol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium phosphate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+  - id: "zamora2007-4"
+    odorant: "phenylacetaldehyde"
+    lever_class: "precursor dose"
+    lever: "oxidized lipid amount (umol), 2,4-decadienal"
+    focal: true
+    location: "Fig. 4A"
+    digitised: true
+    unit: "umol aldehyde/mmol Phe"
+    quant_type: "absolute"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "0 umol"
+        lever_value: 0
+        value: 2.5
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.0
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "2,4-decadienal": "0 umol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium citrate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "2.5 umol"
+        lever_value: 2.5
+        value: 3.6
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.0
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "2,4-decadienal": "2.5 umol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium citrate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "5 umol"
+        lever_value: 5
+        value: 10.4
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.0
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "2,4-decadienal": "5 umol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium citrate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "10 umol"
+        lever_value: 10
+        value: 21.2
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.0
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "2,4-decadienal": "10 umol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium citrate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "25 umol"
+        lever_value: 25
+        value: 43.4
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.0
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "2,4-decadienal": "25 umol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium citrate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "50 umol"
+        lever_value: 50
+        value: 81.5
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.0
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "2,4-decadienal": "50 umol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium citrate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+  - id: "zamora2007-5"
+    odorant: "phenylacetaldehyde"
+    lever_class: "precursor dose"
+    lever: "oxidized lipid amount (umol), methyl 13-oxooctadeca-9,11-dienoate"
+    focal: true
+    location: "Fig. 4A"
+    digitised: true
+    unit: "umol aldehyde/mmol Phe"
+    quant_type: "absolute"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "0 umol"
+        lever_value: 0
+        value: 0.0
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.0
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "methyl 13-oxooctadeca-9,11-dienoate": "0 umol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium citrate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "2.5 umol"
+        lever_value: 2.5
+        value: 2.5
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.0
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "methyl 13-oxooctadeca-9,11-dienoate": "2.5 umol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium citrate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "5 umol"
+        lever_value: 5
+        value: 2.3
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.0
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "methyl 13-oxooctadeca-9,11-dienoate": "5 umol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium citrate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "10 umol"
+        lever_value: 10
+        value: 2.9
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.0
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "methyl 13-oxooctadeca-9,11-dienoate": "10 umol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium citrate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "25 umol"
+        lever_value: 25
+        value: 12.6
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.0
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "methyl 13-oxooctadeca-9,11-dienoate": "25 umol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium citrate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "50 umol"
+        lever_value: 50
+        value: 25.5
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.0
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "methyl 13-oxooctadeca-9,11-dienoate": "50 umol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium citrate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+  - id: "zamora2007-6"
+    odorant: "hexanal"
+    lever_class: "precursor dose"
+    lever: "oxidized lipid amount (umol), 2,4-decadienal"
+    focal: false
+    location: "Fig. 4B"
+    digitised: true
+    unit: "umol aldehyde/mmol Phe"
+    quant_type: "absolute"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    note: "panel B plotted with diamond symbols; caption/text assign hexanal to decadienal/Phe mixtures"
+    arms:
+      - label: "0 umol"
+        lever_value: 0
+        value: 0.0
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.0
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "2,4-decadienal": "0 umol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium citrate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "2.5 umol"
+        lever_value: 2.5
+        value: 4.6
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.0
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "2,4-decadienal": "2.5 umol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium citrate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "5 umol"
+        lever_value: 5
+        value: 7.3
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.0
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "2,4-decadienal": "5 umol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium citrate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "10 umol"
+        lever_value: 10
+        value: 17.9
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.0
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "2,4-decadienal": "10 umol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium citrate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "25 umol"
+        lever_value: 25
+        value: 49.3
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.0
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "2,4-decadienal": "25 umol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium citrate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "50 umol"
+        lever_value: 50
+        value: 97.0
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.0
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "2,4-decadienal": "50 umol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium citrate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+  - id: "zamora2007-7"
+    odorant: "phenylacetaldehyde"
+    lever_class: "time"
+    lever: "heating time (h), 2,4-decadienal/Phe"
+    focal: true
+    location: "Fig. 6A"
+    digitised: true
+    unit: "umol aldehyde/mmol Phe"
+    quant_type: "absolute"
+    quantity: "amount"
+    time_course_rule: "lever is time; whole series"
+    arms:
+      - label: "0 h"
+        lever_value: 0
+        value: 17.0
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.0
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 0
+          precursors:
+            "2,4-decadienal": "0.05 mmol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium citrate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "0.33 h"
+        lever_value: 0.33
+        value: 41.0
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.0
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 20
+          precursors:
+            "2,4-decadienal": "0.05 mmol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium citrate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "0.67 h"
+        lever_value: 0.67
+        value: 61.7
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.0
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 40
+          precursors:
+            "2,4-decadienal": "0.05 mmol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium citrate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "1 h"
+        lever_value: 1
+        value: 80.8
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.0
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "2,4-decadienal": "0.05 mmol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium citrate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "1.5 h"
+        lever_value: 1.5
+        value: 80.3
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.0
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 90
+          precursors:
+            "2,4-decadienal": "0.05 mmol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium citrate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "2 h"
+        lever_value: 2
+        value: 85.8
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.0
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 120
+          precursors:
+            "2,4-decadienal": "0.05 mmol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium citrate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "3 h"
+        lever_value: 3
+        value: 90.0
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.0
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 180
+          precursors:
+            "2,4-decadienal": "0.05 mmol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium citrate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+  - id: "zamora2007-8"
+    odorant: "phenylacetaldehyde"
+    lever_class: "time"
+    lever: "heating time (h), methyl 13-oxooctadeca-9,11-dienoate/Phe"
+    focal: true
+    location: "Fig. 6A"
+    digitised: true
+    unit: "umol aldehyde/mmol Phe"
+    quant_type: "absolute"
+    quantity: "amount"
+    time_course_rule: "lever is time; whole series"
+    arms:
+      - label: "0 h"
+        lever_value: 0
+        value: 1.6
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.0
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 0
+          precursors:
+            "methyl 13-oxooctadeca-9,11-dienoate": "0.05 mmol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium citrate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "0.33 h"
+        lever_value: 0.33
+        value: 8.0
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.0
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 20
+          precursors:
+            "methyl 13-oxooctadeca-9,11-dienoate": "0.05 mmol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium citrate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "0.67 h"
+        lever_value: 0.67
+        value: 18.6
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.0
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 40
+          precursors:
+            "methyl 13-oxooctadeca-9,11-dienoate": "0.05 mmol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium citrate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "1 h"
+        lever_value: 1
+        value: 25.2
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.0
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "methyl 13-oxooctadeca-9,11-dienoate": "0.05 mmol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium citrate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "1.5 h"
+        lever_value: 1.5
+        value: 28.0
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.0
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 90
+          precursors:
+            "methyl 13-oxooctadeca-9,11-dienoate": "0.05 mmol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium citrate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "2 h"
+        lever_value: 2
+        value: 37.9
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.0
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 120
+          precursors:
+            "methyl 13-oxooctadeca-9,11-dienoate": "0.05 mmol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium citrate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "3 h"
+        lever_value: 3
+        value: 60.1
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.0
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 180
+          precursors:
+            "methyl 13-oxooctadeca-9,11-dienoate": "0.05 mmol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium citrate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+  - id: "zamora2007-9"
+    odorant: "hexanal"
+    lever_class: "time"
+    lever: "heating time (h), 2,4-decadienal/Phe"
+    focal: false
+    location: "Fig. 6B"
+    digitised: true
+    unit: "umol aldehyde/mmol Phe"
+    quant_type: "absolute"
+    quantity: "amount"
+    time_course_rule: "lever is time; whole series"
+    arms:
+      - label: "0 h"
+        lever_value: 0
+        value: 0.0
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.0
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 0
+          precursors:
+            "2,4-decadienal": "0.05 mmol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium citrate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "0.33 h"
+        lever_value: 0.33
+        value: 36.8
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.0
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 20
+          precursors:
+            "2,4-decadienal": "0.05 mmol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium citrate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "0.67 h"
+        lever_value: 0.67
+        value: 61.9
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.0
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 40
+          precursors:
+            "2,4-decadienal": "0.05 mmol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium citrate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "1 h"
+        lever_value: 1
+        value: 96.0
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.0
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "2,4-decadienal": "0.05 mmol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium citrate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "1.5 h"
+        lever_value: 1.5
+        value: 103.9
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.0
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 90
+          precursors:
+            "2,4-decadienal": "0.05 mmol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium citrate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "2 h"
+        lever_value: 2
+        value: 127.1
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.0
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 120
+          precursors:
+            "2,4-decadienal": "0.05 mmol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium citrate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "3 h"
+        lever_value: 3
+        value: 138.4
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.0
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 180
+          precursors:
+            "2,4-decadienal": "0.05 mmol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium citrate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+  - id: "zamora2007-10"
+    odorant: "phenylacetaldehyde"
+    lever_class: "lipid"
+    lever: "2,4-decadienal vs methyl 13-oxooctadeca-9,11-dienoate"
+    focal: true
+    location: "Fig. 4A"
+    digitised: true
+    unit: "umol aldehyde/mmol Phe"
+    quant_type: "absolute"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    note: "equimolar lipid (50 umol) arm of the dose figure, 1 h"
+    arms:
+      - label: "decadienal 50 umol"
+        lever_value: "2,4-decadienal"
+        value: 81.5
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.0
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "2,4-decadienal": "50 umol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium citrate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "ketodiene 50 umol"
+        lever_value: "methyl 13-oxooctadeca-9,11-dienoate"
+        value: 25.5
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.0
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "methyl 13-oxooctadeca-9,11-dienoate": "50 umol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium citrate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+  - id: "zamora2007-11"
+    odorant: "phenylacetaldehyde"
+    lever_class: "lipid"
+    lever: "2,4-decadienal vs methyl 13-oxooctadeca-9,11-dienoate"
+    focal: true
+    location: "Fig. 6A"
+    digitised: true
+    unit: "umol aldehyde/mmol Phe"
+    quant_type: "absolute"
+    quantity: "amount"
+    time_course_rule: "longest time"
+    arms:
+      - label: "decadienal 3 h"
+        lever_value: "2,4-decadienal"
+        value: 90.0
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.0
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 180
+          precursors:
+            "2,4-decadienal": "0.05 mmol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium citrate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"
+      - label: "ketodiene 3 h"
+        lever_value: "methyl 13-oxooctadeca-9,11-dienoate"
+        value: 60.1
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.0
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 180
+          precursors:
+            "methyl 13-oxooctadeca-9,11-dienoate": "0.05 mmol"
+            "phenylalanine": "0.05 mmol"
+            "volume": "1 mL"
+          buffer: "0.3 M sodium citrate; acetonitrile/buffer 2:1 (captions)"
+          matrix: "other (acetonitrile/buffer 2:1)"
+          headspace: "air (closed tubes, buffer O2-bubbled)"

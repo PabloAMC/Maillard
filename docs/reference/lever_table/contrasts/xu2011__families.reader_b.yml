@@ -1,0 +1,1538 @@
+source: "xu2011"
+pdf: "data/articles/xu2011.pdf"
+reader: "b"
+scope_note: "Table 2 lipid odorants keyed as four pairs per compound (oxidation state with/without Xyl-Cys; Xyl-Cys added vs lard alone as mixed, two precursors); pairs with both arms n.d. skipped; (2E)-octenal Xyl-Cys-fresh lard cell printed blank, not keyed; no no-lard arm printed for Table 2 compounds; final pH printed (3.60/3.65/3.71) not used as lever"
+contrasts:
+  - id: "xu2011-1"
+    odorant: "Furfural"
+    lever_class: "lipid"
+    lever: "no lard vs fresh lard vs oxidized lard (cysteine + xylose present)"
+    focal: true
+    location: "Table 1"
+    digitised: false
+    unit: "ug/mL"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    note: "semi-quantitative against internal standard cyclohexanone (response factor 1)"
+    arms:
+      - label: "Xyl-Cys"
+        lever_value: "none"
+        value: 22.95
+        censor: "none"
+        limit: null
+        n: 3
+        sd: 3.09
+        conditions:
+          ph: 5.0
+          ph_basis: "initial"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "L-cysteine": "0.2 g in 10 mL"
+            "D-xylose": "0.2 g in 10 mL"
+          buffer: "0.2 mol/L phosphate, 10 mL"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "Xyl-Cys-fresh lard"
+        lever_value: "fresh lard"
+        value: 9.85
+        censor: "none"
+        limit: null
+        n: 3
+        sd: 1.18
+        conditions:
+          ph: 5.0
+          ph_basis: "initial"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "L-cysteine": "0.2 g in 10 mL"
+            "D-xylose": "0.2 g in 10 mL"
+            "fresh lard": "0.1 g"
+          buffer: "0.2 mol/L phosphate, 10 mL"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "Xyl-Cys-oxidized lard"
+        lever_value: "oxidized lard"
+        value: 9.05
+        censor: "none"
+        limit: null
+        n: 3
+        sd: 0.27
+        conditions:
+          ph: 5.0
+          ph_basis: "initial"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "L-cysteine": "0.2 g in 10 mL"
+            "D-xylose": "0.2 g in 10 mL"
+            "oxidized lard": "0.1 g"
+          buffer: "0.2 mol/L phosphate, 10 mL"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+  - id: "xu2011-2"
+    odorant: "Hexanal"
+    lever_class: "lipid"
+    lever: "oxidized vs fresh lard, heated alone (no cysteine, no xylose)"
+    focal: false
+    location: "Table 2"
+    digitised: false
+    unit: "ug/mL"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    note: "semi-quantitative against internal standard cyclohexanone (response factor 1)"
+    arms:
+      - label: "Oxidized lard"
+        lever_value: "oxidized lard"
+        value: 10.19
+        censor: "none"
+        limit: null
+        n: 3
+        sd: 0.23
+        conditions:
+          ph: 5.0
+          ph_basis: "initial"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "oxidized lard": "0.1 g"
+          buffer: "0.2 mol/L phosphate, 10 mL"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "Fresh lard"
+        lever_value: "fresh lard"
+        value: 0.69
+        censor: "none"
+        limit: null
+        n: 3
+        sd: 0.17
+        conditions:
+          ph: 5.0
+          ph_basis: "initial"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "fresh lard": "0.1 g"
+          buffer: "0.2 mol/L phosphate, 10 mL"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+  - id: "xu2011-3"
+    odorant: "Hexanal"
+    lever_class: "mixed"
+    lever: "cysteine + xylose (0.2 g each) absent vs present, oxidized lard"
+    focal: false
+    location: "Table 2"
+    digitised: false
+    unit: "ug/mL"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    note: "semi-quantitative against internal standard cyclohexanone (response factor 1)"
+    arms:
+      - label: "Oxidized lard"
+        lever_value: "no cysteine, no xylose"
+        value: 10.19
+        censor: "none"
+        limit: null
+        n: 3
+        sd: 0.23
+        conditions:
+          ph: 5.0
+          ph_basis: "initial"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "oxidized lard": "0.1 g"
+          buffer: "0.2 mol/L phosphate, 10 mL"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "Xyl-Cys-oxidized lard"
+        lever_value: "cysteine + xylose"
+        value: null
+        censor: "nd_no_limit"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.0
+          ph_basis: "initial"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "L-cysteine": "0.2 g in 10 mL"
+            "D-xylose": "0.2 g in 10 mL"
+            "oxidized lard": "0.1 g"
+          buffer: "0.2 mol/L phosphate, 10 mL"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+  - id: "xu2011-4"
+    odorant: "Hexanal"
+    lever_class: "mixed"
+    lever: "cysteine + xylose (0.2 g each) absent vs present, fresh lard"
+    focal: false
+    location: "Table 2"
+    digitised: false
+    unit: "ug/mL"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    note: "semi-quantitative against internal standard cyclohexanone (response factor 1)"
+    arms:
+      - label: "Fresh lard"
+        lever_value: "no cysteine, no xylose"
+        value: 0.69
+        censor: "none"
+        limit: null
+        n: 3
+        sd: 0.17
+        conditions:
+          ph: 5.0
+          ph_basis: "initial"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "fresh lard": "0.1 g"
+          buffer: "0.2 mol/L phosphate, 10 mL"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "Xyl-Cys-fresh lard"
+        lever_value: "cysteine + xylose"
+        value: null
+        censor: "nd_no_limit"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.0
+          ph_basis: "initial"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "L-cysteine": "0.2 g in 10 mL"
+            "D-xylose": "0.2 g in 10 mL"
+            "fresh lard": "0.1 g"
+          buffer: "0.2 mol/L phosphate, 10 mL"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+  - id: "xu2011-5"
+    odorant: "Heptanal"
+    lever_class: "lipid"
+    lever: "oxidized vs fresh lard, heated alone (no cysteine, no xylose)"
+    focal: false
+    location: "Table 2"
+    digitised: false
+    unit: "ug/mL"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    note: "semi-quantitative against internal standard cyclohexanone (response factor 1)"
+    arms:
+      - label: "Oxidized lard"
+        lever_value: "oxidized lard"
+        value: 5.43
+        censor: "none"
+        limit: null
+        n: 3
+        sd: 0.1
+        conditions:
+          ph: 5.0
+          ph_basis: "initial"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "oxidized lard": "0.1 g"
+          buffer: "0.2 mol/L phosphate, 10 mL"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "Fresh lard"
+        lever_value: "fresh lard"
+        value: null
+        censor: "nd_no_limit"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.0
+          ph_basis: "initial"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "fresh lard": "0.1 g"
+          buffer: "0.2 mol/L phosphate, 10 mL"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+  - id: "xu2011-6"
+    odorant: "Heptanal"
+    lever_class: "mixed"
+    lever: "cysteine + xylose (0.2 g each) absent vs present, oxidized lard"
+    focal: false
+    location: "Table 2"
+    digitised: false
+    unit: "ug/mL"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    note: "semi-quantitative against internal standard cyclohexanone (response factor 1)"
+    arms:
+      - label: "Oxidized lard"
+        lever_value: "no cysteine, no xylose"
+        value: 5.43
+        censor: "none"
+        limit: null
+        n: 3
+        sd: 0.1
+        conditions:
+          ph: 5.0
+          ph_basis: "initial"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "oxidized lard": "0.1 g"
+          buffer: "0.2 mol/L phosphate, 10 mL"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "Xyl-Cys-oxidized lard"
+        lever_value: "cysteine + xylose"
+        value: null
+        censor: "nd_no_limit"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.0
+          ph_basis: "initial"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "L-cysteine": "0.2 g in 10 mL"
+            "D-xylose": "0.2 g in 10 mL"
+            "oxidized lard": "0.1 g"
+          buffer: "0.2 mol/L phosphate, 10 mL"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+  - id: "xu2011-7"
+    odorant: "1-Octen-3-ol"
+    lever_class: "lipid"
+    lever: "oxidized vs fresh lard (cysteine + xylose present)"
+    focal: true
+    location: "Table 2"
+    digitised: false
+    unit: "ug/mL"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    note: "semi-quantitative against internal standard cyclohexanone (response factor 1)"
+    arms:
+      - label: "Xyl-Cys-oxidized lard"
+        lever_value: "oxidized lard"
+        value: 5.31
+        censor: "none"
+        limit: null
+        n: 3
+        sd: 0.63
+        conditions:
+          ph: 5.0
+          ph_basis: "initial"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "L-cysteine": "0.2 g in 10 mL"
+            "D-xylose": "0.2 g in 10 mL"
+            "oxidized lard": "0.1 g"
+          buffer: "0.2 mol/L phosphate, 10 mL"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "Xyl-Cys-fresh lard"
+        lever_value: "fresh lard"
+        value: null
+        censor: "nd_no_limit"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.0
+          ph_basis: "initial"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "L-cysteine": "0.2 g in 10 mL"
+            "D-xylose": "0.2 g in 10 mL"
+            "fresh lard": "0.1 g"
+          buffer: "0.2 mol/L phosphate, 10 mL"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+  - id: "xu2011-8"
+    odorant: "1-Octen-3-ol"
+    lever_class: "lipid"
+    lever: "oxidized vs fresh lard, heated alone (no cysteine, no xylose)"
+    focal: false
+    location: "Table 2"
+    digitised: false
+    unit: "ug/mL"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    note: "semi-quantitative against internal standard cyclohexanone (response factor 1)"
+    arms:
+      - label: "Oxidized lard"
+        lever_value: "oxidized lard"
+        value: 3.39
+        censor: "none"
+        limit: null
+        n: 3
+        sd: 0.4
+        conditions:
+          ph: 5.0
+          ph_basis: "initial"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "oxidized lard": "0.1 g"
+          buffer: "0.2 mol/L phosphate, 10 mL"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "Fresh lard"
+        lever_value: "fresh lard"
+        value: null
+        censor: "nd_no_limit"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.0
+          ph_basis: "initial"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "fresh lard": "0.1 g"
+          buffer: "0.2 mol/L phosphate, 10 mL"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+  - id: "xu2011-9"
+    odorant: "1-Octen-3-ol"
+    lever_class: "mixed"
+    lever: "cysteine + xylose (0.2 g each) absent vs present, oxidized lard"
+    focal: false
+    location: "Table 2"
+    digitised: false
+    unit: "ug/mL"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    note: "semi-quantitative against internal standard cyclohexanone (response factor 1)"
+    arms:
+      - label: "Oxidized lard"
+        lever_value: "no cysteine, no xylose"
+        value: 3.39
+        censor: "none"
+        limit: null
+        n: 3
+        sd: 0.4
+        conditions:
+          ph: 5.0
+          ph_basis: "initial"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "oxidized lard": "0.1 g"
+          buffer: "0.2 mol/L phosphate, 10 mL"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "Xyl-Cys-oxidized lard"
+        lever_value: "cysteine + xylose"
+        value: 5.31
+        censor: "none"
+        limit: null
+        n: 3
+        sd: 0.63
+        conditions:
+          ph: 5.0
+          ph_basis: "initial"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "L-cysteine": "0.2 g in 10 mL"
+            "D-xylose": "0.2 g in 10 mL"
+            "oxidized lard": "0.1 g"
+          buffer: "0.2 mol/L phosphate, 10 mL"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+  - id: "xu2011-10"
+    odorant: "2-Pentylfuran"
+    lever_class: "lipid"
+    lever: "oxidized vs fresh lard (cysteine + xylose present)"
+    focal: true
+    location: "Table 2"
+    digitised: false
+    unit: "ug/mL"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    note: "semi-quantitative against internal standard cyclohexanone (response factor 1)"
+    arms:
+      - label: "Xyl-Cys-oxidized lard"
+        lever_value: "oxidized lard"
+        value: 26.2
+        censor: "none"
+        limit: null
+        n: 3
+        sd: 4.14
+        conditions:
+          ph: 5.0
+          ph_basis: "initial"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "L-cysteine": "0.2 g in 10 mL"
+            "D-xylose": "0.2 g in 10 mL"
+            "oxidized lard": "0.1 g"
+          buffer: "0.2 mol/L phosphate, 10 mL"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "Xyl-Cys-fresh lard"
+        lever_value: "fresh lard"
+        value: 1.55
+        censor: "none"
+        limit: null
+        n: 3
+        sd: 0.16
+        conditions:
+          ph: 5.0
+          ph_basis: "initial"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "L-cysteine": "0.2 g in 10 mL"
+            "D-xylose": "0.2 g in 10 mL"
+            "fresh lard": "0.1 g"
+          buffer: "0.2 mol/L phosphate, 10 mL"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+  - id: "xu2011-11"
+    odorant: "2-Pentylfuran"
+    lever_class: "lipid"
+    lever: "oxidized vs fresh lard, heated alone (no cysteine, no xylose)"
+    focal: false
+    location: "Table 2"
+    digitised: false
+    unit: "ug/mL"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    note: "semi-quantitative against internal standard cyclohexanone (response factor 1)"
+    arms:
+      - label: "Oxidized lard"
+        lever_value: "oxidized lard"
+        value: 9.15
+        censor: "none"
+        limit: null
+        n: 3
+        sd: 0.11
+        conditions:
+          ph: 5.0
+          ph_basis: "initial"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "oxidized lard": "0.1 g"
+          buffer: "0.2 mol/L phosphate, 10 mL"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "Fresh lard"
+        lever_value: "fresh lard"
+        value: null
+        censor: "nd_no_limit"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.0
+          ph_basis: "initial"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "fresh lard": "0.1 g"
+          buffer: "0.2 mol/L phosphate, 10 mL"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+  - id: "xu2011-12"
+    odorant: "2-Pentylfuran"
+    lever_class: "mixed"
+    lever: "cysteine + xylose (0.2 g each) absent vs present, oxidized lard"
+    focal: false
+    location: "Table 2"
+    digitised: false
+    unit: "ug/mL"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    note: "semi-quantitative against internal standard cyclohexanone (response factor 1)"
+    arms:
+      - label: "Oxidized lard"
+        lever_value: "no cysteine, no xylose"
+        value: 9.15
+        censor: "none"
+        limit: null
+        n: 3
+        sd: 0.11
+        conditions:
+          ph: 5.0
+          ph_basis: "initial"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "oxidized lard": "0.1 g"
+          buffer: "0.2 mol/L phosphate, 10 mL"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "Xyl-Cys-oxidized lard"
+        lever_value: "cysteine + xylose"
+        value: 26.2
+        censor: "none"
+        limit: null
+        n: 3
+        sd: 4.14
+        conditions:
+          ph: 5.0
+          ph_basis: "initial"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "L-cysteine": "0.2 g in 10 mL"
+            "D-xylose": "0.2 g in 10 mL"
+            "oxidized lard": "0.1 g"
+          buffer: "0.2 mol/L phosphate, 10 mL"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+  - id: "xu2011-13"
+    odorant: "2-Pentylfuran"
+    lever_class: "mixed"
+    lever: "cysteine + xylose (0.2 g each) absent vs present, fresh lard"
+    focal: false
+    location: "Table 2"
+    digitised: false
+    unit: "ug/mL"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    note: "semi-quantitative against internal standard cyclohexanone (response factor 1)"
+    arms:
+      - label: "Fresh lard"
+        lever_value: "no cysteine, no xylose"
+        value: null
+        censor: "nd_no_limit"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.0
+          ph_basis: "initial"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "fresh lard": "0.1 g"
+          buffer: "0.2 mol/L phosphate, 10 mL"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "Xyl-Cys-fresh lard"
+        lever_value: "cysteine + xylose"
+        value: 1.55
+        censor: "none"
+        limit: null
+        n: 3
+        sd: 0.16
+        conditions:
+          ph: 5.0
+          ph_basis: "initial"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "L-cysteine": "0.2 g in 10 mL"
+            "D-xylose": "0.2 g in 10 mL"
+            "fresh lard": "0.1 g"
+          buffer: "0.2 mol/L phosphate, 10 mL"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+  - id: "xu2011-14"
+    odorant: "Octanal"
+    lever_class: "lipid"
+    lever: "oxidized vs fresh lard (cysteine + xylose present)"
+    focal: true
+    location: "Table 2"
+    digitised: false
+    unit: "ug/mL"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    note: "semi-quantitative against internal standard cyclohexanone (response factor 1)"
+    arms:
+      - label: "Xyl-Cys-oxidized lard"
+        lever_value: "oxidized lard"
+        value: 3.56
+        censor: "none"
+        limit: null
+        n: 3
+        sd: 0.42
+        conditions:
+          ph: 5.0
+          ph_basis: "initial"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "L-cysteine": "0.2 g in 10 mL"
+            "D-xylose": "0.2 g in 10 mL"
+            "oxidized lard": "0.1 g"
+          buffer: "0.2 mol/L phosphate, 10 mL"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "Xyl-Cys-fresh lard"
+        lever_value: "fresh lard"
+        value: null
+        censor: "nd_no_limit"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.0
+          ph_basis: "initial"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "L-cysteine": "0.2 g in 10 mL"
+            "D-xylose": "0.2 g in 10 mL"
+            "fresh lard": "0.1 g"
+          buffer: "0.2 mol/L phosphate, 10 mL"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+  - id: "xu2011-15"
+    odorant: "Octanal"
+    lever_class: "lipid"
+    lever: "oxidized vs fresh lard, heated alone (no cysteine, no xylose)"
+    focal: false
+    location: "Table 2"
+    digitised: false
+    unit: "ug/mL"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    note: "semi-quantitative against internal standard cyclohexanone (response factor 1)"
+    arms:
+      - label: "Oxidized lard"
+        lever_value: "oxidized lard"
+        value: 14.06
+        censor: "none"
+        limit: null
+        n: 3
+        sd: 0.76
+        conditions:
+          ph: 5.0
+          ph_basis: "initial"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "oxidized lard": "0.1 g"
+          buffer: "0.2 mol/L phosphate, 10 mL"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "Fresh lard"
+        lever_value: "fresh lard"
+        value: 0.61
+        censor: "none"
+        limit: null
+        n: 3
+        sd: 0.01
+        conditions:
+          ph: 5.0
+          ph_basis: "initial"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "fresh lard": "0.1 g"
+          buffer: "0.2 mol/L phosphate, 10 mL"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+  - id: "xu2011-16"
+    odorant: "Octanal"
+    lever_class: "mixed"
+    lever: "cysteine + xylose (0.2 g each) absent vs present, oxidized lard"
+    focal: false
+    location: "Table 2"
+    digitised: false
+    unit: "ug/mL"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    note: "semi-quantitative against internal standard cyclohexanone (response factor 1)"
+    arms:
+      - label: "Oxidized lard"
+        lever_value: "no cysteine, no xylose"
+        value: 14.06
+        censor: "none"
+        limit: null
+        n: 3
+        sd: 0.76
+        conditions:
+          ph: 5.0
+          ph_basis: "initial"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "oxidized lard": "0.1 g"
+          buffer: "0.2 mol/L phosphate, 10 mL"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "Xyl-Cys-oxidized lard"
+        lever_value: "cysteine + xylose"
+        value: 3.56
+        censor: "none"
+        limit: null
+        n: 3
+        sd: 0.42
+        conditions:
+          ph: 5.0
+          ph_basis: "initial"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "L-cysteine": "0.2 g in 10 mL"
+            "D-xylose": "0.2 g in 10 mL"
+            "oxidized lard": "0.1 g"
+          buffer: "0.2 mol/L phosphate, 10 mL"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+  - id: "xu2011-17"
+    odorant: "Octanal"
+    lever_class: "mixed"
+    lever: "cysteine + xylose (0.2 g each) absent vs present, fresh lard"
+    focal: false
+    location: "Table 2"
+    digitised: false
+    unit: "ug/mL"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    note: "semi-quantitative against internal standard cyclohexanone (response factor 1)"
+    arms:
+      - label: "Fresh lard"
+        lever_value: "no cysteine, no xylose"
+        value: 0.61
+        censor: "none"
+        limit: null
+        n: 3
+        sd: 0.01
+        conditions:
+          ph: 5.0
+          ph_basis: "initial"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "fresh lard": "0.1 g"
+          buffer: "0.2 mol/L phosphate, 10 mL"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "Xyl-Cys-fresh lard"
+        lever_value: "cysteine + xylose"
+        value: null
+        censor: "nd_no_limit"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.0
+          ph_basis: "initial"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "L-cysteine": "0.2 g in 10 mL"
+            "D-xylose": "0.2 g in 10 mL"
+            "fresh lard": "0.1 g"
+          buffer: "0.2 mol/L phosphate, 10 mL"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+  - id: "xu2011-18"
+    odorant: "(2E)-Octenal"
+    lever_class: "lipid"
+    lever: "oxidized vs fresh lard, heated alone (no cysteine, no xylose)"
+    focal: false
+    location: "Table 2"
+    digitised: false
+    unit: "ug/mL"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    note: "semi-quantitative against internal standard cyclohexanone (response factor 1)"
+    arms:
+      - label: "Oxidized lard"
+        lever_value: "oxidized lard"
+        value: 47.02
+        censor: "none"
+        limit: null
+        n: 3
+        sd: 5.69
+        conditions:
+          ph: 5.0
+          ph_basis: "initial"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "oxidized lard": "0.1 g"
+          buffer: "0.2 mol/L phosphate, 10 mL"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "Fresh lard"
+        lever_value: "fresh lard"
+        value: 1.19
+        censor: "none"
+        limit: null
+        n: 3
+        sd: 0.23
+        conditions:
+          ph: 5.0
+          ph_basis: "initial"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "fresh lard": "0.1 g"
+          buffer: "0.2 mol/L phosphate, 10 mL"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+  - id: "xu2011-19"
+    odorant: "(2E)-Octenal"
+    lever_class: "mixed"
+    lever: "cysteine + xylose (0.2 g each) absent vs present, oxidized lard"
+    focal: false
+    location: "Table 2"
+    digitised: false
+    unit: "ug/mL"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    note: "semi-quantitative against internal standard cyclohexanone (response factor 1)"
+    arms:
+      - label: "Oxidized lard"
+        lever_value: "no cysteine, no xylose"
+        value: 47.02
+        censor: "none"
+        limit: null
+        n: 3
+        sd: 5.69
+        conditions:
+          ph: 5.0
+          ph_basis: "initial"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "oxidized lard": "0.1 g"
+          buffer: "0.2 mol/L phosphate, 10 mL"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "Xyl-Cys-oxidized lard"
+        lever_value: "cysteine + xylose"
+        value: 1.59
+        censor: "none"
+        limit: null
+        n: 3
+        sd: 0.29
+        conditions:
+          ph: 5.0
+          ph_basis: "initial"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "L-cysteine": "0.2 g in 10 mL"
+            "D-xylose": "0.2 g in 10 mL"
+            "oxidized lard": "0.1 g"
+          buffer: "0.2 mol/L phosphate, 10 mL"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+  - id: "xu2011-20"
+    odorant: "Nonanal"
+    lever_class: "lipid"
+    lever: "oxidized vs fresh lard (cysteine + xylose present)"
+    focal: true
+    location: "Table 2"
+    digitised: false
+    unit: "ug/mL"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    note: "semi-quantitative against internal standard cyclohexanone (response factor 1)"
+    arms:
+      - label: "Xyl-Cys-oxidized lard"
+        lever_value: "oxidized lard"
+        value: 14.69
+        censor: "none"
+        limit: null
+        n: 3
+        sd: 1.84
+        conditions:
+          ph: 5.0
+          ph_basis: "initial"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "L-cysteine": "0.2 g in 10 mL"
+            "D-xylose": "0.2 g in 10 mL"
+            "oxidized lard": "0.1 g"
+          buffer: "0.2 mol/L phosphate, 10 mL"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "Xyl-Cys-fresh lard"
+        lever_value: "fresh lard"
+        value: 2.99
+        censor: "none"
+        limit: null
+        n: 3
+        sd: 0.15
+        conditions:
+          ph: 5.0
+          ph_basis: "initial"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "L-cysteine": "0.2 g in 10 mL"
+            "D-xylose": "0.2 g in 10 mL"
+            "fresh lard": "0.1 g"
+          buffer: "0.2 mol/L phosphate, 10 mL"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+  - id: "xu2011-21"
+    odorant: "Nonanal"
+    lever_class: "lipid"
+    lever: "oxidized vs fresh lard, heated alone (no cysteine, no xylose)"
+    focal: false
+    location: "Table 2"
+    digitised: false
+    unit: "ug/mL"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    note: "semi-quantitative against internal standard cyclohexanone (response factor 1)"
+    arms:
+      - label: "Oxidized lard"
+        lever_value: "oxidized lard"
+        value: 10.21
+        censor: "none"
+        limit: null
+        n: 3
+        sd: 0.6
+        conditions:
+          ph: 5.0
+          ph_basis: "initial"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "oxidized lard": "0.1 g"
+          buffer: "0.2 mol/L phosphate, 10 mL"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "Fresh lard"
+        lever_value: "fresh lard"
+        value: null
+        censor: "nd_no_limit"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.0
+          ph_basis: "initial"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "fresh lard": "0.1 g"
+          buffer: "0.2 mol/L phosphate, 10 mL"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+  - id: "xu2011-22"
+    odorant: "Nonanal"
+    lever_class: "mixed"
+    lever: "cysteine + xylose (0.2 g each) absent vs present, oxidized lard"
+    focal: false
+    location: "Table 2"
+    digitised: false
+    unit: "ug/mL"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    note: "semi-quantitative against internal standard cyclohexanone (response factor 1)"
+    arms:
+      - label: "Oxidized lard"
+        lever_value: "no cysteine, no xylose"
+        value: 10.21
+        censor: "none"
+        limit: null
+        n: 3
+        sd: 0.6
+        conditions:
+          ph: 5.0
+          ph_basis: "initial"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "oxidized lard": "0.1 g"
+          buffer: "0.2 mol/L phosphate, 10 mL"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "Xyl-Cys-oxidized lard"
+        lever_value: "cysteine + xylose"
+        value: 14.69
+        censor: "none"
+        limit: null
+        n: 3
+        sd: 1.84
+        conditions:
+          ph: 5.0
+          ph_basis: "initial"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "L-cysteine": "0.2 g in 10 mL"
+            "D-xylose": "0.2 g in 10 mL"
+            "oxidized lard": "0.1 g"
+          buffer: "0.2 mol/L phosphate, 10 mL"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+  - id: "xu2011-23"
+    odorant: "Nonanal"
+    lever_class: "mixed"
+    lever: "cysteine + xylose (0.2 g each) absent vs present, fresh lard"
+    focal: false
+    location: "Table 2"
+    digitised: false
+    unit: "ug/mL"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    note: "semi-quantitative against internal standard cyclohexanone (response factor 1)"
+    arms:
+      - label: "Fresh lard"
+        lever_value: "no cysteine, no xylose"
+        value: null
+        censor: "nd_no_limit"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.0
+          ph_basis: "initial"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "fresh lard": "0.1 g"
+          buffer: "0.2 mol/L phosphate, 10 mL"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "Xyl-Cys-fresh lard"
+        lever_value: "cysteine + xylose"
+        value: 2.99
+        censor: "none"
+        limit: null
+        n: 3
+        sd: 0.15
+        conditions:
+          ph: 5.0
+          ph_basis: "initial"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "L-cysteine": "0.2 g in 10 mL"
+            "D-xylose": "0.2 g in 10 mL"
+            "fresh lard": "0.1 g"
+          buffer: "0.2 mol/L phosphate, 10 mL"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+  - id: "xu2011-24"
+    odorant: "2-Nonenal"
+    lever_class: "lipid"
+    lever: "oxidized vs fresh lard (cysteine + xylose present)"
+    focal: true
+    location: "Table 2"
+    digitised: false
+    unit: "ug/mL"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    note: "semi-quantitative against internal standard cyclohexanone (response factor 1)"
+    arms:
+      - label: "Xyl-Cys-oxidized lard"
+        lever_value: "oxidized lard"
+        value: 4.87
+        censor: "none"
+        limit: null
+        n: 3
+        sd: 0.69
+        conditions:
+          ph: 5.0
+          ph_basis: "initial"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "L-cysteine": "0.2 g in 10 mL"
+            "D-xylose": "0.2 g in 10 mL"
+            "oxidized lard": "0.1 g"
+          buffer: "0.2 mol/L phosphate, 10 mL"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "Xyl-Cys-fresh lard"
+        lever_value: "fresh lard"
+        value: 0.74
+        censor: "none"
+        limit: null
+        n: 3
+        sd: 0.16
+        conditions:
+          ph: 5.0
+          ph_basis: "initial"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "L-cysteine": "0.2 g in 10 mL"
+            "D-xylose": "0.2 g in 10 mL"
+            "fresh lard": "0.1 g"
+          buffer: "0.2 mol/L phosphate, 10 mL"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+  - id: "xu2011-25"
+    odorant: "2-Nonenal"
+    lever_class: "lipid"
+    lever: "oxidized vs fresh lard, heated alone (no cysteine, no xylose)"
+    focal: false
+    location: "Table 2"
+    digitised: false
+    unit: "ug/mL"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    note: "semi-quantitative against internal standard cyclohexanone (response factor 1)"
+    arms:
+      - label: "Oxidized lard"
+        lever_value: "oxidized lard"
+        value: 11.95
+        censor: "none"
+        limit: null
+        n: 3
+        sd: 1.4
+        conditions:
+          ph: 5.0
+          ph_basis: "initial"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "oxidized lard": "0.1 g"
+          buffer: "0.2 mol/L phosphate, 10 mL"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "Fresh lard"
+        lever_value: "fresh lard"
+        value: 1.24
+        censor: "none"
+        limit: null
+        n: 3
+        sd: 0.11
+        conditions:
+          ph: 5.0
+          ph_basis: "initial"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "fresh lard": "0.1 g"
+          buffer: "0.2 mol/L phosphate, 10 mL"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+  - id: "xu2011-26"
+    odorant: "2-Nonenal"
+    lever_class: "mixed"
+    lever: "cysteine + xylose (0.2 g each) absent vs present, oxidized lard"
+    focal: false
+    location: "Table 2"
+    digitised: false
+    unit: "ug/mL"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    note: "semi-quantitative against internal standard cyclohexanone (response factor 1)"
+    arms:
+      - label: "Oxidized lard"
+        lever_value: "no cysteine, no xylose"
+        value: 11.95
+        censor: "none"
+        limit: null
+        n: 3
+        sd: 1.4
+        conditions:
+          ph: 5.0
+          ph_basis: "initial"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "oxidized lard": "0.1 g"
+          buffer: "0.2 mol/L phosphate, 10 mL"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "Xyl-Cys-oxidized lard"
+        lever_value: "cysteine + xylose"
+        value: 4.87
+        censor: "none"
+        limit: null
+        n: 3
+        sd: 0.69
+        conditions:
+          ph: 5.0
+          ph_basis: "initial"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "L-cysteine": "0.2 g in 10 mL"
+            "D-xylose": "0.2 g in 10 mL"
+            "oxidized lard": "0.1 g"
+          buffer: "0.2 mol/L phosphate, 10 mL"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+  - id: "xu2011-27"
+    odorant: "2-Nonenal"
+    lever_class: "mixed"
+    lever: "cysteine + xylose (0.2 g each) absent vs present, fresh lard"
+    focal: false
+    location: "Table 2"
+    digitised: false
+    unit: "ug/mL"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    note: "semi-quantitative against internal standard cyclohexanone (response factor 1)"
+    arms:
+      - label: "Fresh lard"
+        lever_value: "no cysteine, no xylose"
+        value: 1.24
+        censor: "none"
+        limit: null
+        n: 3
+        sd: 0.11
+        conditions:
+          ph: 5.0
+          ph_basis: "initial"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "fresh lard": "0.1 g"
+          buffer: "0.2 mol/L phosphate, 10 mL"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "Xyl-Cys-fresh lard"
+        lever_value: "cysteine + xylose"
+        value: 0.74
+        censor: "none"
+        limit: null
+        n: 3
+        sd: 0.16
+        conditions:
+          ph: 5.0
+          ph_basis: "initial"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "L-cysteine": "0.2 g in 10 mL"
+            "D-xylose": "0.2 g in 10 mL"
+            "fresh lard": "0.1 g"
+          buffer: "0.2 mol/L phosphate, 10 mL"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+  - id: "xu2011-28"
+    odorant: "(2E,4E)-Decadienal"
+    lever_class: "lipid"
+    lever: "oxidized vs fresh lard (cysteine + xylose present)"
+    focal: true
+    location: "Table 2"
+    digitised: false
+    unit: "ug/mL"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    note: "semi-quantitative against internal standard cyclohexanone (response factor 1)"
+    arms:
+      - label: "Xyl-Cys-oxidized lard"
+        lever_value: "oxidized lard"
+        value: 39.06
+        censor: "none"
+        limit: null
+        n: 3
+        sd: 5.94
+        conditions:
+          ph: 5.0
+          ph_basis: "initial"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "L-cysteine": "0.2 g in 10 mL"
+            "D-xylose": "0.2 g in 10 mL"
+            "oxidized lard": "0.1 g"
+          buffer: "0.2 mol/L phosphate, 10 mL"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "Xyl-Cys-fresh lard"
+        lever_value: "fresh lard"
+        value: 0.45
+        censor: "none"
+        limit: null
+        n: 3
+        sd: 0.07
+        conditions:
+          ph: 5.0
+          ph_basis: "initial"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "L-cysteine": "0.2 g in 10 mL"
+            "D-xylose": "0.2 g in 10 mL"
+            "fresh lard": "0.1 g"
+          buffer: "0.2 mol/L phosphate, 10 mL"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+  - id: "xu2011-29"
+    odorant: "(2E,4E)-Decadienal"
+    lever_class: "lipid"
+    lever: "oxidized vs fresh lard, heated alone (no cysteine, no xylose)"
+    focal: false
+    location: "Table 2"
+    digitised: false
+    unit: "ug/mL"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    note: "semi-quantitative against internal standard cyclohexanone (response factor 1)"
+    arms:
+      - label: "Oxidized lard"
+        lever_value: "oxidized lard"
+        value: 57.01
+        censor: "none"
+        limit: null
+        n: 3
+        sd: 7.09
+        conditions:
+          ph: 5.0
+          ph_basis: "initial"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "oxidized lard": "0.1 g"
+          buffer: "0.2 mol/L phosphate, 10 mL"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "Fresh lard"
+        lever_value: "fresh lard"
+        value: 3.16
+        censor: "none"
+        limit: null
+        n: 3
+        sd: 0.41
+        conditions:
+          ph: 5.0
+          ph_basis: "initial"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "fresh lard": "0.1 g"
+          buffer: "0.2 mol/L phosphate, 10 mL"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+  - id: "xu2011-30"
+    odorant: "(2E,4E)-Decadienal"
+    lever_class: "mixed"
+    lever: "cysteine + xylose (0.2 g each) absent vs present, oxidized lard"
+    focal: false
+    location: "Table 2"
+    digitised: false
+    unit: "ug/mL"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    note: "semi-quantitative against internal standard cyclohexanone (response factor 1)"
+    arms:
+      - label: "Oxidized lard"
+        lever_value: "no cysteine, no xylose"
+        value: 57.01
+        censor: "none"
+        limit: null
+        n: 3
+        sd: 7.09
+        conditions:
+          ph: 5.0
+          ph_basis: "initial"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "oxidized lard": "0.1 g"
+          buffer: "0.2 mol/L phosphate, 10 mL"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "Xyl-Cys-oxidized lard"
+        lever_value: "cysteine + xylose"
+        value: 39.06
+        censor: "none"
+        limit: null
+        n: 3
+        sd: 5.94
+        conditions:
+          ph: 5.0
+          ph_basis: "initial"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "L-cysteine": "0.2 g in 10 mL"
+            "D-xylose": "0.2 g in 10 mL"
+            "oxidized lard": "0.1 g"
+          buffer: "0.2 mol/L phosphate, 10 mL"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+  - id: "xu2011-31"
+    odorant: "(2E,4E)-Decadienal"
+    lever_class: "mixed"
+    lever: "cysteine + xylose (0.2 g each) absent vs present, fresh lard"
+    focal: false
+    location: "Table 2"
+    digitised: false
+    unit: "ug/mL"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    note: "semi-quantitative against internal standard cyclohexanone (response factor 1)"
+    arms:
+      - label: "Fresh lard"
+        lever_value: "no cysteine, no xylose"
+        value: 3.16
+        censor: "none"
+        limit: null
+        n: 3
+        sd: 0.41
+        conditions:
+          ph: 5.0
+          ph_basis: "initial"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "fresh lard": "0.1 g"
+          buffer: "0.2 mol/L phosphate, 10 mL"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "Xyl-Cys-fresh lard"
+        lever_value: "cysteine + xylose"
+        value: 0.45
+        censor: "none"
+        limit: null
+        n: 3
+        sd: 0.07
+        conditions:
+          ph: 5.0
+          ph_basis: "initial"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "L-cysteine": "0.2 g in 10 mL"
+            "D-xylose": "0.2 g in 10 mL"
+            "fresh lard": "0.1 g"
+          buffer: "0.2 mol/L phosphate, 10 mL"
+          matrix: "buffer"
+          headspace: "sealed, unstated"

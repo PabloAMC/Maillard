@@ -1,0 +1,2026 @@
+source: "zamora2008"
+pdf: "data/articles/zamora2008.pdf"
+reader: "b"
+scope_note: "All values digitised from figures; only phenylacetaldehyde is quantified (hexanal, benzaldehyde, 2-pentylfuran, 2-octenal, 2,4-decadienal identified only in Table 1); pH ladders cross three buffers with unassigned duplicates at pH 6 and 8"
+contrasts:
+  - id: "zamora2008-1"
+    odorant: "phenylacetaldehyde"
+    lever_class: "pH"
+    lever: "reaction pH (MeLOOH/Phe)"
+    focal: false
+    location: "Fig. 1"
+    digitised: true
+    unit: "umol PA/100 umol Phe"
+    quant_type: "absolute"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    note: "buffer changes along the ladder (citrate 2.15-6, phosphate 6-8 and 11-12, borate 8-10); duplicate points at pH 6 and 8 not assigned to a buffer in the figure"
+    arms:
+      - label: "pH 2.15"
+        lever_value: 2.15
+        value: 9.6
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 2.15
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLOOH": "equimolar (25 umol)"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "pH 3"
+        lever_value: 3
+        value: 8.96
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLOOH": "equimolar (25 umol)"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "pH 4"
+        lever_value: 4
+        value: 7.0
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 4
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLOOH": "equimolar (25 umol)"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "pH 5"
+        lever_value: 5
+        value: 6.28
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 5
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLOOH": "equimolar (25 umol)"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "pH 6"
+        lever_value: 6
+        value: 5.0
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 6
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLOOH": "equimolar (25 umol)"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate or phosphate (not distinguished)"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "pH 6"
+        lever_value: 6
+        value: 4.02
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 6
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLOOH": "equimolar (25 umol)"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate or phosphate (not distinguished)"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "pH 7"
+        lever_value: 7
+        value: 3.24
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLOOH": "equimolar (25 umol)"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium phosphate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "pH 8"
+        lever_value: 8
+        value: 3.81
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 8
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLOOH": "equimolar (25 umol)"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium phosphate or borate (not distinguished)"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "pH 8"
+        lever_value: 8
+        value: 2.7
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 8
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLOOH": "equimolar (25 umol)"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium phosphate or borate (not distinguished)"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "pH 9"
+        lever_value: 9
+        value: 2.45
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 9
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLOOH": "equimolar (25 umol)"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium borate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "pH 10"
+        lever_value: 10
+        value: 1.78
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 10
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLOOH": "equimolar (25 umol)"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium borate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "pH 11"
+        lever_value: 11
+        value: 2.4
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 11
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLOOH": "equimolar (25 umol)"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium phosphate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "pH 12"
+        lever_value: 12
+        value: 0.88
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 12
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLOOH": "equimolar (25 umol)"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium phosphate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+  - id: "zamora2008-2"
+    odorant: "phenylacetaldehyde"
+    lever_class: "pH"
+    lever: "reaction pH (MeLnOOH/Phe)"
+    focal: false
+    location: "Fig. 1"
+    digitised: true
+    unit: "umol PA/100 umol Phe"
+    quant_type: "absolute"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    note: "buffer changes along the ladder (citrate 2.15-6, phosphate 6-8 and 11-12, borate 8-10); duplicate points at pH 6 and 8 not assigned to a buffer in the figure"
+    arms:
+      - label: "pH 2.15"
+        lever_value: 2.15
+        value: 11.82
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 2.15
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLnOOH": "equimolar (25 umol)"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "pH 3"
+        lever_value: 3
+        value: 9.5
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLnOOH": "equimolar (25 umol)"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "pH 4"
+        lever_value: 4
+        value: 7.88
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 4
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLnOOH": "equimolar (25 umol)"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "pH 5"
+        lever_value: 5
+        value: 5.38
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 5
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLnOOH": "equimolar (25 umol)"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "pH 6"
+        lever_value: 6
+        value: 6.21
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 6
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLnOOH": "equimolar (25 umol)"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate or phosphate (not distinguished)"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "pH 6"
+        lever_value: 6
+        value: 5.0
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 6
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLnOOH": "equimolar (25 umol)"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate or phosphate (not distinguished)"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "pH 7"
+        lever_value: 7
+        value: 5.05
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLnOOH": "equimolar (25 umol)"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium phosphate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "pH 8"
+        lever_value: 8
+        value: 2.29
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 8
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLnOOH": "equimolar (25 umol)"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium phosphate or borate (not distinguished)"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "pH 8"
+        lever_value: 8
+        value: 1.57
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 8
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLnOOH": "equimolar (25 umol)"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium phosphate or borate (not distinguished)"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "pH 9"
+        lever_value: 9
+        value: 1.75
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 9
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLnOOH": "equimolar (25 umol)"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium borate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "pH 10"
+        lever_value: 10
+        value: 1.6
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 10
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLnOOH": "equimolar (25 umol)"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium borate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "pH 11"
+        lever_value: 11
+        value: 0.77
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 11
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLnOOH": "equimolar (25 umol)"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium phosphate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "pH 12"
+        lever_value: 12
+        value: 0.36
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 12
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLnOOH": "equimolar (25 umol)"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium phosphate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+  - id: "zamora2008-3"
+    odorant: "phenylacetaldehyde"
+    lever_class: "precursor dose"
+    lever: "lipid amount (umol), MeLOOH"
+    focal: false
+    location: "Fig. 2A"
+    digitised: true
+    unit: "umol PA/100 umol Phe"
+    quant_type: "absolute"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    note: "pH not printed in caption (0.3 M sodium citrate; text says pH 3 used for the rest of the study); MeLOOH series also replotted in Fig. 2B, keyed once"
+    arms:
+      - label: "0 umol"
+        lever_value: 0
+        value: 1.63
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLOOH": "0 umol"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "1.5625 umol"
+        lever_value: 1.5625
+        value: 3.42
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLOOH": "1.5625 umol"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "3.125 umol"
+        lever_value: 3.125
+        value: 4.68
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLOOH": "3.125 umol"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "6.25 umol"
+        lever_value: 6.25
+        value: 6.01
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLOOH": "6.25 umol"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "12.5 umol"
+        lever_value: 12.5
+        value: 6.8
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLOOH": "12.5 umol"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "25 umol"
+        lever_value: 25
+        value: 8.96
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLOOH": "25 umol"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+  - id: "zamora2008-4"
+    odorant: "phenylacetaldehyde"
+    lever_class: "precursor dose"
+    lever: "lipid amount (umol), MeLnOOH"
+    focal: false
+    location: "Fig. 2A"
+    digitised: true
+    unit: "umol PA/100 umol Phe"
+    quant_type: "absolute"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    note: "pH not printed in caption (0.3 M sodium citrate; text says pH 3 used for the rest of the study)"
+    arms:
+      - label: "0 umol"
+        lever_value: 0
+        value: 2.26
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLnOOH": "0 umol"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "1.5625 umol"
+        lever_value: 1.5625
+        value: 3.73
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLnOOH": "1.5625 umol"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "3.125 umol"
+        lever_value: 3.125
+        value: 5.06
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLnOOH": "3.125 umol"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "6.25 umol"
+        lever_value: 6.25
+        value: 6.4
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLnOOH": "6.25 umol"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "12.5 umol"
+        lever_value: 12.5
+        value: 7.07
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLnOOH": "12.5 umol"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "25 umol"
+        lever_value: 25
+        value: 9.51
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLnOOH": "25 umol"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+  - id: "zamora2008-5"
+    odorant: "phenylacetaldehyde"
+    lever_class: "precursor dose"
+    lever: "lipid amount (umol), MeLOH"
+    focal: false
+    location: "Fig. 2B"
+    digitised: true
+    unit: "umol PA/100 umol Phe"
+    quant_type: "absolute"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    note: "pH not printed in caption (0.3 M sodium citrate; text says pH 3 used for the rest of the study)"
+    arms:
+      - label: "0 umol"
+        lever_value: 0
+        value: 1.19
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLOH": "0 umol"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "1.5625 umol"
+        lever_value: 1.5625
+        value: 2.29
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLOH": "1.5625 umol"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "3.125 umol"
+        lever_value: 3.125
+        value: 2.74
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLOH": "3.125 umol"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "6.25 umol"
+        lever_value: 6.25
+        value: 5.18
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLOH": "6.25 umol"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "12.5 umol"
+        lever_value: 12.5
+        value: 6.26
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLOH": "12.5 umol"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "25 umol"
+        lever_value: 25
+        value: 9.41
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLOH": "25 umol"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+  - id: "zamora2008-6"
+    odorant: "phenylacetaldehyde"
+    lever_class: "precursor dose"
+    lever: "lipid amount (umol), MeLCO"
+    focal: false
+    location: "Fig. 2B"
+    digitised: true
+    unit: "umol PA/100 umol Phe"
+    quant_type: "absolute"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    note: "pH not printed in caption (0.3 M sodium citrate; text says pH 3 used for the rest of the study)"
+    arms:
+      - label: "0 umol"
+        lever_value: 0
+        value: 2.04
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLCO": "0 umol"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "1.5625 umol"
+        lever_value: 1.5625
+        value: 2.94
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLCO": "1.5625 umol"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "3.125 umol"
+        lever_value: 3.125
+        value: 2.92
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLCO": "3.125 umol"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "6.25 umol"
+        lever_value: 6.25
+        value: 3.63
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLCO": "6.25 umol"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "12.5 umol"
+        lever_value: 12.5
+        value: 6.76
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLCO": "12.5 umol"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "25 umol"
+        lever_value: 25
+        value: 10.45
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLCO": "25 umol"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+  - id: "zamora2008-7"
+    odorant: "phenylacetaldehyde"
+    lever_class: "time"
+    lever: "heating time (min), MeLOOH/Phe"
+    focal: false
+    location: "Fig. 3A"
+    digitised: true
+    unit: "umol PA/100 umol Phe"
+    quant_type: "absolute"
+    quantity: "amount"
+    time_course_rule: "lever is time; whole series"
+    note: "pH and lipid amount not printed in caption (0.3 M sodium citrate); MeLOOH series also replotted in Fig. 3B, keyed once"
+    arms:
+      - label: "0 min"
+        lever_value: 0
+        value: 2.08
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 0
+          precursors:
+            "MeLOOH": "unstated"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "10 min"
+        lever_value: 10
+        value: 4.59
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 10
+          precursors:
+            "MeLOOH": "unstated"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "20 min"
+        lever_value: 20
+        value: 5.8
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 20
+          precursors:
+            "MeLOOH": "unstated"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "30 min"
+        lever_value: 30
+        value: 7.08
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 30
+          precursors:
+            "MeLOOH": "unstated"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "40 min"
+        lever_value: 40
+        value: 7.81
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 40
+          precursors:
+            "MeLOOH": "unstated"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "50 min"
+        lever_value: 50
+        value: 8.48
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 50
+          precursors:
+            "MeLOOH": "unstated"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "60 min"
+        lever_value: 60
+        value: 8.96
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLOOH": "unstated"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+  - id: "zamora2008-8"
+    odorant: "phenylacetaldehyde"
+    lever_class: "time"
+    lever: "heating time (min), MeLnOOH/Phe"
+    focal: false
+    location: "Fig. 3A"
+    digitised: true
+    unit: "umol PA/100 umol Phe"
+    quant_type: "absolute"
+    quantity: "amount"
+    time_course_rule: "lever is time; whole series"
+    note: "pH and lipid amount not printed in caption (0.3 M sodium citrate)"
+    arms:
+      - label: "0 min"
+        lever_value: 0
+        value: 1.75
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 0
+          precursors:
+            "MeLnOOH": "unstated"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "10 min"
+        lever_value: 10
+        value: 3.57
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 10
+          precursors:
+            "MeLnOOH": "unstated"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "20 min"
+        lever_value: 20
+        value: 4.68
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 20
+          precursors:
+            "MeLnOOH": "unstated"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "30 min"
+        lever_value: 30
+        value: 7.77
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 30
+          precursors:
+            "MeLnOOH": "unstated"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "40 min"
+        lever_value: 40
+        value: 7.45
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 40
+          precursors:
+            "MeLnOOH": "unstated"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "50 min"
+        lever_value: 50
+        value: 7.21
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 50
+          precursors:
+            "MeLnOOH": "unstated"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "60 min"
+        lever_value: 60
+        value: 9.48
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLnOOH": "unstated"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+  - id: "zamora2008-9"
+    odorant: "phenylacetaldehyde"
+    lever_class: "time"
+    lever: "heating time (min), MeLOH/Phe"
+    focal: false
+    location: "Fig. 3B"
+    digitised: true
+    unit: "umol PA/100 umol Phe"
+    quant_type: "absolute"
+    quantity: "amount"
+    time_course_rule: "lever is time; whole series"
+    note: "pH and lipid amount not printed in caption (0.3 M sodium citrate)"
+    arms:
+      - label: "0 min"
+        lever_value: 0
+        value: 1.26
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 0
+          precursors:
+            "MeLOH": "unstated"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "10 min"
+        lever_value: 10
+        value: 4.87
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 10
+          precursors:
+            "MeLOH": "unstated"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "20 min"
+        lever_value: 20
+        value: 5.33
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 20
+          precursors:
+            "MeLOH": "unstated"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "30 min"
+        lever_value: 30
+        value: 7.54
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 30
+          precursors:
+            "MeLOH": "unstated"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "40 min"
+        lever_value: 40
+        value: 6.93
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 40
+          precursors:
+            "MeLOH": "unstated"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "50 min"
+        lever_value: 50
+        value: 8.54
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 50
+          precursors:
+            "MeLOH": "unstated"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "60 min"
+        lever_value: 60
+        value: 9.43
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLOH": "unstated"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+  - id: "zamora2008-10"
+    odorant: "phenylacetaldehyde"
+    lever_class: "time"
+    lever: "heating time (min), MeLCO/Phe"
+    focal: false
+    location: "Fig. 3B"
+    digitised: true
+    unit: "umol PA/100 umol Phe"
+    quant_type: "absolute"
+    quantity: "amount"
+    time_course_rule: "lever is time; whole series"
+    note: "pH and lipid amount not printed in caption (0.3 M sodium citrate)"
+    arms:
+      - label: "0 min"
+        lever_value: 0
+        value: 0.8
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 0
+          precursors:
+            "MeLCO": "unstated"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "20 min"
+        lever_value: 20
+        value: 3.39
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 20
+          precursors:
+            "MeLCO": "unstated"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "40 min"
+        lever_value: 40
+        value: 7.76
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 40
+          precursors:
+            "MeLCO": "unstated"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+      - label: "60 min"
+        lever_value: 60
+        value: 10.5
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLCO": "unstated"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air (closed tubes)"
+  - id: "zamora2008-11"
+    odorant: "phenylacetaldehyde"
+    lever_class: "lipid"
+    lever: "lipid oxidation product identity, under air"
+    focal: true
+    location: "Fig. 4"
+    digitised: true
+    unit: "umol PA/100 umol Phe"
+    quant_type: "absolute"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    note: "pH and lipid amount not printed in caption (0.3 M sodium citrate, 1 h, 180 C)"
+    arms:
+      - label: "MeLOOH"
+        lever_value: "MeLOOH"
+        value: 8.91
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLOOH": "unstated"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air"
+      - label: "MeLOH"
+        lever_value: "MeLOH"
+        value: 9.39
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLOH": "unstated"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air"
+      - label: "MeLEPOH"
+        lever_value: "MeLEPOH"
+        value: 9.48
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLEPOH": "unstated"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air"
+      - label: "MeLCO"
+        lever_value: "MeLCO"
+        value: 10.42
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLCO": "unstated"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air"
+      - label: "MeLEPCO"
+        lever_value: "MeLEPCO"
+        value: 10.73
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLEPCO": "unstated"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air"
+  - id: "zamora2008-12"
+    odorant: "phenylacetaldehyde"
+    lever_class: "lipid"
+    lever: "lipid oxidation product identity, under nitrogen"
+    focal: true
+    location: "Fig. 4"
+    digitised: true
+    unit: "umol PA/100 umol Phe"
+    quant_type: "absolute"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    note: "pH and lipid amount not printed in caption (0.3 M sodium citrate, 1 h, 180 C)"
+    arms:
+      - label: "MeLOOH"
+        lever_value: "MeLOOH"
+        value: 3.72
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLOOH": "unstated"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "inert (nitrogen)"
+      - label: "MeLOH"
+        lever_value: "MeLOH"
+        value: 4.56
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLOH": "unstated"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "inert (nitrogen)"
+      - label: "MeLEPOH"
+        lever_value: "MeLEPOH"
+        value: 5.54
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLEPOH": "unstated"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "inert (nitrogen)"
+      - label: "MeLCO"
+        lever_value: "MeLCO"
+        value: 4.29
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLCO": "unstated"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "inert (nitrogen)"
+      - label: "MeLEPCO"
+        lever_value: "MeLEPCO"
+        value: 10.55
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLEPCO": "unstated"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "inert (nitrogen)"
+  - id: "zamora2008-13"
+    odorant: "phenylacetaldehyde"
+    lever_class: "oxygen"
+    lever: "air vs nitrogen, MeLOOH/Phe"
+    focal: false
+    location: "Fig. 4"
+    digitised: true
+    unit: "umol PA/100 umol Phe"
+    quant_type: "absolute"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "air"
+        lever_value: "air"
+        value: 8.91
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLOOH": "unstated"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air"
+      - label: "nitrogen"
+        lever_value: "inert"
+        value: 3.72
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLOOH": "unstated"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "inert (nitrogen)"
+  - id: "zamora2008-14"
+    odorant: "phenylacetaldehyde"
+    lever_class: "oxygen"
+    lever: "air vs nitrogen, MeLOH/Phe"
+    focal: false
+    location: "Fig. 4"
+    digitised: true
+    unit: "umol PA/100 umol Phe"
+    quant_type: "absolute"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "air"
+        lever_value: "air"
+        value: 9.39
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLOH": "unstated"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air"
+      - label: "nitrogen"
+        lever_value: "inert"
+        value: 4.56
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLOH": "unstated"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "inert (nitrogen)"
+  - id: "zamora2008-15"
+    odorant: "phenylacetaldehyde"
+    lever_class: "oxygen"
+    lever: "air vs nitrogen, MeLEPOH/Phe"
+    focal: false
+    location: "Fig. 4"
+    digitised: true
+    unit: "umol PA/100 umol Phe"
+    quant_type: "absolute"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "air"
+        lever_value: "air"
+        value: 9.48
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLEPOH": "unstated"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air"
+      - label: "nitrogen"
+        lever_value: "inert"
+        value: 5.54
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLEPOH": "unstated"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "inert (nitrogen)"
+  - id: "zamora2008-16"
+    odorant: "phenylacetaldehyde"
+    lever_class: "oxygen"
+    lever: "air vs nitrogen, MeLCO/Phe"
+    focal: false
+    location: "Fig. 4"
+    digitised: true
+    unit: "umol PA/100 umol Phe"
+    quant_type: "absolute"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "air"
+        lever_value: "air"
+        value: 10.42
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLCO": "unstated"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air"
+      - label: "nitrogen"
+        lever_value: "inert"
+        value: 4.29
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLCO": "unstated"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "inert (nitrogen)"
+  - id: "zamora2008-17"
+    odorant: "phenylacetaldehyde"
+    lever_class: "oxygen"
+    lever: "air vs nitrogen, MeLEPCO/Phe"
+    focal: false
+    location: "Fig. 4"
+    digitised: true
+    unit: "umol PA/100 umol Phe"
+    quant_type: "absolute"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "air"
+        lever_value: "air"
+        value: 10.73
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLEPCO": "unstated"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "air"
+      - label: "nitrogen"
+        lever_value: "inert"
+        value: 10.55
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "label"
+          temp_C: 180
+          time_min: 60
+          precursors:
+            "MeLEPCO": "unstated"
+            "phenylalanine": "25 umol"
+            "volume": "0.5 mL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "inert (nitrogen)"
