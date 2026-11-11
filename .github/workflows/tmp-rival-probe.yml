@@ -10,7 +10,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        job: [sug01-reps, s3-subset]
+        job: [sug01-score]
     steps:
       - uses: actions/checkout@v4
       - uses: conda-incubator/setup-miniconda@v3
@@ -36,3 +36,17 @@ jobs:
           WORKERS: "4"
           SUBSET_EVERY: "6"
         run: python scripts/tmp_probe/s3_subset_compare.py
+      - if: matrix.job == 'sug01-score'
+        shell: bash -el {0}
+        env:
+          MAILLARD_WORKERS: "4"
+        run: |
+          python - <<'PY'
+          import json
+          from src.kinetic_core import directional as d, ph_balance_refusal as s3
+          p = d.load_panel(d.PANEL_PATH)['panel']
+          r = d.score_claim(p[0], flat_tolerance_pct=5.0)
+          print("SUG-01 status", r["status"], "failures", [v.failure for v in s3._CACHE.values()])
+          tracked = json.load(open("results/validation/core_directional_scores.json"))
+          print("tracked", json.dumps([c for c in tracked.get("claims", tracked.get("rows", [])) if c.get("claim_id") == "SUG-01"])[:600])
+          PY
