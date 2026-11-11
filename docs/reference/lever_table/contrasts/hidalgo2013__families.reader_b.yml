@@ -1,0 +1,1591 @@
+source: "hidalgo2013"
+pdf: "data/articles/hidalgo2013.pdf"
+reader: "b"
+scope_note: "All values digitised from figures (no tables). Fig. 1 (identity of the alpha-keto acid vs control) not keyed: carbonyl-reactant identity is not a listed lever. Fig. 2A pH ladder keyed within each buffer (buffer changes along the ladder) plus buffer pairs at pH 6 and 8; Fig. 2A axis prints 'mmol/umol Phe'. Fig. 3 control arms read ~0 (axis 0-800 nmol), control temperature pair not keyed."
+contrasts:
+  - id: "hidalgo2013-1"
+    odorant: "phenylacetaldehyde"
+    lever_class: "pH"
+    lever: "buffer pH within 0.3 M sodium citrate"
+    focal: false
+    location: "Fig. 2A"
+    digitised: true
+    unit: "mmol/umol Phe (axis label as printed)"
+    quant_type: "absolute"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "pH 2.15 (citrate)"
+        lever_value: 2.15
+        value: 51.5
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 2.15
+          ph_basis: "label"
+          temp_C: 100
+          time_min: 60
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "20 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "pH 3 (citrate)"
+        lever_value: 3
+        value: 42
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "label"
+          temp_C: 100
+          time_min: 60
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "20 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "pH 4 (citrate)"
+        lever_value: 4
+        value: 24.5
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 4
+          ph_basis: "label"
+          temp_C: 100
+          time_min: 60
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "20 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "pH 5 (citrate)"
+        lever_value: 5
+        value: 23.5
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 5
+          ph_basis: "label"
+          temp_C: 100
+          time_min: 60
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "20 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "pH 6 (citrate)"
+        lever_value: 6
+        value: 23
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 6
+          ph_basis: "label"
+          temp_C: 100
+          time_min: 60
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "20 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+  - id: "hidalgo2013-2"
+    odorant: "phenylacetaldehyde"
+    lever_class: "pH"
+    lever: "buffer pH within 0.3 M sodium phosphate"
+    focal: false
+    location: "Fig. 2A"
+    digitised: true
+    unit: "mmol/umol Phe (axis label as printed)"
+    quant_type: "absolute"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "pH 6 (phosphate)"
+        lever_value: 6
+        value: 25
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 6
+          ph_basis: "label"
+          temp_C: 100
+          time_min: 60
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "20 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium phosphate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "pH 7 (phosphate)"
+        lever_value: 7
+        value: 23.5
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7
+          ph_basis: "label"
+          temp_C: 100
+          time_min: 60
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "20 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium phosphate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "pH 8 (phosphate)"
+        lever_value: 8
+        value: 21
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 8
+          ph_basis: "label"
+          temp_C: 100
+          time_min: 60
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "20 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium phosphate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "pH 11 (phosphate)"
+        lever_value: 11
+        value: 11
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 11
+          ph_basis: "label"
+          temp_C: 100
+          time_min: 60
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "20 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium phosphate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "pH 12 (phosphate)"
+        lever_value: 12
+        value: 6
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 12
+          ph_basis: "label"
+          temp_C: 100
+          time_min: 60
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "20 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium phosphate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+  - id: "hidalgo2013-3"
+    odorant: "phenylacetaldehyde"
+    lever_class: "pH"
+    lever: "buffer pH within 0.3 M sodium borate"
+    focal: false
+    location: "Fig. 2A"
+    digitised: true
+    unit: "mmol/umol Phe (axis label as printed)"
+    quant_type: "absolute"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "pH 8 (borate)"
+        lever_value: 8
+        value: 24
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 8
+          ph_basis: "label"
+          temp_C: 100
+          time_min: 60
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "20 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium borate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "pH 9 (borate)"
+        lever_value: 9
+        value: 20.5
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 9
+          ph_basis: "label"
+          temp_C: 100
+          time_min: 60
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "20 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium borate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "pH 10 (borate)"
+        lever_value: 10
+        value: 17
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 10
+          ph_basis: "label"
+          temp_C: 100
+          time_min: 60
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "20 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium borate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+  - id: "hidalgo2013-4"
+    odorant: "phenylacetaldehyde"
+    lever_class: "buffer"
+    lever: "buffer type at pH 6"
+    focal: false
+    location: "Fig. 2A"
+    digitised: true
+    unit: "mmol/umol Phe (axis label as printed)"
+    quant_type: "absolute"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "0.3 M sodium citrate pH 6"
+        lever_value: "citrate"
+        value: 23
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 6
+          ph_basis: "label"
+          temp_C: 100
+          time_min: 60
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "20 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "0.3 M sodium phosphate pH 6"
+        lever_value: "phosphate"
+        value: 25
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 6
+          ph_basis: "label"
+          temp_C: 100
+          time_min: 60
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "20 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium phosphate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+  - id: "hidalgo2013-5"
+    odorant: "phenylacetaldehyde"
+    lever_class: "buffer"
+    lever: "buffer type at pH 8"
+    focal: false
+    location: "Fig. 2A"
+    digitised: true
+    unit: "mmol/umol Phe (axis label as printed)"
+    quant_type: "absolute"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "0.3 M sodium phosphate pH 8"
+        lever_value: "phosphate"
+        value: 21
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 8
+          ph_basis: "label"
+          temp_C: 100
+          time_min: 60
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "20 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium phosphate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "0.3 M sodium borate pH 8"
+        lever_value: "borate"
+        value: 24
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 8
+          ph_basis: "label"
+          temp_C: 100
+          time_min: 60
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "20 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium borate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+  - id: "hidalgo2013-6"
+    odorant: "phenylacetaldehyde"
+    lever_class: "precursor dose"
+    lever: "glyoxylic acid (GlyKA) amount, 100 C 1 h"
+    focal: true
+    location: "Fig. 2B"
+    digitised: true
+    unit: "umol/mmol Phe"
+    quant_type: "absolute"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "GlyKA 0 umol, 100 C 1 h"
+        lever_value: 0
+        value: 0.8
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "label"
+          temp_C: 100
+          time_min: 60
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "0 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "GlyKA 5 umol, 100 C 1 h"
+        lever_value: 5
+        value: 12.8
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "label"
+          temp_C: 100
+          time_min: 60
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "5 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "GlyKA 10 umol, 100 C 1 h"
+        lever_value: 10
+        value: 21.2
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "label"
+          temp_C: 100
+          time_min: 60
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "10 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "GlyKA 15 umol, 100 C 1 h"
+        lever_value: 15
+        value: 32.3
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "label"
+          temp_C: 100
+          time_min: 60
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "15 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "GlyKA 20 umol, 100 C 1 h"
+        lever_value: 20
+        value: 42
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "label"
+          temp_C: 100
+          time_min: 60
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "20 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+  - id: "hidalgo2013-7"
+    odorant: "phenylacetaldehyde"
+    lever_class: "precursor dose"
+    lever: "glyoxylic acid (GlyKA) amount, 37 C 6 days"
+    focal: true
+    location: "Fig. 2B"
+    digitised: true
+    unit: "umol/mmol Phe"
+    quant_type: "absolute"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "GlyKA 0 umol, 37 C 6 days"
+        lever_value: 0
+        value: 2.8
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "label"
+          temp_C: 37
+          time_min: 8640
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "0 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "GlyKA 5 umol, 37 C 6 days"
+        lever_value: 5
+        value: 6.7
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "label"
+          temp_C: 37
+          time_min: 8640
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "5 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "GlyKA 10 umol, 37 C 6 days"
+        lever_value: 10
+        value: 16.5
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "label"
+          temp_C: 37
+          time_min: 8640
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "10 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "GlyKA 15 umol, 37 C 6 days"
+        lever_value: 15
+        value: 22.8
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "label"
+          temp_C: 37
+          time_min: 8640
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "15 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "GlyKA 20 umol, 37 C 6 days"
+        lever_value: 20
+        value: 28
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "label"
+          temp_C: 37
+          time_min: 8640
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "20 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+  - id: "hidalgo2013-8"
+    odorant: "phenylacetaldehyde"
+    lever_class: "mixed"
+    lever: "temperature and time together (100 C 1 h vs 37 C 6 days) at GlyKA 0 umol"
+    focal: false
+    location: "Fig. 2B"
+    digitised: true
+    unit: "umol/mmol Phe"
+    quant_type: "absolute"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "100 C 1 h"
+        lever_value: "100 C / 60 min"
+        value: 0.8
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "label"
+          temp_C: 100
+          time_min: 60
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "0 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "37 C 6 days"
+        lever_value: "37 C / 8640 min"
+        value: 2.8
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "label"
+          temp_C: 37
+          time_min: 8640
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "0 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+  - id: "hidalgo2013-9"
+    odorant: "phenylacetaldehyde"
+    lever_class: "mixed"
+    lever: "temperature and time together (100 C 1 h vs 37 C 6 days) at GlyKA 5 umol"
+    focal: false
+    location: "Fig. 2B"
+    digitised: true
+    unit: "umol/mmol Phe"
+    quant_type: "absolute"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "100 C 1 h"
+        lever_value: "100 C / 60 min"
+        value: 12.8
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "label"
+          temp_C: 100
+          time_min: 60
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "5 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "37 C 6 days"
+        lever_value: "37 C / 8640 min"
+        value: 6.7
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "label"
+          temp_C: 37
+          time_min: 8640
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "5 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+  - id: "hidalgo2013-10"
+    odorant: "phenylacetaldehyde"
+    lever_class: "mixed"
+    lever: "temperature and time together (100 C 1 h vs 37 C 6 days) at GlyKA 10 umol"
+    focal: false
+    location: "Fig. 2B"
+    digitised: true
+    unit: "umol/mmol Phe"
+    quant_type: "absolute"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "100 C 1 h"
+        lever_value: "100 C / 60 min"
+        value: 21.2
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "label"
+          temp_C: 100
+          time_min: 60
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "10 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "37 C 6 days"
+        lever_value: "37 C / 8640 min"
+        value: 16.5
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "label"
+          temp_C: 37
+          time_min: 8640
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "10 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+  - id: "hidalgo2013-11"
+    odorant: "phenylacetaldehyde"
+    lever_class: "mixed"
+    lever: "temperature and time together (100 C 1 h vs 37 C 6 days) at GlyKA 15 umol"
+    focal: false
+    location: "Fig. 2B"
+    digitised: true
+    unit: "umol/mmol Phe"
+    quant_type: "absolute"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "100 C 1 h"
+        lever_value: "100 C / 60 min"
+        value: 32.3
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "label"
+          temp_C: 100
+          time_min: 60
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "15 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "37 C 6 days"
+        lever_value: "37 C / 8640 min"
+        value: 22.8
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "label"
+          temp_C: 37
+          time_min: 8640
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "15 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+  - id: "hidalgo2013-12"
+    odorant: "phenylacetaldehyde"
+    lever_class: "mixed"
+    lever: "temperature and time together (100 C 1 h vs 37 C 6 days) at GlyKA 20 umol"
+    focal: false
+    location: "Fig. 2B"
+    digitised: true
+    unit: "umol/mmol Phe"
+    quant_type: "absolute"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "100 C 1 h"
+        lever_value: "100 C / 60 min"
+        value: 42
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "label"
+          temp_C: 100
+          time_min: 60
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "20 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "37 C 6 days"
+        lever_value: "37 C / 8640 min"
+        value: 28
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "label"
+          temp_C: 37
+          time_min: 8640
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "20 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+  - id: "hidalgo2013-13"
+    odorant: "phenylacetaldehyde"
+    lever_class: "oxygen"
+    lever: "O2 percentage of the reaction atmosphere"
+    focal: false
+    location: "Fig. 2C"
+    digitised: true
+    unit: "umol/mmol Phe"
+    quant_type: "absolute"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "0 % O2"
+        lever_value: 0
+        value: 44.5
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "label"
+          temp_C: 100
+          time_min: 60
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "20 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "0 % O2"
+      - label: "20 % O2"
+        lever_value: 20
+        value: 42
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "label"
+          temp_C: 100
+          time_min: 60
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "20 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "20 % O2"
+      - label: "40 % O2"
+        lever_value: 40
+        value: 46
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "label"
+          temp_C: 100
+          time_min: 60
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "20 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "40 % O2"
+      - label: "60 % O2"
+        lever_value: 60
+        value: 45.5
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "label"
+          temp_C: 100
+          time_min: 60
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "20 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "60 % O2"
+      - label: "80 % O2"
+        lever_value: 80
+        value: 49
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "label"
+          temp_C: 100
+          time_min: 60
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "20 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "80 % O2"
+      - label: "100 % O2"
+        lever_value: 100
+        value: 53
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "label"
+          temp_C: 100
+          time_min: 60
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "20 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "100 % O2"
+  - id: "hidalgo2013-14"
+    odorant: "phenylacetaldehyde"
+    lever_class: "time"
+    lever: "heating time at 140 C"
+    focal: false
+    location: "Fig. 2D"
+    digitised: true
+    unit: "umol/mmol Phe"
+    quant_type: "absolute"
+    quantity: "amount"
+    time_course_rule: "whole series (lever is time)"
+    arms:
+      - label: "140 C, 0 min"
+        lever_value: 0
+        value: 7
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 0
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "20 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "140 C, 5 min"
+        lever_value: 5
+        value: 25
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 5
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "20 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "140 C, 10 min"
+        lever_value: 10
+        value: 58
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 10
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "20 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "140 C, 15 min"
+        lever_value: 15
+        value: 88
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 15
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "20 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "140 C, 20 min"
+        lever_value: 20
+        value: 110
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 20
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "20 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "140 C, 30 min"
+        lever_value: 30
+        value: 153
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 30
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "20 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+  - id: "hidalgo2013-15"
+    odorant: "phenylacetaldehyde"
+    lever_class: "time"
+    lever: "heating time at 120 C"
+    focal: false
+    location: "Fig. 2D"
+    digitised: true
+    unit: "umol/mmol Phe"
+    quant_type: "absolute"
+    quantity: "amount"
+    time_course_rule: "whole series (lever is time)"
+    arms:
+      - label: "120 C, 0 min"
+        lever_value: 0
+        value: 5
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "label"
+          temp_C: 120
+          time_min: 0
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "20 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "120 C, 5 min"
+        lever_value: 5
+        value: 20
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "label"
+          temp_C: 120
+          time_min: 5
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "20 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "120 C, 10 min"
+        lever_value: 10
+        value: 32
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "label"
+          temp_C: 120
+          time_min: 10
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "20 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "120 C, 20 min"
+        lever_value: 20
+        value: 65
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "label"
+          temp_C: 120
+          time_min: 20
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "20 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "120 C, 30 min"
+        lever_value: 30
+        value: 92
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "label"
+          temp_C: 120
+          time_min: 30
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "20 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+  - id: "hidalgo2013-16"
+    odorant: "phenylacetaldehyde"
+    lever_class: "time"
+    lever: "heating time at 100 C"
+    focal: false
+    location: "Fig. 2D"
+    digitised: true
+    unit: "umol/mmol Phe"
+    quant_type: "absolute"
+    quantity: "amount"
+    time_course_rule: "whole series (lever is time)"
+    arms:
+      - label: "100 C, 0 min"
+        lever_value: 0
+        value: 5
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "label"
+          temp_C: 100
+          time_min: 0
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "20 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "100 C, 10 min"
+        lever_value: 10
+        value: 20
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "label"
+          temp_C: 100
+          time_min: 10
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "20 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "100 C, 20 min"
+        lever_value: 20
+        value: 31
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "label"
+          temp_C: 100
+          time_min: 20
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "20 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "100 C, 30 min"
+        lever_value: 30
+        value: 52
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "label"
+          temp_C: 100
+          time_min: 30
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "20 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+  - id: "hidalgo2013-17"
+    odorant: "phenylacetaldehyde"
+    lever_class: "time"
+    lever: "heating time at 80 C"
+    focal: false
+    location: "Fig. 2D"
+    digitised: true
+    unit: "umol/mmol Phe"
+    quant_type: "absolute"
+    quantity: "amount"
+    time_course_rule: "whole series (lever is time)"
+    arms:
+      - label: "80 C, 0 min"
+        lever_value: 0
+        value: 4
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "label"
+          temp_C: 80
+          time_min: 0
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "20 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "80 C, 10 min"
+        lever_value: 10
+        value: 11
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "label"
+          temp_C: 80
+          time_min: 10
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "20 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "80 C, 20 min"
+        lever_value: 20
+        value: 19
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "label"
+          temp_C: 80
+          time_min: 20
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "20 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+  - id: "hidalgo2013-18"
+    odorant: "phenylacetaldehyde"
+    lever_class: "temperature"
+    lever: "heating temperature at 30 min (80 C series ends at 20 min, so not an arm)"
+    focal: false
+    location: "Fig. 2D"
+    digitised: true
+    unit: "umol/mmol Phe"
+    quant_type: "absolute"
+    quantity: "amount"
+    time_course_rule: "longest time"
+    arms:
+      - label: "140 C, 30 min"
+        lever_value: 140
+        value: 153
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 30
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "20 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "120 C, 30 min"
+        lever_value: 120
+        value: 92
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "label"
+          temp_C: 120
+          time_min: 30
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "20 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "100 C, 30 min"
+        lever_value: 100
+        value: 52
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "label"
+          temp_C: 100
+          time_min: 30
+          precursors:
+            "phenylalanine": "20 umol"
+            "glyoxylic acid": "20 umol"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+  - id: "hidalgo2013-19"
+    odorant: "phenylacetaldehyde"
+    lever_class: "lipid"
+    lever: "4,5-epoxy-2-decenal added vs none, 37 C"
+    focal: true
+    location: "Fig. 3B"
+    digitised: true
+    unit: "nmol"
+    quant_type: "absolute"
+    quantity: "amount"
+    time_course_rule: "longest time"
+    arms:
+      - label: "control (glycine alone) 37 C, day 5 (read as ~0 on a 0-800 nmol axis)"
+        lever_value: "none"
+        value: 0
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "label"
+          temp_C: 37
+          time_min: 7200
+          precursors:
+            "glycine": "20 umol"
+            "phenylalanine": "20 umol (added after 2 days)"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "glycine + 4,5-epoxy-2-decenal 37 C, day 5"
+        lever_value: "4,5-epoxy-2-decenal 20 umol"
+        value: 65
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "label"
+          temp_C: 37
+          time_min: 7200
+          precursors:
+            "glycine": "20 umol"
+            "phenylalanine": "20 umol (added after 2 days)"
+            "volume": "320 uL"
+            "4,5-epoxy-2-decenal": "20 umol"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+  - id: "hidalgo2013-20"
+    odorant: "phenylacetaldehyde"
+    lever_class: "lipid"
+    lever: "4,5-epoxy-2-decenal added vs none, 60 C"
+    focal: true
+    location: "Fig. 3D"
+    digitised: true
+    unit: "nmol"
+    quant_type: "absolute"
+    quantity: "amount"
+    time_course_rule: "longest time"
+    arms:
+      - label: "control (glycine alone) 60 C, day 5 (read as ~0 on a 0-800 nmol axis)"
+        lever_value: "none"
+        value: 0
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "label"
+          temp_C: 60
+          time_min: 7200
+          precursors:
+            "glycine": "20 umol"
+            "phenylalanine": "20 umol (added after 2 days)"
+            "volume": "320 uL"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "glycine + 4,5-epoxy-2-decenal 60 C, day 5"
+        lever_value: "4,5-epoxy-2-decenal 20 umol"
+        value: 715
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "label"
+          temp_C: 60
+          time_min: 7200
+          precursors:
+            "glycine": "20 umol"
+            "phenylalanine": "20 umol (added after 2 days)"
+            "volume": "320 uL"
+            "4,5-epoxy-2-decenal": "20 umol"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+  - id: "hidalgo2013-21"
+    odorant: "phenylacetaldehyde"
+    lever_class: "temperature"
+    lever: "incubation temperature, with 4,5-epoxy-2-decenal"
+    focal: true
+    location: "Fig. 3B/3D"
+    digitised: true
+    unit: "nmol"
+    quant_type: "absolute"
+    quantity: "amount"
+    time_course_rule: "longest time"
+    arms:
+      - label: "37 C, day 5"
+        lever_value: 37
+        value: 65
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "label"
+          temp_C: 37
+          time_min: 7200
+          precursors:
+            "glycine": "20 umol"
+            "phenylalanine": "20 umol (added after 2 days)"
+            "volume": "320 uL"
+            "4,5-epoxy-2-decenal": "20 umol"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "60 C, day 5"
+        lever_value: 60
+        value: 715
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "label"
+          temp_C: 60
+          time_min: 7200
+          precursors:
+            "glycine": "20 umol"
+            "phenylalanine": "20 umol (added after 2 days)"
+            "volume": "320 uL"
+            "4,5-epoxy-2-decenal": "20 umol"
+          buffer: "0.3 M sodium citrate"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
