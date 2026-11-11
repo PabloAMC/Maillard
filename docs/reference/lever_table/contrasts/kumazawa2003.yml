@@ -1,137 +1,503 @@
-source: "kumazawa2003"
-pdf: "data/articles/kumazawa2003.pdf"
-reader: "resolved"
-scope_note: "Model solutions are FFT (1 ppm) degradation in McIlvaine buffer, not Maillard formation from precursors. Fig. 3 (FFT residual ratio vs pH, same samples as Table 3) not digitised because Table 3 prints the values. Table 1 is GCO-H FD factors in a coffee drink; 2-furfuryl methyl disulfide and methanethiol are not on the odorant list. Table 2 buffer/FFT level not restated for that table; conditions copied from the Methods model experiment. Contrast 7 compares unheated (0 min) with retorted (10 min, 121 C) coffee: a 0-min arm has no log time, so it cannot enter a doubling-of-time slope as keyed."
+source: kumazawa2003
+pdf: data/articles/kumazawa2003.pdf
+reader: resolved
+scope_note: 'Model solutions are FFT (1 ppm) degradation in McIlvaine buffer, not Maillard formation from precursors. Fig.
+  3 (FFT residual ratio vs pH, same samples as Table 3) not digitised because Table 3 prints the values. Table 1 is GCO-H
+  FD factors in a coffee drink; 2-furfuryl methyl disulfide and methanethiol are not on the odorant list. Table 2 buffer/FFT
+  level not restated for that table; conditions copied from the Methods model experiment. Contrast 7 compares unheated (0
+  min) with retorted (10 min, 121 C) coffee: a 0-min arm has no log time, so it cannot enter a doubling-of-time slope as keyed.'
 contrasts:
-  - id: "kumazawa2003-1"
-    odorant: "2-Furfurylthiol (FFT)"
-    lever_class: "pH"
-    lever: "buffer pH 6.8 vs 6.0, 121 C 10 min"
-    focal: true
-    location: "Table 2, p. 2677"
-    digitised: false
-    unit: "% residual ratio"
-    quant_type: "relative"
-    time_course_rule: "not a time course"
-    resolution: "agreed"
-    arms:
-      - {label: "pH 6.8, 121 C 10 min", lever_value: 6.8, value: 5.5, censor: none, limit: null, n: null, sd: null,
-         conditions: {ph: 6.8, ph_basis: "label", temp_C: 121, time_min: 10, precursors: {2-furfurylthiol: "1 ppm"}, buffer: "citric acid / Na2HPO4 (mixed 1/10 M citric acid and 1/5 M Na2HPO4)", matrix: "buffer", headspace: "sealed (canned without deoxidization)"}}
-      - {label: "pH 6.0, 121 C 10 min", lever_value: 6.0, value: 48.3, censor: none, limit: null, n: null, sd: null,
-         conditions: {ph: 6.0, ph_basis: "label", temp_C: 121, time_min: 10, precursors: {2-furfurylthiol: "1 ppm"}, buffer: "citric acid / Na2HPO4 (mixed 1/10 M citric acid and 1/5 M Na2HPO4)", matrix: "buffer", headspace: "sealed (canned without deoxidization)"}}
-  - id: "kumazawa2003-2"
-    odorant: "2-Furfurylthiol (FFT)"
-    lever_class: "pH"
-    lever: "buffer pH 6.8 vs 6.0, 123 C 20 min"
-    focal: true
-    location: "Table 2, p. 2677"
-    digitised: false
-    unit: "% residual ratio"
-    quant_type: "relative"
-    time_course_rule: "not a time course"
-    resolution: "agreed"
-    arms:
-      - {label: "pH 6.8, 123 C 20 min", lever_value: 6.8, value: 5.3, censor: none, limit: null, n: null, sd: null,
-         conditions: {ph: 6.8, ph_basis: "label", temp_C: 123, time_min: 20, precursors: {2-furfurylthiol: "1 ppm"}, buffer: "citric acid / Na2HPO4 (mixed 1/10 M citric acid and 1/5 M Na2HPO4)", matrix: "buffer", headspace: "sealed (canned without deoxidization)"}}
-      - {label: "pH 6.0, 123 C 20 min", lever_value: 6.0, value: 43.4, censor: none, limit: null, n: null, sd: null,
-         conditions: {ph: 6.0, ph_basis: "label", temp_C: 123, time_min: 20, precursors: {2-furfurylthiol: "1 ppm"}, buffer: "citric acid / Na2HPO4 (mixed 1/10 M citric acid and 1/5 M Na2HPO4)", matrix: "buffer", headspace: "sealed (canned without deoxidization)"}}
-  - id: "kumazawa2003-3"
-    odorant: "2-Furfurylthiol (FFT)"
-    lever_class: "mixed"
-    lever: "temperature and time together: 121 C 10 min vs 123 C 20 min, pH 6.8"
-    focal: true
-    location: "Table 2, p. 2677"
-    digitised: false
-    unit: "% residual ratio"
-    quant_type: "relative"
-    time_course_rule: "not a time course"
-    resolution: "agreed"
-    arms:
-      - {label: "121 C, 10 min, pH 6.8", lever_value: "121 C / 10 min", value: 5.5, censor: none, limit: null, n: null, sd: null,
-         conditions: {ph: 6.8, ph_basis: "label", temp_C: 121, time_min: 10, precursors: {2-furfurylthiol: "1 ppm"}, buffer: "citric acid / Na2HPO4 (mixed 1/10 M citric acid and 1/5 M Na2HPO4)", matrix: "buffer", headspace: "sealed (canned without deoxidization)"}}
-      - {label: "123 C, 20 min, pH 6.8", lever_value: "123 C / 20 min", value: 5.3, censor: none, limit: null, n: null, sd: null,
-         conditions: {ph: 6.8, ph_basis: "label", temp_C: 123, time_min: 20, precursors: {2-furfurylthiol: "1 ppm"}, buffer: "citric acid / Na2HPO4 (mixed 1/10 M citric acid and 1/5 M Na2HPO4)", matrix: "buffer", headspace: "sealed (canned without deoxidization)"}}
-  - id: "kumazawa2003-4"
-    odorant: "2-Furfurylthiol (FFT)"
-    lever_class: "mixed"
-    lever: "temperature and time together: 121 C 10 min vs 123 C 20 min, pH 6.0"
-    focal: true
-    location: "Table 2, p. 2677"
-    digitised: false
-    unit: "% residual ratio"
-    quant_type: "relative"
-    time_course_rule: "not a time course"
-    resolution: "agreed"
-    arms:
-      - {label: "121 C, 10 min, pH 6.0", lever_value: "121 C / 10 min", value: 48.3, censor: none, limit: null, n: null, sd: null,
-         conditions: {ph: 6.0, ph_basis: "label", temp_C: 121, time_min: 10, precursors: {2-furfurylthiol: "1 ppm"}, buffer: "citric acid / Na2HPO4 (mixed 1/10 M citric acid and 1/5 M Na2HPO4)", matrix: "buffer", headspace: "sealed (canned without deoxidization)"}}
-      - {label: "123 C, 20 min, pH 6.0", lever_value: "123 C / 20 min", value: 43.4, censor: none, limit: null, n: null, sd: null,
-         conditions: {ph: 6.0, ph_basis: "label", temp_C: 123, time_min: 20, precursors: {2-furfurylthiol: "1 ppm"}, buffer: "citric acid / Na2HPO4 (mixed 1/10 M citric acid and 1/5 M Na2HPO4)", matrix: "buffer", headspace: "sealed (canned without deoxidization)"}}
-  - id: "kumazawa2003-5"
-    odorant: "2-Furfurylthiol (FFT)"
-    lever_class: "pH"
-    lever: "buffer pH 3.0 - 7.0 (7 levels)"
-    focal: true
-    location: "Table 3, p. 2677"
-    digitised: false
-    unit: "peak area ratio to internal standard (methyl octanoate)"
-    quant_type: "peak_area"
-    time_course_rule: "not a time course"
-    resolution: "agreed"
-    arms:
-      - {label: "pH 3.0", lever_value: 3.0, value: 0.46, censor: none, limit: null, n: null, sd: null,
-         conditions: {ph: 3.0, ph_basis: "label", temp_C: 121, time_min: 10, precursors: {2-furfurylthiol: "1 ppm"}, buffer: "citric acid / Na2HPO4 (McIlvaine)", matrix: "buffer", headspace: "sealed (canned without deoxidization)"}}
-      - {label: "pH 4.0", lever_value: 4.0, value: 0.44, censor: none, limit: null, n: null, sd: null,
-         conditions: {ph: 4.0, ph_basis: "label", temp_C: 121, time_min: 10, precursors: {2-furfurylthiol: "1 ppm"}, buffer: "citric acid / Na2HPO4 (McIlvaine)", matrix: "buffer", headspace: "sealed (canned without deoxidization)"}}
-      - {label: "pH 5.0", lever_value: 5.0, value: 0.41, censor: none, limit: null, n: null, sd: null,
-         conditions: {ph: 5.0, ph_basis: "label", temp_C: 121, time_min: 10, precursors: {2-furfurylthiol: "1 ppm"}, buffer: "citric acid / Na2HPO4 (McIlvaine)", matrix: "buffer", headspace: "sealed (canned without deoxidization)"}}
-      - {label: "pH 5.4", lever_value: 5.4, value: 0.37, censor: none, limit: null, n: null, sd: null,
-         conditions: {ph: 5.4, ph_basis: "label", temp_C: 121, time_min: 10, precursors: {2-furfurylthiol: "1 ppm"}, buffer: "citric acid / Na2HPO4 (McIlvaine)", matrix: "buffer", headspace: "sealed (canned without deoxidization)"}}
-      - {label: "pH 6.0", lever_value: 6.0, value: 0.21, censor: none, limit: null, n: null, sd: null,
-         conditions: {ph: 6.0, ph_basis: "label", temp_C: 121, time_min: 10, precursors: {2-furfurylthiol: "1 ppm"}, buffer: "citric acid / Na2HPO4 (McIlvaine)", matrix: "buffer", headspace: "sealed (canned without deoxidization)"}}
-      - {label: "pH 6.4", lever_value: 6.4, value: 0.05, censor: none, limit: null, n: null, sd: null,
-         conditions: {ph: 6.4, ph_basis: "label", temp_C: 121, time_min: 10, precursors: {2-furfurylthiol: "1 ppm"}, buffer: "citric acid / Na2HPO4 (McIlvaine)", matrix: "buffer", headspace: "sealed (canned without deoxidization)"}}
-      - {label: "pH 7.0", lever_value: 7.0, value: null, censor: below_value, limit: 0.01, n: null, sd: null,
-         conditions: {ph: 7.0, ph_basis: "label", temp_C: 121, time_min: 10, precursors: {2-furfurylthiol: "1 ppm"}, buffer: "citric acid / Na2HPO4 (McIlvaine)", matrix: "buffer", headspace: "sealed (canned without deoxidization)"}}
-  - id: "kumazawa2003-6"
-    odorant: "Bis(2-furfuryl) disulfide"
-    lever_class: "pH"
-    lever: "buffer pH 3.0 - 7.0 (7 levels); disulfide formed from 1 ppm FFT"
-    focal: false
-    location: "Table 3, p. 2677"
-    digitised: false
-    unit: "peak area ratio to internal standard (methyl octanoate)"
-    quant_type: "peak_area"
-    time_course_rule: "not a time course"
-    resolution: "agreed"
-    arms:
-      - {label: "pH 3.0", lever_value: 3.0, value: null, censor: below_value, limit: 0.01, n: null, sd: null,
-         conditions: {ph: 3.0, ph_basis: "label", temp_C: 121, time_min: 10, precursors: {2-furfurylthiol: "1 ppm"}, buffer: "citric acid / Na2HPO4 (McIlvaine)", matrix: "buffer", headspace: "sealed (canned without deoxidization)"}}
-      - {label: "pH 4.0", lever_value: 4.0, value: 0.01, censor: none, limit: null, n: null, sd: null,
-         conditions: {ph: 4.0, ph_basis: "label", temp_C: 121, time_min: 10, precursors: {2-furfurylthiol: "1 ppm"}, buffer: "citric acid / Na2HPO4 (McIlvaine)", matrix: "buffer", headspace: "sealed (canned without deoxidization)"}}
-      - {label: "pH 5.0", lever_value: 5.0, value: 0.03, censor: none, limit: null, n: null, sd: null,
-         conditions: {ph: 5.0, ph_basis: "label", temp_C: 121, time_min: 10, precursors: {2-furfurylthiol: "1 ppm"}, buffer: "citric acid / Na2HPO4 (McIlvaine)", matrix: "buffer", headspace: "sealed (canned without deoxidization)"}}
-      - {label: "pH 5.4", lever_value: 5.4, value: 0.07, censor: none, limit: null, n: null, sd: null,
-         conditions: {ph: 5.4, ph_basis: "label", temp_C: 121, time_min: 10, precursors: {2-furfurylthiol: "1 ppm"}, buffer: "citric acid / Na2HPO4 (McIlvaine)", matrix: "buffer", headspace: "sealed (canned without deoxidization)"}}
-      - {label: "pH 6.0", lever_value: 6.0, value: 0.13, censor: none, limit: null, n: null, sd: null,
-         conditions: {ph: 6.0, ph_basis: "label", temp_C: 121, time_min: 10, precursors: {2-furfurylthiol: "1 ppm"}, buffer: "citric acid / Na2HPO4 (McIlvaine)", matrix: "buffer", headspace: "sealed (canned without deoxidization)"}}
-      - {label: "pH 6.4", lever_value: 6.4, value: 0.14, censor: none, limit: null, n: null, sd: null,
-         conditions: {ph: 6.4, ph_basis: "label", temp_C: 121, time_min: 10, precursors: {2-furfurylthiol: "1 ppm"}, buffer: "citric acid / Na2HPO4 (McIlvaine)", matrix: "buffer", headspace: "sealed (canned without deoxidization)"}}
-      - {label: "pH 7.0", lever_value: 7.0, value: 0.17, censor: none, limit: null, n: null, sd: null,
-         conditions: {ph: 7.0, ph_basis: "label", temp_C: 121, time_min: 10, precursors: {2-furfurylthiol: "1 ppm"}, buffer: "citric acid / Na2HPO4 (McIlvaine)", matrix: "buffer", headspace: "sealed (canned without deoxidization)"}}
-  - id: "kumazawa2003-7"
-    odorant: "2-Furfurylthiol (FFT)"
-    lever_class: "time"
-    lever: "coffee drink before vs after heat processing (unheated vs retort 121 C, 10 min)"
-    focal: true
-    location: "Table 1, p. 2676"
-    digitised: false
-    unit: "FD factor (GCO-H)"
-    quant_type: "relative"
-    time_course_rule: "not a time course"
-    resolution: "re-read"
-    arms:
-      - {label: "before heating", lever_value: 0, value: 200, censor: none, limit: null, n: null, sd: null,
-         conditions: {ph: 6.0, ph_basis: "initial", temp_C: null, time_min: 0, precursors: {coffee: "50 g medium-roasted Arabica powder brewed with 500 mL water (~450 mL filtrate)"}, buffer: "NaHCO3 added to pH 6.0", matrix: "other (coffee drink)", headspace: "sealed (canned without deoxidization)"}}
-      - {label: "after heating", lever_value: 10, value: 40, censor: none, limit: null, n: null, sd: null,
-         conditions: {ph: 6.0, ph_basis: "initial", temp_C: 121, time_min: 10, precursors: {coffee: "50 g medium-roasted Arabica powder brewed with 500 mL water (~450 mL filtrate)"}, buffer: "NaHCO3 added to pH 6.0 (pH 5.2 after heat processing)", matrix: "other (coffee drink)", headspace: "sealed (canned without deoxidization)"}}
+- id: kumazawa2003-1
+  odorant: 2-Furfurylthiol (FFT)
+  lever_class: pH
+  lever: buffer pH 6.8 vs 6.0, 121 C 10 min
+  focal: true
+  location: Table 2, p. 2677
+  digitised: false
+  unit: '% residual ratio'
+  quant_type: relative
+  time_course_rule: not a time course
+  resolution: agreed
+  arms:
+  - label: pH 6.8, 121 C 10 min
+    lever_value: 6.8
+    value: 5.5
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.8
+      ph_basis: label
+      temp_C: 121
+      time_min: 10
+      precursors:
+        2-furfurylthiol: 1 ppm
+      buffer: citric acid / Na2HPO4 (mixed 1/10 M citric acid and 1/5 M Na2HPO4)
+      matrix: buffer
+      headspace: sealed (canned without deoxidization)
+  - label: pH 6.0, 121 C 10 min
+    lever_value: 6.0
+    value: 48.3
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 121
+      time_min: 10
+      precursors:
+        2-furfurylthiol: 1 ppm
+      buffer: citric acid / Na2HPO4 (mixed 1/10 M citric acid and 1/5 M Na2HPO4)
+      matrix: buffer
+      headspace: sealed (canned without deoxidization)
+- id: kumazawa2003-2
+  odorant: 2-Furfurylthiol (FFT)
+  lever_class: pH
+  lever: buffer pH 6.8 vs 6.0, 123 C 20 min
+  focal: true
+  location: Table 2, p. 2677
+  digitised: false
+  unit: '% residual ratio'
+  quant_type: relative
+  time_course_rule: not a time course
+  resolution: agreed
+  arms:
+  - label: pH 6.8, 123 C 20 min
+    lever_value: 6.8
+    value: 5.3
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.8
+      ph_basis: label
+      temp_C: 123
+      time_min: 20
+      precursors:
+        2-furfurylthiol: 1 ppm
+      buffer: citric acid / Na2HPO4 (mixed 1/10 M citric acid and 1/5 M Na2HPO4)
+      matrix: buffer
+      headspace: sealed (canned without deoxidization)
+  - label: pH 6.0, 123 C 20 min
+    lever_value: 6.0
+    value: 43.4
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 123
+      time_min: 20
+      precursors:
+        2-furfurylthiol: 1 ppm
+      buffer: citric acid / Na2HPO4 (mixed 1/10 M citric acid and 1/5 M Na2HPO4)
+      matrix: buffer
+      headspace: sealed (canned without deoxidization)
+- id: kumazawa2003-3
+  odorant: 2-Furfurylthiol (FFT)
+  lever_class: mixed
+  lever: 'temperature and time together: 121 C 10 min vs 123 C 20 min, pH 6.8'
+  focal: true
+  location: Table 2, p. 2677
+  digitised: false
+  unit: '% residual ratio'
+  quant_type: relative
+  time_course_rule: not a time course
+  resolution: agreed
+  arms:
+  - label: 121 C, 10 min, pH 6.8
+    lever_value: 121 C / 10 min
+    value: 5.5
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.8
+      ph_basis: label
+      temp_C: 121
+      time_min: 10
+      precursors:
+        2-furfurylthiol: 1 ppm
+      buffer: citric acid / Na2HPO4 (mixed 1/10 M citric acid and 1/5 M Na2HPO4)
+      matrix: buffer
+      headspace: sealed (canned without deoxidization)
+  - label: 123 C, 20 min, pH 6.8
+    lever_value: 123 C / 20 min
+    value: 5.3
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.8
+      ph_basis: label
+      temp_C: 123
+      time_min: 20
+      precursors:
+        2-furfurylthiol: 1 ppm
+      buffer: citric acid / Na2HPO4 (mixed 1/10 M citric acid and 1/5 M Na2HPO4)
+      matrix: buffer
+      headspace: sealed (canned without deoxidization)
+- id: kumazawa2003-4
+  odorant: 2-Furfurylthiol (FFT)
+  lever_class: mixed
+  lever: 'temperature and time together: 121 C 10 min vs 123 C 20 min, pH 6.0'
+  focal: true
+  location: Table 2, p. 2677
+  digitised: false
+  unit: '% residual ratio'
+  quant_type: relative
+  time_course_rule: not a time course
+  resolution: agreed
+  arms:
+  - label: 121 C, 10 min, pH 6.0
+    lever_value: 121 C / 10 min
+    value: 48.3
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 121
+      time_min: 10
+      precursors:
+        2-furfurylthiol: 1 ppm
+      buffer: citric acid / Na2HPO4 (mixed 1/10 M citric acid and 1/5 M Na2HPO4)
+      matrix: buffer
+      headspace: sealed (canned without deoxidization)
+  - label: 123 C, 20 min, pH 6.0
+    lever_value: 123 C / 20 min
+    value: 43.4
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 123
+      time_min: 20
+      precursors:
+        2-furfurylthiol: 1 ppm
+      buffer: citric acid / Na2HPO4 (mixed 1/10 M citric acid and 1/5 M Na2HPO4)
+      matrix: buffer
+      headspace: sealed (canned without deoxidization)
+- id: kumazawa2003-5
+  odorant: 2-Furfurylthiol (FFT)
+  lever_class: pH
+  lever: buffer pH 3.0 - 7.0 (7 levels)
+  focal: true
+  location: Table 3, p. 2677
+  digitised: false
+  unit: peak area ratio to internal standard (methyl octanoate)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  resolution: agreed
+  arms:
+  - label: pH 3.0
+    lever_value: 3.0
+    value: 0.46
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 121
+      time_min: 10
+      precursors:
+        2-furfurylthiol: 1 ppm
+      buffer: citric acid / Na2HPO4 (McIlvaine)
+      matrix: buffer
+      headspace: sealed (canned without deoxidization)
+  - label: pH 4.0
+    lever_value: 4.0
+    value: 0.44
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 4.0
+      ph_basis: label
+      temp_C: 121
+      time_min: 10
+      precursors:
+        2-furfurylthiol: 1 ppm
+      buffer: citric acid / Na2HPO4 (McIlvaine)
+      matrix: buffer
+      headspace: sealed (canned without deoxidization)
+  - label: pH 5.0
+    lever_value: 5.0
+    value: 0.41
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 121
+      time_min: 10
+      precursors:
+        2-furfurylthiol: 1 ppm
+      buffer: citric acid / Na2HPO4 (McIlvaine)
+      matrix: buffer
+      headspace: sealed (canned without deoxidization)
+  - label: pH 5.4
+    lever_value: 5.4
+    value: 0.37
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.4
+      ph_basis: label
+      temp_C: 121
+      time_min: 10
+      precursors:
+        2-furfurylthiol: 1 ppm
+      buffer: citric acid / Na2HPO4 (McIlvaine)
+      matrix: buffer
+      headspace: sealed (canned without deoxidization)
+  - label: pH 6.0
+    lever_value: 6.0
+    value: 0.21
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 121
+      time_min: 10
+      precursors:
+        2-furfurylthiol: 1 ppm
+      buffer: citric acid / Na2HPO4 (McIlvaine)
+      matrix: buffer
+      headspace: sealed (canned without deoxidization)
+  - label: pH 6.4
+    lever_value: 6.4
+    value: 0.05
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.4
+      ph_basis: label
+      temp_C: 121
+      time_min: 10
+      precursors:
+        2-furfurylthiol: 1 ppm
+      buffer: citric acid / Na2HPO4 (McIlvaine)
+      matrix: buffer
+      headspace: sealed (canned without deoxidization)
+  - label: pH 7.0
+    lever_value: 7.0
+    value: null
+    censor: below_value
+    limit: 0.01
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: label
+      temp_C: 121
+      time_min: 10
+      precursors:
+        2-furfurylthiol: 1 ppm
+      buffer: citric acid / Na2HPO4 (McIlvaine)
+      matrix: buffer
+      headspace: sealed (canned without deoxidization)
+- id: kumazawa2003-6
+  odorant: Bis(2-furfuryl) disulfide
+  lever_class: pH
+  lever: buffer pH 3.0 - 7.0 (7 levels); disulfide formed from 1 ppm FFT
+  focal: false
+  location: Table 3, p. 2677
+  digitised: false
+  unit: peak area ratio to internal standard (methyl octanoate)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  resolution: agreed
+  arms:
+  - label: pH 3.0
+    lever_value: 3.0
+    value: null
+    censor: below_value
+    limit: 0.01
+    n: null
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 121
+      time_min: 10
+      precursors:
+        2-furfurylthiol: 1 ppm
+      buffer: citric acid / Na2HPO4 (McIlvaine)
+      matrix: buffer
+      headspace: sealed (canned without deoxidization)
+  - label: pH 4.0
+    lever_value: 4.0
+    value: 0.01
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 4.0
+      ph_basis: label
+      temp_C: 121
+      time_min: 10
+      precursors:
+        2-furfurylthiol: 1 ppm
+      buffer: citric acid / Na2HPO4 (McIlvaine)
+      matrix: buffer
+      headspace: sealed (canned without deoxidization)
+  - label: pH 5.0
+    lever_value: 5.0
+    value: 0.03
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 121
+      time_min: 10
+      precursors:
+        2-furfurylthiol: 1 ppm
+      buffer: citric acid / Na2HPO4 (McIlvaine)
+      matrix: buffer
+      headspace: sealed (canned without deoxidization)
+  - label: pH 5.4
+    lever_value: 5.4
+    value: 0.07
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.4
+      ph_basis: label
+      temp_C: 121
+      time_min: 10
+      precursors:
+        2-furfurylthiol: 1 ppm
+      buffer: citric acid / Na2HPO4 (McIlvaine)
+      matrix: buffer
+      headspace: sealed (canned without deoxidization)
+  - label: pH 6.0
+    lever_value: 6.0
+    value: 0.13
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: label
+      temp_C: 121
+      time_min: 10
+      precursors:
+        2-furfurylthiol: 1 ppm
+      buffer: citric acid / Na2HPO4 (McIlvaine)
+      matrix: buffer
+      headspace: sealed (canned without deoxidization)
+  - label: pH 6.4
+    lever_value: 6.4
+    value: 0.14
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.4
+      ph_basis: label
+      temp_C: 121
+      time_min: 10
+      precursors:
+        2-furfurylthiol: 1 ppm
+      buffer: citric acid / Na2HPO4 (McIlvaine)
+      matrix: buffer
+      headspace: sealed (canned without deoxidization)
+  - label: pH 7.0
+    lever_value: 7.0
+    value: 0.17
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: label
+      temp_C: 121
+      time_min: 10
+      precursors:
+        2-furfurylthiol: 1 ppm
+      buffer: citric acid / Na2HPO4 (McIlvaine)
+      matrix: buffer
+      headspace: sealed (canned without deoxidization)
+- id: kumazawa2003-7
+  odorant: 2-Furfurylthiol (FFT)
+  lever_class: time
+  lever: coffee drink before vs after heat processing (unheated vs retort 121 C, 10 min)
+  focal: true
+  location: Table 1, p. 2676
+  digitised: false
+  unit: FD factor (GCO-H)
+  quant_type: relative
+  time_course_rule: not a time course
+  resolution: re-read
+  arms:
+  - label: before heating
+    lever_value: 0
+    value: 200
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: initial
+      temp_C: null
+      time_min: 0
+      precursors:
+        coffee: 50 g medium-roasted Arabica powder brewed with 500 mL water (~450 mL filtrate)
+      buffer: NaHCO3 added to pH 6.0
+      matrix: other (coffee drink)
+      headspace: sealed (canned without deoxidization)
+  - label: after heating
+    lever_value: 10
+    value: 40
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: initial
+      temp_C: 121
+      time_min: 10
+      precursors:
+        coffee: 50 g medium-roasted Arabica powder brewed with 500 mL water (~450 mL filtrate)
+      buffer: NaHCO3 added to pH 6.0 (pH 5.2 after heat processing)
+      matrix: other (coffee drink)
+      headspace: sealed (canned without deoxidization)
+  quantity: fd_factor
+  quantity_note: 'AEDA flavour-dilution factor: an odour-potency rank, not an amount (PREREG A1)'

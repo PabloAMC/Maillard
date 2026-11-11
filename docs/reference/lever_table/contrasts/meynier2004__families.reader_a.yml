@@ -1,0 +1,7 @@
+# Reader a, families round (Strecker aldehydes, pyrazines, lipid-derived, furanones/furans).
+source: meynier2004
+pdf: data/articles/meynier2004.pdf
+reader: a
+scope_note: 'No odorant measured after heating: hexanal and t-2-hexenal are added reagents (20 C storage); the responses are
+  protein fluorescence, UV, electrophoresis and His/Lys content; no qualifying contrast.'
+contrasts: []

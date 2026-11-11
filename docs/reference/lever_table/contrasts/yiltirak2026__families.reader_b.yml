@@ -1,0 +1,5 @@
+source: "yiltirak2026"
+pdf: "data/articles/Yiltirak2026.pdf"
+reader: "b"
+scope_note: "Only thiols (MFT, FFT, 3-mercapto-2-butanone) are quantified in the paper (excluded this round); hexanal is mentioned only as relative concentration in supplementary Fig. S5, not in the PDF"
+contrasts: []

@@ -1,0 +1,3666 @@
+# Reader b, blind double-keying, second round (families). Rules: PREREG secs. 3 - 4.
+source: "farmer1992"
+pdf: "data/articles/farmer1992.pdf"
+reader: "b"
+scope_note: "Cysteine and ribose are added together, so the Maillard-reactant contrast is keyed as 'mixed'; lipid-identity contrasts keyed per +/- column; tr,cis/cis,tr-2,4-decadienal, other alkenals/alkadienals, ketones, other alcohols and other 2-alkylfurans are not on the declared list and not keyed; 2-octenal and 2-nonenal printed without stereo-descriptor."
+contrasts:
+  - id: "farmer1992-1"
+    odorant: "hexanal"
+    lever_class: "mixed"
+    lever: "cysteine + ribose absent vs present (two precursors added together), lipid BTG"
+    focal: true
+    location: "Table 1, No. 1, p. 490 - 491"
+    digitised: false
+    unit: "RPA (relative peak area)"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "RPA = relative peak area (1 ng 1,2-dichlorobenzene = 100), mean of quadruplicate with SD in parentheses; printed 0 keyed as value 0 with censor nd_no_limit."
+    arms:
+      - label: "BTG -"
+        lever_value: "without cysteine + ribose"
+        value: 8310
+        censor: none
+        limit: null
+        n: 4
+        sd: 76
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef triglyceride": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef triglyceride emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "BTG +"
+        lever_value: "with cysteine + ribose"
+        value: 3900
+        censor: none
+        limit: null
+        n: 4
+        sd: 1870
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef triglyceride": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef triglyceride emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+  - id: "farmer1992-2"
+    odorant: "hexanal"
+    lever_class: "mixed"
+    lever: "cysteine + ribose absent vs present (two precursors added together), lipid BPL"
+    focal: true
+    location: "Table 1, No. 1, p. 490 - 491"
+    digitised: false
+    unit: "RPA (relative peak area)"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "RPA = relative peak area (1 ng 1,2-dichlorobenzene = 100), mean of quadruplicate with SD in parentheses; printed 0 keyed as value 0 with censor nd_no_limit."
+    arms:
+      - label: "BPL -"
+        lever_value: "without cysteine + ribose"
+        value: 22000
+        censor: none
+        limit: null
+        n: 4
+        sd: 9000
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef phospholipid": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef phospholipid emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "BPL +"
+        lever_value: "with cysteine + ribose"
+        value: 11000
+        censor: none
+        limit: null
+        n: 4
+        sd: 1680
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef phospholipid": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef phospholipid emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+  - id: "farmer1992-3"
+    odorant: "hexanal"
+    lever_class: "mixed"
+    lever: "cysteine + ribose absent vs present (two precursors added together), lipid PC"
+    focal: true
+    location: "Table 1, No. 1, p. 490 - 491"
+    digitised: false
+    unit: "RPA (relative peak area)"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "RPA = relative peak area (1 ng 1,2-dichlorobenzene = 100), mean of quadruplicate with SD in parentheses; printed 0 keyed as value 0 with censor nd_no_limit."
+    arms:
+      - label: "PC -"
+        lever_value: "without cysteine + ribose"
+        value: 20600
+        censor: none
+        limit: null
+        n: 4
+        sd: 2820
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylcholine": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylcholine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "PC +"
+        lever_value: "with cysteine + ribose"
+        value: 17100
+        censor: none
+        limit: null
+        n: 4
+        sd: 5840
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylcholine": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylcholine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+  - id: "farmer1992-4"
+    odorant: "hexanal"
+    lever_class: "mixed"
+    lever: "cysteine + ribose absent vs present (two precursors added together), lipid PE"
+    focal: true
+    location: "Table 1, No. 1, p. 490 - 491"
+    digitised: false
+    unit: "RPA (relative peak area)"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "RPA = relative peak area (1 ng 1,2-dichlorobenzene = 100), mean of quadruplicate with SD in parentheses; printed 0 keyed as value 0 with censor nd_no_limit."
+    arms:
+      - label: "PE -"
+        lever_value: "without cysteine + ribose"
+        value: 52900
+        censor: none
+        limit: null
+        n: 4
+        sd: 8760
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylethanolamine": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylethanolamine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "PE +"
+        lever_value: "with cysteine + ribose"
+        value: 17100
+        censor: none
+        limit: null
+        n: 4
+        sd: 4350
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylethanolamine": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylethanolamine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+  - id: "farmer1992-5"
+    odorant: "hexanal"
+    lever_class: "lipid"
+    lever: "lipid identity: BTG vs BPL vs PC vs PE (without cysteine + ribose)"
+    focal: false
+    location: "Table 1, No. 1, p. 490 - 491"
+    digitised: false
+    unit: "RPA (relative peak area)"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "RPA = relative peak area (1 ng 1,2-dichlorobenzene = 100), mean of quadruplicate with SD in parentheses; printed 0 keyed as value 0 with censor nd_no_limit."
+    arms:
+      - label: "BTG -"
+        lever_value: "beef triglyceride"
+        value: 8310
+        censor: none
+        limit: null
+        n: 4
+        sd: 76
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef triglyceride": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef triglyceride emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "BPL -"
+        lever_value: "beef phospholipid"
+        value: 22000
+        censor: none
+        limit: null
+        n: 4
+        sd: 9000
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef phospholipid": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef phospholipid emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "PC -"
+        lever_value: "egg phosphatidylcholine"
+        value: 20600
+        censor: none
+        limit: null
+        n: 4
+        sd: 2820
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylcholine": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylcholine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "PE -"
+        lever_value: "egg phosphatidylethanolamine"
+        value: 52900
+        censor: none
+        limit: null
+        n: 4
+        sd: 8760
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylethanolamine": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylethanolamine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+  - id: "farmer1992-6"
+    odorant: "hexanal"
+    lever_class: "lipid"
+    lever: "lipid identity: BTG vs BPL vs PC vs PE (with cysteine + ribose)"
+    focal: false
+    location: "Table 1, No. 1, p. 490 - 491"
+    digitised: false
+    unit: "RPA (relative peak area)"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "RPA = relative peak area (1 ng 1,2-dichlorobenzene = 100), mean of quadruplicate with SD in parentheses; printed 0 keyed as value 0 with censor nd_no_limit."
+    arms:
+      - label: "BTG +"
+        lever_value: "beef triglyceride"
+        value: 3900
+        censor: none
+        limit: null
+        n: 4
+        sd: 1870
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef triglyceride": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef triglyceride emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "BPL +"
+        lever_value: "beef phospholipid"
+        value: 11000
+        censor: none
+        limit: null
+        n: 4
+        sd: 1680
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef phospholipid": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef phospholipid emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "PC +"
+        lever_value: "egg phosphatidylcholine"
+        value: 17100
+        censor: none
+        limit: null
+        n: 4
+        sd: 5840
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylcholine": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylcholine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "PE +"
+        lever_value: "egg phosphatidylethanolamine"
+        value: 17100
+        censor: none
+        limit: null
+        n: 4
+        sd: 4350
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylethanolamine": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylethanolamine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+  - id: "farmer1992-7"
+    odorant: "heptanal"
+    lever_class: "mixed"
+    lever: "cysteine + ribose absent vs present (two precursors added together), lipid BTG"
+    focal: true
+    location: "Table 1, No. 2, p. 490 - 491"
+    digitised: false
+    unit: "RPA (relative peak area)"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "RPA = relative peak area (1 ng 1,2-dichlorobenzene = 100), mean of quadruplicate with SD in parentheses; printed 0 keyed as value 0 with censor nd_no_limit."
+    arms:
+      - label: "BTG -"
+        lever_value: "without cysteine + ribose"
+        value: 6740
+        censor: none
+        limit: null
+        n: 4
+        sd: 649
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef triglyceride": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef triglyceride emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "BTG +"
+        lever_value: "with cysteine + ribose"
+        value: 2640
+        censor: none
+        limit: null
+        n: 4
+        sd: 697
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef triglyceride": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef triglyceride emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+  - id: "farmer1992-8"
+    odorant: "heptanal"
+    lever_class: "mixed"
+    lever: "cysteine + ribose absent vs present (two precursors added together), lipid BPL"
+    focal: true
+    location: "Table 1, No. 2, p. 490 - 491"
+    digitised: false
+    unit: "RPA (relative peak area)"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "RPA = relative peak area (1 ng 1,2-dichlorobenzene = 100), mean of quadruplicate with SD in parentheses; printed 0 keyed as value 0 with censor nd_no_limit."
+    arms:
+      - label: "BPL -"
+        lever_value: "without cysteine + ribose"
+        value: 11100
+        censor: none
+        limit: null
+        n: 4
+        sd: 2910
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef phospholipid": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef phospholipid emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "BPL +"
+        lever_value: "with cysteine + ribose"
+        value: 5040
+        censor: none
+        limit: null
+        n: 4
+        sd: 646
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef phospholipid": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef phospholipid emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+  - id: "farmer1992-9"
+    odorant: "heptanal"
+    lever_class: "mixed"
+    lever: "cysteine + ribose absent vs present (two precursors added together), lipid PC"
+    focal: true
+    location: "Table 1, No. 2, p. 490 - 491"
+    digitised: false
+    unit: "RPA (relative peak area)"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "RPA = relative peak area (1 ng 1,2-dichlorobenzene = 100), mean of quadruplicate with SD in parentheses; printed 0 keyed as value 0 with censor nd_no_limit."
+    arms:
+      - label: "PC -"
+        lever_value: "without cysteine + ribose"
+        value: 9820
+        censor: none
+        limit: null
+        n: 4
+        sd: 190
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylcholine": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylcholine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "PC +"
+        lever_value: "with cysteine + ribose"
+        value: 10400
+        censor: none
+        limit: null
+        n: 4
+        sd: 3700
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylcholine": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylcholine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+  - id: "farmer1992-10"
+    odorant: "heptanal"
+    lever_class: "mixed"
+    lever: "cysteine + ribose absent vs present (two precursors added together), lipid PE"
+    focal: true
+    location: "Table 1, No. 2, p. 490 - 491"
+    digitised: false
+    unit: "RPA (relative peak area)"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "RPA = relative peak area (1 ng 1,2-dichlorobenzene = 100), mean of quadruplicate with SD in parentheses; printed 0 keyed as value 0 with censor nd_no_limit."
+    arms:
+      - label: "PE -"
+        lever_value: "without cysteine + ribose"
+        value: 32600
+        censor: none
+        limit: null
+        n: 4
+        sd: 6670
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylethanolamine": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylethanolamine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "PE +"
+        lever_value: "with cysteine + ribose"
+        value: 6290
+        censor: none
+        limit: null
+        n: 4
+        sd: 4460
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylethanolamine": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylethanolamine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+  - id: "farmer1992-11"
+    odorant: "heptanal"
+    lever_class: "lipid"
+    lever: "lipid identity: BTG vs BPL vs PC vs PE (without cysteine + ribose)"
+    focal: false
+    location: "Table 1, No. 2, p. 490 - 491"
+    digitised: false
+    unit: "RPA (relative peak area)"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "RPA = relative peak area (1 ng 1,2-dichlorobenzene = 100), mean of quadruplicate with SD in parentheses; printed 0 keyed as value 0 with censor nd_no_limit."
+    arms:
+      - label: "BTG -"
+        lever_value: "beef triglyceride"
+        value: 6740
+        censor: none
+        limit: null
+        n: 4
+        sd: 649
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef triglyceride": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef triglyceride emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "BPL -"
+        lever_value: "beef phospholipid"
+        value: 11100
+        censor: none
+        limit: null
+        n: 4
+        sd: 2910
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef phospholipid": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef phospholipid emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "PC -"
+        lever_value: "egg phosphatidylcholine"
+        value: 9820
+        censor: none
+        limit: null
+        n: 4
+        sd: 190
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylcholine": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylcholine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "PE -"
+        lever_value: "egg phosphatidylethanolamine"
+        value: 32600
+        censor: none
+        limit: null
+        n: 4
+        sd: 6670
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylethanolamine": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylethanolamine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+  - id: "farmer1992-12"
+    odorant: "heptanal"
+    lever_class: "lipid"
+    lever: "lipid identity: BTG vs BPL vs PC vs PE (with cysteine + ribose)"
+    focal: false
+    location: "Table 1, No. 2, p. 490 - 491"
+    digitised: false
+    unit: "RPA (relative peak area)"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "RPA = relative peak area (1 ng 1,2-dichlorobenzene = 100), mean of quadruplicate with SD in parentheses; printed 0 keyed as value 0 with censor nd_no_limit."
+    arms:
+      - label: "BTG +"
+        lever_value: "beef triglyceride"
+        value: 2640
+        censor: none
+        limit: null
+        n: 4
+        sd: 697
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef triglyceride": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef triglyceride emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "BPL +"
+        lever_value: "beef phospholipid"
+        value: 5040
+        censor: none
+        limit: null
+        n: 4
+        sd: 646
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef phospholipid": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef phospholipid emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "PC +"
+        lever_value: "egg phosphatidylcholine"
+        value: 10400
+        censor: none
+        limit: null
+        n: 4
+        sd: 3700
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylcholine": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylcholine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "PE +"
+        lever_value: "egg phosphatidylethanolamine"
+        value: 6290
+        censor: none
+        limit: null
+        n: 4
+        sd: 4460
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylethanolamine": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylethanolamine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+  - id: "farmer1992-13"
+    odorant: "octanal"
+    lever_class: "mixed"
+    lever: "cysteine + ribose absent vs present (two precursors added together), lipid BTG"
+    focal: true
+    location: "Table 1, No. 3, p. 490 - 491"
+    digitised: false
+    unit: "RPA (relative peak area)"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "RPA = relative peak area (1 ng 1,2-dichlorobenzene = 100), mean of quadruplicate with SD in parentheses; printed 0 keyed as value 0 with censor nd_no_limit."
+    arms:
+      - label: "BTG -"
+        lever_value: "without cysteine + ribose"
+        value: 6110
+        censor: none
+        limit: null
+        n: 4
+        sd: 746
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef triglyceride": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef triglyceride emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "BTG +"
+        lever_value: "with cysteine + ribose"
+        value: 392
+        censor: none
+        limit: null
+        n: 4
+        sd: 106
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef triglyceride": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef triglyceride emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+  - id: "farmer1992-14"
+    odorant: "octanal"
+    lever_class: "mixed"
+    lever: "cysteine + ribose absent vs present (two precursors added together), lipid BPL"
+    focal: true
+    location: "Table 1, No. 3, p. 490 - 491"
+    digitised: false
+    unit: "RPA (relative peak area)"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "RPA = relative peak area (1 ng 1,2-dichlorobenzene = 100), mean of quadruplicate with SD in parentheses; printed 0 keyed as value 0 with censor nd_no_limit."
+    arms:
+      - label: "BPL -"
+        lever_value: "without cysteine + ribose"
+        value: 14100
+        censor: none
+        limit: null
+        n: 4
+        sd: 5850
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef phospholipid": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef phospholipid emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "BPL +"
+        lever_value: "with cysteine + ribose"
+        value: 860
+        censor: none
+        limit: null
+        n: 4
+        sd: 343
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef phospholipid": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef phospholipid emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+  - id: "farmer1992-15"
+    odorant: "octanal"
+    lever_class: "mixed"
+    lever: "cysteine + ribose absent vs present (two precursors added together), lipid PC"
+    focal: true
+    location: "Table 1, No. 3, p. 490 - 491"
+    digitised: false
+    unit: "RPA (relative peak area)"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "RPA = relative peak area (1 ng 1,2-dichlorobenzene = 100), mean of quadruplicate with SD in parentheses; printed 0 keyed as value 0 with censor nd_no_limit."
+    arms:
+      - label: "PC -"
+        lever_value: "without cysteine + ribose"
+        value: 12300
+        censor: none
+        limit: null
+        n: 4
+        sd: 511
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylcholine": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylcholine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "PC +"
+        lever_value: "with cysteine + ribose"
+        value: 4790
+        censor: none
+        limit: null
+        n: 4
+        sd: 2850
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylcholine": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylcholine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+  - id: "farmer1992-16"
+    odorant: "octanal"
+    lever_class: "mixed"
+    lever: "cysteine + ribose absent vs present (two precursors added together), lipid PE"
+    focal: true
+    location: "Table 1, No. 3, p. 490 - 491"
+    digitised: false
+    unit: "RPA (relative peak area)"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "RPA = relative peak area (1 ng 1,2-dichlorobenzene = 100), mean of quadruplicate with SD in parentheses; printed 0 keyed as value 0 with censor nd_no_limit."
+    arms:
+      - label: "PE -"
+        lever_value: "without cysteine + ribose"
+        value: 29700
+        censor: none
+        limit: null
+        n: 4
+        sd: 9310
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylethanolamine": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylethanolamine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "PE +"
+        lever_value: "with cysteine + ribose"
+        value: 1290
+        censor: none
+        limit: null
+        n: 4
+        sd: 1210
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylethanolamine": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylethanolamine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+  - id: "farmer1992-17"
+    odorant: "octanal"
+    lever_class: "lipid"
+    lever: "lipid identity: BTG vs BPL vs PC vs PE (without cysteine + ribose)"
+    focal: false
+    location: "Table 1, No. 3, p. 490 - 491"
+    digitised: false
+    unit: "RPA (relative peak area)"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "RPA = relative peak area (1 ng 1,2-dichlorobenzene = 100), mean of quadruplicate with SD in parentheses; printed 0 keyed as value 0 with censor nd_no_limit."
+    arms:
+      - label: "BTG -"
+        lever_value: "beef triglyceride"
+        value: 6110
+        censor: none
+        limit: null
+        n: 4
+        sd: 746
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef triglyceride": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef triglyceride emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "BPL -"
+        lever_value: "beef phospholipid"
+        value: 14100
+        censor: none
+        limit: null
+        n: 4
+        sd: 5850
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef phospholipid": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef phospholipid emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "PC -"
+        lever_value: "egg phosphatidylcholine"
+        value: 12300
+        censor: none
+        limit: null
+        n: 4
+        sd: 511
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylcholine": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylcholine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "PE -"
+        lever_value: "egg phosphatidylethanolamine"
+        value: 29700
+        censor: none
+        limit: null
+        n: 4
+        sd: 9310
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylethanolamine": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylethanolamine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+  - id: "farmer1992-18"
+    odorant: "octanal"
+    lever_class: "lipid"
+    lever: "lipid identity: BTG vs BPL vs PC vs PE (with cysteine + ribose)"
+    focal: false
+    location: "Table 1, No. 3, p. 490 - 491"
+    digitised: false
+    unit: "RPA (relative peak area)"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "RPA = relative peak area (1 ng 1,2-dichlorobenzene = 100), mean of quadruplicate with SD in parentheses; printed 0 keyed as value 0 with censor nd_no_limit."
+    arms:
+      - label: "BTG +"
+        lever_value: "beef triglyceride"
+        value: 392
+        censor: none
+        limit: null
+        n: 4
+        sd: 106
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef triglyceride": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef triglyceride emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "BPL +"
+        lever_value: "beef phospholipid"
+        value: 860
+        censor: none
+        limit: null
+        n: 4
+        sd: 343
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef phospholipid": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef phospholipid emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "PC +"
+        lever_value: "egg phosphatidylcholine"
+        value: 4790
+        censor: none
+        limit: null
+        n: 4
+        sd: 2850
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylcholine": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylcholine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "PE +"
+        lever_value: "egg phosphatidylethanolamine"
+        value: 1290
+        censor: none
+        limit: null
+        n: 4
+        sd: 1210
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylethanolamine": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylethanolamine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+  - id: "farmer1992-19"
+    odorant: "nonanal"
+    lever_class: "mixed"
+    lever: "cysteine + ribose absent vs present (two precursors added together), lipid BTG"
+    focal: true
+    location: "Table 1, No. 4, p. 490 - 491"
+    digitised: false
+    unit: "RPA (relative peak area)"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "RPA = relative peak area (1 ng 1,2-dichlorobenzene = 100), mean of quadruplicate with SD in parentheses; printed 0 keyed as value 0 with censor nd_no_limit."
+    arms:
+      - label: "BTG -"
+        lever_value: "without cysteine + ribose"
+        value: 11600
+        censor: none
+        limit: null
+        n: 4
+        sd: 1170
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef triglyceride": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef triglyceride emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "BTG +"
+        lever_value: "with cysteine + ribose"
+        value: 3100
+        censor: none
+        limit: null
+        n: 4
+        sd: 1110
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef triglyceride": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef triglyceride emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+  - id: "farmer1992-20"
+    odorant: "nonanal"
+    lever_class: "mixed"
+    lever: "cysteine + ribose absent vs present (two precursors added together), lipid BPL"
+    focal: true
+    location: "Table 1, No. 4, p. 490 - 491"
+    digitised: false
+    unit: "RPA (relative peak area)"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "RPA = relative peak area (1 ng 1,2-dichlorobenzene = 100), mean of quadruplicate with SD in parentheses; printed 0 keyed as value 0 with censor nd_no_limit."
+    arms:
+      - label: "BPL -"
+        lever_value: "without cysteine + ribose"
+        value: 19000
+        censor: none
+        limit: null
+        n: 4
+        sd: 6400
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef phospholipid": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef phospholipid emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "BPL +"
+        lever_value: "with cysteine + ribose"
+        value: 3930
+        censor: none
+        limit: null
+        n: 4
+        sd: 840
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef phospholipid": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef phospholipid emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+  - id: "farmer1992-21"
+    odorant: "nonanal"
+    lever_class: "mixed"
+    lever: "cysteine + ribose absent vs present (two precursors added together), lipid PC"
+    focal: true
+    location: "Table 1, No. 4, p. 490 - 491"
+    digitised: false
+    unit: "RPA (relative peak area)"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "RPA = relative peak area (1 ng 1,2-dichlorobenzene = 100), mean of quadruplicate with SD in parentheses; printed 0 keyed as value 0 with censor nd_no_limit."
+    arms:
+      - label: "PC -"
+        lever_value: "without cysteine + ribose"
+        value: 35000
+        censor: none
+        limit: null
+        n: 4
+        sd: 11900
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylcholine": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylcholine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "PC +"
+        lever_value: "with cysteine + ribose"
+        value: 17200
+        censor: none
+        limit: null
+        n: 4
+        sd: 2940
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylcholine": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylcholine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+  - id: "farmer1992-22"
+    odorant: "nonanal"
+    lever_class: "mixed"
+    lever: "cysteine + ribose absent vs present (two precursors added together), lipid PE"
+    focal: true
+    location: "Table 1, No. 4, p. 490 - 491"
+    digitised: false
+    unit: "RPA (relative peak area)"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "RPA = relative peak area (1 ng 1,2-dichlorobenzene = 100), mean of quadruplicate with SD in parentheses; printed 0 keyed as value 0 with censor nd_no_limit."
+    arms:
+      - label: "PE -"
+        lever_value: "without cysteine + ribose"
+        value: 26600
+        censor: none
+        limit: null
+        n: 4
+        sd: 5350
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylethanolamine": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylethanolamine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "PE +"
+        lever_value: "with cysteine + ribose"
+        value: 2050
+        censor: none
+        limit: null
+        n: 4
+        sd: 434
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylethanolamine": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylethanolamine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+  - id: "farmer1992-23"
+    odorant: "nonanal"
+    lever_class: "lipid"
+    lever: "lipid identity: BTG vs BPL vs PC vs PE (without cysteine + ribose)"
+    focal: false
+    location: "Table 1, No. 4, p. 490 - 491"
+    digitised: false
+    unit: "RPA (relative peak area)"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "RPA = relative peak area (1 ng 1,2-dichlorobenzene = 100), mean of quadruplicate with SD in parentheses; printed 0 keyed as value 0 with censor nd_no_limit."
+    arms:
+      - label: "BTG -"
+        lever_value: "beef triglyceride"
+        value: 11600
+        censor: none
+        limit: null
+        n: 4
+        sd: 1170
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef triglyceride": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef triglyceride emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "BPL -"
+        lever_value: "beef phospholipid"
+        value: 19000
+        censor: none
+        limit: null
+        n: 4
+        sd: 6400
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef phospholipid": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef phospholipid emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "PC -"
+        lever_value: "egg phosphatidylcholine"
+        value: 35000
+        censor: none
+        limit: null
+        n: 4
+        sd: 11900
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylcholine": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylcholine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "PE -"
+        lever_value: "egg phosphatidylethanolamine"
+        value: 26600
+        censor: none
+        limit: null
+        n: 4
+        sd: 5350
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylethanolamine": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylethanolamine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+  - id: "farmer1992-24"
+    odorant: "nonanal"
+    lever_class: "lipid"
+    lever: "lipid identity: BTG vs BPL vs PC vs PE (with cysteine + ribose)"
+    focal: false
+    location: "Table 1, No. 4, p. 490 - 491"
+    digitised: false
+    unit: "RPA (relative peak area)"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "RPA = relative peak area (1 ng 1,2-dichlorobenzene = 100), mean of quadruplicate with SD in parentheses; printed 0 keyed as value 0 with censor nd_no_limit."
+    arms:
+      - label: "BTG +"
+        lever_value: "beef triglyceride"
+        value: 3100
+        censor: none
+        limit: null
+        n: 4
+        sd: 1110
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef triglyceride": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef triglyceride emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "BPL +"
+        lever_value: "beef phospholipid"
+        value: 3930
+        censor: none
+        limit: null
+        n: 4
+        sd: 840
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef phospholipid": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef phospholipid emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "PC +"
+        lever_value: "egg phosphatidylcholine"
+        value: 17200
+        censor: none
+        limit: null
+        n: 4
+        sd: 2940
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylcholine": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylcholine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "PE +"
+        lever_value: "egg phosphatidylethanolamine"
+        value: 2050
+        censor: none
+        limit: null
+        n: 4
+        sd: 434
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylethanolamine": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylethanolamine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+  - id: "farmer1992-25"
+    odorant: "2-octenal"
+    lever_class: "mixed"
+    lever: "cysteine + ribose absent vs present (two precursors added together), lipid BTG"
+    focal: true
+    location: "Table 1, No. 10, p. 490 - 491"
+    digitised: false
+    unit: "RPA (relative peak area)"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "RPA = relative peak area (1 ng 1,2-dichlorobenzene = 100), mean of quadruplicate with SD in parentheses; printed 0 keyed as value 0 with censor nd_no_limit."
+    arms:
+      - label: "BTG -"
+        lever_value: "without cysteine + ribose"
+        value: 3000
+        censor: none
+        limit: null
+        n: 4
+        sd: 206
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef triglyceride": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef triglyceride emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "BTG +"
+        lever_value: "with cysteine + ribose"
+        value: 0
+        censor: nd_no_limit
+        limit: null
+        n: 4
+        sd: null
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef triglyceride": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef triglyceride emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+  - id: "farmer1992-26"
+    odorant: "2-octenal"
+    lever_class: "mixed"
+    lever: "cysteine + ribose absent vs present (two precursors added together), lipid BPL"
+    focal: true
+    location: "Table 1, No. 10, p. 490 - 491"
+    digitised: false
+    unit: "RPA (relative peak area)"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "RPA = relative peak area (1 ng 1,2-dichlorobenzene = 100), mean of quadruplicate with SD in parentheses; printed 0 keyed as value 0 with censor nd_no_limit."
+    arms:
+      - label: "BPL -"
+        lever_value: "without cysteine + ribose"
+        value: 1460
+        censor: none
+        limit: null
+        n: 4
+        sd: 466
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef phospholipid": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef phospholipid emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "BPL +"
+        lever_value: "with cysteine + ribose"
+        value: 0
+        censor: nd_no_limit
+        limit: null
+        n: 4
+        sd: null
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef phospholipid": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef phospholipid emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+  - id: "farmer1992-27"
+    odorant: "2-octenal"
+    lever_class: "mixed"
+    lever: "cysteine + ribose absent vs present (two precursors added together), lipid PC"
+    focal: true
+    location: "Table 1, No. 10, p. 490 - 491"
+    digitised: false
+    unit: "RPA (relative peak area)"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "RPA = relative peak area (1 ng 1,2-dichlorobenzene = 100), mean of quadruplicate with SD in parentheses; printed 0 keyed as value 0 with censor nd_no_limit."
+    arms:
+      - label: "PC -"
+        lever_value: "without cysteine + ribose"
+        value: 31800
+        censor: none
+        limit: null
+        n: 4
+        sd: 14100
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylcholine": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylcholine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "PC +"
+        lever_value: "with cysteine + ribose"
+        value: 0
+        censor: nd_no_limit
+        limit: null
+        n: 4
+        sd: null
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylcholine": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylcholine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+  - id: "farmer1992-28"
+    odorant: "2-octenal"
+    lever_class: "mixed"
+    lever: "cysteine + ribose absent vs present (two precursors added together), lipid PE"
+    focal: true
+    location: "Table 1, No. 10, p. 490 - 491"
+    digitised: false
+    unit: "RPA (relative peak area)"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "RPA = relative peak area (1 ng 1,2-dichlorobenzene = 100), mean of quadruplicate with SD in parentheses; printed 0 keyed as value 0 with censor nd_no_limit."
+    arms:
+      - label: "PE -"
+        lever_value: "without cysteine + ribose"
+        value: 2620
+        censor: none
+        limit: null
+        n: 4
+        sd: 317
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylethanolamine": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylethanolamine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "PE +"
+        lever_value: "with cysteine + ribose"
+        value: 0
+        censor: nd_no_limit
+        limit: null
+        n: 4
+        sd: null
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylethanolamine": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylethanolamine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+  - id: "farmer1992-29"
+    odorant: "2-octenal"
+    lever_class: "lipid"
+    lever: "lipid identity: BTG vs BPL vs PC vs PE (without cysteine + ribose)"
+    focal: false
+    location: "Table 1, No. 10, p. 490 - 491"
+    digitised: false
+    unit: "RPA (relative peak area)"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "RPA = relative peak area (1 ng 1,2-dichlorobenzene = 100), mean of quadruplicate with SD in parentheses; printed 0 keyed as value 0 with censor nd_no_limit."
+    arms:
+      - label: "BTG -"
+        lever_value: "beef triglyceride"
+        value: 3000
+        censor: none
+        limit: null
+        n: 4
+        sd: 206
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef triglyceride": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef triglyceride emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "BPL -"
+        lever_value: "beef phospholipid"
+        value: 1460
+        censor: none
+        limit: null
+        n: 4
+        sd: 466
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef phospholipid": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef phospholipid emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "PC -"
+        lever_value: "egg phosphatidylcholine"
+        value: 31800
+        censor: none
+        limit: null
+        n: 4
+        sd: 14100
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylcholine": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylcholine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "PE -"
+        lever_value: "egg phosphatidylethanolamine"
+        value: 2620
+        censor: none
+        limit: null
+        n: 4
+        sd: 317
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylethanolamine": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylethanolamine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+  - id: "farmer1992-30"
+    odorant: "2-octenal"
+    lever_class: "lipid"
+    lever: "lipid identity: BTG vs BPL vs PC vs PE (with cysteine + ribose)"
+    focal: false
+    location: "Table 1, No. 10, p. 490 - 491"
+    digitised: false
+    unit: "RPA (relative peak area)"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "RPA = relative peak area (1 ng 1,2-dichlorobenzene = 100), mean of quadruplicate with SD in parentheses; printed 0 keyed as value 0 with censor nd_no_limit."
+    arms:
+      - label: "BTG +"
+        lever_value: "beef triglyceride"
+        value: 0
+        censor: nd_no_limit
+        limit: null
+        n: 4
+        sd: null
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef triglyceride": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef triglyceride emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "BPL +"
+        lever_value: "beef phospholipid"
+        value: 0
+        censor: nd_no_limit
+        limit: null
+        n: 4
+        sd: null
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef phospholipid": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef phospholipid emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "PC +"
+        lever_value: "egg phosphatidylcholine"
+        value: 0
+        censor: nd_no_limit
+        limit: null
+        n: 4
+        sd: null
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylcholine": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylcholine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "PE +"
+        lever_value: "egg phosphatidylethanolamine"
+        value: 0
+        censor: nd_no_limit
+        limit: null
+        n: 4
+        sd: null
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylethanolamine": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylethanolamine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+  - id: "farmer1992-31"
+    odorant: "2-nonenal"
+    lever_class: "mixed"
+    lever: "cysteine + ribose absent vs present (two precursors added together), lipid BTG"
+    focal: true
+    location: "Table 1, No. 11, p. 490 - 491"
+    digitised: false
+    unit: "RPA (relative peak area)"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "RPA = relative peak area (1 ng 1,2-dichlorobenzene = 100), mean of quadruplicate with SD in parentheses; printed 0 keyed as value 0 with censor nd_no_limit."
+    arms:
+      - label: "BTG -"
+        lever_value: "without cysteine + ribose"
+        value: 4580
+        censor: none
+        limit: null
+        n: 4
+        sd: 706
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef triglyceride": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef triglyceride emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "BTG +"
+        lever_value: "with cysteine + ribose"
+        value: 238
+        censor: none
+        limit: null
+        n: 4
+        sd: 95
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef triglyceride": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef triglyceride emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+  - id: "farmer1992-32"
+    odorant: "2-nonenal"
+    lever_class: "mixed"
+    lever: "cysteine + ribose absent vs present (two precursors added together), lipid BPL"
+    focal: true
+    location: "Table 1, No. 11, p. 490 - 491"
+    digitised: false
+    unit: "RPA (relative peak area)"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "RPA = relative peak area (1 ng 1,2-dichlorobenzene = 100), mean of quadruplicate with SD in parentheses; printed 0 keyed as value 0 with censor nd_no_limit."
+    arms:
+      - label: "BPL -"
+        lever_value: "without cysteine + ribose"
+        value: 1060
+        censor: none
+        limit: null
+        n: 4
+        sd: 459
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef phospholipid": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef phospholipid emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "BPL +"
+        lever_value: "with cysteine + ribose"
+        value: 1440
+        censor: none
+        limit: null
+        n: 4
+        sd: 475
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef phospholipid": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef phospholipid emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+  - id: "farmer1992-33"
+    odorant: "2-nonenal"
+    lever_class: "mixed"
+    lever: "cysteine + ribose absent vs present (two precursors added together), lipid PC"
+    focal: true
+    location: "Table 1, No. 11, p. 490 - 491"
+    digitised: false
+    unit: "RPA (relative peak area)"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "RPA = relative peak area (1 ng 1,2-dichlorobenzene = 100), mean of quadruplicate with SD in parentheses; printed 0 keyed as value 0 with censor nd_no_limit."
+    arms:
+      - label: "PC -"
+        lever_value: "without cysteine + ribose"
+        value: 13400
+        censor: none
+        limit: null
+        n: 4
+        sd: 2150
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylcholine": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylcholine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "PC +"
+        lever_value: "with cysteine + ribose"
+        value: 1650
+        censor: none
+        limit: null
+        n: 4
+        sd: 826
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylcholine": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylcholine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+  - id: "farmer1992-34"
+    odorant: "2-nonenal"
+    lever_class: "mixed"
+    lever: "cysteine + ribose absent vs present (two precursors added together), lipid PE"
+    focal: true
+    location: "Table 1, No. 11, p. 490 - 491"
+    digitised: false
+    unit: "RPA (relative peak area)"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "RPA = relative peak area (1 ng 1,2-dichlorobenzene = 100), mean of quadruplicate with SD in parentheses; printed 0 keyed as value 0 with censor nd_no_limit."
+    arms:
+      - label: "PE -"
+        lever_value: "without cysteine + ribose"
+        value: 171
+        censor: none
+        limit: null
+        n: 4
+        sd: 190
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylethanolamine": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylethanolamine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "PE +"
+        lever_value: "with cysteine + ribose"
+        value: 0
+        censor: nd_no_limit
+        limit: null
+        n: 4
+        sd: null
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylethanolamine": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylethanolamine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+  - id: "farmer1992-35"
+    odorant: "2-nonenal"
+    lever_class: "lipid"
+    lever: "lipid identity: BTG vs BPL vs PC vs PE (without cysteine + ribose)"
+    focal: false
+    location: "Table 1, No. 11, p. 490 - 491"
+    digitised: false
+    unit: "RPA (relative peak area)"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "RPA = relative peak area (1 ng 1,2-dichlorobenzene = 100), mean of quadruplicate with SD in parentheses; printed 0 keyed as value 0 with censor nd_no_limit."
+    arms:
+      - label: "BTG -"
+        lever_value: "beef triglyceride"
+        value: 4580
+        censor: none
+        limit: null
+        n: 4
+        sd: 706
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef triglyceride": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef triglyceride emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "BPL -"
+        lever_value: "beef phospholipid"
+        value: 1060
+        censor: none
+        limit: null
+        n: 4
+        sd: 459
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef phospholipid": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef phospholipid emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "PC -"
+        lever_value: "egg phosphatidylcholine"
+        value: 13400
+        censor: none
+        limit: null
+        n: 4
+        sd: 2150
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylcholine": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylcholine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "PE -"
+        lever_value: "egg phosphatidylethanolamine"
+        value: 171
+        censor: none
+        limit: null
+        n: 4
+        sd: 190
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylethanolamine": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylethanolamine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+  - id: "farmer1992-36"
+    odorant: "2-nonenal"
+    lever_class: "lipid"
+    lever: "lipid identity: BTG vs BPL vs PC vs PE (with cysteine + ribose)"
+    focal: false
+    location: "Table 1, No. 11, p. 490 - 491"
+    digitised: false
+    unit: "RPA (relative peak area)"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "RPA = relative peak area (1 ng 1,2-dichlorobenzene = 100), mean of quadruplicate with SD in parentheses; printed 0 keyed as value 0 with censor nd_no_limit."
+    arms:
+      - label: "BTG +"
+        lever_value: "beef triglyceride"
+        value: 238
+        censor: none
+        limit: null
+        n: 4
+        sd: 95
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef triglyceride": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef triglyceride emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "BPL +"
+        lever_value: "beef phospholipid"
+        value: 1440
+        censor: none
+        limit: null
+        n: 4
+        sd: 475
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef phospholipid": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef phospholipid emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "PC +"
+        lever_value: "egg phosphatidylcholine"
+        value: 1650
+        censor: none
+        limit: null
+        n: 4
+        sd: 826
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylcholine": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylcholine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "PE +"
+        lever_value: "egg phosphatidylethanolamine"
+        value: 0
+        censor: nd_no_limit
+        limit: null
+        n: 4
+        sd: null
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylethanolamine": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylethanolamine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+  - id: "farmer1992-37"
+    odorant: "tr,tr-2,4-decadienal"
+    lever_class: "mixed"
+    lever: "cysteine + ribose absent vs present (two precursors added together), lipid BTG"
+    focal: true
+    location: "Table 1, No. 18, p. 490 - 491"
+    digitised: false
+    unit: "RPA (relative peak area)"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "RPA = relative peak area (1 ng 1,2-dichlorobenzene = 100), mean of quadruplicate with SD in parentheses; printed 0 keyed as value 0 with censor nd_no_limit."
+    arms:
+      - label: "BTG -"
+        lever_value: "without cysteine + ribose"
+        value: 839
+        censor: none
+        limit: null
+        n: 4
+        sd: 185
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef triglyceride": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef triglyceride emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "BTG +"
+        lever_value: "with cysteine + ribose"
+        value: 184
+        censor: none
+        limit: null
+        n: 4
+        sd: 8
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef triglyceride": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef triglyceride emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+  - id: "farmer1992-38"
+    odorant: "tr,tr-2,4-decadienal"
+    lever_class: "mixed"
+    lever: "cysteine + ribose absent vs present (two precursors added together), lipid BPL"
+    focal: true
+    location: "Table 1, No. 18, p. 490 - 491"
+    digitised: false
+    unit: "RPA (relative peak area)"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "RPA = relative peak area (1 ng 1,2-dichlorobenzene = 100), mean of quadruplicate with SD in parentheses; printed 0 keyed as value 0 with censor nd_no_limit."
+    arms:
+      - label: "BPL -"
+        lever_value: "without cysteine + ribose"
+        value: 815
+        censor: none
+        limit: null
+        n: 4
+        sd: 369
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef phospholipid": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef phospholipid emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "BPL +"
+        lever_value: "with cysteine + ribose"
+        value: 478
+        censor: none
+        limit: null
+        n: 4
+        sd: 34
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef phospholipid": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef phospholipid emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+  - id: "farmer1992-39"
+    odorant: "tr,tr-2,4-decadienal"
+    lever_class: "mixed"
+    lever: "cysteine + ribose absent vs present (two precursors added together), lipid PC"
+    focal: true
+    location: "Table 1, No. 18, p. 490 - 491"
+    digitised: false
+    unit: "RPA (relative peak area)"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "RPA = relative peak area (1 ng 1,2-dichlorobenzene = 100), mean of quadruplicate with SD in parentheses; printed 0 keyed as value 0 with censor nd_no_limit."
+    arms:
+      - label: "PC -"
+        lever_value: "without cysteine + ribose"
+        value: 26400
+        censor: none
+        limit: null
+        n: 4
+        sd: 3360
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylcholine": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylcholine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "PC +"
+        lever_value: "with cysteine + ribose"
+        value: 1330
+        censor: none
+        limit: null
+        n: 4
+        sd: 560
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylcholine": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylcholine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+  - id: "farmer1992-40"
+    odorant: "tr,tr-2,4-decadienal"
+    lever_class: "mixed"
+    lever: "cysteine + ribose absent vs present (two precursors added together), lipid PE"
+    focal: true
+    location: "Table 1, No. 18, p. 490 - 491"
+    digitised: false
+    unit: "RPA (relative peak area)"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "RPA = relative peak area (1 ng 1,2-dichlorobenzene = 100), mean of quadruplicate with SD in parentheses; printed 0 keyed as value 0 with censor nd_no_limit."
+    arms:
+      - label: "PE -"
+        lever_value: "without cysteine + ribose"
+        value: 676
+        censor: none
+        limit: null
+        n: 4
+        sd: 288
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylethanolamine": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylethanolamine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "PE +"
+        lever_value: "with cysteine + ribose"
+        value: 78
+        censor: none
+        limit: null
+        n: 4
+        sd: 40
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylethanolamine": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylethanolamine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+  - id: "farmer1992-41"
+    odorant: "tr,tr-2,4-decadienal"
+    lever_class: "lipid"
+    lever: "lipid identity: BTG vs BPL vs PC vs PE (without cysteine + ribose)"
+    focal: false
+    location: "Table 1, No. 18, p. 490 - 491"
+    digitised: false
+    unit: "RPA (relative peak area)"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "RPA = relative peak area (1 ng 1,2-dichlorobenzene = 100), mean of quadruplicate with SD in parentheses; printed 0 keyed as value 0 with censor nd_no_limit."
+    arms:
+      - label: "BTG -"
+        lever_value: "beef triglyceride"
+        value: 839
+        censor: none
+        limit: null
+        n: 4
+        sd: 185
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef triglyceride": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef triglyceride emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "BPL -"
+        lever_value: "beef phospholipid"
+        value: 815
+        censor: none
+        limit: null
+        n: 4
+        sd: 369
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef phospholipid": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef phospholipid emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "PC -"
+        lever_value: "egg phosphatidylcholine"
+        value: 26400
+        censor: none
+        limit: null
+        n: 4
+        sd: 3360
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylcholine": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylcholine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "PE -"
+        lever_value: "egg phosphatidylethanolamine"
+        value: 676
+        censor: none
+        limit: null
+        n: 4
+        sd: 288
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylethanolamine": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylethanolamine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+  - id: "farmer1992-42"
+    odorant: "tr,tr-2,4-decadienal"
+    lever_class: "lipid"
+    lever: "lipid identity: BTG vs BPL vs PC vs PE (with cysteine + ribose)"
+    focal: false
+    location: "Table 1, No. 18, p. 490 - 491"
+    digitised: false
+    unit: "RPA (relative peak area)"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "RPA = relative peak area (1 ng 1,2-dichlorobenzene = 100), mean of quadruplicate with SD in parentheses; printed 0 keyed as value 0 with censor nd_no_limit."
+    arms:
+      - label: "BTG +"
+        lever_value: "beef triglyceride"
+        value: 184
+        censor: none
+        limit: null
+        n: 4
+        sd: 8
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef triglyceride": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef triglyceride emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "BPL +"
+        lever_value: "beef phospholipid"
+        value: 478
+        censor: none
+        limit: null
+        n: 4
+        sd: 34
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef phospholipid": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef phospholipid emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "PC +"
+        lever_value: "egg phosphatidylcholine"
+        value: 1330
+        censor: none
+        limit: null
+        n: 4
+        sd: 560
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylcholine": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylcholine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "PE +"
+        lever_value: "egg phosphatidylethanolamine"
+        value: 78
+        censor: none
+        limit: null
+        n: 4
+        sd: 40
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylethanolamine": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylethanolamine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+  - id: "farmer1992-43"
+    odorant: "1-hexanol"
+    lever_class: "mixed"
+    lever: "cysteine + ribose absent vs present (two precursors added together), lipid BTG"
+    focal: true
+    location: "Table 1, No. 28, p. 490 - 491"
+    digitised: false
+    unit: "RPA (relative peak area)"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "RPA = relative peak area (1 ng 1,2-dichlorobenzene = 100), mean of quadruplicate with SD in parentheses; printed 0 keyed as value 0 with censor nd_no_limit."
+    arms:
+      - label: "BTG -"
+        lever_value: "without cysteine + ribose"
+        value: 817
+        censor: none
+        limit: null
+        n: 4
+        sd: 260
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef triglyceride": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef triglyceride emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "BTG +"
+        lever_value: "with cysteine + ribose"
+        value: 870
+        censor: none
+        limit: null
+        n: 4
+        sd: 144
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef triglyceride": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef triglyceride emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+  - id: "farmer1992-44"
+    odorant: "1-hexanol"
+    lever_class: "mixed"
+    lever: "cysteine + ribose absent vs present (two precursors added together), lipid BPL"
+    focal: true
+    location: "Table 1, No. 28, p. 490 - 491"
+    digitised: false
+    unit: "RPA (relative peak area)"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "RPA = relative peak area (1 ng 1,2-dichlorobenzene = 100), mean of quadruplicate with SD in parentheses; printed 0 keyed as value 0 with censor nd_no_limit."
+    arms:
+      - label: "BPL -"
+        lever_value: "without cysteine + ribose"
+        value: 336
+        censor: none
+        limit: null
+        n: 4
+        sd: 225
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef phospholipid": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef phospholipid emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "BPL +"
+        lever_value: "with cysteine + ribose"
+        value: 1353
+        censor: none
+        limit: null
+        n: 4
+        sd: 105
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef phospholipid": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef phospholipid emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+  - id: "farmer1992-45"
+    odorant: "1-hexanol"
+    lever_class: "mixed"
+    lever: "cysteine + ribose absent vs present (two precursors added together), lipid PC"
+    focal: true
+    location: "Table 1, No. 28, p. 490 - 491"
+    digitised: false
+    unit: "RPA (relative peak area)"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "RPA = relative peak area (1 ng 1,2-dichlorobenzene = 100), mean of quadruplicate with SD in parentheses; printed 0 keyed as value 0 with censor nd_no_limit."
+    arms:
+      - label: "PC -"
+        lever_value: "without cysteine + ribose"
+        value: 641
+        censor: none
+        limit: null
+        n: 4
+        sd: 153
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylcholine": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylcholine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "PC +"
+        lever_value: "with cysteine + ribose"
+        value: 7490
+        censor: none
+        limit: null
+        n: 4
+        sd: 3510
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylcholine": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylcholine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+  - id: "farmer1992-46"
+    odorant: "1-hexanol"
+    lever_class: "mixed"
+    lever: "cysteine + ribose absent vs present (two precursors added together), lipid PE"
+    focal: true
+    location: "Table 1, No. 28, p. 490 - 491"
+    digitised: false
+    unit: "RPA (relative peak area)"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "RPA = relative peak area (1 ng 1,2-dichlorobenzene = 100), mean of quadruplicate with SD in parentheses; printed 0 keyed as value 0 with censor nd_no_limit."
+    arms:
+      - label: "PE -"
+        lever_value: "without cysteine + ribose"
+        value: 656
+        censor: none
+        limit: null
+        n: 4
+        sd: 157
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylethanolamine": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylethanolamine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "PE +"
+        lever_value: "with cysteine + ribose"
+        value: 4890
+        censor: none
+        limit: null
+        n: 4
+        sd: 967
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylethanolamine": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylethanolamine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+  - id: "farmer1992-47"
+    odorant: "1-hexanol"
+    lever_class: "lipid"
+    lever: "lipid identity: BTG vs BPL vs PC vs PE (without cysteine + ribose)"
+    focal: false
+    location: "Table 1, No. 28, p. 490 - 491"
+    digitised: false
+    unit: "RPA (relative peak area)"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "RPA = relative peak area (1 ng 1,2-dichlorobenzene = 100), mean of quadruplicate with SD in parentheses; printed 0 keyed as value 0 with censor nd_no_limit."
+    arms:
+      - label: "BTG -"
+        lever_value: "beef triglyceride"
+        value: 817
+        censor: none
+        limit: null
+        n: 4
+        sd: 260
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef triglyceride": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef triglyceride emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "BPL -"
+        lever_value: "beef phospholipid"
+        value: 336
+        censor: none
+        limit: null
+        n: 4
+        sd: 225
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef phospholipid": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef phospholipid emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "PC -"
+        lever_value: "egg phosphatidylcholine"
+        value: 641
+        censor: none
+        limit: null
+        n: 4
+        sd: 153
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylcholine": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylcholine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "PE -"
+        lever_value: "egg phosphatidylethanolamine"
+        value: 656
+        censor: none
+        limit: null
+        n: 4
+        sd: 157
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylethanolamine": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylethanolamine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+  - id: "farmer1992-48"
+    odorant: "1-hexanol"
+    lever_class: "lipid"
+    lever: "lipid identity: BTG vs BPL vs PC vs PE (with cysteine + ribose)"
+    focal: false
+    location: "Table 1, No. 28, p. 490 - 491"
+    digitised: false
+    unit: "RPA (relative peak area)"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "RPA = relative peak area (1 ng 1,2-dichlorobenzene = 100), mean of quadruplicate with SD in parentheses; printed 0 keyed as value 0 with censor nd_no_limit."
+    arms:
+      - label: "BTG +"
+        lever_value: "beef triglyceride"
+        value: 870
+        censor: none
+        limit: null
+        n: 4
+        sd: 144
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef triglyceride": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef triglyceride emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "BPL +"
+        lever_value: "beef phospholipid"
+        value: 1353
+        censor: none
+        limit: null
+        n: 4
+        sd: 105
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef phospholipid": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef phospholipid emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "PC +"
+        lever_value: "egg phosphatidylcholine"
+        value: 7490
+        censor: none
+        limit: null
+        n: 4
+        sd: 3510
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylcholine": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylcholine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "PE +"
+        lever_value: "egg phosphatidylethanolamine"
+        value: 4890
+        censor: none
+        limit: null
+        n: 4
+        sd: 967
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylethanolamine": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylethanolamine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+  - id: "farmer1992-49"
+    odorant: "1-octen-3-ol"
+    lever_class: "mixed"
+    lever: "cysteine + ribose absent vs present (two precursors added together), lipid BTG"
+    focal: true
+    location: "Table 1, No. 32, p. 490 - 491"
+    digitised: false
+    unit: "RPA (relative peak area)"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "RPA = relative peak area (1 ng 1,2-dichlorobenzene = 100), mean of quadruplicate with SD in parentheses; printed 0 keyed as value 0 with censor nd_no_limit."
+    arms:
+      - label: "BTG -"
+        lever_value: "without cysteine + ribose"
+        value: 340
+        censor: none
+        limit: null
+        n: 4
+        sd: 87
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef triglyceride": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef triglyceride emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "BTG +"
+        lever_value: "with cysteine + ribose"
+        value: 213
+        censor: none
+        limit: null
+        n: 4
+        sd: 99
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef triglyceride": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef triglyceride emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+  - id: "farmer1992-50"
+    odorant: "1-octen-3-ol"
+    lever_class: "mixed"
+    lever: "cysteine + ribose absent vs present (two precursors added together), lipid BPL"
+    focal: true
+    location: "Table 1, No. 32, p. 490 - 491"
+    digitised: false
+    unit: "RPA (relative peak area)"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "RPA = relative peak area (1 ng 1,2-dichlorobenzene = 100), mean of quadruplicate with SD in parentheses; printed 0 keyed as value 0 with censor nd_no_limit."
+    arms:
+      - label: "BPL -"
+        lever_value: "without cysteine + ribose"
+        value: 6830
+        censor: none
+        limit: null
+        n: 4
+        sd: 3320
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef phospholipid": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef phospholipid emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "BPL +"
+        lever_value: "with cysteine + ribose"
+        value: 6660
+        censor: none
+        limit: null
+        n: 4
+        sd: 1280
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef phospholipid": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef phospholipid emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+  - id: "farmer1992-51"
+    odorant: "1-octen-3-ol"
+    lever_class: "mixed"
+    lever: "cysteine + ribose absent vs present (two precursors added together), lipid PC"
+    focal: true
+    location: "Table 1, No. 32, p. 490 - 491"
+    digitised: false
+    unit: "RPA (relative peak area)"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "RPA = relative peak area (1 ng 1,2-dichlorobenzene = 100), mean of quadruplicate with SD in parentheses; printed 0 keyed as value 0 with censor nd_no_limit."
+    arms:
+      - label: "PC -"
+        lever_value: "without cysteine + ribose"
+        value: 25500
+        censor: none
+        limit: null
+        n: 4
+        sd: 5260
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylcholine": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylcholine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "PC +"
+        lever_value: "with cysteine + ribose"
+        value: 40600
+        censor: none
+        limit: null
+        n: 4
+        sd: 21000
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylcholine": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylcholine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+  - id: "farmer1992-52"
+    odorant: "1-octen-3-ol"
+    lever_class: "mixed"
+    lever: "cysteine + ribose absent vs present (two precursors added together), lipid PE"
+    focal: true
+    location: "Table 1, No. 32, p. 490 - 491"
+    digitised: false
+    unit: "RPA (relative peak area)"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "RPA = relative peak area (1 ng 1,2-dichlorobenzene = 100), mean of quadruplicate with SD in parentheses; printed 0 keyed as value 0 with censor nd_no_limit."
+    arms:
+      - label: "PE -"
+        lever_value: "without cysteine + ribose"
+        value: 30700
+        censor: none
+        limit: null
+        n: 4
+        sd: 7960
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylethanolamine": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylethanolamine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "PE +"
+        lever_value: "with cysteine + ribose"
+        value: 34500
+        censor: none
+        limit: null
+        n: 4
+        sd: 18600
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylethanolamine": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylethanolamine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+  - id: "farmer1992-53"
+    odorant: "1-octen-3-ol"
+    lever_class: "lipid"
+    lever: "lipid identity: BTG vs BPL vs PC vs PE (without cysteine + ribose)"
+    focal: false
+    location: "Table 1, No. 32, p. 490 - 491"
+    digitised: false
+    unit: "RPA (relative peak area)"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "RPA = relative peak area (1 ng 1,2-dichlorobenzene = 100), mean of quadruplicate with SD in parentheses; printed 0 keyed as value 0 with censor nd_no_limit."
+    arms:
+      - label: "BTG -"
+        lever_value: "beef triglyceride"
+        value: 340
+        censor: none
+        limit: null
+        n: 4
+        sd: 87
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef triglyceride": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef triglyceride emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "BPL -"
+        lever_value: "beef phospholipid"
+        value: 6830
+        censor: none
+        limit: null
+        n: 4
+        sd: 3320
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef phospholipid": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef phospholipid emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "PC -"
+        lever_value: "egg phosphatidylcholine"
+        value: 25500
+        censor: none
+        limit: null
+        n: 4
+        sd: 5260
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylcholine": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylcholine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "PE -"
+        lever_value: "egg phosphatidylethanolamine"
+        value: 30700
+        censor: none
+        limit: null
+        n: 4
+        sd: 7960
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylethanolamine": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylethanolamine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+  - id: "farmer1992-54"
+    odorant: "1-octen-3-ol"
+    lever_class: "lipid"
+    lever: "lipid identity: BTG vs BPL vs PC vs PE (with cysteine + ribose)"
+    focal: false
+    location: "Table 1, No. 32, p. 490 - 491"
+    digitised: false
+    unit: "RPA (relative peak area)"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "RPA = relative peak area (1 ng 1,2-dichlorobenzene = 100), mean of quadruplicate with SD in parentheses; printed 0 keyed as value 0 with censor nd_no_limit."
+    arms:
+      - label: "BTG +"
+        lever_value: "beef triglyceride"
+        value: 213
+        censor: none
+        limit: null
+        n: 4
+        sd: 99
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef triglyceride": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef triglyceride emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "BPL +"
+        lever_value: "beef phospholipid"
+        value: 6660
+        censor: none
+        limit: null
+        n: 4
+        sd: 1280
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef phospholipid": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef phospholipid emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "PC +"
+        lever_value: "egg phosphatidylcholine"
+        value: 40600
+        censor: none
+        limit: null
+        n: 4
+        sd: 21000
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylcholine": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylcholine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "PE +"
+        lever_value: "egg phosphatidylethanolamine"
+        value: 34500
+        censor: none
+        limit: null
+        n: 4
+        sd: 18600
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylethanolamine": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylethanolamine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+  - id: "farmer1992-55"
+    odorant: "2-pentylfuran"
+    lever_class: "mixed"
+    lever: "cysteine + ribose absent vs present (two precursors added together), lipid BTG"
+    focal: true
+    location: "Table 1, No. 36, p. 490 - 491"
+    digitised: false
+    unit: "RPA (relative peak area)"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "RPA = relative peak area (1 ng 1,2-dichlorobenzene = 100), mean of quadruplicate with SD in parentheses; printed 0 keyed as value 0 with censor nd_no_limit."
+    arms:
+      - label: "BTG -"
+        lever_value: "without cysteine + ribose"
+        value: 387
+        censor: none
+        limit: null
+        n: 4
+        sd: 170
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef triglyceride": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef triglyceride emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "BTG +"
+        lever_value: "with cysteine + ribose"
+        value: 1250
+        censor: none
+        limit: null
+        n: 4
+        sd: 1270
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef triglyceride": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef triglyceride emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+  - id: "farmer1992-56"
+    odorant: "2-pentylfuran"
+    lever_class: "mixed"
+    lever: "cysteine + ribose absent vs present (two precursors added together), lipid BPL"
+    focal: true
+    location: "Table 1, No. 36, p. 490 - 491"
+    digitised: false
+    unit: "RPA (relative peak area)"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "RPA = relative peak area (1 ng 1,2-dichlorobenzene = 100), mean of quadruplicate with SD in parentheses; printed 0 keyed as value 0 with censor nd_no_limit."
+    arms:
+      - label: "BPL -"
+        lever_value: "without cysteine + ribose"
+        value: 25500
+        censor: none
+        limit: null
+        n: 4
+        sd: 2810
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef phospholipid": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef phospholipid emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "BPL +"
+        lever_value: "with cysteine + ribose"
+        value: 21400
+        censor: none
+        limit: null
+        n: 4
+        sd: 5100
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef phospholipid": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef phospholipid emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+  - id: "farmer1992-57"
+    odorant: "2-pentylfuran"
+    lever_class: "mixed"
+    lever: "cysteine + ribose absent vs present (two precursors added together), lipid PC"
+    focal: true
+    location: "Table 1, No. 36, p. 490 - 491"
+    digitised: false
+    unit: "RPA (relative peak area)"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "RPA = relative peak area (1 ng 1,2-dichlorobenzene = 100), mean of quadruplicate with SD in parentheses; printed 0 keyed as value 0 with censor nd_no_limit."
+    arms:
+      - label: "PC -"
+        lever_value: "without cysteine + ribose"
+        value: 15600
+        censor: none
+        limit: null
+        n: 4
+        sd: 2810
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylcholine": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylcholine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "PC +"
+        lever_value: "with cysteine + ribose"
+        value: 34500
+        censor: none
+        limit: null
+        n: 4
+        sd: 4810
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylcholine": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylcholine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+  - id: "farmer1992-58"
+    odorant: "2-pentylfuran"
+    lever_class: "mixed"
+    lever: "cysteine + ribose absent vs present (two precursors added together), lipid PE"
+    focal: true
+    location: "Table 1, No. 36, p. 490 - 491"
+    digitised: false
+    unit: "RPA (relative peak area)"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "RPA = relative peak area (1 ng 1,2-dichlorobenzene = 100), mean of quadruplicate with SD in parentheses; printed 0 keyed as value 0 with censor nd_no_limit."
+    arms:
+      - label: "PE -"
+        lever_value: "without cysteine + ribose"
+        value: 32200
+        censor: none
+        limit: null
+        n: 4
+        sd: 1900
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylethanolamine": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylethanolamine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "PE +"
+        lever_value: "with cysteine + ribose"
+        value: 50000
+        censor: none
+        limit: null
+        n: 4
+        sd: 22900
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylethanolamine": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylethanolamine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+  - id: "farmer1992-59"
+    odorant: "2-pentylfuran"
+    lever_class: "lipid"
+    lever: "lipid identity: BTG vs BPL vs PC vs PE (without cysteine + ribose)"
+    focal: false
+    location: "Table 1, No. 36, p. 490 - 491"
+    digitised: false
+    unit: "RPA (relative peak area)"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "RPA = relative peak area (1 ng 1,2-dichlorobenzene = 100), mean of quadruplicate with SD in parentheses; printed 0 keyed as value 0 with censor nd_no_limit."
+    arms:
+      - label: "BTG -"
+        lever_value: "beef triglyceride"
+        value: 387
+        censor: none
+        limit: null
+        n: 4
+        sd: 170
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef triglyceride": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef triglyceride emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "BPL -"
+        lever_value: "beef phospholipid"
+        value: 25500
+        censor: none
+        limit: null
+        n: 4
+        sd: 2810
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef phospholipid": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef phospholipid emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "PC -"
+        lever_value: "egg phosphatidylcholine"
+        value: 15600
+        censor: none
+        limit: null
+        n: 4
+        sd: 2810
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylcholine": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylcholine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "PE -"
+        lever_value: "egg phosphatidylethanolamine"
+        value: 32200
+        censor: none
+        limit: null
+        n: 4
+        sd: 1900
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylethanolamine": "30 mg"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylethanolamine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+  - id: "farmer1992-60"
+    odorant: "2-pentylfuran"
+    lever_class: "lipid"
+    lever: "lipid identity: BTG vs BPL vs PC vs PE (with cysteine + ribose)"
+    focal: false
+    location: "Table 1, No. 36, p. 490 - 491"
+    digitised: false
+    unit: "RPA (relative peak area)"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "RPA = relative peak area (1 ng 1,2-dichlorobenzene = 100), mean of quadruplicate with SD in parentheses; printed 0 keyed as value 0 with censor nd_no_limit."
+    arms:
+      - label: "BTG +"
+        lever_value: "beef triglyceride"
+        value: 1250
+        censor: none
+        limit: null
+        n: 4
+        sd: 1270
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef triglyceride": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef triglyceride emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "BPL +"
+        lever_value: "beef phospholipid"
+        value: 21400
+        censor: none
+        limit: null
+        n: 4
+        sd: 5100
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "beef phospholipid": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + beef phospholipid emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "PC +"
+        lever_value: "egg phosphatidylcholine"
+        value: 34500
+        censor: none
+        limit: null
+        n: 4
+        sd: 4810
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylcholine": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylcholine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"
+      - label: "PE +"
+        lever_value: "egg phosphatidylethanolamine"
+        value: 50000
+        censor: none
+        limit: null
+        n: 4
+        sd: 22900
+        conditions:
+          ph: 5.6
+          ph_basis: "label"
+          temp_C: 140
+          time_min: 60
+          precursors:
+            "egg phosphatidylethanolamine": "30 mg"
+            "L-cysteine": "5 mg/mL (2 mL)"
+            "D-ribose": "4.5 mg/mL (2 mL)"
+          buffer: "0.5 M phosphate, pH 5.6, 2 mL"
+          matrix: "buffer + egg phosphatidylethanolamine emulsion"
+          headspace: "inert (N2 flushed, flame-sealed ampoule)"

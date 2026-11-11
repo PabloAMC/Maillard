@@ -1,0 +1,56 @@
+# Reader b, blind double-keying, second round (families). Rules: PREREG secs. 3 - 4.
+source: "elmore1997"
+pdf: "data/articles/elmore1997.pdf"
+reader: "b"
+scope_note: "Tables 1 - 2 list only thiazolines, thiazoles and pyridines (not on the list); tetramethylpyrazine for the saturated aldehydes (12 - 30 %) and the 2,3-butanedione systems (0.3 - 2.0 %) is printed only as ranges, not per arm, so not keyed; the aldehydes (3-methylbutanal, hexanal ...) are reactants."
+contrasts:
+  - id: "elmore1997-1"
+    odorant: "tetramethylpyrazine"
+    lever_class: "lipid"
+    lever: "aldehyde reacted with 3-hydroxy-2-butanone and ammonium sulfide: (E)-2-nonenal vs (E,E)-2,4-nonadienal"
+    focal: false
+    location: "p. 3601, text (Other Compounds)"
+    digitised: false
+    unit: "% of total GC peak area"
+    quant_type: "relative"
+    quantity: amount
+    time_course_rule: "not a time course"
+    arms:
+      - label: "(E)-2-nonenal reaction mixture"
+        lever_value: "(E)-2-nonenal"
+        value: 16.0
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 140
+          time_min: 30
+          precursors:
+            "ammonium sulfide": "0.1 M, 50 mL"
+            "(E)-2-nonenal": "0.005 mol"
+            "3-hydroxy-2-butanone": "0.005 mol"
+          buffer: "none"
+          matrix: "water"
+          headspace: "sealed, unstated (screw-top jar, PTFE-lined cap)"
+      - label: "(E,E)-2,4-nonadienal reaction mixture"
+        lever_value: "(E,E)-2,4-nonadienal"
+        value: 30.0
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 140
+          time_min: 30
+          precursors:
+            "ammonium sulfide": "0.1 M, 50 mL"
+            "(E,E)-2,4-nonadienal": "0.005 mol"
+            "3-hydroxy-2-butanone": "0.005 mol"
+          buffer: "none"
+          matrix: "water"
+          headspace: "sealed, unstated (screw-top jar, PTFE-lined cap)"

@@ -1,0 +1,454 @@
+source: "zhou2023c"
+pdf: "data/articles/zhou2023c.pdf"
+reader: "b"
+scope_note: "Table 1 (ARP + GSH/Glu/Cys/Gly/pGlu, 120 C 60 min, ug/L calibrated, mean +- SD n=3) keyed as amino acid identity for each pyrazine and total pyrazines; ND has no printed limit (method LODs are given per calibration curve without compound names). Fig. 1 heat map prints cell values (not digitised; unit not stated in caption, values match Table 1 ug/L); printed 0 keyed as nd_no_limit. Fig. 1 ARP+GSH vs ARP+Cys pairs for pyrazines not keyed again (same pots as Table 1). Sets where every arm is 0 not keyed (pyrazines and 2-acetylthiazole time series without GSH; 2,5-dimethylpyrazine ARP vs ARP+Cys). 'GSH or Cys added vs none' keyed as precursor dose. Fig. 5a total pyrazines vs GSH pre-degradation time is digitised. 2,3-butanedione, 2-propionylfuran, thiophenes, thiazole, 2-methylthiazole and thiols not keyed (not on the list / excluded)."
+contrasts:
+  # ================= Table 1: amino acid identity =================
+  - id: "zhou2023c-1"
+    odorant: "unsubstituted pyrazine"
+    lever_class: "amino acid identity"
+    lever: "added GSH vs Glu vs Cys vs Gly vs pGlu (1:1 with ARP)"
+    focal: true
+    quantity: amount
+    location: "Table 1, p. 14318"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "ARP + GSH", lever_value: "glutathione", value: 8.33, censor: none, limit: null, n: 3, sd: 1.06, conditions: &z_gsh60 {ph: 7.5, ph_basis: "initial", temp_C: 120, time_min: 60, precursors: {"ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine)": "20 mmol/L", glutathione: "20 mmol/L"}, buffer: "none", matrix: "water", headspace: "sealed, unstated"}}
+      - {label: "ARP + Glu", lever_value: "glutamic acid", value: 8.33, censor: none, limit: null, n: 3, sd: 1.00, conditions: &z_glu60 {ph: 7.5, ph_basis: "initial", temp_C: 120, time_min: 60, precursors: {"ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine)": "20 mmol/L", "glutamic acid": "20 mmol/L (1:1)"}, buffer: "none", matrix: "water", headspace: "sealed, unstated"}}
+      - {label: "ARP + Cys", lever_value: "cysteine", value: 11.0, censor: none, limit: null, n: 3, sd: 1.28, conditions: &z_cys60 {ph: 7.5, ph_basis: "initial", temp_C: 120, time_min: 60, precursors: {"ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine)": "20 mmol/L", cysteine: "20 mmol/L (1:1)"}, buffer: "none", matrix: "water", headspace: "sealed, unstated"}}
+      - {label: "ARP + Gly", lever_value: "glycine", value: 5.97, censor: none, limit: null, n: 3, sd: 1.25, conditions: &z_gly60 {ph: 7.5, ph_basis: "initial", temp_C: 120, time_min: 60, precursors: {"ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine)": "20 mmol/L", glycine: "20 mmol/L (1:1)"}, buffer: "none", matrix: "water", headspace: "sealed, unstated"}}
+      - {label: "ARP + pGlu", lever_value: "pyroglutamic acid", value: null, censor: nd_no_limit, limit: null, n: 3, sd: null, conditions: &z_pglu60 {ph: 7.5, ph_basis: "initial", temp_C: 120, time_min: 60, precursors: {"ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine)": "20 mmol/L", "pyroglutamic acid": "20 mmol/L (1:1)"}, buffer: "none", matrix: "water", headspace: "sealed, unstated"}}
+  - id: "zhou2023c-2"
+    odorant: "methylpyrazine"
+    lever_class: "amino acid identity"
+    lever: "added GSH vs Glu vs Cys vs Gly vs pGlu (1:1 with ARP)"
+    focal: true
+    quantity: amount
+    location: "Table 1, p. 14318"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "ARP + GSH", lever_value: "glutathione", value: 13.1, censor: none, limit: null, n: 3, sd: 2.72, conditions: *z_gsh60}
+      - {label: "ARP + Glu", lever_value: "glutamic acid", value: 29.5, censor: none, limit: null, n: 3, sd: 2.30, conditions: *z_glu60}
+      - {label: "ARP + Cys", lever_value: "cysteine", value: 4.51, censor: none, limit: null, n: 3, sd: 0.494, conditions: *z_cys60}
+      - {label: "ARP + Gly", lever_value: "glycine", value: null, censor: nd_no_limit, limit: null, n: 3, sd: null, conditions: *z_gly60}
+      - {label: "ARP + pGlu", lever_value: "pyroglutamic acid", value: null, censor: nd_no_limit, limit: null, n: 3, sd: null, conditions: *z_pglu60}
+  - id: "zhou2023c-3"
+    odorant: "2,5-dimethylpyrazine"
+    lever_class: "amino acid identity"
+    lever: "added GSH vs Glu vs Cys vs Gly vs pGlu (1:1 with ARP)"
+    focal: true
+    quantity: amount
+    location: "Table 1, p. 14318"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "ARP + GSH", lever_value: "glutathione", value: 3.75, censor: none, limit: null, n: 3, sd: 0.738, conditions: *z_gsh60}
+      - {label: "ARP + Glu", lever_value: "glutamic acid", value: 15.1, censor: none, limit: null, n: 3, sd: 2.48, conditions: *z_glu60}
+      - {label: "ARP + Cys", lever_value: "cysteine", value: null, censor: nd_no_limit, limit: null, n: 3, sd: null, conditions: *z_cys60}
+      - {label: "ARP + Gly", lever_value: "glycine", value: 1.16, censor: none, limit: null, n: 3, sd: 0.164, conditions: *z_gly60}
+      - {label: "ARP + pGlu", lever_value: "pyroglutamic acid", value: null, censor: nd_no_limit, limit: null, n: 3, sd: null, conditions: *z_pglu60}
+  - id: "zhou2023c-4"
+    odorant: "2,3-dimethylpyrazine"
+    lever_class: "amino acid identity"
+    lever: "added GSH vs Glu vs Cys vs Gly vs pGlu (1:1 with ARP)"
+    focal: true
+    quantity: amount
+    location: "Table 1, p. 14318"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "ARP + GSH", lever_value: "glutathione", value: null, censor: nd_no_limit, limit: null, n: 3, sd: null, conditions: *z_gsh60}
+      - {label: "ARP + Glu", lever_value: "glutamic acid", value: 7.63, censor: none, limit: null, n: 3, sd: 1.07, conditions: *z_glu60}
+      - {label: "ARP + Cys", lever_value: "cysteine", value: null, censor: nd_no_limit, limit: null, n: 3, sd: null, conditions: *z_cys60}
+      - {label: "ARP + Gly", lever_value: "glycine", value: null, censor: nd_no_limit, limit: null, n: 3, sd: null, conditions: *z_gly60}
+      - {label: "ARP + pGlu", lever_value: "pyroglutamic acid", value: null, censor: nd_no_limit, limit: null, n: 3, sd: null, conditions: *z_pglu60}
+  - id: "zhou2023c-5"
+    odorant: "trimethylpyrazine"
+    lever_class: "amino acid identity"
+    lever: "added GSH vs Glu vs Cys vs Gly vs pGlu (1:1 with ARP)"
+    focal: true
+    quantity: amount
+    location: "Table 1, p. 14318"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "ARP + GSH", lever_value: "glutathione", value: null, censor: nd_no_limit, limit: null, n: 3, sd: null, conditions: *z_gsh60}
+      - {label: "ARP + Glu", lever_value: "glutamic acid", value: 12.5, censor: none, limit: null, n: 3, sd: 3.30, conditions: *z_glu60}
+      - {label: "ARP + Cys", lever_value: "cysteine", value: null, censor: nd_no_limit, limit: null, n: 3, sd: null, conditions: *z_cys60}
+      - {label: "ARP + Gly", lever_value: "glycine", value: null, censor: nd_no_limit, limit: null, n: 3, sd: null, conditions: *z_gly60}
+      - {label: "ARP + pGlu", lever_value: "pyroglutamic acid", value: null, censor: nd_no_limit, limit: null, n: 3, sd: null, conditions: *z_pglu60}
+  - id: "zhou2023c-6"
+    odorant: "total pyrazines"
+    lever_class: "amino acid identity"
+    lever: "added GSH vs Glu vs Cys vs Gly vs pGlu (1:1 with ARP)"
+    focal: true
+    quantity: amount
+    location: "Table 1, p. 14318"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "ARP + GSH", lever_value: "glutathione", value: 25.2, censor: none, limit: null, n: 3, sd: 4.50, conditions: *z_gsh60}
+      - {label: "ARP + Glu", lever_value: "glutamic acid", value: 72.8, censor: none, limit: null, n: 3, sd: 7.26, conditions: *z_glu60}
+      - {label: "ARP + Cys", lever_value: "cysteine", value: 15.5, censor: none, limit: null, n: 3, sd: 0.803, conditions: *z_cys60}
+      - {label: "ARP + Gly", lever_value: "glycine", value: 7.13, censor: none, limit: null, n: 3, sd: 1.40, conditions: *z_gly60}
+      - {label: "ARP + pGlu", lever_value: "pyroglutamic acid", value: null, censor: nd_no_limit, limit: null, n: 3, sd: null, conditions: *z_pglu60}
+  # ================= Fig. 1: furfural =================
+  - id: "zhou2023c-7"
+    odorant: "furfural"
+    lever_class: "precursor dose"
+    lever: "GSH (20 mmol/L) added vs none, ARP 20 mmol/L"
+    focal: false
+    quantity: amount
+    location: "Fig. 1 (heat map cell values), p. 14314"
+    digitised: false
+    unit: "heat-map value, unit not stated (matches Table 1 ug/L)"
+    quant_type: "absolute"
+    time_course_rule: "longest time"
+    arms:
+      - {label: "ARP-120 min", lever_value: "none", value: 1130, censor: none, limit: null, n: 3, sd: null, conditions: &z_arp120 {ph: 7.5, ph_basis: "initial", temp_C: 120, time_min: 120, precursors: {"ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine)": "20 mmol/L"}, buffer: "none", matrix: "water", headspace: "sealed, unstated"}}
+      - {label: "ARP+GSH-120 min", lever_value: "GSH 20 mmol/L", value: 716, censor: none, limit: null, n: 3, sd: null, conditions: &z_gsh120 {ph: 7.5, ph_basis: "initial", temp_C: 120, time_min: 120, precursors: {"ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine)": "20 mmol/L", glutathione: "20 mmol/L"}, buffer: "none", matrix: "water", headspace: "sealed, unstated"}}
+  - id: "zhou2023c-8"
+    odorant: "furfural"
+    lever_class: "precursor dose"
+    lever: "cysteine (20 mmol/L) added vs none, ARP 20 mmol/L"
+    focal: false
+    quantity: amount
+    location: "Fig. 1 (heat map cell values), p. 14314"
+    digitised: false
+    unit: "heat-map value, unit not stated (matches Table 1 ug/L)"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "ARP-60 min", lever_value: "none", value: 619, censor: none, limit: null, n: 3, sd: null, conditions: &z_arp60 {ph: 7.5, ph_basis: "initial", temp_C: 120, time_min: 60, precursors: {"ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine)": "20 mmol/L"}, buffer: "none", matrix: "water", headspace: "sealed, unstated"}}
+      - {label: "ARP+Cys-60 min", lever_value: "cysteine 20 mmol/L", value: 230, censor: none, limit: null, n: 3, sd: null, conditions: *z_cys60}
+  - id: "zhou2023c-9"
+    odorant: "furfural"
+    lever_class: "sulfur source"
+    lever: "glutathione vs cysteine (20 mmol/L each), ARP 20 mmol/L"
+    focal: false
+    quantity: amount
+    location: "Fig. 1 (heat map cell values), p. 14314"
+    digitised: false
+    unit: "heat-map value, unit not stated (matches Table 1 ug/L)"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "ARP+GSH-60 min", lever_value: "glutathione", value: 397, censor: none, limit: null, n: 3, sd: null, conditions: *z_gsh60}
+      - {label: "ARP+Cys-60 min", lever_value: "cysteine", value: 230, censor: none, limit: null, n: 3, sd: null, conditions: *z_cys60}
+  - id: "zhou2023c-10"
+    odorant: "furfural"
+    lever_class: "time"
+    lever: "heating time 30 - 120 min, ARP alone"
+    focal: false
+    quantity: amount
+    location: "Fig. 1 (heat map cell values), p. 14314"
+    digitised: false
+    unit: "heat-map value, unit not stated (matches Table 1 ug/L)"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "ARP-30 min", lever_value: "30", value: 341, censor: none, limit: null, n: 3, sd: null, conditions: &z_arp30 {ph: 7.5, ph_basis: "initial", temp_C: 120, time_min: 30, precursors: {"ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine)": "20 mmol/L"}, buffer: "none", matrix: "water", headspace: "sealed, unstated"}}
+      - {label: "ARP-60 min", lever_value: "60", value: 619, censor: none, limit: null, n: 3, sd: null, conditions: *z_arp60}
+      - {label: "ARP-90 min", lever_value: "90", value: 874, censor: none, limit: null, n: 3, sd: null, conditions: &z_arp90 {ph: 7.5, ph_basis: "initial", temp_C: 120, time_min: 90, precursors: {"ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine)": "20 mmol/L"}, buffer: "none", matrix: "water", headspace: "sealed, unstated"}}
+      - {label: "ARP-120 min", lever_value: "120", value: 1130, censor: none, limit: null, n: 3, sd: null, conditions: *z_arp120}
+  - id: "zhou2023c-11"
+    odorant: "furfural"
+    lever_class: "time"
+    lever: "heating time 30 - 120 min, ARP + GSH"
+    focal: false
+    quantity: amount
+    location: "Fig. 1 (heat map cell values), p. 14314"
+    digitised: false
+    unit: "heat-map value, unit not stated (matches Table 1 ug/L)"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "ARP+GSH-30 min", lever_value: "30", value: 113, censor: none, limit: null, n: 3, sd: null, conditions: &z_gsh30 {ph: 7.5, ph_basis: "initial", temp_C: 120, time_min: 30, precursors: {"ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine)": "20 mmol/L", glutathione: "20 mmol/L"}, buffer: "none", matrix: "water", headspace: "sealed, unstated"}}
+      - {label: "ARP+GSH-60 min", lever_value: "60", value: 397, censor: none, limit: null, n: 3, sd: null, conditions: *z_gsh60}
+      - {label: "ARP+GSH-90 min", lever_value: "90", value: 575, censor: none, limit: null, n: 3, sd: null, conditions: &z_gsh90 {ph: 7.5, ph_basis: "initial", temp_C: 120, time_min: 90, precursors: {"ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine)": "20 mmol/L", glutathione: "20 mmol/L"}, buffer: "none", matrix: "water", headspace: "sealed, unstated"}}
+      - {label: "ARP+GSH-120 min", lever_value: "120", value: 716, censor: none, limit: null, n: 3, sd: null, conditions: *z_gsh120}
+  # ================= Fig. 1: 2-acetylfuran =================
+  - id: "zhou2023c-12"
+    odorant: "2-acetylfuran"
+    lever_class: "precursor dose"
+    lever: "GSH (20 mmol/L) added vs none, ARP 20 mmol/L"
+    focal: false
+    quantity: amount
+    location: "Fig. 1 (heat map cell values), p. 14314"
+    digitised: false
+    unit: "heat-map value, unit not stated (matches Table 1 ug/L)"
+    quant_type: "absolute"
+    time_course_rule: "longest time"
+    arms:
+      - {label: "ARP-120 min", lever_value: "none", value: 61.7, censor: none, limit: null, n: 3, sd: null, conditions: *z_arp120}
+      - {label: "ARP+GSH-120 min", lever_value: "GSH 20 mmol/L", value: 27.3, censor: none, limit: null, n: 3, sd: null, conditions: *z_gsh120}
+  - id: "zhou2023c-13"
+    odorant: "2-acetylfuran"
+    lever_class: "precursor dose"
+    lever: "cysteine (20 mmol/L) added vs none, ARP 20 mmol/L"
+    focal: false
+    quantity: amount
+    location: "Fig. 1 (heat map cell values), p. 14314"
+    digitised: false
+    unit: "heat-map value, unit not stated (matches Table 1 ug/L)"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "ARP-60 min", lever_value: "none", value: 15.8, censor: none, limit: null, n: 3, sd: null, conditions: *z_arp60}
+      - {label: "ARP+Cys-60 min", lever_value: "cysteine 20 mmol/L", value: 0.232, censor: none, limit: null, n: 3, sd: null, conditions: *z_cys60}
+  - id: "zhou2023c-14"
+    odorant: "2-acetylfuran"
+    lever_class: "sulfur source"
+    lever: "glutathione vs cysteine (20 mmol/L each), ARP 20 mmol/L"
+    focal: false
+    quantity: amount
+    location: "Fig. 1 (heat map cell values), p. 14314"
+    digitised: false
+    unit: "heat-map value, unit not stated (matches Table 1 ug/L)"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "ARP+GSH-60 min", lever_value: "glutathione", value: 5.02, censor: none, limit: null, n: 3, sd: null, conditions: *z_gsh60}
+      - {label: "ARP+Cys-60 min", lever_value: "cysteine", value: 0.232, censor: none, limit: null, n: 3, sd: null, conditions: *z_cys60}
+  - id: "zhou2023c-15"
+    odorant: "2-acetylfuran"
+    lever_class: "time"
+    lever: "heating time 30 - 120 min, ARP alone"
+    focal: false
+    quantity: amount
+    location: "Fig. 1 (heat map cell values), p. 14314"
+    digitised: false
+    unit: "heat-map value, unit not stated (matches Table 1 ug/L)"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "ARP-30 min", lever_value: "30", value: 0.439, censor: none, limit: null, n: 3, sd: null, conditions: *z_arp30}
+      - {label: "ARP-60 min", lever_value: "60", value: 15.8, censor: none, limit: null, n: 3, sd: null, conditions: *z_arp60}
+      - {label: "ARP-90 min", lever_value: "90", value: 34.7, censor: none, limit: null, n: 3, sd: null, conditions: *z_arp90}
+      - {label: "ARP-120 min", lever_value: "120", value: 61.7, censor: none, limit: null, n: 3, sd: null, conditions: *z_arp120}
+  - id: "zhou2023c-16"
+    odorant: "2-acetylfuran"
+    lever_class: "time"
+    lever: "heating time 30 - 120 min, ARP + GSH"
+    focal: false
+    quantity: amount
+    location: "Fig. 1 (heat map cell values), p. 14314"
+    digitised: false
+    unit: "heat-map value, unit not stated (matches Table 1 ug/L)"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "ARP+GSH-30 min", lever_value: "30", value: 0, censor: nd_no_limit, limit: null, n: 3, sd: null, conditions: *z_gsh30}
+      - {label: "ARP+GSH-60 min", lever_value: "60", value: 5.02, censor: none, limit: null, n: 3, sd: null, conditions: *z_gsh60}
+      - {label: "ARP+GSH-90 min", lever_value: "90", value: 14.9, censor: none, limit: null, n: 3, sd: null, conditions: *z_gsh90}
+      - {label: "ARP+GSH-120 min", lever_value: "120", value: 27.3, censor: none, limit: null, n: 3, sd: null, conditions: *z_gsh120}
+  # ================= Fig. 1: pyrazines =================
+  - id: "zhou2023c-17"
+    odorant: "unsubstituted pyrazine"
+    lever_class: "precursor dose"
+    lever: "GSH (20 mmol/L) added vs none, ARP 20 mmol/L"
+    focal: true
+    quantity: amount
+    location: "Fig. 1 (heat map cell values), p. 14314"
+    digitised: false
+    unit: "heat-map value, unit not stated (matches Table 1 ug/L)"
+    quant_type: "absolute"
+    time_course_rule: "longest time"
+    arms:
+      - {label: "ARP-120 min", lever_value: "none", value: 0, censor: nd_no_limit, limit: null, n: 3, sd: null, conditions: *z_arp120}
+      - {label: "ARP+GSH-120 min", lever_value: "GSH 20 mmol/L", value: 12.3, censor: none, limit: null, n: 3, sd: null, conditions: *z_gsh120}
+  - id: "zhou2023c-18"
+    odorant: "unsubstituted pyrazine"
+    lever_class: "precursor dose"
+    lever: "cysteine (20 mmol/L) added vs none, ARP 20 mmol/L"
+    focal: false
+    quantity: amount
+    location: "Fig. 1 (heat map cell values), p. 14314"
+    digitised: false
+    unit: "heat-map value, unit not stated (matches Table 1 ug/L)"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "ARP-60 min", lever_value: "none", value: 0, censor: nd_no_limit, limit: null, n: 3, sd: null, conditions: *z_arp60}
+      - {label: "ARP+Cys-60 min", lever_value: "cysteine 20 mmol/L", value: 11.0, censor: none, limit: null, n: 3, sd: null, conditions: *z_cys60}
+  - id: "zhou2023c-19"
+    odorant: "unsubstituted pyrazine"
+    lever_class: "time"
+    lever: "heating time 30 - 120 min, ARP + GSH"
+    focal: false
+    quantity: amount
+    location: "Fig. 1 (heat map cell values), p. 14314"
+    digitised: false
+    unit: "heat-map value, unit not stated (matches Table 1 ug/L)"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "ARP+GSH-30 min", lever_value: "30", value: 8.92, censor: none, limit: null, n: 3, sd: null, conditions: *z_gsh30}
+      - {label: "ARP+GSH-60 min", lever_value: "60", value: 8.33, censor: none, limit: null, n: 3, sd: null, conditions: *z_gsh60}
+      - {label: "ARP+GSH-90 min", lever_value: "90", value: 7.25, censor: none, limit: null, n: 3, sd: null, conditions: *z_gsh90}
+      - {label: "ARP+GSH-120 min", lever_value: "120", value: 12.3, censor: none, limit: null, n: 3, sd: null, conditions: *z_gsh120}
+  - id: "zhou2023c-20"
+    odorant: "methylpyrazine"
+    lever_class: "precursor dose"
+    lever: "GSH (20 mmol/L) added vs none, ARP 20 mmol/L"
+    focal: true
+    quantity: amount
+    location: "Fig. 1 (heat map cell values), p. 14314"
+    digitised: false
+    unit: "heat-map value, unit not stated (matches Table 1 ug/L)"
+    quant_type: "absolute"
+    time_course_rule: "longest time"
+    arms:
+      - {label: "ARP-120 min", lever_value: "none", value: 0, censor: nd_no_limit, limit: null, n: 3, sd: null, conditions: *z_arp120}
+      - {label: "ARP+GSH-120 min", lever_value: "GSH 20 mmol/L", value: 10.5, censor: none, limit: null, n: 3, sd: null, conditions: *z_gsh120}
+  - id: "zhou2023c-21"
+    odorant: "methylpyrazine"
+    lever_class: "precursor dose"
+    lever: "cysteine (20 mmol/L) added vs none, ARP 20 mmol/L"
+    focal: false
+    quantity: amount
+    location: "Fig. 1 (heat map cell values), p. 14314"
+    digitised: false
+    unit: "heat-map value, unit not stated (matches Table 1 ug/L)"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "ARP-60 min", lever_value: "none", value: 0, censor: nd_no_limit, limit: null, n: 3, sd: null, conditions: *z_arp60}
+      - {label: "ARP+Cys-60 min", lever_value: "cysteine 20 mmol/L", value: 4.51, censor: none, limit: null, n: 3, sd: null, conditions: *z_cys60}
+  - id: "zhou2023c-22"
+    odorant: "methylpyrazine"
+    lever_class: "time"
+    lever: "heating time 30 - 120 min, ARP + GSH"
+    focal: false
+    quantity: amount
+    location: "Fig. 1 (heat map cell values), p. 14314"
+    digitised: false
+    unit: "heat-map value, unit not stated (matches Table 1 ug/L)"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "ARP+GSH-30 min", lever_value: "30", value: 8.26, censor: none, limit: null, n: 3, sd: null, conditions: *z_gsh30}
+      - {label: "ARP+GSH-60 min", lever_value: "60", value: 13.1, censor: none, limit: null, n: 3, sd: null, conditions: *z_gsh60}
+      - {label: "ARP+GSH-90 min", lever_value: "90", value: 8.54, censor: none, limit: null, n: 3, sd: null, conditions: *z_gsh90}
+      - {label: "ARP+GSH-120 min", lever_value: "120", value: 10.5, censor: none, limit: null, n: 3, sd: null, conditions: *z_gsh120}
+  - id: "zhou2023c-23"
+    odorant: "2,5-dimethylpyrazine"
+    lever_class: "precursor dose"
+    lever: "GSH (20 mmol/L) added vs none, ARP 20 mmol/L"
+    focal: true
+    quantity: amount
+    location: "Fig. 1 (heat map cell values), p. 14314"
+    digitised: false
+    unit: "heat-map value, unit not stated (matches Table 1 ug/L)"
+    quant_type: "absolute"
+    time_course_rule: "longest time"
+    arms:
+      - {label: "ARP-120 min", lever_value: "none", value: 0, censor: nd_no_limit, limit: null, n: 3, sd: null, conditions: *z_arp120}
+      - {label: "ARP+GSH-120 min", lever_value: "GSH 20 mmol/L", value: 7.97, censor: none, limit: null, n: 3, sd: null, conditions: *z_gsh120}
+  - id: "zhou2023c-24"
+    odorant: "2,5-dimethylpyrazine"
+    lever_class: "time"
+    lever: "heating time 30 - 120 min, ARP + GSH"
+    focal: false
+    quantity: amount
+    location: "Fig. 1 (heat map cell values), p. 14314"
+    digitised: false
+    unit: "heat-map value, unit not stated (matches Table 1 ug/L)"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "ARP+GSH-30 min", lever_value: "30", value: 0.226, censor: none, limit: null, n: 3, sd: null, conditions: *z_gsh30}
+      - {label: "ARP+GSH-60 min", lever_value: "60", value: 3.75, censor: none, limit: null, n: 3, sd: null, conditions: *z_gsh60}
+      - {label: "ARP+GSH-90 min", lever_value: "90", value: 5.39, censor: none, limit: null, n: 3, sd: null, conditions: *z_gsh90}
+      - {label: "ARP+GSH-120 min", lever_value: "120", value: 7.97, censor: none, limit: null, n: 3, sd: null, conditions: *z_gsh120}
+  # ================= Fig. 1: 2-acetylthiazole =================
+  - id: "zhou2023c-25"
+    odorant: "2-acetylthiazole"
+    lever_class: "precursor dose"
+    lever: "GSH (20 mmol/L) added vs none, ARP 20 mmol/L"
+    focal: false
+    quantity: amount
+    location: "Fig. 1 (heat map cell values), p. 14314"
+    digitised: false
+    unit: "heat-map value, unit not stated (matches Table 1 ug/L)"
+    quant_type: "absolute"
+    time_course_rule: "longest time"
+    arms:
+      - {label: "ARP-120 min", lever_value: "none", value: 0, censor: nd_no_limit, limit: null, n: 3, sd: null, conditions: *z_arp120}
+      - {label: "ARP+GSH-120 min", lever_value: "GSH 20 mmol/L", value: 11.0, censor: none, limit: null, n: 3, sd: null, conditions: *z_gsh120}
+  - id: "zhou2023c-26"
+    odorant: "2-acetylthiazole"
+    lever_class: "precursor dose"
+    lever: "cysteine (20 mmol/L) added vs none, ARP 20 mmol/L"
+    focal: false
+    quantity: amount
+    location: "Fig. 1 (heat map cell values), p. 14314"
+    digitised: false
+    unit: "heat-map value, unit not stated (matches Table 1 ug/L)"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "ARP-60 min", lever_value: "none", value: 0, censor: nd_no_limit, limit: null, n: 3, sd: null, conditions: *z_arp60}
+      - {label: "ARP+Cys-60 min", lever_value: "cysteine 20 mmol/L", value: 18.6, censor: none, limit: null, n: 3, sd: null, conditions: *z_cys60}
+  - id: "zhou2023c-27"
+    odorant: "2-acetylthiazole"
+    lever_class: "sulfur source"
+    lever: "glutathione vs cysteine (20 mmol/L each), ARP 20 mmol/L"
+    focal: false
+    quantity: amount
+    location: "Fig. 1 (heat map cell values), p. 14314"
+    digitised: false
+    unit: "heat-map value, unit not stated (matches Table 1 ug/L)"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "ARP+GSH-60 min", lever_value: "glutathione", value: 9.61, censor: none, limit: null, n: 3, sd: null, conditions: *z_gsh60}
+      - {label: "ARP+Cys-60 min", lever_value: "cysteine", value: 18.6, censor: none, limit: null, n: 3, sd: null, conditions: *z_cys60}
+  - id: "zhou2023c-28"
+    odorant: "2-acetylthiazole"
+    lever_class: "time"
+    lever: "heating time 30 - 120 min, ARP + GSH"
+    focal: false
+    quantity: amount
+    location: "Fig. 1 (heat map cell values), p. 14314"
+    digitised: false
+    unit: "heat-map value, unit not stated (matches Table 1 ug/L)"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "ARP+GSH-30 min", lever_value: "30", value: 0, censor: nd_no_limit, limit: null, n: 3, sd: null, conditions: *z_gsh30}
+      - {label: "ARP+GSH-60 min", lever_value: "60", value: 9.61, censor: none, limit: null, n: 3, sd: null, conditions: *z_gsh60}
+      - {label: "ARP+GSH-90 min", lever_value: "90", value: 11.8, censor: none, limit: null, n: 3, sd: null, conditions: *z_gsh90}
+      - {label: "ARP+GSH-120 min", lever_value: "120", value: 11.0, censor: none, limit: null, n: 3, sd: null, conditions: *z_gsh120}
+  # ================= Fig. 5a: total pyrazines vs GSH pre-degradation time =================
+  - id: "zhou2023c-29"
+    odorant: "total pyrazines"
+    lever_class: "time"
+    lever: "GSH pre-degradation time (GSH 20 mmol/L heated alone at 120 C, pH 7.5, for 0 - 120 min) before 60 min co-heating with ARP"
+    focal: true
+    quantity: amount
+    location: "Fig. 5a, p. 14318"
+    digitised: true
+    unit: "ug/L"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "0 min", lever_value: "0", value: 25, censor: none, limit: null, n: 3, sd: null, conditions: {ph: 7.5, ph_basis: "initial", temp_C: 120, time_min: 60, precursors: {"ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine)": "20 mmol/L", glutathione: "20 mmol/L, pre-heated 0 min"}, buffer: "none", matrix: "water", headspace: "sealed, unstated"}}
+      - {label: "30 min", lever_value: "30", value: 34, censor: none, limit: null, n: 3, sd: null, conditions: {ph: 7.5, ph_basis: "initial", temp_C: 120, time_min: 60, precursors: {"ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine)": "20 mmol/L", glutathione: "20 mmol/L, pre-heated 30 min"}, buffer: "none", matrix: "water", headspace: "sealed, unstated"}}
+      - {label: "60 min", lever_value: "60", value: 42, censor: none, limit: null, n: 3, sd: null, conditions: {ph: 7.5, ph_basis: "initial", temp_C: 120, time_min: 60, precursors: {"ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine)": "20 mmol/L", glutathione: "20 mmol/L, pre-heated 60 min"}, buffer: "none", matrix: "water", headspace: "sealed, unstated"}}
+      - {label: "90 min", lever_value: "90", value: 49, censor: none, limit: null, n: 3, sd: null, conditions: {ph: 7.5, ph_basis: "initial", temp_C: 120, time_min: 60, precursors: {"ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine)": "20 mmol/L", glutathione: "20 mmol/L, pre-heated 90 min"}, buffer: "none", matrix: "water", headspace: "sealed, unstated"}}
+      - {label: "120 min", lever_value: "120", value: 58, censor: none, limit: null, n: 3, sd: null, conditions: {ph: 7.5, ph_basis: "initial", temp_C: 120, time_min: 60, precursors: {"ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine)": "20 mmol/L", glutathione: "20 mmol/L, pre-heated 120 min"}, buffer: "none", matrix: "water", headspace: "sealed, unstated"}}

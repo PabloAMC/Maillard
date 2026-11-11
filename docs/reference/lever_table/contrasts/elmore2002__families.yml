@@ -1,0 +1,1495 @@
+source: elmore2002
+pdf: data/articles/elmore2002.pdf
+reader: resolved
+scope_note: Listed odorants are only in Table 2 (lipid-derived; approx. ng in headspace vs 1,2-dichlorobenzene IS, n = 4).
+  Lipid identity (methyl linoleate vs methyl alpha-linolenate) keyed with and without cysteine + ribose; cysteine + ribose
+  added vs none keyed as mixed (two precursors added at once; discussed in text). Table 2 prints no cysteine/ribose-alone
+  column. 'tr' (<10 ng) keyed trace, limit 10; '-' nd, LOD 2 ng. Pairs with both arms censored not keyed (1-hexanol lipid
+  without CR; benzaldehyde CR in 18:2n-6; 1-hexanol, heptanal, 1-octen-3-ol, (E,E)-2,4-decadienal CR in 18:3n-3). Unlisted
+  family members (e.g. (E)-2-heptenal, (E)-2-hexenal, 2-ethylfuran, 1-pentanol) were keyed by neither reader.
+contrasts:
+- id: elmore2002-1
+  odorant: Pentanal
+  lever_class: lipid
+  lever: 'lipid identity: methyl linoleate vs methyl alpha-linolenate (no cysteine/ribose)'
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ng in headspace of 100 mL reaction mixture (approx., vs 100 ng 1,2-dichlorobenzene IS)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: 18:2n-6
+    lever_value: methyl linoleate
+    value: 72
+    censor: none
+    limit: null
+    n: 4
+    sd: 33
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        methyl linoleate: 0.5 mmol in 20 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 18:3n-3
+    lever_value: methyl alpha-linolenate
+    value: 45
+    censor: none
+    limit: null
+    n: 4
+    sd: 18
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        methyl alpha-linolenate: 0.5 mmol in 20 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: elmore2002-2
+  odorant: Pentanal
+  lever_class: lipid
+  lever: 'lipid identity: methyl linoleate vs methyl alpha-linolenate (both with cysteine + ribose)'
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ng in headspace of 100 mL reaction mixture (approx., vs 100 ng 1,2-dichlorobenzene IS)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: 18:2n-6 cysteine ribose
+    lever_value: methyl linoleate
+    value: 11
+    censor: none
+    limit: null
+    n: 4
+    sd: 13
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.5 mmol in 20 mL
+        ribose: 0.5 mmol in 20 mL
+        methyl linoleate: 0.5 mmol in 20 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 18:3n-3 cysteine ribose
+    lever_value: methyl alpha-linolenate
+    value: null
+    censor: nd_with_limit
+    limit: 2
+    n: 4
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.5 mmol in 20 mL
+        ribose: 0.5 mmol in 20 mL
+        methyl alpha-linolenate: 0.5 mmol in 20 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: elmore2002-3
+  odorant: Pentanal
+  lever_class: mixed
+  lever: 'cysteine + ribose (0.5 mmol each) added vs none, methyl linoleate system (cysteine and ribose added together: two
+    precursors; pair discussed in text, p. 1129)'
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ng in headspace of 100 mL reaction mixture (approx., vs 100 ng 1,2-dichlorobenzene IS)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: 18:2n-6
+    lever_value: none
+    value: 72
+    censor: none
+    limit: null
+    n: 4
+    sd: 33
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        methyl linoleate: 0.5 mmol in 20 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 18:2n-6 cysteine ribose
+    lever_value: cysteine + ribose
+    value: 11
+    censor: none
+    limit: null
+    n: 4
+    sd: 13
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.5 mmol in 20 mL
+        ribose: 0.5 mmol in 20 mL
+        methyl linoleate: 0.5 mmol in 20 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: elmore2002-4
+  odorant: Pentanal
+  lever_class: mixed
+  lever: 'cysteine + ribose (0.5 mmol each) added vs none, methyl alpha-linolenate system (cysteine and ribose added together:
+    two precursors; pair discussed in text, p. 1129)'
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ng in headspace of 100 mL reaction mixture (approx., vs 100 ng 1,2-dichlorobenzene IS)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: 18:3n-3
+    lever_value: none
+    value: 45
+    censor: none
+    limit: null
+    n: 4
+    sd: 18
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        methyl alpha-linolenate: 0.5 mmol in 20 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 18:3n-3 cysteine ribose
+    lever_value: cysteine + ribose
+    value: null
+    censor: nd_with_limit
+    limit: 2
+    n: 4
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.5 mmol in 20 mL
+        ribose: 0.5 mmol in 20 mL
+        methyl alpha-linolenate: 0.5 mmol in 20 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: elmore2002-5
+  odorant: Hexanal
+  lever_class: lipid
+  lever: 'lipid identity: methyl linoleate vs methyl alpha-linolenate (no cysteine/ribose)'
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ng in headspace of 100 mL reaction mixture (approx., vs 100 ng 1,2-dichlorobenzene IS)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: 18:2n-6
+    lever_value: methyl linoleate
+    value: 644
+    censor: none
+    limit: null
+    n: 4
+    sd: 302
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        methyl linoleate: 0.5 mmol in 20 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 18:3n-3
+    lever_value: methyl alpha-linolenate
+    value: 12
+    censor: none
+    limit: null
+    n: 4
+    sd: 5
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        methyl alpha-linolenate: 0.5 mmol in 20 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: elmore2002-6
+  odorant: Hexanal
+  lever_class: lipid
+  lever: 'lipid identity: methyl linoleate vs methyl alpha-linolenate (both with cysteine + ribose)'
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ng in headspace of 100 mL reaction mixture (approx., vs 100 ng 1,2-dichlorobenzene IS)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: 18:2n-6 cysteine ribose
+    lever_value: methyl linoleate
+    value: 379
+    censor: none
+    limit: null
+    n: 4
+    sd: 430
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.5 mmol in 20 mL
+        ribose: 0.5 mmol in 20 mL
+        methyl linoleate: 0.5 mmol in 20 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 18:3n-3 cysteine ribose
+    lever_value: methyl alpha-linolenate
+    value: null
+    censor: nd_with_limit
+    limit: 2
+    n: 4
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.5 mmol in 20 mL
+        ribose: 0.5 mmol in 20 mL
+        methyl alpha-linolenate: 0.5 mmol in 20 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: elmore2002-7
+  odorant: Hexanal
+  lever_class: mixed
+  lever: 'cysteine + ribose (0.5 mmol each) added vs none, methyl linoleate system (cysteine and ribose added together: two
+    precursors; pair discussed in text, p. 1129)'
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ng in headspace of 100 mL reaction mixture (approx., vs 100 ng 1,2-dichlorobenzene IS)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: 18:2n-6
+    lever_value: none
+    value: 644
+    censor: none
+    limit: null
+    n: 4
+    sd: 302
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        methyl linoleate: 0.5 mmol in 20 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 18:2n-6 cysteine ribose
+    lever_value: cysteine + ribose
+    value: 379
+    censor: none
+    limit: null
+    n: 4
+    sd: 430
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.5 mmol in 20 mL
+        ribose: 0.5 mmol in 20 mL
+        methyl linoleate: 0.5 mmol in 20 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: elmore2002-8
+  odorant: Hexanal
+  lever_class: mixed
+  lever: 'cysteine + ribose (0.5 mmol each) added vs none, methyl alpha-linolenate system (cysteine and ribose added together:
+    two precursors; pair discussed in text, p. 1129)'
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ng in headspace of 100 mL reaction mixture (approx., vs 100 ng 1,2-dichlorobenzene IS)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: 18:3n-3
+    lever_value: none
+    value: 12
+    censor: none
+    limit: null
+    n: 4
+    sd: 5
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        methyl alpha-linolenate: 0.5 mmol in 20 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 18:3n-3 cysteine ribose
+    lever_value: cysteine + ribose
+    value: null
+    censor: nd_with_limit
+    limit: 2
+    n: 4
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.5 mmol in 20 mL
+        ribose: 0.5 mmol in 20 mL
+        methyl alpha-linolenate: 0.5 mmol in 20 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: elmore2002-9
+  odorant: 1-Hexanol
+  lever_class: lipid
+  lever: 'lipid identity: methyl linoleate vs methyl alpha-linolenate (both with cysteine + ribose)'
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ng in headspace of 100 mL reaction mixture (approx., vs 100 ng 1,2-dichlorobenzene IS)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: 18:2n-6 cysteine ribose
+    lever_value: methyl linoleate
+    value: 47
+    censor: none
+    limit: null
+    n: 4
+    sd: 28
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.5 mmol in 20 mL
+        ribose: 0.5 mmol in 20 mL
+        methyl linoleate: 0.5 mmol in 20 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 18:3n-3 cysteine ribose
+    lever_value: methyl alpha-linolenate
+    value: null
+    censor: nd_with_limit
+    limit: 2
+    n: 4
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.5 mmol in 20 mL
+        ribose: 0.5 mmol in 20 mL
+        methyl alpha-linolenate: 0.5 mmol in 20 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: elmore2002-10
+  odorant: 1-Hexanol
+  lever_class: mixed
+  lever: 'cysteine + ribose (0.5 mmol each) added vs none, methyl linoleate system (cysteine and ribose added together: two
+    precursors; pair discussed in text, p. 1129)'
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ng in headspace of 100 mL reaction mixture (approx., vs 100 ng 1,2-dichlorobenzene IS)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: 18:2n-6
+    lever_value: none
+    value: null
+    censor: trace
+    limit: 10
+    n: 4
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        methyl linoleate: 0.5 mmol in 20 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 18:2n-6 cysteine ribose
+    lever_value: cysteine + ribose
+    value: 47
+    censor: none
+    limit: null
+    n: 4
+    sd: 28
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.5 mmol in 20 mL
+        ribose: 0.5 mmol in 20 mL
+        methyl linoleate: 0.5 mmol in 20 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: elmore2002-11
+  odorant: Heptanal
+  lever_class: lipid
+  lever: 'lipid identity: methyl linoleate vs methyl alpha-linolenate (no cysteine/ribose)'
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ng in headspace of 100 mL reaction mixture (approx., vs 100 ng 1,2-dichlorobenzene IS)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: 18:2n-6
+    lever_value: methyl linoleate
+    value: 21
+    censor: none
+    limit: null
+    n: 4
+    sd: 9
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        methyl linoleate: 0.5 mmol in 20 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 18:3n-3
+    lever_value: methyl alpha-linolenate
+    value: null
+    censor: nd_with_limit
+    limit: 2
+    n: 4
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        methyl alpha-linolenate: 0.5 mmol in 20 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: elmore2002-12
+  odorant: Heptanal
+  lever_class: lipid
+  lever: 'lipid identity: methyl linoleate vs methyl alpha-linolenate (both with cysteine + ribose)'
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ng in headspace of 100 mL reaction mixture (approx., vs 100 ng 1,2-dichlorobenzene IS)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: 18:2n-6 cysteine ribose
+    lever_value: methyl linoleate
+    value: 21
+    censor: none
+    limit: null
+    n: 4
+    sd: 17
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.5 mmol in 20 mL
+        ribose: 0.5 mmol in 20 mL
+        methyl linoleate: 0.5 mmol in 20 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 18:3n-3 cysteine ribose
+    lever_value: methyl alpha-linolenate
+    value: null
+    censor: nd_with_limit
+    limit: 2
+    n: 4
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.5 mmol in 20 mL
+        ribose: 0.5 mmol in 20 mL
+        methyl alpha-linolenate: 0.5 mmol in 20 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: elmore2002-13
+  odorant: Heptanal
+  lever_class: mixed
+  lever: 'cysteine + ribose (0.5 mmol each) added vs none, methyl linoleate system (cysteine and ribose added together: two
+    precursors; pair discussed in text, p. 1129)'
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ng in headspace of 100 mL reaction mixture (approx., vs 100 ng 1,2-dichlorobenzene IS)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: 18:2n-6
+    lever_value: none
+    value: 21
+    censor: none
+    limit: null
+    n: 4
+    sd: 9
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        methyl linoleate: 0.5 mmol in 20 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 18:2n-6 cysteine ribose
+    lever_value: cysteine + ribose
+    value: 21
+    censor: none
+    limit: null
+    n: 4
+    sd: 17
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.5 mmol in 20 mL
+        ribose: 0.5 mmol in 20 mL
+        methyl linoleate: 0.5 mmol in 20 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: elmore2002-14
+  odorant: Benzaldehyde
+  lever_class: lipid
+  lever: 'lipid identity: methyl linoleate vs methyl alpha-linolenate (no cysteine/ribose)'
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ng in headspace of 100 mL reaction mixture (approx., vs 100 ng 1,2-dichlorobenzene IS)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: 18:2n-6
+    lever_value: methyl linoleate
+    value: null
+    censor: trace
+    limit: 10
+    n: 4
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        methyl linoleate: 0.5 mmol in 20 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 18:3n-3
+    lever_value: methyl alpha-linolenate
+    value: 185
+    censor: none
+    limit: null
+    n: 4
+    sd: 54
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        methyl alpha-linolenate: 0.5 mmol in 20 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: elmore2002-15
+  odorant: Benzaldehyde
+  lever_class: lipid
+  lever: 'lipid identity: methyl linoleate vs methyl alpha-linolenate (both with cysteine + ribose)'
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ng in headspace of 100 mL reaction mixture (approx., vs 100 ng 1,2-dichlorobenzene IS)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: 18:2n-6 cysteine ribose
+    lever_value: methyl linoleate
+    value: null
+    censor: trace
+    limit: 10
+    n: 4
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.5 mmol in 20 mL
+        ribose: 0.5 mmol in 20 mL
+        methyl linoleate: 0.5 mmol in 20 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 18:3n-3 cysteine ribose
+    lever_value: methyl alpha-linolenate
+    value: 34
+    censor: none
+    limit: null
+    n: 4
+    sd: 15
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.5 mmol in 20 mL
+        ribose: 0.5 mmol in 20 mL
+        methyl alpha-linolenate: 0.5 mmol in 20 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: elmore2002-16
+  odorant: Benzaldehyde
+  lever_class: mixed
+  lever: 'cysteine + ribose (0.5 mmol each) added vs none, methyl alpha-linolenate system (cysteine and ribose added together:
+    two precursors; pair discussed in text, p. 1129)'
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ng in headspace of 100 mL reaction mixture (approx., vs 100 ng 1,2-dichlorobenzene IS)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: 18:3n-3
+    lever_value: none
+    value: 185
+    censor: none
+    limit: null
+    n: 4
+    sd: 54
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        methyl alpha-linolenate: 0.5 mmol in 20 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 18:3n-3 cysteine ribose
+    lever_value: cysteine + ribose
+    value: 34
+    censor: none
+    limit: null
+    n: 4
+    sd: 15
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.5 mmol in 20 mL
+        ribose: 0.5 mmol in 20 mL
+        methyl alpha-linolenate: 0.5 mmol in 20 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: elmore2002-17
+  odorant: 1-Octen-3-ol
+  lever_class: lipid
+  lever: 'lipid identity: methyl linoleate vs methyl alpha-linolenate (no cysteine/ribose)'
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ng in headspace of 100 mL reaction mixture (approx., vs 100 ng 1,2-dichlorobenzene IS)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: 18:2n-6
+    lever_value: methyl linoleate
+    value: 51
+    censor: none
+    limit: null
+    n: 4
+    sd: 23
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        methyl linoleate: 0.5 mmol in 20 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 18:3n-3
+    lever_value: methyl alpha-linolenate
+    value: null
+    censor: nd_with_limit
+    limit: 2
+    n: 4
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        methyl alpha-linolenate: 0.5 mmol in 20 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: elmore2002-18
+  odorant: 1-Octen-3-ol
+  lever_class: lipid
+  lever: 'lipid identity: methyl linoleate vs methyl alpha-linolenate (both with cysteine + ribose)'
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ng in headspace of 100 mL reaction mixture (approx., vs 100 ng 1,2-dichlorobenzene IS)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: 18:2n-6 cysteine ribose
+    lever_value: methyl linoleate
+    value: 219
+    censor: none
+    limit: null
+    n: 4
+    sd: 175
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.5 mmol in 20 mL
+        ribose: 0.5 mmol in 20 mL
+        methyl linoleate: 0.5 mmol in 20 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 18:3n-3 cysteine ribose
+    lever_value: methyl alpha-linolenate
+    value: null
+    censor: trace
+    limit: 10
+    n: 4
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.5 mmol in 20 mL
+        ribose: 0.5 mmol in 20 mL
+        methyl alpha-linolenate: 0.5 mmol in 20 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: elmore2002-19
+  odorant: 1-Octen-3-ol
+  lever_class: mixed
+  lever: 'cysteine + ribose (0.5 mmol each) added vs none, methyl linoleate system (cysteine and ribose added together: two
+    precursors; pair discussed in text, p. 1129)'
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ng in headspace of 100 mL reaction mixture (approx., vs 100 ng 1,2-dichlorobenzene IS)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: 18:2n-6
+    lever_value: none
+    value: 51
+    censor: none
+    limit: null
+    n: 4
+    sd: 23
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        methyl linoleate: 0.5 mmol in 20 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 18:2n-6 cysteine ribose
+    lever_value: cysteine + ribose
+    value: 219
+    censor: none
+    limit: null
+    n: 4
+    sd: 175
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.5 mmol in 20 mL
+        ribose: 0.5 mmol in 20 mL
+        methyl linoleate: 0.5 mmol in 20 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: elmore2002-20
+  odorant: 2-Pentylfuran
+  lever_class: lipid
+  lever: 'lipid identity: methyl linoleate vs methyl alpha-linolenate (no cysteine/ribose)'
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ng in headspace of 100 mL reaction mixture (approx., vs 100 ng 1,2-dichlorobenzene IS)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: 18:2n-6
+    lever_value: methyl linoleate
+    value: 315
+    censor: none
+    limit: null
+    n: 4
+    sd: 161
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        methyl linoleate: 0.5 mmol in 20 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 18:3n-3
+    lever_value: methyl alpha-linolenate
+    value: 17
+    censor: none
+    limit: null
+    n: 4
+    sd: 2
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        methyl alpha-linolenate: 0.5 mmol in 20 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: elmore2002-21
+  odorant: 2-Pentylfuran
+  lever_class: lipid
+  lever: 'lipid identity: methyl linoleate vs methyl alpha-linolenate (both with cysteine + ribose)'
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ng in headspace of 100 mL reaction mixture (approx., vs 100 ng 1,2-dichlorobenzene IS)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: 18:2n-6 cysteine ribose
+    lever_value: methyl linoleate
+    value: 1736
+    censor: none
+    limit: null
+    n: 4
+    sd: 1264
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.5 mmol in 20 mL
+        ribose: 0.5 mmol in 20 mL
+        methyl linoleate: 0.5 mmol in 20 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 18:3n-3 cysteine ribose
+    lever_value: methyl alpha-linolenate
+    value: 47
+    censor: none
+    limit: null
+    n: 4
+    sd: 30
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.5 mmol in 20 mL
+        ribose: 0.5 mmol in 20 mL
+        methyl alpha-linolenate: 0.5 mmol in 20 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: elmore2002-22
+  odorant: 2-Pentylfuran
+  lever_class: mixed
+  lever: 'cysteine + ribose (0.5 mmol each) added vs none, methyl linoleate system (cysteine and ribose added together: two
+    precursors; pair discussed in text, p. 1129)'
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ng in headspace of 100 mL reaction mixture (approx., vs 100 ng 1,2-dichlorobenzene IS)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: 18:2n-6
+    lever_value: none
+    value: 315
+    censor: none
+    limit: null
+    n: 4
+    sd: 161
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        methyl linoleate: 0.5 mmol in 20 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 18:2n-6 cysteine ribose
+    lever_value: cysteine + ribose
+    value: 1736
+    censor: none
+    limit: null
+    n: 4
+    sd: 1264
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.5 mmol in 20 mL
+        ribose: 0.5 mmol in 20 mL
+        methyl linoleate: 0.5 mmol in 20 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: elmore2002-23
+  odorant: 2-Pentylfuran
+  lever_class: mixed
+  lever: 'cysteine + ribose (0.5 mmol each) added vs none, methyl alpha-linolenate system (cysteine and ribose added together:
+    two precursors; pair discussed in text, p. 1129)'
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ng in headspace of 100 mL reaction mixture (approx., vs 100 ng 1,2-dichlorobenzene IS)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: 18:3n-3
+    lever_value: none
+    value: 17
+    censor: none
+    limit: null
+    n: 4
+    sd: 2
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        methyl alpha-linolenate: 0.5 mmol in 20 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 18:3n-3 cysteine ribose
+    lever_value: cysteine + ribose
+    value: 47
+    censor: none
+    limit: null
+    n: 4
+    sd: 30
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.5 mmol in 20 mL
+        ribose: 0.5 mmol in 20 mL
+        methyl alpha-linolenate: 0.5 mmol in 20 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: elmore2002-24
+  odorant: (E)-2-Octenal
+  lever_class: lipid
+  lever: 'lipid identity: methyl linoleate vs methyl alpha-linolenate (no cysteine/ribose)'
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ng in headspace of 100 mL reaction mixture (approx., vs 100 ng 1,2-dichlorobenzene IS)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: 18:2n-6
+    lever_value: methyl linoleate
+    value: 50
+    censor: none
+    limit: null
+    n: 4
+    sd: 33
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        methyl linoleate: 0.5 mmol in 20 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 18:3n-3
+    lever_value: methyl alpha-linolenate
+    value: 17
+    censor: none
+    limit: null
+    n: 4
+    sd: 6
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        methyl alpha-linolenate: 0.5 mmol in 20 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: elmore2002-25
+  odorant: (E)-2-Octenal
+  lever_class: lipid
+  lever: 'lipid identity: methyl linoleate vs methyl alpha-linolenate (both with cysteine + ribose)'
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ng in headspace of 100 mL reaction mixture (approx., vs 100 ng 1,2-dichlorobenzene IS)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: 18:2n-6 cysteine ribose
+    lever_value: methyl linoleate
+    value: 400
+    censor: none
+    limit: null
+    n: 4
+    sd: 531
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.5 mmol in 20 mL
+        ribose: 0.5 mmol in 20 mL
+        methyl linoleate: 0.5 mmol in 20 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 18:3n-3 cysteine ribose
+    lever_value: methyl alpha-linolenate
+    value: 10
+    censor: none
+    limit: null
+    n: 4
+    sd: 6
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.5 mmol in 20 mL
+        ribose: 0.5 mmol in 20 mL
+        methyl alpha-linolenate: 0.5 mmol in 20 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: elmore2002-26
+  odorant: (E)-2-Octenal
+  lever_class: mixed
+  lever: 'cysteine + ribose (0.5 mmol each) added vs none, methyl linoleate system (cysteine and ribose added together: two
+    precursors; pair discussed in text, p. 1129)'
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ng in headspace of 100 mL reaction mixture (approx., vs 100 ng 1,2-dichlorobenzene IS)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: 18:2n-6
+    lever_value: none
+    value: 50
+    censor: none
+    limit: null
+    n: 4
+    sd: 33
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        methyl linoleate: 0.5 mmol in 20 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 18:2n-6 cysteine ribose
+    lever_value: cysteine + ribose
+    value: 400
+    censor: none
+    limit: null
+    n: 4
+    sd: 531
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.5 mmol in 20 mL
+        ribose: 0.5 mmol in 20 mL
+        methyl linoleate: 0.5 mmol in 20 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: elmore2002-27
+  odorant: (E)-2-Octenal
+  lever_class: mixed
+  lever: 'cysteine + ribose (0.5 mmol each) added vs none, methyl alpha-linolenate system (cysteine and ribose added together:
+    two precursors; pair discussed in text, p. 1129)'
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ng in headspace of 100 mL reaction mixture (approx., vs 100 ng 1,2-dichlorobenzene IS)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: 18:3n-3
+    lever_value: none
+    value: 17
+    censor: none
+    limit: null
+    n: 4
+    sd: 6
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        methyl alpha-linolenate: 0.5 mmol in 20 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 18:3n-3 cysteine ribose
+    lever_value: cysteine + ribose
+    value: 10
+    censor: none
+    limit: null
+    n: 4
+    sd: 6
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.5 mmol in 20 mL
+        ribose: 0.5 mmol in 20 mL
+        methyl alpha-linolenate: 0.5 mmol in 20 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: elmore2002-28
+  odorant: (E,E)-2,4-Decadienal
+  lever_class: lipid
+  lever: 'lipid identity: methyl linoleate vs methyl alpha-linolenate (no cysteine/ribose)'
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ng in headspace of 100 mL reaction mixture (approx., vs 100 ng 1,2-dichlorobenzene IS)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: 18:2n-6
+    lever_value: methyl linoleate
+    value: 29
+    censor: none
+    limit: null
+    n: 4
+    sd: 8
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        methyl linoleate: 0.5 mmol in 20 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 18:3n-3
+    lever_value: methyl alpha-linolenate
+    value: null
+    censor: trace
+    limit: 10
+    n: 4
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        methyl alpha-linolenate: 0.5 mmol in 20 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: elmore2002-29
+  odorant: (E,E)-2,4-Decadienal
+  lever_class: lipid
+  lever: 'lipid identity: methyl linoleate vs methyl alpha-linolenate (both with cysteine + ribose)'
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ng in headspace of 100 mL reaction mixture (approx., vs 100 ng 1,2-dichlorobenzene IS)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: 18:2n-6 cysteine ribose
+    lever_value: methyl linoleate
+    value: 115
+    censor: none
+    limit: null
+    n: 4
+    sd: 65
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.5 mmol in 20 mL
+        ribose: 0.5 mmol in 20 mL
+        methyl linoleate: 0.5 mmol in 20 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 18:3n-3 cysteine ribose
+    lever_value: methyl alpha-linolenate
+    value: null
+    censor: trace
+    limit: 10
+    n: 4
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.5 mmol in 20 mL
+        ribose: 0.5 mmol in 20 mL
+        methyl alpha-linolenate: 0.5 mmol in 20 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: elmore2002-30
+  odorant: (E,E)-2,4-Decadienal
+  lever_class: mixed
+  lever: 'cysteine + ribose (0.5 mmol each) added vs none, methyl linoleate system (cysteine and ribose added together: two
+    precursors; pair discussed in text, p. 1129)'
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ng in headspace of 100 mL reaction mixture (approx., vs 100 ng 1,2-dichlorobenzene IS)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: 18:2n-6
+    lever_value: none
+    value: 29
+    censor: none
+    limit: null
+    n: 4
+    sd: 8
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        methyl linoleate: 0.5 mmol in 20 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 18:2n-6 cysteine ribose
+    lever_value: cysteine + ribose
+    value: 115
+    censor: none
+    limit: null
+    n: 4
+    sd: 65
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 140
+      time_min: 30
+      precursors:
+        cysteine: 0.5 mmol in 20 mL
+        ribose: 0.5 mmol in 20 mL
+        methyl linoleate: 0.5 mmol in 20 mL
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read

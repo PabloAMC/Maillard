@@ -1,0 +1,720 @@
+# Reader b, blind double-keying, second round (families). Rules: docs/reference/lever_table/PREREG.md secs. 3 - 4.
+source: monforte2021
+pdf: data/articles/monforte2021.pdf
+reader: b
+scope_note: 'Phenylacetaldehyde only. Not keyed: metals (Fe/Cu) and SO2 additions (no lever class), sequential-addition curves (Fig. 3). Weibull k values (Fig. 2B,
+  Table 1) and Table 2 release values (ppbv per unit time) keyed as quantity rate; cumulative amounts at 60 min digitised from Fig. 4B/D because no table prints them.
+  pH/temperature arms contain Phe, gallic acid, glucose and Fe/Cu (per Sec. 3.2).'
+contrasts:
+- id: monforte2021-1
+  odorant: phenylacetaldehyde
+  lever_class: precursor dose
+  lever: glucose absent vs added (2.4 mM), no metals
+  focal: true
+  location: Fig. 2A inset table ([Phenylacetaldehyde]final)
+  digitised: false
+  unit: ppb (cumulative, PTR-ToF-MS)
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: longest time
+  note: final cumulative value after 60 min; PTR-MS signal converted to ppbv with a common rate coefficient
+  arms:
+  - label: Phe+Gal, no metals
+    lever_value: glucose 0
+    value: 13.9
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3.4
+      ph_basis: initial
+      temp_C: 80
+      time_min: 60
+      precursors:
+        phenylalanine: 2.4 mM
+        gallic acid: 2.4 mM
+      buffer: 10 mM tartrate (pH adjusted with NaOH)
+      matrix: wine-like model solution (buffer)
+      headspace: open flask, headspace swept with oxygen
+  - label: Phe+Gal+Glu, no metals
+    lever_value: glucose 2.4 mM
+    value: 4.79
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3.4
+      ph_basis: initial
+      temp_C: 80
+      time_min: 60
+      precursors:
+        phenylalanine: 2.4 mM
+        gallic acid: 2.4 mM
+        glucose: 2.4 mM
+      buffer: 10 mM tartrate (pH adjusted with NaOH)
+      matrix: wine-like model solution (buffer)
+      headspace: open flask, headspace swept with oxygen
+- id: monforte2021-2
+  odorant: phenylacetaldehyde
+  lever_class: precursor dose
+  lever: glucose absent vs added (2.4 mM), with Fe(II) + Cu(II)
+  focal: true
+  location: Fig. 2A inset table ([Phenylacetaldehyde]final)
+  digitised: false
+  unit: ppb (cumulative, PTR-ToF-MS)
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: longest time
+  arms:
+  - label: Phe+Gal, Fe(II) + Cu(II)
+    lever_value: glucose 0
+    value: 190.6
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3.4
+      ph_basis: initial
+      temp_C: 80
+      time_min: 60
+      precursors:
+        phenylalanine: 2.4 mM
+        gallic acid: 2.4 mM
+        Fe2+: 7.5 mg/L (ferrous sulfate)
+        Cu2+: 0.4 mg/L (copper sulfate)
+      buffer: 10 mM tartrate (pH adjusted with NaOH)
+      matrix: wine-like model solution (buffer)
+      headspace: open flask, headspace swept with oxygen
+  - label: Phe+Gal+Glu, Fe(II) + Cu(II)
+    lever_value: glucose 2.4 mM
+    value: 165.1
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3.4
+      ph_basis: initial
+      temp_C: 80
+      time_min: 60
+      precursors:
+        phenylalanine: 2.4 mM
+        gallic acid: 2.4 mM
+        glucose: 2.4 mM
+        Fe2+: 7.5 mg/L (ferrous sulfate)
+        Cu2+: 0.4 mg/L (copper sulfate)
+      buffer: 10 mM tartrate (pH adjusted with NaOH)
+      matrix: wine-like model solution (buffer)
+      headspace: open flask, headspace swept with oxygen
+- id: monforte2021-3
+  odorant: phenylacetaldehyde
+  lever_class: precursor dose
+  lever: glucose absent vs added (2.4 mM), no metals; Weibull rate constant
+  focal: true
+  location: Fig. 2B
+  digitised: true
+  unit: k (min^-1)
+  quant_type: relative
+  quantity: rate
+  time_course_rule: not a time course
+  note: text gives 0.1 for Phe+Gal without metals
+  arms:
+  - label: Phe+Gal, no metals
+    lever_value: glucose 0
+    value: 0.095
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3.4
+      ph_basis: initial
+      temp_C: 80
+      time_min: 60
+      precursors:
+        phenylalanine: 2.4 mM
+        gallic acid: 2.4 mM
+      buffer: 10 mM tartrate (pH adjusted with NaOH)
+      matrix: wine-like model solution (buffer)
+      headspace: open flask, headspace swept with oxygen
+  - label: Phe+Gal+Glu, no metals
+    lever_value: glucose 2.4 mM
+    value: 0.062
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3.4
+      ph_basis: initial
+      temp_C: 80
+      time_min: 60
+      precursors:
+        phenylalanine: 2.4 mM
+        gallic acid: 2.4 mM
+        glucose: 2.4 mM
+      buffer: 10 mM tartrate (pH adjusted with NaOH)
+      matrix: wine-like model solution (buffer)
+      headspace: open flask, headspace swept with oxygen
+- id: monforte2021-4
+  odorant: phenylacetaldehyde
+  lever_class: precursor dose
+  lever: glucose absent vs added (2.4 mM), with Fe(II) + Cu(II); Weibull rate constant
+  focal: true
+  location: Fig. 2B
+  digitised: true
+  unit: k (min^-1)
+  quant_type: relative
+  quantity: rate
+  time_course_rule: not a time course
+  note: text gives 0.42
+  arms:
+  - label: Phe+Gal, Fe(II) + Cu(II)
+    lever_value: glucose 0
+    value: 0.41
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3.4
+      ph_basis: initial
+      temp_C: 80
+      time_min: 60
+      precursors:
+        phenylalanine: 2.4 mM
+        gallic acid: 2.4 mM
+        Fe2+: 7.5 mg/L (ferrous sulfate)
+        Cu2+: 0.4 mg/L (copper sulfate)
+      buffer: 10 mM tartrate (pH adjusted with NaOH)
+      matrix: wine-like model solution (buffer)
+      headspace: open flask, headspace swept with oxygen
+  - label: Phe+Gal+Glu, Fe(II) + Cu(II)
+    lever_value: glucose 2.4 mM
+    value: 0.28
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3.4
+      ph_basis: initial
+      temp_C: 80
+      time_min: 60
+      precursors:
+        phenylalanine: 2.4 mM
+        gallic acid: 2.4 mM
+        glucose: 2.4 mM
+        Fe2+: 7.5 mg/L (ferrous sulfate)
+        Cu2+: 0.4 mg/L (copper sulfate)
+      buffer: 10 mM tartrate (pH adjusted with NaOH)
+      matrix: wine-like model solution (buffer)
+      headspace: open flask, headspace swept with oxygen
+- id: monforte2021-5
+  odorant: phenylacetaldehyde
+  lever_class: pH
+  lever: pH 3.4 / 5 / 7 at 80 C; Weibull rate constant
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: k (min^-1)
+  quant_type: relative
+  quantity: rate
+  time_course_rule: not a time course
+  arms:
+  - label: pH = 3.4
+    lever_value: 3.4
+    value: 0.3
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.02
+    conditions:
+      ph: 3.4
+      ph_basis: initial
+      temp_C: 80
+      time_min: 60
+      precursors:
+        phenylalanine: 2.4 mM
+        gallic acid: 2.4 mM
+        glucose: 2.4 mM
+        Fe2+: 7.5 mg/L (ferrous sulfate)
+        Cu2+: 0.4 mg/L (copper sulfate)
+      buffer: 10 mM tartrate (pH adjusted with NaOH)
+      matrix: wine-like model solution (buffer)
+      headspace: open flask, headspace swept with oxygen
+  - label: pH = 5
+    lever_value: 5
+    value: 0.32
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: 5
+      ph_basis: initial
+      temp_C: 80
+      time_min: 60
+      precursors:
+        phenylalanine: 2.4 mM
+        gallic acid: 2.4 mM
+        glucose: 2.4 mM
+        Fe2+: 7.5 mg/L (ferrous sulfate)
+        Cu2+: 0.4 mg/L (copper sulfate)
+      buffer: 10 mM tartrate (pH adjusted with NaOH)
+      matrix: wine-like model solution (buffer)
+      headspace: open flask, headspace swept with oxygen
+  - label: pH = 7
+    lever_value: 7
+    value: 0.36
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.05
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 80
+      time_min: 60
+      precursors:
+        phenylalanine: 2.4 mM
+        gallic acid: 2.4 mM
+        glucose: 2.4 mM
+        Fe2+: 7.5 mg/L (ferrous sulfate)
+        Cu2+: 0.4 mg/L (copper sulfate)
+      buffer: 10 mM tartrate (pH adjusted with NaOH)
+      matrix: wine-like model solution (buffer)
+      headspace: open flask, headspace swept with oxygen
+- id: monforte2021-6
+  odorant: phenylacetaldehyde
+  lever_class: temperature
+  lever: 40-80 C at pH 3.4; Weibull rate constant
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: k (min^-1)
+  quant_type: relative
+  quantity: rate
+  time_course_rule: not a time course
+  arms:
+  - label: T = 40 C
+    lever_value: 40
+    value: 0.014
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.008
+    conditions:
+      ph: 3.4
+      ph_basis: initial
+      temp_C: 40
+      time_min: 60
+      precursors:
+        phenylalanine: 2.4 mM
+        gallic acid: 2.4 mM
+        glucose: 2.4 mM
+        Fe2+: 7.5 mg/L (ferrous sulfate)
+        Cu2+: 0.4 mg/L (copper sulfate)
+      buffer: 10 mM tartrate (pH adjusted with NaOH)
+      matrix: wine-like model solution (buffer)
+      headspace: open flask, headspace swept with oxygen
+  - label: T = 50 C
+    lever_value: 50
+    value: 0.033
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.004
+    conditions:
+      ph: 3.4
+      ph_basis: initial
+      temp_C: 50
+      time_min: 60
+      precursors:
+        phenylalanine: 2.4 mM
+        gallic acid: 2.4 mM
+        glucose: 2.4 mM
+        Fe2+: 7.5 mg/L (ferrous sulfate)
+        Cu2+: 0.4 mg/L (copper sulfate)
+      buffer: 10 mM tartrate (pH adjusted with NaOH)
+      matrix: wine-like model solution (buffer)
+      headspace: open flask, headspace swept with oxygen
+  - label: T = 60 C
+    lever_value: 60
+    value: 0.08
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.003
+    conditions:
+      ph: 3.4
+      ph_basis: initial
+      temp_C: 60
+      time_min: 60
+      precursors:
+        phenylalanine: 2.4 mM
+        gallic acid: 2.4 mM
+        glucose: 2.4 mM
+        Fe2+: 7.5 mg/L (ferrous sulfate)
+        Cu2+: 0.4 mg/L (copper sulfate)
+      buffer: 10 mM tartrate (pH adjusted with NaOH)
+      matrix: wine-like model solution (buffer)
+      headspace: open flask, headspace swept with oxygen
+  - label: T = 70 C
+    lever_value: 70
+    value: 0.174
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: 3.4
+      ph_basis: initial
+      temp_C: 70
+      time_min: 60
+      precursors:
+        phenylalanine: 2.4 mM
+        gallic acid: 2.4 mM
+        glucose: 2.4 mM
+        Fe2+: 7.5 mg/L (ferrous sulfate)
+        Cu2+: 0.4 mg/L (copper sulfate)
+      buffer: 10 mM tartrate (pH adjusted with NaOH)
+      matrix: wine-like model solution (buffer)
+      headspace: open flask, headspace swept with oxygen
+  - label: T = 80 C
+    lever_value: 80
+    value: 0.354
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.02
+    conditions:
+      ph: 3.4
+      ph_basis: initial
+      temp_C: 80
+      time_min: 60
+      precursors:
+        phenylalanine: 2.4 mM
+        gallic acid: 2.4 mM
+        glucose: 2.4 mM
+        Fe2+: 7.5 mg/L (ferrous sulfate)
+        Cu2+: 0.4 mg/L (copper sulfate)
+      buffer: 10 mM tartrate (pH adjusted with NaOH)
+      matrix: wine-like model solution (buffer)
+      headspace: open flask, headspace swept with oxygen
+- id: monforte2021-7
+  odorant: phenylacetaldehyde
+  lever_class: pH
+  lever: pH 3.4 / 5 / 7 at 80 C, SO2 added at 20 min; release value at end (60 min)
+  focal: true
+  location: Table 2 (End, t = 60 min)
+  digitised: false
+  unit: ppb (release, per unit time)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: longest time
+  note: release profile is ppbv per unit time (instantaneous emission), so keyed as rate; Table 2 also prints t = 20 and 25 min
+  arms:
+  - label: pH = 3.4
+    lever_value: 3.4
+    value: 0.0022
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3.4
+      ph_basis: initial
+      temp_C: 80
+      time_min: 60
+      precursors:
+        phenylalanine: 2.4 mM
+        gallic acid: 2.4 mM
+        glucose: 2.4 mM
+        Fe2+: 7.5 mg/L (ferrous sulfate)
+        Cu2+: 0.4 mg/L (copper sulfate)
+        SO2: 50 mg/L added at 20 min
+      buffer: 10 mM tartrate (pH adjusted with NaOH)
+      matrix: wine-like model solution (buffer)
+      headspace: open flask, headspace swept with oxygen
+  - label: pH = 5
+    lever_value: 5
+    value: 0.0024
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5
+      ph_basis: initial
+      temp_C: 80
+      time_min: 60
+      precursors:
+        phenylalanine: 2.4 mM
+        gallic acid: 2.4 mM
+        glucose: 2.4 mM
+        Fe2+: 7.5 mg/L (ferrous sulfate)
+        Cu2+: 0.4 mg/L (copper sulfate)
+        SO2: 50 mg/L added at 20 min
+      buffer: 10 mM tartrate (pH adjusted with NaOH)
+      matrix: wine-like model solution (buffer)
+      headspace: open flask, headspace swept with oxygen
+  - label: pH = 7
+    lever_value: 7
+    value: 0.0027
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 80
+      time_min: 60
+      precursors:
+        phenylalanine: 2.4 mM
+        gallic acid: 2.4 mM
+        glucose: 2.4 mM
+        Fe2+: 7.5 mg/L (ferrous sulfate)
+        Cu2+: 0.4 mg/L (copper sulfate)
+        SO2: 50 mg/L added at 20 min
+      buffer: 10 mM tartrate (pH adjusted with NaOH)
+      matrix: wine-like model solution (buffer)
+      headspace: open flask, headspace swept with oxygen
+- id: monforte2021-8
+  odorant: phenylacetaldehyde
+  lever_class: temperature
+  lever: 60 / 70 / 80 C at pH 3.4, SO2 added at 20 min; release value at end (60 min)
+  focal: true
+  location: Table 2 (End, t = 60 min)
+  digitised: false
+  unit: ppb (release, per unit time)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: longest time
+  arms:
+  - label: T = 60 C
+    lever_value: 60
+    value: 0.0012
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3.4
+      ph_basis: initial
+      temp_C: 60
+      time_min: 60
+      precursors:
+        phenylalanine: 2.4 mM
+        gallic acid: 2.4 mM
+        glucose: 2.4 mM
+        Fe2+: 7.5 mg/L (ferrous sulfate)
+        Cu2+: 0.4 mg/L (copper sulfate)
+        SO2: 50 mg/L added at 20 min
+      buffer: 10 mM tartrate (pH adjusted with NaOH)
+      matrix: wine-like model solution (buffer)
+      headspace: open flask, headspace swept with oxygen
+  - label: T = 70 C
+    lever_value: 70
+    value: 0.00046
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3.4
+      ph_basis: initial
+      temp_C: 70
+      time_min: 60
+      precursors:
+        phenylalanine: 2.4 mM
+        gallic acid: 2.4 mM
+        glucose: 2.4 mM
+        Fe2+: 7.5 mg/L (ferrous sulfate)
+        Cu2+: 0.4 mg/L (copper sulfate)
+        SO2: 50 mg/L added at 20 min
+      buffer: 10 mM tartrate (pH adjusted with NaOH)
+      matrix: wine-like model solution (buffer)
+      headspace: open flask, headspace swept with oxygen
+  - label: T = 80 C
+    lever_value: 80
+    value: 0.0027
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3.4
+      ph_basis: initial
+      temp_C: 80
+      time_min: 60
+      precursors:
+        phenylalanine: 2.4 mM
+        gallic acid: 2.4 mM
+        glucose: 2.4 mM
+        Fe2+: 7.5 mg/L (ferrous sulfate)
+        Cu2+: 0.4 mg/L (copper sulfate)
+        SO2: 50 mg/L added at 20 min
+      buffer: 10 mM tartrate (pH adjusted with NaOH)
+      matrix: wine-like model solution (buffer)
+      headspace: open flask, headspace swept with oxygen
+- id: monforte2021-9
+  odorant: phenylacetaldehyde
+  lever_class: pH
+  lever: pH 3.4 / 5 / 7 at 80 C, SO2 added at 20 min; cumulative amount at 60 min
+  focal: true
+  location: Fig. 4B
+  digitised: true
+  unit: ppb (cumulative)
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: longest time
+  arms:
+  - label: pH = 3.4
+    lever_value: 3.4
+    value: 25.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3.4
+      ph_basis: initial
+      temp_C: 80
+      time_min: 60
+      precursors:
+        phenylalanine: 2.4 mM
+        gallic acid: 2.4 mM
+        glucose: 2.4 mM
+        Fe2+: 7.5 mg/L (ferrous sulfate)
+        Cu2+: 0.4 mg/L (copper sulfate)
+        SO2: 50 mg/L added at 20 min
+      buffer: 10 mM tartrate (pH adjusted with NaOH)
+      matrix: wine-like model solution (buffer)
+      headspace: open flask, headspace swept with oxygen
+  - label: pH = 5
+    lever_value: 5
+    value: 23.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5
+      ph_basis: initial
+      temp_C: 80
+      time_min: 60
+      precursors:
+        phenylalanine: 2.4 mM
+        gallic acid: 2.4 mM
+        glucose: 2.4 mM
+        Fe2+: 7.5 mg/L (ferrous sulfate)
+        Cu2+: 0.4 mg/L (copper sulfate)
+        SO2: 50 mg/L added at 20 min
+      buffer: 10 mM tartrate (pH adjusted with NaOH)
+      matrix: wine-like model solution (buffer)
+      headspace: open flask, headspace swept with oxygen
+  - label: pH = 7
+    lever_value: 7
+    value: 32.5
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 80
+      time_min: 60
+      precursors:
+        phenylalanine: 2.4 mM
+        gallic acid: 2.4 mM
+        glucose: 2.4 mM
+        Fe2+: 7.5 mg/L (ferrous sulfate)
+        Cu2+: 0.4 mg/L (copper sulfate)
+        SO2: 50 mg/L added at 20 min
+      buffer: 10 mM tartrate (pH adjusted with NaOH)
+      matrix: wine-like model solution (buffer)
+      headspace: open flask, headspace swept with oxygen
+- id: monforte2021-10
+  odorant: phenylacetaldehyde
+  lever_class: temperature
+  lever: 60 / 70 / 80 C at pH 3.4, SO2 added at 20 min; cumulative amount at 60 min
+  focal: true
+  location: Fig. 4D
+  digitised: true
+  unit: ppb (cumulative)
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: longest time
+  arms:
+  - label: T = 60 C
+    lever_value: 60
+    value: 1.6
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3.4
+      ph_basis: initial
+      temp_C: 60
+      time_min: 60
+      precursors:
+        phenylalanine: 2.4 mM
+        gallic acid: 2.4 mM
+        glucose: 2.4 mM
+        Fe2+: 7.5 mg/L (ferrous sulfate)
+        Cu2+: 0.4 mg/L (copper sulfate)
+        SO2: 50 mg/L added at 20 min
+      buffer: 10 mM tartrate (pH adjusted with NaOH)
+      matrix: wine-like model solution (buffer)
+      headspace: open flask, headspace swept with oxygen
+  - label: T = 70 C
+    lever_value: 70
+    value: 6.5
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3.4
+      ph_basis: initial
+      temp_C: 70
+      time_min: 60
+      precursors:
+        phenylalanine: 2.4 mM
+        gallic acid: 2.4 mM
+        glucose: 2.4 mM
+        Fe2+: 7.5 mg/L (ferrous sulfate)
+        Cu2+: 0.4 mg/L (copper sulfate)
+        SO2: 50 mg/L added at 20 min
+      buffer: 10 mM tartrate (pH adjusted with NaOH)
+      matrix: wine-like model solution (buffer)
+      headspace: open flask, headspace swept with oxygen
+  - label: T = 80 C
+    lever_value: 80
+    value: 25.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3.4
+      ph_basis: initial
+      temp_C: 80
+      time_min: 60
+      precursors:
+        phenylalanine: 2.4 mM
+        gallic acid: 2.4 mM
+        glucose: 2.4 mM
+        Fe2+: 7.5 mg/L (ferrous sulfate)
+        Cu2+: 0.4 mg/L (copper sulfate)
+        SO2: 50 mg/L added at 20 min
+      buffer: 10 mM tartrate (pH adjusted with NaOH)
+      matrix: wine-like model solution (buffer)
+      headspace: open flask, headspace swept with oxygen

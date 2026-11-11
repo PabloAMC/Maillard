@@ -1,0 +1,1130 @@
+# Resolved (third read) from reader_a / reader_b; rows the comparison listed were re-read in the PDF.
+source: zamora2006
+pdf: data/articles/zamora2006.pdf
+reader: resolved
+scope_note: All values digitised (no tables of amounts). Fig. 1 pH ladder split at the buffer switch (citrate 2.15-6, phosphate
+  6-8) with the pH 6 citrate/phosphate pair keyed as buffer type. Fig. 4 early sampling times keyed at their nominal half-hour
+  values (0.5-2.5 h; the plot is crowded there). Incubations are at 37 and 60 C (mild heating). Phenylpyruvic acid not on
+  the odorant list. Temperature keyed once (Fig. 4 vs 5 at 24 h). Fig. 6 caption says 0.5 umol 4,5-epoxy-2-decenal; Methods
+  say 0.5 umol phenylpyruvic acid (Methods followed).
+contrasts:
+- id: zamora2006-1
+  odorant: Phenylacetaldehyde
+  lever_class: pH
+  lever: reaction pH 2.15-6, 50 mM sodium citrate run (buffer switch split, rule BUFFER SWITCH)
+  focal: true
+  location: Fig. 1
+  digitised: true
+  unit: umol/mmol Phe
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  resolution: re-read
+  arms:
+  - label: pH 2.15 (citrate)
+    lever_value: 2.15
+    value: 4.86
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 2.15
+      ph_basis: label
+      temp_C: 37
+      time_min: 1260
+      precursors:
+        4,5-epoxy-2-decenal: 25 umol in 500 uL
+        phenylalanine: 25 umol in 500 uL
+      buffer: 50 mM sodium citrate (acetonitrile/buffer 2:1)
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: unstated
+  - label: pH 3 (citrate)
+    lever_value: 3
+    value: 5.1
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 37
+      time_min: 1260
+      precursors:
+        4,5-epoxy-2-decenal: 25 umol in 500 uL
+        phenylalanine: 25 umol in 500 uL
+      buffer: 50 mM sodium citrate (acetonitrile/buffer 2:1)
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: unstated
+  - label: pH 4 (citrate)
+    lever_value: 4
+    value: 4.4
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 4
+      ph_basis: label
+      temp_C: 37
+      time_min: 1260
+      precursors:
+        4,5-epoxy-2-decenal: 25 umol in 500 uL
+        phenylalanine: 25 umol in 500 uL
+      buffer: 50 mM sodium citrate (acetonitrile/buffer 2:1)
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: unstated
+  - label: pH 5 (citrate)
+    lever_value: 5
+    value: 4.05
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5
+      ph_basis: label
+      temp_C: 37
+      time_min: 1260
+      precursors:
+        4,5-epoxy-2-decenal: 25 umol in 500 uL
+        phenylalanine: 25 umol in 500 uL
+      buffer: 50 mM sodium citrate (acetonitrile/buffer 2:1)
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: unstated
+  - label: pH 6 (citrate)
+    lever_value: 6
+    value: 3.6
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: label
+      temp_C: 37
+      time_min: 1260
+      precursors:
+        4,5-epoxy-2-decenal: 25 umol in 500 uL
+        phenylalanine: 25 umol in 500 uL
+      buffer: 50 mM sodium citrate (acetonitrile/buffer 2:1)
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: unstated
+- id: zamora2006-2
+  odorant: Phenylacetaldehyde
+  lever_class: pH
+  lever: reaction pH 6-8, 50 mM sodium phosphate run (buffer switch split, rule BUFFER SWITCH)
+  focal: true
+  location: Fig. 1
+  digitised: true
+  unit: umol/mmol Phe
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  resolution: re-read
+  arms:
+  - label: pH 6 (phosphate)
+    lever_value: 6
+    value: 3.85
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: label
+      temp_C: 37
+      time_min: 1260
+      precursors:
+        4,5-epoxy-2-decenal: 25 umol in 500 uL
+        phenylalanine: 25 umol in 500 uL
+      buffer: 50 mM sodium phosphate (acetonitrile/buffer 2:1)
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: unstated
+  - label: pH 7 (phosphate)
+    lever_value: 7
+    value: 3.35
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      temp_C: 37
+      time_min: 1260
+      precursors:
+        4,5-epoxy-2-decenal: 25 umol in 500 uL
+        phenylalanine: 25 umol in 500 uL
+      buffer: 50 mM sodium phosphate (acetonitrile/buffer 2:1)
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: unstated
+  - label: pH 8 (phosphate)
+    lever_value: 8
+    value: 2.8
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8
+      ph_basis: label
+      temp_C: 37
+      time_min: 1260
+      precursors:
+        4,5-epoxy-2-decenal: 25 umol in 500 uL
+        phenylalanine: 25 umol in 500 uL
+      buffer: 50 mM sodium phosphate (acetonitrile/buffer 2:1)
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: unstated
+- id: zamora2006-3
+  odorant: Phenylacetaldehyde
+  lever_class: buffer
+  lever: 'buffer type at pH 6: sodium citrate vs sodium phosphate (both 50 mM)'
+  focal: false
+  location: Fig. 1
+  digitised: true
+  unit: umol/mmol Phe
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  resolution: re-read
+  arms:
+  - label: pH 6 (citrate)
+    lever_value: citrate
+    value: 3.6
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: label
+      temp_C: 37
+      time_min: 1260
+      precursors:
+        4,5-epoxy-2-decenal: 25 umol in 500 uL
+        phenylalanine: 25 umol in 500 uL
+      buffer: 50 mM sodium citrate (acetonitrile/buffer 2:1)
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: unstated
+  - label: pH 6 (phosphate)
+    lever_value: phosphate
+    value: 3.85
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: label
+      temp_C: 37
+      time_min: 1260
+      precursors:
+        4,5-epoxy-2-decenal: 25 umol in 500 uL
+        phenylalanine: 25 umol in 500 uL
+      buffer: 50 mM sodium phosphate (acetonitrile/buffer 2:1)
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: unstated
+- id: zamora2006-4
+  odorant: Phenylacetaldehyde
+  lever_class: precursor dose
+  lever: 4,5-epoxy-2-decenal amount 0-0.031 mmol (phenylalanine fixed 25 umol), 37 C
+  focal: true
+  location: Fig. 2
+  digitised: true
+  unit: umol/mmol Phe
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  resolution: agreed
+  arms:
+  - label: ED 0 mmol
+    lever_value: 0
+    value: 1.76
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 37
+      time_min: 1260
+      precursors:
+        4,5-epoxy-2-decenal: 0 mmol in 500 uL
+        phenylalanine: 25 umol in 500 uL
+      buffer: sodium citrate, pH 3 (acetonitrile/buffer 2:1)
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: unstated
+  - label: ED 0.00125 mmol
+    lever_value: 0.00125
+    value: 1.73
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 37
+      time_min: 1260
+      precursors:
+        4,5-epoxy-2-decenal: 0.00125 mmol in 500 uL
+        phenylalanine: 25 umol in 500 uL
+      buffer: sodium citrate, pH 3 (acetonitrile/buffer 2:1)
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: unstated
+  - label: ED 0.0025 mmol
+    lever_value: 0.0025
+    value: 1.85
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 37
+      time_min: 1260
+      precursors:
+        4,5-epoxy-2-decenal: 0.0025 mmol in 500 uL
+        phenylalanine: 25 umol in 500 uL
+      buffer: sodium citrate, pH 3 (acetonitrile/buffer 2:1)
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: unstated
+  - label: ED 0.0125 mmol
+    lever_value: 0.0125
+    value: 3.33
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 37
+      time_min: 1260
+      precursors:
+        4,5-epoxy-2-decenal: 0.0125 mmol in 500 uL
+        phenylalanine: 25 umol in 500 uL
+      buffer: sodium citrate, pH 3 (acetonitrile/buffer 2:1)
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: unstated
+  - label: ED 0.025 mmol
+    lever_value: 0.025
+    value: 5.1
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 37
+      time_min: 1260
+      precursors:
+        4,5-epoxy-2-decenal: 0.025 mmol in 500 uL
+        phenylalanine: 25 umol in 500 uL
+      buffer: sodium citrate, pH 3 (acetonitrile/buffer 2:1)
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: unstated
+  - label: ED 0.031 mmol
+    lever_value: 0.031
+    value: 5.96
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 37
+      time_min: 1260
+      precursors:
+        4,5-epoxy-2-decenal: 0.031 mmol in 500 uL
+        phenylalanine: 25 umol in 500 uL
+      buffer: sodium citrate, pH 3 (acetonitrile/buffer 2:1)
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: unstated
+- id: zamora2006-5
+  odorant: Phenylacetaldehyde
+  lever_class: precursor dose
+  lever: 4,5-epoxy-2-decenal amount 0-0.031 mmol (phenylalanine fixed 25 umol), 60 C
+  focal: true
+  location: Fig. 3
+  digitised: true
+  unit: umol/mmol Phe
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  resolution: agreed
+  arms:
+  - label: ED 0 mmol
+    lever_value: 0
+    value: 2.94
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 60
+      time_min: 1260
+      precursors:
+        4,5-epoxy-2-decenal: 0 mmol in 500 uL
+        phenylalanine: 25 umol in 500 uL
+      buffer: sodium citrate, pH 3 (acetonitrile/buffer 2:1)
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: unstated
+  - label: ED 0.00125 mmol
+    lever_value: 0.00125
+    value: 3.29
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 60
+      time_min: 1260
+      precursors:
+        4,5-epoxy-2-decenal: 0.00125 mmol in 500 uL
+        phenylalanine: 25 umol in 500 uL
+      buffer: sodium citrate, pH 3 (acetonitrile/buffer 2:1)
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: unstated
+  - label: ED 0.0025 mmol
+    lever_value: 0.0025
+    value: 3.23
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 60
+      time_min: 1260
+      precursors:
+        4,5-epoxy-2-decenal: 0.0025 mmol in 500 uL
+        phenylalanine: 25 umol in 500 uL
+      buffer: sodium citrate, pH 3 (acetonitrile/buffer 2:1)
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: unstated
+  - label: ED 0.0125 mmol
+    lever_value: 0.0125
+    value: 5.94
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 60
+      time_min: 1260
+      precursors:
+        4,5-epoxy-2-decenal: 0.0125 mmol in 500 uL
+        phenylalanine: 25 umol in 500 uL
+      buffer: sodium citrate, pH 3 (acetonitrile/buffer 2:1)
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: unstated
+  - label: ED 0.025 mmol
+    lever_value: 0.025
+    value: 7.95
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 60
+      time_min: 1260
+      precursors:
+        4,5-epoxy-2-decenal: 0.025 mmol in 500 uL
+        phenylalanine: 25 umol in 500 uL
+      buffer: sodium citrate, pH 3 (acetonitrile/buffer 2:1)
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: unstated
+  - label: ED 0.031 mmol
+    lever_value: 0.031
+    value: 9.28
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 60
+      time_min: 1260
+      precursors:
+        4,5-epoxy-2-decenal: 0.031 mmol in 500 uL
+        phenylalanine: 25 umol in 500 uL
+      buffer: sodium citrate, pH 3 (acetonitrile/buffer 2:1)
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: unstated
+- id: zamora2006-6
+  odorant: Phenylacetaldehyde
+  lever_class: time
+  lever: incubation time 0-24 h at 37 C
+  focal: true
+  location: Fig. 4
+  digitised: true
+  unit: umol/mmol Phe
+  quant_type: absolute
+  time_course_rule: 'lever is time: whole series'
+  quantity: amount
+  resolution: re-read
+  arms:
+  - label: 0 h
+    lever_value: 0
+    value: 2.35
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 37
+      time_min: 0
+      precursors:
+        4,5-epoxy-2-decenal: 25 umol in 500 uL
+        phenylalanine: 25 umol in 500 uL
+      buffer: sodium citrate, pH 3 (acetonitrile/buffer 2:1)
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: unstated
+  - label: 0.5 h
+    lever_value: 0.5
+    value: 2.9
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 37
+      time_min: 30.0
+      precursors:
+        4,5-epoxy-2-decenal: 25 umol in 500 uL
+        phenylalanine: 25 umol in 500 uL
+      buffer: sodium citrate, pH 3 (acetonitrile/buffer 2:1)
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: unstated
+  - label: 1 h
+    lever_value: 1
+    value: 3.1
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 37
+      time_min: 60
+      precursors:
+        4,5-epoxy-2-decenal: 25 umol in 500 uL
+        phenylalanine: 25 umol in 500 uL
+      buffer: sodium citrate, pH 3 (acetonitrile/buffer 2:1)
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: unstated
+  - label: 1.5 h
+    lever_value: 1.5
+    value: 3.4
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 37
+      time_min: 90.0
+      precursors:
+        4,5-epoxy-2-decenal: 25 umol in 500 uL
+        phenylalanine: 25 umol in 500 uL
+      buffer: sodium citrate, pH 3 (acetonitrile/buffer 2:1)
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: unstated
+  - label: 2 h
+    lever_value: 2
+    value: 3.5
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 37
+      time_min: 120
+      precursors:
+        4,5-epoxy-2-decenal: 25 umol in 500 uL
+        phenylalanine: 25 umol in 500 uL
+      buffer: sodium citrate, pH 3 (acetonitrile/buffer 2:1)
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: unstated
+  - label: 2.5 h
+    lever_value: 2.5
+    value: 3.85
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 37
+      time_min: 150.0
+      precursors:
+        4,5-epoxy-2-decenal: 25 umol in 500 uL
+        phenylalanine: 25 umol in 500 uL
+      buffer: sodium citrate, pH 3 (acetonitrile/buffer 2:1)
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: unstated
+  - label: 3 h
+    lever_value: 3
+    value: 4.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 37
+      time_min: 180
+      precursors:
+        4,5-epoxy-2-decenal: 25 umol in 500 uL
+        phenylalanine: 25 umol in 500 uL
+      buffer: sodium citrate, pH 3 (acetonitrile/buffer 2:1)
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: unstated
+  - label: 4 h
+    lever_value: 4
+    value: 3.85
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 37
+      time_min: 240
+      precursors:
+        4,5-epoxy-2-decenal: 25 umol in 500 uL
+        phenylalanine: 25 umol in 500 uL
+      buffer: sodium citrate, pH 3 (acetonitrile/buffer 2:1)
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: unstated
+  - label: 5 h
+    lever_value: 5
+    value: 3.75
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 37
+      time_min: 300
+      precursors:
+        4,5-epoxy-2-decenal: 25 umol in 500 uL
+        phenylalanine: 25 umol in 500 uL
+      buffer: sodium citrate, pH 3 (acetonitrile/buffer 2:1)
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: unstated
+  - label: 6 h
+    lever_value: 6
+    value: 4.35
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 37
+      time_min: 360
+      precursors:
+        4,5-epoxy-2-decenal: 25 umol in 500 uL
+        phenylalanine: 25 umol in 500 uL
+      buffer: sodium citrate, pH 3 (acetonitrile/buffer 2:1)
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: unstated
+  - label: 14 h
+    lever_value: 14
+    value: 4.95
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 37
+      time_min: 840
+      precursors:
+        4,5-epoxy-2-decenal: 25 umol in 500 uL
+        phenylalanine: 25 umol in 500 uL
+      buffer: sodium citrate, pH 3 (acetonitrile/buffer 2:1)
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: unstated
+  - label: 16 h
+    lever_value: 16
+    value: 4.85
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 37
+      time_min: 960
+      precursors:
+        4,5-epoxy-2-decenal: 25 umol in 500 uL
+        phenylalanine: 25 umol in 500 uL
+      buffer: sodium citrate, pH 3 (acetonitrile/buffer 2:1)
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: unstated
+  - label: 18 h
+    lever_value: 18
+    value: 5.2
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 37
+      time_min: 1080
+      precursors:
+        4,5-epoxy-2-decenal: 25 umol in 500 uL
+        phenylalanine: 25 umol in 500 uL
+      buffer: sodium citrate, pH 3 (acetonitrile/buffer 2:1)
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: unstated
+  - label: 20 h
+    lever_value: 20
+    value: 4.85
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 37
+      time_min: 1200
+      precursors:
+        4,5-epoxy-2-decenal: 25 umol in 500 uL
+        phenylalanine: 25 umol in 500 uL
+      buffer: sodium citrate, pH 3 (acetonitrile/buffer 2:1)
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: unstated
+  - label: 21 h
+    lever_value: 21
+    value: 5.3
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 37
+      time_min: 1260
+      precursors:
+        4,5-epoxy-2-decenal: 25 umol in 500 uL
+        phenylalanine: 25 umol in 500 uL
+      buffer: sodium citrate, pH 3 (acetonitrile/buffer 2:1)
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: unstated
+  - label: 24 h
+    lever_value: 24
+    value: 5.5
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 37
+      time_min: 1440
+      precursors:
+        4,5-epoxy-2-decenal: 25 umol in 500 uL
+        phenylalanine: 25 umol in 500 uL
+      buffer: sodium citrate, pH 3 (acetonitrile/buffer 2:1)
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: unstated
+- id: zamora2006-7
+  odorant: Phenylacetaldehyde
+  lever_class: time
+  lever: incubation time 0-24 h at 60 C
+  focal: true
+  location: Fig. 5
+  digitised: true
+  unit: umol/mmol Phe
+  quant_type: absolute
+  time_course_rule: 'lever is time: whole series'
+  quantity: amount
+  resolution: agreed
+  arms:
+  - label: 0 h
+    lever_value: 0
+    value: 3.05
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 60
+      time_min: 0
+      precursors:
+        4,5-epoxy-2-decenal: 25 umol in 500 uL
+        phenylalanine: 25 umol in 500 uL
+      buffer: sodium citrate, pH 3 (acetonitrile/buffer 2:1)
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: unstated
+  - label: 1 h
+    lever_value: 1
+    value: 6.3
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 60
+      time_min: 60
+      precursors:
+        4,5-epoxy-2-decenal: 25 umol in 500 uL
+        phenylalanine: 25 umol in 500 uL
+      buffer: sodium citrate, pH 3 (acetonitrile/buffer 2:1)
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: unstated
+  - label: 2 h
+    lever_value: 2
+    value: 7.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 60
+      time_min: 120
+      precursors:
+        4,5-epoxy-2-decenal: 25 umol in 500 uL
+        phenylalanine: 25 umol in 500 uL
+      buffer: sodium citrate, pH 3 (acetonitrile/buffer 2:1)
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: unstated
+  - label: 3 h
+    lever_value: 3
+    value: 7.3
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 60
+      time_min: 180
+      precursors:
+        4,5-epoxy-2-decenal: 25 umol in 500 uL
+        phenylalanine: 25 umol in 500 uL
+      buffer: sodium citrate, pH 3 (acetonitrile/buffer 2:1)
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: unstated
+  - label: 4 h
+    lever_value: 4
+    value: 7.55
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 60
+      time_min: 240
+      precursors:
+        4,5-epoxy-2-decenal: 25 umol in 500 uL
+        phenylalanine: 25 umol in 500 uL
+      buffer: sodium citrate, pH 3 (acetonitrile/buffer 2:1)
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: unstated
+  - label: 21 h
+    lever_value: 21
+    value: 8.1
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 60
+      time_min: 1260
+      precursors:
+        4,5-epoxy-2-decenal: 25 umol in 500 uL
+        phenylalanine: 25 umol in 500 uL
+      buffer: sodium citrate, pH 3 (acetonitrile/buffer 2:1)
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: unstated
+  - label: 24 h
+    lever_value: 24
+    value: 8.5
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 60
+      time_min: 1440
+      precursors:
+        4,5-epoxy-2-decenal: 25 umol in 500 uL
+        phenylalanine: 25 umol in 500 uL
+      buffer: sodium citrate, pH 3 (acetonitrile/buffer 2:1)
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: unstated
+- id: zamora2006-8
+  odorant: Phenylacetaldehyde
+  lever_class: temperature
+  lever: incubation temperature 37 vs 60 C
+  focal: true
+  location: Fig. 4 vs Fig. 5 (24 h point)
+  digitised: true
+  unit: umol/mmol Phe
+  quant_type: absolute
+  time_course_rule: longest time
+  quantity: amount
+  resolution: agreed
+  arms:
+  - label: 37 C, 24 h
+    lever_value: 37
+    value: 5.5
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 37
+      time_min: 1440
+      precursors:
+        4,5-epoxy-2-decenal: 25 umol in 500 uL
+        phenylalanine: 25 umol in 500 uL
+      buffer: sodium citrate, pH 3 (acetonitrile/buffer 2:1)
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: unstated
+  - label: 60 C, 24 h
+    lever_value: 60
+    value: 8.5
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 60
+      time_min: 1440
+      precursors:
+        4,5-epoxy-2-decenal: 25 umol in 500 uL
+        phenylalanine: 25 umol in 500 uL
+      buffer: sodium citrate, pH 3 (acetonitrile/buffer 2:1)
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: unstated
+- id: zamora2006-9
+  odorant: Phenylacetaldehyde
+  lever_class: time
+  lever: incubation time 0-24 h at 60 C (phenylpyruvic acid/phenylalanine)
+  focal: false
+  location: Fig. 6
+  digitised: true
+  unit: nmol/umol phenylpyruvic acid
+  quant_type: absolute
+  time_course_rule: 'lever is time: whole series'
+  quantity: amount
+  resolution: agreed
+  arms:
+  - label: 0 h
+    lever_value: 0
+    value: 18.5
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 60
+      time_min: 0
+      precursors:
+        phenylpyruvic acid: 0.5 umol in 500 uL
+        phenylalanine: 25 umol in 500 uL
+      buffer: sodium citrate, pH 3 (acetonitrile/buffer 2:1)
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: unstated
+  - label: 3 h
+    lever_value: 3
+    value: 23.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 60
+      time_min: 180
+      precursors:
+        phenylpyruvic acid: 0.5 umol in 500 uL
+        phenylalanine: 25 umol in 500 uL
+      buffer: sodium citrate, pH 3 (acetonitrile/buffer 2:1)
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: unstated
+  - label: 21 h
+    lever_value: 21
+    value: 38.5
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 60
+      time_min: 1260
+      precursors:
+        phenylpyruvic acid: 0.5 umol in 500 uL
+        phenylalanine: 25 umol in 500 uL
+      buffer: sodium citrate, pH 3 (acetonitrile/buffer 2:1)
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: unstated
+  - label: 24 h
+    lever_value: 24
+    value: 42.1
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 60
+      time_min: 1440
+      precursors:
+        phenylpyruvic acid: 0.5 umol in 500 uL
+        phenylalanine: 25 umol in 500 uL
+      buffer: sodium citrate, pH 3 (acetonitrile/buffer 2:1)
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: unstated
+- id: zamora2006-10
+  odorant: Benzaldehyde
+  lever_class: time
+  lever: incubation time 0-24 h at 60 C (phenylpyruvic acid/phenylalanine)
+  focal: false
+  location: Fig. 6
+  digitised: true
+  unit: nmol/umol phenylpyruvic acid
+  quant_type: absolute
+  time_course_rule: 'lever is time: whole series'
+  quantity: amount
+  resolution: agreed
+  arms:
+  - label: 0 h
+    lever_value: 0
+    value: 23.6
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 60
+      time_min: 0
+      precursors:
+        phenylpyruvic acid: 0.5 umol in 500 uL
+        phenylalanine: 25 umol in 500 uL
+      buffer: sodium citrate, pH 3 (acetonitrile/buffer 2:1)
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: unstated
+  - label: 3 h
+    lever_value: 3
+    value: 28.3
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 60
+      time_min: 180
+      precursors:
+        phenylpyruvic acid: 0.5 umol in 500 uL
+        phenylalanine: 25 umol in 500 uL
+      buffer: sodium citrate, pH 3 (acetonitrile/buffer 2:1)
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: unstated
+  - label: 21 h
+    lever_value: 21
+    value: 43.7
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 60
+      time_min: 1260
+      precursors:
+        phenylpyruvic acid: 0.5 umol in 500 uL
+        phenylalanine: 25 umol in 500 uL
+      buffer: sodium citrate, pH 3 (acetonitrile/buffer 2:1)
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: unstated
+  - label: 24 h
+    lever_value: 24
+    value: 50.2
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 60
+      time_min: 1440
+      precursors:
+        phenylpyruvic acid: 0.5 umol in 500 uL
+        phenylalanine: 25 umol in 500 uL
+      buffer: sodium citrate, pH 3 (acetonitrile/buffer 2:1)
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: unstated

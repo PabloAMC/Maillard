@@ -1,0 +1,886 @@
+# Reader b, blind double-keying, second round (families). Rules: PREREG secs. 3 - 4.
+source: "du2025"
+pdf: "data/articles/du2025.pdf"
+reader: "b"
+scope_note: "Lever is the added fatty acid; 2-methyl-3-furanthiol and other thiols not keyed; 1-heptanol, 2-heptylfuran, 2-octylfuran, 5-HMF and 1-octen-3-one are not on the declared list; the time series (Fig. 2) covers glutathione and its Amadori compound only, not odorants."
+contrasts:
+  - id: "du2025-1"
+    odorant: "2-pentylfuran"
+    lever_class: "lipid"
+    lever: "added C18 fatty acid: none vs oleic vs linoleic vs linolenic acid"
+    focal: false
+    location: "Table 1, No. 22, p. 5"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "Blank cell in Table 1 keyed as not detected, no LOD printed; quantity by ratio to 1,2-dichlorobenzene internal standard; +- values as printed (three repeats)."
+    arms:
+      - label: "system GG"
+        lever_value: "none (control)"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 145
+          time_min: 120
+          precursors:
+            "glutathione": "1 mmol in 5 mL"
+            "glucose": "1 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "system GGO"
+        lever_value: "oleic acid"
+        value: 41.77
+        censor: none
+        limit: null
+        n: 3
+        sd: 4.22
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 145
+          time_min: 120
+          precursors:
+            "glutathione": "1 mmol in 5 mL"
+            "glucose": "1 mmol in 5 mL"
+            "oleic acid": "0.05 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "system GGL"
+        lever_value: "linoleic acid"
+        value: 108.87
+        censor: none
+        limit: null
+        n: 3
+        sd: 8.58
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 145
+          time_min: 120
+          precursors:
+            "glutathione": "1 mmol in 5 mL"
+            "glucose": "1 mmol in 5 mL"
+            "linoleic acid": "0.05 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "system GGN"
+        lever_value: "linolenic acid"
+        value: 225.3
+        censor: none
+        limit: null
+        n: 3
+        sd: 11.49
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 145
+          time_min: 120
+          precursors:
+            "glutathione": "1 mmol in 5 mL"
+            "glucose": "1 mmol in 5 mL"
+            "linolenic acid": "0.05 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "unstated"
+  - id: "du2025-2"
+    odorant: "2-furaldehyde (furfural)"
+    lever_class: "lipid"
+    lever: "added C18 fatty acid: none vs oleic vs linoleic vs linolenic acid"
+    focal: false
+    location: "Table 1, No. 26, p. 5"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "Blank cell in Table 1 keyed as not detected, no LOD printed; quantity by ratio to 1,2-dichlorobenzene internal standard; +- values as printed (three repeats)."
+    arms:
+      - label: "system GG"
+        lever_value: "none (control)"
+        value: 39.94
+        censor: none
+        limit: null
+        n: 3
+        sd: 6.84
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 145
+          time_min: 120
+          precursors:
+            "glutathione": "1 mmol in 5 mL"
+            "glucose": "1 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "system GGO"
+        lever_value: "oleic acid"
+        value: 35.44
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.09
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 145
+          time_min: 120
+          precursors:
+            "glutathione": "1 mmol in 5 mL"
+            "glucose": "1 mmol in 5 mL"
+            "oleic acid": "0.05 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "system GGL"
+        lever_value: "linoleic acid"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 145
+          time_min: 120
+          precursors:
+            "glutathione": "1 mmol in 5 mL"
+            "glucose": "1 mmol in 5 mL"
+            "linoleic acid": "0.05 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "system GGN"
+        lever_value: "linolenic acid"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 145
+          time_min: 120
+          precursors:
+            "glutathione": "1 mmol in 5 mL"
+            "glucose": "1 mmol in 5 mL"
+            "linolenic acid": "0.05 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "unstated"
+  - id: "du2025-3"
+    odorant: "1-(2-furanyl)-ethanone (2-acetylfuran)"
+    lever_class: "lipid"
+    lever: "added C18 fatty acid: none vs oleic vs linoleic vs linolenic acid"
+    focal: false
+    location: "Table 1, No. 27, p. 5"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "Blank cell in Table 1 keyed as not detected, no LOD printed; quantity by ratio to 1,2-dichlorobenzene internal standard; +- values as printed (three repeats)."
+    arms:
+      - label: "system GG"
+        lever_value: "none (control)"
+        value: 469.0
+        censor: none
+        limit: null
+        n: 3
+        sd: 29.45
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 145
+          time_min: 120
+          precursors:
+            "glutathione": "1 mmol in 5 mL"
+            "glucose": "1 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "system GGO"
+        lever_value: "oleic acid"
+        value: 449.95
+        censor: none
+        limit: null
+        n: 3
+        sd: 35.09
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 145
+          time_min: 120
+          precursors:
+            "glutathione": "1 mmol in 5 mL"
+            "glucose": "1 mmol in 5 mL"
+            "oleic acid": "0.05 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "system GGL"
+        lever_value: "linoleic acid"
+        value: 413.46
+        censor: none
+        limit: null
+        n: 3
+        sd: 27.22
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 145
+          time_min: 120
+          precursors:
+            "glutathione": "1 mmol in 5 mL"
+            "glucose": "1 mmol in 5 mL"
+            "linoleic acid": "0.05 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "system GGN"
+        lever_value: "linolenic acid"
+        value: 486.77
+        censor: none
+        limit: null
+        n: 3
+        sd: 12.08
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 145
+          time_min: 120
+          precursors:
+            "glutathione": "1 mmol in 5 mL"
+            "glucose": "1 mmol in 5 mL"
+            "linolenic acid": "0.05 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "unstated"
+  - id: "du2025-4"
+    odorant: "5-methyl-2-furancarboxaldehyde (5-methylfurfural)"
+    lever_class: "lipid"
+    lever: "added C18 fatty acid: none vs oleic vs linoleic vs linolenic acid"
+    focal: false
+    location: "Table 1, No. 29, p. 5"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "Blank cell in Table 1 keyed as not detected, no LOD printed; quantity by ratio to 1,2-dichlorobenzene internal standard; +- values as printed (three repeats)."
+    arms:
+      - label: "system GG"
+        lever_value: "none (control)"
+        value: 670.24
+        censor: none
+        limit: null
+        n: 3
+        sd: 97.38
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 145
+          time_min: 120
+          precursors:
+            "glutathione": "1 mmol in 5 mL"
+            "glucose": "1 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "system GGO"
+        lever_value: "oleic acid"
+        value: 100.31
+        censor: none
+        limit: null
+        n: 3
+        sd: 4.67
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 145
+          time_min: 120
+          precursors:
+            "glutathione": "1 mmol in 5 mL"
+            "glucose": "1 mmol in 5 mL"
+            "oleic acid": "0.05 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "system GGL"
+        lever_value: "linoleic acid"
+        value: 125.77
+        censor: none
+        limit: null
+        n: 3
+        sd: 16.6
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 145
+          time_min: 120
+          precursors:
+            "glutathione": "1 mmol in 5 mL"
+            "glucose": "1 mmol in 5 mL"
+            "linoleic acid": "0.05 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "system GGN"
+        lever_value: "linolenic acid"
+        value: 518.3
+        censor: none
+        limit: null
+        n: 3
+        sd: 30.53
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 145
+          time_min: 120
+          precursors:
+            "glutathione": "1 mmol in 5 mL"
+            "glucose": "1 mmol in 5 mL"
+            "linolenic acid": "0.05 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "unstated"
+  - id: "du2025-5"
+    odorant: "2-acetylthiazole"
+    lever_class: "lipid"
+    lever: "added C18 fatty acid: none vs oleic vs linoleic vs linolenic acid"
+    focal: false
+    location: "Table 1, No. 39, p. 5"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "Blank cell in Table 1 keyed as not detected, no LOD printed; quantity by ratio to 1,2-dichlorobenzene internal standard; +- values as printed (three repeats)."
+    arms:
+      - label: "system GG"
+        lever_value: "none (control)"
+        value: 86.11
+        censor: none
+        limit: null
+        n: 3
+        sd: 13.51
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 145
+          time_min: 120
+          precursors:
+            "glutathione": "1 mmol in 5 mL"
+            "glucose": "1 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "system GGO"
+        lever_value: "oleic acid"
+        value: 35.53
+        censor: none
+        limit: null
+        n: 3
+        sd: 1.07
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 145
+          time_min: 120
+          precursors:
+            "glutathione": "1 mmol in 5 mL"
+            "glucose": "1 mmol in 5 mL"
+            "oleic acid": "0.05 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "system GGL"
+        lever_value: "linoleic acid"
+        value: 90.7
+        censor: none
+        limit: null
+        n: 3
+        sd: 5.57
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 145
+          time_min: 120
+          precursors:
+            "glutathione": "1 mmol in 5 mL"
+            "glucose": "1 mmol in 5 mL"
+            "linoleic acid": "0.05 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "system GGN"
+        lever_value: "linolenic acid"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 145
+          time_min: 120
+          precursors:
+            "glutathione": "1 mmol in 5 mL"
+            "glucose": "1 mmol in 5 mL"
+            "linolenic acid": "0.05 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "unstated"
+  - id: "du2025-6"
+    odorant: "hexanal"
+    lever_class: "lipid"
+    lever: "added C18 fatty acid: none vs oleic vs linoleic vs linolenic acid"
+    focal: false
+    location: "Table 1, No. 45, p. 5"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "Blank cell in Table 1 keyed as not detected, no LOD printed; quantity by ratio to 1,2-dichlorobenzene internal standard; +- values as printed (three repeats)."
+    arms:
+      - label: "system GG"
+        lever_value: "none (control)"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 145
+          time_min: 120
+          precursors:
+            "glutathione": "1 mmol in 5 mL"
+            "glucose": "1 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "system GGO"
+        lever_value: "oleic acid"
+        value: 5.64
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.12
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 145
+          time_min: 120
+          precursors:
+            "glutathione": "1 mmol in 5 mL"
+            "glucose": "1 mmol in 5 mL"
+            "oleic acid": "0.05 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "system GGL"
+        lever_value: "linoleic acid"
+        value: 63.83
+        censor: none
+        limit: null
+        n: 3
+        sd: 1.56
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 145
+          time_min: 120
+          precursors:
+            "glutathione": "1 mmol in 5 mL"
+            "glucose": "1 mmol in 5 mL"
+            "linoleic acid": "0.05 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "system GGN"
+        lever_value: "linolenic acid"
+        value: 6.7
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.31
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 145
+          time_min: 120
+          precursors:
+            "glutathione": "1 mmol in 5 mL"
+            "glucose": "1 mmol in 5 mL"
+            "linolenic acid": "0.05 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "unstated"
+  - id: "du2025-7"
+    odorant: "octanal"
+    lever_class: "lipid"
+    lever: "added C18 fatty acid: none vs oleic vs linoleic vs linolenic acid"
+    focal: false
+    location: "Table 1, No. 46, p. 5"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "Blank cell in Table 1 keyed as not detected, no LOD printed; quantity by ratio to 1,2-dichlorobenzene internal standard; +- values as printed (three repeats)."
+    arms:
+      - label: "system GG"
+        lever_value: "none (control)"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 145
+          time_min: 120
+          precursors:
+            "glutathione": "1 mmol in 5 mL"
+            "glucose": "1 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "system GGO"
+        lever_value: "oleic acid"
+        value: 135.84
+        censor: none
+        limit: null
+        n: 3
+        sd: 20.63
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 145
+          time_min: 120
+          precursors:
+            "glutathione": "1 mmol in 5 mL"
+            "glucose": "1 mmol in 5 mL"
+            "oleic acid": "0.05 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "system GGL"
+        lever_value: "linoleic acid"
+        value: 23.15
+        censor: none
+        limit: null
+        n: 3
+        sd: 5.76
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 145
+          time_min: 120
+          precursors:
+            "glutathione": "1 mmol in 5 mL"
+            "glucose": "1 mmol in 5 mL"
+            "linoleic acid": "0.05 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "system GGN"
+        lever_value: "linolenic acid"
+        value: 25.0
+        censor: none
+        limit: null
+        n: 3
+        sd: 1.27
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 145
+          time_min: 120
+          precursors:
+            "glutathione": "1 mmol in 5 mL"
+            "glucose": "1 mmol in 5 mL"
+            "linolenic acid": "0.05 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "unstated"
+  - id: "du2025-8"
+    odorant: "nonanal"
+    lever_class: "lipid"
+    lever: "added C18 fatty acid: none vs oleic vs linoleic vs linolenic acid"
+    focal: false
+    location: "Table 1, No. 47, p. 5"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "Blank cell in Table 1 keyed as not detected, no LOD printed; quantity by ratio to 1,2-dichlorobenzene internal standard; +- values as printed (three repeats)."
+    arms:
+      - label: "system GG"
+        lever_value: "none (control)"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 145
+          time_min: 120
+          precursors:
+            "glutathione": "1 mmol in 5 mL"
+            "glucose": "1 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "system GGO"
+        lever_value: "oleic acid"
+        value: 216.69
+        censor: none
+        limit: null
+        n: 3
+        sd: 42.32
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 145
+          time_min: 120
+          precursors:
+            "glutathione": "1 mmol in 5 mL"
+            "glucose": "1 mmol in 5 mL"
+            "oleic acid": "0.05 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "system GGL"
+        lever_value: "linoleic acid"
+        value: 54.1
+        censor: none
+        limit: null
+        n: 3
+        sd: 3.11
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 145
+          time_min: 120
+          precursors:
+            "glutathione": "1 mmol in 5 mL"
+            "glucose": "1 mmol in 5 mL"
+            "linoleic acid": "0.05 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "system GGN"
+        lever_value: "linolenic acid"
+        value: 26.81
+        censor: none
+        limit: null
+        n: 3
+        sd: 1.23
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 145
+          time_min: 120
+          precursors:
+            "glutathione": "1 mmol in 5 mL"
+            "glucose": "1 mmol in 5 mL"
+            "linolenic acid": "0.05 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "unstated"
+  - id: "du2025-9"
+    odorant: "(E)-2-nonenal"
+    lever_class: "lipid"
+    lever: "added C18 fatty acid: none vs oleic vs linoleic vs linolenic acid"
+    focal: false
+    location: "Table 1, No. 49, p. 5"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "Blank cell in Table 1 keyed as not detected, no LOD printed; quantity by ratio to 1,2-dichlorobenzene internal standard; +- values as printed (three repeats)."
+    arms:
+      - label: "system GG"
+        lever_value: "none (control)"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 145
+          time_min: 120
+          precursors:
+            "glutathione": "1 mmol in 5 mL"
+            "glucose": "1 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "system GGO"
+        lever_value: "oleic acid"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 145
+          time_min: 120
+          precursors:
+            "glutathione": "1 mmol in 5 mL"
+            "glucose": "1 mmol in 5 mL"
+            "oleic acid": "0.05 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "system GGL"
+        lever_value: "linoleic acid"
+        value: 72.79
+        censor: none
+        limit: null
+        n: 3
+        sd: 11.39
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 145
+          time_min: 120
+          precursors:
+            "glutathione": "1 mmol in 5 mL"
+            "glucose": "1 mmol in 5 mL"
+            "linoleic acid": "0.05 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "system GGN"
+        lever_value: "linolenic acid"
+        value: 38.42
+        censor: none
+        limit: null
+        n: 3
+        sd: 1.56
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 145
+          time_min: 120
+          precursors:
+            "glutathione": "1 mmol in 5 mL"
+            "glucose": "1 mmol in 5 mL"
+            "linolenic acid": "0.05 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "unstated"
+  - id: "du2025-10"
+    odorant: "(E,E)-2,4-decadienal"
+    lever_class: "lipid"
+    lever: "added C18 fatty acid: none vs oleic vs linoleic vs linolenic acid"
+    focal: false
+    location: "Table 1, No. 50, p. 5"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "Blank cell in Table 1 keyed as not detected, no LOD printed; quantity by ratio to 1,2-dichlorobenzene internal standard; +- values as printed (three repeats)."
+    arms:
+      - label: "system GG"
+        lever_value: "none (control)"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 145
+          time_min: 120
+          precursors:
+            "glutathione": "1 mmol in 5 mL"
+            "glucose": "1 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "system GGO"
+        lever_value: "oleic acid"
+        value: 233.72
+        censor: none
+        limit: null
+        n: 3
+        sd: 20.67
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 145
+          time_min: 120
+          precursors:
+            "glutathione": "1 mmol in 5 mL"
+            "glucose": "1 mmol in 5 mL"
+            "oleic acid": "0.05 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "system GGL"
+        lever_value: "linoleic acid"
+        value: 114.65
+        censor: none
+        limit: null
+        n: 3
+        sd: 47.28
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 145
+          time_min: 120
+          precursors:
+            "glutathione": "1 mmol in 5 mL"
+            "glucose": "1 mmol in 5 mL"
+            "linoleic acid": "0.05 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "system GGN"
+        lever_value: "linolenic acid"
+        value: 17.32
+        censor: none
+        limit: null
+        n: 3
+        sd: 2.16
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 145
+          time_min: 120
+          precursors:
+            "glutathione": "1 mmol in 5 mL"
+            "glucose": "1 mmol in 5 mL"
+            "linolenic acid": "0.05 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "unstated"

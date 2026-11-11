@@ -1,0 +1,434 @@
+source: "elmore2002"
+pdf: "data/articles/elmore2002.pdf"
+reader: "b"
+scope_note: "Table 2 (2x2: methyl linoleate vs methyl alpha-linolenate, each with/without cysteine + ribose) keyed for listed lipid odorants; the cysteine/ribose-only mixture has no Table 2 column, so lipid added vs none cannot be keyed for them. Table 1 holds no listed odorant. Pairs with both arms censored (nd or tr) not keyed: 1-hexanol (ML vs MLn; MLn vs MLn+CR), heptanal (MLn vs MLn+CR), benzaldehyde (ML vs ML+CR), 1-octen-3-ol (MLn vs MLn+CR), (E,E)-2,4-decadienal (MLn vs MLn+CR). Values are ng-equivalents vs internal standard, response factor 1 (keyed as peak_area); 'tr' = <10 ng, '-' = nd, LOD 2 ng per 100 mL. Adding cysteine + ribose keyed as precursor dose (two precursors added together vs none)."
+contrasts:
+  # ---------- pentanal ----------
+  - id: "elmore2002-1"
+    odorant: "pentanal"
+    lever_class: "lipid"
+    lever: "methyl linoleate (18:2n-6) vs methyl alpha-linolenate (18:3n-3), no cysteine/ribose"
+    focal: true
+    quantity: amount
+    location: "Table 2, p. 1129"
+    digitised: false
+    unit: "ng in headspace of 100 mL reaction mixture (relative to 100 ng 1,2-dichlorobenzene IS)"
+    quant_type: "peak_area"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "18:2n-6", lever_value: "methyl linoleate", value: 72, censor: none, limit: null, n: 4, sd: 33, conditions: &eML {ph: 5.5, ph_basis: "label", temp_C: 140, time_min: 30, precursors: {"methyl linoleate": "0.5 mmol in 20 mL"}, buffer: "0.2 M pyrophosphate pH 5.5", matrix: "buffer", headspace: "sealed, unstated"}}
+      - {label: "18:3n-3", lever_value: "methyl alpha-linolenate", value: 45, censor: none, limit: null, n: 4, sd: 18, conditions: &eMLn {ph: 5.5, ph_basis: "label", temp_C: 140, time_min: 30, precursors: {"methyl alpha-linolenate": "0.5 mmol in 20 mL"}, buffer: "0.2 M pyrophosphate pH 5.5", matrix: "buffer", headspace: "sealed, unstated"}}
+  - id: "elmore2002-2"
+    odorant: "pentanal"
+    lever_class: "lipid"
+    lever: "methyl linoleate (18:2n-6) vs methyl alpha-linolenate (18:3n-3), with cysteine + ribose"
+    focal: true
+    quantity: amount
+    location: "Table 2, p. 1129"
+    digitised: false
+    unit: "ng in headspace of 100 mL reaction mixture (relative to 100 ng 1,2-dichlorobenzene IS)"
+    quant_type: "peak_area"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "18:2n-6 cysteine ribose", lever_value: "methyl linoleate", value: 11, censor: none, limit: null, n: 4, sd: 13, conditions: &eMLCR {ph: 5.5, ph_basis: "label", temp_C: 140, time_min: 30, precursors: {cysteine: "0.5 mmol in 20 mL", ribose: "0.5 mmol in 20 mL", "methyl linoleate": "0.5 mmol in 20 mL"}, buffer: "0.2 M pyrophosphate pH 5.5", matrix: "buffer", headspace: "sealed, unstated"}}
+      - {label: "18:3n-3 cysteine ribose", lever_value: "methyl alpha-linolenate", value: null, censor: nd_with_limit, limit: 2, n: 4, sd: null, conditions: &eMLnCR {ph: 5.5, ph_basis: "label", temp_C: 140, time_min: 30, precursors: {cysteine: "0.5 mmol in 20 mL", ribose: "0.5 mmol in 20 mL", "methyl alpha-linolenate": "0.5 mmol in 20 mL"}, buffer: "0.2 M pyrophosphate pH 5.5", matrix: "buffer", headspace: "sealed, unstated"}}
+  - id: "elmore2002-3"
+    odorant: "pentanal"
+    lever_class: "precursor dose"
+    lever: "cysteine + ribose (0.5 mmol each) added vs none, with methyl linoleate"
+    focal: true
+    quantity: amount
+    location: "Table 2, p. 1129"
+    digitised: false
+    unit: "ng in headspace of 100 mL reaction mixture (relative to 100 ng 1,2-dichlorobenzene IS)"
+    quant_type: "peak_area"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "18:2n-6", lever_value: "none", value: 72, censor: none, limit: null, n: 4, sd: 33, conditions: *eML}
+      - {label: "18:2n-6 cysteine ribose", lever_value: "cysteine + ribose 0.5 mmol each", value: 11, censor: none, limit: null, n: 4, sd: 13, conditions: *eMLCR}
+  - id: "elmore2002-4"
+    odorant: "pentanal"
+    lever_class: "precursor dose"
+    lever: "cysteine + ribose (0.5 mmol each) added vs none, with methyl alpha-linolenate"
+    focal: true
+    quantity: amount
+    location: "Table 2, p. 1129"
+    digitised: false
+    unit: "ng in headspace of 100 mL reaction mixture (relative to 100 ng 1,2-dichlorobenzene IS)"
+    quant_type: "peak_area"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "18:3n-3", lever_value: "none", value: 45, censor: none, limit: null, n: 4, sd: 18, conditions: *eMLn}
+      - {label: "18:3n-3 cysteine ribose", lever_value: "cysteine + ribose 0.5 mmol each", value: null, censor: nd_with_limit, limit: 2, n: 4, sd: null, conditions: *eMLnCR}
+  # ---------- hexanal ----------
+  - id: "elmore2002-5"
+    odorant: "hexanal"
+    lever_class: "lipid"
+    lever: "methyl linoleate (18:2n-6) vs methyl alpha-linolenate (18:3n-3), no cysteine/ribose"
+    focal: true
+    quantity: amount
+    location: "Table 2, p. 1129"
+    digitised: false
+    unit: "ng in headspace of 100 mL reaction mixture (relative to 100 ng 1,2-dichlorobenzene IS)"
+    quant_type: "peak_area"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "18:2n-6", lever_value: "methyl linoleate", value: 644, censor: none, limit: null, n: 4, sd: 302, conditions: *eML}
+      - {label: "18:3n-3", lever_value: "methyl alpha-linolenate", value: 12, censor: none, limit: null, n: 4, sd: 5, conditions: *eMLn}
+  - id: "elmore2002-6"
+    odorant: "hexanal"
+    lever_class: "lipid"
+    lever: "methyl linoleate (18:2n-6) vs methyl alpha-linolenate (18:3n-3), with cysteine + ribose"
+    focal: true
+    quantity: amount
+    location: "Table 2, p. 1129"
+    digitised: false
+    unit: "ng in headspace of 100 mL reaction mixture (relative to 100 ng 1,2-dichlorobenzene IS)"
+    quant_type: "peak_area"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "18:2n-6 cysteine ribose", lever_value: "methyl linoleate", value: 379, censor: none, limit: null, n: 4, sd: 430, conditions: *eMLCR}
+      - {label: "18:3n-3 cysteine ribose", lever_value: "methyl alpha-linolenate", value: null, censor: nd_with_limit, limit: 2, n: 4, sd: null, conditions: *eMLnCR}
+  - id: "elmore2002-7"
+    odorant: "hexanal"
+    lever_class: "precursor dose"
+    lever: "cysteine + ribose (0.5 mmol each) added vs none, with methyl linoleate"
+    focal: true
+    quantity: amount
+    location: "Table 2, p. 1129"
+    digitised: false
+    unit: "ng in headspace of 100 mL reaction mixture (relative to 100 ng 1,2-dichlorobenzene IS)"
+    quant_type: "peak_area"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "18:2n-6", lever_value: "none", value: 644, censor: none, limit: null, n: 4, sd: 302, conditions: *eML}
+      - {label: "18:2n-6 cysteine ribose", lever_value: "cysteine + ribose 0.5 mmol each", value: 379, censor: none, limit: null, n: 4, sd: 430, conditions: *eMLCR}
+  - id: "elmore2002-8"
+    odorant: "hexanal"
+    lever_class: "precursor dose"
+    lever: "cysteine + ribose (0.5 mmol each) added vs none, with methyl alpha-linolenate"
+    focal: true
+    quantity: amount
+    location: "Table 2, p. 1129"
+    digitised: false
+    unit: "ng in headspace of 100 mL reaction mixture (relative to 100 ng 1,2-dichlorobenzene IS)"
+    quant_type: "peak_area"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "18:3n-3", lever_value: "none", value: 12, censor: none, limit: null, n: 4, sd: 5, conditions: *eMLn}
+      - {label: "18:3n-3 cysteine ribose", lever_value: "cysteine + ribose 0.5 mmol each", value: null, censor: nd_with_limit, limit: 2, n: 4, sd: null, conditions: *eMLnCR}
+  # ---------- 1-hexanol ----------
+  - id: "elmore2002-9"
+    odorant: "1-hexanol"
+    lever_class: "lipid"
+    lever: "methyl linoleate (18:2n-6) vs methyl alpha-linolenate (18:3n-3), with cysteine + ribose"
+    focal: true
+    quantity: amount
+    location: "Table 2, p. 1129"
+    digitised: false
+    unit: "ng in headspace of 100 mL reaction mixture (relative to 100 ng 1,2-dichlorobenzene IS)"
+    quant_type: "peak_area"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "18:2n-6 cysteine ribose", lever_value: "methyl linoleate", value: 47, censor: none, limit: null, n: 4, sd: 28, conditions: *eMLCR}
+      - {label: "18:3n-3 cysteine ribose", lever_value: "methyl alpha-linolenate", value: null, censor: nd_with_limit, limit: 2, n: 4, sd: null, conditions: *eMLnCR}
+  - id: "elmore2002-10"
+    odorant: "1-hexanol"
+    lever_class: "precursor dose"
+    lever: "cysteine + ribose (0.5 mmol each) added vs none, with methyl linoleate"
+    focal: true
+    quantity: amount
+    location: "Table 2, p. 1129"
+    digitised: false
+    unit: "ng in headspace of 100 mL reaction mixture (relative to 100 ng 1,2-dichlorobenzene IS)"
+    quant_type: "peak_area"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "18:2n-6", lever_value: "none", value: null, censor: trace, limit: 10, n: 4, sd: null, conditions: *eML}
+      - {label: "18:2n-6 cysteine ribose", lever_value: "cysteine + ribose 0.5 mmol each", value: 47, censor: none, limit: null, n: 4, sd: 28, conditions: *eMLCR}
+  # ---------- heptanal ----------
+  - id: "elmore2002-11"
+    odorant: "heptanal"
+    lever_class: "lipid"
+    lever: "methyl linoleate (18:2n-6) vs methyl alpha-linolenate (18:3n-3), no cysteine/ribose"
+    focal: true
+    quantity: amount
+    location: "Table 2, p. 1129"
+    digitised: false
+    unit: "ng in headspace of 100 mL reaction mixture (relative to 100 ng 1,2-dichlorobenzene IS)"
+    quant_type: "peak_area"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "18:2n-6", lever_value: "methyl linoleate", value: 21, censor: none, limit: null, n: 4, sd: 9, conditions: *eML}
+      - {label: "18:3n-3", lever_value: "methyl alpha-linolenate", value: null, censor: nd_with_limit, limit: 2, n: 4, sd: null, conditions: *eMLn}
+  - id: "elmore2002-12"
+    odorant: "heptanal"
+    lever_class: "lipid"
+    lever: "methyl linoleate (18:2n-6) vs methyl alpha-linolenate (18:3n-3), with cysteine + ribose"
+    focal: true
+    quantity: amount
+    location: "Table 2, p. 1129"
+    digitised: false
+    unit: "ng in headspace of 100 mL reaction mixture (relative to 100 ng 1,2-dichlorobenzene IS)"
+    quant_type: "peak_area"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "18:2n-6 cysteine ribose", lever_value: "methyl linoleate", value: 21, censor: none, limit: null, n: 4, sd: 17, conditions: *eMLCR}
+      - {label: "18:3n-3 cysteine ribose", lever_value: "methyl alpha-linolenate", value: null, censor: nd_with_limit, limit: 2, n: 4, sd: null, conditions: *eMLnCR}
+  - id: "elmore2002-13"
+    odorant: "heptanal"
+    lever_class: "precursor dose"
+    lever: "cysteine + ribose (0.5 mmol each) added vs none, with methyl linoleate"
+    focal: true
+    quantity: amount
+    location: "Table 2, p. 1129"
+    digitised: false
+    unit: "ng in headspace of 100 mL reaction mixture (relative to 100 ng 1,2-dichlorobenzene IS)"
+    quant_type: "peak_area"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "18:2n-6", lever_value: "none", value: 21, censor: none, limit: null, n: 4, sd: 9, conditions: *eML}
+      - {label: "18:2n-6 cysteine ribose", lever_value: "cysteine + ribose 0.5 mmol each", value: 21, censor: none, limit: null, n: 4, sd: 17, conditions: *eMLCR}
+  # ---------- benzaldehyde ----------
+  - id: "elmore2002-14"
+    odorant: "benzaldehyde"
+    lever_class: "lipid"
+    lever: "methyl linoleate (18:2n-6) vs methyl alpha-linolenate (18:3n-3), no cysteine/ribose"
+    focal: true
+    quantity: amount
+    location: "Table 2, p. 1129"
+    digitised: false
+    unit: "ng in headspace of 100 mL reaction mixture (relative to 100 ng 1,2-dichlorobenzene IS)"
+    quant_type: "peak_area"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "18:2n-6", lever_value: "methyl linoleate", value: null, censor: trace, limit: 10, n: 4, sd: null, conditions: *eML}
+      - {label: "18:3n-3", lever_value: "methyl alpha-linolenate", value: 185, censor: none, limit: null, n: 4, sd: 54, conditions: *eMLn}
+  - id: "elmore2002-15"
+    odorant: "benzaldehyde"
+    lever_class: "lipid"
+    lever: "methyl linoleate (18:2n-6) vs methyl alpha-linolenate (18:3n-3), with cysteine + ribose"
+    focal: true
+    quantity: amount
+    location: "Table 2, p. 1129"
+    digitised: false
+    unit: "ng in headspace of 100 mL reaction mixture (relative to 100 ng 1,2-dichlorobenzene IS)"
+    quant_type: "peak_area"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "18:2n-6 cysteine ribose", lever_value: "methyl linoleate", value: null, censor: trace, limit: 10, n: 4, sd: null, conditions: *eMLCR}
+      - {label: "18:3n-3 cysteine ribose", lever_value: "methyl alpha-linolenate", value: 34, censor: none, limit: null, n: 4, sd: 15, conditions: *eMLnCR}
+  - id: "elmore2002-16"
+    odorant: "benzaldehyde"
+    lever_class: "precursor dose"
+    lever: "cysteine + ribose (0.5 mmol each) added vs none, with methyl alpha-linolenate"
+    focal: true
+    quantity: amount
+    location: "Table 2, p. 1129"
+    digitised: false
+    unit: "ng in headspace of 100 mL reaction mixture (relative to 100 ng 1,2-dichlorobenzene IS)"
+    quant_type: "peak_area"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "18:3n-3", lever_value: "none", value: 185, censor: none, limit: null, n: 4, sd: 54, conditions: *eMLn}
+      - {label: "18:3n-3 cysteine ribose", lever_value: "cysteine + ribose 0.5 mmol each", value: 34, censor: none, limit: null, n: 4, sd: 15, conditions: *eMLnCR}
+  # ---------- 1-octen-3-ol ----------
+  - id: "elmore2002-17"
+    odorant: "1-octen-3-ol"
+    lever_class: "lipid"
+    lever: "methyl linoleate (18:2n-6) vs methyl alpha-linolenate (18:3n-3), no cysteine/ribose"
+    focal: true
+    quantity: amount
+    location: "Table 2, p. 1129"
+    digitised: false
+    unit: "ng in headspace of 100 mL reaction mixture (relative to 100 ng 1,2-dichlorobenzene IS)"
+    quant_type: "peak_area"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "18:2n-6", lever_value: "methyl linoleate", value: 51, censor: none, limit: null, n: 4, sd: 23, conditions: *eML}
+      - {label: "18:3n-3", lever_value: "methyl alpha-linolenate", value: null, censor: nd_with_limit, limit: 2, n: 4, sd: null, conditions: *eMLn}
+  - id: "elmore2002-18"
+    odorant: "1-octen-3-ol"
+    lever_class: "lipid"
+    lever: "methyl linoleate (18:2n-6) vs methyl alpha-linolenate (18:3n-3), with cysteine + ribose"
+    focal: true
+    quantity: amount
+    location: "Table 2, p. 1129"
+    digitised: false
+    unit: "ng in headspace of 100 mL reaction mixture (relative to 100 ng 1,2-dichlorobenzene IS)"
+    quant_type: "peak_area"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "18:2n-6 cysteine ribose", lever_value: "methyl linoleate", value: 219, censor: none, limit: null, n: 4, sd: 175, conditions: *eMLCR}
+      - {label: "18:3n-3 cysteine ribose", lever_value: "methyl alpha-linolenate", value: null, censor: trace, limit: 10, n: 4, sd: null, conditions: *eMLnCR}
+  - id: "elmore2002-19"
+    odorant: "1-octen-3-ol"
+    lever_class: "precursor dose"
+    lever: "cysteine + ribose (0.5 mmol each) added vs none, with methyl linoleate"
+    focal: true
+    quantity: amount
+    location: "Table 2, p. 1129"
+    digitised: false
+    unit: "ng in headspace of 100 mL reaction mixture (relative to 100 ng 1,2-dichlorobenzene IS)"
+    quant_type: "peak_area"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "18:2n-6", lever_value: "none", value: 51, censor: none, limit: null, n: 4, sd: 23, conditions: *eML}
+      - {label: "18:2n-6 cysteine ribose", lever_value: "cysteine + ribose 0.5 mmol each", value: 219, censor: none, limit: null, n: 4, sd: 175, conditions: *eMLCR}
+  # ---------- 2-pentylfuran ----------
+  - id: "elmore2002-20"
+    odorant: "2-pentylfuran"
+    lever_class: "lipid"
+    lever: "methyl linoleate (18:2n-6) vs methyl alpha-linolenate (18:3n-3), no cysteine/ribose"
+    focal: true
+    quantity: amount
+    location: "Table 2, p. 1129"
+    digitised: false
+    unit: "ng in headspace of 100 mL reaction mixture (relative to 100 ng 1,2-dichlorobenzene IS)"
+    quant_type: "peak_area"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "18:2n-6", lever_value: "methyl linoleate", value: 315, censor: none, limit: null, n: 4, sd: 161, conditions: *eML}
+      - {label: "18:3n-3", lever_value: "methyl alpha-linolenate", value: 17, censor: none, limit: null, n: 4, sd: 2, conditions: *eMLn}
+  - id: "elmore2002-21"
+    odorant: "2-pentylfuran"
+    lever_class: "lipid"
+    lever: "methyl linoleate (18:2n-6) vs methyl alpha-linolenate (18:3n-3), with cysteine + ribose"
+    focal: true
+    quantity: amount
+    location: "Table 2, p. 1129"
+    digitised: false
+    unit: "ng in headspace of 100 mL reaction mixture (relative to 100 ng 1,2-dichlorobenzene IS)"
+    quant_type: "peak_area"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "18:2n-6 cysteine ribose", lever_value: "methyl linoleate", value: 1736, censor: none, limit: null, n: 4, sd: 1264, conditions: *eMLCR}
+      - {label: "18:3n-3 cysteine ribose", lever_value: "methyl alpha-linolenate", value: 47, censor: none, limit: null, n: 4, sd: 30, conditions: *eMLnCR}
+  - id: "elmore2002-22"
+    odorant: "2-pentylfuran"
+    lever_class: "precursor dose"
+    lever: "cysteine + ribose (0.5 mmol each) added vs none, with methyl linoleate"
+    focal: true
+    quantity: amount
+    location: "Table 2, p. 1129"
+    digitised: false
+    unit: "ng in headspace of 100 mL reaction mixture (relative to 100 ng 1,2-dichlorobenzene IS)"
+    quant_type: "peak_area"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "18:2n-6", lever_value: "none", value: 315, censor: none, limit: null, n: 4, sd: 161, conditions: *eML}
+      - {label: "18:2n-6 cysteine ribose", lever_value: "cysteine + ribose 0.5 mmol each", value: 1736, censor: none, limit: null, n: 4, sd: 1264, conditions: *eMLCR}
+  - id: "elmore2002-23"
+    odorant: "2-pentylfuran"
+    lever_class: "precursor dose"
+    lever: "cysteine + ribose (0.5 mmol each) added vs none, with methyl alpha-linolenate"
+    focal: true
+    quantity: amount
+    location: "Table 2, p. 1129"
+    digitised: false
+    unit: "ng in headspace of 100 mL reaction mixture (relative to 100 ng 1,2-dichlorobenzene IS)"
+    quant_type: "peak_area"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "18:3n-3", lever_value: "none", value: 17, censor: none, limit: null, n: 4, sd: 2, conditions: *eMLn}
+      - {label: "18:3n-3 cysteine ribose", lever_value: "cysteine + ribose 0.5 mmol each", value: 47, censor: none, limit: null, n: 4, sd: 30, conditions: *eMLnCR}
+  # ---------- (E)-2-octenal ----------
+  - id: "elmore2002-24"
+    odorant: "(E)-2-octenal"
+    lever_class: "lipid"
+    lever: "methyl linoleate (18:2n-6) vs methyl alpha-linolenate (18:3n-3), no cysteine/ribose"
+    focal: true
+    quantity: amount
+    location: "Table 2, p. 1129"
+    digitised: false
+    unit: "ng in headspace of 100 mL reaction mixture (relative to 100 ng 1,2-dichlorobenzene IS)"
+    quant_type: "peak_area"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "18:2n-6", lever_value: "methyl linoleate", value: 50, censor: none, limit: null, n: 4, sd: 33, conditions: *eML}
+      - {label: "18:3n-3", lever_value: "methyl alpha-linolenate", value: 17, censor: none, limit: null, n: 4, sd: 6, conditions: *eMLn}
+  - id: "elmore2002-25"
+    odorant: "(E)-2-octenal"
+    lever_class: "lipid"
+    lever: "methyl linoleate (18:2n-6) vs methyl alpha-linolenate (18:3n-3), with cysteine + ribose"
+    focal: true
+    quantity: amount
+    location: "Table 2, p. 1129"
+    digitised: false
+    unit: "ng in headspace of 100 mL reaction mixture (relative to 100 ng 1,2-dichlorobenzene IS)"
+    quant_type: "peak_area"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "18:2n-6 cysteine ribose", lever_value: "methyl linoleate", value: 400, censor: none, limit: null, n: 4, sd: 531, conditions: *eMLCR}
+      - {label: "18:3n-3 cysteine ribose", lever_value: "methyl alpha-linolenate", value: 10, censor: none, limit: null, n: 4, sd: 6, conditions: *eMLnCR}
+  - id: "elmore2002-26"
+    odorant: "(E)-2-octenal"
+    lever_class: "precursor dose"
+    lever: "cysteine + ribose (0.5 mmol each) added vs none, with methyl linoleate"
+    focal: true
+    quantity: amount
+    location: "Table 2, p. 1129"
+    digitised: false
+    unit: "ng in headspace of 100 mL reaction mixture (relative to 100 ng 1,2-dichlorobenzene IS)"
+    quant_type: "peak_area"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "18:2n-6", lever_value: "none", value: 50, censor: none, limit: null, n: 4, sd: 33, conditions: *eML}
+      - {label: "18:2n-6 cysteine ribose", lever_value: "cysteine + ribose 0.5 mmol each", value: 400, censor: none, limit: null, n: 4, sd: 531, conditions: *eMLCR}
+  - id: "elmore2002-27"
+    odorant: "(E)-2-octenal"
+    lever_class: "precursor dose"
+    lever: "cysteine + ribose (0.5 mmol each) added vs none, with methyl alpha-linolenate"
+    focal: true
+    quantity: amount
+    location: "Table 2, p. 1129"
+    digitised: false
+    unit: "ng in headspace of 100 mL reaction mixture (relative to 100 ng 1,2-dichlorobenzene IS)"
+    quant_type: "peak_area"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "18:3n-3", lever_value: "none", value: 17, censor: none, limit: null, n: 4, sd: 6, conditions: *eMLn}
+      - {label: "18:3n-3 cysteine ribose", lever_value: "cysteine + ribose 0.5 mmol each", value: 10, censor: none, limit: null, n: 4, sd: 6, conditions: *eMLnCR}
+  # ---------- (E,E)-2,4-decadienal ----------
+  - id: "elmore2002-28"
+    odorant: "(E,E)-2,4-decadienal"
+    lever_class: "lipid"
+    lever: "methyl linoleate (18:2n-6) vs methyl alpha-linolenate (18:3n-3), no cysteine/ribose"
+    focal: true
+    quantity: amount
+    location: "Table 2, p. 1129"
+    digitised: false
+    unit: "ng in headspace of 100 mL reaction mixture (relative to 100 ng 1,2-dichlorobenzene IS)"
+    quant_type: "peak_area"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "18:2n-6", lever_value: "methyl linoleate", value: 29, censor: none, limit: null, n: 4, sd: 8, conditions: *eML}
+      - {label: "18:3n-3", lever_value: "methyl alpha-linolenate", value: null, censor: trace, limit: 10, n: 4, sd: null, conditions: *eMLn}
+  - id: "elmore2002-29"
+    odorant: "(E,E)-2,4-decadienal"
+    lever_class: "lipid"
+    lever: "methyl linoleate (18:2n-6) vs methyl alpha-linolenate (18:3n-3), with cysteine + ribose"
+    focal: true
+    quantity: amount
+    location: "Table 2, p. 1129"
+    digitised: false
+    unit: "ng in headspace of 100 mL reaction mixture (relative to 100 ng 1,2-dichlorobenzene IS)"
+    quant_type: "peak_area"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "18:2n-6 cysteine ribose", lever_value: "methyl linoleate", value: 115, censor: none, limit: null, n: 4, sd: 65, conditions: *eMLCR}
+      - {label: "18:3n-3 cysteine ribose", lever_value: "methyl alpha-linolenate", value: null, censor: trace, limit: 10, n: 4, sd: null, conditions: *eMLnCR}
+  - id: "elmore2002-30"
+    odorant: "(E,E)-2,4-decadienal"
+    lever_class: "precursor dose"
+    lever: "cysteine + ribose (0.5 mmol each) added vs none, with methyl linoleate"
+    focal: true
+    quantity: amount
+    location: "Table 2, p. 1129"
+    digitised: false
+    unit: "ng in headspace of 100 mL reaction mixture (relative to 100 ng 1,2-dichlorobenzene IS)"
+    quant_type: "peak_area"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "18:2n-6", lever_value: "none", value: 29, censor: none, limit: null, n: 4, sd: 8, conditions: *eML}
+      - {label: "18:2n-6 cysteine ribose", lever_value: "cysteine + ribose 0.5 mmol each", value: 115, censor: none, limit: null, n: 4, sd: 65, conditions: *eMLCR}

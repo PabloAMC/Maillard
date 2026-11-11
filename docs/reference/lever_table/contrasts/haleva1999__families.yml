@@ -1,0 +1,5519 @@
+source: haleva1999
+pdf: data/articles/haleva1999.pdf
+reader: resolved
+scope_note: 'Re-read (third reader) of every contrast: the comparison matched none because the readers named the odorants
+  differently (MF vs 5-methylfurfural; Furaneol vs Furaneol (HDMF)); odorants now carry the registry names 5-Methylfurfural
+  and DMHF. Table 1 (MF, mg/L, mean +/- SEM n = 3; SEM not keyed as sd; ND without limit) values agreed and were confirmed.
+  Fig. 1 re-digitised from a 500 dpi render with pixel-located ticks (A and C log axes, B linear); both readers had read the
+  log panels too low (pH 5 Rhm+Arg + Cys ~23-28, not 17-20 mg/L; pH 7 Rhm + Cys 5/10 mM ~6, not 3 mg/L), so those values are
+  replaced. The shared no-thiol control drawn in both pH 5 panels is keyed once at 9.3 mg/L. Fig. 1A pH 5 rhamnose-only bars
+  absent: text says Furaneol not detected with rhamnose alone, <0.5 mg/L with 5 and 10 mM Cys; absent bars nd_no_limit (the
+  all-ND AcCys ladder and the 1 mM pair are kept; they enter no estimate). Fig. 2 is Furaneol (20 mg/L) ADDED to sugar-free
+  buffer pH 3.5 and heated 48 h at 70 C with thiols, the amount remaining keyed as system fed_odorant, quantity amount (reader
+  B had keyed it rate). HMF out of scope; Rhm+Arg pH 7 and glucose Furaneol are data not shown. Sulfur-source levels: cysteine,
+  n-acetylcysteine.'
+contrasts:
+- id: haleva1999-1
+  odorant: 5-Methylfurfural
+  lever_class: precursor dose
+  lever: L-cysteine concentration (0, 1, 5, 10 mM), pH 3, Rhm
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 3 Rhm, no thiols
+    lever_value: 0
+    value: 3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 3 Rhm, 1 mM Cys
+    lever_value: 1
+    value: 1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        L-cysteine: 1 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 3 Rhm, 5 mM Cys
+    lever_value: 5
+    value: 0.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        L-cysteine: 5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 3 Rhm, 10 mM Cys
+    lever_value: 10
+    value: 0.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        L-cysteine: 10 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-2
+  odorant: 5-Methylfurfural
+  lever_class: precursor dose
+  lever: N-acetyl-L-cysteine concentration (0, 1, 5, 10 mM), pH 3, Rhm
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 3 Rhm, no thiols
+    lever_value: 0
+    value: 3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 3 Rhm, 1 mM AcCys
+    lever_value: 1
+    value: 1.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        N-acetyl-L-cysteine: 1 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 3 Rhm, 5 mM AcCys
+    lever_value: 5
+    value: 1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        N-acetyl-L-cysteine: 5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 3 Rhm, 10 mM AcCys
+    lever_value: 10
+    value: 0.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        N-acetyl-L-cysteine: 10 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-3
+  odorant: 5-Methylfurfural
+  lever_class: precursor dose
+  lever: L-cysteine concentration (0, 1, 5, 10 mM), pH 3, Rhm+Arg
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 3 Rhm+Arg, no thiols
+    lever_value: 0
+    value: 27
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 3 Rhm+Arg, 1 mM Cys
+    lever_value: 1
+    value: 7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        L-cysteine: 1 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 3 Rhm+Arg, 5 mM Cys
+    lever_value: 5
+    value: 1.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        L-cysteine: 5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 3 Rhm+Arg, 10 mM Cys
+    lever_value: 10
+    value: 1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        L-cysteine: 10 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-4
+  odorant: 5-Methylfurfural
+  lever_class: precursor dose
+  lever: N-acetyl-L-cysteine concentration (0, 1, 5, 10 mM), pH 3, Rhm+Arg
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 3 Rhm+Arg, no thiols
+    lever_value: 0
+    value: 27
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 3 Rhm+Arg, 1 mM AcCys
+    lever_value: 1
+    value: 12
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        N-acetyl-L-cysteine: 1 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 3 Rhm+Arg, 5 mM AcCys
+    lever_value: 5
+    value: 7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        N-acetyl-L-cysteine: 5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 3 Rhm+Arg, 10 mM AcCys
+    lever_value: 10
+    value: 4.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        N-acetyl-L-cysteine: 10 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-5
+  odorant: 5-Methylfurfural
+  lever_class: precursor dose
+  lever: L-cysteine concentration (0, 1, 5, 10 mM), pH 5, Rhm
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 5 Rhm, no thiols
+    lever_value: 0
+    value: 2.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm, 1 mM Cys
+    lever_value: 1
+    value: 0.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        L-cysteine: 1 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm, 5 mM Cys
+    lever_value: 5
+    value: 0.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        L-cysteine: 5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm, 10 mM Cys
+    lever_value: 10
+    value: 0.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        L-cysteine: 10 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-6
+  odorant: 5-Methylfurfural
+  lever_class: precursor dose
+  lever: N-acetyl-L-cysteine concentration (0, 1, 5, 10 mM), pH 5, Rhm
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 5 Rhm, no thiols
+    lever_value: 0
+    value: 2.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm, 1 mM AcCys
+    lever_value: 1
+    value: 1.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        N-acetyl-L-cysteine: 1 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm, 5 mM AcCys
+    lever_value: 5
+    value: 0.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        N-acetyl-L-cysteine: 5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm, 10 mM AcCys
+    lever_value: 10
+    value: 0.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        N-acetyl-L-cysteine: 10 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-7
+  odorant: 5-Methylfurfural
+  lever_class: precursor dose
+  lever: L-cysteine concentration (0, 1, 5, 10 mM), pH 5, Rhm+Arg
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 5 Rhm+Arg, no thiols
+    lever_value: 0
+    value: 8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm+Arg, 1 mM Cys
+    lever_value: 1
+    value: 2.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        L-cysteine: 1 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm+Arg, 5 mM Cys
+    lever_value: 5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        L-cysteine: 5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm+Arg, 10 mM Cys
+    lever_value: 10
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        L-cysteine: 10 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-8
+  odorant: 5-Methylfurfural
+  lever_class: precursor dose
+  lever: N-acetyl-L-cysteine concentration (0, 1, 5, 10 mM), pH 5, Rhm+Arg
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 5 Rhm+Arg, no thiols
+    lever_value: 0
+    value: 8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm+Arg, 1 mM AcCys
+    lever_value: 1
+    value: 4.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        N-acetyl-L-cysteine: 1 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm+Arg, 5 mM AcCys
+    lever_value: 5
+    value: 4.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        N-acetyl-L-cysteine: 5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm+Arg, 10 mM AcCys
+    lever_value: 10
+    value: 2.6
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        N-acetyl-L-cysteine: 10 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-9
+  odorant: 5-Methylfurfural
+  lever_class: sulfur source
+  lever: L-cysteine vs N-acetyl-L-cysteine at 1 mM, pH 3, Rhm
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 3 Rhm, 1 mM Cys
+    lever_value: cysteine
+    value: 1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        L-cysteine: 1 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 3 Rhm, 1 mM AcCys
+    lever_value: n-acetylcysteine
+    value: 1.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        N-acetyl-L-cysteine: 1 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-10
+  odorant: 5-Methylfurfural
+  lever_class: sulfur source
+  lever: L-cysteine vs N-acetyl-L-cysteine at 5 mM, pH 3, Rhm
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 3 Rhm, 5 mM Cys
+    lever_value: cysteine
+    value: 0.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        L-cysteine: 5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 3 Rhm, 5 mM AcCys
+    lever_value: n-acetylcysteine
+    value: 1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        N-acetyl-L-cysteine: 5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-11
+  odorant: 5-Methylfurfural
+  lever_class: sulfur source
+  lever: L-cysteine vs N-acetyl-L-cysteine at 10 mM, pH 3, Rhm
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 3 Rhm, 10 mM Cys
+    lever_value: cysteine
+    value: 0.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        L-cysteine: 10 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 3 Rhm, 10 mM AcCys
+    lever_value: n-acetylcysteine
+    value: 0.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        N-acetyl-L-cysteine: 10 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-12
+  odorant: 5-Methylfurfural
+  lever_class: sulfur source
+  lever: L-cysteine vs N-acetyl-L-cysteine at 1 mM, pH 3, Rhm+Arg
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 3 Rhm+Arg, 1 mM Cys
+    lever_value: cysteine
+    value: 7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        L-cysteine: 1 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 3 Rhm+Arg, 1 mM AcCys
+    lever_value: n-acetylcysteine
+    value: 12
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        N-acetyl-L-cysteine: 1 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-13
+  odorant: 5-Methylfurfural
+  lever_class: sulfur source
+  lever: L-cysteine vs N-acetyl-L-cysteine at 5 mM, pH 3, Rhm+Arg
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 3 Rhm+Arg, 5 mM Cys
+    lever_value: cysteine
+    value: 1.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        L-cysteine: 5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 3 Rhm+Arg, 5 mM AcCys
+    lever_value: n-acetylcysteine
+    value: 7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        N-acetyl-L-cysteine: 5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-14
+  odorant: 5-Methylfurfural
+  lever_class: sulfur source
+  lever: L-cysteine vs N-acetyl-L-cysteine at 10 mM, pH 3, Rhm+Arg
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 3 Rhm+Arg, 10 mM Cys
+    lever_value: cysteine
+    value: 1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        L-cysteine: 10 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 3 Rhm+Arg, 10 mM AcCys
+    lever_value: n-acetylcysteine
+    value: 4.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        N-acetyl-L-cysteine: 10 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-15
+  odorant: 5-Methylfurfural
+  lever_class: sulfur source
+  lever: L-cysteine vs N-acetyl-L-cysteine at 1 mM, pH 5, Rhm
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 5 Rhm, 1 mM Cys
+    lever_value: cysteine
+    value: 0.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        L-cysteine: 1 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm, 1 mM AcCys
+    lever_value: n-acetylcysteine
+    value: 1.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        N-acetyl-L-cysteine: 1 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-16
+  odorant: 5-Methylfurfural
+  lever_class: sulfur source
+  lever: L-cysteine vs N-acetyl-L-cysteine at 5 mM, pH 5, Rhm
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 5 Rhm, 5 mM Cys
+    lever_value: cysteine
+    value: 0.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        L-cysteine: 5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm, 5 mM AcCys
+    lever_value: n-acetylcysteine
+    value: 0.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        N-acetyl-L-cysteine: 5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-17
+  odorant: 5-Methylfurfural
+  lever_class: sulfur source
+  lever: L-cysteine vs N-acetyl-L-cysteine at 10 mM, pH 5, Rhm
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 5 Rhm, 10 mM Cys
+    lever_value: cysteine
+    value: 0.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        L-cysteine: 10 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm, 10 mM AcCys
+    lever_value: n-acetylcysteine
+    value: 0.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        N-acetyl-L-cysteine: 10 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-18
+  odorant: 5-Methylfurfural
+  lever_class: sulfur source
+  lever: L-cysteine vs N-acetyl-L-cysteine at 1 mM, pH 5, Rhm+Arg
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 5 Rhm+Arg, 1 mM Cys
+    lever_value: cysteine
+    value: 2.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        L-cysteine: 1 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm+Arg, 1 mM AcCys
+    lever_value: n-acetylcysteine
+    value: 4.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        N-acetyl-L-cysteine: 1 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-19
+  odorant: 5-Methylfurfural
+  lever_class: sulfur source
+  lever: L-cysteine vs N-acetyl-L-cysteine at 5 mM, pH 5, Rhm+Arg
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 5 Rhm+Arg, 5 mM Cys
+    lever_value: cysteine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        L-cysteine: 5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm+Arg, 5 mM AcCys
+    lever_value: n-acetylcysteine
+    value: 4.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        N-acetyl-L-cysteine: 5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-20
+  odorant: 5-Methylfurfural
+  lever_class: sulfur source
+  lever: L-cysteine vs N-acetyl-L-cysteine at 10 mM, pH 5, Rhm+Arg
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 5 Rhm+Arg, 10 mM Cys
+    lever_value: cysteine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        L-cysteine: 10 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm+Arg, 10 mM AcCys
+    lever_value: n-acetylcysteine
+    value: 2.6
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        N-acetyl-L-cysteine: 10 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-21
+  odorant: 5-Methylfurfural
+  lever_class: pH
+  lever: buffer pH (3, 5), Rhm, no thiols
+  focal: false
+  location: Table 1
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 3 Rhm, no thiols
+    lever_value: 3.0
+    value: 3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm, no thiols
+    lever_value: 5.0
+    value: 2.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-22
+  odorant: 5-Methylfurfural
+  lever_class: pH
+  lever: buffer pH (3, 5), Rhm, 1 mM Cys
+  focal: false
+  location: Table 1
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 3 Rhm, 1 mM Cys
+    lever_value: 3.0
+    value: 1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        L-cysteine: 1 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm, 1 mM Cys
+    lever_value: 5.0
+    value: 0.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        L-cysteine: 1 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-23
+  odorant: 5-Methylfurfural
+  lever_class: pH
+  lever: buffer pH (3, 5), Rhm, 5 mM Cys
+  focal: false
+  location: Table 1
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 3 Rhm, 5 mM Cys
+    lever_value: 3.0
+    value: 0.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        L-cysteine: 5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm, 5 mM Cys
+    lever_value: 5.0
+    value: 0.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        L-cysteine: 5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-24
+  odorant: 5-Methylfurfural
+  lever_class: pH
+  lever: buffer pH (3, 5), Rhm, 10 mM Cys
+  focal: false
+  location: Table 1
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 3 Rhm, 10 mM Cys
+    lever_value: 3.0
+    value: 0.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        L-cysteine: 10 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm, 10 mM Cys
+    lever_value: 5.0
+    value: 0.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        L-cysteine: 10 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-25
+  odorant: 5-Methylfurfural
+  lever_class: pH
+  lever: buffer pH (3, 5), Rhm, 1 mM AcCys
+  focal: false
+  location: Table 1
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 3 Rhm, 1 mM AcCys
+    lever_value: 3.0
+    value: 1.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        N-acetyl-L-cysteine: 1 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm, 1 mM AcCys
+    lever_value: 5.0
+    value: 1.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        N-acetyl-L-cysteine: 1 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-26
+  odorant: 5-Methylfurfural
+  lever_class: pH
+  lever: buffer pH (3, 5), Rhm, 5 mM AcCys
+  focal: false
+  location: Table 1
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 3 Rhm, 5 mM AcCys
+    lever_value: 3.0
+    value: 1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        N-acetyl-L-cysteine: 5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm, 5 mM AcCys
+    lever_value: 5.0
+    value: 0.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        N-acetyl-L-cysteine: 5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-27
+  odorant: 5-Methylfurfural
+  lever_class: pH
+  lever: buffer pH (3, 5), Rhm, 10 mM AcCys
+  focal: false
+  location: Table 1
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 3 Rhm, 10 mM AcCys
+    lever_value: 3.0
+    value: 0.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        N-acetyl-L-cysteine: 10 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm, 10 mM AcCys
+    lever_value: 5.0
+    value: 0.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        N-acetyl-L-cysteine: 10 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-28
+  odorant: 5-Methylfurfural
+  lever_class: pH
+  lever: buffer pH (3, 5), Rhm+Arg, no thiols
+  focal: false
+  location: Table 1
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 3 Rhm+Arg, no thiols
+    lever_value: 3.0
+    value: 27
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm+Arg, no thiols
+    lever_value: 5.0
+    value: 8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-29
+  odorant: 5-Methylfurfural
+  lever_class: pH
+  lever: buffer pH (3, 5), Rhm+Arg, 1 mM Cys
+  focal: false
+  location: Table 1
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 3 Rhm+Arg, 1 mM Cys
+    lever_value: 3.0
+    value: 7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        L-cysteine: 1 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm+Arg, 1 mM Cys
+    lever_value: 5.0
+    value: 2.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        L-cysteine: 1 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-30
+  odorant: 5-Methylfurfural
+  lever_class: pH
+  lever: buffer pH (3, 5), Rhm+Arg, 5 mM Cys
+  focal: false
+  location: Table 1
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 3 Rhm+Arg, 5 mM Cys
+    lever_value: 3.0
+    value: 1.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        L-cysteine: 5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm+Arg, 5 mM Cys
+    lever_value: 5.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        L-cysteine: 5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-31
+  odorant: 5-Methylfurfural
+  lever_class: pH
+  lever: buffer pH (3, 5), Rhm+Arg, 10 mM Cys
+  focal: false
+  location: Table 1
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 3 Rhm+Arg, 10 mM Cys
+    lever_value: 3.0
+    value: 1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        L-cysteine: 10 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm+Arg, 10 mM Cys
+    lever_value: 5.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        L-cysteine: 10 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-32
+  odorant: 5-Methylfurfural
+  lever_class: pH
+  lever: buffer pH (3, 5), Rhm+Arg, 1 mM AcCys
+  focal: false
+  location: Table 1
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 3 Rhm+Arg, 1 mM AcCys
+    lever_value: 3.0
+    value: 12
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        N-acetyl-L-cysteine: 1 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm+Arg, 1 mM AcCys
+    lever_value: 5.0
+    value: 4.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        N-acetyl-L-cysteine: 1 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-33
+  odorant: 5-Methylfurfural
+  lever_class: pH
+  lever: buffer pH (3, 5), Rhm+Arg, 5 mM AcCys
+  focal: false
+  location: Table 1
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 3 Rhm+Arg, 5 mM AcCys
+    lever_value: 3.0
+    value: 7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        N-acetyl-L-cysteine: 5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm+Arg, 5 mM AcCys
+    lever_value: 5.0
+    value: 4.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        N-acetyl-L-cysteine: 5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-34
+  odorant: 5-Methylfurfural
+  lever_class: pH
+  lever: buffer pH (3, 5), Rhm+Arg, 10 mM AcCys
+  focal: false
+  location: Table 1
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 3 Rhm+Arg, 10 mM AcCys
+    lever_value: 3.0
+    value: 4.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        N-acetyl-L-cysteine: 10 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm+Arg, 10 mM AcCys
+    lever_value: 5.0
+    value: 2.6
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        N-acetyl-L-cysteine: 10 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-35
+  odorant: 5-Methylfurfural
+  lever_class: precursor dose
+  lever: arginine added (0 vs 55 mM) to rhamnose, pH 3, no thiols
+  focal: false
+  location: Table 1
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 3 Rhm, no thiols
+    lever_value: 0
+    value: 3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 3 Rhm+Arg, no thiols
+    lever_value: 55
+    value: 27
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-36
+  odorant: 5-Methylfurfural
+  lever_class: precursor dose
+  lever: arginine added (0 vs 55 mM) to rhamnose, pH 3, 1 mM Cys
+  focal: false
+  location: Table 1
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 3 Rhm, 1 mM Cys
+    lever_value: 0
+    value: 1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        L-cysteine: 1 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 3 Rhm+Arg, 1 mM Cys
+    lever_value: 55
+    value: 7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        L-cysteine: 1 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-37
+  odorant: 5-Methylfurfural
+  lever_class: precursor dose
+  lever: arginine added (0 vs 55 mM) to rhamnose, pH 3, 5 mM Cys
+  focal: false
+  location: Table 1
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 3 Rhm, 5 mM Cys
+    lever_value: 0
+    value: 0.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        L-cysteine: 5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 3 Rhm+Arg, 5 mM Cys
+    lever_value: 55
+    value: 1.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        L-cysteine: 5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-38
+  odorant: 5-Methylfurfural
+  lever_class: precursor dose
+  lever: arginine added (0 vs 55 mM) to rhamnose, pH 3, 10 mM Cys
+  focal: false
+  location: Table 1
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 3 Rhm, 10 mM Cys
+    lever_value: 0
+    value: 0.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        L-cysteine: 10 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 3 Rhm+Arg, 10 mM Cys
+    lever_value: 55
+    value: 1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        L-cysteine: 10 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-39
+  odorant: 5-Methylfurfural
+  lever_class: precursor dose
+  lever: arginine added (0 vs 55 mM) to rhamnose, pH 3, 1 mM AcCys
+  focal: false
+  location: Table 1
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 3 Rhm, 1 mM AcCys
+    lever_value: 0
+    value: 1.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        N-acetyl-L-cysteine: 1 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 3 Rhm+Arg, 1 mM AcCys
+    lever_value: 55
+    value: 12
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        N-acetyl-L-cysteine: 1 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-40
+  odorant: 5-Methylfurfural
+  lever_class: precursor dose
+  lever: arginine added (0 vs 55 mM) to rhamnose, pH 3, 5 mM AcCys
+  focal: false
+  location: Table 1
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 3 Rhm, 5 mM AcCys
+    lever_value: 0
+    value: 1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        N-acetyl-L-cysteine: 5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 3 Rhm+Arg, 5 mM AcCys
+    lever_value: 55
+    value: 7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        N-acetyl-L-cysteine: 5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-41
+  odorant: 5-Methylfurfural
+  lever_class: precursor dose
+  lever: arginine added (0 vs 55 mM) to rhamnose, pH 3, 10 mM AcCys
+  focal: false
+  location: Table 1
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 3 Rhm, 10 mM AcCys
+    lever_value: 0
+    value: 0.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        N-acetyl-L-cysteine: 10 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 3 Rhm+Arg, 10 mM AcCys
+    lever_value: 55
+    value: 4.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        N-acetyl-L-cysteine: 10 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-42
+  odorant: 5-Methylfurfural
+  lever_class: precursor dose
+  lever: arginine added (0 vs 55 mM) to rhamnose, pH 5, no thiols
+  focal: false
+  location: Table 1
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 5 Rhm, no thiols
+    lever_value: 0
+    value: 2.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm+Arg, no thiols
+    lever_value: 55
+    value: 8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-43
+  odorant: 5-Methylfurfural
+  lever_class: precursor dose
+  lever: arginine added (0 vs 55 mM) to rhamnose, pH 5, 1 mM Cys
+  focal: false
+  location: Table 1
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 5 Rhm, 1 mM Cys
+    lever_value: 0
+    value: 0.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        L-cysteine: 1 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm+Arg, 1 mM Cys
+    lever_value: 55
+    value: 2.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        L-cysteine: 1 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-44
+  odorant: 5-Methylfurfural
+  lever_class: precursor dose
+  lever: arginine added (0 vs 55 mM) to rhamnose, pH 5, 5 mM Cys
+  focal: false
+  location: Table 1
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 5 Rhm, 5 mM Cys
+    lever_value: 0
+    value: 0.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        L-cysteine: 5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm+Arg, 5 mM Cys
+    lever_value: 55
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        L-cysteine: 5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-45
+  odorant: 5-Methylfurfural
+  lever_class: precursor dose
+  lever: arginine added (0 vs 55 mM) to rhamnose, pH 5, 10 mM Cys
+  focal: false
+  location: Table 1
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 5 Rhm, 10 mM Cys
+    lever_value: 0
+    value: 0.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        L-cysteine: 10 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm+Arg, 10 mM Cys
+    lever_value: 55
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        L-cysteine: 10 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-46
+  odorant: 5-Methylfurfural
+  lever_class: precursor dose
+  lever: arginine added (0 vs 55 mM) to rhamnose, pH 5, 1 mM AcCys
+  focal: false
+  location: Table 1
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 5 Rhm, 1 mM AcCys
+    lever_value: 0
+    value: 1.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        N-acetyl-L-cysteine: 1 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm+Arg, 1 mM AcCys
+    lever_value: 55
+    value: 4.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        N-acetyl-L-cysteine: 1 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-47
+  odorant: 5-Methylfurfural
+  lever_class: precursor dose
+  lever: arginine added (0 vs 55 mM) to rhamnose, pH 5, 5 mM AcCys
+  focal: false
+  location: Table 1
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 5 Rhm, 5 mM AcCys
+    lever_value: 0
+    value: 0.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        N-acetyl-L-cysteine: 5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm+Arg, 5 mM AcCys
+    lever_value: 55
+    value: 4.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        N-acetyl-L-cysteine: 5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-48
+  odorant: 5-Methylfurfural
+  lever_class: precursor dose
+  lever: arginine added (0 vs 55 mM) to rhamnose, pH 5, 10 mM AcCys
+  focal: false
+  location: Table 1
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 5 Rhm, 10 mM AcCys
+    lever_value: 0
+    value: 0.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        N-acetyl-L-cysteine: 10 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm+Arg, 10 mM AcCys
+    lever_value: 55
+    value: 2.6
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        N-acetyl-L-cysteine: 10 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-49
+  odorant: DMHF
+  lever_class: precursor dose
+  lever: L-cysteine concentration (0, 1, 5, 10 mM), pH 5, Rhm
+  focal: true
+  location: Fig. 1A
+  digitised: true
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 5 Rhm, no thiols
+    lever_value: 0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm, 1 mM Cys
+    lever_value: 1
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        L-cysteine: 1 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm, 5 mM Cys
+    lever_value: 5
+    value: 0.37
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        L-cysteine: 5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm, 10 mM Cys
+    lever_value: 10
+    value: 0.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        L-cysteine: 10 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-50
+  odorant: DMHF
+  lever_class: precursor dose
+  lever: N-acetyl-L-cysteine concentration (0, 1, 5, 10 mM), pH 5, Rhm
+  focal: true
+  location: Fig. 1A
+  digitised: true
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 5 Rhm, no thiols
+    lever_value: 0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm, 1 mM AcCys
+    lever_value: 1
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        N-acetyl-L-cysteine: 1 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm, 5 mM AcCys
+    lever_value: 5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        N-acetyl-L-cysteine: 5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm, 10 mM AcCys
+    lever_value: 10
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        N-acetyl-L-cysteine: 10 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-51
+  odorant: DMHF
+  lever_class: precursor dose
+  lever: L-cysteine concentration (0, 1, 5, 10 mM), pH 5, Rhm+Arg
+  focal: true
+  location: Fig. 1A
+  digitised: true
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 5 Rhm+Arg, no thiols
+    lever_value: 0
+    value: 9.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm+Arg, 1 mM Cys
+    lever_value: 1
+    value: 23
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        L-cysteine: 1 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm+Arg, 5 mM Cys
+    lever_value: 5
+    value: 28
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        L-cysteine: 5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm+Arg, 10 mM Cys
+    lever_value: 10
+    value: 23
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        L-cysteine: 10 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-52
+  odorant: DMHF
+  lever_class: precursor dose
+  lever: N-acetyl-L-cysteine concentration (0, 1, 5, 10 mM), pH 5, Rhm+Arg
+  focal: true
+  location: Fig. 1A
+  digitised: true
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 5 Rhm+Arg, no thiols
+    lever_value: 0
+    value: 9.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm+Arg, 1 mM AcCys
+    lever_value: 1
+    value: 6.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        N-acetyl-L-cysteine: 1 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm+Arg, 5 mM AcCys
+    lever_value: 5
+    value: 5.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        N-acetyl-L-cysteine: 5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm+Arg, 10 mM AcCys
+    lever_value: 10
+    value: 3.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        N-acetyl-L-cysteine: 10 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-53
+  odorant: DMHF
+  lever_class: precursor dose
+  lever: L-cysteine concentration (0, 1, 5, 10 mM), pH 3, Rhm+Arg
+  focal: true
+  location: Fig. 1B
+  digitised: true
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 3 Rhm+Arg, no thiols
+    lever_value: 0
+    value: 0.167
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 3 Rhm+Arg, 1 mM Cys
+    lever_value: 1
+    value: 0.119
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        L-cysteine: 1 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 3 Rhm+Arg, 5 mM Cys
+    lever_value: 5
+    value: 0.119
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        L-cysteine: 5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 3 Rhm+Arg, 10 mM Cys
+    lever_value: 10
+    value: 0.179
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        L-cysteine: 10 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-54
+  odorant: DMHF
+  lever_class: precursor dose
+  lever: N-acetyl-L-cysteine concentration (0, 1, 5, 10 mM), pH 3, Rhm+Arg
+  focal: true
+  location: Fig. 1B
+  digitised: true
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 3 Rhm+Arg, no thiols
+    lever_value: 0
+    value: 0.167
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 3 Rhm+Arg, 1 mM AcCys
+    lever_value: 1
+    value: 0.158
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        N-acetyl-L-cysteine: 1 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 3 Rhm+Arg, 5 mM AcCys
+    lever_value: 5
+    value: 0.071
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        N-acetyl-L-cysteine: 5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 3 Rhm+Arg, 10 mM AcCys
+    lever_value: 10
+    value: 0.057
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        N-acetyl-L-cysteine: 10 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-55
+  odorant: DMHF
+  lever_class: precursor dose
+  lever: L-cysteine concentration (0, 1, 5, 10 mM), pH 7, Rhm
+  focal: true
+  location: Fig. 1C
+  digitised: true
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 7 Rhm, no thiols
+    lever_value: 0
+    value: 1.34
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 7 Rhm, 1 mM Cys
+    lever_value: 1
+    value: 2.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        L-cysteine: 1 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 7 Rhm, 5 mM Cys
+    lever_value: 5
+    value: 6.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        L-cysteine: 5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 7 Rhm, 10 mM Cys
+    lever_value: 10
+    value: 5.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        L-cysteine: 10 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-56
+  odorant: DMHF
+  lever_class: precursor dose
+  lever: N-acetyl-L-cysteine concentration (0, 1, 5, 10 mM), pH 7, Rhm
+  focal: true
+  location: Fig. 1C
+  digitised: true
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 7 Rhm, no thiols
+    lever_value: 0
+    value: 1.34
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 7 Rhm, 1 mM AcCys
+    lever_value: 1
+    value: 1.15
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        N-acetyl-L-cysteine: 1 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 7 Rhm, 5 mM AcCys
+    lever_value: 5
+    value: 1.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        N-acetyl-L-cysteine: 5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 7 Rhm, 10 mM AcCys
+    lever_value: 10
+    value: 0.61
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        N-acetyl-L-cysteine: 10 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-57
+  odorant: DMHF
+  lever_class: sulfur source
+  lever: L-cysteine vs N-acetyl-L-cysteine at 1 mM, pH 5, Rhm
+  focal: true
+  location: Fig. 1A
+  digitised: true
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 5 Rhm, 1 mM Cys
+    lever_value: cysteine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        L-cysteine: 1 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm, 1 mM AcCys
+    lever_value: n-acetylcysteine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        N-acetyl-L-cysteine: 1 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-58
+  odorant: DMHF
+  lever_class: sulfur source
+  lever: L-cysteine vs N-acetyl-L-cysteine at 5 mM, pH 5, Rhm
+  focal: true
+  location: Fig. 1A
+  digitised: true
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 5 Rhm, 5 mM Cys
+    lever_value: cysteine
+    value: 0.37
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        L-cysteine: 5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm, 5 mM AcCys
+    lever_value: n-acetylcysteine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        N-acetyl-L-cysteine: 5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-59
+  odorant: DMHF
+  lever_class: sulfur source
+  lever: L-cysteine vs N-acetyl-L-cysteine at 10 mM, pH 5, Rhm
+  focal: true
+  location: Fig. 1A
+  digitised: true
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 5 Rhm, 10 mM Cys
+    lever_value: cysteine
+    value: 0.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        L-cysteine: 10 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm, 10 mM AcCys
+    lever_value: n-acetylcysteine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        N-acetyl-L-cysteine: 10 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-60
+  odorant: DMHF
+  lever_class: sulfur source
+  lever: L-cysteine vs N-acetyl-L-cysteine at 1 mM, pH 5, Rhm+Arg
+  focal: true
+  location: Fig. 1A
+  digitised: true
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 5 Rhm+Arg, 1 mM Cys
+    lever_value: cysteine
+    value: 23
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        L-cysteine: 1 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm+Arg, 1 mM AcCys
+    lever_value: n-acetylcysteine
+    value: 6.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        N-acetyl-L-cysteine: 1 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-61
+  odorant: DMHF
+  lever_class: sulfur source
+  lever: L-cysteine vs N-acetyl-L-cysteine at 5 mM, pH 5, Rhm+Arg
+  focal: true
+  location: Fig. 1A
+  digitised: true
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 5 Rhm+Arg, 5 mM Cys
+    lever_value: cysteine
+    value: 28
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        L-cysteine: 5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm+Arg, 5 mM AcCys
+    lever_value: n-acetylcysteine
+    value: 5.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        N-acetyl-L-cysteine: 5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-62
+  odorant: DMHF
+  lever_class: sulfur source
+  lever: L-cysteine vs N-acetyl-L-cysteine at 10 mM, pH 5, Rhm+Arg
+  focal: true
+  location: Fig. 1A
+  digitised: true
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 5 Rhm+Arg, 10 mM Cys
+    lever_value: cysteine
+    value: 23
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        L-cysteine: 10 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm+Arg, 10 mM AcCys
+    lever_value: n-acetylcysteine
+    value: 3.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        N-acetyl-L-cysteine: 10 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-63
+  odorant: DMHF
+  lever_class: sulfur source
+  lever: L-cysteine vs N-acetyl-L-cysteine at 1 mM, pH 3, Rhm+Arg
+  focal: true
+  location: Fig. 1B
+  digitised: true
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 3 Rhm+Arg, 1 mM Cys
+    lever_value: cysteine
+    value: 0.119
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        L-cysteine: 1 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 3 Rhm+Arg, 1 mM AcCys
+    lever_value: n-acetylcysteine
+    value: 0.158
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        N-acetyl-L-cysteine: 1 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-64
+  odorant: DMHF
+  lever_class: sulfur source
+  lever: L-cysteine vs N-acetyl-L-cysteine at 5 mM, pH 3, Rhm+Arg
+  focal: true
+  location: Fig. 1B
+  digitised: true
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 3 Rhm+Arg, 5 mM Cys
+    lever_value: cysteine
+    value: 0.119
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        L-cysteine: 5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 3 Rhm+Arg, 5 mM AcCys
+    lever_value: n-acetylcysteine
+    value: 0.071
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        N-acetyl-L-cysteine: 5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-65
+  odorant: DMHF
+  lever_class: sulfur source
+  lever: L-cysteine vs N-acetyl-L-cysteine at 10 mM, pH 3, Rhm+Arg
+  focal: true
+  location: Fig. 1B
+  digitised: true
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 3 Rhm+Arg, 10 mM Cys
+    lever_value: cysteine
+    value: 0.179
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        L-cysteine: 10 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 3 Rhm+Arg, 10 mM AcCys
+    lever_value: n-acetylcysteine
+    value: 0.057
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        N-acetyl-L-cysteine: 10 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-66
+  odorant: DMHF
+  lever_class: sulfur source
+  lever: L-cysteine vs N-acetyl-L-cysteine at 1 mM, pH 7, Rhm
+  focal: true
+  location: Fig. 1C
+  digitised: true
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 7 Rhm, 1 mM Cys
+    lever_value: cysteine
+    value: 2.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        L-cysteine: 1 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 7 Rhm, 1 mM AcCys
+    lever_value: n-acetylcysteine
+    value: 1.15
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        N-acetyl-L-cysteine: 1 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-67
+  odorant: DMHF
+  lever_class: sulfur source
+  lever: L-cysteine vs N-acetyl-L-cysteine at 5 mM, pH 7, Rhm
+  focal: true
+  location: Fig. 1C
+  digitised: true
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 7 Rhm, 5 mM Cys
+    lever_value: cysteine
+    value: 6.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        L-cysteine: 5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 7 Rhm, 5 mM AcCys
+    lever_value: n-acetylcysteine
+    value: 1.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        N-acetyl-L-cysteine: 5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-68
+  odorant: DMHF
+  lever_class: sulfur source
+  lever: L-cysteine vs N-acetyl-L-cysteine at 10 mM, pH 7, Rhm
+  focal: true
+  location: Fig. 1C
+  digitised: true
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 7 Rhm, 10 mM Cys
+    lever_value: cysteine
+    value: 5.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        L-cysteine: 10 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 7 Rhm, 10 mM AcCys
+    lever_value: n-acetylcysteine
+    value: 0.61
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        N-acetyl-L-cysteine: 10 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-69
+  odorant: DMHF
+  lever_class: pH
+  lever: buffer pH (5, 7), Rhm, no thiols
+  focal: false
+  location: Fig. 1A, 1C
+  digitised: true
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 5 Rhm, no thiols
+    lever_value: 5.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 7 Rhm, no thiols
+    lever_value: 7.0
+    value: 1.34
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-70
+  odorant: DMHF
+  lever_class: pH
+  lever: buffer pH (5, 7), Rhm, 1 mM Cys
+  focal: false
+  location: Fig. 1A, 1C
+  digitised: true
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 5 Rhm, 1 mM Cys
+    lever_value: 5.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        L-cysteine: 1 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 7 Rhm, 1 mM Cys
+    lever_value: 7.0
+    value: 2.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        L-cysteine: 1 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-71
+  odorant: DMHF
+  lever_class: pH
+  lever: buffer pH (5, 7), Rhm, 5 mM Cys
+  focal: false
+  location: Fig. 1A, 1C
+  digitised: true
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 5 Rhm, 5 mM Cys
+    lever_value: 5.0
+    value: 0.37
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        L-cysteine: 5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 7 Rhm, 5 mM Cys
+    lever_value: 7.0
+    value: 6.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        L-cysteine: 5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-72
+  odorant: DMHF
+  lever_class: pH
+  lever: buffer pH (5, 7), Rhm, 10 mM Cys
+  focal: false
+  location: Fig. 1A, 1C
+  digitised: true
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 5 Rhm, 10 mM Cys
+    lever_value: 5.0
+    value: 0.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        L-cysteine: 10 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 7 Rhm, 10 mM Cys
+    lever_value: 7.0
+    value: 5.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        L-cysteine: 10 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-73
+  odorant: DMHF
+  lever_class: pH
+  lever: buffer pH (5, 7), Rhm, 1 mM AcCys
+  focal: false
+  location: Fig. 1A, 1C
+  digitised: true
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 5 Rhm, 1 mM AcCys
+    lever_value: 5.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        N-acetyl-L-cysteine: 1 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 7 Rhm, 1 mM AcCys
+    lever_value: 7.0
+    value: 1.15
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        N-acetyl-L-cysteine: 1 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-74
+  odorant: DMHF
+  lever_class: pH
+  lever: buffer pH (5, 7), Rhm, 5 mM AcCys
+  focal: false
+  location: Fig. 1A, 1C
+  digitised: true
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 5 Rhm, 5 mM AcCys
+    lever_value: 5.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        N-acetyl-L-cysteine: 5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 7 Rhm, 5 mM AcCys
+    lever_value: 7.0
+    value: 1.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        N-acetyl-L-cysteine: 5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-75
+  odorant: DMHF
+  lever_class: pH
+  lever: buffer pH (5, 7), Rhm, 10 mM AcCys
+  focal: false
+  location: Fig. 1A, 1C
+  digitised: true
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 5 Rhm, 10 mM AcCys
+    lever_value: 5.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        N-acetyl-L-cysteine: 10 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 7 Rhm, 10 mM AcCys
+    lever_value: 7.0
+    value: 0.61
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        N-acetyl-L-cysteine: 10 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-76
+  odorant: DMHF
+  lever_class: pH
+  lever: buffer pH (3, 5), Rhm+Arg, no thiols
+  focal: false
+  location: Fig. 1A, 1B
+  digitised: true
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 3 Rhm+Arg, no thiols
+    lever_value: 3.0
+    value: 0.167
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm+Arg, no thiols
+    lever_value: 5.0
+    value: 9.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-77
+  odorant: DMHF
+  lever_class: pH
+  lever: buffer pH (3, 5), Rhm+Arg, 1 mM Cys
+  focal: false
+  location: Fig. 1A, 1B
+  digitised: true
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 3 Rhm+Arg, 1 mM Cys
+    lever_value: 3.0
+    value: 0.119
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        L-cysteine: 1 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm+Arg, 1 mM Cys
+    lever_value: 5.0
+    value: 23
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        L-cysteine: 1 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-78
+  odorant: DMHF
+  lever_class: pH
+  lever: buffer pH (3, 5), Rhm+Arg, 5 mM Cys
+  focal: false
+  location: Fig. 1A, 1B
+  digitised: true
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 3 Rhm+Arg, 5 mM Cys
+    lever_value: 3.0
+    value: 0.119
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        L-cysteine: 5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm+Arg, 5 mM Cys
+    lever_value: 5.0
+    value: 28
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        L-cysteine: 5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-79
+  odorant: DMHF
+  lever_class: pH
+  lever: buffer pH (3, 5), Rhm+Arg, 10 mM Cys
+  focal: false
+  location: Fig. 1A, 1B
+  digitised: true
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 3 Rhm+Arg, 10 mM Cys
+    lever_value: 3.0
+    value: 0.179
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        L-cysteine: 10 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm+Arg, 10 mM Cys
+    lever_value: 5.0
+    value: 23
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        L-cysteine: 10 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-80
+  odorant: DMHF
+  lever_class: pH
+  lever: buffer pH (3, 5), Rhm+Arg, 1 mM AcCys
+  focal: false
+  location: Fig. 1A, 1B
+  digitised: true
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 3 Rhm+Arg, 1 mM AcCys
+    lever_value: 3.0
+    value: 0.158
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        N-acetyl-L-cysteine: 1 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm+Arg, 1 mM AcCys
+    lever_value: 5.0
+    value: 6.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        N-acetyl-L-cysteine: 1 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-81
+  odorant: DMHF
+  lever_class: pH
+  lever: buffer pH (3, 5), Rhm+Arg, 5 mM AcCys
+  focal: false
+  location: Fig. 1A, 1B
+  digitised: true
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 3 Rhm+Arg, 5 mM AcCys
+    lever_value: 3.0
+    value: 0.071
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        N-acetyl-L-cysteine: 5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm+Arg, 5 mM AcCys
+    lever_value: 5.0
+    value: 5.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        N-acetyl-L-cysteine: 5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-82
+  odorant: DMHF
+  lever_class: pH
+  lever: buffer pH (3, 5), Rhm+Arg, 10 mM AcCys
+  focal: false
+  location: Fig. 1A, 1B
+  digitised: true
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 3 Rhm+Arg, 10 mM AcCys
+    lever_value: 3.0
+    value: 0.057
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        N-acetyl-L-cysteine: 10 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm+Arg, 10 mM AcCys
+    lever_value: 5.0
+    value: 3.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        N-acetyl-L-cysteine: 10 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-83
+  odorant: DMHF
+  lever_class: precursor dose
+  lever: arginine added (0 vs 55 mM) to rhamnose, pH 5, no thiols
+  focal: false
+  location: Fig. 1A
+  digitised: true
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 5 Rhm, no thiols
+    lever_value: 0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm+Arg, no thiols
+    lever_value: 55
+    value: 9.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-84
+  odorant: DMHF
+  lever_class: precursor dose
+  lever: arginine added (0 vs 55 mM) to rhamnose, pH 5, 1 mM Cys
+  focal: false
+  location: Fig. 1A
+  digitised: true
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 5 Rhm, 1 mM Cys
+    lever_value: 0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        L-cysteine: 1 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm+Arg, 1 mM Cys
+    lever_value: 55
+    value: 23
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        L-cysteine: 1 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-85
+  odorant: DMHF
+  lever_class: precursor dose
+  lever: arginine added (0 vs 55 mM) to rhamnose, pH 5, 5 mM Cys
+  focal: false
+  location: Fig. 1A
+  digitised: true
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 5 Rhm, 5 mM Cys
+    lever_value: 0
+    value: 0.37
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        L-cysteine: 5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm+Arg, 5 mM Cys
+    lever_value: 55
+    value: 28
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        L-cysteine: 5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-86
+  odorant: DMHF
+  lever_class: precursor dose
+  lever: arginine added (0 vs 55 mM) to rhamnose, pH 5, 10 mM Cys
+  focal: false
+  location: Fig. 1A
+  digitised: true
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 5 Rhm, 10 mM Cys
+    lever_value: 0
+    value: 0.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        L-cysteine: 10 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm+Arg, 10 mM Cys
+    lever_value: 55
+    value: 23
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        L-cysteine: 10 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-87
+  odorant: DMHF
+  lever_class: precursor dose
+  lever: arginine added (0 vs 55 mM) to rhamnose, pH 5, 1 mM AcCys
+  focal: false
+  location: Fig. 1A
+  digitised: true
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 5 Rhm, 1 mM AcCys
+    lever_value: 0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        N-acetyl-L-cysteine: 1 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm+Arg, 1 mM AcCys
+    lever_value: 55
+    value: 6.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        N-acetyl-L-cysteine: 1 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-88
+  odorant: DMHF
+  lever_class: precursor dose
+  lever: arginine added (0 vs 55 mM) to rhamnose, pH 5, 5 mM AcCys
+  focal: false
+  location: Fig. 1A
+  digitised: true
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 5 Rhm, 5 mM AcCys
+    lever_value: 0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        N-acetyl-L-cysteine: 5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm+Arg, 5 mM AcCys
+    lever_value: 55
+    value: 5.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        N-acetyl-L-cysteine: 5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-89
+  odorant: DMHF
+  lever_class: precursor dose
+  lever: arginine added (0 vs 55 mM) to rhamnose, pH 5, 10 mM AcCys
+  focal: false
+  location: Fig. 1A
+  digitised: true
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: pH 5 Rhm, 10 mM AcCys
+    lever_value: 0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        N-acetyl-L-cysteine: 10 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5 Rhm+Arg, 10 mM AcCys
+    lever_value: 55
+    value: 3.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        rhamnose: 55 mM
+        arginine: 55 mM
+        N-acetyl-L-cysteine: 10 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+- id: haleva1999-90
+  odorant: DMHF
+  lever_class: precursor dose
+  lever: L-cysteine concentration (0-2.5 mM), Furaneol retention, pH 3.5, no sugar
+  focal: true
+  location: Fig. 2
+  digitised: true
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: no thiols
+    lever_value: 0
+    value: 16.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.5
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        Furaneol: 20 mg/L
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 0.01 mM Cys
+    lever_value: 0.01
+    value: 16.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.5
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        Furaneol: 20 mg/L
+        L-cysteine: 0.01 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 0.05 mM Cys
+    lever_value: 0.05
+    value: 12.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.5
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        Furaneol: 20 mg/L
+        L-cysteine: 0.05 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 0.15 mM Cys
+    lever_value: 0.15
+    value: 9.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.5
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        Furaneol: 20 mg/L
+        L-cysteine: 0.15 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 0.5 mM Cys
+    lever_value: 0.5
+    value: 0.45
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.5
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        Furaneol: 20 mg/L
+        L-cysteine: 0.5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 2.5 mM Cys
+    lever_value: 2.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.5
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        Furaneol: 20 mg/L
+        L-cysteine: 2.5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+  system: fed_odorant
+- id: haleva1999-91
+  odorant: DMHF
+  lever_class: precursor dose
+  lever: N-acetyl-L-cysteine concentration (0-2.5 mM), Furaneol retention, pH 3.5, no sugar
+  focal: true
+  location: Fig. 2
+  digitised: true
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: no thiols
+    lever_value: 0
+    value: 16.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.5
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        Furaneol: 20 mg/L
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 0.01 mM AcCys
+    lever_value: 0.01
+    value: 15.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.5
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        Furaneol: 20 mg/L
+        N-acetyl-L-cysteine: 0.01 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 0.05 mM AcCys
+    lever_value: 0.05
+    value: 13.6
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.5
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        Furaneol: 20 mg/L
+        N-acetyl-L-cysteine: 0.05 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 0.15 mM AcCys
+    lever_value: 0.15
+    value: 3.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.5
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        Furaneol: 20 mg/L
+        N-acetyl-L-cysteine: 0.15 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 0.5 mM AcCys
+    lever_value: 0.5
+    value: 1.6
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.5
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        Furaneol: 20 mg/L
+        N-acetyl-L-cysteine: 0.5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 2.5 mM AcCys
+    lever_value: 2.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.5
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        Furaneol: 20 mg/L
+        N-acetyl-L-cysteine: 2.5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+  system: fed_odorant
+- id: haleva1999-92
+  odorant: DMHF
+  lever_class: sulfur source
+  lever: L-cysteine vs N-acetyl-L-cysteine at 0.01 mM, Furaneol retention, pH 3.5, no sugar
+  focal: true
+  location: Fig. 2
+  digitised: true
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: 0.01 mM Cys
+    lever_value: cysteine
+    value: 16.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.5
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        Furaneol: 20 mg/L
+        L-cysteine: 0.01 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 0.01 mM AcCys
+    lever_value: n-acetylcysteine
+    value: 15.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.5
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        Furaneol: 20 mg/L
+        N-acetyl-L-cysteine: 0.01 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+  system: fed_odorant
+- id: haleva1999-93
+  odorant: DMHF
+  lever_class: sulfur source
+  lever: L-cysteine vs N-acetyl-L-cysteine at 0.05 mM, Furaneol retention, pH 3.5, no sugar
+  focal: true
+  location: Fig. 2
+  digitised: true
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: 0.05 mM Cys
+    lever_value: cysteine
+    value: 12.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.5
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        Furaneol: 20 mg/L
+        L-cysteine: 0.05 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 0.05 mM AcCys
+    lever_value: n-acetylcysteine
+    value: 13.6
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.5
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        Furaneol: 20 mg/L
+        N-acetyl-L-cysteine: 0.05 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+  system: fed_odorant
+- id: haleva1999-94
+  odorant: DMHF
+  lever_class: sulfur source
+  lever: L-cysteine vs N-acetyl-L-cysteine at 0.15 mM, Furaneol retention, pH 3.5, no sugar
+  focal: true
+  location: Fig. 2
+  digitised: true
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: 0.15 mM Cys
+    lever_value: cysteine
+    value: 9.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.5
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        Furaneol: 20 mg/L
+        L-cysteine: 0.15 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 0.15 mM AcCys
+    lever_value: n-acetylcysteine
+    value: 3.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.5
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        Furaneol: 20 mg/L
+        N-acetyl-L-cysteine: 0.15 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+  system: fed_odorant
+- id: haleva1999-95
+  odorant: DMHF
+  lever_class: sulfur source
+  lever: L-cysteine vs N-acetyl-L-cysteine at 0.5 mM, Furaneol retention, pH 3.5, no sugar
+  focal: true
+  location: Fig. 2
+  digitised: true
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: 0.5 mM Cys
+    lever_value: cysteine
+    value: 0.45
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.5
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        Furaneol: 20 mg/L
+        L-cysteine: 0.5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 0.5 mM AcCys
+    lever_value: n-acetylcysteine
+    value: 1.6
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.5
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        Furaneol: 20 mg/L
+        N-acetyl-L-cysteine: 0.5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+  system: fed_odorant
+- id: haleva1999-96
+  odorant: DMHF
+  lever_class: sulfur source
+  lever: L-cysteine vs N-acetyl-L-cysteine at 2.5 mM, Furaneol retention, pH 3.5, no sugar
+  focal: true
+  location: Fig. 2
+  digitised: true
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: 2.5 mM Cys
+    lever_value: cysteine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.5
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        Furaneol: 20 mg/L
+        L-cysteine: 2.5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 2.5 mM AcCys
+    lever_value: n-acetylcysteine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.5
+      ph_basis: label
+      temp_C: 70
+      time_min: 2880
+      precursors:
+        Furaneol: 20 mg/L
+        N-acetyl-L-cysteine: 2.5 mM
+      buffer: 0.1 M citrate phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  resolution: re-read
+  system: fed_odorant

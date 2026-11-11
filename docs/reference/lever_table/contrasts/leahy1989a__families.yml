@@ -1,0 +1,1656 @@
+source: leahy1989a
+pdf: data/articles/leahy1989a.pdf
+reader: resolved
+scope_note: 'Resolved from readers A and B. Table I zero-order rate constants and Table IV NFDM water-activity rates keyed
+  as quantity rate (enter no cell); Table III (95 C, 2 h) single pyrazines are % of total (quantity share), total pyrazines
+  ppm (amount). pH 9.0 used borate vs citrate-phosphate at pH 5.0/7.0, so pH 7 vs 9 is keyed mixed. pH 9.0 temperature ladders
+  not re-keyed (reprint of leahy1989 Table I lysine-glucose). Table IV quantified against external-standard response factors
+  per dry weight (keyed absolute). Not keyed: Tables II/V, Figs. 1-4.'
+contrasts:
+- id: leahy1989a-1
+  odorant: Unsubstituted pyrazine
+  lever_class: pH
+  lever: initial pH 5.0 vs 7.0 (both 0.1 M citrate-phosphate)
+  focal: true
+  location: Table I, p. 200
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: agreed
+  arms:
+  - label: pH 5.0, 95 C
+    lever_value: 5.0
+    value: 0.0938
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        L-lysine monohydrochloride: 0.1 M
+        D-glucose: 0.1 M
+      buffer: 0.1 M citrate-phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 7.0, 95 C
+    lever_value: 7.0
+    value: 1.346
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        L-lysine monohydrochloride: 0.1 M
+        D-glucose: 0.1 M
+      buffer: 0.1 M citrate-phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989a-2
+  odorant: Unsubstituted pyrazine
+  lever_class: mixed
+  lever: 'initial pH 7.0 (citrate-phosphate) vs 9.0 (borate): pH and buffer type both change'
+  focal: true
+  location: Table I, p. 200
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: agreed
+  arms:
+  - label: pH 7.0, 95 C
+    lever_value: 7.0
+    value: 1.346
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        L-lysine monohydrochloride: 0.1 M
+        D-glucose: 0.1 M
+      buffer: 0.1 M citrate-phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 9.0, 95 C
+    lever_value: 9.0
+    value: 3.596
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        L-lysine monohydrochloride: 0.1 M
+        D-glucose: 0.1 M
+      buffer: 0.1 M borate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989a-3
+  odorant: Unsubstituted pyrazine
+  lever_class: pH
+  lever: initial pH 5.0 vs 7.0 (both 0.1 M citrate-phosphate)
+  focal: true
+  location: Table I, p. 200
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: agreed
+  arms:
+  - label: pH 5.0, 85 C
+    lever_value: 5.0
+    value: 0.0232
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        L-lysine monohydrochloride: 0.1 M
+        D-glucose: 0.1 M
+      buffer: 0.1 M citrate-phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 7.0, 85 C
+    lever_value: 7.0
+    value: 0.159
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        L-lysine monohydrochloride: 0.1 M
+        D-glucose: 0.1 M
+      buffer: 0.1 M citrate-phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989a-4
+  odorant: Unsubstituted pyrazine
+  lever_class: mixed
+  lever: 'initial pH 7.0 (citrate-phosphate) vs 9.0 (borate): pH and buffer type both change'
+  focal: true
+  location: Table I, p. 200
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: agreed
+  arms:
+  - label: pH 7.0, 85 C
+    lever_value: 7.0
+    value: 0.159
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        L-lysine monohydrochloride: 0.1 M
+        D-glucose: 0.1 M
+      buffer: 0.1 M citrate-phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 9.0, 85 C
+    lever_value: 9.0
+    value: 0.49
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        L-lysine monohydrochloride: 0.1 M
+        D-glucose: 0.1 M
+      buffer: 0.1 M borate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989a-5
+  odorant: Unsubstituted pyrazine
+  lever_class: pH
+  lever: initial pH 5.0 vs 7.0 (both 0.1 M citrate-phosphate)
+  focal: true
+  location: Table I, p. 200
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: agreed
+  arms:
+  - label: pH 5.0, 75 C
+    lever_value: 5.0
+    value: 0.00356
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      temp_C: 75
+      time_min: 1440
+      precursors:
+        L-lysine monohydrochloride: 0.1 M
+        D-glucose: 0.1 M
+      buffer: 0.1 M citrate-phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 7.0, 75 C
+    lever_value: 7.0
+    value: 0.0957
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 75
+      time_min: 1440
+      precursors:
+        L-lysine monohydrochloride: 0.1 M
+        D-glucose: 0.1 M
+      buffer: 0.1 M citrate-phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989a-6
+  odorant: Unsubstituted pyrazine
+  lever_class: mixed
+  lever: 'initial pH 7.0 (citrate-phosphate) vs 9.0 (borate): pH and buffer type both change'
+  focal: true
+  location: Table I, p. 200
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: agreed
+  arms:
+  - label: pH 7.0, 75 C
+    lever_value: 7.0
+    value: 0.0957
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 75
+      time_min: 1440
+      precursors:
+        L-lysine monohydrochloride: 0.1 M
+        D-glucose: 0.1 M
+      buffer: 0.1 M citrate-phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 9.0, 75 C
+    lever_value: 9.0
+    value: 0.214
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 75
+      time_min: 1440
+      precursors:
+        L-lysine monohydrochloride: 0.1 M
+        D-glucose: 0.1 M
+      buffer: 0.1 M borate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989a-7
+  odorant: 2-Methylpyrazine
+  lever_class: pH
+  lever: initial pH 5.0 vs 7.0 (both 0.1 M citrate-phosphate)
+  focal: true
+  location: Table I, p. 200
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: agreed
+  arms:
+  - label: pH 5.0, 95 C
+    lever_value: 5.0
+    value: 0.00636
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        L-lysine monohydrochloride: 0.1 M
+        D-glucose: 0.1 M
+      buffer: 0.1 M citrate-phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 7.0, 95 C
+    lever_value: 7.0
+    value: 1.367
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        L-lysine monohydrochloride: 0.1 M
+        D-glucose: 0.1 M
+      buffer: 0.1 M citrate-phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989a-8
+  odorant: 2-Methylpyrazine
+  lever_class: mixed
+  lever: 'initial pH 7.0 (citrate-phosphate) vs 9.0 (borate): pH and buffer type both change'
+  focal: true
+  location: Table I, p. 200
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: agreed
+  arms:
+  - label: pH 7.0, 95 C
+    lever_value: 7.0
+    value: 1.367
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        L-lysine monohydrochloride: 0.1 M
+        D-glucose: 0.1 M
+      buffer: 0.1 M citrate-phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 9.0, 95 C
+    lever_value: 9.0
+    value: 2.837
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        L-lysine monohydrochloride: 0.1 M
+        D-glucose: 0.1 M
+      buffer: 0.1 M borate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989a-9
+  odorant: 2-Methylpyrazine
+  lever_class: pH
+  lever: initial pH 5.0 vs 7.0 (both 0.1 M citrate-phosphate)
+  focal: true
+  location: Table I, p. 200
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: agreed
+  arms:
+  - label: pH 5.0, 85 C
+    lever_value: 5.0
+    value: 0.00279
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        L-lysine monohydrochloride: 0.1 M
+        D-glucose: 0.1 M
+      buffer: 0.1 M citrate-phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 7.0, 85 C
+    lever_value: 7.0
+    value: 0.276
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        L-lysine monohydrochloride: 0.1 M
+        D-glucose: 0.1 M
+      buffer: 0.1 M citrate-phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989a-10
+  odorant: 2-Methylpyrazine
+  lever_class: mixed
+  lever: 'initial pH 7.0 (citrate-phosphate) vs 9.0 (borate): pH and buffer type both change'
+  focal: true
+  location: Table I, p. 200
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: agreed
+  arms:
+  - label: pH 7.0, 85 C
+    lever_value: 7.0
+    value: 0.276
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        L-lysine monohydrochloride: 0.1 M
+        D-glucose: 0.1 M
+      buffer: 0.1 M citrate-phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 9.0, 85 C
+    lever_value: 9.0
+    value: 0.422
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        L-lysine monohydrochloride: 0.1 M
+        D-glucose: 0.1 M
+      buffer: 0.1 M borate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989a-11
+  odorant: 2-Methylpyrazine
+  lever_class: mixed
+  lever: 'initial pH 7.0 (citrate-phosphate) vs 9.0 (borate): pH and buffer type both change'
+  focal: true
+  location: Table I, p. 200
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: agreed
+  arms:
+  - label: pH 7.0, 75 C
+    lever_value: 7.0
+    value: 0.0945
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 75
+      time_min: 1440
+      precursors:
+        L-lysine monohydrochloride: 0.1 M
+        D-glucose: 0.1 M
+      buffer: 0.1 M citrate-phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 9.0, 75 C
+    lever_value: 9.0
+    value: 0.159
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 75
+      time_min: 1440
+      precursors:
+        L-lysine monohydrochloride: 0.1 M
+        D-glucose: 0.1 M
+      buffer: 0.1 M borate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989a-12
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: mixed
+  lever: 'initial pH 7.0 (citrate-phosphate) vs 9.0 (borate): pH and buffer type both change'
+  focal: true
+  location: Table I, p. 200
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: agreed
+  arms:
+  - label: pH 7.0, 95 C
+    lever_value: 7.0
+    value: 0.063
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        L-lysine monohydrochloride: 0.1 M
+        D-glucose: 0.1 M
+      buffer: 0.1 M citrate-phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 9.0, 95 C
+    lever_value: 9.0
+    value: 0.186
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        L-lysine monohydrochloride: 0.1 M
+        D-glucose: 0.1 M
+      buffer: 0.1 M borate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989a-13
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: mixed
+  lever: 'initial pH 7.0 (citrate-phosphate) vs 9.0 (borate): pH and buffer type both change'
+  focal: true
+  location: Table I, p. 200
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: agreed
+  arms:
+  - label: pH 7.0, 85 C
+    lever_value: 7.0
+    value: 0.00949
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        L-lysine monohydrochloride: 0.1 M
+        D-glucose: 0.1 M
+      buffer: 0.1 M citrate-phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 9.0, 85 C
+    lever_value: 9.0
+    value: 0.0247
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        L-lysine monohydrochloride: 0.1 M
+        D-glucose: 0.1 M
+      buffer: 0.1 M borate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989a-14
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: mixed
+  lever: 'initial pH 7.0 (citrate-phosphate) vs 9.0 (borate): pH and buffer type both change'
+  focal: true
+  location: Table I, p. 200
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: agreed
+  arms:
+  - label: pH 7.0, 75 C
+    lever_value: 7.0
+    value: 0.00209
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 75
+      time_min: 1440
+      precursors:
+        L-lysine monohydrochloride: 0.1 M
+        D-glucose: 0.1 M
+      buffer: 0.1 M citrate-phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 9.0, 75 C
+    lever_value: 9.0
+    value: 0.00668
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 75
+      time_min: 1440
+      precursors:
+        L-lysine monohydrochloride: 0.1 M
+        D-glucose: 0.1 M
+      buffer: 0.1 M borate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989a-15
+  odorant: Unsubstituted pyrazine
+  lever_class: temperature
+  lever: reaction temperature at pH 7.0
+  focal: false
+  location: Table I, p. 200
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: agreed
+  arms:
+  - label: pH 7.0, 75 C
+    lever_value: 75
+    value: 0.0957
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 75
+      time_min: 1440
+      precursors:
+        L-lysine monohydrochloride: 0.1 M
+        D-glucose: 0.1 M
+      buffer: 0.1 M citrate-phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 7.0, 85 C
+    lever_value: 85
+    value: 0.159
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        L-lysine monohydrochloride: 0.1 M
+        D-glucose: 0.1 M
+      buffer: 0.1 M citrate-phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 7.0, 95 C
+    lever_value: 95
+    value: 1.346
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        L-lysine monohydrochloride: 0.1 M
+        D-glucose: 0.1 M
+      buffer: 0.1 M citrate-phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989a-16
+  odorant: Unsubstituted pyrazine
+  lever_class: temperature
+  lever: reaction temperature at pH 5.0
+  focal: false
+  location: Table I, p. 200
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: agreed
+  arms:
+  - label: pH 5.0, 75 C
+    lever_value: 75
+    value: 0.00356
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      temp_C: 75
+      time_min: 1440
+      precursors:
+        L-lysine monohydrochloride: 0.1 M
+        D-glucose: 0.1 M
+      buffer: 0.1 M citrate-phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5.0, 85 C
+    lever_value: 85
+    value: 0.0232
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        L-lysine monohydrochloride: 0.1 M
+        D-glucose: 0.1 M
+      buffer: 0.1 M citrate-phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5.0, 95 C
+    lever_value: 95
+    value: 0.0938
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        L-lysine monohydrochloride: 0.1 M
+        D-glucose: 0.1 M
+      buffer: 0.1 M citrate-phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989a-17
+  odorant: 2-Methylpyrazine
+  lever_class: temperature
+  lever: reaction temperature at pH 7.0
+  focal: false
+  location: Table I, p. 200
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: agreed
+  arms:
+  - label: pH 7.0, 75 C
+    lever_value: 75
+    value: 0.0945
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 75
+      time_min: 1440
+      precursors:
+        L-lysine monohydrochloride: 0.1 M
+        D-glucose: 0.1 M
+      buffer: 0.1 M citrate-phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 7.0, 85 C
+    lever_value: 85
+    value: 0.276
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        L-lysine monohydrochloride: 0.1 M
+        D-glucose: 0.1 M
+      buffer: 0.1 M citrate-phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 7.0, 95 C
+    lever_value: 95
+    value: 1.367
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        L-lysine monohydrochloride: 0.1 M
+        D-glucose: 0.1 M
+      buffer: 0.1 M citrate-phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989a-18
+  odorant: 2-Methylpyrazine
+  lever_class: temperature
+  lever: reaction temperature at pH 5.0
+  focal: false
+  location: Table I, p. 200
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: agreed
+  arms:
+  - label: pH 5.0, 85 C
+    lever_value: 85
+    value: 0.00279
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        L-lysine monohydrochloride: 0.1 M
+        D-glucose: 0.1 M
+      buffer: 0.1 M citrate-phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5.0, 95 C
+    lever_value: 95
+    value: 0.00636
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        L-lysine monohydrochloride: 0.1 M
+        D-glucose: 0.1 M
+      buffer: 0.1 M citrate-phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989a-19
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: temperature
+  lever: reaction temperature at pH 7.0
+  focal: false
+  location: Table I, p. 200
+  digitised: false
+  unit: ppm/hr (k)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0-24 h)
+  resolution: agreed
+  arms:
+  - label: pH 7.0, 75 C
+    lever_value: 75
+    value: 0.00209
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 75
+      time_min: 1440
+      precursors:
+        L-lysine monohydrochloride: 0.1 M
+        D-glucose: 0.1 M
+      buffer: 0.1 M citrate-phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 7.0, 85 C
+    lever_value: 85
+    value: 0.00949
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 85
+      time_min: 1440
+      precursors:
+        L-lysine monohydrochloride: 0.1 M
+        D-glucose: 0.1 M
+      buffer: 0.1 M citrate-phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 7.0, 95 C
+    lever_value: 95
+    value: 0.063
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 1440
+      precursors:
+        L-lysine monohydrochloride: 0.1 M
+        D-glucose: 0.1 M
+      buffer: 0.1 M citrate-phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989a-20
+  odorant: Unsubstituted pyrazine
+  lever_class: pH
+  lever: initial pH 5.0 vs 7.0 (both 0.1 M citrate-phosphate)
+  focal: true
+  location: Table III, p. 202
+  digitised: false
+  unit: '% of total pyrazines'
+  quant_type: relative
+  quantity: share
+  time_course_rule: main result time (2 h at 95 C, the stated standard yield conditions)
+  resolution: agreed
+  arms:
+  - label: pH 5.0
+    lever_value: 5.0
+    value: 63.2
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        L-lysine monohydrochloride: 0.1 M
+        D-glucose: 0.1 M
+      buffer: 0.1 M citrate-phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 7.0
+    lever_value: 7.0
+    value: 58.7
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        L-lysine monohydrochloride: 0.1 M
+        D-glucose: 0.1 M
+      buffer: 0.1 M citrate-phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989a-21
+  odorant: Unsubstituted pyrazine
+  lever_class: mixed
+  lever: 'initial pH 7.0 (citrate-phosphate) vs 9.0 (borate): pH and buffer type both change'
+  focal: true
+  location: Table III, p. 202
+  digitised: false
+  unit: '% of total pyrazines'
+  quant_type: relative
+  quantity: share
+  time_course_rule: main result time (2 h at 95 C, the stated standard yield conditions)
+  resolution: agreed
+  arms:
+  - label: pH 7.0
+    lever_value: 7.0
+    value: 58.7
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        L-lysine monohydrochloride: 0.1 M
+        D-glucose: 0.1 M
+      buffer: 0.1 M citrate-phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 9.0
+    lever_value: 9.0
+    value: 55.8
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        L-lysine monohydrochloride: 0.1 M
+        D-glucose: 0.1 M
+      buffer: 0.1 M borate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989a-22
+  odorant: 2-Methylpyrazine
+  lever_class: pH
+  lever: initial pH 5.0 vs 7.0 (both 0.1 M citrate-phosphate)
+  focal: true
+  location: Table III, p. 202
+  digitised: false
+  unit: '% of total pyrazines'
+  quant_type: relative
+  quantity: share
+  time_course_rule: main result time (2 h at 95 C, the stated standard yield conditions)
+  resolution: agreed
+  arms:
+  - label: pH 5.0
+    lever_value: 5.0
+    value: 36.8
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        L-lysine monohydrochloride: 0.1 M
+        D-glucose: 0.1 M
+      buffer: 0.1 M citrate-phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 7.0
+    lever_value: 7.0
+    value: 39.6
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        L-lysine monohydrochloride: 0.1 M
+        D-glucose: 0.1 M
+      buffer: 0.1 M citrate-phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989a-23
+  odorant: 2-Methylpyrazine
+  lever_class: mixed
+  lever: 'initial pH 7.0 (citrate-phosphate) vs 9.0 (borate): pH and buffer type both change'
+  focal: true
+  location: Table III, p. 202
+  digitised: false
+  unit: '% of total pyrazines'
+  quant_type: relative
+  quantity: share
+  time_course_rule: main result time (2 h at 95 C, the stated standard yield conditions)
+  resolution: agreed
+  arms:
+  - label: pH 7.0
+    lever_value: 7.0
+    value: 39.6
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        L-lysine monohydrochloride: 0.1 M
+        D-glucose: 0.1 M
+      buffer: 0.1 M citrate-phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 9.0
+    lever_value: 9.0
+    value: 41.5
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        L-lysine monohydrochloride: 0.1 M
+        D-glucose: 0.1 M
+      buffer: 0.1 M borate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989a-24
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: pH
+  lever: initial pH 5.0 vs 7.0 (both 0.1 M citrate-phosphate)
+  focal: true
+  location: Table III, p. 202
+  digitised: false
+  unit: '% of total pyrazines'
+  quant_type: relative
+  quantity: share
+  time_course_rule: main result time (2 h at 95 C, the stated standard yield conditions)
+  resolution: agreed
+  arms:
+  - label: pH 5.0
+    lever_value: 5.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        L-lysine monohydrochloride: 0.1 M
+        D-glucose: 0.1 M
+      buffer: 0.1 M citrate-phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 7.0
+    lever_value: 7.0
+    value: 1.7
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        L-lysine monohydrochloride: 0.1 M
+        D-glucose: 0.1 M
+      buffer: 0.1 M citrate-phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989a-25
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: mixed
+  lever: 'initial pH 7.0 (citrate-phosphate) vs 9.0 (borate): pH and buffer type both change'
+  focal: true
+  location: Table III, p. 202
+  digitised: false
+  unit: '% of total pyrazines'
+  quant_type: relative
+  quantity: share
+  time_course_rule: main result time (2 h at 95 C, the stated standard yield conditions)
+  resolution: agreed
+  arms:
+  - label: pH 7.0
+    lever_value: 7.0
+    value: 1.7
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        L-lysine monohydrochloride: 0.1 M
+        D-glucose: 0.1 M
+      buffer: 0.1 M citrate-phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 9.0
+    lever_value: 9.0
+    value: 2.4
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        L-lysine monohydrochloride: 0.1 M
+        D-glucose: 0.1 M
+      buffer: 0.1 M borate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989a-26
+  odorant: 2,3-Dimethylpyrazine
+  lever_class: pH
+  lever: initial pH 5.0 vs 7.0 (both 0.1 M citrate-phosphate)
+  focal: true
+  location: Table III, p. 202
+  digitised: false
+  unit: '% of total pyrazines'
+  quant_type: relative
+  quantity: share
+  time_course_rule: main result time
+  resolution: re-read
+  arms:
+  - label: pH 5.0
+    lever_value: 5.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        L-lysine monohydrochloride: 0.1 M
+        D-glucose: 0.1 M
+      buffer: 0.1 M citrate-phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 7.0
+    lever_value: 7.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        L-lysine monohydrochloride: 0.1 M
+        D-glucose: 0.1 M
+      buffer: 0.1 M citrate-phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989a-27
+  odorant: 2,3-Dimethylpyrazine
+  lever_class: mixed
+  lever: 'initial pH 7.0 (citrate-phosphate) vs 9.0 (borate): pH and buffer type both change'
+  focal: true
+  location: Table III, p. 202
+  digitised: false
+  unit: '% of total pyrazines'
+  quant_type: relative
+  quantity: share
+  time_course_rule: main result time (2 h at 95 C, the stated standard yield conditions)
+  resolution: agreed
+  arms:
+  - label: pH 7.0
+    lever_value: 7.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        L-lysine monohydrochloride: 0.1 M
+        D-glucose: 0.1 M
+      buffer: 0.1 M citrate-phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 9.0
+    lever_value: 9.0
+    value: 0.3
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        L-lysine monohydrochloride: 0.1 M
+        D-glucose: 0.1 M
+      buffer: 0.1 M borate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989a-28
+  odorant: Pyrazines
+  lever_class: pH
+  lever: initial pH 5.0 vs 7.0 (both 0.1 M citrate-phosphate)
+  focal: true
+  location: Table III, p. 202
+  digitised: false
+  unit: ppm
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: main result time (2 h at 95 C, the stated standard yield conditions)
+  resolution: agreed
+  arms:
+  - label: pH 5.0
+    lever_value: 5.0
+    value: 0.0239
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        L-lysine monohydrochloride: 0.1 M
+        D-glucose: 0.1 M
+      buffer: 0.1 M citrate-phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 7.0
+    lever_value: 7.0
+    value: 6.19
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        L-lysine monohydrochloride: 0.1 M
+        D-glucose: 0.1 M
+      buffer: 0.1 M citrate-phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989a-29
+  odorant: Pyrazines
+  lever_class: mixed
+  lever: 'initial pH 7.0 (citrate-phosphate) vs 9.0 (borate): pH and buffer type both change'
+  focal: true
+  location: Table III, p. 202
+  digitised: false
+  unit: ppm
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: main result time (2 h at 95 C, the stated standard yield conditions)
+  resolution: agreed
+  arms:
+  - label: pH 7.0
+    lever_value: 7.0
+    value: 6.19
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        L-lysine monohydrochloride: 0.1 M
+        D-glucose: 0.1 M
+      buffer: 0.1 M citrate-phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 9.0
+    lever_value: 9.0
+    value: 13.1
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      temp_C: 95
+      time_min: 120
+      precursors:
+        L-lysine monohydrochloride: 0.1 M
+        D-glucose: 0.1 M
+      buffer: 0.1 M borate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: leahy1989a-30
+  odorant: Unsubstituted pyrazine
+  lever_class: water
+  lever: water activity of NFDM (0.32 / 0.58 / 0.75 / 0.84)
+  focal: true
+  location: Table IV, p. 203
+  digitised: false
+  unit: ppm/hr (slope; standardized concentration units per dry weight)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0.5-3 h)
+  resolution: re-read
+  arms:
+  - label: aw 0.32
+    lever_value: 0.32
+    value: 0.324
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 95
+      time_min: 180
+      precursors: {}
+      buffer: none
+      matrix: other (nonfat dry milk powder, aw 0.32)
+      headspace: sealed, unstated
+  - label: aw 0.58
+    lever_value: 0.58
+    value: 0.681
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 95
+      time_min: 180
+      precursors: {}
+      buffer: none
+      matrix: other (nonfat dry milk powder, aw 0.58)
+      headspace: sealed, unstated
+  - label: aw 0.75
+    lever_value: 0.75
+    value: 1.371
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 95
+      time_min: 180
+      precursors: {}
+      buffer: none
+      matrix: other (nonfat dry milk powder, aw 0.75)
+      headspace: sealed, unstated
+  - label: aw 0.84
+    lever_value: 0.84
+    value: 1.318
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 95
+      time_min: 180
+      precursors: {}
+      buffer: none
+      matrix: other (nonfat dry milk powder, aw 0.84)
+      headspace: sealed, unstated
+- id: leahy1989a-31
+  odorant: 2-Methylpyrazine
+  lever_class: water
+  lever: water activity of NFDM (0.32 / 0.58 / 0.75 / 0.84)
+  focal: true
+  location: Table IV, p. 203
+  digitised: false
+  unit: ppm/hr (slope; standardized concentration units per dry weight)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course (zero-order rate constant fitted over 0.5-3 h)
+  resolution: re-read
+  arms:
+  - label: aw 0.32
+    lever_value: 0.32
+    value: 0.271
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 95
+      time_min: 180
+      precursors: {}
+      buffer: none
+      matrix: other (nonfat dry milk powder, aw 0.32)
+      headspace: sealed, unstated
+  - label: aw 0.58
+    lever_value: 0.58
+    value: 0.626
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 95
+      time_min: 180
+      precursors: {}
+      buffer: none
+      matrix: other (nonfat dry milk powder, aw 0.58)
+      headspace: sealed, unstated
+  - label: aw 0.75
+    lever_value: 0.75
+    value: 0.886
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 95
+      time_min: 180
+      precursors: {}
+      buffer: none
+      matrix: other (nonfat dry milk powder, aw 0.75)
+      headspace: sealed, unstated
+  - label: aw 0.84
+    lever_value: 0.84
+    value: 0.718
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 95
+      time_min: 180
+      precursors: {}
+      buffer: none
+      matrix: other (nonfat dry milk powder, aw 0.84)
+      headspace: sealed, unstated

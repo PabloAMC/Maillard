@@ -1,0 +1,1911 @@
+# Resolved (third read) from reader_a / reader_b; rows the comparison listed were re-read in the PDF.
+source: zamora2008
+pdf: data/articles/zamora2008.pdf
+reader: resolved
+scope_note: All values digitised (no tables of amounts). MeLOOH circles replotted in Figs. 2B and 3B keyed once (from 2A,
+  3A). Fig. 1 pH ladders split at the buffer switches (citrate 2.15-6, phosphate 6-8 and 11-12, borate 8-10); the duplicate
+  points at pH 6 and 8 cannot be assigned to a buffer and are left out. The 1 h / 25 umol / pH 3 / air pot recurs across Figs.
+  1-4 (shared arm). MeLOOH vs MeLnOOH lipid-identity pairs within Figs. 1-3 not keyed separately. Oxygen level for the nitrogen
+  arms written 'inert' (the PREREG reference level).
+contrasts:
+- id: zamora2008-1
+  odorant: Phenylacetaldehyde
+  lever_class: pH
+  lever: reaction pH 2.15-5, 0.3 M sodium citrate run (pH 6 duplicates not assignable to a buffer)
+  focal: false
+  location: Fig. 1 (circles)
+  digitised: true
+  unit: umol PA/100 umol Phe
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  resolution: re-read
+  arms:
+  - label: pH 2.15
+    lever_value: 2.15
+    value: 9.55
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 2.15
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-hydroperoxyoctadeca-9,11-dienoate (MeLOOH): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: pH 3
+    lever_value: 3
+    value: 8.9
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-hydroperoxyoctadeca-9,11-dienoate (MeLOOH): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: pH 4
+    lever_value: 4
+    value: 6.95
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 4
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-hydroperoxyoctadeca-9,11-dienoate (MeLOOH): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: pH 5
+    lever_value: 5
+    value: 6.3
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-hydroperoxyoctadeca-9,11-dienoate (MeLOOH): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+- id: zamora2008-2
+  odorant: Phenylacetaldehyde
+  lever_class: pH
+  lever: reaction pH 9 vs 10, 0.3 M sodium borate run (pH 8 duplicates not assignable)
+  focal: false
+  location: Fig. 1 (circles)
+  digitised: true
+  unit: umol PA/100 umol Phe
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  resolution: re-read
+  arms:
+  - label: pH 9
+    lever_value: 9
+    value: 2.4
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-hydroperoxyoctadeca-9,11-dienoate (MeLOOH): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium borate
+      matrix: buffer
+      headspace: air
+  - label: pH 10
+    lever_value: 10
+    value: 1.75
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 10
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-hydroperoxyoctadeca-9,11-dienoate (MeLOOH): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium borate
+      matrix: buffer
+      headspace: air
+- id: zamora2008-3
+  odorant: Phenylacetaldehyde
+  lever_class: pH
+  lever: reaction pH 11 vs 12, 0.3 M sodium phosphate run
+  focal: false
+  location: Fig. 1 (circles)
+  digitised: true
+  unit: umol PA/100 umol Phe
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  resolution: re-read
+  arms:
+  - label: pH 11
+    lever_value: 11
+    value: 2.3
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 11
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-hydroperoxyoctadeca-9,11-dienoate (MeLOOH): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium phosphate
+      matrix: buffer
+      headspace: air
+  - label: pH 12
+    lever_value: 12
+    value: 0.82
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 12
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-hydroperoxyoctadeca-9,11-dienoate (MeLOOH): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium phosphate
+      matrix: buffer
+      headspace: air
+- id: zamora2008-4
+  odorant: Phenylacetaldehyde
+  lever_class: mixed
+  lever: 'pH 10 (borate) vs pH 11 (phosphate): cross-buffer step of the pH ladder'
+  focal: false
+  location: Fig. 1 (circles)
+  digitised: true
+  unit: umol PA/100 umol Phe
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  resolution: re-read
+  arms:
+  - label: pH 10
+    lever_value: pH 10, borate
+    value: 1.75
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 10
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-hydroperoxyoctadeca-9,11-dienoate (MeLOOH): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium borate
+      matrix: buffer
+      headspace: air
+  - label: pH 11
+    lever_value: pH 11, phosphate
+    value: 2.3
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 11
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-hydroperoxyoctadeca-9,11-dienoate (MeLOOH): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium phosphate
+      matrix: buffer
+      headspace: air
+- id: zamora2008-5
+  odorant: Phenylacetaldehyde
+  lever_class: pH
+  lever: reaction pH 2.15-5, 0.3 M sodium citrate run (pH 6 duplicates not assignable to a buffer)
+  focal: false
+  location: Fig. 1 (triangles)
+  digitised: true
+  unit: umol PA/100 umol Phe
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  resolution: re-read
+  arms:
+  - label: pH 2.15
+    lever_value: 2.15
+    value: 11.8
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 2.15
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-hydroperoxyoctadeca-9,11,15-trienoate (MeLnOOH): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: pH 3
+    lever_value: 3
+    value: 9.48
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-hydroperoxyoctadeca-9,11,15-trienoate (MeLnOOH): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: pH 4
+    lever_value: 4
+    value: 7.83
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 4
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-hydroperoxyoctadeca-9,11,15-trienoate (MeLnOOH): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: pH 5
+    lever_value: 5
+    value: 5.36
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-hydroperoxyoctadeca-9,11,15-trienoate (MeLnOOH): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+- id: zamora2008-6
+  odorant: Phenylacetaldehyde
+  lever_class: pH
+  lever: reaction pH 9 vs 10, 0.3 M sodium borate run (pH 8 duplicates not assignable)
+  focal: false
+  location: Fig. 1 (triangles)
+  digitised: true
+  unit: umol PA/100 umol Phe
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  resolution: re-read
+  arms:
+  - label: pH 9
+    lever_value: 9
+    value: 1.7
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-hydroperoxyoctadeca-9,11,15-trienoate (MeLnOOH): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium borate
+      matrix: buffer
+      headspace: air
+  - label: pH 10
+    lever_value: 10
+    value: 1.52
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 10
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-hydroperoxyoctadeca-9,11,15-trienoate (MeLnOOH): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium borate
+      matrix: buffer
+      headspace: air
+- id: zamora2008-7
+  odorant: Phenylacetaldehyde
+  lever_class: pH
+  lever: reaction pH 11 vs 12, 0.3 M sodium phosphate run
+  focal: false
+  location: Fig. 1 (triangles)
+  digitised: true
+  unit: umol PA/100 umol Phe
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  resolution: re-read
+  arms:
+  - label: pH 11
+    lever_value: 11
+    value: 0.75
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 11
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-hydroperoxyoctadeca-9,11,15-trienoate (MeLnOOH): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium phosphate
+      matrix: buffer
+      headspace: air
+  - label: pH 12
+    lever_value: 12
+    value: 0.33
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 12
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-hydroperoxyoctadeca-9,11,15-trienoate (MeLnOOH): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium phosphate
+      matrix: buffer
+      headspace: air
+- id: zamora2008-8
+  odorant: Phenylacetaldehyde
+  lever_class: mixed
+  lever: 'pH 10 (borate) vs pH 11 (phosphate): cross-buffer step of the pH ladder'
+  focal: false
+  location: Fig. 1 (triangles)
+  digitised: true
+  unit: umol PA/100 umol Phe
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  resolution: re-read
+  arms:
+  - label: pH 10
+    lever_value: pH 10, borate
+    value: 1.52
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 10
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-hydroperoxyoctadeca-9,11,15-trienoate (MeLnOOH): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium borate
+      matrix: buffer
+      headspace: air
+  - label: pH 11
+    lever_value: pH 11, phosphate
+    value: 0.75
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 11
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-hydroperoxyoctadeca-9,11,15-trienoate (MeLnOOH): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium phosphate
+      matrix: buffer
+      headspace: air
+- id: zamora2008-9
+  odorant: Phenylacetaldehyde
+  lever_class: precursor dose
+  lever: MeLOOH amount 0-25 umol (phenylalanine fixed 25 umol)
+  focal: false
+  location: Fig. 2A (circles)
+  digitised: true
+  unit: umol PA/100 umol Phe
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  resolution: agreed
+  arms:
+  - label: 0 umol MeLOOH
+    lever_value: 0
+    value: 1.63
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-hydroperoxyoctadeca-9,11-dienoate (MeLOOH): 0 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 1.5625 umol MeLOOH
+    lever_value: 1.5625
+    value: 3.45
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-hydroperoxyoctadeca-9,11-dienoate (MeLOOH): 1.5625 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 3.125 umol MeLOOH
+    lever_value: 3.125
+    value: 4.69
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-hydroperoxyoctadeca-9,11-dienoate (MeLOOH): 3.125 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 6.25 umol MeLOOH
+    lever_value: 6.25
+    value: 6.01
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-hydroperoxyoctadeca-9,11-dienoate (MeLOOH): 6.25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 12.5 umol MeLOOH
+    lever_value: 12.5
+    value: 6.81
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-hydroperoxyoctadeca-9,11-dienoate (MeLOOH): 12.5 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 25 umol MeLOOH
+    lever_value: 25
+    value: 8.97
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-hydroperoxyoctadeca-9,11-dienoate (MeLOOH): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+- id: zamora2008-10
+  odorant: Phenylacetaldehyde
+  lever_class: precursor dose
+  lever: MeLnOOH amount 0-25 umol (phenylalanine fixed 25 umol)
+  focal: false
+  location: Fig. 2A (triangles)
+  digitised: true
+  unit: umol PA/100 umol Phe
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  resolution: agreed
+  arms:
+  - label: 0 umol MeLnOOH
+    lever_value: 0
+    value: 2.2
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-hydroperoxyoctadeca-9,11,15-trienoate (MeLnOOH): 0 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 1.5625 umol MeLnOOH
+    lever_value: 1.5625
+    value: 3.75
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-hydroperoxyoctadeca-9,11,15-trienoate (MeLnOOH): 1.5625 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 3.125 umol MeLnOOH
+    lever_value: 3.125
+    value: 5.1
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-hydroperoxyoctadeca-9,11,15-trienoate (MeLnOOH): 3.125 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 6.25 umol MeLnOOH
+    lever_value: 6.25
+    value: 6.4
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-hydroperoxyoctadeca-9,11,15-trienoate (MeLnOOH): 6.25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 12.5 umol MeLnOOH
+    lever_value: 12.5
+    value: 7.2
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-hydroperoxyoctadeca-9,11,15-trienoate (MeLnOOH): 12.5 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 25 umol MeLnOOH
+    lever_value: 25
+    value: 9.5
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-hydroperoxyoctadeca-9,11,15-trienoate (MeLnOOH): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+- id: zamora2008-11
+  odorant: Phenylacetaldehyde
+  lever_class: precursor dose
+  lever: MeLOH amount 0-25 umol (phenylalanine fixed 25 umol)
+  focal: false
+  location: Fig. 2B (diamonds)
+  digitised: true
+  unit: umol PA/100 umol Phe
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  resolution: agreed
+  arms:
+  - label: 0 umol MeLOH
+    lever_value: 0
+    value: 1.16
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-hydroxyoctadeca-9,11-dienoate (MeLOH): 0 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 1.5625 umol MeLOH
+    lever_value: 1.5625
+    value: 2.27
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-hydroxyoctadeca-9,11-dienoate (MeLOH): 1.5625 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 3.125 umol MeLOH
+    lever_value: 3.125
+    value: 2.73
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-hydroxyoctadeca-9,11-dienoate (MeLOH): 3.125 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 6.25 umol MeLOH
+    lever_value: 6.25
+    value: 5.2
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-hydroxyoctadeca-9,11-dienoate (MeLOH): 6.25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 12.5 umol MeLOH
+    lever_value: 12.5
+    value: 6.24
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-hydroxyoctadeca-9,11-dienoate (MeLOH): 12.5 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 25 umol MeLOH
+    lever_value: 25
+    value: 9.45
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-hydroxyoctadeca-9,11-dienoate (MeLOH): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+- id: zamora2008-12
+  odorant: Phenylacetaldehyde
+  lever_class: precursor dose
+  lever: MeLCO amount 0-25 umol (phenylalanine fixed 25 umol)
+  focal: false
+  location: Fig. 2B (squares)
+  digitised: true
+  unit: umol PA/100 umol Phe
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  resolution: agreed
+  arms:
+  - label: 0 umol MeLCO
+    lever_value: 0
+    value: 2.04
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-oxooctadeca-9,11-dienoate (MeLCO): 0 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 1.5625 umol MeLCO
+    lever_value: 1.5625
+    value: 2.94
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-oxooctadeca-9,11-dienoate (MeLCO): 1.5625 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 3.125 umol MeLCO
+    lever_value: 3.125
+    value: 2.92
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-oxooctadeca-9,11-dienoate (MeLCO): 3.125 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 6.25 umol MeLCO
+    lever_value: 6.25
+    value: 3.63
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-oxooctadeca-9,11-dienoate (MeLCO): 6.25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 12.5 umol MeLCO
+    lever_value: 12.5
+    value: 6.76
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-oxooctadeca-9,11-dienoate (MeLCO): 12.5 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 25 umol MeLCO
+    lever_value: 25
+    value: 10.5
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-oxooctadeca-9,11-dienoate (MeLCO): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+- id: zamora2008-13
+  odorant: Phenylacetaldehyde
+  lever_class: time
+  lever: heating time 0-60 min at 180 C; MeLOOH/phenylalanine
+  focal: false
+  location: Fig. 3A (circles)
+  digitised: true
+  unit: umol PA/100 umol Phe
+  quant_type: absolute
+  time_course_rule: 'lever is time: whole series'
+  quantity: amount
+  resolution: agreed
+  arms:
+  - label: 0 min
+    lever_value: 0
+    value: 2.06
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 0
+      precursors:
+        methyl 13-hydroperoxyoctadeca-9,11-dienoate (MeLOOH): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 10 min
+    lever_value: 10
+    value: 4.59
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 10
+      precursors:
+        methyl 13-hydroperoxyoctadeca-9,11-dienoate (MeLOOH): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 20 min
+    lever_value: 20
+    value: 5.8
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 20
+      precursors:
+        methyl 13-hydroperoxyoctadeca-9,11-dienoate (MeLOOH): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 30 min
+    lever_value: 30
+    value: 7.08
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 30
+      precursors:
+        methyl 13-hydroperoxyoctadeca-9,11-dienoate (MeLOOH): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 40 min
+    lever_value: 40
+    value: 7.79
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 40
+      precursors:
+        methyl 13-hydroperoxyoctadeca-9,11-dienoate (MeLOOH): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 50 min
+    lever_value: 50
+    value: 8.48
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 50
+      precursors:
+        methyl 13-hydroperoxyoctadeca-9,11-dienoate (MeLOOH): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 60 min
+    lever_value: 60
+    value: 8.96
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-hydroperoxyoctadeca-9,11-dienoate (MeLOOH): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+- id: zamora2008-14
+  odorant: Phenylacetaldehyde
+  lever_class: time
+  lever: heating time 0-60 min at 180 C; MeLnOOH/phenylalanine
+  focal: false
+  location: Fig. 3A (triangles)
+  digitised: true
+  unit: umol PA/100 umol Phe
+  quant_type: absolute
+  time_course_rule: 'lever is time: whole series'
+  quantity: amount
+  resolution: agreed
+  arms:
+  - label: 0 min
+    lever_value: 0
+    value: 1.69
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 0
+      precursors:
+        methyl 13-hydroperoxyoctadeca-9,11,15-trienoate (MeLnOOH): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 10 min
+    lever_value: 10
+    value: 3.55
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 10
+      precursors:
+        methyl 13-hydroperoxyoctadeca-9,11,15-trienoate (MeLnOOH): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 20 min
+    lever_value: 20
+    value: 4.65
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 20
+      precursors:
+        methyl 13-hydroperoxyoctadeca-9,11,15-trienoate (MeLnOOH): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 30 min
+    lever_value: 30
+    value: 7.8
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 30
+      precursors:
+        methyl 13-hydroperoxyoctadeca-9,11,15-trienoate (MeLnOOH): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 40 min
+    lever_value: 40
+    value: 7.47
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 40
+      precursors:
+        methyl 13-hydroperoxyoctadeca-9,11,15-trienoate (MeLnOOH): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 50 min
+    lever_value: 50
+    value: 7.19
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 50
+      precursors:
+        methyl 13-hydroperoxyoctadeca-9,11,15-trienoate (MeLnOOH): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 60 min
+    lever_value: 60
+    value: 9.5
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-hydroperoxyoctadeca-9,11,15-trienoate (MeLnOOH): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+- id: zamora2008-15
+  odorant: Phenylacetaldehyde
+  lever_class: time
+  lever: heating time 0-60 min at 180 C; MeLOH/phenylalanine
+  focal: false
+  location: Fig. 3B (diamonds)
+  digitised: true
+  unit: umol PA/100 umol Phe
+  quant_type: absolute
+  time_course_rule: 'lever is time: whole series'
+  quantity: amount
+  resolution: agreed
+  arms:
+  - label: 0 min
+    lever_value: 0
+    value: 1.28
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 0
+      precursors:
+        methyl 13-hydroxyoctadeca-9,11-dienoate (MeLOH): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 10 min
+    lever_value: 10
+    value: 4.85
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 10
+      precursors:
+        methyl 13-hydroxyoctadeca-9,11-dienoate (MeLOH): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 20 min
+    lever_value: 20
+    value: 5.3
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 20
+      precursors:
+        methyl 13-hydroxyoctadeca-9,11-dienoate (MeLOH): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 30 min
+    lever_value: 30
+    value: 7.53
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 30
+      precursors:
+        methyl 13-hydroxyoctadeca-9,11-dienoate (MeLOH): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 40 min
+    lever_value: 40
+    value: 6.88
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 40
+      precursors:
+        methyl 13-hydroxyoctadeca-9,11-dienoate (MeLOH): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 50 min
+    lever_value: 50
+    value: 8.5
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 50
+      precursors:
+        methyl 13-hydroxyoctadeca-9,11-dienoate (MeLOH): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 60 min
+    lever_value: 60
+    value: 9.44
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-hydroxyoctadeca-9,11-dienoate (MeLOH): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+- id: zamora2008-16
+  odorant: Phenylacetaldehyde
+  lever_class: time
+  lever: heating time 0-60 min at 180 C; MeLCO/phenylalanine
+  focal: false
+  location: Fig. 3B (squares)
+  digitised: true
+  unit: umol PA/100 umol Phe
+  quant_type: absolute
+  time_course_rule: 'lever is time: whole series'
+  quantity: amount
+  resolution: agreed
+  arms:
+  - label: 0 min
+    lever_value: 0
+    value: 0.8
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 0
+      precursors:
+        methyl 13-oxooctadeca-9,11-dienoate (MeLCO): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 20 min
+    lever_value: 20
+    value: 3.38
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 20
+      precursors:
+        methyl 13-oxooctadeca-9,11-dienoate (MeLCO): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 40 min
+    lever_value: 40
+    value: 7.73
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 40
+      precursors:
+        methyl 13-oxooctadeca-9,11-dienoate (MeLCO): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 60 min
+    lever_value: 60
+    value: 10.45
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-oxooctadeca-9,11-dienoate (MeLCO): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+- id: zamora2008-17
+  odorant: Phenylacetaldehyde
+  lever_class: lipid
+  lever: lipid oxidation product identity (MeLOOH, MeLOH, MeLEPOH, MeLCO, MeLEPCO), heated under air
+  focal: true
+  location: Fig. 4, air (slashed bars)
+  digitised: true
+  unit: umol PA/100 umol Phe
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  resolution: agreed
+  arms:
+  - label: MeLOOH
+    lever_value: MeLOOH
+    value: 8.96
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-hydroperoxyoctadeca-9,11-dienoate (MeLOOH): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: MeLOH
+    lever_value: MeLOH
+    value: 9.43
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-hydroxyoctadeca-9,11-dienoate (MeLOH): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: MeLEPOH
+    lever_value: MeLEPOH
+    value: 9.53
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 9,10-epoxy-13-hydroxy-11-octadecenoate (MeLEPOH): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: MeLCO
+    lever_value: MeLCO
+    value: 10.47
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-oxooctadeca-9,11-dienoate (MeLCO): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: MeLEPCO
+    lever_value: MeLEPCO
+    value: 10.79
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 9,10-epoxy-13-oxo-11-octadecenoate (MeLEPCO): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+- id: zamora2008-18
+  odorant: Phenylacetaldehyde
+  lever_class: lipid
+  lever: lipid oxidation product identity (MeLOOH, MeLOH, MeLEPOH, MeLCO, MeLEPCO), heated under nitrogen
+  focal: true
+  location: Fig. 4, nitrogen (horizontal bars)
+  digitised: true
+  unit: umol PA/100 umol Phe
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  resolution: agreed
+  arms:
+  - label: MeLOOH
+    lever_value: MeLOOH
+    value: 3.75
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-hydroperoxyoctadeca-9,11-dienoate (MeLOOH): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: inert
+  - label: MeLOH
+    lever_value: MeLOH
+    value: 4.58
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-hydroxyoctadeca-9,11-dienoate (MeLOH): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: inert
+  - label: MeLEPOH
+    lever_value: MeLEPOH
+    value: 5.56
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 9,10-epoxy-13-hydroxy-11-octadecenoate (MeLEPOH): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: inert
+  - label: MeLCO
+    lever_value: MeLCO
+    value: 4.31
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-oxooctadeca-9,11-dienoate (MeLCO): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: inert
+  - label: MeLEPCO
+    lever_value: MeLEPCO
+    value: 10.58
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 9,10-epoxy-13-oxo-11-octadecenoate (MeLEPCO): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: inert
+- id: zamora2008-19
+  odorant: Phenylacetaldehyde
+  lever_class: oxygen
+  lever: air vs inert (nitrogen) atmosphere; MeLOOH/phenylalanine
+  focal: false
+  location: Fig. 4
+  digitised: true
+  unit: umol PA/100 umol Phe
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  resolution: re-read
+  arms:
+  - label: MeLOOH, air
+    lever_value: air
+    value: 8.96
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-hydroperoxyoctadeca-9,11-dienoate (MeLOOH): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: MeLOOH, nitrogen
+    lever_value: inert
+    value: 3.75
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-hydroperoxyoctadeca-9,11-dienoate (MeLOOH): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: inert
+- id: zamora2008-20
+  odorant: Phenylacetaldehyde
+  lever_class: oxygen
+  lever: air vs inert (nitrogen) atmosphere; MeLOH/phenylalanine
+  focal: false
+  location: Fig. 4
+  digitised: true
+  unit: umol PA/100 umol Phe
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  resolution: re-read
+  arms:
+  - label: MeLOH, air
+    lever_value: air
+    value: 9.43
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-hydroxyoctadeca-9,11-dienoate (MeLOH): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: MeLOH, nitrogen
+    lever_value: inert
+    value: 4.58
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-hydroxyoctadeca-9,11-dienoate (MeLOH): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: inert
+- id: zamora2008-21
+  odorant: Phenylacetaldehyde
+  lever_class: oxygen
+  lever: air vs inert (nitrogen) atmosphere; MeLEPOH/phenylalanine
+  focal: false
+  location: Fig. 4
+  digitised: true
+  unit: umol PA/100 umol Phe
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  resolution: re-read
+  arms:
+  - label: MeLEPOH, air
+    lever_value: air
+    value: 9.53
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 9,10-epoxy-13-hydroxy-11-octadecenoate (MeLEPOH): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: MeLEPOH, nitrogen
+    lever_value: inert
+    value: 5.56
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 9,10-epoxy-13-hydroxy-11-octadecenoate (MeLEPOH): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: inert
+- id: zamora2008-22
+  odorant: Phenylacetaldehyde
+  lever_class: oxygen
+  lever: air vs inert (nitrogen) atmosphere; MeLCO/phenylalanine
+  focal: false
+  location: Fig. 4
+  digitised: true
+  unit: umol PA/100 umol Phe
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  resolution: re-read
+  arms:
+  - label: MeLCO, air
+    lever_value: air
+    value: 10.47
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-oxooctadeca-9,11-dienoate (MeLCO): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: MeLCO, nitrogen
+    lever_value: inert
+    value: 4.31
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-oxooctadeca-9,11-dienoate (MeLCO): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: inert
+- id: zamora2008-23
+  odorant: Phenylacetaldehyde
+  lever_class: oxygen
+  lever: air vs inert (nitrogen) atmosphere; MeLEPCO/phenylalanine
+  focal: false
+  location: Fig. 4
+  digitised: true
+  unit: umol PA/100 umol Phe
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  resolution: re-read
+  arms:
+  - label: MeLEPCO, air
+    lever_value: air
+    value: 10.79
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 9,10-epoxy-13-oxo-11-octadecenoate (MeLEPCO): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: MeLEPCO, nitrogen
+    lever_value: inert
+    value: 10.58
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 9,10-epoxy-13-oxo-11-octadecenoate (MeLEPCO): 25 umol in 0.5 mL
+        phenylalanine: 25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: inert

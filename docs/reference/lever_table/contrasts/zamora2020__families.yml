@@ -1,0 +1,7 @@
+# Resolved (third read) from reader_a / reader_b; rows the comparison listed were re-read in the PDF.
+source: zamora2020
+pdf: data/articles/zamora2020.pdf
+reader: resolved
+scope_note: 'No qualifying contrast (both readers): the paper quantifies only alkylpyridines (Tables 1-2); no pyrazine, Strecker
+  aldehyde, lipid aldehyde or furan is measured (hexanal from menhaden oil is mentioned without values).'
+contrasts: []

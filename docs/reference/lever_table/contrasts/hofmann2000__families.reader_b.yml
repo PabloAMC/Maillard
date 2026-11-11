@@ -1,0 +1,945 @@
+source: "hofmann2000"
+pdf: "data/articles/hofmann2000.pdf"
+reader: "b"
+scope_note: "Table 2 not keyed (each odorant measured from one amino acid only); Table 4 expt 2 (copper ions) not keyed (copper is not a lever class); Fig. 4 carbonyl-identity contrasts at fixed pH not keyed separately (Table 4 prints that lever); Fig. 4 time and temperature unstated; Fig. 5 is phenylacetic acid."
+contrasts:
+  - id: "hofmann2000-1"
+    odorant: "phenylacetaldehyde"
+    lever_class: "time"
+    lever: "heating time"
+    focal: false
+    location: "Fig. 2"
+    digitised: true
+    unit: "umol/mmol glucose"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "10 min"
+        lever_value: 10
+        value: 0.2
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 98
+          time_min: 10
+          precursors: {"glucose": "1.0 mmol", "L-phenylalanine": "1.0 mmol", "volume": "10 mL"}
+          buffer: "phosphate 0.5 mol/L"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "30 min"
+        lever_value: 30
+        value: 0.5
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 98
+          time_min: 30
+          precursors: {"glucose": "1.0 mmol", "L-phenylalanine": "1.0 mmol", "volume": "10 mL"}
+          buffer: "phosphate 0.5 mol/L"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "60 min"
+        lever_value: 60
+        value: 0.9
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 98
+          time_min: 60
+          precursors: {"glucose": "1.0 mmol", "L-phenylalanine": "1.0 mmol", "volume": "10 mL"}
+          buffer: "phosphate 0.5 mol/L"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "120 min"
+        lever_value: 120
+        value: 1.4
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 98
+          time_min: 120
+          precursors: {"glucose": "1.0 mmol", "L-phenylalanine": "1.0 mmol", "volume": "10 mL"}
+          buffer: "phosphate 0.5 mol/L"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "240 min"
+        lever_value: 240
+        value: 2.01
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 98
+          time_min: 240
+          precursors: {"glucose": "1.0 mmol", "L-phenylalanine": "1.0 mmol", "volume": "10 mL"}
+          buffer: "phosphate 0.5 mol/L"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "500 min"
+        lever_value: 500
+        value: 2.21
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 98
+          time_min: 500
+          precursors: {"glucose": "1.0 mmol", "L-phenylalanine": "1.0 mmol", "volume": "10 mL"}
+          buffer: "phosphate 0.5 mol/L"
+          matrix: "buffer"
+          headspace: "unstated"
+  - id: "hofmann2000-2"
+    odorant: "phenylacetaldehyde"
+    lever_class: "time"
+    lever: "reaction time"
+    focal: false
+    location: "Table 3"
+    digitised: false
+    unit: "umol"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "10 min"
+        lever_value: 10
+        value: 6.2
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 98
+          time_min: 10
+          precursors: {"2-oxopropanal": "1 mmol", "L-phenylalanine": "1 mmol", "volume": "10 mL"}
+          buffer: "phosphate 0.5 mol/L"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "30 min"
+        lever_value: 30
+        value: 9.5
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 98
+          time_min: 30
+          precursors: {"2-oxopropanal": "1 mmol", "L-phenylalanine": "1 mmol", "volume": "10 mL"}
+          buffer: "phosphate 0.5 mol/L"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "60 min"
+        lever_value: 60
+        value: 10.6
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 98
+          time_min: 60
+          precursors: {"2-oxopropanal": "1 mmol", "L-phenylalanine": "1 mmol", "volume": "10 mL"}
+          buffer: "phosphate 0.5 mol/L"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "120 min"
+        lever_value: 120
+        value: 12.3
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 98
+          time_min: 120
+          precursors: {"2-oxopropanal": "1 mmol", "L-phenylalanine": "1 mmol", "volume": "10 mL"}
+          buffer: "phosphate 0.5 mol/L"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "240 min"
+        lever_value: 240
+        value: 13.5
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 98
+          time_min: 240
+          precursors: {"2-oxopropanal": "1 mmol", "L-phenylalanine": "1 mmol", "volume": "10 mL"}
+          buffer: "phosphate 0.5 mol/L"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "300 min"
+        lever_value: 300
+        value: 13.3
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 98
+          time_min: 300
+          precursors: {"2-oxopropanal": "1 mmol", "L-phenylalanine": "1 mmol", "volume": "10 mL"}
+          buffer: "phosphate 0.5 mol/L"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "500 min"
+        lever_value: 500
+        value: 12.2
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 98
+          time_min: 500
+          precursors: {"2-oxopropanal": "1 mmol", "L-phenylalanine": "1 mmol", "volume": "10 mL"}
+          buffer: "phosphate 0.5 mol/L"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+  - id: "hofmann2000-3"
+    odorant: "phenylacetaldehyde"
+    lever_class: "sugar identity"
+    lever: "alpha-dicarbonyl identity reacted with L-phenylalanine, model A (oxygen absent)"
+    focal: true
+    location: "Table 4"
+    digitised: false
+    unit: "umol/mmol"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "expt 1 2-oxopropanal"
+        lever_value: "2-oxopropanal"
+        value: 11.1
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 98
+          time_min: 60
+          precursors: {"2-oxopropanal": "1.0 mmol", "L-phenylalanine": "1.0 mmol", "volume": "10 mL"}
+          buffer: "phosphate 0.1 mol/L"
+          matrix: "buffer"
+          headspace: "inert"
+      - label: "expt 3 glyoxal"
+        lever_value: "glyoxal"
+        value: 9.2
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 98
+          time_min: 60
+          precursors: {"glyoxal": "1.0 mmol", "L-phenylalanine": "1.0 mmol", "volume": "10 mL"}
+          buffer: "phosphate 0.1 mol/L"
+          matrix: "buffer"
+          headspace: "inert"
+      - label: "expt 4 3-deoxy-2-hexosulose"
+        lever_value: "3-deoxy-2-hexosulose"
+        value: 8.4
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 98
+          time_min: 60
+          precursors: {"3-deoxy-2-hexosulose": "1.0 mmol", "L-phenylalanine": "1.0 mmol", "volume": "10 mL"}
+          buffer: "phosphate 0.1 mol/L"
+          matrix: "buffer"
+          headspace: "inert"
+      - label: "expt 5 2-hexosulose"
+        lever_value: "2-hexosulose"
+        value: 8.1
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 98
+          time_min: 60
+          precursors: {"2-hexosulose": "1.0 mmol", "L-phenylalanine": "1.0 mmol", "volume": "10 mL"}
+          buffer: "phosphate 0.1 mol/L"
+          matrix: "buffer"
+          headspace: "inert"
+  - id: "hofmann2000-4"
+    odorant: "phenylacetaldehyde"
+    lever_class: "sugar identity"
+    lever: "alpha-dicarbonyl identity reacted with L-phenylalanine, model B (oxygen present)"
+    focal: true
+    location: "Table 4"
+    digitised: false
+    unit: "umol/mmol"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "expt 1 2-oxopropanal"
+        lever_value: "2-oxopropanal"
+        value: 10.2
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 98
+          time_min: 60
+          precursors: {"2-oxopropanal": "1.0 mmol", "L-phenylalanine": "1.0 mmol", "volume": "10 mL"}
+          buffer: "phosphate 0.1 mol/L"
+          matrix: "buffer"
+          headspace: "air"
+      - label: "expt 3 glyoxal"
+        lever_value: "glyoxal"
+        value: 8.3
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 98
+          time_min: 60
+          precursors: {"glyoxal": "1.0 mmol", "L-phenylalanine": "1.0 mmol", "volume": "10 mL"}
+          buffer: "phosphate 0.1 mol/L"
+          matrix: "buffer"
+          headspace: "air"
+      - label: "expt 4 3-deoxy-2-hexosulose"
+        lever_value: "3-deoxy-2-hexosulose"
+        value: 7.8
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 98
+          time_min: 60
+          precursors: {"3-deoxy-2-hexosulose": "1.0 mmol", "L-phenylalanine": "1.0 mmol", "volume": "10 mL"}
+          buffer: "phosphate 0.1 mol/L"
+          matrix: "buffer"
+          headspace: "air"
+      - label: "expt 5 2-hexosulose"
+        lever_value: "2-hexosulose"
+        value: 6.9
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 98
+          time_min: 60
+          precursors: {"2-hexosulose": "1.0 mmol", "L-phenylalanine": "1.0 mmol", "volume": "10 mL"}
+          buffer: "phosphate 0.1 mol/L"
+          matrix: "buffer"
+          headspace: "air"
+  - id: "hofmann2000-5"
+    odorant: "phenylacetaldehyde"
+    lever_class: "oxygen"
+    lever: "oxygen absent (model A) vs present (model B), 2-oxopropanal"
+    focal: true
+    location: "Table 4"
+    digitised: false
+    unit: "umol/mmol"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "expt 1 model A"
+        lever_value: "oxygen absent"
+        value: 11.1
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 98
+          time_min: 60
+          precursors: {"2-oxopropanal": "1.0 mmol", "L-phenylalanine": "1.0 mmol", "volume": "10 mL"}
+          buffer: "phosphate 0.1 mol/L"
+          matrix: "buffer"
+          headspace: "inert"
+      - label: "expt 1 model B"
+        lever_value: "oxygen present"
+        value: 10.2
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 98
+          time_min: 60
+          precursors: {"2-oxopropanal": "1.0 mmol", "L-phenylalanine": "1.0 mmol", "volume": "10 mL"}
+          buffer: "phosphate 0.1 mol/L"
+          matrix: "buffer"
+          headspace: "air"
+  - id: "hofmann2000-6"
+    odorant: "phenylacetaldehyde"
+    lever_class: "oxygen"
+    lever: "oxygen absent (model A) vs present (model B), glyoxal"
+    focal: true
+    location: "Table 4"
+    digitised: false
+    unit: "umol/mmol"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "expt 3 model A"
+        lever_value: "oxygen absent"
+        value: 9.2
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 98
+          time_min: 60
+          precursors: {"glyoxal": "1.0 mmol", "L-phenylalanine": "1.0 mmol", "volume": "10 mL"}
+          buffer: "phosphate 0.1 mol/L"
+          matrix: "buffer"
+          headspace: "inert"
+      - label: "expt 3 model B"
+        lever_value: "oxygen present"
+        value: 8.3
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 98
+          time_min: 60
+          precursors: {"glyoxal": "1.0 mmol", "L-phenylalanine": "1.0 mmol", "volume": "10 mL"}
+          buffer: "phosphate 0.1 mol/L"
+          matrix: "buffer"
+          headspace: "air"
+  - id: "hofmann2000-7"
+    odorant: "phenylacetaldehyde"
+    lever_class: "oxygen"
+    lever: "oxygen absent (model A) vs present (model B), 3-deoxy-2-hexosulose"
+    focal: true
+    location: "Table 4"
+    digitised: false
+    unit: "umol/mmol"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "expt 4 model A"
+        lever_value: "oxygen absent"
+        value: 8.4
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 98
+          time_min: 60
+          precursors: {"3-deoxy-2-hexosulose": "1.0 mmol", "L-phenylalanine": "1.0 mmol", "volume": "10 mL"}
+          buffer: "phosphate 0.1 mol/L"
+          matrix: "buffer"
+          headspace: "inert"
+      - label: "expt 4 model B"
+        lever_value: "oxygen present"
+        value: 7.8
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 98
+          time_min: 60
+          precursors: {"3-deoxy-2-hexosulose": "1.0 mmol", "L-phenylalanine": "1.0 mmol", "volume": "10 mL"}
+          buffer: "phosphate 0.1 mol/L"
+          matrix: "buffer"
+          headspace: "air"
+  - id: "hofmann2000-8"
+    odorant: "phenylacetaldehyde"
+    lever_class: "oxygen"
+    lever: "oxygen absent (model A) vs present (model B), 2-hexosulose"
+    focal: true
+    location: "Table 4"
+    digitised: false
+    unit: "umol/mmol"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "expt 5 model A"
+        lever_value: "oxygen absent"
+        value: 8.1
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 98
+          time_min: 60
+          precursors: {"2-hexosulose": "1.0 mmol", "L-phenylalanine": "1.0 mmol", "volume": "10 mL"}
+          buffer: "phosphate 0.1 mol/L"
+          matrix: "buffer"
+          headspace: "inert"
+      - label: "expt 5 model B"
+        lever_value: "oxygen present"
+        value: 6.9
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 98
+          time_min: 60
+          precursors: {"2-hexosulose": "1.0 mmol", "L-phenylalanine": "1.0 mmol", "volume": "10 mL"}
+          buffer: "phosphate 0.1 mol/L"
+          matrix: "buffer"
+          headspace: "air"
+  - id: "hofmann2000-9"
+    odorant: "phenylacetaldehyde"
+    lever_class: "pH"
+    lever: "pH value, 2-oxopropanal + L-phenylalanine"
+    focal: true
+    location: "Fig. 4"
+    digitised: true
+    unit: "umol/mmol phenylalanine"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "pH 3"
+        lever_value: 3
+        value: 10.52
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "unstated"
+          temp_C: null
+          time_min: null
+          precursors: {"2-oxopropanal": "unstated", "L-phenylalanine": "unstated"}
+          buffer: "unstated"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "pH 5"
+        lever_value: 5
+        value: 13.44
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 5
+          ph_basis: "unstated"
+          temp_C: null
+          time_min: null
+          precursors: {"2-oxopropanal": "unstated", "L-phenylalanine": "unstated"}
+          buffer: "unstated"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "pH 7"
+        lever_value: 7
+        value: 10.41
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7
+          ph_basis: "unstated"
+          temp_C: null
+          time_min: null
+          precursors: {"2-oxopropanal": "unstated", "L-phenylalanine": "unstated"}
+          buffer: "unstated"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "pH 9"
+        lever_value: 9
+        value: 5.81
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 9
+          ph_basis: "unstated"
+          temp_C: null
+          time_min: null
+          precursors: {"2-oxopropanal": "unstated", "L-phenylalanine": "unstated"}
+          buffer: "unstated"
+          matrix: "buffer"
+          headspace: "unstated"
+  - id: "hofmann2000-10"
+    odorant: "phenylacetaldehyde"
+    lever_class: "pH"
+    lever: "pH value, glyoxal + L-phenylalanine"
+    focal: true
+    location: "Fig. 4"
+    digitised: true
+    unit: "umol/mmol phenylalanine"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "pH 3"
+        lever_value: 3
+        value: 9.82
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "unstated"
+          temp_C: null
+          time_min: null
+          precursors: {"glyoxal": "unstated", "L-phenylalanine": "unstated"}
+          buffer: "unstated"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "pH 5"
+        lever_value: 5
+        value: 11.92
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 5
+          ph_basis: "unstated"
+          temp_C: null
+          time_min: null
+          precursors: {"glyoxal": "unstated", "L-phenylalanine": "unstated"}
+          buffer: "unstated"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "pH 7"
+        lever_value: 7
+        value: 8.39
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7
+          ph_basis: "unstated"
+          temp_C: null
+          time_min: null
+          precursors: {"glyoxal": "unstated", "L-phenylalanine": "unstated"}
+          buffer: "unstated"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "pH 9"
+        lever_value: 9
+        value: 5.56
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 9
+          ph_basis: "unstated"
+          temp_C: null
+          time_min: null
+          precursors: {"glyoxal": "unstated", "L-phenylalanine": "unstated"}
+          buffer: "unstated"
+          matrix: "buffer"
+          headspace: "unstated"
+  - id: "hofmann2000-11"
+    odorant: "phenylacetaldehyde"
+    lever_class: "pH"
+    lever: "pH value, 3-deoxyosone + L-phenylalanine"
+    focal: true
+    location: "Fig. 4"
+    digitised: true
+    unit: "umol/mmol phenylalanine"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "pH 3"
+        lever_value: 3
+        value: 8.19
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "unstated"
+          temp_C: null
+          time_min: null
+          precursors: {"3-deoxyosone": "unstated", "L-phenylalanine": "unstated"}
+          buffer: "unstated"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "pH 5"
+        lever_value: 5
+        value: 11.03
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 5
+          ph_basis: "unstated"
+          temp_C: null
+          time_min: null
+          precursors: {"3-deoxyosone": "unstated", "L-phenylalanine": "unstated"}
+          buffer: "unstated"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "pH 7"
+        lever_value: 7
+        value: 8.0
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7
+          ph_basis: "unstated"
+          temp_C: null
+          time_min: null
+          precursors: {"3-deoxyosone": "unstated", "L-phenylalanine": "unstated"}
+          buffer: "unstated"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "pH 9"
+        lever_value: 9
+        value: 5.19
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 9
+          ph_basis: "unstated"
+          temp_C: null
+          time_min: null
+          precursors: {"3-deoxyosone": "unstated", "L-phenylalanine": "unstated"}
+          buffer: "unstated"
+          matrix: "buffer"
+          headspace: "unstated"
+  - id: "hofmann2000-12"
+    odorant: "phenylacetaldehyde"
+    lever_class: "pH"
+    lever: "pH value, glucosone + L-phenylalanine"
+    focal: true
+    location: "Fig. 4"
+    digitised: true
+    unit: "umol/mmol phenylalanine"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "pH 3"
+        lever_value: 3
+        value: 8.02
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "unstated"
+          temp_C: null
+          time_min: null
+          precursors: {"glucosone": "unstated", "L-phenylalanine": "unstated"}
+          buffer: "unstated"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "pH 5"
+        lever_value: 5
+        value: 10.02
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 5
+          ph_basis: "unstated"
+          temp_C: null
+          time_min: null
+          precursors: {"glucosone": "unstated", "L-phenylalanine": "unstated"}
+          buffer: "unstated"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "pH 7"
+        lever_value: 7
+        value: 6.99
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7
+          ph_basis: "unstated"
+          temp_C: null
+          time_min: null
+          precursors: {"glucosone": "unstated", "L-phenylalanine": "unstated"}
+          buffer: "unstated"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "pH 9"
+        lever_value: 9
+        value: 4.99
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 9
+          ph_basis: "unstated"
+          temp_C: null
+          time_min: null
+          precursors: {"glucosone": "unstated", "L-phenylalanine": "unstated"}
+          buffer: "unstated"
+          matrix: "buffer"
+          headspace: "unstated"
+  - id: "hofmann2000-13"
+    odorant: "phenylacetaldehyde"
+    lever_class: "pH"
+    lever: "pH value, glucose + L-phenylalanine"
+    focal: true
+    location: "Fig. 4"
+    digitised: true
+    unit: "umol/mmol phenylalanine"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "pH 3"
+        lever_value: 3
+        value: 1.04
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "unstated"
+          temp_C: null
+          time_min: null
+          precursors: {"glucose": "unstated", "L-phenylalanine": "unstated"}
+          buffer: "unstated"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "pH 5"
+        lever_value: 5
+        value: 1.52
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 5
+          ph_basis: "unstated"
+          temp_C: null
+          time_min: null
+          precursors: {"glucose": "unstated", "L-phenylalanine": "unstated"}
+          buffer: "unstated"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "pH 7"
+        lever_value: 7
+        value: 0.81
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7
+          ph_basis: "unstated"
+          temp_C: null
+          time_min: null
+          precursors: {"glucose": "unstated", "L-phenylalanine": "unstated"}
+          buffer: "unstated"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "pH 9"
+        lever_value: 9
+        value: 0.59
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 9
+          ph_basis: "unstated"
+          temp_C: null
+          time_min: null
+          precursors: {"glucose": "unstated", "L-phenylalanine": "unstated"}
+          buffer: "unstated"
+          matrix: "buffer"
+          headspace: "unstated"
