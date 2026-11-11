@@ -1,0 +1,7 @@
+# Reader a, blind double-keying, second round (odorant families). Rules: PREREG secs. 3 - 4.
+source: yiltirak2026
+pdf: data/articles/Yiltirak2026.pdf
+reader: a
+scope_note: 'No qualifying contrast: the paper quantifies only thiols (MFT, FFT, 3-mercapto-2-butanone; Fig. 6), out of scope
+  this round; hexanal is discussed only via supplementary Fig. S5, which is not in the PDF.'
+contrasts: []

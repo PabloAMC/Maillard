@@ -1,0 +1,3338 @@
+# Resolved (third read) from reader_a / reader_b; rows the comparison listed were re-read in the PDF.
+source: zamora2013
+pdf: data/articles/zamora2013.pdf
+reader: resolved
+scope_note: 'Phenylacetaldehyde only (benzaldehyde identified, not quantified). Fig. 1 pH ladders split at the buffer switches
+  (citrate 2.15-5, phosphate 6-8, borate 9-10) with the two cross-buffer steps keyed as mixed. Time ladders keyed only for
+  the highest-temperature series of Figs. 3, 5, 6 (the other series enter only through the Fig. 4 rate constants; neither
+  reader keyed them as time contrasts). Oxygen: one amount pair (Figs. 6B vs 6C, 180 C, 12 min) and four rate pairs (Fig.
+  4C). Fig. 3/5/6 y-axis printed ''umol/mmol PhIP'' (read as Phe). Table 2 cross-column (temperature + time) comparisons and
+  Ea values not keyed. Oxygen level for nitrogen arms written ''inert''.'
+contrasts:
+- id: zamora2013-1
+  odorant: Phenylacetaldehyde
+  lever_class: pH
+  lever: reaction pH 2.15-5, 0.3 M sodium citrate run (4-oxo-2-hexenal + Phe)
+  focal: false
+  location: Fig. 1 (circles)
+  digitised: true
+  unit: umol/mmol Phe
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: not a time course
+  note: Fig. 1 ladder split at the buffer switches (citrate 2.15-5, phosphate 6-8, borate 9-10)
+  resolution: re-read
+  arms:
+  - label: pH 2.15, 4-oxo-2-hexenal
+    lever_value: 2.15
+    value: 157
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 2.15
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-oxo-2-hexenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: pH 3, 4-oxo-2-hexenal
+    lever_value: 3
+    value: 144
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-oxo-2-hexenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: pH 4, 4-oxo-2-hexenal
+    lever_value: 4
+    value: 128
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 4
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-oxo-2-hexenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: pH 5, 4-oxo-2-hexenal
+    lever_value: 5
+    value: 89
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-oxo-2-hexenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+- id: zamora2013-2
+  odorant: Phenylacetaldehyde
+  lever_class: pH
+  lever: reaction pH 6-8, 0.3 M sodium phosphate run (4-oxo-2-hexenal + Phe)
+  focal: false
+  location: Fig. 1 (circles)
+  digitised: true
+  unit: umol/mmol Phe
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: not a time course
+  note: Fig. 1 ladder split at the buffer switches (citrate 2.15-5, phosphate 6-8, borate 9-10)
+  resolution: re-read
+  arms:
+  - label: pH 6, 4-oxo-2-hexenal
+    lever_value: 6
+    value: 84
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-oxo-2-hexenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium phosphate
+      matrix: buffer
+      headspace: air
+  - label: pH 7, 4-oxo-2-hexenal
+    lever_value: 7
+    value: 79
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-oxo-2-hexenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium phosphate
+      matrix: buffer
+      headspace: air
+  - label: pH 8, 4-oxo-2-hexenal
+    lever_value: 8
+    value: 51
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-oxo-2-hexenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium phosphate
+      matrix: buffer
+      headspace: air
+- id: zamora2013-3
+  odorant: Phenylacetaldehyde
+  lever_class: pH
+  lever: reaction pH 9-10, 0.3 M sodium borate run (4-oxo-2-hexenal + Phe)
+  focal: false
+  location: Fig. 1 (circles)
+  digitised: true
+  unit: umol/mmol Phe
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: not a time course
+  note: Fig. 1 ladder split at the buffer switches (citrate 2.15-5, phosphate 6-8, borate 9-10)
+  resolution: re-read
+  arms:
+  - label: pH 9, 4-oxo-2-hexenal
+    lever_value: 9
+    value: 26
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-oxo-2-hexenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium borate
+      matrix: buffer
+      headspace: air
+  - label: pH 10, 4-oxo-2-hexenal
+    lever_value: 10
+    value: 7
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 10
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-oxo-2-hexenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium borate
+      matrix: buffer
+      headspace: air
+- id: zamora2013-4
+  odorant: Phenylacetaldehyde
+  lever_class: mixed
+  lever: 'pH 5 (citrate) vs pH 6 (phosphate): cross-buffer step of the Fig. 1 pH ladder (4-oxo-2-hexenal + Phe)'
+  focal: false
+  location: Fig. 1 (circles)
+  digitised: true
+  unit: umol/mmol Phe
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: not a time course
+  note: pH and buffer type both change; the paper discusses the whole pH ladder (linear decrease)
+  resolution: re-read
+  arms:
+  - label: pH 5, 4-oxo-2-hexenal
+    lever_value: ph 5, citrate
+    value: 89
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-oxo-2-hexenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: pH 6, 4-oxo-2-hexenal
+    lever_value: ph 6, phosphate
+    value: 84
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-oxo-2-hexenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium phosphate
+      matrix: buffer
+      headspace: air
+- id: zamora2013-5
+  odorant: Phenylacetaldehyde
+  lever_class: mixed
+  lever: 'pH 8 (phosphate) vs pH 9 (borate): cross-buffer step of the Fig. 1 pH ladder (4-oxo-2-hexenal + Phe)'
+  focal: false
+  location: Fig. 1 (circles)
+  digitised: true
+  unit: umol/mmol Phe
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: not a time course
+  note: pH and buffer type both change; the paper discusses the whole pH ladder (linear decrease)
+  resolution: re-read
+  arms:
+  - label: pH 8, 4-oxo-2-hexenal
+    lever_value: ph 8, phosphate
+    value: 51
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-oxo-2-hexenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium phosphate
+      matrix: buffer
+      headspace: air
+  - label: pH 9, 4-oxo-2-hexenal
+    lever_value: ph 9, borate
+    value: 26
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-oxo-2-hexenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium borate
+      matrix: buffer
+      headspace: air
+- id: zamora2013-6
+  odorant: Phenylacetaldehyde
+  lever_class: pH
+  lever: reaction pH 2.15-5, 0.3 M sodium citrate run (4-oxo-2-nonenal + Phe)
+  focal: false
+  location: Fig. 1 (triangles)
+  digitised: true
+  unit: umol/mmol Phe
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: not a time course
+  note: Fig. 1 ladder split at the buffer switches (citrate 2.15-5, phosphate 6-8, borate 9-10)
+  resolution: re-read
+  arms:
+  - label: pH 2.15, 4-oxo-2-nonenal
+    lever_value: 2.15
+    value: 200
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 2.15
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-oxo-2-nonenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: pH 3, 4-oxo-2-nonenal
+    lever_value: 3
+    value: 169
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-oxo-2-nonenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: pH 4, 4-oxo-2-nonenal
+    lever_value: 4
+    value: 138
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 4
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-oxo-2-nonenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: pH 5, 4-oxo-2-nonenal
+    lever_value: 5
+    value: 100
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-oxo-2-nonenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+- id: zamora2013-7
+  odorant: Phenylacetaldehyde
+  lever_class: pH
+  lever: reaction pH 6-8, 0.3 M sodium phosphate run (4-oxo-2-nonenal + Phe)
+  focal: false
+  location: Fig. 1 (triangles)
+  digitised: true
+  unit: umol/mmol Phe
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: not a time course
+  note: Fig. 1 ladder split at the buffer switches (citrate 2.15-5, phosphate 6-8, borate 9-10)
+  resolution: re-read
+  arms:
+  - label: pH 6, 4-oxo-2-nonenal
+    lever_value: 6
+    value: 93
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-oxo-2-nonenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium phosphate
+      matrix: buffer
+      headspace: air
+  - label: pH 7, 4-oxo-2-nonenal
+    lever_value: 7
+    value: 71
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-oxo-2-nonenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium phosphate
+      matrix: buffer
+      headspace: air
+  - label: pH 8, 4-oxo-2-nonenal
+    lever_value: 8
+    value: 39
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-oxo-2-nonenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium phosphate
+      matrix: buffer
+      headspace: air
+- id: zamora2013-8
+  odorant: Phenylacetaldehyde
+  lever_class: pH
+  lever: reaction pH 9-10, 0.3 M sodium borate run (4-oxo-2-nonenal + Phe)
+  focal: false
+  location: Fig. 1 (triangles)
+  digitised: true
+  unit: umol/mmol Phe
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: not a time course
+  note: Fig. 1 ladder split at the buffer switches (citrate 2.15-5, phosphate 6-8, borate 9-10)
+  resolution: re-read
+  arms:
+  - label: pH 9, 4-oxo-2-nonenal
+    lever_value: 9
+    value: 32
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-oxo-2-nonenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium borate
+      matrix: buffer
+      headspace: air
+  - label: pH 10, 4-oxo-2-nonenal
+    lever_value: 10
+    value: 20
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 10
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-oxo-2-nonenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium borate
+      matrix: buffer
+      headspace: air
+- id: zamora2013-9
+  odorant: Phenylacetaldehyde
+  lever_class: mixed
+  lever: 'pH 5 (citrate) vs pH 6 (phosphate): cross-buffer step of the Fig. 1 pH ladder (4-oxo-2-nonenal + Phe)'
+  focal: false
+  location: Fig. 1 (triangles)
+  digitised: true
+  unit: umol/mmol Phe
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: not a time course
+  note: pH and buffer type both change; the paper discusses the whole pH ladder (linear decrease)
+  resolution: re-read
+  arms:
+  - label: pH 5, 4-oxo-2-nonenal
+    lever_value: ph 5, citrate
+    value: 100
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-oxo-2-nonenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: pH 6, 4-oxo-2-nonenal
+    lever_value: ph 6, phosphate
+    value: 93
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-oxo-2-nonenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium phosphate
+      matrix: buffer
+      headspace: air
+- id: zamora2013-10
+  odorant: Phenylacetaldehyde
+  lever_class: mixed
+  lever: 'pH 8 (phosphate) vs pH 9 (borate): cross-buffer step of the Fig. 1 pH ladder (4-oxo-2-nonenal + Phe)'
+  focal: false
+  location: Fig. 1 (triangles)
+  digitised: true
+  unit: umol/mmol Phe
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: not a time course
+  note: pH and buffer type both change; the paper discusses the whole pH ladder (linear decrease)
+  resolution: re-read
+  arms:
+  - label: pH 8, 4-oxo-2-nonenal
+    lever_value: ph 8, phosphate
+    value: 39
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-oxo-2-nonenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium phosphate
+      matrix: buffer
+      headspace: air
+  - label: pH 9, 4-oxo-2-nonenal
+    lever_value: ph 9, borate
+    value: 32
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-oxo-2-nonenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium borate
+      matrix: buffer
+      headspace: air
+- id: zamora2013-11
+  odorant: Phenylacetaldehyde
+  lever_class: precursor dose
+  lever: 4-oxo-2-hexenal amount (umol) with 10 umol phenylalanine
+  focal: false
+  location: Fig. 2
+  digitised: true
+  unit: umol/mmol Phe
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: not a time course
+  note: 0.25 umol arm re-read (8.7; readers 8 / 9)
+  resolution: re-read
+  arms:
+  - label: 0 umol 4-oxo-2-hexenal
+    lever_value: 0
+    value: 4
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-oxo-2-hexenal: 0 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 0.25 umol 4-oxo-2-hexenal
+    lever_value: 0.25
+    value: 8.7
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-oxo-2-hexenal: 0.25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 0.5 umol 4-oxo-2-hexenal
+    lever_value: 0.5
+    value: 15
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-oxo-2-hexenal: 0.5 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 1 umol 4-oxo-2-hexenal
+    lever_value: 1
+    value: 23
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-oxo-2-hexenal: 1 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 2 umol 4-oxo-2-hexenal
+    lever_value: 2
+    value: 37
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-oxo-2-hexenal: 2 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 5 umol 4-oxo-2-hexenal
+    lever_value: 5
+    value: 89
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-oxo-2-hexenal: 5 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 7.5 umol 4-oxo-2-hexenal
+    lever_value: 7.5
+    value: 111
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-oxo-2-hexenal: 7.5 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 10 umol 4-oxo-2-hexenal
+    lever_value: 10
+    value: 144
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-oxo-2-hexenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+- id: zamora2013-12
+  odorant: Phenylacetaldehyde
+  lever_class: precursor dose
+  lever: 4-oxo-2-nonenal amount (umol) with 10 umol phenylalanine
+  focal: false
+  location: Fig. 2
+  digitised: true
+  unit: umol/mmol Phe
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: not a time course
+  note: 0 and 0.25 umol arms re-read (4.4 and 11.6; readers 5 / 4.4 and 10 / 13)
+  resolution: re-read
+  arms:
+  - label: 0 umol 4-oxo-2-nonenal
+    lever_value: 0
+    value: 4.4
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-oxo-2-nonenal: 0 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 0.25 umol 4-oxo-2-nonenal
+    lever_value: 0.25
+    value: 11.6
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-oxo-2-nonenal: 0.25 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 0.5 umol 4-oxo-2-nonenal
+    lever_value: 0.5
+    value: 20
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-oxo-2-nonenal: 0.5 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 1 umol 4-oxo-2-nonenal
+    lever_value: 1
+    value: 24
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-oxo-2-nonenal: 1 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 2 umol 4-oxo-2-nonenal
+    lever_value: 2
+    value: 47
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-oxo-2-nonenal: 2 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 5 umol 4-oxo-2-nonenal
+    lever_value: 5
+    value: 102
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-oxo-2-nonenal: 5 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 7.5 umol 4-oxo-2-nonenal
+    lever_value: 7.5
+    value: 147
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-oxo-2-nonenal: 7.5 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 10 umol 4-oxo-2-nonenal
+    lever_value: 10
+    value: 170
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-oxo-2-nonenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+- id: zamora2013-13
+  odorant: Phenylacetaldehyde
+  lever_class: time
+  lever: heating time at 180 C, 4-oxo-2-hexenal
+  focal: false
+  location: Fig. 3A
+  digitised: true
+  unit: umol/mmol PhIP (axis label as printed)
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: whole series (lever is time)
+  note: the lever is time; whole 180 C series keyed (lower-temperature series not keyed by either reader)
+  resolution: re-read
+  arms:
+  - label: 0 min
+    lever_value: 0
+    value: 6.9
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 0
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-oxo-2-hexenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 3 min
+    lever_value: 3
+    value: 18.1
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 3
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-oxo-2-hexenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 6 min
+    lever_value: 6
+    value: 28.9
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 6
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-oxo-2-hexenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 9 min
+    lever_value: 9
+    value: 60.2
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 9
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-oxo-2-hexenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 12 min
+    lever_value: 12
+    value: 72.7
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 12
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-oxo-2-hexenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+- id: zamora2013-14
+  odorant: Phenylacetaldehyde
+  lever_class: time
+  lever: heating time at 180 C, 4-oxo-2-nonenal
+  focal: false
+  location: Fig. 3B
+  digitised: true
+  unit: umol/mmol PhIP (axis label as printed)
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: whole series (lever is time)
+  note: the lever is time; whole 180 C series keyed (lower-temperature series not keyed by either reader)
+  resolution: re-read
+  arms:
+  - label: 0 min
+    lever_value: 0
+    value: 13.5
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 0
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-oxo-2-nonenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 3 min
+    lever_value: 3
+    value: 34.9
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 3
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-oxo-2-nonenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 6 min
+    lever_value: 6
+    value: 34.9
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 6
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-oxo-2-nonenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 9 min
+    lever_value: 9
+    value: 63.5
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 9
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-oxo-2-nonenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 12 min
+    lever_value: 12
+    value: 91.3
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 12
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-oxo-2-nonenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 15 min
+    lever_value: 15
+    value: 101.4
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 15
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-oxo-2-nonenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+- id: zamora2013-15
+  odorant: Phenylacetaldehyde
+  lever_class: temperature
+  lever: temperature, zero-order formation rate constant k, 4-oxo-2-hexenal
+  focal: true
+  location: Fig. 4A
+  digitised: true
+  unit: ln k (k from [PAC] = [PAC]0 + kt; PAC in umol/mmol, t in min)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course
+  note: temperatures assigned to points from the Fig. 3/5/6 legends in order; x positions in Fig. 4B do not map cleanly
+  resolution: agreed
+  arms:
+  - label: 180 C
+    lever_value: 180
+    value: 1.76
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: null
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-oxo-2-hexenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 160 C
+    lever_value: 160
+    value: 1.08
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 160
+      time_min: null
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-oxo-2-hexenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 140 C
+    lever_value: 140
+    value: 0.51
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 140
+      time_min: null
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-oxo-2-hexenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 120 C
+    lever_value: 120
+    value: -0.53
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 120
+      time_min: null
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-oxo-2-hexenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+- id: zamora2013-16
+  odorant: Phenylacetaldehyde
+  lever_class: temperature
+  lever: temperature, zero-order formation rate constant k, 4-oxo-2-nonenal
+  focal: true
+  location: Fig. 4A
+  digitised: true
+  unit: ln k (k from [PAC] = [PAC]0 + kt; PAC in umol/mmol, t in min)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course
+  note: temperatures assigned to points from the Fig. 3/5/6 legends in order; x positions in Fig. 4B do not map cleanly
+  resolution: agreed
+  arms:
+  - label: 180 C
+    lever_value: 180
+    value: 1.82
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: null
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-oxo-2-nonenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 160 C
+    lever_value: 160
+    value: 0.98
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 160
+      time_min: null
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-oxo-2-nonenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 140 C
+    lever_value: 140
+    value: 0.12
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 140
+      time_min: null
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-oxo-2-nonenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 120 C
+    lever_value: 120
+    value: -0.76
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 120
+      time_min: null
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-oxo-2-nonenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+- id: zamora2013-17
+  odorant: Phenylacetaldehyde
+  lever_class: temperature
+  lever: temperature, zero-order formation rate constant k, 4,5-epoxy-2-heptenal
+  focal: true
+  location: Fig. 4B
+  digitised: true
+  unit: ln k (k from [PAC] = [PAC]0 + kt; PAC in umol/mmol, t in min)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course
+  note: temperatures assigned to points from the Fig. 3/5/6 legends in order; x positions in Fig. 4B do not map cleanly
+  resolution: agreed
+  arms:
+  - label: 180 C
+    lever_value: 180
+    value: 0.2
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: null
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4,5-epoxy-2-heptenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 170 C
+    lever_value: 170
+    value: 0.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 170
+      time_min: null
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4,5-epoxy-2-heptenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 150 C
+    lever_value: 150
+    value: -0.59
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 150
+      time_min: null
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4,5-epoxy-2-heptenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 140 C
+    lever_value: 140
+    value: -1.31
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 140
+      time_min: null
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4,5-epoxy-2-heptenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 120 C
+    lever_value: 120
+    value: -2.06
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 120
+      time_min: null
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4,5-epoxy-2-heptenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+- id: zamora2013-18
+  odorant: Phenylacetaldehyde
+  lever_class: temperature
+  lever: temperature, zero-order formation rate constant k, 4,5-epoxy-2-decenal
+  focal: true
+  location: Fig. 4B
+  digitised: true
+  unit: ln k (k from [PAC] = [PAC]0 + kt; PAC in umol/mmol, t in min)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course
+  note: temperatures assigned to points from the Fig. 3/5/6 legends in order; x positions in Fig. 4B do not map cleanly
+  resolution: agreed
+  arms:
+  - label: 180 C
+    lever_value: 180
+    value: 1.28
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: null
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4,5-epoxy-2-decenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 170 C
+    lever_value: 170
+    value: 0.72
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 170
+      time_min: null
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4,5-epoxy-2-decenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 160 C
+    lever_value: 160
+    value: 0.07
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 160
+      time_min: null
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4,5-epoxy-2-decenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 150 C
+    lever_value: 150
+    value: -0.05
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 150
+      time_min: null
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4,5-epoxy-2-decenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 140 C
+    lever_value: 140
+    value: -0.13
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 140
+      time_min: null
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4,5-epoxy-2-decenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 120 C
+    lever_value: 120
+    value: -1.33
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 120
+      time_min: null
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4,5-epoxy-2-decenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+- id: zamora2013-19
+  odorant: Phenylacetaldehyde
+  lever_class: temperature
+  lever: temperature, zero-order formation rate constant k, 4-hydroxy-2-nonenal
+  focal: true
+  location: Fig. 4B
+  digitised: true
+  unit: ln k (k from [PAC] = [PAC]0 + kt; PAC in umol/mmol, t in min)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course
+  note: temperatures assigned to points from the Fig. 3/5/6 legends in order; x positions in Fig. 4B do not map cleanly
+  resolution: agreed
+  arms:
+  - label: 190 C
+    lever_value: 190
+    value: 0.58
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 190
+      time_min: null
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-hydroxy-2-nonenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 170 C
+    lever_value: 170
+    value: -0.24
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 170
+      time_min: null
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-hydroxy-2-nonenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 160 C
+    lever_value: 160
+    value: -0.48
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 160
+      time_min: null
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-hydroxy-2-nonenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 140 C
+    lever_value: 140
+    value: -1.56
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 140
+      time_min: null
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-hydroxy-2-nonenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+- id: zamora2013-20
+  odorant: Phenylacetaldehyde
+  lever_class: temperature
+  lever: temperature, zero-order formation rate constant k, 2,4-heptadienal
+  focal: true
+  location: Fig. 4C
+  digitised: true
+  unit: ln k (k from [PAC] = [PAC]0 + kt; PAC in umol/mmol, t in min)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course
+  note: temperatures assigned to points from the Fig. 3/5/6 legends in order; x positions in Fig. 4B do not map cleanly
+  resolution: agreed
+  arms:
+  - label: 180 C
+    lever_value: 180
+    value: 0.39
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: null
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        2,4-heptadienal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 160 C
+    lever_value: 160
+    value: 0.09
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 160
+      time_min: null
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        2,4-heptadienal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 140 C
+    lever_value: 140
+    value: -0.56
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 140
+      time_min: null
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        2,4-heptadienal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 120 C
+    lever_value: 120
+    value: -1.08
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 120
+      time_min: null
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        2,4-heptadienal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+- id: zamora2013-21
+  odorant: Phenylacetaldehyde
+  lever_class: temperature
+  lever: temperature, zero-order formation rate constant k, 2,4-decadienal
+  focal: true
+  location: Fig. 4C
+  digitised: true
+  unit: ln k (k from [PAC] = [PAC]0 + kt; PAC in umol/mmol, t in min)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course
+  note: temperatures assigned to points from the Fig. 3/5/6 legends in order; x positions in Fig. 4B do not map cleanly
+  resolution: agreed
+  arms:
+  - label: 180 C
+    lever_value: 180
+    value: 0.67
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: null
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        2,4-decadienal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 160 C
+    lever_value: 160
+    value: 0.28
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 160
+      time_min: null
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        2,4-decadienal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 150 C
+    lever_value: 150
+    value: 0.03
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 150
+      time_min: null
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        2,4-decadienal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 140 C
+    lever_value: 140
+    value: 0.17
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 140
+      time_min: null
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        2,4-decadienal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 130 C
+    lever_value: 130
+    value: -0.31
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 130
+      time_min: null
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        2,4-decadienal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 120 C
+    lever_value: 120
+    value: -0.49
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 120
+      time_min: null
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        2,4-decadienal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+- id: zamora2013-22
+  odorant: Phenylacetaldehyde
+  lever_class: temperature
+  lever: temperature, zero-order formation rate constant k, 2,4-decadienal under nitrogen
+  focal: true
+  location: Fig. 4C
+  digitised: true
+  unit: ln k (k from [PAC] = [PAC]0 + kt; PAC in umol/mmol, t in min)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course
+  note: temperatures assigned to points from the Fig. 3/5/6 legends in order; x positions in Fig. 4B do not map cleanly
+  resolution: agreed
+  arms:
+  - label: 180 C
+    lever_value: 180
+    value: 0.28
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: null
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        2,4-decadienal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: inert
+  - label: 160 C
+    lever_value: 160
+    value: -0.38
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 160
+      time_min: null
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        2,4-decadienal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: inert
+  - label: 150 C
+    lever_value: 150
+    value: -1.2
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 150
+      time_min: null
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        2,4-decadienal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: inert
+  - label: 140 C
+    lever_value: 140
+    value: -1.67
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 140
+      time_min: null
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        2,4-decadienal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: inert
+- id: zamora2013-23
+  odorant: Phenylacetaldehyde
+  lever_class: oxygen
+  lever: reaction atmosphere air vs nitrogen, 2,4-decadienal + Phe, 180 C (rate constants)
+  focal: false
+  location: Fig. 4C
+  digitised: true
+  unit: ln k (k = slope of PAC, umol/mmol Phe, vs time in min)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course
+  note: 'rate contrast (quantity rate): enters no cell; ln k values as in the Fig. 4C ladders'
+  resolution: re-read
+  arms:
+  - label: air, 180 C
+    lever_value: air
+    value: 0.67
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: null
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        2,4-decadienal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: nitrogen, 180 C
+    lever_value: inert
+    value: 0.28
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: null
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        2,4-decadienal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: inert
+- id: zamora2013-24
+  odorant: Phenylacetaldehyde
+  lever_class: oxygen
+  lever: reaction atmosphere air vs nitrogen, 2,4-decadienal + Phe, 160 C (rate constants)
+  focal: false
+  location: Fig. 4C
+  digitised: true
+  unit: ln k (k = slope of PAC, umol/mmol Phe, vs time in min)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course
+  note: 'rate contrast (quantity rate): enters no cell; ln k values as in the Fig. 4C ladders'
+  resolution: re-read
+  arms:
+  - label: air, 160 C
+    lever_value: air
+    value: 0.28
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 160
+      time_min: null
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        2,4-decadienal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: nitrogen, 160 C
+    lever_value: inert
+    value: -0.38
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 160
+      time_min: null
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        2,4-decadienal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: inert
+- id: zamora2013-25
+  odorant: Phenylacetaldehyde
+  lever_class: oxygen
+  lever: reaction atmosphere air vs nitrogen, 2,4-decadienal + Phe, 150 C (rate constants)
+  focal: false
+  location: Fig. 4C
+  digitised: true
+  unit: ln k (k = slope of PAC, umol/mmol Phe, vs time in min)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course
+  note: 'rate contrast (quantity rate): enters no cell; ln k values as in the Fig. 4C ladders'
+  resolution: re-read
+  arms:
+  - label: air, 150 C
+    lever_value: air
+    value: 0.03
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 150
+      time_min: null
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        2,4-decadienal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: nitrogen, 150 C
+    lever_value: inert
+    value: -1.2
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 150
+      time_min: null
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        2,4-decadienal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: inert
+- id: zamora2013-26
+  odorant: Phenylacetaldehyde
+  lever_class: oxygen
+  lever: reaction atmosphere air vs nitrogen, 2,4-decadienal + Phe, 140 C (rate constants)
+  focal: false
+  location: Fig. 4C
+  digitised: true
+  unit: ln k (k = slope of PAC, umol/mmol Phe, vs time in min)
+  quant_type: absolute
+  quantity: rate
+  time_course_rule: not a time course
+  note: 'rate contrast (quantity rate): enters no cell; ln k values as in the Fig. 4C ladders'
+  resolution: re-read
+  arms:
+  - label: air, 140 C
+    lever_value: air
+    value: 0.17
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 140
+      time_min: null
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        2,4-decadienal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: nitrogen, 140 C
+    lever_value: inert
+    value: -1.67
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 140
+      time_min: null
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        2,4-decadienal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: inert
+- id: zamora2013-27
+  odorant: Phenylacetaldehyde
+  lever_class: lipid
+  lever: lipid-derived carbonyl identity (none vs 7 carbonyls), 1 h at 180 C
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: umol/mmol Phe
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: not a time course
+  note: 2,4-decadienal under nitrogen printed ND = not determined; not keyed
+  resolution: agreed
+  arms:
+  - label: none
+    lever_value: none
+    value: 8.5
+    censor: none
+    limit: null
+    n: null
+    sd: 2.0
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        phenylalanine: equimolecular (10 umol in 0.5 mL)
+      buffer: 0.3 M sodium citrate (pH 3 per text, not in table)
+      matrix: buffer
+      headspace: air
+  - label: 4-oxo-2-hexenal
+    lever_value: 4-oxo-2-hexenal
+    value: 140.9
+    censor: none
+    limit: null
+    n: null
+    sd: 8.5
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        phenylalanine: equimolecular (10 umol in 0.5 mL)
+        4-oxo-2-hexenal: equimolecular with phenylalanine
+      buffer: 0.3 M sodium citrate (pH 3 per text, not in table)
+      matrix: buffer
+      headspace: air
+  - label: 4-oxo-2-nonenal
+    lever_value: 4-oxo-2-nonenal
+    value: 168.0
+    censor: none
+    limit: null
+    n: null
+    sd: 9.3
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        phenylalanine: equimolecular (10 umol in 0.5 mL)
+        4-oxo-2-nonenal: equimolecular with phenylalanine
+      buffer: 0.3 M sodium citrate (pH 3 per text, not in table)
+      matrix: buffer
+      headspace: air
+  - label: 4,5-epoxy-2-heptenal
+    lever_value: 4,5-epoxy-2-heptenal
+    value: 99.8
+    censor: none
+    limit: null
+    n: null
+    sd: 6.3
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        phenylalanine: equimolecular (10 umol in 0.5 mL)
+        4,5-epoxy-2-heptenal: equimolecular with phenylalanine
+      buffer: 0.3 M sodium citrate (pH 3 per text, not in table)
+      matrix: buffer
+      headspace: air
+  - label: 4,5-epoxy-2-decenal
+    lever_value: 4,5-epoxy-2-decenal
+    value: 92.4
+    censor: none
+    limit: null
+    n: null
+    sd: 6.1
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        phenylalanine: equimolecular (10 umol in 0.5 mL)
+        4,5-epoxy-2-decenal: equimolecular with phenylalanine
+      buffer: 0.3 M sodium citrate (pH 3 per text, not in table)
+      matrix: buffer
+      headspace: air
+  - label: 4-hydroxy-2-nonenal
+    lever_value: 4-hydroxy-2-nonenal
+    value: 21.1
+    censor: none
+    limit: null
+    n: null
+    sd: 0.9
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        phenylalanine: equimolecular (10 umol in 0.5 mL)
+        4-hydroxy-2-nonenal: equimolecular with phenylalanine
+      buffer: 0.3 M sodium citrate (pH 3 per text, not in table)
+      matrix: buffer
+      headspace: air
+  - label: 2,4-heptadienal
+    lever_value: 2,4-heptadienal
+    value: 88.6
+    censor: none
+    limit: null
+    n: null
+    sd: 7.3
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        phenylalanine: equimolecular (10 umol in 0.5 mL)
+        2,4-heptadienal: equimolecular with phenylalanine
+      buffer: 0.3 M sodium citrate (pH 3 per text, not in table)
+      matrix: buffer
+      headspace: air
+  - label: 2,4-decadienal
+    lever_value: 2,4-decadienal
+    value: 133.5
+    censor: none
+    limit: null
+    n: null
+    sd: 2.5
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        phenylalanine: equimolecular (10 umol in 0.5 mL)
+        2,4-decadienal: equimolecular with phenylalanine
+      buffer: 0.3 M sodium citrate (pH 3 per text, not in table)
+      matrix: buffer
+      headspace: air
+- id: zamora2013-28
+  odorant: Phenylacetaldehyde
+  lever_class: lipid
+  lever: lipid-derived carbonyl identity (none vs 7 carbonyls), 2 h at 80 C
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: umol/mmol Phe
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: not a time course
+  note: 2,4-decadienal under nitrogen printed ND = not determined; not keyed
+  resolution: agreed
+  arms:
+  - label: none
+    lever_value: none
+    value: 4.5
+    censor: none
+    limit: null
+    n: null
+    sd: 0.4
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 80
+      time_min: 120
+      precursors:
+        phenylalanine: equimolecular (10 umol in 0.5 mL)
+      buffer: 0.3 M sodium citrate (pH 3 per text, not in table)
+      matrix: buffer
+      headspace: air
+  - label: 4-oxo-2-hexenal
+    lever_value: 4-oxo-2-hexenal
+    value: 13.6
+    censor: none
+    limit: null
+    n: null
+    sd: 1.1
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 80
+      time_min: 120
+      precursors:
+        phenylalanine: equimolecular (10 umol in 0.5 mL)
+        4-oxo-2-hexenal: equimolecular with phenylalanine
+      buffer: 0.3 M sodium citrate (pH 3 per text, not in table)
+      matrix: buffer
+      headspace: air
+  - label: 4-oxo-2-nonenal
+    lever_value: 4-oxo-2-nonenal
+    value: 35.5
+    censor: none
+    limit: null
+    n: null
+    sd: 3.0
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 80
+      time_min: 120
+      precursors:
+        phenylalanine: equimolecular (10 umol in 0.5 mL)
+        4-oxo-2-nonenal: equimolecular with phenylalanine
+      buffer: 0.3 M sodium citrate (pH 3 per text, not in table)
+      matrix: buffer
+      headspace: air
+  - label: 4,5-epoxy-2-heptenal
+    lever_value: 4,5-epoxy-2-heptenal
+    value: 10.9
+    censor: none
+    limit: null
+    n: null
+    sd: 1.1
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 80
+      time_min: 120
+      precursors:
+        phenylalanine: equimolecular (10 umol in 0.5 mL)
+        4,5-epoxy-2-heptenal: equimolecular with phenylalanine
+      buffer: 0.3 M sodium citrate (pH 3 per text, not in table)
+      matrix: buffer
+      headspace: air
+  - label: 4,5-epoxy-2-decenal
+    lever_value: 4,5-epoxy-2-decenal
+    value: 16.6
+    censor: none
+    limit: null
+    n: null
+    sd: 2.6
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 80
+      time_min: 120
+      precursors:
+        phenylalanine: equimolecular (10 umol in 0.5 mL)
+        4,5-epoxy-2-decenal: equimolecular with phenylalanine
+      buffer: 0.3 M sodium citrate (pH 3 per text, not in table)
+      matrix: buffer
+      headspace: air
+  - label: 4-hydroxy-2-nonenal
+    lever_value: 4-hydroxy-2-nonenal
+    value: 5.1
+    censor: none
+    limit: null
+    n: null
+    sd: 0.4
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 80
+      time_min: 120
+      precursors:
+        phenylalanine: equimolecular (10 umol in 0.5 mL)
+        4-hydroxy-2-nonenal: equimolecular with phenylalanine
+      buffer: 0.3 M sodium citrate (pH 3 per text, not in table)
+      matrix: buffer
+      headspace: air
+  - label: 2,4-heptadienal
+    lever_value: 2,4-heptadienal
+    value: 18.1
+    censor: none
+    limit: null
+    n: null
+    sd: 0.5
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 80
+      time_min: 120
+      precursors:
+        phenylalanine: equimolecular (10 umol in 0.5 mL)
+        2,4-heptadienal: equimolecular with phenylalanine
+      buffer: 0.3 M sodium citrate (pH 3 per text, not in table)
+      matrix: buffer
+      headspace: air
+  - label: 2,4-decadienal
+    lever_value: 2,4-decadienal
+    value: 29.3
+    censor: none
+    limit: null
+    n: null
+    sd: 2.3
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 80
+      time_min: 120
+      precursors:
+        phenylalanine: equimolecular (10 umol in 0.5 mL)
+        2,4-decadienal: equimolecular with phenylalanine
+      buffer: 0.3 M sodium citrate (pH 3 per text, not in table)
+      matrix: buffer
+      headspace: air
+- id: zamora2013-29
+  odorant: Phenylacetaldehyde
+  lever_class: lipid
+  lever: lipid-derived carbonyl identity (none vs 7 carbonyls), 24 h at 37 C
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: umol/mmol Phe
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: not a time course
+  note: 2,4-decadienal under nitrogen printed ND = not determined; not keyed
+  resolution: agreed
+  arms:
+  - label: none
+    lever_value: none
+    value: 4.8
+    censor: none
+    limit: null
+    n: null
+    sd: 0.1
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 37
+      time_min: 1440
+      precursors:
+        phenylalanine: equimolecular (10 umol in 0.5 mL)
+      buffer: 0.3 M sodium citrate (pH 3 per text, not in table)
+      matrix: buffer
+      headspace: air
+  - label: 4-oxo-2-hexenal
+    lever_value: 4-oxo-2-hexenal
+    value: 9.5
+    censor: none
+    limit: null
+    n: null
+    sd: 3.3
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 37
+      time_min: 1440
+      precursors:
+        phenylalanine: equimolecular (10 umol in 0.5 mL)
+        4-oxo-2-hexenal: equimolecular with phenylalanine
+      buffer: 0.3 M sodium citrate (pH 3 per text, not in table)
+      matrix: buffer
+      headspace: air
+  - label: 4-oxo-2-nonenal
+    lever_value: 4-oxo-2-nonenal
+    value: 14.5
+    censor: none
+    limit: null
+    n: null
+    sd: 2.7
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 37
+      time_min: 1440
+      precursors:
+        phenylalanine: equimolecular (10 umol in 0.5 mL)
+        4-oxo-2-nonenal: equimolecular with phenylalanine
+      buffer: 0.3 M sodium citrate (pH 3 per text, not in table)
+      matrix: buffer
+      headspace: air
+  - label: 4,5-epoxy-2-heptenal
+    lever_value: 4,5-epoxy-2-heptenal
+    value: 10.6
+    censor: none
+    limit: null
+    n: null
+    sd: 1.6
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 37
+      time_min: 1440
+      precursors:
+        phenylalanine: equimolecular (10 umol in 0.5 mL)
+        4,5-epoxy-2-heptenal: equimolecular with phenylalanine
+      buffer: 0.3 M sodium citrate (pH 3 per text, not in table)
+      matrix: buffer
+      headspace: air
+  - label: 4,5-epoxy-2-decenal
+    lever_value: 4,5-epoxy-2-decenal
+    value: 15.8
+    censor: none
+    limit: null
+    n: null
+    sd: 1.6
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 37
+      time_min: 1440
+      precursors:
+        phenylalanine: equimolecular (10 umol in 0.5 mL)
+        4,5-epoxy-2-decenal: equimolecular with phenylalanine
+      buffer: 0.3 M sodium citrate (pH 3 per text, not in table)
+      matrix: buffer
+      headspace: air
+  - label: 4-hydroxy-2-nonenal
+    lever_value: 4-hydroxy-2-nonenal
+    value: 5.6
+    censor: none
+    limit: null
+    n: null
+    sd: 0.2
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 37
+      time_min: 1440
+      precursors:
+        phenylalanine: equimolecular (10 umol in 0.5 mL)
+        4-hydroxy-2-nonenal: equimolecular with phenylalanine
+      buffer: 0.3 M sodium citrate (pH 3 per text, not in table)
+      matrix: buffer
+      headspace: air
+  - label: 2,4-heptadienal
+    lever_value: 2,4-heptadienal
+    value: 18.0
+    censor: none
+    limit: null
+    n: null
+    sd: 2.2
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 37
+      time_min: 1440
+      precursors:
+        phenylalanine: equimolecular (10 umol in 0.5 mL)
+        2,4-heptadienal: equimolecular with phenylalanine
+      buffer: 0.3 M sodium citrate (pH 3 per text, not in table)
+      matrix: buffer
+      headspace: air
+  - label: 2,4-decadienal
+    lever_value: 2,4-decadienal
+    value: 22.9
+    censor: none
+    limit: null
+    n: null
+    sd: 1.6
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 37
+      time_min: 1440
+      precursors:
+        phenylalanine: equimolecular (10 umol in 0.5 mL)
+        2,4-decadienal: equimolecular with phenylalanine
+      buffer: 0.3 M sodium citrate (pH 3 per text, not in table)
+      matrix: buffer
+      headspace: air
+- id: zamora2013-30
+  odorant: Phenylacetaldehyde
+  lever_class: time
+  lever: heating time at 180 C, 4,5-epoxy-2-heptenal
+  focal: false
+  location: Fig. 5A
+  digitised: true
+  unit: umol/mmol PhIP (axis label as printed)
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: whole series (lever is time)
+  note: the lever is time; whole series at the highest temperature keyed (lower-temperature series not keyed by either reader)
+  resolution: re-read
+  arms:
+  - label: 0 min
+    lever_value: 0
+    value: 15.7
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 0
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4,5-epoxy-2-heptenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 3 min
+    lever_value: 3
+    value: 17.7
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 3
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4,5-epoxy-2-heptenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 6 min
+    lever_value: 6
+    value: 18.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 6
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4,5-epoxy-2-heptenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 9 min
+    lever_value: 9
+    value: 25.6
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 9
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4,5-epoxy-2-heptenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 12 min
+    lever_value: 12
+    value: 32.1
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 12
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4,5-epoxy-2-heptenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 15 min
+    lever_value: 15
+    value: 41.8
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 15
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4,5-epoxy-2-heptenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 30 min
+    lever_value: 30
+    value: 52.8
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 30
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4,5-epoxy-2-heptenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 45 min
+    lever_value: 45
+    value: 70.3
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 45
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4,5-epoxy-2-heptenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+- id: zamora2013-31
+  odorant: Phenylacetaldehyde
+  lever_class: time
+  lever: heating time at 180 C, 4,5-epoxy-2-decenal
+  focal: false
+  location: Fig. 5B
+  digitised: true
+  unit: umol/mmol PhIP (axis label as printed)
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: whole series (lever is time)
+  note: the lever is time; whole series at the highest temperature keyed (lower-temperature series not keyed by either reader)
+  resolution: re-read
+  arms:
+  - label: 0 min
+    lever_value: 0
+    value: 11.3
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 0
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4,5-epoxy-2-decenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 6 min
+    lever_value: 6
+    value: 31.3
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 6
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4,5-epoxy-2-decenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 9 min
+    lever_value: 9
+    value: 45.8
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 9
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4,5-epoxy-2-decenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 12 min
+    lever_value: 12
+    value: 49.3
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 12
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4,5-epoxy-2-decenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 15 min
+    lever_value: 15
+    value: 68.8
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 15
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4,5-epoxy-2-decenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+- id: zamora2013-32
+  odorant: Phenylacetaldehyde
+  lever_class: time
+  lever: heating time at 190 C, 4-hydroxy-2-nonenal
+  focal: false
+  location: Fig. 5C
+  digitised: true
+  unit: umol/mmol PhIP (axis label as printed)
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: whole series (lever is time)
+  note: the lever is time; whole series at the highest temperature keyed (lower-temperature series not keyed by either reader)
+  resolution: re-read
+  arms:
+  - label: 0 min
+    lever_value: 0
+    value: 9.9
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 190
+      time_min: 0
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-hydroxy-2-nonenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 6 min
+    lever_value: 6
+    value: 20.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 190
+      time_min: 6
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-hydroxy-2-nonenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 12 min
+    lever_value: 12
+    value: 31.5
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 190
+      time_min: 12
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        4-hydroxy-2-nonenal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+- id: zamora2013-33
+  odorant: Phenylacetaldehyde
+  lever_class: time
+  lever: heating time at 180 C, 2,4-heptadienal
+  focal: false
+  location: Fig. 6A
+  digitised: true
+  unit: umol/mmol PhIP (axis label as printed)
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: whole series (lever is time)
+  note: the lever is time; whole series at the highest temperature keyed (lower-temperature series not keyed by either reader)
+  resolution: re-read
+  arms:
+  - label: 0 min
+    lever_value: 0
+    value: 9.9
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 0
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        2,4-heptadienal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 5 min
+    lever_value: 5
+    value: 17.9
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 5
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        2,4-heptadienal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 10 min
+    lever_value: 10
+    value: 26.5
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 10
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        2,4-heptadienal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 15 min
+    lever_value: 15
+    value: 29.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 15
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        2,4-heptadienal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 20 min
+    lever_value: 20
+    value: 38.1
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 20
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        2,4-heptadienal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 25 min
+    lever_value: 25
+    value: 48.7
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 25
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        2,4-heptadienal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 30 min
+    lever_value: 30
+    value: 54.6
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 30
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        2,4-heptadienal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+- id: zamora2013-34
+  odorant: Phenylacetaldehyde
+  lever_class: time
+  lever: heating time at 180 C, 2,4-decadienal
+  focal: false
+  location: Fig. 6B
+  digitised: true
+  unit: umol/mmol PhIP (axis label as printed)
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: whole series (lever is time)
+  note: the lever is time; whole series at the highest temperature keyed (lower-temperature series not keyed by either reader)
+  resolution: re-read
+  arms:
+  - label: 0 min
+    lever_value: 0
+    value: 10.2
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 0
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        2,4-decadienal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 3 min
+    lever_value: 3
+    value: 17.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 3
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        2,4-decadienal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 12 min
+    lever_value: 12
+    value: 35.6
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 12
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        2,4-decadienal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 30 min
+    lever_value: 30
+    value: 71.2
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 30
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        2,4-decadienal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 60 min
+    lever_value: 60
+    value: 128.5
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        2,4-decadienal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+- id: zamora2013-35
+  odorant: Phenylacetaldehyde
+  lever_class: time
+  lever: heating time at 180 C, 2,4-decadienal under nitrogen
+  focal: false
+  location: Fig. 6C
+  digitised: true
+  unit: umol/mmol PhIP (axis label as printed)
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: whole series (lever is time)
+  note: the lever is time; whole series at the highest temperature keyed (lower-temperature series not keyed by either reader)
+  resolution: re-read
+  arms:
+  - label: 0 min
+    lever_value: 0
+    value: 5.3
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 0
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        2,4-decadienal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: inert
+  - label: 3 min
+    lever_value: 3
+    value: 9.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 3
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        2,4-decadienal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: inert
+  - label: 9 min
+    lever_value: 9
+    value: 16.3
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 9
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        2,4-decadienal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: inert
+  - label: 12 min
+    lever_value: 12
+    value: 19.6
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 12
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        2,4-decadienal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: inert
+  - label: 15 min
+    lever_value: 15
+    value: 26.2
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 15
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        2,4-decadienal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: inert
+- id: zamora2013-36
+  odorant: Phenylacetaldehyde
+  lever_class: oxygen
+  lever: air vs nitrogen atmosphere, 2,4-decadienal + Phe, 180 C
+  focal: false
+  location: Fig. 6B vs Fig. 6C
+  digitised: true
+  unit: umol/mmol PhIP (axis label as printed)
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: longest time common to both arms (12 min of 0-60 / 0-15 min series)
+  note: amount contrast at the longest time common to both 180 C series
+  resolution: re-read
+  arms:
+  - label: 2,4-decadienal in air
+    lever_value: air
+    value: 35.6
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 12
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        2,4-decadienal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: air
+  - label: 2,4-decadienal in nitrogen
+    lever_value: inert
+    value: 19.6
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 12
+      precursors:
+        phenylalanine: 10 umol in 0.5 mL
+        2,4-decadienal: 10 umol in 0.5 mL
+      buffer: 0.3 M sodium citrate
+      matrix: buffer
+      headspace: inert

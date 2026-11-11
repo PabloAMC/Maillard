@@ -1,0 +1,4209 @@
+source: meynier1995
+pdf: data/articles/meynier1995.pdf
+reader: resolved
+scope_note: Resolved from readers A and B. Amino acid (100 mM) + ribose (70 mM), 0.2 M pyrophosphate, pH 4.5-6.5 held (no
+  change > 0.2 unit after heating), 140 C, 1 h; 'approximate quantities' from GC area vs internal standard without response
+  factors (peak_area), mean of 3. nd limit c. 10 ng/10 mg ribose (0.01 in the table unit); tr < 0.1. Amino-acid-identity contrasts
+  pair the same pH across Tables 1-4 (one study, one design, one method; B's keying kept). Table 3 'Dimethypyrazine' (LRI
+  912, as 2,5-dimethylpyrazine in Tables 1-2) keyed as 2,5-Dimethylpyrazine. Table 4 prints '3-(Methylthio)propanol' at LRI
+  903 while the abstract and text name 3-(methylthio)propanal; LRI 903 fits methional, so keyed as Methional (name uncertain).
+  Thiols, sulfides, thiophenes, pyridines out of scope; 4,5-dihydro-2-methyl-3(2H)-furanone not keyed by either reader.
+contrasts:
+- id: meynier1995-1
+  odorant: 2-Methylpyrazine
+  lever_class: pH
+  lever: pH 4.5-6.5 (pyrophosphate buffer), glycine/ribose
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ug/10 mg ribose
+  quant_type: peak_area
+  quantity: amount
+  resolution: agreed
+  time_course_rule: not a time course
+  arms:
+  - label: pH 4.5
+    lever_value: 4.5
+    value: null
+    censor: nd_with_limit
+    limit: 0.01
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 5.0
+    lever_value: 5.0
+    value: null
+    censor: nd_with_limit
+    limit: 0.01
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 5.5
+    lever_value: 5.5
+    value: 0.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 6.0
+    lever_value: 6.0
+    value: 0.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 6.5
+    lever_value: 6.5
+    value: 0.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+- id: meynier1995-2
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: pH
+  lever: pH 4.5-6.5 (pyrophosphate buffer), glycine/ribose
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ug/10 mg ribose
+  quant_type: peak_area
+  quantity: amount
+  resolution: agreed
+  time_course_rule: not a time course
+  arms:
+  - label: pH 4.5
+    lever_value: 4.5
+    value: null
+    censor: nd_with_limit
+    limit: 0.01
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 5.0
+    lever_value: 5.0
+    value: null
+    censor: nd_with_limit
+    limit: 0.01
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 5.5
+    lever_value: 5.5
+    value: 0.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 6.0
+    lever_value: 6.0
+    value: 3.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 6.5
+    lever_value: 6.5
+    value: 4.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+- id: meynier1995-3
+  odorant: Furfural
+  lever_class: pH
+  lever: pH 4.5-6.5 (pyrophosphate buffer), glycine/ribose
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ug/10 mg ribose
+  quant_type: peak_area
+  quantity: amount
+  resolution: re-read
+  time_course_rule: not a time course
+  arms:
+  - label: pH 4.5
+    lever_value: 4.5
+    value: 151.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 5.0
+    lever_value: 5.0
+    value: 10.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 5.5
+    lever_value: 5.5
+    value: 3.6
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 6.0
+    lever_value: 6.0
+    value: 0.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 6.5
+    lever_value: 6.5
+    value: null
+    censor: trace
+    limit: 0.1
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+- id: meynier1995-4
+  odorant: 2-Furanmethanol
+  lever_class: pH
+  lever: pH 4.5-6.5 (pyrophosphate buffer), glycine/ribose
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ug/10 mg ribose
+  quant_type: peak_area
+  quantity: amount
+  resolution: re-read
+  time_course_rule: not a time course
+  arms:
+  - label: pH 4.5
+    lever_value: 4.5
+    value: 1.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 5.0
+    lever_value: 5.0
+    value: 3.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 5.5
+    lever_value: 5.5
+    value: 2.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 6.0
+    lever_value: 6.0
+    value: 4.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 6.5
+    lever_value: 6.5
+    value: 3.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+- id: meynier1995-5
+  odorant: Norfuraneol (NF)
+  lever_class: pH
+  lever: pH 4.5-6.5 (pyrophosphate buffer), glycine/ribose
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ug/10 mg ribose
+  quant_type: peak_area
+  quantity: amount
+  resolution: re-read
+  time_course_rule: not a time course
+  arms:
+  - label: pH 4.5
+    lever_value: 4.5
+    value: 12.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 5.0
+    lever_value: 5.0
+    value: 5.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 5.5
+    lever_value: 5.5
+    value: 5.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 6.0
+    lever_value: 6.0
+    value: 1.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 6.5
+    lever_value: 6.5
+    value: 0.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+- id: meynier1995-6
+  odorant: 2-Methylpyrazine
+  lever_class: pH
+  lever: pH 4.5-6.5 (pyrophosphate buffer), L-lysine/ribose
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ug/10 mg ribose
+  quant_type: peak_area
+  quantity: amount
+  resolution: agreed
+  time_course_rule: not a time course
+  arms:
+  - label: pH 4.5
+    lever_value: 4.5
+    value: null
+    censor: nd_with_limit
+    limit: 0.01
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-lysine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 5.0
+    lever_value: 5.0
+    value: 0.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-lysine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 5.5
+    lever_value: 5.5
+    value: 1.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-lysine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 6.0
+    lever_value: 6.0
+    value: 4.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-lysine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 6.5
+    lever_value: 6.5
+    value: 4.6
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-lysine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+- id: meynier1995-7
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: pH
+  lever: pH 4.5-6.5 (pyrophosphate buffer), L-lysine/ribose
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ug/10 mg ribose
+  quant_type: peak_area
+  quantity: amount
+  resolution: agreed
+  time_course_rule: not a time course
+  arms:
+  - label: pH 4.5
+    lever_value: 4.5
+    value: null
+    censor: nd_with_limit
+    limit: 0.01
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-lysine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 5.0
+    lever_value: 5.0
+    value: 0.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-lysine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 5.5
+    lever_value: 5.5
+    value: 0.6
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-lysine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 6.0
+    lever_value: 6.0
+    value: 2.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-lysine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 6.5
+    lever_value: 6.5
+    value: 5.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-lysine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+- id: meynier1995-8
+  odorant: Furfural
+  lever_class: pH
+  lever: pH 4.5-6.5 (pyrophosphate buffer), L-lysine/ribose
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ug/10 mg ribose
+  quant_type: peak_area
+  quantity: amount
+  resolution: re-read
+  time_course_rule: not a time course
+  arms:
+  - label: pH 4.5
+    lever_value: 4.5
+    value: 10.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-lysine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 5.0
+    lever_value: 5.0
+    value: 4.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-lysine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 5.5
+    lever_value: 5.5
+    value: null
+    censor: trace
+    limit: 0.1
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-lysine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 6.0
+    lever_value: 6.0
+    value: null
+    censor: nd_with_limit
+    limit: 0.01
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-lysine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 6.5
+    lever_value: 6.5
+    value: null
+    censor: nd_with_limit
+    limit: 0.01
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-lysine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+- id: meynier1995-9
+  odorant: 2-Furanmethanol
+  lever_class: pH
+  lever: pH 4.5-6.5 (pyrophosphate buffer), L-lysine/ribose
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ug/10 mg ribose
+  quant_type: peak_area
+  quantity: amount
+  resolution: re-read
+  time_course_rule: not a time course
+  arms:
+  - label: pH 4.5
+    lever_value: 4.5
+    value: 1.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-lysine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 5.0
+    lever_value: 5.0
+    value: 1.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-lysine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 5.5
+    lever_value: 5.5
+    value: 1.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-lysine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 6.0
+    lever_value: 6.0
+    value: 1.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-lysine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 6.5
+    lever_value: 6.5
+    value: 1.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-lysine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+- id: meynier1995-10
+  odorant: Norfuraneol (NF)
+  lever_class: pH
+  lever: pH 4.5-6.5 (pyrophosphate buffer), L-lysine/ribose
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ug/10 mg ribose
+  quant_type: peak_area
+  quantity: amount
+  resolution: re-read
+  time_course_rule: not a time course
+  arms:
+  - label: pH 4.5
+    lever_value: 4.5
+    value: 8.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-lysine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 5.0
+    lever_value: 5.0
+    value: 7.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-lysine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 5.5
+    lever_value: 5.5
+    value: 7.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-lysine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 6.0
+    lever_value: 6.0
+    value: 1.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-lysine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 6.5
+    lever_value: 6.5
+    value: 1.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-lysine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+- id: meynier1995-11
+  odorant: 2-Methylpyrazine
+  lever_class: pH
+  lever: pH 4.5-6.5 (pyrophosphate buffer), L-cysteine/ribose
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/10 mg ribose
+  quant_type: peak_area
+  quantity: amount
+  resolution: agreed
+  time_course_rule: not a time course
+  arms:
+  - label: pH 4.5
+    lever_value: 4.5
+    value: null
+    censor: nd_with_limit
+    limit: 0.01
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 5.0
+    lever_value: 5.0
+    value: null
+    censor: nd_with_limit
+    limit: 0.01
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 5.5
+    lever_value: 5.5
+    value: null
+    censor: nd_with_limit
+    limit: 0.01
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 6.0
+    lever_value: 6.0
+    value: 0.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 6.5
+    lever_value: 6.5
+    value: 3.6
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+- id: meynier1995-12
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: pH
+  lever: pH 4.5-6.5 (pyrophosphate buffer), L-cysteine/ribose
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/10 mg ribose
+  quant_type: peak_area
+  quantity: amount
+  resolution: re-read
+  time_course_rule: not a time course
+  arms:
+  - label: pH 4.5
+    lever_value: 4.5
+    value: null
+    censor: nd_with_limit
+    limit: 0.01
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 5.0
+    lever_value: 5.0
+    value: null
+    censor: nd_with_limit
+    limit: 0.01
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 5.5
+    lever_value: 5.5
+    value: null
+    censor: nd_with_limit
+    limit: 0.01
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 6.0
+    lever_value: 6.0
+    value: 0.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 6.5
+    lever_value: 6.5
+    value: 1.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+- id: meynier1995-13
+  odorant: Furfural
+  lever_class: pH
+  lever: pH 4.5-6.5 (pyrophosphate buffer), L-cysteine/ribose
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/10 mg ribose
+  quant_type: peak_area
+  quantity: amount
+  resolution: re-read
+  time_course_rule: not a time course
+  arms:
+  - label: pH 4.5
+    lever_value: 4.5
+    value: 3.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 5.0
+    lever_value: 5.0
+    value: 1.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 5.5
+    lever_value: 5.5
+    value: 1.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 6.0
+    lever_value: 6.0
+    value: 0.6
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 6.5
+    lever_value: 6.5
+    value: null
+    censor: trace
+    limit: 0.1
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+- id: meynier1995-14
+  odorant: 2-Furanmethanol
+  lever_class: pH
+  lever: pH 4.5-6.5 (pyrophosphate buffer), L-cysteine/ribose
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/10 mg ribose
+  quant_type: peak_area
+  quantity: amount
+  resolution: re-read
+  time_course_rule: not a time course
+  arms:
+  - label: pH 4.5
+    lever_value: 4.5
+    value: null
+    censor: nd_with_limit
+    limit: 0.01
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 5.0
+    lever_value: 5.0
+    value: 1.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 5.5
+    lever_value: 5.5
+    value: 1.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 6.0
+    lever_value: 6.0
+    value: 0.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 6.5
+    lever_value: 6.5
+    value: 0.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+- id: meynier1995-15
+  odorant: Norfuraneol (NF)
+  lever_class: pH
+  lever: pH 4.5-6.5 (pyrophosphate buffer), L-cysteine/ribose
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/10 mg ribose
+  quant_type: peak_area
+  quantity: amount
+  resolution: re-read
+  time_course_rule: not a time course
+  arms:
+  - label: pH 4.5
+    lever_value: 4.5
+    value: 10.6
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 5.0
+    lever_value: 5.0
+    value: 6.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 5.5
+    lever_value: 5.5
+    value: 5.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 6.0
+    lever_value: 6.0
+    value: 2.6
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 6.5
+    lever_value: 6.5
+    value: 3.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+- id: meynier1995-16
+  odorant: 2-Acetylthiazole
+  lever_class: pH
+  lever: pH 4.5-6.5 (pyrophosphate buffer), L-cysteine/ribose
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/10 mg ribose
+  quant_type: peak_area
+  quantity: amount
+  resolution: agreed
+  time_course_rule: not a time course
+  arms:
+  - label: pH 4.5
+    lever_value: 4.5
+    value: null
+    censor: nd_with_limit
+    limit: 0.01
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 5.0
+    lever_value: 5.0
+    value: 0.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 5.5
+    lever_value: 5.5
+    value: 0.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 6.0
+    lever_value: 6.0
+    value: 1.6
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 6.5
+    lever_value: 6.5
+    value: 4.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+- id: meynier1995-17
+  odorant: 2-Methylpyrazine
+  lever_class: pH
+  lever: pH 4.5-6.5 (pyrophosphate buffer), L-methionine/ribose
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: ug/10 mg ribose
+  quant_type: peak_area
+  quantity: amount
+  resolution: agreed
+  time_course_rule: not a time course
+  arms:
+  - label: pH 4.5
+    lever_value: 4.5
+    value: null
+    censor: nd_with_limit
+    limit: 0.01
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-methionine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 5.0
+    lever_value: 5.0
+    value: null
+    censor: nd_with_limit
+    limit: 0.01
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-methionine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 5.5
+    lever_value: 5.5
+    value: null
+    censor: nd_with_limit
+    limit: 0.01
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-methionine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 6.0
+    lever_value: 6.0
+    value: null
+    censor: nd_with_limit
+    limit: 0.01
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-methionine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 6.5
+    lever_value: 6.5
+    value: null
+    censor: trace
+    limit: 0.1
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-methionine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+- id: meynier1995-18
+  odorant: Furfural
+  lever_class: pH
+  lever: pH 4.5-6.5 (pyrophosphate buffer), L-methionine/ribose
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: ug/10 mg ribose
+  quant_type: peak_area
+  quantity: amount
+  resolution: re-read
+  time_course_rule: not a time course
+  arms:
+  - label: pH 4.5
+    lever_value: 4.5
+    value: 92.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-methionine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 5.0
+    lever_value: 5.0
+    value: 10.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-methionine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 5.5
+    lever_value: 5.5
+    value: 3.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-methionine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 6.0
+    lever_value: 6.0
+    value: 2.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-methionine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 6.5
+    lever_value: 6.5
+    value: 1.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-methionine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+- id: meynier1995-19
+  odorant: 2-Furanmethanol
+  lever_class: pH
+  lever: pH 4.5-6.5 (pyrophosphate buffer), L-methionine/ribose
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: ug/10 mg ribose
+  quant_type: peak_area
+  quantity: amount
+  resolution: re-read
+  time_course_rule: not a time course
+  arms:
+  - label: pH 4.5
+    lever_value: 4.5
+    value: 3.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-methionine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 5.0
+    lever_value: 5.0
+    value: 3.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-methionine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 5.5
+    lever_value: 5.5
+    value: 3.6
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-methionine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 6.0
+    lever_value: 6.0
+    value: 4.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-methionine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 6.5
+    lever_value: 6.5
+    value: 4.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-methionine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+- id: meynier1995-20
+  odorant: Norfuraneol (NF)
+  lever_class: pH
+  lever: pH 4.5-6.5 (pyrophosphate buffer), L-methionine/ribose
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: ug/10 mg ribose
+  quant_type: peak_area
+  quantity: amount
+  resolution: re-read
+  time_course_rule: not a time course
+  arms:
+  - label: pH 4.5
+    lever_value: 4.5
+    value: 3.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-methionine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 5.0
+    lever_value: 5.0
+    value: 2.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-methionine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 5.5
+    lever_value: 5.5
+    value: 1.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-methionine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 6.0
+    lever_value: 6.0
+    value: 1.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-methionine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 6.5
+    lever_value: 6.5
+    value: 1.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-methionine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+- id: meynier1995-21
+  odorant: Methional (3-(methylthio)propanal)
+  lever_class: pH
+  lever: pH 4.5-6.5 (pyrophosphate buffer), L-methionine/ribose
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: ug/10 mg ribose
+  quant_type: peak_area
+  quantity: amount
+  resolution: re-read
+  time_course_rule: not a time course
+  arms:
+  - label: pH 4.5
+    lever_value: 4.5
+    value: 167.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-methionine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 5.0
+    lever_value: 5.0
+    value: 98.6
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-methionine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 5.5
+    lever_value: 5.5
+    value: 138.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-methionine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 6.0
+    lever_value: 6.0
+    value: 109.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-methionine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+  - label: pH 6.5
+    lever_value: 6.5
+    value: 90.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-methionine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed glass ampoules
+- id: meynier1995-22
+  odorant: 2-Methylpyrazine
+  lever_class: amino acid identity
+  lever: glycine vs lysine vs cysteine vs methionine; pH 4.5
+  focal: false
+  location: Tables 1-4
+  digitised: false
+  unit: ug/10 mg ribose
+  quant_type: peak_area
+  quantity: amount
+  resolution: re-read
+  time_course_rule: not a time course
+  arms:
+  - label: glycine pH 4.5
+    lever_value: glycine
+    value: null
+    censor: nd_with_limit
+    limit: 0.01
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine pH 4.5
+    lever_value: lysine
+    value: null
+    censor: nd_with_limit
+    limit: 0.01
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-lysine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: cysteine pH 4.5
+    lever_value: cysteine
+    value: null
+    censor: nd_with_limit
+    limit: 0.01
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: methionine pH 4.5
+    lever_value: methionine
+    value: null
+    censor: nd_with_limit
+    limit: 0.01
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-methionine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: meynier1995-23
+  odorant: 2-Methylpyrazine
+  lever_class: amino acid identity
+  lever: glycine vs lysine vs cysteine vs methionine; pH 5.0
+  focal: false
+  location: Tables 1-4
+  digitised: false
+  unit: ug/10 mg ribose
+  quant_type: peak_area
+  quantity: amount
+  resolution: re-read
+  time_course_rule: not a time course
+  arms:
+  - label: glycine pH 5.0
+    lever_value: glycine
+    value: null
+    censor: nd_with_limit
+    limit: 0.01
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine pH 5.0
+    lever_value: lysine
+    value: 0.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-lysine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: cysteine pH 5.0
+    lever_value: cysteine
+    value: null
+    censor: nd_with_limit
+    limit: 0.01
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: methionine pH 5.0
+    lever_value: methionine
+    value: null
+    censor: nd_with_limit
+    limit: 0.01
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-methionine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: meynier1995-24
+  odorant: 2-Methylpyrazine
+  lever_class: amino acid identity
+  lever: glycine vs lysine vs cysteine vs methionine; pH 5.5
+  focal: false
+  location: Tables 1-4
+  digitised: false
+  unit: ug/10 mg ribose
+  quant_type: peak_area
+  quantity: amount
+  resolution: re-read
+  time_course_rule: not a time course
+  arms:
+  - label: glycine pH 5.5
+    lever_value: glycine
+    value: 0.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine pH 5.5
+    lever_value: lysine
+    value: 1.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-lysine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: cysteine pH 5.5
+    lever_value: cysteine
+    value: null
+    censor: nd_with_limit
+    limit: 0.01
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: methionine pH 5.5
+    lever_value: methionine
+    value: null
+    censor: nd_with_limit
+    limit: 0.01
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-methionine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: meynier1995-25
+  odorant: 2-Methylpyrazine
+  lever_class: amino acid identity
+  lever: glycine vs lysine vs cysteine vs methionine; pH 6.0
+  focal: false
+  location: Tables 1-4
+  digitised: false
+  unit: ug/10 mg ribose
+  quant_type: peak_area
+  quantity: amount
+  resolution: re-read
+  time_course_rule: not a time course
+  arms:
+  - label: glycine pH 6.0
+    lever_value: glycine
+    value: 0.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine pH 6.0
+    lever_value: lysine
+    value: 4.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-lysine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: cysteine pH 6.0
+    lever_value: cysteine
+    value: 0.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: methionine pH 6.0
+    lever_value: methionine
+    value: null
+    censor: nd_with_limit
+    limit: 0.01
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-methionine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: meynier1995-26
+  odorant: 2-Methylpyrazine
+  lever_class: amino acid identity
+  lever: glycine vs lysine vs cysteine vs methionine; pH 6.5
+  focal: false
+  location: Tables 1-4
+  digitised: false
+  unit: ug/10 mg ribose
+  quant_type: peak_area
+  quantity: amount
+  resolution: re-read
+  time_course_rule: not a time course
+  arms:
+  - label: glycine pH 6.5
+    lever_value: glycine
+    value: 0.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine pH 6.5
+    lever_value: lysine
+    value: 4.6
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-lysine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: cysteine pH 6.5
+    lever_value: cysteine
+    value: 3.6
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: methionine pH 6.5
+    lever_value: methionine
+    value: null
+    censor: trace
+    limit: 0.1
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-methionine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: meynier1995-27
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: amino acid identity
+  lever: glycine vs lysine vs cysteine; pH 4.5
+  focal: false
+  location: Tables 1-3
+  digitised: false
+  unit: ug/10 mg ribose
+  quant_type: peak_area
+  quantity: amount
+  resolution: re-read
+  time_course_rule: not a time course
+  arms:
+  - label: glycine pH 4.5
+    lever_value: glycine
+    value: null
+    censor: nd_with_limit
+    limit: 0.01
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine pH 4.5
+    lever_value: lysine
+    value: null
+    censor: nd_with_limit
+    limit: 0.01
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-lysine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: cysteine pH 4.5 ('Dimethypyrazine')
+    lever_value: cysteine
+    value: null
+    censor: nd_with_limit
+    limit: 0.01
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: meynier1995-28
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: amino acid identity
+  lever: glycine vs lysine vs cysteine; pH 5.0
+  focal: false
+  location: Tables 1-3
+  digitised: false
+  unit: ug/10 mg ribose
+  quant_type: peak_area
+  quantity: amount
+  resolution: re-read
+  time_course_rule: not a time course
+  arms:
+  - label: glycine pH 5.0
+    lever_value: glycine
+    value: null
+    censor: nd_with_limit
+    limit: 0.01
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine pH 5.0
+    lever_value: lysine
+    value: 0.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-lysine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: cysteine pH 5.0 ('Dimethypyrazine')
+    lever_value: cysteine
+    value: null
+    censor: nd_with_limit
+    limit: 0.01
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: meynier1995-29
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: amino acid identity
+  lever: glycine vs lysine vs cysteine; pH 5.5
+  focal: false
+  location: Tables 1-3
+  digitised: false
+  unit: ug/10 mg ribose
+  quant_type: peak_area
+  quantity: amount
+  resolution: re-read
+  time_course_rule: not a time course
+  arms:
+  - label: glycine pH 5.5
+    lever_value: glycine
+    value: 0.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine pH 5.5
+    lever_value: lysine
+    value: 0.6
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-lysine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: cysteine pH 5.5 ('Dimethypyrazine')
+    lever_value: cysteine
+    value: null
+    censor: nd_with_limit
+    limit: 0.01
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: meynier1995-30
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: amino acid identity
+  lever: glycine vs lysine vs cysteine; pH 6.0
+  focal: false
+  location: Tables 1-3
+  digitised: false
+  unit: ug/10 mg ribose
+  quant_type: peak_area
+  quantity: amount
+  resolution: re-read
+  time_course_rule: not a time course
+  arms:
+  - label: glycine pH 6.0
+    lever_value: glycine
+    value: 3.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine pH 6.0
+    lever_value: lysine
+    value: 2.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-lysine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: cysteine pH 6.0 ('Dimethypyrazine')
+    lever_value: cysteine
+    value: 0.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: meynier1995-31
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: amino acid identity
+  lever: glycine vs lysine vs cysteine; pH 6.5
+  focal: false
+  location: Tables 1-3
+  digitised: false
+  unit: ug/10 mg ribose
+  quant_type: peak_area
+  quantity: amount
+  resolution: re-read
+  time_course_rule: not a time course
+  arms:
+  - label: glycine pH 6.5
+    lever_value: glycine
+    value: 4.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine pH 6.5
+    lever_value: lysine
+    value: 5.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-lysine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: cysteine pH 6.5 ('Dimethypyrazine')
+    lever_value: cysteine
+    value: 1.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: meynier1995-32
+  odorant: Furfural
+  lever_class: amino acid identity
+  lever: glycine vs lysine vs cysteine vs methionine; pH 4.5
+  focal: false
+  location: Tables 1-4
+  digitised: false
+  unit: ug/10 mg ribose
+  quant_type: peak_area
+  quantity: amount
+  resolution: re-read
+  time_course_rule: not a time course
+  arms:
+  - label: glycine pH 4.5
+    lever_value: glycine
+    value: 151.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine pH 4.5
+    lever_value: lysine
+    value: 10.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-lysine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: cysteine pH 4.5
+    lever_value: cysteine
+    value: 3.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: methionine pH 4.5
+    lever_value: methionine
+    value: 92.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-methionine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: meynier1995-33
+  odorant: Furfural
+  lever_class: amino acid identity
+  lever: glycine vs lysine vs cysteine vs methionine; pH 5.0
+  focal: false
+  location: Tables 1-4
+  digitised: false
+  unit: ug/10 mg ribose
+  quant_type: peak_area
+  quantity: amount
+  resolution: re-read
+  time_course_rule: not a time course
+  arms:
+  - label: glycine pH 5.0
+    lever_value: glycine
+    value: 10.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine pH 5.0
+    lever_value: lysine
+    value: 4.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-lysine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: cysteine pH 5.0
+    lever_value: cysteine
+    value: 1.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: methionine pH 5.0
+    lever_value: methionine
+    value: 10.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-methionine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: meynier1995-34
+  odorant: Furfural
+  lever_class: amino acid identity
+  lever: glycine vs lysine vs cysteine vs methionine; pH 5.5
+  focal: false
+  location: Tables 1-4
+  digitised: false
+  unit: ug/10 mg ribose
+  quant_type: peak_area
+  quantity: amount
+  resolution: re-read
+  time_course_rule: not a time course
+  arms:
+  - label: glycine pH 5.5
+    lever_value: glycine
+    value: 3.6
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine pH 5.5
+    lever_value: lysine
+    value: null
+    censor: trace
+    limit: 0.1
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-lysine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: cysteine pH 5.5
+    lever_value: cysteine
+    value: 1.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: methionine pH 5.5
+    lever_value: methionine
+    value: 3.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-methionine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: meynier1995-35
+  odorant: Furfural
+  lever_class: amino acid identity
+  lever: glycine vs lysine vs cysteine vs methionine; pH 6.0
+  focal: false
+  location: Tables 1-4
+  digitised: false
+  unit: ug/10 mg ribose
+  quant_type: peak_area
+  quantity: amount
+  resolution: re-read
+  time_course_rule: not a time course
+  arms:
+  - label: glycine pH 6.0
+    lever_value: glycine
+    value: 0.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine pH 6.0
+    lever_value: lysine
+    value: null
+    censor: nd_with_limit
+    limit: 0.01
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-lysine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: cysteine pH 6.0
+    lever_value: cysteine
+    value: 0.6
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: methionine pH 6.0
+    lever_value: methionine
+    value: 2.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-methionine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: meynier1995-36
+  odorant: Furfural
+  lever_class: amino acid identity
+  lever: glycine vs lysine vs cysteine vs methionine; pH 6.5
+  focal: false
+  location: Tables 1-4
+  digitised: false
+  unit: ug/10 mg ribose
+  quant_type: peak_area
+  quantity: amount
+  resolution: re-read
+  time_course_rule: not a time course
+  arms:
+  - label: glycine pH 6.5
+    lever_value: glycine
+    value: null
+    censor: trace
+    limit: 0.1
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine pH 6.5
+    lever_value: lysine
+    value: null
+    censor: nd_with_limit
+    limit: 0.01
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-lysine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: cysteine pH 6.5
+    lever_value: cysteine
+    value: null
+    censor: trace
+    limit: 0.1
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: methionine pH 6.5
+    lever_value: methionine
+    value: 1.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-methionine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: meynier1995-37
+  odorant: 2-Furanmethanol
+  lever_class: amino acid identity
+  lever: glycine vs lysine vs cysteine vs methionine; pH 4.5
+  focal: false
+  location: Tables 1-4
+  digitised: false
+  unit: ug/10 mg ribose
+  quant_type: peak_area
+  quantity: amount
+  resolution: re-read
+  time_course_rule: not a time course
+  arms:
+  - label: glycine pH 4.5
+    lever_value: glycine
+    value: 1.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine pH 4.5
+    lever_value: lysine
+    value: 1.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-lysine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: cysteine pH 4.5
+    lever_value: cysteine
+    value: null
+    censor: nd_with_limit
+    limit: 0.01
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: methionine pH 4.5
+    lever_value: methionine
+    value: 3.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-methionine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: meynier1995-38
+  odorant: 2-Furanmethanol
+  lever_class: amino acid identity
+  lever: glycine vs lysine vs cysteine vs methionine; pH 5.0
+  focal: false
+  location: Tables 1-4
+  digitised: false
+  unit: ug/10 mg ribose
+  quant_type: peak_area
+  quantity: amount
+  resolution: re-read
+  time_course_rule: not a time course
+  arms:
+  - label: glycine pH 5.0
+    lever_value: glycine
+    value: 3.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine pH 5.0
+    lever_value: lysine
+    value: 1.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-lysine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: cysteine pH 5.0
+    lever_value: cysteine
+    value: 1.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: methionine pH 5.0
+    lever_value: methionine
+    value: 3.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-methionine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: meynier1995-39
+  odorant: 2-Furanmethanol
+  lever_class: amino acid identity
+  lever: glycine vs lysine vs cysteine vs methionine; pH 5.5
+  focal: false
+  location: Tables 1-4
+  digitised: false
+  unit: ug/10 mg ribose
+  quant_type: peak_area
+  quantity: amount
+  resolution: re-read
+  time_course_rule: not a time course
+  arms:
+  - label: glycine pH 5.5
+    lever_value: glycine
+    value: 2.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine pH 5.5
+    lever_value: lysine
+    value: 1.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-lysine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: cysteine pH 5.5
+    lever_value: cysteine
+    value: 1.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: methionine pH 5.5
+    lever_value: methionine
+    value: 3.6
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-methionine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: meynier1995-40
+  odorant: 2-Furanmethanol
+  lever_class: amino acid identity
+  lever: glycine vs lysine vs cysteine vs methionine; pH 6.0
+  focal: false
+  location: Tables 1-4
+  digitised: false
+  unit: ug/10 mg ribose
+  quant_type: peak_area
+  quantity: amount
+  resolution: re-read
+  time_course_rule: not a time course
+  arms:
+  - label: glycine pH 6.0
+    lever_value: glycine
+    value: 4.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine pH 6.0
+    lever_value: lysine
+    value: 1.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-lysine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: cysteine pH 6.0
+    lever_value: cysteine
+    value: 0.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: methionine pH 6.0
+    lever_value: methionine
+    value: 4.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-methionine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: meynier1995-41
+  odorant: 2-Furanmethanol
+  lever_class: amino acid identity
+  lever: glycine vs lysine vs cysteine vs methionine; pH 6.5
+  focal: false
+  location: Tables 1-4
+  digitised: false
+  unit: ug/10 mg ribose
+  quant_type: peak_area
+  quantity: amount
+  resolution: re-read
+  time_course_rule: not a time course
+  arms:
+  - label: glycine pH 6.5
+    lever_value: glycine
+    value: 3.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine pH 6.5
+    lever_value: lysine
+    value: 1.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-lysine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: cysteine pH 6.5
+    lever_value: cysteine
+    value: 0.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: methionine pH 6.5
+    lever_value: methionine
+    value: 4.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-methionine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: meynier1995-42
+  odorant: Norfuraneol (NF)
+  lever_class: amino acid identity
+  lever: glycine vs lysine vs cysteine vs methionine; pH 4.5
+  focal: false
+  location: Tables 1-4
+  digitised: false
+  unit: ug/10 mg ribose
+  quant_type: peak_area
+  quantity: amount
+  resolution: re-read
+  time_course_rule: not a time course
+  arms:
+  - label: glycine pH 4.5
+    lever_value: glycine
+    value: 12.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine pH 4.5
+    lever_value: lysine
+    value: 8.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-lysine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: cysteine pH 4.5
+    lever_value: cysteine
+    value: 10.6
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: methionine pH 4.5
+    lever_value: methionine
+    value: 3.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-methionine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: meynier1995-43
+  odorant: Norfuraneol (NF)
+  lever_class: amino acid identity
+  lever: glycine vs lysine vs cysteine vs methionine; pH 5.0
+  focal: false
+  location: Tables 1-4
+  digitised: false
+  unit: ug/10 mg ribose
+  quant_type: peak_area
+  quantity: amount
+  resolution: re-read
+  time_course_rule: not a time course
+  arms:
+  - label: glycine pH 5.0
+    lever_value: glycine
+    value: 5.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine pH 5.0
+    lever_value: lysine
+    value: 7.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-lysine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: cysteine pH 5.0
+    lever_value: cysteine
+    value: 6.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: methionine pH 5.0
+    lever_value: methionine
+    value: 2.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-methionine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: meynier1995-44
+  odorant: Norfuraneol (NF)
+  lever_class: amino acid identity
+  lever: glycine vs lysine vs cysteine vs methionine; pH 5.5
+  focal: false
+  location: Tables 1-4
+  digitised: false
+  unit: ug/10 mg ribose
+  quant_type: peak_area
+  quantity: amount
+  resolution: re-read
+  time_course_rule: not a time course
+  arms:
+  - label: glycine pH 5.5
+    lever_value: glycine
+    value: 5.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine pH 5.5
+    lever_value: lysine
+    value: 7.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-lysine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: cysteine pH 5.5
+    lever_value: cysteine
+    value: 5.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: methionine pH 5.5
+    lever_value: methionine
+    value: 1.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-methionine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: meynier1995-45
+  odorant: Norfuraneol (NF)
+  lever_class: amino acid identity
+  lever: glycine vs lysine vs cysteine vs methionine; pH 6.0
+  focal: false
+  location: Tables 1-4
+  digitised: false
+  unit: ug/10 mg ribose
+  quant_type: peak_area
+  quantity: amount
+  resolution: re-read
+  time_course_rule: not a time course
+  arms:
+  - label: glycine pH 6.0
+    lever_value: glycine
+    value: 1.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine pH 6.0
+    lever_value: lysine
+    value: 1.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-lysine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: cysteine pH 6.0
+    lever_value: cysteine
+    value: 2.6
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: methionine pH 6.0
+    lever_value: methionine
+    value: 1.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-methionine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: meynier1995-46
+  odorant: Norfuraneol (NF)
+  lever_class: amino acid identity
+  lever: glycine vs lysine vs cysteine vs methionine; pH 6.5
+  focal: false
+  location: Tables 1-4
+  digitised: false
+  unit: ug/10 mg ribose
+  quant_type: peak_area
+  quantity: amount
+  resolution: re-read
+  time_course_rule: not a time course
+  arms:
+  - label: glycine pH 6.5
+    lever_value: glycine
+    value: 0.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: lysine pH 6.5
+    lever_value: lysine
+    value: 1.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-lysine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: cysteine pH 6.5
+    lever_value: cysteine
+    value: 3.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-cysteine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: methionine pH 6.5
+    lever_value: methionine
+    value: 1.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: held
+      temp_C: 140
+      time_min: 60
+      precursors:
+        L-methionine: 100 mM
+        ribose: 70 mM
+      buffer: 0.2 M pyrophosphate
+      matrix: buffer
+      headspace: sealed, unstated

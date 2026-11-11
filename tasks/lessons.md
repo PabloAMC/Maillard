@@ -574,3 +574,14 @@ have no null answer): counting it as a difference of 0 pulls the mean to zero an
 - **Rule:** before a pooled residual statistic drives a plan decision, report it by lever class, by bin of predicted
   effect, with and without its most influential studies, and with sign accuracy; and propagate the parameter bands
   onto the same residuals before calling the error structural.
+## 2026-11-11 — A paper key is not a file name: resolve PDFs through the alias table
+- **What happened:** the first readers for `zhou2023` were given `data/articles/Zhou2023.pdf`, which is a different
+  paper (Zhu et al. 2023, a Baijiu protein-binding study); the key's PDF is `Zhou2023b.pdf`
+  (`data/keys/pdf_dossier_aliases.yml`). A reader noticed; both files were discarded and the source re-keyed.
+- **Rule:** map every paper key to its PDF through `pdf_dossier_aliases.yml` before handing it to a reader, and have
+  readers state the title they read in their reply.
+## 2026-11-11 — Parallel PRs that each tick their own row of one plan table conflict on every merge
+- **What happened:** PRs #113, #115 and #116 each edited their own row of STATUS_AND_PLAN sec. 0's step table; every
+  merge to main put the next PR into conflict, and one resolution briefly dropped a row edit from main.
+- **Rule:** resolve by marker lines and verify row by row against `origin/main` (one diff per row) before committing;
+  or keep progress notes for parallel work out of the shared table until the last PR merges.

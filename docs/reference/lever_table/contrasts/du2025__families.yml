@@ -1,0 +1,929 @@
+# Resolved (third read) from reader_a / reader_b. Rules: docs/reference/lever_table/PREREG.md secs. 3 - 4 and amendments A1 - A3.
+source: du2025
+pdf: data/articles/du2025.pdf
+reader: resolved
+scope_note: 'Lever = C18 fatty acid added to glutathione-glucose in 0.2 M phosphate pH 6.5, 145 C, 2 h (GG none; GGO oleic; GGL linoleic; GGN linolenic), keyed as lipid, first arm GG. IS (1,2-dichlorobenzene)
+  ratios: peak_area; blank cell = nd_no_limit. Readers agreed on every value of the nine listed odorants; Table 1 row 26 prints ''3-furaldehyde'' (RI 1425), not furfural: keyed as printed with odorant_unlisted.
+  5-HMF, 2-heptylfuran, 2-octylfuran, 5-methyl-2(3H)-furanone, 1-octen-3-one, 1-heptanol not keyed by either reader. Fig. 2 time course covers glutathione / Amadori compound only.'
+contrasts:
+- id: du2025-1
+  odorant: 2-Pentylfuran
+  lever_class: lipid
+  lever: C18 fatty acid added (none, oleic, linoleic, linolenic)
+  focal: false
+  location: Table 1, row 22, p. 5
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  resolution: agreed
+  arms:
+  - label: GG
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: label
+      temp_C: 145
+      time_min: 120
+      precursors:
+        glutathione: 1 mmol
+        glucose: 1 mmol
+        volume: 5 mL
+      buffer: 0.2 M phosphate pH 6.50
+      matrix: buffer
+      headspace: unstated
+  - label: GGO
+    lever_value: oleic acid
+    value: 41.77
+    censor: none
+    limit: null
+    n: 3
+    sd: 4.22
+    conditions:
+      ph: 6.5
+      ph_basis: label
+      temp_C: 145
+      time_min: 120
+      precursors:
+        glutathione: 1 mmol
+        glucose: 1 mmol
+        oleic acid: 0.05 mmol
+        volume: 5 mL
+      buffer: 0.2 M phosphate pH 6.50
+      matrix: buffer
+      headspace: unstated
+  - label: GGL
+    lever_value: linoleic acid
+    value: 108.87
+    censor: none
+    limit: null
+    n: 3
+    sd: 8.58
+    conditions:
+      ph: 6.5
+      ph_basis: label
+      temp_C: 145
+      time_min: 120
+      precursors:
+        glutathione: 1 mmol
+        glucose: 1 mmol
+        linoleic acid: 0.05 mmol
+        volume: 5 mL
+      buffer: 0.2 M phosphate pH 6.50
+      matrix: buffer
+      headspace: unstated
+  - label: GGN
+    lever_value: linolenic acid
+    value: 225.3
+    censor: none
+    limit: null
+    n: 3
+    sd: 11.49
+    conditions:
+      ph: 6.5
+      ph_basis: label
+      temp_C: 145
+      time_min: 120
+      precursors:
+        glutathione: 1 mmol
+        glucose: 1 mmol
+        linolenic acid: 0.05 mmol
+        volume: 5 mL
+      buffer: 0.2 M phosphate pH 6.50
+      matrix: buffer
+      headspace: unstated
+- id: du2025-2
+  odorant: 3-furaldehyde
+  odorant_unlisted: true
+  lever_class: lipid
+  lever: C18 fatty acid added (none, oleic, linoleic, linolenic)
+  focal: false
+  location: Table 1, row 26, p. 5
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  resolution: re-read
+  arms:
+  - label: GG
+    lever_value: none
+    value: 39.94
+    censor: none
+    limit: null
+    n: 3
+    sd: 6.84
+    conditions:
+      ph: 6.5
+      ph_basis: label
+      temp_C: 145
+      time_min: 120
+      precursors:
+        glutathione: 1 mmol
+        glucose: 1 mmol
+        volume: 5 mL
+      buffer: 0.2 M phosphate pH 6.50
+      matrix: buffer
+      headspace: unstated
+  - label: GGO
+    lever_value: oleic acid
+    value: 35.44
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.09
+    conditions:
+      ph: 6.5
+      ph_basis: label
+      temp_C: 145
+      time_min: 120
+      precursors:
+        glutathione: 1 mmol
+        glucose: 1 mmol
+        oleic acid: 0.05 mmol
+        volume: 5 mL
+      buffer: 0.2 M phosphate pH 6.50
+      matrix: buffer
+      headspace: unstated
+  - label: GGL
+    lever_value: linoleic acid
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: label
+      temp_C: 145
+      time_min: 120
+      precursors:
+        glutathione: 1 mmol
+        glucose: 1 mmol
+        linoleic acid: 0.05 mmol
+        volume: 5 mL
+      buffer: 0.2 M phosphate pH 6.50
+      matrix: buffer
+      headspace: unstated
+  - label: GGN
+    lever_value: linolenic acid
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: label
+      temp_C: 145
+      time_min: 120
+      precursors:
+        glutathione: 1 mmol
+        glucose: 1 mmol
+        linolenic acid: 0.05 mmol
+        volume: 5 mL
+      buffer: 0.2 M phosphate pH 6.50
+      matrix: buffer
+      headspace: unstated
+- id: du2025-3
+  odorant: 2-Acetylfuran
+  lever_class: lipid
+  lever: C18 fatty acid added (none, oleic, linoleic, linolenic)
+  focal: false
+  location: Table 1, row 27, p. 5
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  resolution: agreed
+  arms:
+  - label: GG
+    lever_value: none
+    value: 469.0
+    censor: none
+    limit: null
+    n: 3
+    sd: 29.45
+    conditions:
+      ph: 6.5
+      ph_basis: label
+      temp_C: 145
+      time_min: 120
+      precursors:
+        glutathione: 1 mmol
+        glucose: 1 mmol
+        volume: 5 mL
+      buffer: 0.2 M phosphate pH 6.50
+      matrix: buffer
+      headspace: unstated
+  - label: GGO
+    lever_value: oleic acid
+    value: 449.95
+    censor: none
+    limit: null
+    n: 3
+    sd: 35.09
+    conditions:
+      ph: 6.5
+      ph_basis: label
+      temp_C: 145
+      time_min: 120
+      precursors:
+        glutathione: 1 mmol
+        glucose: 1 mmol
+        oleic acid: 0.05 mmol
+        volume: 5 mL
+      buffer: 0.2 M phosphate pH 6.50
+      matrix: buffer
+      headspace: unstated
+  - label: GGL
+    lever_value: linoleic acid
+    value: 413.46
+    censor: none
+    limit: null
+    n: 3
+    sd: 27.22
+    conditions:
+      ph: 6.5
+      ph_basis: label
+      temp_C: 145
+      time_min: 120
+      precursors:
+        glutathione: 1 mmol
+        glucose: 1 mmol
+        linoleic acid: 0.05 mmol
+        volume: 5 mL
+      buffer: 0.2 M phosphate pH 6.50
+      matrix: buffer
+      headspace: unstated
+  - label: GGN
+    lever_value: linolenic acid
+    value: 486.77
+    censor: none
+    limit: null
+    n: 3
+    sd: 12.08
+    conditions:
+      ph: 6.5
+      ph_basis: label
+      temp_C: 145
+      time_min: 120
+      precursors:
+        glutathione: 1 mmol
+        glucose: 1 mmol
+        linolenic acid: 0.05 mmol
+        volume: 5 mL
+      buffer: 0.2 M phosphate pH 6.50
+      matrix: buffer
+      headspace: unstated
+- id: du2025-4
+  odorant: 5-Methylfurfural
+  lever_class: lipid
+  lever: C18 fatty acid added (none, oleic, linoleic, linolenic)
+  focal: false
+  location: Table 1, row 29, p. 5
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  resolution: agreed
+  arms:
+  - label: GG
+    lever_value: none
+    value: 670.24
+    censor: none
+    limit: null
+    n: 3
+    sd: 97.38
+    conditions:
+      ph: 6.5
+      ph_basis: label
+      temp_C: 145
+      time_min: 120
+      precursors:
+        glutathione: 1 mmol
+        glucose: 1 mmol
+        volume: 5 mL
+      buffer: 0.2 M phosphate pH 6.50
+      matrix: buffer
+      headspace: unstated
+  - label: GGO
+    lever_value: oleic acid
+    value: 100.31
+    censor: none
+    limit: null
+    n: 3
+    sd: 4.67
+    conditions:
+      ph: 6.5
+      ph_basis: label
+      temp_C: 145
+      time_min: 120
+      precursors:
+        glutathione: 1 mmol
+        glucose: 1 mmol
+        oleic acid: 0.05 mmol
+        volume: 5 mL
+      buffer: 0.2 M phosphate pH 6.50
+      matrix: buffer
+      headspace: unstated
+  - label: GGL
+    lever_value: linoleic acid
+    value: 125.77
+    censor: none
+    limit: null
+    n: 3
+    sd: 16.6
+    conditions:
+      ph: 6.5
+      ph_basis: label
+      temp_C: 145
+      time_min: 120
+      precursors:
+        glutathione: 1 mmol
+        glucose: 1 mmol
+        linoleic acid: 0.05 mmol
+        volume: 5 mL
+      buffer: 0.2 M phosphate pH 6.50
+      matrix: buffer
+      headspace: unstated
+  - label: GGN
+    lever_value: linolenic acid
+    value: 518.3
+    censor: none
+    limit: null
+    n: 3
+    sd: 30.53
+    conditions:
+      ph: 6.5
+      ph_basis: label
+      temp_C: 145
+      time_min: 120
+      precursors:
+        glutathione: 1 mmol
+        glucose: 1 mmol
+        linolenic acid: 0.05 mmol
+        volume: 5 mL
+      buffer: 0.2 M phosphate pH 6.50
+      matrix: buffer
+      headspace: unstated
+- id: du2025-5
+  odorant: 2-Acetylthiazole
+  lever_class: lipid
+  lever: C18 fatty acid added (none, oleic, linoleic, linolenic)
+  focal: false
+  location: Table 1, row 39, p. 5
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  resolution: agreed
+  arms:
+  - label: GG
+    lever_value: none
+    value: 86.11
+    censor: none
+    limit: null
+    n: 3
+    sd: 13.51
+    conditions:
+      ph: 6.5
+      ph_basis: label
+      temp_C: 145
+      time_min: 120
+      precursors:
+        glutathione: 1 mmol
+        glucose: 1 mmol
+        volume: 5 mL
+      buffer: 0.2 M phosphate pH 6.50
+      matrix: buffer
+      headspace: unstated
+  - label: GGO
+    lever_value: oleic acid
+    value: 35.53
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.07
+    conditions:
+      ph: 6.5
+      ph_basis: label
+      temp_C: 145
+      time_min: 120
+      precursors:
+        glutathione: 1 mmol
+        glucose: 1 mmol
+        oleic acid: 0.05 mmol
+        volume: 5 mL
+      buffer: 0.2 M phosphate pH 6.50
+      matrix: buffer
+      headspace: unstated
+  - label: GGL
+    lever_value: linoleic acid
+    value: 90.7
+    censor: none
+    limit: null
+    n: 3
+    sd: 5.57
+    conditions:
+      ph: 6.5
+      ph_basis: label
+      temp_C: 145
+      time_min: 120
+      precursors:
+        glutathione: 1 mmol
+        glucose: 1 mmol
+        linoleic acid: 0.05 mmol
+        volume: 5 mL
+      buffer: 0.2 M phosphate pH 6.50
+      matrix: buffer
+      headspace: unstated
+  - label: GGN
+    lever_value: linolenic acid
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: label
+      temp_C: 145
+      time_min: 120
+      precursors:
+        glutathione: 1 mmol
+        glucose: 1 mmol
+        linolenic acid: 0.05 mmol
+        volume: 5 mL
+      buffer: 0.2 M phosphate pH 6.50
+      matrix: buffer
+      headspace: unstated
+- id: du2025-6
+  odorant: Hexanal
+  lever_class: lipid
+  lever: C18 fatty acid added (none, oleic, linoleic, linolenic)
+  focal: false
+  location: Table 1, row 45, p. 5
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  resolution: agreed
+  arms:
+  - label: GG
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: label
+      temp_C: 145
+      time_min: 120
+      precursors:
+        glutathione: 1 mmol
+        glucose: 1 mmol
+        volume: 5 mL
+      buffer: 0.2 M phosphate pH 6.50
+      matrix: buffer
+      headspace: unstated
+  - label: GGO
+    lever_value: oleic acid
+    value: 5.64
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.12
+    conditions:
+      ph: 6.5
+      ph_basis: label
+      temp_C: 145
+      time_min: 120
+      precursors:
+        glutathione: 1 mmol
+        glucose: 1 mmol
+        oleic acid: 0.05 mmol
+        volume: 5 mL
+      buffer: 0.2 M phosphate pH 6.50
+      matrix: buffer
+      headspace: unstated
+  - label: GGL
+    lever_value: linoleic acid
+    value: 63.83
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.56
+    conditions:
+      ph: 6.5
+      ph_basis: label
+      temp_C: 145
+      time_min: 120
+      precursors:
+        glutathione: 1 mmol
+        glucose: 1 mmol
+        linoleic acid: 0.05 mmol
+        volume: 5 mL
+      buffer: 0.2 M phosphate pH 6.50
+      matrix: buffer
+      headspace: unstated
+  - label: GGN
+    lever_value: linolenic acid
+    value: 6.7
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.31
+    conditions:
+      ph: 6.5
+      ph_basis: label
+      temp_C: 145
+      time_min: 120
+      precursors:
+        glutathione: 1 mmol
+        glucose: 1 mmol
+        linolenic acid: 0.05 mmol
+        volume: 5 mL
+      buffer: 0.2 M phosphate pH 6.50
+      matrix: buffer
+      headspace: unstated
+- id: du2025-7
+  odorant: Octanal
+  lever_class: lipid
+  lever: C18 fatty acid added (none, oleic, linoleic, linolenic)
+  focal: false
+  location: Table 1, row 46, p. 5
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  resolution: agreed
+  arms:
+  - label: GG
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: label
+      temp_C: 145
+      time_min: 120
+      precursors:
+        glutathione: 1 mmol
+        glucose: 1 mmol
+        volume: 5 mL
+      buffer: 0.2 M phosphate pH 6.50
+      matrix: buffer
+      headspace: unstated
+  - label: GGO
+    lever_value: oleic acid
+    value: 135.84
+    censor: none
+    limit: null
+    n: 3
+    sd: 20.63
+    conditions:
+      ph: 6.5
+      ph_basis: label
+      temp_C: 145
+      time_min: 120
+      precursors:
+        glutathione: 1 mmol
+        glucose: 1 mmol
+        oleic acid: 0.05 mmol
+        volume: 5 mL
+      buffer: 0.2 M phosphate pH 6.50
+      matrix: buffer
+      headspace: unstated
+  - label: GGL
+    lever_value: linoleic acid
+    value: 23.15
+    censor: none
+    limit: null
+    n: 3
+    sd: 5.76
+    conditions:
+      ph: 6.5
+      ph_basis: label
+      temp_C: 145
+      time_min: 120
+      precursors:
+        glutathione: 1 mmol
+        glucose: 1 mmol
+        linoleic acid: 0.05 mmol
+        volume: 5 mL
+      buffer: 0.2 M phosphate pH 6.50
+      matrix: buffer
+      headspace: unstated
+  - label: GGN
+    lever_value: linolenic acid
+    value: 25.0
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.27
+    conditions:
+      ph: 6.5
+      ph_basis: label
+      temp_C: 145
+      time_min: 120
+      precursors:
+        glutathione: 1 mmol
+        glucose: 1 mmol
+        linolenic acid: 0.05 mmol
+        volume: 5 mL
+      buffer: 0.2 M phosphate pH 6.50
+      matrix: buffer
+      headspace: unstated
+- id: du2025-8
+  odorant: Nonanal
+  lever_class: lipid
+  lever: C18 fatty acid added (none, oleic, linoleic, linolenic)
+  focal: false
+  location: Table 1, row 47, p. 5
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  resolution: agreed
+  arms:
+  - label: GG
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: label
+      temp_C: 145
+      time_min: 120
+      precursors:
+        glutathione: 1 mmol
+        glucose: 1 mmol
+        volume: 5 mL
+      buffer: 0.2 M phosphate pH 6.50
+      matrix: buffer
+      headspace: unstated
+  - label: GGO
+    lever_value: oleic acid
+    value: 216.69
+    censor: none
+    limit: null
+    n: 3
+    sd: 42.32
+    conditions:
+      ph: 6.5
+      ph_basis: label
+      temp_C: 145
+      time_min: 120
+      precursors:
+        glutathione: 1 mmol
+        glucose: 1 mmol
+        oleic acid: 0.05 mmol
+        volume: 5 mL
+      buffer: 0.2 M phosphate pH 6.50
+      matrix: buffer
+      headspace: unstated
+  - label: GGL
+    lever_value: linoleic acid
+    value: 54.1
+    censor: none
+    limit: null
+    n: 3
+    sd: 3.11
+    conditions:
+      ph: 6.5
+      ph_basis: label
+      temp_C: 145
+      time_min: 120
+      precursors:
+        glutathione: 1 mmol
+        glucose: 1 mmol
+        linoleic acid: 0.05 mmol
+        volume: 5 mL
+      buffer: 0.2 M phosphate pH 6.50
+      matrix: buffer
+      headspace: unstated
+  - label: GGN
+    lever_value: linolenic acid
+    value: 26.81
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.23
+    conditions:
+      ph: 6.5
+      ph_basis: label
+      temp_C: 145
+      time_min: 120
+      precursors:
+        glutathione: 1 mmol
+        glucose: 1 mmol
+        linolenic acid: 0.05 mmol
+        volume: 5 mL
+      buffer: 0.2 M phosphate pH 6.50
+      matrix: buffer
+      headspace: unstated
+- id: du2025-9
+  odorant: (E)-2-Nonenal
+  lever_class: lipid
+  lever: C18 fatty acid added (none, oleic, linoleic, linolenic)
+  focal: false
+  location: Table 1, row 49, p. 5
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  resolution: agreed
+  arms:
+  - label: GG
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: label
+      temp_C: 145
+      time_min: 120
+      precursors:
+        glutathione: 1 mmol
+        glucose: 1 mmol
+        volume: 5 mL
+      buffer: 0.2 M phosphate pH 6.50
+      matrix: buffer
+      headspace: unstated
+  - label: GGO
+    lever_value: oleic acid
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: label
+      temp_C: 145
+      time_min: 120
+      precursors:
+        glutathione: 1 mmol
+        glucose: 1 mmol
+        oleic acid: 0.05 mmol
+        volume: 5 mL
+      buffer: 0.2 M phosphate pH 6.50
+      matrix: buffer
+      headspace: unstated
+  - label: GGL
+    lever_value: linoleic acid
+    value: 72.79
+    censor: none
+    limit: null
+    n: 3
+    sd: 11.39
+    conditions:
+      ph: 6.5
+      ph_basis: label
+      temp_C: 145
+      time_min: 120
+      precursors:
+        glutathione: 1 mmol
+        glucose: 1 mmol
+        linoleic acid: 0.05 mmol
+        volume: 5 mL
+      buffer: 0.2 M phosphate pH 6.50
+      matrix: buffer
+      headspace: unstated
+  - label: GGN
+    lever_value: linolenic acid
+    value: 38.42
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.56
+    conditions:
+      ph: 6.5
+      ph_basis: label
+      temp_C: 145
+      time_min: 120
+      precursors:
+        glutathione: 1 mmol
+        glucose: 1 mmol
+        linolenic acid: 0.05 mmol
+        volume: 5 mL
+      buffer: 0.2 M phosphate pH 6.50
+      matrix: buffer
+      headspace: unstated
+- id: du2025-10
+  odorant: (E,E)-2,4-Decadienal
+  lever_class: lipid
+  lever: C18 fatty acid added (none, oleic, linoleic, linolenic)
+  focal: false
+  location: Table 1, row 50, p. 5
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  resolution: agreed
+  arms:
+  - label: GG
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: label
+      temp_C: 145
+      time_min: 120
+      precursors:
+        glutathione: 1 mmol
+        glucose: 1 mmol
+        volume: 5 mL
+      buffer: 0.2 M phosphate pH 6.50
+      matrix: buffer
+      headspace: unstated
+  - label: GGO
+    lever_value: oleic acid
+    value: 233.72
+    censor: none
+    limit: null
+    n: 3
+    sd: 20.67
+    conditions:
+      ph: 6.5
+      ph_basis: label
+      temp_C: 145
+      time_min: 120
+      precursors:
+        glutathione: 1 mmol
+        glucose: 1 mmol
+        oleic acid: 0.05 mmol
+        volume: 5 mL
+      buffer: 0.2 M phosphate pH 6.50
+      matrix: buffer
+      headspace: unstated
+  - label: GGL
+    lever_value: linoleic acid
+    value: 114.65
+    censor: none
+    limit: null
+    n: 3
+    sd: 47.28
+    conditions:
+      ph: 6.5
+      ph_basis: label
+      temp_C: 145
+      time_min: 120
+      precursors:
+        glutathione: 1 mmol
+        glucose: 1 mmol
+        linoleic acid: 0.05 mmol
+        volume: 5 mL
+      buffer: 0.2 M phosphate pH 6.50
+      matrix: buffer
+      headspace: unstated
+  - label: GGN
+    lever_value: linolenic acid
+    value: 17.32
+    censor: none
+    limit: null
+    n: 3
+    sd: 2.16
+    conditions:
+      ph: 6.5
+      ph_basis: label
+      temp_C: 145
+      time_min: 120
+      precursors:
+        glutathione: 1 mmol
+        glucose: 1 mmol
+        linolenic acid: 0.05 mmol
+        volume: 5 mL
+      buffer: 0.2 M phosphate pH 6.50
+      matrix: buffer
+      headspace: unstated

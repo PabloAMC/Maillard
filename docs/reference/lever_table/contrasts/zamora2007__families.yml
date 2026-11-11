@@ -1,0 +1,1585 @@
+# Resolved (third read) from reader_a / reader_b; rows the comparison listed were re-read in the PDF.
+source: zamora2007
+pdf: data/articles/zamora2007.pdf
+reader: resolved
+scope_note: 'All values digitised from figures. Fig. 2 pH ladders split at the buffer switches (citrate 2.15-6, phosphate
+  6-8 and 11-12, borate 8-10): the duplicate points at pH 6 and 8 cannot be assigned to a buffer and are left out, so each
+  series gives a citrate ladder (2.15-5), a borate pair (9-10), a phosphate pair (11-12) and one mixed cross-buffer step (10
+  vs 11). Air vs inert is ''data not shown'', not keyed. Zero values at 0 umol lipid / 0 h are read off the plot as 0 (agreed
+  by both readers). Methods say 1 mL buffer, captions acetonitrile/buffer 2:1.'
+contrasts:
+- id: zamora2007-1
+  odorant: Phenylacetaldehyde
+  lever_class: pH
+  lever: reaction pH 2.15-5, 0.3 M sodium citrate run (pH 6 duplicates not assignable to a buffer)
+  focal: true
+  location: Fig. 2A (left axis, circles)
+  digitised: true
+  unit: umol aldehyde/mmol Phe
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  resolution: re-read
+  arms:
+  - label: pH 2.15
+    lever_value: 2.15
+    value: 74.1
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 2.15
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        2,4-decadienal: 50 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium citrate; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+  - label: pH 3
+    lever_value: 3
+    value: 81.1
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        2,4-decadienal: 50 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium citrate; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+  - label: pH 4
+    lever_value: 4
+    value: 43.7
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 4
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        2,4-decadienal: 50 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium citrate; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+  - label: pH 5
+    lever_value: 5
+    value: 29.6
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        2,4-decadienal: 50 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium citrate; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+- id: zamora2007-2
+  odorant: Phenylacetaldehyde
+  lever_class: pH
+  lever: reaction pH 9 vs 10, 0.3 M sodium borate run (pH 8 duplicates not assignable)
+  focal: true
+  location: Fig. 2A (left axis, circles)
+  digitised: true
+  unit: umol aldehyde/mmol Phe
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  resolution: re-read
+  arms:
+  - label: pH 9
+    lever_value: 9
+    value: 8.5
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        2,4-decadienal: 50 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium borate; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+  - label: pH 10
+    lever_value: 10
+    value: 5.7
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 10
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        2,4-decadienal: 50 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium borate; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+- id: zamora2007-3
+  odorant: Phenylacetaldehyde
+  lever_class: pH
+  lever: reaction pH 11 vs 12, 0.3 M sodium phosphate run
+  focal: true
+  location: Fig. 2A (left axis, circles)
+  digitised: true
+  unit: umol aldehyde/mmol Phe
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  resolution: re-read
+  arms:
+  - label: pH 11
+    lever_value: 11
+    value: 3.9
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 11
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        2,4-decadienal: 50 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium phosphate; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+  - label: pH 12
+    lever_value: 12
+    value: 8.5
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 12
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        2,4-decadienal: 50 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium phosphate; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+- id: zamora2007-4
+  odorant: Phenylacetaldehyde
+  lever_class: mixed
+  lever: 'pH 10 (borate) vs pH 11 (phosphate): cross-buffer step of the pH ladder'
+  focal: false
+  location: Fig. 2A (left axis, circles)
+  digitised: true
+  unit: umol aldehyde/mmol Phe
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  resolution: re-read
+  arms:
+  - label: pH 10
+    lever_value: pH 10, borate
+    value: 5.7
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 10
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        2,4-decadienal: 50 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium borate; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+  - label: pH 11
+    lever_value: pH 11, phosphate
+    value: 3.9
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 11
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        2,4-decadienal: 50 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium phosphate; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+- id: zamora2007-5
+  odorant: Phenylacetaldehyde
+  lever_class: pH
+  lever: reaction pH 2.15-5, 0.3 M sodium citrate run (pH 6 duplicates not assignable to a buffer)
+  focal: true
+  location: Fig. 2A (right axis, diamonds)
+  digitised: true
+  unit: umol aldehyde/mmol Phe
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  resolution: re-read
+  arms:
+  - label: pH 2.15
+    lever_value: 2.15
+    value: 19.3
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 2.15
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-oxooctadeca-9,11-dienoate: 50 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium citrate; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+  - label: pH 3
+    lever_value: 3
+    value: 25.7
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-oxooctadeca-9,11-dienoate: 50 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium citrate; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+  - label: pH 4
+    lever_value: 4
+    value: 22.6
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 4
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-oxooctadeca-9,11-dienoate: 50 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium citrate; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+  - label: pH 5
+    lever_value: 5
+    value: 18.7
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-oxooctadeca-9,11-dienoate: 50 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium citrate; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+- id: zamora2007-6
+  odorant: Phenylacetaldehyde
+  lever_class: pH
+  lever: reaction pH 9 vs 10, 0.3 M sodium borate run (pH 8 duplicates not assignable)
+  focal: true
+  location: Fig. 2A (right axis, diamonds)
+  digitised: true
+  unit: umol aldehyde/mmol Phe
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  resolution: re-read
+  arms:
+  - label: pH 9
+    lever_value: 9
+    value: 12.4
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-oxooctadeca-9,11-dienoate: 50 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium borate; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+  - label: pH 10
+    lever_value: 10
+    value: 6.6
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 10
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-oxooctadeca-9,11-dienoate: 50 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium borate; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+- id: zamora2007-7
+  odorant: Phenylacetaldehyde
+  lever_class: pH
+  lever: reaction pH 11 vs 12, 0.3 M sodium phosphate run
+  focal: true
+  location: Fig. 2A (right axis, diamonds)
+  digitised: true
+  unit: umol aldehyde/mmol Phe
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  resolution: re-read
+  arms:
+  - label: pH 11
+    lever_value: 11
+    value: 6.3
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 11
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-oxooctadeca-9,11-dienoate: 50 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium phosphate; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+  - label: pH 12
+    lever_value: 12
+    value: 7.3
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 12
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-oxooctadeca-9,11-dienoate: 50 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium phosphate; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+- id: zamora2007-8
+  odorant: Phenylacetaldehyde
+  lever_class: mixed
+  lever: 'pH 10 (borate) vs pH 11 (phosphate): cross-buffer step of the pH ladder'
+  focal: false
+  location: Fig. 2A (right axis, diamonds)
+  digitised: true
+  unit: umol aldehyde/mmol Phe
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  resolution: re-read
+  arms:
+  - label: pH 10
+    lever_value: pH 10, borate
+    value: 6.6
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 10
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-oxooctadeca-9,11-dienoate: 50 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium borate; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+  - label: pH 11
+    lever_value: pH 11, phosphate
+    value: 6.3
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 11
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-oxooctadeca-9,11-dienoate: 50 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium phosphate; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+- id: zamora2007-9
+  odorant: Hexanal
+  lever_class: pH
+  lever: reaction pH 2.15-5, 0.3 M sodium citrate run (pH 6 duplicates not assignable to a buffer)
+  focal: false
+  location: Fig. 2B
+  digitised: true
+  unit: umol aldehyde/mmol Phe
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  resolution: re-read
+  arms:
+  - label: pH 2.15
+    lever_value: 2.15
+    value: 79.5
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 2.15
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        2,4-decadienal: 50 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium citrate; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+  - label: pH 3
+    lever_value: 3
+    value: 96.4
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        2,4-decadienal: 50 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium citrate; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+  - label: pH 4
+    lever_value: 4
+    value: 96.8
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 4
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        2,4-decadienal: 50 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium citrate; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+  - label: pH 5
+    lever_value: 5
+    value: 77.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        2,4-decadienal: 50 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium citrate; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+- id: zamora2007-10
+  odorant: Hexanal
+  lever_class: pH
+  lever: reaction pH 9 vs 10, 0.3 M sodium borate run (pH 8 duplicates not assignable)
+  focal: false
+  location: Fig. 2B
+  digitised: true
+  unit: umol aldehyde/mmol Phe
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  resolution: re-read
+  arms:
+  - label: pH 9
+    lever_value: 9
+    value: 54.2
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 9
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        2,4-decadienal: 50 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium borate; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+  - label: pH 10
+    lever_value: 10
+    value: 60.7
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 10
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        2,4-decadienal: 50 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium borate; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+- id: zamora2007-11
+  odorant: Hexanal
+  lever_class: pH
+  lever: reaction pH 11 vs 12, 0.3 M sodium phosphate run
+  focal: false
+  location: Fig. 2B
+  digitised: true
+  unit: umol aldehyde/mmol Phe
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  resolution: re-read
+  arms:
+  - label: pH 11
+    lever_value: 11
+    value: 48.6
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 11
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        2,4-decadienal: 50 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium phosphate; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+  - label: pH 12
+    lever_value: 12
+    value: 98.3
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 12
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        2,4-decadienal: 50 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium phosphate; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+- id: zamora2007-12
+  odorant: Hexanal
+  lever_class: mixed
+  lever: 'pH 10 (borate) vs pH 11 (phosphate): cross-buffer step of the pH ladder'
+  focal: false
+  location: Fig. 2B
+  digitised: true
+  unit: umol aldehyde/mmol Phe
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  resolution: re-read
+  arms:
+  - label: pH 10
+    lever_value: pH 10, borate
+    value: 60.7
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 10
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        2,4-decadienal: 50 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium borate; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+  - label: pH 11
+    lever_value: pH 11, phosphate
+    value: 48.6
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 11
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        2,4-decadienal: 50 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium phosphate; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+- id: zamora2007-13
+  odorant: Phenylacetaldehyde
+  lever_class: precursor dose
+  lever: 2,4-decadienal amount 0-50 umol (phenylalanine fixed 50 umol)
+  focal: true
+  location: Fig. 4A (circles)
+  digitised: true
+  unit: umol aldehyde/mmol Phe
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  resolution: re-read
+  arms:
+  - label: 0 umol 2,4-decadienal
+    lever_value: 0
+    value: 2.7
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        2,4-decadienal: 0 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium citrate pH 3; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+  - label: 2.5 umol 2,4-decadienal
+    lever_value: 2.5
+    value: 4.3
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        2,4-decadienal: 2.5 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium citrate pH 3; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+  - label: 5 umol 2,4-decadienal
+    lever_value: 5
+    value: 10.8
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        2,4-decadienal: 5 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium citrate pH 3; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+  - label: 10 umol 2,4-decadienal
+    lever_value: 10
+    value: 21.1
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        2,4-decadienal: 10 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium citrate pH 3; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+  - label: 25 umol 2,4-decadienal
+    lever_value: 25
+    value: 43.1
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        2,4-decadienal: 25 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium citrate pH 3; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+  - label: 50 umol 2,4-decadienal
+    lever_value: 50
+    value: 76.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        2,4-decadienal: 50 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium citrate pH 3; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+- id: zamora2007-14
+  odorant: Phenylacetaldehyde
+  lever_class: precursor dose
+  lever: methyl 13-oxooctadeca-9,11-dienoate amount 0-50 umol (phenylalanine fixed 50 umol)
+  focal: true
+  location: Fig. 4A (diamonds)
+  digitised: true
+  unit: umol aldehyde/mmol Phe
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  resolution: re-read
+  arms:
+  - label: 0 umol methyl 13-oxooctadeca-9,11-dienoate
+    lever_value: 0
+    value: 0.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-oxooctadeca-9,11-dienoate: 0 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium citrate pH 3; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+  - label: 2.5 umol methyl 13-oxooctadeca-9,11-dienoate
+    lever_value: 2.5
+    value: 3.6
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-oxooctadeca-9,11-dienoate: 2.5 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium citrate pH 3; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+  - label: 5 umol methyl 13-oxooctadeca-9,11-dienoate
+    lever_value: 5
+    value: 2.7
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-oxooctadeca-9,11-dienoate: 5 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium citrate pH 3; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+  - label: 10 umol methyl 13-oxooctadeca-9,11-dienoate
+    lever_value: 10
+    value: 3.4
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-oxooctadeca-9,11-dienoate: 10 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium citrate pH 3; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+  - label: 25 umol methyl 13-oxooctadeca-9,11-dienoate
+    lever_value: 25
+    value: 13.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-oxooctadeca-9,11-dienoate: 25 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium citrate pH 3; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+  - label: 50 umol methyl 13-oxooctadeca-9,11-dienoate
+    lever_value: 50
+    value: 25.6
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-oxooctadeca-9,11-dienoate: 50 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium citrate pH 3; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+- id: zamora2007-15
+  odorant: Hexanal
+  lever_class: precursor dose
+  lever: 2,4-decadienal amount 0-50 umol (phenylalanine fixed 50 umol)
+  focal: false
+  location: Fig. 4B
+  digitised: true
+  unit: umol aldehyde/mmol Phe
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  resolution: agreed
+  arms:
+  - label: 0 umol 2,4-decadienal
+    lever_value: 0
+    value: 0.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        2,4-decadienal: 0 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium citrate pH 3; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+  - label: 2.5 umol 2,4-decadienal
+    lever_value: 2.5
+    value: 4.6
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        2,4-decadienal: 2.5 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium citrate pH 3; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+  - label: 5 umol 2,4-decadienal
+    lever_value: 5
+    value: 7.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        2,4-decadienal: 5 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium citrate pH 3; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+  - label: 10 umol 2,4-decadienal
+    lever_value: 10
+    value: 18.1
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        2,4-decadienal: 10 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium citrate pH 3; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+  - label: 25 umol 2,4-decadienal
+    lever_value: 25
+    value: 49.2
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        2,4-decadienal: 25 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium citrate pH 3; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+  - label: 50 umol 2,4-decadienal
+    lever_value: 50
+    value: 96.8
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        2,4-decadienal: 50 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium citrate pH 3; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+- id: zamora2007-16
+  odorant: Phenylacetaldehyde
+  lever_class: lipid
+  lever: 'oxidized lipid identity: 2,4-decadienal vs methyl 13-oxooctadeca-9,11-dienoate (50 umol each)'
+  focal: true
+  location: Fig. 4A (50 umol points)
+  digitised: true
+  unit: umol aldehyde/mmol Phe
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  resolution: agreed
+  arms:
+  - label: 2,4-decadienal/Phe
+    lever_value: 2,4-decadienal
+    value: 76.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        2,4-decadienal: 50 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium citrate pH 3; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+  - label: methyl 13-oxooctadeca-9,11-dienoate/Phe
+    lever_value: methyl 13-oxooctadeca-9,11-dienoate
+    value: 25.6
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-oxooctadeca-9,11-dienoate: 50 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium citrate pH 3; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+- id: zamora2007-17
+  odorant: Phenylacetaldehyde
+  lever_class: time
+  lever: heating time 0-3 h at 180 C; 2,4-decadienal/phenylalanine
+  focal: true
+  location: Fig. 6A (circles)
+  digitised: true
+  unit: umol aldehyde/mmol Phe
+  quant_type: absolute
+  time_course_rule: 'lever is time: whole series'
+  quantity: amount
+  resolution: agreed
+  arms:
+  - label: 0 h
+    lever_value: 0
+    value: 17.2
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 0
+      precursors:
+        2,4-decadienal: 50 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium citrate pH 3; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+  - label: 0.33 h
+    lever_value: 0.33
+    value: 41.1
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 20
+      precursors:
+        2,4-decadienal: 50 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium citrate pH 3; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+  - label: 0.67 h
+    lever_value: 0.67
+    value: 62.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 40
+      precursors:
+        2,4-decadienal: 50 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium citrate pH 3; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+  - label: 1.0 h
+    lever_value: 1.0
+    value: 80.8
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        2,4-decadienal: 50 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium citrate pH 3; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+  - label: 1.5 h
+    lever_value: 1.5
+    value: 80.1
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 90
+      precursors:
+        2,4-decadienal: 50 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium citrate pH 3; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+  - label: 2.0 h
+    lever_value: 2.0
+    value: 85.8
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 120
+      precursors:
+        2,4-decadienal: 50 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium citrate pH 3; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+  - label: 3.0 h
+    lever_value: 3.0
+    value: 90.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 180
+      precursors:
+        2,4-decadienal: 50 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium citrate pH 3; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+- id: zamora2007-18
+  odorant: Phenylacetaldehyde
+  lever_class: time
+  lever: heating time 0-3 h at 180 C; methyl 13-oxooctadeca-9,11-dienoate/phenylalanine
+  focal: true
+  location: Fig. 6A (diamonds)
+  digitised: true
+  unit: umol aldehyde/mmol Phe
+  quant_type: absolute
+  time_course_rule: 'lever is time: whole series'
+  quantity: amount
+  resolution: re-read
+  arms:
+  - label: 0 h
+    lever_value: 0
+    value: 2.1
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 0
+      precursors:
+        methyl 13-oxooctadeca-9,11-dienoate: 50 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium citrate pH 3; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+  - label: 0.33 h
+    lever_value: 0.33
+    value: 8.2
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 20
+      precursors:
+        methyl 13-oxooctadeca-9,11-dienoate: 50 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium citrate pH 3; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+  - label: 0.67 h
+    lever_value: 0.67
+    value: 18.8
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 40
+      precursors:
+        methyl 13-oxooctadeca-9,11-dienoate: 50 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium citrate pH 3; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+  - label: 1.0 h
+    lever_value: 1.0
+    value: 25.6
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        methyl 13-oxooctadeca-9,11-dienoate: 50 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium citrate pH 3; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+  - label: 1.5 h
+    lever_value: 1.5
+    value: 28.4
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 90
+      precursors:
+        methyl 13-oxooctadeca-9,11-dienoate: 50 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium citrate pH 3; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+  - label: 2.0 h
+    lever_value: 2.0
+    value: 38.3
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 120
+      precursors:
+        methyl 13-oxooctadeca-9,11-dienoate: 50 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium citrate pH 3; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+  - label: 3.0 h
+    lever_value: 3.0
+    value: 59.9
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 180
+      precursors:
+        methyl 13-oxooctadeca-9,11-dienoate: 50 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium citrate pH 3; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+- id: zamora2007-19
+  odorant: Hexanal
+  lever_class: time
+  lever: heating time 0-3 h at 180 C; 2,4-decadienal/phenylalanine
+  focal: false
+  location: Fig. 6B
+  digitised: true
+  unit: umol aldehyde/mmol Phe
+  quant_type: absolute
+  time_course_rule: 'lever is time: whole series'
+  quantity: amount
+  resolution: agreed
+  arms:
+  - label: 0 h
+    lever_value: 0
+    value: 0.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 0
+      precursors:
+        2,4-decadienal: 50 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium citrate pH 3; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+  - label: 0.33 h
+    lever_value: 0.33
+    value: 37.2
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 20
+      precursors:
+        2,4-decadienal: 50 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium citrate pH 3; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+  - label: 0.67 h
+    lever_value: 0.67
+    value: 62.1
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 40
+      precursors:
+        2,4-decadienal: 50 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium citrate pH 3; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+  - label: 1.0 h
+    lever_value: 1.0
+    value: 97.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 60
+      precursors:
+        2,4-decadienal: 50 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium citrate pH 3; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+  - label: 1.5 h
+    lever_value: 1.5
+    value: 104.5
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 90
+      precursors:
+        2,4-decadienal: 50 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium citrate pH 3; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+  - label: 2.0 h
+    lever_value: 2.0
+    value: 127.5
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 120
+      precursors:
+        2,4-decadienal: 50 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium citrate pH 3; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+  - label: 3.0 h
+    lever_value: 3.0
+    value: 139.2
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 180
+      precursors:
+        2,4-decadienal: 50 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium citrate pH 3; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+- id: zamora2007-20
+  odorant: Phenylacetaldehyde
+  lever_class: lipid
+  lever: 'oxidized lipid identity: 2,4-decadienal vs methyl 13-oxooctadeca-9,11-dienoate (50 umol each), time course at its
+    longest time'
+  focal: true
+  location: Fig. 6A (3 h points)
+  digitised: true
+  unit: umol aldehyde/mmol Phe
+  quant_type: absolute
+  time_course_rule: longest time
+  quantity: amount
+  resolution: re-read
+  arms:
+  - label: 2,4-decadienal/Phe, 3 h
+    lever_value: 2,4-decadienal
+    value: 90.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 180
+      precursors:
+        2,4-decadienal: 50 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium citrate pH 3; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air
+  - label: methyl 13-oxooctadeca-9,11-dienoate/Phe, 3 h
+    lever_value: methyl 13-oxooctadeca-9,11-dienoate
+    value: 59.9
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: label
+      temp_C: 180
+      time_min: 180
+      precursors:
+        methyl 13-oxooctadeca-9,11-dienoate: 50 umol in 1 mL
+        phenylalanine: 50 umol in 1 mL
+      buffer: 0.3 M sodium citrate pH 3; acetonitrile/buffer 2:1
+      matrix: other (acetonitrile/buffer 2:1)
+      headspace: air

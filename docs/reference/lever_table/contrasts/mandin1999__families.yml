@@ -1,0 +1,2828 @@
+source: mandin1999
+pdf: data/articles/mandin1999.pdf
+reader: resolved
+scope_note: 'Table 2 only (ug recovered from 400 mL, internal standard without response factors: peak_area). Single-lever
+  pairs only: glucose added, methionine added, linoleic acid added (each against the system without it) and potato starch
+  added (L/M/G vs L/M/G/S, keyed as matrix: the paper tests starch binding and concludes it acts as extra carbohydrate). Reader
+  b''s two-lever pairs (e.g. G vs L, L/G vs L/M) not keyed: the paper discusses no such pair as a contrast. Pairs with both
+  arms nd not keyed; nd printed without a limit (nd_no_limit). Family compounds off the declared list (1-pentanol, 2-heptenal,
+  2-ethylhexanal, decanal, 2,4-nonadienal, (E,Z)-2,4-decadienal) not keyed by either reader.'
+contrasts:
+- id: mandin1999-1
+  odorant: Hexanal
+  lever_class: precursor dose
+  lever: 'glucose added (0 vs 13 g/L): L vs L/G'
+  focal: true
+  location: Table 2, p. 2357
+  digitised: false
+  unit: ug recovered from 400 mL
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  note: quantified against the internal standard 1,2-dichlorobenzene without response factors; n = at least 3; RSD 2-25% printed
+    only as a range
+  arms:
+  - label: L
+    lever_value: 0
+    value: 16
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  - label: L/G
+    lever_value: 13
+    value: 28
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  resolution: re-read
+- id: mandin1999-2
+  odorant: Hexanal
+  lever_class: precursor dose
+  lever: 'glucose added (0 vs 13 g/L): L/M vs L/M/G'
+  focal: true
+  location: Table 2, p. 2357
+  digitised: false
+  unit: ug recovered from 400 mL
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  note: quantified against the internal standard 1,2-dichlorobenzene without response factors; n = at least 3; RSD 2-25% printed
+    only as a range
+  arms:
+  - label: L/M
+    lever_value: 0
+    value: 15
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        methionine: 20 g/L (0.1415 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  - label: L/M/G
+    lever_value: 13
+    value: 21
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        methionine: 20 g/L (0.1415 mol/L)
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  resolution: re-read
+- id: mandin1999-3
+  odorant: Hexanal
+  lever_class: precursor dose
+  lever: 'methionine added (0 vs 20 g/L): L vs L/M'
+  focal: true
+  location: Table 2, p. 2357
+  digitised: false
+  unit: ug recovered from 400 mL
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  note: quantified against the internal standard 1,2-dichlorobenzene without response factors; n = at least 3; RSD 2-25% printed
+    only as a range
+  arms:
+  - label: L
+    lever_value: 0
+    value: 16
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  - label: L/M
+    lever_value: 20
+    value: 15
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        methionine: 20 g/L (0.1415 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  resolution: re-read
+- id: mandin1999-4
+  odorant: Hexanal
+  lever_class: precursor dose
+  lever: 'methionine added (0 vs 20 g/L): L/G vs L/M/G'
+  focal: true
+  location: Table 2, p. 2357
+  digitised: false
+  unit: ug recovered from 400 mL
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  note: quantified against the internal standard 1,2-dichlorobenzene without response factors; n = at least 3; RSD 2-25% printed
+    only as a range
+  arms:
+  - label: L/G
+    lever_value: 0
+    value: 28
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  - label: L/M/G
+    lever_value: 20
+    value: 21
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        methionine: 20 g/L (0.1415 mol/L)
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  resolution: re-read
+- id: mandin1999-5
+  odorant: Hexanal
+  lever_class: lipid
+  lever: 'linoleic acid (0.5 g/L) added vs none: G vs L/G'
+  focal: true
+  location: Table 2, p. 2357
+  digitised: false
+  unit: ug recovered from 400 mL
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  note: quantified against the internal standard 1,2-dichlorobenzene without response factors; n = at least 3; RSD 2-25% printed
+    only as a range
+  arms:
+  - label: G
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  - label: L/G
+    lever_value: linoleic acid
+    value: 28
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  resolution: re-read
+- id: mandin1999-6
+  odorant: Hexanal
+  lever_class: lipid
+  lever: 'linoleic acid (0.5 g/L) added vs none: M vs L/M'
+  focal: true
+  location: Table 2, p. 2357
+  digitised: false
+  unit: ug recovered from 400 mL
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  note: quantified against the internal standard 1,2-dichlorobenzene without response factors; n = at least 3; RSD 2-25% printed
+    only as a range
+  arms:
+  - label: M
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        methionine: 20 g/L (0.1415 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  - label: L/M
+    lever_value: linoleic acid
+    value: 15
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        methionine: 20 g/L (0.1415 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  resolution: re-read
+- id: mandin1999-7
+  odorant: Hexanal
+  lever_class: lipid
+  lever: 'linoleic acid (0.5 g/L) added vs none: M/G vs L/M/G'
+  focal: true
+  location: Table 2, p. 2357
+  digitised: false
+  unit: ug recovered from 400 mL
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  note: quantified against the internal standard 1,2-dichlorobenzene without response factors; n = at least 3; RSD 2-25% printed
+    only as a range
+  arms:
+  - label: M/G
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        methionine: 20 g/L (0.1415 mol/L)
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  - label: L/M/G
+    lever_value: linoleic acid
+    value: 21
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        methionine: 20 g/L (0.1415 mol/L)
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  resolution: re-read
+- id: mandin1999-8
+  odorant: Hexanal
+  lever_class: matrix
+  lever: 'potato starch (50 g/L) added vs none: L/M/G vs L/M/G/S'
+  focal: true
+  location: Table 2, p. 2357
+  digitised: false
+  unit: ug recovered from 400 mL
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  note: quantified against the internal standard 1,2-dichlorobenzene without response factors; n = at least 3; RSD 2-25% printed
+    only as a range
+  arms:
+  - label: L/M/G
+    lever_value: water
+    value: 21
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        methionine: 20 g/L (0.1415 mol/L)
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  - label: L/M/G/S
+    lever_value: potato starch
+    value: 17
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        methionine: 20 g/L (0.1415 mol/L)
+        glucose: 13 g/L (0.0721 mol/L)
+        potato starch: 50 g/L (added at boiling)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  resolution: re-read
+- id: mandin1999-9
+  odorant: Heptanal
+  lever_class: precursor dose
+  lever: 'glucose added (0 vs 13 g/L): L vs L/G'
+  focal: true
+  location: Table 2, p. 2357
+  digitised: false
+  unit: ug recovered from 400 mL
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  note: quantified against the internal standard 1,2-dichlorobenzene without response factors; n = at least 3; RSD 2-25% printed
+    only as a range
+  arms:
+  - label: L
+    lever_value: 0
+    value: 2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  - label: L/G
+    lever_value: 13
+    value: 2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  resolution: re-read
+- id: mandin1999-10
+  odorant: Heptanal
+  lever_class: precursor dose
+  lever: 'methionine added (0 vs 20 g/L): L vs L/M'
+  focal: true
+  location: Table 2, p. 2357
+  digitised: false
+  unit: ug recovered from 400 mL
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  note: quantified against the internal standard 1,2-dichlorobenzene without response factors; n = at least 3; RSD 2-25% printed
+    only as a range
+  arms:
+  - label: L
+    lever_value: 0
+    value: 2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  - label: L/M
+    lever_value: 20
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        methionine: 20 g/L (0.1415 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  resolution: re-read
+- id: mandin1999-11
+  odorant: Heptanal
+  lever_class: precursor dose
+  lever: 'methionine added (0 vs 20 g/L): L/G vs L/M/G'
+  focal: true
+  location: Table 2, p. 2357
+  digitised: false
+  unit: ug recovered from 400 mL
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  note: quantified against the internal standard 1,2-dichlorobenzene without response factors; n = at least 3; RSD 2-25% printed
+    only as a range
+  arms:
+  - label: L/G
+    lever_value: 0
+    value: 2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  - label: L/M/G
+    lever_value: 20
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        methionine: 20 g/L (0.1415 mol/L)
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  resolution: re-read
+- id: mandin1999-12
+  odorant: Heptanal
+  lever_class: lipid
+  lever: 'linoleic acid (0.5 g/L) added vs none: G vs L/G'
+  focal: true
+  location: Table 2, p. 2357
+  digitised: false
+  unit: ug recovered from 400 mL
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  note: quantified against the internal standard 1,2-dichlorobenzene without response factors; n = at least 3; RSD 2-25% printed
+    only as a range
+  arms:
+  - label: G
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  - label: L/G
+    lever_value: linoleic acid
+    value: 2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  resolution: re-read
+- id: mandin1999-13
+  odorant: Heptanal
+  lever_class: matrix
+  lever: 'potato starch (50 g/L) added vs none: L/M/G vs L/M/G/S'
+  focal: true
+  location: Table 2, p. 2357
+  digitised: false
+  unit: ug recovered from 400 mL
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  note: quantified against the internal standard 1,2-dichlorobenzene without response factors; n = at least 3; RSD 2-25% printed
+    only as a range
+  arms:
+  - label: L/M/G
+    lever_value: water
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        methionine: 20 g/L (0.1415 mol/L)
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  - label: L/M/G/S
+    lever_value: potato starch
+    value: 1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        methionine: 20 g/L (0.1415 mol/L)
+        glucose: 13 g/L (0.0721 mol/L)
+        potato starch: 50 g/L (added at boiling)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  resolution: re-read
+- id: mandin1999-14
+  odorant: 1-Octen-3-ol
+  lever_class: precursor dose
+  lever: 'glucose added (0 vs 13 g/L): L vs L/G'
+  focal: true
+  location: Table 2, p. 2357
+  digitised: false
+  unit: ug recovered from 400 mL
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  note: quantified against the internal standard 1,2-dichlorobenzene without response factors; n = at least 3; RSD 2-25% printed
+    only as a range
+  arms:
+  - label: L
+    lever_value: 0
+    value: 1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  - label: L/G
+    lever_value: 13
+    value: 3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  resolution: re-read
+- id: mandin1999-15
+  odorant: 1-Octen-3-ol
+  lever_class: precursor dose
+  lever: 'methionine added (0 vs 20 g/L): L vs L/M'
+  focal: true
+  location: Table 2, p. 2357
+  digitised: false
+  unit: ug recovered from 400 mL
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  note: quantified against the internal standard 1,2-dichlorobenzene without response factors; n = at least 3; RSD 2-25% printed
+    only as a range
+  arms:
+  - label: L
+    lever_value: 0
+    value: 1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  - label: L/M
+    lever_value: 20
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        methionine: 20 g/L (0.1415 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  resolution: re-read
+- id: mandin1999-16
+  odorant: 1-Octen-3-ol
+  lever_class: precursor dose
+  lever: 'methionine added (0 vs 20 g/L): L/G vs L/M/G'
+  focal: true
+  location: Table 2, p. 2357
+  digitised: false
+  unit: ug recovered from 400 mL
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  note: quantified against the internal standard 1,2-dichlorobenzene without response factors; n = at least 3; RSD 2-25% printed
+    only as a range
+  arms:
+  - label: L/G
+    lever_value: 0
+    value: 3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  - label: L/M/G
+    lever_value: 20
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        methionine: 20 g/L (0.1415 mol/L)
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  resolution: re-read
+- id: mandin1999-17
+  odorant: 1-Octen-3-ol
+  lever_class: lipid
+  lever: 'linoleic acid (0.5 g/L) added vs none: G vs L/G'
+  focal: true
+  location: Table 2, p. 2357
+  digitised: false
+  unit: ug recovered from 400 mL
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  note: quantified against the internal standard 1,2-dichlorobenzene without response factors; n = at least 3; RSD 2-25% printed
+    only as a range
+  arms:
+  - label: G
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  - label: L/G
+    lever_value: linoleic acid
+    value: 3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  resolution: re-read
+- id: mandin1999-18
+  odorant: 2-Pentylfuran
+  lever_class: precursor dose
+  lever: 'glucose added (0 vs 13 g/L): L vs L/G'
+  focal: true
+  location: Table 2, p. 2357
+  digitised: false
+  unit: ug recovered from 400 mL
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  note: quantified against the internal standard 1,2-dichlorobenzene without response factors; n = at least 3; RSD 2-25% printed
+    only as a range
+  arms:
+  - label: L
+    lever_value: 0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  - label: L/G
+    lever_value: 13
+    value: 1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  resolution: re-read
+- id: mandin1999-19
+  odorant: 2-Pentylfuran
+  lever_class: precursor dose
+  lever: 'glucose added (0 vs 13 g/L): L/M vs L/M/G'
+  focal: true
+  location: Table 2, p. 2357
+  digitised: false
+  unit: ug recovered from 400 mL
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  note: quantified against the internal standard 1,2-dichlorobenzene without response factors; n = at least 3; RSD 2-25% printed
+    only as a range
+  arms:
+  - label: L/M
+    lever_value: 0
+    value: 12
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        methionine: 20 g/L (0.1415 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  - label: L/M/G
+    lever_value: 13
+    value: 18
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        methionine: 20 g/L (0.1415 mol/L)
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  resolution: re-read
+- id: mandin1999-20
+  odorant: 2-Pentylfuran
+  lever_class: precursor dose
+  lever: 'methionine added (0 vs 20 g/L): L vs L/M'
+  focal: true
+  location: Table 2, p. 2357
+  digitised: false
+  unit: ug recovered from 400 mL
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  note: quantified against the internal standard 1,2-dichlorobenzene without response factors; n = at least 3; RSD 2-25% printed
+    only as a range
+  arms:
+  - label: L
+    lever_value: 0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  - label: L/M
+    lever_value: 20
+    value: 12
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        methionine: 20 g/L (0.1415 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  resolution: re-read
+- id: mandin1999-21
+  odorant: 2-Pentylfuran
+  lever_class: precursor dose
+  lever: 'methionine added (0 vs 20 g/L): L/G vs L/M/G'
+  focal: true
+  location: Table 2, p. 2357
+  digitised: false
+  unit: ug recovered from 400 mL
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  note: quantified against the internal standard 1,2-dichlorobenzene without response factors; n = at least 3; RSD 2-25% printed
+    only as a range
+  arms:
+  - label: L/G
+    lever_value: 0
+    value: 1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  - label: L/M/G
+    lever_value: 20
+    value: 18
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        methionine: 20 g/L (0.1415 mol/L)
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  resolution: re-read
+- id: mandin1999-22
+  odorant: 2-Pentylfuran
+  lever_class: lipid
+  lever: 'linoleic acid (0.5 g/L) added vs none: G vs L/G'
+  focal: true
+  location: Table 2, p. 2357
+  digitised: false
+  unit: ug recovered from 400 mL
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  note: quantified against the internal standard 1,2-dichlorobenzene without response factors; n = at least 3; RSD 2-25% printed
+    only as a range
+  arms:
+  - label: G
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  - label: L/G
+    lever_value: linoleic acid
+    value: 1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  resolution: re-read
+- id: mandin1999-23
+  odorant: 2-Pentylfuran
+  lever_class: lipid
+  lever: 'linoleic acid (0.5 g/L) added vs none: M vs L/M'
+  focal: true
+  location: Table 2, p. 2357
+  digitised: false
+  unit: ug recovered from 400 mL
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  note: quantified against the internal standard 1,2-dichlorobenzene without response factors; n = at least 3; RSD 2-25% printed
+    only as a range
+  arms:
+  - label: M
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        methionine: 20 g/L (0.1415 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  - label: L/M
+    lever_value: linoleic acid
+    value: 12
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        methionine: 20 g/L (0.1415 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  resolution: re-read
+- id: mandin1999-24
+  odorant: 2-Pentylfuran
+  lever_class: lipid
+  lever: 'linoleic acid (0.5 g/L) added vs none: M/G vs L/M/G'
+  focal: true
+  location: Table 2, p. 2357
+  digitised: false
+  unit: ug recovered from 400 mL
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  note: quantified against the internal standard 1,2-dichlorobenzene without response factors; n = at least 3; RSD 2-25% printed
+    only as a range
+  arms:
+  - label: M/G
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        methionine: 20 g/L (0.1415 mol/L)
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  - label: L/M/G
+    lever_value: linoleic acid
+    value: 18
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        methionine: 20 g/L (0.1415 mol/L)
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  resolution: re-read
+- id: mandin1999-25
+  odorant: 2-Pentylfuran
+  lever_class: matrix
+  lever: 'potato starch (50 g/L) added vs none: L/M/G vs L/M/G/S'
+  focal: true
+  location: Table 2, p. 2357
+  digitised: false
+  unit: ug recovered from 400 mL
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  note: quantified against the internal standard 1,2-dichlorobenzene without response factors; n = at least 3; RSD 2-25% printed
+    only as a range
+  arms:
+  - label: L/M/G
+    lever_value: water
+    value: 18
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        methionine: 20 g/L (0.1415 mol/L)
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  - label: L/M/G/S
+    lever_value: potato starch
+    value: 17
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        methionine: 20 g/L (0.1415 mol/L)
+        glucose: 13 g/L (0.0721 mol/L)
+        potato starch: 50 g/L (added at boiling)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  resolution: re-read
+- id: mandin1999-26
+  odorant: (E)-2-Octenal
+  lever_class: precursor dose
+  lever: 'glucose added (0 vs 13 g/L): L vs L/G'
+  focal: true
+  location: Table 2, p. 2357
+  digitised: false
+  unit: ug recovered from 400 mL
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  note: quantified against the internal standard 1,2-dichlorobenzene without response factors; n = at least 3; RSD 2-25% printed
+    only as a range
+  arms:
+  - label: L
+    lever_value: 0
+    value: 3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  - label: L/G
+    lever_value: 13
+    value: 4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  resolution: re-read
+- id: mandin1999-27
+  odorant: (E)-2-Octenal
+  lever_class: precursor dose
+  lever: 'glucose added (0 vs 13 g/L): L/M vs L/M/G'
+  focal: true
+  location: Table 2, p. 2357
+  digitised: false
+  unit: ug recovered from 400 mL
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  note: quantified against the internal standard 1,2-dichlorobenzene without response factors; n = at least 3; RSD 2-25% printed
+    only as a range
+  arms:
+  - label: L/M
+    lever_value: 0
+    value: 4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        methionine: 20 g/L (0.1415 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  - label: L/M/G
+    lever_value: 13
+    value: 4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        methionine: 20 g/L (0.1415 mol/L)
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  resolution: re-read
+- id: mandin1999-28
+  odorant: (E)-2-Octenal
+  lever_class: precursor dose
+  lever: 'methionine added (0 vs 20 g/L): L vs L/M'
+  focal: true
+  location: Table 2, p. 2357
+  digitised: false
+  unit: ug recovered from 400 mL
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  note: quantified against the internal standard 1,2-dichlorobenzene without response factors; n = at least 3; RSD 2-25% printed
+    only as a range
+  arms:
+  - label: L
+    lever_value: 0
+    value: 3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  - label: L/M
+    lever_value: 20
+    value: 4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        methionine: 20 g/L (0.1415 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  resolution: re-read
+- id: mandin1999-29
+  odorant: (E)-2-Octenal
+  lever_class: precursor dose
+  lever: 'methionine added (0 vs 20 g/L): L/G vs L/M/G'
+  focal: true
+  location: Table 2, p. 2357
+  digitised: false
+  unit: ug recovered from 400 mL
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  note: quantified against the internal standard 1,2-dichlorobenzene without response factors; n = at least 3; RSD 2-25% printed
+    only as a range
+  arms:
+  - label: L/G
+    lever_value: 0
+    value: 4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  - label: L/M/G
+    lever_value: 20
+    value: 4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        methionine: 20 g/L (0.1415 mol/L)
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  resolution: re-read
+- id: mandin1999-30
+  odorant: (E)-2-Octenal
+  lever_class: lipid
+  lever: 'linoleic acid (0.5 g/L) added vs none: G vs L/G'
+  focal: true
+  location: Table 2, p. 2357
+  digitised: false
+  unit: ug recovered from 400 mL
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  note: quantified against the internal standard 1,2-dichlorobenzene without response factors; n = at least 3; RSD 2-25% printed
+    only as a range
+  arms:
+  - label: G
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  - label: L/G
+    lever_value: linoleic acid
+    value: 4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  resolution: re-read
+- id: mandin1999-31
+  odorant: (E)-2-Octenal
+  lever_class: lipid
+  lever: 'linoleic acid (0.5 g/L) added vs none: M vs L/M'
+  focal: true
+  location: Table 2, p. 2357
+  digitised: false
+  unit: ug recovered from 400 mL
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  note: quantified against the internal standard 1,2-dichlorobenzene without response factors; n = at least 3; RSD 2-25% printed
+    only as a range
+  arms:
+  - label: M
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        methionine: 20 g/L (0.1415 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  - label: L/M
+    lever_value: linoleic acid
+    value: 4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        methionine: 20 g/L (0.1415 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  resolution: re-read
+- id: mandin1999-32
+  odorant: (E)-2-Octenal
+  lever_class: lipid
+  lever: 'linoleic acid (0.5 g/L) added vs none: M/G vs L/M/G'
+  focal: true
+  location: Table 2, p. 2357
+  digitised: false
+  unit: ug recovered from 400 mL
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  note: quantified against the internal standard 1,2-dichlorobenzene without response factors; n = at least 3; RSD 2-25% printed
+    only as a range
+  arms:
+  - label: M/G
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        methionine: 20 g/L (0.1415 mol/L)
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  - label: L/M/G
+    lever_value: linoleic acid
+    value: 4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        methionine: 20 g/L (0.1415 mol/L)
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  resolution: re-read
+- id: mandin1999-33
+  odorant: (E)-2-Octenal
+  lever_class: matrix
+  lever: 'potato starch (50 g/L) added vs none: L/M/G vs L/M/G/S'
+  focal: true
+  location: Table 2, p. 2357
+  digitised: false
+  unit: ug recovered from 400 mL
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  note: quantified against the internal standard 1,2-dichlorobenzene without response factors; n = at least 3; RSD 2-25% printed
+    only as a range
+  arms:
+  - label: L/M/G
+    lever_value: water
+    value: 4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        methionine: 20 g/L (0.1415 mol/L)
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  - label: L/M/G/S
+    lever_value: potato starch
+    value: 4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        methionine: 20 g/L (0.1415 mol/L)
+        glucose: 13 g/L (0.0721 mol/L)
+        potato starch: 50 g/L (added at boiling)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  resolution: re-read
+- id: mandin1999-34
+  odorant: (E)-2-Nonenal
+  lever_class: precursor dose
+  lever: 'glucose added (0 vs 13 g/L): L vs L/G'
+  focal: true
+  location: Table 2, p. 2357
+  digitised: false
+  unit: ug recovered from 400 mL
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  note: quantified against the internal standard 1,2-dichlorobenzene without response factors; n = at least 3; RSD 2-25% printed
+    only as a range
+  arms:
+  - label: L
+    lever_value: 0
+    value: 1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  - label: L/G
+    lever_value: 13
+    value: 1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  resolution: re-read
+- id: mandin1999-35
+  odorant: (E)-2-Nonenal
+  lever_class: precursor dose
+  lever: 'glucose added (0 vs 13 g/L): L/M vs L/M/G'
+  focal: true
+  location: Table 2, p. 2357
+  digitised: false
+  unit: ug recovered from 400 mL
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  note: quantified against the internal standard 1,2-dichlorobenzene without response factors; n = at least 3; RSD 2-25% printed
+    only as a range
+  arms:
+  - label: L/M
+    lever_value: 0
+    value: 2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        methionine: 20 g/L (0.1415 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  - label: L/M/G
+    lever_value: 13
+    value: 1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        methionine: 20 g/L (0.1415 mol/L)
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  resolution: re-read
+- id: mandin1999-36
+  odorant: (E)-2-Nonenal
+  lever_class: precursor dose
+  lever: 'methionine added (0 vs 20 g/L): L vs L/M'
+  focal: true
+  location: Table 2, p. 2357
+  digitised: false
+  unit: ug recovered from 400 mL
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  note: quantified against the internal standard 1,2-dichlorobenzene without response factors; n = at least 3; RSD 2-25% printed
+    only as a range
+  arms:
+  - label: L
+    lever_value: 0
+    value: 1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  - label: L/M
+    lever_value: 20
+    value: 2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        methionine: 20 g/L (0.1415 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  resolution: re-read
+- id: mandin1999-37
+  odorant: (E)-2-Nonenal
+  lever_class: precursor dose
+  lever: 'methionine added (0 vs 20 g/L): L/G vs L/M/G'
+  focal: true
+  location: Table 2, p. 2357
+  digitised: false
+  unit: ug recovered from 400 mL
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  note: quantified against the internal standard 1,2-dichlorobenzene without response factors; n = at least 3; RSD 2-25% printed
+    only as a range
+  arms:
+  - label: L/G
+    lever_value: 0
+    value: 1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  - label: L/M/G
+    lever_value: 20
+    value: 1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        methionine: 20 g/L (0.1415 mol/L)
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  resolution: re-read
+- id: mandin1999-38
+  odorant: (E)-2-Nonenal
+  lever_class: lipid
+  lever: 'linoleic acid (0.5 g/L) added vs none: G vs L/G'
+  focal: true
+  location: Table 2, p. 2357
+  digitised: false
+  unit: ug recovered from 400 mL
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  note: quantified against the internal standard 1,2-dichlorobenzene without response factors; n = at least 3; RSD 2-25% printed
+    only as a range
+  arms:
+  - label: G
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  - label: L/G
+    lever_value: linoleic acid
+    value: 1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  resolution: re-read
+- id: mandin1999-39
+  odorant: (E)-2-Nonenal
+  lever_class: lipid
+  lever: 'linoleic acid (0.5 g/L) added vs none: M vs L/M'
+  focal: true
+  location: Table 2, p. 2357
+  digitised: false
+  unit: ug recovered from 400 mL
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  note: quantified against the internal standard 1,2-dichlorobenzene without response factors; n = at least 3; RSD 2-25% printed
+    only as a range
+  arms:
+  - label: M
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        methionine: 20 g/L (0.1415 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  - label: L/M
+    lever_value: linoleic acid
+    value: 2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        methionine: 20 g/L (0.1415 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  resolution: re-read
+- id: mandin1999-40
+  odorant: (E)-2-Nonenal
+  lever_class: lipid
+  lever: 'linoleic acid (0.5 g/L) added vs none: M/G vs L/M/G'
+  focal: true
+  location: Table 2, p. 2357
+  digitised: false
+  unit: ug recovered from 400 mL
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  note: quantified against the internal standard 1,2-dichlorobenzene without response factors; n = at least 3; RSD 2-25% printed
+    only as a range
+  arms:
+  - label: M/G
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        methionine: 20 g/L (0.1415 mol/L)
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  - label: L/M/G
+    lever_value: linoleic acid
+    value: 1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        methionine: 20 g/L (0.1415 mol/L)
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  resolution: re-read
+- id: mandin1999-41
+  odorant: (E)-2-Nonenal
+  lever_class: matrix
+  lever: 'potato starch (50 g/L) added vs none: L/M/G vs L/M/G/S'
+  focal: true
+  location: Table 2, p. 2357
+  digitised: false
+  unit: ug recovered from 400 mL
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  note: quantified against the internal standard 1,2-dichlorobenzene without response factors; n = at least 3; RSD 2-25% printed
+    only as a range
+  arms:
+  - label: L/M/G
+    lever_value: water
+    value: 1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        methionine: 20 g/L (0.1415 mol/L)
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  - label: L/M/G/S
+    lever_value: potato starch
+    value: 2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        methionine: 20 g/L (0.1415 mol/L)
+        glucose: 13 g/L (0.0721 mol/L)
+        potato starch: 50 g/L (added at boiling)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  resolution: re-read
+- id: mandin1999-42
+  odorant: (E,E)-2,4-Decadienal
+  lever_class: precursor dose
+  lever: 'glucose added (0 vs 13 g/L): L vs L/G'
+  focal: true
+  location: Table 2, p. 2357
+  digitised: false
+  unit: ug recovered from 400 mL
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  note: quantified against the internal standard 1,2-dichlorobenzene without response factors; n = at least 3; RSD 2-25% printed
+    only as a range
+  arms:
+  - label: L
+    lever_value: 0
+    value: 53
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  - label: L/G
+    lever_value: 13
+    value: 76
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  resolution: re-read
+- id: mandin1999-43
+  odorant: (E,E)-2,4-Decadienal
+  lever_class: precursor dose
+  lever: 'glucose added (0 vs 13 g/L): L/M vs L/M/G'
+  focal: true
+  location: Table 2, p. 2357
+  digitised: false
+  unit: ug recovered from 400 mL
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  note: quantified against the internal standard 1,2-dichlorobenzene without response factors; n = at least 3; RSD 2-25% printed
+    only as a range
+  arms:
+  - label: L/M
+    lever_value: 0
+    value: 15
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        methionine: 20 g/L (0.1415 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  - label: L/M/G
+    lever_value: 13
+    value: 26
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        methionine: 20 g/L (0.1415 mol/L)
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  resolution: re-read
+- id: mandin1999-44
+  odorant: (E,E)-2,4-Decadienal
+  lever_class: precursor dose
+  lever: 'methionine added (0 vs 20 g/L): L vs L/M'
+  focal: true
+  location: Table 2, p. 2357
+  digitised: false
+  unit: ug recovered from 400 mL
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  note: quantified against the internal standard 1,2-dichlorobenzene without response factors; n = at least 3; RSD 2-25% printed
+    only as a range
+  arms:
+  - label: L
+    lever_value: 0
+    value: 53
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  - label: L/M
+    lever_value: 20
+    value: 15
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        methionine: 20 g/L (0.1415 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  resolution: re-read
+- id: mandin1999-45
+  odorant: (E,E)-2,4-Decadienal
+  lever_class: precursor dose
+  lever: 'methionine added (0 vs 20 g/L): L/G vs L/M/G'
+  focal: true
+  location: Table 2, p. 2357
+  digitised: false
+  unit: ug recovered from 400 mL
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  note: quantified against the internal standard 1,2-dichlorobenzene without response factors; n = at least 3; RSD 2-25% printed
+    only as a range
+  arms:
+  - label: L/G
+    lever_value: 0
+    value: 76
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  - label: L/M/G
+    lever_value: 20
+    value: 26
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        methionine: 20 g/L (0.1415 mol/L)
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  resolution: re-read
+- id: mandin1999-46
+  odorant: (E,E)-2,4-Decadienal
+  lever_class: lipid
+  lever: 'linoleic acid (0.5 g/L) added vs none: G vs L/G'
+  focal: true
+  location: Table 2, p. 2357
+  digitised: false
+  unit: ug recovered from 400 mL
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  note: quantified against the internal standard 1,2-dichlorobenzene without response factors; n = at least 3; RSD 2-25% printed
+    only as a range
+  arms:
+  - label: G
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  - label: L/G
+    lever_value: linoleic acid
+    value: 76
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  resolution: re-read
+- id: mandin1999-47
+  odorant: (E,E)-2,4-Decadienal
+  lever_class: lipid
+  lever: 'linoleic acid (0.5 g/L) added vs none: M vs L/M'
+  focal: true
+  location: Table 2, p. 2357
+  digitised: false
+  unit: ug recovered from 400 mL
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  note: quantified against the internal standard 1,2-dichlorobenzene without response factors; n = at least 3; RSD 2-25% printed
+    only as a range
+  arms:
+  - label: M
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        methionine: 20 g/L (0.1415 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  - label: L/M
+    lever_value: linoleic acid
+    value: 15
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        methionine: 20 g/L (0.1415 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  resolution: re-read
+- id: mandin1999-48
+  odorant: (E,E)-2,4-Decadienal
+  lever_class: lipid
+  lever: 'linoleic acid (0.5 g/L) added vs none: M/G vs L/M/G'
+  focal: true
+  location: Table 2, p. 2357
+  digitised: false
+  unit: ug recovered from 400 mL
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  note: quantified against the internal standard 1,2-dichlorobenzene without response factors; n = at least 3; RSD 2-25% printed
+    only as a range
+  arms:
+  - label: M/G
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        methionine: 20 g/L (0.1415 mol/L)
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  - label: L/M/G
+    lever_value: linoleic acid
+    value: 26
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        methionine: 20 g/L (0.1415 mol/L)
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  resolution: re-read
+- id: mandin1999-49
+  odorant: (E,E)-2,4-Decadienal
+  lever_class: matrix
+  lever: 'potato starch (50 g/L) added vs none: L/M/G vs L/M/G/S'
+  focal: true
+  location: Table 2, p. 2357
+  digitised: false
+  unit: ug recovered from 400 mL
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  note: quantified against the internal standard 1,2-dichlorobenzene without response factors; n = at least 3; RSD 2-25% printed
+    only as a range
+  arms:
+  - label: L/M/G
+    lever_value: water
+    value: 26
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        methionine: 20 g/L (0.1415 mol/L)
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  - label: L/M/G/S
+    lever_value: potato starch
+    value: 37
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        methionine: 20 g/L (0.1415 mol/L)
+        glucose: 13 g/L (0.0721 mol/L)
+        potato starch: 50 g/L (added at boiling)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  resolution: re-read
+- id: mandin1999-50
+  odorant: Methional (3-(methylthio)propanal)
+  lever_class: precursor dose
+  lever: 'glucose added (0 vs 13 g/L): M vs M/G'
+  focal: true
+  location: Table 2, p. 2357
+  digitised: false
+  unit: ug recovered from 400 mL
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  note: quantified against the internal standard 1,2-dichlorobenzene without response factors; n = at least 3; RSD 2-25% printed
+    only as a range
+  arms:
+  - label: M
+    lever_value: 0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        methionine: 20 g/L (0.1415 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  - label: M/G
+    lever_value: 13
+    value: 36
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        methionine: 20 g/L (0.1415 mol/L)
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  resolution: re-read
+- id: mandin1999-51
+  odorant: Methional (3-(methylthio)propanal)
+  lever_class: precursor dose
+  lever: 'glucose added (0 vs 13 g/L): L/M vs L/M/G'
+  focal: true
+  location: Table 2, p. 2357
+  digitised: false
+  unit: ug recovered from 400 mL
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  note: quantified against the internal standard 1,2-dichlorobenzene without response factors; n = at least 3; RSD 2-25% printed
+    only as a range
+  arms:
+  - label: L/M
+    lever_value: 0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        methionine: 20 g/L (0.1415 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  - label: L/M/G
+    lever_value: 13
+    value: 106
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        methionine: 20 g/L (0.1415 mol/L)
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  resolution: re-read
+- id: mandin1999-52
+  odorant: Methional (3-(methylthio)propanal)
+  lever_class: precursor dose
+  lever: 'methionine added (0 vs 20 g/L): G vs M/G'
+  focal: true
+  location: Table 2, p. 2357
+  digitised: false
+  unit: ug recovered from 400 mL
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  note: quantified against the internal standard 1,2-dichlorobenzene without response factors; n = at least 3; RSD 2-25% printed
+    only as a range
+  arms:
+  - label: G
+    lever_value: 0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  - label: M/G
+    lever_value: 20
+    value: 36
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        methionine: 20 g/L (0.1415 mol/L)
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  resolution: re-read
+- id: mandin1999-53
+  odorant: Methional (3-(methylthio)propanal)
+  lever_class: precursor dose
+  lever: 'methionine added (0 vs 20 g/L): L/G vs L/M/G'
+  focal: true
+  location: Table 2, p. 2357
+  digitised: false
+  unit: ug recovered from 400 mL
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  note: quantified against the internal standard 1,2-dichlorobenzene without response factors; n = at least 3; RSD 2-25% printed
+    only as a range
+  arms:
+  - label: L/G
+    lever_value: 0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  - label: L/M/G
+    lever_value: 20
+    value: 106
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        methionine: 20 g/L (0.1415 mol/L)
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  resolution: re-read
+- id: mandin1999-54
+  odorant: Methional (3-(methylthio)propanal)
+  lever_class: lipid
+  lever: 'linoleic acid (0.5 g/L) added vs none: M/G vs L/M/G'
+  focal: true
+  location: Table 2, p. 2357
+  digitised: false
+  unit: ug recovered from 400 mL
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  note: quantified against the internal standard 1,2-dichlorobenzene without response factors; n = at least 3; RSD 2-25% printed
+    only as a range
+  arms:
+  - label: M/G
+    lever_value: none
+    value: 36
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        methionine: 20 g/L (0.1415 mol/L)
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  - label: L/M/G
+    lever_value: linoleic acid
+    value: 106
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        methionine: 20 g/L (0.1415 mol/L)
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  resolution: re-read
+- id: mandin1999-55
+  odorant: Methional (3-(methylthio)propanal)
+  lever_class: matrix
+  lever: 'potato starch (50 g/L) added vs none: L/M/G vs L/M/G/S'
+  focal: true
+  location: Table 2, p. 2357
+  digitised: false
+  unit: ug recovered from 400 mL
+  quant_type: peak_area
+  time_course_rule: not a time course
+  quantity: amount
+  note: quantified against the internal standard 1,2-dichlorobenzene without response factors; n = at least 3; RSD 2-25% printed
+    only as a range
+  arms:
+  - label: L/M/G
+    lever_value: water
+    value: 106
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        methionine: 20 g/L (0.1415 mol/L)
+        glucose: 13 g/L (0.0721 mol/L)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  - label: L/M/G/S
+    lever_value: potato starch
+    value: 145
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: held
+      temp_C: 100-105
+      time_min: 120
+      precursors:
+        linoleic acid: 0.5 g/L
+        methionine: 20 g/L (0.1415 mol/L)
+        glucose: 13 g/L (0.0721 mol/L)
+        potato starch: 50 g/L (added at boiling)
+      buffer: none (pH held with 0.5 M NaOH/HCl)
+      matrix: water
+      headspace: unstated (reflux in Likens-Nickerson SDE)
+  resolution: re-read

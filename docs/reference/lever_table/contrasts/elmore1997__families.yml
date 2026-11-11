@@ -1,0 +1,59 @@
+# Resolved (third read) from reader_a / reader_b. Rules: docs/reference/lever_table/PREREG.md secs. 3 - 4 and amendments A1 - A3.
+source: elmore1997
+pdf: data/articles/elmore1997.pdf
+reader: resolved
+scope_note: 'Only keyable values: text p. 3601, tetramethylpyrazine 16 % ((E)-2-nonenal) vs 30 % ((E,E)-2,4-nonadienal), both with 3-hydroxy-2-butanone + ammonium sulfide, 140 C 30 min. Printed as % of
+  total chromatogram peak area and no amount is printed: quantity share (amendment A1), enters no cell. Ranges 12-30 % and 0.3-2.0 % pooled across aldehydes: not keyed. Tables 1-2 hold thiazolines / thiazoles
+  / pyridines only.'
+contrasts:
+- id: elmore1997-1
+  odorant: Tetramethylpyrazine
+  lever_class: lipid
+  lever: lipid-derived aldehyde identity ((E)-2-nonenal vs (E,E)-2,4-nonadienal)
+  focal: false
+  location: text, p. 3601 (Other Compounds)
+  digitised: false
+  unit: '% of total chromatogram peak area'
+  quant_type: relative
+  quantity: share
+  time_course_rule: not a time course
+  resolution: re-read
+  arms:
+  - label: (E)-2-nonenal + 3-hydroxy-2-butanone + ammonium sulfide
+    lever_value: (E)-2-nonenal
+    value: 16
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 140
+      time_min: 30
+      precursors:
+        ammonium sulfide: 0.1 M, 50 mL
+        (E)-2-nonenal: 0.005 mol
+        3-hydroxy-2-butanone: 0.005 mol
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (100 mL screw-top jar, PTFE-lined cap)
+  - label: (E,E)-2,4-nonadienal + 3-hydroxy-2-butanone + ammonium sulfide
+    lever_value: (E,E)-2,4-nonadienal
+    value: 30
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 140
+      time_min: 30
+      precursors:
+        ammonium sulfide: 0.1 M, 50 mL
+        (E,E)-2,4-nonadienal: 0.005 mol
+        3-hydroxy-2-butanone: 0.005 mol
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (100 mL screw-top jar, PTFE-lined cap)

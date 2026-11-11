@@ -1,0 +1,4045 @@
+source: shibamoto1977
+pdf: data/articles/shibamoto1977.pdf
+reader: resolved
+scope_note: 'Resolved from readers A and B (values agreed; level names and time units re-read). Keyed Table II mg yields per
+  compound and total yield % relative to sugar used (amounts; the % distribution columns are not keyed, the mg amounts are).
+  NaOH addition keyed as pH with no pH printed (lever_value_unprinted). Compound I printed "1,3,5-trimethyl-pyrazine" (impossible
+  locants; abstract lists 2,3,5-trimethyl-) keyed as Trimethylpyrazine. Not keyed: propyl gallate, BHT, CuCl2, ZnCl2 additions
+  and open vs closed system (no lever class fits).'
+contrasts:
+- id: shibamoto1977-1
+  odorant: Unsubstituted pyrazine
+  lever_class: time
+  lever: reaction time 120 vs 1080 min (2 h vs 18 h) (open, no additive)
+  focal: false
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: 'lever is time: whole series'
+  resolution: re-read
+  arms:
+  - label: Exp. 13
+    lever_value: 120
+    value: 6.5
+    censor: none
+    limit: null
+    n: 8
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+  - label: Exp. 14
+    lever_value: 1080
+    value: 6.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+- id: shibamoto1977-2
+  odorant: Unsubstituted pyrazine
+  lever_class: time
+  lever: reaction time 120 vs 1080 min (2 h vs 18 h) (closed, no additive)
+  focal: false
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: 'lever is time: whole series'
+  resolution: re-read
+  arms:
+  - label: Exp. 15
+    lever_value: 120
+    value: 4.6
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+  - label: Exp. 16
+    lever_value: 1080
+    value: 35.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+- id: shibamoto1977-3
+  odorant: Unsubstituted pyrazine
+  lever_class: time
+  lever: reaction time 120 vs 1080 min (2 h vs 18 h) (open, propyl gallate)
+  focal: false
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: 'lever is time: whole series'
+  resolution: re-read
+  arms:
+  - label: Exp. 1
+    lever_value: 120
+    value: 2.1
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        propyl gallate: 0.1 g
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+  - label: Exp. 2
+    lever_value: 1080
+    value: 3.9
+    censor: none
+    limit: null
+    n: 1
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        propyl gallate: 0.1 g
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+- id: shibamoto1977-4
+  odorant: Unsubstituted pyrazine
+  lever_class: time
+  lever: reaction time 120 vs 1080 min (2 h vs 18 h) (closed, CuCl2)
+  focal: false
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: 'lever is time: whole series'
+  resolution: re-read
+  arms:
+  - label: Exp. 6
+    lever_value: 120
+    value: 5.6
+    censor: none
+    limit: null
+    n: 1
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        CuCl2: 0.17 g
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+  - label: Exp. 7
+    lever_value: 1080
+    value: 23.1
+    censor: none
+    limit: null
+    n: 1
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        CuCl2: 0.17 g
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+- id: shibamoto1977-5
+  odorant: Unsubstituted pyrazine
+  lever_class: time
+  lever: reaction time 120 vs 1080 min (2 h vs 18 h) (closed, NaOH)
+  focal: false
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: 'lever is time: whole series'
+  resolution: re-read
+  arms:
+  - label: Exp. 11
+    lever_value: 120
+    value: 7.2
+    censor: none
+    limit: null
+    n: 1
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        NaOH: 0.4 g
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+  - label: Exp. 12
+    lever_value: 1080
+    value: 26.8
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        NaOH: 0.4 g
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+- id: shibamoto1977-6
+  odorant: Unsubstituted pyrazine
+  lever_class: pH
+  lever: NaOH (0.4 g) added vs control; pH not printed (open, 2 h)
+  lever_value_unprinted: true
+  focal: true
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: not a time course (open system run at 2 h only)
+  resolution: re-read
+  arms:
+  - label: Exp. 13
+    lever_value: none
+    value: 6.5
+    censor: none
+    limit: null
+    n: 8
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+  - label: Exp. 10
+    lever_value: naoh 0.4 g
+    value: 7.0
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        NaOH: 0.4 g
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+- id: shibamoto1977-7
+  odorant: Unsubstituted pyrazine
+  lever_class: pH
+  lever: NaOH (0.4 g) added vs control; pH not printed (closed, 18 h)
+  lever_value_unprinted: true
+  focal: true
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: longest time (closed NaOH runs at 2 h and 18 h; no main time stated)
+  resolution: re-read
+  arms:
+  - label: Exp. 16
+    lever_value: none
+    value: 35.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+  - label: Exp. 12
+    lever_value: naoh 0.4 g
+    value: 26.8
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        NaOH: 0.4 g
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+- id: shibamoto1977-8
+  odorant: Unsubstituted pyrazine
+  lever_class: oxygen
+  lever: air (open) vs oxygen blanket (open, 2 h)
+  focal: true
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: not a time course (oxygen run at 2 h only)
+  resolution: re-read
+  arms:
+  - label: Exp. 4
+    lever_value: oxygen
+    value: 5.8
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: oxygen (O2 bubbled 5 min, O2 balloon on condenser)
+  - label: Exp. 13
+    lever_value: air
+    value: 6.5
+    censor: none
+    limit: null
+    n: 8
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+- id: shibamoto1977-9
+  odorant: 2-Methylpyrazine
+  lever_class: time
+  lever: reaction time 120 vs 1080 min (2 h vs 18 h) (open, no additive)
+  focal: false
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: 'lever is time: whole series'
+  resolution: re-read
+  arms:
+  - label: Exp. 13
+    lever_value: 120
+    value: 136.0
+    censor: none
+    limit: null
+    n: 8
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+  - label: Exp. 14
+    lever_value: 1080
+    value: 137.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+- id: shibamoto1977-10
+  odorant: 2-Methylpyrazine
+  lever_class: time
+  lever: reaction time 120 vs 1080 min (2 h vs 18 h) (closed, no additive)
+  focal: false
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: 'lever is time: whole series'
+  resolution: re-read
+  arms:
+  - label: Exp. 15
+    lever_value: 120
+    value: 95.8
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+  - label: Exp. 16
+    lever_value: 1080
+    value: 762.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+- id: shibamoto1977-11
+  odorant: 2-Methylpyrazine
+  lever_class: time
+  lever: reaction time 120 vs 1080 min (2 h vs 18 h) (open, propyl gallate)
+  focal: false
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: 'lever is time: whole series'
+  resolution: re-read
+  arms:
+  - label: Exp. 1
+    lever_value: 120
+    value: 43.3
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        propyl gallate: 0.1 g
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+  - label: Exp. 2
+    lever_value: 1080
+    value: 95.4
+    censor: none
+    limit: null
+    n: 1
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        propyl gallate: 0.1 g
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+- id: shibamoto1977-12
+  odorant: 2-Methylpyrazine
+  lever_class: time
+  lever: reaction time 120 vs 1080 min (2 h vs 18 h) (closed, CuCl2)
+  focal: false
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: 'lever is time: whole series'
+  resolution: re-read
+  arms:
+  - label: Exp. 6
+    lever_value: 120
+    value: 114.6
+    censor: none
+    limit: null
+    n: 1
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        CuCl2: 0.17 g
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+  - label: Exp. 7
+    lever_value: 1080
+    value: 553.6
+    censor: none
+    limit: null
+    n: 1
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        CuCl2: 0.17 g
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+- id: shibamoto1977-13
+  odorant: 2-Methylpyrazine
+  lever_class: time
+  lever: reaction time 120 vs 1080 min (2 h vs 18 h) (closed, NaOH)
+  focal: false
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: 'lever is time: whole series'
+  resolution: re-read
+  arms:
+  - label: Exp. 11
+    lever_value: 120
+    value: 149.5
+    censor: none
+    limit: null
+    n: 1
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        NaOH: 0.4 g
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+  - label: Exp. 12
+    lever_value: 1080
+    value: 757.4
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        NaOH: 0.4 g
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+- id: shibamoto1977-14
+  odorant: 2-Methylpyrazine
+  lever_class: pH
+  lever: NaOH (0.4 g) added vs control; pH not printed (open, 2 h)
+  lever_value_unprinted: true
+  focal: true
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: not a time course (open system run at 2 h only)
+  resolution: re-read
+  arms:
+  - label: Exp. 13
+    lever_value: none
+    value: 136.0
+    censor: none
+    limit: null
+    n: 8
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+  - label: Exp. 10
+    lever_value: naoh 0.4 g
+    value: 151.7
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        NaOH: 0.4 g
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+- id: shibamoto1977-15
+  odorant: 2-Methylpyrazine
+  lever_class: pH
+  lever: NaOH (0.4 g) added vs control; pH not printed (closed, 18 h)
+  lever_value_unprinted: true
+  focal: true
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: longest time (closed NaOH runs at 2 h and 18 h; no main time stated)
+  resolution: re-read
+  arms:
+  - label: Exp. 16
+    lever_value: none
+    value: 762.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+  - label: Exp. 12
+    lever_value: naoh 0.4 g
+    value: 757.4
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        NaOH: 0.4 g
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+- id: shibamoto1977-16
+  odorant: 2-Methylpyrazine
+  lever_class: oxygen
+  lever: air (open) vs oxygen blanket (open, 2 h)
+  focal: true
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: not a time course (oxygen run at 2 h only)
+  resolution: re-read
+  arms:
+  - label: Exp. 4
+    lever_value: oxygen
+    value: 120.3
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: oxygen (O2 bubbled 5 min, O2 balloon on condenser)
+  - label: Exp. 13
+    lever_value: air
+    value: 136.0
+    censor: none
+    limit: null
+    n: 8
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+- id: shibamoto1977-17
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: time
+  lever: reaction time 120 vs 1080 min (2 h vs 18 h) (open, no additive)
+  focal: false
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: 'lever is time: whole series'
+  resolution: re-read
+  arms:
+  - label: Exp. 13
+    lever_value: 120
+    value: 6.3
+    censor: none
+    limit: null
+    n: 8
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+  - label: Exp. 14
+    lever_value: 1080
+    value: 8.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+- id: shibamoto1977-18
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: time
+  lever: reaction time 120 vs 1080 min (2 h vs 18 h) (closed, no additive)
+  focal: false
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: 'lever is time: whole series'
+  resolution: re-read
+  arms:
+  - label: Exp. 15
+    lever_value: 120
+    value: 4.0
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+  - label: Exp. 16
+    lever_value: 1080
+    value: 39.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+- id: shibamoto1977-19
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: time
+  lever: reaction time 120 vs 1080 min (2 h vs 18 h) (open, propyl gallate)
+  focal: false
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: 'lever is time: whole series'
+  resolution: re-read
+  arms:
+  - label: Exp. 1
+    lever_value: 120
+    value: 2.6
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        propyl gallate: 0.1 g
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+  - label: Exp. 2
+    lever_value: 1080
+    value: 3.6
+    censor: none
+    limit: null
+    n: 1
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        propyl gallate: 0.1 g
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+- id: shibamoto1977-20
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: time
+  lever: reaction time 120 vs 1080 min (2 h vs 18 h) (closed, CuCl2)
+  focal: false
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: 'lever is time: whole series'
+  resolution: re-read
+  arms:
+  - label: Exp. 6
+    lever_value: 120
+    value: 4.7
+    censor: none
+    limit: null
+    n: 1
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        CuCl2: 0.17 g
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+  - label: Exp. 7
+    lever_value: 1080
+    value: 25.3
+    censor: none
+    limit: null
+    n: 1
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        CuCl2: 0.17 g
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+- id: shibamoto1977-21
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: time
+  lever: reaction time 120 vs 1080 min (2 h vs 18 h) (closed, NaOH)
+  focal: false
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: 'lever is time: whole series'
+  resolution: re-read
+  arms:
+  - label: Exp. 11
+    lever_value: 120
+    value: 7.8
+    censor: none
+    limit: null
+    n: 1
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        NaOH: 0.4 g
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+  - label: Exp. 12
+    lever_value: 1080
+    value: 39.1
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        NaOH: 0.4 g
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+- id: shibamoto1977-22
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: pH
+  lever: NaOH (0.4 g) added vs control; pH not printed (open, 2 h)
+  lever_value_unprinted: true
+  focal: true
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: not a time course (open system run at 2 h only)
+  resolution: re-read
+  arms:
+  - label: Exp. 13
+    lever_value: none
+    value: 6.3
+    censor: none
+    limit: null
+    n: 8
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+  - label: Exp. 10
+    lever_value: naoh 0.4 g
+    value: 7.4
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        NaOH: 0.4 g
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+- id: shibamoto1977-23
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: pH
+  lever: NaOH (0.4 g) added vs control; pH not printed (closed, 18 h)
+  lever_value_unprinted: true
+  focal: true
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: longest time (closed NaOH runs at 2 h and 18 h; no main time stated)
+  resolution: re-read
+  arms:
+  - label: Exp. 16
+    lever_value: none
+    value: 39.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+  - label: Exp. 12
+    lever_value: naoh 0.4 g
+    value: 39.1
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        NaOH: 0.4 g
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+- id: shibamoto1977-24
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: oxygen
+  lever: air (open) vs oxygen blanket (open, 2 h)
+  focal: true
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: not a time course (oxygen run at 2 h only)
+  resolution: re-read
+  arms:
+  - label: Exp. 4
+    lever_value: oxygen
+    value: 7.1
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: oxygen (O2 bubbled 5 min, O2 balloon on condenser)
+  - label: Exp. 13
+    lever_value: air
+    value: 6.3
+    censor: none
+    limit: null
+    n: 8
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+- id: shibamoto1977-25
+  odorant: 2,6-Dimethylpyrazine
+  lever_class: time
+  lever: reaction time 120 vs 1080 min (2 h vs 18 h) (open, no additive)
+  focal: false
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: 'lever is time: whole series'
+  resolution: re-read
+  arms:
+  - label: Exp. 13
+    lever_value: 120
+    value: 13.7
+    censor: none
+    limit: null
+    n: 8
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+  - label: Exp. 14
+    lever_value: 1080
+    value: 15.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+- id: shibamoto1977-26
+  odorant: 2,6-Dimethylpyrazine
+  lever_class: time
+  lever: reaction time 120 vs 1080 min (2 h vs 18 h) (closed, no additive)
+  focal: false
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: 'lever is time: whole series'
+  resolution: re-read
+  arms:
+  - label: Exp. 15
+    lever_value: 120
+    value: 11.7
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+  - label: Exp. 16
+    lever_value: 1080
+    value: 82.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+- id: shibamoto1977-27
+  odorant: 2,6-Dimethylpyrazine
+  lever_class: time
+  lever: reaction time 120 vs 1080 min (2 h vs 18 h) (open, propyl gallate)
+  focal: false
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: 'lever is time: whole series'
+  resolution: re-read
+  arms:
+  - label: Exp. 1
+    lever_value: 120
+    value: 4.9
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        propyl gallate: 0.1 g
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+  - label: Exp. 2
+    lever_value: 1080
+    value: 14.2
+    censor: none
+    limit: null
+    n: 1
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        propyl gallate: 0.1 g
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+- id: shibamoto1977-28
+  odorant: 2,6-Dimethylpyrazine
+  lever_class: time
+  lever: reaction time 120 vs 1080 min (2 h vs 18 h) (closed, CuCl2)
+  focal: false
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: 'lever is time: whole series'
+  resolution: re-read
+  arms:
+  - label: Exp. 6
+    lever_value: 120
+    value: 13.3
+    censor: none
+    limit: null
+    n: 1
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        CuCl2: 0.17 g
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+  - label: Exp. 7
+    lever_value: 1080
+    value: 77.3
+    censor: none
+    limit: null
+    n: 1
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        CuCl2: 0.17 g
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+- id: shibamoto1977-29
+  odorant: 2,6-Dimethylpyrazine
+  lever_class: time
+  lever: reaction time 120 vs 1080 min (2 h vs 18 h) (closed, NaOH)
+  focal: false
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: 'lever is time: whole series'
+  resolution: re-read
+  arms:
+  - label: Exp. 11
+    lever_value: 120
+    value: 17.2
+    censor: none
+    limit: null
+    n: 1
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        NaOH: 0.4 g
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+  - label: Exp. 12
+    lever_value: 1080
+    value: 119.7
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        NaOH: 0.4 g
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+- id: shibamoto1977-30
+  odorant: 2,6-Dimethylpyrazine
+  lever_class: pH
+  lever: NaOH (0.4 g) added vs control; pH not printed (open, 2 h)
+  lever_value_unprinted: true
+  focal: true
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: not a time course (open system run at 2 h only)
+  resolution: re-read
+  arms:
+  - label: Exp. 13
+    lever_value: none
+    value: 13.7
+    censor: none
+    limit: null
+    n: 8
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+  - label: Exp. 10
+    lever_value: naoh 0.4 g
+    value: 18.9
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        NaOH: 0.4 g
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+- id: shibamoto1977-31
+  odorant: 2,6-Dimethylpyrazine
+  lever_class: pH
+  lever: NaOH (0.4 g) added vs control; pH not printed (closed, 18 h)
+  lever_value_unprinted: true
+  focal: true
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: longest time (closed NaOH runs at 2 h and 18 h; no main time stated)
+  resolution: re-read
+  arms:
+  - label: Exp. 16
+    lever_value: none
+    value: 82.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+  - label: Exp. 12
+    lever_value: naoh 0.4 g
+    value: 119.7
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        NaOH: 0.4 g
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+- id: shibamoto1977-32
+  odorant: 2,6-Dimethylpyrazine
+  lever_class: oxygen
+  lever: air (open) vs oxygen blanket (open, 2 h)
+  focal: true
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: not a time course (oxygen run at 2 h only)
+  resolution: re-read
+  arms:
+  - label: Exp. 4
+    lever_value: oxygen
+    value: 14.0
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: oxygen (O2 bubbled 5 min, O2 balloon on condenser)
+  - label: Exp. 13
+    lever_value: air
+    value: 13.7
+    censor: none
+    limit: null
+    n: 8
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+- id: shibamoto1977-33
+  odorant: 2-Ethylpyrazine
+  lever_class: time
+  lever: reaction time 120 vs 1080 min (2 h vs 18 h) (open, no additive)
+  focal: false
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: 'lever is time: whole series'
+  resolution: re-read
+  arms:
+  - label: Exp. 13
+    lever_value: 120
+    value: 0.5
+    censor: none
+    limit: null
+    n: 8
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+  - label: Exp. 14
+    lever_value: 1080
+    value: 0.6
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+- id: shibamoto1977-34
+  odorant: 2-Ethylpyrazine
+  lever_class: time
+  lever: reaction time 120 vs 1080 min (2 h vs 18 h) (closed, no additive)
+  focal: false
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: 'lever is time: whole series'
+  resolution: re-read
+  arms:
+  - label: Exp. 15
+    lever_value: 120
+    value: 0.7
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+  - label: Exp. 16
+    lever_value: 1080
+    value: 3.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+- id: shibamoto1977-35
+  odorant: 2-Ethylpyrazine
+  lever_class: time
+  lever: reaction time 120 vs 1080 min (2 h vs 18 h) (open, propyl gallate)
+  focal: false
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: 'lever is time: whole series'
+  resolution: re-read
+  arms:
+  - label: Exp. 1
+    lever_value: 120
+    value: 0.2
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        propyl gallate: 0.1 g
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+  - label: Exp. 2
+    lever_value: 1080
+    value: 0.6
+    censor: none
+    limit: null
+    n: 1
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        propyl gallate: 0.1 g
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+- id: shibamoto1977-36
+  odorant: 2-Ethylpyrazine
+  lever_class: time
+  lever: reaction time 120 vs 1080 min (2 h vs 18 h) (closed, CuCl2)
+  focal: false
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: 'lever is time: whole series'
+  resolution: re-read
+  arms:
+  - label: Exp. 6
+    lever_value: 120
+    value: 0.6
+    censor: none
+    limit: null
+    n: 1
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        CuCl2: 0.17 g
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+  - label: Exp. 7
+    lever_value: 1080
+    value: 2.4
+    censor: none
+    limit: null
+    n: 1
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        CuCl2: 0.17 g
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+- id: shibamoto1977-37
+  odorant: 2-Ethylpyrazine
+  lever_class: time
+  lever: reaction time 120 vs 1080 min (2 h vs 18 h) (closed, NaOH)
+  focal: false
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: 'lever is time: whole series'
+  resolution: re-read
+  arms:
+  - label: Exp. 11
+    lever_value: 120
+    value: 0.8
+    censor: none
+    limit: null
+    n: 1
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        NaOH: 0.4 g
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+  - label: Exp. 12
+    lever_value: 1080
+    value: 5.6
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        NaOH: 0.4 g
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+- id: shibamoto1977-38
+  odorant: 2-Ethylpyrazine
+  lever_class: pH
+  lever: NaOH (0.4 g) added vs control; pH not printed (open, 2 h)
+  lever_value_unprinted: true
+  focal: true
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: not a time course (open system run at 2 h only)
+  resolution: re-read
+  arms:
+  - label: Exp. 13
+    lever_value: none
+    value: 0.5
+    censor: none
+    limit: null
+    n: 8
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+  - label: Exp. 10
+    lever_value: naoh 0.4 g
+    value: 0.7
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        NaOH: 0.4 g
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+- id: shibamoto1977-39
+  odorant: 2-Ethylpyrazine
+  lever_class: pH
+  lever: NaOH (0.4 g) added vs control; pH not printed (closed, 18 h)
+  lever_value_unprinted: true
+  focal: true
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: longest time (closed NaOH runs at 2 h and 18 h; no main time stated)
+  resolution: re-read
+  arms:
+  - label: Exp. 16
+    lever_value: none
+    value: 3.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+  - label: Exp. 12
+    lever_value: naoh 0.4 g
+    value: 5.6
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        NaOH: 0.4 g
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+- id: shibamoto1977-40
+  odorant: 2-Ethylpyrazine
+  lever_class: oxygen
+  lever: air (open) vs oxygen blanket (open, 2 h)
+  focal: true
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: not a time course (oxygen run at 2 h only)
+  resolution: re-read
+  arms:
+  - label: Exp. 4
+    lever_value: oxygen
+    value: 0.5
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: oxygen (O2 bubbled 5 min, O2 balloon on condenser)
+  - label: Exp. 13
+    lever_value: air
+    value: 0.5
+    censor: none
+    limit: null
+    n: 8
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+- id: shibamoto1977-41
+  odorant: 2,3-Dimethylpyrazine
+  lever_class: time
+  lever: reaction time 120 vs 1080 min (2 h vs 18 h) (open, no additive)
+  focal: false
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: 'lever is time: whole series'
+  resolution: re-read
+  arms:
+  - label: Exp. 13
+    lever_value: 120
+    value: 3.1
+    censor: none
+    limit: null
+    n: 8
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+  - label: Exp. 14
+    lever_value: 1080
+    value: 3.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+- id: shibamoto1977-42
+  odorant: 2,3-Dimethylpyrazine
+  lever_class: time
+  lever: reaction time 120 vs 1080 min (2 h vs 18 h) (closed, no additive)
+  focal: false
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: 'lever is time: whole series'
+  resolution: re-read
+  arms:
+  - label: Exp. 15
+    lever_value: 120
+    value: 2.1
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+  - label: Exp. 16
+    lever_value: 1080
+    value: 20.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+- id: shibamoto1977-43
+  odorant: 2,3-Dimethylpyrazine
+  lever_class: time
+  lever: reaction time 120 vs 1080 min (2 h vs 18 h) (open, propyl gallate)
+  focal: false
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: 'lever is time: whole series'
+  resolution: re-read
+  arms:
+  - label: Exp. 1
+    lever_value: 120
+    value: 1.1
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        propyl gallate: 0.1 g
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+  - label: Exp. 2
+    lever_value: 1080
+    value: 2.2
+    censor: none
+    limit: null
+    n: 1
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        propyl gallate: 0.1 g
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+- id: shibamoto1977-44
+  odorant: 2,3-Dimethylpyrazine
+  lever_class: time
+  lever: reaction time 120 vs 1080 min (2 h vs 18 h) (closed, CuCl2)
+  focal: false
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: 'lever is time: whole series'
+  resolution: re-read
+  arms:
+  - label: Exp. 6
+    lever_value: 120
+    value: 2.4
+    censor: none
+    limit: null
+    n: 1
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        CuCl2: 0.17 g
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+  - label: Exp. 7
+    lever_value: 1080
+    value: 11.8
+    censor: none
+    limit: null
+    n: 1
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        CuCl2: 0.17 g
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+- id: shibamoto1977-45
+  odorant: 2,3-Dimethylpyrazine
+  lever_class: time
+  lever: reaction time 120 vs 1080 min (2 h vs 18 h) (closed, NaOH)
+  focal: false
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: 'lever is time: whole series'
+  resolution: re-read
+  arms:
+  - label: Exp. 11
+    lever_value: 120
+    value: 3.8
+    censor: none
+    limit: null
+    n: 1
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        NaOH: 0.4 g
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+  - label: Exp. 12
+    lever_value: 1080
+    value: 16.9
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        NaOH: 0.4 g
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+- id: shibamoto1977-46
+  odorant: 2,3-Dimethylpyrazine
+  lever_class: pH
+  lever: NaOH (0.4 g) added vs control; pH not printed (open, 2 h)
+  lever_value_unprinted: true
+  focal: true
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: not a time course (open system run at 2 h only)
+  resolution: re-read
+  arms:
+  - label: Exp. 13
+    lever_value: none
+    value: 3.1
+    censor: none
+    limit: null
+    n: 8
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+  - label: Exp. 10
+    lever_value: naoh 0.4 g
+    value: 3.8
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        NaOH: 0.4 g
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+- id: shibamoto1977-47
+  odorant: 2,3-Dimethylpyrazine
+  lever_class: pH
+  lever: NaOH (0.4 g) added vs control; pH not printed (closed, 18 h)
+  lever_value_unprinted: true
+  focal: true
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: longest time (closed NaOH runs at 2 h and 18 h; no main time stated)
+  resolution: re-read
+  arms:
+  - label: Exp. 16
+    lever_value: none
+    value: 20.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+  - label: Exp. 12
+    lever_value: naoh 0.4 g
+    value: 16.9
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        NaOH: 0.4 g
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+- id: shibamoto1977-48
+  odorant: 2,3-Dimethylpyrazine
+  lever_class: oxygen
+  lever: air (open) vs oxygen blanket (open, 2 h)
+  focal: true
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: not a time course (oxygen run at 2 h only)
+  resolution: re-read
+  arms:
+  - label: Exp. 4
+    lever_value: oxygen
+    value: 2.5
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: oxygen (O2 bubbled 5 min, O2 balloon on condenser)
+  - label: Exp. 13
+    lever_value: air
+    value: 3.1
+    censor: none
+    limit: null
+    n: 8
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+- id: shibamoto1977-49
+  odorant: 2-ethyl-5-methylpyrazine
+  odorant_unlisted: true
+  lever_class: time
+  lever: reaction time 120 vs 1080 min (2 h vs 18 h) (open, no additive)
+  focal: false
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: 'lever is time: whole series'
+  resolution: re-read
+  arms:
+  - label: Exp. 13
+    lever_value: 120
+    value: 0.5
+    censor: none
+    limit: null
+    n: 8
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+  - label: Exp. 14
+    lever_value: 1080
+    value: 0.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+- id: shibamoto1977-50
+  odorant: 2-ethyl-5-methylpyrazine
+  odorant_unlisted: true
+  lever_class: time
+  lever: reaction time 120 vs 1080 min (2 h vs 18 h) (closed, no additive)
+  focal: false
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: 'lever is time: whole series'
+  resolution: re-read
+  arms:
+  - label: Exp. 15
+    lever_value: 120
+    value: 1.2
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+  - label: Exp. 16
+    lever_value: 1080
+    value: 2.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+- id: shibamoto1977-51
+  odorant: 2-ethyl-5-methylpyrazine
+  odorant_unlisted: true
+  lever_class: time
+  lever: reaction time 120 vs 1080 min (2 h vs 18 h) (open, propyl gallate)
+  focal: false
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: 'lever is time: whole series'
+  resolution: re-read
+  arms:
+  - label: Exp. 1
+    lever_value: 120
+    value: 0.1
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        propyl gallate: 0.1 g
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+  - label: Exp. 2
+    lever_value: 1080
+    value: 0.1
+    censor: none
+    limit: null
+    n: 1
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        propyl gallate: 0.1 g
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+- id: shibamoto1977-52
+  odorant: 2-ethyl-5-methylpyrazine
+  odorant_unlisted: true
+  lever_class: time
+  lever: reaction time 120 vs 1080 min (2 h vs 18 h) (closed, CuCl2)
+  focal: false
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: 'lever is time: whole series'
+  resolution: re-read
+  arms:
+  - label: Exp. 6
+    lever_value: 120
+    value: 0.3
+    censor: none
+    limit: null
+    n: 1
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        CuCl2: 0.17 g
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+  - label: Exp. 7
+    lever_value: 1080
+    value: 0.4
+    censor: none
+    limit: null
+    n: 1
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        CuCl2: 0.17 g
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+- id: shibamoto1977-53
+  odorant: 2-ethyl-5-methylpyrazine
+  odorant_unlisted: true
+  lever_class: time
+  lever: reaction time 120 vs 1080 min (2 h vs 18 h) (closed, NaOH)
+  focal: false
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: 'lever is time: whole series'
+  resolution: re-read
+  arms:
+  - label: Exp. 11
+    lever_value: 120
+    value: 0.2
+    censor: none
+    limit: null
+    n: 1
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        NaOH: 0.4 g
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+  - label: Exp. 12
+    lever_value: 1080
+    value: 1.9
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        NaOH: 0.4 g
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+- id: shibamoto1977-54
+  odorant: 2-ethyl-5-methylpyrazine
+  odorant_unlisted: true
+  lever_class: pH
+  lever: NaOH (0.4 g) added vs control; pH not printed (open, 2 h)
+  lever_value_unprinted: true
+  focal: true
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: not a time course (open system run at 2 h only)
+  resolution: re-read
+  arms:
+  - label: Exp. 13
+    lever_value: none
+    value: 0.5
+    censor: none
+    limit: null
+    n: 8
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+  - label: Exp. 10
+    lever_value: naoh 0.4 g
+    value: 0.3
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        NaOH: 0.4 g
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+- id: shibamoto1977-55
+  odorant: 2-ethyl-5-methylpyrazine
+  odorant_unlisted: true
+  lever_class: pH
+  lever: NaOH (0.4 g) added vs control; pH not printed (closed, 18 h)
+  lever_value_unprinted: true
+  focal: true
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: longest time (closed NaOH runs at 2 h and 18 h; no main time stated)
+  resolution: re-read
+  arms:
+  - label: Exp. 16
+    lever_value: none
+    value: 2.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+  - label: Exp. 12
+    lever_value: naoh 0.4 g
+    value: 1.9
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        NaOH: 0.4 g
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+- id: shibamoto1977-56
+  odorant: 2-ethyl-5-methylpyrazine
+  odorant_unlisted: true
+  lever_class: oxygen
+  lever: air (open) vs oxygen blanket (open, 2 h)
+  focal: true
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: not a time course (oxygen run at 2 h only)
+  resolution: re-read
+  arms:
+  - label: Exp. 4
+    lever_value: oxygen
+    value: 0.2
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: oxygen (O2 bubbled 5 min, O2 balloon on condenser)
+  - label: Exp. 13
+    lever_value: air
+    value: 0.5
+    censor: none
+    limit: null
+    n: 8
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+- id: shibamoto1977-57
+  odorant: 2-ethyl-6-methylpyrazine
+  odorant_unlisted: true
+  lever_class: time
+  lever: reaction time 120 vs 1080 min (2 h vs 18 h) (open, no additive)
+  focal: false
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: 'lever is time: whole series'
+  resolution: re-read
+  arms:
+  - label: Exp. 13
+    lever_value: 120
+    value: 0.3
+    censor: none
+    limit: null
+    n: 8
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+  - label: Exp. 14
+    lever_value: 1080
+    value: 0.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+- id: shibamoto1977-58
+  odorant: 2-ethyl-6-methylpyrazine
+  odorant_unlisted: true
+  lever_class: time
+  lever: reaction time 120 vs 1080 min (2 h vs 18 h) (closed, no additive)
+  focal: false
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: 'lever is time: whole series'
+  resolution: re-read
+  arms:
+  - label: Exp. 15
+    lever_value: 120
+    value: 0.1
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+  - label: Exp. 16
+    lever_value: 1080
+    value: 2.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+- id: shibamoto1977-59
+  odorant: 2-ethyl-6-methylpyrazine
+  odorant_unlisted: true
+  lever_class: time
+  lever: reaction time 120 vs 1080 min (2 h vs 18 h) (open, propyl gallate)
+  focal: false
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: 'lever is time: whole series'
+  resolution: re-read
+  arms:
+  - label: Exp. 1
+    lever_value: 120
+    value: 0.1
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        propyl gallate: 0.1 g
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+  - label: Exp. 2
+    lever_value: 1080
+    value: 0.1
+    censor: none
+    limit: null
+    n: 1
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        propyl gallate: 0.1 g
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+- id: shibamoto1977-60
+  odorant: 2-ethyl-6-methylpyrazine
+  odorant_unlisted: true
+  lever_class: time
+  lever: reaction time 120 vs 1080 min (2 h vs 18 h) (closed, CuCl2)
+  focal: false
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: 'lever is time: whole series'
+  resolution: re-read
+  arms:
+  - label: Exp. 6
+    lever_value: 120
+    value: 0.2
+    censor: none
+    limit: null
+    n: 1
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        CuCl2: 0.17 g
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+  - label: Exp. 7
+    lever_value: 1080
+    value: 0.3
+    censor: none
+    limit: null
+    n: 1
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        CuCl2: 0.17 g
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+- id: shibamoto1977-61
+  odorant: 2-ethyl-6-methylpyrazine
+  odorant_unlisted: true
+  lever_class: time
+  lever: reaction time 120 vs 1080 min (2 h vs 18 h) (closed, NaOH)
+  focal: false
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: 'lever is time: whole series'
+  resolution: re-read
+  arms:
+  - label: Exp. 11
+    lever_value: 120
+    value: 0.2
+    censor: none
+    limit: null
+    n: 1
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        NaOH: 0.4 g
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+  - label: Exp. 12
+    lever_value: 1080
+    value: 0.8
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        NaOH: 0.4 g
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+- id: shibamoto1977-62
+  odorant: 2-ethyl-6-methylpyrazine
+  odorant_unlisted: true
+  lever_class: pH
+  lever: NaOH (0.4 g) added vs control; pH not printed (open, 2 h)
+  lever_value_unprinted: true
+  focal: true
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: not a time course (open system run at 2 h only)
+  resolution: re-read
+  arms:
+  - label: Exp. 13
+    lever_value: none
+    value: 0.3
+    censor: none
+    limit: null
+    n: 8
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+  - label: Exp. 10
+    lever_value: naoh 0.4 g
+    value: 0.2
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        NaOH: 0.4 g
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+- id: shibamoto1977-63
+  odorant: 2-ethyl-6-methylpyrazine
+  odorant_unlisted: true
+  lever_class: pH
+  lever: NaOH (0.4 g) added vs control; pH not printed (closed, 18 h)
+  lever_value_unprinted: true
+  focal: true
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: longest time (closed NaOH runs at 2 h and 18 h; no main time stated)
+  resolution: re-read
+  arms:
+  - label: Exp. 16
+    lever_value: none
+    value: 2.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+  - label: Exp. 12
+    lever_value: naoh 0.4 g
+    value: 0.8
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        NaOH: 0.4 g
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+- id: shibamoto1977-64
+  odorant: 2-ethyl-6-methylpyrazine
+  odorant_unlisted: true
+  lever_class: oxygen
+  lever: air (open) vs oxygen blanket (open, 2 h)
+  focal: true
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: not a time course (oxygen run at 2 h only)
+  resolution: re-read
+  arms:
+  - label: Exp. 4
+    lever_value: oxygen
+    value: 0.1
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: oxygen (O2 bubbled 5 min, O2 balloon on condenser)
+  - label: Exp. 13
+    lever_value: air
+    value: 0.3
+    censor: none
+    limit: null
+    n: 8
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+- id: shibamoto1977-65
+  odorant: Trimethylpyrazine
+  lever_class: time
+  lever: reaction time 120 vs 1080 min (2 h vs 18 h) (open, no additive)
+  focal: false
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: 'lever is time: whole series'
+  resolution: re-read
+  arms:
+  - label: Exp. 13
+    lever_value: 120
+    value: 1.7
+    censor: none
+    limit: null
+    n: 8
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+  - label: Exp. 14
+    lever_value: 1080
+    value: 1.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+- id: shibamoto1977-66
+  odorant: Trimethylpyrazine
+  lever_class: time
+  lever: reaction time 120 vs 1080 min (2 h vs 18 h) (closed, no additive)
+  focal: false
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: 'lever is time: whole series'
+  resolution: re-read
+  arms:
+  - label: Exp. 15
+    lever_value: 120
+    value: 1.9
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+  - label: Exp. 16
+    lever_value: 1080
+    value: 11.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+- id: shibamoto1977-67
+  odorant: Trimethylpyrazine
+  lever_class: time
+  lever: reaction time 120 vs 1080 min (2 h vs 18 h) (open, propyl gallate)
+  focal: false
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: 'lever is time: whole series'
+  resolution: re-read
+  arms:
+  - label: Exp. 1
+    lever_value: 120
+    value: 0.5
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        propyl gallate: 0.1 g
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+  - label: Exp. 2
+    lever_value: 1080
+    value: 1.2
+    censor: none
+    limit: null
+    n: 1
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        propyl gallate: 0.1 g
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+- id: shibamoto1977-68
+  odorant: Trimethylpyrazine
+  lever_class: time
+  lever: reaction time 120 vs 1080 min (2 h vs 18 h) (closed, CuCl2)
+  focal: false
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: 'lever is time: whole series'
+  resolution: re-read
+  arms:
+  - label: Exp. 6
+    lever_value: 120
+    value: 1.5
+    censor: none
+    limit: null
+    n: 1
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        CuCl2: 0.17 g
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+  - label: Exp. 7
+    lever_value: 1080
+    value: 6.8
+    censor: none
+    limit: null
+    n: 1
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        CuCl2: 0.17 g
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+- id: shibamoto1977-69
+  odorant: Trimethylpyrazine
+  lever_class: time
+  lever: reaction time 120 vs 1080 min (2 h vs 18 h) (closed, NaOH)
+  focal: false
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: 'lever is time: whole series'
+  resolution: re-read
+  arms:
+  - label: Exp. 11
+    lever_value: 120
+    value: 1.9
+    censor: none
+    limit: null
+    n: 1
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        NaOH: 0.4 g
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+  - label: Exp. 12
+    lever_value: 1080
+    value: 15.9
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        NaOH: 0.4 g
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+- id: shibamoto1977-70
+  odorant: Trimethylpyrazine
+  lever_class: pH
+  lever: NaOH (0.4 g) added vs control; pH not printed (open, 2 h)
+  lever_value_unprinted: true
+  focal: true
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: not a time course (open system run at 2 h only)
+  resolution: re-read
+  arms:
+  - label: Exp. 13
+    lever_value: none
+    value: 1.7
+    censor: none
+    limit: null
+    n: 8
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+  - label: Exp. 10
+    lever_value: naoh 0.4 g
+    value: 1.8
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        NaOH: 0.4 g
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+- id: shibamoto1977-71
+  odorant: Trimethylpyrazine
+  lever_class: pH
+  lever: NaOH (0.4 g) added vs control; pH not printed (closed, 18 h)
+  lever_value_unprinted: true
+  focal: true
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: longest time (closed NaOH runs at 2 h and 18 h; no main time stated)
+  resolution: re-read
+  arms:
+  - label: Exp. 16
+    lever_value: none
+    value: 11.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+  - label: Exp. 12
+    lever_value: naoh 0.4 g
+    value: 15.9
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        NaOH: 0.4 g
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+- id: shibamoto1977-72
+  odorant: Trimethylpyrazine
+  lever_class: oxygen
+  lever: air (open) vs oxygen blanket (open, 2 h)
+  focal: true
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: mg
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: not a time course (oxygen run at 2 h only)
+  resolution: re-read
+  arms:
+  - label: Exp. 4
+    lever_value: oxygen
+    value: 1.0
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: oxygen (O2 bubbled 5 min, O2 balloon on condenser)
+  - label: Exp. 13
+    lever_value: air
+    value: 1.7
+    censor: none
+    limit: null
+    n: 8
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+- id: shibamoto1977-73
+  odorant: Pyrazines
+  lever_class: time
+  lever: reaction time 120 vs 1080 min (2 h vs 18 h) (open, no additive)
+  focal: false
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: Yield % relative to sugar used
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: 'lever is time: whole series'
+  resolution: re-read
+  arms:
+  - label: Exp. 13
+    lever_value: 120
+    value: 0.94
+    censor: none
+    limit: null
+    n: 8
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+  - label: Exp. 14
+    lever_value: 1080
+    value: 0.951
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+- id: shibamoto1977-74
+  odorant: Pyrazines
+  lever_class: time
+  lever: reaction time 120 vs 1080 min (2 h vs 18 h) (closed, no additive)
+  focal: false
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: Yield % relative to sugar used
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: 'lever is time: whole series'
+  resolution: re-read
+  arms:
+  - label: Exp. 15
+    lever_value: 120
+    value: 0.681
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+  - label: Exp. 16
+    lever_value: 1080
+    value: 5.289
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+- id: shibamoto1977-75
+  odorant: Pyrazines
+  lever_class: time
+  lever: reaction time 120 vs 1080 min (2 h vs 18 h) (open, propyl gallate)
+  focal: false
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: Yield % relative to sugar used
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: 'lever is time: whole series'
+  resolution: re-read
+  arms:
+  - label: Exp. 1
+    lever_value: 120
+    value: 0.303
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        propyl gallate: 0.1 g
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+  - label: Exp. 2
+    lever_value: 1080
+    value: 0.672
+    censor: none
+    limit: null
+    n: 1
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        propyl gallate: 0.1 g
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+- id: shibamoto1977-76
+  odorant: Pyrazines
+  lever_class: time
+  lever: reaction time 120 vs 1080 min (2 h vs 18 h) (closed, CuCl2)
+  focal: false
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: Yield % relative to sugar used
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: 'lever is time: whole series'
+  resolution: re-read
+  arms:
+  - label: Exp. 6
+    lever_value: 120
+    value: 0.795
+    censor: none
+    limit: null
+    n: 1
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        CuCl2: 0.17 g
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+  - label: Exp. 7
+    lever_value: 1080
+    value: 3.867
+    censor: none
+    limit: null
+    n: 1
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        CuCl2: 0.17 g
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+- id: shibamoto1977-77
+  odorant: Pyrazines
+  lever_class: time
+  lever: reaction time 120 vs 1080 min (2 h vs 18 h) (closed, NaOH)
+  focal: false
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: Yield % relative to sugar used
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: 'lever is time: whole series'
+  resolution: re-read
+  arms:
+  - label: Exp. 11
+    lever_value: 120
+    value: 1.047
+    censor: none
+    limit: null
+    n: 1
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        NaOH: 0.4 g
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+  - label: Exp. 12
+    lever_value: 1080
+    value: 5.469
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        NaOH: 0.4 g
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+- id: shibamoto1977-78
+  odorant: Pyrazines
+  lever_class: pH
+  lever: NaOH (0.4 g) added vs control; pH not printed (open, 2 h)
+  lever_value_unprinted: true
+  focal: true
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: Yield % relative to sugar used
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: not a time course (open system run at 2 h only)
+  resolution: re-read
+  arms:
+  - label: Exp. 13
+    lever_value: none
+    value: 0.94
+    censor: none
+    limit: null
+    n: 8
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+  - label: Exp. 10
+    lever_value: naoh 0.4 g
+    value: 1.047
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        NaOH: 0.4 g
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)
+- id: shibamoto1977-79
+  odorant: Pyrazines
+  lever_class: pH
+  lever: NaOH (0.4 g) added vs control; pH not printed (closed, 18 h)
+  lever_value_unprinted: true
+  focal: true
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: Yield % relative to sugar used
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: longest time (closed NaOH runs at 2 h and 18 h; no main time stated)
+  resolution: re-read
+  arms:
+  - label: Exp. 16
+    lever_value: none
+    value: 5.289
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+  - label: Exp. 12
+    lever_value: naoh 0.4 g
+    value: 5.469
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 1080
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+        NaOH: 0.4 g
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated (sealed ampoule)
+- id: shibamoto1977-80
+  odorant: Pyrazines
+  lever_class: oxygen
+  lever: air (open) vs oxygen blanket (open, 2 h)
+  focal: true
+  location: Table II, p. 147 (conditions Table I, p. 144)
+  digitised: false
+  unit: Yield % relative to sugar used
+  quant_type: absolute
+  quantity: amount
+  time_course_rule: not a time course (oxygen run at 2 h only)
+  resolution: re-read
+  arms:
+  - label: Exp. 4
+    lever_value: oxygen
+    value: 0.84
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: oxygen (O2 bubbled 5 min, O2 balloon on condenser)
+  - label: Exp. 13
+    lever_value: air
+    value: 0.94
+    censor: none
+    limit: null
+    n: 8
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 100
+      time_min: 120
+      precursors:
+        ammonium hydroxide: 8 M
+        D-glucose: 1 M
+      buffer: none
+      matrix: water
+      headspace: air (open, atmospheric pressure)

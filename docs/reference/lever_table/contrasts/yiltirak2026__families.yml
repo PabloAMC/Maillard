@@ -1,0 +1,7 @@
+# Resolved (third read) from reader_a / reader_b; rows the comparison listed were re-read in the PDF.
+source: yiltirak2026
+pdf: data/articles/Yiltirak2026.pdf
+reader: resolved
+scope_note: 'No qualifying contrast: the paper quantifies only thiols (MFT, FFT, 3-mercapto-2-butanone; Fig. 6), out of scope
+  this round; hexanal appears only in supplementary Fig. S5, which is not in the PDF.'
+contrasts: []

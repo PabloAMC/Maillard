@@ -1,0 +1,755 @@
+# Reader b, blind double-keying, second round (families). Rules: PREREG secs. 3 - 4.
+source: "du2023"
+pdf: "data/articles/Du2023.pdf"
+reader: "b"
+scope_note: "Lever is the added C9 aldehyde (lipid-derived); 2-methyl-3-furanthiol and 2-furfurylthiol not keyed (thiols, earlier round); the added aldehydes (nonanal etc.) are reactants and not reported as products."
+contrasts:
+  - id: "du2023-1"
+    odorant: "2-pentylfuran"
+    lever_class: "lipid"
+    lever: "added aliphatic aldehyde: none vs nonanal vs (E)-2-nonenal vs (E,E)-2,4-nonadienal vs (E,Z)-2,6-nonadienal"
+    focal: false
+    location: "Table 1, No. 6, p. 4 - 5"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "'-' = not detected (Table 1 footnote), no LOD printed; quantity by ratio to 1,2-dichlorobenzene internal standard; +- values as printed (averages of three replicates)."
+    arms:
+      - label: "system M"
+        lever_value: "none (control)"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 150
+          time_min: 120
+          precursors:
+            "L-cysteine": "1 mmol in 5 mL"
+            "D-glucose": "1 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "sealed, unstated (15 mL screw-cap vial)"
+      - label: "system A"
+        lever_value: "nonanal"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 150
+          time_min: 120
+          precursors:
+            "L-cysteine": "1 mmol in 5 mL"
+            "D-glucose": "1 mmol in 5 mL"
+            "nonanal": "0.05 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "sealed, unstated (15 mL screw-cap vial)"
+      - label: "system B"
+        lever_value: "(E)-2-nonenal"
+        value: 366.97
+        censor: none
+        limit: null
+        n: 3
+        sd: 69.66
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 150
+          time_min: 120
+          precursors:
+            "L-cysteine": "1 mmol in 5 mL"
+            "D-glucose": "1 mmol in 5 mL"
+            "(E)-2-nonenal": "0.05 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "sealed, unstated (15 mL screw-cap vial)"
+      - label: "system C"
+        lever_value: "(E,E)-2,4-nonadienal"
+        value: 7.79
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.4
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 150
+          time_min: 120
+          precursors:
+            "L-cysteine": "1 mmol in 5 mL"
+            "D-glucose": "1 mmol in 5 mL"
+            "(E,E)-2,4-nonadienal": "0.05 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "sealed, unstated (15 mL screw-cap vial)"
+      - label: "system D"
+        lever_value: "(E,Z)-2,6-nonadienal"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 150
+          time_min: 120
+          precursors:
+            "L-cysteine": "1 mmol in 5 mL"
+            "D-glucose": "1 mmol in 5 mL"
+            "(E,Z)-2,6-nonadienal": "0.05 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "sealed, unstated (15 mL screw-cap vial)"
+  - id: "du2023-2"
+    odorant: "furfural"
+    lever_class: "lipid"
+    lever: "added aliphatic aldehyde: none vs nonanal vs (E)-2-nonenal vs (E,E)-2,4-nonadienal vs (E,Z)-2,6-nonadienal"
+    focal: false
+    location: "Table 1, No. 9, p. 4 - 5"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "'-' = not detected (Table 1 footnote), no LOD printed; quantity by ratio to 1,2-dichlorobenzene internal standard; +- values as printed (averages of three replicates)."
+    arms:
+      - label: "system M"
+        lever_value: "none (control)"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 150
+          time_min: 120
+          precursors:
+            "L-cysteine": "1 mmol in 5 mL"
+            "D-glucose": "1 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "sealed, unstated (15 mL screw-cap vial)"
+      - label: "system A"
+        lever_value: "nonanal"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 150
+          time_min: 120
+          precursors:
+            "L-cysteine": "1 mmol in 5 mL"
+            "D-glucose": "1 mmol in 5 mL"
+            "nonanal": "0.05 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "sealed, unstated (15 mL screw-cap vial)"
+      - label: "system B"
+        lever_value: "(E)-2-nonenal"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 150
+          time_min: 120
+          precursors:
+            "L-cysteine": "1 mmol in 5 mL"
+            "D-glucose": "1 mmol in 5 mL"
+            "(E)-2-nonenal": "0.05 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "sealed, unstated (15 mL screw-cap vial)"
+      - label: "system C"
+        lever_value: "(E,E)-2,4-nonadienal"
+        value: 26.71
+        censor: none
+        limit: null
+        n: 3
+        sd: 1.87
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 150
+          time_min: 120
+          precursors:
+            "L-cysteine": "1 mmol in 5 mL"
+            "D-glucose": "1 mmol in 5 mL"
+            "(E,E)-2,4-nonadienal": "0.05 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "sealed, unstated (15 mL screw-cap vial)"
+      - label: "system D"
+        lever_value: "(E,Z)-2,6-nonadienal"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 150
+          time_min: 120
+          precursors:
+            "L-cysteine": "1 mmol in 5 mL"
+            "D-glucose": "1 mmol in 5 mL"
+            "(E,Z)-2,6-nonadienal": "0.05 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "sealed, unstated (15 mL screw-cap vial)"
+  - id: "du2023-3"
+    odorant: "2-furanmethanol (furfuryl alcohol)"
+    lever_class: "lipid"
+    lever: "added aliphatic aldehyde: none vs nonanal vs (E)-2-nonenal vs (E,E)-2,4-nonadienal vs (E,Z)-2,6-nonadienal"
+    focal: false
+    location: "Table 1, No. 10, p. 4 - 5"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "'-' = not detected (Table 1 footnote), no LOD printed; quantity by ratio to 1,2-dichlorobenzene internal standard; +- values as printed (averages of three replicates)."
+    arms:
+      - label: "system M"
+        lever_value: "none (control)"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 150
+          time_min: 120
+          precursors:
+            "L-cysteine": "1 mmol in 5 mL"
+            "D-glucose": "1 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "sealed, unstated (15 mL screw-cap vial)"
+      - label: "system A"
+        lever_value: "nonanal"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 150
+          time_min: 120
+          precursors:
+            "L-cysteine": "1 mmol in 5 mL"
+            "D-glucose": "1 mmol in 5 mL"
+            "nonanal": "0.05 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "sealed, unstated (15 mL screw-cap vial)"
+      - label: "system B"
+        lever_value: "(E)-2-nonenal"
+        value: 31.07
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.71
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 150
+          time_min: 120
+          precursors:
+            "L-cysteine": "1 mmol in 5 mL"
+            "D-glucose": "1 mmol in 5 mL"
+            "(E)-2-nonenal": "0.05 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "sealed, unstated (15 mL screw-cap vial)"
+      - label: "system C"
+        lever_value: "(E,E)-2,4-nonadienal"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 150
+          time_min: 120
+          precursors:
+            "L-cysteine": "1 mmol in 5 mL"
+            "D-glucose": "1 mmol in 5 mL"
+            "(E,E)-2,4-nonadienal": "0.05 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "sealed, unstated (15 mL screw-cap vial)"
+      - label: "system D"
+        lever_value: "(E,Z)-2,6-nonadienal"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 150
+          time_min: 120
+          precursors:
+            "L-cysteine": "1 mmol in 5 mL"
+            "D-glucose": "1 mmol in 5 mL"
+            "(E,Z)-2,6-nonadienal": "0.05 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "sealed, unstated (15 mL screw-cap vial)"
+  - id: "du2023-4"
+    odorant: "2,5-dimethyl-4-hydroxy-3(2H)-furone (HDMF)"
+    lever_class: "lipid"
+    lever: "added aliphatic aldehyde: none vs nonanal vs (E)-2-nonenal vs (E,E)-2,4-nonadienal vs (E,Z)-2,6-nonadienal"
+    focal: false
+    location: "Table 1, No. 15, p. 4 - 5"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "'-' = not detected (Table 1 footnote), no LOD printed; quantity by ratio to 1,2-dichlorobenzene internal standard; +- values as printed (averages of three replicates)."
+    arms:
+      - label: "system M"
+        lever_value: "none (control)"
+        value: 9.71
+        censor: none
+        limit: null
+        n: 3
+        sd: 3.84
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 150
+          time_min: 120
+          precursors:
+            "L-cysteine": "1 mmol in 5 mL"
+            "D-glucose": "1 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "sealed, unstated (15 mL screw-cap vial)"
+      - label: "system A"
+        lever_value: "nonanal"
+        value: 3.84
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.82
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 150
+          time_min: 120
+          precursors:
+            "L-cysteine": "1 mmol in 5 mL"
+            "D-glucose": "1 mmol in 5 mL"
+            "nonanal": "0.05 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "sealed, unstated (15 mL screw-cap vial)"
+      - label: "system B"
+        lever_value: "(E)-2-nonenal"
+        value: 5.16
+        censor: none
+        limit: null
+        n: 3
+        sd: 1.43
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 150
+          time_min: 120
+          precursors:
+            "L-cysteine": "1 mmol in 5 mL"
+            "D-glucose": "1 mmol in 5 mL"
+            "(E)-2-nonenal": "0.05 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "sealed, unstated (15 mL screw-cap vial)"
+      - label: "system C"
+        lever_value: "(E,E)-2,4-nonadienal"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 150
+          time_min: 120
+          precursors:
+            "L-cysteine": "1 mmol in 5 mL"
+            "D-glucose": "1 mmol in 5 mL"
+            "(E,E)-2,4-nonadienal": "0.05 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "sealed, unstated (15 mL screw-cap vial)"
+      - label: "system D"
+        lever_value: "(E,Z)-2,6-nonadienal"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 150
+          time_min: 120
+          precursors:
+            "L-cysteine": "1 mmol in 5 mL"
+            "D-glucose": "1 mmol in 5 mL"
+            "(E,Z)-2,6-nonadienal": "0.05 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "sealed, unstated (15 mL screw-cap vial)"
+  - id: "du2023-5"
+    odorant: "1-(2-furanyl)-ethanone (2-acetylfuran)"
+    lever_class: "lipid"
+    lever: "added aliphatic aldehyde: none vs nonanal vs (E)-2-nonenal vs (E,E)-2,4-nonadienal vs (E,Z)-2,6-nonadienal"
+    focal: false
+    location: "Table 1, No. 8, p. 4 - 5"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "'-' = not detected (Table 1 footnote), no LOD printed; quantity by ratio to 1,2-dichlorobenzene internal standard; +- values as printed (averages of three replicates)."
+    arms:
+      - label: "system M"
+        lever_value: "none (control)"
+        value: 49.13
+        censor: none
+        limit: null
+        n: 3
+        sd: 16.55
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 150
+          time_min: 120
+          precursors:
+            "L-cysteine": "1 mmol in 5 mL"
+            "D-glucose": "1 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "sealed, unstated (15 mL screw-cap vial)"
+      - label: "system A"
+        lever_value: "nonanal"
+        value: 31.81
+        censor: none
+        limit: null
+        n: 3
+        sd: 1.67
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 150
+          time_min: 120
+          precursors:
+            "L-cysteine": "1 mmol in 5 mL"
+            "D-glucose": "1 mmol in 5 mL"
+            "nonanal": "0.05 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "sealed, unstated (15 mL screw-cap vial)"
+      - label: "system B"
+        lever_value: "(E)-2-nonenal"
+        value: 44.41
+        censor: none
+        limit: null
+        n: 3
+        sd: 24.81
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 150
+          time_min: 120
+          precursors:
+            "L-cysteine": "1 mmol in 5 mL"
+            "D-glucose": "1 mmol in 5 mL"
+            "(E)-2-nonenal": "0.05 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "sealed, unstated (15 mL screw-cap vial)"
+      - label: "system C"
+        lever_value: "(E,E)-2,4-nonadienal"
+        value: 37.86
+        censor: none
+        limit: null
+        n: 3
+        sd: 1.24
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 150
+          time_min: 120
+          precursors:
+            "L-cysteine": "1 mmol in 5 mL"
+            "D-glucose": "1 mmol in 5 mL"
+            "(E,E)-2,4-nonadienal": "0.05 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "sealed, unstated (15 mL screw-cap vial)"
+      - label: "system D"
+        lever_value: "(E,Z)-2,6-nonadienal"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 150
+          time_min: 120
+          precursors:
+            "L-cysteine": "1 mmol in 5 mL"
+            "D-glucose": "1 mmol in 5 mL"
+            "(E,Z)-2,6-nonadienal": "0.05 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "sealed, unstated (15 mL screw-cap vial)"
+  - id: "du2023-6"
+    odorant: "benzaldehyde"
+    lever_class: "lipid"
+    lever: "added aliphatic aldehyde: none vs nonanal vs (E)-2-nonenal vs (E,E)-2,4-nonadienal vs (E,Z)-2,6-nonadienal"
+    focal: false
+    location: "Table 1, No. 79, p. 4 - 5"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "'-' = not detected (Table 1 footnote), no LOD printed; quantity by ratio to 1,2-dichlorobenzene internal standard; +- values as printed (averages of three replicates)."
+    arms:
+      - label: "system M"
+        lever_value: "none (control)"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 150
+          time_min: 120
+          precursors:
+            "L-cysteine": "1 mmol in 5 mL"
+            "D-glucose": "1 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "sealed, unstated (15 mL screw-cap vial)"
+      - label: "system A"
+        lever_value: "nonanal"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 150
+          time_min: 120
+          precursors:
+            "L-cysteine": "1 mmol in 5 mL"
+            "D-glucose": "1 mmol in 5 mL"
+            "nonanal": "0.05 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "sealed, unstated (15 mL screw-cap vial)"
+      - label: "system B"
+        lever_value: "(E)-2-nonenal"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 150
+          time_min: 120
+          precursors:
+            "L-cysteine": "1 mmol in 5 mL"
+            "D-glucose": "1 mmol in 5 mL"
+            "(E)-2-nonenal": "0.05 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "sealed, unstated (15 mL screw-cap vial)"
+      - label: "system C"
+        lever_value: "(E,E)-2,4-nonadienal"
+        value: 23.67
+        censor: none
+        limit: null
+        n: 3
+        sd: 1.55
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 150
+          time_min: 120
+          precursors:
+            "L-cysteine": "1 mmol in 5 mL"
+            "D-glucose": "1 mmol in 5 mL"
+            "(E,E)-2,4-nonadienal": "0.05 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "sealed, unstated (15 mL screw-cap vial)"
+      - label: "system D"
+        lever_value: "(E,Z)-2,6-nonadienal"
+        value: 15.52
+        censor: none
+        limit: null
+        n: 3
+        sd: 4.2
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 150
+          time_min: 120
+          precursors:
+            "L-cysteine": "1 mmol in 5 mL"
+            "D-glucose": "1 mmol in 5 mL"
+            "(E,Z)-2,6-nonadienal": "0.05 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "sealed, unstated (15 mL screw-cap vial)"
+  - id: "du2023-7"
+    odorant: "2-acetylthiazole"
+    lever_class: "lipid"
+    lever: "added aliphatic aldehyde: none vs nonanal vs (E)-2-nonenal vs (E,E)-2,4-nonadienal vs (E,Z)-2,6-nonadienal"
+    focal: false
+    location: "Table 1, No. 69, p. 4 - 5"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    note: "'-' = not detected (Table 1 footnote), no LOD printed; quantity by ratio to 1,2-dichlorobenzene internal standard; +- values as printed (averages of three replicates)."
+    arms:
+      - label: "system M"
+        lever_value: "none (control)"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 150
+          time_min: 120
+          precursors:
+            "L-cysteine": "1 mmol in 5 mL"
+            "D-glucose": "1 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "sealed, unstated (15 mL screw-cap vial)"
+      - label: "system A"
+        lever_value: "nonanal"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 150
+          time_min: 120
+          precursors:
+            "L-cysteine": "1 mmol in 5 mL"
+            "D-glucose": "1 mmol in 5 mL"
+            "nonanal": "0.05 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "sealed, unstated (15 mL screw-cap vial)"
+      - label: "system B"
+        lever_value: "(E)-2-nonenal"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 150
+          time_min: 120
+          precursors:
+            "L-cysteine": "1 mmol in 5 mL"
+            "D-glucose": "1 mmol in 5 mL"
+            "(E)-2-nonenal": "0.05 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "sealed, unstated (15 mL screw-cap vial)"
+      - label: "system C"
+        lever_value: "(E,E)-2,4-nonadienal"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 150
+          time_min: 120
+          precursors:
+            "L-cysteine": "1 mmol in 5 mL"
+            "D-glucose": "1 mmol in 5 mL"
+            "(E,E)-2,4-nonadienal": "0.05 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "sealed, unstated (15 mL screw-cap vial)"
+      - label: "system D"
+        lever_value: "(E,Z)-2,6-nonadienal"
+        value: 8.87
+        censor: none
+        limit: null
+        n: 3
+        sd: 1.12
+        conditions:
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 150
+          time_min: 120
+          precursors:
+            "L-cysteine": "1 mmol in 5 mL"
+            "D-glucose": "1 mmol in 5 mL"
+            "(E,Z)-2,6-nonadienal": "0.05 mmol in 5 mL"
+          buffer: "0.2 M phosphate, pH 6.50"
+          matrix: "buffer"
+          headspace: "sealed, unstated (15 mL screw-cap vial)"

@@ -38,16 +38,24 @@ OUT = data_paths.VALIDATION_DIR / "experiment_map.json"
 LEVER_TABLE = data_paths.VALIDATION_DIR / "lever_table.json"
 
 #: The formulator's levers (STATUS_AND_PLAN sec. 1 and W5.4) and the odorant families of the plan.
-LEVERS = ["pH", "temperature", "time", "precursor dose", "sugar identity", "sulfur source", "yeast extract",
+LEVERS = ["pH", "temperature", "time", "precursor dose", "sugar identity", "sulfur source", "amino acid identity",
+          "yeast extract",
           "thiamine", "lipid", "water", "buffer", "heme / iron", "matrix", "cooking method"]
 FAMILIES = {
     "meaty thiols": ["2-Methyl-3-furanthiol (MFT)", "2-Furfurylthiol (FFT)", "Hydrogen Sulfide",
                      "Bis(2-methyl-3-furyl) disulfide", "Bis(2-furfuryl) disulfide",
                      "2-Methyl-3-(2-furfuryldithio)furan"],
-    "Strecker aldehydes, methional": [],
-    "pyrazines": [],
-    "lipid aldehydes (off-notes)": [],
-    "furanones, furfural": [],
+    "Strecker aldehydes, methional": ["Methional (3-(methylthio)propanal)", "2-Methylbutanal", "3-Methylbutanal",
+                                      "2-Methylpropanal (isobutyraldehyde)", "Phenylacetaldehyde", "Benzaldehyde"],
+    "pyrazines": ["Pyrazines", "Unsubstituted pyrazine", "2-Methylpyrazine", "2,5-Dimethylpyrazine",
+                  "2,3-Dimethylpyrazine", "2,6-Dimethylpyrazine", "2-Ethylpyrazine", "Trimethylpyrazine",
+                  "Tetramethylpyrazine", "2-Ethyl-3,5-dimethylpyrazine", "2-Ethyl-3,6-dimethylpyrazine",
+                  "2-Acetyl-1-pyrroline", "2-Acetylthiazole"],
+    "lipid aldehydes (off-notes)": ["Pentanal", "Hexanal", "Heptanal", "Octanal", "Nonanal", "(E)-2-Octenal",
+                                    "(E)-2-Nonenal", "(E,E)-2,4-Decadienal", "2-Pentylfuran", "1-Octen-3-ol",
+                                    "1-Hexanol"],
+    "furanones, furfural": ["DMHF", "HEMF", "Norfuraneol (NF)", "Furfural", "5-Methylfurfural", "2-Acetylfuran",
+                            "2-Furanmethanol"],
 }
 #: the split's odorant classes -> the families above (for "keyed later" counts)
 SPLIT_CLASS = {"thiol_h2s_sulfur": "meaty thiols", "strecker_aldehyde_acid": "Strecker aldehydes, methional",
@@ -59,6 +67,7 @@ SPLIT_FACTOR = {"ph": "pH", "temperature": "temperature", "time": "time", "conce
 #: levels a design line proposes per lever (the formulator's range; a convention, stated as such)
 LEVELS = {"pH": "pH 5.0 / 6.0 / 7.0", "temperature": "120 / 140 / 160 C", "time": "5 / 10 / 20 / 40 min",
           "precursor dose": "0 / 0.5x / 1x / 2x of the base dose", "sugar identity": "ribose vs glucose (vs xylose)",
+          "amino acid identity": "glycine vs alanine vs leucine vs methionine vs phenylalanine",
           "sulfur source": "cysteine vs glutathione vs thiamine vs none", "yeast extract": "0 / 0.5 / 1 / 2 % w/w",
           "thiamine": "0 / 0.05 / 0.1 % w/w", "lipid": "0 / 2 / 5 % sunflower oil", "water": "a_w 0.95 / 0.85 / 0.75",
           "buffer": "phosphate 0 / 0.1 / 0.2 M", "heme / iron": "0 / 0.2 / 0.5 % leghemoglobin or FeSO4 equivalent",
@@ -91,6 +100,8 @@ def build() -> Dict[str, Any]:
         if fam and c["kind"] == "paired_arms":
             for f in c.get("factors") or []:
                 lv = SPLIT_FACTOR.get(f)
+                if f == "amine" and fam != "meaty thiols":
+                    lv = "amino acid identity"   # outside the thiols, the amine factor is WHICH amino acid
                 if lv:
                     atlas[(fam, lv)]["contrasts"] += 1
                     atlas[(fam, lv)]["labs"].add(c["lab"])

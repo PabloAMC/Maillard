@@ -1,0 +1,1973 @@
+source: "granvogl2006"
+pdf: "data/articles/granvogl2006.pdf"
+reader: "b"
+scope_note: "RSD (%) printed, not SD: carried in arm labels, sd null; origin (SU vs GH) not keyed (many uncontrolled differences); Table 2/3 are amines; benzaldehyde from 2-phenylethylamine (data not shown) has no contrast; roasting keyed as temperature (unroasted vs roasted)."
+contrasts:
+  - id: "granvogl2006-1"
+    odorant: "3-methylbutanal"
+    lever_class: "temperature"
+    lever: "roasting: unroasted vs roasted (15 min 95 C, then to 115 C at 1 C/min), unfermented beans, SU"
+    focal: true
+    location: "Table 4"
+    digitised: false
+    unit: "ug/kg"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "UF-SU (RSD 21.1 %)"
+        lever_value: "unroasted"
+        value: 58
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: null
+          time_min: null
+          precursors: {}
+          buffer: "none"
+          matrix: "other (cocoa beans, SU, unfermented, unroasted)"
+          headspace: "unstated"
+      - label: "UF-R-SU (RSD 5.0 %)"
+        lever_value: "roasted"
+        value: 565
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 115
+          time_min: null
+          precursors: {}
+          buffer: "none"
+          matrix: "other (cocoa beans, SU, unfermented, roasted)"
+          headspace: "unstated"
+  - id: "granvogl2006-2"
+    odorant: "3-methylbutanal"
+    lever_class: "temperature"
+    lever: "roasting: unroasted vs roasted (15 min 95 C, then to 115 C at 1 C/min), 7-day fermented beans, SU"
+    focal: true
+    location: "Table 4"
+    digitised: false
+    unit: "ug/kg"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "7F-SU (RSD 2.5 %)"
+        lever_value: "unroasted"
+        value: 1152
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: null
+          time_min: null
+          precursors: {}
+          buffer: "none"
+          matrix: "other (cocoa beans, SU, 7-day fermented, unroasted)"
+          headspace: "unstated"
+      - label: "7F-R-SU (RSD 2.4 %)"
+        lever_value: "roasted"
+        value: 6841
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 115
+          time_min: null
+          precursors: {}
+          buffer: "none"
+          matrix: "other (cocoa beans, SU, 7-day fermented, roasted)"
+          headspace: "unstated"
+  - id: "granvogl2006-3"
+    odorant: "3-methylbutanal"
+    lever_class: "matrix"
+    lever: "fermentation: unfermented vs 7-day fermented cocoa beans, unroasted, SU"
+    focal: true
+    location: "Table 4"
+    digitised: false
+    unit: "ug/kg"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "UF-SU (RSD 21.1 %)"
+        lever_value: "unfermented"
+        value: 58
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: null
+          time_min: null
+          precursors: {}
+          buffer: "none"
+          matrix: "other (cocoa beans, SU, unfermented, unroasted)"
+          headspace: "unstated"
+      - label: "7F-SU (RSD 2.5 %)"
+        lever_value: "7-day fermented"
+        value: 1152
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: null
+          time_min: null
+          precursors: {}
+          buffer: "none"
+          matrix: "other (cocoa beans, SU, 7-day fermented, unroasted)"
+          headspace: "unstated"
+  - id: "granvogl2006-4"
+    odorant: "3-methylbutanal"
+    lever_class: "matrix"
+    lever: "fermentation: unfermented vs 7-day fermented cocoa beans, roasted, SU"
+    focal: true
+    location: "Table 4"
+    digitised: false
+    unit: "ug/kg"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "UF-R-SU (RSD 5.0 %)"
+        lever_value: "unfermented"
+        value: 565
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 115
+          time_min: null
+          precursors: {}
+          buffer: "none"
+          matrix: "other (cocoa beans, SU, unfermented, roasted)"
+          headspace: "unstated"
+      - label: "7F-R-SU (RSD 2.4 %)"
+        lever_value: "7-day fermented"
+        value: 6841
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 115
+          time_min: null
+          precursors: {}
+          buffer: "none"
+          matrix: "other (cocoa beans, SU, 7-day fermented, roasted)"
+          headspace: "unstated"
+  - id: "granvogl2006-5"
+    odorant: "3-methylbutanal"
+    lever_class: "temperature"
+    lever: "roasting: unroasted vs roasted (15 min 95 C, then to 115 C at 1 C/min), unfermented beans, GH"
+    focal: true
+    location: "Table 4"
+    digitised: false
+    unit: "ug/kg"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "UF-GH (RSD 9.5 %)"
+        lever_value: "unroasted"
+        value: 116
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: null
+          time_min: null
+          precursors: {}
+          buffer: "none"
+          matrix: "other (cocoa beans, GH, unfermented, unroasted)"
+          headspace: "unstated"
+      - label: "UF-R-GH (RSD 20.2 %)"
+        lever_value: "roasted"
+        value: 511
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 115
+          time_min: null
+          precursors: {}
+          buffer: "none"
+          matrix: "other (cocoa beans, GH, unfermented, roasted)"
+          headspace: "unstated"
+  - id: "granvogl2006-6"
+    odorant: "3-methylbutanal"
+    lever_class: "temperature"
+    lever: "roasting: unroasted vs roasted (15 min 95 C, then to 115 C at 1 C/min), 7-day fermented beans, GH"
+    focal: true
+    location: "Table 4"
+    digitised: false
+    unit: "ug/kg"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "7F-GH (RSD 2.4 %)"
+        lever_value: "unroasted"
+        value: 1636
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: null
+          time_min: null
+          precursors: {}
+          buffer: "none"
+          matrix: "other (cocoa beans, GH, 7-day fermented, unroasted)"
+          headspace: "unstated"
+      - label: "7F-R-GH (RSD 1.2 %)"
+        lever_value: "roasted"
+        value: 8470
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 115
+          time_min: null
+          precursors: {}
+          buffer: "none"
+          matrix: "other (cocoa beans, GH, 7-day fermented, roasted)"
+          headspace: "unstated"
+  - id: "granvogl2006-7"
+    odorant: "3-methylbutanal"
+    lever_class: "matrix"
+    lever: "fermentation: unfermented vs 7-day fermented cocoa beans, unroasted, GH"
+    focal: true
+    location: "Table 4"
+    digitised: false
+    unit: "ug/kg"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "UF-GH (RSD 9.5 %)"
+        lever_value: "unfermented"
+        value: 116
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: null
+          time_min: null
+          precursors: {}
+          buffer: "none"
+          matrix: "other (cocoa beans, GH, unfermented, unroasted)"
+          headspace: "unstated"
+      - label: "7F-GH (RSD 2.4 %)"
+        lever_value: "7-day fermented"
+        value: 1636
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: null
+          time_min: null
+          precursors: {}
+          buffer: "none"
+          matrix: "other (cocoa beans, GH, 7-day fermented, unroasted)"
+          headspace: "unstated"
+  - id: "granvogl2006-8"
+    odorant: "3-methylbutanal"
+    lever_class: "matrix"
+    lever: "fermentation: unfermented vs 7-day fermented cocoa beans, roasted, GH"
+    focal: true
+    location: "Table 4"
+    digitised: false
+    unit: "ug/kg"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "UF-R-GH (RSD 20.2 %)"
+        lever_value: "unfermented"
+        value: 511
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 115
+          time_min: null
+          precursors: {}
+          buffer: "none"
+          matrix: "other (cocoa beans, GH, unfermented, roasted)"
+          headspace: "unstated"
+      - label: "7F-R-GH (RSD 1.2 %)"
+        lever_value: "7-day fermented"
+        value: 8470
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 115
+          time_min: null
+          precursors: {}
+          buffer: "none"
+          matrix: "other (cocoa beans, GH, 7-day fermented, roasted)"
+          headspace: "unstated"
+  - id: "granvogl2006-9"
+    odorant: "2-methylbutanal"
+    lever_class: "temperature"
+    lever: "roasting: unroasted vs roasted (15 min 95 C, then to 115 C at 1 C/min), unfermented beans, SU"
+    focal: true
+    location: "Table 4"
+    digitised: false
+    unit: "ug/kg"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "UF-SU (RSD 29.9 %)"
+        lever_value: "unroasted"
+        value: 109
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: null
+          time_min: null
+          precursors: {}
+          buffer: "none"
+          matrix: "other (cocoa beans, SU, unfermented, unroasted)"
+          headspace: "unstated"
+      - label: "UF-R-SU (RSD 7.0 %)"
+        lever_value: "roasted"
+        value: 665
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 115
+          time_min: null
+          precursors: {}
+          buffer: "none"
+          matrix: "other (cocoa beans, SU, unfermented, roasted)"
+          headspace: "unstated"
+  - id: "granvogl2006-10"
+    odorant: "2-methylbutanal"
+    lever_class: "temperature"
+    lever: "roasting: unroasted vs roasted (15 min 95 C, then to 115 C at 1 C/min), 7-day fermented beans, SU"
+    focal: true
+    location: "Table 4"
+    digitised: false
+    unit: "ug/kg"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "7F-SU (RSD 14.9 %)"
+        lever_value: "unroasted"
+        value: 1132
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: null
+          time_min: null
+          precursors: {}
+          buffer: "none"
+          matrix: "other (cocoa beans, SU, 7-day fermented, unroasted)"
+          headspace: "unstated"
+      - label: "7F-R-SU (RSD 8.5 %)"
+        lever_value: "roasted"
+        value: 5718
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 115
+          time_min: null
+          precursors: {}
+          buffer: "none"
+          matrix: "other (cocoa beans, SU, 7-day fermented, roasted)"
+          headspace: "unstated"
+  - id: "granvogl2006-11"
+    odorant: "2-methylbutanal"
+    lever_class: "matrix"
+    lever: "fermentation: unfermented vs 7-day fermented cocoa beans, unroasted, SU"
+    focal: true
+    location: "Table 4"
+    digitised: false
+    unit: "ug/kg"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "UF-SU (RSD 29.9 %)"
+        lever_value: "unfermented"
+        value: 109
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: null
+          time_min: null
+          precursors: {}
+          buffer: "none"
+          matrix: "other (cocoa beans, SU, unfermented, unroasted)"
+          headspace: "unstated"
+      - label: "7F-SU (RSD 14.9 %)"
+        lever_value: "7-day fermented"
+        value: 1132
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: null
+          time_min: null
+          precursors: {}
+          buffer: "none"
+          matrix: "other (cocoa beans, SU, 7-day fermented, unroasted)"
+          headspace: "unstated"
+  - id: "granvogl2006-12"
+    odorant: "2-methylbutanal"
+    lever_class: "matrix"
+    lever: "fermentation: unfermented vs 7-day fermented cocoa beans, roasted, SU"
+    focal: true
+    location: "Table 4"
+    digitised: false
+    unit: "ug/kg"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "UF-R-SU (RSD 7.0 %)"
+        lever_value: "unfermented"
+        value: 665
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 115
+          time_min: null
+          precursors: {}
+          buffer: "none"
+          matrix: "other (cocoa beans, SU, unfermented, roasted)"
+          headspace: "unstated"
+      - label: "7F-R-SU (RSD 8.5 %)"
+        lever_value: "7-day fermented"
+        value: 5718
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 115
+          time_min: null
+          precursors: {}
+          buffer: "none"
+          matrix: "other (cocoa beans, SU, 7-day fermented, roasted)"
+          headspace: "unstated"
+  - id: "granvogl2006-13"
+    odorant: "2-methylbutanal"
+    lever_class: "temperature"
+    lever: "roasting: unroasted vs roasted (15 min 95 C, then to 115 C at 1 C/min), unfermented beans, GH"
+    focal: true
+    location: "Table 4"
+    digitised: false
+    unit: "ug/kg"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "UF-GH (RSD 6.7 %)"
+        lever_value: "unroasted"
+        value: 143
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: null
+          time_min: null
+          precursors: {}
+          buffer: "none"
+          matrix: "other (cocoa beans, GH, unfermented, unroasted)"
+          headspace: "unstated"
+      - label: "UF-R-GH (RSD 24.0 %)"
+        lever_value: "roasted"
+        value: 504
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 115
+          time_min: null
+          precursors: {}
+          buffer: "none"
+          matrix: "other (cocoa beans, GH, unfermented, roasted)"
+          headspace: "unstated"
+  - id: "granvogl2006-14"
+    odorant: "2-methylbutanal"
+    lever_class: "temperature"
+    lever: "roasting: unroasted vs roasted (15 min 95 C, then to 115 C at 1 C/min), 7-day fermented beans, GH"
+    focal: true
+    location: "Table 4"
+    digitised: false
+    unit: "ug/kg"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "7F-GH (RSD 4.3 %)"
+        lever_value: "unroasted"
+        value: 2075
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: null
+          time_min: null
+          precursors: {}
+          buffer: "none"
+          matrix: "other (cocoa beans, GH, 7-day fermented, unroasted)"
+          headspace: "unstated"
+      - label: "7F-R-GH (RSD 1.2 %)"
+        lever_value: "roasted"
+        value: 3791
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 115
+          time_min: null
+          precursors: {}
+          buffer: "none"
+          matrix: "other (cocoa beans, GH, 7-day fermented, roasted)"
+          headspace: "unstated"
+  - id: "granvogl2006-15"
+    odorant: "2-methylbutanal"
+    lever_class: "matrix"
+    lever: "fermentation: unfermented vs 7-day fermented cocoa beans, unroasted, GH"
+    focal: true
+    location: "Table 4"
+    digitised: false
+    unit: "ug/kg"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "UF-GH (RSD 6.7 %)"
+        lever_value: "unfermented"
+        value: 143
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: null
+          time_min: null
+          precursors: {}
+          buffer: "none"
+          matrix: "other (cocoa beans, GH, unfermented, unroasted)"
+          headspace: "unstated"
+      - label: "7F-GH (RSD 4.3 %)"
+        lever_value: "7-day fermented"
+        value: 2075
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: null
+          time_min: null
+          precursors: {}
+          buffer: "none"
+          matrix: "other (cocoa beans, GH, 7-day fermented, unroasted)"
+          headspace: "unstated"
+  - id: "granvogl2006-16"
+    odorant: "2-methylbutanal"
+    lever_class: "matrix"
+    lever: "fermentation: unfermented vs 7-day fermented cocoa beans, roasted, GH"
+    focal: true
+    location: "Table 4"
+    digitised: false
+    unit: "ug/kg"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "UF-R-GH (RSD 24.0 %)"
+        lever_value: "unfermented"
+        value: 504
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 115
+          time_min: null
+          precursors: {}
+          buffer: "none"
+          matrix: "other (cocoa beans, GH, unfermented, roasted)"
+          headspace: "unstated"
+      - label: "7F-R-GH (RSD 1.2 %)"
+        lever_value: "7-day fermented"
+        value: 3791
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 115
+          time_min: null
+          precursors: {}
+          buffer: "none"
+          matrix: "other (cocoa beans, GH, 7-day fermented, roasted)"
+          headspace: "unstated"
+  - id: "granvogl2006-17"
+    odorant: "phenylacetaldehyde"
+    lever_class: "temperature"
+    lever: "roasting: unroasted vs roasted (15 min 95 C, then to 115 C at 1 C/min), unfermented beans, SU"
+    focal: true
+    location: "Table 4"
+    digitised: false
+    unit: "ug/kg"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "UF-SU (RSD 2.4 %)"
+        lever_value: "unroasted"
+        value: 42
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: null
+          time_min: null
+          precursors: {}
+          buffer: "none"
+          matrix: "other (cocoa beans, SU, unfermented, unroasted)"
+          headspace: "unstated"
+      - label: "UF-R-SU (RSD 0.5 %)"
+        lever_value: "roasted"
+        value: 43
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 115
+          time_min: null
+          precursors: {}
+          buffer: "none"
+          matrix: "other (cocoa beans, SU, unfermented, roasted)"
+          headspace: "unstated"
+  - id: "granvogl2006-18"
+    odorant: "phenylacetaldehyde"
+    lever_class: "temperature"
+    lever: "roasting: unroasted vs roasted (15 min 95 C, then to 115 C at 1 C/min), 7-day fermented beans, SU"
+    focal: true
+    location: "Table 4"
+    digitised: false
+    unit: "ug/kg"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "7F-SU (RSD 1.2 %)"
+        lever_value: "unroasted"
+        value: 73
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: null
+          time_min: null
+          precursors: {}
+          buffer: "none"
+          matrix: "other (cocoa beans, SU, 7-day fermented, unroasted)"
+          headspace: "unstated"
+      - label: "7F-R-SU (RSD 6.3 %)"
+        lever_value: "roasted"
+        value: 63
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 115
+          time_min: null
+          precursors: {}
+          buffer: "none"
+          matrix: "other (cocoa beans, SU, 7-day fermented, roasted)"
+          headspace: "unstated"
+  - id: "granvogl2006-19"
+    odorant: "phenylacetaldehyde"
+    lever_class: "matrix"
+    lever: "fermentation: unfermented vs 7-day fermented cocoa beans, unroasted, SU"
+    focal: true
+    location: "Table 4"
+    digitised: false
+    unit: "ug/kg"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "UF-SU (RSD 2.4 %)"
+        lever_value: "unfermented"
+        value: 42
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: null
+          time_min: null
+          precursors: {}
+          buffer: "none"
+          matrix: "other (cocoa beans, SU, unfermented, unroasted)"
+          headspace: "unstated"
+      - label: "7F-SU (RSD 1.2 %)"
+        lever_value: "7-day fermented"
+        value: 73
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: null
+          time_min: null
+          precursors: {}
+          buffer: "none"
+          matrix: "other (cocoa beans, SU, 7-day fermented, unroasted)"
+          headspace: "unstated"
+  - id: "granvogl2006-20"
+    odorant: "phenylacetaldehyde"
+    lever_class: "matrix"
+    lever: "fermentation: unfermented vs 7-day fermented cocoa beans, roasted, SU"
+    focal: true
+    location: "Table 4"
+    digitised: false
+    unit: "ug/kg"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "UF-R-SU (RSD 0.5 %)"
+        lever_value: "unfermented"
+        value: 43
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 115
+          time_min: null
+          precursors: {}
+          buffer: "none"
+          matrix: "other (cocoa beans, SU, unfermented, roasted)"
+          headspace: "unstated"
+      - label: "7F-R-SU (RSD 6.3 %)"
+        lever_value: "7-day fermented"
+        value: 63
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 115
+          time_min: null
+          precursors: {}
+          buffer: "none"
+          matrix: "other (cocoa beans, SU, 7-day fermented, roasted)"
+          headspace: "unstated"
+  - id: "granvogl2006-21"
+    odorant: "phenylacetaldehyde"
+    lever_class: "temperature"
+    lever: "roasting: unroasted vs roasted (15 min 95 C, then to 115 C at 1 C/min), unfermented beans, GH"
+    focal: true
+    location: "Table 4"
+    digitised: false
+    unit: "ug/kg"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "UF-GH (RSD 2.2 %)"
+        lever_value: "unroasted"
+        value: 16
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: null
+          time_min: null
+          precursors: {}
+          buffer: "none"
+          matrix: "other (cocoa beans, GH, unfermented, unroasted)"
+          headspace: "unstated"
+      - label: "UF-R-GH (RSD 1.2 %)"
+        lever_value: "roasted"
+        value: 91
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 115
+          time_min: null
+          precursors: {}
+          buffer: "none"
+          matrix: "other (cocoa beans, GH, unfermented, roasted)"
+          headspace: "unstated"
+  - id: "granvogl2006-22"
+    odorant: "phenylacetaldehyde"
+    lever_class: "temperature"
+    lever: "roasting: unroasted vs roasted (15 min 95 C, then to 115 C at 1 C/min), 7-day fermented beans, GH"
+    focal: true
+    location: "Table 4"
+    digitised: false
+    unit: "ug/kg"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "7F-GH (RSD 1.7 %)"
+        lever_value: "unroasted"
+        value: 34
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: null
+          time_min: null
+          precursors: {}
+          buffer: "none"
+          matrix: "other (cocoa beans, GH, 7-day fermented, unroasted)"
+          headspace: "unstated"
+      - label: "7F-R-GH (RSD 1.5 %)"
+        lever_value: "roasted"
+        value: 202
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 115
+          time_min: null
+          precursors: {}
+          buffer: "none"
+          matrix: "other (cocoa beans, GH, 7-day fermented, roasted)"
+          headspace: "unstated"
+  - id: "granvogl2006-23"
+    odorant: "phenylacetaldehyde"
+    lever_class: "matrix"
+    lever: "fermentation: unfermented vs 7-day fermented cocoa beans, unroasted, GH"
+    focal: true
+    location: "Table 4"
+    digitised: false
+    unit: "ug/kg"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "UF-GH (RSD 2.2 %)"
+        lever_value: "unfermented"
+        value: 16
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: null
+          time_min: null
+          precursors: {}
+          buffer: "none"
+          matrix: "other (cocoa beans, GH, unfermented, unroasted)"
+          headspace: "unstated"
+      - label: "7F-GH (RSD 1.7 %)"
+        lever_value: "7-day fermented"
+        value: 34
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: null
+          time_min: null
+          precursors: {}
+          buffer: "none"
+          matrix: "other (cocoa beans, GH, 7-day fermented, unroasted)"
+          headspace: "unstated"
+  - id: "granvogl2006-24"
+    odorant: "phenylacetaldehyde"
+    lever_class: "matrix"
+    lever: "fermentation: unfermented vs 7-day fermented cocoa beans, roasted, GH"
+    focal: true
+    location: "Table 4"
+    digitised: false
+    unit: "ug/kg"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "UF-R-GH (RSD 1.2 %)"
+        lever_value: "unfermented"
+        value: 91
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 115
+          time_min: null
+          precursors: {}
+          buffer: "none"
+          matrix: "other (cocoa beans, GH, unfermented, roasted)"
+          headspace: "unstated"
+      - label: "7F-R-GH (RSD 1.5 %)"
+        lever_value: "7-day fermented"
+        value: 202
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 115
+          time_min: null
+          precursors: {}
+          buffer: "none"
+          matrix: "other (cocoa beans, GH, 7-day fermented, roasted)"
+          headspace: "unstated"
+  - id: "granvogl2006-25"
+    odorant: "3-methylbutanal"
+    lever_class: "time"
+    lever: "reaction time, model A (low water)"
+    focal: false
+    location: "Table 6"
+    digitised: false
+    unit: "mmol/mol"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "2.5 min (RSD 10.2 %)"
+        lever_value: 2.5
+        value: 27.7
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 170
+          time_min: 2.5
+          precursors: {"L-leucine": "50 umol", "2-oxopropanal": "50 umol", "silica gel": "3 g (10 % water)"}
+          buffer: "none"
+          matrix: "other (silica gel, 10 % water)"
+          headspace: "sealed, unstated"
+      - label: "5 min (RSD 14.1 %)"
+        lever_value: 5
+        value: 36.8
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 170
+          time_min: 5
+          precursors: {"L-leucine": "50 umol", "2-oxopropanal": "50 umol", "silica gel": "3 g (10 % water)"}
+          buffer: "none"
+          matrix: "other (silica gel, 10 % water)"
+          headspace: "sealed, unstated"
+      - label: "10 min (RSD 12.4 %)"
+        lever_value: 10
+        value: 57.6
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 170
+          time_min: 10
+          precursors: {"L-leucine": "50 umol", "2-oxopropanal": "50 umol", "silica gel": "3 g (10 % water)"}
+          buffer: "none"
+          matrix: "other (silica gel, 10 % water)"
+          headspace: "sealed, unstated"
+      - label: "20 min (RSD 6.5 %)"
+        lever_value: 20
+        value: 149.4
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 170
+          time_min: 20
+          precursors: {"L-leucine": "50 umol", "2-oxopropanal": "50 umol", "silica gel": "3 g (10 % water)"}
+          buffer: "none"
+          matrix: "other (silica gel, 10 % water)"
+          headspace: "sealed, unstated"
+      - label: "30 min (RSD 4.5 %)"
+        lever_value: 30
+        value: 178.8
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 170
+          time_min: 30
+          precursors: {"L-leucine": "50 umol", "2-oxopropanal": "50 umol", "silica gel": "3 g (10 % water)"}
+          buffer: "none"
+          matrix: "other (silica gel, 10 % water)"
+          headspace: "sealed, unstated"
+  - id: "granvogl2006-26"
+    odorant: "3-methylbutanal"
+    lever_class: "time"
+    lever: "reaction time, model B (aqueous)"
+    focal: false
+    location: "Table 6"
+    digitised: false
+    unit: "mmol/mol"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "2.5 min (RSD 22.5 %)"
+        lever_value: 2.5
+        value: 18.0
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 170
+          time_min: 2.5
+          precursors: {"L-leucine": "50 umol", "2-oxopropanal": "50 umol", "volume": "10 mL"}
+          buffer: "phosphate 0.1 mol/L"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "5 min (RSD 2.2 %)"
+        lever_value: 5
+        value: 28.5
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 170
+          time_min: 5
+          precursors: {"L-leucine": "50 umol", "2-oxopropanal": "50 umol", "volume": "10 mL"}
+          buffer: "phosphate 0.1 mol/L"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "10 min (RSD 10.7 %)"
+        lever_value: 10
+        value: 48.7
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 170
+          time_min: 10
+          precursors: {"L-leucine": "50 umol", "2-oxopropanal": "50 umol", "volume": "10 mL"}
+          buffer: "phosphate 0.1 mol/L"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "20 min (RSD 2.6 %)"
+        lever_value: 20
+        value: 64.6
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 170
+          time_min: 20
+          precursors: {"L-leucine": "50 umol", "2-oxopropanal": "50 umol", "volume": "10 mL"}
+          buffer: "phosphate 0.1 mol/L"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "30 min (RSD 3.3 %)"
+        lever_value: 30
+        value: 84.6
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 170
+          time_min: 30
+          precursors: {"L-leucine": "50 umol", "2-oxopropanal": "50 umol", "volume": "10 mL"}
+          buffer: "phosphate 0.1 mol/L"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+  - id: "granvogl2006-27"
+    odorant: "2-methylbutanal"
+    lever_class: "time"
+    lever: "reaction time, model A (low water)"
+    focal: false
+    location: "Table 7"
+    digitised: false
+    unit: "mmol/mol"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "2.5 min (RSD 15.2 %)"
+        lever_value: 2.5
+        value: 67.8
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 170
+          time_min: 2.5
+          precursors: {"L-isoleucine": "50 umol", "2-oxopropanal": "50 umol", "silica gel": "3 g (10 % water)"}
+          buffer: "none"
+          matrix: "other (silica gel, 10 % water)"
+          headspace: "sealed, unstated"
+      - label: "5 min (RSD 12.2 %)"
+        lever_value: 5
+        value: 78.0
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 170
+          time_min: 5
+          precursors: {"L-isoleucine": "50 umol", "2-oxopropanal": "50 umol", "silica gel": "3 g (10 % water)"}
+          buffer: "none"
+          matrix: "other (silica gel, 10 % water)"
+          headspace: "sealed, unstated"
+      - label: "10 min (RSD 14.1 %)"
+        lever_value: 10
+        value: 142.5
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 170
+          time_min: 10
+          precursors: {"L-isoleucine": "50 umol", "2-oxopropanal": "50 umol", "silica gel": "3 g (10 % water)"}
+          buffer: "none"
+          matrix: "other (silica gel, 10 % water)"
+          headspace: "sealed, unstated"
+      - label: "20 min (RSD 2.4 %)"
+        lever_value: 20
+        value: 294.9
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 170
+          time_min: 20
+          precursors: {"L-isoleucine": "50 umol", "2-oxopropanal": "50 umol", "silica gel": "3 g (10 % water)"}
+          buffer: "none"
+          matrix: "other (silica gel, 10 % water)"
+          headspace: "sealed, unstated"
+      - label: "30 min (RSD 4.1 %)"
+        lever_value: 30
+        value: 402.0
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 170
+          time_min: 30
+          precursors: {"L-isoleucine": "50 umol", "2-oxopropanal": "50 umol", "silica gel": "3 g (10 % water)"}
+          buffer: "none"
+          matrix: "other (silica gel, 10 % water)"
+          headspace: "sealed, unstated"
+  - id: "granvogl2006-28"
+    odorant: "2-methylbutanal"
+    lever_class: "time"
+    lever: "reaction time, model B (aqueous)"
+    focal: false
+    location: "Table 7"
+    digitised: false
+    unit: "mmol/mol"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "2.5 min (RSD 12.7 %)"
+        lever_value: 2.5
+        value: 31.8
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 170
+          time_min: 2.5
+          precursors: {"L-isoleucine": "50 umol", "2-oxopropanal": "50 umol", "volume": "10 mL"}
+          buffer: "phosphate 0.1 mol/L"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "5 min (RSD 9.6 %)"
+        lever_value: 5
+        value: 41.2
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 170
+          time_min: 5
+          precursors: {"L-isoleucine": "50 umol", "2-oxopropanal": "50 umol", "volume": "10 mL"}
+          buffer: "phosphate 0.1 mol/L"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "10 min (RSD 19.9 %)"
+        lever_value: 10
+        value: 68.5
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 170
+          time_min: 10
+          precursors: {"L-isoleucine": "50 umol", "2-oxopropanal": "50 umol", "volume": "10 mL"}
+          buffer: "phosphate 0.1 mol/L"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "20 min (RSD 3.1 %)"
+        lever_value: 20
+        value: 117.6
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 170
+          time_min: 20
+          precursors: {"L-isoleucine": "50 umol", "2-oxopropanal": "50 umol", "volume": "10 mL"}
+          buffer: "phosphate 0.1 mol/L"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "30 min (RSD 11.2 %)"
+        lever_value: 30
+        value: 122.1
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 170
+          time_min: 30
+          precursors: {"L-isoleucine": "50 umol", "2-oxopropanal": "50 umol", "volume": "10 mL"}
+          buffer: "phosphate 0.1 mol/L"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+  - id: "granvogl2006-29"
+    odorant: "phenylacetaldehyde"
+    lever_class: "time"
+    lever: "reaction time, model A (low water)"
+    focal: false
+    location: "Table 8"
+    digitised: false
+    unit: "mmol/mol"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "2.5 min (RSD 13.4 %)"
+        lever_value: 2.5
+        value: 19.4
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 170
+          time_min: 2.5
+          precursors: {"L-phenylalanine": "50 umol", "2-oxopropanal": "50 umol", "silica gel": "3 g (10 % water)"}
+          buffer: "none"
+          matrix: "other (silica gel, 10 % water)"
+          headspace: "sealed, unstated"
+      - label: "5 min (RSD 0.5 %)"
+        lever_value: 5
+        value: 23.2
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 170
+          time_min: 5
+          precursors: {"L-phenylalanine": "50 umol", "2-oxopropanal": "50 umol", "silica gel": "3 g (10 % water)"}
+          buffer: "none"
+          matrix: "other (silica gel, 10 % water)"
+          headspace: "sealed, unstated"
+      - label: "10 min (RSD 2.7 %)"
+        lever_value: 10
+        value: 28.4
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 170
+          time_min: 10
+          precursors: {"L-phenylalanine": "50 umol", "2-oxopropanal": "50 umol", "silica gel": "3 g (10 % water)"}
+          buffer: "none"
+          matrix: "other (silica gel, 10 % water)"
+          headspace: "sealed, unstated"
+      - label: "20 min (RSD 3.5 %)"
+        lever_value: 20
+        value: 26.4
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 170
+          time_min: 20
+          precursors: {"L-phenylalanine": "50 umol", "2-oxopropanal": "50 umol", "silica gel": "3 g (10 % water)"}
+          buffer: "none"
+          matrix: "other (silica gel, 10 % water)"
+          headspace: "sealed, unstated"
+      - label: "30 min (RSD 8.8 %)"
+        lever_value: 30
+        value: 26.2
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 170
+          time_min: 30
+          precursors: {"L-phenylalanine": "50 umol", "2-oxopropanal": "50 umol", "silica gel": "3 g (10 % water)"}
+          buffer: "none"
+          matrix: "other (silica gel, 10 % water)"
+          headspace: "sealed, unstated"
+  - id: "granvogl2006-30"
+    odorant: "phenylacetaldehyde"
+    lever_class: "time"
+    lever: "reaction time, model B (aqueous)"
+    focal: false
+    location: "Table 8"
+    digitised: false
+    unit: "mmol/mol"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "2.5 min (RSD 4.7 %)"
+        lever_value: 2.5
+        value: 9.0
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 170
+          time_min: 2.5
+          precursors: {"L-phenylalanine": "50 umol", "2-oxopropanal": "50 umol", "volume": "10 mL"}
+          buffer: "phosphate 0.1 mol/L"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "5 min (RSD 5.4 %)"
+        lever_value: 5
+        value: 22.8
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 170
+          time_min: 5
+          precursors: {"L-phenylalanine": "50 umol", "2-oxopropanal": "50 umol", "volume": "10 mL"}
+          buffer: "phosphate 0.1 mol/L"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "10 min (RSD 1.7 %)"
+        lever_value: 10
+        value: 43.6
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 170
+          time_min: 10
+          precursors: {"L-phenylalanine": "50 umol", "2-oxopropanal": "50 umol", "volume": "10 mL"}
+          buffer: "phosphate 0.1 mol/L"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "20 min (RSD 5.9 %)"
+        lever_value: 20
+        value: 63.0
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 170
+          time_min: 20
+          precursors: {"L-phenylalanine": "50 umol", "2-oxopropanal": "50 umol", "volume": "10 mL"}
+          buffer: "phosphate 0.1 mol/L"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "30 min (RSD 3.2 %)"
+        lever_value: 30
+        value: 72.8
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 170
+          time_min: 30
+          precursors: {"L-phenylalanine": "50 umol", "2-oxopropanal": "50 umol", "volume": "10 mL"}
+          buffer: "phosphate 0.1 mol/L"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+  - id: "granvogl2006-31"
+    odorant: "3-(methylthio)propanal"
+    lever_class: "time"
+    lever: "reaction time, model A (low water)"
+    focal: false
+    location: "Table 9"
+    digitised: false
+    unit: "mmol/mol"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "2.5 min (RSD 5.4 %)"
+        lever_value: 2.5
+        value: 15.7
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 170
+          time_min: 2.5
+          precursors: {"L-methionine": "50 umol", "2-oxopropanal": "50 umol", "silica gel": "3 g (10 % water)"}
+          buffer: "none"
+          matrix: "other (silica gel, 10 % water)"
+          headspace: "sealed, unstated"
+      - label: "5 min (RSD 13.4 %)"
+        lever_value: 5
+        value: 21.6
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 170
+          time_min: 5
+          precursors: {"L-methionine": "50 umol", "2-oxopropanal": "50 umol", "silica gel": "3 g (10 % water)"}
+          buffer: "none"
+          matrix: "other (silica gel, 10 % water)"
+          headspace: "sealed, unstated"
+      - label: "10 min (RSD 10.7 %)"
+        lever_value: 10
+        value: 33.3
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 170
+          time_min: 10
+          precursors: {"L-methionine": "50 umol", "2-oxopropanal": "50 umol", "silica gel": "3 g (10 % water)"}
+          buffer: "none"
+          matrix: "other (silica gel, 10 % water)"
+          headspace: "sealed, unstated"
+      - label: "20 min (RSD 8.7 %)"
+        lever_value: 20
+        value: 19.6
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 170
+          time_min: 20
+          precursors: {"L-methionine": "50 umol", "2-oxopropanal": "50 umol", "silica gel": "3 g (10 % water)"}
+          buffer: "none"
+          matrix: "other (silica gel, 10 % water)"
+          headspace: "sealed, unstated"
+      - label: "30 min (RSD 15.4 %)"
+        lever_value: 30
+        value: 12.6
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 170
+          time_min: 30
+          precursors: {"L-methionine": "50 umol", "2-oxopropanal": "50 umol", "silica gel": "3 g (10 % water)"}
+          buffer: "none"
+          matrix: "other (silica gel, 10 % water)"
+          headspace: "sealed, unstated"
+  - id: "granvogl2006-32"
+    odorant: "3-(methylthio)propanal"
+    lever_class: "time"
+    lever: "reaction time, model B (aqueous)"
+    focal: false
+    location: "Table 9"
+    digitised: false
+    unit: "mmol/mol"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "2.5 min (RSD 23.2 %)"
+        lever_value: 2.5
+        value: 9.1
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 170
+          time_min: 2.5
+          precursors: {"L-methionine": "50 umol", "2-oxopropanal": "50 umol", "volume": "10 mL"}
+          buffer: "phosphate 0.1 mol/L"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "5 min (RSD 3.1 %)"
+        lever_value: 5
+        value: 15.3
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 170
+          time_min: 5
+          precursors: {"L-methionine": "50 umol", "2-oxopropanal": "50 umol", "volume": "10 mL"}
+          buffer: "phosphate 0.1 mol/L"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "10 min (RSD 1.0 %)"
+        lever_value: 10
+        value: 19.3
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 170
+          time_min: 10
+          precursors: {"L-methionine": "50 umol", "2-oxopropanal": "50 umol", "volume": "10 mL"}
+          buffer: "phosphate 0.1 mol/L"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "20 min (RSD 9.9 %)"
+        lever_value: 20
+        value: 25.3
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 170
+          time_min: 20
+          precursors: {"L-methionine": "50 umol", "2-oxopropanal": "50 umol", "volume": "10 mL"}
+          buffer: "phosphate 0.1 mol/L"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+      - label: "30 min (RSD 2.1 %)"
+        lever_value: 30
+        value: 22.5
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 170
+          time_min: 30
+          precursors: {"L-methionine": "50 umol", "2-oxopropanal": "50 umol", "volume": "10 mL"}
+          buffer: "phosphate 0.1 mol/L"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+  - id: "granvogl2006-33"
+    odorant: "3-methylbutanal"
+    lever_class: "mixed"
+    lever: "model A (silica gel, 10 % water) vs model B (phosphate buffer 0.1 mol/L pH 7.0): water and buffer"
+    focal: false
+    location: "Table 6"
+    digitised: false
+    unit: "mmol/mol"
+    quant_type: "absolute"
+    time_course_rule: "longest time"
+    quantity: "amount"
+    arms:
+      - label: "model A 30 min (RSD 4.5 %)"
+        lever_value: "low water (silica gel)"
+        value: 178.8
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 170
+          time_min: 30
+          precursors: {"L-leucine": "50 umol", "2-oxopropanal": "50 umol", "silica gel": "3 g (10 % water)"}
+          buffer: "none"
+          matrix: "other (silica gel, 10 % water)"
+          headspace: "sealed, unstated"
+      - label: "model B 30 min (RSD 3.3 %)"
+        lever_value: "aqueous phosphate buffer"
+        value: 84.6
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 170
+          time_min: 30
+          precursors: {"L-leucine": "50 umol", "2-oxopropanal": "50 umol", "volume": "10 mL"}
+          buffer: "phosphate 0.1 mol/L"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+  - id: "granvogl2006-34"
+    odorant: "2-methylbutanal"
+    lever_class: "mixed"
+    lever: "model A (silica gel, 10 % water) vs model B (phosphate buffer 0.1 mol/L pH 7.0): water and buffer"
+    focal: false
+    location: "Table 7"
+    digitised: false
+    unit: "mmol/mol"
+    quant_type: "absolute"
+    time_course_rule: "longest time"
+    quantity: "amount"
+    arms:
+      - label: "model A 30 min (RSD 4.1 %)"
+        lever_value: "low water (silica gel)"
+        value: 402.0
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 170
+          time_min: 30
+          precursors: {"L-isoleucine": "50 umol", "2-oxopropanal": "50 umol", "silica gel": "3 g (10 % water)"}
+          buffer: "none"
+          matrix: "other (silica gel, 10 % water)"
+          headspace: "sealed, unstated"
+      - label: "model B 30 min (RSD 11.2 %)"
+        lever_value: "aqueous phosphate buffer"
+        value: 122.1
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 170
+          time_min: 30
+          precursors: {"L-isoleucine": "50 umol", "2-oxopropanal": "50 umol", "volume": "10 mL"}
+          buffer: "phosphate 0.1 mol/L"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+  - id: "granvogl2006-35"
+    odorant: "phenylacetaldehyde"
+    lever_class: "mixed"
+    lever: "model A (silica gel, 10 % water) vs model B (phosphate buffer 0.1 mol/L pH 7.0): water and buffer"
+    focal: false
+    location: "Table 8"
+    digitised: false
+    unit: "mmol/mol"
+    quant_type: "absolute"
+    time_course_rule: "longest time"
+    quantity: "amount"
+    arms:
+      - label: "model A 30 min (RSD 8.8 %)"
+        lever_value: "low water (silica gel)"
+        value: 26.2
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 170
+          time_min: 30
+          precursors: {"L-phenylalanine": "50 umol", "2-oxopropanal": "50 umol", "silica gel": "3 g (10 % water)"}
+          buffer: "none"
+          matrix: "other (silica gel, 10 % water)"
+          headspace: "sealed, unstated"
+      - label: "model B 30 min (RSD 3.2 %)"
+        lever_value: "aqueous phosphate buffer"
+        value: 72.8
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 170
+          time_min: 30
+          precursors: {"L-phenylalanine": "50 umol", "2-oxopropanal": "50 umol", "volume": "10 mL"}
+          buffer: "phosphate 0.1 mol/L"
+          matrix: "buffer"
+          headspace: "sealed, unstated"
+  - id: "granvogl2006-36"
+    odorant: "3-(methylthio)propanal"
+    lever_class: "mixed"
+    lever: "model A (silica gel, 10 % water) vs model B (phosphate buffer 0.1 mol/L pH 7.0): water and buffer"
+    focal: false
+    location: "Table 9"
+    digitised: false
+    unit: "mmol/mol"
+    quant_type: "absolute"
+    time_course_rule: "longest time"
+    quantity: "amount"
+    arms:
+      - label: "model A 30 min (RSD 15.4 %)"
+        lever_value: "low water (silica gel)"
+        value: 12.6
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 170
+          time_min: 30
+          precursors: {"L-methionine": "50 umol", "2-oxopropanal": "50 umol", "silica gel": "3 g (10 % water)"}
+          buffer: "none"
+          matrix: "other (silica gel, 10 % water)"
+          headspace: "sealed, unstated"
+      - label: "model B 30 min (RSD 2.1 %)"
+        lever_value: "aqueous phosphate buffer"
+        value: 22.5
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: 170
+          time_min: 30
+          precursors: {"L-methionine": "50 umol", "2-oxopropanal": "50 umol", "volume": "10 mL"}
+          buffer: "phosphate 0.1 mol/L"
+          matrix: "buffer"
+          headspace: "sealed, unstated"

@@ -263,6 +263,16 @@ compounds:
   - panel:key
   - species:desirable_targets.yml
   identity_source: data/species/desirable_targets.yml
+- id: 2_ethyl_3_6_dimethylpyrazine
+  display_name: 2-Ethyl-3,6-dimethylpyrazine
+  kind: molecule
+  smiles: CCc1nc(C)cnc1C
+  inchikey: WHMWOHBXYIZFPF-UHFFFAOYSA-N
+  canonical_smiles: CCc1nc(C)cnc1C
+  aliases:
+  - 3-ethyl-2,5-dimethylpyrazine
+  seen_in: []
+  identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
 - id: 2_ethylpyrazine
   display_name: 2-Ethylpyrazine
   kind: molecule
@@ -270,7 +280,8 @@ compounds:
   inchikey: KVFIJIWMDBAGDP-UHFFFAOYSA-N
   canonical_smiles: CCc1cnccn1
   class: pyrazines
-  aliases: []
+  aliases:
+  - ethylpyrazine
   seen_in: []
   identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
 - id: 2_furanmethanol
@@ -798,6 +809,18 @@ compounds:
   - henry_constants
   - species:desirable_targets.yml
   identity_source: data/species/desirable_targets.yml
+- id: e_2_nonenal
+  display_name: (E)-2-Nonenal
+  kind: molecule
+  smiles: CCCCCC/C=C/C=O
+  inchikey: BSAIUMLZVGUGKX-BQYQJAHWSA-N
+  canonical_smiles: CCCCCC/C=C/C=O
+  aliases:
+  - (e)-non-2-enal
+  - 2-nonenal
+  - trans-2-nonenal
+  seen_in: []
+  identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
 - id: e_2_octenal
   display_name: (E)-2-Octenal
   kind: molecule
@@ -1241,6 +1264,26 @@ compounds:
   seen_in:
   - benchmarks:measured_volatiles
   identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
+- id: octanal
+  display_name: Octanal
+  kind: molecule
+  smiles: CCCCCCCC=O
+  inchikey: NUJGJRNETVAIRJ-UHFFFAOYSA-N
+  canonical_smiles: CCCCCCCC=O
+  aliases:
+  - caprylaldehyde
+  seen_in: []
+  identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
+- id: pentanal
+  display_name: Pentanal
+  kind: molecule
+  smiles: CCCCC=O
+  inchikey: HGBOYTHUEUWSSQ-UHFFFAOYSA-N
+  canonical_smiles: CCCCC=O
+  aliases:
+  - valeraldehyde
+  seen_in: []
+  identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
 - id: phenylacetaldehyde
   display_name: Phenylacetaldehyde
   kind: molecule
@@ -1256,6 +1299,16 @@ compounds:
   - henry_constants
   - species:desirable_targets.yml
   identity_source: data/species/desirable_targets.yml
+- id: phenylacetic_acid
+  display_name: Phenylacetic acid
+  kind: molecule
+  smiles: OC(=O)Cc1ccccc1
+  inchikey: WLJVXDMOQOGPHL-UHFFFAOYSA-N
+  canonical_smiles: O=C(O)Cc1ccccc1
+  aliases:
+  - benzeneacetic acid
+  seen_in: []
+  identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
 - id: phip
   display_name: 2-Amino-1-methyl-6-phenylimidazo[4,5-b]pyridine (PhIP)
   kind: molecule
@@ -1271,6 +1324,16 @@ compounds:
   - safety:analyte
   - species:toxic_markers.yml
   identity_source: data/species/toxic_markers.yml
+- id: pyrazine_unsubstituted
+  display_name: Unsubstituted pyrazine
+  kind: molecule
+  smiles: c1cnccn1
+  inchikey: KYQCOXFCLRTKLS-UHFFFAOYSA-N
+  canonical_smiles: c1cnccn1
+  aliases:
+  - 1,4-diazine
+  seen_in: []
+  identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
 - id: ribose
   display_name: D-Ribose
   kind: molecule

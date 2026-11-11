@@ -1,0 +1,7 @@
+# Reader a, families round (Strecker aldehydes, pyrazines, lipid-derived, furanones/furans).
+source: hidalgo1993
+pdf: data/articles/hidalgo1993.pdf
+reader: a
+scope_note: 'No odorant measured: the paper reports colour (CIELAB, yellowness) and fluorescence of an epoxyheptenal/lysine
+  system only; no qualifying contrast.'
+contrasts: []

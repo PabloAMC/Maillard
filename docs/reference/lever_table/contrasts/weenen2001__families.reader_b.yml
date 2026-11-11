@@ -1,0 +1,725 @@
+source: "weenen2001"
+pdf: "data/articles/weenen2001.pdf"
+reader: "b"
+scope_note: "Temperature printed only as reflux (temp_C null); Table II entry 6 printed as 'very small amount' (keyed trace); ACTP not in the odorant list; Table III ARP arms keyed separately because they also differ in amino acid supply; pH 3.2 in tables vs 3.5 in methods, keyed as tables print."
+contrasts:
+  - id: "weenen2001-1"
+    odorant: "phenylacetaldehyde"
+    lever_class: "mixed"
+    lever: "pH and buffer: phosphate pH 7.0 vs citrate pH 3.2, glucose + phenylalanine"
+    focal: false
+    location: "Table II"
+    digitised: false
+    unit: "% yield of phenylacetaldehyde"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "entry 1"
+        lever_value: "pH 7.0 phosphate"
+        value: 0.15
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: null
+          time_min: 120
+          precursors: {"glucose": "unstated (equimolar)", "phenylalanine": "unstated (equimolar)"}
+          buffer: "phosphate 100 mM"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "entry 3"
+        lever_value: "pH 3.2 citrate"
+        value: 0.006
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.2
+          ph_basis: "label"
+          temp_C: null
+          time_min: 120
+          precursors: {"glucose": "unstated (equimolar)", "phenylalanine": "unstated (equimolar)"}
+          buffer: "citrate 50 mM"
+          matrix: "buffer"
+          headspace: "unstated"
+  - id: "weenen2001-2"
+    odorant: "phenylacetaldehyde"
+    lever_class: "mixed"
+    lever: "pH and buffer: phosphate pH 7.0 vs citrate pH 3.2, ARP from glucose and phenylalanine"
+    focal: false
+    location: "Table II"
+    digitised: false
+    unit: "% yield of phenylacetaldehyde"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "entry 2"
+        lever_value: "pH 7.0 phosphate"
+        value: 0.63
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: null
+          time_min: 120
+          precursors: {"ARP from glucose and phenylalanine": "unstated"}
+          buffer: "phosphate 100 mM"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "entry 5"
+        lever_value: "pH 3.2 citrate"
+        value: 1.6
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.2
+          ph_basis: "label"
+          temp_C: null
+          time_min: 120
+          precursors: {"ARP from glucose and phenylalanine": "unstated"}
+          buffer: "citrate 50 mM"
+          matrix: "buffer"
+          headspace: "unstated"
+  - id: "weenen2001-3"
+    odorant: "phenylacetaldehyde"
+    lever_class: "sugar identity"
+    lever: "precursor form: glucose + phenylalanine vs glucose-phenylalanine ARP, pH 7.0"
+    focal: true
+    location: "Table II"
+    digitised: false
+    unit: "% yield of phenylacetaldehyde"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "entry 1"
+        lever_value: "glucose + phenylalanine"
+        value: 0.15
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: null
+          time_min: 120
+          precursors: {"glucose": "unstated (equimolar)", "phenylalanine": "unstated (equimolar)"}
+          buffer: "phosphate 100 mM"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "entry 2"
+        lever_value: "ARP from glucose and phenylalanine"
+        value: 0.63
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: null
+          time_min: 120
+          precursors: {"ARP from glucose and phenylalanine": "unstated"}
+          buffer: "phosphate 100 mM"
+          matrix: "buffer"
+          headspace: "unstated"
+  - id: "weenen2001-4"
+    odorant: "phenylacetaldehyde"
+    lever_class: "sugar identity"
+    lever: "carbonyl co-reactant at pH 3.2: glucose + phenylalanine vs phenylalanine alone vs glucose-phenylalanine ARP"
+    focal: true
+    location: "Table II"
+    digitised: false
+    unit: "% yield of phenylacetaldehyde"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "entry 3"
+        lever_value: "glucose + phenylalanine"
+        value: 0.006
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.2
+          ph_basis: "label"
+          temp_C: null
+          time_min: 120
+          precursors: {"glucose": "unstated (equimolar)", "phenylalanine": "unstated (equimolar)"}
+          buffer: "citrate 50 mM"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "entry 4"
+        lever_value: "phenylalanine alone"
+        value: 0.006
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.2
+          ph_basis: "label"
+          temp_C: null
+          time_min: 120
+          precursors: {"phenylalanine": "unstated"}
+          buffer: "citrate 50 mM"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "entry 5"
+        lever_value: "ARP from glucose and phenylalanine"
+        value: 1.6
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.2
+          ph_basis: "label"
+          temp_C: null
+          time_min: 120
+          precursors: {"ARP from glucose and phenylalanine": "unstated"}
+          buffer: "citrate 50 mM"
+          matrix: "buffer"
+          headspace: "unstated"
+  - id: "weenen2001-5"
+    odorant: "phenylacetaldehyde"
+    lever_class: "matrix"
+    lever: "solvent: aqueous phosphate buffer vs ethanol with phosphate salts, glucose-phenylalanine ARP"
+    focal: false
+    location: "Table II"
+    digitised: false
+    unit: "% yield of phenylacetaldehyde"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "entry 2"
+        lever_value: "aqueous phosphate buffer (100 mM)"
+        value: 0.63
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: null
+          time_min: 120
+          precursors: {"ARP from glucose and phenylalanine": "unstated"}
+          buffer: "phosphate 100 mM"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "entry 6"
+        lever_value: "EtOH, phosphate salts (100 mM)"
+        value: null
+        censor: "trace"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "label"
+          temp_C: null
+          time_min: 120
+          precursors: {"ARP from glucose and phenylalanine": "unstated"}
+          buffer: "phosphate salts 100 mM in EtOH"
+          matrix: "other (ethanol)"
+          headspace: "unstated"
+  - id: "weenen2001-6"
+    odorant: "phenylacetaldehyde"
+    lever_class: "sugar identity"
+    lever: "carbonyl compound reacted with phenylalanine at pH 3.2"
+    focal: true
+    location: "Table III"
+    digitised: false
+    unit: "% yield of phenylacetaldehyde"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "Pyruvaldehyde"
+        lever_value: "Pyruvaldehyde"
+        value: 21.0
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.2
+          ph_basis: "label"
+          temp_C: null
+          time_min: 120
+          precursors: {"Pyruvaldehyde": "~1.3 mmol", "phenylalanine": "equimolar"}
+          buffer: "citrate 50 mM"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "3-deoxyerythrosone"
+        lever_value: "3-deoxyerythrosone"
+        value: 17.2
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.2
+          ph_basis: "label"
+          temp_C: null
+          time_min: 120
+          precursors: {"3-deoxyerythrosone": "~1.3 mmol", "phenylalanine": "equimolar"}
+          buffer: "citrate 50 mM"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "Dihydroxyacetone"
+        lever_value: "Dihydroxyacetone"
+        value: 9.0
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.2
+          ph_basis: "label"
+          temp_C: null
+          time_min: 120
+          precursors: {"Dihydroxyacetone": "~1.3 mmol", "phenylalanine": "equimolar"}
+          buffer: "citrate 50 mM"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "Glyoxal"
+        lever_value: "Glyoxal"
+        value: 8.8
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.2
+          ph_basis: "label"
+          temp_C: null
+          time_min: 120
+          precursors: {"Glyoxal": "~1.3 mmol", "phenylalanine": "equimolar"}
+          buffer: "citrate 50 mM"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "Erythrose"
+        lever_value: "Erythrose"
+        value: 5.7
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.2
+          ph_basis: "label"
+          temp_C: null
+          time_min: 120
+          precursors: {"Erythrose": "~1.3 mmol", "phenylalanine": "equimolar"}
+          buffer: "citrate 50 mM"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "Glyceraldehyde"
+        lever_value: "Glyceraldehyde"
+        value: 3.7
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.2
+          ph_basis: "label"
+          temp_C: null
+          time_min: 120
+          precursors: {"Glyceraldehyde": "~1.3 mmol", "phenylalanine": "equimolar"}
+          buffer: "citrate 50 mM"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "3-deoxyxylosone"
+        lever_value: "3-deoxyxylosone"
+        value: 2.6
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.2
+          ph_basis: "label"
+          temp_C: null
+          time_min: 120
+          precursors: {"3-deoxyxylosone": "~1.3 mmol", "phenylalanine": "equimolar"}
+          buffer: "citrate 50 mM"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "Hydroxyacetone"
+        lever_value: "Hydroxyacetone"
+        value: 1.2
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.2
+          ph_basis: "label"
+          temp_C: null
+          time_min: 120
+          precursors: {"Hydroxyacetone": "~1.3 mmol", "phenylalanine": "equimolar"}
+          buffer: "citrate 50 mM"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "Glycolaldehyde"
+        lever_value: "Glycolaldehyde"
+        value: 0.8
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.2
+          ph_basis: "label"
+          temp_C: null
+          time_min: 120
+          precursors: {"Glycolaldehyde": "~1.3 mmol", "phenylalanine": "equimolar"}
+          buffer: "citrate 50 mM"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "3-deoxyglucosone"
+        lever_value: "3-deoxyglucosone"
+        value: 0.6
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.2
+          ph_basis: "label"
+          temp_C: null
+          time_min: 120
+          precursors: {"3-deoxyglucosone": "~1.3 mmol", "phenylalanine": "equimolar"}
+          buffer: "citrate 50 mM"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "Xylose"
+        lever_value: "Xylose"
+        value: 0.6
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.2
+          ph_basis: "label"
+          temp_C: null
+          time_min: 120
+          precursors: {"Xylose": "~1.3 mmol", "phenylalanine": "equimolar"}
+          buffer: "citrate 50 mM"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "Fructose"
+        lever_value: "Fructose"
+        value: 0.13
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.2
+          ph_basis: "label"
+          temp_C: null
+          time_min: 120
+          precursors: {"Fructose": "~1.3 mmol", "phenylalanine": "equimolar"}
+          buffer: "citrate 50 mM"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "Glucose"
+        lever_value: "Glucose"
+        value: 0.03
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.2
+          ph_basis: "label"
+          temp_C: null
+          time_min: 120
+          precursors: {"Glucose": "~1.3 mmol", "phenylalanine": "equimolar"}
+          buffer: "citrate 50 mM"
+          matrix: "buffer"
+          headspace: "unstated"
+  - id: "weenen2001-7"
+    odorant: "phenylacetaldehyde"
+    lever_class: "sugar identity"
+    lever: "precursor form: Glc-Phe ARP (no added phenylalanine) vs glucose + phenylalanine, pH 3.2"
+    focal: true
+    location: "Table III"
+    digitised: false
+    unit: "% yield of phenylacetaldehyde"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "Glc-Phe ARP*"
+        lever_value: "Glc-Phe ARP"
+        value: 0.5
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.2
+          ph_basis: "label"
+          temp_C: null
+          time_min: 120
+          precursors: {"Glc-Phe ARP": "~1.3 mmol"}
+          buffer: "citrate 50 mM"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "Glucose"
+        lever_value: "glucose + phenylalanine"
+        value: 0.03
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.2
+          ph_basis: "label"
+          temp_C: null
+          time_min: 120
+          precursors: {"Glucose": "~1.3 mmol", "phenylalanine": "equimolar"}
+          buffer: "citrate 50 mM"
+          matrix: "buffer"
+          headspace: "unstated"
+  - id: "weenen2001-8"
+    odorant: "phenylacetaldehyde"
+    lever_class: "mixed"
+    lever: "carbonyl form and added amino acid: Glc-Pro ARP + phenylalanine vs glucose + phenylalanine, pH 3.2"
+    focal: false
+    location: "Table III"
+    digitised: false
+    unit: "% yield of phenylacetaldehyde"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "Glc-Pro ARP"
+        lever_value: "Glc-Pro ARP + phenylalanine"
+        value: 0.9
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.2
+          ph_basis: "label"
+          temp_C: null
+          time_min: 120
+          precursors: {"Glc-Pro ARP": "~1.3 mmol", "phenylalanine": "equimolar"}
+          buffer: "citrate 50 mM"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "Glucose"
+        lever_value: "glucose + phenylalanine"
+        value: 0.03
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3.2
+          ph_basis: "label"
+          temp_C: null
+          time_min: 120
+          precursors: {"Glucose": "~1.3 mmol", "phenylalanine": "equimolar"}
+          buffer: "citrate 50 mM"
+          matrix: "buffer"
+          headspace: "unstated"
+  - id: "weenen2001-9"
+    odorant: "2-acetyl-1-pyrroline"
+    lever_class: "sugar identity"
+    lever: "precursor form: Glc-Pro ARP vs glucose + proline"
+    focal: true
+    location: "Table IV"
+    digitised: false
+    unit: "% yield ACP"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "Glc-Pro ARP"
+        lever_value: "Glc-Pro ARP"
+        value: 0.016
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.2
+          ph_basis: "label"
+          temp_C: null
+          time_min: 240
+          precursors: {"Glc-Pro ARP": "150 umol - 2.7 mmol"}
+          buffer: "phosphate 50 mM"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "Glc + Pro"
+        lever_value: "glucose + proline"
+        value: 0.017
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.2
+          ph_basis: "label"
+          temp_C: null
+          time_min: 240
+          precursors: {"glucose": "same molar", "proline": "same molar"}
+          buffer: "phosphate 50 mM"
+          matrix: "buffer"
+          headspace: "unstated"
+  - id: "weenen2001-10"
+    odorant: "2-acetyl-1-pyrroline"
+    lever_class: "sugar identity"
+    lever: "precursor form: glyceraldehyde-Pro ARP vs glyceraldehyde + proline"
+    focal: true
+    location: "Table IV"
+    digitised: false
+    unit: "% yield ACP"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "Glyceraldehyde-Pro ARP"
+        lever_value: "Glyceraldehyde-Pro ARP"
+        value: 0.033
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.2
+          ph_basis: "label"
+          temp_C: null
+          time_min: 240
+          precursors: {"Glyceraldehyde-Pro ARP": "150 umol - 2.7 mmol"}
+          buffer: "phosphate 50 mM"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "Glyceraldehyde + Pro"
+        lever_value: "glyceraldehyde + proline"
+        value: 0.034
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.2
+          ph_basis: "label"
+          temp_C: null
+          time_min: 240
+          precursors: {"glyceraldehyde": "same molar", "proline": "same molar"}
+          buffer: "phosphate 50 mM"
+          matrix: "buffer"
+          headspace: "unstated"
+  - id: "weenen2001-11"
+    odorant: "2-acetyl-1-pyrroline"
+    lever_class: "sugar identity"
+    lever: "sugar moiety of the proline ARP: glucose vs glyceraldehyde"
+    focal: false
+    location: "Table IV"
+    digitised: false
+    unit: "% yield ACP"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "Glc-Pro ARP"
+        lever_value: "glucose"
+        value: 0.016
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.2
+          ph_basis: "label"
+          temp_C: null
+          time_min: 240
+          precursors: {"Glc-Pro ARP": "150 umol - 2.7 mmol"}
+          buffer: "phosphate 50 mM"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "Glyceraldehyde-Pro ARP"
+        lever_value: "glyceraldehyde"
+        value: 0.033
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.2
+          ph_basis: "label"
+          temp_C: null
+          time_min: 240
+          precursors: {"Glyceraldehyde-Pro ARP": "150 umol - 2.7 mmol"}
+          buffer: "phosphate 50 mM"
+          matrix: "buffer"
+          headspace: "unstated"
+  - id: "weenen2001-12"
+    odorant: "2-acetyl-1-pyrroline"
+    lever_class: "sugar identity"
+    lever: "sugar reacted with proline: glucose vs glyceraldehyde"
+    focal: false
+    location: "Table IV"
+    digitised: false
+    unit: "% yield ACP"
+    quant_type: "absolute"
+    time_course_rule: "not a time course"
+    quantity: "amount"
+    arms:
+      - label: "Glc + Pro"
+        lever_value: "glucose"
+        value: 0.017
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.2
+          ph_basis: "label"
+          temp_C: null
+          time_min: 240
+          precursors: {"glucose": "same molar", "proline": "same molar"}
+          buffer: "phosphate 50 mM"
+          matrix: "buffer"
+          headspace: "unstated"
+      - label: "Glyceraldehyde + Pro"
+        lever_value: "glyceraldehyde"
+        value: 0.034
+        censor: "none"
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.2
+          ph_basis: "label"
+          temp_C: null
+          time_min: 240
+          precursors: {"glyceraldehyde": "same molar", "proline": "same molar"}
+          buffer: "phosphate 50 mM"
+          matrix: "buffer"
+          headspace: "unstated"

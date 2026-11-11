@@ -1,0 +1,191 @@
+# Reader b, blind. Rules: docs/reference/lever_table/PREREG.md secs. 3 - 4.
+source: "mikami2017"
+pdf: "data/articles/mikami2017.pdf"
+reader: "b"
+scope_note: "Only odorant in scope is HMFO (4-hydroxy-5-methyl-3(2H)-furanone, norfuraneol), by HPLC-DAD. No table prints values: all arms digitised from Fig. 3 bar charts (relative %, 100% = 24, 20 and 33 mg/100 mL for panels A, B, C; n = 3, error bars read as SD though the caption does not say SD or SEM). Fig. 3B is keyed both as time series (per pH) and as a pH contrast at 1 h (the paper's main heating time). Fig. 3C keyed as sugar identity per pH and pH per sugar. Fig. 6B (loss of added HMFO at pH 8, mM) keyed as quantity rate; the 6 h point is plotted at about 0. No other listed odorant is measured."
+contrasts:
+  - id: "mikami2017-1"
+    odorant: "HMFO (4-hydroxy-5-methyl-3(2H)-furanone)"
+    lever_class: "pH"
+    lever: "buffer pH 5.5 - 8.0, xylose-Lys, 60 min"
+    focal: true
+    location: "Fig. 3A"
+    digitised: true
+    unit: "% (100% = 24 mg/100 mL)"
+    quant_type: "relative"
+    quantity: amount
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "pH 5.5", lever_value: 5.5, value: 28, censor: none, limit: null, n: 3, sd: 9, conditions: {ph: 5.5, ph_basis: "label", temp_C: 100, time_min: 60, precursors: {xylose: "13.3 mM", L-lysine: "34 mM"}, buffer: "0.2 M phosphate-Na/K", matrix: "buffer", headspace: "sealed, unstated"}}
+      - {label: "pH 6", lever_value: 6.0, value: 62, censor: none, limit: null, n: 3, sd: 10, conditions: {ph: 6.0, ph_basis: "label", temp_C: 100, time_min: 60, precursors: {xylose: "13.3 mM", L-lysine: "34 mM"}, buffer: "0.2 M phosphate-Na/K", matrix: "buffer", headspace: "sealed, unstated"}}
+      - {label: "pH 6.5", lever_value: 6.5, value: 100, censor: none, limit: null, n: 3, sd: 10, conditions: {ph: 6.5, ph_basis: "label", temp_C: 100, time_min: 60, precursors: {xylose: "13.3 mM", L-lysine: "34 mM"}, buffer: "0.2 M phosphate-Na/K", matrix: "buffer", headspace: "sealed, unstated"}}
+      - {label: "pH 7", lever_value: 7.0, value: 83, censor: none, limit: null, n: 3, sd: 10, conditions: {ph: 7.0, ph_basis: "label", temp_C: 100, time_min: 60, precursors: {xylose: "13.3 mM", L-lysine: "34 mM"}, buffer: "0.2 M phosphate-Na/K", matrix: "buffer", headspace: "sealed, unstated"}}
+      - {label: "pH 7.5", lever_value: 7.5, value: 60, censor: none, limit: null, n: 3, sd: 9, conditions: {ph: 7.5, ph_basis: "label", temp_C: 100, time_min: 60, precursors: {xylose: "13.3 mM", L-lysine: "34 mM"}, buffer: "0.2 M phosphate-Na/K", matrix: "buffer", headspace: "sealed, unstated"}}
+      - {label: "pH 8", lever_value: 8.0, value: 21, censor: none, limit: null, n: 3, sd: 10, conditions: {ph: 8.0, ph_basis: "label", temp_C: 100, time_min: 60, precursors: {xylose: "13.3 mM", L-lysine: "34 mM"}, buffer: "0.2 M phosphate-Na/K", matrix: "buffer", headspace: "sealed, unstated"}}
+  - id: "mikami2017-2"
+    odorant: "HMFO (4-hydroxy-5-methyl-3(2H)-furanone)"
+    lever_class: "pH"
+    lever: "buffer pH 6.0, 7.0, 8.0, xylose-Lys, at 1 h"
+    focal: true
+    location: "Fig. 3B (1 h bars)"
+    digitised: true
+    unit: "% (100% = 20 mg/100 mL)"
+    quant_type: "relative"
+    quantity: amount
+    time_course_rule: "main result time"
+    arms:
+      - {label: "pH 6, 1h", lever_value: 6.0, value: 67, censor: none, limit: null, n: 3, sd: 9, conditions: {ph: 6.0, ph_basis: "label", temp_C: 100, time_min: 60, precursors: {xylose: "13.3 mM", L-lysine: "34 mM"}, buffer: "0.2 M phosphate-Na/K", matrix: "buffer", headspace: "sealed, unstated"}}
+      - {label: "pH 7, 1h", lever_value: 7.0, value: 80, censor: none, limit: null, n: 3, sd: 7, conditions: {ph: 7.0, ph_basis: "label", temp_C: 100, time_min: 60, precursors: {xylose: "13.3 mM", L-lysine: "34 mM"}, buffer: "0.2 M phosphate-Na/K", matrix: "buffer", headspace: "sealed, unstated"}}
+      - {label: "pH 8, 1h", lever_value: 8.0, value: 30, censor: none, limit: null, n: 3, sd: 5, conditions: {ph: 8.0, ph_basis: "label", temp_C: 100, time_min: 60, precursors: {xylose: "13.3 mM", L-lysine: "34 mM"}, buffer: "0.2 M phosphate-Na/K", matrix: "buffer", headspace: "sealed, unstated"}}
+  - id: "mikami2017-3"
+    odorant: "HMFO (4-hydroxy-5-methyl-3(2H)-furanone)"
+    lever_class: "time"
+    lever: "heating time 30 min, 1 h, 2 h at pH 6.0"
+    focal: true
+    location: "Fig. 3B"
+    digitised: true
+    unit: "% (100% = 20 mg/100 mL)"
+    quant_type: "relative"
+    quantity: amount
+    time_course_rule: "time is the lever: whole series keyed"
+    arms:
+      - {label: "pH 6, 30min", lever_value: 30, value: 31, censor: none, limit: null, n: 3, sd: 5, conditions: {ph: 6.0, ph_basis: "label", temp_C: 100, time_min: 30, precursors: {xylose: "13.3 mM", L-lysine: "34 mM"}, buffer: "0.2 M phosphate-Na/K", matrix: "buffer", headspace: "sealed, unstated"}}
+      - {label: "pH 6, 1h", lever_value: 60, value: 67, censor: none, limit: null, n: 3, sd: 9, conditions: {ph: 6.0, ph_basis: "label", temp_C: 100, time_min: 60, precursors: {xylose: "13.3 mM", L-lysine: "34 mM"}, buffer: "0.2 M phosphate-Na/K", matrix: "buffer", headspace: "sealed, unstated"}}
+      - {label: "pH 6, 2h", lever_value: 120, value: 102, censor: none, limit: null, n: 3, sd: 5, conditions: {ph: 6.0, ph_basis: "label", temp_C: 100, time_min: 120, precursors: {xylose: "13.3 mM", L-lysine: "34 mM"}, buffer: "0.2 M phosphate-Na/K", matrix: "buffer", headspace: "sealed, unstated"}}
+  - id: "mikami2017-4"
+    odorant: "HMFO (4-hydroxy-5-methyl-3(2H)-furanone)"
+    lever_class: "time"
+    lever: "heating time 30 min, 1 h, 2 h at pH 7.0"
+    focal: true
+    location: "Fig. 3B"
+    digitised: true
+    unit: "% (100% = 20 mg/100 mL)"
+    quant_type: "relative"
+    quantity: amount
+    time_course_rule: "time is the lever: whole series keyed"
+    arms:
+      - {label: "pH 7, 30min", lever_value: 30, value: 52, censor: none, limit: null, n: 3, sd: 6, conditions: {ph: 7.0, ph_basis: "label", temp_C: 100, time_min: 30, precursors: {xylose: "13.3 mM", L-lysine: "34 mM"}, buffer: "0.2 M phosphate-Na/K", matrix: "buffer", headspace: "sealed, unstated"}}
+      - {label: "pH 7, 1h", lever_value: 60, value: 80, censor: none, limit: null, n: 3, sd: 7, conditions: {ph: 7.0, ph_basis: "label", temp_C: 100, time_min: 60, precursors: {xylose: "13.3 mM", L-lysine: "34 mM"}, buffer: "0.2 M phosphate-Na/K", matrix: "buffer", headspace: "sealed, unstated"}}
+      - {label: "pH 7, 2h", lever_value: 120, value: 72, censor: none, limit: null, n: 3, sd: 18, conditions: {ph: 7.0, ph_basis: "label", temp_C: 100, time_min: 120, precursors: {xylose: "13.3 mM", L-lysine: "34 mM"}, buffer: "0.2 M phosphate-Na/K", matrix: "buffer", headspace: "sealed, unstated"}}
+  - id: "mikami2017-5"
+    odorant: "HMFO (4-hydroxy-5-methyl-3(2H)-furanone)"
+    lever_class: "time"
+    lever: "heating time 30 min, 1 h, 2 h at pH 8.0"
+    focal: true
+    location: "Fig. 3B"
+    digitised: true
+    unit: "% (100% = 20 mg/100 mL)"
+    quant_type: "relative"
+    quantity: amount
+    time_course_rule: "time is the lever: whole series keyed"
+    arms:
+      - {label: "pH 8, 30min", lever_value: 30, value: 23, censor: none, limit: null, n: 3, sd: 8, conditions: {ph: 8.0, ph_basis: "label", temp_C: 100, time_min: 30, precursors: {xylose: "13.3 mM", L-lysine: "34 mM"}, buffer: "0.2 M phosphate-Na/K", matrix: "buffer", headspace: "sealed, unstated"}}
+      - {label: "pH 8, 1h", lever_value: 60, value: 30, censor: none, limit: null, n: 3, sd: 5, conditions: {ph: 8.0, ph_basis: "label", temp_C: 100, time_min: 60, precursors: {xylose: "13.3 mM", L-lysine: "34 mM"}, buffer: "0.2 M phosphate-Na/K", matrix: "buffer", headspace: "sealed, unstated"}}
+      - {label: "pH 8, 2h", lever_value: 120, value: 19, censor: none, limit: null, n: 3, sd: 7, conditions: {ph: 8.0, ph_basis: "label", temp_C: 100, time_min: 120, precursors: {xylose: "13.3 mM", L-lysine: "34 mM"}, buffer: "0.2 M phosphate-Na/K", matrix: "buffer", headspace: "sealed, unstated"}}
+  - id: "mikami2017-6"
+    odorant: "HMFO (4-hydroxy-5-methyl-3(2H)-furanone)"
+    lever_class: "sugar identity"
+    lever: "pentose: arabinose vs ribose vs xylose, pH 6.0"
+    focal: true
+    location: "Fig. 3C"
+    digitised: true
+    unit: "% (100% = 33 mg/100 mL)"
+    quant_type: "relative"
+    quantity: amount
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "Arabinose pH 6", lever_value: "arabinose", value: 33, censor: none, limit: null, n: 3, sd: 15, conditions: {ph: 6.0, ph_basis: "label", temp_C: 100, time_min: 60, precursors: {arabinose: "13.3 mM", L-lysine: "34 mM"}, buffer: "0.2 M phosphate-Na/K", matrix: "buffer", headspace: "sealed, unstated"}}
+      - {label: "Ribose pH 6", lever_value: "ribose", value: 100, censor: none, limit: null, n: 3, sd: 12, conditions: {ph: 6.0, ph_basis: "label", temp_C: 100, time_min: 60, precursors: {ribose: "13.3 mM", L-lysine: "34 mM"}, buffer: "0.2 M phosphate-Na/K", matrix: "buffer", headspace: "sealed, unstated"}}
+      - {label: "Xylose pH 6", lever_value: "xylose", value: 43, censor: none, limit: null, n: 3, sd: 20, conditions: {ph: 6.0, ph_basis: "label", temp_C: 100, time_min: 60, precursors: {xylose: "13.3 mM", L-lysine: "34 mM"}, buffer: "0.2 M phosphate-Na/K", matrix: "buffer", headspace: "sealed, unstated"}}
+  - id: "mikami2017-7"
+    odorant: "HMFO (4-hydroxy-5-methyl-3(2H)-furanone)"
+    lever_class: "sugar identity"
+    lever: "pentose: arabinose vs ribose vs xylose, pH 7.0"
+    focal: true
+    location: "Fig. 3C"
+    digitised: true
+    unit: "% (100% = 33 mg/100 mL)"
+    quant_type: "relative"
+    quantity: amount
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "Arabinose pH 7", lever_value: "arabinose", value: 54, censor: none, limit: null, n: 3, sd: 12, conditions: {ph: 7.0, ph_basis: "label", temp_C: 100, time_min: 60, precursors: {arabinose: "13.3 mM", L-lysine: "34 mM"}, buffer: "0.2 M phosphate-Na/K", matrix: "buffer", headspace: "sealed, unstated"}}
+      - {label: "Ribose pH 7", lever_value: "ribose", value: 84, censor: none, limit: null, n: 3, sd: 10, conditions: {ph: 7.0, ph_basis: "label", temp_C: 100, time_min: 60, precursors: {ribose: "13.3 mM", L-lysine: "34 mM"}, buffer: "0.2 M phosphate-Na/K", matrix: "buffer", headspace: "sealed, unstated"}}
+      - {label: "Xylose pH 7", lever_value: "xylose", value: 63, censor: none, limit: null, n: 3, sd: 13, conditions: {ph: 7.0, ph_basis: "label", temp_C: 100, time_min: 60, precursors: {xylose: "13.3 mM", L-lysine: "34 mM"}, buffer: "0.2 M phosphate-Na/K", matrix: "buffer", headspace: "sealed, unstated"}}
+  - id: "mikami2017-8"
+    odorant: "HMFO (4-hydroxy-5-methyl-3(2H)-furanone)"
+    lever_class: "sugar identity"
+    lever: "pentose: arabinose vs ribose vs xylose, pH 8.0"
+    focal: true
+    location: "Fig. 3C"
+    digitised: true
+    unit: "% (100% = 33 mg/100 mL)"
+    quant_type: "relative"
+    quantity: amount
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "Arabinose pH 8", lever_value: "arabinose", value: 25, censor: none, limit: null, n: 3, sd: 8, conditions: {ph: 8.0, ph_basis: "label", temp_C: 100, time_min: 60, precursors: {arabinose: "13.3 mM", L-lysine: "34 mM"}, buffer: "0.2 M phosphate-Na/K", matrix: "buffer", headspace: "sealed, unstated"}}
+      - {label: "Ribose pH 8", lever_value: "ribose", value: 31, censor: none, limit: null, n: 3, sd: 9, conditions: {ph: 8.0, ph_basis: "label", temp_C: 100, time_min: 60, precursors: {ribose: "13.3 mM", L-lysine: "34 mM"}, buffer: "0.2 M phosphate-Na/K", matrix: "buffer", headspace: "sealed, unstated"}}
+      - {label: "Xylose pH 8", lever_value: "xylose", value: 23, censor: none, limit: null, n: 3, sd: 15, conditions: {ph: 8.0, ph_basis: "label", temp_C: 100, time_min: 60, precursors: {xylose: "13.3 mM", L-lysine: "34 mM"}, buffer: "0.2 M phosphate-Na/K", matrix: "buffer", headspace: "sealed, unstated"}}
+  - id: "mikami2017-9"
+    odorant: "HMFO (4-hydroxy-5-methyl-3(2H)-furanone)"
+    lever_class: "pH"
+    lever: "buffer pH 6.0, 7.0, 8.0, arabinose-Lys"
+    focal: true
+    location: "Fig. 3C"
+    digitised: true
+    unit: "% (100% = 33 mg/100 mL)"
+    quant_type: "relative"
+    quantity: amount
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "Arabinose pH 6", lever_value: 6.0, value: 33, censor: none, limit: null, n: 3, sd: 15, conditions: {ph: 6.0, ph_basis: "label", temp_C: 100, time_min: 60, precursors: {arabinose: "13.3 mM", L-lysine: "34 mM"}, buffer: "0.2 M phosphate-Na/K", matrix: "buffer", headspace: "sealed, unstated"}}
+      - {label: "Arabinose pH 7", lever_value: 7.0, value: 54, censor: none, limit: null, n: 3, sd: 12, conditions: {ph: 7.0, ph_basis: "label", temp_C: 100, time_min: 60, precursors: {arabinose: "13.3 mM", L-lysine: "34 mM"}, buffer: "0.2 M phosphate-Na/K", matrix: "buffer", headspace: "sealed, unstated"}}
+      - {label: "Arabinose pH 8", lever_value: 8.0, value: 25, censor: none, limit: null, n: 3, sd: 8, conditions: {ph: 8.0, ph_basis: "label", temp_C: 100, time_min: 60, precursors: {arabinose: "13.3 mM", L-lysine: "34 mM"}, buffer: "0.2 M phosphate-Na/K", matrix: "buffer", headspace: "sealed, unstated"}}
+  - id: "mikami2017-10"
+    odorant: "HMFO (4-hydroxy-5-methyl-3(2H)-furanone)"
+    lever_class: "pH"
+    lever: "buffer pH 6.0, 7.0, 8.0, ribose-Lys"
+    focal: true
+    location: "Fig. 3C"
+    digitised: true
+    unit: "% (100% = 33 mg/100 mL)"
+    quant_type: "relative"
+    quantity: amount
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "Ribose pH 6", lever_value: 6.0, value: 100, censor: none, limit: null, n: 3, sd: 12, conditions: {ph: 6.0, ph_basis: "label", temp_C: 100, time_min: 60, precursors: {ribose: "13.3 mM", L-lysine: "34 mM"}, buffer: "0.2 M phosphate-Na/K", matrix: "buffer", headspace: "sealed, unstated"}}
+      - {label: "Ribose pH 7", lever_value: 7.0, value: 84, censor: none, limit: null, n: 3, sd: 10, conditions: {ph: 7.0, ph_basis: "label", temp_C: 100, time_min: 60, precursors: {ribose: "13.3 mM", L-lysine: "34 mM"}, buffer: "0.2 M phosphate-Na/K", matrix: "buffer", headspace: "sealed, unstated"}}
+      - {label: "Ribose pH 8", lever_value: 8.0, value: 31, censor: none, limit: null, n: 3, sd: 9, conditions: {ph: 8.0, ph_basis: "label", temp_C: 100, time_min: 60, precursors: {ribose: "13.3 mM", L-lysine: "34 mM"}, buffer: "0.2 M phosphate-Na/K", matrix: "buffer", headspace: "sealed, unstated"}}
+  - id: "mikami2017-11"
+    odorant: "HMFO (4-hydroxy-5-methyl-3(2H)-furanone)"
+    lever_class: "pH"
+    lever: "buffer pH 6.0, 7.0, 8.0, xylose-Lys"
+    focal: true
+    location: "Fig. 3C"
+    digitised: true
+    unit: "% (100% = 33 mg/100 mL)"
+    quant_type: "relative"
+    quantity: amount
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "Xylose pH 6", lever_value: 6.0, value: 43, censor: none, limit: null, n: 3, sd: 20, conditions: {ph: 6.0, ph_basis: "label", temp_C: 100, time_min: 60, precursors: {xylose: "13.3 mM", L-lysine: "34 mM"}, buffer: "0.2 M phosphate-Na/K", matrix: "buffer", headspace: "sealed, unstated"}}
+      - {label: "Xylose pH 7", lever_value: 7.0, value: 63, censor: none, limit: null, n: 3, sd: 13, conditions: {ph: 7.0, ph_basis: "label", temp_C: 100, time_min: 60, precursors: {xylose: "13.3 mM", L-lysine: "34 mM"}, buffer: "0.2 M phosphate-Na/K", matrix: "buffer", headspace: "sealed, unstated"}}
+      - {label: "Xylose pH 8", lever_value: 8.0, value: 23, censor: none, limit: null, n: 3, sd: 15, conditions: {ph: 8.0, ph_basis: "label", temp_C: 100, time_min: 60, precursors: {xylose: "13.3 mM", L-lysine: "34 mM"}, buffer: "0.2 M phosphate-Na/K", matrix: "buffer", headspace: "sealed, unstated"}}
+  - id: "mikami2017-12"
+    odorant: "HMFO (4-hydroxy-5-methyl-3(2H)-furanone)"
+    lever_class: "time"
+    lever: "heating time 0 - 6 h of added HMFO (1.7 mM) at pH 8.0, no sugar or amino acid (loss)"
+    focal: false
+    location: "Fig. 6B (HMFO, right axis)"
+    digitised: true
+    unit: "mM"
+    quant_type: "absolute"
+    quantity: rate
+    time_course_rule: "time is the lever: whole series keyed"
+    arms:
+      - {label: "0 h", lever_value: 0, value: 1.7, censor: none, limit: null, n: null, sd: null, conditions: {ph: 8.0, ph_basis: "label", temp_C: 100, time_min: 0, precursors: {HMFO: "1.7 mM"}, buffer: "0.2 M phosphate", matrix: "buffer", headspace: "unstated"}}
+      - {label: "0.5 h", lever_value: 30, value: 0.6, censor: none, limit: null, n: null, sd: null, conditions: {ph: 8.0, ph_basis: "label", temp_C: 100, time_min: 30, precursors: {HMFO: "1.7 mM"}, buffer: "0.2 M phosphate", matrix: "buffer", headspace: "unstated"}}
+      - {label: "1 h", lever_value: 60, value: 0.3, censor: none, limit: null, n: null, sd: null, conditions: {ph: 8.0, ph_basis: "label", temp_C: 100, time_min: 60, precursors: {HMFO: "1.7 mM"}, buffer: "0.2 M phosphate", matrix: "buffer", headspace: "unstated"}}
+      - {label: "3 h", lever_value: 180, value: 0.03, censor: none, limit: null, n: null, sd: null, conditions: {ph: 8.0, ph_basis: "label", temp_C: 100, time_min: 180, precursors: {HMFO: "1.7 mM"}, buffer: "0.2 M phosphate", matrix: "buffer", headspace: "unstated"}}
+      - {label: "6 h", lever_value: 360, value: null, censor: nd_no_limit, limit: null, n: null, sd: null, conditions: {ph: 8.0, ph_basis: "label", temp_C: 100, time_min: 360, precursors: {HMFO: "1.7 mM"}, buffer: "0.2 M phosphate", matrix: "buffer", headspace: "unstated"}}

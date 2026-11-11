@@ -1,0 +1,200 @@
+# One file per source and reader. Rules: docs/reference/lever_table/PREREG.md secs. 3 - 4. Key what the source prints.
+source: "du2023"
+pdf: "data/articles/Du2023.pdf"
+reader: "a"
+scope_note: "Lever = aliphatic aldehyde added to cysteine-glucose (none M; nonanal A; (E)-2-nonenal B; (E,E)-2,4-nonadienal C; (E,Z)-2,6-nonadienal D), keyed as lipid, first-listed arm M. Values are IS (1,2-dichlorobenzene) area ratios without response factors: peak_area. '-' = not detected, no LOD: nd_no_limit. +/- assumed SD (n = 3, not labelled SD vs SE). Lipid-derived volatiles (hexanal, nonanal, ...) are only in supplementary Table S1, not in the PDF: not keyed. Focal false: the lever is the stated question but no listed odorant is named as a target."
+contrasts:
+  - id: "du2023-1"
+    odorant: "2-pentylfuran"
+    lever_class: "lipid"
+    lever: "aliphatic aldehyde added (none, nonanal, (E)-2-nonenal, (E,E)-2,4-nonadienal, (E,Z)-2,6-nonadienal)"
+    focal: false
+    location: "Table 1, row 6, p. 4"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    arms:
+      - label: "M (control)"
+        lever_value: "none"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions: &du23_M
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 150
+          time_min: 120
+          precursors: {L-cysteine: "1 mmol", D-glucose: "1 mmol", volume: "5 mL"}
+          buffer: "0.2 M phosphate pH 6.50"
+          matrix: "buffer"
+          headspace: "sealed, unstated (15 mL screw-cap vial)"
+      - label: "A (nonanal)"
+        lever_value: "nonanal"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions: &du23_A
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 150
+          time_min: 120
+          precursors: {L-cysteine: "1 mmol", D-glucose: "1 mmol", nonanal: "0.05 mmol", volume: "5 mL"}
+          buffer: "0.2 M phosphate pH 6.50"
+          matrix: "buffer"
+          headspace: "sealed, unstated (15 mL screw-cap vial)"
+      - label: "B ((E)-2-nonenal)"
+        lever_value: "(E)-2-nonenal"
+        value: 366.97
+        censor: none
+        limit: null
+        n: 3
+        sd: 69.66
+        conditions: &du23_B
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 150
+          time_min: 120
+          precursors: {L-cysteine: "1 mmol", D-glucose: "1 mmol", "(E)-2-nonenal": "0.05 mmol", volume: "5 mL"}
+          buffer: "0.2 M phosphate pH 6.50"
+          matrix: "buffer"
+          headspace: "sealed, unstated (15 mL screw-cap vial)"
+      - label: "C ((E,E)-2,4-nonadienal)"
+        lever_value: "(E,E)-2,4-nonadienal"
+        value: 7.79
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.40
+        conditions: &du23_C
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 150
+          time_min: 120
+          precursors: {L-cysteine: "1 mmol", D-glucose: "1 mmol", "(E,E)-2,4-nonadienal": "0.05 mmol", volume: "5 mL"}
+          buffer: "0.2 M phosphate pH 6.50"
+          matrix: "buffer"
+          headspace: "sealed, unstated (15 mL screw-cap vial)"
+      - label: "D ((E,Z)-2,6-nonadienal)"
+        lever_value: "(E,Z)-2,6-nonadienal"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions: &du23_D
+          ph: 6.5
+          ph_basis: "label"
+          temp_C: 150
+          time_min: 120
+          precursors: {L-cysteine: "1 mmol", D-glucose: "1 mmol", "(E,Z)-2,6-nonadienal": "0.05 mmol", volume: "5 mL"}
+          buffer: "0.2 M phosphate pH 6.50"
+          matrix: "buffer"
+          headspace: "sealed, unstated (15 mL screw-cap vial)"
+  - id: "du2023-2"
+    odorant: "1-(2-furanyl)-ethanone (2-acetylfuran)"
+    lever_class: "lipid"
+    lever: "aliphatic aldehyde added (none, nonanal, (E)-2-nonenal, (E,E)-2,4-nonadienal, (E,Z)-2,6-nonadienal)"
+    focal: false
+    location: "Table 1, row 8, p. 4"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "M (control)", lever_value: "none", value: 49.13, censor: none, limit: null, n: 3, sd: 16.55, conditions: *du23_M}
+      - {label: "A (nonanal)", lever_value: "nonanal", value: 31.81, censor: none, limit: null, n: 3, sd: 1.67, conditions: *du23_A}
+      - {label: "B ((E)-2-nonenal)", lever_value: "(E)-2-nonenal", value: 44.41, censor: none, limit: null, n: 3, sd: 24.81, conditions: *du23_B}
+      - {label: "C ((E,E)-2,4-nonadienal)", lever_value: "(E,E)-2,4-nonadienal", value: 37.86, censor: none, limit: null, n: 3, sd: 1.24, conditions: *du23_C}
+      - {label: "D ((E,Z)-2,6-nonadienal)", lever_value: "(E,Z)-2,6-nonadienal", value: null, censor: nd_no_limit, limit: null, n: 3, sd: null, conditions: *du23_D}
+  - id: "du2023-3"
+    odorant: "furfural"
+    lever_class: "lipid"
+    lever: "aliphatic aldehyde added (none, nonanal, (E)-2-nonenal, (E,E)-2,4-nonadienal, (E,Z)-2,6-nonadienal)"
+    focal: false
+    location: "Table 1, row 9, p. 4"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "M (control)", lever_value: "none", value: null, censor: nd_no_limit, limit: null, n: 3, sd: null, conditions: *du23_M}
+      - {label: "A (nonanal)", lever_value: "nonanal", value: null, censor: nd_no_limit, limit: null, n: 3, sd: null, conditions: *du23_A}
+      - {label: "B ((E)-2-nonenal)", lever_value: "(E)-2-nonenal", value: null, censor: nd_no_limit, limit: null, n: 3, sd: null, conditions: *du23_B}
+      - {label: "C ((E,E)-2,4-nonadienal)", lever_value: "(E,E)-2,4-nonadienal", value: 26.71, censor: none, limit: null, n: 3, sd: 1.87, conditions: *du23_C}
+      - {label: "D ((E,Z)-2,6-nonadienal)", lever_value: "(E,Z)-2,6-nonadienal", value: null, censor: nd_no_limit, limit: null, n: 3, sd: null, conditions: *du23_D}
+  - id: "du2023-4"
+    odorant: "2-furanmethanol (furfuryl alcohol)"
+    lever_class: "lipid"
+    lever: "aliphatic aldehyde added (none, nonanal, (E)-2-nonenal, (E,E)-2,4-nonadienal, (E,Z)-2,6-nonadienal)"
+    focal: false
+    location: "Table 1, row 10, p. 4"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "M (control)", lever_value: "none", value: null, censor: nd_no_limit, limit: null, n: 3, sd: null, conditions: *du23_M}
+      - {label: "A (nonanal)", lever_value: "nonanal", value: null, censor: nd_no_limit, limit: null, n: 3, sd: null, conditions: *du23_A}
+      - {label: "B ((E)-2-nonenal)", lever_value: "(E)-2-nonenal", value: 31.07, censor: none, limit: null, n: 3, sd: 0.71, conditions: *du23_B}
+      - {label: "C ((E,E)-2,4-nonadienal)", lever_value: "(E,E)-2,4-nonadienal", value: null, censor: nd_no_limit, limit: null, n: 3, sd: null, conditions: *du23_C}
+      - {label: "D ((E,Z)-2,6-nonadienal)", lever_value: "(E,Z)-2,6-nonadienal", value: null, censor: nd_no_limit, limit: null, n: 3, sd: null, conditions: *du23_D}
+  - id: "du2023-5"
+    odorant: "2,5-dimethyl-4-hydroxy-3(2H)-furone (HDMF, furaneol)"
+    lever_class: "lipid"
+    lever: "aliphatic aldehyde added (none, nonanal, (E)-2-nonenal, (E,E)-2,4-nonadienal, (E,Z)-2,6-nonadienal)"
+    focal: false
+    location: "Table 1, row 15, p. 4"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "M (control)", lever_value: "none", value: 9.71, censor: none, limit: null, n: 3, sd: 3.84, conditions: *du23_M}
+      - {label: "A (nonanal)", lever_value: "nonanal", value: 3.84, censor: none, limit: null, n: 3, sd: 0.82, conditions: *du23_A}
+      - {label: "B ((E)-2-nonenal)", lever_value: "(E)-2-nonenal", value: 5.16, censor: none, limit: null, n: 3, sd: 1.43, conditions: *du23_B}
+      - {label: "C ((E,E)-2,4-nonadienal)", lever_value: "(E,E)-2,4-nonadienal", value: null, censor: nd_no_limit, limit: null, n: 3, sd: null, conditions: *du23_C}
+      - {label: "D ((E,Z)-2,6-nonadienal)", lever_value: "(E,Z)-2,6-nonadienal", value: null, censor: nd_no_limit, limit: null, n: 3, sd: null, conditions: *du23_D}
+  - id: "du2023-6"
+    odorant: "2-acetylthiazole"
+    lever_class: "lipid"
+    lever: "aliphatic aldehyde added (none, nonanal, (E)-2-nonenal, (E,E)-2,4-nonadienal, (E,Z)-2,6-nonadienal)"
+    focal: false
+    location: "Table 1 (continued), row 69, p. 5"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "M (control)", lever_value: "none", value: null, censor: nd_no_limit, limit: null, n: 3, sd: null, conditions: *du23_M}
+      - {label: "A (nonanal)", lever_value: "nonanal", value: null, censor: nd_no_limit, limit: null, n: 3, sd: null, conditions: *du23_A}
+      - {label: "B ((E)-2-nonenal)", lever_value: "(E)-2-nonenal", value: null, censor: nd_no_limit, limit: null, n: 3, sd: null, conditions: *du23_B}
+      - {label: "C ((E,E)-2,4-nonadienal)", lever_value: "(E,E)-2,4-nonadienal", value: null, censor: nd_no_limit, limit: null, n: 3, sd: null, conditions: *du23_C}
+      - {label: "D ((E,Z)-2,6-nonadienal)", lever_value: "(E,Z)-2,6-nonadienal", value: 8.87, censor: none, limit: null, n: 3, sd: 1.12, conditions: *du23_D}
+  - id: "du2023-7"
+    odorant: "benzaldehyde"
+    lever_class: "lipid"
+    lever: "aliphatic aldehyde added (none, nonanal, (E)-2-nonenal, (E,E)-2,4-nonadienal, (E,Z)-2,6-nonadienal)"
+    focal: false
+    location: "Table 1 (continued), row 79, p. 5"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "M (control)", lever_value: "none", value: null, censor: nd_no_limit, limit: null, n: 3, sd: null, conditions: *du23_M}
+      - {label: "A (nonanal)", lever_value: "nonanal", value: null, censor: nd_no_limit, limit: null, n: 3, sd: null, conditions: *du23_A}
+      - {label: "B ((E)-2-nonenal)", lever_value: "(E)-2-nonenal", value: null, censor: nd_no_limit, limit: null, n: 3, sd: null, conditions: *du23_B}
+      - {label: "C ((E,E)-2,4-nonadienal)", lever_value: "(E,E)-2,4-nonadienal", value: 23.67, censor: none, limit: null, n: 3, sd: 1.55, conditions: *du23_C}
+      - {label: "D ((E,Z)-2,6-nonadienal)", lever_value: "(E,Z)-2,6-nonadienal", value: 15.52, censor: none, limit: null, n: 3, sd: 4.20, conditions: *du23_D}
