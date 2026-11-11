@@ -69,3 +69,14 @@ def test_categorical_network_connects_through_a_shared_level():
     f = LT.categorical_fit(rows, "glucose", LT.PRIOR_SCALE)
     assert f["levels"]["xylose"]["estimate"] == pytest.approx(1.2, abs=0.15)
     assert f["levels"]["fructose"] == {"reading": "not connected"}
+
+
+@pytest.mark.parametrize("scale", [0.25, 0.5, 1.0])
+def test_the_grid_prior_is_the_half_normal_it_declares(scale):
+    """GRID is log-spaced: each point's weight must be the half-normal density times its cell width, else the grid
+    applies ~ half-normal / s and piles prior mass near zero (sparse cells' intervals came out too narrow)."""
+    w = np.exp(LT._grid_log_prior(scale))
+    w /= w.sum()
+    assert (w * LT.GRID).sum() == pytest.approx(scale * math.sqrt(2.0 / math.pi), rel=0.03)
+    true_below = math.erf(0.1 / scale / math.sqrt(2.0))           # P(|N(0, scale)| < 0.1)
+    assert w[LT.GRID < 0.1].sum() == pytest.approx(true_below, abs=0.03)
