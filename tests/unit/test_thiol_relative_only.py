@@ -21,8 +21,10 @@ from src.kinetic_core.calibration import PAYLOAD_CHECKSUM_FIELD, Calibration, Re
 from src.kinetic_core.engine import SULFUR, TARGET_ALIASES, declare_envelope, predict
 from src.report_html import render_compare_report, render_predict_report
 
+# 2026-11-07 (S3, ph_balance_refusal): a HELD pH, so the pot does not solve the falsified balance and the H0 ruling is
+# what these tests read; on a balance-solved pot the S3 refusal comes first (tests/unit/test_ph_balance_refusal.py).
 POT = {"name": "ribose_cysteine", "precursors": {"L-Cysteine": 10.0, "D-Ribose": 10.0},
-       "temp_C": 145.0, "time_min": 20.0, "ph": 5.0, "aw": 0.98}
+       "temp_C": 145.0, "time_min": 20.0, "ph": 5.0, "aw": 0.98, "buffer": {"kind": "clamped"}}
 COOLER = dict(POT, name="ribose_cysteine_130C", temp_C=130.0)
 IN_SCOPE = {"MFT": "2-methyl-3-furanthiol", "FFT": "2-furfurylthiol", "MFTD": "bis(2-methyl-3-furyl) disulfide",
             "FUR": "furfural", "NF": "norfuraneol", "MGO": "methylglyoxal"}

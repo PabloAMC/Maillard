@@ -116,8 +116,10 @@ def test_water_activity_is_never_trusted_and_ph_is_tagged_by_the_standing_rule()
     # RE-PINNED 2026-10-27 (B51 ships; PH-04/PH-05 retired against the Cerny 2015 chapter): 6/8 -> 4/7. Below
     # the 0.60 caution rate, so the standing rule now says do-not-use for pH-direction claims.
     # RE-PINNED 2026-10-28 (B60 ships; Amendment 45's blind claims scored): 4/7 -> 5/10, still under 0.60: do-not-use.
-    assert (ph.agree, ph.evaluable) == (5, 10)
-    assert ph.verdict == dr.verdict_for(5, 10) == dr.VERDICT_DO_NOT_USE
+    # RE-PINNED 2026-11-07 (S3 application of M1b part (i)): 5/10 -> 1/4; the pH claims whose arms or steps move with
+    # the falsified pH balance are not evaluable. Under the evaluable minimum: do-not-use.
+    assert (ph.agree, ph.evaluable) == (1, 4)
+    assert ph.verdict == dr.verdict_for(1, 4) == dr.VERDICT_DO_NOT_USE
     assert dr.verdict_for(8, 10) == dr.VERDICT_CAUTION
     assert dr.wilson_lower(8, 10) < dr.COIN < dr.wilson_lower(8, 8)
     assert dr.verdict_for(8, 8) == dr.VERDICT_TRUST and dr.verdict_for(7, 7) == dr.VERDICT_TRUST
@@ -531,8 +533,9 @@ def test_one_refused_target_does_not_sink_the_others():
     """2026-10-27. MFT + FFT + methional used to return nothing because methional has no route
     (B22); the two thiols are answered alone. Now they are answered together and methional is
     listed by name with its own reason."""
+    # 2026-11-07 (S3, ph_balance_refusal): a held pH, so the falsified balance's refusal does not take the thiols first
     spec = {"name": "partial", "precursors": {"D-Ribose": 50.0, "L-Cysteine": 10.0, "L-Methionine": 10.0},
-            "temp_C": 150.0, "time_min": 10.0, "ph": 6.0, "aw": 0.98}
+            "temp_C": 150.0, "time_min": 10.0, "ph": 6.0, "aw": 0.98, "buffer": {"kind": "clamped"}}
     # 2026-11-05 (H0 / EX-059): MFT and FFT are now refused by name too, for their absolute level; the
     # out-of-scope 2-acetylthiazole carries the "answered together" half of the test.
     targets = ["2-Methyl-3-furanthiol (MFT)", "2-Furfurylthiol (FFT)", "2-acetylthiazole",

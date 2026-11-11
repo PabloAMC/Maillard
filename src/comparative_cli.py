@@ -473,8 +473,8 @@ def predict_core(
 
     absolute_refused = [c for c in run.concentrations_ug_per_l
                         if run.answered and thiol_relative_only.refused_for(run.declaration, c, calibration)]
-    refused_targets += [{"target": c, "reasons": [thiol_relative_only.refusal_text(calibration, c)], "absolute_refused": True}
-                        for c in absolute_refused]
+    refused_targets += [{"target": c, "reasons": [thiol_relative_only.level_refusal_text(run.declaration, c, calibration)],
+                         "absolute_refused": True} for c in absolute_refused]
     answered = bool(run.answered) and any(c not in absolute_refused for c in run.concentrations_ug_per_l)
     rows: List[Dict[str, Any]] = []
     oav_payload: Dict[str, Any] = {}
@@ -847,6 +847,13 @@ def render_compare_core_text(payload: Mapping[str, Any]) -> str:
             out.append(f"  arm {label}:")
             _render_declaration(declaration, out)
             out.append("")
+    # R3d (PR #108): outputs KEPT on a balance-solved pot carry the band's limit too, not only the refused ones
+    if any(((comparison.get(f"run_{arm}") or {}).get("run_metadata") or {}).get("balance_s3") for arm in ("a", "b")):
+        from src.kinetic_core.ph_balance_refusal import BAND_LIMIT_SHORT
+
+        out.append(_wrap("pH balance (S3): the outputs kept below were judged against the carried rival balances. "
+                         + BAND_LIMIT_SHORT, indent="  ~ "))
+        out.append("")
 
     reliability = payload.get("reliability") or {}
     if reliability.get("available"):

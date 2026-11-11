@@ -152,7 +152,12 @@ def _predict_arm(label: str, system: Mapping[str, Any], observable: str) -> Dict
     value: Optional[float] = None
     if run.answered:
         value = run.concentrations_ug_per_l.get(observable)
+    from .ph_balance_refusal import point_values
+
     return {
+        # 2026-11-07 (S3, ph_balance_refusal): B0's and the carried rivals' values, for the step check; popped before
+        # the claim is returned (they hold absolute levels the tracked artifact must not carry beyond its own)
+        "_s3_points": point_values(core_spec, [observable], run, observable) if value is not None else None,
         "label": label,
         "spec": spec,
         "answered": bool(run.answered),
@@ -226,6 +231,24 @@ def _with_input(claim: Mapping[str, Any], key: str, value: float) -> Dict[str, A
     return out
 
 
+def _balance_step_refusal(runs: List[Dict[str, Any]]) -> Optional[str]:
+    """2026-11-07 (S3 application of M1b part (i)): the first step between consecutive arms whose ratio B0 and the
+    carried pH-balance rivals disagree on in sign, or spread beyond omega (``ph_balance_refusal.ratio_refusal``)."""
+    from .ph_balance_refusal import ratio_refusal
+
+    for a, b in zip(runs, runs[1:]):
+        why = ratio_refusal(b.get("_s3_points"), a.get("_s3_points"))
+        if why:
+            return f"step {a['label']!r} -> {b['label']!r} refused: {why}"
+    return None
+
+
+def _pop_s3(runs: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    for r in runs:
+        r.pop("_s3_points", None)
+    return runs
+
+
 def score_claim(claim: Mapping[str, Any], *, flat_tolerance_pct: float) -> Dict[str, Any]:
     """Score one claim on the core; never raises for a refusal."""
     # 2026-09-07: AN UNSTATED INPUT IS SWEPT, NOT INVENTED. A claim whose source leaves one input
@@ -280,16 +303,19 @@ def score_claim(claim: Mapping[str, Any], *, flat_tolerance_pct: float) -> Dict[
         refused = [r for r in runs if r["value_ug_per_l"] is None]
         if refused:
             reasons = "; ".join(refused[0]["reasons"]) or f"{refused[0]['label']}: no concentration returned"
-            return {**base, "status": NOT_EVALUABLE, "reason": f"observable {refused[0]['label']!r} refused: {reasons[:400]}", "arms": runs}
+            return {**base, "status": NOT_EVALUABLE, "reason": f"observable {refused[0]['label']!r} refused: {reasons[:400]}", "arms": _pop_s3(runs)}
         values = [r["value_ug_per_l"] for r in runs]
         if any(v <= 0.0 for v in values):
-            return {**base, "status": NOT_EVALUABLE, "reason": "a predicted concentration is zero; no ranking is defined", "arms": runs}
+            return {**base, "status": NOT_EVALUABLE, "reason": "a predicted concentration is zero; no ranking is defined", "arms": _pop_s3(runs)}
+        refused_step = _balance_step_refusal(runs)
+        if refused_step:
+            return {**base, "status": NOT_EVALUABLE, "reason": refused_step, "arms": _pop_s3(runs)}
         steps = [math.log10(values[i + 1] / values[i]) for i in range(len(values) - 1)]
         agree = all(s < -tol for s in steps)
         return {
             **base, "status": "agree" if agree else "disagree", "reason": None, "identical_predictions": False,
             "mechanism_absent": False, "lane": runs[0]["lane"], "values_ug_per_l": values, "log10_steps": steps,
-            "predicted_order": [o for _, o in sorted(zip(values, observables), key=lambda p: -p[0])], "arms": runs,
+            "predicted_order": [o for _, o in sorted(zip(values, observables), key=lambda p: -p[0])], "arms": _pop_s3(runs),
         }
     observable = observables[0]  # the panel lists one observable per claim; the first governs
     runs = [_predict_arm(label, system, observable) for label, system in arms]
@@ -306,15 +332,18 @@ def score_claim(claim: Mapping[str, Any], *, flat_tolerance_pct: float) -> Dict[
     refused = [r for r in runs if r["value_ug_per_l"] is None]
     if refused:
         reasons = "; ".join(refused[0]["reasons"]) or f"{observable}: no concentration returned"
-        return {**base, "status": NOT_EVALUABLE, "reason": f"arm {refused[0]['label']!r} refused: {reasons[:400]}", "arms": runs}
+        return {**base, "status": NOT_EVALUABLE, "reason": f"arm {refused[0]['label']!r} refused: {reasons[:400]}", "arms": _pop_s3(runs)}
 
     # Step 5 (2026-09-03): an axis the lane carries no term for is REFUSED by the engine
     # (engine.axis_refusal), so the claim is NOT EVALUABLE rather than a miss of identical
     # predictions. The count of such claims is reported by reason.
     refusal = _axis_refusal_between_arms(arms, runs)
     if refusal is not None:
-        return {**base, "status": NOT_EVALUABLE, "reason": refusal, "arms": runs}
+        return {**base, "status": NOT_EVALUABLE, "reason": refusal, "arms": _pop_s3(runs)}
     values = [r["value_ug_per_l"] for r in runs]
+    refused_step = _balance_step_refusal(runs)
+    if refused_step:
+        return {**base, "status": NOT_EVALUABLE, "reason": refused_step, "arms": _pop_s3(runs)}
     if claim_type == "ordering" and len(values) == 2 and expected in ("A>B", "A<B") and (values[0] == 0.0) != (values[1] == 0.0):
         # one arm is exactly zero (a structural zero or a true zero rate): the ordering is
         # defined even though the log ratio is not.
@@ -323,11 +352,11 @@ def score_claim(claim: Mapping[str, Any], *, flat_tolerance_pct: float) -> Dict[
             **base, "status": "agree" if agree else "disagree", "reason": None,
             "identical_predictions": False, "mechanism_absent": False, "lane": runs[0]["lane"],
             "values_ug_per_l": values, "log10_ratio_B_over_A": None,
-            "structural_zero": any(r.get("structural_zero") for r in runs), "arms": runs,
+            "structural_zero": any(r.get("structural_zero") for r in runs), "arms": _pop_s3(runs),
         }
     steps = [_log_step(values[i + 1], values[i]) for i in range(len(values) - 1)]
     if any(s is None for s in steps):
-        return {**base, "status": NOT_EVALUABLE, "reason": "a predicted concentration is zero; no direction is defined", "arms": runs}
+        return {**base, "status": NOT_EVALUABLE, "reason": "a predicted concentration is zero; no direction is defined", "arms": _pop_s3(runs)}
     identical = all(abs(s) < 1e-12 for s in steps)
     warnings = " ".join(w for r in runs for w in r["warnings"]).lower()
     mechanism_absent = identical and ("no ph term" in warnings or "no a_w term" in warnings or "no water activity" in warnings or "no aw term" in warnings)
@@ -341,7 +370,7 @@ def score_claim(claim: Mapping[str, Any], *, flat_tolerance_pct: float) -> Dict[
         elif expected == "flat":
             agree = abs(step) <= tol
         else:
-            return {**base, "status": NOT_EVALUABLE, "reason": f"unknown expected_relation {expected!r}", "arms": runs}
+            return {**base, "status": NOT_EVALUABLE, "reason": f"unknown expected_relation {expected!r}", "arms": _pop_s3(runs)}
         detail = {"log10_ratio_B_over_A": step}
     else:  # monotonic_direction
         if expected == "increasing":
@@ -354,7 +383,7 @@ def score_claim(claim: Mapping[str, Any], *, flat_tolerance_pct: float) -> Dict[
             k = max(range(len(values)), key=lambda i: values[i])
             agree = 0 < k < len(values) - 1
         else:
-            return {**base, "status": NOT_EVALUABLE, "reason": f"unknown expected_relation {expected!r}", "arms": runs}
+            return {**base, "status": NOT_EVALUABLE, "reason": f"unknown expected_relation {expected!r}", "arms": _pop_s3(runs)}
         detail = {"log10_steps": steps}
     return {
         **base,
@@ -365,7 +394,7 @@ def score_claim(claim: Mapping[str, Any], *, flat_tolerance_pct: float) -> Dict[
         "lane": runs[0]["lane"],
         "values_ug_per_l": values,
         **detail,
-        "arms": runs,
+        "arms": _pop_s3(runs),
     }
 
 
@@ -399,7 +428,13 @@ def _close(bucket: Dict[str, Any]) -> Dict[str, Any]:
 def score_panel(path: Path | str = PANEL_PATH) -> Dict[str, Any]:
     panel = load_panel(path)
     tol_pct = float(panel.get("flat_tolerance_pct", 5.0))
-    rows = [score_claim(claim, flat_tolerance_pct=tol_pct) for claim in panel["panel"]]
+    # 2026-11-07 (S3, ph_balance_refusal): each sulfur arm now runs the carried rivals' points too, so the claims are
+    # scored in parallel when MAILLARD_WORKERS asks for it (forked workers; the result is independent of the count)
+    from functools import partial
+
+    from . import parallel
+
+    rows = parallel.map_ordered(partial(score_claim, flat_tolerance_pct=tol_pct), list(panel["panel"]))
 
     def split(predicate) -> Dict[str, Any]:
         by_cat: Dict[str, Dict[str, Any]] = {}

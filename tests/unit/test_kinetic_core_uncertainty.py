@@ -416,7 +416,7 @@ def test_a_draw_runs_through_every_lane():
         (_glucose_spec(), ["DMHF"]),
         (_lipid_spec(), ["hexanal"]),
     ):
-        run = predict(spec, targets, draw=draw, size_declared_bands=False)
+        run = predict(spec, targets, draw=draw, size_declared_bands=False, balance_refusal=False)   # 2026-11-07 (S3, ph_balance_refusal)
         assert run.answered
         assert all(v >= 0.0 for v in run.concentrations_ug_per_l.values())
 
@@ -513,7 +513,8 @@ def test_shared_hofmann_rows_carry_shared_with(small_artifact):
     refused = {(r["benchmark_id"], r["compound"]): r for r in small_artifact["refused_compounds"]}
     for key in (("mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7", MFT),
                 ("hofmann1998_ribose_cysteine_145C_20min_pH5", MFT)):
-        assert refused[key]["reason"].startswith("NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059)")
+        # 2026-11-07 (S3, ph_balance_refusal): both pots' MFT move beyond omega with the falsified balance, so S3 refuses them first
+        assert refused[key]["reason"].startswith("NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3")
 
 
 def test_predicted_point_is_the_deterministic_prediction(small_artifact):
@@ -551,7 +552,8 @@ def test_refused_rows_use_the_engine_refusal_vocabulary(small_artifact):
     # a refusal reason that is not in it is either a typo or a new category that deserves a decision.
     vocab = ("UNMAPPED PRECURSORS", "UNREPRESENTED TARGET", "LANE CONFLICT", "NOT EVALUABLE",
              "GLYCATION TARGETS", "METHIONINE CHAIN TARGETS", "2-ACETYL-1-PYRROLINE TARGETS",
-             "PYRAZINE TARGETS", "CHARGES NO PRECURSOR", "WAS NEVER COOKED")
+             "PYRAZINE TARGETS", "CHARGES NO PRECURSOR", "WAS NEVER COOKED",
+             "FALSIFIED pH BALANCE")   # 2026-11-07 (S3, ph_balance_refusal)
     assert refused, "the small panel must refuse at least one row"
     assert all(any(v in r["reason"] for v in vocab) for r in refused.values()), \
         [r["reason"][:60] for r in refused.values() if not any(v in r["reason"] for v in vocab)]

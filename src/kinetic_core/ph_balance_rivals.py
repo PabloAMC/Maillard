@@ -79,6 +79,16 @@ TRACKERS: Tuple[str, ...] = ("NH4_CYS", "NH4_ARP", "RET_AA", "LCX", "LAA")
 BRANCH_FORMS: Tuple[str, ...] = ("hold_total", "added_sink")
 #: the added-sink form's rate is y / (1 - y) x the other sinks: undefined at y = 1
 ADDED_SINK_Y_CAP = 1.0 - 1e-6
+#: 2026-11-07 (the S3 application of M1b part (i); ``ph_balance_refusal``): an inline rival integration that needs more
+#: than this many right-hand-side plus Jacobian evaluations is stopped (``RivalBudgetExceeded``), so a refusal for want
+#: of a rival never depends on the machine's speed. Basis: the rival points that finish on the slowest recorded pots
+#: need at most ~38 000 (0.5 M phosphate, pH 7.5, 145 C; 2026-11-07 probe); Chen 2000 / 2002's pH 5 ribose + cysteine
+#: pots at 180 C passed 500 000 without finishing. Off for no run that finishes inside it: it changes no number.
+RIVAL_RHS_BUDGET = 200_000
+
+
+class RivalBudgetExceeded(RuntimeError):
+    """An inline rival integration ran past ``RIVAL_RHS_BUDGET`` evaluations."""
 
 
 def _check_fraction(name: str, value: float) -> None:
@@ -377,11 +387,19 @@ def integrate_inline(parameters, y0, eval_times, duration, temperature_of, sid, 
         j_aug[n_rx + 2, tix["LAA"]] = k_iso
         return s_aug @ j_aug
 
+    def spend():
+        diag["evaluations"] = diag.get("evaluations", 0) + 1
+        if diag["evaluations"] > RIVAL_RHS_BUDGET:
+            raise RivalBudgetExceeded(f"the carried rival's inline integration needed more than RIVAL_RHS_BUDGET = "
+                                      f"{RIVAL_RHS_BUDGET} right-hand-side and Jacobian evaluations")
+
     def rhs(t, y):
         diag["rhs_calls"] += 1
+        spend()
         return evaluate(t, y, False)
 
     def jac(t, y):
+        spend()
         return evaluate(t, y, True)
 
     y_aug0 = np.concatenate([np.asarray(y0, float), np.zeros(len(TRACKERS))])
@@ -424,7 +442,7 @@ def switches_record() -> Dict[str, Any]:
             "arp_forcing": {"enabled": ARP_FORCING.enabled, "n_points": len(ARP_FORCING.times_min)}}
 
 
-__all__ = ["ACID_LAG", "ACID_SUPPLY", "AMADORI_AMINE_STEPS", "AMADORI_LOSS_STEPS", "AMINE_SURVIVAL", "ARP_FORCING",
+__all__ = ["RIVAL_RHS_BUDGET", "RivalBudgetExceeded", "ACID_LAG", "ACID_SUPPLY", "AMADORI_AMINE_STEPS", "AMADORI_LOSS_STEPS", "AMINE_SURVIVAL", "ARP_FORCING",
            "AcidLag", "AcidSupply", "AmineSurvival", "ArpForcing", "BRANCH_FORMS", "CYSTEINE_AMINE_STEPS", "TRACKERS",
            "any_active", "arrhenius_from_120c", "augmented_stoichiometry", "balance_pools", "check_combination",
            "integrate_inline", "switches_record"]

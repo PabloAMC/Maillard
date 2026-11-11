@@ -9,18 +9,18 @@
       "engine": 3.4836008093783635
     },
     "contrasts_oos": {
-      "engine_dex": 0.3076327489342042,
-      "no_change_dex": 0.2841997875578205,
-      "pairs": 37,
-      "studies": 5
+      "engine_dex": 0.3043651020350228,
+      "no_change_dex": 0.14721513131945216,
+      "pairs": 19,
+      "studies": 4
     },
     "directional": [
-      19,
-      32
+      10,
+      19
     ],
     "oos_within_3x": [
       10,
-      24
+      23
     ]
   },
   "artifact": "maillard_model_card",
@@ -29,11 +29,11 @@
     "ci_level_pct": 90,
     "literature_hits": 12,
     "literature_not_evaluable": 1,
-    "literature_total": 23,
-    "median_ci_width_log10": 0.9953630386243943,
+    "literature_total": 22,
+    "median_ci_width_log10": 0.994248176293911,
     "n_samples": 200,
     "out_of_sample_hits": 12,
-    "out_of_sample_total": 23,
+    "out_of_sample_total": 22,
     "path": "results/validation/core_prediction_uncertainty.json",
     "seed": 0,
     "unsampled_lanes": []
@@ -51,30 +51,25 @@
         "rows": 7,
         "within_band": 4
       },
-      "sulfur": {
-        "median_fold_error": 1757.0440585888973,
-        "rows": 1,
-        "within_band": 0
-      },
       "trunk": {
         "median_fold_error": 5.75732658105864,
         "rows": 6,
         "within_band": 2
       }
     },
-    "median_fold_error": 4.62361402798846,
-    "out_of_sample_median_fold_error": 4.62361402798846,
-    "out_of_sample_rows": 24,
+    "median_fold_error": 4.4229437179256,
+    "out_of_sample_median_fold_error": 4.4229437179256,
+    "out_of_sample_rows": 23,
     "out_of_sample_within_band": 10,
     "pass_band_level": 3.0,
-    "rows": 24,
-    "scored": 11,
+    "rows": 23,
+    "scored": 10,
     "source": "recomputed live: src.kinetic_core.scoring.score_panel over the union panel",
     "strict_ready": 0,
     "strict_ready_ids": [],
     "total": 42,
     "within_band": 10,
-    "worst_fold_error": 1757.0440585888973
+    "worst_fold_error": 365.6087699378835
   },
   "directional": {
     "available": true,
@@ -100,8 +95,8 @@
         0
       ],
       "ph": [
-        5,
-        10
+        1,
+        4
       ],
       "process_heating": [
         0,
@@ -116,60 +111,54 @@
         0
       ],
       "sugar_identity": [
-        4,
-        8
+        2,
+        5
       ],
       "sulfur_donor": [
-        2,
-        2
+        1,
+        1
       ],
       "temperature": [
-        5,
-        8
+        4,
+        7
       ],
       "time": [
-        2,
-        3
+        1,
+        1
       ]
     },
     "claims": 119,
     "excluding_ph_aw": [
-      14,
-      22
+      9,
+      15
     ],
     "headline": [
-      19,
-      32
+      10,
+      19
     ],
     "mechanism_absent_misses": 0,
     "misses": {
       "ph": [
         "PH-07",
         "HOX-03",
-        "CER07-PH-01",
-        "CER07-PH-02",
         "MOD08-PH-01"
       ],
       "sugar_identity": [
         "SUG-03",
         "SUG-12",
-        "HOF-03",
         "DIC-01"
       ],
       "temperature": [
         "TEMP-01",
         "TEMP-05",
         "YIL-01"
-      ],
-      "time": [
-        "Z23C-T-01"
       ]
     },
-    "not_evaluable": 43,
+    "not_evaluable": 56,
     "path": "results/validation/core_directional_scores.json",
     "ph_aw": [
-      5,
-      10
+      1,
+      4
     ]
   },
   "exposed_assumptions": [
@@ -223,8 +212,8 @@
   ],
   "generated_by": "scripts/generators/generate_model_card.py",
   "headline_sentences": [
-    "**Absolute concentrations are unreliable.** On the union panel the kinetic core lands 10/24 rows within 3x (median fold error 4.62x, worst 1.76e+03x); out of sample -- every row a core fit read removed -- 10/24 (median 4.62x). Nothing in this repository licenses a ppb number as a specification. The core's 90% Monte-Carlo interval covers 12/23 evaluable literature rows (1 not evaluable: the no lane carries no sampled uncertainty), 12/23 out of sample.",
-    "**Directional and ranking claims are the product, and on the kinetic core they score 19/32 on strictly independent literature claims** (43 independent claims not evaluable: refused arms, prose-only claims, observables the core does not represent) -- 14/22 once pH and water activity are set aside, and 5/10 on pH and water activity themselves, 0 of the misses being identical predictions across an axis the lane carries no term for. A coin scores ~0.5 on binary orderings; read the per-axis rows below, not the aggregate.",
+    "**Absolute concentrations are unreliable.** On the union panel the kinetic core lands 10/23 rows within 3x (median fold error 4.42x, worst 366x); out of sample -- every row a core fit read removed -- 10/23 (median 4.42x). Nothing in this repository licenses a ppb number as a specification. The core's 90% Monte-Carlo interval covers 12/22 evaluable literature rows (1 not evaluable: the no lane carries no sampled uncertainty), 12/22 out of sample.",
+    "**Directional and ranking claims are the product, and on the kinetic core they score 10/19 on strictly independent literature claims** (56 independent claims not evaluable: refused arms, prose-only claims, observables the core does not represent) -- 9/15 once pH and water activity are set aside, and 1/4 on pH and water activity themselves, 0 of the misses being identical predictions across an axis the lane carries no term for. A coin scores ~0.5 on binary orderings; read the per-axis rows below, not the aggregate.",
     "**The sulfur branch has 8 absolute literature anchors, and the model lands no scored anchor rows within 3x to report: since 2026-11-05 the thiol lane ships relative within-laboratory predictions only (H0 / EX-059, D2 branch (i)), so every anchor row is refused for its level, kept only for the within-study contrasts, and the branch has no scored absolute anchor.** They are the primary-source-verified stable-isotope-dilution rows in hofmann1998_c2c3_recombination_145C_20min_pH3, hofmann1998_c2c3_recombination_145C_20min_pH5, hofmann1998_c2c3_recombination_145C_20min_pH7, hofmann1998_fructose_cysteine_145C_20min_pH5, hofmann1998_furan2aldehyde_h2s_145C_20min_pH5, hofmann1998_glucose_cysteine_145C_20min_pH5, hofmann1998_norfuraneol_cysteine_145C_20min_pH5, hofmann1998_ribose_cysteine_145C_20min_pH5. A further 1 primary-source-verified sulfur row(s) are on the panel and are NOT counted here, because a constant was selected by looking at them (hofmann1998_norfuraneol_h2s_145C_20min_pH5): agreement on a fitted row is not evidence about the model. The previously shipped claim of ZERO anchors was corrected on 2026-08-28 when the full text behind them was obtained; the retired benchmark (cys_ribose_140C_Hofmann1998, two values derived inside the repository, never measured) was deleted on 2026-10-27. Absolute agreement is poor and the DIRECTION is a separate question."
   ],
   "no_verifiable_source": {
@@ -367,13 +356,6 @@
     {
       "basis": "recomputed live on the union panel; an absolute is never trust by rule",
       "claim_type": "Absolute concentration (ppb)",
-      "evidence": "0/1 rows within 3x, median 1.76e+03x",
-      "system_class": "free precursor, sulfur-lane observables H0 did not score (2-acetylthiazole) [sulfur lane]",
-      "verdict": "do-not-use"
-    },
-    {
-      "basis": "recomputed live on the union panel; an absolute is never trust by rule",
-      "claim_type": "Absolute concentration (ppb)",
       "evidence": "2/6 rows within 3x, median 5.76x",
       "system_class": "free precursor, sugar + amine browning / furanics [trunk lane]",
       "verdict": "do-not-use"
@@ -393,16 +375,23 @@
       "verdict": "do-not-use"
     },
     {
+      "basis": "results/validation/ph_balance_s3_sensitivity.json; S3 (STATUS_AND_PLAN sec. 7) on CF-084 / CF-134; lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test",
+      "claim_type": "Any output on a pot whose pH the sulfur lane solves from the charge balance",
+      "evidence": "REFUSED where it moves with the carried rivals B1 / B13 beyond the term it ships with: 1155/3522 levels beyond tau 0.964 dex, 671/1396 pH levels beyond 0.478 pH; ratios beyond omega 0.419 dex or in sign. Refused and kept outputs alike: The band is bounded by the carried rivals' screen-passing extremes (R3: 23 points of B1's 95 and B13's 255 passing draws), which under-cover it: they reach the all-draws spread within 0.05 in 0.76 of outputs and its verdict in 57 of 58 (miss rate 1.7 %, exact 95 % interval 0.04 - 9.2 %). A re-run on every passing draw replaces them when B1 and B13 are ported to the JAX network (prereg sec. 21.10, R3d).",
+      "system_class": "sulfur lane, any buffer but a clamped (held, measured) pH [sulfur lane]",
+      "verdict": "do-not-use"
+    },
+    {
       "basis": "results/validation/core_prediction_uncertainty.json (n=200); the no lane has no sampled uncertainty",
       "claim_type": "Absolute concentration interval (90% CI)",
-      "evidence": "12/23 evaluable literature rows inside; 12/23 out of sample; 1 not evaluable",
+      "evidence": "12/22 evaluable literature rows inside; 12/22 out of sample; 1 not evaluable",
       "system_class": "every lane with sampled uncertainty",
       "verdict": "do-not-use"
     },
     {
-      "basis": "misses: SUG-03, SUG-12, HOF-03, DIC-01",
+      "basis": "misses: SUG-03, SUG-12, DIC-01",
       "claim_type": "Direction / ranking on `sugar_identity`",
-      "evidence": "4/8 on the directional panel (independent claims)",
+      "evidence": "2/5 on the directional panel (independent claims)",
       "system_class": "any (sugar swap, conditions held)",
       "verdict": "do-not-use"
     },
@@ -416,14 +405,14 @@
     {
       "basis": "misses: TEMP-01, TEMP-05, YIL-01",
       "claim_type": "Direction / ranking on `temperature`",
-      "evidence": "5/8 on the directional panel (independent claims)",
+      "evidence": "4/7 on the directional panel (independent claims)",
       "system_class": "any (temperature moved, everything else held)",
-      "verdict": "caution"
+      "verdict": "do-not-use"
     },
     {
-      "basis": "misses: Z23C-T-01",
+      "basis": "",
       "claim_type": "Direction / ranking on `time`",
-      "evidence": "2/3 on the directional panel (independent claims)",
+      "evidence": "1/1 on the directional panel (independent claims)",
       "system_class": "any (time moved, everything else held)",
       "verdict": "caution"
     },
@@ -442,9 +431,9 @@
       "verdict": "do-not-use"
     },
     {
-      "basis": "misses: PH-07, HOX-03, CER07-PH-01, CER07-PH-02, MOD08-PH-01",
+      "basis": "misses: PH-07, HOX-03, MOD08-PH-01",
       "claim_type": "Direction / ranking on `ph`",
-      "evidence": "5/10 on the directional panel (independent claims)",
+      "evidence": "1/4 on the directional panel (independent claims)",
       "system_class": "any (pH moved)",
       "verdict": "do-not-use"
     },
@@ -472,7 +461,7 @@
     {
       "basis": "recomputed live; strict-ready is the repository's own passing bar",
       "claim_type": "Any claim of benchmark-grade agreement",
-      "evidence": "0/42 strict-ready (none); 10/24 rows within 3x, out-of-sample 10/24",
+      "evidence": "0/42 strict-ready (none); 10/23 rows within 3x, out-of-sample 10/23",
       "system_class": "the union panel: trust loop + hold-outs + matrix bundles",
       "verdict": "do-not-use"
     },

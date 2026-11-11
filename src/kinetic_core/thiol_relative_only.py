@@ -258,13 +258,29 @@ def calibration_rescues(calibration: Any, compound: str) -> bool:
 
 
 def refused_for(declaration: Any, compound: str, calibration: Any = None) -> bool:
-    """Declared, and not rescued by a calibration :func:`calibration_rescues` accepts."""
+    """Declared, and not rescued by a calibration :func:`calibration_rescues` accepts. A level the S3 refusal of the
+    falsified pH balance withholds (``ph_balance_refusal.level_refused``, 2026-11-07) is never rescued: a calibrated
+    response factor does not undo the balance's dependence."""
+    from .ph_balance_refusal import level_refused
+
+    if declared(declaration, compound) and level_refused(declaration, compound):
+        return True
     return declared(declaration, compound) and not calibration_rescues(calibration, compound)
+
+
+def level_refusal_text(declaration: Any, compound: str, calibration: Any = None, *, short: bool = False) -> str:
+    """The reason a declared level is withheld: S3's (the falsified pH balance) where that rule refused it, else H0's."""
+    from . import ph_balance_refusal as s3
+
+    if s3.level_refused(declaration, compound):
+        return s3.short_reason() if short else s3.refusal_text((compound,))
+    return short_reason() if short else refusal_text(calibration, compound)
 
 
 __all__ = [
     "ABSOLUTE_REFUSED_TAG", "CALIBRATE_GENERATOR", "H0_RECORD", "H0Ruling", "NOISE_RECORD", "RELATIVE_ONLY_SPECIES",
     "Z90", "calibrated_extra_decades", "calibration_problem", "calibration_rescues", "declared", "in_scope", "ratio_half_width_dex",
-    "ratio_interval", "ratio_interval_factor", "refusal_text", "refused_for", "relative_caveat", "ruling",
+    "level_refusal_text", "ratio_interval", "ratio_interval_factor", "refusal_text", "refused_for",
+    "relative_caveat", "ruling",
     "short_reason",
 ]

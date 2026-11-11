@@ -94,9 +94,10 @@ def test_with_consumers_on_the_reservoir_depletes_and_the_thiols_respond():
 
 
 def test_a_draw_can_move_the_consumers_and_the_reservoir():
-    run0 = predict(_pot(), ["2-furfurylthiol"])
+    # 2026-11-07 (S3, ph_balance_refusal): the draw mechanism on the unrefused engine (this pot's FFT moves with the falsified balance)
+    run0 = predict(_pot(), ["2-furfurylthiol"], balance_refusal=False)
     draw = engine.CoreDraw(maillard={"oxygen": {"k_cys_ox": 0.1, "k_red_ox": 0.0}}, oxygen_reservoir_scale=0.1)
-    run1 = predict(_pot(), ["2-furfurylthiol"], draw=draw)
+    run1 = predict(_pot(), ["2-furfurylthiol"], draw=draw, balance_refusal=False)
     assert run1.require("2-furfurylthiol") != run0.require("2-furfurylthiol")
 
 

@@ -889,6 +889,11 @@ class EnvelopeDeclaration:
     #: and every output that would emit the level refuses it by name; ``compare`` answers their ratios with
     #: omega in the interval.
     absolute_refused_targets: Tuple[str, ...] = ()
+    #: 2026-11-07 (the S3 application of M1b part (i); ``ph_balance_refusal``): the requested names whose absolute
+    #: level moves with the falsified pH balance beyond tau. They are ALSO in ``absolute_refused_targets``, so every
+    #: output that withholds an H0 level withholds these by the same path (the number is kept for ratios); this field
+    #: says which reason applies and that no calibration rescues them.
+    balance_refused_targets: Tuple[str, ...] = ()
 
     @property
     def is_answerable(self) -> bool:
@@ -944,6 +949,7 @@ class EnvelopeDeclaration:
             "mapped_targets": dict(self.mapped_targets),
             "lipid_carriers": list(self.lipid_carriers),
             "absolute_refused_targets": list(self.absolute_refused_targets),
+            "balance_refused_targets": list(self.balance_refused_targets),
         }
 
 
@@ -2740,6 +2746,7 @@ def predict(
     parameters: Optional[Mapping[str, Any]] = None,
     draw: Optional[CoreDraw] = None,
     size_declared_bands: bool = True,
+    balance_refusal: Optional[bool] = None,
 ) -> CorePrediction:
     """
     THE ENTRY POINT. Map ``spec`` onto a lane, integrate, emit B4 objects.
@@ -2755,6 +2762,14 @@ def predict(
     not ALSO price them by re-integration. ``parameters`` is still the raw
     operative override and cannot be combined with ``draw.maillard``. With
     the defaults the output is byte-identical to the pre-B2 engine.
+
+    ``balance_refusal`` (2026-11-07, the S3 application of M1b part (i); ``ph_balance_refusal``): on a pot whose pH
+    the falsified charge balance solves, every output whose spread over B0 and the two carried rivals exceeds the
+    lane's within-lab term is refused (all of them: ``out_of_envelope`` with the reason; some: named and dropped) and
+    the balance's end pH is withheld when its spread exceeds the prereg's pH term. ``False`` skips that, and exists
+    for the S3 sensitivity generator and the rule's own integrations, which must compute the falsified point.
+    ``None`` reads the switch ``ph_balance_refusal.ENABLED`` (config key ``ph.balance_refusal``, shipped True; a frozen
+    fit's objective runs with it off).
     """
     if parameters is not None and draw is not None and draw.maillard is not None:
         raise ValueError(
@@ -2762,6 +2777,10 @@ def predict(
             "space `draw.maillard`, not both: they would silently shadow each "
             "other."
         )
+    if balance_refusal is None:
+        from . import ph_balance_refusal as _s3_switch
+
+        balance_refusal = bool(_s3_switch.ENABLED)
     declaration = declare_envelope(spec, targets)
     if not declaration.is_answerable:
         return CorePrediction(spec=spec, declaration=declaration)
@@ -2972,13 +2991,58 @@ def predict(
         for name in declaration.unreachable_targets:
             concentrations.pop(name, None)
 
-    return CorePrediction(
+    shipped = CorePrediction(
         spec=spec,
         declaration=declaration,
         concentrations_ug_per_l=concentrations,
         species_mmol_per_l=final_state,
         run_metadata=metadata,
     )
+    if balance_refusal and maillard_lane == SULFUR:
+        return _apply_balance_refusal(shipped, targets, centre=(parameters is None and (draw is None or draw.is_centre)))
+    return shipped
+
+
+def _apply_balance_refusal(run: CorePrediction, targets: Sequence[str], *, centre: bool) -> CorePrediction:
+    """2026-11-07 (S3 application of M1b part (i); ``ph_balance_refusal``, prereg sec. 21.10): on a pot whose pH the
+    falsified balance solves, every absolute level that moves with the carried rivals beyond tau is refused BY NAME as
+    H0 refuses a thiol level (``absolute_refused_targets``, and ``balance_refused_targets`` for the reason): the number
+    stays in the run, so a ratio between pots is judged by the ratio rule (omega and sign, in ``compare``), never by
+    its arms' levels. The balance's end pH is withheld when it moves beyond the pH-level term."""
+    from dataclasses import replace
+
+    from . import ph_balance_refusal as s3
+    from . import ph_balance_rivals
+
+    spec, declaration = run.spec, run.declaration
+    if not s3.balance_solved(spec, declaration.lanes or (declaration.lane,)):
+        return run
+    if ph_balance_rivals.any_active():
+        raise ValueError("a carried pH-balance rival (ph_balance_rivals) is switched on, so this run is not the shipped "
+                         "balance and S3's refusal does not read it: pass balance_refusal=False to run a rival")
+    verdict = s3.assess(spec, list(targets), b0_run=run if centre else None)
+    metadata = dict(run.run_metadata)
+    metadata["balance_s3"] = verdict.summary()
+    refused = tuple(c for c in run.concentrations_ug_per_l if c in verdict.refused)
+    if refused:
+        declaration = replace(
+            declaration,
+            absolute_refused_targets=tuple(declaration.absolute_refused_targets)
+            + tuple(c for c in refused if c not in declaration.absolute_refused_targets),
+            balance_refused_targets=refused)
+    if verdict.ph_refused:
+        segments = []
+        for i, segment in enumerate(metadata.get("segments") or []):
+            segment = dict(segment)
+            # a later segment's in-situ START is the balance's pH at the boundary, not the label's shift
+            # (confirmation read of PR #108): withheld too; only segment 0's start is the label's
+            for key in s3.WITHHELD_PH_KEYS + (("ph_in_situ_start",) if i > 0 else ()):
+                if key in segment:
+                    segment[key] = None
+            segment["ph_refused"] = s3.ph_refusal_text()
+            segments.append(segment)
+        metadata["segments"] = segments
+    return replace(run, declaration=declaration, run_metadata=metadata)
 
 
 # ---------------------------------------------------------------------------
@@ -3158,11 +3222,34 @@ def compare(
                 "band-floor artefact, so no ratio is claimed; the model supports the ordering "
                 "'pentose above hexose' structurally, not a magnitude"
             )
+    # 2026-11-07 (S3 application of M1b part (i); ph_balance_refusal): a ratio whose arms sit on the falsified pH
+    # balance is refused when B0 and the carried rivals disagree on its sign, or spread it beyond omega.
+    from . import ph_balance_refusal as _s3
+
+    for row in payload.get("rows", []):
+        if row.get("direction") == "undefined":
+            continue
+        compound = str(row["compound"])
+        why = _s3.ratio_refusal(_s3.point_values(spec_a, targets, run_a, compound),
+                                _s3.point_values(spec_b, targets, run_b, compound))
+        if why:
+            row["ratio_a_over_b"] = None
+            row["direction"] = "undefined"
+            row["within_reliability_band"] = False
+            row["balance_refused"] = True
+            row["note"] = why
     # 2026-11-05 (H0 / EX-059, D2 branch (i)): a ratio of a thiol-lane observable is what the lane ships, with
     # the within-laboratory shape error omega in each arm -- added HERE and nowhere else, since no other interval
     # carries it -- and the owner's caveat that the relative branch has not been shown better than a null.
     # A ratio inside that interval is not resolved, whatever the dispersion band says (review m1).
-    relative_only = set(run_a.declaration.absolute_refused_targets) | set(run_b.declaration.absolute_refused_targets)
+    # A level refused by the balance only (S3) is not a relative-only H0 output; a level refused by BOTH (an H0
+    # thiol on a balance-solved pot) keeps H0's ratio treatment when its ratio stands (confirmation read of PR #108).
+    def _relative_only(decl) -> set:
+        h0 = {t for t in decl.balance_refused_targets
+              if thiol_relative_only.in_scope(decl.mapped_targets.get(t))}
+        return (set(decl.absolute_refused_targets) - set(decl.balance_refused_targets)) | h0
+
+    relative_only = _relative_only(run_a.declaration) | _relative_only(run_b.declaration)
     for row in payload.get("rows", []):
         if str(row["compound"]) not in relative_only or row.get("direction") == "undefined":
             continue
@@ -3178,6 +3265,10 @@ def compare(
     rows_ = payload.get("rows", [])
     payload["n_undefined"] = sum(1 for r in rows_ if r.get("direction") == "undefined")
     payload["n_resolved"] = sum(1 for r in rows_ if r.get("direction") != "undefined" and not r.get("within_reliability_band"))
+    # the ranking is recomputed AFTER the refusals, so a refused or undefined ratio is never ordered (review, PR #108)
+    payload["ranking_by_ratio"] = [r["compound"] for r in sorted(
+        (r for r in rows_ if r.get("direction") != "undefined" and isinstance(r.get("ratio_a_over_b"), (int, float))),
+        key=lambda r: r["ratio_a_over_b"], reverse=True)]
     out = {
         "comparable": True,
         "ratios": payload,
@@ -3200,7 +3291,9 @@ def compare(
     if relative_only:
         out["relative_caveat"] = thiol_relative_only.relative_caveat()
     if withheld:
-        out["absolute_refused"] = {c: thiol_relative_only.refusal_text(calibration, c) for c in sorted(withheld)}
+        out["absolute_refused"] = {
+            c: thiol_relative_only.level_refusal_text(run_a.declaration if c in run_a.declaration.absolute_refused_targets
+                                                      else run_b.declaration, c, calibration) for c in sorted(withheld)}
     return out
 
 
@@ -3217,8 +3310,10 @@ def _withhold_absolutes(payload: Dict[str, Any], arm: str, declaration: "Envelop
     b4 = {keys_for(n, declaration.mapped_targets).b4 for n in names} - {None}
     run = payload[f"run_{arm}"]
     run["concentrations_ug_per_l"] = {c: v for c, v in run["concentrations_ug_per_l"].items() if c not in names}
+    # 2026-11-07 (S3): the species of a level the falsified balance refuses leave the state vector too
+    balance_keys = {declaration.mapped_targets.get(n) for n in declaration.balance_refused_targets} - {None}
     run["species_mmol_per_l"] = {k: v for k, v in run["species_mmol_per_l"].items()
-                                 if k not in thiol_relative_only.RELATIVE_ONLY_SPECIES}
+                                 if k not in thiol_relative_only.RELATIVE_ONLY_SPECIES and k not in balance_keys}
     payload[f"rows_{arm}"] = [r for r in payload[f"rows_{arm}"] if r.get("compound") not in names]
     table = payload[f"oav_table_{arm}"]
     if table and b4:
