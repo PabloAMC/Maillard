@@ -224,3 +224,19 @@ def test_a_thiol_refused_on_both_grounds_keeps_h0s_interval_when_its_ratio_stand
         assert "interval_90_ratio_a_over_b" in row and row.get("relative_caveat"), row["compound"]
         checked += 1
     assert checked >= 1
+
+
+def test_the_rivals_run_in_parallel_with_the_serial_verdict(monkeypatch):
+    """The 23 rival integrations go through ``parallel.map_ordered`` (each under its own Config): the verdict with
+    workers is the serial one, bit for bit (2026-11-11: the serial loop doubled CI time and timed main out)."""
+    spec = _core(UNBUFFERED)
+    verdicts = []
+    for n in ("1", "3"):
+        monkeypatch.setenv("MAILLARD_WORKERS", n)
+        s3._CACHE.clear()
+        verdicts.append(s3.assess(spec, LEVELS))
+    s3._CACHE.clear()
+    serial, forked = verdicts
+    assert serial.failure is None and forked.failure is None
+    assert forked.values == serial.values and forked.ph == serial.ph
+    assert forked.refused == serial.refused and forked.spread_dex == serial.spread_dex

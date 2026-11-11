@@ -46,6 +46,11 @@ env:
   # Belt and braces: conda >=25.3 refuses the `defaults` channel non-interactively until
   # its terms are accepted; environment.yml uses conda-forge only, so this should never fire.
   CONDA_PLUGINS_AUTO_ACCEPT_TOS: "yes"
+  # The hosted runner has 4 vCPUs. src/kinetic_core/parallel.py forks this many workers for independent pots (the
+  # directional panel's claims, the S3 refusal's 23 carried rival points); results are bit-identical to the serial
+  # loop (tests/unit/test_parallel.py, test_ph_balance_refusal.py). Without it the S3 rivals ran serially and both
+  # test jobs hit their timeouts on main (2026-11-11, after PR #108).
+  MAILLARD_WORKERS: "4"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

@@ -213,6 +213,15 @@ def _ph_of(run) -> Dict[str, Optional[float]]:
     return {k: seg.get(k) for k in WITHHELD_PH_KEYS}
 
 
+def _rival_values(job: Tuple[Any, Tuple[str, ...], Any]) -> Tuple[Dict[str, float], Dict[str, Optional[float]]]:
+    """One rival point's integration (its Config is installed by ``parallel.run_job``): ({compound: ug/L}, end pH)."""
+    from . import engine
+
+    spec, targets, drift = job
+    run = engine.predict(spec, list(targets), draw=engine.CoreDraw(ph_drift=drift), balance_refusal=False)
+    return {c: float(v) for c, v in run.concentrations_ug_per_l.items()}, _ph_of(run)
+
+
 def assess(spec: Any, targets: Sequence[str], b0_run: Any = None) -> Verdict:
     """The verdict for ``spec`` asked for ``targets``: B0 (``b0_run`` when the caller already integrated the shipped
     centre, else integrated here) against every rival point. Cached by (spec, targets)."""
@@ -228,12 +237,17 @@ def assess(spec: Any, targets: Sequence[str], b0_run: Any = None) -> Verdict:
     verdict.values["B0"] = {c: float(v) for c, v in b0_run.concentrations_ug_per_l.items()}
     verdict.ph["B0"] = _ph_of(b0_run)
     try:
+        # the rival points are independent integrations, each under its own Config: run through ``parallel`` (forked
+        # per call, bit-identical to the serial loop; MAILLARD_WORKERS workers, serial by default and inside a worker)
+        from . import parallel
+
         base = config.Config.from_globals()
-        for point, (changes, drift) in rival_points().items():
-            with config.applied(base.replace(changes)):
-                run = engine.predict(spec, list(targets), draw=engine.CoreDraw(ph_drift=drift), balance_refusal=False)
-            verdict.values[point] = {c: float(v) for c, v in run.concentrations_ug_per_l.items()}
-            verdict.ph[point] = _ph_of(run)
+        points = rival_points()
+        jobs = [parallel.Configured((spec, tuple(targets), drift), base.replace(changes))
+                for changes, drift in points.values()]
+        for point, (values, ph) in zip(points, parallel.map_ordered(_rival_values, jobs)):
+            verdict.values[point] = values
+            verdict.ph[point] = ph
     except Exception as exc:  # noqa: BLE001 - a rival that cannot be run cannot show independence: refuse
         verdict.failure = f"{type(exc).__name__}: {exc}"[:300]
         verdict.refused = tuple(names)
