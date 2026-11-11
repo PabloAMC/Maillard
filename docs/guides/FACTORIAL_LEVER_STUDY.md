@@ -1,7 +1,8 @@
-# One factorial lever study in a plant-protein matrix (plan P3, STATUS_AND_PLAN sec. 4.1 and sec. 0)
+# One factorial lever study in a plant-protein matrix, run in two or three laboratories (plan P3, STATUS_AND_PLAN sec. 4.1 and sec. 0)
 
 *Draft, 2026-11-11. Design and sizing only; nothing has been sent. Sending a request to any laboratory is the
-owner's action (STATUS_AND_PLAN sec. 0, owner row). Written for a food-chemistry group with SIDA GC-MS.*
+owner's action (STATUS_AND_PLAN sec. 0, owner row). Written for food-chemistry groups with SIDA GC-MS; redesigned the same day for two or three
+laboratories after the preposterior check.*
 
 ## Why this study, and why now
 
@@ -16,61 +17,78 @@ the same in every odorant family:
 2. **Matrix.** No keyed cell has a heated plant-protein contrast. Every published lever is measured in buffer, meat or
    a process flavour.
 
-A single designed study in a pea-isolate matrix adds one laboratory to many cells at once, in the matrix users cook
-in. It is also the only route by which the kinetic engine can earn a cell (step 5 needs held-out contrasts from new
-laboratories, and no thiol x pH, sugar or temperature cell has two on disk).
+One designed study in a pea-isolate matrix, run in the same form by two or three laboratories, adds those
+laboratories to many cells at once, in the matrix users cook in. It is also the only route by which the kinetic
+engine can earn a cell: step 5 needs held-out contrasts from two new laboratories, and no thiol x pH, sugar or
+temperature cell has two on disk. One laboratory alone would not open step 5 (preposterior check below).
 
-## The design: 2^4 full factorial, two replicate pots, plus four checks (36 pots)
+## The design: one 2^3 factorial, run in two or three laboratories (36 pots)
 
-**Base pot.** 15 % w/w commercial pea protein isolate (state the product, lot and its protein %) in water, 1 kg/L,
-sealed glass vials, one vial per pot, the same fill and headspace in every vial. Heat 140 C, 20 min (sample
+*Redesigned 2026-11-11 after the preposterior check below. The 2^4 single-laboratory draft is kept in git history.
+What the study must buy is laboratories, not replicates.*
+
+**Base pot.** 15 % w/w commercial pea protein isolate in water, 1 kg/L, sealed glass vials, one vial per pot, the
+same fill and headspace in every vial. One product and one lot for every laboratory, shipped from one batch (state
+product, lot and protein %), so that a laboratory difference is not a lot difference. Heat 140 C, 20 min (sample
 temperature logged), ice quench. pH measured before heating and after cooling in every vial.
 
 | factor | low | high | the cells it feeds |
 |---|---|---|---|
 | A. sugar | glucose 30 mM | ribose 30 mM | sugar identity x every family |
 | B. sulfur source | cysteine 10 mM | thiamine 10 mM | sulfur source (thiamine connects to cysteine, which no keyed study does) |
-| C. yeast extract | 0 % | 1 % w/w (state product) | yeast extract x every family (no contrast on disk) |
-| D. pH (set before heating) | 5.5 | 6.5 | pH x every family, in the 4.5-6 and 6-7.5 bands |
+| C. pH (set before heating) | 5.5 | 6.5 | pH x every family, 6 - 7.5 band (midpoint 6.0) |
 
-16 cells x 2 replicate pots = **32 pots**, randomised run order, blocked by day if needed. **Four checks:** base pot
-with no sugar and no sulfur source (the matrix's own background), duplicated; the A-low/B-low/C-low/D-low pot
-without pea isolate (buffer only), duplicated: the matrix contrast the map lacks.
+Yeast extract is dropped: the lever table has no yeast-extract class, so it would feed no cell (preposterior check,
+point 4). It returns only if the owner wants it and a PREREG amendment adds the class before any data are read.
+
+**Per laboratory**, randomised run order:
+
+| | three laboratories (preferred) | two laboratories (minimum) |
+|---|---|---|
+| factorial pots | 8 cells x 1 pot | 8 cells x 2 pots |
+| matrix background (base pot, no sugar, no sulfur source) | 2 | 1 |
+| buffer only (A-low / B-low / C-low without pea isolate: the matrix contrast) | 2 | 1 |
+| pots per laboratory | 12 | 18 |
+| total | 36 | 36 |
 
 **Analytes** (SIDA where a labelled standard exists; otherwise one internal standard and the same method in every
-pot, so within-study ratios cancel the response factor):
+pot, so within-study ratios cancel the response factor; each laboratory may use its own method, which is part of
+what a new laboratory measures):
 - meaty thiols: MFT, FFT, bis(2-methyl-3-furyl) disulfide, H2S (if the group can trap it);
 - Strecker aldehydes and methional: 2- and 3-methylbutanal, phenylacetaldehyde, methional;
 - pyrazines: 2,5-dimethylpyrazine, 2,3,5-trimethylpyrazine, 2-ethyl-3,5-dimethylpyrazine, total pyrazines;
 - off-notes: hexanal, nonanal, 2-pentylfuran, 1-octen-3-ol (the isolate's lipid background);
 - furanones: DMHF, norfuraneol, furfural.
-- Optional, if available: GC-O / AEDA on the 4 corner pots that differ in A and C (the perception layer).
+- Optional, if available: GC-O / AEDA on the 4 corner pots that differ in A and B (the perception layer).
+
+**Keying (PREREG amendment A4).** Each laboratory gives ONE contrast per lever and odorant: the mean log10 value of
+the factorial pots at the lever's high level against those at its low level (4 against 4, or 8 against 8 with two pots
+per cell). Interactions are estimated within each laboratory and reported with the
+study; they do not enter the table.
 
 ## Sizing
 
-Per-pot reproducibility of a within-study log ratio is taken as 0.10 - 0.15 dex (20 - 30 % CV per pot; PREREG sec. 5
-uses 20 %, n = 2). In a 2^4 design with 2 replicates, each main effect is a difference of two means of 16 pots:
-standard error 0.035 - 0.053 dex. A main effect of **0.15 dex (1.4x) is detected at alpha 0.05 (two-sided) with power
-about 0.85 - 0.99** across that range; in a full factorial every two-factor interaction (e.g. ribose x thiamine,
-yeast extract x pH) has the same standard error, so it is detected at the same size. The study is therefore not
-limited by replicates; what it adds is one laboratory and one matrix to each cell below. Adding a third replicate
-does not change what the table can show; a second laboratory running the same 36 pots would.
+Per-pot reproducibility of a log value is taken as 0.10 - 0.15 dex (PREREG sec. 5 uses 20 % CV, n = 2). One
+laboratory's main effect is a difference of two means of 4 pots (three-laboratory arm) or 8 pots (two-laboratory
+arm): standard error 0.07 - 0.11 dex or 0.05 - 0.075 dex. A 2x effect (0.30 dex) is therefore seen by each
+laboratory on its own, and the measurement is not what limits the answer. What limits it is how much the effect
+varies between laboratories, and only more laboratories measure that. With one pot per cell, a laboratory's own
+error estimate rests on the duplicated checks and the three-factor interaction; the table does not need it (sec. 5
+uses the declared measurement variance).
 
 ## What each result does to the tool
 
-| map cell (family x lever) | today | after this study |
-|---|---|---|
-| thiols x sugar identity | 2 laboratories, listed | 3: can be answered (ribose vs glucose) |
-| thiols x pH | 4 laboratories, direction unclear | 5, and the first plant-protein matrix in the cell |
-| thiols x sulfur source (thiamine) | keyed, not connected to cysteine | connected: thiamine vs cysteine estimated |
-| any family x yeast extract | no contrast on disk | 1 laboratory: listed (the map's experiment line still asks for 2 more) |
-| Strecker / pyrazines / furanones x sugar, pH | 1 - 3 laboratories | one more each |
-| off-notes x any lever | thin | the isolate's own lipid background, measured |
-| engine, step 5 | no held-out new-laboratory contrasts | 16+ new-laboratory contrasts per odorant (TEST by PREREG sec. 2) |
+From the preposterior check (matrix shift 0.3 dex, A4 keying; means of 200 simulated outcomes):
+
+| | today | two laboratories | three laboratories |
+|---|---|---|---|
+| lever-table cells newly answered | - | 11 (8 with a literature estimate today) | 36 (8 with a literature estimate; the rest depend on the prior, read as optimistic) |
+| experiment-map family x lever cells newly answered | 1 answered | 7 | 18 |
+| cells where step 5 can test the engine (two TEST laboratories) | 0 | 57 | 57 |
+| plant-protein matrix in the keyed record | none | every cell the study touches | every cell the study touches |
 
 Every prediction (the lever table's and the engine's) is frozen and sent before the data exist, with its pass rule.
-A cell is "answered" only by the PREREG sec. 5 rule; the study cannot answer a cell on its own, only add its
-laboratory.
+A cell is "answered" only by the PREREG sec. 5 rule.
 
 ## Preposterior check: does the study unblock anything? (2026-11-11)
 
@@ -111,9 +129,8 @@ What it shows:
    (MFT, no sulfur source vs cysteine; 7 contrasts, 4 from one laboratory) survives this: refitted with one contrast
    per laboratory, it stays answered in all 8 subsamples (estimate -0.81 to -1.21 dex).
 
-**Redesign before sending:** the 2^3 (sugar x sulfur source x pH) with the four checks, run in two laboratories
-(minimum) or three (preferred), one replicate each when three take part. What it adds is laboratories; the matrix
-comes with them.
+**Redesign (done the same day, owner-approved):** the design section above is now the 2^3 (sugar x sulfur source x pH)
+with checks, in two laboratories (minimum) or three (preferred), keyed by PREREG amendment A4.
 
 ## What the partner gets
 
@@ -122,7 +139,11 @@ analysis and the pre-registration done by us. They keep their data and decide wh
 
 ## Open points for the owner
 
-- Which group, and whether the full 36 pots or the 2^(4-1) half fraction (8 cells x 2 pots = 16 pots plus the checks;
-  resolution IV: main effects clear of two-factor interactions, which are then aliased in pairs) fits their budget.
-- Whether to add the pan-fried arm (180 C surface) at the two A x C corners: the cooking-method cell has no contrast.
+- Which two or three groups. Each must be a separate laboratory (not two groups sharing one instrument or one method
+  lead). Preferably each is absent from `docs/reference/contrast_benchmark/split.yml`: PREREG sec. 2 makes an absent
+  laboratory TEST, while a laboratory already in the split keeps its partition, and a DEVELOPMENT one gives step 5
+  nothing. The preposterior counts assume all new laboratories are TEST.
+- Whether yeast extract matters enough to bring back (it needs a PREREG amendment adding the class, and then it
+  needs three laboratories of its own).
+- Whether to add the pan-fried arm (180 C surface) at the two A x B corners: the cooking-method cell has no contrast.
 - Whether the blind-test framing already used once (predictions frozen and sent before the data) applies here too.
