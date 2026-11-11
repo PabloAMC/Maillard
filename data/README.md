@@ -10,7 +10,7 @@ code comes from `src/data_paths.py`; every load goes through `src/data_access.py
 Names resolve through `data/keys/` (`src/compound_keys.py`, `src/paper_keys.py`). Benchmarks validate
 against `data/schemas/` (`scripts/ci/schema_gate.py`). The restructure record is `tasks/data_restructure_plan.md`.
 
-Tracked files: **882**. Local-only (gitignored): `data/articles/` (primary-source PDFs, ~160 MB).
+Tracked files: **883**. Local-only (gitignored): `data/articles/` (primary-source PDFs, ~160 MB).
 
 ## `data (top level)`
 
@@ -107,6 +107,8 @@ Compound and precursor definitions (SMILES, CAS, InChI, odour thresholds). The s
 | `protein_matrices.yml` | Reactive-site densities (free thiol, disulfide, amine, mmol per gram) for the protein matrices a dossier states; charged by `protein_g_per_l` in a spec (`src/kinetic_core/matrix_sites.py`). |
 | `structures.yml` | A SMILES (or compound-registry id) for every kinetic-core species key, lumps declared as such; the hypothesis layer's input, checked against the engine's atom counts and molar masses by `tests/unit/test_species_structures.py`. |
 | `toxic_markers.yml` | 8 safety markers (AGEs, acrylamide, HCAs) with IARC class. |
+
+1 files covered by the directory description above: `ingredients.yml`
 
 ## `data/benchmarks/external_validation`
 

@@ -1,0 +1,68 @@
+# Ingredients a formulator writes, mapped to the engine's precursors (STATUS_AND_PLAN sec. 0 step 3, 2026-11-10).
+#
+# A spec may give `ingredients: {name: percent w/w of the pot}`. Each ingredient here lists what one gram of it
+# contributes, in mmol per gram, ONLY where a dossier on disk prints the value (the dossier and its table are named
+# per row). The pot is taken at 1 kg/L, so 1 % w/w = 10 g/L. `central` is what the engine runs; `band` is the spread
+# the sources print (products, processes), carried to the output beside the answer, not yet propagated through the
+# engine. A component a formulator would expect but no dossier quantifies is listed under `not_mapped` with the
+# reason; the output names it, so a missing precursor is never a silent zero.
+#
+# Basis: per gram of powder, read as dry weight (the sources print dry weight; a powder's 5 - 11 % moisture is
+# inside every band below).
+schema_version: 1
+ingredients:
+  yeast_extract:
+    display_name: yeast extract (commercial autolysed, baker's or brewer's yeast)
+    precursors:
+      L-Cysteine:
+        central: 0.0176    # 2.13 mg/g free Cys, commercial baker's-yeast extract (CYE)
+        band: [0.0017, 0.0176]   # 0.21 mg/g in a self-prepared autolysate (SPYA)
+        source: "munch1997_extraction.md sec. 1 item 1 and Table 3 (CYE 2.13 vs SPYA 0.21 mg/g)"
+      L-Glutathione (GSH):
+        central: 0.0062    # ~1.9 mg/g GSH-equivalent thiol, industrial autolysed YE
+        band: [0.0039, 0.043]    # 1.2 (autolysis) - 13.2 mg/g (mechanical disruption)
+        source: "jacob2019_extraction.md answers 1 - 3 (Fig. 4, Ellman: TOTAL free thiol expressed as GSH)"
+        caveat: "Ellman reads every free SH, cysteine included: with the cysteine row this may count part of the thiol twice"
+      D-Glucose:
+        central: 0.0096    # 1.73 mg/g, industrial product
+        band: [0.0096, 0.0177]   # 1.73 - 3.19 mg/g
+        source: "jacob2019_extraction.md answer 1 and sec. 1 (HPLC, MEBAK 2.7.1)"
+      D-Fructose:
+        central: 0.0026    # 0.47 mg/g, industrial product
+        band: [0.0026, 0.0054]   # 0.47 - 0.98 mg/g
+        source: "jacob2019_extraction.md answer 1 and sec. 1"
+      Thiamine (Vitamin B1):
+        central: 0.00028   # 7.46 mg/100 g as the thiamine cation (265.35 g/mol), industrial product
+        band: [0.00019, 0.00045]   # 5.18 mg/100 g (Jacob) to 10 - 12 mg/100 g dried YE (Tome 2021 Table 1)
+        source: "jacob2019_extraction.md answer 1; tome2021_extraction.md row 'thiamine' (Table 1)"
+      L-Serine:     {central: 0.1360, band: [0.0556, 0.1360], source: "munch1997_extraction.md Table 9 (CYE 14.29 / SPYA 5.84 mg/g)"}
+      Glycine:      {central: 0.0631, band: [0.0254, 0.0631], source: "munch1997_extraction.md Table 9 (4.74 / 1.91 mg/g)"}
+      L-Alanine:    {central: 0.2108, band: [0.0781, 0.2108], source: "munch1997_extraction.md Table 9 (18.78 / 6.96 mg/g)"}
+      L-Valine:     {central: 0.0816, band: [0.0276, 0.0816], source: "munch1997_extraction.md Table 9 (9.56 / 3.23 mg/g)"}
+      L-Methionine: {central: 0.0293, band: [0.0049, 0.0293], source: "munch1997_extraction.md Table 9 (4.37 / 0.73 mg/g)"}
+      L-Isoleucine: {central: 0.0681, band: [0.0191, 0.0681], source: "munch1997_extraction.md Table 9 (8.93 / 2.51 mg/g)"}
+      L-Leucine:    {central: 0.1089, band: [0.0261, 0.1089], source: "munch1997_extraction.md Table 9 (14.28 / 3.43 mg/g)"}
+      L-Phenylalanine: {central: 0.0578, band: [0.0136, 0.0578], source: "munch1997_extraction.md Table 9 (9.55 / 2.24 mg/g)"}
+      L-Lysine:     {central: 0.0537, band: [0.0307, 0.0537], source: "munch1997_extraction.md Table 9 (7.85 / 4.49 mg/g)"}
+    not_mapped:
+      ribose and nucleotides (IMP, GMP): "no dossier on disk quantifies them in a yeast extract (jacob2019: only total RNA 48.8 - 55.2 mg/g; tome2021: named, never quantified); they are the extract's main pentose source, so a yeast-extract answer without them under-states thiol formation"
+      other free amino acids: "threonine, proline, tyrosine, histidine, ornithine and arginine are printed (munch1997 Table 9) but are not engine species"
+      salt, glutamate, peptides: "not engine species"
+  pea_isolate:
+    display_name: pea protein isolate
+    protein_fraction:
+      central: 0.84
+      band: [0.83, 0.85]
+      source: "gao2020 via protein_matrices.yml pea_isolate (83 - 85 % protein, N x 6.25)"
+    matrix: pea_isolate   # its reactive sites per gram of protein: data/species/protein_matrices.yml
+    not_mapped:
+      free sugars and free amino acids: "no dossier on disk quantifies them in a pea isolate; the isolate enters as protein (sites) only"
+  soy_isolate:
+    display_name: soy protein isolate
+    protein_fraction:
+      central: 0.90
+      band: [0.90, 0.90]
+      source: "ruan2014_extraction.md (90 % protein, micro-Kjeldahl); shimada1988_extraction.md (90 %, N x 6.25, db)"
+    matrix: soy_isolate
+    not_mapped:
+      free sugars and free amino acids: "no dossier on disk quantifies them in a soy isolate; the isolate enters as protein (sites) only"

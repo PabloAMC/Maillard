@@ -45,6 +45,8 @@ SPECIES_STRUCTURES: Path = SPECIES_DIR / "structures.yml"
 LITERATURE_STRUCTURES: Path = SPECIES_DIR / "literature_structures.yml"
 #: 2026-09-08: reactive-site densities per gram of protein for the matrices a dossier states (the matrix layer).
 PROTEIN_MATRICES: Path = SPECIES_DIR / "protein_matrices.yml"
+#: Ingredients in % w/w -> precursors, each value with its dossier (STATUS_AND_PLAN sec. 0 step 3).
+INGREDIENTS: Path = SPECIES_DIR / "ingredients.yml"
 BENCHMARKS_DIR: Path = DATA_ROOT / "benchmarks"
 PROTOCOLS_DIR: Path = DATA_ROOT / "protocols"
 TIMESERIES_DIR: Path = LIT_DIR / "timeseries"
