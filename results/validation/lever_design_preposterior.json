@@ -1466,5 +1466,332 @@
         "sha256": "1098b4b420330aa737497f6c855454c732dc394ce2007be6fd94dd9933cb36ac"
       }
     ]
+  },
+  "predictive": {
+    "sims": 200,
+    "configs": [
+      [
+        0.3,
+        1.0
+      ],
+      [
+        0.3,
+        0.5
+      ]
+    ],
+    "results": [
+      {
+        "design": "no study (the literature alone)",
+        "pots": 0,
+        "new_labs": 0,
+        "matrix_shift_sd": 0.3,
+        "protocol_factor": 1.0,
+        "scores": {
+          "all": {
+            "cells": 57,
+            "sign_error": 0.44172274003612394,
+            "oracle_sign_error": 0.16422437206194015,
+            "abs_error": 0.4390004136113031,
+            "coverage90": 0.8694275084206282,
+            "width90": 2.1933687019613464,
+            "confident_per_run": 9.0,
+            "confident_sign_error": 0.1601721150779689
+          },
+          "with a literature estimate": {
+            "cells": 12,
+            "sign_error": 0.22318301517158862,
+            "oracle_sign_error": 0.13787938025181234,
+            "abs_error": 0.34283741838485843,
+            "coverage90": 0.8309306597160409,
+            "width90": 1.6945714214273622,
+            "confident_per_run": 9.0,
+            "confident_sign_error": 0.1601721150779689
+          },
+          "prior only": {
+            "cells": 45,
+            "sign_error": 0.5,
+            "oracle_sign_error": 0.17124970321130756,
+            "abs_error": 0.46464387900502174,
+            "coverage90": 0.8796933347418516,
+            "width90": 2.326381310103742,
+            "confident_per_run": 0.0,
+            "confident_sign_error": null
+          }
+        }
+      },
+      {
+        "design": "one laboratory, 2^3 x 4",
+        "pots": 36,
+        "new_labs": 1,
+        "matrix_shift_sd": 0.3,
+        "protocol_factor": 1.0,
+        "scores": {
+          "all": {
+            "cells": 57,
+            "sign_error": 0.3018399643362628,
+            "oracle_sign_error": 0.16422437206194015,
+            "abs_error": 0.46007300324735395,
+            "coverage90": 0.621598324913014,
+            "width90": 1.2697347002717128,
+            "confident_per_run": 45.13,
+            "confident_sign_error": 0.26939728307861893
+          },
+          "with a literature estimate": {
+            "cells": 12,
+            "sign_error": 0.2119838837120667,
+            "oracle_sign_error": 0.13787938025181234,
+            "abs_error": 0.32334055373344983,
+            "coverage90": 0.8147771300016159,
+            "width90": 1.680327097773359,
+            "confident_per_run": 8.065,
+            "confident_sign_error": 0.12702931214982946
+          },
+          "prior only": {
+            "cells": 45,
+            "sign_error": 0.3258015858360484,
+            "oracle_sign_error": 0.17124970321130756,
+            "abs_error": 0.4965349897843951,
+            "coverage90": 0.5700839768893868,
+            "width90": 1.160243394271274,
+            "confident_per_run": 37.065,
+            "confident_sign_error": 0.3003752322366032
+          }
+        }
+      },
+      {
+        "design": "two laboratories, 2^3 x 2 each",
+        "pots": 36,
+        "new_labs": 2,
+        "matrix_shift_sd": 0.3,
+        "protocol_factor": 1.0,
+        "scores": {
+          "all": {
+            "cells": 57,
+            "sign_error": 0.2931882816683693,
+            "oracle_sign_error": 0.16422437206194015,
+            "abs_error": 0.406931918022562,
+            "coverage90": 0.6562127139893849,
+            "width90": 1.4367107541105326,
+            "confident_per_run": 39.04,
+            "confident_sign_error": 0.232592119720685
+          },
+          "with a literature estimate": {
+            "cells": 12,
+            "sign_error": 0.21983860392904475,
+            "oracle_sign_error": 0.13787938025181234,
+            "abs_error": 0.32628734620934713,
+            "coverage90": 0.8035464558067903,
+            "width90": 1.63605757674863,
+            "confident_per_run": 8.06,
+            "confident_sign_error": 0.13388175663505406
+          },
+          "prior only": {
+            "cells": 45,
+            "sign_error": 0.3127481957321892,
+            "oracle_sign_error": 0.17124970321130756,
+            "abs_error": 0.4284371371727526,
+            "coverage90": 0.6169237161714102,
+            "width90": 1.3835516014070397,
+            "confident_per_run": 30.98,
+            "confident_sign_error": 0.2582733826796968
+          }
+        }
+      },
+      {
+        "design": "three laboratories, 2^3 x 1 each",
+        "pots": 36,
+        "new_labs": 3,
+        "matrix_shift_sd": 0.3,
+        "protocol_factor": 1.0,
+        "scores": {
+          "all": {
+            "cells": 57,
+            "sign_error": 0.28590346734332217,
+            "oracle_sign_error": 0.16422437206194015,
+            "abs_error": 0.38198928119018477,
+            "coverage90": 0.673613336624878,
+            "width90": 1.4594845395779785,
+            "confident_per_run": 37.345,
+            "confident_sign_error": 0.2115368759090063
+          },
+          "with a literature estimate": {
+            "cells": 12,
+            "sign_error": 0.21767725702755844,
+            "oracle_sign_error": 0.13787938025181234,
+            "abs_error": 0.3226229537360599,
+            "coverage90": 0.8075754546169814,
+            "width90": 1.6223097894397316,
+            "confident_per_run": 8.02,
+            "confident_sign_error": 0.1293458688207575
+          },
+          "prior only": {
+            "cells": 45,
+            "sign_error": 0.3040971234275258,
+            "oracle_sign_error": 0.17124970321130756,
+            "abs_error": 0.3978203018446181,
+            "coverage90": 0.6378901051603171,
+            "width90": 1.4160644729481775,
+            "confident_per_run": 29.325,
+            "confident_sign_error": 0.2340150302772162
+          }
+        }
+      },
+      {
+        "design": "no study (the literature alone)",
+        "pots": 0,
+        "new_labs": 0,
+        "matrix_shift_sd": 0.3,
+        "protocol_factor": 0.5,
+        "scores": {
+          "all": {
+            "cells": 57,
+            "sign_error": 0.4438722712655227,
+            "oracle_sign_error": 0.16005204303330425,
+            "abs_error": 0.44229307354236164,
+            "coverage90": 0.8675634817050479,
+            "width90": 2.1933687019613464,
+            "confident_per_run": 9.0,
+            "confident_sign_error": 0.17090497718612496
+          },
+          "with a literature estimate": {
+            "cells": 12,
+            "sign_error": 0.2333932885112327,
+            "oracle_sign_error": 0.14078814325605218,
+            "abs_error": 0.34100685583197293,
+            "coverage90": 0.8302819932540948,
+            "width90": 1.6945714214273622,
+            "confident_per_run": 9.0,
+            "confident_sign_error": 0.17090497718612496
+          },
+          "prior only": {
+            "cells": 45,
+            "sign_error": 0.5,
+            "oracle_sign_error": 0.16518908297390483,
+            "abs_error": 0.46930273159846525,
+            "coverage90": 0.8775052119586354,
+            "width90": 2.326381310103742,
+            "confident_per_run": 0.0,
+            "confident_sign_error": null
+          }
+        }
+      },
+      {
+        "design": "one laboratory, 2^3 x 4",
+        "pots": 36,
+        "new_labs": 1,
+        "matrix_shift_sd": 0.3,
+        "protocol_factor": 0.5,
+        "scores": {
+          "all": {
+            "cells": 57,
+            "sign_error": 0.2830438886657627,
+            "oracle_sign_error": 0.16005204303330425,
+            "abs_error": 0.3724231077039762,
+            "coverage90": 0.6542557787139566,
+            "width90": 1.2539918456662158,
+            "confident_per_run": 44.775,
+            "confident_sign_error": 0.2416164820313933
+          },
+          "with a literature estimate": {
+            "cells": 12,
+            "sign_error": 0.21899380225037646,
+            "oracle_sign_error": 0.14078814325605218,
+            "abs_error": 0.3072574985163101,
+            "coverage90": 0.8055411552193129,
+            "width90": 1.607258326343804,
+            "confident_per_run": 8.225,
+            "confident_sign_error": 0.13152199695649738
+          },
+          "prior only": {
+            "cells": 45,
+            "sign_error": 0.30012391170986574,
+            "oracle_sign_error": 0.16518908297390483,
+            "abs_error": 0.3898006034873538,
+            "coverage90": 0.6139130116458615,
+            "width90": 1.1597874508188588,
+            "confident_per_run": 36.55,
+            "confident_sign_error": 0.2663915063745128
+          }
+        }
+      },
+      {
+        "design": "two laboratories, 2^3 x 2 each",
+        "pots": 36,
+        "new_labs": 2,
+        "matrix_shift_sd": 0.3,
+        "protocol_factor": 0.5,
+        "scores": {
+          "all": {
+            "cells": 57,
+            "sign_error": 0.2820218927598062,
+            "oracle_sign_error": 0.16005204303330425,
+            "abs_error": 0.34966359322527757,
+            "coverage90": 0.5780869452759027,
+            "width90": 1.1247374871431068,
+            "confident_per_run": 42.51,
+            "confident_sign_error": 0.22884589001155206
+          },
+          "with a literature estimate": {
+            "cells": 12,
+            "sign_error": 0.2172014084460945,
+            "oracle_sign_error": 0.14078814325605218,
+            "abs_error": 0.2999568887392009,
+            "coverage90": 0.7733216760605671,
+            "width90": 1.4821170390690428,
+            "confident_per_run": 8.6,
+            "confident_sign_error": 0.14071265395661223
+          },
+          "prior only": {
+            "cells": 45,
+            "sign_error": 0.29930735524346264,
+            "oracle_sign_error": 0.16518908297390483,
+            "abs_error": 0.36291871442156465,
+            "coverage90": 0.5260243503999921,
+            "width90": 1.0294362732961904,
+            "confident_per_run": 33.91,
+            "confident_sign_error": 0.2511975806654147
+          }
+        }
+      },
+      {
+        "design": "three laboratories, 2^3 x 1 each",
+        "pots": 36,
+        "new_labs": 3,
+        "matrix_shift_sd": 0.3,
+        "protocol_factor": 0.5,
+        "scores": {
+          "all": {
+            "cells": 57,
+            "sign_error": 0.28216833576225037,
+            "oracle_sign_error": 0.16005204303330425,
+            "abs_error": 0.34683194664673184,
+            "coverage90": 0.5408513347044697,
+            "width90": 1.0482685889567234,
+            "confident_per_run": 42.095,
+            "confident_sign_error": 0.22826100983187086
+          },
+          "with a literature estimate": {
+            "cells": 12,
+            "sign_error": 0.21644145999844103,
+            "oracle_sign_error": 0.14078814325605218,
+            "abs_error": 0.3056311200193712,
+            "coverage90": 0.739379722030798,
+            "width90": 1.383336160414996,
+            "confident_per_run": 8.68,
+            "confident_sign_error": 0.1392587036055262
+          },
+          "prior only": {
+            "cells": 45,
+            "sign_error": 0.29969550263259953,
+            "oracle_sign_error": 0.16518908297390483,
+            "abs_error": 0.3578188337473614,
+            "coverage90": 0.48791043141744883,
+            "width90": 0.9589172365678507,
+            "confident_per_run": 33.415,
+            "confident_sign_error": 0.2513805674570294
+          }
+        }
+      }
+    ]
   }
 }

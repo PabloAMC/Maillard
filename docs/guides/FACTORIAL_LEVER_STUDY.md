@@ -1,8 +1,8 @@
-# One factorial lever study in a plant-protein matrix, run in two or three laboratories (plan P3, STATUS_AND_PLAN sec. 4.1 and sec. 0)
+# One factorial lever study in a plant-protein matrix, run in one or two laboratories (plan P3, STATUS_AND_PLAN sec. 4.1 and sec. 0)
 
 *Draft, 2026-11-11. Design and sizing only; nothing has been sent. Sending a request to any laboratory is the
-owner's action (STATUS_AND_PLAN sec. 0, owner row). Written for food-chemistry groups with SIDA GC-MS; redesigned the same day for two or three
-laboratories after the preposterior check.*
+owner's action (STATUS_AND_PLAN sec. 0, owner row). Written for food-chemistry groups with SIDA GC-MS; redesigned the same day after the preposterior
+and predictive checks.*
 
 ## Why this study, and why now
 
@@ -17,12 +17,13 @@ the same in every odorant family:
 2. **Matrix.** No keyed cell has a heated plant-protein contrast. Every published lever is measured in buffer, meat or
    a process flavour.
 
-One designed study in a pea-isolate matrix, run in the same form by two or three laboratories, adds those
-laboratories to many cells at once, in the matrix users cook in. It is also the only route by which the kinetic
+One designed study in a pea-isolate matrix gives the first plant-protein data to many cells at once, in the matrix
+users cook in. It is also the only route by which the kinetic
 engine can earn a cell: step 5 needs held-out contrasts from two new laboratories, and no thiol x pH, sugar or
-temperature cell has two on disk. One laboratory alone would not open step 5 (preposterior check below).
+temperature cell has two on disk. One laboratory alone would not open step 5 (preposterior check below), though for the prediction itself one
+laboratory does about as well as two or three (predictive check below).
 
-## The design: one 2^3 factorial, run in two or three laboratories (36 pots)
+## The design: one 2^3 factorial, 36 pots, in two laboratories (or one)
 
 *Redesigned 2026-11-11 after the preposterior check below. The 2^4 single-laboratory draft is kept in git history.
 What the study must buy is laboratories, not replicates.*
@@ -43,13 +44,17 @@ point 4). It returns only if the owner wants it and a PREREG amendment adds the 
 
 **Per laboratory**, randomised run order:
 
-| | three laboratories (preferred) | two laboratories (minimum) |
-|---|---|---|
-| factorial pots | 8 cells x 1 pot | 8 cells x 2 pots |
-| matrix background (base pot, no sugar, no sulfur source) | 2 | 1 |
-| buffer only (A-low / B-low / C-low without pea isolate: the matrix contrast) | 2 | 1 |
-| pots per laboratory | 12 | 18 |
-| total | 36 | 36 |
+| | two laboratories (default) | one laboratory (acceptable) | three laboratories (not worth the coordination) |
+|---|---|---|---|
+| factorial pots | 8 cells x 2 pots | 8 cells x 4 pots | 8 cells x 1 pot |
+| matrix background (base pot, no sugar, no sulfur source) | 1 | 2 | 2 |
+| buffer only (A-low / B-low / C-low without pea isolate: the matrix contrast) | 1 | 2 | 2 |
+| pots per laboratory | 18 | 36 | 12 |
+| total | 36 | 36 | 36 |
+
+The number of laboratories is chosen by the predictive check below, not by the 'answered' count: for the
+prediction a new kitchen gets, one, two and three laboratories are nearly equal. Two is the default because one
+laboratory cannot show any between-laboratory spread (its intervals are the worst calibrated) and step 5 needs two.
 
 **Analytes** (SIDA where a labelled standard exists; otherwise one internal standard and the same method in every
 pot, so within-study ratios cancel the response factor; each laboratory may use its own method, which is part of
@@ -130,7 +135,43 @@ What it shows:
    per laboratory, it stays answered in all 8 subsamples (estimate -0.81 to -1.21 dex).
 
 **Redesign (done the same day, owner-approved):** the design section above is now the 2^3 (sugar x sulfur source x pH)
-with checks, in two laboratories (minimum) or three (preferred), keyed by PREREG amendment A4.
+with checks, keyed by PREREG amendment A4. The laboratory count was then revised by the predictive check below: two by
+default, one acceptable, three not worth it.
+
+## Predictive check: does the number of laboratories matter? (2026-11-11)
+
+The 'answered' count above is partly circular: it counts how often new laboratories clear our own three-laboratory
+rule. The non-circular question is how much better the table predicts **a new kitchen cooking in pea isolate**. The
+same simulated worlds were scored for the literature alone and for the same 36 pots in one (2^3 x 4), two (2^3 x 2) or
+three (2^3 x 1) laboratories ([the last section of the record](../../results/validation/lever_design_preposterior.md);
+200 worlds per setting). The 57 cells the 2^3 touches, matrix shift 0.3 dex:
+
+| | literature alone | one laboratory | two laboratories | three laboratories | floor: the pea mean known exactly |
+|---|---|---|---|---|---|
+| sign wrong for a new kitchen, all cells | 0.44 | 0.30 | 0.29 | 0.29 | 0.16 |
+| the same, 12 cells with a literature estimate | 0.22 | 0.21 | 0.22 | 0.22 | 0.14 |
+| the same, 45 cells with none | 0.50 | 0.33 | 0.31 | 0.30 | 0.17 |
+| 90 % interval coverage, cells with none (nominal 0.90) | 0.88 | 0.57 | 0.62 | 0.64 | - |
+| confident calls (P(same sign) >= 0.8) that are wrong, cells with none | - | 0.30 | 0.26 | 0.23 | - |
+
+With the design laboratories sharing our protocol and lot (offsets half the literature's), sign errors are 0.28 for
+all three designs. Coverage then FALLS with more laboratories (0.61, 0.53, 0.49): laboratories that agree with each
+other make the fit understate the spread a new kitchen has.
+
+What it shows:
+
+1. **The study's value is pea-matrix data where the literature has none.** It cuts the sign error on those 45 cells
+   from a coin flip (0.50) to about 0.31. On the 12 cells the literature already estimates, it changes almost nothing
+   (0.22 -> 0.21).
+2. **How the 36 pots are split across laboratories barely matters for prediction** (0.30 / 0.29 / 0.29). A third
+   laboratory does not earn its coordination cost.
+3. **The binding problem is calibration, not data.** With 1 - 3 laboratories in a cell, the table's 90 % new-laboratory
+   interval covers about 60 %, and a third of 'confident' signs are wrong, against the 20 % the 0.8 threshold promises.
+   Even the literature-only cells cover 0.83. Whether the fit or the simulator is at fault is being checked; until it
+   is, no cell this study adds should be read as answered on its interval alone.
+4. **The floor is high.** Even a predictor that knew the pea-matrix mean exactly would get the sign wrong for 16 % of
+   new kitchens, because laboratories scatter that much. No study design removes that; only conditioning on what
+   differs between kitchens would.
 
 ## What the partner gets
 
@@ -139,7 +180,7 @@ analysis and the pre-registration done by us. They keep their data and decide wh
 
 ## Open points for the owner
 
-- Which two or three groups. Each must be a separate laboratory (not two groups sharing one instrument or one method
+- Which one or two groups. Each must be a separate laboratory (not two groups sharing one instrument or one method
   lead). Preferably each is absent from `docs/reference/contrast_benchmark/split.yml`: PREREG sec. 2 makes an absent
   laboratory TEST, while a laboratory already in the split keeps its partition, and a DEVELOPMENT one gives step 5
   nothing. The preposterior counts assume all new laboratories are TEST.

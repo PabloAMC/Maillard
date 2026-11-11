@@ -35,3 +35,34 @@ Settings: 200 simulations per design and matrix setting; within-laboratory resid
 **reference: P3 in two laboratories (72 pots):** 2-Methyl-3-furanthiol (MFT), sugar identity, all, ribose vs glucose (1.00); Hydrogen Sulfide, pH, pH 6-7.5, initial or label (0.99); Pyrazines, pH, pH 6-7.5, initial or label (0.98); 2-Furfurylthiol (FFT), sugar identity, all, ribose vs glucose (0.94); DMHF, pH, pH 6-7.5, initial or label (0.77); Norfuraneol (NF), sugar identity, all, ribose vs glucose (0.72); 2-Furfurylthiol (FFT), pH, pH 6-7.5, initial or label (0.69); DMHF, sugar identity, all, ribose vs glucose (0.69); Bis(2-methyl-3-furyl) disulfide, sulfur source, all, thiamine vs cysteine (0.64); 2-Methyl-3-furanthiol (MFT), pH, pH 6-7.5, initial or label (0.59); Phenylacetaldehyde, pH, pH 6-7.5, initial or label (0.56); Pyrazines, sugar identity, all, ribose vs glucose (0.54).
 
 Reading: a cell is one odorant x lever (x pH band, x level for categorical levers) of `lever_table.md`; 'answered' is PREREG sec. 5 (>= 3 laboratories, the 90 % interval of mu excludes zero, P(a new laboratory sees the same sign) >= 0.8). 'Map cells' are the experiment map's family x lever cells. Yeast extract has no lever class in PREREG sec. 4, so a yeast-extract factor feeds no cell until an amendment adds one.
+
+## Does the study improve the prediction for a new kitchen? (predictive check)
+
+*Not the 'answered' count (that counts our own three-laboratory rule). For each simulated world, the table's prediction for one new kitchen cooking in pea isolate (its effect: mu + the matrix shift + a new laboratory offset drawn with the full tau) is scored: the chance its sign is wrong, the error of its estimate against the pea-matrix mean, and its 90 % new-laboratory interval's coverage and width. 'Oracle' is the sign error of a predictor that knows the pea-matrix mean exactly (the floor set by between-laboratory scatter). 'Confident' is P(same sign in a new laboratory) >= 0.8 (the PREREG sec. 5 sign criterion). Protocol factor 0.5: the design laboratories, sharing our protocol and lot, scatter half as much as the literature's, so the fit sees less between-laboratory spread than a new kitchen has. Same 36 pots; same simulated worlds for every design (200 per setting).*
+
+| cells | protocol factor | design | sign error | oracle | abs. error of estimate (dex) | 90 % coverage | 90 % width (dex) | confident calls per run | sign error of confident calls |
+|---|---|---|---|---|---|---|---|---|---|
+| with a literature estimate (12) | 1.0 | no study (the literature alone) | 0.223 | 0.138 | 0.343 | 0.831 | 1.69 | 9.0 | 0.160 |
+| with a literature estimate (12) | 1.0 | one laboratory, 2^3 x 4 | 0.212 | 0.138 | 0.323 | 0.815 | 1.68 | 8.1 | 0.127 |
+| with a literature estimate (12) | 1.0 | two laboratories, 2^3 x 2 each | 0.220 | 0.138 | 0.326 | 0.804 | 1.64 | 8.1 | 0.134 |
+| with a literature estimate (12) | 1.0 | three laboratories, 2^3 x 1 each | 0.218 | 0.138 | 0.323 | 0.808 | 1.62 | 8.0 | 0.129 |
+| with a literature estimate (12) | 0.5 | no study (the literature alone) | 0.233 | 0.141 | 0.341 | 0.830 | 1.69 | 9.0 | 0.171 |
+| with a literature estimate (12) | 0.5 | one laboratory, 2^3 x 4 | 0.219 | 0.141 | 0.307 | 0.806 | 1.61 | 8.2 | 0.132 |
+| with a literature estimate (12) | 0.5 | two laboratories, 2^3 x 2 each | 0.217 | 0.141 | 0.300 | 0.773 | 1.48 | 8.6 | 0.141 |
+| with a literature estimate (12) | 0.5 | three laboratories, 2^3 x 1 each | 0.216 | 0.141 | 0.306 | 0.739 | 1.38 | 8.7 | 0.139 |
+| prior only (45) | 1.0 | no study (the literature alone) | 0.500 | 0.171 | 0.465 | 0.880 | 2.33 | 0.0 | - |
+| prior only (45) | 1.0 | one laboratory, 2^3 x 4 | 0.326 | 0.171 | 0.497 | 0.570 | 1.16 | 37.1 | 0.300 |
+| prior only (45) | 1.0 | two laboratories, 2^3 x 2 each | 0.313 | 0.171 | 0.428 | 0.617 | 1.38 | 31.0 | 0.258 |
+| prior only (45) | 1.0 | three laboratories, 2^3 x 1 each | 0.304 | 0.171 | 0.398 | 0.638 | 1.42 | 29.3 | 0.234 |
+| prior only (45) | 0.5 | no study (the literature alone) | 0.500 | 0.165 | 0.469 | 0.878 | 2.33 | 0.0 | - |
+| prior only (45) | 0.5 | one laboratory, 2^3 x 4 | 0.300 | 0.165 | 0.390 | 0.614 | 1.16 | 36.5 | 0.266 |
+| prior only (45) | 0.5 | two laboratories, 2^3 x 2 each | 0.299 | 0.165 | 0.363 | 0.526 | 1.03 | 33.9 | 0.251 |
+| prior only (45) | 0.5 | three laboratories, 2^3 x 1 each | 0.300 | 0.165 | 0.358 | 0.488 | 0.96 | 33.4 | 0.251 |
+| all (57) | 1.0 | no study (the literature alone) | 0.442 | 0.164 | 0.439 | 0.869 | 2.19 | 9.0 | 0.160 |
+| all (57) | 1.0 | one laboratory, 2^3 x 4 | 0.302 | 0.164 | 0.460 | 0.622 | 1.27 | 45.1 | 0.269 |
+| all (57) | 1.0 | two laboratories, 2^3 x 2 each | 0.293 | 0.164 | 0.407 | 0.656 | 1.44 | 39.0 | 0.233 |
+| all (57) | 1.0 | three laboratories, 2^3 x 1 each | 0.286 | 0.164 | 0.382 | 0.674 | 1.46 | 37.3 | 0.212 |
+| all (57) | 0.5 | no study (the literature alone) | 0.444 | 0.160 | 0.442 | 0.868 | 2.19 | 9.0 | 0.171 |
+| all (57) | 0.5 | one laboratory, 2^3 x 4 | 0.283 | 0.160 | 0.372 | 0.654 | 1.25 | 44.8 | 0.242 |
+| all (57) | 0.5 | two laboratories, 2^3 x 2 each | 0.282 | 0.160 | 0.350 | 0.578 | 1.12 | 42.5 | 0.229 |
+| all (57) | 0.5 | three laboratories, 2^3 x 1 each | 0.282 | 0.160 | 0.347 | 0.541 | 1.05 | 42.1 | 0.228 |
