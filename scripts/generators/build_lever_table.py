@@ -182,7 +182,7 @@ def numeric_observation(c: Mapping[str, Any], arms: List[Dict[str, Any]]) -> Opt
         x = _lever_x(lc, a)
         ly, var, censor = arm_log_and_var(a, bool(c.get("digitised")))
         if x is not None and ly is not None:
-            pts.append((x, ly, var, censor))
+            pts.append((x, ly, var, censor, _raw_lever(lc, a)))
     pts.sort()
     if len(pts) < 2 or len({p[0] for p in pts}) < 2:
         return None
@@ -206,7 +206,7 @@ def numeric_observation(c: Mapping[str, Any], arms: List[Dict[str, Any]]) -> Opt
     if sxx <= 0:
         return None
     slope = float(np.sum(w * (x - xb) * (y - np.sum(w * y) / np.sum(w))) / sxx)
-    raw_x = [_inverse(lc, p[0]) for p in run]
+    raw_x = [p[4] for p in run]
     mid = (min(raw_x) + max(raw_x)) / 2.0
     if lc == "pH":
         band = _band(PH_BANDS, mid)
@@ -222,6 +222,15 @@ def numeric_observation(c: Mapping[str, Any], arms: List[Dict[str, Any]]) -> Opt
     return {"kind": "numeric", "y": slope, "v": 1.0 / sxx, "band": band, "non_monotone": not monotone,
             "range": [min(raw_x), max(raw_x)], "censored_arms": sum(1 for p in run if p[3] != "none"),
             "arms_used": len(run)}
+
+
+def _raw_lever(lc: str, arm: Mapping[str, Any]) -> Optional[float]:
+    raw = _num(arm.get("lever_value"))
+    if raw is None:
+        cond = arm.get("conditions") or {}
+        raw = {"pH": _num(cond.get("ph")), "temperature": _num(cond.get("temp_C")),
+               "time": _num(cond.get("time_min"))}.get(lc)
+    return raw
 
 
 def _inverse(lc, x):

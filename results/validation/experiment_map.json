@@ -58,6 +58,15 @@
     },
     {
       "family": "meaty thiols",
+      "lever": "amino acid identity",
+      "reading": "needs experiment",
+      "why": "no atlas contrast on disk (the measurement ledger may hold unkeyed ones)",
+      "plant_protein_evidence": false,
+      "design": "amino acid identity: glycine vs alanine vs leucine vs methionine vs phenylalanine; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 3 new laboratory(ies) to reach 3; measure MFT, FFT, H2S and the disulfides by SIDA",
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "meaty thiols",
       "lever": "yeast extract",
       "reading": "needs experiment",
       "why": "no atlas contrast on disk (the measurement ledger may hold unkeyed ones)",
@@ -131,55 +140,64 @@
     {
       "family": "Strecker aldehydes, methional",
       "lever": "pH",
-      "reading": "not yet keyed",
-      "why": "8 atlas contrasts from 4 laboratories await keying (step 2)",
+      "reading": "needs experiment",
+      "why": "keyed: best cell 'Phenylacetaldehyde, pH 6-7.5, initial or label' reads direction unclear (3 laboratories)",
       "plant_protein_evidence": false,
-      "design": null,
+      "design": "pH: pH 5.0 / 6.0 / 7.0; 3 replicate pots per arm; in a 15 % pea-isolate matrix; from 1 new laboratory(ies) to reach 3; measure Strecker aldehydes, methional",
       "engine": "blank in v1 (step 5 adds)"
     },
     {
       "family": "Strecker aldehydes, methional",
       "lever": "temperature",
-      "reading": "not yet keyed",
-      "why": "3 atlas contrasts from 3 laboratories await keying (step 2)",
+      "reading": "needs experiment",
+      "why": "keyed: best cell 'Phenylacetaldehyde, time 30-120 min' reads too few laboratories (2 laboratories)",
       "plant_protein_evidence": false,
-      "design": null,
+      "design": "temperature: 120 / 140 / 160 C; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 1 new laboratory(ies) to reach 3; measure Strecker aldehydes, methional",
       "engine": "blank in v1 (step 5 adds)"
     },
     {
       "family": "Strecker aldehydes, methional",
       "lever": "time",
       "reading": "needs experiment",
-      "why": "no atlas contrast on disk (the measurement ledger may hold unkeyed ones)",
+      "why": "keyed: best cell 'Phenylacetaldehyde, T <100 C' reads direction unclear (3 laboratories)",
       "plant_protein_evidence": false,
-      "design": "time: 5 / 10 / 20 / 40 min; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 3 new laboratory(ies) to reach 3; measure Strecker aldehydes, methional",
+      "design": "time: 5 / 10 / 20 / 40 min; 8 replicate pots per arm; in a 15 % pea-isolate matrix; from 1 new laboratory(ies) to reach 3; measure Strecker aldehydes, methional",
       "engine": "blank in v1 (step 5 adds)"
     },
     {
       "family": "Strecker aldehydes, methional",
       "lever": "precursor dose",
       "reading": "needs experiment",
-      "why": "no atlas contrast on disk (the measurement ledger may hold unkeyed ones)",
+      "why": "keyed: best cell 'Benzaldehyde, all' reads too few laboratories (1 laboratories)",
       "plant_protein_evidence": false,
-      "design": "precursor dose: 0 / 0.5x / 1x / 2x of the base dose; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 3 new laboratory(ies) to reach 3; measure Strecker aldehydes, methional",
+      "design": "precursor dose: 0 / 0.5x / 1x / 2x of the base dose; 5 replicate pots per arm; in a 15 % pea-isolate matrix; from 2 new laboratory(ies) to reach 3; measure Strecker aldehydes, methional",
       "engine": "blank in v1 (step 5 adds)"
     },
     {
       "family": "Strecker aldehydes, methional",
       "lever": "sugar identity",
-      "reading": "not yet keyed",
-      "why": "5 atlas contrasts from 4 laboratories await keying (step 2)",
+      "reading": "needs experiment",
+      "why": "keyed: best cell 'Phenylacetaldehyde, fructose vs glucose' reads too few laboratories (1 laboratories)",
       "plant_protein_evidence": false,
-      "design": null,
+      "design": "sugar identity: ribose vs glucose (vs xylose); 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 2 new laboratory(ies) to reach 3; measure Strecker aldehydes, methional",
       "engine": "blank in v1 (step 5 adds)"
     },
     {
       "family": "Strecker aldehydes, methional",
       "lever": "sulfur source",
-      "reading": "not yet keyed",
-      "why": "6 atlas contrasts from 4 laboratories await keying (step 2)",
+      "reading": "needs experiment",
+      "why": "keyed: best cell 'Benzaldehyde, glutathione vs cysteine' reads too few laboratories (1 laboratories)",
       "plant_protein_evidence": false,
-      "design": null,
+      "design": "sulfur source: cysteine vs glutathione vs thiamine vs none; 3 replicate pots per arm; in a 15 % pea-isolate matrix; from 2 new laboratory(ies) to reach 3; measure Strecker aldehydes, methional",
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "Strecker aldehydes, methional",
+      "lever": "amino acid identity",
+      "reading": "needs experiment",
+      "why": "keyed: best cell '2-Methylbutanal, isoleucine vs none' reads too few laboratories (1 laboratories)",
+      "plant_protein_evidence": false,
+      "design": "amino acid identity: glycine vs alanine vs leucine vs methionine vs phenylalanine; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 2 new laboratory(ies) to reach 3; measure Strecker aldehydes, methional",
       "engine": "blank in v1 (step 5 adds)"
     },
     {
@@ -203,28 +221,28 @@
     {
       "family": "Strecker aldehydes, methional",
       "lever": "lipid",
-      "reading": "not yet keyed",
-      "why": "1 atlas contrasts from 1 laboratories await keying (step 2)",
+      "reading": "needs experiment",
+      "why": "keyed: best cell 'Benzaldehyde, 13-hydroperoxyoctadeca-9,11-dienoic acid vs none' reads too few laboratories (1 laboratories)",
       "plant_protein_evidence": false,
-      "design": null,
+      "design": "lipid: 0 / 2 / 5 % sunflower oil; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 2 new laboratory(ies) to reach 3; measure Strecker aldehydes, methional",
       "engine": "blank in v1 (step 5 adds)"
     },
     {
       "family": "Strecker aldehydes, methional",
       "lever": "water",
-      "reading": "not yet keyed",
-      "why": "1 atlas contrasts from 1 laboratories await keying (step 2)",
+      "reading": "needs experiment",
+      "why": "keyed: best cell 'Benzaldehyde, all' reads too few laboratories (1 laboratories)",
       "plant_protein_evidence": false,
-      "design": null,
+      "design": "water: a_w 0.95 / 0.85 / 0.75; 8 replicate pots per arm; in a 15 % pea-isolate matrix; from 2 new laboratory(ies) to reach 3; measure Strecker aldehydes, methional",
       "engine": "blank in v1 (step 5 adds)"
     },
     {
       "family": "Strecker aldehydes, methional",
       "lever": "buffer",
-      "reading": "not yet keyed",
-      "why": "1 atlas contrasts from 1 laboratories await keying (step 2)",
+      "reading": "needs experiment",
+      "why": "keyed: best cell 'Benzaldehyde, citrate vs phosphate' reads too few laboratories (1 laboratories)",
       "plant_protein_evidence": false,
-      "design": null,
+      "design": "buffer: phosphate 0 / 0.1 / 0.2 M; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 2 new laboratory(ies) to reach 3; measure Strecker aldehydes, methional",
       "engine": "blank in v1 (step 5 adds)"
     },
     {
@@ -240,9 +258,9 @@
       "family": "Strecker aldehydes, methional",
       "lever": "matrix",
       "reading": "needs experiment",
-      "why": "no atlas contrast on disk (the measurement ledger may hold unkeyed ones)",
+      "why": "keyed: best cell 'Methional (3-(methylthio)propanal), water vs potato starch' reads too few laboratories (1 laboratories)",
       "plant_protein_evidence": false,
-      "design": "matrix: buffer vs 15 % pea isolate; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 3 new laboratory(ies) to reach 3; measure Strecker aldehydes, methional",
+      "design": "matrix: buffer vs 15 % pea isolate; 5 replicate pots per arm; in a 15 % pea-isolate matrix; from 2 new laboratory(ies) to reach 3; measure Strecker aldehydes, methional",
       "engine": "blank in v1 (step 5 adds)"
     },
     {
@@ -257,55 +275,64 @@
     {
       "family": "pyrazines",
       "lever": "pH",
-      "reading": "not yet keyed",
-      "why": "3 atlas contrasts from 2 laboratories await keying (step 2)",
+      "reading": "needs experiment",
+      "why": "keyed: best cell '2,5-Dimethylpyrazine, pH 4.5-6, held' reads too few laboratories (1 laboratories)",
       "plant_protein_evidence": false,
-      "design": null,
+      "design": "pH: pH 5.0 / 6.0 / 7.0; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 2 new laboratory(ies) to reach 3; measure pyrazines",
       "engine": "blank in v1 (step 5 adds)"
     },
     {
       "family": "pyrazines",
       "lever": "temperature",
       "reading": "needs experiment",
-      "why": "no atlas contrast on disk (the measurement ledger may hold unkeyed ones)",
+      "why": "keyed: best cell '2-Ethyl-3,5-dimethylpyrazine, time >120 min' reads too few laboratories (1 laboratories)",
       "plant_protein_evidence": false,
-      "design": "temperature: 120 / 140 / 160 C; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 3 new laboratory(ies) to reach 3; measure pyrazines",
+      "design": "temperature: 120 / 140 / 160 C; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 2 new laboratory(ies) to reach 3; measure pyrazines",
       "engine": "blank in v1 (step 5 adds)"
     },
     {
       "family": "pyrazines",
       "lever": "time",
       "reading": "needs experiment",
-      "why": "no atlas contrast on disk (the measurement ledger may hold unkeyed ones)",
+      "why": "keyed: best cell '2,3-Dimethylpyrazine, T 100-130 C' reads too few laboratories (2 laboratories)",
       "plant_protein_evidence": false,
-      "design": "time: 5 / 10 / 20 / 40 min; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 3 new laboratory(ies) to reach 3; measure pyrazines",
+      "design": "time: 5 / 10 / 20 / 40 min; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 1 new laboratory(ies) to reach 3; measure pyrazines",
       "engine": "blank in v1 (step 5 adds)"
     },
     {
       "family": "pyrazines",
       "lever": "precursor dose",
       "reading": "needs experiment",
-      "why": "no atlas contrast on disk (the measurement ledger may hold unkeyed ones)",
+      "why": "keyed: best cell '2-Methylpyrazine, all' reads too few laboratories (2 laboratories)",
       "plant_protein_evidence": false,
-      "design": "precursor dose: 0 / 0.5x / 1x / 2x of the base dose; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 3 new laboratory(ies) to reach 3; measure pyrazines",
+      "design": "precursor dose: 0 / 0.5x / 1x / 2x of the base dose; 4 replicate pots per arm; in a 15 % pea-isolate matrix; from 1 new laboratory(ies) to reach 3; measure pyrazines",
       "engine": "blank in v1 (step 5 adds)"
     },
     {
       "family": "pyrazines",
       "lever": "sugar identity",
-      "reading": "not yet keyed",
-      "why": "1 atlas contrasts from 1 laboratories await keying (step 2)",
+      "reading": "needs experiment",
+      "why": "keyed: best cell 'Pyrazines, fructose vs glucose' reads too few laboratories (2 laboratories)",
       "plant_protein_evidence": false,
-      "design": null,
+      "design": "sugar identity: ribose vs glucose (vs xylose); 5 replicate pots per arm; in a 15 % pea-isolate matrix; from 1 new laboratory(ies) to reach 3; measure pyrazines",
       "engine": "blank in v1 (step 5 adds)"
     },
     {
       "family": "pyrazines",
       "lever": "sulfur source",
-      "reading": "not yet keyed",
-      "why": "10 atlas contrasts from 3 laboratories await keying (step 2)",
+      "reading": "needs experiment",
+      "why": "keyed: best cell '2-Acetylthiazole, glutathione vs cysteine' reads too few laboratories (1 laboratories)",
       "plant_protein_evidence": false,
-      "design": null,
+      "design": "sulfur source: cysteine vs glutathione vs thiamine vs none; 8 replicate pots per arm; in a 15 % pea-isolate matrix; from 2 new laboratory(ies) to reach 3; measure pyrazines",
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "pyrazines",
+      "lever": "amino acid identity",
+      "reading": "needs experiment",
+      "why": "keyed: best cell 'Pyrazines, asparagine vs glycine' reads direction unclear (3 laboratories)",
+      "plant_protein_evidence": false,
+      "design": "amino acid identity: glycine vs alanine vs leucine vs methionine vs phenylalanine; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 1 new laboratory(ies) to reach 3; measure pyrazines",
       "engine": "blank in v1 (step 5 adds)"
     },
     {
@@ -330,27 +357,27 @@
       "family": "pyrazines",
       "lever": "lipid",
       "reading": "needs experiment",
-      "why": "no atlas contrast on disk (the measurement ledger may hold unkeyed ones)",
+      "why": "keyed: best cell '2,3-Dimethylpyrazine, lecithin vs none' reads too few laboratories (1 laboratories)",
       "plant_protein_evidence": false,
-      "design": "lipid: 0 / 2 / 5 % sunflower oil; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 3 new laboratory(ies) to reach 3; measure pyrazines",
+      "design": "lipid: 0 / 2 / 5 % sunflower oil; 3 replicate pots per arm; in a 15 % pea-isolate matrix; from 2 new laboratory(ies) to reach 3; measure pyrazines",
       "engine": "blank in v1 (step 5 adds)"
     },
     {
       "family": "pyrazines",
       "lever": "water",
-      "reading": "not yet keyed",
-      "why": "1 atlas contrasts from 1 laboratories await keying (step 2)",
+      "reading": "needs experiment",
+      "why": "keyed: best cell '2,3-Dimethylpyrazine, all' reads too few laboratories (1 laboratories)",
       "plant_protein_evidence": false,
-      "design": null,
+      "design": "water: a_w 0.95 / 0.85 / 0.75; 8 replicate pots per arm; in a 15 % pea-isolate matrix; from 2 new laboratory(ies) to reach 3; measure pyrazines",
       "engine": "blank in v1 (step 5 adds)"
     },
     {
       "family": "pyrazines",
       "lever": "buffer",
-      "reading": "not yet keyed",
-      "why": "1 atlas contrasts from 1 laboratories await keying (step 2)",
+      "reading": "needs experiment",
+      "why": "keyed: best cell '2-Methylpyrazine, none vs phosphate' reads too few laboratories (1 laboratories)",
       "plant_protein_evidence": false,
-      "design": null,
+      "design": "buffer: phosphate 0 / 0.1 / 0.2 M; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 2 new laboratory(ies) to reach 3; measure pyrazines",
       "engine": "blank in v1 (step 5 adds)"
     },
     {
@@ -383,10 +410,10 @@
     {
       "family": "lipid aldehydes (off-notes)",
       "lever": "pH",
-      "reading": "not yet keyed",
-      "why": "6 atlas contrasts from 4 laboratories await keying (step 2)",
+      "reading": "needs experiment",
+      "why": "keyed: best cell 'Hexanal, pH <4.5, initial or label' reads too few laboratories (1 laboratories)",
       "plant_protein_evidence": false,
-      "design": null,
+      "design": "pH: pH 5.0 / 6.0 / 7.0; 8 replicate pots per arm; in a 15 % pea-isolate matrix; from 2 new laboratory(ies) to reach 3; measure lipid aldehydes (off-notes)",
       "engine": "blank in v1 (step 5 adds)"
     },
     {
@@ -402,18 +429,18 @@
       "family": "lipid aldehydes (off-notes)",
       "lever": "time",
       "reading": "needs experiment",
-      "why": "no atlas contrast on disk (the measurement ledger may hold unkeyed ones)",
+      "why": "keyed: best cell 'Hexanal, T >130 C' reads too few laboratories (1 laboratories)",
       "plant_protein_evidence": false,
-      "design": "time: 5 / 10 / 20 / 40 min; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 3 new laboratory(ies) to reach 3; measure lipid aldehydes (off-notes)",
+      "design": "time: 5 / 10 / 20 / 40 min; 3 replicate pots per arm; in a 15 % pea-isolate matrix; from 2 new laboratory(ies) to reach 3; measure lipid aldehydes (off-notes)",
       "engine": "blank in v1 (step 5 adds)"
     },
     {
       "family": "lipid aldehydes (off-notes)",
       "lever": "precursor dose",
       "reading": "needs experiment",
-      "why": "no atlas contrast on disk (the measurement ledger may hold unkeyed ones)",
+      "why": "keyed: best cell 'Hexanal, all' reads too few laboratories (1 laboratories)",
       "plant_protein_evidence": false,
-      "design": "precursor dose: 0 / 0.5x / 1x / 2x of the base dose; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 3 new laboratory(ies) to reach 3; measure lipid aldehydes (off-notes)",
+      "design": "precursor dose: 0 / 0.5x / 1x / 2x of the base dose; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 2 new laboratory(ies) to reach 3; measure lipid aldehydes (off-notes)",
       "engine": "blank in v1 (step 5 adds)"
     },
     {
@@ -428,10 +455,19 @@
     {
       "family": "lipid aldehydes (off-notes)",
       "lever": "sulfur source",
-      "reading": "not yet keyed",
-      "why": "4 atlas contrasts from 2 laboratories await keying (step 2)",
+      "reading": "needs experiment",
+      "why": "keyed: best cell '2-Pentylfuran, glutathione vs cysteine' reads too few laboratories (1 laboratories)",
       "plant_protein_evidence": false,
-      "design": null,
+      "design": "sulfur source: cysteine vs glutathione vs thiamine vs none; 8 replicate pots per arm; in a 15 % pea-isolate matrix; from 2 new laboratory(ies) to reach 3; measure lipid aldehydes (off-notes)",
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "lipid aldehydes (off-notes)",
+      "lever": "amino acid identity",
+      "reading": "needs experiment",
+      "why": "keyed: best cell '2-Pentylfuran, cysteine vs glycine' reads too few laboratories (1 laboratories)",
+      "plant_protein_evidence": false,
+      "design": "amino acid identity: glycine vs alanine vs leucine vs methionine vs phenylalanine; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 2 new laboratory(ies) to reach 3; measure lipid aldehydes (off-notes)",
       "engine": "blank in v1 (step 5 adds)"
     },
     {
@@ -455,10 +491,10 @@
     {
       "family": "lipid aldehydes (off-notes)",
       "lever": "lipid",
-      "reading": "not yet keyed",
-      "why": "5 atlas contrasts from 3 laboratories await keying (step 2)",
+      "reading": "needs experiment",
+      "why": "keyed: best cell '(E)-2-Nonenal, beef phospholipid vs beef triglyceride' reads too few laboratories (1 laboratories)",
       "plant_protein_evidence": false,
-      "design": null,
+      "design": "lipid: 0 / 2 / 5 % sunflower oil; 8 replicate pots per arm; in a 15 % pea-isolate matrix; from 2 new laboratory(ies) to reach 3; measure lipid aldehydes (off-notes)",
       "engine": "blank in v1 (step 5 adds)"
     },
     {
@@ -492,9 +528,9 @@
       "family": "lipid aldehydes (off-notes)",
       "lever": "matrix",
       "reading": "needs experiment",
-      "why": "no atlas contrast on disk (the measurement ledger may hold unkeyed ones)",
+      "why": "keyed: best cell '(E)-2-Nonenal, water vs potato starch' reads too few laboratories (1 laboratories)",
       "plant_protein_evidence": false,
-      "design": "matrix: buffer vs 15 % pea isolate; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 3 new laboratory(ies) to reach 3; measure lipid aldehydes (off-notes)",
+      "design": "matrix: buffer vs 15 % pea isolate; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 2 new laboratory(ies) to reach 3; measure lipid aldehydes (off-notes)",
       "engine": "blank in v1 (step 5 adds)"
     },
     {
@@ -509,55 +545,64 @@
     {
       "family": "furanones, furfural",
       "lever": "pH",
-      "reading": "not yet keyed",
-      "why": "6 atlas contrasts from 4 laboratories await keying (step 2)",
+      "reading": "needs experiment",
+      "why": "keyed: best cell 'DMHF, pH 6-7.5, initial or label' reads too few laboratories (2 laboratories)",
       "plant_protein_evidence": false,
-      "design": null,
+      "design": "pH: pH 5.0 / 6.0 / 7.0; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 1 new laboratory(ies) to reach 3; measure furanones, furfural",
       "engine": "blank in v1 (step 5 adds)"
     },
     {
       "family": "furanones, furfural",
       "lever": "temperature",
-      "reading": "not yet keyed",
-      "why": "1 atlas contrasts from 1 laboratories await keying (step 2)",
+      "reading": "needs experiment",
+      "why": "keyed: best cell '2-Acetylfuran, time >120 min' reads too few laboratories (2 laboratories)",
       "plant_protein_evidence": false,
-      "design": null,
+      "design": "temperature: 120 / 140 / 160 C; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 1 new laboratory(ies) to reach 3; measure furanones, furfural",
       "engine": "blank in v1 (step 5 adds)"
     },
     {
       "family": "furanones, furfural",
       "lever": "time",
       "reading": "needs experiment",
-      "why": "no atlas contrast on disk (the measurement ledger may hold unkeyed ones)",
+      "why": "keyed: best cell '2-Acetylfuran, T 100-130 C' reads too few laboratories (2 laboratories)",
       "plant_protein_evidence": false,
-      "design": "time: 5 / 10 / 20 / 40 min; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 3 new laboratory(ies) to reach 3; measure furanones, furfural",
+      "design": "time: 5 / 10 / 20 / 40 min; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 1 new laboratory(ies) to reach 3; measure furanones, furfural",
       "engine": "blank in v1 (step 5 adds)"
     },
     {
       "family": "furanones, furfural",
       "lever": "precursor dose",
       "reading": "needs experiment",
-      "why": "no atlas contrast on disk (the measurement ledger may hold unkeyed ones)",
+      "why": "keyed: best cell 'DMHF, all' reads too few laboratories (2 laboratories)",
       "plant_protein_evidence": false,
-      "design": "precursor dose: 0 / 0.5x / 1x / 2x of the base dose; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 3 new laboratory(ies) to reach 3; measure furanones, furfural",
+      "design": "precursor dose: 0 / 0.5x / 1x / 2x of the base dose; 8 replicate pots per arm; in a 15 % pea-isolate matrix; from 1 new laboratory(ies) to reach 3; measure furanones, furfural",
       "engine": "blank in v1 (step 5 adds)"
     },
     {
       "family": "furanones, furfural",
       "lever": "sugar identity",
-      "reading": "not yet keyed",
-      "why": "1 atlas contrasts from 1 laboratories await keying (step 2)",
+      "reading": "needs experiment",
+      "why": "keyed: best cell 'DMHF, ribose vs arabinose' reads too few laboratories (1 laboratories)",
       "plant_protein_evidence": false,
-      "design": null,
+      "design": "sugar identity: ribose vs glucose (vs xylose); 8 replicate pots per arm; in a 15 % pea-isolate matrix; from 2 new laboratory(ies) to reach 3; measure furanones, furfural",
       "engine": "blank in v1 (step 5 adds)"
     },
     {
       "family": "furanones, furfural",
       "lever": "sulfur source",
-      "reading": "not yet keyed",
-      "why": "2 atlas contrasts from 2 laboratories await keying (step 2)",
+      "reading": "needs experiment",
+      "why": "keyed: best cell '2-Acetylfuran, glutathione vs cysteine' reads too few laboratories (1 laboratories)",
       "plant_protein_evidence": false,
-      "design": null,
+      "design": "sulfur source: cysteine vs glutathione vs thiamine vs none; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 2 new laboratory(ies) to reach 3; measure furanones, furfural",
+      "engine": "blank in v1 (step 5 adds)"
+    },
+    {
+      "family": "furanones, furfural",
+      "lever": "amino acid identity",
+      "reading": "needs experiment",
+      "why": "keyed: best cell '2-Acetylfuran, cysteine vs glycine' reads too few laboratories (1 laboratories)",
+      "plant_protein_evidence": false,
+      "design": "amino acid identity: glycine vs alanine vs leucine vs methionine vs phenylalanine; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 2 new laboratory(ies) to reach 3; measure furanones, furfural",
       "engine": "blank in v1 (step 5 adds)"
     },
     {
@@ -582,9 +627,9 @@
       "family": "furanones, furfural",
       "lever": "lipid",
       "reading": "needs experiment",
-      "why": "no atlas contrast on disk (the measurement ledger may hold unkeyed ones)",
+      "why": "keyed: best cell '2-Acetylfuran, (e)-2-nonenal vs none' reads too few laboratories (1 laboratories)",
       "plant_protein_evidence": false,
-      "design": "lipid: 0 / 2 / 5 % sunflower oil; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 3 new laboratory(ies) to reach 3; measure furanones, furfural",
+      "design": "lipid: 0 / 2 / 5 % sunflower oil; 8 replicate pots per arm; in a 15 % pea-isolate matrix; from 2 new laboratory(ies) to reach 3; measure furanones, furfural",
       "engine": "blank in v1 (step 5 adds)"
     },
     {
@@ -599,10 +644,10 @@
     {
       "family": "furanones, furfural",
       "lever": "buffer",
-      "reading": "not yet keyed",
-      "why": "3 atlas contrasts from 2 laboratories await keying (step 2)",
+      "reading": "needs experiment",
+      "why": "keyed: best cell 'DMHF, malonate vs phosphate' reads too few laboratories (1 laboratories)",
       "plant_protein_evidence": false,
-      "design": null,
+      "design": "buffer: phosphate 0 / 0.1 / 0.2 M; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 2 new laboratory(ies) to reach 3; measure furanones, furfural",
       "engine": "blank in v1 (step 5 adds)"
     },
     {
@@ -634,24 +679,24 @@
     }
   ],
   "counts": {
-    "needs experiment": 44,
+    "needs experiment": 69,
     "answered by the literature": 1,
-    "not yet keyed": 25
+    "not yet keyed": 5
   },
   "provenance": {
     "artifact": "experiment_map",
-    "generated_on": "2026-11-10",
+    "generated_on": "2026-11-11",
     "git": {
-      "commit": "40d4150d3a63e8bebbc1d1b92e777a1def5b6bb9",
-      "short": "40d4150d",
-      "branch": "lever-table-keying",
-      "dirty": false
+      "commit": "d585c816595d4b38b2bc2a8eaf12c0990d9baeaf",
+      "short": "d585c816",
+      "branch": "lever-table-keying-2",
+      "dirty": true
     },
     "generated_by": "scripts/generators/build_experiment_map.py",
     "inputs": [
       {
         "path": "results/validation/lever_table.json",
-        "sha256": "f82ab64109d676c5cb656cc25151ae697a089e5d7d0adb77e92d42790f1b3202"
+        "sha256": "4527f87d9ea2c7767a992e5f0a91491539fd80df7e9e298d5b68ec971dcf939d"
       },
       {
         "path": "docs/reference/contrast_benchmark/split.yml",
