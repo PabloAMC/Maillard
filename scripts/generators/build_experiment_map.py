@@ -94,7 +94,7 @@ def lever_of(cell: Mapping[str, Any]) -> str:
 def build() -> Dict[str, Any]:
     lt = json.loads(LEVER_TABLE.read_text())
     split = yaml.safe_load(data_paths.CONTRAST_SPLIT.read_text())
-    atlas = defaultdict(lambda: {"contrasts": 0, "labs": set()})
+    atlas = defaultdict(lambda: {"contrasts": 0, "labs": set(), "papers": set()})
     for c in split["contrasts"]:
         fam = SPLIT_CLASS.get(c.get("odorant_class"))
         if fam and c["kind"] == "paired_arms":
@@ -105,6 +105,7 @@ def build() -> Dict[str, Any]:
                 if lv:
                     atlas[(fam, lv)]["contrasts"] += 1
                     atlas[(fam, lv)]["labs"].add(c["lab"])
+                    atlas[(fam, lv)]["papers"].add(c["id"].rsplit("@", 1)[-1])
 
     # the lever table's evidence per (family, lever): the best reading among its odorants / bands / levels
     rank = {"answered by the literature": 3, "direction unclear": 2, "too few laboratories": 1}
@@ -129,12 +130,16 @@ def build() -> Dict[str, Any]:
                                          "reading": s["reading"], "labs": s["labs"], "estimate": s["estimate"],
                                           "new_lab_pi90": s["new_lab_pi90"], "plant": _plant(cell["matrices"]),
                                           "rows": []})
-    # keyed thiamine contrasts that gave no estimate (censored "none" arm, or no chain to cysteine)
+    # keyed thiamine contrasts that gave no estimate (censored "none" arm, or no chain to cysteine); and the sources
+    # read so far: an atlas contrast from a read source is keyed, whatever cell its atlas tags pointed at (the tags
+    # list every precursor in the pot, not the lever the study varied)
     keyed_thiamine = []
+    read_sources = set()
     for f in sorted(data_paths.LEVER_TABLE_CONTRASTS_DIR.glob("*.yml")):
         if ".reader_" in f.name or f.name == "TEMPLATE.yml":
             continue
         doc = yaml.safe_load(f.read_text()) or {}
+        read_sources.add(doc["source"])
         for c in doc.get("contrasts") or []:
             if any("thiamin" in str(a.get("lever_value") or "").lower() for a in c.get("arms") or []):
                 keyed_thiamine.append(doc["source"])
@@ -142,7 +147,8 @@ def build() -> Dict[str, Any]:
     for fam in FAMILIES:
         for lv in LEVERS:
             ev = keyed.get((fam, lv), [])
-            at = atlas.get((fam, lv), {"contrasts": 0, "labs": set()})
+            at = atlas.get((fam, lv), {"contrasts": 0, "labs": set(), "papers": set()})
+            unread = sorted(at["papers"] - read_sources)
             answered = [e for e in ev if e["reading"] == "answered by the literature"]
             best = max(ev, key=lambda e: (rank.get(e["reading"], 0), e["labs"]), default=None)
             plant = any(e["plant"] for e in ev)
@@ -158,9 +164,14 @@ def build() -> Dict[str, Any]:
                 why = (f"keyed in {', '.join(sorted(set(keyed_thiamine)))} but no usable estimate: the no-thiamine arm "
                        "is 'not detected' without a limit, or thiamine is compared only with thiamine pyrophosphate "
                        "and never connects to cysteine")
-            elif fam != "meaty thiols" and at["contrasts"]:
+            elif fam != "meaty thiols" and unread:
                 reading = "not yet keyed"
-                why = f"{at['contrasts']} atlas contrasts from {len(at['labs'])} laboratories await keying (step 2)"
+                why = (f"{at['contrasts']} atlas contrasts from {len(at['labs'])} laboratories; sources not yet read "
+                       f"({', '.join(unread)}) await keying (step 2)")
+            elif fam != "meaty thiols" and at["contrasts"]:
+                reading = "needs experiment"
+                why = (f"{at['contrasts']} atlas contrasts from {len(at['labs'])} laboratories, every source read by "
+                       f"two readers ({', '.join(sorted(at['papers']))}); none varies this lever alone")
             else:
                 reading = "needs experiment"
                 why = ("no atlas contrast on disk (the measurement ledger may hold unkeyed ones)" if not at["contrasts"]

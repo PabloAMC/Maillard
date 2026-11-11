@@ -248,10 +248,10 @@
     {
       "family": "Strecker aldehydes, methional",
       "lever": "heme / iron",
-      "reading": "not yet keyed",
-      "why": "1 atlas contrasts from 1 laboratories await keying (step 2)",
+      "reading": "needs experiment",
+      "why": "1 atlas contrasts from 1 laboratories, every source read by two readers (hofmann2000); none varies this lever alone",
       "plant_protein_evidence": false,
-      "design": null,
+      "design": "heme / iron: 0 / 0.2 / 0.5 % leghemoglobin or FeSO4 equivalent; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 3 new laboratory(ies) to reach 3; measure Strecker aldehydes, methional",
       "engine": "blank in v1 (step 5 adds)"
     },
     {
@@ -383,10 +383,10 @@
     {
       "family": "pyrazines",
       "lever": "heme / iron",
-      "reading": "not yet keyed",
-      "why": "1 atlas contrasts from 1 laboratories await keying (step 2)",
+      "reading": "needs experiment",
+      "why": "1 atlas contrasts from 1 laboratories, every source read by two readers (shibamoto1977); none varies this lever alone",
       "plant_protein_evidence": false,
-      "design": null,
+      "design": "heme / iron: 0 / 0.2 / 0.5 % leghemoglobin or FeSO4 equivalent; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 3 new laboratory(ies) to reach 3; measure pyrazines",
       "engine": "blank in v1 (step 5 adds)"
     },
     {
@@ -446,10 +446,10 @@
     {
       "family": "lipid aldehydes (off-notes)",
       "lever": "sugar identity",
-      "reading": "not yet keyed",
-      "why": "5 atlas contrasts from 3 laboratories await keying (step 2)",
+      "reading": "needs experiment",
+      "why": "5 atlas contrasts from 3 laboratories, every source read by two readers (du2025, elmore2002, farmer1992, whitfield1988, xu2011); none varies this lever alone",
       "plant_protein_evidence": false,
-      "design": null,
+      "design": "sugar identity: ribose vs glucose (vs xylose); 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 3 new laboratory(ies) to reach 3; measure lipid aldehydes (off-notes)",
       "engine": "blank in v1 (step 5 adds)"
     },
     {
@@ -509,10 +509,10 @@
     {
       "family": "lipid aldehydes (off-notes)",
       "lever": "buffer",
-      "reading": "not yet keyed",
-      "why": "6 atlas contrasts from 4 laboratories await keying (step 2)",
+      "reading": "needs experiment",
+      "why": "6 atlas contrasts from 4 laboratories, every source read by two readers (du2025, elmore2002, farmer1992, whitfield1988, xu2011, zamora2015); none varies this lever alone",
       "plant_protein_evidence": false,
-      "design": null,
+      "design": "buffer: phosphate 0 / 0.1 / 0.2 M; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 3 new laboratory(ies) to reach 3; measure lipid aldehydes (off-notes)",
       "engine": "blank in v1 (step 5 adds)"
     },
     {
@@ -635,10 +635,10 @@
     {
       "family": "furanones, furfural",
       "lever": "water",
-      "reading": "not yet keyed",
-      "why": "1 atlas contrasts from 1 laboratories await keying (step 2)",
+      "reading": "needs experiment",
+      "why": "1 atlas contrasts from 1 laboratories, every source read by two readers (blank1997); none varies this lever alone",
       "plant_protein_evidence": false,
-      "design": null,
+      "design": "water: a_w 0.95 / 0.85 / 0.75; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 3 new laboratory(ies) to reach 3; measure furanones, furfural",
       "engine": "blank in v1 (step 5 adds)"
     },
     {
@@ -679,17 +679,16 @@
     }
   ],
   "counts": {
-    "needs experiment": 69,
-    "answered by the literature": 1,
-    "not yet keyed": 5
+    "needs experiment": 74,
+    "answered by the literature": 1
   },
   "provenance": {
     "artifact": "experiment_map",
     "generated_on": "2026-11-11",
     "git": {
-      "commit": "d585c816595d4b38b2bc2a8eaf12c0990d9baeaf",
-      "short": "d585c816",
-      "branch": "lever-table-keying-2",
+      "commit": "9c3c96f27dc7b26e3c22e670edfe3f188b8236c6",
+      "short": "9c3c96f2",
+      "branch": "lever-keying-round3",
       "dirty": true
     },
     "generated_by": "scripts/generators/build_experiment_map.py",
