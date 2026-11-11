@@ -22,7 +22,23 @@ _orig = pbr.integrate_inline
 _LOG = []
 _TRACE = {}
 
-if MODE == "coldph":
+if MODE in ("tightph", "coldtight"):
+    ph_state.IONIC_STRENGTH_TOL_M = 1e-15
+    _c0, _w0 = ph_state.solve_ph_and_ionic_strength_compiled, ph_state.solve_ph_and_ionic_strength_warm
+    ph_state.solve_ph_and_ionic_strength_compiled = lambda T, sid, inv, g, i=0.0, **k: _c0(T, sid, inv, g, i, tol=1e-14)
+    ph_state.solve_ph_and_ionic_strength_warm = lambda T, sid, inv, g, i=0.0, **k: _w0(T, sid, inv, g, i, tol=1e-14)
+_FROZEN = {}
+if MODE == "frozenph":
+    _c1 = ph_state.solve_ph_and_ionic_strength_compiled
+
+    def _frozen(T, sid, inv, g, i=0.0, **k):
+        key = round(T, 6)
+        if key not in _FROZEN:
+            _FROZEN[key] = _c1(T, sid, inv, g, i, **k)
+        return _FROZEN[key]
+
+    ph_state.solve_ph_and_ionic_strength_compiled = _frozen
+if MODE in ("coldph", "coldtight"):
     _c, _w = ph_state.solve_ph_and_ionic_strength_compiled, ph_state.solve_ph_and_ionic_strength_warm
     ph_state.solve_ph_and_ionic_strength_compiled = lambda T, sid, inv, g, i=0.0, **k: _c(T, sid, inv, 7.0, 0.0, **k)
     ph_state.solve_ph_and_ionic_strength_warm = lambda T, sid, inv, g, i=0.0, **k: _w(T, sid, inv, 7.0, 0.0, **k)
@@ -60,10 +76,30 @@ def _traced_solve_ivp(fun, t_span, y0, **kw):
 
 si.solve_ivp = _traced_solve_ivp
 
+import scipy.integrate._ivp.lsoda as _L
+_step0 = _L.LSODA._step_impl
+
+
+def _step_traced(self):
+    out = _step0(self)
+    it = self._lsoda_solver._integrator
+    st = _TRACE.setdefault("steps", [])
+    st.append((float(self.t), float(it.rwork[10]), int(it.iwork[18]), int(it.iwork[13])))
+    if len(st) > 4000:
+        del st[1000:2000]
+    return out
+
+
+_L.LSODA._step_impl = _step_traced
+
 
 def _trace_summary():
     jt = _TRACE.get("jac_t", [])
-    return {"last_t": _TRACE.get("last_t"), "max_t": _TRACE.get("max_t"),
+    st = _TRACE.get("steps", [])
+    meth = [m for _, _, m, _ in st]
+    return {"n_steps_kept": len(st), "adams_steps": meth.count(1), "bdf_steps": meth.count(2),
+            "first_steps": st[:12], "last_steps": st[-12:],
+            "last_t": _TRACE.get("last_t"), "max_t": _TRACE.get("max_t"),
             "bins": [int(v) for v in _TRACE.get("bins", [])], "n_jac": len(jt),
             "first_jac_t": jt[0] if jt else None}
 
@@ -87,6 +123,7 @@ pbr.integrate_inline = _wrapped
 def job(item):
     name, spec, drift, cfg = item
     _LOG.clear()
+    _FROZEN.clear()
     try:
         with config.applied(cfg):
             vals, ph = s3._rival_values((spec, ("MFT", "FFT"), drift))
@@ -98,15 +135,21 @@ def job(item):
 p = d.load_panel(d.PANEL_PATH)["panel"]
 arms = d._arms(p[0])
 perturb = float(os.environ.get("PROBE_PERTURB", "0"))
+reps = int(os.environ.get("PROBE_REPS", "1"))
+arm_filter = os.environ.get("PROBE_ARM", "")
 base = config.Config.from_globals()
 items = []
-for label, system in arms:
-    sp = d._spec_from_system(label, system)
-    if perturb:
-        sp["precursors"] = {k: v * (1 + perturb) for k, v in sp["precursors"].items()}
-    spec = spec_to_core(sp)
-    for point, (changes, drift) in s3.rival_points().items():
-        items.append((f"{label}|{point}", spec, drift, base.replace(changes)))
+for rep in range(reps):
+    for label, system in arms:
+        if arm_filter and arm_filter not in label:
+            continue
+        sp = d._spec_from_system(label, system)
+        eps = perturb * rep if reps > 1 else perturb
+        if eps:
+            sp["precursors"] = {k: v * (1 + eps) for k, v in sp["precursors"].items()}
+        spec = spec_to_core(sp)
+        for point, (changes, drift) in s3.rival_points().items():
+            items.append((f"{label}|{point}|rep{rep}", spec, drift, base.replace(changes)))
 only = os.environ.get("PROBE_ONLY")
 if only:
     items = [it for it in items if any(o in it[0] for o in only.split(","))]
@@ -115,5 +158,6 @@ res = parallel.map_ordered(job, items, n_workers=int(os.environ.get("PROBE_WORKE
 print("MODE", MODE, "budget", pbr.RIVAL_RHS_BUDGET, "perturb", perturb)
 for name, diag, vals, ph, err in res:
     print("ROW " + json.dumps({"name": name, "diag": diag, "vals": vals, "ph": ph, "err": err}), flush=True)
+print("STALLS", MODE, sum(1 for r in res if r[4]), "of", len(res))
 print("wall", round(time.time() - t0, 1), "max evals", max((r[1].get("evaluations") or 0) for r in res),
       "failures", [r[0] for r in res if r[4]])
