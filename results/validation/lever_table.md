@@ -35,7 +35,7 @@
 | 2-Furanmethanol | time (a doubling of time) | T 100-130 C | too few laboratories | not pooled; per contrast: +0.23, +0.58 | - | - | 1 / 1 / 2 | 100% | water | - |
 | 2-Furanmethanol | time (a doubling of time) | T >130 C | too few laboratories | not pooled; per contrast: +0.32 | - | - | 1 / 1 / 1 | 100% | water | - |
 | 2-Furfurylthiol (FFT) | pH (+1 pH unit) | pH 4.5-6, held | too few laboratories | not pooled; per contrast: -0.43, -0.48, -0.18, -1.67 | - | - | 1 / 2 / 4 | 100% | buffer | - |
-| 2-Furfurylthiol (FFT) | pH (+1 pH unit) | pH 4.5-6, initial or label | direction unclear (1 non-monotone) | -0.14 (-0.35 to +0.07) | -0.64 to +0.37 | 0.70 | 4 / 4 / 5 | 60% | buffer, water | 1.00 |
+| 2-Furfurylthiol (FFT) | pH (+1 pH unit) | pH 4.5-6, initial or label | direction unclear (1 non-monotone) | -0.14 (-0.45 to +0.17) | -0.87 to +0.59 | 0.65 | 4 / 4 / 5 | 60% | buffer, water | 1.00 |
 | 2-Furfurylthiol (FFT) | pH (+1 pH unit) | pH 6-7.5, initial or label | too few laboratories | not pooled; per contrast: -1.18, -1.14, -0.11 | - | - | 2 / 2 / 3 | 67% | buffer, water | - |
 | 2-Furfurylthiol (FFT) | pH (+1 pH unit) | pH <4.5, initial or label | too few laboratories | not pooled; per contrast: +0.30, +0.30 | - | - | 1 / 1 / 2 | 0% | buffer | - |
 | 2-Furfurylthiol (FFT) | temperature (+10 C) | time >120 min | too few laboratories | not pooled; per contrast: +0.16, +0.31 | - | - | 1 / 1 / 2 | 0% | water | - |
@@ -44,7 +44,7 @@
 | 2-Methyl-3-furanthiol (MFT) | pH (+1 pH unit) | pH 4.5-6, initial or label | too few laboratories | not pooled; per contrast: +0.21, -0.34, +0.33 | - | - | 2 / 2 / 3 | 33% | buffer | - |
 | 2-Methyl-3-furanthiol (MFT) | pH (+1 pH unit) | pH 6-7.5, initial or label | too few laboratories | not pooled; per contrast: +0.36 | - | - | 1 / 1 / 1 | 0% | water | - |
 | 2-Methyl-3-furanthiol (MFT) | pH (+1 pH unit) | pH <4.5, initial or label | too few laboratories | not pooled; per contrast: +0.40, +0.45 | - | - | 1 / 1 / 2 | 0% | buffer | - |
-| 2-Methyl-3-furanthiol (MFT) | precursor dose (a doubling of dose) | all | direction unclear (4 non-monotone) | +0.12 (-0.09 to +0.35) | -0.52 to +0.77 | 0.63 | 3 / 3 / 10 | 10% | buffer, meat (pork M. semimembranosus model ham) | - |
+| 2-Methyl-3-furanthiol (MFT) | precursor dose (a doubling of dose) | all | direction unclear (4 non-monotone) | +0.13 (-0.19 to +0.48) | -0.70 to +0.98 | 0.62 | 3 / 3 / 10 | 10% | buffer, meat (pork M. semimembranosus model ham) | - |
 | 2-Methyl-3-furanthiol (MFT) | temperature (+10 C) | time >120 min | too few laboratories | not pooled; per contrast: +0.11, +0.26 | - | - | 1 / 1 / 2 | 0% | water | - |
 | 2-Methyl-3-furanthiol (MFT) | time (a doubling of time) | T 100-130 C | too few laboratories | not pooled; per contrast: +0.10, +0.23, +0.36, +0.45, +0.68, -0.85 | - | - | 2 / 3 / 6 | 0% | buffer, other (choline chloride/glycerol 1:1 molar), other (glycerol), water | - |
 | 2-Methylbutanal | temperature (+10 C) | time >120 min | too few laboratories | not pooled; per contrast: +0.01 | - | - | 1 / 1 / 1 | 0% | other (aqueous beef liver extract, batch 2) | - |
@@ -104,14 +104,14 @@
 | Norfuraneol (NF) | time (a doubling of time) | T 100-130 C | too few laboratories | not pooled; per contrast: +0.26, +0.19, +0.10 | - | - | 1 / 1 / 3 | 100% | buffer | - |
 | Norfuraneol (NF) | time (a doubling of time) | T 100-130 C, fed odorant (stability) | too few laboratories | not pooled; per contrast: -0.34 | - | - | 1 / 1 / 1 | 0% | buffer | - |
 | Phenylacetaldehyde | pH (+1 pH unit) | pH 4.5-6, initial or label | too few laboratories | not pooled; per contrast: -0.05 | - | - | 1 / 1 / 1 | 0% | other (acetonitrile/buffer 2:1) | - |
-| Phenylacetaldehyde | pH (+1 pH unit) | pH 6-7.5, initial or label | direction unclear (6 non-monotone) | -0.19 (-0.42 to +0.02) | -0.63 to +0.23 | 0.83 | 3 / 5 / 10 | 10% | buffer, other (600 mg sand + 30 uL 0.3 M buffer + 80 uL water), other (acetonitrile/buffer 2:1), water | - |
+| Phenylacetaldehyde | pH (+1 pH unit) | pH 6-7.5, initial or label | direction unclear (prior-dominated) (6 non-monotone) | -0.20 (-0.50 to +0.10) | -0.81 to +0.40 | 0.77 | 3 / 5 / 10 | 10% | buffer, other (600 mg sand + 30 uL 0.3 M buffer + 80 uL water), other (acetonitrile/buffer 2:1), water | - |
 | Phenylacetaldehyde | pH (+1 pH unit) | pH <4.5, initial or label | too few laboratories | not pooled; per contrast: -0.13, -0.03, -0.22, -0.07, -0.07, -0.12, -0.08, -0.10, -0.14 | - | - | 2 / 6 / 9 | 0% | buffer, buffer (wine-like model solution), other (600 mg sand + 30 uL 0.3 M buffer + 80 uL water), other (acetonitrile/buffer 2:1) | - |
 | Phenylacetaldehyde | pH (+1 pH unit) | pH >7.5, initial or label | too few laboratories | not pooled; per contrast: -0.11, -0.07, -0.17, +0.34, -0.27, +0.06, -0.14, -0.45, -0.05, -0.36, -0.57, -0.20 | - | - | 1 / 4 / 12 | 0% | buffer, other (acetonitrile/buffer 2:1) | - |
 | Phenylacetaldehyde | precursor dose (a doubling of dose) | all | too few laboratories | not pooled; per contrast: +0.27, +0.32, +0.12, +0.12, +0.28, +0.31, +0.10, +0.10, +0.16, +0.19, +0.23, +0.22, +0.15, +0.24 | - | - | 1 / 6 / 14 | 0% | buffer, other (600 mg sand + 30 uL 0.3 M buffer + 80 uL water), other (acetonitrile/buffer 2:1) | - |
 | Phenylacetaldehyde | temperature (+10 C) | time 30-120 min | too few laboratories | not pooled; per contrast: +0.12, +0.58, +0.23, +0.12 | - | - | 2 / 3 / 4 | 0% | buffer, buffer (wine-like model solution), other (600 mg sand + 30 uL 0.3 M buffer + 80 uL water) | - |
 | Phenylacetaldehyde | temperature (+10 C) | time >120 min | too few laboratories | not pooled; per contrast: +0.45, +0.08 | - | - | 1 / 2 / 2 | 0% | buffer, other (acetonitrile/buffer 2:1) | - |
 | Phenylacetaldehyde | time (a doubling of time) | T 100-130 C | too few laboratories | not pooled; per contrast: +0.27, +0.24, +0.40, +0.29, +0.34, +0.30 | - | - | 1 / 2 / 6 | 0% | buffer, other (600 mg sand + 30 uL 0.3 M buffer + 80 uL water) | - |
-| Phenylacetaldehyde | time (a doubling of time) | T <100 C | direction unclear (2 non-monotone) | +0.00 (-0.15 to +0.15) | -0.30 to +0.30 | 0.51 | 3 / 4 / 8 | 38% | buffer, other (acetonitrile/buffer 2:1), water | - |
+| Phenylacetaldehyde | time (a doubling of time) | T <100 C | direction unclear (2 non-monotone) | +0.00 (-0.24 to +0.23) | -0.47 to +0.47 | 0.50 | 3 / 4 / 8 | 38% | buffer, other (acetonitrile/buffer 2:1), water | - |
 | Phenylacetaldehyde | time (a doubling of time) | T >130 C | too few laboratories | not pooled; per contrast: +0.08, +0.25, +0.31, +0.18, +0.25, +0.12, +0.21, +0.11, +0.31, +0.32, +0.22, +0.17, +0.24, +0.20, +0.19, +0.20, +0.19, +0.27, +0.24, +0.29, +0.35, +0.31 | - | - | 2 / 6 / 22 | 0% | buffer, other (600 mg sand + 30 uL 0.3 M buffer + 80 uL water), other (acetonitrile/buffer 2:1), other (silica gel 3 g, 10 % water) | - |
 | Phenylacetaldehyde | time (a doubling of time) | T unstated C | too few laboratories | not pooled; per contrast: +0.19, +0.22, +0.18 | - | - | 1 / 2 / 3 | 0% | buffer | - |
 | Phenylacetaldehyde | water (+0.1 a_w) | all | too few laboratories | not pooled; per contrast: -0.00, -0.00 | - | - | 1 / 1 / 2 | 0% | other (600 mg sand + 30 uL buffer + 0 uL water), other (600 mg sand + 30 uL buffer + 120 uL water), other (600 mg sand + 30 uL buffer + 160 uL water), other (600 mg sand + 30 uL buffer + 200 uL water), other (600 mg sand + 30 uL buffer + 40 uL water), other (600 mg sand + 30 uL buffer + 80 uL water) | - |
@@ -156,27 +156,27 @@
 | (E,E)-2,4-Decadienal | lipid | oleic acid vs beef triglyceride | not connected to the reference | - | - | - | - |
 | (E,E)-2,4-Decadienal | lipid | oxidized lard vs beef triglyceride | not connected to the reference | - | - | - | - |
 | (E,E)-2,4-Decadienal | matrix | water vs potato starch | too few laboratories | not pooled (network estimate -0.15, shown for orientation only) | - | - | 1 / 1 |
-| 1-Hexanol | lipid | beef phospholipid vs beef triglyceride | too few laboratories | not pooled (network estimate -0.09, shown for orientation only) | - | - | 1 / 2 |
-| 1-Hexanol | lipid | egg phosphatidylcholine vs beef triglyceride | too few laboratories | not pooled (network estimate +0.41, shown for orientation only) | - | - | 1 / 2 |
+| 1-Hexanol | lipid | beef phospholipid vs beef triglyceride | too few laboratories | not pooled (network estimate -0.10, shown for orientation only) | - | - | 1 / 2 |
+| 1-Hexanol | lipid | egg phosphatidylcholine vs beef triglyceride | too few laboratories | not pooled (network estimate +0.40, shown for orientation only) | - | - | 1 / 2 |
 | 1-Hexanol | lipid | egg phosphatidylethanolamine vs beef triglyceride | too few laboratories | not pooled (network estimate +0.33, shown for orientation only) | - | - | 1 / 2 |
 | 1-Hexanol | lipid | methyl alpha-linolenate vs beef triglyceride | not connected to the reference | - | - | - | - |
 | 1-Hexanol | lipid | methyl linoleate vs beef triglyceride | not connected to the reference | - | - | - | - |
-| 1-Octen-3-ol | lipid | beef phospholipid vs beef triglyceride | too few laboratories | not pooled (network estimate +1.35, shown for orientation only) | - | - | 1 / 2 |
-| 1-Octen-3-ol | lipid | egg phosphatidylcholine vs beef triglyceride | too few laboratories | not pooled (network estimate +1.97, shown for orientation only) | - | - | 1 / 2 |
-| 1-Octen-3-ol | lipid | egg phosphatidylethanolamine vs beef triglyceride | too few laboratories | not pooled (network estimate +2.02, shown for orientation only) | - | - | 1 / 2 |
+| 1-Octen-3-ol | lipid | beef phospholipid vs beef triglyceride | too few laboratories | not pooled (network estimate +1.36, shown for orientation only) | - | - | 1 / 2 |
+| 1-Octen-3-ol | lipid | egg phosphatidylcholine vs beef triglyceride | too few laboratories | not pooled (network estimate +2.00, shown for orientation only) | - | - | 1 / 2 |
+| 1-Octen-3-ol | lipid | egg phosphatidylethanolamine vs beef triglyceride | too few laboratories | not pooled (network estimate +2.03, shown for orientation only) | - | - | 1 / 2 |
 | 1-Octen-3-ol | lipid | methyl alpha-linolenate vs beef triglyceride | not connected to the reference | - | - | - | - |
 | 1-Octen-3-ol | lipid | methyl linoleate vs beef triglyceride | not connected to the reference | - | - | - | - |
 | 2,3-Dimethylpyrazine | amino acid identity | arginine vs glycine | too few laboratories | not pooled (network estimate -0.34, shown for orientation only) | - | - | 1 / 1 |
 | 2,3-Dimethylpyrazine | amino acid identity | asparagine vs glycine | too few laboratories | not pooled (network estimate +0.43, shown for orientation only) | - | - | 2 / 2 |
 | 2,3-Dimethylpyrazine | amino acid identity | aspartic acid vs glycine | too few laboratories | not pooled (network estimate -0.08, shown for orientation only) | - | - | 1 / 1 |
 | 2,3-Dimethylpyrazine | amino acid identity | cysteine vs glycine | too few laboratories | not pooled (network estimate +0.38, shown for orientation only) | - | - | 1 / 2 |
-| 2,3-Dimethylpyrazine | amino acid identity | glutamic acid vs glycine | too few laboratories | not pooled (network estimate +0.03, shown for orientation only) | - | - | 1 / 1 |
+| 2,3-Dimethylpyrazine | amino acid identity | glutamic acid vs glycine | too few laboratories | not pooled (network estimate +0.04, shown for orientation only) | - | - | 1 / 1 |
 | 2,3-Dimethylpyrazine | amino acid identity | glutamine vs glycine | too few laboratories | not pooled (network estimate +0.12, shown for orientation only) | - | - | 2 / 2 |
 | 2,3-Dimethylpyrazine | amino acid identity | isoleucine vs glycine | too few laboratories | not pooled (network estimate -0.34, shown for orientation only) | - | - | 2 / 2 |
-| 2,3-Dimethylpyrazine | amino acid identity | leucine vs glycine | too few laboratories | not pooled (network estimate -0.44, shown for orientation only) | - | - | 1 / 1 |
+| 2,3-Dimethylpyrazine | amino acid identity | leucine vs glycine | too few laboratories | not pooled (network estimate -0.43, shown for orientation only) | - | - | 1 / 1 |
 | 2,3-Dimethylpyrazine | amino acid identity | lysine vs glycine | too few laboratories | not pooled (network estimate +0.55, shown for orientation only) | - | - | 2 / 3 |
-| 2,3-Dimethylpyrazine | amino acid identity | methionine vs glycine | too few laboratories | not pooled (network estimate -0.44, shown for orientation only) | - | - | 1 / 1 |
-| 2,3-Dimethylpyrazine | amino acid identity | none vs glycine | too few laboratories | not pooled (network estimate -0.33, shown for orientation only) | - | - | 2 / 14 |
+| 2,3-Dimethylpyrazine | amino acid identity | methionine vs glycine | too few laboratories | not pooled (network estimate -0.43, shown for orientation only) | - | - | 1 / 1 |
+| 2,3-Dimethylpyrazine | amino acid identity | none vs glycine | too few laboratories | not pooled (network estimate -0.32, shown for orientation only) | - | - | 2 / 14 |
 | 2,3-Dimethylpyrazine | amino acid identity | phenylalanine vs glycine | too few laboratories | not pooled (network estimate -0.05, shown for orientation only) | - | - | 2 / 2 |
 | 2,3-Dimethylpyrazine | amino acid identity | ala-gly vs glycine | not connected to the reference | - | - | - | - |
 | 2,3-Dimethylpyrazine | amino acid identity | ala-lys vs glycine | not connected to the reference | - | - | - | - |
@@ -225,7 +225,7 @@
 | 2,6-Dimethylpyrazine | amino acid identity | lysine vs glycine | too few laboratories | not pooled (network estimate +0.78, shown for orientation only) | - | - | 1 / 2 |
 | 2,6-Dimethylpyrazine | lipid | lecithin vs none | too few laboratories | not pooled (network estimate -0.17, shown for orientation only) | - | - | 1 / 3 |
 | 2,6-Dimethylpyrazine | oxygen | oxygen vs air | too few laboratories | not pooled (network estimate +0.01, shown for orientation only) | - | - | 1 / 1 |
-| 2-Acetylfuran | amino acid identity | cysteine vs glycine | too few laboratories | not pooled (network estimate -0.82, shown for orientation only) | - | - | 1 / 2 |
+| 2-Acetylfuran | amino acid identity | cysteine vs glycine | too few laboratories | not pooled (network estimate -0.81, shown for orientation only) | - | - | 1 / 2 |
 | 2-Acetylfuran | amino acid identity | lysine vs glycine | too few laboratories | not pooled (network estimate -0.57, shown for orientation only) | - | - | 1 / 2 |
 | 2-Acetylfuran | amino acid identity | gly-gly vs glycine | not connected to the reference | - | - | - | - |
 | 2-Acetylfuran | amino acid identity | glycine (2 mmol) vs glycine | not connected to the reference | - | - | - | - |
@@ -236,8 +236,8 @@
 | 2-Acetylfuran | lipid | linolenic acid vs none | too few laboratories | not pooled (network estimate +0.02, shown for orientation only) | - | - | 1 / 1 |
 | 2-Acetylfuran | lipid | nonanal vs none | too few laboratories | not pooled (network estimate -0.19, shown for orientation only) | - | - | 1 / 1 |
 | 2-Acetylfuran | lipid | oleic acid vs none | too few laboratories | not pooled (network estimate -0.02, shown for orientation only) | - | - | 1 / 1 |
-| 2-Acetylfuran | sulfur source | glutathione vs cysteine | too few laboratories | not pooled (network estimate +1.33, shown for orientation only) | - | - | 1 / 1 |
-| 2-Acetylfuran | sulfur source | none vs cysteine | too few laboratories | not pooled (network estimate +1.83, shown for orientation only) | - | - | 1 / 2 |
+| 2-Acetylfuran | sulfur source | glutathione vs cysteine | too few laboratories | not pooled (network estimate +1.31, shown for orientation only) | - | - | 1 / 1 |
+| 2-Acetylfuran | sulfur source | none vs cysteine | too few laboratories | not pooled (network estimate +1.81, shown for orientation only) | - | - | 1 / 2 |
 | 2-Acetylthiazole | lipid | lecithin vs none | too few laboratories | not pooled (network estimate +0.23, shown for orientation only) | - | - | 1 / 1 |
 | 2-Acetylthiazole | lipid | linoleic acid vs none | too few laboratories | not pooled (network estimate +0.02, shown for orientation only) | - | - | 1 / 1 |
 | 2-Acetylthiazole | lipid | oleic acid vs none | too few laboratories | not pooled (network estimate -0.38, shown for orientation only) | - | - | 1 / 1 |
@@ -285,16 +285,16 @@
 | 2-Ethyl-3,5-dimethylpyrazine | amino acid identity | valine + glycine vs glycine | not connected to the reference | - | - | - | - |
 | 2-Ethyl-3,5-dimethylpyrazine | amino acid identity | valine + lysine vs glycine | not connected to the reference | - | - | - | - |
 | 2-Ethyl-3,5-dimethylpyrazine | lipid | lecithin vs none | too few laboratories | not pooled (network estimate +0.01, shown for orientation only) | - | - | 1 / 3 |
-| 2-Ethyl-3,6-dimethylpyrazine | amino acid identity | arginine vs glycine | too few laboratories | not pooled (network estimate +0.48, shown for orientation only) | - | - | 1 / 1 |
-| 2-Ethyl-3,6-dimethylpyrazine | amino acid identity | asparagine vs glycine | too few laboratories | not pooled (network estimate +1.09, shown for orientation only) | - | - | 1 / 1 |
-| 2-Ethyl-3,6-dimethylpyrazine | amino acid identity | aspartic acid vs glycine | too few laboratories | not pooled (network estimate +0.67, shown for orientation only) | - | - | 1 / 1 |
+| 2-Ethyl-3,6-dimethylpyrazine | amino acid identity | arginine vs glycine | too few laboratories | not pooled (network estimate +0.47, shown for orientation only) | - | - | 1 / 1 |
+| 2-Ethyl-3,6-dimethylpyrazine | amino acid identity | asparagine vs glycine | too few laboratories | not pooled (network estimate +1.07, shown for orientation only) | - | - | 1 / 1 |
+| 2-Ethyl-3,6-dimethylpyrazine | amino acid identity | aspartic acid vs glycine | too few laboratories | not pooled (network estimate +0.66, shown for orientation only) | - | - | 1 / 1 |
 | 2-Ethyl-3,6-dimethylpyrazine | amino acid identity | cysteine vs glycine | too few laboratories | not pooled (network estimate -0.48, shown for orientation only) | - | - | 1 / 2 |
-| 2-Ethyl-3,6-dimethylpyrazine | amino acid identity | glutamic acid vs glycine | too few laboratories | not pooled (network estimate +0.93, shown for orientation only) | - | - | 1 / 1 |
-| 2-Ethyl-3,6-dimethylpyrazine | amino acid identity | glutamine vs glycine | too few laboratories | not pooled (network estimate +0.90, shown for orientation only) | - | - | 1 / 1 |
-| 2-Ethyl-3,6-dimethylpyrazine | amino acid identity | isoleucine vs glycine | too few laboratories | not pooled (network estimate +0.68, shown for orientation only) | - | - | 1 / 1 |
-| 2-Ethyl-3,6-dimethylpyrazine | amino acid identity | lysine vs glycine | too few laboratories | not pooled (network estimate +0.83, shown for orientation only) | - | - | 2 / 3 |
-| 2-Ethyl-3,6-dimethylpyrazine | amino acid identity | none vs glycine | too few laboratories | not pooled (network estimate +0.38, shown for orientation only) | - | - | 1 / 8 |
-| 2-Ethyl-3,6-dimethylpyrazine | amino acid identity | phenylalanine vs glycine | too few laboratories | not pooled (network estimate +0.96, shown for orientation only) | - | - | 1 / 1 |
+| 2-Ethyl-3,6-dimethylpyrazine | amino acid identity | glutamic acid vs glycine | too few laboratories | not pooled (network estimate +0.91, shown for orientation only) | - | - | 1 / 1 |
+| 2-Ethyl-3,6-dimethylpyrazine | amino acid identity | glutamine vs glycine | too few laboratories | not pooled (network estimate +0.88, shown for orientation only) | - | - | 1 / 1 |
+| 2-Ethyl-3,6-dimethylpyrazine | amino acid identity | isoleucine vs glycine | too few laboratories | not pooled (network estimate +0.67, shown for orientation only) | - | - | 1 / 1 |
+| 2-Ethyl-3,6-dimethylpyrazine | amino acid identity | lysine vs glycine | too few laboratories | not pooled (network estimate +0.82, shown for orientation only) | - | - | 2 / 3 |
+| 2-Ethyl-3,6-dimethylpyrazine | amino acid identity | none vs glycine | too few laboratories | not pooled (network estimate +0.36, shown for orientation only) | - | - | 1 / 8 |
+| 2-Ethyl-3,6-dimethylpyrazine | amino acid identity | phenylalanine vs glycine | too few laboratories | not pooled (network estimate +0.94, shown for orientation only) | - | - | 1 / 1 |
 | 2-Ethyl-3,6-dimethylpyrazine | amino acid identity | ala-gly vs glycine | not connected to the reference | - | - | - | - |
 | 2-Ethyl-3,6-dimethylpyrazine | amino acid identity | ala-lys vs glycine | not connected to the reference | - | - | - | - |
 | 2-Ethyl-3,6-dimethylpyrazine | amino acid identity | alanine + glycine vs glycine | not connected to the reference | - | - | - | - |
@@ -335,7 +335,7 @@
 | 2-Ethyl-3,6-dimethylpyrazine | amino acid identity | valine + lysine vs glycine | not connected to the reference | - | - | - | - |
 | 2-Ethyl-3,6-dimethylpyrazine | lipid | lecithin vs none | too few laboratories | not pooled (network estimate -0.13, shown for orientation only) | - | - | 1 / 3 |
 | 2-Ethylpyrazine | amino acid identity | cysteine vs glycine | too few laboratories | not pooled (network estimate +0.74, shown for orientation only) | - | - | 1 / 2 |
-| 2-Ethylpyrazine | amino acid identity | lysine vs glycine | too few laboratories | not pooled (network estimate +1.05, shown for orientation only) | - | - | 1 / 2 |
+| 2-Ethylpyrazine | amino acid identity | lysine vs glycine | too few laboratories | not pooled (network estimate +1.04, shown for orientation only) | - | - | 1 / 2 |
 | 2-Ethylpyrazine | amino acid identity | alanine + lysine vs glycine | not connected to the reference | - | - | - | - |
 | 2-Ethylpyrazine | amino acid identity | arginine vs glycine | not connected to the reference | - | - | - | - |
 | 2-Ethylpyrazine | amino acid identity | asparagine vs glycine | not connected to the reference | - | - | - | - |
@@ -354,13 +354,13 @@
 | 2-Furfurylthiol (FFT) | buffer | none vs phosphate | too few laboratories | not pooled (network estimate +0.25, shown for orientation only) | - | - | 1 / 6 |
 | 2-Furfurylthiol (FFT) | buffer | phthalate vs phosphate | too few laboratories | not pooled (network estimate +0.28, shown for orientation only) | - | - | 1 / 3 |
 | 2-Furfurylthiol (FFT) | lipid | beef phospholipid vs none | too few laboratories | not pooled (network estimate -0.20, shown for orientation only) | - | - | 1 / 1 |
-| 2-Furfurylthiol (FFT) | lipid | beef triglyceride vs none | too few laboratories | not pooled (network estimate -0.18, shown for orientation only) | - | - | 1 / 1 |
+| 2-Furfurylthiol (FFT) | lipid | beef triglyceride vs none | too few laboratories | not pooled (network estimate -0.17, shown for orientation only) | - | - | 1 / 1 |
 | 2-Furfurylthiol (FFT) | lipid | egg phosphatidylcholine vs none | too few laboratories | not pooled (network estimate -0.21, shown for orientation only) | - | - | 1 / 1 |
 | 2-Furfurylthiol (FFT) | lipid | egg phosphatidylethanolamine vs none | too few laboratories | not pooled (network estimate -0.14, shown for orientation only) | - | - | 1 / 1 |
-| 2-Furfurylthiol (FFT) | lipid | methyl alpha-linolenate vs none | too few laboratories | not pooled (network estimate -0.73, shown for orientation only) | - | - | 1 / 1 |
+| 2-Furfurylthiol (FFT) | lipid | methyl alpha-linolenate vs none | too few laboratories | not pooled (network estimate -0.72, shown for orientation only) | - | - | 1 / 1 |
 | 2-Furfurylthiol (FFT) | lipid | methyl linoleate vs none | too few laboratories | not pooled (network estimate -0.02, shown for orientation only) | - | - | 1 / 1 |
-| 2-Furfurylthiol (FFT) | matrix | choline chloride/glycerol vs buffer | too few laboratories | not pooled (network estimate +1.50, shown for orientation only) | - | - | 1 / 2 |
-| 2-Furfurylthiol (FFT) | matrix | glycerol vs buffer | too few laboratories | not pooled (network estimate +1.74, shown for orientation only) | - | - | 1 / 1 |
+| 2-Furfurylthiol (FFT) | matrix | choline chloride/glycerol vs buffer | too few laboratories | not pooled (network estimate +1.48, shown for orientation only) | - | - | 1 / 2 |
+| 2-Furfurylthiol (FFT) | matrix | glycerol vs buffer | too few laboratories | not pooled (network estimate +1.71, shown for orientation only) | - | - | 1 / 1 |
 | 2-Furfurylthiol (FFT) | sugar identity | fructose vs glucose | too few laboratories | not pooled (network estimate +0.17, shown for orientation only) | - | - | 1 / 1 |
 | 2-Furfurylthiol (FFT) | sugar identity | glucose-6-phosphate vs glucose | too few laboratories | not pooled (network estimate -0.36, shown for orientation only) | - | - | 1 / 1 |
 | 2-Furfurylthiol (FFT) | sugar identity | inosine 5'-monophosphate vs glucose | too few laboratories | not pooled (network estimate -0.41, shown for orientation only) | - | - | 1 / 4 |
@@ -376,19 +376,19 @@
 | 2-Furfurylthiol (FFT) | sulfur source | thiamine pyrophosphate vs cysteine | not connected to the reference | - | - | - | - |
 | 2-Methyl-3-(2-furfuryldithio)furan | buffer | none vs phosphate | too few laboratories | not pooled (network estimate -0.01, shown for orientation only) | - | - | 1 / 4 |
 | 2-Methyl-3-(2-furfuryldithio)furan | buffer | phthalate vs phosphate | too few laboratories | not pooled (network estimate +0.01, shown for orientation only) | - | - | 1 / 3 |
-| 2-Methyl-3-(2-furfuryldithio)furan | lipid | methyl alpha-linolenate vs none | too few laboratories | not pooled (network estimate -1.28, shown for orientation only) | - | - | 1 / 1 |
+| 2-Methyl-3-(2-furfuryldithio)furan | lipid | methyl alpha-linolenate vs none | too few laboratories | not pooled (network estimate -1.27, shown for orientation only) | - | - | 1 / 1 |
 | 2-Methyl-3-(2-furfuryldithio)furan | sugar identity | inosine 5'-monophosphate vs ribose 5-phosphate | too few laboratories | not pooled (network estimate -2.46, shown for orientation only) | - | - | 1 / 2 |
 | 2-Methyl-3-(2-furfuryldithio)furan | sugar identity | ribose vs ribose 5-phosphate | too few laboratories | not pooled (network estimate +0.43, shown for orientation only) | - | - | 1 / 3 |
 | 2-Methyl-3-furanthiol (MFT) | buffer | none vs phosphate | too few laboratories | not pooled (network estimate -0.01, shown for orientation only) | - | - | 1 / 6 |
 | 2-Methyl-3-furanthiol (MFT) | buffer | phthalate vs phosphate | too few laboratories | not pooled (network estimate +0.19, shown for orientation only) | - | - | 1 / 3 |
 | 2-Methyl-3-furanthiol (MFT) | buffer | 0.1 vs phosphate | not connected to the reference | - | - | - | - |
 | 2-Methyl-3-furanthiol (MFT) | buffer | 0.2 vs phosphate | not connected to the reference | - | - | - | - |
-| 2-Methyl-3-furanthiol (MFT) | lipid | beef phospholipid vs none | too few laboratories | not pooled (network estimate -0.81, shown for orientation only) | - | - | 1 / 1 |
-| 2-Methyl-3-furanthiol (MFT) | lipid | beef triglyceride vs none | too few laboratories | not pooled (network estimate -0.39, shown for orientation only) | - | - | 1 / 1 |
-| 2-Methyl-3-furanthiol (MFT) | lipid | egg phosphatidylcholine vs none | too few laboratories | not pooled (network estimate -0.57, shown for orientation only) | - | - | 1 / 1 |
-| 2-Methyl-3-furanthiol (MFT) | lipid | egg phosphatidylethanolamine vs none | too few laboratories | not pooled (network estimate -0.62, shown for orientation only) | - | - | 1 / 1 |
-| 2-Methyl-3-furanthiol (MFT) | lipid | methyl linoleate vs none | too few laboratories | not pooled (network estimate -1.13, shown for orientation only) | - | - | 1 / 1 |
-| 2-Methyl-3-furanthiol (MFT) | matrix | choline chloride/glycerol vs buffer | too few laboratories | not pooled (network estimate +0.24, shown for orientation only) | - | - | 1 / 2 |
+| 2-Methyl-3-furanthiol (MFT) | lipid | beef phospholipid vs none | too few laboratories | not pooled (network estimate -0.80, shown for orientation only) | - | - | 1 / 1 |
+| 2-Methyl-3-furanthiol (MFT) | lipid | beef triglyceride vs none | too few laboratories | not pooled (network estimate -0.38, shown for orientation only) | - | - | 1 / 1 |
+| 2-Methyl-3-furanthiol (MFT) | lipid | egg phosphatidylcholine vs none | too few laboratories | not pooled (network estimate -0.56, shown for orientation only) | - | - | 1 / 1 |
+| 2-Methyl-3-furanthiol (MFT) | lipid | egg phosphatidylethanolamine vs none | too few laboratories | not pooled (network estimate -0.61, shown for orientation only) | - | - | 1 / 1 |
+| 2-Methyl-3-furanthiol (MFT) | lipid | methyl linoleate vs none | too few laboratories | not pooled (network estimate -1.12, shown for orientation only) | - | - | 1 / 1 |
+| 2-Methyl-3-furanthiol (MFT) | matrix | choline chloride/glycerol vs buffer | too few laboratories | not pooled (network estimate +0.23, shown for orientation only) | - | - | 1 / 2 |
 | 2-Methyl-3-furanthiol (MFT) | matrix | glycerol vs buffer | too few laboratories | not pooled (network estimate +0.20, shown for orientation only) | - | - | 1 / 1 |
 | 2-Methyl-3-furanthiol (MFT) | sugar identity | fructose vs glucose | too few laboratories | not pooled (network estimate +0.17, shown for orientation only) | - | - | 1 / 1 |
 | 2-Methyl-3-furanthiol (MFT) | sugar identity | glucose-6-phosphate vs glucose | too few laboratories | not pooled (network estimate -0.44, shown for orientation only) | - | - | 1 / 1 |
@@ -400,10 +400,10 @@
 | 2-Methyl-3-furanthiol (MFT) | sugar identity | ribose 5-phosphate vs glucose | too few laboratories | not pooled (network estimate +1.36, shown for orientation only) | - | - | 2 / 9 |
 | 2-Methyl-3-furanthiol (MFT) | sugar identity | xylose vs glucose | too few laboratories | not pooled (network estimate +0.91, shown for orientation only) | - | - | 2 / 2 |
 | 2-Methyl-3-furanthiol (MFT) | sulfur source | cystine vs cysteine | too few laboratories | not pooled (network estimate +0.28, shown for orientation only) | - | - | 1 / 1 |
-| 2-Methyl-3-furanthiol (MFT) | sulfur source | glutathione vs cysteine | direction unclear | -0.29 (-0.71 to +0.14) | -1.26 to +0.68 | 0.70 | 3 / 5 |
+| 2-Methyl-3-furanthiol (MFT) | sulfur source | glutathione vs cysteine | direction unclear | -0.29 (-0.73 to +0.16) | -1.31 to +0.74 | 0.69 | 3 / 5 |
 | 2-Methyl-3-furanthiol (MFT) | sulfur source | glutathione + cysteine vs cysteine | too few laboratories | not pooled (network estimate -0.51, shown for orientation only) | - | - | 1 / 1 |
 | 2-Methyl-3-furanthiol (MFT) | sulfur source | hydrogen sulfide vs cysteine | too few laboratories | not pooled (network estimate +0.60, shown for orientation only) | - | - | 1 / 1 |
-| 2-Methyl-3-furanthiol (MFT) | sulfur source | none vs cysteine | answered by the literature | -0.78 (-1.14 to -0.41) | -1.72 to +0.17 | 0.92 | 3 / 11 |
+| 2-Methyl-3-furanthiol (MFT) | sulfur source | none vs cysteine | answered by the literature | -0.78 (-1.16 to -0.39) | -1.77 to +0.22 | 0.90 | 3 / 11 |
 | 2-Methyl-3-furanthiol (MFT) | sulfur source | thiamine vs cysteine | not connected to the reference | - | - | - | - |
 | 2-Methyl-3-furanthiol (MFT) | sulfur source | thiamine pyrophosphate vs cysteine | not connected to the reference | - | - | - | - |
 | 2-Methylbutanal | amino acid identity | isoleucine vs none | too few laboratories | not pooled (network estimate +2.46, shown for orientation only) | - | - | 1 / 2 |
@@ -411,7 +411,7 @@
 | 2-Methylbutanal | amino acid identity | methionine vs none | too few laboratories | not pooled (network estimate +0.04, shown for orientation only) | - | - | 1 / 2 |
 | 2-Methylbutanal | amino acid identity | phenylalanine vs none | too few laboratories | not pooled (network estimate +0.24, shown for orientation only) | - | - | 1 / 2 |
 | 2-Methylpyrazine | amino acid identity | arginine vs glycine | too few laboratories | not pooled (network estimate -0.42, shown for orientation only) | - | - | 1 / 1 |
-| 2-Methylpyrazine | amino acid identity | asparagine vs glycine | too few laboratories | not pooled (network estimate +0.39, shown for orientation only) | - | - | 2 / 3 |
+| 2-Methylpyrazine | amino acid identity | asparagine vs glycine | too few laboratories | not pooled (network estimate +0.38, shown for orientation only) | - | - | 2 / 3 |
 | 2-Methylpyrazine | amino acid identity | aspartic acid vs glycine | too few laboratories | not pooled (network estimate -0.05, shown for orientation only) | - | - | 1 / 1 |
 | 2-Methylpyrazine | amino acid identity | cysteine vs glycine | too few laboratories | not pooled (network estimate -0.06, shown for orientation only) | - | - | 2 / 8 |
 | 2-Methylpyrazine | amino acid identity | glutamic acid vs glycine | too few laboratories | not pooled (network estimate +0.37, shown for orientation only) | - | - | 1 / 2 |
@@ -464,7 +464,7 @@
 | 2-Methylpyrazine | amino acid identity | val-lys vs glycine | not connected to the reference | - | - | - | - |
 | 2-Methylpyrazine | amino acid identity | valine + glycine vs glycine | not connected to the reference | - | - | - | - |
 | 2-Methylpyrazine | amino acid identity | valine + lysine vs glycine | not connected to the reference | - | - | - | - |
-| 2-Methylpyrazine | buffer | none vs phosphate | too few laboratories | not pooled (network estimate -3.15, shown for orientation only) | - | - | 1 / 3 |
+| 2-Methylpyrazine | buffer | none vs phosphate | too few laboratories | not pooled (network estimate -3.14, shown for orientation only) | - | - | 1 / 3 |
 | 2-Methylpyrazine | buffer | phthalate vs phosphate | too few laboratories | not pooled (network estimate +0.18, shown for orientation only) | - | - | 1 / 1 |
 | 2-Methylpyrazine | lipid | lecithin vs none | too few laboratories | not pooled (network estimate -0.36, shown for orientation only) | - | - | 1 / 3 |
 | 2-Methylpyrazine | oxygen | oxygen vs air | too few laboratories | not pooled (network estimate -0.05, shown for orientation only) | - | - | 1 / 1 |
@@ -490,7 +490,7 @@
 | 2-Pentylfuran | matrix | water vs potato starch | too few laboratories | not pooled (network estimate +0.02, shown for orientation only) | - | - | 1 / 1 |
 | 2-Pentylfuran | sulfur source | glutathione vs cysteine | too few laboratories | not pooled (network estimate +0.00, shown for orientation only) | - | - | 1 / 1 |
 | 3-Methylbutanal | amino acid identity | isoleucine vs none | too few laboratories | not pooled (network estimate +0.05, shown for orientation only) | - | - | 1 / 1 |
-| 3-Methylbutanal | amino acid identity | leucine vs none | too few laboratories | not pooled (network estimate +2.38, shown for orientation only) | - | - | 1 / 2 |
+| 3-Methylbutanal | amino acid identity | leucine vs none | too few laboratories | not pooled (network estimate +2.37, shown for orientation only) | - | - | 1 / 2 |
 | 3-Methylbutanal | amino acid identity | methionine vs none | too few laboratories | not pooled (network estimate +0.17, shown for orientation only) | - | - | 1 / 2 |
 | 3-Methylbutanal | amino acid identity | phenylalanine vs none | too few laboratories | not pooled (network estimate +0.15, shown for orientation only) | - | - | 1 / 2 |
 | 3-Methylbutanal | amino acid identity | free amino acids (lysine + leucine) vs none | not connected to the reference | - | - | - | - |
@@ -503,8 +503,8 @@
 | Benzaldehyde | amino acid identity | isoleucine vs none | too few laboratories | not pooled (network estimate -0.08, shown for orientation only) | - | - | 1 / 2 |
 | Benzaldehyde | amino acid identity | leucine vs none | too few laboratories | not pooled (network estimate -0.14, shown for orientation only) | - | - | 1 / 2 |
 | Benzaldehyde | amino acid identity | methionine vs none | too few laboratories | not pooled (network estimate -0.21, shown for orientation only) | - | - | 1 / 2 |
-| Benzaldehyde | amino acid identity | phenylalanine vs none | too few laboratories | not pooled (network estimate +0.56, shown for orientation only) | - | - | 1 / 2 |
-| Benzaldehyde | buffer | citrate vs phosphate | too few laboratories | not pooled (network estimate -0.62, shown for orientation only) | - | - | 1 / 1 |
+| Benzaldehyde | amino acid identity | phenylalanine vs none | too few laboratories | not pooled (network estimate +0.55, shown for orientation only) | - | - | 1 / 2 |
+| Benzaldehyde | buffer | citrate vs phosphate | too few laboratories | not pooled (network estimate -0.61, shown for orientation only) | - | - | 1 / 1 |
 | Benzaldehyde | lipid | 13-hydroperoxyoctadeca-9,11-dienoic acid vs none | too few laboratories | not pooled (network estimate +0.68, shown for orientation only) | - | - | 1 / 12 |
 | Benzaldehyde | lipid | 2,4-decadienal vs none | too few laboratories | not pooled (network estimate +0.70, shown for orientation only) | - | - | 1 / 4 |
 | Benzaldehyde | lipid | 2,4-heptadienal vs none | too few laboratories | not pooled (network estimate +0.49, shown for orientation only) | - | - | 1 / 4 |
@@ -532,9 +532,9 @@
 | Bis(2-furfuryl) disulfide | sugar identity | inosine 5'-monophosphate vs ribose 5-phosphate | too few laboratories | not pooled (network estimate -0.88, shown for orientation only) | - | - | 1 / 3 |
 | Bis(2-furfuryl) disulfide | sugar identity | ribose vs ribose 5-phosphate | too few laboratories | not pooled (network estimate +1.76, shown for orientation only) | - | - | 1 / 3 |
 | Bis(2-furfuryl) disulfide | sulfur source | glutathione vs cysteine | too few laboratories | not pooled (network estimate +0.33, shown for orientation only) | - | - | 1 / 1 |
-| Bis(2-methyl-3-furyl) disulfide | buffer | none vs phosphate | too few laboratories | not pooled (network estimate +0.09, shown for orientation only) | - | - | 1 / 4 |
+| Bis(2-methyl-3-furyl) disulfide | buffer | none vs phosphate | too few laboratories | not pooled (network estimate +0.08, shown for orientation only) | - | - | 1 / 4 |
 | Bis(2-methyl-3-furyl) disulfide | buffer | phthalate vs phosphate | too few laboratories | not pooled (network estimate +0.33, shown for orientation only) | - | - | 1 / 2 |
-| Bis(2-methyl-3-furyl) disulfide | lipid | methyl alpha-linolenate vs none | too few laboratories | not pooled (network estimate -1.99, shown for orientation only) | - | - | 1 / 1 |
+| Bis(2-methyl-3-furyl) disulfide | lipid | methyl alpha-linolenate vs none | too few laboratories | not pooled (network estimate -1.96, shown for orientation only) | - | - | 1 / 1 |
 | Bis(2-methyl-3-furyl) disulfide | sugar identity | inosine 5'-monophosphate vs ribose 5-phosphate | too few laboratories | not pooled (network estimate -0.77, shown for orientation only) | - | - | 1 / 2 |
 | Bis(2-methyl-3-furyl) disulfide | sugar identity | ribose vs ribose 5-phosphate | too few laboratories | not pooled (network estimate -0.02, shown for orientation only) | - | - | 1 / 4 |
 | Bis(2-methyl-3-furyl) disulfide | sulfur source | cystine vs cysteine | too few laboratories | not pooled (network estimate +1.11, shown for orientation only) | - | - | 1 / 1 |
@@ -546,7 +546,7 @@
 | DMHF | amino acid identity | alanine vs glycine | too few laboratories | not pooled (network estimate -0.42, shown for orientation only) | - | - | 1 / 6 |
 | DMHF | amino acid identity | none vs glycine | too few laboratories | not pooled (network estimate -1.24, shown for orientation only) | - | - | 1 / 6 |
 | DMHF | buffer | malonate vs phosphate | too few laboratories | not pooled (network estimate -0.27, shown for orientation only) | - | - | 1 / 2 |
-| DMHF | buffer | none vs phosphate | too few laboratories | not pooled (network estimate -1.08, shown for orientation only) | - | - | 1 / 5 |
+| DMHF | buffer | none vs phosphate | too few laboratories | not pooled (network estimate -1.07, shown for orientation only) | - | - | 1 / 5 |
 | DMHF | lipid | (e)-2-nonenal vs none | too few laboratories | not pooled (network estimate -0.27, shown for orientation only) | - | - | 1 / 1 |
 | DMHF | lipid | nonanal vs none | too few laboratories | not pooled (network estimate -0.40, shown for orientation only) | - | - | 1 / 1 |
 | DMHF | sugar identity | ribose vs arabinose | too few laboratories | not pooled (network estimate -0.01, shown for orientation only) | - | - | 1 / 2 |
@@ -558,29 +558,29 @@
 | Furfural | amino acid identity | methionine vs glycine | too few laboratories | not pooled (network estimate +0.10, shown for orientation only) | - | - | 1 / 5 |
 | Furfural | amino acid identity | gly-gly vs glycine | not connected to the reference | - | - | - | - |
 | Furfural | amino acid identity | glycine (2 mmol) vs glycine | not connected to the reference | - | - | - | - |
-| Furfural | buffer | none vs phosphate | too few laboratories | not pooled (network estimate +1.73, shown for orientation only) | - | - | 1 / 4 |
-| Furfural | buffer | phthalate vs phosphate | too few laboratories | not pooled (network estimate -0.47, shown for orientation only) | - | - | 1 / 2 |
-| Furfural | lipid | fresh lard vs none | too few laboratories | not pooled (network estimate -0.37, shown for orientation only) | - | - | 1 / 1 |
+| Furfural | buffer | none vs phosphate | too few laboratories | not pooled (network estimate +1.72, shown for orientation only) | - | - | 1 / 4 |
+| Furfural | buffer | phthalate vs phosphate | too few laboratories | not pooled (network estimate -0.48, shown for orientation only) | - | - | 1 / 2 |
+| Furfural | lipid | fresh lard vs none | too few laboratories | not pooled (network estimate -0.36, shown for orientation only) | - | - | 1 / 1 |
 | Furfural | lipid | lecithin vs none | too few laboratories | not pooled (network estimate -0.29, shown for orientation only) | - | - | 1 / 3 |
 | Furfural | lipid | oxidized lard vs none | too few laboratories | not pooled (network estimate -0.40, shown for orientation only) | - | - | 1 / 1 |
 | Furfural | sugar identity | inosine 5'-monophosphate vs ribose 5-phosphate | too few laboratories | not pooled (network estimate -1.21, shown for orientation only) | - | - | 1 / 1 |
 | Furfural | sugar identity | ribose vs ribose 5-phosphate | too few laboratories | not pooled (network estimate +0.94, shown for orientation only) | - | - | 1 / 4 |
-| Furfural | sulfur source | glutathione vs cysteine | too few laboratories | not pooled (network estimate +0.24, shown for orientation only) | - | - | 1 / 1 |
-| Furfural | sulfur source | none vs cysteine | too few laboratories | not pooled (network estimate +0.43, shown for orientation only) | - | - | 1 / 2 |
+| Furfural | sulfur source | glutathione vs cysteine | too few laboratories | not pooled (network estimate +0.23, shown for orientation only) | - | - | 1 / 1 |
+| Furfural | sulfur source | none vs cysteine | too few laboratories | not pooled (network estimate +0.42, shown for orientation only) | - | - | 1 / 2 |
 | HEMF | amino acid identity | alanine vs glycine | too few laboratories | not pooled (network estimate +1.01, shown for orientation only) | - | - | 1 / 6 |
 | HEMF | amino acid identity | none vs glycine | too few laboratories | not pooled (network estimate -0.63, shown for orientation only) | - | - | 1 / 6 |
 | HEMF | buffer | malonate vs phosphate | too few laboratories | not pooled (network estimate -0.40, shown for orientation only) | - | - | 1 / 2 |
 | HEMF | buffer | none vs phosphate | too few laboratories | not pooled (network estimate -1.19, shown for orientation only) | - | - | 1 / 5 |
 | HEMF | sugar identity | ribose vs arabinose | too few laboratories | not pooled (network estimate -0.05, shown for orientation only) | - | - | 1 / 2 |
-| HEMF | sugar identity | xylose vs arabinose | too few laboratories | not pooled (network estimate -0.30, shown for orientation only) | - | - | 1 / 2 |
+| HEMF | sugar identity | xylose vs arabinose | too few laboratories | not pooled (network estimate -0.29, shown for orientation only) | - | - | 1 / 2 |
 | Heptanal | lipid | beef phospholipid vs beef triglyceride | too few laboratories | not pooled (network estimate +0.24, shown for orientation only) | - | - | 1 / 2 |
 | Heptanal | lipid | egg phosphatidylcholine vs beef triglyceride | too few laboratories | not pooled (network estimate +0.35, shown for orientation only) | - | - | 1 / 2 |
-| Heptanal | lipid | egg phosphatidylethanolamine vs beef triglyceride | too few laboratories | not pooled (network estimate +0.58, shown for orientation only) | - | - | 1 / 2 |
+| Heptanal | lipid | egg phosphatidylethanolamine vs beef triglyceride | too few laboratories | not pooled (network estimate +0.57, shown for orientation only) | - | - | 1 / 2 |
 | Heptanal | lipid | methyl alpha-linolenate vs beef triglyceride | not connected to the reference | - | - | - | - |
 | Heptanal | lipid | methyl linoleate vs beef triglyceride | not connected to the reference | - | - | - | - |
 | Hexanal | lipid | beef phospholipid vs beef triglyceride | too few laboratories | not pooled (network estimate +0.43, shown for orientation only) | - | - | 1 / 2 |
-| Hexanal | lipid | egg phosphatidylcholine vs beef triglyceride | too few laboratories | not pooled (network estimate +0.48, shown for orientation only) | - | - | 1 / 2 |
-| Hexanal | lipid | egg phosphatidylethanolamine vs beef triglyceride | too few laboratories | not pooled (network estimate +0.73, shown for orientation only) | - | - | 1 / 2 |
+| Hexanal | lipid | egg phosphatidylcholine vs beef triglyceride | too few laboratories | not pooled (network estimate +0.49, shown for orientation only) | - | - | 1 / 2 |
+| Hexanal | lipid | egg phosphatidylethanolamine vs beef triglyceride | too few laboratories | not pooled (network estimate +0.72, shown for orientation only) | - | - | 1 / 2 |
 | Hexanal | lipid | fresh lard vs beef triglyceride | not connected to the reference | - | - | - | - |
 | Hexanal | lipid | linoleic acid vs beef triglyceride | not connected to the reference | - | - | - | - |
 | Hexanal | lipid | linolenic acid vs beef triglyceride | not connected to the reference | - | - | - | - |
@@ -589,10 +589,10 @@
 | Hexanal | lipid | oleic acid vs beef triglyceride | not connected to the reference | - | - | - | - |
 | Hexanal | lipid | oxidized lard vs beef triglyceride | not connected to the reference | - | - | - | - |
 | Hexanal | matrix | water vs potato starch | too few laboratories | not pooled (network estimate +0.09, shown for orientation only) | - | - | 1 / 1 |
-| Hexanal | sulfur source | glutathione vs cysteine | too few laboratories | not pooled (network estimate -0.79, shown for orientation only) | - | - | 1 / 1 |
+| Hexanal | sulfur source | glutathione vs cysteine | too few laboratories | not pooled (network estimate -0.78, shown for orientation only) | - | - | 1 / 1 |
 | Hydrogen Sulfide | oxygen | air vs inert | too few laboratories | not pooled (network estimate +0.11, shown for orientation only) | - | - | 1 / 3 |
-| Hydrogen Sulfide | sugar identity | xylose vs none | too few laboratories | not pooled (network estimate +0.48, shown for orientation only) | - | - | 1 / 1 |
-| Hydrogen Sulfide | sulfur source | cysteine mercaptal of acetaldehyde vs cysteine | too few laboratories | not pooled (network estimate -0.16, shown for orientation only) | - | - | 1 / 1 |
+| Hydrogen Sulfide | sugar identity | xylose vs none | too few laboratories | not pooled (network estimate +0.47, shown for orientation only) | - | - | 1 / 1 |
+| Hydrogen Sulfide | sulfur source | cysteine mercaptal of acetaldehyde vs cysteine | too few laboratories | not pooled (network estimate -0.15, shown for orientation only) | - | - | 1 / 1 |
 | Hydrogen Sulfide | sulfur source | cysteine mercaptal of benzaldehyde vs cysteine | too few laboratories | not pooled (network estimate +0.14, shown for orientation only) | - | - | 1 / 1 |
 | Hydrogen Sulfide | sulfur source | cysteine mercaptal of furfural vs cysteine | too few laboratories | not pooled (network estimate +0.30, shown for orientation only) | - | - | 1 / 1 |
 | Hydrogen Sulfide | sulfur source | cysteine mercaptal of n-butyraldehyde vs cysteine | too few laboratories | not pooled (network estimate -0.27, shown for orientation only) | - | - | 1 / 1 |
@@ -605,8 +605,8 @@
 | Hydrogen Sulfide | sulfur source | cysteine-n-butyraldehyde vs cysteine | too few laboratories | not pooled (network estimate -0.52, shown for orientation only) | - | - | 1 / 1 |
 | Hydrogen Sulfide | sulfur source | cystine vs cysteine | too few laboratories | not pooled (network estimate +0.17, shown for orientation only) | - | - | 1 / 14 |
 | Hydrogen Sulfide | sulfur source | djenkolic acid vs cysteine | too few laboratories | not pooled (network estimate -0.12, shown for orientation only) | - | - | 1 / 1 |
-| Methional (3-(methylthio)propanal) | lipid | linoleic acid vs none | too few laboratories | not pooled (network estimate +0.47, shown for orientation only) | - | - | 1 / 1 |
-| Methional (3-(methylthio)propanal) | matrix | water vs potato starch | too few laboratories | not pooled (network estimate -0.14, shown for orientation only) | - | - | 1 / 1 |
+| Methional (3-(methylthio)propanal) | lipid | linoleic acid vs none | too few laboratories | not pooled (network estimate +0.46, shown for orientation only) | - | - | 1 / 1 |
+| Methional (3-(methylthio)propanal) | matrix | water vs potato starch | too few laboratories | not pooled (network estimate -0.13, shown for orientation only) | - | - | 1 / 1 |
 | Nonanal | lipid | beef phospholipid vs beef triglyceride | too few laboratories | not pooled (network estimate +0.16, shown for orientation only) | - | - | 1 / 2 |
 | Nonanal | lipid | egg phosphatidylcholine vs beef triglyceride | too few laboratories | not pooled (network estimate +0.62, shown for orientation only) | - | - | 1 / 2 |
 | Nonanal | lipid | egg phosphatidylethanolamine vs beef triglyceride | too few laboratories | not pooled (network estimate +0.09, shown for orientation only) | - | - | 1 / 2 |
@@ -622,18 +622,18 @@
 | Norfuraneol (NF) | sugar identity | ribose vs arabinose | too few laboratories | not pooled (network estimate +0.25, shown for orientation only) | - | - | 1 / 3 |
 | Norfuraneol (NF) | sugar identity | xylose vs arabinose | too few laboratories | not pooled (network estimate +0.05, shown for orientation only) | - | - | 1 / 3 |
 | Octanal | lipid | beef phospholipid vs beef triglyceride | too few laboratories | not pooled (network estimate +0.34, shown for orientation only) | - | - | 1 / 2 |
-| Octanal | lipid | egg phosphatidylcholine vs beef triglyceride | too few laboratories | not pooled (network estimate +0.63, shown for orientation only) | - | - | 1 / 2 |
-| Octanal | lipid | egg phosphatidylethanolamine vs beef triglyceride | too few laboratories | not pooled (network estimate +0.63, shown for orientation only) | - | - | 1 / 2 |
+| Octanal | lipid | egg phosphatidylcholine vs beef triglyceride | too few laboratories | not pooled (network estimate +0.64, shown for orientation only) | - | - | 1 / 2 |
+| Octanal | lipid | egg phosphatidylethanolamine vs beef triglyceride | too few laboratories | not pooled (network estimate +0.62, shown for orientation only) | - | - | 1 / 2 |
 | Octanal | lipid | fresh lard vs beef triglyceride | not connected to the reference | - | - | - | - |
 | Octanal | lipid | linoleic acid vs beef triglyceride | not connected to the reference | - | - | - | - |
 | Octanal | lipid | linolenic acid vs beef triglyceride | not connected to the reference | - | - | - | - |
 | Octanal | lipid | oleic acid vs beef triglyceride | not connected to the reference | - | - | - | - |
 | Octanal | lipid | oxidized lard vs beef triglyceride | not connected to the reference | - | - | - | - |
-| Pentanal | lipid | methyl linoleate vs methyl alpha-linolenate | too few laboratories | not pooled (network estimate +0.34, shown for orientation only) | - | - | 1 / 2 |
-| Phenylacetaldehyde | amino acid identity | isoleucine vs none | too few laboratories | not pooled (network estimate +0.30, shown for orientation only) | - | - | 1 / 1 |
-| Phenylacetaldehyde | amino acid identity | leucine vs none | too few laboratories | not pooled (network estimate -0.00, shown for orientation only) | - | - | 1 / 1 |
-| Phenylacetaldehyde | amino acid identity | methionine vs none | too few laboratories | not pooled (network estimate -0.00, shown for orientation only) | - | - | 1 / 1 |
-| Phenylacetaldehyde | amino acid identity | phenylalanine vs none | too few laboratories | not pooled (network estimate +2.38, shown for orientation only) | - | - | 1 / 1 |
+| Pentanal | lipid | methyl linoleate vs methyl alpha-linolenate | too few laboratories | not pooled (network estimate +0.39, shown for orientation only) | - | - | 1 / 2 |
+| Phenylacetaldehyde | amino acid identity | isoleucine vs none | too few laboratories | not pooled (network estimate +0.29, shown for orientation only) | - | - | 1 / 1 |
+| Phenylacetaldehyde | amino acid identity | leucine vs none | too few laboratories | not pooled (network estimate -0.01, shown for orientation only) | - | - | 1 / 1 |
+| Phenylacetaldehyde | amino acid identity | methionine vs none | too few laboratories | not pooled (network estimate -0.01, shown for orientation only) | - | - | 1 / 1 |
+| Phenylacetaldehyde | amino acid identity | phenylalanine vs none | too few laboratories | not pooled (network estimate +2.36, shown for orientation only) | - | - | 1 / 1 |
 | Phenylacetaldehyde | amino acid identity | free amino acids (lysine + phenylalanine) vs none | not connected to the reference | - | - | - | - |
 | Phenylacetaldehyde | amino acid identity | lys-phe vs none | not connected to the reference | - | - | - | - |
 | Phenylacetaldehyde | buffer | borate vs phosphate | too few laboratories | not pooled (network estimate +0.05, shown for orientation only) | - | - | 1 / 1 |
@@ -664,22 +664,22 @@
 | Phenylacetaldehyde | oxygen | 40 vs inert | not connected to the reference | - | - | - | - |
 | Phenylacetaldehyde | oxygen | 60 vs inert | not connected to the reference | - | - | - | - |
 | Phenylacetaldehyde | oxygen | 80 vs inert | not connected to the reference | - | - | - | - |
-| Phenylacetaldehyde | sugar identity | fructose vs glucose | too few laboratories | not pooled (network estimate +0.63, shown for orientation only) | - | - | 1 / 1 |
+| Phenylacetaldehyde | sugar identity | fructose vs glucose | too few laboratories | not pooled (network estimate +0.62, shown for orientation only) | - | - | 1 / 1 |
 | Phenylacetaldehyde | sugar identity | none vs glucose | too few laboratories | not pooled (network estimate +0.00, shown for orientation only) | - | - | 1 / 1 |
-| Phenylacetaldehyde | sugar identity | xylose vs glucose | too few laboratories | not pooled (network estimate +1.30, shown for orientation only) | - | - | 1 / 2 |
-| Pyrazines | amino acid identity | arginine vs glycine | too few laboratories | not pooled (network estimate +0.33, shown for orientation only) | - | - | 1 / 1 |
-| Pyrazines | amino acid identity | asparagine vs glycine | direction unclear | +0.86 (-0.15 to +1.78) | -0.51 to +2.14 | 0.86 | 3 / 5 |
-| Pyrazines | amino acid identity | aspartic acid vs glycine | too few laboratories | not pooled (network estimate +0.60, shown for orientation only) | - | - | 1 / 1 |
-| Pyrazines | amino acid identity | cysteine vs glycine | too few laboratories | not pooled (network estimate +0.23, shown for orientation only) | - | - | 1 / 1 |
-| Pyrazines | amino acid identity | glutamic acid vs glycine | too few laboratories | not pooled (network estimate +0.80, shown for orientation only) | - | - | 1 / 2 |
-| Pyrazines | amino acid identity | glutamine vs glycine | too few laboratories | not pooled (network estimate +0.89, shown for orientation only) | - | - | 2 / 3 |
+| Phenylacetaldehyde | sugar identity | xylose vs glucose | too few laboratories | not pooled (network estimate +1.29, shown for orientation only) | - | - | 1 / 2 |
+| Pyrazines | amino acid identity | arginine vs glycine | too few laboratories | not pooled (network estimate +0.31, shown for orientation only) | - | - | 1 / 1 |
+| Pyrazines | amino acid identity | asparagine vs glycine | direction unclear | +0.83 (-0.21 to +1.80) | -0.60 to +2.17 | 0.84 | 3 / 5 |
+| Pyrazines | amino acid identity | aspartic acid vs glycine | too few laboratories | not pooled (network estimate +0.58, shown for orientation only) | - | - | 1 / 1 |
+| Pyrazines | amino acid identity | cysteine vs glycine | too few laboratories | not pooled (network estimate +0.22, shown for orientation only) | - | - | 1 / 1 |
+| Pyrazines | amino acid identity | glutamic acid vs glycine | too few laboratories | not pooled (network estimate +0.79, shown for orientation only) | - | - | 1 / 2 |
+| Pyrazines | amino acid identity | glutamine vs glycine | too few laboratories | not pooled (network estimate +0.87, shown for orientation only) | - | - | 2 / 3 |
 | Pyrazines | amino acid identity | glutathione vs glycine | too few laboratories | not pooled (network estimate +0.43, shown for orientation only) | - | - | 1 / 3 |
-| Pyrazines | amino acid identity | isoleucine vs glycine | too few laboratories | not pooled (network estimate +0.44, shown for orientation only) | - | - | 2 / 2 |
-| Pyrazines | amino acid identity | leucine vs glycine | too few laboratories | not pooled (network estimate +0.20, shown for orientation only) | - | - | 1 / 1 |
-| Pyrazines | amino acid identity | lysine vs glycine | too few laboratories | not pooled (network estimate +1.36, shown for orientation only) | - | - | 2 / 3 |
-| Pyrazines | amino acid identity | methionine vs glycine | too few laboratories | not pooled (network estimate +0.36, shown for orientation only) | - | - | 1 / 1 |
-| Pyrazines | amino acid identity | none vs glycine | too few laboratories | not pooled (network estimate +0.16, shown for orientation only) | - | - | 2 / 14 |
-| Pyrazines | amino acid identity | phenylalanine vs glycine | too few laboratories | not pooled (network estimate +0.68, shown for orientation only) | - | - | 2 / 2 |
+| Pyrazines | amino acid identity | isoleucine vs glycine | too few laboratories | not pooled (network estimate +0.42, shown for orientation only) | - | - | 2 / 2 |
+| Pyrazines | amino acid identity | leucine vs glycine | too few laboratories | not pooled (network estimate +0.18, shown for orientation only) | - | - | 1 / 1 |
+| Pyrazines | amino acid identity | lysine vs glycine | too few laboratories | not pooled (network estimate +1.34, shown for orientation only) | - | - | 2 / 3 |
+| Pyrazines | amino acid identity | methionine vs glycine | too few laboratories | not pooled (network estimate +0.33, shown for orientation only) | - | - | 1 / 1 |
+| Pyrazines | amino acid identity | none vs glycine | too few laboratories | not pooled (network estimate +0.14, shown for orientation only) | - | - | 2 / 14 |
+| Pyrazines | amino acid identity | phenylalanine vs glycine | too few laboratories | not pooled (network estimate +0.66, shown for orientation only) | - | - | 2 / 2 |
 | Pyrazines | amino acid identity | ala-gly vs glycine | not connected to the reference | - | - | - | - |
 | Pyrazines | amino acid identity | ala-lys vs glycine | not connected to the reference | - | - | - | - |
 | Pyrazines | amino acid identity | alanine + glycine vs glycine | not connected to the reference | - | - | - | - |
@@ -722,15 +722,15 @@
 | Pyrazines | oxygen | oxygen vs air | too few laboratories | not pooled (network estimate -0.05, shown for orientation only) | - | - | 1 / 1 |
 | Pyrazines | sugar identity | fructose vs glucose | too few laboratories | not pooled (network estimate +0.13, shown for orientation only) | - | - | 2 / 3 |
 | Pyrazines | sugar identity | ribose vs glucose | too few laboratories | not pooled (network estimate +0.42, shown for orientation only) | - | - | 1 / 1 |
-| Tetramethylpyrazine | amino acid identity | arginine vs glycine | too few laboratories | not pooled (network estimate -1.45, shown for orientation only) | - | - | 1 / 1 |
-| Tetramethylpyrazine | amino acid identity | asparagine vs glycine | too few laboratories | not pooled (network estimate -1.19, shown for orientation only) | - | - | 1 / 1 |
-| Tetramethylpyrazine | amino acid identity | aspartic acid vs glycine | too few laboratories | not pooled (network estimate -1.59, shown for orientation only) | - | - | 1 / 1 |
-| Tetramethylpyrazine | amino acid identity | cysteine vs glycine | too few laboratories | not pooled (network estimate -1.20, shown for orientation only) | - | - | 1 / 1 |
-| Tetramethylpyrazine | amino acid identity | glutamine vs glycine | too few laboratories | not pooled (network estimate -1.79, shown for orientation only) | - | - | 1 / 1 |
-| Tetramethylpyrazine | amino acid identity | isoleucine vs glycine | too few laboratories | not pooled (network estimate -1.52, shown for orientation only) | - | - | 1 / 1 |
-| Tetramethylpyrazine | amino acid identity | lysine vs glycine | too few laboratories | not pooled (network estimate -1.15, shown for orientation only) | - | - | 2 / 3 |
-| Tetramethylpyrazine | amino acid identity | none vs glycine | too few laboratories | not pooled (network estimate -1.26, shown for orientation only) | - | - | 1 / 7 |
-| Tetramethylpyrazine | amino acid identity | phenylalanine vs glycine | too few laboratories | not pooled (network estimate -1.11, shown for orientation only) | - | - | 1 / 1 |
+| Tetramethylpyrazine | amino acid identity | arginine vs glycine | too few laboratories | not pooled (network estimate -1.41, shown for orientation only) | - | - | 1 / 1 |
+| Tetramethylpyrazine | amino acid identity | asparagine vs glycine | too few laboratories | not pooled (network estimate -1.15, shown for orientation only) | - | - | 1 / 1 |
+| Tetramethylpyrazine | amino acid identity | aspartic acid vs glycine | too few laboratories | not pooled (network estimate -1.55, shown for orientation only) | - | - | 1 / 1 |
+| Tetramethylpyrazine | amino acid identity | cysteine vs glycine | too few laboratories | not pooled (network estimate -1.18, shown for orientation only) | - | - | 1 / 1 |
+| Tetramethylpyrazine | amino acid identity | glutamine vs glycine | too few laboratories | not pooled (network estimate -1.75, shown for orientation only) | - | - | 1 / 1 |
+| Tetramethylpyrazine | amino acid identity | isoleucine vs glycine | too few laboratories | not pooled (network estimate -1.48, shown for orientation only) | - | - | 1 / 1 |
+| Tetramethylpyrazine | amino acid identity | lysine vs glycine | too few laboratories | not pooled (network estimate -1.13, shown for orientation only) | - | - | 2 / 3 |
+| Tetramethylpyrazine | amino acid identity | none vs glycine | too few laboratories | not pooled (network estimate -1.22, shown for orientation only) | - | - | 1 / 7 |
+| Tetramethylpyrazine | amino acid identity | phenylalanine vs glycine | too few laboratories | not pooled (network estimate -1.07, shown for orientation only) | - | - | 1 / 1 |
 | Tetramethylpyrazine | amino acid identity | alanine + glycine vs glycine | not connected to the reference | - | - | - | - |
 | Tetramethylpyrazine | amino acid identity | free amino acids (lysine + glycine) vs glycine | not connected to the reference | - | - | - | - |
 | Tetramethylpyrazine | amino acid identity | free amino acids (lysine + leucine) vs glycine | not connected to the reference | - | - | - | - |
@@ -753,11 +753,11 @@
 | Tetramethylpyrazine | amino acid identity | valine + glycine vs glycine | not connected to the reference | - | - | - | - |
 | Tetramethylpyrazine | lipid | lecithin vs none | too few laboratories | not pooled (network estimate +0.04, shown for orientation only) | - | - | 1 / 2 |
 | Trimethylpyrazine | amino acid identity | arginine vs glycine | too few laboratories | not pooled (network estimate -0.77, shown for orientation only) | - | - | 1 / 1 |
-| Trimethylpyrazine | amino acid identity | asparagine vs glycine | too few laboratories | not pooled (network estimate -0.47, shown for orientation only) | - | - | 1 / 1 |
+| Trimethylpyrazine | amino acid identity | asparagine vs glycine | too few laboratories | not pooled (network estimate -0.46, shown for orientation only) | - | - | 1 / 1 |
 | Trimethylpyrazine | amino acid identity | aspartic acid vs glycine | too few laboratories | not pooled (network estimate -1.02, shown for orientation only) | - | - | 1 / 1 |
 | Trimethylpyrazine | amino acid identity | cysteine vs glycine | too few laboratories | not pooled (network estimate -1.22, shown for orientation only) | - | - | 1 / 2 |
 | Trimethylpyrazine | amino acid identity | glutamic acid vs glycine | too few laboratories | not pooled (network estimate -1.02, shown for orientation only) | - | - | 1 / 1 |
-| Trimethylpyrazine | amino acid identity | isoleucine vs glycine | too few laboratories | not pooled (network estimate -0.62, shown for orientation only) | - | - | 1 / 1 |
+| Trimethylpyrazine | amino acid identity | isoleucine vs glycine | too few laboratories | not pooled (network estimate -0.61, shown for orientation only) | - | - | 1 / 1 |
 | Trimethylpyrazine | amino acid identity | lysine vs glycine | too few laboratories | not pooled (network estimate -0.19, shown for orientation only) | - | - | 2 / 3 |
 | Trimethylpyrazine | amino acid identity | none vs glycine | too few laboratories | not pooled (network estimate -0.51, shown for orientation only) | - | - | 1 / 7 |
 | Trimethylpyrazine | amino acid identity | phenylalanine vs glycine | too few laboratories | not pooled (network estimate -0.32, shown for orientation only) | - | - | 1 / 1 |
@@ -802,19 +802,19 @@
 | Trimethylpyrazine | amino acid identity | valine + lysine vs glycine | not connected to the reference | - | - | - | - |
 | Trimethylpyrazine | lipid | lecithin vs none | too few laboratories | not pooled (network estimate -0.10, shown for orientation only) | - | - | 1 / 3 |
 | Trimethylpyrazine | oxygen | oxygen vs air | too few laboratories | not pooled (network estimate -0.23, shown for orientation only) | - | - | 1 / 1 |
-| Unsubstituted pyrazine | amino acid identity | arginine vs glycine | too few laboratories | not pooled (network estimate -0.62, shown for orientation only) | - | - | 1 / 1 |
-| Unsubstituted pyrazine | amino acid identity | asparagine vs glycine | too few laboratories | not pooled (network estimate +0.31, shown for orientation only) | - | - | 2 / 2 |
-| Unsubstituted pyrazine | amino acid identity | aspartic acid vs glycine | too few laboratories | not pooled (network estimate -0.27, shown for orientation only) | - | - | 1 / 1 |
+| Unsubstituted pyrazine | amino acid identity | arginine vs glycine | too few laboratories | not pooled (network estimate -0.61, shown for orientation only) | - | - | 1 / 1 |
+| Unsubstituted pyrazine | amino acid identity | asparagine vs glycine | too few laboratories | not pooled (network estimate +0.32, shown for orientation only) | - | - | 2 / 2 |
+| Unsubstituted pyrazine | amino acid identity | aspartic acid vs glycine | too few laboratories | not pooled (network estimate -0.26, shown for orientation only) | - | - | 1 / 1 |
 | Unsubstituted pyrazine | amino acid identity | cysteine vs glycine | too few laboratories | not pooled (network estimate +0.28, shown for orientation only) | - | - | 1 / 1 |
 | Unsubstituted pyrazine | amino acid identity | glutamic acid vs glycine | too few laboratories | not pooled (network estimate +0.18, shown for orientation only) | - | - | 1 / 2 |
-| Unsubstituted pyrazine | amino acid identity | glutamine vs glycine | too few laboratories | not pooled (network estimate +0.08, shown for orientation only) | - | - | 2 / 2 |
+| Unsubstituted pyrazine | amino acid identity | glutamine vs glycine | too few laboratories | not pooled (network estimate +0.09, shown for orientation only) | - | - | 2 / 2 |
 | Unsubstituted pyrazine | amino acid identity | glutathione vs glycine | too few laboratories | not pooled (network estimate +0.16, shown for orientation only) | - | - | 1 / 3 |
-| Unsubstituted pyrazine | amino acid identity | isoleucine vs glycine | too few laboratories | not pooled (network estimate -0.66, shown for orientation only) | - | - | 2 / 2 |
-| Unsubstituted pyrazine | amino acid identity | leucine vs glycine | too few laboratories | not pooled (network estimate -0.65, shown for orientation only) | - | - | 1 / 1 |
-| Unsubstituted pyrazine | amino acid identity | lysine vs glycine | too few laboratories | not pooled (network estimate +0.32, shown for orientation only) | - | - | 1 / 1 |
-| Unsubstituted pyrazine | amino acid identity | methionine vs glycine | too few laboratories | not pooled (network estimate -0.57, shown for orientation only) | - | - | 1 / 1 |
-| Unsubstituted pyrazine | amino acid identity | none vs glycine | too few laboratories | not pooled (network estimate -1.10, shown for orientation only) | - | - | 2 / 14 |
-| Unsubstituted pyrazine | amino acid identity | phenylalanine vs glycine | too few laboratories | not pooled (network estimate -0.25, shown for orientation only) | - | - | 2 / 2 |
+| Unsubstituted pyrazine | amino acid identity | isoleucine vs glycine | too few laboratories | not pooled (network estimate -0.65, shown for orientation only) | - | - | 2 / 2 |
+| Unsubstituted pyrazine | amino acid identity | leucine vs glycine | too few laboratories | not pooled (network estimate -0.64, shown for orientation only) | - | - | 1 / 1 |
+| Unsubstituted pyrazine | amino acid identity | lysine vs glycine | too few laboratories | not pooled (network estimate +0.33, shown for orientation only) | - | - | 1 / 1 |
+| Unsubstituted pyrazine | amino acid identity | methionine vs glycine | too few laboratories | not pooled (network estimate -0.56, shown for orientation only) | - | - | 1 / 1 |
+| Unsubstituted pyrazine | amino acid identity | none vs glycine | too few laboratories | not pooled (network estimate -1.09, shown for orientation only) | - | - | 2 / 14 |
+| Unsubstituted pyrazine | amino acid identity | phenylalanine vs glycine | too few laboratories | not pooled (network estimate -0.23, shown for orientation only) | - | - | 2 / 2 |
 | Unsubstituted pyrazine | amino acid identity | ala-gly vs glycine | not connected to the reference | - | - | - | - |
 | Unsubstituted pyrazine | amino acid identity | ala-lys vs glycine | not connected to the reference | - | - | - | - |
 | Unsubstituted pyrazine | amino acid identity | alanine + glycine vs glycine | not connected to the reference | - | - | - | - |

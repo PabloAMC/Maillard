@@ -593,3 +593,13 @@ have no null answer): counting it as a difference of 0 pulls the mean to zero an
 - **Rule:** after the watch, merge only if the parsed check list has no `fail`/`cancel` line
   (`gh pr checks N | awk '$2!="pass" && $2!="skipping"'` is empty). And compare the PR's job durations with main's
   last run: a job that takes 2x longer is a finding, not noise.
+
+## A prior on a grid must be weighted by the grid's cell widths (2026-11-11)
+- **What happened:** the lever table's scales sat on a log-spaced grid (`GRID`, geomspace 0.01 - 3 dex) and each point
+  got the half-normal density as its weight. Equal weight per log-spaced point is a log-uniform prior, so the
+  applied prior was ~ half-normal / s: 61 % of the mass below 0.1 dex against 16 %. With 1 - 3 laboratories a cell's
+  scales collapsed and its 90 % new-laboratory interval covered ~0.64. A preposterior design check exposed it, and a
+  self-calibration run (simulate from the fit's own model, refit, score coverage) pinned it.
+- **Rule:** a grid prior's weight is density x cell width (`np.gradient(grid)`). Every Bayesian fit in the repo gets a
+  self-calibration test: data simulated from its own declared model must give nominal coverage at the sparsest
+  sample size it reports.
