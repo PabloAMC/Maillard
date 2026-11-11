@@ -1,0 +1,4988 @@
+# Reader A, second keying round (odorant families). Rules: PREREG.md secs. 3 - 4.
+source: whitfield1988
+pdf: data/articles/whitfield1988.pdf
+reader: a
+scope_note: 'Table 1 (ng, mean of 3; quantified against authentic compounds, else estimated from isomers). Keyed: lecithin
+  absent vs present per amino acid (the paper''s question), and glycine vs lysine vs cysteine with and without lecithin (initial
+  pH differs with the amino acid: 5.7 Gly/Cys, 6.2 Lys, as printed). The printed -/+ ratio column is not keyed. Not keyed:
+  lecithin-alone control (footnote b; no amino acid or ribose), 3- or 4-methyl-2-furfural (not 5-methylfurfural), other furans/pyridines/thiophenes
+  not on the list; thiols excluded by brief.'
+contrasts:
+- id: whitfield1988-1
+  odorant: methylpyrazine
+  lever_class: lipid
+  lever: lecithin absent vs present, glycine + ribose
+  focal: true
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Glycine+ribose, lecithin -
+    lever_value: none
+    value: 23.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Glycine+ribose, lecithin +
+    lever_value: lecithin
+    value: 7.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-2
+  odorant: methylpyrazine
+  lever_class: lipid
+  lever: lecithin absent vs present, lysine + ribose
+  focal: true
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Lysine+ribose, lecithin -
+    lever_value: none
+    value: 534.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Lysine+ribose, lecithin +
+    lever_value: lecithin
+    value: 317.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-3
+  odorant: methylpyrazine
+  lever_class: lipid
+  lever: lecithin absent vs present, cysteine + ribose
+  focal: true
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Cysteine+ribose, lecithin -
+    lever_value: none
+    value: 27.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Cysteine+ribose, lecithin +
+    lever_value: lecithin
+    value: 12.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-4
+  odorant: methylpyrazine
+  lever_class: amino acid identity
+  lever: amino acid (glycine vs lysine vs cysteine) with ribose, lecithin absent
+  focal: false
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Glycine+ribose, lecithin -
+    lever_value: glycine
+    value: 23.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Lysine+ribose, lecithin -
+    lever_value: lysine
+    value: 534.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Cysteine+ribose, lecithin -
+    lever_value: cysteine
+    value: 27.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-5
+  odorant: methylpyrazine
+  lever_class: amino acid identity
+  lever: amino acid (glycine vs lysine vs cysteine) with ribose, lecithin present
+  focal: false
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Glycine+ribose, lecithin +
+    lever_value: glycine
+    value: 7.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Lysine+ribose, lecithin +
+    lever_value: lysine
+    value: 317.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Cysteine+ribose, lecithin +
+    lever_value: cysteine
+    value: 12.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-6
+  odorant: 2,5-dimethylpyrazine
+  lever_class: lipid
+  lever: lecithin absent vs present, glycine + ribose
+  focal: true
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Glycine+ribose, lecithin -
+    lever_value: none
+    value: 70.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Glycine+ribose, lecithin +
+    lever_value: lecithin
+    value: 48.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-7
+  odorant: 2,5-dimethylpyrazine
+  lever_class: lipid
+  lever: lecithin absent vs present, lysine + ribose
+  focal: true
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Lysine+ribose, lecithin -
+    lever_value: none
+    value: 179.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Lysine+ribose, lecithin +
+    lever_value: lecithin
+    value: 198.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-8
+  odorant: 2,5-dimethylpyrazine
+  lever_class: lipid
+  lever: lecithin absent vs present, cysteine + ribose
+  focal: true
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Cysteine+ribose, lecithin -
+    lever_value: none
+    value: 4.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Cysteine+ribose, lecithin +
+    lever_value: lecithin
+    value: 3.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-9
+  odorant: 2,5-dimethylpyrazine
+  lever_class: amino acid identity
+  lever: amino acid (glycine vs lysine vs cysteine) with ribose, lecithin absent
+  focal: false
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Glycine+ribose, lecithin -
+    lever_value: glycine
+    value: 70.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Lysine+ribose, lecithin -
+    lever_value: lysine
+    value: 179.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Cysteine+ribose, lecithin -
+    lever_value: cysteine
+    value: 4.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-10
+  odorant: 2,5-dimethylpyrazine
+  lever_class: amino acid identity
+  lever: amino acid (glycine vs lysine vs cysteine) with ribose, lecithin present
+  focal: false
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Glycine+ribose, lecithin +
+    lever_value: glycine
+    value: 48.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Lysine+ribose, lecithin +
+    lever_value: lysine
+    value: 198.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Cysteine+ribose, lecithin +
+    lever_value: cysteine
+    value: 3.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-11
+  odorant: ethylpyrazine
+  lever_class: lipid
+  lever: lecithin absent vs present, glycine + ribose
+  focal: true
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Glycine+ribose, lecithin -
+    lever_value: none
+    value: 1.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Glycine+ribose, lecithin +
+    lever_value: lecithin
+    value: 1.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-12
+  odorant: ethylpyrazine
+  lever_class: lipid
+  lever: lecithin absent vs present, lysine + ribose
+  focal: true
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Lysine+ribose, lecithin -
+    lever_value: none
+    value: 12.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Lysine+ribose, lecithin +
+    lever_value: lecithin
+    value: 23.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-13
+  odorant: ethylpyrazine
+  lever_class: lipid
+  lever: lecithin absent vs present, cysteine + ribose
+  focal: true
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Cysteine+ribose, lecithin -
+    lever_value: none
+    value: 9.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Cysteine+ribose, lecithin +
+    lever_value: lecithin
+    value: 8.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-14
+  odorant: ethylpyrazine
+  lever_class: amino acid identity
+  lever: amino acid (glycine vs lysine vs cysteine) with ribose, lecithin absent
+  focal: false
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Glycine+ribose, lecithin -
+    lever_value: glycine
+    value: 1.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Lysine+ribose, lecithin -
+    lever_value: lysine
+    value: 12.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Cysteine+ribose, lecithin -
+    lever_value: cysteine
+    value: 9.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-15
+  odorant: ethylpyrazine
+  lever_class: amino acid identity
+  lever: amino acid (glycine vs lysine vs cysteine) with ribose, lecithin present
+  focal: false
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Glycine+ribose, lecithin +
+    lever_value: glycine
+    value: 1.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Lysine+ribose, lecithin +
+    lever_value: lysine
+    value: 23.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Cysteine+ribose, lecithin +
+    lever_value: cysteine
+    value: 8.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-16
+  odorant: 2,6-dimethylpyrazine
+  lever_class: lipid
+  lever: lecithin absent vs present, glycine + ribose
+  focal: true
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Glycine+ribose, lecithin -
+    lever_value: none
+    value: 4.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Glycine+ribose, lecithin +
+    lever_value: lecithin
+    value: 2.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-17
+  odorant: 2,6-dimethylpyrazine
+  lever_class: lipid
+  lever: lecithin absent vs present, lysine + ribose
+  focal: true
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Lysine+ribose, lecithin -
+    lever_value: none
+    value: 30.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Lysine+ribose, lecithin +
+    lever_value: lecithin
+    value: 16.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-18
+  odorant: 2,6-dimethylpyrazine
+  lever_class: lipid
+  lever: lecithin absent vs present, cysteine + ribose
+  focal: true
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Cysteine+ribose, lecithin -
+    lever_value: none
+    value: 1.6
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Cysteine+ribose, lecithin +
+    lever_value: lecithin
+    value: 1.6
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-19
+  odorant: 2,6-dimethylpyrazine
+  lever_class: amino acid identity
+  lever: amino acid (glycine vs lysine vs cysteine) with ribose, lecithin absent
+  focal: false
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Glycine+ribose, lecithin -
+    lever_value: glycine
+    value: 4.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Lysine+ribose, lecithin -
+    lever_value: lysine
+    value: 30.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Cysteine+ribose, lecithin -
+    lever_value: cysteine
+    value: 1.6
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-20
+  odorant: 2,6-dimethylpyrazine
+  lever_class: amino acid identity
+  lever: amino acid (glycine vs lysine vs cysteine) with ribose, lecithin present
+  focal: false
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Glycine+ribose, lecithin +
+    lever_value: glycine
+    value: 2.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Lysine+ribose, lecithin +
+    lever_value: lysine
+    value: 16.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Cysteine+ribose, lecithin +
+    lever_value: cysteine
+    value: 1.6
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-21
+  odorant: 2,3-dimethylpyrazine
+  lever_class: lipid
+  lever: lecithin absent vs present, glycine + ribose
+  focal: true
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Glycine+ribose, lecithin -
+    lever_value: none
+    value: 3.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Glycine+ribose, lecithin +
+    lever_value: lecithin
+    value: 1.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-22
+  odorant: 2,3-dimethylpyrazine
+  lever_class: lipid
+  lever: lecithin absent vs present, lysine + ribose
+  focal: true
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Lysine+ribose, lecithin -
+    lever_value: none
+    value: 10.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Lysine+ribose, lecithin +
+    lever_value: lecithin
+    value: 7.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-23
+  odorant: 2,3-dimethylpyrazine
+  lever_class: lipid
+  lever: lecithin absent vs present, cysteine + ribose
+  focal: true
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Cysteine+ribose, lecithin -
+    lever_value: none
+    value: 6.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Cysteine+ribose, lecithin +
+    lever_value: lecithin
+    value: 5.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-24
+  odorant: 2,3-dimethylpyrazine
+  lever_class: amino acid identity
+  lever: amino acid (glycine vs lysine vs cysteine) with ribose, lecithin absent
+  focal: false
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Glycine+ribose, lecithin -
+    lever_value: glycine
+    value: 3.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Lysine+ribose, lecithin -
+    lever_value: lysine
+    value: 10.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Cysteine+ribose, lecithin -
+    lever_value: cysteine
+    value: 6.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-25
+  odorant: 2,3-dimethylpyrazine
+  lever_class: amino acid identity
+  lever: amino acid (glycine vs lysine vs cysteine) with ribose, lecithin present
+  focal: false
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Glycine+ribose, lecithin +
+    lever_value: glycine
+    value: 1.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Lysine+ribose, lecithin +
+    lever_value: lysine
+    value: 7.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Cysteine+ribose, lecithin +
+    lever_value: cysteine
+    value: 5.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-26
+  odorant: 2-ethyl-6-methylpyrazine
+  lever_class: lipid
+  lever: lecithin absent vs present, glycine + ribose
+  focal: true
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Glycine+ribose, lecithin -
+    lever_value: none
+    value: 1.6
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Glycine+ribose, lecithin +
+    lever_value: lecithin
+    value: 0.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-27
+  odorant: 2-ethyl-6-methylpyrazine
+  lever_class: lipid
+  lever: lecithin absent vs present, lysine + ribose
+  focal: true
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Lysine+ribose, lecithin -
+    lever_value: none
+    value: 13.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Lysine+ribose, lecithin +
+    lever_value: lecithin
+    value: 8.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-28
+  odorant: 2-ethyl-6-methylpyrazine
+  lever_class: lipid
+  lever: lecithin absent vs present, cysteine + ribose
+  focal: true
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Cysteine+ribose, lecithin -
+    lever_value: none
+    value: 0.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Cysteine+ribose, lecithin +
+    lever_value: lecithin
+    value: 0.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-29
+  odorant: 2-ethyl-6-methylpyrazine
+  lever_class: amino acid identity
+  lever: amino acid (glycine vs lysine vs cysteine) with ribose, lecithin absent
+  focal: false
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Glycine+ribose, lecithin -
+    lever_value: glycine
+    value: 1.6
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Lysine+ribose, lecithin -
+    lever_value: lysine
+    value: 13.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Cysteine+ribose, lecithin -
+    lever_value: cysteine
+    value: 0.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-30
+  odorant: 2-ethyl-6-methylpyrazine
+  lever_class: amino acid identity
+  lever: amino acid (glycine vs lysine vs cysteine) with ribose, lecithin present
+  focal: false
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Glycine+ribose, lecithin +
+    lever_value: glycine
+    value: 0.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Lysine+ribose, lecithin +
+    lever_value: lysine
+    value: 8.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Cysteine+ribose, lecithin +
+    lever_value: cysteine
+    value: 0.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-31
+  odorant: 2-ethyl-5-methylpyrazine
+  lever_class: lipid
+  lever: lecithin absent vs present, glycine + ribose
+  focal: true
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Glycine+ribose, lecithin -
+    lever_value: none
+    value: 41.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Glycine+ribose, lecithin +
+    lever_value: lecithin
+    value: 23.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-32
+  odorant: 2-ethyl-5-methylpyrazine
+  lever_class: lipid
+  lever: lecithin absent vs present, lysine + ribose
+  focal: true
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Lysine+ribose, lecithin -
+    lever_value: none
+    value: 107.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Lysine+ribose, lecithin +
+    lever_value: lecithin
+    value: 98.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-33
+  odorant: 2-ethyl-5-methylpyrazine
+  lever_class: lipid
+  lever: lecithin absent vs present, cysteine + ribose
+  focal: true
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Cysteine+ribose, lecithin -
+    lever_value: none
+    value: 2.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Cysteine+ribose, lecithin +
+    lever_value: lecithin
+    value: 1.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-34
+  odorant: 2-ethyl-5-methylpyrazine
+  lever_class: amino acid identity
+  lever: amino acid (glycine vs lysine vs cysteine) with ribose, lecithin absent
+  focal: false
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Glycine+ribose, lecithin -
+    lever_value: glycine
+    value: 41.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Lysine+ribose, lecithin -
+    lever_value: lysine
+    value: 107.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Cysteine+ribose, lecithin -
+    lever_value: cysteine
+    value: 2.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-35
+  odorant: 2-ethyl-5-methylpyrazine
+  lever_class: amino acid identity
+  lever: amino acid (glycine vs lysine vs cysteine) with ribose, lecithin present
+  focal: false
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Glycine+ribose, lecithin +
+    lever_value: glycine
+    value: 23.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Lysine+ribose, lecithin +
+    lever_value: lysine
+    value: 98.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Cysteine+ribose, lecithin +
+    lever_value: cysteine
+    value: 1.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-36
+  odorant: 2-ethyl-3-methylpyrazine
+  lever_class: lipid
+  lever: lecithin absent vs present, glycine + ribose
+  focal: true
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Glycine+ribose, lecithin -
+    lever_value: none
+    value: 0.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Glycine+ribose, lecithin +
+    lever_value: lecithin
+    value: 0.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-37
+  odorant: 2-ethyl-3-methylpyrazine
+  lever_class: lipid
+  lever: lecithin absent vs present, lysine + ribose
+  focal: true
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Lysine+ribose, lecithin -
+    lever_value: none
+    value: 1.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Lysine+ribose, lecithin +
+    lever_value: lecithin
+    value: 1.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-38
+  odorant: 2-ethyl-3-methylpyrazine
+  lever_class: lipid
+  lever: lecithin absent vs present, cysteine + ribose
+  focal: true
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Cysteine+ribose, lecithin -
+    lever_value: none
+    value: 2.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Cysteine+ribose, lecithin +
+    lever_value: lecithin
+    value: 2.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-39
+  odorant: 2-ethyl-3-methylpyrazine
+  lever_class: amino acid identity
+  lever: amino acid (glycine vs lysine vs cysteine) with ribose, lecithin absent
+  focal: false
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Glycine+ribose, lecithin -
+    lever_value: glycine
+    value: 0.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Lysine+ribose, lecithin -
+    lever_value: lysine
+    value: 1.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Cysteine+ribose, lecithin -
+    lever_value: cysteine
+    value: 2.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-40
+  odorant: 2-ethyl-3-methylpyrazine
+  lever_class: amino acid identity
+  lever: amino acid (glycine vs lysine vs cysteine) with ribose, lecithin present
+  focal: false
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Glycine+ribose, lecithin +
+    lever_value: glycine
+    value: 0.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Lysine+ribose, lecithin +
+    lever_value: lysine
+    value: 1.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Cysteine+ribose, lecithin +
+    lever_value: cysteine
+    value: 2.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-41
+  odorant: trimethylpyrazine
+  lever_class: lipid
+  lever: lecithin absent vs present, glycine + ribose
+  focal: true
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Glycine+ribose, lecithin -
+    lever_value: none
+    value: 17.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Glycine+ribose, lecithin +
+    lever_value: lecithin
+    value: 13.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-42
+  odorant: trimethylpyrazine
+  lever_class: lipid
+  lever: lecithin absent vs present, lysine + ribose
+  focal: true
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Lysine+ribose, lecithin -
+    lever_value: none
+    value: 10.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Lysine+ribose, lecithin +
+    lever_value: lecithin
+    value: 9.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-43
+  odorant: trimethylpyrazine
+  lever_class: lipid
+  lever: lecithin absent vs present, cysteine + ribose
+  focal: true
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Cysteine+ribose, lecithin -
+    lever_value: none
+    value: 1.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Cysteine+ribose, lecithin +
+    lever_value: lecithin
+    value: 0.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-44
+  odorant: trimethylpyrazine
+  lever_class: amino acid identity
+  lever: amino acid (glycine vs lysine vs cysteine) with ribose, lecithin absent
+  focal: false
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Glycine+ribose, lecithin -
+    lever_value: glycine
+    value: 17.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Lysine+ribose, lecithin -
+    lever_value: lysine
+    value: 10.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Cysteine+ribose, lecithin -
+    lever_value: cysteine
+    value: 1.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-45
+  odorant: trimethylpyrazine
+  lever_class: amino acid identity
+  lever: amino acid (glycine vs lysine vs cysteine) with ribose, lecithin present
+  focal: false
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Glycine+ribose, lecithin +
+    lever_value: glycine
+    value: 13.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Lysine+ribose, lecithin +
+    lever_value: lysine
+    value: 9.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Cysteine+ribose, lecithin +
+    lever_value: cysteine
+    value: 0.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-46
+  odorant: 2-ethyl-3,6-dimethylpyrazine
+  lever_class: lipid
+  lever: lecithin absent vs present, glycine + ribose
+  focal: true
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Glycine+ribose, lecithin -
+    lever_value: none
+    value: 0.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Glycine+ribose, lecithin +
+    lever_value: lecithin
+    value: 0.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-47
+  odorant: 2-ethyl-3,6-dimethylpyrazine
+  lever_class: lipid
+  lever: lecithin absent vs present, lysine + ribose
+  focal: true
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Lysine+ribose, lecithin -
+    lever_value: none
+    value: 6.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Lysine+ribose, lecithin +
+    lever_value: lecithin
+    value: 5.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-48
+  odorant: 2-ethyl-3,6-dimethylpyrazine
+  lever_class: lipid
+  lever: lecithin absent vs present, cysteine + ribose
+  focal: true
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Cysteine+ribose, lecithin -
+    lever_value: none
+    value: 0.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Cysteine+ribose, lecithin +
+    lever_value: lecithin
+    value: 0.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-49
+  odorant: 2-ethyl-3,6-dimethylpyrazine
+  lever_class: amino acid identity
+  lever: amino acid (glycine vs lysine vs cysteine) with ribose, lecithin absent
+  focal: false
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Glycine+ribose, lecithin -
+    lever_value: glycine
+    value: 0.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Lysine+ribose, lecithin -
+    lever_value: lysine
+    value: 6.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Cysteine+ribose, lecithin -
+    lever_value: cysteine
+    value: 0.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-50
+  odorant: 2-ethyl-3,6-dimethylpyrazine
+  lever_class: amino acid identity
+  lever: amino acid (glycine vs lysine vs cysteine) with ribose, lecithin present
+  focal: false
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Glycine+ribose, lecithin +
+    lever_value: glycine
+    value: 0.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Lysine+ribose, lecithin +
+    lever_value: lysine
+    value: 5.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Cysteine+ribose, lecithin +
+    lever_value: cysteine
+    value: 0.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-51
+  odorant: 2,5-diethylpyrazine
+  lever_class: lipid
+  lever: lecithin absent vs present, glycine + ribose
+  focal: true
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Glycine+ribose, lecithin -
+    lever_value: none
+    value: 3.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Glycine+ribose, lecithin +
+    lever_value: lecithin
+    value: 2.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-52
+  odorant: 2,5-diethylpyrazine
+  lever_class: lipid
+  lever: lecithin absent vs present, lysine + ribose
+  focal: true
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Lysine+ribose, lecithin -
+    lever_value: none
+    value: 7.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Lysine+ribose, lecithin +
+    lever_value: lecithin
+    value: 7.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-53
+  odorant: 2,5-diethylpyrazine
+  lever_class: lipid
+  lever: lecithin absent vs present, cysteine + ribose
+  focal: true
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Cysteine+ribose, lecithin -
+    lever_value: none
+    value: 0.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Cysteine+ribose, lecithin +
+    lever_value: lecithin
+    value: 0.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-54
+  odorant: 2,5-diethylpyrazine
+  lever_class: amino acid identity
+  lever: amino acid (glycine vs lysine vs cysteine) with ribose, lecithin absent
+  focal: false
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Glycine+ribose, lecithin -
+    lever_value: glycine
+    value: 3.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Lysine+ribose, lecithin -
+    lever_value: lysine
+    value: 7.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Cysteine+ribose, lecithin -
+    lever_value: cysteine
+    value: 0.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-55
+  odorant: 2,5-diethylpyrazine
+  lever_class: amino acid identity
+  lever: amino acid (glycine vs lysine vs cysteine) with ribose, lecithin present
+  focal: false
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Glycine+ribose, lecithin +
+    lever_value: glycine
+    value: 2.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Lysine+ribose, lecithin +
+    lever_value: lysine
+    value: 7.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Cysteine+ribose, lecithin +
+    lever_value: cysteine
+    value: 0.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-56
+  odorant: 2-ethyl-3,5-dimethylpyrazine
+  lever_class: lipid
+  lever: lecithin absent vs present, glycine + ribose
+  focal: true
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Glycine+ribose, lecithin -
+    lever_value: none
+    value: 9.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Glycine+ribose, lecithin +
+    lever_value: lecithin
+    value: 10.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-57
+  odorant: 2-ethyl-3,5-dimethylpyrazine
+  lever_class: lipid
+  lever: lecithin absent vs present, lysine + ribose
+  focal: true
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Lysine+ribose, lecithin -
+    lever_value: none
+    value: 4.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Lysine+ribose, lecithin +
+    lever_value: lecithin
+    value: 4.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-58
+  odorant: 2-ethyl-3,5-dimethylpyrazine
+  lever_class: lipid
+  lever: lecithin absent vs present, cysteine + ribose
+  focal: true
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Cysteine+ribose, lecithin -
+    lever_value: none
+    value: 0.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Cysteine+ribose, lecithin +
+    lever_value: lecithin
+    value: 0.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-59
+  odorant: 2-ethyl-3,5-dimethylpyrazine
+  lever_class: amino acid identity
+  lever: amino acid (glycine vs lysine vs cysteine) with ribose, lecithin absent
+  focal: false
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Glycine+ribose, lecithin -
+    lever_value: glycine
+    value: 9.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Lysine+ribose, lecithin -
+    lever_value: lysine
+    value: 4.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Cysteine+ribose, lecithin -
+    lever_value: cysteine
+    value: 0.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-60
+  odorant: 2-ethyl-3,5-dimethylpyrazine
+  lever_class: amino acid identity
+  lever: amino acid (glycine vs lysine vs cysteine) with ribose, lecithin present
+  focal: false
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Glycine+ribose, lecithin +
+    lever_value: glycine
+    value: 10.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Lysine+ribose, lecithin +
+    lever_value: lysine
+    value: 4.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Cysteine+ribose, lecithin +
+    lever_value: cysteine
+    value: 0.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-61
+  odorant: tetramethylpyrazine
+  lever_class: lipid
+  lever: lecithin absent vs present, glycine + ribose
+  focal: true
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Glycine+ribose, lecithin -
+    lever_value: none
+    value: 5.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Glycine+ribose, lecithin +
+    lever_value: lecithin
+    value: 4.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-62
+  odorant: tetramethylpyrazine
+  lever_class: lipid
+  lever: lecithin absent vs present, lysine + ribose
+  focal: true
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Lysine+ribose, lecithin -
+    lever_value: none
+    value: 0.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Lysine+ribose, lecithin +
+    lever_value: lecithin
+    value: 0.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-63
+  odorant: tetramethylpyrazine
+  lever_class: lipid
+  lever: lecithin absent vs present, cysteine + ribose
+  focal: true
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Cysteine+ribose, lecithin -
+    lever_value: none
+    value: 0.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Cysteine+ribose, lecithin +
+    lever_value: lecithin
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-64
+  odorant: tetramethylpyrazine
+  lever_class: amino acid identity
+  lever: amino acid (glycine vs lysine vs cysteine) with ribose, lecithin absent
+  focal: false
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Glycine+ribose, lecithin -
+    lever_value: glycine
+    value: 5.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Lysine+ribose, lecithin -
+    lever_value: lysine
+    value: 0.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Cysteine+ribose, lecithin -
+    lever_value: cysteine
+    value: 0.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-65
+  odorant: tetramethylpyrazine
+  lever_class: amino acid identity
+  lever: amino acid (glycine vs lysine vs cysteine) with ribose, lecithin present
+  focal: false
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Glycine+ribose, lecithin +
+    lever_value: glycine
+    value: 4.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Lysine+ribose, lecithin +
+    lever_value: lysine
+    value: 0.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Cysteine+ribose, lecithin +
+    lever_value: cysteine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-66
+  odorant: 3,5-diethyl-2-methylpyrazine
+  lever_class: lipid
+  lever: lecithin absent vs present, glycine + ribose
+  focal: true
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Glycine+ribose, lecithin -
+    lever_value: none
+    value: 0.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Glycine+ribose, lecithin +
+    lever_value: lecithin
+    value: 0.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-67
+  odorant: 3,5-diethyl-2-methylpyrazine
+  lever_class: lipid
+  lever: lecithin absent vs present, lysine + ribose
+  focal: true
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Lysine+ribose, lecithin -
+    lever_value: none
+    value: 1.6
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Lysine+ribose, lecithin +
+    lever_value: lecithin
+    value: 2.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-68
+  odorant: 3,5-diethyl-2-methylpyrazine
+  lever_class: lipid
+  lever: lecithin absent vs present, cysteine + ribose
+  focal: true
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Cysteine+ribose, lecithin -
+    lever_value: none
+    value: 0.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Cysteine+ribose, lecithin +
+    lever_value: lecithin
+    value: 0.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-69
+  odorant: 3,5-diethyl-2-methylpyrazine
+  lever_class: amino acid identity
+  lever: amino acid (glycine vs lysine vs cysteine) with ribose, lecithin absent
+  focal: false
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Glycine+ribose, lecithin -
+    lever_value: glycine
+    value: 0.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Lysine+ribose, lecithin -
+    lever_value: lysine
+    value: 1.6
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Cysteine+ribose, lecithin -
+    lever_value: cysteine
+    value: 0.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-70
+  odorant: 3,5-diethyl-2-methylpyrazine
+  lever_class: amino acid identity
+  lever: amino acid (glycine vs lysine vs cysteine) with ribose, lecithin present
+  focal: false
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Glycine+ribose, lecithin +
+    lever_value: glycine
+    value: 0.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Lysine+ribose, lecithin +
+    lever_value: lysine
+    value: 2.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Cysteine+ribose, lecithin +
+    lever_value: cysteine
+    value: 0.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-71
+  odorant: 2-pentylfuran
+  lever_class: lipid
+  lever: lecithin absent vs present, glycine + ribose
+  focal: true
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Glycine+ribose, lecithin -
+    lever_value: none
+    value: 1.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Glycine+ribose, lecithin +
+    lever_value: lecithin
+    value: 1425.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-72
+  odorant: 2-pentylfuran
+  lever_class: lipid
+  lever: lecithin absent vs present, lysine + ribose
+  focal: true
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Lysine+ribose, lecithin -
+    lever_value: none
+    value: 1.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Lysine+ribose, lecithin +
+    lever_value: lecithin
+    value: 674.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-73
+  odorant: 2-pentylfuran
+  lever_class: lipid
+  lever: lecithin absent vs present, cysteine + ribose
+  focal: true
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Cysteine+ribose, lecithin -
+    lever_value: none
+    value: 1.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Cysteine+ribose, lecithin +
+    lever_value: lecithin
+    value: 704.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-74
+  odorant: 2-pentylfuran
+  lever_class: amino acid identity
+  lever: amino acid (glycine vs lysine vs cysteine) with ribose, lecithin absent
+  focal: false
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Glycine+ribose, lecithin -
+    lever_value: glycine
+    value: 1.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Lysine+ribose, lecithin -
+    lever_value: lysine
+    value: 1.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Cysteine+ribose, lecithin -
+    lever_value: cysteine
+    value: 1.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-75
+  odorant: 2-pentylfuran
+  lever_class: amino acid identity
+  lever: amino acid (glycine vs lysine vs cysteine) with ribose, lecithin present
+  focal: false
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Glycine+ribose, lecithin +
+    lever_value: glycine
+    value: 1425.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Lysine+ribose, lecithin +
+    lever_value: lysine
+    value: 674.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Cysteine+ribose, lecithin +
+    lever_value: cysteine
+    value: 704.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-76
+  odorant: furfural
+  lever_class: lipid
+  lever: lecithin absent vs present, glycine + ribose
+  focal: true
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Glycine+ribose, lecithin -
+    lever_value: none
+    value: 1063.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Glycine+ribose, lecithin +
+    lever_value: lecithin
+    value: 328.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-77
+  odorant: furfural
+  lever_class: lipid
+  lever: lecithin absent vs present, lysine + ribose
+  focal: true
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Lysine+ribose, lecithin -
+    lever_value: none
+    value: 7.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Lysine+ribose, lecithin +
+    lever_value: lecithin
+    value: 5.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-78
+  odorant: furfural
+  lever_class: lipid
+  lever: lecithin absent vs present, cysteine + ribose
+  focal: true
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Cysteine+ribose, lecithin -
+    lever_value: none
+    value: 41.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Cysteine+ribose, lecithin +
+    lever_value: lecithin
+    value: 24.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-79
+  odorant: furfural
+  lever_class: amino acid identity
+  lever: amino acid (glycine vs lysine vs cysteine) with ribose, lecithin absent
+  focal: false
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Glycine+ribose, lecithin -
+    lever_value: glycine
+    value: 1063.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Lysine+ribose, lecithin -
+    lever_value: lysine
+    value: 7.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Cysteine+ribose, lecithin -
+    lever_value: cysteine
+    value: 41.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-80
+  odorant: furfural
+  lever_class: amino acid identity
+  lever: amino acid (glycine vs lysine vs cysteine) with ribose, lecithin present
+  focal: false
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Glycine+ribose, lecithin +
+    lever_value: glycine
+    value: 328.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Lysine+ribose, lecithin +
+    lever_value: lysine
+    value: 5.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Cysteine+ribose, lecithin +
+    lever_value: cysteine
+    value: 24.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-81
+  odorant: 2-acetylfuran
+  lever_class: lipid
+  lever: lecithin absent vs present, glycine + ribose
+  focal: true
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Glycine+ribose, lecithin -
+    lever_value: none
+    value: 33.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Glycine+ribose, lecithin +
+    lever_value: lecithin
+    value: 25.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-82
+  odorant: 2-acetylfuran
+  lever_class: lipid
+  lever: lecithin absent vs present, lysine + ribose
+  focal: true
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Lysine+ribose, lecithin -
+    lever_value: none
+    value: 6.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Lysine+ribose, lecithin +
+    lever_value: lecithin
+    value: 8.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-83
+  odorant: 2-acetylfuran
+  lever_class: lipid
+  lever: lecithin absent vs present, cysteine + ribose
+  focal: true
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Cysteine+ribose, lecithin -
+    lever_value: none
+    value: 4.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Cysteine+ribose, lecithin +
+    lever_value: lecithin
+    value: 4.6
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-84
+  odorant: 2-acetylfuran
+  lever_class: amino acid identity
+  lever: amino acid (glycine vs lysine vs cysteine) with ribose, lecithin absent
+  focal: false
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Glycine+ribose, lecithin -
+    lever_value: glycine
+    value: 33.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Lysine+ribose, lecithin -
+    lever_value: lysine
+    value: 6.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Cysteine+ribose, lecithin -
+    lever_value: cysteine
+    value: 4.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-85
+  odorant: 2-acetylfuran
+  lever_class: amino acid identity
+  lever: amino acid (glycine vs lysine vs cysteine) with ribose, lecithin present
+  focal: false
+  location: Table 1, p. 266
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Glycine+ribose, lecithin +
+    lever_value: glycine
+    value: 25.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Lysine+ribose, lecithin +
+    lever_value: lysine
+    value: 8.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Cysteine+ribose, lecithin +
+    lever_value: cysteine
+    value: 4.6
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-86
+  odorant: 2-acetylthiazole
+  lever_class: lipid
+  lever: lecithin absent vs present, cysteine + ribose
+  focal: true
+  location: Table 1, p. 267
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Cysteine+ribose, lecithin -
+    lever_value: none
+    value: 14.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Cysteine+ribose, lecithin +
+    lever_value: lecithin
+    value: 25.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-87
+  odorant: 2-acetylthiazole
+  lever_class: amino acid identity
+  lever: amino acid (glycine vs lysine vs cysteine) with ribose, lecithin absent
+  focal: false
+  location: Table 1, p. 267
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Glycine+ribose, lecithin -
+    lever_value: glycine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Lysine+ribose, lecithin -
+    lever_value: lysine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Cysteine+ribose, lecithin -
+    lever_value: cysteine
+    value: 14.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+- id: whitfield1988-88
+  odorant: 2-acetylthiazole
+  lever_class: amino acid identity
+  lever: amino acid (glycine vs lysine vs cysteine) with ribose, lecithin present
+  focal: false
+  location: Table 1, p. 267
+  digitised: false
+  unit: ng
+  quant_type: absolute
+  time_course_rule: not a time course
+  quantity: amount
+  arms:
+  - label: Glycine+ribose, lecithin +
+    lever_value: glycine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        glycine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Lysine+ribose, lecithin +
+    lever_value: lysine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.2
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        lysine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
+  - label: Cysteine+ribose, lecithin +
+    lever_value: cysteine
+    value: 25.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 5 g/L (2 mL)
+        ribose: 4.5 g/L
+        lecithin (egg yolk PC): 300 uL of 100 mg/mL in hexane (30 mg), solvent evaporated
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: inert (helium purge, flame sealed)
