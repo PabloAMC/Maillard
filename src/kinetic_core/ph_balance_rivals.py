@@ -84,6 +84,7 @@ ADDED_SINK_Y_CAP = 1.0 - 1e-6
 #: of a rival never depends on the machine's speed. Basis: the rival points that finish on the slowest recorded pots
 #: need at most ~38 000 (0.5 M phosphate, pH 7.5, 145 C; 2026-11-07 probe); Chen 2000 / 2002's pH 5 ribose + cysteine
 #: pots at 180 C passed 500 000 without finishing. Off for no run that finishes inside it: it changes no number.
+#: 2026-11-11: the budget is per attempt; an LSODA run that exceeds it is retried once on BDF (``integrate_inline``).
 RIVAL_RHS_BUDGET = 200_000
 
 
@@ -390,8 +391,8 @@ def integrate_inline(parameters, y0, eval_times, duration, temperature_of, sid, 
     def spend():
         diag["evaluations"] = diag.get("evaluations", 0) + 1
         if diag["evaluations"] > RIVAL_RHS_BUDGET:
-            raise RivalBudgetExceeded(f"the carried rival's inline integration needed more than RIVAL_RHS_BUDGET = "
-                                      f"{RIVAL_RHS_BUDGET} right-hand-side and Jacobian evaluations")
+            raise RivalBudgetExceeded(f"the carried rival's inline integration ({diag['method']}) needed more than "
+                                      f"RIVAL_RHS_BUDGET = {RIVAL_RHS_BUDGET} right-hand-side and Jacobian evaluations")
 
     def rhs(t, y):
         diag["rhs_calls"] += 1
@@ -403,10 +404,37 @@ def integrate_inline(parameters, y0, eval_times, duration, temperature_of, sid, 
         return evaluate(t, y, True)
 
     y_aug0 = np.concatenate([np.asarray(y0, float), np.zeros(len(TRACKERS))])
-    kwargs = {"jac": jac} if method in ("BDF", "Radau", "LSODA") else {}
-    sol = solve_ivp(rhs, (0.0, duration), y_aug0, t_eval=eval_times, method=method, rtol=rtol, atol=atol, **kwargs)
-    if not sol.success:
-        raise RuntimeError(f"sulfur-network integration (M1b rival) failed: {sol.message}")
+    # 2026-11-11 (platform robustness; SUG-01): an LSODA run that exceeds the budget or fails is re-integrated ONCE with
+    # BDF under a fresh budget, as fit_m1b_ph_balance.integrate_with_fallback does for the screen's pots; the fallback
+    # is recorded in the diagnostics. With the pH re-solved inside the right-hand side, ~1 % of LSODA runs of a pH 5 pot
+    # lock in the first ~1e-6 min into order-1 Adams steps of ~1e-13 min that never switch to BDF (no Jacobian call;
+    # the Jacobian's eigenvalues there are > -1e4 /min, so the cap is not the problem's stiffness). Which run locks is
+    # chaotic in the last bits: a 1e-8 relative change of a precursor, or the platform's arithmetic, moves it (SUG-01's
+    # glucose arm, B1_d345, locks on ubuntu x86-64 and not on macOS arm64; 8 of 920 runs of SUG-01's two arms under
+    # 3e-8 - 6e-7 perturbations lock on macOS, 0 of 920 on BDF). A run that finishes on LSODA is untouched, bit for bit;
+    # BDF agrees with LSODA to < 4e-6 dex on every rival output of 294 S3 recipes.
+    fresh = dict(diag)
+    attempts = [method] + (["BDF"] if method == "LSODA" else [])
+    fallback = None
+    for attempt, m in enumerate(attempts):
+        diag.clear()
+        diag.update(fresh, method=m)
+        memo.update(ph=None, i=0.0, cool=None)
+        kwargs = {"jac": jac} if m in ("BDF", "Radau", "LSODA") else {}
+        last = attempt == len(attempts) - 1
+        try:
+            sol = solve_ivp(rhs, (0.0, duration), y_aug0, t_eval=eval_times, method=m, rtol=rtol, atol=atol, **kwargs)
+        except RivalBudgetExceeded as exc:
+            if last:
+                raise
+            fallback = {"from": m, "to": attempts[attempt + 1], "reason": str(exc)[:200]}
+            continue
+        if sol.success:
+            break
+        if last:
+            raise RuntimeError(f"sulfur-network integration (M1b rival) failed: {sol.message}")
+        fallback = {"from": m, "to": attempts[attempt + 1], "reason": str(sol.message)[:200]}
+    diag["solver_fallback"] = fallback
     states = np.clip(sol.y.T, 0.0, None)
     memo.update(ph=None, i=0.0, cool=None)
     ph_hot, ionic, ph_cool, k_rows = [], [], [], []
