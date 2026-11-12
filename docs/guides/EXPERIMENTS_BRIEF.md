@@ -25,8 +25,8 @@ today. This section says how far it is and what would move it.
 
 **What the month between the two versions showed.**
 
-- **The literature was keyed as a table of levers, and it answers almost nothing.** 67 sources, 1,571
-  within-study contrasts, 29 laboratories, read by two blind readers: four cells of 75 are answered. The cause is the
+- **The literature was keyed as a table of levers, and it answers almost nothing.** 70 sources, 1,643
+  within-study contrasts, 31 laboratories, read by two blind readers: four cells of 75 are answered. The cause is the
   shape of the data, as this brief said in October: liquid model systems, one laboratory per question, peak
   areas, several things changed at once. **Four sources on disk have a heated plant- or fungal-protein contrast** (flaxseed, goji seed meal, two mushroom hydrolysates); none is a pea or soy isolate.
 - **Laboratories disagree by more than most levers move things.** How much of that is measurement (isotope
@@ -187,7 +187,7 @@ temperatures and quantifies these thiols, which makes it the natural first call 
 
 ## What to record, so that the data add up
 
-Most of the 1,571 keyed contrasts could not be combined, and each item below is a reason found while keying
+Most of the 1,643 keyed contrasts could not be combined, and each item below is a reason found while keying
 them. A study that records these is worth several that do not, to this model and to anyone else's.
 
 | record | why (what its absence cost here) |

@@ -1,0 +1,3647 @@
+{
+  "artifact": "lever_disagreement_audit",
+  "status": "DIAGNOSTIC, exploratory; literature contrasts only; no engine output",
+  "rules": {
+    "pot_sd_floor_dex": 0.1,
+    "z": 2.0,
+    "bootstrap": 1000,
+    "seed": 20261112,
+    "classes": [
+      "conflict between laboratories",
+      "sign changes inside one laboratory",
+      "direction agreed",
+      "no clear effect"
+    ]
+  },
+  "counts": {
+    "items": 2834,
+    "laboratories": 31,
+    "cells_two_or_more_labs": 99,
+    "cells_three_or_more_labs": 15
+  },
+  "classes_two_or_more_labs": {
+    "conflict between laboratories": 9,
+    "sign changes inside one laboratory": 8,
+    "direction agreed": 55,
+    "no clear effect": 27
+  },
+  "classes_three_or_more_labs": {
+    "conflict between laboratories": 0,
+    "sign changes inside one laboratory": 3,
+    "direction agreed": 6,
+    "no clear effect": 6
+  },
+  "classes_by_lever": {
+    "amino acid identity": {
+      "cells": 23,
+      "conflict between laboratories": 1,
+      "sign changes inside one laboratory": 0,
+      "direction agreed": 17,
+      "no clear effect": 5
+    },
+    "oxygen": {
+      "cells": 1,
+      "conflict between laboratories": 0,
+      "sign changes inside one laboratory": 0,
+      "direction agreed": 1,
+      "no clear effect": 0
+    },
+    "pH": {
+      "cells": 15,
+      "conflict between laboratories": 2,
+      "sign changes inside one laboratory": 2,
+      "direction agreed": 8,
+      "no clear effect": 3
+    },
+    "precursor dose": {
+      "cells": 25,
+      "conflict between laboratories": 2,
+      "sign changes inside one laboratory": 2,
+      "direction agreed": 6,
+      "no clear effect": 15
+    },
+    "sugar identity": {
+      "cells": 11,
+      "conflict between laboratories": 4,
+      "sign changes inside one laboratory": 1,
+      "direction agreed": 4,
+      "no clear effect": 2
+    },
+    "sulfur source": {
+      "cells": 5,
+      "conflict between laboratories": 0,
+      "sign changes inside one laboratory": 0,
+      "direction agreed": 4,
+      "no clear effect": 1
+    },
+    "temperature": {
+      "cells": 4,
+      "conflict between laboratories": 0,
+      "sign changes inside one laboratory": 1,
+      "direction agreed": 3,
+      "no clear effect": 0
+    },
+    "time": {
+      "cells": 15,
+      "conflict between laboratories": 0,
+      "sign changes inside one laboratory": 2,
+      "direction agreed": 12,
+      "no clear effect": 1
+    }
+  },
+  "precursor_dose": {
+    "pooled": {
+      "cells": 26,
+      "conflict between laboratories": 5,
+      "sign changes inside one laboratory": 3,
+      "direction agreed": 6,
+      "no clear effect": 12
+    },
+    "banded_A5": {
+      "cells": 25,
+      "conflict between laboratories": 2,
+      "sign changes inside one laboratory": 2,
+      "direction agreed": 6,
+      "no clear effect": 15
+    },
+    "pooled_cells": [
+      {
+        "compound": "1-Octen-3-ol",
+        "lever_class": "precursor dose",
+        "band": "all",
+        "labs": 2,
+        "contrasts": 7,
+        "class": "no clear effect",
+        "lab_means": {
+          "kasetsart_mookdasanit": {
+            "mean": 0.0,
+            "se": 0.128,
+            "contrasts": 1
+          },
+          "nus_liu_shaoquan": {
+            "mean": -0.062,
+            "se": 0.043,
+            "contrasts": 6
+          }
+        }
+      },
+      {
+        "compound": "2,3-Dimethylpyrazine",
+        "lever_class": "precursor dose",
+        "band": "all",
+        "labs": 2,
+        "contrasts": 6,
+        "class": "no clear effect",
+        "lab_means": {
+          "ghent_de_kimpe": {
+            "mean": 0.359,
+            "se": 0.049,
+            "contrasts": 5
+          },
+          "kasetsart_mookdasanit": {
+            "mean": -0.176,
+            "se": 0.128,
+            "contrasts": 1
+          }
+        }
+      },
+      {
+        "compound": "2,5-Dimethylpyrazine",
+        "lever_class": "precursor dose",
+        "band": "all",
+        "labs": 3,
+        "contrasts": 3,
+        "class": "no clear effect",
+        "lab_means": {
+          "ho_network": {
+            "mean": 0.233,
+            "se": 0.101,
+            "contrasts": 1
+          },
+          "kasetsart_mookdasanit": {
+            "mean": 0.053,
+            "se": 0.118,
+            "contrasts": 1
+          },
+          "zjut_zheng_zhou": {
+            "mean": -0.029,
+            "se": 0.103,
+            "contrasts": 1
+          }
+        }
+      },
+      {
+        "compound": "2-Acetylfuran",
+        "lever_class": "precursor dose",
+        "band": "all",
+        "labs": 2,
+        "contrasts": 3,
+        "class": "direction agreed",
+        "lab_means": {
+          "astar_sifbi_chiang": {
+            "mean": 0.277,
+            "se": 0.073,
+            "contrasts": 2
+          },
+          "zjut_zheng_zhou": {
+            "mean": 0.133,
+            "se": 0.104,
+            "contrasts": 1
+          }
+        }
+      },
+      {
+        "compound": "2-Acetylthiazole",
+        "lever_class": "precursor dose",
+        "band": "all",
+        "labs": 2,
+        "contrasts": 2,
+        "class": "direction agreed",
+        "lab_means": {
+          "kasetsart_mookdasanit": {
+            "mean": -0.176,
+            "se": 0.128,
+            "contrasts": 1
+          },
+          "zjut_zheng_zhou": {
+            "mean": -1.015,
+            "se": 0.101,
+            "contrasts": 1
+          }
+        }
+      },
+      {
+        "compound": "2-Ethyl-3,5-dimethylpyrazine",
+        "lever_class": "precursor dose",
+        "band": "all",
+        "labs": 3,
+        "contrasts": 6,
+        "class": "direction agreed",
+        "lab_means": {
+          "astar_sifbi_chiang": {
+            "mean": -0.012,
+            "se": 0.076,
+            "contrasts": 2
+          },
+          "ghent_de_kimpe": {
+            "mean": -0.045,
+            "se": 0.062,
+            "contrasts": 3
+          },
+          "zjut_zheng_zhou": {
+            "mean": -0.441,
+            "se": 0.108,
+            "contrasts": 1
+          }
+        }
+      },
+      {
+        "compound": "2-Ethyl-3,6-dimethylpyrazine",
+        "lever_class": "precursor dose",
+        "band": "all",
+        "labs": 3,
+        "contrasts": 9,
+        "class": "no clear effect",
+        "lab_means": {
+          "astar_sifbi_chiang": {
+            "mean": 0.048,
+            "se": 0.054,
+            "contrasts": 4
+          },
+          "ghent_de_kimpe": {
+            "mean": 0.095,
+            "se": 0.056,
+            "contrasts": 4
+          },
+          "kasetsart_mookdasanit": {
+            "mean": 0.0,
+            "se": 0.276,
+            "contrasts": 1
+          }
+        }
+      },
+      {
+        "compound": "2-Ethylpyrazine",
+        "lever_class": "precursor dose",
+        "band": "all",
+        "labs": 3,
+        "contrasts": 7,
+        "class": "no clear effect",
+        "lab_means": {
+          "astar_sifbi_chiang": {
+            "mean": 0.022,
+            "se": 0.056,
+            "contrasts": 4
+          },
+          "ghent_de_kimpe": {
+            "mean": -0.075,
+            "se": 0.071,
+            "contrasts": 2
+          },
+          "kasetsart_mookdasanit": {
+            "mean": 0.0,
+            "se": 0.376,
+            "contrasts": 1
+          }
+        }
+      },
+      {
+        "compound": "2-Furanmethanol",
+        "lever_class": "precursor dose",
+        "band": "all",
+        "labs": 2,
+        "contrasts": 5,
+        "class": "no clear effect",
+        "lab_means": {
+          "astar_sifbi_chiang": {
+            "mean": 0.139,
+            "se": 0.052,
+            "contrasts": 4
+          },
+          "kasetsart_mookdasanit": {
+            "mean": 0.0,
+            "se": 0.108,
+            "contrasts": 1
+          }
+        }
+      },
+      {
+        "compound": "2-Methyl-3-furanthiol (MFT)",
+        "lever_class": "precursor dose",
+        "band": "all",
+        "labs": 4,
+        "contrasts": 11,
+        "class": "sign changes inside one laboratory",
+        "lab_means": {
+          "btbu_beijing": {
+            "mean": 0.265,
+            "se": 0.071,
+            "contrasts": 2
+          },
+          "dfa_garching": {
+            "mean": 0.077,
+            "se": 0.04,
+            "contrasts": 7
+          },
+          "inra_clermont_berdague": {
+            "mean": 0.164,
+            "se": 0.101,
+            "contrasts": 1
+          },
+          "zjut_zheng_zhou": {
+            "mean": 0.575,
+            "se": 0.101,
+            "contrasts": 1
+          }
+        }
+      },
+      {
+        "compound": "2-Methylbutanal",
+        "lever_class": "precursor dose",
+        "band": "all",
+        "labs": 2,
+        "contrasts": 6,
+        "class": "no clear effect",
+        "lab_means": {
+          "kasetsart_mookdasanit": {
+            "mean": -0.176,
+            "se": 0.131,
+            "contrasts": 1
+          },
+          "nus_liu_shaoquan": {
+            "mean": 0.214,
+            "se": 0.045,
+            "contrasts": 5
+          }
+        }
+      },
+      {
+        "compound": "2-Methylpropanal (isobutyraldehyde)",
+        "lever_class": "precursor dose",
+        "band": "all",
+        "labs": 2,
+        "contrasts": 2,
+        "class": "no clear effect",
+        "lab_means": {
+          "astar_sifbi_chiang": {
+            "mean": 0.077,
+            "se": 0.102,
+            "contrasts": 1
+          },
+          "kasetsart_mookdasanit": {
+            "mean": -0.222,
+            "se": 0.125,
+            "contrasts": 1
+          }
+        }
+      },
+      {
+        "compound": "2-Methylpyrazine",
+        "lever_class": "precursor dose",
+        "band": "all",
+        "labs": 5,
+        "contrasts": 17,
+        "class": "conflict between laboratories",
+        "lab_means": {
+          "astar_sifbi_chiang": {
+            "mean": -0.061,
+            "se": 0.05,
+            "contrasts": 4
+          },
+          "ghent_de_kimpe": {
+            "mean": 0.119,
+            "se": 0.036,
+            "contrasts": 9
+          },
+          "ho_network": {
+            "mean": 0.3,
+            "se": 0.084,
+            "contrasts": 2
+          },
+          "kasetsart_mookdasanit": {
+            "mean": 0.0,
+            "se": 0.276,
+            "contrasts": 1
+          },
+          "zjut_zheng_zhou": {
+            "mean": -0.428,
+            "se": 0.105,
+            "contrasts": 1
+          }
+        }
+      },
+      {
+        "compound": "3-Methylbutanal",
+        "lever_class": "precursor dose",
+        "band": "all",
+        "labs": 2,
+        "contrasts": 2,
+        "class": "no clear effect",
+        "lab_means": {
+          "kasetsart_mookdasanit": {
+            "mean": 0.0,
+            "se": 0.174,
+            "contrasts": 1
+          },
+          "zjut_zheng_zhou": {
+            "mean": -0.142,
+            "se": 0.104,
+            "contrasts": 1
+          }
+        }
+      },
+      {
+        "compound": "Benzaldehyde",
+        "lever_class": "precursor dose",
+        "band": "all",
+        "labs": 5,
+        "contrasts": 18,
+        "class": "sign changes inside one laboratory",
+        "lab_means": {
+          "astar_sifbi_chiang": {
+            "mean": 0.031,
+            "se": 0.059,
+            "contrasts": 4
+          },
+          "kasetsart_mookdasanit": {
+            "mean": 0.0,
+            "se": 0.128,
+            "contrasts": 1
+          },
+          "nus_liu_shaoquan": {
+            "mean": -0.129,
+            "se": 0.034,
+            "contrasts": 10
+          },
+          "seville_hidalgo_zamora": {
+            "mean": 0.139,
+            "se": 0.076,
+            "contrasts": 2
+          },
+          "zjut_zheng_zhou": {
+            "mean": 0.187,
+            "se": 0.102,
+            "contrasts": 1
+          }
+        }
+      },
+      {
+        "compound": "Bis(2-methyl-3-furyl) disulfide",
+        "lever_class": "precursor dose",
+        "band": "all",
+        "labs": 2,
+        "contrasts": 3,
+        "class": "direction agreed",
+        "lab_means": {
+          "btbu_beijing": {
+            "mean": 0.224,
+            "se": 0.071,
+            "contrasts": 2
+          },
+          "inra_clermont_berdague": {
+            "mean": 0.176,
+            "se": 0.101,
+            "contrasts": 1
+          }
+        }
+      },
+      {
+        "compound": "DMHF",
+        "lever_class": "precursor dose",
+        "band": "all",
+        "labs": 2,
+        "contrasts": 11,
+        "class": "no clear effect",
+        "lab_means": {
+          "hebrew_university_naim": {
+            "mean": -0.045,
+            "se": 0.036,
+            "contrasts": 9
+          },
+          "nestle_rc_and_cerny_firmenich": {
+            "mean": 0.115,
+            "se": 0.076,
+            "contrasts": 2
+          }
+        }
+      },
+      {
+        "compound": "Furfural",
+        "lever_class": "precursor dose",
+        "band": "all",
+        "labs": 3,
+        "contrasts": 15,
+        "class": "conflict between laboratories",
+        "lab_means": {
+          "astar_sifbi_chiang": {
+            "mean": 0.314,
+            "se": 0.053,
+            "contrasts": 4
+          },
+          "nus_liu_shaoquan": {
+            "mean": 0.147,
+            "se": 0.033,
+            "contrasts": 10
+          },
+          "zjut_zheng_zhou": {
+            "mean": -0.53,
+            "se": 0.105,
+            "contrasts": 1
+          }
+        }
+      },
+      {
+        "compound": "Heptanal",
+        "lever_class": "precursor dose",
+        "band": "all",
+        "labs": 3,
+        "contrasts": 7,
+        "class": "no clear effect",
+        "lab_means": {
+          "astar_sifbi_chiang": {
+            "mean": 0.062,
+            "se": 0.057,
+            "contrasts": 4
+          },
+          "nus_liu_shaoquan": {
+            "mean": -0.095,
+            "se": 0.073,
+            "contrasts": 2
+          },
+          "zjut_zheng_zhou": {
+            "mean": 0.157,
+            "se": 0.102,
+            "contrasts": 1
+          }
+        }
+      },
+      {
+        "compound": "Hexanal",
+        "lever_class": "precursor dose",
+        "band": "all",
+        "labs": 4,
+        "contrasts": 17,
+        "class": "conflict between laboratories",
+        "lab_means": {
+          "kasetsart_mookdasanit": {
+            "mean": -0.097,
+            "se": 0.128,
+            "contrasts": 1
+          },
+          "nus_liu_shaoquan": {
+            "mean": -0.185,
+            "se": 0.028,
+            "contrasts": 14
+          },
+          "seville_hidalgo_zamora": {
+            "mean": 0.319,
+            "se": 0.102,
+            "contrasts": 1
+          },
+          "zjut_zheng_zhou": {
+            "mean": 0.164,
+            "se": 0.102,
+            "contrasts": 1
+          }
+        }
+      },
+      {
+        "compound": "Methional (3-(methylthio)propanal)",
+        "lever_class": "precursor dose",
+        "band": "all",
+        "labs": 3,
+        "contrasts": 7,
+        "class": "no clear effect",
+        "lab_means": {
+          "kasetsart_mookdasanit": {
+            "mean": 0.0,
+            "se": 0.122,
+            "contrasts": 1
+          },
+          "nus_liu_shaoquan": {
+            "mean": 0.064,
+            "se": 0.052,
+            "contrasts": 5
+          },
+          "zjut_zheng_zhou": {
+            "mean": -0.447,
+            "se": 0.1,
+            "contrasts": 1
+          }
+        }
+      },
+      {
+        "compound": "Nonanal",
+        "lever_class": "precursor dose",
+        "band": "all",
+        "labs": 2,
+        "contrasts": 11,
+        "class": "conflict between laboratories",
+        "lab_means": {
+          "nus_liu_shaoquan": {
+            "mean": -0.19,
+            "se": 0.034,
+            "contrasts": 10
+          },
+          "zjut_zheng_zhou": {
+            "mean": 0.221,
+            "se": 0.101,
+            "contrasts": 1
+          }
+        }
+      },
+      {
+        "compound": "Octanal",
+        "lever_class": "precursor dose",
+        "band": "all",
+        "labs": 3,
+        "contrasts": 6,
+        "class": "conflict between laboratories",
+        "lab_means": {
+          "astar_sifbi_chiang": {
+            "mean": 0.207,
+            "se": 0.096,
+            "contrasts": 2
+          },
+          "nus_liu_shaoquan": {
+            "mean": -0.194,
+            "se": 0.076,
+            "contrasts": 3
+          },
+          "zjut_zheng_zhou": {
+            "mean": 0.113,
+            "se": 0.114,
+            "contrasts": 1
+          }
+        }
+      },
+      {
+        "compound": "Phenylacetaldehyde",
+        "lever_class": "precursor dose",
+        "band": "all",
+        "labs": 5,
+        "contrasts": 24,
+        "class": "sign changes inside one laboratory",
+        "lab_means": {
+          "astar_sifbi_chiang": {
+            "mean": 0.011,
+            "se": 0.105,
+            "contrasts": 1
+          },
+          "kasetsart_mookdasanit": {
+            "mean": 0.0,
+            "se": 0.118,
+            "contrasts": 1
+          },
+          "nus_liu_shaoquan": {
+            "mean": -0.056,
+            "se": 0.039,
+            "contrasts": 7
+          },
+          "seville_hidalgo_zamora": {
+            "mean": 0.197,
+            "se": 0.029,
+            "contrasts": 14
+          },
+          "zjut_zheng_zhou": {
+            "mean": -0.199,
+            "se": 0.1,
+            "contrasts": 1
+          }
+        }
+      },
+      {
+        "compound": "Pyrazines",
+        "lever_class": "precursor dose",
+        "band": "all",
+        "labs": 2,
+        "contrasts": 4,
+        "class": "direction agreed",
+        "lab_means": {
+          "ghent_de_kimpe": {
+            "mean": 0.233,
+            "se": 0.074,
+            "contrasts": 3
+          },
+          "hfut_wei_zhaojun": {
+            "mean": 0.198,
+            "se": 0.127,
+            "contrasts": 1
+          }
+        }
+      },
+      {
+        "compound": "Unsubstituted pyrazine",
+        "lever_class": "precursor dose",
+        "band": "all",
+        "labs": 2,
+        "contrasts": 4,
+        "class": "direction agreed",
+        "lab_means": {
+          "ghent_de_kimpe": {
+            "mean": 0.066,
+            "se": 0.09,
+            "contrasts": 2
+          },
+          "ho_network": {
+            "mean": 0.682,
+            "se": 0.08,
+            "contrasts": 2
+          }
+        }
+      }
+    ]
+  },
+  "conditions": {
+    "quantification": {
+      "gap": 0.1715067217308202,
+      "cells": 7,
+      "pairs_true": 54,
+      "pairs_false": 104,
+      "median_true": 0.09725247200165985,
+      "median_false": 0.28368251608273665,
+      "ci90": [
+        -0.15361417912825787,
+        0.4228377324947042
+      ],
+      "p_gap_positive": 0.7977401129943503
+    },
+    "matrix": {
+      "gap": 0.04747109870693869,
+      "cells": 8,
+      "pairs_true": 37,
+      "pairs_false": 152,
+      "median_true": 0.16671316106000478,
+      "median_false": 0.31338546979067816,
+      "ci90": [
+        -0.9153655072183938,
+        0.35340584214624954
+      ],
+      "p_gap_positive": 0.5984427141268076
+    },
+    "buffered": {
+      "gap": 0.08891951557966557,
+      "cells": 15,
+      "pairs_true": 92,
+      "pairs_false": 177,
+      "median_true": 0.15904282457816107,
+      "median_false": 0.2742550782566588,
+      "ci90": [
+        -0.053778073193774804,
+        0.2613371653116848
+      ],
+      "p_gap_positive": 0.9036402569593148
+    },
+    "ph_basis": {
+      "gap": -0.052675588736951995,
+      "cells": 1,
+      "pairs_true": 2,
+      "pairs_false": 6,
+      "median_true": 0.6593072177274947,
+      "median_false": 0.7022825012338121,
+      "ci90": null,
+      "p_gap_positive": null
+    },
+    "digitised": {
+      "gap": -0.05759244658734429,
+      "cells": 10,
+      "pairs_true": 234,
+      "pairs_false": 166,
+      "median_true": 0.30147397622302374,
+      "median_false": 0.27380569852779335,
+      "ci90": [
+        -0.21860610800131644,
+        0.12131312366459691
+      ],
+      "p_gap_positive": 0.45531019978969506
+    },
+    "temperature within 10 C": {
+      "gap": -0.16094446144675967,
+      "cells": 17,
+      "pairs_true": 116,
+      "pairs_false": 214,
+      "median_true": 0.21666056007474757,
+      "median_false": 0.17024403164879126,
+      "ci90": [
+        -0.4436741629782992,
+        0.024832367306518922
+      ],
+      "p_gap_positive": 0.07459677419354839
+    },
+    "time within 2x": {
+      "gap": -0.621076814654346,
+      "cells": 9,
+      "pairs_true": 220,
+      "pairs_false": 79,
+      "median_true": 0.4672313832475048,
+      "median_false": 0.2505750345742153,
+      "ci90": [
+        -1.7690158645684637,
+        0.3573286751331617
+      ],
+      "p_gap_positive": 0.29147465437788017
+    },
+    "pH within 0.5": {
+      "gap": 0.0701118749340361,
+      "cells": 9,
+      "pairs_true": 62,
+      "pairs_false": 115,
+      "median_true": 0.3795181320260195,
+      "median_false": 0.2024186265190982,
+      "ci90": [
+        -0.09513268017036265,
+        0.3197331512365468
+      ],
+      "p_gap_positive": 0.6847599164926931
+    },
+    "lever midpoint within 1 step": {
+      "gap": 0.10055318979670258,
+      "cells": 8,
+      "pairs_true": 75,
+      "pairs_false": 119,
+      "median_true": 0.1145222530672133,
+      "median_false": 0.20998195868113068,
+      "ci90": [
+        -0.15406380843844866,
+        0.32121215952641785
+      ],
+      "p_gap_positive": 0.914560770156438
+    }
+  },
+  "same_laboratory_vs_two": {
+    "gap": 0.13256315804937477,
+    "cells": 68,
+    "pairs_true": 1421,
+    "pairs_false": 841,
+    "median_true": 0.13826221169983105,
+    "median_false": 0.23368609039887883,
+    "ci90": [
+      0.04574113152308153,
+      0.3310815538378149
+    ],
+    "p_gap_positive": 0.996
+  },
+  "size_in_agreed_cells": {
+    "conditions": {
+      "quantification": {
+        "gap": 0.48275195688878725,
+        "cells": 3,
+        "pairs_true": 28,
+        "pairs_false": 23,
+        "median_true": 0.12279206185770551,
+        "median_false": 0.6444015498095653,
+        "ci90": [
+          0.253589029704099,
+          0.7190614274582612
+        ],
+        "p_gap_positive": 1.0
+      },
+      "matrix": {
+        "gap": 0.0026519306731728567,
+        "cells": 3,
+        "pairs_true": 6,
+        "pairs_false": 42,
+        "median_true": 0.34996794013316,
+        "median_false": 0.6537716828742968,
+        "ci90": [
+          -0.698791449997125,
+          0.2927896546832659
+        ],
+        "p_gap_positive": 0.42987249544626593
+      },
+      "buffered": {
+        "gap": 0.2473514030749533,
+        "cells": 7,
+        "pairs_true": 35,
+        "pairs_false": 66,
+        "median_true": 0.10054983108331991,
+        "median_false": 0.5741477954603931,
+        "ci90": [
+          -0.6948340086570245,
+          0.6831404037006563
+        ],
+        "p_gap_positive": 0.7226666666666667
+      },
+      "ph_basis": {
+        "gap": -0.2038816503109553,
+        "cells": 2,
+        "pairs_true": 3,
+        "pairs_false": 10,
+        "median_true": 0.6029136358262257,
+        "median_false": 0.34024353353929626,
+        "ci90": null,
+        "p_gap_positive": null
+      },
+      "digitised": {
+        "gap": 0.043805476277342915,
+        "cells": 6,
+        "pairs_true": 118,
+        "pairs_false": 47,
+        "median_true": 0.1445990813595896,
+        "median_false": 0.23921316793338004,
+        "ci90": [
+          -0.030270453591867336,
+          0.187017405799293
+        ],
+        "p_gap_positive": 0.7538631346578366
+      },
+      "temperature within 10 C": {
+        "gap": -0.11966855558561587,
+        "cells": 9,
+        "pairs_true": 51,
+        "pairs_false": 63,
+        "median_true": 0.34352367517347115,
+        "median_false": 0.574096993316039,
+        "ci90": [
+          -0.6858935313252821,
+          0.1747515784369871
+        ],
+        "p_gap_positive": 0.37252747252747254
+      },
+      "time within 2x": {
+        "gap": -0.015056402117869665,
+        "cells": 7,
+        "pairs_true": 104,
+        "pairs_false": 50,
+        "median_true": 0.24450544647258204,
+        "median_false": 0.5272612837166606,
+        "ci90": [
+          -0.3181000670689021,
+          0.2111247619175476
+        ],
+        "p_gap_positive": 0.5029308323563892
+      },
+      "pH within 0.5": {
+        "gap": -0.07487487224949671,
+        "cells": 5,
+        "pairs_true": 46,
+        "pairs_false": 57,
+        "median_true": 0.6332115080255047,
+        "median_false": 0.24451512463521968,
+        "ci90": [
+          -0.3704976101842373,
+          0.3686325541695342
+        ],
+        "p_gap_positive": 0.5012106537530266
+      },
+      "lever midpoint within 1 step": {
+        "gap": 0.12206493848644406,
+        "cells": 2,
+        "pairs_true": 22,
+        "pairs_false": 32,
+        "median_true": 0.1268047349200152,
+        "median_false": 0.36860094633335316,
+        "ci90": [
+          -0.3558731670740557,
+          0.16608143904197875
+        ],
+        "p_gap_positive": 0.7283950617283951
+      }
+    },
+    "same_laboratory_vs_two": {
+      "gap": 0.08338509280353258,
+      "cells": 31,
+      "pairs_true": 954,
+      "pairs_false": 354,
+      "median_true": 0.1544580333874157,
+      "median_false": 0.1978613403035029,
+      "ci90": [
+        0.009281222392410205,
+        0.28676603918390464
+      ],
+      "p_gap_positive": 0.976
+    },
+    "cells": 55
+  },
+  "variance_split": {
+    "all cells": {
+      "cells": 99,
+      "contrasts": 522,
+      "sd_within_lab": 0.22254252804608987,
+      "sd_between_lab": 0.31451244998294453,
+      "share_between_lab": 0.6663696454663056
+    },
+    "numeric levers": {
+      "cells": 59,
+      "contrasts": 384,
+      "sd_within_lab": 0.19022268735864295,
+      "sd_between_lab": 0.28981124344789055,
+      "share_between_lab": 0.6989007509772268
+    },
+    "categorical pairs": {
+      "cells": 40,
+      "contrasts": 138,
+      "sd_within_lab": 0.3306345875465269,
+      "sd_between_lab": 0.3337817795779376,
+      "share_between_lab": 0.5047366705201688
+    },
+    "amino acid identity": {
+      "cells": 23,
+      "contrasts": 48,
+      "sd_within_lab": 0.29343046836185016,
+      "sd_between_lab": 0.3668761868573387,
+      "share_between_lab": 0.609870389297581
+    },
+    "oxygen": {
+      "cells": 1,
+      "contrasts": 34,
+      "sd_within_lab": 0.3818198369516892,
+      "sd_between_lab": 0.25095322919571583,
+      "share_between_lab": 0.3016686308557565
+    },
+    "pH": {
+      "cells": 15,
+      "contrasts": 88,
+      "sd_within_lab": 0.2328563843656775,
+      "sd_between_lab": 0.5336264530613561,
+      "share_between_lab": 0.8400430415785538
+    },
+    "precursor dose": {
+      "cells": 25,
+      "contrasts": 147,
+      "sd_within_lab": 0.16203723149711158,
+      "sd_between_lab": 0.14153601362392487,
+      "share_between_lab": 0.43277358064733884
+    },
+    "sugar identity": {
+      "cells": 11,
+      "contrasts": 39,
+      "sd_within_lab": 0.2227432660516145,
+      "sd_between_lab": 0.44977775243331614,
+      "share_between_lab": 0.80305006257199
+    },
+    "sulfur source": {
+      "cells": 5,
+      "contrasts": 17,
+      "sd_within_lab": 0.29641285707763704,
+      "sd_between_lab": 0.2690046088216227,
+      "share_between_lab": 0.4516392789651875
+    },
+    "temperature": {
+      "cells": 4,
+      "contrasts": 23,
+      "sd_within_lab": 0.3329067106854525,
+      "sd_between_lab": 0.14522904025395303,
+      "share_between_lab": 0.1598827895356324
+    },
+    "time": {
+      "cells": 15,
+      "contrasts": 126,
+      "sd_within_lab": 0.15621722483743458,
+      "sd_between_lab": 0.1995750646175931,
+      "share_between_lab": 0.6200795405553573
+    }
+  },
+  "cells": [
+    {
+      "compound": "1-Octen-3-ol",
+      "lever_class": "precursor dose",
+      "band": "sugar varied",
+      "labs": 2,
+      "contrasts": 4,
+      "class": "no clear effect",
+      "lab_means": {
+        "kasetsart_mookdasanit": {
+          "mean": 0.0,
+          "se": 0.128,
+          "contrasts": 1
+        },
+        "nus_liu_shaoquan": {
+          "mean": -0.041,
+          "se": 0.06,
+          "contrasts": 3
+        }
+      }
+    },
+    {
+      "compound": "2,3-Dimethylpyrazine",
+      "lever_class": "amino acid identity",
+      "band": "none vs asparagine",
+      "labs": 2,
+      "contrasts": 2,
+      "class": "direction agreed",
+      "lab_means": {
+        "ho_network": {
+          "mean": -0.241,
+          "se": 0.128,
+          "contrasts": 1
+        },
+        "reading_mottram_parker": {
+          "mean": -1.279,
+          "se": 0.128,
+          "contrasts": 1
+        }
+      }
+    },
+    {
+      "compound": "2,3-Dimethylpyrazine",
+      "lever_class": "amino acid identity",
+      "band": "none vs glutamine",
+      "labs": 2,
+      "contrasts": 2,
+      "class": "direction agreed",
+      "lab_means": {
+        "ho_network": {
+          "mean": -0.123,
+          "se": 0.128,
+          "contrasts": 1
+        },
+        "reading_mottram_parker": {
+          "mean": -0.778,
+          "se": 0.128,
+          "contrasts": 1
+        }
+      }
+    },
+    {
+      "compound": "2,3-Dimethylpyrazine",
+      "lever_class": "amino acid identity",
+      "band": "none vs isoleucine",
+      "labs": 2,
+      "contrasts": 2,
+      "class": "no clear effect",
+      "lab_means": {
+        "ho_network": {
+          "mean": 0.023,
+          "se": 0.128,
+          "contrasts": 1
+        },
+        "reading_mottram_parker": {
+          "mean": 0.0,
+          "se": 0.128,
+          "contrasts": 1
+        }
+      }
+    },
+    {
+      "compound": "2,3-Dimethylpyrazine",
+      "lever_class": "amino acid identity",
+      "band": "phenylalanine vs none",
+      "labs": 2,
+      "contrasts": 2,
+      "class": "no clear effect",
+      "lab_means": {
+        "ho_network": {
+          "mean": 0.551,
+          "se": 0.128,
+          "contrasts": 1
+        },
+        "reading_mottram_parker": {
+          "mean": 0.0,
+          "se": 0.128,
+          "contrasts": 1
+        }
+      }
+    },
+    {
+      "compound": "2,3-Dimethylpyrazine",
+      "lever_class": "precursor dose",
+      "band": "sugar varied",
+      "labs": 2,
+      "contrasts": 4,
+      "class": "no clear effect",
+      "lab_means": {
+        "ghent_de_kimpe": {
+          "mean": 0.24,
+          "se": 0.058,
+          "contrasts": 3
+        },
+        "kasetsart_mookdasanit": {
+          "mean": -0.176,
+          "se": 0.128,
+          "contrasts": 1
+        }
+      }
+    },
+    {
+      "compound": "2,3-Dimethylpyrazine",
+      "lever_class": "time",
+      "band": "T 100-130 C",
+      "labs": 2,
+      "contrasts": 6,
+      "class": "direction agreed",
+      "lab_means": {
+        "ho_network": {
+          "mean": 0.306,
+          "se": 0.108,
+          "contrasts": 1
+        },
+        "ucdavis_shibamoto": {
+          "mean": 0.169,
+          "se": 0.046,
+          "contrasts": 5
+        }
+      }
+    },
+    {
+      "compound": "2,5-Dimethylpyrazine",
+      "lever_class": "precursor dose",
+      "band": "sulfur donor varied",
+      "labs": 2,
+      "contrasts": 2,
+      "class": "no clear effect",
+      "lab_means": {
+        "ho_network": {
+          "mean": 0.233,
+          "se": 0.101,
+          "contrasts": 1
+        },
+        "zjut_zheng_zhou": {
+          "mean": -0.029,
+          "se": 0.103,
+          "contrasts": 1
+        }
+      }
+    },
+    {
+      "compound": "2,5-Dimethylpyrazine",
+      "lever_class": "time",
+      "band": "T 100-130 C",
+      "labs": 2,
+      "contrasts": 6,
+      "class": "direction agreed",
+      "lab_means": {
+        "ho_network": {
+          "mean": 0.774,
+          "se": 0.107,
+          "contrasts": 1
+        },
+        "ucdavis_shibamoto": {
+          "mean": 0.169,
+          "se": 0.046,
+          "contrasts": 5
+        }
+      }
+    },
+    {
+      "compound": "2-Acetylfuran",
+      "lever_class": "temperature",
+      "band": "time >120 min",
+      "labs": 2,
+      "contrasts": 3,
+      "class": "direction agreed",
+      "lab_means": {
+        "ghent_de_kimpe": {
+          "mean": 0.363,
+          "se": 0.072,
+          "contrasts": 2
+        },
+        "minnesota_reineccius": {
+          "mean": 0.877,
+          "se": 0.113,
+          "contrasts": 1
+        }
+      }
+    },
+    {
+      "compound": "2-Acetylfuran",
+      "lever_class": "time",
+      "band": "T 100-130 C",
+      "labs": 2,
+      "contrasts": 5,
+      "class": "direction agreed",
+      "lab_means": {
+        "ho_network": {
+          "mean": 0.771,
+          "se": 0.064,
+          "contrasts": 3
+        },
+        "minnesota_reineccius": {
+          "mean": 0.297,
+          "se": 0.076,
+          "contrasts": 2
+        }
+      }
+    },
+    {
+      "compound": "2-Acetylthiazole",
+      "lever_class": "pH",
+      "band": "pH 6-7.5, initial or label",
+      "labs": 2,
+      "contrasts": 4,
+      "class": "direction agreed",
+      "lab_means": {
+        "cau_gao_yanxiang": {
+          "mean": 0.168,
+          "se": 0.074,
+          "contrasts": 2
+        },
+        "ccnu_yu_ainong": {
+          "mean": 0.194,
+          "se": 0.072,
+          "contrasts": 2
+        }
+      }
+    },
+    {
+      "compound": "2-Ethyl-3,5-dimethylpyrazine",
+      "lever_class": "precursor dose",
+      "band": "sugar varied",
+      "labs": 2,
+      "contrasts": 4,
+      "class": "direction agreed",
+      "lab_means": {
+        "astar_sifbi_chiang": {
+          "mean": -0.012,
+          "se": 0.076,
+          "contrasts": 2
+        },
+        "ghent_de_kimpe": {
+          "mean": -0.059,
+          "se": 0.071,
+          "contrasts": 2
+        }
+      }
+    },
+    {
+      "compound": "2-Ethyl-3,6-dimethylpyrazine",
+      "lever_class": "amino acid identity",
+      "band": "none vs arginine",
+      "labs": 2,
+      "contrasts": 2,
+      "class": "direction agreed",
+      "lab_means": {
+        "ho_network": {
+          "mean": -0.105,
+          "se": 0.128,
+          "contrasts": 1
+        },
+        "wonkwang_cho_inhee": {
+          "mean": -0.483,
+          "se": 0.1,
+          "contrasts": 1
+        }
+      }
+    },
+    {
+      "compound": "2-Ethyl-3,6-dimethylpyrazine",
+      "lever_class": "amino acid identity",
+      "band": "none vs glutamine",
+      "labs": 2,
+      "contrasts": 2,
+      "class": "direction agreed",
+      "lab_means": {
+        "ho_network": {
+          "mean": -0.521,
+          "se": 0.128,
+          "contrasts": 1
+        },
+        "wonkwang_cho_inhee": {
+          "mean": -0.162,
+          "se": 0.109,
+          "contrasts": 1
+        }
+      }
+    },
+    {
+      "compound": "2-Ethyl-3,6-dimethylpyrazine",
+      "lever_class": "precursor dose",
+      "band": "sugar varied",
+      "labs": 3,
+      "contrasts": 7,
+      "class": "no clear effect",
+      "lab_means": {
+        "astar_sifbi_chiang": {
+          "mean": 0.048,
+          "se": 0.054,
+          "contrasts": 4
+        },
+        "ghent_de_kimpe": {
+          "mean": -0.025,
+          "se": 0.071,
+          "contrasts": 2
+        },
+        "kasetsart_mookdasanit": {
+          "mean": 0.0,
+          "se": 0.276,
+          "contrasts": 1
+        }
+      }
+    },
+    {
+      "compound": "2-Ethylpyrazine",
+      "lever_class": "precursor dose",
+      "band": "sugar varied",
+      "labs": 3,
+      "contrasts": 7,
+      "class": "no clear effect",
+      "lab_means": {
+        "astar_sifbi_chiang": {
+          "mean": 0.022,
+          "se": 0.056,
+          "contrasts": 4
+        },
+        "ghent_de_kimpe": {
+          "mean": -0.075,
+          "se": 0.071,
+          "contrasts": 2
+        },
+        "kasetsart_mookdasanit": {
+          "mean": 0.0,
+          "se": 0.376,
+          "contrasts": 1
+        }
+      }
+    },
+    {
+      "compound": "2-Furanmethanol",
+      "lever_class": "precursor dose",
+      "band": "sugar varied",
+      "labs": 2,
+      "contrasts": 5,
+      "class": "no clear effect",
+      "lab_means": {
+        "astar_sifbi_chiang": {
+          "mean": 0.139,
+          "se": 0.052,
+          "contrasts": 4
+        },
+        "kasetsart_mookdasanit": {
+          "mean": 0.0,
+          "se": 0.108,
+          "contrasts": 1
+        }
+      }
+    },
+    {
+      "compound": "2-Furfurylthiol (FFT)",
+      "lever_class": "pH",
+      "band": "pH 4.5-6, initial or label",
+      "labs": 4,
+      "contrasts": 5,
+      "class": "no clear effect",
+      "lab_means": {
+        "dfa_garching": {
+          "mean": -0.117,
+          "se": 0.072,
+          "contrasts": 2
+        },
+        "ho_network": {
+          "mean": 0.069,
+          "se": 0.103,
+          "contrasts": 1
+        },
+        "nestle_rc_and_cerny_firmenich": {
+          "mean": -0.156,
+          "se": 0.107,
+          "contrasts": 1
+        },
+        "ogawa_chiba": {
+          "mean": -0.363,
+          "se": 0.101,
+          "contrasts": 1
+        }
+      }
+    },
+    {
+      "compound": "2-Furfurylthiol (FFT)",
+      "lever_class": "pH",
+      "band": "pH 6-7.5, initial or label",
+      "labs": 3,
+      "contrasts": 5,
+      "class": "direction agreed",
+      "lab_means": {
+        "cau_gao_yanxiang": {
+          "mean": -0.774,
+          "se": 0.074,
+          "contrasts": 2
+        },
+        "ho_network": {
+          "mean": -0.114,
+          "se": 0.1,
+          "contrasts": 1
+        },
+        "ogawa_chiba": {
+          "mean": -1.16,
+          "se": 0.099,
+          "contrasts": 2
+        }
+      }
+    },
+    {
+      "compound": "2-Furfurylthiol (FFT)",
+      "lever_class": "sulfur source",
+      "band": "none vs glutathione",
+      "labs": 2,
+      "contrasts": 3,
+      "class": "direction agreed",
+      "lab_means": {
+        "dfa_garching": {
+          "mean": -0.054,
+          "se": 0.128,
+          "contrasts": 1
+        },
+        "ho_network": {
+          "mean": -0.496,
+          "se": 0.074,
+          "contrasts": 2
+        }
+      }
+    },
+    {
+      "compound": "2-Furfurylthiol (FFT)",
+      "lever_class": "time",
+      "band": "T 100-130 C",
+      "labs": 2,
+      "contrasts": 6,
+      "class": "sign changes inside one laboratory",
+      "lab_means": {
+        "ho_network": {
+          "mean": 0.004,
+          "se": 0.062,
+          "contrasts": 3
+        },
+        "nestle_rc_and_cerny_firmenich": {
+          "mean": 0.459,
+          "se": 0.062,
+          "contrasts": 3
+        }
+      }
+    },
+    {
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lever_class": "pH",
+      "band": "pH 4.5-6, initial or label",
+      "labs": 2,
+      "contrasts": 3,
+      "class": "sign changes inside one laboratory",
+      "lab_means": {
+        "dfa_garching": {
+          "mean": -0.005,
+          "se": 0.072,
+          "contrasts": 2
+        },
+        "nestle_rc_and_cerny_firmenich": {
+          "mean": 0.205,
+          "se": 0.128,
+          "contrasts": 1
+        }
+      }
+    },
+    {
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lever_class": "pH",
+      "band": "pH 6-7.5, initial or label",
+      "labs": 2,
+      "contrasts": 3,
+      "class": "conflict between laboratories",
+      "lab_means": {
+        "cau_gao_yanxiang": {
+          "mean": -0.618,
+          "se": 0.074,
+          "contrasts": 2
+        },
+        "ho_network": {
+          "mean": 0.358,
+          "se": 0.1,
+          "contrasts": 1
+        }
+      }
+    },
+    {
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lever_class": "precursor dose",
+      "band": "sulfur donor varied",
+      "labs": 4,
+      "contrasts": 11,
+      "class": "sign changes inside one laboratory",
+      "lab_means": {
+        "btbu_beijing": {
+          "mean": 0.265,
+          "se": 0.071,
+          "contrasts": 2
+        },
+        "dfa_garching": {
+          "mean": 0.077,
+          "se": 0.04,
+          "contrasts": 7
+        },
+        "inra_clermont_berdague": {
+          "mean": 0.164,
+          "se": 0.101,
+          "contrasts": 1
+        },
+        "zjut_zheng_zhou": {
+          "mean": 0.575,
+          "se": 0.101,
+          "contrasts": 1
+        }
+      }
+    },
+    {
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lever_class": "sugar identity",
+      "band": "ribose 5-phosphate vs ribose",
+      "labs": 2,
+      "contrasts": 5,
+      "class": "direction agreed",
+      "lab_means": {
+        "dfa_garching": {
+          "mean": 0.301,
+          "se": 0.128,
+          "contrasts": 1
+        },
+        "reading_mottram_parker": {
+          "mean": 0.143,
+          "se": 0.064,
+          "contrasts": 4
+        }
+      }
+    },
+    {
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lever_class": "sulfur source",
+      "band": "none vs cysteine",
+      "labs": 2,
+      "contrasts": 5,
+      "class": "direction agreed",
+      "lab_means": {
+        "btbu_beijing": {
+          "mean": -1.282,
+          "se": 0.128,
+          "contrasts": 1
+        },
+        "dfa_garching": {
+          "mean": -0.544,
+          "se": 0.06,
+          "contrasts": 4
+        }
+      }
+    },
+    {
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lever_class": "sulfur source",
+      "band": "none vs glutathione",
+      "labs": 3,
+      "contrasts": 4,
+      "class": "direction agreed",
+      "lab_means": {
+        "btbu_beijing": {
+          "mean": -1.176,
+          "se": 0.128,
+          "contrasts": 1
+        },
+        "dfa_garching": {
+          "mean": -0.646,
+          "se": 0.104,
+          "contrasts": 1
+        },
+        "ho_network": {
+          "mean": -0.492,
+          "se": 0.071,
+          "contrasts": 2
+        }
+      }
+    },
+    {
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lever_class": "time",
+      "band": "T 100-130 C",
+      "labs": 2,
+      "contrasts": 6,
+      "class": "sign changes inside one laboratory",
+      "lab_means": {
+        "ho_network": {
+          "mean": -0.077,
+          "se": 0.062,
+          "contrasts": 3
+        },
+        "nestle_rc_and_cerny_firmenich": {
+          "mean": 0.499,
+          "se": 0.061,
+          "contrasts": 3
+        }
+      }
+    },
+    {
+      "compound": "2-Methylbutanal",
+      "lever_class": "precursor dose",
+      "band": "sugar varied",
+      "labs": 2,
+      "contrasts": 6,
+      "class": "no clear effect",
+      "lab_means": {
+        "kasetsart_mookdasanit": {
+          "mean": -0.176,
+          "se": 0.131,
+          "contrasts": 1
+        },
+        "nus_liu_shaoquan": {
+          "mean": 0.214,
+          "se": 0.045,
+          "contrasts": 5
+        }
+      }
+    },
+    {
+      "compound": "2-Methylbutanal",
+      "lever_class": "time",
+      "band": "T >130 C",
+      "labs": 2,
+      "contrasts": 6,
+      "class": "direction agreed",
+      "lab_means": {
+        "dfa_garching": {
+          "mean": 0.204,
+          "se": 0.072,
+          "contrasts": 2
+        },
+        "reading_mottram_parker": {
+          "mean": 0.245,
+          "se": 0.054,
+          "contrasts": 4
+        }
+      }
+    },
+    {
+      "compound": "2-Methylpropanal (isobutyraldehyde)",
+      "lever_class": "precursor dose",
+      "band": "sugar varied",
+      "labs": 2,
+      "contrasts": 2,
+      "class": "no clear effect",
+      "lab_means": {
+        "astar_sifbi_chiang": {
+          "mean": 0.077,
+          "se": 0.102,
+          "contrasts": 1
+        },
+        "kasetsart_mookdasanit": {
+          "mean": -0.222,
+          "se": 0.125,
+          "contrasts": 1
+        }
+      }
+    },
+    {
+      "compound": "2-Methylpyrazine",
+      "lever_class": "amino acid identity",
+      "band": "none vs asparagine",
+      "labs": 2,
+      "contrasts": 2,
+      "class": "direction agreed",
+      "lab_means": {
+        "ho_network": {
+          "mean": -0.188,
+          "se": 0.128,
+          "contrasts": 1
+        },
+        "reading_mottram_parker": {
+          "mean": -1.336,
+          "se": 0.128,
+          "contrasts": 1
+        }
+      }
+    },
+    {
+      "compound": "2-Methylpyrazine",
+      "lever_class": "amino acid identity",
+      "band": "none vs glutamine",
+      "labs": 2,
+      "contrasts": 2,
+      "class": "direction agreed",
+      "lab_means": {
+        "ho_network": {
+          "mean": -0.28,
+          "se": 0.128,
+          "contrasts": 1
+        },
+        "reading_mottram_parker": {
+          "mean": -1.301,
+          "se": 0.128,
+          "contrasts": 1
+        }
+      }
+    },
+    {
+      "compound": "2-Methylpyrazine",
+      "lever_class": "amino acid identity",
+      "band": "none vs isoleucine",
+      "labs": 2,
+      "contrasts": 2,
+      "class": "direction agreed",
+      "lab_means": {
+        "ho_network": {
+          "mean": -0.006,
+          "se": 0.128,
+          "contrasts": 1
+        },
+        "reading_mottram_parker": {
+          "mean": -0.222,
+          "se": 0.128,
+          "contrasts": 1
+        }
+      }
+    },
+    {
+      "compound": "2-Methylpyrazine",
+      "lever_class": "amino acid identity",
+      "band": "phenylalanine vs none",
+      "labs": 2,
+      "contrasts": 2,
+      "class": "direction agreed",
+      "lab_means": {
+        "ho_network": {
+          "mean": 0.397,
+          "se": 0.128,
+          "contrasts": 1
+        },
+        "reading_mottram_parker": {
+          "mean": 0.637,
+          "se": 0.128,
+          "contrasts": 1
+        }
+      }
+    },
+    {
+      "compound": "2-Methylpyrazine",
+      "lever_class": "pH",
+      "band": "pH 6-7.5, initial or label",
+      "labs": 2,
+      "contrasts": 2,
+      "class": "direction agreed",
+      "lab_means": {
+        "cau_gao_yanxiang": {
+          "mean": 0.346,
+          "se": 0.105,
+          "contrasts": 1
+        },
+        "ccnu_yu_ainong": {
+          "mean": 0.382,
+          "se": 0.102,
+          "contrasts": 1
+        }
+      }
+    },
+    {
+      "compound": "2-Methylpyrazine",
+      "lever_class": "pH",
+      "band": "pH >7.5, initial or label",
+      "labs": 2,
+      "contrasts": 3,
+      "class": "no clear effect",
+      "lab_means": {
+        "ccnu_yu_ainong": {
+          "mean": -0.073,
+          "se": 0.128,
+          "contrasts": 1
+        },
+        "ho_network": {
+          "mean": 1.94,
+          "se": 0.076,
+          "contrasts": 2
+        }
+      }
+    },
+    {
+      "compound": "2-Methylpyrazine",
+      "lever_class": "precursor dose",
+      "band": "sugar varied",
+      "labs": 3,
+      "contrasts": 11,
+      "class": "no clear effect",
+      "lab_means": {
+        "astar_sifbi_chiang": {
+          "mean": -0.061,
+          "se": 0.05,
+          "contrasts": 4
+        },
+        "ghent_de_kimpe": {
+          "mean": 0.129,
+          "se": 0.041,
+          "contrasts": 6
+        },
+        "kasetsart_mookdasanit": {
+          "mean": 0.0,
+          "se": 0.276,
+          "contrasts": 1
+        }
+      }
+    },
+    {
+      "compound": "2-Methylpyrazine",
+      "lever_class": "precursor dose",
+      "band": "sulfur donor varied",
+      "labs": 2,
+      "contrasts": 3,
+      "class": "conflict between laboratories",
+      "lab_means": {
+        "ho_network": {
+          "mean": 0.3,
+          "se": 0.084,
+          "contrasts": 2
+        },
+        "zjut_zheng_zhou": {
+          "mean": -0.428,
+          "se": 0.105,
+          "contrasts": 1
+        }
+      }
+    },
+    {
+      "compound": "2-Methylpyrazine",
+      "lever_class": "time",
+      "band": "T 100-130 C",
+      "labs": 2,
+      "contrasts": 7,
+      "class": "direction agreed",
+      "lab_means": {
+        "ho_network": {
+          "mean": 0.162,
+          "se": 0.079,
+          "contrasts": 2
+        },
+        "ucdavis_shibamoto": {
+          "mean": 0.166,
+          "se": 0.046,
+          "contrasts": 5
+        }
+      }
+    },
+    {
+      "compound": "3-Methylbutanal",
+      "lever_class": "time",
+      "band": "T >130 C",
+      "labs": 2,
+      "contrasts": 6,
+      "class": "direction agreed",
+      "lab_means": {
+        "dfa_garching": {
+          "mean": 0.214,
+          "se": 0.072,
+          "contrasts": 2
+        },
+        "reading_mottram_parker": {
+          "mean": 0.191,
+          "se": 0.056,
+          "contrasts": 4
+        }
+      }
+    },
+    {
+      "compound": "5-Methylfurfural",
+      "lever_class": "temperature",
+      "band": "time >120 min",
+      "labs": 2,
+      "contrasts": 3,
+      "class": "direction agreed",
+      "lab_means": {
+        "ghent_de_kimpe": {
+          "mean": 0.522,
+          "se": 0.073,
+          "contrasts": 2
+        },
+        "minnesota_reineccius": {
+          "mean": 0.565,
+          "se": 0.113,
+          "contrasts": 1
+        }
+      }
+    },
+    {
+      "compound": "Benzaldehyde",
+      "lever_class": "amino acid identity",
+      "band": "none vs methionine",
+      "labs": 2,
+      "contrasts": 3,
+      "class": "no clear effect",
+      "lab_means": {
+        "reading_mottram_parker": {
+          "mean": 0.207,
+          "se": 0.09,
+          "contrasts": 2
+        },
+        "wonkwang_cho_inhee": {
+          "mean": -0.151,
+          "se": 0.101,
+          "contrasts": 1
+        }
+      }
+    },
+    {
+      "compound": "Benzaldehyde",
+      "lever_class": "precursor dose",
+      "band": "sugar varied",
+      "labs": 3,
+      "contrasts": 11,
+      "class": "sign changes inside one laboratory",
+      "lab_means": {
+        "astar_sifbi_chiang": {
+          "mean": 0.031,
+          "se": 0.059,
+          "contrasts": 4
+        },
+        "kasetsart_mookdasanit": {
+          "mean": 0.0,
+          "se": 0.128,
+          "contrasts": 1
+        },
+        "nus_liu_shaoquan": {
+          "mean": -0.082,
+          "se": 0.044,
+          "contrasts": 6
+        }
+      }
+    },
+    {
+      "compound": "Benzaldehyde",
+      "lever_class": "precursor dose",
+      "band": "sulfur donor varied",
+      "labs": 2,
+      "contrasts": 5,
+      "class": "no clear effect",
+      "lab_means": {
+        "nus_liu_shaoquan": {
+          "mean": -0.201,
+          "se": 0.054,
+          "contrasts": 4
+        },
+        "zjut_zheng_zhou": {
+          "mean": 0.187,
+          "se": 0.102,
+          "contrasts": 1
+        }
+      }
+    },
+    {
+      "compound": "Benzaldehyde",
+      "lever_class": "sugar identity",
+      "band": "xylose vs glucose",
+      "labs": 2,
+      "contrasts": 4,
+      "class": "conflict between laboratories",
+      "lab_means": {
+        "astar_sifbi_chiang": {
+          "mean": 0.14,
+          "se": 0.068,
+          "contrasts": 3
+        },
+        "hfut_wei_zhaojun": {
+          "mean": -0.382,
+          "se": 0.111,
+          "contrasts": 1
+        }
+      }
+    },
+    {
+      "compound": "Bis(2-methyl-3-furyl) disulfide",
+      "lever_class": "pH",
+      "band": "pH 6-7.5, initial or label",
+      "labs": 2,
+      "contrasts": 3,
+      "class": "conflict between laboratories",
+      "lab_means": {
+        "cau_gao_yanxiang": {
+          "mean": -0.344,
+          "se": 0.078,
+          "contrasts": 2
+        },
+        "ho_network": {
+          "mean": 0.235,
+          "se": 0.101,
+          "contrasts": 1
+        }
+      }
+    },
+    {
+      "compound": "Bis(2-methyl-3-furyl) disulfide",
+      "lever_class": "precursor dose",
+      "band": "sulfur donor varied",
+      "labs": 2,
+      "contrasts": 3,
+      "class": "direction agreed",
+      "lab_means": {
+        "btbu_beijing": {
+          "mean": 0.224,
+          "se": 0.071,
+          "contrasts": 2
+        },
+        "inra_clermont_berdague": {
+          "mean": 0.176,
+          "se": 0.101,
+          "contrasts": 1
+        }
+      }
+    },
+    {
+      "compound": "Bis(2-methyl-3-furyl) disulfide",
+      "lever_class": "sulfur source",
+      "band": "none vs cysteine",
+      "labs": 2,
+      "contrasts": 2,
+      "class": "no clear effect",
+      "lab_means": {
+        "btbu_beijing": {
+          "mean": -0.439,
+          "se": 0.137,
+          "contrasts": 1
+        },
+        "dfa_garching": {
+          "mean": 0.0,
+          "se": 0.128,
+          "contrasts": 1
+        }
+      }
+    },
+    {
+      "compound": "DMHF",
+      "lever_class": "pH",
+      "band": "pH 6-7.5, initial or label",
+      "labs": 2,
+      "contrasts": 4,
+      "class": "direction agreed",
+      "lab_means": {
+        "hebrew_university_naim": {
+          "mean": 0.596,
+          "se": 0.08,
+          "contrasts": 2
+        },
+        "nestle_rc_and_cerny_firmenich": {
+          "mean": 0.249,
+          "se": 0.076,
+          "contrasts": 2
+        }
+      }
+    },
+    {
+      "compound": "DMHF",
+      "lever_class": "sugar identity",
+      "band": "xylose vs arabinose",
+      "labs": 2,
+      "contrasts": 3,
+      "class": "direction agreed",
+      "lab_means": {
+        "hfut_wei_zhaojun": {
+          "mean": -0.727,
+          "se": 0.128,
+          "contrasts": 1
+        },
+        "nestle_rc_and_cerny_firmenich": {
+          "mean": -0.209,
+          "se": 0.09,
+          "contrasts": 2
+        }
+      }
+    },
+    {
+      "compound": "Furfural",
+      "lever_class": "pH",
+      "band": "pH 4.5-6, initial or label",
+      "labs": 3,
+      "contrasts": 17,
+      "class": "direction agreed",
+      "lab_means": {
+        "nestle_rc_and_cerny_firmenich": {
+          "mean": -0.119,
+          "se": 0.128,
+          "contrasts": 1
+        },
+        "nus_liu_shaoquan": {
+          "mean": -0.659,
+          "se": 0.028,
+          "contrasts": 15
+        },
+        "reading_mottram_parker": {
+          "mean": -2.929,
+          "se": 0.115,
+          "contrasts": 1
+        }
+      }
+    },
+    {
+      "compound": "Furfural",
+      "lever_class": "precursor dose",
+      "band": "sugar varied",
+      "labs": 2,
+      "contrasts": 12,
+      "class": "direction agreed",
+      "lab_means": {
+        "astar_sifbi_chiang": {
+          "mean": 0.314,
+          "se": 0.053,
+          "contrasts": 4
+        },
+        "nus_liu_shaoquan": {
+          "mean": 0.19,
+          "se": 0.037,
+          "contrasts": 8
+        }
+      }
+    },
+    {
+      "compound": "Furfural",
+      "lever_class": "precursor dose",
+      "band": "sulfur donor varied",
+      "labs": 2,
+      "contrasts": 3,
+      "class": "direction agreed",
+      "lab_means": {
+        "nus_liu_shaoquan": {
+          "mean": -0.04,
+          "se": 0.077,
+          "contrasts": 2
+        },
+        "zjut_zheng_zhou": {
+          "mean": -0.53,
+          "se": 0.105,
+          "contrasts": 1
+        }
+      }
+    },
+    {
+      "compound": "Furfural",
+      "lever_class": "sulfur source",
+      "band": "none vs cysteine",
+      "labs": 2,
+      "contrasts": 3,
+      "class": "direction agreed",
+      "lab_means": {
+        "ho_network": {
+          "mean": 0.43,
+          "se": 0.128,
+          "contrasts": 1
+        },
+        "nus_liu_shaoquan": {
+          "mean": 0.841,
+          "se": 0.074,
+          "contrasts": 2
+        }
+      }
+    },
+    {
+      "compound": "Furfural",
+      "lever_class": "temperature",
+      "band": "time >120 min",
+      "labs": 2,
+      "contrasts": 3,
+      "class": "direction agreed",
+      "lab_means": {
+        "ghent_de_kimpe": {
+          "mean": 0.135,
+          "se": 0.073,
+          "contrasts": 2
+        },
+        "minnesota_reineccius": {
+          "mean": 0.754,
+          "se": 0.113,
+          "contrasts": 1
+        }
+      }
+    },
+    {
+      "compound": "Furfural",
+      "lever_class": "time",
+      "band": "T 100-130 C",
+      "labs": 2,
+      "contrasts": 6,
+      "class": "direction agreed",
+      "lab_means": {
+        "ho_network": {
+          "mean": 0.274,
+          "se": 0.052,
+          "contrasts": 4
+        },
+        "minnesota_reineccius": {
+          "mean": 0.456,
+          "se": 0.076,
+          "contrasts": 2
+        }
+      }
+    },
+    {
+      "compound": "Heptanal",
+      "lever_class": "precursor dose",
+      "band": "sugar varied",
+      "labs": 2,
+      "contrasts": 6,
+      "class": "no clear effect",
+      "lab_means": {
+        "astar_sifbi_chiang": {
+          "mean": 0.062,
+          "se": 0.057,
+          "contrasts": 4
+        },
+        "nus_liu_shaoquan": {
+          "mean": -0.095,
+          "se": 0.073,
+          "contrasts": 2
+        }
+      }
+    },
+    {
+      "compound": "Heptanal",
+      "lever_class": "sugar identity",
+      "band": "xylose vs glucose",
+      "labs": 2,
+      "contrasts": 4,
+      "class": "direction agreed",
+      "lab_means": {
+        "astar_sifbi_chiang": {
+          "mean": 0.188,
+          "se": 0.077,
+          "contrasts": 3
+        },
+        "hfut_wei_zhaojun": {
+          "mean": 0.523,
+          "se": 0.128,
+          "contrasts": 1
+        }
+      }
+    },
+    {
+      "compound": "Hexanal",
+      "lever_class": "precursor dose",
+      "band": "sugar varied",
+      "labs": 2,
+      "contrasts": 11,
+      "class": "direction agreed",
+      "lab_means": {
+        "kasetsart_mookdasanit": {
+          "mean": -0.097,
+          "se": 0.128,
+          "contrasts": 1
+        },
+        "nus_liu_shaoquan": {
+          "mean": -0.125,
+          "se": 0.034,
+          "contrasts": 10
+        }
+      }
+    },
+    {
+      "compound": "Hexanal",
+      "lever_class": "precursor dose",
+      "band": "sulfur donor varied",
+      "labs": 2,
+      "contrasts": 5,
+      "class": "no clear effect",
+      "lab_means": {
+        "nus_liu_shaoquan": {
+          "mean": -0.331,
+          "se": 0.053,
+          "contrasts": 4
+        },
+        "zjut_zheng_zhou": {
+          "mean": 0.164,
+          "se": 0.102,
+          "contrasts": 1
+        }
+      }
+    },
+    {
+      "compound": "Hexanal",
+      "lever_class": "sugar identity",
+      "band": "xylose vs arabinose",
+      "labs": 2,
+      "contrasts": 4,
+      "class": "conflict between laboratories",
+      "lab_means": {
+        "hfut_wei_zhaojun": {
+          "mean": 0.236,
+          "se": 0.083,
+          "contrasts": 2
+        },
+        "nus_liu_shaoquan": {
+          "mean": -0.229,
+          "se": 0.103,
+          "contrasts": 2
+        }
+      }
+    },
+    {
+      "compound": "Hexanal",
+      "lever_class": "sugar identity",
+      "band": "xylose vs fructose",
+      "labs": 2,
+      "contrasts": 4,
+      "class": "conflict between laboratories",
+      "lab_means": {
+        "hfut_wei_zhaojun": {
+          "mean": 0.303,
+          "se": 0.081,
+          "contrasts": 2
+        },
+        "nus_liu_shaoquan": {
+          "mean": -0.716,
+          "se": 0.103,
+          "contrasts": 2
+        }
+      }
+    },
+    {
+      "compound": "Hexanal",
+      "lever_class": "sugar identity",
+      "band": "xylose vs glucose",
+      "labs": 2,
+      "contrasts": 4,
+      "class": "conflict between laboratories",
+      "lab_means": {
+        "hfut_wei_zhaojun": {
+          "mean": 0.389,
+          "se": 0.08,
+          "contrasts": 2
+        },
+        "nus_liu_shaoquan": {
+          "mean": -0.631,
+          "se": 0.103,
+          "contrasts": 2
+        }
+      }
+    },
+    {
+      "compound": "Hydrogen Sulfide",
+      "lever_class": "time",
+      "band": "T 100-130 C",
+      "labs": 2,
+      "contrasts": 21,
+      "class": "direction agreed",
+      "lab_means": {
+        "hokkaido_obata_mizutani": {
+          "mean": 0.362,
+          "se": 0.025,
+          "contrasts": 17
+        },
+        "nebraska_lincoln_arnold": {
+          "mean": 0.282,
+          "se": 0.055,
+          "contrasts": 4
+        }
+      }
+    },
+    {
+      "compound": "Methional (3-(methylthio)propanal)",
+      "lever_class": "precursor dose",
+      "band": "sugar varied",
+      "labs": 2,
+      "contrasts": 6,
+      "class": "no clear effect",
+      "lab_means": {
+        "kasetsart_mookdasanit": {
+          "mean": 0.0,
+          "se": 0.122,
+          "contrasts": 1
+        },
+        "nus_liu_shaoquan": {
+          "mean": 0.064,
+          "se": 0.052,
+          "contrasts": 5
+        }
+      }
+    },
+    {
+      "compound": "Methional (3-(methylthio)propanal)",
+      "lever_class": "sugar identity",
+      "band": "xylose vs glucose",
+      "labs": 2,
+      "contrasts": 4,
+      "class": "direction agreed",
+      "lab_means": {
+        "hfut_wei_zhaojun": {
+          "mean": 0.452,
+          "se": 0.128,
+          "contrasts": 1
+        },
+        "nus_liu_shaoquan": {
+          "mean": 0.518,
+          "se": 0.084,
+          "contrasts": 3
+        }
+      }
+    },
+    {
+      "compound": "Nonanal",
+      "lever_class": "precursor dose",
+      "band": "sulfur donor varied",
+      "labs": 2,
+      "contrasts": 5,
+      "class": "conflict between laboratories",
+      "lab_means": {
+        "nus_liu_shaoquan": {
+          "mean": -0.303,
+          "se": 0.058,
+          "contrasts": 4
+        },
+        "zjut_zheng_zhou": {
+          "mean": 0.221,
+          "se": 0.101,
+          "contrasts": 1
+        }
+      }
+    },
+    {
+      "compound": "Octanal",
+      "lever_class": "precursor dose",
+      "band": "sulfur donor varied",
+      "labs": 2,
+      "contrasts": 4,
+      "class": "no clear effect",
+      "lab_means": {
+        "nus_liu_shaoquan": {
+          "mean": -0.194,
+          "se": 0.076,
+          "contrasts": 3
+        },
+        "zjut_zheng_zhou": {
+          "mean": 0.113,
+          "se": 0.114,
+          "contrasts": 1
+        }
+      }
+    },
+    {
+      "compound": "Phenylacetaldehyde",
+      "lever_class": "amino acid identity",
+      "band": "none vs methionine",
+      "labs": 2,
+      "contrasts": 2,
+      "class": "no clear effect",
+      "lab_means": {
+        "reading_mottram_parker": {
+          "mean": 0.0,
+          "se": 0.128,
+          "contrasts": 1
+        },
+        "wonkwang_cho_inhee": {
+          "mean": 0.045,
+          "se": 0.101,
+          "contrasts": 1
+        }
+      }
+    },
+    {
+      "compound": "Phenylacetaldehyde",
+      "lever_class": "oxygen",
+      "band": "inert vs air",
+      "labs": 2,
+      "contrasts": 34,
+      "class": "direction agreed",
+      "lab_means": {
+        "dfa_garching": {
+          "mean": -0.221,
+          "se": 0.052,
+          "contrasts": 6
+        },
+        "seville_hidalgo_zamora": {
+          "mean": -0.621,
+          "se": 0.024,
+          "contrasts": 28
+        }
+      }
+    },
+    {
+      "compound": "Phenylacetaldehyde",
+      "lever_class": "pH",
+      "band": "pH 4.5-6, initial or label",
+      "labs": 2,
+      "contrasts": 16,
+      "class": "sign changes inside one laboratory",
+      "lab_means": {
+        "nus_liu_shaoquan": {
+          "mean": -0.037,
+          "se": 0.03,
+          "contrasts": 15
+        },
+        "seville_hidalgo_zamora": {
+          "mean": -0.049,
+          "se": 0.105,
+          "contrasts": 1
+        }
+      }
+    },
+    {
+      "compound": "Phenylacetaldehyde",
+      "lever_class": "pH",
+      "band": "pH 6-7.5, initial or label",
+      "labs": 3,
+      "contrasts": 10,
+      "class": "direction agreed",
+      "lab_means": {
+        "dfa_garching": {
+          "mean": -0.087,
+          "se": 0.046,
+          "contrasts": 5
+        },
+        "minnesota_reineccius": {
+          "mean": -0.406,
+          "se": 0.113,
+          "contrasts": 1
+        },
+        "seville_hidalgo_zamora": {
+          "mean": -0.118,
+          "se": 0.063,
+          "contrasts": 4
+        }
+      }
+    },
+    {
+      "compound": "Phenylacetaldehyde",
+      "lever_class": "pH",
+      "band": "pH <4.5, initial or label",
+      "labs": 2,
+      "contrasts": 9,
+      "class": "direction agreed",
+      "lab_means": {
+        "porto_silva_ferreira": {
+          "mean": -0.026,
+          "se": 0.12,
+          "contrasts": 1
+        },
+        "seville_hidalgo_zamora": {
+          "mean": -0.115,
+          "se": 0.038,
+          "contrasts": 8
+        }
+      }
+    },
+    {
+      "compound": "Phenylacetaldehyde",
+      "lever_class": "precursor dose",
+      "band": "sugar varied",
+      "labs": 3,
+      "contrasts": 8,
+      "class": "no clear effect",
+      "lab_means": {
+        "astar_sifbi_chiang": {
+          "mean": 0.011,
+          "se": 0.105,
+          "contrasts": 1
+        },
+        "kasetsart_mookdasanit": {
+          "mean": 0.0,
+          "se": 0.118,
+          "contrasts": 1
+        },
+        "nus_liu_shaoquan": {
+          "mean": 0.068,
+          "se": 0.042,
+          "contrasts": 6
+        }
+      }
+    },
+    {
+      "compound": "Phenylacetaldehyde",
+      "lever_class": "precursor dose",
+      "band": "sulfur donor varied",
+      "labs": 2,
+      "contrasts": 2,
+      "class": "direction agreed",
+      "lab_means": {
+        "nus_liu_shaoquan": {
+          "mean": -0.765,
+          "se": 0.101,
+          "contrasts": 1
+        },
+        "zjut_zheng_zhou": {
+          "mean": -0.199,
+          "se": 0.1,
+          "contrasts": 1
+        }
+      }
+    },
+    {
+      "compound": "Phenylacetaldehyde",
+      "lever_class": "sugar identity",
+      "band": "none vs glucose",
+      "labs": 2,
+      "contrasts": 2,
+      "class": "no clear effect",
+      "lab_means": {
+        "nus_liu_shaoquan": {
+          "mean": -0.121,
+          "se": 0.102,
+          "contrasts": 1
+        },
+        "quest_international": {
+          "mean": 0.0,
+          "se": 0.128,
+          "contrasts": 1
+        }
+      }
+    },
+    {
+      "compound": "Phenylacetaldehyde",
+      "lever_class": "sugar identity",
+      "band": "xylose vs glucose",
+      "labs": 2,
+      "contrasts": 2,
+      "class": "no clear effect",
+      "lab_means": {
+        "hfut_wei_zhaojun": {
+          "mean": -0.23,
+          "se": 0.128,
+          "contrasts": 1
+        },
+        "quest_international": {
+          "mean": 1.301,
+          "se": 0.128,
+          "contrasts": 1
+        }
+      }
+    },
+    {
+      "compound": "Phenylacetaldehyde",
+      "lever_class": "temperature",
+      "band": "time 30-120 min",
+      "labs": 3,
+      "contrasts": 14,
+      "class": "sign changes inside one laboratory",
+      "lab_means": {
+        "nus_liu_shaoquan": {
+          "mean": -0.023,
+          "se": 0.044,
+          "contrasts": 10
+        },
+        "porto_silva_ferreira": {
+          "mean": 0.584,
+          "se": 0.113,
+          "contrasts": 1
+        },
+        "seville_hidalgo_zamora": {
+          "mean": 0.159,
+          "se": 0.059,
+          "contrasts": 3
+        }
+      }
+    },
+    {
+      "compound": "Phenylacetaldehyde",
+      "lever_class": "time",
+      "band": "T <100 C",
+      "labs": 3,
+      "contrasts": 8,
+      "class": "no clear effect",
+      "lab_means": {
+        "dfa_garching": {
+          "mean": 0.072,
+          "se": 0.101,
+          "contrasts": 1
+        },
+        "minnesota_reineccius": {
+          "mean": -0.133,
+          "se": 0.069,
+          "contrasts": 3
+        },
+        "seville_hidalgo_zamora": {
+          "mean": 0.071,
+          "se": 0.056,
+          "contrasts": 4
+        }
+      }
+    },
+    {
+      "compound": "Phenylacetaldehyde",
+      "lever_class": "time",
+      "band": "T >130 C",
+      "labs": 2,
+      "contrasts": 22,
+      "class": "direction agreed",
+      "lab_means": {
+        "dfa_garching": {
+          "mean": 0.171,
+          "se": 0.074,
+          "contrasts": 2
+        },
+        "seville_hidalgo_zamora": {
+          "mean": 0.232,
+          "se": 0.025,
+          "contrasts": 20
+        }
+      }
+    },
+    {
+      "compound": "Pyrazines",
+      "lever_class": "amino acid identity",
+      "band": "none vs arginine",
+      "labs": 2,
+      "contrasts": 2,
+      "class": "no clear effect",
+      "lab_means": {
+        "ho_network": {
+          "mean": 0.078,
+          "se": 0.128,
+          "contrasts": 1
+        },
+        "wonkwang_cho_inhee": {
+          "mean": -0.73,
+          "se": 0.128,
+          "contrasts": 1
+        }
+      }
+    },
+    {
+      "compound": "Pyrazines",
+      "lever_class": "amino acid identity",
+      "band": "none vs asparagine",
+      "labs": 2,
+      "contrasts": 2,
+      "class": "direction agreed",
+      "lab_means": {
+        "ho_network": {
+          "mean": -0.352,
+          "se": 0.128,
+          "contrasts": 1
+        },
+        "reading_mottram_parker": {
+          "mean": -1.428,
+          "se": 0.128,
+          "contrasts": 1
+        }
+      }
+    },
+    {
+      "compound": "Pyrazines",
+      "lever_class": "amino acid identity",
+      "band": "none vs glutamine",
+      "labs": 3,
+      "contrasts": 3,
+      "class": "direction agreed",
+      "lab_means": {
+        "ho_network": {
+          "mean": -0.204,
+          "se": 0.128,
+          "contrasts": 1
+        },
+        "reading_mottram_parker": {
+          "mean": -1.23,
+          "se": 0.128,
+          "contrasts": 1
+        },
+        "wonkwang_cho_inhee": {
+          "mean": -0.244,
+          "se": 0.128,
+          "contrasts": 1
+        }
+      }
+    },
+    {
+      "compound": "Pyrazines",
+      "lever_class": "amino acid identity",
+      "band": "none vs isoleucine",
+      "labs": 2,
+      "contrasts": 2,
+      "class": "direction agreed",
+      "lab_means": {
+        "ho_network": {
+          "mean": -0.291,
+          "se": 0.128,
+          "contrasts": 1
+        },
+        "reading_mottram_parker": {
+          "mean": -0.273,
+          "se": 0.128,
+          "contrasts": 1
+        }
+      }
+    },
+    {
+      "compound": "Pyrazines",
+      "lever_class": "amino acid identity",
+      "band": "none vs methionine",
+      "labs": 2,
+      "contrasts": 2,
+      "class": "direction agreed",
+      "lab_means": {
+        "reading_mottram_parker": {
+          "mean": -0.459,
+          "se": 0.128,
+          "contrasts": 1
+        },
+        "wonkwang_cho_inhee": {
+          "mean": -0.245,
+          "se": 0.128,
+          "contrasts": 1
+        }
+      }
+    },
+    {
+      "compound": "Pyrazines",
+      "lever_class": "amino acid identity",
+      "band": "phenylalanine vs none",
+      "labs": 2,
+      "contrasts": 2,
+      "class": "direction agreed",
+      "lab_means": {
+        "ho_network": {
+          "mean": 0.476,
+          "se": 0.128,
+          "contrasts": 1
+        },
+        "reading_mottram_parker": {
+          "mean": 0.574,
+          "se": 0.128,
+          "contrasts": 1
+        }
+      }
+    },
+    {
+      "compound": "Pyrazines",
+      "lever_class": "pH",
+      "band": "pH 6-7.5, initial or label",
+      "labs": 2,
+      "contrasts": 2,
+      "class": "direction agreed",
+      "lab_means": {
+        "ccnu_yu_ainong": {
+          "mean": 0.534,
+          "se": 0.102,
+          "contrasts": 1
+        },
+        "minnesota_reineccius": {
+          "mean": 1.207,
+          "se": 0.108,
+          "contrasts": 1
+        }
+      }
+    },
+    {
+      "compound": "Pyrazines",
+      "lever_class": "pH",
+      "band": "pH >7.5, initial or label",
+      "labs": 2,
+      "contrasts": 2,
+      "class": "no clear effect",
+      "lab_means": {
+        "ccnu_yu_ainong": {
+          "mean": 0.209,
+          "se": 0.108,
+          "contrasts": 1
+        },
+        "hfut_wei_zhaojun": {
+          "mean": -0.279,
+          "se": 0.187,
+          "contrasts": 1
+        }
+      }
+    },
+    {
+      "compound": "Pyrazines",
+      "lever_class": "sugar identity",
+      "band": "glucose vs fructose",
+      "labs": 2,
+      "contrasts": 3,
+      "class": "sign changes inside one laboratory",
+      "lab_means": {
+        "minnesota_reineccius": {
+          "mean": -0.056,
+          "se": 0.09,
+          "contrasts": 2
+        },
+        "reading_mottram_parker": {
+          "mean": -0.279,
+          "se": 0.146,
+          "contrasts": 1
+        }
+      }
+    },
+    {
+      "compound": "Pyrazines",
+      "lever_class": "time",
+      "band": "T 100-130 C",
+      "labs": 3,
+      "contrasts": 8,
+      "class": "direction agreed",
+      "lab_means": {
+        "hfut_wei_zhaojun": {
+          "mean": 0.666,
+          "se": 0.104,
+          "contrasts": 2
+        },
+        "ho_network": {
+          "mean": 0.113,
+          "se": 0.112,
+          "contrasts": 1
+        },
+        "ucdavis_shibamoto": {
+          "mean": 0.167,
+          "se": 0.046,
+          "contrasts": 5
+        }
+      }
+    },
+    {
+      "compound": "Trimethylpyrazine",
+      "lever_class": "amino acid identity",
+      "band": "none vs arginine",
+      "labs": 2,
+      "contrasts": 2,
+      "class": "conflict between laboratories",
+      "lab_means": {
+        "ho_network": {
+          "mean": 0.26,
+          "se": 0.128,
+          "contrasts": 1
+        },
+        "wonkwang_cho_inhee": {
+          "mean": -0.775,
+          "se": 0.1,
+          "contrasts": 1
+        }
+      }
+    },
+    {
+      "compound": "Trimethylpyrazine",
+      "lever_class": "time",
+      "band": "T 100-130 C",
+      "labs": 2,
+      "contrasts": 6,
+      "class": "direction agreed",
+      "lab_means": {
+        "ho_network": {
+          "mean": 0.097,
+          "se": 0.105,
+          "contrasts": 1
+        },
+        "ucdavis_shibamoto": {
+          "mean": 0.174,
+          "se": 0.046,
+          "contrasts": 5
+        }
+      }
+    },
+    {
+      "compound": "Unsubstituted pyrazine",
+      "lever_class": "amino acid identity",
+      "band": "none vs asparagine",
+      "labs": 2,
+      "contrasts": 2,
+      "class": "direction agreed",
+      "lab_means": {
+        "ho_network": {
+          "mean": -1.07,
+          "se": 0.128,
+          "contrasts": 1
+        },
+        "reading_mottram_parker": {
+          "mean": -1.756,
+          "se": 0.128,
+          "contrasts": 1
+        }
+      }
+    },
+    {
+      "compound": "Unsubstituted pyrazine",
+      "lever_class": "amino acid identity",
+      "band": "none vs glutamine",
+      "labs": 2,
+      "contrasts": 2,
+      "class": "direction agreed",
+      "lab_means": {
+        "ho_network": {
+          "mean": -0.796,
+          "se": 0.128,
+          "contrasts": 1
+        },
+        "reading_mottram_parker": {
+          "mean": -1.58,
+          "se": 0.128,
+          "contrasts": 1
+        }
+      }
+    },
+    {
+      "compound": "Unsubstituted pyrazine",
+      "lever_class": "amino acid identity",
+      "band": "none vs isoleucine",
+      "labs": 2,
+      "contrasts": 2,
+      "class": "direction agreed",
+      "lab_means": {
+        "ho_network": {
+          "mean": -0.099,
+          "se": 0.128,
+          "contrasts": 1
+        },
+        "reading_mottram_parker": {
+          "mean": -0.778,
+          "se": 0.128,
+          "contrasts": 1
+        }
+      }
+    },
+    {
+      "compound": "Unsubstituted pyrazine",
+      "lever_class": "amino acid identity",
+      "band": "phenylalanine vs none",
+      "labs": 2,
+      "contrasts": 2,
+      "class": "direction agreed",
+      "lab_means": {
+        "ho_network": {
+          "mean": 0.674,
+          "se": 0.128,
+          "contrasts": 1
+        },
+        "reading_mottram_parker": {
+          "mean": 1.041,
+          "se": 0.128,
+          "contrasts": 1
+        }
+      }
+    },
+    {
+      "compound": "Unsubstituted pyrazine",
+      "lever_class": "time",
+      "band": "T 100-130 C",
+      "labs": 2,
+      "contrasts": 7,
+      "class": "direction agreed",
+      "lab_means": {
+        "ho_network": {
+          "mean": 0.068,
+          "se": 0.075,
+          "contrasts": 2
+        },
+        "ucdavis_shibamoto": {
+          "mean": 0.148,
+          "se": 0.046,
+          "contrasts": 5
+        }
+      }
+    }
+  ],
+  "provenance": {
+    "artifact": "lever_disagreement_audit",
+    "generated_on": "2026-11-12",
+    "git": {
+      "commit": "e53a43b026710285661cc2dfd44b73619b53cf32",
+      "short": "e53a43b0",
+      "branch": "disagreement-audit",
+      "dirty": true
+    },
+    "generated_by": "scripts/generators/build_lever_disagreement_audit.py",
+    "inputs": [
+      {
+        "path": "docs/reference/lever_table/contrasts/Zhang2024.yml",
+        "sha256": "3ab67b0ca88bebe134d5aa54764e689d12243a44a7376643be81f319be95fa1c"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/adams2001.yml",
+        "sha256": "382e917f924eac837e679501a647ea3df5d46097cf93af2af46ed0814e7b0890"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/ames2001b.yml",
+        "sha256": "0f3da559691144f55f9ce78a9518a25d7447975ff8bb0af1da957048a86ed5ea"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/ames2001b__families.yml",
+        "sha256": "ebd9b49ce41df0001044067914ec5e8c3ce0881f29135841a76e44f8d9a26526"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/arnold1971.yml",
+        "sha256": "b7b6f953251fddf900cea0706e65f7b1727a6769b11645aedf54d29ed51c3584"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/balagiannis2009__families.yml",
+        "sha256": "08090421c50731d84a4d045118296e48d39272ea1fc5c659bd595a59abc18992"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/blank1997__families.yml",
+        "sha256": "8887cd21dba55dd33ef236926254dda160ea770691a3b63729103e855b758aa8"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/boonbumrung2023.yml",
+        "sha256": "051dff0fbe176596de81c2f9313af336118d1960ed8e86275482d8388a9bd471"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/boonbumrung2023__families.yml",
+        "sha256": "301e3f663bb2575eee0bf9ed4a7bf40813da1d7b4f17a90ff168d8def628c6b4"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/cerny2007.yml",
+        "sha256": "79440bc09e637af4d7dc9fd6add50e3aa52933cc97da9d94c324aa8441e08842"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/cerny2007__families.yml",
+        "sha256": "c393054bee91e33be719cb52793e8198597f872ae0493c0cadeb9a5d3accfe1b"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/chan1994b__families.yml",
+        "sha256": "88b2457b03d7844912a2e7db41709a95673fa04f69363a5c5b7a45374c9f476d"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/chen2023lycium.yml",
+        "sha256": "2b050760f603c5c31953b8f7cd6ddecca3645f076ed5abf0aa901e73b1b6791a"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/chen2023lycium__families.yml",
+        "sha256": "9e7784570e4668762269caeb2451ee9da665d657df980b0618195d26de765b5b"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/chen2024coprinus.yml",
+        "sha256": "3e95cf7b823dff5af417fc0c9a09286f616443ebd45113746d95c89f26b87047"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/chen2024coprinus__families.yml",
+        "sha256": "6c68d392c2776d72ad65082499abebb6bb528d3c754b4b83ed75d4900b3c4c5b"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/cremer2000b.yml",
+        "sha256": "bedd9e669a7cb72efc117241f13397148bdb57a8a0c0947e57697c6ae0b81081"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/cremer2000b__families.yml",
+        "sha256": "ac5178769ffffee086b643c476693d6572ae87dc1d7b9c81b71984e425b60c32"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/cremer2000c.yml",
+        "sha256": "6518f0857ee00a426548b9a4eab087d5be2b8c5e743046b5675d5620ef60ef7e"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/cremer2000c__families.yml",
+        "sha256": "7e9428c8e1171ec3e17bb30219186ed3a9b288f13804cba9aa4484ad124966b6"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/ding2023.yml",
+        "sha256": "fadf5888bf21641e969b225d24f4b7a93de4747d17a77f25de443029ac26ab93"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/ding2023__families.yml",
+        "sha256": "d779d4108837769c543468940b1ef09eef9ff6b582ef9fe709dd0684f9fc406e"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/du2023__families.yml",
+        "sha256": "9914b6a6d289e6790d0d46a4b8ef2ac4dd6a19278a50d92bf00a894d17637b99"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/du2025__families.yml",
+        "sha256": "012ca89304ae5642aa9d645f54ea80456023e221ca73d4db3904343dc54d6784"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/elmore1997__families.yml",
+        "sha256": "805fb646c248fbf89ee29dec14f2a5d821de2ba3547b2716273b7d735f7ff02f"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/elmore2002.yml",
+        "sha256": "72d12c2e6887c7d66693b88e85e0daaed19aedf896598a3243de989d431f398a"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/elmore2002__families.yml",
+        "sha256": "cbd7f9e190dbb785b27f3ee8e86b1e4c69ab14c7d90c10009cd50f71fe469a99"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/farmer1990.yml",
+        "sha256": "9bdd916ed84b09e2aa9c0d5df0682e7bbaa0f1a63843e2411f1757d321362d30"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/farmer1992__families.yml",
+        "sha256": "6c2f8a485d0377b612119b6ace49b1ccffc5d34592edaf92ef82af6cdb0ae6f7"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/feng2022.yml",
+        "sha256": "7122d8df4eccb64a96f7c853e2371f3f19f7483b6ce78c87cc40d49627120877"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/granvogl2006__families.yml",
+        "sha256": "c1dc74790cfedd9dce7a05a1149e242f62e6a98d259598ee30fcf03107ae4aa3"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/grosch1992.yml",
+        "sha256": "e09d4a48c11445e141058b55c222b06e7715b792088aefa583cb011b7e4a1d39"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/guentert1990.yml",
+        "sha256": "0a0759ebdb09230944f920aaaf7474f7f146397616a2eb9ff407577572885940"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/guentert1990__families.yml",
+        "sha256": "ba065d658e80ae05095fc32fd3f262148cbd43f69f6b8fa0198eb66ec31d1fd2"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/guo2010brassica.yml",
+        "sha256": "baad073c012e61655819ffcc0e6bf1392402af2bff8bd9b118a11401a2bce53c"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/guo2010brassica__families.yml",
+        "sha256": "de4d46d38b388e6e3174afeb4ec54c98d32d5fb1c0e71e295ac65fa6f1a3b4bc"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/haleva1999__families.yml",
+        "sha256": "bc875461bbbfce43ad5b8ee8c836ee34586029b79c2a7e3c64287650aad34389"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/hartman1984b.yml",
+        "sha256": "c4d4b43ba2c0a3d1b37f2c35dc9e3044206fbd10013f60234610fb32ddc2f138"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/hidalgo1993__families.yml",
+        "sha256": "01787f01adea48e5521c4cf3dfb91e8127847eeb71fe7a30c548c4e808d7d344"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/hidalgo2013__families.yml",
+        "sha256": "202e59df36c3ecfc902d2192b7bc1a291244f340e80862492d1ed638c5ae7fb0"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/hincelin1992.yml",
+        "sha256": "831d2d054e56b6b23e477eb8b1111e9e7b93f6516d6043962ff1d41da1ab7a76"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/hofmann1998.yml",
+        "sha256": "a11a08104d2f92c89a8507fda499868f150d7f1b935921776d35c34b939d29c2"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/hofmann2000__families.yml",
+        "sha256": "ff5cc1c1767a7396935aa03f4c21a409617e6d5f94273a447d24a4fdec05252b"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/hofmann2000b__families.yml",
+        "sha256": "3a6e5a8c51bed9c05fbd1f4a2fbfaf369d5f291db2d105873dbb3365e597b7b3"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/hwang1995__families.yml",
+        "sha256": "56186a354b7a2664d806cc7d4112a7f746d49f37136dfc84416d3966c57fcc4b"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/hwang1995b__families.yml",
+        "sha256": "607e5a900e8f18723008a15853b8265139816477605d83280303ebf00ab8321d"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/kobayasi1965.yml",
+        "sha256": "e9eca2f0073ed90b413b314d15eff84bc18c1ff65d3253eedc40440e5946617e"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/kumazawa2003.yml",
+        "sha256": "d70f831f68f08d2f079083436cfe2ee8232f6c9f36c9722f0de6a8f0d8039471"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/leahy1989__families.yml",
+        "sha256": "506a543d43532f5f2eeef4a5a1e5a750058c3531230237bc08086661bb86edef"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/leahy1989a__families.yml",
+        "sha256": "83ce385ebe5713e4e36a0de0f28875cafea71b89e25c201112d14ee2a44b9e7b"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/li2021lab.yml",
+        "sha256": "feb9f2d1525aebb5dd7fab5b959fbda2a084e0f3d2a16ca6336fcade1bc151bd"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/li2021lab__families.yml",
+        "sha256": "f39d2e0469ecfcb9b1549a43e5b2f3b96b453582e26ed8d1e798f15c01e40d6d"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/li2021ph.yml",
+        "sha256": "c1d68ed62ad8108412501c3ba9cd8aec9df51fc5bf22830aae60f22bdae0b083"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/li2021ph__families.yml",
+        "sha256": "bfa1e7105c3c3e48cb718611c22ff20451f0214a93e796f7cc1a5ef255b4d0f9"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/li2022heat.yml",
+        "sha256": "be8fe9b067dca9f89be6fe5b750af9ea26ca679b31d65e872aa55dc55edf440d"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/li2022heat__families.yml",
+        "sha256": "f9ba2c53a8aea2f6a64e2dabf4c52e0efb8349aca444e853b5809c888ec24717"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/mandin1999__families.yml",
+        "sha256": "109c67f04f9378fc5be29b9472df49d169d46d324452c522034d67ea1bb3a54d"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/marrufo-curtido2022.yml",
+        "sha256": "6b3295c43bac3b147356a7d1b430b101ce8823709f4daabf4942e19bafac28a9"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/marrufo-curtido2022__families.yml",
+        "sha256": "ad6c96facc831417b3ae6342f42477d00644df4795c5708c5aef1d19b4aca342"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/martin2001__families.yml",
+        "sha256": "451bfdec8b569cacadb3f91ef45492d3ded6288c920e66680f426104bdf2c7b3"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/meynier1995.yml",
+        "sha256": "55cc4c0568aab56174c676c43965991573f3362e549140a3f5fa1f4a353fb979"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/meynier1995__families.yml",
+        "sha256": "aa61e5c6aee5c83cc98a0ea9895c2093e297979e9e964737d3ef825ae97c205c"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/meynier2004__families.yml",
+        "sha256": "6c1474ff6d1610503ad95f6511ac0db301067c53ff031ba07f5ee561464eee61"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/mikami2017__families.yml",
+        "sha256": "28faacbf0b852eeab9759a1cb9580056ba69c64f17367b51ae414fc50755804d"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/mizutani1960.yml",
+        "sha256": "36b5461c1c8bf9bb829192c1481118b46bcaabf7689f555bbdb5a1cbf8842821"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/monforte2021__families.yml",
+        "sha256": "8ed92a2f514aacfb85653585afd0e920c2375f1031ceea84c922e873fec8fdb5"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/mottram2002.yml",
+        "sha256": "d9858cc2fd75a60ebc63ae4ed49b7293a8577bbdbee5b2cbcf0a3444f1060c98"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/mottram2002__families.yml",
+        "sha256": "bd26da477256cc123ac7ab1699d258f8ebd52db4eb029a287c762abf6aeb30c6"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/obata1960.yml",
+        "sha256": "7e1339147e9ad3a0ebec9e114c3040059f84f2e4be30b4ae6f837cbab2c1d5c6"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/park2022mealworm.yml",
+        "sha256": "5c61831419635752ce2209681690b67a3ee12f09d20d8d7a9a11f112e3a97271"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/park2022mealworm__families.yml",
+        "sha256": "cb031ae54a4f4ae264b6fc55aaaecfed324763a61572befcb775c99d61ee6439"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/sarkisyan2025.yml",
+        "sha256": "0ec71c779f8e523e5092e77e151fbfa86f9ba54d411f9a094a9ce3865ba0c379"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/sarkisyan2025__families.yml",
+        "sha256": "aef940d527aee14b4add76cc641f90619a93de60e2832f52dba2fd13cb8d366b"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/sasanam2022.yml",
+        "sha256": "af7709fcc184ceaf9a3be6ce9c9f83eedbe40a63c81b483c20193f4ac4a8457b"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/sasanam2022__families.yml",
+        "sha256": "4eb71ff056048c3af84c701c0a52a9ee57cb0d22c491be3be9990d759e1d63ef"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/scalone2015__families.yml",
+        "sha256": "467d1c1c1173b1b5ccea0cdb8cf94ecd09da673e4c49d456d3f485f55c817045"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/schirle1992__families.yml",
+        "sha256": "812d753d360d5560bf7d6f967626320c7e96ee602bf7c7d5b33247e57b1ac098"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/shibamoto1977__families.yml",
+        "sha256": "fa55f8d209a461fd2bdc90e3be0e4a7ad7b06cfcf2877bfa22a6fda7e5d2bdb1"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/shu1985.yml",
+        "sha256": "38ed130813edfa52e60595fedf907f1634bb56f26984c229a34c9482fe970007"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/sun2020.yml",
+        "sha256": "1ee70f2ad7bb382d6877e1f1dfeda34a219bb7dfebcc3c4d1f044a961ebdf6e0"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/sun2020__families.yml",
+        "sha256": "061a553083b56ea4bd4da271ff60af6b5615ba9e9f5b87b3925caacbc1b312da"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/tai1997.yml",
+        "sha256": "b65a9d2692b0b094bb687d4a81080ed289dc5590733899b8a2467c40afefce86"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/tai1998.yml",
+        "sha256": "423d75015439d6c4f344291ada8b48fa99e799dec7a4a505c559997002f47c3e"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/theng2024.yml",
+        "sha256": "4c9999b513925e2857cafcf8999cfd319d2da3cf3261d8b545f91e3dbd7cdb6a"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/theng2024__families.yml",
+        "sha256": "664989a591fd999af7d78c8cd8254ec9c4cf89d2f6ac3a6b0fdf250f118b06a3"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/thomas2014.yml",
+        "sha256": "a4feee4e1cc32a02e410e75de89967c483ca8fd004cfc490fb2594f1a44b3566"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/us10076126.yml",
+        "sha256": "0ab75b3b0d25c98c1f98848835bc945148d36b868e6132d4b43f66781b399a4a"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/vanlancker2010__families.yml",
+        "sha256": "ed48dbd0b0ffe57c042d86b50bc7e9dda705937f0d74ba39b64cecab8e41327e"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/vanlancker2012__families.yml",
+        "sha256": "2972c678e0c78fc3299315b379dde822969fd12af722bcc4f240ba15ce66781a"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/vanseeventer2001.yml",
+        "sha256": "1ac09daa2c684da5348845aa1ed873b54acb5f5b3f2a9ddfefcc54b4ac5c676e"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/weenen2001__families.yml",
+        "sha256": "0b675e7aaac4882a000a90f5d61c9a2010d4397bf75a5b952f0ba51711e4781f"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/wei2019flax.yml",
+        "sha256": "f1826906979e29aea3e170320ad8b2031ec5da0a8ac4d1f9fa5a87bf3205a80d"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/wei2019flax__families.yml",
+        "sha256": "a975717167bce5e6d92db24ec50103b9dac5f6e45ae559b3cc361281673c9279"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/whitfield1988__families.yml",
+        "sha256": "1a38054047a832773531ffd7b8ec450c96b9a591faf6cbf9ae5e331fffa6970c"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/xu2007.yml",
+        "sha256": "913d56978d33f812063876b0c9b936989e8705530a74505816bdc4bab03a159f"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/xu2007__families.yml",
+        "sha256": "08fe8d69afae6600031eb40040ccc5ecbb32f964204e3f6c2c39084cdf98ea64"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/xu2011__families.yml",
+        "sha256": "0991efd64bc0594bb7821ff51ca069d132681bbc24092d63dd3e64501b4dc35c"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/yiltirak2026__families.yml",
+        "sha256": "9dfb9debb42279bb1294ad7e08448b13b8adc2ada5409003e891493d5776877c"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/yu2010.yml",
+        "sha256": "0fbeaf437cc3b3d14398ea94c2cbdd78987492519a6eb1b70a904cd62cd11e7e"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/yu2010__families.yml",
+        "sha256": "1d290c4fc018a50d833974b295023e27ef0d69bb3b4f57ee11e79bbdc46e3789"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zamora2006__families.yml",
+        "sha256": "a52844390176d8a4b58514cd72a1d0fa73c20f2a9ca1057f3b7f3cdf685d3be9"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zamora2007__families.yml",
+        "sha256": "bdaf5d603b5589f903df99cdb12e6857de97772b2209facc53bd7ab93ef028d5"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zamora2008__families.yml",
+        "sha256": "988bfada65606280dfc3958cb502455fede510aba30082584270b5b8b5a662ac"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zamora2013__families.yml",
+        "sha256": "0f712c5aadd503242f258bb9f6ce509ccf369b266d908c62302f32a5d3dae3d4"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zamora2015__families.yml",
+        "sha256": "d5058ce2634ec774095822f7c6ab9430e49d4c61d2704fe0d4eeedf66eb704dc"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zamora2020__families.yml",
+        "sha256": "d9c95b20a334171ab54d9b42396efe18b7b89d413da0a45b616e3ed02e4420c2"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zhang1988.yml",
+        "sha256": "d8d59114cfbaaafda8446e95267f546a68ab3af5db7fca6a4675b84f9aee92f8"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zhang1989__families.yml",
+        "sha256": "b17d1a5d8c8ba9ad44e3e59ef590c81e1e74db0f68c932b18942defc9df635d8"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zhang1991.yml",
+        "sha256": "47d142c1d6ee57d654dc4096276a4eb8b487ffc3ad8cbb1e724c5b4dcef792c5"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zhang1991b.yml",
+        "sha256": "3d5e5b4d5f951b2e6f67b4512d6c00e5eb268515019ca50af75b1d4003e884bc"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zhang2018soypep.yml",
+        "sha256": "432dad3f73a988b02ff45bbcd274603b6a2490cfae152c48551419e215e7220c"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zhang2018soypep__families.yml",
+        "sha256": "01ddd39531f7618496d670d1ce852893d556db8c120f8f290526947ebe49bb9f"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zhang2022pleurotus.yml",
+        "sha256": "efb1ee73509d74839669d5b159285f136b4efbd3694ed76b4b37842238ef7029"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zhang2022pleurotus__families.yml",
+        "sha256": "fc8a87fa982864c4248d94664fbdf490e52e0288739c17a040f3bbcfdbd0a3bc"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zhang2024sugars.yml",
+        "sha256": "12ad28898984e90ea1c19a18ac9aea2044c8798822ff4016393adafbaf8084e6"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zhang2024sugars__families.yml",
+        "sha256": "31fd3b84cfd86d4eb5f66772361bd8c30e7a8ff14109ed8fc6ad922464443d63"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zheng1994.yml",
+        "sha256": "f092b3a0a3d1a755d10fb484799d8ef8d68177d68df172c013b58591772f9be3"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zhou2022__families.yml",
+        "sha256": "e8f5ffb28ba3ddb5bd20c9b0df2697777e61105eaf33e1b79e60d48df367cb79"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zhou2023.yml",
+        "sha256": "6a0e93487ef6ae9dfa23956f8388a5869e598f7f3d5129d5c3250b91c6204ee8"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zhou2023c.yml",
+        "sha256": "85182525c3b45952be61e1341a78a7af8be334345200d6438dc39cca29a0e498"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zhou2023c__families.yml",
+        "sha256": "5f251761746b3d7c5ee24f540d5e788bf88d6d0f616603757e11d511c7f6a90a"
+      },
+      {
+        "path": "docs/reference/contrast_benchmark/split.yml",
+        "sha256": "1098b4b420330aa737497f6c855454c732dc394ce2007be6fd94dd9933cb36ac"
+      },
+      {
+        "path": "docs/reference/lever_table/new_labs.yml",
+        "sha256": "cf57620a5ca17e6703490ed3adc3ec7793b8628f51948660032c1be75a0f2842"
+      }
+    ]
+  }
+}

@@ -1,0 +1,250 @@
+source: cremer2000c
+pdf: data/articles/cremer2000c.pdf
+reader: resolved
+scope_note: 'Group F. Only Fig. 1 prints values (no table): 2-MB and 3-MB are given only as mol% of their own sum (quantity:
+  share); the absolute amount is printed only for that sum (right axis), which is not a listed odorant, so not keyed. Arm
+  values digitised and read so that each pair sums to ~100; 2-MB at ratio 0 is a plotted 0. The Fru-Leu/OPD experiment prints
+  no numbers (text only): not keyed.'
+contrasts:
+- id: cremer2000c-1
+  odorant: 2-Methylbutanal
+  lever_class: precursor dose
+  lever: isoleucine dose at constant fructose-leucine (molar ratio Ile/Fru-Leu)
+  focal: true
+  location: Fig. 1 (left y-axis), p. 401
+  digitised: true
+  unit: mol% of the molar sum 2-MB + 3-MB
+  quant_type: relative
+  quantity: share
+  time_course_rule: not a time course
+  resolution: agreed
+  arms:
+  - label: Ile/Fru-Leu 0:1
+    lever_value: 0
+    value: 0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 90
+      time_min: 60
+      precursors:
+        fructose-leucine (ARP): 250 ul of 0.1 M (7.3 mg) per model
+        L-isoleucine: 0 ul of 0.1 M
+      buffer: 2.0 ml 0.1 M citrate pH 7.0 (before freeze-drying)
+      matrix: other (freeze-dried on microcrystalline cellulose, ~1 g; a_w 0.75)
+      headspace: sealed, unstated
+  - label: Ile/Fru-Leu 0.25:1
+    lever_value: 0.25
+    value: 49.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 90
+      time_min: 60
+      precursors:
+        fructose-leucine (ARP): 250 ul of 0.1 M (7.3 mg) per model
+        L-isoleucine: 62.5 ul of 0.1 M
+      buffer: 2.0 ml 0.1 M citrate pH 7.0 (before freeze-drying)
+      matrix: other (freeze-dried on microcrystalline cellulose, ~1 g; a_w 0.75)
+      headspace: sealed, unstated
+  - label: Ile/Fru-Leu 0.5:1
+    lever_value: 0.5
+    value: 63.5
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 90
+      time_min: 60
+      precursors:
+        fructose-leucine (ARP): 250 ul of 0.1 M (7.3 mg) per model
+        L-isoleucine: 125 ul of 0.1 M
+      buffer: 2.0 ml 0.1 M citrate pH 7.0 (before freeze-drying)
+      matrix: other (freeze-dried on microcrystalline cellulose, ~1 g; a_w 0.75)
+      headspace: sealed, unstated
+  - label: Ile/Fru-Leu 1:1
+    lever_value: 1
+    value: 71.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 90
+      time_min: 60
+      precursors:
+        fructose-leucine (ARP): 250 ul of 0.1 M (7.3 mg) per model
+        L-isoleucine: 250 ul of 0.1 M
+      buffer: 2.0 ml 0.1 M citrate pH 7.0 (before freeze-drying)
+      matrix: other (freeze-dried on microcrystalline cellulose, ~1 g; a_w 0.75)
+      headspace: sealed, unstated
+  - label: Ile/Fru-Leu 2.5:1
+    lever_value: 2.5
+    value: 74.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 90
+      time_min: 60
+      precursors:
+        fructose-leucine (ARP): 250 ul of 0.1 M (7.3 mg) per model
+        L-isoleucine: 625 ul of 0.1 M
+      buffer: 2.0 ml 0.1 M citrate pH 7.0 (before freeze-drying)
+      matrix: other (freeze-dried on microcrystalline cellulose, ~1 g; a_w 0.75)
+      headspace: sealed, unstated
+  - label: Ile/Fru-Leu 5:1
+    lever_value: 5
+    value: 73.5
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 90
+      time_min: 60
+      precursors:
+        fructose-leucine (ARP): 250 ul of 0.1 M (7.3 mg) per model
+        L-isoleucine: 1.25 ml of 0.1 M
+      buffer: 2.0 ml 0.1 M citrate pH 7.0 (before freeze-drying)
+      matrix: other (freeze-dried on microcrystalline cellulose, ~1 g; a_w 0.75)
+      headspace: sealed, unstated
+- id: cremer2000c-2
+  odorant: 3-Methylbutanal
+  lever_class: precursor dose
+  lever: isoleucine dose at constant fructose-leucine (molar ratio Ile/Fru-Leu)
+  focal: true
+  location: Fig. 1 (left y-axis), p. 401
+  digitised: true
+  unit: mol% of the molar sum 2-MB + 3-MB
+  quant_type: relative
+  quantity: share
+  time_course_rule: not a time course
+  resolution: agreed
+  arms:
+  - label: Ile/Fru-Leu 0:1
+    lever_value: 0
+    value: 100
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 90
+      time_min: 60
+      precursors:
+        fructose-leucine (ARP): 250 ul of 0.1 M (7.3 mg) per model
+        L-isoleucine: 0 ul of 0.1 M
+      buffer: 2.0 ml 0.1 M citrate pH 7.0 (before freeze-drying)
+      matrix: other (freeze-dried on microcrystalline cellulose, ~1 g; a_w 0.75)
+      headspace: sealed, unstated
+  - label: Ile/Fru-Leu 0.25:1
+    lever_value: 0.25
+    value: 50.8
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 90
+      time_min: 60
+      precursors:
+        fructose-leucine (ARP): 250 ul of 0.1 M (7.3 mg) per model
+        L-isoleucine: 62.5 ul of 0.1 M
+      buffer: 2.0 ml 0.1 M citrate pH 7.0 (before freeze-drying)
+      matrix: other (freeze-dried on microcrystalline cellulose, ~1 g; a_w 0.75)
+      headspace: sealed, unstated
+  - label: Ile/Fru-Leu 0.5:1
+    lever_value: 0.5
+    value: 36.5
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 90
+      time_min: 60
+      precursors:
+        fructose-leucine (ARP): 250 ul of 0.1 M (7.3 mg) per model
+        L-isoleucine: 125 ul of 0.1 M
+      buffer: 2.0 ml 0.1 M citrate pH 7.0 (before freeze-drying)
+      matrix: other (freeze-dried on microcrystalline cellulose, ~1 g; a_w 0.75)
+      headspace: sealed, unstated
+  - label: Ile/Fru-Leu 1:1
+    lever_value: 1
+    value: 29.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 90
+      time_min: 60
+      precursors:
+        fructose-leucine (ARP): 250 ul of 0.1 M (7.3 mg) per model
+        L-isoleucine: 250 ul of 0.1 M
+      buffer: 2.0 ml 0.1 M citrate pH 7.0 (before freeze-drying)
+      matrix: other (freeze-dried on microcrystalline cellulose, ~1 g; a_w 0.75)
+      headspace: sealed, unstated
+  - label: Ile/Fru-Leu 2.5:1
+    lever_value: 2.5
+    value: 26.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 90
+      time_min: 60
+      precursors:
+        fructose-leucine (ARP): 250 ul of 0.1 M (7.3 mg) per model
+        L-isoleucine: 625 ul of 0.1 M
+      buffer: 2.0 ml 0.1 M citrate pH 7.0 (before freeze-drying)
+      matrix: other (freeze-dried on microcrystalline cellulose, ~1 g; a_w 0.75)
+      headspace: sealed, unstated
+  - label: Ile/Fru-Leu 5:1
+    lever_value: 5
+    value: 27.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 90
+      time_min: 60
+      precursors:
+        fructose-leucine (ARP): 250 ul of 0.1 M (7.3 mg) per model
+        L-isoleucine: 1.25 ml of 0.1 M
+      buffer: 2.0 ml 0.1 M citrate pH 7.0 (before freeze-drying)
+      matrix: other (freeze-dried on microcrystalline cellulose, ~1 g; a_w 0.75)
+      headspace: sealed, unstated

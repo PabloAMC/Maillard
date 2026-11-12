@@ -184,3 +184,18 @@ variance of that mean. Interactions are reported in the study, not in the table.
 sec. 3 says. The one literature cell answered today (MFT, no sulfur source vs cysteine) was checked under the same
 collapse: it stays answered in all eight one-contrast-per-laboratory subsamples.
 
+
+**A5 (2026-11-12, AFTER the all-data table was read; a correction, not a blind rule).** *Reason:* sec. 4 defines
+the precursor-dose step as "a doubling of the varied precursor's concentration" and pools every such contrast of an
+odorant in one cell. Doubling cysteine and doubling a sugar are different levers and move a thiol in opposite
+directions; the disagreement audit (STATUS_AND_PLAN sec. 0, step 5b) found that five of the 14 cells with three
+laboratories that read "direction unclear" were precursor-dose cells, pooled over different precursors. The pooled
+cell answers no question a formulator asks. *Rule:* a precursor-dose cell is banded by the kind of precursor varied:
+sulfur donor (cysteine, cystine, glutathione, thiamine, methionine, H2S), sugar, amino acid, lipid oxidation
+product, other. The kind is read from the precursor whose printed amount differs between the arms, else from the
+contrast's `lever` text (`precursor_class` in `build_lever_table.py`). *Because this amendment was written after
+the data were seen,* the audit record (`results/validation/lever_disagreement_audit.md`) reports the pooled cells
+beside the banded ones, and a banded cell that becomes "answered" is marked as answered under A5.
+*Outcome (same day):* banding moves no reading. The six precursor-dose cells with three laboratories stay "direction
+unclear" (their effects per doubling are small and often non-monotone), and no banded cell becomes answered; the two
+pooled cells the audit classed as a conflict between laboratories are no longer one.

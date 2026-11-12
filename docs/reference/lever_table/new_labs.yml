@@ -147,3 +147,47 @@ yu2010:
   pdf: data/articles/yu2010.pdf
   priority: 0
   cells: "sulfur volatiles from a cysteine / sugar model system (design to be read by the keying readers)"
+
+# ---- 2026-11-12, second registration: lever-study papers among the 19 downloaded for the disagreement audit
+# (STATUS_AND_PLAN sec. 0 step 5b). Registered from author lines and affiliations only, BEFORE any reader file exists
+# and before any of their results was read. Papers from laboratories already in split v1 are listed too, so that
+# build_lever_table.py maps them to that laboratory (and its partition) instead of counting them as unmapped.
+sun2020:
+  lab: ho_network
+  lab_name: "Jiangnan University (Zhang Xiaoming, Cui Heping), with Nottingham (Fisk); split v1's Ho network"
+  doi: 10.1016/j.foodchem.2020.126754
+  pdf: data/articles/sun2020.pdf
+  collaborations: [nottingham_fisk]
+  note: "Lead group Jiangnan (rule 4); Jiangnan's Zhang / Cui papers are already the Ho network (DEVELOPMENT)."
+ames2001b:
+  lab: reading_mottram_parker
+  lab_name: "University of Reading (Ames), with Campden and Chorleywood"
+  doi: 10.1021/jf010198m
+  pdf: data/articles/ames2001b.pdf
+  note: "lab_ids.yml chains the Ames papers into the Reading lab (rule 2); DEVELOPMENT."
+cremer2000b:
+  lab: munster_eichner
+  lab_name: "Universitaet Muenster (Eichner)"
+  doi: 10.1007/s002170000192
+  pdf: data/articles/cremer2000b.pdf
+cremer2000c:
+  lab: munster_eichner
+  lab_name: "Universitaet Muenster (Eichner)"
+  doi: 10.1007/s002170000196
+  pdf: data/articles/cremer2000c.pdf
+guentert1990:
+  lab: haarmann_reimer_werkhoff
+  lab_name: "Haarmann & Reimer GmbH, Holzminden, research department (Werkhoff)"
+  doi: 10.1021/jf00101a007
+  pdf: data/articles/guentert1990.pdf
+ding2023:
+  lab: zjut_zheng_zhou
+  lab_name: "Zhejiang University of Technology (Zheng Renchao, Zhou Xuxia)"
+  doi: 10.1186/s40643-023-00714-8
+  pdf: data/articles/ding2023.pdf
+marrufo-curtido2022:
+  lab: zaragoza_ferreira_escudero
+  lab_name: "Universidad de Zaragoza, IA2 (Ferreira, Escudero)"
+  doi: 10.3390/molecules27103056
+  pdf: data/articles/marrufo-curtido2022.pdf
+  note: "Wine oxidation at pH 3 - 4; whether it is a heated Maillard system (PREREG sec. 1) is for the readers."

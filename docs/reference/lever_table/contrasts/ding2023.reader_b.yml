@@ -1,0 +1,219 @@
+source: ding2023
+pdf: data/articles/ding2023.pdf
+reader: b
+scope_note: 'Cysteine ladder A-E (heated 110 C, 60 min); unheated sample F is not a lever arm and is not keyed. Methyl furfuryl disulfide (not on the list) not keyed. ND has no printed LOD: nd_no_limit.'
+contrasts:
+- id: ding2023-1
+  odorant: 2-methyl-3-furanthiol
+  lever_class: precursor dose
+  lever: L-cysteine addition 0 / 0.25 / 0.5 / 0.75 / 1.0% (groups A-E)
+  focal: true
+  location: Table 2 row 12, p. 9
+  digitised: false
+  unit: ng/g (semi-quantitative vs internal standard 1,2-dichlorobenzene)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: A (0% cysteine)
+    lever_value: 0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 110
+      time_min: 60
+      precursors:
+        fish protein hydrolysate (snakehead waste): unstated amount in 10 mL
+        D-xylose: 0.25%
+        L-cysteine: 0%
+      buffer: none (pH adjusted with 1 M NaOH)
+      matrix: other (fish protein hydrolysate solution)
+      headspace: sealed, unstated
+  - label: B (0.25% cysteine)
+    lever_value: 0.25
+    value: 4.31
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.25
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 110
+      time_min: 60
+      precursors:
+        fish protein hydrolysate (snakehead waste): unstated amount in 10 mL
+        D-xylose: 0.25%
+        L-cysteine: 0.25%
+      buffer: none (pH adjusted with 1 M NaOH)
+      matrix: other (fish protein hydrolysate solution)
+      headspace: sealed, unstated
+  - label: C (0.5% cysteine)
+    lever_value: 0.5
+    value: 18.16
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.23
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 110
+      time_min: 60
+      precursors:
+        fish protein hydrolysate (snakehead waste): unstated amount in 10 mL
+        D-xylose: 0.25%
+        L-cysteine: 0.5%
+      buffer: none (pH adjusted with 1 M NaOH)
+      matrix: other (fish protein hydrolysate solution)
+      headspace: sealed, unstated
+  - label: D (0.75% cysteine)
+    lever_value: 0.75
+    value: 43.73
+    censor: none
+    limit: null
+    n: 3
+    sd: 3.52
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 110
+      time_min: 60
+      precursors:
+        fish protein hydrolysate (snakehead waste): unstated amount in 10 mL
+        D-xylose: 0.25%
+        L-cysteine: 0.75%
+      buffer: none (pH adjusted with 1 M NaOH)
+      matrix: other (fish protein hydrolysate solution)
+      headspace: sealed, unstated
+  - label: E (1.0% cysteine)
+    lever_value: 1.0
+    value: 55.35
+    censor: none
+    limit: null
+    n: 3
+    sd: 3.87
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 110
+      time_min: 60
+      precursors:
+        fish protein hydrolysate (snakehead waste): unstated amount in 10 mL
+        D-xylose: 0.25%
+        L-cysteine: 1.0%
+      buffer: none (pH adjusted with 1 M NaOH)
+      matrix: other (fish protein hydrolysate solution)
+      headspace: sealed, unstated
+- id: ding2023-2
+  odorant: furfuryl mercaptan (2-furfurylthiol)
+  lever_class: precursor dose
+  lever: L-cysteine addition 0 / 0.25 / 0.5 / 0.75 / 1.0% (groups A-E)
+  focal: true
+  location: Table 2 row 17, p. 9
+  digitised: false
+  unit: ng/g (semi-quantitative vs internal standard 1,2-dichlorobenzene)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: A (0% cysteine)
+    lever_value: 0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 110
+      time_min: 60
+      precursors:
+        fish protein hydrolysate (snakehead waste): unstated amount in 10 mL
+        D-xylose: 0.25%
+        L-cysteine: 0%
+      buffer: none (pH adjusted with 1 M NaOH)
+      matrix: other (fish protein hydrolysate solution)
+      headspace: sealed, unstated
+  - label: B (0.25% cysteine)
+    lever_value: 0.25
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 110
+      time_min: 60
+      precursors:
+        fish protein hydrolysate (snakehead waste): unstated amount in 10 mL
+        D-xylose: 0.25%
+        L-cysteine: 0.25%
+      buffer: none (pH adjusted with 1 M NaOH)
+      matrix: other (fish protein hydrolysate solution)
+      headspace: sealed, unstated
+  - label: C (0.5% cysteine)
+    lever_value: 0.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 110
+      time_min: 60
+      precursors:
+        fish protein hydrolysate (snakehead waste): unstated amount in 10 mL
+        D-xylose: 0.25%
+        L-cysteine: 0.5%
+      buffer: none (pH adjusted with 1 M NaOH)
+      matrix: other (fish protein hydrolysate solution)
+      headspace: sealed, unstated
+  - label: D (0.75% cysteine)
+    lever_value: 0.75
+    value: 209.8
+    censor: none
+    limit: null
+    n: 3
+    sd: 12.41
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 110
+      time_min: 60
+      precursors:
+        fish protein hydrolysate (snakehead waste): unstated amount in 10 mL
+        D-xylose: 0.25%
+        L-cysteine: 0.75%
+      buffer: none (pH adjusted with 1 M NaOH)
+      matrix: other (fish protein hydrolysate solution)
+      headspace: sealed, unstated
+  - label: E (1.0% cysteine)
+    lever_value: 1.0
+    value: 111.6
+    censor: none
+    limit: null
+    n: 3
+    sd: 8.3
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 110
+      time_min: 60
+      precursors:
+        fish protein hydrolysate (snakehead waste): unstated amount in 10 mL
+        D-xylose: 0.25%
+        L-cysteine: 1.0%
+      buffer: none (pH adjusted with 1 M NaOH)
+      matrix: other (fish protein hydrolysate solution)
+      headspace: sealed, unstated

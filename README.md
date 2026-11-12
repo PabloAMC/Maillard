@@ -31,8 +31,8 @@ sections below say which data.
 
 ## What we found
 
-- **The published record answers very little about levers.** 67 sources and 1,571 within-study
-  contrasts from 29 laboratories, each read by two blind readers, answer four formulator questions:
+- **The published record answers very little about levers.** 70 sources and 1,643 within-study
+  contrasts from 31 laboratories, each read by two blind readers, answer four formulator questions:
   leaving out cysteine lowers 2-methyl-3-furanthiol about sixfold; xylose gives about three times
   the methional of glucose; and raising the pH lowers 2-furfurylthiol (pH 6 - 7.5) and furfural
   (pH 4.5 - 6), the last two on a weak prior-dominated footing. The rest is one laboratory per question, peak areas, several things changed at once, and
