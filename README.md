@@ -35,7 +35,7 @@ sections below say which data.
   contrasts from 31 laboratories, each read by two blind readers, answer four formulator questions:
   leaving out cysteine lowers 2-methyl-3-furanthiol about sixfold; xylose gives about three times
   the methional of glucose; and raising the pH lowers 2-furfurylthiol (pH 6 - 7.5) and furfural
-  (pH 4.5 - 6), the last two on a weak prior-dominated footing. The rest is one laboratory per question, peak areas, several things changed at once, and
+  (pH 4.5 - 6), the last two on a weak footing that the table itself marks fragile (each loses its third laboratory under a stricter reading). The rest is one laboratory per question, peak areas, several things changed at once, and
   **four heated plant- or fungal-protein sources** (flaxseed, goji seed meal and two mushroom hydrolysates; none a pea or soy isolate)
   ([experiment map](results/validation/experiment_map.md)).
 - **Laboratories differ by about tenfold on absolute meaty-thiol levels**, more than most levers
