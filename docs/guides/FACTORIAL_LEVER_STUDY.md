@@ -53,8 +53,8 @@ point 4). It returns only if the owner wants it and a PREREG amendment adds the 
 | total | 36 | 36 | 36 |
 
 The number of laboratories is chosen by the predictive check below, not by the 'answered' count: for the
-prediction a new kitchen gets, one, two and three laboratories are nearly equal. Two is the default because one
-laboratory cannot show any between-laboratory spread (its intervals are the worst calibrated) and step 5 needs two.
+prediction a new kitchen gets, one, two and three laboratories are nearly equal, and one is the best calibrated. Two
+is the default only because step 5 (the engine against held-out contrasts from two TEST laboratories) needs two.
 
 **Analytes** (SIDA where a labelled standard exists; otherwise one internal standard and the same method in every
 pot, so within-study ratios cancel the response factor; each laboratory may use its own method, which is part of
@@ -138,7 +138,7 @@ What it shows:
 with checks, keyed by PREREG amendment A4. The laboratory count was then revised by the predictive check below: two by
 default, one acceptable, three not worth it.
 
-## Predictive check: does the number of laboratories matter? (2026-11-11)
+## Predictive check: does the number of laboratories matter? (2026-11-11, rerun 2026-11-12)
 
 The 'answered' count above is partly circular: it counts how often new laboratories clear our own three-laboratory
 rule. The non-circular question is how much better the table predicts **a new kitchen cooking in pea isolate**. The
@@ -148,30 +148,33 @@ three (2^3 x 1) laboratories ([the last section of the record](../../results/val
 
 | | literature alone | one laboratory | two laboratories | three laboratories | floor: the pea mean known exactly |
 |---|---|---|---|---|---|
-| sign wrong for a new kitchen, all cells | 0.44 | 0.30 | 0.29 | 0.29 | 0.16 |
-| the same, 12 cells with a literature estimate | 0.22 | 0.21 | 0.22 | 0.22 | 0.14 |
+| sign wrong for a new kitchen, all cells | 0.45 | 0.31 | 0.30 | 0.29 | 0.17 |
+| the same, 12 cells with a literature estimate | 0.27 | 0.25 | 0.24 | 0.24 | 0.18 |
 | the same, 45 cells with none | 0.50 | 0.33 | 0.31 | 0.30 | 0.17 |
-| 90 % interval coverage, cells with none (nominal 0.90) | 0.88 | 0.57 | 0.62 | 0.64 | - |
-| confident calls (P(same sign) >= 0.8) that are wrong, cells with none | - | 0.30 | 0.26 | 0.23 | - |
+| 90 % interval coverage, cells with none (nominal 0.90) | 0.88 | 0.86 | 0.81 | 0.77 | - |
+| the same, design laboratories sharing our protocol (half the scatter) | 0.88 | 0.89 | 0.78 | 0.67 | - |
 
-With the design laboratories sharing our protocol and lot (offsets half the literature's), sign errors are 0.28 for
-all three designs. Coverage then FALLS with more laboratories (0.61, 0.53, 0.49): laboratories that agree with each
-other make the fit understate the spread a new kitchen has.
+The first run of this check found the table's intervals covering only about 60 % in sparse cells. The cause was a bug
+in the lever table: the scale prior on its log-spaced grid was not the declared half-normal (it put 61 % of its mass
+below 0.1 dex instead of 16 %). Fixed in PR #124 (readings unchanged, intervals wider); the numbers above are the rerun.
 
 What it shows:
 
 1. **The study's value is pea-matrix data where the literature has none.** It cuts the sign error on those 45 cells
-   from a coin flip (0.50) to about 0.31. On the 12 cells the literature already estimates, it changes almost nothing
-   (0.22 -> 0.21).
-2. **How the 36 pots are split across laboratories barely matters for prediction** (0.30 / 0.29 / 0.29). A third
-   laboratory does not earn its coordination cost.
-3. **The binding problem is calibration, not data.** With 1 - 3 laboratories in a cell, the table's 90 % new-laboratory
-   interval covers about 60 %, and a third of 'confident' signs are wrong, against the 20 % the 0.8 threshold promises.
-   Even the literature-only cells cover 0.83. Whether the fit or the simulator is at fault is being checked; until it
-   is, no cell this study adds should be read as answered on its interval alone.
-4. **The floor is high.** Even a predictor that knew the pea-matrix mean exactly would get the sign wrong for 16 % of
-   new kitchens, because laboratories scatter that much. No study design removes that; only conditioning on what
-   differs between kitchens would.
+   from a coin flip (0.50) to about 0.31. On the 12 cells the literature already estimates, it helps a little
+   (0.27 -> 0.24).
+2. **How the 36 pots are split across laboratories barely matters for accuracy** (0.31 / 0.30 / 0.29).
+3. **More laboratories make the intervals worse calibrated, not better.** Laboratories that share our protocol and lot
+   agree with each other, so the fit narrows its interval below the spread a new kitchen has: 0.89 coverage with one
+   laboratory, 0.67 with three. One laboratory is the best calibrated.
+4. **The floor is high.** Even a predictor that knew the pea-matrix mean exactly would get the sign wrong for about
+   17 % of new kitchens, because laboratories scatter that much. No study design removes that.
+
+**So the laboratory count is decided by step 5, not by the table.** For the table's own predictions, one laboratory
+(2^3 x 4) is as accurate as two or three and the best calibrated. Two laboratories are worth the coordination only
+because step 5 (the engine judged on held-out contrasts from two TEST laboratories) cannot run on one. The design
+section keeps two as the default for that reason; if step 5 is not wanted from this round, one laboratory is the
+better and cheaper design.
 
 ## What the partner gets
 

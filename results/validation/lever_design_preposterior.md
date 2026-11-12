@@ -6,33 +6,33 @@ Settings: 200 simulations per design and matrix setting; within-laboratory resid
 
 | design | pots | new labs | matrix shift SD | keying | cells newly answered: mean [90 %] | P(>= 1) | P(>= 3) | of which with a literature estimate today (mean) | map cells newly answered (mean) | cells with 2 TEST labs (step 5): before -> after | levers feeding no cell |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| P3: one laboratory, 2^4 x 2 (as drafted) | 36 | 1 | 0.0 | main_effect | 4.34 [3, 5] | 1.00 | 0.99 | 4.34 | 3.36 | 0 -> 2 | yeast extract |
-| P3: one laboratory, 2^4 x 2 (as drafted) | 36 | 1 | 0.3 | main_effect | 4.11 [3, 5] | 1.00 | 0.98 | 4.11 | 3.13 | 0 -> 2 | yeast extract |
-| P3: one laboratory, 2^4 x 2 (as drafted) | 36 | 1 | 0.3 | per_pair | 3.77 [2, 5] | 1.00 | 0.92 | 3.77 | 3.07 | 0 -> 2 | yeast extract |
-| two laboratories, 2^3 x 2 each (no yeast extract) | 36 | 2 | 0.0 | main_effect | 10.79 [8, 14] | 1.00 | 1.00 | 7.66 | 6.68 | 0 -> 57 | - |
-| two laboratories, 2^3 x 2 each (no yeast extract) | 36 | 2 | 0.3 | main_effect | 11.22 [8, 14] | 1.00 | 1.00 | 7.67 | 6.74 | 0 -> 57 | - |
-| two laboratories, 2^3 x 2 each (no yeast extract) | 36 | 2 | 0.3 | per_pair | 12.53 [10, 16] | 1.00 | 1.00 | 8.05 | 7.11 | 0 -> 57 | - |
-| three laboratories, 2^3 x 1 each (no yeast extract) | 36 | 3 | 0.0 | main_effect | 33.59 [28, 40] | 1.00 | 1.00 | 7.97 | 18.33 | 0 -> 57 | - |
-| three laboratories, 2^3 x 1 each (no yeast extract) | 36 | 3 | 0.3 | main_effect | 35.78 [30, 41] | 1.00 | 1.00 | 8.15 | 18.46 | 0 -> 57 | - |
-| three laboratories, 2^3 x 1 each (no yeast extract) | 36 | 3 | 0.3 | per_pair | 38.15 [32, 43] | 1.00 | 1.00 | 8.19 | 18.66 | 0 -> 57 | - |
-| three laboratories, targeted replication (sugar x sulfur source 2 x 3, x 2) | 36 | 3 | 0.0 | main_effect | 28.66 [23, 34] | 1.00 | 1.00 | 5.92 | 8.77 | 0 -> 57 | - |
-| three laboratories, targeted replication (sugar x sulfur source 2 x 3, x 2) | 36 | 3 | 0.3 | main_effect | 30.71 [25, 36] | 1.00 | 1.00 | 6.03 | 8.86 | 0 -> 57 | - |
-| three laboratories, targeted replication (sugar x sulfur source 2 x 3, x 2) | 36 | 3 | 0.3 | per_pair | 33.66 [27, 40] | 1.00 | 1.00 | 6.79 | 8.88 | 0 -> 57 | - |
-| reference: P3 in two laboratories (72 pots) | 72 | 2 | 0.0 | main_effect | 11.11 [8, 14] | 1.00 | 1.00 | 7.88 | 6.80 | 0 -> 57 | yeast extract |
-| reference: P3 in two laboratories (72 pots) | 72 | 2 | 0.3 | main_effect | 11.15 [8, 14] | 1.00 | 1.00 | 7.75 | 6.75 | 0 -> 57 | yeast extract |
-| reference: P3 in two laboratories (72 pots) | 72 | 2 | 0.3 | per_pair | 12.87 [10, 16] | 1.00 | 1.00 | 8.15 | 7.09 | 0 -> 57 | yeast extract |
+| P3: one laboratory, 2^4 x 2 (as drafted) | 36 | 1 | 0.0 | main_effect | 3.63 [2, 5] | 1.00 | 0.92 | 3.63 | 2.65 | 0 -> 2 | yeast extract |
+| P3: one laboratory, 2^4 x 2 (as drafted) | 36 | 1 | 0.3 | main_effect | 3.46 [2, 5] | 1.00 | 0.85 | 3.46 | 2.50 | 0 -> 2 | yeast extract |
+| P3: one laboratory, 2^4 x 2 (as drafted) | 36 | 1 | 0.3 | per_pair | 3.16 [2, 4] | 0.99 | 0.76 | 3.16 | 2.47 | 0 -> 2 | yeast extract |
+| two laboratories, 2^3 x 2 each (no yeast extract) | 36 | 2 | 0.0 | main_effect | 9.19 [6, 12] | 1.00 | 1.00 | 6.38 | 5.96 | 0 -> 57 | - |
+| two laboratories, 2^3 x 2 each (no yeast extract) | 36 | 2 | 0.3 | main_effect | 9.66 [6, 13] | 1.00 | 1.00 | 6.48 | 6.04 | 0 -> 57 | - |
+| two laboratories, 2^3 x 2 each (no yeast extract) | 36 | 2 | 0.3 | per_pair | 11.36 [8, 15] | 1.00 | 1.00 | 7.00 | 6.62 | 0 -> 57 | - |
+| three laboratories, 2^3 x 1 each (no yeast extract) | 36 | 3 | 0.0 | main_effect | 28.07 [22, 34] | 1.00 | 1.00 | 6.79 | 17.50 | 0 -> 57 | - |
+| three laboratories, 2^3 x 1 each (no yeast extract) | 36 | 3 | 0.3 | main_effect | 30.73 [25, 36] | 1.00 | 1.00 | 7.03 | 17.82 | 0 -> 57 | - |
+| three laboratories, 2^3 x 1 each (no yeast extract) | 36 | 3 | 0.3 | per_pair | 35.86 [29, 41] | 1.00 | 1.00 | 7.36 | 18.46 | 0 -> 57 | - |
+| three laboratories, targeted replication (sugar x sulfur source 2 x 3, x 2) | 36 | 3 | 0.0 | main_effect | 24.78 [19, 30] | 1.00 | 1.00 | 4.84 | 8.60 | 0 -> 57 | - |
+| three laboratories, targeted replication (sugar x sulfur source 2 x 3, x 2) | 36 | 3 | 0.3 | main_effect | 27.20 [21, 33] | 1.00 | 1.00 | 4.95 | 8.70 | 0 -> 57 | - |
+| three laboratories, targeted replication (sugar x sulfur source 2 x 3, x 2) | 36 | 3 | 0.3 | per_pair | 31.83 [26, 38] | 1.00 | 1.00 | 6.04 | 8.84 | 0 -> 57 | - |
+| reference: P3 in two laboratories (72 pots) | 72 | 2 | 0.0 | main_effect | 9.48 [7, 12] | 1.00 | 1.00 | 6.62 | 5.96 | 0 -> 57 | yeast extract |
+| reference: P3 in two laboratories (72 pots) | 72 | 2 | 0.3 | main_effect | 9.77 [7, 13] | 1.00 | 1.00 | 6.64 | 6.17 | 0 -> 57 | yeast extract |
+| reference: P3 in two laboratories (72 pots) | 72 | 2 | 0.3 | per_pair | 11.81 [9, 15] | 1.00 | 1.00 | 7.17 | 6.71 | 0 -> 57 | yeast extract |
 
 ## The cells most likely to be answered, per design (matrix shift 0.3 dex)
 
-**P3: one laboratory, 2^4 x 2 (as drafted):** 2-Methyl-3-furanthiol (MFT), sugar identity, all, ribose vs glucose (1.00); 2-Furfurylthiol (FFT), sugar identity, all, ribose vs glucose (0.97); DMHF, pH, pH 6-7.5, initial or label (0.79); 2-Furfurylthiol (FFT), pH, pH 6-7.5, initial or label (0.70); Phenylacetaldehyde, pH, pH 6-7.5, initial or label (0.65).
+**P3: one laboratory, 2^4 x 2 (as drafted):** 2-Methyl-3-furanthiol (MFT), sugar identity, all, ribose vs glucose (1.00); 2-Furfurylthiol (FFT), sugar identity, all, ribose vs glucose (0.95); 2-Furfurylthiol (FFT), pH, pH 6-7.5, initial or label (0.61); DMHF, pH, pH 6-7.5, initial or label (0.53); Phenylacetaldehyde, pH, pH 6-7.5, initial or label (0.36).
 
-**two laboratories, 2^3 x 2 each (no yeast extract):** 2-Methyl-3-furanthiol (MFT), sugar identity, all, ribose vs glucose (1.00); Hydrogen Sulfide, pH, pH 6-7.5, initial or label (0.99); Pyrazines, pH, pH 6-7.5, initial or label (0.97); 2-Furfurylthiol (FFT), sugar identity, all, ribose vs glucose (0.92); DMHF, sugar identity, all, ribose vs glucose (0.79); Norfuraneol (NF), sugar identity, all, ribose vs glucose (0.74); 2-Furfurylthiol (FFT), pH, pH 6-7.5, initial or label (0.70); DMHF, pH, pH 6-7.5, initial or label (0.70); 2-Furfurylthiol (FFT), sulfur source, all, thiamine vs cysteine (0.64); Phenylacetaldehyde, pH, pH 6-7.5, initial or label (0.62); 2-Methyl-3-furanthiol (MFT), pH, pH 6-7.5, initial or label (0.62); Bis(2-methyl-3-furyl) disulfide, sulfur source, all, thiamine vs cysteine (0.61).
+**two laboratories, 2^3 x 2 each (no yeast extract):** 2-Methyl-3-furanthiol (MFT), sugar identity, all, ribose vs glucose (1.00); Hydrogen Sulfide, pH, pH 6-7.5, initial or label (0.93); 2-Furfurylthiol (FFT), sugar identity, all, ribose vs glucose (0.89); Pyrazines, pH, pH 6-7.5, initial or label (0.80); DMHF, sugar identity, all, ribose vs glucose (0.69); Norfuraneol (NF), sugar identity, all, ribose vs glucose (0.69); 2-Furfurylthiol (FFT), pH, pH 6-7.5, initial or label (0.60); 2-Furfurylthiol (FFT), sulfur source, all, thiamine vs cysteine (0.59); Bis(2-methyl-3-furyl) disulfide, sulfur source, all, thiamine vs cysteine (0.53); Phenylacetaldehyde, pH, pH 6-7.5, initial or label (0.47); DMHF, pH, pH 6-7.5, initial or label (0.47); Pyrazines, sugar identity, all, ribose vs glucose (0.44).
 
-**three laboratories, 2^3 x 1 each (no yeast extract):** Hydrogen Sulfide, pH, pH 6-7.5, initial or label (0.99); 2-Methyl-3-furanthiol (MFT), sugar identity, all, ribose vs glucose (0.99); Pyrazines, pH, pH 6-7.5, initial or label (0.98); 2-Furfurylthiol (FFT), sugar identity, all, ribose vs glucose (0.94); Norfuraneol (NF), sugar identity, all, ribose vs glucose (0.72); DMHF, pH, pH 6-7.5, initial or label (0.71); Hydrogen Sulfide, sulfur source, all, thiamine vs cysteine (0.70); Nonanal, sulfur source, all, thiamine vs cysteine (0.69); DMHF, sugar identity, all, ribose vs glucose (0.69); Hexanal, sugar identity, all, ribose vs glucose (0.69); Phenylacetaldehyde, sugar identity, all, ribose vs glucose (0.68); Methional (3-(methylthio)propanal), sugar identity, all, ribose vs glucose (0.68).
+**three laboratories, 2^3 x 1 each (no yeast extract):** 2-Methyl-3-furanthiol (MFT), sugar identity, all, ribose vs glucose (0.99); Hydrogen Sulfide, pH, pH 6-7.5, initial or label (0.95); 2-Furfurylthiol (FFT), sugar identity, all, ribose vs glucose (0.92); Pyrazines, pH, pH 6-7.5, initial or label (0.81); Norfuraneol (NF), sugar identity, all, ribose vs glucose (0.70); DMHF, sugar identity, all, ribose vs glucose (0.67); Hydrogen Sulfide, sulfur source, all, thiamine vs cysteine (0.66); DMHF, sulfur source, all, thiamine vs cysteine (0.64); 2-Furfurylthiol (FFT), sulfur source, all, thiamine vs cysteine (0.63); Phenylacetaldehyde, sugar identity, all, ribose vs glucose (0.62); 2-Methylbutanal, sugar identity, all, ribose vs glucose (0.60); Hexanal, sugar identity, all, ribose vs glucose (0.59).
 
-**three laboratories, targeted replication (sugar x sulfur source 2 x 3, x 2):** 2-Methyl-3-furanthiol (MFT), sugar identity, all, ribose vs glucose (0.99); 2-Furfurylthiol (FFT), sugar identity, all, ribose vs glucose (0.93); Hexanal, sulfur source, all, glutathione vs cysteine (0.89); Norfuraneol (NF), sugar identity, all, ribose vs glucose (0.77); Furfural, sulfur source, all, none vs cysteine (0.70); DMHF, sugar identity, all, ribose vs glucose (0.69); Hydrogen Sulfide, sugar identity, all, ribose vs glucose (0.68); 2-Pentylfuran, sugar identity, all, ribose vs glucose (0.67); Nonanal, sugar identity, all, ribose vs glucose (0.66); Trimethylpyrazine, sugar identity, all, ribose vs glucose (0.65); Hexanal, sugar identity, all, ribose vs glucose (0.65); 3-Methylbutanal, sugar identity, all, ribose vs glucose (0.64).
+**three laboratories, targeted replication (sugar x sulfur source 2 x 3, x 2):** 2-Methyl-3-furanthiol (MFT), sugar identity, all, ribose vs glucose (0.99); 2-Furfurylthiol (FFT), sugar identity, all, ribose vs glucose (0.91); Norfuraneol (NF), sugar identity, all, ribose vs glucose (0.73); Hexanal, sulfur source, all, glutathione vs cysteine (0.70); DMHF, sugar identity, all, ribose vs glucose (0.65); Hydrogen Sulfide, sugar identity, all, ribose vs glucose (0.59); Nonanal, sugar identity, all, ribose vs glucose (0.58); 2-Pentylfuran, sugar identity, all, ribose vs glucose (0.57); Trimethylpyrazine, sugar identity, all, ribose vs glucose (0.56); Nonanal, sulfur source, all, glutathione vs cysteine (0.56); Pyrazines, sulfur source, all, none vs cysteine (0.56); Hexanal, sugar identity, all, ribose vs glucose (0.56).
 
-**reference: P3 in two laboratories (72 pots):** 2-Methyl-3-furanthiol (MFT), sugar identity, all, ribose vs glucose (1.00); Hydrogen Sulfide, pH, pH 6-7.5, initial or label (0.99); Pyrazines, pH, pH 6-7.5, initial or label (0.98); 2-Furfurylthiol (FFT), sugar identity, all, ribose vs glucose (0.94); DMHF, pH, pH 6-7.5, initial or label (0.77); Norfuraneol (NF), sugar identity, all, ribose vs glucose (0.72); 2-Furfurylthiol (FFT), pH, pH 6-7.5, initial or label (0.69); DMHF, sugar identity, all, ribose vs glucose (0.69); Bis(2-methyl-3-furyl) disulfide, sulfur source, all, thiamine vs cysteine (0.64); 2-Methyl-3-furanthiol (MFT), pH, pH 6-7.5, initial or label (0.59); Phenylacetaldehyde, pH, pH 6-7.5, initial or label (0.56); Pyrazines, sugar identity, all, ribose vs glucose (0.54).
+**reference: P3 in two laboratories (72 pots):** 2-Methyl-3-furanthiol (MFT), sugar identity, all, ribose vs glucose (1.00); 2-Furfurylthiol (FFT), sugar identity, all, ribose vs glucose (0.93); Hydrogen Sulfide, pH, pH 6-7.5, initial or label (0.92); Pyrazines, pH, pH 6-7.5, initial or label (0.79); Norfuraneol (NF), sugar identity, all, ribose vs glucose (0.66); DMHF, sugar identity, all, ribose vs glucose (0.63); 2-Furfurylthiol (FFT), pH, pH 6-7.5, initial or label (0.62); Bis(2-methyl-3-furyl) disulfide, sulfur source, all, thiamine vs cysteine (0.57); DMHF, pH, pH 6-7.5, initial or label (0.57); 2-Furfurylthiol (FFT), sulfur source, all, thiamine vs cysteine (0.51); Pyrazines, sugar identity, all, ribose vs glucose (0.47); Phenylacetaldehyde, pH, pH 6-7.5, initial or label (0.43).
 
 Reading: a cell is one odorant x lever (x pH band, x level for categorical levers) of `lever_table.md`; 'answered' is PREREG sec. 5 (>= 3 laboratories, the 90 % interval of mu excludes zero, P(a new laboratory sees the same sign) >= 0.8). 'Map cells' are the experiment map's family x lever cells. Yeast extract has no lever class in PREREG sec. 4, so a yeast-extract factor feeds no cell until an amendment adds one.
 
@@ -42,27 +42,27 @@ Reading: a cell is one odorant x lever (x pH band, x level for categorical lever
 
 | cells | protocol factor | design | sign error | oracle | abs. error of estimate (dex) | 90 % coverage | 90 % width (dex) | confident calls per run | sign error of confident calls |
 |---|---|---|---|---|---|---|---|---|---|
-| with a literature estimate (12) | 1.0 | no study (the literature alone) | 0.223 | 0.138 | 0.343 | 0.831 | 1.69 | 9.0 | 0.160 |
-| with a literature estimate (12) | 1.0 | one laboratory, 2^3 x 4 | 0.212 | 0.138 | 0.323 | 0.815 | 1.68 | 8.1 | 0.127 |
-| with a literature estimate (12) | 1.0 | two laboratories, 2^3 x 2 each | 0.220 | 0.138 | 0.326 | 0.804 | 1.64 | 8.1 | 0.134 |
-| with a literature estimate (12) | 1.0 | three laboratories, 2^3 x 1 each | 0.218 | 0.138 | 0.323 | 0.808 | 1.62 | 8.0 | 0.129 |
-| with a literature estimate (12) | 0.5 | no study (the literature alone) | 0.233 | 0.141 | 0.341 | 0.830 | 1.69 | 9.0 | 0.171 |
-| with a literature estimate (12) | 0.5 | one laboratory, 2^3 x 4 | 0.219 | 0.141 | 0.307 | 0.806 | 1.61 | 8.2 | 0.132 |
-| with a literature estimate (12) | 0.5 | two laboratories, 2^3 x 2 each | 0.217 | 0.141 | 0.300 | 0.773 | 1.48 | 8.6 | 0.141 |
-| with a literature estimate (12) | 0.5 | three laboratories, 2^3 x 1 each | 0.216 | 0.141 | 0.306 | 0.739 | 1.38 | 8.7 | 0.139 |
+| with a literature estimate (12) | 1.0 | no study (the literature alone) | 0.272 | 0.181 | 0.459 | 0.869 | 2.61 | 5.0 | 0.127 |
+| with a literature estimate (12) | 1.0 | one laboratory, 2^3 x 4 | 0.246 | 0.181 | 0.401 | 0.856 | 2.43 | 6.8 | 0.144 |
+| with a literature estimate (12) | 1.0 | two laboratories, 2^3 x 2 each | 0.242 | 0.181 | 0.380 | 0.844 | 2.35 | 6.8 | 0.141 |
+| with a literature estimate (12) | 1.0 | three laboratories, 2^3 x 1 each | 0.236 | 0.181 | 0.362 | 0.848 | 2.34 | 6.9 | 0.130 |
+| with a literature estimate (12) | 0.5 | no study (the literature alone) | 0.280 | 0.181 | 0.465 | 0.869 | 2.61 | 5.0 | 0.123 |
+| with a literature estimate (12) | 0.5 | one laboratory, 2^3 x 4 | 0.234 | 0.181 | 0.365 | 0.854 | 2.33 | 6.8 | 0.136 |
+| with a literature estimate (12) | 0.5 | two laboratories, 2^3 x 2 each | 0.231 | 0.181 | 0.338 | 0.823 | 2.12 | 7.6 | 0.144 |
+| with a literature estimate (12) | 0.5 | three laboratories, 2^3 x 1 each | 0.227 | 0.181 | 0.331 | 0.793 | 1.97 | 7.8 | 0.138 |
 | prior only (45) | 1.0 | no study (the literature alone) | 0.500 | 0.171 | 0.465 | 0.880 | 2.33 | 0.0 | - |
-| prior only (45) | 1.0 | one laboratory, 2^3 x 4 | 0.326 | 0.171 | 0.497 | 0.570 | 1.16 | 37.1 | 0.300 |
-| prior only (45) | 1.0 | two laboratories, 2^3 x 2 each | 0.313 | 0.171 | 0.428 | 0.617 | 1.38 | 31.0 | 0.258 |
-| prior only (45) | 1.0 | three laboratories, 2^3 x 1 each | 0.304 | 0.171 | 0.398 | 0.638 | 1.42 | 29.3 | 0.234 |
+| prior only (45) | 1.0 | one laboratory, 2^3 x 4 | 0.326 | 0.171 | 0.493 | 0.856 | 2.35 | 24.4 | 0.261 |
+| prior only (45) | 1.0 | two laboratories, 2^3 x 2 each | 0.313 | 0.171 | 0.427 | 0.810 | 1.95 | 25.8 | 0.233 |
+| prior only (45) | 1.0 | three laboratories, 2^3 x 1 each | 0.304 | 0.171 | 0.397 | 0.770 | 1.77 | 26.0 | 0.219 |
 | prior only (45) | 0.5 | no study (the literature alone) | 0.500 | 0.165 | 0.469 | 0.878 | 2.33 | 0.0 | - |
-| prior only (45) | 0.5 | one laboratory, 2^3 x 4 | 0.300 | 0.165 | 0.390 | 0.614 | 1.16 | 36.5 | 0.266 |
-| prior only (45) | 0.5 | two laboratories, 2^3 x 2 each | 0.299 | 0.165 | 0.363 | 0.526 | 1.03 | 33.9 | 0.251 |
-| prior only (45) | 0.5 | three laboratories, 2^3 x 1 each | 0.300 | 0.165 | 0.358 | 0.488 | 0.96 | 33.4 | 0.251 |
-| all (57) | 1.0 | no study (the literature alone) | 0.442 | 0.164 | 0.439 | 0.869 | 2.19 | 9.0 | 0.160 |
-| all (57) | 1.0 | one laboratory, 2^3 x 4 | 0.302 | 0.164 | 0.460 | 0.622 | 1.27 | 45.1 | 0.269 |
-| all (57) | 1.0 | two laboratories, 2^3 x 2 each | 0.293 | 0.164 | 0.407 | 0.656 | 1.44 | 39.0 | 0.233 |
-| all (57) | 1.0 | three laboratories, 2^3 x 1 each | 0.286 | 0.164 | 0.382 | 0.674 | 1.46 | 37.3 | 0.212 |
-| all (57) | 0.5 | no study (the literature alone) | 0.444 | 0.160 | 0.442 | 0.868 | 2.19 | 9.0 | 0.171 |
-| all (57) | 0.5 | one laboratory, 2^3 x 4 | 0.283 | 0.160 | 0.372 | 0.654 | 1.25 | 44.8 | 0.242 |
-| all (57) | 0.5 | two laboratories, 2^3 x 2 each | 0.282 | 0.160 | 0.350 | 0.578 | 1.12 | 42.5 | 0.229 |
-| all (57) | 0.5 | three laboratories, 2^3 x 1 each | 0.282 | 0.160 | 0.347 | 0.541 | 1.05 | 42.1 | 0.228 |
+| prior only (45) | 0.5 | one laboratory, 2^3 x 4 | 0.300 | 0.165 | 0.388 | 0.890 | 2.35 | 22.7 | 0.213 |
+| prior only (45) | 0.5 | two laboratories, 2^3 x 2 each | 0.299 | 0.165 | 0.362 | 0.779 | 1.67 | 27.9 | 0.223 |
+| prior only (45) | 0.5 | three laboratories, 2^3 x 1 each | 0.300 | 0.165 | 0.358 | 0.670 | 1.34 | 29.9 | 0.232 |
+| all (57) | 1.0 | no study (the literature alone) | 0.452 | 0.173 | 0.464 | 0.877 | 2.39 | 5.0 | 0.127 |
+| all (57) | 1.0 | one laboratory, 2^3 x 4 | 0.309 | 0.173 | 0.474 | 0.856 | 2.37 | 31.2 | 0.235 |
+| all (57) | 1.0 | two laboratories, 2^3 x 2 each | 0.298 | 0.173 | 0.417 | 0.817 | 2.04 | 32.6 | 0.214 |
+| all (57) | 1.0 | three laboratories, 2^3 x 1 each | 0.290 | 0.173 | 0.390 | 0.787 | 1.89 | 32.9 | 0.200 |
+| all (57) | 0.5 | no study (the literature alone) | 0.454 | 0.169 | 0.468 | 0.876 | 2.39 | 5.0 | 0.123 |
+| all (57) | 0.5 | one laboratory, 2^3 x 4 | 0.286 | 0.169 | 0.383 | 0.882 | 2.35 | 29.5 | 0.195 |
+| all (57) | 0.5 | two laboratories, 2^3 x 2 each | 0.285 | 0.169 | 0.357 | 0.789 | 1.76 | 35.4 | 0.206 |
+| all (57) | 0.5 | three laboratories, 2^3 x 1 each | 0.284 | 0.169 | 0.352 | 0.696 | 1.47 | 37.7 | 0.213 |
