@@ -684,11 +684,11 @@
   },
   "provenance": {
     "artifact": "experiment_map",
-    "generated_on": "2026-11-11",
+    "generated_on": "2026-11-12",
     "git": {
-      "commit": "eb5a0f14f8883a988e1854d671ea8420f9e2585e",
-      "short": "eb5a0f14",
-      "branch": "lever-prior-fix",
+      "commit": "4ce7c3f682cc80001709eea973bc271b2fe2dfab",
+      "short": "4ce7c3f6",
+      "branch": "front-door-rewrite",
       "dirty": true
     },
     "generated_by": "scripts/generators/build_experiment_map.py",

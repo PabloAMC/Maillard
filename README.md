@@ -6,25 +6,76 @@
 [![Out of sample: 10/23 rows within 3x](https://img.shields.io/badge/out--of--sample-10%2F23%20rows%20within%203x-red.svg)](results/validation/core_panel_scores.md)
 [![Strict-ready: 0/37 benchmarks](https://img.shields.io/badge/strict--ready-0%2F37-red.svg)](results/validation/core_panel_scores.md)
 
-**Maillard** is a kinetic model of the Maillard reaction for alternative-protein scientists.
-Sugars, amino acids, fats and the cooking programme go in. The aroma compounds come out: the
-meaty thiols, the caramel furanones, acrylamide, the fat aldehydes, each with a measured
-reliability interval, an odour-activity ratio, and a **named refusal** wherever the evidence
-cannot answer. It exists to help decide *which experiment to run next*, not to replace the GC-MS.
+**Maillard** is an open attempt to predict the aroma of a cooked plant-based food from its recipe and
+its cooking programme, for alternative-protein scientists who want meat aroma without the animal.
+Sugars, amino acids, fats and the process go in; the aroma compounds should come out: the meaty
+thiols, the caramel furanones, the fat aldehydes, acrylamide.
 
-> **Start here if you know what the Maillard reaction is and nothing else:**
-> [**Modelling the Maillard reaction: an introduction**](docs/guides/INTRODUCTION.md). Eight short
-> sections, each led by a figure: the chemistry and how well the field has measured it, how a kinetic
-> model is built from that, what this repository is made of, how well this model does, how it got
-> here, the one problem that stops it from predicting meaty aroma, and what is needed next. The
-> step-by-step reaction trees are in its [appendix](docs/guides/REACTION_TREES.md); every paper
-> used, with what was taken from it, in [SOURCES.md](docs/guides/SOURCES.md).
+**It cannot do that yet, and it says so.** What it can do today is narrower and still useful: tell
+you what the published evidence does and does not establish, refuse by name what it cannot answer,
+and say which experiment would answer it.
+
+## The goal, and how far it is
+
+| | milestone | today |
+|---|---|---|
+| 1 | Know the direction and rough size of each big lever (sugar, sulfur source, pH, temperature, ...) per odorant | **1 of 75** lever × odorant cells is answered by the literature at a three-laboratory standard ([lever table](results/validation/lever_table.md)) |
+| 2 | The kinetic model beats that table on contrasts it has never seen | **not testable yet**: the held-out data do not exist; on what can be scored it loses to "no change" ([contrast scores](results/validation/contrast_scores.md)) |
+| 3 | Ratios within threefold in a new laboratory after a few calibration pots | one stand-in case; no real partner yet |
+| 4 | Absolute levels within threefold in a new plant matrix | **10 of 23** rows outside the meaty thiols; absolute thiol levels are refused ([scorecard](results/validation/core_panel_scores.md)) |
+
+The goal is reachable in principle. A kitchen is a set of conditions (pH, the temperature the sample
+really saw, water, the precursors the matrix brings) and chemistry maps conditions to products
+whoever does the cooking. What stands in the way is data of the right shape, not ideas, and the
+sections below say which data.
+
+## What we found
+
+- **The published record answers very little about levers.** 54 sources and 946 within-study
+  contrasts from 20 laboratories, each read by two blind readers, answer one formulator question:
+  leaving out cysteine lowers 2-methyl-3-furanthiol about sixfold. The rest is one laboratory per
+  question, peak areas, several things changed at once, and **no heated plant-protein contrast at
+  all** ([experiment map](results/validation/experiment_map.md)).
+- **Laboratories differ by about tenfold on absolute meaty-thiol levels**, more than most levers
+  move them. How much of that is measurement method, how much is unrecorded conditions and how much
+  is unknown chemistry is the open question that decides how far prediction can go.
+- **The kinetic model has no demonstrated skill on new data for the meaty thiols**, and its response
+  to pH is wrong in structure, not in constants. Its out-of-sample record is printed below, misses
+  included.
+- **Literature gathered with language models needs auditing.** An audit of this repository's own
+  first corpus found 61 % of 225 anchor citations defective (dead, pointing at an unrelated paper,
+  or mismatched) and four benchmarks whose values were in no paper.
+  Everything the model reads today has been checked against its PDF; the method and the record are
+  in [the audit](docs/history/AUDIT_legacy_lane_2026-08.md).
+
+## What would move it
+
+**The experiments, ranked, with what each buys and what to record so that results from different
+laboratories add up, are one page: [EXPERIMENTS_BRIEF.md](docs/guides/EXPERIMENTS_BRIEF.md).** In
+short:
+
+1. **The big levers in pea protein** (sugar × sulfur source × pH, 36 pots, ideally two laboratories):
+   the first plant-protein data for the choices every formulation makes first, and the first fair
+   test of the model ([design](docs/guides/FACTORIAL_LEVER_STUDY.md)).
+2. **Where the meaty thiols go** (ribose + cysteine against time at two temperatures): settles the
+   model's central structural question and gives it its first activation energies.
+3. **Odour thresholds and hot binding in pea protein**: worth doing with or without any model; nobody
+   has published either.
+
+Protocols are in [EXPERIMENTS.md](docs/guides/EXPERIMENTS.md). If you have data, `maillard score`
+and `maillard calibrate` take it as it is.
+
+> **New to the chemistry?** [**Modelling the Maillard reaction: an introduction**](docs/guides/INTRODUCTION.md):
+> eight short sections, each led by a figure, from the chemistry to the one problem that stops this
+> model from predicting meaty aroma. The reaction trees are in its
+> [appendix](docs/guides/REACTION_TREES.md); every paper used, with what was taken from it, in
+> [SOURCES.md](docs/guides/SOURCES.md).
 >
 > [![The Maillard reaction map, coloured by how well this model predicts each part](docs/assets/thiol_sink/00_map.png)](docs/guides/INTRODUCTION.md)
 
-> **Who is this for?** Alternative-protein scientists who want to triage formulations and
-> process conditions before burning GC-MS time, and computational chemists who want a
-> transparent, benchmarked, honestly scored Maillard kinetics platform.
+> **Who is this for?** Alternative-protein scientists deciding which experiment to run next;
+> laboratories with data that want it compared and used; and modellers who want a transparent,
+> honestly scored Maillard kinetics platform to build on.
 
 ---
 
