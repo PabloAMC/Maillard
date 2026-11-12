@@ -4,7 +4,7 @@
 
 **What this table cannot do.** Published contrasts are a selected sample (a lever that did nothing is under-reported), so a pooled effect is an upper estimate of the typical one. Most contrasts are model systems in buffer; a cell names its matrices and does not claim to transfer to a plant-protein product. A cell reports what happened, not why, and predicts no combination of levers that no study varied together.
 
-- Sources 48, contrasts used 813, laboratories 15; not used: mixed-lever contrasts (no single-lever cell) 186; fewer than two usable arms 517; odorants outside the declared lists (PREREG amendment A3) 494; shares of a total (PREREG amendment A1) 63; sugar-identity contrasts whose levels are not sugars (fed intermediates) 14; flavour-dilution factors, an odour potency not an amount (PREREG amendment A1) 3; rates, half-lives or storage losses (PREREG amendment A1) 148; second peaks of one compound in the same pots (one row enters the cell) 1.
+- Sources 48, contrasts used 813, laboratories 15; not used: mixed-lever contrasts (no single-lever cell) 191; fewer than two usable arms 555; odorants outside the declared lists (PREREG amendment A3) 511; second peaks of one compound in the same pots (one row enters the cell) 13; shares of a total (PREREG amendment A1) 161; sugar-identity contrasts whose levels are not sugars (fed intermediates) 14; flavour-dilution factors, an odour potency not an amount (PREREG amendment A1) 3; rates, half-lives or storage losses (PREREG amendment A1) 148.
 
 ## Numeric levers
 

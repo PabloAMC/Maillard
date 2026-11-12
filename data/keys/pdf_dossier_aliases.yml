@@ -146,3 +146,7 @@ pending:
   yeo2026: "Yeo et al. 2026, Food Chem., 10.1016/j.foodchem.2026.149082 (M5)"
   Deng2025: "Deng et al. 2025, Food Chem., 10.1016/j.foodchem.2025.146293 (M5)"
   sherwin2003: "Sherwin & Labuza 2003, J. Food Sci., 10.1111/j.1365-2621.2003.tb05715.x (M5 item 7)"
+  # supplements downloaded 2026-11-12 16:00-16:02 for the new-laboratory keying (the two .zip files are unpacked into
+  # chen2023_supplementary/ and zhang2024sugars_supplementary/ and are not article files of this table)
+  li2021_supplementary: "SI of Li & Liu 2021, LWT, 10.1016/j.lwt.2021.112017 (Tables S1-S2); keyed with lever table source li2021ph"
+  zhang2018_supplementary: "SI of Zhang et al. 2018, Int. J. Biol. Macromol., 10.1016/j.ijbiomac.2018.09.082 (Tables S1-S4); keyed with lever table source zhang2018soypep"

@@ -7,14 +7,14 @@
     "new_labs": 17
   },
   "skipped": {
-    "mixed-lever contrasts (no single-lever cell)": 186,
-    "fewer than two usable arms": 517,
-    "odorants outside the declared lists (PREREG amendment A3)": 494,
-    "shares of a total (PREREG amendment A1)": 63,
+    "mixed-lever contrasts (no single-lever cell)": 191,
+    "fewer than two usable arms": 555,
+    "odorants outside the declared lists (PREREG amendment A3)": 511,
+    "second peaks of one compound in the same pots (one row enters the cell)": 13,
+    "shares of a total (PREREG amendment A1)": 161,
     "sugar-identity contrasts whose levels are not sugars (fed intermediates)": 14,
     "flavour-dilution factors, an odour potency not an amount (PREREG amendment A1)": 3,
-    "rates, half-lives or storage losses (PREREG amendment A1)": 148,
-    "second peaks of one compound in the same pots (one row enters the cell)": 1
+    "rates, half-lives or storage losses (PREREG amendment A1)": 148
   },
   "counts": {
     "sources": 48,
@@ -37212,8 +37212,8 @@
     "artifact": "lever_table_development_only",
     "generated_on": "2026-11-12",
     "git": {
-      "commit": "dafcb3faa6e1873a9eac6c1ddfb33acbf0b2374e",
-      "short": "dafcb3fa",
+      "commit": "a30be9ad43239adc16342aae703a271e1259fbf2",
+      "short": "a30be9ad",
       "branch": "new-lab-keying",
       "dirty": true
     },
@@ -37261,11 +37261,11 @@
       },
       {
         "path": "docs/reference/lever_table/contrasts/chen2023lycium.yml",
-        "sha256": "17b4cc3e12951de05c45974d2e95dd98bee68820d25f9364271b11028bdbf20f"
+        "sha256": "2b050760f603c5c31953b8f7cd6ddecca3645f076ed5abf0aa901e73b1b6791a"
       },
       {
         "path": "docs/reference/lever_table/contrasts/chen2023lycium__families.yml",
-        "sha256": "188417c3a135444ed250c2ecdb977f346a2a29e5d8e118556fed811c536a4e29"
+        "sha256": "9e7784570e4668762269caeb2451ee9da665d657df980b0618195d26de765b5b"
       },
       {
         "path": "docs/reference/lever_table/contrasts/chen2024coprinus.yml",
@@ -37389,11 +37389,11 @@
       },
       {
         "path": "docs/reference/lever_table/contrasts/li2021ph.yml",
-        "sha256": "dad07b9cf963520884b3856ee32a1ebcce71dada10a1bfd18c225a2bfc426833"
+        "sha256": "c1d68ed62ad8108412501c3ba9cd8aec9df51fc5bf22830aae60f22bdae0b083"
       },
       {
         "path": "docs/reference/lever_table/contrasts/li2021ph__families.yml",
-        "sha256": "a8e5b14dcfde4231acb53daaf9dfa5b43eecdfe5ff9bcc7f0f35be2b577c9f8f"
+        "sha256": "bfa1e7105c3c3e48cb718611c22ff20451f0214a93e796f7cc1a5ef255b4d0f9"
       },
       {
         "path": "docs/reference/lever_table/contrasts/li2022heat.yml",
@@ -37605,11 +37605,11 @@
       },
       {
         "path": "docs/reference/lever_table/contrasts/zhang2018soypep.yml",
-        "sha256": "6a64a8bda2dafe2d290a2c886d72a21467f4043e40b083a36b4b86a80cbee3c8"
+        "sha256": "432dad3f73a988b02ff45bbcd274603b6a2490cfae152c48551419e215e7220c"
       },
       {
         "path": "docs/reference/lever_table/contrasts/zhang2018soypep__families.yml",
-        "sha256": "b25505ad5e1b1ab443608240d76613a55591992f8f86abb6c3acda7eae555eb3"
+        "sha256": "01ddd39531f7618496d670d1ce852893d556db8c120f8f290526947ebe49bb9f"
       },
       {
         "path": "docs/reference/lever_table/contrasts/zhang2022pleurotus.yml",
@@ -37621,11 +37621,11 @@
       },
       {
         "path": "docs/reference/lever_table/contrasts/zhang2024sugars.yml",
-        "sha256": "8f20ca2c69fd0f6f96f6d3d3896a209520148f7891869e2d2817c42e3ae526dc"
+        "sha256": "12ad28898984e90ea1c19a18ac9aea2044c8798822ff4016393adafbaf8084e6"
       },
       {
         "path": "docs/reference/lever_table/contrasts/zhang2024sugars__families.yml",
-        "sha256": "5b1b0f685a120517532bbe93b2d39754528e954fee8e866f18b6856eb9d1b64d"
+        "sha256": "31fd3b84cfd86d4eb5f66772361bd8c30e7a8ff14109ed8fc6ad922464443d63"
       },
       {
         "path": "docs/reference/lever_table/contrasts/zheng1994.yml",

@@ -1,6 +1,5 @@
 source: zhang2024sugars
-pdf: data/articles/zhang2024sugars.pdf
+pdf: data/articles/zhang2024b.pdf + data/articles/zhang2024sugars_supplementary/foods-2927528-supplementary.pdf
 reader: resolved
-scope_note: 'No thiol keyed: the paper states MFT and FFT were not found (cysteine-poor chicken hydrolysate); H2S and disulfides
-  not reported. Both readers agree.'
+scope_note: 'No group-T contrast (both readers agree): the text states MFT and FFT (2-furanmethanethiol) were not found; no thiol, H2S or disulfide row exists in Table S1 or any figure, and no LOD is printed.'
 contrasts: []

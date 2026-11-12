@@ -1,5 +1,5 @@
-source: "li2021ph"
-pdf: "data/articles/li2021.pdf"
-reader: "a"
-scope_note: "No thiol is reported: the text states 2-furanmethanethiol (FFT) was below detectable levels in all samples (no LOD printed, no values); MFT, H2S and disulfides not mentioned"
+source: li2021ph
+pdf: data/articles/li2021.pdf
+reader: a
+scope_note: 'No group-T odorant quantified: the paper reports 2-furanmethanethiol (FFT) and other sulfur compounds below detection in all samples (Conclusion; Table S2 lists none); no contrast keyable.'
 contrasts: []

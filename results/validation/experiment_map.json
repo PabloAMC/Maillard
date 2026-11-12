@@ -42,7 +42,7 @@
       "family": "meaty thiols",
       "lever": "sugar identity",
       "reading": "needs experiment",
-      "why": "keyed: best cell '2-Furfurylthiol (FFT), ribose vs glucose' reads too few laboratories (2 laboratories)",
+      "why": "keyed: best cell '2-Methyl-3-furanthiol (MFT), xylose vs glucose' reads direction unclear (3 laboratories)",
       "plant_protein_evidence": true,
       "design": "sugar identity: ribose vs glucose (vs xylose); 2 replicate pots per arm; matrix as in the keyed studies; from 1 new laboratory(ies) to reach 3; measure MFT, FFT, H2S and the disulfides by SIDA",
       "engine": "blank in v1 (step 5 adds)"
@@ -150,9 +150,9 @@
       "family": "Strecker aldehydes, methional",
       "lever": "temperature",
       "reading": "needs experiment",
-      "why": "keyed: best cell 'Phenylacetaldehyde, time 30-120 min' reads too few laboratories (2 laboratories)",
+      "why": "keyed: best cell 'Phenylacetaldehyde, time 30-120 min' reads direction unclear (3 laboratories)",
       "plant_protein_evidence": false,
-      "design": "temperature: 120 / 140 / 160 C; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 1 new laboratory(ies) to reach 3; measure Strecker aldehydes, methional",
+      "design": "temperature: 120 / 140 / 160 C; 5 replicate pots per arm; in a 15 % pea-isolate matrix; from 1 new laboratory(ies) to reach 3; measure Strecker aldehydes, methional",
       "engine": "blank in v1 (step 5 adds)"
     },
     {
@@ -176,10 +176,10 @@
     {
       "family": "Strecker aldehydes, methional",
       "lever": "sugar identity",
-      "reading": "needs experiment",
-      "why": "keyed: best cell 'Benzaldehyde, ribose vs glucose' reads too few laboratories (2 laboratories)",
+      "reading": "answered by the literature",
+      "why": "Methional (3-(methylthio)propanal), xylose vs glucose: +0.51 dex (new laboratory +0.41 to +0.60)",
       "plant_protein_evidence": true,
-      "design": "sugar identity: ribose vs glucose (vs xylose); 8 replicate pots per arm; matrix as in the keyed studies; from 1 new laboratory(ies) to reach 3; measure Strecker aldehydes, methional",
+      "design": null,
       "engine": "blank in v1 (step 5 adds)"
     },
     {
@@ -411,18 +411,18 @@
       "family": "lipid aldehydes (off-notes)",
       "lever": "pH",
       "reading": "needs experiment",
-      "why": "keyed: best cell '2-Pentylfuran, pH 4.5-6, initial or label' reads too few laboratories (1 laboratories)",
+      "why": "keyed: best cell '(E)-2-Octenal, pH 4.5-6, initial or label' reads too few laboratories (1 laboratories)",
       "plant_protein_evidence": false,
-      "design": "pH: pH 5.0 / 6.0 / 7.0; 8 replicate pots per arm; in a 15 % pea-isolate matrix; from 2 new laboratory(ies) to reach 3; measure lipid aldehydes (off-notes)",
+      "design": "pH: pH 5.0 / 6.0 / 7.0; 6 replicate pots per arm; in a 15 % pea-isolate matrix; from 2 new laboratory(ies) to reach 3; measure lipid aldehydes (off-notes)",
       "engine": "blank in v1 (step 5 adds)"
     },
     {
       "family": "lipid aldehydes (off-notes)",
       "lever": "temperature",
       "reading": "needs experiment",
-      "why": "keyed: best cell '2-Pentylfuran, time 30-120 min' reads too few laboratories (1 laboratories)",
+      "why": "keyed: best cell '(E)-2-Octenal, time 30-120 min' reads too few laboratories (1 laboratories)",
       "plant_protein_evidence": false,
-      "design": "temperature: 120 / 140 / 160 C; 5 replicate pots per arm; in a 15 % pea-isolate matrix; from 2 new laboratory(ies) to reach 3; measure lipid aldehydes (off-notes)",
+      "design": "temperature: 120 / 140 / 160 C; 8 replicate pots per arm; in a 15 % pea-isolate matrix; from 2 new laboratory(ies) to reach 3; measure lipid aldehydes (off-notes)",
       "engine": "blank in v1 (step 5 adds)"
     },
     {
@@ -447,9 +447,9 @@
       "family": "lipid aldehydes (off-notes)",
       "lever": "sugar identity",
       "reading": "needs experiment",
-      "why": "keyed: best cell '2-Pentylfuran, xylose vs glucose' reads too few laboratories (2 laboratories)",
+      "why": "keyed: best cell 'Hexanal, xylose vs glucose' reads direction unclear (3 laboratories)",
       "plant_protein_evidence": true,
-      "design": "sugar identity: ribose vs glucose (vs xylose); 2 replicate pots per arm; matrix as in the keyed studies; from 1 new laboratory(ies) to reach 3; measure lipid aldehydes (off-notes)",
+      "design": "sugar identity: ribose vs glucose (vs xylose); 3 replicate pots per arm; matrix as in the keyed studies; from 1 new laboratory(ies) to reach 3; measure lipid aldehydes (off-notes)",
       "engine": "blank in v1 (step 5 adds)"
     },
     {
@@ -546,7 +546,7 @@
       "family": "furanones, furfural",
       "lever": "pH",
       "reading": "answered by the literature",
-      "why": "Furfural, pH 4.5-6, initial or label: -1.18 dex (new laboratory -3.08 to +0.74)",
+      "why": "Furfural, pH 4.5-6, initial or label: -1.18 dex (new laboratory -3.09 to +0.74)",
       "plant_protein_evidence": false,
       "design": null,
       "engine": "blank in v1 (step 5 adds)"
@@ -582,9 +582,9 @@
       "family": "furanones, furfural",
       "lever": "sugar identity",
       "reading": "needs experiment",
-      "why": "keyed: best cell 'Furfural, ribose vs glucose' reads too few laboratories (2 laboratories)",
-      "plant_protein_evidence": false,
-      "design": "sugar identity: ribose vs glucose (vs xylose); 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 1 new laboratory(ies) to reach 3; measure furanones, furfural",
+      "why": "keyed: best cell '2-Furanmethanol, fructose vs glucose' reads too few laboratories (2 laboratories)",
+      "plant_protein_evidence": true,
+      "design": "sugar identity: ribose vs glucose (vs xylose); 2 replicate pots per arm; matrix as in the keyed studies; from 1 new laboratory(ies) to reach 3; measure furanones, furfural",
       "engine": "blank in v1 (step 5 adds)"
     },
     {
@@ -679,15 +679,15 @@
     }
   ],
   "counts": {
-    "answered by the literature": 3,
-    "needs experiment": 72
+    "answered by the literature": 4,
+    "needs experiment": 71
   },
   "provenance": {
     "artifact": "experiment_map",
     "generated_on": "2026-11-12",
     "git": {
-      "commit": "53bff9cdc7c6259c4d662940e3edbb019995ca4f",
-      "short": "53bff9cd",
+      "commit": "a30be9ad43239adc16342aae703a271e1259fbf2",
+      "short": "a30be9ad",
       "branch": "new-lab-keying",
       "dirty": true
     },
@@ -695,7 +695,7 @@
     "inputs": [
       {
         "path": "results/validation/lever_table.json",
-        "sha256": "00e68eccbd5ce57b7ae3f3dd75deed99046901d95ccc0d0ee8fd9a016f36b5cc"
+        "sha256": "ab733dc7c1db894c6634df48500ca32a8a67c477fb7435ede5c4b6a7fdc1de88"
       },
       {
         "path": "docs/reference/contrast_benchmark/split.yml",
