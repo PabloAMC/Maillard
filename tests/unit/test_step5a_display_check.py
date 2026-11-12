@@ -104,21 +104,21 @@ def test_display_needs_both_rivals_beaten_in_every_laboratory():
     rng = np.random.default_rng(0)
     good = [_row("a", 1.0, 0.9, 0.5), _row("a", 0.8, 0.8, 0.5), _row("b", 1.2, 1.1, 0.5), _row("b", 0.9, 1.0, 0.5)]
     out = S.score_rows(good, rng)
-    assert out["displayed"] and out["engine_minus_no_change"]["reading"] == "beats"
+    assert out["beats_both"] and out["engine_minus_no_change"]["reading"] == "beats"
     assert out["engine_minus_table"]["ci90"][1] < 0
     # one laboratory where the table is closer: the interval reaches zero or beyond, and the cell is not displayed
     mixed = good[:2] + [_row("b", 0.5, 0.9, 0.5), _row("b", 0.5, 1.0, 0.5)]
     out = S.score_rows(mixed, rng)
-    assert not out["displayed"] and out["engine_minus_table"]["reading"] != "beats"
+    assert not out["beats_both"] and out["engine_minus_table"]["reading"] != "beats"
     # one laboratory is never judged
     out = S.score_rows(good[:2], rng)
-    assert not out["displayed"] and out["engine_minus_no_change"]["reading"].startswith("not judged")
+    assert not out["beats_both"] and out["engine_minus_no_change"]["reading"].startswith("not judged")
 
 
 def test_engine_worse_than_no_change_loses():
     rows = [_row("a", 0.1, -1.0), _row("b", -0.1, 1.2), _row("a", 0.2, -0.9), _row("b", 0.1, 1.0)]
     out = S.score_rows(rows, np.random.default_rng(0))
-    assert out["engine_minus_no_change"]["reading"] == "loses" and not out["displayed"]
+    assert out["engine_minus_no_change"]["reading"] == "loses" and not out["beats_both"]
 
 
 def test_censored_rows_enter_the_sign_score_only():

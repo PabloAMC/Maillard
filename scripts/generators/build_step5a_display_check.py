@@ -504,7 +504,7 @@ def compare_errors(rows: Sequence[Mapping[str, Any]], rng: np.random.Generator) 
         out["engine_minus_table"]["ci90"] = _ci([b[1] for b in boot])
     for key in ("engine_minus_no_change", "engine_minus_table"):
         out[key]["reading"] = verdict(out[key].get("ci90"))
-    out["displayed"] = all(out[k]["reading"] == "beats" for k in ("engine_minus_no_change", "engine_minus_table"))
+    out["beats_both"] = all(out[k]["reading"] == "beats" for k in ("engine_minus_no_change", "engine_minus_table"))
     return out
 
 
@@ -530,7 +530,7 @@ def score_rows(rows: Sequence[Dict[str, Any]], rng: np.random.Generator) -> Dict
     """Errors on the rows with no censored arm (a censored arm makes the measured ratio a bound: prereg sec. 3);
     sign accuracy on all of them."""
     exact = [r for r in rows if not r["censored_arms"]]
-    out = compare_errors(exact, rng) if exact else {"contrasts": 0, "laboratories": 0, "displayed": False}
+    out = compare_errors(exact, rng) if exact else {"contrasts": 0, "laboratories": 0, "beats_both": False}
     out["sign_accuracy"] = sign_accuracy(rows)
     out["contrasts_with_a_censored_arm"] = len(rows) - len(exact)
     return out
@@ -562,8 +562,10 @@ def score_reading(items: Sequence[Mapping[str, Any]], reading: str, rival: Mappi
         if mine:
             rec.update(score_rows(mine, rng))
         else:
-            rec.update({"displayed": False, "not_simulable": dict(Counter(
+            rec.update({"beats_both": False, "not_simulable": dict(Counter(
                 n["why"] for n in not_simulable if tuple(n["cell"]) == cell).most_common())})
+        # prereg sec. 5: only the front-door reading displays a cell
+        rec["displayed"] = bool(reading == PRIMARY and rec["beats_both"])
         cells.append(rec)
     classes = {}
     for lc in sorted({it["lever_class"] for it in items}):
@@ -707,7 +709,8 @@ def _score_line(label: str, total: int, s: Optional[Mapping[str, Any]], simulate
     if not s or not s.get("contrasts"):
         return f"| {label} | {total} | {simulated} | - | - | - | - | - | - | - |"
     e, sa = s["median_abs_error"], s["sign_accuracy"]
-    sign = "-" if sa["engine"] is None else f"{sa['engine']:.0%} / {sa['table']:.0%} (n = {sa['contrasts']})"
+    sign = ("-" if sa["engine"] is None else f"{sa['engine']:.0%} / "
+            + (f"{sa['table']:.0%}" if s["table_estimates"] else "no estimate") + f" (n = {sa['contrasts']})")
     return (f"| {label} | {total} | {simulated} | {s['laboratories']} | {e['engine']:.2f} | {e['no_change']:.2f} | "
             f"{e['table']:.2f} | {_diff(s['engine_minus_no_change'])} | {_diff(s['engine_minus_table'])} | {sign} |")
 
@@ -751,13 +754,16 @@ def render_score(p: Mapping[str, Any]) -> str:
               for lc, s in r["lever_classes"].items()]
         L += [_score_line("**all**", r["test_contrasts"], r["overall"], r["simulated"]), "",
               HEAD.format(what="cell")]
-        L += [_score_line(_cell(x["cell"]) + (" **(displayed)**" if x.get("displayed") else ""),
+        L += [_score_line(_cell(x["cell"]) + (" **(displayed)**" if x.get("displayed") else
+                                               " (beats both; secondary reading, not a display)"
+                                               if x.get("beats_both") else ""),
                           x["test_contrasts"], x if x.get("contrasts") else None, x["simulated"])
               for x in r["cells"] if x["simulated"]]
         L += ["", "| contrast | cell | lab | measured | engine | table |", "|---|---|---|---|---|---|"]
         L += [f"| {x['contrast']}" + (f" ({x['level']} vs {x['against']})" if x.get("level") else "")
               + f" | {_cell(x['cell'])} | {x['lab']} | {_d(x['m'])}" + (" (bound)" if x["censored_arms"] else "")
-              + f" | {_d(x['engine'])} | {_d(x['table'])} |" for x in r["rows"]]
+              + f" | {_d(x['engine'])} | " + ("no estimate" if x["table"] is None else _d(x["table"])) + " |"
+              for x in r["rows"]]
         L.append("")
     L += ["## Cells the engine cannot simulate (front-door reading)", "",
           "| cell | TEST contrasts | why |", "|---|---|---|"]

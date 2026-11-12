@@ -178,4 +178,9 @@ it, so that additive fields in the table's file (PR 130) do not make this record
 
 ## Amendments
 
-(none)
+**A1 (2026-11-12, after the first score run; presentation only, no number moves).** The first score run's table
+marked a cell of the pH-clamped sensitivity run "(displayed)": the generator computed the flag in every reading,
+against sec. 5, which displays a cell under the front-door reading only. The flag is now `beats_both` in every
+reading and `displayed` is set under the front-door reading alone; a contrast or cell for which the
+DEVELOPMENT-only table has no estimate prints "no estimate" instead of a zero. The score was re-run with the same
+seed; every error, difference and interval is unchanged.
