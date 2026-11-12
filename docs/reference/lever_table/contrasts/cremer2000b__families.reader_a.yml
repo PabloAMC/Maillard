@@ -1,0 +1,140 @@
+source: cremer2000b
+pdf: data/articles/cremer2000b.pdf
+reader: a
+scope_note: 'Group F. No table prints values; both contrasts digitised (300 dpi render). Fig. 2 (3-MB standardised to max
+  = 1 vs pH, 60 min) is the same model data as Fig. 1 and is not keyed again. Plant powders (paprika, tomato) report only
+  the sum of acetaldehyde + 2-MP + 2-MB + 3-MB, not a listed single odorant: not keyed. Fig. 5 carbonyl partners are not sugars
+  (glyoxal, methylglyoxal); keyed under sugar identity as the nearest class.'
+contrasts:
+- id: cremer2000b-fam-1
+  odorant: 3-methylbutanal
+  lever_class: pH
+  lever: pH adjusted in the aqueous mix before freeze-drying (3, 5, 7)
+  focal: true
+  location: Fig. 1 (60 min points), p. 249
+  digitised: true
+  unit: mmol/kg
+  quant_type: absolute
+  time_course_rule: main result time (60 min isochrone, Fig. 2 and text)
+  quantity: amount
+  arms:
+  - label: Model G/L-3 (pH 3)
+    lever_value: 3
+    value: 0.26
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 3
+      ph_basis: initial
+      temp_C: 90
+      time_min: 60
+      precursors:
+        glucose: 1.0 mol/kg
+        L-leucine: 50 mmol/kg
+      buffer: 0.1 M citrate (20 ml per model before freeze-drying)
+      matrix: other (freeze-dried low-moisture model on microcrystalline cellulose, a_w 0.52)
+      headspace: sealed, unstated
+  - label: Model G/L-5 (pH 5)
+    lever_value: 5
+    value: 0.69
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5
+      ph_basis: initial
+      temp_C: 90
+      time_min: 60
+      precursors:
+        glucose: 1.0 mol/kg
+        L-leucine: 50 mmol/kg
+      buffer: 0.1 M citrate (20 ml per model before freeze-drying)
+      matrix: other (freeze-dried low-moisture model on microcrystalline cellulose, a_w 0.52)
+      headspace: sealed, unstated
+  - label: Model G/L-7 (pH 7)
+    lever_value: 7
+    value: 1.42
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: initial
+      temp_C: 90
+      time_min: 60
+      precursors:
+        glucose: 1.0 mol/kg
+        L-leucine: 50 mmol/kg
+      buffer: 0.1 M citrate (20 ml per model before freeze-drying)
+      matrix: other (freeze-dried low-moisture model on microcrystalline cellulose, a_w 0.52)
+      headspace: sealed, unstated
+- id: cremer2000b-fam-2
+  odorant: 3-methylbutanal
+  lever_class: sugar identity
+  lever: 'carbonyl partner of leucine: glucose vs methylglyoxal vs glyoxal'
+  focal: false
+  location: Fig. 5, p. 250
+  digitised: true
+  unit: mol% (of leucine)
+  quant_type: absolute
+  time_course_rule: longest time (120 min; no main time stated for Fig. 5)
+  quantity: amount
+  arms:
+  - label: Glucose + Leu
+    lever_value: glucose
+    value: 2.2
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 90
+      time_min: 120
+      precursors:
+        glucose: 50 mmol/kg
+        L-leucine: 50 mmol/kg
+      buffer: 0.1 M citrate pH 7.0
+      matrix: other (freeze-dried low-moisture model on microcrystalline cellulose, a_w 0.75)
+      headspace: sealed, unstated
+  - label: Methylglyoxal + Leu
+    lever_value: methylglyoxal
+    value: 8.8
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 90
+      time_min: 120
+      precursors:
+        methylglyoxal: 50 mmol/kg
+        L-leucine: 50 mmol/kg
+      buffer: 0.1 M citrate pH 7.0
+      matrix: other (freeze-dried low-moisture model on microcrystalline cellulose, a_w 0.75)
+      headspace: sealed, unstated
+  - label: Glyoxal + Leu
+    lever_value: glyoxal
+    value: 36.6
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 90
+      time_min: 120
+      precursors:
+        glyoxal: 50 mmol/kg
+        L-leucine: 50 mmol/kg
+      buffer: 0.1 M citrate pH 7.0
+      matrix: other (freeze-dried low-moisture model on microcrystalline cellulose, a_w 0.75)
+      headspace: sealed, unstated

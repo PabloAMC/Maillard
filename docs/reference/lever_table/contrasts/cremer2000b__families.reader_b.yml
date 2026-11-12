@@ -1,0 +1,125 @@
+source: "cremer2000b"
+pdf: "data/articles/cremer2000b.pdf"
+reader: "b"
+scope_note: "No tables; all values digitised. Fig. 2 re-plots the Fig. 1 model-system 3-MB data at 60 min normalised to max = 1 (read 0.17 / 0.59 / 1.00 at pH 3 / 5 / 7; Fig. 1 read 0.24 / 0.68 / 1.40 mmol/kg, so the two figures disagree for pH 5) - keyed once from Fig. 1 (absolute). Plant-powder pH series (paprika, tomato) report only the SUM of AA, 2-MP, 2-MB and 3-MB: not keyed (no single listed odorant). Freeze-drying comparison (text) is also a sum: not keyed."
+contrasts:
+  - id: "cremer2000b-1"
+    odorant: "3-methylbutanal"
+    lever_class: "pH"
+    lever: "pH adjusted in aqueous suspension before freeze-drying (3 / 5 / 7)"
+    focal: true
+    location: "Fig. 1 (60 min points), p. 249; same data normalised in Fig. 2"
+    digitised: true
+    unit: "mmol/kg"
+    quant_type: "absolute"
+    quantity: "amount"
+    time_course_rule: "main result time (60 min isochrones, Fig. 2 caption and text)"
+    arms:
+      - label: "Model G/L-3 (pH 3)"
+        lever_value: 3
+        value: 0.24
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 3
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {glucose: "1.0 mol/kg", L-leucine: "50 mmol/kg"}
+          buffer: "0.1 M citrate (pH 3), freeze-dried"
+          matrix: "other (low-moisture microcrystalline cellulose model, a_w 0.52)"
+          headspace: "sealed, unstated"
+      - label: "Model G/L-5 (pH 5)"
+        lever_value: 5
+        value: 0.68
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {glucose: "1.0 mol/kg", L-leucine: "50 mmol/kg"}
+          buffer: "0.1 M citrate (pH 5), freeze-dried"
+          matrix: "other (low-moisture microcrystalline cellulose model, a_w 0.52)"
+          headspace: "sealed, unstated"
+      - label: "Model G/L-7 (pH 7)"
+        lever_value: 7
+        value: 1.40
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {glucose: "1.0 mol/kg", L-leucine: "50 mmol/kg"}
+          buffer: "0.1 M citrate (pH 7), freeze-dried"
+          matrix: "other (low-moisture microcrystalline cellulose model, a_w 0.52)"
+          headspace: "sealed, unstated"
+  - id: "cremer2000b-2"
+    odorant: "3-methylbutanal"
+    lever_class: "sugar identity"
+    lever: "carbonyl partner of leucine: glucose vs methylglyoxal vs glyoxal (equimolar)"
+    focal: false
+    location: "Fig. 5, p. 250"
+    digitised: true
+    unit: "mol% (aldehyde formed)"
+    quant_type: "absolute"
+    quantity: "amount"
+    time_course_rule: "longest time (120 min); no main time stated for Fig. 5"
+    arms:
+      - label: "Glucose + Leu"
+        lever_value: "glucose"
+        value: 2.2
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 120
+          precursors: {glucose: "50 mmol/kg", L-leucine: "50 mmol/kg"}
+          buffer: "0.1 M citrate (pH 7.0), freeze-dried"
+          matrix: "other (low-moisture microcrystalline cellulose model, a_w 0.75)"
+          headspace: "sealed, unstated"
+      - label: "Methylglyoxal + Leu"
+        lever_value: "methylglyoxal"
+        value: 8.9
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 120
+          precursors: {methylglyoxal: "50 mmol/kg", L-leucine: "50 mmol/kg"}
+          buffer: "0.1 M citrate (pH 7.0), freeze-dried"
+          matrix: "other (low-moisture microcrystalline cellulose model, a_w 0.75)"
+          headspace: "sealed, unstated"
+      - label: "Glyoxal + Leu"
+        lever_value: "glyoxal"
+        value: 36.6
+        censor: none
+        limit: null
+        n: null
+        sd: null
+        conditions:
+          ph: 7.0
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 120
+          precursors: {glyoxal: "50 mmol/kg", L-leucine: "50 mmol/kg"}
+          buffer: "0.1 M citrate (pH 7.0), freeze-dried"
+          matrix: "other (low-moisture microcrystalline cellulose model, a_w 0.75)"
+          headspace: "sealed, unstated"
