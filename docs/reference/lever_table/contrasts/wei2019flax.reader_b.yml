@@ -1,0 +1,5 @@
+source: "wei2019flax"
+pdf: "data/articles/wei2019.pdf"
+reader: "b"
+scope_note: "No group-T contrast: Table 1 prints only class sums (Thiols (4), Sulfur-substituted furans (5)); MFT and furfuryl mercaptan are named in the text (p. 91) without values; individual compounds are in supplementary material not in the PDF."
+contrasts: []

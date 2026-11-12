@@ -1,0 +1,413 @@
+source: "park2022mealworm"
+pdf: "data/articles/park2022.pdf"
+reader: "b"
+scope_note: "Table 2 relative peak areas (n = 3), mealworm protein + xylose at 125 C 60 min, no amino acid vs 11 added amino acids; MFT and FFT detected only in MPCys-RF, ND (no limit printed) in all other arms. No H2S or disulfides of the listed thiols reported."
+contrasts:
+  - id: "park2022mealworm-1"
+    odorant: "2-Methyl-3-furanthiol"
+    lever_class: "amino acid identity"
+    lever: "amino acid added to mealworm protein + D-xylose (none vs Arg, Cys, Gln, Gly, Met, Pro, Ser, Thr, Trp, Tyr, Val)"
+    focal: true
+    location: "Table 2, compound no. 34, pp. 1650-1652"
+    digitised: false
+    unit: "relative peak area (peak area / internal standard benzyl acetate)"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    arms:
+      - label: "MP-RF"
+        lever_value: "none"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 125
+          time_min: 60
+          precursors: {"mealworm protein powder": "2 g", "D-xylose": "0.1 g", "distilled water": "2 mL"}
+          buffer: "none"
+          matrix: "other (Tenebrio molitor mealworm protein powder in water)"
+          headspace: "unstated"
+      - label: "MPArg-RF"
+        lever_value: "Arg"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 125
+          time_min: 60
+          precursors: {"mealworm protein powder": "2 g", "D-xylose": "0.1 g", "Arg": "0.1 g", "distilled water": "2 mL"}
+          buffer: "none"
+          matrix: "other (Tenebrio molitor mealworm protein powder in water)"
+          headspace: "unstated"
+      - label: "MPCys-RF"
+        lever_value: "Cys"
+        value: 0.111
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.032
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 125
+          time_min: 60
+          precursors: {"mealworm protein powder": "2 g", "D-xylose": "0.1 g", "Cys": "0.1 g", "distilled water": "2 mL"}
+          buffer: "none"
+          matrix: "other (Tenebrio molitor mealworm protein powder in water)"
+          headspace: "unstated"
+      - label: "MPGln-RF"
+        lever_value: "Gln"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 125
+          time_min: 60
+          precursors: {"mealworm protein powder": "2 g", "D-xylose": "0.1 g", "Gln": "0.1 g", "distilled water": "2 mL"}
+          buffer: "none"
+          matrix: "other (Tenebrio molitor mealworm protein powder in water)"
+          headspace: "unstated"
+      - label: "MPGly-RF"
+        lever_value: "Gly"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 125
+          time_min: 60
+          precursors: {"mealworm protein powder": "2 g", "D-xylose": "0.1 g", "Gly": "0.1 g", "distilled water": "2 mL"}
+          buffer: "none"
+          matrix: "other (Tenebrio molitor mealworm protein powder in water)"
+          headspace: "unstated"
+      - label: "MPMet-RF"
+        lever_value: "Met"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 125
+          time_min: 60
+          precursors: {"mealworm protein powder": "2 g", "D-xylose": "0.1 g", "Met": "0.1 g", "distilled water": "2 mL"}
+          buffer: "none"
+          matrix: "other (Tenebrio molitor mealworm protein powder in water)"
+          headspace: "unstated"
+      - label: "MPPro-RF"
+        lever_value: "Pro"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 125
+          time_min: 60
+          precursors: {"mealworm protein powder": "2 g", "D-xylose": "0.1 g", "Pro": "0.1 g", "distilled water": "2 mL"}
+          buffer: "none"
+          matrix: "other (Tenebrio molitor mealworm protein powder in water)"
+          headspace: "unstated"
+      - label: "MPSer-RF"
+        lever_value: "Ser"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 125
+          time_min: 60
+          precursors: {"mealworm protein powder": "2 g", "D-xylose": "0.1 g", "Ser": "0.1 g", "distilled water": "2 mL"}
+          buffer: "none"
+          matrix: "other (Tenebrio molitor mealworm protein powder in water)"
+          headspace: "unstated"
+      - label: "MPThr-RF"
+        lever_value: "Thr"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 125
+          time_min: 60
+          precursors: {"mealworm protein powder": "2 g", "D-xylose": "0.1 g", "Thr": "0.1 g", "distilled water": "2 mL"}
+          buffer: "none"
+          matrix: "other (Tenebrio molitor mealworm protein powder in water)"
+          headspace: "unstated"
+      - label: "MPTrp-RF"
+        lever_value: "Trp"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 125
+          time_min: 60
+          precursors: {"mealworm protein powder": "2 g", "D-xylose": "0.1 g", "Trp": "0.1 g", "distilled water": "2 mL"}
+          buffer: "none"
+          matrix: "other (Tenebrio molitor mealworm protein powder in water)"
+          headspace: "unstated"
+      - label: "MPTyr-RF"
+        lever_value: "Tyr"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 125
+          time_min: 60
+          precursors: {"mealworm protein powder": "2 g", "D-xylose": "0.1 g", "Tyr": "0.1 g", "distilled water": "2 mL"}
+          buffer: "none"
+          matrix: "other (Tenebrio molitor mealworm protein powder in water)"
+          headspace: "unstated"
+      - label: "MPVal-RF"
+        lever_value: "Val"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 125
+          time_min: 60
+          precursors: {"mealworm protein powder": "2 g", "D-xylose": "0.1 g", "Val": "0.1 g", "distilled water": "2 mL"}
+          buffer: "none"
+          matrix: "other (Tenebrio molitor mealworm protein powder in water)"
+          headspace: "unstated"
+  - id: "park2022mealworm-2"
+    odorant: "2-Furfurylthiol"
+    lever_class: "amino acid identity"
+    lever: "amino acid added to mealworm protein + D-xylose (none vs Arg, Cys, Gln, Gly, Met, Pro, Ser, Thr, Trp, Tyr, Val)"
+    focal: true
+    location: "Table 2, compound no. 35, pp. 1650-1652"
+    digitised: false
+    unit: "relative peak area (peak area / internal standard benzyl acetate)"
+    quant_type: "peak_area"
+    quantity: amount
+    time_course_rule: "not a time course"
+    arms:
+      - label: "MP-RF"
+        lever_value: "none"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 125
+          time_min: 60
+          precursors: {"mealworm protein powder": "2 g", "D-xylose": "0.1 g", "distilled water": "2 mL"}
+          buffer: "none"
+          matrix: "other (Tenebrio molitor mealworm protein powder in water)"
+          headspace: "unstated"
+      - label: "MPArg-RF"
+        lever_value: "Arg"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 125
+          time_min: 60
+          precursors: {"mealworm protein powder": "2 g", "D-xylose": "0.1 g", "Arg": "0.1 g", "distilled water": "2 mL"}
+          buffer: "none"
+          matrix: "other (Tenebrio molitor mealworm protein powder in water)"
+          headspace: "unstated"
+      - label: "MPCys-RF"
+        lever_value: "Cys"
+        value: 0.294
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.084
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 125
+          time_min: 60
+          precursors: {"mealworm protein powder": "2 g", "D-xylose": "0.1 g", "Cys": "0.1 g", "distilled water": "2 mL"}
+          buffer: "none"
+          matrix: "other (Tenebrio molitor mealworm protein powder in water)"
+          headspace: "unstated"
+      - label: "MPGln-RF"
+        lever_value: "Gln"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 125
+          time_min: 60
+          precursors: {"mealworm protein powder": "2 g", "D-xylose": "0.1 g", "Gln": "0.1 g", "distilled water": "2 mL"}
+          buffer: "none"
+          matrix: "other (Tenebrio molitor mealworm protein powder in water)"
+          headspace: "unstated"
+      - label: "MPGly-RF"
+        lever_value: "Gly"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 125
+          time_min: 60
+          precursors: {"mealworm protein powder": "2 g", "D-xylose": "0.1 g", "Gly": "0.1 g", "distilled water": "2 mL"}
+          buffer: "none"
+          matrix: "other (Tenebrio molitor mealworm protein powder in water)"
+          headspace: "unstated"
+      - label: "MPMet-RF"
+        lever_value: "Met"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 125
+          time_min: 60
+          precursors: {"mealworm protein powder": "2 g", "D-xylose": "0.1 g", "Met": "0.1 g", "distilled water": "2 mL"}
+          buffer: "none"
+          matrix: "other (Tenebrio molitor mealworm protein powder in water)"
+          headspace: "unstated"
+      - label: "MPPro-RF"
+        lever_value: "Pro"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 125
+          time_min: 60
+          precursors: {"mealworm protein powder": "2 g", "D-xylose": "0.1 g", "Pro": "0.1 g", "distilled water": "2 mL"}
+          buffer: "none"
+          matrix: "other (Tenebrio molitor mealworm protein powder in water)"
+          headspace: "unstated"
+      - label: "MPSer-RF"
+        lever_value: "Ser"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 125
+          time_min: 60
+          precursors: {"mealworm protein powder": "2 g", "D-xylose": "0.1 g", "Ser": "0.1 g", "distilled water": "2 mL"}
+          buffer: "none"
+          matrix: "other (Tenebrio molitor mealworm protein powder in water)"
+          headspace: "unstated"
+      - label: "MPThr-RF"
+        lever_value: "Thr"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 125
+          time_min: 60
+          precursors: {"mealworm protein powder": "2 g", "D-xylose": "0.1 g", "Thr": "0.1 g", "distilled water": "2 mL"}
+          buffer: "none"
+          matrix: "other (Tenebrio molitor mealworm protein powder in water)"
+          headspace: "unstated"
+      - label: "MPTrp-RF"
+        lever_value: "Trp"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 125
+          time_min: 60
+          precursors: {"mealworm protein powder": "2 g", "D-xylose": "0.1 g", "Trp": "0.1 g", "distilled water": "2 mL"}
+          buffer: "none"
+          matrix: "other (Tenebrio molitor mealworm protein powder in water)"
+          headspace: "unstated"
+      - label: "MPTyr-RF"
+        lever_value: "Tyr"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 125
+          time_min: 60
+          precursors: {"mealworm protein powder": "2 g", "D-xylose": "0.1 g", "Tyr": "0.1 g", "distilled water": "2 mL"}
+          buffer: "none"
+          matrix: "other (Tenebrio molitor mealworm protein powder in water)"
+          headspace: "unstated"
+      - label: "MPVal-RF"
+        lever_value: "Val"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 125
+          time_min: 60
+          precursors: {"mealworm protein powder": "2 g", "D-xylose": "0.1 g", "Val": "0.1 g", "distilled water": "2 mL"}
+          buffer: "none"
+          matrix: "other (Tenebrio molitor mealworm protein powder in water)"
+          headspace: "unstated"

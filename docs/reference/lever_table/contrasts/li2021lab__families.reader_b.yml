@@ -1,0 +1,3079 @@
+source: li2021lab
+pdf: data/articles/li2021b.pdf
+reader: b
+scope_note: 2x2 design (xylose 0/3.5 x cysteine 0/1.0 g/100 mL), all at initial pH 5.5, 100 C, 60 min. 2-octenal printed without
+  isomer. 2,5-dimethylpyrazine printed as 0.00 (not 'nd') in three arms, keyed as printed. nd without LOD. Unheated control
+  not keyed. Values semi-quantified against 2-octanol.
+contrasts:
+- id: li2021lab-1
+  odorant: methional
+  lever_class: sulfur source
+  lever: L-cysteine added (none vs 1.0 g/100 mL), xylose 0 g/100 mL
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L0-0
+    lever_value: none
+    value: 4.61
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.86
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L0-10
+    lever_value: L-cysteine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+- id: li2021lab-2
+  odorant: methional
+  lever_class: sulfur source
+  lever: L-cysteine added (none vs 1.0 g/100 mL), xylose 3.5 g/100 mL
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L35-0
+    lever_value: none
+    value: 15.28
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.32
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L35-10
+    lever_value: L-cysteine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+- id: li2021lab-3
+  odorant: methional
+  lever_class: precursor dose
+  lever: xylose added (0 vs 3.5 g/100 mL), cysteine 0 g/100 mL
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L0-0
+    lever_value: 0
+    value: 4.61
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.86
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L35-0
+    lever_value: 3.5
+    value: 15.28
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.32
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+- id: li2021lab-4
+  odorant: methional
+  lever_class: precursor dose
+  lever: xylose added (0 vs 3.5 g/100 mL), cysteine 1.0 g/100 mL
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L0-10
+    lever_value: 0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L35-10
+    lever_value: 3.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+- id: li2021lab-5
+  odorant: 2-acetylthiazole
+  lever_class: sulfur source
+  lever: L-cysteine added (none vs 1.0 g/100 mL), xylose 0 g/100 mL
+  focal: false
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L0-0
+    lever_value: none
+    value: 0.49
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.11
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L0-10
+    lever_value: L-cysteine
+    value: 0.32
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.05
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+- id: li2021lab-6
+  odorant: 2-acetylthiazole
+  lever_class: sulfur source
+  lever: L-cysteine added (none vs 1.0 g/100 mL), xylose 3.5 g/100 mL
+  focal: false
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L35-0
+    lever_value: none
+    value: 2.23
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.33
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L35-10
+    lever_value: L-cysteine
+    value: 0.56
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.03
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+- id: li2021lab-7
+  odorant: 2-acetylthiazole
+  lever_class: precursor dose
+  lever: xylose added (0 vs 3.5 g/100 mL), cysteine 0 g/100 mL
+  focal: false
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L0-0
+    lever_value: 0
+    value: 0.49
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.11
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L35-0
+    lever_value: 3.5
+    value: 2.23
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.33
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+- id: li2021lab-8
+  odorant: 2-acetylthiazole
+  lever_class: precursor dose
+  lever: xylose added (0 vs 3.5 g/100 mL), cysteine 1.0 g/100 mL
+  focal: false
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L0-10
+    lever_value: 0
+    value: 0.32
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.05
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L35-10
+    lever_value: 3.5
+    value: 0.56
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.03
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+- id: li2021lab-9
+  odorant: 1-hexanol
+  lever_class: sulfur source
+  lever: L-cysteine added (none vs 1.0 g/100 mL), xylose 0 g/100 mL
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L0-0
+    lever_value: none
+    value: 414.47
+    censor: none
+    limit: null
+    n: 3
+    sd: 8.08
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L0-10
+    lever_value: L-cysteine
+    value: 405.41
+    censor: none
+    limit: null
+    n: 3
+    sd: 8.04
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+- id: li2021lab-10
+  odorant: 1-hexanol
+  lever_class: sulfur source
+  lever: L-cysteine added (none vs 1.0 g/100 mL), xylose 3.5 g/100 mL
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L35-0
+    lever_value: none
+    value: 286.35
+    censor: none
+    limit: null
+    n: 3
+    sd: 10.96
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L35-10
+    lever_value: L-cysteine
+    value: 350.25
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.36
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+- id: li2021lab-11
+  odorant: 1-hexanol
+  lever_class: precursor dose
+  lever: xylose added (0 vs 3.5 g/100 mL), cysteine 0 g/100 mL
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L0-0
+    lever_value: 0
+    value: 414.47
+    censor: none
+    limit: null
+    n: 3
+    sd: 8.08
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L35-0
+    lever_value: 3.5
+    value: 286.35
+    censor: none
+    limit: null
+    n: 3
+    sd: 10.96
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+- id: li2021lab-12
+  odorant: 1-hexanol
+  lever_class: precursor dose
+  lever: xylose added (0 vs 3.5 g/100 mL), cysteine 1.0 g/100 mL
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L0-10
+    lever_value: 0
+    value: 405.41
+    censor: none
+    limit: null
+    n: 3
+    sd: 8.04
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L35-10
+    lever_value: 3.5
+    value: 350.25
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.36
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+- id: li2021lab-13
+  odorant: 1-octen-3-ol
+  lever_class: sulfur source
+  lever: L-cysteine added (none vs 1.0 g/100 mL), xylose 0 g/100 mL
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L0-0
+    lever_value: none
+    value: 124.92
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.8
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L0-10
+    lever_value: L-cysteine
+    value: 47.9
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.31
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+- id: li2021lab-14
+  odorant: 1-octen-3-ol
+  lever_class: sulfur source
+  lever: L-cysteine added (none vs 1.0 g/100 mL), xylose 3.5 g/100 mL
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L35-0
+    lever_value: none
+    value: 91.23
+    censor: none
+    limit: null
+    n: 3
+    sd: 3.86
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L35-10
+    lever_value: L-cysteine
+    value: 80.66
+    censor: none
+    limit: null
+    n: 3
+    sd: 9.31
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+- id: li2021lab-15
+  odorant: 1-octen-3-ol
+  lever_class: precursor dose
+  lever: xylose added (0 vs 3.5 g/100 mL), cysteine 0 g/100 mL
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L0-0
+    lever_value: 0
+    value: 124.92
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.8
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L35-0
+    lever_value: 3.5
+    value: 91.23
+    censor: none
+    limit: null
+    n: 3
+    sd: 3.86
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+- id: li2021lab-16
+  odorant: 1-octen-3-ol
+  lever_class: precursor dose
+  lever: xylose added (0 vs 3.5 g/100 mL), cysteine 1.0 g/100 mL
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L0-10
+    lever_value: 0
+    value: 47.9
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.31
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L35-10
+    lever_value: 3.5
+    value: 80.66
+    censor: none
+    limit: null
+    n: 3
+    sd: 9.31
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+- id: li2021lab-17
+  odorant: pentanal
+  lever_class: sulfur source
+  lever: L-cysteine added (none vs 1.0 g/100 mL), xylose 0 g/100 mL
+  focal: false
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L0-0
+    lever_value: none
+    value: 7.33
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.46
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L0-10
+    lever_value: L-cysteine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+- id: li2021lab-18
+  odorant: pentanal
+  lever_class: sulfur source
+  lever: L-cysteine added (none vs 1.0 g/100 mL), xylose 3.5 g/100 mL
+  focal: false
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L35-0
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L35-10
+    lever_value: L-cysteine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+- id: li2021lab-19
+  odorant: pentanal
+  lever_class: precursor dose
+  lever: xylose added (0 vs 3.5 g/100 mL), cysteine 0 g/100 mL
+  focal: false
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L0-0
+    lever_value: 0
+    value: 7.33
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.46
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L35-0
+    lever_value: 3.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+- id: li2021lab-20
+  odorant: pentanal
+  lever_class: precursor dose
+  lever: xylose added (0 vs 3.5 g/100 mL), cysteine 1.0 g/100 mL
+  focal: false
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L0-10
+    lever_value: 0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L35-10
+    lever_value: 3.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+- id: li2021lab-21
+  odorant: hexanal
+  lever_class: sulfur source
+  lever: L-cysteine added (none vs 1.0 g/100 mL), xylose 0 g/100 mL
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L0-0
+    lever_value: none
+    value: 57.64
+    censor: none
+    limit: null
+    n: 3
+    sd: 3.03
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L0-10
+    lever_value: L-cysteine
+    value: 13.84
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.28
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+- id: li2021lab-22
+  odorant: hexanal
+  lever_class: sulfur source
+  lever: L-cysteine added (none vs 1.0 g/100 mL), xylose 3.5 g/100 mL
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L35-0
+    lever_value: none
+    value: 3.99
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.66
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L35-10
+    lever_value: L-cysteine
+    value: 14.79
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.22
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+- id: li2021lab-23
+  odorant: hexanal
+  lever_class: precursor dose
+  lever: xylose added (0 vs 3.5 g/100 mL), cysteine 0 g/100 mL
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L0-0
+    lever_value: 0
+    value: 57.64
+    censor: none
+    limit: null
+    n: 3
+    sd: 3.03
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L35-0
+    lever_value: 3.5
+    value: 3.99
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.66
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+- id: li2021lab-24
+  odorant: hexanal
+  lever_class: precursor dose
+  lever: xylose added (0 vs 3.5 g/100 mL), cysteine 1.0 g/100 mL
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L0-10
+    lever_value: 0
+    value: 13.84
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.28
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L35-10
+    lever_value: 3.5
+    value: 14.79
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.22
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+- id: li2021lab-25
+  odorant: octanal
+  lever_class: sulfur source
+  lever: L-cysteine added (none vs 1.0 g/100 mL), xylose 0 g/100 mL
+  focal: false
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L0-0
+    lever_value: none
+    value: 7.61
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.48
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L0-10
+    lever_value: L-cysteine
+    value: 3.68
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.56
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+- id: li2021lab-26
+  odorant: octanal
+  lever_class: sulfur source
+  lever: L-cysteine added (none vs 1.0 g/100 mL), xylose 3.5 g/100 mL
+  focal: false
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L35-0
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L35-10
+    lever_value: L-cysteine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+- id: li2021lab-27
+  odorant: octanal
+  lever_class: precursor dose
+  lever: xylose added (0 vs 3.5 g/100 mL), cysteine 0 g/100 mL
+  focal: false
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L0-0
+    lever_value: 0
+    value: 7.61
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.48
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L35-0
+    lever_value: 3.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+- id: li2021lab-28
+  odorant: octanal
+  lever_class: precursor dose
+  lever: xylose added (0 vs 3.5 g/100 mL), cysteine 1.0 g/100 mL
+  focal: false
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L0-10
+    lever_value: 0
+    value: 3.68
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.56
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L35-10
+    lever_value: 3.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+- id: li2021lab-29
+  odorant: nonanal
+  lever_class: sulfur source
+  lever: L-cysteine added (none vs 1.0 g/100 mL), xylose 0 g/100 mL
+  focal: false
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L0-0
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L0-10
+    lever_value: L-cysteine
+    value: 3.95
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.14
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+- id: li2021lab-30
+  odorant: nonanal
+  lever_class: sulfur source
+  lever: L-cysteine added (none vs 1.0 g/100 mL), xylose 3.5 g/100 mL
+  focal: false
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L35-0
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L35-10
+    lever_value: L-cysteine
+    value: 3.78
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.26
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+- id: li2021lab-31
+  odorant: nonanal
+  lever_class: precursor dose
+  lever: xylose added (0 vs 3.5 g/100 mL), cysteine 0 g/100 mL
+  focal: false
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L0-0
+    lever_value: 0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L35-0
+    lever_value: 3.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+- id: li2021lab-32
+  odorant: nonanal
+  lever_class: precursor dose
+  lever: xylose added (0 vs 3.5 g/100 mL), cysteine 1.0 g/100 mL
+  focal: false
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L0-10
+    lever_value: 0
+    value: 3.95
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.14
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L35-10
+    lever_value: 3.5
+    value: 3.78
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.26
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+- id: li2021lab-33
+  odorant: 2-octenal
+  lever_class: sulfur source
+  lever: L-cysteine added (none vs 1.0 g/100 mL), xylose 0 g/100 mL
+  focal: false
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L0-0
+    lever_value: none
+    value: 5.6
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.35
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L0-10
+    lever_value: L-cysteine
+    value: 1.36
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.13
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+- id: li2021lab-34
+  odorant: 2-octenal
+  lever_class: sulfur source
+  lever: L-cysteine added (none vs 1.0 g/100 mL), xylose 3.5 g/100 mL
+  focal: false
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L35-0
+    lever_value: none
+    value: 1.65
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.15
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L35-10
+    lever_value: L-cysteine
+    value: 1.18
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.21
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+- id: li2021lab-35
+  odorant: 2-octenal
+  lever_class: precursor dose
+  lever: xylose added (0 vs 3.5 g/100 mL), cysteine 0 g/100 mL
+  focal: false
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L0-0
+    lever_value: 0
+    value: 5.6
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.35
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L35-0
+    lever_value: 3.5
+    value: 1.65
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.15
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+- id: li2021lab-36
+  odorant: 2-octenal
+  lever_class: precursor dose
+  lever: xylose added (0 vs 3.5 g/100 mL), cysteine 1.0 g/100 mL
+  focal: false
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L0-10
+    lever_value: 0
+    value: 1.36
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.13
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L35-10
+    lever_value: 3.5
+    value: 1.18
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.21
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+- id: li2021lab-37
+  odorant: furfural
+  lever_class: sulfur source
+  lever: L-cysteine added (none vs 1.0 g/100 mL), xylose 0 g/100 mL
+  focal: false
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L0-0
+    lever_value: none
+    value: 4.23
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.08
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L0-10
+    lever_value: L-cysteine
+    value: 0.73
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.13
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+- id: li2021lab-38
+  odorant: furfural
+  lever_class: sulfur source
+  lever: L-cysteine added (none vs 1.0 g/100 mL), xylose 3.5 g/100 mL
+  focal: false
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L35-0
+    lever_value: none
+    value: 230.87
+    censor: none
+    limit: null
+    n: 3
+    sd: 13.68
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L35-10
+    lever_value: L-cysteine
+    value: 28.57
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.42
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+- id: li2021lab-39
+  odorant: furfural
+  lever_class: precursor dose
+  lever: xylose added (0 vs 3.5 g/100 mL), cysteine 0 g/100 mL
+  focal: false
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L0-0
+    lever_value: 0
+    value: 4.23
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.08
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L35-0
+    lever_value: 3.5
+    value: 230.87
+    censor: none
+    limit: null
+    n: 3
+    sd: 13.68
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+- id: li2021lab-40
+  odorant: furfural
+  lever_class: precursor dose
+  lever: xylose added (0 vs 3.5 g/100 mL), cysteine 1.0 g/100 mL
+  focal: false
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L0-10
+    lever_value: 0
+    value: 0.73
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.13
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L35-10
+    lever_value: 3.5
+    value: 28.57
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.42
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+- id: li2021lab-41
+  odorant: benzaldehyde
+  lever_class: sulfur source
+  lever: L-cysteine added (none vs 1.0 g/100 mL), xylose 0 g/100 mL
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L0-0
+    lever_value: none
+    value: 30.81
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.14
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L0-10
+    lever_value: L-cysteine
+    value: 71.46
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.37
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+- id: li2021lab-42
+  odorant: benzaldehyde
+  lever_class: sulfur source
+  lever: L-cysteine added (none vs 1.0 g/100 mL), xylose 3.5 g/100 mL
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L35-0
+    lever_value: none
+    value: 49.13
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.9
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L35-10
+    lever_value: L-cysteine
+    value: 46.11
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.62
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+- id: li2021lab-43
+  odorant: benzaldehyde
+  lever_class: precursor dose
+  lever: xylose added (0 vs 3.5 g/100 mL), cysteine 0 g/100 mL
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L0-0
+    lever_value: 0
+    value: 30.81
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.14
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L35-0
+    lever_value: 3.5
+    value: 49.13
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.9
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+- id: li2021lab-44
+  odorant: benzaldehyde
+  lever_class: precursor dose
+  lever: xylose added (0 vs 3.5 g/100 mL), cysteine 1.0 g/100 mL
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L0-10
+    lever_value: 0
+    value: 71.46
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.37
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L35-10
+    lever_value: 3.5
+    value: 46.11
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.62
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+- id: li2021lab-45
+  odorant: benzeneacetaldehyde (2-phenylacetaldehyde)
+  lever_class: sulfur source
+  lever: L-cysteine added (none vs 1.0 g/100 mL), xylose 0 g/100 mL
+  focal: false
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L0-0
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L0-10
+    lever_value: L-cysteine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+- id: li2021lab-46
+  odorant: benzeneacetaldehyde (2-phenylacetaldehyde)
+  lever_class: sulfur source
+  lever: L-cysteine added (none vs 1.0 g/100 mL), xylose 3.5 g/100 mL
+  focal: false
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L35-0
+    lever_value: none
+    value: 57.24
+    censor: none
+    limit: null
+    n: 3
+    sd: 4.53
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L35-10
+    lever_value: L-cysteine
+    value: 7.35
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.34
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+- id: li2021lab-47
+  odorant: benzeneacetaldehyde (2-phenylacetaldehyde)
+  lever_class: precursor dose
+  lever: xylose added (0 vs 3.5 g/100 mL), cysteine 0 g/100 mL
+  focal: false
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L0-0
+    lever_value: 0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L35-0
+    lever_value: 3.5
+    value: 57.24
+    censor: none
+    limit: null
+    n: 3
+    sd: 4.53
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+- id: li2021lab-48
+  odorant: benzeneacetaldehyde (2-phenylacetaldehyde)
+  lever_class: precursor dose
+  lever: xylose added (0 vs 3.5 g/100 mL), cysteine 1.0 g/100 mL
+  focal: false
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L0-10
+    lever_value: 0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L35-10
+    lever_value: 3.5
+    value: 7.35
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.34
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+- id: li2021lab-49
+  odorant: 2-pentylfuran
+  lever_class: sulfur source
+  lever: L-cysteine added (none vs 1.0 g/100 mL), xylose 0 g/100 mL
+  focal: false
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L0-0
+    lever_value: none
+    value: 64.25
+    censor: none
+    limit: null
+    n: 3
+    sd: 8.24
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L0-10
+    lever_value: L-cysteine
+    value: 27.87
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.62
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+- id: li2021lab-50
+  odorant: 2-pentylfuran
+  lever_class: sulfur source
+  lever: L-cysteine added (none vs 1.0 g/100 mL), xylose 3.5 g/100 mL
+  focal: false
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L35-0
+    lever_value: none
+    value: 48.22
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.1
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L35-10
+    lever_value: L-cysteine
+    value: 16.54
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.2
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+- id: li2021lab-51
+  odorant: 2-pentylfuran
+  lever_class: precursor dose
+  lever: xylose added (0 vs 3.5 g/100 mL), cysteine 0 g/100 mL
+  focal: false
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L0-0
+    lever_value: 0
+    value: 64.25
+    censor: none
+    limit: null
+    n: 3
+    sd: 8.24
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L35-0
+    lever_value: 3.5
+    value: 48.22
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.1
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+- id: li2021lab-52
+  odorant: 2-pentylfuran
+  lever_class: precursor dose
+  lever: xylose added (0 vs 3.5 g/100 mL), cysteine 1.0 g/100 mL
+  focal: false
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L0-10
+    lever_value: 0
+    value: 27.87
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.62
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L35-10
+    lever_value: 3.5
+    value: 16.54
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.2
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+- id: li2021lab-53
+  odorant: 2-acetylfuran
+  lever_class: sulfur source
+  lever: L-cysteine added (none vs 1.0 g/100 mL), xylose 0 g/100 mL
+  focal: false
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L0-0
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L0-10
+    lever_value: L-cysteine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+- id: li2021lab-54
+  odorant: 2-acetylfuran
+  lever_class: sulfur source
+  lever: L-cysteine added (none vs 1.0 g/100 mL), xylose 3.5 g/100 mL
+  focal: false
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L35-0
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L35-10
+    lever_value: L-cysteine
+    value: 1.39
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.15
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+- id: li2021lab-55
+  odorant: 2-acetylfuran
+  lever_class: precursor dose
+  lever: xylose added (0 vs 3.5 g/100 mL), cysteine 0 g/100 mL
+  focal: false
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L0-0
+    lever_value: 0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L35-0
+    lever_value: 3.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+- id: li2021lab-56
+  odorant: 2-acetylfuran
+  lever_class: precursor dose
+  lever: xylose added (0 vs 3.5 g/100 mL), cysteine 1.0 g/100 mL
+  focal: false
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L0-10
+    lever_value: 0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L35-10
+    lever_value: 3.5
+    value: 1.39
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.15
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+- id: li2021lab-57
+  odorant: 2-furanmethanol
+  lever_class: sulfur source
+  lever: L-cysteine added (none vs 1.0 g/100 mL), xylose 0 g/100 mL
+  focal: false
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L0-0
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L0-10
+    lever_value: L-cysteine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+- id: li2021lab-58
+  odorant: 2-furanmethanol
+  lever_class: sulfur source
+  lever: L-cysteine added (none vs 1.0 g/100 mL), xylose 3.5 g/100 mL
+  focal: false
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L35-0
+    lever_value: none
+    value: 3.54
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.87
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L35-10
+    lever_value: L-cysteine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+- id: li2021lab-59
+  odorant: 2-furanmethanol
+  lever_class: precursor dose
+  lever: xylose added (0 vs 3.5 g/100 mL), cysteine 0 g/100 mL
+  focal: false
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L0-0
+    lever_value: 0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L35-0
+    lever_value: 3.5
+    value: 3.54
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.87
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+- id: li2021lab-60
+  odorant: 2-furanmethanol
+  lever_class: precursor dose
+  lever: xylose added (0 vs 3.5 g/100 mL), cysteine 1.0 g/100 mL
+  focal: false
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L0-10
+    lever_value: 0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L35-10
+    lever_value: 3.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+- id: li2021lab-61
+  odorant: 2,5-dimethylpyrazine
+  lever_class: sulfur source
+  lever: L-cysteine added (none vs 1.0 g/100 mL), xylose 0 g/100 mL
+  focal: false
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L0-0
+    lever_value: none
+    value: 0.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L0-10
+    lever_value: L-cysteine
+    value: 0.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+- id: li2021lab-62
+  odorant: 2,5-dimethylpyrazine
+  lever_class: sulfur source
+  lever: L-cysteine added (none vs 1.0 g/100 mL), xylose 3.5 g/100 mL
+  focal: false
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L35-0
+    lever_value: none
+    value: 2.32
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.36
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L35-10
+    lever_value: L-cysteine
+    value: 0.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+- id: li2021lab-63
+  odorant: 2,5-dimethylpyrazine
+  lever_class: precursor dose
+  lever: xylose added (0 vs 3.5 g/100 mL), cysteine 0 g/100 mL
+  focal: false
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L0-0
+    lever_value: 0
+    value: 0.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L35-0
+    lever_value: 3.5
+    value: 2.32
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.36
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+- id: li2021lab-64
+  odorant: 2,5-dimethylpyrazine
+  lever_class: precursor dose
+  lever: xylose added (0 vs 3.5 g/100 mL), cysteine 1.0 g/100 mL
+  focal: false
+  location: Table 4
+  digitised: false
+  unit: ug/L
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: L0-10
+    lever_value: 0
+    value: 0.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated
+  - label: L35-10
+    lever_value: 3.5
+    value: 0.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (Lactobacillus fermentum fermented pork hydrolysate)
+      headspace: sealed, unstated

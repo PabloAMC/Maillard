@@ -1,0 +1,544 @@
+source: xu2007
+pdf: data/articles/xu2007.pdf
+reader: resolved
+scope_note: 'Resolved from readers A and B. Table 1, ribose + cysteine (5 mmol each) in 100 mL 0.2 M phosphate; pH ladders
+  (initial pH 5.6 / 7.0 / 8.0) keyed separately within the control and within the SC-CO2 series. Not keyed: SC-CO2 vs control
+  (pressure/CO2, not a listed lever class); ladders with every arm below detection. ''-'' = below detection limit ~0.07 ng/mL
+  (nd_with_limit 0.07); quantities vs internal standard, response factor 1. No H2S or bis(2-furfuryl) disulfide reported.'
+contrasts:
+- id: xu2007-1
+  resolution: re-read
+  odorant: 2-Methyl-3-furanthiol (MFT)
+  lever_class: pH
+  lever: initial pH 5.6 / 7.0 / 8.0, conventional heating (Contr.)
+  focal: false
+  location: Table 1, pp. 332-333
+  digitised: false
+  unit: ng/mL of mixture (approximate, headspace)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Contr., initial pH 5.6 (final pH 5.5)
+    lever_value: 5.6
+    value: 16.62
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        D-ribose: 5 mmol in 100 mL
+        L-cysteine: 5 mmol in 100 mL
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated (same vessel, no SC-CO2)
+  - label: Contr., initial pH 7.0 (final pH 6.2)
+    lever_value: 7.0
+    value: 2.63
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        D-ribose: 5 mmol in 100 mL
+        L-cysteine: 5 mmol in 100 mL
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated (same vessel, no SC-CO2)
+  - label: Contr., initial pH 8.0 (final pH 6.8)
+    lever_value: 8.0
+    value: null
+    censor: nd_with_limit
+    limit: 0.07
+    n: 2
+    sd: null
+    conditions:
+      ph: 8.0
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        D-ribose: 5 mmol in 100 mL
+        L-cysteine: 5 mmol in 100 mL
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated (same vessel, no SC-CO2)
+- id: xu2007-2
+  resolution: agreed
+  odorant: 2-Methyl-3-furanthiol (MFT)
+  lever_class: pH
+  lever: initial pH 5.6 / 7.0 / 8.0, SC-CO2 treated
+  focal: false
+  location: Table 1, pp. 332-333
+  digitised: false
+  unit: ng/mL of mixture (approximate, headspace)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: SC-CO2, initial pH 5.6 (final pH 5.5)
+    lever_value: 5.6
+    value: 34.42
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        D-ribose: 5 mmol in 100 mL
+        L-cysteine: 5 mmol in 100 mL
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: supercritical CO2, 40 MPa
+  - label: SC-CO2, initial pH 7.0 (final pH 6.0)
+    lever_value: 7.0
+    value: 25.84
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        D-ribose: 5 mmol in 100 mL
+        L-cysteine: 5 mmol in 100 mL
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: supercritical CO2, 40 MPa
+  - label: SC-CO2, initial pH 8.0 (final pH 6.3)
+    lever_value: 8.0
+    value: 7.06
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 8.0
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        D-ribose: 5 mmol in 100 mL
+        L-cysteine: 5 mmol in 100 mL
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: supercritical CO2, 40 MPa
+- id: xu2007-3
+  resolution: agreed
+  odorant: 2-Furfurylthiol (FFT)
+  lever_class: pH
+  lever: initial pH 5.6 / 7.0 / 8.0, conventional heating (Contr.)
+  focal: false
+  location: Table 1, pp. 332-333
+  digitised: false
+  unit: ng/mL of mixture (approximate, headspace)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Contr., initial pH 5.6 (final pH 5.5)
+    lever_value: 5.6
+    value: 22.09
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        D-ribose: 5 mmol in 100 mL
+        L-cysteine: 5 mmol in 100 mL
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated (same vessel, no SC-CO2)
+  - label: Contr., initial pH 7.0 (final pH 6.2)
+    lever_value: 7.0
+    value: null
+    censor: nd_with_limit
+    limit: 0.07
+    n: 2
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        D-ribose: 5 mmol in 100 mL
+        L-cysteine: 5 mmol in 100 mL
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated (same vessel, no SC-CO2)
+  - label: Contr., initial pH 8.0 (final pH 6.8)
+    lever_value: 8.0
+    value: null
+    censor: nd_with_limit
+    limit: 0.07
+    n: 2
+    sd: null
+    conditions:
+      ph: 8.0
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        D-ribose: 5 mmol in 100 mL
+        L-cysteine: 5 mmol in 100 mL
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated (same vessel, no SC-CO2)
+- id: xu2007-4
+  resolution: agreed
+  odorant: 2-Furfurylthiol (FFT)
+  lever_class: pH
+  lever: initial pH 5.6 / 7.0 / 8.0, SC-CO2 treated
+  focal: false
+  location: Table 1, pp. 332-333
+  digitised: false
+  unit: ng/mL of mixture (approximate, headspace)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: SC-CO2, initial pH 5.6 (final pH 5.5)
+    lever_value: 5.6
+    value: 25.13
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        D-ribose: 5 mmol in 100 mL
+        L-cysteine: 5 mmol in 100 mL
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: supercritical CO2, 40 MPa
+  - label: SC-CO2, initial pH 7.0 (final pH 6.0)
+    lever_value: 7.0
+    value: 14.57
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        D-ribose: 5 mmol in 100 mL
+        L-cysteine: 5 mmol in 100 mL
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: supercritical CO2, 40 MPa
+  - label: SC-CO2, initial pH 8.0 (final pH 6.3)
+    lever_value: 8.0
+    value: 1.79
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 8.0
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        D-ribose: 5 mmol in 100 mL
+        L-cysteine: 5 mmol in 100 mL
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: supercritical CO2, 40 MPa
+- id: xu2007-5
+  resolution: agreed
+  odorant: Bis(2-methyl-3-furyl) disulfide
+  lever_class: pH
+  lever: initial pH 5.6 / 7.0 / 8.0, conventional heating (Contr.)
+  focal: false
+  location: Table 1, pp. 332-333
+  digitised: false
+  unit: ng/mL of mixture (approximate, headspace)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Contr., initial pH 5.6 (final pH 5.5)
+    lever_value: 5.6
+    value: 3.94
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        D-ribose: 5 mmol in 100 mL
+        L-cysteine: 5 mmol in 100 mL
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated (same vessel, no SC-CO2)
+  - label: Contr., initial pH 7.0 (final pH 6.2)
+    lever_value: 7.0
+    value: 1.23
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        D-ribose: 5 mmol in 100 mL
+        L-cysteine: 5 mmol in 100 mL
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated (same vessel, no SC-CO2)
+  - label: Contr., initial pH 8.0 (final pH 6.8)
+    lever_value: 8.0
+    value: null
+    censor: nd_with_limit
+    limit: 0.07
+    n: 2
+    sd: null
+    conditions:
+      ph: 8.0
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        D-ribose: 5 mmol in 100 mL
+        L-cysteine: 5 mmol in 100 mL
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated (same vessel, no SC-CO2)
+- id: xu2007-6
+  resolution: agreed
+  odorant: Bis(2-methyl-3-furyl) disulfide
+  lever_class: pH
+  lever: initial pH 5.6 / 7.0 / 8.0, SC-CO2 treated
+  focal: false
+  location: Table 1, pp. 332-333
+  digitised: false
+  unit: ng/mL of mixture (approximate, headspace)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: SC-CO2, initial pH 5.6 (final pH 5.5)
+    lever_value: 5.6
+    value: 7.87
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        D-ribose: 5 mmol in 100 mL
+        L-cysteine: 5 mmol in 100 mL
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: supercritical CO2, 40 MPa
+  - label: SC-CO2, initial pH 7.0 (final pH 6.0)
+    lever_value: 7.0
+    value: 10.39
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        D-ribose: 5 mmol in 100 mL
+        L-cysteine: 5 mmol in 100 mL
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: supercritical CO2, 40 MPa
+  - label: SC-CO2, initial pH 8.0 (final pH 6.3)
+    lever_value: 8.0
+    value: 1.4
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 8.0
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        D-ribose: 5 mmol in 100 mL
+        L-cysteine: 5 mmol in 100 mL
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: supercritical CO2, 40 MPa
+- id: xu2007-7
+  resolution: agreed
+  odorant: 2-Methyl-3-(2-furfuryldithio)furan
+  lever_class: pH
+  lever: initial pH 5.6 / 7.0 / 8.0, conventional heating (Contr.)
+  focal: false
+  location: Table 1, pp. 332-333
+  digitised: false
+  unit: ng/mL of mixture (approximate, headspace)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Contr., initial pH 5.6 (final pH 5.5)
+    lever_value: 5.6
+    value: 0.48
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        D-ribose: 5 mmol in 100 mL
+        L-cysteine: 5 mmol in 100 mL
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated (same vessel, no SC-CO2)
+  - label: Contr., initial pH 7.0 (final pH 6.2)
+    lever_value: 7.0
+    value: null
+    censor: nd_with_limit
+    limit: 0.07
+    n: 2
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        D-ribose: 5 mmol in 100 mL
+        L-cysteine: 5 mmol in 100 mL
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated (same vessel, no SC-CO2)
+  - label: Contr., initial pH 8.0 (final pH 6.8)
+    lever_value: 8.0
+    value: null
+    censor: nd_with_limit
+    limit: 0.07
+    n: 2
+    sd: null
+    conditions:
+      ph: 8.0
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        D-ribose: 5 mmol in 100 mL
+        L-cysteine: 5 mmol in 100 mL
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated (same vessel, no SC-CO2)
+- id: xu2007-8
+  resolution: agreed
+  odorant: 2-Methyl-3-(2-furfuryldithio)furan
+  lever_class: pH
+  lever: initial pH 5.6 / 7.0 / 8.0, SC-CO2 treated
+  focal: false
+  location: Table 1, pp. 332-333
+  digitised: false
+  unit: ng/mL of mixture (approximate, headspace)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: SC-CO2, initial pH 5.6 (final pH 5.5)
+    lever_value: 5.6
+    value: 0.85
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        D-ribose: 5 mmol in 100 mL
+        L-cysteine: 5 mmol in 100 mL
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: supercritical CO2, 40 MPa
+  - label: SC-CO2, initial pH 7.0 (final pH 6.0)
+    lever_value: 7.0
+    value: 1.49
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        D-ribose: 5 mmol in 100 mL
+        L-cysteine: 5 mmol in 100 mL
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: supercritical CO2, 40 MPa
+  - label: SC-CO2, initial pH 8.0 (final pH 6.3)
+    lever_value: 8.0
+    value: null
+    censor: trace
+    limit: 0.3
+    n: 2
+    sd: null
+    conditions:
+      ph: 8.0
+      ph_basis: initial
+      temp_C: 140
+      time_min: 60
+      precursors:
+        D-ribose: 5 mmol in 100 mL
+        L-cysteine: 5 mmol in 100 mL
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: supercritical CO2, 40 MPa

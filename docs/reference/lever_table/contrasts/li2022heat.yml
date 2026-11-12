@@ -1,0 +1,388 @@
+source: li2022heat
+pdf: data/articles/li2022b.pdf
+reader: resolved
+scope_note: Only 2-furfurylthiol is reported (Table 4B, EPH, E35-10 only); design matrix (NPE, EPH) x xylose (0, 3.5) x cysteine
+  (0, 0.5, 1.0 g/100 mL), pH 5.5, 100 C, 60 min; cysteine ladders keyed as precursor dose; NPE arm nd from the abstract statement;
+  '-' = nd without LOD; unheated controls not keyed.
+contrasts:
+- id: li2022heat-1
+  odorant: 2-Furfurylthiol (FFT)
+  lever_class: precursor dose
+  lever: L-cysteine added (0 / 0.5 / 1.0 g/100 mL), xylose 0 g/100 mL
+  focal: true
+  location: Table 4B
+  digitised: false
+  unit: ng/mL
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  resolution: re-read
+  arms:
+  - label: E0-0
+    lever_value: 0.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (enzymatic pork trimmings hydrolysate, EPH)
+      headspace: sealed, unstated
+  - label: E0-05
+    lever_value: 0.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 0.5 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (enzymatic pork trimmings hydrolysate, EPH)
+      headspace: sealed, unstated
+  - label: E0-10
+    lever_value: 1.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (enzymatic pork trimmings hydrolysate, EPH)
+      headspace: sealed, unstated
+- id: li2022heat-2
+  odorant: 2-Furfurylthiol (FFT)
+  lever_class: precursor dose
+  lever: L-cysteine added 0 / 0.5 / 1.0 g/100 mL (xylose 3.5 g/100 mL) [EPH]
+  focal: true
+  location: Table 4B
+  digitised: false
+  unit: ng/mL (semi-quantified against internal standard 2-octanol)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  resolution: agreed
+  arms:
+  - label: E35-0
+    lever_value: 0.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (pH adjusted with lactic acid / NaOH)
+      matrix: other (enzymatic pork trimmings hydrolysate, EPH)
+      headspace: sealed, unstated
+  - label: E35-5
+    lever_value: 0.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 0.5 g/100 mL
+      buffer: none (pH adjusted with lactic acid / NaOH)
+      matrix: other (enzymatic pork trimmings hydrolysate, EPH)
+      headspace: sealed, unstated
+  - label: E35-10
+    lever_value: 1.0
+    value: 8.13
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.18
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (pH adjusted with lactic acid / NaOH)
+      matrix: other (enzymatic pork trimmings hydrolysate, EPH)
+      headspace: sealed, unstated
+- id: li2022heat-3
+  odorant: 2-Furfurylthiol (FFT)
+  lever_class: precursor dose
+  lever: xylose added (0 vs 3.5 g/100 mL), cysteine 0 g/100 mL
+  focal: true
+  location: Table 4B
+  digitised: false
+  unit: ng/mL
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  resolution: re-read
+  arms:
+  - label: E0-0
+    lever_value: 0.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (enzymatic pork trimmings hydrolysate, EPH)
+      headspace: sealed, unstated
+  - label: E35-0
+    lever_value: 3.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (enzymatic pork trimmings hydrolysate, EPH)
+      headspace: sealed, unstated
+- id: li2022heat-4
+  odorant: 2-Furfurylthiol (FFT)
+  lever_class: precursor dose
+  lever: xylose added (0 vs 3.5 g/100 mL), cysteine 0.5 g/100 mL
+  focal: true
+  location: Table 4B
+  digitised: false
+  unit: ng/mL
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  resolution: re-read
+  arms:
+  - label: E0-05
+    lever_value: 0.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 0.5 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (enzymatic pork trimmings hydrolysate, EPH)
+      headspace: sealed, unstated
+  - label: E35-5
+    lever_value: 3.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 0.5 g/100 mL
+      buffer: none (adjusted with lactic acid / NaOH)
+      matrix: other (enzymatic pork trimmings hydrolysate, EPH)
+      headspace: sealed, unstated
+- id: li2022heat-5
+  odorant: 2-Furfurylthiol (FFT)
+  lever_class: precursor dose
+  lever: xylose 0 vs 3.5 g/100 mL (cysteine 1.0 g/100 mL) [EPH]
+  focal: true
+  location: Table 4B
+  digitised: false
+  unit: ng/mL (semi-quantified against internal standard 2-octanol)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  resolution: agreed
+  arms:
+  - label: E0-10
+    lever_value: 0.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (pH adjusted with lactic acid / NaOH)
+      matrix: other (enzymatic pork trimmings hydrolysate, EPH)
+      headspace: sealed, unstated
+  - label: E35-10
+    lever_value: 3.5
+    value: 8.13
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.18
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (pH adjusted with lactic acid / NaOH)
+      matrix: other (enzymatic pork trimmings hydrolysate, EPH)
+      headspace: sealed, unstated
+- id: li2022heat-6
+  odorant: 2-Furfurylthiol (FFT)
+  lever_class: matrix
+  lever: non-enzymatic pork extract (NPE) vs enzymatic pork hydrolysate (EPH), sample 35-10
+  focal: true
+  location: Table 4B; abstract; p. 9
+  digitised: false
+  unit: ng/mL (semi-quantified against internal standard 2-octanol)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  resolution: agreed
+  arms:
+  - label: 'N35-10 [not in Table 4A; text/abstract: sulfur volatiles not formed in NPE]'
+    lever_value: non-enzymatic pork extract
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (pH adjusted with lactic acid / NaOH)
+      matrix: other (non-enzymatic pork trimmings extract, NPE)
+      headspace: sealed, unstated
+    note: no Table 4A row; the abstract states FFT was detected only in EPH samples
+  - label: E35-10
+    lever_value: enzymatic pork hydrolysate
+    value: 8.13
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.18
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (pH adjusted with lactic acid / NaOH)
+      matrix: other (enzymatic pork trimmings hydrolysate, EPH)
+      headspace: sealed, unstated
+- id: li2022heat-7
+  odorant: 2-Furfurylthiol (FFT)
+  lever_class: mixed
+  lever: 'xylose (0 vs 3.5 g/100 mL) and L-cysteine (0 vs 1.0 g/100 mL) together; paper: FFT only when both added'
+  focal: true
+  location: Table 4B; abstract
+  digitised: false
+  unit: ng/mL (semi-quantified against internal standard 2-octanol)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  resolution: re-read
+  note: 'two-lever pair kept: the abstract discusses it (FFT only when both xylose and cysteine were added)'
+  arms:
+  - label: E0-0
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0 g/100 mL
+        L-cysteine: 0 g/100 mL
+      buffer: none (pH adjusted with lactic acid / NaOH)
+      matrix: other (enzymatic pork trimmings hydrolysate, EPH)
+      headspace: sealed, unstated
+  - label: E35-10
+    lever_value: xylose + cysteine
+    value: 8.13
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.18
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 mL
+        L-cysteine: 1.0 g/100 mL
+      buffer: none (pH adjusted with lactic acid / NaOH)
+      matrix: other (enzymatic pork trimmings hydrolysate, EPH)
+      headspace: sealed, unstated

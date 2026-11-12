@@ -1,0 +1,2957 @@
+source: chen2023lycium
+pdf: data/articles/chen2023.pdf
+reader: resolved
+scope_note: 'Resolved: readers A and B agree on every arm value and on structure (one six-level sugar-identity contrast per odorant per table); the report''s ONLY A / ONLY B rows were name and location
+  spellings, plus a different order of the last three Table S2 rows (table order used: 2,5-dimethylpyrazine, 2-ethyl-6-methylpyrazine, methional; re-read). Table S1 = GC-MS ng/g vs one internal standard
+  (peak_area); Table S2 = GC-IMS peak areas, no SD. ND = not detected, no limit. ''Pyrazines'' is the printed subtotal row of Table S1. 2-ethyl-6-methylpyrazine is unlisted. Hexanal, nonanal and 1-hexanol
+  appear in both tables (two methods), keyed once per table.'
+contrasts:
+- id: chen2023lycium-1
+  odorant: 2-Methylpyrazine
+  odorant_printed: 2-methyl-pyrazine
+  lever_class: sugar identity
+  lever: xylose vs fructose vs arabinose vs galactose vs glucose vs xylo-oligosaccharide (with LSH + L-cysteine)
+  focal: false
+  location: Table S1
+  digitised: false
+  unit: ng/g (GC-MS, semi-quantified vs internal standard o-dichlorobenzene)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: X-MRPs
+    lever_value: xylose
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        xylose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: F-MRPs
+    lever_value: fructose
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        fructose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: A-MRPs
+    lever_value: arabinose
+    value: 28.52
+    censor: none
+    limit: null
+    n: 3
+    sd: 2.1
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        arabinose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: Ga-MRPs
+    lever_value: galactose
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        galactose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: G-MRPs
+    lever_value: glucose
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        glucose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: Xo-MRPs
+    lever_value: xylo-oligosaccharide
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        xylo-oligosaccharide: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  resolution: agreed
+- id: chen2023lycium-2
+  odorant: Tetramethylpyrazine
+  odorant_printed: Tetramethylpyrazine
+  lever_class: sugar identity
+  lever: xylose vs fructose vs arabinose vs galactose vs glucose vs xylo-oligosaccharide (with LSH + L-cysteine)
+  focal: false
+  location: Table S1
+  digitised: false
+  unit: ng/g (GC-MS, semi-quantified vs internal standard o-dichlorobenzene)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: X-MRPs
+    lever_value: xylose
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        xylose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: F-MRPs
+    lever_value: fructose
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        fructose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: A-MRPs
+    lever_value: arabinose
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        arabinose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: Ga-MRPs
+    lever_value: galactose
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        galactose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: G-MRPs
+    lever_value: glucose
+    value: 6.86
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.03
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        glucose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: Xo-MRPs
+    lever_value: xylo-oligosaccharide
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        xylo-oligosaccharide: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  resolution: agreed
+- id: chen2023lycium-3
+  odorant: Pyrazines
+  odorant_printed: total pyrazines
+  lever_class: sugar identity
+  lever: xylose vs fructose vs arabinose vs galactose vs glucose vs xylo-oligosaccharide (with LSH + L-cysteine)
+  focal: false
+  location: Table S1
+  digitised: false
+  unit: ng/g (GC-MS, semi-quantified vs internal standard o-dichlorobenzene)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: X-MRPs
+    lever_value: xylose
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        xylose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: F-MRPs
+    lever_value: fructose
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        fructose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: A-MRPs
+    lever_value: arabinose
+    value: 28.52
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        arabinose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: Ga-MRPs
+    lever_value: galactose
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        galactose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: G-MRPs
+    lever_value: glucose
+    value: 6.86
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        glucose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: Xo-MRPs
+    lever_value: xylo-oligosaccharide
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        xylo-oligosaccharide: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  resolution: agreed
+- id: chen2023lycium-4
+  odorant: 2-Acetylfuran
+  odorant_printed: 2-Acetylfuran
+  lever_class: sugar identity
+  lever: xylose vs fructose vs arabinose vs galactose vs glucose vs xylo-oligosaccharide (with LSH + L-cysteine)
+  focal: false
+  location: Table S1
+  digitised: false
+  unit: ng/g (GC-MS, semi-quantified vs internal standard o-dichlorobenzene)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: X-MRPs
+    lever_value: xylose
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        xylose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: F-MRPs
+    lever_value: fructose
+    value: 19.94
+    censor: none
+    limit: null
+    n: 3
+    sd: 3.5
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        fructose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: A-MRPs
+    lever_value: arabinose
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        arabinose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: Ga-MRPs
+    lever_value: galactose
+    value: 9.58
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.3
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        galactose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: G-MRPs
+    lever_value: glucose
+    value: 15.94
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.2
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        glucose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: Xo-MRPs
+    lever_value: xylo-oligosaccharide
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        xylo-oligosaccharide: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  resolution: agreed
+- id: chen2023lycium-5
+  odorant: 1-Hexanol
+  odorant_printed: 1-hexanol
+  lever_class: sugar identity
+  lever: xylose vs fructose vs arabinose vs galactose vs glucose vs xylo-oligosaccharide (with LSH + L-cysteine)
+  focal: false
+  location: Table S1
+  digitised: false
+  unit: ng/g (GC-MS, semi-quantified vs internal standard o-dichlorobenzene)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: X-MRPs
+    lever_value: xylose
+    value: 34.14
+    censor: none
+    limit: null
+    n: 3
+    sd: 2.13
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        xylose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: F-MRPs
+    lever_value: fructose
+    value: 97.36
+    censor: none
+    limit: null
+    n: 3
+    sd: 24.63
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        fructose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: A-MRPs
+    lever_value: arabinose
+    value: 47.83
+    censor: none
+    limit: null
+    n: 3
+    sd: 5.24
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        arabinose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: Ga-MRPs
+    lever_value: galactose
+    value: 42.53
+    censor: none
+    limit: null
+    n: 3
+    sd: 7.26
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        galactose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: G-MRPs
+    lever_value: glucose
+    value: 15.25
+    censor: none
+    limit: null
+    n: 3
+    sd: 5.27
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        glucose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: Xo-MRPs
+    lever_value: xylo-oligosaccharide
+    value: 11.48
+    censor: none
+    limit: null
+    n: 3
+    sd: 3.26
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        xylo-oligosaccharide: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  resolution: agreed
+- id: chen2023lycium-6
+  odorant: 1-Octen-3-ol
+  odorant_printed: 1-octen-3-ol
+  lever_class: sugar identity
+  lever: xylose vs fructose vs arabinose vs galactose vs glucose vs xylo-oligosaccharide (with LSH + L-cysteine)
+  focal: false
+  location: Table S1
+  digitised: false
+  unit: ng/g (GC-MS, semi-quantified vs internal standard o-dichlorobenzene)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: X-MRPs
+    lever_value: xylose
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        xylose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: F-MRPs
+    lever_value: fructose
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        fructose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: A-MRPs
+    lever_value: arabinose
+    value: 49.53
+    censor: none
+    limit: null
+    n: 3
+    sd: 8.36
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        arabinose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: Ga-MRPs
+    lever_value: galactose
+    value: 67.77
+    censor: none
+    limit: null
+    n: 3
+    sd: 13.34
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        galactose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: G-MRPs
+    lever_value: glucose
+    value: 74.17
+    censor: none
+    limit: null
+    n: 3
+    sd: 5.13
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        glucose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: Xo-MRPs
+    lever_value: xylo-oligosaccharide
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        xylo-oligosaccharide: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  resolution: agreed
+- id: chen2023lycium-7
+  odorant: Hexanal
+  odorant_printed: Hexanal
+  lever_class: sugar identity
+  lever: xylose vs fructose vs arabinose vs galactose vs glucose vs xylo-oligosaccharide (with LSH + L-cysteine)
+  focal: false
+  location: Table S1
+  digitised: false
+  unit: ng/g (GC-MS, semi-quantified vs internal standard o-dichlorobenzene)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: X-MRPs
+    lever_value: xylose
+    value: 549.52
+    censor: none
+    limit: null
+    n: 3
+    sd: 45.85
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        xylose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: F-MRPs
+    lever_value: fructose
+    value: 190.54
+    censor: none
+    limit: null
+    n: 3
+    sd: 21.06
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        fructose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: A-MRPs
+    lever_value: arabinose
+    value: 257.69
+    censor: none
+    limit: null
+    n: 3
+    sd: 37.42
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        arabinose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: Ga-MRPs
+    lever_value: galactose
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        galactose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: G-MRPs
+    lever_value: glucose
+    value: 251.55
+    censor: none
+    limit: null
+    n: 3
+    sd: 8.28
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        glucose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: Xo-MRPs
+    lever_value: xylo-oligosaccharide
+    value: 94.78
+    censor: none
+    limit: null
+    n: 3
+    sd: 5.38
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        xylo-oligosaccharide: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  resolution: agreed
+- id: chen2023lycium-8
+  odorant: Benzaldehyde
+  odorant_printed: Benzaldehyde
+  lever_class: sugar identity
+  lever: xylose vs fructose vs arabinose vs galactose vs glucose vs xylo-oligosaccharide (with LSH + L-cysteine)
+  focal: false
+  location: Table S1
+  digitised: false
+  unit: ng/g (GC-MS, semi-quantified vs internal standard o-dichlorobenzene)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: X-MRPs
+    lever_value: xylose
+    value: 87.63
+    censor: none
+    limit: null
+    n: 3
+    sd: 14.68
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        xylose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: F-MRPs
+    lever_value: fructose
+    value: 132.44
+    censor: none
+    limit: null
+    n: 3
+    sd: 45.28
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        fructose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: A-MRPs
+    lever_value: arabinose
+    value: 151.66
+    censor: none
+    limit: null
+    n: 3
+    sd: 16.23
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        arabinose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: Ga-MRPs
+    lever_value: galactose
+    value: 118.58
+    censor: none
+    limit: null
+    n: 3
+    sd: 26.42
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        galactose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: G-MRPs
+    lever_value: glucose
+    value: 211.33
+    censor: none
+    limit: null
+    n: 3
+    sd: 21.17
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        glucose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: Xo-MRPs
+    lever_value: xylo-oligosaccharide
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        xylo-oligosaccharide: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  resolution: agreed
+- id: chen2023lycium-9
+  odorant: Nonanal
+  odorant_printed: Nonanal
+  lever_class: sugar identity
+  lever: xylose vs fructose vs arabinose vs galactose vs glucose vs xylo-oligosaccharide (with LSH + L-cysteine)
+  focal: false
+  location: Table S1
+  digitised: false
+  unit: ng/g (GC-MS, semi-quantified vs internal standard o-dichlorobenzene)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: X-MRPs
+    lever_value: xylose
+    value: 34.47
+    censor: none
+    limit: null
+    n: 3
+    sd: 3.72
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        xylose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: F-MRPs
+    lever_value: fructose
+    value: 144.93
+    censor: none
+    limit: null
+    n: 3
+    sd: 19.16
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        fructose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: A-MRPs
+    lever_value: arabinose
+    value: 140.14
+    censor: none
+    limit: null
+    n: 3
+    sd: 15.96
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        arabinose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: Ga-MRPs
+    lever_value: galactose
+    value: 116.48
+    censor: none
+    limit: null
+    n: 3
+    sd: 18.17
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        galactose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: G-MRPs
+    lever_value: glucose
+    value: 0.36
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.19
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        glucose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: Xo-MRPs
+    lever_value: xylo-oligosaccharide
+    value: 1.19
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.63
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        xylo-oligosaccharide: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  resolution: agreed
+- id: chen2023lycium-10
+  odorant: 2-Methylpropanal (isobutyraldehyde)
+  odorant_printed: 2-methylpropanal
+  lever_class: sugar identity
+  lever: xylose vs fructose vs arabinose vs galactose vs glucose vs xylo-oligosaccharide (with LSH + L-cysteine)
+  focal: false
+  location: Table S2
+  digitised: false
+  unit: GC-IMS peak area
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: X-MRPs
+    lever_value: xylose
+    value: 830.76
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        xylose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: F-MRPs
+    lever_value: fructose
+    value: 268.47
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        fructose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: G-MRPs
+    lever_value: glucose
+    value: 501.364
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        glucose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: A-MRPs
+    lever_value: arabinose
+    value: 330.25
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        arabinose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: Ga-MRPs
+    lever_value: galactose
+    value: 330.25
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        galactose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: Xo-MRPs
+    lever_value: xylo-oligosaccharide
+    value: 501.425
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        xylo-oligosaccharide: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  resolution: agreed
+- id: chen2023lycium-11
+  odorant: Pentanal
+  odorant_printed: Pentanal
+  lever_class: sugar identity
+  lever: xylose vs fructose vs arabinose vs galactose vs glucose vs xylo-oligosaccharide (with LSH + L-cysteine)
+  focal: false
+  location: Table S2
+  digitised: false
+  unit: GC-IMS peak area
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: X-MRPs
+    lever_value: xylose
+    value: 435.36
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        xylose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: F-MRPs
+    lever_value: fructose
+    value: 532.16
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        fructose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: G-MRPs
+    lever_value: glucose
+    value: 466.2
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        glucose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: A-MRPs
+    lever_value: arabinose
+    value: 272.35
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        arabinose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: Ga-MRPs
+    lever_value: galactose
+    value: 243.98
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        galactose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: Xo-MRPs
+    lever_value: xylo-oligosaccharide
+    value: 524.31
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        xylo-oligosaccharide: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  resolution: agreed
+- id: chen2023lycium-12
+  odorant: Phenylacetaldehyde
+  odorant_printed: Phenylacetaldehyde
+  lever_class: sugar identity
+  lever: xylose vs fructose vs arabinose vs galactose vs glucose vs xylo-oligosaccharide (with LSH + L-cysteine)
+  focal: false
+  location: Table S2
+  digitised: false
+  unit: GC-IMS peak area
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: X-MRPs
+    lever_value: xylose
+    value: 256.32
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        xylose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: F-MRPs
+    lever_value: fructose
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        fructose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: G-MRPs
+    lever_value: glucose
+    value: 435.36
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        glucose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: A-MRPs
+    lever_value: arabinose
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        arabinose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: Ga-MRPs
+    lever_value: galactose
+    value: 435.36
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        galactose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: Xo-MRPs
+    lever_value: xylo-oligosaccharide
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        xylo-oligosaccharide: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  resolution: agreed
+- id: chen2023lycium-13
+  odorant: 3-Methylbutanal
+  odorant_printed: 3-methylbutanal
+  lever_class: sugar identity
+  lever: xylose vs fructose vs arabinose vs galactose vs glucose vs xylo-oligosaccharide (with LSH + L-cysteine)
+  focal: false
+  location: Table S2
+  digitised: false
+  unit: GC-IMS peak area
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: X-MRPs
+    lever_value: xylose
+    value: 210.35
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        xylose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: F-MRPs
+    lever_value: fructose
+    value: 374.52
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        fructose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: G-MRPs
+    lever_value: glucose
+    value: 390.1
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        glucose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: A-MRPs
+    lever_value: arabinose
+    value: 76.82
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        arabinose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: Ga-MRPs
+    lever_value: galactose
+    value: 374.52
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        galactose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: Xo-MRPs
+    lever_value: xylo-oligosaccharide
+    value: 86.48
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        xylo-oligosaccharide: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  resolution: agreed
+- id: chen2023lycium-14
+  odorant: Hexanal
+  odorant_printed: Hexanal
+  lever_class: sugar identity
+  lever: xylose vs fructose vs arabinose vs galactose vs glucose vs xylo-oligosaccharide (with LSH + L-cysteine)
+  focal: false
+  location: Table S2
+  digitised: false
+  unit: GC-IMS peak area
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: X-MRPs
+    lever_value: xylose
+    value: 720.16
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        xylose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: F-MRPs
+    lever_value: fructose
+    value: 607.53
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        fructose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: G-MRPs
+    lever_value: glucose
+    value: 246.87
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        glucose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: A-MRPs
+    lever_value: arabinose
+    value: 562.39
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        arabinose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: Ga-MRPs
+    lever_value: galactose
+    value: 653.24
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        galactose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: Xo-MRPs
+    lever_value: xylo-oligosaccharide
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        xylo-oligosaccharide: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  resolution: agreed
+- id: chen2023lycium-15
+  odorant: Nonanal
+  odorant_printed: Nonanal
+  lever_class: sugar identity
+  lever: xylose vs fructose vs arabinose vs galactose vs glucose vs xylo-oligosaccharide (with LSH + L-cysteine)
+  focal: false
+  location: Table S2
+  digitised: false
+  unit: GC-IMS peak area
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: X-MRPs
+    lever_value: xylose
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        xylose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: F-MRPs
+    lever_value: fructose
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        fructose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: G-MRPs
+    lever_value: glucose
+    value: 58.71
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        glucose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: A-MRPs
+    lever_value: arabinose
+    value: 48.581
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        arabinose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: Ga-MRPs
+    lever_value: galactose
+    value: 110.86
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        galactose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: Xo-MRPs
+    lever_value: xylo-oligosaccharide
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        xylo-oligosaccharide: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  resolution: agreed
+- id: chen2023lycium-16
+  odorant: Heptanal
+  odorant_printed: n-Heptanal
+  lever_class: sugar identity
+  lever: xylose vs fructose vs arabinose vs galactose vs glucose vs xylo-oligosaccharide (with LSH + L-cysteine)
+  focal: false
+  location: Table S2
+  digitised: false
+  unit: GC-IMS peak area
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: X-MRPs
+    lever_value: xylose
+    value: 475.25
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        xylose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: F-MRPs
+    lever_value: fructose
+    value: 352.16
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        fructose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: G-MRPs
+    lever_value: glucose
+    value: 142.57
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        glucose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: A-MRPs
+    lever_value: arabinose
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        arabinose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: Ga-MRPs
+    lever_value: galactose
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        galactose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: Xo-MRPs
+    lever_value: xylo-oligosaccharide
+    value: 265.28
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        xylo-oligosaccharide: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  resolution: agreed
+- id: chen2023lycium-17
+  odorant: Octanal
+  odorant_printed: Octanal
+  lever_class: sugar identity
+  lever: xylose vs fructose vs arabinose vs galactose vs glucose vs xylo-oligosaccharide (with LSH + L-cysteine)
+  focal: false
+  location: Table S2
+  digitised: false
+  unit: GC-IMS peak area
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: X-MRPs
+    lever_value: xylose
+    value: 420.16
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        xylose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: F-MRPs
+    lever_value: fructose
+    value: 226.12
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        fructose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: G-MRPs
+    lever_value: glucose
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        glucose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: A-MRPs
+    lever_value: arabinose
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        arabinose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: Ga-MRPs
+    lever_value: galactose
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        galactose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: Xo-MRPs
+    lever_value: xylo-oligosaccharide
+    value: 56.67
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        xylo-oligosaccharide: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  resolution: agreed
+- id: chen2023lycium-18
+  odorant: 1-Hexanol
+  odorant_printed: 1-Hexanol
+  lever_class: sugar identity
+  lever: xylose vs fructose vs arabinose vs galactose vs glucose vs xylo-oligosaccharide (with LSH + L-cysteine)
+  focal: false
+  location: Table S2
+  digitised: false
+  unit: GC-IMS peak area
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: X-MRPs
+    lever_value: xylose
+    value: 225.32
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        xylose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: F-MRPs
+    lever_value: fructose
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        fructose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: G-MRPs
+    lever_value: glucose
+    value: 412.53
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        glucose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: A-MRPs
+    lever_value: arabinose
+    value: 356.28
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        arabinose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: Ga-MRPs
+    lever_value: galactose
+    value: 732.23
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        galactose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: Xo-MRPs
+    lever_value: xylo-oligosaccharide
+    value: 175.43
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        xylo-oligosaccharide: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  resolution: agreed
+- id: chen2023lycium-19
+  odorant: DMHF
+  odorant_printed: 2,5-dimethyl-4-hydroxy-3(2H)-furanone
+  lever_class: sugar identity
+  lever: xylose vs fructose vs arabinose vs galactose vs glucose vs xylo-oligosaccharide (with LSH + L-cysteine)
+  focal: false
+  location: Table S2
+  digitised: false
+  unit: GC-IMS peak area
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: X-MRPs
+    lever_value: xylose
+    value: 140.94
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        xylose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: F-MRPs
+    lever_value: fructose
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        fructose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: G-MRPs
+    lever_value: glucose
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        glucose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: A-MRPs
+    lever_value: arabinose
+    value: 752.34
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        arabinose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: Ga-MRPs
+    lever_value: galactose
+    value: 415.54
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        galactose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: Xo-MRPs
+    lever_value: xylo-oligosaccharide
+    value: 369.58
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        xylo-oligosaccharide: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  resolution: agreed
+- id: chen2023lycium-20
+  odorant: 2,5-Dimethylpyrazine
+  odorant_printed: 2,5-dimethylpyrazine
+  lever_class: sugar identity
+  lever: xylose vs fructose vs arabinose vs galactose vs glucose vs xylo-oligosaccharide (with LSH + L-cysteine)
+  focal: false
+  location: Table S2
+  digitised: false
+  unit: GC-IMS peak area
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: X-MRPs
+    lever_value: xylose
+    value: 223.3
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        xylose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: F-MRPs
+    lever_value: fructose
+    value: 392.31
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        fructose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: G-MRPs
+    lever_value: glucose
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        glucose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: A-MRPs
+    lever_value: arabinose
+    value: 290.65
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        arabinose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: Ga-MRPs
+    lever_value: galactose
+    value: 470.97
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        galactose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: Xo-MRPs
+    lever_value: xylo-oligosaccharide
+    value: 377.53
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        xylo-oligosaccharide: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  resolution: re-read
+- id: chen2023lycium-21
+  odorant: 2-ethyl-6-methylpyrazine
+  odorant_printed: 2-ethyl-6-methylpyrazine
+  odorant_unlisted: true
+  lever_class: sugar identity
+  lever: xylose vs fructose vs arabinose vs galactose vs glucose vs xylo-oligosaccharide (with LSH + L-cysteine)
+  focal: false
+  location: Table S2
+  digitised: false
+  unit: GC-IMS peak area
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: X-MRPs
+    lever_value: xylose
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        xylose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: F-MRPs
+    lever_value: fructose
+    value: 535.39
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        fructose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: G-MRPs
+    lever_value: glucose
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        glucose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: A-MRPs
+    lever_value: arabinose
+    value: 311.02
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        arabinose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: Ga-MRPs
+    lever_value: galactose
+    value: 425.89
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        galactose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: Xo-MRPs
+    lever_value: xylo-oligosaccharide
+    value: 324.59
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        xylo-oligosaccharide: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  resolution: re-read
+- id: chen2023lycium-22
+  odorant: Methional (3-(methylthio)propanal)
+  odorant_printed: Methional
+  lever_class: sugar identity
+  lever: xylose vs fructose vs arabinose vs galactose vs glucose vs xylo-oligosaccharide (with LSH + L-cysteine)
+  focal: false
+  location: Table S2
+  digitised: false
+  unit: GC-IMS peak area
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: X-MRPs
+    lever_value: xylose
+    value: 242.36
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        xylose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: F-MRPs
+    lever_value: fructose
+    value: 197.93
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        fructose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: G-MRPs
+    lever_value: glucose
+    value: 85.63
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        glucose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: A-MRPs
+    lever_value: arabinose
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        arabinose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: Ga-MRPs
+    lever_value: galactose
+    value: 369.85
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        galactose: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  - label: Xo-MRPs
+    lever_value: xylo-oligosaccharide
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      temp_C: 120
+      time_min: 120
+      precursors:
+        Lycium barbarum seed meal hydrolysate (LSH): 1.0 g
+        xylo-oligosaccharide: 0.3 g
+        L-cysteine: 0.15 g
+        total solids: 10 % (mixture adjusted to 10 % concentration)
+      buffer: none stated
+      matrix: plant protein (Lycium barbarum seed meal hydrolysate)
+      headspace: sealed, unstated
+  resolution: re-read

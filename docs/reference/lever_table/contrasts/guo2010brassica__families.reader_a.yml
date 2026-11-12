@@ -1,0 +1,5 @@
+source: "guo2010brassica"
+pdf: "data/articles/guo2010.pdf"
+reader: "a"
+scope_note: "No per-odorant values printed: Table 1 (Box-Behnken; one-factor pairs exist, e.g. trials 1 vs 3, but responses are total volatile amount and number of products only) and Figs. 1-2 give totals; Table 4 names 2-methylbutanal, pyrazine, 2-methylpyrazine, 2-furaldehyde, 5-methyl-2-furaldehyde, 2-furanmethanol as identified, with no amounts or per-arm presence."
+contrasts: []

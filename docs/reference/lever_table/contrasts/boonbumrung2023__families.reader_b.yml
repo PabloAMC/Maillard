@@ -1,0 +1,4499 @@
+source: "boonbumrung2023"
+pdf: "data/articles/Boonbumrung2023.pdf"
+reader: "b"
+scope_note: "Table 4 (ppm by peak area against one internal standard, 2-methyl-3-heptanone; n=3, mean +/- SD), all treatments 120 C 60 min. Keyed: xylose ladder A/B/C; yeast extract B vs D and C vs E; methionine D vs F and E vs G. Not keyed: D vs E and F vs G (xylose and yeast extract both change, not discussed as a pair); unheated TVPH vs heated treatments (heating is not a listed lever). Blank cells keyed as nd_no_limit (no LOD printed). Pairs with every arm blank not keyed: Trimethylpyrazine (B/D); Trimethylpyrazine (D/F); Trimethylpyrazine (E/G). Text (p. 398) gives methylpyrazine A/B/C as 0.007/0.015/0.016 ppm, Table 4 prints 0.007/0.01/0.01; Table 4 keyed."
+contrasts:
+  - id: "boonbumrung2023-1"
+    odorant: "2-Furanmethanol"
+    lever_class: "precursor dose"
+    lever: "xylose added (0, 1.0, 2.0 g per 200 g batch), no yeast extract or methionine"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt A"
+        lever_value: "0 g"
+        value: 0.42
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.07
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "10 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt B"
+        lever_value: "1.0 g"
+        value: 0.47
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.06
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "9 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt C"
+        lever_value: "2.0 g"
+        value: 0.47
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.05
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "8 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-2"
+    odorant: "2-Furanmethanol"
+    lever_class: "precursor dose"
+    lever: "yeast extract added (0 vs 2.0 g per 200 g) at xylose 1.0 g"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt B"
+        lever_value: "0 g"
+        value: 0.47
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.06
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "9 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt D"
+        lever_value: "2.0 g"
+        value: 0.4
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.03
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "2.0 g"
+            "methionine": "0 g"
+            "water": "7 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-3"
+    odorant: "2-Furanmethanol"
+    lever_class: "precursor dose"
+    lever: "yeast extract added (0 vs 4.0 g per 200 g) at xylose 2.0 g"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt C"
+        lever_value: "0 g"
+        value: 0.47
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.05
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "8 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt E"
+        lever_value: "4.0 g"
+        value: 0.41
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.01
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "4.0 g"
+            "methionine": "0 g"
+            "water": "4 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-4"
+    odorant: "2-Furanmethanol"
+    lever_class: "sulfur source"
+    lever: "methionine added (none vs 0.2 g per 200 g) at xylose 1.0 g + yeast extract 2.0 g"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt D"
+        lever_value: "none"
+        value: 0.4
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.03
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "2.0 g"
+            "methionine": "0 g"
+            "water": "7 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt F"
+        lever_value: "methionine 0.2 g"
+        value: 0.35
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.05
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "2.0 g"
+            "methionine": "0.2 g"
+            "water": "6.8 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-5"
+    odorant: "2-Furanmethanol"
+    lever_class: "sulfur source"
+    lever: "methionine added (none vs 0.2 g per 200 g) at xylose 2.0 g + yeast extract 4.0 g"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt E"
+        lever_value: "none"
+        value: 0.41
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.01
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "4.0 g"
+            "methionine": "0 g"
+            "water": "4 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt G"
+        lever_value: "methionine 0.2 g"
+        value: 0.34
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.05
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "4.0 g"
+            "methionine": "0.2 g"
+            "water": "3.8 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-6"
+    odorant: "1-Octen-3-ol"
+    lever_class: "precursor dose"
+    lever: "xylose added (0, 1.0, 2.0 g per 200 g batch), no yeast extract or methionine"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt A"
+        lever_value: "0 g"
+        value: 0.006
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "10 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt B"
+        lever_value: "1.0 g"
+        value: 0.01
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "9 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt C"
+        lever_value: "2.0 g"
+        value: 0.01
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "8 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-7"
+    odorant: "1-Octen-3-ol"
+    lever_class: "precursor dose"
+    lever: "yeast extract added (0 vs 2.0 g per 200 g) at xylose 1.0 g"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt B"
+        lever_value: "0 g"
+        value: 0.01
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "9 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt D"
+        lever_value: "2.0 g"
+        value: 0.01
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "2.0 g"
+            "methionine": "0 g"
+            "water": "7 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-8"
+    odorant: "1-Octen-3-ol"
+    lever_class: "precursor dose"
+    lever: "yeast extract added (0 vs 4.0 g per 200 g) at xylose 2.0 g"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt C"
+        lever_value: "0 g"
+        value: 0.01
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "8 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt E"
+        lever_value: "4.0 g"
+        value: 0.01
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "4.0 g"
+            "methionine": "0 g"
+            "water": "4 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-9"
+    odorant: "1-Octen-3-ol"
+    lever_class: "sulfur source"
+    lever: "methionine added (none vs 0.2 g per 200 g) at xylose 1.0 g + yeast extract 2.0 g"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt D"
+        lever_value: "none"
+        value: 0.01
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "2.0 g"
+            "methionine": "0 g"
+            "water": "7 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt F"
+        lever_value: "methionine 0.2 g"
+        value: 0.007
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "2.0 g"
+            "methionine": "0.2 g"
+            "water": "6.8 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-10"
+    odorant: "1-Octen-3-ol"
+    lever_class: "sulfur source"
+    lever: "methionine added (none vs 0.2 g per 200 g) at xylose 2.0 g + yeast extract 4.0 g"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt E"
+        lever_value: "none"
+        value: 0.01
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "4.0 g"
+            "methionine": "0 g"
+            "water": "4 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt G"
+        lever_value: "methionine 0.2 g"
+        value: 0.006
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "4.0 g"
+            "methionine": "0.2 g"
+            "water": "3.8 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-11"
+    odorant: "2-Methylpropanal"
+    lever_class: "precursor dose"
+    lever: "xylose added (0, 1.0, 2.0 g per 200 g batch), no yeast extract or methionine"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt A"
+        lever_value: "0 g"
+        value: 0.03
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.01
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "10 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt B"
+        lever_value: "1.0 g"
+        value: 0.05
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.01
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "9 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt C"
+        lever_value: "2.0 g"
+        value: 0.03
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "8 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-12"
+    odorant: "2-Methylpropanal"
+    lever_class: "precursor dose"
+    lever: "yeast extract added (0 vs 2.0 g per 200 g) at xylose 1.0 g"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt B"
+        lever_value: "0 g"
+        value: 0.05
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.01
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "9 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt D"
+        lever_value: "2.0 g"
+        value: 0.03
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "2.0 g"
+            "methionine": "0 g"
+            "water": "7 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-13"
+    odorant: "2-Methylpropanal"
+    lever_class: "precursor dose"
+    lever: "yeast extract added (0 vs 4.0 g per 200 g) at xylose 2.0 g"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt C"
+        lever_value: "0 g"
+        value: 0.03
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "8 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt E"
+        lever_value: "4.0 g"
+        value: 0.04
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.01
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "4.0 g"
+            "methionine": "0 g"
+            "water": "4 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-14"
+    odorant: "2-Methylpropanal"
+    lever_class: "sulfur source"
+    lever: "methionine added (none vs 0.2 g per 200 g) at xylose 1.0 g + yeast extract 2.0 g"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt D"
+        lever_value: "none"
+        value: 0.03
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "2.0 g"
+            "methionine": "0 g"
+            "water": "7 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt F"
+        lever_value: "methionine 0.2 g"
+        value: 0.04
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "2.0 g"
+            "methionine": "0.2 g"
+            "water": "6.8 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-15"
+    odorant: "2-Methylpropanal"
+    lever_class: "sulfur source"
+    lever: "methionine added (none vs 0.2 g per 200 g) at xylose 2.0 g + yeast extract 4.0 g"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt E"
+        lever_value: "none"
+        value: 0.04
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.01
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "4.0 g"
+            "methionine": "0 g"
+            "water": "4 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt G"
+        lever_value: "methionine 0.2 g"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "4.0 g"
+            "methionine": "0.2 g"
+            "water": "3.8 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-16"
+    odorant: "3-Methylbutanal"
+    lever_class: "precursor dose"
+    lever: "xylose added (0, 1.0, 2.0 g per 200 g batch), no yeast extract or methionine"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt A"
+        lever_value: "0 g"
+        value: 0.31
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.02
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "10 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt B"
+        lever_value: "1.0 g"
+        value: 0.25
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.02
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "9 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt C"
+        lever_value: "2.0 g"
+        value: 0.25
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.03
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "8 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-17"
+    odorant: "3-Methylbutanal"
+    lever_class: "precursor dose"
+    lever: "yeast extract added (0 vs 2.0 g per 200 g) at xylose 1.0 g"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt B"
+        lever_value: "0 g"
+        value: 0.25
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.02
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "9 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt D"
+        lever_value: "2.0 g"
+        value: 0.21
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.02
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "2.0 g"
+            "methionine": "0 g"
+            "water": "7 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-18"
+    odorant: "3-Methylbutanal"
+    lever_class: "precursor dose"
+    lever: "yeast extract added (0 vs 4.0 g per 200 g) at xylose 2.0 g"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt C"
+        lever_value: "0 g"
+        value: 0.25
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.03
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "8 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt E"
+        lever_value: "4.0 g"
+        value: 0.17
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.02
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "4.0 g"
+            "methionine": "0 g"
+            "water": "4 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-19"
+    odorant: "3-Methylbutanal"
+    lever_class: "sulfur source"
+    lever: "methionine added (none vs 0.2 g per 200 g) at xylose 1.0 g + yeast extract 2.0 g"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt D"
+        lever_value: "none"
+        value: 0.21
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.02
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "2.0 g"
+            "methionine": "0 g"
+            "water": "7 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt F"
+        lever_value: "methionine 0.2 g"
+        value: 0.16
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.05
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "2.0 g"
+            "methionine": "0.2 g"
+            "water": "6.8 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-20"
+    odorant: "3-Methylbutanal"
+    lever_class: "sulfur source"
+    lever: "methionine added (none vs 0.2 g per 200 g) at xylose 2.0 g + yeast extract 4.0 g"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt E"
+        lever_value: "none"
+        value: 0.17
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.02
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "4.0 g"
+            "methionine": "0 g"
+            "water": "4 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt G"
+        lever_value: "methionine 0.2 g"
+        value: 0.09
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.04
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "4.0 g"
+            "methionine": "0.2 g"
+            "water": "3.8 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-21"
+    odorant: "2-Methylbutanal"
+    lever_class: "precursor dose"
+    lever: "xylose added (0, 1.0, 2.0 g per 200 g batch), no yeast extract or methionine"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt A"
+        lever_value: "0 g"
+        value: 0.17
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.01
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "10 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt B"
+        lever_value: "1.0 g"
+        value: 0.36
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.01
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "9 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt C"
+        lever_value: "2.0 g"
+        value: 0.24
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.08
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "8 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-22"
+    odorant: "2-Methylbutanal"
+    lever_class: "precursor dose"
+    lever: "yeast extract added (0 vs 2.0 g per 200 g) at xylose 1.0 g"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt B"
+        lever_value: "0 g"
+        value: 0.36
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.01
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "9 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt D"
+        lever_value: "2.0 g"
+        value: 0.27
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.04
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "2.0 g"
+            "methionine": "0 g"
+            "water": "7 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-23"
+    odorant: "2-Methylbutanal"
+    lever_class: "precursor dose"
+    lever: "yeast extract added (0 vs 4.0 g per 200 g) at xylose 2.0 g"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt C"
+        lever_value: "0 g"
+        value: 0.24
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.08
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "8 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt E"
+        lever_value: "4.0 g"
+        value: 0.34
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.08
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "4.0 g"
+            "methionine": "0 g"
+            "water": "4 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-24"
+    odorant: "2-Methylbutanal"
+    lever_class: "sulfur source"
+    lever: "methionine added (none vs 0.2 g per 200 g) at xylose 1.0 g + yeast extract 2.0 g"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt D"
+        lever_value: "none"
+        value: 0.27
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.04
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "2.0 g"
+            "methionine": "0 g"
+            "water": "7 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt F"
+        lever_value: "methionine 0.2 g"
+        value: 0.16
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.03
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "2.0 g"
+            "methionine": "0.2 g"
+            "water": "6.8 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-25"
+    odorant: "2-Methylbutanal"
+    lever_class: "sulfur source"
+    lever: "methionine added (none vs 0.2 g per 200 g) at xylose 2.0 g + yeast extract 4.0 g"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt E"
+        lever_value: "none"
+        value: 0.34
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.08
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "4.0 g"
+            "methionine": "0 g"
+            "water": "4 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt G"
+        lever_value: "methionine 0.2 g"
+        value: 0.09
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.03
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "4.0 g"
+            "methionine": "0.2 g"
+            "water": "3.8 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-26"
+    odorant: "Hexanal"
+    lever_class: "precursor dose"
+    lever: "xylose added (0, 1.0, 2.0 g per 200 g batch), no yeast extract or methionine"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt A"
+        lever_value: "0 g"
+        value: 0.009
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "10 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt B"
+        lever_value: "1.0 g"
+        value: 0.005
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "9 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt C"
+        lever_value: "2.0 g"
+        value: 0.004
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "8 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-27"
+    odorant: "Hexanal"
+    lever_class: "precursor dose"
+    lever: "yeast extract added (0 vs 2.0 g per 200 g) at xylose 1.0 g"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt B"
+        lever_value: "0 g"
+        value: 0.005
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "9 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt D"
+        lever_value: "2.0 g"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "2.0 g"
+            "methionine": "0 g"
+            "water": "7 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-28"
+    odorant: "Hexanal"
+    lever_class: "precursor dose"
+    lever: "yeast extract added (0 vs 4.0 g per 200 g) at xylose 2.0 g"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt C"
+        lever_value: "0 g"
+        value: 0.004
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "8 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt E"
+        lever_value: "4.0 g"
+        value: 0.004
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "4.0 g"
+            "methionine": "0 g"
+            "water": "4 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-29"
+    odorant: "Hexanal"
+    lever_class: "sulfur source"
+    lever: "methionine added (none vs 0.2 g per 200 g) at xylose 1.0 g + yeast extract 2.0 g"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt D"
+        lever_value: "none"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "2.0 g"
+            "methionine": "0 g"
+            "water": "7 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt F"
+        lever_value: "methionine 0.2 g"
+        value: 0.005
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "2.0 g"
+            "methionine": "0.2 g"
+            "water": "6.8 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-30"
+    odorant: "Hexanal"
+    lever_class: "sulfur source"
+    lever: "methionine added (none vs 0.2 g per 200 g) at xylose 2.0 g + yeast extract 4.0 g"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt E"
+        lever_value: "none"
+        value: 0.004
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "4.0 g"
+            "methionine": "0 g"
+            "water": "4 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt G"
+        lever_value: "methionine 0.2 g"
+        value: 0.004
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "4.0 g"
+            "methionine": "0.2 g"
+            "water": "3.8 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-31"
+    odorant: "Benzaldehyde"
+    lever_class: "precursor dose"
+    lever: "xylose added (0, 1.0, 2.0 g per 200 g batch), no yeast extract or methionine"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt A"
+        lever_value: "0 g"
+        value: 0.02
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "10 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt B"
+        lever_value: "1.0 g"
+        value: 0.02
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "9 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt C"
+        lever_value: "2.0 g"
+        value: 0.02
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "8 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-32"
+    odorant: "Benzaldehyde"
+    lever_class: "precursor dose"
+    lever: "yeast extract added (0 vs 2.0 g per 200 g) at xylose 1.0 g"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt B"
+        lever_value: "0 g"
+        value: 0.02
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "9 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt D"
+        lever_value: "2.0 g"
+        value: 0.02
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "2.0 g"
+            "methionine": "0 g"
+            "water": "7 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-33"
+    odorant: "Benzaldehyde"
+    lever_class: "precursor dose"
+    lever: "yeast extract added (0 vs 4.0 g per 200 g) at xylose 2.0 g"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt C"
+        lever_value: "0 g"
+        value: 0.02
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "8 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt E"
+        lever_value: "4.0 g"
+        value: 0.02
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "4.0 g"
+            "methionine": "0 g"
+            "water": "4 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-34"
+    odorant: "Benzaldehyde"
+    lever_class: "sulfur source"
+    lever: "methionine added (none vs 0.2 g per 200 g) at xylose 1.0 g + yeast extract 2.0 g"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt D"
+        lever_value: "none"
+        value: 0.02
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "2.0 g"
+            "methionine": "0 g"
+            "water": "7 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt F"
+        lever_value: "methionine 0.2 g"
+        value: 0.01
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "2.0 g"
+            "methionine": "0.2 g"
+            "water": "6.8 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-35"
+    odorant: "Benzaldehyde"
+    lever_class: "sulfur source"
+    lever: "methionine added (none vs 0.2 g per 200 g) at xylose 2.0 g + yeast extract 4.0 g"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt E"
+        lever_value: "none"
+        value: 0.02
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "4.0 g"
+            "methionine": "0 g"
+            "water": "4 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt G"
+        lever_value: "methionine 0.2 g"
+        value: 0.02
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "4.0 g"
+            "methionine": "0.2 g"
+            "water": "3.8 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-36"
+    odorant: "Benzene acetaldehyde"
+    lever_class: "precursor dose"
+    lever: "xylose added (0, 1.0, 2.0 g per 200 g batch), no yeast extract or methionine"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt A"
+        lever_value: "0 g"
+        value: 0.08
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.01
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "10 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt B"
+        lever_value: "1.0 g"
+        value: 0.09
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.02
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "9 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt C"
+        lever_value: "2.0 g"
+        value: 0.09
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.01
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "8 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-37"
+    odorant: "Benzene acetaldehyde"
+    lever_class: "precursor dose"
+    lever: "yeast extract added (0 vs 2.0 g per 200 g) at xylose 1.0 g"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt B"
+        lever_value: "0 g"
+        value: 0.09
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.02
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "9 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt D"
+        lever_value: "2.0 g"
+        value: 0.09
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.01
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "2.0 g"
+            "methionine": "0 g"
+            "water": "7 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-38"
+    odorant: "Benzene acetaldehyde"
+    lever_class: "precursor dose"
+    lever: "yeast extract added (0 vs 4.0 g per 200 g) at xylose 2.0 g"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt C"
+        lever_value: "0 g"
+        value: 0.09
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.01
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "8 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt E"
+        lever_value: "4.0 g"
+        value: 0.09
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.02
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "4.0 g"
+            "methionine": "0 g"
+            "water": "4 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-39"
+    odorant: "Benzene acetaldehyde"
+    lever_class: "sulfur source"
+    lever: "methionine added (none vs 0.2 g per 200 g) at xylose 1.0 g + yeast extract 2.0 g"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt D"
+        lever_value: "none"
+        value: 0.09
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.01
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "2.0 g"
+            "methionine": "0 g"
+            "water": "7 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt F"
+        lever_value: "methionine 0.2 g"
+        value: 0.07
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.02
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "2.0 g"
+            "methionine": "0.2 g"
+            "water": "6.8 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-40"
+    odorant: "Benzene acetaldehyde"
+    lever_class: "sulfur source"
+    lever: "methionine added (none vs 0.2 g per 200 g) at xylose 2.0 g + yeast extract 4.0 g"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt E"
+        lever_value: "none"
+        value: 0.09
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.02
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "4.0 g"
+            "methionine": "0 g"
+            "water": "4 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt G"
+        lever_value: "methionine 0.2 g"
+        value: 0.09
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.01
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "4.0 g"
+            "methionine": "0.2 g"
+            "water": "3.8 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-41"
+    odorant: "Methylpyrazine"
+    lever_class: "precursor dose"
+    lever: "xylose added (0, 1.0, 2.0 g per 200 g batch), no yeast extract or methionine"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt A"
+        lever_value: "0 g"
+        value: 0.007
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "10 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt B"
+        lever_value: "1.0 g"
+        value: 0.01
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "9 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt C"
+        lever_value: "2.0 g"
+        value: 0.01
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.01
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "8 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-42"
+    odorant: "Methylpyrazine"
+    lever_class: "precursor dose"
+    lever: "yeast extract added (0 vs 2.0 g per 200 g) at xylose 1.0 g"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt B"
+        lever_value: "0 g"
+        value: 0.01
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "9 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt D"
+        lever_value: "2.0 g"
+        value: 0.01
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "2.0 g"
+            "methionine": "0 g"
+            "water": "7 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-43"
+    odorant: "Methylpyrazine"
+    lever_class: "precursor dose"
+    lever: "yeast extract added (0 vs 4.0 g per 200 g) at xylose 2.0 g"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt C"
+        lever_value: "0 g"
+        value: 0.01
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.01
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "8 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt E"
+        lever_value: "4.0 g"
+        value: 0.01
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "4.0 g"
+            "methionine": "0 g"
+            "water": "4 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-44"
+    odorant: "Methylpyrazine"
+    lever_class: "sulfur source"
+    lever: "methionine added (none vs 0.2 g per 200 g) at xylose 1.0 g + yeast extract 2.0 g"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt D"
+        lever_value: "none"
+        value: 0.01
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "2.0 g"
+            "methionine": "0 g"
+            "water": "7 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt F"
+        lever_value: "methionine 0.2 g"
+        value: 0.01
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.01
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "2.0 g"
+            "methionine": "0.2 g"
+            "water": "6.8 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-45"
+    odorant: "Methylpyrazine"
+    lever_class: "sulfur source"
+    lever: "methionine added (none vs 0.2 g per 200 g) at xylose 2.0 g + yeast extract 4.0 g"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt E"
+        lever_value: "none"
+        value: 0.01
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "4.0 g"
+            "methionine": "0 g"
+            "water": "4 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt G"
+        lever_value: "methionine 0.2 g"
+        value: 0.01
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "4.0 g"
+            "methionine": "0.2 g"
+            "water": "3.8 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-46"
+    odorant: "Ethylpyrazine"
+    lever_class: "precursor dose"
+    lever: "xylose added (0, 1.0, 2.0 g per 200 g batch), no yeast extract or methionine"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt A"
+        lever_value: "0 g"
+        value: 0.003
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "10 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt B"
+        lever_value: "1.0 g"
+        value: 0.007
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "9 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt C"
+        lever_value: "2.0 g"
+        value: 0.007
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.01
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "8 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-47"
+    odorant: "Ethylpyrazine"
+    lever_class: "precursor dose"
+    lever: "yeast extract added (0 vs 2.0 g per 200 g) at xylose 1.0 g"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt B"
+        lever_value: "0 g"
+        value: 0.007
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "9 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt D"
+        lever_value: "2.0 g"
+        value: 0.01
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.01
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "2.0 g"
+            "methionine": "0 g"
+            "water": "7 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-48"
+    odorant: "Ethylpyrazine"
+    lever_class: "precursor dose"
+    lever: "yeast extract added (0 vs 4.0 g per 200 g) at xylose 2.0 g"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt C"
+        lever_value: "0 g"
+        value: 0.007
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.01
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "8 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt E"
+        lever_value: "4.0 g"
+        value: 0.008
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "4.0 g"
+            "methionine": "0 g"
+            "water": "4 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-49"
+    odorant: "Ethylpyrazine"
+    lever_class: "sulfur source"
+    lever: "methionine added (none vs 0.2 g per 200 g) at xylose 1.0 g + yeast extract 2.0 g"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt D"
+        lever_value: "none"
+        value: 0.01
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.01
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "2.0 g"
+            "methionine": "0 g"
+            "water": "7 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt F"
+        lever_value: "methionine 0.2 g"
+        value: 0.008
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "2.0 g"
+            "methionine": "0.2 g"
+            "water": "6.8 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-50"
+    odorant: "Ethylpyrazine"
+    lever_class: "sulfur source"
+    lever: "methionine added (none vs 0.2 g per 200 g) at xylose 2.0 g + yeast extract 4.0 g"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt E"
+        lever_value: "none"
+        value: 0.008
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "4.0 g"
+            "methionine": "0 g"
+            "water": "4 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt G"
+        lever_value: "methionine 0.2 g"
+        value: 0.009
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.01
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "4.0 g"
+            "methionine": "0.2 g"
+            "water": "3.8 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-51"
+    odorant: "2,5-Dimethylpyrazine"
+    lever_class: "precursor dose"
+    lever: "xylose added (0, 1.0, 2.0 g per 200 g batch), no yeast extract or methionine"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt A"
+        lever_value: "0 g"
+        value: 0.014
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "10 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt B"
+        lever_value: "1.0 g"
+        value: 0.054
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.01
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "9 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt C"
+        lever_value: "2.0 g"
+        value: 0.061
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.01
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "8 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-52"
+    odorant: "2,5-Dimethylpyrazine"
+    lever_class: "precursor dose"
+    lever: "yeast extract added (0 vs 2.0 g per 200 g) at xylose 1.0 g"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt B"
+        lever_value: "0 g"
+        value: 0.054
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.01
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "9 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt D"
+        lever_value: "2.0 g"
+        value: 0.05
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.01
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "2.0 g"
+            "methionine": "0 g"
+            "water": "7 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-53"
+    odorant: "2,5-Dimethylpyrazine"
+    lever_class: "precursor dose"
+    lever: "yeast extract added (0 vs 4.0 g per 200 g) at xylose 2.0 g"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt C"
+        lever_value: "0 g"
+        value: 0.061
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.01
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "8 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt E"
+        lever_value: "4.0 g"
+        value: 0.07
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "4.0 g"
+            "methionine": "0 g"
+            "water": "4 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-54"
+    odorant: "2,5-Dimethylpyrazine"
+    lever_class: "sulfur source"
+    lever: "methionine added (none vs 0.2 g per 200 g) at xylose 1.0 g + yeast extract 2.0 g"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt D"
+        lever_value: "none"
+        value: 0.05
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.01
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "2.0 g"
+            "methionine": "0 g"
+            "water": "7 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt F"
+        lever_value: "methionine 0.2 g"
+        value: 0.04
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.01
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "2.0 g"
+            "methionine": "0.2 g"
+            "water": "6.8 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-55"
+    odorant: "2,5-Dimethylpyrazine"
+    lever_class: "sulfur source"
+    lever: "methionine added (none vs 0.2 g per 200 g) at xylose 2.0 g + yeast extract 4.0 g"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt E"
+        lever_value: "none"
+        value: 0.07
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "4.0 g"
+            "methionine": "0 g"
+            "water": "4 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt G"
+        lever_value: "methionine 0.2 g"
+        value: 0.07
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.01
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "4.0 g"
+            "methionine": "0.2 g"
+            "water": "3.8 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-56"
+    odorant: "2,3-Dimethylpyrazine"
+    lever_class: "precursor dose"
+    lever: "xylose added (0, 1.0, 2.0 g per 200 g batch), no yeast extract or methionine"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt A"
+        lever_value: "0 g"
+        value: 0.002
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "10 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt B"
+        lever_value: "1.0 g"
+        value: 0.003
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "9 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt C"
+        lever_value: "2.0 g"
+        value: 0.002
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "8 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-57"
+    odorant: "2,3-Dimethylpyrazine"
+    lever_class: "precursor dose"
+    lever: "yeast extract added (0 vs 2.0 g per 200 g) at xylose 1.0 g"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt B"
+        lever_value: "0 g"
+        value: 0.003
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "9 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt D"
+        lever_value: "2.0 g"
+        value: 0.004
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "2.0 g"
+            "methionine": "0 g"
+            "water": "7 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-58"
+    odorant: "2,3-Dimethylpyrazine"
+    lever_class: "precursor dose"
+    lever: "yeast extract added (0 vs 4.0 g per 200 g) at xylose 2.0 g"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt C"
+        lever_value: "0 g"
+        value: 0.002
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "8 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt E"
+        lever_value: "4.0 g"
+        value: 0.002
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "4.0 g"
+            "methionine": "0 g"
+            "water": "4 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-59"
+    odorant: "2,3-Dimethylpyrazine"
+    lever_class: "sulfur source"
+    lever: "methionine added (none vs 0.2 g per 200 g) at xylose 1.0 g + yeast extract 2.0 g"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt D"
+        lever_value: "none"
+        value: 0.004
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "2.0 g"
+            "methionine": "0 g"
+            "water": "7 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt F"
+        lever_value: "methionine 0.2 g"
+        value: 0.002
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "2.0 g"
+            "methionine": "0.2 g"
+            "water": "6.8 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-60"
+    odorant: "2,3-Dimethylpyrazine"
+    lever_class: "sulfur source"
+    lever: "methionine added (none vs 0.2 g per 200 g) at xylose 2.0 g + yeast extract 4.0 g"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt E"
+        lever_value: "none"
+        value: 0.002
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "4.0 g"
+            "methionine": "0 g"
+            "water": "4 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt G"
+        lever_value: "methionine 0.2 g"
+        value: 0.002
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "4.0 g"
+            "methionine": "0.2 g"
+            "water": "3.8 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-61"
+    odorant: "Trimethylpyrazine"
+    lever_class: "precursor dose"
+    lever: "xylose added (0, 1.0, 2.0 g per 200 g batch), no yeast extract or methionine"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt A"
+        lever_value: "0 g"
+        value: 0.04
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "10 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt B"
+        lever_value: "1.0 g"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "9 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt C"
+        lever_value: "2.0 g"
+        value: 0.06
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "8 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-62"
+    odorant: "Trimethylpyrazine"
+    lever_class: "precursor dose"
+    lever: "yeast extract added (0 vs 4.0 g per 200 g) at xylose 2.0 g"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt C"
+        lever_value: "0 g"
+        value: 0.06
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "8 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt E"
+        lever_value: "4.0 g"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "4.0 g"
+            "methionine": "0 g"
+            "water": "4 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-63"
+    odorant: "2,5-Dimethyl-3-ethylpyrazine"
+    lever_class: "precursor dose"
+    lever: "xylose added (0, 1.0, 2.0 g per 200 g batch), no yeast extract or methionine"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt A"
+        lever_value: "0 g"
+        value: 0.009
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.01
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "10 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt B"
+        lever_value: "1.0 g"
+        value: 0.01
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "9 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt C"
+        lever_value: "2.0 g"
+        value: 0.01
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.01
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "8 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-64"
+    odorant: "2,5-Dimethyl-3-ethylpyrazine"
+    lever_class: "precursor dose"
+    lever: "yeast extract added (0 vs 2.0 g per 200 g) at xylose 1.0 g"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt B"
+        lever_value: "0 g"
+        value: 0.01
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "9 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt D"
+        lever_value: "2.0 g"
+        value: 0.01
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "2.0 g"
+            "methionine": "0 g"
+            "water": "7 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-65"
+    odorant: "2,5-Dimethyl-3-ethylpyrazine"
+    lever_class: "precursor dose"
+    lever: "yeast extract added (0 vs 4.0 g per 200 g) at xylose 2.0 g"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt C"
+        lever_value: "0 g"
+        value: 0.01
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.01
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "8 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt E"
+        lever_value: "4.0 g"
+        value: 0.01
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.01
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "4.0 g"
+            "methionine": "0 g"
+            "water": "4 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-66"
+    odorant: "2,5-Dimethyl-3-ethylpyrazine"
+    lever_class: "sulfur source"
+    lever: "methionine added (none vs 0.2 g per 200 g) at xylose 1.0 g + yeast extract 2.0 g"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt D"
+        lever_value: "none"
+        value: 0.01
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "2.0 g"
+            "methionine": "0 g"
+            "water": "7 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt F"
+        lever_value: "methionine 0.2 g"
+        value: 0.01
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "2.0 g"
+            "methionine": "0.2 g"
+            "water": "6.8 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-67"
+    odorant: "2,5-Dimethyl-3-ethylpyrazine"
+    lever_class: "sulfur source"
+    lever: "methionine added (none vs 0.2 g per 200 g) at xylose 2.0 g + yeast extract 4.0 g"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt E"
+        lever_value: "none"
+        value: 0.01
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.01
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "4.0 g"
+            "methionine": "0 g"
+            "water": "4 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt G"
+        lever_value: "methionine 0.2 g"
+        value: 0.01
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "4.0 g"
+            "methionine": "0.2 g"
+            "water": "3.8 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-68"
+    odorant: "Methional"
+    lever_class: "precursor dose"
+    lever: "xylose added (0, 1.0, 2.0 g per 200 g batch), no yeast extract or methionine"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt A"
+        lever_value: "0 g"
+        value: 0.06
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.01
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "10 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt B"
+        lever_value: "1.0 g"
+        value: 0.06
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.01
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "9 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt C"
+        lever_value: "2.0 g"
+        value: 0.06
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "8 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-69"
+    odorant: "Methional"
+    lever_class: "precursor dose"
+    lever: "yeast extract added (0 vs 2.0 g per 200 g) at xylose 1.0 g"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt B"
+        lever_value: "0 g"
+        value: 0.06
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.01
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "9 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt D"
+        lever_value: "2.0 g"
+        value: 0.07
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.01
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "2.0 g"
+            "methionine": "0 g"
+            "water": "7 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-70"
+    odorant: "Methional"
+    lever_class: "precursor dose"
+    lever: "yeast extract added (0 vs 4.0 g per 200 g) at xylose 2.0 g"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt C"
+        lever_value: "0 g"
+        value: 0.06
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "8 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt E"
+        lever_value: "4.0 g"
+        value: 0.06
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.01
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "4.0 g"
+            "methionine": "0 g"
+            "water": "4 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-71"
+    odorant: "Methional"
+    lever_class: "sulfur source"
+    lever: "methionine added (none vs 0.2 g per 200 g) at xylose 1.0 g + yeast extract 2.0 g"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt D"
+        lever_value: "none"
+        value: 0.07
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.01
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "2.0 g"
+            "methionine": "0 g"
+            "water": "7 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt F"
+        lever_value: "methionine 0.2 g"
+        value: 0.08
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.02
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "2.0 g"
+            "methionine": "0.2 g"
+            "water": "6.8 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-72"
+    odorant: "Methional"
+    lever_class: "sulfur source"
+    lever: "methionine added (none vs 0.2 g per 200 g) at xylose 2.0 g + yeast extract 4.0 g"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt E"
+        lever_value: "none"
+        value: 0.06
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.01
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "4.0 g"
+            "methionine": "0 g"
+            "water": "4 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt G"
+        lever_value: "methionine 0.2 g"
+        value: 0.08
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.01
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "4.0 g"
+            "methionine": "0.2 g"
+            "water": "3.8 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-73"
+    odorant: "2-Acetylthiazole"
+    lever_class: "precursor dose"
+    lever: "xylose added (0, 1.0, 2.0 g per 200 g batch), no yeast extract or methionine"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt A"
+        lever_value: "0 g"
+        value: 0.002
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "10 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt B"
+        lever_value: "1.0 g"
+        value: 0.003
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "9 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt C"
+        lever_value: "2.0 g"
+        value: 0.002
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "8 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-74"
+    odorant: "2-Acetylthiazole"
+    lever_class: "precursor dose"
+    lever: "yeast extract added (0 vs 2.0 g per 200 g) at xylose 1.0 g"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt B"
+        lever_value: "0 g"
+        value: 0.003
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "9 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt D"
+        lever_value: "2.0 g"
+        value: 0.004
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "2.0 g"
+            "methionine": "0 g"
+            "water": "7 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-75"
+    odorant: "2-Acetylthiazole"
+    lever_class: "precursor dose"
+    lever: "yeast extract added (0 vs 4.0 g per 200 g) at xylose 2.0 g"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt C"
+        lever_value: "0 g"
+        value: 0.002
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "0 g"
+            "methionine": "0 g"
+            "water": "8 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt E"
+        lever_value: "4.0 g"
+        value: 0.003
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "4.0 g"
+            "methionine": "0 g"
+            "water": "4 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-76"
+    odorant: "2-Acetylthiazole"
+    lever_class: "sulfur source"
+    lever: "methionine added (none vs 0.2 g per 200 g) at xylose 1.0 g + yeast extract 2.0 g"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt D"
+        lever_value: "none"
+        value: 0.004
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "2.0 g"
+            "methionine": "0 g"
+            "water": "7 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt F"
+        lever_value: "methionine 0.2 g"
+        value: 0.001
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "1.0 g"
+            "yeast extract": "2.0 g"
+            "methionine": "0.2 g"
+            "water": "6.8 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+  - id: "boonbumrung2023-77"
+    odorant: "2-Acetylthiazole"
+    lever_class: "sulfur source"
+    lever: "methionine added (none vs 0.2 g per 200 g) at xylose 2.0 g + yeast extract 4.0 g"
+    focal: true
+    location: "Table 4, p. 399"
+    digitised: false
+    unit: "ppm"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Trt E"
+        lever_value: "none"
+        value: 0.003
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "4.0 g"
+            "methionine": "0 g"
+            "water": "4 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"
+      - label: "Trt G"
+        lever_value: "methionine 0.2 g"
+        value: 0.001
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: null
+          ph_basis: "unstated"
+          temp_C: 120
+          time_min: 60
+          precursors:
+            "TVPH": "190 g"
+            "xylose": "2.0 g"
+            "yeast extract": "4.0 g"
+            "methionine": "0.2 g"
+            "water": "3.8 g"
+          buffer: "none"
+          matrix: "other (tuna viscera protein hydrolysate, TVPH)"
+          headspace: "unstated"

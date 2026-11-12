@@ -200,7 +200,8 @@ def render(p: Mapping[str, Any]) -> str:
          "literature answers, and where it does not, the smallest experiment that would. The engine's column is "
          "blank in v1; step 5 alone fills it.*", "",
          "**Read this first.** " + ", ".join(f"{v} cells {k}" for k, v in sorted(p["counts"].items())) + ". "
-         "No cell has a heated plant-protein contrast on the keyed record, so every design below names a pea-isolate "
+         "The keyed record holds heated plant- or fungal-protein hydrolysates from four sources only (flaxseed, goji "
+         "seed meal, two mushrooms), none a pea or soy isolate, so every design below names a pea-isolate "
          "matrix: that, and laboratories, are the binding gaps, not replicates.", "",
          "**One study covers most of the meaty-thiol column.** A single factorial in a 15 % pea-isolate matrix "
          "(sugar ribose vs glucose x sulfur source cysteine vs thiamine x pH 5.5 vs 6.5, 36 pots with checks, "

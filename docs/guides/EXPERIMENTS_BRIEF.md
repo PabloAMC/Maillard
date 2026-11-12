@@ -18,17 +18,17 @@ today. This section says how far it is and what would move it.
 
 | | milestone | the test | today |
 |---|---|---|---|
-| 1 | Know the direction and rough size of each big lever, per odorant | a lever-table cell with three laboratories whose interval excludes zero ([lever_table.md](../../results/validation/lever_table.md)) | **1 of 75** cells: leaving out cysteine lowers 2-methyl-3-furanthiol about 6x |
-| 2 | The kinetic model beats that table on contrasts it never saw | the display rule of [STATUS_AND_PLAN](STATUS_AND_PLAN.md) sec. 0, step 5, on held-out laboratories | **cannot be run**: no meaty-thiol cell for pH, sugar or temperature has two held-out laboratories. On the contrasts that can be scored, the model loses to "no change" (median error 0.30 against 0.15 log units, 19 pairs; [contrast_scores.md](../../results/validation/contrast_scores.md)) |
+| 1 | Know the direction and rough size of each big lever, per odorant | a lever-table cell with three laboratories whose interval excludes zero ([lever_table.md](../../results/validation/lever_table.md)) | **4 of 75** cells: leaving out cysteine lowers 2-methyl-3-furanthiol about 6x; xylose gives about 3x the methional of glucose; raising the pH lowers 2-furfurylthiol and furfural (both prior-dominated) |
+| 2 | The kinetic model beats that table on contrasts it never saw | the display rule of [STATUS_AND_PLAN](STATUS_AND_PLAN.md) sec. 0, step 5, on held-out laboratories | **cannot be run**: no meaty-thiol cell for pH, sugar or temperature has two held-out laboratories the model has not already been scored on (one disulfide x sugar cell now has). On the contrasts that can be scored, the model loses to "no change" (median error 0.30 against 0.15 log units, 19 pairs; [contrast_scores.md](../../results/validation/contrast_scores.md)) |
 | 3 | Ratios within threefold in a new laboratory after a few calibration pots | `maillard calibrate`, then `score` on that laboratory's other pots | one stand-in case (the Yiltirak ladder, below): 3 of 4 rows; not yet tried on a real partner |
 | 4 | Absolute levels within threefold in a new plant matrix, no calibration | the out-of-sample panel | **10 of 23** rows outside the meaty thiols; absolute thiol levels are refused for a new laboratory (they differ between laboratories by about one log unit) |
 
 **What the month between the two versions showed.**
 
-- **The literature was keyed as a table of levers, and it answers almost nothing.** 54 sources, 946
-  within-study contrasts, 20 laboratories, read by two blind readers: one cell of 75 is answered. The cause is the
+- **The literature was keyed as a table of levers, and it answers almost nothing.** 67 sources, 1,571
+  within-study contrasts, 29 laboratories, read by two blind readers: four cells of 75 are answered. The cause is the
   shape of the data, as this brief said in October: liquid model systems, one laboratory per question, peak
-  areas, several things changed at once. **No source on disk has a heated plant-protein contrast.**
+  areas, several things changed at once. **Four sources on disk have a heated plant- or fungal-protein contrast** (flaxseed, goji seed meal, two mushroom hydrolysates); none is a pea or soy isolate.
 - **Laboratories disagree by more than most levers move things.** How much of that is measurement (isotope
   dilution against peak areas), how much is unrecorded conditions and how much is chemistry nobody has
   described is not known yet; that split is the next analysis, and it decides how far milestone 3 can go.
@@ -68,7 +68,8 @@ model, only modestly.**
   filled one gap out of about fifteen (`tasks/data_restructure_plan.md`, "The gap search"). The marginal
   paper no longer changes what the model can predict. *(2026-11-12: the lever table tested this from the
   other side. Keying 54 sources as contrasts answered one cell of 75. The one exception worth a search is a
-  paper from a laboratory the corpus does not hold yet, because laboratories are what the cells lack.)*
+  paper from a laboratory the corpus does not hold yet, because laboratories are what the cells lack;
+  17 such papers from 13 new laboratories, keyed the same day with four supplements, answered three more cells, two of them weakly.)*
 
 ## Where the model stands
 
@@ -186,7 +187,7 @@ temperatures and quantifies these thiols, which makes it the natural first call 
 
 ## What to record, so that the data add up
 
-Most of the 946 keyed contrasts could not be combined, and each item below is a reason found while keying
+Most of the 1,571 keyed contrasts could not be combined, and each item below is a reason found while keying
 them. A study that records these is worth several that do not, to this model and to anyone else's.
 
 | record | why (what its absence cost here) |

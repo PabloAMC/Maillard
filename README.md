@@ -19,7 +19,7 @@ and say which experiment would answer it.
 
 | | milestone | today |
 |---|---|---|
-| 1 | Know the direction and rough size of each big lever (sugar, sulfur source, pH, temperature, ...) per odorant | **1 of 75** lever × odorant cells is answered by the literature at a three-laboratory standard ([lever table](results/validation/lever_table.md)) |
+| 1 | Know the direction and rough size of each big lever (sugar, sulfur source, pH, temperature, ...) per odorant | **4 of 75** lever × odorant cells are answered by the literature at a three-laboratory standard ([lever table](results/validation/lever_table.md)) |
 | 2 | The kinetic model beats that table on contrasts it has never seen | **not testable yet**: the held-out data do not exist; on what can be scored it loses to "no change" ([contrast scores](results/validation/contrast_scores.md)) |
 | 3 | Ratios within threefold in a new laboratory after a few calibration pots | one stand-in case; no real partner yet |
 | 4 | Absolute levels within threefold in a new plant matrix | **10 of 23** rows outside the meaty thiols; absolute thiol levels are refused ([scorecard](results/validation/core_panel_scores.md)) |
@@ -31,11 +31,13 @@ sections below say which data.
 
 ## What we found
 
-- **The published record answers very little about levers.** 54 sources and 946 within-study
-  contrasts from 20 laboratories, each read by two blind readers, answer one formulator question:
-  leaving out cysteine lowers 2-methyl-3-furanthiol about sixfold. The rest is one laboratory per
-  question, peak areas, several things changed at once, and **no heated plant-protein contrast at
-  all** ([experiment map](results/validation/experiment_map.md)).
+- **The published record answers very little about levers.** 67 sources and 1,571 within-study
+  contrasts from 29 laboratories, each read by two blind readers, answer four formulator questions:
+  leaving out cysteine lowers 2-methyl-3-furanthiol about sixfold; xylose gives about three times
+  the methional of glucose; and raising the pH lowers 2-furfurylthiol (pH 6 - 7.5) and furfural
+  (pH 4.5 - 6), the last two on a weak prior-dominated footing. The rest is one laboratory per question, peak areas, several things changed at once, and
+  **four heated plant- or fungal-protein sources** (flaxseed, goji seed meal and two mushroom hydrolysates; none a pea or soy isolate)
+  ([experiment map](results/validation/experiment_map.md)).
 - **Laboratories differ by about tenfold on absolute meaty-thiol levels**, more than most levers
   move them. How much of that is measurement method, how much is unrecorded conditions and how much
   is unknown chemistry is the open question that decides how far prediction can go.

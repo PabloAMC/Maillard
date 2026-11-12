@@ -1,0 +1,289 @@
+source: "chen2024coprinus"
+pdf: "data/articles/chen2024.pdf"
+reader: "b"
+scope_note: "Only bis(2-methyl-3-furyl) disulfide of group T is reported (Table 1); MFT, FFT, H2S not reported; R-C vs X-C pair not keyed (both not detected). '-' keyed as nd_no_limit, N.Q. as trace."
+contrasts:
+  - id: "chen2024coprinus-1"
+    odorant: "bis(2-methyl-3-furyl) disulfide"
+    lever_class: "amino acid identity"
+    lever: "cysteine vs methionine vs proline vs glutamic acid with D-ribose"
+    focal: true
+    location: "Table 1"
+    digitised: false
+    unit: "ug/L (semi-quantified vs internal standard 2-methyl-3-heptanone)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "R-C"
+        lever_value: "L-cysteine"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 7.4
+          ph_basis: "initial"
+          temp_C: 125
+          time_min: 120
+          precursors: {"L-cysteine": "0.2 g", "D-ribose": "0.4 g (amino acid:sugar 1:2 w/w)", "Coprinus comatus protein hydrolysate (CPEH)": "30 g"}
+          buffer: "none"
+          matrix: "plant protein (Coprinus comatus mushroom protein hydrolysate)"
+          headspace: "sealed, unstated"
+      - label: "R-M"
+        lever_value: "L-methionine"
+        value: 9.37
+        censor: none
+        limit: null
+        n: 3
+        sd: 1.29
+        conditions:
+          ph: 7.4
+          ph_basis: "initial"
+          temp_C: 125
+          time_min: 120
+          precursors: {"L-methionine": "0.2 g", "D-ribose": "0.4 g (amino acid:sugar 1:2 w/w)", "Coprinus comatus protein hydrolysate (CPEH)": "30 g"}
+          buffer: "none"
+          matrix: "plant protein (Coprinus comatus mushroom protein hydrolysate)"
+          headspace: "sealed, unstated"
+      - label: "R-P"
+        lever_value: "L-proline"
+        value: 2.01
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.45
+        conditions:
+          ph: 7.4
+          ph_basis: "initial"
+          temp_C: 125
+          time_min: 120
+          precursors: {"L-proline": "0.2 g", "D-ribose": "0.4 g (amino acid:sugar 1:2 w/w)", "Coprinus comatus protein hydrolysate (CPEH)": "30 g"}
+          buffer: "none"
+          matrix: "plant protein (Coprinus comatus mushroom protein hydrolysate)"
+          headspace: "sealed, unstated"
+      - label: "R-GA"
+        lever_value: "L-glutamic acid"
+        value: 2.76
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.4
+        conditions:
+          ph: 7.4
+          ph_basis: "initial"
+          temp_C: 125
+          time_min: 120
+          precursors: {"L-glutamic acid": "0.2 g", "D-ribose": "0.4 g (amino acid:sugar 1:2 w/w)", "Coprinus comatus protein hydrolysate (CPEH)": "30 g"}
+          buffer: "none"
+          matrix: "plant protein (Coprinus comatus mushroom protein hydrolysate)"
+          headspace: "sealed, unstated"
+  - id: "chen2024coprinus-2"
+    odorant: "bis(2-methyl-3-furyl) disulfide"
+    lever_class: "amino acid identity"
+    lever: "cysteine vs methionine vs proline vs glutamic acid with D-xylose"
+    focal: true
+    location: "Table 1"
+    digitised: false
+    unit: "ug/L (semi-quantified vs internal standard 2-methyl-3-heptanone)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "X-C"
+        lever_value: "L-cysteine"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 7.4
+          ph_basis: "initial"
+          temp_C: 125
+          time_min: 120
+          precursors: {"L-cysteine": "0.2 g", "D-xylose": "0.4 g (amino acid:sugar 1:2 w/w)", "Coprinus comatus protein hydrolysate (CPEH)": "30 g"}
+          buffer: "none"
+          matrix: "plant protein (Coprinus comatus mushroom protein hydrolysate)"
+          headspace: "sealed, unstated"
+      - label: "X-M"
+        lever_value: "L-methionine"
+        value: 25.5
+        censor: none
+        limit: null
+        n: 3
+        sd: 3.35
+        conditions:
+          ph: 7.4
+          ph_basis: "initial"
+          temp_C: 125
+          time_min: 120
+          precursors: {"L-methionine": "0.2 g", "D-xylose": "0.4 g (amino acid:sugar 1:2 w/w)", "Coprinus comatus protein hydrolysate (CPEH)": "30 g"}
+          buffer: "none"
+          matrix: "plant protein (Coprinus comatus mushroom protein hydrolysate)"
+          headspace: "sealed, unstated"
+      - label: "X-P"
+        lever_value: "L-proline"
+        value: 6.1
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.33
+        conditions:
+          ph: 7.4
+          ph_basis: "initial"
+          temp_C: 125
+          time_min: 120
+          precursors: {"L-proline": "0.2 g", "D-xylose": "0.4 g (amino acid:sugar 1:2 w/w)", "Coprinus comatus protein hydrolysate (CPEH)": "30 g"}
+          buffer: "none"
+          matrix: "plant protein (Coprinus comatus mushroom protein hydrolysate)"
+          headspace: "sealed, unstated"
+      - label: "X-GA"
+        lever_value: "L-glutamic acid"
+        value: 14.9
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.69
+        conditions:
+          ph: 7.4
+          ph_basis: "initial"
+          temp_C: 125
+          time_min: 120
+          precursors: {"L-glutamic acid": "0.2 g", "D-xylose": "0.4 g (amino acid:sugar 1:2 w/w)", "Coprinus comatus protein hydrolysate (CPEH)": "30 g"}
+          buffer: "none"
+          matrix: "plant protein (Coprinus comatus mushroom protein hydrolysate)"
+          headspace: "sealed, unstated"
+  - id: "chen2024coprinus-3"
+    odorant: "bis(2-methyl-3-furyl) disulfide"
+    lever_class: "sugar identity"
+    lever: "ribose vs xylose with L-methionine"
+    focal: true
+    location: "Table 1"
+    digitised: false
+    unit: "ug/L (semi-quantified vs internal standard 2-methyl-3-heptanone)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "R-M"
+        lever_value: "D-ribose"
+        value: 9.37
+        censor: none
+        limit: null
+        n: 3
+        sd: 1.29
+        conditions:
+          ph: 7.4
+          ph_basis: "initial"
+          temp_C: 125
+          time_min: 120
+          precursors: {"L-methionine": "0.2 g", "D-ribose": "0.4 g (amino acid:sugar 1:2 w/w)", "Coprinus comatus protein hydrolysate (CPEH)": "30 g"}
+          buffer: "none"
+          matrix: "plant protein (Coprinus comatus mushroom protein hydrolysate)"
+          headspace: "sealed, unstated"
+      - label: "X-M"
+        lever_value: "D-xylose"
+        value: 25.5
+        censor: none
+        limit: null
+        n: 3
+        sd: 3.35
+        conditions:
+          ph: 7.4
+          ph_basis: "initial"
+          temp_C: 125
+          time_min: 120
+          precursors: {"L-methionine": "0.2 g", "D-xylose": "0.4 g (amino acid:sugar 1:2 w/w)", "Coprinus comatus protein hydrolysate (CPEH)": "30 g"}
+          buffer: "none"
+          matrix: "plant protein (Coprinus comatus mushroom protein hydrolysate)"
+          headspace: "sealed, unstated"
+  - id: "chen2024coprinus-4"
+    odorant: "bis(2-methyl-3-furyl) disulfide"
+    lever_class: "sugar identity"
+    lever: "ribose vs xylose with L-proline"
+    focal: true
+    location: "Table 1"
+    digitised: false
+    unit: "ug/L (semi-quantified vs internal standard 2-methyl-3-heptanone)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "R-P"
+        lever_value: "D-ribose"
+        value: 2.01
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.45
+        conditions:
+          ph: 7.4
+          ph_basis: "initial"
+          temp_C: 125
+          time_min: 120
+          precursors: {"L-proline": "0.2 g", "D-ribose": "0.4 g (amino acid:sugar 1:2 w/w)", "Coprinus comatus protein hydrolysate (CPEH)": "30 g"}
+          buffer: "none"
+          matrix: "plant protein (Coprinus comatus mushroom protein hydrolysate)"
+          headspace: "sealed, unstated"
+      - label: "X-P"
+        lever_value: "D-xylose"
+        value: 6.1
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.33
+        conditions:
+          ph: 7.4
+          ph_basis: "initial"
+          temp_C: 125
+          time_min: 120
+          precursors: {"L-proline": "0.2 g", "D-xylose": "0.4 g (amino acid:sugar 1:2 w/w)", "Coprinus comatus protein hydrolysate (CPEH)": "30 g"}
+          buffer: "none"
+          matrix: "plant protein (Coprinus comatus mushroom protein hydrolysate)"
+          headspace: "sealed, unstated"
+  - id: "chen2024coprinus-5"
+    odorant: "bis(2-methyl-3-furyl) disulfide"
+    lever_class: "sugar identity"
+    lever: "ribose vs xylose with L-glutamic acid"
+    focal: true
+    location: "Table 1"
+    digitised: false
+    unit: "ug/L (semi-quantified vs internal standard 2-methyl-3-heptanone)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "R-GA"
+        lever_value: "D-ribose"
+        value: 2.76
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.4
+        conditions:
+          ph: 7.4
+          ph_basis: "initial"
+          temp_C: 125
+          time_min: 120
+          precursors: {"L-glutamic acid": "0.2 g", "D-ribose": "0.4 g (amino acid:sugar 1:2 w/w)", "Coprinus comatus protein hydrolysate (CPEH)": "30 g"}
+          buffer: "none"
+          matrix: "plant protein (Coprinus comatus mushroom protein hydrolysate)"
+          headspace: "sealed, unstated"
+      - label: "X-GA"
+        lever_value: "D-xylose"
+        value: 14.9
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.69
+        conditions:
+          ph: 7.4
+          ph_basis: "initial"
+          temp_C: 125
+          time_min: 120
+          precursors: {"L-glutamic acid": "0.2 g", "D-xylose": "0.4 g (amino acid:sugar 1:2 w/w)", "Coprinus comatus protein hydrolysate (CPEH)": "30 g"}
+          buffer: "none"
+          matrix: "plant protein (Coprinus comatus mushroom protein hydrolysate)"
+          headspace: "sealed, unstated"

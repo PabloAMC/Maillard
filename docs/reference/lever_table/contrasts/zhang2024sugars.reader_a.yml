@@ -1,0 +1,6 @@
+source: zhang2024sugars
+pdf: data/articles/zhang2024b.pdf + data/articles/zhang2024sugars_supplementary/foods-2927528-supplementary.pdf
+reader: a
+scope_note: 'No group-T contrast: the paper states MFT and FFT (2-furanmethanethiol) were not found in any sample (p. 10-12), and prints no H2S or disulfide value; no table or figure row exists for any
+  thiol.'
+contrasts: []

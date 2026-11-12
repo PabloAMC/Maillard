@@ -104,3 +104,71 @@ pending:
   # downloaded 2026-11-05: BLINDED by the coordinator until another case is frozen -- do NOT open these files.
   # Listed unread (stem only, no identification from the PDF); bork2022 / 2022b / 2023, chen2026, gupta2011, blank2006
   # and hu2012 from the same download are dossiered.
+  # downloaded 2026-11-12 (new-laboratory thiol contrasts, STATUS_AND_PLAN sec. 0 step 5); identified by the DOI on
+  # the first page. Each is keyed into the lever table under the source key given (docs/reference/lever_table/
+  # new_labs.yml, contrasts/<key>.yml); no extraction dossier yet.
+  li2021: "Li & Liu 2021, LWT, 10.1016/j.lwt.2021.112017; lever table source li2021ph"
+  li2021b: "Li & Liu 2021, LWT, 10.1016/j.lwt.2021.112368; lever table source li2021lab"
+  li2022b: "Li & Liu 2022, Food Biosci., 10.1016/j.fbio.2021.101538; lever table source li2022heat"
+  # zhang2024b.pdf on disk is Zhang & Liu 2024, Foods 13:991, 10.3390/foods13070991 (lever table source zhang2024sugars),
+  # NOT the paper of zhang2024b_extraction.md (that one was read from Zhang2024.pdf); the stem collides, so it has no line here
+  wei2019: "Wei et al. 2019, Int. J. Food Prop., 10.1080/10942912.2019.1573830; lever table source wei2019flax"
+  chen2023: "Chen et al. 2023, Foods, 10.3390/foods12234346; lever table source chen2023lycium"
+  zhang2018: "Zhang et al. 2018, Int. J. Biol. Macromol., 10.1016/j.ijbiomac.2018.09.082; lever table source zhang2018soypep"
+  Theng2024: "Theng, Osen & Chiang 2024, Int. J. Food Sci. Technol., 10.1111/ijfs.17373; lever table source theng2024"
+  chen2024: "Chen et al. 2024, Food Biosci., 10.1016/j.fbio.2024.104503; lever table source chen2024coprinus"
+  zhang2022b: "Zhang et al. 2022, LWT, 10.1016/j.lwt.2022.114144; lever table source zhang2022pleurotus"
+  park2022: "Park, Seo & Cho 2022, Food Sci. Biotechnol., 10.1007/s10068-022-01158-0; lever table source park2022mealworm"
+  guo2010: "Guo, Tian & Small 2010, Food Chem., 10.1016/j.foodchem.2009.05.089; lever table source guo2010brassica"
+  sasanam2022: "Sasanam et al. 2022, J. Food Sci., 10.1111/1750-3841.16060; lever table source sasanam2022"
+  sarkisyan2025: "Sarkisyan et al. 2025, Foods, 10.3390/foods14010116; lever table source sarkisyan2025"
+  Boonbumrung2023: "Boonbumrung et al. 2023, Fish. Aquat. Sci., 10.47853/fas.2023.e33; lever table source boonbumrung2023"
+  # downloaded 2026-11-12 15:46-15:55: the PARKED list of the download queue (cases M4, M0a, M5 paused in the 2026-11-10
+  # plan reset), identified by DOI or title on the first page; unread until one of those cases resumes.
+  haase2017: "Haase et al. 2017, JAFC, 10.1021/acs.jafc.6b04512 (M4: fed glucosone / 1-DG / 3-DG, 130 C)"
+  yuan2024: "Yuan et al. 2024, JSFA, 10.1002/jsfa.14094 (M4: an O2 law, Met-glucose)"
+  kanzler2017: "Kanzler et al. 2017, JAFC, 10.1021/acs.jafc.7b04105 (M4: glucose dicarbonyls at 130 C)"
+  shi2025: "Shi et al. 2025, Food Chem., 10.1016/j.foodchem.2025.146741 (M4: dicarbonyls and aroma over heating time)"
+  ajandouz2001: "Ajandouz et al. 2001, J. Food Sci., 10.1111/j.1365-2621.2001.tb08213.x (M0a: fructose-lysine pH)"
+  ajandouz1999: "Ajandouz & Puigserver 1999, JAFC, 10.1021/jf980928z (M0a)"
+  hollnagel1998: "Hollnagel & Kroh 1998, Z. Lebensm. Unters. Forsch. A, 10.1007/s002170050294 (M0a)"
+  chen2011: "Chen X. et al. 2011, Food Res. Int., 10.1016/j.foodres.2011.06.002 (M0a)"
+  bell1998: "Bell, White & Chen 1998, J. Food Sci., 10.1111/j.1365-2621.1998.tb17900.x (M5: buffer type and concentration in glassy solids)"
+  bell1998b: "Bell, Touma, White & Chen 1998, J. Food Sci., 10.1111/j.1365-2621.1998.tb15799.x (M5: glycine loss and the glass transition)"
+  bell1994: "Bell & Labuza 1994, J. Food Eng., 10.1016/0260-8774(94)90036-1 (M5: pH in the low-moisture state)"
+  liu2023c: "Liu et al. 2023, Foods, 10.3390/foods12010217 (M5: aldehydes dosed into GSH + ribose)"
+  pepa2023: "Pepa et al. 2023, ACS Food Sci. Technol., 10.1021/acsfoodscitech.3c00029 (M5)"
+  zhang2012b: "Zhang & Serianni 2012, JACS, 10.1021/ja3020296 (M5 / M4 R5)"
+  mikami2015: "Mikami & Murata 2015, Food Sci. Technol. Res., 10.3136/fstr.21.813 (M5)"
+  dobbs2010: "Dobbs & Bell 2010, Food Res. Int., 10.1016/j.foodres.2009.10.010 (M5)"
+  vanba2013: "Van Ba et al. 2013, Meat Sci., 10.1016/j.meatsci.2013.04.029 (M5)"
+  yang2015: "Yang et al. 2015, Flavour Fragr. J., 10.1002/ffj.3248 (M5)"
+  elmore2000: "Elmore & Mottram 2000, JAFC, 10.1021/jf000124v (M5)"
+  yeo2026: "Yeo et al. 2026, Food Chem., 10.1016/j.foodchem.2026.149082 (M5)"
+  Deng2025: "Deng et al. 2025, Food Chem., 10.1016/j.foodchem.2025.146293 (M5)"
+  sherwin2003: "Sherwin & Labuza 2003, J. Food Sci., 10.1111/j.1365-2621.2003.tb05715.x (M5 item 7)"
+  # supplements downloaded 2026-11-12 16:00-16:02 for the new-laboratory keying (the two .zip files are unpacked into
+  # chen2023_supplementary/ and zhang2024sugars_supplementary/ and are not article files of this table)
+  li2021_supplementary: "SI of Li & Liu 2021, LWT, 10.1016/j.lwt.2021.112017 (Tables S1-S2); keyed with lever table source li2021ph"
+  zhang2018_supplementary: "SI of Zhang et al. 2018, Int. J. Biol. Macromol., 10.1016/j.ijbiomac.2018.09.082 (Tables S1-S4); keyed with lever table source zhang2018soypep"
+  # downloaded 2026-11-12 17:11-17:19 for the disagreement audit (STATUS_AND_PLAN sec. 0 step 5b), identified by DOI
+  # or by journal, volume and pages on the first page; unread
+  sun2020: "Sun et al. 2020, Food Chem 322:126754, 10.1016/j.foodchem.2020.126754 (FFT vs pH, formation and loss)"
+  hofmann2001b: "Hofmann, Czerny, Calligaris & Schieberle 2001, JAFC 49:2382, 10.1021/jf0012042 (thiol losses to melanoidins)"
+  ames2001b: "Ames, Guy & Kipping 2001, JAFC 49:4315, 10.1021/jf010198m (pH x temperature x moisture)"
+  cremer2000b: "Cremer & Eichner 2000, Eur Food Res Technol 211:247, 10.1007/s002170000192 (pH and Strecker aldehydes; NOT the cremer2000 dossier's paper)"
+  cremer2000c: "Cremer, Vollenbroeker & Eichner 2000, Eur Food Res Technol 211:400, 10.1007/s002170000196"
+  aparicio2022: "Aparicio-Ruiz et al. 2022, Food Control 135:108756, 10.1016/j.foodcont.2021.108756 (5-laboratory ring trial)"
+  casadei2021: "Casadei et al. 2021, Food Control 123:107823, 10.1016/j.foodcont.2020.107823 (3-laboratory ring trial)"
+  cordero2019: "Cordero et al. 2019, Anal Chim Acta 1052:190, 10.1016/j.aca.2018.11.043 (accepted manuscript)"
+  roberts2000: "Roberts, Pollien & Milo 2000, JAFC 48:2430, 10.1021/jf991116l (SPME method effects)"
+  guentert1990: "Guentert et al. 1990, JAFC 38:2027, 10.1021/jf00101a007"
+  muller2007: "Mueller & Hofmann 2007, JAFC 55:4095, 10.1021/jf070095p"
+  sun2017: "Sun et al. 2018 (online 2017), Food Anal Methods 11:654, 10.1007/s12161-017-1034-8 (free FFT)"
+  tominaga2005: "Tominaga & Dubourdieu 2006, JAFC 54:29, 10.1021/jf050970b"
+  mateo-vivaracho2006: "Mateo-Vivaracho, Ferreira & Cacho 2006, J Chromatogr A 1121:1, 10.1016/j.chroma.2006.04.029"
+  engel1999: "Engel, Bahr & Schieberle 1999, Eur Food Res Technol 209:237, 10.1007/s002170050486 (SAFE)"
+  chaintreau2001: "Chaintreau 2001, Flavour Fragr J 16:136, 10.1002/ffj.967 (SDE review)"
+  marrufo-curtido2022: "Marrufo-Curtido, Ferreira & Escudero 2022, Molecules 27:3056, 10.3390/molecules27103056"
+  eckert2023: "Eckert et al. 2023, Metabolomics 19:62, 10.1007/s11306-023-02026-6 (5-laboratory comparison)"
+  ding2023: "Ding et al. 2023, Bioresour Bioprocess 10:95, 10.1186/s40643-023-00714-8"

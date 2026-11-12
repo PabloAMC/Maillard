@@ -285,6 +285,9 @@ def observations(sources, labs) -> Tuple[List[Dict[str, Any]], Dict[str, int]]:
             if c.get("odorant_unlisted"):
                 skipped["odorants outside the declared lists (PREREG amendment A3)"] += 1
                 continue
+            if c.get("duplicate_of"):       # a second printed peak of one compound in the same pots
+                skipped["second peaks of one compound in the same pots (one row enters the cell)"] += 1
+                continue
             key = compound_keys.resolve(str(c.get("odorant", "")))
             if key is None:
                 raise SystemExit(f"{src} {c.get('id')}: odorant {c.get('odorant')!r} does not resolve "

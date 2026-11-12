@@ -1,0 +1,4347 @@
+source: boonbumrung2023
+pdf: data/articles/Boonbumrung2023.pdf
+reader: resolved
+scope_note: 'Resolved from readers A and B. Table 4 (ppm vs one internal standard, peak-area basis, n = 3, mean +/- SD); all
+  treatments heated 120 C 60 min. Keyed: xylose ladder A/B/C; yeast extract B vs D and C vs E; methionine D vs F and E vs
+  G. Blank cells = not detected, no limit (nd_no_limit). Not keyed: unheated TVPH vs Trt A (heating plus dilution); D vs E
+  and F vs G (xylose and yeast extract both doubled, not discussed as a pair); pairs with every arm blank (trimethylpyrazine
+  B/D, D/F, E/G). Text p. 398 prints methylpyrazine A/B/C as 0.007/0.015/0.016 ppm, Table 4 0.007/0.01/0.01; the table is
+  keyed. ''2,5-Dimethyl-3-ethylpyrazine'' is keyed as its structural identity 2-ethyl-3,6-dimethylpyrazine. (Z)-4-heptenal
+  and 2-ethyl-1-hexanol not keyed by either reader. Class totals (Fig. 1) not keyed.'
+contrasts:
+- id: boonbumrung2023-1
+  resolution: agreed
+  odorant: 2-Furanmethanol
+  lever_class: precursor dose
+  lever: xylose added (0, 1, 2 g per 200 g)
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt A
+    lever_value: 0.0
+    value: 0.42
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.07
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        water: 10 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt B
+    lever_value: 1.0
+    value: 0.47
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.06
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        water: 9 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt C
+    lever_value: 2.0
+    value: 0.47
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.05
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        water: 8 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-2
+  resolution: agreed
+  odorant: 2-Furanmethanol
+  lever_class: precursor dose
+  lever: yeast extract added (0 vs 2 g per 200 g), xylose 1 g
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt B
+    lever_value: 0.0
+    value: 0.47
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.06
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        water: 9 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt D
+    lever_value: 2.0
+    value: 0.4
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.03
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        yeast extract: 2.0 g
+        water: 7 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-3
+  resolution: agreed
+  odorant: 2-Furanmethanol
+  lever_class: precursor dose
+  lever: yeast extract added (0 vs 4 g per 200 g), xylose 2 g
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt C
+    lever_value: 0.0
+    value: 0.47
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.05
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        water: 8 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt E
+    lever_value: 4.0
+    value: 0.41
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        yeast extract: 4.0 g
+        water: 4 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-4
+  resolution: agreed
+  odorant: 2-Furanmethanol
+  lever_class: sulfur source
+  lever: methionine added (none vs 0.2 g per 200 g), xylose 1 g + yeast extract 2 g
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt D
+    lever_value: none
+    value: 0.4
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.03
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        yeast extract: 2.0 g
+        water: 7 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt F
+    lever_value: methionine
+    value: 0.35
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.05
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        yeast extract: 2.0 g
+        methionine: 0.2 g
+        water: 6.8 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-5
+  resolution: agreed
+  odorant: 2-Furanmethanol
+  lever_class: sulfur source
+  lever: methionine added (none vs 0.2 g per 200 g), xylose 2 g + yeast extract 4 g
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt E
+    lever_value: none
+    value: 0.41
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        yeast extract: 4.0 g
+        water: 4 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt G
+    lever_value: methionine
+    value: 0.34
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.05
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        yeast extract: 4.0 g
+        methionine: 0.2 g
+        water: 3.8 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-6
+  resolution: agreed
+  odorant: 1-Octen-3-ol
+  lever_class: precursor dose
+  lever: xylose added (0, 1, 2 g per 200 g)
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt A
+    lever_value: 0.0
+    value: 0.006
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        water: 10 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt B
+    lever_value: 1.0
+    value: 0.01
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        water: 9 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt C
+    lever_value: 2.0
+    value: 0.01
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        water: 8 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-7
+  resolution: agreed
+  odorant: 1-Octen-3-ol
+  lever_class: precursor dose
+  lever: yeast extract added (0 vs 2 g per 200 g), xylose 1 g
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt B
+    lever_value: 0.0
+    value: 0.01
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        water: 9 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt D
+    lever_value: 2.0
+    value: 0.01
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        yeast extract: 2.0 g
+        water: 7 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-8
+  resolution: agreed
+  odorant: 1-Octen-3-ol
+  lever_class: precursor dose
+  lever: yeast extract added (0 vs 4 g per 200 g), xylose 2 g
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt C
+    lever_value: 0.0
+    value: 0.01
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        water: 8 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt E
+    lever_value: 4.0
+    value: 0.01
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        yeast extract: 4.0 g
+        water: 4 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-9
+  resolution: agreed
+  odorant: 1-Octen-3-ol
+  lever_class: sulfur source
+  lever: methionine added (none vs 0.2 g per 200 g), xylose 1 g + yeast extract 2 g
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt D
+    lever_value: none
+    value: 0.01
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        yeast extract: 2.0 g
+        water: 7 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt F
+    lever_value: methionine
+    value: 0.007
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        yeast extract: 2.0 g
+        methionine: 0.2 g
+        water: 6.8 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-10
+  resolution: agreed
+  odorant: 1-Octen-3-ol
+  lever_class: sulfur source
+  lever: methionine added (none vs 0.2 g per 200 g), xylose 2 g + yeast extract 4 g
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt E
+    lever_value: none
+    value: 0.01
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        yeast extract: 4.0 g
+        water: 4 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt G
+    lever_value: methionine
+    value: 0.006
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        yeast extract: 4.0 g
+        methionine: 0.2 g
+        water: 3.8 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-11
+  resolution: agreed
+  odorant: 2-Methylpropanal (isobutyraldehyde)
+  lever_class: precursor dose
+  lever: xylose added (0, 1, 2 g per 200 g)
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt A
+    lever_value: 0.0
+    value: 0.03
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        water: 10 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt B
+    lever_value: 1.0
+    value: 0.05
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        water: 9 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt C
+    lever_value: 2.0
+    value: 0.03
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        water: 8 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-12
+  resolution: agreed
+  odorant: 2-Methylpropanal (isobutyraldehyde)
+  lever_class: precursor dose
+  lever: yeast extract added (0 vs 2 g per 200 g), xylose 1 g
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt B
+    lever_value: 0.0
+    value: 0.05
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        water: 9 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt D
+    lever_value: 2.0
+    value: 0.03
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        yeast extract: 2.0 g
+        water: 7 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-13
+  resolution: agreed
+  odorant: 2-Methylpropanal (isobutyraldehyde)
+  lever_class: precursor dose
+  lever: yeast extract added (0 vs 4 g per 200 g), xylose 2 g
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt C
+    lever_value: 0.0
+    value: 0.03
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        water: 8 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt E
+    lever_value: 4.0
+    value: 0.04
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        yeast extract: 4.0 g
+        water: 4 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-14
+  resolution: agreed
+  odorant: 2-Methylpropanal (isobutyraldehyde)
+  lever_class: sulfur source
+  lever: methionine added (none vs 0.2 g per 200 g), xylose 1 g + yeast extract 2 g
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt D
+    lever_value: none
+    value: 0.03
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        yeast extract: 2.0 g
+        water: 7 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt F
+    lever_value: methionine
+    value: 0.04
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        yeast extract: 2.0 g
+        methionine: 0.2 g
+        water: 6.8 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-15
+  resolution: agreed
+  odorant: 2-Methylpropanal (isobutyraldehyde)
+  lever_class: sulfur source
+  lever: methionine added (none vs 0.2 g per 200 g), xylose 2 g + yeast extract 4 g
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt E
+    lever_value: none
+    value: 0.04
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        yeast extract: 4.0 g
+        water: 4 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt G
+    lever_value: methionine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        yeast extract: 4.0 g
+        methionine: 0.2 g
+        water: 3.8 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-16
+  resolution: re-read
+  odorant: 3-Methylbutanal
+  lever_class: precursor dose
+  lever: xylose added (0, 1, 2 g per 200 g)
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt A
+    lever_value: 0.0
+    value: 0.31
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.02
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        water: 10 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt B
+    lever_value: 1.0
+    value: 0.25
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.02
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        water: 9 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt C
+    lever_value: 2.0
+    value: 0.25
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.14
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        water: 8 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-17
+  resolution: agreed
+  odorant: 3-Methylbutanal
+  lever_class: precursor dose
+  lever: yeast extract added (0 vs 2 g per 200 g), xylose 1 g
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt B
+    lever_value: 0.0
+    value: 0.25
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.02
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        water: 9 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt D
+    lever_value: 2.0
+    value: 0.21
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.02
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        yeast extract: 2.0 g
+        water: 7 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-18
+  resolution: re-read
+  odorant: 3-Methylbutanal
+  lever_class: precursor dose
+  lever: yeast extract added (0 vs 4 g per 200 g), xylose 2 g
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt C
+    lever_value: 0.0
+    value: 0.25
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.14
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        water: 8 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt E
+    lever_value: 4.0
+    value: 0.17
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.02
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        yeast extract: 4.0 g
+        water: 4 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-19
+  resolution: agreed
+  odorant: 3-Methylbutanal
+  lever_class: sulfur source
+  lever: methionine added (none vs 0.2 g per 200 g), xylose 1 g + yeast extract 2 g
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt D
+    lever_value: none
+    value: 0.21
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.02
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        yeast extract: 2.0 g
+        water: 7 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt F
+    lever_value: methionine
+    value: 0.16
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.05
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        yeast extract: 2.0 g
+        methionine: 0.2 g
+        water: 6.8 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-20
+  resolution: agreed
+  odorant: 3-Methylbutanal
+  lever_class: sulfur source
+  lever: methionine added (none vs 0.2 g per 200 g), xylose 2 g + yeast extract 4 g
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt E
+    lever_value: none
+    value: 0.17
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.02
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        yeast extract: 4.0 g
+        water: 4 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt G
+    lever_value: methionine
+    value: 0.09
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.04
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        yeast extract: 4.0 g
+        methionine: 0.2 g
+        water: 3.8 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-21
+  resolution: agreed
+  odorant: 2-Methylbutanal
+  lever_class: precursor dose
+  lever: xylose added (0, 1, 2 g per 200 g)
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt A
+    lever_value: 0.0
+    value: 0.17
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        water: 10 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt B
+    lever_value: 1.0
+    value: 0.36
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        water: 9 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt C
+    lever_value: 2.0
+    value: 0.24
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.08
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        water: 8 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-22
+  resolution: agreed
+  odorant: 2-Methylbutanal
+  lever_class: precursor dose
+  lever: yeast extract added (0 vs 2 g per 200 g), xylose 1 g
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt B
+    lever_value: 0.0
+    value: 0.36
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        water: 9 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt D
+    lever_value: 2.0
+    value: 0.27
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.04
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        yeast extract: 2.0 g
+        water: 7 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-23
+  resolution: agreed
+  odorant: 2-Methylbutanal
+  lever_class: precursor dose
+  lever: yeast extract added (0 vs 4 g per 200 g), xylose 2 g
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt C
+    lever_value: 0.0
+    value: 0.24
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.08
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        water: 8 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt E
+    lever_value: 4.0
+    value: 0.34
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.08
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        yeast extract: 4.0 g
+        water: 4 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-24
+  resolution: agreed
+  odorant: 2-Methylbutanal
+  lever_class: sulfur source
+  lever: methionine added (none vs 0.2 g per 200 g), xylose 1 g + yeast extract 2 g
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt D
+    lever_value: none
+    value: 0.27
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.04
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        yeast extract: 2.0 g
+        water: 7 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt F
+    lever_value: methionine
+    value: 0.16
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.03
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        yeast extract: 2.0 g
+        methionine: 0.2 g
+        water: 6.8 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-25
+  resolution: agreed
+  odorant: 2-Methylbutanal
+  lever_class: sulfur source
+  lever: methionine added (none vs 0.2 g per 200 g), xylose 2 g + yeast extract 4 g
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt E
+    lever_value: none
+    value: 0.34
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.08
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        yeast extract: 4.0 g
+        water: 4 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt G
+    lever_value: methionine
+    value: 0.09
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.03
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        yeast extract: 4.0 g
+        methionine: 0.2 g
+        water: 3.8 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-26
+  resolution: agreed
+  odorant: Hexanal
+  lever_class: precursor dose
+  lever: xylose added (0, 1, 2 g per 200 g)
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt A
+    lever_value: 0.0
+    value: 0.009
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        water: 10 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt B
+    lever_value: 1.0
+    value: 0.005
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        water: 9 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt C
+    lever_value: 2.0
+    value: 0.004
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        water: 8 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-27
+  resolution: agreed
+  odorant: Hexanal
+  lever_class: precursor dose
+  lever: yeast extract added (0 vs 2 g per 200 g), xylose 1 g
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt B
+    lever_value: 0.0
+    value: 0.005
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        water: 9 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt D
+    lever_value: 2.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        yeast extract: 2.0 g
+        water: 7 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-28
+  resolution: agreed
+  odorant: Hexanal
+  lever_class: precursor dose
+  lever: yeast extract added (0 vs 4 g per 200 g), xylose 2 g
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt C
+    lever_value: 0.0
+    value: 0.004
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        water: 8 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt E
+    lever_value: 4.0
+    value: 0.004
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        yeast extract: 4.0 g
+        water: 4 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-29
+  resolution: agreed
+  odorant: Hexanal
+  lever_class: sulfur source
+  lever: methionine added (none vs 0.2 g per 200 g), xylose 1 g + yeast extract 2 g
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt D
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        yeast extract: 2.0 g
+        water: 7 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt F
+    lever_value: methionine
+    value: 0.005
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        yeast extract: 2.0 g
+        methionine: 0.2 g
+        water: 6.8 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-30
+  resolution: agreed
+  odorant: Hexanal
+  lever_class: sulfur source
+  lever: methionine added (none vs 0.2 g per 200 g), xylose 2 g + yeast extract 4 g
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt E
+    lever_value: none
+    value: 0.004
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        yeast extract: 4.0 g
+        water: 4 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt G
+    lever_value: methionine
+    value: 0.004
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        yeast extract: 4.0 g
+        methionine: 0.2 g
+        water: 3.8 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-31
+  resolution: agreed
+  odorant: Benzaldehyde
+  lever_class: precursor dose
+  lever: xylose added (0, 1, 2 g per 200 g)
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt A
+    lever_value: 0.0
+    value: 0.02
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        water: 10 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt B
+    lever_value: 1.0
+    value: 0.02
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        water: 9 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt C
+    lever_value: 2.0
+    value: 0.02
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        water: 8 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-32
+  resolution: agreed
+  odorant: Benzaldehyde
+  lever_class: precursor dose
+  lever: yeast extract added (0 vs 2 g per 200 g), xylose 1 g
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt B
+    lever_value: 0.0
+    value: 0.02
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        water: 9 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt D
+    lever_value: 2.0
+    value: 0.02
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        yeast extract: 2.0 g
+        water: 7 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-33
+  resolution: agreed
+  odorant: Benzaldehyde
+  lever_class: precursor dose
+  lever: yeast extract added (0 vs 4 g per 200 g), xylose 2 g
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt C
+    lever_value: 0.0
+    value: 0.02
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        water: 8 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt E
+    lever_value: 4.0
+    value: 0.02
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        yeast extract: 4.0 g
+        water: 4 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-34
+  resolution: agreed
+  odorant: Benzaldehyde
+  lever_class: sulfur source
+  lever: methionine added (none vs 0.2 g per 200 g), xylose 1 g + yeast extract 2 g
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt D
+    lever_value: none
+    value: 0.02
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        yeast extract: 2.0 g
+        water: 7 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt F
+    lever_value: methionine
+    value: 0.01
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        yeast extract: 2.0 g
+        methionine: 0.2 g
+        water: 6.8 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-35
+  resolution: agreed
+  odorant: Benzaldehyde
+  lever_class: sulfur source
+  lever: methionine added (none vs 0.2 g per 200 g), xylose 2 g + yeast extract 4 g
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt E
+    lever_value: none
+    value: 0.02
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        yeast extract: 4.0 g
+        water: 4 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt G
+    lever_value: methionine
+    value: 0.02
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        yeast extract: 4.0 g
+        methionine: 0.2 g
+        water: 3.8 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-36
+  resolution: agreed
+  odorant: Phenylacetaldehyde
+  lever_class: precursor dose
+  lever: xylose added (0, 1, 2 g per 200 g)
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt A
+    lever_value: 0.0
+    value: 0.08
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        water: 10 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt B
+    lever_value: 1.0
+    value: 0.09
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.02
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        water: 9 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt C
+    lever_value: 2.0
+    value: 0.09
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        water: 8 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-37
+  resolution: agreed
+  odorant: Phenylacetaldehyde
+  lever_class: precursor dose
+  lever: yeast extract added (0 vs 2 g per 200 g), xylose 1 g
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt B
+    lever_value: 0.0
+    value: 0.09
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.02
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        water: 9 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt D
+    lever_value: 2.0
+    value: 0.09
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        yeast extract: 2.0 g
+        water: 7 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-38
+  resolution: agreed
+  odorant: Phenylacetaldehyde
+  lever_class: precursor dose
+  lever: yeast extract added (0 vs 4 g per 200 g), xylose 2 g
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt C
+    lever_value: 0.0
+    value: 0.09
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        water: 8 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt E
+    lever_value: 4.0
+    value: 0.09
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.02
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        yeast extract: 4.0 g
+        water: 4 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-39
+  resolution: agreed
+  odorant: Phenylacetaldehyde
+  lever_class: sulfur source
+  lever: methionine added (none vs 0.2 g per 200 g), xylose 1 g + yeast extract 2 g
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt D
+    lever_value: none
+    value: 0.09
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        yeast extract: 2.0 g
+        water: 7 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt F
+    lever_value: methionine
+    value: 0.07
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.02
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        yeast extract: 2.0 g
+        methionine: 0.2 g
+        water: 6.8 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-40
+  resolution: agreed
+  odorant: Phenylacetaldehyde
+  lever_class: sulfur source
+  lever: methionine added (none vs 0.2 g per 200 g), xylose 2 g + yeast extract 4 g
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt E
+    lever_value: none
+    value: 0.09
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.02
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        yeast extract: 4.0 g
+        water: 4 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt G
+    lever_value: methionine
+    value: 0.09
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        yeast extract: 4.0 g
+        methionine: 0.2 g
+        water: 3.8 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-41
+  resolution: agreed
+  odorant: 2-Methylpyrazine
+  lever_class: precursor dose
+  lever: xylose added (0, 1, 2 g per 200 g)
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt A
+    lever_value: 0.0
+    value: 0.007
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        water: 10 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt B
+    lever_value: 1.0
+    value: 0.01
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        water: 9 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt C
+    lever_value: 2.0
+    value: 0.01
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        water: 8 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-42
+  resolution: agreed
+  odorant: 2-Methylpyrazine
+  lever_class: precursor dose
+  lever: yeast extract added (0 vs 2 g per 200 g), xylose 1 g
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt B
+    lever_value: 0.0
+    value: 0.01
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        water: 9 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt D
+    lever_value: 2.0
+    value: 0.01
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        yeast extract: 2.0 g
+        water: 7 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-43
+  resolution: agreed
+  odorant: 2-Methylpyrazine
+  lever_class: precursor dose
+  lever: yeast extract added (0 vs 4 g per 200 g), xylose 2 g
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt C
+    lever_value: 0.0
+    value: 0.01
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        water: 8 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt E
+    lever_value: 4.0
+    value: 0.01
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        yeast extract: 4.0 g
+        water: 4 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-44
+  resolution: agreed
+  odorant: 2-Methylpyrazine
+  lever_class: sulfur source
+  lever: methionine added (none vs 0.2 g per 200 g), xylose 1 g + yeast extract 2 g
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt D
+    lever_value: none
+    value: 0.01
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        yeast extract: 2.0 g
+        water: 7 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt F
+    lever_value: methionine
+    value: 0.01
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        yeast extract: 2.0 g
+        methionine: 0.2 g
+        water: 6.8 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-45
+  resolution: agreed
+  odorant: 2-Methylpyrazine
+  lever_class: sulfur source
+  lever: methionine added (none vs 0.2 g per 200 g), xylose 2 g + yeast extract 4 g
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt E
+    lever_value: none
+    value: 0.01
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        yeast extract: 4.0 g
+        water: 4 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt G
+    lever_value: methionine
+    value: 0.01
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        yeast extract: 4.0 g
+        methionine: 0.2 g
+        water: 3.8 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-46
+  resolution: agreed
+  odorant: 2-Ethylpyrazine
+  lever_class: precursor dose
+  lever: xylose added (0, 1, 2 g per 200 g)
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt A
+    lever_value: 0.0
+    value: 0.003
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        water: 10 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt B
+    lever_value: 1.0
+    value: 0.007
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        water: 9 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt C
+    lever_value: 2.0
+    value: 0.007
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        water: 8 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-47
+  resolution: agreed
+  odorant: 2-Ethylpyrazine
+  lever_class: precursor dose
+  lever: yeast extract added (0 vs 2 g per 200 g), xylose 1 g
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt B
+    lever_value: 0.0
+    value: 0.007
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        water: 9 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt D
+    lever_value: 2.0
+    value: 0.01
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        yeast extract: 2.0 g
+        water: 7 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-48
+  resolution: agreed
+  odorant: 2-Ethylpyrazine
+  lever_class: precursor dose
+  lever: yeast extract added (0 vs 4 g per 200 g), xylose 2 g
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt C
+    lever_value: 0.0
+    value: 0.007
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        water: 8 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt E
+    lever_value: 4.0
+    value: 0.008
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        yeast extract: 4.0 g
+        water: 4 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-49
+  resolution: agreed
+  odorant: 2-Ethylpyrazine
+  lever_class: sulfur source
+  lever: methionine added (none vs 0.2 g per 200 g), xylose 1 g + yeast extract 2 g
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt D
+    lever_value: none
+    value: 0.01
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        yeast extract: 2.0 g
+        water: 7 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt F
+    lever_value: methionine
+    value: 0.008
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        yeast extract: 2.0 g
+        methionine: 0.2 g
+        water: 6.8 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-50
+  resolution: agreed
+  odorant: 2-Ethylpyrazine
+  lever_class: sulfur source
+  lever: methionine added (none vs 0.2 g per 200 g), xylose 2 g + yeast extract 4 g
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt E
+    lever_value: none
+    value: 0.008
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        yeast extract: 4.0 g
+        water: 4 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt G
+    lever_value: methionine
+    value: 0.009
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        yeast extract: 4.0 g
+        methionine: 0.2 g
+        water: 3.8 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-51
+  resolution: agreed
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: precursor dose
+  lever: xylose added (0, 1, 2 g per 200 g)
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt A
+    lever_value: 0.0
+    value: 0.014
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        water: 10 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt B
+    lever_value: 1.0
+    value: 0.054
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        water: 9 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt C
+    lever_value: 2.0
+    value: 0.061
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        water: 8 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-52
+  resolution: agreed
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: precursor dose
+  lever: yeast extract added (0 vs 2 g per 200 g), xylose 1 g
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt B
+    lever_value: 0.0
+    value: 0.054
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        water: 9 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt D
+    lever_value: 2.0
+    value: 0.05
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        yeast extract: 2.0 g
+        water: 7 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-53
+  resolution: agreed
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: precursor dose
+  lever: yeast extract added (0 vs 4 g per 200 g), xylose 2 g
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt C
+    lever_value: 0.0
+    value: 0.061
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        water: 8 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt E
+    lever_value: 4.0
+    value: 0.07
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        yeast extract: 4.0 g
+        water: 4 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-54
+  resolution: agreed
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: sulfur source
+  lever: methionine added (none vs 0.2 g per 200 g), xylose 1 g + yeast extract 2 g
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt D
+    lever_value: none
+    value: 0.05
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        yeast extract: 2.0 g
+        water: 7 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt F
+    lever_value: methionine
+    value: 0.04
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        yeast extract: 2.0 g
+        methionine: 0.2 g
+        water: 6.8 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-55
+  resolution: agreed
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: sulfur source
+  lever: methionine added (none vs 0.2 g per 200 g), xylose 2 g + yeast extract 4 g
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt E
+    lever_value: none
+    value: 0.07
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        yeast extract: 4.0 g
+        water: 4 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt G
+    lever_value: methionine
+    value: 0.07
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        yeast extract: 4.0 g
+        methionine: 0.2 g
+        water: 3.8 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-56
+  resolution: agreed
+  odorant: 2,3-Dimethylpyrazine
+  lever_class: precursor dose
+  lever: xylose added (0, 1, 2 g per 200 g)
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt A
+    lever_value: 0.0
+    value: 0.002
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        water: 10 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt B
+    lever_value: 1.0
+    value: 0.003
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        water: 9 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt C
+    lever_value: 2.0
+    value: 0.002
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        water: 8 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-57
+  resolution: agreed
+  odorant: 2,3-Dimethylpyrazine
+  lever_class: precursor dose
+  lever: yeast extract added (0 vs 2 g per 200 g), xylose 1 g
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt B
+    lever_value: 0.0
+    value: 0.003
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        water: 9 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt D
+    lever_value: 2.0
+    value: 0.004
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        yeast extract: 2.0 g
+        water: 7 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-58
+  resolution: agreed
+  odorant: 2,3-Dimethylpyrazine
+  lever_class: precursor dose
+  lever: yeast extract added (0 vs 4 g per 200 g), xylose 2 g
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt C
+    lever_value: 0.0
+    value: 0.002
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        water: 8 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt E
+    lever_value: 4.0
+    value: 0.002
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        yeast extract: 4.0 g
+        water: 4 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-59
+  resolution: agreed
+  odorant: 2,3-Dimethylpyrazine
+  lever_class: sulfur source
+  lever: methionine added (none vs 0.2 g per 200 g), xylose 1 g + yeast extract 2 g
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt D
+    lever_value: none
+    value: 0.004
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        yeast extract: 2.0 g
+        water: 7 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt F
+    lever_value: methionine
+    value: 0.002
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        yeast extract: 2.0 g
+        methionine: 0.2 g
+        water: 6.8 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-60
+  resolution: agreed
+  odorant: 2,3-Dimethylpyrazine
+  lever_class: sulfur source
+  lever: methionine added (none vs 0.2 g per 200 g), xylose 2 g + yeast extract 4 g
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt E
+    lever_value: none
+    value: 0.002
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        yeast extract: 4.0 g
+        water: 4 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt G
+    lever_value: methionine
+    value: 0.002
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        yeast extract: 4.0 g
+        methionine: 0.2 g
+        water: 3.8 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-61
+  resolution: agreed
+  odorant: Trimethylpyrazine
+  lever_class: precursor dose
+  lever: xylose added (0, 1, 2 g per 200 g)
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt A
+    lever_value: 0.0
+    value: 0.04
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        water: 10 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt B
+    lever_value: 1.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        water: 9 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt C
+    lever_value: 2.0
+    value: 0.06
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        water: 8 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-62
+  resolution: agreed
+  odorant: Trimethylpyrazine
+  lever_class: precursor dose
+  lever: yeast extract added (0 vs 4 g per 200 g), xylose 2 g
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt C
+    lever_value: 0.0
+    value: 0.06
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        water: 8 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt E
+    lever_value: 4.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        yeast extract: 4.0 g
+        water: 4 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-63
+  resolution: agreed
+  odorant: 2-Ethyl-3,6-dimethylpyrazine
+  lever_class: precursor dose
+  lever: xylose added (0, 1, 2 g per 200 g)
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt A
+    lever_value: 0.0
+    value: 0.009
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        water: 10 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt B
+    lever_value: 1.0
+    value: 0.01
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        water: 9 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt C
+    lever_value: 2.0
+    value: 0.01
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        water: 8 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-64
+  resolution: agreed
+  odorant: 2-Ethyl-3,6-dimethylpyrazine
+  lever_class: precursor dose
+  lever: yeast extract added (0 vs 2 g per 200 g), xylose 1 g
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt B
+    lever_value: 0.0
+    value: 0.01
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        water: 9 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt D
+    lever_value: 2.0
+    value: 0.01
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        yeast extract: 2.0 g
+        water: 7 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-65
+  resolution: agreed
+  odorant: 2-Ethyl-3,6-dimethylpyrazine
+  lever_class: precursor dose
+  lever: yeast extract added (0 vs 4 g per 200 g), xylose 2 g
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt C
+    lever_value: 0.0
+    value: 0.01
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        water: 8 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt E
+    lever_value: 4.0
+    value: 0.01
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        yeast extract: 4.0 g
+        water: 4 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-66
+  resolution: agreed
+  odorant: 2-Ethyl-3,6-dimethylpyrazine
+  lever_class: sulfur source
+  lever: methionine added (none vs 0.2 g per 200 g), xylose 1 g + yeast extract 2 g
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt D
+    lever_value: none
+    value: 0.01
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        yeast extract: 2.0 g
+        water: 7 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt F
+    lever_value: methionine
+    value: 0.01
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        yeast extract: 2.0 g
+        methionine: 0.2 g
+        water: 6.8 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-67
+  resolution: agreed
+  odorant: 2-Ethyl-3,6-dimethylpyrazine
+  lever_class: sulfur source
+  lever: methionine added (none vs 0.2 g per 200 g), xylose 2 g + yeast extract 4 g
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt E
+    lever_value: none
+    value: 0.01
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        yeast extract: 4.0 g
+        water: 4 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt G
+    lever_value: methionine
+    value: 0.01
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        yeast extract: 4.0 g
+        methionine: 0.2 g
+        water: 3.8 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-68
+  resolution: agreed
+  odorant: Methional (3-(methylthio)propanal)
+  lever_class: precursor dose
+  lever: xylose added (0, 1, 2 g per 200 g)
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt A
+    lever_value: 0.0
+    value: 0.06
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        water: 10 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt B
+    lever_value: 1.0
+    value: 0.06
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        water: 9 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt C
+    lever_value: 2.0
+    value: 0.06
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        water: 8 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-69
+  resolution: agreed
+  odorant: Methional (3-(methylthio)propanal)
+  lever_class: precursor dose
+  lever: yeast extract added (0 vs 2 g per 200 g), xylose 1 g
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt B
+    lever_value: 0.0
+    value: 0.06
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        water: 9 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt D
+    lever_value: 2.0
+    value: 0.07
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        yeast extract: 2.0 g
+        water: 7 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-70
+  resolution: agreed
+  odorant: Methional (3-(methylthio)propanal)
+  lever_class: precursor dose
+  lever: yeast extract added (0 vs 4 g per 200 g), xylose 2 g
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt C
+    lever_value: 0.0
+    value: 0.06
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        water: 8 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt E
+    lever_value: 4.0
+    value: 0.06
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        yeast extract: 4.0 g
+        water: 4 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-71
+  resolution: agreed
+  odorant: Methional (3-(methylthio)propanal)
+  lever_class: sulfur source
+  lever: methionine added (none vs 0.2 g per 200 g), xylose 1 g + yeast extract 2 g
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt D
+    lever_value: none
+    value: 0.07
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        yeast extract: 2.0 g
+        water: 7 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt F
+    lever_value: methionine
+    value: 0.08
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.02
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        yeast extract: 2.0 g
+        methionine: 0.2 g
+        water: 6.8 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-72
+  resolution: agreed
+  odorant: Methional (3-(methylthio)propanal)
+  lever_class: sulfur source
+  lever: methionine added (none vs 0.2 g per 200 g), xylose 2 g + yeast extract 4 g
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt E
+    lever_value: none
+    value: 0.06
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        yeast extract: 4.0 g
+        water: 4 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt G
+    lever_value: methionine
+    value: 0.08
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        yeast extract: 4.0 g
+        methionine: 0.2 g
+        water: 3.8 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-73
+  resolution: agreed
+  odorant: 2-Acetylthiazole
+  lever_class: precursor dose
+  lever: xylose added (0, 1, 2 g per 200 g)
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt A
+    lever_value: 0.0
+    value: 0.002
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        water: 10 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt B
+    lever_value: 1.0
+    value: 0.003
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        water: 9 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt C
+    lever_value: 2.0
+    value: 0.002
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        water: 8 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-74
+  resolution: agreed
+  odorant: 2-Acetylthiazole
+  lever_class: precursor dose
+  lever: yeast extract added (0 vs 2 g per 200 g), xylose 1 g
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt B
+    lever_value: 0.0
+    value: 0.003
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        water: 9 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt D
+    lever_value: 2.0
+    value: 0.004
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        yeast extract: 2.0 g
+        water: 7 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-75
+  resolution: agreed
+  odorant: 2-Acetylthiazole
+  lever_class: precursor dose
+  lever: yeast extract added (0 vs 4 g per 200 g), xylose 2 g
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt C
+    lever_value: 0.0
+    value: 0.002
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        water: 8 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt E
+    lever_value: 4.0
+    value: 0.003
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        yeast extract: 4.0 g
+        water: 4 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-76
+  resolution: agreed
+  odorant: 2-Acetylthiazole
+  lever_class: sulfur source
+  lever: methionine added (none vs 0.2 g per 200 g), xylose 1 g + yeast extract 2 g
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt D
+    lever_value: none
+    value: 0.004
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        yeast extract: 2.0 g
+        water: 7 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt F
+    lever_value: methionine
+    value: 0.001
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 1.0 g
+        yeast extract: 2.0 g
+        methionine: 0.2 g
+        water: 6.8 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+- id: boonbumrung2023-77
+  resolution: agreed
+  odorant: 2-Acetylthiazole
+  lever_class: sulfur source
+  lever: methionine added (none vs 0.2 g per 200 g), xylose 2 g + yeast extract 4 g
+  focal: true
+  location: Table 4, p. 399
+  digitised: false
+  unit: ppm (vs internal standard 2-methyl-3-heptanone)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Trt E
+    lever_value: none
+    value: 0.003
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        yeast extract: 4.0 g
+        water: 4 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
+  - label: Trt G
+    lever_value: methionine
+    value: 0.001
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 120
+      time_min: 60
+      precursors:
+        tuna viscera protein hydrolysate (TVPH): 190 g
+        xylose: 2.0 g
+        yeast extract: 4.0 g
+        methionine: 0.2 g
+        water: 3.8 g (total 200 g)
+      buffer: none
+      matrix: other (tuna viscera protein hydrolysate)
+      headspace: unstated
