@@ -686,8 +686,8 @@
     "artifact": "experiment_map",
     "generated_on": "2026-11-12",
     "git": {
-      "commit": "dafcb3faa6e1873a9eac6c1ddfb33acbf0b2374e",
-      "short": "dafcb3fa",
+      "commit": "53bff9cdc7c6259c4d662940e3edbb019995ca4f",
+      "short": "53bff9cd",
       "branch": "new-lab-keying",
       "dirty": true
     },

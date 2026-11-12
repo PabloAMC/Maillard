@@ -203,11 +203,12 @@ def render(p: Mapping[str, Any]) -> str:
          "No cell has a heated plant-protein contrast on the keyed record, so every design below names a pea-isolate "
          "matrix: that, and laboratories, are the binding gaps, not replicates.", "",
          "**One study covers most of the meaty-thiol column.** A single factorial in a 15 % pea-isolate matrix "
-         "(sugar ribose vs glucose x sulfur source cysteine vs thiamine x yeast extract 0 vs 1 % x pH 5.5 vs 6.5, "
-         "2 replicates, 32 pots, MFT / FFT / H2S / disulfides by SIDA) adds one laboratory to eight thiol cells at "
-         "once, and is the matrix the keyed record lacks. That is the plan's P3 study (STATUS_AND_PLAN sec. 4.1); "
-         "it brings each cell one laboratory closer, so cells keyed at two laboratories reach the three-laboratory "
-         "rule.", ""]
+         "(sugar ribose vs glucose x sulfur source cysteine vs thiamine x pH 5.5 vs 6.5, 36 pots with checks, "
+         "MFT / FFT / H2S / disulfides by SIDA), run in two laboratories from one shipped lot (one is acceptable), "
+         "adds a laboratory or two to the sugar, sulfur-source and pH cells of every family at once, and is the "
+         "matrix the keyed record lacks. That is the plan's P3 study (docs/guides/FACTORIAL_LEVER_STUDY.md, sized "
+         "by results/validation/lever_design_preposterior.md); yeast extract is not in it, because the lever "
+         "table has no yeast-extract class to receive it.", ""]
     for fam in dict.fromkeys(r["family"] for r in p["rows"]):
         L += [f"## {fam}", "", "| lever | reading | evidence | smallest experiment |", "|---|---|---|---|"]
         for r in p["rows"]:
