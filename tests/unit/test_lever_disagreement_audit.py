@@ -74,3 +74,21 @@ def _c(lever, *precursor_sets):
 def test_precursor_class_reads_the_varied_precursor(lever, sets, expected):
     c, arms = _c(lever, *sets)
     assert LT.precursor_class(c, arms) == expected
+
+
+@pytest.mark.parametrize("matrix, expected", [
+    ("buffer", "model system"), ("water", "model system"), ("other (acetonitrile/buffer 2:1)", "model system"),
+    ("other (Tenebrio molitor mealworm protein powder in water)", "food or protein matrix"),
+    ("plant protein (flaxseed protein hydrolysate)", "food or protein matrix"),
+    ("buffer + lard (other: lard in phosphate buffer)", "model system"),
+])
+def test_matrix_class_reads_the_leading_category(matrix, expected):
+    c = {"arms": [{"conditions": {"matrix": matrix}}]}
+    assert DA.moderators(c)["matrix"] == expected
+
+
+def test_ph_adjusted_without_buffer_is_not_buffered():
+    arm = lambda b: {"arms": [{"conditions": {"buffer": b}}]}
+    assert DA.moderators(arm("none (pH adjusted with 3 mol/L NaOH)"))["buffered"] is False
+    assert DA.moderators(arm("0.2 M phosphate"))["buffered"] is True
+    assert DA.moderators(arm("none stated"))["buffered"] is None

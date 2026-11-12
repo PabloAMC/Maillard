@@ -612,30 +612,30 @@
       "p_gap_positive": 0.7536945812807881
     },
     "matrix": {
-      "gap": 0.1261305283273701,
-      "cells": 11,
-      "pairs_true": 164,
-      "pairs_false": 235,
-      "median_true": 0.16963367561114967,
-      "median_false": 0.5593654585336183,
+      "gap": 0.023371391794795734,
+      "cells": 8,
+      "pairs_true": 36,
+      "pairs_false": 143,
+      "median_true": 0.16087858342424047,
+      "median_false": 0.31955177642422194,
       "ci90": [
-        -0.3526435196312783,
-        0.24643530801101002
+        -1.1117844705256354,
+        0.4040254381669195
       ],
-      "p_gap_positive": 0.8308977035490606
+      "p_gap_positive": 0.47123623011015914
     },
     "buffered": {
-      "gap": 0.03280466168066366,
-      "cells": 20,
-      "pairs_true": 126,
-      "pairs_false": 226,
-      "median_true": 0.0997039996595975,
-      "median_false": 0.1586973610503954,
+      "gap": 0.07836079445167847,
+      "cells": 14,
+      "pairs_true": 69,
+      "pairs_false": 167,
+      "median_true": 0.13716136729909054,
+      "median_false": 0.2721124787523874,
       "ci90": [
-        -0.06625288593498545,
-        0.0852456082258436
+        -0.1157290319524175,
+        0.29309232446796873
       ],
-      "p_gap_positive": 0.6523955147808359
+      "p_gap_positive": 0.8535242290748899
     },
     "ph_basis": {
       "gap": -0.052675588736951995,
@@ -2711,8 +2711,8 @@
     "artifact": "lever_disagreement_audit",
     "generated_on": "2026-11-12",
     "git": {
-      "commit": "d363216ab3433f191e6b1e04b379387f0261f4d4",
-      "short": "d363216a",
+      "commit": "f13c76f25a679859297bac362d251921880c4432",
+      "short": "f13c76f2",
       "branch": "disagreement-audit",
       "dirty": true
     },

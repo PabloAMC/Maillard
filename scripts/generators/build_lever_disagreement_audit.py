@@ -48,7 +48,9 @@ POT_SD = 0.10          # dex; floor on a contrast's standard deviation (unmodell
 Z = 2.0                # standard errors for "separable from zero"
 N_BOOT = 1000
 SEED = 20261112
-MODEL_MATRIX_WORDS = ("buffer", "water", "solvent", "ethanol", "glycerol", "acetonitrile", "model solution")
+MODEL_LEAD = ("buffer", "water")                    # the keyed matrix field's leading category
+FOOD_WORDS = ("protein", "meat", "hydrolys", "extract", "flour", "mealworm", "chicken", "pork", "beef", "yeast",
+              "oil", "lard", "fish", "seed", "mushroom", "milk", "egg", "soy", "pea ")
 CLASSES = ("conflict between laboratories", "sign changes inside one laboratory", "direction agreed",
            "no clear effect")
 
@@ -64,13 +66,15 @@ def moderators(c: Mapping[str, Any]) -> Dict[str, Any]:
     cond = [(a.get("conditions") or {}) for a in arms]
     matrices = {str(k.get("matrix") or "unstated").lower() for k in cond}
     stated = matrices - {"unstated"}
-    model = bool(stated) and all(any(w in m for w in MODEL_MATRIX_WORDS) and "+" not in m for m in stated)
+    model = bool(stated) and all(m.split(" (")[0].strip().startswith(MODEL_LEAD) or
+                                 (m.startswith("other") and not any(w in m for w in FOOD_WORDS)) for m in stated)
     buffers = {str(k.get("buffer") or "unstated").lower() for k in cond}
     basis = {str(k.get("ph_basis") or "unstated").lower() for k in cond}
     return {
         "quantification": "absolute" if c.get("quant_type") == "absolute" else "peak area or relative",
         "matrix": None if not stated else ("model system" if model else "food or protein matrix"),
-        "buffered": None if buffers <= {"unstated", ""} else (not buffers <= {"none", "unstated", ""}),
+        "buffered": None if all(b in ("unstated", "") or b.startswith(("unstated", "none stated")) for b in buffers)
+        else not all(b.startswith(("none", "unstated", "water")) or b == "" for b in buffers),
         "ph_basis": basis.pop() if len(basis) == 1 and basis != {"unstated"} else None,
         "digitised": bool(c.get("digitised")),
         "temp_C": _median([LT._num(k.get("temp_C")) for k in cond]),
@@ -323,7 +327,7 @@ def render(p: Mapping[str, Any]) -> str:
          f"{p['counts']['items']} effects (one per numeric contrast, one per pair of levels of a categorical "
          f"contrast) from {p['counts']['laboratories']} laboratories; {p['counts']['cells_two_or_more_labs']} cells "
          f"hold two or more laboratories, {p['counts']['cells_three_or_more_labs']} hold three or more. A cell here is "
-         "an odorant x lever x band, or an odorant x pair of levels.", "",
+         "an odorant x lever x band, or an odorant x pair of levels. A pair cell 'B vs A' holds log10(B / A).", "",
          "## 1. What kind of disagreement each cell shows", "",
          "| class | cells with 2+ laboratories | cells with 3+ |", "|---|---|---|"]
     for k in CLASSES:
