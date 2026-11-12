@@ -2,12 +2,12 @@
   "artifact": "ph_balance_s3_sensitivity",
   "provenance": {
     "artifact": "ph_balance_s3_sensitivity",
-    "generated_on": "2026-11-11",
+    "generated_on": "2026-11-12",
     "git": {
-      "commit": "9c3c96f27dc7b26e3c22e670edfe3f188b8236c6",
-      "short": "9c3c96f2",
+      "commit": "2e0fcb05a68eb2106fd61a4c1f0dfcb7a4aa98a4",
+      "short": "2e0fcb05",
       "branch": "rival-bdf-retry",
-      "dirty": true
+      "dirty": false
     },
     "generated_by": "scripts/generators/build_ph_balance_s3_sensitivity.py",
     "wave": "S3 application: the pH balance (M1b part (i))",
@@ -42,7 +42,7 @@
       },
       {
         "path": "src/kinetic_core/ph_balance_refusal.py",
-        "sha256": "dad8a09a04a2898e0fa29b6bacd1ce7280eb699752754b6a8e225830143b89b4"
+        "sha256": "a6e3bf866c38056f4d023cdce8b4647680d4bc3dc4fa81bcd587f2a001688d27"
       },
       {
         "path": "results/validation/kinetic_core_thiol_lolo_nested_tau.json",
@@ -383,7 +383,8 @@
       "median": 27.8825,
       "max": 2148.933,
       "n_points": 23
-    }
+    },
+    "reanalysed": true
   },
   "failed_point_runs": 96,
   "complete": true,
