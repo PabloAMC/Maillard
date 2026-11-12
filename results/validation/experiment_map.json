@@ -35,7 +35,7 @@
       "reading": "needs experiment",
       "why": "keyed: best cell '2-Methyl-3-furanthiol (MFT), all' reads direction unclear (3 laboratories)",
       "plant_protein_evidence": false,
-      "design": "precursor dose: 0 / 0.5x / 1x / 2x of the base dose; 6 replicate pots per arm; in a 15 % pea-isolate matrix; from 1 new laboratory(ies) to reach 3; measure MFT, FFT, H2S and the disulfides by SIDA",
+      "design": "precursor dose: 0 / 0.5x / 1x / 2x of the base dose; 5 replicate pots per arm; in a 15 % pea-isolate matrix; from 1 new laboratory(ies) to reach 3; measure MFT, FFT, H2S and the disulfides by SIDA",
       "engine": "blank in v1 (step 5 adds)"
     },
     {
@@ -51,7 +51,7 @@
       "family": "meaty thiols",
       "lever": "sulfur source",
       "reading": "answered by the literature",
-      "why": "2-Methyl-3-furanthiol (MFT), none vs cysteine: -0.78 dex (new laboratory -1.72 to +0.17)",
+      "why": "2-Methyl-3-furanthiol (MFT), none vs cysteine: -0.78 dex (new laboratory -1.77 to +0.22)",
       "plant_protein_evidence": false,
       "design": null,
       "engine": "blank in v1 (step 5 adds)"
@@ -305,7 +305,7 @@
       "reading": "needs experiment",
       "why": "keyed: best cell '2-Methylpyrazine, all' reads too few laboratories (2 laboratories)",
       "plant_protein_evidence": false,
-      "design": "precursor dose: 0 / 0.5x / 1x / 2x of the base dose; 4 replicate pots per arm; in a 15 % pea-isolate matrix; from 1 new laboratory(ies) to reach 3; measure pyrazines",
+      "design": "precursor dose: 0 / 0.5x / 1x / 2x of the base dose; 3 replicate pots per arm; in a 15 % pea-isolate matrix; from 1 new laboratory(ies) to reach 3; measure pyrazines",
       "engine": "blank in v1 (step 5 adds)"
     },
     {
@@ -686,16 +686,16 @@
     "artifact": "experiment_map",
     "generated_on": "2026-11-11",
     "git": {
-      "commit": "9c3c96f27dc7b26e3c22e670edfe3f188b8236c6",
-      "short": "9c3c96f2",
-      "branch": "lever-keying-round3",
+      "commit": "eb5a0f14f8883a988e1854d671ea8420f9e2585e",
+      "short": "eb5a0f14",
+      "branch": "lever-prior-fix",
       "dirty": true
     },
     "generated_by": "scripts/generators/build_experiment_map.py",
     "inputs": [
       {
         "path": "results/validation/lever_table.json",
-        "sha256": "4527f87d9ea2c7767a992e5f0a91491539fd80df7e9e298d5b68ec971dcf939d"
+        "sha256": "b7328af7aec4c4452aa20bda3c7e905abda9a50c32f7cb74ddef190d4b0a0fca"
       },
       {
         "path": "docs/reference/contrast_benchmark/split.yml",

@@ -44,6 +44,10 @@ DIGITISED_SD = 0.05          # PREREG sec. 3
 MIN_LABS, P_SAME_SIGN, LOLO_MIN_LABS, LOLO_FLAG = 3, 0.8, 4, 0.7
 PRIOR_DOMINATED = 0.30
 GRID = np.concatenate([[0.0], np.geomspace(0.01, 3.0, 34)])
+#: log width of each grid cell. GRID is log-spaced, so a point's prior weight is the half-normal density times the
+#: width of the cell it stands for; without it the grid applies ~ half-normal / s, which piles mass near zero and
+#: makes sparse cells' new-laboratory intervals too narrow (fixed 2026-11-11; PREREG sec. 5 asks for half-normal)
+GRID_LOG_WIDTH = np.log(np.gradient(GRID))
 
 NUMERIC = {"pH": ("+1 pH unit", lambda x: x),
            "temperature": ("+10 C", lambda x: x / 10.0),
@@ -325,6 +329,11 @@ def _halfnormal_logpdf(x, scale):
     return -0.5 * (x / scale) ** 2
 
 
+def _grid_log_prior(scale: float) -> np.ndarray:
+    """log prior weight of each GRID point under half-normal(scale): the density times the cell width."""
+    return _halfnormal_logpdf(GRID, scale) + GRID_LOG_WIDTH
+
+
 def fit_gaussian(y: np.ndarray, S: np.ndarray, X: np.ndarray, comps: Sequence[np.ndarray], scale: float
                  ) -> Dict[str, Any]:
     """y ~ N(X beta, S + sum_k s_k^2 K_k), beta ~ N(0, LOCATION_SD^2 I), s_k ~ half-normal(scale) on GRID.
@@ -332,7 +341,9 @@ def fit_gaussian(y: np.ndarray, S: np.ndarray, X: np.ndarray, comps: Sequence[np
     n, p = X.shape
     P0 = np.eye(p) / LOCATION_SD ** 2
     pts, logw, means, covs, loglik = [], [], [], [], []
-    for s in itertools.product(GRID, repeat=len(comps)):
+    log_prior = _grid_log_prior(scale)
+    for idx in itertools.product(range(len(GRID)), repeat=len(comps)):
+        s = tuple(float(GRID[i]) for i in idx)
         V = S.copy()
         for sk, K in zip(s, comps):
             V = V + sk ** 2 * K
@@ -348,7 +359,7 @@ def fit_gaussian(y: np.ndarray, S: np.ndarray, X: np.ndarray, comps: Sequence[np
         M = V + LOCATION_SD ** 2 * X @ X.T
         sign, logdet = np.linalg.slogdet(M)
         ll = -0.5 * (logdet + y @ np.linalg.solve(M, y) + n * math.log(2 * math.pi))
-        lp = sum(_halfnormal_logpdf(sk, scale) for sk in s)
+        lp = float(sum(log_prior[i] for i in idx))
         pts.append(s); logw.append(ll + lp); loglik.append(ll); means.append(b); covs.append(Ai)
     logw = np.array(logw)
     w = np.exp(logw - logw.max())
