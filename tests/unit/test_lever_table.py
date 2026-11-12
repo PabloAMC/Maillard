@@ -80,3 +80,45 @@ def test_the_grid_prior_is_the_half_normal_it_declares(scale):
     assert (w * LT.GRID).sum() == pytest.approx(scale * math.sqrt(2.0 / math.pi), rel=0.03)
     true_below = math.erf(0.1 / scale / math.sqrt(2.0))           # P(|N(0, scale)| < 0.1)
     assert w[LT.GRID < 0.1].sum() == pytest.approx(true_below, abs=0.03)
+
+
+# ------------------------------------------------------------- sensitivity readings and fragility (RULES_V2_SPEC)
+def test_a_flat_ladder_that_wiggles_has_no_turning_point_and_a_real_peak_has_one():
+    flat = LT.numeric_observation({"lever_class": "pH"}, [_arm(4.0, 3.9), _arm(5.0, 3.6), _arm(6.0, 4.1), _arm(7.0, 3.7)])
+    peak = LT.numeric_observation({"lever_class": "pH"}, [_arm(4.0, 1.0), _arm(5.0, 10.0), _arm(6.0, 1.0)])
+    assert flat["non_monotone"] and not flat["turning_point"]
+    assert peak["non_monotone"] and peak["turning_point"]
+
+
+def test_whole_ladder_slope_of_a_symmetric_peak_is_zero_while_the_longest_run_is_not():
+    peak = LT.numeric_observation({"lever_class": "pH"}, [_arm(4.0, 1.0), _arm(5.0, 10.0), _arm(6.0, 1.0)])
+    assert abs(peak["y"]) == pytest.approx(1.0)
+    assert peak["alt"]["whole_ladder"][0] == pytest.approx(0.0, abs=1e-9)
+
+
+def test_without_censored_arms_a_two_arm_contrast_has_no_alternative_and_a_ladder_keeps_its_measured_arms():
+    two = LT.numeric_observation({"lever_class": "pH"}, [_arm(5.0, 10.0), _arm(7.0, None, censor="nd_with_limit", limit=0.1)])
+    assert two["y"] == pytest.approx(-1.0) and two["censored_arms"] == 1 and two["alt"]["no_censored"] is None
+    lad = LT.numeric_observation({"lever_class": "pH"}, [_arm(5.0, 100.0), _arm(6.0, 10.0),
+                                                          _arm(7.0, None, censor="nd_with_limit", limit=0.001)])
+    assert lad["alt"]["no_censored"][0] == pytest.approx(-1.0) and lad["y"] < -1.5
+
+
+def test_buffer_state_reads_ph_adjusted_without_buffer_as_unbuffered():
+    arms = lambda b: [{"conditions": {"buffer": b}}]
+    assert LT.buffer_state(arms("none (pH adjusted with 3 mol/L NaOH)")) == "unbuffered"
+    assert LT.buffer_state(arms("0.2 M phosphate")) == "buffered"
+    assert LT.buffer_state(arms("unstated")) == "unstated"
+
+
+def test_a_cell_answered_only_through_detection_limits_is_flagged_fragile():
+    def row(lab, censored):
+        arms = [_arm(5.0, 100.0), _arm(6.0, 50.0),
+                _arm(7.0, None, censor="nd_with_limit", limit=0.01) if censored else _arm(7.0, 45.0)]
+        o = LT.numeric_observation({"lever_class": "pH"}, arms)
+        return {**o, "lab": lab, "source": lab}
+    rows = [row("a", True), row("b", True), row("c", True)]
+    fr = LT.numeric_fragility(rows, "pH", "answered by the literature")
+    assert fr["contrasts_with_a_censored_arm"] == 3
+    assert "without censored arms" in fr["variants"]
+    assert abs(fr["variants"]["without censored arms"]["estimate"]) < abs(sum(r["y"] for r in rows) / 3)

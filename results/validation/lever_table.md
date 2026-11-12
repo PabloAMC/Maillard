@@ -68,7 +68,7 @@
 | 2-Furanmethanol | time (a doubling of time) | T >130 C | too few laboratories | not pooled; per contrast: +0.32 | - | - | 1 / 1 / 1 | 100% | water | - |
 | 2-Furfurylthiol (FFT) | pH (+1 pH unit) | pH 4.5-6, held | too few laboratories | not pooled; per contrast: -0.43, -0.48, -0.18, -1.67 | - | - | 1 / 2 / 4 | 100% | buffer | - |
 | 2-Furfurylthiol (FFT) | pH (+1 pH unit) | pH 4.5-6, initial or label | direction unclear (1 non-monotone) | -0.14 (-0.45 to +0.17) | -0.87 to +0.59 | 0.65 | 4 / 4 / 5 | 60% | buffer, water | 1.00 |
-| 2-Furfurylthiol (FFT) | pH (+1 pH unit) | pH 6-7.5, initial or label | answered by the literature (prior-dominated) | -0.74 (-1.28 to -0.16) | -1.95 to +0.50 | 0.86 | 3 / 3 / 5 | 80% | buffer, water | - |
+| 2-Furfurylthiol (FFT) | pH (+1 pH unit) | pH 6-7.5, initial or label | answered by the literature (prior-dominated) **[fragile: buffered studies only: too few laboratories]** | -0.74 (-1.28 to -0.16) | -1.95 to +0.50 | 0.86 | 3 / 3 / 5 | 80% | buffer, water | - |
 | 2-Furfurylthiol (FFT) | pH (+1 pH unit) | pH <4.5, initial or label | too few laboratories | not pooled; per contrast: +0.30, +0.30 | - | - | 1 / 1 / 2 | 0% | buffer | - |
 | 2-Furfurylthiol (FFT) | precursor dose (a doubling of dose) | sulfur donor varied | too few laboratories | not pooled; per contrast: -0.66 | - | - | 1 / 1 / 1 | 100% | other (fish protein hydrolysate solution) | - |
 | 2-Furfurylthiol (FFT) | temperature (+10 C) | time >120 min | too few laboratories | not pooled; per contrast: +0.16, +0.31 | - | - | 1 / 1 / 2 | 0% | water | - |
@@ -139,7 +139,7 @@
 | DMHF | precursor dose (a doubling of dose) | sulfur donor varied | too few laboratories | not pooled; per contrast: +0.03, +0.04, -0.06, +0.04, -0.14, +0.19, +0.02 | - | - | 1 / 1 / 7 | 0% | buffer | - |
 | DMHF | precursor dose (a doubling of dose) | sulfur donor varied, fed odorant (stability) | too few laboratories | not pooled; per contrast: -0.25, -0.19 | - | - | 1 / 1 / 2 | 0% | buffer | - |
 | Furfural | pH (+1 pH unit) | pH 4.5-6, held | too few laboratories | not pooled; per contrast: -1.71, -1.73, -0.52, -0.81 | - | - | 1 / 1 / 4 | 100% | buffer | - |
-| Furfural | pH (+1 pH unit) | pH 4.5-6, initial or label | answered by the literature (prior-dominated) (1 non-monotone) | -1.18 (-2.11 to -0.24) | -3.09 to +0.74 | 0.85 | 3 / 3 / 17 | 100% | buffer, other (enzymatically hydrolysed pork trimmings) | - |
+| Furfural | pH (+1 pH unit) | pH 4.5-6, initial or label | answered by the literature (prior-dominated) (1 non-monotone) **[fragile: without censored arms: too few laboratories]** **[fragile: buffered studies only: too few laboratories]** | -1.18 (-2.11 to -0.24) | -3.09 to +0.74 | 0.85 | 3 / 3 / 17 | 100% | buffer, other (enzymatically hydrolysed pork trimmings) | - |
 | Furfural | pH (+1 pH unit) | pH 6-7.5, final | too few laboratories | not pooled; per contrast: -0.32, +0.15, -0.41 | - | - | 1 / 1 / 3 | 100% | other (glycine/glucose/wheat starch extrudate) | - |
 | Furfural | pH (+1 pH unit) | pH 6-7.5, initial or label | too few laboratories | not pooled; per contrast: -0.66, -0.24 | - | - | 1 / 1 / 2 | 100% | buffer | - |
 | Furfural | precursor dose (a doubling of dose) | sugar varied | too few laboratories | not pooled; per contrast: +0.26, +0.17, +0.16, +0.14, +0.12, +0.10, +0.15, +0.11, +0.51, +0.41, +0.23, +0.47 | - | - | 2 / 3 / 12 | 100% | other (enzymatically hydrolysed pork trimmings), other (minced chicken carcass enzymatic hydrolysate, no pH adjustment), yeast extract (nutritional yeast hydrolysate) | - |
@@ -188,7 +188,7 @@
 | Pentanal | precursor dose (a doubling of dose) | sulfur donor varied | too few laboratories | not pooled; per contrast: -0.08, -0.14, -0.23, -0.55 | - | - | 1 / 1 / 4 | 100% | other (enzymatic pork trimmings hydrolysate, EPH), other (non-enzymatic pork trimmings extract, NPE) | - |
 | Pentanal | temperature (+10 C) | time 30-120 min | too few laboratories | not pooled; per contrast: -0.13, -0.10 | - | - | 1 / 1 / 2 | 100% | other (enzymatically hydrolysed pork trimmings) | - |
 | Phenylacetaldehyde | pH (+1 pH unit) | pH 4.5-6, initial or label | too few laboratories | not pooled; per contrast: -0.05, -0.10, -0.12, -0.02, -0.59, +0.25, -0.57, -0.23, +0.04, +0.25, -0.17, +0.21, -0.16, +0.24, +0.38, -0.05 | - | - | 2 / 2 / 16 | 94% | other (acetonitrile/buffer 2:1), other (enzymatically hydrolysed pork trimmings) | - |
-| Phenylacetaldehyde | pH (+1 pH unit) | pH 6-7.5, initial or label | direction unclear (prior-dominated) (6 non-monotone) | -0.20 (-0.50 to +0.10) | -0.81 to +0.40 | 0.77 | 3 / 5 / 10 | 10% | buffer, other (600 mg sand + 30 uL 0.3 M buffer + 80 uL water), other (acetonitrile/buffer 2:1), water | - |
+| Phenylacetaldehyde | pH (+1 pH unit) | pH 6-7.5, initial or label | direction unclear (prior-dominated) (6 non-monotone) **[fragile: buffered studies only: too few laboratories]** | -0.20 (-0.50 to +0.10) | -0.81 to +0.40 | 0.77 | 3 / 5 / 10 | 10% | buffer, other (600 mg sand + 30 uL 0.3 M buffer + 80 uL water), other (acetonitrile/buffer 2:1), water | - |
 | Phenylacetaldehyde | pH (+1 pH unit) | pH <4.5, initial or label | too few laboratories | not pooled; per contrast: -0.13, -0.03, -0.22, -0.07, -0.07, -0.12, -0.08, -0.10, -0.14 | - | - | 2 / 6 / 9 | 0% | buffer, buffer (wine-like model solution), other (600 mg sand + 30 uL 0.3 M buffer + 80 uL water), other (acetonitrile/buffer 2:1) | - |
 | Phenylacetaldehyde | pH (+1 pH unit) | pH >7.5, initial or label | too few laboratories | not pooled; per contrast: -0.11, -0.07, -0.17, +0.34, -0.27, +0.06, -0.14, -0.45, -0.05, -0.36, -0.57, -0.20 | - | - | 1 / 4 / 12 | 0% | buffer, other (acetonitrile/buffer 2:1) | - |
 | Phenylacetaldehyde | precursor dose (a doubling of dose) | lipid oxidation product varied | too few laboratories | not pooled; per contrast: +0.12, +0.12, +0.28, +0.31, +0.10, +0.10, +0.16, +0.19, +0.23, +0.22, +0.15, +0.24 | - | - | 1 / 5 / 12 | 0% | buffer, other (600 mg sand + 30 uL 0.3 M buffer + 80 uL water), other (acetonitrile/buffer 2:1) | - |
@@ -631,7 +631,7 @@
 | 2-Methylpyrazine | amino acid identity | aspartic acid vs glycine | too few laboratories | not pooled (network estimate +0.04, shown for orientation only) | - | - | 1 / 1 |
 | 2-Methylpyrazine | amino acid identity | cysteine vs glycine | direction unclear | -0.09 (-0.47 to +0.30) | -1.27 to +1.10 | 0.55 | 3 / 9 |
 | 2-Methylpyrazine | amino acid identity | glutamic acid vs glycine | too few laboratories | not pooled (network estimate +0.42, shown for orientation only) | - | - | 1 / 2 |
-| 2-Methylpyrazine | amino acid identity | glutamine vs glycine | direction unclear | +0.35 (-0.26 to +0.97) | -0.92 to +1.63 | 0.68 | 3 / 4 |
+| 2-Methylpyrazine | amino acid identity | glutamine vs glycine | direction unclear **[fragile: without censored arms: answered by the literature]** | +0.35 (-0.26 to +0.97) | -0.92 to +1.63 | 0.68 | 3 / 4 |
 | 2-Methylpyrazine | amino acid identity | glutathione vs glycine | too few laboratories | not pooled (network estimate +0.22, shown for orientation only) | - | - | 1 / 2 |
 | 2-Methylpyrazine | amino acid identity | isoleucine vs glycine | too few laboratories | not pooled (network estimate -0.19, shown for orientation only) | - | - | 2 / 2 |
 | 2-Methylpyrazine | amino acid identity | leucine vs glycine | too few laboratories | not pooled (network estimate -0.30, shown for orientation only) | - | - | 1 / 1 |
@@ -1288,3 +1288,5 @@
 | Unsubstituted pyrazine | sulfur source | glutathione vs cysteine | too few laboratories | not pooled (network estimate -0.12, shown for orientation only) | - | - | 1 / 1 |
 
 Estimates are log10 ratios (dex) per lever step; +0.30 dex is about 2x. 'answered by the literature' needs at least three laboratories, a 90 % interval of the estimate that excludes zero, and P(a new laboratory sees the same sign) >= 0.8 (PREREG sec. 5).
+
+**[fragile: ...]** marks a cell whose reading would change under a sensitivity reading (docs/reference/lever_table/RULES_V2_SPEC.md): without the arms that are detection limits, with slopes over the whole ladder instead of its longest monotone run, or (pH) on buffered studies only. The sensitivity readings move no reading. A categorical 'none' level is not checked to be the same pot across studies.

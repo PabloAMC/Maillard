@@ -3143,9 +3143,9 @@
     "artifact": "lever_disagreement_audit",
     "generated_on": "2026-11-12",
     "git": {
-      "commit": "e53a43b026710285661cc2dfd44b73619b53cf32",
-      "short": "e53a43b0",
-      "branch": "disagreement-audit",
+      "commit": "c34c040a708f76ef5d572a29d1ef791cff67856b",
+      "short": "c34c040a",
+      "branch": "lever-table-rules-v2",
       "dirty": true
     },
     "generated_by": "scripts/generators/build_lever_disagreement_audit.py",

@@ -42,7 +42,7 @@
 | 2-Furanmethanol | time (a doubling of time) | T 100-130 C | too few laboratories | not pooled; per contrast: +0.23, +0.58 | - | - | 1 / 1 / 2 | 100% | water | - |
 | 2-Furanmethanol | time (a doubling of time) | T >130 C | too few laboratories | not pooled; per contrast: +0.32 | - | - | 1 / 1 / 1 | 100% | water | - |
 | 2-Furfurylthiol (FFT) | pH (+1 pH unit) | pH 4.5-6, held | too few laboratories | not pooled; per contrast: -0.43, -0.48, -0.18, -1.67 | - | - | 1 / 2 / 4 | 100% | buffer | - |
-| 2-Furfurylthiol (FFT) | pH (+1 pH unit) | pH 4.5-6, initial or label | direction unclear (prior-dominated) (1 non-monotone) | -0.08 (-0.47 to +0.32) | -0.91 to +0.77 | 0.58 | 3 / 3 / 4 | 50% | buffer, water | - |
+| 2-Furfurylthiol (FFT) | pH (+1 pH unit) | pH 4.5-6, initial or label | direction unclear (prior-dominated) (1 non-monotone) **[fragile: buffered studies only: too few laboratories]** | -0.08 (-0.47 to +0.32) | -0.91 to +0.77 | 0.58 | 3 / 3 / 4 | 50% | buffer, water | - |
 | 2-Furfurylthiol (FFT) | pH (+1 pH unit) | pH 6-7.5, initial or label | too few laboratories | not pooled; per contrast: -0.11 | - | - | 1 / 1 / 1 | 0% | water | - |
 | 2-Furfurylthiol (FFT) | pH (+1 pH unit) | pH <4.5, initial or label | too few laboratories | not pooled; per contrast: +0.30, +0.30 | - | - | 1 / 1 / 2 | 0% | buffer | - |
 | 2-Furfurylthiol (FFT) | temperature (+10 C) | time >120 min | too few laboratories | not pooled; per contrast: +0.16, +0.31 | - | - | 1 / 1 / 2 | 0% | water | - |
@@ -116,7 +116,7 @@
 | Norfuraneol (NF) | time (a doubling of time) | T 100-130 C | too few laboratories | not pooled; per contrast: +0.26, +0.19, +0.10 | - | - | 1 / 1 / 3 | 100% | buffer | - |
 | Norfuraneol (NF) | time (a doubling of time) | T 100-130 C, fed odorant (stability) | too few laboratories | not pooled; per contrast: -0.34 | - | - | 1 / 1 / 1 | 0% | buffer | - |
 | Phenylacetaldehyde | pH (+1 pH unit) | pH 4.5-6, initial or label | too few laboratories | not pooled; per contrast: -0.05 | - | - | 1 / 1 / 1 | 0% | other (acetonitrile/buffer 2:1) | - |
-| Phenylacetaldehyde | pH (+1 pH unit) | pH 6-7.5, initial or label | direction unclear (prior-dominated) (6 non-monotone) | -0.20 (-0.50 to +0.10) | -0.81 to +0.40 | 0.77 | 3 / 5 / 10 | 10% | buffer, other (600 mg sand + 30 uL 0.3 M buffer + 80 uL water), other (acetonitrile/buffer 2:1), water | - |
+| Phenylacetaldehyde | pH (+1 pH unit) | pH 6-7.5, initial or label | direction unclear (prior-dominated) (6 non-monotone) **[fragile: buffered studies only: too few laboratories]** | -0.20 (-0.50 to +0.10) | -0.81 to +0.40 | 0.77 | 3 / 5 / 10 | 10% | buffer, other (600 mg sand + 30 uL 0.3 M buffer + 80 uL water), other (acetonitrile/buffer 2:1), water | - |
 | Phenylacetaldehyde | pH (+1 pH unit) | pH <4.5, initial or label | too few laboratories | not pooled; per contrast: -0.13, -0.03, -0.22, -0.07, -0.07, -0.12, -0.08, -0.10, -0.14 | - | - | 2 / 6 / 9 | 0% | buffer, buffer (wine-like model solution), other (600 mg sand + 30 uL 0.3 M buffer + 80 uL water), other (acetonitrile/buffer 2:1) | - |
 | Phenylacetaldehyde | pH (+1 pH unit) | pH >7.5, initial or label | too few laboratories | not pooled; per contrast: -0.11, -0.07, -0.17, +0.34, -0.27, +0.06, -0.14, -0.45, -0.05, -0.36, -0.57, -0.20 | - | - | 1 / 4 / 12 | 0% | buffer, other (acetonitrile/buffer 2:1) | - |
 | Phenylacetaldehyde | precursor dose (a doubling of dose) | lipid oxidation product varied | too few laboratories | not pooled; per contrast: +0.12, +0.12, +0.28, +0.31, +0.10, +0.10, +0.16, +0.19, +0.23, +0.22, +0.15, +0.24 | - | - | 1 / 5 / 12 | 0% | buffer, other (600 mg sand + 30 uL 0.3 M buffer + 80 uL water), other (acetonitrile/buffer 2:1) | - |
@@ -853,3 +853,5 @@
 | Unsubstituted pyrazine | sulfur source | glutathione vs cysteine | too few laboratories | not pooled (network estimate -0.12, shown for orientation only) | - | - | 1 / 1 |
 
 Estimates are log10 ratios (dex) per lever step; +0.30 dex is about 2x. 'answered by the literature' needs at least three laboratories, a 90 % interval of the estimate that excludes zero, and P(a new laboratory sees the same sign) >= 0.8 (PREREG sec. 5).
+
+**[fragile: ...]** marks a cell whose reading would change under a sensitivity reading (docs/reference/lever_table/RULES_V2_SPEC.md): without the arms that are detection limits, with slopes over the whole ladder instead of its longest monotone run, or (pH) on buffered studies only. The sensitivity readings move no reading. A categorical 'none' level is not checked to be the same pot across studies.
