@@ -6996,18 +6996,18 @@
  },
  "provenance": {
   "artifact": "frozen_fit_reproducibility",
-  "generated_on": "2026-11-07",
+  "generated_on": "2026-11-11",
   "git": {
-   "commit": "b8ba234edfc17900ca3c60f4afa5abb5844ce9db",
-   "short": "b8ba234e",
-   "branch": "s3-ph-balance-refusal",
+   "commit": "28fa3e7d78fc1910c237d41e13e383cd6f863ad2",
+   "short": "28fa3e7d",
+   "branch": "rival-bdf-retry",
    "dirty": true
   },
   "generated_by": "scripts/generators/build_frozen_fit_reproducibility.py",
   "inputs": [
    {
     "path": "results/validation/incumbent_evidence_tiers.json",
-    "sha256": "da5739affea8c18e726672727d9d01de3773191ce459f4f80083ba762943feae"
+    "sha256": "1aa2f1b6fe915d9e10e57d89c69176fb9763bae132c115106405330986c48644"
    },
    {
     "path": "results/validation/kinetic_core_b1_fit_report.json",

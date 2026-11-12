@@ -41,11 +41,11 @@
   },
   "provenance": {
     "artifact": "core_directional_scores",
-    "generated_on": "2026-11-07",
+    "generated_on": "2026-11-11",
     "git": {
-      "commit": "5e61fed0344b8b1cb5f8312085ed42ad63ad3b0b",
-      "short": "5e61fed0",
-      "branch": "s3-ph-balance-refusal",
+      "commit": "9c3c96f27dc7b26e3c22e670edfe3f188b8236c6",
+      "short": "9c3c96f2",
+      "branch": "rival-bdf-retry",
       "dirty": true
     },
     "generated_by": "src/kinetic_core/directional.py",
@@ -482,7 +482,7 @@
       "arm 'egg PC alone' refused": 1,
       "arm 'methionine alone' refused": 1
     },
-    "wall_seconds": 2970.5
+    "wall_seconds": 2716.1
   },
   "claims": [
     {
@@ -3323,7 +3323,7 @@
       "statement": "Under DRY-heating (6 min / 180 C on buffered silica gel), the pentose still beats the hexose for FFT, and by a wider margin than in water: ribose 97.2 ug vs glucose 1.4 ug.",
       "source": "hofmann1998",
       "status": "not_evaluable",
-      "reason": "step 'cysteine + D-ribose, dry-heated 180 C 6 min' -> 'cysteine + D-glucose, dry-heated 180 C 6 min' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): an arm's carried rivals could not be run, so the ratio's independence from the balance is not shown. REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause). Band bounded by the carried rivals' screen-passing extremes, pending the full-draw re-run (prereg sec. 21.10, R3d).",
+      "reason": "step 'cysteine + D-ribose, dry-heated 180 C 6 min' -> 'cysteine + D-glucose, dry-heated 180 C 6 min' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the DIRECTION of this ratio is refused: B0 and the carried rivals disagree in its sign (S3). REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause). Band bounded by the carried rivals' screen-passing extremes, pending the full-draw re-run (prereg sec. 21.10, R3d).",
       "arms": [
         {
           "label": "cysteine + D-ribose, dry-heated 180 C 6 min",

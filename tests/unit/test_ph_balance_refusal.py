@@ -143,15 +143,17 @@ def test_the_rivals_are_the_screens_passing_extremes():
 
 
 def test_the_rival_budget_is_deterministic_and_refuses_on_record():
-    """Fix 4: no wall clock. A pot whose rival exceeds the evaluation budget is refused with that reason (Chen 2002's
-    pH 5 ribose + cysteine arms in the record)."""
+    """Fix 4: no wall clock. A pot whose rival cannot be integrated is refused for a deterministic solver reason:
+    LSODA exceeding the evaluation budget, after which BDF retries under a fresh budget and either exceeds it too or
+    fails on step size (Chen 2002's pH 5 ribose + cysteine arms in the record)."""
     import build_ph_balance_s3_sensitivity as gen
     from src.kinetic_core import ph_balance_rivals as pbr
 
     assert isinstance(pbr.RIVAL_RHS_BUDGET, int) and pbr.RIVAL_RHS_BUDGET > 0
     failed = [v["failed"] for r in gen.read_detail()["recipes"] for p, v in r["points"].items()
               if v.get("failed") and p not in ("B0", "B0_inline") and "skipped" not in v["failed"]]
-    assert failed and all("RIVAL_RHS_BUDGET" in f for f in failed), failed[:3]
+    deterministic = ("RIVAL_RHS_BUDGET", "Required step size is less than spacing between numbers")
+    assert failed and all(any(d in f for d in deterministic) for f in failed), failed[:3]
 
 
 def test_the_sign_floor_sits_above_the_coupling_noise():
@@ -227,7 +229,7 @@ def test_a_thiol_refused_on_both_grounds_keeps_h0s_interval_when_its_ratio_stand
 
 
 def test_the_rivals_run_in_parallel_with_the_serial_verdict(monkeypatch):
-    """The 23 rival integrations go through ``parallel.map_ordered`` (each under its own Config): the verdict with
+    """The 23 rival integrations go through ``parallel.imap_ordered`` (each under its own Config): the verdict with
     workers is the serial one, bit for bit (2026-11-11: the serial loop doubled CI time and timed main out)."""
     spec = _core(UNBUFFERED)
     verdicts = []

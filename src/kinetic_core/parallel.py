@@ -58,7 +58,7 @@ import multiprocessing as mp
 import os
 import pickle
 from dataclasses import dataclass
-from typing import Any, Callable, Iterable, List, Optional
+from typing import Any, Callable, Iterable, Iterator, List, Optional
 
 _FN: Optional[Callable[[Any], Any]] = None
 #: True inside a worker. A worker is a daemon and may not fork its own pool, so a nested call (a Jacobian's
@@ -201,5 +201,29 @@ def map_ordered(fn: Callable[[Any], Any], items: Iterable[Any], n_workers: Optio
     try:
         with mp.get_context("fork").Pool(min(n, len(items)), initializer=_mark_worker) as pool:
             return pool.map(_call, items, chunksize=1)
+    finally:
+        _FN = None
+
+
+def imap_ordered(fn: Callable[[Any], Any], items: Iterable[Any], n_workers: Optional[int] = None) -> Iterator[Any]:
+    """``(fn(item) for item in items)``, lazily and in order, on a pool forked at the call as ``map_ordered``'s.
+
+    For a caller that STOPS AT THE FIRST EXCEPTION (2026-11-12): an exception is raised at the item that raised it,
+    exactly where the serial loop raises it, and leaving the iteration (that exception, or a ``break``) terminates
+    the pool, so the integrations still running are abandoned instead of awaited. ``map_ordered`` collects every
+    result before it raises, which on the S3 refusal's pots at 180 - 250 C meant running all 23 rival points (each
+    up to ``RIVAL_RHS_BUDGET`` evaluations) when the second had already decided the verdict. Every item is a
+    ``Configured`` job or a plain one, as in ``map_ordered``; the persistent pool is not used here."""
+    global _FN
+    items = list(items)
+    n = workers() if n_workers is None else max(1, int(n_workers))
+    if n == 1 or len(items) < 2 or _IN_WORKER or "fork" not in mp.get_all_start_methods():
+        for item in items:
+            yield run_job(fn, item)
+        return
+    _FN = fn
+    try:
+        with mp.get_context("fork").Pool(min(n, len(items)), initializer=_mark_worker) as pool:
+            yield from pool.imap(_call, items, chunksize=1)
     finally:
         _FN = None

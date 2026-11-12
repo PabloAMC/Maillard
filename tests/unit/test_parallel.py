@@ -39,6 +39,32 @@ def test_a_worker_exception_is_raised_in_the_caller():
         parallel.map_ordered(_fail_on_three, [1, 2, 3, 4], n_workers=2)
 
 
+def _slow_after_fail(x):
+    import time
+
+    if x == 2:
+        raise ValueError("two")
+    if x > 4:
+        time.sleep(30)
+    return x
+
+
+def test_imap_ordered_matches_serial_and_stops_at_the_first_exception():
+    import time
+
+    items = list(range(7))
+    assert list(parallel.imap_ordered(_square, items, n_workers=3)) == [x * x for x in items]
+    seen = []
+    start = time.perf_counter()
+    with pytest.raises(ValueError, match="two"):
+        for value in parallel.imap_ordered(_slow_after_fail, [1, 2, 3, 4, 5, 6, 7, 8], n_workers=2):
+            seen.append(value)
+    # raised at the failing item, as the serial loop, and the 30 s items still running are abandoned, not awaited
+    assert seen == [1]
+    assert time.perf_counter() - start < 20
+    assert parallel._FN is None
+
+
 def test_workers_default_to_one_and_read_the_environment(monkeypatch):
     monkeypatch.delenv("MAILLARD_WORKERS", raising=False)
     assert parallel.workers() == 1
