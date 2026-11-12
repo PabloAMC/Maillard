@@ -1,39 +1,59 @@
-# Lever table, rules version 2: specification (STATUS_AND_PLAN sec. 0, step 5b-2)
+# Lever table: sensitivity readings and fragility flags (STATUS_AND_PLAN sec. 0, step 5b-2)
 
-*Draft 2026-11-12, before any v2 table is generated. Written AFTER the all-data table and the disagreement audit
-were read: nothing here is a blind rule. Version 2 is generated BESIDE version 1 (`lever_table_v2*`), never in its
-place; which one is the product is decided from the comparison at the end, and by the owner.*
+*Revision 2, 2026-11-12, after an independent premortem (ADOPT WITH EDITS) of revision 1. Written AFTER the
+all-data table and the disagreement audit were read: nothing here is a blind rule, and nothing here moves a
+reading of the table.*
 
-## Why
+## What changed between revision 1 and this one
 
-The disagreement reading ([DISAGREEMENT_READING.md](DISAGREEMENT_READING.md)) found that the table's own rules
-produce part of the disagreement between laboratories. Five rules or gaps were seen in several cells each.
+Revision 1 proposed a second table with five changed rules, generated beside the first and adopted if its
+between-laboratory SD was lower. The premortem showed that this comparison cannot tell "more correct" from "more
+split": dropping censored arms removes the extreme values, splitting cells moves conflicting laboratories into
+one-laboratory cells that leave the statistic, and the leave-one-laboratory-out check rests on two cells. Every rule
+was also chosen after reading the data, TEST laboratories included, so a re-banded DEVELOPMENT-only table would be a
+rival informed by TEST contrasts.
 
-## The rules that change
+So the table keeps its rules and its readings. Each cell gains **sensitivity readings** and a **fragility flag**:
+what the same model says under a defensible alternative reading of the same contrasts. A formulator sees which
+answers rest on a choice.
 
-| # | version 1 | version 2 | reason |
-|---|---|---|---|
-| R1 | a censored arm ("not detected", "<x", trace) enters as its limit, as if measured | a censored arm enters NO point estimate. A contrast left with fewer than two measured arms is kept as a **bound**: its direction and the limit-based value are listed in the cell ("at most -2.9"), counted, and compared with the cell's sign; it moves no estimate | PREREG sec. 3 calls these arms bounds; v1's code used them as values (89 contrasts) |
-| R2 | a non-monotone ladder contributes the slope of its longest monotone run | every monotone piece of two or more arms is its own contrast (the shared turning arm's covariance is neglected and said so). A cell in which one study has pieces of both signs, each separable from zero, reads **"depends on the level"** instead of a pooled direction | which piece survived decided the sign in 6 of the 17 cells read |
-| R3 | a zero-dose arm is dropped (no log of zero) | the step from zero to the first dose is its own contrast, in a band "none -> first dose" of the same lever, as a log ratio (not per doubling) | the first addition is often the largest step and was never seen |
-| R4 | an initial-pH contrast is one sub-cell, buffered or not | initial-pH contrasts are banded "initial, buffered" and "initial, unbuffered" (from the keyed `buffer` field; "none (pH adjusted ...)" is unbuffered; unstated stays "initial, buffer unstated") | an unbuffered pot does not keep its initial pH (two thiol conflicts) |
-| R5 | a categorical "none" level is one level across studies | for amino acid identity, a "none" arm whose pot still holds a free amino acid, a protein or a hydrolysate is the level "none (amine in the base)"; for sulfur source, one whose pot holds another sulfur donor is "none (sulfur in the base)" (from the arm's keyed precursors and matrix) | 9 of the 16 widest size spreads |
+## The sensitivity readings (in `build_lever_table.py`)
 
-Not changed in v2, and why: **fed-intermediate experiments** (R6 of the reading) cannot be told from the keyed
-fields reliably; they need a `system` field at keying. **Dose relative to sugar** as a band needs the keyed amounts
-in one unit, which the files do not carry. Both stay in the backlog.
+| reading | what it does | the question it answers |
+|---|---|---|
+| without censored arms | each contrast is refitted on its measured arms only; a contrast left with fewer than two has no alternative and drops out | does the answer rest on a detection limit used as a value? (PREREG sec. 3 calls these arms bounds; 89 contrasts use one) |
+| whole-ladder slopes | a non-monotone ladder contributes its slope over ALL its arms instead of over its longest monotone run | does the answer rest on which stretch of a rise-then-fall ladder was kept? |
+| buffered studies only (pH) | the cell is refitted on contrasts whose keyed `buffer` field names a buffer | does the answer rest on unbuffered pots, whose initial pH the reaction did not keep? |
+| without censored pairs (categorical) | a level's reading without the pairs that rest on a censored arm | the same as the first row, for categorical levers |
 
-## How version 2 is judged against version 1
+Fitted only where a cell has three laboratories (a reading can only change there). A cell whose reading would
+change is marked **[fragile: ...]** with the alternative reading. Also reported per cell, as counts: contrasts with
+a censored arm; contrasts with a **supported turning point** (a rising and a falling stretch that each span more
+than two standard errors end to end, so that a flat ladder does not turn on noise); for pH, contrasts by buffer
+state. A cell with supported turning points in two or more laboratories is marked "depends on the level".
 
-On the same keyed contrasts, both generated by `build_lever_table.py`:
+Censoring is informative: a lever that drives an odorant below detection is its strongest effect. The limit used
+as a value is a conservative size with the right sign, so the main reading keeps it; the alternative shows what
+remains without it. Neither is the censored likelihood, which this Gaussian-grid model does not carry.
 
-1. between-laboratory and within-laboratory SD of an effect (the audit's one-way split), all cells and per lever;
-2. leave-one-laboratory-out coverage of the 90 % new-laboratory interval, and median absolute error against "no
-   change", on cells with four or more laboratories;
-3. the audit's classes (conflict, sign change inside a laboratory, direction agreed, no clear effect);
-4. cells answered, and how many contrasts and laboratories each version uses (v2 must not look better only by
-   discarding data: the number of contrasts that enter no cell is reported for both).
+## What is NOT done here, and what it needs
 
-No threshold decides. The comparison is reported; if v2 has the lower between-laboratory SD and no worse coverage it
-is proposed as the product table through a PREREG amendment (A6), and the DEVELOPMENT-only v2 table becomes the
-rival of step 5a.
+| gap seen in the reading | why it is not a rule yet | what it needs |
+|---|---|---|
+| a "none" arm that is a different pot in each study (9 of the 16 widest size spreads) | the pots can only be told apart from free-text precursor names ("RG-ARP", "TVPH", "soybean peptides", empty), which the two readers did not compare | a per-arm field (`base_amine`, `base_sulfur`) keyed by two readers blind to the values |
+| pH bands by buffered against unbuffered, or by final pH | "buffered" is free text with more than 40 spellings and no capacity; 102 contrasts are `ph_basis: label` | a keyed three-way field, and the final pH where the paper prints it |
+| the step from zero to the first dose | its size depends on the first dose (0.00125 to 670, mixed units), and many such arms already sit in categorical "none vs X" cells | amounts in one unit; then a list beside the cell, never pooled |
+| fed-intermediate and stability experiments in formation cells | not marked in the keyed files | a `system` field at keying |
+| a one-sided likelihood for censored arms | not in the model | mu on the grid for numeric cells |
+
+## How a future rule change is tested
+
+No clean test exists on contrasts already read. A rule change is frozen first and scored on sources keyed AFTER the
+freeze, one rule at a time, on an identical contrast set and a fixed cell partition, against a placebo (random
+bandings with the same cell sizes), per lever class, with interval width beside coverage.
+
+## Step 5a
+
+The rival the engine must beat is the DEVELOPMENT-only table under the rules as they stand (PREREG with A1 - A5),
+frozen by hash in step 5a's own pre-registration. The sensitivity readings are additive fields; they change no
+estimate of that table. Step 5a opens neither all-data table.

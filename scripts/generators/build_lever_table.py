@@ -43,6 +43,7 @@ CV_DEFAULT, N_DEFAULT = 0.20, 2   # PREREG sec. 5 via step 0: 20 % per replicate
 DIGITISED_SD = 0.05          # PREREG sec. 3
 MIN_LABS, P_SAME_SIGN, LOLO_MIN_LABS, LOLO_FLAG = 3, 0.8, 4, 0.7
 PRIOR_DOMINATED = 0.30
+TURNING_Z = 2.0              # RULES_V2_SPEC: standard errors a stretch must span to count as a turn
 GRID = np.concatenate([[0.0], np.geomspace(0.01, 3.0, 34)])
 #: log width of each grid cell. GRID is log-spaced, so a point's prior weight is the half-normal density times the
 #: width of the cell it stands for; without it the grid applies ~ half-normal / s, which piles mass near zero and
@@ -250,9 +251,69 @@ def numeric_observation(c: Mapping[str, Any], arms: List[Dict[str, Any]]) -> Opt
         band = f"T {_band(TEMP_BANDS, _common(arms, 'temp_C')) or 'unstated'} C"
     else:
         band = "all"
-    return {"kind": "numeric", "y": slope, "v": 1.0 / sxx, "band": band, "non_monotone": not monotone,
-            "range": [min(raw_x), max(raw_x)], "censored_arms": sum(1 for p in run if p[3] != "none"),
-            "arms_used": len(run)}
+    out = {"kind": "numeric", "y": slope, "v": 1.0 / sxx, "band": band, "non_monotone": not monotone,
+           "range": [min(raw_x), max(raw_x)], "censored_arms": sum(1 for p in run if p[3] != "none"),
+           "arms_used": len(run)}
+    # sensitivity readings (RULES_V2_SPEC): the slope over the whole ladder, and without censored arms
+    whole = _wls_slope(pts)
+    measured = [p for p in pts if p[3] == "none"]
+    out["alt"] = {"whole_ladder": whole,
+                  "no_censored": _wls_slope(_longest_monotone(measured)) if len(measured) >= 2 else None}
+    out["turning_point"] = (not monotone) and _turning_supported(pts)
+    out["buffer_state"] = buffer_state(arms)
+    return out
+
+
+def _wls_slope(pts) -> Optional[Tuple[float, float]]:
+    """(slope, variance) of log10 y on the lever over these points, inverse-variance weighted; None if undefined."""
+    if len(pts) < 2:
+        return None
+    x = np.array([p[0] for p in pts])
+    y = np.array([p[1] for p in pts])
+    w = 1.0 / np.array([p[2] for p in pts])
+    xb = float(np.sum(w * x) / np.sum(w))
+    sxx = float(np.sum(w * (x - xb) ** 2))
+    if sxx <= 0:
+        return None
+    return float(np.sum(w * (x - xb) * (y - np.sum(w * y) / np.sum(w))) / sxx), 1.0 / sxx
+
+
+def _longest_monotone(pts):
+    best = []
+    for i in range(len(pts)):
+        for j in range(i + 2, len(pts) + 1):
+            seg = pts[i:j]
+            ds = [np.sign(q[1] - p[1]) for p, q in zip(seg, seg[1:])]
+            if (all(d >= 0 for d in ds) or all(d <= 0 for d in ds)) and len(seg) > len(best):
+                best = seg
+    return best
+
+
+def _turning_supported(pts) -> bool:
+    """A turning point counts only if a rising and a falling stretch each span more than TURNING_Z standard errors
+    end to end (a flat ladder turns on noise)."""
+    signs = set()
+    i = 0
+    while i < len(pts) - 1:
+        j = i + 1
+        d = np.sign(pts[j][1] - pts[i][1])
+        while j < len(pts) - 1 and np.sign(pts[j + 1][1] - pts[j][1]) in (d, 0):
+            j += 1
+        if abs(pts[j][1] - pts[i][1]) > TURNING_Z * math.sqrt(pts[i][2] + pts[j][2]):
+            signs.add(float(d))
+        i = j
+    return {1.0, -1.0} <= signs
+
+
+def buffer_state(arms: Sequence[Mapping[str, Any]]) -> str:
+    """'buffered' | 'unbuffered' | 'unstated', from the arms' keyed `buffer` text ('none (pH adjusted ...)' is
+    unbuffered). Free text: a flag for a sensitivity reading, not a band."""
+    bs = {str((a.get("conditions") or {}).get("buffer") or "unstated").strip().lower() for a in arms}
+    if all(b == "" or b.startswith(("unstated", "none stated", "not stated")) for b in bs):
+        return "unstated"
+    if all(b == "" or b.startswith(("none", "unstated", "water", "no buffer", "not stated")) for b in bs):
+        return "unbuffered"
+    return "buffered"
 
 
 def _raw_lever(lc: str, arm: Mapping[str, Any]) -> Optional[float]:
@@ -292,8 +353,8 @@ def categorical_observation(c: Mapping[str, Any], arms: List[Dict[str, Any]]) ->
         if len(vals) < 2:
             return {"kind": "excluded", "reason": "levels are not sugars (fed intermediates)", "n": len(dropped)}
     ref = vals[0]
-    pairs = [{"level": v[0], "against": ref[0], "y": v[1] - ref[1], "v": v[2] + ref[2]} for v in vals[1:]
-             if v[0] != ref[0]]
+    pairs = [{"level": v[0], "against": ref[0], "y": v[1] - ref[1], "v": v[2] + ref[2],
+              "censored": int(v[3] != "none") + int(ref[3] != "none")} for v in vals[1:] if v[0] != ref[0]]
     if not pairs:
         return None
     return {"kind": "categorical", "pairs": pairs, "shared_var": ref[2], "band": "all",
@@ -549,7 +610,8 @@ def cell_table(obs: Sequence[Mapping[str, Any]]) -> List[Dict[str, Any]]:
                 "temperature_range_C": [min((t for r in rows for t in r["temps"]), default=None),
                                         max((t for r in rows for t in r["temps"]), default=None)],
                 "rows": [{k: r.get(k) for k in ("source", "contrast", "lab", "y", "v", "range", "non_monotone",
-                                                "pairs", "focal", "peak_area")} for r in rows]}
+                                                "pairs", "focal", "peak_area", "censored_arms", "turning_point",
+                                                "buffer_state")} for r in rows]}
         if lc in NUMERIC:
             base["step"] = NUMERIC[lc][0]
             s = numeric_fit(rows, PRIOR_SCALE)
@@ -566,6 +628,7 @@ def cell_table(obs: Sequence[Mapping[str, Any]]) -> List[Dict[str, Any]]:
             base["fit"] = s
             base["reading"] = reading(len(labs), s)
             base["lolo"] = lolo(rows)
+            base["fragility"] = numeric_fragility(rows, lc, base["reading"])
         else:
             ref = CATEGORICAL_REFERENCE[lc]
             f = categorical_fit(rows, ref, PRIOR_SCALE)
@@ -578,7 +641,67 @@ def cell_table(obs: Sequence[Mapping[str, Any]]) -> List[Dict[str, Any]]:
                     s["reading"] = reading(s["labs"], s)
             base["fit"] = f
             base["reading"] = "per level"
+            base["fragility"] = categorical_fragility(rows, ref, f)
         out.append(base)
+    return out
+
+
+# ------------------------------------------------------------------------------------------------- fragility
+def _alt_reading(rows) -> Dict[str, Any]:
+    labs = {r["lab"] for r in rows}
+    if len(rows) < 2 or len(labs) < MIN_LABS:
+        return {"reading": "too few laboratories", "labs": len(labs), "contrasts": len(rows)}
+    s = numeric_fit(rows, PRIOR_SCALE)
+    return {"reading": reading(len(labs), s), "labs": len(labs), "contrasts": len(rows),
+            "estimate": s["estimate"], "ci90": s["ci90"]}
+
+
+def numeric_fragility(rows, lc: str, main: str) -> Dict[str, Any]:
+    """Sensitivity readings of a numeric cell (RULES_V2_SPEC): the same model on (i) contrasts refitted without
+    censored arms, (ii) slopes over the whole ladder, (iii) for pH, buffered studies only. They move no reading;
+    a cell whose reading would change is flagged. Fitted only where the cell has MIN_LABS laboratories."""
+    out = {"contrasts_with_a_censored_arm": sum(1 for r in rows if r.get("censored_arms")),
+           "contrasts_with_a_turning_point": sum(1 for r in rows if r.get("turning_point")),
+           "labs_with_a_turning_point": len({r["lab"] for r in rows if r.get("turning_point")}),
+           "flags": []}
+    if lc == "pH":
+        st = [r.get("buffer_state") for r in rows]
+        out["buffer"] = {k: st.count(k) for k in ("buffered", "unbuffered", "unstated")}
+    if len({r["lab"] for r in rows}) < MIN_LABS:
+        return out
+
+    def swap(key):
+        return [{**r, "y": r["alt"][key][0], "v": r["alt"][key][1]} for r in rows if r["alt"].get(key)]
+
+    variants = {}
+    if out["contrasts_with_a_censored_arm"]:
+        variants["without censored arms"] = _alt_reading(swap("no_censored"))
+    if any(r.get("non_monotone") for r in rows):
+        variants["whole-ladder slopes"] = _alt_reading(swap("whole_ladder"))
+    if lc == "pH" and out["buffer"]["unbuffered"] + out["buffer"]["unstated"] and out["buffer"]["buffered"]:
+        variants["buffered studies only"] = _alt_reading([r for r in rows if r.get("buffer_state") == "buffered"])
+    out["variants"] = variants
+    out["flags"] = [f"{name}: {v['reading']}" for name, v in variants.items() if v["reading"] != main]
+    return out
+
+
+def categorical_fragility(rows, ref: str, main_fit: Mapping[str, Any]) -> Dict[str, Any]:
+    """Per level: the reading without pairs that rest on a censored arm, where it differs from the main one."""
+    n_cens = sum(1 for r in rows for p in r["pairs"] if p.get("censored"))
+    out = {"pairs_with_a_censored_arm": n_cens,
+           "pairs_with_both_arms_censored": sum(1 for r in rows for p in r["pairs"] if p.get("censored") == 2),
+           "flags": {}}
+    answered = [lv for lv, s in main_fit["levels"].items() if s.get("labs", 0) >= MIN_LABS]
+    if not n_cens or not answered:
+        return out
+    kept = [{**r, "pairs": [p for p in r["pairs"] if not p.get("censored")]} for r in rows]
+    kept = [r for r in kept if r["pairs"]]
+    alt = categorical_fit(kept, ref, PRIOR_SCALE)["levels"] if kept else {}
+    for lv in answered:
+        m, s = main_fit["levels"][lv], alt.get(lv, {})
+        r2 = reading(s["labs"], s) if "estimate" in s else "too few laboratories"
+        if r2 != m.get("reading"):
+            out["flags"][lv] = f"without censored arms: {r2}"
     return out
 
 
@@ -610,6 +733,10 @@ def render(payload: Mapping[str, Any]) -> str:
         s = c["fit"]
         flags = (" (prior-dominated)" if s.get("prior_dominated") else "") + \
                 (f" ({s['non_monotone_contrasts']} non-monotone)" if s.get("non_monotone_contrasts") else "")
+        fr = c.get("fragility") or {}
+        flags += "".join(f" **[fragile: {x}]**" for x in fr.get("flags", []))
+        if fr.get("labs_with_a_turning_point", 0) >= 2:
+            flags += f" [rises and falls in {fr['labs_with_a_turning_point']} laboratories: depends on the level]"
         lo = c.get("lolo")
         if c["reading"] == "too few laboratories":      # PREREG sec. 5: listed, nothing pooled
             raw = ", ".join(f"{r['y']:+.2f}" for r in c["rows"])
@@ -639,13 +766,20 @@ def render(payload: Mapping[str, Any]) -> str:
                          f"not pooled (network estimate {_f(s['estimate'])}, shown for orientation only) | - | - | "
                          f"{s['labs']} / {s['contrasts']} |")
                 continue
-            L.append(f"| {c['compound']} | {c['lever_class']} | {lv} vs {c['reference']} | {s['reading']} | "
+            frag = (c.get("fragility") or {}).get("flags", {}).get(lv)
+            L.append(f"| {c['compound']} | {c['lever_class']} | {lv} vs {c['reference']} | {s['reading']}"
+                     + (f" **[fragile: {frag}]**" if frag else "") + " | "
                      f"{_f(s['estimate'])} ({_f(s['ci90'][0])} to {_f(s['ci90'][1])}) | "
                      f"{_f(s['new_lab_pi90'][0])} to {_f(s['new_lab_pi90'][1])} | {s['p_same_sign_new_lab']:.2f} | "
                      f"{s['labs']} / {s['contrasts']} |")
     L += ["", "Estimates are log10 ratios (dex) per lever step; +0.30 dex is about 2x. 'answered by the literature' "
           "needs at least three laboratories, a 90 % interval of the estimate that excludes zero, and P(a new "
-          "laboratory sees the same sign) >= 0.8 (PREREG sec. 5).", ""]
+          "laboratory sees the same sign) >= 0.8 (PREREG sec. 5).", "",
+          "**[fragile: ...]** marks a cell whose reading would change under a sensitivity reading "
+          "(docs/reference/lever_table/RULES_V2_SPEC.md): without the arms that are detection limits, with slopes "
+          "over the whole ladder instead of its longest monotone run, or (pH) on buffered studies only. The "
+          "sensitivity readings move no reading. A categorical 'none' level is not checked to be the same pot "
+          "across studies.", ""]
     return "\n".join(L)
 
 
