@@ -41,6 +41,47 @@ and drops a zero-dose arm (no log of zero). PREREG sec. 4 says a non-monotone la
 own bands"; for dose there are no bands, so the other pieces are silently lost, and which piece survives decides the
 sign. The keying itself was checked against the three papers: no transcription error.
 
+## Beyond the sign conflicts: 8 sign changes inside a laboratory, and the 16 widest size spreads
+
+Read 2026-11-12 against their sources ([sign changes inside a laboratory](disagreement_reading/read_sign_changes_inside_a_lab.md);
+size spreads [1](disagreement_reading/read_size_spread_1.md) and [2](disagreement_reading/read_size_spread_2.md)).
+Every keyed arm that was checked matches its paper; the causes are in the design of the studies and in the table's
+own rules.
+
+**The 8 cells where the sign changes inside one laboratory: none needs a laboratory effect.**
+
+| cause | cells | examples |
+|---|---|---|
+| a segment of a rise-then-fall curve, picked by the longest-monotone-run rule or left by a dropped zero-dose arm | 4 | FFT x time (zhou2023c peaks at 60 min; the table keeps the fall, the rise agrees with feng2022); MFT x cysteine dose (grosch1992 rises then falls, "inhibitory" above 170 - 325 umol); benzaldehyde x xylose dose and phenylacetaldehyde x temperature in li2021ph |
+| a second factor the study itself varied | 3 | MFT x pH in hofmann1998: -0.34 per pH unit from cysteine / ribose, +0.33 from fed intermediates, pooled in one cell; pyrazines x sugar identity (the amino acid decides) ; MFT x time |
+| scatter of uncorrected peak areas | 1 | phenylacetaldehyde x pH in li2021ph: 15 contrasts, mean -0.04, SD 0.29; its unheated controls already differ by 0.3 dex |
+
+**The 16 cells with the widest size spread among those that agree in direction (5x to 25x):**
+
+| cause | cells | examples |
+|---|---|---|
+| the reference arm is a different pot | 9 | every amino-acid-identity cell: hwang1995's "none" holds glycine, martin2001's has no amine, park2022mealworm's holds 2 g protein; FFT x glutathione (feng2022's "none" is itself a glutathione Amadori product) |
+| a table artefact | 5 | furfural x pH: mottram2002's -2.93 is a detection limit used as a value; FFT x glutathione: grosch1992's -0.05 is a ratio of two "<" limits; furfural x cysteine dose and furfural x temperature: zero or not-detected arms dropped, leaving a plateau or a two-arm slope; phenylacetaldehyde x pH: zamora2015's -0.07 is one piece of a flat ladder |
+| where on the reaction curve the window sits | 4 | pyrazines x time (wei2019flax: 0.97 / 0.35 / 0.12 per doubling at 110 / 120 / 130 C over one window); 2,5-dimethylpyrazine x time (a lag step); furfural x temperature (100 - 120 against 150 - 180 C) |
+| the lever is not what its label says | 3 | FFT x pH (zhou2023's unbuffered pots; furfural and FFT respond to pH like a switch near pH 5.5 - 6.5, so the final pH decides the slope); a "time" lever that is a pre-heating time (zhou2023c-21); arginine added with no pH correction |
+| a second reactant | 1 | phenylacetaldehyde x pH in chan1994b: only that study holds leucine, whose aldehyde condenses with phenylacetaldehyde at higher pH (the authors' explanation) |
+
+(A cell can have more than one cause.) Across all 55 agreed cells, the generated audit (sec. 3b) finds that two
+effects from ONE laboratory differ in size by a median factor 1.4 and from two laboratories by 1.6: most of the size
+spread is inside laboratories, between conditions. The one condition that separates sizes is the quantification
+method (absolute against peak area: +0.48 dex, 90 % +0.25 to +0.72, on three cells only).
+
+**The table's own rules produce part of the disagreement.** Five rules or gaps, each seen in several cells:
+
+1. **A censored arm enters as its limit.** PREREG sec. 3 says a not-detected arm is left-censored AT its limit, a
+   bound; `arm_log_and_var` uses the limit as the value. 89 of 1,643 contrasts use such an arm. Leaving them out
+   (a check, not a new table) turns the "answered" furfural x pH cell into "too few laboratories" and removes 27
+   thin cells.
+2. **A non-monotone ladder keeps only its longest monotone run** (see the two cysteine-dose conflicts above).
+3. **A zero-dose arm is dropped** (no log of zero), so the 0 to first-dose step, often the largest, is never seen.
+4. **Categorical reference arms are treated as the same pot** across studies.
+5. **Fed-intermediate and stability experiments share cells with formation from sugar and amino acid.**
+
 ## What this changes
 
 1. **pH cells should not pool buffered and unbuffered initial-pH studies.** In an unbuffered pot the initial pH
@@ -61,6 +102,12 @@ sign. The keying itself was checked against the three papers: no transcription e
    much there is relative to the sugar; a slope over the longest monotone run discards that. Proposed (backlog):
    keep every monotone piece of a dose ladder as its own contrast, banded by the dose relative to the sugar
    (sulfur donor : sugar below or above about 1 mol/mol), scored beside the current table.
+
+6. **Proposed: a second version of the table's rules** (one amendment bundle, written after the data and scored
+   beside the current table, never replacing it silently): censored arms as bounds; every monotone piece of a
+   ladder; the zero-dose step as its own "added vs none" contrast; pH by buffered against unbuffered or by final pH;
+   reference arms grouped by base mixture; fed-intermediate experiments in their own sub-cells. The test of whether
+   it is better: the between-laboratory SD (0.31 dex today) and the leave-one-laboratory-out coverage.
 
 ## Limits
 
