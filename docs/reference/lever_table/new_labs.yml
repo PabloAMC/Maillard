@@ -1,0 +1,149 @@
+# Laboratories absent from the frozen split v1 (docs/reference/contrast_benchmark/split.yml), and the keying queue of
+# their papers (PREREG secs. 2 and 7; STATUS_AND_PLAN sec. 0 step 5).
+#
+# Written 2026-11-12, BEFORE any reader file of these sources exists and before any of their result values was read:
+# the laboratories were assigned from the papers' author lines and affiliations only. A laboratory listed here is TEST
+# (PREREG sec. 2) unless its id is a DEVELOPMENT laboratory of split v1. lab_ids.yml and split.yml are not edited.
+#
+# Laboratory assignment follows lab_ids.yml's merge rules: one research group = one laboratory (rule 1); an
+# institute's co-author groups merge only when the same senior authors chain the papers (rule 2); a two-group paper is
+# the lead (home) group's (rule 4). Where a paper's senior authors also carry the affiliation of a split laboratory,
+# the paper is given THAT laboratory: over-merging can only move contrasts from TEST to DEVELOPMENT, never fake
+# independence (lab_ids.yml rule 2's own rationale).
+#
+# `engine_seen: true` marks a source whose results already entered engine work (step 0's diagnosis, the directional
+# claims panel or the contrast benchmark). Its contrasts enter the lever table, but step 5 does not count them as
+# held-out evidence for the engine.
+#
+# Fields: lab (id), lab_name, doi, pdf (main checkout, data/articles/), priority (download queue), cells (what the
+# queue expected the paper to feed, from title / abstract / design only).
+
+li2021ph:
+  lab: nus_liu_shaoquan
+  lab_name: "National University of Singapore, Dept. of Food Science and Technology (Liu Shao-Quan)"
+  doi: 10.1016/j.lwt.2021.112017
+  pdf: data/articles/li2021.pdf
+  priority: 1
+  cells: "thiols x pH, x temperature, x sugar dose"
+li2021lab:
+  lab: nus_liu_shaoquan
+  lab_name: "National University of Singapore, Dept. of Food Science and Technology (Liu Shao-Quan)"
+  doi: 10.1016/j.lwt.2021.112368
+  pdf: data/articles/li2021b.pdf
+  priority: 2
+  cells: "thiols x temperature, x cysteine dose"
+li2022heat:
+  lab: nus_liu_shaoquan
+  lab_name: "National University of Singapore, Dept. of Food Science and Technology (Liu Shao-Quan)"
+  doi: 10.1016/j.fbio.2021.101538
+  pdf: data/articles/li2022b.pdf
+  priority: 2
+  cells: "thiols x temperature"
+zhang2024sugars:
+  lab: nus_liu_shaoquan
+  lab_name: "National University of Singapore, Dept. of Food Science and Technology (Liu Shao-Quan)"
+  doi: 10.3390/foods13070991
+  pdf: data/articles/zhang2024b.pdf   # file name only; NOT the paper key zhang2024b (a BTBU paper read from Zhang2024.pdf)
+  priority: 1
+  cells: "sugar x methional; thiols if reported"
+wei2019flax:
+  lab: hfut_wei_zhaojun
+  lab_name: "Hefei University of Technology, School of Food and Biological Engineering (Wei Zhao-Jun), with Ningxia / North Minzu (Wei Chao-Kun)"
+  doi: 10.1080/10942912.2019.1573830
+  pdf: data/articles/wei2019.pdf
+  priority: 1
+  cells: "thiols x pH, x temperature, x cysteine dose (plant protein)"
+chen2023lycium:
+  lab: hfut_wei_zhaojun
+  lab_name: "Hefei University of Technology, School of Food and Biological Engineering (Wei Zhao-Jun), with Ningxia / North Minzu (Wei Chao-Kun)"
+  doi: 10.3390/foods12234346
+  pdf: data/articles/chen2023.pdf
+  priority: 1
+  cells: "thiols x sugar (plant protein)"
+  note: "Wei Chao-Kun and Wei Zhao-Jun are the senior authors of both wei2019flax and chen2023lycium (rule 2)."
+zhang2018soypep:
+  lab: btbu_beijing
+  lab_name: "Hefei University of Technology (He Shudong, Sun Hanju), whose affiliation list includes BTBU's Beijing Advanced Innovation Center"
+  doi: 10.1016/j.ijbiomac.2018.09.082
+  pdf: data/articles/zhang2018.pdf
+  priority: 1
+  cells: "thiols x temperature, x cysteine dose (plant protein)"
+  note: >-
+    Merged into btbu_beijing (a DEVELOPMENT laboratory) because the paper lists the Beijing Advanced Innovation Center
+    for Food Nutrition and Human Health (BTBU) among its affiliations; whether He and Sun form a group independent of
+    BTBU's is not decidable from the paper, so the conservative assignment is taken. Its contrasts enter the table as
+    DEVELOPMENT and give step 5 nothing.
+theng2024:
+  lab: astar_sifbi_chiang
+  lab_name: "A*STAR Singapore Institute of Food and Biotechnology Innovation (Chiang Jie Hong)"
+  doi: 10.1111/ijfs.17373
+  pdf: data/articles/Theng2024.pdf
+  priority: 1
+  cells: "thiols / methional x sugar (yeast matrix)"
+chen2024coprinus:
+  lab: njau_zhao_liyan
+  lab_name: "Nanjing Agricultural University, College of Food Science and Technology (Zhao Liyan)"
+  doi: 10.1016/j.fbio.2024.104503
+  pdf: data/articles/chen2024.pdf
+  priority: 2
+  cells: "thiols x sugar, x sulfur source"
+zhang2022pleurotus:
+  lab: tust_wang_jianming
+  lab_name: "Tianjin University of Science and Technology, College of Food Science and Engineering (Wang Jianming)"
+  doi: 10.1016/j.lwt.2022.114144
+  pdf: data/articles/zhang2022b.pdf
+  priority: 2
+  cells: "thiols x sulfur source"
+  collaborations: [nus_liu_shaoquan]
+  note: "Lead group Tianjin (corresponding author Wang Jianming); one NUS co-author (Xu Xu), listed as a collaboration (rule 4)."
+park2022mealworm:
+  lab: wonkwang_cho_inhee
+  lab_name: "Wonkwang University, Iksan (Cho In Hee)"
+  doi: 10.1007/s10068-022-01158-0
+  pdf: data/articles/park2022.pdf
+  priority: 2
+  cells: "thiols x sulfur source / amino-acid identity"
+guo2010brassica:
+  lab: haut_tian_shaojun
+  lab_name: "Henan University of Technology (Tian Shaojun), with RMIT Melbourne (Small)"
+  doi: 10.1016/j.foodchem.2009.05.089
+  pdf: data/articles/guo2010.pdf
+  priority: 3
+  cells: "thiols x pH, x temperature, only where the design has one-lever pairs (plant protein)"
+sasanam2022:
+  lab: kmutnb_rungsardthong
+  lab_name: "King Mongkut's University of Technology North Bangkok (Rungsardthong)"
+  doi: 10.1111/1750-3841.16060
+  pdf: data/articles/sasanam2022.pdf
+  priority: 3
+  cells: "methional x sugar, x sulfur source (extrusion)"
+sarkisyan2025:
+  lab: frc_nutrition_moscow
+  lab_name: "Federal Research Center of Nutrition, Biotechnology and Food Safety, Moscow, Laboratory of Food Chemistry (Sarkisyan / Kochetkova)"
+  doi: 10.3390/foods14010116
+  pdf: data/articles/sarkisyan2025.pdf
+  priority: 3
+  cells: "weak: L9 orthogonal array, few one-lever pairs"
+boonbumrung2023:
+  lab: kasetsart_mookdasanit
+  lab_name: "Kasetsart University, Faculty of Fisheries (Mookdasanit)"
+  doi: 10.47853/fas.2023.e33
+  pdf: data/articles/Boonbumrung2023.pdf
+  priority: 3
+  cells: "methional x supplement (low)"
+xu2007:
+  lab: cau_gao_yanxiang
+  lab_name: "China Agricultural University, College of Food Science and Nutritional Engineering (Gao Yanxiang)"
+  doi: 10.1002/jsfa.3093
+  pdf: data/articles/xu2007.pdf
+  priority: 0
+  cells: "thiols x pH (supercritical CO2 vs heating also reported)"
+  engine_seen: true
+  note: "Read in step 0 (the pH structural error), the directional claims panel and the contrast benchmark."
+yu2010:
+  lab: ccnu_yu_ainong
+  lab_name: "Central China Normal University / Hubei University for Nationalities (Yu Ai-Nong, Zhang Ai-Dong)"
+  doi: 10.1016/j.foodchem.2010.01.049
+  pdf: data/articles/yu2010.pdf
+  priority: 0
+  cells: "sulfur volatiles from a cysteine / sugar model system (design to be read by the keying readers)"
