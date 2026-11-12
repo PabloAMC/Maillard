@@ -87,15 +87,15 @@ From the preposterior check (matrix shift 0.3 dex, A4 keying; means of 200 simul
 
 | | today | two laboratories | three laboratories |
 |---|---|---|---|
-| lever-table cells newly answered | - | 11 (8 with a literature estimate today) | 36 (8 with a literature estimate; the rest depend on the prior, read as optimistic) |
-| experiment-map family x lever cells newly answered | 1 answered | 7 | 18 |
+| lever-table cells newly answered | - | 10 (7 with a literature estimate today) | 31 (7 with a literature estimate; the rest depend on the prior, read as optimistic) |
+| experiment-map family x lever cells newly answered | 1 answered | 6 | 18 |
 | cells where step 5 can test the engine (two TEST laboratories) | 0 | 57 | 57 |
 | plant-protein matrix in the keyed record | none | every cell the study touches | every cell the study touches |
 
 Every prediction (the lever table's and the engine's) is frozen and sent before the data exist, with its pass rule.
 A cell is "answered" only by the PREREG sec. 5 rule.
 
-## Preposterior check: does the study unblock anything? (2026-11-11)
+## Preposterior check: does the study unblock anything? (2026-11-11, rerun on the fixed table 2026-11-12)
 
 Before anything is sent, `scripts/generators/build_lever_design_preposterior.py` simulated each candidate design 200
 times. Each run draws true effects from the lever table's own posterior predictive (cells with no keyed estimate draw
@@ -107,27 +107,27 @@ main-effect keying:
 
 | design (36 pots unless stated) | cells newly answered, mean [90 %] | of which with a literature estimate today | experiment-map cells newly answered | cells with 2 TEST laboratories (step 5) |
 |---|---|---|---|---|
-| the draft above: one laboratory, 2^4 x 2 | 4.1 [3, 5] | 4.1 | 3.1 | 0 -> 2 |
-| two laboratories, 2^3 x 2 each, no yeast extract | 11.2 [8, 14] | 7.7 | 6.7 | 0 -> 57 |
-| three laboratories, 2^3 x 1 each, no yeast extract | 35.8 [30, 41] | 8.2 | 18.5 | 0 -> 57 |
-| three laboratories, sugar x sulfur source 2 x 3, x 2 | 30.7 [25, 36] | 6.0 | 8.9 | 0 -> 57 |
-| reference: the draft in two laboratories (72 pots) | 11.2 [8, 14] | 7.8 | 6.8 | 0 -> 57 |
+| the draft above: one laboratory, 2^4 x 2 | 3.5 [2, 5] | 3.5 | 2.5 | 0 -> 2 |
+| two laboratories, 2^3 x 2 each, no yeast extract | 9.7 [6, 13] | 6.5 | 6.0 | 0 -> 57 |
+| three laboratories, 2^3 x 1 each, no yeast extract | 30.7 [25, 36] | 7.0 | 17.8 | 0 -> 57 |
+| three laboratories, sugar x sulfur source 2 x 3, x 2 | 27.2 [21, 33] | 5.0 | 8.7 | 0 -> 57 |
+| reference: the draft in two laboratories (72 pots) | 9.8 [7, 13] | 6.6 | 6.2 | 0 -> 57 |
 
 What it shows:
 
 1. **As drafted, the study barely unblocks anything.** One laboratory can only finish cells that already have two;
-   there are about four. It gives step 5 (the engine against the lever table on held-out contrasts from two or more
+   there are about three to four. It gives step 5 (the engine against the lever table on held-out contrasts from two or more
    TEST laboratories) two cells. Its strength (power for 0.15 dex effects and interactions) is the wrong currency: the
    binding constraint is laboratories, and replicates inside one laboratory do not buy them.
-2. **The same pots in two laboratories do about 3x better on every count, and give step 5 its 57 cells.** Running the
+2. **The same pots in two laboratories do about 2 - 3x better on every count, and give step 5 its 57 cells.** Running the
    whole draft in a second laboratory (72 pots) adds nothing over two laboratories at 36: the yeast-extract factor and
    the second replicate are spent on cells the table cannot read.
-3. **A third laboratory mostly answers cells no paper has keyed** (34 against 11; the literature-backed count stays
-   about 8). Those cells would be answered by the three new laboratories alone, and how many depends on the prior
-   for effect sizes (mu ~ N(0, 0.5) dex). Read the 34 as optimistic; the 8 and the step-5 count barely depend on it.
+3. **A third laboratory mostly answers cells no paper has keyed** (31 against 10; the literature-backed count stays
+   about 7). Those cells would be answered by the three new laboratories alone, and how many depends on the prior
+   for effect sizes (mu ~ N(0, 0.5) dex). Read the 31 as optimistic; the 7 and the step-5 count barely depend on it.
 4. **Yeast extract feeds no cell.** PREREG sec. 4 has no yeast-extract lever class. Keep it only after an amendment
    adds one (categorical, reference "none") before any data are read.
-5. **Keying a factorial pair by pair would overstate the answer** (per-pair keying: up to +3 cells). The categorical
+5. **Keying a factorial pair by pair would overstate the answer** (per-pair keying: up to +5 cells). The categorical
    network has one heterogeneity scale per pair and no laboratory random effect, so a laboratory's 2^(k-1) contrasts
    for one lever would count as independent draws. Key a designed study as one contrast per laboratory per lever (the
    mean over the other factors), and state that in the pre-registration. The one cell the literature answers today
