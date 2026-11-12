@@ -173,3 +173,14 @@ connects to the declared reference, the cell is reported against its most-connec
 name), and the output names that level as the reference. Compounds keyed with `odorant_unlisted: true` (in a family
 but not on the declared list) are counted and enter no cell.
 
+**A4 (2026-11-11, before any designed study is requested or run; no designed-study value exists).** *Reason:* the
+categorical network (sec. 5) has one heterogeneity scale per pair and no laboratory random effect. A designed
+2^k factorial keyed by sec. 3 read literally gives 2^(k-1) contrasts per lever from ONE laboratory, and the model
+would count them as independent draws of between-study heterogeneity. The preposterior check
+(`results/validation/lever_design_preposterior.md`) shows that this overstates what a factorial answers. *Rule:* a
+designed factorial run for this table (`docs/guides/FACTORIAL_LEVER_STUDY.md`) is keyed as ONE contrast per
+laboratory per lever. The arm value is the mean of log10 values over the other factors' settings; its variance is the
+variance of that mean. Interactions are reported in the study, not in the table. Literature sources are keyed as
+sec. 3 says. The one literature cell answered today (MFT, no sulfur source vs cysteine) was checked under the same
+collapse: it stays answered in all eight one-contrast-per-laboratory subsamples.
+
