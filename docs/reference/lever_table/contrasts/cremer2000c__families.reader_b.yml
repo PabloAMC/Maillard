@@ -1,0 +1,53 @@
+source: "cremer2000c"
+pdf: "data/articles/cremer2000c.pdf"
+reader: "b"
+scope_note: "Only figure data (digitised). Fig. 1 left axis gives 2-MB and 3-MB each as mol% of the sum (2-MB + 3-MB), i.e. shares; the right-axis sum (mol% of Fru-Leu) is not a single odorant and is not keyed. The Fru-Leu/OPD 1:0 vs 1:1.2 experiment prints no values (text only): not keyed."
+contrasts:
+  - id: "cremer2000c-1"
+    odorant: "2-methylbutanal"
+    lever_class: "precursor dose"
+    lever: "isoleucine dose: molar ratio Ile/Fru-Leu 0, 0.25, 0.5, 1, 2.5, 5 (Fru-Leu constant)"
+    focal: true
+    location: "Fig. 1 (left axis), p. 401"
+    digitised: true
+    unit: "mol% of the sum (2-MB + 3-MB)"
+    quant_type: "relative"
+    quantity: "share"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "Ile/Fru-Leu 0:1", lever_value: 0, value: 0, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: 7.0, ph_basis: "initial", temp_C: 90, time_min: 60, precursors: {fructose-leucine: "250 ul of 0.1 M (7.3 mg)", L-isoleucine: "0"}, buffer: "2.0 ml 0.1 M citrate pH 7.0, freeze-dried", matrix: "other (microcrystalline cellulose low-moisture model, a_w 0.75)", headspace: "sealed, unstated"}}
+      - {label: "Ile/Fru-Leu 0.25:1", lever_value: 0.25, value: 49.4, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: 7.0, ph_basis: "initial", temp_C: 90, time_min: 60, precursors: {fructose-leucine: "250 ul of 0.1 M (7.3 mg)", L-isoleucine: "molar ratio 0.25 to Fru-Leu"}, buffer: "2.0 ml 0.1 M citrate pH 7.0, freeze-dried", matrix: "other (microcrystalline cellulose low-moisture model, a_w 0.75)", headspace: "sealed, unstated"}}
+      - {label: "Ile/Fru-Leu 0.5:1", lever_value: 0.5, value: 63.4, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: 7.0, ph_basis: "initial", temp_C: 90, time_min: 60, precursors: {fructose-leucine: "250 ul of 0.1 M (7.3 mg)", L-isoleucine: "molar ratio 0.5 to Fru-Leu"}, buffer: "2.0 ml 0.1 M citrate pH 7.0, freeze-dried", matrix: "other (microcrystalline cellulose low-moisture model, a_w 0.75)", headspace: "sealed, unstated"}}
+      - {label: "Ile/Fru-Leu 1:1", lever_value: 1, value: 71.2, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: 7.0, ph_basis: "initial", temp_C: 90, time_min: 60, precursors: {fructose-leucine: "250 ul of 0.1 M (7.3 mg)", L-isoleucine: "molar ratio 1 to Fru-Leu"}, buffer: "2.0 ml 0.1 M citrate pH 7.0, freeze-dried", matrix: "other (microcrystalline cellulose low-moisture model, a_w 0.75)", headspace: "sealed, unstated"}}
+      - {label: "Ile/Fru-Leu 2.5:1", lever_value: 2.5, value: 74.5, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: 7.0, ph_basis: "initial", temp_C: 90, time_min: 60, precursors: {fructose-leucine: "250 ul of 0.1 M (7.3 mg)", L-isoleucine: "molar ratio 2.5 to Fru-Leu"}, buffer: "2.0 ml 0.1 M citrate pH 7.0, freeze-dried", matrix: "other (microcrystalline cellulose low-moisture model, a_w 0.75)", headspace: "sealed, unstated"}}
+      - {label: "Ile/Fru-Leu 5:1", lever_value: 5, value: 73.5, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: 7.0, ph_basis: "initial", temp_C: 90, time_min: 60, precursors: {fructose-leucine: "250 ul of 0.1 M (7.3 mg)", L-isoleucine: "molar ratio 5 to Fru-Leu (1.25 ml 0.1 M)"}, buffer: "2.0 ml 0.1 M citrate pH 7.0, freeze-dried", matrix: "other (microcrystalline cellulose low-moisture model, a_w 0.75)", headspace: "sealed, unstated"}}
+  - id: "cremer2000c-2"
+    odorant: "3-methylbutanal"
+    lever_class: "precursor dose"
+    lever: "isoleucine dose: molar ratio Ile/Fru-Leu 0, 0.25, 0.5, 1, 2.5, 5 (Fru-Leu constant)"
+    focal: true
+    location: "Fig. 1 (left axis), p. 401"
+    digitised: true
+    unit: "mol% of the sum (2-MB + 3-MB)"
+    quant_type: "relative"
+    quantity: "share"
+    time_course_rule: "not a time course"
+    arms:
+      - {label: "Ile/Fru-Leu 0:1", lever_value: 0, value: 100, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: 7.0, ph_basis: "initial", temp_C: 90, time_min: 60, precursors: {fructose-leucine: "250 ul of 0.1 M (7.3 mg)", L-isoleucine: "0"}, buffer: "2.0 ml 0.1 M citrate pH 7.0, freeze-dried", matrix: "other (microcrystalline cellulose low-moisture model, a_w 0.75)", headspace: "sealed, unstated"}}
+      - {label: "Ile/Fru-Leu 0.25:1", lever_value: 0.25, value: 51.0, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: 7.0, ph_basis: "initial", temp_C: 90, time_min: 60, precursors: {fructose-leucine: "250 ul of 0.1 M (7.3 mg)", L-isoleucine: "molar ratio 0.25 to Fru-Leu"}, buffer: "2.0 ml 0.1 M citrate pH 7.0, freeze-dried", matrix: "other (microcrystalline cellulose low-moisture model, a_w 0.75)", headspace: "sealed, unstated"}}
+      - {label: "Ile/Fru-Leu 0.5:1", lever_value: 0.5, value: 36.6, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: 7.0, ph_basis: "initial", temp_C: 90, time_min: 60, precursors: {fructose-leucine: "250 ul of 0.1 M (7.3 mg)", L-isoleucine: "molar ratio 0.5 to Fru-Leu"}, buffer: "2.0 ml 0.1 M citrate pH 7.0, freeze-dried", matrix: "other (microcrystalline cellulose low-moisture model, a_w 0.75)", headspace: "sealed, unstated"}}
+      - {label: "Ile/Fru-Leu 1:1", lever_value: 1, value: 29.2, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: 7.0, ph_basis: "initial", temp_C: 90, time_min: 60, precursors: {fructose-leucine: "250 ul of 0.1 M (7.3 mg)", L-isoleucine: "molar ratio 1 to Fru-Leu"}, buffer: "2.0 ml 0.1 M citrate pH 7.0, freeze-dried", matrix: "other (microcrystalline cellulose low-moisture model, a_w 0.75)", headspace: "sealed, unstated"}}
+      - {label: "Ile/Fru-Leu 2.5:1", lever_value: 2.5, value: 26.1, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: 7.0, ph_basis: "initial", temp_C: 90, time_min: 60, precursors: {fructose-leucine: "250 ul of 0.1 M (7.3 mg)", L-isoleucine: "molar ratio 2.5 to Fru-Leu"}, buffer: "2.0 ml 0.1 M citrate pH 7.0, freeze-dried", matrix: "other (microcrystalline cellulose low-moisture model, a_w 0.75)", headspace: "sealed, unstated"}}
+      - {label: "Ile/Fru-Leu 5:1", lever_value: 5, value: 27.2, censor: none, limit: null, n: null, sd: null,
+         conditions: {ph: 7.0, ph_basis: "initial", temp_C: 90, time_min: 60, precursors: {fructose-leucine: "250 ul of 0.1 M (7.3 mg)", L-isoleucine: "molar ratio 5 to Fru-Leu (1.25 ml 0.1 M)"}, buffer: "2.0 ml 0.1 M citrate pH 7.0, freeze-dried", matrix: "other (microcrystalline cellulose low-moisture model, a_w 0.75)", headspace: "sealed, unstated"}}

@@ -1,0 +1,5 @@
+source: ames2001b
+pdf: data/articles/ames2001b.pdf
+reader: resolved
+scope_note: 'No thiol is measured (glycine/glucose/starch, no sulfur source). Both readers: no group-T contrasts.'
+contrasts: []
