@@ -10,23 +10,26 @@
 
 | odorant | lever (step) | band | reading | estimate (90 % CI) | new laboratory 90 % | P(same sign) | labs / studies / contrasts | peak areas | matrices | LOLO coverage |
 |---|---|---|---|---|---|---|---|---|---|---|
-| 2,3-Dimethylpyrazine | precursor dose (a doubling of dose) | all | too few laboratories | not pooled; per contrast: +0.16, +0.30, +0.25, +1.01, +0.28 | - | - | 1 / 2 / 5 | 100% | buffer, other (freeze-dried on 1.5 g sand, dry), water | - |
+| 2,3-Dimethylpyrazine | precursor dose (a doubling of dose) | amino acid varied | too few laboratories | not pooled; per contrast: +1.01, +0.28 | - | - | 1 / 1 / 2 | 100% | water | - |
+| 2,3-Dimethylpyrazine | precursor dose (a doubling of dose) | sugar varied | too few laboratories | not pooled; per contrast: +0.16, +0.30, +0.25 | - | - | 1 / 1 / 3 | 100% | buffer, other (freeze-dried on 1.5 g sand, dry) | - |
 | 2,3-Dimethylpyrazine | time (a doubling of time) | T 100-130 C | too few laboratories | not pooled; per contrast: +0.31 | - | - | 1 / 1 / 1 | 0% | water | - |
 | 2,3-Dimethylpyrazine | water (+0.1 a_w) | all | too few laboratories | not pooled; per contrast: -0.03 | - | - | 1 / 1 / 1 | 100% | other (freeze-dried on sand, aw 0.16), other (freeze-dried on sand, aw 0.33), other (freeze-dried on sand, aw 0.38), other (freeze-dried on sand, aw 0.53), other (freeze-dried on sand, aw 0.62), other (freeze-dried on sand, aw 0.75) | - |
 | 2,5-Dimethylpyrazine | pH (+1 pH unit) | pH 4.5-6, held | too few laboratories | not pooled; per contrast: +1.54, +1.37, +1.17 | - | - | 1 / 1 / 3 | 100% | buffer | - |
-| 2,5-Dimethylpyrazine | precursor dose (a doubling of dose) | all | too few laboratories | not pooled; per contrast: +0.23 | - | - | 1 / 1 / 1 | 0% | water | - |
+| 2,5-Dimethylpyrazine | precursor dose (a doubling of dose) | sulfur donor varied | too few laboratories | not pooled; per contrast: +0.23 | - | - | 1 / 1 / 1 | 0% | water | - |
 | 2,5-Dimethylpyrazine | time (a doubling of time) | T 100-130 C | too few laboratories | not pooled; per contrast: +0.77 | - | - | 1 / 1 / 1 | 0% | water | - |
 | 2-Acetylfuran | temperature (+10 C) | time >120 min | too few laboratories | not pooled; per contrast: +0.88, +0.48, +0.24 | - | - | 2 / 2 / 3 | 100% | water | - |
 | 2-Acetylfuran | time (a doubling of time) | T 100-130 C | too few laboratories | not pooled; per contrast: +0.19, +0.41, +0.51, +1.08, +0.74 | - | - | 2 / 3 / 5 | 40% | water | - |
 | 2-Acetylfuran | time (a doubling of time) | T >130 C | too few laboratories | not pooled; per contrast: +0.35 | - | - | 1 / 1 / 1 | 100% | water | - |
 | 2-Acetylthiazole | pH (+1 pH unit) | pH 4.5-6, held | too few laboratories | not pooled; per contrast: +1.20 | - | - | 1 / 1 / 1 | 100% | buffer | - |
 | 2-Acetylthiazole | time (a doubling of time) | T 100-130 C | too few laboratories | not pooled; per contrast: +0.15, +0.02, +0.15 | - | - | 1 / 2 / 3 | 0% | water | - |
-| 2-Ethyl-3,5-dimethylpyrazine | precursor dose (a doubling of dose) | all | too few laboratories | not pooled; per contrast: -0.17, +0.05, +0.00 | - | - | 1 / 2 / 3 | 100% | other (freeze-dried on 1.5 g sand, dry), water | - |
+| 2-Ethyl-3,5-dimethylpyrazine | precursor dose (a doubling of dose) | amino acid varied | too few laboratories | not pooled; per contrast: +0.00 | - | - | 1 / 1 / 1 | 100% | water | - |
+| 2-Ethyl-3,5-dimethylpyrazine | precursor dose (a doubling of dose) | sugar varied | too few laboratories | not pooled; per contrast: -0.17, +0.05 | - | - | 1 / 1 / 2 | 100% | other (freeze-dried on 1.5 g sand, dry) | - |
 | 2-Ethyl-3,5-dimethylpyrazine | temperature (+10 C) | time >120 min | too few laboratories | not pooled; per contrast: +0.65 | - | - | 1 / 1 / 1 | 100% | water | - |
 | 2-Ethyl-3,5-dimethylpyrazine | water (+0.1 a_w) | all | too few laboratories | not pooled; per contrast: -0.07 | - | - | 1 / 1 / 1 | 100% | other (freeze-dried on sand, aw 0.16), other (freeze-dried on sand, aw 0.33), other (freeze-dried on sand, aw 0.38), other (freeze-dried on sand, aw 0.53), other (freeze-dried on sand, aw 0.62), other (freeze-dried on sand, aw 0.75) | - |
-| 2-Ethyl-3,6-dimethylpyrazine | precursor dose (a doubling of dose) | all | too few laboratories | not pooled; per contrast: -0.20, +0.14, +0.00, +0.58 | - | - | 1 / 2 / 4 | 100% | other (freeze-dried on 1.5 g sand, dry), water | - |
+| 2-Ethyl-3,6-dimethylpyrazine | precursor dose (a doubling of dose) | amino acid varied | too few laboratories | not pooled; per contrast: +0.00, +0.58 | - | - | 1 / 1 / 2 | 100% | water | - |
+| 2-Ethyl-3,6-dimethylpyrazine | precursor dose (a doubling of dose) | sugar varied | too few laboratories | not pooled; per contrast: -0.20, +0.14 | - | - | 1 / 1 / 2 | 100% | other (freeze-dried on 1.5 g sand, dry) | - |
 | 2-Ethyl-3,6-dimethylpyrazine | water (+0.1 a_w) | all | too few laboratories | not pooled; per contrast: -0.01 | - | - | 1 / 1 / 1 | 100% | other (freeze-dried on sand, aw 0.16), other (freeze-dried on sand, aw 0.33), other (freeze-dried on sand, aw 0.38), other (freeze-dried on sand, aw 0.53), other (freeze-dried on sand, aw 0.62), other (freeze-dried on sand, aw 0.75) | - |
-| 2-Ethylpyrazine | precursor dose (a doubling of dose) | all | too few laboratories | not pooled; per contrast: +0.09, -0.24 | - | - | 1 / 1 / 2 | 100% | other (freeze-dried on 1.5 g sand, dry) | - |
+| 2-Ethylpyrazine | precursor dose (a doubling of dose) | sugar varied | too few laboratories | not pooled; per contrast: +0.09, -0.24 | - | - | 1 / 1 / 2 | 100% | other (freeze-dried on 1.5 g sand, dry) | - |
 | 2-Ethylpyrazine | water (+0.1 a_w) | all | too few laboratories | not pooled; per contrast: -0.07 | - | - | 1 / 1 / 1 | 100% | other (freeze-dried on sand, aw 0.16), other (freeze-dried on sand, aw 0.33), other (freeze-dried on sand, aw 0.38), other (freeze-dried on sand, aw 0.53), other (freeze-dried on sand, aw 0.62), other (freeze-dried on sand, aw 0.75) | - |
 | 2-Furanmethanol | pH (+1 pH unit) | pH 4.5-6, held | too few laboratories | not pooled; per contrast: +0.80, +0.19, +2.18, +0.09 | - | - | 1 / 1 / 4 | 100% | buffer | - |
 | 2-Furanmethanol | temperature (+10 C) | time >120 min | too few laboratories | not pooled; per contrast: +1.02 | - | - | 1 / 1 / 1 | 100% | water | - |
@@ -42,7 +45,7 @@
 | 2-Methyl-3-furanthiol (MFT) | pH (+1 pH unit) | pH 4.5-6, initial or label | too few laboratories | not pooled; per contrast: +0.21, -0.34, +0.33 | - | - | 2 / 2 / 3 | 33% | buffer | - |
 | 2-Methyl-3-furanthiol (MFT) | pH (+1 pH unit) | pH 6-7.5, initial or label | too few laboratories | not pooled; per contrast: +0.36 | - | - | 1 / 1 / 1 | 0% | water | - |
 | 2-Methyl-3-furanthiol (MFT) | pH (+1 pH unit) | pH <4.5, initial or label | too few laboratories | not pooled; per contrast: +0.40, +0.45 | - | - | 1 / 1 / 2 | 0% | buffer | - |
-| 2-Methyl-3-furanthiol (MFT) | precursor dose (a doubling of dose) | all | too few laboratories | not pooled; per contrast: +0.18, +0.35, -0.29, -0.37, +0.40, +0.30, +0.34, +0.42, -0.35 | - | - | 2 / 2 / 9 | 0% | buffer | - |
+| 2-Methyl-3-furanthiol (MFT) | precursor dose (a doubling of dose) | sulfur donor varied | too few laboratories | not pooled; per contrast: +0.18, +0.35, -0.29, -0.37, +0.40, +0.30, +0.34, +0.42, -0.35 | - | - | 2 / 2 / 9 | 0% | buffer | - |
 | 2-Methyl-3-furanthiol (MFT) | temperature (+10 C) | time >120 min | too few laboratories | not pooled; per contrast: +0.11, +0.26 | - | - | 1 / 1 / 2 | 0% | water | - |
 | 2-Methyl-3-furanthiol (MFT) | time (a doubling of time) | T 100-130 C | too few laboratories | not pooled; per contrast: +0.10, +0.23, +0.36, +0.45, +0.68, -0.85 | - | - | 2 / 3 / 6 | 0% | buffer, other (choline chloride/glycerol 1:1 molar), other (glycerol), water | - |
 | 2-Methylbutanal | temperature (+10 C) | time >120 min | too few laboratories | not pooled; per contrast: +0.01 | - | - | 1 / 1 / 1 | 0% | other (aqueous beef liver extract, batch 2) | - |
@@ -50,7 +53,9 @@
 | 2-Methylbutanal | time (a doubling of time) | T >130 C | too few laboratories | not pooled; per contrast: +0.23, +0.40, +0.27, +0.07, +0.23, +0.18 | - | - | 2 / 2 / 6 | 0% | buffer, other (aqueous beef liver extract, batch 1), other (aqueous beef liver extract, batch 2), other (aqueous beef liver extract, batch 3), other (silica gel 3 g, 10 % water) | - |
 | 2-Methylpyrazine | pH (+1 pH unit) | pH 4.5-6, held | too few laboratories | not pooled; per contrast: +1.08, +1.27, +1.41, +0.00 | - | - | 1 / 1 / 4 | 100% | buffer | - |
 | 2-Methylpyrazine | pH (+1 pH unit) | pH >7.5, initial or label | too few laboratories | not pooled; per contrast: +1.95, +1.93 | - | - | 1 / 1 / 2 | 0% | water | - |
-| 2-Methylpyrazine | precursor dose (a doubling of dose) | all | too few laboratories | not pooled; per contrast: +0.28, +0.49, -0.14, +0.22, -0.02, -0.08, +0.23, +0.03, +0.00, +0.20, +0.35 | - | - | 2 / 3 / 11 | 82% | buffer, other (freeze-dried on 1.5 g sand, dry), water | - |
+| 2-Methylpyrazine | precursor dose (a doubling of dose) | amino acid varied | too few laboratories | not pooled; per contrast: +0.23, +0.03, +0.00 | - | - | 1 / 1 / 3 | 100% | water | - |
+| 2-Methylpyrazine | precursor dose (a doubling of dose) | sugar varied | too few laboratories | not pooled; per contrast: +0.28, +0.49, -0.14, +0.22, -0.02, -0.08 | - | - | 1 / 1 / 6 | 100% | buffer, other (freeze-dried on 1.5 g sand, dry) | - |
+| 2-Methylpyrazine | precursor dose (a doubling of dose) | sulfur donor varied | too few laboratories | not pooled; per contrast: +0.20, +0.35 | - | - | 1 / 1 / 2 | 0% | water | - |
 | 2-Methylpyrazine | temperature (+10 C) | time >120 min | too few laboratories | not pooled; per contrast: +0.45, +0.00 | - | - | 1 / 1 / 2 | 100% | water | - |
 | 2-Methylpyrazine | time (a doubling of time) | T 100-130 C | too few laboratories | not pooled; per contrast: +0.14, +0.20 | - | - | 1 / 2 / 2 | 0% | water | - |
 | 2-Methylpyrazine | water (+0.1 a_w) | all | too few laboratories | not pooled; per contrast: -0.09 | - | - | 1 / 1 / 1 | 100% | other (freeze-dried on sand, aw 0.16), other (freeze-dried on sand, aw 0.33), other (freeze-dried on sand, aw 0.38), other (freeze-dried on sand, aw 0.53), other (freeze-dried on sand, aw 0.62), other (freeze-dried on sand, aw 0.75) | - |
@@ -64,29 +69,29 @@
 | 5-Methylfurfural | time (a doubling of time) | T >130 C | too few laboratories | not pooled; per contrast: +0.34 | - | - | 1 / 1 / 1 | 100% | water | - |
 | Benzaldehyde | pH (+1 pH unit) | pH 6-7.5, initial or label | too few laboratories | not pooled; per contrast: -0.27 | - | - | 1 / 1 / 1 | 0% | other (600 mg sand + 30 uL 0.3 M buffer + 80 uL water) | - |
 | Benzaldehyde | pH (+1 pH unit) | pH <4.5, initial or label | too few laboratories | not pooled; per contrast: -0.16 | - | - | 1 / 1 / 1 | 0% | other (600 mg sand + 30 uL 0.3 M buffer + 80 uL water) | - |
-| Benzaldehyde | precursor dose (a doubling of dose) | all | too few laboratories | not pooled; per contrast: +0.15, +0.13 | - | - | 1 / 1 / 2 | 0% | other (600 mg sand + 30 uL 0.3 M buffer + 80 uL water) | - |
+| Benzaldehyde | precursor dose (a doubling of dose) | lipid oxidation product varied | too few laboratories | not pooled; per contrast: +0.15, +0.13 | - | - | 1 / 1 / 2 | 0% | other (600 mg sand + 30 uL 0.3 M buffer + 80 uL water) | - |
 | Benzaldehyde | time (a doubling of time) | T <100 C | too few laboratories | not pooled; per contrast: +0.08 | - | - | 1 / 1 / 1 | 0% | other (acetonitrile/buffer 2:1) | - |
 | Benzaldehyde | water (+0.1 a_w) | all | too few laboratories | not pooled; per contrast: -0.00, +0.00 | - | - | 1 / 1 / 2 | 0% | other (600 mg sand + 30 uL buffer + 0 uL water), other (600 mg sand + 30 uL buffer + 120 uL water), other (600 mg sand + 30 uL buffer + 160 uL water), other (600 mg sand + 30 uL buffer + 200 uL water), other (600 mg sand + 30 uL buffer + 40 uL water), other (600 mg sand + 30 uL buffer + 80 uL water) | - |
 | Bis(2-furfuryl) disulfide | pH (+1 pH unit) | pH 4.5-6, held | too few laboratories | not pooled; per contrast: +0.33 | - | - | 1 / 1 / 1 | 100% | buffer | - |
 | Bis(2-furfuryl) disulfide | pH (+1 pH unit) | pH 6-7.5, initial or label | too few laboratories | not pooled; per contrast: -0.30 | - | - | 1 / 1 / 1 | 0% | water | - |
 | Bis(2-methyl-3-furyl) disulfide | pH (+1 pH unit) | pH 4.5-6, held | too few laboratories | not pooled; per contrast: -0.50, -0.40 | - | - | 1 / 1 / 2 | 100% | buffer | - |
 | Bis(2-methyl-3-furyl) disulfide | pH (+1 pH unit) | pH 6-7.5, initial or label | too few laboratories | not pooled; per contrast: +0.24 | - | - | 1 / 1 / 1 | 0% | water | - |
-| Bis(2-methyl-3-furyl) disulfide | precursor dose (a doubling of dose) | all | too few laboratories | not pooled; per contrast: +0.15, +0.30 | - | - | 1 / 1 / 2 | 0% | buffer | - |
+| Bis(2-methyl-3-furyl) disulfide | precursor dose (a doubling of dose) | sulfur donor varied | too few laboratories | not pooled; per contrast: +0.15, +0.30 | - | - | 1 / 1 / 2 | 0% | buffer | - |
 | DMHF | pH (+1 pH unit) | pH 6-7.5, initial or label | too few laboratories | not pooled; per contrast: +0.04, +0.46 | - | - | 1 / 1 / 2 | 0% | buffer | - |
-| DMHF | precursor dose (a doubling of dose) | all | too few laboratories | not pooled; per contrast: +0.10, +0.12 | - | - | 1 / 1 / 2 | 0% | buffer | - |
+| DMHF | precursor dose (a doubling of dose) | amino acid varied | too few laboratories | not pooled; per contrast: +0.10, +0.12 | - | - | 1 / 1 / 2 | 0% | buffer | - |
 | Furfural | pH (+1 pH unit) | pH 4.5-6, held | too few laboratories | not pooled; per contrast: -1.71, -1.73, -0.52, -0.81 | - | - | 1 / 1 / 4 | 100% | buffer | - |
 | Furfural | pH (+1 pH unit) | pH 4.5-6, initial or label | too few laboratories | not pooled; per contrast: -0.12, -2.93 | - | - | 2 / 2 / 2 | 100% | buffer | - |
 | Furfural | temperature (+10 C) | time >120 min | too few laboratories | not pooled; per contrast: +0.75, +0.03, +0.24 | - | - | 2 / 2 / 3 | 100% | water | - |
 | Furfural | time (a doubling of time) | T 100-130 C | too few laboratories | not pooled; per contrast: +0.54, +0.37, +0.23, +0.21, +0.26, +0.41 | - | - | 2 / 3 / 6 | 33% | water | - |
 | Furfural | time (a doubling of time) | T >130 C | too few laboratories | not pooled; per contrast: +0.31 | - | - | 1 / 1 / 1 | 100% | water | - |
 | HEMF | pH (+1 pH unit) | pH 6-7.5, initial or label | too few laboratories | not pooled; per contrast: +0.18, +0.41 | - | - | 1 / 1 / 2 | 0% | buffer | - |
-| HEMF | precursor dose (a doubling of dose) | all | too few laboratories | not pooled; per contrast: +0.11, +0.21 | - | - | 1 / 1 / 2 | 0% | buffer | - |
+| HEMF | precursor dose (a doubling of dose) | amino acid varied | too few laboratories | not pooled; per contrast: +0.11, +0.21 | - | - | 1 / 1 / 2 | 0% | buffer | - |
 | Hexanal | pH (+1 pH unit) | pH <4.5, initial or label | too few laboratories | not pooled; per contrast: +0.04 | - | - | 1 / 1 / 1 | 0% | other (acetonitrile/buffer 2:1) | - |
 | Hexanal | pH (+1 pH unit) | pH >7.5, initial or label | too few laboratories | not pooled; per contrast: +0.05, +0.31 | - | - | 1 / 1 / 2 | 0% | other (acetonitrile/buffer 2:1) | - |
-| Hexanal | precursor dose (a doubling of dose) | all | too few laboratories | not pooled; per contrast: +0.32 | - | - | 1 / 1 / 1 | 0% | other (acetonitrile/buffer 2:1) | - |
+| Hexanal | precursor dose (a doubling of dose) | lipid oxidation product varied | too few laboratories | not pooled; per contrast: +0.32 | - | - | 1 / 1 / 1 | 0% | other (acetonitrile/buffer 2:1) | - |
 | Hexanal | time (a doubling of time) | T >130 C | too few laboratories | not pooled; per contrast: +0.18 | - | - | 1 / 1 / 1 | 0% | other (acetonitrile/buffer 2:1) | - |
 | Hydrogen Sulfide | pH (+1 pH unit) | pH 6-7.5, initial or label | too few laboratories | not pooled; per contrast: +1.26, +1.90, +1.55, +1.00 | - | - | 1 / 1 / 4 | 0% | buffer | - |
-| Hydrogen Sulfide | precursor dose (a doubling of dose) | all | too few laboratories | not pooled; per contrast: +0.28 | - | - | 1 / 1 / 1 | 0% | water | - |
+| Hydrogen Sulfide | precursor dose (a doubling of dose) | sugar varied | too few laboratories | not pooled; per contrast: +0.28 | - | - | 1 / 1 / 1 | 0% | water | - |
 | Hydrogen Sulfide | temperature (+10 C) | time 30-120 min | too few laboratories | not pooled; per contrast: +0.79, +0.47, +0.13 | - | - | 1 / 1 / 3 | 0% | buffer | - |
 | Hydrogen Sulfide | time (a doubling of time) | T 100-130 C | too few laboratories | not pooled; per contrast: +0.29, +0.02, +0.38, +0.46 | - | - | 1 / 1 / 4 | 0% | buffer | - |
 | Methional (3-(methylthio)propanal) | pH (+1 pH unit) | pH 6-7.5, held | too few laboratories | not pooled; per contrast: -0.19 | - | - | 1 / 1 / 1 | 100% | buffer | - |
@@ -100,7 +105,8 @@
 | Phenylacetaldehyde | pH (+1 pH unit) | pH 6-7.5, initial or label | direction unclear (prior-dominated) (6 non-monotone) | -0.20 (-0.50 to +0.10) | -0.81 to +0.40 | 0.77 | 3 / 5 / 10 | 10% | buffer, other (600 mg sand + 30 uL 0.3 M buffer + 80 uL water), other (acetonitrile/buffer 2:1), water | - |
 | Phenylacetaldehyde | pH (+1 pH unit) | pH <4.5, initial or label | too few laboratories | not pooled; per contrast: -0.13, -0.03, -0.22, -0.07, -0.07, -0.12, -0.08, -0.10, -0.14 | - | - | 2 / 6 / 9 | 0% | buffer, buffer (wine-like model solution), other (600 mg sand + 30 uL 0.3 M buffer + 80 uL water), other (acetonitrile/buffer 2:1) | - |
 | Phenylacetaldehyde | pH (+1 pH unit) | pH >7.5, initial or label | too few laboratories | not pooled; per contrast: -0.11, -0.07, -0.17, +0.34, -0.27, +0.06, -0.14, -0.45, -0.05, -0.36, -0.57, -0.20 | - | - | 1 / 4 / 12 | 0% | buffer, other (acetonitrile/buffer 2:1) | - |
-| Phenylacetaldehyde | precursor dose (a doubling of dose) | all | too few laboratories | not pooled; per contrast: +0.27, +0.32, +0.12, +0.12, +0.28, +0.31, +0.10, +0.10, +0.16, +0.19, +0.23, +0.22, +0.15, +0.24 | - | - | 1 / 6 / 14 | 0% | buffer, other (600 mg sand + 30 uL 0.3 M buffer + 80 uL water), other (acetonitrile/buffer 2:1) | - |
+| Phenylacetaldehyde | precursor dose (a doubling of dose) | lipid oxidation product varied | too few laboratories | not pooled; per contrast: +0.12, +0.12, +0.28, +0.31, +0.10, +0.10, +0.16, +0.19, +0.23, +0.22, +0.15, +0.24 | - | - | 1 / 5 / 12 | 0% | buffer, other (600 mg sand + 30 uL 0.3 M buffer + 80 uL water), other (acetonitrile/buffer 2:1) | - |
+| Phenylacetaldehyde | precursor dose (a doubling of dose) | other precursor varied | too few laboratories | not pooled; per contrast: +0.27, +0.32 | - | - | 1 / 1 / 2 | 0% | buffer | - |
 | Phenylacetaldehyde | temperature (+10 C) | time 30-120 min | too few laboratories | not pooled; per contrast: +0.12, +0.58, +0.23, +0.12 | - | - | 2 / 3 / 4 | 0% | buffer, buffer (wine-like model solution), other (600 mg sand + 30 uL 0.3 M buffer + 80 uL water) | - |
 | Phenylacetaldehyde | temperature (+10 C) | time >120 min | too few laboratories | not pooled; per contrast: +0.45, +0.08 | - | - | 1 / 2 / 2 | 0% | buffer, other (acetonitrile/buffer 2:1) | - |
 | Phenylacetaldehyde | time (a doubling of time) | T 100-130 C | too few laboratories | not pooled; per contrast: +0.27, +0.24, +0.40, +0.29, +0.34, +0.30 | - | - | 1 / 2 / 6 | 0% | buffer, other (600 mg sand + 30 uL 0.3 M buffer + 80 uL water) | - |
@@ -109,14 +115,15 @@
 | Phenylacetaldehyde | time (a doubling of time) | T unstated C | too few laboratories | not pooled; per contrast: +0.19, +0.22, +0.18 | - | - | 1 / 2 / 3 | 0% | buffer | - |
 | Phenylacetaldehyde | water (+0.1 a_w) | all | too few laboratories | not pooled; per contrast: -0.00, -0.00 | - | - | 1 / 1 / 2 | 0% | other (600 mg sand + 30 uL buffer + 0 uL water), other (600 mg sand + 30 uL buffer + 120 uL water), other (600 mg sand + 30 uL buffer + 160 uL water), other (600 mg sand + 30 uL buffer + 200 uL water), other (600 mg sand + 30 uL buffer + 40 uL water), other (600 mg sand + 30 uL buffer + 80 uL water) | - |
 | Pyrazines | pH (+1 pH unit) | pH 6-7.5, initial or label | too few laboratories | not pooled; per contrast: +1.21 | - | - | 1 / 1 / 1 | 0% | buffer | - |
-| Pyrazines | precursor dose (a doubling of dose) | all | too few laboratories | not pooled; per contrast: +0.36, +0.45, -0.12 | - | - | 1 / 1 / 3 | 100% | water | - |
+| Pyrazines | precursor dose (a doubling of dose) | amino acid varied | too few laboratories | not pooled; per contrast: +0.36, +0.45, -0.12 | - | - | 1 / 1 / 3 | 100% | water | - |
 | Pyrazines | time (a doubling of time) | T 100-130 C | too few laboratories | not pooled; per contrast: +0.11 | - | - | 1 / 1 / 1 | 0% | water | - |
 | Tetramethylpyrazine | time (a doubling of time) | T 100-130 C | too few laboratories | not pooled; per contrast: +0.11 | - | - | 1 / 1 / 1 | 0% | water | - |
-| Trimethylpyrazine | precursor dose (a doubling of dose) | all | too few laboratories | not pooled; per contrast: +0.44, +0.65 | - | - | 1 / 1 / 2 | 100% | water | - |
+| Trimethylpyrazine | precursor dose (a doubling of dose) | amino acid varied | too few laboratories | not pooled; per contrast: +0.44, +0.65 | - | - | 1 / 1 / 2 | 100% | water | - |
 | Trimethylpyrazine | temperature (+10 C) | time >120 min | too few laboratories | not pooled; per contrast: +0.60, +0.18 | - | - | 1 / 1 / 2 | 100% | water | - |
 | Trimethylpyrazine | time (a doubling of time) | T 100-130 C | too few laboratories | not pooled; per contrast: +0.10 | - | - | 1 / 1 / 1 | 0% | water | - |
 | Unsubstituted pyrazine | pH (+1 pH unit) | pH >7.5, initial or label | too few laboratories | not pooled; per contrast: +1.56, +1.15 | - | - | 1 / 1 / 2 | 0% | water | - |
-| Unsubstituted pyrazine | precursor dose (a doubling of dose) | all | too few laboratories | not pooled; per contrast: +0.24, -0.11, +0.92, +0.51 | - | - | 2 / 2 / 4 | 50% | water | - |
+| Unsubstituted pyrazine | precursor dose (a doubling of dose) | amino acid varied | too few laboratories | not pooled; per contrast: +0.24, -0.11 | - | - | 1 / 1 / 2 | 100% | water | - |
+| Unsubstituted pyrazine | precursor dose (a doubling of dose) | sulfur donor varied | too few laboratories | not pooled; per contrast: +0.92, +0.51 | - | - | 1 / 1 / 2 | 0% | water | - |
 | Unsubstituted pyrazine | temperature (+10 C) | time >120 min | too few laboratories | not pooled; per contrast: +0.32, +0.00 | - | - | 1 / 1 / 2 | 100% | water | - |
 | Unsubstituted pyrazine | time (a doubling of time) | T 100-130 C | too few laboratories | not pooled; per contrast: +0.17, -0.05 | - | - | 1 / 2 / 2 | 0% | water | - |
 

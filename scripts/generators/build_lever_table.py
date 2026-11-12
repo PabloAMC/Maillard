@@ -177,6 +177,33 @@ def _common(arms, key) -> Optional[float]:
     return vals.pop() if len(vals) == 1 else None
 
 
+#: PREREG amendment A5: a precursor-dose cell is banded by WHICH precursor is varied. Order matters (first match).
+PRECURSOR_CLASSES = (
+    ("sulfur donor varied", ("cystein", "cystine", "cys", "glutathione", "gsh", "thiamin", "vb1", "methionin",
+                             "hydrogen sulfide", "h2s", "sulfide")),
+    ("lipid oxidation product varied", ("enal", "hexenal", "nonenal", "octadeca", "hydroperox", "epoxy", "linole",
+                                        "lipid", "oil", "fat")),
+    ("sugar varied", ("xylose", "glucose", "fructose", "ribose", "arabinose", "rhamnose", "glucosamine", "maltose",
+                      "lactose", "sucrose", "galactose", "dextrose", "sugar")),
+    ("amino acid varied", ("lysine", "arginine", "threonine", "glycine", "alanine", "leucine", "valine", "proline",
+                           "serine", "phenylalanine", "glutam", "aspar", "histidine", "tyrosine", "tryptophan",
+                           "amino acid", "ammoni")),
+)
+PRECURSOR_OTHER = "other precursor varied"
+
+
+def precursor_class(c: Mapping[str, Any], arms: Sequence[Mapping[str, Any]]) -> str:
+    """Which kind of precursor a precursor-dose contrast varies (PREREG amendment A5): the precursor whose printed
+    amount differs between the arms, else the contrast's `lever` text."""
+    P = [(a.get("conditions") or {}).get("precursors") or {} for a in arms]
+    P = [p if isinstance(p, Mapping) else {} for p in P]
+    varied = sorted(k for k in set().union(*[set(p) for p in P]) if len({str(p.get(k)) for p in P}) > 1) if P else []
+    names = [str(k).lower() for k in varied if str(k).lower() != "water"] or [str(c.get("lever") or "").lower()]
+    found = {label for name in names for label, keys in PRECURSOR_CLASSES
+             if label == next((lb for lb, ks in PRECURSOR_CLASSES if any(k in name for k in ks)), None)}
+    return found.pop() if len(found) == 1 else PRECURSOR_OTHER
+
+
 def numeric_observation(c: Mapping[str, Any], arms: List[Dict[str, Any]]) -> Optional[Dict[str, Any]]:
     """One within-study slope per contrast (PREREG sec. 4): two arms give the normalised difference, a ladder the
     weighted least-squares slope over its longest monotone run."""
@@ -316,6 +343,8 @@ def observations(sources, labs) -> Tuple[List[Dict[str, Any]], Dict[str, int]]:
             if o.get("kind") == "excluded":
                 skipped[f"sugar-identity contrasts whose levels are not sugars (fed intermediates)"] += 1
                 continue
+            if lc == "precursor dose":                # PREREG amendment A5
+                o["band"] = precursor_class(c, arms)
             if c.get("system") == "fed_odorant":      # stability of an added odorant, not its formation
                 o["band"] = f"{o['band']}, fed odorant (stability)"
             o.update({"source": src, "contrast": c.get("id"), "compound": key.display_name, "lever_class": lc,

@@ -33,7 +33,7 @@
       "family": "meaty thiols",
       "lever": "precursor dose",
       "reading": "needs experiment",
-      "why": "keyed: best cell '2-Methyl-3-furanthiol (MFT), all' reads direction unclear (3 laboratories)",
+      "why": "keyed: best cell '2-Methyl-3-furanthiol (MFT), sulfur donor varied' reads direction unclear (3 laboratories)",
       "plant_protein_evidence": false,
       "design": "precursor dose: 0 / 0.5x / 1x / 2x of the base dose; 5 replicate pots per arm; in a 15 % pea-isolate matrix; from 1 new laboratory(ies) to reach 3; measure MFT, FFT, H2S and the disulfides by SIDA",
       "engine": "blank in v1 (step 5 adds)"
@@ -168,7 +168,7 @@
       "family": "Strecker aldehydes, methional",
       "lever": "precursor dose",
       "reading": "needs experiment",
-      "why": "keyed: best cell 'Benzaldehyde, all' reads direction unclear (4 laboratories)",
+      "why": "keyed: best cell 'Benzaldehyde, sugar varied' reads direction unclear (3 laboratories)",
       "plant_protein_evidence": false,
       "design": "precursor dose: 0 / 0.5x / 1x / 2x of the base dose; 8 replicate pots per arm; in a 15 % pea-isolate matrix; from 1 new laboratory(ies) to reach 3; measure Strecker aldehydes, methional",
       "engine": "blank in v1 (step 5 adds)"
@@ -303,7 +303,7 @@
       "family": "pyrazines",
       "lever": "precursor dose",
       "reading": "needs experiment",
-      "why": "keyed: best cell '2-Methylpyrazine, all' reads direction unclear (4 laboratories)",
+      "why": "keyed: best cell '2-Ethyl-3,6-dimethylpyrazine, sugar varied' reads direction unclear (3 laboratories)",
       "plant_protein_evidence": true,
       "design": "precursor dose: 0 / 0.5x / 1x / 2x of the base dose; 8 replicate pots per arm; matrix as in the keyed studies; from 1 new laboratory(ies) to reach 3; measure pyrazines",
       "engine": "blank in v1 (step 5 adds)"
@@ -438,7 +438,7 @@
       "family": "lipid aldehydes (off-notes)",
       "lever": "precursor dose",
       "reading": "needs experiment",
-      "why": "keyed: best cell 'Hexanal, all' reads direction unclear (3 laboratories)",
+      "why": "keyed: best cell '1-Octen-3-ol, sugar varied' reads too few laboratories (2 laboratories)",
       "plant_protein_evidence": false,
       "design": "precursor dose: 0 / 0.5x / 1x / 2x of the base dose; 8 replicate pots per arm; in a 15 % pea-isolate matrix; from 1 new laboratory(ies) to reach 3; measure lipid aldehydes (off-notes)",
       "engine": "blank in v1 (step 5 adds)"
@@ -573,7 +573,7 @@
       "family": "furanones, furfural",
       "lever": "precursor dose",
       "reading": "needs experiment",
-      "why": "keyed: best cell '2-Furanmethanol, all' reads too few laboratories (2 laboratories)",
+      "why": "keyed: best cell '2-Furanmethanol, sugar varied' reads too few laboratories (2 laboratories)",
       "plant_protein_evidence": false,
       "design": "precursor dose: 0 / 0.5x / 1x / 2x of the base dose; 8 replicate pots per arm; in a 15 % pea-isolate matrix; from 1 new laboratory(ies) to reach 3; measure furanones, furfural",
       "engine": "blank in v1 (step 5 adds)"
@@ -686,16 +686,16 @@
     "artifact": "experiment_map",
     "generated_on": "2026-11-12",
     "git": {
-      "commit": "a30be9ad43239adc16342aae703a271e1259fbf2",
-      "short": "a30be9ad",
-      "branch": "new-lab-keying",
+      "commit": "d363216ab3433f191e6b1e04b379387f0261f4d4",
+      "short": "d363216a",
+      "branch": "disagreement-audit",
       "dirty": true
     },
     "generated_by": "scripts/generators/build_experiment_map.py",
     "inputs": [
       {
         "path": "results/validation/lever_table.json",
-        "sha256": "ab733dc7c1db894c6634df48500ca32a8a67c477fb7435ede5c4b6a7fdc1de88"
+        "sha256": "5fe69f1b54f073fa3f5c1ba320ea617a0ea17f88947e303fec088c7124ac8539"
       },
       {
         "path": "docs/reference/contrast_benchmark/split.yml",

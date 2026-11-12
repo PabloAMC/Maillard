@@ -2299,19 +2299,120 @@
     {
       "compound": "2,3-Dimethylpyrazine",
       "lever_class": "precursor dose",
-      "band": "all",
-      "contrasts": 5,
-      "studies": 2,
+      "band": "amino acid varied",
+      "contrasts": 2,
+      "studies": 1,
       "labs": 1,
       "lab_names": [
         "ghent_de_kimpe"
       ],
       "peak_area_share": 1.0,
-      "focal_share": 0.6,
+      "focal_share": 0.0,
+      "matrices": [
+        "water"
+      ],
+      "temperature_range_C": [
+        130.0,
+        130.0
+      ],
+      "rows": [
+        {
+          "source": "vanlancker2010",
+          "contrast": "vanlancker2010-7",
+          "lab": "ghent_de_kimpe",
+          "y": 1.0142404391146103,
+          "v": 0.006269669725654502,
+          "range": [
+            0.2,
+            0.4
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": true
+        },
+        {
+          "source": "vanlancker2010",
+          "contrast": "vanlancker2010-57",
+          "lab": "ghent_de_kimpe",
+          "y": 0.28113516694704194,
+          "v": 0.006269669725654502,
+          "range": [
+            0.2,
+            0.4
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": true
+        }
+      ],
+      "step": "a doubling of dose",
+      "fit": {
+        "estimate": 0.6275629954645936,
+        "ci90": [
+          -0.40836466380061204,
+          1.62112462577805
+        ],
+        "new_lab_pi90": [
+          -1.0071871221488804,
+          2.2208998325094695
+        ],
+        "p_same_sign_new_lab": 0.7731903850438093,
+        "new_lab_pi90_width": 3.22808695465835,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.532694791291947
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": 0.6398827615082153,
+            "new_lab_pi90": [
+              -0.3238800819354006,
+              1.5932613893097727
+            ]
+          },
+          "1.0": {
+            "estimate": 0.5966226068278203,
+            "new_lab_pi90": [
+              -2.217092575229847,
+              3.2795619120993345
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 0
+        },
+        "incidental_only": {
+          "contrasts": 2,
+          "estimate": 0.6275629954645936,
+          "ci90": [
+            -0.40836466380061204,
+            1.62112462577805
+          ]
+        },
+        "non_monotone_contrasts": 0
+      },
+      "reading": "too few laboratories",
+      "lolo": null
+    },
+    {
+      "compound": "2,3-Dimethylpyrazine",
+      "lever_class": "precursor dose",
+      "band": "sugar varied",
+      "contrasts": 3,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "ghent_de_kimpe"
+      ],
+      "peak_area_share": 1.0,
+      "focal_share": 1.0,
       "matrices": [
         "buffer",
-        "other (freeze-dried on 1.5 g sand, dry)",
-        "water"
+        "other (freeze-dried on 1.5 g sand, dry)"
       ],
       "temperature_range_C": [
         120.0,
@@ -2362,70 +2463,40 @@
           "pairs": null,
           "focal": true,
           "peak_area": true
-        },
-        {
-          "source": "vanlancker2010",
-          "contrast": "vanlancker2010-7",
-          "lab": "ghent_de_kimpe",
-          "y": 1.0142404391146103,
-          "v": 0.006269669725654502,
-          "range": [
-            0.2,
-            0.4
-          ],
-          "non_monotone": false,
-          "pairs": null,
-          "focal": false,
-          "peak_area": true
-        },
-        {
-          "source": "vanlancker2010",
-          "contrast": "vanlancker2010-57",
-          "lab": "ghent_de_kimpe",
-          "y": 0.28113516694704194,
-          "v": 0.006269669725654502,
-          "range": [
-            0.2,
-            0.4
-          ],
-          "non_monotone": false,
-          "pairs": null,
-          "focal": false,
-          "peak_area": true
         }
       ],
       "step": "a doubling of dose",
       "fit": {
-        "estimate": 0.3910894155081835,
+        "estimate": 0.23729641702294058,
         "ci90": [
-          -0.43957380933822154,
-          1.1952774237464565
+          -0.5621241356661505,
+          1.0172681259077705
         ],
         "new_lab_pi90": [
-          -0.9561728395752029,
-          1.7159835584343766
+          -0.9454013025748375,
+          1.4009455803175301
         ],
-        "p_same_sign_new_lab": 0.725801188048846,
-        "new_lab_pi90_width": 2.6721563980095793,
+        "p_same_sign_new_lab": 0.7047755841969167,
+        "new_lab_pi90_width": 2.3463468828923677,
         "tau_study_fitted": false,
         "reml_scales": [
           0.0,
-          0.3171652579277238
+          0.07957403220540027
         ],
         "prior_dominated": true,
         "sensitivity": {
           "0.25": {
-            "estimate": 0.3933594995585872,
+            "estimate": 0.23894679103418964,
             "new_lab_pi90": [
-              -0.4389076081567769,
-              1.2234547728329344
+              -0.3953130455032166,
+              0.8685238624170287
             ]
           },
           "1.0": {
-            "estimate": 0.3819857750562165,
+            "estimate": 0.23267397535441162,
             "new_lab_pi90": [
-              -1.9034487945749843,
-              2.5807034314199657
+              -1.9407856121698024,
+              2.3451744124216582
             ]
           }
         },
@@ -2433,12 +2504,7 @@
           "contrasts": 0
         },
         "incidental_only": {
-          "contrasts": 2,
-          "estimate": 0.6275629954645936,
-          "ci90": [
-            -0.40836466380061204,
-            1.62112462577805
-          ]
+          "contrasts": 0
         },
         "non_monotone_contrasts": 3
       },
@@ -3139,7 +3205,7 @@
     {
       "compound": "2,5-Dimethylpyrazine",
       "lever_class": "precursor dose",
-      "band": "all",
+      "band": "sulfur donor varied",
       "contrasts": 1,
       "studies": 1,
       "labs": 1,
@@ -5588,21 +5654,107 @@
     {
       "compound": "2-Ethyl-3,5-dimethylpyrazine",
       "lever_class": "precursor dose",
-      "band": "all",
-      "contrasts": 3,
-      "studies": 2,
+      "band": "amino acid varied",
+      "contrasts": 1,
+      "studies": 1,
       "labs": 1,
       "lab_names": [
         "ghent_de_kimpe"
       ],
       "peak_area_share": 1.0,
-      "focal_share": 0.6666666666666666,
+      "focal_share": 0.0,
       "matrices": [
-        "other (freeze-dried on 1.5 g sand, dry)",
         "water"
       ],
       "temperature_range_C": [
         130.0,
+        130.0
+      ],
+      "rows": [
+        {
+          "source": "vanlancker2010",
+          "contrast": "vanlancker2010-24",
+          "lab": "ghent_de_kimpe",
+          "y": 0.0,
+          "v": 0.006269669725654502,
+          "range": [
+            0.2,
+            0.4
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": true
+        }
+      ],
+      "step": "a doubling of dose",
+      "fit": {
+        "estimate": 2.410649622126698e-16,
+        "ci90": [
+          -1.092099177853031,
+          1.0920991778530305
+        ],
+        "new_lab_pi90": [
+          -1.5734525412915623,
+          1.5734525412915634
+        ],
+        "p_same_sign_new_lab": 0.5,
+        "new_lab_pi90_width": 3.1469050825831255,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.0
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": 9.942428484339946e-16,
+            "new_lab_pi90": [
+              -0.8094610513908648,
+              0.8094610513908721
+            ]
+          },
+          "1.0": {
+            "estimate": 4.271425602974744e-16,
+            "new_lab_pi90": [
+              -2.923400863974458,
+              2.923400863974441
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 0
+        },
+        "incidental_only": {
+          "contrasts": 1,
+          "estimate": 2.410649622126698e-16,
+          "ci90": [
+            -1.092099177853031,
+            1.0920991778530305
+          ]
+        },
+        "non_monotone_contrasts": 0
+      },
+      "reading": "too few laboratories",
+      "lolo": null
+    },
+    {
+      "compound": "2-Ethyl-3,5-dimethylpyrazine",
+      "lever_class": "precursor dose",
+      "band": "sugar varied",
+      "contrasts": 2,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "ghent_de_kimpe"
+      ],
+      "peak_area_share": 1.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "other (freeze-dried on 1.5 g sand, dry)"
+      ],
+      "temperature_range_C": [
+        180.0,
         180.0
       ],
       "rows": [
@@ -5635,55 +5787,40 @@
           "pairs": null,
           "focal": true,
           "peak_area": true
-        },
-        {
-          "source": "vanlancker2010",
-          "contrast": "vanlancker2010-24",
-          "lab": "ghent_de_kimpe",
-          "y": 0.0,
-          "v": 0.006269669725654502,
-          "range": [
-            0.2,
-            0.4
-          ],
-          "non_monotone": false,
-          "pairs": null,
-          "focal": false,
-          "peak_area": true
         }
       ],
       "step": "a doubling of dose",
       "fit": {
-        "estimate": -0.04268593898552606,
+        "estimate": -0.059346510901467475,
         "ci90": [
-          -0.8482677963940427,
-          0.7672800266750752
+          -0.9503547281331953,
+          0.8356406687233783
         ],
         "new_lab_pi90": [
-          -1.2649780688423724,
-          1.184161830214252
+          -1.4282034323490644,
+          1.3133119725516929
         ],
-        "p_same_sign_new_lab": 0.537689357003662,
-        "new_lab_pi90_width": 2.4491398990566244,
+        "p_same_sign_new_lab": 0.5431454694951445,
+        "new_lab_pi90_width": 2.741515404900757,
         "tau_study_fitted": false,
         "reml_scales": [
           0.0,
-          0.11243458629672394
+          0.15886509512405417
         ],
         "prior_dominated": true,
         "sensitivity": {
           "0.25": {
-            "estimate": -0.04349557744901785,
+            "estimate": -0.05977816429356531,
             "new_lab_pi90": [
-              -0.722344839251703,
-              0.6376307309637154
+              -0.8154485825014941,
+              0.6961262710161215
             ]
           },
           "1.0": {
-            "estimate": -0.04146345715739643,
+            "estimate": -0.057469254575389324,
             "new_lab_pi90": [
-              -2.232370808743231,
-              2.160818714288362
+              -2.510795917055809,
+              2.409560472011702
             ]
           }
         },
@@ -5691,12 +5828,7 @@
           "contrasts": 0
         },
         "incidental_only": {
-          "contrasts": 1,
-          "estimate": 2.410649622126698e-16,
-          "ci90": [
-            -1.092099177853031,
-            1.0920991778530305
-          ]
+          "contrasts": 0
         },
         "non_monotone_contrasts": 2
       },
@@ -6917,54 +7049,23 @@
     {
       "compound": "2-Ethyl-3,6-dimethylpyrazine",
       "lever_class": "precursor dose",
-      "band": "all",
-      "contrasts": 4,
-      "studies": 2,
+      "band": "amino acid varied",
+      "contrasts": 2,
+      "studies": 1,
       "labs": 1,
       "lab_names": [
         "ghent_de_kimpe"
       ],
       "peak_area_share": 1.0,
-      "focal_share": 0.5,
+      "focal_share": 0.0,
       "matrices": [
-        "other (freeze-dried on 1.5 g sand, dry)",
         "water"
       ],
       "temperature_range_C": [
         130.0,
-        180.0
+        130.0
       ],
       "rows": [
-        {
-          "source": "scalone2015",
-          "contrast": "scalone2015-8",
-          "lab": "ghent_de_kimpe",
-          "y": -0.19695200247048744,
-          "v": 0.00012428825014795987,
-          "range": [
-            5.0,
-            15.0
-          ],
-          "non_monotone": true,
-          "pairs": null,
-          "focal": true,
-          "peak_area": true
-        },
-        {
-          "source": "scalone2015",
-          "contrast": "scalone2015-20",
-          "lab": "ghent_de_kimpe",
-          "y": 0.14456051501515474,
-          "v": 1.894923216825097e-07,
-          "range": [
-            2.5,
-            22.5
-          ],
-          "non_monotone": true,
-          "pairs": null,
-          "focal": true,
-          "peak_area": true
-        },
         {
           "source": "vanlancker2010",
           "contrast": "vanlancker2010-21",
@@ -6998,36 +7099,36 @@
       ],
       "step": "a doubling of dose",
       "fit": {
-        "estimate": 0.12451182621098626,
+        "estimate": 0.28158897777037833,
         "ci90": [
-          -0.7145980936087942,
-          0.9567906365656531
+          -0.7071127897010387,
+          1.2505288585986816
         ],
         "new_lab_pi90": [
-          -1.2360512785078523,
-          1.479735844644217
+          -1.2701259672643916,
+          1.8139500324069269
         ],
-        "p_same_sign_new_lab": 0.5784644914122314,
-        "new_lab_pi90_width": 2.7157871231520696,
+        "p_same_sign_new_lab": 0.6493338097257059,
+        "new_lab_pi90_width": 3.0840759996713185,
         "tau_study_fitted": false,
         "reml_scales": [
           0.0,
-          0.3171652579277238
+          0.37700741270170407
         ],
         "prior_dominated": true,
         "sensitivity": {
           "0.25": {
-            "estimate": 0.12420129071061403,
+            "estimate": 0.2865530623966045,
             "new_lab_pi90": [
-              -0.7039369274874073,
-              0.9540176611628586
+              -0.6136939876195354,
+              1.181863229983644
             ]
           },
           "1.0": {
-            "estimate": 0.12187566026745296,
+            "estimate": 0.2688451539741735,
             "new_lab_pi90": [
-              -2.180672042082703,
-              2.3985048758379155
+              -2.4248820108991618,
+              2.9016839448382252
             ]
           }
         },
@@ -7041,6 +7142,103 @@
             -0.7071127897010387,
             1.2505288585986816
           ]
+        },
+        "non_monotone_contrasts": 0
+      },
+      "reading": "too few laboratories",
+      "lolo": null
+    },
+    {
+      "compound": "2-Ethyl-3,6-dimethylpyrazine",
+      "lever_class": "precursor dose",
+      "band": "sugar varied",
+      "contrasts": 2,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "ghent_de_kimpe"
+      ],
+      "peak_area_share": 1.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "other (freeze-dried on 1.5 g sand, dry)"
+      ],
+      "temperature_range_C": [
+        180.0,
+        180.0
+      ],
+      "rows": [
+        {
+          "source": "scalone2015",
+          "contrast": "scalone2015-8",
+          "lab": "ghent_de_kimpe",
+          "y": -0.19695200247048744,
+          "v": 0.00012428825014795987,
+          "range": [
+            5.0,
+            15.0
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true
+        },
+        {
+          "source": "scalone2015",
+          "contrast": "scalone2015-20",
+          "lab": "ghent_de_kimpe",
+          "y": 0.14456051501515474,
+          "v": 1.894923216825097e-07,
+          "range": [
+            2.5,
+            22.5
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true
+        }
+      ],
+      "step": "a doubling of dose",
+      "fit": {
+        "estimate": -0.02541257961574106,
+        "ci90": [
+          -0.9484523442418535,
+          0.899358640241578
+        ],
+        "new_lab_pi90": [
+          -1.4594549515760369,
+          1.4103481060395657
+        ],
+        "p_same_sign_new_lab": 0.5164432710323292,
+        "new_lab_pi90_width": 2.8698030576156026,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.2244693495128745
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": -0.025679799351627494,
+            "new_lab_pi90": [
+              -0.8365829060849719,
+              0.7853757157758248
+            ]
+          },
+          "1.0": {
+            "estimate": -0.024482381906055645,
+            "new_lab_pi90": [
+              -2.5573539670325562,
+              2.514110466069994
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 0
+        },
+        "incidental_only": {
+          "contrasts": 0
         },
         "non_monotone_contrasts": 2
       },
@@ -7480,7 +7678,7 @@
     {
       "compound": "2-Ethylpyrazine",
       "lever_class": "precursor dose",
-      "band": "all",
+      "band": "sugar varied",
       "contrasts": 2,
       "studies": 1,
       "labs": 1,
@@ -11348,7 +11546,7 @@
     {
       "compound": "2-Methyl-3-furanthiol (MFT)",
       "lever_class": "precursor dose",
-      "band": "all",
+      "band": "sulfur donor varied",
       "contrasts": 9,
       "studies": 2,
       "labs": 2,
@@ -15068,20 +15266,135 @@
     {
       "compound": "2-Methylpyrazine",
       "lever_class": "precursor dose",
-      "band": "all",
-      "contrasts": 11,
-      "studies": 3,
-      "labs": 2,
+      "band": "amino acid varied",
+      "contrasts": 3,
+      "studies": 1,
+      "labs": 1,
       "lab_names": [
-        "ghent_de_kimpe",
-        "ho_network"
+        "ghent_de_kimpe"
       ],
-      "peak_area_share": 0.8181818181818182,
-      "focal_share": 0.7272727272727273,
+      "peak_area_share": 1.0,
+      "focal_share": 0.0,
+      "matrices": [
+        "water"
+      ],
+      "temperature_range_C": [
+        130.0,
+        130.0
+      ],
+      "rows": [
+        {
+          "source": "vanlancker2010",
+          "contrast": "vanlancker2010-3",
+          "lab": "ghent_de_kimpe",
+          "y": 0.2256500384965052,
+          "v": 0.006269669725654502,
+          "range": [
+            0.2,
+            0.4
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": true
+        },
+        {
+          "source": "vanlancker2010",
+          "contrast": "vanlancker2010-53",
+          "lab": "ghent_de_kimpe",
+          "y": 0.034762106259212056,
+          "v": 0.006269669725654502,
+          "range": [
+            0.2,
+            0.4
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": true
+        },
+        {
+          "source": "vanlancker2010",
+          "contrast": "vanlancker2010-88",
+          "lab": "ghent_de_kimpe",
+          "y": 0.0,
+          "v": 0.006269669725654502,
+          "range": [
+            0.2,
+            0.4
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": true
+        }
+      ],
+      "step": "a doubling of dose",
+      "fit": {
+        "estimate": 0.08575353367032172,
+        "ci90": [
+          -0.7180294134230892,
+          0.882687289772722
+        ],
+        "new_lab_pi90": [
+          -1.116640289674145,
+          1.2815209781076504
+        ],
+        "p_same_sign_new_lab": 0.5833040098970865,
+        "new_lab_pi90_width": 2.3981612677817954,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.09458791355652352
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": 0.08643855030219731,
+            "new_lab_pi90": [
+              -0.5653715028756033,
+              0.7365686146178514
+            ]
+          },
+          "1.0": {
+            "estimate": 0.08389288651157582,
+            "new_lab_pi90": [
+              -2.0995403092017257,
+              2.2459017142447055
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 0
+        },
+        "incidental_only": {
+          "contrasts": 3,
+          "estimate": 0.08575353367032172,
+          "ci90": [
+            -0.7180294134230892,
+            0.882687289772722
+          ]
+        },
+        "non_monotone_contrasts": 0
+      },
+      "reading": "too few laboratories",
+      "lolo": null
+    },
+    {
+      "compound": "2-Methylpyrazine",
+      "lever_class": "precursor dose",
+      "band": "sugar varied",
+      "contrasts": 6,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "ghent_de_kimpe"
+      ],
+      "peak_area_share": 1.0,
+      "focal_share": 1.0,
       "matrices": [
         "buffer",
-        "other (freeze-dried on 1.5 g sand, dry)",
-        "water"
+        "other (freeze-dried on 1.5 g sand, dry)"
       ],
       "temperature_range_C": [
         120.0,
@@ -15177,52 +15490,74 @@
           "pairs": null,
           "focal": true,
           "peak_area": true
+        }
+      ],
+      "step": "a doubling of dose",
+      "fit": {
+        "estimate": 0.12417916051673081,
+        "ci90": [
+          -0.6680426225992536,
+          0.906609179890717
+        ],
+        "new_lab_pi90": [
+          -1.1054997717737496,
+          1.3448426146096106
+        ],
+        "p_same_sign_new_lab": 0.5923504991040841,
+        "new_lab_pi90_width": 2.45034238638336,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.2244693495128745
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": 0.1253014598127152,
+            "new_lab_pi90": [
+              -0.615267535672548,
+              0.8635826891769387
+            ]
+          },
+          "1.0": {
+            "estimate": 0.12152799157988041,
+            "new_lab_pi90": [
+              -2.034388132178326,
+              2.246875556402583
+            ]
+          }
         },
-        {
-          "source": "vanlancker2010",
-          "contrast": "vanlancker2010-3",
-          "lab": "ghent_de_kimpe",
-          "y": 0.2256500384965052,
-          "v": 0.006269669725654502,
-          "range": [
-            0.2,
-            0.4
-          ],
-          "non_monotone": false,
-          "pairs": null,
-          "focal": false,
-          "peak_area": true
+        "without_peak_areas": {
+          "contrasts": 0
         },
-        {
-          "source": "vanlancker2010",
-          "contrast": "vanlancker2010-53",
-          "lab": "ghent_de_kimpe",
-          "y": 0.034762106259212056,
-          "v": 0.006269669725654502,
-          "range": [
-            0.2,
-            0.4
-          ],
-          "non_monotone": false,
-          "pairs": null,
-          "focal": false,
-          "peak_area": true
+        "incidental_only": {
+          "contrasts": 0
         },
-        {
-          "source": "vanlancker2010",
-          "contrast": "vanlancker2010-88",
-          "lab": "ghent_de_kimpe",
-          "y": 0.0,
-          "v": 0.006269669725654502,
-          "range": [
-            0.2,
-            0.4
-          ],
-          "non_monotone": false,
-          "pairs": null,
-          "focal": false,
-          "peak_area": true
-        },
+        "non_monotone_contrasts": 3
+      },
+      "reading": "too few laboratories",
+      "lolo": null
+    },
+    {
+      "compound": "2-Methylpyrazine",
+      "lever_class": "precursor dose",
+      "band": "sulfur donor varied",
+      "contrasts": 2,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "ho_network"
+      ],
+      "peak_area_share": 0.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "water"
+      ],
+      "temperature_range_C": [
+        120.0,
+        120.0
+      ],
+      "rows": [
         {
           "source": "zhou2022",
           "contrast": "zhou2022-7",
@@ -15256,36 +15591,36 @@
       ],
       "step": "a doubling of dose",
       "fit": {
-        "estimate": 0.16657152030482156,
+        "estimate": 0.297026370369314,
         "ci90": [
-          -0.21162034420547343,
-          0.5902945289484524
+          -0.5833464346351753,
+          1.1339003063543214
         ],
         "new_lab_pi90": [
-          -0.5796689651841934,
-          0.9512588246751535
+          -1.019565229915862,
+          1.5683794220194875
         ],
-        "p_same_sign_new_lab": 0.6868415212837586,
-        "new_lab_pi90_width": 1.530927789859347,
+        "p_same_sign_new_lab": 0.7108601541602866,
+        "new_lab_pi90_width": 2.5879446519353495,
         "tau_study_fitted": false,
         "reml_scales": [
-          0.0473781964106776,
-          0.18883946770417823
+          0.0,
+          0.06694329500821695
         ],
         "prior_dominated": true,
         "sensitivity": {
           "0.25": {
-            "estimate": 0.16313173008051077,
+            "estimate": 0.3067369690119719,
             "new_lab_pi90": [
-              -0.3667387864574912,
-              0.7198798990339126
+              -0.3968872410077334,
+              0.9780020150344176
             ]
           },
           "1.0": {
-            "estimate": 0.16840308156487965,
+            "estimate": 0.2839103619895714,
             "new_lab_pi90": [
-              -0.9767131481938427,
-              1.3503687565065658
+              -2.1298915029410774,
+              2.608566871390186
             ]
           }
         },
@@ -15298,14 +15633,9 @@
           ]
         },
         "incidental_only": {
-          "contrasts": 3,
-          "estimate": 0.08575353367032172,
-          "ci90": [
-            -0.7180294134230892,
-            0.882687289772722
-          ]
+          "contrasts": 0
         },
-        "non_monotone_contrasts": 3
+        "non_monotone_contrasts": 0
       },
       "reading": "too few laboratories",
       "lolo": null
@@ -19183,7 +19513,7 @@
     {
       "compound": "Benzaldehyde",
       "lever_class": "precursor dose",
-      "band": "all",
+      "band": "lipid oxidation product varied",
       "contrasts": 2,
       "studies": 1,
       "labs": 1,
@@ -20454,7 +20784,7 @@
     {
       "compound": "Bis(2-methyl-3-furyl) disulfide",
       "lever_class": "precursor dose",
-      "band": "all",
+      "band": "sulfur donor varied",
       "contrasts": 2,
       "studies": 1,
       "labs": 1,
@@ -21438,7 +21768,7 @@
     {
       "compound": "DMHF",
       "lever_class": "precursor dose",
-      "band": "all",
+      "band": "amino acid varied",
       "contrasts": 2,
       "studies": 1,
       "labs": 1,
@@ -23544,7 +23874,7 @@
     {
       "compound": "HEMF",
       "lever_class": "precursor dose",
-      "band": "all",
+      "band": "amino acid varied",
       "contrasts": 2,
       "studies": 1,
       "labs": 1,
@@ -24484,7 +24814,7 @@
     {
       "compound": "Hexanal",
       "lever_class": "precursor dose",
-      "band": "all",
+      "band": "lipid oxidation product varied",
       "contrasts": 1,
       "studies": 1,
       "labs": 1,
@@ -24974,7 +25304,7 @@
     {
       "compound": "Hydrogen Sulfide",
       "lever_class": "precursor dose",
-      "band": "all",
+      "band": "sugar varied",
       "contrasts": 1,
       "studies": 1,
       "labs": 1,
@@ -30117,15 +30447,15 @@
     {
       "compound": "Phenylacetaldehyde",
       "lever_class": "precursor dose",
-      "band": "all",
-      "contrasts": 14,
-      "studies": 6,
+      "band": "lipid oxidation product varied",
+      "contrasts": 12,
+      "studies": 5,
       "labs": 1,
       "lab_names": [
         "seville_hidalgo_zamora"
       ],
       "peak_area_share": 0.0,
-      "focal_share": 0.5714285714285714,
+      "focal_share": 0.5,
       "matrices": [
         "buffer",
         "other (600 mg sand + 30 uL 0.3 M buffer + 80 uL water)",
@@ -30136,36 +30466,6 @@
         180.0
       ],
       "rows": [
-        {
-          "source": "hidalgo2013",
-          "contrast": "hidalgo2013-6",
-          "lab": "seville_hidalgo_zamora",
-          "y": 0.26520699337473824,
-          "v": 0.0024970067165333465,
-          "range": [
-            5.0,
-            20.0
-          ],
-          "non_monotone": false,
-          "pairs": null,
-          "focal": true,
-          "peak_area": false
-        },
-        {
-          "source": "hidalgo2013",
-          "contrast": "hidalgo2013-7",
-          "lab": "seville_hidalgo_zamora",
-          "y": 0.32033862359181736,
-          "v": 0.0024970067165333465,
-          "range": [
-            5.0,
-            20.0
-          ],
-          "non_monotone": false,
-          "pairs": null,
-          "focal": true,
-          "peak_area": false
-        },
         {
           "source": "zamora2006",
           "contrast": "zamora2006-4",
@@ -30349,17 +30649,17 @@
       ],
       "step": "a doubling of dose",
       "fit": {
-        "estimate": 0.19438173467605493,
+        "estimate": 0.18108292259290817,
         "ci90": [
-          -0.5786559621680536,
-          0.9503608094767586
+          -0.5914674852399303,
+          0.9376770273619959
         ],
         "new_lab_pi90": [
-          -0.9159907732419782,
-          1.2877762930946048
+          -0.9285739915891521,
+          1.274805209477089
         ],
-        "p_same_sign_new_lab": 0.7057683026338482,
-        "new_lab_pi90_width": 2.203767066336583,
+        "p_same_sign_new_lab": 0.6963694578019806,
+        "new_lab_pi90_width": 2.203379201066241,
         "tau_study_fitted": false,
         "reml_scales": [
           0.0,
@@ -30368,26 +30668,26 @@
         "prior_dominated": true,
         "sensitivity": {
           "0.25": {
-            "estimate": 0.19522138672637435,
+            "estimate": 0.1818991090031828,
             "new_lab_pi90": [
-              -0.37653081092370755,
-              0.7627342815143513
+              -0.38940618480773115,
+              0.7492468645496477
             ]
           },
           "1.0": {
-            "estimate": 0.19181724822543744,
+            "estimate": 0.17866301546610316,
             "new_lab_pi90": [
-              -1.9008711883942977,
-              2.230687107927788
+              -1.9120238728459285,
+              2.219231574904059
             ]
           }
         },
         "without_peak_areas": {
-          "contrasts": 14,
-          "estimate": 0.19438173467605493,
+          "contrasts": 12,
+          "estimate": 0.18108292259290817,
           "ci90": [
-            -0.5786559621680536,
-            0.9503608094767586
+            -0.5914674852399303,
+            0.9376770273619959
           ]
         },
         "incidental_only": {
@@ -30399,6 +30699,108 @@
           ]
         },
         "non_monotone_contrasts": 4
+      },
+      "reading": "too few laboratories",
+      "lolo": null
+    },
+    {
+      "compound": "Phenylacetaldehyde",
+      "lever_class": "precursor dose",
+      "band": "other precursor varied",
+      "contrasts": 2,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "seville_hidalgo_zamora"
+      ],
+      "peak_area_share": 0.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "buffer"
+      ],
+      "temperature_range_C": [
+        37.0,
+        100.0
+      ],
+      "rows": [
+        {
+          "source": "hidalgo2013",
+          "contrast": "hidalgo2013-6",
+          "lab": "seville_hidalgo_zamora",
+          "y": 0.26520699337473824,
+          "v": 0.0024970067165333465,
+          "range": [
+            5.0,
+            20.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": false
+        },
+        {
+          "source": "hidalgo2013",
+          "contrast": "hidalgo2013-7",
+          "lab": "seville_hidalgo_zamora",
+          "y": 0.32033862359181736,
+          "v": 0.0024970067165333465,
+          "range": [
+            5.0,
+            20.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": false
+        }
+      ],
+      "step": "a doubling of dose",
+      "fit": {
+        "estimate": 0.28913449397127794,
+        "ci90": [
+          -0.5565524804413645,
+          1.1105014307950065
+        ],
+        "new_lab_pi90": [
+          -0.9662735866327087,
+          1.5204302370228029
+        ],
+        "p_same_sign_new_lab": 0.7247272961888874,
+        "new_lab_pi90_width": 2.4867038236555117,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.0
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": 0.29161173690137354,
+            "new_lab_pi90": [
+              -0.36159887243177186,
+              0.9385081064267499
+            ]
+          },
+          "1.0": {
+            "estimate": 0.2818838834835897,
+            "new_lab_pi90": [
+              -2.0568920914570885,
+              2.5457599156123387
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 2,
+          "estimate": 0.28913449397127794,
+          "ci90": [
+            -0.5565524804413645,
+            1.1105014307950065
+          ]
+        },
+        "incidental_only": {
+          "contrasts": 0
+        },
+        "non_monotone_contrasts": 0
       },
       "reading": "too few laboratories",
       "lolo": null
@@ -33211,7 +33613,7 @@
     {
       "compound": "Pyrazines",
       "lever_class": "precursor dose",
-      "band": "all",
+      "band": "amino acid varied",
       "contrasts": 3,
       "studies": 1,
       "labs": 1,
@@ -35404,7 +35806,7 @@
     {
       "compound": "Trimethylpyrazine",
       "lever_class": "precursor dose",
-      "band": "all",
+      "band": "amino acid varied",
       "contrasts": 2,
       "studies": 1,
       "labs": 1,
@@ -36800,21 +37202,20 @@
     {
       "compound": "Unsubstituted pyrazine",
       "lever_class": "precursor dose",
-      "band": "all",
-      "contrasts": 4,
-      "studies": 2,
-      "labs": 2,
+      "band": "amino acid varied",
+      "contrasts": 2,
+      "studies": 1,
+      "labs": 1,
       "lab_names": [
-        "ghent_de_kimpe",
-        "ho_network"
+        "ghent_de_kimpe"
       ],
-      "peak_area_share": 0.5,
-      "focal_share": 0.5,
+      "peak_area_share": 1.0,
+      "focal_share": 0.0,
       "matrices": [
         "water"
       ],
       "temperature_range_C": [
-        120.0,
+        130.0,
         130.0
       ],
       "rows": [
@@ -36847,7 +37248,79 @@
           "pairs": null,
           "focal": false,
           "peak_area": true
+        }
+      ],
+      "step": "a doubling of dose",
+      "fit": {
+        "estimate": 0.06428210162898504,
+        "ci90": [
+          -0.8586714149536775,
+          0.9823983432005795
+        ],
+        "new_lab_pi90": [
+          -1.3609163163532148,
+          1.484724015940812
+        ],
+        "p_same_sign_new_lab": 0.5430184495291123,
+        "new_lab_pi90_width": 2.8456403322940265,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.2244693495128745
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": 0.06519729334927256,
+            "new_lab_pi90": [
+              -0.7299523872894228,
+              0.8591005398047273
+            ]
+          },
+          "1.0": {
+            "estimate": 0.06182476498974638,
+            "new_lab_pi90": [
+              -2.4708909808010224,
+              2.5796872372882786
+            ]
+          }
         },
+        "without_peak_areas": {
+          "contrasts": 0
+        },
+        "incidental_only": {
+          "contrasts": 2,
+          "estimate": 0.06428210162898504,
+          "ci90": [
+            -0.8586714149536775,
+            0.9823983432005795
+          ]
+        },
+        "non_monotone_contrasts": 0
+      },
+      "reading": "too few laboratories",
+      "lolo": null
+    },
+    {
+      "compound": "Unsubstituted pyrazine",
+      "lever_class": "precursor dose",
+      "band": "sulfur donor varied",
+      "contrasts": 2,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "ho_network"
+      ],
+      "peak_area_share": 0.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "water"
+      ],
+      "temperature_range_C": [
+        120.0,
+        120.0
+      ],
+      "rows": [
         {
           "source": "zhou2022",
           "contrast": "zhou2022-1",
@@ -36881,36 +37354,36 @@
       ],
       "step": "a doubling of dose",
       "fit": {
-        "estimate": 0.38595286143228447,
+        "estimate": 0.6939356197515626,
         "ci90": [
-          -0.27082766685116755,
-          1.0302565789496645
+          -0.26893114218726766,
+          1.6116145480475554
         ],
         "new_lab_pi90": [
-          -0.8657247981080308,
-          1.6259949530629267
+          -0.7927498981602594,
+          2.137030322723156
         ],
-        "p_same_sign_new_lab": 0.7260540215312116,
-        "new_lab_pi90_width": 2.4917197511709577,
+        "p_same_sign_new_lab": 0.8228301957343784,
+        "new_lab_pi90_width": 2.9297802208834156,
         "tau_study_fitted": false,
         "reml_scales": [
-          0.37700741270170407,
+          0.0,
           0.26682181158053636
         ],
         "prior_dominated": true,
         "sensitivity": {
           "0.25": {
-            "estimate": 0.38891633184938124,
+            "estimate": 0.7009517235672081,
             "new_lab_pi90": [
-              -0.45021323223866605,
-              1.2239728412151274
+              -0.1344061756051396,
+              1.5325456094852803
             ]
           },
           "1.0": {
-            "estimate": 0.3808519113839692,
+            "estimate": 0.6675344344530346,
             "new_lab_pi90": [
-              -1.5150827298782745,
-              2.2410533125397736
+              -1.9851466998847185,
+              3.1672411137745704
             ]
           }
         },
@@ -36923,12 +37396,7 @@
           ]
         },
         "incidental_only": {
-          "contrasts": 2,
-          "estimate": 0.06428210162898504,
-          "ci90": [
-            -0.8586714149536775,
-            0.9823983432005795
-          ]
+          "contrasts": 0
         },
         "non_monotone_contrasts": 0
       },
@@ -37212,9 +37680,9 @@
     "artifact": "lever_table_development_only",
     "generated_on": "2026-11-12",
     "git": {
-      "commit": "a30be9ad43239adc16342aae703a271e1259fbf2",
-      "short": "a30be9ad",
-      "branch": "new-lab-keying",
+      "commit": "d363216ab3433f191e6b1e04b379387f0261f4d4",
+      "short": "d363216a",
+      "branch": "disagreement-audit",
       "dirty": true
     },
     "generated_by": "scripts/generators/build_lever_table.py",
