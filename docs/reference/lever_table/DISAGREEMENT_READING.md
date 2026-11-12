@@ -29,10 +29,17 @@ between laboratories by up to about 2 dex.
 | benzaldehyde x sugar identity (xylose vs glucose) | chen2023lycium against theng2024 (A*STAR; nutritional yeast) | **Not a real conflict.** Both laboratories' own tests find no difference between the two sugars; in theng2024 benzaldehyde is present before heating. chen2023lycium prints nearly the same retention index for hexanal and benzaldehyde (872, 873), where standard values on that column differ by about 160 units, so at least one identification is in doubt (the reader's comparison, not the paper's) | medium - high |
 | trimethylpyrazine x amino acid identity (none vs arginine) | hwang1995 (Ho network) against park2022mealworm (Wonkwang) | **The "none" arm is not the same pot.** In hwang1995 "none" still holds glucose + glycine; in park2022mealworm it is protein + xylose with no free amino acid, and every added amino acid raises pyrazines over that base. park2022mealworm also added basic arginine with no reported pH correction, and extracted by 2 h of simultaneous distillation-extraction with sugar and amino acid still present, which runs the Maillard reaction during the extraction (Chaintreau 2001) | medium - high |
 
-**Added after this reading (same day).** Keying seven more papers raised the audit to 9 conflict cells. The two new
-ones, 2-methylpyrazine and nonanal against cysteine dose (ho_network and nus_liu_shaoquan against ding2023, a fish
-protein hydrolysate), were not read against the method papers. Cysteine is known to divert carbonyls from pyrazines
-and lipid aldehydes in some matrices and not others; that is a hypothesis, not a reading.
+**The two cells added the same day** (cysteine dose x a non-thiol; [reading note](disagreement_reading/method_read_cysteine_dose.md)):
+
+| cell | the two laboratories | best-supported explanation | confidence |
+|---|---|---|---|
+| 2-methylpyrazine x cysteine dose | ding2023 (ZJUT; fish hydrolysate + xylose + glycine) -0.43 against zhou2022 (Ho network; Amadori product, no free amine) +0.20, +0.35 | **Opposite sides of one rise-then-fall curve.** ding2023 rises from 0 to 0.5 % cysteine and falls above it (Table 2); the keyed slope is the falling half, where cysteine is 2.5 - 5 times the xylose (mol/mol) and takes the dicarbonyls that would make pyrazines. zhou2022 stays at or below one cysteine per sugar, in a system with no other nitrogen, where cysteine is the nitrogen donor (Table 3) | medium - high (mechanism: medium) |
+| nonanal x cysteine dose | ding2023 +0.22 against li2022heat (NUS; pork-trimming hydrolysate) -0.13 to -0.44 | **Mostly different segments of non-monotone ladders.** ding2023 falls at its top step and li2022heat's hydrolysate rises from 0 to 0.5 %; over a matched dose range what remains is li2022heat's fatty non-enzymatic extract falling at every dose against ding2023's lean fish rising. Fibre competition pushes both the same way, so it cannot flip the sign; formation against thiol-aldehyde trapping is not settled | medium (mechanism: low) |
+
+Both point to the same generator choice: `numeric_observation` keeps only the **longest monotone run** of a ladder
+and drops a zero-dose arm (no log of zero). PREREG sec. 4 says a non-monotone ladder's monotone pieces "enter their
+own bands"; for dose there are no bands, so the other pieces are silently lost, and which piece survives decides the
+sign. The keying itself was checked against the three papers: no transcription error.
 
 ## What this changes
 
@@ -49,6 +56,11 @@ and lipid aldehydes in some matrices and not others; that is a hypothesis, not a
    after heating, and the base mixture of the reference arm.
 4. **Method, not chemistry, sets the floor on absolute levels:** about 0.1 - 0.25 dex between laboratories even
    under a harmonised protocol, more without one. For ratios the method cancels unless recovery moves with the lever.
+
+5. **Non-monotone dose ladders need their pieces kept.** Cysteine both feeds and starves a pathway depending on how
+   much there is relative to the sugar; a slope over the longest monotone run discards that. Proposed (backlog):
+   keep every monotone piece of a dose ladder as its own contrast, banded by the dose relative to the sugar
+   (sulfur donor : sugar below or above about 1 mol/mol), scored beside the current table.
 
 ## Limits
 
