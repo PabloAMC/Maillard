@@ -35,7 +35,7 @@ table below is the record of how each step went.
   public pages say what the tool can do today and show the path: four milestones (lever directions; the engine beats
   the lever table on held-out contrasts; ratios within 3x after calibration pots; absolute levels within 3x in a new
   matrix), in [README.md](../../README.md) and [EXPERIMENTS_BRIEF.md](EXPERIMENTS_BRIEF.md) (rewritten, PR #127).
-- **Lever table:** 67 sources, 1,571 contrasts, 29 laboratories; **4 of 75** map cells answered, 71 need an
+- **Lever table:** 70 sources, 1,643 contrasts, 31 laboratories; **4 of 75** map cells answered, 71 need an
   experiment. 52 detailed cells now have TEST contrasts from two laboratories (none had before the 2026-11-12
   keying), one of them a thiol cell the engine has not been scored on.
 - **Outside data: plan for none.** No laboratory is expected to run new experiments for this project in the short or
