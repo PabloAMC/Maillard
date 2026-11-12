@@ -38,6 +38,7 @@ from __future__ import annotations
 
 import json
 import math
+import os
 import subprocess
 import sys
 from dataclasses import dataclass
@@ -203,6 +204,22 @@ def collect_core_envelope() -> Dict[str, Any]:
     }
 
 
+#: 2026-11-12: set by ``scripts/ci/artifact_freshness_gate.py`` for its ``--check`` runners: a JSON file holding the
+#: ``score_panel()`` payload the gate itself just computed live in this checkout (not the tracked file, which matches
+#: it only within the gate's float tolerance). The card reads it instead of scoring the panel a second time; the run
+#: is deterministic, so the card is the same, and the gate saves one full panel (3.6 - 9 min on CI runners).
+LIVE_CORE_PANEL_ENV = "MAILLARD_LIVE_CORE_PANEL_JSON"
+
+
+def _live_core_panel() -> Dict[str, Any]:
+    path = os.environ.get(LIVE_CORE_PANEL_ENV)
+    if path:
+        return json.loads(Path(path).read_text(encoding="utf-8"))
+    from src.kinetic_core.scoring import score_panel
+
+    return score_panel()
+
+
 def collect_core_panel() -> Dict[str, Any]:
     """The kinetic core scored on the union panel (retirement step B3), recomputed live.
 
@@ -210,9 +227,7 @@ def collect_core_panel() -> Dict[str, Any]:
     15 s) for the same reason ``collect_benchmark_panel`` does: a number the card prints must
     be one the card can stand behind on a fresh clone.
     """
-    from src.kinetic_core.scoring import score_panel
-
-    payload = score_panel()
+    payload = _live_core_panel()
     s = payload["summary"]
     return {
         "available": True,

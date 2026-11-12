@@ -24,10 +24,13 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
+import platform
 import re
 import subprocess
 import sys
 import tempfile
+import time
 from pathlib import Path
 from typing import Callable, Dict, List
 
@@ -36,6 +39,28 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from src import data_access, data_paths, provenance  # noqa: E402
+
+
+def _say(line: str) -> None:
+    """One progress line, flushed at once. 2026-11-12: without the flush, CI's pipe block-buffers stdout, so every line
+    after the core panel's reached the log at the gate's exit, and the log read as if the directional scorecard alone
+    took the whole tail (97 min on a slow runner) when it also covered the fit targets, the ranking and the --check
+    runners."""
+    print(line, flush=True)
+
+
+def _machine() -> str:
+    """The runner's CPU model and count: the gate's wall time scales with them (3.6 vs 9 min for the same core panel on
+    two GitHub-hosted ubuntu runners, 2026-11-11/12), so the log must say which machine it ran on."""
+    model = platform.processor() or platform.machine()
+    try:
+        for line in Path("/proc/cpuinfo").read_text().splitlines():
+            if line.startswith("model name"):
+                model = line.split(":", 1)[1].strip()
+                break
+    except OSError:
+        pass
+    return (f"  [machine] {model}; {os.cpu_count()} CPUs; MAILLARD_WORKERS={os.environ.get('MAILLARD_WORKERS', 'unset')}")
 
 CHECK_RUNNERS = (
     "scripts/generators/build_wave_manifest.py",
@@ -100,6 +125,12 @@ REGENERATE: Dict[str, Callable[[], Dict]] = {
 }
 
 
+#: the live payloads ``check_regenerate`` computed, by artifact path; ``check_runners`` hands the core panel's to the
+#: model card (``src.model_card.LIVE_CORE_PANEL_ENV``) so the card does not score the panel a second time
+LIVE: Dict[str, Dict] = {}
+CORE_PANEL = "results/validation/core_panel_scores.json"
+
+
 def check_regenerate(failures: List[str]) -> None:
     for relative, live_fn in REGENERATE.items():
         tracked_path = ROOT / relative
@@ -107,29 +138,49 @@ def check_regenerate(failures: List[str]) -> None:
             failures.append(f"{relative}: tracked artifact missing")
             continue
         tracked = data_access.load_json(tracked_path)
+        start = time.monotonic()
         try:
             live = live_fn()
         except Exception as exc:  # noqa: BLE001 - report, then keep checking the rest
             failures.append(f"{relative}: regeneration failed: {exc}")
+            _say(f"  [regenerate] {relative}: FAILED ({time.monotonic() - start:.0f} s)")
             continue
+        LIVE[relative] = live
         diffs = provenance.payload_differences(tracked, live)
         if diffs:
             failures.append(f"{relative}: tracked != regenerated:\n      " + "\n      ".join(diffs))
+            _say(f"  [regenerate] {relative}: DIFFERS ({time.monotonic() - start:.0f} s)")
         else:
-            print(f"  [regenerate] {relative}: matches")
+            _say(f"  [regenerate] {relative}: matches ({time.monotonic() - start:.0f} s)")
 
 
 def check_runners(failures: List[str]) -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        env = dict(os.environ)
+        if CORE_PANEL in LIVE:
+            from src.model_card import LIVE_CORE_PANEL_ENV
+
+            panel = Path(tmp) / "core_panel_scores.live.json"
+            panel.write_text(json.dumps(LIVE[CORE_PANEL]), encoding="utf-8")
+            env[LIVE_CORE_PANEL_ENV] = str(panel)
+        _run_checks(failures, env)
+
+
+def _run_checks(failures: List[str], env: Dict[str, str]) -> None:
     for relative in CHECK_RUNNERS:
+        start = time.monotonic()
         proc = subprocess.run(
             # 2026-11-07: 1800 s, not 600: the model card's --check re-scores the panel live, and since the S3 refusal
-            # every balance-solved row also runs the carried pH-balance rivals (~10 min serial)
-            [sys.executable, relative, "--check"], cwd=str(ROOT), capture_output=True, text=True, timeout=1800
+            # every balance-solved row also runs the carried pH-balance rivals (~10 min serial). 2026-11-12: unless the
+            # gate scored it already this run (``LIVE``), in which case the card reads that payload.
+            [sys.executable, relative, "--check"], cwd=str(ROOT), capture_output=True, text=True, timeout=1800,
+            env=env,
         )
         if proc.returncode != 0:
             failures.append(f"{relative} --check: " + (proc.stderr.strip() or proc.stdout.strip())[-500:])
+            _say(f"  [check] {relative}: FAILED ({time.monotonic() - start:.0f} s)")
         else:
-            print(f"  [check] {relative}: current")
+            _say(f"  [check] {relative}: current ({time.monotonic() - start:.0f} s)")
 
 
 #: 2026-10-29 (owner: "Yes, exempt them"). A wave's record -- its ship rule, fit report, verification, identifiability
@@ -206,6 +257,7 @@ def main(argv=None) -> int:
     parser.add_argument("--skip-regenerate", action="store_true", help="skip check 1 (about a minute)")
     args = parser.parse_args(argv)
     failures: List[str] = []
+    _say(_machine())
     if not args.skip_regenerate:
         check_regenerate(failures)
     check_runners(failures)
