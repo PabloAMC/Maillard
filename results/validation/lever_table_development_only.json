@@ -4,21 +4,22 @@
   "prereg": "docs/reference/lever_table/PREREG.md",
   "split": {
     "split_sha256": "022d0cab5a53ececb27a1fc6837ff275fbab177cf2161ae1f8a4ed0341f273a7",
-    "new_labs": 17
+    "new_labs": 24
   },
   "skipped": {
     "mixed-lever contrasts (no single-lever cell)": 191,
-    "fewer than two usable arms": 555,
-    "odorants outside the declared lists (PREREG amendment A3)": 511,
-    "second peaks of one compound in the same pots (one row enters the cell)": 13,
-    "shares of a total (PREREG amendment A1)": 161,
-    "sugar-identity contrasts whose levels are not sugars (fed intermediates)": 14,
+    "fewer than two usable arms": 577,
+    "rows the source appears to have misprinted (kept, enter no cell)": 6,
+    "odorants outside the declared lists (PREREG amendment A3)": 596,
+    "second peaks of one compound in the same pots (one row enters the cell)": 14,
+    "sugar-identity contrasts whose levels are not sugars (fed intermediates)": 15,
+    "shares of a total (PREREG amendment A1)": 163,
     "flavour-dilution factors, an odour potency not an amount (PREREG amendment A1)": 3,
     "rates, half-lives or storage losses (PREREG amendment A1)": 148
   },
   "counts": {
-    "sources": 48,
-    "observations": 813,
+    "sources": 49,
+    "observations": 868,
     "labs": 15
   },
   "cells": [
@@ -2298,6 +2299,118 @@
     },
     {
       "compound": "2,3-Dimethylpyrazine",
+      "lever_class": "pH",
+      "band": "pH 6-7.5, final",
+      "contrasts": 3,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "reading_mottram_parker"
+      ],
+      "peak_area_share": 1.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "other (glycine/glucose/wheat starch extrudate)"
+      ],
+      "temperature_range_C": [
+        120.0,
+        180.0
+      ],
+      "rows": [
+        {
+          "source": "ames2001b",
+          "contrast": "ames2001b-47",
+          "lab": "reading_mottram_parker",
+          "y": -0.07952857338002589,
+          "v": 0.0018659731326352669,
+          "range": [
+            5.6,
+            7.4
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true
+        },
+        {
+          "source": "ames2001b",
+          "contrast": "ames2001b-48",
+          "lab": "reading_mottram_parker",
+          "y": 0.21706512664373953,
+          "v": 0.004353937309482292,
+          "range": [
+            5.6,
+            6.8
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true
+        },
+        {
+          "source": "ames2001b",
+          "contrast": "ames2001b-49",
+          "lab": "reading_mottram_parker",
+          "y": 0.07825375239027597,
+          "v": 0.004353937309482292,
+          "range": [
+            5.6,
+            6.8
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true
+        }
+      ],
+      "step": "+1 pH unit",
+      "fit": {
+        "estimate": 0.06551657265415071,
+        "ci90": [
+          -0.7499067557806585,
+          0.8787506817597136
+        ],
+        "new_lab_pi90": [
+          -1.1772309513849233,
+          1.3068699415187095
+        ],
+        "p_same_sign_new_lab": 0.5554670844126359,
+        "new_lab_pi90_width": 2.4841008929036326,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.13364853627055825
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": 0.06471939465670865,
+            "new_lab_pi90": [
+              -0.6268978541728464,
+              0.7599354202792438
+            ]
+          },
+          "1.0": {
+            "estimate": 0.06463659543402114,
+            "new_lab_pi90": [
+              -2.1587588452089466,
+              2.2744556129678695
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 0
+        },
+        "incidental_only": {
+          "contrasts": 0
+        },
+        "non_monotone_contrasts": 2
+      },
+      "reading": "too few laboratories",
+      "lolo": null
+    },
+    {
+      "compound": "2,3-Dimethylpyrazine",
       "lever_class": "precursor dose",
       "band": "amino acid varied",
       "contrasts": 2,
@@ -2507,6 +2620,118 @@
           "contrasts": 0
         },
         "non_monotone_contrasts": 3
+      },
+      "reading": "too few laboratories",
+      "lolo": null
+    },
+    {
+      "compound": "2,3-Dimethylpyrazine",
+      "lever_class": "temperature",
+      "band": "time <30 min",
+      "contrasts": 3,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "reading_mottram_parker"
+      ],
+      "peak_area_share": 1.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "other (glycine/glucose/wheat starch extrudate)"
+      ],
+      "temperature_range_C": [
+        120.0,
+        180.0
+      ],
+      "rows": [
+        {
+          "source": "ames2001b",
+          "contrast": "ames2001b-44",
+          "lab": "reading_mottram_parker",
+          "y": 0.43239875839590447,
+          "v": 0.00017415749237929172,
+          "range": [
+            120.0,
+            180.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true
+        },
+        {
+          "source": "ames2001b",
+          "contrast": "ames2001b-45",
+          "lab": "reading_mottram_parker",
+          "y": 0.17868107154717072,
+          "v": 0.00017415749237929172,
+          "range": [
+            120.0,
+            180.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true
+        },
+        {
+          "source": "ames2001b",
+          "contrast": "ames2001b-46",
+          "lab": "reading_mottram_parker",
+          "y": 0.21206697194831517,
+          "v": 0.00017415749237929172,
+          "range": [
+            120.0,
+            180.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true
+        }
+      ],
+      "step": "+10 C",
+      "fit": {
+        "estimate": 0.2706848773807552,
+        "ci90": [
+          -0.5519365664135856,
+          1.0722253982214
+        ],
+        "new_lab_pi90": [
+          -0.9778208992632973,
+          1.4988928162455493
+        ],
+        "p_same_sign_new_lab": 0.7010693117430546,
+        "new_lab_pi90_width": 2.4767137155088466,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.13364853627055825
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": 0.2730740169966057,
+            "new_lab_pi90": [
+              -0.4218909770439396,
+              0.9630497593432762
+            ]
+          },
+          "1.0": {
+            "estimate": 0.2642967486846131,
+            "new_lab_pi90": [
+              -1.9805406629367721,
+              2.4432436472264927
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 0
+        },
+        "incidental_only": {
+          "contrasts": 0
+        },
+        "non_monotone_contrasts": 0
       },
       "reading": "too few laboratories",
       "lolo": null
@@ -7677,6 +7902,118 @@
     },
     {
       "compound": "2-Ethylpyrazine",
+      "lever_class": "pH",
+      "band": "pH 6-7.5, final",
+      "contrasts": 3,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "reading_mottram_parker"
+      ],
+      "peak_area_share": 1.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "other (glycine/glucose/wheat starch extrudate)"
+      ],
+      "temperature_range_C": [
+        120.0,
+        180.0
+      ],
+      "rows": [
+        {
+          "source": "ames2001b",
+          "contrast": "ames2001b-41",
+          "lab": "reading_mottram_parker",
+          "y": 0.6685752475787479,
+          "v": 0.01741574923792914,
+          "range": [
+            6.8,
+            7.4
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true
+        },
+        {
+          "source": "ames2001b",
+          "contrast": "ames2001b-42",
+          "lab": "reading_mottram_parker",
+          "y": 0.09495279358903058,
+          "v": 0.004353937309482292,
+          "range": [
+            5.6,
+            6.8
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true
+        },
+        {
+          "source": "ames2001b",
+          "contrast": "ames2001b-43",
+          "lab": "reading_mottram_parker",
+          "y": -0.10384866146366349,
+          "v": 0.0018659731326352669,
+          "range": [
+            5.6,
+            7.4
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true
+        }
+      ],
+      "step": "+1 pH unit",
+      "fit": {
+        "estimate": 0.19721871284447715,
+        "ci90": [
+          -0.6986269605500964,
+          1.0896038949355422
+        ],
+        "new_lab_pi90": [
+          -1.2597546192845188,
+          1.6537192405850676
+        ],
+        "p_same_sign_new_lab": 0.6125509595989813,
+        "new_lab_pi90_width": 2.9134738598695864,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.37700741270170407
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": 0.19176694856735244,
+            "new_lab_pi90": [
+              -0.6756981519588323,
+              1.0719492722005277
+            ]
+          },
+          "1.0": {
+            "estimate": 0.19439528577253953,
+            "new_lab_pi90": [
+              -2.2795103053441554,
+              2.6345359852187715
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 0
+        },
+        "incidental_only": {
+          "contrasts": 0
+        },
+        "non_monotone_contrasts": 1
+      },
+      "reading": "too few laboratories",
+      "lolo": null
+    },
+    {
+      "compound": "2-Ethylpyrazine",
       "lever_class": "precursor dose",
       "band": "sugar varied",
       "contrasts": 2,
@@ -7768,6 +8105,118 @@
           "contrasts": 0
         },
         "non_monotone_contrasts": 2
+      },
+      "reading": "too few laboratories",
+      "lolo": null
+    },
+    {
+      "compound": "2-Ethylpyrazine",
+      "lever_class": "temperature",
+      "band": "time <30 min",
+      "contrasts": 3,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "reading_mottram_parker"
+      ],
+      "peak_area_share": 1.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "other (glycine/glucose/wheat starch extrudate)"
+      ],
+      "temperature_range_C": [
+        120.0,
+        180.0
+      ],
+      "rows": [
+        {
+          "source": "ames2001b",
+          "contrast": "ames2001b-38",
+          "lab": "reading_mottram_parker",
+          "y": 0.1645684787819966,
+          "v": 0.00017415749237929172,
+          "range": [
+            120.0,
+            180.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true
+        },
+        {
+          "source": "ames2001b",
+          "contrast": "ames2001b-39",
+          "lab": "reading_mottram_parker",
+          "y": 0.28622361573451016,
+          "v": 0.0006966299695171669,
+          "range": [
+            120.0,
+            150.0
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true
+        },
+        {
+          "source": "ames2001b",
+          "contrast": "ames2001b-40",
+          "lab": "reading_mottram_parker",
+          "y": 0.21919243972593122,
+          "v": 0.0006966299695171669,
+          "range": [
+            120.0,
+            150.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true
+        }
+      ],
+      "step": "+10 C",
+      "fit": {
+        "estimate": 0.21893205845260258,
+        "ci90": [
+          -0.5745297604508525,
+          0.9951781572031629
+        ],
+        "new_lab_pi90": [
+          -0.9478633415151546,
+          1.3689268703386108
+        ],
+        "p_same_sign_new_lab": 0.6998572473519804,
+        "new_lab_pi90_width": 2.3167902118537653,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.05631742695895507
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": 0.22007353436249733,
+            "new_lab_pi90": [
+              -0.3989167721542639,
+              0.8361184089541815
+            ]
+          },
+          "1.0": {
+            "estimate": 0.21506059988934528,
+            "new_lab_pi90": [
+              -1.9408493476104642,
+              2.3146900402849067
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 0
+        },
+        "incidental_only": {
+          "contrasts": 0
+        },
+        "non_monotone_contrasts": 1
       },
       "reading": "too few laboratories",
       "lolo": null
@@ -8218,6 +8667,170 @@
           "contrasts": 0
         },
         "non_monotone_contrasts": 3
+      },
+      "reading": "too few laboratories",
+      "lolo": null
+    },
+    {
+      "compound": "2-Furanmethanol",
+      "lever_class": "pH",
+      "band": "pH 6-7.5, final",
+      "contrasts": 1,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "reading_mottram_parker"
+      ],
+      "peak_area_share": 1.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "other (glycine/glucose/wheat starch extrudate)"
+      ],
+      "temperature_range_C": [
+        180.0,
+        180.0
+      ],
+      "rows": [
+        {
+          "source": "ames2001b",
+          "contrast": "ames2001b-10",
+          "lab": "reading_mottram_parker",
+          "y": 0.6972883047079088,
+          "v": 0.004353937309482292,
+          "range": [
+            5.6,
+            6.8
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true
+        }
+      ],
+      "step": "+1 pH unit",
+      "fit": {
+        "estimate": 0.6776147147761974,
+        "ci90": [
+          -0.4494617226079201,
+          1.7341031919768046
+        ],
+        "new_lab_pi90": [
+          -0.9318701578743186,
+          2.2155878753053644
+        ],
+        "p_same_sign_new_lab": 0.809121197750714,
+        "new_lab_pi90_width": 3.147458033179683,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.0
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": 0.691499701187089,
+            "new_lab_pi90": [
+              -0.1252377476578748,
+              1.4887680112037718
+            ]
+          },
+          "1.0": {
+            "estimate": 0.6342765478675878,
+            "new_lab_pi90": [
+              -2.393825049301817,
+              3.4646390683495376
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 0
+        },
+        "incidental_only": {
+          "contrasts": 0
+        },
+        "non_monotone_contrasts": 1
+      },
+      "reading": "too few laboratories",
+      "lolo": null
+    },
+    {
+      "compound": "2-Furanmethanol",
+      "lever_class": "temperature",
+      "band": "time <30 min",
+      "contrasts": 1,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "reading_mottram_parker"
+      ],
+      "peak_area_share": 1.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "other (glycine/glucose/wheat starch extrudate)"
+      ],
+      "temperature_range_C": [
+        120.0,
+        180.0
+      ],
+      "rows": [
+        {
+          "source": "ames2001b",
+          "contrast": "ames2001b-8",
+          "lab": "reading_mottram_parker",
+          "y": 0.38924639489697166,
+          "v": 0.0006966299695171669,
+          "range": [
+            150.0,
+            180.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true
+        }
+      ],
+      "step": "+10 C",
+      "fit": {
+        "estimate": 0.3790620101589163,
+        "ci90": [
+          -0.7286415651282053,
+          1.4459307724106103
+        ],
+        "new_lab_pi90": [
+          -1.2118611850440084,
+          1.9286985179627103
+        ],
+        "p_same_sign_new_lab": 0.7102942787654765,
+        "new_lab_pi90_width": 3.1405597030067187,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.0
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": 0.3864812463681537,
+            "new_lab_pi90": [
+              -0.42102479813515103,
+              1.1825020825876686
+            ]
+          },
+          "1.0": {
+            "estimate": 0.35543093254231084,
+            "new_lab_pi90": [
+              -2.6247767288991812,
+              3.2228915566447185
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 0
+        },
+        "incidental_only": {
+          "contrasts": 0
+        },
+        "non_monotone_contrasts": 0
       },
       "reading": "too few laboratories",
       "lolo": null
@@ -15164,6 +15777,118 @@
     {
       "compound": "2-Methylpyrazine",
       "lever_class": "pH",
+      "band": "pH 6-7.5, final",
+      "contrasts": 3,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "reading_mottram_parker"
+      ],
+      "peak_area_share": 1.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "other (glycine/glucose/wheat starch extrudate)"
+      ],
+      "temperature_range_C": [
+        120.0,
+        180.0
+      ],
+      "rows": [
+        {
+          "source": "ames2001b",
+          "contrast": "ames2001b-29",
+          "lab": "reading_mottram_parker",
+          "y": 0.03194511407100808,
+          "v": 0.004353937309482292,
+          "range": [
+            5.6,
+            6.8
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true
+        },
+        {
+          "source": "ames2001b",
+          "contrast": "ames2001b-30",
+          "lab": "reading_mottram_parker",
+          "y": 0.21234022269809896,
+          "v": 0.004353937309482292,
+          "range": [
+            5.6,
+            6.8
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true
+        },
+        {
+          "source": "ames2001b",
+          "contrast": "ames2001b-31",
+          "lab": "reading_mottram_parker",
+          "y": 0.29849578492625223,
+          "v": 0.0018659731326352669,
+          "range": [
+            5.6,
+            7.4
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true
+        }
+      ],
+      "step": "+1 pH unit",
+      "fit": {
+        "estimate": 0.18398603335140282,
+        "ci90": [
+          -0.6335971766346882,
+          0.9842342972483539
+        ],
+        "new_lab_pi90": [
+          -1.0511313282284267,
+          1.401611654480807
+        ],
+        "p_same_sign_new_lab": 0.6504764073176397,
+        "new_lab_pi90_width": 2.4527429827092337,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.13364853627055825
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": 0.18688278765460367,
+            "new_lab_pi90": [
+              -0.4957561141214977,
+              0.8611776946833183
+            ]
+          },
+          "1.0": {
+            "estimate": 0.17907932904389154,
+            "new_lab_pi90": [
+              -2.0451087438245095,
+              2.3558620564966883
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 0
+        },
+        "incidental_only": {
+          "contrasts": 0
+        },
+        "non_monotone_contrasts": 2
+      },
+      "reading": "too few laboratories",
+      "lolo": null
+    },
+    {
+      "compound": "2-Methylpyrazine",
+      "lever_class": "pH",
       "band": "pH >7.5, initial or label",
       "contrasts": 2,
       "studies": 1,
@@ -15821,6 +16546,118 @@
         ]
       },
       "reading": "per level"
+    },
+    {
+      "compound": "2-Methylpyrazine",
+      "lever_class": "temperature",
+      "band": "time <30 min",
+      "contrasts": 3,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "reading_mottram_parker"
+      ],
+      "peak_area_share": 1.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "other (glycine/glucose/wheat starch extrudate)"
+      ],
+      "temperature_range_C": [
+        120.0,
+        180.0
+      ],
+      "rows": [
+        {
+          "source": "ames2001b",
+          "contrast": "ames2001b-26",
+          "lab": "reading_mottram_parker",
+          "y": 0.11146419093280593,
+          "v": 0.00017415749237929172,
+          "range": [
+            120.0,
+            180.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true
+        },
+        {
+          "source": "ames2001b",
+          "contrast": "ames2001b-27",
+          "lab": "reading_mottram_parker",
+          "y": 0.18391438644417857,
+          "v": 0.00017415749237929172,
+          "range": [
+            120.0,
+            180.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true
+        },
+        {
+          "source": "ames2001b",
+          "contrast": "ames2001b-28",
+          "lab": "reading_mottram_parker",
+          "y": 0.2398566765543952,
+          "v": 0.00017415749237929172,
+          "range": [
+            120.0,
+            180.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true
+        }
+      ],
+      "step": "+10 C",
+      "fit": {
+        "estimate": 0.17663314668376792,
+        "ci90": [
+          -0.6169698777967955,
+          0.9555304104130844
+        ],
+        "new_lab_pi90": [
+          -0.9935734422353204,
+          1.3323816459645679
+        ],
+        "p_same_sign_new_lab": 0.6679568017519173,
+        "new_lab_pi90_width": 2.3259550881998883,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.06694329500821695
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": 0.17782108416467485,
+            "new_lab_pi90": [
+              -0.446105991388144,
+              0.7981420720386304
+            ]
+          },
+          "1.0": {
+            "estimate": 0.17331575277548159,
+            "new_lab_pi90": [
+              -1.9818413103959371,
+              2.282619482236354
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 0
+        },
+        "incidental_only": {
+          "contrasts": 0
+        },
+        "non_monotone_contrasts": 0
+      },
+      "reading": "too few laboratories",
+      "lolo": null
     },
     {
       "compound": "2-Methylpyrazine",
@@ -16614,6 +17451,118 @@
     },
     {
       "compound": "2-Pentylfuran",
+      "lever_class": "pH",
+      "band": "pH 6-7.5, final",
+      "contrasts": 3,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "reading_mottram_parker"
+      ],
+      "peak_area_share": 1.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "other (glycine/glucose/wheat starch extrudate)"
+      ],
+      "temperature_range_C": [
+        120.0,
+        180.0
+      ],
+      "rows": [
+        {
+          "source": "ames2001b",
+          "contrast": "ames2001b-17",
+          "lab": "reading_mottram_parker",
+          "y": -0.07262514643241678,
+          "v": 0.004353937309482292,
+          "range": [
+            5.6,
+            6.8
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true
+        },
+        {
+          "source": "ames2001b",
+          "contrast": "ames2001b-18",
+          "lab": "reading_mottram_parker",
+          "y": 0.07262514643241687,
+          "v": 0.004353937309482292,
+          "range": [
+            5.6,
+            6.8
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true
+        },
+        {
+          "source": "ames2001b",
+          "contrast": "ames2001b-19",
+          "lab": "reading_mottram_parker",
+          "y": -0.4209583152665882,
+          "v": 0.004353937309482292,
+          "range": [
+            5.6,
+            6.8
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true
+        }
+      ],
+      "step": "+1 pH unit",
+      "fit": {
+        "estimate": -0.1378396613841772,
+        "ci90": [
+          -0.9827392891236347,
+          0.7170238811013262
+        ],
+        "new_lab_pi90": [
+          -1.4741128775595627,
+          1.20781960759092
+        ],
+        "p_same_sign_new_lab": 0.5932851764998973,
+        "new_lab_pi90_width": 2.6819324851504827,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.26682181158053636
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": -0.13939118940516532,
+            "new_lab_pi90": [
+              -0.9191142804420371,
+              0.6426133070752306
+            ]
+          },
+          "1.0": {
+            "estimate": -0.13385725285450328,
+            "new_lab_pi90": [
+              -2.442485950129039,
+              2.2059212849425474
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 0
+        },
+        "incidental_only": {
+          "contrasts": 0
+        },
+        "non_monotone_contrasts": 2
+      },
+      "reading": "too few laboratories",
+      "lolo": null
+    },
+    {
+      "compound": "2-Pentylfuran",
       "lever_class": "sulfur source",
       "band": "all",
       "contrasts": 1,
@@ -16679,6 +17628,118 @@
         ]
       },
       "reading": "per level"
+    },
+    {
+      "compound": "2-Pentylfuran",
+      "lever_class": "temperature",
+      "band": "time <30 min",
+      "contrasts": 3,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "reading_mottram_parker"
+      ],
+      "peak_area_share": 1.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "other (glycine/glucose/wheat starch extrudate)"
+      ],
+      "temperature_range_C": [
+        120.0,
+        180.0
+      ],
+      "rows": [
+        {
+          "source": "ames2001b",
+          "contrast": "ames2001b-14",
+          "lab": "reading_mottram_parker",
+          "y": 0.15357694617716436,
+          "v": 0.0006966299695171669,
+          "range": [
+            150.0,
+            180.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true
+        },
+        {
+          "source": "ames2001b",
+          "contrast": "ames2001b-15",
+          "lab": "reading_mottram_parker",
+          "y": 0.09271708346121452,
+          "v": 0.00017415749237929172,
+          "range": [
+            120.0,
+            180.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true
+        },
+        {
+          "source": "ames2001b",
+          "contrast": "ames2001b-16",
+          "lab": "reading_mottram_parker",
+          "y": -0.08329249107219998,
+          "v": 0.0006966299695171669,
+          "range": [
+            120.0,
+            150.0
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true
+        }
+      ],
+      "step": "+10 C",
+      "fit": {
+        "estimate": 0.05403403112219029,
+        "ci90": [
+          -0.7543259395138924,
+          0.8579014753678705
+        ],
+        "new_lab_pi90": [
+          -1.169276401610929,
+          1.2729755936255216
+        ],
+        "p_same_sign_new_lab": 0.5481241327688553,
+        "new_lab_pi90_width": 2.4422519952364503,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.11243458629672394
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": 0.05457616148696498,
+            "new_lab_pi90": [
+              -0.6224983961671963,
+              0.7302506960726348
+            ]
+          },
+          "1.0": {
+            "estimate": 0.052767532948725465,
+            "new_lab_pi90": [
+              -2.147293445316119,
+              2.23932831015047
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 0
+        },
+        "incidental_only": {
+          "contrasts": 0
+        },
+        "non_monotone_contrasts": 1
+      },
+      "reading": "too few laboratories",
+      "lolo": null
     },
     {
       "compound": "3-Methylbutanal",
@@ -22827,6 +23888,118 @@
     },
     {
       "compound": "Furfural",
+      "lever_class": "pH",
+      "band": "pH 6-7.5, final",
+      "contrasts": 3,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "reading_mottram_parker"
+      ],
+      "peak_area_share": 1.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "other (glycine/glucose/wheat starch extrudate)"
+      ],
+      "temperature_range_C": [
+        120.0,
+        180.0
+      ],
+      "rows": [
+        {
+          "source": "ames2001b",
+          "contrast": "ames2001b-4",
+          "lab": "reading_mottram_parker",
+          "y": -0.32080121251352495,
+          "v": 0.0018659731326352669,
+          "range": [
+            5.6,
+            7.4
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true
+        },
+        {
+          "source": "ames2001b",
+          "contrast": "ames2001b-5",
+          "lab": "reading_mottram_parker",
+          "y": 0.15469714746825955,
+          "v": 0.004353937309482292,
+          "range": [
+            5.6,
+            6.8
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true
+        },
+        {
+          "source": "ames2001b",
+          "contrast": "ames2001b-6",
+          "lab": "reading_mottram_parker",
+          "y": -0.4124747047197542,
+          "v": 0.0018659731326352669,
+          "range": [
+            5.6,
+            7.4
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true
+        }
+      ],
+      "step": "+1 pH unit",
+      "fit": {
+        "estimate": -0.19259837911799016,
+        "ci90": [
+          -1.0514914791446235,
+          0.6817444326873601
+        ],
+        "new_lab_pi90": [
+          -1.573024578423767,
+          1.202866429802998
+        ],
+        "p_same_sign_new_lab": 0.619219980504756,
+        "new_lab_pi90_width": 2.775891008226765,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.3171652579277238
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": -0.19634106573648163,
+            "new_lab_pi90": [
+              -1.0155201671411735,
+              0.6288490231632327
+            ]
+          },
+          "1.0": {
+            "estimate": -0.18596285031909973,
+            "new_lab_pi90": [
+              -2.5398170277785304,
+              2.2116380503974473
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 0
+        },
+        "incidental_only": {
+          "contrasts": 0
+        },
+        "non_monotone_contrasts": 0
+      },
+      "reading": "too few laboratories",
+      "lolo": null
+    },
+    {
+      "compound": "Furfural",
       "lever_class": "sugar identity",
       "band": "all",
       "contrasts": 4,
@@ -23067,6 +24240,118 @@
         ]
       },
       "reading": "per level"
+    },
+    {
+      "compound": "Furfural",
+      "lever_class": "temperature",
+      "band": "time <30 min",
+      "contrasts": 3,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "reading_mottram_parker"
+      ],
+      "peak_area_share": 1.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "other (glycine/glucose/wheat starch extrudate)"
+      ],
+      "temperature_range_C": [
+        120.0,
+        180.0
+      ],
+      "rows": [
+        {
+          "source": "ames2001b",
+          "contrast": "ames2001b-1",
+          "lab": "reading_mottram_parker",
+          "y": 0.15630868220852592,
+          "v": 0.00017415749237929172,
+          "range": [
+            120.0,
+            180.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true
+        },
+        {
+          "source": "ames2001b",
+          "contrast": "ames2001b-2",
+          "lab": "reading_mottram_parker",
+          "y": 0.15490315428571547,
+          "v": 0.00017415749237929172,
+          "range": [
+            120.0,
+            180.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true
+        },
+        {
+          "source": "ames2001b",
+          "contrast": "ames2001b-3",
+          "lab": "reading_mottram_parker",
+          "y": -0.026393748682541553,
+          "v": 0.0006966299695171669,
+          "range": [
+            120.0,
+            150.0
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true
+        }
+      ],
+      "step": "+10 C",
+      "fit": {
+        "estimate": 0.09540252206929445,
+        "ci90": [
+          -0.7086849116167241,
+          0.8910270435199789
+        ],
+        "new_lab_pi90": [
+          -1.1118324338836987,
+          1.2942397757102448
+        ],
+        "p_same_sign_new_lab": 0.5876939459601731,
+        "new_lab_pi90_width": 2.4060722095939435,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.09458791355652352
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": 0.09647440661521019,
+            "new_lab_pi90": [
+              -0.5648002723389185,
+              0.7544550718915479
+            ]
+          },
+          "1.0": {
+            "estimate": 0.09318470688303626,
+            "new_lab_pi90": [
+              -2.09325725491485,
+              2.255081229545252
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 0
+        },
+        "incidental_only": {
+          "contrasts": 0
+        },
+        "non_monotone_contrasts": 1
+      },
+      "reading": "too few laboratories",
+      "lolo": null
     },
     {
       "compound": "Furfural",
@@ -24615,6 +25900,123 @@
     {
       "compound": "Hexanal",
       "lever_class": "pH",
+      "band": "pH 6-7.5, final",
+      "contrasts": 3,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "reading_mottram_parker"
+      ],
+      "peak_area_share": 1.0,
+      "focal_share": 0.0,
+      "matrices": [
+        "other (glycine/glucose/wheat starch extrudate)"
+      ],
+      "temperature_range_C": [
+        120.0,
+        180.0
+      ],
+      "rows": [
+        {
+          "source": "ames2001b",
+          "contrast": "ames2001b-132",
+          "lab": "reading_mottram_parker",
+          "y": 0.06598437170635388,
+          "v": 0.004353937309482292,
+          "range": [
+            5.6,
+            6.8
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": false,
+          "peak_area": true
+        },
+        {
+          "source": "ames2001b",
+          "contrast": "ames2001b-133",
+          "lab": "reading_mottram_parker",
+          "y": 0.40113192305243073,
+          "v": 0.004353937309482292,
+          "range": [
+            5.6,
+            6.8
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": false,
+          "peak_area": true
+        },
+        {
+          "source": "ames2001b",
+          "contrast": "ames2001b-134",
+          "lab": "reading_mottram_parker",
+          "y": -0.3037311321117904,
+          "v": 0.0018659731326352669,
+          "range": [
+            5.6,
+            7.4
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": true
+        }
+      ],
+      "step": "+1 pH unit",
+      "fit": {
+        "estimate": 0.05051030370984805,
+        "ci90": [
+          -0.8341847220857607,
+          0.9332964798804616
+        ],
+        "new_lab_pi90": [
+          -1.3833770124837967,
+          1.4830778620665939
+        ],
+        "p_same_sign_new_lab": 0.5301381137138002,
+        "new_lab_pi90_width": 2.8664548745503904,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.37700741270170407
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": 0.049951745988124914,
+            "new_lab_pi90": [
+              -0.8109687613180286,
+              0.9125268872301739
+            ]
+          },
+          "1.0": {
+            "estimate": 0.049434090442032355,
+            "new_lab_pi90": [
+              -2.380773240992411,
+              2.470099629918739
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 0
+        },
+        "incidental_only": {
+          "contrasts": 3,
+          "estimate": 0.05051030370984805,
+          "ci90": [
+            -0.8341847220857607,
+            0.9332964798804616
+          ]
+        },
+        "non_monotone_contrasts": 2
+      },
+      "reading": "too few laboratories",
+      "lolo": null
+    },
+    {
+      "compound": "Hexanal",
+      "lever_class": "pH",
       "band": "pH <4.5, initial or label",
       "contrasts": 1,
       "studies": 1,
@@ -24970,6 +26372,123 @@
         ]
       },
       "reading": "per level"
+    },
+    {
+      "compound": "Hexanal",
+      "lever_class": "temperature",
+      "band": "time <30 min",
+      "contrasts": 3,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "reading_mottram_parker"
+      ],
+      "peak_area_share": 1.0,
+      "focal_share": 0.0,
+      "matrices": [
+        "other (glycine/glucose/wheat starch extrudate)"
+      ],
+      "temperature_range_C": [
+        120.0,
+        180.0
+      ],
+      "rows": [
+        {
+          "source": "ames2001b",
+          "contrast": "ames2001b-129",
+          "lab": "reading_mottram_parker",
+          "y": 0.13218806772554942,
+          "v": 0.00017415749237929172,
+          "range": [
+            120.0,
+            180.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": true
+        },
+        {
+          "source": "ames2001b",
+          "contrast": "ames2001b-130",
+          "lab": "reading_mottram_parker",
+          "y": 0.10796958031477288,
+          "v": 0.00017415749237929172,
+          "range": [
+            120.0,
+            180.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": true
+        },
+        {
+          "source": "ames2001b",
+          "contrast": "ames2001b-131",
+          "lab": "reading_mottram_parker",
+          "y": -0.09602167283320456,
+          "v": 0.0006966299695171669,
+          "range": [
+            120.0,
+            150.0
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": false,
+          "peak_area": true
+        }
+      ],
+      "step": "+10 C",
+      "fit": {
+        "estimate": 0.048790135895228,
+        "ci90": [
+          -0.7604940708296274,
+          0.8535308229229996
+        ],
+        "new_lab_pi90": [
+          -1.1774265226287013,
+          1.2703876097818032
+        ],
+        "p_same_sign_new_lab": 0.5431467563803729,
+        "new_lab_pi90_width": 2.4478141324105045,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.13364853627055825
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": 0.049510944020464825,
+            "new_lab_pi90": [
+              -0.6305331377561155,
+              0.7275021548921726
+            ]
+          },
+          "1.0": {
+            "estimate": 0.047522866217235823,
+            "new_lab_pi90": [
+              -2.1548987251067597,
+              2.237388015664897
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 0
+        },
+        "incidental_only": {
+          "contrasts": 3,
+          "estimate": 0.048790135895228,
+          "ci90": [
+            -0.7604940708296274,
+            0.8535308229229996
+          ]
+        },
+        "non_monotone_contrasts": 1
+      },
+      "reading": "too few laboratories",
+      "lolo": null
     },
     {
       "compound": "Hexanal",
@@ -33526,6 +35045,118 @@
     {
       "compound": "Pyrazines",
       "lever_class": "pH",
+      "band": "pH 6-7.5, final",
+      "contrasts": 3,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "reading_mottram_parker"
+      ],
+      "peak_area_share": 1.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "other (glycine/glucose/wheat starch extrudate)"
+      ],
+      "temperature_range_C": [
+        120.0,
+        180.0
+      ],
+      "rows": [
+        {
+          "source": "ames2001b",
+          "contrast": "ames2001b-126",
+          "lab": "reading_mottram_parker",
+          "y": -0.07763427721147446,
+          "v": 0.0018659731326352669,
+          "range": [
+            5.6,
+            7.4
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true
+        },
+        {
+          "source": "ames2001b",
+          "contrast": "ames2001b-127",
+          "lab": "reading_mottram_parker",
+          "y": 0.2228511622357509,
+          "v": 0.004353937309482292,
+          "range": [
+            5.6,
+            6.8
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true
+        },
+        {
+          "source": "ames2001b",
+          "contrast": "ames2001b-128",
+          "lab": "reading_mottram_parker",
+          "y": 0.1753974475721776,
+          "v": 0.0018659731326352669,
+          "range": [
+            5.6,
+            7.4
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true
+        }
+      ],
+      "step": "+1 pH unit",
+      "fit": {
+        "estimate": 0.10218243174321258,
+        "ci90": [
+          -0.7200102350912266,
+          0.9181552518295426
+        ],
+        "new_lab_pi90": [
+          -1.1569955813477582,
+          1.3557613491569758
+        ],
+        "p_same_sign_new_lab": 0.5821944198464497,
+        "new_lab_pi90_width": 2.512756930504734,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.15886509512405417
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": 0.10231680985865399,
+            "new_lab_pi90": [
+              -0.6043344499090022,
+              0.809833269642292
+            ]
+          },
+          "1.0": {
+            "estimate": 0.10007379985513529,
+            "new_lab_pi90": [
+              -2.143185999077005,
+              2.32013936253956
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 0
+        },
+        "incidental_only": {
+          "contrasts": 0
+        },
+        "non_monotone_contrasts": 1
+      },
+      "reading": "too few laboratories",
+      "lolo": null
+    },
+    {
+      "compound": "Pyrazines",
+      "lever_class": "pH",
       "band": "pH 6-7.5, initial or label",
       "contrasts": 1,
       "studies": 1,
@@ -33856,6 +35487,118 @@
         ]
       },
       "reading": "per level"
+    },
+    {
+      "compound": "Pyrazines",
+      "lever_class": "temperature",
+      "band": "time <30 min",
+      "contrasts": 3,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "reading_mottram_parker"
+      ],
+      "peak_area_share": 1.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "other (glycine/glucose/wheat starch extrudate)"
+      ],
+      "temperature_range_C": [
+        120.0,
+        180.0
+      ],
+      "rows": [
+        {
+          "source": "ames2001b",
+          "contrast": "ames2001b-123",
+          "lab": "reading_mottram_parker",
+          "y": 0.1473509056124879,
+          "v": 0.00017415749237929172,
+          "range": [
+            120.0,
+            180.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true
+        },
+        {
+          "source": "ames2001b",
+          "contrast": "ames2001b-124",
+          "lab": "reading_mottram_parker",
+          "y": 0.18806955764457745,
+          "v": 0.00017415749237929172,
+          "range": [
+            120.0,
+            180.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true
+        },
+        {
+          "source": "ames2001b",
+          "contrast": "ames2001b-125",
+          "lab": "reading_mottram_parker",
+          "y": 0.22634351895832844,
+          "v": 0.00017415749237929172,
+          "range": [
+            120.0,
+            180.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true
+        }
+      ],
+      "step": "+10 C",
+      "fit": {
+        "estimate": 0.18567921730083103,
+        "ci90": [
+          -0.5995435186135569,
+          0.9550160303650099
+        ],
+        "new_lab_pi90": [
+          -0.9581508465679032,
+          1.3137626897447445
+        ],
+        "p_same_sign_new_lab": 0.6872544546118742,
+        "new_lab_pi90_width": 2.2719135363126477,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.03985788443006656
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": 0.1867416125595035,
+            "new_lab_pi90": [
+              -0.41145761606158965,
+              0.7808597979182705
+            ]
+          },
+          "1.0": {
+            "estimate": 0.18264551099104273,
+            "new_lab_pi90": [
+              -1.946574420870681,
+              2.262146961014191
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 0
+        },
+        "incidental_only": {
+          "contrasts": 0
+        },
+        "non_monotone_contrasts": 0
+      },
+      "reading": "too few laboratories",
+      "lolo": null
     },
     {
       "compound": "Pyrazines",
@@ -34599,6 +36342,215 @@
         ]
       },
       "reading": "per level"
+    },
+    {
+      "compound": "Tetramethylpyrazine",
+      "lever_class": "pH",
+      "band": "pH 6-7.5, final",
+      "contrasts": 3,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "reading_mottram_parker"
+      ],
+      "peak_area_share": 1.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "other (glycine/glucose/wheat starch extrudate)"
+      ],
+      "temperature_range_C": [
+        120.0,
+        180.0
+      ],
+      "rows": [
+        {
+          "source": "ames2001b",
+          "contrast": "ames2001b-96",
+          "lab": "reading_mottram_parker",
+          "y": 0.14033702532449197,
+          "v": 0.004353937309482292,
+          "range": [
+            5.6,
+            6.8
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true
+        },
+        {
+          "source": "ames2001b",
+          "contrast": "ames2001b-97",
+          "lab": "reading_mottram_parker",
+          "y": -1.4821695041771823,
+          "v": 0.01741574923792914,
+          "range": [
+            6.8,
+            7.4
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true
+        },
+        {
+          "source": "ames2001b",
+          "contrast": "ames2001b-98",
+          "lab": "reading_mottram_parker",
+          "y": 0.7952020911994366,
+          "v": 0.01741574923792914,
+          "range": [
+            6.8,
+            7.4
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true
+        }
+      ],
+      "step": "+1 pH unit",
+      "fit": {
+        "estimate": -0.1718526247101035,
+        "ci90": [
+          -1.285363327604963,
+          0.9493708309344345
+        ],
+        "new_lab_pi90": [
+          -2.1785735270883384,
+          1.841708325289221
+        ],
+        "p_same_sign_new_lab": 0.5616128773237677,
+        "new_lab_pi90_width": 4.020281852377559,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          1.0634952929398014
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": -0.17452775737336318,
+            "new_lab_pi90": [
+              -1.4911497391249915,
+              1.1426439271124418
+            ]
+          },
+          "1.0": {
+            "estimate": -0.16289787410574988,
+            "new_lab_pi90": [
+              -3.2609320173302025,
+              2.961183510382808
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 0
+        },
+        "incidental_only": {
+          "contrasts": 0
+        },
+        "non_monotone_contrasts": 1
+      },
+      "reading": "too few laboratories",
+      "lolo": null
+    },
+    {
+      "compound": "Tetramethylpyrazine",
+      "lever_class": "temperature",
+      "band": "time <30 min",
+      "contrasts": 2,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "reading_mottram_parker"
+      ],
+      "peak_area_share": 1.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "other (glycine/glucose/wheat starch extrudate)"
+      ],
+      "temperature_range_C": [
+        120.0,
+        180.0
+      ],
+      "rows": [
+        {
+          "source": "ames2001b",
+          "contrast": "ames2001b-93",
+          "lab": "reading_mottram_parker",
+          "y": 0.09404523840642712,
+          "v": 0.00017415749237929172,
+          "range": [
+            120.0,
+            180.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true
+        },
+        {
+          "source": "ames2001b",
+          "contrast": "ames2001b-94",
+          "lab": "reading_mottram_parker",
+          "y": 0.4971205646114242,
+          "v": 0.0006966299695171669,
+          "range": [
+            120.0,
+            150.0
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true
+        }
+      ],
+      "step": "+10 C",
+      "fit": {
+        "estimate": 0.2878199133599055,
+        "ci90": [
+          -0.6617856831085576,
+          1.2169674220178623
+        ],
+        "new_lab_pi90": [
+          -1.1883652275266654,
+          1.7439725737523535
+        ],
+        "p_same_sign_new_lab": 0.6655174470522819,
+        "new_lab_pi90_width": 2.9323378012790187,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.26682181158053636
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": 0.2918263671568835,
+            "new_lab_pi90": [
+              -0.547740119807847,
+              1.1271039399239586
+            ]
+          },
+          "1.0": {
+            "estimate": 0.27634565196844274,
+            "new_lab_pi90": [
+              -2.32889356614398,
+              2.8170891563322047
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 0
+        },
+        "incidental_only": {
+          "contrasts": 0
+        },
+        "non_monotone_contrasts": 1
+      },
+      "reading": "too few laboratories",
+      "lolo": null
     },
     {
       "compound": "Tetramethylpyrazine",
@@ -35805,6 +37757,118 @@
     },
     {
       "compound": "Trimethylpyrazine",
+      "lever_class": "pH",
+      "band": "pH 6-7.5, final",
+      "contrasts": 3,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "reading_mottram_parker"
+      ],
+      "peak_area_share": 1.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "other (glycine/glucose/wheat starch extrudate)"
+      ],
+      "temperature_range_C": [
+        120.0,
+        180.0
+      ],
+      "rows": [
+        {
+          "source": "ames2001b",
+          "contrast": "ames2001b-65",
+          "lab": "reading_mottram_parker",
+          "y": -0.013468049618688227,
+          "v": 0.004353937309482292,
+          "range": [
+            5.6,
+            6.8
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true
+        },
+        {
+          "source": "ames2001b",
+          "contrast": "ames2001b-66",
+          "lab": "reading_mottram_parker",
+          "y": -0.09616118225172443,
+          "v": 0.004353937309482292,
+          "range": [
+            5.6,
+            6.8
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true
+        },
+        {
+          "source": "ames2001b",
+          "contrast": "ames2001b-67",
+          "lab": "reading_mottram_parker",
+          "y": -0.23235510476457502,
+          "v": 0.0018659731326352669,
+          "range": [
+            5.6,
+            7.4
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true
+        }
+      ],
+      "step": "+1 pH unit",
+      "fit": {
+        "estimate": -0.12021041302786772,
+        "ci90": [
+          -0.9140995070915509,
+          0.6870582106072658
+        ],
+        "new_lab_pi90": [
+          -1.3154209710979525,
+          1.0888982653298078
+        ],
+        "p_same_sign_new_lab": 0.6098337271192913,
+        "new_lab_pi90_width": 2.40431923642776,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.09458791355652352
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": -0.12270607652736053,
+            "new_lab_pi90": [
+              -0.7749189799275251,
+              0.5381683617108431
+            ]
+          },
+          "1.0": {
+            "estimate": -0.11680999142378351,
+            "new_lab_pi90": [
+              -2.2747752451148764,
+              2.0742303987661552
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 0
+        },
+        "incidental_only": {
+          "contrasts": 0
+        },
+        "non_monotone_contrasts": 2
+      },
+      "reading": "too few laboratories",
+      "lolo": null
+    },
+    {
+      "compound": "Trimethylpyrazine",
       "lever_class": "precursor dose",
       "band": "amino acid varied",
       "contrasts": 2,
@@ -35899,6 +37963,118 @@
             -0.36126538553527626,
             1.3891564219176569
           ]
+        },
+        "non_monotone_contrasts": 0
+      },
+      "reading": "too few laboratories",
+      "lolo": null
+    },
+    {
+      "compound": "Trimethylpyrazine",
+      "lever_class": "temperature",
+      "band": "time <30 min",
+      "contrasts": 3,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "reading_mottram_parker"
+      ],
+      "peak_area_share": 1.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "other (glycine/glucose/wheat starch extrudate)"
+      ],
+      "temperature_range_C": [
+        120.0,
+        180.0
+      ],
+      "rows": [
+        {
+          "source": "ames2001b",
+          "contrast": "ames2001b-62",
+          "lab": "reading_mottram_parker",
+          "y": 0.2613669540111659,
+          "v": 0.00017415749237929172,
+          "range": [
+            120.0,
+            180.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true
+        },
+        {
+          "source": "ames2001b",
+          "contrast": "ames2001b-63",
+          "lab": "reading_mottram_parker",
+          "y": 0.18899179285456685,
+          "v": 0.00017415749237929172,
+          "range": [
+            120.0,
+            180.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true
+        },
+        {
+          "source": "ames2001b",
+          "contrast": "ames2001b-64",
+          "lab": "reading_mottram_parker",
+          "y": 0.17694841898121494,
+          "v": 0.00017415749237929172,
+          "range": [
+            120.0,
+            180.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true
+        }
+      ],
+      "step": "+10 C",
+      "fit": {
+        "estimate": 0.20725814416611266,
+        "ci90": [
+          -0.58110593538529,
+          0.9780038332495159
+        ],
+        "new_lab_pi90": [
+          -0.9443244490420122,
+          1.3413625527212845
+        ],
+        "p_same_sign_new_lab": 0.6987753488611024,
+        "new_lab_pi90_width": 2.2856870017632964,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.0473781964106776
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": 0.20850606533855964,
+            "new_lab_pi90": [
+              -0.39651884855365854,
+              0.8090556574258845
+            ]
+          },
+          "1.0": {
+            "estimate": 0.2037166840456236,
+            "new_lab_pi90": [
+              -1.9353056186957538,
+              2.2877147076895312
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 0
+        },
+        "incidental_only": {
+          "contrasts": 0
         },
         "non_monotone_contrasts": 0
       },
@@ -37680,8 +39856,8 @@
     "artifact": "lever_table_development_only",
     "generated_on": "2026-11-12",
     "git": {
-      "commit": "d363216ab3433f191e6b1e04b379387f0261f4d4",
-      "short": "d363216a",
+      "commit": "2a986a90a02bbcfbd0a26dfd944a1c2a806a3423",
+      "short": "2a986a90",
       "branch": "disagreement-audit",
       "dirty": true
     },
@@ -37694,6 +39870,14 @@
       {
         "path": "docs/reference/lever_table/contrasts/adams2001.yml",
         "sha256": "382e917f924eac837e679501a647ea3df5d46097cf93af2af46ed0814e7b0890"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/ames2001b.yml",
+        "sha256": "0f3da559691144f55f9ce78a9518a25d7447975ff8bb0af1da957048a86ed5ea"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/ames2001b__families.yml",
+        "sha256": "ebd9b49ce41df0001044067914ec5e8c3ce0881f29135841a76e44f8d9a26526"
       },
       {
         "path": "docs/reference/lever_table/contrasts/arnold1971.yml",
@@ -37744,6 +39928,30 @@
         "sha256": "6c68d392c2776d72ad65082499abebb6bb528d3c754b4b83ed75d4900b3c4c5b"
       },
       {
+        "path": "docs/reference/lever_table/contrasts/cremer2000b.yml",
+        "sha256": "bedd9e669a7cb72efc117241f13397148bdb57a8a0c0947e57697c6ae0b81081"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/cremer2000b__families.yml",
+        "sha256": "ac5178769ffffee086b643c476693d6572ae87dc1d7b9c81b71984e425b60c32"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/cremer2000c.yml",
+        "sha256": "6518f0857ee00a426548b9a4eab087d5be2b8c5e743046b5675d5620ef60ef7e"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/cremer2000c__families.yml",
+        "sha256": "7e9428c8e1171ec3e17bb30219186ed3a9b288f13804cba9aa4484ad124966b6"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/ding2023.yml",
+        "sha256": "fadf5888bf21641e969b225d24f4b7a93de4747d17a77f25de443029ac26ab93"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/ding2023__families.yml",
+        "sha256": "d779d4108837769c543468940b1ef09eef9ff6b582ef9fe709dd0684f9fc406e"
+      },
+      {
         "path": "docs/reference/lever_table/contrasts/du2023__families.yml",
         "sha256": "9914b6a6d289e6790d0d46a4b8ef2ac4dd6a19278a50d92bf00a894d17637b99"
       },
@@ -37782,6 +39990,14 @@
       {
         "path": "docs/reference/lever_table/contrasts/grosch1992.yml",
         "sha256": "e09d4a48c11445e141058b55c222b06e7715b792088aefa583cb011b7e4a1d39"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/guentert1990.yml",
+        "sha256": "0a0759ebdb09230944f920aaaf7474f7f146397616a2eb9ff407577572885940"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/guentert1990__families.yml",
+        "sha256": "ba065d658e80ae05095fc32fd3f262148cbd43f69f6b8fa0198eb66ec31d1fd2"
       },
       {
         "path": "docs/reference/lever_table/contrasts/guo2010brassica.yml",
@@ -37876,6 +40092,14 @@
         "sha256": "109c67f04f9378fc5be29b9472df49d169d46d324452c522034d67ea1bb3a54d"
       },
       {
+        "path": "docs/reference/lever_table/contrasts/marrufo-curtido2022.yml",
+        "sha256": "6b3295c43bac3b147356a7d1b430b101ce8823709f4daabf4942e19bafac28a9"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/marrufo-curtido2022__families.yml",
+        "sha256": "ad6c96facc831417b3ae6342f42477d00644df4795c5708c5aef1d19b4aca342"
+      },
+      {
         "path": "docs/reference/lever_table/contrasts/martin2001__families.yml",
         "sha256": "451bfdec8b569cacadb3f91ef45492d3ded6288c920e66680f426104bdf2c7b3"
       },
@@ -37954,6 +40178,14 @@
       {
         "path": "docs/reference/lever_table/contrasts/shu1985.yml",
         "sha256": "38ed130813edfa52e60595fedf907f1634bb56f26984c229a34c9482fe970007"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/sun2020.yml",
+        "sha256": "1ee70f2ad7bb382d6877e1f1dfeda34a219bb7dfebcc3c4d1f044a961ebdf6e0"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/sun2020__families.yml",
+        "sha256": "061a553083b56ea4bd4da271ff60af6b5615ba9e9f5b87b3925caacbc1b312da"
       },
       {
         "path": "docs/reference/lever_table/contrasts/tai1997.yml",

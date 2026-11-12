@@ -322,7 +322,8 @@ def observations(sources, labs) -> Tuple[List[Dict[str, Any]], Dict[str, int]]:
             q = str(c.get("quantity") or "amount")
             if q != "amount":
                 skipped[{"share": "shares of a total (PREREG amendment A1)",
-                         "fd_factor": "flavour-dilution factors, an odour potency not an amount (PREREG amendment A1)"}
+                         "fd_factor": "flavour-dilution factors, an odour potency not an amount (PREREG amendment A1)",
+                         "suspect_print": "rows the source appears to have misprinted (kept, enter no cell)"}
                         .get(q, "rates, half-lives or storage losses (PREREG amendment A1)")] += 1
                 continue
             if lc == "mixed":

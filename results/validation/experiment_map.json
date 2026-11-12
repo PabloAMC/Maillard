@@ -33,9 +33,9 @@
       "family": "meaty thiols",
       "lever": "precursor dose",
       "reading": "needs experiment",
-      "why": "keyed: best cell '2-Methyl-3-furanthiol (MFT), sulfur donor varied' reads direction unclear (3 laboratories)",
+      "why": "keyed: best cell '2-Methyl-3-furanthiol (MFT), sulfur donor varied' reads direction unclear (4 laboratories)",
       "plant_protein_evidence": false,
-      "design": "precursor dose: 0 / 0.5x / 1x / 2x of the base dose; 5 replicate pots per arm; in a 15 % pea-isolate matrix; from 1 new laboratory(ies) to reach 3; measure MFT, FFT, H2S and the disulfides by SIDA",
+      "design": "precursor dose: 0 / 0.5x / 1x / 2x of the base dose; 3 replicate pots per arm; in a 15 % pea-isolate matrix; from 1 new laboratory(ies) to reach 3; measure MFT, FFT, H2S and the disulfides by SIDA",
       "engine": "blank in v1 (step 5 adds)"
     },
     {
@@ -285,7 +285,7 @@
       "family": "pyrazines",
       "lever": "temperature",
       "reading": "needs experiment",
-      "why": "keyed: best cell '2-Ethyl-3,5-dimethylpyrazine, time >120 min' reads too few laboratories (1 laboratories)",
+      "why": "keyed: best cell '2,3-Dimethylpyrazine, time <30 min' reads too few laboratories (1 laboratories)",
       "plant_protein_evidence": true,
       "design": "temperature: 120 / 140 / 160 C; 2 replicate pots per arm; matrix as in the keyed studies; from 2 new laboratory(ies) to reach 3; measure pyrazines",
       "engine": "blank in v1 (step 5 adds)"
@@ -686,8 +686,8 @@
     "artifact": "experiment_map",
     "generated_on": "2026-11-12",
     "git": {
-      "commit": "d363216ab3433f191e6b1e04b379387f0261f4d4",
-      "short": "d363216a",
+      "commit": "2a986a90a02bbcfbd0a26dfd944a1c2a806a3423",
+      "short": "2a986a90",
       "branch": "disagreement-audit",
       "dirty": true
     },
@@ -695,7 +695,7 @@
     "inputs": [
       {
         "path": "results/validation/lever_table.json",
-        "sha256": "5fe69f1b54f073fa3f5c1ba320ea617a0ea17f88947e303fec088c7124ac8539"
+        "sha256": "ec9cf9838c796d45e26c72dc8d6b33e9711d0891fc3ddda4d28938b1ddff1eb0"
       },
       {
         "path": "docs/reference/contrast_benchmark/split.yml",

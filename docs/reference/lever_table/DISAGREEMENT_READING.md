@@ -29,6 +29,11 @@ between laboratories by up to about 2 dex.
 | benzaldehyde x sugar identity (xylose vs glucose) | chen2023lycium against theng2024 (A*STAR; nutritional yeast) | **Not a real conflict.** Both laboratories' own tests find no difference between the two sugars; in theng2024 benzaldehyde is present before heating. chen2023lycium prints nearly the same retention index for hexanal and benzaldehyde (872, 873), where standard values on that column differ by about 160 units, so at least one identification is in doubt (the reader's comparison, not the paper's) | medium - high |
 | trimethylpyrazine x amino acid identity (none vs arginine) | hwang1995 (Ho network) against park2022mealworm (Wonkwang) | **The "none" arm is not the same pot.** In hwang1995 "none" still holds glucose + glycine; in park2022mealworm it is protein + xylose with no free amino acid, and every added amino acid raises pyrazines over that base. park2022mealworm also added basic arginine with no reported pH correction, and extracted by 2 h of simultaneous distillation-extraction with sugar and amino acid still present, which runs the Maillard reaction during the extraction (Chaintreau 2001) | medium - high |
 
+**Added after this reading (same day).** Keying seven more papers raised the audit to 9 conflict cells. The two new
+ones, 2-methylpyrazine and nonanal against cysteine dose (ho_network and nus_liu_shaoquan against ding2023, a fish
+protein hydrolysate), were not read against the method papers. Cysteine is known to divert carbonyls from pyrazines
+and lipid aldehydes in some matrices and not others; that is a hypothesis, not a reading.
+
 ## What this changes
 
 1. **pH cells should not pool buffered and unbuffered initial-pH studies.** In an unbuffered pot the initial pH
