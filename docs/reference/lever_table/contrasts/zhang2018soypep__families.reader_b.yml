@@ -1,0 +1,5 @@
+source: "zhang2018soypep"
+pdf: "data/articles/zhang2018.pdf"
+reader: "b"
+scope_note: "No values printed: volatile data are in Supplementary Tables S1-S4, not in the PDF; the text gives single-arm maxima only (pyrazines 19.11 relative content in XS-100; furans class 34.10 in XS-140), no two-arm contrast; figures are PLSR loadings/coefficients."
+contrasts: []

@@ -43,7 +43,7 @@ zhang2024sugars:
   lab: nus_liu_shaoquan
   lab_name: "National University of Singapore, Dept. of Food Science and Technology (Liu Shao-Quan)"
   doi: 10.3390/foods13070991
-  pdf: data/articles/zhang2024b.pdf   # file name only; NOT the paper key zhang2024b (a BTBU paper read from Zhang2024.pdf)
+  pdf: data/articles/zhang2024sugars.pdf   # renamed on disk from zhang2024b.pdf, a stem the BTBU dossier zhang2024b already used
   priority: 1
   cells: "sugar x methional; thiols if reported"
 wei2019flax:

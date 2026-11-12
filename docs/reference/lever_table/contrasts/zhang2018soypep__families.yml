@@ -1,0 +1,6 @@
+source: zhang2018soypep
+pdf: data/articles/zhang2018.pdf
+reader: resolved
+scope_note: Cysteine x temperature design, but all volatile values (incl. pyrazines, furans, aldehydes) are in supplementary Tables S1-S4, not in the PDF; the text prints only single maxima (XS-100 pyrazines
+  relative content 19.11), which give no two-arm contrast. Figs. 1-3 are PLSR plots, not amounts.
+contrasts: []

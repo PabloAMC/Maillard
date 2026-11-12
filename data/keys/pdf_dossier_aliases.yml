@@ -104,3 +104,21 @@ pending:
   # downloaded 2026-11-05: BLINDED by the coordinator until another case is frozen -- do NOT open these files.
   # Listed unread (stem only, no identification from the PDF); bork2022 / 2022b / 2023, chen2026, gupta2011, blank2006
   # and hu2012 from the same download are dossiered.
+  # downloaded 2026-11-12 (new-laboratory thiol contrasts, STATUS_AND_PLAN sec. 0 step 5); identified by the DOI on
+  # the first page. Each is keyed into the lever table under the source key given (docs/reference/lever_table/
+  # new_labs.yml, contrasts/<key>.yml); no extraction dossier yet.
+  li2021: "Li & Liu 2021, LWT, 10.1016/j.lwt.2021.112017; lever table source li2021ph"
+  li2021b: "Li & Liu 2021, LWT, 10.1016/j.lwt.2021.112368; lever table source li2021lab"
+  li2022b: "Li & Liu 2022, Food Biosci., 10.1016/j.fbio.2021.101538; lever table source li2022heat"
+  zhang2024sugars: "Zhang & Liu 2024, Foods, 10.3390/foods13070991; lever table source zhang2024sugars"
+  wei2019: "Wei et al. 2019, Int. J. Food Prop., 10.1080/10942912.2019.1573830; lever table source wei2019flax"
+  chen2023: "Chen et al. 2023, Foods, 10.3390/foods12234346; lever table source chen2023lycium"
+  zhang2018: "Zhang et al. 2018, Int. J. Biol. Macromol., 10.1016/j.ijbiomac.2018.09.082; lever table source zhang2018soypep"
+  Theng2024: "Theng, Osen & Chiang 2024, Int. J. Food Sci. Technol., 10.1111/ijfs.17373; lever table source theng2024"
+  chen2024: "Chen et al. 2024, Food Biosci., 10.1016/j.fbio.2024.104503; lever table source chen2024coprinus"
+  zhang2022b: "Zhang et al. 2022, LWT, 10.1016/j.lwt.2022.114144; lever table source zhang2022pleurotus"
+  park2022: "Park, Seo & Cho 2022, Food Sci. Biotechnol., 10.1007/s10068-022-01158-0; lever table source park2022mealworm"
+  guo2010: "Guo, Tian & Small 2010, Food Chem., 10.1016/j.foodchem.2009.05.089; lever table source guo2010brassica"
+  sasanam2022: "Sasanam et al. 2022, J. Food Sci., 10.1111/1750-3841.16060; lever table source sasanam2022"
+  sarkisyan2025: "Sarkisyan et al. 2025, Foods, 10.3390/foods14010116; lever table source sarkisyan2025"
+  Boonbumrung2023: "Boonbumrung et al. 2023, Fish. Aquat. Sci., 10.47853/fas.2023.e33; lever table source boonbumrung2023"

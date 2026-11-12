@@ -1,0 +1,144 @@
+source: zhang2022pleurotus
+pdf: data/articles/zhang2022b.pdf
+reader: a
+scope_note: ND printed without LOD (nd_no_limit). No MFT, H2S, difurfuryl or MFT-FFT disulfide reported. Control (PCH-TDPs,
+  no xylose and no sulfur compound) differs in two levers and is not keyed for thiols (both ND there).
+contrasts:
+- id: zhang2022pleurotus-1
+  odorant: 2-furfurylthiol
+  lever_class: sulfur source
+  lever: L-cysteine vs L-methionine vs thiamine (equal S) with xylose
+  focal: true
+  location: Table 3, p. 7
+  digitised: false
+  unit: ng/g (peak area vs internal standard 1,2-dichlorobenzene)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Cys-MRPs
+    lever_value: L-cysteine
+    value: 8.87
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.24
+    conditions:
+      ph: 7.4
+      ph_basis: initial
+      temp_C: 100
+      time_min: 120
+      precursors:
+        P. citrinopileatus hydrolysate (PCH): 1.0 g
+        D-xylose: 0.3 g
+        L-cysteine: 0.15 g (equal S content)
+      buffer: none (10% w/v in deionized water)
+      matrix: plant protein (Pleurotus citrinopileatus mushroom hydrolysate)
+      headspace: sealed, unstated
+  - label: Met-MRPs
+    lever_value: L-methionine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.4
+      ph_basis: initial
+      temp_C: 100
+      time_min: 120
+      precursors:
+        P. citrinopileatus hydrolysate (PCH): 1.0 g
+        D-xylose: 0.3 g
+        L-methionine: 0.19 g (equal S content)
+      buffer: none (10% w/v in deionized water)
+      matrix: plant protein (Pleurotus citrinopileatus mushroom hydrolysate)
+      headspace: sealed, unstated
+  - label: Thi-MRPs
+    lever_value: thiamine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.4
+      ph_basis: initial
+      temp_C: 100
+      time_min: 120
+      precursors:
+        P. citrinopileatus hydrolysate (PCH): 1.0 g
+        D-xylose: 0.3 g
+        thiamine: 0.42 g (equal S content)
+      buffer: none (10% w/v in deionized water)
+      matrix: plant protein (Pleurotus citrinopileatus mushroom hydrolysate)
+      headspace: sealed, unstated
+- id: zhang2022pleurotus-2
+  odorant: 3,3'-dithiobis(2-methylfuran) [bis(2-methyl-3-furyl) disulfide]
+  lever_class: sulfur source
+  lever: L-cysteine vs L-methionine vs thiamine (equal S) with xylose
+  focal: true
+  location: Table 3, p. 7
+  digitised: false
+  unit: ng/g (peak area vs internal standard 1,2-dichlorobenzene)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Cys-MRPs
+    lever_value: L-cysteine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.4
+      ph_basis: initial
+      temp_C: 100
+      time_min: 120
+      precursors:
+        P. citrinopileatus hydrolysate (PCH): 1.0 g
+        D-xylose: 0.3 g
+        L-cysteine: 0.15 g (equal S content)
+      buffer: none (10% w/v in deionized water)
+      matrix: plant protein (Pleurotus citrinopileatus mushroom hydrolysate)
+      headspace: sealed, unstated
+  - label: Met-MRPs
+    lever_value: L-methionine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.4
+      ph_basis: initial
+      temp_C: 100
+      time_min: 120
+      precursors:
+        P. citrinopileatus hydrolysate (PCH): 1.0 g
+        D-xylose: 0.3 g
+        L-methionine: 0.19 g (equal S content)
+      buffer: none (10% w/v in deionized water)
+      matrix: plant protein (Pleurotus citrinopileatus mushroom hydrolysate)
+      headspace: sealed, unstated
+  - label: Thi-MRPs
+    lever_value: thiamine
+    value: 6.79
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.18
+    conditions:
+      ph: 7.4
+      ph_basis: initial
+      temp_C: 100
+      time_min: 120
+      precursors:
+        P. citrinopileatus hydrolysate (PCH): 1.0 g
+        D-xylose: 0.3 g
+        thiamine: 0.42 g (equal S content)
+      buffer: none (10% w/v in deionized water)
+      matrix: plant protein (Pleurotus citrinopileatus mushroom hydrolysate)
+      headspace: sealed, unstated

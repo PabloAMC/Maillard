@@ -1,0 +1,5669 @@
+source: "li2021ph"
+pdf: "data/articles/li2021.pdf"
+reader: "a"
+scope_note: "Only hexanal, furfural and 2-pentylfuran are printed in the paper (Fig. 4 bars, a few values in the text); all other volatiles (methional, phenylacetaldehyde, 2-methylbutanal, benzaldehyde, heptanal, nonanal, 1-octen-3-ol, ...) are in supplementary Table S2, not available; full 2 x 3 x 5 factorial keyed as one-factor ladders/pairs; bars digitised at 300 dpi (bar tops), text-printed values used where printed; unheated controls (25 C, time unstated) included in the 0% xylose temperature ladders and as one pH pair"
+contrasts:
+  - id: "li2021ph-1"
+    odorant: "hexanal"
+    lever_class: "precursor dose"
+    lever: "xylose added (g/100 mL), 5-level ladder"
+    focal: true
+    location: "Fig. 4a"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A90-0"
+        lever_value: "0 g/100 mL"
+        value: 63.1
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A90-5"
+        lever_value: "0.5 g/100 mL"
+        value: 52.8
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "0.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A90-15"
+        lever_value: "1.5 g/100 mL"
+        value: 38.7
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "1.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A90-25"
+        lever_value: "2.5 g/100 mL"
+        value: 32.5
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "2.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A90-35"
+        lever_value: "3.5 g/100 mL"
+        value: 28.0
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "3.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-2"
+    odorant: "hexanal"
+    lever_class: "precursor dose"
+    lever: "xylose added (g/100 mL), 5-level ladder"
+    focal: true
+    location: "Fig. 4a"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A95-0"
+        lever_value: "0 g/100 mL"
+        value: 56.1
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A95-5"
+        lever_value: "0.5 g/100 mL"
+        value: 35.4
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "0.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A95-15"
+        lever_value: "1.5 g/100 mL"
+        value: 22.6
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "1.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A95-25"
+        lever_value: "2.5 g/100 mL"
+        value: 17.4
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "2.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A95-35"
+        lever_value: "3.5 g/100 mL"
+        value: 14.5
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "3.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-3"
+    odorant: "hexanal"
+    lever_class: "precursor dose"
+    lever: "xylose added (g/100 mL), 5-level ladder"
+    focal: true
+    location: "Fig. 4a"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A100-0"
+        lever_value: "0 g/100 mL"
+        value: 19.7
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A100-5"
+        lever_value: "0.5 g/100 mL"
+        value: 21.6
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "0.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A100-15"
+        lever_value: "1.5 g/100 mL"
+        value: 12.6
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "1.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A100-25"
+        lever_value: "2.5 g/100 mL"
+        value: 9.0
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "2.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A100-35 [A100-35 printed in text p. 7-8 (9.44 x10^6)]"
+        lever_value: "3.5 g/100 mL"
+        value: 9.44
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "3.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-4"
+    odorant: "hexanal"
+    lever_class: "precursor dose"
+    lever: "xylose added (g/100 mL), 5-level ladder"
+    focal: true
+    location: "Fig. 4b"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "B90-0"
+        lever_value: "0 g/100 mL"
+        value: 54.2
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B90-5"
+        lever_value: "0.5 g/100 mL"
+        value: 34.7
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "0.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B90-15"
+        lever_value: "1.5 g/100 mL"
+        value: 36.3
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "1.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B90-25"
+        lever_value: "2.5 g/100 mL"
+        value: 25.3
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "2.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B90-35"
+        lever_value: "3.5 g/100 mL"
+        value: 25.3
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "3.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-5"
+    odorant: "hexanal"
+    lever_class: "precursor dose"
+    lever: "xylose added (g/100 mL), 5-level ladder"
+    focal: true
+    location: "Fig. 4b"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "B95-0"
+        lever_value: "0 g/100 mL"
+        value: 46.8
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B95-5"
+        lever_value: "0.5 g/100 mL"
+        value: 25.0
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "0.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B95-15"
+        lever_value: "1.5 g/100 mL"
+        value: 17.6
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "1.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B95-25"
+        lever_value: "2.5 g/100 mL"
+        value: 17.0
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "2.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B95-35"
+        lever_value: "3.5 g/100 mL"
+        value: 16.0
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "3.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-6"
+    odorant: "hexanal"
+    lever_class: "precursor dose"
+    lever: "xylose added (g/100 mL), 5-level ladder"
+    focal: true
+    location: "Fig. 4b"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "B100-0"
+        lever_value: "0 g/100 mL"
+        value: 35.9
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B100-5"
+        lever_value: "0.5 g/100 mL"
+        value: 18.6
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "0.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B100-15"
+        lever_value: "1.5 g/100 mL"
+        value: 10.9
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "1.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B100-25"
+        lever_value: "2.5 g/100 mL"
+        value: 9.9
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "2.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B100-35 [B100-35 printed in text (7.94 x10^6)]"
+        lever_value: "3.5 g/100 mL"
+        value: 7.94
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "3.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-7"
+    odorant: "hexanal"
+    lever_class: "temperature"
+    lever: "heating temperature 90/95/100 C (60 min) plus the unheated control"
+    focal: true
+    location: "Fig. 4a"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A0 [unheated control, 25 C]"
+        lever_value: "25 C (unheated)"
+        value: 49.9
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 25
+          time_min: null
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A90-0"
+        lever_value: "90 C"
+        value: 63.1
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A95-0"
+        lever_value: "95 C"
+        value: 56.1
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A100-0"
+        lever_value: "100 C"
+        value: 19.7
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-8"
+    odorant: "hexanal"
+    lever_class: "temperature"
+    lever: "heating temperature 90/95/100 C (60 min)"
+    focal: true
+    location: "Fig. 4a"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A90-5"
+        lever_value: "90 C"
+        value: 52.8
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "0.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A95-5"
+        lever_value: "95 C"
+        value: 35.4
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "0.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A100-5"
+        lever_value: "100 C"
+        value: 21.6
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "0.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-9"
+    odorant: "hexanal"
+    lever_class: "temperature"
+    lever: "heating temperature 90/95/100 C (60 min)"
+    focal: true
+    location: "Fig. 4a"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A90-15"
+        lever_value: "90 C"
+        value: 38.7
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "1.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A95-15"
+        lever_value: "95 C"
+        value: 22.6
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "1.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A100-15"
+        lever_value: "100 C"
+        value: 12.6
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "1.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-10"
+    odorant: "hexanal"
+    lever_class: "temperature"
+    lever: "heating temperature 90/95/100 C (60 min)"
+    focal: true
+    location: "Fig. 4a"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A90-25"
+        lever_value: "90 C"
+        value: 32.5
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "2.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A95-25"
+        lever_value: "95 C"
+        value: 17.4
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "2.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A100-25"
+        lever_value: "100 C"
+        value: 9.0
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "2.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-11"
+    odorant: "hexanal"
+    lever_class: "temperature"
+    lever: "heating temperature 90/95/100 C (60 min)"
+    focal: true
+    location: "Fig. 4a"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A90-35"
+        lever_value: "90 C"
+        value: 28.0
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "3.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A95-35"
+        lever_value: "95 C"
+        value: 14.5
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "3.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A100-35 [A100-35 printed in text p. 7-8 (9.44 x10^6)]"
+        lever_value: "100 C"
+        value: 9.44
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "3.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-12"
+    odorant: "hexanal"
+    lever_class: "temperature"
+    lever: "heating temperature 90/95/100 C (60 min) plus the unheated control"
+    focal: true
+    location: "Fig. 4b"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "B0 [unheated control, 25 C]"
+        lever_value: "25 C (unheated)"
+        value: 74.8
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 25
+          time_min: null
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B90-0"
+        lever_value: "90 C"
+        value: 54.2
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B95-0"
+        lever_value: "95 C"
+        value: 46.8
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B100-0"
+        lever_value: "100 C"
+        value: 35.9
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-13"
+    odorant: "hexanal"
+    lever_class: "temperature"
+    lever: "heating temperature 90/95/100 C (60 min)"
+    focal: true
+    location: "Fig. 4b"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "B90-5"
+        lever_value: "90 C"
+        value: 34.7
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "0.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B95-5"
+        lever_value: "95 C"
+        value: 25.0
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "0.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B100-5"
+        lever_value: "100 C"
+        value: 18.6
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "0.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-14"
+    odorant: "hexanal"
+    lever_class: "temperature"
+    lever: "heating temperature 90/95/100 C (60 min)"
+    focal: true
+    location: "Fig. 4b"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "B90-15"
+        lever_value: "90 C"
+        value: 36.3
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "1.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B95-15"
+        lever_value: "95 C"
+        value: 17.6
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "1.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B100-15"
+        lever_value: "100 C"
+        value: 10.9
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "1.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-15"
+    odorant: "hexanal"
+    lever_class: "temperature"
+    lever: "heating temperature 90/95/100 C (60 min)"
+    focal: true
+    location: "Fig. 4b"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "B90-25"
+        lever_value: "90 C"
+        value: 25.3
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "2.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B95-25"
+        lever_value: "95 C"
+        value: 17.0
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "2.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B100-25"
+        lever_value: "100 C"
+        value: 9.9
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "2.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-16"
+    odorant: "hexanal"
+    lever_class: "temperature"
+    lever: "heating temperature 90/95/100 C (60 min)"
+    focal: true
+    location: "Fig. 4b"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "B90-35"
+        lever_value: "90 C"
+        value: 25.3
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "3.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B95-35"
+        lever_value: "95 C"
+        value: 16.0
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "3.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B100-35 [B100-35 printed in text (7.94 x10^6)]"
+        lever_value: "100 C"
+        value: 7.94
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "3.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-17"
+    odorant: "hexanal"
+    lever_class: "pH"
+    lever: "initial pH 5.5 vs 4.5 (unheated controls)"
+    focal: true
+    location: "Fig. 4a / Fig. 4b"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A0 [unheated control]"
+        lever_value: "5.5"
+        value: 49.9
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 25
+          time_min: null
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B0 [unheated control]"
+        lever_value: "4.5"
+        value: 74.8
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 25
+          time_min: null
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-18"
+    odorant: "hexanal"
+    lever_class: "pH"
+    lever: "initial pH 5.5 vs 4.5"
+    focal: true
+    location: "Fig. 4a / Fig. 4b"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A90-0"
+        lever_value: "5.5"
+        value: 63.1
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B90-0"
+        lever_value: "4.5"
+        value: 54.2
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-19"
+    odorant: "hexanal"
+    lever_class: "pH"
+    lever: "initial pH 5.5 vs 4.5"
+    focal: true
+    location: "Fig. 4a / Fig. 4b"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A90-5"
+        lever_value: "5.5"
+        value: 52.8
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "0.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B90-5"
+        lever_value: "4.5"
+        value: 34.7
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "0.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-20"
+    odorant: "hexanal"
+    lever_class: "pH"
+    lever: "initial pH 5.5 vs 4.5"
+    focal: true
+    location: "Fig. 4a / Fig. 4b"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A90-15"
+        lever_value: "5.5"
+        value: 38.7
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "1.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B90-15"
+        lever_value: "4.5"
+        value: 36.3
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "1.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-21"
+    odorant: "hexanal"
+    lever_class: "pH"
+    lever: "initial pH 5.5 vs 4.5"
+    focal: true
+    location: "Fig. 4a / Fig. 4b"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A90-25"
+        lever_value: "5.5"
+        value: 32.5
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "2.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B90-25"
+        lever_value: "4.5"
+        value: 25.3
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "2.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-22"
+    odorant: "hexanal"
+    lever_class: "pH"
+    lever: "initial pH 5.5 vs 4.5"
+    focal: true
+    location: "Fig. 4a / Fig. 4b"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A90-35"
+        lever_value: "5.5"
+        value: 28.0
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "3.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B90-35"
+        lever_value: "4.5"
+        value: 25.3
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "3.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-23"
+    odorant: "hexanal"
+    lever_class: "pH"
+    lever: "initial pH 5.5 vs 4.5"
+    focal: true
+    location: "Fig. 4a / Fig. 4b"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A95-0"
+        lever_value: "5.5"
+        value: 56.1
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B95-0"
+        lever_value: "4.5"
+        value: 46.8
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-24"
+    odorant: "hexanal"
+    lever_class: "pH"
+    lever: "initial pH 5.5 vs 4.5"
+    focal: true
+    location: "Fig. 4a / Fig. 4b"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A95-5"
+        lever_value: "5.5"
+        value: 35.4
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "0.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B95-5"
+        lever_value: "4.5"
+        value: 25.0
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "0.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-25"
+    odorant: "hexanal"
+    lever_class: "pH"
+    lever: "initial pH 5.5 vs 4.5"
+    focal: true
+    location: "Fig. 4a / Fig. 4b"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A95-15"
+        lever_value: "5.5"
+        value: 22.6
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "1.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B95-15"
+        lever_value: "4.5"
+        value: 17.6
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "1.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-26"
+    odorant: "hexanal"
+    lever_class: "pH"
+    lever: "initial pH 5.5 vs 4.5"
+    focal: true
+    location: "Fig. 4a / Fig. 4b"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A95-25"
+        lever_value: "5.5"
+        value: 17.4
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "2.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B95-25"
+        lever_value: "4.5"
+        value: 17.0
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "2.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-27"
+    odorant: "hexanal"
+    lever_class: "pH"
+    lever: "initial pH 5.5 vs 4.5"
+    focal: true
+    location: "Fig. 4a / Fig. 4b"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A95-35"
+        lever_value: "5.5"
+        value: 14.5
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "3.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B95-35"
+        lever_value: "4.5"
+        value: 16.0
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "3.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-28"
+    odorant: "hexanal"
+    lever_class: "pH"
+    lever: "initial pH 5.5 vs 4.5"
+    focal: true
+    location: "Fig. 4a / Fig. 4b"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A100-0"
+        lever_value: "5.5"
+        value: 19.7
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B100-0"
+        lever_value: "4.5"
+        value: 35.9
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-29"
+    odorant: "hexanal"
+    lever_class: "pH"
+    lever: "initial pH 5.5 vs 4.5"
+    focal: true
+    location: "Fig. 4a / Fig. 4b"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A100-5"
+        lever_value: "5.5"
+        value: 21.6
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "0.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B100-5"
+        lever_value: "4.5"
+        value: 18.6
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "0.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-30"
+    odorant: "hexanal"
+    lever_class: "pH"
+    lever: "initial pH 5.5 vs 4.5"
+    focal: true
+    location: "Fig. 4a / Fig. 4b"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A100-15"
+        lever_value: "5.5"
+        value: 12.6
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "1.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B100-15"
+        lever_value: "4.5"
+        value: 10.9
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "1.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-31"
+    odorant: "hexanal"
+    lever_class: "pH"
+    lever: "initial pH 5.5 vs 4.5"
+    focal: true
+    location: "Fig. 4a / Fig. 4b"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A100-25"
+        lever_value: "5.5"
+        value: 9.0
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "2.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B100-25"
+        lever_value: "4.5"
+        value: 9.9
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "2.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-32"
+    odorant: "hexanal"
+    lever_class: "pH"
+    lever: "initial pH 5.5 vs 4.5"
+    focal: true
+    location: "Fig. 4a / Fig. 4b"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A100-35 [A100-35 printed in text p. 7-8 (9.44 x10^6)]"
+        lever_value: "5.5"
+        value: 9.44
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "3.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B100-35 [B100-35 printed in text (7.94 x10^6)]"
+        lever_value: "4.5"
+        value: 7.94
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "3.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-33"
+    odorant: "furfural"
+    lever_class: "precursor dose"
+    lever: "xylose added (g/100 mL), 5-level ladder"
+    focal: true
+    location: "Fig. 4c"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A90-0"
+        lever_value: "0 g/100 mL"
+        value: 2.0
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A90-5"
+        lever_value: "0.5 g/100 mL"
+        value: 16.1
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "0.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A90-15"
+        lever_value: "1.5 g/100 mL"
+        value: 24.1
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "1.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A90-25"
+        lever_value: "2.5 g/100 mL"
+        value: 48.2
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "2.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A90-35"
+        lever_value: "3.5 g/100 mL"
+        value: 67.9
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "3.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-34"
+    odorant: "furfural"
+    lever_class: "precursor dose"
+    lever: "xylose added (g/100 mL), 5-level ladder"
+    focal: true
+    location: "Fig. 4c"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A95-0"
+        lever_value: "0 g/100 mL"
+        value: 2.0
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A95-5"
+        lever_value: "0.5 g/100 mL"
+        value: 20.1
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "0.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A95-15"
+        lever_value: "1.5 g/100 mL"
+        value: 30.6
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "1.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A95-25"
+        lever_value: "2.5 g/100 mL"
+        value: 55.5
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "2.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A95-35"
+        lever_value: "3.5 g/100 mL"
+        value: 52.7
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "3.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-35"
+    odorant: "furfural"
+    lever_class: "precursor dose"
+    lever: "xylose added (g/100 mL), 5-level ladder"
+    focal: true
+    location: "Fig. 4c"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A100-0"
+        lever_value: "0 g/100 mL"
+        value: 1.6
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A100-5"
+        lever_value: "0.5 g/100 mL"
+        value: 41.0
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "0.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A100-15"
+        lever_value: "1.5 g/100 mL"
+        value: 69.5
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "1.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A100-25"
+        lever_value: "2.5 g/100 mL"
+        value: 96.1
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "2.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A100-35 [A100-35 printed in text p. 7 (111.67 x10^6)]"
+        lever_value: "3.5 g/100 mL"
+        value: 111.67
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "3.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-36"
+    odorant: "furfural"
+    lever_class: "precursor dose"
+    lever: "xylose added (g/100 mL), 5-level ladder"
+    focal: true
+    location: "Fig. 4d"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "B90-0"
+        lever_value: "0 g/100 mL"
+        value: 8.4
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B90-5"
+        lever_value: "0.5 g/100 mL"
+        value: 114.0
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "0.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B90-15"
+        lever_value: "1.5 g/100 mL"
+        value: 184.8
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "1.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B90-25"
+        lever_value: "2.5 g/100 mL"
+        value: 236.4
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "2.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B90-35"
+        lever_value: "3.5 g/100 mL"
+        value: 282.0
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "3.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-37"
+    odorant: "furfural"
+    lever_class: "precursor dose"
+    lever: "xylose added (g/100 mL), 5-level ladder"
+    focal: true
+    location: "Fig. 4d"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "B95-0"
+        lever_value: "0 g/100 mL"
+        value: 4.8
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B95-5"
+        lever_value: "0.5 g/100 mL"
+        value: 148.8
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "0.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B95-15"
+        lever_value: "1.5 g/100 mL"
+        value: 242.4
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "1.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B95-25"
+        lever_value: "2.5 g/100 mL"
+        value: 288.0
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "2.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B95-35"
+        lever_value: "3.5 g/100 mL"
+        value: 319.2
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "3.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-38"
+    odorant: "furfural"
+    lever_class: "precursor dose"
+    lever: "xylose added (g/100 mL), 5-level ladder"
+    focal: true
+    location: "Fig. 4d"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "B100-0"
+        lever_value: "0 g/100 mL"
+        value: 6.0
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B100-5"
+        lever_value: "0.5 g/100 mL"
+        value: 183.6
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "0.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B100-15"
+        lever_value: "1.5 g/100 mL"
+        value: 277.2
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "1.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B100-25"
+        lever_value: "2.5 g/100 mL"
+        value: 316.8
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "2.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B100-35 [B100-35 printed in text (361.74 x10^6)]"
+        lever_value: "3.5 g/100 mL"
+        value: 361.74
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "3.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-39"
+    odorant: "furfural"
+    lever_class: "temperature"
+    lever: "heating temperature 90/95/100 C (60 min) plus the unheated control"
+    focal: true
+    location: "Fig. 4c"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A0 [unheated control, 25 C; value printed in text p. 7]"
+        lever_value: "25 C (unheated)"
+        value: 4.13
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 25
+          time_min: null
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A90-0"
+        lever_value: "90 C"
+        value: 2.0
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A95-0"
+        lever_value: "95 C"
+        value: 2.0
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A100-0"
+        lever_value: "100 C"
+        value: 1.6
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-40"
+    odorant: "furfural"
+    lever_class: "temperature"
+    lever: "heating temperature 90/95/100 C (60 min)"
+    focal: true
+    location: "Fig. 4c"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A90-5"
+        lever_value: "90 C"
+        value: 16.1
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "0.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A95-5"
+        lever_value: "95 C"
+        value: 20.1
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "0.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A100-5"
+        lever_value: "100 C"
+        value: 41.0
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "0.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-41"
+    odorant: "furfural"
+    lever_class: "temperature"
+    lever: "heating temperature 90/95/100 C (60 min)"
+    focal: true
+    location: "Fig. 4c"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A90-15"
+        lever_value: "90 C"
+        value: 24.1
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "1.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A95-15"
+        lever_value: "95 C"
+        value: 30.6
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "1.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A100-15"
+        lever_value: "100 C"
+        value: 69.5
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "1.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-42"
+    odorant: "furfural"
+    lever_class: "temperature"
+    lever: "heating temperature 90/95/100 C (60 min)"
+    focal: true
+    location: "Fig. 4c"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A90-25"
+        lever_value: "90 C"
+        value: 48.2
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "2.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A95-25"
+        lever_value: "95 C"
+        value: 55.5
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "2.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A100-25"
+        lever_value: "100 C"
+        value: 96.1
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "2.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-43"
+    odorant: "furfural"
+    lever_class: "temperature"
+    lever: "heating temperature 90/95/100 C (60 min)"
+    focal: true
+    location: "Fig. 4c"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A90-35"
+        lever_value: "90 C"
+        value: 67.9
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "3.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A95-35"
+        lever_value: "95 C"
+        value: 52.7
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "3.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A100-35 [A100-35 printed in text p. 7 (111.67 x10^6)]"
+        lever_value: "100 C"
+        value: 111.67
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "3.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-44"
+    odorant: "furfural"
+    lever_class: "temperature"
+    lever: "heating temperature 90/95/100 C (60 min) plus the unheated control"
+    focal: true
+    location: "Fig. 4d"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "B0 [unheated control, 25 C; value printed in text p. 7]"
+        lever_value: "25 C (unheated)"
+        value: 9.14
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 25
+          time_min: null
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B90-0"
+        lever_value: "90 C"
+        value: 8.4
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B95-0"
+        lever_value: "95 C"
+        value: 4.8
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B100-0"
+        lever_value: "100 C"
+        value: 6.0
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-45"
+    odorant: "furfural"
+    lever_class: "temperature"
+    lever: "heating temperature 90/95/100 C (60 min)"
+    focal: true
+    location: "Fig. 4d"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "B90-5"
+        lever_value: "90 C"
+        value: 114.0
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "0.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B95-5"
+        lever_value: "95 C"
+        value: 148.8
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "0.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B100-5"
+        lever_value: "100 C"
+        value: 183.6
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "0.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-46"
+    odorant: "furfural"
+    lever_class: "temperature"
+    lever: "heating temperature 90/95/100 C (60 min)"
+    focal: true
+    location: "Fig. 4d"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "B90-15"
+        lever_value: "90 C"
+        value: 184.8
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "1.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B95-15"
+        lever_value: "95 C"
+        value: 242.4
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "1.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B100-15"
+        lever_value: "100 C"
+        value: 277.2
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "1.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-47"
+    odorant: "furfural"
+    lever_class: "temperature"
+    lever: "heating temperature 90/95/100 C (60 min)"
+    focal: true
+    location: "Fig. 4d"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "B90-25"
+        lever_value: "90 C"
+        value: 236.4
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "2.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B95-25"
+        lever_value: "95 C"
+        value: 288.0
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "2.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B100-25"
+        lever_value: "100 C"
+        value: 316.8
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "2.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-48"
+    odorant: "furfural"
+    lever_class: "temperature"
+    lever: "heating temperature 90/95/100 C (60 min)"
+    focal: true
+    location: "Fig. 4d"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "B90-35"
+        lever_value: "90 C"
+        value: 282.0
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "3.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B95-35"
+        lever_value: "95 C"
+        value: 319.2
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "3.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B100-35 [B100-35 printed in text (361.74 x10^6)]"
+        lever_value: "100 C"
+        value: 361.74
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "3.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-49"
+    odorant: "furfural"
+    lever_class: "pH"
+    lever: "initial pH 5.5 vs 4.5 (unheated controls)"
+    focal: true
+    location: "Fig. 4c / Fig. 4d"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A0 [unheated control]"
+        lever_value: "5.5"
+        value: 4.13
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 25
+          time_min: null
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B0 [unheated control]"
+        lever_value: "4.5"
+        value: 9.14
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 25
+          time_min: null
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-50"
+    odorant: "furfural"
+    lever_class: "pH"
+    lever: "initial pH 5.5 vs 4.5"
+    focal: true
+    location: "Fig. 4c / Fig. 4d"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A90-0"
+        lever_value: "5.5"
+        value: 2.0
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B90-0"
+        lever_value: "4.5"
+        value: 8.4
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-51"
+    odorant: "furfural"
+    lever_class: "pH"
+    lever: "initial pH 5.5 vs 4.5"
+    focal: true
+    location: "Fig. 4c / Fig. 4d"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A90-5"
+        lever_value: "5.5"
+        value: 16.1
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "0.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B90-5"
+        lever_value: "4.5"
+        value: 114.0
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "0.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-52"
+    odorant: "furfural"
+    lever_class: "pH"
+    lever: "initial pH 5.5 vs 4.5"
+    focal: true
+    location: "Fig. 4c / Fig. 4d"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A90-15"
+        lever_value: "5.5"
+        value: 24.1
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "1.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B90-15"
+        lever_value: "4.5"
+        value: 184.8
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "1.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-53"
+    odorant: "furfural"
+    lever_class: "pH"
+    lever: "initial pH 5.5 vs 4.5"
+    focal: true
+    location: "Fig. 4c / Fig. 4d"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A90-25"
+        lever_value: "5.5"
+        value: 48.2
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "2.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B90-25"
+        lever_value: "4.5"
+        value: 236.4
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "2.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-54"
+    odorant: "furfural"
+    lever_class: "pH"
+    lever: "initial pH 5.5 vs 4.5"
+    focal: true
+    location: "Fig. 4c / Fig. 4d"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A90-35"
+        lever_value: "5.5"
+        value: 67.9
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "3.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B90-35"
+        lever_value: "4.5"
+        value: 282.0
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "3.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-55"
+    odorant: "furfural"
+    lever_class: "pH"
+    lever: "initial pH 5.5 vs 4.5"
+    focal: true
+    location: "Fig. 4c / Fig. 4d"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A95-0"
+        lever_value: "5.5"
+        value: 2.0
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B95-0"
+        lever_value: "4.5"
+        value: 4.8
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-56"
+    odorant: "furfural"
+    lever_class: "pH"
+    lever: "initial pH 5.5 vs 4.5"
+    focal: true
+    location: "Fig. 4c / Fig. 4d"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A95-5"
+        lever_value: "5.5"
+        value: 20.1
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "0.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B95-5"
+        lever_value: "4.5"
+        value: 148.8
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "0.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-57"
+    odorant: "furfural"
+    lever_class: "pH"
+    lever: "initial pH 5.5 vs 4.5"
+    focal: true
+    location: "Fig. 4c / Fig. 4d"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A95-15"
+        lever_value: "5.5"
+        value: 30.6
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "1.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B95-15"
+        lever_value: "4.5"
+        value: 242.4
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "1.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-58"
+    odorant: "furfural"
+    lever_class: "pH"
+    lever: "initial pH 5.5 vs 4.5"
+    focal: true
+    location: "Fig. 4c / Fig. 4d"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A95-25"
+        lever_value: "5.5"
+        value: 55.5
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "2.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B95-25"
+        lever_value: "4.5"
+        value: 288.0
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "2.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-59"
+    odorant: "furfural"
+    lever_class: "pH"
+    lever: "initial pH 5.5 vs 4.5"
+    focal: true
+    location: "Fig. 4c / Fig. 4d"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A95-35"
+        lever_value: "5.5"
+        value: 52.7
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "3.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B95-35"
+        lever_value: "4.5"
+        value: 319.2
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "3.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-60"
+    odorant: "furfural"
+    lever_class: "pH"
+    lever: "initial pH 5.5 vs 4.5"
+    focal: true
+    location: "Fig. 4c / Fig. 4d"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A100-0"
+        lever_value: "5.5"
+        value: 1.6
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B100-0"
+        lever_value: "4.5"
+        value: 6.0
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-61"
+    odorant: "furfural"
+    lever_class: "pH"
+    lever: "initial pH 5.5 vs 4.5"
+    focal: true
+    location: "Fig. 4c / Fig. 4d"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A100-5"
+        lever_value: "5.5"
+        value: 41.0
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "0.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B100-5"
+        lever_value: "4.5"
+        value: 183.6
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "0.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-62"
+    odorant: "furfural"
+    lever_class: "pH"
+    lever: "initial pH 5.5 vs 4.5"
+    focal: true
+    location: "Fig. 4c / Fig. 4d"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A100-15"
+        lever_value: "5.5"
+        value: 69.5
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "1.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B100-15"
+        lever_value: "4.5"
+        value: 277.2
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "1.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-63"
+    odorant: "furfural"
+    lever_class: "pH"
+    lever: "initial pH 5.5 vs 4.5"
+    focal: true
+    location: "Fig. 4c / Fig. 4d"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A100-25"
+        lever_value: "5.5"
+        value: 96.1
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "2.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B100-25"
+        lever_value: "4.5"
+        value: 316.8
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "2.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-64"
+    odorant: "furfural"
+    lever_class: "pH"
+    lever: "initial pH 5.5 vs 4.5"
+    focal: true
+    location: "Fig. 4c / Fig. 4d"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A100-35 [A100-35 printed in text p. 7 (111.67 x10^6)]"
+        lever_value: "5.5"
+        value: 111.67
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "3.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B100-35 [B100-35 printed in text (361.74 x10^6)]"
+        lever_value: "4.5"
+        value: 361.74
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "3.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-65"
+    odorant: "2-pentylfuran"
+    lever_class: "precursor dose"
+    lever: "xylose added (g/100 mL), 5-level ladder"
+    focal: true
+    location: "Fig. 4e"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A90-0"
+        lever_value: "0 g/100 mL"
+        value: 156.3
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A90-5"
+        lever_value: "0.5 g/100 mL"
+        value: 186.2
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "0.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A90-15"
+        lever_value: "1.5 g/100 mL"
+        value: 183.4
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "1.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A90-25"
+        lever_value: "2.5 g/100 mL"
+        value: 164.7
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "2.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A90-35"
+        lever_value: "3.5 g/100 mL"
+        value: 131.0
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "3.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-66"
+    odorant: "2-pentylfuran"
+    lever_class: "precursor dose"
+    lever: "xylose added (g/100 mL), 5-level ladder"
+    focal: true
+    location: "Fig. 4e"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A95-0"
+        lever_value: "0 g/100 mL"
+        value: 195.6
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A95-5"
+        lever_value: "0.5 g/100 mL"
+        value: 244.3
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "0.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A95-15"
+        lever_value: "1.5 g/100 mL"
+        value: 220.9
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "1.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A95-25"
+        lever_value: "2.5 g/100 mL"
+        value: 193.7
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "2.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A95-35"
+        lever_value: "3.5 g/100 mL"
+        value: 170.3
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "3.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-67"
+    odorant: "2-pentylfuran"
+    lever_class: "precursor dose"
+    lever: "xylose added (g/100 mL), 5-level ladder"
+    focal: true
+    location: "Fig. 4e"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A100-0"
+        lever_value: "0 g/100 mL"
+        value: 242.4
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A100-5 [A100-5 printed in text p. 8 (272.50 x10^6)]"
+        lever_value: "0.5 g/100 mL"
+        value: 272.5
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "0.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A100-15"
+        lever_value: "1.5 g/100 mL"
+        value: 232.1
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "1.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A100-25"
+        lever_value: "2.5 g/100 mL"
+        value: 187.2
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "2.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A100-35"
+        lever_value: "3.5 g/100 mL"
+        value: 187.2
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "3.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-68"
+    odorant: "2-pentylfuran"
+    lever_class: "precursor dose"
+    lever: "xylose added (g/100 mL), 5-level ladder"
+    focal: true
+    location: "Fig. 4f"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "B90-0"
+        lever_value: "0 g/100 mL"
+        value: 159.1
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B90-5"
+        lever_value: "0.5 g/100 mL"
+        value: 141.3
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "0.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B90-15"
+        lever_value: "1.5 g/100 mL"
+        value: 160.0
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "1.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B90-25"
+        lever_value: "2.5 g/100 mL"
+        value: 159.1
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "2.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B90-35"
+        lever_value: "3.5 g/100 mL"
+        value: 144.1
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "3.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-69"
+    odorant: "2-pentylfuran"
+    lever_class: "precursor dose"
+    lever: "xylose added (g/100 mL), 5-level ladder"
+    focal: true
+    location: "Fig. 4f"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "B95-0"
+        lever_value: "0 g/100 mL"
+        value: 204.0
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B95-5"
+        lever_value: "0.5 g/100 mL"
+        value: 208.7
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "0.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B95-15"
+        lever_value: "1.5 g/100 mL"
+        value: 207.8
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "1.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B95-25"
+        lever_value: "2.5 g/100 mL"
+        value: 174.1
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "2.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B95-35"
+        lever_value: "3.5 g/100 mL"
+        value: 136.6
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "3.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-70"
+    odorant: "2-pentylfuran"
+    lever_class: "precursor dose"
+    lever: "xylose added (g/100 mL), 5-level ladder"
+    focal: true
+    location: "Fig. 4f"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "B100-0"
+        lever_value: "0 g/100 mL"
+        value: 223.7
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B100-5"
+        lever_value: "0.5 g/100 mL"
+        value: 216.2
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "0.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B100-15"
+        lever_value: "1.5 g/100 mL"
+        value: 177.8
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "1.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B100-25"
+        lever_value: "2.5 g/100 mL"
+        value: 156.3
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "2.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B100-35"
+        lever_value: "3.5 g/100 mL"
+        value: 132.0
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "3.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-71"
+    odorant: "2-pentylfuran"
+    lever_class: "temperature"
+    lever: "heating temperature 90/95/100 C (60 min) plus the unheated control"
+    focal: true
+    location: "Fig. 4e"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A0 [unheated control, 25 C]"
+        lever_value: "25 C (unheated)"
+        value: 44.0
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 25
+          time_min: null
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A90-0"
+        lever_value: "90 C"
+        value: 156.3
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A95-0"
+        lever_value: "95 C"
+        value: 195.6
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A100-0"
+        lever_value: "100 C"
+        value: 242.4
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-72"
+    odorant: "2-pentylfuran"
+    lever_class: "temperature"
+    lever: "heating temperature 90/95/100 C (60 min)"
+    focal: true
+    location: "Fig. 4e"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A90-5"
+        lever_value: "90 C"
+        value: 186.2
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "0.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A95-5"
+        lever_value: "95 C"
+        value: 244.3
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "0.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A100-5 [A100-5 printed in text p. 8 (272.50 x10^6)]"
+        lever_value: "100 C"
+        value: 272.5
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "0.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-73"
+    odorant: "2-pentylfuran"
+    lever_class: "temperature"
+    lever: "heating temperature 90/95/100 C (60 min)"
+    focal: true
+    location: "Fig. 4e"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A90-15"
+        lever_value: "90 C"
+        value: 183.4
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "1.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A95-15"
+        lever_value: "95 C"
+        value: 220.9
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "1.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A100-15"
+        lever_value: "100 C"
+        value: 232.1
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "1.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-74"
+    odorant: "2-pentylfuran"
+    lever_class: "temperature"
+    lever: "heating temperature 90/95/100 C (60 min)"
+    focal: true
+    location: "Fig. 4e"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A90-25"
+        lever_value: "90 C"
+        value: 164.7
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "2.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A95-25"
+        lever_value: "95 C"
+        value: 193.7
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "2.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A100-25"
+        lever_value: "100 C"
+        value: 187.2
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "2.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-75"
+    odorant: "2-pentylfuran"
+    lever_class: "temperature"
+    lever: "heating temperature 90/95/100 C (60 min)"
+    focal: true
+    location: "Fig. 4e"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A90-35"
+        lever_value: "90 C"
+        value: 131.0
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "3.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A95-35"
+        lever_value: "95 C"
+        value: 170.3
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "3.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "A100-35"
+        lever_value: "100 C"
+        value: 187.2
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "3.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-76"
+    odorant: "2-pentylfuran"
+    lever_class: "temperature"
+    lever: "heating temperature 90/95/100 C (60 min) plus the unheated control"
+    focal: true
+    location: "Fig. 4f"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "B0 [unheated control, 25 C]"
+        lever_value: "25 C (unheated)"
+        value: 43.0
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 25
+          time_min: null
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B90-0"
+        lever_value: "90 C"
+        value: 159.1
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B95-0"
+        lever_value: "95 C"
+        value: 204.0
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B100-0"
+        lever_value: "100 C"
+        value: 223.7
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-77"
+    odorant: "2-pentylfuran"
+    lever_class: "temperature"
+    lever: "heating temperature 90/95/100 C (60 min)"
+    focal: true
+    location: "Fig. 4f"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "B90-5"
+        lever_value: "90 C"
+        value: 141.3
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "0.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B95-5"
+        lever_value: "95 C"
+        value: 208.7
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "0.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B100-5"
+        lever_value: "100 C"
+        value: 216.2
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "0.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-78"
+    odorant: "2-pentylfuran"
+    lever_class: "temperature"
+    lever: "heating temperature 90/95/100 C (60 min)"
+    focal: true
+    location: "Fig. 4f"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "B90-15"
+        lever_value: "90 C"
+        value: 160.0
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "1.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B95-15"
+        lever_value: "95 C"
+        value: 207.8
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "1.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B100-15"
+        lever_value: "100 C"
+        value: 177.8
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "1.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-79"
+    odorant: "2-pentylfuran"
+    lever_class: "temperature"
+    lever: "heating temperature 90/95/100 C (60 min)"
+    focal: true
+    location: "Fig. 4f"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "B90-25"
+        lever_value: "90 C"
+        value: 159.1
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "2.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B95-25"
+        lever_value: "95 C"
+        value: 174.1
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "2.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B100-25"
+        lever_value: "100 C"
+        value: 156.3
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "2.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-80"
+    odorant: "2-pentylfuran"
+    lever_class: "temperature"
+    lever: "heating temperature 90/95/100 C (60 min)"
+    focal: true
+    location: "Fig. 4f"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "B90-35"
+        lever_value: "90 C"
+        value: 144.1
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "3.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B95-35"
+        lever_value: "95 C"
+        value: 136.6
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "3.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B100-35"
+        lever_value: "100 C"
+        value: 132.0
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "3.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-81"
+    odorant: "2-pentylfuran"
+    lever_class: "pH"
+    lever: "initial pH 5.5 vs 4.5 (unheated controls)"
+    focal: true
+    location: "Fig. 4e / Fig. 4f"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A0 [unheated control]"
+        lever_value: "5.5"
+        value: 44.0
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 25
+          time_min: null
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B0 [unheated control]"
+        lever_value: "4.5"
+        value: 43.0
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 25
+          time_min: null
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-82"
+    odorant: "2-pentylfuran"
+    lever_class: "pH"
+    lever: "initial pH 5.5 vs 4.5"
+    focal: true
+    location: "Fig. 4e / Fig. 4f"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A90-0"
+        lever_value: "5.5"
+        value: 156.3
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B90-0"
+        lever_value: "4.5"
+        value: 159.1
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-83"
+    odorant: "2-pentylfuran"
+    lever_class: "pH"
+    lever: "initial pH 5.5 vs 4.5"
+    focal: true
+    location: "Fig. 4e / Fig. 4f"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A90-5"
+        lever_value: "5.5"
+        value: 186.2
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "0.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B90-5"
+        lever_value: "4.5"
+        value: 141.3
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "0.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-84"
+    odorant: "2-pentylfuran"
+    lever_class: "pH"
+    lever: "initial pH 5.5 vs 4.5"
+    focal: true
+    location: "Fig. 4e / Fig. 4f"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A90-15"
+        lever_value: "5.5"
+        value: 183.4
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "1.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B90-15"
+        lever_value: "4.5"
+        value: 160.0
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "1.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-85"
+    odorant: "2-pentylfuran"
+    lever_class: "pH"
+    lever: "initial pH 5.5 vs 4.5"
+    focal: true
+    location: "Fig. 4e / Fig. 4f"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A90-25"
+        lever_value: "5.5"
+        value: 164.7
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "2.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B90-25"
+        lever_value: "4.5"
+        value: 159.1
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "2.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-86"
+    odorant: "2-pentylfuran"
+    lever_class: "pH"
+    lever: "initial pH 5.5 vs 4.5"
+    focal: true
+    location: "Fig. 4e / Fig. 4f"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A90-35"
+        lever_value: "5.5"
+        value: 131.0
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "3.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B90-35"
+        lever_value: "4.5"
+        value: 144.1
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 90
+          time_min: 60
+          precursors: {"xylose": "3.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-87"
+    odorant: "2-pentylfuran"
+    lever_class: "pH"
+    lever: "initial pH 5.5 vs 4.5"
+    focal: true
+    location: "Fig. 4e / Fig. 4f"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A95-0"
+        lever_value: "5.5"
+        value: 195.6
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B95-0"
+        lever_value: "4.5"
+        value: 204.0
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-88"
+    odorant: "2-pentylfuran"
+    lever_class: "pH"
+    lever: "initial pH 5.5 vs 4.5"
+    focal: true
+    location: "Fig. 4e / Fig. 4f"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A95-5"
+        lever_value: "5.5"
+        value: 244.3
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "0.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B95-5"
+        lever_value: "4.5"
+        value: 208.7
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "0.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-89"
+    odorant: "2-pentylfuran"
+    lever_class: "pH"
+    lever: "initial pH 5.5 vs 4.5"
+    focal: true
+    location: "Fig. 4e / Fig. 4f"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A95-15"
+        lever_value: "5.5"
+        value: 220.9
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "1.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B95-15"
+        lever_value: "4.5"
+        value: 207.8
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "1.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-90"
+    odorant: "2-pentylfuran"
+    lever_class: "pH"
+    lever: "initial pH 5.5 vs 4.5"
+    focal: true
+    location: "Fig. 4e / Fig. 4f"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A95-25"
+        lever_value: "5.5"
+        value: 193.7
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "2.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B95-25"
+        lever_value: "4.5"
+        value: 174.1
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "2.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-91"
+    odorant: "2-pentylfuran"
+    lever_class: "pH"
+    lever: "initial pH 5.5 vs 4.5"
+    focal: true
+    location: "Fig. 4e / Fig. 4f"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A95-35"
+        lever_value: "5.5"
+        value: 170.3
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "3.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B95-35"
+        lever_value: "4.5"
+        value: 136.6
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 95
+          time_min: 60
+          precursors: {"xylose": "3.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-92"
+    odorant: "2-pentylfuran"
+    lever_class: "pH"
+    lever: "initial pH 5.5 vs 4.5"
+    focal: true
+    location: "Fig. 4e / Fig. 4f"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A100-0"
+        lever_value: "5.5"
+        value: 242.4
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B100-0"
+        lever_value: "4.5"
+        value: 223.7
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "0 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-93"
+    odorant: "2-pentylfuran"
+    lever_class: "pH"
+    lever: "initial pH 5.5 vs 4.5"
+    focal: true
+    location: "Fig. 4e / Fig. 4f"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A100-5 [A100-5 printed in text p. 8 (272.50 x10^6)]"
+        lever_value: "5.5"
+        value: 272.5
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "0.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B100-5"
+        lever_value: "4.5"
+        value: 216.2
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "0.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-94"
+    odorant: "2-pentylfuran"
+    lever_class: "pH"
+    lever: "initial pH 5.5 vs 4.5"
+    focal: true
+    location: "Fig. 4e / Fig. 4f"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A100-15"
+        lever_value: "5.5"
+        value: 232.1
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "1.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B100-15"
+        lever_value: "4.5"
+        value: 177.8
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "1.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-95"
+    odorant: "2-pentylfuran"
+    lever_class: "pH"
+    lever: "initial pH 5.5 vs 4.5"
+    focal: true
+    location: "Fig. 4e / Fig. 4f"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A100-25"
+        lever_value: "5.5"
+        value: 187.2
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "2.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B100-25"
+        lever_value: "4.5"
+        value: 156.3
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "2.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+  - id: "li2021ph-96"
+    odorant: "2-pentylfuran"
+    lever_class: "pH"
+    lever: "initial pH 5.5 vs 4.5"
+    focal: true
+    location: "Fig. 4e / Fig. 4f"
+    digitised: true
+    unit: "GC-FID peak area (10^6)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "A100-35"
+        lever_value: "5.5"
+        value: 187.2
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 5.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "3.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"
+      - label: "B100-35"
+        lever_value: "4.5"
+        value: 132.0
+        censor: "none"
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.5
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 60
+          precursors: {"xylose": "3.5 g/100 mL"}
+          buffer: "none (pH adjusted with 1 M lactic acid)"
+          matrix: "other (enzymatic pork trimmings hydrolysate)"
+          headspace: "unstated"

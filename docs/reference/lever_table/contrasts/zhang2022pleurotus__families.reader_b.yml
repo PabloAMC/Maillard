@@ -1,0 +1,982 @@
+source: "zhang2022pleurotus"
+pdf: "data/articles/zhang2022b.pdf"
+reader: "b"
+scope_note: "Table 3 keyed as sulfur source (Cys / Met / Thi, each with xylose); the two-lever control PCH-TDPs keyed only for total pyrazines, the comparison the paper discusses; pyrazines detected only in the control (ethylpyrazine, 2,3-dimethylpyrazine, 2-ethyl-5-methylpyrazine, 2-ethenyl-6-methylpyrazine) not keyed; ND printed without a limit."
+contrasts:
+  - id: "zhang2022pleurotus-1"
+    odorant: "methional"
+    lever_class: "sulfur source"
+    lever: "L-cysteine vs L-methionine vs thiamine (equal S, with xylose)"
+    focal: true
+    location: "Table 3"
+    digitised: false
+    unit: "ng/g (peak area vs internal standard 1,2-dichlorobenzene)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Cys-MRPs"
+        lever_value: "L-cysteine"
+        value: 1.2
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.07
+        conditions:
+          ph: 7.4
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 120
+          precursors: {"P. citrinopileatus hydrolysate (PCH)": "1.0 g", "D-xylose": "0.3 g", "L-cysteine": "0.15 g (equal S content)"}
+          buffer: "none"
+          matrix: "plant protein (Pleurotus citrinopileatus mushroom hydrolysate), 10% w/v in water"
+          headspace: "sealed, unstated"
+      - label: "Met-MRPs"
+        lever_value: "L-methionine"
+        value: 102.67
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.27
+        conditions:
+          ph: 7.4
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 120
+          precursors: {"P. citrinopileatus hydrolysate (PCH)": "1.0 g", "D-xylose": "0.3 g", "L-methionine": "0.19 g (equal S content)"}
+          buffer: "none"
+          matrix: "plant protein (Pleurotus citrinopileatus mushroom hydrolysate), 10% w/v in water"
+          headspace: "sealed, unstated"
+      - label: "Thi-MRPs"
+        lever_value: "thiamine"
+        value: 1.47
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.18
+        conditions:
+          ph: 7.4
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 120
+          precursors: {"P. citrinopileatus hydrolysate (PCH)": "1.0 g", "D-xylose": "0.3 g", "thiamine": "0.42 g (equal S content)"}
+          buffer: "none"
+          matrix: "plant protein (Pleurotus citrinopileatus mushroom hydrolysate), 10% w/v in water"
+          headspace: "sealed, unstated"
+  - id: "zhang2022pleurotus-2"
+    odorant: "2-methylpropanal"
+    lever_class: "sulfur source"
+    lever: "L-cysteine vs L-methionine vs thiamine (equal S, with xylose)"
+    focal: true
+    location: "Table 3"
+    digitised: false
+    unit: "ng/g (peak area vs internal standard 1,2-dichlorobenzene)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Cys-MRPs"
+        lever_value: "L-cysteine"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 7.4
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 120
+          precursors: {"P. citrinopileatus hydrolysate (PCH)": "1.0 g", "D-xylose": "0.3 g", "L-cysteine": "0.15 g (equal S content)"}
+          buffer: "none"
+          matrix: "plant protein (Pleurotus citrinopileatus mushroom hydrolysate), 10% w/v in water"
+          headspace: "sealed, unstated"
+      - label: "Met-MRPs"
+        lever_value: "L-methionine"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 7.4
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 120
+          precursors: {"P. citrinopileatus hydrolysate (PCH)": "1.0 g", "D-xylose": "0.3 g", "L-methionine": "0.19 g (equal S content)"}
+          buffer: "none"
+          matrix: "plant protein (Pleurotus citrinopileatus mushroom hydrolysate), 10% w/v in water"
+          headspace: "sealed, unstated"
+      - label: "Thi-MRPs"
+        lever_value: "thiamine"
+        value: 16.25
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.95
+        conditions:
+          ph: 7.4
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 120
+          precursors: {"P. citrinopileatus hydrolysate (PCH)": "1.0 g", "D-xylose": "0.3 g", "thiamine": "0.42 g (equal S content)"}
+          buffer: "none"
+          matrix: "plant protein (Pleurotus citrinopileatus mushroom hydrolysate), 10% w/v in water"
+          headspace: "sealed, unstated"
+  - id: "zhang2022pleurotus-3"
+    odorant: "2-methylbutanal"
+    lever_class: "sulfur source"
+    lever: "L-cysteine vs L-methionine vs thiamine (equal S, with xylose)"
+    focal: true
+    location: "Table 3"
+    digitised: false
+    unit: "ng/g (peak area vs internal standard 1,2-dichlorobenzene)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Cys-MRPs"
+        lever_value: "L-cysteine"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 7.4
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 120
+          precursors: {"P. citrinopileatus hydrolysate (PCH)": "1.0 g", "D-xylose": "0.3 g", "L-cysteine": "0.15 g (equal S content)"}
+          buffer: "none"
+          matrix: "plant protein (Pleurotus citrinopileatus mushroom hydrolysate), 10% w/v in water"
+          headspace: "sealed, unstated"
+      - label: "Met-MRPs"
+        lever_value: "L-methionine"
+        value: 7.32
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.11
+        conditions:
+          ph: 7.4
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 120
+          precursors: {"P. citrinopileatus hydrolysate (PCH)": "1.0 g", "D-xylose": "0.3 g", "L-methionine": "0.19 g (equal S content)"}
+          buffer: "none"
+          matrix: "plant protein (Pleurotus citrinopileatus mushroom hydrolysate), 10% w/v in water"
+          headspace: "sealed, unstated"
+      - label: "Thi-MRPs"
+        lever_value: "thiamine"
+        value: 61.03
+        censor: none
+        limit: null
+        n: 3
+        sd: 5.05
+        conditions:
+          ph: 7.4
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 120
+          precursors: {"P. citrinopileatus hydrolysate (PCH)": "1.0 g", "D-xylose": "0.3 g", "thiamine": "0.42 g (equal S content)"}
+          buffer: "none"
+          matrix: "plant protein (Pleurotus citrinopileatus mushroom hydrolysate), 10% w/v in water"
+          headspace: "sealed, unstated"
+  - id: "zhang2022pleurotus-4"
+    odorant: "3-methylbutanal"
+    lever_class: "sulfur source"
+    lever: "L-cysteine vs L-methionine vs thiamine (equal S, with xylose)"
+    focal: true
+    location: "Table 3"
+    digitised: false
+    unit: "ng/g (peak area vs internal standard 1,2-dichlorobenzene)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Cys-MRPs"
+        lever_value: "L-cysteine"
+        value: 8.66
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.38
+        conditions:
+          ph: 7.4
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 120
+          precursors: {"P. citrinopileatus hydrolysate (PCH)": "1.0 g", "D-xylose": "0.3 g", "L-cysteine": "0.15 g (equal S content)"}
+          buffer: "none"
+          matrix: "plant protein (Pleurotus citrinopileatus mushroom hydrolysate), 10% w/v in water"
+          headspace: "sealed, unstated"
+      - label: "Met-MRPs"
+        lever_value: "L-methionine"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 7.4
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 120
+          precursors: {"P. citrinopileatus hydrolysate (PCH)": "1.0 g", "D-xylose": "0.3 g", "L-methionine": "0.19 g (equal S content)"}
+          buffer: "none"
+          matrix: "plant protein (Pleurotus citrinopileatus mushroom hydrolysate), 10% w/v in water"
+          headspace: "sealed, unstated"
+      - label: "Thi-MRPs"
+        lever_value: "thiamine"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 7.4
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 120
+          precursors: {"P. citrinopileatus hydrolysate (PCH)": "1.0 g", "D-xylose": "0.3 g", "thiamine": "0.42 g (equal S content)"}
+          buffer: "none"
+          matrix: "plant protein (Pleurotus citrinopileatus mushroom hydrolysate), 10% w/v in water"
+          headspace: "sealed, unstated"
+  - id: "zhang2022pleurotus-5"
+    odorant: "hexanal"
+    lever_class: "sulfur source"
+    lever: "L-cysteine vs L-methionine vs thiamine (equal S, with xylose)"
+    focal: true
+    location: "Table 3"
+    digitised: false
+    unit: "ng/g (peak area vs internal standard 1,2-dichlorobenzene)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Cys-MRPs"
+        lever_value: "L-cysteine"
+        value: 2.15
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.14
+        conditions:
+          ph: 7.4
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 120
+          precursors: {"P. citrinopileatus hydrolysate (PCH)": "1.0 g", "D-xylose": "0.3 g", "L-cysteine": "0.15 g (equal S content)"}
+          buffer: "none"
+          matrix: "plant protein (Pleurotus citrinopileatus mushroom hydrolysate), 10% w/v in water"
+          headspace: "sealed, unstated"
+      - label: "Met-MRPs"
+        lever_value: "L-methionine"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 7.4
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 120
+          precursors: {"P. citrinopileatus hydrolysate (PCH)": "1.0 g", "D-xylose": "0.3 g", "L-methionine": "0.19 g (equal S content)"}
+          buffer: "none"
+          matrix: "plant protein (Pleurotus citrinopileatus mushroom hydrolysate), 10% w/v in water"
+          headspace: "sealed, unstated"
+      - label: "Thi-MRPs"
+        lever_value: "thiamine"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 7.4
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 120
+          precursors: {"P. citrinopileatus hydrolysate (PCH)": "1.0 g", "D-xylose": "0.3 g", "thiamine": "0.42 g (equal S content)"}
+          buffer: "none"
+          matrix: "plant protein (Pleurotus citrinopileatus mushroom hydrolysate), 10% w/v in water"
+          headspace: "sealed, unstated"
+  - id: "zhang2022pleurotus-6"
+    odorant: "nonanal"
+    lever_class: "sulfur source"
+    lever: "L-cysteine vs L-methionine vs thiamine (equal S, with xylose)"
+    focal: true
+    location: "Table 3"
+    digitised: false
+    unit: "ng/g (peak area vs internal standard 1,2-dichlorobenzene)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Cys-MRPs"
+        lever_value: "L-cysteine"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 7.4
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 120
+          precursors: {"P. citrinopileatus hydrolysate (PCH)": "1.0 g", "D-xylose": "0.3 g", "L-cysteine": "0.15 g (equal S content)"}
+          buffer: "none"
+          matrix: "plant protein (Pleurotus citrinopileatus mushroom hydrolysate), 10% w/v in water"
+          headspace: "sealed, unstated"
+      - label: "Met-MRPs"
+        lever_value: "L-methionine"
+        value: 1.88
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.31
+        conditions:
+          ph: 7.4
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 120
+          precursors: {"P. citrinopileatus hydrolysate (PCH)": "1.0 g", "D-xylose": "0.3 g", "L-methionine": "0.19 g (equal S content)"}
+          buffer: "none"
+          matrix: "plant protein (Pleurotus citrinopileatus mushroom hydrolysate), 10% w/v in water"
+          headspace: "sealed, unstated"
+      - label: "Thi-MRPs"
+        lever_value: "thiamine"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 7.4
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 120
+          precursors: {"P. citrinopileatus hydrolysate (PCH)": "1.0 g", "D-xylose": "0.3 g", "thiamine": "0.42 g (equal S content)"}
+          buffer: "none"
+          matrix: "plant protein (Pleurotus citrinopileatus mushroom hydrolysate), 10% w/v in water"
+          headspace: "sealed, unstated"
+  - id: "zhang2022pleurotus-7"
+    odorant: "benzaldehyde"
+    lever_class: "sulfur source"
+    lever: "L-cysteine vs L-methionine vs thiamine (equal S, with xylose)"
+    focal: true
+    location: "Table 3"
+    digitised: false
+    unit: "ng/g (peak area vs internal standard 1,2-dichlorobenzene)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Cys-MRPs"
+        lever_value: "L-cysteine"
+        value: 3.13
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.08
+        conditions:
+          ph: 7.4
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 120
+          precursors: {"P. citrinopileatus hydrolysate (PCH)": "1.0 g", "D-xylose": "0.3 g", "L-cysteine": "0.15 g (equal S content)"}
+          buffer: "none"
+          matrix: "plant protein (Pleurotus citrinopileatus mushroom hydrolysate), 10% w/v in water"
+          headspace: "sealed, unstated"
+      - label: "Met-MRPs"
+        lever_value: "L-methionine"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 7.4
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 120
+          precursors: {"P. citrinopileatus hydrolysate (PCH)": "1.0 g", "D-xylose": "0.3 g", "L-methionine": "0.19 g (equal S content)"}
+          buffer: "none"
+          matrix: "plant protein (Pleurotus citrinopileatus mushroom hydrolysate), 10% w/v in water"
+          headspace: "sealed, unstated"
+      - label: "Thi-MRPs"
+        lever_value: "thiamine"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 7.4
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 120
+          precursors: {"P. citrinopileatus hydrolysate (PCH)": "1.0 g", "D-xylose": "0.3 g", "thiamine": "0.42 g (equal S content)"}
+          buffer: "none"
+          matrix: "plant protein (Pleurotus citrinopileatus mushroom hydrolysate), 10% w/v in water"
+          headspace: "sealed, unstated"
+  - id: "zhang2022pleurotus-8"
+    odorant: "furfural"
+    lever_class: "sulfur source"
+    lever: "L-cysteine vs L-methionine vs thiamine (equal S, with xylose)"
+    focal: true
+    location: "Table 3"
+    digitised: false
+    unit: "ng/g (peak area vs internal standard 1,2-dichlorobenzene)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Cys-MRPs"
+        lever_value: "L-cysteine"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 7.4
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 120
+          precursors: {"P. citrinopileatus hydrolysate (PCH)": "1.0 g", "D-xylose": "0.3 g", "L-cysteine": "0.15 g (equal S content)"}
+          buffer: "none"
+          matrix: "plant protein (Pleurotus citrinopileatus mushroom hydrolysate), 10% w/v in water"
+          headspace: "sealed, unstated"
+      - label: "Met-MRPs"
+        lever_value: "L-methionine"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 7.4
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 120
+          precursors: {"P. citrinopileatus hydrolysate (PCH)": "1.0 g", "D-xylose": "0.3 g", "L-methionine": "0.19 g (equal S content)"}
+          buffer: "none"
+          matrix: "plant protein (Pleurotus citrinopileatus mushroom hydrolysate), 10% w/v in water"
+          headspace: "sealed, unstated"
+      - label: "Thi-MRPs"
+        lever_value: "thiamine"
+        value: 5.31
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.06
+        conditions:
+          ph: 7.4
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 120
+          precursors: {"P. citrinopileatus hydrolysate (PCH)": "1.0 g", "D-xylose": "0.3 g", "thiamine": "0.42 g (equal S content)"}
+          buffer: "none"
+          matrix: "plant protein (Pleurotus citrinopileatus mushroom hydrolysate), 10% w/v in water"
+          headspace: "sealed, unstated"
+  - id: "zhang2022pleurotus-9"
+    odorant: "furfuryl alcohol (2-furylmethanol)"
+    lever_class: "sulfur source"
+    lever: "L-cysteine vs L-methionine vs thiamine (equal S, with xylose)"
+    focal: true
+    location: "Table 3"
+    digitised: false
+    unit: "ng/g (peak area vs internal standard 1,2-dichlorobenzene)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Cys-MRPs"
+        lever_value: "L-cysteine"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 7.4
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 120
+          precursors: {"P. citrinopileatus hydrolysate (PCH)": "1.0 g", "D-xylose": "0.3 g", "L-cysteine": "0.15 g (equal S content)"}
+          buffer: "none"
+          matrix: "plant protein (Pleurotus citrinopileatus mushroom hydrolysate), 10% w/v in water"
+          headspace: "sealed, unstated"
+      - label: "Met-MRPs"
+        lever_value: "L-methionine"
+        value: 17.71
+        censor: none
+        limit: null
+        n: 3
+        sd: 1.48
+        conditions:
+          ph: 7.4
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 120
+          precursors: {"P. citrinopileatus hydrolysate (PCH)": "1.0 g", "D-xylose": "0.3 g", "L-methionine": "0.19 g (equal S content)"}
+          buffer: "none"
+          matrix: "plant protein (Pleurotus citrinopileatus mushroom hydrolysate), 10% w/v in water"
+          headspace: "sealed, unstated"
+      - label: "Thi-MRPs"
+        lever_value: "thiamine"
+        value: 3.79
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.04
+        conditions:
+          ph: 7.4
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 120
+          precursors: {"P. citrinopileatus hydrolysate (PCH)": "1.0 g", "D-xylose": "0.3 g", "thiamine": "0.42 g (equal S content)"}
+          buffer: "none"
+          matrix: "plant protein (Pleurotus citrinopileatus mushroom hydrolysate), 10% w/v in water"
+          headspace: "sealed, unstated"
+  - id: "zhang2022pleurotus-10"
+    odorant: "methylpyrazine"
+    lever_class: "sulfur source"
+    lever: "L-cysteine vs L-methionine vs thiamine (equal S, with xylose)"
+    focal: true
+    location: "Table 3"
+    digitised: false
+    unit: "ng/g (peak area vs internal standard 1,2-dichlorobenzene)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Cys-MRPs"
+        lever_value: "L-cysteine"
+        value: 6.08
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.63
+        conditions:
+          ph: 7.4
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 120
+          precursors: {"P. citrinopileatus hydrolysate (PCH)": "1.0 g", "D-xylose": "0.3 g", "L-cysteine": "0.15 g (equal S content)"}
+          buffer: "none"
+          matrix: "plant protein (Pleurotus citrinopileatus mushroom hydrolysate), 10% w/v in water"
+          headspace: "sealed, unstated"
+      - label: "Met-MRPs"
+        lever_value: "L-methionine"
+        value: 9.47
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.66
+        conditions:
+          ph: 7.4
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 120
+          precursors: {"P. citrinopileatus hydrolysate (PCH)": "1.0 g", "D-xylose": "0.3 g", "L-methionine": "0.19 g (equal S content)"}
+          buffer: "none"
+          matrix: "plant protein (Pleurotus citrinopileatus mushroom hydrolysate), 10% w/v in water"
+          headspace: "sealed, unstated"
+      - label: "Thi-MRPs"
+        lever_value: "thiamine"
+        value: 1.33
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.02
+        conditions:
+          ph: 7.4
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 120
+          precursors: {"P. citrinopileatus hydrolysate (PCH)": "1.0 g", "D-xylose": "0.3 g", "thiamine": "0.42 g (equal S content)"}
+          buffer: "none"
+          matrix: "plant protein (Pleurotus citrinopileatus mushroom hydrolysate), 10% w/v in water"
+          headspace: "sealed, unstated"
+  - id: "zhang2022pleurotus-11"
+    odorant: "2,5-dimethylpyrazine"
+    lever_class: "sulfur source"
+    lever: "L-cysteine vs L-methionine vs thiamine (equal S, with xylose)"
+    focal: true
+    location: "Table 3"
+    digitised: false
+    unit: "ng/g (peak area vs internal standard 1,2-dichlorobenzene)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Cys-MRPs"
+        lever_value: "L-cysteine"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 7.4
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 120
+          precursors: {"P. citrinopileatus hydrolysate (PCH)": "1.0 g", "D-xylose": "0.3 g", "L-cysteine": "0.15 g (equal S content)"}
+          buffer: "none"
+          matrix: "plant protein (Pleurotus citrinopileatus mushroom hydrolysate), 10% w/v in water"
+          headspace: "sealed, unstated"
+      - label: "Met-MRPs"
+        lever_value: "L-methionine"
+        value: 5.72
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.18
+        conditions:
+          ph: 7.4
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 120
+          precursors: {"P. citrinopileatus hydrolysate (PCH)": "1.0 g", "D-xylose": "0.3 g", "L-methionine": "0.19 g (equal S content)"}
+          buffer: "none"
+          matrix: "plant protein (Pleurotus citrinopileatus mushroom hydrolysate), 10% w/v in water"
+          headspace: "sealed, unstated"
+      - label: "Thi-MRPs"
+        lever_value: "thiamine"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 7.4
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 120
+          precursors: {"P. citrinopileatus hydrolysate (PCH)": "1.0 g", "D-xylose": "0.3 g", "thiamine": "0.42 g (equal S content)"}
+          buffer: "none"
+          matrix: "plant protein (Pleurotus citrinopileatus mushroom hydrolysate), 10% w/v in water"
+          headspace: "sealed, unstated"
+  - id: "zhang2022pleurotus-12"
+    odorant: "2,6-dimethylpyrazine"
+    lever_class: "sulfur source"
+    lever: "L-cysteine vs L-methionine vs thiamine (equal S, with xylose)"
+    focal: true
+    location: "Table 3"
+    digitised: false
+    unit: "ng/g (peak area vs internal standard 1,2-dichlorobenzene)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Cys-MRPs"
+        lever_value: "L-cysteine"
+        value: 3.54
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.03
+        conditions:
+          ph: 7.4
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 120
+          precursors: {"P. citrinopileatus hydrolysate (PCH)": "1.0 g", "D-xylose": "0.3 g", "L-cysteine": "0.15 g (equal S content)"}
+          buffer: "none"
+          matrix: "plant protein (Pleurotus citrinopileatus mushroom hydrolysate), 10% w/v in water"
+          headspace: "sealed, unstated"
+      - label: "Met-MRPs"
+        lever_value: "L-methionine"
+        value: 11.54
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.07
+        conditions:
+          ph: 7.4
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 120
+          precursors: {"P. citrinopileatus hydrolysate (PCH)": "1.0 g", "D-xylose": "0.3 g", "L-methionine": "0.19 g (equal S content)"}
+          buffer: "none"
+          matrix: "plant protein (Pleurotus citrinopileatus mushroom hydrolysate), 10% w/v in water"
+          headspace: "sealed, unstated"
+      - label: "Thi-MRPs"
+        lever_value: "thiamine"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 7.4
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 120
+          precursors: {"P. citrinopileatus hydrolysate (PCH)": "1.0 g", "D-xylose": "0.3 g", "thiamine": "0.42 g (equal S content)"}
+          buffer: "none"
+          matrix: "plant protein (Pleurotus citrinopileatus mushroom hydrolysate), 10% w/v in water"
+          headspace: "sealed, unstated"
+  - id: "zhang2022pleurotus-13"
+    odorant: "2-ethyl-6-methylpyrazine"
+    lever_class: "sulfur source"
+    lever: "L-cysteine vs L-methionine vs thiamine (equal S, with xylose)"
+    focal: true
+    location: "Table 3"
+    digitised: false
+    unit: "ng/g (peak area vs internal standard 1,2-dichlorobenzene)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Cys-MRPs"
+        lever_value: "L-cysteine"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 7.4
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 120
+          precursors: {"P. citrinopileatus hydrolysate (PCH)": "1.0 g", "D-xylose": "0.3 g", "L-cysteine": "0.15 g (equal S content)"}
+          buffer: "none"
+          matrix: "plant protein (Pleurotus citrinopileatus mushroom hydrolysate), 10% w/v in water"
+          headspace: "sealed, unstated"
+      - label: "Met-MRPs"
+        lever_value: "L-methionine"
+        value: 2.4
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.03
+        conditions:
+          ph: 7.4
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 120
+          precursors: {"P. citrinopileatus hydrolysate (PCH)": "1.0 g", "D-xylose": "0.3 g", "L-methionine": "0.19 g (equal S content)"}
+          buffer: "none"
+          matrix: "plant protein (Pleurotus citrinopileatus mushroom hydrolysate), 10% w/v in water"
+          headspace: "sealed, unstated"
+      - label: "Thi-MRPs"
+        lever_value: "thiamine"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 7.4
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 120
+          precursors: {"P. citrinopileatus hydrolysate (PCH)": "1.0 g", "D-xylose": "0.3 g", "thiamine": "0.42 g (equal S content)"}
+          buffer: "none"
+          matrix: "plant protein (Pleurotus citrinopileatus mushroom hydrolysate), 10% w/v in water"
+          headspace: "sealed, unstated"
+  - id: "zhang2022pleurotus-14"
+    odorant: "2,3,5-trimethylpyrazine"
+    lever_class: "sulfur source"
+    lever: "L-cysteine vs L-methionine vs thiamine (equal S, with xylose)"
+    focal: true
+    location: "Table 3"
+    digitised: false
+    unit: "ng/g (peak area vs internal standard 1,2-dichlorobenzene)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Cys-MRPs"
+        lever_value: "L-cysteine"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 7.4
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 120
+          precursors: {"P. citrinopileatus hydrolysate (PCH)": "1.0 g", "D-xylose": "0.3 g", "L-cysteine": "0.15 g (equal S content)"}
+          buffer: "none"
+          matrix: "plant protein (Pleurotus citrinopileatus mushroom hydrolysate), 10% w/v in water"
+          headspace: "sealed, unstated"
+      - label: "Met-MRPs"
+        lever_value: "L-methionine"
+        value: 1.5
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.22
+        conditions:
+          ph: 7.4
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 120
+          precursors: {"P. citrinopileatus hydrolysate (PCH)": "1.0 g", "D-xylose": "0.3 g", "L-methionine": "0.19 g (equal S content)"}
+          buffer: "none"
+          matrix: "plant protein (Pleurotus citrinopileatus mushroom hydrolysate), 10% w/v in water"
+          headspace: "sealed, unstated"
+      - label: "Thi-MRPs"
+        lever_value: "thiamine"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 7.4
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 120
+          precursors: {"P. citrinopileatus hydrolysate (PCH)": "1.0 g", "D-xylose": "0.3 g", "thiamine": "0.42 g (equal S content)"}
+          buffer: "none"
+          matrix: "plant protein (Pleurotus citrinopileatus mushroom hydrolysate), 10% w/v in water"
+          headspace: "sealed, unstated"
+  - id: "zhang2022pleurotus-15"
+    odorant: "total pyrazines"
+    lever_class: "sulfur source"
+    lever: "L-cysteine vs L-methionine vs thiamine (equal S, with xylose)"
+    focal: true
+    location: "Table 3"
+    digitised: false
+    unit: "ng/g (peak area vs internal standard 1,2-dichlorobenzene)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    arms:
+      - label: "Cys-MRPs"
+        lever_value: "L-cysteine"
+        value: 9.62
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.66
+        conditions:
+          ph: 7.4
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 120
+          precursors: {"P. citrinopileatus hydrolysate (PCH)": "1.0 g", "D-xylose": "0.3 g", "L-cysteine": "0.15 g (equal S content)"}
+          buffer: "none"
+          matrix: "plant protein (Pleurotus citrinopileatus mushroom hydrolysate), 10% w/v in water"
+          headspace: "sealed, unstated"
+      - label: "Met-MRPs"
+        lever_value: "L-methionine"
+        value: 30.63
+        censor: none
+        limit: null
+        n: 3
+        sd: 1.16
+        conditions:
+          ph: 7.4
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 120
+          precursors: {"P. citrinopileatus hydrolysate (PCH)": "1.0 g", "D-xylose": "0.3 g", "L-methionine": "0.19 g (equal S content)"}
+          buffer: "none"
+          matrix: "plant protein (Pleurotus citrinopileatus mushroom hydrolysate), 10% w/v in water"
+          headspace: "sealed, unstated"
+      - label: "Thi-MRPs"
+        lever_value: "thiamine"
+        value: 1.33
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.02
+        conditions:
+          ph: 7.4
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 120
+          precursors: {"P. citrinopileatus hydrolysate (PCH)": "1.0 g", "D-xylose": "0.3 g", "thiamine": "0.42 g (equal S content)"}
+          buffer: "none"
+          matrix: "plant protein (Pleurotus citrinopileatus mushroom hydrolysate), 10% w/v in water"
+          headspace: "sealed, unstated"
+  - id: "zhang2022pleurotus-16"
+    odorant: "total pyrazines"
+    lever_class: "mixed"
+    lever: "control (no xylose, no sulfur compound) vs xylose + Cys / Met / Thi"
+    focal: true
+    location: "Table 3"
+    digitised: false
+    unit: "ng/g (peak area vs internal standard 1,2-dichlorobenzene)"
+    quant_type: "peak_area"
+    quantity: "amount"
+    time_course_rule: "not a time course"
+    note: "paper discusses higher pyrazines in PCH-TDPs than in the MRPs (sec. 3.6)"
+    arms:
+      - label: "PCH-TDPs"
+        lever_value: "no xylose, no sulfur compound"
+        value: 52.66
+        censor: none
+        limit: null
+        n: 3
+        sd: 1.69
+        conditions:
+          ph: 7.4
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 120
+          precursors: {"P. citrinopileatus hydrolysate (PCH)": "1.0 g"}
+          buffer: "none"
+          matrix: "plant protein (Pleurotus citrinopileatus mushroom hydrolysate), 10% w/v in water"
+          headspace: "sealed, unstated"
+      - label: "Cys-MRPs"
+        lever_value: "L-cysteine"
+        value: 9.62
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.66
+        conditions:
+          ph: 7.4
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 120
+          precursors: {"P. citrinopileatus hydrolysate (PCH)": "1.0 g", "D-xylose": "0.3 g", "L-cysteine": "0.15 g (equal S content)"}
+          buffer: "none"
+          matrix: "plant protein (Pleurotus citrinopileatus mushroom hydrolysate), 10% w/v in water"
+          headspace: "sealed, unstated"
+      - label: "Met-MRPs"
+        lever_value: "L-methionine"
+        value: 30.63
+        censor: none
+        limit: null
+        n: 3
+        sd: 1.16
+        conditions:
+          ph: 7.4
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 120
+          precursors: {"P. citrinopileatus hydrolysate (PCH)": "1.0 g", "D-xylose": "0.3 g", "L-methionine": "0.19 g (equal S content)"}
+          buffer: "none"
+          matrix: "plant protein (Pleurotus citrinopileatus mushroom hydrolysate), 10% w/v in water"
+          headspace: "sealed, unstated"
+      - label: "Thi-MRPs"
+        lever_value: "thiamine"
+        value: 1.33
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.02
+        conditions:
+          ph: 7.4
+          ph_basis: "initial"
+          temp_C: 100
+          time_min: 120
+          precursors: {"P. citrinopileatus hydrolysate (PCH)": "1.0 g", "D-xylose": "0.3 g", "thiamine": "0.42 g (equal S content)"}
+          buffer: "none"
+          matrix: "plant protein (Pleurotus citrinopileatus mushroom hydrolysate), 10% w/v in water"
+          headspace: "sealed, unstated"

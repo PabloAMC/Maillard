@@ -1,0 +1,5 @@
+source: "chen2023lycium"
+pdf: "data/articles/chen2023.pdf"
+reader: "a"
+scope_note: "Sugar-identity study (6 sugars, LSH + cysteine, pH 7.5, 120 C, 2 h), but no amounts are printed in the PDF: GC-MS values are in supplementary Table S1 (not in the PDF), GC-IMS only as a colour fingerprint (Fig. 2B, not digitisable to values); MFT/FFT/difurfuryl disulfide/bis(2-methyl-3-furyl) disulfide/MFT-FFT disulfide appear only as presence (Table 3) and in qualitative text."
+contrasts: []

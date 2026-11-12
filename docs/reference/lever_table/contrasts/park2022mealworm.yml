@@ -1,0 +1,485 @@
+source: park2022mealworm
+pdf: data/articles/park2022.pdf
+reader: resolved
+scope_note: 'Thiols: only MFT (no. 34) and FFT (no. 35) in Table 2, each detected only in MPCys-RF; ND has no printed limit. No H2S or disulfides reported. Values = mean of n=3, 125 C 60 min heating block.'
+contrasts:
+- id: park2022mealworm-1
+  resolution: agreed
+  odorant: 2-Methyl-3-furanthiol (MFT)
+  lever_class: amino acid identity
+  lever: added amino acid (0.1 g) to mealworm protein + D-xylose; MP-RF = no added amino acid (first-listed arm)
+  focal: true
+  location: Table 2, compound no. 34, pp. 1650-1653
+  digitised: false
+  unit: relative peak area (peak area / internal standard benzyl acetate peak area)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: MP-RF
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 125
+      time_min: 60
+      precursors:
+        mealworm protein powder: 2 g
+        D-xylose: 0.1 g
+      buffer: none (2 mL distilled water)
+      matrix: other (Tenebrio molitor mealworm protein powder in water)
+      headspace: unstated
+  - label: MPArg-RF
+    lever_value: arginine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 125
+      time_min: 60
+      precursors:
+        mealworm protein powder: 2 g
+        D-xylose: 0.1 g
+        arginine: 0.1 g
+      buffer: none (2 mL distilled water)
+      matrix: other (Tenebrio molitor mealworm protein powder in water)
+      headspace: unstated
+  - label: MPCys-RF
+    lever_value: cysteine
+    value: 0.111
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.032
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 125
+      time_min: 60
+      precursors:
+        mealworm protein powder: 2 g
+        D-xylose: 0.1 g
+        cysteine: 0.1 g
+      buffer: none (2 mL distilled water)
+      matrix: other (Tenebrio molitor mealworm protein powder in water)
+      headspace: unstated
+  - label: MPGln-RF
+    lever_value: glutamine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 125
+      time_min: 60
+      precursors:
+        mealworm protein powder: 2 g
+        D-xylose: 0.1 g
+        glutamine: 0.1 g
+      buffer: none (2 mL distilled water)
+      matrix: other (Tenebrio molitor mealworm protein powder in water)
+      headspace: unstated
+  - label: MPGly-RF
+    lever_value: glycine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 125
+      time_min: 60
+      precursors:
+        mealworm protein powder: 2 g
+        D-xylose: 0.1 g
+        glycine: 0.1 g
+      buffer: none (2 mL distilled water)
+      matrix: other (Tenebrio molitor mealworm protein powder in water)
+      headspace: unstated
+  - label: MPMet-RF
+    lever_value: methionine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 125
+      time_min: 60
+      precursors:
+        mealworm protein powder: 2 g
+        D-xylose: 0.1 g
+        methionine: 0.1 g
+      buffer: none (2 mL distilled water)
+      matrix: other (Tenebrio molitor mealworm protein powder in water)
+      headspace: unstated
+  - label: MPPro-RF
+    lever_value: proline
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 125
+      time_min: 60
+      precursors:
+        mealworm protein powder: 2 g
+        D-xylose: 0.1 g
+        proline: 0.1 g
+      buffer: none (2 mL distilled water)
+      matrix: other (Tenebrio molitor mealworm protein powder in water)
+      headspace: unstated
+  - label: MPSer-RF
+    lever_value: serine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 125
+      time_min: 60
+      precursors:
+        mealworm protein powder: 2 g
+        D-xylose: 0.1 g
+        serine: 0.1 g
+      buffer: none (2 mL distilled water)
+      matrix: other (Tenebrio molitor mealworm protein powder in water)
+      headspace: unstated
+  - label: MPThr-RF
+    lever_value: threonine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 125
+      time_min: 60
+      precursors:
+        mealworm protein powder: 2 g
+        D-xylose: 0.1 g
+        threonine: 0.1 g
+      buffer: none (2 mL distilled water)
+      matrix: other (Tenebrio molitor mealworm protein powder in water)
+      headspace: unstated
+  - label: MPTrp-RF
+    lever_value: tryptophan
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 125
+      time_min: 60
+      precursors:
+        mealworm protein powder: 2 g
+        D-xylose: 0.1 g
+        tryptophan: 0.1 g
+      buffer: none (2 mL distilled water)
+      matrix: other (Tenebrio molitor mealworm protein powder in water)
+      headspace: unstated
+  - label: MPTyr-RF
+    lever_value: tyrosine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 125
+      time_min: 60
+      precursors:
+        mealworm protein powder: 2 g
+        D-xylose: 0.1 g
+        tyrosine: 0.1 g
+      buffer: none (2 mL distilled water)
+      matrix: other (Tenebrio molitor mealworm protein powder in water)
+      headspace: unstated
+  - label: MPVal-RF
+    lever_value: valine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 125
+      time_min: 60
+      precursors:
+        mealworm protein powder: 2 g
+        D-xylose: 0.1 g
+        valine: 0.1 g
+      buffer: none (2 mL distilled water)
+      matrix: other (Tenebrio molitor mealworm protein powder in water)
+      headspace: unstated
+- id: park2022mealworm-2
+  resolution: agreed
+  odorant: 2-Furfurylthiol (FFT)
+  lever_class: amino acid identity
+  lever: added amino acid (0.1 g) to mealworm protein + D-xylose; MP-RF = no added amino acid (first-listed arm)
+  focal: true
+  location: Table 2, compound no. 35, pp. 1650-1653
+  digitised: false
+  unit: relative peak area (peak area / internal standard benzyl acetate peak area)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: MP-RF
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 125
+      time_min: 60
+      precursors:
+        mealworm protein powder: 2 g
+        D-xylose: 0.1 g
+      buffer: none (2 mL distilled water)
+      matrix: other (Tenebrio molitor mealworm protein powder in water)
+      headspace: unstated
+  - label: MPArg-RF
+    lever_value: arginine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 125
+      time_min: 60
+      precursors:
+        mealworm protein powder: 2 g
+        D-xylose: 0.1 g
+        arginine: 0.1 g
+      buffer: none (2 mL distilled water)
+      matrix: other (Tenebrio molitor mealworm protein powder in water)
+      headspace: unstated
+  - label: MPCys-RF
+    lever_value: cysteine
+    value: 0.294
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.084
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 125
+      time_min: 60
+      precursors:
+        mealworm protein powder: 2 g
+        D-xylose: 0.1 g
+        cysteine: 0.1 g
+      buffer: none (2 mL distilled water)
+      matrix: other (Tenebrio molitor mealworm protein powder in water)
+      headspace: unstated
+  - label: MPGln-RF
+    lever_value: glutamine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 125
+      time_min: 60
+      precursors:
+        mealworm protein powder: 2 g
+        D-xylose: 0.1 g
+        glutamine: 0.1 g
+      buffer: none (2 mL distilled water)
+      matrix: other (Tenebrio molitor mealworm protein powder in water)
+      headspace: unstated
+  - label: MPGly-RF
+    lever_value: glycine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 125
+      time_min: 60
+      precursors:
+        mealworm protein powder: 2 g
+        D-xylose: 0.1 g
+        glycine: 0.1 g
+      buffer: none (2 mL distilled water)
+      matrix: other (Tenebrio molitor mealworm protein powder in water)
+      headspace: unstated
+  - label: MPMet-RF
+    lever_value: methionine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 125
+      time_min: 60
+      precursors:
+        mealworm protein powder: 2 g
+        D-xylose: 0.1 g
+        methionine: 0.1 g
+      buffer: none (2 mL distilled water)
+      matrix: other (Tenebrio molitor mealworm protein powder in water)
+      headspace: unstated
+  - label: MPPro-RF
+    lever_value: proline
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 125
+      time_min: 60
+      precursors:
+        mealworm protein powder: 2 g
+        D-xylose: 0.1 g
+        proline: 0.1 g
+      buffer: none (2 mL distilled water)
+      matrix: other (Tenebrio molitor mealworm protein powder in water)
+      headspace: unstated
+  - label: MPSer-RF
+    lever_value: serine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 125
+      time_min: 60
+      precursors:
+        mealworm protein powder: 2 g
+        D-xylose: 0.1 g
+        serine: 0.1 g
+      buffer: none (2 mL distilled water)
+      matrix: other (Tenebrio molitor mealworm protein powder in water)
+      headspace: unstated
+  - label: MPThr-RF
+    lever_value: threonine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 125
+      time_min: 60
+      precursors:
+        mealworm protein powder: 2 g
+        D-xylose: 0.1 g
+        threonine: 0.1 g
+      buffer: none (2 mL distilled water)
+      matrix: other (Tenebrio molitor mealworm protein powder in water)
+      headspace: unstated
+  - label: MPTrp-RF
+    lever_value: tryptophan
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 125
+      time_min: 60
+      precursors:
+        mealworm protein powder: 2 g
+        D-xylose: 0.1 g
+        tryptophan: 0.1 g
+      buffer: none (2 mL distilled water)
+      matrix: other (Tenebrio molitor mealworm protein powder in water)
+      headspace: unstated
+  - label: MPTyr-RF
+    lever_value: tyrosine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 125
+      time_min: 60
+      precursors:
+        mealworm protein powder: 2 g
+        D-xylose: 0.1 g
+        tyrosine: 0.1 g
+      buffer: none (2 mL distilled water)
+      matrix: other (Tenebrio molitor mealworm protein powder in water)
+      headspace: unstated
+  - label: MPVal-RF
+    lever_value: valine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      temp_C: 125
+      time_min: 60
+      precursors:
+        mealworm protein powder: 2 g
+        D-xylose: 0.1 g
+        valine: 0.1 g
+      buffer: none (2 mL distilled water)
+      matrix: other (Tenebrio molitor mealworm protein powder in water)
+      headspace: unstated

@@ -4,16 +4,17 @@
   "prereg": "docs/reference/lever_table/PREREG.md",
   "split": {
     "split_sha256": "022d0cab5a53ececb27a1fc6837ff275fbab177cf2161ae1f8a4ed0341f273a7",
-    "new_labs": 0
+    "new_labs": 17
   },
   "skipped": {
-    "mixed-lever contrasts (no single-lever cell)": 183,
-    "fewer than two usable arms": 300,
-    "odorants outside the declared lists (PREREG amendment A3)": 426,
+    "mixed-lever contrasts (no single-lever cell)": 186,
+    "fewer than two usable arms": 517,
+    "odorants outside the declared lists (PREREG amendment A3)": 494,
     "shares of a total (PREREG amendment A1)": 63,
     "sugar-identity contrasts whose levels are not sugars (fed intermediates)": 14,
     "flavour-dilution factors, an odour potency not an amount (PREREG amendment A1)": 3,
-    "rates, half-lives or storage losses (PREREG amendment A1)": 148
+    "rates, half-lives or storage losses (PREREG amendment A1)": 148,
+    "second peaks of one compound in the same pots (one row enters the cell)": 1
   },
   "counts": {
     "sources": 48,
@@ -37209,11 +37210,11 @@
   ],
   "provenance": {
     "artifact": "lever_table_development_only",
-    "generated_on": "2026-11-11",
+    "generated_on": "2026-11-12",
     "git": {
-      "commit": "eb5a0f14f8883a988e1854d671ea8420f9e2585e",
-      "short": "eb5a0f14",
-      "branch": "lever-prior-fix",
+      "commit": "dafcb3faa6e1873a9eac6c1ddfb33acbf0b2374e",
+      "short": "dafcb3fa",
+      "branch": "new-lab-keying",
       "dirty": true
     },
     "generated_by": "scripts/generators/build_lever_table.py",
@@ -37239,6 +37240,14 @@
         "sha256": "8887cd21dba55dd33ef236926254dda160ea770691a3b63729103e855b758aa8"
       },
       {
+        "path": "docs/reference/lever_table/contrasts/boonbumrung2023.yml",
+        "sha256": "051dff0fbe176596de81c2f9313af336118d1960ed8e86275482d8388a9bd471"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/boonbumrung2023__families.yml",
+        "sha256": "301e3f663bb2575eee0bf9ed4a7bf40813da1d7b4f17a90ff168d8def628c6b4"
+      },
+      {
         "path": "docs/reference/lever_table/contrasts/cerny2007.yml",
         "sha256": "79440bc09e637af4d7dc9fd6add50e3aa52933cc97da9d94c324aa8441e08842"
       },
@@ -37249,6 +37258,22 @@
       {
         "path": "docs/reference/lever_table/contrasts/chan1994b__families.yml",
         "sha256": "88b2457b03d7844912a2e7db41709a95673fa04f69363a5c5b7a45374c9f476d"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/chen2023lycium.yml",
+        "sha256": "17b4cc3e12951de05c45974d2e95dd98bee68820d25f9364271b11028bdbf20f"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/chen2023lycium__families.yml",
+        "sha256": "188417c3a135444ed250c2ecdb977f346a2a29e5d8e118556fed811c536a4e29"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/chen2024coprinus.yml",
+        "sha256": "3e95cf7b823dff5af417fc0c9a09286f616443ebd45113746d95c89f26b87047"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/chen2024coprinus__families.yml",
+        "sha256": "6c68d392c2776d72ad65082499abebb6bb528d3c754b4b83ed75d4900b3c4c5b"
       },
       {
         "path": "docs/reference/lever_table/contrasts/du2023__families.yml",
@@ -37289,6 +37314,14 @@
       {
         "path": "docs/reference/lever_table/contrasts/grosch1992.yml",
         "sha256": "e09d4a48c11445e141058b55c222b06e7715b792088aefa583cb011b7e4a1d39"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/guo2010brassica.yml",
+        "sha256": "baad073c012e61655819ffcc0e6bf1392402af2bff8bd9b118a11401a2bce53c"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/guo2010brassica__families.yml",
+        "sha256": "de4d46d38b388e6e3174afeb4ec54c98d32d5fb1c0e71e295ac65fa6f1a3b4bc"
       },
       {
         "path": "docs/reference/lever_table/contrasts/haleva1999__families.yml",
@@ -37347,6 +37380,30 @@
         "sha256": "83ce385ebe5713e4e36a0de0f28875cafea71b89e25c201112d14ee2a44b9e7b"
       },
       {
+        "path": "docs/reference/lever_table/contrasts/li2021lab.yml",
+        "sha256": "feb9f2d1525aebb5dd7fab5b959fbda2a084e0f3d2a16ca6336fcade1bc151bd"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/li2021lab__families.yml",
+        "sha256": "f39d2e0469ecfcb9b1549a43e5b2f3b96b453582e26ed8d1e798f15c01e40d6d"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/li2021ph.yml",
+        "sha256": "dad07b9cf963520884b3856ee32a1ebcce71dada10a1bfd18c225a2bfc426833"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/li2021ph__families.yml",
+        "sha256": "a8e5b14dcfde4231acb53daaf9dfa5b43eecdfe5ff9bcc7f0f35be2b577c9f8f"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/li2022heat.yml",
+        "sha256": "be8fe9b067dca9f89be6fe5b750af9ea26ca679b31d65e872aa55dc55edf440d"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/li2022heat__families.yml",
+        "sha256": "f9ba2c53a8aea2f6a64e2dabf4c52e0efb8349aca444e853b5809c888ec24717"
+      },
+      {
         "path": "docs/reference/lever_table/contrasts/mandin1999__families.yml",
         "sha256": "109c67f04f9378fc5be29b9472df49d169d46d324452c522034d67ea1bb3a54d"
       },
@@ -37391,6 +37448,30 @@
         "sha256": "7e1339147e9ad3a0ebec9e114c3040059f84f2e4be30b4ae6f837cbab2c1d5c6"
       },
       {
+        "path": "docs/reference/lever_table/contrasts/park2022mealworm.yml",
+        "sha256": "5c61831419635752ce2209681690b67a3ee12f09d20d8d7a9a11f112e3a97271"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/park2022mealworm__families.yml",
+        "sha256": "cb031ae54a4f4ae264b6fc55aaaecfed324763a61572befcb775c99d61ee6439"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/sarkisyan2025.yml",
+        "sha256": "0ec71c779f8e523e5092e77e151fbfa86f9ba54d411f9a094a9ce3865ba0c379"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/sarkisyan2025__families.yml",
+        "sha256": "aef940d527aee14b4add76cc641f90619a93de60e2832f52dba2fd13cb8d366b"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/sasanam2022.yml",
+        "sha256": "af7709fcc184ceaf9a3be6ce9c9f83eedbe40a63c81b483c20193f4ac4a8457b"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/sasanam2022__families.yml",
+        "sha256": "4eb71ff056048c3af84c701c0a52a9ee57cb0d22c491be3be9990d759e1d63ef"
+      },
+      {
         "path": "docs/reference/lever_table/contrasts/scalone2015__families.yml",
         "sha256": "467d1c1c1173b1b5ccea0cdb8cf94ecd09da673e4c49d456d3f485f55c817045"
       },
@@ -37413,6 +37494,14 @@
       {
         "path": "docs/reference/lever_table/contrasts/tai1998.yml",
         "sha256": "423d75015439d6c4f344291ada8b48fa99e799dec7a4a505c559997002f47c3e"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/theng2024.yml",
+        "sha256": "4c9999b513925e2857cafcf8999cfd319d2da3cf3261d8b545f91e3dbd7cdb6a"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/theng2024__families.yml",
+        "sha256": "664989a591fd999af7d78c8cd8254ec9c4cf89d2f6ac3a6b0fdf250f118b06a3"
       },
       {
         "path": "docs/reference/lever_table/contrasts/thomas2014.yml",
@@ -37439,8 +37528,24 @@
         "sha256": "0b675e7aaac4882a000a90f5d61c9a2010d4397bf75a5b952f0ba51711e4781f"
       },
       {
+        "path": "docs/reference/lever_table/contrasts/wei2019flax.yml",
+        "sha256": "f1826906979e29aea3e170320ad8b2031ec5da0a8ac4d1f9fa5a87bf3205a80d"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/wei2019flax__families.yml",
+        "sha256": "a975717167bce5e6d92db24ec50103b9dac5f6e45ae559b3cc361281673c9279"
+      },
+      {
         "path": "docs/reference/lever_table/contrasts/whitfield1988__families.yml",
         "sha256": "1a38054047a832773531ffd7b8ec450c96b9a591faf6cbf9ae5e331fffa6970c"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/xu2007.yml",
+        "sha256": "913d56978d33f812063876b0c9b936989e8705530a74505816bdc4bab03a159f"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/xu2007__families.yml",
+        "sha256": "08fe8d69afae6600031eb40040ccc5ecbb32f964204e3f6c2c39084cdf98ea64"
       },
       {
         "path": "docs/reference/lever_table/contrasts/xu2011__families.yml",
@@ -37449,6 +37554,14 @@
       {
         "path": "docs/reference/lever_table/contrasts/yiltirak2026__families.yml",
         "sha256": "9dfb9debb42279bb1294ad7e08448b13b8adc2ada5409003e891493d5776877c"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/yu2010.yml",
+        "sha256": "0fbeaf437cc3b3d14398ea94c2cbdd78987492519a6eb1b70a904cd62cd11e7e"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/yu2010__families.yml",
+        "sha256": "1d290c4fc018a50d833974b295023e27ef0d69bb3b4f57ee11e79bbdc46e3789"
       },
       {
         "path": "docs/reference/lever_table/contrasts/zamora2006__families.yml",
@@ -37489,6 +37602,30 @@
       {
         "path": "docs/reference/lever_table/contrasts/zhang1991b.yml",
         "sha256": "3d5e5b4d5f951b2e6f67b4512d6c00e5eb268515019ca50af75b1d4003e884bc"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zhang2018soypep.yml",
+        "sha256": "6a64a8bda2dafe2d290a2c886d72a21467f4043e40b083a36b4b86a80cbee3c8"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zhang2018soypep__families.yml",
+        "sha256": "b25505ad5e1b1ab443608240d76613a55591992f8f86abb6c3acda7eae555eb3"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zhang2022pleurotus.yml",
+        "sha256": "efb1ee73509d74839669d5b159285f136b4efbd3694ed76b4b37842238ef7029"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zhang2022pleurotus__families.yml",
+        "sha256": "fc8a87fa982864c4248d94664fbdf490e52e0288739c17a040f3bbcfdbd0a3bc"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zhang2024sugars.yml",
+        "sha256": "8f20ca2c69fd0f6f96f6d3d3896a209520148f7891869e2d2817c42e3ae526dc"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zhang2024sugars__families.yml",
+        "sha256": "5b1b0f685a120517532bbe93b2d39754528e954fee8e866f18b6856eb9d1b64d"
       },
       {
         "path": "docs/reference/lever_table/contrasts/zheng1994.yml",

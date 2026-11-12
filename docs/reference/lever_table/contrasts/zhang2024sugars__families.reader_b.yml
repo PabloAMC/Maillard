@@ -1,0 +1,2841 @@
+source: zhang2024sugars
+pdf: data/articles/zhang2024sugars.pdf
+reader: b
+scope_note: Values digitised from Fig. 5 (no table prints them; Table S1 is supplementary, 2.5% only, not in the PDF); arms
+  with a number printed in the text use it (methional control and Xyl-35; furfural Ara-05, Ara-15; hexanal Xyl-15, Ara-15,
+  Fru-05). Bars absent in Fig. 5 (stated below detection in text) keyed nd_no_limit. Heated control (0%) is the shared zero
+  arm of every dose ladder. n = 4 per Table 1 footnote (Table 2 footnote says n = 3); error bars not keyed. pH unadjusted
+  (natural 6.62).
+contrasts:
+- id: zhang2024sugars-1
+  odorant: methional
+  lever_class: sugar identity
+  lever: added sugar at 0.5 g/100 g (xylose / arabinose / glucose / fructose)
+  focal: true
+  location: Fig. 5a
+  digitised: true
+  unit: peak area (x10^5)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Xyl-05
+    lever_value: xylose
+    value: 64.47
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Ara-05
+    lever_value: arabinose
+    value: 36.3
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        arabinose: 0.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Glu-05
+    lever_value: glucose
+    value: 22.61
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        glucose: 0.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Fru-05
+    lever_value: fructose
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        fructose: 0.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+- id: zhang2024sugars-2
+  odorant: methional
+  lever_class: sugar identity
+  lever: added sugar at 1.5 g/100 g (xylose / arabinose / glucose / fructose)
+  focal: true
+  location: Fig. 5a
+  digitised: true
+  unit: peak area (x10^5)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Xyl-15
+    lever_value: xylose
+    value: 89.28
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 1.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Ara-15
+    lever_value: arabinose
+    value: 27.52
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        arabinose: 1.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Glu-15
+    lever_value: glucose
+    value: 24.94
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        glucose: 1.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Fru-15
+    lever_value: fructose
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        fructose: 1.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+- id: zhang2024sugars-3
+  odorant: methional
+  lever_class: sugar identity
+  lever: added sugar at 2.5 g/100 g (xylose / arabinose / glucose / fructose)
+  focal: true
+  location: Fig. 5a
+  digitised: true
+  unit: peak area (x10^5)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Xyl-25
+    lever_value: xylose
+    value: 82.3
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 2.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Ara-25
+    lever_value: arabinose
+    value: 39.15
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        arabinose: 2.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Glu-25
+    lever_value: glucose
+    value: 25.45
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        glucose: 2.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Fru-25
+    lever_value: fructose
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        fructose: 2.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+- id: zhang2024sugars-4
+  odorant: methional
+  lever_class: sugar identity
+  lever: added sugar at 3.5 g/100 g (xylose / arabinose / glucose / fructose)
+  focal: true
+  location: Fig. 5a
+  digitised: true
+  unit: peak area (x10^5)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Xyl-35
+    lever_value: xylose
+    value: 89.45
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Ara-35
+    lever_value: arabinose
+    value: 43.02
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        arabinose: 3.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Glu-35
+    lever_value: glucose
+    value: 25.19
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        glucose: 3.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Fru-35
+    lever_value: fructose
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        fructose: 3.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+- id: zhang2024sugars-5
+  odorant: methional
+  lever_class: precursor dose
+  lever: xylose added (0 / 0.5 / 1.5 / 2.5 / 3.5 g/100 g)
+  focal: true
+  location: Fig. 5a
+  digitised: true
+  unit: peak area (x10^5)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Heated control
+    lever_value: 0
+    value: 33.22
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        no sugar added: '0'
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Xyl-05
+    lever_value: 0.5
+    value: 64.47
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Xyl-15
+    lever_value: 1.5
+    value: 89.28
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 1.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Xyl-25
+    lever_value: 2.5
+    value: 82.3
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 2.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Xyl-35
+    lever_value: 3.5
+    value: 89.45
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+- id: zhang2024sugars-6
+  odorant: methional
+  lever_class: precursor dose
+  lever: arabinose added (0 / 0.5 / 1.5 / 2.5 / 3.5 g/100 g)
+  focal: true
+  location: Fig. 5a
+  digitised: true
+  unit: peak area (x10^5)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Heated control
+    lever_value: 0
+    value: 33.22
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        no sugar added: '0'
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Ara-05
+    lever_value: 0.5
+    value: 36.3
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        arabinose: 0.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Ara-15
+    lever_value: 1.5
+    value: 27.52
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        arabinose: 1.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Ara-25
+    lever_value: 2.5
+    value: 39.15
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        arabinose: 2.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Ara-35
+    lever_value: 3.5
+    value: 43.02
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        arabinose: 3.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+- id: zhang2024sugars-7
+  odorant: methional
+  lever_class: precursor dose
+  lever: glucose added (0 / 0.5 / 1.5 / 2.5 / 3.5 g/100 g)
+  focal: true
+  location: Fig. 5a
+  digitised: true
+  unit: peak area (x10^5)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Heated control
+    lever_value: 0
+    value: 33.22
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        no sugar added: '0'
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Glu-05
+    lever_value: 0.5
+    value: 22.61
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        glucose: 0.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Glu-15
+    lever_value: 1.5
+    value: 24.94
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        glucose: 1.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Glu-25
+    lever_value: 2.5
+    value: 25.45
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        glucose: 2.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Glu-35
+    lever_value: 3.5
+    value: 25.19
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        glucose: 3.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+- id: zhang2024sugars-8
+  odorant: methional
+  lever_class: precursor dose
+  lever: fructose added (0 / 0.5 / 1.5 / 2.5 / 3.5 g/100 g)
+  focal: true
+  location: Fig. 5a
+  digitised: true
+  unit: peak area (x10^5)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Heated control
+    lever_value: 0
+    value: 33.22
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        no sugar added: '0'
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Fru-05
+    lever_value: 0.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        fructose: 0.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Fru-15
+    lever_value: 1.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        fructose: 1.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Fru-25
+    lever_value: 2.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        fructose: 2.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Fru-35
+    lever_value: 3.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        fructose: 3.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+- id: zhang2024sugars-9
+  odorant: furfural
+  lever_class: sugar identity
+  lever: added sugar at 0.5 g/100 g (xylose / arabinose / glucose / fructose)
+  focal: true
+  location: Fig. 5b
+  digitised: true
+  unit: peak area (x10^5)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Xyl-05
+    lever_value: xylose
+    value: 172.28
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Ara-05
+    lever_value: arabinose
+    value: 169.63
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        arabinose: 0.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Glu-05
+    lever_value: glucose
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        glucose: 0.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Fru-05
+    lever_value: fructose
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        fructose: 0.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+- id: zhang2024sugars-10
+  odorant: furfural
+  lever_class: sugar identity
+  lever: added sugar at 1.5 g/100 g (xylose / arabinose / glucose / fructose)
+  focal: true
+  location: Fig. 5b
+  digitised: true
+  unit: peak area (x10^5)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Xyl-15
+    lever_value: xylose
+    value: 234.75
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 1.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Ara-15
+    lever_value: arabinose
+    value: 92.32
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        arabinose: 1.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Glu-15
+    lever_value: glucose
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        glucose: 1.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Fru-15
+    lever_value: fructose
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        fructose: 1.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+- id: zhang2024sugars-11
+  odorant: furfural
+  lever_class: sugar identity
+  lever: added sugar at 2.5 g/100 g (xylose / arabinose / glucose / fructose)
+  focal: true
+  location: Fig. 5b
+  digitised: true
+  unit: peak area (x10^5)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Xyl-25
+    lever_value: xylose
+    value: 571.25
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 2.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Ara-25
+    lever_value: arabinose
+    value: 260.94
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        arabinose: 2.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Glu-25
+    lever_value: glucose
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        glucose: 2.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Fru-25
+    lever_value: fructose
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        fructose: 2.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+- id: zhang2024sugars-12
+  odorant: furfural
+  lever_class: sugar identity
+  lever: added sugar at 3.5 g/100 g (xylose / arabinose / glucose / fructose)
+  focal: true
+  location: Fig. 5b
+  digitised: true
+  unit: peak area (x10^5)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Xyl-35
+    lever_value: xylose
+    value: 712.3
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Ara-35
+    lever_value: arabinose
+    value: 323.41
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        arabinose: 3.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Glu-35
+    lever_value: glucose
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        glucose: 3.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Fru-35
+    lever_value: fructose
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        fructose: 3.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+- id: zhang2024sugars-13
+  odorant: furfural
+  lever_class: precursor dose
+  lever: xylose added (0 / 0.5 / 1.5 / 2.5 / 3.5 g/100 g)
+  focal: true
+  location: Fig. 5b
+  digitised: true
+  unit: peak area (x10^5)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Heated control
+    lever_value: 0
+    value: 21.16
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        no sugar added: '0'
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Xyl-05
+    lever_value: 0.5
+    value: 172.28
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Xyl-15
+    lever_value: 1.5
+    value: 234.75
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 1.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Xyl-25
+    lever_value: 2.5
+    value: 571.25
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 2.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Xyl-35
+    lever_value: 3.5
+    value: 712.3
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+- id: zhang2024sugars-14
+  odorant: furfural
+  lever_class: precursor dose
+  lever: arabinose added (0 / 0.5 / 1.5 / 2.5 / 3.5 g/100 g)
+  focal: true
+  location: Fig. 5b
+  digitised: true
+  unit: peak area (x10^5)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Heated control
+    lever_value: 0
+    value: 21.16
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        no sugar added: '0'
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Ara-05
+    lever_value: 0.5
+    value: 169.63
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        arabinose: 0.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Ara-15
+    lever_value: 1.5
+    value: 92.32
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        arabinose: 1.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Ara-25
+    lever_value: 2.5
+    value: 260.94
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        arabinose: 2.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Ara-35
+    lever_value: 3.5
+    value: 323.41
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        arabinose: 3.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+- id: zhang2024sugars-15
+  odorant: furfural
+  lever_class: precursor dose
+  lever: glucose added (0 / 0.5 / 1.5 / 2.5 / 3.5 g/100 g)
+  focal: true
+  location: Fig. 5b
+  digitised: true
+  unit: peak area (x10^5)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Heated control
+    lever_value: 0
+    value: 21.16
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        no sugar added: '0'
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Glu-05
+    lever_value: 0.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        glucose: 0.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Glu-15
+    lever_value: 1.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        glucose: 1.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Glu-25
+    lever_value: 2.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        glucose: 2.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Glu-35
+    lever_value: 3.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        glucose: 3.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+- id: zhang2024sugars-16
+  odorant: furfural
+  lever_class: precursor dose
+  lever: fructose added (0 / 0.5 / 1.5 / 2.5 / 3.5 g/100 g)
+  focal: true
+  location: Fig. 5b
+  digitised: true
+  unit: peak area (x10^5)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Heated control
+    lever_value: 0
+    value: 21.16
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        no sugar added: '0'
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Fru-05
+    lever_value: 0.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        fructose: 0.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Fru-15
+    lever_value: 1.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        fructose: 1.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Fru-25
+    lever_value: 2.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        fructose: 2.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Fru-35
+    lever_value: 3.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        fructose: 3.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+- id: zhang2024sugars-17
+  odorant: hexanal
+  lever_class: sugar identity
+  lever: added sugar at 0.5 g/100 g (xylose / arabinose / glucose / fructose)
+  focal: true
+  location: Fig. 5c
+  digitised: true
+  unit: peak area (x10^6)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Xyl-05
+    lever_value: xylose
+    value: 150.0
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Ara-05
+    lever_value: arabinose
+    value: 151.82
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        arabinose: 0.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Glu-05
+    lever_value: glucose
+    value: 424.55
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        glucose: 0.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Fru-05
+    lever_value: fructose
+    value: 585.78
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        fructose: 0.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+- id: zhang2024sugars-18
+  odorant: hexanal
+  lever_class: sugar identity
+  lever: added sugar at 1.5 g/100 g (xylose / arabinose / glucose / fructose)
+  focal: true
+  location: Fig. 5c
+  digitised: true
+  unit: peak area (x10^6)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Xyl-15
+    lever_value: xylose
+    value: 62.47
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 1.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Ara-15
+    lever_value: arabinose
+    value: 177.61
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        arabinose: 1.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Glu-15
+    lever_value: glucose
+    value: 402.73
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        glucose: 1.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Fru-15
+    lever_value: fructose
+    value: 433.64
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        fructose: 1.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+- id: zhang2024sugars-19
+  odorant: hexanal
+  lever_class: sugar identity
+  lever: added sugar at 2.5 g/100 g (xylose / arabinose / glucose / fructose)
+  focal: true
+  location: Fig. 5c
+  digitised: true
+  unit: peak area (x10^6)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Xyl-25
+    lever_value: xylose
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 2.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Ara-25
+    lever_value: arabinose
+    value: 119.09
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        arabinose: 2.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Glu-25
+    lever_value: glucose
+    value: 417.27
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        glucose: 2.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Fru-25
+    lever_value: fructose
+    value: 397.27
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        fructose: 2.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+- id: zhang2024sugars-20
+  odorant: hexanal
+  lever_class: sugar identity
+  lever: added sugar at 3.5 g/100 g (xylose / arabinose / glucose / fructose)
+  focal: true
+  location: Fig. 5c
+  digitised: true
+  unit: peak area (x10^6)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Xyl-35
+    lever_value: xylose
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Ara-35
+    lever_value: arabinose
+    value: 84.55
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        arabinose: 3.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Glu-35
+    lever_value: glucose
+    value: 402.73
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        glucose: 3.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Fru-35
+    lever_value: fructose
+    value: 362.73
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        fructose: 3.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+- id: zhang2024sugars-21
+  odorant: hexanal
+  lever_class: precursor dose
+  lever: xylose added (0 / 0.5 / 1.5 / 2.5 / 3.5 g/100 g)
+  focal: true
+  location: Fig. 5c
+  digitised: true
+  unit: peak area (x10^6)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Heated control
+    lever_value: 0
+    value: 326.36
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        no sugar added: '0'
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Xyl-05
+    lever_value: 0.5
+    value: 150.0
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Xyl-15
+    lever_value: 1.5
+    value: 62.47
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 1.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Xyl-25
+    lever_value: 2.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 2.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Xyl-35
+    lever_value: 3.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+- id: zhang2024sugars-22
+  odorant: hexanal
+  lever_class: precursor dose
+  lever: arabinose added (0 / 0.5 / 1.5 / 2.5 / 3.5 g/100 g)
+  focal: true
+  location: Fig. 5c
+  digitised: true
+  unit: peak area (x10^6)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Heated control
+    lever_value: 0
+    value: 326.36
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        no sugar added: '0'
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Ara-05
+    lever_value: 0.5
+    value: 151.82
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        arabinose: 0.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Ara-15
+    lever_value: 1.5
+    value: 177.61
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        arabinose: 1.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Ara-25
+    lever_value: 2.5
+    value: 119.09
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        arabinose: 2.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Ara-35
+    lever_value: 3.5
+    value: 84.55
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        arabinose: 3.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+- id: zhang2024sugars-23
+  odorant: hexanal
+  lever_class: precursor dose
+  lever: glucose added (0 / 0.5 / 1.5 / 2.5 / 3.5 g/100 g)
+  focal: true
+  location: Fig. 5c
+  digitised: true
+  unit: peak area (x10^6)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Heated control
+    lever_value: 0
+    value: 326.36
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        no sugar added: '0'
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Glu-05
+    lever_value: 0.5
+    value: 424.55
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        glucose: 0.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Glu-15
+    lever_value: 1.5
+    value: 402.73
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        glucose: 1.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Glu-25
+    lever_value: 2.5
+    value: 417.27
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        glucose: 2.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Glu-35
+    lever_value: 3.5
+    value: 402.73
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        glucose: 3.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+- id: zhang2024sugars-24
+  odorant: hexanal
+  lever_class: precursor dose
+  lever: fructose added (0 / 0.5 / 1.5 / 2.5 / 3.5 g/100 g)
+  focal: true
+  location: Fig. 5c
+  digitised: true
+  unit: peak area (x10^6)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Heated control
+    lever_value: 0
+    value: 326.36
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        no sugar added: '0'
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Fru-05
+    lever_value: 0.5
+    value: 585.78
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        fructose: 0.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Fru-15
+    lever_value: 1.5
+    value: 433.64
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        fructose: 1.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Fru-25
+    lever_value: 2.5
+    value: 397.27
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        fructose: 2.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Fru-35
+    lever_value: 3.5
+    value: 362.73
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        fructose: 3.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+- id: zhang2024sugars-25
+  odorant: 2-pentylfuran
+  lever_class: sugar identity
+  lever: added sugar at 0.5 g/100 g (xylose / arabinose / glucose / fructose)
+  focal: false
+  location: Fig. 5d
+  digitised: true
+  unit: peak area (x10^6)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Xyl-05
+    lever_value: xylose
+    value: 44.89
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Ara-05
+    lever_value: arabinose
+    value: 249.43
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        arabinose: 0.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Glu-05
+    lever_value: glucose
+    value: 311.93
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        glucose: 0.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Fru-05
+    lever_value: fructose
+    value: 389.2
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        fructose: 0.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+- id: zhang2024sugars-26
+  odorant: 2-pentylfuran
+  lever_class: sugar identity
+  lever: added sugar at 1.5 g/100 g (xylose / arabinose / glucose / fructose)
+  focal: false
+  location: Fig. 5d
+  digitised: true
+  unit: peak area (x10^6)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Xyl-15
+    lever_value: xylose
+    value: 26.7
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 1.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Ara-15
+    lever_value: arabinose
+    value: 268.75
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        arabinose: 1.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Glu-15
+    lever_value: glucose
+    value: 302.84
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        glucose: 1.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Fru-15
+    lever_value: fructose
+    value: 378.98
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        fructose: 1.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+- id: zhang2024sugars-27
+  odorant: 2-pentylfuran
+  lever_class: sugar identity
+  lever: added sugar at 2.5 g/100 g (xylose / arabinose / glucose / fructose)
+  focal: false
+  location: Fig. 5d
+  digitised: true
+  unit: peak area (x10^6)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Xyl-25
+    lever_value: xylose
+    value: 26.7
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 2.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Ara-25
+    lever_value: arabinose
+    value: 202.84
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        arabinose: 2.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Glu-25
+    lever_value: glucose
+    value: 286.93
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        glucose: 2.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Fru-25
+    lever_value: fructose
+    value: 334.66
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        fructose: 2.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+- id: zhang2024sugars-28
+  odorant: 2-pentylfuran
+  lever_class: sugar identity
+  lever: added sugar at 3.5 g/100 g (xylose / arabinose / glucose / fructose)
+  focal: false
+  location: Fig. 5d
+  digitised: true
+  unit: peak area (x10^6)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Xyl-35
+    lever_value: xylose
+    value: 9.66
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Ara-35
+    lever_value: arabinose
+    value: 191.48
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        arabinose: 3.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Glu-35
+    lever_value: glucose
+    value: 283.52
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        glucose: 3.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Fru-35
+    lever_value: fructose
+    value: 344.89
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        fructose: 3.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+- id: zhang2024sugars-29
+  odorant: 2-pentylfuran
+  lever_class: precursor dose
+  lever: xylose added (0 / 0.5 / 1.5 / 2.5 / 3.5 g/100 g)
+  focal: false
+  location: Fig. 5d
+  digitised: true
+  unit: peak area (x10^6)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Heated control
+    lever_value: 0
+    value: 42.61
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        no sugar added: '0'
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Xyl-05
+    lever_value: 0.5
+    value: 44.89
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 0.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Xyl-15
+    lever_value: 1.5
+    value: 26.7
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 1.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Xyl-25
+    lever_value: 2.5
+    value: 26.7
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 2.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Xyl-35
+    lever_value: 3.5
+    value: 9.66
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        xylose: 3.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+- id: zhang2024sugars-30
+  odorant: 2-pentylfuran
+  lever_class: precursor dose
+  lever: arabinose added (0 / 0.5 / 1.5 / 2.5 / 3.5 g/100 g)
+  focal: false
+  location: Fig. 5d
+  digitised: true
+  unit: peak area (x10^6)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Heated control
+    lever_value: 0
+    value: 42.61
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        no sugar added: '0'
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Ara-05
+    lever_value: 0.5
+    value: 249.43
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        arabinose: 0.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Ara-15
+    lever_value: 1.5
+    value: 268.75
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        arabinose: 1.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Ara-25
+    lever_value: 2.5
+    value: 202.84
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        arabinose: 2.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Ara-35
+    lever_value: 3.5
+    value: 191.48
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        arabinose: 3.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+- id: zhang2024sugars-31
+  odorant: 2-pentylfuran
+  lever_class: precursor dose
+  lever: glucose added (0 / 0.5 / 1.5 / 2.5 / 3.5 g/100 g)
+  focal: false
+  location: Fig. 5d
+  digitised: true
+  unit: peak area (x10^6)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Heated control
+    lever_value: 0
+    value: 42.61
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        no sugar added: '0'
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Glu-05
+    lever_value: 0.5
+    value: 311.93
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        glucose: 0.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Glu-15
+    lever_value: 1.5
+    value: 302.84
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        glucose: 1.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Glu-25
+    lever_value: 2.5
+    value: 286.93
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        glucose: 2.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Glu-35
+    lever_value: 3.5
+    value: 283.52
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        glucose: 3.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+- id: zhang2024sugars-32
+  odorant: 2-pentylfuran
+  lever_class: precursor dose
+  lever: fructose added (0 / 0.5 / 1.5 / 2.5 / 3.5 g/100 g)
+  focal: false
+  location: Fig. 5d
+  digitised: true
+  unit: peak area (x10^6)
+  quant_type: peak_area
+  quantity: amount
+  time_course_rule: not a time course
+  arms:
+  - label: Heated control
+    lever_value: 0
+    value: 42.61
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        no sugar added: '0'
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Fru-05
+    lever_value: 0.5
+    value: 389.2
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        fructose: 0.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Fru-15
+    lever_value: 1.5
+    value: 378.98
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        fructose: 1.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Fru-25
+    lever_value: 2.5
+    value: 334.66
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        fructose: 2.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated
+  - label: Fru-35
+    lever_value: 3.5
+    value: 344.89
+    censor: none
+    limit: null
+    n: 4
+    sd: null
+    conditions:
+      ph: 6.62
+      ph_basis: initial
+      temp_C: 100
+      time_min: 60
+      precursors:
+        fructose: 3.5 g/100 g
+      buffer: none (natural pH, unadjusted)
+      matrix: other (enzymatic minced chicken carcass hydrolysate)
+      headspace: sealed, unstated

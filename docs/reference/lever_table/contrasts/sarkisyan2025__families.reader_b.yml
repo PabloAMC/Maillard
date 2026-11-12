@@ -1,0 +1,5 @@
+source: "sarkisyan2025"
+pdf: "data/articles/sarkisyan2025.pdf"
+reader: "b"
+scope_note: "Taguchi L9 orthogonal array (Table 1: sugar type x sugar concentration x temperature, 9 runs); every pair of runs differs in at least two factors, so no one-factor pair or ladder exists and nothing is keyed. Group-F odorants in Table 2 (3-methylbutanal, hexanal, heptanal, 2-pentylfuran, 1-hexanol, 1-octen-3-ol, benzaldehyde, benzeneacetaldehyde, 2-acetylthiazole, methylpyrazine, 2-furancarboxaldehyde, 2-furanmethanol) are therefore not keyed; Figs. 1-4 marginal factor means are fluorescence/sensory, not odorants."
+contrasts: []

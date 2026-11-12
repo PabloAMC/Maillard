@@ -1,0 +1,5 @@
+source: "sasanam2022"
+pdf: "data/articles/sasanam2022.pdf"
+reader: "b"
+scope_note: "No values printed: Tables 3-6 list compounds identified per substrate mix (methionine/thiamine x xylose/dextrose, extrusion) without amounts or peak areas; MFT appears only in the methionine + dextrose list (Table 4), presence only."
+contrasts: []

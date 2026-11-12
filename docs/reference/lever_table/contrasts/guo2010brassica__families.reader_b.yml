@@ -1,0 +1,5 @@
+source: "guo2010brassica"
+pdf: "data/articles/guo2010.pdf"
+reader: "b"
+scope_note: "No group-F odorant is quantified: only total volatile amount and number of products are printed (Table 1 Box-Behnken RSM, Figs. 1-2); Table 4 lists identified structures (e.g. 2-methylbutanal, pyrazine, 2-methylpyrazine, furfural, 5-methylfurfural, 2-furanmethanol) without values or arm assignment. Totals are not on the odorant list."
+contrasts: []
