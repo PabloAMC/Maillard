@@ -65,6 +65,24 @@ For pairs of effects in one cell from two different laboratories: the mean |diff
 
 **What a laboratory itself is worth.** Pairs from two laboratories differ by +0.13 dex more than pairs from one laboratory in the same cell (+0.05 to +0.33; median 0.14 within a laboratory, 0.23 between; 68 cells).
 
+### 3b. The SIZE of agreed effects (55 cells whose laboratories agree in direction)
+
+Same method, but the distance between two same-sign effects is |log10 of their size ratio| (effects of at least 0.05 dex). A positive gap: laboratories that match on the condition agree more closely on size.
+
+| condition | gap, dex (90 % interval) | P(gap > 0) | median, matching | median, differing | cells | pairs (match / differ) |
+|---|---|---|---|---|---|---|
+| quantification | +0.48 (+0.25 to +0.72) | 1.00 | 0.12 | 0.64 | 3 | 28 / 23 |
+| matrix | +0.00 (-0.70 to +0.29) | 0.43 | 0.35 | 0.65 | 3 | 6 / 42 |
+| buffered | +0.25 (-0.69 to +0.68) | 0.72 | 0.10 | 0.57 | 7 | 35 / 66 |
+| ph_basis | -0.20 (-) | - | 0.60 | 0.34 | 2 | 3 / 10 |
+| digitised | +0.04 (-0.03 to +0.19) | 0.75 | 0.14 | 0.24 | 6 | 118 / 47 |
+| temperature within 10 C | -0.12 (-0.69 to +0.17) | 0.37 | 0.34 | 0.57 | 9 | 51 / 63 |
+| time within 2x | -0.02 (-0.32 to +0.21) | 0.50 | 0.24 | 0.53 | 7 | 104 / 50 |
+| pH within 0.5 | -0.07 (-0.37 to +0.37) | 0.50 | 0.63 | 0.24 | 5 | 46 / 57 |
+| lever midpoint within 1 step | +0.12 (-0.36 to +0.17) | 0.73 | 0.13 | 0.37 | 2 | 22 / 32 |
+
+Two effects from one laboratory differ in size by a median factor 1.4; from two laboratories, 1.6 (gap +0.08 dex, +0.01 to +0.29).
+
 ## 4. Variance split (one-way, pooled over cells)
 
 | cells | n cells | n effects | SD within a laboratory | SD between laboratories | share between |

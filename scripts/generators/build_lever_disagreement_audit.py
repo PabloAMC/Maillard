@@ -51,6 +51,7 @@ SEED = 20261112
 MODEL_LEAD = ("buffer", "water")                    # the keyed matrix field's leading category
 FOOD_WORDS = ("protein", "meat", "hydrolys", "extract", "flour", "mealworm", "chicken", "pork", "beef", "yeast",
               "oil", "lard", "fish", "seed", "mushroom", "milk", "egg", "soy", "pea ")
+SIZE_MIN = 0.05      # dex; smaller effects have no meaningful size ratio
 CLASSES = ("conflict between laboratories", "sign changes inside one laboratory", "direction agreed",
            "no clear effect")
 
@@ -182,7 +183,7 @@ CONDITIONS = ("quantification", "matrix", "buffered", "ph_basis", "digitised", "
               "time within 2x", "pH within 0.5", "lever midpoint within 1 step")
 
 
-def stratified_gap(cells, split) -> Optional[Dict[str, Any]]:
+def stratified_gap(cells, split, dist=None) -> Optional[Dict[str, Any]]:
     """Mean over cells of (mean discordance of group False) - (mean discordance of group True), weighted by the
     smaller pair count. `split(a, b)` returns True / False / None."""
     num = den = 0.0
@@ -194,7 +195,10 @@ def stratified_gap(cells, split) -> Optional[Dict[str, Any]]:
             s = split(a, b)
             if s is None:
                 continue
-            (t if s else f).append(abs(a["y"] - b["y"]))
+            dd = abs(a["y"] - b["y"]) if dist is None else dist(a, b)
+            if dd is None:
+                continue
+            (t if s else f).append(dd)
         if t and f:
             w = min(len(t), len(f))
             num += w * (float(np.mean(f)) - float(np.mean(t)))
@@ -210,9 +214,9 @@ def stratified_gap(cells, split) -> Optional[Dict[str, Any]]:
             "median_true": float(np.median(d_true)), "median_false": float(np.median(d_false))}
 
 
-def bootstrap_gap(its: Sequence[Mapping[str, Any]], split, rng) -> Optional[Dict[str, Any]]:
-    cells = cells_of(its)
-    point = stratified_gap(cells, split)
+def bootstrap_gap(its: Sequence[Mapping[str, Any]], split, rng, dist=None, keep=None) -> Optional[Dict[str, Any]]:
+    cells = {k: v for k, v in cells_of(its).items() if keep is None or k in keep}
+    point = stratified_gap(cells, split, dist)
     if point is None:
         return None
     labs = sorted({it["lab"] for it in its})
@@ -225,8 +229,9 @@ def bootstrap_gap(its: Sequence[Mapping[str, Any]], split, rng) -> Optional[Dict
         sample = []
         for k, i in enumerate(pick):               # a resampled laboratory is a new laboratory (its own id)
             sample += [{**it, "lab": f"{labs[i]}#{k}", "_orig": labs[i]} for it in by_lab[labs[i]]]
-        g = stratified_gap(cells_of(sample), lambda a, b: None if a["_orig"] == b["_orig"] and a["lab"] != b["lab"]
-                           else split(a, b))
+        g = stratified_gap({k: v for k, v in cells_of(sample).items() if keep is None or k in keep},
+                           lambda a, b: None if a["_orig"] == b["_orig"] and a["lab"] != b["lab"] else split(a, b),
+                           dist)
         if g is not None:
             draws.append(g["gap"])
     if len(draws) >= 0.5 * N_BOOT:
@@ -293,6 +298,23 @@ def build(sources, labs) -> Dict[str, Any]:
             conds[key] = g
     lab_effect = bootstrap_gap(its, lambda a, b: a["lab"] == b["lab"], rng)
 
+    # (c') the size of an agreed effect: for cells whose laboratories agree in direction, the distance between two
+    # same-sign effects is |log10(|y_a| / |y_b|)| (a ratio of sizes), for effects of at least SIZE_MIN dex
+    agreed = {(c["compound"], c["lever_class"], c["band"]) for c in classified if c["class"] == CLASSES[2]}
+
+    def size_dist(a, b):
+        if a["y"] * b["y"] <= 0 or min(abs(a["y"]), abs(b["y"])) < SIZE_MIN:
+            return None
+        return abs(math.log10(abs(a["y"]) / abs(b["y"])))
+
+    size = {}
+    for key in CONDITIONS:
+        g = bootstrap_gap(its, lambda a, b, key=key: None if a["lab"] == b["lab"] else _match(key, a, b), rng,
+                          dist=size_dist, keep=agreed)
+        if g is not None:
+            size[key] = g
+    size_lab = bootstrap_gap(its, lambda a, b: a["lab"] == b["lab"], rng, dist=size_dist, keep=agreed)
+
     numeric_cells = {k: v for k, v in cells.items() if k[1] in LT.NUMERIC}
     var = {"all cells": variance_split(cells), "numeric levers": variance_split(numeric_cells),
            "categorical pairs": variance_split({k: v for k, v in cells.items() if k[1] not in LT.NUMERIC})}
@@ -310,7 +332,8 @@ def build(sources, labs) -> Dict[str, Any]:
             "precursor_dose": {"pooled": {"cells": len(pooled), **tally(pooled)},
                                "banded_A5": {"cells": len(banded), **tally(banded)},
                                "pooled_cells": pooled},
-            "conditions": conds, "same_laboratory_vs_two": lab_effect, "variance_split": var,
+            "conditions": conds, "same_laboratory_vs_two": lab_effect,
+            "size_in_agreed_cells": {"conditions": size, "same_laboratory_vs_two": size_lab, "cells": len(agreed)}, "variance_split": var,
             "cells": classified}
 
 
@@ -372,6 +395,22 @@ def render(p: Mapping[str, Any]) -> str:
         L += ["", f"**What a laboratory itself is worth.** Pairs from two laboratories differ by {_g(g['gap'])} dex "
               f"more than pairs from one laboratory in the same cell ({ci}; median {g['median_true']:.2f} within a "
               f"laboratory, {g['median_false']:.2f} between; {g['cells']} cells)."]
+    sz = p["size_in_agreed_cells"]
+    L += ["", f"### 3b. The SIZE of agreed effects ({sz['cells']} cells whose laboratories agree in direction)", "",
+          "Same method, but the distance between two same-sign effects is |log10 of their size ratio| (effects of at "
+          f"least {SIZE_MIN} dex). A positive gap: laboratories that match on the condition agree more closely on size.",
+          "", "| condition | gap, dex (90 % interval) | P(gap > 0) | median, matching | median, differing | cells | "
+          "pairs (match / differ) |", "|---|---|---|---|---|---|---|"]
+    for k, g in sz["conditions"].items():
+        ci = "-" if not g.get("ci90") else f"{_g(g['ci90'][0])} to {_g(g['ci90'][1])}"
+        pg = "-" if g.get("p_gap_positive") is None else f"{g['p_gap_positive']:.2f}"
+        L.append(f"| {k} | {_g(g['gap'])} ({ci}) | {pg} | {g['median_true']:.2f} | {g['median_false']:.2f} | "
+                 f"{g['cells']} | {g['pairs_true']} / {g['pairs_false']} |")
+    g = sz["same_laboratory_vs_two"]
+    if g:
+        ci = "-" if not g.get("ci90") else f"{_g(g['ci90'][0])} to {_g(g['ci90'][1])}"
+        L += ["", f"Two effects from one laboratory differ in size by a median factor {10 ** g['median_true']:.1f}; "
+              f"from two laboratories, {10 ** g['median_false']:.1f} (gap {_g(g['gap'])} dex, {ci})."]
     L += ["", "## 4. Variance split (one-way, pooled over cells)", "",
           "| cells | n cells | n effects | SD within a laboratory | SD between laboratories | share between |",
           "|---|---|---|---|---|---|"]

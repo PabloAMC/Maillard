@@ -861,6 +861,138 @@
     ],
     "p_gap_positive": 0.996
   },
+  "size_in_agreed_cells": {
+    "conditions": {
+      "quantification": {
+        "gap": 0.48275195688878725,
+        "cells": 3,
+        "pairs_true": 28,
+        "pairs_false": 23,
+        "median_true": 0.12279206185770551,
+        "median_false": 0.6444015498095653,
+        "ci90": [
+          0.253589029704099,
+          0.7190614274582612
+        ],
+        "p_gap_positive": 1.0
+      },
+      "matrix": {
+        "gap": 0.0026519306731728567,
+        "cells": 3,
+        "pairs_true": 6,
+        "pairs_false": 42,
+        "median_true": 0.34996794013316,
+        "median_false": 0.6537716828742968,
+        "ci90": [
+          -0.698791449997125,
+          0.2927896546832659
+        ],
+        "p_gap_positive": 0.42987249544626593
+      },
+      "buffered": {
+        "gap": 0.2473514030749533,
+        "cells": 7,
+        "pairs_true": 35,
+        "pairs_false": 66,
+        "median_true": 0.10054983108331991,
+        "median_false": 0.5741477954603931,
+        "ci90": [
+          -0.6948340086570245,
+          0.6831404037006563
+        ],
+        "p_gap_positive": 0.7226666666666667
+      },
+      "ph_basis": {
+        "gap": -0.2038816503109553,
+        "cells": 2,
+        "pairs_true": 3,
+        "pairs_false": 10,
+        "median_true": 0.6029136358262257,
+        "median_false": 0.34024353353929626,
+        "ci90": null,
+        "p_gap_positive": null
+      },
+      "digitised": {
+        "gap": 0.043805476277342915,
+        "cells": 6,
+        "pairs_true": 118,
+        "pairs_false": 47,
+        "median_true": 0.1445990813595896,
+        "median_false": 0.23921316793338004,
+        "ci90": [
+          -0.030270453591867336,
+          0.187017405799293
+        ],
+        "p_gap_positive": 0.7538631346578366
+      },
+      "temperature within 10 C": {
+        "gap": -0.11966855558561587,
+        "cells": 9,
+        "pairs_true": 51,
+        "pairs_false": 63,
+        "median_true": 0.34352367517347115,
+        "median_false": 0.574096993316039,
+        "ci90": [
+          -0.6858935313252821,
+          0.1747515784369871
+        ],
+        "p_gap_positive": 0.37252747252747254
+      },
+      "time within 2x": {
+        "gap": -0.015056402117869665,
+        "cells": 7,
+        "pairs_true": 104,
+        "pairs_false": 50,
+        "median_true": 0.24450544647258204,
+        "median_false": 0.5272612837166606,
+        "ci90": [
+          -0.3181000670689021,
+          0.2111247619175476
+        ],
+        "p_gap_positive": 0.5029308323563892
+      },
+      "pH within 0.5": {
+        "gap": -0.07487487224949671,
+        "cells": 5,
+        "pairs_true": 46,
+        "pairs_false": 57,
+        "median_true": 0.6332115080255047,
+        "median_false": 0.24451512463521968,
+        "ci90": [
+          -0.3704976101842373,
+          0.3686325541695342
+        ],
+        "p_gap_positive": 0.5012106537530266
+      },
+      "lever midpoint within 1 step": {
+        "gap": 0.12206493848644406,
+        "cells": 2,
+        "pairs_true": 22,
+        "pairs_false": 32,
+        "median_true": 0.1268047349200152,
+        "median_false": 0.36860094633335316,
+        "ci90": [
+          -0.3558731670740557,
+          0.16608143904197875
+        ],
+        "p_gap_positive": 0.7283950617283951
+      }
+    },
+    "same_laboratory_vs_two": {
+      "gap": 0.08338509280353258,
+      "cells": 31,
+      "pairs_true": 954,
+      "pairs_false": 354,
+      "median_true": 0.1544580333874157,
+      "median_false": 0.1978613403035029,
+      "ci90": [
+        0.009281222392410205,
+        0.28676603918390464
+      ],
+      "p_gap_positive": 0.976
+    },
+    "cells": 55
+  },
   "variance_split": {
     "all cells": {
       "cells": 99,
@@ -3011,8 +3143,8 @@
     "artifact": "lever_disagreement_audit",
     "generated_on": "2026-11-12",
     "git": {
-      "commit": "2a986a90a02bbcfbd0a26dfd944a1c2a806a3423",
-      "short": "2a986a90",
+      "commit": "e53a43b026710285661cc2dfd44b73619b53cf32",
+      "short": "e53a43b0",
       "branch": "disagreement-audit",
       "dirty": true
     },
