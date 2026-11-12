@@ -1,12 +1,52 @@
 # Would a few experiments make this model predictive?
 
-*A two-page decision brief, 2026-10-09. The model's purpose is to help alternative-protein scientists
+*A decision brief, first written 2026-10-09 and updated 2026-11-12 (the update is the next section; text it
+supersedes is marked). The model's purpose is to help alternative-protein scientists
 build meat aroma into plant-based products: which precursors and which cooking programme give the meaty
 thiols in a pea or soy matrix, without the off-notes and the acrylamide. Every number below comes from the
 model's own records (paths given). The probabilities are judgement and are labelled as such. Protocols
 are in [EXPERIMENTS.md](EXPERIMENTS.md).*
 
-## The short answer
+## The goal, where we are, and what changed since October (2026-11-12)
+
+**The goal has not changed: predict the aroma a formulation and a cooking programme will give, in anyone's
+kitchen.** A kitchen is a set of conditions (pH, the temperature the sample really saw, water, the precursors the
+matrix brings), and chemistry maps conditions to products whoever does the cooking. The model cannot do this
+today. This section says how far it is and what would move it.
+
+**Four milestones, each with a test that exists in the repository.**
+
+| | milestone | the test | today |
+|---|---|---|---|
+| 1 | Know the direction and rough size of each big lever, per odorant | a lever-table cell with three laboratories whose interval excludes zero ([lever_table.md](../../results/validation/lever_table.md)) | **1 of 75** cells: leaving out cysteine lowers 2-methyl-3-furanthiol about 6x |
+| 2 | The kinetic model beats that table on contrasts it never saw | the display rule of [STATUS_AND_PLAN](STATUS_AND_PLAN.md) sec. 0, step 5, on held-out laboratories | **cannot be run**: no meaty-thiol cell for pH, sugar or temperature has two held-out laboratories. On the contrasts that can be scored, the model loses to "no change" (median error 0.30 against 0.15 log units, 19 pairs; [contrast_scores.md](../../results/validation/contrast_scores.md)) |
+| 3 | Ratios within threefold in a new laboratory after a few calibration pots | `maillard calibrate`, then `score` on that laboratory's other pots | one stand-in case (the Yiltirak ladder, below): 3 of 4 rows; not yet tried on a real partner |
+| 4 | Absolute levels within threefold in a new plant matrix, no calibration | the out-of-sample panel | **10 of 23** rows outside the meaty thiols; absolute thiol levels are refused for a new laboratory (they differ between laboratories by about one log unit) |
+
+**What the month between the two versions showed.**
+
+- **The literature was keyed as a table of levers, and it answers almost nothing.** 54 sources, 946
+  within-study contrasts, 20 laboratories, read by two blind readers: one cell of 75 is answered. The cause is the
+  shape of the data, as this brief said in October: liquid model systems, one laboratory per question, peak
+  areas, several things changed at once. **No source on disk has a heated plant-protein contrast.**
+- **Laboratories disagree by more than most levers move things.** How much of that is measurement (isotope
+  dilution against peak areas), how much is unrecorded conditions and how much is chemistry nobody has
+  described is not known yet; that split is the next analysis, and it decides how far milestone 3 can go.
+- **The model's pH error is in its structure, not its constants.** No choice of constants inside their bands
+  repairs it ([decision_relevance_step0_addendum.md](../../results/validation/decision_relevance_step0_addendum.md)).
+  Outputs that rest on the falsified pH balance are now refused.
+- **A designed study was sized before asking anyone to run it.** 36 pots in pea isolate (below, experiment L).
+  The check says what it will and will not buy: it halves the wrong-direction rate for a new kitchen where the
+  literature has no plant-protein data (0.50 to about 0.31), it does not remove the spread between
+  laboratories (a floor near 0.17 remains), and it is the only way milestone 2 can be tested at all
+  ([lever_design_preposterior.md](../../results/validation/lever_design_preposterior.md)).
+
+**What this changes in the advice below.** The October ranking stands, with one experiment added at the top
+(L). The October sentence "the model will not become the design tool" described the evidence then and still
+describes it now; it is a statement of where the model is, not a decision to stop wanting it. The path is the
+four milestones, and each experiment below is marked with the milestone it moves.
+
+## The short answer (2026-10-09)
 
 **Would these experiments help design better plant-based products? Through their data, yes. Through the
 model, only modestly.**
@@ -26,23 +66,29 @@ model, only modestly.**
   has published either. The chance their results are directly useful to formulators: **~70 %**.
 - **Stop scraping literature.** On 2026-10-09 four targeted searches against the 438 registered papers
   filled one gap out of about fifteen (`tasks/data_restructure_plan.md`, "The gap search"). The marginal
-  paper no longer changes what the model can predict.
+  paper no longer changes what the model can predict. *(2026-11-12: the lever table tested this from the
+  other side. Keying 54 sources as contrasts answered one cell of 75. The one exception worth a search is a
+  paper from a laboratory the corpus does not hold yet, because laboratories are what the cells lack.)*
 
 ## Where the model stands
 
-Out of sample, 11 of 44 scored rows land within threefold of the measurement. The median miss is 9×
-(about one decade) and the worst is 9,630×. Directional claims ("more X gives more Y") are right 16 times
-out of 31 once pH and water activity are set aside, which is close to a coin flip
-(`results/validation/core_panel_scores.md`, `core_directional_scores.md`).
+*Numbers as of 2026-11-12; the October figures follow in brackets. The counts fell because rows were refused,
+not because predictions got better: absolute thiol levels for a new laboratory, outputs that rest on the
+falsified pH balance, and three rows the source data cannot support.*
 
-| lane | what it is for in a plant-based product | rows | within 3× | median miss |
+Out of sample, 10 of 23 scored rows land within threefold of the measurement, with a median miss of 4.4×
+[11 of 44, median 9×, worst 9,630×]. Directional claims ("more X gives more Y") are right 10 times out of 19
+[16 of 31], which is a coin flip (`results/validation/core_panel_scores.md`, `core_directional_scores.md`).
+
+| lane | what it is for in a plant-based product | rows | within 3× | October |
 |---|---|---|---|---|
-| sulfur | the meaty thiols, the aroma you are trying to build | 19 | 2 | 29× |
-| lipid | the beany and green off-notes of pea and soy (hexanal and friends) | 8 | 4 | 2.8× |
-| acrylamide | the safety constraint on hot processing | 12 | 4 | 7.7× |
-| trunk | the sugar chemistry underneath everything | 6, all from one pot | 2 | 8.0× |
+| sulfur | the meaty thiols, the aroma you are trying to build | 0: absolute levels refused; ratios within one laboratory are given with an interval | – | 2 of 19, median miss 29× |
+| lipid | the beany and green off-notes of pea and soy (hexanal and friends) | 7 | 4 | 4 of 8 |
+| acrylamide | the safety constraint on hot processing | 10 | 4 | 4 of 12 |
+| trunk | the sugar chemistry underneath everything | 6, all from one pot | 2 | 2 of 6 |
 
-The lane that matters most for the product, the meaty thiols, is the worst.
+The lane that matters most for the product, the meaty thiols, is the worst: 29 of the 39 thiol rows removed
+by the refusal were misses.
 
 ## Why more papers have not helped
 
@@ -118,9 +164,13 @@ The repo has two cases where the missing data shape existed. Both worked.
 ## The experiments worth paying for, in order
 
 Step-by-step protocol cards for experiments 0, 1, 1b, 2 and 3 are at the top of [EXPERIMENTS.md](EXPERIMENTS.md#protocol-cards).
+Experiment L was added on 2026-11-12; its design is [FACTORIAL_LEVER_STUDY.md](FACTORIAL_LEVER_STUDY.md). The
+milestone each experiment moves is in brackets. The order is judgement: L comes first because it is the
+smallest, is useful with or without the model, and is the only one that can test the model on new laboratories.
 
 | # | experiment | size | what it buys | why it matters for plant-based products |
 |---|---|---|---|---|
+| L | **The big levers in pea protein** ([FACTORIAL_LEVER_STUDY.md](FACTORIAL_LEVER_STUDY.md)): sugar (ribose or glucose) × sulfur source (cysteine or thiamine) × pH (5.5 or 6.5) in 15 % pea isolate, 140 °C for 20 min, isotope-dilution GC, in two laboratories from one shipped lot (one laboratory is acceptable) | 36 pots in all | The first heated plant-protein contrasts for the sugar, sulfur-source and pH cells of every odorant family, and the held-out laboratories the model's first real test needs [milestones 1 and 2]. It will not remove the spread between laboratories; record the conditions listed in the next section so that spread can be explained. | These are the three choices every reaction-flavour formulation makes first, and today each is answered only in buffer or in meat. |
 | 0 | **Residual cysteine, one day**: free cysteine against time in a ribose–cysteine pot, 0–30 min at 100 °C, pH 5–5.5, ± chelator in excess | 42 samples (two arms), one day | Whether fast early cysteine loss explains the meaty-thiol over-prediction (first hypothesis above) | Decides the model's main structural question before anyone pays for experiment 1 |
 | 1 | **Where the thiols go** ([EXPERIMENTS.md §1](EXPERIMENTS.md)): ribose + cysteine at pH 5, 100 °C and 140 °C, against time, with fed-thiol, nitrogen, chelator and diketone arms; isotope-dilution GC | ~130 vials, ~2 weeks of GC | Settles where the 29× over-prediction of meaty thiols comes from: formation, the thiol sink, or precursor loss. A copper-catalysed loss of cysteine is one candidate, now unlikely at 33 mM cysteine (Ehrenberg 1989). Gives the lane its first activation energies. | Ribose + cysteine is the standard reaction flavour behind plant-based meat aroma. Without this, the model cannot say which cooking programme gets the most meat aroma out of it. |
 | 1b | **Thiamine arm in the same pots** ([pre-registration §10](../../results/validation/cultivated_tissue_invariance_prereg.md)): thiamine vs cysteine at both temperatures | +24 vials | Tests the one prediction a flavour chemist would not make unaided: thiamine pays off at braising temperatures and hardly at all when searing. | Thiamine and yeast extract are cheap, common reaction-flavour ingredients. If the claim holds, it is a direct formulation rule; if not, it is one fewer false lead. |
@@ -133,6 +183,29 @@ Experiments 1 and 1b share one bench and one extraction method. Experiment 2 nee
 extraction on a protein suspension, and experiment 3 needs a sensory panel; these may be different
 partners. The Reading group behind the Yiltirak ladder already heats ribose–cysteine systems across
 temperatures and quantifies these thiols, which makes it the natural first call for 1 and 1b.
+
+## What to record, so that the data add up
+
+Most of the 946 keyed contrasts could not be combined, and each item below is a reason found while keying
+them. A study that records these is worth several that do not, to this model and to anyone else's.
+
+| record | why (what its absence cost here) |
+|---|---|
+| **Absolute amounts**, by isotope dilution or a stated calibration; never peak areas alone | peak areas from two laboratories cannot be compared, and a response factor per compound is then one more unknown per laboratory |
+| **An unheated blank** of every matrix | in one paper 36–42 % of the "formed" volatiles were there before heating; correcting for it turned two 30× misses into 2× |
+| **pH before heating and after cooling**, in every vessel | pH drifts during heating wherever the pot is not strongly buffered (Zhou 2023), and the model's largest structural error is its pH response |
+| **The temperature the sample saw** (a logged thermocouple in a dummy vessel), not the oven setting | a 1 g sample in a 150 °C oven for 10 min is not at 150 °C for 10 min, and at a typical activation energy 30 °C is roughly a tenfold change in rate |
+| **Water before and after** (mass loss, or water activity) and whether the vessel was sealed | dry and wet arms move 2-furfurylthiol in opposite directions for pentoses and hexoses (Hofmann 1998) |
+| **What the matrix brings**: free sugars, free amino acids, and the lot | a flour charges precursors nobody added; a laboratory difference must not be a lot difference |
+| **One lever at a time, or a full factorial** | 183 keyed contrasts changed several things at once and feed no cell |
+| **A detection limit wherever a compound is "not detected"** | the thiamine cells are unusable because the no-thiamine arm is "not detected" with no limit |
+| **Vessel volume and fill** | headspace sets how much of a volatile thiol is in the liquid that is extracted |
+| **The numbers as a table**, in the supplement | values read off a figure carry a reading error that two readers here resolved by hand |
+
+A few **calibration pots** make a new laboratory comparable with the rest: a handful of defined pots that
+every laboratory runs on its own method (which pots is not fixed yet; experiment L's two check pots, the matrix with nothing added and the
+buffer without the matrix, are the first version). `maillard calibrate` turns a laboratory's own measurements into its
+response factors [milestone 3].
 
 ## What to expect (judgement, not measurement)
 
@@ -173,3 +246,8 @@ model with the missing step added) and the meaty-thiol miss on the new pots is s
 extending the engine,** and publish it as a reasoned map of what is and is not known, which it already
 is. In every case: stop scraping literature for this model. The evidence above says the marginal paper
 no longer changes what it can predict.
+
+*2026-11-12.* The rule stands as written, and it is a rule about effort, not about the goal. "Stop extending
+the engine" means no further fitting on the literature on disk, which the lever table has since shown cannot
+decide these questions. Work on the engine resumes when designed data arrive (experiment L, experiment 1, a
+partner's time courses), judged by milestones 2 and 3 above.
