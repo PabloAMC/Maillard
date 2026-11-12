@@ -2,11 +2,11 @@
  "artifact": "incumbent_evidence_tiers",
  "provenance": {
   "artifact": "incumbent_evidence_tiers",
-  "generated_on": "2026-11-07",
+  "generated_on": "2026-11-11",
   "git": {
-   "commit": "b8ba234edfc17900ca3c60f4afa5abb5844ce9db",
-   "short": "b8ba234e",
-   "branch": "s3-ph-balance-refusal",
+   "commit": "c21806bf6756e31dbfaf751d91438e2633db8916",
+   "short": "c21806bf",
+   "branch": "rival-bdf-retry",
    "dirty": true
   },
   "generated_by": "scripts/generators/build_evidence_tiers.py",
@@ -77,7 +77,7 @@
    },
    {
     "path": "results/validation/data_wishlist.json",
-    "sha256": "6842110d1fd5fb97c55ebd915a5259c851277bbde609431124cf3e5e179f330f"
+    "sha256": "734a1d00774b022a1b7cc60fd3217424747605277acfc71515f97496077c5636"
    },
    {
     "path": "docs/reference/unpinned_constants.yml",

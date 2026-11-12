@@ -2,12 +2,12 @@
   "artifact": "ph_balance_s3_sensitivity",
   "provenance": {
     "artifact": "ph_balance_s3_sensitivity",
-    "generated_on": "2026-11-11",
+    "generated_on": "2026-11-12",
     "git": {
-      "commit": "9344557b7529f60a524d92b085b31da447ff9020",
-      "short": "9344557b",
-      "branch": "s3-refusal-speed",
-      "dirty": true
+      "commit": "2e0fcb05a68eb2106fd61a4c1f0dfcb7a4aa98a4",
+      "short": "2e0fcb05",
+      "branch": "rival-bdf-retry",
+      "dirty": false
     },
     "generated_by": "scripts/generators/build_ph_balance_s3_sensitivity.py",
     "wave": "S3 application: the pH balance (M1b part (i))",
@@ -34,7 +34,7 @@
       },
       {
         "path": "src/kinetic_core/ph_balance_rivals.py",
-        "sha256": "5d61d944f4578d13104027ddf3a2b64a6274cbd95016384383aea37d4bc84879"
+        "sha256": "03f108508554c67c9c67c5c6357d9bfe352cb0724f8bcd68935808432fbe84b3"
       },
       {
         "path": "src/kinetic_core/ph_state.py",
@@ -42,7 +42,7 @@
       },
       {
         "path": "src/kinetic_core/ph_balance_refusal.py",
-        "sha256": "dad8a09a04a2898e0fa29b6bacd1ce7280eb699752754b6a8e225830143b89b4"
+        "sha256": "a6e3bf866c38056f4d023cdce8b4647680d4bc3dc4fa81bcd587f2a001688d27"
       },
       {
         "path": "results/validation/kinetic_core_thiol_lolo_nested_tau.json",
@@ -349,44 +349,44 @@
   },
   "timing": {
     "recipes": 809,
-    "workers": 4,
-    "wall_seconds": 7298.91600394249,
-    "projected_hours": 0.67,
+    "workers": 8,
+    "wall_seconds": 10733.010823965073,
+    "projected_hours": null,
     "median_seconds": {
-      "B0": 3.123,
-      "B0_inline": 0.407,
-      "B1_d345": 0.384,
-      "B1_d446": 0.38,
-      "B1_d460": 0.386,
-      "B1_d506": 0.401,
-      "B1_d544": 0.4095,
-      "B1_d594": 0.3755,
-      "B1_d618": 0.385,
-      "B1_d638": 0.3775,
-      "B13_d40": 0.4245,
-      "B13_d66": 0.4075,
-      "B13_d100": 0.426,
-      "B13_d115": 0.4075,
-      "B13_d161": 0.436,
-      "B13_d218": 0.3955,
-      "B13_d246": 0.4125,
-      "B13_d313": 0.392,
-      "B13_d319": 0.418,
-      "B13_d356": 0.4195,
-      "B13_d362": 0.424,
-      "B13_d388": 0.403,
-      "B13_d413": 0.409,
-      "B13_d440": 0.392,
-      "B13_d628": 0.401
+      "B0": 5.566,
+      "B0_inline": 1.1764999999999999,
+      "B1_d345": 0.9884999999999999,
+      "B1_d446": 0.96,
+      "B1_d460": 1.0335,
+      "B1_d506": 0.9924999999999999,
+      "B1_d544": 1.0405,
+      "B1_d594": 1.0025,
+      "B1_d618": 0.9544999999999999,
+      "B1_d638": 0.9275,
+      "B13_d40": 1.108,
+      "B13_d66": 1.0185,
+      "B13_d100": 1.045,
+      "B13_d115": 1.074,
+      "B13_d161": 1.016,
+      "B13_d218": 1.0295,
+      "B13_d246": 1.0474999999999999,
+      "B13_d313": 1.0085,
+      "B13_d319": 1.0434999999999999,
+      "B13_d356": 1.0125,
+      "B13_d362": 1.056,
+      "B13_d388": 1.0935000000000001,
+      "B13_d413": 1.0535,
+      "B13_d440": 1.0495,
+      "B13_d628": 1.0059999999999998
     },
     "rivals_seconds_per_pot": {
-      "median": 9.645,
-      "max": 909.543,
+      "median": 27.8825,
+      "max": 2148.933,
       "n_points": 23
     },
     "reanalysed": true
   },
-  "failed_point_runs": 102,
+  "failed_point_runs": 96,
   "complete": true,
   "detail_file": "results/validation/ph_balance_s3_sensitivity_detail.json.gz",
   "summary": {
@@ -396,12 +396,12 @@
           "absolute"
         ],
         "n": 5502,
-        "n_decided": 3522,
+        "n_decided": 3523,
         "n_dependent": 1155,
-        "n_dependent_sensitivity": 1885,
+        "n_dependent_sensitivity": 1886,
         "n_sign_flip": 0,
         "n_infinite_spread": 81,
-        "median_spread": 0.4735099333756172,
+        "median_spread": 0.4735734005095045,
         "min_spread": 0.0,
         "max_spread": 6.561568421517767
       },
@@ -410,12 +410,12 @@
           "ph"
         ],
         "n": 1408,
-        "n_decided": 1396,
-        "n_dependent": 671,
-        "n_dependent_sensitivity": 813,
+        "n_decided": 1398,
+        "n_dependent": 673,
+        "n_dependent_sensitivity": 815,
         "n_sign_flip": 0,
         "n_infinite_spread": 0,
-        "median_spread": 0.41502917926228555,
+        "median_spread": 0.4180057514458895,
         "min_spread": 0.0,
         "max_spread": 5.083186207339168
       }
@@ -547,12 +547,12 @@
           "FFT"
         ],
         "n": 60,
-        "n_decided": 56,
+        "n_decided": 57,
         "n_dependent": 13,
-        "n_dependent_sensitivity": 32,
+        "n_dependent_sensitivity": 33,
         "n_sign_flip": 0,
         "n_infinite_spread": 0,
-        "median_spread": 0.4879325611861982,
+        "median_spread": 0.49417229586650485,
         "min_spread": 0.0,
         "max_spread": 3.4429363241078703
       },
@@ -712,12 +712,12 @@
           "ph_cooled_end"
         ],
         "n": 704,
-        "n_decided": 698,
-        "n_dependent": 353,
-        "n_dependent_sensitivity": 430,
+        "n_decided": 699,
+        "n_dependent": 354,
+        "n_dependent_sensitivity": 431,
         "n_sign_flip": 0,
         "n_infinite_spread": 0,
-        "median_spread": 0.49849442671984434,
+        "median_spread": 0.5011142389848828,
         "min_spread": 0.0,
         "max_spread": 5.083186207339168
       },
@@ -727,12 +727,12 @@
           "ph_in_situ_end"
         ],
         "n": 704,
-        "n_decided": 698,
-        "n_dependent": 318,
-        "n_dependent_sensitivity": 383,
+        "n_decided": 699,
+        "n_dependent": 319,
+        "n_dependent_sensitivity": 384,
         "n_sign_flip": 0,
         "n_infinite_spread": 0,
-        "median_spread": 0.3607732529249068,
+        "median_spread": 0.3607732529714731,
         "min_spread": 0.0,
         "max_spread": 2.3487157049977836
       }
@@ -1257,12 +1257,12 @@
           "?"
         ],
         "n": 60,
-        "n_decided": 56,
+        "n_decided": 57,
         "n_dependent": 13,
-        "n_dependent_sensitivity": 32,
+        "n_dependent_sensitivity": 33,
         "n_sign_flip": 0,
         "n_infinite_spread": 0,
-        "median_spread": 0.4879325611861982,
+        "median_spread": 0.49417229586650485,
         "min_spread": 0.0,
         "max_spread": 3.4429363241078703
       },
@@ -2009,12 +2009,12 @@
           "?"
         ],
         "n": 148,
-        "n_decided": 143,
-        "n_dependent": 111,
-        "n_dependent_sensitivity": 121,
+        "n_decided": 144,
+        "n_dependent": 112,
+        "n_dependent_sensitivity": 122,
         "n_sign_flip": 0,
         "n_infinite_spread": 0,
-        "median_spread": 1.0625088345259428,
+        "median_spread": 1.0861608334816992,
         "min_spread": 0.0,
         "max_spread": 5.083186207339168
       },
@@ -2153,12 +2153,12 @@
           "?"
         ],
         "n": 148,
-        "n_decided": 143,
-        "n_dependent": 108,
-        "n_dependent_sensitivity": 115,
+        "n_decided": 144,
+        "n_dependent": 109,
+        "n_dependent_sensitivity": 116,
         "n_sign_flip": 0,
         "n_infinite_spread": 0,
-        "median_spread": 0.7801555058453387,
+        "median_spread": 0.793254646011178,
         "min_spread": 9.313261273291573e-11,
         "max_spread": 2.3487157049977836
       },
@@ -2298,9 +2298,9 @@
           "absolute"
         ],
         "n": 149,
-        "n_decided": 143,
+        "n_decided": 144,
         "n_dependent": 43,
-        "n_dependent_sensitivity": 80,
+        "n_dependent_sensitivity": 81,
         "n_sign_flip": 0,
         "n_infinite_spread": 0,
         "median_spread": 0.502386576654587,
@@ -2313,12 +2313,12 @@
           "ph"
         ],
         "n": 296,
-        "n_decided": 286,
-        "n_dependent": 219,
-        "n_dependent_sensitivity": 236,
+        "n_decided": 288,
+        "n_dependent": 221,
+        "n_dependent_sensitivity": 238,
         "n_sign_flip": 0,
         "n_infinite_spread": 0,
-        "median_spread": 0.9260241110133616,
+        "median_spread": 0.9429546241380384,
         "min_spread": 0.0,
         "max_spread": 5.083186207339168
       },
@@ -3207,10 +3207,10 @@
           "sugar_identity"
         ],
         "n": 13,
-        "n_decided": 9,
-        "n_dependent": 4,
+        "n_decided": 10,
+        "n_dependent": 5,
         "n_dependent_sensitivity": 0,
-        "n_sign_flip": 1,
+        "n_sign_flip": 2,
         "n_infinite_spread": 0,
         "median_spread": null,
         "min_spread": null,
@@ -4124,6 +4124,13 @@
         "kind": "ph",
         "spread": 0.06694309368466289,
         "tolerance": 0.47759815745038214
+      },
+      {
+        "rid": "directional:HOF-03|arm0:cysteine + D-ribose, dry-heated 180 C 6 min",
+        "output": "FFT",
+        "kind": "absolute",
+        "spread": 0.5596576211307893,
+        "tolerance": 0.9639695606957359
       },
       {
         "rid": "directional:HOF-03|arm1:cysteine + D-glucose, dry-heated 180 C 6 min",
@@ -24909,7 +24916,7 @@
         "tolerance": 0.47759815745038214
       }
     ],
-    "undecided_dynamic_outputs": 1992
+    "undecided_dynamic_outputs": 1989
   },
   "directional": [
     {
@@ -26678,27 +26685,27 @@
           -0.2934960388883433
         ],
         "B13_d356": [
-          null
+          -0.1264782143854065
         ],
         "B13_d362": [
-          null
+          -0.05010321194648713
         ],
         "B13_d388": [
-          null
+          -0.2557241962150466
         ],
         "B13_d413": [
-          null
+          -0.058348696132517905
         ],
         "B13_d440": [
-          null
+          -0.25056541005541993
         ],
         "B13_d628": [
-          null
+          -0.1295417669648798
         ]
       },
-      "dependent": null,
-      "sign_flip": null,
-      "why": "a step is undefined at some point (zero, refused or failed)"
+      "sign_flip": true,
+      "max_step_spread": 0.5071770314922978,
+      "dependent": true
     },
     {
       "claim_id": "MOT-01",
@@ -31460,7 +31467,7 @@
     "absolute 2-methyl-3-furanthiol (MFT): 169 of 482 decided dynamic-pH recipes balance-dependent (spread median 0.474, max 3.512)",
     "absolute 5-HMF: 0 of 48 decided dynamic-pH recipes balance-dependent (spread median 0.000, max 0.000)",
     "absolute Bis(2-methyl-3-furyl) disulfide: 1 of 1 decided dynamic-pH recipes balance-dependent (spread median 2.273, max 2.273)",
-    "absolute FFT: 13 of 56 decided dynamic-pH recipes balance-dependent (spread median 0.488, max 3.443)",
+    "absolute FFT: 13 of 57 decided dynamic-pH recipes balance-dependent (spread median 0.494, max 3.443)",
     "absolute Furfural: 6 of 15 decided dynamic-pH recipes balance-dependent (spread median 0.083, max 3.250)",
     "absolute MFT: 24 of 66 decided dynamic-pH recipes balance-dependent (spread median 0.526, max 6.155)",
     "absolute bis(2-methyl-3-furyl) disulfide: 237 of 484 decided dynamic-pH recipes balance-dependent (spread median 0.779, max 5.283)",
@@ -31471,8 +31478,8 @@
     "absolute methanethiol: 0 of 96 decided dynamic-pH recipes balance-dependent (spread median 0.000, max 0.008)",
     "absolute norfuraneol: 197 of 482 decided dynamic-pH recipes balance-dependent (spread median 0.716, max 5.754)",
     "absolute pentane: 0 of 2 decided dynamic-pH recipes balance-dependent (spread median 0.000, max 0.000)",
-    "ph ph_cooled_end: 353 of 698 decided dynamic-pH recipes balance-dependent (spread median 0.498, max 5.083)",
-    "ph ph_in_situ_end: 318 of 698 decided dynamic-pH recipes balance-dependent (spread median 0.361, max 2.349)",
+    "ph ph_cooled_end: 354 of 699 decided dynamic-pH recipes balance-dependent (spread median 0.501, max 5.083)",
+    "ph ph_in_situ_end: 319 of 699 decided dynamic-pH recipes balance-dependent (spread median 0.361, max 2.349)",
     "ratio, lever buffer: 1697 of 2499 dependent, 585 direction flips",
     "ratio, lever dose: 285 of 374 dependent, 39 direction flips",
     "ratio, lever ph: 1201 of 2603 dependent, 382 direction flips",
@@ -31484,13 +31491,13 @@
     "directional claims, lipid_lane: 0 of 0 dependent, 0 direction flips",
     "directional claims, ph: 11 of 15 dependent, 3 direction flips",
     "directional claims, ranking: 0 of 3 dependent, 0 direction flips",
-    "directional claims, sugar_identity: 4 of 9 dependent, 1 direction flips",
+    "directional claims, sugar_identity: 5 of 10 dependent, 2 direction flips",
     "directional claims, sulfur_donor: 2 of 3 dependent, 0 direction flips",
     "directional claims, temperature: 5 of 9 dependent, 4 direction flips",
     "directional claims, time: 4 of 5 dependent, 3 direction flips"
   ],
   "extremes_check": {
-    "summary": "8 recorded pots x 48 further passing draws (24 per rival, seed 20261107): 23 of 58 outputs' spreads widen beyond B0 + the extremes (largest widening 2.048); 0 verdicts change. 51 s.",
+    "summary": "8 recorded pots x 48 further passing draws (24 per rival, seed 20261107): 23 of 58 outputs' spreads widen beyond B0 + the extremes (largest widening 2.048); 0 verdicts change. 64 s.",
     "n_outputs": 58,
     "n_widened": 23,
     "largest_widening": 2.0484920758754015,
@@ -31975,7 +31982,7 @@
     ]
   },
   "draws_needed": {
-    "summary": "every passing draw (B1 95, B13 255) on 8 recorded pots, 58 outputs: the extremes (+ best draw) reach within 0.05 of the all-draws spread in 0.76 of outputs (verdict agrees in 0.98); random subsets reach it in 95 % of (output, subset) at more than 80 draws per rival. 376 s.",
+    "summary": "every passing draw (B1 95, B13 255) on 8 recorded pots, 58 outputs: the extremes (+ best draw) reach within 0.05 of the all-draws spread in 0.76 of outputs (verdict agrees in 0.98); random subsets reach it in 95 % of (output, subset) at more than 80 draws per rival. 481 s.",
     "table": [
       {
         "draws_per_rival": 5,
