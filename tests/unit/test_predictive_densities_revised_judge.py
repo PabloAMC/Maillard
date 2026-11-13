@@ -647,6 +647,7 @@ def planted():
 R_RANK = 400
 
 
+@pytest.mark.monte_carlo_power
 @pytest.mark.slow
 def test_observed_rank_is_uniform_in_the_null_rival_bootstrap(planted):
     """(a) Under rival r as truth (fresh truth draws from r's prior, data at them), the observed T's randomised rank
@@ -674,6 +675,7 @@ def test_observed_rank_is_uniform_in_the_null_rival_bootstrap(planted):
 R_POWER, ORACLE_LOSS = 200, 0.10
 
 
+@pytest.mark.monte_carlo_power
 @pytest.mark.slow
 def test_power_is_near_the_neyman_pearson_oracle_in_a_near_simple_world():
     """(b) theta ~ N(1, 0.002): each rival is near a simple hypothesis, so the most powerful 5 % test of b against a
@@ -717,6 +719,7 @@ def _same_mean_world(seed):
     return _build(design, draws, pool=1600, seed=seed)
 
 
+@pytest.mark.monte_carlo_power
 @pytest.mark.slow
 def test_same_mean_different_spread_with_a_spent_row_does_not_over_credit():
     """(c) False credit not shown above 0.05: the exact one-sided binomial p is >= 0.05 under each truth (R = 300 per
@@ -732,6 +735,7 @@ def test_same_mean_different_spread_with_a_spent_row_does_not_over_credit():
         assert nc <= 0.1 * R_FALSE, rates                        # the check is not emptied by refusals
 
 
+@pytest.mark.monte_carlo_power
 @pytest.mark.slow
 @pytest.mark.parametrize("nu", [2, 4, 9])
 def test_the_bound_false_credit_is_not_shown_above_alpha_in_df_carrying_worlds(nu):

@@ -59,15 +59,22 @@ def test_a_refused_level_carries_the_reason_and_the_lift_text_and_stays_for_rati
         assert name not in {r["compound"] for r in payload["rows"]}
 
 
-@pytest.mark.slow
-def test_the_ratio_rule_decides_every_ratio_and_the_state_vector_leaks_nothing():
-    """A refused level is not a refused ratio: compare keeps both arms' numbers and judges each ratio on omega and the
-    sign; the arms' state vectors carry no species whose level S3 refused (review, PR #108)."""
+@pytest.fixture(scope="module")
+def buffered_pair():
+    """One compare of two 0.2 M pyrophosphate pots (145 C / 20 min against 120 C / 60 min), shared by the tests that
+    read its rows (2026-11-13: each test ran the same two arms' 23 rival points, ~5 min apiece on CI). The targets are
+    the union of what those tests ask: each compound's verdict is its own spread, so asking more changes none."""
     a = {"name": "A", "precursors": {"cysteine": 50.0, "ribose": 35.0}, "temp_C": 145.0, "time_min": 20.0, "ph": 6.5,
          "aw": 0.98, "buffer": {"kind": "pyrophosphate", "pyrophosphate_mol_l": 0.2}}
     b = dict(a, name="B", temp_C=120.0, time_min=60.0)
-    targets = [H2S, ACTZ, FFT, "methanethiol"]
-    cmp = compare_core(a, b, targets=targets)["comparison"]
+    return compare_core(a, b, targets=[H2S, ACTZ, FFT, "methanethiol", MFT])["comparison"]
+
+
+@pytest.mark.slow
+def test_the_ratio_rule_decides_every_ratio_and_the_state_vector_leaks_nothing(buffered_pair):
+    """A refused level is not a refused ratio: compare keeps both arms' numbers and judges each ratio on omega and the
+    sign; the arms' state vectors carry no species whose level S3 refused (review, PR #108)."""
+    cmp = buffered_pair
     assert cmp["comparable"] is True
     for arm in ("a", "b"):
         decl = cmp[f"declaration_{arm}"]
@@ -215,15 +222,14 @@ def test_the_sensitivity_generator_on_a_toy_pot():
 
 
 @pytest.mark.slow
-def test_a_thiol_refused_on_both_grounds_keeps_h0s_interval_when_its_ratio_stands():
+def test_a_thiol_refused_on_both_grounds_keeps_h0s_interval_when_its_ratio_stands(buffered_pair):
     """Confirmation read of PR #108: an H0 thiol whose level the balance ALSO refuses must keep H0's ratio treatment
     (the omega interval, the relative caveat, the not-resolved check) whenever its ratio stands under S3."""
-    a = {"name": "A", "precursors": {"cysteine": 50.0, "ribose": 35.0}, "temp_C": 145.0, "time_min": 20.0, "ph": 6.5,
-         "aw": 0.98, "buffer": {"kind": "pyrophosphate", "pyrophosphate_mol_l": 0.2}}
-    b = dict(a, name="B", temp_C=120.0, time_min=60.0)
-    cmp = compare_core(a, b, targets=[MFT, FFT])["comparison"]
+    cmp = buffered_pair
     checked = 0
     for row in cmp["ratios"]["rows"]:
+        if row["compound"] not in (MFT, FFT):      # the H0 thiols; the shared pair also holds non-H0 targets
+            continue
         if row.get("direction") == "undefined" or row.get("balance_refused"):
             continue
         assert "interval_90_ratio_a_over_b" in row and row.get("relative_caveat"), row["compound"]

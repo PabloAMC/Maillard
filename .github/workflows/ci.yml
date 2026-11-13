@@ -243,8 +243,31 @@ jobs:
       - name: Build the maillard environment
         run: bash scripts/ci/setup_env.sh
 
+      # 2026-11-13: the Monte-Carlo size / power checks of the frozen revised judge (~11 min) run only where they can
+      # fail: on the weekly schedule, on a manual run, and on a pull request that touches the judge, its test or the
+      # calibration script it loads. The judge is frozen (STATUS_AND_PLAN sec. 7), so no other change can move them.
+      - name: Decide whether the judge's Monte-Carlo checks run
+        id: judge
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          run=false
+          case "${{ github.event_name }}" in
+            schedule|workflow_dispatch) run=true ;;
+            pull_request)
+              git fetch --no-tags --depth=1 origin "$BASE_SHA"
+              if git diff --name-only "$BASE_SHA" HEAD | grep -qE '^(src/kinetic_core/predictive_densities\.py|tests/unit/test_predictive_densities_revised_judge\.py|scripts/diagnostics/judge_calibration\.py|pytest\.ini)$'; then
+                run=true
+              fi ;;
+          esac
+          echo "run=$run" >> "$GITHUB_OUTPUT"
+          echo "judge Monte-Carlo checks run: $run"
+
       - name: Unit tests marked slow
-        run: python -m pytest tests/unit -q -m "slow and not artifact_rebuild" --durations=15
+        run: |
+          marks="slow and not artifact_rebuild"
+          if [ "${{ steps.judge.outputs.run }}" != "true" ]; then marks="$marks and not monte_carlo_power"; fi
+          python -m pytest tests/unit -q -m "$marks" --durations=15
 
       - name: data/ untouched by the slow unit tier
         if: always()
