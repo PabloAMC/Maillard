@@ -570,6 +570,7 @@ def test_same_seed_gives_an_identical_artifact():
     assert json.dumps(a["benchmarks"], sort_keys=True) != json.dumps(c["benchmarks"], sort_keys=True)
 
 
+@pytest.mark.slow
 def test_every_trust_loop_benchmark_is_scored_or_refused_with_a_reason():
     """Cheap: the deterministic pass only (n_samples small), over the whole trust loop."""
     scored, _ = panel.panel_bundles()

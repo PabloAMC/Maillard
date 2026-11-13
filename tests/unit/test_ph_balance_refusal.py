@@ -59,6 +59,7 @@ def test_a_refused_level_carries_the_reason_and_the_lift_text_and_stays_for_rati
         assert name not in {r["compound"] for r in payload["rows"]}
 
 
+@pytest.mark.slow
 def test_the_ratio_rule_decides_every_ratio_and_the_state_vector_leaks_nothing():
     """A refused level is not a refused ratio: compare keeps both arms' numbers and judges each ratio on omega and the
     sign; the arms' state vectors carry no species whose level S3 refused (review, PR #108)."""
@@ -164,6 +165,7 @@ def test_the_sign_floor_sits_above_the_coupling_noise():
     assert noise and max(noise) < s3.SIGN_FLOOR_DEX
 
 
+@pytest.mark.slow
 def test_the_engine_reproduces_the_records_verdicts():
     """The record audits the rule the engine applies: on recipes it ran, the live verdict agrees output by output."""
     import build_ph_balance_s3_sensitivity as gen
@@ -212,6 +214,7 @@ def test_the_sensitivity_generator_on_a_toy_pot():
     assert gen.log_spread([1.0, 0.0]) == float("inf") and gen.log_spread([0.0, 0.0]) == 0.0
 
 
+@pytest.mark.slow
 def test_a_thiol_refused_on_both_grounds_keeps_h0s_interval_when_its_ratio_stands():
     """Confirmation read of PR #108: an H0 thiol whose level the balance ALSO refuses must keep H0's ratio treatment
     (the omega interval, the relative caveat, the not-resolved check) whenever its ratio stands under S3."""

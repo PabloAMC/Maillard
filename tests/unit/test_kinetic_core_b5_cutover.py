@@ -248,7 +248,11 @@ def test_out_of_range_conditions_are_a_DECLARED_extrapolation_not_a_refusal():
     An extrapolation still answers -- but it says so, and the warning travels
     with the number rather than being discovered later.
     """
-    run = predict(_sulfur_spec(temperature_c=250.0, minutes=5.0), [MFT])
+    # balance_refusal=False: the declaration is decided before any integration. With the S3 refusal on, this one
+    # predict integrates 23 rival points at 250 C, each finishing in 50 000 - 200 000 evaluations (~1 min apiece):
+    # 16 - 22 min of the unit tier, the cause of its timeouts on main (2026-11-13). The refusal is tested in
+    # test_ph_balance_refusal.py.
+    run = predict(_sulfur_spec(temperature_c=250.0, minutes=5.0), [MFT], balance_refusal=False)
     assert run.answered
     assert run.declaration.state == "in_envelope_extrapolated"
     assert any("200 C" in w or "extrapolation" in w for w in run.declaration.warnings)
