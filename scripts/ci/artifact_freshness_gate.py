@@ -221,7 +221,9 @@ FROZEN_RECORD_FILES = frozenset({"results/validation/kinetic_core_contrast_bench
                                  "results/validation/step5a_display_check.json",
                                  "results/validation/step5a_display_check_items.json",
                                  "results/validation/step5c_discordant_cells.json",
-                                 "results/validation/step5c_discordant_cells_items.json"})
+                                 "results/validation/step5c_discordant_cells_items.json",
+                                 # 2026-11-13: A6 scored once per post-freeze batch (A6_SCORING_PREREG.md sec. 7)
+                                 "results/validation/a6_post_freeze_score_batch1.json"})
 
 
 #: 2026-10-30 (owner: "I am not sure regenerating the figure is needed until we have the engine finished"; strategy
