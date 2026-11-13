@@ -629,3 +629,13 @@ have no null answer): counting it as a difference of 0 pulls the mean to zero an
   any batch-2 paper was chosen. The premortem had caught the same thing for batch 1; batch 2 was not checked.
 - **Rule:** before choosing papers to test a rule, list the cells where it CAN be scored (from training-side counts
   only) and pick papers that land in them. Keying that only grows the table is still worth doing, but call it that.
+
+## Count dependence by laboratory, not by source (2026-11-13)
+- **What happened:** A6 revision 3's first draft proposed scoring batches 1 - 2 together, because a count by source
+  said that pooled set was eligible (41 contrasts, 8 sources, largest source 29 %). Counted by laboratory, the
+  premortem showed one laboratory (BTBU: yang2011 + hou2017ph) holds 44 %. The source cap was standing in for the
+  laboratory cap that matters. The same premortem found that revision 2's placebo quietly fell back to the baseline
+  on unfittable draws, which narrows the placebo.
+- **Rule:** in any eligibility rule, bootstrap or share cap, the unit is the laboratory: several sources from one
+  group are one draw of its method. A placebo that cannot be computed for a draw discards the draw; it never
+  substitutes the null arm.
