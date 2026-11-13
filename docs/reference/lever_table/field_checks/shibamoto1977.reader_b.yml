@@ -1,0 +1,20 @@
+source: shibamoto1977
+reader: b
+pdf: data/articles/shibamoto1977.pdf
+fields: [F1, F2]
+ph_control: unadjusted
+ph_control_overrides: {}
+arms:
+  "Exp. 13":
+    final_ph: null
+    final_ph_location: "not printed"
+  "Exp. 10":
+    final_ph: null
+    final_ph_location: "not printed"
+  "Exp. 16":
+    final_ph: null
+    final_ph_location: "not printed"
+  "Exp. 12":
+    final_ph: null
+    final_ph_location: "not printed"
+notes: "pH contrasts shibamoto1977-6/-7/-14/-15/-22/-23/-30/-31/-38/-39/-46/-47 etc. (families file). No pH is printed anywhere (text p. 144-145; Table I conditions are an image, text extraction gives only its footnotes: 8 M NH4OH + 1 M glucose in 100 ml water). NaOH arms (Exps. 10-12) add a fixed 0.4 g NaOH as a reagent 'to learn more about the effects of strong base', not titrated to a stated pH; no buffer. Keyed unadjusted because nobody set a pH value; a resolver could argue adjusted_unbuffered for the NaOH arms."

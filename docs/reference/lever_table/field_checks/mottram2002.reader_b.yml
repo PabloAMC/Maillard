@@ -1,0 +1,47 @@
+source: mottram2002
+reader: b
+pdf: data/articles/mottram2002.pdf
+fields: [F1, F2]
+ph_control: buffered
+ph_control_overrides: {}
+arms:
+  "phosphate buffer, pH 5.6, Rib-PO4 (final pH 5.5)":
+    final_ph: 5.5
+    final_ph_location: "Table 1, row 'final pH', p. 4083"
+  "phosphate buffer, pH 4.2, Rib-PO4 (final pH 3.9)":
+    final_ph: 3.9
+    final_ph_location: "Table 1, row 'final pH', p. 4083"
+  "phosphate buffer, pH 5.6, ribose (final pH 5.5)":
+    final_ph: 5.5
+    final_ph_location: "Table 1, row 'final pH', p. 4083"
+  "phosphate buffer, pH 4.2, ribose (final pH 3.9)":
+    final_ph: 3.9
+    final_ph_location: "Table 1, row 'final pH', p. 4083"
+  "phosphate buffer, pH 5.6, IMP (final pH 5.7)":
+    final_ph: 5.7
+    final_ph_location: "Table 1, row 'final pH', p. 4083"
+  "phosphate buffer, pH 4.2, IMP (final pH 4.5)":
+    final_ph: 4.5
+    final_ph_location: "Table 1, row 'final pH', p. 4083"
+  "phosphate buffer, pH 5.6, IMP (final pH 5.7) [tr]":
+    final_ph: 5.7
+    final_ph_location: "Table 1, row 'final pH', p. 4083"
+  "phosphate buffer, pH 5.6, Rib-PO4 (final pH 5.5) [+ present, quantification confounded by adjacent peak]":
+    final_ph: 5.5
+    final_ph_location: "Table 1, row 'final pH', p. 4083"
+  "phosphate buffer, pH 5.6, ribose (final pH 5.5) [+ present, quantification confounded by adjacent peak]":
+    final_ph: 5.5
+    final_ph_location: "Table 1, row 'final pH', p. 4083"
+  "phosphate buffer, pH 5.6, IMP (final pH 5.7) [- below detection limit]":
+    final_ph: 5.7
+    final_ph_location: "Table 1, row 'final pH', p. 4083"
+  "phosphate buffer, pH 4.2, IMP (final pH 4.5) [tr]":
+    final_ph: 4.5
+    final_ph_location: "Table 1, row 'final pH', p. 4083"
+  "phosphate buffer, pH 5.6, Rib-PO4 (final pH 5.5) [- below detection limit]":
+    final_ph: 5.5
+    final_ph_location: "Table 1, row 'final pH', p. 4083"
+  "phosphate buffer, pH 4.2, Rib-PO4 (final pH 3.9) [tr]":
+    final_ph: 3.9
+    final_ph_location: "Table 1, row 'final pH', p. 4083"
+notes: "Arms from mottram2002.yml (pH contrasts -8, -10, -12) and mottram2002__families.yml (-6, -7, -8; note id mottram2002-8 exists in both files with different content). 'Phosphate' buffer is 0.2 M pyrophosphate (disodium + tetrasodium); stock solutions also checked and adjusted to 5.6 or 4.2 with NaOH or HCl before mixing. pH measured before and after heating (Methods). mottram2002b not cited by either contrast file, not read."

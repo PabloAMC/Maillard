@@ -1,0 +1,46 @@
+source: zhang2018soypep
+reader: resolved
+pdf: data/articles/zhang2018.pdf
+fields:
+- F3
+arms:
+  XS-80:
+    present:
+    - soybean peptides
+    - xylose
+  XS-100:
+    present:
+    - soybean peptides
+    - xylose
+  XS-120:
+    present:
+    - soybean peptides
+    - xylose
+  XS-140:
+    present:
+    - soybean peptides
+    - xylose
+  XSC-80:
+    present:
+    - soybean peptides
+    - xylose
+    - cysteine
+  XSC-100:
+    present:
+    - soybean peptides
+    - xylose
+    - cysteine
+  XSC-120:
+    present:
+    - soybean peptides
+    - xylose
+    - cysteine
+  XSC-140:
+    present:
+    - soybean peptides
+    - xylose
+    - cysteine
+notes: 'Resolved 2026-11-13: readers a and b agree on every checked field (F1 exact, F2 within 0.1, F3 on compound classes;
+  scripts/tools/compare_field_checks.py); values and names from reader a. Sec. 2.3: 1 g soybean peptides (sec. 2.2, enzymatic
+  hydrolysate, freeze-dried supernatant), 0.28 g xylose, 0.1 g cysteine in ultrapure water 1:10 (w/v), pH 7.6; XS controls
+  prepared the same without cysteine. Labels cover both zhang2018soypep.yml and zhang2018soypep__families.yml.'

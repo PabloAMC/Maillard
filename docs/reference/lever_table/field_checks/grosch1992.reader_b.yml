@@ -1,0 +1,26 @@
+source: grosch1992
+reader: b
+pdf: data/articles/grosch1992.pdf
+fields: [F3]
+arms:
+  "1 Thiamine":
+    present: [thiamine HCl]
+  "2 Thiamine pyrophosphate":
+    present: [thiamine pyrophosphate]
+  "3 Thiamine + ribose":
+    present: [thiamine HCl, D(-)-ribose]
+  "4 Thiamine + cysteine":
+    present: [thiamine HCl, cysteine HCl]
+  "5 Thiamine pyrophosphate + cysteine":
+    present: [thiamine pyrophosphate, cysteine HCl]
+  "6 Thiamine + cysteine + ribose":
+    present: [thiamine HCl, cysteine HCl, D(-)-ribose]
+  "7 Thiamine + GSH + ribose":
+    present: [thiamine HCl, GSH, D(-)-ribose]
+  "8 Thiamine + GSH + cysteine + ribose":
+    present: [thiamine HCl, GSH, cysteine HCl, D(-)-ribose]
+  "1 Thiamine (30 umol)":
+    present: [thiamine]
+  "2 Thiamine (30 umol) + cysteine (325 umol)":
+    present: [thiamine, cysteine]
+notes: "Table II footnote a gives the salt forms (thiamine HCl, cysteine HCl); Table VIII prints 'Thiamine' and 'cysteine' without salt form. All in 0.2 mol/L Na-pyrophosphate buffer (not listed)."

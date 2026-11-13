@@ -1,0 +1,52 @@
+source: grosch1992
+reader: resolved
+pdf: data/articles/grosch1992.pdf
+fields:
+- F3
+arms:
+  1 Thiamine:
+    present:
+    - thiamine HCl
+  2 Thiamine pyrophosphate:
+    present:
+    - thiamine pyrophosphate
+  3 Thiamine + ribose:
+    present:
+    - thiamine HCl
+    - D(-)-ribose
+  4 Thiamine + cysteine:
+    present:
+    - thiamine HCl
+    - cysteine HCl
+  5 Thiamine pyrophosphate + cysteine:
+    present:
+    - thiamine pyrophosphate
+    - cysteine HCl
+  6 Thiamine + cysteine + ribose:
+    present:
+    - thiamine HCl
+    - cysteine HCl
+    - D(-)-ribose
+  7 Thiamine + GSH + ribose:
+    present:
+    - thiamine HCl
+    - GSH
+    - D(-)-ribose
+  8 Thiamine + GSH + cysteine + ribose:
+    present:
+    - thiamine HCl
+    - GSH
+    - cysteine HCl
+    - D(-)-ribose
+  1 Thiamine (30 umol):
+    present:
+    - thiamine
+  2 Thiamine (30 umol) + cysteine (325 umol):
+    present:
+    - thiamine
+    - cysteine
+notes: 'Resolved 2026-11-13: readers a and b agree on every checked field (F1 exact, F2 within 0.1, F3 on compound classes;
+  scripts/tools/compare_field_checks.py); values and names from reader a. Table II footnote a lists reactants (thiamine HCl,
+  TPP, D(-)-ribose, cysteine HCl, GSH); Table VIII prints ''Thiamine'' and ''cysteine'' without salt form. All dissolved in
+  Na-pyrophosphate buffer pH 5.7, 0.2 mol/L (buffer salt, not keyed; note arm 2 TPP is a reactant distinct from the pyrophosphate
+  buffer).'

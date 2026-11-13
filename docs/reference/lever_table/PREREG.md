@@ -199,3 +199,18 @@ beside the banded ones, and a banded cell that becomes "answered" is marked as a
 *Outcome (same day):* banding moves no reading. The six precursor-dose cells with three laboratories stay "direction
 unclear" (their effects per doubling are small and often non-monotone), and no banded cell becomes answered; the two
 pooled cells the audit classed as a conflict between laboratories are no longer one.
+
+**A6 (2026-11-13, AFTER the all-data table, the disagreement audit and RULES_V2_SPEC were read; a frozen CANDIDATE
+rule, not a change to the table).** *Reason:* STATUS_AND_PLAN sec. 0, steps 5b - 7: two answered cells are fragile on
+the pH basis and three conflicts between laboratories turn on facts held only as free text (buffering, final pH,
+the base pot of a "none" arm). *Rule (candidate):* **R1** a pH cell is banded `buffered` against `unbuffered`
+(`adjusted_unbuffered` + `unadjusted`) on the contrast's `ph_control`; `unstated` enters neither band. **R2** each
+pH contrast carries its arms' final pH and their spread (delta-final) as a covariate; a slope on final pH is reported
+only where delta-final >= 0.5 pH unit, as an alternative reading, never as the step. **R3** a categorical pair whose
+arms differ in base-mixture compound classes (amine, sulfur, carbonyl) beyond the lever's own level leaves that
+level's reading. *Status:* the table's rules and readings are unchanged. R1 - R3 are reported as an audit on the
+sources already read (`results/validation/lever_field_readings.*`) and are SCORED only on sources keyed after this
+commit, one rule at a time, on an identical contrast set and fixed cell partition, against a placebo banding of
+the same cell sizes, per lever class, by coverage of the post-freeze contrasts by the new-laboratory 90 % interval
+with width beside it; no score before 20 post-freeze contrasts fall in cells a rule touches. Fields and checks:
+`STEP8_FIELDS_SPEC.md`.

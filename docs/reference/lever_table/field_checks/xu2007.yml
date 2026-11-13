@@ -1,0 +1,31 @@
+source: xu2007
+reader: resolved
+pdf: data/articles/xu2007.pdf
+fields:
+- F1
+- F2
+ph_control: buffered
+ph_control_overrides: {}
+arms:
+  Contr., initial pH 5.6 (final pH 5.5):
+    final_ph: 5.5
+    final_ph_location: Table 1 header row 'Final pH', Acidic Contr. column
+  Contr., initial pH 7.0 (final pH 6.2):
+    final_ph: 6.2
+    final_ph_location: Table 1 header row 'Final pH', Neutral Contr. column
+  Contr., initial pH 8.0 (final pH 6.8):
+    final_ph: 6.8
+    final_ph_location: Table 1 header row 'Final pH', Alkaline Contr. column
+  SC-CO2, initial pH 5.6 (final pH 5.5):
+    final_ph: 5.5
+    final_ph_location: Table 1 header row 'Final pH', Acidic SC-CO2 column
+  SC-CO2, initial pH 7.0 (final pH 6.0):
+    final_ph: 6.0
+    final_ph_location: Table 1 header row 'Final pH', Neutral SC-CO2 column
+  SC-CO2, initial pH 8.0 (final pH 6.3):
+    final_ph: 6.3
+    final_ph_location: Table 1 header row 'Final pH', Alkaline SC-CO2 column
+notes: 'Resolved 2026-11-13: readers a and b agree on every checked field (F1 exact, F2 within 0.1, F3 on compound classes;
+  scripts/tools/compare_field_checks.py); values and names from reader a. 0.2 mol/L phosphate buffer (Methods and Table 1
+  footnote b); after dissolving reactants the slight pH drop was re-adjusted to the target with small volumes of a 0.2 mol/L
+  sodium (pyro)phosphate solution, still buffered. Labels identical across xu2007.yml and xu2007__families.yml.'

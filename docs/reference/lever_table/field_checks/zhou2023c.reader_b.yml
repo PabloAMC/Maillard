@@ -1,0 +1,18 @@
+source: zhou2023c
+reader: b
+pdf: data/articles/zhou2023c.pdf
+fields: [F3]
+arms:
+  "ARP-60 min":
+    present: [ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine)]
+  "ARP+GSH-60 min":
+    present: [ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine), GSH]
+  "ARP+Cys-60 min":
+    present: [ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine), Cys]
+  "ARP-60":
+    present: [ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine)]
+  "ARP+GSH-60":
+    present: [ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine), GSH]
+  "ARP+Cys-60":
+    present: [ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine), Cys]
+notes: "Thermal Treatment section: ARP 20 mmol/L with or without GSH 20 mmol/L; ARP with Cys at molar ratio 1:1; initial pH 7.5 with 3 mol/L NaOH (not listed)."

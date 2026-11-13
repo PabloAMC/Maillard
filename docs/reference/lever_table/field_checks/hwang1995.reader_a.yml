@@ -1,0 +1,24 @@
+source: hwang1995
+reader: a
+pdf: data/articles/hwang1995.pdf
+fields: [F3]
+arms:
+  "ctrl":
+    present: ["wheat starch", "glucose", "glycine"]
+  "Gln":
+    present: ["wheat starch", "glucose", "glycine-alpha-amine-15N", "L-glutamine"]
+  "Lys":
+    present: ["wheat starch", "glucose", "glycine-alpha-amine-15N", "L-lysine"]
+  "Asn":
+    present: ["wheat starch", "glucose", "glycine-alpha-amine-15N", "L-asparagine"]
+  "Phe":
+    present: ["wheat starch", "glucose", "glycine-alpha-amine-15N", "L-phenylalanine"]
+  "Glu":
+    present: ["wheat starch", "glucose", "glycine-alpha-amine-15N", "L-glutamic acid"]
+  "Asp":
+    present: ["wheat starch", "glucose", "glycine-alpha-amine-15N", "L-aspartic acid"]
+  "Ile":
+    present: ["wheat starch", "glucose", "glycine-alpha-amine-15N", "L-isoleucine"]
+  "Arg":
+    present: ["wheat starch", "glucose", "glycine-alpha-amine-15N", "L-arginine"]
+notes: "Methods: 20 g wheat starch + equimolar glucose, glycine-alpha-amine-15N and the tested amino acid, pH 7, freeze-dried, 12-14% moisture, 180 C 1 h. Table 1 footnote: 'ctrl contained glycine only' (labelled or unlabelled glycine not stated; glucose and starch inferred from the common method, Table 1 title 'Reaction of Glucose, Glycine-a-amine-15N, and Tested Amino Acids'). Wheat starch keyed as the carrier matrix in the pot. Contrast file: contrasts/hwang1995__families.yml."

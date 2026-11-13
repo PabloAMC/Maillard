@@ -1,0 +1,30 @@
+source: park2022mealworm
+reader: b
+pdf: data/articles/park2022.pdf
+fields: [F3]
+arms:
+  "MP-RF":
+    present: [mealworm protein powder, xylose]
+  "MPArg-RF":
+    present: [mealworm protein powder, xylose, arginine]
+  "MPCys-RF":
+    present: [mealworm protein powder, xylose, cysteine]
+  "MPGln-RF":
+    present: [mealworm protein powder, xylose, glutamine]
+  "MPGly-RF":
+    present: [mealworm protein powder, xylose, glycine]
+  "MPMet-RF":
+    present: [mealworm protein powder, xylose, methionine]
+  "MPPro-RF":
+    present: [mealworm protein powder, xylose, proline]
+  "MPSer-RF":
+    present: [mealworm protein powder, xylose, serine]
+  "MPThr-RF":
+    present: [mealworm protein powder, xylose, threonine]
+  "MPTrp-RF":
+    present: [mealworm protein powder, xylose, tryptophan]
+  "MPTyr-RF":
+    present: [mealworm protein powder, xylose, tyrosine]
+  "MPVal-RF":
+    present: [mealworm protein powder, xylose, valine]
+notes: "MP-RF and MPA-RF preparation: mealworm protein powder 2 g, xylose 0.1 g, distilled water 2 mL, without or with each amino acid 0.1 g; 125 C, 60 min."

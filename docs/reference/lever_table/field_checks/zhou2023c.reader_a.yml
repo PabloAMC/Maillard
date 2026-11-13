@@ -1,0 +1,18 @@
+source: zhou2023c
+reader: a
+pdf: data/articles/zhou2023c.pdf
+fields: [F3]
+arms:
+  "ARP-60 min":
+    present: ["ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine)"]
+  "ARP+GSH-60 min":
+    present: ["ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine)", "GSH"]
+  "ARP+Cys-60 min":
+    present: ["ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine)", "Cys"]
+  "ARP-60":
+    present: ["ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine)"]
+  "ARP+GSH-60":
+    present: ["ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine)", "GSH"]
+  "ARP+Cys-60":
+    present: ["ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine)", "Cys"]
+notes: "Methods, Thermal Treatment: ARP 20 mmol/L with or without GSH 20 mmol/L; separate systems of ARP + Cys (also Gly, pGlu, Glu) at molar ratio 1:1; pH 7.5 with NaOH. Labels cover zhou2023c.yml ('-60 min') and zhou2023c__families.yml ('-60')."

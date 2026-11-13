@@ -1,0 +1,35 @@
+source: ames2001b
+reader: b
+pdf: data/articles/ames2001b.pdf
+fields: [F1, F2]
+ph_control: adjusted_unbuffered
+ph_control_overrides: {}
+arms:
+  "pH 5.6, 180 C":
+    final_ph: 5.76
+    final_ph_location: "Table 1, p. 4316 (extrudate pH; target die 180 C, NaOH 0 g/L)"
+  "pH 6.8, 180 C":
+    final_ph: 6.62
+    final_ph_location: "Table 1, p. 4316 (extrudate pH; target die 180 C, NaOH 3 g/L)"
+  "pH 7.4, 180 C":
+    final_ph: 7.36
+    final_ph_location: "Table 1, p. 4316 (extrudate pH; target die 180 C, NaOH 6 g/L)"
+  "pH 5.6, 150 C":
+    final_ph: 5.60
+    final_ph_location: "Table 1, p. 4316 (extrudate pH; target die 150 C, NaOH 0 g/L)"
+  "pH 6.8, 150 C":
+    final_ph: 6.85
+    final_ph_location: "Table 1, p. 4316 (extrudate pH; target die 150 C, NaOH 3 g/L)"
+  "pH 7.4, 150 C":
+    final_ph: 7.64
+    final_ph_location: "Table 1, p. 4316 (extrudate pH; target die 150 C, NaOH 6 g/L)"
+  "pH 5.6, 120 C":
+    final_ph: 5.72
+    final_ph_location: "Table 1, p. 4316 (extrudate pH; target die 120 C, NaOH 0 g/L)"
+  "pH 6.8, 120 C":
+    final_ph: 6.98
+    final_ph_location: "Table 1, p. 4316 (extrudate pH; target die 120 C, NaOH 3 g/L)"
+  "pH 7.4, 120 C":
+    final_ph: 7.28
+    final_ph_location: "Table 1, p. 4316 (extrudate pH; target die 120 C, NaOH 6 g/L)"
+notes: "ames2001b.yml has no pH contrasts; arms are from ames2001b__families.yml (ames2001b-4/-5/-6/-111). pH set by NaOH at 0, 3 or 6 g/L of extruder water feed 'to produce extrudates at three pH levels', no buffer (the 0 g/L arm received no NaOH). Final pH = pH of the extrudate after extrusion, measured per the AOAC flour method (5 g extrudate stirred 30 min in 20 mL tap water of pH 7.3), so it is a slurry pH, not an in-process pH."

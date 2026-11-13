@@ -1,0 +1,24 @@
+source: hwang1995
+reader: b
+pdf: data/articles/hwang1995.pdf
+fields: [F3]
+arms:
+  "ctrl":
+    present: [wheat starch, glucose, glycine-alpha-amine-15N]
+  "Gln":
+    present: [wheat starch, glucose, glycine-alpha-amine-15N, L-glutamine]
+  "Lys":
+    present: [wheat starch, glucose, glycine-alpha-amine-15N, L-lysine]
+  "Asn":
+    present: [wheat starch, glucose, glycine-alpha-amine-15N, L-asparagine]
+  "Phe":
+    present: [wheat starch, glucose, glycine-alpha-amine-15N, L-phenylalanine]
+  "Glu":
+    present: [wheat starch, glucose, glycine-alpha-amine-15N, L-glutamic acid]
+  "Asp":
+    present: [wheat starch, glucose, glycine-alpha-amine-15N, L-aspartic acid]
+  "Ile":
+    present: [wheat starch, glucose, glycine-alpha-amine-15N, L-isoleucine]
+  "Arg":
+    present: [wheat starch, glucose, glycine-alpha-amine-15N, L-arginine]
+notes: "Volatile Generation: 20 g wheat starch plus equal moles (2.66 umol printed) of glucose, labelled glycine and the tested amino acid, freeze-dried; Table 1 footnote: ctrl contained glycine only. Wheat starch listed as it is in the pot (carrier, not solvent). HCl/NaOH for pH 7 not listed."
