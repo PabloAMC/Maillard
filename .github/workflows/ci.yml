@@ -185,7 +185,9 @@ jobs:
         # do not add --timeout or -n here; the job-level timeout-minutes is the
         # runaway guard.
         # -m "not artifact_rebuild": see the tests-full job; the freshness gate rebuilds those artifacts once.
-        run: python -m pytest tests/unit -q -m "not artifact_rebuild" --durations=15
+        # -m "not slow": the panel, model-card and S3-rival tests run in tests-unit-slow, concurrently (2026-11-13:
+        # together the tier took 65 min and timed out at 90 on two of four merges to main).
+        run: python -m pytest tests/unit -q -m "not artifact_rebuild and not slow" --durations=15
 
       # 2026-10-29. Every rate constant's evidence anchor resolves and every measured constant cites its paper's
       # dossier. It imports the engine (numpy), so it runs here, not in the dependency-light gates job.
@@ -207,6 +209,44 @@ jobs:
       # 2026-09-01: data/ is read-only at runtime. Fails if the tier above wrote,
       # rewrote or deleted anything under data/ (see scripts/ci/data_readonly_gate.py).
       - name: data/ untouched by the unit tier
+        if: always()
+        run: python scripts/ci/data_readonly_gate.py
+
+  # ---------------------------------------------------------------------------
+  # Tier 1b: the unit tests marked slow (whole-panel scoring, the model card, the S3 rivals), beside tier 1.
+  # ---------------------------------------------------------------------------
+  tests-unit-slow:
+    name: Unit tests (slow)
+    if: github.event_name != 'pull_request' || github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache conda packages
+        uses: actions/cache@v4
+        env:
+          CACHE_EPOCH: 1
+        with:
+          path: ~/conda_pkgs_dir
+          key: conda-${{ runner.os }}-${{ env.CACHE_EPOCH }}-${{ hashFiles('environment.yml') }}
+
+      - name: Install conda (Miniforge)
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          miniforge-version: latest
+          activate-environment: maillard
+          python-version: "3.12"
+          auto-activate-base: false
+          pkgs-dirs: ~/conda_pkgs_dir
+
+      - name: Build the maillard environment
+        run: bash scripts/ci/setup_env.sh
+
+      - name: Unit tests marked slow
+        run: python -m pytest tests/unit -q -m "slow and not artifact_rebuild" --durations=15
+
+      - name: data/ untouched by the slow unit tier
         if: always()
         run: python scripts/ci/data_readonly_gate.py
 

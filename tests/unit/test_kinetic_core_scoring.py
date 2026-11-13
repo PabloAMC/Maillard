@@ -145,6 +145,7 @@ def test_in_core_fit_flags_the_step_level_bundles_and_the_pots_the_fit_read():
     assert not fit_targets.in_core_fit("mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7", MFT)
 
 
+@pytest.mark.slow
 def test_core_evidence_role_ignores_legacy_fit_declarations_but_reports_them(small):
     by_id = {b["benchmark_id"]: b for b in small["benchmarks"]}
     trik = by_id["pea_isolate_uht_140C_Trikusuma2019"]
@@ -162,6 +163,7 @@ def test_core_evidence_role_ignores_legacy_fit_declarations_but_reports_them(sma
 # ---------------------------------------------------------------------------
 
 
+@pytest.mark.slow
 def test_artifact_contract_fields(small):
     assert SUMMARY_FIELDS <= set(small["summary"])
     assert small["parameter_sources"] and all(len(p["sha256"]) == 64 for p in small["parameter_sources"])
@@ -178,6 +180,7 @@ def test_artifact_contract_fields(small):
             assert r["reason"].strip()
 
 
+@pytest.mark.slow
 def test_predicted_point_is_the_deterministic_prediction(small):
     for b in small["benchmarks"]:
         spec = panel.core_spec(panel.load_bundle(ROOT / b["bench_file"]))
@@ -187,6 +190,7 @@ def test_predicted_point_is_the_deterministic_prediction(small):
                 assert r["predicted"] == pytest.approx(run.concentrations_ug_per_l[r["compound"]])
 
 
+@pytest.mark.slow
 def test_refusals_use_the_engine_vocabulary_and_a_fully_refused_bundle_is_refused(small):
     # 2026-10-27: hydrogen sulfide became a nameable precursor, so the fed norfuraneol + H2S bundle that
     # used to be this test's fully refused example is now SCORED. The unmapped-precursor vocabulary is
@@ -208,6 +212,7 @@ def test_refusals_use_the_engine_vocabulary_and_a_fully_refused_bundle_is_refuse
     assert any("UNMAPPED PRECURSORS" in r for r in run.declaration.reasons)
 
 
+@pytest.mark.slow
 def test_status_vocabulary_matches_the_legacy_harness(small):
     for b in small["benchmarks"]:
         if not b["compounds"]:
@@ -221,6 +226,7 @@ def test_status_vocabulary_matches_the_legacy_harness(small):
             assert b["tier"] == "PRIMARY" and b["execution_path"] == "free_precursor"
 
 
+@pytest.mark.slow
 def test_shared_hofmann_rows_carry_shared_with(small):
     by_id = {b["benchmark_id"]: b for b in small["benchmarks"]}
     # 2026-11-05 (H0 / EX-059): the shared MFT row is refused for its absolute level; the link travels with it
@@ -232,6 +238,7 @@ def test_shared_hofmann_rows_carry_shared_with(small):
     assert rows[MFT]["relative_use_only"]["shared_with"] == "hofmann_ribose_pH7_MFT"
 
 
+@pytest.mark.slow
 def test_coverage_splits_are_consistent(small):
     s = small["summary"]
     assert s["honest_literature"]["rows"] == s["out_of_sample"]["rows"] + s["in_core_fit"]["rows"]
@@ -250,6 +257,7 @@ def test_coverage_splits_are_consistent(small):
                for r in b["refused_compounds"])
 
 
+@pytest.mark.slow
 def test_markdown_renders(small):
     text = scoring.render_markdown(small)
     for token in ("out-of-sample", "## Benchmarks", "## Rows", "hofmann1998_ribose_cysteine_145C_20min_pH5"):
@@ -261,6 +269,7 @@ def test_markdown_renders(small):
 # ---------------------------------------------------------------------------
 
 
+@pytest.mark.slow
 def test_every_panel_bundle_is_scored_or_refused_with_a_reason(full):
     scored, _ = panel.panel_bundles()
     assert {b["benchmark_id"] for b in full["benchmarks"]} == {
