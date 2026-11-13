@@ -253,3 +253,16 @@ wang2026arp:
   pdf: data/articles/Wang2026.pdf
   cells: "sulfur volatiles x pH 5 - 9 (cysteine-xylose-glutamic acid Amadori product)"
   note: "Senior author Wei Chao-Kun also senior on wei2019flax and chen2023lycium (rule 2): that laboratory, TEST."
+desousafontes2024:
+  lab: ufpb_madruga
+  lab_name: "Universidade Federal da Paraiba, Department of Food Engineering (Madruga, corresponding)"
+  doi: 10.1016/j.foodchem.2024.138398
+  pdf: data/articles/desousa-fontes2024.pdf
+  cells: "thiols x pH 4 vs 6 (goat-viscera protein hydrolysate + xylose / cysteine / thiamine)"
+  note: "Madruga is the senior author here, with no Reading affiliation; her own group is absent from split v1: TEST. (In madruga1995 / 1998 she is first author under Mottram, hence Reading.)"
+hou2017ph:
+  lab: btbu_beijing
+  lab_name: "Beijing Technology and Business University (Xie Jianchun, corresponding)"
+  doi: 10.7506/spkx1002-6630-201708021
+  pdf: "pending: full text at https://www.spkx.net.cn/fileup/HTML/2017-38-8-021.shtml (Food Science 38(8):129-138, in Chinese); NOT data/articles/hou2017.pdf, which is a different Hou 2017 paper"
+  cells: "MFT, FFT, bis(2-methyl-3-furyl) disulfide x initial pH 4.5 / 5.5 / 6.5 / 7.5, 0.2 M phosphate, pH drop per arm printed"
