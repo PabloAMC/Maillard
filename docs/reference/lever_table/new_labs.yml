@@ -191,3 +191,65 @@ marrufo-curtido2022:
   doi: 10.3390/molecules27103056
   pdf: data/articles/marrufo-curtido2022.pdf
   note: "Wine oxidation at pH 3 - 4; whether it is a heated Maillard system (PREREG sec. 1) is for the readers."
+
+# ---- 2026-11-13, third registration: the first sources keyed AFTER PREREG amendment A6 was frozen (3b2f80ad), i.e.
+# A6's post-freeze sources (STATUS_AND_PLAN sec. 0 step 9). Papers on disk that vary pH and report the meaty thiols,
+# found by a literature search for pH studies that print the final pH. Registered from author lines and affiliations
+# only, BEFORE any reader file exists and before any of their results was read.
+yang2011:
+  lab: btbu_beijing
+  lab_name: "Beijing Technology and Business University, Beijing Key Laboratory of Flavor Chemistry (Song Huanlu)"
+  doi: 10.1111/j.1750-3841.2011.02423.x
+  pdf: data/articles/yang2011.pdf
+  cells: "meat-like volatiles x initial pH (response-surface design, glutathione)"
+raza2020:
+  lab: btbu_beijing
+  lab_name: "Beijing Technology and Business University (Song Huanlu), with the Hubei Key Laboratory of Yeast Function"
+  doi: 10.1039/d0fo01946a
+  pdf: data/articles/raza2020.pdf
+  cells: "MFT and its disulfide x pH (glutathione-enriched yeast extract)"
+madruga1995:
+  lab: reading_mottram_parker
+  lab_name: "University of Reading (Mottram), first author later at Universidade Federal da Paraiba"
+  doi: 10.1002/jsfa.2740680308
+  pdf: data/articles/madruga1995.pdf
+  cells: "furanthiols x pH (cooked minced beef)"
+  note: "Senior author Mottram carries the Reading affiliation (a split v1 laboratory): DEVELOPMENT."
+madruga1998:
+  lab: reading_mottram_parker
+  lab_name: "Universidade Federal da Paraiba (Madruga) with the University of Reading (Mottram)"
+  doi: 10.1590/S0103-50531998000300010
+  pdf: data/articles/madruga1998.pdf
+  cells: "thiols x pH (IMP + cysteine, pyrophosphate buffer)"
+  note: "Two-group paper; the senior author carries a split v1 laboratory's affiliation, so it is given that laboratory."
+whitfield1999:
+  lab: reading_mottram_parker
+  lab_name: "Food Science Australia (Whitfield) with the University of Reading (Mottram, corresponding)"
+  doi: 10.1021/jf980980v
+  pdf: data/articles/whitfield1999.pdf
+  cells: "volatiles from norfuraneol + cysteine or H2S (pH 4.5)"
+whitfield2001:
+  lab: reading_mottram_parker
+  lab_name: "Food Science Australia (Whitfield) with the University of Reading (Mottram, corresponding)"
+  doi: 10.1021/jf0008644
+  pdf: data/articles/whitfield2001.pdf
+  cells: "volatiles from norfuraneol + cysteine or H2S (pH 6.5); with whitfield1999 a pH contrast ACROSS papers only"
+chen2000:
+  lab: ho_network
+  lab_name: "Rutgers University (Ho)"
+  doi: 10.1021/jf991076l
+  pdf: data/articles/chen2000.pdf
+  cells: "cysteine-ribose volatiles x pH, x urea"
+kang2026:
+  lab: ho_network
+  lab_name: "Zhejiang Gongshang University (Zhai Yun, Fu Yuying); lab_ids.yml places Zhai in the Ho network"
+  doi: 10.1039/d5fb00932d
+  pdf: data/articles/Kang2026.pdf
+  cells: "MFT x pH from cysteine-xylose intermediates (supplement: data/articles/Kang2026_supplementary.pdf)"
+wang2026arp:
+  lab: hfut_wei_zhaojun
+  lab_name: "Ningxia University (Wei Chao-Kun, Liu Yuan)"
+  doi: 10.1016/j.foodres.2026.118535
+  pdf: data/articles/Wang2026.pdf
+  cells: "sulfur volatiles x pH 5 - 9 (cysteine-xylose-glutamic acid Amadori product)"
+  note: "Senior author Wei Chao-Kun also senior on wei2019flax and chen2023lycium (rule 2): that laboratory, TEST."
