@@ -191,8 +191,16 @@ def observations_with_contrasts(sources, labs) -> Tuple[List[Dict[str, Any]], Di
     for doc in sources:
         by_id = {str(c.get("id")): c for c in doc["contrasts"] or []}
         o_doc, sk = LT.observations([doc], labs)
+        if len(by_id) != len(doc["contrasts"] or []):
+            raise SystemExit(f"{doc['source']}: contrast ids repeat inside one resolved file")
         for o in o_doc:
-            o["_contrast"] = by_id[str(o["contrast"])]
+            c = o["_contrast"] = by_id[str(o["contrast"])]
+            if o["kind"] == "numeric":         # the pairing check (tasks/lessons.md, 2026-11-13)
+                arms = [dict(a) for a in (c.get("arms") or [])]
+                LT._trace_fill(arms)
+                again = LT.numeric_observation(c, arms)
+                if again is None or abs(again["y"] - o["y"]) > 1e-9:
+                    raise SystemExit(f"{o['source']} {o['contrast']}: observation not paired with its own contrast")
         obs += o_doc
         skipped.update(sk)
     return obs, dict(skipped)

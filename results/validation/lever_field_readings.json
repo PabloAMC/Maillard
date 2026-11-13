@@ -1113,10 +1113,10 @@
     "artifact": "lever_field_readings",
     "generated_on": "2026-11-13",
     "git": {
-      "commit": "3b2f80ad7253fa255a98133e9565a95d1d3b839d",
-      "short": "3b2f80ad",
+      "commit": "27a11b055e8fcacfa5c34c62300c8c0281838b71",
+      "short": "27a11b05",
       "branch": "lever-fields",
-      "dirty": false
+      "dirty": true
     },
     "generated_by": "scripts/generators/build_lever_field_readings.py",
     "inputs": [
