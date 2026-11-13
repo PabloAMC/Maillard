@@ -191,6 +191,7 @@ def test_compare_emits_each_arm_s_own_oav_table_and_rows():
     assert all(r["interval_ug_per_l"][1] is not None for r in payload["rows_a"])
 
 
+@pytest.mark.slow
 def test_a_compare_arm_draws_the_same_interval_as_a_predict_of_that_arm():
     """
     The drift test. The report layer's hand-rolled copy of ``.oav()`` was never

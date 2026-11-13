@@ -199,6 +199,7 @@ def test_a_hexose_only_thiol_request_is_declared_unidentified_and_others_are_not
     assert engine.unidentified_routes({"Glc": 10.0, "CYS": 10.0}, {"furfural": "FUR"}) == ()
 
 
+@pytest.mark.slow
 def test_the_declaration_carries_the_tag_and_the_scorers_read_it():
     from src.kinetic_core import engine, panel
     from src.kinetic_core.scoring import score_benchmark

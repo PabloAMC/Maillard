@@ -52,7 +52,9 @@ To ensure both rapid development and scientific accuracy, the Maillard test suit
 
 ## Markers
 
-- `@pytest.mark.slow`: Deselect with `pytest -m "not slow"` for fast local iteration.
+- `@pytest.mark.slow`: Deselect with `pytest -m "not slow"` for fast local iteration. In CI the unit tests marked slow
+  run in their own job (`tests-unit-slow`) beside the rest; mark a unit test slow when it, or a fixture only it and
+  other slow tests use, takes more than about 40 s (2026-11-13).
 - `@pytest.mark.skipif(...)`: Automatically skips tests if an external backend is unavailable or unsupported in the active environment.
 - `xfail_strict = true` is set in `pytest.ini` (2026-08-27). An `xfail`-marked test that starts
   passing is a **failure**, not a silent `xpass`: closing a known gap forces you back here to

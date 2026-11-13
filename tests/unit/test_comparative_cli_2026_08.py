@@ -365,6 +365,7 @@ def card_without_gates():
     return model_card.build_model_card(run_gate_checks=False)
 
 
+@pytest.mark.slow
 def test_the_card_states_all_three_honest_headline_sentences(card_without_gates):
     card = card_without_gates
     joined = " ".join(card["headline_sentences"])
@@ -480,6 +481,7 @@ def test_a_missing_artifact_is_reported_in_the_card_not_dropped_from_it(monkeypa
     assert collected["path"]
 
 
+@pytest.mark.slow
 def test_every_verdict_in_the_card_is_one_of_the_three_words(card_without_gates):
     card = card_without_gates
     assert card["validity_domain"], "the card must not be empty"
@@ -491,6 +493,7 @@ def test_every_verdict_in_the_card_is_one_of_the_three_words(card_without_gates)
         }, row
 
 
+@pytest.mark.slow
 def test_absolute_concentration_rows_are_never_trust(card_without_gates):
     """No artifact state may make the card say 'trust' about an absolute ppb number."""
     card = card_without_gates
