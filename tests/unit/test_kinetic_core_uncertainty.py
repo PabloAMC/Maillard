@@ -15,7 +15,7 @@ from pathlib import Path
 import pytest
 
 from src import data_paths
-from src.kinetic_core import panel
+from src.kinetic_core import panel, parallel
 from src.kinetic_core import uncertainty as unc
 from src.kinetic_core.engine import (
     ACRYLAMIDE,
@@ -575,7 +575,7 @@ def test_every_trust_loop_benchmark_is_scored_or_refused_with_a_reason():
     """Cheap: the deterministic pass only (n_samples small), over the whole trust loop."""
     scored, _ = panel.panel_bundles()
     trust = [(p, t) for p, t in scored if t == panel.PANEL_TRUST_LOOP]
-    payload = unc.propagate_panel(trust, n_samples=5, seed=0, workers=1)
+    payload = unc.propagate_panel(trust, n_samples=5, seed=0, workers=parallel.workers())   # MAILLARD_WORKERS
     seen = {b["benchmark_id"] for b in payload["benchmarks"]}
     assert seen == {panel.load_bundle(p)["benchmark_id"] for p, _ in trust}
     for bench in payload["benchmarks"]:

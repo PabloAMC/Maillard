@@ -23,6 +23,7 @@ pinning behaviour rather than output.
 from __future__ import annotations
 
 import json
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -362,7 +363,18 @@ def card_without_gates():
     from tests.support import reset_engine_switches
 
     reset_engine_switches()
-    return model_card.build_model_card(run_gate_checks=False)
+    # 2026-11-13: the card's core-panel section reads the tracked scorecard through the hook the freshness gate uses
+    # for its live payload (model_card.LIVE_CORE_PANEL_ENV), instead of scoring the whole panel (~10 min on CI). The
+    # gate certifies that file against a live score; these tests read the card's sentences, not the scorer.
+    previous = os.environ.get(model_card.LIVE_CORE_PANEL_ENV)
+    os.environ[model_card.LIVE_CORE_PANEL_ENV] = str(data_paths.CORE_PANEL_SCORES)
+    try:
+        return model_card.build_model_card(run_gate_checks=False)
+    finally:
+        if previous is None:
+            os.environ.pop(model_card.LIVE_CORE_PANEL_ENV, None)
+        else:
+            os.environ[model_card.LIVE_CORE_PANEL_ENV] = previous
 
 
 @pytest.mark.slow
