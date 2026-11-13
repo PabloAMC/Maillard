@@ -2,12 +2,12 @@
  "artifact": "incumbent_evidence_tiers",
  "provenance": {
   "artifact": "incumbent_evidence_tiers",
-  "generated_on": "2026-11-11",
+  "generated_on": "2026-11-13",
   "git": {
-   "commit": "c21806bf6756e31dbfaf751d91438e2633db8916",
-   "short": "c21806bf",
-   "branch": "rival-bdf-retry",
-   "dirty": true
+   "commit": "25fc686edb4c58e6b6fe3deb00d15c432d3c4a36",
+   "short": "25fc686e",
+   "branch": "a6-batch3",
+   "dirty": false
   },
   "generated_by": "scripts/generators/build_evidence_tiers.py",
   "inputs": [
@@ -77,7 +77,7 @@
    },
    {
     "path": "results/validation/data_wishlist.json",
-    "sha256": "734a1d00774b022a1b7cc60fd3217424747605277acfc71515f97496077c5636"
+    "sha256": "814cc6a8acfc0a809c9ea3840edd64ac15306bbad4eb19fb808dfed3f458c116"
    },
    {
     "path": "docs/reference/unpinned_constants.yml",
