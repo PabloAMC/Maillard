@@ -16,6 +16,8 @@ contrasts:
     unit: ""          # as printed (ug/kg, mg/mol precursor, ng, peak area, % of total, ...)
     quant_type: ""    # absolute (calibrated or isotope dilution) | peak_area | relative
     time_course_rule: ""  # "main result time" | "longest time" | "not a time course"
+    ph_control: ""    # PREREG A6: buffered (a named buffer at a printed concentration) | adjusted_unbuffered (titrated,
+                      # no buffer) | unadjusted | unstated
     arms:
       - label: ""     # as printed
         lever_value: ""   # the lever's value for this arm (number or level name)
@@ -27,6 +29,8 @@ contrasts:
         conditions:
           ph: null
           ph_basis: ""      # initial | final | held | label | unstated
+          final_ph: null    # PREREG A6: the pH after heating as printed, even when ph is the initial pH; null if not printed
+          final_ph_location: ""  # where final_ph is printed (Table 1 / Fig. 2, digitised / text p. 3)
           temp_C: null
           time_min: null
           precursors: {}    # name: concentration with unit as printed, e.g. {cysteine: "0.1 M", ribose: "0.1 M"}
