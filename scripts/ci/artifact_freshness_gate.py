@@ -203,7 +203,9 @@ def _run_checks(failures: List[str], env: Dict[str, str]) -> None:
 FROZEN_RECORD_GENERATOR = re.compile(
     r"scripts/generators/(generate_(kinetic_core_b\d+\w*|env_\w+)_(ship_rule|fit|verification|identifiability|"
     r"structural_discrepancy)|fit_\w+|build_submodel_probe|predict_ph_acid_holdout|diagnose_\w+|probe_\w+|"
-    r"feasibility_\w+|score_thiol_lolo_nested_tau|rescore_\w+|supply_structure_signature_screen)\.py$")
+    r"feasibility_\w+|score_thiol_lolo_nested_tau|score_a6_prequential|rescore_\w+|supply_structure_signature_screen)\.py$")
+#: 2026-11-13: so are A6's prequential records (score_a6_prequential.py, A6_PREQUENTIAL_PREREG.md sec. 6): the first
+#: look and each confirmation record are run once; a re-run would replace a frozen verdict.
 #: 2026-11-05: frozen scoring records whose generator also writes LIVE files (score_contrast_benchmark.py writes the
 #: items record, re-derived and checked by the scorer itself before every use, and the named M1 scores): the v1 score
 #: is the benchmark's run-once "before" record (prereg v6), pinned by the commit it was written at. And the
