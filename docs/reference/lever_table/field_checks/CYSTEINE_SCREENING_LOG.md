@@ -226,3 +226,28 @@ Cells (cysteine added vs none): 1 benzaldehyde; 2 phenylacetaldehyde; 3 hexanal;
 | 198 | Sarathadevi Rajendran 2024: Volatile Organic Compounds (VOCs) Produced by Levilactobacillus brevis WLP672 Fermentation in Defined Media Supplemented with Different Amino Acids | 10.3390/molecules29040753 |  | no | Title and abstract do not mention cysteine; no cysteine-addition design. |
 | 199 | Jaloliddin Khushvakov 2024: Analytical Platform to Determine Similarities and Dissimilarities between Cell-Cultured Coffee and Farm-Grown Coffee | 10.1021/acsfoodscitech.4c00238 |  | no | Title and abstract do not mention cysteine; no cysteine-addition design. |
 | 200 | Keono Kim 2026: Comparative analysis of volatile sulfur compound composition in different types of kimchi | 10.11002/fsp.2026.33.4.686 |  | no | Title and abstract do not mention cysteine; no cysteine-addition design. |
+
+## Methods check (2026-11-14, design only, before any value was read)
+
+All 11 on disk (salleh2023 is `shazwani2023.pdf`, zhang2024rice `zhang2024c.pdf`, chen2021egcg `chen2022b.pdf`, zhang2025chicken `zhang2025c.pdf`). A design-only reader read methods, author lines and table / figure labels.
+
+| file | laboratory | base system | heating | none arm | reader's decision | reason (design only) |
+|---|---|---|---|---|---|---|
+| baert2018.pdf | kuleuven_ghent_decooman | commercial pale lager beer X (bottled) | storage only: forced ageing 30 C, 90 days (no heating step) | True | drop | no Maillard heating step: the only treatment is storage at 30 C; otherwise a clean 0 vs >0 cysteine spike in one beer |
+| zhang2025c.pdf | nus_liu_shaoquan | chicken carcass hydrolysate + 1.5% xylose | 100 C, 1 h (autoclave), no pH adjustment | True | drop | for the only lab-new cells (7 FFT, 8 bis(2-methyl-3-furyl) disulfide) the H-Control entry is '—' (not detected) with no stated detection limit; cells 1-6 not lab-new |
+| ni2022.pdf | hfut_wei_zhaojun | flaxseed protein hydrolysate fractions (F1-F3, FPH, recombined) + xylose + cysteine | 120 C, 120 min, pH 7.5 | False | drop | no cysteine-free arm; manipulated factor is the peptide/amino-acid fraction |
+| charnock2025.pdf | brock_kemp | Chardonnay sparkling base wine + fructose 0.02 M | storage only: accelerated ageing 50 C, 0/2/4 weeks | True | drop | no Maillard heating step: ageing at 50 C (<= 60 C storage) |
+| gao2020b.pdf | nus_liu_shaoquan | fermented tilapia fish head hydrolysate | RSM 150-190 C, 60-120 min; verification run at the optimum | True | drop | cysteine confounded with xylose (Control I lacks both); no xylose-only arm; RSM has no zero-cysteine level |
+| fu2023.pdf | hainan_he_yanfu | enzymatically hydrolysed tilapia fish head soup + 0.75% xylose | 120 C, 1.5 h, pH 7.0 | True | drop | cysteine confounded with 3% oxidized lipid addition; no xylose+cysteine-only arm |
+| chen2022b.pdf | jiangnan_zhang_min | concentrated orange juice | storage only: accelerated storage 50 C, 20 days | True | drop | no Maillard heating step: storage at 50 C (<= 60 C) |
+| zhang2024c.pdf | hefei_normal_zhang_zuoyong | rice protein isolate hydrolysate 1.0 g + D-xylose 0.5 g in 10 mL, pH 7.2 | 80, 100, 120, 140 C, 2 h, sealed tube, oil bath | True | take | clean 0 vs >0 cysteine contrast at four matched temperatures; lab new to all five cells |
+| lou2025.pdf | hfut_wei_zhaojun | sesame cake meal hydrolysate fractions + xylose + cysteine | thermal Maillard step per methods (same design as ni2022) | False | drop | no cysteine-free arm |
+| shazwani2023.pdf | usm_rabeta | squid ink and cuttlefish ink enzyme hydrolysates + D-xylose | 120 C, 120 min, pH 7.4, oil bath | True | drop | target rows (benzaldehyde, furfural) carry n.d. entries in the contrasted arms with no stated detection limit; hexanal named in text only, not in Table 3 |
+| song2019.pdf | sit_song_shiqing | model: [13C6]glucose 0.13 g + (E)-2-nonenal 12.5 uL in 10 mL 0.2 M phosphate pH 6.0 | 130 C, 90 min, sealed vial | True | drop | target rows in Table 2 (hexanal, benzaldehyde, 1-octen-3-ol) are reported in A but 'ND' in C with no stated detection limit; other targets absent from Table 2 |
+
+**Rulings, from the frozen step-14 rule (STATUS_AND_PLAN sec. 0 row 14) and PREREG sec. 3, not from the papers:**
+- The base system is "sugar + amino acid, or a hydrolysate": beer (baert2018), wine (charnock2025) and orange juice (chen2022b) are neither, so they are dropped. Temperature alone would not have excluded them; the table already holds 37 - 60 C sources.
+- "Not detected" without a limit is censored at the lowest quantified value of the compound in the same table (PREREG sec. 3), so it counts as reported: **zhang2025c qualifies** (NUS, new to cells 7 and 8). song2019 still drops: its no-cysteine base is glucose + (E)-2-nonenal, not a frozen base system.
+- A row-standardised (z-score) heat map gives no ratio between arms: **zhang2024c** can be keyed but enters no estimate.
+
+**Qualifying papers: at most 2 (zhang2025c; zhang2024c without an estimate), below 3.** The yield rule fires: step 14 ends without keying.
