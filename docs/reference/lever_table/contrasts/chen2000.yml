@@ -1,0 +1,2987 @@
+source: chen2000
+pdf: data/articles/chen2000.pdf
+reader: resolved
+scope_note: 'Resolved 2026-11-13 (step 9, post-A6). Base reader b (54 = reader a''s 40 + 14 contrasts a did not key: 11 with
+  all arms not detected, kept by convention, and 3-ethyl-2,5-dimethylpyrazine = 2-ethyl-3,6-dimethylpyrazine, which a skipped).
+  Every value both readers keyed agrees and was checked against Table 2. 2x2 design (initial pH 5/8.5 x urea 0/0.01 mol),
+  180 C, 2 h, no buffer; final pH from Table 4. Urea keyed lever_class precursor dose, lever naming urea (amine source added).
+  Bare ''pyrazine'' keyed as Unsubstituted pyrazine (not the class). ''2,5- (and 2,6-) dimethylpyrazine'' is one co-eluting
+  peak: odorant_unlisted. Table 3 (urea + acetoin / diacetyl) tetramethylpyrazine pH pairs keyed (diacetyl pair all not detected).
+  Values are mg/g ribose vs a tridecane internal standard: relative. Conventions applied (resolver, uniform across batch 1):
+  a printed ND, ''-'', ''–'', blank, 0, 0.000 or 0±0 is censor nd_no_limit with value null; contrasts whose arms are all not
+  detected are kept (keyed, counted, enter no estimate); only run pairs differing in exactly one factor are keyed; odorant
+  names canonicalised to the compound_keys display name with the printed name in odorant_printed; quant_type absolute only
+  where the paper states calibration with authentic standards for that compound, internal-standard semi-quantification relative.'
+contrasts:
+- id: chen2000-1
+  resolution: agreed
+  odorant: Unsubstituted pyrazine
+  lever_class: pH
+  lever: initial pH (no urea)
+  focal: true
+  location: Table 2; final pH Table 4
+  digitised: false
+  unit: mg/g of ribose
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: RC5
+    lever_value: 5.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 3.86
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: RC8.5
+    lever_value: 8.5
+    value: 0.06
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 8.5
+      ph_basis: initial
+      final_ph: 6.05
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  odorant_printed: pyrazine
+- id: chen2000-2
+  resolution: agreed
+  odorant: Unsubstituted pyrazine
+  lever_class: pH
+  lever: initial pH (with urea)
+  focal: true
+  location: Table 2; final pH Table 4
+  digitised: false
+  unit: mg/g of ribose
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: RCU5
+    lever_value: 5.0
+    value: 0.25
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 7.43
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+        urea: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: RCU8.5
+    lever_value: 8.5
+    value: 0.33
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 8.5
+      ph_basis: initial
+      final_ph: 8.35
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+        urea: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  odorant_printed: pyrazine
+- id: chen2000-3
+  resolution: agreed
+  odorant: Unsubstituted pyrazine
+  lever_class: precursor dose
+  lever: 'urea (amine source) added: 0 vs 0.01 mol in 100 mL (equimolar to cysteine), at initial pH 5'
+  focal: true
+  location: Table 2; final pH Table 4
+  digitised: false
+  unit: mg/g of ribose
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: RC5
+    lever_value: '0'
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 3.86
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: RCU5
+    lever_value: 0.01 mol
+    value: 0.25
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 7.43
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+        urea: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  odorant_printed: pyrazine
+- id: chen2000-4
+  resolution: agreed
+  odorant: Unsubstituted pyrazine
+  lever_class: precursor dose
+  lever: 'urea (amine source) added: 0 vs 0.01 mol in 100 mL (equimolar to cysteine), at initial pH 8.5'
+  focal: true
+  location: Table 2; final pH Table 4
+  digitised: false
+  unit: mg/g of ribose
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: RC8.5
+    lever_value: '0'
+    value: 0.06
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 8.5
+      ph_basis: initial
+      final_ph: 6.05
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: RCU8.5
+    lever_value: 0.01 mol
+    value: 0.33
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 8.5
+      ph_basis: initial
+      final_ph: 8.35
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+        urea: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  odorant_printed: pyrazine
+- id: chen2000-5
+  resolution: agreed
+  odorant: 2-Methylpyrazine
+  lever_class: pH
+  lever: initial pH (no urea)
+  focal: true
+  location: Table 2; final pH Table 4
+  digitised: false
+  unit: mg/g of ribose
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: RC5
+    lever_value: 5.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 3.86
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: RC8.5
+    lever_value: 8.5
+    value: 0.35
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 8.5
+      ph_basis: initial
+      final_ph: 6.05
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  odorant_printed: methylpyrazine
+- id: chen2000-6
+  resolution: agreed
+  odorant: 2-Methylpyrazine
+  lever_class: pH
+  lever: initial pH (with urea)
+  focal: true
+  location: Table 2; final pH Table 4
+  digitised: false
+  unit: mg/g of ribose
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: RCU5
+    lever_value: 5.0
+    value: 3.18
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 7.43
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+        urea: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: RCU8.5
+    lever_value: 8.5
+    value: 3.8
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 8.5
+      ph_basis: initial
+      final_ph: 8.35
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+        urea: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  odorant_printed: methylpyrazine
+- id: chen2000-7
+  resolution: agreed
+  odorant: 2-Methylpyrazine
+  lever_class: precursor dose
+  lever: 'urea (amine source) added: 0 vs 0.01 mol in 100 mL (equimolar to cysteine), at initial pH 5'
+  focal: true
+  location: Table 2; final pH Table 4
+  digitised: false
+  unit: mg/g of ribose
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: RC5
+    lever_value: '0'
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 3.86
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: RCU5
+    lever_value: 0.01 mol
+    value: 3.18
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 7.43
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+        urea: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  odorant_printed: methylpyrazine
+- id: chen2000-8
+  resolution: agreed
+  odorant: 2-Methylpyrazine
+  lever_class: precursor dose
+  lever: 'urea (amine source) added: 0 vs 0.01 mol in 100 mL (equimolar to cysteine), at initial pH 8.5'
+  focal: true
+  location: Table 2; final pH Table 4
+  digitised: false
+  unit: mg/g of ribose
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: RC8.5
+    lever_value: '0'
+    value: 0.35
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 8.5
+      ph_basis: initial
+      final_ph: 6.05
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: RCU8.5
+    lever_value: 0.01 mol
+    value: 3.8
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 8.5
+      ph_basis: initial
+      final_ph: 8.35
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+        urea: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  odorant_printed: methylpyrazine
+- id: chen2000-9
+  resolution: agreed
+  odorant: 2-Ethylpyrazine
+  lever_class: pH
+  lever: initial pH (no urea)
+  focal: true
+  location: Table 2; final pH Table 4
+  digitised: false
+  unit: mg/g of ribose
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: RC5
+    lever_value: 5.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 3.86
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: RC8.5
+    lever_value: 8.5
+    value: 0.04
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 8.5
+      ph_basis: initial
+      final_ph: 6.05
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  odorant_printed: ethylpyrazine
+- id: chen2000-10
+  resolution: agreed
+  odorant: 2-Ethylpyrazine
+  lever_class: pH
+  lever: initial pH (with urea)
+  focal: true
+  location: Table 2; final pH Table 4
+  digitised: false
+  unit: mg/g of ribose
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: RCU5
+    lever_value: 5.0
+    value: 0.17
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 7.43
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+        urea: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: RCU8.5
+    lever_value: 8.5
+    value: 0.22
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 8.5
+      ph_basis: initial
+      final_ph: 8.35
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+        urea: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  odorant_printed: ethylpyrazine
+- id: chen2000-11
+  resolution: agreed
+  odorant: 2-Ethylpyrazine
+  lever_class: precursor dose
+  lever: 'urea (amine source) added: 0 vs 0.01 mol in 100 mL (equimolar to cysteine), at initial pH 5'
+  focal: true
+  location: Table 2; final pH Table 4
+  digitised: false
+  unit: mg/g of ribose
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: RC5
+    lever_value: '0'
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 3.86
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: RCU5
+    lever_value: 0.01 mol
+    value: 0.17
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 7.43
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+        urea: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  odorant_printed: ethylpyrazine
+- id: chen2000-12
+  resolution: agreed
+  odorant: 2-Ethylpyrazine
+  lever_class: precursor dose
+  lever: 'urea (amine source) added: 0 vs 0.01 mol in 100 mL (equimolar to cysteine), at initial pH 8.5'
+  focal: true
+  location: Table 2; final pH Table 4
+  digitised: false
+  unit: mg/g of ribose
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: RC8.5
+    lever_value: '0'
+    value: 0.04
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 8.5
+      ph_basis: initial
+      final_ph: 6.05
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: RCU8.5
+    lever_value: 0.01 mol
+    value: 0.22
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 8.5
+      ph_basis: initial
+      final_ph: 8.35
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+        urea: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  odorant_printed: ethylpyrazine
+- id: chen2000-13
+  resolution: agreed
+  odorant: 2,3-Dimethylpyrazine
+  lever_class: pH
+  lever: initial pH (no urea)
+  focal: false
+  location: Table 2; final pH Table 4
+  digitised: false
+  unit: mg/g of ribose
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: RC5
+    lever_value: 5.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 3.86
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: RC8.5
+    lever_value: 8.5
+    value: 0.03
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 8.5
+      ph_basis: initial
+      final_ph: 6.05
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  odorant_printed: 2,3-dimethylpyrazine
+- id: chen2000-14
+  resolution: agreed
+  odorant: 2,3-Dimethylpyrazine
+  lever_class: pH
+  lever: initial pH (with urea)
+  focal: false
+  location: Table 2; final pH Table 4
+  digitised: false
+  unit: mg/g of ribose
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: RCU5
+    lever_value: 5.0
+    value: 0.11
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 7.43
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+        urea: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: RCU8.5
+    lever_value: 8.5
+    value: 0.18
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 8.5
+      ph_basis: initial
+      final_ph: 8.35
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+        urea: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  odorant_printed: 2,3-dimethylpyrazine
+- id: chen2000-15
+  resolution: agreed
+  odorant: 2,3-Dimethylpyrazine
+  lever_class: precursor dose
+  lever: 'urea (amine source) added: 0 vs 0.01 mol in 100 mL (equimolar to cysteine), at initial pH 5'
+  focal: false
+  location: Table 2; final pH Table 4
+  digitised: false
+  unit: mg/g of ribose
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: RC5
+    lever_value: '0'
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 3.86
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: RCU5
+    lever_value: 0.01 mol
+    value: 0.11
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 7.43
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+        urea: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  odorant_printed: 2,3-dimethylpyrazine
+- id: chen2000-16
+  resolution: agreed
+  odorant: 2,3-Dimethylpyrazine
+  lever_class: precursor dose
+  lever: 'urea (amine source) added: 0 vs 0.01 mol in 100 mL (equimolar to cysteine), at initial pH 8.5'
+  focal: false
+  location: Table 2; final pH Table 4
+  digitised: false
+  unit: mg/g of ribose
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: RC8.5
+    lever_value: '0'
+    value: 0.03
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 8.5
+      ph_basis: initial
+      final_ph: 6.05
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: RCU8.5
+    lever_value: 0.01 mol
+    value: 0.18
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 8.5
+      ph_basis: initial
+      final_ph: 8.35
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+        urea: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  odorant_printed: 2,3-dimethylpyrazine
+- id: chen2000-17
+  resolution: resolved
+  odorant: 2,5- (and 2,6-) dimethylpyrazine
+  lever_class: pH
+  lever: initial pH (no urea)
+  focal: true
+  location: Table 2; final pH Table 4
+  digitised: false
+  unit: mg/g of ribose
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: RC5
+    lever_value: 5.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 3.86
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: RC8.5
+    lever_value: 8.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 8.5
+      ph_basis: initial
+      final_ph: 6.05
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  odorant_unlisted: true
+  unlisted_reason: 'co-eluting isomers printed as one peak (2,5- or 2,6-dimethylpyrazine): no single listed odorant'
+- id: chen2000-18
+  resolution: agreed
+  odorant: 2,5- (and 2,6-) dimethylpyrazine
+  lever_class: pH
+  lever: initial pH (with urea)
+  focal: true
+  location: Table 2; final pH Table 4
+  digitised: false
+  unit: mg/g of ribose
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: RCU5
+    lever_value: 5.0
+    value: 0.47
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 7.43
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+        urea: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: RCU8.5
+    lever_value: 8.5
+    value: 0.91
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 8.5
+      ph_basis: initial
+      final_ph: 8.35
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+        urea: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  odorant_unlisted: true
+  unlisted_reason: 'co-eluting isomers printed as one peak (2,5- or 2,6-dimethylpyrazine): no single listed odorant'
+- id: chen2000-19
+  resolution: agreed
+  odorant: 2,5- (and 2,6-) dimethylpyrazine
+  lever_class: precursor dose
+  lever: 'urea (amine source) added: 0 vs 0.01 mol in 100 mL (equimolar to cysteine), at initial pH 5'
+  focal: true
+  location: Table 2; final pH Table 4
+  digitised: false
+  unit: mg/g of ribose
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: RC5
+    lever_value: '0'
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 3.86
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: RCU5
+    lever_value: 0.01 mol
+    value: 0.47
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 7.43
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+        urea: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  odorant_unlisted: true
+  unlisted_reason: 'co-eluting isomers printed as one peak (2,5- or 2,6-dimethylpyrazine): no single listed odorant'
+- id: chen2000-20
+  resolution: agreed
+  odorant: 2,5- (and 2,6-) dimethylpyrazine
+  lever_class: precursor dose
+  lever: 'urea (amine source) added: 0 vs 0.01 mol in 100 mL (equimolar to cysteine), at initial pH 8.5'
+  focal: true
+  location: Table 2; final pH Table 4
+  digitised: false
+  unit: mg/g of ribose
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: RC8.5
+    lever_value: '0'
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 8.5
+      ph_basis: initial
+      final_ph: 6.05
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: RCU8.5
+    lever_value: 0.01 mol
+    value: 0.91
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 8.5
+      ph_basis: initial
+      final_ph: 8.35
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+        urea: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  odorant_unlisted: true
+  unlisted_reason: 'co-eluting isomers printed as one peak (2,5- or 2,6-dimethylpyrazine): no single listed odorant'
+- id: chen2000-21
+  resolution: resolved
+  odorant: Trimethylpyrazine
+  lever_class: pH
+  lever: initial pH (no urea)
+  focal: false
+  location: Table 2; final pH Table 4
+  digitised: false
+  unit: mg/g of ribose
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: RC5
+    lever_value: 5.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 3.86
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: RC8.5
+    lever_value: 8.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 8.5
+      ph_basis: initial
+      final_ph: 6.05
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  odorant_printed: trimethylpyrazine
+- id: chen2000-22
+  resolution: agreed
+  odorant: Trimethylpyrazine
+  lever_class: pH
+  lever: initial pH (with urea)
+  focal: false
+  location: Table 2; final pH Table 4
+  digitised: false
+  unit: mg/g of ribose
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: RCU5
+    lever_value: 5.0
+    value: 0.09
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 7.43
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+        urea: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: RCU8.5
+    lever_value: 8.5
+    value: 0.18
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 8.5
+      ph_basis: initial
+      final_ph: 8.35
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+        urea: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  odorant_printed: trimethylpyrazine
+- id: chen2000-23
+  resolution: agreed
+  odorant: Trimethylpyrazine
+  lever_class: precursor dose
+  lever: 'urea (amine source) added: 0 vs 0.01 mol in 100 mL (equimolar to cysteine), at initial pH 5'
+  focal: false
+  location: Table 2; final pH Table 4
+  digitised: false
+  unit: mg/g of ribose
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: RC5
+    lever_value: '0'
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 3.86
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: RCU5
+    lever_value: 0.01 mol
+    value: 0.09
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 7.43
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+        urea: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  odorant_printed: trimethylpyrazine
+- id: chen2000-24
+  resolution: agreed
+  odorant: Trimethylpyrazine
+  lever_class: precursor dose
+  lever: 'urea (amine source) added: 0 vs 0.01 mol in 100 mL (equimolar to cysteine), at initial pH 8.5'
+  focal: false
+  location: Table 2; final pH Table 4
+  digitised: false
+  unit: mg/g of ribose
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: RC8.5
+    lever_value: '0'
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 8.5
+      ph_basis: initial
+      final_ph: 6.05
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: RCU8.5
+    lever_value: 0.01 mol
+    value: 0.18
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 8.5
+      ph_basis: initial
+      final_ph: 8.35
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+        urea: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  odorant_printed: trimethylpyrazine
+- id: chen2000-25
+  resolution: resolved
+  odorant: 2-Ethyl-3,5-dimethylpyrazine
+  lever_class: pH
+  lever: initial pH (no urea)
+  focal: false
+  location: Table 2; final pH Table 4
+  digitised: false
+  unit: mg/g of ribose
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: RC5
+    lever_value: 5.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 3.86
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: RC8.5
+    lever_value: 8.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 8.5
+      ph_basis: initial
+      final_ph: 6.05
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  odorant_printed: 2-ethyl-3,5-dimethylpyrazine
+- id: chen2000-26
+  resolution: agreed
+  odorant: 2-Ethyl-3,5-dimethylpyrazine
+  lever_class: pH
+  lever: initial pH (with urea)
+  focal: false
+  location: Table 2; final pH Table 4
+  digitised: false
+  unit: mg/g of ribose
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: RCU5
+    lever_value: 5.0
+    value: 0.03
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 7.43
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+        urea: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: RCU8.5
+    lever_value: 8.5
+    value: 0.05
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 8.5
+      ph_basis: initial
+      final_ph: 8.35
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+        urea: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  odorant_printed: 2-ethyl-3,5-dimethylpyrazine
+- id: chen2000-27
+  resolution: agreed
+  odorant: 2-Ethyl-3,5-dimethylpyrazine
+  lever_class: precursor dose
+  lever: 'urea (amine source) added: 0 vs 0.01 mol in 100 mL (equimolar to cysteine), at initial pH 5'
+  focal: false
+  location: Table 2; final pH Table 4
+  digitised: false
+  unit: mg/g of ribose
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: RC5
+    lever_value: '0'
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 3.86
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: RCU5
+    lever_value: 0.01 mol
+    value: 0.03
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 7.43
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+        urea: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  odorant_printed: 2-ethyl-3,5-dimethylpyrazine
+- id: chen2000-28
+  resolution: agreed
+  odorant: 2-Ethyl-3,5-dimethylpyrazine
+  lever_class: precursor dose
+  lever: 'urea (amine source) added: 0 vs 0.01 mol in 100 mL (equimolar to cysteine), at initial pH 8.5'
+  focal: false
+  location: Table 2; final pH Table 4
+  digitised: false
+  unit: mg/g of ribose
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: RC8.5
+    lever_value: '0'
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 8.5
+      ph_basis: initial
+      final_ph: 6.05
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: RCU8.5
+    lever_value: 0.01 mol
+    value: 0.05
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 8.5
+      ph_basis: initial
+      final_ph: 8.35
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+        urea: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  odorant_printed: 2-ethyl-3,5-dimethylpyrazine
+- id: chen2000-29
+  resolution: resolved
+  odorant: 2-Ethyl-3,6-dimethylpyrazine
+  lever_class: pH
+  lever: initial pH (no urea)
+  focal: false
+  location: Table 2; final pH Table 4
+  digitised: false
+  unit: mg/g of ribose
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: RC5
+    lever_value: 5.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 3.86
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: RC8.5
+    lever_value: 8.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 8.5
+      ph_basis: initial
+      final_ph: 6.05
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  odorant_printed: 3-ethyl-2,5-dimethylpyrazine
+- id: chen2000-30
+  resolution: resolved
+  odorant: 2-Ethyl-3,6-dimethylpyrazine
+  lever_class: pH
+  lever: initial pH (with urea)
+  focal: false
+  location: Table 2; final pH Table 4
+  digitised: false
+  unit: mg/g of ribose
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: RCU5
+    lever_value: 5.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 7.43
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+        urea: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: RCU8.5
+    lever_value: 8.5
+    value: 0.09
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 8.5
+      ph_basis: initial
+      final_ph: 8.35
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+        urea: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  odorant_printed: 3-ethyl-2,5-dimethylpyrazine
+- id: chen2000-31
+  resolution: resolved
+  odorant: 2-Ethyl-3,6-dimethylpyrazine
+  lever_class: precursor dose
+  lever: 'urea (amine source) added: 0 vs 0.01 mol in 100 mL (equimolar to cysteine), at initial pH 5'
+  focal: false
+  location: Table 2; final pH Table 4
+  digitised: false
+  unit: mg/g of ribose
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: RC5
+    lever_value: '0'
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 3.86
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: RCU5
+    lever_value: 0.01 mol
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 7.43
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+        urea: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  odorant_printed: 3-ethyl-2,5-dimethylpyrazine
+- id: chen2000-32
+  resolution: resolved
+  odorant: 2-Ethyl-3,6-dimethylpyrazine
+  lever_class: precursor dose
+  lever: 'urea (amine source) added: 0 vs 0.01 mol in 100 mL (equimolar to cysteine), at initial pH 8.5'
+  focal: false
+  location: Table 2; final pH Table 4
+  digitised: false
+  unit: mg/g of ribose
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: RC8.5
+    lever_value: '0'
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 8.5
+      ph_basis: initial
+      final_ph: 6.05
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: RCU8.5
+    lever_value: 0.01 mol
+    value: 0.09
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 8.5
+      ph_basis: initial
+      final_ph: 8.35
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+        urea: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  odorant_printed: 3-ethyl-2,5-dimethylpyrazine
+- id: chen2000-33
+  resolution: agreed
+  odorant: 2-Acetylthiazole
+  lever_class: pH
+  lever: initial pH (no urea)
+  focal: true
+  location: Table 2; final pH Table 4
+  digitised: false
+  unit: mg/g of ribose
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: RC5
+    lever_value: 5.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 3.86
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: RC8.5
+    lever_value: 8.5
+    value: 0.15
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 8.5
+      ph_basis: initial
+      final_ph: 6.05
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  odorant_printed: 2-acetylthiazole
+- id: chen2000-34
+  resolution: agreed
+  odorant: 2-Acetylthiazole
+  lever_class: pH
+  lever: initial pH (with urea)
+  focal: true
+  location: Table 2; final pH Table 4
+  digitised: false
+  unit: mg/g of ribose
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: RCU5
+    lever_value: 5.0
+    value: 0.29
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 7.43
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+        urea: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: RCU8.5
+    lever_value: 8.5
+    value: 0.77
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 8.5
+      ph_basis: initial
+      final_ph: 8.35
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+        urea: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  odorant_printed: 2-acetylthiazole
+- id: chen2000-35
+  resolution: agreed
+  odorant: 2-Acetylthiazole
+  lever_class: precursor dose
+  lever: 'urea (amine source) added: 0 vs 0.01 mol in 100 mL (equimolar to cysteine), at initial pH 5'
+  focal: true
+  location: Table 2; final pH Table 4
+  digitised: false
+  unit: mg/g of ribose
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: RC5
+    lever_value: '0'
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 3.86
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: RCU5
+    lever_value: 0.01 mol
+    value: 0.29
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 7.43
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+        urea: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  odorant_printed: 2-acetylthiazole
+- id: chen2000-36
+  resolution: agreed
+  odorant: 2-Acetylthiazole
+  lever_class: precursor dose
+  lever: 'urea (amine source) added: 0 vs 0.01 mol in 100 mL (equimolar to cysteine), at initial pH 8.5'
+  focal: true
+  location: Table 2; final pH Table 4
+  digitised: false
+  unit: mg/g of ribose
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: RC8.5
+    lever_value: '0'
+    value: 0.15
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 8.5
+      ph_basis: initial
+      final_ph: 6.05
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: RCU8.5
+    lever_value: 0.01 mol
+    value: 0.77
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 8.5
+      ph_basis: initial
+      final_ph: 8.35
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+        urea: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  odorant_printed: 2-acetylthiazole
+- id: chen2000-37
+  resolution: agreed
+  odorant: 2-Furfurylthiol (FFT)
+  lever_class: pH
+  lever: initial pH (no urea)
+  focal: true
+  location: Table 2; final pH Table 4
+  digitised: false
+  unit: mg/g of ribose
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: RC5
+    lever_value: 5.0
+    value: 1.55
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 3.86
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: RC8.5
+    lever_value: 8.5
+    value: 0.22
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 8.5
+      ph_basis: initial
+      final_ph: 6.05
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  odorant_printed: 2-furfurylthiol
+- id: chen2000-38
+  resolution: resolved
+  odorant: 2-Furfurylthiol (FFT)
+  lever_class: pH
+  lever: initial pH (with urea)
+  focal: true
+  location: Table 2; final pH Table 4
+  digitised: false
+  unit: mg/g of ribose
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: RCU5
+    lever_value: 5.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 7.43
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+        urea: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: RCU8.5
+    lever_value: 8.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 8.5
+      ph_basis: initial
+      final_ph: 8.35
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+        urea: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  odorant_printed: 2-furfurylthiol
+- id: chen2000-39
+  resolution: agreed
+  odorant: 2-Furfurylthiol (FFT)
+  lever_class: precursor dose
+  lever: 'urea (amine source) added: 0 vs 0.01 mol in 100 mL (equimolar to cysteine), at initial pH 5'
+  focal: true
+  location: Table 2; final pH Table 4
+  digitised: false
+  unit: mg/g of ribose
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: RC5
+    lever_value: '0'
+    value: 1.55
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 3.86
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: RCU5
+    lever_value: 0.01 mol
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 7.43
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+        urea: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  odorant_printed: 2-furfurylthiol
+- id: chen2000-40
+  resolution: agreed
+  odorant: 2-Furfurylthiol (FFT)
+  lever_class: precursor dose
+  lever: 'urea (amine source) added: 0 vs 0.01 mol in 100 mL (equimolar to cysteine), at initial pH 8.5'
+  focal: true
+  location: Table 2; final pH Table 4
+  digitised: false
+  unit: mg/g of ribose
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: RC8.5
+    lever_value: '0'
+    value: 0.22
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 8.5
+      ph_basis: initial
+      final_ph: 6.05
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: RCU8.5
+    lever_value: 0.01 mol
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 8.5
+      ph_basis: initial
+      final_ph: 8.35
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+        urea: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  odorant_printed: 2-furfurylthiol
+- id: chen2000-41
+  resolution: agreed
+  odorant: Bis(2-furfuryl) disulfide
+  lever_class: pH
+  lever: initial pH (no urea)
+  focal: false
+  location: Table 2; final pH Table 4
+  digitised: false
+  unit: mg/g of ribose
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: RC5
+    lever_value: 5.0
+    value: 0.32
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 3.86
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: RC8.5
+    lever_value: 8.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 8.5
+      ph_basis: initial
+      final_ph: 6.05
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  odorant_printed: bis(2-furfuryl)disulfide
+- id: chen2000-42
+  resolution: resolved
+  odorant: Bis(2-furfuryl) disulfide
+  lever_class: pH
+  lever: initial pH (with urea)
+  focal: false
+  location: Table 2; final pH Table 4
+  digitised: false
+  unit: mg/g of ribose
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: RCU5
+    lever_value: 5.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 7.43
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+        urea: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: RCU8.5
+    lever_value: 8.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 8.5
+      ph_basis: initial
+      final_ph: 8.35
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+        urea: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  odorant_printed: bis(2-furfuryl)disulfide
+- id: chen2000-43
+  resolution: agreed
+  odorant: Bis(2-furfuryl) disulfide
+  lever_class: precursor dose
+  lever: 'urea (amine source) added: 0 vs 0.01 mol in 100 mL (equimolar to cysteine), at initial pH 5'
+  focal: false
+  location: Table 2; final pH Table 4
+  digitised: false
+  unit: mg/g of ribose
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: RC5
+    lever_value: '0'
+    value: 0.32
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 3.86
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: RCU5
+    lever_value: 0.01 mol
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 7.43
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+        urea: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  odorant_printed: bis(2-furfuryl)disulfide
+- id: chen2000-44
+  resolution: resolved
+  odorant: Bis(2-furfuryl) disulfide
+  lever_class: precursor dose
+  lever: 'urea (amine source) added: 0 vs 0.01 mol in 100 mL (equimolar to cysteine), at initial pH 8.5'
+  focal: false
+  location: Table 2; final pH Table 4
+  digitised: false
+  unit: mg/g of ribose
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: RC8.5
+    lever_value: '0'
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 8.5
+      ph_basis: initial
+      final_ph: 6.05
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: RCU8.5
+    lever_value: 0.01 mol
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 8.5
+      ph_basis: initial
+      final_ph: 8.35
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+        urea: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  odorant_printed: bis(2-furfuryl)disulfide
+- id: chen2000-45
+  resolution: agreed
+  odorant: Furfural
+  lever_class: pH
+  lever: initial pH (no urea)
+  focal: false
+  location: Table 2; final pH Table 4
+  digitised: false
+  unit: mg/g of ribose
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: RC5
+    lever_value: 5.0
+    value: 0.09
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 3.86
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: RC8.5
+    lever_value: 8.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 8.5
+      ph_basis: initial
+      final_ph: 6.05
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  odorant_printed: 2-furfural
+- id: chen2000-46
+  resolution: resolved
+  odorant: Furfural
+  lever_class: pH
+  lever: initial pH (with urea)
+  focal: false
+  location: Table 2; final pH Table 4
+  digitised: false
+  unit: mg/g of ribose
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: RCU5
+    lever_value: 5.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 7.43
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+        urea: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: RCU8.5
+    lever_value: 8.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 8.5
+      ph_basis: initial
+      final_ph: 8.35
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+        urea: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  odorant_printed: 2-furfural
+- id: chen2000-47
+  resolution: agreed
+  odorant: Furfural
+  lever_class: precursor dose
+  lever: 'urea (amine source) added: 0 vs 0.01 mol in 100 mL (equimolar to cysteine), at initial pH 5'
+  focal: false
+  location: Table 2; final pH Table 4
+  digitised: false
+  unit: mg/g of ribose
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: RC5
+    lever_value: '0'
+    value: 0.09
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 3.86
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: RCU5
+    lever_value: 0.01 mol
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 7.43
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+        urea: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  odorant_printed: 2-furfural
+- id: chen2000-48
+  resolution: resolved
+  odorant: Furfural
+  lever_class: precursor dose
+  lever: 'urea (amine source) added: 0 vs 0.01 mol in 100 mL (equimolar to cysteine), at initial pH 8.5'
+  focal: false
+  location: Table 2; final pH Table 4
+  digitised: false
+  unit: mg/g of ribose
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: RC8.5
+    lever_value: '0'
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 8.5
+      ph_basis: initial
+      final_ph: 6.05
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: RCU8.5
+    lever_value: 0.01 mol
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 8.5
+      ph_basis: initial
+      final_ph: 8.35
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+        urea: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  odorant_printed: 2-furfural
+- id: chen2000-49
+  resolution: agreed
+  odorant: 2-Furanmethanol
+  lever_class: pH
+  lever: initial pH (no urea)
+  focal: false
+  location: Table 2; final pH Table 4
+  digitised: false
+  unit: mg/g of ribose
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: RC5
+    lever_value: 5.0
+    value: 0.09
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 3.86
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: RC8.5
+    lever_value: 8.5
+    value: 0.09
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 8.5
+      ph_basis: initial
+      final_ph: 6.05
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  odorant_printed: 2-furfuryl alcohol
+- id: chen2000-50
+  resolution: resolved
+  odorant: 2-Furanmethanol
+  lever_class: pH
+  lever: initial pH (with urea)
+  focal: false
+  location: Table 2; final pH Table 4
+  digitised: false
+  unit: mg/g of ribose
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: RCU5
+    lever_value: 5.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 7.43
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+        urea: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: RCU8.5
+    lever_value: 8.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 8.5
+      ph_basis: initial
+      final_ph: 8.35
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+        urea: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  odorant_printed: 2-furfuryl alcohol
+- id: chen2000-51
+  resolution: agreed
+  odorant: 2-Furanmethanol
+  lever_class: precursor dose
+  lever: 'urea (amine source) added: 0 vs 0.01 mol in 100 mL (equimolar to cysteine), at initial pH 5'
+  focal: false
+  location: Table 2; final pH Table 4
+  digitised: false
+  unit: mg/g of ribose
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: RC5
+    lever_value: '0'
+    value: 0.09
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 3.86
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: RCU5
+    lever_value: 0.01 mol
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 7.43
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+        urea: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  odorant_printed: 2-furfuryl alcohol
+- id: chen2000-52
+  resolution: agreed
+  odorant: 2-Furanmethanol
+  lever_class: precursor dose
+  lever: 'urea (amine source) added: 0 vs 0.01 mol in 100 mL (equimolar to cysteine), at initial pH 8.5'
+  focal: false
+  location: Table 2; final pH Table 4
+  digitised: false
+  unit: mg/g of ribose
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: RC8.5
+    lever_value: '0'
+    value: 0.09
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 8.5
+      ph_basis: initial
+      final_ph: 6.05
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: RCU8.5
+    lever_value: 0.01 mol
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 8.5
+      ph_basis: initial
+      final_ph: 8.35
+      final_ph_location: Table 4
+      temp_C: 180
+      time_min: 120
+      precursors:
+        L-cysteine: 0.01 mol / 100 mL
+        D-ribose: 0.01 mol / 100 mL
+        urea: 0.01 mol / 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  odorant_printed: 2-furfuryl alcohol
+- id: chen2000-53
+  resolution: agreed
+  odorant: Tetramethylpyrazine
+  lever_class: pH
+  lever: initial pH (urea + acetoin (3-hydroxy-2-butanone))
+  focal: false
+  location: Table 3
+  digitised: false
+  unit: mg/g of acetoin
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: urea + acetoin pH 5.0
+    lever_value: 5.0
+    value: 3.06
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 120
+      precursors:
+        urea: 100 mM
+        acetoin (3-hydroxy-2-butanone): 100 mM
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: urea + acetoin pH 8.5
+    lever_value: 8.5
+    value: 4.74
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 120
+      precursors:
+        urea: 100 mM
+        acetoin (3-hydroxy-2-butanone): 100 mM
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  odorant_printed: tetramethylpyrazine
+- id: chen2000-54
+  resolution: resolved
+  odorant: Tetramethylpyrazine
+  lever_class: pH
+  lever: initial pH (urea + diacetyl)
+  focal: false
+  location: Table 3
+  digitised: false
+  unit: mg/g of acetoin
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: urea + diacetyl pH 5.0
+    lever_value: 5.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 120
+      precursors:
+        urea: 100 mM
+        diacetyl: 100 mM
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: urea + diacetyl pH 8.5
+    lever_value: 8.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 120
+      precursors:
+        urea: 100 mM
+        diacetyl: 100 mM
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  odorant_printed: tetramethylpyrazine

@@ -31,11 +31,12 @@ sections below say which data.
 
 ## What we found
 
-- **The published record answers very little about levers.** 70 sources and 1,643 within-study
-  contrasts from 31 laboratories, each read by two blind readers, answer four formulator questions:
+- **The published record answers very little about levers.** 79 sources and 1,835 within-study
+  contrasts from 32 laboratories, each read by two blind readers, answer four formulator questions:
   leaving out cysteine lowers 2-methyl-3-furanthiol about sixfold; xylose gives about three times
-  the methional of glucose; and raising the pH lowers 2-furfurylthiol (pH 6 - 7.5) and furfural
-  (pH 4.5 - 6), the last two on a weak footing that the table itself marks fragile (each loses its third laboratory under a stricter reading). The rest is one laboratory per question, peak areas, several things changed at once, and
+  the methional of glucose; raising the pH lowers 2-furfurylthiol (pH 6 - 7.5, four laboratories) and
+  slightly raises 2-acetylthiazole (pH 6 - 7.5). Furfural's fall with pH (pH 4.5 - 6), answered on three
+  laboratories, became unclear once two more reported. The rest is one laboratory per question, peak areas, several things changed at once, and
   **four heated plant- or fungal-protein sources** (flaxseed, goji seed meal and two mushroom hydrolysates; none a pea or soy isolate)
   ([experiment map](results/validation/experiment_map.md)).
 - **Laboratories differ by about tenfold on absolute meaty-thiol levels**, more than most levers

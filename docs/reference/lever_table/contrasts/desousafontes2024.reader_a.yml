@@ -1,0 +1,1349 @@
+source: "desousafontes2024"
+pdf: "data/articles/desousa-fontes2024.pdf"
+reader: "a"
+scope_note: "Only F4 vs F6 (Table 2) keyed: H and GV differ from the flavorings in heating, supplements and pH (not one lever); model systems M4/M6 have no printed values ('data not shown', Fig. 2 is a standardised heat map). No supplementary file in data/articles. Concentrations are IS (1,2-dichlorobenzene) semi-quantification, keyed quant_type relative. No final pH printed (Table 1 has no pH row). (Z)-2-nonenal printed, not the declared (E) isomer: not keyed. 2-Acetylfuran (furans) and 2-furyl methyl ketone (ketones) are the same compound printed as two rows; both keyed as printed. Location column/italic (polar-column) status not distinguishable in text extraction. No H2S measured."
+contrasts:
+  - id: "desousafontes2024-1"
+    odorant: "2-Methyl-3-furanthiol"
+    lever_class: "pH"
+    lever: "initial pH (4.0 vs 6.0, adjusted with 1 M HCl)"
+    focal: true
+    location: "Table 2"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "relative"
+    time_course_rule: "not a time course"
+    ph_control: "adjusted_unbuffered"
+    arms:
+      - label: "F4"
+        lever_value: "4.0"
+        value: 0.93
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.15
+        conditions:
+          ph: 4.0
+          ph_basis: "initial"
+          final_ph: null
+          final_ph_location: ""
+          temp_C: 121
+          time_min: 60
+          precursors: {goat viscera protein hydrolysate: "20 mL", cysteine: "0.1 g", xylose: "1.0 g", thiamine: "0.5 g", total volume: "50 mL"}
+          buffer: "none"
+          matrix: "other (goat viscera protein hydrolysate, Alcalase)"
+          headspace: "sealed, unstated"
+      - label: "F6"
+        lever_value: "6.0"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 6.0
+          ph_basis: "initial"
+          final_ph: null
+          final_ph_location: ""
+          temp_C: 121
+          time_min: 60
+          precursors: {goat viscera protein hydrolysate: "20 mL", cysteine: "0.1 g", xylose: "1.0 g", thiamine: "0.5 g", total volume: "50 mL"}
+          buffer: "none"
+          matrix: "other (goat viscera protein hydrolysate, Alcalase)"
+          headspace: "sealed, unstated"
+  - id: "desousafontes2024-2"
+    odorant: "2-Furfurylthiol"
+    lever_class: "pH"
+    lever: "initial pH (4.0 vs 6.0, adjusted with 1 M HCl)"
+    focal: true
+    location: "Table 2"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "relative"
+    time_course_rule: "not a time course"
+    ph_control: "adjusted_unbuffered"
+    arms:
+      - label: "F4"
+        lever_value: "4.0"
+        value: 0.77
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.08
+        conditions:
+          ph: 4.0
+          ph_basis: "initial"
+          final_ph: null
+          final_ph_location: ""
+          temp_C: 121
+          time_min: 60
+          precursors: {goat viscera protein hydrolysate: "20 mL", cysteine: "0.1 g", xylose: "1.0 g", thiamine: "0.5 g", total volume: "50 mL"}
+          buffer: "none"
+          matrix: "other (goat viscera protein hydrolysate, Alcalase)"
+          headspace: "sealed, unstated"
+      - label: "F6"
+        lever_value: "6.0"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 6.0
+          ph_basis: "initial"
+          final_ph: null
+          final_ph_location: ""
+          temp_C: 121
+          time_min: 60
+          precursors: {goat viscera protein hydrolysate: "20 mL", cysteine: "0.1 g", xylose: "1.0 g", thiamine: "0.5 g", total volume: "50 mL"}
+          buffer: "none"
+          matrix: "other (goat viscera protein hydrolysate, Alcalase)"
+          headspace: "sealed, unstated"
+  - id: "desousafontes2024-3"
+    odorant: "Bis(2-methyl-3-furyl)disulfide"
+    lever_class: "pH"
+    lever: "initial pH (4.0 vs 6.0, adjusted with 1 M HCl)"
+    focal: true
+    location: "Table 2"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "relative"
+    time_course_rule: "not a time course"
+    ph_control: "adjusted_unbuffered"
+    arms:
+      - label: "F4"
+        lever_value: "4.0"
+        value: 1.45
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.05
+        conditions:
+          ph: 4.0
+          ph_basis: "initial"
+          final_ph: null
+          final_ph_location: ""
+          temp_C: 121
+          time_min: 60
+          precursors: {goat viscera protein hydrolysate: "20 mL", cysteine: "0.1 g", xylose: "1.0 g", thiamine: "0.5 g", total volume: "50 mL"}
+          buffer: "none"
+          matrix: "other (goat viscera protein hydrolysate, Alcalase)"
+          headspace: "sealed, unstated"
+      - label: "F6"
+        lever_value: "6.0"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 6.0
+          ph_basis: "initial"
+          final_ph: null
+          final_ph_location: ""
+          temp_C: 121
+          time_min: 60
+          precursors: {goat viscera protein hydrolysate: "20 mL", cysteine: "0.1 g", xylose: "1.0 g", thiamine: "0.5 g", total volume: "50 mL"}
+          buffer: "none"
+          matrix: "other (goat viscera protein hydrolysate, Alcalase)"
+          headspace: "sealed, unstated"
+  - id: "desousafontes2024-4"
+    odorant: "2-furfuryl 2-methyl-3-furyl disulfide"
+    lever_class: "pH"
+    lever: "initial pH (4.0 vs 6.0, adjusted with 1 M HCl)"
+    focal: false
+    location: "Table 2"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "relative"
+    time_course_rule: "not a time course"
+    ph_control: "adjusted_unbuffered"
+    arms:
+      - label: "F4"
+        lever_value: "4.0"
+        value: 0.04
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: 4.0
+          ph_basis: "initial"
+          final_ph: null
+          final_ph_location: ""
+          temp_C: 121
+          time_min: 60
+          precursors: {goat viscera protein hydrolysate: "20 mL", cysteine: "0.1 g", xylose: "1.0 g", thiamine: "0.5 g", total volume: "50 mL"}
+          buffer: "none"
+          matrix: "other (goat viscera protein hydrolysate, Alcalase)"
+          headspace: "sealed, unstated"
+      - label: "F6"
+        lever_value: "6.0"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 6.0
+          ph_basis: "initial"
+          final_ph: null
+          final_ph_location: ""
+          temp_C: 121
+          time_min: 60
+          precursors: {goat viscera protein hydrolysate: "20 mL", cysteine: "0.1 g", xylose: "1.0 g", thiamine: "0.5 g", total volume: "50 mL"}
+          buffer: "none"
+          matrix: "other (goat viscera protein hydrolysate, Alcalase)"
+          headspace: "sealed, unstated"
+  - id: "desousafontes2024-5"
+    odorant: "Methional"
+    lever_class: "pH"
+    lever: "initial pH (4.0 vs 6.0, adjusted with 1 M HCl)"
+    focal: false
+    location: "Table 2"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "relative"
+    time_course_rule: "not a time course"
+    ph_control: "adjusted_unbuffered"
+    arms:
+      - label: "F4"
+        lever_value: "4.0"
+        value: 0.77
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.06
+        conditions:
+          ph: 4.0
+          ph_basis: "initial"
+          final_ph: null
+          final_ph_location: ""
+          temp_C: 121
+          time_min: 60
+          precursors: {goat viscera protein hydrolysate: "20 mL", cysteine: "0.1 g", xylose: "1.0 g", thiamine: "0.5 g", total volume: "50 mL"}
+          buffer: "none"
+          matrix: "other (goat viscera protein hydrolysate, Alcalase)"
+          headspace: "sealed, unstated"
+      - label: "F6"
+        lever_value: "6.0"
+        value: 2.01
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.01
+        conditions:
+          ph: 6.0
+          ph_basis: "initial"
+          final_ph: null
+          final_ph_location: ""
+          temp_C: 121
+          time_min: 60
+          precursors: {goat viscera protein hydrolysate: "20 mL", cysteine: "0.1 g", xylose: "1.0 g", thiamine: "0.5 g", total volume: "50 mL"}
+          buffer: "none"
+          matrix: "other (goat viscera protein hydrolysate, Alcalase)"
+          headspace: "sealed, unstated"
+  - id: "desousafontes2024-6"
+    odorant: "2-Methylpropanal"
+    lever_class: "pH"
+    lever: "initial pH (4.0 vs 6.0, adjusted with 1 M HCl)"
+    focal: false
+    location: "Table 2"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "relative"
+    time_course_rule: "not a time course"
+    ph_control: "adjusted_unbuffered"
+    arms:
+      - label: "F4"
+        lever_value: "4.0"
+        value: 0.29
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.14
+        conditions:
+          ph: 4.0
+          ph_basis: "initial"
+          final_ph: null
+          final_ph_location: ""
+          temp_C: 121
+          time_min: 60
+          precursors: {goat viscera protein hydrolysate: "20 mL", cysteine: "0.1 g", xylose: "1.0 g", thiamine: "0.5 g", total volume: "50 mL"}
+          buffer: "none"
+          matrix: "other (goat viscera protein hydrolysate, Alcalase)"
+          headspace: "sealed, unstated"
+      - label: "F6"
+        lever_value: "6.0"
+        value: 13.38
+        censor: none
+        limit: null
+        n: 3
+        sd: 2.62
+        conditions:
+          ph: 6.0
+          ph_basis: "initial"
+          final_ph: null
+          final_ph_location: ""
+          temp_C: 121
+          time_min: 60
+          precursors: {goat viscera protein hydrolysate: "20 mL", cysteine: "0.1 g", xylose: "1.0 g", thiamine: "0.5 g", total volume: "50 mL"}
+          buffer: "none"
+          matrix: "other (goat viscera protein hydrolysate, Alcalase)"
+          headspace: "sealed, unstated"
+  - id: "desousafontes2024-7"
+    odorant: "2-methyl-butanal"
+    lever_class: "pH"
+    lever: "initial pH (4.0 vs 6.0, adjusted with 1 M HCl)"
+    focal: false
+    location: "Table 2"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "relative"
+    time_course_rule: "not a time course"
+    ph_control: "adjusted_unbuffered"
+    arms:
+      - label: "F4"
+        lever_value: "4.0"
+        value: 0.45
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.1
+        conditions:
+          ph: 4.0
+          ph_basis: "initial"
+          final_ph: null
+          final_ph_location: ""
+          temp_C: 121
+          time_min: 60
+          precursors: {goat viscera protein hydrolysate: "20 mL", cysteine: "0.1 g", xylose: "1.0 g", thiamine: "0.5 g", total volume: "50 mL"}
+          buffer: "none"
+          matrix: "other (goat viscera protein hydrolysate, Alcalase)"
+          headspace: "sealed, unstated"
+      - label: "F6"
+        lever_value: "6.0"
+        value: 23.29
+        censor: none
+        limit: null
+        n: 3
+        sd: 1.92
+        conditions:
+          ph: 6.0
+          ph_basis: "initial"
+          final_ph: null
+          final_ph_location: ""
+          temp_C: 121
+          time_min: 60
+          precursors: {goat viscera protein hydrolysate: "20 mL", cysteine: "0.1 g", xylose: "1.0 g", thiamine: "0.5 g", total volume: "50 mL"}
+          buffer: "none"
+          matrix: "other (goat viscera protein hydrolysate, Alcalase)"
+          headspace: "sealed, unstated"
+  - id: "desousafontes2024-8"
+    odorant: "3-Methylbutanal"
+    lever_class: "pH"
+    lever: "initial pH (4.0 vs 6.0, adjusted with 1 M HCl)"
+    focal: false
+    location: "Table 2"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "relative"
+    time_course_rule: "not a time course"
+    ph_control: "adjusted_unbuffered"
+    arms:
+      - label: "F4"
+        lever_value: "4.0"
+        value: 9.25
+        censor: none
+        limit: null
+        n: 3
+        sd: 1.84
+        conditions:
+          ph: 4.0
+          ph_basis: "initial"
+          final_ph: null
+          final_ph_location: ""
+          temp_C: 121
+          time_min: 60
+          precursors: {goat viscera protein hydrolysate: "20 mL", cysteine: "0.1 g", xylose: "1.0 g", thiamine: "0.5 g", total volume: "50 mL"}
+          buffer: "none"
+          matrix: "other (goat viscera protein hydrolysate, Alcalase)"
+          headspace: "sealed, unstated"
+      - label: "F6"
+        lever_value: "6.0"
+        value: 372.38
+        censor: none
+        limit: null
+        n: 3
+        sd: 34.08
+        conditions:
+          ph: 6.0
+          ph_basis: "initial"
+          final_ph: null
+          final_ph_location: ""
+          temp_C: 121
+          time_min: 60
+          precursors: {goat viscera protein hydrolysate: "20 mL", cysteine: "0.1 g", xylose: "1.0 g", thiamine: "0.5 g", total volume: "50 mL"}
+          buffer: "none"
+          matrix: "other (goat viscera protein hydrolysate, Alcalase)"
+          headspace: "sealed, unstated"
+  - id: "desousafontes2024-9"
+    odorant: "Benzacetaldehyde"
+    lever_class: "pH"
+    lever: "initial pH (4.0 vs 6.0, adjusted with 1 M HCl)"
+    focal: false
+    location: "Table 2"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "relative"
+    time_course_rule: "not a time course"
+    ph_control: "adjusted_unbuffered"
+    arms:
+      - label: "F4"
+        lever_value: "4.0"
+        value: 7.99
+        censor: none
+        limit: null
+        n: 3
+        sd: 1.4
+        conditions:
+          ph: 4.0
+          ph_basis: "initial"
+          final_ph: null
+          final_ph_location: ""
+          temp_C: 121
+          time_min: 60
+          precursors: {goat viscera protein hydrolysate: "20 mL", cysteine: "0.1 g", xylose: "1.0 g", thiamine: "0.5 g", total volume: "50 mL"}
+          buffer: "none"
+          matrix: "other (goat viscera protein hydrolysate, Alcalase)"
+          headspace: "sealed, unstated"
+      - label: "F6"
+        lever_value: "6.0"
+        value: 28.24
+        censor: none
+        limit: null
+        n: 3
+        sd: 2.21
+        conditions:
+          ph: 6.0
+          ph_basis: "initial"
+          final_ph: null
+          final_ph_location: ""
+          temp_C: 121
+          time_min: 60
+          precursors: {goat viscera protein hydrolysate: "20 mL", cysteine: "0.1 g", xylose: "1.0 g", thiamine: "0.5 g", total volume: "50 mL"}
+          buffer: "none"
+          matrix: "other (goat viscera protein hydrolysate, Alcalase)"
+          headspace: "sealed, unstated"
+  - id: "desousafontes2024-10"
+    odorant: "Benzaldehyde"
+    lever_class: "pH"
+    lever: "initial pH (4.0 vs 6.0, adjusted with 1 M HCl)"
+    focal: false
+    location: "Table 2"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "relative"
+    time_course_rule: "not a time course"
+    ph_control: "adjusted_unbuffered"
+    arms:
+      - label: "F4"
+        lever_value: "4.0"
+        value: 69.8
+        censor: none
+        limit: null
+        n: 3
+        sd: 2.85
+        conditions:
+          ph: 4.0
+          ph_basis: "initial"
+          final_ph: null
+          final_ph_location: ""
+          temp_C: 121
+          time_min: 60
+          precursors: {goat viscera protein hydrolysate: "20 mL", cysteine: "0.1 g", xylose: "1.0 g", thiamine: "0.5 g", total volume: "50 mL"}
+          buffer: "none"
+          matrix: "other (goat viscera protein hydrolysate, Alcalase)"
+          headspace: "sealed, unstated"
+      - label: "F6"
+        lever_value: "6.0"
+        value: 68.88
+        censor: none
+        limit: null
+        n: 3
+        sd: 3.49
+        conditions:
+          ph: 6.0
+          ph_basis: "initial"
+          final_ph: null
+          final_ph_location: ""
+          temp_C: 121
+          time_min: 60
+          precursors: {goat viscera protein hydrolysate: "20 mL", cysteine: "0.1 g", xylose: "1.0 g", thiamine: "0.5 g", total volume: "50 mL"}
+          buffer: "none"
+          matrix: "other (goat viscera protein hydrolysate, Alcalase)"
+          headspace: "sealed, unstated"
+  - id: "desousafontes2024-11"
+    odorant: "Pyrazines (total concentration)"
+    lever_class: "pH"
+    lever: "initial pH (4.0 vs 6.0, adjusted with 1 M HCl)"
+    focal: false
+    location: "Table 2"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "relative"
+    time_course_rule: "not a time course"
+    ph_control: "adjusted_unbuffered"
+    arms:
+      - label: "F4"
+        lever_value: "4.0"
+        value: 0.64
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.26
+        conditions:
+          ph: 4.0
+          ph_basis: "initial"
+          final_ph: null
+          final_ph_location: ""
+          temp_C: 121
+          time_min: 60
+          precursors: {goat viscera protein hydrolysate: "20 mL", cysteine: "0.1 g", xylose: "1.0 g", thiamine: "0.5 g", total volume: "50 mL"}
+          buffer: "none"
+          matrix: "other (goat viscera protein hydrolysate, Alcalase)"
+          headspace: "sealed, unstated"
+      - label: "F6"
+        lever_value: "6.0"
+        value: 64.84
+        censor: none
+        limit: null
+        n: 3
+        sd: 6.0
+        conditions:
+          ph: 6.0
+          ph_basis: "initial"
+          final_ph: null
+          final_ph_location: ""
+          temp_C: 121
+          time_min: 60
+          precursors: {goat viscera protein hydrolysate: "20 mL", cysteine: "0.1 g", xylose: "1.0 g", thiamine: "0.5 g", total volume: "50 mL"}
+          buffer: "none"
+          matrix: "other (goat viscera protein hydrolysate, Alcalase)"
+          headspace: "sealed, unstated"
+  - id: "desousafontes2024-12"
+    odorant: "2-Methylpyrazine"
+    lever_class: "pH"
+    lever: "initial pH (4.0 vs 6.0, adjusted with 1 M HCl)"
+    focal: false
+    location: "Table 2"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "relative"
+    time_course_rule: "not a time course"
+    ph_control: "adjusted_unbuffered"
+    arms:
+      - label: "F4"
+        lever_value: "4.0"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.0
+          ph_basis: "initial"
+          final_ph: null
+          final_ph_location: ""
+          temp_C: 121
+          time_min: 60
+          precursors: {goat viscera protein hydrolysate: "20 mL", cysteine: "0.1 g", xylose: "1.0 g", thiamine: "0.5 g", total volume: "50 mL"}
+          buffer: "none"
+          matrix: "other (goat viscera protein hydrolysate, Alcalase)"
+          headspace: "sealed, unstated"
+      - label: "F6"
+        lever_value: "6.0"
+        value: 12.65
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.41
+        conditions:
+          ph: 6.0
+          ph_basis: "initial"
+          final_ph: null
+          final_ph_location: ""
+          temp_C: 121
+          time_min: 60
+          precursors: {goat viscera protein hydrolysate: "20 mL", cysteine: "0.1 g", xylose: "1.0 g", thiamine: "0.5 g", total volume: "50 mL"}
+          buffer: "none"
+          matrix: "other (goat viscera protein hydrolysate, Alcalase)"
+          headspace: "sealed, unstated"
+  - id: "desousafontes2024-13"
+    odorant: "2,5-Dimethylpyrazine"
+    lever_class: "pH"
+    lever: "initial pH (4.0 vs 6.0, adjusted with 1 M HCl)"
+    focal: false
+    location: "Table 2"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "relative"
+    time_course_rule: "not a time course"
+    ph_control: "adjusted_unbuffered"
+    arms:
+      - label: "F4"
+        lever_value: "4.0"
+        value: 0.64
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.26
+        conditions:
+          ph: 4.0
+          ph_basis: "initial"
+          final_ph: null
+          final_ph_location: ""
+          temp_C: 121
+          time_min: 60
+          precursors: {goat viscera protein hydrolysate: "20 mL", cysteine: "0.1 g", xylose: "1.0 g", thiamine: "0.5 g", total volume: "50 mL"}
+          buffer: "none"
+          matrix: "other (goat viscera protein hydrolysate, Alcalase)"
+          headspace: "sealed, unstated"
+      - label: "F6"
+        lever_value: "6.0"
+        value: 32.22
+        censor: none
+        limit: null
+        n: 3
+        sd: 3.78
+        conditions:
+          ph: 6.0
+          ph_basis: "initial"
+          final_ph: null
+          final_ph_location: ""
+          temp_C: 121
+          time_min: 60
+          precursors: {goat viscera protein hydrolysate: "20 mL", cysteine: "0.1 g", xylose: "1.0 g", thiamine: "0.5 g", total volume: "50 mL"}
+          buffer: "none"
+          matrix: "other (goat viscera protein hydrolysate, Alcalase)"
+          headspace: "sealed, unstated"
+  - id: "desousafontes2024-14"
+    odorant: "2-Acetylthiazole"
+    lever_class: "pH"
+    lever: "initial pH (4.0 vs 6.0, adjusted with 1 M HCl)"
+    focal: false
+    location: "Table 2"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "relative"
+    time_course_rule: "not a time course"
+    ph_control: "adjusted_unbuffered"
+    arms:
+      - label: "F4"
+        lever_value: "4.0"
+        value: 1.06
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: 4.0
+          ph_basis: "initial"
+          final_ph: null
+          final_ph_location: ""
+          temp_C: 121
+          time_min: 60
+          precursors: {goat viscera protein hydrolysate: "20 mL", cysteine: "0.1 g", xylose: "1.0 g", thiamine: "0.5 g", total volume: "50 mL"}
+          buffer: "none"
+          matrix: "other (goat viscera protein hydrolysate, Alcalase)"
+          headspace: "sealed, unstated"
+      - label: "F6"
+        lever_value: "6.0"
+        value: 3.46
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.04
+        conditions:
+          ph: 6.0
+          ph_basis: "initial"
+          final_ph: null
+          final_ph_location: ""
+          temp_C: 121
+          time_min: 60
+          precursors: {goat viscera protein hydrolysate: "20 mL", cysteine: "0.1 g", xylose: "1.0 g", thiamine: "0.5 g", total volume: "50 mL"}
+          buffer: "none"
+          matrix: "other (goat viscera protein hydrolysate, Alcalase)"
+          headspace: "sealed, unstated"
+  - id: "desousafontes2024-15"
+    odorant: "Pentanal"
+    lever_class: "pH"
+    lever: "initial pH (4.0 vs 6.0, adjusted with 1 M HCl)"
+    focal: false
+    location: "Table 2"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "relative"
+    time_course_rule: "not a time course"
+    ph_control: "adjusted_unbuffered"
+    arms:
+      - label: "F4"
+        lever_value: "4.0"
+        value: 0.39
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.11
+        conditions:
+          ph: 4.0
+          ph_basis: "initial"
+          final_ph: null
+          final_ph_location: ""
+          temp_C: 121
+          time_min: 60
+          precursors: {goat viscera protein hydrolysate: "20 mL", cysteine: "0.1 g", xylose: "1.0 g", thiamine: "0.5 g", total volume: "50 mL"}
+          buffer: "none"
+          matrix: "other (goat viscera protein hydrolysate, Alcalase)"
+          headspace: "sealed, unstated"
+      - label: "F6"
+        lever_value: "6.0"
+        value: 11.44
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.21
+        conditions:
+          ph: 6.0
+          ph_basis: "initial"
+          final_ph: null
+          final_ph_location: ""
+          temp_C: 121
+          time_min: 60
+          precursors: {goat viscera protein hydrolysate: "20 mL", cysteine: "0.1 g", xylose: "1.0 g", thiamine: "0.5 g", total volume: "50 mL"}
+          buffer: "none"
+          matrix: "other (goat viscera protein hydrolysate, Alcalase)"
+          headspace: "sealed, unstated"
+  - id: "desousafontes2024-16"
+    odorant: "Hexanal"
+    lever_class: "pH"
+    lever: "initial pH (4.0 vs 6.0, adjusted with 1 M HCl)"
+    focal: false
+    location: "Table 2"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "relative"
+    time_course_rule: "not a time course"
+    ph_control: "adjusted_unbuffered"
+    arms:
+      - label: "F4"
+        lever_value: "4.0"
+        value: 5.85
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.62
+        conditions:
+          ph: 4.0
+          ph_basis: "initial"
+          final_ph: null
+          final_ph_location: ""
+          temp_C: 121
+          time_min: 60
+          precursors: {goat viscera protein hydrolysate: "20 mL", cysteine: "0.1 g", xylose: "1.0 g", thiamine: "0.5 g", total volume: "50 mL"}
+          buffer: "none"
+          matrix: "other (goat viscera protein hydrolysate, Alcalase)"
+          headspace: "sealed, unstated"
+      - label: "F6"
+        lever_value: "6.0"
+        value: 8.4
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.81
+        conditions:
+          ph: 6.0
+          ph_basis: "initial"
+          final_ph: null
+          final_ph_location: ""
+          temp_C: 121
+          time_min: 60
+          precursors: {goat viscera protein hydrolysate: "20 mL", cysteine: "0.1 g", xylose: "1.0 g", thiamine: "0.5 g", total volume: "50 mL"}
+          buffer: "none"
+          matrix: "other (goat viscera protein hydrolysate, Alcalase)"
+          headspace: "sealed, unstated"
+  - id: "desousafontes2024-17"
+    odorant: "Heptanal"
+    lever_class: "pH"
+    lever: "initial pH (4.0 vs 6.0, adjusted with 1 M HCl)"
+    focal: false
+    location: "Table 2"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "relative"
+    time_course_rule: "not a time course"
+    ph_control: "adjusted_unbuffered"
+    arms:
+      - label: "F4"
+        lever_value: "4.0"
+        value: 1.65
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.2
+        conditions:
+          ph: 4.0
+          ph_basis: "initial"
+          final_ph: null
+          final_ph_location: ""
+          temp_C: 121
+          time_min: 60
+          precursors: {goat viscera protein hydrolysate: "20 mL", cysteine: "0.1 g", xylose: "1.0 g", thiamine: "0.5 g", total volume: "50 mL"}
+          buffer: "none"
+          matrix: "other (goat viscera protein hydrolysate, Alcalase)"
+          headspace: "sealed, unstated"
+      - label: "F6"
+        lever_value: "6.0"
+        value: 3.21
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.26
+        conditions:
+          ph: 6.0
+          ph_basis: "initial"
+          final_ph: null
+          final_ph_location: ""
+          temp_C: 121
+          time_min: 60
+          precursors: {goat viscera protein hydrolysate: "20 mL", cysteine: "0.1 g", xylose: "1.0 g", thiamine: "0.5 g", total volume: "50 mL"}
+          buffer: "none"
+          matrix: "other (goat viscera protein hydrolysate, Alcalase)"
+          headspace: "sealed, unstated"
+  - id: "desousafontes2024-18"
+    odorant: "Octanal"
+    lever_class: "pH"
+    lever: "initial pH (4.0 vs 6.0, adjusted with 1 M HCl)"
+    focal: false
+    location: "Table 2"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "relative"
+    time_course_rule: "not a time course"
+    ph_control: "adjusted_unbuffered"
+    arms:
+      - label: "F4"
+        lever_value: "4.0"
+        value: 0.5
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.03
+        conditions:
+          ph: 4.0
+          ph_basis: "initial"
+          final_ph: null
+          final_ph_location: ""
+          temp_C: 121
+          time_min: 60
+          precursors: {goat viscera protein hydrolysate: "20 mL", cysteine: "0.1 g", xylose: "1.0 g", thiamine: "0.5 g", total volume: "50 mL"}
+          buffer: "none"
+          matrix: "other (goat viscera protein hydrolysate, Alcalase)"
+          headspace: "sealed, unstated"
+      - label: "F6"
+        lever_value: "6.0"
+        value: 20.5
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.76
+        conditions:
+          ph: 6.0
+          ph_basis: "initial"
+          final_ph: null
+          final_ph_location: ""
+          temp_C: 121
+          time_min: 60
+          precursors: {goat viscera protein hydrolysate: "20 mL", cysteine: "0.1 g", xylose: "1.0 g", thiamine: "0.5 g", total volume: "50 mL"}
+          buffer: "none"
+          matrix: "other (goat viscera protein hydrolysate, Alcalase)"
+          headspace: "sealed, unstated"
+  - id: "desousafontes2024-19"
+    odorant: "Nonanal"
+    lever_class: "pH"
+    lever: "initial pH (4.0 vs 6.0, adjusted with 1 M HCl)"
+    focal: false
+    location: "Table 2"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "relative"
+    time_course_rule: "not a time course"
+    ph_control: "adjusted_unbuffered"
+    arms:
+      - label: "F4"
+        lever_value: "4.0"
+        value: 20.88
+        censor: none
+        limit: null
+        n: 3
+        sd: 2.42
+        conditions:
+          ph: 4.0
+          ph_basis: "initial"
+          final_ph: null
+          final_ph_location: ""
+          temp_C: 121
+          time_min: 60
+          precursors: {goat viscera protein hydrolysate: "20 mL", cysteine: "0.1 g", xylose: "1.0 g", thiamine: "0.5 g", total volume: "50 mL"}
+          buffer: "none"
+          matrix: "other (goat viscera protein hydrolysate, Alcalase)"
+          headspace: "sealed, unstated"
+      - label: "F6"
+        lever_value: "6.0"
+        value: 37.25
+        censor: none
+        limit: null
+        n: 3
+        sd: 2.73
+        conditions:
+          ph: 6.0
+          ph_basis: "initial"
+          final_ph: null
+          final_ph_location: ""
+          temp_C: 121
+          time_min: 60
+          precursors: {goat viscera protein hydrolysate: "20 mL", cysteine: "0.1 g", xylose: "1.0 g", thiamine: "0.5 g", total volume: "50 mL"}
+          buffer: "none"
+          matrix: "other (goat viscera protein hydrolysate, Alcalase)"
+          headspace: "sealed, unstated"
+  - id: "desousafontes2024-20"
+    odorant: "(E)-2-Octenal"
+    lever_class: "pH"
+    lever: "initial pH (4.0 vs 6.0, adjusted with 1 M HCl)"
+    focal: false
+    location: "Table 2"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "relative"
+    time_course_rule: "not a time course"
+    ph_control: "adjusted_unbuffered"
+    arms:
+      - label: "F4"
+        lever_value: "4.0"
+        value: 1.82
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.16
+        conditions:
+          ph: 4.0
+          ph_basis: "initial"
+          final_ph: null
+          final_ph_location: ""
+          temp_C: 121
+          time_min: 60
+          precursors: {goat viscera protein hydrolysate: "20 mL", cysteine: "0.1 g", xylose: "1.0 g", thiamine: "0.5 g", total volume: "50 mL"}
+          buffer: "none"
+          matrix: "other (goat viscera protein hydrolysate, Alcalase)"
+          headspace: "sealed, unstated"
+      - label: "F6"
+        lever_value: "6.0"
+        value: 5.68
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.28
+        conditions:
+          ph: 6.0
+          ph_basis: "initial"
+          final_ph: null
+          final_ph_location: ""
+          temp_C: 121
+          time_min: 60
+          precursors: {goat viscera protein hydrolysate: "20 mL", cysteine: "0.1 g", xylose: "1.0 g", thiamine: "0.5 g", total volume: "50 mL"}
+          buffer: "none"
+          matrix: "other (goat viscera protein hydrolysate, Alcalase)"
+          headspace: "sealed, unstated"
+  - id: "desousafontes2024-21"
+    odorant: "(E,E)-2,4-Decadienal"
+    lever_class: "pH"
+    lever: "initial pH (4.0 vs 6.0, adjusted with 1 M HCl)"
+    focal: false
+    location: "Table 2"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "relative"
+    time_course_rule: "not a time course"
+    ph_control: "adjusted_unbuffered"
+    arms:
+      - label: "F4"
+        lever_value: "4.0"
+        value: 0.5
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.03
+        conditions:
+          ph: 4.0
+          ph_basis: "initial"
+          final_ph: null
+          final_ph_location: ""
+          temp_C: 121
+          time_min: 60
+          precursors: {goat viscera protein hydrolysate: "20 mL", cysteine: "0.1 g", xylose: "1.0 g", thiamine: "0.5 g", total volume: "50 mL"}
+          buffer: "none"
+          matrix: "other (goat viscera protein hydrolysate, Alcalase)"
+          headspace: "sealed, unstated"
+      - label: "F6"
+        lever_value: "6.0"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 6.0
+          ph_basis: "initial"
+          final_ph: null
+          final_ph_location: ""
+          temp_C: 121
+          time_min: 60
+          precursors: {goat viscera protein hydrolysate: "20 mL", cysteine: "0.1 g", xylose: "1.0 g", thiamine: "0.5 g", total volume: "50 mL"}
+          buffer: "none"
+          matrix: "other (goat viscera protein hydrolysate, Alcalase)"
+          headspace: "sealed, unstated"
+  - id: "desousafontes2024-22"
+    odorant: "2-Pentylfuran"
+    lever_class: "pH"
+    lever: "initial pH (4.0 vs 6.0, adjusted with 1 M HCl)"
+    focal: false
+    location: "Table 2"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "relative"
+    time_course_rule: "not a time course"
+    ph_control: "adjusted_unbuffered"
+    arms:
+      - label: "F4"
+        lever_value: "4.0"
+        value: 6.57
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.97
+        conditions:
+          ph: 4.0
+          ph_basis: "initial"
+          final_ph: null
+          final_ph_location: ""
+          temp_C: 121
+          time_min: 60
+          precursors: {goat viscera protein hydrolysate: "20 mL", cysteine: "0.1 g", xylose: "1.0 g", thiamine: "0.5 g", total volume: "50 mL"}
+          buffer: "none"
+          matrix: "other (goat viscera protein hydrolysate, Alcalase)"
+          headspace: "sealed, unstated"
+      - label: "F6"
+        lever_value: "6.0"
+        value: 62.72
+        censor: none
+        limit: null
+        n: 3
+        sd: 7.38
+        conditions:
+          ph: 6.0
+          ph_basis: "initial"
+          final_ph: null
+          final_ph_location: ""
+          temp_C: 121
+          time_min: 60
+          precursors: {goat viscera protein hydrolysate: "20 mL", cysteine: "0.1 g", xylose: "1.0 g", thiamine: "0.5 g", total volume: "50 mL"}
+          buffer: "none"
+          matrix: "other (goat viscera protein hydrolysate, Alcalase)"
+          headspace: "sealed, unstated"
+  - id: "desousafontes2024-23"
+    odorant: "1-Octen-3-ol"
+    lever_class: "pH"
+    lever: "initial pH (4.0 vs 6.0, adjusted with 1 M HCl)"
+    focal: false
+    location: "Table 2"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "relative"
+    time_course_rule: "not a time course"
+    ph_control: "adjusted_unbuffered"
+    arms:
+      - label: "F4"
+        lever_value: "4.0"
+        value: 2.38
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.27
+        conditions:
+          ph: 4.0
+          ph_basis: "initial"
+          final_ph: null
+          final_ph_location: ""
+          temp_C: 121
+          time_min: 60
+          precursors: {goat viscera protein hydrolysate: "20 mL", cysteine: "0.1 g", xylose: "1.0 g", thiamine: "0.5 g", total volume: "50 mL"}
+          buffer: "none"
+          matrix: "other (goat viscera protein hydrolysate, Alcalase)"
+          headspace: "sealed, unstated"
+      - label: "F6"
+        lever_value: "6.0"
+        value: 8.96
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.86
+        conditions:
+          ph: 6.0
+          ph_basis: "initial"
+          final_ph: null
+          final_ph_location: ""
+          temp_C: 121
+          time_min: 60
+          precursors: {goat viscera protein hydrolysate: "20 mL", cysteine: "0.1 g", xylose: "1.0 g", thiamine: "0.5 g", total volume: "50 mL"}
+          buffer: "none"
+          matrix: "other (goat viscera protein hydrolysate, Alcalase)"
+          headspace: "sealed, unstated"
+  - id: "desousafontes2024-24"
+    odorant: "1-Hexanol"
+    lever_class: "pH"
+    lever: "initial pH (4.0 vs 6.0, adjusted with 1 M HCl)"
+    focal: false
+    location: "Table 2"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "relative"
+    time_course_rule: "not a time course"
+    ph_control: "adjusted_unbuffered"
+    arms:
+      - label: "F4"
+        lever_value: "4.0"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.0
+          ph_basis: "initial"
+          final_ph: null
+          final_ph_location: ""
+          temp_C: 121
+          time_min: 60
+          precursors: {goat viscera protein hydrolysate: "20 mL", cysteine: "0.1 g", xylose: "1.0 g", thiamine: "0.5 g", total volume: "50 mL"}
+          buffer: "none"
+          matrix: "other (goat viscera protein hydrolysate, Alcalase)"
+          headspace: "sealed, unstated"
+      - label: "F6"
+        lever_value: "6.0"
+        value: 2.83
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.49
+        conditions:
+          ph: 6.0
+          ph_basis: "initial"
+          final_ph: null
+          final_ph_location: ""
+          temp_C: 121
+          time_min: 60
+          precursors: {goat viscera protein hydrolysate: "20 mL", cysteine: "0.1 g", xylose: "1.0 g", thiamine: "0.5 g", total volume: "50 mL"}
+          buffer: "none"
+          matrix: "other (goat viscera protein hydrolysate, Alcalase)"
+          headspace: "sealed, unstated"
+  - id: "desousafontes2024-25"
+    odorant: "Furfural"
+    lever_class: "pH"
+    lever: "initial pH (4.0 vs 6.0, adjusted with 1 M HCl)"
+    focal: false
+    location: "Table 2"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "relative"
+    time_course_rule: "not a time course"
+    ph_control: "adjusted_unbuffered"
+    arms:
+      - label: "F4"
+        lever_value: "4.0"
+        value: 1891.84
+        censor: none
+        limit: null
+        n: 3
+        sd: 166.08
+        conditions:
+          ph: 4.0
+          ph_basis: "initial"
+          final_ph: null
+          final_ph_location: ""
+          temp_C: 121
+          time_min: 60
+          precursors: {goat viscera protein hydrolysate: "20 mL", cysteine: "0.1 g", xylose: "1.0 g", thiamine: "0.5 g", total volume: "50 mL"}
+          buffer: "none"
+          matrix: "other (goat viscera protein hydrolysate, Alcalase)"
+          headspace: "sealed, unstated"
+      - label: "F6"
+        lever_value: "6.0"
+        value: 3188.44
+        censor: none
+        limit: null
+        n: 3
+        sd: 36.86
+        conditions:
+          ph: 6.0
+          ph_basis: "initial"
+          final_ph: null
+          final_ph_location: ""
+          temp_C: 121
+          time_min: 60
+          precursors: {goat viscera protein hydrolysate: "20 mL", cysteine: "0.1 g", xylose: "1.0 g", thiamine: "0.5 g", total volume: "50 mL"}
+          buffer: "none"
+          matrix: "other (goat viscera protein hydrolysate, Alcalase)"
+          headspace: "sealed, unstated"
+  - id: "desousafontes2024-26"
+    odorant: "2-(Hydroxymethyl)furan"
+    lever_class: "pH"
+    lever: "initial pH (4.0 vs 6.0, adjusted with 1 M HCl)"
+    focal: false
+    location: "Table 2"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "relative"
+    time_course_rule: "not a time course"
+    ph_control: "adjusted_unbuffered"
+    arms:
+      - label: "F4"
+        lever_value: "4.0"
+        value: 2.5
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.12
+        conditions:
+          ph: 4.0
+          ph_basis: "initial"
+          final_ph: null
+          final_ph_location: ""
+          temp_C: 121
+          time_min: 60
+          precursors: {goat viscera protein hydrolysate: "20 mL", cysteine: "0.1 g", xylose: "1.0 g", thiamine: "0.5 g", total volume: "50 mL"}
+          buffer: "none"
+          matrix: "other (goat viscera protein hydrolysate, Alcalase)"
+          headspace: "sealed, unstated"
+      - label: "F6"
+        lever_value: "6.0"
+        value: 11.55
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.94
+        conditions:
+          ph: 6.0
+          ph_basis: "initial"
+          final_ph: null
+          final_ph_location: ""
+          temp_C: 121
+          time_min: 60
+          precursors: {goat viscera protein hydrolysate: "20 mL", cysteine: "0.1 g", xylose: "1.0 g", thiamine: "0.5 g", total volume: "50 mL"}
+          buffer: "none"
+          matrix: "other (goat viscera protein hydrolysate, Alcalase)"
+          headspace: "sealed, unstated"
+  - id: "desousafontes2024-27"
+    odorant: "2-Acetylfuran"
+    lever_class: "pH"
+    lever: "initial pH (4.0 vs 6.0, adjusted with 1 M HCl)"
+    focal: false
+    location: "Table 2"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "relative"
+    time_course_rule: "not a time course"
+    ph_control: "adjusted_unbuffered"
+    arms:
+      - label: "F4"
+        lever_value: "4.0"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.0
+          ph_basis: "initial"
+          final_ph: null
+          final_ph_location: ""
+          temp_C: 121
+          time_min: 60
+          precursors: {goat viscera protein hydrolysate: "20 mL", cysteine: "0.1 g", xylose: "1.0 g", thiamine: "0.5 g", total volume: "50 mL"}
+          buffer: "none"
+          matrix: "other (goat viscera protein hydrolysate, Alcalase)"
+          headspace: "sealed, unstated"
+      - label: "F6"
+        lever_value: "6.0"
+        value: 40.5
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.69
+        conditions:
+          ph: 6.0
+          ph_basis: "initial"
+          final_ph: null
+          final_ph_location: ""
+          temp_C: 121
+          time_min: 60
+          precursors: {goat viscera protein hydrolysate: "20 mL", cysteine: "0.1 g", xylose: "1.0 g", thiamine: "0.5 g", total volume: "50 mL"}
+          buffer: "none"
+          matrix: "other (goat viscera protein hydrolysate, Alcalase)"
+          headspace: "sealed, unstated"
+  - id: "desousafontes2024-28"
+    odorant: "2-Furyl methyl ketone"
+    lever_class: "pH"
+    lever: "initial pH (4.0 vs 6.0, adjusted with 1 M HCl)"
+    focal: false
+    location: "Table 2"
+    digitised: false
+    unit: "ug/L"
+    quant_type: "relative"
+    time_course_rule: "not a time course"
+    ph_control: "adjusted_unbuffered"
+    arms:
+      - label: "F4"
+        lever_value: "4.0"
+        value: null
+        censor: nd_no_limit
+        limit: null
+        n: 3
+        sd: null
+        conditions:
+          ph: 4.0
+          ph_basis: "initial"
+          final_ph: null
+          final_ph_location: ""
+          temp_C: 121
+          time_min: 60
+          precursors: {goat viscera protein hydrolysate: "20 mL", cysteine: "0.1 g", xylose: "1.0 g", thiamine: "0.5 g", total volume: "50 mL"}
+          buffer: "none"
+          matrix: "other (goat viscera protein hydrolysate, Alcalase)"
+          headspace: "sealed, unstated"
+      - label: "F6"
+        lever_value: "6.0"
+        value: 2.44
+        censor: none
+        limit: null
+        n: 3
+        sd: 0.0
+        conditions:
+          ph: 6.0
+          ph_basis: "initial"
+          final_ph: null
+          final_ph_location: ""
+          temp_C: 121
+          time_min: 60
+          precursors: {goat viscera protein hydrolysate: "20 mL", cysteine: "0.1 g", xylose: "1.0 g", thiamine: "0.5 g", total volume: "50 mL"}
+          buffer: "none"
+          matrix: "other (goat viscera protein hydrolysate, Alcalase)"
+          headspace: "sealed, unstated"

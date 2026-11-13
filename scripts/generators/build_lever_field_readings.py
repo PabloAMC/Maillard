@@ -58,18 +58,24 @@ def control_from_text(text: Any) -> str:
     return "buffered"
 
 
-def contrast_control(arms: Sequence[Mapping[str, Any]], check: Optional[Mapping[str, Any]], cid: str) -> Tuple[str, str]:
-    """(F1 value, where it came from)."""
+def contrast_control(arms: Sequence[Mapping[str, Any]], check: Optional[Mapping[str, Any]], cid: str,
+                     keyed: Any = None) -> Tuple[str, str]:
+    """(F1 value, where it came from): a reader check, else the contrast's own keyed `ph_control` (the template
+    field since A6), else the written map from the arms' `buffer` text."""
     if check and "F1" in (check.get("fields") or []):
         v = (check.get("ph_control_overrides") or {}).get(cid) or check.get("ph_control")
         if v in CONTROL_VALUES:
             return v, "check"
+    if keyed in CONTROL_VALUES:
+        return keyed, "keyed"
     states = {control_from_text((a.get("conditions") or {}).get("buffer")) for a in arms}
     return (states.pop() if len(states) == 1 else "mixed"), "derived"
 
 
 def arm_final_ph(arm: Mapping[str, Any], check: Optional[Mapping[str, Any]]) -> Optional[float]:
     cond = arm.get("conditions") or {}
+    if LT._num(cond.get("final_ph")) is not None:          # the template field since A6
+        return LT._num(cond.get("final_ph"))
     if cond.get("ph_basis") == "final" and LT._num(cond.get("ph")) is not None:
         return LT._num(cond.get("ph"))
     if check and "F2" in (check.get("fields") or []):
@@ -217,7 +223,7 @@ def annotate(obs, checks) -> Dict[str, Any]:
         chk = checks.get(o["source"])
         if o["lever_class"] == "pH":
             cov["ph_contrasts"] += 1
-            o["ph_control"], how = contrast_control(arms, chk, str(c.get("id")))
+            o["ph_control"], how = contrast_control(arms, chk, str(c.get("id")), c.get("ph_control"))
             cov["ph_control"][o["ph_control"]] += 1
             cov["ph_control_source"][how] += 1
             fin = [arm_final_ph(a, chk) for a in arms]

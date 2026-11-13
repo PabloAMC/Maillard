@@ -1,0 +1,1482 @@
+# Reader A, STATUS_AND_PLAN sec. 0 step 9. Rules: PREREG secs. 3 - 4 + A1 - A6.
+source: madruga1995
+pdf: data/articles/madruga1995.pdf
+reader: a
+scope_note: 'Table 2 values are ''approximate concentrations'' from GC-MS peak area vs a dichlorobenzene internal standard
+  (no response factors), printed as mg/kg meat; n of headspace collections ''usually no less than three'' (not keyed as n).
+  One 4-level initial-pH ladder (HCl into beef, no added buffer; final pH from Table 1). Tr printed as ''trace (2 mg/kg meat)''
+  keyed censor trace, limit 2; ND has no printed limit. Not keyed (not on the declared lists): 2-ethyl-(5 or 6)-methylpyrazine,
+  2,3-diethyl-5-methylpyrazine, decanal, other sulfur compounds, alkylfurans other than 2-pentylfuran.'
+contrasts:
+- id: madruga1995-1
+  odorant: 2-Methyl-3-furanthiol
+  lever_class: pH
+  lever: initial pH of minced beef (adjusted with 1 M HCl before cooking), 4-level ladder 4.0/4.5/5.0/5.6
+  focal: true
+  location: Table 2 (p. 308); final pH Table 1
+  digitised: false
+  unit: mg/kg meat (approximate, vs internal standard)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 4
+    lever_value: 4.0
+    value: 130
+    censor: none
+    limit: null
+    n: null
+    sd: 20
+    conditions:
+      ph: 4.0
+      ph_basis: initial
+      final_ph: 4.4
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: 12 ml (in 12 ml added solution)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated
+  - label: pH 4.5
+    lever_value: 4.5
+    value: 60
+    censor: none
+    limit: null
+    n: null
+    sd: 10
+    conditions:
+      ph: 4.5
+      ph_basis: initial
+      final_ph: 4.9
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: 7.2 ml (in 12 ml added solution)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated
+  - label: pH 5
+    lever_value: 5.0
+    value: 30
+    censor: none
+    limit: null
+    n: null
+    sd: 10
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 5.4
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: 3 ml (in 12 ml added solution)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated
+  - label: pH 5.6
+    lever_value: 5.6
+    value: null
+    censor: trace
+    limit: 2
+    n: null
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      final_ph: 5.8
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: none (12 ml water)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated
+- id: madruga1995-2
+  odorant: 2-Furanylmethanethiol
+  lever_class: pH
+  lever: initial pH of minced beef (adjusted with 1 M HCl before cooking), 4-level ladder 4.0/4.5/5.0/5.6
+  focal: true
+  location: Table 2 (p. 308); final pH Table 1
+  digitised: false
+  unit: mg/kg meat (approximate, vs internal standard)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 4
+    lever_value: 4.0
+    value: 3100
+    censor: none
+    limit: null
+    n: null
+    sd: 730
+    conditions:
+      ph: 4.0
+      ph_basis: initial
+      final_ph: 4.4
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: 12 ml (in 12 ml added solution)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated
+  - label: pH 4.5
+    lever_value: 4.5
+    value: 580
+    censor: none
+    limit: null
+    n: null
+    sd: 300
+    conditions:
+      ph: 4.5
+      ph_basis: initial
+      final_ph: 4.9
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: 7.2 ml (in 12 ml added solution)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated
+  - label: pH 5
+    lever_value: 5.0
+    value: 720
+    censor: none
+    limit: null
+    n: null
+    sd: 230
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 5.4
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: 3 ml (in 12 ml added solution)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated
+  - label: pH 5.6
+    lever_value: 5.6
+    value: 1420
+    censor: none
+    limit: null
+    n: null
+    sd: 350
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      final_ph: 5.8
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: none (12 ml water)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated
+- id: madruga1995-3
+  odorant: 2-Methyl-3-(2-furanylmethyldithio)furan
+  lever_class: pH
+  lever: initial pH of minced beef (adjusted with 1 M HCl before cooking), 4-level ladder 4.0/4.5/5.0/5.6
+  focal: true
+  location: Table 2 (p. 308); final pH Table 1
+  digitised: false
+  unit: mg/kg meat (approximate, vs internal standard)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 4
+    lever_value: 4.0
+    value: 140
+    censor: none
+    limit: null
+    n: null
+    sd: 1
+    conditions:
+      ph: 4.0
+      ph_basis: initial
+      final_ph: 4.4
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: 12 ml (in 12 ml added solution)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated
+  - label: pH 4.5
+    lever_value: 4.5
+    value: 10
+    censor: none
+    limit: null
+    n: null
+    sd: 5
+    conditions:
+      ph: 4.5
+      ph_basis: initial
+      final_ph: 4.9
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: 7.2 ml (in 12 ml added solution)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated
+  - label: pH 5
+    lever_value: 5.0
+    value: 10
+    censor: none
+    limit: null
+    n: null
+    sd: 6
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 5.4
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: 3 ml (in 12 ml added solution)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated
+  - label: pH 5.6
+    lever_value: 5.6
+    value: 40
+    censor: none
+    limit: null
+    n: null
+    sd: 10
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      final_ph: 5.8
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: none (12 ml water)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated
+- id: madruga1995-4
+  odorant: Bis(2-furanylmethyl) disulphide
+  lever_class: pH
+  lever: initial pH of minced beef (adjusted with 1 M HCl before cooking), 4-level ladder 4.0/4.5/5.0/5.6
+  focal: true
+  location: Table 2 (p. 308); final pH Table 1
+  digitised: false
+  unit: mg/kg meat (approximate, vs internal standard)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 4
+    lever_value: 4.0
+    value: null
+    censor: trace
+    limit: 2
+    n: null
+    sd: null
+    conditions:
+      ph: 4.0
+      ph_basis: initial
+      final_ph: 4.4
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: 12 ml (in 12 ml added solution)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated
+  - label: pH 4.5
+    lever_value: 4.5
+    value: null
+    censor: trace
+    limit: 2
+    n: null
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: initial
+      final_ph: 4.9
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: 7.2 ml (in 12 ml added solution)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated
+  - label: pH 5
+    lever_value: 5.0
+    value: null
+    censor: trace
+    limit: 2
+    n: null
+    sd: null
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 5.4
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: 3 ml (in 12 ml added solution)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated
+  - label: pH 5.6
+    lever_value: 5.6
+    value: 300
+    censor: none
+    limit: null
+    n: null
+    sd: 60
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      final_ph: 5.8
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: none (12 ml water)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated
+- id: madruga1995-5
+  odorant: 2-Furfural
+  lever_class: pH
+  lever: initial pH of minced beef (adjusted with 1 M HCl before cooking), 4-level ladder 4.0/4.5/5.0/5.6
+  focal: true
+  location: Table 2 (p. 308); final pH Table 1
+  digitised: false
+  unit: mg/kg meat (approximate, vs internal standard)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 4
+    lever_value: 4.0
+    value: 6650
+    censor: none
+    limit: null
+    n: null
+    sd: 1680
+    conditions:
+      ph: 4.0
+      ph_basis: initial
+      final_ph: 4.4
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: 12 ml (in 12 ml added solution)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated
+  - label: pH 4.5
+    lever_value: 4.5
+    value: 2480
+    censor: none
+    limit: null
+    n: null
+    sd: 1300
+    conditions:
+      ph: 4.5
+      ph_basis: initial
+      final_ph: 4.9
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: 7.2 ml (in 12 ml added solution)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated
+  - label: pH 5
+    lever_value: 5.0
+    value: 1700
+    censor: none
+    limit: null
+    n: null
+    sd: 430
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 5.4
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: 3 ml (in 12 ml added solution)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated
+  - label: pH 5.6
+    lever_value: 5.6
+    value: 500
+    censor: none
+    limit: null
+    n: null
+    sd: 260
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      final_ph: 5.8
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: none (12 ml water)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated
+- id: madruga1995-6
+  odorant: Methylpyrazine
+  lever_class: pH
+  lever: initial pH of minced beef (adjusted with 1 M HCl before cooking), 4-level ladder 4.0/4.5/5.0/5.6
+  focal: true
+  location: Table 2 (p. 308); final pH Table 1
+  digitised: false
+  unit: mg/kg meat (approximate, vs internal standard)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 4
+    lever_value: 4.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 4.0
+      ph_basis: initial
+      final_ph: 4.4
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: 12 ml (in 12 ml added solution)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated
+  - label: pH 4.5
+    lever_value: 4.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: initial
+      final_ph: 4.9
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: 7.2 ml (in 12 ml added solution)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated
+  - label: pH 5
+    lever_value: 5.0
+    value: 420
+    censor: none
+    limit: null
+    n: null
+    sd: 150
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 5.4
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: 3 ml (in 12 ml added solution)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated
+  - label: pH 5.6
+    lever_value: 5.6
+    value: 260
+    censor: none
+    limit: null
+    n: null
+    sd: 80
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      final_ph: 5.8
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: none (12 ml water)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated
+- id: madruga1995-7
+  odorant: 2,6 or 2,5-Dimethylpyrazine
+  lever_class: pH
+  lever: initial pH of minced beef (adjusted with 1 M HCl before cooking), 4-level ladder 4.0/4.5/5.0/5.6
+  focal: true
+  location: Table 2 (p. 308); final pH Table 1
+  digitised: false
+  unit: mg/kg meat (approximate, vs internal standard)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 4
+    lever_value: 4.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 4.0
+      ph_basis: initial
+      final_ph: 4.4
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: 12 ml (in 12 ml added solution)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated
+  - label: pH 4.5
+    lever_value: 4.5
+    value: 510
+    censor: none
+    limit: null
+    n: null
+    sd: 180
+    conditions:
+      ph: 4.5
+      ph_basis: initial
+      final_ph: 4.9
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: 7.2 ml (in 12 ml added solution)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated
+  - label: pH 5
+    lever_value: 5.0
+    value: 1190
+    censor: none
+    limit: null
+    n: null
+    sd: 340
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 5.4
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: 3 ml (in 12 ml added solution)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated
+  - label: pH 5.6
+    lever_value: 5.6
+    value: 1430
+    censor: none
+    limit: null
+    n: null
+    sd: 460
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      final_ph: 5.8
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: none (12 ml water)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated
+- id: madruga1995-8
+  odorant: 2-Ethyl-3,6-dimethylpyrazine
+  lever_class: pH
+  lever: initial pH of minced beef (adjusted with 1 M HCl before cooking), 4-level ladder 4.0/4.5/5.0/5.6
+  focal: true
+  location: Table 2 (p. 308); final pH Table 1
+  digitised: false
+  unit: mg/kg meat (approximate, vs internal standard)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 4
+    lever_value: 4.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 4.0
+      ph_basis: initial
+      final_ph: 4.4
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: 12 ml (in 12 ml added solution)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated
+  - label: pH 4.5
+    lever_value: 4.5
+    value: 680
+    censor: none
+    limit: null
+    n: null
+    sd: 200
+    conditions:
+      ph: 4.5
+      ph_basis: initial
+      final_ph: 4.9
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: 7.2 ml (in 12 ml added solution)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated
+  - label: pH 5
+    lever_value: 5.0
+    value: 1100
+    censor: none
+    limit: null
+    n: null
+    sd: 350
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 5.4
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: 3 ml (in 12 ml added solution)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated
+  - label: pH 5.6
+    lever_value: 5.6
+    value: 1210
+    censor: none
+    limit: null
+    n: null
+    sd: 370
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      final_ph: 5.8
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: none (12 ml water)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated
+- id: madruga1995-9
+  odorant: 2-Acetylthiazole
+  lever_class: pH
+  lever: initial pH of minced beef (adjusted with 1 M HCl before cooking), 4-level ladder 4.0/4.5/5.0/5.6
+  focal: true
+  location: Table 2 (p. 308); final pH Table 1
+  digitised: false
+  unit: mg/kg meat (approximate, vs internal standard)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 4
+    lever_value: 4.0
+    value: 690
+    censor: none
+    limit: null
+    n: null
+    sd: 90
+    conditions:
+      ph: 4.0
+      ph_basis: initial
+      final_ph: 4.4
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: 12 ml (in 12 ml added solution)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated
+  - label: pH 4.5
+    lever_value: 4.5
+    value: 800
+    censor: none
+    limit: null
+    n: null
+    sd: 270
+    conditions:
+      ph: 4.5
+      ph_basis: initial
+      final_ph: 4.9
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: 7.2 ml (in 12 ml added solution)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated
+  - label: pH 5
+    lever_value: 5.0
+    value: 1100
+    censor: none
+    limit: null
+    n: null
+    sd: 290
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 5.4
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: 3 ml (in 12 ml added solution)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated
+  - label: pH 5.6
+    lever_value: 5.6
+    value: 1650
+    censor: none
+    limit: null
+    n: null
+    sd: 370
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      final_ph: 5.8
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: none (12 ml water)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated
+- id: madruga1995-10
+  odorant: 2-Pentylfuran
+  lever_class: pH
+  lever: initial pH of minced beef (adjusted with 1 M HCl before cooking), 4-level ladder 4.0/4.5/5.0/5.6
+  focal: false
+  location: Table 2 (p. 308); final pH Table 1
+  digitised: false
+  unit: mg/kg meat (approximate, vs internal standard)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 4
+    lever_value: 4.0
+    value: 30330
+    censor: none
+    limit: null
+    n: null
+    sd: 1230
+    conditions:
+      ph: 4.0
+      ph_basis: initial
+      final_ph: 4.4
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: 12 ml (in 12 ml added solution)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated
+  - label: pH 4.5
+    lever_value: 4.5
+    value: 26130
+    censor: none
+    limit: null
+    n: null
+    sd: 590
+    conditions:
+      ph: 4.5
+      ph_basis: initial
+      final_ph: 4.9
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: 7.2 ml (in 12 ml added solution)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated
+  - label: pH 5
+    lever_value: 5.0
+    value: 20100
+    censor: none
+    limit: null
+    n: null
+    sd: 890
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 5.4
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: 3 ml (in 12 ml added solution)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated
+  - label: pH 5.6
+    lever_value: 5.6
+    value: 9170
+    censor: none
+    limit: null
+    n: null
+    sd: 630
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      final_ph: 5.8
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: none (12 ml water)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated
+- id: madruga1995-11
+  odorant: Hexanal
+  lever_class: pH
+  lever: initial pH of minced beef (adjusted with 1 M HCl before cooking), 4-level ladder 4.0/4.5/5.0/5.6
+  focal: false
+  location: Table 2 (p. 308); final pH Table 1
+  digitised: false
+  unit: mg/kg meat (approximate, vs internal standard)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 4
+    lever_value: 4.0
+    value: 1930
+    censor: none
+    limit: null
+    n: null
+    sd: 360
+    conditions:
+      ph: 4.0
+      ph_basis: initial
+      final_ph: 4.4
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: 12 ml (in 12 ml added solution)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated
+  - label: pH 4.5
+    lever_value: 4.5
+    value: 1630
+    censor: none
+    limit: null
+    n: null
+    sd: 650
+    conditions:
+      ph: 4.5
+      ph_basis: initial
+      final_ph: 4.9
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: 7.2 ml (in 12 ml added solution)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated
+  - label: pH 5
+    lever_value: 5.0
+    value: 1180
+    censor: none
+    limit: null
+    n: null
+    sd: 350
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 5.4
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: 3 ml (in 12 ml added solution)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated
+  - label: pH 5.6
+    lever_value: 5.6
+    value: 1140
+    censor: none
+    limit: null
+    n: null
+    sd: 680
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      final_ph: 5.8
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: none (12 ml water)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated
+- id: madruga1995-12
+  odorant: Heptanal
+  lever_class: pH
+  lever: initial pH of minced beef (adjusted with 1 M HCl before cooking), 4-level ladder 4.0/4.5/5.0/5.6
+  focal: false
+  location: Table 2 (p. 308); final pH Table 1
+  digitised: false
+  unit: mg/kg meat (approximate, vs internal standard)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 4
+    lever_value: 4.0
+    value: 8220
+    censor: none
+    limit: null
+    n: null
+    sd: 2640
+    conditions:
+      ph: 4.0
+      ph_basis: initial
+      final_ph: 4.4
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: 12 ml (in 12 ml added solution)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated
+  - label: pH 4.5
+    lever_value: 4.5
+    value: 9910
+    censor: none
+    limit: null
+    n: null
+    sd: 2780
+    conditions:
+      ph: 4.5
+      ph_basis: initial
+      final_ph: 4.9
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: 7.2 ml (in 12 ml added solution)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated
+  - label: pH 5
+    lever_value: 5.0
+    value: 7600
+    censor: none
+    limit: null
+    n: null
+    sd: 3960
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 5.4
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: 3 ml (in 12 ml added solution)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated
+  - label: pH 5.6
+    lever_value: 5.6
+    value: 3220
+    censor: none
+    limit: null
+    n: null
+    sd: 2170
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      final_ph: 5.8
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: none (12 ml water)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated
+- id: madruga1995-13
+  odorant: Octanal
+  lever_class: pH
+  lever: initial pH of minced beef (adjusted with 1 M HCl before cooking), 4-level ladder 4.0/4.5/5.0/5.6
+  focal: false
+  location: Table 2 (p. 308); final pH Table 1
+  digitised: false
+  unit: mg/kg meat (approximate, vs internal standard)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 4
+    lever_value: 4.0
+    value: 37090
+    censor: none
+    limit: null
+    n: null
+    sd: 2720
+    conditions:
+      ph: 4.0
+      ph_basis: initial
+      final_ph: 4.4
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: 12 ml (in 12 ml added solution)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated
+  - label: pH 4.5
+    lever_value: 4.5
+    value: 38350
+    censor: none
+    limit: null
+    n: null
+    sd: 2610
+    conditions:
+      ph: 4.5
+      ph_basis: initial
+      final_ph: 4.9
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: 7.2 ml (in 12 ml added solution)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated
+  - label: pH 5
+    lever_value: 5.0
+    value: 36880
+    censor: none
+    limit: null
+    n: null
+    sd: 2470
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 5.4
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: 3 ml (in 12 ml added solution)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated
+  - label: pH 5.6
+    lever_value: 5.6
+    value: 33630
+    censor: none
+    limit: null
+    n: null
+    sd: 3930
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      final_ph: 5.8
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: none (12 ml water)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated
+- id: madruga1995-14
+  odorant: Nonanal
+  lever_class: pH
+  lever: initial pH of minced beef (adjusted with 1 M HCl before cooking), 4-level ladder 4.0/4.5/5.0/5.6
+  focal: false
+  location: Table 2 (p. 308); final pH Table 1
+  digitised: false
+  unit: mg/kg meat (approximate, vs internal standard)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 4
+    lever_value: 4.0
+    value: 53110
+    censor: none
+    limit: null
+    n: null
+    sd: 3890
+    conditions:
+      ph: 4.0
+      ph_basis: initial
+      final_ph: 4.4
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: 12 ml (in 12 ml added solution)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated
+  - label: pH 4.5
+    lever_value: 4.5
+    value: 50680
+    censor: none
+    limit: null
+    n: null
+    sd: 3850
+    conditions:
+      ph: 4.5
+      ph_basis: initial
+      final_ph: 4.9
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: 7.2 ml (in 12 ml added solution)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated
+  - label: pH 5
+    lever_value: 5.0
+    value: 54710
+    censor: none
+    limit: null
+    n: null
+    sd: 2870
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 5.4
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: 3 ml (in 12 ml added solution)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated
+  - label: pH 5.6
+    lever_value: 5.6
+    value: 56110
+    censor: none
+    limit: null
+    n: null
+    sd: 2200
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      final_ph: 5.8
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: none (12 ml water)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated
+- id: madruga1995-15
+  odorant: E-2-Nonenal
+  lever_class: pH
+  lever: initial pH of minced beef (adjusted with 1 M HCl before cooking), 4-level ladder 4.0/4.5/5.0/5.6
+  focal: false
+  location: Table 2 (p. 308); final pH Table 1
+  digitised: false
+  unit: mg/kg meat (approximate, vs internal standard)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 4
+    lever_value: 4.0
+    value: 6220
+    censor: none
+    limit: null
+    n: null
+    sd: 3770
+    conditions:
+      ph: 4.0
+      ph_basis: initial
+      final_ph: 4.4
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: 12 ml (in 12 ml added solution)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated
+  - label: pH 4.5
+    lever_value: 4.5
+    value: 6800
+    censor: none
+    limit: null
+    n: null
+    sd: 4520
+    conditions:
+      ph: 4.5
+      ph_basis: initial
+      final_ph: 4.9
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: 7.2 ml (in 12 ml added solution)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated
+  - label: pH 5
+    lever_value: 5.0
+    value: 4320
+    censor: none
+    limit: null
+    n: null
+    sd: 3910
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 5.4
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: 3 ml (in 12 ml added solution)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated
+  - label: pH 5.6
+    lever_value: 5.6
+    value: 1240
+    censor: none
+    limit: null
+    n: null
+    sd: 910
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      final_ph: 5.8
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: none (12 ml water)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated
+- id: madruga1995-16
+  odorant: E,E-2,4-Decadienal
+  lever_class: pH
+  lever: initial pH of minced beef (adjusted with 1 M HCl before cooking), 4-level ladder 4.0/4.5/5.0/5.6
+  focal: false
+  location: Table 2 (p. 308); final pH Table 1
+  digitised: false
+  unit: mg/kg meat (approximate, vs internal standard)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 4
+    lever_value: 4.0
+    value: 1980
+    censor: none
+    limit: null
+    n: null
+    sd: 1110
+    conditions:
+      ph: 4.0
+      ph_basis: initial
+      final_ph: 4.4
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: 12 ml (in 12 ml added solution)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated
+  - label: pH 4.5
+    lever_value: 4.5
+    value: 1160
+    censor: none
+    limit: null
+    n: null
+    sd: 710
+    conditions:
+      ph: 4.5
+      ph_basis: initial
+      final_ph: 4.9
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: 7.2 ml (in 12 ml added solution)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated
+  - label: pH 5
+    lever_value: 5.0
+    value: 770
+    censor: none
+    limit: null
+    n: null
+    sd: 790
+    conditions:
+      ph: 5.0
+      ph_basis: initial
+      final_ph: 5.4
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: 3 ml (in 12 ml added solution)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated
+  - label: pH 5.6
+    lever_value: 5.6
+    value: 580
+    censor: none
+    limit: null
+    n: null
+    sd: 360
+    conditions:
+      ph: 5.6
+      ph_basis: initial
+      final_ph: 5.8
+      final_ph_location: Table 1
+      temp_C: 140
+      time_min: 30
+      precursors:
+        beef (M. psoas major): 100 g
+        1 M HCl: none (12 ml water)
+      buffer: none
+      matrix: meat (minced beef, M. psoas major)
+      headspace: sealed, unstated

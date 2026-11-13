@@ -1,0 +1,323 @@
+# Reader B, step 9 keying (PREREG secs. 3 - 4, A1 - A6). Key what the source prints.
+source: whitfield2001
+pdf: data/articles/whitfield2001.pdf
+reader: b
+scope_note: 'Sulfur-source contrast only (HMF + cysteine vs HMF + H2S, 0.5 M phosphate pH 6.5, 140 C 60 min). Duplicates printed;
+  arm value = mean (methylpyrazine 3,2; 2,5/2,6-DMP 16,11; trimethylpyrazine 10,7; 2-ethyl-3,6-DMP 3,2); 2,3-dimethylpyrazine
+  cysteine duplicates ''2, nd'' keyed as 2 with n 1; H2S arms nd at printed LOD ~0.1. Methods text for the H2S mixture literally
+  reads ''1 mL of a solution containing 12.1 mg of cysteine'' + 1 mL H2S; keyed as HMF + H2S per title, abstract and Table
+  1 heading. Table 2 pH 4.5 columns come from ref 8 (whitfield1999): cross-paper, not keyed. No final pH printed. Not on lists:
+  2-ethyl-(5 or 6)-methylpyrazine, thiazoles, oxazoles, 3-mercaptobutan-2-one, 3-(2-methyl-3-furyldithio)-2-butanone.'
+contrasts:
+- id: whitfield2001-1
+  odorant: methylpyrazine
+  lever_class: sulfur source
+  lever: cysteine vs hydrogen sulfide reacted with HMF
+  focal: true
+  location: Table 1 (no. 8)
+  digitised: false
+  unit: ug/10 mg of HMF (approximate, vs 100 ug methyl decanoate internal standard, response factors 1)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: cysteine
+    lever_value: cysteine
+    value: 2.5
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        HMF: 11.4 mg (0.1 M, 1 mL)
+        cysteine: 12.1 mg (0.1 M, 1 mL)
+      buffer: 0.5 M phosphate pH 6.5
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: hydrogen sulfide
+    lever_value: hydrogen sulfide
+    value: null
+    censor: nd_with_limit
+    limit: 0.1
+    n: 2
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        HMF: 11.4 mg (0.1 M, 1 mL)
+        hydrogen sulfide: ~6.6 mg (saturated ~0.2 M, 1 mL)
+      buffer: 0.5 M phosphate pH 6.5
+      matrix: buffer
+      headspace: sealed, unstated
+- id: whitfield2001-2
+  odorant: 2,5(or 2,6)-dimethylpyrazine
+  lever_class: sulfur source
+  lever: cysteine vs hydrogen sulfide reacted with HMF
+  focal: true
+  location: Table 1 (no. 18)
+  digitised: false
+  unit: ug/10 mg of HMF (approximate, vs 100 ug methyl decanoate internal standard, response factors 1)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: cysteine
+    lever_value: cysteine
+    value: 13.5
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        HMF: 11.4 mg (0.1 M, 1 mL)
+        cysteine: 12.1 mg (0.1 M, 1 mL)
+      buffer: 0.5 M phosphate pH 6.5
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: hydrogen sulfide
+    lever_value: hydrogen sulfide
+    value: null
+    censor: nd_with_limit
+    limit: 0.1
+    n: 2
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        HMF: 11.4 mg (0.1 M, 1 mL)
+        hydrogen sulfide: ~6.6 mg (saturated ~0.2 M, 1 mL)
+      buffer: 0.5 M phosphate pH 6.5
+      matrix: buffer
+      headspace: sealed, unstated
+- id: whitfield2001-3
+  odorant: 2,3-dimethylpyrazine
+  lever_class: sulfur source
+  lever: cysteine vs hydrogen sulfide reacted with HMF
+  focal: true
+  location: Table 1 (no. 20)
+  digitised: false
+  unit: ug/10 mg of HMF (approximate, vs 100 ug methyl decanoate internal standard, response factors 1)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: cysteine
+    lever_value: cysteine
+    value: 2
+    censor: none
+    limit: null
+    n: 1
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        HMF: 11.4 mg (0.1 M, 1 mL)
+        cysteine: 12.1 mg (0.1 M, 1 mL)
+      buffer: 0.5 M phosphate pH 6.5
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: hydrogen sulfide
+    lever_value: hydrogen sulfide
+    value: null
+    censor: nd_with_limit
+    limit: 0.1
+    n: 2
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        HMF: 11.4 mg (0.1 M, 1 mL)
+        hydrogen sulfide: ~6.6 mg (saturated ~0.2 M, 1 mL)
+      buffer: 0.5 M phosphate pH 6.5
+      matrix: buffer
+      headspace: sealed, unstated
+- id: whitfield2001-4
+  odorant: 2,3,5-trimethylpyrazine
+  lever_class: sulfur source
+  lever: cysteine vs hydrogen sulfide reacted with HMF
+  focal: true
+  location: Table 1 (no. 31)
+  digitised: false
+  unit: ug/10 mg of HMF (approximate, vs 100 ug methyl decanoate internal standard, response factors 1)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: cysteine
+    lever_value: cysteine
+    value: 8.5
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        HMF: 11.4 mg (0.1 M, 1 mL)
+        cysteine: 12.1 mg (0.1 M, 1 mL)
+      buffer: 0.5 M phosphate pH 6.5
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: hydrogen sulfide
+    lever_value: hydrogen sulfide
+    value: null
+    censor: nd_with_limit
+    limit: 0.1
+    n: 2
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        HMF: 11.4 mg (0.1 M, 1 mL)
+        hydrogen sulfide: ~6.6 mg (saturated ~0.2 M, 1 mL)
+      buffer: 0.5 M phosphate pH 6.5
+      matrix: buffer
+      headspace: sealed, unstated
+- id: whitfield2001-5
+  odorant: 2-ethyl-3,6-dimethylpyrazine
+  lever_class: sulfur source
+  lever: cysteine vs hydrogen sulfide reacted with HMF
+  focal: true
+  location: Table 1 (no. 37)
+  digitised: false
+  unit: ug/10 mg of HMF (approximate, vs 100 ug methyl decanoate internal standard, response factors 1)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: cysteine
+    lever_value: cysteine
+    value: 2.5
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        HMF: 11.4 mg (0.1 M, 1 mL)
+        cysteine: 12.1 mg (0.1 M, 1 mL)
+      buffer: 0.5 M phosphate pH 6.5
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: hydrogen sulfide
+    lever_value: hydrogen sulfide
+    value: null
+    censor: nd_with_limit
+    limit: 0.1
+    n: 2
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        HMF: 11.4 mg (0.1 M, 1 mL)
+        hydrogen sulfide: ~6.6 mg (saturated ~0.2 M, 1 mL)
+      buffer: 0.5 M phosphate pH 6.5
+      matrix: buffer
+      headspace: sealed, unstated
+- id: whitfield2001-6
+  odorant: pyrazines (class total)
+  lever_class: sulfur source
+  lever: cysteine vs hydrogen sulfide reacted with HMF
+  focal: true
+  location: Table 2 (pH 6.5 columns)
+  digitised: false
+  unit: ug/10 mg of HMF (approximate, vs 100 ug methyl decanoate internal standard, response factors 1)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: cysteine
+    lever_value: cysteine
+    value: 36
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        HMF: 11.4 mg (0.1 M, 1 mL)
+        cysteine: 12.1 mg (0.1 M, 1 mL)
+      buffer: 0.5 M phosphate pH 6.5
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: hydrogen sulfide
+    lever_value: hydrogen sulfide
+    value: null
+    censor: nd_with_limit
+    limit: 0.1
+    n: 2
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        HMF: 11.4 mg (0.1 M, 1 mL)
+        hydrogen sulfide: ~6.6 mg (saturated ~0.2 M, 1 mL)
+      buffer: 0.5 M phosphate pH 6.5
+      matrix: buffer
+      headspace: sealed, unstated

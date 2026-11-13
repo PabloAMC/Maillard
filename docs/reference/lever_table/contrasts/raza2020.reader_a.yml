@@ -1,0 +1,7196 @@
+# PREREG secs. 3 - 4, reader A (blind). Key what the source prints; do not judge it.
+source: raza2020
+pdf: data/articles/raza2020.pdf
+reader: a
+scope_note: 'Face-centred CCD (21 runs). Keyed: the four axial ladders (axial-centre-axial; the five centre replicates MRP-2/3/4/8/11
+  entered as separate arms) and the four factorial pairs that differ only in cysteine. No other single-factor pair exists.
+  Heating time not printed. pH set with NaOH/HCl (materials list, no buffer) -> adjusted_unbuffered, reader inference. Quantified
+  by external standards -> absolute. ''0±0'' cells (2,5-dimethylpyrazine MRP-10/11) keyed nd_no_limit. ND keyed nd_no_limit;
+  ladders with all arms ND not keyed. 3,3''-Dithiobis[2-methylfuran] keyed as bis(2-methyl-3-furyl) disulfide. No final pH
+  printed.'
+contrasts:
+- id: raza2020-1
+  odorant: 2-Acetylthiazole
+  lever_class: temperature
+  lever: Maillard temperature
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-9
+    lever_value: 100
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-2 (centre point)
+    lever_value: 130
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-3 (centre point)
+    lever_value: 130
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-4 (centre point)
+    lever_value: 130
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-8 (centre point)
+    lever_value: 130
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-11 (centre point)
+    lever_value: 130
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-15
+    lever_value: 160
+    value: 3.64
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.29
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 160
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-2
+  odorant: 2-Acetylthiazole
+  lever_class: precursor dose
+  lever: added % of ribose
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-12
+    lever_value: 0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 0 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-2 (centre point)
+    lever_value: 5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-3 (centre point)
+    lever_value: 5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-4 (centre point)
+    lever_value: 5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-8 (centre point)
+    lever_value: 5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-11 (centre point)
+    lever_value: 5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-10
+    lever_value: 10
+    value: 0.62
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.04
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 10 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-3
+  odorant: 2-Acetylthiazole
+  lever_class: precursor dose
+  lever: added % of cysteine (160 C, 0 % ribose, pH 6.50)
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-6
+    lever_value: 0
+    value: 2.22
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.263
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 160
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 0 % added
+        cysteine: 0 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-5
+    lever_value: 2
+    value: 2.75
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.33
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 160
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 0 % added
+        cysteine: 2 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-4
+  odorant: 2-Acetylthiazole
+  lever_class: precursor dose
+  lever: added % of cysteine (160 C, 10 % ribose, pH 4.80)
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-7
+    lever_value: 0
+    value: 1.64
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.18
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 160
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 10 % added
+        cysteine: 0 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-16
+    lever_value: 2
+    value: 2.31
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.17
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 160
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 10 % added
+        cysteine: 2 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-5
+  odorant: Methylpyrazine
+  lever_class: pH
+  lever: initial pH
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-21
+    lever_value: 4.8
+    value: 1.22
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.02
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-2 (centre point)
+    lever_value: 5.65
+    value: 1.73
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.024
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-3 (centre point)
+    lever_value: 5.65
+    value: 1.62
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.08
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-4 (centre point)
+    lever_value: 5.65
+    value: 2.801
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.59
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-8 (centre point)
+    lever_value: 5.65
+    value: 2.57
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.21
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-11 (centre point)
+    lever_value: 5.65
+    value: 1.11
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-1
+    lever_value: 6.5
+    value: 1.84
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.12
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-6
+  odorant: Methylpyrazine
+  lever_class: temperature
+  lever: Maillard temperature
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-9
+    lever_value: 100
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-2 (centre point)
+    lever_value: 130
+    value: 1.73
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.024
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-3 (centre point)
+    lever_value: 130
+    value: 1.62
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.08
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-4 (centre point)
+    lever_value: 130
+    value: 2.801
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.59
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-8 (centre point)
+    lever_value: 130
+    value: 2.57
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.21
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-11 (centre point)
+    lever_value: 130
+    value: 1.11
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-15
+    lever_value: 160
+    value: 4.07
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.27
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 160
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-7
+  odorant: Methylpyrazine
+  lever_class: precursor dose
+  lever: added % of ribose
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-12
+    lever_value: 0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 0 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-2 (centre point)
+    lever_value: 5
+    value: 1.73
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.024
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-3 (centre point)
+    lever_value: 5
+    value: 1.62
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.08
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-4 (centre point)
+    lever_value: 5
+    value: 2.801
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.59
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-8 (centre point)
+    lever_value: 5
+    value: 2.57
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.21
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-11 (centre point)
+    lever_value: 5
+    value: 1.11
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-10
+    lever_value: 10
+    value: 2.93
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.26
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 10 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-8
+  odorant: Methylpyrazine
+  lever_class: precursor dose
+  lever: added % of cysteine
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-20
+    lever_value: 0
+    value: 2.09
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.09
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 0 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-2 (centre point)
+    lever_value: 1
+    value: 1.73
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.024
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-3 (centre point)
+    lever_value: 1
+    value: 1.62
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.08
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-4 (centre point)
+    lever_value: 1
+    value: 2.801
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.59
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-8 (centre point)
+    lever_value: 1
+    value: 2.57
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.21
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-11 (centre point)
+    lever_value: 1
+    value: 1.11
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-17
+    lever_value: 2
+    value: 2.27
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.11
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 2 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-9
+  odorant: Methylpyrazine
+  lever_class: precursor dose
+  lever: added % of cysteine (160 C, 0 % ribose, pH 6.50)
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-6
+    lever_value: 0
+    value: 2.09
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.15
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 160
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 0 % added
+        cysteine: 0 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-5
+    lever_value: 2
+    value: 2.59
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.224
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 160
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 0 % added
+        cysteine: 2 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-10
+  odorant: Methylpyrazine
+  lever_class: precursor dose
+  lever: added % of cysteine (160 C, 10 % ribose, pH 4.80)
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-7
+    lever_value: 0
+    value: 3.32
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.32
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 160
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 10 % added
+        cysteine: 0 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-16
+    lever_value: 2
+    value: 920.02
+    censor: none
+    limit: null
+    n: 3
+    sd: 90.17
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 160
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 10 % added
+        cysteine: 2 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-11
+  odorant: Methylpyrazine
+  lever_class: precursor dose
+  lever: added % of cysteine (100 C, 0 % ribose, pH 4.80)
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-14
+    lever_value: 0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 0 % added
+        cysteine: 0 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-18
+    lever_value: 2
+    value: 1.31
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.02
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 0 % added
+        cysteine: 2 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-12
+  odorant: Methylpyrazine
+  lever_class: precursor dose
+  lever: added % of cysteine (100 C, 10 % ribose, pH 6.50)
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-13
+    lever_value: 0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 10 % added
+        cysteine: 0 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-19
+    lever_value: 2
+    value: 1.89
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.07
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 10 % added
+        cysteine: 2 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-13
+  odorant: 2,5-dimethylpyrazine
+  lever_class: pH
+  lever: initial pH
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-21
+    lever_value: 4.8
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-2 (centre point)
+    lever_value: 5.65
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-3 (centre point)
+    lever_value: 5.65
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-4 (centre point)
+    lever_value: 5.65
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-8 (centre point)
+    lever_value: 5.65
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-11 (centre point)
+    lever_value: 5.65
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-1
+    lever_value: 6.5
+    value: 1.35
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.17
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-14
+  odorant: 2,5-dimethylpyrazine
+  lever_class: temperature
+  lever: Maillard temperature
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-9
+    lever_value: 100
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-2 (centre point)
+    lever_value: 130
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-3 (centre point)
+    lever_value: 130
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-4 (centre point)
+    lever_value: 130
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-8 (centre point)
+    lever_value: 130
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-11 (centre point)
+    lever_value: 130
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-15
+    lever_value: 160
+    value: 8.71
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.76
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 160
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-15
+  odorant: 2,5-dimethylpyrazine
+  lever_class: precursor dose
+  lever: added % of cysteine (160 C, 0 % ribose, pH 6.50)
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-6
+    lever_value: 0
+    value: 4.63
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.63
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 160
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 0 % added
+        cysteine: 0 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-5
+    lever_value: 2
+    value: 5.09
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.695
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 160
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 0 % added
+        cysteine: 2 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-16
+  odorant: 2,5-dimethylpyrazine
+  lever_class: precursor dose
+  lever: added % of cysteine (100 C, 0 % ribose, pH 4.80)
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-14
+    lever_value: 0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 0 % added
+        cysteine: 0 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-18
+    lever_value: 2
+    value: 1.82
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.15
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 0 % added
+        cysteine: 2 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-17
+  odorant: Trimethylpyrazine
+  lever_class: pH
+  lever: initial pH
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-21
+    lever_value: 4.8
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-2 (centre point)
+    lever_value: 5.65
+    value: 199.76
+    censor: none
+    limit: null
+    n: 3
+    sd: 25.96
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-3 (centre point)
+    lever_value: 5.65
+    value: 204.45
+    censor: none
+    limit: null
+    n: 3
+    sd: 26.61
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-4 (centre point)
+    lever_value: 5.65
+    value: 242.79
+    censor: none
+    limit: null
+    n: 3
+    sd: 75.21
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-8 (centre point)
+    lever_value: 5.65
+    value: 136.51
+    censor: none
+    limit: null
+    n: 3
+    sd: 17.15
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-11 (centre point)
+    lever_value: 5.65
+    value: 196.63
+    censor: none
+    limit: null
+    n: 3
+    sd: 25.52
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-1
+    lever_value: 6.5
+    value: 76.96
+    censor: none
+    limit: null
+    n: 3
+    sd: 8.86
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-18
+  odorant: Trimethylpyrazine
+  lever_class: temperature
+  lever: Maillard temperature
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-9
+    lever_value: 100
+    value: 135.69
+    censor: none
+    limit: null
+    n: 3
+    sd: 17.04
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-2 (centre point)
+    lever_value: 130
+    value: 199.76
+    censor: none
+    limit: null
+    n: 3
+    sd: 25.96
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-3 (centre point)
+    lever_value: 130
+    value: 204.45
+    censor: none
+    limit: null
+    n: 3
+    sd: 26.61
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-4 (centre point)
+    lever_value: 130
+    value: 242.79
+    censor: none
+    limit: null
+    n: 3
+    sd: 75.21
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-8 (centre point)
+    lever_value: 130
+    value: 136.51
+    censor: none
+    limit: null
+    n: 3
+    sd: 17.15
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-11 (centre point)
+    lever_value: 130
+    value: 196.63
+    censor: none
+    limit: null
+    n: 3
+    sd: 25.52
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-15
+    lever_value: 160
+    value: 477.54
+    censor: none
+    limit: null
+    n: 3
+    sd: 41.52
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 160
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-19
+  odorant: Trimethylpyrazine
+  lever_class: precursor dose
+  lever: added % of ribose
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-12
+    lever_value: 0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 0 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-2 (centre point)
+    lever_value: 5
+    value: 199.76
+    censor: none
+    limit: null
+    n: 3
+    sd: 25.96
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-3 (centre point)
+    lever_value: 5
+    value: 204.45
+    censor: none
+    limit: null
+    n: 3
+    sd: 26.61
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-4 (centre point)
+    lever_value: 5
+    value: 242.79
+    censor: none
+    limit: null
+    n: 3
+    sd: 75.21
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-8 (centre point)
+    lever_value: 5
+    value: 136.51
+    censor: none
+    limit: null
+    n: 3
+    sd: 17.15
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-11 (centre point)
+    lever_value: 5
+    value: 196.63
+    censor: none
+    limit: null
+    n: 3
+    sd: 25.52
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-10
+    lever_value: 10
+    value: 114.72
+    censor: none
+    limit: null
+    n: 3
+    sd: 14.12
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 10 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-20
+  odorant: Trimethylpyrazine
+  lever_class: precursor dose
+  lever: added % of cysteine
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-20
+    lever_value: 0
+    value: 151.64
+    censor: none
+    limit: null
+    n: 3
+    sd: 12.37
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 0 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-2 (centre point)
+    lever_value: 1
+    value: 199.76
+    censor: none
+    limit: null
+    n: 3
+    sd: 25.96
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-3 (centre point)
+    lever_value: 1
+    value: 204.45
+    censor: none
+    limit: null
+    n: 3
+    sd: 26.61
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-4 (centre point)
+    lever_value: 1
+    value: 242.79
+    censor: none
+    limit: null
+    n: 3
+    sd: 75.21
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-8 (centre point)
+    lever_value: 1
+    value: 136.51
+    censor: none
+    limit: null
+    n: 3
+    sd: 17.15
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-11 (centre point)
+    lever_value: 1
+    value: 196.63
+    censor: none
+    limit: null
+    n: 3
+    sd: 25.52
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-17
+    lever_value: 2
+    value: 116.64
+    censor: none
+    limit: null
+    n: 3
+    sd: 9.24
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 2 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-21
+  odorant: Trimethylpyrazine
+  lever_class: precursor dose
+  lever: added % of cysteine (160 C, 0 % ribose, pH 6.50)
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-6
+    lever_value: 0
+    value: 475.91
+    censor: none
+    limit: null
+    n: 3
+    sd: 64.41
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 160
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 0 % added
+        cysteine: 0 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-5
+    lever_value: 2
+    value: 463.05
+    censor: none
+    limit: null
+    n: 3
+    sd: 62.62
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 160
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 0 % added
+        cysteine: 2 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-22
+  odorant: Trimethylpyrazine
+  lever_class: precursor dose
+  lever: added % of cysteine (160 C, 10 % ribose, pH 4.80)
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-7
+    lever_value: 0
+    value: 363.99
+    censor: none
+    limit: null
+    n: 3
+    sd: 48.83
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 160
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 10 % added
+        cysteine: 0 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-16
+    lever_value: 2
+    value: 488.81
+    censor: none
+    limit: null
+    n: 3
+    sd: 42.53
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 160
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 10 % added
+        cysteine: 2 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-23
+  odorant: Trimethylpyrazine
+  lever_class: precursor dose
+  lever: added % of cysteine (100 C, 0 % ribose, pH 4.80)
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-14
+    lever_value: 0
+    value: 135.28
+    censor: none
+    limit: null
+    n: 3
+    sd: 21.97
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 0 % added
+        cysteine: 0 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-18
+    lever_value: 2
+    value: 152.52
+    censor: none
+    limit: null
+    n: 3
+    sd: 12.45
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 0 % added
+        cysteine: 2 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-24
+  odorant: Trimethylpyrazine
+  lever_class: precursor dose
+  lever: added % of cysteine (100 C, 10 % ribose, pH 6.50)
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-13
+    lever_value: 0
+    value: 128.08
+    censor: none
+    limit: null
+    n: 3
+    sd: 15.98
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 10 % added
+        cysteine: 0 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-19
+    lever_value: 2
+    value: 198.99
+    censor: none
+    limit: null
+    n: 3
+    sd: 16.61
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 10 % added
+        cysteine: 2 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-25
+  odorant: 2-Methyl-3-furanthiol
+  lever_class: pH
+  lever: initial pH
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-21
+    lever_value: 4.8
+    value: 2.24
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.09
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-2 (centre point)
+    lever_value: 5.65
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-3 (centre point)
+    lever_value: 5.65
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-4 (centre point)
+    lever_value: 5.65
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-8 (centre point)
+    lever_value: 5.65
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-11 (centre point)
+    lever_value: 5.65
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-1
+    lever_value: 6.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-26
+  odorant: 2-Methyl-3-furanthiol
+  lever_class: temperature
+  lever: Maillard temperature
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-9
+    lever_value: 100
+    value: 4.81
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.51
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-2 (centre point)
+    lever_value: 130
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-3 (centre point)
+    lever_value: 130
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-4 (centre point)
+    lever_value: 130
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-8 (centre point)
+    lever_value: 130
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-11 (centre point)
+    lever_value: 130
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-15
+    lever_value: 160
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 160
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-27
+  odorant: 2-Methyl-3-furanthiol
+  lever_class: precursor dose
+  lever: added % of cysteine
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-20
+    lever_value: 0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 0 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-2 (centre point)
+    lever_value: 1
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-3 (centre point)
+    lever_value: 1
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-4 (centre point)
+    lever_value: 1
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-8 (centre point)
+    lever_value: 1
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-11 (centre point)
+    lever_value: 1
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-17
+    lever_value: 2
+    value: 2.56
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.12
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 2 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-28
+  odorant: 2-Methyl-3-furanthiol
+  lever_class: precursor dose
+  lever: added % of cysteine (160 C, 10 % ribose, pH 4.80)
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-7
+    lever_value: 0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 160
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 10 % added
+        cysteine: 0 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-16
+    lever_value: 2
+    value: 1.31
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 160
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 10 % added
+        cysteine: 2 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-29
+  odorant: 2-Methyl-3-furanthiol
+  lever_class: precursor dose
+  lever: added % of cysteine (100 C, 0 % ribose, pH 4.80)
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-14
+    lever_value: 0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 0 % added
+        cysteine: 0 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-18
+    lever_value: 2
+    value: 2.03
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.08
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 0 % added
+        cysteine: 2 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-30
+  odorant: 2-Methyl-3-furanthiol
+  lever_class: precursor dose
+  lever: added % of cysteine (100 C, 10 % ribose, pH 6.50)
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-13
+    lever_value: 0
+    value: 2.28
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.15
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 10 % added
+        cysteine: 0 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-19
+    lever_value: 2
+    value: 3.32
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.19
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 10 % added
+        cysteine: 2 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-31
+  odorant: 2-Furfurylthiol
+  lever_class: temperature
+  lever: Maillard temperature
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-9
+    lever_value: 100
+    value: 3.61
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.32
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-2 (centre point)
+    lever_value: 130
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-3 (centre point)
+    lever_value: 130
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-4 (centre point)
+    lever_value: 130
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-8 (centre point)
+    lever_value: 130
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-11 (centre point)
+    lever_value: 130
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-15
+    lever_value: 160
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 160
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-32
+  odorant: 2-Furfurylthiol
+  lever_class: precursor dose
+  lever: added % of cysteine (100 C, 10 % ribose, pH 6.50)
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-13
+    lever_value: 0
+    value: 3.88
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.36
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 10 % added
+        cysteine: 0 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-19
+    lever_value: 2
+    value: 4.04
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.246
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 10 % added
+        cysteine: 2 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-33
+  odorant: 3,3'-Dithiobis[2-methyl-furan] (bis(2-methyl-3-furyl) disulfide)
+  lever_class: pH
+  lever: initial pH
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-21
+    lever_value: 4.8
+    value: 1.31
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.02
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-2 (centre point)
+    lever_value: 5.65
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-3 (centre point)
+    lever_value: 5.65
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-4 (centre point)
+    lever_value: 5.65
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-8 (centre point)
+    lever_value: 5.65
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-11 (centre point)
+    lever_value: 5.65
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-1
+    lever_value: 6.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-34
+  odorant: 3,3'-Dithiobis[2-methyl-furan] (bis(2-methyl-3-furyl) disulfide)
+  lever_class: temperature
+  lever: Maillard temperature
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-9
+    lever_value: 100
+    value: 3.47
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.34
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-2 (centre point)
+    lever_value: 130
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-3 (centre point)
+    lever_value: 130
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-4 (centre point)
+    lever_value: 130
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-8 (centre point)
+    lever_value: 130
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-11 (centre point)
+    lever_value: 130
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-15
+    lever_value: 160
+    value: 2.77
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.15
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 160
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-35
+  odorant: 3,3'-Dithiobis[2-methyl-furan] (bis(2-methyl-3-furyl) disulfide)
+  lever_class: precursor dose
+  lever: added % of cysteine
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-20
+    lever_value: 0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 0 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-2 (centre point)
+    lever_value: 1
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-3 (centre point)
+    lever_value: 1
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-4 (centre point)
+    lever_value: 1
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-8 (centre point)
+    lever_value: 1
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-11 (centre point)
+    lever_value: 1
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-17
+    lever_value: 2
+    value: 1.25
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.023
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 2 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-36
+  odorant: 3,3'-Dithiobis[2-methyl-furan] (bis(2-methyl-3-furyl) disulfide)
+  lever_class: precursor dose
+  lever: added % of cysteine (100 C, 0 % ribose, pH 4.80)
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-14
+    lever_value: 0
+    value: 0.394
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.58
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 0 % added
+        cysteine: 0 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-18
+    lever_value: 2
+    value: 1.18
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 0 % added
+        cysteine: 2 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-37
+  odorant: 3,3'-Dithiobis[2-methyl-furan] (bis(2-methyl-3-furyl) disulfide)
+  lever_class: precursor dose
+  lever: added % of cysteine (100 C, 10 % ribose, pH 6.50)
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-13
+    lever_value: 0
+    value: 1.31
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.04
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 10 % added
+        cysteine: 0 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-19
+    lever_value: 2
+    value: 2.45
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.13
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 10 % added
+        cysteine: 2 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-38
+  odorant: Heptanal
+  lever_class: pH
+  lever: initial pH
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-21
+    lever_value: 4.8
+    value: 3.81
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.042
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-2 (centre point)
+    lever_value: 5.65
+    value: 3.359
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.06
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-3 (centre point)
+    lever_value: 5.65
+    value: 3.61
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.04
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-4 (centre point)
+    lever_value: 5.65
+    value: 3.89
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.1831
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-8 (centre point)
+    lever_value: 5.65
+    value: 3.57
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.03
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-11 (centre point)
+    lever_value: 5.65
+    value: 3.71
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.05
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-1
+    lever_value: 6.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-39
+  odorant: Heptanal
+  lever_class: temperature
+  lever: Maillard temperature
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-9
+    lever_value: 100
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-2 (centre point)
+    lever_value: 130
+    value: 3.359
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.06
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-3 (centre point)
+    lever_value: 130
+    value: 3.61
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.04
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-4 (centre point)
+    lever_value: 130
+    value: 3.89
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.1831
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-8 (centre point)
+    lever_value: 130
+    value: 3.57
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.03
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-11 (centre point)
+    lever_value: 130
+    value: 3.71
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.05
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-15
+    lever_value: 160
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 160
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-40
+  odorant: Heptanal
+  lever_class: precursor dose
+  lever: added % of ribose
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-12
+    lever_value: 0
+    value: 3.71
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.052
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 0 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-2 (centre point)
+    lever_value: 5
+    value: 3.359
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.06
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-3 (centre point)
+    lever_value: 5
+    value: 3.61
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.04
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-4 (centre point)
+    lever_value: 5
+    value: 3.89
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.1831
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-8 (centre point)
+    lever_value: 5
+    value: 3.57
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.03
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-11 (centre point)
+    lever_value: 5
+    value: 3.71
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.05
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-10
+    lever_value: 10
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 10 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-41
+  odorant: Heptanal
+  lever_class: precursor dose
+  lever: added % of cysteine
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-20
+    lever_value: 0
+    value: 3.51
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 0 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-2 (centre point)
+    lever_value: 1
+    value: 3.359
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.06
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-3 (centre point)
+    lever_value: 1
+    value: 3.61
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.04
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-4 (centre point)
+    lever_value: 1
+    value: 3.89
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.1831
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-8 (centre point)
+    lever_value: 1
+    value: 3.57
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.03
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-11 (centre point)
+    lever_value: 1
+    value: 3.71
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.05
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-17
+    lever_value: 2
+    value: 3.77
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.03
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 2 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-42
+  odorant: Heptanal
+  lever_class: precursor dose
+  lever: added % of cysteine (100 C, 10 % ribose, pH 6.50)
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-13
+    lever_value: 0
+    value: 3.74
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.057
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 10 % added
+        cysteine: 0 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-19
+    lever_value: 2
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 10 % added
+        cysteine: 2 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-43
+  odorant: Benzaldehyde
+  lever_class: pH
+  lever: initial pH
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-21
+    lever_value: 4.8
+    value: 7.17
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.62
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-2 (centre point)
+    lever_value: 5.65
+    value: 4.497
+    censor: none
+    limit: null
+    n: 3
+    sd: 2.14
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-3 (centre point)
+    lever_value: 5.65
+    value: 5.94
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.81
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-4 (centre point)
+    lever_value: 5.65
+    value: 6.93
+    censor: none
+    limit: null
+    n: 3
+    sd: 2.23
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-8 (centre point)
+    lever_value: 5.65
+    value: 4.49
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.59
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-11 (centre point)
+    lever_value: 5.65
+    value: 10.37
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.41
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-1
+    lever_value: 6.5
+    value: 3.13
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.41
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-44
+  odorant: Benzaldehyde
+  lever_class: temperature
+  lever: Maillard temperature
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-9
+    lever_value: 100
+    value: 4.01
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.531
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-2 (centre point)
+    lever_value: 130
+    value: 4.497
+    censor: none
+    limit: null
+    n: 3
+    sd: 2.14
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-3 (centre point)
+    lever_value: 130
+    value: 5.94
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.81
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-4 (centre point)
+    lever_value: 130
+    value: 6.93
+    censor: none
+    limit: null
+    n: 3
+    sd: 2.23
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-8 (centre point)
+    lever_value: 130
+    value: 4.49
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.59
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-11 (centre point)
+    lever_value: 130
+    value: 10.37
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.41
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-15
+    lever_value: 160
+    value: 5.02
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.43
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 160
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-45
+  odorant: Benzaldehyde
+  lever_class: precursor dose
+  lever: added % of ribose
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-12
+    lever_value: 0
+    value: 10.58
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.44
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 0 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-2 (centre point)
+    lever_value: 5
+    value: 4.497
+    censor: none
+    limit: null
+    n: 3
+    sd: 2.14
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-3 (centre point)
+    lever_value: 5
+    value: 5.94
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.81
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-4 (centre point)
+    lever_value: 5
+    value: 6.93
+    censor: none
+    limit: null
+    n: 3
+    sd: 2.23
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-8 (centre point)
+    lever_value: 5
+    value: 4.49
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.59
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-11 (centre point)
+    lever_value: 5
+    value: 10.37
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.41
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-10
+    lever_value: 10
+    value: 3.52
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.46
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 10 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-46
+  odorant: Benzaldehyde
+  lever_class: precursor dose
+  lever: added % of cysteine
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-20
+    lever_value: 0
+    value: 4.11
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.35
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 0 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-2 (centre point)
+    lever_value: 1
+    value: 4.497
+    censor: none
+    limit: null
+    n: 3
+    sd: 2.14
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-3 (centre point)
+    lever_value: 1
+    value: 5.94
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.81
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-4 (centre point)
+    lever_value: 1
+    value: 6.93
+    censor: none
+    limit: null
+    n: 3
+    sd: 2.23
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-8 (centre point)
+    lever_value: 1
+    value: 4.49
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.59
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-11 (centre point)
+    lever_value: 1
+    value: 10.37
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.41
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-17
+    lever_value: 2
+    value: 3.87
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.329
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 2 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-47
+  odorant: Benzaldehyde
+  lever_class: precursor dose
+  lever: added % of cysteine (160 C, 0 % ribose, pH 6.50)
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-6
+    lever_value: 0
+    value: 1.93
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.24
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 160
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 0 % added
+        cysteine: 0 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-5
+    lever_value: 2
+    value: 4.27
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.56
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 160
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 0 % added
+        cysteine: 2 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-48
+  odorant: Benzaldehyde
+  lever_class: precursor dose
+  lever: added % of cysteine (160 C, 10 % ribose, pH 4.80)
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-7
+    lever_value: 0
+    value: 5.22
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.69
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 160
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 10 % added
+        cysteine: 0 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-16
+    lever_value: 2
+    value: 4.72
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.41
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 160
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 10 % added
+        cysteine: 2 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-49
+  odorant: Benzaldehyde
+  lever_class: precursor dose
+  lever: added % of cysteine (100 C, 0 % ribose, pH 4.80)
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-14
+    lever_value: 0
+    value: 5.59
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.81
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 0 % added
+        cysteine: 0 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-18
+    lever_value: 2
+    value: 2.49
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.21
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 0 % added
+        cysteine: 2 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-50
+  odorant: Benzaldehyde
+  lever_class: precursor dose
+  lever: added % of cysteine (100 C, 10 % ribose, pH 6.50)
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-13
+    lever_value: 0
+    value: 2.13
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.26
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 10 % added
+        cysteine: 0 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-19
+    lever_value: 2
+    value: 2.61
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.214
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 10 % added
+        cysteine: 2 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-51
+  odorant: Nonanal
+  lever_class: pH
+  lever: initial pH
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-21
+    lever_value: 4.8
+    value: 0.65
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.05
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-2 (centre point)
+    lever_value: 5.65
+    value: 0.098
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.09
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-3 (centre point)
+    lever_value: 5.65
+    value: 0.69
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.09
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-4 (centre point)
+    lever_value: 5.65
+    value: 0.88
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.28
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-8 (centre point)
+    lever_value: 5.65
+    value: 0.65
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.08
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-11 (centre point)
+    lever_value: 5.65
+    value: 0.66
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.08
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-1
+    lever_value: 6.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-52
+  odorant: Nonanal
+  lever_class: temperature
+  lever: Maillard temperature
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-9
+    lever_value: 100
+    value: 0.62
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.08
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-2 (centre point)
+    lever_value: 130
+    value: 0.098
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.09
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-3 (centre point)
+    lever_value: 130
+    value: 0.69
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.09
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-4 (centre point)
+    lever_value: 130
+    value: 0.88
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.28
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-8 (centre point)
+    lever_value: 130
+    value: 0.65
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.08
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-11 (centre point)
+    lever_value: 130
+    value: 0.66
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.08
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-15
+    lever_value: 160
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 160
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-53
+  odorant: Nonanal
+  lever_class: precursor dose
+  lever: added % of ribose
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-12
+    lever_value: 0
+    value: 0.44
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.05
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 0 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-2 (centre point)
+    lever_value: 5
+    value: 0.098
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.09
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-3 (centre point)
+    lever_value: 5
+    value: 0.69
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.09
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-4 (centre point)
+    lever_value: 5
+    value: 0.88
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.28
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-8 (centre point)
+    lever_value: 5
+    value: 0.65
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.08
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-11 (centre point)
+    lever_value: 5
+    value: 0.66
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.08
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-10
+    lever_value: 10
+    value: 0.78
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.14
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 10 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-54
+  odorant: Nonanal
+  lever_class: precursor dose
+  lever: added % of cysteine
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-20
+    lever_value: 0
+    value: 0.53
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.04
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 0 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-2 (centre point)
+    lever_value: 1
+    value: 0.098
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.09
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-3 (centre point)
+    lever_value: 1
+    value: 0.69
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.09
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-4 (centre point)
+    lever_value: 1
+    value: 0.88
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.28
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-8 (centre point)
+    lever_value: 1
+    value: 0.65
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.08
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-11 (centre point)
+    lever_value: 1
+    value: 0.66
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.08
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-17
+    lever_value: 2
+    value: 0.72
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.062
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 2 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-55
+  odorant: Nonanal
+  lever_class: precursor dose
+  lever: added % of cysteine (160 C, 10 % ribose, pH 4.80)
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-7
+    lever_value: 0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 160
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 10 % added
+        cysteine: 0 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-16
+    lever_value: 2
+    value: 1.76
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.15
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 160
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 10 % added
+        cysteine: 2 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-56
+  odorant: Nonanal
+  lever_class: precursor dose
+  lever: added % of cysteine (100 C, 0 % ribose, pH 4.80)
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-14
+    lever_value: 0
+    value: 0.31
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.04
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 0 % added
+        cysteine: 0 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-18
+    lever_value: 2
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 0 % added
+        cysteine: 2 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-57
+  odorant: Nonanal
+  lever_class: precursor dose
+  lever: added % of cysteine (100 C, 10 % ribose, pH 6.50)
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-13
+    lever_value: 0
+    value: 0.382
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.049
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 10 % added
+        cysteine: 0 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-19
+    lever_value: 2
+    value: 0.77
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.06
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 10 % added
+        cysteine: 2 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-58
+  odorant: Pyrazine
+  lever_class: temperature
+  lever: Maillard temperature
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-9
+    lever_value: 100
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-2 (centre point)
+    lever_value: 130
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-3 (centre point)
+    lever_value: 130
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-4 (centre point)
+    lever_value: 130
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-8 (centre point)
+    lever_value: 130
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-11 (centre point)
+    lever_value: 130
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-15
+    lever_value: 160
+    value: 39.69
+    censor: none
+    limit: null
+    n: 3
+    sd: 2.95
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 160
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-59
+  odorant: Pyrazine
+  lever_class: precursor dose
+  lever: added % of ribose
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-12
+    lever_value: 0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 0 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-2 (centre point)
+    lever_value: 5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-3 (centre point)
+    lever_value: 5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-4 (centre point)
+    lever_value: 5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-8 (centre point)
+    lever_value: 5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-11 (centre point)
+    lever_value: 5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-10
+    lever_value: 10
+    value: 27.15
+    censor: none
+    limit: null
+    n: 3
+    sd: 2.85
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 10 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-60
+  odorant: Pyrazine
+  lever_class: precursor dose
+  lever: added % of cysteine
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-20
+    lever_value: 0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 0 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-2 (centre point)
+    lever_value: 1
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-3 (centre point)
+    lever_value: 1
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-4 (centre point)
+    lever_value: 1
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-8 (centre point)
+    lever_value: 1
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-11 (centre point)
+    lever_value: 1
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-17
+    lever_value: 2
+    value: 7.59
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.083
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 2 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-61
+  odorant: Pyrazine
+  lever_class: precursor dose
+  lever: added % of cysteine (160 C, 10 % ribose, pH 4.80)
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-7
+    lever_value: 0
+    value: 35.99
+    censor: none
+    limit: null
+    n: 3
+    sd: 4.08
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 160
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 10 % added
+        cysteine: 0 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-16
+    lever_value: 2
+    value: 23.04
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.46
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 160
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 10 % added
+        cysteine: 2 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-62
+  odorant: Tetramethylpyrazine
+  lever_class: temperature
+  lever: Maillard temperature
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-9
+    lever_value: 100
+    value: 63.82
+    censor: none
+    limit: null
+    n: 3
+    sd: 5.41
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-2 (centre point)
+    lever_value: 130
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-3 (centre point)
+    lever_value: 130
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-4 (centre point)
+    lever_value: 130
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-8 (centre point)
+    lever_value: 130
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-11 (centre point)
+    lever_value: 130
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 130
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-15
+    lever_value: 160
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.65
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 160
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 5 % added
+        cysteine: 1 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-63
+  odorant: Tetramethylpyrazine
+  lever_class: precursor dose
+  lever: added % of cysteine (160 C, 0 % ribose, pH 6.50)
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-6
+    lever_value: 0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 160
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 0 % added
+        cysteine: 0 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-5
+    lever_value: 2
+    value: 135.43
+    censor: none
+    limit: null
+    n: 3
+    sd: 15.37
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 160
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 0 % added
+        cysteine: 2 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-64
+  odorant: Tetramethylpyrazine
+  lever_class: precursor dose
+  lever: added % of cysteine (100 C, 0 % ribose, pH 4.80)
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-14
+    lever_value: 0
+    value: 39.96
+    censor: none
+    limit: null
+    n: 3
+    sd: 16.41
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 0 % added
+        cysteine: 0 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-18
+    lever_value: 2
+    value: 65.03
+    censor: none
+    limit: null
+    n: 3
+    sd: 3.58
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 0 % added
+        cysteine: 2 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+- id: raza2020-65
+  odorant: Tetramethylpyrazine
+  lever_class: precursor dose
+  lever: added % of cysteine (100 C, 10 % ribose, pH 6.50)
+  focal: true
+  location: Table 3 (Table 1 for the design)
+  digitised: false
+  unit: µg/ml
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: MRP-13
+    lever_value: 0
+    value: 67.34
+    censor: none
+    limit: null
+    n: 3
+    sd: 5.89
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 10 % added
+        cysteine: 0 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated
+  - label: MRP-19
+    lever_value: 2
+    value: 73.23
+    censor: none
+    limit: null
+    n: 3
+    sd: 4.31
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: null
+      precursors:
+        'GSH-enriched yeast extract : water': '1:5'
+        ribose: 10 % added
+        cysteine: 2 % added
+      buffer: none
+      matrix: yeast extract (glutathione-enriched)
+      headspace: unstated

@@ -6,7 +6,7 @@
       "family": "meaty thiols",
       "lever": "pH",
       "reading": "answered by the literature",
-      "why": "2-Furfurylthiol (FFT), pH 6-7.5, initial or label: -0.74 dex (new laboratory -1.95 to +0.50)",
+      "why": "2-Furfurylthiol (FFT), pH 6-7.5, initial or label: -0.57 dex (new laboratory -1.66 to +0.51)",
       "plant_protein_evidence": false,
       "design": null,
       "engine": "blank in v1 (step 5 adds)"
@@ -15,9 +15,9 @@
       "family": "meaty thiols",
       "lever": "temperature",
       "reading": "needs experiment",
-      "why": "keyed: best cell '2-Furfurylthiol (FFT), time >120 min' reads too few laboratories (1 laboratories)",
+      "why": "keyed: best cell '2-Furfurylthiol (FFT), time >120 min' reads too few laboratories (2 laboratories)",
       "plant_protein_evidence": false,
-      "design": "temperature: 120 / 140 / 160 C; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 2 new laboratory(ies) to reach 3; measure MFT, FFT, H2S and the disulfides by SIDA",
+      "design": "temperature: 120 / 140 / 160 C; 3 replicate pots per arm; in a 15 % pea-isolate matrix; from 1 new laboratory(ies) to reach 3; measure MFT, FFT, H2S and the disulfides by SIDA",
       "engine": "blank in v1 (step 5 adds)"
     },
     {
@@ -51,7 +51,7 @@
       "family": "meaty thiols",
       "lever": "sulfur source",
       "reading": "answered by the literature",
-      "why": "2-Methyl-3-furanthiol (MFT), none vs cysteine: -0.78 dex (new laboratory -1.77 to +0.22)",
+      "why": "2-Methyl-3-furanthiol (MFT), none vs cysteine: -0.78 dex (new laboratory -1.76 to +0.22)",
       "plant_protein_evidence": false,
       "design": null,
       "engine": "blank in v1 (step 5 adds)"
@@ -60,7 +60,7 @@
       "family": "meaty thiols",
       "lever": "amino acid identity",
       "reading": "needs experiment",
-      "why": "keyed: best cell 'Bis(2-methyl-3-furyl) disulfide, glutamic acid vs methionine' reads too few laboratories (1 laboratories)",
+      "why": "keyed: best cell '2-Furfurylthiol (FFT), ala vs none' reads too few laboratories (1 laboratories)",
       "plant_protein_evidence": true,
       "design": "amino acid identity: glycine vs alanine vs leucine vs methionine vs phenylalanine; 2 replicate pots per arm; matrix as in the keyed studies; from 2 new laboratory(ies) to reach 3; measure MFT, FFT, H2S and the disulfides by SIDA",
       "engine": "blank in v1 (step 5 adds)"
@@ -141,9 +141,9 @@
       "family": "Strecker aldehydes, methional",
       "lever": "pH",
       "reading": "needs experiment",
-      "why": "keyed: best cell 'Phenylacetaldehyde, pH 6-7.5, initial or label' reads direction unclear (3 laboratories)",
+      "why": "keyed: best cell 'Benzaldehyde, pH 4.5-6, initial or label' reads direction unclear (3 laboratories)",
       "plant_protein_evidence": false,
-      "design": "pH: pH 5.0 / 6.0 / 7.0; 3 replicate pots per arm; in a 15 % pea-isolate matrix; from 1 new laboratory(ies) to reach 3; measure Strecker aldehydes, methional",
+      "design": "pH: pH 5.0 / 6.0 / 7.0; 8 replicate pots per arm; in a 15 % pea-isolate matrix; from 1 new laboratory(ies) to reach 3; measure Strecker aldehydes, methional",
       "engine": "blank in v1 (step 5 adds)"
     },
     {
@@ -168,7 +168,7 @@
       "family": "Strecker aldehydes, methional",
       "lever": "precursor dose",
       "reading": "needs experiment",
-      "why": "keyed: best cell 'Benzaldehyde, sugar varied' reads direction unclear (3 laboratories)",
+      "why": "keyed: best cell 'Benzaldehyde, sugar varied' reads direction unclear (4 laboratories)",
       "plant_protein_evidence": false,
       "design": "precursor dose: 0 / 0.5x / 1x / 2x of the base dose; 8 replicate pots per arm; in a 15 % pea-isolate matrix; from 1 new laboratory(ies) to reach 3; measure Strecker aldehydes, methional",
       "engine": "blank in v1 (step 5 adds)"
@@ -275,19 +275,19 @@
     {
       "family": "pyrazines",
       "lever": "pH",
-      "reading": "needs experiment",
-      "why": "keyed: best cell '2-Acetylthiazole, pH 6-7.5, initial or label' reads too few laboratories (2 laboratories)",
+      "reading": "answered by the literature",
+      "why": "2-Acetylthiazole, pH 6-7.5, initial or label: +0.23 dex (new laboratory -0.18 to +0.65)",
       "plant_protein_evidence": true,
-      "design": "pH: pH 5.0 / 6.0 / 7.0; 3 replicate pots per arm; matrix as in the keyed studies; from 1 new laboratory(ies) to reach 3; measure pyrazines",
+      "design": null,
       "engine": "blank in v1 (step 5 adds)"
     },
     {
       "family": "pyrazines",
       "lever": "temperature",
       "reading": "needs experiment",
-      "why": "keyed: best cell '2,3-Dimethylpyrazine, time <30 min' reads too few laboratories (1 laboratories)",
+      "why": "keyed: best cell '2-Acetylthiazole, time >120 min' reads too few laboratories (2 laboratories)",
       "plant_protein_evidence": true,
-      "design": "temperature: 120 / 140 / 160 C; 2 replicate pots per arm; matrix as in the keyed studies; from 2 new laboratory(ies) to reach 3; measure pyrazines",
+      "design": "temperature: 120 / 140 / 160 C; 2 replicate pots per arm; matrix as in the keyed studies; from 1 new laboratory(ies) to reach 3; measure pyrazines",
       "engine": "blank in v1 (step 5 adds)"
     },
     {
@@ -303,7 +303,7 @@
       "family": "pyrazines",
       "lever": "precursor dose",
       "reading": "needs experiment",
-      "why": "keyed: best cell '2-Ethyl-3,6-dimethylpyrazine, sugar varied' reads direction unclear (3 laboratories)",
+      "why": "keyed: best cell '2-Methylpyrazine, sugar varied' reads direction unclear (4 laboratories)",
       "plant_protein_evidence": true,
       "design": "precursor dose: 0 / 0.5x / 1x / 2x of the base dose; 8 replicate pots per arm; matrix as in the keyed studies; from 1 new laboratory(ies) to reach 3; measure pyrazines",
       "engine": "blank in v1 (step 5 adds)"
@@ -411,18 +411,18 @@
       "family": "lipid aldehydes (off-notes)",
       "lever": "pH",
       "reading": "needs experiment",
-      "why": "keyed: best cell '(E)-2-Octenal, pH 4.5-6, initial or label' reads too few laboratories (1 laboratories)",
+      "why": "keyed: best cell 'Heptanal, pH 4.5-6, initial or label' reads direction unclear (4 laboratories)",
       "plant_protein_evidence": false,
-      "design": "pH: pH 5.0 / 6.0 / 7.0; 6 replicate pots per arm; in a 15 % pea-isolate matrix; from 2 new laboratory(ies) to reach 3; measure lipid aldehydes (off-notes)",
+      "design": "pH: pH 5.0 / 6.0 / 7.0; 8 replicate pots per arm; in a 15 % pea-isolate matrix; from 1 new laboratory(ies) to reach 3; measure lipid aldehydes (off-notes)",
       "engine": "blank in v1 (step 5 adds)"
     },
     {
       "family": "lipid aldehydes (off-notes)",
       "lever": "temperature",
       "reading": "needs experiment",
-      "why": "keyed: best cell '(E)-2-Octenal, time 30-120 min' reads too few laboratories (1 laboratories)",
+      "why": "keyed: best cell 'Nonanal, time 30-120 min' reads too few laboratories (2 laboratories)",
       "plant_protein_evidence": false,
-      "design": "temperature: 120 / 140 / 160 C; 8 replicate pots per arm; in a 15 % pea-isolate matrix; from 2 new laboratory(ies) to reach 3; measure lipid aldehydes (off-notes)",
+      "design": "temperature: 120 / 140 / 160 C; 8 replicate pots per arm; in a 15 % pea-isolate matrix; from 1 new laboratory(ies) to reach 3; measure lipid aldehydes (off-notes)",
       "engine": "blank in v1 (step 5 adds)"
     },
     {
@@ -438,7 +438,7 @@
       "family": "lipid aldehydes (off-notes)",
       "lever": "precursor dose",
       "reading": "needs experiment",
-      "why": "keyed: best cell '1-Octen-3-ol, sugar varied' reads too few laboratories (2 laboratories)",
+      "why": "keyed: best cell 'Nonanal, sulfur donor varied' reads direction unclear (3 laboratories)",
       "plant_protein_evidence": false,
       "design": "precursor dose: 0 / 0.5x / 1x / 2x of the base dose; 8 replicate pots per arm; in a 15 % pea-isolate matrix; from 1 new laboratory(ies) to reach 3; measure lipid aldehydes (off-notes)",
       "engine": "blank in v1 (step 5 adds)"
@@ -545,17 +545,17 @@
     {
       "family": "furanones, furfural",
       "lever": "pH",
-      "reading": "answered by the literature",
-      "why": "Furfural, pH 4.5-6, initial or label: -1.18 dex (new laboratory -3.09 to +0.74)",
+      "reading": "needs experiment",
+      "why": "keyed: best cell 'Furfural, pH 4.5-6, initial or label' reads direction unclear (5 laboratories)",
       "plant_protein_evidence": false,
-      "design": null,
+      "design": "pH: pH 5.0 / 6.0 / 7.0; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 1 new laboratory(ies) to reach 3; measure furanones, furfural",
       "engine": "blank in v1 (step 5 adds)"
     },
     {
       "family": "furanones, furfural",
       "lever": "temperature",
       "reading": "needs experiment",
-      "why": "keyed: best cell '2-Acetylfuran, time >120 min' reads too few laboratories (2 laboratories)",
+      "why": "keyed: best cell 'Furfural, time >120 min' reads direction unclear (4 laboratories)",
       "plant_protein_evidence": false,
       "design": "temperature: 120 / 140 / 160 C; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 1 new laboratory(ies) to reach 3; measure furanones, furfural",
       "engine": "blank in v1 (step 5 adds)"
@@ -684,18 +684,18 @@
   },
   "provenance": {
     "artifact": "experiment_map",
-    "generated_on": "2026-11-12",
+    "generated_on": "2026-11-13",
     "git": {
-      "commit": "c34c040a708f76ef5d572a29d1ef791cff67856b",
-      "short": "c34c040a",
-      "branch": "lever-table-rules-v2",
+      "commit": "3b569fd5ab195a53af395258985d70202afa1f03",
+      "short": "3b569fd5",
+      "branch": "lever-keying-a6",
       "dirty": true
     },
     "generated_by": "scripts/generators/build_experiment_map.py",
     "inputs": [
       {
         "path": "results/validation/lever_table.json",
-        "sha256": "bf13fb6897b3de535609c40190d94be224822ff92600126e9ac132e4fb22c73c"
+        "sha256": "8e957940a1fb45c59c2fa568930285d7aefbae3acc2b9a1d287cc8044a89c28e"
       },
       {
         "path": "docs/reference/contrast_benchmark/split.yml",

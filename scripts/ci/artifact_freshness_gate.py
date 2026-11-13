@@ -211,8 +211,17 @@ FROZEN_RECORD_GENERATOR = re.compile(
 #: 2026-11-11: so is decision-relevance step 0 (build_decision_relevance_step0.py, run once under its pre-registration,
 #: results/validation/decision_relevance_prereg.md sec. 5.0, frozen in 9e02ce3a; read in STATUS_AND_PLAN sec. 4.1): its inputs (the contrast and panel
 #: scores) moved with PR #108's S3 refusal after it was run; re-running it would replace a frozen verdict.
+#: 2026-11-13: so are steps 5a and 5c of STATUS_AND_PLAN sec. 0 (build_step5a_display_check.py under STEP5A_PREREG.md,
+#: build_step5c_discordant_cells.py with rules frozen in the generator; recorded in STEP5_RECORD.md). Each was a scoring
+#: look at TEST contrasts, two of the three allowed before 2027-01-23: re-running one would spend a look and replace a
+#: frozen verdict. Their inputs move whenever the lever table gains a source (5a hashes new_labs.yml, 5c the
+#: disagreement audit), as they did with step 9's keying, so they are pinned by the commit they were written at.
 FROZEN_RECORD_FILES = frozenset({"results/validation/kinetic_core_contrast_benchmark_score_v1.json",
-                                 "results/validation/decision_relevance_step0.json"})
+                                 "results/validation/decision_relevance_step0.json",
+                                 "results/validation/step5a_display_check.json",
+                                 "results/validation/step5a_display_check_items.json",
+                                 "results/validation/step5c_discordant_cells.json",
+                                 "results/validation/step5c_discordant_cells_items.json"})
 
 
 #: 2026-10-30 (owner: "I am not sure regenerating the figure is needed until we have the engine finished"; strategy

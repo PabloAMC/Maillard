@@ -1,0 +1,874 @@
+# Reader A, STATUS_AND_PLAN sec. 0 step 9. Rules: PREREG secs. 3 - 4 + A1 - A6.
+source: madruga1998
+pdf: data/articles/madruga1998.pdf
+reader: a
+scope_note: 'Table 1 prints presence only (''+'' clear MS, ''nd'' not detected, no LOD); no amounts anywhere, so every arm
+  has value null: ''+'' arms are keyed censor none with value null (detected, unquantified), nd arms nd_no_limit; none can
+  enter an estimate. pH set by pyrophosphate buffer whose concentration is not printed (ph_control keyed buffered; strictly
+  the concentration is missing). Final pH only as text ''decreased by less than 0.2 pH unit after heating'' (p. 262), no per-arm
+  value, so final_ph null. Triplicate reactions (n 3). No pyrazines or 2-acetylthiazole were detected at any pH.'
+contrasts:
+- id: madruga1998-1
+  odorant: hexanal
+  lever_class: pH
+  lever: initial pH (pyrophosphate buffer), 3-level ladder 6.0/4.5/3.0
+  focal: false
+  location: Table 1 (pp. 264-266)
+  digitised: false
+  unit: presence (+ / nd), no amount printed
+  quant_type: peak_area
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 6
+    lever_value: 6.0
+    value: null
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 12.1 mg/mL
+        5'-IMP: 34.8 mg/mL
+      buffer: pyrophosphate (concentration not printed)
+      matrix: buffer
+      headspace: inert
+  - label: pH 4.5
+    lever_value: 4.5
+    value: null
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 12.1 mg/mL
+        5'-IMP: 34.8 mg/mL
+      buffer: pyrophosphate (concentration not printed)
+      matrix: buffer
+      headspace: inert
+  - label: pH 3
+    lever_value: 3.0
+    value: null
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 12.1 mg/mL
+        5'-IMP: 34.8 mg/mL
+      buffer: pyrophosphate (concentration not printed)
+      matrix: buffer
+      headspace: inert
+- id: madruga1998-2
+  odorant: 2-furfural
+  lever_class: pH
+  lever: initial pH (pyrophosphate buffer), 3-level ladder 6.0/4.5/3.0
+  focal: true
+  location: Table 1 (pp. 264-266)
+  digitised: false
+  unit: presence (+ / nd), no amount printed
+  quant_type: peak_area
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 6
+    lever_value: 6.0
+    value: null
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 12.1 mg/mL
+        5'-IMP: 34.8 mg/mL
+      buffer: pyrophosphate (concentration not printed)
+      matrix: buffer
+      headspace: inert
+  - label: pH 4.5
+    lever_value: 4.5
+    value: null
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 12.1 mg/mL
+        5'-IMP: 34.8 mg/mL
+      buffer: pyrophosphate (concentration not printed)
+      matrix: buffer
+      headspace: inert
+  - label: pH 3
+    lever_value: 3.0
+    value: null
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 12.1 mg/mL
+        5'-IMP: 34.8 mg/mL
+      buffer: pyrophosphate (concentration not printed)
+      matrix: buffer
+      headspace: inert
+- id: madruga1998-3
+  odorant: 4-hydroxy-5-methyl-3(2H)-furanone
+  lever_class: pH
+  lever: initial pH (pyrophosphate buffer), 3-level ladder 6.0/4.5/3.0
+  focal: true
+  location: Table 1 (pp. 264-266)
+  digitised: false
+  unit: presence (+ / nd), no amount printed
+  quant_type: peak_area
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 6
+    lever_value: 6.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 12.1 mg/mL
+        5'-IMP: 34.8 mg/mL
+      buffer: pyrophosphate (concentration not printed)
+      matrix: buffer
+      headspace: inert
+  - label: pH 4.5
+    lever_value: 4.5
+    value: null
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 12.1 mg/mL
+        5'-IMP: 34.8 mg/mL
+      buffer: pyrophosphate (concentration not printed)
+      matrix: buffer
+      headspace: inert
+  - label: pH 3
+    lever_value: 3.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 12.1 mg/mL
+        5'-IMP: 34.8 mg/mL
+      buffer: pyrophosphate (concentration not printed)
+      matrix: buffer
+      headspace: inert
+- id: madruga1998-4
+  odorant: 2-methyl-3-furanthiol
+  lever_class: pH
+  lever: initial pH (pyrophosphate buffer), 3-level ladder 6.0/4.5/3.0
+  focal: true
+  location: Table 1 (pp. 264-266)
+  digitised: false
+  unit: presence (+ / nd), no amount printed
+  quant_type: peak_area
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 6
+    lever_value: 6.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 12.1 mg/mL
+        5'-IMP: 34.8 mg/mL
+      buffer: pyrophosphate (concentration not printed)
+      matrix: buffer
+      headspace: inert
+  - label: pH 4.5
+    lever_value: 4.5
+    value: null
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 12.1 mg/mL
+        5'-IMP: 34.8 mg/mL
+      buffer: pyrophosphate (concentration not printed)
+      matrix: buffer
+      headspace: inert
+  - label: pH 3
+    lever_value: 3.0
+    value: null
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 12.1 mg/mL
+        5'-IMP: 34.8 mg/mL
+      buffer: pyrophosphate (concentration not printed)
+      matrix: buffer
+      headspace: inert
+- id: madruga1998-5
+  odorant: 2-acetylfuran
+  lever_class: pH
+  lever: initial pH (pyrophosphate buffer), 3-level ladder 6.0/4.5/3.0
+  focal: true
+  location: Table 1 (pp. 264-266)
+  digitised: false
+  unit: presence (+ / nd), no amount printed
+  quant_type: peak_area
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 6
+    lever_value: 6.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 12.1 mg/mL
+        5'-IMP: 34.8 mg/mL
+      buffer: pyrophosphate (concentration not printed)
+      matrix: buffer
+      headspace: inert
+  - label: pH 4.5
+    lever_value: 4.5
+    value: null
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 12.1 mg/mL
+        5'-IMP: 34.8 mg/mL
+      buffer: pyrophosphate (concentration not printed)
+      matrix: buffer
+      headspace: inert
+  - label: pH 3
+    lever_value: 3.0
+    value: null
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 12.1 mg/mL
+        5'-IMP: 34.8 mg/mL
+      buffer: pyrophosphate (concentration not printed)
+      matrix: buffer
+      headspace: inert
+- id: madruga1998-6
+  odorant: 2-furylmethanethiol
+  lever_class: pH
+  lever: initial pH (pyrophosphate buffer), 3-level ladder 6.0/4.5/3.0
+  focal: true
+  location: Table 1 (pp. 264-266)
+  digitised: false
+  unit: presence (+ / nd), no amount printed
+  quant_type: peak_area
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 6
+    lever_value: 6.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 12.1 mg/mL
+        5'-IMP: 34.8 mg/mL
+      buffer: pyrophosphate (concentration not printed)
+      matrix: buffer
+      headspace: inert
+  - label: pH 4.5
+    lever_value: 4.5
+    value: null
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 12.1 mg/mL
+        5'-IMP: 34.8 mg/mL
+      buffer: pyrophosphate (concentration not printed)
+      matrix: buffer
+      headspace: inert
+  - label: pH 3
+    lever_value: 3.0
+    value: null
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 12.1 mg/mL
+        5'-IMP: 34.8 mg/mL
+      buffer: pyrophosphate (concentration not printed)
+      matrix: buffer
+      headspace: inert
+- id: madruga1998-7
+  odorant: 5-methyl-2-furfural
+  lever_class: pH
+  lever: initial pH (pyrophosphate buffer), 3-level ladder 6.0/4.5/3.0
+  focal: true
+  location: Table 1 (pp. 264-266)
+  digitised: false
+  unit: presence (+ / nd), no amount printed
+  quant_type: peak_area
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 6
+    lever_value: 6.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 12.1 mg/mL
+        5'-IMP: 34.8 mg/mL
+      buffer: pyrophosphate (concentration not printed)
+      matrix: buffer
+      headspace: inert
+  - label: pH 4.5
+    lever_value: 4.5
+    value: null
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 12.1 mg/mL
+        5'-IMP: 34.8 mg/mL
+      buffer: pyrophosphate (concentration not printed)
+      matrix: buffer
+      headspace: inert
+  - label: pH 3
+    lever_value: 3.0
+    value: null
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 12.1 mg/mL
+        5'-IMP: 34.8 mg/mL
+      buffer: pyrophosphate (concentration not printed)
+      matrix: buffer
+      headspace: inert
+- id: madruga1998-8
+  odorant: benzaldehyde
+  lever_class: pH
+  lever: initial pH (pyrophosphate buffer), 3-level ladder 6.0/4.5/3.0
+  focal: false
+  location: Table 1 (pp. 264-266)
+  digitised: false
+  unit: presence (+ / nd), no amount printed
+  quant_type: peak_area
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 6
+    lever_value: 6.0
+    value: null
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 12.1 mg/mL
+        5'-IMP: 34.8 mg/mL
+      buffer: pyrophosphate (concentration not printed)
+      matrix: buffer
+      headspace: inert
+  - label: pH 4.5
+    lever_value: 4.5
+    value: null
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 12.1 mg/mL
+        5'-IMP: 34.8 mg/mL
+      buffer: pyrophosphate (concentration not printed)
+      matrix: buffer
+      headspace: inert
+  - label: pH 3
+    lever_value: 3.0
+    value: null
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 12.1 mg/mL
+        5'-IMP: 34.8 mg/mL
+      buffer: pyrophosphate (concentration not printed)
+      matrix: buffer
+      headspace: inert
+- id: madruga1998-9
+  odorant: 2-pentylfuran
+  lever_class: pH
+  lever: initial pH (pyrophosphate buffer), 3-level ladder 6.0/4.5/3.0
+  focal: true
+  location: Table 1 (pp. 264-266)
+  digitised: false
+  unit: presence (+ / nd), no amount printed
+  quant_type: peak_area
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 6
+    lever_value: 6.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 12.1 mg/mL
+        5'-IMP: 34.8 mg/mL
+      buffer: pyrophosphate (concentration not printed)
+      matrix: buffer
+      headspace: inert
+  - label: pH 4.5
+    lever_value: 4.5
+    value: null
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 12.1 mg/mL
+        5'-IMP: 34.8 mg/mL
+      buffer: pyrophosphate (concentration not printed)
+      matrix: buffer
+      headspace: inert
+  - label: pH 3
+    lever_value: 3.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 12.1 mg/mL
+        5'-IMP: 34.8 mg/mL
+      buffer: pyrophosphate (concentration not printed)
+      matrix: buffer
+      headspace: inert
+- id: madruga1998-10
+  odorant: bis(2-methyl-3-furyl) disulphide
+  lever_class: pH
+  lever: initial pH (pyrophosphate buffer), 3-level ladder 6.0/4.5/3.0
+  focal: true
+  location: Table 1 (pp. 264-266)
+  digitised: false
+  unit: presence (+ / nd), no amount printed
+  quant_type: peak_area
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 6
+    lever_value: 6.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 12.1 mg/mL
+        5'-IMP: 34.8 mg/mL
+      buffer: pyrophosphate (concentration not printed)
+      matrix: buffer
+      headspace: inert
+  - label: pH 4.5
+    lever_value: 4.5
+    value: null
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 12.1 mg/mL
+        5'-IMP: 34.8 mg/mL
+      buffer: pyrophosphate (concentration not printed)
+      matrix: buffer
+      headspace: inert
+  - label: pH 3
+    lever_value: 3.0
+    value: null
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 12.1 mg/mL
+        5'-IMP: 34.8 mg/mL
+      buffer: pyrophosphate (concentration not printed)
+      matrix: buffer
+      headspace: inert
+- id: madruga1998-11
+  odorant: 2-methyl-3-furyl 2-furylmethyl disulphide
+  lever_class: pH
+  lever: initial pH (pyrophosphate buffer), 3-level ladder 6.0/4.5/3.0
+  focal: true
+  location: Table 1 (pp. 264-266)
+  digitised: false
+  unit: presence (+ / nd), no amount printed
+  quant_type: peak_area
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 6
+    lever_value: 6.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 12.1 mg/mL
+        5'-IMP: 34.8 mg/mL
+      buffer: pyrophosphate (concentration not printed)
+      matrix: buffer
+      headspace: inert
+  - label: pH 4.5
+    lever_value: 4.5
+    value: null
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 12.1 mg/mL
+        5'-IMP: 34.8 mg/mL
+      buffer: pyrophosphate (concentration not printed)
+      matrix: buffer
+      headspace: inert
+  - label: pH 3
+    lever_value: 3.0
+    value: null
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 12.1 mg/mL
+        5'-IMP: 34.8 mg/mL
+      buffer: pyrophosphate (concentration not printed)
+      matrix: buffer
+      headspace: inert
+- id: madruga1998-12
+  odorant: bis(2-furylmethyl) disulphide
+  lever_class: pH
+  lever: initial pH (pyrophosphate buffer), 3-level ladder 6.0/4.5/3.0
+  focal: true
+  location: Table 1 (pp. 264-266)
+  digitised: false
+  unit: presence (+ / nd), no amount printed
+  quant_type: peak_area
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 6
+    lever_value: 6.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 12.1 mg/mL
+        5'-IMP: 34.8 mg/mL
+      buffer: pyrophosphate (concentration not printed)
+      matrix: buffer
+      headspace: inert
+  - label: pH 4.5
+    lever_value: 4.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 12.1 mg/mL
+        5'-IMP: 34.8 mg/mL
+      buffer: pyrophosphate (concentration not printed)
+      matrix: buffer
+      headspace: inert
+  - label: pH 3
+    lever_value: 3.0
+    value: null
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 3.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        cysteine: 12.1 mg/mL
+        5'-IMP: 34.8 mg/mL
+      buffer: pyrophosphate (concentration not printed)
+      matrix: buffer
+      headspace: inert

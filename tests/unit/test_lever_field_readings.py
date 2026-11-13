@@ -24,6 +24,13 @@ def test_check_overrides_derived_control():
     chk = {"fields": ["F1"], "ph_control": "adjusted_unbuffered", "ph_control_overrides": {"s-2": "buffered"}}
     assert F.contrast_control(arms, chk, "s-1") == ("adjusted_unbuffered", "check")
     assert F.contrast_control(arms, chk, "s-2") == ("buffered", "check")
+    assert F.contrast_control(arms, None, "s-3", keyed="adjusted_unbuffered") == ("adjusted_unbuffered", "keyed")
+
+
+def test_final_ph_from_the_template_field():
+    assert F.arm_final_ph({"conditions": {"ph": 7.0, "ph_basis": "initial", "final_ph": 6.2}}, None) == 6.2
+    assert F.arm_final_ph({"conditions": {"ph": 5.5, "ph_basis": "final"}}, None) == 5.5
+    assert F.arm_final_ph({"conditions": {"ph": 7.0, "ph_basis": "initial"}}, None) is None
 
 
 def test_same_reactant_matches_the_level_not_its_neighbours():
