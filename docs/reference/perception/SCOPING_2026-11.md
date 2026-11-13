@@ -73,6 +73,11 @@ models. **Cap:** 17 h for 7.0 - 7.3.
 DMTS appears in four keyed source files but enters no cell of the lever table. A perception layer without it cannot
 test that finding; the lever table would need its contrasts keyed as a cell first (a PREREG amendment).
 
+**Result of 7.0 (2026-11-13): 0 of 3 cells decidable; the kill rule fired; 7.1 - 7.3 are parked**
+([DECIDABILITY_7_0.md](DECIDABILITY_7_0.md)). The thiol lever intervals for a new laboratory include zero, so no
+threshold or base level can make a "crosses threshold" call; methional's would need threshold and base level known
+to within 0.4 dex together.
+
 ## 5. To read (owner's download list)
 
 - Czerny, M. et al. (2008). Re-investigation on odour thresholds of key food aroma compounds and development of an
