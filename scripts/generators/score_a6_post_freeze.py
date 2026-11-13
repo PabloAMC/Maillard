@@ -33,7 +33,10 @@ from src import artifact_io, data_paths, provenance  # noqa: E402
 PREREG = data_paths.LEVER_TABLE_DIR / "A6_SCORING_PREREG.md"
 #: post-freeze batches (new_labs.yml): sources keyed after A6 (3b2f80ad). Every batch's sources leave the training set.
 BATCHES = {1: ("yang2011", "raza2020", "madruga1995", "madruga1998", "whitfield1999", "whitfield2001", "chen2000",
-               "kang2026", "wang2026arp", "desousafontes2024")}
+               "kang2026", "wang2026arp", "desousafontes2024"),
+           # batch 2 (new_labs.yml, fourth registration, 2026-11-13; hou2017ph registered with batch 1, keyed here)
+           2: ("huang2010", "huang2011", "laemont2023", "lotfy2021", "arsa2021", "braggins1996", "kim2008", "gou2025",
+               "du2024c", "bemisyoung1993", "vanba2013", "yang2012", "hou2017ph")}
 ALPHA, Z90 = 0.10, 1.6448536269514722
 MIN_ROWS, MIN_LABS = 2, 2
 MIN_SCORED, MIN_SOURCES, MIN_LABS_SCORED, MAX_SOURCE_SHARE = 20, 4, 3, 0.40
