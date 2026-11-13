@@ -2,11 +2,11 @@
   "artifact": "data_wishlist",
   "provenance": {
     "artifact": "data_wishlist",
-    "generated_on": "2026-11-11",
+    "generated_on": "2026-11-13",
     "git": {
-      "commit": "c21806bf6756e31dbfaf751d91438e2633db8916",
-      "short": "c21806bf",
-      "branch": "rival-bdf-retry",
+      "commit": "63783d3b23a5888482c46b5752a5dfb6434cae45",
+      "short": "63783d3b",
+      "branch": "a6-batch3",
       "dirty": true
     },
     "generated_by": "src/data_wishlist.py",
@@ -41,7 +41,7 @@
       },
       {
         "path": "docs/reference/decisive_measurements.yml",
-        "sha256": "57490a4c531ebde0d22145634ecb95041939e65e0a1070c7db108424fbcec89e"
+        "sha256": "eca0acba9eedc993b7a0f328580aaf0f02223a4c92428eb311e279ffb21a8305"
       }
     ]
   },
@@ -1708,6 +1708,39 @@
       "status_note": null,
       "disagreements": [],
       "added": "2026-11-06"
+    },
+    {
+      "id": "ph_control_buffered_vs_unbuffered",
+      "plan_step": "STATUS_AND_PLAN sec. 0, steps 8 - 13 (PREREG A6-R1)",
+      "question": "Does a pH lever's effect on an odorant depend on whether the pots are buffered, so that a lever-table pH cell must be banded by control state (A6-R1)?",
+      "rivals": [
+        "the table's own rule: one pH slope per odorant and band, whatever the control",
+        "A6-R1: buffered and unbuffered pots have different slopes (buffer catalysis, or drift of the unbuffered pots' pH)"
+      ],
+      "measurement": "Within one laboratory, the same model system and initial pH series run buffered and unbuffered (NaOH / HCl adjusted), with final pH printed; design not yet written.",
+      "measurement_source": "A6_PREQUENTIAL_PREREG.md sec. 1 (the question); no record writes a design",
+      "arms": [
+        "buffered vs adjusted-unbuffered pH series, one laboratory: design not yet written: matched initial pH levels in a target cell (e.g. 2-methylpyrazine or furfural at pH 6 - 7.5), both control states, final pH printed"
+      ],
+      "design_written": false,
+      "decides": [
+        {
+          "outcome": "the two control states give the same slope within error",
+          "means": "the table's rule holds; R1 leaves the candidates"
+        },
+        {
+          "outcome": "the slopes differ beyond the between-laboratory spread",
+          "means": "R1: pH cells are banded by control state"
+        }
+      ],
+      "unlocks": [
+        "the three pH fragility flags of the lever table (step 8) and the furfural / FFT pH cells' new-laboratory intervals"
+      ],
+      "existing_data_route": "Every later pH source joins A6's confirmation set (A6_PREQUENTIAL_PREREG sec. 2); it is scored once at first eligibility.",
+      "status": "open",
+      "status_note": null,
+      "disagreements": [],
+      "added": "2026-11-13"
     }
   ],
   "summary": {
@@ -1718,8 +1751,8 @@
     "data_refused_rows": 3,
     "axes_below_trust": 13,
     "lanes_that_cannot_support_a_trend": 3,
-    "structural_questions": 13,
-    "structural_questions_open": 13,
+    "structural_questions": 14,
+    "structural_questions_open": 14,
     "trust_rule": "rate >= 0.8 on >= 3 claims and Wilson lower bound > 0.5"
   }
 }
