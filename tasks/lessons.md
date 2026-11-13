@@ -603,3 +603,12 @@ have no null answer): counting it as a difference of 0 pulls the mean to zero an
 - **Rule:** a grid prior's weight is density x cell width (`np.gradient(grid)`). Every Bayesian fit in the repo gets a
   self-calibration test: data simulated from its own declared model must give nominal coverage at the sparsest
   sample size it reports.
+
+## Never edit the generator of a frozen record, even for a refactor (2026-11-13)
+- **What happened:** step 5c reused step 5a's item builder, so `build_step5a_display_check.py` was refactored (items
+  checked identical). But every tracked artifact records the hash of its generator as an input, and the freshness
+  gate's input-hash check fails on a changed one. Refreshing the hash meant rescoring 5a: another engine look at TEST
+  contrasts and a rewrite of frozen evidence. The draft PR skipped the gate, so this surfaced only on the full run.
+- **Rule:** a generator whose output is frozen evidence (a scoring look, a pre-registered result) is read-only. Reuse
+  it by import, or copy the function into the new generator with a note. Before marking ready a PR that touches any
+  `scripts/generators/` file, run `artifact_freshness_gate.py --skip-regenerate` locally (one minute).

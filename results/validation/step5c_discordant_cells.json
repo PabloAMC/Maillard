@@ -1,0 +1,1787 @@
+{
+  "artifact": "step5c_discordant_cells",
+  "status": "diagnostic (step 5c); no display, no credit",
+  "primary_reading": "front_door",
+  "readings": {
+    "front_door": {
+      "cells": [
+        {
+          "cell": [
+            "2-Methyl-3-furanthiol (MFT)",
+            "pH",
+            "pH 6-7.5, initial or label"
+          ],
+          "per_lab": {
+            "cau_gao_yanxiang": {
+              "measured": -0.6184696411651879,
+              "engine": null,
+              "items": 2,
+              "engine_items": 0
+            },
+            "ho_network": {
+              "measured": 0.3577798095364914,
+              "engine": null,
+              "items": 1,
+              "engine_items": 0
+            }
+          },
+          "verdict": "not runnable",
+          "rows": [
+            {
+              "lab": "cau_gao_yanxiang",
+              "source": "xu2007",
+              "contrast": "xu2007-1",
+              "level": null,
+              "against": null,
+              "kind": "numeric",
+              "m": -0.9629681466121985,
+              "engine": null,
+              "why": "the engine refuses the ratio: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the spread of this log ratio over B0 and the carried rivals (2.48 dex) exceeds omega. REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i),"
+            },
+            {
+              "lab": "cau_gao_yanxiang",
+              "source": "xu2007",
+              "contrast": "xu2007-2",
+              "level": null,
+              "against": null,
+              "kind": "numeric",
+              "m": -0.2739711357181772,
+              "engine": null,
+              "why": "the engine refuses the ratio: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): an arm's carried rivals could not be run, so the ratio's independence from the balance is not shown. REFUSED, FALSIFIED pH BALANCE (S3"
+            },
+            {
+              "lab": "ho_network",
+              "source": "zhou2023",
+              "contrast": "zhou2023-1",
+              "level": null,
+              "against": null,
+              "kind": "numeric",
+              "m": 0.3577798095364914,
+              "engine": null,
+              "why": "the engine refuses the ratio: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the DIRECTION of this ratio is refused: B0 and the carried rivals disagree in its sign (S3). REFUSED, FALSIFIED pH BALANCE (S3; M1b pa"
+            }
+          ]
+        },
+        {
+          "cell": [
+            "2-Methylpyrazine",
+            "precursor dose",
+            "sulfur donor varied"
+          ],
+          "per_lab": {
+            "zjut_zheng_zhou": {
+              "measured": -0.4276765833115363,
+              "engine": null,
+              "items": 1,
+              "engine_items": 0
+            },
+            "ho_network": {
+              "measured": 0.2761546096205996,
+              "engine": null,
+              "items": 2,
+              "engine_items": 0
+            }
+          },
+          "verdict": "not runnable",
+          "rows": [
+            {
+              "lab": "zjut_zheng_zhou",
+              "source": "ding2023",
+              "contrast": "ding2023-17",
+              "level": null,
+              "against": null,
+              "kind": "numeric",
+              "m": -0.4276765833115363,
+              "engine": null,
+              "why": "matrix material not on file: other (fish protein hydrolysate solution)"
+            },
+            {
+              "lab": "ho_network",
+              "source": "zhou2022",
+              "contrast": "zhou2022-7",
+              "level": null,
+              "against": null,
+              "kind": "numeric",
+              "m": 0.20353830329717496,
+              "engine": null,
+              "why": "unmapped precursor: ax-arp -alanine)"
+            },
+            {
+              "lab": "ho_network",
+              "source": "zhou2022",
+              "contrast": "zhou2022-8",
+              "level": null,
+              "against": null,
+              "kind": "numeric",
+              "m": 0.3487709159440243,
+              "engine": null,
+              "why": "unmapped precursor: ax-arp -alanine)"
+            }
+          ]
+        },
+        {
+          "cell": [
+            "Benzaldehyde",
+            "sugar identity",
+            "xylose vs glucose"
+          ],
+          "per_lab": {
+            "hfut_wei_zhaojun": {
+              "measured": -0.38230834134414216,
+              "engine": null,
+              "items": 1,
+              "engine_items": 0
+            },
+            "astar_sifbi_chiang": {
+              "measured": 0.14035021706824333,
+              "engine": null,
+              "items": 3,
+              "engine_items": 0
+            }
+          },
+          "verdict": "not runnable",
+          "rows": [
+            {
+              "lab": "hfut_wei_zhaojun",
+              "source": "chen2023lycium",
+              "contrast": "chen2023lycium-8",
+              "level": "xylose",
+              "against": "glucose",
+              "kind": "categorical",
+              "m": -0.38230834134414216,
+              "engine": null,
+              "why": "no engine target for this odorant"
+            },
+            {
+              "lab": "astar_sifbi_chiang",
+              "source": "theng2024",
+              "contrast": "theng2024-22",
+              "level": "xylose",
+              "against": "glucose",
+              "kind": "categorical",
+              "m": 0.042869299177749065,
+              "engine": null,
+              "why": "no engine target for this odorant"
+            },
+            {
+              "lab": "astar_sifbi_chiang",
+              "source": "theng2024",
+              "contrast": "theng2024-23",
+              "level": "xylose",
+              "against": "glucose",
+              "kind": "categorical",
+              "m": 0.17782151824436288,
+              "engine": null,
+              "why": "no engine target for this odorant"
+            },
+            {
+              "lab": "astar_sifbi_chiang",
+              "source": "theng2024",
+              "contrast": "theng2024-24",
+              "level": "xylose",
+              "against": "glucose",
+              "kind": "categorical",
+              "m": 0.200359833782618,
+              "engine": null,
+              "why": "no engine target for this odorant"
+            }
+          ]
+        },
+        {
+          "cell": [
+            "Bis(2-methyl-3-furyl) disulfide",
+            "pH",
+            "pH 6-7.5, initial or label"
+          ],
+          "per_lab": {
+            "cau_gao_yanxiang": {
+              "measured": -0.3097574729157349,
+              "engine": null,
+              "items": 2,
+              "engine_items": 0
+            },
+            "ho_network": {
+              "measured": 0.23513069868661085,
+              "engine": null,
+              "items": 1,
+              "engine_items": 0
+            }
+          },
+          "verdict": "not runnable",
+          "rows": [
+            {
+              "lab": "cau_gao_yanxiang",
+              "source": "xu2007",
+              "contrast": "xu2007-5",
+              "level": null,
+              "against": null,
+              "kind": "numeric",
+              "m": -0.7056869566872647,
+              "engine": null,
+              "why": "the engine refuses the ratio: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the spread of this log ratio over B0 and the carried rivals (4.76 dex) exceeds omega. REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i),"
+            },
+            {
+              "lab": "cau_gao_yanxiang",
+              "source": "xu2007",
+              "contrast": "xu2007-6",
+              "level": null,
+              "against": null,
+              "kind": "numeric",
+              "m": 0.08617201085579489,
+              "engine": null,
+              "why": "the engine refuses the ratio: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): an arm's carried rivals could not be run, so the ratio's independence from the balance is not shown. REFUSED, FALSIFIED pH BALANCE (S3"
+            },
+            {
+              "lab": "ho_network",
+              "source": "zhou2023",
+              "contrast": "zhou2023-3",
+              "level": null,
+              "against": null,
+              "kind": "numeric",
+              "m": 0.23513069868661085,
+              "engine": null,
+              "why": "the engine refuses the ratio: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the spread of this log ratio over B0 and the carried rivals (0.73 dex) exceeds omega. REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i),"
+            }
+          ]
+        },
+        {
+          "cell": [
+            "Hexanal",
+            "sugar identity",
+            "xylose vs arabinose"
+          ],
+          "per_lab": {
+            "hfut_wei_zhaojun": {
+              "measured": 0.21813867183750424,
+              "engine": null,
+              "items": 2,
+              "engine_items": 0
+            },
+            "nus_liu_shaoquan": {
+              "measured": -0.22946946469978136,
+              "engine": null,
+              "items": 2,
+              "engine_items": 0
+            }
+          },
+          "verdict": "not runnable",
+          "rows": [
+            {
+              "lab": "hfut_wei_zhaojun",
+              "source": "chen2023lycium",
+              "contrast": "chen2023lycium-7",
+              "level": "xylose",
+              "against": "arabinose",
+              "kind": "categorical",
+              "m": 0.328885937860099,
+              "engine": null,
+              "why": "matrix material not on file: plant protein (lycium barbarum seed meal hydrolysate)"
+            },
+            {
+              "lab": "hfut_wei_zhaojun",
+              "source": "chen2023lycium",
+              "contrast": "chen2023lycium-14",
+              "level": "xylose",
+              "against": "arabinose",
+              "kind": "categorical",
+              "m": 0.10739140581490947,
+              "engine": null,
+              "why": "matrix material not on file: plant protein (lycium barbarum seed meal hydrolysate)"
+            },
+            {
+              "lab": "nus_liu_shaoquan",
+              "source": "zhang2024sugars",
+              "contrast": "zhang2024sugars-38",
+              "level": "xylose",
+              "against": "arabinose",
+              "kind": "categorical",
+              "m": -0.005143021073295007,
+              "engine": null,
+              "why": "matrix material not on file: other (minced chicken carcass enzymatic hydrolysate, no ph adjustment)"
+            },
+            {
+              "lab": "nus_liu_shaoquan",
+              "source": "zhang2024sugars",
+              "contrast": "zhang2024sugars-39",
+              "level": "xylose",
+              "against": "arabinose",
+              "kind": "categorical",
+              "m": -0.4537959083262677,
+              "engine": null,
+              "why": "matrix material not on file: other (minced chicken carcass enzymatic hydrolysate, no ph adjustment)"
+            }
+          ]
+        },
+        {
+          "cell": [
+            "Hexanal",
+            "sugar identity",
+            "xylose vs fructose"
+          ],
+          "per_lab": {
+            "hfut_wei_zhaojun": {
+              "measured": 0.26692930484965327,
+              "engine": null,
+              "items": 2,
+              "engine_items": 0
+            },
+            "nus_liu_shaoquan": {
+              "measured": -0.7157437280498627,
+              "engine": null,
+              "items": 2,
+              "engine_items": 0
+            }
+          },
+          "verdict": "not runnable",
+          "rows": [
+            {
+              "lab": "hfut_wei_zhaojun",
+              "source": "chen2023lycium",
+              "contrast": "chen2023lycium-7",
+              "level": "xylose",
+              "against": "fructose",
+              "kind": "categorical",
+              "m": 0.4599973424868047,
+              "engine": null,
+              "why": "matrix material not on file: plant protein (lycium barbarum seed meal hydrolysate)"
+            },
+            {
+              "lab": "hfut_wei_zhaojun",
+              "source": "chen2023lycium",
+              "contrast": "chen2023lycium-14",
+              "level": "xylose",
+              "against": "fructose",
+              "kind": "categorical",
+              "m": 0.07386126721250186,
+              "engine": null,
+              "why": "matrix material not on file: plant protein (lycium barbarum seed meal hydrolysate)"
+            },
+            {
+              "lab": "nus_liu_shaoquan",
+              "source": "zhang2024sugars",
+              "contrast": "zhang2024sugars-38",
+              "level": "xylose",
+              "against": "fructose",
+              "kind": "categorical",
+              "m": -0.5884700753556236,
+              "engine": null,
+              "why": "matrix material not on file: other (minced chicken carcass enzymatic hydrolysate, no ph adjustment)"
+            },
+            {
+              "lab": "nus_liu_shaoquan",
+              "source": "zhang2024sugars",
+              "contrast": "zhang2024sugars-39",
+              "level": "xylose",
+              "against": "fructose",
+              "kind": "categorical",
+              "m": -0.8430173807441019,
+              "engine": null,
+              "why": "matrix material not on file: other (minced chicken carcass enzymatic hydrolysate, no ph adjustment)"
+            }
+          ]
+        },
+        {
+          "cell": [
+            "Hexanal",
+            "sugar identity",
+            "xylose vs glucose"
+          ],
+          "per_lab": {
+            "hfut_wei_zhaojun": {
+              "measured": 0.40215993012857987,
+              "engine": null,
+              "items": 2,
+              "engine_items": 0
+            },
+            "nus_liu_shaoquan": {
+              "measured": -0.6305859365473455,
+              "engine": null,
+              "items": 2,
+              "engine_items": 0
+            }
+          },
+          "verdict": "not runnable",
+          "rows": [
+            {
+              "lab": "hfut_wei_zhaojun",
+              "source": "chen2023lycium",
+              "contrast": "chen2023lycium-7",
+              "level": "xylose",
+              "against": "glucose",
+              "kind": "categorical",
+              "m": 0.33935918170661017,
+              "engine": null,
+              "why": "matrix material not on file: plant protein (lycium barbarum seed meal hydrolysate)"
+            },
+            {
+              "lab": "hfut_wei_zhaojun",
+              "source": "chen2023lycium",
+              "contrast": "chen2023lycium-14",
+              "level": "xylose",
+              "against": "glucose",
+              "kind": "categorical",
+              "m": 0.46496067855054957,
+              "engine": null,
+              "why": "matrix material not on file: plant protein (lycium barbarum seed meal hydrolysate)"
+            },
+            {
+              "lab": "nus_liu_shaoquan",
+              "source": "zhang2024sugars",
+              "contrast": "zhang2024sugars-38",
+              "level": "xylose",
+              "against": "glucose",
+              "kind": "categorical",
+              "m": -0.4502470698614278,
+              "engine": null,
+              "why": "matrix material not on file: other (minced chicken carcass enzymatic hydrolysate, no ph adjustment)"
+            },
+            {
+              "lab": "nus_liu_shaoquan",
+              "source": "zhang2024sugars",
+              "contrast": "zhang2024sugars-39",
+              "level": "xylose",
+              "against": "glucose",
+              "kind": "categorical",
+              "m": -0.8109248032332632,
+              "engine": null,
+              "why": "matrix material not on file: other (minced chicken carcass enzymatic hydrolysate, no ph adjustment)"
+            }
+          ]
+        },
+        {
+          "cell": [
+            "Nonanal",
+            "precursor dose",
+            "sulfur donor varied"
+          ],
+          "per_lab": {
+            "zjut_zheng_zhou": {
+              "measured": 0.22067281590937227,
+              "engine": null,
+              "items": 1,
+              "engine_items": 0
+            },
+            "nus_liu_shaoquan": {
+              "measured": -0.2983489228187693,
+              "engine": null,
+              "items": 4,
+              "engine_items": 0
+            }
+          },
+          "verdict": "not runnable",
+          "rows": [
+            {
+              "lab": "zjut_zheng_zhou",
+              "source": "ding2023",
+              "contrast": "ding2023-25",
+              "level": null,
+              "against": null,
+              "kind": "numeric",
+              "m": 0.22067281590937227,
+              "engine": null,
+              "why": "matrix material not on file: other (fish protein hydrolysate solution)"
+            },
+            {
+              "lab": "nus_liu_shaoquan",
+              "source": "li2022heat",
+              "contrast": "li2022heat-59",
+              "level": null,
+              "against": null,
+              "kind": "numeric",
+              "m": -0.22750738969440523,
+              "engine": null,
+              "why": "matrix material not on file: other (non-enzymatic pork trimmings extract, npe)"
+            },
+            {
+              "lab": "nus_liu_shaoquan",
+              "source": "li2022heat",
+              "contrast": "li2022heat-60",
+              "level": null,
+              "against": null,
+              "kind": "numeric",
+              "m": -0.13469857389745624,
+              "engine": null,
+              "why": "matrix material not on file: other (non-enzymatic pork trimmings extract, npe)"
+            },
+            {
+              "lab": "nus_liu_shaoquan",
+              "source": "li2022heat",
+              "contrast": "li2022heat-64",
+              "level": null,
+              "against": null,
+              "kind": "numeric",
+              "m": -0.4448651824302236,
+              "engine": null,
+              "why": "matrix material not on file: other (enzymatic pork trimmings hydrolysate, eph)"
+            },
+            {
+              "lab": "nus_liu_shaoquan",
+              "source": "li2022heat",
+              "contrast": "li2022heat-65",
+              "level": null,
+              "against": null,
+              "kind": "numeric",
+              "m": -0.3863245452529921,
+              "engine": null,
+              "why": "matrix material not on file: other (enzymatic pork trimmings hydrolysate, eph)"
+            }
+          ]
+        },
+        {
+          "cell": [
+            "Trimethylpyrazine",
+            "amino acid identity",
+            "none vs arginine"
+          ],
+          "per_lab": {
+            "ho_network": {
+              "measured": 0.259835397764838,
+              "engine": null,
+              "items": 1,
+              "engine_items": 0
+            },
+            "wonkwang_cho_inhee": {
+              "measured": -0.774690718274137,
+              "engine": null,
+              "items": 1,
+              "engine_items": 0
+            }
+          },
+          "verdict": "not runnable",
+          "rows": [
+            {
+              "lab": "ho_network",
+              "source": "hwang1995",
+              "contrast": "hwang1995-9",
+              "level": "none",
+              "against": "arginine",
+              "kind": "categorical",
+              "m": 0.259835397764838,
+              "engine": null,
+              "why": "no engine target for this odorant"
+            },
+            {
+              "lab": "wonkwang_cho_inhee",
+              "source": "park2022mealworm",
+              "contrast": "park2022mealworm__families-8",
+              "level": "none",
+              "against": "arginine",
+              "kind": "categorical",
+              "m": -0.774690718274137,
+              "engine": null,
+              "why": "no engine target for this odorant"
+            }
+          ]
+        }
+      ],
+      "verdicts": {
+        "not runnable": 9
+      },
+      "not_run": {
+        "matrix material not on file": 18,
+        "the engine refuses the ratio": 6,
+        "no engine target for this odorant": 6,
+        "unmapped precursor": 2
+      }
+    },
+    "added_precursors": {
+      "cells": [
+        {
+          "cell": [
+            "2-Methyl-3-furanthiol (MFT)",
+            "pH",
+            "pH 6-7.5, initial or label"
+          ],
+          "per_lab": {
+            "cau_gao_yanxiang": {
+              "measured": -0.6184696411651879,
+              "engine": null,
+              "items": 2,
+              "engine_items": 0
+            },
+            "ho_network": {
+              "measured": 0.3577798095364914,
+              "engine": null,
+              "items": 1,
+              "engine_items": 0
+            }
+          },
+          "verdict": "not runnable",
+          "rows": [
+            {
+              "lab": "cau_gao_yanxiang",
+              "source": "xu2007",
+              "contrast": "xu2007-1",
+              "level": null,
+              "against": null,
+              "kind": "numeric",
+              "m": -0.9629681466121985,
+              "engine": null,
+              "why": "the engine refuses the ratio: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the spread of this log ratio over B0 and the carried rivals (2.48 dex) exceeds omega. REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i),"
+            },
+            {
+              "lab": "cau_gao_yanxiang",
+              "source": "xu2007",
+              "contrast": "xu2007-2",
+              "level": null,
+              "against": null,
+              "kind": "numeric",
+              "m": -0.2739711357181772,
+              "engine": null,
+              "why": "the engine refuses the ratio: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): an arm's carried rivals could not be run, so the ratio's independence from the balance is not shown. REFUSED, FALSIFIED pH BALANCE (S3"
+            },
+            {
+              "lab": "ho_network",
+              "source": "zhou2023",
+              "contrast": "zhou2023-1",
+              "level": null,
+              "against": null,
+              "kind": "numeric",
+              "m": 0.3577798095364914,
+              "engine": null,
+              "why": "the engine refuses the ratio: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the DIRECTION of this ratio is refused: B0 and the carried rivals disagree in its sign (S3). REFUSED, FALSIFIED pH BALANCE (S3; M1b pa"
+            }
+          ]
+        },
+        {
+          "cell": [
+            "2-Methylpyrazine",
+            "precursor dose",
+            "sulfur donor varied"
+          ],
+          "per_lab": {
+            "zjut_zheng_zhou": {
+              "measured": -0.4276765833115363,
+              "engine": null,
+              "items": 1,
+              "engine_items": 0
+            },
+            "ho_network": {
+              "measured": 0.2761546096205996,
+              "engine": null,
+              "items": 2,
+              "engine_items": 0
+            }
+          },
+          "verdict": "not runnable",
+          "rows": [
+            {
+              "lab": "zjut_zheng_zhou",
+              "source": "ding2023",
+              "contrast": "ding2023-17",
+              "level": null,
+              "against": null,
+              "kind": "numeric",
+              "m": -0.4276765833115363,
+              "engine": null,
+              "why": "charge not derivable: glycine (unstated (named in title, no amount prin)"
+            },
+            {
+              "lab": "ho_network",
+              "source": "zhou2022",
+              "contrast": "zhou2022-7",
+              "level": null,
+              "against": null,
+              "kind": "numeric",
+              "m": 0.20353830329717496,
+              "engine": null,
+              "why": "unmapped precursor: ax-arp -alanine)"
+            },
+            {
+              "lab": "ho_network",
+              "source": "zhou2022",
+              "contrast": "zhou2022-8",
+              "level": null,
+              "against": null,
+              "kind": "numeric",
+              "m": 0.3487709159440243,
+              "engine": null,
+              "why": "unmapped precursor: ax-arp -alanine)"
+            }
+          ]
+        },
+        {
+          "cell": [
+            "Benzaldehyde",
+            "sugar identity",
+            "xylose vs glucose"
+          ],
+          "per_lab": {
+            "hfut_wei_zhaojun": {
+              "measured": -0.38230834134414216,
+              "engine": null,
+              "items": 1,
+              "engine_items": 0
+            },
+            "astar_sifbi_chiang": {
+              "measured": 0.14035021706824333,
+              "engine": null,
+              "items": 3,
+              "engine_items": 0
+            }
+          },
+          "verdict": "not runnable",
+          "rows": [
+            {
+              "lab": "hfut_wei_zhaojun",
+              "source": "chen2023lycium",
+              "contrast": "chen2023lycium-8",
+              "level": "xylose",
+              "against": "glucose",
+              "kind": "categorical",
+              "m": -0.38230834134414216,
+              "engine": null,
+              "why": "no engine target for this odorant"
+            },
+            {
+              "lab": "astar_sifbi_chiang",
+              "source": "theng2024",
+              "contrast": "theng2024-22",
+              "level": "xylose",
+              "against": "glucose",
+              "kind": "categorical",
+              "m": 0.042869299177749065,
+              "engine": null,
+              "why": "no engine target for this odorant"
+            },
+            {
+              "lab": "astar_sifbi_chiang",
+              "source": "theng2024",
+              "contrast": "theng2024-23",
+              "level": "xylose",
+              "against": "glucose",
+              "kind": "categorical",
+              "m": 0.17782151824436288,
+              "engine": null,
+              "why": "no engine target for this odorant"
+            },
+            {
+              "lab": "astar_sifbi_chiang",
+              "source": "theng2024",
+              "contrast": "theng2024-24",
+              "level": "xylose",
+              "against": "glucose",
+              "kind": "categorical",
+              "m": 0.200359833782618,
+              "engine": null,
+              "why": "no engine target for this odorant"
+            }
+          ]
+        },
+        {
+          "cell": [
+            "Bis(2-methyl-3-furyl) disulfide",
+            "pH",
+            "pH 6-7.5, initial or label"
+          ],
+          "per_lab": {
+            "cau_gao_yanxiang": {
+              "measured": -0.3097574729157349,
+              "engine": null,
+              "items": 2,
+              "engine_items": 0
+            },
+            "ho_network": {
+              "measured": 0.23513069868661085,
+              "engine": null,
+              "items": 1,
+              "engine_items": 0
+            }
+          },
+          "verdict": "not runnable",
+          "rows": [
+            {
+              "lab": "cau_gao_yanxiang",
+              "source": "xu2007",
+              "contrast": "xu2007-5",
+              "level": null,
+              "against": null,
+              "kind": "numeric",
+              "m": -0.7056869566872647,
+              "engine": null,
+              "why": "the engine refuses the ratio: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the spread of this log ratio over B0 and the carried rivals (4.76 dex) exceeds omega. REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i),"
+            },
+            {
+              "lab": "cau_gao_yanxiang",
+              "source": "xu2007",
+              "contrast": "xu2007-6",
+              "level": null,
+              "against": null,
+              "kind": "numeric",
+              "m": 0.08617201085579489,
+              "engine": null,
+              "why": "the engine refuses the ratio: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): an arm's carried rivals could not be run, so the ratio's independence from the balance is not shown. REFUSED, FALSIFIED pH BALANCE (S3"
+            },
+            {
+              "lab": "ho_network",
+              "source": "zhou2023",
+              "contrast": "zhou2023-3",
+              "level": null,
+              "against": null,
+              "kind": "numeric",
+              "m": 0.23513069868661085,
+              "engine": null,
+              "why": "the engine refuses the ratio: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the spread of this log ratio over B0 and the carried rivals (0.73 dex) exceeds omega. REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i),"
+            }
+          ]
+        },
+        {
+          "cell": [
+            "Hexanal",
+            "sugar identity",
+            "xylose vs arabinose"
+          ],
+          "per_lab": {
+            "hfut_wei_zhaojun": {
+              "measured": 0.21813867183750424,
+              "engine": null,
+              "items": 2,
+              "engine_items": 0
+            },
+            "nus_liu_shaoquan": {
+              "measured": -0.22946946469978136,
+              "engine": null,
+              "items": 2,
+              "engine_items": 0
+            }
+          },
+          "verdict": "not runnable",
+          "rows": [
+            {
+              "lab": "hfut_wei_zhaojun",
+              "source": "chen2023lycium",
+              "contrast": "chen2023lycium-7",
+              "level": "xylose",
+              "against": "arabinose",
+              "kind": "categorical",
+              "m": 0.328885937860099,
+              "engine": null,
+              "why": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
+            },
+            {
+              "lab": "hfut_wei_zhaojun",
+              "source": "chen2023lycium",
+              "contrast": "chen2023lycium-14",
+              "level": "xylose",
+              "against": "arabinose",
+              "kind": "categorical",
+              "m": 0.10739140581490947,
+              "engine": null,
+              "why": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
+            },
+            {
+              "lab": "nus_liu_shaoquan",
+              "source": "zhang2024sugars",
+              "contrast": "zhang2024sugars-38",
+              "level": "xylose",
+              "against": "arabinose",
+              "kind": "categorical",
+              "m": -0.005143021073295007,
+              "engine": null,
+              "why": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
+            },
+            {
+              "lab": "nus_liu_shaoquan",
+              "source": "zhang2024sugars",
+              "contrast": "zhang2024sugars-39",
+              "level": "xylose",
+              "against": "arabinose",
+              "kind": "categorical",
+              "m": -0.4537959083262677,
+              "engine": null,
+              "why": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
+            }
+          ]
+        },
+        {
+          "cell": [
+            "Hexanal",
+            "sugar identity",
+            "xylose vs fructose"
+          ],
+          "per_lab": {
+            "hfut_wei_zhaojun": {
+              "measured": 0.26692930484965327,
+              "engine": null,
+              "items": 2,
+              "engine_items": 0
+            },
+            "nus_liu_shaoquan": {
+              "measured": -0.7157437280498627,
+              "engine": null,
+              "items": 2,
+              "engine_items": 0
+            }
+          },
+          "verdict": "not runnable",
+          "rows": [
+            {
+              "lab": "hfut_wei_zhaojun",
+              "source": "chen2023lycium",
+              "contrast": "chen2023lycium-7",
+              "level": "xylose",
+              "against": "fructose",
+              "kind": "categorical",
+              "m": 0.4599973424868047,
+              "engine": null,
+              "why": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
+            },
+            {
+              "lab": "hfut_wei_zhaojun",
+              "source": "chen2023lycium",
+              "contrast": "chen2023lycium-14",
+              "level": "xylose",
+              "against": "fructose",
+              "kind": "categorical",
+              "m": 0.07386126721250186,
+              "engine": null,
+              "why": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
+            },
+            {
+              "lab": "nus_liu_shaoquan",
+              "source": "zhang2024sugars",
+              "contrast": "zhang2024sugars-38",
+              "level": "xylose",
+              "against": "fructose",
+              "kind": "categorical",
+              "m": -0.5884700753556236,
+              "engine": null,
+              "why": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
+            },
+            {
+              "lab": "nus_liu_shaoquan",
+              "source": "zhang2024sugars",
+              "contrast": "zhang2024sugars-39",
+              "level": "xylose",
+              "against": "fructose",
+              "kind": "categorical",
+              "m": -0.8430173807441019,
+              "engine": null,
+              "why": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
+            }
+          ]
+        },
+        {
+          "cell": [
+            "Hexanal",
+            "sugar identity",
+            "xylose vs glucose"
+          ],
+          "per_lab": {
+            "hfut_wei_zhaojun": {
+              "measured": 0.40215993012857987,
+              "engine": null,
+              "items": 2,
+              "engine_items": 0
+            },
+            "nus_liu_shaoquan": {
+              "measured": -0.6305859365473455,
+              "engine": null,
+              "items": 2,
+              "engine_items": 0
+            }
+          },
+          "verdict": "not runnable",
+          "rows": [
+            {
+              "lab": "hfut_wei_zhaojun",
+              "source": "chen2023lycium",
+              "contrast": "chen2023lycium-7",
+              "level": "xylose",
+              "against": "glucose",
+              "kind": "categorical",
+              "m": 0.33935918170661017,
+              "engine": null,
+              "why": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
+            },
+            {
+              "lab": "hfut_wei_zhaojun",
+              "source": "chen2023lycium",
+              "contrast": "chen2023lycium-14",
+              "level": "xylose",
+              "against": "glucose",
+              "kind": "categorical",
+              "m": 0.46496067855054957,
+              "engine": null,
+              "why": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
+            },
+            {
+              "lab": "nus_liu_shaoquan",
+              "source": "zhang2024sugars",
+              "contrast": "zhang2024sugars-38",
+              "level": "xylose",
+              "against": "glucose",
+              "kind": "categorical",
+              "m": -0.4502470698614278,
+              "engine": null,
+              "why": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
+            },
+            {
+              "lab": "nus_liu_shaoquan",
+              "source": "zhang2024sugars",
+              "contrast": "zhang2024sugars-39",
+              "level": "xylose",
+              "against": "glucose",
+              "kind": "categorical",
+              "m": -0.8109248032332632,
+              "engine": null,
+              "why": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
+            }
+          ]
+        },
+        {
+          "cell": [
+            "Nonanal",
+            "precursor dose",
+            "sulfur donor varied"
+          ],
+          "per_lab": {
+            "zjut_zheng_zhou": {
+              "measured": 0.22067281590937227,
+              "engine": null,
+              "items": 1,
+              "engine_items": 0
+            },
+            "nus_liu_shaoquan": {
+              "measured": -0.2983489228187693,
+              "engine": null,
+              "items": 4,
+              "engine_items": 0
+            }
+          },
+          "verdict": "not runnable",
+          "rows": [
+            {
+              "lab": "zjut_zheng_zhou",
+              "source": "ding2023",
+              "contrast": "ding2023-25",
+              "level": null,
+              "against": null,
+              "kind": "numeric",
+              "m": 0.22067281590937227,
+              "engine": null,
+              "why": "charge not derivable: glycine (unstated (named in title, no amount prin)"
+            },
+            {
+              "lab": "nus_liu_shaoquan",
+              "source": "li2022heat",
+              "contrast": "li2022heat-59",
+              "level": null,
+              "against": null,
+              "kind": "numeric",
+              "m": -0.22750738969440523,
+              "engine": null,
+              "why": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
+            },
+            {
+              "lab": "nus_liu_shaoquan",
+              "source": "li2022heat",
+              "contrast": "li2022heat-60",
+              "level": null,
+              "against": null,
+              "kind": "numeric",
+              "m": -0.13469857389745624,
+              "engine": null,
+              "why": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
+            },
+            {
+              "lab": "nus_liu_shaoquan",
+              "source": "li2022heat",
+              "contrast": "li2022heat-64",
+              "level": null,
+              "against": null,
+              "kind": "numeric",
+              "m": -0.4448651824302236,
+              "engine": null,
+              "why": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
+            },
+            {
+              "lab": "nus_liu_shaoquan",
+              "source": "li2022heat",
+              "contrast": "li2022heat-65",
+              "level": null,
+              "against": null,
+              "kind": "numeric",
+              "m": -0.3863245452529921,
+              "engine": null,
+              "why": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
+            }
+          ]
+        },
+        {
+          "cell": [
+            "Trimethylpyrazine",
+            "amino acid identity",
+            "none vs arginine"
+          ],
+          "per_lab": {
+            "ho_network": {
+              "measured": 0.259835397764838,
+              "engine": null,
+              "items": 1,
+              "engine_items": 0
+            },
+            "wonkwang_cho_inhee": {
+              "measured": -0.774690718274137,
+              "engine": null,
+              "items": 1,
+              "engine_items": 0
+            }
+          },
+          "verdict": "not runnable",
+          "rows": [
+            {
+              "lab": "ho_network",
+              "source": "hwang1995",
+              "contrast": "hwang1995-9",
+              "level": "none",
+              "against": "arginine",
+              "kind": "categorical",
+              "m": 0.259835397764838,
+              "engine": null,
+              "why": "no engine target for this odorant"
+            },
+            {
+              "lab": "wonkwang_cho_inhee",
+              "source": "park2022mealworm",
+              "contrast": "park2022mealworm__families-8",
+              "level": "none",
+              "against": "arginine",
+              "kind": "categorical",
+              "m": -0.774690718274137,
+              "engine": null,
+              "why": "no engine target for this odorant"
+            }
+          ]
+        }
+      ],
+      "verdicts": {
+        "not runnable": 9
+      },
+      "not_run": {
+        "the engine refuses the arm": 16,
+        "the engine refuses the ratio": 6,
+        "no engine target for this odorant": 6,
+        "charge not derivable": 2,
+        "unmapped precursor": 2
+      }
+    },
+    "added_precursors_ph_clamped": {
+      "cells": [
+        {
+          "cell": [
+            "2-Methyl-3-furanthiol (MFT)",
+            "pH",
+            "pH 6-7.5, initial or label"
+          ],
+          "per_lab": {
+            "cau_gao_yanxiang": {
+              "measured": -0.6184696411651879,
+              "engine": -2.0661245466555154,
+              "items": 2,
+              "engine_items": 2
+            },
+            "ho_network": {
+              "measured": 0.3577798095364914,
+              "engine": -1.1943709450443256,
+              "items": 1,
+              "engine_items": 1
+            }
+          },
+          "measured_difference": -0.9762494507016792,
+          "engine_difference": -0.8717536016111898,
+          "verdict": "explained by conditions",
+          "rows": [
+            {
+              "lab": "cau_gao_yanxiang",
+              "source": "xu2007",
+              "contrast": "xu2007-1",
+              "level": null,
+              "against": null,
+              "kind": "numeric",
+              "m": -0.9629681466121985,
+              "engine": -2.0661245466555154,
+              "why": null
+            },
+            {
+              "lab": "cau_gao_yanxiang",
+              "source": "xu2007",
+              "contrast": "xu2007-2",
+              "level": null,
+              "against": null,
+              "kind": "numeric",
+              "m": -0.2739711357181772,
+              "engine": -2.0661245466555154,
+              "why": null
+            },
+            {
+              "lab": "ho_network",
+              "source": "zhou2023",
+              "contrast": "zhou2023-1",
+              "level": null,
+              "against": null,
+              "kind": "numeric",
+              "m": 0.3577798095364914,
+              "engine": -1.1943709450443256,
+              "why": null
+            }
+          ]
+        },
+        {
+          "cell": [
+            "2-Methylpyrazine",
+            "precursor dose",
+            "sulfur donor varied"
+          ],
+          "per_lab": {
+            "zjut_zheng_zhou": {
+              "measured": -0.4276765833115363,
+              "engine": null,
+              "items": 1,
+              "engine_items": 0
+            },
+            "ho_network": {
+              "measured": 0.2761546096205996,
+              "engine": null,
+              "items": 2,
+              "engine_items": 0
+            }
+          },
+          "verdict": "not runnable",
+          "rows": [
+            {
+              "lab": "zjut_zheng_zhou",
+              "source": "ding2023",
+              "contrast": "ding2023-17",
+              "level": null,
+              "against": null,
+              "kind": "numeric",
+              "m": -0.4276765833115363,
+              "engine": null,
+              "why": "charge not derivable: glycine (unstated (named in title, no amount prin)"
+            },
+            {
+              "lab": "ho_network",
+              "source": "zhou2022",
+              "contrast": "zhou2022-7",
+              "level": null,
+              "against": null,
+              "kind": "numeric",
+              "m": 0.20353830329717496,
+              "engine": null,
+              "why": "unmapped precursor: ax-arp -alanine)"
+            },
+            {
+              "lab": "ho_network",
+              "source": "zhou2022",
+              "contrast": "zhou2022-8",
+              "level": null,
+              "against": null,
+              "kind": "numeric",
+              "m": 0.3487709159440243,
+              "engine": null,
+              "why": "unmapped precursor: ax-arp -alanine)"
+            }
+          ]
+        },
+        {
+          "cell": [
+            "Benzaldehyde",
+            "sugar identity",
+            "xylose vs glucose"
+          ],
+          "per_lab": {
+            "hfut_wei_zhaojun": {
+              "measured": -0.38230834134414216,
+              "engine": null,
+              "items": 1,
+              "engine_items": 0
+            },
+            "astar_sifbi_chiang": {
+              "measured": 0.14035021706824333,
+              "engine": null,
+              "items": 3,
+              "engine_items": 0
+            }
+          },
+          "verdict": "not runnable",
+          "rows": [
+            {
+              "lab": "hfut_wei_zhaojun",
+              "source": "chen2023lycium",
+              "contrast": "chen2023lycium-8",
+              "level": "xylose",
+              "against": "glucose",
+              "kind": "categorical",
+              "m": -0.38230834134414216,
+              "engine": null,
+              "why": "no engine target for this odorant"
+            },
+            {
+              "lab": "astar_sifbi_chiang",
+              "source": "theng2024",
+              "contrast": "theng2024-22",
+              "level": "xylose",
+              "against": "glucose",
+              "kind": "categorical",
+              "m": 0.042869299177749065,
+              "engine": null,
+              "why": "no engine target for this odorant"
+            },
+            {
+              "lab": "astar_sifbi_chiang",
+              "source": "theng2024",
+              "contrast": "theng2024-23",
+              "level": "xylose",
+              "against": "glucose",
+              "kind": "categorical",
+              "m": 0.17782151824436288,
+              "engine": null,
+              "why": "no engine target for this odorant"
+            },
+            {
+              "lab": "astar_sifbi_chiang",
+              "source": "theng2024",
+              "contrast": "theng2024-24",
+              "level": "xylose",
+              "against": "glucose",
+              "kind": "categorical",
+              "m": 0.200359833782618,
+              "engine": null,
+              "why": "no engine target for this odorant"
+            }
+          ]
+        },
+        {
+          "cell": [
+            "Bis(2-methyl-3-furyl) disulfide",
+            "pH",
+            "pH 6-7.5, initial or label"
+          ],
+          "per_lab": {
+            "cau_gao_yanxiang": {
+              "measured": -0.3097574729157349,
+              "engine": -3.2092156164536805,
+              "items": 2,
+              "engine_items": 2
+            },
+            "ho_network": {
+              "measured": 0.23513069868661085,
+              "engine": -1.4221170533495415,
+              "items": 1,
+              "engine_items": 1
+            }
+          },
+          "measured_difference": -0.5448881716023457,
+          "engine_difference": -1.787098563104139,
+          "verdict": "not explained",
+          "rows": [
+            {
+              "lab": "cau_gao_yanxiang",
+              "source": "xu2007",
+              "contrast": "xu2007-5",
+              "level": null,
+              "against": null,
+              "kind": "numeric",
+              "m": -0.7056869566872647,
+              "engine": -3.2140153311055366,
+              "why": null
+            },
+            {
+              "lab": "cau_gao_yanxiang",
+              "source": "xu2007",
+              "contrast": "xu2007-6",
+              "level": null,
+              "against": null,
+              "kind": "numeric",
+              "m": 0.08617201085579489,
+              "engine": -3.204415901801825,
+              "why": null
+            },
+            {
+              "lab": "ho_network",
+              "source": "zhou2023",
+              "contrast": "zhou2023-3",
+              "level": null,
+              "against": null,
+              "kind": "numeric",
+              "m": 0.23513069868661085,
+              "engine": -1.4221170533495415,
+              "why": null
+            }
+          ]
+        },
+        {
+          "cell": [
+            "Hexanal",
+            "sugar identity",
+            "xylose vs arabinose"
+          ],
+          "per_lab": {
+            "hfut_wei_zhaojun": {
+              "measured": 0.21813867183750424,
+              "engine": null,
+              "items": 2,
+              "engine_items": 0
+            },
+            "nus_liu_shaoquan": {
+              "measured": -0.22946946469978136,
+              "engine": null,
+              "items": 2,
+              "engine_items": 0
+            }
+          },
+          "verdict": "not runnable",
+          "rows": [
+            {
+              "lab": "hfut_wei_zhaojun",
+              "source": "chen2023lycium",
+              "contrast": "chen2023lycium-7",
+              "level": "xylose",
+              "against": "arabinose",
+              "kind": "categorical",
+              "m": 0.328885937860099,
+              "engine": null,
+              "why": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
+            },
+            {
+              "lab": "hfut_wei_zhaojun",
+              "source": "chen2023lycium",
+              "contrast": "chen2023lycium-14",
+              "level": "xylose",
+              "against": "arabinose",
+              "kind": "categorical",
+              "m": 0.10739140581490947,
+              "engine": null,
+              "why": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
+            },
+            {
+              "lab": "nus_liu_shaoquan",
+              "source": "zhang2024sugars",
+              "contrast": "zhang2024sugars-38",
+              "level": "xylose",
+              "against": "arabinose",
+              "kind": "categorical",
+              "m": -0.005143021073295007,
+              "engine": null,
+              "why": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
+            },
+            {
+              "lab": "nus_liu_shaoquan",
+              "source": "zhang2024sugars",
+              "contrast": "zhang2024sugars-39",
+              "level": "xylose",
+              "against": "arabinose",
+              "kind": "categorical",
+              "m": -0.4537959083262677,
+              "engine": null,
+              "why": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
+            }
+          ]
+        },
+        {
+          "cell": [
+            "Hexanal",
+            "sugar identity",
+            "xylose vs fructose"
+          ],
+          "per_lab": {
+            "hfut_wei_zhaojun": {
+              "measured": 0.26692930484965327,
+              "engine": null,
+              "items": 2,
+              "engine_items": 0
+            },
+            "nus_liu_shaoquan": {
+              "measured": -0.7157437280498627,
+              "engine": null,
+              "items": 2,
+              "engine_items": 0
+            }
+          },
+          "verdict": "not runnable",
+          "rows": [
+            {
+              "lab": "hfut_wei_zhaojun",
+              "source": "chen2023lycium",
+              "contrast": "chen2023lycium-7",
+              "level": "xylose",
+              "against": "fructose",
+              "kind": "categorical",
+              "m": 0.4599973424868047,
+              "engine": null,
+              "why": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
+            },
+            {
+              "lab": "hfut_wei_zhaojun",
+              "source": "chen2023lycium",
+              "contrast": "chen2023lycium-14",
+              "level": "xylose",
+              "against": "fructose",
+              "kind": "categorical",
+              "m": 0.07386126721250186,
+              "engine": null,
+              "why": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
+            },
+            {
+              "lab": "nus_liu_shaoquan",
+              "source": "zhang2024sugars",
+              "contrast": "zhang2024sugars-38",
+              "level": "xylose",
+              "against": "fructose",
+              "kind": "categorical",
+              "m": -0.5884700753556236,
+              "engine": null,
+              "why": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
+            },
+            {
+              "lab": "nus_liu_shaoquan",
+              "source": "zhang2024sugars",
+              "contrast": "zhang2024sugars-39",
+              "level": "xylose",
+              "against": "fructose",
+              "kind": "categorical",
+              "m": -0.8430173807441019,
+              "engine": null,
+              "why": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
+            }
+          ]
+        },
+        {
+          "cell": [
+            "Hexanal",
+            "sugar identity",
+            "xylose vs glucose"
+          ],
+          "per_lab": {
+            "hfut_wei_zhaojun": {
+              "measured": 0.40215993012857987,
+              "engine": null,
+              "items": 2,
+              "engine_items": 0
+            },
+            "nus_liu_shaoquan": {
+              "measured": -0.6305859365473455,
+              "engine": null,
+              "items": 2,
+              "engine_items": 0
+            }
+          },
+          "verdict": "not runnable",
+          "rows": [
+            {
+              "lab": "hfut_wei_zhaojun",
+              "source": "chen2023lycium",
+              "contrast": "chen2023lycium-7",
+              "level": "xylose",
+              "against": "glucose",
+              "kind": "categorical",
+              "m": 0.33935918170661017,
+              "engine": null,
+              "why": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
+            },
+            {
+              "lab": "hfut_wei_zhaojun",
+              "source": "chen2023lycium",
+              "contrast": "chen2023lycium-14",
+              "level": "xylose",
+              "against": "glucose",
+              "kind": "categorical",
+              "m": 0.46496067855054957,
+              "engine": null,
+              "why": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
+            },
+            {
+              "lab": "nus_liu_shaoquan",
+              "source": "zhang2024sugars",
+              "contrast": "zhang2024sugars-38",
+              "level": "xylose",
+              "against": "glucose",
+              "kind": "categorical",
+              "m": -0.4502470698614278,
+              "engine": null,
+              "why": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
+            },
+            {
+              "lab": "nus_liu_shaoquan",
+              "source": "zhang2024sugars",
+              "contrast": "zhang2024sugars-39",
+              "level": "xylose",
+              "against": "glucose",
+              "kind": "categorical",
+              "m": -0.8109248032332632,
+              "engine": null,
+              "why": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
+            }
+          ]
+        },
+        {
+          "cell": [
+            "Nonanal",
+            "precursor dose",
+            "sulfur donor varied"
+          ],
+          "per_lab": {
+            "zjut_zheng_zhou": {
+              "measured": 0.22067281590937227,
+              "engine": null,
+              "items": 1,
+              "engine_items": 0
+            },
+            "nus_liu_shaoquan": {
+              "measured": -0.2983489228187693,
+              "engine": null,
+              "items": 4,
+              "engine_items": 0
+            }
+          },
+          "verdict": "not runnable",
+          "rows": [
+            {
+              "lab": "zjut_zheng_zhou",
+              "source": "ding2023",
+              "contrast": "ding2023-25",
+              "level": null,
+              "against": null,
+              "kind": "numeric",
+              "m": 0.22067281590937227,
+              "engine": null,
+              "why": "charge not derivable: glycine (unstated (named in title, no amount prin)"
+            },
+            {
+              "lab": "nus_liu_shaoquan",
+              "source": "li2022heat",
+              "contrast": "li2022heat-59",
+              "level": null,
+              "against": null,
+              "kind": "numeric",
+              "m": -0.22750738969440523,
+              "engine": null,
+              "why": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
+            },
+            {
+              "lab": "nus_liu_shaoquan",
+              "source": "li2022heat",
+              "contrast": "li2022heat-60",
+              "level": null,
+              "against": null,
+              "kind": "numeric",
+              "m": -0.13469857389745624,
+              "engine": null,
+              "why": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
+            },
+            {
+              "lab": "nus_liu_shaoquan",
+              "source": "li2022heat",
+              "contrast": "li2022heat-64",
+              "level": null,
+              "against": null,
+              "kind": "numeric",
+              "m": -0.4448651824302236,
+              "engine": null,
+              "why": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
+            },
+            {
+              "lab": "nus_liu_shaoquan",
+              "source": "li2022heat",
+              "contrast": "li2022heat-65",
+              "level": null,
+              "against": null,
+              "kind": "numeric",
+              "m": -0.3863245452529921,
+              "engine": null,
+              "why": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
+            }
+          ]
+        },
+        {
+          "cell": [
+            "Trimethylpyrazine",
+            "amino acid identity",
+            "none vs arginine"
+          ],
+          "per_lab": {
+            "ho_network": {
+              "measured": 0.259835397764838,
+              "engine": null,
+              "items": 1,
+              "engine_items": 0
+            },
+            "wonkwang_cho_inhee": {
+              "measured": -0.774690718274137,
+              "engine": null,
+              "items": 1,
+              "engine_items": 0
+            }
+          },
+          "verdict": "not runnable",
+          "rows": [
+            {
+              "lab": "ho_network",
+              "source": "hwang1995",
+              "contrast": "hwang1995-9",
+              "level": "none",
+              "against": "arginine",
+              "kind": "categorical",
+              "m": 0.259835397764838,
+              "engine": null,
+              "why": "no engine target for this odorant"
+            },
+            {
+              "lab": "wonkwang_cho_inhee",
+              "source": "park2022mealworm",
+              "contrast": "park2022mealworm__families-8",
+              "level": "none",
+              "against": "arginine",
+              "kind": "categorical",
+              "m": -0.774690718274137,
+              "engine": null,
+              "why": "no engine target for this odorant"
+            }
+          ]
+        }
+      ],
+      "verdicts": {
+        "explained by conditions": 1,
+        "not runnable": 7,
+        "not explained": 1
+      },
+      "not_run": {
+        "the engine refuses the arm": 16,
+        "no engine target for this odorant": 6,
+        "charge not derivable": 2,
+        "unmapped precursor": 2
+      }
+    }
+  },
+  "engine_integrations": 18,
+  "provenance": {
+    "artifact": "step5c_discordant_cells",
+    "generated_on": "2026-11-13",
+    "git": {
+      "commit": "02b6763c892e54778b42198f9e380228280e88f8",
+      "short": "02b6763c",
+      "branch": "step6-writeup",
+      "dirty": true
+    },
+    "generated_by": "scripts/generators/build_step5c_discordant_cells.py",
+    "inputs": [
+      {
+        "path": "results/validation/lever_disagreement_audit.json",
+        "sha256": "df57df7372981fa664b34fbd07c824757d4d383ca99142b3f13e447465d9315e"
+      },
+      {
+        "path": "scripts/generators/build_step5a_display_check.py",
+        "sha256": "f079abfd3d9165211fec60318b0b769b6049dc1c5225201fe18933054272a643"
+      },
+      {
+        "path": "scripts/generators/build_step5c_discordant_cells.py",
+        "sha256": "40326eed9d62e26a9b0de6b5a05b279d0686026250070e55c664dbeeadfb8a92"
+      },
+      {
+        "path": "results/validation/step5c_discordant_cells_items.json",
+        "sha256": "830f21657d465823b188e84a67c3c5953b25b534a0c4301c9a2f2b11a2968281"
+      }
+    ]
+  }
+}

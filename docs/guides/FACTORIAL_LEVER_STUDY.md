@@ -176,6 +176,26 @@ because step 5 (the engine judged on held-out contrasts from two TEST laboratori
 section keeps two as the default for that reason; if step 5 is not wanted from this round, one laboratory is the
 better and cheaper design.
 
+## Changes after steps 5a - 5b (2026-11-13)
+
+The disagreement audit ([DISAGREEMENT_READING.md](../reference/lever_table/DISAGREEMENT_READING.md)) and the step-5a
+coverage check ([step5a_display_check.md](../../results/validation/step5a_display_check.md)) found why published
+contrasts fail to add up; the design already avoids most of it, and four points are added:
+
+- **pH, buffered or not.** The pea isolate is the only buffer; no buffer salt is added (state "none" in the report).
+  pH is measured before heating and after cooling in every vial (as above), and each laboratory's pH contrast is
+  keyed with its final pH beside the initial one, so that the table can read it as the lever it really was. If the
+  two pH levels end less than 0.3 units apart in a laboratory, that laboratory's pH contrast is reported but read
+  "pH not held".
+- **Reference arms.** Every factor's two levels are both compounds, and the matrix-background pot is the same in
+  every laboratory, so no "none" arm means a different pot in different studies (the cause of 9 of the 16 widest
+  disagreements in size).
+- **Detection limits.** A compound not detected is reported with that run's limit, never as zero or blank.
+- **The isolate's composition.** The engine cannot run a pot whose matrix composition is not on file (148 of step
+  5a's 396 held-out contrasts), and no dossier on disk gives free sugars or free amino acids for a pea isolate. One
+  laboratory measures them (and total cysteine and methionine, and fat) once on the shipped lot; without them the
+  study still serves the lever table, but the engine cannot be judged on it.
+
 ## What the partner gets
 
 Co-authorship on the data and on the validation; the open tool and the lever table run on their own recipes; the
