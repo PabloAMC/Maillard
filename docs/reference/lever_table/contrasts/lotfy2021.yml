@@ -1,0 +1,2064 @@
+source: lotfy2021
+pdf: data/articles/lotfy2021.pdf
+reader: resolved
+scope_note: 'Resolved 2026-11-13 (step 11, A6 batch 2). Base reader a (18). Readers agree on 17 contrasts; reader a also keys
+  Table 2''s ''3-Ethyl-2,5-dimethylpyrazine'' (row 20, ''-'' / ''-'' / 1.80 / 6.51 / 5.16 at pH 5 - 9), re-read and confirmed;
+  it is the same compound as 2-ethyl-3,6-dimethylpyrazine (decided call), canonical odorant 2-Ethyl-3,6-dimethylpyrazine (lotfy2021-8).
+  Row 18 (5-ethyl-2,3-dimethylpyrazine, not keyed) prints partly the same numbers; keyed as printed. GC-MS TIC peak areas
+  x 10^6 (peak_area), n = 3 with SD, initial pH 5 - 9 with NaOH/HCl, no buffer (adjusted_unbuffered); no final pH printed.
+  Conventions (resolver, uniform with batch 1): printed ND, ''-'', blank or 0 is nd_no_limit with value null; all-ND contrasts
+  kept; one compound printed twice carries duplicate_of; co-eluting mixtures odorant_unlisted; odorant names canonicalised
+  to the compound_keys display name, printed name in odorant_printed; IS semi-quantification and SIFT-MS ppb relative, calibration
+  with authentic standards absolute.'
+contrasts:
+- id: lotfy2021-1
+  resolution: agreed
+  odorant: 2-Methylpropanal (isobutyraldehyde)
+  lever_class: pH
+  lever: initial pH
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: peak area x 10^6 (TIC)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH5
+    lever_value: 5
+    value: 0.2
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.03
+    conditions:
+      ph: 5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH6
+    lever_value: 6
+    value: 0.51
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.06
+    conditions:
+      ph: 6
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH7
+    lever_value: 7
+    value: 12.9
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.61
+    conditions:
+      ph: 7
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH8
+    lever_value: 8
+    value: 21.92
+    censor: none
+    limit: null
+    n: 3
+    sd: 2.74
+    conditions:
+      ph: 8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH9
+    lever_value: 9
+    value: 29.63
+    censor: none
+    limit: null
+    n: 3
+    sd: 3.7
+    conditions:
+      ph: 9
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  odorant_printed: 2-methylpropanal
+- id: lotfy2021-2
+  resolution: agreed
+  odorant: 2-Methylbutanal
+  lever_class: pH
+  lever: initial pH
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: peak area x 10^6 (TIC)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH5
+    lever_value: 5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH6
+    lever_value: 6
+    value: 0.35
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.04
+    conditions:
+      ph: 6
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH7
+    lever_value: 7
+    value: 0.91
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.11
+    conditions:
+      ph: 7
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH8
+    lever_value: 8
+    value: 4.1
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.51
+    conditions:
+      ph: 8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH9
+    lever_value: 9
+    value: 6.9
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.86
+    conditions:
+      ph: 9
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  odorant_printed: 2-methylbutanal
+- id: lotfy2021-3
+  resolution: agreed
+  odorant: 3-Methylbutanal
+  lever_class: pH
+  lever: initial pH
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: peak area x 10^6 (TIC)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH5
+    lever_value: 5
+    value: 1.62
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.2
+    conditions:
+      ph: 5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH6
+    lever_value: 6
+    value: 2.04
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.26
+    conditions:
+      ph: 6
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH7
+    lever_value: 7
+    value: 15.05
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.83
+    conditions:
+      ph: 7
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH8
+    lever_value: 8
+    value: 16.68
+    censor: none
+    limit: null
+    n: 3
+    sd: 2.09
+    conditions:
+      ph: 8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH9
+    lever_value: 9
+    value: 15.9
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.99
+    conditions:
+      ph: 9
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  odorant_printed: 3-methylbutanal
+- id: lotfy2021-4
+  resolution: agreed
+  odorant: 2-Methylpyrazine
+  lever_class: pH
+  lever: initial pH
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: peak area x 10^6 (TIC)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH5
+    lever_value: 5
+    value: 0.92
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.12
+    conditions:
+      ph: 5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH6
+    lever_value: 6
+    value: 1.52
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.19
+    conditions:
+      ph: 6
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH7
+    lever_value: 7
+    value: 4.5
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.56
+    conditions:
+      ph: 7
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH8
+    lever_value: 8
+    value: 3.22
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.4
+    conditions:
+      ph: 8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH9
+    lever_value: 9
+    value: 1.88
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.24
+    conditions:
+      ph: 9
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  odorant_printed: 2-methylpyrazine
+- id: lotfy2021-5
+  resolution: agreed
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: pH
+  lever: initial pH
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: peak area x 10^6 (TIC)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH5
+    lever_value: 5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH6
+    lever_value: 6
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH7
+    lever_value: 7
+    value: 0.81
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.1
+    conditions:
+      ph: 7
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH8
+    lever_value: 8
+    value: 2.22
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.28
+    conditions:
+      ph: 8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH9
+    lever_value: 9
+    value: 12.1
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.51
+    conditions:
+      ph: 9
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  odorant_printed: 2,5-dimethylpyrazine
+- id: lotfy2021-6
+  resolution: agreed
+  odorant: 2,6-Dimethylpyrazine
+  lever_class: pH
+  lever: initial pH
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: peak area x 10^6 (TIC)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH5
+    lever_value: 5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH6
+    lever_value: 6
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH7
+    lever_value: 7
+    value: 1.11
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.14
+    conditions:
+      ph: 7
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH8
+    lever_value: 8
+    value: 5.0
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.63
+    conditions:
+      ph: 8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH9
+    lever_value: 9
+    value: 16.02
+    censor: none
+    limit: null
+    n: 3
+    sd: 2.0
+    conditions:
+      ph: 9
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  odorant_printed: 2,6-dimethylpyrazine
+- id: lotfy2021-7
+  resolution: agreed
+  odorant: 2-Ethylpyrazine
+  lever_class: pH
+  lever: initial pH
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: peak area x 10^6 (TIC)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH5
+    lever_value: 5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH6
+    lever_value: 6
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH7
+    lever_value: 7
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH8
+    lever_value: 8
+    value: 6.85
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.86
+    conditions:
+      ph: 8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH9
+    lever_value: 9
+    value: 9.95
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.24
+    conditions:
+      ph: 9
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  odorant_printed: 2-ethylpyrazine
+- id: lotfy2021-8
+  resolution: resolved
+  odorant: 2-Ethyl-3,6-dimethylpyrazine
+  lever_class: pH
+  lever: initial pH
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: peak area x 10^6 (TIC)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH5
+    lever_value: 5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH6
+    lever_value: 6
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH7
+    lever_value: 7
+    value: 1.8
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.23
+    conditions:
+      ph: 7
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH8
+    lever_value: 8
+    value: 6.51
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.81
+    conditions:
+      ph: 8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH9
+    lever_value: 9
+    value: 5.16
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.65
+    conditions:
+      ph: 9
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  odorant_printed: 3-ethyl-2,5-dimethylpyrazine
+- id: lotfy2021-9
+  resolution: agreed
+  odorant: Methional (3-(methylthio)propanal)
+  lever_class: pH
+  lever: initial pH
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: peak area x 10^6 (TIC)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH5
+    lever_value: 5
+    value: 8.75
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.09
+    conditions:
+      ph: 5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH6
+    lever_value: 6
+    value: 5.12
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.64
+    conditions:
+      ph: 6
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH7
+    lever_value: 7
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH8
+    lever_value: 8
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH9
+    lever_value: 9
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  odorant_printed: 3-(methylthio)propanal
+- id: lotfy2021-10
+  resolution: agreed
+  odorant: Furfural
+  lever_class: pH
+  lever: initial pH
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: peak area x 10^6 (TIC)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH5
+    lever_value: 5
+    value: 90.7
+    censor: none
+    limit: null
+    n: 3
+    sd: 11.33
+    conditions:
+      ph: 5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH6
+    lever_value: 6
+    value: 66.01
+    censor: none
+    limit: null
+    n: 3
+    sd: 8.25
+    conditions:
+      ph: 6
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH7
+    lever_value: 7
+    value: 12.24
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.53
+    conditions:
+      ph: 7
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH8
+    lever_value: 8
+    value: 2.44
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.31
+    conditions:
+      ph: 8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH9
+    lever_value: 9
+    value: 1.01
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.13
+    conditions:
+      ph: 9
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  odorant_printed: 2-furfural
+- id: lotfy2021-11
+  resolution: agreed
+  odorant: Tetramethylpyrazine
+  lever_class: pH
+  lever: initial pH
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: peak area x 10^6 (TIC)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH5
+    lever_value: 5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH6
+    lever_value: 6
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH7
+    lever_value: 7
+    value: 4.0
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.5
+    conditions:
+      ph: 7
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH8
+    lever_value: 8
+    value: 6.32
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.79
+    conditions:
+      ph: 8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH9
+    lever_value: 9
+    value: 9.0
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.0
+    conditions:
+      ph: 9
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  odorant_printed: tetramethylpyrazine
+- id: lotfy2021-12
+  resolution: agreed
+  odorant: Benzaldehyde
+  lever_class: pH
+  lever: initial pH
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: peak area x 10^6 (TIC)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH5
+    lever_value: 5
+    value: 0.21
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.03
+    conditions:
+      ph: 5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH6
+    lever_value: 6
+    value: 1.1
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.14
+    conditions:
+      ph: 6
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH7
+    lever_value: 7
+    value: 3.34
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.42
+    conditions:
+      ph: 7
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH8
+    lever_value: 8
+    value: 5.98
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.75
+    conditions:
+      ph: 8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH9
+    lever_value: 9
+    value: 2.0
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.25
+    conditions:
+      ph: 9
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  odorant_printed: benzaldehyde
+- id: lotfy2021-13
+  resolution: agreed
+  odorant: 2-Acetylfuran
+  lever_class: pH
+  lever: initial pH
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: peak area x 10^6 (TIC)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH5
+    lever_value: 5
+    value: 2.31
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.29
+    conditions:
+      ph: 5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH6
+    lever_value: 6
+    value: 5.52
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.69
+    conditions:
+      ph: 6
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH7
+    lever_value: 7
+    value: 4.15
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.64
+    conditions:
+      ph: 7
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH8
+    lever_value: 8
+    value: 3.0
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.38
+    conditions:
+      ph: 8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH9
+    lever_value: 9
+    value: 1.52
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.32
+    conditions:
+      ph: 9
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  odorant_printed: 2-acetylfuran
+- id: lotfy2021-14
+  resolution: agreed
+  odorant: 5-Methylfurfural
+  lever_class: pH
+  lever: initial pH
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: peak area x 10^6 (TIC)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH5
+    lever_value: 5
+    value: 3.17
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.4
+    conditions:
+      ph: 5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH6
+    lever_value: 6
+    value: 6.33
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.79
+    conditions:
+      ph: 6
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH7
+    lever_value: 7
+    value: 4.05
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.51
+    conditions:
+      ph: 7
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH8
+    lever_value: 8
+    value: 4.66
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.58
+    conditions:
+      ph: 8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH9
+    lever_value: 9
+    value: 3.02
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.38
+    conditions:
+      ph: 9
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  odorant_printed: 5-methyl-2-furfural
+- id: lotfy2021-15
+  resolution: agreed
+  odorant: Phenylacetaldehyde
+  lever_class: pH
+  lever: initial pH
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: peak area x 10^6 (TIC)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH5
+    lever_value: 5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH6
+    lever_value: 6
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH7
+    lever_value: 7
+    value: 0.95
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.12
+    conditions:
+      ph: 7
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH8
+    lever_value: 8
+    value: 1.01
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.13
+    conditions:
+      ph: 8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH9
+    lever_value: 9
+    value: 0.8
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.1
+    conditions:
+      ph: 9
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  odorant_printed: phenylacetaldehyde
+- id: lotfy2021-16
+  resolution: agreed
+  odorant: 2-Furanmethanol
+  lever_class: pH
+  lever: initial pH
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: peak area x 10^6 (TIC)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH5
+    lever_value: 5
+    value: 2.17
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.27
+    conditions:
+      ph: 5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH6
+    lever_value: 6
+    value: 3.99
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.5
+    conditions:
+      ph: 6
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH7
+    lever_value: 7
+    value: 2.08
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.26
+    conditions:
+      ph: 7
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH8
+    lever_value: 8
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH9
+    lever_value: 9
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  odorant_printed: furfuryl alcohol
+- id: lotfy2021-17
+  resolution: agreed
+  odorant: DMHF
+  lever_class: pH
+  lever: initial pH
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: peak area x 10^6 (TIC)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH5
+    lever_value: 5
+    value: 0.95
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.12
+    conditions:
+      ph: 5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH6
+    lever_value: 6
+    value: 1.08
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.14
+    conditions:
+      ph: 6
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH7
+    lever_value: 7
+    value: 0.87
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.11
+    conditions:
+      ph: 7
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH8
+    lever_value: 8
+    value: 0.69
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.69
+    conditions:
+      ph: 8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH9
+    lever_value: 9
+    value: 0.41
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.08
+    conditions:
+      ph: 9
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  odorant_printed: furaneol
+- id: lotfy2021-18
+  resolution: agreed
+  odorant: Pyrazines
+  lever_class: pH
+  lever: initial pH
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: peak area x 10^6 (TIC)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH5
+    lever_value: 5
+    value: 1.99
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.25
+    conditions:
+      ph: 5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH6
+    lever_value: 6
+    value: 5.49
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.69
+    conditions:
+      ph: 6
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH7
+    lever_value: 7
+    value: 38.48
+    censor: none
+    limit: null
+    n: 3
+    sd: 4.56
+    conditions:
+      ph: 7
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH8
+    lever_value: 8
+    value: 86.85
+    censor: none
+    limit: null
+    n: 3
+    sd: 10.87
+    conditions:
+      ph: 8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated
+  - label: pH9
+    lever_value: 9
+    value: 157.23
+    censor: none
+    limit: null
+    n: 3
+    sd: 19.55
+    conditions:
+      ph: 9
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 120
+      precursors:
+        enzymatically hydrolyzed quinoa protein: 5 g / 100 mL
+        xylose: 0.5 g / 100 mL
+      buffer: none
+      matrix: plant protein (enzymatically hydrolyzed quinoa protein)
+      headspace: sealed, unstated

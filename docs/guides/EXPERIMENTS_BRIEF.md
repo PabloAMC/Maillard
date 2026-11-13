@@ -25,8 +25,8 @@ today. This section says how far it is and what would move it.
 
 **What the month between the two versions showed.**
 
-- **The literature was keyed as a table of levers, and it answers almost nothing.** 79 sources, 1,835
-  within-study contrasts, 32 laboratories, read by two blind readers: four cells of 75 are answered. The cause is the
+- **The literature was keyed as a table of levers, and it answers almost nothing.** 92 sources, 2,311
+  within-study contrasts, 40 laboratories, read by two blind readers: six cells of 75 are answered. The cause is the
   shape of the data, as this brief said in October: liquid model systems, one laboratory per question, peak
   areas, several things changed at once. **Four sources on disk have a heated plant- or fungal-protein contrast** (flaxseed, goji seed meal, two mushroom hydrolysates); none is a pea or soy isolate.
 - **Laboratories disagree by more than most levers move things.** How much of that is measurement (isotope

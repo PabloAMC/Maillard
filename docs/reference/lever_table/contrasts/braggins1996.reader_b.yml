@@ -1,0 +1,1321 @@
+source: braggins1996
+pdf: data/articles/braggins1996.pdf
+reader: b
+scope_note: 'Meat ultimate pH (semimembranosus, Table 1 means 5.66 / 6.26 / 6.81), induced by preslaughter adrenaline, not
+  titrated (unadjusted); cooked mince, volatiles from rendered fat by purge-and-trap GC-MS, ng/g rendered fat via 2-octanone
+  internal standard (relative). Tables 4-5 print ONLY compounds that changed significantly (hexanal etc. not printed, so not
+  keyed). Pyrazines, furfural and 2-methylfuranthiol were targeted but ''not found in any of the samples'' (Table 5 footnote):
+  keyed as all-ND contrasts. The isomer-unspecified ''2,4 decadienal'' row is keyed odorant_unlisted beside the (E,E) row.'
+contrasts:
+- id: braggins1996-1
+  odorant: pentanal
+  lever_class: pH
+  lever: meat ultimate pH
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: ng/g rendered fat
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unadjusted
+  arms:
+  - label: low pH (SM mean 5.66)
+    lever_value: 5.66
+    value: 293
+    censor: none
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 5.66
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors:
+        sheep semimembranosus mince: 20% (w/w) fat added from same animal
+      buffer: none
+      matrix: meat (sheep semimembranosus mince)
+      headspace: air
+  - label: medium pH (SM mean 6.26)
+    lever_value: 6.26
+    value: 160
+    censor: none
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.26
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors:
+        sheep semimembranosus mince: 20% (w/w) fat added from same animal
+      buffer: none
+      matrix: meat (sheep semimembranosus mince)
+      headspace: air
+  - label: high pH (SM mean 6.81)
+    lever_value: 6.81
+    value: 121
+    censor: none
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.81
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors:
+        sheep semimembranosus mince: 20% (w/w) fat added from same animal
+      buffer: none
+      matrix: meat (sheep semimembranosus mince)
+      headspace: air
+- id: braggins1996-2
+  odorant: nonanal
+  lever_class: pH
+  lever: meat ultimate pH
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: ng/g rendered fat
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unadjusted
+  arms:
+  - label: low pH (SM mean 5.66)
+    lever_value: 5.66
+    value: 277
+    censor: none
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 5.66
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors:
+        sheep semimembranosus mince: 20% (w/w) fat added from same animal
+      buffer: none
+      matrix: meat (sheep semimembranosus mince)
+      headspace: air
+  - label: medium pH (SM mean 6.26)
+    lever_value: 6.26
+    value: 112
+    censor: none
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.26
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors:
+        sheep semimembranosus mince: 20% (w/w) fat added from same animal
+      buffer: none
+      matrix: meat (sheep semimembranosus mince)
+      headspace: air
+  - label: high pH (SM mean 6.81)
+    lever_value: 6.81
+    value: 91
+    censor: none
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.81
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors:
+        sheep semimembranosus mince: 20% (w/w) fat added from same animal
+      buffer: none
+      matrix: meat (sheep semimembranosus mince)
+      headspace: air
+- id: braggins1996-3
+  odorant: benzaldehyde
+  lever_class: pH
+  lever: meat ultimate pH
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: ng/g rendered fat
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unadjusted
+  arms:
+  - label: low pH (SM mean 5.66)
+    lever_value: 5.66
+    value: 120
+    censor: none
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 5.66
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors:
+        sheep semimembranosus mince: 20% (w/w) fat added from same animal
+      buffer: none
+      matrix: meat (sheep semimembranosus mince)
+      headspace: air
+  - label: medium pH (SM mean 6.26)
+    lever_value: 6.26
+    value: 48
+    censor: none
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.26
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors:
+        sheep semimembranosus mince: 20% (w/w) fat added from same animal
+      buffer: none
+      matrix: meat (sheep semimembranosus mince)
+      headspace: air
+  - label: high pH (SM mean 6.81)
+    lever_value: 6.81
+    value: 28
+    censor: none
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.81
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors:
+        sheep semimembranosus mince: 20% (w/w) fat added from same animal
+      buffer: none
+      matrix: meat (sheep semimembranosus mince)
+      headspace: air
+- id: braggins1996-4
+  odorant: octanal
+  lever_class: pH
+  lever: meat ultimate pH
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: ng/g rendered fat
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unadjusted
+  arms:
+  - label: low pH (SM mean 5.66)
+    lever_value: 5.66
+    value: 92
+    censor: none
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 5.66
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors:
+        sheep semimembranosus mince: 20% (w/w) fat added from same animal
+      buffer: none
+      matrix: meat (sheep semimembranosus mince)
+      headspace: air
+  - label: medium pH (SM mean 6.26)
+    lever_value: 6.26
+    value: 39
+    censor: none
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.26
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors:
+        sheep semimembranosus mince: 20% (w/w) fat added from same animal
+      buffer: none
+      matrix: meat (sheep semimembranosus mince)
+      headspace: air
+  - label: high pH (SM mean 6.81)
+    lever_value: 6.81
+    value: 30
+    censor: none
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.81
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors:
+        sheep semimembranosus mince: 20% (w/w) fat added from same animal
+      buffer: none
+      matrix: meat (sheep semimembranosus mince)
+      headspace: air
+- id: braggins1996-5
+  odorant: (E)-2-octenal
+  lever_class: pH
+  lever: meat ultimate pH
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: ng/g rendered fat
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unadjusted
+  arms:
+  - label: low pH (SM mean 5.66)
+    lever_value: 5.66
+    value: 41
+    censor: none
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 5.66
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors:
+        sheep semimembranosus mince: 20% (w/w) fat added from same animal
+      buffer: none
+      matrix: meat (sheep semimembranosus mince)
+      headspace: air
+  - label: medium pH (SM mean 6.26)
+    lever_value: 6.26
+    value: 15
+    censor: none
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.26
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors:
+        sheep semimembranosus mince: 20% (w/w) fat added from same animal
+      buffer: none
+      matrix: meat (sheep semimembranosus mince)
+      headspace: air
+  - label: high pH (SM mean 6.81)
+    lever_value: 6.81
+    value: 9
+    censor: none
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.81
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors:
+        sheep semimembranosus mince: 20% (w/w) fat added from same animal
+      buffer: none
+      matrix: meat (sheep semimembranosus mince)
+      headspace: air
+- id: braggins1996-6
+  odorant: 2,4 decadienal
+  lever_class: pH
+  lever: meat ultimate pH
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: ng/g rendered fat
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unadjusted
+  odorant_unlisted: true
+  arms:
+  - label: low pH (SM mean 5.66)
+    lever_value: 5.66
+    value: 21
+    censor: none
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 5.66
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors:
+        sheep semimembranosus mince: 20% (w/w) fat added from same animal
+      buffer: none
+      matrix: meat (sheep semimembranosus mince)
+      headspace: air
+  - label: medium pH (SM mean 6.26)
+    lever_value: 6.26
+    value: 5
+    censor: none
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.26
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors:
+        sheep semimembranosus mince: 20% (w/w) fat added from same animal
+      buffer: none
+      matrix: meat (sheep semimembranosus mince)
+      headspace: air
+  - label: high pH (SM mean 6.81)
+    lever_value: 6.81
+    value: 2.5
+    censor: none
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.81
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors:
+        sheep semimembranosus mince: 20% (w/w) fat added from same animal
+      buffer: none
+      matrix: meat (sheep semimembranosus mince)
+      headspace: air
+- id: braggins1996-7
+  odorant: (E,E)-2,4 decadienal
+  lever_class: pH
+  lever: meat ultimate pH
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: ng/g rendered fat
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unadjusted
+  arms:
+  - label: low pH (SM mean 5.66)
+    lever_value: 5.66
+    value: 11
+    censor: none
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 5.66
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors:
+        sheep semimembranosus mince: 20% (w/w) fat added from same animal
+      buffer: none
+      matrix: meat (sheep semimembranosus mince)
+      headspace: air
+  - label: medium pH (SM mean 6.26)
+    lever_value: 6.26
+    value: 2.9
+    censor: none
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.26
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors:
+        sheep semimembranosus mince: 20% (w/w) fat added from same animal
+      buffer: none
+      matrix: meat (sheep semimembranosus mince)
+      headspace: air
+  - label: high pH (SM mean 6.81)
+    lever_value: 6.81
+    value: 1.7
+    censor: none
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.81
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors:
+        sheep semimembranosus mince: 20% (w/w) fat added from same animal
+      buffer: none
+      matrix: meat (sheep semimembranosus mince)
+      headspace: air
+- id: braggins1996-8
+  odorant: 1-octen-3-ol
+  lever_class: pH
+  lever: meat ultimate pH
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: ng/g rendered fat
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unadjusted
+  arms:
+  - label: low pH (SM mean 5.66)
+    lever_value: 5.66
+    value: 170
+    censor: none
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 5.66
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors:
+        sheep semimembranosus mince: 20% (w/w) fat added from same animal
+      buffer: none
+      matrix: meat (sheep semimembranosus mince)
+      headspace: air
+  - label: medium pH (SM mean 6.26)
+    lever_value: 6.26
+    value: 56
+    censor: none
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.26
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors:
+        sheep semimembranosus mince: 20% (w/w) fat added from same animal
+      buffer: none
+      matrix: meat (sheep semimembranosus mince)
+      headspace: air
+  - label: high pH (SM mean 6.81)
+    lever_value: 6.81
+    value: 25
+    censor: none
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.81
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors:
+        sheep semimembranosus mince: 20% (w/w) fat added from same animal
+      buffer: none
+      matrix: meat (sheep semimembranosus mince)
+      headspace: air
+- id: braggins1996-9
+  odorant: 2-acetylthiazole
+  lever_class: pH
+  lever: meat ultimate pH
+  focal: true
+  location: Table 5
+  digitised: false
+  unit: ng/g rendered fat
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unadjusted
+  arms:
+  - label: low pH (SM mean 5.66)
+    lever_value: 5.66
+    value: 0.85
+    censor: none
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 5.66
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors:
+        sheep semimembranosus mince: 20% (w/w) fat added from same animal
+      buffer: none
+      matrix: meat (sheep semimembranosus mince)
+      headspace: air
+  - label: medium pH (SM mean 6.26)
+    lever_value: 6.26
+    value: 0.42
+    censor: none
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.26
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors:
+        sheep semimembranosus mince: 20% (w/w) fat added from same animal
+      buffer: none
+      matrix: meat (sheep semimembranosus mince)
+      headspace: air
+  - label: high pH (SM mean 6.81)
+    lever_value: 6.81
+    value: 0.44
+    censor: none
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.81
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors:
+        sheep semimembranosus mince: 20% (w/w) fat added from same animal
+      buffer: none
+      matrix: meat (sheep semimembranosus mince)
+      headspace: air
+- id: braggins1996-10
+  odorant: 2-pentylfuran
+  lever_class: pH
+  lever: meat ultimate pH
+  focal: true
+  location: Table 5
+  digitised: false
+  unit: ng/g rendered fat
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unadjusted
+  arms:
+  - label: low pH (SM mean 5.66)
+    lever_value: 5.66
+    value: 5.1
+    censor: none
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 5.66
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors:
+        sheep semimembranosus mince: 20% (w/w) fat added from same animal
+      buffer: none
+      matrix: meat (sheep semimembranosus mince)
+      headspace: air
+  - label: medium pH (SM mean 6.26)
+    lever_value: 6.26
+    value: 1.3
+    censor: none
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.26
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors:
+        sheep semimembranosus mince: 20% (w/w) fat added from same animal
+      buffer: none
+      matrix: meat (sheep semimembranosus mince)
+      headspace: air
+  - label: high pH (SM mean 6.81)
+    lever_value: 6.81
+    value: 0.61
+    censor: none
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.81
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors:
+        sheep semimembranosus mince: 20% (w/w) fat added from same animal
+      buffer: none
+      matrix: meat (sheep semimembranosus mince)
+      headspace: air
+- id: braggins1996-11
+  odorant: methylpyrazine
+  lever_class: pH
+  lever: meat ultimate pH
+  focal: false
+  location: Table 5 footnote (targeted, not found in any sample)
+  digitised: false
+  unit: ng/g rendered fat
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unadjusted
+  arms:
+  - label: low pH (SM mean 5.66)
+    lever_value: 5.66
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 5.66
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors:
+        sheep semimembranosus mince: 20% (w/w) fat added from same animal
+      buffer: none
+      matrix: meat (sheep semimembranosus mince)
+      headspace: air
+  - label: medium pH (SM mean 6.26)
+    lever_value: 6.26
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.26
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors:
+        sheep semimembranosus mince: 20% (w/w) fat added from same animal
+      buffer: none
+      matrix: meat (sheep semimembranosus mince)
+      headspace: air
+  - label: high pH (SM mean 6.81)
+    lever_value: 6.81
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.81
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors:
+        sheep semimembranosus mince: 20% (w/w) fat added from same animal
+      buffer: none
+      matrix: meat (sheep semimembranosus mince)
+      headspace: air
+- id: braggins1996-12
+  odorant: 2,5-dimethylpyrazine
+  lever_class: pH
+  lever: meat ultimate pH
+  focal: false
+  location: Table 5 footnote (targeted, not found in any sample)
+  digitised: false
+  unit: ng/g rendered fat
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unadjusted
+  arms:
+  - label: low pH (SM mean 5.66)
+    lever_value: 5.66
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 5.66
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors:
+        sheep semimembranosus mince: 20% (w/w) fat added from same animal
+      buffer: none
+      matrix: meat (sheep semimembranosus mince)
+      headspace: air
+  - label: medium pH (SM mean 6.26)
+    lever_value: 6.26
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.26
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors:
+        sheep semimembranosus mince: 20% (w/w) fat added from same animal
+      buffer: none
+      matrix: meat (sheep semimembranosus mince)
+      headspace: air
+  - label: high pH (SM mean 6.81)
+    lever_value: 6.81
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.81
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors:
+        sheep semimembranosus mince: 20% (w/w) fat added from same animal
+      buffer: none
+      matrix: meat (sheep semimembranosus mince)
+      headspace: air
+- id: braggins1996-13
+  odorant: 2,6-dimethylpyrazine
+  lever_class: pH
+  lever: meat ultimate pH
+  focal: false
+  location: Table 5 footnote (targeted, not found in any sample)
+  digitised: false
+  unit: ng/g rendered fat
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unadjusted
+  arms:
+  - label: low pH (SM mean 5.66)
+    lever_value: 5.66
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 5.66
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors:
+        sheep semimembranosus mince: 20% (w/w) fat added from same animal
+      buffer: none
+      matrix: meat (sheep semimembranosus mince)
+      headspace: air
+  - label: medium pH (SM mean 6.26)
+    lever_value: 6.26
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.26
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors:
+        sheep semimembranosus mince: 20% (w/w) fat added from same animal
+      buffer: none
+      matrix: meat (sheep semimembranosus mince)
+      headspace: air
+  - label: high pH (SM mean 6.81)
+    lever_value: 6.81
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.81
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors:
+        sheep semimembranosus mince: 20% (w/w) fat added from same animal
+      buffer: none
+      matrix: meat (sheep semimembranosus mince)
+      headspace: air
+- id: braggins1996-14
+  odorant: 2,3-dimethylpyrazine
+  lever_class: pH
+  lever: meat ultimate pH
+  focal: false
+  location: Table 5 footnote (targeted, not found in any sample)
+  digitised: false
+  unit: ng/g rendered fat
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unadjusted
+  arms:
+  - label: low pH (SM mean 5.66)
+    lever_value: 5.66
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 5.66
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors:
+        sheep semimembranosus mince: 20% (w/w) fat added from same animal
+      buffer: none
+      matrix: meat (sheep semimembranosus mince)
+      headspace: air
+  - label: medium pH (SM mean 6.26)
+    lever_value: 6.26
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.26
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors:
+        sheep semimembranosus mince: 20% (w/w) fat added from same animal
+      buffer: none
+      matrix: meat (sheep semimembranosus mince)
+      headspace: air
+  - label: high pH (SM mean 6.81)
+    lever_value: 6.81
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.81
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors:
+        sheep semimembranosus mince: 20% (w/w) fat added from same animal
+      buffer: none
+      matrix: meat (sheep semimembranosus mince)
+      headspace: air
+- id: braggins1996-15
+  odorant: ethylpyrazine
+  lever_class: pH
+  lever: meat ultimate pH
+  focal: false
+  location: Table 5 footnote (targeted, not found in any sample)
+  digitised: false
+  unit: ng/g rendered fat
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unadjusted
+  arms:
+  - label: low pH (SM mean 5.66)
+    lever_value: 5.66
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 5.66
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors:
+        sheep semimembranosus mince: 20% (w/w) fat added from same animal
+      buffer: none
+      matrix: meat (sheep semimembranosus mince)
+      headspace: air
+  - label: medium pH (SM mean 6.26)
+    lever_value: 6.26
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.26
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors:
+        sheep semimembranosus mince: 20% (w/w) fat added from same animal
+      buffer: none
+      matrix: meat (sheep semimembranosus mince)
+      headspace: air
+  - label: high pH (SM mean 6.81)
+    lever_value: 6.81
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.81
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors:
+        sheep semimembranosus mince: 20% (w/w) fat added from same animal
+      buffer: none
+      matrix: meat (sheep semimembranosus mince)
+      headspace: air
+- id: braggins1996-16
+  odorant: 2-ethyl-3,6-dimethylpyrazine
+  lever_class: pH
+  lever: meat ultimate pH
+  focal: false
+  location: Table 5 footnote (targeted, not found in any sample)
+  digitised: false
+  unit: ng/g rendered fat
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unadjusted
+  arms:
+  - label: low pH (SM mean 5.66)
+    lever_value: 5.66
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 5.66
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors:
+        sheep semimembranosus mince: 20% (w/w) fat added from same animal
+      buffer: none
+      matrix: meat (sheep semimembranosus mince)
+      headspace: air
+  - label: medium pH (SM mean 6.26)
+    lever_value: 6.26
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.26
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors:
+        sheep semimembranosus mince: 20% (w/w) fat added from same animal
+      buffer: none
+      matrix: meat (sheep semimembranosus mince)
+      headspace: air
+  - label: high pH (SM mean 6.81)
+    lever_value: 6.81
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.81
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors:
+        sheep semimembranosus mince: 20% (w/w) fat added from same animal
+      buffer: none
+      matrix: meat (sheep semimembranosus mince)
+      headspace: air
+- id: braggins1996-17
+  odorant: 2-ethyl-3,5-dimethylpyrazine
+  lever_class: pH
+  lever: meat ultimate pH
+  focal: false
+  location: Table 5 footnote (targeted, not found in any sample)
+  digitised: false
+  unit: ng/g rendered fat
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unadjusted
+  arms:
+  - label: low pH (SM mean 5.66)
+    lever_value: 5.66
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 5.66
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors:
+        sheep semimembranosus mince: 20% (w/w) fat added from same animal
+      buffer: none
+      matrix: meat (sheep semimembranosus mince)
+      headspace: air
+  - label: medium pH (SM mean 6.26)
+    lever_value: 6.26
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.26
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors:
+        sheep semimembranosus mince: 20% (w/w) fat added from same animal
+      buffer: none
+      matrix: meat (sheep semimembranosus mince)
+      headspace: air
+  - label: high pH (SM mean 6.81)
+    lever_value: 6.81
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.81
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors:
+        sheep semimembranosus mince: 20% (w/w) fat added from same animal
+      buffer: none
+      matrix: meat (sheep semimembranosus mince)
+      headspace: air
+- id: braggins1996-18
+  odorant: furfural (furan carboxyaldehyde)
+  lever_class: pH
+  lever: meat ultimate pH
+  focal: false
+  location: Table 5 footnote (targeted, not found in any sample)
+  digitised: false
+  unit: ng/g rendered fat
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unadjusted
+  arms:
+  - label: low pH (SM mean 5.66)
+    lever_value: 5.66
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 5.66
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors:
+        sheep semimembranosus mince: 20% (w/w) fat added from same animal
+      buffer: none
+      matrix: meat (sheep semimembranosus mince)
+      headspace: air
+  - label: medium pH (SM mean 6.26)
+    lever_value: 6.26
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.26
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors:
+        sheep semimembranosus mince: 20% (w/w) fat added from same animal
+      buffer: none
+      matrix: meat (sheep semimembranosus mince)
+      headspace: air
+  - label: high pH (SM mean 6.81)
+    lever_value: 6.81
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.81
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors:
+        sheep semimembranosus mince: 20% (w/w) fat added from same animal
+      buffer: none
+      matrix: meat (sheep semimembranosus mince)
+      headspace: air
+- id: braggins1996-19
+  odorant: 2-methylfuranthiol
+  lever_class: pH
+  lever: meat ultimate pH
+  focal: false
+  location: Table 5 footnote (targeted, not found in any sample)
+  digitised: false
+  unit: ng/g rendered fat
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unadjusted
+  arms:
+  - label: low pH (SM mean 5.66)
+    lever_value: 5.66
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 5.66
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors:
+        sheep semimembranosus mince: 20% (w/w) fat added from same animal
+      buffer: none
+      matrix: meat (sheep semimembranosus mince)
+      headspace: air
+  - label: medium pH (SM mean 6.26)
+    lever_value: 6.26
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.26
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors:
+        sheep semimembranosus mince: 20% (w/w) fat added from same animal
+      buffer: none
+      matrix: meat (sheep semimembranosus mince)
+      headspace: air
+  - label: high pH (SM mean 6.81)
+    lever_value: 6.81
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.81
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors:
+        sheep semimembranosus mince: 20% (w/w) fat added from same animal
+      buffer: none
+      matrix: meat (sheep semimembranosus mince)
+      headspace: air

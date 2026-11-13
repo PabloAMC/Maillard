@@ -4,7 +4,7 @@
 
 **What this table cannot do.** Published contrasts are a selected sample (a lever that did nothing is under-reported), so a pooled effect is an upper estimate of the typical one. Most contrasts are model systems in buffer; a cell names its matrices and does not claim to transfer to a plant-protein product. A cell reports what happened, not why, and predicts no combination of levers that no study varied together.
 
-- Sources 56, contrasts used 1011, laboratories 15; not used: mixed-lever contrasts (no single-lever cell) 191; fewer than two usable arms 806; rows the source appears to have misprinted (kept, enter no cell) 6; odorants outside the declared lists (PREREG amendment A3) 602; second peaks of one compound in the same pots (one row enters the cell) 19; sugar-identity contrasts whose levels are not sugars (fed intermediates) 15; shares of a total (PREREG amendment A1) 163; flavour-dilution factors, an odour potency not an amount (PREREG amendment A1) 3; rates, half-lives or storage losses (PREREG amendment A1) 148.
+- Sources 58, contrasts used 1032, laboratories 15; not used: mixed-lever contrasts (no single-lever cell) 437; fewer than two usable arms 988; rows the source appears to have misprinted (kept, enter no cell) 6; odorants outside the declared lists (PREREG amendment A3) 647; second peaks of one compound in the same pots (one row enters the cell) 26; sugar-identity contrasts whose levels are not sugars (fed intermediates) 15; shares of a total (PREREG amendment A1) 163; flavour-dilution factors, an odour potency not an amount (PREREG amendment A1) 3; rates, half-lives or storage losses (PREREG amendment A1) 148.
 
 ## Numeric levers
 
@@ -13,21 +13,23 @@
 | (E)-2-Nonenal | pH (+1 pH unit) | pH 4.5-6, initial or label | too few laboratories | not pooled; per contrast: -0.67 | - | - | 1 / 1 / 1 | 100% | meat (minced beef, M. psoas major) | - |
 | (E,E)-2,4-Decadienal | pH (+1 pH unit) | pH 4.5-6, initial or label | too few laboratories | not pooled; per contrast: -0.33 | - | - | 1 / 1 / 1 | 100% | meat (minced beef, M. psoas major) | - |
 | 2,3-Dimethylpyrazine | pH (+1 pH unit) | pH 6-7.5, final | too few laboratories | not pooled; per contrast: -0.08, +0.22, +0.08 | - | - | 1 / 1 / 3 | 100% | other (glycine/glucose/wheat starch extrudate) | - |
-| 2,3-Dimethylpyrazine | pH (+1 pH unit) | pH 6-7.5, initial or label | too few laboratories | not pooled; per contrast: +0.06 | - | - | 1 / 1 / 1 | 100% | water | - |
+| 2,3-Dimethylpyrazine | pH (+1 pH unit) | pH 6-7.5, initial or label | too few laboratories | not pooled; per contrast: +0.06, -0.39 | - | - | 2 / 2 / 2 | 100% | buffer, water | - |
 | 2,3-Dimethylpyrazine | precursor dose (a doubling of dose) | amino acid varied | too few laboratories | not pooled; per contrast: +1.01, +0.28 | - | - | 1 / 1 / 2 | 100% | water | - |
 | 2,3-Dimethylpyrazine | precursor dose (a doubling of dose) | sugar varied | too few laboratories | not pooled; per contrast: +0.16, +0.30, +0.25 | - | - | 1 / 1 / 3 | 100% | buffer, other (freeze-dried on 1.5 g sand, dry) | - |
 | 2,3-Dimethylpyrazine | temperature (+10 C) | time <30 min | too few laboratories | not pooled; per contrast: +0.43, +0.18, +0.21 | - | - | 1 / 1 / 3 | 100% | other (glycine/glucose/wheat starch extrudate) | - |
 | 2,3-Dimethylpyrazine | time (a doubling of time) | T 100-130 C | too few laboratories | not pooled; per contrast: +0.31 | - | - | 1 / 1 / 1 | 0% | water | - |
 | 2,3-Dimethylpyrazine | water (+0.1 a_w) | all | too few laboratories | not pooled; per contrast: -0.03 | - | - | 1 / 1 / 1 | 100% | other (freeze-dried on sand, aw 0.16), other (freeze-dried on sand, aw 0.33), other (freeze-dried on sand, aw 0.38), other (freeze-dried on sand, aw 0.53), other (freeze-dried on sand, aw 0.62), other (freeze-dried on sand, aw 0.75) | - |
 | 2,5-Dimethylpyrazine | pH (+1 pH unit) | pH 4.5-6, held | too few laboratories | not pooled; per contrast: +1.54, +1.37, +1.17 | - | - | 1 / 1 / 3 | 100% | buffer | - |
+| 2,5-Dimethylpyrazine | pH (+1 pH unit) | pH 6-7.5, initial or label | too few laboratories | not pooled; per contrast: -0.83 | - | - | 1 / 1 / 1 | 100% | buffer | - |
 | 2,5-Dimethylpyrazine | precursor dose (a doubling of dose) | sulfur donor varied | too few laboratories | not pooled; per contrast: +0.23 | - | - | 1 / 1 / 1 | 0% | water | - |
 | 2,5-Dimethylpyrazine | time (a doubling of time) | T 100-130 C | too few laboratories | not pooled; per contrast: +0.77 | - | - | 1 / 1 / 1 | 0% | water | - |
+| 2,6-Dimethylpyrazine | pH (+1 pH unit) | pH 6-7.5, initial or label | too few laboratories | not pooled; per contrast: -0.10 | - | - | 1 / 1 / 1 | 100% | buffer | - |
 | 2-Acetylfuran | temperature (+10 C) | time >120 min | direction unclear (prior-dominated) | +0.47 (-0.01 to +0.94) | -0.53 to +1.46 | 0.82 | 3 / 3 / 4 | 75% | water | - |
 | 2-Acetylfuran | time (a doubling of time) | T 100-130 C | too few laboratories | not pooled; per contrast: +0.19, +0.41, +0.51, +1.08, +0.74 | - | - | 2 / 3 / 5 | 40% | water | - |
 | 2-Acetylfuran | time (a doubling of time) | T >130 C | too few laboratories | not pooled; per contrast: +0.35 | - | - | 1 / 1 / 1 | 100% | water | - |
 | 2-Acetylthiazole | pH (+1 pH unit) | pH 4.5-6, held | too few laboratories | not pooled; per contrast: +1.20 | - | - | 1 / 1 / 1 | 100% | buffer | - |
 | 2-Acetylthiazole | pH (+1 pH unit) | pH 4.5-6, initial or label | too few laboratories | not pooled; per contrast: +0.23, +0.35 | - | - | 2 / 2 / 2 | 100% | buffer, meat (minced beef, M. psoas major) | - |
-| 2-Acetylthiazole | pH (+1 pH unit) | pH 6-7.5, initial or label | too few laboratories | not pooled; per contrast: +0.12, +0.49 | - | - | 1 / 2 / 2 | 50% | water | - |
+| 2-Acetylthiazole | pH (+1 pH unit) | pH 6-7.5, initial or label | too few laboratories | not pooled; per contrast: +0.12, +0.79, +0.49 | - | - | 2 / 3 / 3 | 67% | buffer, water | - |
 | 2-Acetylthiazole | temperature (+10 C) | time >120 min | too few laboratories | not pooled; per contrast: +0.18, +0.37 | - | - | 2 / 2 / 2 | 50% | buffer, water | - |
 | 2-Acetylthiazole | time (a doubling of time) | T 100-130 C | too few laboratories | not pooled; per contrast: +0.15, +0.02, +0.15 | - | - | 1 / 2 / 3 | 0% | water | - |
 | 2-Acetylthiazole | time (a doubling of time) | T >130 C | too few laboratories | not pooled; per contrast: -0.39 | - | - | 1 / 1 / 1 | 100% | buffer | - |
@@ -41,7 +43,7 @@
 | 2-Ethyl-3,6-dimethylpyrazine | precursor dose (a doubling of dose) | sugar varied | too few laboratories | not pooled; per contrast: -0.20, +0.14 | - | - | 1 / 1 / 2 | 100% | other (freeze-dried on 1.5 g sand, dry) | - |
 | 2-Ethyl-3,6-dimethylpyrazine | water (+0.1 a_w) | all | too few laboratories | not pooled; per contrast: -0.01 | - | - | 1 / 1 / 1 | 100% | other (freeze-dried on sand, aw 0.16), other (freeze-dried on sand, aw 0.33), other (freeze-dried on sand, aw 0.38), other (freeze-dried on sand, aw 0.53), other (freeze-dried on sand, aw 0.62), other (freeze-dried on sand, aw 0.75) | - |
 | 2-Ethylpyrazine | pH (+1 pH unit) | pH 6-7.5, final | too few laboratories | not pooled; per contrast: +0.67, +0.09, -0.10 | - | - | 1 / 1 / 3 | 100% | other (glycine/glucose/wheat starch extrudate) | - |
-| 2-Ethylpyrazine | pH (+1 pH unit) | pH 6-7.5, initial or label | too few laboratories | not pooled; per contrast: +0.03 | - | - | 1 / 1 / 1 | 100% | water | - |
+| 2-Ethylpyrazine | pH (+1 pH unit) | pH 6-7.5, initial or label | too few laboratories | not pooled; per contrast: +0.03, -0.32 | - | - | 2 / 2 / 2 | 100% | buffer, water | - |
 | 2-Ethylpyrazine | precursor dose (a doubling of dose) | sugar varied | too few laboratories | not pooled; per contrast: +0.09, -0.24 | - | - | 1 / 1 / 2 | 100% | other (freeze-dried on 1.5 g sand, dry) | - |
 | 2-Ethylpyrazine | temperature (+10 C) | time <30 min | too few laboratories | not pooled; per contrast: +0.16, +0.29, +0.22 | - | - | 1 / 1 / 3 | 100% | other (glycine/glucose/wheat starch extrudate) | - |
 | 2-Ethylpyrazine | water (+0.1 a_w) | all | too few laboratories | not pooled; per contrast: -0.07 | - | - | 1 / 1 / 1 | 100% | other (freeze-dried on sand, aw 0.16), other (freeze-dried on sand, aw 0.33), other (freeze-dried on sand, aw 0.38), other (freeze-dried on sand, aw 0.53), other (freeze-dried on sand, aw 0.62), other (freeze-dried on sand, aw 0.75) | - |
@@ -57,7 +59,7 @@
 | 2-Furanmethanol | time (a doubling of time) | T >130 C | too few laboratories | not pooled; per contrast: +0.32, -1.12, +0.80, +1.02, -0.15 | - | - | 2 / 2 / 5 | 100% | buffer, water | - |
 | 2-Furfurylthiol (FFT) | pH (+1 pH unit) | pH 4.5-6, held | too few laboratories | not pooled; per contrast: -0.43, -0.48, -0.18, -1.67 | - | - | 1 / 2 / 4 | 100% | buffer | - |
 | 2-Furfurylthiol (FFT) | pH (+1 pH unit) | pH 4.5-6, initial or label | direction unclear (2 non-monotone) | -0.14 (-0.42 to +0.19) | -0.94 to +0.70 | 0.62 | 5 / 5 / 11 | 82% | buffer, meat (minced beef, M. psoas major), water | 1.00 |
-| 2-Furfurylthiol (FFT) | pH (+1 pH unit) | pH 6-7.5, initial or label | too few laboratories | not pooled; per contrast: -0.24, -0.11, -0.11 | - | - | 1 / 3 / 3 | 33% | water | - |
+| 2-Furfurylthiol (FFT) | pH (+1 pH unit) | pH 6-7.5, initial or label | too few laboratories | not pooled; per contrast: -0.24, -0.32, -0.11, -0.11 | - | - | 2 / 4 / 4 | 50% | buffer, water | - |
 | 2-Furfurylthiol (FFT) | pH (+1 pH unit) | pH <4.5, initial or label | too few laboratories | not pooled; per contrast: +0.30, +0.30 | - | - | 1 / 1 / 2 | 0% | buffer | - |
 | 2-Furfurylthiol (FFT) | precursor dose (a doubling of dose) | other precursor varied | too few laboratories | not pooled; per contrast: +1.47, +0.48, +0.33, -0.16, +0.09, +0.45 | - | - | 1 / 1 / 6 | 100% | buffer | - |
 | 2-Furfurylthiol (FFT) | temperature (+10 C) | time 30-120 min | too few laboratories | not pooled; per contrast: -0.01 | - | - | 1 / 1 / 1 | 100% | buffer | - |
@@ -67,7 +69,7 @@
 | 2-Methyl-3-(2-furfuryldithio)furan | pH (+1 pH unit) | pH 4.5-6, initial or label | too few laboratories | not pooled; per contrast: -1.45 | - | - | 1 / 1 / 1 | 100% | meat (minced beef, M. psoas major) | - |
 | 2-Methyl-3-furanthiol (MFT) | pH (+1 pH unit) | pH 4.5-6, held | too few laboratories | not pooled; per contrast: -0.82, -0.50, -0.41, -1.03 | - | - | 1 / 2 / 4 | 100% | buffer | - |
 | 2-Methyl-3-furanthiol (MFT) | pH (+1 pH unit) | pH 4.5-6, initial or label | direction unclear (1 non-monotone) | -0.15 (-0.63 to +0.32) | -1.40 to +1.10 | 0.59 | 4 / 4 / 7 | 71% | buffer, meat (minced beef, M. psoas major) | 1.00 |
-| 2-Methyl-3-furanthiol (MFT) | pH (+1 pH unit) | pH 6-7.5, initial or label | too few laboratories | not pooled; per contrast: -0.09, +0.36 | - | - | 1 / 2 / 2 | 0% | water | - |
+| 2-Methyl-3-furanthiol (MFT) | pH (+1 pH unit) | pH 6-7.5, initial or label | too few laboratories | not pooled; per contrast: -0.20, -0.09, +0.36 | - | - | 2 / 3 / 3 | 33% | buffer, water | - |
 | 2-Methyl-3-furanthiol (MFT) | pH (+1 pH unit) | pH <4.5, initial or label | too few laboratories | not pooled; per contrast: +0.40, +0.45 | - | - | 1 / 1 / 2 | 0% | buffer | - |
 | 2-Methyl-3-furanthiol (MFT) | precursor dose (a doubling of dose) | other precursor varied | too few laboratories | not pooled; per contrast: -0.24 | - | - | 1 / 1 / 1 | 100% | buffer | - |
 | 2-Methyl-3-furanthiol (MFT) | precursor dose (a doubling of dose) | sulfur donor varied | too few laboratories | not pooled; per contrast: +0.18, +0.35, -0.29, -0.37, +0.40, +0.30, +0.34, +0.42, -0.35 | - | - | 2 / 2 / 9 | 0% | buffer | - |
@@ -81,7 +83,7 @@
 | 2-Methylpyrazine | pH (+1 pH unit) | pH 4.5-6, held | too few laboratories | not pooled; per contrast: +1.08, +1.27, +1.41, +0.00 | - | - | 1 / 1 / 4 | 100% | buffer | - |
 | 2-Methylpyrazine | pH (+1 pH unit) | pH 4.5-6, initial or label | too few laboratories | not pooled; per contrast: -0.35, +0.24 | - | - | 2 / 2 / 2 | 50% | meat (minced beef, M. psoas major), yeast extract (glutathione-enriched) | - |
 | 2-Methylpyrazine | pH (+1 pH unit) | pH 6-7.5, final | too few laboratories | not pooled; per contrast: +0.03, +0.21, +0.30 | - | - | 1 / 1 / 3 | 100% | other (glycine/glucose/wheat starch extrudate) | - |
-| 2-Methylpyrazine | pH (+1 pH unit) | pH 6-7.5, initial or label | too few laboratories | not pooled; per contrast: +0.02 | - | - | 1 / 1 / 1 | 100% | water | - |
+| 2-Methylpyrazine | pH (+1 pH unit) | pH 6-7.5, initial or label | too few laboratories | not pooled; per contrast: +0.02, +0.07 | - | - | 2 / 2 / 2 | 100% | buffer, water | - |
 | 2-Methylpyrazine | pH (+1 pH unit) | pH >7.5, initial or label | too few laboratories | not pooled; per contrast: +1.95, +1.93 | - | - | 1 / 1 / 2 | 0% | water | - |
 | 2-Methylpyrazine | precursor dose (a doubling of dose) | amino acid varied | too few laboratories | not pooled; per contrast: +0.23, +0.03, +0.00 | - | - | 1 / 1 / 3 | 100% | water | - |
 | 2-Methylpyrazine | precursor dose (a doubling of dose) | sugar varied | too few laboratories | not pooled; per contrast: +0.17, +0.28, +0.49, -0.14, +0.22, -0.02, -0.08 | - | - | 2 / 2 / 7 | 86% | buffer, other (freeze-dried on 1.5 g sand, dry), yeast extract (glutathione-enriched) | - |
@@ -112,9 +114,10 @@
 | Benzaldehyde | time (a doubling of time) | T <100 C | too few laboratories | not pooled; per contrast: +0.08 | - | - | 1 / 1 / 1 | 0% | other (acetonitrile/buffer 2:1) | - |
 | Benzaldehyde | water (+0.1 a_w) | all | too few laboratories | not pooled; per contrast: -0.00, +0.00 | - | - | 1 / 1 / 2 | 0% | other (600 mg sand + 30 uL buffer + 0 uL water), other (600 mg sand + 30 uL buffer + 120 uL water), other (600 mg sand + 30 uL buffer + 160 uL water), other (600 mg sand + 30 uL buffer + 200 uL water), other (600 mg sand + 30 uL buffer + 40 uL water), other (600 mg sand + 30 uL buffer + 80 uL water) | - |
 | Bis(2-furfuryl) disulfide | pH (+1 pH unit) | pH 4.5-6, held | too few laboratories | not pooled; per contrast: +0.33 | - | - | 1 / 1 / 1 | 100% | buffer | - |
+| Bis(2-furfuryl) disulfide | pH (+1 pH unit) | pH 4.5-6, initial or label | too few laboratories | not pooled; per contrast: +0.28 | - | - | 1 / 1 / 1 | 100% | buffer | - |
 | Bis(2-furfuryl) disulfide | pH (+1 pH unit) | pH 6-7.5, initial or label | too few laboratories | not pooled; per contrast: -0.30 | - | - | 1 / 1 / 1 | 0% | water | - |
 | Bis(2-methyl-3-furyl) disulfide | pH (+1 pH unit) | pH 4.5-6, held | too few laboratories | not pooled; per contrast: -0.50, -0.40 | - | - | 1 / 1 / 2 | 100% | buffer | - |
-| Bis(2-methyl-3-furyl) disulfide | pH (+1 pH unit) | pH 6-7.5, initial or label | too few laboratories | not pooled; per contrast: +0.24 | - | - | 1 / 1 / 1 | 0% | water | - |
+| Bis(2-methyl-3-furyl) disulfide | pH (+1 pH unit) | pH 6-7.5, initial or label | too few laboratories | not pooled; per contrast: -1.00, +0.24 | - | - | 2 / 2 / 2 | 50% | buffer, water | - |
 | Bis(2-methyl-3-furyl) disulfide | precursor dose (a doubling of dose) | sulfur donor varied | too few laboratories | not pooled; per contrast: +0.15, +0.30 | - | - | 1 / 1 / 2 | 0% | buffer | - |
 | Bis(2-methyl-3-furyl) disulfide | temperature (+10 C) | time unstated min | too few laboratories | not pooled; per contrast: -0.02 | - | - | 1 / 1 / 1 | 0% | yeast extract (glutathione-enriched) | - |
 | DMHF | pH (+1 pH unit) | pH 6-7.5, initial or label | too few laboratories | not pooled; per contrast: +0.04, +0.46 | - | - | 1 / 1 / 2 | 0% | buffer | - |
@@ -122,7 +125,7 @@
 | Furfural | pH (+1 pH unit) | pH 4.5-6, held | too few laboratories | not pooled; per contrast: -1.71, -1.73, -0.52, -0.81 | - | - | 1 / 1 / 4 | 100% | buffer | - |
 | Furfural | pH (+1 pH unit) | pH 4.5-6, initial or label | direction unclear (prior-dominated) (1 non-monotone) **[fragile: buffered studies only: answered by the literature]** | -0.69 (-1.42 to +0.00) | -2.43 to +1.02 | 0.76 | 3 / 4 / 9 | 100% | buffer, meat (minced beef, M. psoas major) | - |
 | Furfural | pH (+1 pH unit) | pH 6-7.5, final | too few laboratories | not pooled; per contrast: -0.32, +0.15, -0.41 | - | - | 1 / 1 / 3 | 100% | other (glycine/glucose/wheat starch extrudate) | - |
-| Furfural | pH (+1 pH unit) | pH 6-7.5, initial or label | too few laboratories | not pooled; per contrast: -0.18 | - | - | 1 / 1 / 1 | 0% | water | - |
+| Furfural | pH (+1 pH unit) | pH 6-7.5, initial or label | too few laboratories | not pooled; per contrast: -0.44, -0.18 | - | - | 2 / 2 / 2 | 50% | buffer, water | - |
 | Furfural | precursor dose (a doubling of dose) | other precursor varied | too few laboratories | not pooled; per contrast: -0.04, +0.38, -0.36, -0.28, -0.05, +0.33 | - | - | 1 / 1 / 6 | 100% | buffer | - |
 | Furfural | temperature (+10 C) | time 30-120 min | too few laboratories | not pooled; per contrast: +0.36 | - | - | 1 / 1 / 1 | 100% | buffer | - |
 | Furfural | temperature (+10 C) | time <30 min | too few laboratories | not pooled; per contrast: +0.16, +0.15, -0.03 | - | - | 1 / 1 / 3 | 100% | other (glycine/glucose/wheat starch extrudate) | - |
@@ -147,6 +150,7 @@
 | Methional (3-(methylthio)propanal) | pH (+1 pH unit) | pH 6-7.5, held | too few laboratories | not pooled; per contrast: -0.19 | - | - | 1 / 1 / 1 | 100% | buffer | - |
 | Methional (3-(methylthio)propanal) | time (a doubling of time) | T >130 C | too few laboratories | not pooled; per contrast: +0.16, +0.14 | - | - | 1 / 1 / 2 | 0% | buffer, other (silica gel 3 g, 10 % water) | - |
 | Nonanal | pH (+1 pH unit) | pH 4.5-6, initial or label | too few laboratories | not pooled; per contrast: +0.03, -0.04 | - | - | 2 / 2 / 2 | 50% | meat (minced beef, M. psoas major), yeast extract (glutathione-enriched) | - |
+| Nonanal | pH (+1 pH unit) | pH 6-7.5, initial or label | too few laboratories | not pooled; per contrast: +0.25 | - | - | 1 / 1 / 1 | 100% | buffer | - |
 | Nonanal | precursor dose (a doubling of dose) | other precursor varied | too few laboratories | not pooled; per contrast: -0.04 | - | - | 1 / 1 / 1 | 100% | buffer | - |
 | Nonanal | precursor dose (a doubling of dose) | sugar varied | too few laboratories | not pooled; per contrast: +0.12 | - | - | 1 / 1 / 1 | 0% | yeast extract (glutathione-enriched) | - |
 | Nonanal | precursor dose (a doubling of dose) | sulfur donor varied | too few laboratories | not pooled; per contrast: +0.08 | - | - | 1 / 1 / 1 | 0% | yeast extract (glutathione-enriched) | - |
@@ -183,7 +187,7 @@
 | Tetramethylpyrazine | temperature (+10 C) | time <30 min | too few laboratories | not pooled; per contrast: +0.09, +0.50 | - | - | 1 / 1 / 2 | 100% | other (glycine/glucose/wheat starch extrudate) | - |
 | Tetramethylpyrazine | time (a doubling of time) | T 100-130 C | too few laboratories | not pooled; per contrast: +0.11 | - | - | 1 / 1 / 1 | 0% | water | - |
 | Trimethylpyrazine | pH (+1 pH unit) | pH 6-7.5, final | too few laboratories | not pooled; per contrast: -0.01, -0.10, -0.23 | - | - | 1 / 1 / 3 | 100% | other (glycine/glucose/wheat starch extrudate) | - |
-| Trimethylpyrazine | pH (+1 pH unit) | pH 6-7.5, initial or label | too few laboratories | not pooled; per contrast: +0.09, -0.48 | - | - | 2 / 2 / 2 | 50% | water, yeast extract (glutathione-enriched) | - |
+| Trimethylpyrazine | pH (+1 pH unit) | pH 6-7.5, initial or label | too few laboratories | not pooled; per contrast: +0.09, -0.29, -0.48 | - | - | 2 / 3 / 3 | 67% | buffer, water, yeast extract (glutathione-enriched) | - |
 | Trimethylpyrazine | precursor dose (a doubling of dose) | amino acid varied | too few laboratories | not pooled; per contrast: +0.44, +0.65 | - | - | 1 / 1 / 2 | 100% | water | - |
 | Trimethylpyrazine | precursor dose (a doubling of dose) | sugar varied | too few laboratories | not pooled; per contrast: -0.23 | - | - | 1 / 1 / 1 | 0% | yeast extract (glutathione-enriched) | - |
 | Trimethylpyrazine | precursor dose (a doubling of dose) | sulfur donor varied | too few laboratories | not pooled; per contrast: -0.23 | - | - | 1 / 1 / 1 | 0% | yeast extract (glutathione-enriched) | - |
@@ -458,6 +462,9 @@
 | 2-Furfurylthiol (FFT) | sulfur source | glutathione vs cysteine | too few laboratories | not pooled (network estimate +0.04, shown for orientation only) | - | - | 2 / 5 |
 | 2-Furfurylthiol (FFT) | sulfur source | glutathione + cysteine vs cysteine | too few laboratories | not pooled (network estimate +0.14, shown for orientation only) | - | - | 1 / 1 |
 | 2-Furfurylthiol (FFT) | sulfur source | none vs cysteine | too few laboratories | not pooled (network estimate -0.15, shown for orientation only) | - | - | 2 / 7 |
+| 2-Furfurylthiol (FFT) | sulfur source | gsh + cysteine vs cysteine | not connected to the reference | - | - | - | - |
+| 2-Furfurylthiol (FFT) | sulfur source | gsh + cysteine + thiamine vs cysteine | not connected to the reference | - | - | - | - |
+| 2-Furfurylthiol (FFT) | sulfur source | gsh only (0.37 mmol) vs cysteine | not connected to the reference | - | - | - | - |
 | 2-Furfurylthiol (FFT) | sulfur source | thiamine vs cysteine | not connected to the reference | - | - | - | - |
 | 2-Furfurylthiol (FFT) | sulfur source | thiamine pyrophosphate vs cysteine | not connected to the reference | - | - | - | - |
 | 2-Methyl-3-(2-furfuryldithio)furan | buffer | none vs phosphate | too few laboratories | not pooled (network estimate -0.01, shown for orientation only) | - | - | 1 / 4 |
@@ -497,6 +504,9 @@
 | 2-Methyl-3-furanthiol (MFT) | sulfur source | glutathione + cysteine vs cysteine | too few laboratories | not pooled (network estimate -0.51, shown for orientation only) | - | - | 1 / 1 |
 | 2-Methyl-3-furanthiol (MFT) | sulfur source | hydrogen sulfide vs cysteine | too few laboratories | not pooled (network estimate +0.26, shown for orientation only) | - | - | 2 / 2 |
 | 2-Methyl-3-furanthiol (MFT) | sulfur source | none vs cysteine | answered by the literature | -0.78 (-1.16 to -0.39) | -1.76 to +0.22 | 0.91 | 3 / 11 |
+| 2-Methyl-3-furanthiol (MFT) | sulfur source | gsh + cysteine vs cysteine | not connected to the reference | - | - | - | - |
+| 2-Methyl-3-furanthiol (MFT) | sulfur source | gsh + cysteine + thiamine vs cysteine | not connected to the reference | - | - | - | - |
+| 2-Methyl-3-furanthiol (MFT) | sulfur source | gsh only (0.37 mmol) vs cysteine | not connected to the reference | - | - | - | - |
 | 2-Methyl-3-furanthiol (MFT) | sulfur source | thiamine vs cysteine | not connected to the reference | - | - | - | - |
 | 2-Methyl-3-furanthiol (MFT) | sulfur source | thiamine pyrophosphate vs cysteine | not connected to the reference | - | - | - | - |
 | 2-Methylbutanal | amino acid identity | isoleucine vs none | too few laboratories | not pooled (network estimate +2.46, shown for orientation only) | - | - | 1 / 2 |
@@ -627,6 +637,9 @@
 | Benzaldehyde | oxygen | 60 vs inert | not connected to the reference | - | - | - | - |
 | Benzaldehyde | oxygen | 80 vs inert | not connected to the reference | - | - | - | - |
 | Benzaldehyde | sulfur source | glutathione vs cysteine | too few laboratories | not pooled (network estimate -0.19, shown for orientation only) | - | - | 1 / 1 |
+| Benzaldehyde | sulfur source | gsh + cysteine vs cysteine | not connected to the reference | - | - | - | - |
+| Benzaldehyde | sulfur source | gsh + cysteine + thiamine vs cysteine | not connected to the reference | - | - | - | - |
+| Benzaldehyde | sulfur source | gsh only (0.37 mmol) vs cysteine | not connected to the reference | - | - | - | - |
 | Bis(2-furfuryl) disulfide | buffer | none vs phosphate | too few laboratories | not pooled (network estimate +1.04, shown for orientation only) | - | - | 1 / 6 |
 | Bis(2-furfuryl) disulfide | buffer | phthalate vs phosphate | too few laboratories | not pooled (network estimate +0.16, shown for orientation only) | - | - | 1 / 3 |
 | Bis(2-furfuryl) disulfide | sugar identity | inosine 5'-monophosphate vs ribose 5-phosphate | too few laboratories | not pooled (network estimate -0.88, shown for orientation only) | - | - | 1 / 3 |
@@ -675,6 +688,9 @@
 | Furfural | sugar identity | ribose vs ribose 5-phosphate | too few laboratories | not pooled (network estimate +0.94, shown for orientation only) | - | - | 1 / 4 |
 | Furfural | sulfur source | glutathione vs cysteine | too few laboratories | not pooled (network estimate +0.23, shown for orientation only) | - | - | 1 / 1 |
 | Furfural | sulfur source | none vs cysteine | too few laboratories | not pooled (network estimate +0.42, shown for orientation only) | - | - | 1 / 2 |
+| Furfural | sulfur source | gsh + cysteine vs cysteine | not connected to the reference | - | - | - | - |
+| Furfural | sulfur source | gsh + cysteine + thiamine vs cysteine | not connected to the reference | - | - | - | - |
+| Furfural | sulfur source | gsh only (0.37 mmol) vs cysteine | not connected to the reference | - | - | - | - |
 | HEMF | amino acid identity | alanine vs glycine | too few laboratories | not pooled (network estimate +1.01, shown for orientation only) | - | - | 1 / 6 |
 | HEMF | amino acid identity | none vs glycine | too few laboratories | not pooled (network estimate -0.63, shown for orientation only) | - | - | 1 / 6 |
 | HEMF | buffer | malonate vs phosphate | too few laboratories | not pooled (network estimate -0.40, shown for orientation only) | - | - | 1 / 2 |

@@ -1,0 +1,294 @@
+source: arsa2021
+pdf: data/articles/arsa2021.pdf
+reader: resolved
+scope_note: 'Resolved 2026-11-13 (step 11, A6 batch 2). Readers agree on every contrast (3 pyrazine pH ladders, Fig. 1 digitised;
+  arm values within 0.03 dex, so no figure re-read was needed); base reader a. Spray-dried (160 C inlet / 80 C outlet) initial-pH
+  arms pH 7 - 10 set with NaOH, no buffer (adjusted_unbuffered); ug/g by internal-standard semi-quantification (relative);
+  no final pH printed. Not keyed: 2-ethyl-5-/2-ethyl-6-methylpyrazine (off the declared list). Conventions (resolver, uniform
+  with batch 1): printed ND, ''-'', blank or 0 is nd_no_limit with value null; all-ND contrasts kept; one compound printed
+  twice carries duplicate_of; co-eluting mixtures odorant_unlisted; odorant names canonicalised to the compound_keys display
+  name, printed name in odorant_printed; IS semi-quantification and SIFT-MS ppb relative, calibration with authentic standards
+  absolute.'
+contrasts:
+- id: arsa2021-1
+  resolution: agreed
+  odorant: 2-Methylpyrazine
+  lever_class: pH
+  lever: pH adjusted before spray drying
+  focal: true
+  location: Fig. 1, digitised
+  digitised: true
+  unit: ug/g sample
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 7
+    lever_value: 7
+    value: 0.00516
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 160
+      time_min: null
+      precursors:
+        rice bran protein hydrolysate: 5% protein suspension (alcalase)
+        fructose: 1% (w/v)
+      buffer: none
+      matrix: plant protein (rice bran protein hydrolysate), spray dried 160 C inlet / 80 C outlet
+      headspace: air
+  - label: pH 8
+    lever_value: 8
+    value: 0.0097
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 160
+      time_min: null
+      precursors:
+        rice bran protein hydrolysate: 5% protein suspension (alcalase)
+        fructose: 1% (w/v)
+      buffer: none
+      matrix: plant protein (rice bran protein hydrolysate), spray dried 160 C inlet / 80 C outlet
+      headspace: air
+  - label: pH 9
+    lever_value: 9
+    value: 0.0284
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 160
+      time_min: null
+      precursors:
+        rice bran protein hydrolysate: 5% protein suspension (alcalase)
+        fructose: 1% (w/v)
+      buffer: none
+      matrix: plant protein (rice bran protein hydrolysate), spray dried 160 C inlet / 80 C outlet
+      headspace: air
+  - label: pH 10
+    lever_value: 10
+    value: 0.0212
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 10
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 160
+      time_min: null
+      precursors:
+        rice bran protein hydrolysate: 5% protein suspension (alcalase)
+        fructose: 1% (w/v)
+      buffer: none
+      matrix: plant protein (rice bran protein hydrolysate), spray dried 160 C inlet / 80 C outlet
+      headspace: air
+  odorant_printed: methylpyrazine
+- id: arsa2021-2
+  resolution: agreed
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: pH
+  lever: pH adjusted before spray drying
+  focal: true
+  location: Fig. 1, digitised
+  digitised: true
+  unit: ug/g sample
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 7
+    lever_value: 7
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 160
+      time_min: null
+      precursors:
+        rice bran protein hydrolysate: 5% protein suspension (alcalase)
+        fructose: 1% (w/v)
+      buffer: none
+      matrix: plant protein (rice bran protein hydrolysate), spray dried 160 C inlet / 80 C outlet
+      headspace: air
+  - label: pH 8
+    lever_value: 8
+    value: 0.277
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 160
+      time_min: null
+      precursors:
+        rice bran protein hydrolysate: 5% protein suspension (alcalase)
+        fructose: 1% (w/v)
+      buffer: none
+      matrix: plant protein (rice bran protein hydrolysate), spray dried 160 C inlet / 80 C outlet
+      headspace: air
+  - label: pH 9
+    lever_value: 9
+    value: 0.714
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 160
+      time_min: null
+      precursors:
+        rice bran protein hydrolysate: 5% protein suspension (alcalase)
+        fructose: 1% (w/v)
+      buffer: none
+      matrix: plant protein (rice bran protein hydrolysate), spray dried 160 C inlet / 80 C outlet
+      headspace: air
+  - label: pH 10
+    lever_value: 10
+    value: 0.629
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 10
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 160
+      time_min: null
+      precursors:
+        rice bran protein hydrolysate: 5% protein suspension (alcalase)
+        fructose: 1% (w/v)
+      buffer: none
+      matrix: plant protein (rice bran protein hydrolysate), spray dried 160 C inlet / 80 C outlet
+      headspace: air
+  odorant_printed: 2,5-dimethylpyrazine
+- id: arsa2021-3
+  resolution: agreed
+  odorant: 2-Ethyl-3,5-dimethylpyrazine
+  lever_class: pH
+  lever: pH adjusted before spray drying
+  focal: true
+  location: Fig. 1, digitised
+  digitised: true
+  unit: ug/g sample
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 7
+    lever_value: 7
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 160
+      time_min: null
+      precursors:
+        rice bran protein hydrolysate: 5% protein suspension (alcalase)
+        fructose: 1% (w/v)
+      buffer: none
+      matrix: plant protein (rice bran protein hydrolysate), spray dried 160 C inlet / 80 C outlet
+      headspace: air
+  - label: pH 8
+    lever_value: 8
+    value: 0.0203
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 160
+      time_min: null
+      precursors:
+        rice bran protein hydrolysate: 5% protein suspension (alcalase)
+        fructose: 1% (w/v)
+      buffer: none
+      matrix: plant protein (rice bran protein hydrolysate), spray dried 160 C inlet / 80 C outlet
+      headspace: air
+  - label: pH 9
+    lever_value: 9
+    value: 0.0251
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 160
+      time_min: null
+      precursors:
+        rice bran protein hydrolysate: 5% protein suspension (alcalase)
+        fructose: 1% (w/v)
+      buffer: none
+      matrix: plant protein (rice bran protein hydrolysate), spray dried 160 C inlet / 80 C outlet
+      headspace: air
+  - label: pH 10
+    lever_value: 10
+    value: 0.00474
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 10
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 160
+      time_min: null
+      precursors:
+        rice bran protein hydrolysate: 5% protein suspension (alcalase)
+        fructose: 1% (w/v)
+      buffer: none
+      matrix: plant protein (rice bran protein hydrolysate), spray dried 160 C inlet / 80 C outlet
+      headspace: air
+  odorant_printed: 2-ethyl-3,5-dimethylpyrazine

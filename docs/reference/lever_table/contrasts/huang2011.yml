@@ -1,0 +1,2433 @@
+source: huang2011
+pdf: data/articles/huang2011.pdf
+reader: resolved
+scope_note: 'Resolved 2026-11-13 (step 11, A6 batch 2). Base reader b (34 = 17 odorants x 2 bean varieties, Table 2 temperature
+  ladders 120 / 150 / 170 C, unalkalized beans, end of 15 min roasting). Readers agree on every arm value; they differed only
+  on the pH fields. Decided call: the bean pH measured on the product (Table 3: Don Homero unalkalized 5.8 / 5.7 / 5.6 at
+  120 / 150 / 170 C) is ph_basis final with final_ph = that pH (reader b); Arriba bean pH is not printed (null). ph_control
+  is unstated (these beans were not alkalized). SIFT-MS roaster-headspace ppb (relative); focal as reader b (pyrazines and
+  Strecker aldehydes are the stated question). Not keyed: bean variety (not a sec. 4 lever), Table 3 times to peak (not amounts),
+  Fig. 2 time courses (Table 2 prints the 15 min values), Fig. 4 DMP mixture vs pH. DMP and methylbutanal are printed isomer
+  mixtures (odorant_unlisted). Conventions (resolver, uniform with batch 1): printed ND, ''-'', blank or 0 is nd_no_limit
+  with value null; all-ND contrasts kept; one compound printed twice carries duplicate_of; co-eluting mixtures odorant_unlisted;
+  odorant names canonicalised to the compound_keys display name, printed name in odorant_printed; IS semi-quantification and
+  SIFT-MS ppb relative, calibration with authentic standards absolute.'
+contrasts:
+- id: huang2011-1
+  resolution: resolved
+  odorant: (E)-2-Nonenal
+  lever_class: temperature
+  lever: roasting temperature
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: main result time
+  ph_control: unstated
+  arms:
+  - label: Arriba 120 C
+    lever_value: 120
+    value: 3
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 15
+      precursors:
+        Arriba cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Arriba)
+      headspace: air
+  - label: Arriba 150 C
+    lever_value: 150
+    value: 12
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 150
+      time_min: 15
+      precursors:
+        Arriba cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Arriba)
+      headspace: air
+  - label: Arriba 170 C
+    lever_value: 170
+    value: 15
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 170
+      time_min: 15
+      precursors:
+        Arriba cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Arriba)
+      headspace: air
+  odorant_printed: (E)-2-nonenal
+- id: huang2011-2
+  resolution: resolved
+  odorant: (E)-2-Nonenal
+  lever_class: temperature
+  lever: roasting temperature
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: main result time
+  ph_control: unstated
+  arms:
+  - label: Don Homero 120 C
+    lever_value: 120
+    value: 4
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: final
+      final_ph: 5.8
+      final_ph_location: Table 3
+      temp_C: 120
+      time_min: 15
+      precursors:
+        Don Homero cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Don Homero)
+      headspace: air
+  - label: Don Homero 150 C
+    lever_value: 150
+    value: 9
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: final
+      final_ph: 5.7
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 15
+      precursors:
+        Don Homero cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Don Homero)
+      headspace: air
+  - label: Don Homero 170 C
+    lever_value: 170
+    value: 7
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: final
+      final_ph: 5.6
+      final_ph_location: Table 3
+      temp_C: 170
+      time_min: 15
+      precursors:
+        Don Homero cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Don Homero)
+      headspace: air
+  odorant_printed: (E)-2-nonenal
+- id: huang2011-3
+  resolution: resolved
+  odorant: (E)-2-Octenal
+  lever_class: temperature
+  lever: roasting temperature
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: main result time
+  ph_control: unstated
+  arms:
+  - label: Arriba 120 C
+    lever_value: 120
+    value: 2
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 15
+      precursors:
+        Arriba cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Arriba)
+      headspace: air
+  - label: Arriba 150 C
+    lever_value: 150
+    value: 7
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 150
+      time_min: 15
+      precursors:
+        Arriba cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Arriba)
+      headspace: air
+  - label: Arriba 170 C
+    lever_value: 170
+    value: 7
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 170
+      time_min: 15
+      precursors:
+        Arriba cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Arriba)
+      headspace: air
+  odorant_printed: (E)-2-octenal
+- id: huang2011-4
+  resolution: resolved
+  odorant: (E)-2-Octenal
+  lever_class: temperature
+  lever: roasting temperature
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: main result time
+  ph_control: unstated
+  arms:
+  - label: Don Homero 120 C
+    lever_value: 120
+    value: 3
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: final
+      final_ph: 5.8
+      final_ph_location: Table 3
+      temp_C: 120
+      time_min: 15
+      precursors:
+        Don Homero cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Don Homero)
+      headspace: air
+  - label: Don Homero 150 C
+    lever_value: 150
+    value: 7
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: final
+      final_ph: 5.7
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 15
+      precursors:
+        Don Homero cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Don Homero)
+      headspace: air
+  - label: Don Homero 170 C
+    lever_value: 170
+    value: 17
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: final
+      final_ph: 5.6
+      final_ph_location: Table 3
+      temp_C: 170
+      time_min: 15
+      precursors:
+        Don Homero cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Don Homero)
+      headspace: air
+  odorant_printed: (E)-2-octenal
+- id: huang2011-5
+  resolution: resolved
+  odorant: (E,E)-2,4-Decadienal
+  lever_class: temperature
+  lever: roasting temperature
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: main result time
+  ph_control: unstated
+  arms:
+  - label: Arriba 120 C
+    lever_value: 120
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 15
+      precursors:
+        Arriba cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Arriba)
+      headspace: air
+  - label: Arriba 150 C
+    lever_value: 150
+    value: 25
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 150
+      time_min: 15
+      precursors:
+        Arriba cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Arriba)
+      headspace: air
+  - label: Arriba 170 C
+    lever_value: 170
+    value: 20
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 170
+      time_min: 15
+      precursors:
+        Arriba cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Arriba)
+      headspace: air
+  odorant_printed: (E,E)-2,4-decadienal
+- id: huang2011-6
+  resolution: resolved
+  odorant: (E,E)-2,4-Decadienal
+  lever_class: temperature
+  lever: roasting temperature
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: main result time
+  ph_control: unstated
+  arms:
+  - label: Don Homero 120 C
+    lever_value: 120
+    value: 1
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: final
+      final_ph: 5.8
+      final_ph_location: Table 3
+      temp_C: 120
+      time_min: 15
+      precursors:
+        Don Homero cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Don Homero)
+      headspace: air
+  - label: Don Homero 150 C
+    lever_value: 150
+    value: 7
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: final
+      final_ph: 5.7
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 15
+      precursors:
+        Don Homero cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Don Homero)
+      headspace: air
+  - label: Don Homero 170 C
+    lever_value: 170
+    value: 31
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: final
+      final_ph: 5.6
+      final_ph_location: Table 3
+      temp_C: 170
+      time_min: 15
+      precursors:
+        Don Homero cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Don Homero)
+      headspace: air
+  odorant_printed: (E,E)-2,4-decadienal
+- id: huang2011-7
+  resolution: resolved
+  odorant: 2-Methylpropanal (isobutyraldehyde)
+  lever_class: temperature
+  lever: roasting temperature
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: main result time
+  ph_control: unstated
+  arms:
+  - label: Arriba 120 C
+    lever_value: 120
+    value: 8
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 15
+      precursors:
+        Arriba cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Arriba)
+      headspace: air
+  - label: Arriba 150 C
+    lever_value: 150
+    value: 24
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 150
+      time_min: 15
+      precursors:
+        Arriba cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Arriba)
+      headspace: air
+  - label: Arriba 170 C
+    lever_value: 170
+    value: 29
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 170
+      time_min: 15
+      precursors:
+        Arriba cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Arriba)
+      headspace: air
+  odorant_printed: 2-methylpropanal
+- id: huang2011-8
+  resolution: resolved
+  odorant: 2-Methylpropanal (isobutyraldehyde)
+  lever_class: temperature
+  lever: roasting temperature
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: main result time
+  ph_control: unstated
+  arms:
+  - label: Don Homero 120 C
+    lever_value: 120
+    value: 6
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: final
+      final_ph: 5.8
+      final_ph_location: Table 3
+      temp_C: 120
+      time_min: 15
+      precursors:
+        Don Homero cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Don Homero)
+      headspace: air
+  - label: Don Homero 150 C
+    lever_value: 150
+    value: 17
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: final
+      final_ph: 5.7
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 15
+      precursors:
+        Don Homero cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Don Homero)
+      headspace: air
+  - label: Don Homero 170 C
+    lever_value: 170
+    value: 23
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: final
+      final_ph: 5.6
+      final_ph_location: Table 3
+      temp_C: 170
+      time_min: 15
+      precursors:
+        Don Homero cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Don Homero)
+      headspace: air
+  odorant_printed: 2-methylpropanal
+- id: huang2011-9
+  resolution: resolved
+  odorant: 2-Methylpyrazine
+  lever_class: temperature
+  lever: roasting temperature
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: main result time
+  ph_control: unstated
+  arms:
+  - label: Arriba 120 C
+    lever_value: 120
+    value: 2
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 15
+      precursors:
+        Arriba cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Arriba)
+      headspace: air
+  - label: Arriba 150 C
+    lever_value: 150
+    value: 9
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 150
+      time_min: 15
+      precursors:
+        Arriba cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Arriba)
+      headspace: air
+  - label: Arriba 170 C
+    lever_value: 170
+    value: 5
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 170
+      time_min: 15
+      precursors:
+        Arriba cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Arriba)
+      headspace: air
+  odorant_printed: 2-methylpyrazine
+- id: huang2011-10
+  resolution: resolved
+  odorant: 2-Methylpyrazine
+  lever_class: temperature
+  lever: roasting temperature
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: main result time
+  ph_control: unstated
+  arms:
+  - label: Don Homero 120 C
+    lever_value: 120
+    value: 2
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: final
+      final_ph: 5.8
+      final_ph_location: Table 3
+      temp_C: 120
+      time_min: 15
+      precursors:
+        Don Homero cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Don Homero)
+      headspace: air
+  - label: Don Homero 150 C
+    lever_value: 150
+    value: 3
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: final
+      final_ph: 5.7
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 15
+      precursors:
+        Don Homero cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Don Homero)
+      headspace: air
+  - label: Don Homero 170 C
+    lever_value: 170
+    value: 12
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: final
+      final_ph: 5.6
+      final_ph_location: Table 3
+      temp_C: 170
+      time_min: 15
+      precursors:
+        Don Homero cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Don Homero)
+      headspace: air
+  odorant_printed: 2-methylpyrazine
+- id: huang2011-11
+  resolution: resolved
+  odorant: 5-Methylfurfural
+  lever_class: temperature
+  lever: roasting temperature
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: main result time
+  ph_control: unstated
+  arms:
+  - label: Arriba 120 C
+    lever_value: 120
+    value: 2
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 15
+      precursors:
+        Arriba cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Arriba)
+      headspace: air
+  - label: Arriba 150 C
+    lever_value: 150
+    value: 16
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 150
+      time_min: 15
+      precursors:
+        Arriba cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Arriba)
+      headspace: air
+  - label: Arriba 170 C
+    lever_value: 170
+    value: 26
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 170
+      time_min: 15
+      precursors:
+        Arriba cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Arriba)
+      headspace: air
+  odorant_printed: 5-methylfurfural
+- id: huang2011-12
+  resolution: resolved
+  odorant: 5-Methylfurfural
+  lever_class: temperature
+  lever: roasting temperature
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: main result time
+  ph_control: unstated
+  arms:
+  - label: Don Homero 120 C
+    lever_value: 120
+    value: 1
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: final
+      final_ph: 5.8
+      final_ph_location: Table 3
+      temp_C: 120
+      time_min: 15
+      precursors:
+        Don Homero cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Don Homero)
+      headspace: air
+  - label: Don Homero 150 C
+    lever_value: 150
+    value: 9
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: final
+      final_ph: 5.7
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 15
+      precursors:
+        Don Homero cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Don Homero)
+      headspace: air
+  - label: Don Homero 170 C
+    lever_value: 170
+    value: 16
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: final
+      final_ph: 5.6
+      final_ph_location: Table 3
+      temp_C: 170
+      time_min: 15
+      precursors:
+        Don Homero cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Don Homero)
+      headspace: air
+  odorant_printed: 5-methylfurfural
+- id: huang2011-13
+  resolution: resolved
+  odorant: Benzaldehyde
+  lever_class: temperature
+  lever: roasting temperature
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: main result time
+  ph_control: unstated
+  arms:
+  - label: Arriba 120 C
+    lever_value: 120
+    value: 13
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 15
+      precursors:
+        Arriba cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Arriba)
+      headspace: air
+  - label: Arriba 150 C
+    lever_value: 150
+    value: 32
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 150
+      time_min: 15
+      precursors:
+        Arriba cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Arriba)
+      headspace: air
+  - label: Arriba 170 C
+    lever_value: 170
+    value: 28
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 170
+      time_min: 15
+      precursors:
+        Arriba cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Arriba)
+      headspace: air
+  odorant_printed: benzaldehyde
+- id: huang2011-14
+  resolution: resolved
+  odorant: Benzaldehyde
+  lever_class: temperature
+  lever: roasting temperature
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: main result time
+  ph_control: unstated
+  arms:
+  - label: Don Homero 120 C
+    lever_value: 120
+    value: 3
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: final
+      final_ph: 5.8
+      final_ph_location: Table 3
+      temp_C: 120
+      time_min: 15
+      precursors:
+        Don Homero cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Don Homero)
+      headspace: air
+  - label: Don Homero 150 C
+    lever_value: 150
+    value: 22
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: final
+      final_ph: 5.7
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 15
+      precursors:
+        Don Homero cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Don Homero)
+      headspace: air
+  - label: Don Homero 170 C
+    lever_value: 170
+    value: 24
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: final
+      final_ph: 5.6
+      final_ph_location: Table 3
+      temp_C: 170
+      time_min: 15
+      precursors:
+        Don Homero cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Don Homero)
+      headspace: air
+  odorant_printed: benzaldehyde
+- id: huang2011-15
+  resolution: resolved
+  odorant: dimethylpyrazine (2,3-/2,5-/2,6- mixture)
+  lever_class: temperature
+  lever: roasting temperature
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: main result time
+  ph_control: unstated
+  odorant_unlisted: true
+  arms:
+  - label: Arriba 120 C
+    lever_value: 120
+    value: 2
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 15
+      precursors:
+        Arriba cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Arriba)
+      headspace: air
+  - label: Arriba 150 C
+    lever_value: 150
+    value: 17
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 150
+      time_min: 15
+      precursors:
+        Arriba cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Arriba)
+      headspace: air
+  - label: Arriba 170 C
+    lever_value: 170
+    value: 32
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 170
+      time_min: 15
+      precursors:
+        Arriba cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Arriba)
+      headspace: air
+  unlisted_reason: co-eluting compounds printed as one value / not a single listed odorant
+- id: huang2011-16
+  resolution: resolved
+  odorant: dimethylpyrazine (2,3-/2,5-/2,6- mixture)
+  lever_class: temperature
+  lever: roasting temperature
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: main result time
+  ph_control: unstated
+  odorant_unlisted: true
+  arms:
+  - label: Don Homero 120 C
+    lever_value: 120
+    value: 7
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: final
+      final_ph: 5.8
+      final_ph_location: Table 3
+      temp_C: 120
+      time_min: 15
+      precursors:
+        Don Homero cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Don Homero)
+      headspace: air
+  - label: Don Homero 150 C
+    lever_value: 150
+    value: 25
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: final
+      final_ph: 5.7
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 15
+      precursors:
+        Don Homero cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Don Homero)
+      headspace: air
+  - label: Don Homero 170 C
+    lever_value: 170
+    value: 31
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: final
+      final_ph: 5.6
+      final_ph_location: Table 3
+      temp_C: 170
+      time_min: 15
+      precursors:
+        Don Homero cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Don Homero)
+      headspace: air
+  unlisted_reason: co-eluting compounds printed as one value / not a single listed odorant
+- id: huang2011-17
+  resolution: resolved
+  odorant: DMHF
+  lever_class: temperature
+  lever: roasting temperature
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: main result time
+  ph_control: unstated
+  arms:
+  - label: Arriba 120 C
+    lever_value: 120
+    value: 8
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 15
+      precursors:
+        Arriba cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Arriba)
+      headspace: air
+  - label: Arriba 150 C
+    lever_value: 150
+    value: 39
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 150
+      time_min: 15
+      precursors:
+        Arriba cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Arriba)
+      headspace: air
+  - label: Arriba 170 C
+    lever_value: 170
+    value: 76
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 170
+      time_min: 15
+      precursors:
+        Arriba cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Arriba)
+      headspace: air
+  odorant_printed: furaneol
+- id: huang2011-18
+  resolution: resolved
+  odorant: DMHF
+  lever_class: temperature
+  lever: roasting temperature
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: main result time
+  ph_control: unstated
+  arms:
+  - label: Don Homero 120 C
+    lever_value: 120
+    value: 10
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: final
+      final_ph: 5.8
+      final_ph_location: Table 3
+      temp_C: 120
+      time_min: 15
+      precursors:
+        Don Homero cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Don Homero)
+      headspace: air
+  - label: Don Homero 150 C
+    lever_value: 150
+    value: 20
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: final
+      final_ph: 5.7
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 15
+      precursors:
+        Don Homero cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Don Homero)
+      headspace: air
+  - label: Don Homero 170 C
+    lever_value: 170
+    value: 48
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: final
+      final_ph: 5.6
+      final_ph_location: Table 3
+      temp_C: 170
+      time_min: 15
+      precursors:
+        Don Homero cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Don Homero)
+      headspace: air
+  odorant_printed: furaneol
+- id: huang2011-19
+  resolution: resolved
+  odorant: Furfural
+  lever_class: temperature
+  lever: roasting temperature
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: main result time
+  ph_control: unstated
+  arms:
+  - label: Arriba 120 C
+    lever_value: 120
+    value: 1
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 15
+      precursors:
+        Arriba cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Arriba)
+      headspace: air
+  - label: Arriba 150 C
+    lever_value: 150
+    value: 21
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 150
+      time_min: 15
+      precursors:
+        Arriba cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Arriba)
+      headspace: air
+  - label: Arriba 170 C
+    lever_value: 170
+    value: 26
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 170
+      time_min: 15
+      precursors:
+        Arriba cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Arriba)
+      headspace: air
+  odorant_printed: furfural
+- id: huang2011-20
+  resolution: resolved
+  odorant: Furfural
+  lever_class: temperature
+  lever: roasting temperature
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: main result time
+  ph_control: unstated
+  arms:
+  - label: Don Homero 120 C
+    lever_value: 120
+    value: 2
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: final
+      final_ph: 5.8
+      final_ph_location: Table 3
+      temp_C: 120
+      time_min: 15
+      precursors:
+        Don Homero cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Don Homero)
+      headspace: air
+  - label: Don Homero 150 C
+    lever_value: 150
+    value: 10
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: final
+      final_ph: 5.7
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 15
+      precursors:
+        Don Homero cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Don Homero)
+      headspace: air
+  - label: Don Homero 170 C
+    lever_value: 170
+    value: 14
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: final
+      final_ph: 5.6
+      final_ph_location: Table 3
+      temp_C: 170
+      time_min: 15
+      precursors:
+        Don Homero cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Don Homero)
+      headspace: air
+  odorant_printed: furfural
+- id: huang2011-21
+  resolution: resolved
+  odorant: Heptanal
+  lever_class: temperature
+  lever: roasting temperature
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: main result time
+  ph_control: unstated
+  arms:
+  - label: Arriba 120 C
+    lever_value: 120
+    value: 5
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 15
+      precursors:
+        Arriba cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Arriba)
+      headspace: air
+  - label: Arriba 150 C
+    lever_value: 150
+    value: 6
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 150
+      time_min: 15
+      precursors:
+        Arriba cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Arriba)
+      headspace: air
+  - label: Arriba 170 C
+    lever_value: 170
+    value: 7
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 170
+      time_min: 15
+      precursors:
+        Arriba cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Arriba)
+      headspace: air
+  odorant_printed: heptanal
+- id: huang2011-22
+  resolution: resolved
+  odorant: Heptanal
+  lever_class: temperature
+  lever: roasting temperature
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: main result time
+  ph_control: unstated
+  arms:
+  - label: Don Homero 120 C
+    lever_value: 120
+    value: 1
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: final
+      final_ph: 5.8
+      final_ph_location: Table 3
+      temp_C: 120
+      time_min: 15
+      precursors:
+        Don Homero cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Don Homero)
+      headspace: air
+  - label: Don Homero 150 C
+    lever_value: 150
+    value: 8
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: final
+      final_ph: 5.7
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 15
+      precursors:
+        Don Homero cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Don Homero)
+      headspace: air
+  - label: Don Homero 170 C
+    lever_value: 170
+    value: 11
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: final
+      final_ph: 5.6
+      final_ph_location: Table 3
+      temp_C: 170
+      time_min: 15
+      precursors:
+        Don Homero cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Don Homero)
+      headspace: air
+  odorant_printed: heptanal
+- id: huang2011-23
+  resolution: resolved
+  odorant: Methional (3-(methylthio)propanal)
+  lever_class: temperature
+  lever: roasting temperature
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: main result time
+  ph_control: unstated
+  arms:
+  - label: Arriba 120 C
+    lever_value: 120
+    value: 2
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 15
+      precursors:
+        Arriba cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Arriba)
+      headspace: air
+  - label: Arriba 150 C
+    lever_value: 150
+    value: 32
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 150
+      time_min: 15
+      precursors:
+        Arriba cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Arriba)
+      headspace: air
+  - label: Arriba 170 C
+    lever_value: 170
+    value: 45
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 170
+      time_min: 15
+      precursors:
+        Arriba cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Arriba)
+      headspace: air
+  odorant_printed: methional
+- id: huang2011-24
+  resolution: resolved
+  odorant: Methional (3-(methylthio)propanal)
+  lever_class: temperature
+  lever: roasting temperature
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: main result time
+  ph_control: unstated
+  arms:
+  - label: Don Homero 120 C
+    lever_value: 120
+    value: 3
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: final
+      final_ph: 5.8
+      final_ph_location: Table 3
+      temp_C: 120
+      time_min: 15
+      precursors:
+        Don Homero cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Don Homero)
+      headspace: air
+  - label: Don Homero 150 C
+    lever_value: 150
+    value: 22
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: final
+      final_ph: 5.7
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 15
+      precursors:
+        Don Homero cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Don Homero)
+      headspace: air
+  - label: Don Homero 170 C
+    lever_value: 170
+    value: 33
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: final
+      final_ph: 5.6
+      final_ph_location: Table 3
+      temp_C: 170
+      time_min: 15
+      precursors:
+        Don Homero cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Don Homero)
+      headspace: air
+  odorant_printed: methional
+- id: huang2011-25
+  resolution: resolved
+  odorant: methylbutanal (2- and 3-methylbutanal mixture)
+  lever_class: temperature
+  lever: roasting temperature
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: main result time
+  ph_control: unstated
+  odorant_unlisted: true
+  arms:
+  - label: Arriba 120 C
+    lever_value: 120
+    value: 76
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 15
+      precursors:
+        Arriba cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Arriba)
+      headspace: air
+  - label: Arriba 150 C
+    lever_value: 150
+    value: 193
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 150
+      time_min: 15
+      precursors:
+        Arriba cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Arriba)
+      headspace: air
+  - label: Arriba 170 C
+    lever_value: 170
+    value: 173
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 170
+      time_min: 15
+      precursors:
+        Arriba cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Arriba)
+      headspace: air
+  unlisted_reason: co-eluting compounds printed as one value / not a single listed odorant
+- id: huang2011-26
+  resolution: resolved
+  odorant: methylbutanal (2- and 3-methylbutanal mixture)
+  lever_class: temperature
+  lever: roasting temperature
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: main result time
+  ph_control: unstated
+  odorant_unlisted: true
+  arms:
+  - label: Don Homero 120 C
+    lever_value: 120
+    value: 46
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: final
+      final_ph: 5.8
+      final_ph_location: Table 3
+      temp_C: 120
+      time_min: 15
+      precursors:
+        Don Homero cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Don Homero)
+      headspace: air
+  - label: Don Homero 150 C
+    lever_value: 150
+    value: 160
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: final
+      final_ph: 5.7
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 15
+      precursors:
+        Don Homero cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Don Homero)
+      headspace: air
+  - label: Don Homero 170 C
+    lever_value: 170
+    value: 148
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: final
+      final_ph: 5.6
+      final_ph_location: Table 3
+      temp_C: 170
+      time_min: 15
+      precursors:
+        Don Homero cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Don Homero)
+      headspace: air
+  unlisted_reason: co-eluting compounds printed as one value / not a single listed odorant
+- id: huang2011-27
+  resolution: resolved
+  odorant: Nonanal
+  lever_class: temperature
+  lever: roasting temperature
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: main result time
+  ph_control: unstated
+  arms:
+  - label: Arriba 120 C
+    lever_value: 120
+    value: 15
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 15
+      precursors:
+        Arriba cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Arriba)
+      headspace: air
+  - label: Arriba 150 C
+    lever_value: 150
+    value: 19
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 150
+      time_min: 15
+      precursors:
+        Arriba cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Arriba)
+      headspace: air
+  - label: Arriba 170 C
+    lever_value: 170
+    value: 46
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 170
+      time_min: 15
+      precursors:
+        Arriba cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Arriba)
+      headspace: air
+  odorant_printed: nonanal
+- id: huang2011-28
+  resolution: resolved
+  odorant: Nonanal
+  lever_class: temperature
+  lever: roasting temperature
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: main result time
+  ph_control: unstated
+  arms:
+  - label: Don Homero 120 C
+    lever_value: 120
+    value: 14
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: final
+      final_ph: 5.8
+      final_ph_location: Table 3
+      temp_C: 120
+      time_min: 15
+      precursors:
+        Don Homero cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Don Homero)
+      headspace: air
+  - label: Don Homero 150 C
+    lever_value: 150
+    value: 28
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: final
+      final_ph: 5.7
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 15
+      precursors:
+        Don Homero cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Don Homero)
+      headspace: air
+  - label: Don Homero 170 C
+    lever_value: 170
+    value: 23
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: final
+      final_ph: 5.6
+      final_ph_location: Table 3
+      temp_C: 170
+      time_min: 15
+      precursors:
+        Don Homero cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Don Homero)
+      headspace: air
+  odorant_printed: nonanal
+- id: huang2011-29
+  resolution: resolved
+  odorant: Phenylacetaldehyde
+  lever_class: temperature
+  lever: roasting temperature
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: main result time
+  ph_control: unstated
+  arms:
+  - label: Arriba 120 C
+    lever_value: 120
+    value: 28
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 15
+      precursors:
+        Arriba cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Arriba)
+      headspace: air
+  - label: Arriba 150 C
+    lever_value: 150
+    value: 49
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 150
+      time_min: 15
+      precursors:
+        Arriba cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Arriba)
+      headspace: air
+  - label: Arriba 170 C
+    lever_value: 170
+    value: 154
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 170
+      time_min: 15
+      precursors:
+        Arriba cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Arriba)
+      headspace: air
+  odorant_printed: phenylacetaldehyde
+- id: huang2011-30
+  resolution: resolved
+  odorant: Phenylacetaldehyde
+  lever_class: temperature
+  lever: roasting temperature
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: main result time
+  ph_control: unstated
+  arms:
+  - label: Don Homero 120 C
+    lever_value: 120
+    value: 13
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: final
+      final_ph: 5.8
+      final_ph_location: Table 3
+      temp_C: 120
+      time_min: 15
+      precursors:
+        Don Homero cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Don Homero)
+      headspace: air
+  - label: Don Homero 150 C
+    lever_value: 150
+    value: 34
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: final
+      final_ph: 5.7
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 15
+      precursors:
+        Don Homero cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Don Homero)
+      headspace: air
+  - label: Don Homero 170 C
+    lever_value: 170
+    value: 38
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: final
+      final_ph: 5.6
+      final_ph_location: Table 3
+      temp_C: 170
+      time_min: 15
+      precursors:
+        Don Homero cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Don Homero)
+      headspace: air
+  odorant_printed: phenylacetaldehyde
+- id: huang2011-31
+  resolution: resolved
+  odorant: Tetramethylpyrazine
+  lever_class: temperature
+  lever: roasting temperature
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: main result time
+  ph_control: unstated
+  arms:
+  - label: Arriba 120 C
+    lever_value: 120
+    value: 1
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 15
+      precursors:
+        Arriba cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Arriba)
+      headspace: air
+  - label: Arriba 150 C
+    lever_value: 150
+    value: 4
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 150
+      time_min: 15
+      precursors:
+        Arriba cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Arriba)
+      headspace: air
+  - label: Arriba 170 C
+    lever_value: 170
+    value: 17
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 170
+      time_min: 15
+      precursors:
+        Arriba cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Arriba)
+      headspace: air
+  odorant_printed: tetramethylpyrazine
+- id: huang2011-32
+  resolution: resolved
+  odorant: Tetramethylpyrazine
+  lever_class: temperature
+  lever: roasting temperature
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: main result time
+  ph_control: unstated
+  arms:
+  - label: Don Homero 120 C
+    lever_value: 120
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: final
+      final_ph: 5.8
+      final_ph_location: Table 3
+      temp_C: 120
+      time_min: 15
+      precursors:
+        Don Homero cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Don Homero)
+      headspace: air
+  - label: Don Homero 150 C
+    lever_value: 150
+    value: 18
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: final
+      final_ph: 5.7
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 15
+      precursors:
+        Don Homero cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Don Homero)
+      headspace: air
+  - label: Don Homero 170 C
+    lever_value: 170
+    value: 13
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: final
+      final_ph: 5.6
+      final_ph_location: Table 3
+      temp_C: 170
+      time_min: 15
+      precursors:
+        Don Homero cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Don Homero)
+      headspace: air
+  odorant_printed: tetramethylpyrazine
+- id: huang2011-33
+  resolution: resolved
+  odorant: Trimethylpyrazine
+  lever_class: temperature
+  lever: roasting temperature
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: main result time
+  ph_control: unstated
+  arms:
+  - label: Arriba 120 C
+    lever_value: 120
+    value: 11
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 15
+      precursors:
+        Arriba cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Arriba)
+      headspace: air
+  - label: Arriba 150 C
+    lever_value: 150
+    value: 84
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 150
+      time_min: 15
+      precursors:
+        Arriba cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Arriba)
+      headspace: air
+  - label: Arriba 170 C
+    lever_value: 170
+    value: 79
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 170
+      time_min: 15
+      precursors:
+        Arriba cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Arriba)
+      headspace: air
+  odorant_printed: trimethylpyrazine
+- id: huang2011-34
+  resolution: resolved
+  odorant: Trimethylpyrazine
+  lever_class: temperature
+  lever: roasting temperature
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: main result time
+  ph_control: unstated
+  arms:
+  - label: Don Homero 120 C
+    lever_value: 120
+    value: 9
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: final
+      final_ph: 5.8
+      final_ph_location: Table 3
+      temp_C: 120
+      time_min: 15
+      precursors:
+        Don Homero cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Don Homero)
+      headspace: air
+  - label: Don Homero 150 C
+    lever_value: 150
+    value: 42
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.7
+      ph_basis: final
+      final_ph: 5.7
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 15
+      precursors:
+        Don Homero cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Don Homero)
+      headspace: air
+  - label: Don Homero 170 C
+    lever_value: 170
+    value: 70
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.6
+      ph_basis: final
+      final_ph: 5.6
+      final_ph_location: Table 3
+      temp_C: 170
+      time_min: 15
+      precursors:
+        Don Homero cocoa beans (unalkalized): 300 g/batch
+      buffer: none
+      matrix: other (cocoa beans, Don Homero)
+      headspace: air
+  odorant_printed: trimethylpyrazine

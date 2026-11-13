@@ -1,0 +1,6945 @@
+source: du2024c
+pdf: data/articles/du2024c.pdf
+reader: resolved
+scope_note: 'Resolved 2026-11-13 (step 11, A6 batch 2). Readers agree on all 110 contrasts (every arm value, lever, ph_control);
+  base reader a. 3 (initial pH 5.8 / 7.0 / 10.0 in 0.2 M phosphate) x 2 (linoleic acid 0 / 1.5 %) x 2 (reheated or not) factorial,
+  Table 3, ug/L by internal standard with response factor 1 (relative). Keyed: pH ladders in each linoleic x reheating cell,
+  and linoleic acid added vs none in each pH x reheating cell. Not keyed: reheating (5 d at 0 C then 10 min boiling; storage
+  plus extra heating, not one sec. 4 lever). ''Total of pyrazines'' read from the rotated Table 3 continuation. Printed 3-ethyl-2,5-dimethylpyrazine
+  is 2-Ethyl-3,6-dimethylpyrazine. No final pH printed. Conventions (resolver, uniform with batch 1): printed ND, ''-'', blank
+  or 0 is nd_no_limit with value null; all-ND contrasts kept; one compound printed twice carries duplicate_of; co-eluting
+  mixtures odorant_unlisted; odorant names canonicalised to the compound_keys display name, printed name in odorant_printed;
+  IS semi-quantification and SIFT-MS ppb relative, calibration with authentic standards absolute.'
+contrasts:
+- id: du2024c-1
+  resolution: agreed
+  odorant: Unsubstituted pyrazine
+  lever_class: pH
+  lever: initial pH (no linoleic acid, not reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: A1 (pH 5.8, NLA, NRH)
+    lever_value: 5.8
+    value: 35.25
+    censor: none
+    limit: null
+    n: 3
+    sd: 11.57
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: C1 (pH 7.0, NLA, NRH)
+    lever_value: 7.0
+    value: 15.02
+    censor: none
+    limit: null
+    n: 3
+    sd: 5.22
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: E1 (pH 10.0, NLA, NRH)
+    lever_value: 10.0
+    value: 5.12
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.41
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+- id: du2024c-2
+  resolution: agreed
+  odorant: Unsubstituted pyrazine
+  lever_class: pH
+  lever: initial pH (no linoleic acid, reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: A2 (pH 5.8, NLA, RH)
+    lever_value: 5.8
+    value: 42.38
+    censor: none
+    limit: null
+    n: 3
+    sd: 10.74
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: C2 (pH 7.0, NLA, RH)
+    lever_value: 7.0
+    value: 20.31
+    censor: none
+    limit: null
+    n: 3
+    sd: 2.16
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: E2 (pH 10.0, NLA, RH)
+    lever_value: 10.0
+    value: 5.1
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.33
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+- id: du2024c-3
+  resolution: agreed
+  odorant: Unsubstituted pyrazine
+  lever_class: pH
+  lever: initial pH (with linoleic acid, not reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: B1 (pH 5.8, LA, NRH)
+    lever_value: 5.8
+    value: 29.39
+    censor: none
+    limit: null
+    n: 3
+    sd: 6.68
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: D1 (pH 7.0, LA, NRH)
+    lever_value: 7.0
+    value: 20.05
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.48
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: F1 (pH 10.0, LA, NRH)
+    lever_value: 10.0
+    value: 15.1
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.49
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+- id: du2024c-4
+  resolution: agreed
+  odorant: Unsubstituted pyrazine
+  lever_class: pH
+  lever: initial pH (with linoleic acid, reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: B2 (pH 5.8, LA, RH)
+    lever_value: 5.8
+    value: 31.32
+    censor: none
+    limit: null
+    n: 3
+    sd: 9.85
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: D2 (pH 7.0, LA, RH)
+    lever_value: 7.0
+    value: 21.33
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.45
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: F2 (pH 10.0, LA, RH)
+    lever_value: 10.0
+    value: 15.96
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.9
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+- id: du2024c-5
+  resolution: agreed
+  odorant: Unsubstituted pyrazine
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 5.8, not reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: A1 (pH 5.8, NLA, NRH)
+    lever_value: none
+    value: 35.25
+    censor: none
+    limit: null
+    n: 3
+    sd: 11.57
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: B1 (pH 5.8, LA, NRH)
+    lever_value: linoleic acid 1.5%
+    value: 29.39
+    censor: none
+    limit: null
+    n: 3
+    sd: 6.68
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+- id: du2024c-6
+  resolution: agreed
+  odorant: Unsubstituted pyrazine
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 5.8, reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: A2 (pH 5.8, NLA, RH)
+    lever_value: none
+    value: 42.38
+    censor: none
+    limit: null
+    n: 3
+    sd: 10.74
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: B2 (pH 5.8, LA, RH)
+    lever_value: linoleic acid 1.5%
+    value: 31.32
+    censor: none
+    limit: null
+    n: 3
+    sd: 9.85
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+- id: du2024c-7
+  resolution: agreed
+  odorant: Unsubstituted pyrazine
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 7.0, not reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: C1 (pH 7.0, NLA, NRH)
+    lever_value: none
+    value: 15.02
+    censor: none
+    limit: null
+    n: 3
+    sd: 5.22
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: D1 (pH 7.0, LA, NRH)
+    lever_value: linoleic acid 1.5%
+    value: 20.05
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.48
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+- id: du2024c-8
+  resolution: agreed
+  odorant: Unsubstituted pyrazine
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 7.0, reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: C2 (pH 7.0, NLA, RH)
+    lever_value: none
+    value: 20.31
+    censor: none
+    limit: null
+    n: 3
+    sd: 2.16
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: D2 (pH 7.0, LA, RH)
+    lever_value: linoleic acid 1.5%
+    value: 21.33
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.45
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+- id: du2024c-9
+  resolution: agreed
+  odorant: Unsubstituted pyrazine
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 10.0, not reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: E1 (pH 10.0, NLA, NRH)
+    lever_value: none
+    value: 5.12
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.41
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: F1 (pH 10.0, LA, NRH)
+    lever_value: linoleic acid 1.5%
+    value: 15.1
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.49
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+- id: du2024c-10
+  resolution: agreed
+  odorant: Unsubstituted pyrazine
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 10.0, reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: E2 (pH 10.0, NLA, RH)
+    lever_value: none
+    value: 5.1
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.33
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: F2 (pH 10.0, LA, RH)
+    lever_value: linoleic acid 1.5%
+    value: 15.96
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.9
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+- id: du2024c-11
+  resolution: agreed
+  odorant: Hexanal
+  lever_class: pH
+  lever: initial pH (no linoleic acid, not reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: A1 (pH 5.8, NLA, NRH)
+    lever_value: 5.8
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: C1 (pH 7.0, NLA, NRH)
+    lever_value: 7.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: E1 (pH 10.0, NLA, NRH)
+    lever_value: 10.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: hexanal
+- id: du2024c-12
+  resolution: agreed
+  odorant: Hexanal
+  lever_class: pH
+  lever: initial pH (no linoleic acid, reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: A2 (pH 5.8, NLA, RH)
+    lever_value: 5.8
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: C2 (pH 7.0, NLA, RH)
+    lever_value: 7.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: E2 (pH 10.0, NLA, RH)
+    lever_value: 10.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: hexanal
+- id: du2024c-13
+  resolution: agreed
+  odorant: Hexanal
+  lever_class: pH
+  lever: initial pH (with linoleic acid, not reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: B1 (pH 5.8, LA, NRH)
+    lever_value: 5.8
+    value: 40.4
+    censor: none
+    limit: null
+    n: 3
+    sd: 10.12
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: D1 (pH 7.0, LA, NRH)
+    lever_value: 7.0
+    value: 19.24
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.8
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: F1 (pH 10.0, LA, NRH)
+    lever_value: 10.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: hexanal
+- id: du2024c-14
+  resolution: agreed
+  odorant: Hexanal
+  lever_class: pH
+  lever: initial pH (with linoleic acid, reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: B2 (pH 5.8, LA, RH)
+    lever_value: 5.8
+    value: 33.66
+    censor: none
+    limit: null
+    n: 3
+    sd: 9.86
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: D2 (pH 7.0, LA, RH)
+    lever_value: 7.0
+    value: 20.72
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.02
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: F2 (pH 10.0, LA, RH)
+    lever_value: 10.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: hexanal
+- id: du2024c-15
+  resolution: agreed
+  odorant: Hexanal
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 5.8, not reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: A1 (pH 5.8, NLA, NRH)
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: B1 (pH 5.8, LA, NRH)
+    lever_value: linoleic acid 1.5%
+    value: 40.4
+    censor: none
+    limit: null
+    n: 3
+    sd: 10.12
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: hexanal
+- id: du2024c-16
+  resolution: agreed
+  odorant: Hexanal
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 5.8, reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: A2 (pH 5.8, NLA, RH)
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: B2 (pH 5.8, LA, RH)
+    lever_value: linoleic acid 1.5%
+    value: 33.66
+    censor: none
+    limit: null
+    n: 3
+    sd: 9.86
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: hexanal
+- id: du2024c-17
+  resolution: agreed
+  odorant: Hexanal
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 7.0, not reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: C1 (pH 7.0, NLA, NRH)
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: D1 (pH 7.0, LA, NRH)
+    lever_value: linoleic acid 1.5%
+    value: 19.24
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.8
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: hexanal
+- id: du2024c-18
+  resolution: agreed
+  odorant: Hexanal
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 7.0, reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: C2 (pH 7.0, NLA, RH)
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: D2 (pH 7.0, LA, RH)
+    lever_value: linoleic acid 1.5%
+    value: 20.72
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.02
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: hexanal
+- id: du2024c-19
+  resolution: agreed
+  odorant: Hexanal
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 10.0, not reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: E1 (pH 10.0, NLA, NRH)
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: F1 (pH 10.0, LA, NRH)
+    lever_value: linoleic acid 1.5%
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: hexanal
+- id: du2024c-20
+  resolution: agreed
+  odorant: Hexanal
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 10.0, reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: E2 (pH 10.0, NLA, RH)
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: F2 (pH 10.0, LA, RH)
+    lever_value: linoleic acid 1.5%
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: hexanal
+- id: du2024c-21
+  resolution: agreed
+  odorant: 2-Methylpyrazine
+  lever_class: pH
+  lever: initial pH (no linoleic acid, not reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: A1 (pH 5.8, NLA, NRH)
+    lever_value: 5.8
+    value: 98.4
+    censor: none
+    limit: null
+    n: 3
+    sd: 29.68
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: C1 (pH 7.0, NLA, NRH)
+    lever_value: 7.0
+    value: 196.6
+    censor: none
+    limit: null
+    n: 3
+    sd: 35.38
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: E1 (pH 10.0, NLA, NRH)
+    lever_value: 10.0
+    value: 151.73
+    censor: none
+    limit: null
+    n: 3
+    sd: 8.52
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: 2-methylpyrazine
+- id: du2024c-22
+  resolution: agreed
+  odorant: 2-Methylpyrazine
+  lever_class: pH
+  lever: initial pH (no linoleic acid, reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: A2 (pH 5.8, NLA, RH)
+    lever_value: 5.8
+    value: 115.82
+    censor: none
+    limit: null
+    n: 3
+    sd: 31.12
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: C2 (pH 7.0, NLA, RH)
+    lever_value: 7.0
+    value: 192.11
+    censor: none
+    limit: null
+    n: 3
+    sd: 18.62
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: E2 (pH 10.0, NLA, RH)
+    lever_value: 10.0
+    value: 140.07
+    censor: none
+    limit: null
+    n: 3
+    sd: 4.38
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: 2-methylpyrazine
+- id: du2024c-23
+  resolution: agreed
+  odorant: 2-Methylpyrazine
+  lever_class: pH
+  lever: initial pH (with linoleic acid, not reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: B1 (pH 5.8, LA, NRH)
+    lever_value: 5.8
+    value: 84.65
+    censor: none
+    limit: null
+    n: 3
+    sd: 18.71
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: D1 (pH 7.0, LA, NRH)
+    lever_value: 7.0
+    value: 154.66
+    censor: none
+    limit: null
+    n: 3
+    sd: 14.2
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: F1 (pH 10.0, LA, NRH)
+    lever_value: 10.0
+    value: 323.27
+    censor: none
+    limit: null
+    n: 3
+    sd: 12.76
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: 2-methylpyrazine
+- id: du2024c-24
+  resolution: agreed
+  odorant: 2-Methylpyrazine
+  lever_class: pH
+  lever: initial pH (with linoleic acid, reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: B2 (pH 5.8, LA, RH)
+    lever_value: 5.8
+    value: 82.08
+    censor: none
+    limit: null
+    n: 3
+    sd: 22.07
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: D2 (pH 7.0, LA, RH)
+    lever_value: 7.0
+    value: 163.73
+    censor: none
+    limit: null
+    n: 3
+    sd: 4.84
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: F2 (pH 10.0, LA, RH)
+    lever_value: 10.0
+    value: 318.86
+    censor: none
+    limit: null
+    n: 3
+    sd: 20.55
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: 2-methylpyrazine
+- id: du2024c-25
+  resolution: agreed
+  odorant: 2-Methylpyrazine
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 5.8, not reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: A1 (pH 5.8, NLA, NRH)
+    lever_value: none
+    value: 98.4
+    censor: none
+    limit: null
+    n: 3
+    sd: 29.68
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: B1 (pH 5.8, LA, NRH)
+    lever_value: linoleic acid 1.5%
+    value: 84.65
+    censor: none
+    limit: null
+    n: 3
+    sd: 18.71
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: 2-methylpyrazine
+- id: du2024c-26
+  resolution: agreed
+  odorant: 2-Methylpyrazine
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 5.8, reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: A2 (pH 5.8, NLA, RH)
+    lever_value: none
+    value: 115.82
+    censor: none
+    limit: null
+    n: 3
+    sd: 31.12
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: B2 (pH 5.8, LA, RH)
+    lever_value: linoleic acid 1.5%
+    value: 82.08
+    censor: none
+    limit: null
+    n: 3
+    sd: 22.07
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: 2-methylpyrazine
+- id: du2024c-27
+  resolution: agreed
+  odorant: 2-Methylpyrazine
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 7.0, not reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: C1 (pH 7.0, NLA, NRH)
+    lever_value: none
+    value: 196.6
+    censor: none
+    limit: null
+    n: 3
+    sd: 35.38
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: D1 (pH 7.0, LA, NRH)
+    lever_value: linoleic acid 1.5%
+    value: 154.66
+    censor: none
+    limit: null
+    n: 3
+    sd: 14.2
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: 2-methylpyrazine
+- id: du2024c-28
+  resolution: agreed
+  odorant: 2-Methylpyrazine
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 7.0, reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: C2 (pH 7.0, NLA, RH)
+    lever_value: none
+    value: 192.11
+    censor: none
+    limit: null
+    n: 3
+    sd: 18.62
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: D2 (pH 7.0, LA, RH)
+    lever_value: linoleic acid 1.5%
+    value: 163.73
+    censor: none
+    limit: null
+    n: 3
+    sd: 4.84
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: 2-methylpyrazine
+- id: du2024c-29
+  resolution: agreed
+  odorant: 2-Methylpyrazine
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 10.0, not reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: E1 (pH 10.0, NLA, NRH)
+    lever_value: none
+    value: 151.73
+    censor: none
+    limit: null
+    n: 3
+    sd: 8.52
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: F1 (pH 10.0, LA, NRH)
+    lever_value: linoleic acid 1.5%
+    value: 323.27
+    censor: none
+    limit: null
+    n: 3
+    sd: 12.76
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: 2-methylpyrazine
+- id: du2024c-30
+  resolution: agreed
+  odorant: 2-Methylpyrazine
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 10.0, reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: E2 (pH 10.0, NLA, RH)
+    lever_value: none
+    value: 140.07
+    censor: none
+    limit: null
+    n: 3
+    sd: 4.38
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: F2 (pH 10.0, LA, RH)
+    lever_value: linoleic acid 1.5%
+    value: 318.86
+    censor: none
+    limit: null
+    n: 3
+    sd: 20.55
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: 2-methylpyrazine
+- id: du2024c-31
+  resolution: agreed
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: pH
+  lever: initial pH (no linoleic acid, not reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: A1 (pH 5.8, NLA, NRH)
+    lever_value: 5.8
+    value: 4.63
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.35
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: C1 (pH 7.0, NLA, NRH)
+    lever_value: 7.0
+    value: 70.91
+    censor: none
+    limit: null
+    n: 3
+    sd: 23.21
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: E1 (pH 10.0, NLA, NRH)
+    lever_value: 10.0
+    value: 212.75
+    censor: none
+    limit: null
+    n: 3
+    sd: 8.61
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: 2,5-dimethylpyrazine
+- id: du2024c-32
+  resolution: agreed
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: pH
+  lever: initial pH (no linoleic acid, reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: A2 (pH 5.8, NLA, RH)
+    lever_value: 5.8
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: C2 (pH 7.0, NLA, RH)
+    lever_value: 7.0
+    value: 69.63
+    censor: none
+    limit: null
+    n: 3
+    sd: 8.78
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: E2 (pH 10.0, NLA, RH)
+    lever_value: 10.0
+    value: 207.56
+    censor: none
+    limit: null
+    n: 3
+    sd: 8.0
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: 2,5-dimethylpyrazine
+- id: du2024c-33
+  resolution: agreed
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: pH
+  lever: initial pH (with linoleic acid, not reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: B1 (pH 5.8, LA, NRH)
+    lever_value: 5.8
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: D1 (pH 7.0, LA, NRH)
+    lever_value: 7.0
+    value: 34.53
+    censor: none
+    limit: null
+    n: 3
+    sd: 3.58
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: F1 (pH 10.0, LA, NRH)
+    lever_value: 10.0
+    value: 320.85
+    censor: none
+    limit: null
+    n: 3
+    sd: 11.97
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: 2,5-dimethylpyrazine
+- id: du2024c-34
+  resolution: agreed
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: pH
+  lever: initial pH (with linoleic acid, reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: B2 (pH 5.8, LA, RH)
+    lever_value: 5.8
+    value: 4.09
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.74
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: D2 (pH 7.0, LA, RH)
+    lever_value: 7.0
+    value: 40.7
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.45
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: F2 (pH 10.0, LA, RH)
+    lever_value: 10.0
+    value: 326.79
+    censor: none
+    limit: null
+    n: 3
+    sd: 19.9
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: 2,5-dimethylpyrazine
+- id: du2024c-35
+  resolution: agreed
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 5.8, not reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: A1 (pH 5.8, NLA, NRH)
+    lever_value: none
+    value: 4.63
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.35
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: B1 (pH 5.8, LA, NRH)
+    lever_value: linoleic acid 1.5%
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: 2,5-dimethylpyrazine
+- id: du2024c-36
+  resolution: agreed
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 5.8, reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: A2 (pH 5.8, NLA, RH)
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: B2 (pH 5.8, LA, RH)
+    lever_value: linoleic acid 1.5%
+    value: 4.09
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.74
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: 2,5-dimethylpyrazine
+- id: du2024c-37
+  resolution: agreed
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 7.0, not reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: C1 (pH 7.0, NLA, NRH)
+    lever_value: none
+    value: 70.91
+    censor: none
+    limit: null
+    n: 3
+    sd: 23.21
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: D1 (pH 7.0, LA, NRH)
+    lever_value: linoleic acid 1.5%
+    value: 34.53
+    censor: none
+    limit: null
+    n: 3
+    sd: 3.58
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: 2,5-dimethylpyrazine
+- id: du2024c-38
+  resolution: agreed
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 7.0, reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: C2 (pH 7.0, NLA, RH)
+    lever_value: none
+    value: 69.63
+    censor: none
+    limit: null
+    n: 3
+    sd: 8.78
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: D2 (pH 7.0, LA, RH)
+    lever_value: linoleic acid 1.5%
+    value: 40.7
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.45
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: 2,5-dimethylpyrazine
+- id: du2024c-39
+  resolution: agreed
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 10.0, not reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: E1 (pH 10.0, NLA, NRH)
+    lever_value: none
+    value: 212.75
+    censor: none
+    limit: null
+    n: 3
+    sd: 8.61
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: F1 (pH 10.0, LA, NRH)
+    lever_value: linoleic acid 1.5%
+    value: 320.85
+    censor: none
+    limit: null
+    n: 3
+    sd: 11.97
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: 2,5-dimethylpyrazine
+- id: du2024c-40
+  resolution: agreed
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 10.0, reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: E2 (pH 10.0, NLA, RH)
+    lever_value: none
+    value: 207.56
+    censor: none
+    limit: null
+    n: 3
+    sd: 8.0
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: F2 (pH 10.0, LA, RH)
+    lever_value: linoleic acid 1.5%
+    value: 326.79
+    censor: none
+    limit: null
+    n: 3
+    sd: 19.9
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: 2,5-dimethylpyrazine
+- id: du2024c-41
+  resolution: agreed
+  odorant: 2,3-Dimethylpyrazine
+  lever_class: pH
+  lever: initial pH (no linoleic acid, not reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: A1 (pH 5.8, NLA, NRH)
+    lever_value: 5.8
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: C1 (pH 7.0, NLA, NRH)
+    lever_value: 7.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: E1 (pH 10.0, NLA, NRH)
+    lever_value: 10.0
+    value: 47.8
+    censor: none
+    limit: null
+    n: 3
+    sd: 2.13
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: 2,3-dimethylpyrazine
+- id: du2024c-42
+  resolution: agreed
+  odorant: 2,3-Dimethylpyrazine
+  lever_class: pH
+  lever: initial pH (no linoleic acid, reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: A2 (pH 5.8, NLA, RH)
+    lever_value: 5.8
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: C2 (pH 7.0, NLA, RH)
+    lever_value: 7.0
+    value: 10.94
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.32
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: E2 (pH 10.0, NLA, RH)
+    lever_value: 10.0
+    value: 42.76
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.83
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: 2,3-dimethylpyrazine
+- id: du2024c-43
+  resolution: agreed
+  odorant: 2,3-Dimethylpyrazine
+  lever_class: pH
+  lever: initial pH (with linoleic acid, not reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: B1 (pH 5.8, LA, NRH)
+    lever_value: 5.8
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: D1 (pH 7.0, LA, NRH)
+    lever_value: 7.0
+    value: 5.01
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.55
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: F1 (pH 10.0, LA, NRH)
+    lever_value: 10.0
+    value: 54.56
+    censor: none
+    limit: null
+    n: 3
+    sd: 2.15
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: 2,3-dimethylpyrazine
+- id: du2024c-44
+  resolution: agreed
+  odorant: 2,3-Dimethylpyrazine
+  lever_class: pH
+  lever: initial pH (with linoleic acid, reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: B2 (pH 5.8, LA, RH)
+    lever_value: 5.8
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: D2 (pH 7.0, LA, RH)
+    lever_value: 7.0
+    value: 5.9
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.25
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: F2 (pH 10.0, LA, RH)
+    lever_value: 10.0
+    value: 53.01
+    censor: none
+    limit: null
+    n: 3
+    sd: 3.44
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: 2,3-dimethylpyrazine
+- id: du2024c-45
+  resolution: agreed
+  odorant: 2,3-Dimethylpyrazine
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 5.8, not reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: A1 (pH 5.8, NLA, NRH)
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: B1 (pH 5.8, LA, NRH)
+    lever_value: linoleic acid 1.5%
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: 2,3-dimethylpyrazine
+- id: du2024c-46
+  resolution: agreed
+  odorant: 2,3-Dimethylpyrazine
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 5.8, reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: A2 (pH 5.8, NLA, RH)
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: B2 (pH 5.8, LA, RH)
+    lever_value: linoleic acid 1.5%
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: 2,3-dimethylpyrazine
+- id: du2024c-47
+  resolution: agreed
+  odorant: 2,3-Dimethylpyrazine
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 7.0, not reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: C1 (pH 7.0, NLA, NRH)
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: D1 (pH 7.0, LA, NRH)
+    lever_value: linoleic acid 1.5%
+    value: 5.01
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.55
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: 2,3-dimethylpyrazine
+- id: du2024c-48
+  resolution: agreed
+  odorant: 2,3-Dimethylpyrazine
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 7.0, reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: C2 (pH 7.0, NLA, RH)
+    lever_value: none
+    value: 10.94
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.32
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: D2 (pH 7.0, LA, RH)
+    lever_value: linoleic acid 1.5%
+    value: 5.9
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.25
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: 2,3-dimethylpyrazine
+- id: du2024c-49
+  resolution: agreed
+  odorant: 2,3-Dimethylpyrazine
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 10.0, not reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: E1 (pH 10.0, NLA, NRH)
+    lever_value: none
+    value: 47.8
+    censor: none
+    limit: null
+    n: 3
+    sd: 2.13
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: F1 (pH 10.0, LA, NRH)
+    lever_value: linoleic acid 1.5%
+    value: 54.56
+    censor: none
+    limit: null
+    n: 3
+    sd: 2.15
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: 2,3-dimethylpyrazine
+- id: du2024c-50
+  resolution: agreed
+  odorant: 2,3-Dimethylpyrazine
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 10.0, reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: E2 (pH 10.0, NLA, RH)
+    lever_value: none
+    value: 42.76
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.83
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: F2 (pH 10.0, LA, RH)
+    lever_value: linoleic acid 1.5%
+    value: 53.01
+    censor: none
+    limit: null
+    n: 3
+    sd: 3.44
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: 2,3-dimethylpyrazine
+- id: du2024c-51
+  resolution: agreed
+  odorant: 1-Octen-3-ol
+  lever_class: pH
+  lever: initial pH (no linoleic acid, not reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: A1 (pH 5.8, NLA, NRH)
+    lever_value: 5.8
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: C1 (pH 7.0, NLA, NRH)
+    lever_value: 7.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: E1 (pH 10.0, NLA, NRH)
+    lever_value: 10.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: 1-octen-3-ol
+- id: du2024c-52
+  resolution: agreed
+  odorant: 1-Octen-3-ol
+  lever_class: pH
+  lever: initial pH (no linoleic acid, reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: A2 (pH 5.8, NLA, RH)
+    lever_value: 5.8
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: C2 (pH 7.0, NLA, RH)
+    lever_value: 7.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: E2 (pH 10.0, NLA, RH)
+    lever_value: 10.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: 1-octen-3-ol
+- id: du2024c-53
+  resolution: agreed
+  odorant: 1-Octen-3-ol
+  lever_class: pH
+  lever: initial pH (with linoleic acid, not reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: B1 (pH 5.8, LA, NRH)
+    lever_value: 5.8
+    value: 14.8
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.11
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: D1 (pH 7.0, LA, NRH)
+    lever_value: 7.0
+    value: 15.98
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.75
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: F1 (pH 10.0, LA, NRH)
+    lever_value: 10.0
+    value: 24.67
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.62
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: 1-octen-3-ol
+- id: du2024c-54
+  resolution: agreed
+  odorant: 1-Octen-3-ol
+  lever_class: pH
+  lever: initial pH (with linoleic acid, reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: B2 (pH 5.8, LA, RH)
+    lever_value: 5.8
+    value: 13.31
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.97
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: D2 (pH 7.0, LA, RH)
+    lever_value: 7.0
+    value: 13.63
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.2
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: F2 (pH 10.0, LA, RH)
+    lever_value: 10.0
+    value: 22.73
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.01
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: 1-octen-3-ol
+- id: du2024c-55
+  resolution: agreed
+  odorant: 1-Octen-3-ol
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 5.8, not reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: A1 (pH 5.8, NLA, NRH)
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: B1 (pH 5.8, LA, NRH)
+    lever_value: linoleic acid 1.5%
+    value: 14.8
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.11
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: 1-octen-3-ol
+- id: du2024c-56
+  resolution: agreed
+  odorant: 1-Octen-3-ol
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 5.8, reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: A2 (pH 5.8, NLA, RH)
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: B2 (pH 5.8, LA, RH)
+    lever_value: linoleic acid 1.5%
+    value: 13.31
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.97
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: 1-octen-3-ol
+- id: du2024c-57
+  resolution: agreed
+  odorant: 1-Octen-3-ol
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 7.0, not reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: C1 (pH 7.0, NLA, NRH)
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: D1 (pH 7.0, LA, NRH)
+    lever_value: linoleic acid 1.5%
+    value: 15.98
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.75
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: 1-octen-3-ol
+- id: du2024c-58
+  resolution: agreed
+  odorant: 1-Octen-3-ol
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 7.0, reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: C2 (pH 7.0, NLA, RH)
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: D2 (pH 7.0, LA, RH)
+    lever_value: linoleic acid 1.5%
+    value: 13.63
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.2
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: 1-octen-3-ol
+- id: du2024c-59
+  resolution: agreed
+  odorant: 1-Octen-3-ol
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 10.0, not reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: E1 (pH 10.0, NLA, NRH)
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: F1 (pH 10.0, LA, NRH)
+    lever_value: linoleic acid 1.5%
+    value: 24.67
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.62
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: 1-octen-3-ol
+- id: du2024c-60
+  resolution: agreed
+  odorant: 1-Octen-3-ol
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 10.0, reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: E2 (pH 10.0, NLA, RH)
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: F2 (pH 10.0, LA, RH)
+    lever_value: linoleic acid 1.5%
+    value: 22.73
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.01
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: 1-octen-3-ol
+- id: du2024c-61
+  resolution: agreed
+  odorant: 2-Pentylfuran
+  lever_class: pH
+  lever: initial pH (no linoleic acid, not reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: A1 (pH 5.8, NLA, NRH)
+    lever_value: 5.8
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: C1 (pH 7.0, NLA, NRH)
+    lever_value: 7.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: E1 (pH 10.0, NLA, NRH)
+    lever_value: 10.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: 2-pentylfuran
+- id: du2024c-62
+  resolution: agreed
+  odorant: 2-Pentylfuran
+  lever_class: pH
+  lever: initial pH (no linoleic acid, reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: A2 (pH 5.8, NLA, RH)
+    lever_value: 5.8
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: C2 (pH 7.0, NLA, RH)
+    lever_value: 7.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: E2 (pH 10.0, NLA, RH)
+    lever_value: 10.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: 2-pentylfuran
+- id: du2024c-63
+  resolution: agreed
+  odorant: 2-Pentylfuran
+  lever_class: pH
+  lever: initial pH (with linoleic acid, not reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: B1 (pH 5.8, LA, NRH)
+    lever_value: 5.8
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: D1 (pH 7.0, LA, NRH)
+    lever_value: 7.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: F1 (pH 10.0, LA, NRH)
+    lever_value: 10.0
+    value: 96.13
+    censor: none
+    limit: null
+    n: 3
+    sd: 7.89
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: 2-pentylfuran
+- id: du2024c-64
+  resolution: agreed
+  odorant: 2-Pentylfuran
+  lever_class: pH
+  lever: initial pH (with linoleic acid, reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: B2 (pH 5.8, LA, RH)
+    lever_value: 5.8
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: D2 (pH 7.0, LA, RH)
+    lever_value: 7.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: F2 (pH 10.0, LA, RH)
+    lever_value: 10.0
+    value: 99.32
+    censor: none
+    limit: null
+    n: 3
+    sd: 9.71
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: 2-pentylfuran
+- id: du2024c-65
+  resolution: agreed
+  odorant: 2-Pentylfuran
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 5.8, not reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: A1 (pH 5.8, NLA, NRH)
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: B1 (pH 5.8, LA, NRH)
+    lever_value: linoleic acid 1.5%
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: 2-pentylfuran
+- id: du2024c-66
+  resolution: agreed
+  odorant: 2-Pentylfuran
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 5.8, reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: A2 (pH 5.8, NLA, RH)
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: B2 (pH 5.8, LA, RH)
+    lever_value: linoleic acid 1.5%
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: 2-pentylfuran
+- id: du2024c-67
+  resolution: agreed
+  odorant: 2-Pentylfuran
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 7.0, not reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: C1 (pH 7.0, NLA, NRH)
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: D1 (pH 7.0, LA, NRH)
+    lever_value: linoleic acid 1.5%
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: 2-pentylfuran
+- id: du2024c-68
+  resolution: agreed
+  odorant: 2-Pentylfuran
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 7.0, reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: C2 (pH 7.0, NLA, RH)
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: D2 (pH 7.0, LA, RH)
+    lever_value: linoleic acid 1.5%
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: 2-pentylfuran
+- id: du2024c-69
+  resolution: agreed
+  odorant: 2-Pentylfuran
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 10.0, not reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: E1 (pH 10.0, NLA, NRH)
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: F1 (pH 10.0, LA, NRH)
+    lever_value: linoleic acid 1.5%
+    value: 96.13
+    censor: none
+    limit: null
+    n: 3
+    sd: 7.89
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: 2-pentylfuran
+- id: du2024c-70
+  resolution: agreed
+  odorant: 2-Pentylfuran
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 10.0, reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: E2 (pH 10.0, NLA, RH)
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: F2 (pH 10.0, LA, RH)
+    lever_value: linoleic acid 1.5%
+    value: 99.32
+    censor: none
+    limit: null
+    n: 3
+    sd: 9.71
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: 2-pentylfuran
+- id: du2024c-71
+  resolution: agreed
+  odorant: Trimethylpyrazine
+  lever_class: pH
+  lever: initial pH (no linoleic acid, not reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: A1 (pH 5.8, NLA, NRH)
+    lever_value: 5.8
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: C1 (pH 7.0, NLA, NRH)
+    lever_value: 7.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: E1 (pH 10.0, NLA, NRH)
+    lever_value: 10.0
+    value: 41.95
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.2
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: trimethylpyrazine
+- id: du2024c-72
+  resolution: agreed
+  odorant: Trimethylpyrazine
+  lever_class: pH
+  lever: initial pH (no linoleic acid, reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: A2 (pH 5.8, NLA, RH)
+    lever_value: 5.8
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: C2 (pH 7.0, NLA, RH)
+    lever_value: 7.0
+    value: 8.8
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.38
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: E2 (pH 10.0, NLA, RH)
+    lever_value: 10.0
+    value: 46.52
+    censor: none
+    limit: null
+    n: 3
+    sd: 2.11
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: trimethylpyrazine
+- id: du2024c-73
+  resolution: agreed
+  odorant: Trimethylpyrazine
+  lever_class: pH
+  lever: initial pH (with linoleic acid, not reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: B1 (pH 5.8, LA, NRH)
+    lever_value: 5.8
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: D1 (pH 7.0, LA, NRH)
+    lever_value: 7.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: F1 (pH 10.0, LA, NRH)
+    lever_value: 10.0
+    value: 55.04
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.71
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: trimethylpyrazine
+- id: du2024c-74
+  resolution: agreed
+  odorant: Trimethylpyrazine
+  lever_class: pH
+  lever: initial pH (with linoleic acid, reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: B2 (pH 5.8, LA, RH)
+    lever_value: 5.8
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: D2 (pH 7.0, LA, RH)
+    lever_value: 7.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: F2 (pH 10.0, LA, RH)
+    lever_value: 10.0
+    value: 61.66
+    censor: none
+    limit: null
+    n: 3
+    sd: 3.86
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: trimethylpyrazine
+- id: du2024c-75
+  resolution: agreed
+  odorant: Trimethylpyrazine
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 5.8, not reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: A1 (pH 5.8, NLA, NRH)
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: B1 (pH 5.8, LA, NRH)
+    lever_value: linoleic acid 1.5%
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: trimethylpyrazine
+- id: du2024c-76
+  resolution: agreed
+  odorant: Trimethylpyrazine
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 5.8, reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: A2 (pH 5.8, NLA, RH)
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: B2 (pH 5.8, LA, RH)
+    lever_value: linoleic acid 1.5%
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: trimethylpyrazine
+- id: du2024c-77
+  resolution: agreed
+  odorant: Trimethylpyrazine
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 7.0, not reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: C1 (pH 7.0, NLA, NRH)
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: D1 (pH 7.0, LA, NRH)
+    lever_value: linoleic acid 1.5%
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: trimethylpyrazine
+- id: du2024c-78
+  resolution: agreed
+  odorant: Trimethylpyrazine
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 7.0, reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: C2 (pH 7.0, NLA, RH)
+    lever_value: none
+    value: 8.8
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.38
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: D2 (pH 7.0, LA, RH)
+    lever_value: linoleic acid 1.5%
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: trimethylpyrazine
+- id: du2024c-79
+  resolution: agreed
+  odorant: Trimethylpyrazine
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 10.0, not reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: E1 (pH 10.0, NLA, NRH)
+    lever_value: none
+    value: 41.95
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.2
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: F1 (pH 10.0, LA, NRH)
+    lever_value: linoleic acid 1.5%
+    value: 55.04
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.71
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: trimethylpyrazine
+- id: du2024c-80
+  resolution: agreed
+  odorant: Trimethylpyrazine
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 10.0, reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: E2 (pH 10.0, NLA, RH)
+    lever_value: none
+    value: 46.52
+    censor: none
+    limit: null
+    n: 3
+    sd: 2.11
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: F2 (pH 10.0, LA, RH)
+    lever_value: linoleic acid 1.5%
+    value: 61.66
+    censor: none
+    limit: null
+    n: 3
+    sd: 3.86
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: trimethylpyrazine
+- id: du2024c-81
+  resolution: agreed
+  odorant: 2-Ethyl-3,6-dimethylpyrazine
+  lever_class: pH
+  lever: initial pH (no linoleic acid, not reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: A1 (pH 5.8, NLA, NRH)
+    lever_value: 5.8
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: C1 (pH 7.0, NLA, NRH)
+    lever_value: 7.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: E1 (pH 10.0, NLA, NRH)
+    lever_value: 10.0
+    value: 5.33
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.21
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: 2-ethyl-3,6-dimethylpyrazine
+- id: du2024c-82
+  resolution: agreed
+  odorant: 2-Ethyl-3,6-dimethylpyrazine
+  lever_class: pH
+  lever: initial pH (no linoleic acid, reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: A2 (pH 5.8, NLA, RH)
+    lever_value: 5.8
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: C2 (pH 7.0, NLA, RH)
+    lever_value: 7.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: E2 (pH 10.0, NLA, RH)
+    lever_value: 10.0
+    value: 9.48
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.67
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: 2-ethyl-3,6-dimethylpyrazine
+- id: du2024c-83
+  resolution: agreed
+  odorant: 2-Ethyl-3,6-dimethylpyrazine
+  lever_class: pH
+  lever: initial pH (with linoleic acid, not reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: B1 (pH 5.8, LA, NRH)
+    lever_value: 5.8
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: D1 (pH 7.0, LA, NRH)
+    lever_value: 7.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: F1 (pH 10.0, LA, NRH)
+    lever_value: 10.0
+    value: 9.59
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.19
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: 2-ethyl-3,6-dimethylpyrazine
+- id: du2024c-84
+  resolution: agreed
+  odorant: 2-Ethyl-3,6-dimethylpyrazine
+  lever_class: pH
+  lever: initial pH (with linoleic acid, reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: B2 (pH 5.8, LA, RH)
+    lever_value: 5.8
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: D2 (pH 7.0, LA, RH)
+    lever_value: 7.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: F2 (pH 10.0, LA, RH)
+    lever_value: 10.0
+    value: 15.42
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.03
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: 2-ethyl-3,6-dimethylpyrazine
+- id: du2024c-85
+  resolution: agreed
+  odorant: 2-Ethyl-3,6-dimethylpyrazine
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 5.8, not reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: A1 (pH 5.8, NLA, NRH)
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: B1 (pH 5.8, LA, NRH)
+    lever_value: linoleic acid 1.5%
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: 2-ethyl-3,6-dimethylpyrazine
+- id: du2024c-86
+  resolution: agreed
+  odorant: 2-Ethyl-3,6-dimethylpyrazine
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 5.8, reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: A2 (pH 5.8, NLA, RH)
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: B2 (pH 5.8, LA, RH)
+    lever_value: linoleic acid 1.5%
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: 2-ethyl-3,6-dimethylpyrazine
+- id: du2024c-87
+  resolution: agreed
+  odorant: 2-Ethyl-3,6-dimethylpyrazine
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 7.0, not reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: C1 (pH 7.0, NLA, NRH)
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: D1 (pH 7.0, LA, NRH)
+    lever_value: linoleic acid 1.5%
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: 2-ethyl-3,6-dimethylpyrazine
+- id: du2024c-88
+  resolution: agreed
+  odorant: 2-Ethyl-3,6-dimethylpyrazine
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 7.0, reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: C2 (pH 7.0, NLA, RH)
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: D2 (pH 7.0, LA, RH)
+    lever_value: linoleic acid 1.5%
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: 2-ethyl-3,6-dimethylpyrazine
+- id: du2024c-89
+  resolution: agreed
+  odorant: 2-Ethyl-3,6-dimethylpyrazine
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 10.0, not reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: E1 (pH 10.0, NLA, NRH)
+    lever_value: none
+    value: 5.33
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.21
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: F1 (pH 10.0, LA, NRH)
+    lever_value: linoleic acid 1.5%
+    value: 9.59
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.19
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: 2-ethyl-3,6-dimethylpyrazine
+- id: du2024c-90
+  resolution: agreed
+  odorant: 2-Ethyl-3,6-dimethylpyrazine
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 10.0, reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: E2 (pH 10.0, NLA, RH)
+    lever_value: none
+    value: 9.48
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.67
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: F2 (pH 10.0, LA, RH)
+    lever_value: linoleic acid 1.5%
+    value: 15.42
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.03
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: 2-ethyl-3,6-dimethylpyrazine
+- id: du2024c-91
+  resolution: agreed
+  odorant: Nonanal
+  lever_class: pH
+  lever: initial pH (no linoleic acid, not reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: A1 (pH 5.8, NLA, NRH)
+    lever_value: 5.8
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: C1 (pH 7.0, NLA, NRH)
+    lever_value: 7.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: E1 (pH 10.0, NLA, NRH)
+    lever_value: 10.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: nonanal
+- id: du2024c-92
+  resolution: agreed
+  odorant: Nonanal
+  lever_class: pH
+  lever: initial pH (no linoleic acid, reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: A2 (pH 5.8, NLA, RH)
+    lever_value: 5.8
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: C2 (pH 7.0, NLA, RH)
+    lever_value: 7.0
+    value: 1.32
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.27
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: E2 (pH 10.0, NLA, RH)
+    lever_value: 10.0
+    value: 1.39
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.12
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: nonanal
+- id: du2024c-93
+  resolution: agreed
+  odorant: Nonanal
+  lever_class: pH
+  lever: initial pH (with linoleic acid, not reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: B1 (pH 5.8, LA, NRH)
+    lever_value: 5.8
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: D1 (pH 7.0, LA, NRH)
+    lever_value: 7.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: F1 (pH 10.0, LA, NRH)
+    lever_value: 10.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: nonanal
+- id: du2024c-94
+  resolution: agreed
+  odorant: Nonanal
+  lever_class: pH
+  lever: initial pH (with linoleic acid, reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: B2 (pH 5.8, LA, RH)
+    lever_value: 5.8
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: D2 (pH 7.0, LA, RH)
+    lever_value: 7.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: F2 (pH 10.0, LA, RH)
+    lever_value: 10.0
+    value: 3.83
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.18
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: nonanal
+- id: du2024c-95
+  resolution: agreed
+  odorant: Nonanal
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 5.8, not reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: A1 (pH 5.8, NLA, NRH)
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: B1 (pH 5.8, LA, NRH)
+    lever_value: linoleic acid 1.5%
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: nonanal
+- id: du2024c-96
+  resolution: agreed
+  odorant: Nonanal
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 5.8, reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: A2 (pH 5.8, NLA, RH)
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: B2 (pH 5.8, LA, RH)
+    lever_value: linoleic acid 1.5%
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: nonanal
+- id: du2024c-97
+  resolution: agreed
+  odorant: Nonanal
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 7.0, not reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: C1 (pH 7.0, NLA, NRH)
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: D1 (pH 7.0, LA, NRH)
+    lever_value: linoleic acid 1.5%
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: nonanal
+- id: du2024c-98
+  resolution: agreed
+  odorant: Nonanal
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 7.0, reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: C2 (pH 7.0, NLA, RH)
+    lever_value: none
+    value: 1.32
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.27
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: D2 (pH 7.0, LA, RH)
+    lever_value: linoleic acid 1.5%
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: nonanal
+- id: du2024c-99
+  resolution: agreed
+  odorant: Nonanal
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 10.0, not reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: E1 (pH 10.0, NLA, NRH)
+    lever_value: none
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: F1 (pH 10.0, LA, NRH)
+    lever_value: linoleic acid 1.5%
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: nonanal
+- id: du2024c-100
+  resolution: agreed
+  odorant: Nonanal
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 10.0, reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: E2 (pH 10.0, NLA, RH)
+    lever_value: none
+    value: 1.39
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.12
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: F2 (pH 10.0, LA, RH)
+    lever_value: linoleic acid 1.5%
+    value: 3.83
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.18
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  odorant_printed: nonanal
+- id: du2024c-101
+  resolution: agreed
+  odorant: Pyrazines
+  lever_class: pH
+  lever: initial pH (no linoleic acid, not reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: A1 (pH 5.8, NLA, NRH)
+    lever_value: 5.8
+    value: 138.27
+    censor: none
+    limit: null
+    n: 3
+    sd: 42.56
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: C1 (pH 7.0, NLA, NRH)
+    lever_value: 7.0
+    value: 282.53
+    censor: none
+    limit: null
+    n: 3
+    sd: 53.7
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: E1 (pH 10.0, NLA, NRH)
+    lever_value: 10.0
+    value: 464.68
+    censor: none
+    limit: null
+    n: 3
+    sd: 20.29
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+- id: du2024c-102
+  resolution: agreed
+  odorant: Pyrazines
+  lever_class: pH
+  lever: initial pH (no linoleic acid, reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: A2 (pH 5.8, NLA, RH)
+    lever_value: 5.8
+    value: 158.2
+    censor: none
+    limit: null
+    n: 3
+    sd: 41.85
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: C2 (pH 7.0, NLA, RH)
+    lever_value: 7.0
+    value: 301.78
+    censor: none
+    limit: null
+    n: 3
+    sd: 32.23
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: E2 (pH 10.0, NLA, RH)
+    lever_value: 10.0
+    value: 451.49
+    censor: none
+    limit: null
+    n: 3
+    sd: 17.15
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+- id: du2024c-103
+  resolution: agreed
+  odorant: Pyrazines
+  lever_class: pH
+  lever: initial pH (with linoleic acid, not reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: B1 (pH 5.8, LA, NRH)
+    lever_value: 5.8
+    value: 114.03
+    censor: none
+    limit: null
+    n: 3
+    sd: 25.35
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: D1 (pH 7.0, LA, NRH)
+    lever_value: 7.0
+    value: 214.24
+    censor: none
+    limit: null
+    n: 3
+    sd: 19.78
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: F1 (pH 10.0, LA, NRH)
+    lever_value: 10.0
+    value: 778.41
+    censor: none
+    limit: null
+    n: 3
+    sd: 28.95
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+- id: du2024c-104
+  resolution: agreed
+  odorant: Pyrazines
+  lever_class: pH
+  lever: initial pH (with linoleic acid, reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: B2 (pH 5.8, LA, RH)
+    lever_value: 5.8
+    value: 119.26
+    censor: none
+    limit: null
+    n: 3
+    sd: 33.9
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: D2 (pH 7.0, LA, RH)
+    lever_value: 7.0
+    value: 231.66
+    censor: none
+    limit: null
+    n: 3
+    sd: 6.84
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: F2 (pH 10.0, LA, RH)
+    lever_value: 10.0
+    value: 791.7
+    censor: none
+    limit: null
+    n: 3
+    sd: 48.33
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+- id: du2024c-105
+  resolution: agreed
+  odorant: Pyrazines
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 5.8, not reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: A1 (pH 5.8, NLA, NRH)
+    lever_value: none
+    value: 138.27
+    censor: none
+    limit: null
+    n: 3
+    sd: 42.56
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: B1 (pH 5.8, LA, NRH)
+    lever_value: linoleic acid 1.5%
+    value: 114.03
+    censor: none
+    limit: null
+    n: 3
+    sd: 25.35
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+- id: du2024c-106
+  resolution: agreed
+  odorant: Pyrazines
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 5.8, reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: A2 (pH 5.8, NLA, RH)
+    lever_value: none
+    value: 158.2
+    censor: none
+    limit: null
+    n: 3
+    sd: 41.85
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: B2 (pH 5.8, LA, RH)
+    lever_value: linoleic acid 1.5%
+    value: 119.26
+    censor: none
+    limit: null
+    n: 3
+    sd: 33.9
+    conditions:
+      ph: 5.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+- id: du2024c-107
+  resolution: agreed
+  odorant: Pyrazines
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 7.0, not reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: C1 (pH 7.0, NLA, NRH)
+    lever_value: none
+    value: 282.53
+    censor: none
+    limit: null
+    n: 3
+    sd: 53.7
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: D1 (pH 7.0, LA, NRH)
+    lever_value: linoleic acid 1.5%
+    value: 214.24
+    censor: none
+    limit: null
+    n: 3
+    sd: 19.78
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+- id: du2024c-108
+  resolution: agreed
+  odorant: Pyrazines
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 7.0, reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: C2 (pH 7.0, NLA, RH)
+    lever_value: none
+    value: 301.78
+    censor: none
+    limit: null
+    n: 3
+    sd: 32.23
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: D2 (pH 7.0, LA, RH)
+    lever_value: linoleic acid 1.5%
+    value: 231.66
+    censor: none
+    limit: null
+    n: 3
+    sd: 6.84
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+- id: du2024c-109
+  resolution: agreed
+  odorant: Pyrazines
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 10.0, not reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: E1 (pH 10.0, NLA, NRH)
+    lever_value: none
+    value: 464.68
+    censor: none
+    limit: null
+    n: 3
+    sd: 20.29
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: F1 (pH 10.0, LA, NRH)
+    lever_value: linoleic acid 1.5%
+    value: 778.41
+    censor: none
+    limit: null
+    n: 3
+    sd: 28.95
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+- id: du2024c-110
+  resolution: agreed
+  odorant: Pyrazines
+  lever_class: lipid
+  lever: linoleic acid 1.5% added vs none (pH 10.0, reheated)
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: E2 (pH 10.0, NLA, RH)
+    lever_value: none
+    value: 451.49
+    censor: none
+    limit: null
+    n: 3
+    sd: 17.15
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated
+  - label: F2 (pH 10.0, LA, RH)
+    lever_value: linoleic acid 1.5%
+    value: 791.7
+    censor: none
+    limit: null
+    n: 3
+    sd: 48.33
+    conditions:
+      ph: 10.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 180
+      time_min: 30
+      precursors:
+        glucose: 0.1 M
+        lysine: 0.1 M
+        linoleic acid: 1.5%
+      buffer: 0.2 M phosphate
+      matrix: buffer
+      headspace: unstated

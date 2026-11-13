@@ -1,0 +1,1309 @@
+source: braggins1996
+pdf: data/articles/braggins1996.pdf
+reader: resolved
+scope_note: 'Resolved 2026-11-13 (step 11, A6 batch 2). Readers agree on all 19 contrasts; base reader a. Kept as lever_class
+  pH (decided call): ultimate meat pH groups 5.66 / 6.26 / 6.81 (semimembranosus, Table 1), ph_control unadjusted. The pH
+  groups were produced by pre-slaughter adrenaline, a biological treatment and a possible confound of the pH lever. Tables
+  4 - 5 print only compounds that changed significantly (hexanal etc. not printed, not keyed); the compounds ''targeted but
+  not found in any of the samples'' (Table 5 footnote) are keyed as all-ND contrasts. ''2-methylfuranthiol'' (printed with
+  no ring position) is odorant_unlisted (decided call); the isomer-unspecified ''2,4 decadienal'' row is odorant_unlisted
+  beside the (E,E) row. ng/g rendered fat by 2-octanone internal standard (relative), geometric means of n = 10, no SD. Conventions
+  (resolver, uniform with batch 1): printed ND, ''-'', blank or 0 is nd_no_limit with value null; all-ND contrasts kept; one
+  compound printed twice carries duplicate_of; co-eluting mixtures odorant_unlisted; odorant names canonicalised to the compound_keys
+  display name, printed name in odorant_printed; IS semi-quantification and SIFT-MS ppb relative, calibration with authentic
+  standards absolute.'
+contrasts:
+- id: braggins1996-1
+  resolution: agreed
+  odorant: Pentanal
+  lever_class: pH
+  lever: meat ultimate pH (preslaughter adrenaline)
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: ng/g rendered fat
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unadjusted
+  arms:
+  - label: low pH (5.66)
+    lever_value: 5.66
+    value: 293
+    censor: none
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 5.66
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors: {}
+      buffer: none
+      matrix: meat (sheep m. semimembranosus mince, 20% fat; rendered fat analysed)
+      headspace: air
+  - label: medium pH (6.26)
+    lever_value: 6.26
+    value: 160
+    censor: none
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.26
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors: {}
+      buffer: none
+      matrix: meat (sheep m. semimembranosus mince, 20% fat; rendered fat analysed)
+      headspace: air
+  - label: high pH (6.81)
+    lever_value: 6.81
+    value: 121
+    censor: none
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.81
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors: {}
+      buffer: none
+      matrix: meat (sheep m. semimembranosus mince, 20% fat; rendered fat analysed)
+      headspace: air
+  odorant_printed: pentanal
+- id: braggins1996-2
+  resolution: agreed
+  odorant: Nonanal
+  lever_class: pH
+  lever: meat ultimate pH (preslaughter adrenaline)
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: ng/g rendered fat
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unadjusted
+  arms:
+  - label: low pH (5.66)
+    lever_value: 5.66
+    value: 277
+    censor: none
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 5.66
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors: {}
+      buffer: none
+      matrix: meat (sheep m. semimembranosus mince, 20% fat; rendered fat analysed)
+      headspace: air
+  - label: medium pH (6.26)
+    lever_value: 6.26
+    value: 112
+    censor: none
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.26
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors: {}
+      buffer: none
+      matrix: meat (sheep m. semimembranosus mince, 20% fat; rendered fat analysed)
+      headspace: air
+  - label: high pH (6.81)
+    lever_value: 6.81
+    value: 91
+    censor: none
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.81
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors: {}
+      buffer: none
+      matrix: meat (sheep m. semimembranosus mince, 20% fat; rendered fat analysed)
+      headspace: air
+  odorant_printed: nonanal
+- id: braggins1996-3
+  resolution: agreed
+  odorant: Benzaldehyde
+  lever_class: pH
+  lever: meat ultimate pH (preslaughter adrenaline)
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: ng/g rendered fat
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unadjusted
+  arms:
+  - label: low pH (5.66)
+    lever_value: 5.66
+    value: 120
+    censor: none
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 5.66
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors: {}
+      buffer: none
+      matrix: meat (sheep m. semimembranosus mince, 20% fat; rendered fat analysed)
+      headspace: air
+  - label: medium pH (6.26)
+    lever_value: 6.26
+    value: 48
+    censor: none
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.26
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors: {}
+      buffer: none
+      matrix: meat (sheep m. semimembranosus mince, 20% fat; rendered fat analysed)
+      headspace: air
+  - label: high pH (6.81)
+    lever_value: 6.81
+    value: 28
+    censor: none
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.81
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors: {}
+      buffer: none
+      matrix: meat (sheep m. semimembranosus mince, 20% fat; rendered fat analysed)
+      headspace: air
+  odorant_printed: benzaldehyde
+- id: braggins1996-4
+  resolution: agreed
+  odorant: Octanal
+  lever_class: pH
+  lever: meat ultimate pH (preslaughter adrenaline)
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: ng/g rendered fat
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unadjusted
+  arms:
+  - label: low pH (5.66)
+    lever_value: 5.66
+    value: 92
+    censor: none
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 5.66
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors: {}
+      buffer: none
+      matrix: meat (sheep m. semimembranosus mince, 20% fat; rendered fat analysed)
+      headspace: air
+  - label: medium pH (6.26)
+    lever_value: 6.26
+    value: 39
+    censor: none
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.26
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors: {}
+      buffer: none
+      matrix: meat (sheep m. semimembranosus mince, 20% fat; rendered fat analysed)
+      headspace: air
+  - label: high pH (6.81)
+    lever_value: 6.81
+    value: 30
+    censor: none
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.81
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors: {}
+      buffer: none
+      matrix: meat (sheep m. semimembranosus mince, 20% fat; rendered fat analysed)
+      headspace: air
+  odorant_printed: octanal
+- id: braggins1996-5
+  resolution: agreed
+  odorant: (E)-2-Octenal
+  lever_class: pH
+  lever: meat ultimate pH (preslaughter adrenaline)
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: ng/g rendered fat
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unadjusted
+  arms:
+  - label: low pH (5.66)
+    lever_value: 5.66
+    value: 41
+    censor: none
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 5.66
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors: {}
+      buffer: none
+      matrix: meat (sheep m. semimembranosus mince, 20% fat; rendered fat analysed)
+      headspace: air
+  - label: medium pH (6.26)
+    lever_value: 6.26
+    value: 15
+    censor: none
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.26
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors: {}
+      buffer: none
+      matrix: meat (sheep m. semimembranosus mince, 20% fat; rendered fat analysed)
+      headspace: air
+  - label: high pH (6.81)
+    lever_value: 6.81
+    value: 9
+    censor: none
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.81
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors: {}
+      buffer: none
+      matrix: meat (sheep m. semimembranosus mince, 20% fat; rendered fat analysed)
+      headspace: air
+  odorant_printed: (E)-2-octenal
+- id: braggins1996-6
+  resolution: agreed
+  odorant: 2,4 decadienal
+  odorant_unlisted: true
+  lever_class: pH
+  lever: meat ultimate pH (preslaughter adrenaline)
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: ng/g rendered fat
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unadjusted
+  arms:
+  - label: low pH (5.66)
+    lever_value: 5.66
+    value: 21
+    censor: none
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 5.66
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors: {}
+      buffer: none
+      matrix: meat (sheep m. semimembranosus mince, 20% fat; rendered fat analysed)
+      headspace: air
+  - label: medium pH (6.26)
+    lever_value: 6.26
+    value: 5
+    censor: none
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.26
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors: {}
+      buffer: none
+      matrix: meat (sheep m. semimembranosus mince, 20% fat; rendered fat analysed)
+      headspace: air
+  - label: high pH (6.81)
+    lever_value: 6.81
+    value: 2.5
+    censor: none
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.81
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors: {}
+      buffer: none
+      matrix: meat (sheep m. semimembranosus mince, 20% fat; rendered fat analysed)
+      headspace: air
+  unlisted_reason: co-eluting compounds printed as one value / not a single listed odorant
+- id: braggins1996-7
+  resolution: agreed
+  odorant: (E,E)-2,4-Decadienal
+  lever_class: pH
+  lever: meat ultimate pH (preslaughter adrenaline)
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: ng/g rendered fat
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unadjusted
+  arms:
+  - label: low pH (5.66)
+    lever_value: 5.66
+    value: 11
+    censor: none
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 5.66
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors: {}
+      buffer: none
+      matrix: meat (sheep m. semimembranosus mince, 20% fat; rendered fat analysed)
+      headspace: air
+  - label: medium pH (6.26)
+    lever_value: 6.26
+    value: 2.9
+    censor: none
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.26
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors: {}
+      buffer: none
+      matrix: meat (sheep m. semimembranosus mince, 20% fat; rendered fat analysed)
+      headspace: air
+  - label: high pH (6.81)
+    lever_value: 6.81
+    value: 1.7
+    censor: none
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.81
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors: {}
+      buffer: none
+      matrix: meat (sheep m. semimembranosus mince, 20% fat; rendered fat analysed)
+      headspace: air
+  odorant_printed: (E,E)-2,4 decadienal
+- id: braggins1996-8
+  resolution: agreed
+  odorant: 1-Octen-3-ol
+  lever_class: pH
+  lever: meat ultimate pH (preslaughter adrenaline)
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: ng/g rendered fat
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unadjusted
+  arms:
+  - label: low pH (5.66)
+    lever_value: 5.66
+    value: 170
+    censor: none
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 5.66
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors: {}
+      buffer: none
+      matrix: meat (sheep m. semimembranosus mince, 20% fat; rendered fat analysed)
+      headspace: air
+  - label: medium pH (6.26)
+    lever_value: 6.26
+    value: 56
+    censor: none
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.26
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors: {}
+      buffer: none
+      matrix: meat (sheep m. semimembranosus mince, 20% fat; rendered fat analysed)
+      headspace: air
+  - label: high pH (6.81)
+    lever_value: 6.81
+    value: 25
+    censor: none
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.81
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors: {}
+      buffer: none
+      matrix: meat (sheep m. semimembranosus mince, 20% fat; rendered fat analysed)
+      headspace: air
+  odorant_printed: 1-octen-3-ol
+- id: braggins1996-9
+  resolution: agreed
+  odorant: 2-Acetylthiazole
+  lever_class: pH
+  lever: meat ultimate pH (preslaughter adrenaline)
+  focal: true
+  location: Table 5
+  digitised: false
+  unit: ng/g rendered fat
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unadjusted
+  arms:
+  - label: low pH (5.66)
+    lever_value: 5.66
+    value: 0.85
+    censor: none
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 5.66
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors: {}
+      buffer: none
+      matrix: meat (sheep m. semimembranosus mince, 20% fat; rendered fat analysed)
+      headspace: air
+  - label: medium pH (6.26)
+    lever_value: 6.26
+    value: 0.42
+    censor: none
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.26
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors: {}
+      buffer: none
+      matrix: meat (sheep m. semimembranosus mince, 20% fat; rendered fat analysed)
+      headspace: air
+  - label: high pH (6.81)
+    lever_value: 6.81
+    value: 0.44
+    censor: none
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.81
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors: {}
+      buffer: none
+      matrix: meat (sheep m. semimembranosus mince, 20% fat; rendered fat analysed)
+      headspace: air
+  odorant_printed: 2-acetylthiazole
+- id: braggins1996-10
+  resolution: agreed
+  odorant: 2-Pentylfuran
+  lever_class: pH
+  lever: meat ultimate pH (preslaughter adrenaline)
+  focal: true
+  location: Table 5
+  digitised: false
+  unit: ng/g rendered fat
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unadjusted
+  arms:
+  - label: low pH (5.66)
+    lever_value: 5.66
+    value: 5.1
+    censor: none
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 5.66
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors: {}
+      buffer: none
+      matrix: meat (sheep m. semimembranosus mince, 20% fat; rendered fat analysed)
+      headspace: air
+  - label: medium pH (6.26)
+    lever_value: 6.26
+    value: 1.3
+    censor: none
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.26
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors: {}
+      buffer: none
+      matrix: meat (sheep m. semimembranosus mince, 20% fat; rendered fat analysed)
+      headspace: air
+  - label: high pH (6.81)
+    lever_value: 6.81
+    value: 0.61
+    censor: none
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.81
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors: {}
+      buffer: none
+      matrix: meat (sheep m. semimembranosus mince, 20% fat; rendered fat analysed)
+      headspace: air
+  odorant_printed: 2-pentylfuran
+- id: braggins1996-11
+  resolution: agreed
+  odorant: 2-Methylpyrazine
+  lever_class: pH
+  lever: meat ultimate pH (preslaughter adrenaline)
+  focal: false
+  location: Table 5 footnote
+  digitised: false
+  unit: ng/g rendered fat
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unadjusted
+  arms:
+  - label: low pH (5.66)
+    lever_value: 5.66
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 5.66
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors: {}
+      buffer: none
+      matrix: meat (sheep m. semimembranosus mince, 20% fat; rendered fat analysed)
+      headspace: air
+  - label: medium pH (6.26)
+    lever_value: 6.26
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.26
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors: {}
+      buffer: none
+      matrix: meat (sheep m. semimembranosus mince, 20% fat; rendered fat analysed)
+      headspace: air
+  - label: high pH (6.81)
+    lever_value: 6.81
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.81
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors: {}
+      buffer: none
+      matrix: meat (sheep m. semimembranosus mince, 20% fat; rendered fat analysed)
+      headspace: air
+  odorant_printed: methylpyrazine
+- id: braggins1996-12
+  resolution: agreed
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: pH
+  lever: meat ultimate pH (preslaughter adrenaline)
+  focal: false
+  location: Table 5 footnote
+  digitised: false
+  unit: ng/g rendered fat
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unadjusted
+  arms:
+  - label: low pH (5.66)
+    lever_value: 5.66
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 5.66
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors: {}
+      buffer: none
+      matrix: meat (sheep m. semimembranosus mince, 20% fat; rendered fat analysed)
+      headspace: air
+  - label: medium pH (6.26)
+    lever_value: 6.26
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.26
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors: {}
+      buffer: none
+      matrix: meat (sheep m. semimembranosus mince, 20% fat; rendered fat analysed)
+      headspace: air
+  - label: high pH (6.81)
+    lever_value: 6.81
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.81
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors: {}
+      buffer: none
+      matrix: meat (sheep m. semimembranosus mince, 20% fat; rendered fat analysed)
+      headspace: air
+  odorant_printed: 2,5-dimethylpyrazine
+- id: braggins1996-13
+  resolution: agreed
+  odorant: 2,6-Dimethylpyrazine
+  lever_class: pH
+  lever: meat ultimate pH (preslaughter adrenaline)
+  focal: false
+  location: Table 5 footnote
+  digitised: false
+  unit: ng/g rendered fat
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unadjusted
+  arms:
+  - label: low pH (5.66)
+    lever_value: 5.66
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 5.66
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors: {}
+      buffer: none
+      matrix: meat (sheep m. semimembranosus mince, 20% fat; rendered fat analysed)
+      headspace: air
+  - label: medium pH (6.26)
+    lever_value: 6.26
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.26
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors: {}
+      buffer: none
+      matrix: meat (sheep m. semimembranosus mince, 20% fat; rendered fat analysed)
+      headspace: air
+  - label: high pH (6.81)
+    lever_value: 6.81
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.81
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors: {}
+      buffer: none
+      matrix: meat (sheep m. semimembranosus mince, 20% fat; rendered fat analysed)
+      headspace: air
+  odorant_printed: 2,6-dimethylpyrazine
+- id: braggins1996-14
+  resolution: agreed
+  odorant: 2,3-Dimethylpyrazine
+  lever_class: pH
+  lever: meat ultimate pH (preslaughter adrenaline)
+  focal: false
+  location: Table 5 footnote
+  digitised: false
+  unit: ng/g rendered fat
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unadjusted
+  arms:
+  - label: low pH (5.66)
+    lever_value: 5.66
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 5.66
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors: {}
+      buffer: none
+      matrix: meat (sheep m. semimembranosus mince, 20% fat; rendered fat analysed)
+      headspace: air
+  - label: medium pH (6.26)
+    lever_value: 6.26
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.26
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors: {}
+      buffer: none
+      matrix: meat (sheep m. semimembranosus mince, 20% fat; rendered fat analysed)
+      headspace: air
+  - label: high pH (6.81)
+    lever_value: 6.81
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.81
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors: {}
+      buffer: none
+      matrix: meat (sheep m. semimembranosus mince, 20% fat; rendered fat analysed)
+      headspace: air
+  odorant_printed: 2,3-dimethylpyrazine
+- id: braggins1996-15
+  resolution: agreed
+  odorant: 2-Ethylpyrazine
+  lever_class: pH
+  lever: meat ultimate pH (preslaughter adrenaline)
+  focal: false
+  location: Table 5 footnote
+  digitised: false
+  unit: ng/g rendered fat
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unadjusted
+  arms:
+  - label: low pH (5.66)
+    lever_value: 5.66
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 5.66
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors: {}
+      buffer: none
+      matrix: meat (sheep m. semimembranosus mince, 20% fat; rendered fat analysed)
+      headspace: air
+  - label: medium pH (6.26)
+    lever_value: 6.26
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.26
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors: {}
+      buffer: none
+      matrix: meat (sheep m. semimembranosus mince, 20% fat; rendered fat analysed)
+      headspace: air
+  - label: high pH (6.81)
+    lever_value: 6.81
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.81
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors: {}
+      buffer: none
+      matrix: meat (sheep m. semimembranosus mince, 20% fat; rendered fat analysed)
+      headspace: air
+  odorant_printed: ethylpyrazine
+- id: braggins1996-16
+  resolution: agreed
+  odorant: 2-Ethyl-3,6-dimethylpyrazine
+  lever_class: pH
+  lever: meat ultimate pH (preslaughter adrenaline)
+  focal: false
+  location: Table 5 footnote
+  digitised: false
+  unit: ng/g rendered fat
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unadjusted
+  arms:
+  - label: low pH (5.66)
+    lever_value: 5.66
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 5.66
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors: {}
+      buffer: none
+      matrix: meat (sheep m. semimembranosus mince, 20% fat; rendered fat analysed)
+      headspace: air
+  - label: medium pH (6.26)
+    lever_value: 6.26
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.26
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors: {}
+      buffer: none
+      matrix: meat (sheep m. semimembranosus mince, 20% fat; rendered fat analysed)
+      headspace: air
+  - label: high pH (6.81)
+    lever_value: 6.81
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.81
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors: {}
+      buffer: none
+      matrix: meat (sheep m. semimembranosus mince, 20% fat; rendered fat analysed)
+      headspace: air
+  odorant_printed: 2-ethyl-3,6-dimethylpyrazine
+- id: braggins1996-17
+  resolution: agreed
+  odorant: 2-Ethyl-3,5-dimethylpyrazine
+  lever_class: pH
+  lever: meat ultimate pH (preslaughter adrenaline)
+  focal: false
+  location: Table 5 footnote
+  digitised: false
+  unit: ng/g rendered fat
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unadjusted
+  arms:
+  - label: low pH (5.66)
+    lever_value: 5.66
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 5.66
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors: {}
+      buffer: none
+      matrix: meat (sheep m. semimembranosus mince, 20% fat; rendered fat analysed)
+      headspace: air
+  - label: medium pH (6.26)
+    lever_value: 6.26
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.26
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors: {}
+      buffer: none
+      matrix: meat (sheep m. semimembranosus mince, 20% fat; rendered fat analysed)
+      headspace: air
+  - label: high pH (6.81)
+    lever_value: 6.81
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.81
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors: {}
+      buffer: none
+      matrix: meat (sheep m. semimembranosus mince, 20% fat; rendered fat analysed)
+      headspace: air
+  odorant_printed: 2-ethyl-3,5-dimethylpyrazine
+- id: braggins1996-18
+  resolution: agreed
+  odorant: Furfural
+  lever_class: pH
+  lever: meat ultimate pH (preslaughter adrenaline)
+  focal: false
+  location: Table 5 footnote
+  digitised: false
+  unit: ng/g rendered fat
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unadjusted
+  arms:
+  - label: low pH (5.66)
+    lever_value: 5.66
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 5.66
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors: {}
+      buffer: none
+      matrix: meat (sheep m. semimembranosus mince, 20% fat; rendered fat analysed)
+      headspace: air
+  - label: medium pH (6.26)
+    lever_value: 6.26
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.26
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors: {}
+      buffer: none
+      matrix: meat (sheep m. semimembranosus mince, 20% fat; rendered fat analysed)
+      headspace: air
+  - label: high pH (6.81)
+    lever_value: 6.81
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.81
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors: {}
+      buffer: none
+      matrix: meat (sheep m. semimembranosus mince, 20% fat; rendered fat analysed)
+      headspace: air
+  odorant_printed: furfural (furan carboxyaldehyde)
+- id: braggins1996-19
+  resolution: resolved
+  odorant: 2-methylfuranthiol
+  lever_class: pH
+  lever: meat ultimate pH (preslaughter adrenaline)
+  focal: false
+  location: Table 5 footnote
+  digitised: false
+  unit: ng/g rendered fat
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unadjusted
+  arms:
+  - label: low pH (5.66)
+    lever_value: 5.66
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 5.66
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors: {}
+      buffer: none
+      matrix: meat (sheep m. semimembranosus mince, 20% fat; rendered fat analysed)
+      headspace: air
+  - label: medium pH (6.26)
+    lever_value: 6.26
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.26
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors: {}
+      buffer: none
+      matrix: meat (sheep m. semimembranosus mince, 20% fat; rendered fat analysed)
+      headspace: air
+  - label: high pH (6.81)
+    lever_value: 6.81
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 10
+    sd: null
+    conditions:
+      ph: 6.81
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors: {}
+      buffer: none
+      matrix: meat (sheep m. semimembranosus mince, 20% fat; rendered fat analysed)
+      headspace: air
+  unlisted_reason: 'printed as ''2-methylfuranthiol'' with no ring position: not attributable to 2-methyl-3-furanthiol'
+  odorant_unlisted: true

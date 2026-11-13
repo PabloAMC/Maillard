@@ -6,7 +6,7 @@
       "family": "meaty thiols",
       "lever": "pH",
       "reading": "answered by the literature",
-      "why": "2-Furfurylthiol (FFT), pH 6-7.5, initial or label: -0.57 dex (new laboratory -1.66 to +0.51)",
+      "why": "2-Furfurylthiol (FFT), pH 6-7.5, initial or label: -0.53 dex (new laboratory -1.52 to +0.46)",
       "plant_protein_evidence": false,
       "design": null,
       "engine": "blank in v1 (step 5 adds)"
@@ -78,7 +78,7 @@
       "family": "meaty thiols",
       "lever": "thiamine",
       "reading": "needs experiment",
-      "why": "keyed in grosch1992, hincelin1992, zhang2022pleurotus but no usable estimate: the no-thiamine arm is 'not detected' without a limit, or thiamine is compared only with thiamine pyrophosphate and never connects to cysteine",
+      "why": "keyed in grosch1992, hincelin1992, yang2012, zhang2022pleurotus but no usable estimate: the no-thiamine arm is 'not detected' without a limit, or thiamine is compared only with thiamine pyrophosphate and never connects to cysteine",
       "plant_protein_evidence": false,
       "design": "thiamine: 0 / 0.05 / 0.1 % w/w; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 3 new laboratory(ies) to reach 3; measure MFT, FFT, H2S and the disulfides by SIDA",
       "engine": "blank in v1 (step 5 adds)"
@@ -141,9 +141,9 @@
       "family": "Strecker aldehydes, methional",
       "lever": "pH",
       "reading": "needs experiment",
-      "why": "keyed: best cell 'Benzaldehyde, pH 4.5-6, initial or label' reads direction unclear (3 laboratories)",
-      "plant_protein_evidence": false,
-      "design": "pH: pH 5.0 / 6.0 / 7.0; 8 replicate pots per arm; in a 15 % pea-isolate matrix; from 1 new laboratory(ies) to reach 3; measure Strecker aldehydes, methional",
+      "why": "keyed: best cell 'Benzaldehyde, pH 4.5-6, initial or label' reads direction unclear (4 laboratories)",
+      "plant_protein_evidence": true,
+      "design": "pH: pH 5.0 / 6.0 / 7.0; 8 replicate pots per arm; matrix as in the keyed studies; from 1 new laboratory(ies) to reach 3; measure Strecker aldehydes, methional",
       "engine": "blank in v1 (step 5 adds)"
     },
     {
@@ -177,7 +177,7 @@
       "family": "Strecker aldehydes, methional",
       "lever": "sugar identity",
       "reading": "answered by the literature",
-      "why": "Methional (3-(methylthio)propanal), xylose vs glucose: +0.51 dex (new laboratory +0.41 to +0.60)",
+      "why": "Methional (3-(methylthio)propanal), xylose vs glucose: +0.50 dex (new laboratory +0.38 to +0.60); Phenylacetaldehyde, xylose vs glucose: +0.55 dex (new laboratory -0.55 to +1.65)",
       "plant_protein_evidence": true,
       "design": null,
       "engine": "blank in v1 (step 5 adds)"
@@ -222,7 +222,7 @@
       "family": "Strecker aldehydes, methional",
       "lever": "lipid",
       "reading": "needs experiment",
-      "why": "keyed: best cell 'Benzaldehyde, 13-hydroperoxyoctadeca-9,11-dienoic acid vs none' reads too few laboratories (1 laboratories)",
+      "why": "keyed: best cell '2-Methylpropanal (isobutyraldehyde), c18:1n-9 vs none' reads too few laboratories (1 laboratories)",
       "plant_protein_evidence": false,
       "design": "lipid: 0 / 2 / 5 % sunflower oil; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 2 new laboratory(ies) to reach 3; measure Strecker aldehydes, methional",
       "engine": "blank in v1 (step 5 adds)"
@@ -276,7 +276,7 @@
       "family": "pyrazines",
       "lever": "pH",
       "reading": "answered by the literature",
-      "why": "2-Acetylthiazole, pH 6-7.5, initial or label: +0.23 dex (new laboratory -0.18 to +0.65)",
+      "why": "2,5-Dimethylpyrazine, pH >7.5, initial or label: +0.35 dex (new laboratory -0.17 to +0.88); 2-Acetylthiazole, pH 6-7.5, initial or label: +0.32 dex (new laboratory -0.30 to +0.95); Pyrazines, pH 6-7.5, initial or label: +0.56 dex (new laboratory -0.61 to +1.72)",
       "plant_protein_evidence": true,
       "design": null,
       "engine": "blank in v1 (step 5 adds)"
@@ -312,9 +312,9 @@
       "family": "pyrazines",
       "lever": "sugar identity",
       "reading": "needs experiment",
-      "why": "keyed: best cell '2-Methylpyrazine, ribose vs glucose' reads too few laboratories (2 laboratories)",
+      "why": "keyed: best cell '2-Methylpyrazine, fructose vs glucose' reads too few laboratories (2 laboratories)",
       "plant_protein_evidence": true,
-      "design": "sugar identity: ribose vs glucose (vs xylose); 8 replicate pots per arm; matrix as in the keyed studies; from 1 new laboratory(ies) to reach 3; measure pyrazines",
+      "design": "sugar identity: ribose vs glucose (vs xylose); 2 replicate pots per arm; matrix as in the keyed studies; from 1 new laboratory(ies) to reach 3; measure pyrazines",
       "engine": "blank in v1 (step 5 adds)"
     },
     {
@@ -329,10 +329,10 @@
     {
       "family": "pyrazines",
       "lever": "amino acid identity",
-      "reading": "needs experiment",
-      "why": "keyed: best cell '2-Methylpyrazine, cysteine vs glycine' reads direction unclear (3 laboratories)",
+      "reading": "answered by the literature",
+      "why": "2-Methylpyrazine, lysine vs glycine: +1.00 dex (new laboratory -0.17 to +2.16); Pyrazines, lysine vs glycine: +1.09 dex (new laboratory -0.01 to +2.19); Trimethylpyrazine, arginine vs glycine: -0.60 dex (new laboratory -1.32 to +0.14)",
       "plant_protein_evidence": true,
-      "design": "amino acid identity: glycine vs alanine vs leucine vs methionine vs phenylalanine; 8 replicate pots per arm; matrix as in the keyed studies; from 1 new laboratory(ies) to reach 3; measure pyrazines",
+      "design": null,
       "engine": "blank in v1 (step 5 adds)"
     },
     {
@@ -411,7 +411,7 @@
       "family": "lipid aldehydes (off-notes)",
       "lever": "pH",
       "reading": "needs experiment",
-      "why": "keyed: best cell 'Heptanal, pH 4.5-6, initial or label' reads direction unclear (4 laboratories)",
+      "why": "keyed: best cell 'Heptanal, pH 4.5-6, initial or label' reads direction unclear (5 laboratories)",
       "plant_protein_evidence": false,
       "design": "pH: pH 5.0 / 6.0 / 7.0; 8 replicate pots per arm; in a 15 % pea-isolate matrix; from 1 new laboratory(ies) to reach 3; measure lipid aldehydes (off-notes)",
       "engine": "blank in v1 (step 5 adds)"
@@ -447,9 +447,9 @@
       "family": "lipid aldehydes (off-notes)",
       "lever": "sugar identity",
       "reading": "needs experiment",
-      "why": "keyed: best cell 'Hexanal, xylose vs glucose' reads direction unclear (3 laboratories)",
+      "why": "keyed: best cell 'Hexanal, fructose vs glucose' reads direction unclear (3 laboratories)",
       "plant_protein_evidence": true,
-      "design": "sugar identity: ribose vs glucose (vs xylose); 3 replicate pots per arm; matrix as in the keyed studies; from 1 new laboratory(ies) to reach 3; measure lipid aldehydes (off-notes)",
+      "design": "sugar identity: ribose vs glucose (vs xylose); 8 replicate pots per arm; matrix as in the keyed studies; from 1 new laboratory(ies) to reach 3; measure lipid aldehydes (off-notes)",
       "engine": "blank in v1 (step 5 adds)"
     },
     {
@@ -492,9 +492,9 @@
       "family": "lipid aldehydes (off-notes)",
       "lever": "lipid",
       "reading": "needs experiment",
-      "why": "keyed: best cell '(E)-2-Nonenal, beef phospholipid vs beef triglyceride' reads too few laboratories (1 laboratories)",
+      "why": "keyed: best cell '(E)-2-Nonenal, c18:2n-6 vs c18:1n-9' reads too few laboratories (1 laboratories)",
       "plant_protein_evidence": false,
-      "design": "lipid: 0 / 2 / 5 % sunflower oil; 8 replicate pots per arm; in a 15 % pea-isolate matrix; from 2 new laboratory(ies) to reach 3; measure lipid aldehydes (off-notes)",
+      "design": "lipid: 0 / 2 / 5 % sunflower oil; 3 replicate pots per arm; in a 15 % pea-isolate matrix; from 2 new laboratory(ies) to reach 3; measure lipid aldehydes (off-notes)",
       "engine": "blank in v1 (step 5 adds)"
     },
     {
@@ -545,10 +545,10 @@
     {
       "family": "furanones, furfural",
       "lever": "pH",
-      "reading": "needs experiment",
-      "why": "keyed: best cell 'Furfural, pH 4.5-6, initial or label' reads direction unclear (5 laboratories)",
-      "plant_protein_evidence": false,
-      "design": "pH: pH 5.0 / 6.0 / 7.0; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 1 new laboratory(ies) to reach 3; measure furanones, furfural",
+      "reading": "answered by the literature",
+      "why": "Furfural, pH 6-7.5, initial or label: -0.28 dex (new laboratory -0.85 to +0.29)",
+      "plant_protein_evidence": true,
+      "design": null,
       "engine": "blank in v1 (step 5 adds)"
     },
     {
@@ -582,9 +582,9 @@
       "family": "furanones, furfural",
       "lever": "sugar identity",
       "reading": "needs experiment",
-      "why": "keyed: best cell '2-Furanmethanol, fructose vs glucose' reads too few laboratories (2 laboratories)",
+      "why": "keyed: best cell '2-Furanmethanol, fructose vs glucose' reads direction unclear (3 laboratories)",
       "plant_protein_evidence": true,
-      "design": "sugar identity: ribose vs glucose (vs xylose); 2 replicate pots per arm; matrix as in the keyed studies; from 1 new laboratory(ies) to reach 3; measure furanones, furfural",
+      "design": "sugar identity: ribose vs glucose (vs xylose); 8 replicate pots per arm; matrix as in the keyed studies; from 1 new laboratory(ies) to reach 3; measure furanones, furfural",
       "engine": "blank in v1 (step 5 adds)"
     },
     {
@@ -600,7 +600,7 @@
       "family": "furanones, furfural",
       "lever": "amino acid identity",
       "reading": "needs experiment",
-      "why": "keyed: best cell '2-Acetylfuran, cysteine vs glycine' reads too few laboratories (2 laboratories)",
+      "why": "keyed: best cell 'Furfural, none vs glycine' reads direction unclear (3 laboratories)",
       "plant_protein_evidence": false,
       "design": "amino acid identity: glycine vs alanine vs leucine vs methionine vs phenylalanine; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 1 new laboratory(ies) to reach 3; measure furanones, furfural",
       "engine": "blank in v1 (step 5 adds)"
@@ -679,23 +679,23 @@
     }
   ],
   "counts": {
-    "answered by the literature": 4,
-    "needs experiment": 71
+    "answered by the literature": 6,
+    "needs experiment": 69
   },
   "provenance": {
     "artifact": "experiment_map",
     "generated_on": "2026-11-13",
     "git": {
-      "commit": "3b569fd5ab195a53af395258985d70202afa1f03",
-      "short": "3b569fd5",
-      "branch": "lever-keying-a6",
+      "commit": "4cf0905223b064ceda8361a5be8ce2c033bfd654",
+      "short": "4cf09052",
+      "branch": "a6-batch2",
       "dirty": true
     },
     "generated_by": "scripts/generators/build_experiment_map.py",
     "inputs": [
       {
         "path": "results/validation/lever_table.json",
-        "sha256": "8e957940a1fb45c59c2fa568930285d7aefbae3acc2b9a1d287cc8044a89c28e"
+        "sha256": "571fa5e14baf40d8cf44190fccaa165103f7705491ce00ec34a2b185b3cf7930"
       },
       {
         "path": "docs/reference/contrast_benchmark/split.yml",

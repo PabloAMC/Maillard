@@ -1,0 +1,3154 @@
+source: laemont2023
+pdf: data/articles/laemont2023.pdf
+reader: b
+scope_note: 'SIFT-MS headspace ppb (relative), Table 2, n = 3, no SD printed. Keyed: pH 4 vs pH 9 (both phosphate buffer,
+  concentration not printed); the pH 7 control is unbuffered water, so it differs from pH 4/9 in buffer as well and is not
+  in the pH contrast. Sugar: no-sugar control (pH 7 water) vs 20% glucose vs 20% fructose. Protein: control vs 17% whey protein
+  isolate (precursor dose); WPI vs WPC keyed mixed (protein purity and lactose differ). Raw seeds not keyed (unroasted, unsoaked:
+  several levers). Mixtures (dimethylpyrazine isomers; 2-pentylfuran + 2-ethylpyrazine) keyed odorant_unlisted. No final pH
+  printed.'
+contrasts:
+- id: laemont2023-1
+  odorant: dimethylpyrazine isomers
+  lever_class: pH
+  lever: soak pH (phosphate buffer)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  odorant_unlisted: true
+  arms:
+  - label: pH 4
+    lever_value: 4
+    value: 26.6
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+      buffer: phosphate buffer, concentration not printed
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: pH 9
+    lever_value: 9
+    value: 68.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+      buffer: phosphate buffer, concentration not printed
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+- id: laemont2023-2
+  odorant: dimethylpyrazine isomers
+  lever_class: sugar identity
+  lever: no added sugar vs glucose vs fructose (20% w/v soak)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  odorant_unlisted: true
+  arms:
+  - label: pH 7
+    lever_value: none
+    value: 37.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: 20% Glucose
+    lever_value: glucose
+    value: 95.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        glucose soak: 20% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: 20% Fructose
+    lever_value: fructose
+    value: 193
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        fructose soak: 20% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+- id: laemont2023-3
+  odorant: dimethylpyrazine isomers
+  lever_class: precursor dose
+  lever: whey protein isolate in the soak, 0 vs 17% w/v
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  odorant_unlisted: true
+  arms:
+  - label: pH 7
+    lever_value: 0%
+    value: 37.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: 17% Whey Isolate
+    lever_value: 17% WPI
+    value: 141
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        whey protein isolate soak: 17% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+- id: laemont2023-4
+  odorant: dimethylpyrazine isomers
+  lever_class: mixed
+  lever: whey protein isolate vs whey protein concentrate (protein purity and lactose differ)
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  odorant_unlisted: true
+  arms:
+  - label: 17% Whey Isolate
+    lever_value: WPI
+    value: 141
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        whey protein isolate soak: 17% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: 17% Whey Concentrate
+    lever_value: WPC
+    value: 333
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        whey protein concentrate soak: 17% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+- id: laemont2023-5
+  odorant: 2-methylpyrazine
+  lever_class: pH
+  lever: soak pH (phosphate buffer)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 4
+    lever_value: 4
+    value: 22.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+      buffer: phosphate buffer, concentration not printed
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: pH 9
+    lever_value: 9
+    value: 53.6
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+      buffer: phosphate buffer, concentration not printed
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+- id: laemont2023-6
+  odorant: 2-methylpyrazine
+  lever_class: sugar identity
+  lever: no added sugar vs glucose vs fructose (20% w/v soak)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7
+    lever_value: none
+    value: 43.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: 20% Glucose
+    lever_value: glucose
+    value: 87.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        glucose soak: 20% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: 20% Fructose
+    lever_value: fructose
+    value: 124
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        fructose soak: 20% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+- id: laemont2023-7
+  odorant: 2-methylpyrazine
+  lever_class: precursor dose
+  lever: whey protein isolate in the soak, 0 vs 17% w/v
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7
+    lever_value: 0%
+    value: 43.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: 17% Whey Isolate
+    lever_value: 17% WPI
+    value: 69.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        whey protein isolate soak: 17% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+- id: laemont2023-8
+  odorant: 2-methylpyrazine
+  lever_class: mixed
+  lever: whey protein isolate vs whey protein concentrate (protein purity and lactose differ)
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 17% Whey Isolate
+    lever_value: WPI
+    value: 69.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        whey protein isolate soak: 17% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: 17% Whey Concentrate
+    lever_value: WPC
+    value: 171
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        whey protein concentrate soak: 17% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+- id: laemont2023-9
+  odorant: 2-pentylfuran isomers (2-pentylfuran + 2-ethylpyrazine)
+  lever_class: pH
+  lever: soak pH (phosphate buffer)
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  odorant_unlisted: true
+  arms:
+  - label: pH 4
+    lever_value: 4
+    value: 3.65
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+      buffer: phosphate buffer, concentration not printed
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: pH 9
+    lever_value: 9
+    value: 4.92
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+      buffer: phosphate buffer, concentration not printed
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+- id: laemont2023-10
+  odorant: 2-pentylfuran isomers (2-pentylfuran + 2-ethylpyrazine)
+  lever_class: sugar identity
+  lever: no added sugar vs glucose vs fructose (20% w/v soak)
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  odorant_unlisted: true
+  arms:
+  - label: pH 7
+    lever_value: none
+    value: 3.69
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: 20% Glucose
+    lever_value: glucose
+    value: 7.06
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        glucose soak: 20% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: 20% Fructose
+    lever_value: fructose
+    value: 10.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        fructose soak: 20% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+- id: laemont2023-11
+  odorant: 2-pentylfuran isomers (2-pentylfuran + 2-ethylpyrazine)
+  lever_class: precursor dose
+  lever: whey protein isolate in the soak, 0 vs 17% w/v
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  odorant_unlisted: true
+  arms:
+  - label: pH 7
+    lever_value: 0%
+    value: 3.69
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: 17% Whey Isolate
+    lever_value: 17% WPI
+    value: 9.06
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        whey protein isolate soak: 17% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+- id: laemont2023-12
+  odorant: 2-pentylfuran isomers (2-pentylfuran + 2-ethylpyrazine)
+  lever_class: mixed
+  lever: whey protein isolate vs whey protein concentrate (protein purity and lactose differ)
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  odorant_unlisted: true
+  arms:
+  - label: 17% Whey Isolate
+    lever_value: WPI
+    value: 9.06
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        whey protein isolate soak: 17% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: 17% Whey Concentrate
+    lever_value: WPC
+    value: 21.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        whey protein concentrate soak: 17% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+- id: laemont2023-13
+  odorant: benzaldehyde
+  lever_class: pH
+  lever: soak pH (phosphate buffer)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 4
+    lever_value: 4
+    value: 12.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+      buffer: phosphate buffer, concentration not printed
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: pH 9
+    lever_value: 9
+    value: 14.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+      buffer: phosphate buffer, concentration not printed
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+- id: laemont2023-14
+  odorant: benzaldehyde
+  lever_class: sugar identity
+  lever: no added sugar vs glucose vs fructose (20% w/v soak)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7
+    lever_value: none
+    value: 13.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: 20% Glucose
+    lever_value: glucose
+    value: 21.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        glucose soak: 20% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: 20% Fructose
+    lever_value: fructose
+    value: 20.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        fructose soak: 20% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+- id: laemont2023-15
+  odorant: benzaldehyde
+  lever_class: precursor dose
+  lever: whey protein isolate in the soak, 0 vs 17% w/v
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7
+    lever_value: 0%
+    value: 13.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: 17% Whey Isolate
+    lever_value: 17% WPI
+    value: 73.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        whey protein isolate soak: 17% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+- id: laemont2023-16
+  odorant: benzaldehyde
+  lever_class: mixed
+  lever: whey protein isolate vs whey protein concentrate (protein purity and lactose differ)
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 17% Whey Isolate
+    lever_value: WPI
+    value: 73.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        whey protein isolate soak: 17% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: 17% Whey Concentrate
+    lever_value: WPC
+    value: 143
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        whey protein concentrate soak: 17% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+- id: laemont2023-17
+  odorant: furfural
+  lever_class: pH
+  lever: soak pH (phosphate buffer)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 4
+    lever_value: 4
+    value: 11.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+      buffer: phosphate buffer, concentration not printed
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: pH 9
+    lever_value: 9
+    value: 12.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+      buffer: phosphate buffer, concentration not printed
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+- id: laemont2023-18
+  odorant: furfural
+  lever_class: sugar identity
+  lever: no added sugar vs glucose vs fructose (20% w/v soak)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7
+    lever_value: none
+    value: 11.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: 20% Glucose
+    lever_value: glucose
+    value: 333
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        glucose soak: 20% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: 20% Fructose
+    lever_value: fructose
+    value: 276
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        fructose soak: 20% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+- id: laemont2023-19
+  odorant: furfural
+  lever_class: precursor dose
+  lever: whey protein isolate in the soak, 0 vs 17% w/v
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7
+    lever_value: 0%
+    value: 11.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: 17% Whey Isolate
+    lever_value: 17% WPI
+    value: 19.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        whey protein isolate soak: 17% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+- id: laemont2023-20
+  odorant: furfural
+  lever_class: mixed
+  lever: whey protein isolate vs whey protein concentrate (protein purity and lactose differ)
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 17% Whey Isolate
+    lever_value: WPI
+    value: 19.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        whey protein isolate soak: 17% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: 17% Whey Concentrate
+    lever_value: WPC
+    value: 41.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        whey protein concentrate soak: 17% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+- id: laemont2023-21
+  odorant: hexanal
+  lever_class: pH
+  lever: soak pH (phosphate buffer)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 4
+    lever_value: 4
+    value: 107
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+      buffer: phosphate buffer, concentration not printed
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: pH 9
+    lever_value: 9
+    value: 109
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+      buffer: phosphate buffer, concentration not printed
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+- id: laemont2023-22
+  odorant: hexanal
+  lever_class: sugar identity
+  lever: no added sugar vs glucose vs fructose (20% w/v soak)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7
+    lever_value: none
+    value: 103
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: 20% Glucose
+    lever_value: glucose
+    value: 161
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        glucose soak: 20% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: 20% Fructose
+    lever_value: fructose
+    value: 127
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        fructose soak: 20% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+- id: laemont2023-23
+  odorant: hexanal
+  lever_class: precursor dose
+  lever: whey protein isolate in the soak, 0 vs 17% w/v
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7
+    lever_value: 0%
+    value: 103
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: 17% Whey Isolate
+    lever_value: 17% WPI
+    value: 189
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        whey protein isolate soak: 17% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+- id: laemont2023-24
+  odorant: hexanal
+  lever_class: mixed
+  lever: whey protein isolate vs whey protein concentrate (protein purity and lactose differ)
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 17% Whey Isolate
+    lever_value: WPI
+    value: 189
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        whey protein isolate soak: 17% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: 17% Whey Concentrate
+    lever_value: WPC
+    value: 227
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        whey protein concentrate soak: 17% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+- id: laemont2023-25
+  odorant: methional
+  lever_class: pH
+  lever: soak pH (phosphate buffer)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 4
+    lever_value: 4
+    value: 19.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+      buffer: phosphate buffer, concentration not printed
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: pH 9
+    lever_value: 9
+    value: 20.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+      buffer: phosphate buffer, concentration not printed
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+- id: laemont2023-26
+  odorant: methional
+  lever_class: sugar identity
+  lever: no added sugar vs glucose vs fructose (20% w/v soak)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7
+    lever_value: none
+    value: 21.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: 20% Glucose
+    lever_value: glucose
+    value: 38.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        glucose soak: 20% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: 20% Fructose
+    lever_value: fructose
+    value: 60.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        fructose soak: 20% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+- id: laemont2023-27
+  odorant: methional
+  lever_class: precursor dose
+  lever: whey protein isolate in the soak, 0 vs 17% w/v
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7
+    lever_value: 0%
+    value: 21.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: 17% Whey Isolate
+    lever_value: 17% WPI
+    value: 160
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        whey protein isolate soak: 17% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+- id: laemont2023-28
+  odorant: methional
+  lever_class: mixed
+  lever: whey protein isolate vs whey protein concentrate (protein purity and lactose differ)
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 17% Whey Isolate
+    lever_value: WPI
+    value: 160
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        whey protein isolate soak: 17% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: 17% Whey Concentrate
+    lever_value: WPC
+    value: 653
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        whey protein concentrate soak: 17% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+- id: laemont2023-29
+  odorant: nonanal
+  lever_class: pH
+  lever: soak pH (phosphate buffer)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 4
+    lever_value: 4
+    value: 8.04
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+      buffer: phosphate buffer, concentration not printed
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: pH 9
+    lever_value: 9
+    value: 6.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+      buffer: phosphate buffer, concentration not printed
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+- id: laemont2023-30
+  odorant: nonanal
+  lever_class: sugar identity
+  lever: no added sugar vs glucose vs fructose (20% w/v soak)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7
+    lever_value: none
+    value: 5.92
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: 20% Glucose
+    lever_value: glucose
+    value: 9.03
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        glucose soak: 20% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: 20% Fructose
+    lever_value: fructose
+    value: 9.13
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        fructose soak: 20% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+- id: laemont2023-31
+  odorant: nonanal
+  lever_class: precursor dose
+  lever: whey protein isolate in the soak, 0 vs 17% w/v
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7
+    lever_value: 0%
+    value: 5.92
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: 17% Whey Isolate
+    lever_value: 17% WPI
+    value: 11.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        whey protein isolate soak: 17% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+- id: laemont2023-32
+  odorant: nonanal
+  lever_class: mixed
+  lever: whey protein isolate vs whey protein concentrate (protein purity and lactose differ)
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 17% Whey Isolate
+    lever_value: WPI
+    value: 11.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        whey protein isolate soak: 17% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: 17% Whey Concentrate
+    lever_value: WPC
+    value: 16.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        whey protein concentrate soak: 17% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+- id: laemont2023-33
+  odorant: octanal
+  lever_class: pH
+  lever: soak pH (phosphate buffer)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 4
+    lever_value: 4
+    value: 6.22
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+      buffer: phosphate buffer, concentration not printed
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: pH 9
+    lever_value: 9
+    value: 5.66
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+      buffer: phosphate buffer, concentration not printed
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+- id: laemont2023-34
+  odorant: octanal
+  lever_class: sugar identity
+  lever: no added sugar vs glucose vs fructose (20% w/v soak)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7
+    lever_value: none
+    value: 5.91
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: 20% Glucose
+    lever_value: glucose
+    value: 20.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        glucose soak: 20% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: 20% Fructose
+    lever_value: fructose
+    value: 14.6
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        fructose soak: 20% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+- id: laemont2023-35
+  odorant: octanal
+  lever_class: precursor dose
+  lever: whey protein isolate in the soak, 0 vs 17% w/v
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7
+    lever_value: 0%
+    value: 5.91
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: 17% Whey Isolate
+    lever_value: 17% WPI
+    value: 8.51
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        whey protein isolate soak: 17% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+- id: laemont2023-36
+  odorant: octanal
+  lever_class: mixed
+  lever: whey protein isolate vs whey protein concentrate (protein purity and lactose differ)
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 17% Whey Isolate
+    lever_value: WPI
+    value: 8.51
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        whey protein isolate soak: 17% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: 17% Whey Concentrate
+    lever_value: WPC
+    value: 14.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        whey protein concentrate soak: 17% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+- id: laemont2023-37
+  odorant: pentanal
+  lever_class: pH
+  lever: soak pH (phosphate buffer)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 4
+    lever_value: 4
+    value: 3290
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+      buffer: phosphate buffer, concentration not printed
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: pH 9
+    lever_value: 9
+    value: 4550
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+      buffer: phosphate buffer, concentration not printed
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+- id: laemont2023-38
+  odorant: pentanal
+  lever_class: sugar identity
+  lever: no added sugar vs glucose vs fructose (20% w/v soak)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7
+    lever_value: none
+    value: 3660
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: 20% Glucose
+    lever_value: glucose
+    value: 10140
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        glucose soak: 20% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: 20% Fructose
+    lever_value: fructose
+    value: 9760
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        fructose soak: 20% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+- id: laemont2023-39
+  odorant: pentanal
+  lever_class: precursor dose
+  lever: whey protein isolate in the soak, 0 vs 17% w/v
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7
+    lever_value: 0%
+    value: 3660
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: 17% Whey Isolate
+    lever_value: 17% WPI
+    value: 10120
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        whey protein isolate soak: 17% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+- id: laemont2023-40
+  odorant: pentanal
+  lever_class: mixed
+  lever: whey protein isolate vs whey protein concentrate (protein purity and lactose differ)
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 17% Whey Isolate
+    lever_value: WPI
+    value: 10120
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        whey protein isolate soak: 17% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: 17% Whey Concentrate
+    lever_value: WPC
+    value: 19300
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        whey protein concentrate soak: 17% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+- id: laemont2023-41
+  odorant: phenylacetaldehyde
+  lever_class: pH
+  lever: soak pH (phosphate buffer)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 4
+    lever_value: 4
+    value: 7.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+      buffer: phosphate buffer, concentration not printed
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: pH 9
+    lever_value: 9
+    value: 9.51
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+      buffer: phosphate buffer, concentration not printed
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+- id: laemont2023-42
+  odorant: phenylacetaldehyde
+  lever_class: sugar identity
+  lever: no added sugar vs glucose vs fructose (20% w/v soak)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7
+    lever_value: none
+    value: 9.28
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: 20% Glucose
+    lever_value: glucose
+    value: 12.6
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        glucose soak: 20% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: 20% Fructose
+    lever_value: fructose
+    value: 17.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        fructose soak: 20% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+- id: laemont2023-43
+  odorant: phenylacetaldehyde
+  lever_class: precursor dose
+  lever: whey protein isolate in the soak, 0 vs 17% w/v
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7
+    lever_value: 0%
+    value: 9.28
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: 17% Whey Isolate
+    lever_value: 17% WPI
+    value: 28.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        whey protein isolate soak: 17% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+- id: laemont2023-44
+  odorant: phenylacetaldehyde
+  lever_class: mixed
+  lever: whey protein isolate vs whey protein concentrate (protein purity and lactose differ)
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 17% Whey Isolate
+    lever_value: WPI
+    value: 28.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        whey protein isolate soak: 17% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: 17% Whey Concentrate
+    lever_value: WPC
+    value: 38.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        whey protein concentrate soak: 17% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+- id: laemont2023-45
+  odorant: Unsubstituted pyrazine
+  lever_class: pH
+  lever: soak pH (phosphate buffer)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 4
+    lever_value: 4
+    value: 2.38
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+      buffer: phosphate buffer, concentration not printed
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: pH 9
+    lever_value: 9
+    value: 3.61
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+      buffer: phosphate buffer, concentration not printed
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+- id: laemont2023-46
+  odorant: Unsubstituted pyrazine
+  lever_class: sugar identity
+  lever: no added sugar vs glucose vs fructose (20% w/v soak)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7
+    lever_value: none
+    value: 3.03
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: 20% Glucose
+    lever_value: glucose
+    value: 7.75
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        glucose soak: 20% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: 20% Fructose
+    lever_value: fructose
+    value: 6.99
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        fructose soak: 20% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+- id: laemont2023-47
+  odorant: Unsubstituted pyrazine
+  lever_class: precursor dose
+  lever: whey protein isolate in the soak, 0 vs 17% w/v
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7
+    lever_value: 0%
+    value: 3.03
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: 17% Whey Isolate
+    lever_value: 17% WPI
+    value: 6.23
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        whey protein isolate soak: 17% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+- id: laemont2023-48
+  odorant: Unsubstituted pyrazine
+  lever_class: mixed
+  lever: whey protein isolate vs whey protein concentrate (protein purity and lactose differ)
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 17% Whey Isolate
+    lever_value: WPI
+    value: 6.23
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        whey protein isolate soak: 17% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: 17% Whey Concentrate
+    lever_value: WPC
+    value: 14.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        whey protein concentrate soak: 17% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+- id: laemont2023-49
+  odorant: tetramethylpyrazine
+  lever_class: pH
+  lever: soak pH (phosphate buffer)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 4
+    lever_value: 4
+    value: 9.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+      buffer: phosphate buffer, concentration not printed
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: pH 9
+    lever_value: 9
+    value: 17.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+      buffer: phosphate buffer, concentration not printed
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+- id: laemont2023-50
+  odorant: tetramethylpyrazine
+  lever_class: sugar identity
+  lever: no added sugar vs glucose vs fructose (20% w/v soak)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7
+    lever_value: none
+    value: 11.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: 20% Glucose
+    lever_value: glucose
+    value: 23.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        glucose soak: 20% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: 20% Fructose
+    lever_value: fructose
+    value: 28.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        fructose soak: 20% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+- id: laemont2023-51
+  odorant: tetramethylpyrazine
+  lever_class: precursor dose
+  lever: whey protein isolate in the soak, 0 vs 17% w/v
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7
+    lever_value: 0%
+    value: 11.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: 17% Whey Isolate
+    lever_value: 17% WPI
+    value: 27.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        whey protein isolate soak: 17% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+- id: laemont2023-52
+  odorant: tetramethylpyrazine
+  lever_class: mixed
+  lever: whey protein isolate vs whey protein concentrate (protein purity and lactose differ)
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 17% Whey Isolate
+    lever_value: WPI
+    value: 27.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        whey protein isolate soak: 17% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: 17% Whey Concentrate
+    lever_value: WPC
+    value: 62.6
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        whey protein concentrate soak: 17% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+- id: laemont2023-53
+  odorant: trimethylpyrazine
+  lever_class: pH
+  lever: soak pH (phosphate buffer)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 4
+    lever_value: 4
+    value: 9.09
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+      buffer: phosphate buffer, concentration not printed
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: pH 9
+    lever_value: 9
+    value: 18.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+      buffer: phosphate buffer, concentration not printed
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+- id: laemont2023-54
+  odorant: trimethylpyrazine
+  lever_class: sugar identity
+  lever: no added sugar vs glucose vs fructose (20% w/v soak)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7
+    lever_value: none
+    value: 12.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: 20% Glucose
+    lever_value: glucose
+    value: 25.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        glucose soak: 20% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: 20% Fructose
+    lever_value: fructose
+    value: 39.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        fructose soak: 20% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+- id: laemont2023-55
+  odorant: trimethylpyrazine
+  lever_class: precursor dose
+  lever: whey protein isolate in the soak, 0 vs 17% w/v
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7
+    lever_value: 0%
+    value: 12.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: 17% Whey Isolate
+    lever_value: 17% WPI
+    value: 41.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        whey protein isolate soak: 17% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+- id: laemont2023-56
+  odorant: trimethylpyrazine
+  lever_class: mixed
+  lever: whey protein isolate vs whey protein concentrate (protein purity and lactose differ)
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 17% Whey Isolate
+    lever_value: WPI
+    value: 41.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        whey protein isolate soak: 17% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air
+  - label: 17% Whey Concentrate
+    lever_value: WPC
+    value: 101
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        sunflower kernels: 30 g
+        whey protein concentrate soak: 17% w/v, 70 mL
+      buffer: none (deionized water)
+      matrix: other (sunflower kernels, Panther)
+      headspace: air

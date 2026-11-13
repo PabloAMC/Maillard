@@ -1,0 +1,2282 @@
+source: hou2017ph
+pdf: data/articles/hou2017ph.html
+reader: resolved
+scope_note: 'Resolved 2026-11-13 (step 11, A6 batch 2). Base reader a (22) plus one resolver row. Table 2 is an image; its
+  values come from the page''s hidden text layer, where blank cells are dropped. Decided call: the resolver re-derived every
+  placement itself: values were parsed per row (HP-5MS block = first RI, DB-WAX = second; a row with one RI may sit in either
+  block) and placed in pH columns by an integer program constrained by the printed per-column subtotals of each class (thiols/disulfides,
+  thiazoles, N-heterocycles, O-heterocycles, others; tolerance 0.03 ng), testing every placement of every row. Determined
+  (unique) for every keyed row; all 22 of reader a''s rows and reader b''s 23 shared rows agree with it. bis(2-furfuryl) disulfide
+  HP-5MS (1.06 / 2.03) is determined at pH 4.5 / 5.5 (ND at 6.5 / 7.5): keyed as hou2017ph-23 (reader a left it unkeyed; reader
+  b placed it at 6.5 / 7.5, which the subtotals exclude). Not keyed (placement not determined): the DB-WAX rows of bis(2-methyl-3-furyl)
+  disulfide (9.00 / 12.81 / 3.25: pH 4.5 / 5.5 / 6.5 or 4.5 / 5.5 / 7.5) and of bis(2-furfuryl) disulfide (1.41 / 2.62 / 0.55:
+  4.5 / 5.5 / 6.5 or 4.5 / 6.5 / 7.5); both would be duplicate_of their HP-5MS rows anyway. HP-5MS rows are primary; the DB-WAX
+  row of a compound printed in both blocks is duplicate_of the HP-5MS one; DB-WAX-only compounds (2,6-/2,3-dimethylpyrazine,
+  ethylpyrazine, trimethylpyrazine, 2-ethyl-3,6-dimethylpyrazine printed as 3-ethyl-2,5-, 2-pentylfuran) are primary. final_ph
+  = initial - printed drop (Table 1): 4.13 / 5.08 / 6.05 / 6.90. 0.2 M phosphate (buffered), 140 C 30 min; ng by internal
+  standard (1,2-dichlorobenzene, response factor 1; relative). No pyrazine class total printed (the N-heterocycle subtotal
+  includes pyrroles / pyridines). Conventions (resolver, uniform with batch 1): printed ND, ''-'', blank or 0 is nd_no_limit
+  with value null; all-ND contrasts kept; one compound printed twice carries duplicate_of; co-eluting mixtures odorant_unlisted;
+  odorant names canonicalised to the compound_keys display name, printed name in odorant_printed; IS semi-quantification and
+  SIFT-MS ppb relative, calibration with authentic standards absolute.'
+contrasts:
+- id: hou2017ph-1
+  resolution: agreed
+  odorant: 2-Methyl-3-furanthiol (MFT)
+  lever_class: pH
+  lever: initial pH of the phosphate buffer (4.5-7.5)
+  focal: true
+  location: Table 2, HP-5MS block
+  digitised: false
+  unit: ng
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 4.5
+    lever_value: 4.5
+    value: 211.22
+    censor: none
+    limit: null
+    n: 2
+    sd: 11.19
+    conditions:
+      ph: 4.5
+      ph_basis: initial
+      final_ph: 4.13
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5.5
+    lever_value: 5.5
+    value: 194.14
+    censor: none
+    limit: null
+    n: 2
+    sd: 10.1
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: 5.08
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 6.5
+    lever_value: 6.5
+    value: 81.01
+    censor: none
+    limit: null
+    n: 2
+    sd: 10.46
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: 6.05
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 7.5
+    lever_value: 7.5
+    value: 20.92
+    censor: none
+    limit: null
+    n: 2
+    sd: 4.82
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      final_ph: 6.9
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  odorant_printed: MFT
+- id: hou2017ph-2
+  resolution: agreed
+  odorant: 2-Methyl-3-furanthiol (MFT)
+  lever_class: pH
+  lever: initial pH of the phosphate buffer (4.5-7.5)
+  focal: true
+  location: Table 2, DB-WAX block
+  digitised: false
+  unit: ng
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  duplicate_of: hou2017ph-1
+  arms:
+  - label: pH 4.5
+    lever_value: 4.5
+    value: 143.74
+    censor: none
+    limit: null
+    n: 2
+    sd: 9.22
+    conditions:
+      ph: 4.5
+      ph_basis: initial
+      final_ph: 4.13
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5.5
+    lever_value: 5.5
+    value: 140.56
+    censor: none
+    limit: null
+    n: 2
+    sd: 10.81
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: 5.08
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 6.5
+    lever_value: 6.5
+    value: 16.62
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.09
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: 6.05
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 7.5
+    lever_value: 7.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      final_ph: 6.9
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  odorant_printed: MFT
+- id: hou2017ph-3
+  resolution: agreed
+  odorant: 2-Furfurylthiol (FFT)
+  lever_class: pH
+  lever: initial pH of the phosphate buffer (4.5-7.5)
+  focal: true
+  location: Table 2, HP-5MS block
+  digitised: false
+  unit: ng
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 4.5
+    lever_value: 4.5
+    value: 60.66
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.69
+    conditions:
+      ph: 4.5
+      ph_basis: initial
+      final_ph: 4.13
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5.5
+    lever_value: 5.5
+    value: 73.64
+    censor: none
+    limit: null
+    n: 2
+    sd: 4.83
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: 5.08
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 6.5
+    lever_value: 6.5
+    value: 40.21
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.45
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: 6.05
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 7.5
+    lever_value: 7.5
+    value: 17.37
+    censor: none
+    limit: null
+    n: 2
+    sd: 1.06
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      final_ph: 6.9
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  odorant_printed: 2-furfurylthiol
+- id: hou2017ph-4
+  resolution: agreed
+  odorant: 2-Furfurylthiol (FFT)
+  lever_class: pH
+  lever: initial pH of the phosphate buffer (4.5-7.5)
+  focal: true
+  location: Table 2, DB-WAX block
+  digitised: false
+  unit: ng
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  duplicate_of: hou2017ph-3
+  arms:
+  - label: pH 4.5
+    lever_value: 4.5
+    value: 47.84
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.54
+    conditions:
+      ph: 4.5
+      ph_basis: initial
+      final_ph: 4.13
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5.5
+    lever_value: 5.5
+    value: 68.43
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.77
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: 5.08
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 6.5
+    lever_value: 6.5
+    value: 24.6
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.28
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: 6.05
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 7.5
+    lever_value: 7.5
+    value: 4.29
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.86
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      final_ph: 6.9
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  odorant_printed: 2-furfurylthiol
+- id: hou2017ph-5
+  resolution: agreed
+  odorant: Bis(2-methyl-3-furyl) disulfide
+  lever_class: pH
+  lever: initial pH of the phosphate buffer (4.5-7.5)
+  focal: true
+  location: Table 2, HP-5MS block
+  digitised: false
+  unit: ng
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 4.5
+    lever_value: 4.5
+    value: 17.32
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.88
+    conditions:
+      ph: 4.5
+      ph_basis: initial
+      final_ph: 4.13
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5.5
+    lever_value: 5.5
+    value: 17.6
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.9
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: 5.08
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 6.5
+    lever_value: 6.5
+    value: 3.74
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.19
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: 6.05
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 7.5
+    lever_value: 7.5
+    value: 0.14
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.01
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      final_ph: 6.9
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  odorant_printed: bis(2-methyl-3-furyl) disulfide
+- id: hou2017ph-6
+  resolution: agreed
+  odorant: Unsubstituted pyrazine
+  lever_class: pH
+  lever: initial pH of the phosphate buffer (4.5-7.5)
+  focal: false
+  location: Table 2, HP-5MS block
+  digitised: false
+  unit: ng
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 4.5
+    lever_value: 4.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: initial
+      final_ph: 4.13
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5.5
+    lever_value: 5.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: 5.08
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 6.5
+    lever_value: 6.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: 6.05
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 7.5
+    lever_value: 7.5
+    value: 2.25
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.07
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      final_ph: 6.9
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: hou2017ph-7
+  resolution: agreed
+  odorant: Unsubstituted pyrazine
+  lever_class: pH
+  lever: initial pH of the phosphate buffer (4.5-7.5)
+  focal: false
+  location: Table 2, DB-WAX block
+  digitised: false
+  unit: ng
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  duplicate_of: hou2017ph-6
+  arms:
+  - label: pH 4.5
+    lever_value: 4.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: initial
+      final_ph: 4.13
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5.5
+    lever_value: 5.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: 5.08
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 6.5
+    lever_value: 6.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: 6.05
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 7.5
+    lever_value: 7.5
+    value: 5.59
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.17
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      final_ph: 6.9
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: hou2017ph-8
+  resolution: agreed
+  odorant: 2-Methylpyrazine
+  lever_class: pH
+  lever: initial pH of the phosphate buffer (4.5-7.5)
+  focal: false
+  location: Table 2, HP-5MS block
+  digitised: false
+  unit: ng
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 4.5
+    lever_value: 4.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: initial
+      final_ph: 4.13
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5.5
+    lever_value: 5.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: 5.08
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 6.5
+    lever_value: 6.5
+    value: 2.6
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.04
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: 6.05
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 7.5
+    lever_value: 7.5
+    value: 3.05
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.12
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      final_ph: 6.9
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  odorant_printed: 2-methylpyrazine
+- id: hou2017ph-9
+  resolution: agreed
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: pH
+  lever: initial pH of the phosphate buffer (4.5-7.5)
+  focal: false
+  location: Table 2, HP-5MS block
+  digitised: false
+  unit: ng
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 4.5
+    lever_value: 4.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: initial
+      final_ph: 4.13
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5.5
+    lever_value: 5.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: 5.08
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 6.5
+    lever_value: 6.5
+    value: 1.15
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.02
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: 6.05
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 7.5
+    lever_value: 7.5
+    value: 0.17
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.02
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      final_ph: 6.9
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  odorant_printed: 2,5-dimethylpyrazine
+- id: hou2017ph-10
+  resolution: agreed
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: pH
+  lever: initial pH of the phosphate buffer (4.5-7.5)
+  focal: false
+  location: Table 2, DB-WAX block
+  digitised: false
+  unit: ng
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  duplicate_of: hou2017ph-9
+  arms:
+  - label: pH 4.5
+    lever_value: 4.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: initial
+      final_ph: 4.13
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5.5
+    lever_value: 5.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: 5.08
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 6.5
+    lever_value: 6.5
+    value: 9.8
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.17
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: 6.05
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 7.5
+    lever_value: 7.5
+    value: 4.74
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.08
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      final_ph: 6.9
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  odorant_printed: 2,5-dimethylpyrazine
+- id: hou2017ph-11
+  resolution: agreed
+  odorant: 2,6-Dimethylpyrazine
+  lever_class: pH
+  lever: initial pH of the phosphate buffer (4.5-7.5)
+  focal: false
+  location: Table 2, DB-WAX block
+  digitised: false
+  unit: ng
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 4.5
+    lever_value: 4.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: initial
+      final_ph: 4.13
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5.5
+    lever_value: 5.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: 5.08
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 6.5
+    lever_value: 6.5
+    value: 5.97
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.11
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: 6.05
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 7.5
+    lever_value: 7.5
+    value: 4.72
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.09
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      final_ph: 6.9
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  odorant_printed: 2,6-dimethylpyrazine
+- id: hou2017ph-12
+  resolution: agreed
+  odorant: 2-Ethylpyrazine
+  lever_class: pH
+  lever: initial pH of the phosphate buffer (4.5-7.5)
+  focal: false
+  location: Table 2, DB-WAX block
+  digitised: false
+  unit: ng
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 4.5
+    lever_value: 4.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: initial
+      final_ph: 4.13
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5.5
+    lever_value: 5.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: 5.08
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 6.5
+    lever_value: 6.5
+    value: 6.59
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.12
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: 6.05
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 7.5
+    lever_value: 7.5
+    value: 3.12
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.06
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      final_ph: 6.9
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  odorant_printed: 2-ethylpyrazine
+- id: hou2017ph-13
+  resolution: agreed
+  odorant: 2,3-Dimethylpyrazine
+  lever_class: pH
+  lever: initial pH of the phosphate buffer (4.5-7.5)
+  focal: false
+  location: Table 2, DB-WAX block
+  digitised: false
+  unit: ng
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 4.5
+    lever_value: 4.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: initial
+      final_ph: 4.13
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5.5
+    lever_value: 5.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: 5.08
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 6.5
+    lever_value: 6.5
+    value: 4.06
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.08
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: 6.05
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 7.5
+    lever_value: 7.5
+    value: 1.67
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.03
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      final_ph: 6.9
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  odorant_printed: 2,3-dimethylpyrazine
+- id: hou2017ph-14
+  resolution: agreed
+  odorant: Trimethylpyrazine
+  lever_class: pH
+  lever: initial pH of the phosphate buffer (4.5-7.5)
+  focal: false
+  location: Table 2, DB-WAX block
+  digitised: false
+  unit: ng
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 4.5
+    lever_value: 4.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: initial
+      final_ph: 4.13
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5.5
+    lever_value: 5.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: 5.08
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 6.5
+    lever_value: 6.5
+    value: 1.34
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.03
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: 6.05
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 7.5
+    lever_value: 7.5
+    value: 0.69
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.01
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      final_ph: 6.9
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  odorant_printed: trimethylpyrazine
+- id: hou2017ph-15
+  resolution: agreed
+  odorant: 2-Ethyl-3,6-dimethylpyrazine
+  lever_class: pH
+  lever: initial pH of the phosphate buffer (4.5-7.5)
+  focal: false
+  location: Table 2, DB-WAX block
+  digitised: false
+  unit: ng
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 4.5
+    lever_value: 4.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: initial
+      final_ph: 4.13
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5.5
+    lever_value: 5.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: 5.08
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 6.5
+    lever_value: 6.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: 6.05
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 7.5
+    lever_value: 7.5
+    value: 0.44
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.01
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      final_ph: 6.9
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  odorant_printed: 2-ethyl-3,6-dimethylpyrazine
+- id: hou2017ph-16
+  resolution: agreed
+  odorant: 2-Acetylthiazole
+  lever_class: pH
+  lever: initial pH of the phosphate buffer (4.5-7.5)
+  focal: true
+  location: Table 2, HP-5MS block
+  digitised: false
+  unit: ng
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 4.5
+    lever_value: 4.5
+    value: 0.58
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.01
+    conditions:
+      ph: 4.5
+      ph_basis: initial
+      final_ph: 4.13
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5.5
+    lever_value: 5.5
+    value: 2.98
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.03
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: 5.08
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 6.5
+    lever_value: 6.5
+    value: 20.93
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.24
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: 6.05
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 7.5
+    lever_value: 7.5
+    value: 72.68
+    censor: none
+    limit: null
+    n: 2
+    sd: 11.61
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      final_ph: 6.9
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  odorant_printed: 2-acetylthiazole
+- id: hou2017ph-17
+  resolution: agreed
+  odorant: 2-Acetylthiazole
+  lever_class: pH
+  lever: initial pH of the phosphate buffer (4.5-7.5)
+  focal: true
+  location: Table 2, DB-WAX block
+  digitised: false
+  unit: ng
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  duplicate_of: hou2017ph-16
+  arms:
+  - label: pH 4.5
+    lever_value: 4.5
+    value: 4.91
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.06
+    conditions:
+      ph: 4.5
+      ph_basis: initial
+      final_ph: 4.13
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5.5
+    lever_value: 5.5
+    value: 6.54
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.08
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: 5.08
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 6.5
+    lever_value: 6.5
+    value: 29.11
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.34
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: 6.05
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 7.5
+    lever_value: 7.5
+    value: 86.97
+    censor: none
+    limit: null
+    n: 2
+    sd: 5.27
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      final_ph: 6.9
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  odorant_printed: 2-acetylthiazole
+- id: hou2017ph-18
+  resolution: agreed
+  odorant: Furfural
+  lever_class: pH
+  lever: initial pH of the phosphate buffer (4.5-7.5)
+  focal: true
+  location: Table 2, HP-5MS block
+  digitised: false
+  unit: ng
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 4.5
+    lever_value: 4.5
+    value: 26.83
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.62
+    conditions:
+      ph: 4.5
+      ph_basis: initial
+      final_ph: 4.13
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5.5
+    lever_value: 5.5
+    value: 7.87
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.18
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: 5.08
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 6.5
+    lever_value: 6.5
+    value: 3.42
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.08
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: 6.05
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 7.5
+    lever_value: 7.5
+    value: 2.53
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.66
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      final_ph: 6.9
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  odorant_printed: furfural
+- id: hou2017ph-19
+  resolution: agreed
+  odorant: Furfural
+  lever_class: pH
+  lever: initial pH of the phosphate buffer (4.5-7.5)
+  focal: true
+  location: Table 2, DB-WAX block
+  digitised: false
+  unit: ng
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  duplicate_of: hou2017ph-18
+  arms:
+  - label: pH 4.5
+    lever_value: 4.5
+    value: 14.25
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.33
+    conditions:
+      ph: 4.5
+      ph_basis: initial
+      final_ph: 4.13
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5.5
+    lever_value: 5.5
+    value: 8.71
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.2
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: 5.08
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 6.5
+    lever_value: 6.5
+    value: 1.41
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.03
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: 6.05
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 7.5
+    lever_value: 7.5
+    value: 0.67
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.06
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      final_ph: 6.9
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  odorant_printed: furfural
+- id: hou2017ph-20
+  resolution: agreed
+  odorant: 2-Pentylfuran
+  lever_class: pH
+  lever: initial pH of the phosphate buffer (4.5-7.5)
+  focal: false
+  location: Table 2, DB-WAX block
+  digitised: false
+  unit: ng
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 4.5
+    lever_value: 4.5
+    value: 0.22
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.01
+    conditions:
+      ph: 4.5
+      ph_basis: initial
+      final_ph: 4.13
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5.5
+    lever_value: 5.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: 5.08
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 6.5
+    lever_value: 6.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: 6.05
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 7.5
+    lever_value: 7.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      final_ph: 6.9
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  odorant_printed: 2-pentylfuran
+- id: hou2017ph-21
+  resolution: agreed
+  odorant: Nonanal
+  lever_class: pH
+  lever: initial pH of the phosphate buffer (4.5-7.5)
+  focal: false
+  location: Table 2, HP-5MS block
+  digitised: false
+  unit: ng
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 4.5
+    lever_value: 4.5
+    value: 0.88
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.02
+    conditions:
+      ph: 4.5
+      ph_basis: initial
+      final_ph: 4.13
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5.5
+    lever_value: 5.5
+    value: 1.88
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.05
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: 5.08
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 6.5
+    lever_value: 6.5
+    value: 2.88
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.07
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: 6.05
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 7.5
+    lever_value: 7.5
+    value: 3.88
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.48
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      final_ph: 6.9
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  odorant_printed: nonanal
+- id: hou2017ph-22
+  resolution: agreed
+  odorant: Nonanal
+  lever_class: pH
+  lever: initial pH of the phosphate buffer (4.5-7.5)
+  focal: false
+  location: Table 2, DB-WAX block
+  digitised: false
+  unit: ng
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  duplicate_of: hou2017ph-21
+  arms:
+  - label: pH 4.5
+    lever_value: 4.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: initial
+      final_ph: 4.13
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5.5
+    lever_value: 5.5
+    value: 1.76
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.04
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: 5.08
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 6.5
+    lever_value: 6.5
+    value: 3.6
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.09
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: 6.05
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 7.5
+    lever_value: 7.5
+    value: 1.79
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.05
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      final_ph: 6.9
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  odorant_printed: nonanal
+- id: hou2017ph-23
+  resolution: resolved
+  odorant: Bis(2-furfuryl) disulfide
+  lever_class: pH
+  lever: initial pH of the phosphate buffer (4.5-7.5)
+  focal: true
+  location: Table 2, HP-5MS block
+  digitised: false
+  unit: ng
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 4.5
+    lever_value: 4.5
+    value: 1.06
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.06
+    conditions:
+      ph: 4.5
+      ph_basis: initial
+      final_ph: 4.13
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 5.5
+    lever_value: 5.5
+    value: 2.03
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.12
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: 5.08
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 6.5
+    lever_value: 6.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: 6.05
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH 7.5
+    lever_value: 7.5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.5
+      ph_basis: initial
+      final_ph: 6.9
+      final_ph_location: Table 1 (initial pH minus printed pH drop)
+      temp_C: 140
+      time_min: 30
+      precursors:
+        L-cysteine: 0.15 mmol in 5 mL
+        D-xylose: 0.15 mmol in 5 mL
+        glycine: 0.15 mmol in 5 mL
+      buffer: 0.2 M sodium dihydrogen phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  odorant_printed: bis(2-furfuryl) disulfide
+  note: HP-5MS RI 1764; placement pH 4.5 / 5.5 derived by the resolver from the thiol subtotals (unique solution)
