@@ -1,0 +1,345 @@
+source: whitfield2001
+pdf: data/articles/whitfield2001.pdf
+reader: resolved
+scope_note: 'Resolved 2026-11-13 (step 9, post-A6): readers a and b agree on every compared field after canonical odorant
+  names and level spellings; base file reader a. Resolver: the H2S pot is HMF + H2S. The Methods (p. 816) print ''a solution
+  containing 12.1 mg of cysteine'' for it, but the title, abstract and Table 1 heading say HMF + H2S, and every pyrazine is
+  nd in the H2S arm, which a cysteine (nitrogen) source would not give; the Methods word is read as a misprint. whitfield2001-6
+  (Table 2 class total): the H2S arm is nd with no printed limit (reader a), not the Table 1 per-compound LOD (reader b).
+  Single lever: sulfur source (cysteine vs H2S) at pH 6.5, 0.5 M phosphate, 140 C 60 min; Table 1 duplicates keyed as mean,
+  n 2 (2,3-dimethylpyrazine cysteine arm is ''2, nd'': keyed 2 with n 1, uncertain). H2S arms nd with LOD ~0.1 ug/10 mg HMF.
+  CAUTION: Methods (p. 816) print the H2S mixture as ''1 mL cysteine solution (12.1 mg) + 1 mL saturated H2S'' (HMF not named),
+  while title/abstract say HMF + H2S; precursors keyed as printed. Table 2''s pH 4.5 column is from ref 8 (whitfield1999):
+  a cross-paper pH contrast, not keyed. No declared thiol, furanone or Strecker aldehyde in Table 1.'
+contrasts:
+- id: whitfield2001-1
+  resolution: agreed
+  odorant: 2-Methylpyrazine
+  lever_class: sulfur source
+  lever: cysteine vs hydrogen sulfide (reacted with HMF)
+  focal: true
+  location: Table 1, no. 8
+  digitised: false
+  unit: ug/10 mg HMF (approximate)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: cysteine (duplicates 3, 2)
+    lever_value: cysteine
+    value: 2.5
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        HMF: 11.4 mg
+        cysteine: 12.1 mg
+        volume: 2 mL phosphate buffer
+      buffer: 0.5 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: H2S (duplicates nd, nd)
+    lever_value: hydrogen sulfide
+    value: null
+    censor: nd_with_limit
+    limit: 0.1
+    n: 2
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        HMF: 11.4 mg (Methods print 'cysteine'; see scope_note)
+        hydrogen sulfide: 1 mL of saturated solution, ~0.2 M (~6.6 mg)
+      buffer: 0.5 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  odorant_printed: methylpyrazine
+- id: whitfield2001-2
+  resolution: agreed
+  odorant: 2,5(or 2,6)-dimethylpyrazine
+  lever_class: sulfur source
+  lever: cysteine vs hydrogen sulfide (reacted with HMF)
+  focal: true
+  location: Table 1, no. 18
+  digitised: false
+  unit: ug/10 mg HMF (approximate)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: cysteine (duplicates 16, 11)
+    lever_value: cysteine
+    value: 13.5
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        HMF: 11.4 mg
+        cysteine: 12.1 mg
+        volume: 2 mL phosphate buffer
+      buffer: 0.5 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: H2S (duplicates nd, nd)
+    lever_value: hydrogen sulfide
+    value: null
+    censor: nd_with_limit
+    limit: 0.1
+    n: 2
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        HMF: 11.4 mg (Methods print 'cysteine'; see scope_note)
+        hydrogen sulfide: 1 mL of saturated solution, ~0.2 M (~6.6 mg)
+      buffer: 0.5 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  odorant_unlisted: true
+  unlisted_reason: 'co-eluting isomers printed as one peak (2,5- or 2,6-dimethylpyrazine): no single listed odorant'
+- id: whitfield2001-3
+  resolution: agreed
+  odorant: 2,3-Dimethylpyrazine
+  lever_class: sulfur source
+  lever: cysteine vs hydrogen sulfide (reacted with HMF)
+  focal: true
+  location: Table 1, no. 20
+  digitised: false
+  unit: ug/10 mg HMF (approximate)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: cysteine (duplicates 2, nd)
+    lever_value: cysteine
+    value: 2.0
+    censor: none
+    limit: null
+    n: 1
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        HMF: 11.4 mg
+        cysteine: 12.1 mg
+        volume: 2 mL phosphate buffer
+      buffer: 0.5 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: H2S (duplicates nd, nd)
+    lever_value: hydrogen sulfide
+    value: null
+    censor: nd_with_limit
+    limit: 0.1
+    n: 2
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        HMF: 11.4 mg (Methods print 'cysteine'; see scope_note)
+        hydrogen sulfide: 1 mL of saturated solution, ~0.2 M (~6.6 mg)
+      buffer: 0.5 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  odorant_printed: 2,3-dimethylpyrazine
+- id: whitfield2001-4
+  resolution: agreed
+  odorant: Trimethylpyrazine
+  lever_class: sulfur source
+  lever: cysteine vs hydrogen sulfide (reacted with HMF)
+  focal: true
+  location: Table 1, no. 31
+  digitised: false
+  unit: ug/10 mg HMF (approximate)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: cysteine (duplicates 10, 7)
+    lever_value: cysteine
+    value: 8.5
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        HMF: 11.4 mg
+        cysteine: 12.1 mg
+        volume: 2 mL phosphate buffer
+      buffer: 0.5 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: H2S (duplicates nd, nd)
+    lever_value: hydrogen sulfide
+    value: null
+    censor: nd_with_limit
+    limit: 0.1
+    n: 2
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        HMF: 11.4 mg (Methods print 'cysteine'; see scope_note)
+        hydrogen sulfide: 1 mL of saturated solution, ~0.2 M (~6.6 mg)
+      buffer: 0.5 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  odorant_printed: 2,3,5-trimethylpyrazine
+- id: whitfield2001-5
+  resolution: agreed
+  odorant: 2-Ethyl-3,6-dimethylpyrazine
+  lever_class: sulfur source
+  lever: cysteine vs hydrogen sulfide (reacted with HMF)
+  focal: true
+  location: Table 1, no. 37
+  digitised: false
+  unit: ug/10 mg HMF (approximate)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: cysteine (duplicates 3, 2)
+    lever_value: cysteine
+    value: 2.5
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        HMF: 11.4 mg
+        cysteine: 12.1 mg
+        volume: 2 mL phosphate buffer
+      buffer: 0.5 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: H2S (duplicates nd, nd)
+    lever_value: hydrogen sulfide
+    value: null
+    censor: nd_with_limit
+    limit: 0.1
+    n: 2
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        HMF: 11.4 mg (Methods print 'cysteine'; see scope_note)
+        hydrogen sulfide: 1 mL of saturated solution, ~0.2 M (~6.6 mg)
+      buffer: 0.5 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  odorant_printed: 2-ethyl-3,6-dimethylpyrazine
+- id: whitfield2001-6
+  resolution: agreed
+  odorant: Pyrazines
+  lever_class: sulfur source
+  lever: cysteine vs hydrogen sulfide (reacted with HMF)
+  focal: true
+  location: Table 2 (pH 6.5 columns)
+  digitised: false
+  unit: ug/10 mg HMF (mean of duplicates)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: cysteine pH 6.5
+    lever_value: cysteine
+    value: 36
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        HMF: 11.4 mg
+        cysteine: 12.1 mg
+        volume: 2 mL phosphate buffer
+      buffer: 0.5 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: H2S pH 6.5
+    lever_value: hydrogen sulfide
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        HMF: 11.4 mg (Methods print 'cysteine'; see scope_note)
+        hydrogen sulfide: 1 mL of saturated solution, ~0.2 M (~6.6 mg)
+      buffer: 0.5 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  odorant_printed: pyrazines (class total)

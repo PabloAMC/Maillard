@@ -1,0 +1,12 @@
+source: madruga1998
+pdf: data/articles/madruga1998.pdf
+reader: resolved
+scope_note: 'Resolved 2026-11-13 (step 9): Table 1 prints presence only (+ / nd), so no contrast has an amount; reader b keyed
+  none, reader a keyed 12 presence-only contrasts that could enter no estimate. None kept. No contrast keyed: Table 1 prints
+  only detected (+) / not detected (nd) at pH 6.0/4.5/3.0 (pyrophosphate buffer, concentration not printed; 5''-IMP + cysteine,
+  140 C 1 h; final pH only as ''decreased by less than 0.2 pH unit''), no amounts. Declared odorants and their +/nd pattern
+  (pH 6.0, 4.5, 3.0): hexanal +,+,+; 2-furfural +,+,+; benzaldehyde +,+,+; 2-methyl-3-furanthiol nd,+,+; 2-furylmethanethiol
+  nd,+,+; 2-acetylfuran nd,+,+; 5-methyl-2-furfural nd,+,+; 4-hydroxy-5-methyl-3(2H)-furanone nd,+,nd; 2-pentylfuran nd,+,nd;
+  bis(2-methyl-3-furyl) disulphide nd,+,+; 2-methyl-3-furyl 2-furylmethyl disulphide nd,+,+; bis(2-furylmethyl) disulphide
+  nd,nd,+.'
+contrasts: []

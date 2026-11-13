@@ -1,0 +1,113 @@
+# Reader B, step 9 keying (PREREG secs. 3 - 4, A1 - A6). Key what the source prints.
+source: whitfield1999
+pdf: data/articles/whitfield1999.pdf
+reader: b
+scope_note: 'Sulfur-source contrast only (HMF + cysteine vs HMF + H2S, both 0.5 M phosphate pH 4.5, 140 C 60 min). Duplicate
+  analyses printed; arm value = mean of the two (MFT: cys 15,15; H2S 16,8. bis(2-methyl-3-furyl) disulfide: cys 2,3; H2S 7,2).
+  Cysteine ~0.1 mmol vs H2S ~0.2 mmol (saturated solution): molar sulfur dose not equal. No final pH printed. Other declared
+  odorants not found; 2-acetyl-5-methylfuran and thiophenes not on the lists.'
+contrasts:
+- id: whitfield1999-1
+  odorant: 2-methyl-3-furanthiol
+  lever_class: sulfur source
+  lever: cysteine vs hydrogen sulfide reacted with HMF
+  focal: true
+  location: Table 1 (no. 6)
+  digitised: false
+  unit: ug/10 mg of HMF (approximate, vs 100 ug methyl decanoate internal standard, response factors 1)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: cysteine
+    lever_value: cysteine
+    value: 15.0
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        HMF: 11.4 mg (0.1 M, 1 mL)
+        cysteine: 12.1 mg (0.1 M, 1 mL)
+      buffer: 0.5 M phosphate pH 4.5
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: hydrogen sulfide
+    lever_value: hydrogen sulfide
+    value: 12.0
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        HMF: 11.4 mg (0.1 M, 1 mL)
+        hydrogen sulfide: ~6.6 mg (saturated ~0.2 M, 1 mL)
+      buffer: 0.5 M phosphate pH 4.5
+      matrix: buffer
+      headspace: sealed, unstated
+- id: whitfield1999-2
+  odorant: bis(2-methyl-3-furyl) disulfide
+  lever_class: sulfur source
+  lever: cysteine vs hydrogen sulfide reacted with HMF
+  focal: true
+  location: Table 1 (no. 48)
+  digitised: false
+  unit: ug/10 mg of HMF (approximate, vs 100 ug methyl decanoate internal standard, response factors 1)
+  quant_type: peak_area
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: cysteine
+    lever_value: cysteine
+    value: 2.5
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        HMF: 11.4 mg (0.1 M, 1 mL)
+        cysteine: 12.1 mg (0.1 M, 1 mL)
+      buffer: 0.5 M phosphate pH 4.5
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: hydrogen sulfide
+    lever_value: hydrogen sulfide
+    value: 4.5
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        HMF: 11.4 mg (0.1 M, 1 mL)
+        hydrogen sulfide: ~6.6 mg (saturated ~0.2 M, 1 mL)
+      buffer: 0.5 M phosphate pH 4.5
+      matrix: buffer
+      headspace: sealed, unstated

@@ -1,0 +1,119 @@
+source: whitfield1999
+pdf: data/articles/whitfield1999.pdf
+reader: resolved
+scope_note: 'Resolved 2026-11-13 (step 9, post-A6): readers a and b agree on every compared field after canonical odorant
+  names and level spellings; base file reader a. Sulfur doses differ (cysteine ~0.05 M against H2S ~0.1 M in the pot): a sulfur-source
+  contrast at unequal dose, as both readers flagged. Single lever: sulfur source (cysteine vs H2S) with HMF at pH 4.5, 0.5
+  M phosphate, 140 C 60 min. Values are approximate ug/10 mg HMF from peak area vs methyl decanoate IS (response factors 1);
+  Table 1 prints duplicate analyses, keyed as their mean with n 2 (duplicates in the label). Sulfur donors are not equimolar
+  (cysteine ~0.05 M vs H2S ~0.1 M in the pot). No final pH printed. The 2-fold/10-fold cysteine runs report only tr* (no contrast).
+  No other declared odorant in Table 1.'
+contrasts:
+- id: whitfield1999-1
+  resolution: agreed
+  odorant: 2-Methyl-3-furanthiol (MFT)
+  lever_class: sulfur source
+  lever: cysteine vs hydrogen sulfide (reacted with HMF)
+  focal: true
+  location: Table 1, no. 6
+  digitised: false
+  unit: ug/10 mg HMF (approximate)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: cysteine (duplicates 15, 15)
+    lever_value: cysteine
+    value: 15.0
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        HMF: 1 mL of 0.1 M solution (11.4 mg)
+        cysteine: 1 mL of 0.1 M solution (12.1 mg)
+      buffer: 0.5 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: H2S (duplicates 16, 8)
+    lever_value: hydrogen sulfide
+    value: 12.0
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        HMF: 1 mL of 0.1 M solution (11.4 mg)
+        hydrogen sulfide: 1 mL of saturated solution, ~0.2 M (~6.6 mg)
+      buffer: 0.5 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  odorant_printed: 2-methyl-3-furanthiol
+- id: whitfield1999-2
+  resolution: agreed
+  odorant: Bis(2-methyl-3-furyl) disulfide
+  lever_class: sulfur source
+  lever: cysteine vs hydrogen sulfide (reacted with HMF)
+  focal: true
+  location: Table 1, no. 48
+  digitised: false
+  unit: ug/10 mg HMF (approximate)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: cysteine (duplicates 2, 3)
+    lever_value: cysteine
+    value: 2.5
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        HMF: 1 mL of 0.1 M solution (11.4 mg)
+        cysteine: 1 mL of 0.1 M solution (12.1 mg)
+      buffer: 0.5 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: H2S (duplicates 7, 2)
+    lever_value: hydrogen sulfide
+    value: 4.5
+    censor: none
+    limit: null
+    n: 2
+    sd: null
+    conditions:
+      ph: 4.5
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 60
+      precursors:
+        HMF: 1 mL of 0.1 M solution (11.4 mg)
+        hydrogen sulfide: 1 mL of saturated solution, ~0.2 M (~6.6 mg)
+      buffer: 0.5 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  odorant_printed: bis(2-methyl-3-furyl) disulfide

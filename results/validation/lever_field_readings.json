@@ -21,66 +21,375 @@
     "zhou2023c"
   ],
   "coverage": {
-    "ph_contrasts": 306,
+    "ph_contrasts": 388,
     "ph_control": {
-      "adjusted_unbuffered": 153,
-      "buffered": 148,
+      "adjusted_unbuffered": 205,
+      "buffered": 178,
       "unstated": 5
     },
     "ph_control_source": {
       "check": 69,
-      "derived": 237
+      "derived": 237,
+      "keyed": 82
     },
-    "final_all_arms": 63,
-    "final_delta_ge_min": 59,
-    "categorical_pairs": 1949,
+    "final_all_arms": 109,
+    "final_delta_ge_min": 100,
+    "categorical_pairs": 1998,
     "pairs_base_mismatch": 7,
     "base_source": {
       "check": 498,
-      "derived": 2633
+      "derived": 2735
     }
   },
   "ph_cells": [
     {
-      "compound": "2-Acetylthiazole",
-      "band": "pH 6-7.5, initial or label",
+      "compound": "(E)-2-Octenal",
+      "band": "pH 4.5-6, initial or label",
       "watched": null,
-      "contrasts": 4,
+      "contrasts": 8,
       "labs": 2,
       "ph_control": {
-        "buffered": 4
+        "adjusted_unbuffered": 8
       },
       "free_text_buffer_state": {
-        "buffered": 4
+        "unbuffered": 8
       },
       "main_reading": "too few laboratories",
       "main_flags": [],
       "free_text_buffered_only": {
         "reading": "too few laboratories",
-        "labs": 2,
-        "contrasts": 4
+        "labs": 0,
+        "contrasts": 0
       },
       "R1_same_set_as_free_text": true,
       "R1": {
         "buffered": {
           "reading": "too few laboratories",
-          "labs": 2,
-          "contrasts": 4
+          "labs": 0,
+          "contrasts": 0
         },
         "unbuffered": {
           "reading": "too few laboratories",
+          "labs": 2,
+          "contrasts": 8
+        }
+      },
+      "R2": {
+        "contrasts_on_final_ph": 0,
+        "reading": null,
+        "per_contrast": []
+      },
+      "changes": []
+    },
+    {
+      "compound": "1-Octen-3-ol",
+      "band": "pH 4.5-6, initial or label",
+      "watched": "sign changes inside one laboratory",
+      "contrasts": 6,
+      "labs": 2,
+      "ph_control": {
+        "adjusted_unbuffered": 6
+      },
+      "free_text_buffer_state": {
+        "unbuffered": 6
+      },
+      "main_reading": "too few laboratories",
+      "main_flags": [],
+      "free_text_buffered_only": {
+        "reading": "too few laboratories",
+        "labs": 0,
+        "contrasts": 0
+      },
+      "R1_same_set_as_free_text": true,
+      "R1": {
+        "buffered": {
+          "reading": "too few laboratories",
           "labs": 0,
           "contrasts": 0
+        },
+        "unbuffered": {
+          "reading": "too few laboratories",
+          "labs": 2,
+          "contrasts": 6
+        }
+      },
+      "R2": {
+        "contrasts_on_final_ph": 0,
+        "reading": null,
+        "per_contrast": []
+      },
+      "changes": []
+    },
+    {
+      "compound": "2,3-Dimethylpyrazine",
+      "band": "pH 6-7.5, initial or label",
+      "watched": null,
+      "contrasts": 3,
+      "labs": 2,
+      "ph_control": {
+        "adjusted_unbuffered": 1,
+        "buffered": 2
+      },
+      "free_text_buffer_state": {
+        "unbuffered": 1,
+        "buffered": 2
+      },
+      "main_reading": "too few laboratories",
+      "main_flags": [],
+      "free_text_buffered_only": {
+        "reading": "too few laboratories",
+        "labs": 1,
+        "contrasts": 2
+      },
+      "R1_same_set_as_free_text": true,
+      "R1": {
+        "buffered": {
+          "reading": "too few laboratories",
+          "labs": 1,
+          "contrasts": 2
+        },
+        "unbuffered": {
+          "reading": "too few laboratories",
+          "labs": 1,
+          "contrasts": 1
+        }
+      },
+      "R2": {
+        "contrasts_on_final_ph": 3,
+        "reading": {
+          "reading": "too few laboratories",
+          "labs": 2,
+          "contrasts": 3
+        },
+        "per_contrast": [
+          {
+            "source": "chen2000",
+            "contrast": "chen2000-14",
+            "lab": "ho_network",
+            "initial_range": [
+              5.0,
+              8.5
+            ],
+            "final_ph": [
+              7.43,
+              8.35
+            ],
+            "y_keyed": 0.06110851998430886,
+            "y_final": 0.23247806515769676
+          },
+          {
+            "source": "xu2007",
+            "contrast": "xu2007-7",
+            "lab": "cau_gao_yanxiang",
+            "initial_range": [
+              5.6,
+              7.0
+            ],
+            "final_ph": [
+              5.5,
+              6.2,
+              6.8
+            ],
+            "y_keyed": 0.08527852539963503,
+            "y_final": 0.17055705079927003
+          },
+          {
+            "source": "xu2007",
+            "contrast": "xu2007-8",
+            "lab": "cau_gao_yanxiang",
+            "initial_range": [
+              5.6,
+              8.0
+            ],
+            "final_ph": [
+              5.5,
+              6.0,
+              6.3
+            ],
+            "y_keyed": 0.5460033524854184,
+            "y_final": 1.6502761871954292
+          }
+        ]
+      },
+      "changes": []
+    },
+    {
+      "compound": "2-Acetylthiazole",
+      "band": "pH 4.5-6, initial or label",
+      "watched": "fragile",
+      "contrasts": 3,
+      "labs": 3,
+      "ph_control": {
+        "adjusted_unbuffered": 2,
+        "buffered": 1
+      },
+      "free_text_buffer_state": {
+        "unbuffered": 2,
+        "buffered": 1
+      },
+      "main_reading": "direction unclear",
+      "main_flags": [
+        "buffered studies only: too few laboratories"
+      ],
+      "free_text_buffered_only": {
+        "reading": "too few laboratories",
+        "labs": 1,
+        "contrasts": 1
+      },
+      "R1_same_set_as_free_text": true,
+      "R1": {
+        "buffered": {
+          "reading": "too few laboratories",
+          "labs": 1,
+          "contrasts": 1
+        },
+        "unbuffered": {
+          "reading": "too few laboratories",
+          "labs": 2,
+          "contrasts": 2
         }
       },
       "R2": {
         "contrasts_on_final_ph": 2,
         "reading": {
-          "reading": "too few laboratories",
-          "labs": 2,
-          "contrasts": 4
+          "reading": "answered by the literature",
+          "labs": 3,
+          "contrasts": 3,
+          "estimate": 0.26423877572208887,
+          "ci90": [
+            0.013837332517662485,
+            0.5092607418369475
+          ]
         },
         "per_contrast": [
+          {
+            "source": "madruga1995",
+            "contrast": "madruga1995-9",
+            "lab": "reading_mottram_parker",
+            "initial_range": [
+              4.0,
+              5.6
+            ],
+            "final_ph": [
+              4.4,
+              4.9,
+              5.4,
+              5.8
+            ],
+            "y_keyed": 0.23078272878319384,
+            "y_final": 0.25420319228267063
+          },
+          {
+            "source": "yang2011",
+            "contrast": "yang2011-139",
+            "lab": "btbu_beijing",
+            "initial_range": [
+              4.7,
+              6.7
+            ],
+            "final_ph": [
+              3.85,
+              6.37
+            ],
+            "y_keyed": 0.35216201801779506,
+            "y_final": 0.27949366509348816
+          }
+        ]
+      },
+      "changes": [
+        "R1 buffered band: too few laboratories",
+        "R1 unbuffered band: too few laboratories",
+        "R2 final pH: answered by the literature"
+      ]
+    },
+    {
+      "compound": "2-Acetylthiazole",
+      "band": "pH 6-7.5, initial or label",
+      "watched": "answered",
+      "contrasts": 7,
+      "labs": 4,
+      "ph_control": {
+        "adjusted_unbuffered": 2,
+        "buffered": 5
+      },
+      "free_text_buffer_state": {
+        "unbuffered": 2,
+        "buffered": 5
+      },
+      "main_reading": "answered by the literature",
+      "main_flags": [],
+      "free_text_buffered_only": {
+        "reading": "answered by the literature",
+        "labs": 3,
+        "contrasts": 5,
+        "estimate": 0.20642308887531877,
+        "ci90": [
+          0.05473230863187814,
+          0.3583330951175226
+        ]
+      },
+      "R1_same_set_as_free_text": true,
+      "R1": {
+        "buffered": {
+          "reading": "answered by the literature",
+          "labs": 3,
+          "contrasts": 5,
+          "estimate": 0.20642308887531877,
+          "ci90": [
+            0.05473230863187814,
+            0.3583330951175226
+          ]
+        },
+        "unbuffered": {
+          "reading": "too few laboratories",
+          "labs": 1,
+          "contrasts": 2
+        }
+      },
+      "R2": {
+        "contrasts_on_final_ph": 3,
+        "reading": {
+          "reading": "answered by the literature",
+          "labs": 4,
+          "contrasts": 7,
+          "estimate": 0.3310568246444313,
+          "ci90": [
+            0.14459840825128198,
+            0.5191393586578875
+          ]
+        },
+        "per_contrast": [
+          {
+            "source": "chen2000",
+            "contrast": "chen2000-34",
+            "lab": "ho_network",
+            "initial_range": [
+              5.0,
+              8.5
+            ],
+            "final_ph": [
+              7.43,
+              8.35
+            ],
+            "y_keyed": 0.12116935064957882,
+            "y_final": 0.46097035573209333
+          },
+          {
+            "source": "kang2026",
+            "contrast": "kang2026-11",
+            "lab": "ho_network",
+            "initial_range": [
+              5.5,
+              8.0
+            ],
+            "final_ph": [
+              5.1,
+              4.9,
+              4.7
+            ],
+            "y_keyed": 0.4938422244582605,
+            "y_final": null
+          },
           {
             "source": "xu2007",
             "contrast": "xu2007-1",
@@ -115,90 +424,37 @@
           }
         ]
       },
-      "changes": []
-    },
-    {
-      "compound": "2-Furfurylthiol (FFT)",
-      "band": "pH 4.5-6, initial or label",
-      "watched": null,
-      "contrasts": 5,
-      "labs": 4,
-      "ph_control": {
-        "buffered": 4,
-        "adjusted_unbuffered": 1
-      },
-      "free_text_buffer_state": {
-        "buffered": 4,
-        "unbuffered": 1
-      },
-      "main_reading": "direction unclear",
-      "main_flags": [],
-      "free_text_buffered_only": {
-        "reading": "direction unclear",
-        "labs": 3,
-        "contrasts": 4,
-        "estimate": -0.1949957021790182,
-        "ci90": [
-          -0.5992146778461528,
-          0.2052798201648614
-        ]
-      },
-      "R1_same_set_as_free_text": true,
-      "R1": {
-        "buffered": {
-          "reading": "direction unclear",
-          "labs": 3,
-          "contrasts": 4,
-          "estimate": -0.1949957021790182,
-          "ci90": [
-            -0.5992146778461528,
-            0.2052798201648614
-          ]
-        },
-        "unbuffered": {
-          "reading": "too few laboratories",
-          "labs": 1,
-          "contrasts": 1
-        }
-      },
-      "R2": {
-        "contrasts_on_final_ph": 0,
-        "reading": null,
-        "per_contrast": []
-      },
       "changes": [
         "R1 unbuffered band: too few laboratories"
       ]
     },
     {
-      "compound": "2-Furfurylthiol (FFT)",
+      "compound": "2-Ethylpyrazine",
       "band": "pH 6-7.5, initial or label",
-      "watched": "answered, fragile",
-      "contrasts": 5,
-      "labs": 3,
+      "watched": null,
+      "contrasts": 3,
+      "labs": 2,
       "ph_control": {
-        "buffered": 4,
-        "adjusted_unbuffered": 1
+        "adjusted_unbuffered": 1,
+        "buffered": 2
       },
       "free_text_buffer_state": {
-        "buffered": 4,
-        "unbuffered": 1
+        "unbuffered": 1,
+        "buffered": 2
       },
-      "main_reading": "answered by the literature",
-      "main_flags": [
-        "buffered studies only: too few laboratories"
-      ],
+      "main_reading": "too few laboratories",
+      "main_flags": [],
       "free_text_buffered_only": {
         "reading": "too few laboratories",
-        "labs": 2,
-        "contrasts": 4
+        "labs": 1,
+        "contrasts": 2
       },
       "R1_same_set_as_free_text": true,
       "R1": {
         "buffered": {
           "reading": "too few laboratories",
-          "labs": 2,
-          "contrasts": 4
+          "labs": 1,
+          "contrasts": 2
         },
         "unbuffered": {
           "reading": "too few laboratories",
@@ -209,16 +465,504 @@
       "R2": {
         "contrasts_on_final_ph": 3,
         "reading": {
-          "reading": "answered by the literature",
-          "labs": 3,
-          "contrasts": 5,
-          "estimate": -1.0783748707543441,
+          "reading": "too few laboratories",
+          "labs": 2,
+          "contrasts": 3
+        },
+        "per_contrast": [
+          {
+            "source": "chen2000",
+            "contrast": "chen2000-10",
+            "lab": "ho_network",
+            "initial_range": [
+              5.0,
+              8.5
+            ],
+            "final_ph": [
+              7.43,
+              8.35
+            ],
+            "y_keyed": 0.03199250269826637,
+            "y_final": 0.12171060809123077
+          },
+          {
+            "source": "xu2007",
+            "contrast": "xu2007-5",
+            "lab": "cau_gao_yanxiang",
+            "initial_range": [
+              5.6,
+              8.0
+            ],
+            "final_ph": [
+              5.5,
+              6.2,
+              6.8
+            ],
+            "y_keyed": 0.14110575202125306,
+            "y_final": 0.2681474747371028
+          },
+          {
+            "source": "xu2007",
+            "contrast": "xu2007-6",
+            "lab": "cau_gao_yanxiang",
+            "initial_range": [
+              5.6,
+              8.0
+            ],
+            "final_ph": [
+              5.5,
+              6.0,
+              6.3
+            ],
+            "y_keyed": 0.5711887185402564,
+            "y_final": 1.7245463963960934
+          }
+        ]
+      },
+      "changes": []
+    },
+    {
+      "compound": "2-Furanmethanol",
+      "band": "pH 4.5-6, initial or label",
+      "watched": null,
+      "contrasts": 4,
+      "labs": 2,
+      "ph_control": {
+        "adjusted_unbuffered": 1,
+        "buffered": 3
+      },
+      "free_text_buffer_state": {
+        "unbuffered": 1,
+        "buffered": 3
+      },
+      "main_reading": "too few laboratories",
+      "main_flags": [],
+      "free_text_buffered_only": {
+        "reading": "too few laboratories",
+        "labs": 1,
+        "contrasts": 3
+      },
+      "R1_same_set_as_free_text": true,
+      "R1": {
+        "buffered": {
+          "reading": "too few laboratories",
+          "labs": 1,
+          "contrasts": 3
+        },
+        "unbuffered": {
+          "reading": "too few laboratories",
+          "labs": 1,
+          "contrasts": 1
+        }
+      },
+      "R2": {
+        "contrasts_on_final_ph": 3,
+        "reading": {
+          "reading": "too few laboratories",
+          "labs": 2,
+          "contrasts": 4
+        },
+        "per_contrast": [
+          {
+            "source": "yang2011",
+            "contrast": "yang2011-163",
+            "lab": "btbu_beijing",
+            "initial_range": [
+              4.7,
+              6.7
+            ],
+            "final_ph": [
+              3.85,
+              6.37
+            ],
+            "y_keyed": 0.32646042260351243,
+            "y_final": 0.2590955734948511
+          },
+          {
+            "source": "yang2011",
+            "contrast": "yang2011-164",
+            "lab": "btbu_beijing",
+            "initial_range": [
+              4.7,
+              6.7
+            ],
+            "final_ph": [
+              3.82,
+              6.38
+            ],
+            "y_keyed": -0.10180288784273422,
+            "y_final": -0.0795335061271361
+          },
+          {
+            "source": "yang2011",
+            "contrast": "yang2011-168",
+            "lab": "btbu_beijing",
+            "initial_range": [
+              4.7,
+              6.7
+            ],
+            "final_ph": [
+              3.72,
+              6.15
+            ],
+            "y_keyed": 0.01579493059185122,
+            "y_final": 0.012999942873951622
+          }
+        ]
+      },
+      "changes": []
+    },
+    {
+      "compound": "2-Furanmethanol",
+      "band": "pH 6-7.5, initial or label",
+      "watched": null,
+      "contrasts": 3,
+      "labs": 2,
+      "ph_control": {
+        "adjusted_unbuffered": 1,
+        "buffered": 2
+      },
+      "free_text_buffer_state": {
+        "unbuffered": 1,
+        "buffered": 2
+      },
+      "main_reading": "too few laboratories",
+      "main_flags": [],
+      "free_text_buffered_only": {
+        "reading": "too few laboratories",
+        "labs": 1,
+        "contrasts": 2
+      },
+      "R1_same_set_as_free_text": true,
+      "R1": {
+        "buffered": {
+          "reading": "too few laboratories",
+          "labs": 1,
+          "contrasts": 2
+        },
+        "unbuffered": {
+          "reading": "too few laboratories",
+          "labs": 1,
+          "contrasts": 1
+        }
+      },
+      "R2": {
+        "contrasts_on_final_ph": 3,
+        "reading": {
+          "reading": "too few laboratories",
+          "labs": 2,
+          "contrasts": 3
+        },
+        "per_contrast": [
+          {
+            "source": "chen2000",
+            "contrast": "chen2000-49",
+            "lab": "ho_network",
+            "initial_range": [
+              5.0,
+              8.5
+            ],
+            "final_ph": [
+              3.86,
+              6.05
+            ],
+            "y_keyed": 0.0,
+            "y_final": 0.0
+          },
+          {
+            "source": "xu2007",
+            "contrast": "xu2007-13",
+            "lab": "cau_gao_yanxiang",
+            "initial_range": [
+              5.6,
+              8.0
+            ],
+            "final_ph": [
+              5.5,
+              6.2,
+              6.8
+            ],
+            "y_keyed": -0.6045045362739119,
+            "y_final": -1.1449977179208821
+          },
+          {
+            "source": "xu2007",
+            "contrast": "xu2007-14",
+            "lab": "cau_gao_yanxiang",
+            "initial_range": [
+              5.6,
+              8.0
+            ],
+            "final_ph": [
+              5.5,
+              6.0,
+              6.3
+            ],
+            "y_keyed": 0.19195149046705037,
+            "y_final": 0.5795524716798774
+          }
+        ]
+      },
+      "changes": []
+    },
+    {
+      "compound": "2-Furfurylthiol (FFT)",
+      "band": "pH 4.5-6, initial or label",
+      "watched": "conflict between laboratories",
+      "contrasts": 12,
+      "labs": 6,
+      "ph_control": {
+        "buffered": 10,
+        "adjusted_unbuffered": 2
+      },
+      "free_text_buffer_state": {
+        "buffered": 10,
+        "unbuffered": 2
+      },
+      "main_reading": "direction unclear",
+      "main_flags": [],
+      "free_text_buffered_only": {
+        "reading": "direction unclear",
+        "labs": 4,
+        "contrasts": 10,
+        "estimate": -0.2966974468492754,
+        "ci90": [
+          -0.5524722896651885,
+          -0.012833066325949535
+        ]
+      },
+      "R1_same_set_as_free_text": true,
+      "R1": {
+        "buffered": {
+          "reading": "direction unclear",
+          "labs": 4,
+          "contrasts": 10,
+          "estimate": -0.2966974468492754,
           "ci90": [
-            -1.702208773395001,
-            -0.40296159598422776
+            -0.5524722896651885,
+            -0.012833066325949535
+          ]
+        },
+        "unbuffered": {
+          "reading": "too few laboratories",
+          "labs": 2,
+          "contrasts": 2
+        }
+      },
+      "R2": {
+        "contrasts_on_final_ph": 7,
+        "reading": {
+          "reading": "direction unclear",
+          "labs": 6,
+          "contrasts": 12,
+          "estimate": -0.14762526315462413,
+          "ci90": [
+            -0.3647055574257283,
+            0.11769233102815899
           ]
         },
         "per_contrast": [
+          {
+            "source": "madruga1995",
+            "contrast": "madruga1995-2",
+            "lab": "reading_mottram_parker",
+            "initial_range": [
+              4.5,
+              5.6
+            ],
+            "final_ph": [
+              4.4,
+              4.9,
+              5.4,
+              5.8
+            ],
+            "y_keyed": 0.39939803906329907,
+            "y_final": 0.49861441719101474
+          },
+          {
+            "source": "yang2011",
+            "contrast": "yang2011-59",
+            "lab": "btbu_beijing",
+            "initial_range": [
+              4.7,
+              6.7
+            ],
+            "final_ph": [
+              4.09,
+              6.42
+            ],
+            "y_keyed": -0.7058232787834727,
+            "y_final": -0.6058568916596333
+          },
+          {
+            "source": "yang2011",
+            "contrast": "yang2011-60",
+            "lab": "btbu_beijing",
+            "initial_range": [
+              4.7,
+              6.7
+            ],
+            "final_ph": [
+              3.7,
+              6.38
+            ],
+            "y_keyed": -0.2332473674400253,
+            "y_final": -0.17406519958210848
+          },
+          {
+            "source": "yang2011",
+            "contrast": "yang2011-67",
+            "lab": "btbu_beijing",
+            "initial_range": [
+              4.7,
+              6.7
+            ],
+            "final_ph": [
+              3.85,
+              6.37
+            ],
+            "y_keyed": -0.36869926584712676,
+            "y_final": -0.29261846495803706
+          },
+          {
+            "source": "yang2011",
+            "contrast": "yang2011-68",
+            "lab": "btbu_beijing",
+            "initial_range": [
+              4.7,
+              6.7
+            ],
+            "final_ph": [
+              3.82,
+              6.38
+            ],
+            "y_keyed": 0.08288972219208554,
+            "y_final": 0.06475759546256682
+          },
+          {
+            "source": "yang2011",
+            "contrast": "yang2011-71",
+            "lab": "btbu_beijing",
+            "initial_range": [
+              4.7,
+              6.7
+            ],
+            "final_ph": [
+              3.51,
+              6.11
+            ],
+            "y_keyed": -0.49763099734313376,
+            "y_final": -0.3827930748793337
+          },
+          {
+            "source": "yang2011",
+            "contrast": "yang2011-72",
+            "lab": "btbu_beijing",
+            "initial_range": [
+              4.7,
+              6.7
+            ],
+            "final_ph": [
+              3.72,
+              6.15
+            ],
+            "y_keyed": -0.7321485756786337,
+            "y_final": -0.6025914203116325
+          }
+        ]
+      },
+      "changes": [
+        "R1 unbuffered band: too few laboratories"
+      ]
+    },
+    {
+      "compound": "2-Furfurylthiol (FFT)",
+      "band": "pH 6-7.5, initial or label",
+      "watched": "answered",
+      "contrasts": 8,
+      "labs": 4,
+      "ph_control": {
+        "adjusted_unbuffered": 3,
+        "buffered": 5
+      },
+      "free_text_buffer_state": {
+        "unbuffered": 3,
+        "buffered": 5
+      },
+      "main_reading": "answered by the literature",
+      "main_flags": [],
+      "free_text_buffered_only": {
+        "reading": "answered by the literature",
+        "labs": 3,
+        "contrasts": 5,
+        "estimate": -0.7667253612598699,
+        "ci90": [
+          -1.2853996294923857,
+          -0.21450394515543356
+        ]
+      },
+      "R1_same_set_as_free_text": true,
+      "R1": {
+        "buffered": {
+          "reading": "answered by the literature",
+          "labs": 3,
+          "contrasts": 5,
+          "estimate": -0.7667253612598699,
+          "ci90": [
+            -1.2853996294923857,
+            -0.21450394515543356
+          ]
+        },
+        "unbuffered": {
+          "reading": "too few laboratories",
+          "labs": 1,
+          "contrasts": 3
+        }
+      },
+      "R2": {
+        "contrasts_on_final_ph": 4,
+        "reading": {
+          "reading": "answered by the literature",
+          "labs": 4,
+          "contrasts": 8,
+          "estimate": -0.8179608421452268,
+          "ci90": [
+            -1.3856761926081136,
+            -0.23902795037219368
+          ]
+        },
+        "per_contrast": [
+          {
+            "source": "chen2000",
+            "contrast": "chen2000-37",
+            "lab": "ho_network",
+            "initial_range": [
+              5.0,
+              8.5
+            ],
+            "final_ph": [
+              3.86,
+              6.05
+            ],
+            "y_keyed": -0.24225971924231005,
+            "y_final": -0.38717306728223067
+          },
+          {
+            "source": "kang2026",
+            "contrast": "kang2026-10",
+            "lab": "ho_network",
+            "initial_range": [
+              5.5,
+              8.0
+            ],
+            "final_ph": [
+              5.1,
+              4.9,
+              4.7
+            ],
+            "y_keyed": -0.11285562995585201,
+            "y_final": null
+          },
           {
             "source": "xu2007",
             "contrast": "xu2007-3",
@@ -270,7 +1014,6 @@
         ]
       },
       "changes": [
-        "R1 buffered band: too few laboratories",
         "R1 unbuffered band: too few laboratories"
       ]
     },
@@ -278,16 +1021,145 @@
       "compound": "2-Methyl-3-furanthiol (MFT)",
       "band": "pH 4.5-6, initial or label",
       "watched": "sign changes inside one laboratory",
-      "contrasts": 3,
-      "labs": 2,
+      "contrasts": 7,
+      "labs": 4,
       "ph_control": {
+        "buffered": 6,
+        "adjusted_unbuffered": 1
+      },
+      "free_text_buffer_state": {
+        "buffered": 6,
+        "unbuffered": 1
+      },
+      "main_reading": "direction unclear",
+      "main_flags": [],
+      "free_text_buffered_only": {
+        "reading": "direction unclear",
+        "labs": 3,
+        "contrasts": 6,
+        "estimate": -0.05434201680954128,
+        "ci90": [
+          -0.5882343933908504,
+          0.4950933453728656
+        ]
+      },
+      "R1_same_set_as_free_text": true,
+      "R1": {
+        "buffered": {
+          "reading": "direction unclear",
+          "labs": 3,
+          "contrasts": 6,
+          "estimate": -0.05434201680954128,
+          "ci90": [
+            -0.5882343933908504,
+            0.4950933453728656
+          ]
+        },
+        "unbuffered": {
+          "reading": "too few laboratories",
+          "labs": 1,
+          "contrasts": 1
+        }
+      },
+      "R2": {
+        "contrasts_on_final_ph": 4,
+        "reading": {
+          "reading": "direction unclear",
+          "labs": 4,
+          "contrasts": 7,
+          "estimate": -0.14026749028783272,
+          "ci90": [
+            -0.5887456182764513,
+            0.30560675207302473
+          ]
+        },
+        "per_contrast": [
+          {
+            "source": "madruga1995",
+            "contrast": "madruga1995-1",
+            "lab": "reading_mottram_parker",
+            "initial_range": [
+              4.0,
+              5.0
+            ],
+            "final_ph": [
+              4.4,
+              4.9,
+              5.4,
+              5.8
+            ],
+            "y_keyed": -0.6491840230750764,
+            "y_final": -0.6491840230750764
+          },
+          {
+            "source": "yang2011",
+            "contrast": "yang2011-11",
+            "lab": "btbu_beijing",
+            "initial_range": [
+              4.7,
+              6.7
+            ],
+            "final_ph": [
+              4.09,
+              6.42
+            ],
+            "y_keyed": -1.017381053129606,
+            "y_final": -0.8732884576219794
+          },
+          {
+            "source": "yang2011",
+            "contrast": "yang2011-19",
+            "lab": "btbu_beijing",
+            "initial_range": [
+              4.7,
+              6.7
+            ],
+            "final_ph": [
+              3.85,
+              6.37
+            ],
+            "y_keyed": -0.1597754712405295,
+            "y_final": -0.12680592955597578
+          },
+          {
+            "source": "yang2011",
+            "contrast": "yang2011-24",
+            "lab": "btbu_beijing",
+            "initial_range": [
+              4.7,
+              6.7
+            ],
+            "final_ph": [
+              3.72,
+              6.15
+            ],
+            "y_keyed": 0.5713337517843657,
+            "y_final": 0.47023354056326394
+          }
+        ]
+      },
+      "changes": [
+        "R1 unbuffered band: too few laboratories"
+      ]
+    },
+    {
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "band": "pH 6-7.5, initial or label",
+      "watched": "fragile",
+      "contrasts": 5,
+      "labs": 3,
+      "ph_control": {
+        "adjusted_unbuffered": 2,
         "buffered": 3
       },
       "free_text_buffer_state": {
+        "unbuffered": 2,
         "buffered": 3
       },
-      "main_reading": "too few laboratories",
-      "main_flags": [],
+      "main_reading": "direction unclear",
+      "main_flags": [
+        "buffered studies only: too few laboratories"
+      ],
       "free_text_buffered_only": {
         "reading": "too few laboratories",
         "labs": 2,
@@ -302,59 +1174,39 @@
         },
         "unbuffered": {
           "reading": "too few laboratories",
-          "labs": 0,
-          "contrasts": 0
-        }
-      },
-      "R2": {
-        "contrasts_on_final_ph": 0,
-        "reading": null,
-        "per_contrast": []
-      },
-      "changes": []
-    },
-    {
-      "compound": "2-Methyl-3-furanthiol (MFT)",
-      "band": "pH 6-7.5, initial or label",
-      "watched": "conflict between laboratories",
-      "contrasts": 3,
-      "labs": 2,
-      "ph_control": {
-        "buffered": 2,
-        "adjusted_unbuffered": 1
-      },
-      "free_text_buffer_state": {
-        "buffered": 2,
-        "unbuffered": 1
-      },
-      "main_reading": "too few laboratories",
-      "main_flags": [],
-      "free_text_buffered_only": {
-        "reading": "too few laboratories",
-        "labs": 1,
-        "contrasts": 2
-      },
-      "R1_same_set_as_free_text": true,
-      "R1": {
-        "buffered": {
-          "reading": "too few laboratories",
           "labs": 1,
           "contrasts": 2
-        },
-        "unbuffered": {
-          "reading": "too few laboratories",
-          "labs": 1,
-          "contrasts": 1
         }
       },
       "R2": {
         "contrasts_on_final_ph": 2,
         "reading": {
-          "reading": "too few laboratories",
-          "labs": 2,
-          "contrasts": 3
+          "reading": "direction unclear",
+          "labs": 3,
+          "contrasts": 5,
+          "estimate": -0.5056219560149267,
+          "ci90": [
+            -1.2080381242659344,
+            0.20991350168878484
+          ]
         },
         "per_contrast": [
+          {
+            "source": "kang2026",
+            "contrast": "kang2026-9",
+            "lab": "ho_network",
+            "initial_range": [
+              5.5,
+              8.0
+            ],
+            "final_ph": [
+              5.1,
+              4.9,
+              4.7
+            ],
+            "y_keyed": -0.09467584433803954,
+            "y_final": null
+          },
           {
             "source": "xu2007",
             "contrast": "xu2007-1",
@@ -405,22 +1257,125 @@
           }
         ]
       },
+      "changes": [
+        "R1 buffered band: too few laboratories",
+        "R1 unbuffered band: too few laboratories"
+      ]
+    },
+    {
+      "compound": "2-Methylbutanal",
+      "band": "pH 4.5-6, initial or label",
+      "watched": null,
+      "contrasts": 8,
+      "labs": 2,
+      "ph_control": {
+        "adjusted_unbuffered": 8
+      },
+      "free_text_buffer_state": {
+        "unbuffered": 8
+      },
+      "main_reading": "too few laboratories",
+      "main_flags": [],
+      "free_text_buffered_only": {
+        "reading": "too few laboratories",
+        "labs": 0,
+        "contrasts": 0
+      },
+      "R1_same_set_as_free_text": true,
+      "R1": {
+        "buffered": {
+          "reading": "too few laboratories",
+          "labs": 0,
+          "contrasts": 0
+        },
+        "unbuffered": {
+          "reading": "too few laboratories",
+          "labs": 2,
+          "contrasts": 8
+        }
+      },
+      "R2": {
+        "contrasts_on_final_ph": 0,
+        "reading": null,
+        "per_contrast": []
+      },
+      "changes": []
+    },
+    {
+      "compound": "2-Methylpyrazine",
+      "band": "pH 4.5-6, initial or label",
+      "watched": null,
+      "contrasts": 2,
+      "labs": 2,
+      "ph_control": {
+        "adjusted_unbuffered": 2
+      },
+      "free_text_buffer_state": {
+        "unbuffered": 2
+      },
+      "main_reading": "too few laboratories",
+      "main_flags": [],
+      "free_text_buffered_only": {
+        "reading": "too few laboratories",
+        "labs": 0,
+        "contrasts": 0
+      },
+      "R1_same_set_as_free_text": true,
+      "R1": {
+        "buffered": {
+          "reading": "too few laboratories",
+          "labs": 0,
+          "contrasts": 0
+        },
+        "unbuffered": {
+          "reading": "too few laboratories",
+          "labs": 2,
+          "contrasts": 2
+        }
+      },
+      "R2": {
+        "contrasts_on_final_ph": 0,
+        "reading": null,
+        "per_contrast": [
+          {
+            "source": "madruga1995",
+            "contrast": "madruga1995-6",
+            "lab": "reading_mottram_parker",
+            "initial_range": [
+              5.0,
+              5.6
+            ],
+            "final_ph": [
+              4.4,
+              4.9,
+              5.4,
+              5.8
+            ],
+            "y_keyed": -0.34712657071180447,
+            "y_final": null
+          }
+        ]
+      },
       "changes": []
     },
     {
       "compound": "2-Methylpyrazine",
       "band": "pH 6-7.5, initial or label",
-      "watched": null,
-      "contrasts": 2,
-      "labs": 2,
+      "watched": "fragile",
+      "contrasts": 3,
+      "labs": 3,
       "ph_control": {
+        "adjusted_unbuffered": 1,
         "buffered": 2
       },
       "free_text_buffer_state": {
+        "unbuffered": 1,
         "buffered": 2
       },
-      "main_reading": "too few laboratories",
-      "main_flags": [],
+      "main_reading": "direction unclear",
+      "main_flags": [
+        "buffered studies only: too few laboratories"
+      ],
       "free_text_buffered_only": {
         "reading": "too few laboratories",
         "labs": 2,
@@ -435,18 +1390,38 @@
         },
         "unbuffered": {
           "reading": "too few laboratories",
-          "labs": 0,
-          "contrasts": 0
+          "labs": 1,
+          "contrasts": 1
         }
       },
       "R2": {
-        "contrasts_on_final_ph": 1,
+        "contrasts_on_final_ph": 2,
         "reading": {
-          "reading": "too few laboratories",
-          "labs": 2,
-          "contrasts": 2
+          "reading": "direction unclear",
+          "labs": 3,
+          "contrasts": 3,
+          "estimate": 0.3692745341393854,
+          "ci90": [
+            -0.13101535707858794,
+            0.8559510790575723
+          ]
         },
         "per_contrast": [
+          {
+            "source": "chen2000",
+            "contrast": "chen2000-6",
+            "lab": "ho_network",
+            "initial_range": [
+              5.0,
+              8.5
+            ],
+            "final_ph": [
+              7.43,
+              8.35
+            ],
+            "y_keyed": 0.02210185046639355,
+            "y_final": 0.08408312677432331
+          },
           {
             "source": "xu2007",
             "contrast": "xu2007-3",
@@ -465,21 +1440,143 @@
           }
         ]
       },
-      "changes": []
+      "changes": [
+        "R1 buffered band: too few laboratories",
+        "R1 unbuffered band: too few laboratories"
+      ]
     },
     {
       "compound": "2-Methylpyrazine",
       "band": "pH >7.5, initial or label",
-      "watched": null,
-      "contrasts": 3,
-      "labs": 2,
+      "watched": "fragile",
+      "contrasts": 4,
+      "labs": 3,
       "ph_control": {
-        "buffered": 1,
+        "buffered": 2,
         "adjusted_unbuffered": 2
       },
       "free_text_buffer_state": {
-        "buffered": 1,
+        "buffered": 2,
         "unbuffered": 2
+      },
+      "main_reading": "direction unclear",
+      "main_flags": [
+        "buffered studies only: too few laboratories"
+      ],
+      "free_text_buffered_only": {
+        "reading": "too few laboratories",
+        "labs": 2,
+        "contrasts": 2
+      },
+      "R1_same_set_as_free_text": true,
+      "R1": {
+        "buffered": {
+          "reading": "too few laboratories",
+          "labs": 2,
+          "contrasts": 2
+        },
+        "unbuffered": {
+          "reading": "too few laboratories",
+          "labs": 1,
+          "contrasts": 2
+        }
+      },
+      "R2": {
+        "contrasts_on_final_ph": 0,
+        "reading": null,
+        "per_contrast": []
+      },
+      "changes": [
+        "R1 buffered band: too few laboratories",
+        "R1 unbuffered band: too few laboratories"
+      ]
+    },
+    {
+      "compound": "2-Pentylfuran",
+      "band": "pH 4.5-6, initial or label",
+      "watched": "conflict between laboratories",
+      "contrasts": 17,
+      "labs": 3,
+      "ph_control": {
+        "adjusted_unbuffered": 17
+      },
+      "free_text_buffer_state": {
+        "unbuffered": 17
+      },
+      "main_reading": "direction unclear",
+      "main_flags": [],
+      "free_text_buffered_only": {
+        "reading": "too few laboratories",
+        "labs": 0,
+        "contrasts": 0
+      },
+      "R1_same_set_as_free_text": true,
+      "R1": {
+        "buffered": {
+          "reading": "too few laboratories",
+          "labs": 0,
+          "contrasts": 0
+        },
+        "unbuffered": {
+          "reading": "direction unclear",
+          "labs": 3,
+          "contrasts": 17,
+          "estimate": 0.08755441056080629,
+          "ci90": [
+            -0.3869662135337504,
+            0.5616904962116548
+          ]
+        }
+      },
+      "R2": {
+        "contrasts_on_final_ph": 1,
+        "reading": {
+          "reading": "direction unclear",
+          "labs": 3,
+          "contrasts": 17,
+          "estimate": 0.08395387080905108,
+          "ci90": [
+            -0.39409546928289063,
+            0.5615288683710425
+          ]
+        },
+        "per_contrast": [
+          {
+            "source": "madruga1995",
+            "contrast": "madruga1995-10",
+            "lab": "reading_mottram_parker",
+            "initial_range": [
+              4.0,
+              5.6
+            ],
+            "final_ph": [
+              4.4,
+              4.9,
+              5.4,
+              5.8
+            ],
+            "y_keyed": -0.28213497951487765,
+            "y_final": -0.2932319968173927
+          }
+        ]
+      },
+      "changes": [
+        "R1 buffered band: too few laboratories"
+      ]
+    },
+    {
+      "compound": "3-Methylbutanal",
+      "band": "pH 4.5-6, initial or label",
+      "watched": null,
+      "contrasts": 2,
+      "labs": 2,
+      "ph_control": {
+        "buffered": 1,
+        "adjusted_unbuffered": 1
+      },
+      "free_text_buffer_state": {
+        "buffered": 1,
+        "unbuffered": 1
       },
       "main_reading": "too few laboratories",
       "main_flags": [],
@@ -498,7 +1595,7 @@
         "unbuffered": {
           "reading": "too few laboratories",
           "labs": 1,
-          "contrasts": 2
+          "contrasts": 1
         }
       },
       "R2": {
@@ -509,32 +1606,80 @@
       "changes": []
     },
     {
-      "compound": "Bis(2-methyl-3-furyl) disulfide",
-      "band": "pH 6-7.5, initial or label",
-      "watched": "conflict between laboratories",
-      "contrasts": 3,
-      "labs": 2,
+      "compound": "Benzaldehyde",
+      "band": "pH 4.5-6, initial or label",
+      "watched": "sign changes inside one laboratory",
+      "contrasts": 17,
+      "labs": 3,
       "ph_control": {
-        "buffered": 2,
-        "adjusted_unbuffered": 1
+        "adjusted_unbuffered": 17
       },
       "free_text_buffer_state": {
-        "buffered": 2,
-        "unbuffered": 1
+        "unbuffered": 17
       },
-      "main_reading": "too few laboratories",
+      "main_reading": "direction unclear",
       "main_flags": [],
       "free_text_buffered_only": {
         "reading": "too few laboratories",
-        "labs": 1,
-        "contrasts": 2
+        "labs": 0,
+        "contrasts": 0
       },
       "R1_same_set_as_free_text": true,
       "R1": {
         "buffered": {
           "reading": "too few laboratories",
-          "labs": 1,
-          "contrasts": 2
+          "labs": 0,
+          "contrasts": 0
+        },
+        "unbuffered": {
+          "reading": "direction unclear",
+          "labs": 3,
+          "contrasts": 17,
+          "estimate": -0.021900647998991402,
+          "ci90": [
+            -0.31978734217763916,
+            0.2211767644474996
+          ]
+        }
+      },
+      "R2": {
+        "contrasts_on_final_ph": 0,
+        "reading": null,
+        "per_contrast": []
+      },
+      "changes": [
+        "R1 buffered band: too few laboratories"
+      ]
+    },
+    {
+      "compound": "Bis(2-methyl-3-furyl) disulfide",
+      "band": "pH 6-7.5, initial or label",
+      "watched": "fragile",
+      "contrasts": 4,
+      "labs": 3,
+      "ph_control": {
+        "buffered": 3,
+        "adjusted_unbuffered": 1
+      },
+      "free_text_buffer_state": {
+        "buffered": 3,
+        "unbuffered": 1
+      },
+      "main_reading": "direction unclear",
+      "main_flags": [
+        "buffered studies only: too few laboratories"
+      ],
+      "free_text_buffered_only": {
+        "reading": "too few laboratories",
+        "labs": 2,
+        "contrasts": 3
+      },
+      "R1_same_set_as_free_text": true,
+      "R1": {
+        "buffered": {
+          "reading": "too few laboratories",
+          "labs": 2,
+          "contrasts": 3
         },
         "unbuffered": {
           "reading": "too few laboratories",
@@ -545,9 +1690,14 @@
       "R2": {
         "contrasts_on_final_ph": 2,
         "reading": {
-          "reading": "too few laboratories",
-          "labs": 2,
-          "contrasts": 3
+          "reading": "direction unclear",
+          "labs": 3,
+          "contrasts": 4,
+          "estimate": -0.2022106601882119,
+          "ci90": [
+            -0.9055720269260898,
+            0.5210477870712511
+          ]
         },
         "per_contrast": [
           {
@@ -600,7 +1750,10 @@
           }
         ]
       },
-      "changes": []
+      "changes": [
+        "R1 buffered band: too few laboratories",
+        "R1 unbuffered band: too few laboratories"
+      ]
     },
     {
       "compound": "DMHF",
@@ -644,53 +1797,84 @@
     {
       "compound": "Furfural",
       "band": "pH 4.5-6, initial or label",
-      "watched": "answered, fragile",
-      "contrasts": 17,
-      "labs": 3,
+      "watched": "fragile",
+      "contrasts": 25,
+      "labs": 5,
       "ph_control": {
-        "buffered": 2,
-        "adjusted_unbuffered": 15
+        "buffered": 8,
+        "adjusted_unbuffered": 17
       },
       "free_text_buffer_state": {
-        "buffered": 2,
-        "unbuffered": 15
+        "buffered": 8,
+        "unbuffered": 17
       },
-      "main_reading": "answered by the literature",
+      "main_reading": "direction unclear",
       "main_flags": [
-        "without censored arms: too few laboratories",
-        "buffered studies only: too few laboratories"
+        "buffered studies only: answered by the literature"
       ],
       "free_text_buffered_only": {
-        "reading": "too few laboratories",
-        "labs": 2,
-        "contrasts": 2
+        "reading": "answered by the literature",
+        "labs": 3,
+        "contrasts": 8,
+        "estimate": -1.0193313660288592,
+        "ci90": [
+          -1.9776738978071635,
+          -0.08489225783679187
+        ]
       },
       "R1_same_set_as_free_text": true,
       "R1": {
         "buffered": {
-          "reading": "too few laboratories",
-          "labs": 2,
-          "contrasts": 2
+          "reading": "answered by the literature",
+          "labs": 3,
+          "contrasts": 8,
+          "estimate": -1.0193313660288592,
+          "ci90": [
+            -1.9776738978071635,
+            -0.08489225783679187
+          ]
         },
         "unbuffered": {
-          "reading": "too few laboratories",
-          "labs": 1,
-          "contrasts": 15
+          "reading": "direction unclear",
+          "labs": 3,
+          "contrasts": 17,
+          "estimate": -0.427099465516386,
+          "ci90": [
+            -0.8863527540260926,
+            0.08990328828246552
+          ]
         }
       },
       "R2": {
-        "contrasts_on_final_ph": 1,
+        "contrasts_on_final_ph": 8,
         "reading": {
-          "reading": "answered by the literature",
-          "labs": 3,
-          "contrasts": 17,
-          "estimate": -1.070908074865484,
+          "reading": "direction unclear",
+          "labs": 5,
+          "contrasts": 25,
+          "estimate": -0.5384014841473782,
           "ci90": [
-            -1.9315452207863548,
-            -0.19537098859179072
+            -1.0128315823281357,
+            -0.038924435473695125
           ]
         },
         "per_contrast": [
+          {
+            "source": "madruga1995",
+            "contrast": "madruga1995-5",
+            "lab": "reading_mottram_parker",
+            "initial_range": [
+              4.0,
+              5.6
+            ],
+            "final_ph": [
+              4.4,
+              4.9,
+              5.4,
+              5.8
+            ],
+            "y_keyed": -0.6426926347555538,
+            "y_final": -0.6726457273247021
+          },
           {
             "source": "mottram2002",
             "contrast": "mottram2002-6",
@@ -705,6 +1889,200 @@
             ],
             "y_keyed": -2.928836103655404,
             "y_final": -2.562731590698477
+          },
+          {
+            "source": "yang2011",
+            "contrast": "yang2011-107",
+            "lab": "btbu_beijing",
+            "initial_range": [
+              4.7,
+              6.7
+            ],
+            "final_ph": [
+              4.09,
+              6.42
+            ],
+            "y_keyed": -0.296907803221075,
+            "y_final": -0.2548564834515666
+          },
+          {
+            "source": "yang2011",
+            "contrast": "yang2011-108",
+            "lab": "btbu_beijing",
+            "initial_range": [
+              4.7,
+              6.7
+            ],
+            "final_ph": [
+              3.7,
+              6.38
+            ],
+            "y_keyed": -0.019029058544047406,
+            "y_final": -0.014200789958244331
+          },
+          {
+            "source": "yang2011",
+            "contrast": "yang2011-115",
+            "lab": "btbu_beijing",
+            "initial_range": [
+              4.7,
+              6.7
+            ],
+            "final_ph": [
+              3.85,
+              6.37
+            ],
+            "y_keyed": -0.030239392453765394,
+            "y_final": -0.023999517820448724
+          },
+          {
+            "source": "yang2011",
+            "contrast": "yang2011-116",
+            "lab": "btbu_beijing",
+            "initial_range": [
+              4.7,
+              6.7
+            ],
+            "final_ph": [
+              3.82,
+              6.38
+            ],
+            "y_keyed": -0.7073024059212425,
+            "y_final": -0.5525800046259706
+          },
+          {
+            "source": "yang2011",
+            "contrast": "yang2011-119",
+            "lab": "btbu_beijing",
+            "initial_range": [
+              4.7,
+              6.7
+            ],
+            "final_ph": [
+              3.51,
+              6.11
+            ],
+            "y_keyed": -0.2846101232409402,
+            "y_final": -0.21893086403149237
+          },
+          {
+            "source": "yang2011",
+            "contrast": "yang2011-120",
+            "lab": "btbu_beijing",
+            "initial_range": [
+              4.7,
+              6.7
+            ],
+            "final_ph": [
+              3.72,
+              6.15
+            ],
+            "y_keyed": -0.5371177639475148,
+            "y_final": -0.44207223370165816
+          }
+        ]
+      },
+      "changes": [
+        "R1 buffered band: answered by the literature"
+      ]
+    },
+    {
+      "compound": "Furfural",
+      "band": "pH 6-7.5, initial or label",
+      "watched": "fragile",
+      "contrasts": 4,
+      "labs": 3,
+      "ph_control": {
+        "adjusted_unbuffered": 1,
+        "buffered": 3
+      },
+      "free_text_buffer_state": {
+        "unbuffered": 1,
+        "buffered": 3
+      },
+      "main_reading": "direction unclear",
+      "main_flags": [
+        "without censored arms: answered by the literature",
+        "buffered studies only: too few laboratories"
+      ],
+      "free_text_buffered_only": {
+        "reading": "too few laboratories",
+        "labs": 2,
+        "contrasts": 3
+      },
+      "R1_same_set_as_free_text": true,
+      "R1": {
+        "buffered": {
+          "reading": "too few laboratories",
+          "labs": 2,
+          "contrasts": 3
+        },
+        "unbuffered": {
+          "reading": "too few laboratories",
+          "labs": 1,
+          "contrasts": 1
+        }
+      },
+      "R2": {
+        "contrasts_on_final_ph": 2,
+        "reading": {
+          "reading": "direction unclear",
+          "labs": 3,
+          "contrasts": 4,
+          "estimate": -0.5105192864509025,
+          "ci90": [
+            -1.098061030562992,
+            0.10395674172652664
+          ]
+        },
+        "per_contrast": [
+          {
+            "source": "kang2026",
+            "contrast": "kang2026-15",
+            "lab": "ho_network",
+            "initial_range": [
+              5.5,
+              8.0
+            ],
+            "final_ph": [
+              5.1,
+              4.9,
+              4.7
+            ],
+            "y_keyed": -0.18438385258853518,
+            "y_final": null
+          },
+          {
+            "source": "xu2007",
+            "contrast": "xu2007-11",
+            "lab": "cau_gao_yanxiang",
+            "initial_range": [
+              5.6,
+              8.0
+            ],
+            "final_ph": [
+              5.5,
+              6.2,
+              6.8
+            ],
+            "y_keyed": -0.6588132523229098,
+            "y_final": -1.2511181752988243
+          },
+          {
+            "source": "xu2007",
+            "contrast": "xu2007-12",
+            "lab": "cau_gao_yanxiang",
+            "initial_range": [
+              5.6,
+              8.0
+            ],
+            "final_ph": [
+              5.5,
+              6.0,
+              6.3
+            ],
+            "y_keyed": -0.23803332323869406,
+            "y_final": -0.7068123571593982
           }
         ]
       },
@@ -714,21 +2092,342 @@
       ]
     },
     {
-      "compound": "Phenylacetaldehyde",
+      "compound": "Heptanal",
       "band": "pH 4.5-6, initial or label",
-      "watched": "sign changes inside one laboratory",
-      "contrasts": 16,
-      "labs": 2,
+      "watched": null,
+      "contrasts": 7,
+      "labs": 4,
       "ph_control": {
-        "adjusted_unbuffered": 15,
-        "buffered": 1
+        "adjusted_unbuffered": 7
       },
       "free_text_buffer_state": {
-        "unbuffered": 15,
-        "buffered": 1
+        "unbuffered": 7
+      },
+      "main_reading": "direction unclear",
+      "main_flags": [],
+      "free_text_buffered_only": {
+        "reading": "too few laboratories",
+        "labs": 0,
+        "contrasts": 0
+      },
+      "R1_same_set_as_free_text": true,
+      "R1": {
+        "buffered": {
+          "reading": "too few laboratories",
+          "labs": 0,
+          "contrasts": 0
+        },
+        "unbuffered": {
+          "reading": "direction unclear",
+          "labs": 4,
+          "contrasts": 7,
+          "estimate": 0.01996752202462952,
+          "ci90": [
+            -0.24596684777854924,
+            0.2083785299925826
+          ]
+        }
+      },
+      "R2": {
+        "contrasts_on_final_ph": 1,
+        "reading": {
+          "reading": "direction unclear",
+          "labs": 4,
+          "contrasts": 7,
+          "estimate": 0.02313306469924037,
+          "ci90": [
+            -0.2530781147657433,
+            0.20860214019958956
+          ]
+        },
+        "per_contrast": [
+          {
+            "source": "madruga1995",
+            "contrast": "madruga1995-12",
+            "lab": "reading_mottram_parker",
+            "initial_range": [
+              4.5,
+              5.6
+            ],
+            "final_ph": [
+              4.4,
+              4.9,
+              5.4,
+              5.8
+            ],
+            "y_keyed": -0.40305098533030737,
+            "y_final": -0.4543004284211706
+          }
+        ]
+      },
+      "changes": [
+        "R1 buffered band: too few laboratories"
+      ]
+    },
+    {
+      "compound": "Hexanal",
+      "band": "pH 4.5-6, initial or label",
+      "watched": null,
+      "contrasts": 17,
+      "labs": 3,
+      "ph_control": {
+        "adjusted_unbuffered": 17
+      },
+      "free_text_buffer_state": {
+        "unbuffered": 17
+      },
+      "main_reading": "direction unclear",
+      "main_flags": [],
+      "free_text_buffered_only": {
+        "reading": "too few laboratories",
+        "labs": 0,
+        "contrasts": 0
+      },
+      "R1_same_set_as_free_text": true,
+      "R1": {
+        "buffered": {
+          "reading": "too few laboratories",
+          "labs": 0,
+          "contrasts": 0
+        },
+        "unbuffered": {
+          "reading": "direction unclear",
+          "labs": 3,
+          "contrasts": 17,
+          "estimate": 0.012519702812868776,
+          "ci90": [
+            -0.23781118082109795,
+            0.2100270299130792
+          ]
+        }
+      },
+      "R2": {
+        "contrasts_on_final_ph": 1,
+        "reading": {
+          "reading": "direction unclear",
+          "labs": 3,
+          "contrasts": 17,
+          "estimate": 0.010948896703785427,
+          "ci90": [
+            -0.24680165778321925,
+            0.21215879871861804
+          ]
+        },
+        "per_contrast": [
+          {
+            "source": "madruga1995",
+            "contrast": "madruga1995-11",
+            "lab": "reading_mottram_parker",
+            "initial_range": [
+              4.0,
+              5.6
+            ],
+            "final_ph": [
+              4.4,
+              4.9,
+              5.4,
+              5.8
+            ],
+            "y_keyed": -0.18160841353067134,
+            "y_final": -0.19378057397923518
+          }
+        ]
+      },
+      "changes": [
+        "R1 buffered band: too few laboratories"
+      ]
+    },
+    {
+      "compound": "Nonanal",
+      "band": "pH 4.5-6, initial or label",
+      "watched": "sign changes inside one laboratory",
+      "contrasts": 18,
+      "labs": 4,
+      "ph_control": {
+        "adjusted_unbuffered": 18
+      },
+      "free_text_buffer_state": {
+        "unbuffered": 18
+      },
+      "main_reading": "direction unclear",
+      "main_flags": [],
+      "free_text_buffered_only": {
+        "reading": "too few laboratories",
+        "labs": 0,
+        "contrasts": 0
+      },
+      "R1_same_set_as_free_text": true,
+      "R1": {
+        "buffered": {
+          "reading": "too few laboratories",
+          "labs": 0,
+          "contrasts": 0
+        },
+        "unbuffered": {
+          "reading": "direction unclear",
+          "labs": 4,
+          "contrasts": 18,
+          "estimate": -0.07863174570828416,
+          "ci90": [
+            -0.25641725416713235,
+            0.17680483262827015
+          ]
+        }
+      },
+      "R2": {
+        "contrasts_on_final_ph": 1,
+        "reading": {
+          "reading": "direction unclear",
+          "labs": 4,
+          "contrasts": 18,
+          "estimate": -0.0763709040094626,
+          "ci90": [
+            -0.2555801748521628,
+            0.18121116832628703
+          ]
+        },
+        "per_contrast": [
+          {
+            "source": "madruga1995",
+            "contrast": "madruga1995-14",
+            "lab": "reading_mottram_parker",
+            "initial_range": [
+              4.5,
+              5.6
+            ],
+            "final_ph": [
+              4.4,
+              4.9,
+              5.4,
+              5.8
+            ],
+            "y_keyed": 0.03407439003482508,
+            "y_final": 0.04533955914361106
+          }
+        ]
+      },
+      "changes": [
+        "R1 buffered band: too few laboratories"
+      ]
+    },
+    {
+      "compound": "Octanal",
+      "band": "pH 4.5-6, initial or label",
+      "watched": null,
+      "contrasts": 2,
+      "labs": 2,
+      "ph_control": {
+        "adjusted_unbuffered": 2
+      },
+      "free_text_buffer_state": {
+        "unbuffered": 2
       },
       "main_reading": "too few laboratories",
       "main_flags": [],
+      "free_text_buffered_only": {
+        "reading": "too few laboratories",
+        "labs": 0,
+        "contrasts": 0
+      },
+      "R1_same_set_as_free_text": true,
+      "R1": {
+        "buffered": {
+          "reading": "too few laboratories",
+          "labs": 0,
+          "contrasts": 0
+        },
+        "unbuffered": {
+          "reading": "too few laboratories",
+          "labs": 2,
+          "contrasts": 2
+        }
+      },
+      "R2": {
+        "contrasts_on_final_ph": 1,
+        "reading": {
+          "reading": "too few laboratories",
+          "labs": 2,
+          "contrasts": 2
+        },
+        "per_contrast": [
+          {
+            "source": "madruga1995",
+            "contrast": "madruga1995-13",
+            "lab": "reading_mottram_parker",
+            "initial_range": [
+              4.5,
+              5.6
+            ],
+            "final_ph": [
+              4.4,
+              4.9,
+              5.4,
+              5.8
+            ],
+            "y_keyed": -0.04840398474628807,
+            "y_final": -0.053976759318633674
+          }
+        ]
+      },
+      "changes": []
+    },
+    {
+      "compound": "Pentanal",
+      "band": "pH 4.5-6, initial or label",
+      "watched": null,
+      "contrasts": 3,
+      "labs": 2,
+      "ph_control": {
+        "adjusted_unbuffered": 3
+      },
+      "free_text_buffer_state": {
+        "unbuffered": 3
+      },
+      "main_reading": "too few laboratories",
+      "main_flags": [],
+      "free_text_buffered_only": {
+        "reading": "too few laboratories",
+        "labs": 0,
+        "contrasts": 0
+      },
+      "R1_same_set_as_free_text": true,
+      "R1": {
+        "buffered": {
+          "reading": "too few laboratories",
+          "labs": 0,
+          "contrasts": 0
+        },
+        "unbuffered": {
+          "reading": "too few laboratories",
+          "labs": 2,
+          "contrasts": 3
+        }
+      },
+      "R2": {
+        "contrasts_on_final_ph": 0,
+        "reading": null,
+        "per_contrast": []
+      },
+      "changes": []
+    },
+    {
+      "compound": "Phenylacetaldehyde",
+      "band": "pH 4.5-6, initial or label",
+      "watched": "fragile",
+      "contrasts": 17,
+      "labs": 3,
+      "ph_control": {
+        "adjusted_unbuffered": 16,
+        "buffered": 1
+      },
+      "free_text_buffer_state": {
+        "unbuffered": 16,
+        "buffered": 1
+      },
+      "main_reading": "direction unclear",
+      "main_flags": [
+        "buffered studies only: too few laboratories"
+      ],
       "free_text_buffered_only": {
         "reading": "too few laboratories",
         "labs": 1,
@@ -743,8 +2442,8 @@
         },
         "unbuffered": {
           "reading": "too few laboratories",
-          "labs": 1,
-          "contrasts": 15
+          "labs": 2,
+          "contrasts": 16
         }
       },
       "R2": {
@@ -752,7 +2451,10 @@
         "reading": null,
         "per_contrast": []
       },
-      "changes": []
+      "changes": [
+        "R1 buffered band: too few laboratories",
+        "R1 unbuffered band: too few laboratories"
+      ]
     },
     {
       "compound": "Phenylacetaldehyde",
@@ -918,6 +2620,134 @@
         "per_contrast": []
       },
       "changes": []
+    },
+    {
+      "compound": "Trimethylpyrazine",
+      "band": "pH 6-7.5, initial or label",
+      "watched": "fragile",
+      "contrasts": 3,
+      "labs": 3,
+      "ph_control": {
+        "adjusted_unbuffered": 2,
+        "buffered": 1
+      },
+      "free_text_buffer_state": {
+        "unbuffered": 2,
+        "buffered": 1
+      },
+      "main_reading": "direction unclear",
+      "main_flags": [
+        "buffered studies only: too few laboratories"
+      ],
+      "free_text_buffered_only": {
+        "reading": "too few laboratories",
+        "labs": 1,
+        "contrasts": 1
+      },
+      "R1_same_set_as_free_text": true,
+      "R1": {
+        "buffered": {
+          "reading": "too few laboratories",
+          "labs": 1,
+          "contrasts": 1
+        },
+        "unbuffered": {
+          "reading": "too few laboratories",
+          "labs": 2,
+          "contrasts": 2
+        }
+      },
+      "R2": {
+        "contrasts_on_final_ph": 2,
+        "reading": {
+          "reading": "direction unclear",
+          "labs": 3,
+          "contrasts": 3,
+          "estimate": 0.6054226049511492,
+          "ci90": [
+            -0.3307270404020948,
+            1.5317623881093791
+          ]
+        },
+        "per_contrast": [
+          {
+            "source": "chen2000",
+            "contrast": "chen2000-22",
+            "lab": "ho_network",
+            "initial_range": [
+              5.0,
+              8.5
+            ],
+            "final_ph": [
+              7.43,
+              8.35
+            ],
+            "y_keyed": 0.08600857018970894,
+            "y_final": 0.3272065170260666
+          },
+          {
+            "source": "xu2007",
+            "contrast": "xu2007-10",
+            "lab": "cau_gao_yanxiang",
+            "initial_range": [
+              5.6,
+              7.0
+            ],
+            "final_ph": [
+              5.5,
+              6.2,
+              6.8
+            ],
+            "y_keyed": 1.0224026886849906,
+            "y_final": 2.0448053773699812
+          }
+        ]
+      },
+      "changes": [
+        "R1 buffered band: too few laboratories",
+        "R1 unbuffered band: too few laboratories"
+      ]
+    },
+    {
+      "compound": "Unsubstituted pyrazine",
+      "band": "pH >7.5, initial or label",
+      "watched": null,
+      "contrasts": 3,
+      "labs": 2,
+      "ph_control": {
+        "buffered": 1,
+        "adjusted_unbuffered": 2
+      },
+      "free_text_buffer_state": {
+        "buffered": 1,
+        "unbuffered": 2
+      },
+      "main_reading": "too few laboratories",
+      "main_flags": [],
+      "free_text_buffered_only": {
+        "reading": "too few laboratories",
+        "labs": 1,
+        "contrasts": 1
+      },
+      "R1_same_set_as_free_text": true,
+      "R1": {
+        "buffered": {
+          "reading": "too few laboratories",
+          "labs": 1,
+          "contrasts": 1
+        },
+        "unbuffered": {
+          "reading": "too few laboratories",
+          "labs": 1,
+          "contrasts": 2
+        }
+      },
+      "R2": {
+        "contrasts_on_final_ph": 0,
+        "reading": null,
+        "per_contrast": []
+      },
+      "changes": []
     }
   ],
   "categorical_cells": [
@@ -946,7 +2776,7 @@
       "compound": "2-Methyl-3-furanthiol (MFT)",
       "lever_class": "sulfur source",
       "watched": "answered (level)",
-      "pairs": 15,
+      "pairs": 16,
       "pairs_base_mismatch": 0,
       "reference_pot_by_lab": {
         "btbu_beijing": [
@@ -962,6 +2792,9 @@
           "none: amine+sulfur",
           "thiamine: amine+sulfur",
           "thiamine: nothing else"
+        ],
+        "reading_mottram_parker": [
+          "cysteine: other"
         ]
       },
       "changes": []
@@ -970,13 +2803,14 @@
       "compound": "2-Methylpyrazine",
       "lever_class": "amino acid identity",
       "watched": "fragile",
-      "pairs": 136,
+      "pairs": 141,
       "pairs_base_mismatch": 0,
       "reference_pot_by_lab": {
         "njau_zhao_liyan": [
           "methionine: amine+carbonyl"
         ],
         "ho_network": [
+          "cys: amine+carbonyl+sulfur",
           "glutathione: amine+carbonyl",
           "none: amine+carbonyl"
         ],
@@ -1113,9 +2947,9 @@
     "artifact": "lever_field_readings",
     "generated_on": "2026-11-13",
     "git": {
-      "commit": "27a11b055e8fcacfa5c34c62300c8c0281838b71",
-      "short": "27a11b05",
-      "branch": "lever-fields",
+      "commit": "3b569fd5ab195a53af395258985d70202afa1f03",
+      "short": "3b569fd5",
+      "branch": "lever-keying-a6",
       "dirty": true
     },
     "generated_by": "scripts/generators/build_lever_field_readings.py",
@@ -1169,6 +3003,10 @@
         "sha256": "88b2457b03d7844912a2e7db41709a95673fa04f69363a5c5b7a45374c9f476d"
       },
       {
+        "path": "docs/reference/lever_table/contrasts/chen2000.yml",
+        "sha256": "20734febc86e8a8fc746d017aa5d5fbeb5681b6de3089083167e00d691dbf4a7"
+      },
+      {
         "path": "docs/reference/lever_table/contrasts/chen2023lycium.yml",
         "sha256": "2b050760f603c5c31953b8f7cd6ddecca3645f076ed5abf0aa901e73b1b6791a"
       },
@@ -1199,6 +3037,10 @@
       {
         "path": "docs/reference/lever_table/contrasts/cremer2000c__families.yml",
         "sha256": "7e9428c8e1171ec3e17bb30219186ed3a9b288f13804cba9aa4484ad124966b6"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/desousafontes2024.yml",
+        "sha256": "725ce2e38fff1661142e0b59b33a79353cec4bf96197b137ef5942365287464a"
       },
       {
         "path": "docs/reference/lever_table/contrasts/ding2023.yml",
@@ -1305,6 +3147,10 @@
         "sha256": "607e5a900e8f18723008a15853b8265139816477605d83280303ebf00ab8321d"
       },
       {
+        "path": "docs/reference/lever_table/contrasts/kang2026.yml",
+        "sha256": "2a0673a32daf975b233cd375c275aad8715c75d9dfb1368e5853f2f21e1a078a"
+      },
+      {
         "path": "docs/reference/lever_table/contrasts/kobayasi1965.yml",
         "sha256": "e9eca2f0073ed90b413b314d15eff84bc18c1ff65d3253eedc40440e5946617e"
       },
@@ -1343,6 +3189,14 @@
       {
         "path": "docs/reference/lever_table/contrasts/li2022heat__families.yml",
         "sha256": "f9ba2c53a8aea2f6a64e2dabf4c52e0efb8349aca444e853b5809c888ec24717"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/madruga1995.yml",
+        "sha256": "190d611c62b11652d69d50f809ff107665e1421cc678cc4378b740e9a96a1e15"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/madruga1998.yml",
+        "sha256": "97d3402dcb79c591a27121d28ce0720899446851284fa8556bfa2e34c071c207"
       },
       {
         "path": "docs/reference/lever_table/contrasts/mandin1999__families.yml",
@@ -1403,6 +3257,10 @@
       {
         "path": "docs/reference/lever_table/contrasts/park2022mealworm__families.yml",
         "sha256": "cb031ae54a4f4ae264b6fc55aaaecfed324763a61572befcb775c99d61ee6439"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/raza2020.yml",
+        "sha256": "09759e623d7289e2afa0641656ba8dfc6da7cba2f59c265bffe598d25d238b4f"
       },
       {
         "path": "docs/reference/lever_table/contrasts/sarkisyan2025.yml",
@@ -1481,6 +3339,10 @@
         "sha256": "1ac09daa2c684da5348845aa1ed873b54acb5f5b3f2a9ddfefcc54b4ac5c676e"
       },
       {
+        "path": "docs/reference/lever_table/contrasts/wang2026arp.yml",
+        "sha256": "e077cf9637cdace1ac55e22954669e3d8c1769630dc32fcad374176f35afa48a"
+      },
+      {
         "path": "docs/reference/lever_table/contrasts/weenen2001__families.yml",
         "sha256": "0b675e7aaac4882a000a90f5d61c9a2010d4397bf75a5b952f0ba51711e4781f"
       },
@@ -1497,6 +3359,14 @@
         "sha256": "1a38054047a832773531ffd7b8ec450c96b9a591faf6cbf9ae5e331fffa6970c"
       },
       {
+        "path": "docs/reference/lever_table/contrasts/whitfield1999.yml",
+        "sha256": "36e9c1d6412d33b17a34a67eb449bb4fae5aae595e3f959386e550e4d486fd51"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/whitfield2001.yml",
+        "sha256": "1b077a2380f2b1729f032778301bd905cfd63672e335b6e082c8abf91704dc0b"
+      },
+      {
         "path": "docs/reference/lever_table/contrasts/xu2007.yml",
         "sha256": "913d56978d33f812063876b0c9b936989e8705530a74505816bdc4bab03a159f"
       },
@@ -1507,6 +3377,10 @@
       {
         "path": "docs/reference/lever_table/contrasts/xu2011__families.yml",
         "sha256": "0991efd64bc0594bb7821ff51ca069d132681bbc24092d63dd3e64501b4dc35c"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/yang2011.yml",
+        "sha256": "ec2924a6cfba409225827589c23e85e527bb2d3496381ced8129a0ab7a3f335a"
       },
       {
         "path": "docs/reference/lever_table/contrasts/yiltirak2026__families.yml",
@@ -1678,11 +3552,11 @@
       },
       {
         "path": "results/validation/lever_table.json",
-        "sha256": "bf13fb6897b3de535609c40190d94be224822ff92600126e9ac132e4fb22c73c"
+        "sha256": "8e957940a1fb45c59c2fa568930285d7aefbae3acc2b9a1d287cc8044a89c28e"
       },
       {
         "path": "results/validation/lever_disagreement_audit.json",
-        "sha256": "df57df7372981fa664b34fbd07c824757d4d383ca99142b3f13e447465d9315e"
+        "sha256": "d82652911ee4436e45f807b72c32b1147f3452aa24babc3f3f6bf9c4794e8f5f"
       }
     ]
   }

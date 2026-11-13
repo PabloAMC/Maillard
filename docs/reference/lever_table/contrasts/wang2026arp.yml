@@ -1,0 +1,4065 @@
+source: wang2026arp
+pdf: data/articles/Wang2026.pdf (+ Wang2026-supplementary.docx)
+reader: resolved
+scope_note: 'Resolved 2026-11-13 (step 9, post-A6). Base reader b (34; reader a''s 34 carry the same values, matched after
+  canonical names; differences were only location wording and 0 vs null). Every value checked against Tables S2 - S4 of the
+  supplementary docx. Three one-factor ladders (S2 pH 5 - 9, S3 85 - 125 C, S4 60 - 140 min) on Glu- and Cys-Amadori intermediates
+  in 0.2 M PBS; the held values of the other factors are not printed (keyed null); final pH not printed. Two printed rows
+  per compound, keyed by convention: CAS 98-02-2 ''2-Furanethiol'' (first printed) and ''Furfuryl mercaptan'' (S2 only) are
+  both 2-furfurylthiol, the second carries duplicate_of; ''Difurfuryl disulfide'' (first) and ''Bis(2-furfuryl) disulfide''
+  (printed with CAS 6911-51-9, which the table also gives bis(2-thienyl) disulfide) likewise. Quantified vs 1,2-dichlorobenzene
+  internal standard: relative. ''Pentanaldehyde'' = pentanal; ''3-Bis(2-methyl-3-furanyl) disulfide'' = bis(2-methyl-3-furyl)
+  disulfide (CAS 28588-75-2); bare ''Pyrazine'' keyed as Unsubstituted pyrazine. Conventions applied (resolver, uniform across
+  batch 1): a printed ND, ''-'', ''–'', blank, 0, 0.000 or 0±0 is censor nd_no_limit with value null; contrasts whose arms
+  are all not detected are kept (keyed, counted, enter no estimate); only run pairs differing in exactly one factor are keyed;
+  odorant names canonicalised to the compound_keys display name with the printed name in odorant_printed; quant_type absolute
+  only where the paper states calibration with authentic standards for that compound, internal-standard semi-quantification
+  relative.'
+contrasts:
+- id: wang2026arp-1
+  resolution: agreed
+  odorant: 2-Methyl-3-furanthiol (MFT)
+  lever_class: pH
+  lever: initial pH (0.2 M PBS, adjusted)
+  focal: true
+  location: Table S2 (Wang2026-supplementary.docx); also plotted in Fig. 2C
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH5
+    lever_value: 5
+    value: 163.79
+    censor: none
+    limit: null
+    n: 3
+    sd: 19.04
+    conditions:
+      ph: 5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH6
+    lever_value: 6
+    value: 136.08
+    censor: none
+    limit: null
+    n: 3
+    sd: 10.64
+    conditions:
+      ph: 6
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH7
+    lever_value: 7
+    value: 80.06
+    censor: none
+    limit: null
+    n: 3
+    sd: 3.98
+    conditions:
+      ph: 7
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH8
+    lever_value: 8
+    value: 14.91
+    censor: none
+    limit: null
+    n: 3
+    sd: 2.47
+    conditions:
+      ph: 8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH9
+    lever_value: 9
+    value: 9.91
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.47
+    conditions:
+      ph: 9
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  odorant_printed: 2-Methyl-3-furanthiol
+- id: wang2026arp-2
+  resolution: agreed
+  odorant: 2-Furfurylthiol (FFT)
+  lever_class: pH
+  lever: initial pH (0.2 M PBS, adjusted)
+  focal: true
+  location: Table S2 (Wang2026-supplementary.docx); also plotted in Fig. 2C
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  note: printed name 2-Furanethiol, printed CAS 98-02-2 (= 2-furfurylthiol); the text calls the pH-decreasing thiol 2-furfurylthiol.
+    'Furfuryl mercaptan' row also carries 98-02-2
+  arms:
+  - label: pH5
+    lever_value: 5
+    value: 65.4
+    censor: none
+    limit: null
+    n: 3
+    sd: 6.15
+    conditions:
+      ph: 5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH6
+    lever_value: 6
+    value: 40.73
+    censor: none
+    limit: null
+    n: 3
+    sd: 3.33
+    conditions:
+      ph: 6
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH7
+    lever_value: 7
+    value: 29.17
+    censor: none
+    limit: null
+    n: 3
+    sd: 3.86
+    conditions:
+      ph: 7
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH8
+    lever_value: 8
+    value: 19.99
+    censor: none
+    limit: null
+    n: 3
+    sd: 3.11
+    conditions:
+      ph: 8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH9
+    lever_value: 9
+    value: 7.92
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.93
+    conditions:
+      ph: 9
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  odorant_printed: 2-Furanethiol
+- id: wang2026arp-3
+  resolution: agreed
+  odorant: Bis(2-furfuryl) disulfide
+  lever_class: pH
+  lever: initial pH (0.2 M PBS, adjusted)
+  focal: false
+  location: Table S2 (Wang2026-supplementary.docx); also plotted in Fig. 2C
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  note: two rows name bis(2-furfuryl) disulfide (printed CAS 4436-20-1 and 6911-51-9); both keyed as printed
+  arms:
+  - label: pH5
+    lever_value: 5
+    value: 6.89
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.59
+    conditions:
+      ph: 5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH6
+    lever_value: 6
+    value: 12.23
+    censor: none
+    limit: null
+    n: 3
+    sd: 2.73
+    conditions:
+      ph: 6
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH7
+    lever_value: 7
+    value: 5.77
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.71
+    conditions:
+      ph: 7
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH8
+    lever_value: 8
+    value: 5.55
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.72
+    conditions:
+      ph: 8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH9
+    lever_value: 9
+    value: 4.58
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.55
+    conditions:
+      ph: 9
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  odorant_printed: Difurfuryl disulfide
+- id: wang2026arp-4
+  resolution: agreed
+  odorant: Bis(2-methyl-3-furyl) disulfide
+  lever_class: pH
+  lever: initial pH (0.2 M PBS, adjusted)
+  focal: true
+  location: Table S2 (Wang2026-supplementary.docx); also plotted in Fig. 2C
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH5
+    lever_value: 5
+    value: 21.57
+    censor: none
+    limit: null
+    n: 3
+    sd: 3.23
+    conditions:
+      ph: 5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH6
+    lever_value: 6
+    value: 19.76
+    censor: none
+    limit: null
+    n: 3
+    sd: 2.68
+    conditions:
+      ph: 6
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH7
+    lever_value: 7
+    value: 16.87
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.98
+    conditions:
+      ph: 7
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH8
+    lever_value: 8
+    value: 15.83
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.43
+    conditions:
+      ph: 8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH9
+    lever_value: 9
+    value: 13.87
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.49
+    conditions:
+      ph: 9
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  odorant_printed: 3-Bis(2-methyl-3-furanyl) disulfide
+- id: wang2026arp-5
+  resolution: agreed
+  odorant: Bis(2-furfuryl) disulfide
+  lever_class: pH
+  lever: initial pH (0.2 M PBS, adjusted)
+  focal: false
+  location: Table S2 (Wang2026-supplementary.docx); also plotted in Fig. 2C
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  note: two rows name bis(2-furfuryl) disulfide (printed CAS 4436-20-1 and 6911-51-9); both keyed as printed
+  arms:
+  - label: pH5
+    lever_value: 5
+    value: 9.72
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.26
+    conditions:
+      ph: 5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH6
+    lever_value: 6
+    value: 7.43
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.71
+    conditions:
+      ph: 6
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH7
+    lever_value: 7
+    value: 5.59
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.12
+    conditions:
+      ph: 7
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH8
+    lever_value: 8
+    value: 5.08
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.82
+    conditions:
+      ph: 8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH9
+    lever_value: 9
+    value: 4.55
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.53
+    conditions:
+      ph: 9
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  duplicate_of: wang2026arp-3
+- id: wang2026arp-6
+  resolution: agreed
+  odorant: 2-Furfurylthiol (FFT)
+  lever_class: pH
+  lever: initial pH (0.2 M PBS, adjusted)
+  focal: false
+  location: Table S2 (Wang2026-supplementary.docx); also plotted in Fig. 2C
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH5
+    lever_value: 5
+    value: 1.36
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.02
+    conditions:
+      ph: 5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH6
+    lever_value: 6
+    value: 1.42
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.09
+    conditions:
+      ph: 6
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH7
+    lever_value: 7
+    value: 1.39
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.13
+    conditions:
+      ph: 7
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH8
+    lever_value: 8
+    value: 1.19
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.17
+    conditions:
+      ph: 8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH9
+    lever_value: 9
+    value: 1.89
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.06
+    conditions:
+      ph: 9
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  duplicate_of: wang2026arp-2
+  odorant_printed: Furfuryl mercaptan
+- id: wang2026arp-7
+  resolution: agreed
+  odorant: Unsubstituted pyrazine
+  lever_class: pH
+  lever: initial pH (0.2 M PBS, adjusted)
+  focal: true
+  location: Table S2 (Wang2026-supplementary.docx); also plotted in Fig. 2C
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH5
+    lever_value: 5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH6
+    lever_value: 6
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH7
+    lever_value: 7
+    value: 0.91
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.21
+    conditions:
+      ph: 7
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH8
+    lever_value: 8
+    value: 5.29
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.29
+    conditions:
+      ph: 8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH9
+    lever_value: 9
+    value: 13.03
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.45
+    conditions:
+      ph: 9
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  odorant_printed: Pyrazine
+- id: wang2026arp-8
+  resolution: agreed
+  odorant: 2-Methylpyrazine
+  lever_class: pH
+  lever: initial pH (0.2 M PBS, adjusted)
+  focal: true
+  location: Table S2 (Wang2026-supplementary.docx); also plotted in Fig. 2C
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH5
+    lever_value: 5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH6
+    lever_value: 6
+    value: 1.33
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.28
+    conditions:
+      ph: 6
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH7
+    lever_value: 7
+    value: 2.97
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.22
+    conditions:
+      ph: 7
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH8
+    lever_value: 8
+    value: 4.9
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.14
+    conditions:
+      ph: 8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH9
+    lever_value: 9
+    value: 6.92
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.57
+    conditions:
+      ph: 9
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  odorant_printed: Methylpyrazine
+- id: wang2026arp-9
+  resolution: agreed
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: pH
+  lever: initial pH (0.2 M PBS, adjusted)
+  focal: true
+  location: Table S2 (Wang2026-supplementary.docx); also plotted in Fig. 2C
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH5
+    lever_value: 5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH6
+    lever_value: 6
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH7
+    lever_value: 7
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH8
+    lever_value: 8
+    value: 0.92
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.26
+    conditions:
+      ph: 8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH9
+    lever_value: 9
+    value: 1.34
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.19
+    conditions:
+      ph: 9
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+- id: wang2026arp-10
+  resolution: agreed
+  odorant: 2-Acetylthiazole
+  lever_class: pH
+  lever: initial pH (0.2 M PBS, adjusted)
+  focal: true
+  location: Table S2 (Wang2026-supplementary.docx); also plotted in Fig. 2C
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH5
+    lever_value: 5
+    value: 4.02
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.23
+    conditions:
+      ph: 5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH6
+    lever_value: 6
+    value: 7.15
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.49
+    conditions:
+      ph: 6
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH7
+    lever_value: 7
+    value: 12.76
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.58
+    conditions:
+      ph: 7
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH8
+    lever_value: 8
+    value: 28.47
+    censor: none
+    limit: null
+    n: 3
+    sd: 3.65
+    conditions:
+      ph: 8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH9
+    lever_value: 9
+    value: 46.02
+    censor: none
+    limit: null
+    n: 3
+    sd: 2.5
+    conditions:
+      ph: 9
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+- id: wang2026arp-11
+  resolution: agreed
+  odorant: Furfural
+  lever_class: pH
+  lever: initial pH (0.2 M PBS, adjusted)
+  focal: true
+  location: Table S2 (Wang2026-supplementary.docx); also plotted in Fig. 2C
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH5
+    lever_value: 5
+    value: 118.62
+    censor: none
+    limit: null
+    n: 3
+    sd: 13.8
+    conditions:
+      ph: 5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH6
+    lever_value: 6
+    value: 79.39
+    censor: none
+    limit: null
+    n: 3
+    sd: 9.57
+    conditions:
+      ph: 6
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH7
+    lever_value: 7
+    value: 74.47
+    censor: none
+    limit: null
+    n: 3
+    sd: 7.16
+    conditions:
+      ph: 7
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH8
+    lever_value: 8
+    value: 51.78
+    censor: none
+    limit: null
+    n: 3
+    sd: 4.22
+    conditions:
+      ph: 8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH9
+    lever_value: 9
+    value: 12.21
+    censor: none
+    limit: null
+    n: 3
+    sd: 2.13
+    conditions:
+      ph: 9
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+- id: wang2026arp-12
+  resolution: agreed
+  odorant: Nonanal
+  lever_class: pH
+  lever: initial pH (0.2 M PBS, adjusted)
+  focal: false
+  location: Table S2 (Wang2026-supplementary.docx); also plotted in Fig. 2C
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH5
+    lever_value: 5
+    value: 1.03
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.21
+    conditions:
+      ph: 5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH6
+    lever_value: 6
+    value: 1.27
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.06
+    conditions:
+      ph: 6
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH7
+    lever_value: 7
+    value: 1.78
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.21
+    conditions:
+      ph: 7
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH8
+    lever_value: 8
+    value: 2.91
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.16
+    conditions:
+      ph: 8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH9
+    lever_value: 9
+    value: 2.58
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.3
+    conditions:
+      ph: 9
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+- id: wang2026arp-13
+  resolution: agreed
+  odorant: Pentanal
+  lever_class: pH
+  lever: initial pH (0.2 M PBS, adjusted)
+  focal: false
+  location: Table S2 (Wang2026-supplementary.docx); also plotted in Fig. 2C
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH5
+    lever_value: 5
+    value: 0.86
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.11
+    conditions:
+      ph: 5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH6
+    lever_value: 6
+    value: 1.24
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.16
+    conditions:
+      ph: 6
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH7
+    lever_value: 7
+    value: 1.53
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.27
+    conditions:
+      ph: 7
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH8
+    lever_value: 8
+    value: 2.04
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.42
+    conditions:
+      ph: 8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: pH9
+    lever_value: 9
+    value: 2.47
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.55
+    conditions:
+      ph: 9
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  odorant_printed: Pentanaldehyde
+- id: wang2026arp-14
+  resolution: agreed
+  odorant: 2-Furfurylthiol (FFT)
+  lever_class: temperature
+  lever: reaction temperature (C)
+  focal: true
+  location: Table S3 (Wang2026-supplementary.docx); also plotted in Fig. 5C
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  note: printed name 2-Furanethiol, printed CAS 98-02-2 (= 2-furfurylthiol); the text calls the pH-decreasing thiol 2-furfurylthiol.
+    'Furfuryl mercaptan' row also carries 98-02-2
+  arms:
+  - label: 85 ℃
+    lever_value: 85
+    value: 6.02
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.21
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 95 ℃
+    lever_value: 95
+    value: 14.37
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.18
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 95
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 105 ℃
+    lever_value: 105
+    value: 7.37
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.13
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 105
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 115 ℃
+    lever_value: 115
+    value: 1.68
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.11
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 115
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 125 ℃
+    lever_value: 125
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 125
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  odorant_printed: 2-Furanethiol
+- id: wang2026arp-15
+  resolution: agreed
+  odorant: 2-Methyl-3-furanthiol (MFT)
+  lever_class: temperature
+  lever: reaction temperature (C)
+  focal: true
+  location: Table S3 (Wang2026-supplementary.docx); also plotted in Fig. 5C
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: 85 ℃
+    lever_value: 85
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 95 ℃
+    lever_value: 95
+    value: 2.08
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.3
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 95
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 105 ℃
+    lever_value: 105
+    value: 4.0
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.19
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 105
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 115 ℃
+    lever_value: 115
+    value: 8.4
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.67
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 115
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 125 ℃
+    lever_value: 125
+    value: 1.91
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.33
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 125
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  odorant_printed: 2-Methyl-3-furanthiol
+- id: wang2026arp-16
+  resolution: agreed
+  odorant: Bis(2-furfuryl) disulfide
+  lever_class: temperature
+  lever: reaction temperature (C)
+  focal: false
+  location: Table S3 (Wang2026-supplementary.docx); also plotted in Fig. 5C
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  note: two rows name bis(2-furfuryl) disulfide (printed CAS 4436-20-1 and 6911-51-9); both keyed as printed
+  arms:
+  - label: 85 ℃
+    lever_value: 85
+    value: 4.19
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.34
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 95 ℃
+    lever_value: 95
+    value: 0.24
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.08
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 95
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 105 ℃
+    lever_value: 105
+    value: 2.4
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.31
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 105
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 115 ℃
+    lever_value: 115
+    value: 3.61
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.29
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 115
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 125 ℃
+    lever_value: 125
+    value: 6.8
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.36
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 125
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  odorant_printed: Difurfuryl disulfide
+- id: wang2026arp-17
+  resolution: agreed
+  odorant: Bis(2-furfuryl) disulfide
+  lever_class: temperature
+  lever: reaction temperature (C)
+  focal: false
+  location: Table S3 (Wang2026-supplementary.docx); also plotted in Fig. 5C
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  note: two rows name bis(2-furfuryl) disulfide (printed CAS 4436-20-1 and 6911-51-9); both keyed as printed
+  arms:
+  - label: 85 ℃
+    lever_value: 85
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 95 ℃
+    lever_value: 95
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 95
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 105 ℃
+    lever_value: 105
+    value: 5.37
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.61
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 105
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 115 ℃
+    lever_value: 115
+    value: 7.92
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.37
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 115
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 125 ℃
+    lever_value: 125
+    value: 6.18
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.43
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 125
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  duplicate_of: wang2026arp-16
+- id: wang2026arp-18
+  resolution: agreed
+  odorant: Unsubstituted pyrazine
+  lever_class: temperature
+  lever: reaction temperature (C)
+  focal: true
+  location: Table S3 (Wang2026-supplementary.docx); also plotted in Fig. 5C
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: 85 ℃
+    lever_value: 85
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 95 ℃
+    lever_value: 95
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 95
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 105 ℃
+    lever_value: 105
+    value: 0.7
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.08
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 105
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 115 ℃
+    lever_value: 115
+    value: 3.41
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.28
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 115
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 125 ℃
+    lever_value: 125
+    value: 5.63
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.51
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 125
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  odorant_printed: Pyrazine
+- id: wang2026arp-19
+  resolution: agreed
+  odorant: 2-Methylpyrazine
+  lever_class: temperature
+  lever: reaction temperature (C)
+  focal: true
+  location: Table S3 (Wang2026-supplementary.docx); also plotted in Fig. 5C
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: 85 ℃
+    lever_value: 85
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 95 ℃
+    lever_value: 95
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 95
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 105 ℃
+    lever_value: 105
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 105
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 115 ℃
+    lever_value: 115
+    value: 2.98
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.16
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 115
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 125 ℃
+    lever_value: 125
+    value: 4.44
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.2
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 125
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  odorant_printed: Methylpyrazine
+- id: wang2026arp-20
+  resolution: agreed
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: temperature
+  lever: reaction temperature (C)
+  focal: true
+  location: Table S3 (Wang2026-supplementary.docx); also plotted in Fig. 5C
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: 85 ℃
+    lever_value: 85
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 95 ℃
+    lever_value: 95
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 95
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 105 ℃
+    lever_value: 105
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 105
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 115 ℃
+    lever_value: 115
+    value: 1.54
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.09
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 115
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 125 ℃
+    lever_value: 125
+    value: 2.18
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.11
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 125
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+- id: wang2026arp-21
+  resolution: agreed
+  odorant: 2-Acetylthiazole
+  lever_class: temperature
+  lever: reaction temperature (C)
+  focal: true
+  location: Table S3 (Wang2026-supplementary.docx); also plotted in Fig. 5C
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: 85 ℃
+    lever_value: 85
+    value: 102.83
+    censor: none
+    limit: null
+    n: 3
+    sd: 9.69
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 95 ℃
+    lever_value: 95
+    value: 152.98
+    censor: none
+    limit: null
+    n: 3
+    sd: 12.2
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 95
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 105 ℃
+    lever_value: 105
+    value: 193.67
+    censor: none
+    limit: null
+    n: 3
+    sd: 8.92
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 105
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 115 ℃
+    lever_value: 115
+    value: 134.01
+    censor: none
+    limit: null
+    n: 3
+    sd: 13.08
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 115
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 125 ℃
+    lever_value: 125
+    value: 167.86
+    censor: none
+    limit: null
+    n: 3
+    sd: 11.81
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 125
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+- id: wang2026arp-22
+  resolution: agreed
+  odorant: Furfural
+  lever_class: temperature
+  lever: reaction temperature (C)
+  focal: true
+  location: Table S3 (Wang2026-supplementary.docx); also plotted in Fig. 5C
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: 85 ℃
+    lever_value: 85
+    value: 31.81
+    censor: none
+    limit: null
+    n: 3
+    sd: 3.06
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 95 ℃
+    lever_value: 95
+    value: 73.77
+    censor: none
+    limit: null
+    n: 3
+    sd: 5.96
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 95
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 105 ℃
+    lever_value: 105
+    value: 142.98
+    censor: none
+    limit: null
+    n: 3
+    sd: 6.16
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 105
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 115 ℃
+    lever_value: 115
+    value: 155.41
+    censor: none
+    limit: null
+    n: 3
+    sd: 4.24
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 115
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 125 ℃
+    lever_value: 125
+    value: 171.61
+    censor: none
+    limit: null
+    n: 3
+    sd: 14.87
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 125
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+- id: wang2026arp-23
+  resolution: agreed
+  odorant: Nonanal
+  lever_class: temperature
+  lever: reaction temperature (C)
+  focal: false
+  location: Table S3 (Wang2026-supplementary.docx); also plotted in Fig. 5C
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: 85 ℃
+    lever_value: 85
+    value: 0.24
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.13
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 95 ℃
+    lever_value: 95
+    value: 4.04
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.27
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 95
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 105 ℃
+    lever_value: 105
+    value: 2.99
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.26
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 105
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 115 ℃
+    lever_value: 115
+    value: 8.18
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.25
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 115
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 125 ℃
+    lever_value: 125
+    value: 12.0
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.38
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 125
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+- id: wang2026arp-24
+  resolution: agreed
+  odorant: Pentanal
+  lever_class: temperature
+  lever: reaction temperature (C)
+  focal: false
+  location: Table S3 (Wang2026-supplementary.docx); also plotted in Fig. 5C
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: 85 ℃
+    lever_value: 85
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 95 ℃
+    lever_value: 95
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 95
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 105 ℃
+    lever_value: 105
+    value: 0.11
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 105
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 115 ℃
+    lever_value: 115
+    value: 0.32
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 115
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 125 ℃
+    lever_value: 125
+    value: 0.27
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.03
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 125
+      time_min: null
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  odorant_printed: Pentanaldehyde
+- id: wang2026arp-25
+  resolution: agreed
+  odorant: 2-Methyl-3-furanthiol (MFT)
+  lever_class: time
+  lever: reaction time (min)
+  focal: true
+  location: Table S4 (Wang2026-supplementary.docx); also plotted in Fig. 7C
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: time is the lever (ladder)
+  ph_control: buffered
+  arms:
+  - label: 60 min
+    lever_value: 60
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: 60
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 80 min
+    lever_value: 80
+    value: 6.0
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.71
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: 80
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 100 min
+    lever_value: 100
+    value: 13.94
+    censor: none
+    limit: null
+    n: 3
+    sd: 2.56
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: 100
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 120 min
+    lever_value: 120
+    value: 20.19
+    censor: none
+    limit: null
+    n: 3
+    sd: 2.27
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: 120
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 140 min
+    lever_value: 140
+    value: 17.35
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.97
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: 140
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  odorant_printed: 2-Methyl-3-furanthiol
+- id: wang2026arp-26
+  resolution: agreed
+  odorant: 2-Furfurylthiol (FFT)
+  lever_class: time
+  lever: reaction time (min)
+  focal: true
+  location: Table S4 (Wang2026-supplementary.docx); also plotted in Fig. 7C
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: time is the lever (ladder)
+  ph_control: buffered
+  note: printed name 2-Furanethiol, printed CAS 98-02-2 (= 2-furfurylthiol); the text calls the pH-decreasing thiol 2-furfurylthiol.
+    'Furfuryl mercaptan' row also carries 98-02-2
+  arms:
+  - label: 60 min
+    lever_value: 60
+    value: 0.29
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.05
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: 60
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 80 min
+    lever_value: 80
+    value: 5.46
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.8
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: 80
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 100 min
+    lever_value: 100
+    value: 4.89
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.16
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: 100
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 120 min
+    lever_value: 120
+    value: 0.88
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.22
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: 120
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 140 min
+    lever_value: 140
+    value: 0.65
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.04
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: 140
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  odorant_printed: 2-Furanethiol
+- id: wang2026arp-27
+  resolution: agreed
+  odorant: Bis(2-furfuryl) disulfide
+  lever_class: time
+  lever: reaction time (min)
+  focal: false
+  location: Table S4 (Wang2026-supplementary.docx); also plotted in Fig. 7C
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: time is the lever (ladder)
+  ph_control: buffered
+  note: two rows name bis(2-furfuryl) disulfide (printed CAS 4436-20-1 and 6911-51-9); both keyed as printed
+  arms:
+  - label: 60 min
+    lever_value: 60
+    value: 0.66
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.06
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: 60
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 80 min
+    lever_value: 80
+    value: 0.45
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.18
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: 80
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 100 min
+    lever_value: 100
+    value: 2.0
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.16
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: 100
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 120 min
+    lever_value: 120
+    value: 1.04
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.32
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: 120
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 140 min
+    lever_value: 140
+    value: 1.15
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.16
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: 140
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  odorant_printed: Difurfuryl disulfide
+- id: wang2026arp-28
+  resolution: agreed
+  odorant: Bis(2-furfuryl) disulfide
+  lever_class: time
+  lever: reaction time (min)
+  focal: false
+  location: Table S4 (Wang2026-supplementary.docx); also plotted in Fig. 7C
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: time is the lever (ladder)
+  ph_control: buffered
+  note: two rows name bis(2-furfuryl) disulfide (printed CAS 4436-20-1 and 6911-51-9); both keyed as printed
+  arms:
+  - label: 60 min
+    lever_value: 60
+    value: 1.12
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.03
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: 60
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 80 min
+    lever_value: 80
+    value: 3.94
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.11
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: 80
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 100 min
+    lever_value: 100
+    value: 4.84
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.24
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: 100
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 120 min
+    lever_value: 120
+    value: 5.09
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.14
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: 120
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 140 min
+    lever_value: 140
+    value: 5.73
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.22
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: 140
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  duplicate_of: wang2026arp-27
+- id: wang2026arp-29
+  resolution: agreed
+  odorant: Unsubstituted pyrazine
+  lever_class: time
+  lever: reaction time (min)
+  focal: true
+  location: Table S4 (Wang2026-supplementary.docx); also plotted in Fig. 7C
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: time is the lever (ladder)
+  ph_control: buffered
+  arms:
+  - label: 60 min
+    lever_value: 60
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: 60
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 80 min
+    lever_value: 80
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: 80
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 100 min
+    lever_value: 100
+    value: 1.86
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.1
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: 100
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 120 min
+    lever_value: 120
+    value: 5.57
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.73
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: 120
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 140 min
+    lever_value: 140
+    value: 15.94
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.79
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: 140
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  odorant_printed: Pyrazine
+- id: wang2026arp-30
+  resolution: agreed
+  odorant: 2-Methylpyrazine
+  lever_class: time
+  lever: reaction time (min)
+  focal: true
+  location: Table S4 (Wang2026-supplementary.docx); also plotted in Fig. 7C
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: time is the lever (ladder)
+  ph_control: buffered
+  arms:
+  - label: 60 min
+    lever_value: 60
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: 60
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 80 min
+    lever_value: 80
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: 80
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 100 min
+    lever_value: 100
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: 100
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 120 min
+    lever_value: 120
+    value: 3.12
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.02
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: 120
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 140 min
+    lever_value: 140
+    value: 6.79
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.59
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: 140
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  odorant_printed: Methylpyrazine
+- id: wang2026arp-31
+  resolution: agreed
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: time
+  lever: reaction time (min)
+  focal: true
+  location: Table S4 (Wang2026-supplementary.docx); also plotted in Fig. 7C
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: time is the lever (ladder)
+  ph_control: buffered
+  arms:
+  - label: 60 min
+    lever_value: 60
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: 60
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 80 min
+    lever_value: 80
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: 80
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 100 min
+    lever_value: 100
+    value: 0.56
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.02
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: 100
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 120 min
+    lever_value: 120
+    value: 0.89
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.06
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: 120
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 140 min
+    lever_value: 140
+    value: 1.12
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.06
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: 140
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+- id: wang2026arp-32
+  resolution: agreed
+  odorant: 2-Acetylthiazole
+  lever_class: time
+  lever: reaction time (min)
+  focal: true
+  location: Table S4 (Wang2026-supplementary.docx); also plotted in Fig. 7C
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: time is the lever (ladder)
+  ph_control: buffered
+  arms:
+  - label: 60 min
+    lever_value: 60
+    value: 69.71
+    censor: none
+    limit: null
+    n: 3
+    sd: 2.92
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: 60
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 80 min
+    lever_value: 80
+    value: 59.63
+    censor: none
+    limit: null
+    n: 3
+    sd: 3.16
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: 80
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 100 min
+    lever_value: 100
+    value: 75.9
+    censor: none
+    limit: null
+    n: 3
+    sd: 2.3
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: 100
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 120 min
+    lever_value: 120
+    value: 70.7
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.36
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: 120
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 140 min
+    lever_value: 140
+    value: 44.15
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.29
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: 140
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+- id: wang2026arp-33
+  resolution: agreed
+  odorant: Furfural
+  lever_class: time
+  lever: reaction time (min)
+  focal: true
+  location: Table S4 (Wang2026-supplementary.docx); also plotted in Fig. 7C
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: time is the lever (ladder)
+  ph_control: buffered
+  arms:
+  - label: 60 min
+    lever_value: 60
+    value: 77.0
+    censor: none
+    limit: null
+    n: 3
+    sd: 3.29
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: 60
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 80 min
+    lever_value: 80
+    value: 57.82
+    censor: none
+    limit: null
+    n: 3
+    sd: 2.05
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: 80
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 100 min
+    lever_value: 100
+    value: 108.08
+    censor: none
+    limit: null
+    n: 3
+    sd: 5.29
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: 100
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 120 min
+    lever_value: 120
+    value: 177.93
+    censor: none
+    limit: null
+    n: 3
+    sd: 6.6
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: 120
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 140 min
+    lever_value: 140
+    value: 103.18
+    censor: none
+    limit: null
+    n: 3
+    sd: 5.08
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: 140
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+- id: wang2026arp-34
+  resolution: agreed
+  odorant: Nonanal
+  lever_class: time
+  lever: reaction time (min)
+  focal: false
+  location: Table S4 (Wang2026-supplementary.docx); also plotted in Fig. 7C
+  digitised: false
+  unit: ug/L
+  quant_type: relative
+  time_course_rule: time is the lever (ladder)
+  ph_control: buffered
+  arms:
+  - label: 60 min
+    lever_value: 60
+    value: 8.17
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.49
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: 60
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 80 min
+    lever_value: 80
+    value: 8.71
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.61
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: 80
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 100 min
+    lever_value: 100
+    value: 11.82
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.9
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: 100
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 120 min
+    lever_value: 120
+    value: 10.63
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.98
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: 120
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 140 min
+    lever_value: 140
+    value: 14.5
+    censor: none
+    limit: null
+    n: 3
+    sd: 1.2
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: 140
+      precursors:
+        Glu-Amadori intermediate: 1.0 g
+        Cys-Amadori intermediate: 1.0 g
+        PBS volume: 20.0 mL
+      buffer: 0.2 mol/L PBS
+      matrix: buffer
+      headspace: sealed, unstated
