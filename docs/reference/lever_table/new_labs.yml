@@ -264,5 +264,84 @@ hou2017ph:
   lab: btbu_beijing
   lab_name: "Beijing Technology and Business University (Xie Jianchun, corresponding)"
   doi: 10.7506/spkx1002-6630-201708021
-  pdf: "pending: full text at https://www.spkx.net.cn/fileup/HTML/2017-38-8-021.shtml (Food Science 38(8):129-138, in Chinese); NOT data/articles/hou2017.pdf, which is a different Hou 2017 paper"
+  pdf: data/articles/hou2017ph.html   # the journal's HTML full text (Chinese; tables as text); NOT hou2017.pdf, a different Hou 2017 paper
   cells: "MFT, FFT, bis(2-methyl-3-furyl) disulfide x initial pH 4.5 / 5.5 / 6.5 / 7.5, 0.2 M phosphate, pH drop per arm printed"
+
+# ---- 2026-11-13, fourth registration: PREREG A6 post-freeze BATCH 2 (STATUS_AND_PLAN sec. 0 steps 10 - 11), found by
+# a search for pH studies from laboratories not yet in the pH cells, unbuffered first. hou2017ph (above) belongs to
+# batch 2 as well: it was registered with batch 1 but had no file until now and was not keyed. Registered from
+# author lines and affiliations only, BEFORE any reader file exists and before any of their results was read.
+huang2010:
+  lab: ohio_state_barringer
+  lab_name: "The Ohio State University, Dept. of Food Science and Technology (Barringer)"
+  doi: 10.1111/j.1750-3841.2009.01455.x
+  pdf: data/articles/huang2010.pdf
+  cells: "pyrazines, Strecker aldehydes x pH (cocoa liquor, alkalized)"
+huang2011:
+  lab: ohio_state_barringer
+  lab_name: "The Ohio State University, Dept. of Food Science and Technology (Barringer)"
+  doi: 10.1111/j.1750-3841.2010.01984.x
+  pdf: data/articles/huang2011.pdf
+  cells: "pyrazines, Strecker aldehydes x pH during cocoa roasting"
+laemont2023:
+  lab: ohio_state_barringer
+  lab_name: "The Ohio State University, Dept. of Food Science and Technology (Barringer)"
+  doi: 10.3390/foods12224155
+  pdf: data/articles/laemont2023.pdf
+  cells: "pyrazines, Strecker and lipid aldehydes, furfural x soak pH 4 / 7 / 9"
+lotfy2021:
+  lab: nrc_cairo_fadel
+  lab_name: "National Research Centre, Cairo, Chemistry of Flavour and Aroma Dept. (Fadel)"
+  doi: 10.1016/j.lwt.2021.111328
+  pdf: data/articles/lotfy2021.pdf
+  cells: "pyrazines, furans x pH 5 - 9 (plant-protein hydrolysate + xylose)"
+arsa2021:
+  lab: kmitl_arsa
+  lab_name: "King Mongkut's Institute of Technology Ladkrabang, Faculty of Food Industry (Arsa, Puechkamutr)"
+  doi: 10.1007/s13197-021-05084-7
+  pdf: data/articles/arsa2021.pdf
+  cells: "alkylpyrazines x pH 7 - 10 (rice bran hydrolysate + fructose)"
+braggins1996:
+  lab: mirinz_braggins
+  lab_name: "Meat Industry Research Institute of New Zealand (Braggins)"
+  doi: 10.1021/jf960136+
+  pdf: data/articles/braggins1996.pdf
+  cells: "lipid aldehydes x ultimate pH (cooked lamb); pH arms may not hold everything else equal"
+kim2008:
+  lab: kyunghee_lee
+  lab_name: "Kyung Hee University, Dept. of Food and Nutrition (Lee, corresponding)"
+  doi: 10.3746/jfn.2008.13.1.054
+  pdf: data/articles/kim2008.pdf
+  cells: "furans x pH (to be confirmed by the readers)"
+gou2025:
+  lab: caas_bi_jinfeng
+  lab_name: "Chinese Academy of Agricultural Sciences, Institute of Food Science and Technology (Bi Jinfeng), with Gembloux Agro-Bio Tech, ULiege (Fauconnier)"
+  doi: 10.1080/07373937.2025.2516748
+  pdf: data/articles/gou2025.pdf
+  cells: "alkylpyrazines x pH 5.5 / 7.8 (red jujube matrix)"
+  note: "Bi Jinfeng's group is not chained to caas_beijing's senior authors (Zhang Dequan; Wang Fengzhong): its own laboratory (lab_ids rule 2), TEST."
+du2024c:
+  lab: shou_lai_keqiang
+  lab_name: "Shanghai Ocean University, College of Food Science and Technology (Lai Keqiang)"
+  doi: 10.1016/j.fbio.2024.103631
+  pdf: data/articles/du2024c.pdf
+  cells: "pyrazines, lipid aldehydes x pH (glucose-lysine x linoleic acid)"
+bemisyoung1993:
+  lab: ucdavis_shibamoto
+  lab_name: "University of California, Davis, Dept. of Food Science and Technology (Bernhard)"
+  doi: 10.1016/0308-8146(93)90009-5
+  pdf: data/articles/bemis-young1993.pdf
+  cells: "pyrazines x pH 1 - 12 (glucose-glycine, titrated, unbuffered)"
+  note: "lab_ids.yml's ucdavis_shibamoto names Bernhard: that laboratory (TEST)."
+vanba2013:
+  lab: chonbuk_hwang
+  lab_name: "Chonbuk National University, Dept. of Animal Science (Hwang In-Ho)"
+  doi: 10.1016/j.meatsci.2013.04.029
+  pdf: data/articles/vanba2013.pdf
+  cells: "thiols, pyrazines, lipid aldehydes x pH 5.5 / 6.2 (amino acids + ribose +/- fatty acids, pyrophosphate buffer)"
+yang2012:
+  lab: btbu_beijing
+  lab_name: "Beijing Technology and Business University, Beijing Key Laboratory of Flavor Chemistry (Song Huanlu)"
+  doi: 10.1111/j.1750-3841.2012.02863.x
+  pdf: data/articles/yang2012.pdf
+  cells: "meat-like volatiles x initial pH (response surface, glutathione); companion of yang2011"
