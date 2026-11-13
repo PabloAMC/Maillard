@@ -64,7 +64,10 @@ def small():
 
 @pytest.fixture(scope="module")
 def full():
-    return scoring.score_panel()
+    """The whole panel's scorecard as tracked. ``scripts/ci/artifact_freshness_gate.py`` rescores the panel live and
+    fails if this file departs from it, so a test of the scorecard's shape need not score it again (2026-11-13: the
+    live call was ~10 min of the slow unit tier; the small-panel fixture above still exercises the scorer itself)."""
+    return json.loads(data_paths.CORE_PANEL_SCORES.read_text(encoding="utf-8"))
 
 
 # ---------------------------------------------------------------------------
