@@ -1,0 +1,6700 @@
+source: laemont2023
+pdf: data/articles/laemont2023.pdf
+reader: resolved
+scope_note: 'Resolved 2026-11-13 (step 11, A6 batch 2). Base reader a (126 = 14 odorants x 9). Every Table 2 value of both
+  readers checked against the table: identical. Decided calls: pH 4 vs pH 9 (both phosphate, concentration not printed) is
+  pH, buffered; the pH 7 control is deionized water, so the 4 / 7 / 9 ladder (water vs buffer) is mixed; raw unsoaked seeds
+  vs soaked-and-roasted control is mixed. Sugar: reader b keyed one three-level sugar-identity network (none / glucose / fructose);
+  resolved to reader a''s form: glucose vs fructose (sugar identity) and each 20% sugar soak vs the water control (precursor
+  dose, sugar), so that ''none'' is not a sugar-identity level. Whey: 17% whey protein isolate vs water control is precursor
+  dose (both readers); whey protein concentrate vs control adds protein and substantially more lactose (text p. 9), so it
+  is mixed (reader a had precursor dose; reader b did not key it); isolate vs concentrate is mixed (both readers). SIFT-MS
+  headspace ppb (relative), n = 3, no SD; seeds soaked 15 h at 25 C, dried, roasted 165 C 8 min. No final pH printed. Not
+  keyed: Table A1 (unheated soaks), off-list compounds. ''dimethylpyrazine isomers'' and ''2-pentylfuran'' (isobaric with
+  2-ethylpyrazine in SIFT-MS) are odorant_unlisted. Conventions (resolver, uniform with batch 1): printed ND, ''-'', blank
+  or 0 is nd_no_limit with value null; all-ND contrasts kept; one compound printed twice carries duplicate_of; co-eluting
+  mixtures odorant_unlisted; odorant names canonicalised to the compound_keys display name, printed name in odorant_printed;
+  IS semi-quantification and SIFT-MS ppb relative, calibration with authentic standards absolute.'
+contrasts:
+- id: laemont2023-1
+  resolution: agreed
+  odorant: dimethylpyrazine isomers
+  odorant_unlisted: true
+  lever_class: pH
+  lever: soak pH 4 vs 9 (phosphate buffer)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 4
+    lever_value: 4
+    value: 26.6
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: phosphate buffer (concentration not printed)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: pH 9
+    lever_value: 9
+    value: 68.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: phosphate buffer (concentration not printed)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  unlisted_reason: co-eluting compounds printed as one value / not a single listed odorant
+- id: laemont2023-2
+  resolution: resolved
+  odorant: dimethylpyrazine isomers
+  odorant_unlisted: true
+  lever_class: mixed
+  lever: soak pH (control deionized water pH 7 vs phosphate buffer pH 4 / pH 9)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 7 (control)
+    lever_value: 7
+    value: 37.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: pH 4
+    lever_value: 4
+    value: 26.6
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: phosphate buffer (concentration not printed)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: pH 9
+    lever_value: 9
+    value: 68.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: phosphate buffer (concentration not printed)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  unlisted_reason: co-eluting compounds printed as one value / not a single listed odorant
+- id: laemont2023-3
+  resolution: resolved
+  odorant: dimethylpyrazine isomers
+  odorant_unlisted: true
+  lever_class: sugar identity
+  lever: glucose vs fructose soak (20%)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 20% Glucose
+    lever_value: glucose
+    value: 95.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        glucose: 20% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 20% Fructose
+    lever_value: fructose
+    value: 193
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        fructose: 20% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  unlisted_reason: co-eluting compounds printed as one value / not a single listed odorant
+- id: laemont2023-4
+  resolution: resolved
+  odorant: dimethylpyrazine isomers
+  odorant_unlisted: true
+  lever_class: precursor dose
+  lever: added glucose (20% soak) vs water control
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7 (control)
+    lever_value: 0%
+    value: 37.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 20% Glucose
+    lever_value: 20%
+    value: 95.5
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        glucose: 20% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  unlisted_reason: co-eluting compounds printed as one value / not a single listed odorant
+- id: laemont2023-5
+  resolution: resolved
+  odorant: dimethylpyrazine isomers
+  odorant_unlisted: true
+  lever_class: precursor dose
+  lever: added fructose (20% soak) vs water control
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7 (control)
+    lever_value: 0%
+    value: 37.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 20% Fructose
+    lever_value: 20%
+    value: 193
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        fructose: 20% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  unlisted_reason: co-eluting compounds printed as one value / not a single listed odorant
+- id: laemont2023-6
+  resolution: agreed
+  odorant: dimethylpyrazine isomers
+  odorant_unlisted: true
+  lever_class: precursor dose
+  lever: added whey protein isolate (17% soak) vs water control
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7 (control)
+    lever_value: 0%
+    value: 37.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 17% Whey Isolate
+    lever_value: 17%
+    value: 141
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        whey protein isolate: 17% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  unlisted_reason: co-eluting compounds printed as one value / not a single listed odorant
+- id: laemont2023-7
+  resolution: resolved
+  odorant: dimethylpyrazine isomers
+  odorant_unlisted: true
+  lever_class: mixed
+  lever: whey protein concentrate 17% soak vs water control (protein and lactose added together)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7 (control)
+    lever_value: 0%
+    value: 37.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 17% Whey Concentrate
+    lever_value: 17%
+    value: 333
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        whey protein concentrate: 17% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  unlisted_reason: co-eluting compounds printed as one value / not a single listed odorant
+- id: laemont2023-8
+  resolution: agreed
+  odorant: dimethylpyrazine isomers
+  odorant_unlisted: true
+  lever_class: mixed
+  lever: whey protein isolate vs whey protein concentrate (protein purity; WPC also carries lactose)
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 17% Whey Isolate
+    lever_value: isolate
+    value: 141
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        whey protein isolate: 17% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 17% Whey Concentrate
+    lever_value: concentrate
+    value: 333
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        whey protein concentrate: 17% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  unlisted_reason: co-eluting compounds printed as one value / not a single listed odorant
+- id: laemont2023-9
+  resolution: resolved
+  odorant: dimethylpyrazine isomers
+  odorant_unlisted: true
+  lever_class: mixed
+  lever: raw unsoaked seeds vs soaked (water) and roasted 165 C 8 min
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: Raw Seeds
+    lever_value: raw
+    value: 4.88
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors: {}
+      buffer: none
+      matrix: other (raw Panther sunflower seed kernels, not soaked, not roasted)
+      headspace: air
+  - label: pH 7 (control)
+    lever_value: roasted
+    value: 37.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  unlisted_reason: co-eluting compounds printed as one value / not a single listed odorant
+- id: laemont2023-10
+  resolution: agreed
+  odorant: 2-Methylpyrazine
+  lever_class: pH
+  lever: soak pH 4 vs 9 (phosphate buffer)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 4
+    lever_value: 4
+    value: 22.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: phosphate buffer (concentration not printed)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: pH 9
+    lever_value: 9
+    value: 53.6
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: phosphate buffer (concentration not printed)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: 2-methylpyrazine
+- id: laemont2023-11
+  resolution: resolved
+  odorant: 2-Methylpyrazine
+  lever_class: mixed
+  lever: soak pH (control deionized water pH 7 vs phosphate buffer pH 4 / pH 9)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 7 (control)
+    lever_value: 7
+    value: 43.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: pH 4
+    lever_value: 4
+    value: 22.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: phosphate buffer (concentration not printed)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: pH 9
+    lever_value: 9
+    value: 53.6
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: phosphate buffer (concentration not printed)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: 2-methylpyrazine
+- id: laemont2023-12
+  resolution: resolved
+  odorant: 2-Methylpyrazine
+  lever_class: sugar identity
+  lever: glucose vs fructose soak (20%)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 20% Glucose
+    lever_value: glucose
+    value: 87.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        glucose: 20% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 20% Fructose
+    lever_value: fructose
+    value: 124
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        fructose: 20% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: 2-methylpyrazine
+- id: laemont2023-13
+  resolution: resolved
+  odorant: 2-Methylpyrazine
+  lever_class: precursor dose
+  lever: added glucose (20% soak) vs water control
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7 (control)
+    lever_value: 0%
+    value: 43.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 20% Glucose
+    lever_value: 20%
+    value: 87.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        glucose: 20% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: 2-methylpyrazine
+- id: laemont2023-14
+  resolution: resolved
+  odorant: 2-Methylpyrazine
+  lever_class: precursor dose
+  lever: added fructose (20% soak) vs water control
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7 (control)
+    lever_value: 0%
+    value: 43.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 20% Fructose
+    lever_value: 20%
+    value: 124
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        fructose: 20% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: 2-methylpyrazine
+- id: laemont2023-15
+  resolution: agreed
+  odorant: 2-Methylpyrazine
+  lever_class: precursor dose
+  lever: added whey protein isolate (17% soak) vs water control
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7 (control)
+    lever_value: 0%
+    value: 43.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 17% Whey Isolate
+    lever_value: 17%
+    value: 69.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        whey protein isolate: 17% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: 2-methylpyrazine
+- id: laemont2023-16
+  resolution: resolved
+  odorant: 2-Methylpyrazine
+  lever_class: mixed
+  lever: whey protein concentrate 17% soak vs water control (protein and lactose added together)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7 (control)
+    lever_value: 0%
+    value: 43.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 17% Whey Concentrate
+    lever_value: 17%
+    value: 171
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        whey protein concentrate: 17% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: 2-methylpyrazine
+- id: laemont2023-17
+  resolution: agreed
+  odorant: 2-Methylpyrazine
+  lever_class: mixed
+  lever: whey protein isolate vs whey protein concentrate (protein purity; WPC also carries lactose)
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 17% Whey Isolate
+    lever_value: isolate
+    value: 69.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        whey protein isolate: 17% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 17% Whey Concentrate
+    lever_value: concentrate
+    value: 171
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        whey protein concentrate: 17% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: 2-methylpyrazine
+- id: laemont2023-18
+  resolution: resolved
+  odorant: 2-Methylpyrazine
+  lever_class: mixed
+  lever: raw unsoaked seeds vs soaked (water) and roasted 165 C 8 min
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: Raw Seeds
+    lever_value: raw
+    value: 4.05
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors: {}
+      buffer: none
+      matrix: other (raw Panther sunflower seed kernels, not soaked, not roasted)
+      headspace: air
+  - label: pH 7 (control)
+    lever_value: roasted
+    value: 43.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: 2-methylpyrazine
+- id: laemont2023-19
+  resolution: agreed
+  odorant: 2-pentylfuran (mixture with 2-ethylpyrazine)
+  odorant_unlisted: true
+  lever_class: pH
+  lever: soak pH 4 vs 9 (phosphate buffer)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 4
+    lever_value: 4
+    value: 3.65
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: phosphate buffer (concentration not printed)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: pH 9
+    lever_value: 9
+    value: 4.92
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: phosphate buffer (concentration not printed)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  unlisted_reason: co-eluting compounds printed as one value / not a single listed odorant
+- id: laemont2023-20
+  resolution: resolved
+  odorant: 2-pentylfuran (mixture with 2-ethylpyrazine)
+  odorant_unlisted: true
+  lever_class: mixed
+  lever: soak pH (control deionized water pH 7 vs phosphate buffer pH 4 / pH 9)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 7 (control)
+    lever_value: 7
+    value: 3.69
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: pH 4
+    lever_value: 4
+    value: 3.65
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: phosphate buffer (concentration not printed)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: pH 9
+    lever_value: 9
+    value: 4.92
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: phosphate buffer (concentration not printed)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  unlisted_reason: co-eluting compounds printed as one value / not a single listed odorant
+- id: laemont2023-21
+  resolution: resolved
+  odorant: 2-pentylfuran (mixture with 2-ethylpyrazine)
+  odorant_unlisted: true
+  lever_class: sugar identity
+  lever: glucose vs fructose soak (20%)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 20% Glucose
+    lever_value: glucose
+    value: 7.06
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        glucose: 20% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 20% Fructose
+    lever_value: fructose
+    value: 10.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        fructose: 20% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  unlisted_reason: co-eluting compounds printed as one value / not a single listed odorant
+- id: laemont2023-22
+  resolution: resolved
+  odorant: 2-pentylfuran (mixture with 2-ethylpyrazine)
+  odorant_unlisted: true
+  lever_class: precursor dose
+  lever: added glucose (20% soak) vs water control
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7 (control)
+    lever_value: 0%
+    value: 3.69
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 20% Glucose
+    lever_value: 20%
+    value: 7.06
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        glucose: 20% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  unlisted_reason: co-eluting compounds printed as one value / not a single listed odorant
+- id: laemont2023-23
+  resolution: resolved
+  odorant: 2-pentylfuran (mixture with 2-ethylpyrazine)
+  odorant_unlisted: true
+  lever_class: precursor dose
+  lever: added fructose (20% soak) vs water control
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7 (control)
+    lever_value: 0%
+    value: 3.69
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 20% Fructose
+    lever_value: 20%
+    value: 10.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        fructose: 20% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  unlisted_reason: co-eluting compounds printed as one value / not a single listed odorant
+- id: laemont2023-24
+  resolution: agreed
+  odorant: 2-pentylfuran (mixture with 2-ethylpyrazine)
+  odorant_unlisted: true
+  lever_class: precursor dose
+  lever: added whey protein isolate (17% soak) vs water control
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7 (control)
+    lever_value: 0%
+    value: 3.69
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 17% Whey Isolate
+    lever_value: 17%
+    value: 9.06
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        whey protein isolate: 17% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  unlisted_reason: co-eluting compounds printed as one value / not a single listed odorant
+- id: laemont2023-25
+  resolution: resolved
+  odorant: 2-pentylfuran (mixture with 2-ethylpyrazine)
+  odorant_unlisted: true
+  lever_class: mixed
+  lever: whey protein concentrate 17% soak vs water control (protein and lactose added together)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7 (control)
+    lever_value: 0%
+    value: 3.69
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 17% Whey Concentrate
+    lever_value: 17%
+    value: 21.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        whey protein concentrate: 17% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  unlisted_reason: co-eluting compounds printed as one value / not a single listed odorant
+- id: laemont2023-26
+  resolution: agreed
+  odorant: 2-pentylfuran (mixture with 2-ethylpyrazine)
+  odorant_unlisted: true
+  lever_class: mixed
+  lever: whey protein isolate vs whey protein concentrate (protein purity; WPC also carries lactose)
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 17% Whey Isolate
+    lever_value: isolate
+    value: 9.06
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        whey protein isolate: 17% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 17% Whey Concentrate
+    lever_value: concentrate
+    value: 21.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        whey protein concentrate: 17% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  unlisted_reason: co-eluting compounds printed as one value / not a single listed odorant
+- id: laemont2023-27
+  resolution: resolved
+  odorant: 2-pentylfuran (mixture with 2-ethylpyrazine)
+  odorant_unlisted: true
+  lever_class: mixed
+  lever: raw unsoaked seeds vs soaked (water) and roasted 165 C 8 min
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: Raw Seeds
+    lever_value: raw
+    value: 2.28
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors: {}
+      buffer: none
+      matrix: other (raw Panther sunflower seed kernels, not soaked, not roasted)
+      headspace: air
+  - label: pH 7 (control)
+    lever_value: roasted
+    value: 3.69
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  unlisted_reason: co-eluting compounds printed as one value / not a single listed odorant
+- id: laemont2023-28
+  resolution: agreed
+  odorant: Benzaldehyde
+  lever_class: pH
+  lever: soak pH 4 vs 9 (phosphate buffer)
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 4
+    lever_value: 4
+    value: 12.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: phosphate buffer (concentration not printed)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: pH 9
+    lever_value: 9
+    value: 14.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: phosphate buffer (concentration not printed)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: benzaldehyde
+- id: laemont2023-29
+  resolution: resolved
+  odorant: Benzaldehyde
+  lever_class: mixed
+  lever: soak pH (control deionized water pH 7 vs phosphate buffer pH 4 / pH 9)
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 7 (control)
+    lever_value: 7
+    value: 13.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: pH 4
+    lever_value: 4
+    value: 12.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: phosphate buffer (concentration not printed)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: pH 9
+    lever_value: 9
+    value: 14.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: phosphate buffer (concentration not printed)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: benzaldehyde
+- id: laemont2023-30
+  resolution: resolved
+  odorant: Benzaldehyde
+  lever_class: sugar identity
+  lever: glucose vs fructose soak (20%)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 20% Glucose
+    lever_value: glucose
+    value: 21.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        glucose: 20% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 20% Fructose
+    lever_value: fructose
+    value: 20.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        fructose: 20% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: benzaldehyde
+- id: laemont2023-31
+  resolution: resolved
+  odorant: Benzaldehyde
+  lever_class: precursor dose
+  lever: added glucose (20% soak) vs water control
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7 (control)
+    lever_value: 0%
+    value: 13.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 20% Glucose
+    lever_value: 20%
+    value: 21.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        glucose: 20% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: benzaldehyde
+- id: laemont2023-32
+  resolution: resolved
+  odorant: Benzaldehyde
+  lever_class: precursor dose
+  lever: added fructose (20% soak) vs water control
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7 (control)
+    lever_value: 0%
+    value: 13.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 20% Fructose
+    lever_value: 20%
+    value: 20.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        fructose: 20% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: benzaldehyde
+- id: laemont2023-33
+  resolution: agreed
+  odorant: Benzaldehyde
+  lever_class: precursor dose
+  lever: added whey protein isolate (17% soak) vs water control
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7 (control)
+    lever_value: 0%
+    value: 13.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 17% Whey Isolate
+    lever_value: 17%
+    value: 73.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        whey protein isolate: 17% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: benzaldehyde
+- id: laemont2023-34
+  resolution: resolved
+  odorant: Benzaldehyde
+  lever_class: mixed
+  lever: whey protein concentrate 17% soak vs water control (protein and lactose added together)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7 (control)
+    lever_value: 0%
+    value: 13.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 17% Whey Concentrate
+    lever_value: 17%
+    value: 143
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        whey protein concentrate: 17% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: benzaldehyde
+- id: laemont2023-35
+  resolution: agreed
+  odorant: Benzaldehyde
+  lever_class: mixed
+  lever: whey protein isolate vs whey protein concentrate (protein purity; WPC also carries lactose)
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 17% Whey Isolate
+    lever_value: isolate
+    value: 73.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        whey protein isolate: 17% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 17% Whey Concentrate
+    lever_value: concentrate
+    value: 143
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        whey protein concentrate: 17% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: benzaldehyde
+- id: laemont2023-36
+  resolution: resolved
+  odorant: Benzaldehyde
+  lever_class: mixed
+  lever: raw unsoaked seeds vs soaked (water) and roasted 165 C 8 min
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: Raw Seeds
+    lever_value: raw
+    value: 2.49
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors: {}
+      buffer: none
+      matrix: other (raw Panther sunflower seed kernels, not soaked, not roasted)
+      headspace: air
+  - label: pH 7 (control)
+    lever_value: roasted
+    value: 13.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: benzaldehyde
+- id: laemont2023-37
+  resolution: agreed
+  odorant: Furfural
+  lever_class: pH
+  lever: soak pH 4 vs 9 (phosphate buffer)
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 4
+    lever_value: 4
+    value: 11.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: phosphate buffer (concentration not printed)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: pH 9
+    lever_value: 9
+    value: 12.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: phosphate buffer (concentration not printed)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: furfural
+- id: laemont2023-38
+  resolution: resolved
+  odorant: Furfural
+  lever_class: mixed
+  lever: soak pH (control deionized water pH 7 vs phosphate buffer pH 4 / pH 9)
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 7 (control)
+    lever_value: 7
+    value: 11.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: pH 4
+    lever_value: 4
+    value: 11.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: phosphate buffer (concentration not printed)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: pH 9
+    lever_value: 9
+    value: 12.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: phosphate buffer (concentration not printed)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: furfural
+- id: laemont2023-39
+  resolution: resolved
+  odorant: Furfural
+  lever_class: sugar identity
+  lever: glucose vs fructose soak (20%)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 20% Glucose
+    lever_value: glucose
+    value: 333
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        glucose: 20% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 20% Fructose
+    lever_value: fructose
+    value: 276
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        fructose: 20% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: furfural
+- id: laemont2023-40
+  resolution: resolved
+  odorant: Furfural
+  lever_class: precursor dose
+  lever: added glucose (20% soak) vs water control
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7 (control)
+    lever_value: 0%
+    value: 11.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 20% Glucose
+    lever_value: 20%
+    value: 333
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        glucose: 20% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: furfural
+- id: laemont2023-41
+  resolution: resolved
+  odorant: Furfural
+  lever_class: precursor dose
+  lever: added fructose (20% soak) vs water control
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7 (control)
+    lever_value: 0%
+    value: 11.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 20% Fructose
+    lever_value: 20%
+    value: 276
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        fructose: 20% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: furfural
+- id: laemont2023-42
+  resolution: agreed
+  odorant: Furfural
+  lever_class: precursor dose
+  lever: added whey protein isolate (17% soak) vs water control
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7 (control)
+    lever_value: 0%
+    value: 11.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 17% Whey Isolate
+    lever_value: 17%
+    value: 19.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        whey protein isolate: 17% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: furfural
+- id: laemont2023-43
+  resolution: resolved
+  odorant: Furfural
+  lever_class: mixed
+  lever: whey protein concentrate 17% soak vs water control (protein and lactose added together)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7 (control)
+    lever_value: 0%
+    value: 11.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 17% Whey Concentrate
+    lever_value: 17%
+    value: 41.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        whey protein concentrate: 17% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: furfural
+- id: laemont2023-44
+  resolution: agreed
+  odorant: Furfural
+  lever_class: mixed
+  lever: whey protein isolate vs whey protein concentrate (protein purity; WPC also carries lactose)
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 17% Whey Isolate
+    lever_value: isolate
+    value: 19.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        whey protein isolate: 17% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 17% Whey Concentrate
+    lever_value: concentrate
+    value: 41.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        whey protein concentrate: 17% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: furfural
+- id: laemont2023-45
+  resolution: resolved
+  odorant: Furfural
+  lever_class: mixed
+  lever: raw unsoaked seeds vs soaked (water) and roasted 165 C 8 min
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: Raw Seeds
+    lever_value: raw
+    value: 1.01
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors: {}
+      buffer: none
+      matrix: other (raw Panther sunflower seed kernels, not soaked, not roasted)
+      headspace: air
+  - label: pH 7 (control)
+    lever_value: roasted
+    value: 11.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: furfural
+- id: laemont2023-46
+  resolution: agreed
+  odorant: Hexanal
+  lever_class: pH
+  lever: soak pH 4 vs 9 (phosphate buffer)
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 4
+    lever_value: 4
+    value: 107
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: phosphate buffer (concentration not printed)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: pH 9
+    lever_value: 9
+    value: 109
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: phosphate buffer (concentration not printed)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: hexanal
+- id: laemont2023-47
+  resolution: resolved
+  odorant: Hexanal
+  lever_class: mixed
+  lever: soak pH (control deionized water pH 7 vs phosphate buffer pH 4 / pH 9)
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 7 (control)
+    lever_value: 7
+    value: 103
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: pH 4
+    lever_value: 4
+    value: 107
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: phosphate buffer (concentration not printed)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: pH 9
+    lever_value: 9
+    value: 109
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: phosphate buffer (concentration not printed)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: hexanal
+- id: laemont2023-48
+  resolution: resolved
+  odorant: Hexanal
+  lever_class: sugar identity
+  lever: glucose vs fructose soak (20%)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 20% Glucose
+    lever_value: glucose
+    value: 161
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        glucose: 20% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 20% Fructose
+    lever_value: fructose
+    value: 127
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        fructose: 20% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: hexanal
+- id: laemont2023-49
+  resolution: resolved
+  odorant: Hexanal
+  lever_class: precursor dose
+  lever: added glucose (20% soak) vs water control
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7 (control)
+    lever_value: 0%
+    value: 103
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 20% Glucose
+    lever_value: 20%
+    value: 161
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        glucose: 20% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: hexanal
+- id: laemont2023-50
+  resolution: resolved
+  odorant: Hexanal
+  lever_class: precursor dose
+  lever: added fructose (20% soak) vs water control
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7 (control)
+    lever_value: 0%
+    value: 103
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 20% Fructose
+    lever_value: 20%
+    value: 127
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        fructose: 20% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: hexanal
+- id: laemont2023-51
+  resolution: agreed
+  odorant: Hexanal
+  lever_class: precursor dose
+  lever: added whey protein isolate (17% soak) vs water control
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7 (control)
+    lever_value: 0%
+    value: 103
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 17% Whey Isolate
+    lever_value: 17%
+    value: 189
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        whey protein isolate: 17% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: hexanal
+- id: laemont2023-52
+  resolution: resolved
+  odorant: Hexanal
+  lever_class: mixed
+  lever: whey protein concentrate 17% soak vs water control (protein and lactose added together)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7 (control)
+    lever_value: 0%
+    value: 103
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 17% Whey Concentrate
+    lever_value: 17%
+    value: 227
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        whey protein concentrate: 17% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: hexanal
+- id: laemont2023-53
+  resolution: agreed
+  odorant: Hexanal
+  lever_class: mixed
+  lever: whey protein isolate vs whey protein concentrate (protein purity; WPC also carries lactose)
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 17% Whey Isolate
+    lever_value: isolate
+    value: 189
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        whey protein isolate: 17% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 17% Whey Concentrate
+    lever_value: concentrate
+    value: 227
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        whey protein concentrate: 17% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: hexanal
+- id: laemont2023-54
+  resolution: resolved
+  odorant: Hexanal
+  lever_class: mixed
+  lever: raw unsoaked seeds vs soaked (water) and roasted 165 C 8 min
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: Raw Seeds
+    lever_value: raw
+    value: 4.54
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors: {}
+      buffer: none
+      matrix: other (raw Panther sunflower seed kernels, not soaked, not roasted)
+      headspace: air
+  - label: pH 7 (control)
+    lever_value: roasted
+    value: 103
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: hexanal
+- id: laemont2023-55
+  resolution: agreed
+  odorant: Methional (3-(methylthio)propanal)
+  lever_class: pH
+  lever: soak pH 4 vs 9 (phosphate buffer)
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 4
+    lever_value: 4
+    value: 19.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: phosphate buffer (concentration not printed)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: pH 9
+    lever_value: 9
+    value: 20.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: phosphate buffer (concentration not printed)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: methional
+- id: laemont2023-56
+  resolution: resolved
+  odorant: Methional (3-(methylthio)propanal)
+  lever_class: mixed
+  lever: soak pH (control deionized water pH 7 vs phosphate buffer pH 4 / pH 9)
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 7 (control)
+    lever_value: 7
+    value: 21.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: pH 4
+    lever_value: 4
+    value: 19.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: phosphate buffer (concentration not printed)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: pH 9
+    lever_value: 9
+    value: 20.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: phosphate buffer (concentration not printed)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: methional
+- id: laemont2023-57
+  resolution: resolved
+  odorant: Methional (3-(methylthio)propanal)
+  lever_class: sugar identity
+  lever: glucose vs fructose soak (20%)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 20% Glucose
+    lever_value: glucose
+    value: 38.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        glucose: 20% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 20% Fructose
+    lever_value: fructose
+    value: 60.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        fructose: 20% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: methional
+- id: laemont2023-58
+  resolution: resolved
+  odorant: Methional (3-(methylthio)propanal)
+  lever_class: precursor dose
+  lever: added glucose (20% soak) vs water control
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7 (control)
+    lever_value: 0%
+    value: 21.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 20% Glucose
+    lever_value: 20%
+    value: 38.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        glucose: 20% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: methional
+- id: laemont2023-59
+  resolution: resolved
+  odorant: Methional (3-(methylthio)propanal)
+  lever_class: precursor dose
+  lever: added fructose (20% soak) vs water control
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7 (control)
+    lever_value: 0%
+    value: 21.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 20% Fructose
+    lever_value: 20%
+    value: 60.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        fructose: 20% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: methional
+- id: laemont2023-60
+  resolution: agreed
+  odorant: Methional (3-(methylthio)propanal)
+  lever_class: precursor dose
+  lever: added whey protein isolate (17% soak) vs water control
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7 (control)
+    lever_value: 0%
+    value: 21.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 17% Whey Isolate
+    lever_value: 17%
+    value: 160
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        whey protein isolate: 17% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: methional
+- id: laemont2023-61
+  resolution: resolved
+  odorant: Methional (3-(methylthio)propanal)
+  lever_class: mixed
+  lever: whey protein concentrate 17% soak vs water control (protein and lactose added together)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7 (control)
+    lever_value: 0%
+    value: 21.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 17% Whey Concentrate
+    lever_value: 17%
+    value: 653
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        whey protein concentrate: 17% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: methional
+- id: laemont2023-62
+  resolution: agreed
+  odorant: Methional (3-(methylthio)propanal)
+  lever_class: mixed
+  lever: whey protein isolate vs whey protein concentrate (protein purity; WPC also carries lactose)
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 17% Whey Isolate
+    lever_value: isolate
+    value: 160
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        whey protein isolate: 17% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 17% Whey Concentrate
+    lever_value: concentrate
+    value: 653
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        whey protein concentrate: 17% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: methional
+- id: laemont2023-63
+  resolution: resolved
+  odorant: Methional (3-(methylthio)propanal)
+  lever_class: mixed
+  lever: raw unsoaked seeds vs soaked (water) and roasted 165 C 8 min
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: Raw Seeds
+    lever_value: raw
+    value: 7.51
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors: {}
+      buffer: none
+      matrix: other (raw Panther sunflower seed kernels, not soaked, not roasted)
+      headspace: air
+  - label: pH 7 (control)
+    lever_value: roasted
+    value: 21.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: methional
+- id: laemont2023-64
+  resolution: agreed
+  odorant: Nonanal
+  lever_class: pH
+  lever: soak pH 4 vs 9 (phosphate buffer)
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 4
+    lever_value: 4
+    value: 8.04
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: phosphate buffer (concentration not printed)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: pH 9
+    lever_value: 9
+    value: 6.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: phosphate buffer (concentration not printed)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: nonanal
+- id: laemont2023-65
+  resolution: resolved
+  odorant: Nonanal
+  lever_class: mixed
+  lever: soak pH (control deionized water pH 7 vs phosphate buffer pH 4 / pH 9)
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 7 (control)
+    lever_value: 7
+    value: 5.92
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: pH 4
+    lever_value: 4
+    value: 8.04
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: phosphate buffer (concentration not printed)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: pH 9
+    lever_value: 9
+    value: 6.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: phosphate buffer (concentration not printed)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: nonanal
+- id: laemont2023-66
+  resolution: resolved
+  odorant: Nonanal
+  lever_class: sugar identity
+  lever: glucose vs fructose soak (20%)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 20% Glucose
+    lever_value: glucose
+    value: 9.03
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        glucose: 20% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 20% Fructose
+    lever_value: fructose
+    value: 9.13
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        fructose: 20% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: nonanal
+- id: laemont2023-67
+  resolution: resolved
+  odorant: Nonanal
+  lever_class: precursor dose
+  lever: added glucose (20% soak) vs water control
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7 (control)
+    lever_value: 0%
+    value: 5.92
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 20% Glucose
+    lever_value: 20%
+    value: 9.03
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        glucose: 20% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: nonanal
+- id: laemont2023-68
+  resolution: resolved
+  odorant: Nonanal
+  lever_class: precursor dose
+  lever: added fructose (20% soak) vs water control
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7 (control)
+    lever_value: 0%
+    value: 5.92
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 20% Fructose
+    lever_value: 20%
+    value: 9.13
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        fructose: 20% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: nonanal
+- id: laemont2023-69
+  resolution: agreed
+  odorant: Nonanal
+  lever_class: precursor dose
+  lever: added whey protein isolate (17% soak) vs water control
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7 (control)
+    lever_value: 0%
+    value: 5.92
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 17% Whey Isolate
+    lever_value: 17%
+    value: 11.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        whey protein isolate: 17% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: nonanal
+- id: laemont2023-70
+  resolution: resolved
+  odorant: Nonanal
+  lever_class: mixed
+  lever: whey protein concentrate 17% soak vs water control (protein and lactose added together)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7 (control)
+    lever_value: 0%
+    value: 5.92
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 17% Whey Concentrate
+    lever_value: 17%
+    value: 16.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        whey protein concentrate: 17% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: nonanal
+- id: laemont2023-71
+  resolution: agreed
+  odorant: Nonanal
+  lever_class: mixed
+  lever: whey protein isolate vs whey protein concentrate (protein purity; WPC also carries lactose)
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 17% Whey Isolate
+    lever_value: isolate
+    value: 11.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        whey protein isolate: 17% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 17% Whey Concentrate
+    lever_value: concentrate
+    value: 16.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        whey protein concentrate: 17% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: nonanal
+- id: laemont2023-72
+  resolution: resolved
+  odorant: Nonanal
+  lever_class: mixed
+  lever: raw unsoaked seeds vs soaked (water) and roasted 165 C 8 min
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: Raw Seeds
+    lever_value: raw
+    value: 2.67
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors: {}
+      buffer: none
+      matrix: other (raw Panther sunflower seed kernels, not soaked, not roasted)
+      headspace: air
+  - label: pH 7 (control)
+    lever_value: roasted
+    value: 5.92
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: nonanal
+- id: laemont2023-73
+  resolution: agreed
+  odorant: Octanal
+  lever_class: pH
+  lever: soak pH 4 vs 9 (phosphate buffer)
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 4
+    lever_value: 4
+    value: 6.22
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: phosphate buffer (concentration not printed)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: pH 9
+    lever_value: 9
+    value: 5.66
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: phosphate buffer (concentration not printed)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: octanal
+- id: laemont2023-74
+  resolution: resolved
+  odorant: Octanal
+  lever_class: mixed
+  lever: soak pH (control deionized water pH 7 vs phosphate buffer pH 4 / pH 9)
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 7 (control)
+    lever_value: 7
+    value: 5.91
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: pH 4
+    lever_value: 4
+    value: 6.22
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: phosphate buffer (concentration not printed)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: pH 9
+    lever_value: 9
+    value: 5.66
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: phosphate buffer (concentration not printed)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: octanal
+- id: laemont2023-75
+  resolution: resolved
+  odorant: Octanal
+  lever_class: sugar identity
+  lever: glucose vs fructose soak (20%)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 20% Glucose
+    lever_value: glucose
+    value: 20.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        glucose: 20% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 20% Fructose
+    lever_value: fructose
+    value: 14.6
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        fructose: 20% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: octanal
+- id: laemont2023-76
+  resolution: resolved
+  odorant: Octanal
+  lever_class: precursor dose
+  lever: added glucose (20% soak) vs water control
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7 (control)
+    lever_value: 0%
+    value: 5.91
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 20% Glucose
+    lever_value: 20%
+    value: 20.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        glucose: 20% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: octanal
+- id: laemont2023-77
+  resolution: resolved
+  odorant: Octanal
+  lever_class: precursor dose
+  lever: added fructose (20% soak) vs water control
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7 (control)
+    lever_value: 0%
+    value: 5.91
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 20% Fructose
+    lever_value: 20%
+    value: 14.6
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        fructose: 20% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: octanal
+- id: laemont2023-78
+  resolution: agreed
+  odorant: Octanal
+  lever_class: precursor dose
+  lever: added whey protein isolate (17% soak) vs water control
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7 (control)
+    lever_value: 0%
+    value: 5.91
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 17% Whey Isolate
+    lever_value: 17%
+    value: 8.51
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        whey protein isolate: 17% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: octanal
+- id: laemont2023-79
+  resolution: resolved
+  odorant: Octanal
+  lever_class: mixed
+  lever: whey protein concentrate 17% soak vs water control (protein and lactose added together)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7 (control)
+    lever_value: 0%
+    value: 5.91
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 17% Whey Concentrate
+    lever_value: 17%
+    value: 14.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        whey protein concentrate: 17% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: octanal
+- id: laemont2023-80
+  resolution: agreed
+  odorant: Octanal
+  lever_class: mixed
+  lever: whey protein isolate vs whey protein concentrate (protein purity; WPC also carries lactose)
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 17% Whey Isolate
+    lever_value: isolate
+    value: 8.51
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        whey protein isolate: 17% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 17% Whey Concentrate
+    lever_value: concentrate
+    value: 14.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        whey protein concentrate: 17% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: octanal
+- id: laemont2023-81
+  resolution: resolved
+  odorant: Octanal
+  lever_class: mixed
+  lever: raw unsoaked seeds vs soaked (water) and roasted 165 C 8 min
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: Raw Seeds
+    lever_value: raw
+    value: 1.96
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors: {}
+      buffer: none
+      matrix: other (raw Panther sunflower seed kernels, not soaked, not roasted)
+      headspace: air
+  - label: pH 7 (control)
+    lever_value: roasted
+    value: 5.91
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: octanal
+- id: laemont2023-82
+  resolution: agreed
+  odorant: Pentanal
+  lever_class: pH
+  lever: soak pH 4 vs 9 (phosphate buffer)
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 4
+    lever_value: 4
+    value: 3290
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: phosphate buffer (concentration not printed)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: pH 9
+    lever_value: 9
+    value: 4550
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: phosphate buffer (concentration not printed)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: pentanal
+- id: laemont2023-83
+  resolution: resolved
+  odorant: Pentanal
+  lever_class: mixed
+  lever: soak pH (control deionized water pH 7 vs phosphate buffer pH 4 / pH 9)
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 7 (control)
+    lever_value: 7
+    value: 3660
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: pH 4
+    lever_value: 4
+    value: 3290
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: phosphate buffer (concentration not printed)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: pH 9
+    lever_value: 9
+    value: 4550
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: phosphate buffer (concentration not printed)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: pentanal
+- id: laemont2023-84
+  resolution: resolved
+  odorant: Pentanal
+  lever_class: sugar identity
+  lever: glucose vs fructose soak (20%)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 20% Glucose
+    lever_value: glucose
+    value: 10140
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        glucose: 20% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 20% Fructose
+    lever_value: fructose
+    value: 9760
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        fructose: 20% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: pentanal
+- id: laemont2023-85
+  resolution: resolved
+  odorant: Pentanal
+  lever_class: precursor dose
+  lever: added glucose (20% soak) vs water control
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7 (control)
+    lever_value: 0%
+    value: 3660
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 20% Glucose
+    lever_value: 20%
+    value: 10140
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        glucose: 20% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: pentanal
+- id: laemont2023-86
+  resolution: resolved
+  odorant: Pentanal
+  lever_class: precursor dose
+  lever: added fructose (20% soak) vs water control
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7 (control)
+    lever_value: 0%
+    value: 3660
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 20% Fructose
+    lever_value: 20%
+    value: 9760
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        fructose: 20% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: pentanal
+- id: laemont2023-87
+  resolution: agreed
+  odorant: Pentanal
+  lever_class: precursor dose
+  lever: added whey protein isolate (17% soak) vs water control
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7 (control)
+    lever_value: 0%
+    value: 3660
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 17% Whey Isolate
+    lever_value: 17%
+    value: 10120
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        whey protein isolate: 17% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: pentanal
+- id: laemont2023-88
+  resolution: resolved
+  odorant: Pentanal
+  lever_class: mixed
+  lever: whey protein concentrate 17% soak vs water control (protein and lactose added together)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7 (control)
+    lever_value: 0%
+    value: 3660
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 17% Whey Concentrate
+    lever_value: 17%
+    value: 19300
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        whey protein concentrate: 17% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: pentanal
+- id: laemont2023-89
+  resolution: agreed
+  odorant: Pentanal
+  lever_class: mixed
+  lever: whey protein isolate vs whey protein concentrate (protein purity; WPC also carries lactose)
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 17% Whey Isolate
+    lever_value: isolate
+    value: 10120
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        whey protein isolate: 17% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 17% Whey Concentrate
+    lever_value: concentrate
+    value: 19300
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        whey protein concentrate: 17% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: pentanal
+- id: laemont2023-90
+  resolution: resolved
+  odorant: Pentanal
+  lever_class: mixed
+  lever: raw unsoaked seeds vs soaked (water) and roasted 165 C 8 min
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: Raw Seeds
+    lever_value: raw
+    value: 3.81
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors: {}
+      buffer: none
+      matrix: other (raw Panther sunflower seed kernels, not soaked, not roasted)
+      headspace: air
+  - label: pH 7 (control)
+    lever_value: roasted
+    value: 3660
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: pentanal
+- id: laemont2023-91
+  resolution: agreed
+  odorant: Phenylacetaldehyde
+  lever_class: pH
+  lever: soak pH 4 vs 9 (phosphate buffer)
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 4
+    lever_value: 4
+    value: 7.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: phosphate buffer (concentration not printed)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: pH 9
+    lever_value: 9
+    value: 9.51
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: phosphate buffer (concentration not printed)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: phenylacetaldehyde
+- id: laemont2023-92
+  resolution: resolved
+  odorant: Phenylacetaldehyde
+  lever_class: mixed
+  lever: soak pH (control deionized water pH 7 vs phosphate buffer pH 4 / pH 9)
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 7 (control)
+    lever_value: 7
+    value: 9.28
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: pH 4
+    lever_value: 4
+    value: 7.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: phosphate buffer (concentration not printed)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: pH 9
+    lever_value: 9
+    value: 9.51
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: phosphate buffer (concentration not printed)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: phenylacetaldehyde
+- id: laemont2023-93
+  resolution: resolved
+  odorant: Phenylacetaldehyde
+  lever_class: sugar identity
+  lever: glucose vs fructose soak (20%)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 20% Glucose
+    lever_value: glucose
+    value: 12.6
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        glucose: 20% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 20% Fructose
+    lever_value: fructose
+    value: 17.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        fructose: 20% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: phenylacetaldehyde
+- id: laemont2023-94
+  resolution: resolved
+  odorant: Phenylacetaldehyde
+  lever_class: precursor dose
+  lever: added glucose (20% soak) vs water control
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7 (control)
+    lever_value: 0%
+    value: 9.28
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 20% Glucose
+    lever_value: 20%
+    value: 12.6
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        glucose: 20% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: phenylacetaldehyde
+- id: laemont2023-95
+  resolution: resolved
+  odorant: Phenylacetaldehyde
+  lever_class: precursor dose
+  lever: added fructose (20% soak) vs water control
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7 (control)
+    lever_value: 0%
+    value: 9.28
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 20% Fructose
+    lever_value: 20%
+    value: 17.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        fructose: 20% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: phenylacetaldehyde
+- id: laemont2023-96
+  resolution: agreed
+  odorant: Phenylacetaldehyde
+  lever_class: precursor dose
+  lever: added whey protein isolate (17% soak) vs water control
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7 (control)
+    lever_value: 0%
+    value: 9.28
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 17% Whey Isolate
+    lever_value: 17%
+    value: 28.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        whey protein isolate: 17% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: phenylacetaldehyde
+- id: laemont2023-97
+  resolution: resolved
+  odorant: Phenylacetaldehyde
+  lever_class: mixed
+  lever: whey protein concentrate 17% soak vs water control (protein and lactose added together)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7 (control)
+    lever_value: 0%
+    value: 9.28
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 17% Whey Concentrate
+    lever_value: 17%
+    value: 38.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        whey protein concentrate: 17% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: phenylacetaldehyde
+- id: laemont2023-98
+  resolution: agreed
+  odorant: Phenylacetaldehyde
+  lever_class: mixed
+  lever: whey protein isolate vs whey protein concentrate (protein purity; WPC also carries lactose)
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 17% Whey Isolate
+    lever_value: isolate
+    value: 28.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        whey protein isolate: 17% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 17% Whey Concentrate
+    lever_value: concentrate
+    value: 38.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        whey protein concentrate: 17% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: phenylacetaldehyde
+- id: laemont2023-99
+  resolution: resolved
+  odorant: Phenylacetaldehyde
+  lever_class: mixed
+  lever: raw unsoaked seeds vs soaked (water) and roasted 165 C 8 min
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: Raw Seeds
+    lever_value: raw
+    value: 3.37
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors: {}
+      buffer: none
+      matrix: other (raw Panther sunflower seed kernels, not soaked, not roasted)
+      headspace: air
+  - label: pH 7 (control)
+    lever_value: roasted
+    value: 9.28
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: phenylacetaldehyde
+- id: laemont2023-100
+  resolution: agreed
+  odorant: Unsubstituted pyrazine
+  lever_class: pH
+  lever: soak pH 4 vs 9 (phosphate buffer)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 4
+    lever_value: 4
+    value: 2.38
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: phosphate buffer (concentration not printed)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: pH 9
+    lever_value: 9
+    value: 3.61
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: phosphate buffer (concentration not printed)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: pyrazine
+- id: laemont2023-101
+  resolution: resolved
+  odorant: Unsubstituted pyrazine
+  lever_class: mixed
+  lever: soak pH (control deionized water pH 7 vs phosphate buffer pH 4 / pH 9)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 7 (control)
+    lever_value: 7
+    value: 3.03
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: pH 4
+    lever_value: 4
+    value: 2.38
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: phosphate buffer (concentration not printed)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: pH 9
+    lever_value: 9
+    value: 3.61
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: phosphate buffer (concentration not printed)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: pyrazine
+- id: laemont2023-102
+  resolution: resolved
+  odorant: Unsubstituted pyrazine
+  lever_class: sugar identity
+  lever: glucose vs fructose soak (20%)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 20% Glucose
+    lever_value: glucose
+    value: 7.75
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        glucose: 20% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 20% Fructose
+    lever_value: fructose
+    value: 6.99
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        fructose: 20% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: pyrazine
+- id: laemont2023-103
+  resolution: resolved
+  odorant: Unsubstituted pyrazine
+  lever_class: precursor dose
+  lever: added glucose (20% soak) vs water control
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7 (control)
+    lever_value: 0%
+    value: 3.03
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 20% Glucose
+    lever_value: 20%
+    value: 7.75
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        glucose: 20% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: pyrazine
+- id: laemont2023-104
+  resolution: resolved
+  odorant: Unsubstituted pyrazine
+  lever_class: precursor dose
+  lever: added fructose (20% soak) vs water control
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7 (control)
+    lever_value: 0%
+    value: 3.03
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 20% Fructose
+    lever_value: 20%
+    value: 6.99
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        fructose: 20% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: pyrazine
+- id: laemont2023-105
+  resolution: agreed
+  odorant: Unsubstituted pyrazine
+  lever_class: precursor dose
+  lever: added whey protein isolate (17% soak) vs water control
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7 (control)
+    lever_value: 0%
+    value: 3.03
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 17% Whey Isolate
+    lever_value: 17%
+    value: 6.23
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        whey protein isolate: 17% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: pyrazine
+- id: laemont2023-106
+  resolution: resolved
+  odorant: Unsubstituted pyrazine
+  lever_class: mixed
+  lever: whey protein concentrate 17% soak vs water control (protein and lactose added together)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7 (control)
+    lever_value: 0%
+    value: 3.03
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 17% Whey Concentrate
+    lever_value: 17%
+    value: 14.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        whey protein concentrate: 17% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: pyrazine
+- id: laemont2023-107
+  resolution: agreed
+  odorant: Unsubstituted pyrazine
+  lever_class: mixed
+  lever: whey protein isolate vs whey protein concentrate (protein purity; WPC also carries lactose)
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 17% Whey Isolate
+    lever_value: isolate
+    value: 6.23
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        whey protein isolate: 17% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 17% Whey Concentrate
+    lever_value: concentrate
+    value: 14.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        whey protein concentrate: 17% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: pyrazine
+- id: laemont2023-108
+  resolution: resolved
+  odorant: Unsubstituted pyrazine
+  lever_class: mixed
+  lever: raw unsoaked seeds vs soaked (water) and roasted 165 C 8 min
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: Raw Seeds
+    lever_value: raw
+    value: 1.91
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors: {}
+      buffer: none
+      matrix: other (raw Panther sunflower seed kernels, not soaked, not roasted)
+      headspace: air
+  - label: pH 7 (control)
+    lever_value: roasted
+    value: 3.03
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: pyrazine
+- id: laemont2023-109
+  resolution: agreed
+  odorant: Tetramethylpyrazine
+  lever_class: pH
+  lever: soak pH 4 vs 9 (phosphate buffer)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 4
+    lever_value: 4
+    value: 9.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: phosphate buffer (concentration not printed)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: pH 9
+    lever_value: 9
+    value: 17.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: phosphate buffer (concentration not printed)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: tetramethylpyrazine
+- id: laemont2023-110
+  resolution: resolved
+  odorant: Tetramethylpyrazine
+  lever_class: mixed
+  lever: soak pH (control deionized water pH 7 vs phosphate buffer pH 4 / pH 9)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 7 (control)
+    lever_value: 7
+    value: 11.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: pH 4
+    lever_value: 4
+    value: 9.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: phosphate buffer (concentration not printed)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: pH 9
+    lever_value: 9
+    value: 17.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: phosphate buffer (concentration not printed)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: tetramethylpyrazine
+- id: laemont2023-111
+  resolution: resolved
+  odorant: Tetramethylpyrazine
+  lever_class: sugar identity
+  lever: glucose vs fructose soak (20%)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 20% Glucose
+    lever_value: glucose
+    value: 23.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        glucose: 20% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 20% Fructose
+    lever_value: fructose
+    value: 28.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        fructose: 20% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: tetramethylpyrazine
+- id: laemont2023-112
+  resolution: resolved
+  odorant: Tetramethylpyrazine
+  lever_class: precursor dose
+  lever: added glucose (20% soak) vs water control
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7 (control)
+    lever_value: 0%
+    value: 11.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 20% Glucose
+    lever_value: 20%
+    value: 23.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        glucose: 20% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: tetramethylpyrazine
+- id: laemont2023-113
+  resolution: resolved
+  odorant: Tetramethylpyrazine
+  lever_class: precursor dose
+  lever: added fructose (20% soak) vs water control
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7 (control)
+    lever_value: 0%
+    value: 11.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 20% Fructose
+    lever_value: 20%
+    value: 28.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        fructose: 20% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: tetramethylpyrazine
+- id: laemont2023-114
+  resolution: agreed
+  odorant: Tetramethylpyrazine
+  lever_class: precursor dose
+  lever: added whey protein isolate (17% soak) vs water control
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7 (control)
+    lever_value: 0%
+    value: 11.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 17% Whey Isolate
+    lever_value: 17%
+    value: 27.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        whey protein isolate: 17% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: tetramethylpyrazine
+- id: laemont2023-115
+  resolution: resolved
+  odorant: Tetramethylpyrazine
+  lever_class: mixed
+  lever: whey protein concentrate 17% soak vs water control (protein and lactose added together)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7 (control)
+    lever_value: 0%
+    value: 11.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 17% Whey Concentrate
+    lever_value: 17%
+    value: 62.6
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        whey protein concentrate: 17% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: tetramethylpyrazine
+- id: laemont2023-116
+  resolution: agreed
+  odorant: Tetramethylpyrazine
+  lever_class: mixed
+  lever: whey protein isolate vs whey protein concentrate (protein purity; WPC also carries lactose)
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 17% Whey Isolate
+    lever_value: isolate
+    value: 27.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        whey protein isolate: 17% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 17% Whey Concentrate
+    lever_value: concentrate
+    value: 62.6
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        whey protein concentrate: 17% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: tetramethylpyrazine
+- id: laemont2023-117
+  resolution: resolved
+  odorant: Tetramethylpyrazine
+  lever_class: mixed
+  lever: raw unsoaked seeds vs soaked (water) and roasted 165 C 8 min
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: Raw Seeds
+    lever_value: raw
+    value: 6.52
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors: {}
+      buffer: none
+      matrix: other (raw Panther sunflower seed kernels, not soaked, not roasted)
+      headspace: air
+  - label: pH 7 (control)
+    lever_value: roasted
+    value: 11.8
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: tetramethylpyrazine
+- id: laemont2023-118
+  resolution: agreed
+  odorant: Trimethylpyrazine
+  lever_class: pH
+  lever: soak pH 4 vs 9 (phosphate buffer)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 4
+    lever_value: 4
+    value: 9.09
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: phosphate buffer (concentration not printed)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: pH 9
+    lever_value: 9
+    value: 18.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: phosphate buffer (concentration not printed)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: trimethylpyrazine
+- id: laemont2023-119
+  resolution: resolved
+  odorant: Trimethylpyrazine
+  lever_class: mixed
+  lever: soak pH (control deionized water pH 7 vs phosphate buffer pH 4 / pH 9)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: pH 7 (control)
+    lever_value: 7
+    value: 12.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: pH 4
+    lever_value: 4
+    value: 9.09
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: phosphate buffer (concentration not printed)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: pH 9
+    lever_value: 9
+    value: 18.3
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: phosphate buffer (concentration not printed)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: trimethylpyrazine
+- id: laemont2023-120
+  resolution: resolved
+  odorant: Trimethylpyrazine
+  lever_class: sugar identity
+  lever: glucose vs fructose soak (20%)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 20% Glucose
+    lever_value: glucose
+    value: 25.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        glucose: 20% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 20% Fructose
+    lever_value: fructose
+    value: 39.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        fructose: 20% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: trimethylpyrazine
+- id: laemont2023-121
+  resolution: resolved
+  odorant: Trimethylpyrazine
+  lever_class: precursor dose
+  lever: added glucose (20% soak) vs water control
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7 (control)
+    lever_value: 0%
+    value: 12.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 20% Glucose
+    lever_value: 20%
+    value: 25.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        glucose: 20% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: trimethylpyrazine
+- id: laemont2023-122
+  resolution: resolved
+  odorant: Trimethylpyrazine
+  lever_class: precursor dose
+  lever: added fructose (20% soak) vs water control
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7 (control)
+    lever_value: 0%
+    value: 12.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 20% Fructose
+    lever_value: 20%
+    value: 39.4
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        fructose: 20% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: trimethylpyrazine
+- id: laemont2023-123
+  resolution: agreed
+  odorant: Trimethylpyrazine
+  lever_class: precursor dose
+  lever: added whey protein isolate (17% soak) vs water control
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7 (control)
+    lever_value: 0%
+    value: 12.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 17% Whey Isolate
+    lever_value: 17%
+    value: 41.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        whey protein isolate: 17% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: trimethylpyrazine
+- id: laemont2023-124
+  resolution: resolved
+  odorant: Trimethylpyrazine
+  lever_class: mixed
+  lever: whey protein concentrate 17% soak vs water control (protein and lactose added together)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: pH 7 (control)
+    lever_value: 0%
+    value: 12.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 17% Whey Concentrate
+    lever_value: 17%
+    value: 101
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        whey protein concentrate: 17% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: trimethylpyrazine
+- id: laemont2023-125
+  resolution: agreed
+  odorant: Trimethylpyrazine
+  lever_class: mixed
+  lever: whey protein isolate vs whey protein concentrate (protein purity; WPC also carries lactose)
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 17% Whey Isolate
+    lever_value: isolate
+    value: 41.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        whey protein isolate: 17% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  - label: 17% Whey Concentrate
+    lever_value: concentrate
+    value: 101
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors:
+        whey protein concentrate: 17% (w/v) soak, 70 mL
+      buffer: none
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: trimethylpyrazine
+- id: laemont2023-126
+  resolution: resolved
+  odorant: Trimethylpyrazine
+  lever_class: mixed
+  lever: raw unsoaked seeds vs soaked (water) and roasted 165 C 8 min
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: Raw Seeds
+    lever_value: raw
+    value: 1.9
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: null
+      time_min: null
+      precursors: {}
+      buffer: none
+      matrix: other (raw Panther sunflower seed kernels, not soaked, not roasted)
+      headspace: air
+  - label: pH 7 (control)
+    lever_value: roasted
+    value: 12.1
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 165
+      time_min: 8
+      precursors: {}
+      buffer: none (deionized water)
+      matrix: other (Panther sunflower seed kernels, soaked 15 h, dried 24 h, ground after roasting)
+      headspace: air
+  odorant_printed: trimethylpyrazine

@@ -1,0 +1,854 @@
+source: yang2012
+pdf: data/articles/yang2012.pdf
+reader: resolved
+scope_note: 'Resolved 2026-11-13 (step 11, A6 batch 2). Base reader a (15). Readers agree on every Table 4 value (5 odorants
+  x Groups I / II / III; reader b keyed one three-level sulfur-source network). Decided call: Group I vs II (thiamine added
+  or not, GSH + cysteine + xylose fixed) and Group II vs III (GSH 0.19 + cysteine 0.19 mmol vs GSH 0.37 mmol) are sulfur source;
+  Group I vs III (thiamine and cysteine removed, GSH doubled) is mixed. The 29 Box-Behnken RSM runs (Table 2) report only
+  a sensory score: no contrast. Groups assumed run at the optimal condition (132 C, 95 min, 50 mL 0.2 M phosphate, initial
+  pH 4.80; buffered). ''mg/mL'' as printed, internal standard with response factor 1 (relative). Group I* (13C-labelled) has
+  no Table 4 column. No final pH printed. Conventions (resolver, uniform with batch 1): printed ND, ''-'', blank or 0 is nd_no_limit
+  with value null; all-ND contrasts kept; one compound printed twice carries duplicate_of; co-eluting mixtures odorant_unlisted;
+  odorant names canonicalised to the compound_keys display name, printed name in odorant_printed; IS semi-quantification and
+  SIFT-MS ppb relative, calibration with authentic standards absolute.'
+contrasts:
+- id: yang2012-1
+  resolution: resolved
+  odorant: 2-Methyl-3-furanthiol (MFT)
+  lever_class: sulfur source
+  lever: thiamine added vs none (GSH + cysteine + xylose)
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: mg/mL
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Group I
+    lever_value: GSH + cysteine + thiamine
+    value: 0.62
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 132
+      time_min: 95
+      precursors:
+        GSH: 0.19 mmol
+        L-cysteine: 0.19 mmol
+        D-xylose: 0.67 mmol
+        thiamine: 0.02 mmol
+      buffer: 0.2 M phosphate (50 mL)
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Group II
+    lever_value: GSH + cysteine
+    value: 0.61
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 132
+      time_min: 95
+      precursors:
+        GSH: 0.19 mmol
+        L-cysteine: 0.19 mmol
+        D-xylose: 0.67 mmol
+      buffer: 0.2 M phosphate (50 mL)
+      matrix: buffer
+      headspace: sealed, unstated
+  odorant_printed: MFT
+- id: yang2012-2
+  resolution: resolved
+  odorant: 2-Methyl-3-furanthiol (MFT)
+  lever_class: sulfur source
+  lever: cysteine 0.19 mmol + GSH 0.19 vs GSH 0.37 mmol
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: mg/mL
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Group II
+    lever_value: GSH + cysteine
+    value: 0.61
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 132
+      time_min: 95
+      precursors:
+        GSH: 0.19 mmol
+        L-cysteine: 0.19 mmol
+        D-xylose: 0.67 mmol
+      buffer: 0.2 M phosphate (50 mL)
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Group III
+    lever_value: GSH only (0.37 mmol)
+    value: 0.19
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 132
+      time_min: 95
+      precursors:
+        GSH: 0.37 mmol
+        D-xylose: 0.67 mmol
+      buffer: 0.2 M phosphate (50 mL)
+      matrix: buffer
+      headspace: sealed, unstated
+  odorant_printed: MFT
+- id: yang2012-3
+  resolution: resolved
+  odorant: 2-Methyl-3-furanthiol (MFT)
+  lever_class: mixed
+  lever: thiamine and cysteine removed, GSH doubled
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: mg/mL
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Group I
+    lever_value: GSH + cysteine + thiamine
+    value: 0.62
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 132
+      time_min: 95
+      precursors:
+        GSH: 0.19 mmol
+        L-cysteine: 0.19 mmol
+        D-xylose: 0.67 mmol
+        thiamine: 0.02 mmol
+      buffer: 0.2 M phosphate (50 mL)
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Group III
+    lever_value: GSH only (0.37 mmol)
+    value: 0.19
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 132
+      time_min: 95
+      precursors:
+        GSH: 0.37 mmol
+        D-xylose: 0.67 mmol
+      buffer: 0.2 M phosphate (50 mL)
+      matrix: buffer
+      headspace: sealed, unstated
+  odorant_printed: MFT
+- id: yang2012-4
+  resolution: resolved
+  odorant: 2-Furfurylthiol (FFT)
+  lever_class: sulfur source
+  lever: thiamine added vs none (GSH + cysteine + xylose)
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: mg/mL
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Group I
+    lever_value: GSH + cysteine + thiamine
+    value: 1.39
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 132
+      time_min: 95
+      precursors:
+        GSH: 0.19 mmol
+        L-cysteine: 0.19 mmol
+        D-xylose: 0.67 mmol
+        thiamine: 0.02 mmol
+      buffer: 0.2 M phosphate (50 mL)
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Group II
+    lever_value: GSH + cysteine
+    value: 0.34
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 132
+      time_min: 95
+      precursors:
+        GSH: 0.19 mmol
+        L-cysteine: 0.19 mmol
+        D-xylose: 0.67 mmol
+      buffer: 0.2 M phosphate (50 mL)
+      matrix: buffer
+      headspace: sealed, unstated
+  odorant_printed: 2-furfurylthiol
+- id: yang2012-5
+  resolution: resolved
+  odorant: 2-Furfurylthiol (FFT)
+  lever_class: sulfur source
+  lever: cysteine 0.19 mmol + GSH 0.19 vs GSH 0.37 mmol
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: mg/mL
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Group II
+    lever_value: GSH + cysteine
+    value: 0.34
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 132
+      time_min: 95
+      precursors:
+        GSH: 0.19 mmol
+        L-cysteine: 0.19 mmol
+        D-xylose: 0.67 mmol
+      buffer: 0.2 M phosphate (50 mL)
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Group III
+    lever_value: GSH only (0.37 mmol)
+    value: 0.07
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 132
+      time_min: 95
+      precursors:
+        GSH: 0.37 mmol
+        D-xylose: 0.67 mmol
+      buffer: 0.2 M phosphate (50 mL)
+      matrix: buffer
+      headspace: sealed, unstated
+  odorant_printed: 2-furfurylthiol
+- id: yang2012-6
+  resolution: resolved
+  odorant: 2-Furfurylthiol (FFT)
+  lever_class: mixed
+  lever: thiamine and cysteine removed, GSH doubled
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: mg/mL
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Group I
+    lever_value: GSH + cysteine + thiamine
+    value: 1.39
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 132
+      time_min: 95
+      precursors:
+        GSH: 0.19 mmol
+        L-cysteine: 0.19 mmol
+        D-xylose: 0.67 mmol
+        thiamine: 0.02 mmol
+      buffer: 0.2 M phosphate (50 mL)
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Group III
+    lever_value: GSH only (0.37 mmol)
+    value: 0.07
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 132
+      time_min: 95
+      precursors:
+        GSH: 0.37 mmol
+        D-xylose: 0.67 mmol
+      buffer: 0.2 M phosphate (50 mL)
+      matrix: buffer
+      headspace: sealed, unstated
+  odorant_printed: 2-furfurylthiol
+- id: yang2012-7
+  resolution: resolved
+  odorant: Furfural
+  lever_class: sulfur source
+  lever: thiamine added vs none (GSH + cysteine + xylose)
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: mg/mL
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Group I
+    lever_value: GSH + cysteine + thiamine
+    value: 3.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 132
+      time_min: 95
+      precursors:
+        GSH: 0.19 mmol
+        L-cysteine: 0.19 mmol
+        D-xylose: 0.67 mmol
+        thiamine: 0.02 mmol
+      buffer: 0.2 M phosphate (50 mL)
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Group II
+    lever_value: GSH + cysteine
+    value: 4.71
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 132
+      time_min: 95
+      precursors:
+        GSH: 0.19 mmol
+        L-cysteine: 0.19 mmol
+        D-xylose: 0.67 mmol
+      buffer: 0.2 M phosphate (50 mL)
+      matrix: buffer
+      headspace: sealed, unstated
+  odorant_printed: furfural
+- id: yang2012-8
+  resolution: resolved
+  odorant: Furfural
+  lever_class: sulfur source
+  lever: cysteine 0.19 mmol + GSH 0.19 vs GSH 0.37 mmol
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: mg/mL
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Group II
+    lever_value: GSH + cysteine
+    value: 4.71
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 132
+      time_min: 95
+      precursors:
+        GSH: 0.19 mmol
+        L-cysteine: 0.19 mmol
+        D-xylose: 0.67 mmol
+      buffer: 0.2 M phosphate (50 mL)
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Group III
+    lever_value: GSH only (0.37 mmol)
+    value: 8.65
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 132
+      time_min: 95
+      precursors:
+        GSH: 0.37 mmol
+        D-xylose: 0.67 mmol
+      buffer: 0.2 M phosphate (50 mL)
+      matrix: buffer
+      headspace: sealed, unstated
+  odorant_printed: furfural
+- id: yang2012-9
+  resolution: resolved
+  odorant: Furfural
+  lever_class: mixed
+  lever: thiamine and cysteine removed, GSH doubled
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: mg/mL
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Group I
+    lever_value: GSH + cysteine + thiamine
+    value: 3.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 132
+      time_min: 95
+      precursors:
+        GSH: 0.19 mmol
+        L-cysteine: 0.19 mmol
+        D-xylose: 0.67 mmol
+        thiamine: 0.02 mmol
+      buffer: 0.2 M phosphate (50 mL)
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Group III
+    lever_value: GSH only (0.37 mmol)
+    value: 8.65
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 132
+      time_min: 95
+      precursors:
+        GSH: 0.37 mmol
+        D-xylose: 0.67 mmol
+      buffer: 0.2 M phosphate (50 mL)
+      matrix: buffer
+      headspace: sealed, unstated
+  odorant_printed: furfural
+- id: yang2012-10
+  resolution: resolved
+  odorant: 1-Octen-3-ol
+  lever_class: sulfur source
+  lever: thiamine added vs none (GSH + cysteine + xylose)
+  focal: false
+  location: Table 4
+  digitised: false
+  unit: mg/mL
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Group I
+    lever_value: GSH + cysteine + thiamine
+    value: 0.12
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 132
+      time_min: 95
+      precursors:
+        GSH: 0.19 mmol
+        L-cysteine: 0.19 mmol
+        D-xylose: 0.67 mmol
+        thiamine: 0.02 mmol
+      buffer: 0.2 M phosphate (50 mL)
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Group II
+    lever_value: GSH + cysteine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 132
+      time_min: 95
+      precursors:
+        GSH: 0.19 mmol
+        L-cysteine: 0.19 mmol
+        D-xylose: 0.67 mmol
+      buffer: 0.2 M phosphate (50 mL)
+      matrix: buffer
+      headspace: sealed, unstated
+  odorant_printed: 1-octen-3-ol
+- id: yang2012-11
+  resolution: resolved
+  odorant: 1-Octen-3-ol
+  lever_class: sulfur source
+  lever: cysteine 0.19 mmol + GSH 0.19 vs GSH 0.37 mmol
+  focal: false
+  location: Table 4
+  digitised: false
+  unit: mg/mL
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Group II
+    lever_value: GSH + cysteine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 132
+      time_min: 95
+      precursors:
+        GSH: 0.19 mmol
+        L-cysteine: 0.19 mmol
+        D-xylose: 0.67 mmol
+      buffer: 0.2 M phosphate (50 mL)
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Group III
+    lever_value: GSH only (0.37 mmol)
+    value: 0.01
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 132
+      time_min: 95
+      precursors:
+        GSH: 0.37 mmol
+        D-xylose: 0.67 mmol
+      buffer: 0.2 M phosphate (50 mL)
+      matrix: buffer
+      headspace: sealed, unstated
+  odorant_printed: 1-octen-3-ol
+- id: yang2012-12
+  resolution: resolved
+  odorant: 1-Octen-3-ol
+  lever_class: mixed
+  lever: thiamine and cysteine removed, GSH doubled
+  focal: false
+  location: Table 4
+  digitised: false
+  unit: mg/mL
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Group I
+    lever_value: GSH + cysteine + thiamine
+    value: 0.12
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 132
+      time_min: 95
+      precursors:
+        GSH: 0.19 mmol
+        L-cysteine: 0.19 mmol
+        D-xylose: 0.67 mmol
+        thiamine: 0.02 mmol
+      buffer: 0.2 M phosphate (50 mL)
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Group III
+    lever_value: GSH only (0.37 mmol)
+    value: 0.01
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 132
+      time_min: 95
+      precursors:
+        GSH: 0.37 mmol
+        D-xylose: 0.67 mmol
+      buffer: 0.2 M phosphate (50 mL)
+      matrix: buffer
+      headspace: sealed, unstated
+  odorant_printed: 1-octen-3-ol
+- id: yang2012-13
+  resolution: resolved
+  odorant: Benzaldehyde
+  lever_class: sulfur source
+  lever: thiamine added vs none (GSH + cysteine + xylose)
+  focal: false
+  location: Table 4
+  digitised: false
+  unit: mg/mL
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Group I
+    lever_value: GSH + cysteine + thiamine
+    value: 0.29
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 132
+      time_min: 95
+      precursors:
+        GSH: 0.19 mmol
+        L-cysteine: 0.19 mmol
+        D-xylose: 0.67 mmol
+        thiamine: 0.02 mmol
+      buffer: 0.2 M phosphate (50 mL)
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Group II
+    lever_value: GSH + cysteine
+    value: 0.32
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 132
+      time_min: 95
+      precursors:
+        GSH: 0.19 mmol
+        L-cysteine: 0.19 mmol
+        D-xylose: 0.67 mmol
+      buffer: 0.2 M phosphate (50 mL)
+      matrix: buffer
+      headspace: sealed, unstated
+  odorant_printed: benzaldehyde
+- id: yang2012-14
+  resolution: resolved
+  odorant: Benzaldehyde
+  lever_class: sulfur source
+  lever: cysteine 0.19 mmol + GSH 0.19 vs GSH 0.37 mmol
+  focal: false
+  location: Table 4
+  digitised: false
+  unit: mg/mL
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Group II
+    lever_value: GSH + cysteine
+    value: 0.32
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 132
+      time_min: 95
+      precursors:
+        GSH: 0.19 mmol
+        L-cysteine: 0.19 mmol
+        D-xylose: 0.67 mmol
+      buffer: 0.2 M phosphate (50 mL)
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Group III
+    lever_value: GSH only (0.37 mmol)
+    value: 0.41
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 132
+      time_min: 95
+      precursors:
+        GSH: 0.37 mmol
+        D-xylose: 0.67 mmol
+      buffer: 0.2 M phosphate (50 mL)
+      matrix: buffer
+      headspace: sealed, unstated
+  odorant_printed: benzaldehyde
+- id: yang2012-15
+  resolution: resolved
+  odorant: Benzaldehyde
+  lever_class: mixed
+  lever: thiamine and cysteine removed, GSH doubled
+  focal: false
+  location: Table 4
+  digitised: false
+  unit: mg/mL
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Group I
+    lever_value: GSH + cysteine + thiamine
+    value: 0.29
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 132
+      time_min: 95
+      precursors:
+        GSH: 0.19 mmol
+        L-cysteine: 0.19 mmol
+        D-xylose: 0.67 mmol
+        thiamine: 0.02 mmol
+      buffer: 0.2 M phosphate (50 mL)
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Group III
+    lever_value: GSH only (0.37 mmol)
+    value: 0.41
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 132
+      time_min: 95
+      precursors:
+        GSH: 0.37 mmol
+        D-xylose: 0.67 mmol
+      buffer: 0.2 M phosphate (50 mL)
+      matrix: buffer
+      headspace: sealed, unstated
+  odorant_printed: benzaldehyde

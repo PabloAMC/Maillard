@@ -1,0 +1,1727 @@
+source: bemisyoung1993
+pdf: data/articles/bemis-young1993.pdf
+reader: a
+scope_note: Table 2 relative weight % (share of pyrazines, mean of triplicates) over an 8-level initial-pH ladder, unbuffered
+  (pH set with NaOH/HCl). Final pH was measured after heating but is not printed. Pyrazines not on the declared list (2-ethyl-6-/5-methyl,
+  2-vinyl, diethyl, quinoxalines) and Table 3 non-pyrazines are not keyed.
+contrasts:
+- id: bemisyoung1993-1
+  odorant: Unsubstituted pyrazine
+  lever_class: pH
+  lever: initial pH (adjusted with 2N NaOH or 10% HCl)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: mean relative weight % of pyrazines
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 1.00
+    lever_value: 1.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 1.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 2.34
+    lever_value: 2.34
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 2.34
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 4.00
+    lever_value: 4.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 5.97
+    lever_value: 5.97
+    value: 1.31
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.97
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 7.00
+    lever_value: 7.0
+    value: 0.79
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 9.00
+    lever_value: 9.0
+    value: 0.48
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 9.64
+    lever_value: 9.64
+    value: 0.06
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9.64
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 12.00
+    lever_value: 12.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 12.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+- id: bemisyoung1993-2
+  odorant: 2-methylpyrazine
+  lever_class: pH
+  lever: initial pH (adjusted with 2N NaOH or 10% HCl)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: mean relative weight % of pyrazines
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 1.00
+    lever_value: 1.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 1.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 2.34
+    lever_value: 2.34
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 2.34
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 4.00
+    lever_value: 4.0
+    value: 0.69
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 5.97
+    lever_value: 5.97
+    value: 0.75
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.97
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 7.00
+    lever_value: 7.0
+    value: 1.14
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 9.00
+    lever_value: 9.0
+    value: 2.22
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 9.64
+    lever_value: 9.64
+    value: 1.93
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9.64
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 12.00
+    lever_value: 12.0
+    value: 0.2
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 12.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+- id: bemisyoung1993-3
+  odorant: 2,5-dimethylpyrazine
+  lever_class: pH
+  lever: initial pH (adjusted with 2N NaOH or 10% HCl)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: mean relative weight % of pyrazines
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 1.00
+    lever_value: 1.0
+    value: 3.73
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 1.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 2.34
+    lever_value: 2.34
+    value: 3.03
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 2.34
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 4.00
+    lever_value: 4.0
+    value: 22.42
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 5.97
+    lever_value: 5.97
+    value: 20.65
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.97
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 7.00
+    lever_value: 7.0
+    value: 18.43
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 9.00
+    lever_value: 9.0
+    value: 18.58
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 9.64
+    lever_value: 9.64
+    value: 18.55
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9.64
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 12.00
+    lever_value: 12.0
+    value: 53.44
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 12.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+- id: bemisyoung1993-4
+  odorant: 2,6-dimethylpyrazine
+  lever_class: pH
+  lever: initial pH (adjusted with 2N NaOH or 10% HCl)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: mean relative weight % of pyrazines
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 1.00
+    lever_value: 1.0
+    value: 1.03
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 1.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 2.34
+    lever_value: 2.34
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 2.34
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 4.00
+    lever_value: 4.0
+    value: 0.21
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 5.97
+    lever_value: 5.97
+    value: 0.6
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.97
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 7.00
+    lever_value: 7.0
+    value: 0.65
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 9.00
+    lever_value: 9.0
+    value: 3.84
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 9.64
+    lever_value: 9.64
+    value: 5.03
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9.64
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 12.00
+    lever_value: 12.0
+    value: 2.24
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 12.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+- id: bemisyoung1993-5
+  odorant: 2-ethylpyrazine
+  lever_class: pH
+  lever: initial pH (adjusted with 2N NaOH or 10% HCl)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: mean relative weight % of pyrazines
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 1.00
+    lever_value: 1.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 1.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 2.34
+    lever_value: 2.34
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 2.34
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 4.00
+    lever_value: 4.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 5.97
+    lever_value: 5.97
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.97
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 7.00
+    lever_value: 7.0
+    value: 1.04
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 9.00
+    lever_value: 9.0
+    value: null
+    censor: trace
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 9.64
+    lever_value: 9.64
+    value: 0.09
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9.64
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 12.00
+    lever_value: 12.0
+    value: 0.11
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 12.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+- id: bemisyoung1993-6
+  odorant: 2,3-dimethylpyrazine
+  lever_class: pH
+  lever: initial pH (adjusted with 2N NaOH or 10% HCl)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: mean relative weight % of pyrazines
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 1.00
+    lever_value: 1.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 1.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 2.34
+    lever_value: 2.34
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 2.34
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 4.00
+    lever_value: 4.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 5.97
+    lever_value: 5.97
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.97
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 7.00
+    lever_value: 7.0
+    value: 0.63
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 9.00
+    lever_value: 9.0
+    value: 1.94
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 9.64
+    lever_value: 9.64
+    value: 2.84
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9.64
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 12.00
+    lever_value: 12.0
+    value: 0.99
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 12.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+- id: bemisyoung1993-7
+  odorant: trimethylpyrazine
+  lever_class: pH
+  lever: initial pH (adjusted with 2N NaOH or 10% HCl)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: mean relative weight % of pyrazines
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 1.00
+    lever_value: 1.0
+    value: 18.72
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 1.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 2.34
+    lever_value: 2.34
+    value: 21.52
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 2.34
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 4.00
+    lever_value: 4.0
+    value: 28.66
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 5.97
+    lever_value: 5.97
+    value: 38.53
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.97
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 7.00
+    lever_value: 7.0
+    value: 37.06
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 9.00
+    lever_value: 9.0
+    value: 39.55
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 9.64
+    lever_value: 9.64
+    value: 47.42
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9.64
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 12.00
+    lever_value: 12.0
+    value: 31.18
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 12.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+- id: bemisyoung1993-8
+  odorant: 2-ethyl-3,6-dimethylpyrazine
+  lever_class: pH
+  lever: initial pH (adjusted with 2N NaOH or 10% HCl)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: mean relative weight % of pyrazines
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 1.00
+    lever_value: 1.0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 1.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 2.34
+    lever_value: 2.34
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 2.34
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 4.00
+    lever_value: 4.0
+    value: 0.65
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 5.97
+    lever_value: 5.97
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.97
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 7.00
+    lever_value: 7.0
+    value: 1.04
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 9.00
+    lever_value: 9.0
+    value: 0.48
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 9.64
+    lever_value: 9.64
+    value: 0.35
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9.64
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 12.00
+    lever_value: 12.0
+    value: 1.65
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 12.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+- id: bemisyoung1993-9
+  odorant: 2-ethyl-3,5-dimethylpyrazine
+  lever_class: pH
+  lever: initial pH (adjusted with 2N NaOH or 10% HCl)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: mean relative weight % of pyrazines
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 1.00
+    lever_value: 1.0
+    value: 71.36
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 1.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 2.34
+    lever_value: 2.34
+    value: 55.43
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 2.34
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 4.00
+    lever_value: 4.0
+    value: 5.31
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 5.97
+    lever_value: 5.97
+    value: 2.45
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.97
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 7.00
+    lever_value: 7.0
+    value: 3.89
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 9.00
+    lever_value: 9.0
+    value: 4.07
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 9.64
+    lever_value: 9.64
+    value: 4.7
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9.64
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 12.00
+    lever_value: 12.0
+    value: 1.76
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 12.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+- id: bemisyoung1993-10
+  odorant: tetramethylpyrazine
+  lever_class: pH
+  lever: initial pH (adjusted with 2N NaOH or 10% HCl)
+  focal: true
+  location: Table 2
+  digitised: false
+  unit: mean relative weight % of pyrazines
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 1.00
+    lever_value: 1.0
+    value: 2.13
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 1.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 2.34
+    lever_value: 2.34
+    value: 1.19
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 2.34
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 4.00
+    lever_value: 4.0
+    value: 7.29
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 4.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 5.97
+    lever_value: 5.97
+    value: 10.41
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 5.97
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 7.00
+    lever_value: 7.0
+    value: 13.17
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 7.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 9.00
+    lever_value: 9.0
+    value: 12.03
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 9.64
+    lever_value: 9.64
+    value: 10.23
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 9.64
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated
+  - label: pH 12.00
+    lever_value: 12.0
+    value: 2.71
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 12.0
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 300
+      precursors:
+        D-glucose: 0.05 mol in 100 mL
+        glycine: 0.15 mol in 100 mL
+      buffer: none
+      matrix: water
+      headspace: sealed, unstated

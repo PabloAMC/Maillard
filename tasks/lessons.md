@@ -621,3 +621,11 @@ have no null answer): counting it as a difference of 0 pulls the mean to zero an
 - **Rule:** never key a contrast by `(source, id)`. Carry the contrast dict alongside its observation (build
   observations one resolved file or one contrast at a time). Any new keyed-data tool asserts that its per-observation
   slope equals the lever table's, as step 5a's `run_points` check does.
+
+## Count what a rule can be scored on before keying a batch for it (2026-11-13)
+- **What happened:** A6 batch 2 (13 sources, about 8 h of reader and resolver time) was keyed to score R1, and came
+  out "too few to score". The protocol trains R1 only on pre-freeze sources, and R1 needs cells whose pre-freeze rows
+  hold both control classes from two laboratories each. That count was knowable from the training set alone, before
+  any batch-2 paper was chosen. The premortem had caught the same thing for batch 1; batch 2 was not checked.
+- **Rule:** before choosing papers to test a rule, list the cells where it CAN be scored (from training-side counts
+  only) and pick papers that land in them. Keying that only grows the table is still worth doing, but call it that.

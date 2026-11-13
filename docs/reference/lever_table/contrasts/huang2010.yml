@@ -1,0 +1,6207 @@
+source: huang2010
+pdf: data/articles/huang2010.pdf
+reader: resolved
+scope_note: 'Resolved 2026-11-13 (step 11, A6 batch 2). Base reader a (90). Table 3 (aldehydes / furans; 9 odorants x before-
+  and after-roasting pH ladders): readers agree on every value. Decided calls: liquor pH measured on the product is ph_basis
+  final with final_ph = that pH (Table 3 / Figs 1 - 3), ph_control adjusted_unbuffered (K2CO3 alkalization); arms that differ
+  in roasting stage (alkalized before vs after roasting at near-matched pH) are lever_class mixed (reader a keyed them, reader
+  b did not; kept: huang2010-25 - 66). Digitised values (Figs 1 - 3, digitised: true) are the geometric mean of the two readers,
+  who agree within 0.07 dex on every point kept. Figures re-read (pdftoppm -r 200 / 600): Fig. 1 (300,000 ppb axis, ~240 ppb
+  per pixel at 600 dpi) points at pH <= 7.0 lie within one marker height of zero and overlap, so they are not keyed (reader
+  b''s pH 5.9 - 6.98 values, read at its stated +-2,000 ppb resolution, dropped), except After-TrMP at pH 7.03 (readers 11,400
+  / 10,600; diamond top visible, kept); After-DMP at pH 7.03 (readers 4,300 / 5,700, 0.12 dex apart, square overlapped by
+  two markers) is not keyed. The unlabelled After-series points at pH ~5.2 / 5.33 in Figs 1 - 2 (not in Table 3, pH not printed)
+  are not keyed (reader b keyed them). Fig. 3 x positions re-read: pH 5.33 / 6.02 / 6.52 / 6.98 / 7.6 / 8.01 (reader b; reader
+  a rounded to 5.3 / 6.0 / ...); final_ph from the x position. Fig. 3 phenylacetaldehyde 40 C at pH 6.98: readers 66 / 77
+  (0.07 dex), mean kept. Fig. 3 40 C values sit near the axis (4,000 ppb scale); kept as both readers agree. SIFT-MS headspace
+  ppb (relative). Not keyed: Figs 4 - 5 (ratios), Fig. 6 commercial powders (proprietary processes), off-list compounds. DMP
+  and 2-/3-methylbutanal are printed isomer mixtures (odorant_unlisted). Conventions (resolver, uniform with batch 1): printed
+  ND, ''-'', blank or 0 is nd_no_limit with value null; all-ND contrasts kept; one compound printed twice carries duplicate_of;
+  co-eluting mixtures odorant_unlisted; odorant names canonicalised to the compound_keys display name, printed name in odorant_printed;
+  IS semi-quantification and SIFT-MS ppb relative, calibration with authentic standards absolute.'
+contrasts:
+- id: huang2010-1
+  resolution: agreed
+  odorant: Phenylacetaldehyde
+  lever_class: pH
+  lever: pH of cocoa liquor alkalized (K2CO3) before roasting
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: before-roasting pH 5.9
+    lever_value: 5.9
+    value: 596
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.9
+      ph_basis: final
+      final_ph: 5.9
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id001
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: before-roasting pH 6.43
+    lever_value: 6.43
+    value: 1604
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.43
+      ph_basis: final
+      final_ph: 6.43
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id001
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: before-roasting pH 6.98
+    lever_value: 6.98
+    value: 1774
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.98
+      ph_basis: final
+      final_ph: 6.98
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id001
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: before-roasting pH 7.39
+    lever_value: 7.39
+    value: 10836
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.39
+      ph_basis: final
+      final_ph: 7.39
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id001
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: before-roasting pH 7.87
+    lever_value: 7.87
+    value: 31862
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.87
+      ph_basis: final
+      final_ph: 7.87
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id001
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  odorant_printed: phenylacetaldehyde
+- id: huang2010-2
+  resolution: agreed
+  odorant: Phenylacetaldehyde
+  lever_class: pH
+  lever: pH of cocoa liquor alkalized (K2CO3) after roasting
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: after-roasting pH 5.97
+    lever_value: 5.97
+    value: 699
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.97
+      ph_basis: final
+      final_ph: 5.97
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id002
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 6.46
+    lever_value: 6.46
+    value: 3062
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.46
+      ph_basis: final
+      final_ph: 6.46
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id002
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 7.03
+    lever_value: 7.03
+    value: 4966
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.03
+      ph_basis: final
+      final_ph: 7.03
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id002
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 8.06
+    lever_value: 8.06
+    value: 22302
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.06
+      ph_basis: final
+      final_ph: 8.06
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id002
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 8.41
+    lever_value: 8.41
+    value: 51462
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.41
+      ph_basis: final
+      final_ph: 8.41
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id002
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  odorant_printed: phenylacetaldehyde
+- id: huang2010-3
+  resolution: agreed
+  odorant: 2- and 3-methylbutanal
+  odorant_unlisted: true
+  lever_class: pH
+  lever: pH of cocoa liquor alkalized (K2CO3) before roasting
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: before-roasting pH 5.9
+    lever_value: 5.9
+    value: 43307
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.9
+      ph_basis: final
+      final_ph: 5.9
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id003
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: before-roasting pH 6.43
+    lever_value: 6.43
+    value: 20490
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.43
+      ph_basis: final
+      final_ph: 6.43
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id003
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: before-roasting pH 6.98
+    lever_value: 6.98
+    value: 14830
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.98
+      ph_basis: final
+      final_ph: 6.98
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id003
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: before-roasting pH 7.39
+    lever_value: 7.39
+    value: 66730
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.39
+      ph_basis: final
+      final_ph: 7.39
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id003
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: before-roasting pH 7.87
+    lever_value: 7.87
+    value: 84830
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.87
+      ph_basis: final
+      final_ph: 7.87
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id003
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  unlisted_reason: co-eluting compounds printed as one value / not a single listed odorant
+- id: huang2010-4
+  resolution: agreed
+  odorant: 2- and 3-methylbutanal
+  odorant_unlisted: true
+  lever_class: pH
+  lever: pH of cocoa liquor alkalized (K2CO3) after roasting
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: after-roasting pH 5.97
+    lever_value: 5.97
+    value: 28227
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.97
+      ph_basis: final
+      final_ph: 5.97
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id004
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 6.46
+    lever_value: 6.46
+    value: 23090
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.46
+      ph_basis: final
+      final_ph: 6.46
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id004
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 7.03
+    lever_value: 7.03
+    value: 25270
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.03
+      ph_basis: final
+      final_ph: 7.03
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id004
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 8.06
+    lever_value: 8.06
+    value: 74070
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.06
+      ph_basis: final
+      final_ph: 8.06
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id004
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 8.41
+    lever_value: 8.41
+    value: 122390
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.41
+      ph_basis: final
+      final_ph: 8.41
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id004
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  unlisted_reason: co-eluting compounds printed as one value / not a single listed odorant
+- id: huang2010-5
+  resolution: agreed
+  odorant: 2-Methylpropanal (isobutyraldehyde)
+  lever_class: pH
+  lever: pH of cocoa liquor alkalized (K2CO3) before roasting
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: before-roasting pH 5.9
+    lever_value: 5.9
+    value: 2638
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.9
+      ph_basis: final
+      final_ph: 5.9
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id005
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: before-roasting pH 6.43
+    lever_value: 6.43
+    value: 3719
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.43
+      ph_basis: final
+      final_ph: 6.43
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id005
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: before-roasting pH 6.98
+    lever_value: 6.98
+    value: 4099
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.98
+      ph_basis: final
+      final_ph: 6.98
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id005
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: before-roasting pH 7.39
+    lever_value: 7.39
+    value: 8185
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.39
+      ph_basis: final
+      final_ph: 7.39
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id005
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: before-roasting pH 7.87
+    lever_value: 7.87
+    value: 17769
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.87
+      ph_basis: final
+      final_ph: 7.87
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id005
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  odorant_printed: 2-methylpropanal
+- id: huang2010-6
+  resolution: agreed
+  odorant: 2-Methylpropanal (isobutyraldehyde)
+  lever_class: pH
+  lever: pH of cocoa liquor alkalized (K2CO3) after roasting
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: after-roasting pH 5.97
+    lever_value: 5.97
+    value: 3046
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.97
+      ph_basis: final
+      final_ph: 5.97
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id006
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 6.46
+    lever_value: 6.46
+    value: 5233
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.46
+      ph_basis: final
+      final_ph: 6.46
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id006
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 7.03
+    lever_value: 7.03
+    value: 5529
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.03
+      ph_basis: final
+      final_ph: 7.03
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id006
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 8.06
+    lever_value: 8.06
+    value: 13779
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.06
+      ph_basis: final
+      final_ph: 8.06
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id006
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 8.41
+    lever_value: 8.41
+    value: 46889
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.41
+      ph_basis: final
+      final_ph: 8.41
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id006
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  odorant_printed: 2-methylpropanal
+- id: huang2010-7
+  resolution: agreed
+  odorant: (E,E)-2,4-Decadienal
+  lever_class: pH
+  lever: pH of cocoa liquor alkalized (K2CO3) before roasting
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: before-roasting pH 5.9
+    lever_value: 5.9
+    value: 596
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.9
+      ph_basis: final
+      final_ph: 5.9
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id007
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: before-roasting pH 6.43
+    lever_value: 6.43
+    value: 828
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.43
+      ph_basis: final
+      final_ph: 6.43
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id007
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: before-roasting pH 6.98
+    lever_value: 6.98
+    value: 924
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.98
+      ph_basis: final
+      final_ph: 6.98
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id007
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: before-roasting pH 7.39
+    lever_value: 7.39
+    value: 1030
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.39
+      ph_basis: final
+      final_ph: 7.39
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id007
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: before-roasting pH 7.87
+    lever_value: 7.87
+    value: 1281
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.87
+      ph_basis: final
+      final_ph: 7.87
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id007
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  odorant_printed: (E,E)-2,4-decadienal
+- id: huang2010-8
+  resolution: agreed
+  odorant: (E,E)-2,4-Decadienal
+  lever_class: pH
+  lever: pH of cocoa liquor alkalized (K2CO3) after roasting
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: after-roasting pH 5.97
+    lever_value: 5.97
+    value: 642
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.97
+      ph_basis: final
+      final_ph: 5.97
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id008
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 6.46
+    lever_value: 6.46
+    value: 1126
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.46
+      ph_basis: final
+      final_ph: 6.46
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id008
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 7.03
+    lever_value: 7.03
+    value: 1092
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.03
+      ph_basis: final
+      final_ph: 7.03
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id008
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 8.06
+    lever_value: 8.06
+    value: 907
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.06
+      ph_basis: final
+      final_ph: 8.06
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id008
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 8.41
+    lever_value: 8.41
+    value: 882
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.41
+      ph_basis: final
+      final_ph: 8.41
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id008
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  odorant_printed: (E,E)-2,4-decadienal
+- id: huang2010-9
+  resolution: agreed
+  odorant: (E)-2-Nonenal
+  lever_class: pH
+  lever: pH of cocoa liquor alkalized (K2CO3) before roasting
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: before-roasting pH 5.9
+    lever_value: 5.9
+    value: 599
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.9
+      ph_basis: final
+      final_ph: 5.9
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id009
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: before-roasting pH 6.43
+    lever_value: 6.43
+    value: 511
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.43
+      ph_basis: final
+      final_ph: 6.43
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id009
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: before-roasting pH 6.98
+    lever_value: 6.98
+    value: 718
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.98
+      ph_basis: final
+      final_ph: 6.98
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id009
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: before-roasting pH 7.39
+    lever_value: 7.39
+    value: 978
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.39
+      ph_basis: final
+      final_ph: 7.39
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id009
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: before-roasting pH 7.87
+    lever_value: 7.87
+    value: 990
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.87
+      ph_basis: final
+      final_ph: 7.87
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id009
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  odorant_printed: (E)-2-nonenal
+- id: huang2010-10
+  resolution: agreed
+  odorant: (E)-2-Nonenal
+  lever_class: pH
+  lever: pH of cocoa liquor alkalized (K2CO3) after roasting
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: after-roasting pH 5.97
+    lever_value: 5.97
+    value: 519
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.97
+      ph_basis: final
+      final_ph: 5.97
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id010
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 6.46
+    lever_value: 6.46
+    value: 1111
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.46
+      ph_basis: final
+      final_ph: 6.46
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id010
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 7.03
+    lever_value: 7.03
+    value: 961
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.03
+      ph_basis: final
+      final_ph: 7.03
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id010
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 8.06
+    lever_value: 8.06
+    value: 820
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.06
+      ph_basis: final
+      final_ph: 8.06
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id010
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 8.41
+    lever_value: 8.41
+    value: 864
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.41
+      ph_basis: final
+      final_ph: 8.41
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id010
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  odorant_printed: (E)-2-nonenal
+- id: huang2010-11
+  resolution: agreed
+  odorant: Heptanal
+  lever_class: pH
+  lever: pH of cocoa liquor alkalized (K2CO3) before roasting
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: before-roasting pH 5.9
+    lever_value: 5.9
+    value: 162
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.9
+      ph_basis: final
+      final_ph: 5.9
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id011
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: before-roasting pH 6.43
+    lever_value: 6.43
+    value: 176
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.43
+      ph_basis: final
+      final_ph: 6.43
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id011
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: before-roasting pH 6.98
+    lever_value: 6.98
+    value: 196
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.98
+      ph_basis: final
+      final_ph: 6.98
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id011
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: before-roasting pH 7.39
+    lever_value: 7.39
+    value: 253
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.39
+      ph_basis: final
+      final_ph: 7.39
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id011
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: before-roasting pH 7.87
+    lever_value: 7.87
+    value: 352
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.87
+      ph_basis: final
+      final_ph: 7.87
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id011
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  odorant_printed: heptanal
+- id: huang2010-12
+  resolution: agreed
+  odorant: Heptanal
+  lever_class: pH
+  lever: pH of cocoa liquor alkalized (K2CO3) after roasting
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: after-roasting pH 5.97
+    lever_value: 5.97
+    value: 195
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.97
+      ph_basis: final
+      final_ph: 5.97
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id012
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 6.46
+    lever_value: 6.46
+    value: 324
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.46
+      ph_basis: final
+      final_ph: 6.46
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id012
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 7.03
+    lever_value: 7.03
+    value: 266
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.03
+      ph_basis: final
+      final_ph: 7.03
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id012
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 8.06
+    lever_value: 8.06
+    value: 289
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.06
+      ph_basis: final
+      final_ph: 8.06
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id012
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 8.41
+    lever_value: 8.41
+    value: 254
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.41
+      ph_basis: final
+      final_ph: 8.41
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id012
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  odorant_printed: heptanal
+- id: huang2010-13
+  resolution: agreed
+  odorant: Nonanal
+  lever_class: pH
+  lever: pH of cocoa liquor alkalized (K2CO3) before roasting
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: before-roasting pH 5.9
+    lever_value: 5.9
+    value: 13268
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.9
+      ph_basis: final
+      final_ph: 5.9
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id013
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: before-roasting pH 6.43
+    lever_value: 6.43
+    value: 13767
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.43
+      ph_basis: final
+      final_ph: 6.43
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id013
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: before-roasting pH 6.98
+    lever_value: 6.98
+    value: 15387
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.98
+      ph_basis: final
+      final_ph: 6.98
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id013
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: before-roasting pH 7.39
+    lever_value: 7.39
+    value: 44207
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.39
+      ph_basis: final
+      final_ph: 7.39
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id013
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: before-roasting pH 7.87
+    lever_value: 7.87
+    value: 89567
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.87
+      ph_basis: final
+      final_ph: 7.87
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id013
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  odorant_printed: nonanal
+- id: huang2010-14
+  resolution: agreed
+  odorant: Nonanal
+  lever_class: pH
+  lever: pH of cocoa liquor alkalized (K2CO3) after roasting
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: after-roasting pH 5.97
+    lever_value: 5.97
+    value: 11222
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.97
+      ph_basis: final
+      final_ph: 5.97
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id014
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 6.46
+    lever_value: 6.46
+    value: 22027
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.46
+      ph_basis: final
+      final_ph: 6.46
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id014
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 7.03
+    lever_value: 7.03
+    value: 23287
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.03
+      ph_basis: final
+      final_ph: 7.03
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id014
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 8.06
+    lever_value: 8.06
+    value: 67647
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.06
+      ph_basis: final
+      final_ph: 8.06
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id014
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 8.41
+    lever_value: 8.41
+    value: 203607
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.41
+      ph_basis: final
+      final_ph: 8.41
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id014
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  odorant_printed: nonanal
+- id: huang2010-15
+  resolution: agreed
+  odorant: DMHF
+  lever_class: pH
+  lever: pH of cocoa liquor alkalized (K2CO3) before roasting
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: before-roasting pH 5.9
+    lever_value: 5.9
+    value: 548
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.9
+      ph_basis: final
+      final_ph: 5.9
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id015
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: before-roasting pH 6.43
+    lever_value: 6.43
+    value: 492
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.43
+      ph_basis: final
+      final_ph: 6.43
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id015
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: before-roasting pH 6.98
+    lever_value: 6.98
+    value: 567
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.98
+      ph_basis: final
+      final_ph: 6.98
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id015
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: before-roasting pH 7.39
+    lever_value: 7.39
+    value: 683
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.39
+      ph_basis: final
+      final_ph: 7.39
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id015
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: before-roasting pH 7.87
+    lever_value: 7.87
+    value: 798
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.87
+      ph_basis: final
+      final_ph: 7.87
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id015
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  odorant_printed: furaneol
+- id: huang2010-16
+  resolution: agreed
+  odorant: DMHF
+  lever_class: pH
+  lever: pH of cocoa liquor alkalized (K2CO3) after roasting
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: after-roasting pH 5.97
+    lever_value: 5.97
+    value: 478
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.97
+      ph_basis: final
+      final_ph: 5.97
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id016
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 6.46
+    lever_value: 6.46
+    value: 840
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.46
+      ph_basis: final
+      final_ph: 6.46
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id016
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 7.03
+    lever_value: 7.03
+    value: 680
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.03
+      ph_basis: final
+      final_ph: 7.03
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id016
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 8.06
+    lever_value: 8.06
+    value: 596
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.06
+      ph_basis: final
+      final_ph: 8.06
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id016
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 8.41
+    lever_value: 8.41
+    value: 608
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.41
+      ph_basis: final
+      final_ph: 8.41
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id016
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  odorant_printed: furaneol
+- id: huang2010-17
+  resolution: agreed
+  odorant: 5-Methylfurfural
+  lever_class: pH
+  lever: pH of cocoa liquor alkalized (K2CO3) before roasting
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: before-roasting pH 5.9
+    lever_value: 5.9
+    value: 196
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.9
+      ph_basis: final
+      final_ph: 5.9
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id017
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: before-roasting pH 6.43
+    lever_value: 6.43
+    value: 217
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.43
+      ph_basis: final
+      final_ph: 6.43
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id017
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: before-roasting pH 6.98
+    lever_value: 6.98
+    value: 221
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.98
+      ph_basis: final
+      final_ph: 6.98
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id017
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: before-roasting pH 7.39
+    lever_value: 7.39
+    value: 391
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.39
+      ph_basis: final
+      final_ph: 7.39
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id017
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: before-roasting pH 7.87
+    lever_value: 7.87
+    value: 1039
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.87
+      ph_basis: final
+      final_ph: 7.87
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id017
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  odorant_printed: 5-methylfurfural
+- id: huang2010-18
+  resolution: agreed
+  odorant: 5-Methylfurfural
+  lever_class: pH
+  lever: pH of cocoa liquor alkalized (K2CO3) after roasting
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: after-roasting pH 5.97
+    lever_value: 5.97
+    value: 207
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.97
+      ph_basis: final
+      final_ph: 5.97
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id018
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 6.46
+    lever_value: 6.46
+    value: 393
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.46
+      ph_basis: final
+      final_ph: 6.46
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id018
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 7.03
+    lever_value: 7.03
+    value: 327
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.03
+      ph_basis: final
+      final_ph: 7.03
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id018
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 8.06
+    lever_value: 8.06
+    value: 480
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.06
+      ph_basis: final
+      final_ph: 8.06
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id018
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 8.41
+    lever_value: 8.41
+    value: 1009
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.41
+      ph_basis: final
+      final_ph: 8.41
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id018
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  odorant_printed: 5-methylfurfural
+- id: huang2010-19
+  resolution: resolved
+  odorant: Tetramethylpyrazine
+  lever_class: pH
+  lever: pH of cocoa liquor alkalized before roasting
+  focal: true
+  location: Fig. 2, digitised
+  digitised: true
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: before-roasting pH 5.9
+    lever_value: 5.9
+    value: 5460.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.9
+      ph_basis: final
+      final_ph: 5.9
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id019
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: before-roasting pH 6.43
+    lever_value: 6.43
+    value: 4980.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.43
+      ph_basis: final
+      final_ph: 6.43
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id019
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: before-roasting pH 6.98
+    lever_value: 6.98
+    value: 5340.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.98
+      ph_basis: final
+      final_ph: 6.98
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id019
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: before-roasting pH 7.39
+    lever_value: 7.39
+    value: 9730.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.39
+      ph_basis: final
+      final_ph: 7.39
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id019
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: before-roasting pH 7.87
+    lever_value: 7.87
+    value: 19700.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.87
+      ph_basis: final
+      final_ph: 7.87
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id019
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  odorant_printed: 2,3,5,6-tetramethylpyrazine (TMP)
+- id: huang2010-20
+  resolution: resolved
+  odorant: Tetramethylpyrazine
+  lever_class: pH
+  lever: pH of cocoa liquor alkalized after roasting
+  focal: true
+  location: Fig. 2, digitised
+  digitised: true
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: after-roasting pH 5.97
+    lever_value: 5.97
+    value: 4140.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.97
+      ph_basis: final
+      final_ph: 5.97
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id020
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 6.46
+    lever_value: 6.46
+    value: 8310.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.46
+      ph_basis: final
+      final_ph: 6.46
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id020
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 7.03
+    lever_value: 7.03
+    value: 7530.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.03
+      ph_basis: final
+      final_ph: 7.03
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id020
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 8.06
+    lever_value: 8.06
+    value: 15300.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.06
+      ph_basis: final
+      final_ph: 8.06
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id020
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 8.41
+    lever_value: 8.41
+    value: 37700.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.41
+      ph_basis: final
+      final_ph: 8.41
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id020
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  odorant_printed: 2,3,5,6-tetramethylpyrazine (TMP)
+- id: huang2010-21
+  resolution: resolved
+  odorant: Trimethylpyrazine
+  lever_class: pH
+  lever: pH of cocoa liquor alkalized before roasting (only arms readable on the figure)
+  focal: true
+  location: Fig. 1, digitised
+  digitised: true
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: before-roasting pH 7.39
+    lever_value: 7.39
+    value: 28400.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.39
+      ph_basis: final
+      final_ph: 7.39
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id021
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: before-roasting pH 7.87
+    lever_value: 7.87
+    value: 101000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.87
+      ph_basis: final
+      final_ph: 7.87
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id021
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  odorant_printed: 2,3,5-trimethylpyrazine (TrMP)
+- id: huang2010-22
+  resolution: resolved
+  odorant: Trimethylpyrazine
+  lever_class: pH
+  lever: pH of cocoa liquor alkalized after roasting (only arms readable on the figure)
+  focal: true
+  location: Fig. 1, digitised
+  digitised: true
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: after-roasting pH 7.03
+    lever_value: 7.03
+    value: 11000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.03
+      ph_basis: final
+      final_ph: 7.03
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id022
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 8.06
+    lever_value: 8.06
+    value: 63300.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.06
+      ph_basis: final
+      final_ph: 8.06
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id022
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 8.41
+    lever_value: 8.41
+    value: 284000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.41
+      ph_basis: final
+      final_ph: 8.41
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id022
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  odorant_printed: 2,3,5-trimethylpyrazine (TrMP)
+- id: huang2010-23
+  resolution: resolved
+  odorant: 2,3-, 2,5- and 2,6-dimethylpyrazine (DMP, mixture)
+  odorant_unlisted: true
+  lever_class: pH
+  lever: pH of cocoa liquor alkalized before roasting (only arms readable on the figure)
+  focal: true
+  location: Fig. 1, digitised
+  digitised: true
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: before-roasting pH 7.39
+    lever_value: 7.39
+    value: 13300.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.39
+      ph_basis: final
+      final_ph: 7.39
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id023
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: before-roasting pH 7.87
+    lever_value: 7.87
+    value: 43600.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.87
+      ph_basis: final
+      final_ph: 7.87
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id023
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  unlisted_reason: co-eluting compounds printed as one value / not a single listed odorant
+- id: huang2010-24
+  resolution: resolved
+  odorant: 2,3-, 2,5- and 2,6-dimethylpyrazine (DMP, mixture)
+  odorant_unlisted: true
+  lever_class: pH
+  lever: pH of cocoa liquor alkalized after roasting (only arms readable on the figure)
+  focal: true
+  location: Fig. 1, digitised
+  digitised: true
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: after-roasting pH 8.06
+    lever_value: 8.06
+    value: 29800.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.06
+      ph_basis: final
+      final_ph: 8.06
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id024
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 8.41
+    lever_value: 8.41
+    value: 124000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.41
+      ph_basis: final
+      final_ph: 8.41
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id024
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  unlisted_reason: co-eluting compounds printed as one value / not a single listed odorant
+- id: huang2010-25
+  resolution: agreed
+  odorant: Phenylacetaldehyde
+  lever_class: mixed
+  lever: alkalization before vs after roasting (pH during roasting alkaline vs natural ~5.2) at near-matched final pH
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: before-roasting pH 5.9
+    lever_value: 5.9
+    value: 596
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.9
+      ph_basis: final
+      final_ph: 5.9
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id025
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 5.97
+    lever_value: 5.97
+    value: 699
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.97
+      ph_basis: final
+      final_ph: 5.97
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id025
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  odorant_printed: phenylacetaldehyde
+- id: huang2010-26
+  resolution: agreed
+  odorant: Phenylacetaldehyde
+  lever_class: mixed
+  lever: alkalization before vs after roasting (pH during roasting alkaline vs natural ~5.2) at near-matched final pH
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: before-roasting pH 6.43
+    lever_value: 6.43
+    value: 1604
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.43
+      ph_basis: final
+      final_ph: 6.43
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id026
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 6.46
+    lever_value: 6.46
+    value: 3062
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.46
+      ph_basis: final
+      final_ph: 6.46
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id026
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  odorant_printed: phenylacetaldehyde
+- id: huang2010-27
+  resolution: agreed
+  odorant: Phenylacetaldehyde
+  lever_class: mixed
+  lever: alkalization before vs after roasting (pH during roasting alkaline vs natural ~5.2) at near-matched final pH
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: before-roasting pH 6.98
+    lever_value: 6.98
+    value: 1774
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.98
+      ph_basis: final
+      final_ph: 6.98
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id027
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 7.03
+    lever_value: 7.03
+    value: 4966
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.03
+      ph_basis: final
+      final_ph: 7.03
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id027
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  odorant_printed: phenylacetaldehyde
+- id: huang2010-28
+  resolution: agreed
+  odorant: Phenylacetaldehyde
+  lever_class: mixed
+  lever: alkalization before vs after roasting (pH during roasting alkaline vs natural ~5.2) at near-matched final pH
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: before-roasting pH 7.87
+    lever_value: 7.87
+    value: 31862
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.87
+      ph_basis: final
+      final_ph: 7.87
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id028
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 8.06
+    lever_value: 8.06
+    value: 22302
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.06
+      ph_basis: final
+      final_ph: 8.06
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id028
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  odorant_printed: phenylacetaldehyde
+- id: huang2010-29
+  resolution: agreed
+  odorant: 2- and 3-methylbutanal
+  odorant_unlisted: true
+  lever_class: mixed
+  lever: alkalization before vs after roasting (pH during roasting alkaline vs natural ~5.2) at near-matched final pH
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: before-roasting pH 5.9
+    lever_value: 5.9
+    value: 43307
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.9
+      ph_basis: final
+      final_ph: 5.9
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id029
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 5.97
+    lever_value: 5.97
+    value: 28227
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.97
+      ph_basis: final
+      final_ph: 5.97
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id029
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  unlisted_reason: co-eluting compounds printed as one value / not a single listed odorant
+- id: huang2010-30
+  resolution: agreed
+  odorant: 2- and 3-methylbutanal
+  odorant_unlisted: true
+  lever_class: mixed
+  lever: alkalization before vs after roasting (pH during roasting alkaline vs natural ~5.2) at near-matched final pH
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: before-roasting pH 6.43
+    lever_value: 6.43
+    value: 20490
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.43
+      ph_basis: final
+      final_ph: 6.43
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id030
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 6.46
+    lever_value: 6.46
+    value: 23090
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.46
+      ph_basis: final
+      final_ph: 6.46
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id030
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  unlisted_reason: co-eluting compounds printed as one value / not a single listed odorant
+- id: huang2010-31
+  resolution: agreed
+  odorant: 2- and 3-methylbutanal
+  odorant_unlisted: true
+  lever_class: mixed
+  lever: alkalization before vs after roasting (pH during roasting alkaline vs natural ~5.2) at near-matched final pH
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: before-roasting pH 6.98
+    lever_value: 6.98
+    value: 14830
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.98
+      ph_basis: final
+      final_ph: 6.98
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id031
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 7.03
+    lever_value: 7.03
+    value: 25270
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.03
+      ph_basis: final
+      final_ph: 7.03
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id031
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  unlisted_reason: co-eluting compounds printed as one value / not a single listed odorant
+- id: huang2010-32
+  resolution: agreed
+  odorant: 2- and 3-methylbutanal
+  odorant_unlisted: true
+  lever_class: mixed
+  lever: alkalization before vs after roasting (pH during roasting alkaline vs natural ~5.2) at near-matched final pH
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: before-roasting pH 7.87
+    lever_value: 7.87
+    value: 84830
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.87
+      ph_basis: final
+      final_ph: 7.87
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id032
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 8.06
+    lever_value: 8.06
+    value: 74070
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.06
+      ph_basis: final
+      final_ph: 8.06
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id032
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  unlisted_reason: co-eluting compounds printed as one value / not a single listed odorant
+- id: huang2010-33
+  resolution: agreed
+  odorant: 2-Methylpropanal (isobutyraldehyde)
+  lever_class: mixed
+  lever: alkalization before vs after roasting (pH during roasting alkaline vs natural ~5.2) at near-matched final pH
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: before-roasting pH 5.9
+    lever_value: 5.9
+    value: 2638
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.9
+      ph_basis: final
+      final_ph: 5.9
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id033
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 5.97
+    lever_value: 5.97
+    value: 3046
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.97
+      ph_basis: final
+      final_ph: 5.97
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id033
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  odorant_printed: 2-methylpropanal
+- id: huang2010-34
+  resolution: agreed
+  odorant: 2-Methylpropanal (isobutyraldehyde)
+  lever_class: mixed
+  lever: alkalization before vs after roasting (pH during roasting alkaline vs natural ~5.2) at near-matched final pH
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: before-roasting pH 6.43
+    lever_value: 6.43
+    value: 3719
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.43
+      ph_basis: final
+      final_ph: 6.43
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id034
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 6.46
+    lever_value: 6.46
+    value: 5233
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.46
+      ph_basis: final
+      final_ph: 6.46
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id034
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  odorant_printed: 2-methylpropanal
+- id: huang2010-35
+  resolution: agreed
+  odorant: 2-Methylpropanal (isobutyraldehyde)
+  lever_class: mixed
+  lever: alkalization before vs after roasting (pH during roasting alkaline vs natural ~5.2) at near-matched final pH
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: before-roasting pH 6.98
+    lever_value: 6.98
+    value: 4099
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.98
+      ph_basis: final
+      final_ph: 6.98
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id035
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 7.03
+    lever_value: 7.03
+    value: 5529
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.03
+      ph_basis: final
+      final_ph: 7.03
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id035
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  odorant_printed: 2-methylpropanal
+- id: huang2010-36
+  resolution: agreed
+  odorant: 2-Methylpropanal (isobutyraldehyde)
+  lever_class: mixed
+  lever: alkalization before vs after roasting (pH during roasting alkaline vs natural ~5.2) at near-matched final pH
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: before-roasting pH 7.87
+    lever_value: 7.87
+    value: 17769
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.87
+      ph_basis: final
+      final_ph: 7.87
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id036
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 8.06
+    lever_value: 8.06
+    value: 13779
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.06
+      ph_basis: final
+      final_ph: 8.06
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id036
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  odorant_printed: 2-methylpropanal
+- id: huang2010-37
+  resolution: agreed
+  odorant: (E,E)-2,4-Decadienal
+  lever_class: mixed
+  lever: alkalization before vs after roasting (pH during roasting alkaline vs natural ~5.2) at near-matched final pH
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: before-roasting pH 5.9
+    lever_value: 5.9
+    value: 596
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.9
+      ph_basis: final
+      final_ph: 5.9
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id037
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 5.97
+    lever_value: 5.97
+    value: 642
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.97
+      ph_basis: final
+      final_ph: 5.97
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id037
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  odorant_printed: (E,E)-2,4-decadienal
+- id: huang2010-38
+  resolution: agreed
+  odorant: (E,E)-2,4-Decadienal
+  lever_class: mixed
+  lever: alkalization before vs after roasting (pH during roasting alkaline vs natural ~5.2) at near-matched final pH
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: before-roasting pH 6.43
+    lever_value: 6.43
+    value: 828
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.43
+      ph_basis: final
+      final_ph: 6.43
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id038
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 6.46
+    lever_value: 6.46
+    value: 1126
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.46
+      ph_basis: final
+      final_ph: 6.46
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id038
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  odorant_printed: (E,E)-2,4-decadienal
+- id: huang2010-39
+  resolution: agreed
+  odorant: (E,E)-2,4-Decadienal
+  lever_class: mixed
+  lever: alkalization before vs after roasting (pH during roasting alkaline vs natural ~5.2) at near-matched final pH
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: before-roasting pH 6.98
+    lever_value: 6.98
+    value: 924
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.98
+      ph_basis: final
+      final_ph: 6.98
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id039
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 7.03
+    lever_value: 7.03
+    value: 1092
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.03
+      ph_basis: final
+      final_ph: 7.03
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id039
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  odorant_printed: (E,E)-2,4-decadienal
+- id: huang2010-40
+  resolution: agreed
+  odorant: (E,E)-2,4-Decadienal
+  lever_class: mixed
+  lever: alkalization before vs after roasting (pH during roasting alkaline vs natural ~5.2) at near-matched final pH
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: before-roasting pH 7.87
+    lever_value: 7.87
+    value: 1281
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.87
+      ph_basis: final
+      final_ph: 7.87
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id040
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 8.06
+    lever_value: 8.06
+    value: 907
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.06
+      ph_basis: final
+      final_ph: 8.06
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id040
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  odorant_printed: (E,E)-2,4-decadienal
+- id: huang2010-41
+  resolution: agreed
+  odorant: (E)-2-Nonenal
+  lever_class: mixed
+  lever: alkalization before vs after roasting (pH during roasting alkaline vs natural ~5.2) at near-matched final pH
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: before-roasting pH 5.9
+    lever_value: 5.9
+    value: 599
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.9
+      ph_basis: final
+      final_ph: 5.9
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id041
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 5.97
+    lever_value: 5.97
+    value: 519
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.97
+      ph_basis: final
+      final_ph: 5.97
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id041
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  odorant_printed: (E)-2-nonenal
+- id: huang2010-42
+  resolution: agreed
+  odorant: (E)-2-Nonenal
+  lever_class: mixed
+  lever: alkalization before vs after roasting (pH during roasting alkaline vs natural ~5.2) at near-matched final pH
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: before-roasting pH 6.43
+    lever_value: 6.43
+    value: 511
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.43
+      ph_basis: final
+      final_ph: 6.43
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id042
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 6.46
+    lever_value: 6.46
+    value: 1111
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.46
+      ph_basis: final
+      final_ph: 6.46
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id042
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  odorant_printed: (E)-2-nonenal
+- id: huang2010-43
+  resolution: agreed
+  odorant: (E)-2-Nonenal
+  lever_class: mixed
+  lever: alkalization before vs after roasting (pH during roasting alkaline vs natural ~5.2) at near-matched final pH
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: before-roasting pH 6.98
+    lever_value: 6.98
+    value: 718
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.98
+      ph_basis: final
+      final_ph: 6.98
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id043
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 7.03
+    lever_value: 7.03
+    value: 961
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.03
+      ph_basis: final
+      final_ph: 7.03
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id043
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  odorant_printed: (E)-2-nonenal
+- id: huang2010-44
+  resolution: agreed
+  odorant: (E)-2-Nonenal
+  lever_class: mixed
+  lever: alkalization before vs after roasting (pH during roasting alkaline vs natural ~5.2) at near-matched final pH
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: before-roasting pH 7.87
+    lever_value: 7.87
+    value: 990
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.87
+      ph_basis: final
+      final_ph: 7.87
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id044
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 8.06
+    lever_value: 8.06
+    value: 820
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.06
+      ph_basis: final
+      final_ph: 8.06
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id044
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  odorant_printed: (E)-2-nonenal
+- id: huang2010-45
+  resolution: agreed
+  odorant: Heptanal
+  lever_class: mixed
+  lever: alkalization before vs after roasting (pH during roasting alkaline vs natural ~5.2) at near-matched final pH
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: before-roasting pH 5.9
+    lever_value: 5.9
+    value: 162
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.9
+      ph_basis: final
+      final_ph: 5.9
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id045
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 5.97
+    lever_value: 5.97
+    value: 195
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.97
+      ph_basis: final
+      final_ph: 5.97
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id045
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  odorant_printed: heptanal
+- id: huang2010-46
+  resolution: agreed
+  odorant: Heptanal
+  lever_class: mixed
+  lever: alkalization before vs after roasting (pH during roasting alkaline vs natural ~5.2) at near-matched final pH
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: before-roasting pH 6.43
+    lever_value: 6.43
+    value: 176
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.43
+      ph_basis: final
+      final_ph: 6.43
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id046
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 6.46
+    lever_value: 6.46
+    value: 324
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.46
+      ph_basis: final
+      final_ph: 6.46
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id046
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  odorant_printed: heptanal
+- id: huang2010-47
+  resolution: agreed
+  odorant: Heptanal
+  lever_class: mixed
+  lever: alkalization before vs after roasting (pH during roasting alkaline vs natural ~5.2) at near-matched final pH
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: before-roasting pH 6.98
+    lever_value: 6.98
+    value: 196
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.98
+      ph_basis: final
+      final_ph: 6.98
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id047
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 7.03
+    lever_value: 7.03
+    value: 266
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.03
+      ph_basis: final
+      final_ph: 7.03
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id047
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  odorant_printed: heptanal
+- id: huang2010-48
+  resolution: agreed
+  odorant: Heptanal
+  lever_class: mixed
+  lever: alkalization before vs after roasting (pH during roasting alkaline vs natural ~5.2) at near-matched final pH
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: before-roasting pH 7.87
+    lever_value: 7.87
+    value: 352
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.87
+      ph_basis: final
+      final_ph: 7.87
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id048
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 8.06
+    lever_value: 8.06
+    value: 289
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.06
+      ph_basis: final
+      final_ph: 8.06
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id048
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  odorant_printed: heptanal
+- id: huang2010-49
+  resolution: agreed
+  odorant: Nonanal
+  lever_class: mixed
+  lever: alkalization before vs after roasting (pH during roasting alkaline vs natural ~5.2) at near-matched final pH
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: before-roasting pH 5.9
+    lever_value: 5.9
+    value: 13268
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.9
+      ph_basis: final
+      final_ph: 5.9
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id049
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 5.97
+    lever_value: 5.97
+    value: 11222
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.97
+      ph_basis: final
+      final_ph: 5.97
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id049
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  odorant_printed: nonanal
+- id: huang2010-50
+  resolution: agreed
+  odorant: Nonanal
+  lever_class: mixed
+  lever: alkalization before vs after roasting (pH during roasting alkaline vs natural ~5.2) at near-matched final pH
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: before-roasting pH 6.43
+    lever_value: 6.43
+    value: 13767
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.43
+      ph_basis: final
+      final_ph: 6.43
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id050
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 6.46
+    lever_value: 6.46
+    value: 22027
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.46
+      ph_basis: final
+      final_ph: 6.46
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id050
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  odorant_printed: nonanal
+- id: huang2010-51
+  resolution: agreed
+  odorant: Nonanal
+  lever_class: mixed
+  lever: alkalization before vs after roasting (pH during roasting alkaline vs natural ~5.2) at near-matched final pH
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: before-roasting pH 6.98
+    lever_value: 6.98
+    value: 15387
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.98
+      ph_basis: final
+      final_ph: 6.98
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id051
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 7.03
+    lever_value: 7.03
+    value: 23287
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.03
+      ph_basis: final
+      final_ph: 7.03
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id051
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  odorant_printed: nonanal
+- id: huang2010-52
+  resolution: agreed
+  odorant: Nonanal
+  lever_class: mixed
+  lever: alkalization before vs after roasting (pH during roasting alkaline vs natural ~5.2) at near-matched final pH
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: before-roasting pH 7.87
+    lever_value: 7.87
+    value: 89567
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.87
+      ph_basis: final
+      final_ph: 7.87
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id052
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 8.06
+    lever_value: 8.06
+    value: 67647
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.06
+      ph_basis: final
+      final_ph: 8.06
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id052
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  odorant_printed: nonanal
+- id: huang2010-53
+  resolution: agreed
+  odorant: DMHF
+  lever_class: mixed
+  lever: alkalization before vs after roasting (pH during roasting alkaline vs natural ~5.2) at near-matched final pH
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: before-roasting pH 5.9
+    lever_value: 5.9
+    value: 548
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.9
+      ph_basis: final
+      final_ph: 5.9
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id053
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 5.97
+    lever_value: 5.97
+    value: 478
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.97
+      ph_basis: final
+      final_ph: 5.97
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id053
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  odorant_printed: furaneol
+- id: huang2010-54
+  resolution: agreed
+  odorant: DMHF
+  lever_class: mixed
+  lever: alkalization before vs after roasting (pH during roasting alkaline vs natural ~5.2) at near-matched final pH
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: before-roasting pH 6.43
+    lever_value: 6.43
+    value: 492
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.43
+      ph_basis: final
+      final_ph: 6.43
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id054
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 6.46
+    lever_value: 6.46
+    value: 840
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.46
+      ph_basis: final
+      final_ph: 6.46
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id054
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  odorant_printed: furaneol
+- id: huang2010-55
+  resolution: agreed
+  odorant: DMHF
+  lever_class: mixed
+  lever: alkalization before vs after roasting (pH during roasting alkaline vs natural ~5.2) at near-matched final pH
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: before-roasting pH 6.98
+    lever_value: 6.98
+    value: 567
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.98
+      ph_basis: final
+      final_ph: 6.98
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id055
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 7.03
+    lever_value: 7.03
+    value: 680
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.03
+      ph_basis: final
+      final_ph: 7.03
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id055
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  odorant_printed: furaneol
+- id: huang2010-56
+  resolution: agreed
+  odorant: DMHF
+  lever_class: mixed
+  lever: alkalization before vs after roasting (pH during roasting alkaline vs natural ~5.2) at near-matched final pH
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: before-roasting pH 7.87
+    lever_value: 7.87
+    value: 798
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.87
+      ph_basis: final
+      final_ph: 7.87
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id056
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 8.06
+    lever_value: 8.06
+    value: 596
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.06
+      ph_basis: final
+      final_ph: 8.06
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id056
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  odorant_printed: furaneol
+- id: huang2010-57
+  resolution: agreed
+  odorant: 5-Methylfurfural
+  lever_class: mixed
+  lever: alkalization before vs after roasting (pH during roasting alkaline vs natural ~5.2) at near-matched final pH
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: before-roasting pH 5.9
+    lever_value: 5.9
+    value: 196
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.9
+      ph_basis: final
+      final_ph: 5.9
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id057
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 5.97
+    lever_value: 5.97
+    value: 207
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.97
+      ph_basis: final
+      final_ph: 5.97
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id057
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  odorant_printed: 5-methylfurfural
+- id: huang2010-58
+  resolution: agreed
+  odorant: 5-Methylfurfural
+  lever_class: mixed
+  lever: alkalization before vs after roasting (pH during roasting alkaline vs natural ~5.2) at near-matched final pH
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: before-roasting pH 6.43
+    lever_value: 6.43
+    value: 217
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.43
+      ph_basis: final
+      final_ph: 6.43
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id058
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 6.46
+    lever_value: 6.46
+    value: 393
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.46
+      ph_basis: final
+      final_ph: 6.46
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id058
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  odorant_printed: 5-methylfurfural
+- id: huang2010-59
+  resolution: agreed
+  odorant: 5-Methylfurfural
+  lever_class: mixed
+  lever: alkalization before vs after roasting (pH during roasting alkaline vs natural ~5.2) at near-matched final pH
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: before-roasting pH 6.98
+    lever_value: 6.98
+    value: 221
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.98
+      ph_basis: final
+      final_ph: 6.98
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id059
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 7.03
+    lever_value: 7.03
+    value: 327
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.03
+      ph_basis: final
+      final_ph: 7.03
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id059
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  odorant_printed: 5-methylfurfural
+- id: huang2010-60
+  resolution: agreed
+  odorant: 5-Methylfurfural
+  lever_class: mixed
+  lever: alkalization before vs after roasting (pH during roasting alkaline vs natural ~5.2) at near-matched final pH
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: before-roasting pH 7.87
+    lever_value: 7.87
+    value: 1039
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.87
+      ph_basis: final
+      final_ph: 7.87
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id060
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 8.06
+    lever_value: 8.06
+    value: 480
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.06
+      ph_basis: final
+      final_ph: 8.06
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id060
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  odorant_printed: 5-methylfurfural
+- id: huang2010-61
+  resolution: resolved
+  odorant: Tetramethylpyrazine
+  lever_class: mixed
+  lever: alkalization before vs after roasting at near-matched final pH
+  focal: true
+  location: Fig. 2, digitised
+  digitised: true
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: before-roasting pH 5.9
+    lever_value: 5.9
+    value: 5460.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.9
+      ph_basis: final
+      final_ph: 5.9
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id061
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 5.97
+    lever_value: 5.97
+    value: 4140.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.97
+      ph_basis: final
+      final_ph: 5.97
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id061
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  odorant_printed: 2,3,5,6-tetramethylpyrazine (TMP)
+- id: huang2010-62
+  resolution: resolved
+  odorant: Tetramethylpyrazine
+  lever_class: mixed
+  lever: alkalization before vs after roasting at near-matched final pH
+  focal: true
+  location: Fig. 2, digitised
+  digitised: true
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: before-roasting pH 6.43
+    lever_value: 6.43
+    value: 4980.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.43
+      ph_basis: final
+      final_ph: 6.43
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id062
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 6.46
+    lever_value: 6.46
+    value: 8310.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.46
+      ph_basis: final
+      final_ph: 6.46
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id062
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  odorant_printed: 2,3,5,6-tetramethylpyrazine (TMP)
+- id: huang2010-63
+  resolution: resolved
+  odorant: Tetramethylpyrazine
+  lever_class: mixed
+  lever: alkalization before vs after roasting at near-matched final pH
+  focal: true
+  location: Fig. 2, digitised
+  digitised: true
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: before-roasting pH 6.98
+    lever_value: 6.98
+    value: 5340.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.98
+      ph_basis: final
+      final_ph: 6.98
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id063
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 7.03
+    lever_value: 7.03
+    value: 7530.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.03
+      ph_basis: final
+      final_ph: 7.03
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id063
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  odorant_printed: 2,3,5,6-tetramethylpyrazine (TMP)
+- id: huang2010-64
+  resolution: resolved
+  odorant: Tetramethylpyrazine
+  lever_class: mixed
+  lever: alkalization before vs after roasting at near-matched final pH
+  focal: true
+  location: Fig. 2, digitised
+  digitised: true
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: before-roasting pH 7.87
+    lever_value: 7.87
+    value: 19700.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.87
+      ph_basis: final
+      final_ph: 7.87
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id064
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 8.06
+    lever_value: 8.06
+    value: 15300.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.06
+      ph_basis: final
+      final_ph: 8.06
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id064
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  odorant_printed: 2,3,5,6-tetramethylpyrazine (TMP)
+- id: huang2010-65
+  resolution: resolved
+  odorant: Trimethylpyrazine
+  lever_class: mixed
+  lever: alkalization before vs after roasting at near-matched final pH
+  focal: true
+  location: Fig. 1, digitised
+  digitised: true
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: before-roasting pH 7.87
+    lever_value: 7.87
+    value: 101000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.87
+      ph_basis: final
+      final_ph: 7.87
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id065
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 8.06
+    lever_value: 8.06
+    value: 63300.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.06
+      ph_basis: final
+      final_ph: 8.06
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id065
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  odorant_printed: 2,3,5-trimethylpyrazine (TrMP)
+- id: huang2010-66
+  resolution: resolved
+  odorant: 2,3-, 2,5- and 2,6-dimethylpyrazine (DMP, mixture)
+  odorant_unlisted: true
+  lever_class: mixed
+  lever: alkalization before vs after roasting at near-matched final pH
+  focal: true
+  location: Fig. 1, digitised
+  digitised: true
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: before-roasting pH 7.87
+    lever_value: 7.87
+    value: 43600.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.87
+      ph_basis: final
+      final_ph: 7.87
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: &id066
+        potassium carbonate soak: 42 - 204 g/L, varied to reach the target pH (per-arm value not printed)
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized before roasting, dried 70 C 2 h)
+      headspace: air
+  - label: after-roasting pH 8.06
+    lever_value: 8.06
+    value: 29800.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.06
+      ph_basis: final
+      final_ph: 8.06
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors: *id066
+      buffer: none
+      matrix: other (cocoa liquor; beans alkalized after roasting, dried 70 C 2 h)
+      headspace: air
+  unlisted_reason: co-eluting compounds printed as one value / not a single listed odorant
+- id: huang2010-67
+  resolution: resolved
+  odorant: Phenylacetaldehyde
+  lever_class: pH
+  lever: pH of alkalized cocoa liquor held at 70 C for 2 h
+  focal: true
+  location: Fig. 3, digitised
+  digitised: true
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 5.33, 70 C
+    lever_value: 5.33
+    value: 318.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.33
+      ph_basis: final
+      final_ph: 5.33
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 70
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  - label: pH 6.02.0, 70 C
+    lever_value: 6.02
+    value: 391.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.02
+      ph_basis: final
+      final_ph: 6.02
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 70
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  - label: pH 6.52, 70 C
+    lever_value: 6.52
+    value: 512.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.52
+      ph_basis: final
+      final_ph: 6.52
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 70
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  - label: pH 6.98.0, 70 C
+    lever_value: 6.98
+    value: 950.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.98
+      ph_basis: final
+      final_ph: 6.98
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 70
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  - label: pH 7.6, 70 C
+    lever_value: 7.6
+    value: 1600.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.6
+      ph_basis: final
+      final_ph: 7.6
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 70
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  - label: pH 8.01.0, 70 C
+    lever_value: 8.01
+    value: 3180.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.01
+      ph_basis: final
+      final_ph: 8.01
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 70
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  odorant_printed: phenylacetaldehyde
+- id: huang2010-68
+  resolution: resolved
+  odorant: Phenylacetaldehyde
+  lever_class: pH
+  lever: pH of alkalized cocoa liquor held at 40 C for 2 h
+  focal: false
+  location: Fig. 3, digitised
+  digitised: true
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 5.33, 40 C
+    lever_value: 5.33
+    value: 133.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.33
+      ph_basis: final
+      final_ph: 5.33
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 40
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  - label: pH 6.02.0, 40 C
+    lever_value: 6.02
+    value: 181.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.02
+      ph_basis: final
+      final_ph: 6.02
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 40
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  - label: pH 6.52, 40 C
+    lever_value: 6.52
+    value: 81.4
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.52
+      ph_basis: final
+      final_ph: 6.52
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 40
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  - label: pH 6.98.0, 40 C
+    lever_value: 6.98
+    value: 71.3
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.98
+      ph_basis: final
+      final_ph: 6.98
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 40
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  - label: pH 7.6, 40 C
+    lever_value: 7.6
+    value: 129.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.6
+      ph_basis: final
+      final_ph: 7.6
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 40
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  - label: pH 8.01.0, 40 C
+    lever_value: 8.01
+    value: 222.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.01
+      ph_basis: final
+      final_ph: 8.01
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 40
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  odorant_printed: phenylacetaldehyde
+- id: huang2010-69
+  resolution: resolved
+  odorant: Phenylacetaldehyde
+  lever_class: temperature
+  lever: holding temperature 40 vs 70 C (2 h) at pH 5.33
+  focal: false
+  location: Fig. 3, digitised
+  digitised: true
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 5.3, 40 C
+    lever_value: 40
+    value: 133.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.33
+      ph_basis: final
+      final_ph: 5.33
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 40
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  - label: pH 5.3, 70 C
+    lever_value: 70
+    value: 318.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.33
+      ph_basis: final
+      final_ph: 5.33
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 70
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  odorant_printed: phenylacetaldehyde
+- id: huang2010-70
+  resolution: resolved
+  odorant: Phenylacetaldehyde
+  lever_class: temperature
+  lever: holding temperature 40 vs 70 C (2 h) at pH 6.02
+  focal: false
+  location: Fig. 3, digitised
+  digitised: true
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 6.0, 40 C
+    lever_value: 40
+    value: 181.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.02
+      ph_basis: final
+      final_ph: 6.02
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 40
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  - label: pH 6.0, 70 C
+    lever_value: 70
+    value: 391.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.02
+      ph_basis: final
+      final_ph: 6.02
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 70
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  odorant_printed: phenylacetaldehyde
+- id: huang2010-71
+  resolution: resolved
+  odorant: Phenylacetaldehyde
+  lever_class: temperature
+  lever: holding temperature 40 vs 70 C (2 h) at pH 6.52
+  focal: false
+  location: Fig. 3, digitised
+  digitised: true
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 6.5, 40 C
+    lever_value: 40
+    value: 81.4
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.52
+      ph_basis: final
+      final_ph: 6.52
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 40
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  - label: pH 6.5, 70 C
+    lever_value: 70
+    value: 512.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.52
+      ph_basis: final
+      final_ph: 6.52
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 70
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  odorant_printed: phenylacetaldehyde
+- id: huang2010-72
+  resolution: resolved
+  odorant: Phenylacetaldehyde
+  lever_class: temperature
+  lever: holding temperature 40 vs 70 C (2 h) at pH 6.98
+  focal: false
+  location: Fig. 3, digitised
+  digitised: true
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 7.0, 40 C
+    lever_value: 40
+    value: 71.3
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.98
+      ph_basis: final
+      final_ph: 6.98
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 40
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  - label: pH 7.0, 70 C
+    lever_value: 70
+    value: 950.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.98
+      ph_basis: final
+      final_ph: 6.98
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 70
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  odorant_printed: phenylacetaldehyde
+- id: huang2010-73
+  resolution: resolved
+  odorant: Phenylacetaldehyde
+  lever_class: temperature
+  lever: holding temperature 40 vs 70 C (2 h) at pH 7.6
+  focal: false
+  location: Fig. 3, digitised
+  digitised: true
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 7.6, 40 C
+    lever_value: 40
+    value: 129.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.6
+      ph_basis: final
+      final_ph: 7.6
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 40
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  - label: pH 7.6, 70 C
+    lever_value: 70
+    value: 1600.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.6
+      ph_basis: final
+      final_ph: 7.6
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 70
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  odorant_printed: phenylacetaldehyde
+- id: huang2010-74
+  resolution: resolved
+  odorant: Phenylacetaldehyde
+  lever_class: temperature
+  lever: holding temperature 40 vs 70 C (2 h) at pH 8.01
+  focal: false
+  location: Fig. 3, digitised
+  digitised: true
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 8.0, 40 C
+    lever_value: 40
+    value: 222.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.01
+      ph_basis: final
+      final_ph: 8.01
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 40
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  - label: pH 8.0, 70 C
+    lever_value: 70
+    value: 3180.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.01
+      ph_basis: final
+      final_ph: 8.01
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 70
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  odorant_printed: phenylacetaldehyde
+- id: huang2010-75
+  resolution: resolved
+  odorant: Trimethylpyrazine
+  lever_class: pH
+  lever: pH of alkalized cocoa liquor held at 70 C for 2 h
+  focal: true
+  location: Fig. 3, digitised
+  digitised: true
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 5.33, 70 C
+    lever_value: 5.33
+    value: 533.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.33
+      ph_basis: final
+      final_ph: 5.33
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 70
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  - label: pH 6.02.0, 70 C
+    lever_value: 6.02
+    value: 562.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.02
+      ph_basis: final
+      final_ph: 6.02
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 70
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  - label: pH 6.52, 70 C
+    lever_value: 6.52
+    value: 556.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.52
+      ph_basis: final
+      final_ph: 6.52
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 70
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  - label: pH 6.98.0, 70 C
+    lever_value: 6.98
+    value: 859.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.98
+      ph_basis: final
+      final_ph: 6.98
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 70
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  - label: pH 7.6, 70 C
+    lever_value: 7.6
+    value: 1440.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.6
+      ph_basis: final
+      final_ph: 7.6
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 70
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  - label: pH 8.01.0, 70 C
+    lever_value: 8.01
+    value: 1920.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.01
+      ph_basis: final
+      final_ph: 8.01
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 70
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  odorant_printed: trimethylpyrazine
+- id: huang2010-76
+  resolution: resolved
+  odorant: Trimethylpyrazine
+  lever_class: pH
+  lever: pH of alkalized cocoa liquor held at 40 C for 2 h
+  focal: false
+  location: Fig. 3, digitised
+  digitised: true
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 5.33, 40 C
+    lever_value: 5.33
+    value: 79.5
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.33
+      ph_basis: final
+      final_ph: 5.33
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 40
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  - label: pH 6.02.0, 40 C
+    lever_value: 6.02
+    value: 92.5
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.02
+      ph_basis: final
+      final_ph: 6.02
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 40
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  - label: pH 6.52, 40 C
+    lever_value: 6.52
+    value: 35.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.52
+      ph_basis: final
+      final_ph: 6.52
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 40
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  - label: pH 6.98.0, 40 C
+    lever_value: 6.98
+    value: 35.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.98
+      ph_basis: final
+      final_ph: 6.98
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 40
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  - label: pH 7.6, 40 C
+    lever_value: 7.6
+    value: 60.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.6
+      ph_basis: final
+      final_ph: 7.6
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 40
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  - label: pH 8.01.0, 40 C
+    lever_value: 8.01
+    value: 88.5
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.01
+      ph_basis: final
+      final_ph: 8.01
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 40
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  odorant_printed: trimethylpyrazine
+- id: huang2010-77
+  resolution: resolved
+  odorant: Trimethylpyrazine
+  lever_class: temperature
+  lever: holding temperature 40 vs 70 C (2 h) at pH 5.33
+  focal: false
+  location: Fig. 3, digitised
+  digitised: true
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 5.3, 40 C
+    lever_value: 40
+    value: 79.5
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.33
+      ph_basis: final
+      final_ph: 5.33
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 40
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  - label: pH 5.3, 70 C
+    lever_value: 70
+    value: 533.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.33
+      ph_basis: final
+      final_ph: 5.33
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 70
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  odorant_printed: trimethylpyrazine
+- id: huang2010-78
+  resolution: resolved
+  odorant: Trimethylpyrazine
+  lever_class: temperature
+  lever: holding temperature 40 vs 70 C (2 h) at pH 6.02
+  focal: false
+  location: Fig. 3, digitised
+  digitised: true
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 6.0, 40 C
+    lever_value: 40
+    value: 92.5
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.02
+      ph_basis: final
+      final_ph: 6.02
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 40
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  - label: pH 6.0, 70 C
+    lever_value: 70
+    value: 562.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.02
+      ph_basis: final
+      final_ph: 6.02
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 70
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  odorant_printed: trimethylpyrazine
+- id: huang2010-79
+  resolution: resolved
+  odorant: Trimethylpyrazine
+  lever_class: temperature
+  lever: holding temperature 40 vs 70 C (2 h) at pH 6.52
+  focal: false
+  location: Fig. 3, digitised
+  digitised: true
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 6.5, 40 C
+    lever_value: 40
+    value: 35.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.52
+      ph_basis: final
+      final_ph: 6.52
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 40
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  - label: pH 6.5, 70 C
+    lever_value: 70
+    value: 556.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.52
+      ph_basis: final
+      final_ph: 6.52
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 70
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  odorant_printed: trimethylpyrazine
+- id: huang2010-80
+  resolution: resolved
+  odorant: Trimethylpyrazine
+  lever_class: temperature
+  lever: holding temperature 40 vs 70 C (2 h) at pH 6.98
+  focal: false
+  location: Fig. 3, digitised
+  digitised: true
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 7.0, 40 C
+    lever_value: 40
+    value: 35.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.98
+      ph_basis: final
+      final_ph: 6.98
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 40
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  - label: pH 7.0, 70 C
+    lever_value: 70
+    value: 859.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.98
+      ph_basis: final
+      final_ph: 6.98
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 70
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  odorant_printed: trimethylpyrazine
+- id: huang2010-81
+  resolution: resolved
+  odorant: Trimethylpyrazine
+  lever_class: temperature
+  lever: holding temperature 40 vs 70 C (2 h) at pH 7.6
+  focal: false
+  location: Fig. 3, digitised
+  digitised: true
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 7.6, 40 C
+    lever_value: 40
+    value: 60.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.6
+      ph_basis: final
+      final_ph: 7.6
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 40
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  - label: pH 7.6, 70 C
+    lever_value: 70
+    value: 1440.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.6
+      ph_basis: final
+      final_ph: 7.6
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 70
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  odorant_printed: trimethylpyrazine
+- id: huang2010-82
+  resolution: resolved
+  odorant: Trimethylpyrazine
+  lever_class: temperature
+  lever: holding temperature 40 vs 70 C (2 h) at pH 8.01
+  focal: false
+  location: Fig. 3, digitised
+  digitised: true
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 8.0, 40 C
+    lever_value: 40
+    value: 88.5
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.01
+      ph_basis: final
+      final_ph: 8.01
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 40
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  - label: pH 8.0, 70 C
+    lever_value: 70
+    value: 1920.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.01
+      ph_basis: final
+      final_ph: 8.01
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 70
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  odorant_printed: trimethylpyrazine
+- id: huang2010-83
+  resolution: resolved
+  odorant: 2- and 3-methylbutanal
+  odorant_unlisted: true
+  lever_class: pH
+  lever: pH of alkalized cocoa liquor held at 70 C for 2 h
+  focal: true
+  location: Fig. 3, digitised
+  digitised: true
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 5.33, 70 C
+    lever_value: 5.33
+    value: 18400.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.33
+      ph_basis: final
+      final_ph: 5.33
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 70
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  - label: pH 6.02.0, 70 C
+    lever_value: 6.02
+    value: 22200.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.02
+      ph_basis: final
+      final_ph: 6.02
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 70
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  - label: pH 6.52, 70 C
+    lever_value: 6.52
+    value: 19100.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.52
+      ph_basis: final
+      final_ph: 6.52
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 70
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  - label: pH 6.98.0, 70 C
+    lever_value: 6.98
+    value: 23400.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.98
+      ph_basis: final
+      final_ph: 6.98
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 70
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  - label: pH 7.6, 70 C
+    lever_value: 7.6
+    value: 28000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.6
+      ph_basis: final
+      final_ph: 7.6
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 70
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  - label: pH 8.01.0, 70 C
+    lever_value: 8.01
+    value: 31100.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.01
+      ph_basis: final
+      final_ph: 8.01
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 70
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  unlisted_reason: co-eluting compounds printed as one value / not a single listed odorant
+- id: huang2010-84
+  resolution: resolved
+  odorant: 2- and 3-methylbutanal
+  odorant_unlisted: true
+  lever_class: pH
+  lever: pH of alkalized cocoa liquor held at 40 C for 2 h
+  focal: false
+  location: Fig. 3, digitised
+  digitised: true
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 5.33, 40 C
+    lever_value: 5.33
+    value: 10900.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.33
+      ph_basis: final
+      final_ph: 5.33
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 40
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  - label: pH 6.02.0, 40 C
+    lever_value: 6.02
+    value: 9930.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.02
+      ph_basis: final
+      final_ph: 6.02
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 40
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  - label: pH 6.52, 40 C
+    lever_value: 6.52
+    value: 8380.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.52
+      ph_basis: final
+      final_ph: 6.52
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 40
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  - label: pH 6.98.0, 40 C
+    lever_value: 6.98
+    value: 9250.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.98
+      ph_basis: final
+      final_ph: 6.98
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 40
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  - label: pH 7.6, 40 C
+    lever_value: 7.6
+    value: 12800.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.6
+      ph_basis: final
+      final_ph: 7.6
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 40
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  - label: pH 8.01.0, 40 C
+    lever_value: 8.01
+    value: 6860.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.01
+      ph_basis: final
+      final_ph: 8.01
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 40
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  unlisted_reason: co-eluting compounds printed as one value / not a single listed odorant
+- id: huang2010-85
+  resolution: resolved
+  odorant: 2- and 3-methylbutanal
+  odorant_unlisted: true
+  lever_class: temperature
+  lever: holding temperature 40 vs 70 C (2 h) at pH 5.33
+  focal: false
+  location: Fig. 3, digitised
+  digitised: true
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 5.3, 40 C
+    lever_value: 40
+    value: 10900.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.33
+      ph_basis: final
+      final_ph: 5.33
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 40
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  - label: pH 5.3, 70 C
+    lever_value: 70
+    value: 18400.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.33
+      ph_basis: final
+      final_ph: 5.33
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 70
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  unlisted_reason: co-eluting compounds printed as one value / not a single listed odorant
+- id: huang2010-86
+  resolution: resolved
+  odorant: 2- and 3-methylbutanal
+  odorant_unlisted: true
+  lever_class: temperature
+  lever: holding temperature 40 vs 70 C (2 h) at pH 6.02
+  focal: false
+  location: Fig. 3, digitised
+  digitised: true
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 6.0, 40 C
+    lever_value: 40
+    value: 9930.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.02
+      ph_basis: final
+      final_ph: 6.02
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 40
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  - label: pH 6.0, 70 C
+    lever_value: 70
+    value: 22200.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.02
+      ph_basis: final
+      final_ph: 6.02
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 70
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  unlisted_reason: co-eluting compounds printed as one value / not a single listed odorant
+- id: huang2010-87
+  resolution: resolved
+  odorant: 2- and 3-methylbutanal
+  odorant_unlisted: true
+  lever_class: temperature
+  lever: holding temperature 40 vs 70 C (2 h) at pH 6.52
+  focal: false
+  location: Fig. 3, digitised
+  digitised: true
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 6.5, 40 C
+    lever_value: 40
+    value: 8380.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.52
+      ph_basis: final
+      final_ph: 6.52
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 40
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  - label: pH 6.5, 70 C
+    lever_value: 70
+    value: 19100.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.52
+      ph_basis: final
+      final_ph: 6.52
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 70
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  unlisted_reason: co-eluting compounds printed as one value / not a single listed odorant
+- id: huang2010-88
+  resolution: resolved
+  odorant: 2- and 3-methylbutanal
+  odorant_unlisted: true
+  lever_class: temperature
+  lever: holding temperature 40 vs 70 C (2 h) at pH 6.98
+  focal: false
+  location: Fig. 3, digitised
+  digitised: true
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 7.0, 40 C
+    lever_value: 40
+    value: 9250.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.98
+      ph_basis: final
+      final_ph: 6.98
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 40
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  - label: pH 7.0, 70 C
+    lever_value: 70
+    value: 23400.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.98
+      ph_basis: final
+      final_ph: 6.98
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 70
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  unlisted_reason: co-eluting compounds printed as one value / not a single listed odorant
+- id: huang2010-89
+  resolution: resolved
+  odorant: 2- and 3-methylbutanal
+  odorant_unlisted: true
+  lever_class: temperature
+  lever: holding temperature 40 vs 70 C (2 h) at pH 7.6
+  focal: false
+  location: Fig. 3, digitised
+  digitised: true
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 7.6, 40 C
+    lever_value: 40
+    value: 12800.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.6
+      ph_basis: final
+      final_ph: 7.6
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 40
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  - label: pH 7.6, 70 C
+    lever_value: 70
+    value: 28000.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.6
+      ph_basis: final
+      final_ph: 7.6
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 70
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  unlisted_reason: co-eluting compounds printed as one value / not a single listed odorant
+- id: huang2010-90
+  resolution: resolved
+  odorant: 2- and 3-methylbutanal
+  odorant_unlisted: true
+  lever_class: temperature
+  lever: holding temperature 40 vs 70 C (2 h) at pH 8.01
+  focal: false
+  location: Fig. 3, digitised
+  digitised: true
+  unit: ppb (headspace)
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 8.0, 40 C
+    lever_value: 40
+    value: 6860.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.01
+      ph_basis: final
+      final_ph: 8.01
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 40
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  - label: pH 8.0, 70 C
+    lever_value: 70
+    value: 31100.0
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.01
+      ph_basis: final
+      final_ph: 8.01
+      final_ph_location: Fig. 3, digitised (x position)
+      temp_C: 70
+      time_min: 120
+      precursors:
+        potassium carbonate solution: 50 mL per 20 g liquor (concentration not printed)
+      buffer: none
+      matrix: other (unalkalized cocoa liquor, alkalized after grinding)
+      headspace: sealed, unstated
+  unlisted_reason: co-eluting compounds printed as one value / not a single listed odorant

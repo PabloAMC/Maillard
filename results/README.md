@@ -11,7 +11,7 @@ regenerates (`core-scores`, `core-directional`, `core-envelope`, `model-card`, .
 (`scripts/generators/WAVES.md`: not re-run, a change is a new wave). Every live artifact carries a
 `provenance` block (git head, date, input hashes: `src/provenance.py`).
 
-Tracked files: **1069**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
+Tracked files: **1071**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
 
 ## `results`
 
@@ -43,7 +43,7 @@ Tracked files: **1069**. Local-only (gitignored): scratch runs under `results/qu
 | `_b40_baseline/` (3 files) | The frozen pair B40's ship rule compares: the same BEFORE, and the B40 candidate (both 3-DG exits with a pH term, refit) scored in-process only. |
 | `_b41_baseline/` (3 files) | The frozen pair B41's ship rule compares: the same BEFORE, and the B41 candidate (the formic-acid exit's pH term only, refit) scored in-process. |
 | `_b55_b56_arms/` (8 files) | FROZEN envelopes of the four B55/B56 arms (baseline, B55, B56, both) that the ship rule compares. |
-| `a6_post_freeze_score_batch*` (2): `a6_post_freeze_score_batch1.json`, `a6_post_freeze_score_batch1.md` | PREREG amendment A6's candidate rule R1 (pH cells banded by keyed buffered / unbuffered control) scored ONCE per post-freeze batch under `docs/reference/lever_table/A6_SCORING_PREREG.md` (STATUS_AND_PLAN sec. 0 step 10): eligibility from row counts first (>= 20 contrasts, 4 sources, 3 laboratories, no source above 40 %), then the source-weighted interval score of the new-laboratory 90 % interval against the table's own rule and a within-cell label placebo. Frozen records, pinned by commit. Written by `scripts/generators/score_a6_post_freeze.py --batch <n>`. |
+| `a6_post_freeze_score_batch*` (4): `a6_post_freeze_score_batch1.json`, `a6_post_freeze_score_batch1.md`, `a6_post_freeze_score_batch2.json`, `a6_post_freeze_score_batch2.md` | PREREG amendment A6's candidate rule R1 (pH cells banded by keyed buffered / unbuffered control) scored ONCE per post-freeze batch under `docs/reference/lever_table/A6_SCORING_PREREG.md` (STATUS_AND_PLAN sec. 0 step 10): eligibility from row counts first (>= 20 contrasts, 4 sources, 3 laboratories, no source above 40 %), then the source-weighted interval score of the new-laboratory 90 % interval against the table's own rule and a within-cell label placebo. Frozen records, pinned by commit. Written by `scripts/generators/score_a6_post_freeze.py --batch <n>`. |
 | `calibration_prereg.md` | Pre-registration of `maillard calibrate` (per-laboratory calibration on the user's own data: levels set the response factor, contrasts move the kinetics), with its declared tests and outcome. |
 | `chemistry_family_scope.*` (2): `chemistry_family_scope.json`, `chemistry_family_scope.md` | Which chemistry families are first-class, bounded or gaps (`src/chemistry_family_scope.py`). |
 | `choice_robustness.*` (2): `choice_robustness.json`, `choice_robustness.md` | Every swept entry of the register of non-measured choices (`docs/reference/choices_register.yml`) and whether any headline depends on it: out-of-sample counts per alternative, by lane, and the contrast diagnostic (`build_choice_robustness.py`). A choice that moves a headline is reported unresolved, never decided on the score. |

@@ -1,0 +1,4944 @@
+source: gou2025
+pdf: data/articles/gou2025.pdf
+reader: a
+scope_note: 'Phosphate buffer named but its concentration is not printed (ph_control keyed buffered). Fig. 1 (calibrated 3,5-EDMP
+  time course) not digitised: Tables 2-3 print the compound. 2,3-dimethylpyrazine (Table 3 only) and 2-furanmethanol (Table
+  2 only) have no row in the other pH table, so no pH contrast. Table 4 additions (lysine + glucose) are two precursors at
+  once: keyed mixed. Printed 3-ethyl-2,5-dimethylpyrazine keyed as 2-ethyl-3,6-dimethylpyrazine (same compound). Final pH
+  not printed.'
+contrasts:
+- id: gou2025-1
+  odorant: 2-methylpyrazine
+  lever_class: amino acid identity
+  lever: amino acid (Arg, Gly, Lys, Ser, Pro) with glucose
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ug/kg 2-cyclohexen-1-one equivalents
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Arg - glucose
+    lever_value: L-arginine
+    value: 16.85
+    censor: none
+    limit: null
+    n: null
+    sd: 1.68
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors:
+        glucose: 5 g
+        L-arginine: 5 g
+        odorless red jujube matrix: 8 g
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Gly - glucose
+    lever_value: glycine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors:
+        glucose: 5 g
+        glycine: 5 g
+        odorless red jujube matrix: 8 g
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Lys - glucose
+    lever_value: L-lysine
+    value: 46.32
+    censor: none
+    limit: null
+    n: null
+    sd: 4.6
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors:
+        glucose: 5 g
+        L-lysine: 5 g
+        odorless red jujube matrix: 8 g
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Ser - glucose
+    lever_value: L-serine
+    value: 6.86
+    censor: none
+    limit: null
+    n: null
+    sd: 0.48
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors:
+        glucose: 5 g
+        L-serine: 5 g
+        odorless red jujube matrix: 8 g
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Pro - glucose
+    lever_value: L-proline
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors:
+        glucose: 5 g
+        L-proline: 5 g
+        odorless red jujube matrix: 8 g
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+- id: gou2025-2
+  odorant: 2,5-dimethylpyrazine
+  lever_class: amino acid identity
+  lever: amino acid (Arg, Gly, Lys, Ser, Pro) with glucose
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ug/kg 2-cyclohexen-1-one equivalents
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Arg - glucose
+    lever_value: L-arginine
+    value: 190
+    censor: none
+    limit: null
+    n: null
+    sd: 16
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors:
+        glucose: 5 g
+        L-arginine: 5 g
+        odorless red jujube matrix: 8 g
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Gly - glucose
+    lever_value: glycine
+    value: 82.38
+    censor: none
+    limit: null
+    n: null
+    sd: 7.09
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors:
+        glucose: 5 g
+        glycine: 5 g
+        odorless red jujube matrix: 8 g
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Lys - glucose
+    lever_value: L-lysine
+    value: 2165
+    censor: none
+    limit: null
+    n: null
+    sd: 172
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors:
+        glucose: 5 g
+        L-lysine: 5 g
+        odorless red jujube matrix: 8 g
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Ser - glucose
+    lever_value: L-serine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors:
+        glucose: 5 g
+        L-serine: 5 g
+        odorless red jujube matrix: 8 g
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Pro - glucose
+    lever_value: L-proline
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors:
+        glucose: 5 g
+        L-proline: 5 g
+        odorless red jujube matrix: 8 g
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+- id: gou2025-3
+  odorant: 2,6-dimethylpyrazine
+  lever_class: amino acid identity
+  lever: amino acid (Arg, Gly, Lys, Ser, Pro) with glucose
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ug/kg 2-cyclohexen-1-one equivalents
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Arg - glucose
+    lever_value: L-arginine
+    value: 24.0
+    censor: none
+    limit: null
+    n: null
+    sd: 2.31
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors:
+        glucose: 5 g
+        L-arginine: 5 g
+        odorless red jujube matrix: 8 g
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Gly - glucose
+    lever_value: glycine
+    value: 11.38
+    censor: none
+    limit: null
+    n: null
+    sd: 1.14
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors:
+        glucose: 5 g
+        glycine: 5 g
+        odorless red jujube matrix: 8 g
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Lys - glucose
+    lever_value: L-lysine
+    value: 72.15
+    censor: none
+    limit: null
+    n: null
+    sd: 5.53
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors:
+        glucose: 5 g
+        L-lysine: 5 g
+        odorless red jujube matrix: 8 g
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Ser - glucose
+    lever_value: L-serine
+    value: 9.02
+    censor: none
+    limit: null
+    n: null
+    sd: 0.2
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors:
+        glucose: 5 g
+        L-serine: 5 g
+        odorless red jujube matrix: 8 g
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Pro - glucose
+    lever_value: L-proline
+    value: 18.15
+    censor: none
+    limit: null
+    n: null
+    sd: 1.41
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors:
+        glucose: 5 g
+        L-proline: 5 g
+        odorless red jujube matrix: 8 g
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+- id: gou2025-4
+  odorant: 2-ethylpyrazine
+  lever_class: amino acid identity
+  lever: amino acid (Arg, Gly, Lys, Ser, Pro) with glucose
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ug/kg 2-cyclohexen-1-one equivalents
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Arg - glucose
+    lever_value: L-arginine
+    value: 11.69
+    censor: none
+    limit: null
+    n: null
+    sd: 1.63
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors:
+        glucose: 5 g
+        L-arginine: 5 g
+        odorless red jujube matrix: 8 g
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Gly - glucose
+    lever_value: glycine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors:
+        glucose: 5 g
+        glycine: 5 g
+        odorless red jujube matrix: 8 g
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Lys - glucose
+    lever_value: L-lysine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors:
+        glucose: 5 g
+        L-lysine: 5 g
+        odorless red jujube matrix: 8 g
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Ser - glucose
+    lever_value: L-serine
+    value: 18.87
+    censor: none
+    limit: null
+    n: null
+    sd: 0.99
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors:
+        glucose: 5 g
+        L-serine: 5 g
+        odorless red jujube matrix: 8 g
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Pro - glucose
+    lever_value: L-proline
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors:
+        glucose: 5 g
+        L-proline: 5 g
+        odorless red jujube matrix: 8 g
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+- id: gou2025-5
+  odorant: trimethylpyrazine
+  lever_class: amino acid identity
+  lever: amino acid (Arg, Gly, Lys, Ser, Pro) with glucose
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ug/kg 2-cyclohexen-1-one equivalents
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Arg - glucose
+    lever_value: L-arginine
+    value: 27.37
+    censor: none
+    limit: null
+    n: null
+    sd: 2.65
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors:
+        glucose: 5 g
+        L-arginine: 5 g
+        odorless red jujube matrix: 8 g
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Gly - glucose
+    lever_value: glycine
+    value: 93.13
+    censor: none
+    limit: null
+    n: null
+    sd: 8.91
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors:
+        glucose: 5 g
+        glycine: 5 g
+        odorless red jujube matrix: 8 g
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Lys - glucose
+    lever_value: L-lysine
+    value: 152
+    censor: none
+    limit: null
+    n: null
+    sd: 14
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors:
+        glucose: 5 g
+        L-lysine: 5 g
+        odorless red jujube matrix: 8 g
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Ser - glucose
+    lever_value: L-serine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors:
+        glucose: 5 g
+        L-serine: 5 g
+        odorless red jujube matrix: 8 g
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Pro - glucose
+    lever_value: L-proline
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors:
+        glucose: 5 g
+        L-proline: 5 g
+        odorless red jujube matrix: 8 g
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+- id: gou2025-6
+  odorant: 2-ethyl-3,6-dimethylpyrazine
+  lever_class: amino acid identity
+  lever: amino acid (Arg, Gly, Lys, Ser, Pro) with glucose
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ug/kg 2-cyclohexen-1-one equivalents
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Arg - glucose
+    lever_value: L-arginine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors:
+        glucose: 5 g
+        L-arginine: 5 g
+        odorless red jujube matrix: 8 g
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Gly - glucose
+    lever_value: glycine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors:
+        glucose: 5 g
+        glycine: 5 g
+        odorless red jujube matrix: 8 g
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Lys - glucose
+    lever_value: L-lysine
+    value: 19.34
+    censor: none
+    limit: null
+    n: null
+    sd: 1.31
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors:
+        glucose: 5 g
+        L-lysine: 5 g
+        odorless red jujube matrix: 8 g
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Ser - glucose
+    lever_value: L-serine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors:
+        glucose: 5 g
+        L-serine: 5 g
+        odorless red jujube matrix: 8 g
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Pro - glucose
+    lever_value: L-proline
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors:
+        glucose: 5 g
+        L-proline: 5 g
+        odorless red jujube matrix: 8 g
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+- id: gou2025-7
+  odorant: 2-ethyl-3,5-dimethylpyrazine
+  lever_class: amino acid identity
+  lever: amino acid (Arg, Gly, Lys, Ser, Pro) with glucose
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ug/kg 2-cyclohexen-1-one equivalents
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Arg - glucose
+    lever_value: L-arginine
+    value: 4.37
+    censor: none
+    limit: null
+    n: null
+    sd: 0.41
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors:
+        glucose: 5 g
+        L-arginine: 5 g
+        odorless red jujube matrix: 8 g
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Gly - glucose
+    lever_value: glycine
+    value: 18.6
+    censor: none
+    limit: null
+    n: null
+    sd: 0.37
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors:
+        glucose: 5 g
+        glycine: 5 g
+        odorless red jujube matrix: 8 g
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Lys - glucose
+    lever_value: L-lysine
+    value: 361
+    censor: none
+    limit: null
+    n: null
+    sd: 21
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors:
+        glucose: 5 g
+        L-lysine: 5 g
+        odorless red jujube matrix: 8 g
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Ser - glucose
+    lever_value: L-serine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors:
+        glucose: 5 g
+        L-serine: 5 g
+        odorless red jujube matrix: 8 g
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Pro - glucose
+    lever_value: L-proline
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors:
+        glucose: 5 g
+        L-proline: 5 g
+        odorless red jujube matrix: 8 g
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+- id: gou2025-8
+  odorant: tetramethylpyrazine
+  lever_class: amino acid identity
+  lever: amino acid (Arg, Gly, Lys, Ser, Pro) with glucose
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ug/kg 2-cyclohexen-1-one equivalents
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Arg - glucose
+    lever_value: L-arginine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors:
+        glucose: 5 g
+        L-arginine: 5 g
+        odorless red jujube matrix: 8 g
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Gly - glucose
+    lever_value: glycine
+    value: 19.96
+    censor: none
+    limit: null
+    n: null
+    sd: 1.69
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors:
+        glucose: 5 g
+        glycine: 5 g
+        odorless red jujube matrix: 8 g
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Lys - glucose
+    lever_value: L-lysine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors:
+        glucose: 5 g
+        L-lysine: 5 g
+        odorless red jujube matrix: 8 g
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Ser - glucose
+    lever_value: L-serine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors:
+        glucose: 5 g
+        L-serine: 5 g
+        odorless red jujube matrix: 8 g
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Pro - glucose
+    lever_value: L-proline
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors:
+        glucose: 5 g
+        L-proline: 5 g
+        odorless red jujube matrix: 8 g
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+- id: gou2025-9
+  odorant: Pyrazines
+  lever_class: amino acid identity
+  lever: amino acid (Arg, Gly, Lys, Ser, Pro) with glucose
+  focal: true
+  location: Table 1
+  digitised: false
+  unit: ug/kg 2-cyclohexen-1-one equivalents
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Arg - glucose
+    lever_value: L-arginine
+    value: 369
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors:
+        glucose: 5 g
+        L-arginine: 5 g
+        odorless red jujube matrix: 8 g
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Gly - glucose
+    lever_value: glycine
+    value: 244
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors:
+        glucose: 5 g
+        glycine: 5 g
+        odorless red jujube matrix: 8 g
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Lys - glucose
+    lever_value: L-lysine
+    value: 3050
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors:
+        glucose: 5 g
+        L-lysine: 5 g
+        odorless red jujube matrix: 8 g
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Ser - glucose
+    lever_value: L-serine
+    value: 42.69
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors:
+        glucose: 5 g
+        L-serine: 5 g
+        odorless red jujube matrix: 8 g
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Pro - glucose
+    lever_value: L-proline
+    value: 18.15
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors:
+        glucose: 5 g
+        L-proline: 5 g
+        odorless red jujube matrix: 8 g
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+- id: gou2025-10
+  odorant: 2-methylpyrazine
+  lever_class: pH
+  lever: initial pH of the phosphate buffer (5.5 vs 7.8)
+  focal: true
+  location: Table 2 vs Table 3, 10 h
+  digitised: false
+  unit: ug/kg 2-cyclohexen-1-one equivalents
+  quant_type: relative
+  time_course_rule: main result time
+  ph_control: buffered
+  arms:
+  - label: Model 1 (pH 5.5)
+    lever_value: 5.5
+    value: 61.86
+    censor: none
+    limit: null
+    n: null
+    sd: 2.11
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors: &id001
+        glucose: 5 g
+        L-lysine: 5 g
+        odorless red jujube matrix: 8 g
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 2 (pH 7.8)
+    lever_value: 7.8
+    value: 43.09
+    censor: none
+    limit: null
+    n: null
+    sd: 0.79
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+- id: gou2025-11
+  odorant: 2,5-dimethylpyrazine
+  lever_class: pH
+  lever: initial pH of the phosphate buffer (5.5 vs 7.8)
+  focal: true
+  location: Table 2 vs Table 3, 10 h
+  digitised: false
+  unit: ug/kg 2-cyclohexen-1-one equivalents
+  quant_type: relative
+  time_course_rule: main result time
+  ph_control: buffered
+  arms:
+  - label: Model 1 (pH 5.5)
+    lever_value: 5.5
+    value: 2912
+    censor: none
+    limit: null
+    n: null
+    sd: 197
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 2 (pH 7.8)
+    lever_value: 7.8
+    value: 2964
+    censor: none
+    limit: null
+    n: null
+    sd: 172
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+- id: gou2025-12
+  odorant: 2,6-dimethylpyrazine
+  lever_class: pH
+  lever: initial pH of the phosphate buffer (5.5 vs 7.8)
+  focal: true
+  location: Table 2 vs Table 3, 10 h
+  digitised: false
+  unit: ug/kg 2-cyclohexen-1-one equivalents
+  quant_type: relative
+  time_course_rule: main result time
+  ph_control: buffered
+  arms:
+  - label: Model 1 (pH 5.5)
+    lever_value: 5.5
+    value: 64.24
+    censor: none
+    limit: null
+    n: null
+    sd: 1.8
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 2 (pH 7.8)
+    lever_value: 7.8
+    value: 76.04
+    censor: none
+    limit: null
+    n: null
+    sd: 0.87
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+- id: gou2025-13
+  odorant: trimethylpyrazine
+  lever_class: pH
+  lever: initial pH of the phosphate buffer (5.5 vs 7.8)
+  focal: true
+  location: Table 2 vs Table 3, 10 h
+  digitised: false
+  unit: ug/kg 2-cyclohexen-1-one equivalents
+  quant_type: relative
+  time_course_rule: main result time
+  ph_control: buffered
+  arms:
+  - label: Model 1 (pH 5.5)
+    lever_value: 5.5
+    value: 97.93
+    censor: none
+    limit: null
+    n: null
+    sd: 2.23
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 2 (pH 7.8)
+    lever_value: 7.8
+    value: 161
+    censor: none
+    limit: null
+    n: null
+    sd: 2
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+- id: gou2025-14
+  odorant: 2-ethyl-3,6-dimethylpyrazine
+  lever_class: pH
+  lever: initial pH of the phosphate buffer (5.5 vs 7.8)
+  focal: true
+  location: Table 2 vs Table 3, 10 h
+  digitised: false
+  unit: ug/kg 2-cyclohexen-1-one equivalents
+  quant_type: relative
+  time_course_rule: main result time
+  ph_control: buffered
+  arms:
+  - label: Model 1 (pH 5.5)
+    lever_value: 5.5
+    value: 167
+    censor: none
+    limit: null
+    n: null
+    sd: 6
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 2 (pH 7.8)
+    lever_value: 7.8
+    value: 21.87
+    censor: none
+    limit: null
+    n: null
+    sd: 1.86
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+- id: gou2025-15
+  odorant: 2-ethyl-3,5-dimethylpyrazine
+  lever_class: pH
+  lever: initial pH of the phosphate buffer (5.5 vs 7.8)
+  focal: true
+  location: Table 2 vs Table 3, 10 h
+  digitised: false
+  unit: ug/kg 2-cyclohexen-1-one equivalents
+  quant_type: relative
+  time_course_rule: main result time
+  ph_control: buffered
+  arms:
+  - label: Model 1 (pH 5.5)
+    lever_value: 5.5
+    value: 180
+    censor: none
+    limit: null
+    n: null
+    sd: 15
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 2 (pH 7.8)
+    lever_value: 7.8
+    value: 361
+    censor: none
+    limit: null
+    n: null
+    sd: 21
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+- id: gou2025-16
+  odorant: Pyrazines
+  lever_class: pH
+  lever: initial pH of the phosphate buffer (5.5 vs 7.8)
+  focal: true
+  location: Table 2 vs Table 3, 10 h
+  digitised: false
+  unit: ug/kg 2-cyclohexen-1-one equivalents
+  quant_type: relative
+  time_course_rule: main result time
+  ph_control: buffered
+  arms:
+  - label: Model 1 (pH 5.5)
+    lever_value: 5.5
+    value: 3712
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 2 (pH 7.8)
+    lever_value: 7.8
+    value: 4133
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+- id: gou2025-17
+  odorant: furfural
+  lever_class: pH
+  lever: initial pH of the phosphate buffer (5.5 vs 7.8)
+  focal: false
+  location: Table 2 vs Table 3, 10 h
+  digitised: false
+  unit: ug/kg 2-cyclohexen-1-one equivalents
+  quant_type: relative
+  time_course_rule: main result time
+  ph_control: buffered
+  arms:
+  - label: Model 1 (pH 5.5)
+    lever_value: 5.5
+    value: 39.3
+    censor: none
+    limit: null
+    n: null
+    sd: 0.51
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 2 (pH 7.8)
+    lever_value: 7.8
+    value: 22.27
+    censor: none
+    limit: null
+    n: null
+    sd: 0.38
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+- id: gou2025-18
+  odorant: 2-acetylfuran
+  lever_class: pH
+  lever: initial pH of the phosphate buffer (5.5 vs 7.8)
+  focal: false
+  location: Table 2 vs Table 3, 10 h
+  digitised: false
+  unit: ug/kg 2-cyclohexen-1-one equivalents
+  quant_type: relative
+  time_course_rule: main result time
+  ph_control: buffered
+  arms:
+  - label: Model 1 (pH 5.5)
+    lever_value: 5.5
+    value: 15.2
+    censor: none
+    limit: null
+    n: null
+    sd: 0.08
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 2 (pH 7.8)
+    lever_value: 7.8
+    value: 6.28
+    censor: none
+    limit: null
+    n: null
+    sd: 0.12
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+- id: gou2025-19
+  odorant: DMHF (furaneol)
+  lever_class: pH
+  lever: initial pH of the phosphate buffer (5.5 vs 7.8)
+  focal: false
+  location: Table 2 vs Table 3, 10 h
+  digitised: false
+  unit: ug/kg 2-cyclohexen-1-one equivalents
+  quant_type: relative
+  time_course_rule: main result time
+  ph_control: buffered
+  arms:
+  - label: Model 1 (pH 5.5)
+    lever_value: 5.5
+    value: 24.96
+    censor: none
+    limit: null
+    n: null
+    sd: 0.94
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 2 (pH 7.8)
+    lever_value: 7.8
+    value: 29.13
+    censor: none
+    limit: null
+    n: null
+    sd: 1.15
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+- id: gou2025-20
+  odorant: 2-methylpyrazine
+  lever_class: time
+  lever: heating time at 85 C (2-10 h)
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ug/kg 2-cyclohexen-1-one equivalents
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Model 1 (pH 5.5), 2 h
+    lever_value: 120
+    value: 117
+    censor: none
+    limit: null
+    n: null
+    sd: 2
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 120
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 1 (pH 5.5), 4 h
+    lever_value: 240
+    value: 55.9
+    censor: none
+    limit: null
+    n: null
+    sd: 1.43
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 240
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 1 (pH 5.5), 6 h
+    lever_value: 360
+    value: 32.27
+    censor: none
+    limit: null
+    n: null
+    sd: 2.54
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 360
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 1 (pH 5.5), 8 h
+    lever_value: 480
+    value: 46.18
+    censor: none
+    limit: null
+    n: null
+    sd: 3.65
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 480
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 1 (pH 5.5), 10 h
+    lever_value: 600
+    value: 61.86
+    censor: none
+    limit: null
+    n: null
+    sd: 2.11
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+- id: gou2025-21
+  odorant: 2,5-dimethylpyrazine
+  lever_class: time
+  lever: heating time at 85 C (2-10 h)
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ug/kg 2-cyclohexen-1-one equivalents
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Model 1 (pH 5.5), 2 h
+    lever_value: 120
+    value: 3591
+    censor: none
+    limit: null
+    n: null
+    sd: 256
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 120
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 1 (pH 5.5), 4 h
+    lever_value: 240
+    value: 1195
+    censor: none
+    limit: null
+    n: null
+    sd: 106
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 240
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 1 (pH 5.5), 6 h
+    lever_value: 360
+    value: 2218
+    censor: none
+    limit: null
+    n: null
+    sd: 173
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 360
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 1 (pH 5.5), 8 h
+    lever_value: 480
+    value: 3047
+    censor: none
+    limit: null
+    n: null
+    sd: 26
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 480
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 1 (pH 5.5), 10 h
+    lever_value: 600
+    value: 2912
+    censor: none
+    limit: null
+    n: null
+    sd: 197
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+- id: gou2025-22
+  odorant: 2,6-dimethylpyrazine
+  lever_class: time
+  lever: heating time at 85 C (2-10 h)
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ug/kg 2-cyclohexen-1-one equivalents
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Model 1 (pH 5.5), 2 h
+    lever_value: 120
+    value: 72.01
+    censor: none
+    limit: null
+    n: null
+    sd: 5.53
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 120
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 1 (pH 5.5), 4 h
+    lever_value: 240
+    value: 158
+    censor: none
+    limit: null
+    n: null
+    sd: 15
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 240
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 1 (pH 5.5), 6 h
+    lever_value: 360
+    value: 54.81
+    censor: none
+    limit: null
+    n: null
+    sd: 0.78
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 360
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 1 (pH 5.5), 8 h
+    lever_value: 480
+    value: 63.67
+    censor: none
+    limit: null
+    n: null
+    sd: 5.9
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 480
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 1 (pH 5.5), 10 h
+    lever_value: 600
+    value: 64.24
+    censor: none
+    limit: null
+    n: null
+    sd: 1.8
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+- id: gou2025-23
+  odorant: trimethylpyrazine
+  lever_class: time
+  lever: heating time at 85 C (2-10 h)
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ug/kg 2-cyclohexen-1-one equivalents
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Model 1 (pH 5.5), 2 h
+    lever_value: 120
+    value: 82.36
+    censor: none
+    limit: null
+    n: null
+    sd: 6.35
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 120
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 1 (pH 5.5), 4 h
+    lever_value: 240
+    value: 82.82
+    censor: none
+    limit: null
+    n: null
+    sd: 7.41
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 240
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 1 (pH 5.5), 6 h
+    lever_value: 360
+    value: 75.58
+    censor: none
+    limit: null
+    n: null
+    sd: 5.16
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 360
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 1 (pH 5.5), 8 h
+    lever_value: 480
+    value: 101
+    censor: none
+    limit: null
+    n: null
+    sd: 6
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 480
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 1 (pH 5.5), 10 h
+    lever_value: 600
+    value: 97.93
+    censor: none
+    limit: null
+    n: null
+    sd: 2.23
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+- id: gou2025-24
+  odorant: 2-ethyl-3,6-dimethylpyrazine
+  lever_class: time
+  lever: heating time at 85 C (2-10 h)
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ug/kg 2-cyclohexen-1-one equivalents
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Model 1 (pH 5.5), 2 h
+    lever_value: 120
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 120
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 1 (pH 5.5), 4 h
+    lever_value: 240
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 240
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 1 (pH 5.5), 6 h
+    lever_value: 360
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 360
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 1 (pH 5.5), 8 h
+    lever_value: 480
+    value: 110
+    censor: none
+    limit: null
+    n: null
+    sd: 1
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 480
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 1 (pH 5.5), 10 h
+    lever_value: 600
+    value: 167
+    censor: none
+    limit: null
+    n: null
+    sd: 6
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+- id: gou2025-25
+  odorant: 2-ethyl-3,5-dimethylpyrazine
+  lever_class: time
+  lever: heating time at 85 C (2-10 h)
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ug/kg 2-cyclohexen-1-one equivalents
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Model 1 (pH 5.5), 2 h
+    lever_value: 120
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 120
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 1 (pH 5.5), 4 h
+    lever_value: 240
+    value: 145
+    censor: none
+    limit: null
+    n: null
+    sd: 13
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 240
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 1 (pH 5.5), 6 h
+    lever_value: 360
+    value: 130
+    censor: none
+    limit: null
+    n: null
+    sd: 2
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 360
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 1 (pH 5.5), 8 h
+    lever_value: 480
+    value: 198
+    censor: none
+    limit: null
+    n: null
+    sd: 9
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 480
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 1 (pH 5.5), 10 h
+    lever_value: 600
+    value: 180
+    censor: none
+    limit: null
+    n: null
+    sd: 15
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+- id: gou2025-26
+  odorant: Pyrazines
+  lever_class: time
+  lever: heating time at 85 C (2-10 h)
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ug/kg 2-cyclohexen-1-one equivalents
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Model 1 (pH 5.5), 2 h
+    lever_value: 120
+    value: 3862
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 120
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 1 (pH 5.5), 4 h
+    lever_value: 240
+    value: 1728
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 240
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 1 (pH 5.5), 6 h
+    lever_value: 360
+    value: 2602
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 360
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 1 (pH 5.5), 8 h
+    lever_value: 480
+    value: 3676
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 480
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 1 (pH 5.5), 10 h
+    lever_value: 600
+    value: 3712
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+- id: gou2025-27
+  odorant: furfural
+  lever_class: time
+  lever: heating time at 85 C (2-10 h)
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ug/kg 2-cyclohexen-1-one equivalents
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Model 1 (pH 5.5), 2 h
+    lever_value: 120
+    value: 29.16
+    censor: none
+    limit: null
+    n: null
+    sd: 0.81
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 120
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 1 (pH 5.5), 4 h
+    lever_value: 240
+    value: 44.59
+    censor: none
+    limit: null
+    n: null
+    sd: 3.38
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 240
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 1 (pH 5.5), 6 h
+    lever_value: 360
+    value: 22.35
+    censor: none
+    limit: null
+    n: null
+    sd: 0.82
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 360
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 1 (pH 5.5), 8 h
+    lever_value: 480
+    value: 26.53
+    censor: none
+    limit: null
+    n: null
+    sd: 2.47
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 480
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 1 (pH 5.5), 10 h
+    lever_value: 600
+    value: 39.3
+    censor: none
+    limit: null
+    n: null
+    sd: 0.51
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+- id: gou2025-28
+  odorant: 2-acetylfuran
+  lever_class: time
+  lever: heating time at 85 C (2-10 h)
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ug/kg 2-cyclohexen-1-one equivalents
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Model 1 (pH 5.5), 2 h
+    lever_value: 120
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 120
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 1 (pH 5.5), 4 h
+    lever_value: 240
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 240
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 1 (pH 5.5), 6 h
+    lever_value: 360
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 360
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 1 (pH 5.5), 8 h
+    lever_value: 480
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 480
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 1 (pH 5.5), 10 h
+    lever_value: 600
+    value: 15.2
+    censor: none
+    limit: null
+    n: null
+    sd: 0.08
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+- id: gou2025-29
+  odorant: DMHF (furaneol)
+  lever_class: time
+  lever: heating time at 85 C (2-10 h)
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ug/kg 2-cyclohexen-1-one equivalents
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Model 1 (pH 5.5), 2 h
+    lever_value: 120
+    value: 127
+    censor: none
+    limit: null
+    n: null
+    sd: 8
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 120
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 1 (pH 5.5), 4 h
+    lever_value: 240
+    value: 65.38
+    censor: none
+    limit: null
+    n: null
+    sd: 2.9
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 240
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 1 (pH 5.5), 6 h
+    lever_value: 360
+    value: 33.28
+    censor: none
+    limit: null
+    n: null
+    sd: 2.97
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 360
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 1 (pH 5.5), 8 h
+    lever_value: 480
+    value: 22.85
+    censor: none
+    limit: null
+    n: null
+    sd: 0.33
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 480
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 1 (pH 5.5), 10 h
+    lever_value: 600
+    value: 24.96
+    censor: none
+    limit: null
+    n: null
+    sd: 0.94
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+- id: gou2025-30
+  odorant: 2-furanmethanol
+  lever_class: time
+  lever: heating time at 85 C (2-10 h)
+  focal: false
+  location: Table 2
+  digitised: false
+  unit: ug/kg 2-cyclohexen-1-one equivalents
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Model 1 (pH 5.5), 2 h
+    lever_value: 120
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 120
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 1 (pH 5.5), 4 h
+    lever_value: 240
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 240
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 1 (pH 5.5), 6 h
+    lever_value: 360
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 360
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 1 (pH 5.5), 8 h
+    lever_value: 480
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 480
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 1 (pH 5.5), 10 h
+    lever_value: 600
+    value: 5.78
+    censor: none
+    limit: null
+    n: null
+    sd: 0.45
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+- id: gou2025-31
+  odorant: 2-methylpyrazine
+  lever_class: time
+  lever: heating time at 85 C (2-10 h)
+  focal: false
+  location: Table 3
+  digitised: false
+  unit: ug/kg 2-cyclohexen-1-one equivalents
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Model 2 (pH 7.8), 2 h
+    lever_value: 120
+    value: 34.66
+    censor: none
+    limit: null
+    n: null
+    sd: 2.51
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 120
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 2 (pH 7.8), 4 h
+    lever_value: 240
+    value: 54.9
+    censor: none
+    limit: null
+    n: null
+    sd: 1.07
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 240
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 2 (pH 7.8), 6 h
+    lever_value: 360
+    value: 68.18
+    censor: none
+    limit: null
+    n: null
+    sd: 2.89
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 360
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 2 (pH 7.8), 8 h
+    lever_value: 480
+    value: 89.51
+    censor: none
+    limit: null
+    n: null
+    sd: 5.9
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 480
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 2 (pH 7.8), 10 h
+    lever_value: 600
+    value: 43.09
+    censor: none
+    limit: null
+    n: null
+    sd: 0.79
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+- id: gou2025-32
+  odorant: 2,5-dimethylpyrazine
+  lever_class: time
+  lever: heating time at 85 C (2-10 h)
+  focal: false
+  location: Table 3
+  digitised: false
+  unit: ug/kg 2-cyclohexen-1-one equivalents
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Model 2 (pH 7.8), 2 h
+    lever_value: 120
+    value: 3633
+    censor: none
+    limit: null
+    n: null
+    sd: 58
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 120
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 2 (pH 7.8), 4 h
+    lever_value: 240
+    value: 3715
+    censor: none
+    limit: null
+    n: null
+    sd: 246
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 240
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 2 (pH 7.8), 6 h
+    lever_value: 360
+    value: 3887
+    censor: none
+    limit: null
+    n: null
+    sd: 221
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 360
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 2 (pH 7.8), 8 h
+    lever_value: 480
+    value: 4490
+    censor: none
+    limit: null
+    n: null
+    sd: 178
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 480
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 2 (pH 7.8), 10 h
+    lever_value: 600
+    value: 2964
+    censor: none
+    limit: null
+    n: null
+    sd: 172
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+- id: gou2025-33
+  odorant: 2,3-dimethylpyrazine
+  lever_class: time
+  lever: heating time at 85 C (2-10 h)
+  focal: false
+  location: Table 3
+  digitised: false
+  unit: ug/kg 2-cyclohexen-1-one equivalents
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Model 2 (pH 7.8), 2 h
+    lever_value: 120
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 120
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 2 (pH 7.8), 4 h
+    lever_value: 240
+    value: 21.38
+    censor: none
+    limit: null
+    n: null
+    sd: 1.21
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 240
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 2 (pH 7.8), 6 h
+    lever_value: 360
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 360
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 2 (pH 7.8), 8 h
+    lever_value: 480
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 480
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 2 (pH 7.8), 10 h
+    lever_value: 600
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+- id: gou2025-34
+  odorant: 2,6-dimethylpyrazine
+  lever_class: time
+  lever: heating time at 85 C (2-10 h)
+  focal: false
+  location: Table 3
+  digitised: false
+  unit: ug/kg 2-cyclohexen-1-one equivalents
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Model 2 (pH 7.8), 2 h
+    lever_value: 120
+    value: 50.71
+    censor: none
+    limit: null
+    n: null
+    sd: 5.04
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 120
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 2 (pH 7.8), 4 h
+    lever_value: 240
+    value: 60.17
+    censor: none
+    limit: null
+    n: null
+    sd: 0.79
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 240
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 2 (pH 7.8), 6 h
+    lever_value: 360
+    value: 71.25
+    censor: none
+    limit: null
+    n: null
+    sd: 2.09
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 360
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 2 (pH 7.8), 8 h
+    lever_value: 480
+    value: 97.61
+    censor: none
+    limit: null
+    n: null
+    sd: 6.96
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 480
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 2 (pH 7.8), 10 h
+    lever_value: 600
+    value: 76.04
+    censor: none
+    limit: null
+    n: null
+    sd: 0.87
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+- id: gou2025-35
+  odorant: trimethylpyrazine
+  lever_class: time
+  lever: heating time at 85 C (2-10 h)
+  focal: false
+  location: Table 3
+  digitised: false
+  unit: ug/kg 2-cyclohexen-1-one equivalents
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Model 2 (pH 7.8), 2 h
+    lever_value: 120
+    value: 77.92
+    censor: none
+    limit: null
+    n: null
+    sd: 2.29
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 120
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 2 (pH 7.8), 4 h
+    lever_value: 240
+    value: 95.69
+    censor: none
+    limit: null
+    n: null
+    sd: 0.65
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 240
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 2 (pH 7.8), 6 h
+    lever_value: 360
+    value: 111
+    censor: none
+    limit: null
+    n: null
+    sd: 1
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 360
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 2 (pH 7.8), 8 h
+    lever_value: 480
+    value: 144
+    censor: none
+    limit: null
+    n: null
+    sd: 8
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 480
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 2 (pH 7.8), 10 h
+    lever_value: 600
+    value: 161
+    censor: none
+    limit: null
+    n: null
+    sd: 2
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+- id: gou2025-36
+  odorant: 2-ethyl-3,6-dimethylpyrazine
+  lever_class: time
+  lever: heating time at 85 C (2-10 h)
+  focal: false
+  location: Table 3
+  digitised: false
+  unit: ug/kg 2-cyclohexen-1-one equivalents
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Model 2 (pH 7.8), 2 h
+    lever_value: 120
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 120
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 2 (pH 7.8), 4 h
+    lever_value: 240
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 240
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 2 (pH 7.8), 6 h
+    lever_value: 360
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 360
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 2 (pH 7.8), 8 h
+    lever_value: 480
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 480
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 2 (pH 7.8), 10 h
+    lever_value: 600
+    value: 21.87
+    censor: none
+    limit: null
+    n: null
+    sd: 1.86
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+- id: gou2025-37
+  odorant: 2-ethyl-3,5-dimethylpyrazine
+  lever_class: time
+  lever: heating time at 85 C (2-10 h)
+  focal: false
+  location: Table 3
+  digitised: false
+  unit: ug/kg 2-cyclohexen-1-one equivalents
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Model 2 (pH 7.8), 2 h
+    lever_value: 120
+    value: 144
+    censor: none
+    limit: null
+    n: null
+    sd: 3
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 120
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 2 (pH 7.8), 4 h
+    lever_value: 240
+    value: 129
+    censor: none
+    limit: null
+    n: null
+    sd: 6
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 240
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 2 (pH 7.8), 6 h
+    lever_value: 360
+    value: 176
+    censor: none
+    limit: null
+    n: null
+    sd: 2
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 360
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 2 (pH 7.8), 8 h
+    lever_value: 480
+    value: 254
+    censor: none
+    limit: null
+    n: null
+    sd: 22
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 480
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 2 (pH 7.8), 10 h
+    lever_value: 600
+    value: 361
+    censor: none
+    limit: null
+    n: null
+    sd: 21
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+- id: gou2025-38
+  odorant: Pyrazines
+  lever_class: time
+  lever: heating time at 85 C (2-10 h)
+  focal: false
+  location: Table 3
+  digitised: false
+  unit: ug/kg 2-cyclohexen-1-one equivalents
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Model 2 (pH 7.8), 2 h
+    lever_value: 120
+    value: 4024
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 120
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 2 (pH 7.8), 4 h
+    lever_value: 240
+    value: 4177
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 240
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 2 (pH 7.8), 6 h
+    lever_value: 360
+    value: 4404
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 360
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 2 (pH 7.8), 8 h
+    lever_value: 480
+    value: 5218
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 480
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 2 (pH 7.8), 10 h
+    lever_value: 600
+    value: 4133
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+- id: gou2025-39
+  odorant: furfural
+  lever_class: time
+  lever: heating time at 85 C (2-10 h)
+  focal: false
+  location: Table 3
+  digitised: false
+  unit: ug/kg 2-cyclohexen-1-one equivalents
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Model 2 (pH 7.8), 2 h
+    lever_value: 120
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 120
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 2 (pH 7.8), 4 h
+    lever_value: 240
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 240
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 2 (pH 7.8), 6 h
+    lever_value: 360
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 360
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 2 (pH 7.8), 8 h
+    lever_value: 480
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 480
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 2 (pH 7.8), 10 h
+    lever_value: 600
+    value: 22.27
+    censor: none
+    limit: null
+    n: null
+    sd: 0.38
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+- id: gou2025-40
+  odorant: 2-acetylfuran
+  lever_class: time
+  lever: heating time at 85 C (2-10 h)
+  focal: false
+  location: Table 3
+  digitised: false
+  unit: ug/kg 2-cyclohexen-1-one equivalents
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Model 2 (pH 7.8), 2 h
+    lever_value: 120
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 120
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 2 (pH 7.8), 4 h
+    lever_value: 240
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 240
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 2 (pH 7.8), 6 h
+    lever_value: 360
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 360
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 2 (pH 7.8), 8 h
+    lever_value: 480
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 480
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 2 (pH 7.8), 10 h
+    lever_value: 600
+    value: 6.28
+    censor: none
+    limit: null
+    n: null
+    sd: 0.12
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+- id: gou2025-41
+  odorant: DMHF (furaneol)
+  lever_class: time
+  lever: heating time at 85 C (2-10 h)
+  focal: false
+  location: Table 3
+  digitised: false
+  unit: ug/kg 2-cyclohexen-1-one equivalents
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Model 2 (pH 7.8), 2 h
+    lever_value: 120
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 120
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 2 (pH 7.8), 4 h
+    lever_value: 240
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 240
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 2 (pH 7.8), 6 h
+    lever_value: 360
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 360
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 2 (pH 7.8), 8 h
+    lever_value: 480
+    value: 16.35
+    censor: none
+    limit: null
+    n: null
+    sd: 1.47
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 480
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+  - label: Model 2 (pH 7.8), 10 h
+    lever_value: 600
+    value: 29.13
+    censor: none
+    limit: null
+    n: null
+    sd: 1.15
+    conditions:
+      ph: 7.8
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: 600
+      precursors: *id001
+      buffer: phosphate (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, solid-state)
+      headspace: unstated
+- id: gou2025-42
+  odorant: 1-octen-3-ol
+  lever_class: mixed
+  lever: glucose + L-lysine added vs none (two precursors), industrial freeze-drying (heating plate to 85 C); odorless matrix
+  focal: false
+  location: Table 4
+  digitised: false
+  unit: ug/kg 2-cyclohexen-1-one equivalents
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Odorless matrix
+    lever_value: none added
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: null
+      precursors:
+        odorless red jujube matrix: 8 g
+      buffer: none
+      matrix: other (odorless red jujube matrix, freeze-dried)
+      headspace: unstated
+  - label: Model 3
+    lever_value: glucose 5 g + L-lysine 5 g added
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: null
+      precursors:
+        glucose: 5 g
+        L-lysine: 5 g
+        odorless red jujube matrix: 8 g
+      buffer: phosphate pH 5.5 (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, freeze-dried)
+      headspace: unstated
+- id: gou2025-43
+  odorant: 1-octen-3-ol
+  lever_class: mixed
+  lever: glucose + L-lysine added vs none (two precursors), industrial freeze-drying (heating plate to 85 C); red jujube slices
+  focal: false
+  location: Table 4
+  digitised: false
+  unit: ug/kg 2-cyclohexen-1-one equivalents
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unadjusted
+  arms:
+  - label: Freeze-dried red jujube
+    lever_value: none added
+    value: 141
+    censor: none
+    limit: null
+    n: null
+    sd: 12
+    conditions:
+      ph: 5.5
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: null
+      precursors:
+        red jujube slices: 30 g
+      buffer: none
+      matrix: other (red jujube slices, freeze-dried)
+      headspace: unstated
+  - label: Model 4
+    lever_value: glucose 5 g + L-lysine 5 g added
+    value: 877
+    censor: none
+    limit: null
+    n: null
+    sd: 21
+    conditions:
+      ph: 5.5
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: null
+      precursors:
+        glucose: 5 g
+        L-lysine: 5 g
+        red jujube slices: 30 g
+        water: 20 mL
+      buffer: none
+      matrix: other (red jujube slices, freeze-dried)
+      headspace: unstated
+- id: gou2025-44
+  odorant: hexanal
+  lever_class: mixed
+  lever: glucose + L-lysine added vs none (two precursors), industrial freeze-drying (heating plate to 85 C); odorless matrix
+  focal: false
+  location: Table 4
+  digitised: false
+  unit: ug/kg 2-cyclohexen-1-one equivalents
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Odorless matrix
+    lever_value: none added
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: null
+      precursors:
+        odorless red jujube matrix: 8 g
+      buffer: none
+      matrix: other (odorless red jujube matrix, freeze-dried)
+      headspace: unstated
+  - label: Model 3
+    lever_value: glucose 5 g + L-lysine 5 g added
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: null
+      precursors:
+        glucose: 5 g
+        L-lysine: 5 g
+        odorless red jujube matrix: 8 g
+      buffer: phosphate pH 5.5 (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, freeze-dried)
+      headspace: unstated
+- id: gou2025-45
+  odorant: hexanal
+  lever_class: mixed
+  lever: glucose + L-lysine added vs none (two precursors), industrial freeze-drying (heating plate to 85 C); red jujube slices
+  focal: false
+  location: Table 4
+  digitised: false
+  unit: ug/kg 2-cyclohexen-1-one equivalents
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unadjusted
+  arms:
+  - label: Freeze-dried red jujube
+    lever_value: none added
+    value: 56.51
+    censor: none
+    limit: null
+    n: null
+    sd: 4.21
+    conditions:
+      ph: 5.5
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: null
+      precursors:
+        red jujube slices: 30 g
+      buffer: none
+      matrix: other (red jujube slices, freeze-dried)
+      headspace: unstated
+  - label: Model 4
+    lever_value: glucose 5 g + L-lysine 5 g added
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: null
+      precursors:
+        glucose: 5 g
+        L-lysine: 5 g
+        red jujube slices: 30 g
+        water: 20 mL
+      buffer: none
+      matrix: other (red jujube slices, freeze-dried)
+      headspace: unstated
+- id: gou2025-46
+  odorant: 2-octenal
+  lever_class: mixed
+  lever: glucose + L-lysine added vs none (two precursors), industrial freeze-drying (heating plate to 85 C); odorless matrix
+  focal: false
+  location: Table 4
+  digitised: false
+  unit: ug/kg 2-cyclohexen-1-one equivalents
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Odorless matrix
+    lever_value: none added
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: null
+      precursors:
+        odorless red jujube matrix: 8 g
+      buffer: none
+      matrix: other (odorless red jujube matrix, freeze-dried)
+      headspace: unstated
+  - label: Model 3
+    lever_value: glucose 5 g + L-lysine 5 g added
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: null
+      precursors:
+        glucose: 5 g
+        L-lysine: 5 g
+        odorless red jujube matrix: 8 g
+      buffer: phosphate pH 5.5 (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, freeze-dried)
+      headspace: unstated
+- id: gou2025-47
+  odorant: 2-octenal
+  lever_class: mixed
+  lever: glucose + L-lysine added vs none (two precursors), industrial freeze-drying (heating plate to 85 C); red jujube slices
+  focal: false
+  location: Table 4
+  digitised: false
+  unit: ug/kg 2-cyclohexen-1-one equivalents
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unadjusted
+  arms:
+  - label: Freeze-dried red jujube
+    lever_value: none added
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: null
+      precursors:
+        red jujube slices: 30 g
+      buffer: none
+      matrix: other (red jujube slices, freeze-dried)
+      headspace: unstated
+  - label: Model 4
+    lever_value: glucose 5 g + L-lysine 5 g added
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: null
+      precursors:
+        glucose: 5 g
+        L-lysine: 5 g
+        red jujube slices: 30 g
+        water: 20 mL
+      buffer: none
+      matrix: other (red jujube slices, freeze-dried)
+      headspace: unstated
+- id: gou2025-48
+  odorant: benzaldehyde
+  lever_class: mixed
+  lever: glucose + L-lysine added vs none (two precursors), industrial freeze-drying (heating plate to 85 C); odorless matrix
+  focal: false
+  location: Table 4
+  digitised: false
+  unit: ug/kg 2-cyclohexen-1-one equivalents
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Odorless matrix
+    lever_value: none added
+    value: 51.14
+    censor: none
+    limit: null
+    n: null
+    sd: 1.59
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: null
+      precursors:
+        odorless red jujube matrix: 8 g
+      buffer: none
+      matrix: other (odorless red jujube matrix, freeze-dried)
+      headspace: unstated
+  - label: Model 3
+    lever_value: glucose 5 g + L-lysine 5 g added
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: null
+      precursors:
+        glucose: 5 g
+        L-lysine: 5 g
+        odorless red jujube matrix: 8 g
+      buffer: phosphate pH 5.5 (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, freeze-dried)
+      headspace: unstated
+- id: gou2025-49
+  odorant: benzaldehyde
+  lever_class: mixed
+  lever: glucose + L-lysine added vs none (two precursors), industrial freeze-drying (heating plate to 85 C); red jujube slices
+  focal: false
+  location: Table 4
+  digitised: false
+  unit: ug/kg 2-cyclohexen-1-one equivalents
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unadjusted
+  arms:
+  - label: Freeze-dried red jujube
+    lever_value: none added
+    value: 81.71
+    censor: none
+    limit: null
+    n: null
+    sd: 5.88
+    conditions:
+      ph: 5.5
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: null
+      precursors:
+        red jujube slices: 30 g
+      buffer: none
+      matrix: other (red jujube slices, freeze-dried)
+      headspace: unstated
+  - label: Model 4
+    lever_value: glucose 5 g + L-lysine 5 g added
+    value: 41.38
+    censor: none
+    limit: null
+    n: null
+    sd: 0.87
+    conditions:
+      ph: 5.5
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: null
+      precursors:
+        glucose: 5 g
+        L-lysine: 5 g
+        red jujube slices: 30 g
+        water: 20 mL
+      buffer: none
+      matrix: other (red jujube slices, freeze-dried)
+      headspace: unstated
+- id: gou2025-50
+  odorant: 2-methylpyrazine
+  lever_class: mixed
+  lever: glucose + L-lysine added vs none (two precursors), industrial freeze-drying (heating plate to 85 C); odorless matrix
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: ug/kg 2-cyclohexen-1-one equivalents
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Odorless matrix
+    lever_value: none added
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: null
+      precursors:
+        odorless red jujube matrix: 8 g
+      buffer: none
+      matrix: other (odorless red jujube matrix, freeze-dried)
+      headspace: unstated
+  - label: Model 3
+    lever_value: glucose 5 g + L-lysine 5 g added
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: null
+      precursors:
+        glucose: 5 g
+        L-lysine: 5 g
+        odorless red jujube matrix: 8 g
+      buffer: phosphate pH 5.5 (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, freeze-dried)
+      headspace: unstated
+- id: gou2025-51
+  odorant: 2-methylpyrazine
+  lever_class: mixed
+  lever: glucose + L-lysine added vs none (two precursors), industrial freeze-drying (heating plate to 85 C); red jujube slices
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: ug/kg 2-cyclohexen-1-one equivalents
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unadjusted
+  arms:
+  - label: Freeze-dried red jujube
+    lever_value: none added
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: null
+      precursors:
+        red jujube slices: 30 g
+      buffer: none
+      matrix: other (red jujube slices, freeze-dried)
+      headspace: unstated
+  - label: Model 4
+    lever_value: glucose 5 g + L-lysine 5 g added
+    value: 46.42
+    censor: none
+    limit: null
+    n: null
+    sd: 0.02
+    conditions:
+      ph: 5.5
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: null
+      precursors:
+        glucose: 5 g
+        L-lysine: 5 g
+        red jujube slices: 30 g
+        water: 20 mL
+      buffer: none
+      matrix: other (red jujube slices, freeze-dried)
+      headspace: unstated
+- id: gou2025-52
+  odorant: 2,5-dimethylpyrazine
+  lever_class: mixed
+  lever: glucose + L-lysine added vs none (two precursors), industrial freeze-drying (heating plate to 85 C); odorless matrix
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: ug/kg 2-cyclohexen-1-one equivalents
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Odorless matrix
+    lever_value: none added
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: null
+      precursors:
+        odorless red jujube matrix: 8 g
+      buffer: none
+      matrix: other (odorless red jujube matrix, freeze-dried)
+      headspace: unstated
+  - label: Model 3
+    lever_value: glucose 5 g + L-lysine 5 g added
+    value: 3581
+    censor: none
+    limit: null
+    n: null
+    sd: 136
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: null
+      precursors:
+        glucose: 5 g
+        L-lysine: 5 g
+        odorless red jujube matrix: 8 g
+      buffer: phosphate pH 5.5 (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, freeze-dried)
+      headspace: unstated
+- id: gou2025-53
+  odorant: 2,5-dimethylpyrazine
+  lever_class: mixed
+  lever: glucose + L-lysine added vs none (two precursors), industrial freeze-drying (heating plate to 85 C); red jujube slices
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: ug/kg 2-cyclohexen-1-one equivalents
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unadjusted
+  arms:
+  - label: Freeze-dried red jujube
+    lever_value: none added
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: null
+      precursors:
+        red jujube slices: 30 g
+      buffer: none
+      matrix: other (red jujube slices, freeze-dried)
+      headspace: unstated
+  - label: Model 4
+    lever_value: glucose 5 g + L-lysine 5 g added
+    value: 5761
+    censor: none
+    limit: null
+    n: null
+    sd: 250
+    conditions:
+      ph: 5.5
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: null
+      precursors:
+        glucose: 5 g
+        L-lysine: 5 g
+        red jujube slices: 30 g
+        water: 20 mL
+      buffer: none
+      matrix: other (red jujube slices, freeze-dried)
+      headspace: unstated
+- id: gou2025-54
+  odorant: 2,6-dimethylpyrazine
+  lever_class: mixed
+  lever: glucose + L-lysine added vs none (two precursors), industrial freeze-drying (heating plate to 85 C); odorless matrix
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: ug/kg 2-cyclohexen-1-one equivalents
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Odorless matrix
+    lever_value: none added
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: null
+      precursors:
+        odorless red jujube matrix: 8 g
+      buffer: none
+      matrix: other (odorless red jujube matrix, freeze-dried)
+      headspace: unstated
+  - label: Model 3
+    lever_value: glucose 5 g + L-lysine 5 g added
+    value: 31.87
+    censor: none
+    limit: null
+    n: null
+    sd: 1.07
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: null
+      precursors:
+        glucose: 5 g
+        L-lysine: 5 g
+        odorless red jujube matrix: 8 g
+      buffer: phosphate pH 5.5 (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, freeze-dried)
+      headspace: unstated
+- id: gou2025-55
+  odorant: 2,6-dimethylpyrazine
+  lever_class: mixed
+  lever: glucose + L-lysine added vs none (two precursors), industrial freeze-drying (heating plate to 85 C); red jujube slices
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: ug/kg 2-cyclohexen-1-one equivalents
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unadjusted
+  arms:
+  - label: Freeze-dried red jujube
+    lever_value: none added
+    value: 6.49
+    censor: none
+    limit: null
+    n: null
+    sd: 0.79
+    conditions:
+      ph: 5.5
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: null
+      precursors:
+        red jujube slices: 30 g
+      buffer: none
+      matrix: other (red jujube slices, freeze-dried)
+      headspace: unstated
+  - label: Model 4
+    lever_value: glucose 5 g + L-lysine 5 g added
+    value: 149.01
+    censor: none
+    limit: null
+    n: null
+    sd: 4.25
+    conditions:
+      ph: 5.5
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: null
+      precursors:
+        glucose: 5 g
+        L-lysine: 5 g
+        red jujube slices: 30 g
+        water: 20 mL
+      buffer: none
+      matrix: other (red jujube slices, freeze-dried)
+      headspace: unstated
+- id: gou2025-56
+  odorant: trimethylpyrazine
+  lever_class: mixed
+  lever: glucose + L-lysine added vs none (two precursors), industrial freeze-drying (heating plate to 85 C); odorless matrix
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: ug/kg 2-cyclohexen-1-one equivalents
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Odorless matrix
+    lever_value: none added
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: null
+      precursors:
+        odorless red jujube matrix: 8 g
+      buffer: none
+      matrix: other (odorless red jujube matrix, freeze-dried)
+      headspace: unstated
+  - label: Model 3
+    lever_value: glucose 5 g + L-lysine 5 g added
+    value: 32.47
+    censor: none
+    limit: null
+    n: null
+    sd: 2.91
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: null
+      precursors:
+        glucose: 5 g
+        L-lysine: 5 g
+        odorless red jujube matrix: 8 g
+      buffer: phosphate pH 5.5 (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, freeze-dried)
+      headspace: unstated
+- id: gou2025-57
+  odorant: trimethylpyrazine
+  lever_class: mixed
+  lever: glucose + L-lysine added vs none (two precursors), industrial freeze-drying (heating plate to 85 C); red jujube slices
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: ug/kg 2-cyclohexen-1-one equivalents
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unadjusted
+  arms:
+  - label: Freeze-dried red jujube
+    lever_value: none added
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: null
+      precursors:
+        red jujube slices: 30 g
+      buffer: none
+      matrix: other (red jujube slices, freeze-dried)
+      headspace: unstated
+  - label: Model 4
+    lever_value: glucose 5 g + L-lysine 5 g added
+    value: 158
+    censor: none
+    limit: null
+    n: null
+    sd: 1
+    conditions:
+      ph: 5.5
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: null
+      precursors:
+        glucose: 5 g
+        L-lysine: 5 g
+        red jujube slices: 30 g
+        water: 20 mL
+      buffer: none
+      matrix: other (red jujube slices, freeze-dried)
+      headspace: unstated
+- id: gou2025-58
+  odorant: 2-ethyl-3,5-dimethylpyrazine
+  lever_class: mixed
+  lever: glucose + L-lysine added vs none (two precursors), industrial freeze-drying (heating plate to 85 C); odorless matrix
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: ug/kg 2-cyclohexen-1-one equivalents
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Odorless matrix
+    lever_value: none added
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: null
+      precursors:
+        odorless red jujube matrix: 8 g
+      buffer: none
+      matrix: other (odorless red jujube matrix, freeze-dried)
+      headspace: unstated
+  - label: Model 3
+    lever_value: glucose 5 g + L-lysine 5 g added
+    value: 53.45
+    censor: none
+    limit: null
+    n: null
+    sd: 3.42
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: null
+      precursors:
+        glucose: 5 g
+        L-lysine: 5 g
+        odorless red jujube matrix: 8 g
+      buffer: phosphate pH 5.5 (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, freeze-dried)
+      headspace: unstated
+- id: gou2025-59
+  odorant: 2-ethyl-3,5-dimethylpyrazine
+  lever_class: mixed
+  lever: glucose + L-lysine added vs none (two precursors), industrial freeze-drying (heating plate to 85 C); red jujube slices
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: ug/kg 2-cyclohexen-1-one equivalents
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unadjusted
+  arms:
+  - label: Freeze-dried red jujube
+    lever_value: none added
+    value: 22.8
+    censor: none
+    limit: null
+    n: null
+    sd: 0.9
+    conditions:
+      ph: 5.5
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: null
+      precursors:
+        red jujube slices: 30 g
+      buffer: none
+      matrix: other (red jujube slices, freeze-dried)
+      headspace: unstated
+  - label: Model 4
+    lever_value: glucose 5 g + L-lysine 5 g added
+    value: 372
+    censor: none
+    limit: null
+    n: null
+    sd: 9
+    conditions:
+      ph: 5.5
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: null
+      precursors:
+        glucose: 5 g
+        L-lysine: 5 g
+        red jujube slices: 30 g
+        water: 20 mL
+      buffer: none
+      matrix: other (red jujube slices, freeze-dried)
+      headspace: unstated
+- id: gou2025-60
+  odorant: Pyrazines
+  lever_class: mixed
+  lever: glucose + L-lysine added vs none (two precursors), industrial freeze-drying (heating plate to 85 C); odorless matrix
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: ug/kg 2-cyclohexen-1-one equivalents
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Odorless matrix
+    lever_value: none added
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: null
+      precursors:
+        odorless red jujube matrix: 8 g
+      buffer: none
+      matrix: other (odorless red jujube matrix, freeze-dried)
+      headspace: unstated
+  - label: Model 3
+    lever_value: glucose 5 g + L-lysine 5 g added
+    value: 3776
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: null
+      precursors:
+        glucose: 5 g
+        L-lysine: 5 g
+        odorless red jujube matrix: 8 g
+      buffer: phosphate pH 5.5 (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, freeze-dried)
+      headspace: unstated
+- id: gou2025-61
+  odorant: Pyrazines
+  lever_class: mixed
+  lever: glucose + L-lysine added vs none (two precursors), industrial freeze-drying (heating plate to 85 C); red jujube slices
+  focal: true
+  location: Table 4
+  digitised: false
+  unit: ug/kg 2-cyclohexen-1-one equivalents
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unadjusted
+  arms:
+  - label: Freeze-dried red jujube
+    lever_value: none added
+    value: 76.35
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: null
+      precursors:
+        red jujube slices: 30 g
+      buffer: none
+      matrix: other (red jujube slices, freeze-dried)
+      headspace: unstated
+  - label: Model 4
+    lever_value: glucose 5 g + L-lysine 5 g added
+    value: 6796
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.5
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: null
+      precursors:
+        glucose: 5 g
+        L-lysine: 5 g
+        red jujube slices: 30 g
+        water: 20 mL
+      buffer: none
+      matrix: other (red jujube slices, freeze-dried)
+      headspace: unstated
+- id: gou2025-62
+  odorant: furfural
+  lever_class: mixed
+  lever: glucose + L-lysine added vs none (two precursors), industrial freeze-drying (heating plate to 85 C); odorless matrix
+  focal: false
+  location: Table 4
+  digitised: false
+  unit: ug/kg 2-cyclohexen-1-one equivalents
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Odorless matrix
+    lever_value: none added
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: null
+      precursors:
+        odorless red jujube matrix: 8 g
+      buffer: none
+      matrix: other (odorless red jujube matrix, freeze-dried)
+      headspace: unstated
+  - label: Model 3
+    lever_value: glucose 5 g + L-lysine 5 g added
+    value: 39.87
+    censor: none
+    limit: null
+    n: null
+    sd: 3.26
+    conditions:
+      ph: 5.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: null
+      precursors:
+        glucose: 5 g
+        L-lysine: 5 g
+        odorless red jujube matrix: 8 g
+      buffer: phosphate pH 5.5 (35 mL, concentration not printed)
+      matrix: other (odorless red jujube matrix, freeze-dried)
+      headspace: unstated
+- id: gou2025-63
+  odorant: furfural
+  lever_class: mixed
+  lever: glucose + L-lysine added vs none (two precursors), industrial freeze-drying (heating plate to 85 C); red jujube slices
+  focal: false
+  location: Table 4
+  digitised: false
+  unit: ug/kg 2-cyclohexen-1-one equivalents
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unadjusted
+  arms:
+  - label: Freeze-dried red jujube
+    lever_value: none added
+    value: 68.58
+    censor: none
+    limit: null
+    n: null
+    sd: 0.43
+    conditions:
+      ph: 5.5
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: null
+      precursors:
+        red jujube slices: 30 g
+      buffer: none
+      matrix: other (red jujube slices, freeze-dried)
+      headspace: unstated
+  - label: Model 4
+    lever_value: glucose 5 g + L-lysine 5 g added
+    value: 101
+    censor: none
+    limit: null
+    n: null
+    sd: 8
+    conditions:
+      ph: 5.5
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 85
+      time_min: null
+      precursors:
+        glucose: 5 g
+        L-lysine: 5 g
+        red jujube slices: 30 g
+        water: 20 mL
+      buffer: none
+      matrix: other (red jujube slices, freeze-dried)
+      headspace: unstated

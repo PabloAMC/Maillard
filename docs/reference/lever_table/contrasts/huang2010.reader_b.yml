@@ -1,0 +1,4557 @@
+source: huang2010
+pdf: data/articles/huang2010.pdf
+reader: b
+scope_note: 'SIFT-MS headspace ppb (relative). Table 3 aldehydes/furans keyed as pH ladders per series; pyrazines (Figs 1-2)
+  and the 40/70 C hold experiment (Fig. 3) digitised; Fig. 1 values below ~10,000 ppb are at the plot''s resolution limit
+  (about +-2,000 ppb) and the pH 5.9 before-TrMP point is hidden under other markers. Not keyed: 2,3-diethyl-5-methylpyrazine
+  and other compounds off the declared lists; commercial cocoa powders (Fig. 6; proprietary processes differ in more than
+  pH); before- vs after-roasting at matched pH (pH not matched and the lever is process order); the ratio plots (Figs 4-5).'
+contrasts:
+- id: huang2010-1
+  odorant: phenylacetaldehyde
+  lever_class: pH
+  lever: liquor pH set by K2CO3 alkalization before roasting
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: alkalized-before-roasting pH 5.9
+    lever_value: 5.9
+    value: 596
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.9
+      ph_basis: final
+      final_ph: 5.9
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h BEFORE roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-before-roasting pH 6.43
+    lever_value: 6.43
+    value: 1604
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.43
+      ph_basis: final
+      final_ph: 6.43
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h BEFORE roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-before-roasting pH 6.98
+    lever_value: 6.98
+    value: 1774
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.98
+      ph_basis: final
+      final_ph: 6.98
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h BEFORE roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-before-roasting pH 7.39
+    lever_value: 7.39
+    value: 10836
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.39
+      ph_basis: final
+      final_ph: 7.39
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h BEFORE roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-before-roasting pH 7.87
+    lever_value: 7.87
+    value: 31862
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.87
+      ph_basis: final
+      final_ph: 7.87
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h BEFORE roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+- id: huang2010-2
+  odorant: phenylacetaldehyde
+  lever_class: pH
+  lever: liquor pH set by K2CO3 alkalization after roasting
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: alkalized-after-roasting pH 5.97
+    lever_value: 5.97
+    value: 699
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.97
+      ph_basis: final
+      final_ph: 5.97
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-after-roasting pH 6.46
+    lever_value: 6.46
+    value: 3062
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.46
+      ph_basis: final
+      final_ph: 6.46
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-after-roasting pH 7.03
+    lever_value: 7.03
+    value: 4966
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.03
+      ph_basis: final
+      final_ph: 7.03
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-after-roasting pH 8.06
+    lever_value: 8.06
+    value: 22302
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.06
+      ph_basis: final
+      final_ph: 8.06
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-after-roasting pH 8.41
+    lever_value: 8.41
+    value: 51462
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.41
+      ph_basis: final
+      final_ph: 8.41
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+- id: huang2010-3
+  odorant: 2- and 3-methylbutanal (mixture)
+  lever_class: pH
+  lever: liquor pH set by K2CO3 alkalization before roasting
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  odorant_unlisted: true
+  arms:
+  - label: alkalized-before-roasting pH 5.9
+    lever_value: 5.9
+    value: 43307
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.9
+      ph_basis: final
+      final_ph: 5.9
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h BEFORE roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-before-roasting pH 6.43
+    lever_value: 6.43
+    value: 20490
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.43
+      ph_basis: final
+      final_ph: 6.43
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h BEFORE roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-before-roasting pH 6.98
+    lever_value: 6.98
+    value: 14830
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.98
+      ph_basis: final
+      final_ph: 6.98
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h BEFORE roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-before-roasting pH 7.39
+    lever_value: 7.39
+    value: 66730
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.39
+      ph_basis: final
+      final_ph: 7.39
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h BEFORE roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-before-roasting pH 7.87
+    lever_value: 7.87
+    value: 84830
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.87
+      ph_basis: final
+      final_ph: 7.87
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h BEFORE roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+- id: huang2010-4
+  odorant: 2- and 3-methylbutanal (mixture)
+  lever_class: pH
+  lever: liquor pH set by K2CO3 alkalization after roasting
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  odorant_unlisted: true
+  arms:
+  - label: alkalized-after-roasting pH 5.97
+    lever_value: 5.97
+    value: 28227
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.97
+      ph_basis: final
+      final_ph: 5.97
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-after-roasting pH 6.46
+    lever_value: 6.46
+    value: 23090
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.46
+      ph_basis: final
+      final_ph: 6.46
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-after-roasting pH 7.03
+    lever_value: 7.03
+    value: 25270
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.03
+      ph_basis: final
+      final_ph: 7.03
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-after-roasting pH 8.06
+    lever_value: 8.06
+    value: 74070
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.06
+      ph_basis: final
+      final_ph: 8.06
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-after-roasting pH 8.41
+    lever_value: 8.41
+    value: 122390
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.41
+      ph_basis: final
+      final_ph: 8.41
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+- id: huang2010-5
+  odorant: 2-methylpropanal
+  lever_class: pH
+  lever: liquor pH set by K2CO3 alkalization before roasting
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: alkalized-before-roasting pH 5.9
+    lever_value: 5.9
+    value: 2638
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.9
+      ph_basis: final
+      final_ph: 5.9
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h BEFORE roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-before-roasting pH 6.43
+    lever_value: 6.43
+    value: 3719
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.43
+      ph_basis: final
+      final_ph: 6.43
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h BEFORE roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-before-roasting pH 6.98
+    lever_value: 6.98
+    value: 4099
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.98
+      ph_basis: final
+      final_ph: 6.98
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h BEFORE roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-before-roasting pH 7.39
+    lever_value: 7.39
+    value: 8185
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.39
+      ph_basis: final
+      final_ph: 7.39
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h BEFORE roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-before-roasting pH 7.87
+    lever_value: 7.87
+    value: 17769
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.87
+      ph_basis: final
+      final_ph: 7.87
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h BEFORE roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+- id: huang2010-6
+  odorant: 2-methylpropanal
+  lever_class: pH
+  lever: liquor pH set by K2CO3 alkalization after roasting
+  focal: true
+  location: Table 3
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: alkalized-after-roasting pH 5.97
+    lever_value: 5.97
+    value: 3046
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.97
+      ph_basis: final
+      final_ph: 5.97
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-after-roasting pH 6.46
+    lever_value: 6.46
+    value: 5233
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.46
+      ph_basis: final
+      final_ph: 6.46
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-after-roasting pH 7.03
+    lever_value: 7.03
+    value: 5529
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.03
+      ph_basis: final
+      final_ph: 7.03
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-after-roasting pH 8.06
+    lever_value: 8.06
+    value: 13779
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.06
+      ph_basis: final
+      final_ph: 8.06
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-after-roasting pH 8.41
+    lever_value: 8.41
+    value: 46889
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.41
+      ph_basis: final
+      final_ph: 8.41
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+- id: huang2010-7
+  odorant: (E,E)-2,4-decadienal
+  lever_class: pH
+  lever: liquor pH set by K2CO3 alkalization before roasting
+  focal: false
+  location: Table 3
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: alkalized-before-roasting pH 5.9
+    lever_value: 5.9
+    value: 596
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.9
+      ph_basis: final
+      final_ph: 5.9
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h BEFORE roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-before-roasting pH 6.43
+    lever_value: 6.43
+    value: 828
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.43
+      ph_basis: final
+      final_ph: 6.43
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h BEFORE roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-before-roasting pH 6.98
+    lever_value: 6.98
+    value: 924
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.98
+      ph_basis: final
+      final_ph: 6.98
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h BEFORE roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-before-roasting pH 7.39
+    lever_value: 7.39
+    value: 1030
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.39
+      ph_basis: final
+      final_ph: 7.39
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h BEFORE roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-before-roasting pH 7.87
+    lever_value: 7.87
+    value: 1281
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.87
+      ph_basis: final
+      final_ph: 7.87
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h BEFORE roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+- id: huang2010-8
+  odorant: (E,E)-2,4-decadienal
+  lever_class: pH
+  lever: liquor pH set by K2CO3 alkalization after roasting
+  focal: false
+  location: Table 3
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: alkalized-after-roasting pH 5.97
+    lever_value: 5.97
+    value: 642
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.97
+      ph_basis: final
+      final_ph: 5.97
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-after-roasting pH 6.46
+    lever_value: 6.46
+    value: 1126
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.46
+      ph_basis: final
+      final_ph: 6.46
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-after-roasting pH 7.03
+    lever_value: 7.03
+    value: 1092
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.03
+      ph_basis: final
+      final_ph: 7.03
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-after-roasting pH 8.06
+    lever_value: 8.06
+    value: 907
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.06
+      ph_basis: final
+      final_ph: 8.06
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-after-roasting pH 8.41
+    lever_value: 8.41
+    value: 882
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.41
+      ph_basis: final
+      final_ph: 8.41
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+- id: huang2010-9
+  odorant: (E)-2-nonenal
+  lever_class: pH
+  lever: liquor pH set by K2CO3 alkalization before roasting
+  focal: false
+  location: Table 3
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: alkalized-before-roasting pH 5.9
+    lever_value: 5.9
+    value: 599
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.9
+      ph_basis: final
+      final_ph: 5.9
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h BEFORE roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-before-roasting pH 6.43
+    lever_value: 6.43
+    value: 511
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.43
+      ph_basis: final
+      final_ph: 6.43
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h BEFORE roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-before-roasting pH 6.98
+    lever_value: 6.98
+    value: 718
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.98
+      ph_basis: final
+      final_ph: 6.98
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h BEFORE roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-before-roasting pH 7.39
+    lever_value: 7.39
+    value: 978
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.39
+      ph_basis: final
+      final_ph: 7.39
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h BEFORE roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-before-roasting pH 7.87
+    lever_value: 7.87
+    value: 990
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.87
+      ph_basis: final
+      final_ph: 7.87
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h BEFORE roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+- id: huang2010-10
+  odorant: (E)-2-nonenal
+  lever_class: pH
+  lever: liquor pH set by K2CO3 alkalization after roasting
+  focal: false
+  location: Table 3
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: alkalized-after-roasting pH 5.97
+    lever_value: 5.97
+    value: 519
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.97
+      ph_basis: final
+      final_ph: 5.97
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-after-roasting pH 6.46
+    lever_value: 6.46
+    value: 1111
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.46
+      ph_basis: final
+      final_ph: 6.46
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-after-roasting pH 7.03
+    lever_value: 7.03
+    value: 961
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.03
+      ph_basis: final
+      final_ph: 7.03
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-after-roasting pH 8.06
+    lever_value: 8.06
+    value: 820
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.06
+      ph_basis: final
+      final_ph: 8.06
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-after-roasting pH 8.41
+    lever_value: 8.41
+    value: 864
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.41
+      ph_basis: final
+      final_ph: 8.41
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+- id: huang2010-11
+  odorant: heptanal
+  lever_class: pH
+  lever: liquor pH set by K2CO3 alkalization before roasting
+  focal: false
+  location: Table 3
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: alkalized-before-roasting pH 5.9
+    lever_value: 5.9
+    value: 162
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.9
+      ph_basis: final
+      final_ph: 5.9
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h BEFORE roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-before-roasting pH 6.43
+    lever_value: 6.43
+    value: 176
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.43
+      ph_basis: final
+      final_ph: 6.43
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h BEFORE roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-before-roasting pH 6.98
+    lever_value: 6.98
+    value: 196
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.98
+      ph_basis: final
+      final_ph: 6.98
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h BEFORE roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-before-roasting pH 7.39
+    lever_value: 7.39
+    value: 253
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.39
+      ph_basis: final
+      final_ph: 7.39
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h BEFORE roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-before-roasting pH 7.87
+    lever_value: 7.87
+    value: 352
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.87
+      ph_basis: final
+      final_ph: 7.87
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h BEFORE roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+- id: huang2010-12
+  odorant: heptanal
+  lever_class: pH
+  lever: liquor pH set by K2CO3 alkalization after roasting
+  focal: false
+  location: Table 3
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: alkalized-after-roasting pH 5.97
+    lever_value: 5.97
+    value: 195
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.97
+      ph_basis: final
+      final_ph: 5.97
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-after-roasting pH 6.46
+    lever_value: 6.46
+    value: 324
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.46
+      ph_basis: final
+      final_ph: 6.46
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-after-roasting pH 7.03
+    lever_value: 7.03
+    value: 266
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.03
+      ph_basis: final
+      final_ph: 7.03
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-after-roasting pH 8.06
+    lever_value: 8.06
+    value: 289
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.06
+      ph_basis: final
+      final_ph: 8.06
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-after-roasting pH 8.41
+    lever_value: 8.41
+    value: 254
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.41
+      ph_basis: final
+      final_ph: 8.41
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+- id: huang2010-13
+  odorant: nonanal
+  lever_class: pH
+  lever: liquor pH set by K2CO3 alkalization before roasting
+  focal: false
+  location: Table 3
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: alkalized-before-roasting pH 5.9
+    lever_value: 5.9
+    value: 13268
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.9
+      ph_basis: final
+      final_ph: 5.9
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h BEFORE roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-before-roasting pH 6.43
+    lever_value: 6.43
+    value: 13767
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.43
+      ph_basis: final
+      final_ph: 6.43
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h BEFORE roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-before-roasting pH 6.98
+    lever_value: 6.98
+    value: 15387
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.98
+      ph_basis: final
+      final_ph: 6.98
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h BEFORE roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-before-roasting pH 7.39
+    lever_value: 7.39
+    value: 44207
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.39
+      ph_basis: final
+      final_ph: 7.39
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h BEFORE roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-before-roasting pH 7.87
+    lever_value: 7.87
+    value: 89567
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.87
+      ph_basis: final
+      final_ph: 7.87
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h BEFORE roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+- id: huang2010-14
+  odorant: nonanal
+  lever_class: pH
+  lever: liquor pH set by K2CO3 alkalization after roasting
+  focal: false
+  location: Table 3
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: alkalized-after-roasting pH 5.97
+    lever_value: 5.97
+    value: 11222
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.97
+      ph_basis: final
+      final_ph: 5.97
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-after-roasting pH 6.46
+    lever_value: 6.46
+    value: 22027
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.46
+      ph_basis: final
+      final_ph: 6.46
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-after-roasting pH 7.03
+    lever_value: 7.03
+    value: 23287
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.03
+      ph_basis: final
+      final_ph: 7.03
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-after-roasting pH 8.06
+    lever_value: 8.06
+    value: 67647
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.06
+      ph_basis: final
+      final_ph: 8.06
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-after-roasting pH 8.41
+    lever_value: 8.41
+    value: 203607
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.41
+      ph_basis: final
+      final_ph: 8.41
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+- id: huang2010-15
+  odorant: furaneol
+  lever_class: pH
+  lever: liquor pH set by K2CO3 alkalization before roasting
+  focal: false
+  location: Table 3
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: alkalized-before-roasting pH 5.9
+    lever_value: 5.9
+    value: 548
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.9
+      ph_basis: final
+      final_ph: 5.9
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h BEFORE roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-before-roasting pH 6.43
+    lever_value: 6.43
+    value: 492
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.43
+      ph_basis: final
+      final_ph: 6.43
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h BEFORE roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-before-roasting pH 6.98
+    lever_value: 6.98
+    value: 567
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.98
+      ph_basis: final
+      final_ph: 6.98
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h BEFORE roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-before-roasting pH 7.39
+    lever_value: 7.39
+    value: 683
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.39
+      ph_basis: final
+      final_ph: 7.39
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h BEFORE roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-before-roasting pH 7.87
+    lever_value: 7.87
+    value: 798
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.87
+      ph_basis: final
+      final_ph: 7.87
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h BEFORE roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+- id: huang2010-16
+  odorant: furaneol
+  lever_class: pH
+  lever: liquor pH set by K2CO3 alkalization after roasting
+  focal: false
+  location: Table 3
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: alkalized-after-roasting pH 5.97
+    lever_value: 5.97
+    value: 478
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.97
+      ph_basis: final
+      final_ph: 5.97
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-after-roasting pH 6.46
+    lever_value: 6.46
+    value: 840
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.46
+      ph_basis: final
+      final_ph: 6.46
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-after-roasting pH 7.03
+    lever_value: 7.03
+    value: 680
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.03
+      ph_basis: final
+      final_ph: 7.03
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-after-roasting pH 8.06
+    lever_value: 8.06
+    value: 596
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.06
+      ph_basis: final
+      final_ph: 8.06
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-after-roasting pH 8.41
+    lever_value: 8.41
+    value: 608
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.41
+      ph_basis: final
+      final_ph: 8.41
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+- id: huang2010-17
+  odorant: 5-methylfurfural
+  lever_class: pH
+  lever: liquor pH set by K2CO3 alkalization before roasting
+  focal: false
+  location: Table 3
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: alkalized-before-roasting pH 5.9
+    lever_value: 5.9
+    value: 196
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.9
+      ph_basis: final
+      final_ph: 5.9
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h BEFORE roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-before-roasting pH 6.43
+    lever_value: 6.43
+    value: 217
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.43
+      ph_basis: final
+      final_ph: 6.43
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h BEFORE roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-before-roasting pH 6.98
+    lever_value: 6.98
+    value: 221
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.98
+      ph_basis: final
+      final_ph: 6.98
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h BEFORE roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-before-roasting pH 7.39
+    lever_value: 7.39
+    value: 391
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.39
+      ph_basis: final
+      final_ph: 7.39
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h BEFORE roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-before-roasting pH 7.87
+    lever_value: 7.87
+    value: 1039
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.87
+      ph_basis: final
+      final_ph: 7.87
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h BEFORE roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+- id: huang2010-18
+  odorant: 5-methylfurfural
+  lever_class: pH
+  lever: liquor pH set by K2CO3 alkalization after roasting
+  focal: false
+  location: Table 3
+  digitised: false
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: alkalized-after-roasting pH 5.97
+    lever_value: 5.97
+    value: 207
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.97
+      ph_basis: final
+      final_ph: 5.97
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-after-roasting pH 6.46
+    lever_value: 6.46
+    value: 393
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.46
+      ph_basis: final
+      final_ph: 6.46
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-after-roasting pH 7.03
+    lever_value: 7.03
+    value: 327
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.03
+      ph_basis: final
+      final_ph: 7.03
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-after-roasting pH 8.06
+    lever_value: 8.06
+    value: 480
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.06
+      ph_basis: final
+      final_ph: 8.06
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-after-roasting pH 8.41
+    lever_value: 8.41
+    value: 1009
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.41
+      ph_basis: final
+      final_ph: 8.41
+      final_ph_location: Table 3
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+- id: huang2010-19
+  odorant: trimethylpyrazine
+  lever_class: pH
+  lever: liquor pH set by K2CO3 alkalization before roasting
+  focal: true
+  location: Fig. 1
+  digitised: true
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: alkalized-before-roasting pH 5.9
+    lever_value: 5.9
+    value: 1500
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.9
+      ph_basis: final
+      final_ph: 5.9
+      final_ph_location: Fig. 1, digitised (x-axis)
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h BEFORE roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-before-roasting pH 6.43
+    lever_value: 6.43
+    value: 7100
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.43
+      ph_basis: final
+      final_ph: 6.43
+      final_ph_location: Fig. 1, digitised (x-axis)
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h BEFORE roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-before-roasting pH 6.98
+    lever_value: 6.98
+    value: 2800
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.98
+      ph_basis: final
+      final_ph: 6.98
+      final_ph_location: Fig. 1, digitised (x-axis)
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h BEFORE roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-before-roasting pH 7.39
+    lever_value: 7.39
+    value: 28400
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.39
+      ph_basis: final
+      final_ph: 7.39
+      final_ph_location: Fig. 1, digitised (x-axis)
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h BEFORE roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-before-roasting pH 7.87
+    lever_value: 7.87
+    value: 101400
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.87
+      ph_basis: final
+      final_ph: 7.87
+      final_ph_location: Fig. 1, digitised (x-axis)
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h BEFORE roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+- id: huang2010-20
+  odorant: trimethylpyrazine
+  lever_class: pH
+  lever: liquor pH set by K2CO3 alkalization after roasting
+  focal: true
+  location: Fig. 1
+  digitised: true
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: alkalized-after-roasting pH 5.2
+    lever_value: 5.2
+    value: 2500
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.2
+      ph_basis: final
+      final_ph: 5.2
+      final_ph_location: Fig. 1, digitised (x-axis)
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-after-roasting pH 5.33
+    lever_value: 5.33
+    value: 3500
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.33
+      ph_basis: final
+      final_ph: 5.33
+      final_ph_location: Fig. 1, digitised (x-axis)
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-after-roasting pH 5.97
+    lever_value: 5.97
+    value: 1800
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.97
+      ph_basis: final
+      final_ph: 5.97
+      final_ph_location: Fig. 1, digitised (x-axis)
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-after-roasting pH 6.46
+    lever_value: 6.46
+    value: 6400
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.46
+      ph_basis: final
+      final_ph: 6.46
+      final_ph_location: Fig. 1, digitised (x-axis)
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-after-roasting pH 7.03
+    lever_value: 7.03
+    value: 10600
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.03
+      ph_basis: final
+      final_ph: 7.03
+      final_ph_location: Fig. 1, digitised (x-axis)
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-after-roasting pH 8.06
+    lever_value: 8.06
+    value: 63800
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.06
+      ph_basis: final
+      final_ph: 8.06
+      final_ph_location: Fig. 1, digitised (x-axis)
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-after-roasting pH 8.41
+    lever_value: 8.41
+    value: 284400
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.41
+      ph_basis: final
+      final_ph: 8.41
+      final_ph_location: Fig. 1, digitised (x-axis)
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+- id: huang2010-21
+  odorant: 2,3-, 2,5- and 2,6-dimethylpyrazine (mixture)
+  lever_class: pH
+  lever: liquor pH set by K2CO3 alkalization before roasting
+  focal: true
+  location: Fig. 1
+  digitised: true
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  odorant_unlisted: true
+  arms:
+  - label: alkalized-before-roasting pH 5.9
+    lever_value: 5.9
+    value: 2100
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.9
+      ph_basis: final
+      final_ph: 5.9
+      final_ph_location: Fig. 1, digitised (x-axis)
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h BEFORE roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-before-roasting pH 6.43
+    lever_value: 6.43
+    value: 1800
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.43
+      ph_basis: final
+      final_ph: 6.43
+      final_ph_location: Fig. 1, digitised (x-axis)
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h BEFORE roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-before-roasting pH 6.98
+    lever_value: 6.98
+    value: 1800
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.98
+      ph_basis: final
+      final_ph: 6.98
+      final_ph_location: Fig. 1, digitised (x-axis)
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h BEFORE roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-before-roasting pH 7.39
+    lever_value: 7.39
+    value: 13100
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.39
+      ph_basis: final
+      final_ph: 7.39
+      final_ph_location: Fig. 1, digitised (x-axis)
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h BEFORE roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-before-roasting pH 7.87
+    lever_value: 7.87
+    value: 44000
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.87
+      ph_basis: final
+      final_ph: 7.87
+      final_ph_location: Fig. 1, digitised (x-axis)
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h BEFORE roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+- id: huang2010-22
+  odorant: 2,3-, 2,5- and 2,6-dimethylpyrazine (mixture)
+  lever_class: pH
+  lever: liquor pH set by K2CO3 alkalization after roasting
+  focal: true
+  location: Fig. 1
+  digitised: true
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  odorant_unlisted: true
+  arms:
+  - label: alkalized-after-roasting pH 5.2
+    lever_value: 5.2
+    value: 2500
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.2
+      ph_basis: final
+      final_ph: 5.2
+      final_ph_location: Fig. 1, digitised (x-axis)
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-after-roasting pH 5.33
+    lever_value: 5.33
+    value: 2500
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.33
+      ph_basis: final
+      final_ph: 5.33
+      final_ph_location: Fig. 1, digitised (x-axis)
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-after-roasting pH 5.97
+    lever_value: 5.97
+    value: 1800
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.97
+      ph_basis: final
+      final_ph: 5.97
+      final_ph_location: Fig. 1, digitised (x-axis)
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-after-roasting pH 6.46
+    lever_value: 6.46
+    value: 4300
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.46
+      ph_basis: final
+      final_ph: 6.46
+      final_ph_location: Fig. 1, digitised (x-axis)
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-after-roasting pH 7.03
+    lever_value: 7.03
+    value: 5700
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.03
+      ph_basis: final
+      final_ph: 7.03
+      final_ph_location: Fig. 1, digitised (x-axis)
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-after-roasting pH 8.06
+    lever_value: 8.06
+    value: 29800
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.06
+      ph_basis: final
+      final_ph: 8.06
+      final_ph_location: Fig. 1, digitised (x-axis)
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-after-roasting pH 8.41
+    lever_value: 8.41
+    value: 124100
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.41
+      ph_basis: final
+      final_ph: 8.41
+      final_ph_location: Fig. 1, digitised (x-axis)
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+- id: huang2010-23
+  odorant: tetramethylpyrazine
+  lever_class: pH
+  lever: liquor pH set by K2CO3 alkalization before roasting
+  focal: true
+  location: Fig. 2
+  digitised: true
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: alkalized-before-roasting pH 5.9
+    lever_value: 5.9
+    value: 5530
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.9
+      ph_basis: final
+      final_ph: 5.9
+      final_ph_location: Fig. 2, digitised (x-axis)
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h BEFORE roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-before-roasting pH 6.45
+    lever_value: 6.45
+    value: 5060
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.45
+      ph_basis: final
+      final_ph: 6.45
+      final_ph_location: Fig. 2, digitised (x-axis)
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h BEFORE roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-before-roasting pH 6.98
+    lever_value: 6.98
+    value: 5390
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.98
+      ph_basis: final
+      final_ph: 6.98
+      final_ph_location: Fig. 2, digitised (x-axis)
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h BEFORE roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-before-roasting pH 7.39
+    lever_value: 7.39
+    value: 9760
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.39
+      ph_basis: final
+      final_ph: 7.39
+      final_ph_location: Fig. 2, digitised (x-axis)
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h BEFORE roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-before-roasting pH 7.87
+    lever_value: 7.87
+    value: 19700
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.87
+      ph_basis: final
+      final_ph: 7.87
+      final_ph_location: Fig. 2, digitised (x-axis)
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h BEFORE roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+- id: huang2010-24
+  odorant: tetramethylpyrazine
+  lever_class: pH
+  lever: liquor pH set by K2CO3 alkalization after roasting
+  focal: true
+  location: Fig. 2
+  digitised: true
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: alkalized-after-roasting pH 5.2
+    lever_value: 5.2
+    value: 5600
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.2
+      ph_basis: final
+      final_ph: 5.2
+      final_ph_location: Fig. 2, digitised (x-axis)
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-after-roasting pH 5.33
+    lever_value: 5.33
+    value: 4040
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.33
+      ph_basis: final
+      final_ph: 5.33
+      final_ph_location: Fig. 2, digitised (x-axis)
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-after-roasting pH 5.97
+    lever_value: 5.97
+    value: 4180
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.97
+      ph_basis: final
+      final_ph: 5.97
+      final_ph_location: Fig. 2, digitised (x-axis)
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-after-roasting pH 6.46
+    lever_value: 6.46
+    value: 8320
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.46
+      ph_basis: final
+      final_ph: 6.46
+      final_ph_location: Fig. 2, digitised (x-axis)
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-after-roasting pH 7.03
+    lever_value: 7.03
+    value: 7570
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.03
+      ph_basis: final
+      final_ph: 7.03
+      final_ph_location: Fig. 2, digitised (x-axis)
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-after-roasting pH 8.06
+    lever_value: 8.06
+    value: 15380
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.06
+      ph_basis: final
+      final_ph: 8.06
+      final_ph_location: Fig. 2, digitised (x-axis)
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+  - label: alkalized-after-roasting pH 8.41
+    lever_value: 8.41
+    value: 37680
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.41
+      ph_basis: final
+      final_ph: 8.41
+      final_ph_location: Fig. 2, digitised (x-axis)
+      temp_C: 150
+      time_min: 20
+      precursors:
+        cocoa beans: 1 kg
+        potassium carbonate soak: 42 - 204 g/L, 30 min, dried 70 C 2 h AFTER roasting
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: air
+- id: huang2010-25
+  odorant: phenylacetaldehyde
+  lever_class: pH
+  lever: liquor pH set by K2CO3, held 40 C 2 h
+  focal: true
+  location: Fig. 3
+  digitised: true
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 5.33, 40 C
+    lever_value: 5.33
+    value: 135
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.33
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 40
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+  - label: pH 6.02, 40 C
+    lever_value: 6.02
+    value: 188
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.02
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 40
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+  - label: pH 6.52, 40 C
+    lever_value: 6.52
+    value: 85
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.52
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 40
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+  - label: pH 6.98, 40 C
+    lever_value: 6.98
+    value: 77
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.98
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 40
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+  - label: pH 7.6, 40 C
+    lever_value: 7.6
+    value: 131
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.6
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 40
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+  - label: pH 8.01, 40 C
+    lever_value: 8.01
+    value: 223
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.01
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 40
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+- id: huang2010-26
+  odorant: phenylacetaldehyde
+  lever_class: pH
+  lever: liquor pH set by K2CO3, held 70 C 2 h
+  focal: true
+  location: Fig. 3
+  digitised: true
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 5.33, 70 C
+    lever_value: 5.33
+    value: 319
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.33
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 70
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+  - label: pH 6.02, 70 C
+    lever_value: 6.02
+    value: 392
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.02
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 70
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+  - label: pH 6.52, 70 C
+    lever_value: 6.52
+    value: 515
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.52
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 70
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+  - label: pH 6.98, 70 C
+    lever_value: 6.98
+    value: 950
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.98
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 70
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+  - label: pH 7.6, 70 C
+    lever_value: 7.6
+    value: 1600
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.6
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 70
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+  - label: pH 8.01, 70 C
+    lever_value: 8.01
+    value: 3165
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.01
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 70
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+- id: huang2010-27
+  odorant: trimethylpyrazine
+  lever_class: pH
+  lever: liquor pH set by K2CO3, held 40 C 2 h
+  focal: true
+  location: Fig. 3
+  digitised: true
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 5.33, 40 C
+    lever_value: 5.33
+    value: 81
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.33
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 40
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+  - label: pH 6.02, 40 C
+    lever_value: 6.02
+    value: 92
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.02
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 40
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+  - label: pH 6.52, 40 C
+    lever_value: 6.52
+    value: 35
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.52
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 40
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+  - label: pH 6.98, 40 C
+    lever_value: 6.98
+    value: 35
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.98
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 40
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+  - label: pH 7.6, 40 C
+    lever_value: 7.6
+    value: 58
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.6
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 40
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+  - label: pH 8.01, 40 C
+    lever_value: 8.01
+    value: 88
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.01
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 40
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+- id: huang2010-28
+  odorant: trimethylpyrazine
+  lever_class: pH
+  lever: liquor pH set by K2CO3, held 70 C 2 h
+  focal: true
+  location: Fig. 3
+  digitised: true
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 5.33, 70 C
+    lever_value: 5.33
+    value: 535
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.33
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 70
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+  - label: pH 6.02, 70 C
+    lever_value: 6.02
+    value: 562
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.02
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 70
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+  - label: pH 6.52, 70 C
+    lever_value: 6.52
+    value: 558
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.52
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 70
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+  - label: pH 6.98, 70 C
+    lever_value: 6.98
+    value: 862
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.98
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 70
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+  - label: pH 7.6, 70 C
+    lever_value: 7.6
+    value: 1450
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.6
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 70
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+  - label: pH 8.01, 70 C
+    lever_value: 8.01
+    value: 1919
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.01
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 70
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+- id: huang2010-29
+  odorant: 2- and 3-methylbutanal (mixture)
+  lever_class: pH
+  lever: liquor pH set by K2CO3, held 40 C 2 h
+  focal: true
+  location: Fig. 3
+  digitised: true
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  odorant_unlisted: true
+  arms:
+  - label: pH 5.33, 40 C
+    lever_value: 5.33
+    value: 10870
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.33
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 40
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+  - label: pH 6.02, 40 C
+    lever_value: 6.02
+    value: 9930
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.02
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 40
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+  - label: pH 6.52, 40 C
+    lever_value: 6.52
+    value: 8380
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.52
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 40
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+  - label: pH 6.98, 40 C
+    lever_value: 6.98
+    value: 9250
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.98
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 40
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+  - label: pH 7.6, 40 C
+    lever_value: 7.6
+    value: 12750
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.6
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 40
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+  - label: pH 8.01, 40 C
+    lever_value: 8.01
+    value: 6860
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.01
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 40
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+- id: huang2010-30
+  odorant: 2- and 3-methylbutanal (mixture)
+  lever_class: pH
+  lever: liquor pH set by K2CO3, held 70 C 2 h
+  focal: true
+  location: Fig. 3
+  digitised: true
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  odorant_unlisted: true
+  arms:
+  - label: pH 5.33, 70 C
+    lever_value: 5.33
+    value: 18340
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.33
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 70
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+  - label: pH 6.02, 70 C
+    lever_value: 6.02
+    value: 22180
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.02
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 70
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+  - label: pH 6.52, 70 C
+    lever_value: 6.52
+    value: 19010
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.52
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 70
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+  - label: pH 6.98, 70 C
+    lever_value: 6.98
+    value: 23320
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.98
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 70
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+  - label: pH 7.6, 70 C
+    lever_value: 7.6
+    value: 27900
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.6
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 70
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+  - label: pH 8.01, 70 C
+    lever_value: 8.01
+    value: 31060
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.01
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 70
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+- id: huang2010-31
+  odorant: phenylacetaldehyde
+  lever_class: temperature
+  lever: hold temperature 40 vs 70 C (2 h)
+  focal: false
+  location: Fig. 3
+  digitised: true
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 5.33, 40 C
+    lever_value: 40 C
+    value: 135
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.33
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 40
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+  - label: pH 5.33, 70 C
+    lever_value: 70 C
+    value: 319
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.33
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 70
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+- id: huang2010-32
+  odorant: phenylacetaldehyde
+  lever_class: temperature
+  lever: hold temperature 40 vs 70 C (2 h)
+  focal: false
+  location: Fig. 3
+  digitised: true
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 6.02, 40 C
+    lever_value: 40 C
+    value: 188
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.02
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 40
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+  - label: pH 6.02, 70 C
+    lever_value: 70 C
+    value: 392
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.02
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 70
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+- id: huang2010-33
+  odorant: phenylacetaldehyde
+  lever_class: temperature
+  lever: hold temperature 40 vs 70 C (2 h)
+  focal: false
+  location: Fig. 3
+  digitised: true
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 6.52, 40 C
+    lever_value: 40 C
+    value: 85
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.52
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 40
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+  - label: pH 6.52, 70 C
+    lever_value: 70 C
+    value: 515
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.52
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 70
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+- id: huang2010-34
+  odorant: phenylacetaldehyde
+  lever_class: temperature
+  lever: hold temperature 40 vs 70 C (2 h)
+  focal: false
+  location: Fig. 3
+  digitised: true
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 6.98, 40 C
+    lever_value: 40 C
+    value: 77
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.98
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 40
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+  - label: pH 6.98, 70 C
+    lever_value: 70 C
+    value: 950
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.98
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 70
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+- id: huang2010-35
+  odorant: phenylacetaldehyde
+  lever_class: temperature
+  lever: hold temperature 40 vs 70 C (2 h)
+  focal: false
+  location: Fig. 3
+  digitised: true
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 7.6, 40 C
+    lever_value: 40 C
+    value: 131
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.6
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 40
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+  - label: pH 7.6, 70 C
+    lever_value: 70 C
+    value: 1600
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.6
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 70
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+- id: huang2010-36
+  odorant: phenylacetaldehyde
+  lever_class: temperature
+  lever: hold temperature 40 vs 70 C (2 h)
+  focal: false
+  location: Fig. 3
+  digitised: true
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 8.01, 40 C
+    lever_value: 40 C
+    value: 223
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.01
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 40
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+  - label: pH 8.01, 70 C
+    lever_value: 70 C
+    value: 3165
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.01
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 70
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+- id: huang2010-37
+  odorant: trimethylpyrazine
+  lever_class: temperature
+  lever: hold temperature 40 vs 70 C (2 h)
+  focal: false
+  location: Fig. 3
+  digitised: true
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 5.33, 40 C
+    lever_value: 40 C
+    value: 81
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.33
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 40
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+  - label: pH 5.33, 70 C
+    lever_value: 70 C
+    value: 535
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.33
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 70
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+- id: huang2010-38
+  odorant: trimethylpyrazine
+  lever_class: temperature
+  lever: hold temperature 40 vs 70 C (2 h)
+  focal: false
+  location: Fig. 3
+  digitised: true
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 6.02, 40 C
+    lever_value: 40 C
+    value: 92
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.02
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 40
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+  - label: pH 6.02, 70 C
+    lever_value: 70 C
+    value: 562
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.02
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 70
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+- id: huang2010-39
+  odorant: trimethylpyrazine
+  lever_class: temperature
+  lever: hold temperature 40 vs 70 C (2 h)
+  focal: false
+  location: Fig. 3
+  digitised: true
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 6.52, 40 C
+    lever_value: 40 C
+    value: 35
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.52
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 40
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+  - label: pH 6.52, 70 C
+    lever_value: 70 C
+    value: 558
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.52
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 70
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+- id: huang2010-40
+  odorant: trimethylpyrazine
+  lever_class: temperature
+  lever: hold temperature 40 vs 70 C (2 h)
+  focal: false
+  location: Fig. 3
+  digitised: true
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 6.98, 40 C
+    lever_value: 40 C
+    value: 35
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.98
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 40
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+  - label: pH 6.98, 70 C
+    lever_value: 70 C
+    value: 862
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.98
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 70
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+- id: huang2010-41
+  odorant: trimethylpyrazine
+  lever_class: temperature
+  lever: hold temperature 40 vs 70 C (2 h)
+  focal: false
+  location: Fig. 3
+  digitised: true
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 7.6, 40 C
+    lever_value: 40 C
+    value: 58
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.6
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 40
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+  - label: pH 7.6, 70 C
+    lever_value: 70 C
+    value: 1450
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.6
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 70
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+- id: huang2010-42
+  odorant: trimethylpyrazine
+  lever_class: temperature
+  lever: hold temperature 40 vs 70 C (2 h)
+  focal: false
+  location: Fig. 3
+  digitised: true
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  arms:
+  - label: pH 8.01, 40 C
+    lever_value: 40 C
+    value: 88
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.01
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 40
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+  - label: pH 8.01, 70 C
+    lever_value: 70 C
+    value: 1919
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.01
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 70
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+- id: huang2010-43
+  odorant: 2- and 3-methylbutanal (mixture)
+  lever_class: temperature
+  lever: hold temperature 40 vs 70 C (2 h)
+  focal: false
+  location: Fig. 3
+  digitised: true
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  odorant_unlisted: true
+  arms:
+  - label: pH 5.33, 40 C
+    lever_value: 40 C
+    value: 10870
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.33
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 40
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+  - label: pH 5.33, 70 C
+    lever_value: 70 C
+    value: 18340
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 5.33
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 70
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+- id: huang2010-44
+  odorant: 2- and 3-methylbutanal (mixture)
+  lever_class: temperature
+  lever: hold temperature 40 vs 70 C (2 h)
+  focal: false
+  location: Fig. 3
+  digitised: true
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  odorant_unlisted: true
+  arms:
+  - label: pH 6.02, 40 C
+    lever_value: 40 C
+    value: 9930
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.02
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 40
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+  - label: pH 6.02, 70 C
+    lever_value: 70 C
+    value: 22180
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.02
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 70
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+- id: huang2010-45
+  odorant: 2- and 3-methylbutanal (mixture)
+  lever_class: temperature
+  lever: hold temperature 40 vs 70 C (2 h)
+  focal: false
+  location: Fig. 3
+  digitised: true
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  odorant_unlisted: true
+  arms:
+  - label: pH 6.52, 40 C
+    lever_value: 40 C
+    value: 8380
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.52
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 40
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+  - label: pH 6.52, 70 C
+    lever_value: 70 C
+    value: 19010
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.52
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 70
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+- id: huang2010-46
+  odorant: 2- and 3-methylbutanal (mixture)
+  lever_class: temperature
+  lever: hold temperature 40 vs 70 C (2 h)
+  focal: false
+  location: Fig. 3
+  digitised: true
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  odorant_unlisted: true
+  arms:
+  - label: pH 6.98, 40 C
+    lever_value: 40 C
+    value: 9250
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.98
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 40
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+  - label: pH 6.98, 70 C
+    lever_value: 70 C
+    value: 23320
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 6.98
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 70
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+- id: huang2010-47
+  odorant: 2- and 3-methylbutanal (mixture)
+  lever_class: temperature
+  lever: hold temperature 40 vs 70 C (2 h)
+  focal: false
+  location: Fig. 3
+  digitised: true
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  odorant_unlisted: true
+  arms:
+  - label: pH 7.6, 40 C
+    lever_value: 40 C
+    value: 12750
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.6
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 40
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+  - label: pH 7.6, 70 C
+    lever_value: 70 C
+    value: 27900
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 7.6
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 70
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+- id: huang2010-48
+  odorant: 2- and 3-methylbutanal (mixture)
+  lever_class: temperature
+  lever: hold temperature 40 vs 70 C (2 h)
+  focal: false
+  location: Fig. 3
+  digitised: true
+  unit: ppb
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: adjusted_unbuffered
+  odorant_unlisted: true
+  arms:
+  - label: pH 8.01, 40 C
+    lever_value: 40 C
+    value: 6860
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.01
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 40
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated
+  - label: pH 8.01, 70 C
+    lever_value: 70 C
+    value: 31060
+    censor: none
+    limit: null
+    n: null
+    sd: null
+    conditions:
+      ph: 8.01
+      ph_basis: label
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 70
+      time_min: 120
+      precursors:
+        unalkalized cocoa liquor: 20 g
+        potassium carbonate solution: 50 mL
+      buffer: none
+      matrix: other (cocoa liquor from roasted cocoa beans)
+      headspace: sealed, unstated

@@ -4,22 +4,22 @@
   "prereg": "docs/reference/lever_table/PREREG.md",
   "split": {
     "split_sha256": "022d0cab5a53ececb27a1fc6837ff275fbab177cf2161ae1f8a4ed0341f273a7",
-    "new_labs": 35
+    "new_labs": 47
   },
   "skipped": {
-    "mixed-lever contrasts (no single-lever cell)": 191,
-    "fewer than two usable arms": 806,
+    "mixed-lever contrasts (no single-lever cell)": 437,
+    "fewer than two usable arms": 988,
     "rows the source appears to have misprinted (kept, enter no cell)": 6,
-    "odorants outside the declared lists (PREREG amendment A3)": 602,
-    "second peaks of one compound in the same pots (one row enters the cell)": 19,
+    "odorants outside the declared lists (PREREG amendment A3)": 647,
+    "second peaks of one compound in the same pots (one row enters the cell)": 26,
     "sugar-identity contrasts whose levels are not sugars (fed intermediates)": 15,
     "shares of a total (PREREG amendment A1)": 163,
     "flavour-dilution factors, an odour potency not an amount (PREREG amendment A1)": 3,
     "rates, half-lives or storage losses (PREREG amendment A1)": 148
   },
   "counts": {
-    "sources": 56,
-    "observations": 1011,
+    "sources": 58,
+    "observations": 1032,
     "labs": 15
   },
   "cells": [
@@ -2924,19 +2924,21 @@
       "compound": "2,3-Dimethylpyrazine",
       "lever_class": "pH",
       "band": "pH 6-7.5, initial or label",
-      "contrasts": 1,
-      "studies": 1,
-      "labs": 1,
+      "contrasts": 2,
+      "studies": 2,
+      "labs": 2,
       "lab_names": [
+        "btbu_beijing",
         "ho_network"
       ],
       "peak_area_share": 1.0,
       "focal_share": 0.0,
       "matrices": [
+        "buffer",
         "water"
       ],
       "temperature_range_C": [
-        180.0,
+        140.0,
         180.0
       ],
       "rows": [
@@ -2957,40 +2959,58 @@
           "censored_arms": 0,
           "turning_point": false,
           "buffer_state": "unbuffered"
+        },
+        {
+          "source": "hou2017ph",
+          "contrast": "hou2017ph-13",
+          "lab": "btbu_beijing",
+          "y": -0.3858095624296108,
+          "v": 6.704887214935199e-05,
+          "range": [
+            6.5,
+            7.5
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "buffered"
         }
       ],
       "step": "+1 pH unit",
       "fit": {
-        "estimate": 0.05952512198049111,
+        "estimate": -0.16061427542343146,
         "ci90": [
-          -1.0303434103835485,
-          1.1429626176534964
+          -0.8662688496981433,
+          0.5523130137568245
         ],
         "new_lab_pi90": [
-          -1.5134175763922084,
-          1.6259259693333812
+          -1.399630433389747,
+          1.0857232176540563
         ],
-        "p_same_sign_new_lab": 0.5417364505600845,
-        "new_lab_pi90_width": 3.1393435457255894,
+        "p_same_sign_new_lab": 0.6136503653511852,
+        "new_lab_pi90_width": 2.4853536510438032,
         "tau_study_fitted": false,
         "reml_scales": [
           0.0,
-          0.0
+          0.3171652579277238
         ],
         "prior_dominated": true,
         "sensitivity": {
           "0.25": {
-            "estimate": 0.06068297872577031,
+            "estimate": -0.1622568402222084,
             "new_lab_pi90": [
-              -0.741639487060777,
-              0.8611687236015253
+              -0.902238024540359,
+              0.5803516654786837
             ]
           },
           "1.0": {
-            "estimate": 0.05585208786363017,
+            "estimate": -0.15715838093969797,
             "new_lab_pi90": [
-              -2.8748816896327063,
-              2.9688101007679135
+              -2.3056249636706325,
+              2.014568071836381
             ]
           }
         },
@@ -2998,11 +3018,11 @@
           "contrasts": 0
         },
         "incidental_only": {
-          "contrasts": 1,
-          "estimate": 0.05952512198049111,
+          "contrasts": 2,
+          "estimate": -0.16061427542343146,
           "ci90": [
-            -1.0303434103835485,
-            1.1429626176534964
+            -0.8662688496981433,
+            0.5523130137568245
           ]
         },
         "non_monotone_contrasts": 0
@@ -3015,7 +3035,7 @@
         "labs_with_a_turning_point": 0,
         "flags": [],
         "buffer": {
-          "buffered": 0,
+          "buffered": 1,
           "unbuffered": 1,
           "unstated": 0
         }
@@ -4329,6 +4349,107 @@
     },
     {
       "compound": "2,5-Dimethylpyrazine",
+      "lever_class": "pH",
+      "band": "pH 6-7.5, initial or label",
+      "contrasts": 1,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "btbu_beijing"
+      ],
+      "peak_area_share": 1.0,
+      "focal_share": 0.0,
+      "matrices": [
+        "buffer"
+      ],
+      "temperature_range_C": [
+        140.0,
+        140.0
+      ],
+      "rows": [
+        {
+          "source": "hou2017ph",
+          "contrast": "hou2017ph-9",
+          "lab": "btbu_beijing",
+          "y": -0.8302489189753375,
+          "v": 0.0013337947676506303,
+          "range": [
+            6.5,
+            7.5
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "buffered"
+        }
+      ],
+      "step": "+1 pH unit",
+      "fit": {
+        "estimate": -0.8080273353106903,
+        "ci90": [
+          -1.854415570122145,
+          0.32466712568714984
+        ],
+        "new_lab_pi90": [
+          -2.336778814414446,
+          0.8079915675297688
+        ],
+        "p_same_sign_new_lab": 0.8409539694646899,
+        "new_lab_pi90_width": 3.1447703819442148,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.0
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": -0.8241013425135754,
+            "new_lab_pi90": [
+              -1.6149350251748946,
+              -0.009034712443922096
+            ]
+          },
+          "1.0": {
+            "estimate": -0.7564051492266962,
+            "new_lab_pi90": [
+              -3.5685271615933196,
+              2.2936118036562436
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 0
+        },
+        "incidental_only": {
+          "contrasts": 1,
+          "estimate": -0.8080273353106903,
+          "ci90": [
+            -1.854415570122145,
+            0.32466712568714984
+          ]
+        },
+        "non_monotone_contrasts": 0
+      },
+      "reading": "too few laboratories",
+      "lolo": null,
+      "fragility": {
+        "contrasts_with_a_censored_arm": 0,
+        "contrasts_with_a_turning_point": 0,
+        "labs_with_a_turning_point": 0,
+        "flags": [],
+        "buffer": {
+          "buffered": 1,
+          "unbuffered": 0,
+          "unstated": 0
+        }
+      }
+    },
+    {
+      "compound": "2,5-Dimethylpyrazine",
       "lever_class": "precursor dose",
       "band": "sulfur donor varied",
       "contrasts": 1,
@@ -4775,6 +4896,107 @@
         "pairs_with_a_censored_arm": 0,
         "pairs_with_both_arms_censored": 0,
         "flags": {}
+      }
+    },
+    {
+      "compound": "2,6-Dimethylpyrazine",
+      "lever_class": "pH",
+      "band": "pH 6-7.5, initial or label",
+      "contrasts": 1,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "btbu_beijing"
+      ],
+      "peak_area_share": 1.0,
+      "focal_share": 0.0,
+      "matrices": [
+        "buffer"
+      ],
+      "temperature_range_C": [
+        140.0,
+        140.0
+      ],
+      "rows": [
+        {
+          "source": "hou2017ph",
+          "contrast": "hou2017ph-11",
+          "lab": "btbu_beijing",
+          "y": -0.10203233249528133,
+          "v": 6.630441141872008e-05,
+          "range": [
+            6.5,
+            7.5
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "buffered"
+        }
+      ],
+      "step": "+1 pH unit",
+      "fit": {
+        "estimate": -0.09946277304433411,
+        "ci90": [
+          -1.1802470906327798,
+          0.9922335313586423
+        ],
+        "new_lab_pi90": [
+          -1.663361226642617,
+          1.4754103897046327
+        ],
+        "p_same_sign_new_lab": 0.5677743915229513,
+        "new_lab_pi90_width": 3.13877161634725,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.0
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": -0.10135467764577744,
+            "new_lab_pi90": [
+              -0.9006314130915993,
+              0.7010745130126288
+            ]
+          },
+          "1.0": {
+            "estimate": -0.0933892976210138,
+            "new_lab_pi90": [
+              -3.0002204701796913,
+              2.8433864335866796
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 0
+        },
+        "incidental_only": {
+          "contrasts": 1,
+          "estimate": -0.09946277304433411,
+          "ci90": [
+            -1.1802470906327798,
+            0.9922335313586423
+          ]
+        },
+        "non_monotone_contrasts": 0
+      },
+      "reading": "too few laboratories",
+      "lolo": null,
+      "fragility": {
+        "contrasts_with_a_censored_arm": 0,
+        "contrasts_with_a_turning_point": 0,
+        "labs_with_a_turning_point": 0,
+        "flags": [],
+        "buffer": {
+          "buffered": 1,
+          "unbuffered": 0,
+          "unstated": 0
+        }
       }
     },
     {
@@ -6269,15 +6491,17 @@
       "compound": "2-Acetylthiazole",
       "lever_class": "pH",
       "band": "pH 6-7.5, initial or label",
-      "contrasts": 2,
-      "studies": 2,
-      "labs": 1,
+      "contrasts": 3,
+      "studies": 3,
+      "labs": 2,
       "lab_names": [
+        "btbu_beijing",
         "ho_network"
       ],
-      "peak_area_share": 0.5,
+      "peak_area_share": 0.6666666666666666,
       "focal_share": 1.0,
       "matrices": [
+        "buffer",
         "water"
       ],
       "temperature_range_C": [
@@ -6304,6 +6528,24 @@
           "buffer_state": "unbuffered"
         },
         {
+          "source": "hou2017ph",
+          "contrast": "hou2017ph-16",
+          "lab": "btbu_beijing",
+          "y": 0.7905813254128196,
+          "v": 9.216572369830872e-06,
+          "range": [
+            4.5,
+            7.5
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "buffered"
+        },
+        {
           "source": "kang2026",
           "contrast": "kang2026-11",
           "lab": "ho_network",
@@ -6324,36 +6566,36 @@
       ],
       "step": "+1 pH unit",
       "fit": {
-        "estimate": 0.30131042867127517,
+        "estimate": 0.4960287477913066,
         "ci90": [
-          -0.6420841950929513,
-          1.2217384811172396
+          -0.15251132689154295,
+          1.1502693410001024
         ],
         "new_lab_pi90": [
-          -1.1609590713795974,
-          1.740997764966472
+          -0.7121358574800123,
+          1.7065555440371618
         ],
-        "p_same_sign_new_lab": 0.6752822385253537,
-        "new_lab_pi90_width": 2.9019568363460695,
+        "p_same_sign_new_lab": 0.7908014300768951,
+        "new_lab_pi90_width": 2.418691401517174,
         "tau_study_fitted": false,
         "reml_scales": [
-          0.0,
+          0.26682181158053636,
           0.26682181158053636
         ],
         "prior_dominated": true,
         "sensitivity": {
           "0.25": {
-            "estimate": 0.3061980038993547,
+            "estimate": 0.49530852883369536,
             "new_lab_pi90": [
-              -0.5215584020201458,
-              1.127362520293744
+              -0.27558440034151693,
+              1.2746567325072915
             ]
           },
           "1.0": {
-            "estimate": 0.28914792461163996,
+            "estimate": 0.49222716676181655,
             "new_lab_pi90": [
-              -2.300644212716409,
-              2.809902600164125
+              -1.4535087097310926,
+              2.407522915863311
             ]
           }
         },
@@ -6378,7 +6620,7 @@
         "labs_with_a_turning_point": 0,
         "flags": [],
         "buffer": {
-          "buffered": 0,
+          "buffered": 1,
           "unbuffered": 2,
           "unstated": 0
         }
@@ -10393,19 +10635,21 @@
       "compound": "2-Ethylpyrazine",
       "lever_class": "pH",
       "band": "pH 6-7.5, initial or label",
-      "contrasts": 1,
-      "studies": 1,
-      "labs": 1,
+      "contrasts": 2,
+      "studies": 2,
+      "labs": 2,
       "lab_names": [
+        "btbu_beijing",
         "ho_network"
       ],
       "peak_area_share": 1.0,
-      "focal_share": 1.0,
+      "focal_share": 0.5,
       "matrices": [
+        "buffer",
         "water"
       ],
       "temperature_range_C": [
-        180.0,
+        140.0,
         180.0
       ],
       "rows": [
@@ -10426,40 +10670,58 @@
           "censored_arms": 0,
           "turning_point": false,
           "buffer_state": "unbuffered"
+        },
+        {
+          "source": "hou2017ph",
+          "contrast": "hou2017ph-12",
+          "lab": "btbu_beijing",
+          "y": -0.324730820575567,
+          "v": 6.614659668818462e-05,
+          "range": [
+            6.5,
+            7.5
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "buffered"
         }
       ],
       "step": "+1 pH unit",
       "fit": {
-        "estimate": 0.031164249982136075,
+        "estimate": -0.14517618117501668,
         "ci90": [
-          -1.0571463699396793,
-          1.1161161779619828
+          -0.8217406163629606,
+          0.5382499565941969
         ],
         "new_lab_pi90": [
-          -1.5401998735747138,
-          1.5991033147952984
+          -1.3324496012593823,
+          1.0489710461218749
         ],
-        "p_same_sign_new_lab": 0.5222940851453957,
-        "new_lab_pi90_width": 3.139303188370012,
+        "p_same_sign_new_lab": 0.6122712409378344,
+        "new_lab_pi90_width": 2.3814206473812574,
         "tau_study_fitted": false,
         "reml_scales": [
-          0.0,
-          0.0
+          0.11243458629672394,
+          0.2244693495128745
         ],
         "prior_dominated": true,
         "sensitivity": {
           "0.25": {
-            "estimate": 0.03177095739504203,
+            "estimate": -0.14655605983561967,
             "new_lab_pi90": [
-              -0.7701327147870923,
-              0.8326700039778351
+              -0.8418013314576757,
+              0.5513002801049747
             ]
           },
           "1.0": {
-            "estimate": 0.02924149270359803,
+            "estimate": -0.1423188481224107,
             "new_lab_pi90": [
-              -2.8972280631265837,
-              2.946385357319139
+              -2.235504672009415,
+              1.9724171774543724
             ]
           }
         },
@@ -10467,7 +10729,12 @@
           "contrasts": 0
         },
         "incidental_only": {
-          "contrasts": 0
+          "contrasts": 1,
+          "estimate": -0.31654743350777187,
+          "ci90": [
+            -1.385760453048398,
+            0.787334648307188
+          ]
         },
         "non_monotone_contrasts": 0
       },
@@ -10479,7 +10746,7 @@
         "labs_with_a_turning_point": 0,
         "flags": [],
         "buffer": {
-          "buffered": 0,
+          "buffered": 1,
           "unbuffered": 1,
           "unstated": 0
         }
@@ -13413,15 +13680,17 @@
       "compound": "2-Furfurylthiol (FFT)",
       "lever_class": "pH",
       "band": "pH 6-7.5, initial or label",
-      "contrasts": 3,
-      "studies": 3,
-      "labs": 1,
+      "contrasts": 4,
+      "studies": 4,
+      "labs": 2,
       "lab_names": [
+        "btbu_beijing",
         "ho_network"
       ],
-      "peak_area_share": 0.3333333333333333,
+      "peak_area_share": 0.5,
       "focal_share": 1.0,
       "matrices": [
+        "buffer",
         "water"
       ],
       "temperature_range_C": [
@@ -13446,6 +13715,24 @@
           "censored_arms": 0,
           "turning_point": false,
           "buffer_state": "unbuffered"
+        },
+        {
+          "source": "hou2017ph",
+          "contrast": "hou2017ph-3",
+          "lab": "btbu_beijing",
+          "y": -0.3171053539855558,
+          "v": 0.00018830077363617362,
+          "range": [
+            5.5,
+            7.5
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": true,
+          "buffer_state": "buffered"
         },
         {
           "source": "kang2026",
@@ -13486,36 +13773,36 @@
       ],
       "step": "+1 pH unit",
       "fit": {
-        "estimate": -0.15278569229610017,
+        "estimate": -0.2162795278840449,
         "ci90": [
-          -0.9360191077482123,
-          0.6420381175200838
+          -0.6464228672556067,
+          0.19570319175411074
         ],
         "new_lab_pi90": [
-          -1.3184062857046646,
-          1.024088550895488
+          -0.9861833123645408,
+          0.5375295721736014
         ],
-        "p_same_sign_new_lab": 0.646627141566696,
-        "new_lab_pi90_width": 2.3424948366001526,
+        "p_same_sign_new_lab": 0.7614565738578913,
+        "new_lab_pi90_width": 1.5237128845381422,
         "tau_study_fitted": false,
         "reml_scales": [
-          0.0,
+          0.09458791355652352,
           0.06694329500821695
         ],
         "prior_dominated": true,
         "sensitivity": {
           "0.25": {
-            "estimate": -0.15353121566230038,
+            "estimate": -0.2147566849055271,
             "new_lab_pi90": [
-              -0.7825601764544196,
-              0.47707933715809203
+              -0.7042487220771435,
+              0.2588438816465443
             ]
           },
           "1.0": {
-            "estimate": -0.15000162635000056,
+            "estimate": -0.2167635987640478,
             "new_lab_pi90": [
-              -2.2716496614827175,
-              2.0101988943937963
+              -1.4450874697802092,
+              1.0054472124410239
             ]
           }
         },
@@ -13530,17 +13817,17 @@
         "incidental_only": {
           "contrasts": 0
         },
-        "non_monotone_contrasts": 0
+        "non_monotone_contrasts": 1
       },
       "reading": "too few laboratories",
       "lolo": null,
       "fragility": {
         "contrasts_with_a_censored_arm": 0,
-        "contrasts_with_a_turning_point": 0,
-        "labs_with_a_turning_point": 0,
+        "contrasts_with_a_turning_point": 1,
+        "labs_with_a_turning_point": 1,
         "flags": [],
         "buffer": {
-          "buffered": 0,
+          "buffered": 1,
           "unbuffered": 3,
           "unstated": 0
         }
@@ -14287,15 +14574,16 @@
       "compound": "2-Furfurylthiol (FFT)",
       "lever_class": "sulfur source",
       "band": "all",
-      "contrasts": 9,
-      "studies": 4,
-      "labs": 2,
+      "contrasts": 11,
+      "studies": 5,
+      "labs": 3,
       "lab_names": [
+        "btbu_beijing",
         "dfa_garching",
         "ho_network"
       ],
-      "peak_area_share": 0.1111111111111111,
-      "focal_share": 0.7777777777777778,
+      "peak_area_share": 0.2727272727272727,
+      "focal_share": 0.8181818181818182,
       "matrices": [
         "buffer",
         "water"
@@ -14481,6 +14769,52 @@
           "buffer_state": null
         },
         {
+          "source": "yang2012",
+          "contrast": "yang2012-4",
+          "lab": "btbu_beijing",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "gsh + cysteine",
+              "against": "gsh + cysteine + thiamine",
+              "y": -0.6115358832118399,
+              "v": 0.006269669725654501,
+              "censored": 0
+            }
+          ],
+          "focal": true,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": null,
+          "buffer_state": null
+        },
+        {
+          "source": "yang2012",
+          "contrast": "yang2012-5",
+          "lab": "btbu_beijing",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "gsh only (0.37 mmol)",
+              "against": "gsh + cysteine",
+              "y": -0.6863808770279982,
+              "v": 0.006269669725654501,
+              "censored": 0
+            }
+          ],
+          "focal": true,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": null,
+          "buffer_state": null
+        },
+        {
           "source": "zhang1991",
           "contrast": "zhang1991-2",
           "lab": "ho_network",
@@ -14579,6 +14913,15 @@
             "labs": 2,
             "contrasts": 7,
             "reading": "too few laboratories"
+          },
+          "gsh + cysteine": {
+            "reading": "not connected"
+          },
+          "gsh + cysteine + thiamine": {
+            "reading": "not connected"
+          },
+          "gsh only (0.37 mmol)": {
+            "reading": "not connected"
           },
           "thiamine": {
             "reading": "not connected"
@@ -16912,22 +17255,42 @@
       "compound": "2-Methyl-3-furanthiol (MFT)",
       "lever_class": "pH",
       "band": "pH 6-7.5, initial or label",
-      "contrasts": 2,
-      "studies": 2,
-      "labs": 1,
+      "contrasts": 3,
+      "studies": 3,
+      "labs": 2,
       "lab_names": [
+        "btbu_beijing",
         "ho_network"
       ],
-      "peak_area_share": 0.0,
+      "peak_area_share": 0.3333333333333333,
       "focal_share": 1.0,
       "matrices": [
+        "buffer",
         "water"
       ],
       "temperature_range_C": [
         120.0,
-        120.0
+        140.0
       ],
       "rows": [
+        {
+          "source": "hou2017ph",
+          "contrast": "hou2017ph-1",
+          "lab": "btbu_beijing",
+          "y": -0.19890834874987007,
+          "v": 0.00023086626460709932,
+          "range": [
+            4.5,
+            7.5
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "buffered"
+        },
         {
           "source": "kang2026",
           "contrast": "kang2026-9",
@@ -16967,17 +17330,17 @@
       ],
       "step": "+1 pH unit",
       "fit": {
-        "estimate": 0.12823525741431865,
+        "estimate": 0.00191724870195605,
         "ci90": [
-          -0.8279394167354024,
-          1.0751640251304833
+          -0.636616629689719,
+          0.624045526729119
         ],
         "new_lab_pi90": [
-          -1.3678949379137626,
-          1.6153316590193092
+          -1.1827425213669074,
+          1.1723655806564819
         ],
-        "p_same_sign_new_lab": 0.5750446078056829,
-        "new_lab_pi90_width": 2.983226596933072,
+        "p_same_sign_new_lab": 0.5009010366978484,
+        "new_lab_pi90_width": 2.3551081020233893,
         "tau_study_fitted": false,
         "reml_scales": [
           0.0,
@@ -16986,17 +17349,17 @@
         "prior_dominated": true,
         "sensitivity": {
           "0.25": {
-            "estimate": 0.13026511223309534,
+            "estimate": 0.005272372327880394,
             "new_lab_pi90": [
-              -0.7305253378837697,
-              0.9888411717454438
+              -0.7460489827113596,
+              0.7464529948865436
             ]
           },
           "1.0": {
-            "estimate": 0.12285604704110971,
+            "estimate": -0.0007158102182782352,
             "new_lab_pi90": [
-              -2.4930435705279064,
-              2.7102651942167175
+              -1.9081387536407912,
+              1.8896703291062498
             ]
           }
         },
@@ -17021,7 +17384,7 @@
         "labs_with_a_turning_point": 1,
         "flags": [],
         "buffer": {
-          "buffered": 0,
+          "buffered": 1,
           "unbuffered": 2,
           "unstated": 0
         }
@@ -17988,8 +18351,8 @@
       "compound": "2-Methyl-3-furanthiol (MFT)",
       "lever_class": "sulfur source",
       "band": "all",
-      "contrasts": 12,
-      "studies": 6,
+      "contrasts": 14,
+      "studies": 7,
       "labs": 4,
       "lab_names": [
         "btbu_beijing",
@@ -17997,8 +18360,8 @@
         "ho_network",
         "reading_mottram_parker"
       ],
-      "peak_area_share": 0.08333333333333333,
-      "focal_share": 0.9166666666666666,
+      "peak_area_share": 0.21428571428571427,
+      "focal_share": 0.9285714285714286,
       "matrices": [
         "buffer",
         "water"
@@ -18290,6 +18653,52 @@
           "buffer_state": null
         },
         {
+          "source": "yang2012",
+          "contrast": "yang2012-1",
+          "lab": "btbu_beijing",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "gsh + cysteine",
+              "against": "gsh + cysteine + thiamine",
+              "y": -0.007061854487486835,
+              "v": 0.006269669725654501,
+              "censored": 0
+            }
+          ],
+          "focal": true,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": null,
+          "buffer_state": null
+        },
+        {
+          "source": "yang2012",
+          "contrast": "yang2012-2",
+          "lab": "btbu_beijing",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "gsh only (0.37 mmol)",
+              "against": "gsh + cysteine",
+              "y": -0.5065762340579381,
+              "v": 0.006269669725654501,
+              "censored": 0
+            }
+          ],
+          "focal": true,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": null,
+          "buffer_state": null
+        },
+        {
           "source": "zhou2023c",
           "contrast": "zhou2023c-1",
           "lab": "ho_network",
@@ -18397,6 +18806,15 @@
             "labs": 3,
             "contrasts": 11,
             "reading": "answered by the literature"
+          },
+          "gsh + cysteine": {
+            "reading": "not connected"
+          },
+          "gsh + cysteine + thiamine": {
+            "reading": "not connected"
+          },
+          "gsh only (0.37 mmol)": {
+            "reading": "not connected"
           },
           "thiamine": {
             "reading": "not connected"
@@ -21945,19 +22363,21 @@
       "compound": "2-Methylpyrazine",
       "lever_class": "pH",
       "band": "pH 6-7.5, initial or label",
-      "contrasts": 1,
-      "studies": 1,
-      "labs": 1,
+      "contrasts": 2,
+      "studies": 2,
+      "labs": 2,
       "lab_names": [
+        "btbu_beijing",
         "ho_network"
       ],
       "peak_area_share": 1.0,
-      "focal_share": 1.0,
+      "focal_share": 0.5,
       "matrices": [
+        "buffer",
         "water"
       ],
       "temperature_range_C": [
-        180.0,
+        140.0,
         180.0
       ],
       "rows": [
@@ -21978,40 +22398,58 @@
           "censored_arms": 0,
           "turning_point": false,
           "buffer_state": "unbuffered"
+        },
+        {
+          "source": "hou2017ph",
+          "contrast": "hou2017ph-8",
+          "lab": "btbu_beijing",
+          "y": 0.06932649137596786,
+          "v": 0.00016830362720000674,
+          "range": [
+            6.5,
+            7.5
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "buffered"
         }
       ],
       "step": "+1 pH unit",
       "fit": {
-        "estimate": 0.021529016841498206,
+        "estimate": 0.0468076843490794,
         "ci90": [
-          -1.0662812029574764,
-          1.1070043258820181
+          -0.5204121746659748,
+          0.6093929384526259
         ],
         "new_lab_pi90": [
-          -1.5493413999792685,
-          1.5900289198423367
+          -0.9427911016931224,
+          1.0317719827545946
         ],
-        "p_same_sign_new_lab": 0.5154823682197489,
-        "new_lab_pi90_width": 3.139370319821605,
+        "p_same_sign_new_lab": 0.5731159959814294,
+        "new_lab_pi90_width": 1.974563084447717,
         "tau_study_fitted": false,
         "reml_scales": [
-          0.0,
-          0.0
+          0.014129557492638108,
+          0.023731293045039722
         ],
         "prior_dominated": true,
         "sensitivity": {
           "0.25": {
-            "estimate": 0.021947192146788037,
+            "estimate": 0.04731113434972779,
             "new_lab_pi90": [
-              -0.7798100963559491,
-              0.8230973717585895
+              -0.4651483851385364,
+              0.5559212153183075
             ]
           },
           "1.0": {
-            "estimate": 0.02020182385658185,
+            "estimate": 0.04615112971889685,
             "new_lab_pi90": [
-              -2.9048215945544396,
-              2.938791252123062
+              -1.8515081534384485,
+              1.9344341962127611
             ]
           }
         },
@@ -22019,7 +22457,12 @@
           "contrasts": 0
         },
         "incidental_only": {
-          "contrasts": 0
+          "contrasts": 1,
+          "estimate": 0.0675634712634715,
+          "ci90": [
+            -1.022450680025661,
+            1.1501918166020497
+          ]
         },
         "non_monotone_contrasts": 0
       },
@@ -22031,7 +22474,7 @@
         "labs_with_a_turning_point": 0,
         "flags": [],
         "buffer": {
-          "buffered": 0,
+          "buffered": 1,
           "unbuffered": 1,
           "unstated": 0
         }
@@ -28114,22 +28557,70 @@
       "compound": "Benzaldehyde",
       "lever_class": "sulfur source",
       "band": "all",
-      "contrasts": 1,
-      "studies": 1,
-      "labs": 1,
+      "contrasts": 3,
+      "studies": 2,
+      "labs": 2,
       "lab_names": [
+        "btbu_beijing",
         "ho_network"
       ],
       "peak_area_share": 1.0,
       "focal_share": 0.0,
       "matrices": [
+        "buffer",
         "water"
       ],
       "temperature_range_C": [
-        180.0,
+        132.0,
         180.0
       ],
       "rows": [
+        {
+          "source": "yang2012",
+          "contrast": "yang2012-13",
+          "lab": "btbu_beijing",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "gsh + cysteine",
+              "against": "gsh + cysteine + thiamine",
+              "y": 0.04275198042094991,
+              "v": 0.006269669725654501,
+              "censored": 0
+            }
+          ],
+          "focal": false,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": null,
+          "buffer_state": null
+        },
+        {
+          "source": "yang2012",
+          "contrast": "yang2012-14",
+          "lab": "btbu_beijing",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "gsh only (0.37 mmol)",
+              "against": "gsh + cysteine",
+              "y": 0.10763387839982946,
+              "v": 0.006269669725654501,
+              "censored": 0
+            }
+          ],
+          "focal": false,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": null,
+          "buffer_state": null
+        },
         {
           "source": "zhang1989",
           "contrast": "zhang1989-2",
@@ -28174,6 +28665,15 @@
             "labs": 1,
             "contrasts": 1,
             "reading": "too few laboratories"
+          },
+          "gsh + cysteine": {
+            "reading": "not connected"
+          },
+          "gsh + cysteine + thiamine": {
+            "reading": "not connected"
+          },
+          "gsh only (0.37 mmol)": {
+            "reading": "not connected"
           }
         },
         "reml_scales": [
@@ -28745,6 +29245,102 @@
             "new_lab_pi90": [
               -2.673723496500011,
               3.1741360991830687
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 0
+        },
+        "incidental_only": {
+          "contrasts": 0
+        },
+        "non_monotone_contrasts": 0
+      },
+      "reading": "too few laboratories",
+      "lolo": null,
+      "fragility": {
+        "contrasts_with_a_censored_arm": 0,
+        "contrasts_with_a_turning_point": 0,
+        "labs_with_a_turning_point": 0,
+        "flags": [],
+        "buffer": {
+          "buffered": 1,
+          "unbuffered": 0,
+          "unstated": 0
+        }
+      }
+    },
+    {
+      "compound": "Bis(2-furfuryl) disulfide",
+      "lever_class": "pH",
+      "band": "pH 4.5-6, initial or label",
+      "contrasts": 1,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "btbu_beijing"
+      ],
+      "peak_area_share": 1.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "buffer"
+      ],
+      "temperature_range_C": [
+        140.0,
+        140.0
+      ],
+      "rows": [
+        {
+          "source": "hou2017ph",
+          "contrast": "hou2017ph-23",
+          "lab": "btbu_beijing",
+          "y": 0.28219017264844265,
+          "v": 0.0006316954173395614,
+          "range": [
+            4.5,
+            5.5
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "buffered"
+        }
+      ],
+      "step": "+1 pH unit",
+      "fit": {
+        "estimate": 0.27482979513531164,
+        "ci90": [
+          -0.8269702043230776,
+          1.346999677105944
+        ],
+        "new_lab_pi90": [
+          -1.3101618249280702,
+          1.8298768686715792
+        ],
+        "p_same_sign_new_lab": 0.6639875559408172,
+        "new_lab_pi90_width": 3.1400386935996494,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.0
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": 0.28019630058152845,
+            "new_lab_pi90": [
+              -0.5256828525065639,
+              1.0776435753977511
+            ]
+          },
+          "1.0": {
+            "estimate": 0.2577706246502543,
+            "new_lab_pi90": [
+              -2.7060261813962208,
+              3.1397121760144016
             ]
           }
         },
@@ -29522,22 +30118,42 @@
       "compound": "Bis(2-methyl-3-furyl) disulfide",
       "lever_class": "pH",
       "band": "pH 6-7.5, initial or label",
-      "contrasts": 1,
-      "studies": 1,
-      "labs": 1,
+      "contrasts": 2,
+      "studies": 2,
+      "labs": 2,
       "lab_names": [
+        "btbu_beijing",
         "ho_network"
       ],
-      "peak_area_share": 0.0,
+      "peak_area_share": 0.5,
       "focal_share": 1.0,
       "matrices": [
+        "buffer",
         "water"
       ],
       "temperature_range_C": [
         120.0,
-        120.0
+        140.0
       ],
       "rows": [
+        {
+          "source": "hou2017ph",
+          "contrast": "hou2017ph-5",
+          "lab": "btbu_beijing",
+          "y": -0.9977106954348629,
+          "v": 0.00017385486586342117,
+          "range": [
+            5.5,
+            7.5
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "buffered"
+        },
         {
           "source": "zhou2023",
           "contrast": "zhou2023-3",
@@ -29559,36 +30175,36 @@
       ],
       "step": "+1 pH unit",
       "fit": {
-        "estimate": 0.22911868549524092,
+        "estimate": -0.37025484380997703,
         "ci90": [
-          -0.8698939844045273,
-          1.3031847261824432
+          -1.2863501128037274,
+          0.559592480820853
         ],
         "new_lab_pi90": [
-          -1.3531041138849036,
-          1.786181284358741
+          -1.9880655332938997,
+          1.2614954116004946
         ],
-        "p_same_sign_new_lab": 0.6413668660674667,
-        "new_lab_pi90_width": 3.1392853982436444,
+        "p_same_sign_new_lab": 0.6665511258968759,
+        "new_lab_pi90_width": 3.2495609448943945,
         "tau_study_fitted": false,
         "reml_scales": [
-          0.0,
-          0.0
+          0.37700741270170407,
+          0.7526741679588419
         ],
         "prior_dominated": true,
         "sensitivity": {
           "0.25": {
-            "estimate": 0.2335300438540286,
+            "estimate": -0.37624859614630823,
             "new_lab_pi90": [
-              -0.5710804935346996,
-              1.0311093680903365
+              -1.427187113373716,
+              0.6783722417637491
             ]
           },
           "1.0": {
-            "estimate": 0.21498183047252076,
+            "estimate": -0.35721272546493654,
             "new_lab_pi90": [
-              -2.7417433212962754,
-              3.103129254069946
+              -2.928355849588248,
+              2.2607458644124607
             ]
           }
         },
@@ -29603,7 +30219,7 @@
         "incidental_only": {
           "contrasts": 0
         },
-        "non_monotone_contrasts": 1
+        "non_monotone_contrasts": 2
       },
       "reading": "too few laboratories",
       "lolo": null,
@@ -29613,7 +30229,7 @@
         "labs_with_a_turning_point": 1,
         "flags": [],
         "buffer": {
-          "buffered": 0,
+          "buffered": 1,
           "unbuffered": 1,
           "unstated": 0
         }
@@ -32481,22 +33097,42 @@
       "compound": "Furfural",
       "lever_class": "pH",
       "band": "pH 6-7.5, initial or label",
-      "contrasts": 1,
-      "studies": 1,
-      "labs": 1,
+      "contrasts": 2,
+      "studies": 2,
+      "labs": 2,
       "lab_names": [
+        "btbu_beijing",
         "ho_network"
       ],
-      "peak_area_share": 0.0,
+      "peak_area_share": 0.5,
       "focal_share": 1.0,
       "matrices": [
+        "buffer",
         "water"
       ],
       "temperature_range_C": [
         120.0,
-        120.0
+        140.0
       ],
       "rows": [
+        {
+          "source": "hou2017ph",
+          "contrast": "hou2017ph-18",
+          "lab": "btbu_beijing",
+          "y": -0.4449413106268608,
+          "v": 2.5088333579487594e-05,
+          "range": [
+            4.5,
+            7.5
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "buffered"
+        },
         {
           "source": "kang2026",
           "contrast": "kang2026-15",
@@ -32518,36 +33154,36 @@
       ],
       "step": "+1 pH unit",
       "fit": {
-        "estimate": -0.17969288021717425,
+        "estimate": -0.3117692655351971,
         "ci90": [
-          -1.2563218180045153,
-          0.9165408899501055
+          -0.952274115935437,
+          0.3422074392825946
         ],
         "new_lab_pi90": [
-          -1.7393839606853536,
-          1.399793031909789
+          -1.4378445178687587,
+          0.8277917497100592
         ],
-        "p_same_sign_new_lab": 0.6150067803759561,
-        "new_lab_pi90_width": 3.139176992595143,
+        "p_same_sign_new_lab": 0.7362285512415124,
+        "new_lab_pi90_width": 2.265636267578818,
         "tau_study_fitted": false,
         "reml_scales": [
-          0.0,
-          0.0
+          0.09458791355652352,
+          0.15886509512405417
         ],
         "prior_dominated": true,
         "sensitivity": {
           "0.25": {
-            "estimate": -0.18314032468845504,
+            "estimate": -0.3138013237799256,
             "new_lab_pi90": [
-              -0.9813009436129795,
-              0.6206608197571718
+              -0.9575494616282904,
+              0.3337968358475258
             ]
           },
           "1.0": {
-            "estimate": -0.1686317024738914,
+            "estimate": -0.3066441007625412,
             "new_lab_pi90": [
-              -3.063835885399004,
-              2.7804339106923175
+              -2.3263204997772196,
+              1.7591702393632844
             ]
           }
         },
@@ -32572,7 +33208,7 @@
         "labs_with_a_turning_point": 0,
         "flags": [],
         "buffer": {
-          "buffered": 0,
+          "buffered": 1,
           "unbuffered": 1,
           "unstated": 0
         }
@@ -32938,22 +33574,70 @@
       "compound": "Furfural",
       "lever_class": "sulfur source",
       "band": "all",
-      "contrasts": 1,
-      "studies": 1,
-      "labs": 1,
+      "contrasts": 3,
+      "studies": 2,
+      "labs": 2,
       "lab_names": [
+        "btbu_beijing",
         "ho_network"
       ],
-      "peak_area_share": 0.0,
-      "focal_share": 0.0,
+      "peak_area_share": 0.6666666666666666,
+      "focal_share": 0.6666666666666666,
       "matrices": [
+        "buffer",
         "water"
       ],
       "temperature_range_C": [
         120.0,
-        120.0
+        132.0
       ],
       "rows": [
+        {
+          "source": "yang2012",
+          "contrast": "yang2012-7",
+          "lab": "btbu_beijing",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "gsh + cysteine",
+              "against": "gsh + cysteine + thiamine",
+              "y": 0.10481918306190119,
+              "v": 0.006269669725654501,
+              "censored": 0
+            }
+          ],
+          "focal": true,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": null,
+          "buffer_state": null
+        },
+        {
+          "source": "yang2012",
+          "contrast": "yang2012-8",
+          "lab": "btbu_beijing",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "gsh only (0.37 mmol)",
+              "against": "gsh + cysteine",
+              "y": 0.26399520033591806,
+              "v": 0.006269669725654501,
+              "censored": 0
+            }
+          ],
+          "focal": true,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": null,
+          "buffer_state": null
+        },
         {
           "source": "zhou2023c",
           "contrast": "zhou2023c-1",
@@ -33021,6 +33705,15 @@
             "labs": 1,
             "contrasts": 2,
             "reading": "too few laboratories"
+          },
+          "gsh + cysteine": {
+            "reading": "not connected"
+          },
+          "gsh + cysteine + thiamine": {
+            "reading": "not connected"
+          },
+          "gsh only (0.37 mmol)": {
+            "reading": "not connected"
           }
         },
         "reml_scales": [
@@ -37822,6 +38515,107 @@
         "buffer": {
           "buffered": 0,
           "unbuffered": 2,
+          "unstated": 0
+        }
+      }
+    },
+    {
+      "compound": "Nonanal",
+      "lever_class": "pH",
+      "band": "pH 6-7.5, initial or label",
+      "contrasts": 1,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "btbu_beijing"
+      ],
+      "peak_area_share": 1.0,
+      "focal_share": 0.0,
+      "matrices": [
+        "buffer"
+      ],
+      "temperature_range_C": [
+        140.0,
+        140.0
+      ],
+      "rows": [
+        {
+          "source": "hou2017ph",
+          "contrast": "hou2017ph-21",
+          "lab": "btbu_beijing",
+          "y": 0.25368317679760843,
+          "v": 2.42580261869332e-05,
+          "range": [
+            4.5,
+            7.5
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "buffered"
+        }
+      ],
+      "step": "+1 pH unit",
+      "fit": {
+        "estimate": 0.24733104780618564,
+        "ci90": [
+          -0.8526292819736172,
+          1.3201163859285412
+        ],
+        "new_lab_pi90": [
+          -1.3359618325393792,
+          1.8031817340701477
+        ],
+        "p_same_sign_new_lab": 0.6506072096662769,
+        "new_lab_pi90_width": 3.139143566609527,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.0
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": 0.2520685664694651,
+            "new_lab_pi90": [
+              -0.5527093249973314,
+              1.048929150232092
+            ]
+          },
+          "1.0": {
+            "estimate": 0.2320601470673399,
+            "new_lab_pi90": [
+              -2.7275715514621726,
+              3.117437553572589
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 0
+        },
+        "incidental_only": {
+          "contrasts": 1,
+          "estimate": 0.24733104780618564,
+          "ci90": [
+            -0.8526292819736172,
+            1.3201163859285412
+          ]
+        },
+        "non_monotone_contrasts": 0
+      },
+      "reading": "too few laboratories",
+      "lolo": null,
+      "fragility": {
+        "contrasts_with_a_censored_arm": 0,
+        "contrasts_with_a_turning_point": 0,
+        "labs_with_a_turning_point": 0,
+        "flags": [],
+        "buffer": {
+          "buffered": 1,
+          "unbuffered": 0,
           "unstated": 0
         }
       }
@@ -50319,16 +51113,17 @@
       "compound": "Trimethylpyrazine",
       "lever_class": "pH",
       "band": "pH 6-7.5, initial or label",
-      "contrasts": 2,
-      "studies": 2,
+      "contrasts": 3,
+      "studies": 3,
       "labs": 2,
       "lab_names": [
         "btbu_beijing",
         "ho_network"
       ],
-      "peak_area_share": 0.5,
-      "focal_share": 0.5,
+      "peak_area_share": 0.6666666666666666,
+      "focal_share": 0.3333333333333333,
       "matrices": [
+        "buffer",
         "water",
         "yeast extract (glutathione-enriched)"
       ],
@@ -50356,6 +51151,24 @@
           "buffer_state": "unbuffered"
         },
         {
+          "source": "hou2017ph",
+          "contrast": "hou2017ph-14",
+          "lab": "btbu_beijing",
+          "y": -0.2882557076275523,
+          "v": 6.707646110496983e-05,
+          "range": [
+            6.5,
+            7.5
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "buffered"
+        },
+        {
           "source": "raza2020",
           "contrast": "raza2020-28",
           "lab": "btbu_beijing",
@@ -50376,36 +51189,36 @@
       ],
       "step": "+1 pH unit",
       "fit": {
-        "estimate": -0.18984336983180136,
+        "estimate": -0.1788405604732616,
         "ci90": [
-          -0.9333901203501139,
-          0.557220128666067
+          -0.7822482918904528,
+          0.44514108791004275
         ],
         "new_lab_pi90": [
-          -1.4933328050250825,
-          1.117154875043811
+          -1.2914138314399657,
+          0.9505091207933783
         ],
-        "p_same_sign_new_lab": 0.622419513312257,
-        "new_lab_pi90_width": 2.6104876800688936,
+        "p_same_sign_new_lab": 0.6341973145006563,
+        "new_lab_pi90_width": 2.241922952233344,
         "tau_study_fitted": false,
         "reml_scales": [
-          0.11243458629672394,
-          0.37700741270170407
+          0.3171652579277238,
+          0.13364853627055825
         ],
         "prior_dominated": true,
         "sensitivity": {
           "0.25": {
-            "estimate": -0.18973504118861084,
+            "estimate": -0.18116651569044986,
             "new_lab_pi90": [
-              -0.9842281667170317,
-              0.6015958717749496
+              -0.8908061435235936,
+              0.537526416522826
             ]
           },
           "1.0": {
-            "estimate": -0.18644212001153085,
+            "estimate": -0.17533915027551114,
             "new_lab_pi90": [
-              -2.40431540027444,
-              2.054948464546336
+              -1.9573174701149987,
+              1.6389605956784912
             ]
           }
         },
@@ -50418,11 +51231,11 @@
           ]
         },
         "incidental_only": {
-          "contrasts": 1,
-          "estimate": 0.08377714304007797,
+          "contrasts": 2,
+          "estimate": -0.10042590195192957,
           "ci90": [
-            -1.0074125673296297,
-            1.1658985038232599
+            -0.7837290057278973,
+            0.5878661025447035
           ]
         },
         "non_monotone_contrasts": 0
@@ -50435,7 +51248,7 @@
         "labs_with_a_turning_point": 0,
         "flags": [],
         "buffer": {
-          "buffered": 0,
+          "buffered": 1,
           "unbuffered": 2,
           "unstated": 0
         }
@@ -53226,9 +54039,9 @@
     "artifact": "lever_table_development_only",
     "generated_on": "2026-11-13",
     "git": {
-      "commit": "3b569fd5ab195a53af395258985d70202afa1f03",
-      "short": "3b569fd5",
-      "branch": "lever-keying-a6",
+      "commit": "4cf0905223b064ceda8361a5be8ce2c033bfd654",
+      "short": "4cf09052",
+      "branch": "a6-batch2",
       "dirty": true
     },
     "generated_by": "scripts/generators/build_lever_table.py",
@@ -53254,8 +54067,16 @@
         "sha256": "b7b6f953251fddf900cea0706e65f7b1727a6769b11645aedf54d29ed51c3584"
       },
       {
+        "path": "docs/reference/lever_table/contrasts/arsa2021.yml",
+        "sha256": "2dfd4671f5ddb283abf97ad282da1e2a74ebd9167ec97c4a56376aaba484805c"
+      },
+      {
         "path": "docs/reference/lever_table/contrasts/balagiannis2009__families.yml",
         "sha256": "08090421c50731d84a4d045118296e48d39272ea1fc5c659bd595a59abc18992"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/bemisyoung1993.yml",
+        "sha256": "3ec9e590ae1e3560da43e44acb78b97a7713cb7dc268c3a4ec02894cbaa8e7da"
       },
       {
         "path": "docs/reference/lever_table/contrasts/blank1997__families.yml",
@@ -53268,6 +54089,10 @@
       {
         "path": "docs/reference/lever_table/contrasts/boonbumrung2023__families.yml",
         "sha256": "301e3f663bb2575eee0bf9ed4a7bf40813da1d7b4f17a90ff168d8def628c6b4"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/braggins1996.yml",
+        "sha256": "de18c35437903274f4fed2c8f4741ec8eb09b2283b06818fb84e4256e1db8fce"
       },
       {
         "path": "docs/reference/lever_table/contrasts/cerny2007.yml",
@@ -53334,6 +54159,10 @@
         "sha256": "9914b6a6d289e6790d0d46a4b8ef2ac4dd6a19278a50d92bf00a894d17637b99"
       },
       {
+        "path": "docs/reference/lever_table/contrasts/du2024c.yml",
+        "sha256": "e13d1714e4e6451d818135cd256da7daacfdefb20ad32b1d8ae4116d347e1c49"
+      },
+      {
         "path": "docs/reference/lever_table/contrasts/du2025__families.yml",
         "sha256": "012ca89304ae5642aa9d645f54ea80456023e221ca73d4db3904343dc54d6784"
       },
@@ -53360,6 +54189,10 @@
       {
         "path": "docs/reference/lever_table/contrasts/feng2022.yml",
         "sha256": "7122d8df4eccb64a96f7c853e2371f3f19f7483b6ce78c87cc40d49627120877"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/gou2025.yml",
+        "sha256": "f4c5a953470695d14904de98421365a63297fac5fa19ded827548fe98773aa17"
       },
       {
         "path": "docs/reference/lever_table/contrasts/granvogl2006__families.yml",
@@ -53418,6 +54251,18 @@
         "sha256": "3a6e5a8c51bed9c05fbd1f4a2fbfaf369d5f291db2d105873dbb3365e597b7b3"
       },
       {
+        "path": "docs/reference/lever_table/contrasts/hou2017ph.yml",
+        "sha256": "e012376e2b730d688380ffbc89a282ef40d6dee9c7bae197c97ff92b8fcca832"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/huang2010.yml",
+        "sha256": "8cb9e381781c61a8e4d5e267ec183f31b01a19885215630800ad561113147965"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/huang2011.yml",
+        "sha256": "43e9e89e218ff060255d8d1fb3075455d14eaeae040106f904510c1e0e7b5077"
+      },
+      {
         "path": "docs/reference/lever_table/contrasts/hwang1995__families.yml",
         "sha256": "56186a354b7a2664d806cc7d4112a7f746d49f37136dfc84416d3966c57fcc4b"
       },
@@ -53430,12 +54275,20 @@
         "sha256": "2a0673a32daf975b233cd375c275aad8715c75d9dfb1368e5853f2f21e1a078a"
       },
       {
+        "path": "docs/reference/lever_table/contrasts/kim2008.yml",
+        "sha256": "cefa0fcf9e3586b9ed5f52570a54d5a26154aec2724d32467e618159e6fa4558"
+      },
+      {
         "path": "docs/reference/lever_table/contrasts/kobayasi1965.yml",
         "sha256": "e9eca2f0073ed90b413b314d15eff84bc18c1ff65d3253eedc40440e5946617e"
       },
       {
         "path": "docs/reference/lever_table/contrasts/kumazawa2003.yml",
         "sha256": "d70f831f68f08d2f079083436cfe2ee8232f6c9f36c9722f0de6a8f0d8039471"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/laemont2023.yml",
+        "sha256": "4eee53012f0138ea216f58a0d59535e19e18bdf661c0014476bb618ef70ed4a4"
       },
       {
         "path": "docs/reference/lever_table/contrasts/leahy1989__families.yml",
@@ -53468,6 +54321,10 @@
       {
         "path": "docs/reference/lever_table/contrasts/li2022heat__families.yml",
         "sha256": "f9ba2c53a8aea2f6a64e2dabf4c52e0efb8349aca444e853b5809c888ec24717"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/lotfy2021.yml",
+        "sha256": "99228e5cf73003d2fa3e9c90df9b5f4cfb8c81047876e10fc3808608f46901ec"
       },
       {
         "path": "docs/reference/lever_table/contrasts/madruga1995.yml",
@@ -53606,6 +54463,10 @@
         "sha256": "0ab75b3b0d25c98c1f98848835bc945148d36b868e6132d4b43f66781b399a4a"
       },
       {
+        "path": "docs/reference/lever_table/contrasts/vanba2013.yml",
+        "sha256": "d7ac7dfa9d6988ec72595ed2b356cb26f297f94c95da1aad5a828adab804294a"
+      },
+      {
         "path": "docs/reference/lever_table/contrasts/vanlancker2010__families.yml",
         "sha256": "ed48dbd0b0ffe57c042d86b50bc7e9dda705937f0d74ba39b64cecab8e41327e"
       },
@@ -53660,6 +54521,10 @@
       {
         "path": "docs/reference/lever_table/contrasts/yang2011.yml",
         "sha256": "ec2924a6cfba409225827589c23e85e527bb2d3496381ced8129a0ab7a3f335a"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/yang2012.yml",
+        "sha256": "845f62b285032f79a4432c669daee70ab8f4ae43ca2a9efe9a4ce8ecf921ccb5"
       },
       {
         "path": "docs/reference/lever_table/contrasts/yiltirak2026__families.yml",
