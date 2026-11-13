@@ -1,0 +1,76 @@
+source: martin2001
+reader: resolved
+pdf: data/articles/martin2001.pdf
+fields:
+- F3
+arms:
+  W:
+    present:
+    - potato slices (sugars and amino acids removed by water/ethanol soaking)
+    - palmolein (frying oil)
+  L:
+    present:
+    - potato slices (sugars and amino acids removed by water/ethanol soaking)
+    - leucine
+    - palmolein (frying oil)
+  I:
+    present:
+    - potato slices (sugars and amino acids removed by water/ethanol soaking)
+    - isoleucine
+    - palmolein (frying oil)
+  P:
+    present:
+    - potato slices (sugars and amino acids removed by water/ethanol soaking)
+    - phenylalanine
+    - palmolein (frying oil)
+  M:
+    present:
+    - potato slices (sugars and amino acids removed by water/ethanol soaking)
+    - methionine
+    - palmolein (frying oil)
+  G:
+    present:
+    - potato slices (sugars and amino acids removed by water/ethanol soaking)
+    - glucose
+    - palmolein (frying oil)
+  GL:
+    present:
+    - potato slices (sugars and amino acids removed by water/ethanol soaking)
+    - glucose
+    - leucine
+    - palmolein (frying oil)
+  GI:
+    present:
+    - potato slices (sugars and amino acids removed by water/ethanol soaking)
+    - glucose
+    - isoleucine
+    - palmolein (frying oil)
+  GP:
+    present:
+    - potato slices (sugars and amino acids removed by water/ethanol soaking)
+    - glucose
+    - phenylalanine
+    - palmolein (frying oil)
+  GM:
+    present:
+    - potato slices (sugars and amino acids removed by water/ethanol soaking)
+    - glucose
+    - methionine
+    - palmolein (frying oil)
+  GA:
+    present:
+    - potato slices (sugars and amino acids removed by water/ethanol soaking)
+    - glucose
+    - asparagine
+    - palmolein (frying oil)
+  GGn:
+    present:
+    - potato slices (sugars and amino acids removed by water/ethanol soaking)
+    - glucose
+    - glutamine
+    - palmolein (frying oil)
+notes: 'Resolved 2026-11-13: readers a and b agree on every checked field (F1 exact, F2 within 0.1, F3 on compound classes;
+  scripts/tools/compare_field_checks.py); values and names from reader a. Table 2 (composition and codes): W = blank, steeped
+  in water only; infused components per x-marks. Pot is the soaked potato slice (residual composition after leaching not printed;
+  glucose removal checked to <~0.1 mg/mL) deep-fried in palmolein at 180 C. Whether the frying oil counts as a reactant or
+  a medium is left to the resolver. Contrast file: contrasts/martin2001__families.yml.'

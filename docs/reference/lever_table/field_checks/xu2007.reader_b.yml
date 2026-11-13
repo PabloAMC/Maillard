@@ -1,0 +1,26 @@
+source: xu2007
+reader: b
+pdf: data/articles/xu2007.pdf
+fields: [F1, F2]
+ph_control: buffered
+ph_control_overrides: {}
+arms:
+  "Contr., initial pH 5.6 (final pH 5.5)":
+    final_ph: 5.5
+    final_ph_location: "Table 1, header row 'Final pH', p. 332"
+  "Contr., initial pH 7.0 (final pH 6.2)":
+    final_ph: 6.2
+    final_ph_location: "Table 1, header row 'Final pH', p. 332"
+  "Contr., initial pH 8.0 (final pH 6.8)":
+    final_ph: 6.8
+    final_ph_location: "Table 1, header row 'Final pH', p. 332"
+  "SC-CO2, initial pH 5.6 (final pH 5.5)":
+    final_ph: 5.5
+    final_ph_location: "Table 1, header row 'Final pH', p. 332"
+  "SC-CO2, initial pH 7.0 (final pH 6.0)":
+    final_ph: 6.0
+    final_ph_location: "Table 1, header row 'Final pH', p. 332"
+  "SC-CO2, initial pH 8.0 (final pH 6.3)":
+    final_ph: 6.3
+    final_ph_location: "Table 1, header row 'Final pH', p. 332"
+notes: "Both xu2007.yml and xu2007__families.yml (xu2007-1, -2) use the same six labels. 0.2 mol/L 'phosphate' buffer made from sodium pyrophosphate dibasic + tetrabasic; after dissolving reactants the slight pH drop was re-adjusted with 0.2 mol/L sodium pyrophosphate tetrabasic, then made up with buffer of the same pH (Methods)."

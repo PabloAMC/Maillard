@@ -1,0 +1,20 @@
+source: hincelin1992
+reader: resolved
+pdf: data/articles/hincelin1992.pdf
+fields:
+- F3
+arms:
+  Thiamine:
+    present:
+    - thiamine hydrochloride
+  Xylose/thiamine:
+    present:
+    - thiamine hydrochloride
+    - xylose
+  Xylose:
+    present:
+    - xylose
+notes: 'Resolved 2026-11-13: readers a and b agree on every checked field (F1 exact, F2 within 0.1, F3 on compound classes;
+  scripts/tools/compare_field_checks.py); values and names from reader a. Methods: thiamine HCl 0.05 mol + xylose 1 mol in
+  250 ml distilled water, pH held at 7 with ~71 ml 3 M NaOH; isolates also prepared from only thiamine HCl and only xylose
+  solutions.'

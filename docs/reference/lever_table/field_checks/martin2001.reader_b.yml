@@ -1,0 +1,30 @@
+source: martin2001
+reader: b
+pdf: data/articles/martin2001.pdf
+fields: [F3]
+arms:
+  "W":
+    present: [potato slices (sugars and amino acids removed), palmolein (frying oil)]
+  "L":
+    present: [potato slices (sugars and amino acids removed), leucine, palmolein (frying oil)]
+  "I":
+    present: [potato slices (sugars and amino acids removed), isoleucine, palmolein (frying oil)]
+  "P":
+    present: [potato slices (sugars and amino acids removed), phenylalanine, palmolein (frying oil)]
+  "M":
+    present: [potato slices (sugars and amino acids removed), methionine, palmolein (frying oil)]
+  "G":
+    present: [potato slices (sugars and amino acids removed), glucose, palmolein (frying oil)]
+  "GL":
+    present: [potato slices (sugars and amino acids removed), glucose, leucine, palmolein (frying oil)]
+  "GI":
+    present: [potato slices (sugars and amino acids removed), glucose, isoleucine, palmolein (frying oil)]
+  "GP":
+    present: [potato slices (sugars and amino acids removed), glucose, phenylalanine, palmolein (frying oil)]
+  "GM":
+    present: [potato slices (sugars and amino acids removed), glucose, methionine, palmolein (frying oil)]
+  "GA":
+    present: [potato slices (sugars and amino acids removed), glucose, asparagine, palmolein (frying oil)]
+  "GGn":
+    present: [potato slices (sugars and amino acids removed), glucose, glutamine, palmolein (frying oil)]
+notes: "Table 2 composition codes; W = blank, steeped in water only. Slices were leached (water 60 C, 50% ethanol 45 C); glucose below strip detection limit (~0.5 mM), residual fructose/amino acids not measured. Palmolein is the frying medium; listed because slices absorb it, drop it if the resolver treats it as solvent."

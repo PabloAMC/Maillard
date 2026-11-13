@@ -1,0 +1,20 @@
+source: hofmann2000
+reader: a
+pdf: data/articles/hofmann2000.pdf
+fields: [F1, F2]
+ph_control: unstated
+ph_control_overrides: {}
+arms:
+  "pH 3":
+    final_ph: null
+    final_ph_location: "not printed (Figs. 4 and 5, p. 437 plot nominal pH only)"
+  "pH 5":
+    final_ph: null
+    final_ph_location: "not printed (Figs. 4 and 5, p. 437 plot nominal pH only)"
+  "pH 7":
+    final_ph: null
+    final_ph_location: "not printed (Figs. 4 and 5, p. 437 plot nominal pH only)"
+  "pH 9":
+    final_ph: null
+    final_ph_location: "not printed (Figs. 4 and 5, p. 437 plot nominal pH only)"
+notes: "pH contrasts hofmann2000-9..13 (Fig. 4). Methods describe only phosphate buffer at pH 7.0 (given as 0.5 mmol/L in Methods, 0.5 mol/L or 0.1 mol/L in table footnotes); how pH 3, 5 and 9 were set (buffer or titration) is not stated anywhere, so F1 keyed unstated; a reader assuming the same phosphate buffer would key buffered."

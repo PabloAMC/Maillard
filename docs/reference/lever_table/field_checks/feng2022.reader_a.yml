@@ -1,0 +1,14 @@
+source: feng2022
+reader: a
+pdf: data/articles/feng2022.pdf
+fields: [F3]
+arms:
+  "ARP-120 C, 120 min":
+    present: ["RG-ARP (purified ribose-glutathione Amadori rearrangement product)"]
+  "ARP-100 C, 120 min":
+    present: ["RG-ARP (purified ribose-glutathione Amadori rearrangement product)"]
+  "ARP + GSH-120 C, 120 min":
+    present: ["RG-ARP (purified ribose-glutathione Amadori rearrangement product)", "GSH"]
+  "ARP + GSH-100 C, 120 min":
+    present: ["RG-ARP (purified ribose-glutathione Amadori rearrangement product)", "GSH"]
+notes: "Methods, 'Model Maillard Reaction of the RG-ARP': RG-ARP 20 mmol/L with or without GSH 20 mmol/L, pH set with NaOH, no buffer named. RG-ARP was purified (preparative HPLC, lyophilised), so no free ribose is stated as present."

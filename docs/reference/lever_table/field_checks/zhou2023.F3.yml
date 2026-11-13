@@ -1,0 +1,31 @@
+source: zhou2023
+reader: resolved
+pdf: data/articles/Zhou2023b.pdf
+fields:
+- F3
+arms:
+  pH 6 ARP:
+    present:
+    - ARP (purified N-(1-deoxy-D-xylulos-1-yl)-alanine)
+  pH 6 ARP + Cys:
+    present:
+    - ARP (purified N-(1-deoxy-D-xylulos-1-yl)-alanine)
+    - Cys (L-cysteine)
+  pH 7 ARP:
+    present:
+    - ARP (purified N-(1-deoxy-D-xylulos-1-yl)-alanine)
+  pH 7 ARP + Cys:
+    present:
+    - ARP (purified N-(1-deoxy-D-xylulos-1-yl)-alanine)
+    - Cys (L-cysteine)
+  pH 8 ARP:
+    present:
+    - ARP (purified N-(1-deoxy-D-xylulos-1-yl)-alanine)
+  pH 8 ARP + Cys:
+    present:
+    - ARP (purified N-(1-deoxy-D-xylulos-1-yl)-alanine)
+    - Cys (L-cysteine)
+notes: 'Resolved 2026-11-13: readers a and b agree on every checked field (F1 exact, F2 within 0.1, F3 on compound classes;
+  scripts/tools/compare_field_checks.py); values and names from reader a. F3 only (pH fields are another reader''s file).
+  Methods: aqueous ARP 20 mmol/L with or without added Cys 20 mmol/L; ARP purified from the alanine-xylose reaction, so no
+  free xylose or alanine stated as added.'

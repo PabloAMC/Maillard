@@ -1,0 +1,18 @@
+source: zhou2023
+reader: b
+pdf: data/articles/Zhou2023b.pdf
+fields: [F3]
+arms:
+  "pH 6 ARP":
+    present: [ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine)]
+  "pH 6 ARP + Cys":
+    present: [ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine), Cys]
+  "pH 7 ARP":
+    present: [ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine)]
+  "pH 7 ARP + Cys":
+    present: [ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine), Cys]
+  "pH 8 ARP":
+    present: [ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine)]
+  "pH 8 ARP + Cys":
+    present: [ARP (N-(1-deoxy-D-xylulos-1-yl)-alanine), Cys]
+notes: "F3 only (pH fields in the other reader-b file). Heat Treatment section: aqueous ARP 20 mmol/L with or without added Cys 20 mmol/L, pH set with 3 mol/L NaOH (not listed)."

@@ -1,0 +1,12 @@
+source: hincelin1992
+reader: b
+pdf: data/articles/hincelin1992.pdf
+fields: [F3]
+arms:
+  "Thiamine":
+    present: [thiamine hydrochloride]
+  "Xylose/thiamine":
+    present: [thiamine hydrochloride, xylose]
+  "Xylose":
+    present: [xylose]
+notes: "Methods: thiamine HCl 0.05 mol and xylose 1 mol in 250 ml water; single-component isolates 'using only thiamine hydrochloride and only xylose solutions'. NaOH used to hold pH 7 not listed."

@@ -1,0 +1,32 @@
+source: zhou2023
+reader: resolved
+pdf: data/articles/Zhou2023b.pdf
+fields:
+- F1
+- F2
+ph_control: adjusted_unbuffered
+ph_control_overrides: {}
+arms:
+  pH 6 ARP + Cys:
+    final_ph: 3.2
+    final_ph_location: Figure 2, p. 2476, ARP+Cys / initial pH 6 bar, digitised
+  pH 7 ARP + Cys:
+    final_ph: 3.4
+    final_ph_location: Figure 2, p. 2476, ARP+Cys / initial pH 7 bar, digitised
+  pH 8 ARP + Cys:
+    final_ph: 5.0
+    final_ph_location: Figure 2, p. 2476, ARP+Cys / initial pH 8 bar, digitised
+  pH 6 ARP:
+    final_ph: 4.0
+    final_ph_location: Figure 2, p. 2476, ARP / initial pH 6 bar, digitised
+  pH 7 ARP:
+    final_ph: 4.1
+    final_ph_location: Figure 2, p. 2476, ARP / initial pH 7 bar, digitised
+  pH 8 ARP:
+    final_ph: 4.9
+    final_ph_location: Figure 2, p. 2476, ARP / initial pH 8 bar, digitised
+notes: 'Resolved 2026-11-13: readers a and b agree on every checked field (F1 exact, F2 within 0.1, F3 on compound classes;
+  scripts/tools/compare_field_checks.py); values and names from reader a. Only zhou2023.yml exists (no zhou2023__* file).
+  Aqueous ARP (20 mmol/L) +/- Cys (20 mmol/L), pH adjusted to 6/7/8 with 3 mol/L NaOH, no buffer (Methods p. 2473). Final
+  pH read off the Fig. 2 bar chart (axis 0-6, 120 C 60 min) at ~500 dpi, bar tops +/-0.05; the SI (zhou2023b_supporting.pdf)
+  prints no pH.'

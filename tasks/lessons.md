@@ -612,3 +612,12 @@ have no null answer): counting it as a difference of 0 pulls the mean to zero an
 - **Rule:** a generator whose output is frozen evidence (a scoring look, a pre-registered result) is read-only. Reuse
   it by import, or copy the function into the new generator with a note. Before marking ready a PR that touches any
   `scripts/generators/` file, run `artifact_freshness_gate.py --skip-regenerate` locally (one minute).
+
+## Contrast ids are unique per resolved FILE, not per source (2026-11-13)
+- **What happened:** the step-8 field audit indexed contrasts by `(source, id)`. 85 such keys repeat, because a
+  source's `<source>.yml` and `<source>__families.yml` both number from `<source>-1`. So xu2007's FFT observation was
+  paired with the other file's arms, and its final-pH slope came out with the opposite sign. Step 5a had already met
+  this and built observations one contrast at a time.
+- **Rule:** never key a contrast by `(source, id)`. Carry the contrast dict alongside its observation (build
+  observations one resolved file or one contrast at a time). Any new keyed-data tool asserts that its per-observation
+  slope equals the lever table's, as step 5a's `run_points` check does.

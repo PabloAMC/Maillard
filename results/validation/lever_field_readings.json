@@ -1,0 +1,1689 @@
+{
+  "artifact": "lever_field_readings",
+  "status": "audit on sources already read; no reading of the lever table moves; PREREG A6 rules are scored only on sources keyed after the A6 commit",
+  "spec": "docs/reference/lever_table/STEP8_FIELDS_SPEC.md",
+  "checked_sources": [
+    "Zhang2024",
+    "ames2001b",
+    "feng2022",
+    "grosch1992",
+    "hincelin1992",
+    "hofmann2000",
+    "hwang1995",
+    "martin2001",
+    "mottram2002",
+    "park2022mealworm",
+    "shibamoto1977",
+    "wei2019flax",
+    "xu2007",
+    "zhang2018soypep",
+    "zhou2023",
+    "zhou2023c"
+  ],
+  "coverage": {
+    "ph_contrasts": 306,
+    "ph_control": {
+      "adjusted_unbuffered": 153,
+      "buffered": 148,
+      "unstated": 5
+    },
+    "ph_control_source": {
+      "check": 69,
+      "derived": 237
+    },
+    "final_all_arms": 63,
+    "final_delta_ge_min": 59,
+    "categorical_pairs": 1949,
+    "pairs_base_mismatch": 7,
+    "base_source": {
+      "check": 498,
+      "derived": 2633
+    }
+  },
+  "ph_cells": [
+    {
+      "compound": "2-Acetylthiazole",
+      "band": "pH 6-7.5, initial or label",
+      "watched": null,
+      "contrasts": 4,
+      "labs": 2,
+      "ph_control": {
+        "buffered": 4
+      },
+      "free_text_buffer_state": {
+        "buffered": 4
+      },
+      "main_reading": "too few laboratories",
+      "main_flags": [],
+      "free_text_buffered_only": {
+        "reading": "too few laboratories",
+        "labs": 2,
+        "contrasts": 4
+      },
+      "R1_same_set_as_free_text": true,
+      "R1": {
+        "buffered": {
+          "reading": "too few laboratories",
+          "labs": 2,
+          "contrasts": 4
+        },
+        "unbuffered": {
+          "reading": "too few laboratories",
+          "labs": 0,
+          "contrasts": 0
+        }
+      },
+      "R2": {
+        "contrasts_on_final_ph": 2,
+        "reading": {
+          "reading": "too few laboratories",
+          "labs": 2,
+          "contrasts": 4
+        },
+        "per_contrast": [
+          {
+            "source": "xu2007",
+            "contrast": "xu2007-1",
+            "lab": "cau_gao_yanxiang",
+            "initial_range": [
+              5.6,
+              8.0
+            ],
+            "final_ph": [
+              5.5,
+              6.2,
+              6.8
+            ],
+            "y_keyed": 0.17298421047640433,
+            "y_final": 0.31915266473791737
+          },
+          {
+            "source": "xu2007",
+            "contrast": "xu2007-2",
+            "lab": "cau_gao_yanxiang",
+            "initial_range": [
+              5.6,
+              8.0
+            ],
+            "final_ph": [
+              5.5,
+              6.0,
+              6.3
+            ],
+            "y_keyed": 0.1630995833434135,
+            "y_final": 0.49520485026210637
+          }
+        ]
+      },
+      "changes": []
+    },
+    {
+      "compound": "2-Furfurylthiol (FFT)",
+      "band": "pH 4.5-6, initial or label",
+      "watched": null,
+      "contrasts": 5,
+      "labs": 4,
+      "ph_control": {
+        "buffered": 4,
+        "adjusted_unbuffered": 1
+      },
+      "free_text_buffer_state": {
+        "buffered": 4,
+        "unbuffered": 1
+      },
+      "main_reading": "direction unclear",
+      "main_flags": [],
+      "free_text_buffered_only": {
+        "reading": "direction unclear",
+        "labs": 3,
+        "contrasts": 4,
+        "estimate": -0.1949957021790182,
+        "ci90": [
+          -0.5992146778461528,
+          0.2052798201648614
+        ]
+      },
+      "R1_same_set_as_free_text": true,
+      "R1": {
+        "buffered": {
+          "reading": "direction unclear",
+          "labs": 3,
+          "contrasts": 4,
+          "estimate": -0.1949957021790182,
+          "ci90": [
+            -0.5992146778461528,
+            0.2052798201648614
+          ]
+        },
+        "unbuffered": {
+          "reading": "too few laboratories",
+          "labs": 1,
+          "contrasts": 1
+        }
+      },
+      "R2": {
+        "contrasts_on_final_ph": 0,
+        "reading": null,
+        "per_contrast": []
+      },
+      "changes": [
+        "R1 unbuffered band: too few laboratories"
+      ]
+    },
+    {
+      "compound": "2-Furfurylthiol (FFT)",
+      "band": "pH 6-7.5, initial or label",
+      "watched": "answered, fragile",
+      "contrasts": 5,
+      "labs": 3,
+      "ph_control": {
+        "buffered": 4,
+        "adjusted_unbuffered": 1
+      },
+      "free_text_buffer_state": {
+        "buffered": 4,
+        "unbuffered": 1
+      },
+      "main_reading": "answered by the literature",
+      "main_flags": [
+        "buffered studies only: too few laboratories"
+      ],
+      "free_text_buffered_only": {
+        "reading": "too few laboratories",
+        "labs": 2,
+        "contrasts": 4
+      },
+      "R1_same_set_as_free_text": true,
+      "R1": {
+        "buffered": {
+          "reading": "too few laboratories",
+          "labs": 2,
+          "contrasts": 4
+        },
+        "unbuffered": {
+          "reading": "too few laboratories",
+          "labs": 1,
+          "contrasts": 1
+        }
+      },
+      "R2": {
+        "contrasts_on_final_ph": 3,
+        "reading": {
+          "reading": "answered by the literature",
+          "labs": 3,
+          "contrasts": 5,
+          "estimate": -1.0783748707543441,
+          "ci90": [
+            -1.702208773395001,
+            -0.40296159598422776
+          ]
+        },
+        "per_contrast": [
+          {
+            "source": "xu2007",
+            "contrast": "xu2007-3",
+            "lab": "cau_gao_yanxiang",
+            "initial_range": [
+              5.6,
+              8.0
+            ],
+            "final_ph": [
+              5.5,
+              6.2,
+              6.8
+            ],
+            "y_keyed": -1.0890563266350086,
+            "y_final": -1.9677934455568329
+          },
+          {
+            "source": "xu2007",
+            "contrast": "xu2007-4",
+            "lab": "cau_gao_yanxiang",
+            "initial_range": [
+              5.6,
+              8.0
+            ],
+            "final_ph": [
+              5.5,
+              6.0,
+              6.3
+            ],
+            "y_keyed": -0.45821643699680675,
+            "y_final": -1.336142847692315
+          },
+          {
+            "source": "zhou2023",
+            "contrast": "zhou2023-2",
+            "lab": "ho_network",
+            "initial_range": [
+              6.0,
+              8.0
+            ],
+            "final_ph": [
+              3.2,
+              3.4,
+              5.0
+            ],
+            "y_keyed": -0.11432916408841304,
+            "y_final": -0.2214768488741606
+          }
+        ]
+      },
+      "changes": [
+        "R1 buffered band: too few laboratories",
+        "R1 unbuffered band: too few laboratories"
+      ]
+    },
+    {
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "band": "pH 4.5-6, initial or label",
+      "watched": "sign changes inside one laboratory",
+      "contrasts": 3,
+      "labs": 2,
+      "ph_control": {
+        "buffered": 3
+      },
+      "free_text_buffer_state": {
+        "buffered": 3
+      },
+      "main_reading": "too few laboratories",
+      "main_flags": [],
+      "free_text_buffered_only": {
+        "reading": "too few laboratories",
+        "labs": 2,
+        "contrasts": 3
+      },
+      "R1_same_set_as_free_text": true,
+      "R1": {
+        "buffered": {
+          "reading": "too few laboratories",
+          "labs": 2,
+          "contrasts": 3
+        },
+        "unbuffered": {
+          "reading": "too few laboratories",
+          "labs": 0,
+          "contrasts": 0
+        }
+      },
+      "R2": {
+        "contrasts_on_final_ph": 0,
+        "reading": null,
+        "per_contrast": []
+      },
+      "changes": []
+    },
+    {
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "band": "pH 6-7.5, initial or label",
+      "watched": "conflict between laboratories",
+      "contrasts": 3,
+      "labs": 2,
+      "ph_control": {
+        "buffered": 2,
+        "adjusted_unbuffered": 1
+      },
+      "free_text_buffer_state": {
+        "buffered": 2,
+        "unbuffered": 1
+      },
+      "main_reading": "too few laboratories",
+      "main_flags": [],
+      "free_text_buffered_only": {
+        "reading": "too few laboratories",
+        "labs": 1,
+        "contrasts": 2
+      },
+      "R1_same_set_as_free_text": true,
+      "R1": {
+        "buffered": {
+          "reading": "too few laboratories",
+          "labs": 1,
+          "contrasts": 2
+        },
+        "unbuffered": {
+          "reading": "too few laboratories",
+          "labs": 1,
+          "contrasts": 1
+        }
+      },
+      "R2": {
+        "contrasts_on_final_ph": 2,
+        "reading": {
+          "reading": "too few laboratories",
+          "labs": 2,
+          "contrasts": 3
+        },
+        "per_contrast": [
+          {
+            "source": "xu2007",
+            "contrast": "xu2007-1",
+            "lab": "cau_gao_yanxiang",
+            "initial_range": [
+              5.6,
+              8.0
+            ],
+            "final_ph": [
+              5.5,
+              6.2,
+              6.8
+            ],
+            "y_keyed": -0.9629681466121985,
+            "y_final": -1.8084961370157953
+          },
+          {
+            "source": "xu2007",
+            "contrast": "xu2007-2",
+            "lab": "cau_gao_yanxiang",
+            "initial_range": [
+              5.6,
+              8.0
+            ],
+            "final_ph": [
+              5.5,
+              6.0,
+              6.3
+            ],
+            "y_keyed": -0.2739711357181772,
+            "y_final": -0.7976637273136841
+          },
+          {
+            "source": "zhou2023",
+            "contrast": "zhou2023-1",
+            "lab": "ho_network",
+            "initial_range": [
+              6.0,
+              7.0
+            ],
+            "final_ph": [
+              3.2,
+              3.4,
+              5.0
+            ],
+            "y_keyed": 0.3577798095364914,
+            "y_final": null
+          }
+        ]
+      },
+      "changes": []
+    },
+    {
+      "compound": "2-Methylpyrazine",
+      "band": "pH 6-7.5, initial or label",
+      "watched": null,
+      "contrasts": 2,
+      "labs": 2,
+      "ph_control": {
+        "buffered": 2
+      },
+      "free_text_buffer_state": {
+        "buffered": 2
+      },
+      "main_reading": "too few laboratories",
+      "main_flags": [],
+      "free_text_buffered_only": {
+        "reading": "too few laboratories",
+        "labs": 2,
+        "contrasts": 2
+      },
+      "R1_same_set_as_free_text": true,
+      "R1": {
+        "buffered": {
+          "reading": "too few laboratories",
+          "labs": 2,
+          "contrasts": 2
+        },
+        "unbuffered": {
+          "reading": "too few laboratories",
+          "labs": 0,
+          "contrasts": 0
+        }
+      },
+      "R2": {
+        "contrasts_on_final_ph": 1,
+        "reading": {
+          "reading": "too few laboratories",
+          "labs": 2,
+          "contrasts": 2
+        },
+        "per_contrast": [
+          {
+            "source": "xu2007",
+            "contrast": "xu2007-3",
+            "lab": "cau_gao_yanxiang",
+            "initial_range": [
+              5.6,
+              8.0
+            ],
+            "final_ph": [
+              5.5,
+              6.2,
+              6.8
+            ],
+            "y_keyed": 0.34632270989518,
+            "y_final": 0.6361200384425857
+          }
+        ]
+      },
+      "changes": []
+    },
+    {
+      "compound": "2-Methylpyrazine",
+      "band": "pH >7.5, initial or label",
+      "watched": null,
+      "contrasts": 3,
+      "labs": 2,
+      "ph_control": {
+        "buffered": 1,
+        "adjusted_unbuffered": 2
+      },
+      "free_text_buffer_state": {
+        "buffered": 1,
+        "unbuffered": 2
+      },
+      "main_reading": "too few laboratories",
+      "main_flags": [],
+      "free_text_buffered_only": {
+        "reading": "too few laboratories",
+        "labs": 1,
+        "contrasts": 1
+      },
+      "R1_same_set_as_free_text": true,
+      "R1": {
+        "buffered": {
+          "reading": "too few laboratories",
+          "labs": 1,
+          "contrasts": 1
+        },
+        "unbuffered": {
+          "reading": "too few laboratories",
+          "labs": 1,
+          "contrasts": 2
+        }
+      },
+      "R2": {
+        "contrasts_on_final_ph": 0,
+        "reading": null,
+        "per_contrast": []
+      },
+      "changes": []
+    },
+    {
+      "compound": "Bis(2-methyl-3-furyl) disulfide",
+      "band": "pH 6-7.5, initial or label",
+      "watched": "conflict between laboratories",
+      "contrasts": 3,
+      "labs": 2,
+      "ph_control": {
+        "buffered": 2,
+        "adjusted_unbuffered": 1
+      },
+      "free_text_buffer_state": {
+        "buffered": 2,
+        "unbuffered": 1
+      },
+      "main_reading": "too few laboratories",
+      "main_flags": [],
+      "free_text_buffered_only": {
+        "reading": "too few laboratories",
+        "labs": 1,
+        "contrasts": 2
+      },
+      "R1_same_set_as_free_text": true,
+      "R1": {
+        "buffered": {
+          "reading": "too few laboratories",
+          "labs": 1,
+          "contrasts": 2
+        },
+        "unbuffered": {
+          "reading": "too few laboratories",
+          "labs": 1,
+          "contrasts": 1
+        }
+      },
+      "R2": {
+        "contrasts_on_final_ph": 2,
+        "reading": {
+          "reading": "too few laboratories",
+          "labs": 2,
+          "contrasts": 3
+        },
+        "per_contrast": [
+          {
+            "source": "xu2007",
+            "contrast": "xu2007-5",
+            "lab": "cau_gao_yanxiang",
+            "initial_range": [
+              5.6,
+              8.0
+            ],
+            "final_ph": [
+              5.5,
+              6.2,
+              6.8
+            ],
+            "y_keyed": -0.7056869566872647,
+            "y_final": -1.3292581324724884
+          },
+          {
+            "source": "xu2007",
+            "contrast": "xu2007-6",
+            "lab": "cau_gao_yanxiang",
+            "initial_range": [
+              5.6,
+              7.0
+            ],
+            "final_ph": [
+              5.5,
+              6.0,
+              6.3
+            ],
+            "y_keyed": 0.08617201085579489,
+            "y_final": 0.24128163039622577
+          },
+          {
+            "source": "zhou2023",
+            "contrast": "zhou2023-3",
+            "lab": "ho_network",
+            "initial_range": [
+              6.0,
+              7.0
+            ],
+            "final_ph": [
+              3.2,
+              3.4,
+              5.0
+            ],
+            "y_keyed": 0.23513069868661085,
+            "y_final": null
+          }
+        ]
+      },
+      "changes": []
+    },
+    {
+      "compound": "DMHF",
+      "band": "pH 6-7.5, initial or label",
+      "watched": null,
+      "contrasts": 4,
+      "labs": 2,
+      "ph_control": {
+        "buffered": 4
+      },
+      "free_text_buffer_state": {
+        "buffered": 4
+      },
+      "main_reading": "too few laboratories",
+      "main_flags": [],
+      "free_text_buffered_only": {
+        "reading": "too few laboratories",
+        "labs": 2,
+        "contrasts": 4
+      },
+      "R1_same_set_as_free_text": true,
+      "R1": {
+        "buffered": {
+          "reading": "too few laboratories",
+          "labs": 2,
+          "contrasts": 4
+        },
+        "unbuffered": {
+          "reading": "too few laboratories",
+          "labs": 0,
+          "contrasts": 0
+        }
+      },
+      "R2": {
+        "contrasts_on_final_ph": 0,
+        "reading": null,
+        "per_contrast": []
+      },
+      "changes": []
+    },
+    {
+      "compound": "Furfural",
+      "band": "pH 4.5-6, initial or label",
+      "watched": "answered, fragile",
+      "contrasts": 17,
+      "labs": 3,
+      "ph_control": {
+        "buffered": 2,
+        "adjusted_unbuffered": 15
+      },
+      "free_text_buffer_state": {
+        "buffered": 2,
+        "unbuffered": 15
+      },
+      "main_reading": "answered by the literature",
+      "main_flags": [
+        "without censored arms: too few laboratories",
+        "buffered studies only: too few laboratories"
+      ],
+      "free_text_buffered_only": {
+        "reading": "too few laboratories",
+        "labs": 2,
+        "contrasts": 2
+      },
+      "R1_same_set_as_free_text": true,
+      "R1": {
+        "buffered": {
+          "reading": "too few laboratories",
+          "labs": 2,
+          "contrasts": 2
+        },
+        "unbuffered": {
+          "reading": "too few laboratories",
+          "labs": 1,
+          "contrasts": 15
+        }
+      },
+      "R2": {
+        "contrasts_on_final_ph": 1,
+        "reading": {
+          "reading": "answered by the literature",
+          "labs": 3,
+          "contrasts": 17,
+          "estimate": -1.070908074865484,
+          "ci90": [
+            -1.9315452207863548,
+            -0.19537098859179072
+          ]
+        },
+        "per_contrast": [
+          {
+            "source": "mottram2002",
+            "contrast": "mottram2002-6",
+            "lab": "reading_mottram_parker",
+            "initial_range": [
+              4.2,
+              5.6
+            ],
+            "final_ph": [
+              5.5,
+              3.9
+            ],
+            "y_keyed": -2.928836103655404,
+            "y_final": -2.562731590698477
+          }
+        ]
+      },
+      "changes": [
+        "R1 buffered band: too few laboratories",
+        "R1 unbuffered band: too few laboratories"
+      ]
+    },
+    {
+      "compound": "Phenylacetaldehyde",
+      "band": "pH 4.5-6, initial or label",
+      "watched": "sign changes inside one laboratory",
+      "contrasts": 16,
+      "labs": 2,
+      "ph_control": {
+        "adjusted_unbuffered": 15,
+        "buffered": 1
+      },
+      "free_text_buffer_state": {
+        "unbuffered": 15,
+        "buffered": 1
+      },
+      "main_reading": "too few laboratories",
+      "main_flags": [],
+      "free_text_buffered_only": {
+        "reading": "too few laboratories",
+        "labs": 1,
+        "contrasts": 1
+      },
+      "R1_same_set_as_free_text": true,
+      "R1": {
+        "buffered": {
+          "reading": "too few laboratories",
+          "labs": 1,
+          "contrasts": 1
+        },
+        "unbuffered": {
+          "reading": "too few laboratories",
+          "labs": 1,
+          "contrasts": 15
+        }
+      },
+      "R2": {
+        "contrasts_on_final_ph": 0,
+        "reading": null,
+        "per_contrast": []
+      },
+      "changes": []
+    },
+    {
+      "compound": "Phenylacetaldehyde",
+      "band": "pH 6-7.5, initial or label",
+      "watched": "fragile",
+      "contrasts": 10,
+      "labs": 3,
+      "ph_control": {
+        "buffered": 5,
+        "unstated": 5
+      },
+      "free_text_buffer_state": {
+        "buffered": 5,
+        "unstated": 5
+      },
+      "main_reading": "direction unclear",
+      "main_flags": [
+        "buffered studies only: too few laboratories"
+      ],
+      "free_text_buffered_only": {
+        "reading": "too few laboratories",
+        "labs": 2,
+        "contrasts": 5
+      },
+      "R1_same_set_as_free_text": true,
+      "R1": {
+        "buffered": {
+          "reading": "too few laboratories",
+          "labs": 2,
+          "contrasts": 5
+        },
+        "unbuffered": {
+          "reading": "too few laboratories",
+          "labs": 0,
+          "contrasts": 0
+        }
+      },
+      "R2": {
+        "contrasts_on_final_ph": 0,
+        "reading": null,
+        "per_contrast": []
+      },
+      "changes": [
+        "R1 buffered band: too few laboratories",
+        "R1 unbuffered band: too few laboratories"
+      ]
+    },
+    {
+      "compound": "Phenylacetaldehyde",
+      "band": "pH <4.5, initial or label",
+      "watched": null,
+      "contrasts": 9,
+      "labs": 2,
+      "ph_control": {
+        "buffered": 9
+      },
+      "free_text_buffer_state": {
+        "buffered": 9
+      },
+      "main_reading": "too few laboratories",
+      "main_flags": [],
+      "free_text_buffered_only": {
+        "reading": "too few laboratories",
+        "labs": 2,
+        "contrasts": 9
+      },
+      "R1_same_set_as_free_text": true,
+      "R1": {
+        "buffered": {
+          "reading": "too few laboratories",
+          "labs": 2,
+          "contrasts": 9
+        },
+        "unbuffered": {
+          "reading": "too few laboratories",
+          "labs": 0,
+          "contrasts": 0
+        }
+      },
+      "R2": {
+        "contrasts_on_final_ph": 0,
+        "reading": null,
+        "per_contrast": []
+      },
+      "changes": []
+    },
+    {
+      "compound": "Pyrazines",
+      "band": "pH 6-7.5, initial or label",
+      "watched": null,
+      "contrasts": 2,
+      "labs": 2,
+      "ph_control": {
+        "buffered": 2
+      },
+      "free_text_buffer_state": {
+        "buffered": 2
+      },
+      "main_reading": "too few laboratories",
+      "main_flags": [],
+      "free_text_buffered_only": {
+        "reading": "too few laboratories",
+        "labs": 2,
+        "contrasts": 2
+      },
+      "R1_same_set_as_free_text": true,
+      "R1": {
+        "buffered": {
+          "reading": "too few laboratories",
+          "labs": 2,
+          "contrasts": 2
+        },
+        "unbuffered": {
+          "reading": "too few laboratories",
+          "labs": 0,
+          "contrasts": 0
+        }
+      },
+      "R2": {
+        "contrasts_on_final_ph": 0,
+        "reading": null,
+        "per_contrast": []
+      },
+      "changes": []
+    },
+    {
+      "compound": "Pyrazines",
+      "band": "pH >7.5, initial or label",
+      "watched": null,
+      "contrasts": 2,
+      "labs": 2,
+      "ph_control": {
+        "adjusted_unbuffered": 1,
+        "buffered": 1
+      },
+      "free_text_buffer_state": {
+        "unbuffered": 1,
+        "buffered": 1
+      },
+      "main_reading": "too few laboratories",
+      "main_flags": [],
+      "free_text_buffered_only": {
+        "reading": "too few laboratories",
+        "labs": 1,
+        "contrasts": 1
+      },
+      "R1_same_set_as_free_text": true,
+      "R1": {
+        "buffered": {
+          "reading": "too few laboratories",
+          "labs": 1,
+          "contrasts": 1
+        },
+        "unbuffered": {
+          "reading": "too few laboratories",
+          "labs": 1,
+          "contrasts": 1
+        }
+      },
+      "R2": {
+        "contrasts_on_final_ph": 0,
+        "reading": null,
+        "per_contrast": []
+      },
+      "changes": []
+    }
+  ],
+  "categorical_cells": [
+    {
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lever_class": "sugar identity",
+      "watched": null,
+      "pairs": 27,
+      "pairs_base_mismatch": 1,
+      "reference_pot_by_lab": {
+        "hfut_wei_zhaojun": [
+          "xylose: amine+other+sulfur"
+        ],
+        "dfa_garching": [
+          "ribose: amine+sulfur",
+          "ribose: sulfur"
+        ],
+        "reading_mottram_parker": [
+          "none: amine+sulfur",
+          "ribose 5-phosphate: amine+sulfur"
+        ]
+      },
+      "changes": []
+    },
+    {
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "lever_class": "sulfur source",
+      "watched": "answered (level)",
+      "pairs": 15,
+      "pairs_base_mismatch": 0,
+      "reference_pot_by_lab": {
+        "btbu_beijing": [
+          "none: amine+carbonyl+sulfur"
+        ],
+        "ho_network": [
+          "glutathione: amine+carbonyl",
+          "none: amine+carbonyl+sulfur"
+        ],
+        "dfa_garching": [
+          "hydrogen sulfide: other",
+          "none: amine+carbonyl+sulfur",
+          "none: amine+sulfur",
+          "thiamine: amine+sulfur",
+          "thiamine: nothing else"
+        ]
+      },
+      "changes": []
+    },
+    {
+      "compound": "2-Methylpyrazine",
+      "lever_class": "amino acid identity",
+      "watched": "fragile",
+      "pairs": 136,
+      "pairs_base_mismatch": 0,
+      "reference_pot_by_lab": {
+        "njau_zhao_liyan": [
+          "methionine: amine+carbonyl"
+        ],
+        "ho_network": [
+          "glutathione: amine+carbonyl",
+          "none: amine+carbonyl"
+        ],
+        "reading_mottram_parker": [
+          "asparagine: nothing else",
+          "glycine: carbonyl",
+          "glycine: carbonyl+lipid",
+          "none: amine+carbonyl+lipid"
+        ],
+        "wonkwang_cho_inhee": [
+          "arginine: amine+carbonyl"
+        ],
+        "ghent_de_kimpe": [
+          "free amino acids (lysine): carbonyl",
+          "gly-gly: carbonyl",
+          "glycine (2 mmol): carbonyl",
+          "glycine (3 mmol): carbonyl",
+          "glycine + lysine: carbonyl",
+          "hydrolysed protein: amine+carbonyl"
+        ]
+      },
+      "changes": []
+    },
+    {
+      "compound": "Benzaldehyde",
+      "lever_class": "sugar identity",
+      "watched": "conflict between laboratories",
+      "pairs": 18,
+      "pairs_base_mismatch": 0,
+      "reference_pot_by_lab": {
+        "hfut_wei_zhaojun": [
+          "xylose: amine+other+sulfur"
+        ],
+        "njau_zhao_liyan": [
+          "ribose: amine+sulfur"
+        ],
+        "astar_sifbi_chiang": [
+          "glucose: amine"
+        ],
+        "nus_liu_shaoquan": [
+          "none: amine"
+        ]
+      },
+      "changes": []
+    },
+    {
+      "compound": "Hexanal",
+      "lever_class": "sugar identity",
+      "watched": "conflict between laboratories",
+      "pairs": 19,
+      "pairs_base_mismatch": 0,
+      "reference_pot_by_lab": {
+        "hfut_wei_zhaojun": [
+          "xylose: amine+other+sulfur"
+        ],
+        "njau_zhao_liyan": [
+          "ribose: amine+sulfur"
+        ],
+        "nus_liu_shaoquan": [
+          "arabinose: amine",
+          "none: amine",
+          "xylose: amine"
+        ]
+      },
+      "changes": []
+    },
+    {
+      "compound": "Methional (3-(methylthio)propanal)",
+      "lever_class": "sugar identity",
+      "watched": "answered (level)",
+      "pairs": 13,
+      "pairs_base_mismatch": 0,
+      "reference_pot_by_lab": {
+        "hfut_wei_zhaojun": [
+          "xylose: amine+other+sulfur"
+        ],
+        "njau_zhao_liyan": [
+          "ribose: amine+sulfur"
+        ],
+        "nus_liu_shaoquan": [
+          "none: amine",
+          "xylose: amine"
+        ]
+      },
+      "changes": []
+    },
+    {
+      "compound": "Pyrazines",
+      "lever_class": "sugar identity",
+      "watched": "sign changes inside one laboratory",
+      "pairs": 5,
+      "pairs_base_mismatch": 1,
+      "reference_pot_by_lab": {
+        "hfut_wei_zhaojun": [
+          "arabinose: amine+other+sulfur"
+        ],
+        "minnesota_reineccius": [
+          "glucose: amine"
+        ],
+        "reading_mottram_parker": [
+          "glucose: amine+carbonyl+lipid"
+        ]
+      },
+      "changes": []
+    },
+    {
+      "compound": "Trimethylpyrazine",
+      "lever_class": "amino acid identity",
+      "watched": "conflict between laboratories",
+      "pairs": 95,
+      "pairs_base_mismatch": 0,
+      "reference_pot_by_lab": {
+        "ho_network": [
+          "none: amine+carbonyl"
+        ],
+        "wonkwang_cho_inhee": [
+          "none: amine+carbonyl"
+        ],
+        "ghent_de_kimpe": [
+          "free amino acids (lysine): carbonyl",
+          "glycine (2 mmol): carbonyl",
+          "glycine (3 mmol): carbonyl",
+          "glycine + lysine: carbonyl"
+        ],
+        "reading_mottram_parker": [
+          "glycine: carbonyl",
+          "glycine: carbonyl+lipid"
+        ]
+      },
+      "changes": []
+    }
+  ],
+  "provenance": {
+    "artifact": "lever_field_readings",
+    "generated_on": "2026-11-13",
+    "git": {
+      "commit": "3b2f80ad7253fa255a98133e9565a95d1d3b839d",
+      "short": "3b2f80ad",
+      "branch": "lever-fields",
+      "dirty": false
+    },
+    "generated_by": "scripts/generators/build_lever_field_readings.py",
+    "inputs": [
+      {
+        "path": "docs/reference/lever_table/contrasts/Zhang2024.yml",
+        "sha256": "3ab67b0ca88bebe134d5aa54764e689d12243a44a7376643be81f319be95fa1c"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/adams2001.yml",
+        "sha256": "382e917f924eac837e679501a647ea3df5d46097cf93af2af46ed0814e7b0890"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/ames2001b.yml",
+        "sha256": "0f3da559691144f55f9ce78a9518a25d7447975ff8bb0af1da957048a86ed5ea"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/ames2001b__families.yml",
+        "sha256": "ebd9b49ce41df0001044067914ec5e8c3ce0881f29135841a76e44f8d9a26526"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/arnold1971.yml",
+        "sha256": "b7b6f953251fddf900cea0706e65f7b1727a6769b11645aedf54d29ed51c3584"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/balagiannis2009__families.yml",
+        "sha256": "08090421c50731d84a4d045118296e48d39272ea1fc5c659bd595a59abc18992"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/blank1997__families.yml",
+        "sha256": "8887cd21dba55dd33ef236926254dda160ea770691a3b63729103e855b758aa8"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/boonbumrung2023.yml",
+        "sha256": "051dff0fbe176596de81c2f9313af336118d1960ed8e86275482d8388a9bd471"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/boonbumrung2023__families.yml",
+        "sha256": "301e3f663bb2575eee0bf9ed4a7bf40813da1d7b4f17a90ff168d8def628c6b4"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/cerny2007.yml",
+        "sha256": "79440bc09e637af4d7dc9fd6add50e3aa52933cc97da9d94c324aa8441e08842"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/cerny2007__families.yml",
+        "sha256": "c393054bee91e33be719cb52793e8198597f872ae0493c0cadeb9a5d3accfe1b"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/chan1994b__families.yml",
+        "sha256": "88b2457b03d7844912a2e7db41709a95673fa04f69363a5c5b7a45374c9f476d"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/chen2023lycium.yml",
+        "sha256": "2b050760f603c5c31953b8f7cd6ddecca3645f076ed5abf0aa901e73b1b6791a"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/chen2023lycium__families.yml",
+        "sha256": "9e7784570e4668762269caeb2451ee9da665d657df980b0618195d26de765b5b"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/chen2024coprinus.yml",
+        "sha256": "3e95cf7b823dff5af417fc0c9a09286f616443ebd45113746d95c89f26b87047"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/chen2024coprinus__families.yml",
+        "sha256": "6c68d392c2776d72ad65082499abebb6bb528d3c754b4b83ed75d4900b3c4c5b"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/cremer2000b.yml",
+        "sha256": "bedd9e669a7cb72efc117241f13397148bdb57a8a0c0947e57697c6ae0b81081"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/cremer2000b__families.yml",
+        "sha256": "ac5178769ffffee086b643c476693d6572ae87dc1d7b9c81b71984e425b60c32"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/cremer2000c.yml",
+        "sha256": "6518f0857ee00a426548b9a4eab087d5be2b8c5e743046b5675d5620ef60ef7e"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/cremer2000c__families.yml",
+        "sha256": "7e9428c8e1171ec3e17bb30219186ed3a9b288f13804cba9aa4484ad124966b6"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/ding2023.yml",
+        "sha256": "fadf5888bf21641e969b225d24f4b7a93de4747d17a77f25de443029ac26ab93"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/ding2023__families.yml",
+        "sha256": "d779d4108837769c543468940b1ef09eef9ff6b582ef9fe709dd0684f9fc406e"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/du2023__families.yml",
+        "sha256": "9914b6a6d289e6790d0d46a4b8ef2ac4dd6a19278a50d92bf00a894d17637b99"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/du2025__families.yml",
+        "sha256": "012ca89304ae5642aa9d645f54ea80456023e221ca73d4db3904343dc54d6784"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/elmore1997__families.yml",
+        "sha256": "805fb646c248fbf89ee29dec14f2a5d821de2ba3547b2716273b7d735f7ff02f"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/elmore2002.yml",
+        "sha256": "72d12c2e6887c7d66693b88e85e0daaed19aedf896598a3243de989d431f398a"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/elmore2002__families.yml",
+        "sha256": "cbd7f9e190dbb785b27f3ee8e86b1e4c69ab14c7d90c10009cd50f71fe469a99"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/farmer1990.yml",
+        "sha256": "9bdd916ed84b09e2aa9c0d5df0682e7bbaa0f1a63843e2411f1757d321362d30"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/farmer1992__families.yml",
+        "sha256": "6c2f8a485d0377b612119b6ace49b1ccffc5d34592edaf92ef82af6cdb0ae6f7"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/feng2022.yml",
+        "sha256": "7122d8df4eccb64a96f7c853e2371f3f19f7483b6ce78c87cc40d49627120877"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/granvogl2006__families.yml",
+        "sha256": "c1dc74790cfedd9dce7a05a1149e242f62e6a98d259598ee30fcf03107ae4aa3"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/grosch1992.yml",
+        "sha256": "e09d4a48c11445e141058b55c222b06e7715b792088aefa583cb011b7e4a1d39"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/guentert1990.yml",
+        "sha256": "0a0759ebdb09230944f920aaaf7474f7f146397616a2eb9ff407577572885940"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/guentert1990__families.yml",
+        "sha256": "ba065d658e80ae05095fc32fd3f262148cbd43f69f6b8fa0198eb66ec31d1fd2"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/guo2010brassica.yml",
+        "sha256": "baad073c012e61655819ffcc0e6bf1392402af2bff8bd9b118a11401a2bce53c"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/guo2010brassica__families.yml",
+        "sha256": "de4d46d38b388e6e3174afeb4ec54c98d32d5fb1c0e71e295ac65fa6f1a3b4bc"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/haleva1999__families.yml",
+        "sha256": "bc875461bbbfce43ad5b8ee8c836ee34586029b79c2a7e3c64287650aad34389"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/hartman1984b.yml",
+        "sha256": "c4d4b43ba2c0a3d1b37f2c35dc9e3044206fbd10013f60234610fb32ddc2f138"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/hidalgo1993__families.yml",
+        "sha256": "01787f01adea48e5521c4cf3dfb91e8127847eeb71fe7a30c548c4e808d7d344"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/hidalgo2013__families.yml",
+        "sha256": "202e59df36c3ecfc902d2192b7bc1a291244f340e80862492d1ed638c5ae7fb0"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/hincelin1992.yml",
+        "sha256": "831d2d054e56b6b23e477eb8b1111e9e7b93f6516d6043962ff1d41da1ab7a76"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/hofmann1998.yml",
+        "sha256": "a11a08104d2f92c89a8507fda499868f150d7f1b935921776d35c34b939d29c2"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/hofmann2000__families.yml",
+        "sha256": "ff5cc1c1767a7396935aa03f4c21a409617e6d5f94273a447d24a4fdec05252b"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/hofmann2000b__families.yml",
+        "sha256": "3a6e5a8c51bed9c05fbd1f4a2fbfaf369d5f291db2d105873dbb3365e597b7b3"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/hwang1995__families.yml",
+        "sha256": "56186a354b7a2664d806cc7d4112a7f746d49f37136dfc84416d3966c57fcc4b"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/hwang1995b__families.yml",
+        "sha256": "607e5a900e8f18723008a15853b8265139816477605d83280303ebf00ab8321d"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/kobayasi1965.yml",
+        "sha256": "e9eca2f0073ed90b413b314d15eff84bc18c1ff65d3253eedc40440e5946617e"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/kumazawa2003.yml",
+        "sha256": "d70f831f68f08d2f079083436cfe2ee8232f6c9f36c9722f0de6a8f0d8039471"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/leahy1989__families.yml",
+        "sha256": "506a543d43532f5f2eeef4a5a1e5a750058c3531230237bc08086661bb86edef"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/leahy1989a__families.yml",
+        "sha256": "83ce385ebe5713e4e36a0de0f28875cafea71b89e25c201112d14ee2a44b9e7b"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/li2021lab.yml",
+        "sha256": "feb9f2d1525aebb5dd7fab5b959fbda2a084e0f3d2a16ca6336fcade1bc151bd"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/li2021lab__families.yml",
+        "sha256": "f39d2e0469ecfcb9b1549a43e5b2f3b96b453582e26ed8d1e798f15c01e40d6d"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/li2021ph.yml",
+        "sha256": "c1d68ed62ad8108412501c3ba9cd8aec9df51fc5bf22830aae60f22bdae0b083"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/li2021ph__families.yml",
+        "sha256": "bfa1e7105c3c3e48cb718611c22ff20451f0214a93e796f7cc1a5ef255b4d0f9"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/li2022heat.yml",
+        "sha256": "be8fe9b067dca9f89be6fe5b750af9ea26ca679b31d65e872aa55dc55edf440d"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/li2022heat__families.yml",
+        "sha256": "f9ba2c53a8aea2f6a64e2dabf4c52e0efb8349aca444e853b5809c888ec24717"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/mandin1999__families.yml",
+        "sha256": "109c67f04f9378fc5be29b9472df49d169d46d324452c522034d67ea1bb3a54d"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/marrufo-curtido2022.yml",
+        "sha256": "6b3295c43bac3b147356a7d1b430b101ce8823709f4daabf4942e19bafac28a9"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/marrufo-curtido2022__families.yml",
+        "sha256": "ad6c96facc831417b3ae6342f42477d00644df4795c5708c5aef1d19b4aca342"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/martin2001__families.yml",
+        "sha256": "451bfdec8b569cacadb3f91ef45492d3ded6288c920e66680f426104bdf2c7b3"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/meynier1995.yml",
+        "sha256": "55cc4c0568aab56174c676c43965991573f3362e549140a3f5fa1f4a353fb979"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/meynier1995__families.yml",
+        "sha256": "aa61e5c6aee5c83cc98a0ea9895c2093e297979e9e964737d3ef825ae97c205c"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/meynier2004__families.yml",
+        "sha256": "6c1474ff6d1610503ad95f6511ac0db301067c53ff031ba07f5ee561464eee61"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/mikami2017__families.yml",
+        "sha256": "28faacbf0b852eeab9759a1cb9580056ba69c64f17367b51ae414fc50755804d"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/mizutani1960.yml",
+        "sha256": "36b5461c1c8bf9bb829192c1481118b46bcaabf7689f555bbdb5a1cbf8842821"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/monforte2021__families.yml",
+        "sha256": "8ed92a2f514aacfb85653585afd0e920c2375f1031ceea84c922e873fec8fdb5"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/mottram2002.yml",
+        "sha256": "d9858cc2fd75a60ebc63ae4ed49b7293a8577bbdbee5b2cbcf0a3444f1060c98"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/mottram2002__families.yml",
+        "sha256": "bd26da477256cc123ac7ab1699d258f8ebd52db4eb029a287c762abf6aeb30c6"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/obata1960.yml",
+        "sha256": "7e1339147e9ad3a0ebec9e114c3040059f84f2e4be30b4ae6f837cbab2c1d5c6"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/park2022mealworm.yml",
+        "sha256": "5c61831419635752ce2209681690b67a3ee12f09d20d8d7a9a11f112e3a97271"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/park2022mealworm__families.yml",
+        "sha256": "cb031ae54a4f4ae264b6fc55aaaecfed324763a61572befcb775c99d61ee6439"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/sarkisyan2025.yml",
+        "sha256": "0ec71c779f8e523e5092e77e151fbfa86f9ba54d411f9a094a9ce3865ba0c379"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/sarkisyan2025__families.yml",
+        "sha256": "aef940d527aee14b4add76cc641f90619a93de60e2832f52dba2fd13cb8d366b"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/sasanam2022.yml",
+        "sha256": "af7709fcc184ceaf9a3be6ce9c9f83eedbe40a63c81b483c20193f4ac4a8457b"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/sasanam2022__families.yml",
+        "sha256": "4eb71ff056048c3af84c701c0a52a9ee57cb0d22c491be3be9990d759e1d63ef"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/scalone2015__families.yml",
+        "sha256": "467d1c1c1173b1b5ccea0cdb8cf94ecd09da673e4c49d456d3f485f55c817045"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/schirle1992__families.yml",
+        "sha256": "812d753d360d5560bf7d6f967626320c7e96ee602bf7c7d5b33247e57b1ac098"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/shibamoto1977__families.yml",
+        "sha256": "fa55f8d209a461fd2bdc90e3be0e4a7ad7b06cfcf2877bfa22a6fda7e5d2bdb1"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/shu1985.yml",
+        "sha256": "38ed130813edfa52e60595fedf907f1634bb56f26984c229a34c9482fe970007"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/sun2020.yml",
+        "sha256": "1ee70f2ad7bb382d6877e1f1dfeda34a219bb7dfebcc3c4d1f044a961ebdf6e0"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/sun2020__families.yml",
+        "sha256": "061a553083b56ea4bd4da271ff60af6b5615ba9e9f5b87b3925caacbc1b312da"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/tai1997.yml",
+        "sha256": "b65a9d2692b0b094bb687d4a81080ed289dc5590733899b8a2467c40afefce86"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/tai1998.yml",
+        "sha256": "423d75015439d6c4f344291ada8b48fa99e799dec7a4a505c559997002f47c3e"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/theng2024.yml",
+        "sha256": "4c9999b513925e2857cafcf8999cfd319d2da3cf3261d8b545f91e3dbd7cdb6a"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/theng2024__families.yml",
+        "sha256": "664989a591fd999af7d78c8cd8254ec9c4cf89d2f6ac3a6b0fdf250f118b06a3"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/thomas2014.yml",
+        "sha256": "a4feee4e1cc32a02e410e75de89967c483ca8fd004cfc490fb2594f1a44b3566"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/us10076126.yml",
+        "sha256": "0ab75b3b0d25c98c1f98848835bc945148d36b868e6132d4b43f66781b399a4a"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/vanlancker2010__families.yml",
+        "sha256": "ed48dbd0b0ffe57c042d86b50bc7e9dda705937f0d74ba39b64cecab8e41327e"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/vanlancker2012__families.yml",
+        "sha256": "2972c678e0c78fc3299315b379dde822969fd12af722bcc4f240ba15ce66781a"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/vanseeventer2001.yml",
+        "sha256": "1ac09daa2c684da5348845aa1ed873b54acb5f5b3f2a9ddfefcc54b4ac5c676e"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/weenen2001__families.yml",
+        "sha256": "0b675e7aaac4882a000a90f5d61c9a2010d4397bf75a5b952f0ba51711e4781f"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/wei2019flax.yml",
+        "sha256": "f1826906979e29aea3e170320ad8b2031ec5da0a8ac4d1f9fa5a87bf3205a80d"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/wei2019flax__families.yml",
+        "sha256": "a975717167bce5e6d92db24ec50103b9dac5f6e45ae559b3cc361281673c9279"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/whitfield1988__families.yml",
+        "sha256": "1a38054047a832773531ffd7b8ec450c96b9a591faf6cbf9ae5e331fffa6970c"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/xu2007.yml",
+        "sha256": "913d56978d33f812063876b0c9b936989e8705530a74505816bdc4bab03a159f"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/xu2007__families.yml",
+        "sha256": "08fe8d69afae6600031eb40040ccc5ecbb32f964204e3f6c2c39084cdf98ea64"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/xu2011__families.yml",
+        "sha256": "0991efd64bc0594bb7821ff51ca069d132681bbc24092d63dd3e64501b4dc35c"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/yiltirak2026__families.yml",
+        "sha256": "9dfb9debb42279bb1294ad7e08448b13b8adc2ada5409003e891493d5776877c"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/yu2010.yml",
+        "sha256": "0fbeaf437cc3b3d14398ea94c2cbdd78987492519a6eb1b70a904cd62cd11e7e"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/yu2010__families.yml",
+        "sha256": "1d290c4fc018a50d833974b295023e27ef0d69bb3b4f57ee11e79bbdc46e3789"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zamora2006__families.yml",
+        "sha256": "a52844390176d8a4b58514cd72a1d0fa73c20f2a9ca1057f3b7f3cdf685d3be9"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zamora2007__families.yml",
+        "sha256": "bdaf5d603b5589f903df99cdb12e6857de97772b2209facc53bd7ab93ef028d5"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zamora2008__families.yml",
+        "sha256": "988bfada65606280dfc3958cb502455fede510aba30082584270b5b8b5a662ac"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zamora2013__families.yml",
+        "sha256": "0f712c5aadd503242f258bb9f6ce509ccf369b266d908c62302f32a5d3dae3d4"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zamora2015__families.yml",
+        "sha256": "d5058ce2634ec774095822f7c6ab9430e49d4c61d2704fe0d4eeedf66eb704dc"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zamora2020__families.yml",
+        "sha256": "d9c95b20a334171ab54d9b42396efe18b7b89d413da0a45b616e3ed02e4420c2"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zhang1988.yml",
+        "sha256": "d8d59114cfbaaafda8446e95267f546a68ab3af5db7fca6a4675b84f9aee92f8"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zhang1989__families.yml",
+        "sha256": "b17d1a5d8c8ba9ad44e3e59ef590c81e1e74db0f68c932b18942defc9df635d8"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zhang1991.yml",
+        "sha256": "47d142c1d6ee57d654dc4096276a4eb8b487ffc3ad8cbb1e724c5b4dcef792c5"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zhang1991b.yml",
+        "sha256": "3d5e5b4d5f951b2e6f67b4512d6c00e5eb268515019ca50af75b1d4003e884bc"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zhang2018soypep.yml",
+        "sha256": "432dad3f73a988b02ff45bbcd274603b6a2490cfae152c48551419e215e7220c"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zhang2018soypep__families.yml",
+        "sha256": "01ddd39531f7618496d670d1ce852893d556db8c120f8f290526947ebe49bb9f"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zhang2022pleurotus.yml",
+        "sha256": "efb1ee73509d74839669d5b159285f136b4efbd3694ed76b4b37842238ef7029"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zhang2022pleurotus__families.yml",
+        "sha256": "fc8a87fa982864c4248d94664fbdf490e52e0288739c17a040f3bbcfdbd0a3bc"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zhang2024sugars.yml",
+        "sha256": "12ad28898984e90ea1c19a18ac9aea2044c8798822ff4016393adafbaf8084e6"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zhang2024sugars__families.yml",
+        "sha256": "31fd3b84cfd86d4eb5f66772361bd8c30e7a8ff14109ed8fc6ad922464443d63"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zheng1994.yml",
+        "sha256": "f092b3a0a3d1a755d10fb484799d8ef8d68177d68df172c013b58591772f9be3"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zhou2022__families.yml",
+        "sha256": "e8f5ffb28ba3ddb5bd20c9b0df2697777e61105eaf33e1b79e60d48df367cb79"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zhou2023.yml",
+        "sha256": "6a0e93487ef6ae9dfa23956f8388a5869e598f7f3d5129d5c3250b91c6204ee8"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zhou2023c.yml",
+        "sha256": "85182525c3b45952be61e1341a78a7af8be334345200d6438dc39cca29a0e498"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/zhou2023c__families.yml",
+        "sha256": "5f251761746b3d7c5ee24f540d5e788bf88d6d0f616603757e11d511c7f6a90a"
+      },
+      {
+        "path": "docs/reference/lever_table/field_checks/Zhang2024.yml",
+        "sha256": "a5625242457ae6d4128cad914522827fa6fc0e0bb30e37203c15d1008e208c26"
+      },
+      {
+        "path": "docs/reference/lever_table/field_checks/ames2001b.yml",
+        "sha256": "7e89af69eae80f0687cb69663c75212b2a666b0370e2888f7205bf9070a49848"
+      },
+      {
+        "path": "docs/reference/lever_table/field_checks/feng2022.yml",
+        "sha256": "98f16662f130f400b7747778fae6428a12cd477e62168b03b0f7cd57cf7c8fa2"
+      },
+      {
+        "path": "docs/reference/lever_table/field_checks/grosch1992.yml",
+        "sha256": "2bc9700c121d22c1f04ddbeb0a283e3bf715c33f5d68b1162e3f938e4614e7aa"
+      },
+      {
+        "path": "docs/reference/lever_table/field_checks/hincelin1992.yml",
+        "sha256": "826ad21e9ce70cd24825932f73f5120e6eed1e5ac14ec35aa6bc75d7bb663cb7"
+      },
+      {
+        "path": "docs/reference/lever_table/field_checks/hofmann2000.yml",
+        "sha256": "def81bdb5d892ae7cbbc883364dba1e17d2e2ff340ba9610b0bab48a2d293720"
+      },
+      {
+        "path": "docs/reference/lever_table/field_checks/hwang1995.yml",
+        "sha256": "4b0f3362bc7f8b06b99c791b50dac3f1db6a5e274b09966ece04674066706a4c"
+      },
+      {
+        "path": "docs/reference/lever_table/field_checks/martin2001.yml",
+        "sha256": "fad51c2e4e6856d4b49983b832703ea5b4078da451438ad935afe66e4faa7ac6"
+      },
+      {
+        "path": "docs/reference/lever_table/field_checks/mottram2002.yml",
+        "sha256": "fa70573520ab715d44061902dbb9035c502c5c5240d7801f1534acdb108a73c4"
+      },
+      {
+        "path": "docs/reference/lever_table/field_checks/park2022mealworm.yml",
+        "sha256": "8974439cc6e97b85b6dd2181fbddff33534d318c840c2a9cf36abb00ef53c924"
+      },
+      {
+        "path": "docs/reference/lever_table/field_checks/shibamoto1977.yml",
+        "sha256": "371a3d0c19742d419db343d9564219967d732d01882f5392ec973e07a55f4402"
+      },
+      {
+        "path": "docs/reference/lever_table/field_checks/wei2019flax.yml",
+        "sha256": "59bec183c71c4da09f7e1ed80085475cffe64f457d8dbbffec65bc83860236ac"
+      },
+      {
+        "path": "docs/reference/lever_table/field_checks/xu2007.yml",
+        "sha256": "b8c43daeb584209b8ab1b10f0abe697a7067c8faf4c310a82836717453aebec9"
+      },
+      {
+        "path": "docs/reference/lever_table/field_checks/zhang2018soypep.yml",
+        "sha256": "dcc77e1e8bfc0d8fc6b815ba8e06dd4b405c2cfe22f1129913fafe787c20f86b"
+      },
+      {
+        "path": "docs/reference/lever_table/field_checks/zhou2023.F3.yml",
+        "sha256": "bb19b27d1694d49bb568f950db3d04558682e101aa41e1d849df35e853bb1dac"
+      },
+      {
+        "path": "docs/reference/lever_table/field_checks/zhou2023.yml",
+        "sha256": "f99a3641b655f2343542867cb110a54665478a7a066c0e466d4097acf5730088"
+      },
+      {
+        "path": "docs/reference/lever_table/field_checks/zhou2023c.yml",
+        "sha256": "f9ba6e65ee1cd4210da441cf444b22d360f6bff2219ebdb461456e222974e94d"
+      },
+      {
+        "path": "docs/reference/contrast_benchmark/split.yml",
+        "sha256": "1098b4b420330aa737497f6c855454c732dc394ce2007be6fd94dd9933cb36ac"
+      },
+      {
+        "path": "results/validation/lever_table.json",
+        "sha256": "bf13fb6897b3de535609c40190d94be224822ff92600126e9ac132e4fb22c73c"
+      },
+      {
+        "path": "results/validation/lever_disagreement_audit.json",
+        "sha256": "df57df7372981fa664b34fbd07c824757d4d383ca99142b3f13e447465d9315e"
+      }
+    ]
+  }
+}

@@ -1,0 +1,53 @@
+source: mottram2002
+reader: resolved
+pdf: data/articles/mottram2002.pdf
+fields:
+- F1
+- F2
+ph_control: buffered
+ph_control_overrides: {}
+arms:
+  phosphate buffer, pH 4.2, IMP (final pH 4.5):
+    final_ph: 4.5
+    final_ph_location: Table 1 header row 'final pH', p. 4083 (repeated p. 4084), phosphate buffer pH 4.2 / IMP column
+  phosphate buffer, pH 4.2, IMP (final pH 4.5) [tr]:
+    final_ph: 4.5
+    final_ph_location: Table 1 header row 'final pH', p. 4083 (repeated p. 4084), phosphate buffer pH 4.2 / IMP column
+  phosphate buffer, pH 4.2, Rib-PO4 (final pH 3.9):
+    final_ph: 3.9
+    final_ph_location: Table 1 header row 'final pH', p. 4083 (repeated p. 4084), phosphate buffer pH 4.2 / Rib-PO4 column
+  phosphate buffer, pH 4.2, Rib-PO4 (final pH 3.9) [tr]:
+    final_ph: 3.9
+    final_ph_location: Table 1 header row 'final pH', p. 4083 (repeated p. 4084), phosphate buffer pH 4.2 / Rib-PO4 column
+  phosphate buffer, pH 4.2, ribose (final pH 3.9):
+    final_ph: 3.9
+    final_ph_location: Table 1 header row 'final pH', p. 4083 (repeated p. 4084), phosphate buffer pH 4.2 / ribose column
+  phosphate buffer, pH 5.6, IMP (final pH 5.7):
+    final_ph: 5.7
+    final_ph_location: Table 1 header row 'final pH', p. 4083 (repeated p. 4084), phosphate buffer pH 5.6 / IMP column
+  phosphate buffer, pH 5.6, IMP (final pH 5.7) [- below detection limit]:
+    final_ph: 5.7
+    final_ph_location: Table 1 header row 'final pH', p. 4083 (repeated p. 4084), phosphate buffer pH 5.6 / IMP column
+  phosphate buffer, pH 5.6, IMP (final pH 5.7) [tr]:
+    final_ph: 5.7
+    final_ph_location: Table 1 header row 'final pH', p. 4083 (repeated p. 4084), phosphate buffer pH 5.6 / IMP column
+  phosphate buffer, pH 5.6, Rib-PO4 (final pH 5.5):
+    final_ph: 5.5
+    final_ph_location: Table 1 header row 'final pH', p. 4083 (repeated p. 4084), phosphate buffer pH 5.6 / Rib-PO4 column
+  phosphate buffer, pH 5.6, Rib-PO4 (final pH 5.5) [+ present, quantification confounded by adjacent peak]:
+    final_ph: 5.5
+    final_ph_location: Table 1 header row 'final pH', p. 4083 (repeated p. 4084), phosphate buffer pH 5.6 / Rib-PO4 column
+  phosphate buffer, pH 5.6, Rib-PO4 (final pH 5.5) [- below detection limit]:
+    final_ph: 5.5
+    final_ph_location: Table 1 header row 'final pH', p. 4083 (repeated p. 4084), phosphate buffer pH 5.6 / Rib-PO4 column
+  phosphate buffer, pH 5.6, ribose (final pH 5.5):
+    final_ph: 5.5
+    final_ph_location: Table 1 header row 'final pH', p. 4083 (repeated p. 4084), phosphate buffer pH 5.6 / ribose column
+  phosphate buffer, pH 5.6, ribose (final pH 5.5) [+ present, quantification confounded by adjacent peak]:
+    final_ph: 5.5
+    final_ph_location: Table 1 header row 'final pH', p. 4083 (repeated p. 4084), phosphate buffer pH 5.6 / ribose column
+notes: 'Resolved 2026-11-13: readers a and b agree on every checked field (F1 exact, F2 within 0.1, F3 on compound classes;
+  scripts/tools/compare_field_checks.py); values and names from reader a. 0.2 M phosphate (disodium/tetrasodium pyrophosphate)
+  buffer at pH 5.6 or 4.2, checked and adjusted with NaOH or HCl if necessary before make-up (Methods p. 4082). Labels are
+  the union of mottram2002.yml and mottram2002__families.yml; bracketed suffixes are censoring tags on the same pot, so they
+  carry the same final pH. mottram2002b not cited by either contrast file, not read.'

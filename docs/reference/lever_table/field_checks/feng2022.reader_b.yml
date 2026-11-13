@@ -1,0 +1,14 @@
+source: feng2022
+reader: b
+pdf: data/articles/feng2022.pdf
+fields: [F3]
+arms:
+  "ARP-120 C, 120 min":
+    present: [RG-ARP (N-(1-deoxy-D-ribulos-1-yl)-glutathione)]
+  "ARP + GSH-120 C, 120 min":
+    present: [RG-ARP (N-(1-deoxy-D-ribulos-1-yl)-glutathione), GSH]
+  "ARP-100 C, 120 min":
+    present: [RG-ARP (N-(1-deoxy-D-ribulos-1-yl)-glutathione)]
+  "ARP + GSH-100 C, 120 min":
+    present: [RG-ARP (N-(1-deoxy-D-ribulos-1-yl)-glutathione), GSH]
+notes: "Model Maillard Reaction section: RG-ARP 20 mmol/L with or without GSH 20 mmol/L in water; RG-ARP is the purified Rib-GSH Amadori product."

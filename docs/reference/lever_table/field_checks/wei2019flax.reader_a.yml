@@ -1,0 +1,23 @@
+source: wei2019flax
+reader: a
+pdf: data/articles/wei2019.pdf
+fields: [F1, F2]
+ph_control: adjusted_unbuffered
+ph_control_overrides: {}
+arms:
+  "pH 6.5":
+    final_ph: null
+    final_ph_location: "not printed"
+  "pH 7.0":
+    final_ph: null
+    final_ph_location: "not printed"
+  "pH 7.5":
+    final_ph: null
+    final_ph_location: "not printed"
+  "pH 8.0":
+    final_ph: null
+    final_ph_location: "not printed"
+  "pH 8.5":
+    final_ph: null
+    final_ph_location: "not printed"
+notes: "wei2019flax.yml has no pH contrasts; arms from wei2019flax__families.yml (wei2019flax-2). Methods: hydrolysate + xylose + cysteine in distilled water, 'followed by initial pH adjustment (6.5-8.5)'; no buffer named, titrant not named. No final pH printed or plotted."

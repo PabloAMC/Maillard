@@ -1,0 +1,26 @@
+source: zhou2023
+reader: b
+pdf: data/articles/Zhou2023b.pdf
+fields: [F1, F2]
+ph_control: adjusted_unbuffered
+ph_control_overrides: {}
+arms:
+  "pH 6 ARP + Cys":
+    final_ph: 3.23
+    final_ph_location: "Figure 2, p. 2476 (bar 'ARP+Cys', Initial pH 6), digitised"
+  "pH 7 ARP + Cys":
+    final_ph: 3.43
+    final_ph_location: "Figure 2, p. 2476 (bar 'ARP+Cys', Initial pH 7), digitised"
+  "pH 8 ARP + Cys":
+    final_ph: 5.05
+    final_ph_location: "Figure 2, p. 2476 (bar 'ARP+Cys', Initial pH 8), digitised"
+  "pH 6 ARP":
+    final_ph: 3.99
+    final_ph_location: "Figure 2, p. 2476 (bar 'ARP', Initial pH 6), digitised"
+  "pH 7 ARP":
+    final_ph: 4.11
+    final_ph_location: "Figure 2, p. 2476 (bar 'ARP', Initial pH 7), digitised"
+  "pH 8 ARP":
+    final_ph: 4.96
+    final_ph_location: "Figure 2, p. 2476 (bar 'ARP', Initial pH 8), digitised"
+notes: "pH contrasts zhou2023-1, -5 (zhou2023.yml; no zhou2023__* file exists other than the separate source zhou2023c). ARP (20 mmol/L) +/- Cys (20 mmol/L) in water, pH adjusted to 6/7/8 with NaOH (3 mol/L), no buffer (Methods p. 2473). Final pH only in Figure 2 bar chart (caption: 'Final pH value ... under different initial pH values'); digitised from the embedded raster by pixel rows of bar tops against the 0 and 6 axis ticks (106 px/unit), reading uncertainty about +/-0.03; error bars not keyed. Supporting file zhou2023b_supporting.pdf has no final pH."

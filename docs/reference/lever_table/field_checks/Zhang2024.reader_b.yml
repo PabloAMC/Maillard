@@ -1,0 +1,14 @@
+source: Zhang2024
+reader: b
+pdf: data/articles/Zhang2024.pdf
+fields: [F3]
+arms:
+  "VB1-Xyl":
+    present: [VB1 (thiamine), Xyl (xylose)]
+  "VB1-Xyl-Cys":
+    present: [VB1 (thiamine), Xyl (xylose), Cys]
+  "VB1-Xyl-GSH":
+    present: [VB1 (thiamine), Xyl (xylose), GSH]
+  "VB1-Xyl-GCys":
+    present: [VB1 (thiamine), Xyl (xylose), GCys]
+notes: "Sec. 2.2: VB1 15.0 mg/mL with Xyl 1:1 in pH 4.9 phosphate buffer; treatment groups add Cys, GSH or GCys 'of equal weight as VB1 and Xyl'. Phosphate buffer not listed."
