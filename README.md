@@ -20,7 +20,7 @@ and say which experiment would answer it.
 | | milestone | today |
 |---|---|---|
 | 1 | Know the direction and rough size of each big lever (sugar, sulfur source, pH, temperature, ...) per odorant | **4 of 75** lever × odorant cells are answered by the literature at a three-laboratory standard ([lever table](results/validation/lever_table.md)) |
-| 2 | The kinetic model beats that table on contrasts it has never seen | **not testable yet**: the held-out data do not exist; on what can be scored it loses to "no change" ([contrast scores](results/validation/contrast_scores.md)) |
+| 2 | The kinetic model beats that table on contrasts it has never seen | **not testable yet**: the model can be run on none of the held-out contrasts on disk, and is paused until new data arrive ([record](docs/reference/lever_table/STEP5_RECORD.md)); on what can be scored it loses to "no change" ([contrast scores](results/validation/contrast_scores.md)) |
 | 3 | Ratios within threefold in a new laboratory after a few calibration pots | one stand-in case; no real partner yet |
 | 4 | Absolute levels within threefold in a new plant matrix | **10 of 23** rows outside the meaty thiols; absolute thiol levels are refused ([scorecard](results/validation/core_panel_scores.md)) |
 
