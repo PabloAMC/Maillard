@@ -1,0 +1,618 @@
+{
+  "artifact": "step5c_discordant_cells_items",
+  "status": "diagnostic (step 5c); no engine output",
+  "cells": [
+    {
+      "cell": [
+        "2-Methyl-3-furanthiol (MFT)",
+        "pH",
+        "pH 6-7.5, initial or label"
+      ],
+      "laboratories": [
+        "cau_gao_yanxiang",
+        "ho_network"
+      ],
+      "items": [
+        {
+          "lab": "cau_gao_yanxiang",
+          "source": "xu2007",
+          "contrast": "xu2007-1",
+          "level": null,
+          "against": null,
+          "kind": "numeric",
+          "m": -0.9629681466121985,
+          "mapping": {
+            "front_door": "simulable",
+            "added_precursors": "simulable",
+            "added_precursors_ph_clamped": "simulable"
+          }
+        },
+        {
+          "lab": "cau_gao_yanxiang",
+          "source": "xu2007",
+          "contrast": "xu2007-2",
+          "level": null,
+          "against": null,
+          "kind": "numeric",
+          "m": -0.2739711357181772,
+          "mapping": {
+            "front_door": "simulable",
+            "added_precursors": "simulable",
+            "added_precursors_ph_clamped": "simulable"
+          }
+        },
+        {
+          "lab": "ho_network",
+          "source": "zhou2023",
+          "contrast": "zhou2023-1",
+          "level": null,
+          "against": null,
+          "kind": "numeric",
+          "m": 0.3577798095364914,
+          "mapping": {
+            "front_door": "simulable",
+            "added_precursors": "simulable",
+            "added_precursors_ph_clamped": "simulable"
+          }
+        }
+      ]
+    },
+    {
+      "cell": [
+        "2-Methylpyrazine",
+        "precursor dose",
+        "sulfur donor varied"
+      ],
+      "laboratories": [
+        "ho_network",
+        "zjut_zheng_zhou"
+      ],
+      "items": [
+        {
+          "lab": "zjut_zheng_zhou",
+          "source": "ding2023",
+          "contrast": "ding2023-17",
+          "level": null,
+          "against": null,
+          "kind": "numeric",
+          "m": -0.4276765833115363,
+          "mapping": {
+            "front_door": "matrix material not on file: other (fish protein hydrolysate solution)",
+            "added_precursors": "charge not derivable: glycine (unstated (named in title, no amount prin)",
+            "added_precursors_ph_clamped": "charge not derivable: glycine (unstated (named in title, no amount prin)"
+          }
+        },
+        {
+          "lab": "ho_network",
+          "source": "zhou2022",
+          "contrast": "zhou2022-7",
+          "level": null,
+          "against": null,
+          "kind": "numeric",
+          "m": 0.20353830329717496,
+          "mapping": {
+            "front_door": "unmapped precursor: ax-arp -alanine)",
+            "added_precursors": "unmapped precursor: ax-arp -alanine)",
+            "added_precursors_ph_clamped": "unmapped precursor: ax-arp -alanine)"
+          }
+        },
+        {
+          "lab": "ho_network",
+          "source": "zhou2022",
+          "contrast": "zhou2022-8",
+          "level": null,
+          "against": null,
+          "kind": "numeric",
+          "m": 0.3487709159440243,
+          "mapping": {
+            "front_door": "unmapped precursor: ax-arp -alanine)",
+            "added_precursors": "unmapped precursor: ax-arp -alanine)",
+            "added_precursors_ph_clamped": "unmapped precursor: ax-arp -alanine)"
+          }
+        }
+      ]
+    },
+    {
+      "cell": [
+        "Benzaldehyde",
+        "sugar identity",
+        "xylose vs glucose"
+      ],
+      "laboratories": [
+        "astar_sifbi_chiang",
+        "hfut_wei_zhaojun"
+      ],
+      "items": [
+        {
+          "lab": "hfut_wei_zhaojun",
+          "source": "chen2023lycium",
+          "contrast": "chen2023lycium-8",
+          "level": "xylose",
+          "against": "glucose",
+          "kind": "categorical",
+          "m": -0.38230834134414216,
+          "mapping": {
+            "front_door": "no engine target for this odorant",
+            "added_precursors": "no engine target for this odorant",
+            "added_precursors_ph_clamped": "no engine target for this odorant"
+          }
+        },
+        {
+          "lab": "astar_sifbi_chiang",
+          "source": "theng2024",
+          "contrast": "theng2024-22",
+          "level": "xylose",
+          "against": "glucose",
+          "kind": "categorical",
+          "m": 0.042869299177749065,
+          "mapping": {
+            "front_door": "no engine target for this odorant",
+            "added_precursors": "no engine target for this odorant",
+            "added_precursors_ph_clamped": "no engine target for this odorant"
+          }
+        },
+        {
+          "lab": "astar_sifbi_chiang",
+          "source": "theng2024",
+          "contrast": "theng2024-23",
+          "level": "xylose",
+          "against": "glucose",
+          "kind": "categorical",
+          "m": 0.17782151824436288,
+          "mapping": {
+            "front_door": "no engine target for this odorant",
+            "added_precursors": "no engine target for this odorant",
+            "added_precursors_ph_clamped": "no engine target for this odorant"
+          }
+        },
+        {
+          "lab": "astar_sifbi_chiang",
+          "source": "theng2024",
+          "contrast": "theng2024-24",
+          "level": "xylose",
+          "against": "glucose",
+          "kind": "categorical",
+          "m": 0.200359833782618,
+          "mapping": {
+            "front_door": "no engine target for this odorant",
+            "added_precursors": "no engine target for this odorant",
+            "added_precursors_ph_clamped": "no engine target for this odorant"
+          }
+        }
+      ]
+    },
+    {
+      "cell": [
+        "Bis(2-methyl-3-furyl) disulfide",
+        "pH",
+        "pH 6-7.5, initial or label"
+      ],
+      "laboratories": [
+        "cau_gao_yanxiang",
+        "ho_network"
+      ],
+      "items": [
+        {
+          "lab": "cau_gao_yanxiang",
+          "source": "xu2007",
+          "contrast": "xu2007-5",
+          "level": null,
+          "against": null,
+          "kind": "numeric",
+          "m": -0.7056869566872647,
+          "mapping": {
+            "front_door": "simulable",
+            "added_precursors": "simulable",
+            "added_precursors_ph_clamped": "simulable"
+          }
+        },
+        {
+          "lab": "cau_gao_yanxiang",
+          "source": "xu2007",
+          "contrast": "xu2007-6",
+          "level": null,
+          "against": null,
+          "kind": "numeric",
+          "m": 0.08617201085579489,
+          "mapping": {
+            "front_door": "simulable",
+            "added_precursors": "simulable",
+            "added_precursors_ph_clamped": "simulable"
+          }
+        },
+        {
+          "lab": "ho_network",
+          "source": "zhou2023",
+          "contrast": "zhou2023-3",
+          "level": null,
+          "against": null,
+          "kind": "numeric",
+          "m": 0.23513069868661085,
+          "mapping": {
+            "front_door": "simulable",
+            "added_precursors": "simulable",
+            "added_precursors_ph_clamped": "simulable"
+          }
+        }
+      ]
+    },
+    {
+      "cell": [
+        "Hexanal",
+        "sugar identity",
+        "xylose vs arabinose"
+      ],
+      "laboratories": [
+        "hfut_wei_zhaojun",
+        "nus_liu_shaoquan"
+      ],
+      "items": [
+        {
+          "lab": "hfut_wei_zhaojun",
+          "source": "chen2023lycium",
+          "contrast": "chen2023lycium-7",
+          "level": "xylose",
+          "against": "arabinose",
+          "kind": "categorical",
+          "m": 0.328885937860099,
+          "mapping": {
+            "front_door": "matrix material not on file: plant protein (lycium barbarum seed meal hydrolysate)",
+            "added_precursors": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU",
+            "added_precursors_ph_clamped": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
+          }
+        },
+        {
+          "lab": "hfut_wei_zhaojun",
+          "source": "chen2023lycium",
+          "contrast": "chen2023lycium-14",
+          "level": "xylose",
+          "against": "arabinose",
+          "kind": "categorical",
+          "m": 0.10739140581490947,
+          "mapping": {
+            "front_door": "matrix material not on file: plant protein (lycium barbarum seed meal hydrolysate)",
+            "added_precursors": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU",
+            "added_precursors_ph_clamped": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
+          }
+        },
+        {
+          "lab": "nus_liu_shaoquan",
+          "source": "zhang2024sugars",
+          "contrast": "zhang2024sugars-38",
+          "level": "xylose",
+          "against": "arabinose",
+          "kind": "categorical",
+          "m": -0.005143021073295007,
+          "mapping": {
+            "front_door": "matrix material not on file: other (minced chicken carcass enzymatic hydrolysate, no ph adjustment)",
+            "added_precursors": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU",
+            "added_precursors_ph_clamped": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
+          }
+        },
+        {
+          "lab": "nus_liu_shaoquan",
+          "source": "zhang2024sugars",
+          "contrast": "zhang2024sugars-39",
+          "level": "xylose",
+          "against": "arabinose",
+          "kind": "categorical",
+          "m": -0.4537959083262677,
+          "mapping": {
+            "front_door": "matrix material not on file: other (minced chicken carcass enzymatic hydrolysate, no ph adjustment)",
+            "added_precursors": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU",
+            "added_precursors_ph_clamped": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
+          }
+        }
+      ]
+    },
+    {
+      "cell": [
+        "Hexanal",
+        "sugar identity",
+        "xylose vs fructose"
+      ],
+      "laboratories": [
+        "hfut_wei_zhaojun",
+        "nus_liu_shaoquan"
+      ],
+      "items": [
+        {
+          "lab": "hfut_wei_zhaojun",
+          "source": "chen2023lycium",
+          "contrast": "chen2023lycium-7",
+          "level": "xylose",
+          "against": "fructose",
+          "kind": "categorical",
+          "m": 0.4599973424868047,
+          "mapping": {
+            "front_door": "matrix material not on file: plant protein (lycium barbarum seed meal hydrolysate)",
+            "added_precursors": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU",
+            "added_precursors_ph_clamped": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
+          }
+        },
+        {
+          "lab": "hfut_wei_zhaojun",
+          "source": "chen2023lycium",
+          "contrast": "chen2023lycium-14",
+          "level": "xylose",
+          "against": "fructose",
+          "kind": "categorical",
+          "m": 0.07386126721250186,
+          "mapping": {
+            "front_door": "matrix material not on file: plant protein (lycium barbarum seed meal hydrolysate)",
+            "added_precursors": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU",
+            "added_precursors_ph_clamped": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
+          }
+        },
+        {
+          "lab": "nus_liu_shaoquan",
+          "source": "zhang2024sugars",
+          "contrast": "zhang2024sugars-38",
+          "level": "xylose",
+          "against": "fructose",
+          "kind": "categorical",
+          "m": -0.5884700753556236,
+          "mapping": {
+            "front_door": "matrix material not on file: other (minced chicken carcass enzymatic hydrolysate, no ph adjustment)",
+            "added_precursors": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU",
+            "added_precursors_ph_clamped": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
+          }
+        },
+        {
+          "lab": "nus_liu_shaoquan",
+          "source": "zhang2024sugars",
+          "contrast": "zhang2024sugars-39",
+          "level": "xylose",
+          "against": "fructose",
+          "kind": "categorical",
+          "m": -0.8430173807441019,
+          "mapping": {
+            "front_door": "matrix material not on file: other (minced chicken carcass enzymatic hydrolysate, no ph adjustment)",
+            "added_precursors": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU",
+            "added_precursors_ph_clamped": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
+          }
+        }
+      ]
+    },
+    {
+      "cell": [
+        "Hexanal",
+        "sugar identity",
+        "xylose vs glucose"
+      ],
+      "laboratories": [
+        "hfut_wei_zhaojun",
+        "nus_liu_shaoquan"
+      ],
+      "items": [
+        {
+          "lab": "hfut_wei_zhaojun",
+          "source": "chen2023lycium",
+          "contrast": "chen2023lycium-7",
+          "level": "xylose",
+          "against": "glucose",
+          "kind": "categorical",
+          "m": 0.33935918170661017,
+          "mapping": {
+            "front_door": "matrix material not on file: plant protein (lycium barbarum seed meal hydrolysate)",
+            "added_precursors": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU",
+            "added_precursors_ph_clamped": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
+          }
+        },
+        {
+          "lab": "hfut_wei_zhaojun",
+          "source": "chen2023lycium",
+          "contrast": "chen2023lycium-14",
+          "level": "xylose",
+          "against": "glucose",
+          "kind": "categorical",
+          "m": 0.46496067855054957,
+          "mapping": {
+            "front_door": "matrix material not on file: plant protein (lycium barbarum seed meal hydrolysate)",
+            "added_precursors": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU",
+            "added_precursors_ph_clamped": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
+          }
+        },
+        {
+          "lab": "nus_liu_shaoquan",
+          "source": "zhang2024sugars",
+          "contrast": "zhang2024sugars-38",
+          "level": "xylose",
+          "against": "glucose",
+          "kind": "categorical",
+          "m": -0.4502470698614278,
+          "mapping": {
+            "front_door": "matrix material not on file: other (minced chicken carcass enzymatic hydrolysate, no ph adjustment)",
+            "added_precursors": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU",
+            "added_precursors_ph_clamped": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
+          }
+        },
+        {
+          "lab": "nus_liu_shaoquan",
+          "source": "zhang2024sugars",
+          "contrast": "zhang2024sugars-39",
+          "level": "xylose",
+          "against": "glucose",
+          "kind": "categorical",
+          "m": -0.8109248032332632,
+          "mapping": {
+            "front_door": "matrix material not on file: other (minced chicken carcass enzymatic hydrolysate, no ph adjustment)",
+            "added_precursors": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU",
+            "added_precursors_ph_clamped": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
+          }
+        }
+      ]
+    },
+    {
+      "cell": [
+        "Nonanal",
+        "precursor dose",
+        "sulfur donor varied"
+      ],
+      "laboratories": [
+        "nus_liu_shaoquan",
+        "zjut_zheng_zhou"
+      ],
+      "items": [
+        {
+          "lab": "zjut_zheng_zhou",
+          "source": "ding2023",
+          "contrast": "ding2023-25",
+          "level": null,
+          "against": null,
+          "kind": "numeric",
+          "m": 0.22067281590937227,
+          "mapping": {
+            "front_door": "matrix material not on file: other (fish protein hydrolysate solution)",
+            "added_precursors": "charge not derivable: glycine (unstated (named in title, no amount prin)",
+            "added_precursors_ph_clamped": "charge not derivable: glycine (unstated (named in title, no amount prin)"
+          }
+        },
+        {
+          "lab": "nus_liu_shaoquan",
+          "source": "li2022heat",
+          "contrast": "li2022heat-59",
+          "level": null,
+          "against": null,
+          "kind": "numeric",
+          "m": -0.22750738969440523,
+          "mapping": {
+            "front_door": "matrix material not on file: other (non-enzymatic pork trimmings extract, npe)",
+            "added_precursors": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU",
+            "added_precursors_ph_clamped": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
+          }
+        },
+        {
+          "lab": "nus_liu_shaoquan",
+          "source": "li2022heat",
+          "contrast": "li2022heat-60",
+          "level": null,
+          "against": null,
+          "kind": "numeric",
+          "m": -0.13469857389745624,
+          "mapping": {
+            "front_door": "matrix material not on file: other (non-enzymatic pork trimmings extract, npe)",
+            "added_precursors": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU",
+            "added_precursors_ph_clamped": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
+          }
+        },
+        {
+          "lab": "nus_liu_shaoquan",
+          "source": "li2022heat",
+          "contrast": "li2022heat-64",
+          "level": null,
+          "against": null,
+          "kind": "numeric",
+          "m": -0.4448651824302236,
+          "mapping": {
+            "front_door": "matrix material not on file: other (enzymatic pork trimmings hydrolysate, eph)",
+            "added_precursors": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU",
+            "added_precursors_ph_clamped": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
+          }
+        },
+        {
+          "lab": "nus_liu_shaoquan",
+          "source": "li2022heat",
+          "contrast": "li2022heat-65",
+          "level": null,
+          "against": null,
+          "kind": "numeric",
+          "m": -0.3863245452529921,
+          "mapping": {
+            "front_door": "matrix material not on file: other (enzymatic pork trimmings hydrolysate, eph)",
+            "added_precursors": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU",
+            "added_precursors_ph_clamped": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
+          }
+        }
+      ]
+    },
+    {
+      "cell": [
+        "Trimethylpyrazine",
+        "amino acid identity",
+        "none vs arginine"
+      ],
+      "laboratories": [
+        "ho_network",
+        "wonkwang_cho_inhee"
+      ],
+      "items": [
+        {
+          "lab": "ho_network",
+          "source": "hwang1995",
+          "contrast": "hwang1995-9",
+          "level": "none",
+          "against": "arginine",
+          "kind": "categorical",
+          "m": 0.259835397764838,
+          "mapping": {
+            "front_door": "no engine target for this odorant",
+            "added_precursors": "no engine target for this odorant",
+            "added_precursors_ph_clamped": "no engine target for this odorant"
+          }
+        },
+        {
+          "lab": "wonkwang_cho_inhee",
+          "source": "park2022mealworm",
+          "contrast": "park2022mealworm__families-8",
+          "level": "none",
+          "against": "arginine",
+          "kind": "categorical",
+          "m": -0.774690718274137,
+          "mapping": {
+            "front_door": "no engine target for this odorant",
+            "added_precursors": "no engine target for this odorant",
+            "added_precursors_ph_clamped": "no engine target for this odorant"
+          }
+        }
+      ]
+    }
+  ],
+  "mapping_counts": {
+    "front_door": {
+      "matrix material not on file": 18,
+      "simulable": 6,
+      "no engine target for this odorant": 6,
+      "unmapped precursor": 2
+    },
+    "added_precursors": {
+      "the engine refuses the arm": 16,
+      "simulable": 6,
+      "no engine target for this odorant": 6,
+      "charge not derivable": 2,
+      "unmapped precursor": 2
+    },
+    "added_precursors_ph_clamped": {
+      "the engine refuses the arm": 16,
+      "simulable": 6,
+      "no engine target for this odorant": 6,
+      "charge not derivable": 2,
+      "unmapped precursor": 2
+    }
+  },
+  "provenance": {
+    "artifact": "step5c_discordant_cells_items",
+    "generated_on": "2026-11-13",
+    "git": {
+      "commit": "02b6763c892e54778b42198f9e380228280e88f8",
+      "short": "02b6763c",
+      "branch": "step6-writeup",
+      "dirty": true
+    },
+    "generated_by": "scripts/generators/build_step5c_discordant_cells.py",
+    "inputs": [
+      {
+        "path": "results/validation/lever_disagreement_audit.json",
+        "sha256": "df57df7372981fa664b34fbd07c824757d4d383ca99142b3f13e447465d9315e"
+      },
+      {
+        "path": "scripts/generators/build_step5a_display_check.py",
+        "sha256": "f079abfd3d9165211fec60318b0b769b6049dc1c5225201fe18933054272a643"
+      },
+      {
+        "path": "scripts/generators/build_step5c_discordant_cells.py",
+        "sha256": "40326eed9d62e26a9b0de6b5a05b279d0686026250070e55c664dbeeadfb8a92"
+      }
+    ]
+  }
+}
