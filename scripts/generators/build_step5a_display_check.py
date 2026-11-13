@@ -323,61 +323,48 @@ def build_items(sources: Sequence[Mapping[str, Any]], labs: Mapping[str, Tuple[s
                 excluded: Mapping[str, str]) -> Tuple[List[Dict[str, Any]], Dict[str, Any]]:
     """One item per TEST contrast of a numeric cell and per TEST pair of a categorical cell, for the cells with two
     or more TEST laboratories after the exclusions. Each item carries its keyed arms; no engine output."""
-    obs = keyed_observations(sources, labs)
+    obs = []
+    for doc in sources:         # one contrast at a time, so that each observation keeps its keyed contrast
+        for c in doc["contrasts"] or []:     # (ids repeat across a source's files)
+            for o in LT.observations([{"source": doc["source"], "contrasts": [c]}], labs)[0]:
+                obs.append({**o, "keyed": c})
     test = [o for o in obs if o["partition"] == "test"]
     kept = [o for o in test if o["source"].lower() not in excluded]
     cells = defaultdict(list)
     for o in kept:
         cells[(o["compound"], o["lever_class"], o["band"])].append(o)
     qualifying = {k: v for k, v in cells.items() if len({o["lab"] for o in v}) >= MIN_LABS}
-    items = [it for key, rows in sorted(qualifying.items()) for it in cell_items(key, rows)]
+    items = []
+    for (compound, lc, band), rows in sorted(qualifying.items()):
+        for o in rows:
+            c = o["keyed"]
+            arms = [dict(a) for a in (c.get("arms") or [])]
+            LT._trace_fill(arms)
+            base = {"cell": [compound, lc, band], "compound": compound, "lever_class": lc, "band": band,
+                    "lab": o["lab"], "source": o["source"], "contrast": o["contrast"], "kind": o["kind"],
+                    "censored_arms": int(o.get("censored_arms") or 0), "peak_area": bool(o["peak_area"])}
+            if o["kind"] == "numeric":
+                pts = run_points(c, arms)
+                xs, ys, vs = [p[0] for p in pts], [p[1] for p in pts], [p[2] for p in pts]
+                if abs(wls_slope(xs, ys, vs) - o["y"]) > 1e-9:
+                    raise SystemExit(f"{o['source']} {o['contrast']}: run_points departs from the lever table's slope")
+                items.append({**base, "m": o["y"], "span_steps": max(xs) - min(xs), "x": xs, "var": vs,
+                              "arms": [arms[p[3]] for p in pts]})
+            else:
+                usable = [(LT._level(a.get("lever_value") or a.get("label")), a) for a in arms
+                          if LT.arm_log_and_var(a, bool(c.get("digitised")))[0] is not None]
+                if lc == "sugar identity":
+                    usable = [u for u in usable if u[0] in LT.SUGAR_LEVELS]
+                others = [u for u in usable[1:] if u[0] != usable[0][0]]      # the order of the table's pairs
+                assert [u[0] for u in others] == [p["level"] for p in o["pairs"]], (o["source"], o["contrast"])
+                for p, (_, arm) in zip(o["pairs"], others):
+                    items.append({**base, "m": p["y"], "span_steps": 1.0, "level": p["level"], "against": p["against"],
+                                  "arms": [usable[0][1], arm]})
     meta = {"test_observations": len(test), "test_observations_after_exclusions": len(kept),
             "test_cells": len(cells), "qualifying_cells": len(qualifying),
             "excluded_observations": dict(Counter(o["source"] for o in test if o["source"].lower() in excluded)),
             "test_laboratories": sorted({o["lab"] for o in kept}), "test_sources": sorted({o["source"] for o in kept})}
     return items, meta
-
-
-def keyed_observations(sources: Sequence[Mapping[str, Any]], labs: Mapping[str, Tuple[str, str]]
-                       ) -> List[Dict[str, Any]]:
-    """The lever table's observations, each with its keyed contrast (``keyed``), both partitions."""
-    obs = []
-    for doc in sources:         # one contrast at a time, so that each observation keeps its keyed contrast
-        for c in doc["contrasts"] or []:     # (ids repeat across a source's files)
-            for o in LT.observations([{"source": doc["source"], "contrasts": [c]}], labs)[0]:
-                obs.append({**o, "keyed": c})
-    return obs
-
-
-def cell_items(key: Tuple[str, str, str], rows: Sequence[Mapping[str, Any]]) -> List[Dict[str, Any]]:
-    """One item per numeric contrast and per categorical pair of one cell's observations, with its keyed arms."""
-    compound, lc, band = key
-    items = []
-    for o in rows:
-        c = o["keyed"]
-        arms = [dict(a) for a in (c.get("arms") or [])]
-        LT._trace_fill(arms)
-        base = {"cell": [compound, lc, band], "compound": compound, "lever_class": lc, "band": band,
-                "lab": o["lab"], "source": o["source"], "contrast": o["contrast"], "kind": o["kind"],
-                "censored_arms": int(o.get("censored_arms") or 0), "peak_area": bool(o["peak_area"])}
-        if o["kind"] == "numeric":
-            pts = run_points(c, arms)
-            xs, ys, vs = [p[0] for p in pts], [p[1] for p in pts], [p[2] for p in pts]
-            if abs(wls_slope(xs, ys, vs) - o["y"]) > 1e-9:
-                raise SystemExit(f"{o['source']} {o['contrast']}: run_points departs from the lever table's slope")
-            items.append({**base, "m": o["y"], "span_steps": max(xs) - min(xs), "x": xs, "var": vs,
-                          "arms": [arms[p[3]] for p in pts]})
-        else:
-            usable = [(LT._level(a.get("lever_value") or a.get("label")), a) for a in arms
-                      if LT.arm_log_and_var(a, bool(c.get("digitised")))[0] is not None]
-            if lc == "sugar identity":
-                usable = [u for u in usable if u[0] in LT.SUGAR_LEVELS]
-            others = [u for u in usable[1:] if u[0] != usable[0][0]]      # the order of the table's pairs
-            assert [u[0] for u in others] == [p["level"] for p in o["pairs"]], (o["source"], o["contrast"])
-            for p, (_, arm) in zip(o["pairs"], others):
-                items.append({**base, "m": p["y"], "span_steps": 1.0, "level": p["level"], "against": p["against"],
-                              "arms": [usable[0][1], arm]})
-    return items
 
 
 def classify(item: Mapping[str, Any], reading: str) -> Tuple[str, Optional[List[engine.FormulationSpec]]]:

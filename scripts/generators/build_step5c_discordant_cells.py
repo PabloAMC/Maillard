@@ -47,6 +47,50 @@ SCORE_OUT = data_paths.VALIDATION_DIR / "step5c_discordant_cells.json"
 CONFLICT = "conflict between laboratories"
 
 
+# ------------------------------------------------------------------------------------------- items (as step 5a's)
+# Step 5a's ``build_items`` restricted to TEST contrasts and inlined its per-cell loop; the two functions below are
+# that loop, copied verbatim, so that step 5a's frozen generator (and its artifacts' input hashes) stay untouched.
+def keyed_observations(sources: Sequence[Mapping[str, Any]], labs: Mapping[str, Any]) -> List[Dict[str, Any]]:
+    """The lever table's observations, each with its keyed contrast (``keyed``), both partitions."""
+    obs = []
+    for doc in sources:         # one contrast at a time, so that each observation keeps its keyed contrast
+        for c in doc["contrasts"] or []:     # (ids repeat across a source's files)
+            for o in LT.observations([{"source": doc["source"], "contrasts": [c]}], labs)[0]:
+                obs.append({**o, "keyed": c})
+    return obs
+
+
+def cell_items(key: Sequence[str], rows: Sequence[Mapping[str, Any]]) -> List[Dict[str, Any]]:
+    """One item per numeric contrast and per categorical pair of one cell's observations, with its keyed arms."""
+    compound, lc, band = key
+    items = []
+    for o in rows:
+        c = o["keyed"]
+        arms = [dict(a) for a in (c.get("arms") or [])]
+        LT._trace_fill(arms)
+        base = {"cell": [compound, lc, band], "compound": compound, "lever_class": lc, "band": band,
+                "lab": o["lab"], "source": o["source"], "contrast": o["contrast"], "kind": o["kind"],
+                "censored_arms": int(o.get("censored_arms") or 0), "peak_area": bool(o["peak_area"])}
+        if o["kind"] == "numeric":
+            pts = S5A.run_points(c, arms)
+            xs, ys, vs = [p[0] for p in pts], [p[1] for p in pts], [p[2] for p in pts]
+            if abs(S5A.wls_slope(xs, ys, vs) - o["y"]) > 1e-9:
+                raise SystemExit(f"{o['source']} {o['contrast']}: run_points departs from the lever table's slope")
+            items.append({**base, "m": o["y"], "span_steps": max(xs) - min(xs), "x": xs, "var": vs,
+                          "arms": [arms[p[3]] for p in pts]})
+        else:
+            usable = [(LT._level(a.get("lever_value") or a.get("label")), a) for a in arms
+                      if LT.arm_log_and_var(a, bool(c.get("digitised")))[0] is not None]
+            if lc == "sugar identity":
+                usable = [u for u in usable if u[0] in LT.SUGAR_LEVELS]
+            others = [u for u in usable[1:] if u[0] != usable[0][0]]      # the order of the table's pairs
+            assert [u[0] for u in others] == [p["level"] for p in o["pairs"]], (o["source"], o["contrast"])
+            for p, (_, arm) in zip(o["pairs"], others):
+                items.append({**base, "m": p["y"], "span_steps": 1.0, "level": p["level"], "against": p["against"],
+                              "arms": [usable[0][1], arm]})
+    return items
+
+
 def conflict_cells() -> List[Dict[str, Any]]:
     return [c for c in json.loads(AUDIT.read_text())["cells"] if c["class"] == CONFLICT]
 
@@ -54,7 +98,7 @@ def conflict_cells() -> List[Dict[str, Any]]:
 def build() -> Dict[str, Any]:
     """The conflict cells, their items (both partitions) and each item's mapping under every reading."""
     labs, _ = LT.lab_partition()
-    obs = S5A.keyed_observations(LT.load_sources(), labs)
+    obs = keyed_observations(LT.load_sources(), labs)
     by_cell = defaultdict(list)
     for o in obs:
         by_cell[(o["compound"], o["lever_class"], o["band"])].append(o)
@@ -62,12 +106,12 @@ def build() -> Dict[str, Any]:
     for c in conflict_cells():
         key = (c["compound"], c["lever_class"], c["band"])
         if key in by_cell:          # a numeric cell: the audit's band is the table's
-            items = S5A.cell_items(key, by_cell[key])
+            items = cell_items(key, by_cell[key])
         else:                       # a categorical pair: the audit names it 'b vs a', levels in name order
             items = []
             for k, rows in by_cell.items():
                 if k[:2] == key[:2]:
-                    items += [it for it in (_oriented(i) for i in S5A.cell_items(k, rows)) if it["pair"] == key[2]]
+                    items += [it for it in (_oriented(i) for i in cell_items(k, rows)) if it["pair"] == key[2]]
         cells.append({"cell": list(key), "lab_means_audit": c["lab_means"], "items": items})
     return {"cells": cells}
 

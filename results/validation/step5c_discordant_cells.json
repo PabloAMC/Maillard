@@ -1759,8 +1759,8 @@
     "artifact": "step5c_discordant_cells",
     "generated_on": "2026-11-13",
     "git": {
-      "commit": "439d3d9806e3ad75777abd504513b4c665368db6",
-      "short": "439d3d98",
+      "commit": "02b6763c892e54778b42198f9e380228280e88f8",
+      "short": "02b6763c",
       "branch": "step6-writeup",
       "dirty": true
     },
@@ -1772,15 +1772,15 @@
       },
       {
         "path": "scripts/generators/build_step5a_display_check.py",
-        "sha256": "0f2b8a77a998377559655da870e3859a771d32d14caa46c2fa084625a457174e"
+        "sha256": "f079abfd3d9165211fec60318b0b769b6049dc1c5225201fe18933054272a643"
       },
       {
         "path": "scripts/generators/build_step5c_discordant_cells.py",
-        "sha256": "d862eea4b8d02c18491afe8206265ed10b67098e5553b38db5562427f5193346"
+        "sha256": "40326eed9d62e26a9b0de6b5a05b279d0686026250070e55c664dbeeadfb8a92"
       },
       {
         "path": "results/validation/step5c_discordant_cells_items.json",
-        "sha256": "468451baf4d5cc5bef615bf33ad0b44be1264b718e260230230e3b328e2b1a6e"
+        "sha256": "830f21657d465823b188e84a67c3c5953b25b534a0c4301c9a2f2b11a2968281"
       }
     ]
   }
