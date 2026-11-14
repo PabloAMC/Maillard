@@ -1,0 +1,3063 @@
+source: seo2015
+pdf: data/articles/seo2015.pdf
+reader: resolved
+scope_note: 'Resolved 2026-11-14 (step 15, A6 batch 3). Readers agree on all 33 contrasts (every arm value, SD, n and censor;
+  comparison tool reports no differences); base reader a. Table 4 re-checked against the PDF (p. 181): 230 / 250 / 280 C,
+  15 min each in the direct-heated continuous reactor (Methods). Keyed: one temperature ladder per odorant (33 aroma-active
+  compounds). ppm by 3-heptanol internal standard, response factor 1 (relative); n = 2 (duplicate analysis); SD as printed,
+  including 3-methylbutanal 250 C 6.3 +- 9.0. Tables 2 / 3 are single-arm (250 C); Fig. 2 plots class totals of Table 4, not
+  keyed. pH, headspace not reported. No amino-acid-identity or other out-of-list contrasts. Odorant names canonicalised to
+  the compound_keys display name, printed name in odorant_printed; names compound_keys does not resolve take the standard
+  spelling; printed ''pyrazine'' is keyed as the single compound Pyrazine (compound_keys maps it to the class key ''Pyrazines'',
+  wrong for this row).'
+contrasts:
+- id: seo2015-1
+  resolution: agreed
+  odorant: 2-Butenal
+  odorant_unlisted: true
+  lever_class: temperature
+  lever: reaction temperature in high-temperature continuous reactor (230, 250, 280 C; 15 min)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 16.4
+    censor: none
+    limit: null
+    n: 2
+    sd: 3.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 39.3
+    censor: none
+    limit: null
+    n: 2
+    sd: 1.7
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 47.0
+    censor: none
+    limit: null
+    n: 2
+    sd: 2.5
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  odorant_printed: 2-butenal
+- id: seo2015-2
+  resolution: agreed
+  odorant: Hexanal
+  lever_class: temperature
+  lever: reaction temperature in high-temperature continuous reactor (230, 250, 280 C; 15 min)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 24.6
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.1
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 65.9
+    censor: none
+    limit: null
+    n: 2
+    sd: 3.6
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 69.1
+    censor: none
+    limit: null
+    n: 2
+    sd: 10.1
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  odorant_printed: hexanal
+- id: seo2015-3
+  resolution: agreed
+  odorant: 2-Pentenal
+  odorant_unlisted: true
+  lever_class: temperature
+  lever: reaction temperature in high-temperature continuous reactor (230, 250, 280 C; 15 min)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 2.3
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 16.0
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.9
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 13.6
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.6
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  odorant_printed: 2-pentenal
+- id: seo2015-4
+  resolution: agreed
+  odorant: Heptanal
+  lever_class: temperature
+  lever: reaction temperature in high-temperature continuous reactor (230, 250, 280 C; 15 min)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 26.4
+    censor: none
+    limit: null
+    n: 2
+    sd: 2.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 115.2
+    censor: none
+    limit: null
+    n: 2
+    sd: 6.5
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 145.8
+    censor: none
+    limit: null
+    n: 2
+    sd: 12.3
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  odorant_printed: heptanal
+- id: seo2015-5
+  resolution: agreed
+  odorant: 3-Methylbutanal
+  lever_class: temperature
+  lever: reaction temperature in high-temperature continuous reactor (230, 250, 280 C; 15 min)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 3.1
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.2
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 6.3
+    censor: none
+    limit: null
+    n: 2
+    sd: 9.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 14.8
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.3
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  odorant_printed: 3-methyl butanal
+- id: seo2015-6
+  resolution: agreed
+  odorant: 2-Hexenal
+  odorant_unlisted: true
+  lever_class: temperature
+  lever: reaction temperature in high-temperature continuous reactor (230, 250, 280 C; 15 min)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 18.7
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.4
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 41.3
+    censor: none
+    limit: null
+    n: 2
+    sd: 5.3
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 57.7
+    censor: none
+    limit: null
+    n: 2
+    sd: 3.5
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  odorant_printed: 2-hexenal
+- id: seo2015-7
+  resolution: agreed
+  odorant: Octanal
+  lever_class: temperature
+  lever: reaction temperature in high-temperature continuous reactor (230, 250, 280 C; 15 min)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 42.9
+    censor: none
+    limit: null
+    n: 2
+    sd: 8.4
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 170.9
+    censor: none
+    limit: null
+    n: 2
+    sd: 1.2
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 162.1
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.7
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  odorant_printed: octanal
+- id: seo2015-8
+  resolution: agreed
+  odorant: Nonanal
+  lever_class: temperature
+  lever: reaction temperature in high-temperature continuous reactor (230, 250, 280 C; 15 min)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 133.1
+    censor: none
+    limit: null
+    n: 2
+    sd: 2.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 469.1
+    censor: none
+    limit: null
+    n: 2
+    sd: 17.8
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 567.0
+    censor: none
+    limit: null
+    n: 2
+    sd: 5.2
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  odorant_printed: nonanal
+- id: seo2015-9
+  resolution: agreed
+  odorant: (E)-2-Octenal
+  lever_class: temperature
+  lever: reaction temperature in high-temperature continuous reactor (230, 250, 280 C; 15 min)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 37.5
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.4
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 195.9
+    censor: none
+    limit: null
+    n: 2
+    sd: 2.1
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 234.4
+    censor: none
+    limit: null
+    n: 2
+    sd: 1.8
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  odorant_printed: (E)-2-octenal
+- id: seo2015-10
+  resolution: agreed
+  odorant: Decanal
+  odorant_unlisted: true
+  lever_class: temperature
+  lever: reaction temperature in high-temperature continuous reactor (230, 250, 280 C; 15 min)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 85.6
+    censor: none
+    limit: null
+    n: 2
+    sd: 4.8
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 190.1
+    censor: none
+    limit: null
+    n: 2
+    sd: 17.8
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 204.9
+    censor: none
+    limit: null
+    n: 2
+    sd: 29.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  odorant_printed: decanal
+- id: seo2015-11
+  resolution: agreed
+  odorant: (E)-2-Nonenal
+  lever_class: temperature
+  lever: reaction temperature in high-temperature continuous reactor (230, 250, 280 C; 15 min)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 40.1
+    censor: none
+    limit: null
+    n: 2
+    sd: 11.9
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 64.4
+    censor: none
+    limit: null
+    n: 2
+    sd: 6.9
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 82.6
+    censor: none
+    limit: null
+    n: 2
+    sd: 4.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  odorant_printed: 2-nonenal
+- id: seo2015-12
+  resolution: agreed
+  odorant: Undecanal
+  odorant_unlisted: true
+  lever_class: temperature
+  lever: reaction temperature in high-temperature continuous reactor (230, 250, 280 C; 15 min)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 56.3
+    censor: none
+    limit: null
+    n: 2
+    sd: 5.8
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 140.8
+    censor: none
+    limit: null
+    n: 2
+    sd: 13.3
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 169.8
+    censor: none
+    limit: null
+    n: 2
+    sd: 5.1
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  odorant_printed: undecanal
+- id: seo2015-13
+  resolution: agreed
+  odorant: Phenylacetaldehyde
+  lever_class: temperature
+  lever: reaction temperature in high-temperature continuous reactor (230, 250, 280 C; 15 min)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 590.2
+    censor: none
+    limit: null
+    n: 2
+    sd: 94.7
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 785.4
+    censor: none
+    limit: null
+    n: 2
+    sd: 63.7
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 944.1
+    censor: none
+    limit: null
+    n: 2
+    sd: 27.2
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  odorant_printed: phenylacetaldehyde
+- id: seo2015-14
+  resolution: agreed
+  odorant: Dodecanal
+  odorant_unlisted: true
+  lever_class: temperature
+  lever: reaction temperature in high-temperature continuous reactor (230, 250, 280 C; 15 min)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 48.6
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.5
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 110.5
+    censor: none
+    limit: null
+    n: 2
+    sd: 12.6
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 141.5
+    censor: none
+    limit: null
+    n: 2
+    sd: 9.8
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  odorant_printed: dodecanal
+- id: seo2015-15
+  resolution: agreed
+  odorant: 2,4-Decadienal
+  odorant_unlisted: true
+  lever_class: temperature
+  lever: reaction temperature in high-temperature continuous reactor (230, 250, 280 C; 15 min)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 20.1
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.2
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 37.1
+    censor: none
+    limit: null
+    n: 2
+    sd: 4.8
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 47.4
+    censor: none
+    limit: null
+    n: 2
+    sd: 3.5
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  odorant_printed: 2,4-decadienal
+- id: seo2015-16
+  resolution: agreed
+  odorant: 2,3-Butanedione
+  lever_class: temperature
+  lever: reaction temperature in high-temperature continuous reactor (230, 250, 280 C; 15 min)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 89.9
+    censor: none
+    limit: null
+    n: 2
+    sd: 6.1
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 145.3
+    censor: none
+    limit: null
+    n: 2
+    sd: 10.5
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 189.6
+    censor: none
+    limit: null
+    n: 2
+    sd: 17.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  odorant_printed: 2,3-butanedione
+- id: seo2015-17
+  resolution: agreed
+  odorant: Furfural
+  lever_class: temperature
+  lever: reaction temperature in high-temperature continuous reactor (230, 250, 280 C; 15 min)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 1595.0
+    censor: none
+    limit: null
+    n: 2
+    sd: 69.7
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 1782.6
+    censor: none
+    limit: null
+    n: 2
+    sd: 61.3
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 2042.0
+    censor: none
+    limit: null
+    n: 2
+    sd: 179.9
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  odorant_printed: furfural
+- id: seo2015-18
+  resolution: agreed
+  odorant: 5-Methylfurfural
+  lever_class: temperature
+  lever: reaction temperature in high-temperature continuous reactor (230, 250, 280 C; 15 min)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 709.4
+    censor: none
+    limit: null
+    n: 2
+    sd: 32.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 816.2
+    censor: none
+    limit: null
+    n: 2
+    sd: 32.6
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 992.4
+    censor: none
+    limit: null
+    n: 2
+    sd: 27.8
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  odorant_printed: 5-methyl furfural
+- id: seo2015-19
+  resolution: agreed
+  odorant: Unsubstituted pyrazine
+  lever_class: temperature
+  lever: reaction temperature in high-temperature continuous reactor (230, 250, 280 C; 15 min)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 9.0
+    censor: none
+    limit: null
+    n: 2
+    sd: 1.1
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 13.7
+    censor: none
+    limit: null
+    n: 2
+    sd: 2.7
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 15.9
+    censor: none
+    limit: null
+    n: 2
+    sd: 1.1
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  odorant_printed: pyrazine
+- id: seo2015-20
+  resolution: agreed
+  odorant: 2-Methylpyrazine
+  lever_class: temperature
+  lever: reaction temperature in high-temperature continuous reactor (230, 250, 280 C; 15 min)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 91.6
+    censor: none
+    limit: null
+    n: 2
+    sd: 7.5
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 96.0
+    censor: none
+    limit: null
+    n: 2
+    sd: 10.8
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 118.8
+    censor: none
+    limit: null
+    n: 2
+    sd: 15.6
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  odorant_printed: 2-methyl pyrazine
+- id: seo2015-21
+  resolution: agreed
+  odorant: 2,5-Dimethylpyrazine
+  lever_class: temperature
+  lever: reaction temperature in high-temperature continuous reactor (230, 250, 280 C; 15 min)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 7.0
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.2
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 13.4
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.9
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 17.6
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.5
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  odorant_printed: 2,5-dimethyl pyrazine
+- id: seo2015-22
+  resolution: agreed
+  odorant: 2,6-Dimethylpyrazine
+  lever_class: temperature
+  lever: reaction temperature in high-temperature continuous reactor (230, 250, 280 C; 15 min)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 47.5
+    censor: none
+    limit: null
+    n: 2
+    sd: 8.9
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 92.4
+    censor: none
+    limit: null
+    n: 2
+    sd: 7.7
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 119.7
+    censor: none
+    limit: null
+    n: 2
+    sd: 1.4
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  odorant_printed: 2,6-dimethyl pyrazine
+- id: seo2015-23
+  resolution: agreed
+  odorant: 2-Ethylpyrazine
+  lever_class: temperature
+  lever: reaction temperature in high-temperature continuous reactor (230, 250, 280 C; 15 min)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 7.0
+    censor: none
+    limit: null
+    n: 2
+    sd: 1.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 21.5
+    censor: none
+    limit: null
+    n: 2
+    sd: 8.4
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 25.7
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.4
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  odorant_printed: ethyl pyrazine
+- id: seo2015-24
+  resolution: agreed
+  odorant: 2,3-Dimethylpyrazine
+  lever_class: temperature
+  lever: reaction temperature in high-temperature continuous reactor (230, 250, 280 C; 15 min)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 12.9
+    censor: none
+    limit: null
+    n: 2
+    sd: 3.2
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 25.0
+    censor: none
+    limit: null
+    n: 2
+    sd: 3.5
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 35.3
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.9
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  odorant_printed: 2,3-dimethyl pyrazine
+- id: seo2015-25
+  resolution: agreed
+  odorant: 2-Ethyl-6-methylpyrazine
+  odorant_unlisted: true
+  lever_class: temperature
+  lever: reaction temperature in high-temperature continuous reactor (230, 250, 280 C; 15 min)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 2.7
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.4
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 2.2
+    censor: none
+    limit: null
+    n: 2
+    sd: 3.1
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 6.5
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.6
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  odorant_printed: 2-ethyl-6-methyl pyrazine
+- id: seo2015-26
+  resolution: agreed
+  odorant: 2-Ethenyl-6-methylpyrazine
+  odorant_unlisted: true
+  lever_class: temperature
+  lever: reaction temperature in high-temperature continuous reactor (230, 250, 280 C; 15 min)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 1.1
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 2.0
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 2.2
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  odorant_printed: 2-ethenyl-6-methyl pyrazine
+- id: seo2015-27
+  resolution: agreed
+  odorant: Acetic acid
+  odorant_unlisted: true
+  lever_class: temperature
+  lever: reaction temperature in high-temperature continuous reactor (230, 250, 280 C; 15 min)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 24.8
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.7
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 35.0
+    censor: none
+    limit: null
+    n: 2
+    sd: 6.2
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 38.1
+    censor: none
+    limit: null
+    n: 2
+    sd: 5.7
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  odorant_printed: acetic acid
+- id: seo2015-28
+  resolution: agreed
+  odorant: Propanoic acid
+  odorant_unlisted: true
+  lever_class: temperature
+  lever: reaction temperature in high-temperature continuous reactor (230, 250, 280 C; 15 min)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 46.9
+    censor: none
+    limit: null
+    n: 2
+    sd: 2.9
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 64.8
+    censor: none
+    limit: null
+    n: 2
+    sd: 3.8
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 87.8
+    censor: none
+    limit: null
+    n: 2
+    sd: 6.7
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  odorant_printed: propanoic acid
+- id: seo2015-29
+  resolution: agreed
+  odorant: Dimethyl trisulfide
+  lever_class: temperature
+  lever: reaction temperature in high-temperature continuous reactor (230, 250, 280 C; 15 min)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 27.6
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.9
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 10.7
+    censor: none
+    limit: null
+    n: 2
+    sd: 2.2
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 11.5
+    censor: none
+    limit: null
+    n: 2
+    sd: 5.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  odorant_printed: dimethyl trisulfide
+- id: seo2015-30
+  resolution: agreed
+  odorant: Methional (3-(methylthio)propanal)
+  lever_class: temperature
+  lever: reaction temperature in high-temperature continuous reactor (230, 250, 280 C; 15 min)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 11.6
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.9
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 14.2
+    censor: none
+    limit: null
+    n: 2
+    sd: 3.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 18.3
+    censor: none
+    limit: null
+    n: 2
+    sd: 2.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  odorant_printed: methional
+- id: seo2015-31
+  resolution: agreed
+  odorant: Diallyl disulfide
+  odorant_unlisted: true
+  lever_class: temperature
+  lever: reaction temperature in high-temperature continuous reactor (230, 250, 280 C; 15 min)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 14.9
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.6
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 8.8
+    censor: none
+    limit: null
+    n: 2
+    sd: 1.6
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 6.6
+    censor: none
+    limit: null
+    n: 2
+    sd: 2.6
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  odorant_printed: diallyl disulfide
+- id: seo2015-32
+  resolution: agreed
+  odorant: Diallyl trisulfide
+  odorant_unlisted: true
+  lever_class: temperature
+  lever: reaction temperature in high-temperature continuous reactor (230, 250, 280 C; 15 min)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 16.8
+    censor: none
+    limit: null
+    n: 2
+    sd: 1.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 8.6
+    censor: none
+    limit: null
+    n: 2
+    sd: 3.7
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 7.8
+    censor: none
+    limit: null
+    n: 2
+    sd: 2.3
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  odorant_printed: diallyl trisulfide
+- id: seo2015-33
+  resolution: agreed
+  odorant: 2-Methoxyphenol (guaiacol)
+  odorant_unlisted: true
+  lever_class: temperature
+  lever: reaction temperature in high-temperature continuous reactor (230, 250, 280 C; 15 min)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 4.5
+    censor: none
+    limit: null
+    n: 2
+    sd: 1.3
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 5.8
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 12.5
+    censor: none
+    limit: null
+    n: 2
+    sd: 3.2
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        soy sauce: 8.4 g
+        sugar: 10.00 g
+        corn syrup: 3.3 g
+        garlic powder: 2.3 g
+        onion powder: 2.3 g
+        ginger extract: 0.3 g
+        water: 73.40 g (aqueous phase, Table 1; pre-heated 100 C 2 h)
+        beef tallow: oil phase; reaction liquid = 80% aqueous + 20% tallow
+      buffer: none
+      matrix: 'other (bulgogi seasoning: soy sauce, sugars, garlic, onion, ginger + beef tallow emulsion)'
+      headspace: unstated
+  odorant_printed: 2-methoxy phenol

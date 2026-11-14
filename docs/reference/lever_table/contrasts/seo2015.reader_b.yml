@@ -1,0 +1,2481 @@
+source: seo2015
+pdf: data/articles/seo2015.pdf
+reader: b
+scope_note: Only Table 4 (3-level temperature ladder, 33 aroma-active compounds) is a contrast; Table 2/3 are single-sample (250 C). ppm by 3-heptanol internal standard without response factors (keyed relative);
+  n=2 taken from 'duplicate' extraction/analysis; '6.3+-9.0' for 3-methyl butanal at 250 C as printed; pH and headspace not reported; Fig. 2 plots class totals, not digitised.
+contrasts:
+- id: seo2015-1
+  odorant: 2-butenal
+  lever_class: temperature
+  lever: reaction temperature (230, 250, 280 C; 15 min, high-temperature direct-heated reactor)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 16.4
+    censor: none
+    limit: null
+    n: 2
+    sd: 3.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 39.3
+    censor: none
+    limit: null
+    n: 2
+    sd: 1.7
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 47.0
+    censor: none
+    limit: null
+    n: 2
+    sd: 2.5
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+- id: seo2015-2
+  odorant: hexanal
+  lever_class: temperature
+  lever: reaction temperature (230, 250, 280 C; 15 min, high-temperature direct-heated reactor)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 24.6
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.1
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 65.9
+    censor: none
+    limit: null
+    n: 2
+    sd: 3.6
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 69.1
+    censor: none
+    limit: null
+    n: 2
+    sd: 10.1
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+- id: seo2015-3
+  odorant: 2-pentenal
+  lever_class: temperature
+  lever: reaction temperature (230, 250, 280 C; 15 min, high-temperature direct-heated reactor)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 2.3
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 16.0
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.9
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 13.6
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.6
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+- id: seo2015-4
+  odorant: heptanal
+  lever_class: temperature
+  lever: reaction temperature (230, 250, 280 C; 15 min, high-temperature direct-heated reactor)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 26.4
+    censor: none
+    limit: null
+    n: 2
+    sd: 2.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 115.2
+    censor: none
+    limit: null
+    n: 2
+    sd: 6.5
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 145.8
+    censor: none
+    limit: null
+    n: 2
+    sd: 12.3
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+- id: seo2015-5
+  odorant: 3-methyl butanal
+  lever_class: temperature
+  lever: reaction temperature (230, 250, 280 C; 15 min, high-temperature direct-heated reactor)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 3.1
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.2
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 6.3
+    censor: none
+    limit: null
+    n: 2
+    sd: 9.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 14.8
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.3
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+- id: seo2015-6
+  odorant: 2-hexenal
+  lever_class: temperature
+  lever: reaction temperature (230, 250, 280 C; 15 min, high-temperature direct-heated reactor)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 18.7
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.4
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 41.3
+    censor: none
+    limit: null
+    n: 2
+    sd: 5.3
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 57.7
+    censor: none
+    limit: null
+    n: 2
+    sd: 3.5
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+- id: seo2015-7
+  odorant: octanal
+  lever_class: temperature
+  lever: reaction temperature (230, 250, 280 C; 15 min, high-temperature direct-heated reactor)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 42.9
+    censor: none
+    limit: null
+    n: 2
+    sd: 8.4
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 170.9
+    censor: none
+    limit: null
+    n: 2
+    sd: 1.2
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 162.1
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.7
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+- id: seo2015-8
+  odorant: nonanal
+  lever_class: temperature
+  lever: reaction temperature (230, 250, 280 C; 15 min, high-temperature direct-heated reactor)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 133.1
+    censor: none
+    limit: null
+    n: 2
+    sd: 2.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 469.1
+    censor: none
+    limit: null
+    n: 2
+    sd: 17.8
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 567.0
+    censor: none
+    limit: null
+    n: 2
+    sd: 5.2
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+- id: seo2015-9
+  odorant: (E)-2-octenal
+  lever_class: temperature
+  lever: reaction temperature (230, 250, 280 C; 15 min, high-temperature direct-heated reactor)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 37.5
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.4
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 195.9
+    censor: none
+    limit: null
+    n: 2
+    sd: 2.1
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 234.4
+    censor: none
+    limit: null
+    n: 2
+    sd: 1.8
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+- id: seo2015-10
+  odorant: decanal
+  lever_class: temperature
+  lever: reaction temperature (230, 250, 280 C; 15 min, high-temperature direct-heated reactor)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 85.6
+    censor: none
+    limit: null
+    n: 2
+    sd: 4.8
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 190.1
+    censor: none
+    limit: null
+    n: 2
+    sd: 17.8
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 204.9
+    censor: none
+    limit: null
+    n: 2
+    sd: 29.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+- id: seo2015-11
+  odorant: 2-nonenal
+  lever_class: temperature
+  lever: reaction temperature (230, 250, 280 C; 15 min, high-temperature direct-heated reactor)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 40.1
+    censor: none
+    limit: null
+    n: 2
+    sd: 11.9
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 64.4
+    censor: none
+    limit: null
+    n: 2
+    sd: 6.9
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 82.6
+    censor: none
+    limit: null
+    n: 2
+    sd: 4.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+- id: seo2015-12
+  odorant: undecanal
+  lever_class: temperature
+  lever: reaction temperature (230, 250, 280 C; 15 min, high-temperature direct-heated reactor)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 56.3
+    censor: none
+    limit: null
+    n: 2
+    sd: 5.8
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 140.8
+    censor: none
+    limit: null
+    n: 2
+    sd: 13.3
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 169.8
+    censor: none
+    limit: null
+    n: 2
+    sd: 5.1
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+- id: seo2015-13
+  odorant: phenylacetaldehyde
+  lever_class: temperature
+  lever: reaction temperature (230, 250, 280 C; 15 min, high-temperature direct-heated reactor)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 590.2
+    censor: none
+    limit: null
+    n: 2
+    sd: 94.7
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 785.4
+    censor: none
+    limit: null
+    n: 2
+    sd: 63.7
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 944.1
+    censor: none
+    limit: null
+    n: 2
+    sd: 27.2
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+- id: seo2015-14
+  odorant: dodecanal
+  lever_class: temperature
+  lever: reaction temperature (230, 250, 280 C; 15 min, high-temperature direct-heated reactor)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 48.6
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.5
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 110.5
+    censor: none
+    limit: null
+    n: 2
+    sd: 12.6
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 141.5
+    censor: none
+    limit: null
+    n: 2
+    sd: 9.8
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+- id: seo2015-15
+  odorant: 2,4-decadienal
+  lever_class: temperature
+  lever: reaction temperature (230, 250, 280 C; 15 min, high-temperature direct-heated reactor)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 20.1
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.2
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 37.1
+    censor: none
+    limit: null
+    n: 2
+    sd: 4.8
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 47.4
+    censor: none
+    limit: null
+    n: 2
+    sd: 3.5
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+- id: seo2015-16
+  odorant: 2,3-butanedione
+  lever_class: temperature
+  lever: reaction temperature (230, 250, 280 C; 15 min, high-temperature direct-heated reactor)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 89.9
+    censor: none
+    limit: null
+    n: 2
+    sd: 6.1
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 145.3
+    censor: none
+    limit: null
+    n: 2
+    sd: 10.5
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 189.6
+    censor: none
+    limit: null
+    n: 2
+    sd: 17.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+- id: seo2015-17
+  odorant: furfural
+  lever_class: temperature
+  lever: reaction temperature (230, 250, 280 C; 15 min, high-temperature direct-heated reactor)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 1595.0
+    censor: none
+    limit: null
+    n: 2
+    sd: 69.7
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 1782.6
+    censor: none
+    limit: null
+    n: 2
+    sd: 61.3
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 2042.0
+    censor: none
+    limit: null
+    n: 2
+    sd: 179.9
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+- id: seo2015-18
+  odorant: 5-methyl furfural
+  lever_class: temperature
+  lever: reaction temperature (230, 250, 280 C; 15 min, high-temperature direct-heated reactor)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 709.4
+    censor: none
+    limit: null
+    n: 2
+    sd: 32.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 816.2
+    censor: none
+    limit: null
+    n: 2
+    sd: 32.6
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 992.4
+    censor: none
+    limit: null
+    n: 2
+    sd: 27.8
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+- id: seo2015-19
+  odorant: pyrazine
+  lever_class: temperature
+  lever: reaction temperature (230, 250, 280 C; 15 min, high-temperature direct-heated reactor)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 9.0
+    censor: none
+    limit: null
+    n: 2
+    sd: 1.1
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 13.7
+    censor: none
+    limit: null
+    n: 2
+    sd: 2.7
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 15.9
+    censor: none
+    limit: null
+    n: 2
+    sd: 1.1
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+- id: seo2015-20
+  odorant: 2-methyl pyrazine
+  lever_class: temperature
+  lever: reaction temperature (230, 250, 280 C; 15 min, high-temperature direct-heated reactor)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 91.6
+    censor: none
+    limit: null
+    n: 2
+    sd: 7.5
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 96.0
+    censor: none
+    limit: null
+    n: 2
+    sd: 10.8
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 118.8
+    censor: none
+    limit: null
+    n: 2
+    sd: 15.6
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+- id: seo2015-21
+  odorant: 2,5-dimethyl pyrazine
+  lever_class: temperature
+  lever: reaction temperature (230, 250, 280 C; 15 min, high-temperature direct-heated reactor)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 7.0
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.2
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 13.4
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.9
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 17.6
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.5
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+- id: seo2015-22
+  odorant: 2,6-dimethyl pyrazine
+  lever_class: temperature
+  lever: reaction temperature (230, 250, 280 C; 15 min, high-temperature direct-heated reactor)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 47.5
+    censor: none
+    limit: null
+    n: 2
+    sd: 8.9
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 92.4
+    censor: none
+    limit: null
+    n: 2
+    sd: 7.7
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 119.7
+    censor: none
+    limit: null
+    n: 2
+    sd: 1.4
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+- id: seo2015-23
+  odorant: ethyl pyrazine
+  lever_class: temperature
+  lever: reaction temperature (230, 250, 280 C; 15 min, high-temperature direct-heated reactor)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 7.0
+    censor: none
+    limit: null
+    n: 2
+    sd: 1.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 21.5
+    censor: none
+    limit: null
+    n: 2
+    sd: 8.4
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 25.7
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.4
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+- id: seo2015-24
+  odorant: 2,3-dimethyl pyrazine
+  lever_class: temperature
+  lever: reaction temperature (230, 250, 280 C; 15 min, high-temperature direct-heated reactor)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 12.9
+    censor: none
+    limit: null
+    n: 2
+    sd: 3.2
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 25.0
+    censor: none
+    limit: null
+    n: 2
+    sd: 3.5
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 35.3
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.9
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+- id: seo2015-25
+  odorant: 2-ethyl-6-methyl pyrazine
+  lever_class: temperature
+  lever: reaction temperature (230, 250, 280 C; 15 min, high-temperature direct-heated reactor)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 2.7
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.4
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 2.2
+    censor: none
+    limit: null
+    n: 2
+    sd: 3.1
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 6.5
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.6
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+- id: seo2015-26
+  odorant: 2-ethenyl-6-methyl pyrazine
+  lever_class: temperature
+  lever: reaction temperature (230, 250, 280 C; 15 min, high-temperature direct-heated reactor)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 1.1
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 2.0
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 2.2
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+- id: seo2015-27
+  odorant: acetic acid
+  lever_class: temperature
+  lever: reaction temperature (230, 250, 280 C; 15 min, high-temperature direct-heated reactor)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 24.8
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.7
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 35.0
+    censor: none
+    limit: null
+    n: 2
+    sd: 6.2
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 38.1
+    censor: none
+    limit: null
+    n: 2
+    sd: 5.7
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+- id: seo2015-28
+  odorant: propanoic acid
+  lever_class: temperature
+  lever: reaction temperature (230, 250, 280 C; 15 min, high-temperature direct-heated reactor)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 46.9
+    censor: none
+    limit: null
+    n: 2
+    sd: 2.9
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 64.8
+    censor: none
+    limit: null
+    n: 2
+    sd: 3.8
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 87.8
+    censor: none
+    limit: null
+    n: 2
+    sd: 6.7
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+- id: seo2015-29
+  odorant: dimethyl trisulfide
+  lever_class: temperature
+  lever: reaction temperature (230, 250, 280 C; 15 min, high-temperature direct-heated reactor)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 27.6
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.9
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 10.7
+    censor: none
+    limit: null
+    n: 2
+    sd: 2.2
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 11.5
+    censor: none
+    limit: null
+    n: 2
+    sd: 5.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+- id: seo2015-30
+  odorant: methional
+  lever_class: temperature
+  lever: reaction temperature (230, 250, 280 C; 15 min, high-temperature direct-heated reactor)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 11.6
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.9
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 14.2
+    censor: none
+    limit: null
+    n: 2
+    sd: 3.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 18.3
+    censor: none
+    limit: null
+    n: 2
+    sd: 2.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+- id: seo2015-31
+  odorant: diallyl disulfide
+  lever_class: temperature
+  lever: reaction temperature (230, 250, 280 C; 15 min, high-temperature direct-heated reactor)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 14.9
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.6
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 8.8
+    censor: none
+    limit: null
+    n: 2
+    sd: 1.6
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 6.6
+    censor: none
+    limit: null
+    n: 2
+    sd: 2.6
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+- id: seo2015-32
+  odorant: diallyl trisulfide
+  lever_class: temperature
+  lever: reaction temperature (230, 250, 280 C; 15 min, high-temperature direct-heated reactor)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 16.8
+    censor: none
+    limit: null
+    n: 2
+    sd: 1.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 8.6
+    censor: none
+    limit: null
+    n: 2
+    sd: 3.7
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 7.8
+    censor: none
+    limit: null
+    n: 2
+    sd: 2.3
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+- id: seo2015-33
+  odorant: 2-methoxy phenol
+  lever_class: temperature
+  lever: reaction temperature (230, 250, 280 C; 15 min, high-temperature direct-heated reactor)
+  focal: true
+  location: Table 4, p. 181
+  digitised: false
+  unit: ppm
+  quant_type: relative
+  time_course_rule: not a time course
+  ph_control: unstated
+  arms:
+  - label: 230oC
+    lever_value: 230
+    value: 4.5
+    censor: none
+    limit: null
+    n: 2
+    sd: 1.3
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 230
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 250oC
+    lever_value: 250
+    value: 5.8
+    censor: none
+    limit: null
+    n: 2
+    sd: 0.0
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 250
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated
+  - label: 280oC
+    lever_value: 280
+    value: 12.5
+    censor: none
+    limit: null
+    n: 2
+    sd: 3.2
+    conditions:
+      ph: null
+      ph_basis: unstated
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 280
+      time_min: 15
+      precursors:
+        aqueous reaction liquid (80% of feed; Table 1, pre-heated 100 C 2 h): soy sauce 8.4 g, sugar 10.00 g, corn syrup 3.3 g, garlic powder 2.3 g, onion powder 2.3 g, ginger extract 0.3 g, water 73.40
+          g
+        oil-soluble reaction liquid (20% of feed): beef tallow, melted at 80 C and filtered
+      buffer: none
+      matrix: other (soy sauce / sugar / corn syrup / garlic, onion, ginger aqueous mix + beef tallow; bulgogi reaction flavor)
+      headspace: unstated

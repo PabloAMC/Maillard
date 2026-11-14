@@ -4,13 +4,13 @@
   "prereg": "docs/reference/lever_table/PREREG.md",
   "split": {
     "split_sha256": "022d0cab5a53ececb27a1fc6837ff275fbab177cf2161ae1f8a4ed0341f273a7",
-    "new_labs": 47
+    "new_labs": 54
   },
   "skipped": {
     "mixed-lever contrasts (no single-lever cell)": 437,
-    "fewer than two usable arms": 988,
+    "fewer than two usable arms": 1025,
     "rows the source appears to have misprinted (kept, enter no cell)": 6,
-    "odorants outside the declared lists (PREREG amendment A3)": 647,
+    "odorants outside the declared lists (PREREG amendment A3)": 1074,
     "second peaks of one compound in the same pots (one row enters the cell)": 26,
     "sugar-identity contrasts whose levels are not sugars (fed intermediates)": 15,
     "shares of a total (PREREG amendment A1)": 163,
@@ -18,8 +18,8 @@
     "rates, half-lives or storage losses (PREREG amendment A1)": 148
   },
   "counts": {
-    "sources": 58,
-    "observations": 1032,
+    "sources": 60,
+    "observations": 1175,
     "labs": 15
   },
   "cells": [
@@ -1184,6 +1184,102 @@
       }
     },
     {
+      "compound": "(E,E)-2,4-Decadienal",
+      "lever_class": "time",
+      "band": "T 100-130 C",
+      "contrasts": 1,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "btbu_beijing"
+      ],
+      "peak_area_share": 1.0,
+      "focal_share": 0.0,
+      "matrices": [
+        "buffer"
+      ],
+      "temperature_range_C": [
+        120.0,
+        120.0
+      ],
+      "rows": [
+        {
+          "source": "wang2022lipid",
+          "contrast": "wang2022lipid-721",
+          "lab": "btbu_beijing",
+          "y": -0.19735496207202483,
+          "v": 0.002495782186128551,
+          "range": [
+            30.0,
+            90.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "buffered"
+        }
+      ],
+      "step": "a doubling of time",
+      "fit": {
+        "estimate": -0.19196121863914545,
+        "ci90": [
+          -1.2704520631888367,
+          0.906811380147741
+        ],
+        "new_lab_pi90": [
+          -1.7527782153585438,
+          1.3893896131214247
+        ],
+        "p_same_sign_new_lab": 0.6210066588901555,
+        "new_lab_pi90_width": 3.142167828479969,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.0
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": -0.19581702340810317,
+            "new_lab_pi90": [
+              -0.9972605763378914,
+              0.6112625061178574
+            ]
+          },
+          "1.0": {
+            "estimate": -0.17992157779226164,
+            "new_lab_pi90": [
+              -3.0745038606752675,
+              2.7712234018470756
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 0
+        },
+        "incidental_only": {
+          "contrasts": 1,
+          "estimate": -0.19196121863914545,
+          "ci90": [
+            -1.2704520631888367,
+            0.906811380147741
+          ]
+        },
+        "non_monotone_contrasts": 0
+      },
+      "reading": "too few laboratories",
+      "lolo": null,
+      "fragility": {
+        "contrasts_with_a_censored_arm": 0,
+        "contrasts_with_a_turning_point": 0,
+        "labs_with_a_turning_point": 0,
+        "flags": []
+      }
+    },
+    {
       "compound": "1-Hexanol",
       "lever_class": "lipid",
       "band": "all",
@@ -1378,6 +1474,102 @@
       }
     },
     {
+      "compound": "1-Hexanol",
+      "lever_class": "time",
+      "band": "T 100-130 C",
+      "contrasts": 1,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "btbu_beijing"
+      ],
+      "peak_area_share": 1.0,
+      "focal_share": 0.0,
+      "matrices": [
+        "buffer"
+      ],
+      "temperature_range_C": [
+        120.0,
+        120.0
+      ],
+      "rows": [
+        {
+          "source": "wang2022lipid",
+          "contrast": "wang2022lipid-702",
+          "lab": "btbu_beijing",
+          "y": 0.2333146181433806,
+          "v": 0.002495782186128551,
+          "range": [
+            30.0,
+            90.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "buffered"
+        }
+      ],
+      "step": "a doubling of time",
+      "fit": {
+        "estimate": 0.22693796669099203,
+        "ci90": [
+          -0.8737194940121067,
+          1.3036348854775268
+        ],
+        "new_lab_pi90": [
+          -1.3563181206953387,
+          1.7859524382034102
+        ],
+        "p_same_sign_new_lab": 0.6395919388854344,
+        "new_lab_pi90_width": 3.142270558898749,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.0
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": 0.23149446585863537,
+            "new_lab_pi90": [
+              -0.5760950697748554,
+              1.032409621679816
+            ]
+          },
+          "1.0": {
+            "estimate": 0.2126975464512443,
+            "new_lab_pi90": [
+              -2.7437767537140743,
+              3.102329449166466
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 0
+        },
+        "incidental_only": {
+          "contrasts": 1,
+          "estimate": 0.22693796669099203,
+          "ci90": [
+            -0.8737194940121067,
+            1.3036348854775268
+          ]
+        },
+        "non_monotone_contrasts": 0
+      },
+      "reading": "too few laboratories",
+      "lolo": null,
+      "fragility": {
+        "contrasts_with_a_censored_arm": 0,
+        "contrasts_with_a_turning_point": 0,
+        "labs_with_a_turning_point": 0,
+        "flags": []
+      }
+    },
+    {
       "compound": "1-Octen-3-ol",
       "lever_class": "lipid",
       "band": "all",
@@ -1569,6 +1761,311 @@
         "pairs_with_a_censored_arm": 1,
         "pairs_with_both_arms_censored": 0,
         "flags": {}
+      }
+    },
+    {
+      "compound": "1-Octen-3-ol",
+      "lever_class": "time",
+      "band": "T 100-130 C",
+      "contrasts": 1,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "btbu_beijing"
+      ],
+      "peak_area_share": 1.0,
+      "focal_share": 0.0,
+      "matrices": [
+        "buffer"
+      ],
+      "temperature_range_C": [
+        120.0,
+        120.0
+      ],
+      "rows": [
+        {
+          "source": "wang2022lipid",
+          "contrast": "wang2022lipid-707",
+          "lab": "btbu_beijing",
+          "y": -0.07272256477326318,
+          "v": 0.002495782186128551,
+          "range": [
+            30.0,
+            90.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "buffered"
+        }
+      ],
+      "step": "a doubling of time",
+      "fit": {
+        "estimate": -0.07073482621113328,
+        "ci90": [
+          -1.1555423051637854,
+          1.0215343011765146
+        ],
+        "new_lab_pi90": [
+          -1.6379616394084604,
+          1.503985685855761
+        ],
+        "p_same_sign_new_lab": 0.5482692023481991,
+        "new_lab_pi90_width": 3.1419473252642214,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.0
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": -0.07215490862043412,
+            "new_lab_pi90": [
+              -0.8753603509469648,
+              0.7331169642673142
+            ]
+          },
+          "1.0": {
+            "estimate": -0.0663044196806967,
+            "new_lab_pi90": [
+              -2.9782957002257007,
+              2.8665499753087436
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 0
+        },
+        "incidental_only": {
+          "contrasts": 1,
+          "estimate": -0.07073482621113328,
+          "ci90": [
+            -1.1555423051637854,
+            1.0215343011765146
+          ]
+        },
+        "non_monotone_contrasts": 0
+      },
+      "reading": "too few laboratories",
+      "lolo": null,
+      "fragility": {
+        "contrasts_with_a_censored_arm": 0,
+        "contrasts_with_a_turning_point": 0,
+        "labs_with_a_turning_point": 0,
+        "flags": []
+      }
+    },
+    {
+      "compound": "2,3-Butanedione",
+      "lever_class": "time",
+      "band": "T >130 C",
+      "contrasts": 7,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "reading_mottram_parker"
+      ],
+      "peak_area_share": 0.0,
+      "focal_share": 0.0,
+      "matrices": [
+        "other: freeze-dried glucose/wheat flour dough powder (crust-like, moisture <2 %), 0.5 g"
+      ],
+      "temperature_range_C": [
+        160.0,
+        160.0
+      ],
+      "rows": [
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-38",
+          "lab": "reading_mottram_parker",
+          "y": 0.4301236603199361,
+          "v": 0.0012139482482875603,
+          "range": [
+            2.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-39",
+          "lab": "reading_mottram_parker",
+          "y": 0.40894133453545506,
+          "v": 0.0012139482482875603,
+          "range": [
+            2.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-40",
+          "lab": "reading_mottram_parker",
+          "y": 0.4239707453314653,
+          "v": 0.0012139482482875603,
+          "range": [
+            2.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-41",
+          "lab": "reading_mottram_parker",
+          "y": 0.49064737013697646,
+          "v": 0.0012139482482875603,
+          "range": [
+            2.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-42",
+          "lab": "reading_mottram_parker",
+          "y": 0.5330662565966394,
+          "v": 0.0012139482482875603,
+          "range": [
+            2.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-43",
+          "lab": "reading_mottram_parker",
+          "y": 0.3128405759586598,
+          "v": 0.007437087201723903,
+          "range": [
+            3.0,
+            7.0
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-44",
+          "lab": "reading_mottram_parker",
+          "y": 0.4546634549186695,
+          "v": 0.0030029416107542222,
+          "range": [
+            3.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        }
+      ],
+      "step": "a doubling of time",
+      "fit": {
+        "estimate": 0.4456839212981605,
+        "ci90": [
+          -0.33948805863813786,
+          1.1908095475357117
+        ],
+        "new_lab_pi90": [
+          -0.673869996411389,
+          1.5250964801809492
+        ],
+        "p_same_sign_new_lab": 0.8285492168107624,
+        "new_lab_pi90_width": 2.1989664765923385,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.03985788443006656
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": 0.44790111002193805,
+            "new_lab_pi90": [
+              -0.12191702399120936,
+              1.0062803190856566
+            ]
+          },
+          "1.0": {
+            "estimate": 0.4395599194528896,
+            "new_lab_pi90": [
+              -1.6886041478714695,
+              2.4436958560887185
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 7,
+          "estimate": 0.4456839212981605,
+          "ci90": [
+            -0.33948805863813786,
+            1.1908095475357117
+          ]
+        },
+        "incidental_only": {
+          "contrasts": 7,
+          "estimate": 0.4456839212981605,
+          "ci90": [
+            -0.33948805863813786,
+            1.1908095475357117
+          ]
+        },
+        "non_monotone_contrasts": 1
+      },
+      "reading": "too few laboratories",
+      "lolo": null,
+      "fragility": {
+        "contrasts_with_a_censored_arm": 0,
+        "contrasts_with_a_turning_point": 0,
+        "labs_with_a_turning_point": 0,
+        "flags": []
       }
     },
     {
@@ -4646,6 +5143,215 @@
       }
     },
     {
+      "compound": "2,5-Dimethylpyrazine",
+      "lever_class": "time",
+      "band": "T >130 C",
+      "contrasts": 7,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "reading_mottram_parker"
+      ],
+      "peak_area_share": 0.0,
+      "focal_share": 0.0,
+      "matrices": [
+        "other: freeze-dried glucose/wheat flour dough powder (crust-like, moisture <2 %), 0.5 g"
+      ],
+      "temperature_range_C": [
+        160.0,
+        160.0
+      ],
+      "rows": [
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-59",
+          "lab": "reading_mottram_parker",
+          "y": 0.3598176829662876,
+          "v": 0.0012139482482875603,
+          "range": [
+            2.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-60",
+          "lab": "reading_mottram_parker",
+          "y": 0.39004130950019084,
+          "v": 0.0012139482482875603,
+          "range": [
+            2.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-61",
+          "lab": "reading_mottram_parker",
+          "y": 0.3987875452763947,
+          "v": 0.0012139482482875603,
+          "range": [
+            2.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-62",
+          "lab": "reading_mottram_parker",
+          "y": 0.2835593115216708,
+          "v": 0.0012139482482875603,
+          "range": [
+            2.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-63",
+          "lab": "reading_mottram_parker",
+          "y": 0.3970629946589558,
+          "v": 0.0012139482482875603,
+          "range": [
+            2.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-64",
+          "lab": "reading_mottram_parker",
+          "y": 0.32746890342000906,
+          "v": 0.0030029416107542222,
+          "range": [
+            3.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-65",
+          "lab": "reading_mottram_parker",
+          "y": 0.39329207493964174,
+          "v": 0.0030029416107542222,
+          "range": [
+            3.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        }
+      ],
+      "step": "a doubling of time",
+      "fit": {
+        "estimate": 0.3625495661800628,
+        "ci90": [
+          -0.41823459139542246,
+          1.1110337066707658
+        ],
+        "new_lab_pi90": [
+          -0.7510857923303984,
+          1.443807769661778
+        ],
+        "p_same_sign_new_lab": 0.7991527799383938,
+        "new_lab_pi90_width": 2.1948935619921763,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.028208869563561088
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": 0.364148081482717,
+            "new_lab_pi90": [
+              -0.20070910808834905,
+              0.9204084591755667
+            ]
+          },
+          "1.0": {
+            "estimate": 0.3578167066736809,
+            "new_lab_pi90": [
+              -1.75711651744466,
+              2.371648290367772
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 7,
+          "estimate": 0.3625495661800628,
+          "ci90": [
+            -0.41823459139542246,
+            1.1110337066707658
+          ]
+        },
+        "incidental_only": {
+          "contrasts": 7,
+          "estimate": 0.3625495661800628,
+          "ci90": [
+            -0.41823459139542246,
+            1.1110337066707658
+          ]
+        },
+        "non_monotone_contrasts": 0
+      },
+      "reading": "too few laboratories",
+      "lolo": null,
+      "fragility": {
+        "contrasts_with_a_censored_arm": 0,
+        "contrasts_with_a_turning_point": 0,
+        "labs_with_a_turning_point": 0,
+        "flags": []
+      }
+    },
+    {
       "compound": "2,6-Dimethylpyrazine",
       "lever_class": "amino acid identity",
       "band": "all",
@@ -5943,22 +6649,150 @@
       "compound": "2-Acetylfuran",
       "lever_class": "time",
       "band": "T >130 C",
-      "contrasts": 1,
-      "studies": 1,
-      "labs": 1,
+      "contrasts": 8,
+      "studies": 2,
+      "labs": 2,
       "lab_names": [
-        "minnesota_reineccius"
+        "minnesota_reineccius",
+        "reading_mottram_parker"
       ],
       "peak_area_share": 1.0,
-      "focal_share": 1.0,
+      "focal_share": 0.125,
       "matrices": [
+        "other: freeze-dried glucose/wheat flour dough powder (crust-like, moisture <2 %), 0.5 g",
         "water"
       ],
       "temperature_range_C": [
         150.0,
-        150.0
+        160.0
       ],
       "rows": [
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-87",
+          "lab": "reading_mottram_parker",
+          "y": 0.31073454918591686,
+          "v": 0.0012139482482875603,
+          "range": [
+            2.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": true,
+          "censored_arms": 3,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-88",
+          "lab": "reading_mottram_parker",
+          "y": 0.3805219963143521,
+          "v": 0.0012139482482875603,
+          "range": [
+            2.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": true,
+          "censored_arms": 3,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-89",
+          "lab": "reading_mottram_parker",
+          "y": 0.324389516713935,
+          "v": 0.0012139482482875603,
+          "range": [
+            2.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": true,
+          "censored_arms": 4,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-90",
+          "lab": "reading_mottram_parker",
+          "y": 0.7894967348957149,
+          "v": 0.0012139482482875603,
+          "range": [
+            2.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": true,
+          "censored_arms": 2,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-91",
+          "lab": "reading_mottram_parker",
+          "y": 0.5070483159484749,
+          "v": 0.0012139482482875603,
+          "range": [
+            2.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": true,
+          "censored_arms": 3,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-92",
+          "lab": "reading_mottram_parker",
+          "y": 0.270907290761015,
+          "v": 0.0030029416107542222,
+          "range": [
+            3.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": true,
+          "censored_arms": 2,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-93",
+          "lab": "reading_mottram_parker",
+          "y": 0.5892506860875649,
+          "v": 0.0030029416107542222,
+          "range": [
+            3.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": true,
+          "censored_arms": 1,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
         {
           "source": "schirle1992",
           "contrast": "schirle1992-15",
@@ -5980,36 +6814,36 @@
       ],
       "step": "a doubling of time",
       "fit": {
-        "estimate": 0.33759869889077343,
+        "estimate": 0.42460023687291754,
         "ci90": [
-          -0.7684720479164292,
-          1.4077454183896734
+          -0.005947862359542391,
+          0.8094668290844355
         ],
         "new_lab_pi90": [
-          -1.2513768817874942,
-          1.890275501843247
+          -0.3586628299413714,
+          1.1680876591150746
         ],
-        "p_same_sign_new_lab": 0.6925191894317004,
-        "new_lab_pi90_width": 3.141652383630741,
+        "p_same_sign_new_lab": 0.8604840483237636,
+        "new_lab_pi90_width": 1.526750489056446,
         "tau_study_fitted": false,
         "reml_scales": [
           0.0,
-          0.0
+          0.15886509512405417
         ],
         "prior_dominated": true,
         "sensitivity": {
           "0.25": {
-            "estimate": 0.34431591801306716,
+            "estimate": 0.4280083257039971,
             "new_lab_pi90": [
-              -0.463869771717413,
-              1.1424493227936166
+              -0.11118686794742973,
+              0.9451030428518041
             ]
           },
           "1.0": {
-            "estimate": 0.3164556303288683,
+            "estimate": 0.42152119117234993,
             "new_lab_pi90": [
-              -2.6571638960889854,
-              3.1902287773034974
+              -0.7801886156400668,
+              1.553398714862405
             ]
           }
         },
@@ -6017,14 +6851,19 @@
           "contrasts": 0
         },
         "incidental_only": {
-          "contrasts": 0
+          "contrasts": 7,
+          "estimate": 0.4487137642491435,
+          "ci90": [
+            -0.34483650694656454,
+            1.2057241645891028
+          ]
         },
         "non_monotone_contrasts": 0
       },
       "reading": "too few laboratories",
       "lolo": null,
       "fragility": {
-        "contrasts_with_a_censored_arm": 0,
+        "contrasts_with_a_censored_arm": 7,
         "contrasts_with_a_turning_point": 0,
         "labs_with_a_turning_point": 0,
         "flags": []
@@ -10990,6 +11829,215 @@
     },
     {
       "compound": "2-Ethylpyrazine",
+      "lever_class": "time",
+      "band": "T >130 C",
+      "contrasts": 7,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "reading_mottram_parker"
+      ],
+      "peak_area_share": 0.0,
+      "focal_share": 0.0,
+      "matrices": [
+        "other: freeze-dried glucose/wheat flour dough powder (crust-like, moisture <2 %), 0.5 g"
+      ],
+      "temperature_range_C": [
+        160.0,
+        160.0
+      ],
+      "rows": [
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-66",
+          "lab": "reading_mottram_parker",
+          "y": 0.3747395698460919,
+          "v": 0.0012139482482875603,
+          "range": [
+            2.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-67",
+          "lab": "reading_mottram_parker",
+          "y": 0.4538632986213269,
+          "v": 0.0012139482482875603,
+          "range": [
+            2.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-68",
+          "lab": "reading_mottram_parker",
+          "y": 0.4539372202210109,
+          "v": 0.0012139482482875603,
+          "range": [
+            2.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-69",
+          "lab": "reading_mottram_parker",
+          "y": 0.486219286323204,
+          "v": 0.0012139482482875603,
+          "range": [
+            2.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-70",
+          "lab": "reading_mottram_parker",
+          "y": 0.4230824514481963,
+          "v": 0.0012139482482875603,
+          "range": [
+            2.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-71",
+          "lab": "reading_mottram_parker",
+          "y": 0.3411031519984482,
+          "v": 0.0030029416107542222,
+          "range": [
+            3.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-72",
+          "lab": "reading_mottram_parker",
+          "y": 0.425927276589111,
+          "v": 0.0030029416107542222,
+          "range": [
+            3.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        }
+      ],
+      "step": "a doubling of time",
+      "fit": {
+        "estimate": 0.42570005043338915,
+        "ci90": [
+          -0.3581938042233316,
+          1.1713327742586483
+        ],
+        "new_lab_pi90": [
+          -0.6911311426760003,
+          1.5041722398701698
+        ],
+        "p_same_sign_new_lab": 0.8226526530431878,
+        "new_lab_pi90_width": 2.19530338254617,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.023731293045039722
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": 0.427622802015923,
+            "new_lab_pi90": [
+              -0.13834751450710056,
+              0.9830117975364577
+            ]
+          },
+          "1.0": {
+            "estimate": 0.42006979945091966,
+            "new_lab_pi90": [
+              -1.7043832983974636,
+              2.425613197460791
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 7,
+          "estimate": 0.42570005043338915,
+          "ci90": [
+            -0.3581938042233316,
+            1.1713327742586483
+          ]
+        },
+        "incidental_only": {
+          "contrasts": 7,
+          "estimate": 0.42570005043338915,
+          "ci90": [
+            -0.3581938042233316,
+            1.1713327742586483
+          ]
+        },
+        "non_monotone_contrasts": 0
+      },
+      "reading": "too few laboratories",
+      "lolo": null,
+      "fragility": {
+        "contrasts_with_a_censored_arm": 0,
+        "contrasts_with_a_turning_point": 0,
+        "labs_with_a_turning_point": 0,
+        "flags": []
+      }
+    },
+    {
+      "compound": "2-Ethylpyrazine",
       "lever_class": "water",
       "band": "all",
       "contrasts": 1,
@@ -12349,24 +13397,152 @@
       "compound": "2-Furanmethanol",
       "lever_class": "time",
       "band": "T >130 C",
-      "contrasts": 5,
-      "studies": 2,
-      "labs": 2,
+      "contrasts": 12,
+      "studies": 3,
+      "labs": 3,
       "lab_names": [
         "btbu_beijing",
-        "minnesota_reineccius"
+        "minnesota_reineccius",
+        "reading_mottram_parker"
       ],
       "peak_area_share": 1.0,
-      "focal_share": 1.0,
+      "focal_share": 0.4166666666666667,
       "matrices": [
         "buffer",
+        "other: freeze-dried glucose/wheat flour dough powder (crust-like, moisture <2 %), 0.5 g",
         "water"
       ],
       "temperature_range_C": [
         130.0,
-        150.0
+        160.0
       ],
       "rows": [
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-94",
+          "lab": "reading_mottram_parker",
+          "y": 0.42536127130534507,
+          "v": 0.0012139482482875603,
+          "range": [
+            2.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": true,
+          "censored_arms": 3,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-95",
+          "lab": "reading_mottram_parker",
+          "y": 0.4436619108762569,
+          "v": 0.0012139482482875603,
+          "range": [
+            2.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": true,
+          "censored_arms": 2,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-96",
+          "lab": "reading_mottram_parker",
+          "y": 0.4212355621565948,
+          "v": 0.0012139482482875603,
+          "range": [
+            2.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": true,
+          "censored_arms": 3,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-97",
+          "lab": "reading_mottram_parker",
+          "y": 0.7337831393599057,
+          "v": 0.0012139482482875603,
+          "range": [
+            2.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": true,
+          "censored_arms": 2,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-98",
+          "lab": "reading_mottram_parker",
+          "y": 0.8239313730765285,
+          "v": 0.0012139482482875603,
+          "range": [
+            2.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": true,
+          "censored_arms": 2,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-99",
+          "lab": "reading_mottram_parker",
+          "y": 0.7986130389889627,
+          "v": 0.0030029416107542222,
+          "range": [
+            3.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": true,
+          "censored_arms": 1,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-100",
+          "lab": "reading_mottram_parker",
+          "y": 0.7509818303953949,
+          "v": 0.0030029416107542222,
+          "range": [
+            3.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": true,
+          "censored_arms": 1,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
         {
           "source": "schirle1992",
           "contrast": "schirle1992-14",
@@ -12460,36 +13636,36 @@
       ],
       "step": "a doubling of time",
       "fit": {
-        "estimate": 0.18165242678880456,
+        "estimate": 0.40966704617525884,
         "ci90": [
-          -0.5974182684652173,
-          0.9675665014957326
+          -0.06946208035942718,
+          0.8475716444500385
         ],
         "new_lab_pi90": [
-          -1.5089426788144815,
-          1.8762848124944282
+          -0.8322322739447807,
+          1.6248443583686298
         ],
-        "p_same_sign_new_lab": 0.5773008349509017,
-        "new_lab_pi90_width": 3.3852274913089095,
+        "p_same_sign_new_lab": 0.7202895619608551,
+        "new_lab_pi90_width": 2.4570766323134103,
         "tau_study_fitted": false,
         "reml_scales": [
-          0.0,
-          0.8946873390976365
+          0.18883946770417823,
+          0.532694791291947
         ],
-        "prior_dominated": true,
+        "prior_dominated": false,
         "sensitivity": {
           "0.25": {
-            "estimate": 0.18060378236777774,
+            "estimate": 0.4169255156375078,
             "new_lab_pi90": [
-              -0.9960472728729028,
-              1.3600419799513765
+              -0.5651870917537287,
+              1.384214246689224
             ]
           },
           "1.0": {
-            "estimate": 0.18120423358354384,
+            "estimate": 0.4039857038622206,
             "new_lab_pi90": [
-              -2.246004229516659,
-              2.607924099689664
+              -1.1180597444362987,
+              1.8807170172019922
             ]
           }
         },
@@ -12497,17 +13673,34 @@
           "contrasts": 0
         },
         "incidental_only": {
-          "contrasts": 0
+          "contrasts": 7,
+          "estimate": 0.6196591771926324,
+          "ci90": [
+            -0.18119450042785099,
+            1.3703981255867201
+          ]
         },
         "non_monotone_contrasts": 0
       },
-      "reading": "too few laboratories",
+      "reading": "direction unclear",
       "lolo": null,
       "fragility": {
-        "contrasts_with_a_censored_arm": 0,
+        "contrasts_with_a_censored_arm": 7,
         "contrasts_with_a_turning_point": 0,
         "labs_with_a_turning_point": 0,
-        "flags": []
+        "flags": [],
+        "variants": {
+          "without censored arms": {
+            "reading": "direction unclear",
+            "labs": 3,
+            "contrasts": 12,
+            "estimate": 0.47916274657142477,
+            "ci90": [
+              -0.04687959575726046,
+              0.9484515839991818
+            ]
+          }
+        }
       }
     },
     {
@@ -12895,19 +14088,20 @@
       "compound": "2-Furfurylthiol (FFT)",
       "lever_class": "lipid",
       "band": "all",
-      "contrasts": 2,
-      "studies": 2,
-      "labs": 1,
+      "contrasts": 3,
+      "studies": 3,
+      "labs": 2,
       "lab_names": [
+        "btbu_beijing",
         "reading_mottram_parker"
       ],
       "peak_area_share": 1.0,
-      "focal_share": 0.0,
+      "focal_share": 0.3333333333333333,
       "matrices": [
         "buffer"
       ],
       "temperature_range_C": [
-        140.0,
+        120.0,
         140.0
       ],
       "rows": [
@@ -12980,6 +14174,36 @@
             }
           ],
           "focal": false,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": null,
+          "buffer_state": null
+        },
+        {
+          "source": "wang2022lipid",
+          "contrast": "wang2022lipid-3",
+          "lab": "btbu_beijing",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "1%",
+              "against": "0%",
+              "y": -0.31374082332890607,
+              "v": 0.00014080793838294872,
+              "censored": 0
+            },
+            {
+              "level": "2%",
+              "against": "0%",
+              "y": -0.40818546233650155,
+              "v": 0.0004206340061881403,
+              "censored": 0
+            }
+          ],
+          "focal": true,
           "peak_area": true,
           "censored_arms": 0,
           "turning_point": null,
@@ -13086,6 +14310,15 @@
             "labs": 1,
             "contrasts": 1,
             "reading": "too few laboratories"
+          },
+          "0%": {
+            "reading": "not connected"
+          },
+          "1%": {
+            "reading": "not connected"
+          },
+          "2%": {
+            "reading": "not connected"
           }
         },
         "reml_scales": [
@@ -15036,15 +16269,15 @@
       "compound": "2-Furfurylthiol (FFT)",
       "lever_class": "temperature",
       "band": "time >120 min",
-      "contrasts": 8,
-      "studies": 3,
+      "contrasts": 9,
+      "studies": 4,
       "labs": 2,
       "lab_names": [
         "btbu_beijing",
         "ho_network"
       ],
-      "peak_area_share": 0.625,
-      "focal_share": 0.75,
+      "peak_area_share": 0.6666666666666666,
+      "focal_share": 0.7777777777777778,
       "matrices": [
         "buffer",
         "water"
@@ -15107,6 +16340,24 @@
           "censored_arms": 0,
           "turning_point": false,
           "buffer_state": "unbuffered"
+        },
+        {
+          "source": "wang2022lipid",
+          "contrast": "wang2022lipid-526",
+          "lab": "btbu_beijing",
+          "y": -0.07843966430886473,
+          "v": 0.0015674174314136255,
+          "range": [
+            120.0,
+            140.0
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "buffered"
         },
         {
           "source": "yang2011",
@@ -15201,36 +16452,37 @@
       ],
       "step": "+10 C",
       "fit": {
-        "estimate": 0.163368838396996,
+        "estimate": 0.12839573029910128,
         "ci90": [
-          -0.16994076743690575,
-          0.49951124371297945
+          -0.30239432062297805,
+          0.5478967200840967
         ],
         "new_lab_pi90": [
-          -0.470987328235916,
-          0.8002378491880067
+          -0.7019231668432517,
+          0.9467982389463317
         ],
-        "p_same_sign_new_lab": 0.729168545413992,
-        "new_lab_pi90_width": 1.2712251774239227,
-        "tau_study_fitted": false,
+        "p_same_sign_new_lab": 0.6407849081067507,
+        "new_lab_pi90_width": 1.6487214057895834,
+        "tau_study_fitted": true,
         "reml_scales": [
           0.0,
-          0.13364853627055825
+          0.0,
+          0.15886509512405417
         ],
         "prior_dominated": true,
         "sensitivity": {
           "0.25": {
-            "estimate": 0.16319154012587325,
+            "estimate": 0.13006828889663694,
             "new_lab_pi90": [
-              -0.2730772048437638,
-              0.6024176182030149
+              -0.42277515601182036,
+              0.6758385054265318
             ]
           },
           "1.0": {
-            "estimate": 0.16327401138126096,
+            "estimate": 0.1270571510996862,
             "new_lab_pi90": [
-              -0.8285120924411751,
-              1.1503877656877908
+              -1.1669423216205166,
+              1.4007775997914769
             ]
           }
         },
@@ -15250,7 +16502,7 @@
             1.0875815134902354
           ]
         },
-        "non_monotone_contrasts": 0
+        "non_monotone_contrasts": 1
       },
       "reading": "too few laboratories",
       "lolo": null,
@@ -15265,15 +16517,16 @@
       "compound": "2-Furfurylthiol (FFT)",
       "lever_class": "time",
       "band": "T 100-130 C",
-      "contrasts": 6,
-      "studies": 3,
-      "labs": 2,
+      "contrasts": 10,
+      "studies": 4,
+      "labs": 3,
       "lab_names": [
+        "btbu_beijing",
         "ho_network",
         "nestle_rc_and_cerny_firmenich"
       ],
-      "peak_area_share": 0.0,
-      "focal_share": 0.0,
+      "peak_area_share": 0.4,
+      "focal_share": 0.4,
       "matrices": [
         "buffer",
         "other (choline chloride/glycerol 1:1 molar)",
@@ -15376,6 +16629,78 @@
           "buffer_state": "buffered"
         },
         {
+          "source": "wang2022lipid",
+          "contrast": "wang2022lipid-266",
+          "lab": "btbu_beijing",
+          "y": 0.4063237364073279,
+          "v": 0.0013891629299274668,
+          "range": [
+            30.0,
+            120.0
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "buffered"
+        },
+        {
+          "source": "wang2022lipid",
+          "contrast": "wang2022lipid-268",
+          "lab": "btbu_beijing",
+          "y": 0.3512810778532372,
+          "v": 0.0006860183125868534,
+          "range": [
+            30.0,
+            180.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "buffered"
+        },
+        {
+          "source": "wang2022lipid",
+          "contrast": "wang2022lipid-377",
+          "lab": "btbu_beijing",
+          "y": 0.5555739389705046,
+          "v": 0.0056220633061758105,
+          "range": [
+            90.0,
+            180.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "buffered"
+        },
+        {
+          "source": "wang2022lipid",
+          "contrast": "wang2022lipid-378",
+          "lab": "btbu_beijing",
+          "y": 0.35381664899949805,
+          "v": 0.0006860183125868534,
+          "range": [
+            30.0,
+            180.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "buffered"
+        },
+        {
           "source": "zhou2023c",
           "contrast": "zhou2023c-4",
           "lab": "ho_network",
@@ -15396,36 +16721,36 @@
       ],
       "step": "a doubling of time",
       "fit": {
-        "estimate": 0.20462255631713738,
+        "estimate": 0.2811465284917604,
         "ci90": [
-          -0.37095243796521227,
-          0.7737171291881594
+          -0.10348191579824294,
+          0.6560930129135799
         ],
         "new_lab_pi90": [
-          -0.9237996283238773,
-          1.3263678554353895
+          -0.5696346207029988,
+          1.1235771859650656
         ],
-        "p_same_sign_new_lab": 0.6409589558820288,
-        "new_lab_pi90_width": 2.2501674837592667,
+        "p_same_sign_new_lab": 0.7377367878779408,
+        "new_lab_pi90_width": 1.6932118066680644,
         "tau_study_fitted": false,
         "reml_scales": [
-          0.3171652579277238,
-          0.26682181158053636
+          0.26682181158053636,
+          0.2244693495128745
         ],
-        "prior_dominated": true,
+        "prior_dominated": false,
         "sensitivity": {
           "0.25": {
-            "estimate": 0.20663780288510075,
+            "estimate": 0.28260144167669093,
             "new_lab_pi90": [
-              -0.5802226359569637,
-              0.9903494577420512
+              -0.37038071799579825,
+              0.9308017692641654
             ]
           },
           "1.0": {
-            "estimate": 0.2024527550741953,
+            "estimate": 0.2800551718140575,
             "new_lab_pi90": [
-              -1.4550244434536508,
-              1.8414476104491424
+              -0.815649758315232,
+              1.3607894570647117
             ]
           }
         },
@@ -15445,23 +16770,37 @@
             0.7737171291881594
           ]
         },
-        "non_monotone_contrasts": 1
+        "non_monotone_contrasts": 2
       },
-      "reading": "too few laboratories",
+      "reading": "direction unclear",
       "lolo": null,
       "fragility": {
         "contrasts_with_a_censored_arm": 0,
         "contrasts_with_a_turning_point": 1,
         "labs_with_a_turning_point": 1,
-        "flags": []
+        "flags": [
+          "whole-ladder slopes: answered by the literature"
+        ],
+        "variants": {
+          "whole-ladder slopes": {
+            "reading": "answered by the literature",
+            "labs": 3,
+            "contrasts": 10,
+            "estimate": 0.3173578127037925,
+            "ci90": [
+              0.012414374556861493,
+              0.6187150609515093
+            ]
+          }
+        }
       }
     },
     {
       "compound": "2-Furfurylthiol (FFT)",
       "lever_class": "time",
       "band": "T >130 C",
-      "contrasts": 6,
-      "studies": 1,
+      "contrasts": 8,
+      "studies": 2,
       "labs": 1,
       "lab_names": [
         "btbu_beijing"
@@ -15476,6 +16815,42 @@
         170.0
       ],
       "rows": [
+        {
+          "source": "wang2022lipid",
+          "contrast": "wang2022lipid-379",
+          "lab": "btbu_beijing",
+          "y": 0.23956938886788856,
+          "v": 0.0013891629299274668,
+          "range": [
+            30.0,
+            120.0
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "buffered"
+        },
+        {
+          "source": "wang2022lipid",
+          "contrast": "wang2022lipid-380",
+          "lab": "btbu_beijing",
+          "y": -0.2445282052718193,
+          "v": 0.00200125780759574,
+          "range": [
+            60.0,
+            180.0
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "buffered"
+        },
         {
           "source": "yang2011",
           "contrast": "yang2011-51",
@@ -15587,36 +16962,36 @@
       ],
       "step": "a doubling of time",
       "fit": {
-        "estimate": 0.42173146319951627,
+        "estimate": 0.31284691726323094,
         "ci90": [
-          -0.4311976652602007,
-          1.2463103679304302
+          -0.510962366305588,
+          1.115147037416802
         ],
         "new_lab_pi90": [
-          -1.0598680718302012,
-          1.8799725604317976
+          -1.1210024275836126,
+          1.7302073604368733
         ],
-        "p_same_sign_new_lab": 0.7092164910588997,
-        "new_lab_pi90_width": 2.9398406322619985,
+        "p_same_sign_new_lab": 0.6645756323876585,
+        "new_lab_pi90_width": 2.851209788020486,
         "tau_study_fitted": false,
         "reml_scales": [
           0.0,
-          0.532694791291947
+          0.4481404746557168
         ],
         "prior_dominated": true,
         "sensitivity": {
           "0.25": {
-            "estimate": 0.42652809390963925,
+            "estimate": 0.3148914530792919,
             "new_lab_pi90": [
-              -0.5406280794191858,
-              1.3887314787656269
+              -0.6416031936416514,
+              1.2692292779936527
             ]
           },
           "1.0": {
-            "estimate": 0.4101511075432717,
+            "estimate": 0.305544917817391,
             "new_lab_pi90": [
-              -1.9779247364388508,
-              2.710841590883832
+              -2.0048289114315803,
+              2.548607216307349
             ]
           }
         },
@@ -15626,7 +17001,7 @@
         "incidental_only": {
           "contrasts": 0
         },
-        "non_monotone_contrasts": 0
+        "non_monotone_contrasts": 2
       },
       "reading": "too few laboratories",
       "lolo": null,
@@ -15788,19 +17163,20 @@
       "compound": "2-Methyl-3-(2-furfuryldithio)furan",
       "lever_class": "lipid",
       "band": "all",
-      "contrasts": 1,
-      "studies": 1,
-      "labs": 1,
+      "contrasts": 2,
+      "studies": 2,
+      "labs": 2,
       "lab_names": [
+        "btbu_beijing",
         "reading_mottram_parker"
       ],
       "peak_area_share": 1.0,
-      "focal_share": 0.0,
+      "focal_share": 0.5,
       "matrices": [
         "buffer"
       ],
       "temperature_range_C": [
-        140.0,
+        120.0,
         140.0
       ],
       "rows": [
@@ -15826,6 +17202,36 @@
           "censored_arms": 1,
           "turning_point": null,
           "buffer_state": null
+        },
+        {
+          "source": "wang2022lipid",
+          "contrast": "wang2022lipid-10",
+          "lab": "btbu_beijing",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "1%",
+              "against": "0%",
+              "y": -0.6774529169616861,
+              "v": 0.003727635278929189,
+              "censored": 0
+            },
+            {
+              "level": "2%",
+              "against": "0%",
+              "y": -0.9281951497794128,
+              "v": 0.003393695048585792,
+              "censored": 0
+            }
+          ],
+          "focal": true,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": null,
+          "buffer_state": null
         }
       ],
       "reference": "none",
@@ -15848,6 +17254,15 @@
             "labs": 1,
             "contrasts": 1,
             "reading": "too few laboratories"
+          },
+          "0%": {
+            "reading": "not connected"
+          },
+          "1%": {
+            "reading": "not connected"
+          },
+          "2%": {
+            "reading": "not connected"
           }
         },
         "reml_scales": [
@@ -16114,6 +17529,333 @@
         "pairs_with_a_censored_arm": 2,
         "pairs_with_both_arms_censored": 0,
         "flags": {}
+      }
+    },
+    {
+      "compound": "2-Methyl-3-(2-furfuryldithio)furan",
+      "lever_class": "temperature",
+      "band": "time >120 min",
+      "contrasts": 1,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "btbu_beijing"
+      ],
+      "peak_area_share": 1.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "buffer"
+      ],
+      "temperature_range_C": [
+        100.0,
+        140.0
+      ],
+      "rows": [
+        {
+          "source": "wang2022lipid",
+          "contrast": "wang2022lipid-568",
+          "lab": "btbu_beijing",
+          "y": 0.21799777610184662,
+          "v": 0.0015674174314136255,
+          "range": [
+            120.0,
+            140.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "buffered"
+        }
+      ],
+      "step": "+10 C",
+      "fit": {
+        "estimate": 0.21215497292061503,
+        "ci90": [
+          -0.8869179041836182,
+          1.2886306858511556
+        ],
+        "new_lab_pi90": [
+          -1.3698017293500304,
+          1.7712564876845205
+        ],
+        "p_same_sign_new_lab": 0.632160659510816,
+        "new_lab_pi90_width": 3.141058217034551,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.0
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": 0.21636406747944478,
+            "new_lab_pi90": [
+              -0.5897265101144985,
+              1.016108766492299
+            ]
+          },
+          "1.0": {
+            "estimate": 0.19891718303330885,
+            "new_lab_pi90": [
+              -2.7552125789673974,
+              3.090188743243958
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 0
+        },
+        "incidental_only": {
+          "contrasts": 0
+        },
+        "non_monotone_contrasts": 0
+      },
+      "reading": "too few laboratories",
+      "lolo": null,
+      "fragility": {
+        "contrasts_with_a_censored_arm": 0,
+        "contrasts_with_a_turning_point": 0,
+        "labs_with_a_turning_point": 0,
+        "flags": []
+      }
+    },
+    {
+      "compound": "2-Methyl-3-(2-furfuryldithio)furan",
+      "lever_class": "time",
+      "band": "T 100-130 C",
+      "contrasts": 3,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "btbu_beijing"
+      ],
+      "peak_area_share": 1.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "buffer"
+      ],
+      "temperature_range_C": [
+        120.0,
+        120.0
+      ],
+      "rows": [
+        {
+          "source": "wang2022lipid",
+          "contrast": "wang2022lipid-287",
+          "lab": "btbu_beijing",
+          "y": 0.4852017401137336,
+          "v": 0.0006860183125868534,
+          "range": [
+            30.0,
+            180.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "buffered"
+        },
+        {
+          "source": "wang2022lipid",
+          "contrast": "wang2022lipid-289",
+          "lab": "btbu_beijing",
+          "y": 0.49482326313113906,
+          "v": 0.0056220633061758105,
+          "range": [
+            90.0,
+            180.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "buffered"
+        },
+        {
+          "source": "wang2022lipid",
+          "contrast": "wang2022lipid-413",
+          "lab": "btbu_beijing",
+          "y": 0.6901967287686249,
+          "v": 0.0032080693710948753,
+          "range": [
+            60.0,
+            150.0
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "buffered"
+        }
+      ],
+      "step": "a doubling of time",
+      "fit": {
+        "estimate": 0.5468387677888449,
+        "ci90": [
+          -0.27682491385440006,
+          1.3288423938582437
+        ],
+        "new_lab_pi90": [
+          -0.6812752629379345,
+          1.7347926367331454
+        ],
+        "p_same_sign_new_lab": 0.8313097312377205,
+        "new_lab_pi90_width": 2.41606789967108,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.11243458629672394
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": 0.5504618482765372,
+            "new_lab_pi90": [
+              -0.1148254242514218,
+              1.2085050366041012
+            ]
+          },
+          "1.0": {
+            "estimate": 0.5351856805582218,
+            "new_lab_pi90": [
+              -1.7154225265117227,
+              2.650809035115162
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 0
+        },
+        "incidental_only": {
+          "contrasts": 0
+        },
+        "non_monotone_contrasts": 1
+      },
+      "reading": "too few laboratories",
+      "lolo": null,
+      "fragility": {
+        "contrasts_with_a_censored_arm": 0,
+        "contrasts_with_a_turning_point": 0,
+        "labs_with_a_turning_point": 0,
+        "flags": []
+      }
+    },
+    {
+      "compound": "2-Methyl-3-(2-furfuryldithio)furan",
+      "lever_class": "time",
+      "band": "T >130 C",
+      "contrasts": 2,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "btbu_beijing"
+      ],
+      "peak_area_share": 1.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "buffer"
+      ],
+      "temperature_range_C": [
+        130.0,
+        140.0
+      ],
+      "rows": [
+        {
+          "source": "wang2022lipid",
+          "contrast": "wang2022lipid-414",
+          "lab": "btbu_beijing",
+          "y": 0.5319437478434276,
+          "v": 0.00200125780759574,
+          "range": [
+            60.0,
+            180.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "buffered"
+        },
+        {
+          "source": "wang2022lipid",
+          "contrast": "wang2022lipid-415",
+          "lab": "btbu_beijing",
+          "y": -0.13429508092371462,
+          "v": 0.0056220633061758105,
+          "range": [
+            90.0,
+            180.0
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "buffered"
+        }
+      ],
+      "step": "a doubling of time",
+      "fit": {
+        "estimate": 0.1974816767797294,
+        "ci90": [
+          -0.8108001154687232,
+          1.1888620182931453
+        ],
+        "new_lab_pi90": [
+          -1.3976564329985595,
+          1.7756817856817375
+        ],
+        "p_same_sign_new_lab": 0.6017549422914783,
+        "new_lab_pi90_width": 3.173338218680297,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.4481404746557168
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": 0.2039214282484576,
+            "new_lab_pi90": [
+              -0.7380475611699117,
+              1.1375752135090669
+            ]
+          },
+          "1.0": {
+            "estimate": 0.18674152132114324,
+            "new_lab_pi90": [
+              -2.548154519710862,
+              2.877695865489061
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 0
+        },
+        "incidental_only": {
+          "contrasts": 0
+        },
+        "non_monotone_contrasts": 1
+      },
+      "reading": "too few laboratories",
+      "lolo": null,
+      "fragility": {
+        "contrasts_with_a_censored_arm": 0,
+        "contrasts_with_a_turning_point": 0,
+        "labs_with_a_turning_point": 0,
+        "flags": []
       }
     },
     {
@@ -16577,19 +18319,20 @@
       "compound": "2-Methyl-3-furanthiol (MFT)",
       "lever_class": "lipid",
       "band": "all",
-      "contrasts": 2,
-      "studies": 2,
-      "labs": 1,
+      "contrasts": 3,
+      "studies": 3,
+      "labs": 2,
       "lab_names": [
+        "btbu_beijing",
         "reading_mottram_parker"
       ],
       "peak_area_share": 1.0,
-      "focal_share": 0.0,
+      "focal_share": 0.3333333333333333,
       "matrices": [
         "buffer"
       ],
       "temperature_range_C": [
-        140.0,
+        120.0,
         140.0
       ],
       "rows": [
@@ -16655,6 +18398,36 @@
             }
           ],
           "focal": false,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": null,
+          "buffer_state": null
+        },
+        {
+          "source": "wang2022lipid",
+          "contrast": "wang2022lipid-2",
+          "lab": "btbu_beijing",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "1%",
+              "against": "0%",
+              "y": -0.5304870946279072,
+              "v": 6.456537977494095e-05,
+              "censored": 0
+            },
+            {
+              "level": "2%",
+              "against": "0%",
+              "y": -0.7274304122030566,
+              "v": 0.0007405888321408339,
+              "censored": 0
+            }
+          ],
+          "focal": true,
           "peak_area": true,
           "censored_arms": 0,
           "turning_point": null,
@@ -16745,6 +18518,15 @@
             "labs": 1,
             "contrasts": 1,
             "reading": "too few laboratories"
+          },
+          "0%": {
+            "reading": "not connected"
+          },
+          "1%": {
+            "reading": "not connected"
+          },
+          "2%": {
+            "reading": "not connected"
           }
         },
         "reml_scales": [
@@ -18929,15 +20711,17 @@
       "compound": "2-Methyl-3-furanthiol (MFT)",
       "lever_class": "temperature",
       "band": "time >120 min",
-      "contrasts": 3,
-      "studies": 2,
-      "labs": 1,
+      "contrasts": 4,
+      "studies": 3,
+      "labs": 2,
       "lab_names": [
+        "btbu_beijing",
         "ho_network"
       ],
-      "peak_area_share": 0.0,
-      "focal_share": 0.3333333333333333,
+      "peak_area_share": 0.25,
+      "focal_share": 0.5,
       "matrices": [
+        "buffer",
         "water"
       ],
       "temperature_range_C": [
@@ -18998,40 +20782,58 @@
           "censored_arms": 0,
           "turning_point": false,
           "buffer_state": "unbuffered"
+        },
+        {
+          "source": "wang2022lipid",
+          "contrast": "wang2022lipid-520",
+          "lab": "btbu_beijing",
+          "y": 1.539878967763758,
+          "v": 0.0015674174314136255,
+          "range": [
+            100.0,
+            120.0
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": true,
+          "buffer_state": "buffered"
         }
       ],
       "step": "+10 C",
       "fit": {
-        "estimate": 0.18324521078050504,
+        "estimate": 0.7895123603653932,
         "ci90": [
-          -0.6156544417300959,
-          0.966982095158756
+          -0.06403408465054218,
+          1.6532806988177449
         ],
         "new_lab_pi90": [
-          -1.0023030386200824,
-          1.3539401715722794
+          -0.7416699627166434,
+          2.32105502476876
         ],
-        "p_same_sign_new_lab": 0.6662608703855778,
-        "new_lab_pi90_width": 2.356243210192362,
+        "p_same_sign_new_lab": 0.8234269219572385,
+        "new_lab_pi90_width": 3.062724987485403,
         "tau_study_fitted": false,
         "reml_scales": [
-          0.0,
+          0.8946873390976365,
           0.07957403220540027
         ],
         "prior_dominated": true,
         "sensitivity": {
           "0.25": {
-            "estimate": 0.18460923333673002,
+            "estimate": 0.7939545853804242,
             "new_lab_pi90": [
-              -0.4540195045722534,
-              0.8193323141590516
+              -0.2540911020769688,
+              1.8506509673332767
             ]
           },
           "1.0": {
-            "estimate": 0.17958350438861242,
+            "estimate": 0.7770243713197252,
             "new_lab_pi90": [
-              -1.9919454442051754,
-              2.304072229774486
+              -1.5037950948928744,
+              3.01075590781945
             ]
           }
         },
@@ -19051,14 +20853,14 @@
             1.0486018294130215
           ]
         },
-        "non_monotone_contrasts": 0
+        "non_monotone_contrasts": 1
       },
       "reading": "too few laboratories",
       "lolo": null,
       "fragility": {
         "contrasts_with_a_censored_arm": 0,
-        "contrasts_with_a_turning_point": 0,
-        "labs_with_a_turning_point": 0,
+        "contrasts_with_a_turning_point": 1,
+        "labs_with_a_turning_point": 1,
         "flags": []
       }
     },
@@ -19066,15 +20868,16 @@
       "compound": "2-Methyl-3-furanthiol (MFT)",
       "lever_class": "time",
       "band": "T 100-130 C",
-      "contrasts": 6,
-      "studies": 3,
-      "labs": 2,
+      "contrasts": 11,
+      "studies": 4,
+      "labs": 3,
       "lab_names": [
+        "btbu_beijing",
         "ho_network",
         "nestle_rc_and_cerny_firmenich"
       ],
-      "peak_area_share": 0.0,
-      "focal_share": 0.0,
+      "peak_area_share": 0.45454545454545453,
+      "focal_share": 0.45454545454545453,
       "matrices": [
         "buffer",
         "other (choline chloride/glycerol 1:1 molar)",
@@ -19082,7 +20885,7 @@
         "water"
       ],
       "temperature_range_C": [
-        110.0,
+        100.0,
         120.0
       ],
       "rows": [
@@ -19177,6 +20980,96 @@
           "buffer_state": "buffered"
         },
         {
+          "source": "wang2022lipid",
+          "contrast": "wang2022lipid-263",
+          "lab": "btbu_beijing",
+          "y": 0.3412700286022643,
+          "v": 0.0013891629299274668,
+          "range": [
+            30.0,
+            120.0
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "buffered"
+        },
+        {
+          "source": "wang2022lipid",
+          "contrast": "wang2022lipid-265",
+          "lab": "btbu_beijing",
+          "y": 0.9278515531795486,
+          "v": 0.0056220633061758105,
+          "range": [
+            90.0,
+            180.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "buffered"
+        },
+        {
+          "source": "wang2022lipid",
+          "contrast": "wang2022lipid-371",
+          "lab": "btbu_beijing",
+          "y": 4.761956196500584,
+          "v": 0.0906190582894562,
+          "range": [
+            150.0,
+            180.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "buffered"
+        },
+        {
+          "source": "wang2022lipid",
+          "contrast": "wang2022lipid-372",
+          "lab": "btbu_beijing",
+          "y": 1.166477555884684,
+          "v": 0.018260963897559167,
+          "range": [
+            120.0,
+            180.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "buffered"
+        },
+        {
+          "source": "wang2022lipid",
+          "contrast": "wang2022lipid-373",
+          "lab": "btbu_beijing",
+          "y": 0.5925932336784837,
+          "v": 0.0009323126744625388,
+          "range": [
+            30.0,
+            150.0
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "buffered"
+        },
+        {
           "source": "zhou2023c",
           "contrast": "zhou2023c-3",
           "lab": "ho_network",
@@ -19197,36 +21090,36 @@
       ],
       "step": "a doubling of time",
       "fit": {
-        "estimate": 0.164729729400718,
+        "estimate": 0.7024423796944697,
         "ci90": [
-          -0.47580877778957187,
-          0.7997059118729082
+          -0.05860948845297069,
+          1.4221410288710863
         ],
         "new_lab_pi90": [
-          -1.1595636291289666,
-          1.483517076931187
+          -1.4637685039785502,
+          2.8459766888676037
         ],
-        "p_same_sign_new_lab": 0.5930554331184713,
-        "new_lab_pi90_width": 2.6430807060601538,
+        "p_same_sign_new_lab": 0.709399367372189,
+        "new_lab_pi90_width": 4.309745192846154,
         "tau_study_fitted": false,
         "reml_scales": [
-          0.37700741270170407,
-          0.4481404746557168
+          0.6332026601426078,
+          1.2641536195715461
         ],
-        "prior_dominated": true,
+        "prior_dominated": false,
         "sensitivity": {
           "0.25": {
-            "estimate": 0.16715562769795214,
+            "estimate": 0.7061390244362258,
             "new_lab_pi90": [
-              -0.7706499735418036,
-              1.1021661597904353
+              -0.9002462908805725,
+              2.3039507951180003
             ]
           },
           "1.0": {
-            "estimate": 0.1622367545895793,
+            "estimate": 0.687626116686388,
             "new_lab_pi90": [
-              -1.7304931784884703,
-              2.040201064347543
+              -2.100721225773088,
+              3.423244968737399
             ]
           }
         },
@@ -19246,23 +21139,35 @@
             0.7997059118729082
           ]
         },
-        "non_monotone_contrasts": 1
+        "non_monotone_contrasts": 3
       },
-      "reading": "too few laboratories",
+      "reading": "direction unclear",
       "lolo": null,
       "fragility": {
         "contrasts_with_a_censored_arm": 0,
         "contrasts_with_a_turning_point": 0,
         "labs_with_a_turning_point": 0,
-        "flags": []
+        "flags": [],
+        "variants": {
+          "whole-ladder slopes": {
+            "reading": "direction unclear",
+            "labs": 3,
+            "contrasts": 11,
+            "estimate": 0.7432087468961803,
+            "ci90": [
+              0.009818606454608502,
+              1.4394514616522753
+            ]
+          }
+        }
       }
     },
     {
       "compound": "2-Methyl-3-furanthiol (MFT)",
       "lever_class": "time",
       "band": "T >130 C",
-      "contrasts": 3,
-      "studies": 1,
+      "contrasts": 5,
+      "studies": 2,
       "labs": 1,
       "lab_names": [
         "btbu_beijing"
@@ -19277,6 +21182,42 @@
         150.0
       ],
       "rows": [
+        {
+          "source": "wang2022lipid",
+          "contrast": "wang2022lipid-374",
+          "lab": "btbu_beijing",
+          "y": 0.8044401900390067,
+          "v": 0.0013891629299274668,
+          "range": [
+            30.0,
+            120.0
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "buffered"
+        },
+        {
+          "source": "wang2022lipid",
+          "contrast": "wang2022lipid-375",
+          "lab": "btbu_beijing",
+          "y": -0.2917392327275998,
+          "v": 0.00200125780759574,
+          "range": [
+            60.0,
+            180.0
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": true,
+          "buffer_state": "buffered"
+        },
         {
           "source": "yang2011",
           "contrast": "yang2011-3",
@@ -19334,17 +21275,17 @@
       ],
       "step": "a doubling of time",
       "fit": {
-        "estimate": 0.8831447499612335,
+        "estimate": 0.6333708469288757,
         "ci90": [
-          -0.26050600723530354,
-          1.9821899630700945
+          -0.3614499652508129,
+          1.595812417270349
         ],
         "new_lab_pi90": [
-          -1.15553160918317,
-          2.881067842878531
+          -1.2959168010613864,
+          2.5366367843976505
         ],
-        "p_same_sign_new_lab": 0.7797247644075275,
-        "new_lab_pi90_width": 4.036599452061701,
+        "p_same_sign_new_lab": 0.7214317256165708,
+        "new_lab_pi90_width": 3.8325535854590367,
         "tau_study_fitted": false,
         "reml_scales": [
           0.0,
@@ -19353,17 +21294,17 @@
         "prior_dominated": true,
         "sensitivity": {
           "0.25": {
-            "estimate": 0.9059705049937433,
+            "estimate": 0.6436125989532544,
             "new_lab_pi90": [
-              -0.42460730336714914,
-              2.2268912126078444
+              -0.6601912165531153,
+              1.942604158122222
             ]
           },
           "1.0": {
-            "estimate": 0.8327394698244885,
+            "estimate": 0.6080160061929104,
             "new_lab_pi90": [
-              -2.359777955630181,
-              3.887440954483878
+              -2.309415270759092,
+              3.426272885705232
             ]
           }
         },
@@ -19373,14 +21314,14 @@
         "incidental_only": {
           "contrasts": 0
         },
-        "non_monotone_contrasts": 0
+        "non_monotone_contrasts": 2
       },
       "reading": "too few laboratories",
       "lolo": null,
       "fragility": {
         "contrasts_with_a_censored_arm": 0,
-        "contrasts_with_a_turning_point": 0,
-        "labs_with_a_turning_point": 0,
+        "contrasts_with_a_turning_point": 1,
+        "labs_with_a_turning_point": 1,
         "flags": []
       }
     },
@@ -24876,6 +26817,529 @@
       }
     },
     {
+      "compound": "2-Pentylfuran",
+      "lever_class": "time",
+      "band": "T 100-130 C",
+      "contrasts": 1,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "btbu_beijing"
+      ],
+      "peak_area_share": 1.0,
+      "focal_share": 0.0,
+      "matrices": [
+        "buffer"
+      ],
+      "temperature_range_C": [
+        120.0,
+        120.0
+      ],
+      "rows": [
+        {
+          "source": "wang2022lipid",
+          "contrast": "wang2022lipid-695",
+          "lab": "btbu_beijing",
+          "y": -0.37387779001344107,
+          "v": 0.002495782186128551,
+          "range": [
+            30.0,
+            90.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "buffered"
+        }
+      ],
+      "step": "a doubling of time",
+      "fit": {
+        "estimate": -0.3636533316046241,
+        "ci90": [
+          -1.433412225643423,
+          0.7444956114067006
+        ],
+        "new_lab_pi90": [
+          -1.9156643129473288,
+          1.2271366753726636
+        ],
+        "p_same_sign_new_lab": 0.7035151204049055,
+        "new_lab_pi90_width": 3.1428009883199923,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.0
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": -0.37096365846948887,
+            "new_lab_pi90": [
+              -1.1699221663750625,
+              0.43865587167014525
+            ]
+          },
+          "1.0": {
+            "estimate": -0.3407734202573721,
+            "new_lab_pi90": [
+              -3.2114225935936607,
+              2.636937330422051
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 0
+        },
+        "incidental_only": {
+          "contrasts": 1,
+          "estimate": -0.3636533316046241,
+          "ci90": [
+            -1.433412225643423,
+            0.7444956114067006
+          ]
+        },
+        "non_monotone_contrasts": 0
+      },
+      "reading": "too few laboratories",
+      "lolo": null,
+      "fragility": {
+        "contrasts_with_a_censored_arm": 0,
+        "contrasts_with_a_turning_point": 0,
+        "labs_with_a_turning_point": 0,
+        "flags": []
+      }
+    },
+    {
+      "compound": "2-Pentylpyridine",
+      "lever_class": "lipid",
+      "band": "all",
+      "contrasts": 1,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "btbu_beijing"
+      ],
+      "peak_area_share": 1.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "buffer"
+      ],
+      "temperature_range_C": [
+        120.0,
+        120.0
+      ],
+      "rows": [
+        {
+          "source": "wang2022lipid",
+          "contrast": "wang2022lipid-33",
+          "lab": "btbu_beijing",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "2%",
+              "against": "1%",
+              "y": 0.04207388508536969,
+              "v": 0.0024162754589515164,
+              "censored": 0
+            }
+          ],
+          "focal": true,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": null,
+          "buffer_state": null
+        }
+      ],
+      "reference": "1%",
+      "reference_note": "declared reference 'none' absent from every study of this cell; reported against '1%' (PREREG amendment A3)",
+      "fit": {
+        "connected": true,
+        "reference": "1%",
+        "levels": {
+          "2%": {
+            "estimate": 0.041718144169954195,
+            "ci90": [
+              -0.7267567265194518,
+              0.8066595857645075
+            ],
+            "new_lab_pi90": [
+              -1.0568138614472686,
+              1.1366548033505683
+            ],
+            "p_same_sign_new_lab": 0.5647624518348466,
+            "new_lab_pi90_width": 2.193468664797837,
+            "labs": 1,
+            "contrasts": 1,
+            "reading": "too few laboratories"
+          }
+        },
+        "reml_scales": [
+          0.0
+        ],
+        "reference_fallback": {
+          "declared": "none",
+          "used": "1%"
+        }
+      },
+      "reading": "per level",
+      "fragility": {
+        "pairs_with_a_censored_arm": 0,
+        "pairs_with_both_arms_censored": 0,
+        "flags": {}
+      }
+    },
+    {
+      "compound": "2-Pentylpyridine",
+      "lever_class": "temperature",
+      "band": "time >120 min",
+      "contrasts": 1,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "btbu_beijing"
+      ],
+      "peak_area_share": 1.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "buffer"
+      ],
+      "temperature_range_C": [
+        100.0,
+        140.0
+      ],
+      "rows": [
+        {
+          "source": "wang2022lipid",
+          "contrast": "wang2022lipid-670",
+          "lab": "btbu_beijing",
+          "y": 0.21056705689712638,
+          "v": 0.0015674174314136255,
+          "range": [
+            120.0,
+            140.0
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "buffered"
+        }
+      ],
+      "step": "+10 C",
+      "fit": {
+        "estimate": 0.2049221833868618,
+        "ci90": [
+          -0.8937719930266145,
+          1.2817884162184447
+        ],
+        "new_lab_pi90": [
+          -1.376606572101409,
+          1.764412917015547
+        ],
+        "p_same_sign_new_lab": 0.6283188929759744,
+        "new_lab_pi90_width": 3.141019489116956,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.0
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": 0.2089916578326092,
+            "new_lab_pi90": [
+              -0.5969265749486689,
+              1.0088231270070616
+            ]
+          },
+          "1.0": {
+            "estimate": 0.19213630936455106,
+            "new_lab_pi90": [
+              -2.760885154206111,
+              3.0844586838205745
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 0
+        },
+        "incidental_only": {
+          "contrasts": 0
+        },
+        "non_monotone_contrasts": 1
+      },
+      "reading": "too few laboratories",
+      "lolo": null,
+      "fragility": {
+        "contrasts_with_a_censored_arm": 0,
+        "contrasts_with_a_turning_point": 0,
+        "labs_with_a_turning_point": 0,
+        "flags": []
+      }
+    },
+    {
+      "compound": "2-Pentylpyridine",
+      "lever_class": "time",
+      "band": "T 100-130 C",
+      "contrasts": 4,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "btbu_beijing"
+      ],
+      "peak_area_share": 1.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "buffer"
+      ],
+      "temperature_range_C": [
+        100.0,
+        120.0
+      ],
+      "rows": [
+        {
+          "source": "wang2022lipid",
+          "contrast": "wang2022lipid-358",
+          "lab": "btbu_beijing",
+          "y": 0.3560381418202952,
+          "v": 0.0013891629299274668,
+          "range": [
+            30.0,
+            120.0
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": true,
+          "buffer_state": "buffered"
+        },
+        {
+          "source": "wang2022lipid",
+          "contrast": "wang2022lipid-496",
+          "lab": "btbu_beijing",
+          "y": 0.6861576138225168,
+          "v": 0.00200125780759574,
+          "range": [
+            60.0,
+            180.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "buffered"
+        },
+        {
+          "source": "wang2022lipid",
+          "contrast": "wang2022lipid-497",
+          "lab": "btbu_beijing",
+          "y": 0.7657395722073177,
+          "v": 0.006209900456089848,
+          "range": [
+            60.0,
+            120.0
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "buffered"
+        },
+        {
+          "source": "wang2022lipid",
+          "contrast": "wang2022lipid-498",
+          "lab": "btbu_beijing",
+          "y": -0.18618557036130953,
+          "v": 0.006209900456089848,
+          "range": [
+            60.0,
+            120.0
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": true,
+          "buffer_state": "buffered"
+        }
+      ],
+      "step": "a doubling of time",
+      "fit": {
+        "estimate": 0.39864305154428814,
+        "ci90": [
+          -0.47960758431443856,
+          1.2497602555615785
+        ],
+        "new_lab_pi90": [
+          -1.0667615275551938,
+          1.8397548042437255
+        ],
+        "p_same_sign_new_lab": 0.7070423868599987,
+        "new_lab_pi90_width": 2.9065163317989193,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.4481404746557168
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": 0.40426261811830894,
+            "new_lab_pi90": [
+              -0.5089709328413857,
+              1.3111464791056422
+            ]
+          },
+          "1.0": {
+            "estimate": 0.38621599813166524,
+            "new_lab_pi90": [
+              -2.0443826179744082,
+              2.733535278275974
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 0
+        },
+        "incidental_only": {
+          "contrasts": 0
+        },
+        "non_monotone_contrasts": 3
+      },
+      "reading": "too few laboratories",
+      "lolo": null,
+      "fragility": {
+        "contrasts_with_a_censored_arm": 0,
+        "contrasts_with_a_turning_point": 2,
+        "labs_with_a_turning_point": 1,
+        "flags": []
+      }
+    },
+    {
+      "compound": "2-Pentylpyridine",
+      "lever_class": "time",
+      "band": "T >130 C",
+      "contrasts": 2,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "btbu_beijing"
+      ],
+      "peak_area_share": 1.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "buffer"
+      ],
+      "temperature_range_C": [
+        130.0,
+        140.0
+      ],
+      "rows": [
+        {
+          "source": "wang2022lipid",
+          "contrast": "wang2022lipid-499",
+          "lab": "btbu_beijing",
+          "y": 0.22150069893833388,
+          "v": 0.0056220633061758105,
+          "range": [
+            90.0,
+            180.0
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "buffered"
+        },
+        {
+          "source": "wang2022lipid",
+          "contrast": "wang2022lipid-500",
+          "lab": "btbu_beijing",
+          "y": 0.16788824243520775,
+          "v": 0.0009323126744625388,
+          "range": [
+            30.0,
+            150.0
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "buffered"
+        }
+      ],
+      "step": "a doubling of time",
+      "fit": {
+        "estimate": 0.18393010272768026,
+        "ci90": [
+          -0.6558773382047929,
+          1.0141055149120608
+        ],
+        "new_lab_pi90": [
+          -1.066851865730459,
+          1.425738607832958
+        ],
+        "p_same_sign_new_lab": 0.6626067917595305,
+        "new_lab_pi90_width": 2.492590473563417,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.0
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": 0.18394059067917534,
+            "new_lab_pi90": [
+              -0.4665552796943506,
+              0.8377925984622759
+            ]
+          },
+          "1.0": {
+            "estimate": 0.18040289940538312,
+            "new_lab_pi90": [
+              -2.1459282919500726,
+              2.4639784118300914
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 0
+        },
+        "incidental_only": {
+          "contrasts": 0
+        },
+        "non_monotone_contrasts": 2
+      },
+      "reading": "too few laboratories",
+      "lolo": null,
+      "fragility": {
+        "contrasts_with_a_censored_arm": 0,
+        "contrasts_with_a_turning_point": 0,
+        "labs_with_a_turning_point": 0,
+        "flags": []
+      }
+    },
+    {
       "compound": "3-Methylbutanal",
       "lever_class": "amino acid identity",
       "band": "all",
@@ -25559,21 +28023,22 @@
       "compound": "3-Methylbutanal",
       "lever_class": "time",
       "band": "T >130 C",
-      "contrasts": 6,
-      "studies": 2,
+      "contrasts": 13,
+      "studies": 3,
       "labs": 2,
       "lab_names": [
         "dfa_garching",
         "reading_mottram_parker"
       ],
       "peak_area_share": 0.0,
-      "focal_share": 0.6666666666666666,
+      "focal_share": 0.3076923076923077,
       "matrices": [
         "buffer",
         "other (aqueous beef liver extract, batch 1)",
         "other (aqueous beef liver extract, batch 2)",
         "other (aqueous beef liver extract, batch 3)",
-        "other (silica gel 3 g, 10 % water)"
+        "other (silica gel 3 g, 10 % water)",
+        "other: freeze-dried glucose/wheat flour dough powder (crust-like, moisture <2 %), 0.5 g"
       ],
       "temperature_range_C": [
         130.0,
@@ -25653,6 +28118,132 @@
           "buffer_state": "unbuffered"
         },
         {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-24",
+          "lab": "reading_mottram_parker",
+          "y": 0.26358561377577505,
+          "v": 0.0012139482482875603,
+          "range": [
+            2.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-25",
+          "lab": "reading_mottram_parker",
+          "y": 0.29976933282830626,
+          "v": 0.0012139482482875603,
+          "range": [
+            2.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-26",
+          "lab": "reading_mottram_parker",
+          "y": 0.3136406853377248,
+          "v": 0.0012139482482875603,
+          "range": [
+            2.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-27",
+          "lab": "reading_mottram_parker",
+          "y": 0.3428247991488434,
+          "v": 0.0012139482482875603,
+          "range": [
+            2.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-28",
+          "lab": "reading_mottram_parker",
+          "y": 0.3940660773588992,
+          "v": 0.002948038117587954,
+          "range": [
+            2.0,
+            7.0
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-29",
+          "lab": "reading_mottram_parker",
+          "y": 0.35143729921890193,
+          "v": 0.007437087201723903,
+          "range": [
+            3.0,
+            7.0
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-30",
+          "lab": "reading_mottram_parker",
+          "y": 0.3265066757020503,
+          "v": 0.007437087201723903,
+          "range": [
+            3.0,
+            7.0
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
           "source": "granvogl2006",
           "contrast": "granvogl2006-13",
           "lab": "dfa_garching",
@@ -25691,17 +28282,190 @@
       ],
       "step": "a doubling of time",
       "fit": {
-        "estimate": 0.20804939541938133,
+        "estimate": 0.25405256534914067,
         "ci90": [
-          -0.10951532728738358,
-          0.5094412125537604
+          -0.061820619549913323,
+          0.5494959081856969
         ],
         "new_lab_pi90": [
-          -0.3699463907546513,
-          0.7679355225589214
+          -0.2941348585347308,
+          0.7819986713283397
         ],
-        "p_same_sign_new_lab": 0.8198720786826963,
-        "new_lab_pi90_width": 1.1378819133135727,
+        "p_same_sign_new_lab": 0.866821509288861,
+        "new_lab_pi90_width": 1.0761335298630705,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.03353126694545314,
+          0.0473781964106776
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": 0.2547127912496127,
+            "new_lab_pi90": [
+              -0.08484408956490545,
+              0.5786567772076553
+            ]
+          },
+          "1.0": {
+            "estimate": 0.2535073794970752,
+            "new_lab_pi90": [
+              -0.6589351422915146,
+              1.1339162936094387
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 13,
+          "estimate": 0.25405256534914067,
+          "ci90": [
+            -0.061820619549913323,
+            0.5494959081856969
+          ]
+        },
+        "incidental_only": {
+          "contrasts": 9,
+          "estimate": 0.26860670952509225,
+          "ci90": [
+            -0.09024051597345595,
+            0.615851470749845
+          ]
+        },
+        "non_monotone_contrasts": 7
+      },
+      "reading": "too few laboratories",
+      "lolo": null,
+      "fragility": {
+        "contrasts_with_a_censored_arm": 0,
+        "contrasts_with_a_turning_point": 0,
+        "labs_with_a_turning_point": 0,
+        "flags": []
+      }
+    },
+    {
+      "compound": "5-Hydroxymethylfurfural (HMF)",
+      "lever_class": "temperature",
+      "band": "time <30 min",
+      "contrasts": 5,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "reading_mottram_parker"
+      ],
+      "peak_area_share": 0.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "other: freeze-dried glucose/wheat flour dough powder (crust-like, moisture <2 %), 0.5 g"
+      ],
+      "temperature_range_C": [
+        160.0,
+        200.0
+      ],
+      "rows": [
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-19",
+          "lab": "reading_mottram_parker",
+          "y": 0.37229644153026076,
+          "v": 0.0007043543578534063,
+          "range": [
+            160.0,
+            200.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": false,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-20",
+          "lab": "reading_mottram_parker",
+          "y": 0.4328325607452695,
+          "v": 0.0007043543578534063,
+          "range": [
+            160.0,
+            200.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": false,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-21",
+          "lab": "reading_mottram_parker",
+          "y": 0.4196120842978543,
+          "v": 0.0007043543578534063,
+          "range": [
+            160.0,
+            200.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": false,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-22",
+          "lab": "reading_mottram_parker",
+          "y": 0.30691957331927,
+          "v": 0.0007043543578534063,
+          "range": [
+            160.0,
+            200.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": false,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-23",
+          "lab": "reading_mottram_parker",
+          "y": 0.37940362632199515,
+          "v": 0.0007043543578534063,
+          "range": [
+            160.0,
+            200.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": false,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        }
+      ],
+      "step": "+10 C",
+      "fit": {
+        "estimate": 0.3795358574726151,
+        "ci90": [
+          -0.4029835964857919,
+          1.128749787267611
+        ],
+        "new_lab_pi90": [
+          -0.74001288015375,
+          1.465817815386534
+        ],
+        "p_same_sign_new_lab": 0.8031302678129406,
+        "new_lab_pi90_width": 2.2058306955402838,
         "tau_study_fitted": false,
         "reml_scales": [
           0.0,
@@ -25710,42 +28474,390 @@
         "prior_dominated": true,
         "sensitivity": {
           "0.25": {
-            "estimate": 0.209224020868113,
+            "estimate": 0.3813547823019395,
             "new_lab_pi90": [
-              -0.16157050466116862,
-              0.5622866097941479
+              -0.19252464994339602,
+              0.946688300239697
             ]
           },
           "1.0": {
-            "estimate": 0.2073908144940049,
+            "estimate": 0.37419335701624823,
             "new_lab_pi90": [
-              -0.7233021721198376,
-              1.1129352006465423
+              -1.745696229414032,
+              2.3895508649976653
             ]
           }
         },
         "without_peak_areas": {
-          "contrasts": 6,
-          "estimate": 0.20804939541938133,
+          "contrasts": 5,
+          "estimate": 0.3795358574726151,
           "ci90": [
-            -0.10951532728738358,
-            0.5094412125537604
+            -0.4029835964857919,
+            1.128749787267611
           ]
         },
         "incidental_only": {
-          "contrasts": 2,
-          "estimate": 0.21169055740342768,
-          "ci90": [
-            -0.6304706555795561,
-            1.0357655591830275
-          ]
+          "contrasts": 0
         },
-        "non_monotone_contrasts": 4
+        "non_monotone_contrasts": 0
       },
       "reading": "too few laboratories",
       "lolo": null,
       "fragility": {
         "contrasts_with_a_censored_arm": 0,
+        "contrasts_with_a_turning_point": 0,
+        "labs_with_a_turning_point": 0,
+        "flags": []
+      }
+    },
+    {
+      "compound": "5-Hydroxymethylfurfural (HMF)",
+      "lever_class": "time",
+      "band": "T >130 C",
+      "contrasts": 15,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "reading_mottram_parker"
+      ],
+      "peak_area_share": 0.0,
+      "focal_share": 0.0,
+      "matrices": [
+        "other: freeze-dried glucose/wheat flour dough powder (crust-like, moisture <2 %), 0.5 g"
+      ],
+      "temperature_range_C": [
+        160.0,
+        200.0
+      ],
+      "rows": [
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-129",
+          "lab": "reading_mottram_parker",
+          "y": 0.5535299618173447,
+          "v": 0.0012139482482875603,
+          "range": [
+            2.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-130",
+          "lab": "reading_mottram_parker",
+          "y": 0.6676152025854415,
+          "v": 0.0012139482482875603,
+          "range": [
+            2.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 1,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-131",
+          "lab": "reading_mottram_parker",
+          "y": 0.6052884788546367,
+          "v": 0.0012139482482875603,
+          "range": [
+            2.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-132",
+          "lab": "reading_mottram_parker",
+          "y": 0.8137330886679296,
+          "v": 0.0012139482482875603,
+          "range": [
+            2.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 1,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-133",
+          "lab": "reading_mottram_parker",
+          "y": 0.5937262902302014,
+          "v": 0.0012139482482875603,
+          "range": [
+            2.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 1,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-134",
+          "lab": "reading_mottram_parker",
+          "y": 0.41035325437752584,
+          "v": 0.0009621251125482094,
+          "range": [
+            1.0,
+            7.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 2,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-135",
+          "lab": "reading_mottram_parker",
+          "y": 0.5915476038870574,
+          "v": 0.0009621251125482094,
+          "range": [
+            1.0,
+            7.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 2,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-136",
+          "lab": "reading_mottram_parker",
+          "y": 0.5545029143115418,
+          "v": 0.0009621251125482094,
+          "range": [
+            1.0,
+            7.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 2,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-137",
+          "lab": "reading_mottram_parker",
+          "y": 0.7550913420760326,
+          "v": 0.0009621251125482094,
+          "range": [
+            1.0,
+            7.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 1,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-138",
+          "lab": "reading_mottram_parker",
+          "y": 0.48793927317579416,
+          "v": 0.0009621251125482094,
+          "range": [
+            1.0,
+            7.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 2,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-139",
+          "lab": "reading_mottram_parker",
+          "y": 0.48202985009041527,
+          "v": 0.0009621251125482094,
+          "range": [
+            1.0,
+            7.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 2,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-140",
+          "lab": "reading_mottram_parker",
+          "y": 0.6461220662830791,
+          "v": 0.0009621251125482094,
+          "range": [
+            1.0,
+            7.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 1,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-141",
+          "lab": "reading_mottram_parker",
+          "y": 0.6364497616188001,
+          "v": 0.0009621251125482094,
+          "range": [
+            1.0,
+            7.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 2,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-142",
+          "lab": "reading_mottram_parker",
+          "y": 0.7278781738502459,
+          "v": 0.0012331111760113607,
+          "range": [
+            1.0,
+            6.0
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 1,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-143",
+          "lab": "reading_mottram_parker",
+          "y": 0.5071924910113429,
+          "v": 0.0009621251125482094,
+          "range": [
+            1.0,
+            7.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 1,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        }
+      ],
+      "step": "a doubling of time",
+      "fit": {
+        "estimate": 0.597393868327717,
+        "ci90": [
+          -0.19447349939938696,
+          1.3370448444648493
+        ],
+        "new_lab_pi90": [
+          -0.5381778661117055,
+          1.6810352683665437
+        ],
+        "p_same_sign_new_lab": 0.868468383602069,
+        "new_lab_pi90_width": 2.2192131344782493,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.11243458629672394
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": 0.6003135904482017,
+            "new_lab_pi90": [
+              0.010064061896355123,
+              1.177584181660401
+            ]
+          },
+          "1.0": {
+            "estimate": 0.588819278434753,
+            "new_lab_pi90": [
+              -1.5662873783493516,
+              2.5799785161525954
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 15,
+          "estimate": 0.597393868327717,
+          "ci90": [
+            -0.19447349939938696,
+            1.3370448444648493
+          ]
+        },
+        "incidental_only": {
+          "contrasts": 15,
+          "estimate": 0.597393868327717,
+          "ci90": [
+            -0.19447349939938696,
+            1.3370448444648493
+          ]
+        },
+        "non_monotone_contrasts": 1
+      },
+      "reading": "too few laboratories",
+      "lolo": null,
+      "fragility": {
+        "contrasts_with_a_censored_arm": 13,
         "contrasts_with_a_turning_point": 0,
         "labs_with_a_turning_point": 0,
         "flags": []
@@ -26255,22 +29367,150 @@
       "compound": "5-Methylfurfural",
       "lever_class": "time",
       "band": "T >130 C",
-      "contrasts": 1,
-      "studies": 1,
-      "labs": 1,
+      "contrasts": 8,
+      "studies": 2,
+      "labs": 2,
       "lab_names": [
-        "minnesota_reineccius"
+        "minnesota_reineccius",
+        "reading_mottram_parker"
       ],
       "peak_area_share": 1.0,
-      "focal_share": 1.0,
+      "focal_share": 0.125,
       "matrices": [
+        "other: freeze-dried glucose/wheat flour dough powder (crust-like, moisture <2 %), 0.5 g",
         "water"
       ],
       "temperature_range_C": [
         150.0,
-        150.0
+        160.0
       ],
       "rows": [
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-108",
+          "lab": "reading_mottram_parker",
+          "y": 0.4186327947813254,
+          "v": 0.0012139482482875603,
+          "range": [
+            2.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": true,
+          "censored_arms": 4,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-109",
+          "lab": "reading_mottram_parker",
+          "y": 0.5028519334312781,
+          "v": 0.0012139482482875603,
+          "range": [
+            2.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": true,
+          "censored_arms": 3,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-110",
+          "lab": "reading_mottram_parker",
+          "y": 0.41257446464847264,
+          "v": 0.0012139482482875603,
+          "range": [
+            2.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": true,
+          "censored_arms": 4,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-111",
+          "lab": "reading_mottram_parker",
+          "y": 0.8133739328669541,
+          "v": 0.0012139482482875603,
+          "range": [
+            2.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": true,
+          "censored_arms": 2,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-112",
+          "lab": "reading_mottram_parker",
+          "y": 0.5337667573719724,
+          "v": 0.0012139482482875603,
+          "range": [
+            2.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": true,
+          "censored_arms": 3,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-113",
+          "lab": "reading_mottram_parker",
+          "y": 0.48138930535968927,
+          "v": 0.0030029416107542222,
+          "range": [
+            3.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": true,
+          "censored_arms": 2,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-114",
+          "lab": "reading_mottram_parker",
+          "y": 0.5163964365783632,
+          "v": 0.0030029416107542222,
+          "range": [
+            3.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": true,
+          "censored_arms": 2,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
         {
           "source": "schirle1992",
           "contrast": "schirle1992-16",
@@ -26292,36 +29532,36 @@
       ],
       "step": "a doubling of time",
       "fit": {
-        "estimate": 0.3327184266788756,
+        "estimate": 0.47133399851837343,
         "ci90": [
-          -0.7730901900564975,
-          1.4031269546301486
+          0.026434992389647485,
+          0.8441408388694288
         ],
         "new_lab_pi90": [
-          -1.255957083649183,
-          1.8856444171836728
+          -0.30115481541420913,
+          1.1768619788223058
         ],
-        "p_same_sign_new_lab": 0.6903756269380759,
-        "new_lab_pi90_width": 3.1416015008328557,
+        "p_same_sign_new_lab": 0.8851514912594237,
+        "new_lab_pi90_width": 1.478016794236515,
         "tau_study_fitted": false,
         "reml_scales": [
-          0.0,
-          0.0
+          0.07957403220540027,
+          0.13364853627055825
         ],
         "prior_dominated": true,
         "sensitivity": {
           "0.25": {
-            "estimate": 0.33933822322200724,
+            "estimate": 0.47688388675821436,
             "new_lab_pi90": [
-              -0.46874703220089253,
-              1.1375071167485364
+              -0.03807749247035234,
+              0.9475391286204679
             ]
           },
           "1.0": {
-            "estimate": 0.31188553338447467,
+            "estimate": 0.4669462464842615,
             "new_lab_pi90": [
-              -2.6609698743049757,
-              3.1863423537204123
+              -0.7455779768339518,
+              1.5810943987173953
             ]
           }
         },
@@ -26329,14 +29569,19 @@
           "contrasts": 0
         },
         "incidental_only": {
-          "contrasts": 0
+          "contrasts": 7,
+          "estimate": 0.5213005503368359,
+          "ci90": [
+            -0.27106450647601144,
+            1.2700096963517187
+          ]
         },
         "non_monotone_contrasts": 0
       },
       "reading": "too few laboratories",
       "lolo": null,
       "fragility": {
-        "contrasts_with_a_censored_arm": 0,
+        "contrasts_with_a_censored_arm": 7,
         "contrasts_with_a_turning_point": 0,
         "labs_with_a_turning_point": 0,
         "flags": []
@@ -29176,6 +32421,111 @@
     },
     {
       "compound": "Bis(2-furfuryl) disulfide",
+      "lever_class": "lipid",
+      "band": "all",
+      "contrasts": 1,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "btbu_beijing"
+      ],
+      "peak_area_share": 1.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "buffer"
+      ],
+      "temperature_range_C": [
+        120.0,
+        120.0
+      ],
+      "rows": [
+        {
+          "source": "wang2022lipid",
+          "contrast": "wang2022lipid-9",
+          "lab": "btbu_beijing",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "1%",
+              "against": "0%",
+              "y": -0.4771212547196624,
+              "v": 0.0031390561988957474,
+              "censored": 0
+            },
+            {
+              "level": "2%",
+              "against": "0%",
+              "y": -0.886742619273047,
+              "v": 0.00011558734320800477,
+              "censored": 0
+            }
+          ],
+          "focal": true,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": null,
+          "buffer_state": null
+        }
+      ],
+      "reference": "0%",
+      "reference_note": "declared reference 'none' absent from every study of this cell; reported against '0%' (PREREG amendment A3)",
+      "fit": {
+        "connected": true,
+        "reference": "0%",
+        "levels": {
+          "1%": {
+            "estimate": -0.4694018941822502,
+            "ci90": [
+              -1.1902545018647392,
+              0.32302338831764965
+            ],
+            "new_lab_pi90": [
+              -1.517142694017089,
+              0.6505127318419823
+            ],
+            "p_same_sign_new_lab": 0.8366608606319622,
+            "new_lab_pi90_width": 2.1676554258590714,
+            "labs": 1,
+            "contrasts": 1,
+            "reading": "too few laboratories"
+          },
+          "2%": {
+            "estimate": -0.88083865664947,
+            "ci90": [
+              -1.58595021239527,
+              -0.07933725077646983
+            ],
+            "new_lab_pi90": [
+              -1.9139562242718704,
+              0.2491179510502683
+            ],
+            "p_same_sign_new_lab": 0.9227372750687766,
+            "new_lab_pi90_width": 2.1630741753221385,
+            "labs": 1,
+            "contrasts": 1,
+            "reading": "too few laboratories"
+          }
+        },
+        "reml_scales": [
+          0.0
+        ],
+        "reference_fallback": {
+          "declared": "none",
+          "used": "0%"
+        }
+      },
+      "reading": "per level",
+      "fragility": {
+        "pairs_with_a_censored_arm": 0,
+        "pairs_with_both_arms_censored": 0,
+        "flags": {}
+      }
+    },
+    {
+      "compound": "Bis(2-furfuryl) disulfide",
       "lever_class": "pH",
       "band": "pH 4.5-6, held",
       "contrasts": 1,
@@ -29711,6 +33061,333 @@
       }
     },
     {
+      "compound": "Bis(2-furfuryl) disulfide",
+      "lever_class": "temperature",
+      "band": "time >120 min",
+      "contrasts": 1,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "btbu_beijing"
+      ],
+      "peak_area_share": 1.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "buffer"
+      ],
+      "temperature_range_C": [
+        100.0,
+        140.0
+      ],
+      "rows": [
+        {
+          "source": "wang2022lipid",
+          "contrast": "wang2022lipid-562",
+          "lab": "btbu_beijing",
+          "y": 0.32504563922070084,
+          "v": 0.0015674174314136255,
+          "range": [
+            120.0,
+            140.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "buffered"
+        }
+      ],
+      "step": "+10 C",
+      "fit": {
+        "estimate": 0.31633024492315626,
+        "ci90": [
+          -0.7884893972116848,
+          1.387453238450928
+        ],
+        "new_lab_pi90": [
+          -1.2714204152144222,
+          1.8699696495793656
+        ],
+        "p_same_sign_new_lab": 0.6830895039972895,
+        "new_lab_pi90_width": 3.1413900647937876,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.0
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": 0.322610773304193,
+            "new_lab_pi90": [
+              -0.48508506214097924,
+              1.1208851341172663
+            ]
+          },
+          "1.0": {
+            "estimate": 0.29654367401338766,
+            "new_lab_pi90": [
+              -2.673712852365697,
+              3.173222777032544
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 0
+        },
+        "incidental_only": {
+          "contrasts": 0
+        },
+        "non_monotone_contrasts": 0
+      },
+      "reading": "too few laboratories",
+      "lolo": null,
+      "fragility": {
+        "contrasts_with_a_censored_arm": 0,
+        "contrasts_with_a_turning_point": 0,
+        "labs_with_a_turning_point": 0,
+        "flags": []
+      }
+    },
+    {
+      "compound": "Bis(2-furfuryl) disulfide",
+      "lever_class": "time",
+      "band": "T 100-130 C",
+      "contrasts": 3,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "btbu_beijing"
+      ],
+      "peak_area_share": 1.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "buffer"
+      ],
+      "temperature_range_C": [
+        120.0,
+        120.0
+      ],
+      "rows": [
+        {
+          "source": "wang2022lipid",
+          "contrast": "wang2022lipid-284",
+          "lab": "btbu_beijing",
+          "y": 0.5420109132828641,
+          "v": 0.0032080693710948753,
+          "range": [
+            60.0,
+            150.0
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": true,
+          "buffer_state": "buffered"
+        },
+        {
+          "source": "wang2022lipid",
+          "contrast": "wang2022lipid-286",
+          "lab": "btbu_beijing",
+          "y": 0.1985561913382531,
+          "v": 0.018260963897559167,
+          "range": [
+            120.0,
+            180.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "buffered"
+        },
+        {
+          "source": "wang2022lipid",
+          "contrast": "wang2022lipid-408",
+          "lab": "btbu_beijing",
+          "y": -0.09753096439251,
+          "v": 0.006209900456089848,
+          "range": [
+            60.0,
+            120.0
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "buffered"
+        }
+      ],
+      "step": "a doubling of time",
+      "fit": {
+        "estimate": 0.21427169645303468,
+        "ci90": [
+          -0.670486948411426,
+          1.0819166129746738
+        ],
+        "new_lab_pi90": [
+          -1.2024926346659062,
+          1.61422903482668
+        ],
+        "p_same_sign_new_lab": 0.6281871678773764,
+        "new_lab_pi90_width": 2.816721669492586,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.3171652579277238
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": 0.21883405408659992,
+            "new_lab_pi90": [
+              -0.6247002425613457,
+              1.0551469877246171
+            ]
+          },
+          "1.0": {
+            "estimate": 0.2065382798772042,
+            "new_lab_pi90": [
+              -2.2157998409812185,
+              2.5807779147178804
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 0
+        },
+        "incidental_only": {
+          "contrasts": 0
+        },
+        "non_monotone_contrasts": 2
+      },
+      "reading": "too few laboratories",
+      "lolo": null,
+      "fragility": {
+        "contrasts_with_a_censored_arm": 0,
+        "contrasts_with_a_turning_point": 1,
+        "labs_with_a_turning_point": 1,
+        "flags": []
+      }
+    },
+    {
+      "compound": "Bis(2-furfuryl) disulfide",
+      "lever_class": "time",
+      "band": "T >130 C",
+      "contrasts": 2,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "btbu_beijing"
+      ],
+      "peak_area_share": 1.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "buffer"
+      ],
+      "temperature_range_C": [
+        130.0,
+        140.0
+      ],
+      "rows": [
+        {
+          "source": "wang2022lipid",
+          "contrast": "wang2022lipid-409",
+          "lab": "btbu_beijing",
+          "y": 0.4797526267138055,
+          "v": 0.0056220633061758105,
+          "range": [
+            90.0,
+            180.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "buffered"
+        },
+        {
+          "source": "wang2022lipid",
+          "contrast": "wang2022lipid-410",
+          "lab": "btbu_beijing",
+          "y": 0.34825733110570767,
+          "v": 0.0013891629299274668,
+          "range": [
+            30.0,
+            120.0
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "buffered"
+        }
+      ],
+      "step": "a doubling of time",
+      "fit": {
+        "estimate": 0.3954002022086708,
+        "ci90": [
+          -0.47121094717423423,
+          1.239451075081838
+        ],
+        "new_lab_pi90": [
+          -0.9038741687327805,
+          1.673292273407683
+        ],
+        "p_same_sign_new_lab": 0.7636266429337915,
+        "new_lab_pi90_width": 2.5771664421404634,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.06694329500821695
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": 0.39598656722587217,
+            "new_lab_pi90": [
+              -0.2853230935616924,
+              1.0823922869800844
+            ]
+          },
+          "1.0": {
+            "estimate": 0.3862032644645675,
+            "new_lab_pi90": [
+              -2.02228070910649,
+              2.7027173250842593
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 0
+        },
+        "incidental_only": {
+          "contrasts": 0
+        },
+        "non_monotone_contrasts": 1
+      },
+      "reading": "too few laboratories",
+      "lolo": null,
+      "fragility": {
+        "contrasts_with_a_censored_arm": 0,
+        "contrasts_with_a_turning_point": 0,
+        "labs_with_a_turning_point": 0,
+        "flags": []
+      }
+    },
+    {
       "compound": "Bis(2-methyl-3-furyl) disulfide",
       "lever_class": "amino acid identity",
       "band": "all",
@@ -29927,19 +33604,20 @@
       "compound": "Bis(2-methyl-3-furyl) disulfide",
       "lever_class": "lipid",
       "band": "all",
-      "contrasts": 1,
-      "studies": 1,
-      "labs": 1,
+      "contrasts": 2,
+      "studies": 2,
+      "labs": 2,
       "lab_names": [
+        "btbu_beijing",
         "reading_mottram_parker"
       ],
       "peak_area_share": 1.0,
-      "focal_share": 0.0,
+      "focal_share": 0.5,
       "matrices": [
         "buffer"
       ],
       "temperature_range_C": [
-        140.0,
+        120.0,
         140.0
       ],
       "rows": [
@@ -29965,6 +33643,36 @@
           "censored_arms": 1,
           "turning_point": null,
           "buffer_state": null
+        },
+        {
+          "source": "wang2022lipid",
+          "contrast": "wang2022lipid-7",
+          "lab": "btbu_beijing",
+          "y": null,
+          "v": null,
+          "range": null,
+          "non_monotone": null,
+          "pairs": [
+            {
+              "level": "1%",
+              "against": "0%",
+              "y": -0.45346543609892764,
+              "v": 7.394652183495855e-05,
+              "censored": 0
+            },
+            {
+              "level": "2%",
+              "against": "0%",
+              "y": -0.686748586336702,
+              "v": 0.0011834334812389966,
+              "censored": 0
+            }
+          ],
+          "focal": true,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": null,
+          "buffer_state": null
         }
       ],
       "reference": "none",
@@ -29987,6 +33695,15 @@
             "labs": 1,
             "contrasts": 1,
             "reading": "too few laboratories"
+          },
+          "0%": {
+            "reading": "not connected"
+          },
+          "1%": {
+            "reading": "not connected"
+          },
+          "2%": {
+            "reading": "not connected"
           }
         },
         "reml_scales": [
@@ -30796,6 +34513,97 @@
     {
       "compound": "Bis(2-methyl-3-furyl) disulfide",
       "lever_class": "temperature",
+      "band": "time >120 min",
+      "contrasts": 1,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "btbu_beijing"
+      ],
+      "peak_area_share": 1.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "buffer"
+      ],
+      "temperature_range_C": [
+        100.0,
+        140.0
+      ],
+      "rows": [
+        {
+          "source": "wang2022lipid",
+          "contrast": "wang2022lipid-556",
+          "lab": "btbu_beijing",
+          "y": -0.0990201877058683,
+          "v": 0.0015674174314136255,
+          "range": [
+            120.0,
+            140.0
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": true,
+          "buffer_state": "buffered"
+        }
+      ],
+      "step": "+10 C",
+      "fit": {
+        "estimate": -0.09636634424571937,
+        "ci90": [
+          -1.178888982683287,
+          0.9964221557118107
+        ],
+        "new_lab_pi90": [
+          -1.66154973326832,
+          1.479207965744486
+        ],
+        "p_same_sign_new_lab": 0.5652081928681689,
+        "new_lab_pi90_width": 3.140757699012806,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.0
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": -0.09827762668270705,
+            "new_lab_pi90": [
+              -0.8997598729283158,
+              0.7060921225322312
+            ]
+          },
+          "1.0": {
+            "estimate": -0.09036309080788121,
+            "new_lab_pi90": [
+              -2.9983093147092883,
+              2.846111480627869
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 0
+        },
+        "incidental_only": {
+          "contrasts": 0
+        },
+        "non_monotone_contrasts": 1
+      },
+      "reading": "too few laboratories",
+      "lolo": null,
+      "fragility": {
+        "contrasts_with_a_censored_arm": 0,
+        "contrasts_with_a_turning_point": 1,
+        "labs_with_a_turning_point": 1,
+        "flags": []
+      }
+    },
+    {
+      "compound": "Bis(2-methyl-3-furyl) disulfide",
+      "lever_class": "temperature",
       "band": "time unstated min",
       "contrasts": 1,
       "studies": 1,
@@ -30886,6 +34694,260 @@
         "contrasts_with_a_censored_arm": 0,
         "contrasts_with_a_turning_point": 0,
         "labs_with_a_turning_point": 0,
+        "flags": []
+      }
+    },
+    {
+      "compound": "Bis(2-methyl-3-furyl) disulfide",
+      "lever_class": "time",
+      "band": "T 100-130 C",
+      "contrasts": 4,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "btbu_beijing"
+      ],
+      "peak_area_share": 1.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "buffer"
+      ],
+      "temperature_range_C": [
+        110.0,
+        120.0
+      ],
+      "rows": [
+        {
+          "source": "wang2022lipid",
+          "contrast": "wang2022lipid-281",
+          "lab": "btbu_beijing",
+          "y": 0.40604580720747413,
+          "v": 0.0013891629299274668,
+          "range": [
+            30.0,
+            120.0
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "buffered"
+        },
+        {
+          "source": "wang2022lipid",
+          "contrast": "wang2022lipid-283",
+          "lab": "btbu_beijing",
+          "y": 0.9460878436617426,
+          "v": 0.0006860183125868534,
+          "range": [
+            30.0,
+            180.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "buffered"
+        },
+        {
+          "source": "wang2022lipid",
+          "contrast": "wang2022lipid-402",
+          "lab": "btbu_beijing",
+          "y": 0.9969207831950322,
+          "v": 0.0906190582894562,
+          "range": [
+            150.0,
+            180.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "buffered"
+        },
+        {
+          "source": "wang2022lipid",
+          "contrast": "wang2022lipid-403",
+          "lab": "btbu_beijing",
+          "y": 0.7790858106457141,
+          "v": 0.0009323126744625388,
+          "range": [
+            30.0,
+            150.0
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "buffered"
+        }
+      ],
+      "step": "a doubling of time",
+      "fit": {
+        "estimate": 0.7389650304421223,
+        "ci90": [
+          -0.10869713044560635,
+          1.5412543970090897
+        ],
+        "new_lab_pi90": [
+          -0.5863799372174227,
+          2.02613627014263
+        ],
+        "p_same_sign_new_lab": 0.859950417472794,
+        "new_lab_pi90_width": 2.612516207360053,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.26682181158053636
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": 0.7411229132971292,
+            "new_lab_pi90": [
+              -0.038323875960611174,
+              1.5204285546571832
+            ]
+          },
+          "1.0": {
+            "estimate": 0.7229437609978612,
+            "new_lab_pi90": [
+              -1.6034774458592618,
+              2.8879648580405743
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 0
+        },
+        "incidental_only": {
+          "contrasts": 0
+        },
+        "non_monotone_contrasts": 2
+      },
+      "reading": "too few laboratories",
+      "lolo": null,
+      "fragility": {
+        "contrasts_with_a_censored_arm": 0,
+        "contrasts_with_a_turning_point": 0,
+        "labs_with_a_turning_point": 0,
+        "flags": []
+      }
+    },
+    {
+      "compound": "Bis(2-methyl-3-furyl) disulfide",
+      "lever_class": "time",
+      "band": "T >130 C",
+      "contrasts": 2,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "btbu_beijing"
+      ],
+      "peak_area_share": 1.0,
+      "focal_share": 1.0,
+      "matrices": [
+        "buffer"
+      ],
+      "temperature_range_C": [
+        130.0,
+        140.0
+      ],
+      "rows": [
+        {
+          "source": "wang2022lipid",
+          "contrast": "wang2022lipid-404",
+          "lab": "btbu_beijing",
+          "y": 1.065445936210733,
+          "v": 0.0013891629299274668,
+          "range": [
+            30.0,
+            120.0
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "buffered"
+        },
+        {
+          "source": "wang2022lipid",
+          "contrast": "wang2022lipid-405",
+          "lab": "btbu_beijing",
+          "y": -0.3108239055175132,
+          "v": 0.00200125780759574,
+          "range": [
+            60.0,
+            180.0
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": true,
+          "buffer_state": "buffered"
+        }
+      ],
+      "step": "a doubling of time",
+      "fit": {
+        "estimate": 0.3611241302702923,
+        "ci90": [
+          -0.7948990475919556,
+          1.4953177993895932
+        ],
+        "new_lab_pi90": [
+          -1.5281065203917454,
+          2.229109394976322
+        ],
+        "p_same_sign_new_lab": 0.6405942479406243,
+        "new_lab_pi90_width": 3.7572159153680675,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.8946873390976365
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": 0.3713140135082946,
+            "new_lab_pi90": [
+              -0.8126272566208381,
+              1.5496143107732894
+            ]
+          },
+          "1.0": {
+            "estimate": 0.33825323939805646,
+            "new_lab_pi90": [
+              -2.743881280425382,
+              3.3540676149121817
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 0
+        },
+        "incidental_only": {
+          "contrasts": 0
+        },
+        "non_monotone_contrasts": 2
+      },
+      "reading": "too few laboratories",
+      "lolo": null,
+      "fragility": {
+        "contrasts_with_a_censored_arm": 0,
+        "contrasts_with_a_turning_point": 1,
+        "labs_with_a_turning_point": 1,
         "flags": []
       }
     },
@@ -34205,16 +38267,18 @@
       "compound": "Furfural",
       "lever_class": "time",
       "band": "T 100-130 C",
-      "contrasts": 6,
-      "studies": 3,
-      "labs": 2,
+      "contrasts": 8,
+      "studies": 4,
+      "labs": 3,
       "lab_names": [
+        "btbu_beijing",
         "ho_network",
         "minnesota_reineccius"
       ],
-      "peak_area_share": 0.3333333333333333,
-      "focal_share": 0.3333333333333333,
+      "peak_area_share": 0.5,
+      "focal_share": 0.5,
       "matrices": [
+        "buffer",
         "water"
       ],
       "temperature_range_C": [
@@ -34257,6 +38321,42 @@
           "censored_arms": 0,
           "turning_point": false,
           "buffer_state": "unbuffered"
+        },
+        {
+          "source": "wang2022lipid",
+          "contrast": "wang2022lipid-335",
+          "lab": "btbu_beijing",
+          "y": 0.33584552160326625,
+          "v": 0.00244001133386794,
+          "range": [
+            30.0,
+            90.0
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": true,
+          "buffer_state": "buffered"
+        },
+        {
+          "source": "wang2022lipid",
+          "contrast": "wang2022lipid-336",
+          "lab": "btbu_beijing",
+          "y": 0.041492777857211394,
+          "v": 0.006269669725654502,
+          "range": [
+            30.0,
+            60.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": true,
+          "peak_area": true,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "buffered"
         },
         {
           "source": "zhou2022",
@@ -34333,36 +38433,36 @@
       ],
       "step": "a doubling of time",
       "fit": {
-        "estimate": 0.3511154435152104,
+        "estimate": 0.30824282280420534,
         "ci90": [
-          -0.048788426006484226,
-          0.7632891675468942
+          0.06699978478742745,
+          0.5500644910867941
         ],
         "new_lab_pi90": [
-          -0.3768685583089634,
-          1.0902013750125852
+          -0.2170390293231031,
+          0.8329097039219251
         ],
-        "p_same_sign_new_lab": 0.8502687677490293,
-        "new_lab_pi90_width": 1.4670699333215484,
+        "p_same_sign_new_lab": 0.8729603344658654,
+        "new_lab_pi90_width": 1.0499487332450281,
         "tau_study_fitted": false,
         "reml_scales": [
-          0.11243458629672394,
-          0.09458791355652352
+          0.09458791355652352,
+          0.11243458629672394
         ],
-        "prior_dominated": true,
+        "prior_dominated": false,
         "sensitivity": {
           "0.25": {
-            "estimate": 0.3499428991082502,
+            "estimate": 0.3083879776406001,
             "new_lab_pi90": [
-              -0.12195264119702541,
-              0.8362079960054661
+              -0.10024233873570858,
+              0.71704775427216
             ]
           },
           "1.0": {
-            "estimate": 0.3510633454764656,
+            "estimate": 0.30810641391124993,
             "new_lab_pi90": [
-              -0.8162576338543608,
-              1.5107554339846962
+              -0.3485399024450581,
+              0.9616824599048894
             ]
           }
         },
@@ -34382,32 +38482,48 @@
             1.034398544700124
           ]
         },
-        "non_monotone_contrasts": 1
+        "non_monotone_contrasts": 2
       },
-      "reading": "too few laboratories",
+      "reading": "answered by the literature",
       "lolo": null,
       "fragility": {
         "contrasts_with_a_censored_arm": 0,
-        "contrasts_with_a_turning_point": 0,
-        "labs_with_a_turning_point": 0,
-        "flags": []
+        "contrasts_with_a_turning_point": 1,
+        "labs_with_a_turning_point": 1,
+        "flags": [
+          "whole-ladder slopes: direction unclear"
+        ],
+        "variants": {
+          "whole-ladder slopes": {
+            "reading": "direction unclear",
+            "labs": 3,
+            "contrasts": 8,
+            "estimate": 0.2670012970803258,
+            "ci90": [
+              -0.03377418897820633,
+              0.563912736444649
+            ]
+          }
+        }
       }
     },
     {
       "compound": "Furfural",
       "lever_class": "time",
       "band": "T >130 C",
-      "contrasts": 7,
-      "studies": 2,
-      "labs": 2,
+      "contrasts": 14,
+      "studies": 3,
+      "labs": 3,
       "lab_names": [
         "btbu_beijing",
-        "minnesota_reineccius"
+        "minnesota_reineccius",
+        "reading_mottram_parker"
       ],
-      "peak_area_share": 1.0,
-      "focal_share": 1.0,
+      "peak_area_share": 0.5,
+      "focal_share": 0.5,
       "matrices": [
         "buffer",
+        "other: freeze-dried glucose/wheat flour dough powder (crust-like, moisture <2 %), 0.5 g",
         "water"
       ],
       "temperature_range_C": [
@@ -34415,6 +38531,132 @@
         170.0
       ],
       "rows": [
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-101",
+          "lab": "reading_mottram_parker",
+          "y": 0.4445208075524622,
+          "v": 0.0012139482482875603,
+          "range": [
+            2.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 2,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-102",
+          "lab": "reading_mottram_parker",
+          "y": 0.4535585326208507,
+          "v": 0.0012139482482875603,
+          "range": [
+            2.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 2,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-103",
+          "lab": "reading_mottram_parker",
+          "y": 0.40964252474025437,
+          "v": 0.0012139482482875603,
+          "range": [
+            2.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 2,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-104",
+          "lab": "reading_mottram_parker",
+          "y": 0.7953485891378671,
+          "v": 0.0012139482482875603,
+          "range": [
+            2.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 1,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-105",
+          "lab": "reading_mottram_parker",
+          "y": 0.4994273803802889,
+          "v": 0.0012139482482875603,
+          "range": [
+            2.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 1,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-106",
+          "lab": "reading_mottram_parker",
+          "y": 0.5075067961234945,
+          "v": 0.0030029416107542222,
+          "range": [
+            3.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 1,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-107",
+          "lab": "reading_mottram_parker",
+          "y": 0.5616413998616291,
+          "v": 0.0030029416107542222,
+          "range": [
+            3.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 1,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
         {
           "source": "schirle1992",
           "contrast": "schirle1992-13",
@@ -34544,54 +38786,76 @@
       ],
       "step": "a doubling of time",
       "fit": {
-        "estimate": 0.14730711361939064,
+        "estimate": 0.3226317027285995,
         "ci90": [
-          -0.5327287205995166,
-          0.8461023354993199
+          -0.1048247523062537,
+          0.7352451617632629
         ],
         "new_lab_pi90": [
-          -1.4040790463431878,
-          1.710645628862088
+          -0.833775856096662,
+          1.4692404191045074
         ],
-        "p_same_sign_new_lab": 0.5688293326974108,
-        "new_lab_pi90_width": 3.1147246752052755,
+        "p_same_sign_new_lab": 0.6897493540095441,
+        "new_lab_pi90_width": 2.3030162752011694,
         "tau_study_fitted": false,
         "reml_scales": [
-          0.0,
-          0.7526741679588419
+          0.15886509512405417,
+          0.532694791291947
         ],
-        "prior_dominated": true,
+        "prior_dominated": false,
         "sensitivity": {
           "0.25": {
-            "estimate": 0.14391792941879006,
+            "estimate": 0.3252390659341692,
             "new_lab_pi90": [
-              -0.973499855194265,
-              1.2676701030726252
+              -0.6094389516789145,
+              1.2544183439538867
             ]
           },
           "1.0": {
-            "estimate": 0.1500367289920511,
+            "estimate": 0.320646988010607,
             "new_lab_pi90": [
-              -1.9924092474625057,
-              2.307889738712778
+              -1.0728618115554556,
+              1.6962088589091686
             ]
           }
         },
         "without_peak_areas": {
-          "contrasts": 0
+          "contrasts": 7,
+          "estimate": 0.5194772289296423,
+          "ci90": [
+            -0.2723256906650477,
+            1.267757795037531
+          ]
         },
         "incidental_only": {
-          "contrasts": 0
+          "contrasts": 7,
+          "estimate": 0.5194772289296423,
+          "ci90": [
+            -0.2723256906650477,
+            1.267757795037531
+          ]
         },
         "non_monotone_contrasts": 0
       },
-      "reading": "too few laboratories",
+      "reading": "direction unclear",
       "lolo": null,
       "fragility": {
-        "contrasts_with_a_censored_arm": 0,
+        "contrasts_with_a_censored_arm": 7,
         "contrasts_with_a_turning_point": 0,
         "labs_with_a_turning_point": 0,
-        "flags": []
+        "flags": [],
+        "variants": {
+          "without censored arms": {
+            "reading": "direction unclear",
+            "labs": 3,
+            "contrasts": 14,
+            "estimate": 0.35699798570635644,
+            "ci90": [
+              -0.09547776818210821,
+              0.7890063638459118
+            ]
+          }
+        }
       }
     },
     {
@@ -45543,26 +49807,154 @@
       "compound": "Phenylacetaldehyde",
       "lever_class": "time",
       "band": "T >130 C",
-      "contrasts": 22,
-      "studies": 6,
-      "labs": 2,
+      "contrasts": 29,
+      "studies": 7,
+      "labs": 3,
       "lab_names": [
         "dfa_garching",
+        "reading_mottram_parker",
         "seville_hidalgo_zamora"
       ],
       "peak_area_share": 0.0,
-      "focal_share": 0.09090909090909091,
+      "focal_share": 0.06896551724137931,
       "matrices": [
         "buffer",
         "other (600 mg sand + 30 uL 0.3 M buffer + 80 uL water)",
         "other (acetonitrile/buffer 2:1)",
-        "other (silica gel 3 g, 10 % water)"
+        "other (silica gel 3 g, 10 % water)",
+        "other: freeze-dried glucose/wheat flour dough powder (crust-like, moisture <2 %), 0.5 g"
       ],
       "temperature_range_C": [
         140.0,
         190.0
       ],
       "rows": [
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-31",
+          "lab": "reading_mottram_parker",
+          "y": 0.30001622785041715,
+          "v": 0.0017797133793358956,
+          "range": [
+            2.0,
+            9.0
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-32",
+          "lab": "reading_mottram_parker",
+          "y": 0.40387820581508294,
+          "v": 0.0017797133793358956,
+          "range": [
+            2.0,
+            9.0
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-33",
+          "lab": "reading_mottram_parker",
+          "y": 0.35309084480695124,
+          "v": 0.0017797133793358956,
+          "range": [
+            2.0,
+            9.0
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-34",
+          "lab": "reading_mottram_parker",
+          "y": 0.5669790014283614,
+          "v": 0.0012139482482875603,
+          "range": [
+            2.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-35",
+          "lab": "reading_mottram_parker",
+          "y": 0.3823354918885318,
+          "v": 0.0017797133793358956,
+          "range": [
+            2.0,
+            9.0
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-36",
+          "lab": "reading_mottram_parker",
+          "y": 0.33014675854647657,
+          "v": 0.007437087201723903,
+          "range": [
+            3.0,
+            7.0
+          ],
+          "non_monotone": true,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-37",
+          "lab": "reading_mottram_parker",
+          "y": 0.27013794538890973,
+          "v": 0.0030029416107542222,
+          "range": [
+            3.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
         {
           "source": "granvogl2006",
           "contrast": "granvogl2006-17",
@@ -45962,64 +50354,76 @@
       ],
       "step": "a doubling of time",
       "fit": {
-        "estimate": 0.2147014853500177,
+        "estimate": 0.2657620932584396,
         "ci90": [
-          -0.08165351579817201,
-          0.48616226910729055
+          0.035838710763367726,
+          0.48766648249371425
         ],
         "new_lab_pi90": [
-          -0.29600077119490886,
-          0.7005021229155126
+          -0.20035024473050855,
+          0.7239739268418157
         ],
-        "p_same_sign_new_lab": 0.859565446928327,
-        "new_lab_pi90_width": 0.9965028941104215,
+        "p_same_sign_new_lab": 0.8758577005395207,
+        "new_lab_pi90_width": 0.9243241715723243,
         "tau_study_fitted": false,
         "reml_scales": [
-          0.014129557492638108,
-          0.05631742695895507
+          0.09458791355652352,
+          0.06694329500821695
         ],
-        "prior_dominated": true,
+        "prior_dominated": false,
         "sensitivity": {
           "0.25": {
-            "estimate": 0.21533368719979468,
+            "estimate": 0.2661806150661028,
             "new_lab_pi90": [
-              -0.09733360914425969,
-              0.5068369609559372
+              -0.0888033395097425,
+              0.6153145462238384
             ]
           },
           "1.0": {
-            "estimate": 0.21425272912990959,
+            "estimate": 0.2655170905454694,
             "new_lab_pi90": [
-              -0.6409477586809107,
-              1.0354148199919204
+              -0.3268638086906502,
+              0.8469464629250594
             ]
           }
         },
         "without_peak_areas": {
-          "contrasts": 22,
-          "estimate": 0.2147014853500177,
+          "contrasts": 29,
+          "estimate": 0.2657620932584396,
           "ci90": [
-            -0.08165351579817201,
-            0.48616226910729055
+            0.035838710763367726,
+            0.48766648249371425
           ]
         },
         "incidental_only": {
-          "contrasts": 20,
-          "estimate": 0.21452585435276014,
+          "contrasts": 27,
+          "estimate": 0.26616696758547165,
           "ci90": [
-            -0.08511233465155345,
-            0.4892009317549453
+            0.03672033156619762,
+            0.48677941940973307
           ]
         },
-        "non_monotone_contrasts": 4
+        "non_monotone_contrasts": 9
       },
-      "reading": "too few laboratories",
+      "reading": "answered by the literature",
       "lolo": null,
       "fragility": {
         "contrasts_with_a_censored_arm": 0,
         "contrasts_with_a_turning_point": 0,
         "labs_with_a_turning_point": 0,
-        "flags": []
+        "flags": [],
+        "variants": {
+          "whole-ladder slopes": {
+            "reading": "answered by the literature",
+            "labs": 3,
+            "contrasts": 29,
+            "estimate": 0.2357157662436442,
+            "ci90": [
+              0.04387216772942913,
+              0.4117405939821238
+            ]
+          }
+        }
       }
     },
     {
@@ -48520,6 +52924,215 @@
         },
         "incidental_only": {
           "contrasts": 0
+        },
+        "non_monotone_contrasts": 0
+      },
+      "reading": "too few laboratories",
+      "lolo": null,
+      "fragility": {
+        "contrasts_with_a_censored_arm": 0,
+        "contrasts_with_a_turning_point": 0,
+        "labs_with_a_turning_point": 0,
+        "flags": []
+      }
+    },
+    {
+      "compound": "Pyrazines",
+      "lever_class": "time",
+      "band": "T >130 C",
+      "contrasts": 7,
+      "studies": 1,
+      "labs": 1,
+      "lab_names": [
+        "reading_mottram_parker"
+      ],
+      "peak_area_share": 0.0,
+      "focal_share": 0.0,
+      "matrices": [
+        "other: freeze-dried glucose/wheat flour dough powder (crust-like, moisture <2 %), 0.5 g"
+      ],
+      "temperature_range_C": [
+        160.0,
+        160.0
+      ],
+      "rows": [
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-52",
+          "lab": "reading_mottram_parker",
+          "y": 0.22640719199266077,
+          "v": 0.0012139482482875603,
+          "range": [
+            2.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-53",
+          "lab": "reading_mottram_parker",
+          "y": 0.30061741794567803,
+          "v": 0.0012139482482875603,
+          "range": [
+            2.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-54",
+          "lab": "reading_mottram_parker",
+          "y": 0.3066886063370958,
+          "v": 0.0012139482482875603,
+          "range": [
+            2.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-55",
+          "lab": "reading_mottram_parker",
+          "y": 0.39875145580242777,
+          "v": 0.0012139482482875603,
+          "range": [
+            2.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-56",
+          "lab": "reading_mottram_parker",
+          "y": 0.24815399933269597,
+          "v": 0.0012139482482875603,
+          "range": [
+            2.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-57",
+          "lab": "reading_mottram_parker",
+          "y": 0.1237932912042811,
+          "v": 0.0030029416107542222,
+          "range": [
+            3.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        },
+        {
+          "source": "goncuoglu2023",
+          "contrast": "goncuoglu2023-58",
+          "lab": "reading_mottram_parker",
+          "y": 0.23161933647200453,
+          "v": 0.0030029416107542222,
+          "range": [
+            3.0,
+            11.0
+          ],
+          "non_monotone": false,
+          "pairs": null,
+          "focal": false,
+          "peak_area": false,
+          "censored_arms": 0,
+          "turning_point": false,
+          "buffer_state": "unbuffered"
+        }
+      ],
+      "step": "a doubling of time",
+      "fit": {
+        "estimate": 0.26559285510599867,
+        "ci90": [
+          -0.512295645370848,
+          1.0198821279262185
+        ],
+        "new_lab_pi90": [
+          -0.8529167902124045,
+          1.360545878830327
+        ],
+        "p_same_sign_new_lab": 0.7457679290395067,
+        "new_lab_pi90_width": 2.2134626690427317,
+        "tau_study_fitted": false,
+        "reml_scales": [
+          0.0,
+          0.06694329500821695
+        ],
+        "prior_dominated": true,
+        "sensitivity": {
+          "0.25": {
+            "estimate": 0.26714300491432547,
+            "new_lab_pi90": [
+              -0.31470651950598477,
+              0.8421541385085688
+            ]
+          },
+          "1.0": {
+            "estimate": 0.26157292531464105,
+            "new_lab_pi90": [
+              -1.8435346566387236,
+              2.2938838623981113
+            ]
+          }
+        },
+        "without_peak_areas": {
+          "contrasts": 7,
+          "estimate": 0.26559285510599867,
+          "ci90": [
+            -0.512295645370848,
+            1.0198821279262185
+          ]
+        },
+        "incidental_only": {
+          "contrasts": 7,
+          "estimate": 0.26559285510599867,
+          "ci90": [
+            -0.512295645370848,
+            1.0198821279262185
+          ]
         },
         "non_monotone_contrasts": 0
       },
@@ -54037,11 +58650,11 @@
   ],
   "provenance": {
     "artifact": "lever_table_development_only",
-    "generated_on": "2026-11-13",
+    "generated_on": "2026-11-14",
     "git": {
-      "commit": "4cf0905223b064ceda8361a5be8ce2c033bfd654",
-      "short": "4cf09052",
-      "branch": "a6-batch2",
+      "commit": "4c9102dc10111f709fd2f01b4fec7fe8c2248247",
+      "short": "4c9102dc",
+      "branch": "temp-time-cluster",
       "dirty": true
     },
     "generated_by": "scripts/generators/build_lever_table.py",
@@ -54105,6 +58718,10 @@
       {
         "path": "docs/reference/lever_table/contrasts/chan1994b__families.yml",
         "sha256": "88b2457b03d7844912a2e7db41709a95673fa04f69363a5c5b7a45374c9f476d"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/chansataporn2018.yml",
+        "sha256": "64a512f111a7e6057ff82a0dca0671dec6226b08ef88e10d008a9958a4d267cd"
       },
       {
         "path": "docs/reference/lever_table/contrasts/chen2000.yml",
@@ -54189,6 +58806,10 @@
       {
         "path": "docs/reference/lever_table/contrasts/feng2022.yml",
         "sha256": "7122d8df4eccb64a96f7c853e2371f3f19f7483b6ce78c87cc40d49627120877"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/goncuoglu2023.yml",
+        "sha256": "c849410adc18c7dd85bc7ca3fd9f2772fd0883a4eeaeaa4eedab947b65c4a2fe"
       },
       {
         "path": "docs/reference/lever_table/contrasts/gou2025.yml",
@@ -54299,6 +58920,10 @@
         "sha256": "83ce385ebe5713e4e36a0de0f28875cafea71b89e25c201112d14ee2a44b9e7b"
       },
       {
+        "path": "docs/reference/lever_table/contrasts/lee2024oven.yml",
+        "sha256": "55b4b15b38cb617953d96f7de32aa931f28b887e6be2c5e9c38e3b7ae4893d66"
+      },
+      {
         "path": "docs/reference/lever_table/contrasts/li2021lab.yml",
         "sha256": "feb9f2d1525aebb5dd7fab5b959fbda2a084e0f3d2a16ca6336fcade1bc151bd"
       },
@@ -54395,6 +59020,10 @@
         "sha256": "cb031ae54a4f4ae264b6fc55aaaecfed324763a61572befcb775c99d61ee6439"
       },
       {
+        "path": "docs/reference/lever_table/contrasts/pastoriza2016.yml",
+        "sha256": "c471e36abd2afa71d4a84458f6b1d6f4a4e83b574d5527a99411017fda545450"
+      },
+      {
         "path": "docs/reference/lever_table/contrasts/raza2020.yml",
         "sha256": "09759e623d7289e2afa0641656ba8dfc6da7cba2f59c265bffe598d25d238b4f"
       },
@@ -54423,6 +59052,10 @@
         "sha256": "812d753d360d5560bf7d6f967626320c7e96ee602bf7c7d5b33247e57b1ac098"
       },
       {
+        "path": "docs/reference/lever_table/contrasts/seo2015.yml",
+        "sha256": "199e01c08ae4ee3772a25461d6472e6f90dc100fbb86b0db51e816dfa73b1cea"
+      },
+      {
         "path": "docs/reference/lever_table/contrasts/shibamoto1977__families.yml",
         "sha256": "fa55f8d209a461fd2bdc90e3be0e4a7ad7b06cfcf2877bfa22a6fda7e5d2bdb1"
       },
@@ -54445,6 +59078,10 @@
       {
         "path": "docs/reference/lever_table/contrasts/tai1998.yml",
         "sha256": "423d75015439d6c4f344291ada8b48fa99e799dec7a4a505c559997002f47c3e"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/tan2011.yml",
+        "sha256": "acbd568be173673104e64a3b113c747971cc1b0b97aab00d6906352e346e4dd0"
       },
       {
         "path": "docs/reference/lever_table/contrasts/theng2024.yml",
@@ -54477,6 +59114,10 @@
       {
         "path": "docs/reference/lever_table/contrasts/vanseeventer2001.yml",
         "sha256": "1ac09daa2c684da5348845aa1ed873b54acb5f5b3f2a9ddfefcc54b4ac5c676e"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/wang2022lipid.yml",
+        "sha256": "030be3438f4474cff0ef67701e26849068ab8ad9754f58cbfaed0f65367d6263"
       },
       {
         "path": "docs/reference/lever_table/contrasts/wang2026arp.yml",

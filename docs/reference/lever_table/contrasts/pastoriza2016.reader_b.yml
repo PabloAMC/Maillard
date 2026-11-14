@@ -1,0 +1,3116 @@
+source: pastoriza2016
+pdf: data/articles/pastoriza2016.pdf
+reader: b
+scope_note: 'Not keyed: OPA fluorescence loss (Table 1), A420 (Table 5), fluorescence (Table 6) - not odorants/volatiles.
+  Amino-acid identity (Gln vs Arg) keyed under a lever_class not in sec. 4. HMF and GIM are low-volatility furanics, keyed
+  as printed. n.d. has no printed LOD (nd_no_limit). Time 0 arms are unheated baselines (HMF from dextrinomaltose). Temperature
+  and amino-acid contrasts use 30 min (longest; no single main-result time stated). Final pH not printed.'
+contrasts:
+- id: pastoriza2016-1
+  odorant: HMF
+  lever_class: time
+  lever: heating time (excl. ~2 min heat-up)
+  focal: true
+  location: Table 2, p. 4
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Glutamine-Dextrinomaltose 100 C, 0 min
+    lever_value: 0
+    value: 0.04
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 0
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Glutamine-Dextrinomaltose 100 C, 5 min
+    lever_value: 5
+    value: 0.04
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 5
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Glutamine-Dextrinomaltose 100 C, 10 min
+    lever_value: 10
+    value: 0.04
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.03
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Glutamine-Dextrinomaltose 100 C, 15 min
+    lever_value: 15
+    value: 0.04
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.02
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 15
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Glutamine-Dextrinomaltose 100 C, 20 min
+    lever_value: 20
+    value: 0.04
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.02
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 20
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Glutamine-Dextrinomaltose 100 C, 25 min
+    lever_value: 25
+    value: 0.07
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.03
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 25
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Glutamine-Dextrinomaltose 100 C, 30 min
+    lever_value: 30
+    value: 0.14
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.03
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 30
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: pastoriza2016-2
+  odorant: HMF
+  lever_class: time
+  lever: heating time (excl. ~2 min heat-up)
+  focal: true
+  location: Table 2, p. 4
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Glutamine-Dextrinomaltose 120 C, 0 min
+    lever_value: 0
+    value: 0.04
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 0
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Glutamine-Dextrinomaltose 120 C, 5 min
+    lever_value: 5
+    value: 0.04
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.02
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 5
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Glutamine-Dextrinomaltose 120 C, 10 min
+    lever_value: 10
+    value: 0.04
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 10
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Glutamine-Dextrinomaltose 120 C, 15 min
+    lever_value: 15
+    value: 0.04
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 15
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Glutamine-Dextrinomaltose 120 C, 20 min
+    lever_value: 20
+    value: 0.19
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.02
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 20
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Glutamine-Dextrinomaltose 120 C, 25 min
+    lever_value: 25
+    value: 0.29
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.04
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 25
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Glutamine-Dextrinomaltose 120 C, 30 min
+    lever_value: 30
+    value: 0.4
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.03
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 30
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: pastoriza2016-3
+  odorant: HMF
+  lever_class: time
+  lever: heating time (excl. ~2 min heat-up)
+  focal: true
+  location: Table 2, p. 4
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Glutamine-Dextrinomaltose 140 C, 0 min
+    lever_value: 0
+    value: 0.04
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 0
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Glutamine-Dextrinomaltose 140 C, 5 min
+    lever_value: 5
+    value: 0.04
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 5
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Glutamine-Dextrinomaltose 140 C, 10 min
+    lever_value: 10
+    value: 0.26
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.05
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 10
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Glutamine-Dextrinomaltose 140 C, 15 min
+    lever_value: 15
+    value: 0.46
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.04
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 15
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Glutamine-Dextrinomaltose 140 C, 20 min
+    lever_value: 20
+    value: 0.73
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.09
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 20
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Glutamine-Dextrinomaltose 140 C, 25 min
+    lever_value: 25
+    value: 1.0
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.11
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 25
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Glutamine-Dextrinomaltose 140 C, 30 min
+    lever_value: 30
+    value: 1.2
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.13
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 30
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: pastoriza2016-4
+  odorant: HMF
+  lever_class: time
+  lever: heating time (excl. ~2 min heat-up)
+  focal: true
+  location: Table 2, p. 4
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Arginine-Dextrinomaltose 100 C, 0 min
+    lever_value: 0
+    value: 0.04
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 0
+      precursors:
+        arginine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Arginine-Dextrinomaltose 100 C, 5 min
+    lever_value: 5
+    value: 0.15
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.04
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 5
+      precursors:
+        arginine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Arginine-Dextrinomaltose 100 C, 10 min
+    lever_value: 10
+    value: 0.26
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.04
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors:
+        arginine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Arginine-Dextrinomaltose 100 C, 15 min
+    lever_value: 15
+    value: 0.35
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.07
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 15
+      precursors:
+        arginine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Arginine-Dextrinomaltose 100 C, 20 min
+    lever_value: 20
+    value: 0.48
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.04
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 20
+      precursors:
+        arginine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Arginine-Dextrinomaltose 100 C, 25 min
+    lever_value: 25
+    value: 0.57
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.08
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 25
+      precursors:
+        arginine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Arginine-Dextrinomaltose 100 C, 30 min
+    lever_value: 30
+    value: 0.78
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.06
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 30
+      precursors:
+        arginine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: pastoriza2016-5
+  odorant: HMF
+  lever_class: time
+  lever: heating time (excl. ~2 min heat-up)
+  focal: true
+  location: Table 2, p. 4
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Arginine-Dextrinomaltose 120 C, 0 min
+    lever_value: 0
+    value: 0.04
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 0
+      precursors:
+        arginine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Arginine-Dextrinomaltose 120 C, 5 min
+    lever_value: 5
+    value: 1.35
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.09
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 5
+      precursors:
+        arginine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Arginine-Dextrinomaltose 120 C, 10 min
+    lever_value: 10
+    value: 2.49
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.14
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 10
+      precursors:
+        arginine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Arginine-Dextrinomaltose 120 C, 15 min
+    lever_value: 15
+    value: 3.58
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.21
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 15
+      precursors:
+        arginine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Arginine-Dextrinomaltose 120 C, 20 min
+    lever_value: 20
+    value: 5.07
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.28
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 20
+      precursors:
+        arginine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Arginine-Dextrinomaltose 120 C, 25 min
+    lever_value: 25
+    value: 6.15
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.31
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 25
+      precursors:
+        arginine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Arginine-Dextrinomaltose 120 C, 30 min
+    lever_value: 30
+    value: 7.32
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.39
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 30
+      precursors:
+        arginine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: pastoriza2016-6
+  odorant: HMF
+  lever_class: time
+  lever: heating time (excl. ~2 min heat-up)
+  focal: true
+  location: Table 2, p. 4
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Arginine-Dextrinomaltose 140 C, 0 min
+    lever_value: 0
+    value: 0.04
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.02
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 0
+      precursors:
+        arginine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Arginine-Dextrinomaltose 140 C, 5 min
+    lever_value: 5
+    value: 2.27
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.11
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 5
+      precursors:
+        arginine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Arginine-Dextrinomaltose 140 C, 10 min
+    lever_value: 10
+    value: 4.19
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.31
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 10
+      precursors:
+        arginine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Arginine-Dextrinomaltose 140 C, 15 min
+    lever_value: 15
+    value: 5.9
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.44
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 15
+      precursors:
+        arginine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Arginine-Dextrinomaltose 140 C, 20 min
+    lever_value: 20
+    value: 7.76
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.32
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 20
+      precursors:
+        arginine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Arginine-Dextrinomaltose 140 C, 25 min
+    lever_value: 25
+    value: 9.59
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.49
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 25
+      precursors:
+        arginine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Arginine-Dextrinomaltose 140 C, 30 min
+    lever_value: 30
+    value: 11.4
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.51
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 30
+      precursors:
+        arginine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: pastoriza2016-7
+  odorant: HMF
+  lever_class: temperature
+  lever: heating temperature (glycerol bath)
+  focal: true
+  location: Table 2, p. 4
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: longest time
+  ph_control: buffered
+  arms:
+  - label: Glutamine-Dextrinomaltose 100 C, 30 min
+    lever_value: 100
+    value: 0.14
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.03
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 30
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Glutamine-Dextrinomaltose 120 C, 30 min
+    lever_value: 120
+    value: 0.4
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.03
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 30
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Glutamine-Dextrinomaltose 140 C, 30 min
+    lever_value: 140
+    value: 1.2
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.13
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 30
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: pastoriza2016-8
+  odorant: HMF
+  lever_class: temperature
+  lever: heating temperature (glycerol bath)
+  focal: true
+  location: Table 2, p. 4
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: longest time
+  ph_control: buffered
+  arms:
+  - label: Arginine-Dextrinomaltose 100 C, 30 min
+    lever_value: 100
+    value: 0.78
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.06
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 30
+      precursors:
+        arginine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Arginine-Dextrinomaltose 120 C, 30 min
+    lever_value: 120
+    value: 7.32
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.39
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 30
+      precursors:
+        arginine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Arginine-Dextrinomaltose 140 C, 30 min
+    lever_value: 140
+    value: 11.4
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.51
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 30
+      precursors:
+        arginine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: pastoriza2016-9
+  odorant: HMF
+  lever_class: amino acid identity
+  lever: glutamine vs arginine (sec. 4 lists no amino-acid class)
+  focal: true
+  location: Table 2, p. 4
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: longest time
+  ph_control: buffered
+  arms:
+  - label: Glutamine-Dextrinomaltose 100 C, 30 min
+    lever_value: glutamine
+    value: 0.14
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.03
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 30
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Arginine-Dextrinomaltose 100 C, 30 min
+    lever_value: arginine
+    value: 0.78
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.06
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 30
+      precursors:
+        arginine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: pastoriza2016-10
+  odorant: HMF
+  lever_class: amino acid identity
+  lever: glutamine vs arginine (sec. 4 lists no amino-acid class)
+  focal: true
+  location: Table 2, p. 4
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: longest time
+  ph_control: buffered
+  arms:
+  - label: Glutamine-Dextrinomaltose 120 C, 30 min
+    lever_value: glutamine
+    value: 0.4
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.03
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 30
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Arginine-Dextrinomaltose 120 C, 30 min
+    lever_value: arginine
+    value: 7.32
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.39
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 30
+      precursors:
+        arginine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: pastoriza2016-11
+  odorant: HMF
+  lever_class: amino acid identity
+  lever: glutamine vs arginine (sec. 4 lists no amino-acid class)
+  focal: true
+  location: Table 2, p. 4
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: longest time
+  ph_control: buffered
+  arms:
+  - label: Glutamine-Dextrinomaltose 140 C, 30 min
+    lever_value: glutamine
+    value: 1.2
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.13
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 30
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Arginine-Dextrinomaltose 140 C, 30 min
+    lever_value: arginine
+    value: 11.4
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.51
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 30
+      precursors:
+        arginine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: pastoriza2016-12
+  odorant: furfural
+  lever_class: time
+  lever: heating time (excl. ~2 min heat-up)
+  focal: true
+  location: Table 3, p. 5
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Glutamine-Dextrinomaltose 100 C, 0 min
+    lever_value: 0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 0
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Glutamine-Dextrinomaltose 100 C, 5 min
+    lever_value: 5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 5
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Glutamine-Dextrinomaltose 100 C, 10 min
+    lever_value: 10
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Glutamine-Dextrinomaltose 100 C, 15 min
+    lever_value: 15
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 15
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Glutamine-Dextrinomaltose 100 C, 20 min
+    lever_value: 20
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 20
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Glutamine-Dextrinomaltose 100 C, 25 min
+    lever_value: 25
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 25
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Glutamine-Dextrinomaltose 100 C, 30 min
+    lever_value: 30
+    value: 0.02
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 30
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: pastoriza2016-13
+  odorant: furfural
+  lever_class: time
+  lever: heating time (excl. ~2 min heat-up)
+  focal: true
+  location: Table 3, p. 5
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Glutamine-Dextrinomaltose 120 C, 0 min
+    lever_value: 0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 0
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Glutamine-Dextrinomaltose 120 C, 5 min
+    lever_value: 5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 5
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Glutamine-Dextrinomaltose 120 C, 10 min
+    lever_value: 10
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 10
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Glutamine-Dextrinomaltose 120 C, 15 min
+    lever_value: 15
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 15
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Glutamine-Dextrinomaltose 120 C, 20 min
+    lever_value: 20
+    value: 0.03
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 20
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Glutamine-Dextrinomaltose 120 C, 25 min
+    lever_value: 25
+    value: 0.08
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.02
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 25
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Glutamine-Dextrinomaltose 120 C, 30 min
+    lever_value: 30
+    value: 0.16
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.04
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 30
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: pastoriza2016-14
+  odorant: furfural
+  lever_class: time
+  lever: heating time (excl. ~2 min heat-up)
+  focal: true
+  location: Table 3, p. 5
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Glutamine-Dextrinomaltose 140 C, 0 min
+    lever_value: 0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 0
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Glutamine-Dextrinomaltose 140 C, 5 min
+    lever_value: 5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 5
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Glutamine-Dextrinomaltose 140 C, 10 min
+    lever_value: 10
+    value: 0.04
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 10
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Glutamine-Dextrinomaltose 140 C, 15 min
+    lever_value: 15
+    value: 0.09
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.02
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 15
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Glutamine-Dextrinomaltose 140 C, 20 min
+    lever_value: 20
+    value: 0.17
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 20
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Glutamine-Dextrinomaltose 140 C, 25 min
+    lever_value: 25
+    value: 0.28
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.05
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 25
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Glutamine-Dextrinomaltose 140 C, 30 min
+    lever_value: 30
+    value: 0.4
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.07
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 30
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: pastoriza2016-15
+  odorant: furfural
+  lever_class: time
+  lever: heating time (excl. ~2 min heat-up)
+  focal: true
+  location: Table 3, p. 5
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Arginine-Dextrinomaltose 100 C, 0 min
+    lever_value: 0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 0
+      precursors:
+        arginine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Arginine-Dextrinomaltose 100 C, 5 min
+    lever_value: 5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 5
+      precursors:
+        arginine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Arginine-Dextrinomaltose 100 C, 10 min
+    lever_value: 10
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors:
+        arginine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Arginine-Dextrinomaltose 100 C, 15 min
+    lever_value: 15
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 15
+      precursors:
+        arginine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Arginine-Dextrinomaltose 100 C, 20 min
+    lever_value: 20
+    value: 0.02
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 20
+      precursors:
+        arginine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Arginine-Dextrinomaltose 100 C, 25 min
+    lever_value: 25
+    value: 0.04
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 25
+      precursors:
+        arginine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Arginine-Dextrinomaltose 100 C, 30 min
+    lever_value: 30
+    value: 0.06
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.02
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 30
+      precursors:
+        arginine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: pastoriza2016-16
+  odorant: furfural
+  lever_class: time
+  lever: heating time (excl. ~2 min heat-up)
+  focal: true
+  location: Table 3, p. 5
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Arginine-Dextrinomaltose 120 C, 0 min
+    lever_value: 0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 0
+      precursors:
+        arginine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Arginine-Dextrinomaltose 120 C, 5 min
+    lever_value: 5
+    value: 0.32
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.04
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 5
+      precursors:
+        arginine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Arginine-Dextrinomaltose 120 C, 10 min
+    lever_value: 10
+    value: 0.64
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.09
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 10
+      precursors:
+        arginine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Arginine-Dextrinomaltose 120 C, 15 min
+    lever_value: 15
+    value: 0.98
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.22
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 15
+      precursors:
+        arginine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Arginine-Dextrinomaltose 120 C, 20 min
+    lever_value: 20
+    value: 1.27
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.25
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 20
+      precursors:
+        arginine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Arginine-Dextrinomaltose 120 C, 25 min
+    lever_value: 25
+    value: 1.62
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.11
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 25
+      precursors:
+        arginine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Arginine-Dextrinomaltose 120 C, 30 min
+    lever_value: 30
+    value: 2.89
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.32
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 30
+      precursors:
+        arginine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: pastoriza2016-17
+  odorant: furfural
+  lever_class: time
+  lever: heating time (excl. ~2 min heat-up)
+  focal: true
+  location: Table 3, p. 5
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Arginine-Dextrinomaltose 140 C, 0 min
+    lever_value: 0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 0
+      precursors:
+        arginine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Arginine-Dextrinomaltose 140 C, 5 min
+    lever_value: 5
+    value: 0.49
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.04
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 5
+      precursors:
+        arginine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Arginine-Dextrinomaltose 140 C, 10 min
+    lever_value: 10
+    value: 1.17
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.11
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 10
+      precursors:
+        arginine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Arginine-Dextrinomaltose 140 C, 15 min
+    lever_value: 15
+    value: 1.88
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.16
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 15
+      precursors:
+        arginine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Arginine-Dextrinomaltose 140 C, 20 min
+    lever_value: 20
+    value: 2.53
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.22
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 20
+      precursors:
+        arginine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Arginine-Dextrinomaltose 140 C, 25 min
+    lever_value: 25
+    value: 3.17
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.31
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 25
+      precursors:
+        arginine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Arginine-Dextrinomaltose 140 C, 30 min
+    lever_value: 30
+    value: 3.95
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.32
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 30
+      precursors:
+        arginine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: pastoriza2016-18
+  odorant: furfural
+  lever_class: temperature
+  lever: heating temperature (glycerol bath)
+  focal: true
+  location: Table 3, p. 5
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: longest time
+  ph_control: buffered
+  arms:
+  - label: Glutamine-Dextrinomaltose 100 C, 30 min
+    lever_value: 100
+    value: 0.02
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 30
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Glutamine-Dextrinomaltose 120 C, 30 min
+    lever_value: 120
+    value: 0.16
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.04
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 30
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Glutamine-Dextrinomaltose 140 C, 30 min
+    lever_value: 140
+    value: 0.4
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.07
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 30
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: pastoriza2016-19
+  odorant: furfural
+  lever_class: temperature
+  lever: heating temperature (glycerol bath)
+  focal: true
+  location: Table 3, p. 5
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: longest time
+  ph_control: buffered
+  arms:
+  - label: Arginine-Dextrinomaltose 100 C, 30 min
+    lever_value: 100
+    value: 0.06
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.02
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 30
+      precursors:
+        arginine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Arginine-Dextrinomaltose 120 C, 30 min
+    lever_value: 120
+    value: 2.89
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.32
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 30
+      precursors:
+        arginine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Arginine-Dextrinomaltose 140 C, 30 min
+    lever_value: 140
+    value: 3.95
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.32
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 30
+      precursors:
+        arginine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: pastoriza2016-20
+  odorant: furfural
+  lever_class: amino acid identity
+  lever: glutamine vs arginine (sec. 4 lists no amino-acid class)
+  focal: true
+  location: Table 3, p. 5
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: longest time
+  ph_control: buffered
+  arms:
+  - label: Glutamine-Dextrinomaltose 100 C, 30 min
+    lever_value: glutamine
+    value: 0.02
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.01
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 30
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Arginine-Dextrinomaltose 100 C, 30 min
+    lever_value: arginine
+    value: 0.06
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.02
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 30
+      precursors:
+        arginine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: pastoriza2016-21
+  odorant: furfural
+  lever_class: amino acid identity
+  lever: glutamine vs arginine (sec. 4 lists no amino-acid class)
+  focal: true
+  location: Table 3, p. 5
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: longest time
+  ph_control: buffered
+  arms:
+  - label: Glutamine-Dextrinomaltose 120 C, 30 min
+    lever_value: glutamine
+    value: 0.16
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.04
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 30
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Arginine-Dextrinomaltose 120 C, 30 min
+    lever_value: arginine
+    value: 2.89
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.32
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 30
+      precursors:
+        arginine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: pastoriza2016-22
+  odorant: furfural
+  lever_class: amino acid identity
+  lever: glutamine vs arginine (sec. 4 lists no amino-acid class)
+  focal: true
+  location: Table 3, p. 5
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: longest time
+  ph_control: buffered
+  arms:
+  - label: Glutamine-Dextrinomaltose 140 C, 30 min
+    lever_value: glutamine
+    value: 0.4
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.07
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 30
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Arginine-Dextrinomaltose 140 C, 30 min
+    lever_value: arginine
+    value: 3.95
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.32
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 30
+      precursors:
+        arginine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: pastoriza2016-23
+  odorant: glucosylisomaltol
+  lever_class: time
+  lever: heating time (excl. ~2 min heat-up)
+  focal: true
+  location: Table 4, p. 6
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Glutamine-Dextrinomaltose 100 C, 0 min
+    lever_value: 0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 0
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Glutamine-Dextrinomaltose 100 C, 5 min
+    lever_value: 5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 5
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Glutamine-Dextrinomaltose 100 C, 10 min
+    lever_value: 10
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 10
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Glutamine-Dextrinomaltose 100 C, 15 min
+    lever_value: 15
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 15
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Glutamine-Dextrinomaltose 100 C, 20 min
+    lever_value: 20
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 20
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Glutamine-Dextrinomaltose 100 C, 25 min
+    lever_value: 25
+    value: 0.26
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.03
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 25
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Glutamine-Dextrinomaltose 100 C, 30 min
+    lever_value: 30
+    value: 0.37
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.04
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 30
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: pastoriza2016-24
+  odorant: glucosylisomaltol
+  lever_class: time
+  lever: heating time (excl. ~2 min heat-up)
+  focal: true
+  location: Table 4, p. 6
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Glutamine-Dextrinomaltose 120 C, 0 min
+    lever_value: 0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 0
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Glutamine-Dextrinomaltose 120 C, 5 min
+    lever_value: 5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 5
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Glutamine-Dextrinomaltose 120 C, 10 min
+    lever_value: 10
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 10
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Glutamine-Dextrinomaltose 120 C, 15 min
+    lever_value: 15
+    value: 0.36
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.03
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 15
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Glutamine-Dextrinomaltose 120 C, 20 min
+    lever_value: 20
+    value: 0.59
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.05
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 20
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Glutamine-Dextrinomaltose 120 C, 25 min
+    lever_value: 25
+    value: 0.96
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.06
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 25
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Glutamine-Dextrinomaltose 120 C, 30 min
+    lever_value: 30
+    value: 1.35
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.1
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 30
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: pastoriza2016-25
+  odorant: glucosylisomaltol
+  lever_class: time
+  lever: heating time (excl. ~2 min heat-up)
+  focal: true
+  location: Table 4, p. 6
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: not a time course
+  ph_control: buffered
+  arms:
+  - label: Glutamine-Dextrinomaltose 140 C, 0 min
+    lever_value: 0
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 0
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Glutamine-Dextrinomaltose 140 C, 5 min
+    lever_value: 5
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 5
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Glutamine-Dextrinomaltose 140 C, 10 min
+    lever_value: 10
+    value: 0.5
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.04
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 10
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Glutamine-Dextrinomaltose 140 C, 15 min
+    lever_value: 15
+    value: 1.22
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.1
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 15
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Glutamine-Dextrinomaltose 140 C, 20 min
+    lever_value: 20
+    value: 1.91
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.13
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 20
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Glutamine-Dextrinomaltose 140 C, 25 min
+    lever_value: 25
+    value: 2.64
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.18
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 25
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Glutamine-Dextrinomaltose 140 C, 30 min
+    lever_value: 30
+    value: 3.38
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.21
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 30
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: pastoriza2016-26
+  odorant: glucosylisomaltol
+  lever_class: temperature
+  lever: heating temperature (glycerol bath)
+  focal: true
+  location: Table 4, p. 6
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: longest time
+  ph_control: buffered
+  arms:
+  - label: Glutamine-Dextrinomaltose 100 C, 30 min
+    lever_value: 100
+    value: 0.37
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.04
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 30
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Glutamine-Dextrinomaltose 120 C, 30 min
+    lever_value: 120
+    value: 1.35
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.1
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 30
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: Glutamine-Dextrinomaltose 140 C, 30 min
+    lever_value: 140
+    value: 3.38
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.21
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 30
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: pastoriza2016-27
+  odorant: glucosylisomaltol
+  lever_class: amino acid identity
+  lever: glutamine vs arginine (sec. 4 lists no amino-acid class)
+  focal: true
+  location: Table 4, p. 6 (Gln); text p. 5 (Arg not found)
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: longest time
+  ph_control: buffered
+  arms:
+  - label: Glutamine-Dextrinomaltose 100 C, 30 min
+    lever_value: glutamine
+    value: 0.37
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.04
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 30
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 'Arginine-Dextrinomaltose 100 C, 30 min (text: "No GIM was found")'
+    lever_value: arginine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 100
+      time_min: 30
+      precursors:
+        arginine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: pastoriza2016-28
+  odorant: glucosylisomaltol
+  lever_class: amino acid identity
+  lever: glutamine vs arginine (sec. 4 lists no amino-acid class)
+  focal: true
+  location: Table 4, p. 6 (Gln); text p. 5 (Arg not found)
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: longest time
+  ph_control: buffered
+  arms:
+  - label: Glutamine-Dextrinomaltose 120 C, 30 min
+    lever_value: glutamine
+    value: 1.35
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.1
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 30
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 'Arginine-Dextrinomaltose 120 C, 30 min (text: "No GIM was found")'
+    lever_value: arginine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 120
+      time_min: 30
+      precursors:
+        arginine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+- id: pastoriza2016-29
+  odorant: glucosylisomaltol
+  lever_class: amino acid identity
+  lever: glutamine vs arginine (sec. 4 lists no amino-acid class)
+  focal: true
+  location: Table 4, p. 6 (Gln); text p. 5 (Arg not found)
+  digitised: false
+  unit: mg/L
+  quant_type: absolute
+  time_course_rule: longest time
+  ph_control: buffered
+  arms:
+  - label: Glutamine-Dextrinomaltose 140 C, 30 min
+    lever_value: glutamine
+    value: 3.38
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.21
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 30
+      precursors:
+        glutamine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 'Arginine-Dextrinomaltose 140 C, 30 min (text: "No GIM was found")'
+    lever_value: arginine
+    value: null
+    censor: nd_no_limit
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: initial
+      final_ph: null
+      final_ph_location: ''
+      temp_C: 140
+      time_min: 30
+      precursors:
+        arginine: 4% w/v
+        dextrinomaltose: 12% w/v (4.25% glucose, 4.30% maltose, 4.60% maltotriose w/w)
+      buffer: 0.1 M phosphate
+      matrix: buffer
+      headspace: sealed, unstated
