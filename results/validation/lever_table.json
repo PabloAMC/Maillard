@@ -113620,9 +113620,9 @@
     "artifact": "lever_table",
     "generated_on": "2026-11-14",
     "git": {
-      "commit": "4c9102dc10111f709fd2f01b4fec7fe8c2248247",
-      "short": "4c9102dc",
-      "branch": "temp-time-cluster",
+      "commit": "92cf287cf0fe7b86e98d3078c3cea45085a4ff94",
+      "short": "92cf287c",
+      "branch": "a7-designed-study-rules",
       "dirty": true
     },
     "generated_by": "scripts/generators/build_lever_table.py",

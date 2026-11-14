@@ -43,6 +43,9 @@ CV_DEFAULT, N_DEFAULT = 0.20, 2   # PREREG sec. 5 via step 0: 20 % per replicate
 DIGITISED_SD = 0.05          # PREREG sec. 3
 MIN_LABS, P_SAME_SIGN, LOLO_MIN_LABS, LOLO_FLAG = 3, 0.8, 4, 0.7
 PRIOR_DOMINATED = 0.30
+#: PREREG A7 R4: the within-cluster scale w between design laboratories sharing one protocol has its own half-normal
+#: prior; its sensitivity is reported separately and never sets the prior-dominated label
+TAU_W_SCALE, TAU_W_SENSITIVITY = 0.25, (0.1, 0.5)
 TURNING_Z = 2.0              # RULES_V2_SPEC: standard errors a stretch must span to count as a turn
 GRID = np.concatenate([[0.0], np.geomspace(0.01, 3.0, 34)])
 #: log width of each grid cell. GRID is log-spaced, so a point's prior weight is the half-normal density times the
@@ -428,14 +431,16 @@ def _grid_log_prior(scale: float) -> np.ndarray:
     return _halfnormal_logpdf(GRID, scale) + GRID_LOG_WIDTH
 
 
-def fit_gaussian(y: np.ndarray, S: np.ndarray, X: np.ndarray, comps: Sequence[np.ndarray], scale: float
+def fit_gaussian(y: np.ndarray, S: np.ndarray, X: np.ndarray, comps: Sequence[np.ndarray], scale
                  ) -> Dict[str, Any]:
-    """y ~ N(X beta, S + sum_k s_k^2 K_k), beta ~ N(0, LOCATION_SD^2 I), s_k ~ half-normal(scale) on GRID.
-    Returns the grid weights, each grid point's Gaussian posterior of beta, and the REML optimum."""
+    """y ~ N(X beta, S + sum_k s_k^2 K_k), beta ~ N(0, LOCATION_SD^2 I), s_k ~ half-normal(scale_k) on GRID
+    (``scale`` one number for every component, or one per component). Returns the grid weights, each grid point's
+    Gaussian posterior of beta, and the REML optimum."""
     n, p = X.shape
     P0 = np.eye(p) / LOCATION_SD ** 2
     pts, logw, means, covs, loglik = [], [], [], [], []
-    log_prior = _grid_log_prior(scale)
+    scales = [scale] * len(comps) if np.isscalar(scale) else list(scale)
+    log_priors = [_grid_log_prior(sc) for sc in scales]
     for idx in itertools.product(range(len(GRID)), repeat=len(comps)):
         s = tuple(float(GRID[i]) for i in idx)
         V = S.copy()
@@ -453,7 +458,7 @@ def fit_gaussian(y: np.ndarray, S: np.ndarray, X: np.ndarray, comps: Sequence[np
         M = V + LOCATION_SD ** 2 * X @ X.T
         sign, logdet = np.linalg.slogdet(M)
         ll = -0.5 * (logdet + y @ np.linalg.solve(M, y) + n * math.log(2 * math.pi))
-        lp = float(sum(log_prior[i] for i in idx))
+        lp = float(sum(lpk[i] for lpk, i in zip(log_priors, idx)))
         pts.append(s); logw.append(ll + lp); loglik.append(ll); means.append(b); covs.append(Ai)
     logw = np.array(logw)
     w = np.exp(logw - logw.max())
@@ -491,7 +496,22 @@ def _incidence(keys: Sequence[str]) -> np.ndarray:
     return Z @ Z.T
 
 
-def numeric_fit(rows, scale):
+def _within_cluster(rows, same=lambda a, b: True) -> Optional[np.ndarray]:
+    """PREREG A7 R4: the component w linking a design laboratory's own rows (``same`` narrows it, e.g. to one level
+    pair); None when no row comes from a designed study."""
+    keys = [r.get("design_lab") for r in rows]
+    if not any(keys):
+        return None
+    n = len(rows)
+    W = np.zeros((n, n))
+    for i in range(n):
+        for k in range(n):
+            if keys[i] and keys[i] == keys[k] and same(rows[i], rows[k]):
+                W[i, k] = 1.0
+    return W
+
+
+def numeric_fit(rows, scale, tau_w_scale=TAU_W_SCALE):
     y = np.array([r["y"] for r in rows])
     S = np.diag([r["v"] for r in rows])
     X = np.ones((len(rows), 1))
@@ -502,15 +522,21 @@ def numeric_fit(rows, scale):
         per_lab[r["lab"]].add(r["source"])
     with_study = sum(1 for s in per_lab.values() if len(s) >= 2) >= 2
     comps = [_incidence(labs)] + ([_incidence(studies)] if with_study else []) + [np.eye(len(rows))]
-    fit = fit_gaussian(y, S, X, comps, scale)
     extra = list(range(len(comps)))      # a new lab's offset, a new study's, a pot's residual
+    scales = [scale] * len(comps)
+    W = _within_cluster(rows)
+    if W is not None:                    # R4: a new laboratory draws a_lab, not the cluster's w
+        comps.append(W); scales.append(tau_w_scale)
+    fit = fit_gaussian(y, S, X, comps, scales)
     out = summarise(fit, 0, extra)
     out["tau_study_fitted"] = with_study
+    if W is not None:
+        out["tau_w_fitted"] = True
     out["reml_scales"] = [float(x) for x in fit["reml"]]
     return out
 
 
-def categorical_fit(rows, reference, scale):
+def categorical_fit(rows, reference, scale, tau_w_scale=TAU_W_SCALE):
     """Network meta-analysis: fixed effect per level (reference = 0), one heterogeneity scale per pair with
     correlation 1/2 between pairs of one multi-arm study, measurement covariance from shared arms."""
     pairs = [(r, p) for r in rows for p in r["pairs"]]
@@ -528,7 +554,7 @@ def categorical_fit(rows, reference, scale):
         # PREREG amendment A3: no study carries the declared reference; report against the most-connected level
         counts = {lv: sum(1 for _, p in pairs if lv in (p["level"], p["against"])) for lv in levels}
         fallback = sorted(levels, key=lambda lv: (-counts[lv], lv))[0]
-        out = categorical_fit(rows, fallback, scale)
+        out = categorical_fit(rows, fallback, scale, tau_w_scale)
         out["reference_fallback"] = {"declared": reference, "used": fallback}
         return out
     pairs = [(r, p) for r, p in pairs if p["level"] in comp]
@@ -549,7 +575,12 @@ def categorical_fit(rows, reference, scale):
             if pairs[k][0] is r:
                 S[i, k] = S[k, i] = r["shared_var"]
                 K[i, k] = K[k, i] = 0.5
-    fit = fit_gaussian(y, S, X, [K], scale)
+    comps, scales = [K], [scale]
+    pr = [dict(r, _pair=(p["level"], p["against"])) for r, p in pairs]
+    W = _within_cluster(pr, same=lambda a, b: a["_pair"] == b["_pair"])
+    if W is not None:                    # R4: w links a design laboratory's contrasts of the same level pair
+        comps.append(W); scales.append(tau_w_scale)
+    fit = fit_gaussian(y, S, X, comps, scales)
     out = {"connected": True, "reference": reference, "levels": {}, "reml_scales": [float(x) for x in fit["reml"]]}
     for j, lv in enumerate(cols):
         s = summarise(fit, j, [0])
@@ -612,6 +643,16 @@ def cell_table(obs: Sequence[Mapping[str, Any]]) -> List[Dict[str, Any]]:
                 "rows": [{k: r.get(k) for k in ("source", "contrast", "lab", "y", "v", "range", "non_monotone",
                                                 "pairs", "focal", "peak_area", "censored_arms", "turning_point",
                                                 "buffer_state")} for r in rows]}
+        design = [r for r in rows if r.get("design_lab")]
+        if design:                       # PREREG A7 R1 / R4; keys absent on literature-only cells
+            for out_row, r in zip(base["rows"], rows):
+                if r.get("design_lab"):
+                    out_row.update({"design_lab": r["design_lab"], "lower_bound": bool(r.get("lower_bound"))})
+            base["design_labs"] = sorted({r["design_lab"] for r in design})
+            base["lower_bound"] = any(r.get("lower_bound") for r in design)
+            base["pea_answer_shown"] = any(not r.get("design_lab") and any(
+                "isolate" in m.lower() and ("pea" in m.lower() or "soy" in m.lower()) for m in r["matrix"])
+                for r in rows)
         if lc in NUMERIC:
             base["step"] = NUMERIC[lc][0]
             s = numeric_fit(rows, PRIOR_SCALE)
@@ -625,6 +666,10 @@ def cell_table(obs: Sequence[Mapping[str, Any]]) -> List[Dict[str, Any]]:
                 s[name] = ({"contrasts": len(sub), **{k: v for k, v in numeric_fit(sub, PRIOR_SCALE).items()
                                                       if k in ("estimate", "ci90")}} if sub else {"contrasts": 0})
             s["non_monotone_contrasts"] = sum(1 for r in rows if r["non_monotone"])
+            if design:
+                s["tau_w_sensitivity"] = {str(t): {k: v for k, v in numeric_fit(rows, PRIOR_SCALE, t).items()
+                                                   if k in ("estimate", "ci90", "new_lab_pi90")}
+                                          for t in TAU_W_SENSITIVITY}
             base["fit"] = s
             base["reading"] = reading(len(labs), s)
             base["lolo"] = lolo(rows)
@@ -639,6 +684,11 @@ def cell_table(obs: Sequence[Mapping[str, Any]]) -> List[Dict[str, Any]]:
             for lv, s in f["levels"].items():
                 if "estimate" in s:
                     s["reading"] = reading(s["labs"], s)
+            if design:
+                f["tau_w_sensitivity"] = {
+                    str(t): {lv: {k: v for k, v in s.items() if k in ("estimate", "ci90", "new_lab_pi90")}
+                             for lv, s in categorical_fit(rows, ref, PRIOR_SCALE, t)["levels"].items()
+                             if "estimate" in s} for t in TAU_W_SENSITIVITY}
             base["fit"] = f
             base["reading"] = "per level"
             base["fragility"] = categorical_fragility(rows, ref, f)

@@ -317,3 +317,18 @@ path; it is written and unit-tested on synthetic data before any P3 value is rea
 
 *Order:* R0 - R5 are frozen with this commit, before any partner is contacted. A change after a P3 value exists is a
 new amendment that says it was written after the data were seen.
+
+*Implementation note (2026-11-14, step 16h; no designed-study value exists).* A7 is coded in
+`scripts/generators/lever_designed_study.py`, with the R4 term in `build_lever_table.py`, and tested on synthetic pots
+(`tests/unit/test_lever_designed_study.py`). No rule moves. Six points the text left open are read as follows:
+- **n pots per corner arm.** R1 and R3 were written for two pots. The one-laboratory design has 4. "One pot not
+  detected" reads "some but not all", "both pots" reads "all", and sigma_pot^2 / 2 reads sigma_pot^2 / n. The ML mean
+  uses every pot of the corner arm.
+- **Bounded at different limits within one corner arm:** the arm enters at the highest limit.
+- **Higher and lower arm:** decided by the two arm means as entered.
+- **R5 with a bounded or excluded arm:** D enters no estimate for that laboratory and is reported with the reason.
+  R5 has no lower-bound reading.
+- **The buffer-type contrast:** keyed as "matrix-buffered" minus "phosphate".
+- **R4's w:** with one design laboratory, w is not identified and adds its prior variance to the cluster's rows. It
+  never enters a new laboratory's interval. "Pea answer shown" needs a row from outside the cluster whose keyed matrix
+  names a pea or soy isolate.
