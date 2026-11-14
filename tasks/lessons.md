@@ -646,3 +646,11 @@ have no null answer): counting it as a difference of 0 pulls the mean to zero an
   "initial or label" cells being targeted, so both fell out at the methods check.
 - **Rule:** when a search targets lever-table cells, the screen records each series' pH basis (initial, final, held)
   next to its levels, and matches cells on band AND basis.
+
+## Screen for printed values per arm, not only for the design (2026-11-14)
+- **What happened:** step 14's best design (zhang2024c, rice hydrolysate +- cysteine at four temperatures) printed
+  its volatiles only as a row-standardised heat map, which gives no ratio between arms; it passed the abstract screen
+  and failed only at the methods check.
+- **Rule:** the methods check reports how values are printed (table with values, bar chart, heat map of z-scores,
+  OAV-filtered table) as a design field, and a paper whose only report cannot give a ratio between arms does not count
+  toward a yield rule.
