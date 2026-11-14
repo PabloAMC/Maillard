@@ -669,3 +669,8 @@ have no null answer): counting it as a difference of 0 pulls the mean to zero an
   independence.
 - **Rule:** each reader gets its own empty working directory named in its brief, and is told to open no other.
   A resolver of a digitised source re-reads a sample of AGREED points, not only the differing rows.
+
+## Track new records before rebuilding results/README.md (2026-11-14, second occurrence)
+- **What happened:** `build_results_readme.py` maps tracked files only; run before `git add` of a new record, it
+  writes a map without that record, and `test_results_readme` fails in CI ten minutes later.
+- **Rule:** `git add` every new results file first, then rebuild the map and run it with `--check`.
