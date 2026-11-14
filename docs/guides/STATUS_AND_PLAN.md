@@ -98,15 +98,20 @@ table below is the record of how each step went.
   - R4, a laboratory cluster: design laboratories sharing a protocol count as one;
   - R5, the buffered pair, its power stated.
 
+**16h done (2026-11-14):** A7 coded in `scripts/generators/lever_designed_study.py` (pots to rows, R1 - R5) and
+`build_lever_table.py` (R4's w with its own prior, out of the new-laboratory interval), with 14 synthetic tests in
+`tests/unit/test_lever_designed_study.py`. The shipped lever table is unchanged. The six points A7 left open are fixed
+in PREREG's A7 implementation note; the main one is 4 pots per corner arm, not 2. No P3 data loader exists yet; it
+comes with the data.
+
 **Next:**
-- **16h**, code R1 - R5 in `build_lever_table.py`, with synthetic tests, before any P3 value;
 - **16g**, rerun the sizing on the laboratory's confirmed panel, with R4, after first contact;
 - **sending is the owner's**, one candidate at a time.
 
 **Engine follow-ups the dry run exposed** (not the design's):
 - the missing Strecker, alkylpyrazine and 1-octen-3-ol targets;
 - the lipid and Strecker refusals in isolates;
-- the implausible DMHF and norfuraneol ratios. | the updated design (one laboratory), its premortem, A7, the outreach package; ready for the owner after 16h | 6 h (16a - 16d done); 16e 3 h, 16f 3 h |
+- the implausible DMHF and norfuraneol ratios. | the updated design (one laboratory), its premortem, A7, the outreach package; ready for the owner (16h done) | 6 h (16a - 16d done); 16e 3 h, 16f 3 h, 16h 3 h |
 | later | **Without a laboratory, optional:** requests to authors for supplementary tables of the discordant cells (drafted here, sent by the owner) | -- | -- |
 
 **The record of steps 0 - 5 follows.**
