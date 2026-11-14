@@ -31,3 +31,13 @@ def test_water_reading_and_buffers():
     assert D.corner_spec("glucose", "cysteine", 6.0, "pea_isolate_ph_held").process.buffer.kind == "clamped"
     phos = D.corner_spec("glucose", "cysteine", 6.0, "pea_isolate", phosphate=True).process.buffer
     assert phos.kind == "phosphate" and phos.phosphate_mol_l == D.PHOSPHATE_M
+
+
+def test_an_ingredient_built_isolate_pot_declares_its_lipid_carrier():
+    """The matrix key src/ingredients.py writes ('pea_isolate') reaches the lipid lane's matrix fallback
+    (engine.LIPID_CARRIER_ALIASES, 2026-11-14); before, every lipid target in an isolate was refused."""
+    from src.kinetic_core import engine
+    spec = D.corner_spec("glucose", "cysteine", 6.0, "pea_isolate")
+    decl = engine.declare_envelope(spec, ["hexanal"])
+    assert "pea_protein_isolate" in decl.lipid_carriers
+    assert not any("NO LIPID CARRIER" in str(r) for r in decl.reasons)

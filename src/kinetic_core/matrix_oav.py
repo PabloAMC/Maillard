@@ -590,6 +590,16 @@ def oav_table(
 # 4. RATIOS LEAD -- formulation comparison, which is the layer's headline
 # ===========================================================================
 
+#: 2026-11-14 (P3 engine dry run, step 16e): an arm below this amount is below anything a laboratory or a nose can
+#: register, so a ratio against it is a ratio against numerical dust (the dry run printed DMHF at -10 dex, ribose
+#: arm 2.7e-10 ug/L, and norfuraneol at +29 dex, glucose arm 6e-23 ug/L). It sits more than two decades below the
+#: lowest odour threshold this layer carries (MFTD in water, 3.2e-4 ug/L, WATER_THRESHOLDS) and below every
+#: detection limit the repo holds (src/m4_reduced_power.py LOD_MM, lowest ~0.1 ug/L). Such a row keeps the
+#: model's ORDERING and claims no magnitude. The dry run's two cases sit 4 and 17 decades below it, so no value in
+#: 1e-8 .. 1e-4 would change them.
+RESOLUTION_FLOOR_UG_PER_L = 1e-6
+
+
 @dataclass(frozen=True)
 class FormulationComparison:
     compound: str
@@ -598,12 +608,17 @@ class FormulationComparison:
     within_reliability_band: bool
     band_x: float
     note: str
+    ordering: Optional[str] = None      # set only on a row below RESOLUTION_FLOOR_UG_PER_L
 
     def as_dict(self) -> Dict[str, object]:
-        return {"compound": self.compound, "ratio_a_over_b": self.ratio,
-                "direction": self.direction,
-                "within_reliability_band": self.within_reliability_band,
-                "reliability_band_x": self.band_x, "note": self.note}
+        out = {"compound": self.compound, "ratio_a_over_b": self.ratio,
+               "direction": self.direction,
+               "within_reliability_band": self.within_reliability_band,
+               "reliability_band_x": self.band_x, "note": self.note}
+        if self.ordering is not None:
+            out["below_resolution"] = True
+            out["ordering"] = self.ordering
+        return out
 
 
 def compare_formulations(
@@ -641,6 +656,19 @@ def compare_formulations(
             rows.append(FormulationComparison(
                 compound, 0.0, "undefined", False, band_x,
                 f"{label_a} is zero; a ratio is undefined"))
+            continue
+        low = [lab for lab, v in ((label_a, a), (label_b, b)) if v < RESOLUTION_FLOOR_UG_PER_L]
+        if low:
+            order = ("higher_in_" + label_a if a > b else ("higher_in_" + label_b if b > a else "equal")) \
+                if len(low) == 1 else "unresolved"
+            # ratio by the exact-zero convention (inf: A above B or both below; 0: B above A), which every
+            # consumer already reads together with direction "undefined"
+            rows.append(FormulationComparison(
+                compound, 0.0 if order == "higher_in_" + label_b else float("inf"), "undefined", False, band_x,
+                f"{' and '.join(low)} below the resolution floor ({RESOLUTION_FLOOR_UG_PER_L:g} ug/L, under every "
+                "odour threshold and detection limit): no magnitude is claimed"
+                + (f"; the model's ordering is {order}" if len(low) == 1 else ""),
+                ordering=order))
             continue
         ratio = a / b
         resolved = ratio >= band_x or ratio <= 1.0 / band_x

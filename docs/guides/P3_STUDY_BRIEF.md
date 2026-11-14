@@ -68,5 +68,5 @@ They are the first data on any of these questions in a plant-protein isolate.
 Some error no study can remove: laboratories scatter enough that even the true pea-matrix mean gets the sign wrong
 for about one new kitchen in six.
 
-The vials also show where our kinetic model stands on plant-protein data. Today it can predict only 3 of the 57
+The vials also show where our kinetic model stands on plant-protein data. Today it can predict only 9 of the 57
 questions in this matrix (`results/validation/p3_engine_dry_run.md`), and your data tell us which gaps matter most.

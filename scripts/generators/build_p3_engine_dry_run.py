@@ -110,7 +110,7 @@ def cell(compound: str, lever: str, reading: str, runner: S5.Runner) -> Dict[str
     row: Dict[str, Any] = {"compound": compound, "lever": lever, "reading": reading, "target": target}
     if target is None:
         return {**row, "status": "not predicted", "why": ["no engine target for this odorant"]}
-    logs, whys = [], []
+    logs, whys, orderings = [], [], 0
     for lo, hi in _pairs(lever):
         a, b = corner_spec(*hi, reading), corner_spec(*lo, reading)
         why = _refusal(a, target) or _refusal(b, target)
@@ -119,10 +119,15 @@ def cell(compound: str, lever: str, reading: str, runner: S5.Runner) -> Dict[str
             if r is not None:
                 logs.append(r)
                 continue
+            if "below the resolution floor" in why:     # matrix_oav.RESOLUTION_FLOOR_UG_PER_L: an ordering only
+                orderings += 1
+                whys.append("an arm is below the engine's resolution floor: the ordering is kept, no magnitude")
+                continue
             why = "the engine refuses the ratio: " + why
         whys.append(why)
-    status = "predicted" if len(logs) == 4 else ("partial" if logs else "not predicted")
-    row.update(status=status, pairs_predicted=len(logs), why=sorted(set(whys)))
+    status = ("predicted" if len(logs) == 4 else "partial" if logs
+              else "ordering only" if orderings == 4 else "not predicted")
+    row.update(status=status, pairs_predicted=len(logs), pairs_ordering_only=orderings, why=sorted(set(whys)))
     if logs:
         row["main_effect_dex"] = sum(logs) / len(logs)
         row["pair_log_ratios"] = logs
@@ -167,6 +172,7 @@ def payload() -> Dict[str, Any]:
         summary[rd] = {"cells": len(rows),
                        "predicted": sum(r["status"] == "predicted" for r in rows),
                        "partial": sum(r["status"] == "partial" for r in rows),
+                       "ordering_only": sum(r["status"] == "ordering only" for r in rows),
                        "by_lever": {lv: sum(r["status"] == "predicted" for r in rows if r["lever"] == lv)
                                     for lv in LEVERS},
                        "reasons": dict(sorted(reasons.items(), key=lambda kv: -kv[1]))}
@@ -193,7 +199,9 @@ def render(p: Mapping[str, Any]) -> str:
              "ships nothing and reads no study data.*", "",
              f"**Result.** In 15 % pea isolate (protein sites only, the placeholder composition), the engine predicts "
              f"**{prim['predicted']} of {prim['cells']}** lever x odorant cells (all 4 matched pairs), and "
-             f"{prim['partial']} more in part. {p['integrations']} integrations.", "",
+             f"{prim['partial']} more in part; in {prim['ordering_only']} it gives an ordering only (an arm below "
+             "the resolution floor, `matrix_oav.RESOLUTION_FLOOR_UG_PER_L`). "
+             f"{p['integrations']} integrations.", "",
              "| reading | cells | predicted | partial | sugar identity | sulfur source | pH | main reasons not predicted |",
              "|---|---|---|---|---|---|---|---|"]
     for rd in READINGS:
@@ -212,6 +220,8 @@ def render(p: Mapping[str, Any]) -> str:
     for c in ANALYTES:
         def show(lv: str) -> str:
             r = by[(c, lv)]
+            if r["status"] == "ordering only":
+                return "ordering only (an arm below the resolution floor)"
             if r["status"] == "not predicted":
                 return "not predicted: " + (_why_class(r["why"][0]) if r["why"] else "")
             tag = "" if r["status"] == "predicted" else f" ({r['pairs_predicted']}/4 pairs)"

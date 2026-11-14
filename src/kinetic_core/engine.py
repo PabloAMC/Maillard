@@ -568,6 +568,11 @@ LIPID_CARRIER_ALIASES: Mapping[str, str] = {
     "pea protein isolate": "pea_protein_isolate",
     "pea protein": "pea_protein_isolate",
     "ppi": "pea_protein_isolate",
+    # 2026-11-14: the matrix keys of data/species/protein_matrices.yml, which src/ingredients.py writes into
+    # ProcessSpec.matrix; without them the matrix fallback of the lipid charge never fired for an ingredient-built
+    # pot and every lipid target in an isolate was refused (P3 engine dry run, step 16e)
+    "pea_isolate": "pea_protein_isolate",
+    "soy_isolate": "soy_protein_isolate",
     "soy protein isolate": "soy_protein_isolate",
     "soy protein": "soy_protein_isolate",
     "spi": "soy_protein_isolate",

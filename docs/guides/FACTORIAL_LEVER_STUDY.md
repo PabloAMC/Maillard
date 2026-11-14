@@ -364,6 +364,21 @@ full; with the added precursors in water, none. Why:
 Some of the ratios it does return are implausible (DMHF -10 dex for ribose against glucose, norfuraneol +29 dex).
 This is an engine follow-up, not a design input.
 
+**Engine follow-up (2026-11-14, same day).** Two fixes, neither a constant change:
+- *The resolution floor* (`matrix_oav.RESOLUTION_FLOOR_UG_PER_L` = 1e-6 ug/L, more than two decades under every odour
+  threshold and detection limit). The DMHF and norfuraneol ratios were taken against numerical dust: ribose has no
+  DMHF route without a Strecker C1/C2 donor, and glucose gives essentially no norfuraneol. An arm under the floor now
+  keeps the model's ordering and claims no magnitude ("ordering only").
+- *The lipid carrier.* Ingredient-built isolate pots carry the matrix key `pea_isolate`, which the lipid lane did not
+  map to its `pea_protein_isolate` carrier, so it refused the arm. `engine.LIPID_CARRIER_ALIASES` now maps it.
+
+The dry run now predicts **9 of 57** cells in full and 11 in part (12 with the pH held), and DMHF sugar identity is an
+ordering only. The lipid cells (hexanal, nonanal, 2-pentylfuran) read exactly +0.00: the lipid lane has no coupling
+to sugar, sulfur source or pH, so the zero is structural, not evidence of no effect. The remaining gaps are scoped:
+the trunk targets (methional, 2,5-DMP, Strecker aldehydes, pyrazines) are refused because every P3 corner resolves to
+the sulfur lane; the isolate's free sugars and amino acids are unmeasured; trimethylpyrazine (Yu 2018) and a Strecker
+arm for Phe/Leu/Ile (Hofmann 2000) are feasible literature steps; 1-octen-3-ol needs a 10-hydroperoxide pool.
+
 **Decision: one laboratory, 2^3 x 4.** Step 5 was the only reason for two laboratories (the predictive check
 above), and it cannot run on 3 cells. A7-R4 also counts two laboratories sharing one protocol and one lot as one
 cluster toward the three-laboratory rule. So the two-laboratory "answered" counts (16.5) were overstated, and a
