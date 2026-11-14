@@ -2,11 +2,11 @@
 
 *Draft, 2026-11-14 (STATUS_AND_PLAN step 16d). The owner fills in the name and sends it; nothing has been sent. It
 links only public repo files. One email per laboratory, sent to the candidates in
-[P3_CANDIDATE_LABS.md](P3_CANDIDATE_LABS.md) in their listed order, two at a time.*
+[P3_CANDIDATE_LABS.md](P3_CANDIDATE_LABS.md) in their listed order, one at a time.*
 
 ---
 
-**Subject:** A two-laboratory Maillard flavour factorial in pea protein: would your group run 24 vials?
+**Subject:** A small Maillard flavour factorial in pea protein: would your group run 44 vials?
 
 Dear Dr [name],
 
@@ -15,8 +15,8 @@ literature into a table of within-study effects: 99 papers, 44 laboratories. It 
 formulators ask (ribose vs glucose, cysteine vs thiamine, pH), mainly because almost every question was studied in
 one or two laboratories and none in a plant-protein isolate.
 
-We would like two independent laboratories to run one small factorial in 15 % pea isolate: sugar x sulfur source x pH,
-plus a few check vials, 24 vials per laboratory, quantified by your own GC-MS method (SIDA where you have it).
+We would like one laboratory to run one small factorial in 15 % pea isolate: sugar x sulfur source x pH, four vials
+per cell plus a few check vials, 44 vials in all, quantified by your own GC-MS method (SIDA where you have it).
 We ship the isolate and can supply labelled thiol standards; we do the analysis; every prediction is frozen and published before your data exist. You
 would be a co-author, and your data stay private until you publish them.
 

@@ -19,21 +19,22 @@ pre-registered searches). Only new laboratories cooking in the users' matrix can
 
 ## What we ask
 
-One small factorial, the same in each of two independent laboratories (one laboratory with more replicates is the
-fallback, decided before we write to you).
+One small factorial in one laboratory, with four vials per cell. A second laboratory with its own protocol is welcome
+later, as an independent replication.
 
 - **Base:** 15 % w/w pea protein isolate in water. Heated in pressure-rated sealed vials at 140 C for 20 min, timed
-  from a thermocouple vial. We ship the isolate from one lot to both laboratories.
-- **Factors**, 8 cells x 2 vials:
+  from a thermocouple vial. We ship the isolate from one lot.
+- **Factors**, 8 cells x 4 vials:
   - sugar: glucose vs ribose, 30 mM;
   - sulfur source: cysteine vs thiamine, 10 mM;
   - pH set before heating: 6.0 vs 7.0.
 - **Checks:**
   - a matrix-background pair;
   - a no-isolate pair in phosphate buffer;
-  - one phosphate-buffered pair at both pH levels: does a buffer salt change the pH effect seen in the matrix alone?
+  - one phosphate-buffered set at both pH levels (4 vials each): does a buffer salt change the pH effect seen in the
+    matrix alone?
     We found no published laboratory that tested this in one study at matched pH.
-- **24 vials per laboratory.** Measure pH before heating and after cooling in every vial.
+- **44 vials in all.** Measure pH before heating and after cooling in every vial.
 - **Composition:** one analysis of the shipped lot (free sugars, free amino acids, total cysteine and methionine,
   fat). We can arrange it with a contract laboratory if you prefer.
 - **Analytes:**
@@ -57,15 +58,15 @@ fallback, decided before we write to you).
 
 ## Why it is worth it
 
-In our simulations (`results/validation/lever_design_preposterior.md`, rerun 2026-11-14), two laboratories cut the
-chance that the table gets an effect's direction wrong for a new kitchen:
+In our simulations (`results/validation/lever_design_preposterior.md`, rerun 2026-11-14), these vials cut the chance
+that the table gets an effect's direction wrong for a new kitchen:
 - from one in two to about one in three, on the 28 questions where the literature has nothing in any matrix;
 - from 0.38 to 0.28, over all 57 questions the study touches.
 
-About 12 questions that already have a literature estimate would become answered. More would be answered among the
-rest, but that count depends on our prior and we do not quote it.
+They are the first data on any of these questions in a plant-protein isolate.
 
 Some error no study can remove: laboratories scatter enough that even the true pea-matrix mean gets the sign wrong
 for about one new kitchen in six.
 
-The vials also give the first held-out test of a mechanistic Maillard model on plant-protein data.
+The vials also show where our kinetic model stands on plant-protein data. Today it can predict only 3 of the 57
+questions in this matrix (`results/validation/p3_engine_dry_run.md`), and your data tell us which gaps matter most.

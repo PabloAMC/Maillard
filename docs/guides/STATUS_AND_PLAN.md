@@ -86,16 +86,27 @@ table below is the record of how each step went.
 - *16d.* [P3_STUDY_BRIEF.md](P3_STUDY_BRIEF.md), [P3_CANDIDATE_LABS.md](P3_CANDIDATE_LABS.md) and
   [P3_OUTREACH_EMAIL.md](P3_OUTREACH_EMAIL.md) are written.
 
-**Gates before sending (the premortem's):**
-- **16e**, an engine dry run on the 8 corners with a placeholder pea composition. If it predicts too few cells, the
-  default becomes one laboratory.
-- **16f**, PREREG amendment A7:
-  - censored pots in A4 keying;
-  - pH band by the nominal level, and the "pH not held" rule;
-  - the corner sign check;
-  - a shared-protocol scale;
-  - the buffered pair's rule.
-- **16g**, rerun the sizing on each laboratory's confirmed panel, after first contact. | the updated design, its premortem, the outreach package; 16e - 16f before sending | 6 h (16a - 16d done); 16e 3 h, 16f 3 h |
+**Gates before sending, done the same day:**
+- **16e, the engine dry run** (`p3_engine_dry_run`). The shipped engine predicts 3 of the 57 cells in pea isolate.
+  The reasons: 7 analytes have no engine target, the lipid and Strecker lanes refuse the isolate, and the thiol lane
+  refuses most ratios. Some of the ratios it returns are implausible. Step 5 cannot run on 3 cells, so **the design
+  is one laboratory, 2^3 x 4: 44 vials.**
+- **16f, PREREG amendment A7**, frozen after an independent review of its draft:
+  - R1, censored pots;
+  - R2, the pH band and the holding rule;
+  - R3, the corner sign check;
+  - R4, a laboratory cluster: design laboratories sharing a protocol count as one;
+  - R5, the buffered pair, its power stated.
+
+**Next:**
+- **16h**, code R1 - R5 in `build_lever_table.py`, with synthetic tests, before any P3 value;
+- **16g**, rerun the sizing on the laboratory's confirmed panel, with R4, after first contact;
+- **sending is the owner's**, one candidate at a time.
+
+**Engine follow-ups the dry run exposed** (not the design's):
+- the missing Strecker, alkylpyrazine and 1-octen-3-ol targets;
+- the lipid and Strecker refusals in isolates;
+- the implausible DMHF and norfuraneol ratios. | the updated design (one laboratory), its premortem, A7, the outreach package; ready for the owner after 16h | 6 h (16a - 16d done); 16e 3 h, 16f 3 h |
 | later | **Without a laboratory, optional:** requests to authors for supplementary tables of the discordant cells (drafted here, sent by the owner) | -- | -- |
 
 **The record of steps 0 - 5 follows.**

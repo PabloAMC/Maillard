@@ -349,6 +349,61 @@ disagrees.
 Pot count (two laboratories): 2^3 x 2 = 16, matrix background 2, no-isolate 2, buffered pair 4: **24 per laboratory
 (18 before), 48 in all.**
 
+## Gates 16e and 16f (2026-11-14): one laboratory, A7 frozen
+
+**16e, the engine dry run** ([p3_engine_dry_run.md](../../results/validation/p3_engine_dry_run.md),
+`scripts/generators/build_p3_engine_dry_run.py`). The shipped engine was run on the 8 corners through its own front
+door, with A4 main effects. In 15 % pea isolate (protein sites only, since no dossier gives its free sugars or amino
+acids) it predicts **3 of the 57** lever x odorant cells in full and 10 in part. With the pH held it predicts 6 in
+full; with the added precursors in water, none. Why:
+- 7 of the 19 analytes have no engine target: 2- and 3-methylbutanal, phenylacetaldehyde, 1-octen-3-ol, two
+  alkylpyrazines and the pyrazine total.
+- The lipid and Strecker lanes refuse the isolate arm.
+- The thiol lane refuses most ratios.
+
+Some of the ratios it does return are implausible (DMHF -10 dex for ribose against glucose, norfuraneol +29 dex).
+This is an engine follow-up, not a design input.
+
+**Decision: one laboratory, 2^3 x 4.** Step 5 was the only reason for two laboratories (the predictive check
+above), and it cannot run on 3 cells. A7-R4 also counts two laboratories sharing one protocol and one lot as one
+cluster toward the three-laboratory rule. So the two-laboratory "answered" counts (16.5) were overstated, and a
+second laboratory under the same protocol buys little.
+
+For the table's own prediction, one laboratory is as accurate as two:
+- sign error 0.28 over the 57 cells, 0.32 on the 28 with no literature;
+- the best calibrated (coverage 0.79, or 0.83 with half the scatter).
+
+It newly answers about 4 cells (the one-laboratory row of the preposterior table; the 2^3 x 4 was not run for that
+count): the cells already two laboratories short.
+
+The better second laboratory is a later, independent replication under its own protocol. That counts as a new
+laboratory under R4, and it is what R4 needs before any interval is shown as a pea answer.
+
+**Pots in the one laboratory:**
+
+| | pots |
+|---|---|
+| factorial, 8 cells x 4 | 32 |
+| matrix background (pH 6.0) | 2 |
+| no isolate (glucose + cysteine in 0.1 M phosphate, pH 6.0) | 2 |
+| buffered pair (0.1 M phosphate at the glucose + cysteine corner, pH 6.0 and 7.0, 4 each; its matrix-only side is the factorial's corner) | 8 |
+| **total** | **44** |
+
+**16f, PREREG amendment A7** is frozen in [PREREG.md](../reference/lever_table/PREREG.md). It was revised once,
+before freezing, after an independent review of its first draft. Its rules:
+- R1, censored pots;
+- R2, the pH band at the nominal levels and the 0.3-unit holding rule;
+- R3, the corner sign check, at about 0.1 % false flags;
+- R4, the protocol cluster;
+- R5, the buffered pair.
+
+R5's power is stated now. With one laboratory, the pair can show a large difference (P about 0.64 at 0.4 dex per pH
+unit) but is not expected to show sameness (P about 0.28 at D = 0).
+
+**Still open:**
+- the R1 - R5 code in `build_lever_table.py`, written and tested on synthetic data before any P3 value is read;
+- 16g, the sizing rerun on the laboratory's confirmed analyte panel, with R4 in the simulation.
+
 ## What the partner gets
 
 Co-authorship on the data and on the validation; the open tool and the lever table run on their own recipes; the

@@ -214,3 +214,106 @@ commit, one rule at a time, on an identical contrast set and fixed cell partitio
 the same cell sizes, per lever class, by coverage of the post-freeze contrasts by the new-laboratory 90 % interval
 with width beside it; no score before 20 post-freeze contrasts fall in cells a rule touches. Fields and checks:
 `STEP8_FIELDS_SPEC.md`.
+
+**A7 (2026-11-14, before any designed study is requested or run; no designed-study value exists; written after
+the P3 premortem, `docs/guides/FACTORIAL_LEVER_STUDY.md`, 'Premortem', and revised once after an independent review
+of its first draft, before freezing).** *Reason:* A4 keys a designed factorial as one contrast per laboratory per
+lever. It left out five things that would decide the reading:
+- censored pots;
+- the pH band at a set level;
+- interactions that reverse a main effect;
+- design laboratories sharing one protocol and one isolate lot;
+- the buffered pair.
+
+The rules apply only to designed studies run for this table. Literature sources are keyed as sec. 3 says, and no
+existing reading moves. Implementing them needs new code in `build_lever_table.py`, which today has no designed-study
+path; it is written and unit-tested on synthetic data before any P3 value is read.
+
+*Rules:*
+
+**R0, terms.**
+- A **corner** is one setting of the other factors; an A4 arm is the mean over its 4 corners.
+- The **pot SD** is sigma_pot = sqrt(0.1^2 + log10(1 + CV)^2) dex, with CV from sec. 5 (0.10 for isotope dilution,
+  0.20 otherwise). R1, R3 and R5 use it, fixed; they do not estimate it from two pots.
+- The **limit** of a pot is the detection limit (LOD) of the GC sequence that measured it.
+
+**R1, censored pots.**
+- **A corner with one pot not detected:** its value is the ML mean of a left-censored normal at sigma_pot. Its
+  variance is the inverse observed Fisher information of that mean.
+- **A corner with both pots not detected** is "bounded": it enters at the limit, with variance sigma_pot^2 / 2.
+- **Bias:** a bounded corner sits above its true value, so a contrast whose lower arm is bounded is biased toward
+  zero.
+- **Which contrasts enter:**
+  - Such a contrast enters the estimate, and the cell reports its size as a lower bound.
+  - A contrast whose higher arm, or whose two arms both, have more than 2 of 4 corners bounded enters no estimate.
+  - A corner bounded in both arms gives no corner contrast (R3). It enters the arm means at the limit only if both
+    arms used the same limit; otherwise the contrast enters no estimate.
+- **Reporting:** counts of censored pots and bounded corners, per cell and per laboratory. A "not detected" with no
+  limit enters no estimate.
+
+**R2, the pH band and holding.**
+- **Band:** a designed pH contrast at set levels 6.0 and 7.0 enters the 6 - 7.5 band, in its "initial or label"
+  sub-cell (sec. 4's initial-pH sub-cell), by its nominal set levels, never by measured values.
+- **Held:** the mean final pH (at 25 C, after cooling) of the laboratory's 8 factorial pots set at 7.0 exceeds that
+  of its 8 pots at 6.0 by at least 0.3 units.
+- **Not held:** a laboratory that fails this, or does not report a final pH for every pot, has its pH contrast
+  reported but entering no estimate.
+- Final-pH spreads per corner are reported and are A6-R2 covariates. They never split the contrast.
+
+**R3, the corner sign check.**
+- Each corner contrast is the mean of its two pots per arm, pooled over the design laboratories (inverse variance,
+  at sigma_pot).
+- **Flag:** the cell is flagged "interaction-dominated" when both hold:
+  - the design laboratories' pooled A4 mean has a 90 % interval excluding zero;
+  - some pooled corner's 97.5 % interval (90 % with a Bonferroni correction over 4 corners) lies entirely on the
+    other side of zero.
+- The reading is still computed. The corner contrasts are printed beside it, and the tool shows the flag with every
+  prediction from the cell.
+- *False-flag rate* (Monte Carlo, the review's scratch script): about 0.1 % per cell under no interaction at a
+  0.1 dex pot SD. Real laboratory-by-corner heterogeneity raises it.
+
+**R4, the shared protocol.**
+- **One cluster:** the design laboratories cook one protocol from one isolate lot and form one cluster. The
+  cluster's offset is drawn from tau_lab like any laboratory's.
+- **Within the cluster:** its laboratories differ from each other by w ~ N(0, tau_w^2), with tau_w ~ half-normal
+  (0.25 dex) as its own prior. In categorical cells, w is a component linking the design laboratories' contrasts of
+  the same level pair.
+- **New laboratories:** a new laboratory draws only a_lab.
+- **Counting:** the cluster counts as ONE laboratory toward the three-laboratory rule of sec. 5. Leave-one-laboratory-out
+  leaves the whole cluster out.
+- **Prior sensitivity:** tau_w's sensitivity (0.1 and 0.5 dex) is reported separately and does not set the
+  prior-dominated label.
+- **The pea-matrix report:** the design laboratories' contrasts and their inverse-variance mean, with a 90 % interval
+  for this protocol. It carries no new-laboratory interval.
+- **Not a pea answer:** no cell is shown to a user as a pea-matrix answer until a laboratory outside the cluster,
+  cooking in a pea or soy isolate, has scored it.
+
+**R5, the buffered pair.**
+- **Pots:** at the glucose + cysteine corner, each laboratory runs both pH levels in 0.1 M phosphate, 4 pots per
+  level. The matrix-only side is the factorial's own pots at that corner, topped up to 4 per level where the design
+  has fewer.
+- **Estimate, per odorant:** D = (the pH slope in phosphate) minus (the matrix-only pH slope at that corner), in dex
+  per pH unit, with SE from sigma_pot. It is pooled over laboratories by inverse variance, and each laboratory is
+  shown alone.
+- **Margin:** 0.2 dex per pH unit. The median REML between-laboratory scale of the 16 pH cells in the 6 - 7.5
+  "initial or label" band with at least three laboratories is 0.21 (`results/validation/lever_table.json` at this
+  commit). A difference below it is smaller than the scatter the table already carries between laboratories.
+- **Reading, on the pooled 90 % interval of D:**
+  - "same": inside +/-0.2;
+  - "different": entirely outside +/-0.2;
+  - "unresolved": otherwise.
+  - Expected power, stated now so that the reading cannot be re-cut later:
+    - with one laboratory (the design as sent, step 16e), P("same" | D = 0) is about 0.28 at a 0.1 dex pot SD and
+      0 at 0.128, and P("different" | D = 0.4) is about 0.64;
+    - with two laboratories, P("same" | D = 0) is about 0.76 and about 0.43.
+    - The pair can therefore show a large difference, but it is not expected to show sameness. "Unresolved" is the
+      likely reading when D is small.
+- **Scope:** the pair measures phosphate buffering together with phosphate catalysis and does not separate them;
+  the reading says so.
+- **Not A6:** it is not part of A6's confirmation set and does not count toward A6's eligibility.
+- **The buffer-type cell:** the pair enters it as one contrast per laboratory, the mean over the two pH levels of
+  log10(phosphate) minus log10(matrix-only). Its reference level is keyed "matrix-buffered", a level separate from
+  the literature's "none".
+
+*Order:* R0 - R5 are frozen with this commit, before any partner is contacted. A change after a P3 value exists is a
+new amendment that says it was written after the data were seen.

@@ -11,7 +11,7 @@ regenerates (`core-scores`, `core-directional`, `core-envelope`, `model-card`, .
 (`scripts/generators/WAVES.md`: not re-run, a change is a new wave). Every live artifact carries a
 `provenance` block (git head, date, input hashes: `src/provenance.py`).
 
-Tracked files: **1075**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
+Tracked files: **1077**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
 
 ## `results`
 
@@ -250,6 +250,7 @@ Tracked files: **1075**. Local-only (gitignored): scratch runs under `results/qu
 | `network_hypotheses.md` | Markdown twin of `network_hypotheses.json`. |
 | `network_hypotheses_prereg.md` | Pre-registration of the hypothesis layer: what runs, what counts as success, and the outcome. |
 | `null_model_baselines.*` (2): `null_model_baselines.json`, `null_model_baselines.md` | Does the mechanism pay for itself? The engine against a no-chemistry baseline (a compound's typical yield per limiting precursor in the OTHER studies, leave-one-study-out) on the scorecard's own ppb rows (`build_null_model_baselines.py`; north star C1). Re-run after every shipped wave. |
+| `p3_engine_dry_run.*` (2): `p3_engine_dry_run.json`, `p3_engine_dry_run.md` | P3 engine dry run (STATUS_AND_PLAN step 16e; `docs/guides/FACTORIAL_LEVER_STUDY.md`, 'Gates 16e and 16f'): the shipped engine on the 8 corners of the P3 pea-isolate factorial through its own front door, A4 main effects per lever x odorant cell, in three readings (isolate, isolate with pH held, added precursors in water), and the buffered pair's pH slopes. A design diagnostic: it moves no shipped number. Written by `scripts/generators/build_p3_engine_dry_run.py`. |
 | `ph_balance_s3_rival_points.json` | The carried pH-balance rivals' points for the S3 refusal (prereg sec. 21.10, R3): per rival (B1, B13), the stored screen draws that pass all four signatures in some A1 form x A2 choice in D, represented by the passing draw at the min and at the max of each free coordinate plus the best draw. Written by `build_ph_balance_s3_sensitivity.py --points`; read by `src/kinetic_core/ph_balance_refusal.py`. |
 | `ph_balance_s3_sensitivity*` (3): `ph_balance_s3_sensitivity.json`, `ph_balance_s3_sensitivity.md`, `ph_balance_s3_sensitivity_detail.json.gz` | The S3 application of M1b part (i) (2026-11-07): every sulfur-lane output path (panel pots, sulfur-lane directional-claim arms, a stratified grid of CLI recipes, clamped controls) integrated at B0, B0 inline, B1 at phi_cys = 1 and B13 at its best draw; each output's spread against omega 0.419 dex (concentrations, ratios, direction flips) and the prereg's pH terms (0.478 / 0.135 pH). Written by `build_ph_balance_s3_sensitivity.py` (the per-recipe rows and per-output entries in `_detail.json.gz`); the engine applies the same rule live, per pot (`src/kinetic_core/ph_balance_refusal.py`), and `tests/unit/test_ph_balance_refusal.py` checks the two agree. |
 | `prefactor_audit.*` (2): `prefactor_audit.json`, `prefactor_audit.md` | Arrhenius prefactor audit (`generate_prefactor_audit.py`); cited by `parameters.py` and pinned by the B8 test. |
