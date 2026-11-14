@@ -35,11 +35,11 @@
     },
     "final_all_arms": 146,
     "final_delta_ge_min": 135,
-    "categorical_pairs": 2322,
+    "categorical_pairs": 2339,
     "pairs_base_mismatch": 37,
     "base_source": {
       "check": 498,
-      "derived": 3302
+      "derived": 3332
     }
   },
   "ph_cells": [
@@ -4683,7 +4683,7 @@
       "compound": "2-Furfurylthiol (FFT)",
       "lever_class": "lipid",
       "watched": null,
-      "pairs": 12,
+      "pairs": 14,
       "pairs_base_mismatch": 2,
       "reference_pot_by_lab": {
         "reading_mottram_parker": [
@@ -4691,6 +4691,9 @@
         ],
         "chonbuk_hwang": [
           "none: amine+carbonyl"
+        ],
+        "btbu_beijing": [
+          "0%: amine+carbonyl+lipid+sulfur"
         ]
       },
       "changes": []
@@ -4699,7 +4702,7 @@
       "compound": "2-Methyl-3-furanthiol (MFT)",
       "lever_class": "lipid",
       "watched": null,
-      "pairs": 11,
+      "pairs": 13,
       "pairs_base_mismatch": 2,
       "reference_pot_by_lab": {
         "reading_mottram_parker": [
@@ -4707,6 +4710,9 @@
         ],
         "chonbuk_hwang": [
           "none: amine+carbonyl"
+        ],
+        "btbu_beijing": [
+          "0%: amine+carbonyl+lipid+sulfur"
         ]
       },
       "changes": []
@@ -5101,11 +5107,11 @@
   ],
   "provenance": {
     "artifact": "lever_field_readings",
-    "generated_on": "2026-11-13",
+    "generated_on": "2026-11-14",
     "git": {
-      "commit": "4cf0905223b064ceda8361a5be8ce2c033bfd654",
-      "short": "4cf09052",
-      "branch": "a6-batch2",
+      "commit": "4c9102dc10111f709fd2f01b4fec7fe8c2248247",
+      "short": "4c9102dc",
+      "branch": "temp-time-cluster",
       "dirty": true
     },
     "generated_by": "scripts/generators/build_lever_field_readings.py",
@@ -5169,6 +5175,10 @@
       {
         "path": "docs/reference/lever_table/contrasts/chan1994b__families.yml",
         "sha256": "88b2457b03d7844912a2e7db41709a95673fa04f69363a5c5b7a45374c9f476d"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/chansataporn2018.yml",
+        "sha256": "64a512f111a7e6057ff82a0dca0671dec6226b08ef88e10d008a9958a4d267cd"
       },
       {
         "path": "docs/reference/lever_table/contrasts/chen2000.yml",
@@ -5253,6 +5263,10 @@
       {
         "path": "docs/reference/lever_table/contrasts/feng2022.yml",
         "sha256": "7122d8df4eccb64a96f7c853e2371f3f19f7483b6ce78c87cc40d49627120877"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/goncuoglu2023.yml",
+        "sha256": "c849410adc18c7dd85bc7ca3fd9f2772fd0883a4eeaeaa4eedab947b65c4a2fe"
       },
       {
         "path": "docs/reference/lever_table/contrasts/gou2025.yml",
@@ -5363,6 +5377,10 @@
         "sha256": "83ce385ebe5713e4e36a0de0f28875cafea71b89e25c201112d14ee2a44b9e7b"
       },
       {
+        "path": "docs/reference/lever_table/contrasts/lee2024oven.yml",
+        "sha256": "55b4b15b38cb617953d96f7de32aa931f28b887e6be2c5e9c38e3b7ae4893d66"
+      },
+      {
         "path": "docs/reference/lever_table/contrasts/li2021lab.yml",
         "sha256": "feb9f2d1525aebb5dd7fab5b959fbda2a084e0f3d2a16ca6336fcade1bc151bd"
       },
@@ -5459,6 +5477,10 @@
         "sha256": "cb031ae54a4f4ae264b6fc55aaaecfed324763a61572befcb775c99d61ee6439"
       },
       {
+        "path": "docs/reference/lever_table/contrasts/pastoriza2016.yml",
+        "sha256": "c471e36abd2afa71d4a84458f6b1d6f4a4e83b574d5527a99411017fda545450"
+      },
+      {
         "path": "docs/reference/lever_table/contrasts/raza2020.yml",
         "sha256": "09759e623d7289e2afa0641656ba8dfc6da7cba2f59c265bffe598d25d238b4f"
       },
@@ -5487,6 +5509,10 @@
         "sha256": "812d753d360d5560bf7d6f967626320c7e96ee602bf7c7d5b33247e57b1ac098"
       },
       {
+        "path": "docs/reference/lever_table/contrasts/seo2015.yml",
+        "sha256": "199e01c08ae4ee3772a25461d6472e6f90dc100fbb86b0db51e816dfa73b1cea"
+      },
+      {
         "path": "docs/reference/lever_table/contrasts/shibamoto1977__families.yml",
         "sha256": "fa55f8d209a461fd2bdc90e3be0e4a7ad7b06cfcf2877bfa22a6fda7e5d2bdb1"
       },
@@ -5509,6 +5535,10 @@
       {
         "path": "docs/reference/lever_table/contrasts/tai1998.yml",
         "sha256": "423d75015439d6c4f344291ada8b48fa99e799dec7a4a505c559997002f47c3e"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/tan2011.yml",
+        "sha256": "acbd568be173673104e64a3b113c747971cc1b0b97aab00d6906352e346e4dd0"
       },
       {
         "path": "docs/reference/lever_table/contrasts/theng2024.yml",
@@ -5541,6 +5571,10 @@
       {
         "path": "docs/reference/lever_table/contrasts/vanseeventer2001.yml",
         "sha256": "1ac09daa2c684da5348845aa1ed873b54acb5f5b3f2a9ddfefcc54b4ac5c676e"
+      },
+      {
+        "path": "docs/reference/lever_table/contrasts/wang2022lipid.yml",
+        "sha256": "030be3438f4474cff0ef67701e26849068ab8ad9754f58cbfaed0f65367d6263"
       },
       {
         "path": "docs/reference/lever_table/contrasts/wang2026arp.yml",
@@ -5760,11 +5794,11 @@
       },
       {
         "path": "results/validation/lever_table.json",
-        "sha256": "571fa5e14baf40d8cf44190fccaa165103f7705491ce00ec34a2b185b3cf7930"
+        "sha256": "cedbc756773dbcba315fcddd5359644529d3eb05ce549baa7663db22dc439fd9"
       },
       {
         "path": "results/validation/lever_disagreement_audit.json",
-        "sha256": "b0d14b0944dca4ed7fcc1a68bb6463036f8bf797684e302540bca394b09b58ba"
+        "sha256": "618e3e807d98350093cab5aa44e0fd4d2f4cc58e89fd7788dc761205aad6e460"
       }
     ]
   }

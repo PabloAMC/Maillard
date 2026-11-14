@@ -17,14 +17,14 @@
       "reading": "needs experiment",
       "why": "keyed: best cell '2-Furfurylthiol (FFT), time >120 min' reads too few laboratories (2 laboratories)",
       "plant_protein_evidence": false,
-      "design": "temperature: 120 / 140 / 160 C; 3 replicate pots per arm; in a 15 % pea-isolate matrix; from 1 new laboratory(ies) to reach 3; measure MFT, FFT, H2S and the disulfides by SIDA",
+      "design": "temperature: 120 / 140 / 160 C; 5 replicate pots per arm; in a 15 % pea-isolate matrix; from 1 new laboratory(ies) to reach 3; measure MFT, FFT, H2S and the disulfides by SIDA",
       "engine": "blank in v1 (step 5 adds)"
     },
     {
       "family": "meaty thiols",
       "lever": "time",
       "reading": "needs experiment",
-      "why": "keyed: best cell '2-Furfurylthiol (FFT), T 100-130 C' reads too few laboratories (2 laboratories)",
+      "why": "keyed: best cell '2-Furfurylthiol (FFT), T 100-130 C' reads direction unclear (3 laboratories)",
       "plant_protein_evidence": false,
       "design": "time: 5 / 10 / 20 / 40 min; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 1 new laboratory(ies) to reach 3; measure MFT, FFT, H2S and the disulfides by SIDA",
       "engine": "blank in v1 (step 5 adds)"
@@ -151,17 +151,17 @@
       "lever": "temperature",
       "reading": "needs experiment",
       "why": "keyed: best cell 'Phenylacetaldehyde, time 30-120 min' reads direction unclear (3 laboratories)",
-      "plant_protein_evidence": false,
-      "design": "temperature: 120 / 140 / 160 C; 5 replicate pots per arm; in a 15 % pea-isolate matrix; from 1 new laboratory(ies) to reach 3; measure Strecker aldehydes, methional",
+      "plant_protein_evidence": true,
+      "design": "temperature: 120 / 140 / 160 C; 5 replicate pots per arm; matrix as in the keyed studies; from 1 new laboratory(ies) to reach 3; measure Strecker aldehydes, methional",
       "engine": "blank in v1 (step 5 adds)"
     },
     {
       "family": "Strecker aldehydes, methional",
       "lever": "time",
-      "reading": "needs experiment",
-      "why": "keyed: best cell 'Phenylacetaldehyde, T <100 C' reads direction unclear (3 laboratories)",
+      "reading": "answered by the literature",
+      "why": "Phenylacetaldehyde, T >130 C: +0.27 dex (new laboratory -0.20 to +0.72)",
       "plant_protein_evidence": false,
-      "design": "time: 5 / 10 / 20 / 40 min; 8 replicate pots per arm; in a 15 % pea-isolate matrix; from 1 new laboratory(ies) to reach 3; measure Strecker aldehydes, methional",
+      "design": null,
       "engine": "blank in v1 (step 5 adds)"
     },
     {
@@ -285,16 +285,16 @@
       "family": "pyrazines",
       "lever": "temperature",
       "reading": "needs experiment",
-      "why": "keyed: best cell '2-Acetylthiazole, time >120 min' reads too few laboratories (2 laboratories)",
+      "why": "keyed: best cell '2-Methylpyrazine, time <30 min' reads direction unclear (3 laboratories)",
       "plant_protein_evidence": true,
-      "design": "temperature: 120 / 140 / 160 C; 2 replicate pots per arm; matrix as in the keyed studies; from 1 new laboratory(ies) to reach 3; measure pyrazines",
+      "design": "temperature: 120 / 140 / 160 C; 4 replicate pots per arm; matrix as in the keyed studies; from 1 new laboratory(ies) to reach 3; measure pyrazines",
       "engine": "blank in v1 (step 5 adds)"
     },
     {
       "family": "pyrazines",
       "lever": "time",
       "reading": "needs experiment",
-      "why": "keyed: best cell 'Pyrazines, T 100-130 C' reads direction unclear (3 laboratories)",
+      "why": "keyed: best cell 'Pyrazines, T 100-130 C' reads direction unclear (4 laboratories)",
       "plant_protein_evidence": true,
       "design": "time: 5 / 10 / 20 / 40 min; 2 replicate pots per arm; matrix as in the keyed studies; from 1 new laboratory(ies) to reach 3; measure pyrazines",
       "engine": "blank in v1 (step 5 adds)"
@@ -420,18 +420,18 @@
       "family": "lipid aldehydes (off-notes)",
       "lever": "temperature",
       "reading": "needs experiment",
-      "why": "keyed: best cell 'Nonanal, time 30-120 min' reads too few laboratories (2 laboratories)",
-      "plant_protein_evidence": false,
-      "design": "temperature: 120 / 140 / 160 C; 8 replicate pots per arm; in a 15 % pea-isolate matrix; from 1 new laboratory(ies) to reach 3; measure lipid aldehydes (off-notes)",
+      "why": "keyed: best cell '(E)-2-Nonenal, time <30 min' reads too few laboratories (2 laboratories)",
+      "plant_protein_evidence": true,
+      "design": "temperature: 120 / 140 / 160 C; 8 replicate pots per arm; matrix as in the keyed studies; from 1 new laboratory(ies) to reach 3; measure lipid aldehydes (off-notes)",
       "engine": "blank in v1 (step 5 adds)"
     },
     {
       "family": "lipid aldehydes (off-notes)",
       "lever": "time",
       "reading": "needs experiment",
-      "why": "keyed: best cell 'Hexanal, T >130 C' reads too few laboratories (1 laboratories)",
+      "why": "keyed: best cell 'Nonanal, T >130 C' reads too few laboratories (2 laboratories)",
       "plant_protein_evidence": false,
-      "design": "time: 5 / 10 / 20 / 40 min; 3 replicate pots per arm; in a 15 % pea-isolate matrix; from 2 new laboratory(ies) to reach 3; measure lipid aldehydes (off-notes)",
+      "design": "time: 5 / 10 / 20 / 40 min; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 1 new laboratory(ies) to reach 3; measure lipid aldehydes (off-notes)",
       "engine": "blank in v1 (step 5 adds)"
     },
     {
@@ -555,18 +555,18 @@
       "family": "furanones, furfural",
       "lever": "temperature",
       "reading": "needs experiment",
-      "why": "keyed: best cell 'Furfural, time >120 min' reads direction unclear (4 laboratories)",
-      "plant_protein_evidence": false,
-      "design": "temperature: 120 / 140 / 160 C; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 1 new laboratory(ies) to reach 3; measure furanones, furfural",
+      "why": "keyed: best cell 'Furfural, time 30-120 min' reads direction unclear (4 laboratories)",
+      "plant_protein_evidence": true,
+      "design": "temperature: 120 / 140 / 160 C; 3 replicate pots per arm; matrix as in the keyed studies; from 1 new laboratory(ies) to reach 3; measure furanones, furfural",
       "engine": "blank in v1 (step 5 adds)"
     },
     {
       "family": "furanones, furfural",
       "lever": "time",
-      "reading": "needs experiment",
-      "why": "keyed: best cell '2-Acetylfuran, T 100-130 C' reads too few laboratories (2 laboratories)",
+      "reading": "answered by the literature",
+      "why": "Furfural, T 100-130 C: +0.39 dex (new laboratory -0.18 to +0.98)",
       "plant_protein_evidence": false,
-      "design": "time: 5 / 10 / 20 / 40 min; 2 replicate pots per arm; in a 15 % pea-isolate matrix; from 1 new laboratory(ies) to reach 3; measure furanones, furfural",
+      "design": null,
       "engine": "blank in v1 (step 5 adds)"
     },
     {
@@ -679,23 +679,23 @@
     }
   ],
   "counts": {
-    "answered by the literature": 6,
-    "needs experiment": 69
+    "answered by the literature": 8,
+    "needs experiment": 67
   },
   "provenance": {
     "artifact": "experiment_map",
-    "generated_on": "2026-11-13",
+    "generated_on": "2026-11-14",
     "git": {
-      "commit": "4cf0905223b064ceda8361a5be8ce2c033bfd654",
-      "short": "4cf09052",
-      "branch": "a6-batch2",
+      "commit": "4c9102dc10111f709fd2f01b4fec7fe8c2248247",
+      "short": "4c9102dc",
+      "branch": "temp-time-cluster",
       "dirty": true
     },
     "generated_by": "scripts/generators/build_experiment_map.py",
     "inputs": [
       {
         "path": "results/validation/lever_table.json",
-        "sha256": "571fa5e14baf40d8cf44190fccaa165103f7705491ce00ec34a2b185b3cf7930"
+        "sha256": "cedbc756773dbcba315fcddd5359644529d3eb05ce549baa7663db22dc439fd9"
       },
       {
         "path": "docs/reference/contrast_benchmark/split.yml",

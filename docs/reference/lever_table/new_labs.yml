@@ -345,3 +345,53 @@ yang2012:
   doi: 10.1111/j.1750-3841.2012.02863.x
   pdf: data/articles/yang2012.pdf
   cells: "meat-like volatiles x initial pH (response surface, glutathione); companion of yang2011"
+
+# ---- 2026-11-14, fifth registration: STATUS_AND_PLAN sec. 0 step 15 (temperature and time, one laboratory short),
+# round 1, chosen by the fixed search and the design-only screen and methods check
+# (field_checks/TEMP_TIME_SCREENING_LOG.md), registered BEFORE any reader file exists or any value is read. Laboratories
+# from author lines and lab_ids.yml. They are also A6 post-freeze batch 3 (A6_PREQUENTIAL_PREREG sec. 2: every source
+# keyed after that freeze joins the next batch).
+pastoriza2016:
+  lab: granada_garcia_villanova
+  lab_name: "University of Granada, Dept. of Nutrition and Bromatology (Garcia-Villanova / Rufian-Henares)"
+  doi: 10.3390/foods5040086
+  pdf: data/articles/pastoriza2016.pdf
+  cells: "furfural x time at 100 / 120 / 140 C (glutamine or arginine + dextrinomaltose)"
+lee2024oven:
+  lab: sayfood_paris_saclay
+  lab_name: "SayFood, Universite Paris-Saclay (Lee / Roux / Bonazzi)"
+  doi: 10.1016/j.foodres.2024.114183
+  pdf: data/articles/lee2024.pdf
+  cells: "Strecker aldehydes, furans x baking time at a held oven temperature (glucose +/- leucine)"
+  note: "lee2022 (same laboratory) is in the contrast benchmark (TEST); check for reprinted data while keying, and mark engine_seen if any."
+wang2022lipid:
+  lab: btbu_beijing
+  lab_name: "Beijing Technology and Business University, Beijing Key Laboratory of Flavor Chemistry"
+  doi: 10.1002/ffj.3710
+  pdf: data/articles/Wang2022.pdf
+  cells: "FFT, MFT, furfural x time at 120 C (Maillard and lipid-Maillard model systems)"
+seo2015:
+  lab: dankook_baek
+  lab_name: "Dankook University (Baek Hyung-Hee)"
+  doi: 10.9721/kjfst.2015.47.2.176
+  pdf: data/articles/seo2015.pdf
+  cells: "pyrazines, furans x temperature 230 / 250 / 280 C at 15 min (bulgogi reaction flavour)"
+tan2011:
+  lab: ccnu_yu_ainong
+  lab_name: "Hubei University for Nationalities / CCNU (Yu Ai-Nong)"
+  doi: 10.1002/apj.607
+  pdf: data/articles/tan2011.pdf
+  cells: "nonanal x temperature at 120 min (L-ascorbic acid + L-glutamic acid / L-glutamine)"
+chansataporn2018:
+  lab: kmutt_tangduangdee
+  lab_name: "King Mongkut's University of Technology Thonburi (Tangduangdee)"
+  doi: 10.1002/kin.21224
+  pdf: data/articles/chansataporn2018.pdf
+  cells: "furfural x time at 100 C (chicken meat model system)"
+goncuoglu2023:
+  lab: reading_mottram_parker
+  lab_name: "University of Reading (Parker), with Hacettepe FoQuS (Gokmen)"
+  doi: 10.1016/j.foodchem.2022.135358
+  pdf: data/articles/goncouglu2023.pdf
+  cells: "furans, Strecker aldehydes x time at 160 C (crust-like glucose / wheat flour dough, control arm)"
+  note: "Two-group paper; corresponding author Parker (Reading): split v1 assigns goncuoglu2026, the same pair, to reading_mottram_parker (rule 4)."

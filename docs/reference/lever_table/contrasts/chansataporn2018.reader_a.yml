@@ -1,0 +1,635 @@
+source: chansataporn2018
+pdf: data/articles/chansataporn2018.pdf
+reader: a
+scope_note: All values digitised from figures (no tables); every time point keyed, rule time = longest (24 h model, 30 h extract); SD read from error bars only where bars clear the symbol, else null; phosphate
+  buffer concentration not printed; aldehydes and pyrazines are class sums (individual compounds not printed); volatiles quantified vs propyl butyrate internal standard (keyed relative); HMF not detected
+  in glucose/lysine and not plotted in extract (only furfural detected), no LOD printed; glucose/lysine vs chicken extract differ in many levers and share no plotted odorant, not keyed; the paper's focus
+  is kinetic modelling, so all contrasts incidental; pyridine t0 and pyrazine/aldehyde t0 read as 0 (at axis zero).
+contrasts:
+- id: chansataporn2018-1
+  odorant: pyridine
+  lever_class: time
+  lever: heating time at 100 C
+  focal: false
+  location: Fig. 1G, p. 5
+  digitised: true
+  unit: mmol/L
+  quant_type: relative
+  time_course_rule: longest time
+  ph_control: buffered
+  arms:
+  - label: 0 h
+    lever_value: 0 h
+    value: 0.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: label
+      final_ph: 6.83
+      final_ph_location: Fig. 1C, digitised; text p. 5 prints 6.83 +/- 0.01 (0 h) and 6.74 +/- 0.01 (24 h)
+      temp_C: 100
+      time_min: 0
+      precursors: &id001
+        D-glucose: 2.3 mM
+        L-lysine: 23 mM
+      buffer: phosphate buffer, concentration not printed
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 1.5 h
+    lever_value: 1.5 h
+    value: 1.6e-05
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: label
+      final_ph: 6.804
+      final_ph_location: Fig. 1C, digitised; text p. 5 prints 6.83 +/- 0.01 (0 h) and 6.74 +/- 0.01 (24 h)
+      temp_C: 100
+      time_min: 90
+      precursors: *id001
+      buffer: phosphate buffer, concentration not printed
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 3 h
+    lever_value: 3 h
+    value: 2.1e-05
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: label
+      final_ph: 6.784
+      final_ph_location: Fig. 1C, digitised; text p. 5 prints 6.83 +/- 0.01 (0 h) and 6.74 +/- 0.01 (24 h)
+      temp_C: 100
+      time_min: 180
+      precursors: *id001
+      buffer: phosphate buffer, concentration not printed
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 4.5 h
+    lever_value: 4.5 h
+    value: 5.8e-05
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: label
+      final_ph: 6.777
+      final_ph_location: Fig. 1C, digitised; text p. 5 prints 6.83 +/- 0.01 (0 h) and 6.74 +/- 0.01 (24 h)
+      temp_C: 100
+      time_min: 270
+      precursors: *id001
+      buffer: phosphate buffer, concentration not printed
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 6 h
+    lever_value: 6 h
+    value: 5.1e-05
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: label
+      final_ph: 6.774
+      final_ph_location: Fig. 1C, digitised; text p. 5 prints 6.83 +/- 0.01 (0 h) and 6.74 +/- 0.01 (24 h)
+      temp_C: 100
+      time_min: 360
+      precursors: *id001
+      buffer: phosphate buffer, concentration not printed
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 9 h
+    lever_value: 9 h
+    value: 0.000121
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: label
+      final_ph: 6.774
+      final_ph_location: Fig. 1C, digitised; text p. 5 prints 6.83 +/- 0.01 (0 h) and 6.74 +/- 0.01 (24 h)
+      temp_C: 100
+      time_min: 540
+      precursors: *id001
+      buffer: phosphate buffer, concentration not printed
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 12 h
+    lever_value: 12 h
+    value: 0.00016
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.5
+      ph_basis: label
+      final_ph: 6.771
+      final_ph_location: Fig. 1C, digitised; text p. 5 prints 6.83 +/- 0.01 (0 h) and 6.74 +/- 0.01 (24 h)
+      temp_C: 100
+      time_min: 720
+      precursors: *id001
+      buffer: phosphate buffer, concentration not printed
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 15 h
+    lever_value: 15 h
+    value: 0.000255
+    censor: none
+    limit: null
+    n: 3
+    sd: 5.8e-05
+    conditions:
+      ph: 6.5
+      ph_basis: label
+      final_ph: 6.751
+      final_ph_location: Fig. 1C, digitised; text p. 5 prints 6.83 +/- 0.01 (0 h) and 6.74 +/- 0.01 (24 h)
+      temp_C: 100
+      time_min: 900
+      precursors: *id001
+      buffer: phosphate buffer, concentration not printed
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 18 h
+    lever_value: 18 h
+    value: 0.000282
+    censor: none
+    limit: null
+    n: 3
+    sd: 2.3e-05
+    conditions:
+      ph: 6.5
+      ph_basis: label
+      final_ph: 6.751
+      final_ph_location: Fig. 1C, digitised; text p. 5 prints 6.83 +/- 0.01 (0 h) and 6.74 +/- 0.01 (24 h)
+      temp_C: 100
+      time_min: 1080
+      precursors: *id001
+      buffer: phosphate buffer, concentration not printed
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 21 h
+    lever_value: 21 h
+    value: 0.000389
+    censor: none
+    limit: null
+    n: 3
+    sd: 4.3e-05
+    conditions:
+      ph: 6.5
+      ph_basis: label
+      final_ph: 6.747
+      final_ph_location: Fig. 1C, digitised; text p. 5 prints 6.83 +/- 0.01 (0 h) and 6.74 +/- 0.01 (24 h)
+      temp_C: 100
+      time_min: 1260
+      precursors: *id001
+      buffer: phosphate buffer, concentration not printed
+      matrix: buffer
+      headspace: sealed, unstated
+  - label: 24 h
+    lever_value: 24 h
+    value: 0.000335
+    censor: none
+    limit: null
+    n: 3
+    sd: 5.5e-05
+    conditions:
+      ph: 6.5
+      ph_basis: label
+      final_ph: 6.74
+      final_ph_location: Fig. 1C, digitised; text p. 5 prints 6.83 +/- 0.01 (0 h) and 6.74 +/- 0.01 (24 h)
+      temp_C: 100
+      time_min: 1440
+      precursors: *id001
+      buffer: phosphate buffer, concentration not printed
+      matrix: buffer
+      headspace: sealed, unstated
+- id: chansataporn2018-2
+  odorant: furfural
+  lever_class: time
+  lever: heating time at 100 C
+  focal: false
+  location: Fig. 5B, p. 10
+  digitised: true
+  unit: mmol/L
+  quant_type: absolute
+  time_course_rule: longest time
+  ph_control: unadjusted
+  arms:
+  - label: 0 h
+    lever_value: 0 h
+    value: 0.004
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.53
+      ph_basis: initial
+      final_ph: 6.51
+      final_ph_location: Fig. 5E, digitised
+      temp_C: 100
+      time_min: 0
+      precursors: &id002
+        chicken breast aqueous ethanolic extract (lipid phase discarded): aw 0.95, total reducing sugars ~8.5 mmol glucose/L (Fig. 5A)
+      buffer: none
+      matrix: other (chicken breast meat extract)
+      headspace: sealed, unstated
+  - label: 5 h
+    lever_value: 5 h
+    value: 0.03
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.53
+      ph_basis: initial
+      final_ph: 6.5
+      final_ph_location: Fig. 5E, digitised
+      temp_C: 100
+      time_min: 300
+      precursors: *id002
+      buffer: none
+      matrix: other (chicken breast meat extract)
+      headspace: sealed, unstated
+  - label: 10 h
+    lever_value: 10 h
+    value: 0.09
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.029
+    conditions:
+      ph: 6.53
+      ph_basis: initial
+      final_ph: 6.49
+      final_ph_location: Fig. 5E, digitised
+      temp_C: 100
+      time_min: 600
+      precursors: *id002
+      buffer: none
+      matrix: other (chicken breast meat extract)
+      headspace: sealed, unstated
+  - label: 15 h
+    lever_value: 15 h
+    value: 0.178
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.53
+      ph_basis: initial
+      final_ph: 6.5
+      final_ph_location: Fig. 5E, digitised
+      temp_C: 100
+      time_min: 900
+      precursors: *id002
+      buffer: none
+      matrix: other (chicken breast meat extract)
+      headspace: sealed, unstated
+  - label: 20 h
+    lever_value: 20 h
+    value: 0.274
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.015
+    conditions:
+      ph: 6.53
+      ph_basis: initial
+      final_ph: 6.51
+      final_ph_location: Fig. 5E, digitised
+      temp_C: 100
+      time_min: 1200
+      precursors: *id002
+      buffer: none
+      matrix: other (chicken breast meat extract)
+      headspace: sealed, unstated
+  - label: 25 h
+    lever_value: 25 h
+    value: 0.31
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.53
+      ph_basis: initial
+      final_ph: 6.45
+      final_ph_location: Fig. 5E, digitised
+      temp_C: 100
+      time_min: 1500
+      precursors: *id002
+      buffer: none
+      matrix: other (chicken breast meat extract)
+      headspace: sealed, unstated
+  - label: 30 h
+    lever_value: 30 h
+    value: 0.316
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.029
+    conditions:
+      ph: 6.53
+      ph_basis: initial
+      final_ph: 6.45
+      final_ph_location: Fig. 5E, digitised
+      temp_C: 100
+      time_min: 1800
+      precursors: *id002
+      buffer: none
+      matrix: other (chicken breast meat extract)
+      headspace: sealed, unstated
+- id: chansataporn2018-3
+  odorant: aldehydes (class sum)
+  lever_class: time
+  lever: heating time at 100 C
+  focal: false
+  location: Fig. 5G, p. 10
+  digitised: true
+  unit: mmol/L
+  quant_type: relative
+  time_course_rule: longest time
+  ph_control: unadjusted
+  arms:
+  - label: 0 h
+    lever_value: 0 h
+    value: 0.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.53
+      ph_basis: initial
+      final_ph: 6.51
+      final_ph_location: Fig. 5E, digitised
+      temp_C: 100
+      time_min: 0
+      precursors: *id002
+      buffer: none
+      matrix: other (chicken breast meat extract)
+      headspace: sealed, unstated
+  - label: 5 h
+    lever_value: 5 h
+    value: 0.0042
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.0018
+    conditions:
+      ph: 6.53
+      ph_basis: initial
+      final_ph: 6.5
+      final_ph_location: Fig. 5E, digitised
+      temp_C: 100
+      time_min: 300
+      precursors: *id002
+      buffer: none
+      matrix: other (chicken breast meat extract)
+      headspace: sealed, unstated
+  - label: 10 h
+    lever_value: 10 h
+    value: 0.0031
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.003
+    conditions:
+      ph: 6.53
+      ph_basis: initial
+      final_ph: 6.49
+      final_ph_location: Fig. 5E, digitised
+      temp_C: 100
+      time_min: 600
+      precursors: *id002
+      buffer: none
+      matrix: other (chicken breast meat extract)
+      headspace: sealed, unstated
+  - label: 15 h
+    lever_value: 15 h
+    value: 0.0071
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.53
+      ph_basis: initial
+      final_ph: 6.5
+      final_ph_location: Fig. 5E, digitised
+      temp_C: 100
+      time_min: 900
+      precursors: *id002
+      buffer: none
+      matrix: other (chicken breast meat extract)
+      headspace: sealed, unstated
+  - label: 20 h
+    lever_value: 20 h
+    value: 0.0082
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.003
+    conditions:
+      ph: 6.53
+      ph_basis: initial
+      final_ph: 6.51
+      final_ph_location: Fig. 5E, digitised
+      temp_C: 100
+      time_min: 1200
+      precursors: *id002
+      buffer: none
+      matrix: other (chicken breast meat extract)
+      headspace: sealed, unstated
+  - label: 25 h
+    lever_value: 25 h
+    value: 0.0155
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.005
+    conditions:
+      ph: 6.53
+      ph_basis: initial
+      final_ph: 6.45
+      final_ph_location: Fig. 5E, digitised
+      temp_C: 100
+      time_min: 1500
+      precursors: *id002
+      buffer: none
+      matrix: other (chicken breast meat extract)
+      headspace: sealed, unstated
+  - label: 30 h
+    lever_value: 30 h
+    value: 0.0164
+    censor: none
+    limit: null
+    n: 3
+    sd: 0.006
+    conditions:
+      ph: 6.53
+      ph_basis: initial
+      final_ph: 6.45
+      final_ph_location: Fig. 5E, digitised
+      temp_C: 100
+      time_min: 1800
+      precursors: *id002
+      buffer: none
+      matrix: other (chicken breast meat extract)
+      headspace: sealed, unstated
+- id: chansataporn2018-4
+  odorant: pyrazines (class sum)
+  lever_class: time
+  lever: heating time at 100 C
+  focal: false
+  location: Fig. 5H, p. 10
+  digitised: true
+  unit: mmol/L
+  quant_type: relative
+  time_course_rule: longest time
+  ph_control: unadjusted
+  arms:
+  - label: 0 h
+    lever_value: 0 h
+    value: 0.0
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.53
+      ph_basis: initial
+      final_ph: 6.51
+      final_ph_location: Fig. 5E, digitised
+      temp_C: 100
+      time_min: 0
+      precursors: *id002
+      buffer: none
+      matrix: other (chicken breast meat extract)
+      headspace: sealed, unstated
+  - label: 5 h
+    lever_value: 5 h
+    value: 0.001
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.53
+      ph_basis: initial
+      final_ph: 6.5
+      final_ph_location: Fig. 5E, digitised
+      temp_C: 100
+      time_min: 300
+      precursors: *id002
+      buffer: none
+      matrix: other (chicken breast meat extract)
+      headspace: sealed, unstated
+  - label: 10 h
+    lever_value: 10 h
+    value: 0.001
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.53
+      ph_basis: initial
+      final_ph: 6.49
+      final_ph_location: Fig. 5E, digitised
+      temp_C: 100
+      time_min: 600
+      precursors: *id002
+      buffer: none
+      matrix: other (chicken breast meat extract)
+      headspace: sealed, unstated
+  - label: 15 h
+    lever_value: 15 h
+    value: 0.001
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.53
+      ph_basis: initial
+      final_ph: 6.5
+      final_ph_location: Fig. 5E, digitised
+      temp_C: 100
+      time_min: 900
+      precursors: *id002
+      buffer: none
+      matrix: other (chicken breast meat extract)
+      headspace: sealed, unstated
+  - label: 20 h
+    lever_value: 20 h
+    value: 0.001
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.53
+      ph_basis: initial
+      final_ph: 6.51
+      final_ph_location: Fig. 5E, digitised
+      temp_C: 100
+      time_min: 1200
+      precursors: *id002
+      buffer: none
+      matrix: other (chicken breast meat extract)
+      headspace: sealed, unstated
+  - label: 25 h
+    lever_value: 25 h
+    value: 0.001
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.53
+      ph_basis: initial
+      final_ph: 6.45
+      final_ph_location: Fig. 5E, digitised
+      temp_C: 100
+      time_min: 1500
+      precursors: *id002
+      buffer: none
+      matrix: other (chicken breast meat extract)
+      headspace: sealed, unstated
+  - label: 30 h
+    lever_value: 30 h
+    value: 0.001
+    censor: none
+    limit: null
+    n: 3
+    sd: null
+    conditions:
+      ph: 6.53
+      ph_basis: initial
+      final_ph: 6.45
+      final_ph_location: Fig. 5E, digitised
+      temp_C: 100
+      time_min: 1800
+      precursors: *id002
+      buffer: none
+      matrix: other (chicken breast meat extract)
+      headspace: sealed, unstated

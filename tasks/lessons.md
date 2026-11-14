@@ -654,3 +654,23 @@ have no null answer): counting it as a difference of 0 pulls the mean to zero an
 - **Rule:** the methods check reports how values are printed (table with values, bar chart, heat map of z-scores,
   OAV-filtered table) as a design field, and a paper whose only report cannot give a ratio between arms does not count
   toward a yield rule.
+
+## Bare "pyrazine" resolves to the class key (2026-11-14, third occurrence)
+- **What happened:** `compound_keys` maps the printed name "pyrazine" to the class "Pyrazines". Resolvers in batch 2
+  and step 15 (seo2015, lee2024oven, tan2011) each had to re-key the single compound by hand as "Unsubstituted pyrazine".
+- **Rule:** after every resolver run, grep resolved files for a bare `odorant: Pyrazine` / `pyrazine` and re-key it as
+  "Unsubstituted pyrazine". Follow-up: fix the alias in `data/keys/compounds.yml` after checking which existing rows
+  meant the class.
+
+## Blind readers need separate working directories (2026-11-14)
+- **What happened:** goncuoglu2023's two readers shared one scratchpad; reader B overwrote reader A's digitising
+  script. The resolver re-digitised all 540 agreed points from the vector figure: 40 low points were read high by
+  BOTH readers by the same amount, the signature of shared code. Agreement between readers had stopped meaning
+  independence.
+- **Rule:** each reader gets its own empty working directory named in its brief, and is told to open no other.
+  A resolver of a digitised source re-reads a sample of AGREED points, not only the differing rows.
+
+## Track new records before rebuilding results/README.md (2026-11-14, second occurrence)
+- **What happened:** `build_results_readme.py` maps tracked files only; run before `git add` of a new record, it
+  writes a map without that record, and `test_results_readme` fails in CI ten minutes later.
+- **Rule:** `git add` every new results file first, then rebuild the map and run it with `--check`.

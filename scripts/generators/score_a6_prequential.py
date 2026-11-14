@@ -36,7 +36,11 @@ from src import artifact_io, data_paths, provenance  # noqa: E402
 PREREG = data_paths.LEVER_TABLE_DIR / "A6_PREQUENTIAL_PREREG.md"
 #: batches 1 and 2 are revision 2's (score_a6_post_freeze.BATCHES); batch 3 onward are added here, each registered in
 #: new_labs.yml before any of its values is read.
-BATCHES: Dict[int, Sequence[str]] = {**S.BATCHES}
+BATCHES: Dict[int, Sequence[str]] = {
+    **S.BATCHES,
+    # batch 3 (new_labs.yml, fifth registration, 2026-11-14): STATUS_AND_PLAN step 15's sources, keyed for the
+    # temperature / time cells; they join A6's confirmation set because every post-freeze source does (sec. 2).
+    3: ("pastoriza2016", "lee2024oven", "wang2022lipid", "seo2015", "tan2011", "chansataporn2018", "goncuoglu2023")}
 FIRST_LOOK = (1, 2)
 
 

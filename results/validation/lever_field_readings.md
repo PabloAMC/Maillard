@@ -6,7 +6,7 @@
 
 - pH contrasts: 623; `ph_control`: adjusted_unbuffered 261, buffered 348, unadjusted 9, unstated 5 (check 69, derived 237, keyed 317).
 - final pH on every arm: 146 contrasts; final-pH spread of at least 0.5 pH unit over the arms the slope uses (A6-R2 slope reported): 135.
-- categorical pairs: 2322; base mixture differs beyond the lever (A6-R3 drops them): 37; arms' base from check 498, derived 3302.
+- categorical pairs: 2339; base mixture differs beyond the lever (A6-R3 drops them): 37; arms' base from check 498, derived 3332.
 - reader-checked sources: Zhang2024, ames2001b, feng2022, grosch1992, hincelin1992, hofmann2000, hwang1995, martin2001, mottram2002, park2022mealworm, shibamoto1977, wei2019flax, xu2007, zhang2018soypep, zhou2023, zhou2023c.
 
 ## pH cells with two or more laboratories
@@ -179,8 +179,8 @@
 | 2-Ethyl-3,6-dimethylpyrazine | lipid |  | 5 | 2 | reading_mottram_parker: none: amine+carbonyl, none: amine+carbonyl+sulfur; shou_lai_keqiang: none: amine+carbonyl | none |
 | 2-Furanmethanol | amino acid identity | sign changes inside one laboratory | 45 | 0 | kyunghee_lee: glycine: carbonyl, lysine: carbonyl, none: carbonyl; reading_mottram_parker: glycine: carbonyl; wonkwang_cho_inhee: none: amine+carbonyl | none |
 | 2-Furanmethanol | sugar identity | conflict between laboratories | 24 | 0 | astar_sifbi_chiang: glucose: amine; kyunghee_lee: glucose: amine, glucose: nothing else; nus_liu_shaoquan: none: amine | none |
-| 2-Furfurylthiol (FFT) | lipid |  | 12 | 2 | chonbuk_hwang: none: amine+carbonyl; reading_mottram_parker: none: amine+carbonyl+sulfur | none |
-| 2-Methyl-3-furanthiol (MFT) | lipid |  | 11 | 2 | chonbuk_hwang: none: amine+carbonyl; reading_mottram_parker: none: amine+carbonyl+sulfur | none |
+| 2-Furfurylthiol (FFT) | lipid |  | 14 | 2 | btbu_beijing: 0%: amine+carbonyl+lipid+sulfur; chonbuk_hwang: none: amine+carbonyl; reading_mottram_parker: none: amine+carbonyl+sulfur | none |
+| 2-Methyl-3-furanthiol (MFT) | lipid |  | 13 | 2 | btbu_beijing: 0%: amine+carbonyl+lipid+sulfur; chonbuk_hwang: none: amine+carbonyl; reading_mottram_parker: none: amine+carbonyl+sulfur | none |
 | 2-Methyl-3-furanthiol (MFT) | sugar identity |  | 27 | 1 | dfa_garching: ribose: amine+sulfur, ribose: sulfur; hfut_wei_zhaojun: xylose: amine+other+sulfur; reading_mottram_parker: none: amine+sulfur, ribose 5-phosphate: amine+sulfur | none |
 | 2-Methyl-3-furanthiol (MFT) | sulfur source | answered (level) | 18 | 0 | btbu_beijing: gsh + cysteine + thiamine: carbonyl, gsh + cysteine: carbonyl, none: amine+carbonyl+sulfur; dfa_garching: hydrogen sulfide: other, none: amine+carbonyl+sulfur, none: amine+sulfur, thiamine: amine+sulfur, thiamine: nothing else; ho_network: glutathione: amine+carbonyl, none: amine+carbonyl+sulfur; reading_mottram_parker: cysteine: other | none |
 | 2-Methylpyrazine | amino acid identity | answered (level) | 143 | 0 | caas_bi_jinfeng: arginine: carbonyl+other; ghent_de_kimpe: free amino acids (lysine): carbonyl, gly-gly: carbonyl, glycine (2 mmol): carbonyl, glycine (3 mmol): carbonyl, glycine + lysine: carbonyl, hydrolysed protein: amine+carbonyl; ho_network: cys: amine+carbonyl+sulfur, glutathione: amine+carbonyl, none: amine+carbonyl; njau_zhao_liyan: methionine: amine+carbonyl; reading_mottram_parker: asparagine: nothing else, glycine: carbonyl, glycine: carbonyl+lipid, none: amine+carbonyl+lipid; wonkwang_cho_inhee: arginine: amine+carbonyl | none |
