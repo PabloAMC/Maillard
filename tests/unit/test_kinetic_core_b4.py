@@ -432,6 +432,19 @@ def test_ratios_lead_and_unresolved_ratios_say_so():
     assert comparison["reliability_band_x"] == pytest.approx(math.sqrt(23.0))
 
 
+def test_an_arm_below_the_resolution_floor_keeps_its_ordering_and_claims_no_magnitude():
+    # the P3 dry run's two cases (2026-11-14): DMHF on a ribose arm, norfuraneol on a glucose arm
+    comparison = compare_formulations({"DMHF": 2.7e-10, "NF": 1.35e5, "MFT": 1e-7, "FFT": 2.0},
+                                      {"DMHF": 0.54, "NF": 6e-23, "MFT": 1e-8, "FFT": 1.0}, "ribose", "glucose")
+    rows = {r["compound"]: r for r in comparison["rows"]}
+    assert rows["DMHF"]["direction"] == "undefined" and rows["DMHF"]["ordering"] == "higher_in_glucose"
+    assert rows["DMHF"]["ratio_a_over_b"] == 0.0 and rows["DMHF"]["below_resolution"] is True
+    assert rows["NF"]["ordering"] == "higher_in_ribose" and rows["NF"]["ratio_a_over_b"] == math.inf
+    assert rows["MFT"]["ordering"] == "unresolved"                 # both arms below: no ordering either
+    assert "below_resolution" not in rows["FFT"] and rows["FFT"]["direction"] == "higher_in_ribose"
+    assert comparison["n_undefined"] == 3 and comparison["n_resolved"] == 0
+
+
 # =========================================================================
 # 7. POLICY: NO DFT, NO MOCKED PROTEIN REGISTRY, NO OLD LANE
 # =========================================================================

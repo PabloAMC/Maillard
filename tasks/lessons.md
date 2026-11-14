@@ -674,3 +674,10 @@ have no null answer): counting it as a difference of 0 pulls the mean to zero an
 - **What happened:** `build_results_readme.py` maps tracked files only; run before `git add` of a new record, it
   writes a map without that record, and `test_results_readme` fails in CI ten minutes later.
 - **Rule:** `git add` every new results file first, then rebuild the map and run it with `--check`.
+
+## A new module-level constant in src/kinetic_core needs a home (2026-11-14)
+- **What happened:** `matrix_oav.RESOLUTION_FLOOR_UG_PER_L` was added and read at call time; targeted tests passed,
+  but `test_engine_config.py` (every global the engine reads is a ConfigKey or listed in `tests/engine_constants.py`)
+  failed in CI 20 minutes later.
+- **Rule:** any new UPPERCASE global in `src/kinetic_core/` goes into `tests/engine_constants.py` (or becomes a
+  ConfigKey) in the same commit; add `tests/unit/test_engine_config.py` to the targeted run.

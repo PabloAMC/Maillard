@@ -21,52 +21,58 @@
   "engine": {
     "fingerprint": null
   },
-  "integrations": 126,
+  "integrations": 180,
   "primary_reading": "pea_isolate",
   "summary": {
     "pea_isolate": {
       "cells": 57,
-      "predicted": 3,
-      "partial": 10,
+      "predicted": 9,
+      "partial": 11,
+      "ordering_only": 1,
       "by_lever": {
-        "sugar identity": 1,
-        "sulfur source": 1,
-        "pH": 1
+        "sugar identity": 3,
+        "sulfur source": 3,
+        "pH": 3
       },
       "reasons": {
         "the engine refuses the ratio": 48,
         "no engine target for this odorant": 21,
-        "the engine refuses the arm": 15
+        "the engine refuses the arm": 6,
+        "an arm is below the engine's resolution floor": 5
       }
     },
     "pea_isolate_ph_held": {
       "cells": 57,
-      "predicted": 6,
-      "partial": 15,
+      "predicted": 12,
+      "partial": 16,
+      "ordering_only": 1,
       "by_lever": {
-        "sugar identity": 2,
-        "sulfur source": 2,
-        "pH": 2
+        "sugar identity": 4,
+        "sulfur source": 4,
+        "pH": 4
       },
       "reasons": {
         "the engine refuses the ratio": 23,
         "no engine target for this odorant": 21,
-        "the engine refuses the arm": 15
+        "the engine refuses the arm": 6,
+        "an arm is below the engine's resolution floor": 5
       }
     },
     "added_precursors": {
       "cells": 57,
       "predicted": 0,
       "partial": 0,
+      "ordering_only": 1,
       "by_lever": {
         "sugar identity": 0,
         "sulfur source": 0,
         "pH": 0
       },
       "reasons": {
-        "the engine refuses the ratio": 44,
+        "the engine refuses the ratio": 42,
         "no engine target for this odorant": 21,
-        "the engine refuses the arm": 15
+        "the engine refuses the arm": 15,
+        "an arm is below the engine's resolution floor": 5
       }
     }
   },
@@ -78,6 +84,7 @@
       "target": "2-methyl-3-furanthiol",
       "status": "partial",
       "pairs_predicted": 2,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the ratio: arm B: HEXOSE ENTRY UNIDENTIFIED -- its number is a band-floor artefact, so no ratio is claimed; the model supports the ordering 'pentose above hexose' structurally, not a magnitude"
       ],
@@ -95,6 +102,7 @@
       "target": "2-furfurylthiol",
       "status": "not predicted",
       "pairs_predicted": 0,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the ratio: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the DIRECTION of this ratio is refused: B0 and the carried rivals disagree in its sign (S3). REFUSED, FALSIFIED pH BALANCE (S3; M1b pa",
         "the engine refuses the ratio: arm B: HEXOSE ENTRY UNIDENTIFIED -- its number is a band-floor artefact, so no ratio is claimed; the model supports the ordering 'pentose above hexose' structurally, not a magnitude",
@@ -108,6 +116,7 @@
       "target": "bis(2-methyl-3-furyl) disulfide",
       "status": "not predicted",
       "pairs_predicted": 0,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the ratio: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the spread of this log ratio over B0 and the carried rivals (1.60 dex) exceeds omega. REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i),",
         "the engine refuses the ratio: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the spread of this log ratio over B0 and the carried rivals (1.73 dex) exceeds omega. REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i),",
@@ -121,6 +130,7 @@
       "target": "hydrogen sulfide",
       "status": "not predicted",
       "pairs_predicted": 0,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the ratio: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the spread of this log ratio over B0 and the carried rivals (1.80 dex) exceeds omega. REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i),",
         "the engine refuses the ratio: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the spread of this log ratio over B0 and the carried rivals (1.84 dex) exceeds omega. REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i),",
@@ -165,6 +175,7 @@
       "target": "methional",
       "status": "not predicted",
       "pairs_predicted": 0,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the arm: METHIONINE CHAIN TARGETS 'methional' (wave B22) run on the trunk lane only: the sulfur lane's network keeps the topology its fit was run on and carries these sp"
       ]
@@ -176,6 +187,7 @@
       "target": "2,5-dimethylpyrazine",
       "status": "not predicted",
       "pairs_predicted": 0,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the arm: PYRAZINE TARGETS '2,5-dimethylpyrazine' (wave B18) run on the trunk lane only: the sulfur lane's network keeps the topology its fit was run on and carries these"
       ]
@@ -215,33 +227,54 @@
       "lever": "sugar identity",
       "reading": "pea_isolate",
       "target": "hexanal",
-      "status": "not predicted",
-      "pairs_predicted": 0,
-      "why": [
-        "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
-      ]
+      "status": "predicted",
+      "pairs_predicted": 4,
+      "pairs_ordering_only": 0,
+      "why": [],
+      "main_effect_dex": 0.0,
+      "pair_log_ratios": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "corner_signs_agree": true
     },
     {
       "compound": "Nonanal",
       "lever": "sugar identity",
       "reading": "pea_isolate",
       "target": "nonanal",
-      "status": "not predicted",
-      "pairs_predicted": 0,
-      "why": [
-        "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
-      ]
+      "status": "predicted",
+      "pairs_predicted": 4,
+      "pairs_ordering_only": 0,
+      "why": [],
+      "main_effect_dex": 0.0,
+      "pair_log_ratios": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "corner_signs_agree": true
     },
     {
       "compound": "2-Pentylfuran",
       "lever": "sugar identity",
       "reading": "pea_isolate",
       "target": "2-pentylfuran",
-      "status": "not predicted",
-      "pairs_predicted": 0,
-      "why": [
-        "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
-      ]
+      "status": "predicted",
+      "pairs_predicted": 4,
+      "pairs_ordering_only": 0,
+      "why": [],
+      "main_effect_dex": 0.0,
+      "pair_log_ratios": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "corner_signs_agree": true
     },
     {
       "compound": "1-Octen-3-ol",
@@ -258,35 +291,26 @@
       "lever": "sugar identity",
       "reading": "pea_isolate",
       "target": "dmhf",
-      "status": "predicted",
-      "pairs_predicted": 4,
-      "why": [],
-      "main_effect_dex": -10.230835873685225,
-      "pair_log_ratios": [
-        -9.297801234021996,
-        -8.70062779087651,
-        -11.462432665364037,
-        -11.462481804478356
-      ],
-      "corner_signs_agree": true
+      "status": "ordering only",
+      "pairs_predicted": 0,
+      "pairs_ordering_only": 4,
+      "why": [
+        "an arm is below the engine's resolution floor: the ordering is kept, no magnitude"
+      ]
     },
     {
       "compound": "Norfuraneol (NF)",
       "lever": "sugar identity",
       "reading": "pea_isolate",
       "target": "norfuraneol",
-      "status": "partial",
-      "pairs_predicted": 2,
+      "status": "not predicted",
+      "pairs_predicted": 0,
+      "pairs_ordering_only": 2,
       "why": [
+        "an arm is below the engine's resolution floor: the ordering is kept, no magnitude",
         "the engine refuses the ratio: pea_isolate:glucose/thiamine/pH6.0 is zero; a ratio is undefined",
         "the engine refuses the ratio: pea_isolate:glucose/thiamine/pH7.0 is zero; a ratio is undefined"
-      ],
-      "main_effect_dex": 28.705829008180572,
-      "pair_log_ratios": [
-        27.348417481323732,
-        30.063240535037412
-      ],
-      "corner_signs_agree": true
+      ]
     },
     {
       "compound": "Furfural",
@@ -295,6 +319,7 @@
       "target": "furfural",
       "status": "partial",
       "pairs_predicted": 2,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the ratio: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the spread of this log ratio over B0 and the carried rivals (0.55 dex) exceeds omega. REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i),",
         "the engine refuses the ratio: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the spread of this log ratio over B0 and the carried rivals (0.77 dex) exceeds omega. REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i),"
@@ -313,6 +338,7 @@
       "target": "2-methyl-3-furanthiol",
       "status": "not predicted",
       "pairs_predicted": 0,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the ratio: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the spread of this log ratio over B0 and the carried rivals (1.29 dex) exceeds omega. REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i),",
         "the engine refuses the ratio: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the spread of this log ratio over B0 and the carried rivals (1.49 dex) exceeds omega. REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i),",
@@ -326,6 +352,7 @@
       "target": "2-furfurylthiol",
       "status": "not predicted",
       "pairs_predicted": 0,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the ratio: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the DIRECTION of this ratio is refused: B0 and the carried rivals disagree in its sign (S3). REFUSED, FALSIFIED pH BALANCE (S3; M1b pa",
         "the engine refuses the ratio: arm B: HEXOSE ENTRY UNIDENTIFIED -- its number is a band-floor artefact, so no ratio is claimed; the model supports the ordering 'pentose above hexose' structurally, not a magnitude",
@@ -339,6 +366,7 @@
       "target": "bis(2-methyl-3-furyl) disulfide",
       "status": "not predicted",
       "pairs_predicted": 0,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the ratio: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the spread of this log ratio over B0 and the carried rivals (1.65 dex) exceeds omega. REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i),",
         "the engine refuses the ratio: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the spread of this log ratio over B0 and the carried rivals (1.88 dex) exceeds omega. REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i),",
@@ -352,6 +380,7 @@
       "target": "hydrogen sulfide",
       "status": "partial",
       "pairs_predicted": 1,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the ratio: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the DIRECTION of this ratio is refused: B0 and the carried rivals disagree in its sign (S3). REFUSED, FALSIFIED pH BALANCE (S3; M1b pa",
         "the engine refuses the ratio: pea_isolate:glucose/thiamine/pH6.0 is zero; a ratio is undefined",
@@ -400,6 +429,7 @@
       "target": "methional",
       "status": "not predicted",
       "pairs_predicted": 0,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the arm: METHIONINE CHAIN TARGETS 'methional' (wave B22) run on the trunk lane only: the sulfur lane's network keeps the topology its fit was run on and carries these sp"
       ]
@@ -411,6 +441,7 @@
       "target": "2,5-dimethylpyrazine",
       "status": "not predicted",
       "pairs_predicted": 0,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the arm: PYRAZINE TARGETS '2,5-dimethylpyrazine' (wave B18) run on the trunk lane only: the sulfur lane's network keeps the topology its fit was run on and carries these"
       ]
@@ -450,33 +481,54 @@
       "lever": "sulfur source",
       "reading": "pea_isolate",
       "target": "hexanal",
-      "status": "not predicted",
-      "pairs_predicted": 0,
-      "why": [
-        "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
-      ]
+      "status": "predicted",
+      "pairs_predicted": 4,
+      "pairs_ordering_only": 0,
+      "why": [],
+      "main_effect_dex": 0.0,
+      "pair_log_ratios": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "corner_signs_agree": true
     },
     {
       "compound": "Nonanal",
       "lever": "sulfur source",
       "reading": "pea_isolate",
       "target": "nonanal",
-      "status": "not predicted",
-      "pairs_predicted": 0,
-      "why": [
-        "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
-      ]
+      "status": "predicted",
+      "pairs_predicted": 4,
+      "pairs_ordering_only": 0,
+      "why": [],
+      "main_effect_dex": 0.0,
+      "pair_log_ratios": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "corner_signs_agree": true
     },
     {
       "compound": "2-Pentylfuran",
       "lever": "sulfur source",
       "reading": "pea_isolate",
       "target": "2-pentylfuran",
-      "status": "not predicted",
-      "pairs_predicted": 0,
-      "why": [
-        "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
-      ]
+      "status": "predicted",
+      "pairs_predicted": 4,
+      "pairs_ordering_only": 0,
+      "why": [],
+      "main_effect_dex": 0.0,
+      "pair_log_ratios": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "corner_signs_agree": true
     },
     {
       "compound": "1-Octen-3-ol",
@@ -493,15 +545,16 @@
       "lever": "sulfur source",
       "reading": "pea_isolate",
       "target": "dmhf",
-      "status": "predicted",
-      "pairs_predicted": 4,
-      "why": [],
-      "main_effect_dex": -1.2319691095422685,
+      "status": "partial",
+      "pairs_predicted": 2,
+      "pairs_ordering_only": 2,
+      "why": [
+        "an arm is below the engine's resolution floor: the ordering is kept, no magnitude"
+      ],
+      "main_effect_dex": -0.0003477483062964941,
       "pair_log_ratios": [
         -0.00025151040498984443,
-        -0.00044398620760314377,
-        -2.164882941747031,
-        -2.7622979998094497
+        -0.00044398620760314377
       ],
       "corner_signs_agree": true
     },
@@ -512,6 +565,7 @@
       "target": "norfuraneol",
       "status": "not predicted",
       "pairs_predicted": 0,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the ratio: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the spread of this log ratio over B0 and the carried rivals (0.50 dex) exceeds omega. REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i),",
         "the engine refuses the ratio: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the spread of this log ratio over B0 and the carried rivals (0.66 dex) exceeds omega. REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i),",
@@ -526,6 +580,7 @@
       "target": "furfural",
       "status": "partial",
       "pairs_predicted": 2,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the ratio: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the DIRECTION of this ratio is refused: B0 and the carried rivals disagree in its sign (S3). REFUSED, FALSIFIED pH BALANCE (S3; M1b pa",
         "the engine refuses the ratio: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the spread of this log ratio over B0 and the carried rivals (0.47 dex) exceeds omega. REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i),"
@@ -544,6 +599,7 @@
       "target": "2-methyl-3-furanthiol",
       "status": "partial",
       "pairs_predicted": 2,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the ratio: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the DIRECTION of this ratio is refused: B0 and the carried rivals disagree in its sign (S3). REFUSED, FALSIFIED pH BALANCE (S3; M1b pa",
         "the engine refuses the ratio: arm BOTH: HEXOSE ENTRY UNIDENTIFIED -- its number is a band-floor artefact, so no ratio is claimed; the model supports the ordering 'pentose above hexose' structurally, not a magnitude"
@@ -562,6 +618,7 @@
       "target": "2-furfurylthiol",
       "status": "not predicted",
       "pairs_predicted": 0,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the ratio: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the spread of this log ratio over B0 and the carried rivals (1.00 dex) exceeds omega. REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i),",
         "the engine refuses the ratio: arm BOTH: HEXOSE ENTRY UNIDENTIFIED -- its number is a band-floor artefact, so no ratio is claimed; the model supports the ordering 'pentose above hexose' structurally, not a magnitude",
@@ -576,6 +633,7 @@
       "target": "bis(2-methyl-3-furyl) disulfide",
       "status": "partial",
       "pairs_predicted": 2,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the ratio: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the DIRECTION of this ratio is refused: B0 and the carried rivals disagree in its sign (S3). REFUSED, FALSIFIED pH BALANCE (S3; M1b pa",
         "the engine refuses the ratio: arm BOTH: HEXOSE ENTRY UNIDENTIFIED -- its number is a band-floor artefact, so no ratio is claimed; the model supports the ordering 'pentose above hexose' structurally, not a magnitude"
@@ -594,6 +652,7 @@
       "target": "hydrogen sulfide",
       "status": "partial",
       "pairs_predicted": 1,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the ratio: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the spread of this log ratio over B0 and the carried rivals (0.96 dex) exceeds omega. REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i),",
         "the engine refuses the ratio: pea_isolate:glucose/thiamine/pH6.0 is zero; a ratio is undefined",
@@ -642,6 +701,7 @@
       "target": "methional",
       "status": "not predicted",
       "pairs_predicted": 0,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the arm: METHIONINE CHAIN TARGETS 'methional' (wave B22) run on the trunk lane only: the sulfur lane's network keeps the topology its fit was run on and carries these sp"
       ]
@@ -653,6 +713,7 @@
       "target": "2,5-dimethylpyrazine",
       "status": "not predicted",
       "pairs_predicted": 0,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the arm: PYRAZINE TARGETS '2,5-dimethylpyrazine' (wave B18) run on the trunk lane only: the sulfur lane's network keeps the topology its fit was run on and carries these"
       ]
@@ -692,33 +753,54 @@
       "lever": "pH",
       "reading": "pea_isolate",
       "target": "hexanal",
-      "status": "not predicted",
-      "pairs_predicted": 0,
-      "why": [
-        "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
-      ]
+      "status": "predicted",
+      "pairs_predicted": 4,
+      "pairs_ordering_only": 0,
+      "why": [],
+      "main_effect_dex": 0.0,
+      "pair_log_ratios": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "corner_signs_agree": true
     },
     {
       "compound": "Nonanal",
       "lever": "pH",
       "reading": "pea_isolate",
       "target": "nonanal",
-      "status": "not predicted",
-      "pairs_predicted": 0,
-      "why": [
-        "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
-      ]
+      "status": "predicted",
+      "pairs_predicted": 4,
+      "pairs_ordering_only": 0,
+      "why": [],
+      "main_effect_dex": 0.0,
+      "pair_log_ratios": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "corner_signs_agree": true
     },
     {
       "compound": "2-Pentylfuran",
       "lever": "pH",
       "reading": "pea_isolate",
       "target": "2-pentylfuran",
-      "status": "not predicted",
-      "pairs_predicted": 0,
-      "why": [
-        "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
-      ]
+      "status": "predicted",
+      "pairs_predicted": 4,
+      "pairs_ordering_only": 0,
+      "why": [],
+      "main_effect_dex": 0.0,
+      "pair_log_ratios": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "corner_signs_agree": true
     },
     {
       "compound": "1-Octen-3-ol",
@@ -735,15 +817,16 @@
       "lever": "pH",
       "reading": "pea_isolate",
       "target": "dmhf",
-      "status": "predicted",
-      "pairs_predicted": 4,
-      "why": [],
-      "main_effect_dex": 0.14937904251035092,
+      "status": "partial",
+      "pairs_predicted": 2,
+      "pairs_ordering_only": 2,
+      "why": [
+        "an arm is below the engine's resolution floor: the ordering is kept, no magnitude"
+      ],
+      "main_effect_dex": 9.796650255858141e-05,
       "pair_log_ratios": [
         0.00019420440386523527,
-        1.7286012519275477e-06,
-        0.5973676475493525,
-        -4.741051306599928e-05
+        1.7286012519275477e-06
       ],
       "corner_signs_agree": true
     },
@@ -753,14 +836,15 @@
       "reading": "pea_isolate",
       "target": "norfuraneol",
       "status": "partial",
-      "pairs_predicted": 2,
+      "pairs_predicted": 1,
+      "pairs_ordering_only": 1,
       "why": [
+        "an arm is below the engine's resolution floor: the ordering is kept, no magnitude",
         "the engine refuses the ratio: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the spread of this log ratio over B0 and the carried rivals (0.44 dex) exceeds omega. REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i),",
         "the engine refuses the ratio: pea_isolate:glucose/thiamine/pH6.0 is zero; a ratio is undefined"
       ],
-      "main_effect_dex": -1.209999482057102,
+      "main_effect_dex": -0.0008466564877694267,
       "pair_log_ratios": [
-        -2.4191523076264345,
         -0.0008466564877694267
       ],
       "corner_signs_agree": true
@@ -772,6 +856,7 @@
       "target": "furfural",
       "status": "partial",
       "pairs_predicted": 2,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the ratio: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the spread of this log ratio over B0 and the carried rivals (0.55 dex) exceeds omega. REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i),",
         "the engine refuses the ratio: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the spread of this log ratio over B0 and the carried rivals (0.57 dex) exceeds omega. REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i),"
@@ -790,6 +875,7 @@
       "target": "2-methyl-3-furanthiol",
       "status": "partial",
       "pairs_predicted": 2,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the ratio: arm B: HEXOSE ENTRY UNIDENTIFIED -- its number is a band-floor artefact, so no ratio is claimed; the model supports the ordering 'pentose above hexose' structurally, not a magnitude"
       ],
@@ -807,6 +893,7 @@
       "target": "2-furfurylthiol",
       "status": "partial",
       "pairs_predicted": 1,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the ratio: arm B: HEXOSE ENTRY UNIDENTIFIED -- its number is a band-floor artefact, so no ratio is claimed; the model supports the ordering 'pentose above hexose' structurally, not a magnitude",
         "the engine refuses the ratio: pea_isolate_ph_held:glucose/thiamine/pH6.0 is zero; a ratio is undefined"
@@ -824,6 +911,7 @@
       "target": "bis(2-methyl-3-furyl) disulfide",
       "status": "partial",
       "pairs_predicted": 2,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the ratio: arm B: HEXOSE ENTRY UNIDENTIFIED -- its number is a band-floor artefact, so no ratio is claimed; the model supports the ordering 'pentose above hexose' structurally, not a magnitude"
       ],
@@ -841,6 +929,7 @@
       "target": "hydrogen sulfide",
       "status": "partial",
       "pairs_predicted": 3,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the ratio: pea_isolate_ph_held:glucose/thiamine/pH6.0 is zero; a ratio is undefined"
       ],
@@ -889,6 +978,7 @@
       "target": "methional",
       "status": "not predicted",
       "pairs_predicted": 0,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the arm: METHIONINE CHAIN TARGETS 'methional' (wave B22) run on the trunk lane only: the sulfur lane's network keeps the topology its fit was run on and carries these sp"
       ]
@@ -900,6 +990,7 @@
       "target": "2,5-dimethylpyrazine",
       "status": "not predicted",
       "pairs_predicted": 0,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the arm: PYRAZINE TARGETS '2,5-dimethylpyrazine' (wave B18) run on the trunk lane only: the sulfur lane's network keeps the topology its fit was run on and carries these"
       ]
@@ -939,33 +1030,54 @@
       "lever": "sugar identity",
       "reading": "pea_isolate_ph_held",
       "target": "hexanal",
-      "status": "not predicted",
-      "pairs_predicted": 0,
-      "why": [
-        "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
-      ]
+      "status": "predicted",
+      "pairs_predicted": 4,
+      "pairs_ordering_only": 0,
+      "why": [],
+      "main_effect_dex": 0.0,
+      "pair_log_ratios": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "corner_signs_agree": true
     },
     {
       "compound": "Nonanal",
       "lever": "sugar identity",
       "reading": "pea_isolate_ph_held",
       "target": "nonanal",
-      "status": "not predicted",
-      "pairs_predicted": 0,
-      "why": [
-        "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
-      ]
+      "status": "predicted",
+      "pairs_predicted": 4,
+      "pairs_ordering_only": 0,
+      "why": [],
+      "main_effect_dex": 0.0,
+      "pair_log_ratios": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "corner_signs_agree": true
     },
     {
       "compound": "2-Pentylfuran",
       "lever": "sugar identity",
       "reading": "pea_isolate_ph_held",
       "target": "2-pentylfuran",
-      "status": "not predicted",
-      "pairs_predicted": 0,
-      "why": [
-        "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
-      ]
+      "status": "predicted",
+      "pairs_predicted": 4,
+      "pairs_ordering_only": 0,
+      "why": [],
+      "main_effect_dex": 0.0,
+      "pair_log_ratios": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "corner_signs_agree": true
     },
     {
       "compound": "1-Octen-3-ol",
@@ -982,35 +1094,26 @@
       "lever": "sugar identity",
       "reading": "pea_isolate_ph_held",
       "target": "dmhf",
-      "status": "predicted",
-      "pairs_predicted": 4,
-      "why": [],
-      "main_effect_dex": -9.797811160992271,
-      "pair_log_ratios": [
-        -8.10840563906521,
-        -8.156316556036801,
-        -11.463251970216765,
-        -11.463270478650312
-      ],
-      "corner_signs_agree": true
+      "status": "ordering only",
+      "pairs_predicted": 0,
+      "pairs_ordering_only": 4,
+      "why": [
+        "an arm is below the engine's resolution floor: the ordering is kept, no magnitude"
+      ]
     },
     {
       "compound": "Norfuraneol (NF)",
       "lever": "sugar identity",
       "reading": "pea_isolate_ph_held",
       "target": "norfuraneol",
-      "status": "partial",
-      "pairs_predicted": 2,
+      "status": "not predicted",
+      "pairs_predicted": 0,
+      "pairs_ordering_only": 2,
       "why": [
+        "an arm is below the engine's resolution floor: the ordering is kept, no magnitude",
         "the engine refuses the ratio: pea_isolate_ph_held:glucose/thiamine/pH6.0 is zero; a ratio is undefined",
         "the engine refuses the ratio: pea_isolate_ph_held:glucose/thiamine/pH7.0 is zero; a ratio is undefined"
-      ],
-      "main_effect_dex": 26.72174841402265,
-      "pair_log_ratios": [
-        32.29847057783363,
-        21.145026250211664
-      ],
-      "corner_signs_agree": true
+      ]
     },
     {
       "compound": "Furfural",
@@ -1019,6 +1122,7 @@
       "target": "furfural",
       "status": "predicted",
       "pairs_predicted": 4,
+      "pairs_ordering_only": 0,
       "why": [],
       "main_effect_dex": 2.5763135701442352,
       "pair_log_ratios": [
@@ -1036,6 +1140,7 @@
       "target": "2-methyl-3-furanthiol",
       "status": "partial",
       "pairs_predicted": 2,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the ratio: arm B: HEXOSE ENTRY UNIDENTIFIED -- its number is a band-floor artefact, so no ratio is claimed; the model supports the ordering 'pentose above hexose' structurally, not a magnitude"
       ],
@@ -1053,6 +1158,7 @@
       "target": "2-furfurylthiol",
       "status": "partial",
       "pairs_predicted": 1,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the ratio: arm B: HEXOSE ENTRY UNIDENTIFIED -- its number is a band-floor artefact, so no ratio is claimed; the model supports the ordering 'pentose above hexose' structurally, not a magnitude",
         "the engine refuses the ratio: pea_isolate_ph_held:ribose/thiamine/pH6.0 is zero; a ratio is undefined"
@@ -1070,6 +1176,7 @@
       "target": "bis(2-methyl-3-furyl) disulfide",
       "status": "partial",
       "pairs_predicted": 2,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the ratio: arm B: HEXOSE ENTRY UNIDENTIFIED -- its number is a band-floor artefact, so no ratio is claimed; the model supports the ordering 'pentose above hexose' structurally, not a magnitude"
       ],
@@ -1087,6 +1194,7 @@
       "target": "hydrogen sulfide",
       "status": "partial",
       "pairs_predicted": 2,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the ratio: pea_isolate_ph_held:glucose/thiamine/pH6.0 is zero; a ratio is undefined",
         "the engine refuses the ratio: pea_isolate_ph_held:ribose/thiamine/pH6.0 is zero; a ratio is undefined"
@@ -1135,6 +1243,7 @@
       "target": "methional",
       "status": "not predicted",
       "pairs_predicted": 0,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the arm: METHIONINE CHAIN TARGETS 'methional' (wave B22) run on the trunk lane only: the sulfur lane's network keeps the topology its fit was run on and carries these sp"
       ]
@@ -1146,6 +1255,7 @@
       "target": "2,5-dimethylpyrazine",
       "status": "not predicted",
       "pairs_predicted": 0,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the arm: PYRAZINE TARGETS '2,5-dimethylpyrazine' (wave B18) run on the trunk lane only: the sulfur lane's network keeps the topology its fit was run on and carries these"
       ]
@@ -1185,33 +1295,54 @@
       "lever": "sulfur source",
       "reading": "pea_isolate_ph_held",
       "target": "hexanal",
-      "status": "not predicted",
-      "pairs_predicted": 0,
-      "why": [
-        "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
-      ]
+      "status": "predicted",
+      "pairs_predicted": 4,
+      "pairs_ordering_only": 0,
+      "why": [],
+      "main_effect_dex": 0.0,
+      "pair_log_ratios": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "corner_signs_agree": true
     },
     {
       "compound": "Nonanal",
       "lever": "sulfur source",
       "reading": "pea_isolate_ph_held",
       "target": "nonanal",
-      "status": "not predicted",
-      "pairs_predicted": 0,
-      "why": [
-        "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
-      ]
+      "status": "predicted",
+      "pairs_predicted": 4,
+      "pairs_ordering_only": 0,
+      "why": [],
+      "main_effect_dex": 0.0,
+      "pair_log_ratios": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "corner_signs_agree": true
     },
     {
       "compound": "2-Pentylfuran",
       "lever": "sulfur source",
       "reading": "pea_isolate_ph_held",
       "target": "2-pentylfuran",
-      "status": "not predicted",
-      "pairs_predicted": 0,
-      "why": [
-        "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
-      ]
+      "status": "predicted",
+      "pairs_predicted": 4,
+      "pairs_ordering_only": 0,
+      "why": [],
+      "main_effect_dex": 0.0,
+      "pair_log_ratios": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "corner_signs_agree": true
     },
     {
       "compound": "1-Octen-3-ol",
@@ -1228,15 +1359,16 @@
       "lever": "sulfur source",
       "reading": "pea_isolate_ph_held",
       "target": "dmhf",
-      "status": "predicted",
-      "pairs_predicted": 4,
-      "why": [],
-      "main_effect_dex": -1.6654500529695977,
+      "status": "partial",
+      "pairs_predicted": 2,
+      "pairs_ordering_only": 2,
+      "why": [
+        "an arm is below the engine's resolution floor: the ordering is kept, no magnitude"
+      ],
+      "main_effect_dex": 1.0471668764814183e-08,
       "pair_log_ratios": [
         1.178439700934591e-08,
-        9.158940520282456e-09,
-        -3.3548463193671574,
-        -3.306953913454571
+        9.158940520282456e-09
       ],
       "corner_signs_agree": true
     },
@@ -1247,6 +1379,7 @@
       "target": "norfuraneol",
       "status": "partial",
       "pairs_predicted": 2,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the ratio: pea_isolate_ph_held:glucose/thiamine/pH6.0 is zero; a ratio is undefined",
         "the engine refuses the ratio: pea_isolate_ph_held:glucose/thiamine/pH7.0 is zero; a ratio is undefined"
@@ -1265,6 +1398,7 @@
       "target": "furfural",
       "status": "predicted",
       "pairs_predicted": 4,
+      "pairs_ordering_only": 0,
       "why": [],
       "main_effect_dex": 0.3335764856151745,
       "pair_log_ratios": [
@@ -1282,6 +1416,7 @@
       "target": "2-methyl-3-furanthiol",
       "status": "partial",
       "pairs_predicted": 3,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the ratio: arm BOTH: HEXOSE ENTRY UNIDENTIFIED -- its number is a band-floor artefact, so no ratio is claimed; the model supports the ordering 'pentose above hexose' structurally, not a magnitude"
       ],
@@ -1300,6 +1435,7 @@
       "target": "2-furfurylthiol",
       "status": "partial",
       "pairs_predicted": 1,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the ratio: arm BOTH: HEXOSE ENTRY UNIDENTIFIED -- its number is a band-floor artefact, so no ratio is claimed; the model supports the ordering 'pentose above hexose' structurally, not a magnitude",
         "the engine refuses the ratio: pea_isolate_ph_held:glucose/thiamine/pH6.0 is zero; a ratio is undefined",
@@ -1318,6 +1454,7 @@
       "target": "bis(2-methyl-3-furyl) disulfide",
       "status": "partial",
       "pairs_predicted": 3,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the ratio: arm BOTH: HEXOSE ENTRY UNIDENTIFIED -- its number is a band-floor artefact, so no ratio is claimed; the model supports the ordering 'pentose above hexose' structurally, not a magnitude"
       ],
@@ -1336,6 +1473,7 @@
       "target": "hydrogen sulfide",
       "status": "partial",
       "pairs_predicted": 2,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the ratio: pea_isolate_ph_held:glucose/thiamine/pH6.0 is zero; a ratio is undefined",
         "the engine refuses the ratio: pea_isolate_ph_held:ribose/thiamine/pH6.0 is zero; a ratio is undefined"
@@ -1384,6 +1522,7 @@
       "target": "methional",
       "status": "not predicted",
       "pairs_predicted": 0,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the arm: METHIONINE CHAIN TARGETS 'methional' (wave B22) run on the trunk lane only: the sulfur lane's network keeps the topology its fit was run on and carries these sp"
       ]
@@ -1395,6 +1534,7 @@
       "target": "2,5-dimethylpyrazine",
       "status": "not predicted",
       "pairs_predicted": 0,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the arm: PYRAZINE TARGETS '2,5-dimethylpyrazine' (wave B18) run on the trunk lane only: the sulfur lane's network keeps the topology its fit was run on and carries these"
       ]
@@ -1434,33 +1574,54 @@
       "lever": "pH",
       "reading": "pea_isolate_ph_held",
       "target": "hexanal",
-      "status": "not predicted",
-      "pairs_predicted": 0,
-      "why": [
-        "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
-      ]
+      "status": "predicted",
+      "pairs_predicted": 4,
+      "pairs_ordering_only": 0,
+      "why": [],
+      "main_effect_dex": 0.0,
+      "pair_log_ratios": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "corner_signs_agree": true
     },
     {
       "compound": "Nonanal",
       "lever": "pH",
       "reading": "pea_isolate_ph_held",
       "target": "nonanal",
-      "status": "not predicted",
-      "pairs_predicted": 0,
-      "why": [
-        "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
-      ]
+      "status": "predicted",
+      "pairs_predicted": 4,
+      "pairs_ordering_only": 0,
+      "why": [],
+      "main_effect_dex": 0.0,
+      "pair_log_ratios": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "corner_signs_agree": true
     },
     {
       "compound": "2-Pentylfuran",
       "lever": "pH",
       "reading": "pea_isolate_ph_held",
       "target": "2-pentylfuran",
-      "status": "not predicted",
-      "pairs_predicted": 0,
-      "why": [
-        "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
-      ]
+      "status": "predicted",
+      "pairs_predicted": 4,
+      "pairs_ordering_only": 0,
+      "why": [],
+      "main_effect_dex": 0.0,
+      "pair_log_ratios": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "corner_signs_agree": true
     },
     {
       "compound": "1-Octen-3-ol",
@@ -1477,15 +1638,16 @@
       "lever": "pH",
       "reading": "pea_isolate_ph_held",
       "target": "dmhf",
-      "status": "predicted",
-      "pairs_predicted": 4,
-      "why": [],
-      "main_effect_dex": -0.011979715519364881,
+      "status": "partial",
+      "pairs_predicted": 2,
+      "pairs_ordering_only": 2,
+      "why": [
+        "an arm is below the engine's resolution floor: the ordering is kept, no magnitude"
+      ],
+      "main_effect_dex": 2.6408319194003137e-06,
       "pair_log_ratios": [
         2.6421446476498157e-06,
-        2.639519191150812e-06,
-        -0.04790827482694234,
-        -1.586891435598336e-05
+        2.639519191150812e-06
       ],
       "corner_signs_agree": true
     },
@@ -1495,17 +1657,18 @@
       "reading": "pea_isolate_ph_held",
       "target": "norfuraneol",
       "status": "partial",
-      "pairs_predicted": 3,
+      "pairs_predicted": 2,
+      "pairs_ordering_only": 1,
       "why": [
+        "an arm is below the engine's resolution floor: the ordering is kept, no magnitude",
         "the engine refuses the ratio: pea_isolate_ph_held:glucose/thiamine/pH6.0 is zero; a ratio is undefined"
       ],
-      "main_effect_dex": 3.701948228086318,
+      "main_effect_dex": -0.011974703304503995,
       "pair_log_ratios": [
-        11.129794090867962,
         -0.023650236754007403,
         -0.0002991698550005863
       ],
-      "corner_signs_agree": false
+      "corner_signs_agree": true
     },
     {
       "compound": "Furfural",
@@ -1514,6 +1677,7 @@
       "target": "furfural",
       "status": "predicted",
       "pairs_predicted": 4,
+      "pairs_ordering_only": 0,
       "why": [],
       "main_effect_dex": -1.336497832025299,
       "pair_log_ratios": [
@@ -1531,6 +1695,7 @@
       "target": "2-methyl-3-furanthiol",
       "status": "not predicted",
       "pairs_predicted": 0,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the ratio: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): an arm's carried rivals could not be run, so the ratio's independence from the balance is not shown. REFUSED, FALSIFIED pH BALANCE (S3",
         "the engine refuses the ratio: arm B: HEXOSE ENTRY UNIDENTIFIED -- its number is a band-floor artefact, so no ratio is claimed; the model supports the ordering 'pentose above hexose' structurally, not a magnitude"
@@ -1543,6 +1708,7 @@
       "target": "2-furfurylthiol",
       "status": "not predicted",
       "pairs_predicted": 0,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the ratio: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): an arm's carried rivals could not be run, so the ratio's independence from the balance is not shown. REFUSED, FALSIFIED pH BALANCE (S3",
         "the engine refuses the ratio: added_precursors:glucose/thiamine/pH6.0 is zero; a ratio is undefined",
@@ -1556,6 +1722,7 @@
       "target": "bis(2-methyl-3-furyl) disulfide",
       "status": "not predicted",
       "pairs_predicted": 0,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the ratio: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): an arm's carried rivals could not be run, so the ratio's independence from the balance is not shown. REFUSED, FALSIFIED pH BALANCE (S3",
         "the engine refuses the ratio: arm B: HEXOSE ENTRY UNIDENTIFIED -- its number is a band-floor artefact, so no ratio is claimed; the model supports the ordering 'pentose above hexose' structurally, not a magnitude"
@@ -1568,6 +1735,7 @@
       "target": "hydrogen sulfide",
       "status": "not predicted",
       "pairs_predicted": 0,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the ratio: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): an arm's carried rivals could not be run, so the ratio's independence from the balance is not shown. REFUSED, FALSIFIED pH BALANCE (S3",
         "the engine refuses the ratio: added_precursors:glucose/thiamine/pH6.0 is zero; a ratio is undefined"
@@ -1610,6 +1778,7 @@
       "target": "methional",
       "status": "not predicted",
       "pairs_predicted": 0,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the arm: METHIONINE CHAIN TARGETS 'methional' (wave B22) run on the trunk lane only: the sulfur lane's network keeps the topology its fit was run on and carries these sp"
       ]
@@ -1621,6 +1790,7 @@
       "target": "2,5-dimethylpyrazine",
       "status": "not predicted",
       "pairs_predicted": 0,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the arm: PYRAZINE TARGETS '2,5-dimethylpyrazine' (wave B18) run on the trunk lane only: the sulfur lane's network keeps the topology its fit was run on and carries these"
       ]
@@ -1662,6 +1832,7 @@
       "target": "hexanal",
       "status": "not predicted",
       "pairs_predicted": 0,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
       ]
@@ -1673,6 +1844,7 @@
       "target": "nonanal",
       "status": "not predicted",
       "pairs_predicted": 0,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
       ]
@@ -1684,6 +1856,7 @@
       "target": "2-pentylfuran",
       "status": "not predicted",
       "pairs_predicted": 0,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
       ]
@@ -1703,10 +1876,11 @@
       "lever": "sugar identity",
       "reading": "added_precursors",
       "target": "dmhf",
-      "status": "not predicted",
+      "status": "ordering only",
       "pairs_predicted": 0,
+      "pairs_ordering_only": 4,
       "why": [
-        "the engine refuses the ratio: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): an arm's carried rivals could not be run, so the ratio's independence from the balance is not shown. REFUSED, FALSIFIED pH BALANCE (S3"
+        "an arm is below the engine's resolution floor: the ordering is kept, no magnitude"
       ]
     },
     {
@@ -1716,8 +1890,9 @@
       "target": "norfuraneol",
       "status": "not predicted",
       "pairs_predicted": 0,
+      "pairs_ordering_only": 2,
       "why": [
-        "the engine refuses the ratio: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): an arm's carried rivals could not be run, so the ratio's independence from the balance is not shown. REFUSED, FALSIFIED pH BALANCE (S3",
+        "an arm is below the engine's resolution floor: the ordering is kept, no magnitude",
         "the engine refuses the ratio: added_precursors:glucose/thiamine/pH6.0 is zero; a ratio is undefined",
         "the engine refuses the ratio: added_precursors:glucose/thiamine/pH7.0 is zero; a ratio is undefined"
       ]
@@ -1729,6 +1904,7 @@
       "target": "furfural",
       "status": "not predicted",
       "pairs_predicted": 0,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the ratio: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): an arm's carried rivals could not be run, so the ratio's independence from the balance is not shown. REFUSED, FALSIFIED pH BALANCE (S3"
       ]
@@ -1740,6 +1916,7 @@
       "target": "2-methyl-3-furanthiol",
       "status": "not predicted",
       "pairs_predicted": 0,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the ratio: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): an arm's carried rivals could not be run, so the ratio's independence from the balance is not shown. REFUSED, FALSIFIED pH BALANCE (S3",
         "the engine refuses the ratio: arm B: HEXOSE ENTRY UNIDENTIFIED -- its number is a band-floor artefact, so no ratio is claimed; the model supports the ordering 'pentose above hexose' structurally, not a magnitude"
@@ -1752,6 +1929,7 @@
       "target": "2-furfurylthiol",
       "status": "not predicted",
       "pairs_predicted": 0,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the ratio: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): an arm's carried rivals could not be run, so the ratio's independence from the balance is not shown. REFUSED, FALSIFIED pH BALANCE (S3",
         "the engine refuses the ratio: added_precursors:ribose/thiamine/pH6.0 is zero; a ratio is undefined",
@@ -1765,6 +1943,7 @@
       "target": "bis(2-methyl-3-furyl) disulfide",
       "status": "not predicted",
       "pairs_predicted": 0,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the ratio: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): an arm's carried rivals could not be run, so the ratio's independence from the balance is not shown. REFUSED, FALSIFIED pH BALANCE (S3",
         "the engine refuses the ratio: arm B: HEXOSE ENTRY UNIDENTIFIED -- its number is a band-floor artefact, so no ratio is claimed; the model supports the ordering 'pentose above hexose' structurally, not a magnitude"
@@ -1777,6 +1956,7 @@
       "target": "hydrogen sulfide",
       "status": "not predicted",
       "pairs_predicted": 0,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the ratio: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): an arm's carried rivals could not be run, so the ratio's independence from the balance is not shown. REFUSED, FALSIFIED pH BALANCE (S3",
         "the engine refuses the ratio: added_precursors:glucose/thiamine/pH6.0 is zero; a ratio is undefined",
@@ -1820,6 +2000,7 @@
       "target": "methional",
       "status": "not predicted",
       "pairs_predicted": 0,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the arm: METHIONINE CHAIN TARGETS 'methional' (wave B22) run on the trunk lane only: the sulfur lane's network keeps the topology its fit was run on and carries these sp"
       ]
@@ -1831,6 +2012,7 @@
       "target": "2,5-dimethylpyrazine",
       "status": "not predicted",
       "pairs_predicted": 0,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the arm: PYRAZINE TARGETS '2,5-dimethylpyrazine' (wave B18) run on the trunk lane only: the sulfur lane's network keeps the topology its fit was run on and carries these"
       ]
@@ -1872,6 +2054,7 @@
       "target": "hexanal",
       "status": "not predicted",
       "pairs_predicted": 0,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
       ]
@@ -1883,6 +2066,7 @@
       "target": "nonanal",
       "status": "not predicted",
       "pairs_predicted": 0,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
       ]
@@ -1894,6 +2078,7 @@
       "target": "2-pentylfuran",
       "status": "not predicted",
       "pairs_predicted": 0,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
       ]
@@ -1915,7 +2100,9 @@
       "target": "dmhf",
       "status": "not predicted",
       "pairs_predicted": 0,
+      "pairs_ordering_only": 2,
       "why": [
+        "an arm is below the engine's resolution floor: the ordering is kept, no magnitude",
         "the engine refuses the ratio: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): an arm's carried rivals could not be run, so the ratio's independence from the balance is not shown. REFUSED, FALSIFIED pH BALANCE (S3"
       ]
     },
@@ -1926,6 +2113,7 @@
       "target": "norfuraneol",
       "status": "not predicted",
       "pairs_predicted": 0,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the ratio: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): an arm's carried rivals could not be run, so the ratio's independence from the balance is not shown. REFUSED, FALSIFIED pH BALANCE (S3",
         "the engine refuses the ratio: added_precursors:glucose/thiamine/pH6.0 is zero; a ratio is undefined",
@@ -1939,6 +2127,7 @@
       "target": "furfural",
       "status": "not predicted",
       "pairs_predicted": 0,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the ratio: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): an arm's carried rivals could not be run, so the ratio's independence from the balance is not shown. REFUSED, FALSIFIED pH BALANCE (S3"
       ]
@@ -1950,6 +2139,7 @@
       "target": "2-methyl-3-furanthiol",
       "status": "not predicted",
       "pairs_predicted": 0,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the ratio: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): an arm's carried rivals could not be run, so the ratio's independence from the balance is not shown. REFUSED, FALSIFIED pH BALANCE (S3",
         "the engine refuses the ratio: arm BOTH: HEXOSE ENTRY UNIDENTIFIED -- its number is a band-floor artefact, so no ratio is claimed; the model supports the ordering 'pentose above hexose' structurally, not a magnitude"
@@ -1962,6 +2152,7 @@
       "target": "2-furfurylthiol",
       "status": "not predicted",
       "pairs_predicted": 0,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the ratio: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): an arm's carried rivals could not be run, so the ratio's independence from the balance is not shown. REFUSED, FALSIFIED pH BALANCE (S3",
         "the engine refuses the ratio: added_precursors:glucose/thiamine/pH6.0 is zero; a ratio is undefined",
@@ -1976,6 +2167,7 @@
       "target": "bis(2-methyl-3-furyl) disulfide",
       "status": "not predicted",
       "pairs_predicted": 0,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the ratio: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): an arm's carried rivals could not be run, so the ratio's independence from the balance is not shown. REFUSED, FALSIFIED pH BALANCE (S3",
         "the engine refuses the ratio: arm BOTH: HEXOSE ENTRY UNIDENTIFIED -- its number is a band-floor artefact, so no ratio is claimed; the model supports the ordering 'pentose above hexose' structurally, not a magnitude"
@@ -1988,6 +2180,7 @@
       "target": "hydrogen sulfide",
       "status": "not predicted",
       "pairs_predicted": 0,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the ratio: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): an arm's carried rivals could not be run, so the ratio's independence from the balance is not shown. REFUSED, FALSIFIED pH BALANCE (S3",
         "the engine refuses the ratio: added_precursors:glucose/thiamine/pH6.0 is zero; a ratio is undefined",
@@ -2031,6 +2224,7 @@
       "target": "methional",
       "status": "not predicted",
       "pairs_predicted": 0,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the arm: METHIONINE CHAIN TARGETS 'methional' (wave B22) run on the trunk lane only: the sulfur lane's network keeps the topology its fit was run on and carries these sp"
       ]
@@ -2042,6 +2236,7 @@
       "target": "2,5-dimethylpyrazine",
       "status": "not predicted",
       "pairs_predicted": 0,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the arm: PYRAZINE TARGETS '2,5-dimethylpyrazine' (wave B18) run on the trunk lane only: the sulfur lane's network keeps the topology its fit was run on and carries these"
       ]
@@ -2083,6 +2278,7 @@
       "target": "hexanal",
       "status": "not predicted",
       "pairs_predicted": 0,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
       ]
@@ -2094,6 +2290,7 @@
       "target": "nonanal",
       "status": "not predicted",
       "pairs_predicted": 0,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
       ]
@@ -2105,6 +2302,7 @@
       "target": "2-pentylfuran",
       "status": "not predicted",
       "pairs_predicted": 0,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
       ]
@@ -2126,7 +2324,9 @@
       "target": "dmhf",
       "status": "not predicted",
       "pairs_predicted": 0,
+      "pairs_ordering_only": 2,
       "why": [
+        "an arm is below the engine's resolution floor: the ordering is kept, no magnitude",
         "the engine refuses the ratio: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): an arm's carried rivals could not be run, so the ratio's independence from the balance is not shown. REFUSED, FALSIFIED pH BALANCE (S3"
       ]
     },
@@ -2137,7 +2337,9 @@
       "target": "norfuraneol",
       "status": "not predicted",
       "pairs_predicted": 0,
+      "pairs_ordering_only": 1,
       "why": [
+        "an arm is below the engine's resolution floor: the ordering is kept, no magnitude",
         "the engine refuses the ratio: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): an arm's carried rivals could not be run, so the ratio's independence from the balance is not shown. REFUSED, FALSIFIED pH BALANCE (S3",
         "the engine refuses the ratio: added_precursors:glucose/thiamine/pH6.0 is zero; a ratio is undefined"
       ]
@@ -2149,6 +2351,7 @@
       "target": "furfural",
       "status": "not predicted",
       "pairs_predicted": 0,
+      "pairs_ordering_only": 0,
       "why": [
         "the engine refuses the ratio: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): an arm's carried rivals could not be run, so the ratio's independence from the balance is not shown. REFUSED, FALSIFIED pH BALANCE (S3"
       ]
@@ -2222,24 +2425,21 @@
     },
     {
       "compound": "Hexanal",
-      "matrix_only": null,
-      "matrix_only_why": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU",
-      "phosphate": null,
-      "phosphate_why": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
+      "matrix_only": 0.0,
+      "phosphate": 0.0,
+      "difference": 0.0
     },
     {
       "compound": "Nonanal",
-      "matrix_only": null,
-      "matrix_only_why": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU",
-      "phosphate": null,
-      "phosphate_why": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
+      "matrix_only": 0.0,
+      "phosphate": 0.0,
+      "difference": 0.0
     },
     {
       "compound": "2-Pentylfuran",
-      "matrix_only": null,
-      "matrix_only_why": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU",
-      "phosphate": null,
-      "phosphate_why": "the engine refuses the arm: The lipid lane was selected but the charge declares NO LIPID CARRIER. Every product in this lane comes from a hydroperoxide pool, and the pool's size is an INPU"
+      "matrix_only": 0.0,
+      "phosphate": 0.0,
+      "difference": 0.0
     },
     {
       "compound": "1-Octen-3-ol",
@@ -2253,9 +2453,10 @@
     },
     {
       "compound": "Norfuraneol (NF)",
-      "matrix_only": -2.4191523076264345,
-      "phosphate": 4.9977220466712735,
-      "difference": 7.416874354297708
+      "matrix_only": null,
+      "matrix_only_why": "pea_isolate:glucose/cysteine/pH7.0 and pea_isolate:glucose/cysteine/pH6.0 below the resolution floor (1e-06 ug/L, under every odour threshold and detection limit): no magnitude is claimed",
+      "phosphate": null,
+      "phosphate_why": "pea_isolate:glucose/cysteine/pH7.0/phosphate and pea_isolate:glucose/cysteine/pH6.0/phosphate below the resolution floor (1e-06 ug/L, under every odour threshold and detection limit): no magnitude is "
     },
     {
       "compound": "Furfural",
@@ -2268,9 +2469,9 @@
     "artifact": "p3_engine_dry_run",
     "generated_on": "2026-11-14",
     "git": {
-      "commit": "9836c23d0fa2a38ca9714e72374dd9c7151d8f2d",
-      "short": "9836c23d",
-      "branch": "designed-data",
+      "commit": "92cf287cf0fe7b86e98d3078c3cea45085a4ff94",
+      "short": "92cf287c",
+      "branch": "engine-resolution-floor",
       "dirty": true
     },
     "generated_by": "scripts/generators/build_p3_engine_dry_run.py",
