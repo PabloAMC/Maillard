@@ -639,3 +639,10 @@ have no null answer): counting it as a difference of 0 pulls the mean to zero an
 - **Rule:** in any eligibility rule, bootstrap or share cap, the unit is the laboratory: several sources from one
   group are one draw of its method. A placebo that cannot be computed for a draw discards the draw; it never
   substitutes the null arm.
+
+## A screen must check the pH basis, not just the pH values (2026-11-13)
+- **What happened:** A6 batch 3's title-and-abstract screen took two papers on design, but one measured pH only
+  after extrusion and the other held it by pH-stat. The lever table bands those as "final" and "held", not the
+  "initial or label" cells being targeted, so both fell out at the methods check.
+- **Rule:** when a search targets lever-table cells, the screen records each series' pH basis (initial, final, held)
+  next to its levels, and matches cells on band AND basis.

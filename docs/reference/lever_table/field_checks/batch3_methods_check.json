@@ -1,0 +1,174 @@
+{
+  "checker": "design-only methods check, A6 batch 3; no values, directions or findings recorded",
+  "date": "2026-11-13",
+  "papers": [
+    {
+      "file": "yang2013.pdf",
+      "lab_id": "ccnu_yu_ainong",
+      "lab_is_new": false,
+      "authors_affiliation": "Yang XZ, Yu AN* (Hubei University for Nationalities, Enshi)",
+      "initial_ph_levels": [5, 6, 7, 8, 9],
+      "run_midpoint_band": "6-7.5",
+      "held_conditions": "4 mmol ASA + 4 mmol Met in 40 mL 0.2 M phosphate, 142 C, 2 h, sealed vial; samples set to pH 7 before HS-SPME (two fibres)",
+      "buffer": "buffered",
+      "buffer_quote": "dissolved in 40 mL of phosphate buffer (0.2 M), and the pH of the solution was adjusted to 5.00, 6.00, 7.00, 8.00, or 9.00 using NaOH",
+      "final_ph_printed": "no (samples readjusted to pH 7 before SPME; no post-reaction pH printed)",
+      "target_odorants_reported_at_levels": [
+        "2-methylpyrazine: quantified at all 5 levels (Table 1, image)",
+        "2,5-dimethylpyrazine: quantified at all 5 levels (not a band-6-7.5 cell)",
+        "furfural: quantified at 1 level only (pH 5); ND at the other four (Table 1)",
+        "trimethylpyrazine, benzaldehyde: not in Table 1"
+      ],
+      "qualifying_cells": [],
+      "decision": "drop",
+      "reason": "Design qualifies (buffered initial-pH series, all else held) but the lab is already in cell 3 (2-methylpyrazine 6-7.5); furfural (cell 7) quantified at only one level; trimethylpyrazine and benzaldehyde not reported. Screen's 'qualifies' not confirmed: no open cell."
+    },
+    {
+      "file": "bredie2002.pdf",
+      "lab_id": "reading_mottram_parker",
+      "lab_is_new": false,
+      "authors_affiliation": "Bredie WLP, Mottram DS*, Guy RCE (University of Reading; CCFRA)",
+      "initial_ph_levels": "NaOH 0, 3, 6 g/kg feed; resulting extrudate pH printed 6.8, 8.0/8.1, 8.8 (Table 1)",
+      "run_midpoint_band": ">7.5 (6.8-8.8, midpoint 7.8)",
+      "held_conditions": "wheat flour twin-screw extrusion, 18% moisture, 350 rpm, 35 s residence; three NaOH series at nominal 120/135/150 C (measured melt temp varies within 120 and 135 series: 123/114/117 and 132/136/141 C; 152 C held in 150 series)",
+      "buffer": "adjusted_unbuffered",
+      "buffer_quote": "Modifications to the feedstock pH were obtained by pumping aqueous solutions of sodium hydroxide into the extruder",
+      "final_ph_printed": "yes - Table 1 'extrudate pH' (measured after extrusion by soaking in water); no pre-heating feedstock pH printed",
+      "target_odorants_reported_at_levels": [
+        "2,5-dimethylpyrazine: reported at all 3 NaOH levels in each temperature series (Table 2)",
+        "methylpyrazine: reported at all 3 levels in each series (Table 2)",
+        "pyrazine: reported at 2 of 3 levels in the 120 C series, all 3 in the 135 and 150 C series (Table 2)"
+      ],
+      "qualifying_cells": [1, 4, 10],
+      "decision": "take",
+      "reason": "NaOH dose series with resulting pH printed; within-series all else held (cleanest at 150 C, melt temp held at 152 C); food Maillard system where pH acts during cooking; band >7.5; Reading not yet in cells 1, 4, 10. Flags: printed pH is post-extrusion (extrudate) pH, used as the series pH; wheat flour fortified with CaCO3."
+    },
+    {
+      "file": "lu1997.pdf",
+      "lab_id": "ho_network",
+      "lab_is_new": false,
+      "authors_affiliation": "Lu G, Yu TH, Ho CT* (Rutgers; Da-Yeh Inst. Tech.)",
+      "initial_ph_levels": [5.0, 8.0],
+      "run_midpoint_band": "6-7.5",
+      "held_conditions": "0.01 mol 2-deoxyglucose + 0.015 mol Asn/Asp/Gln/Glu in 50 mL water, 180 C, 2 h, sealed cylinder; readjusted to pH 8 before CH2Cl2 extraction",
+      "buffer": "adjusted_unbuffered",
+      "buffer_quote": "pH of the solution was adjusted with 1 N NaOH to 5.0 or 8.0 for different samples",
+      "final_ph_printed": "no",
+      "target_odorants_reported_at_levels": [
+        "pyrazine, methylpyrazine: reported at both levels (Table 1)",
+        "trimethylpyrazine, 2,5-dimethylpyrazine, furfural, benzaldehyde: not in the pH-series table (Table 3 non-pyrazines are unadjusted single-pH systems, not a pH series)"
+      ],
+      "qualifying_cells": [],
+      "decision": "drop",
+      "reason": "Valid 2-level initial-pH design, but band 6-7.5 cells: 2-methylpyrazine (cell 3) already holds ho_network; trimethylpyrazine, furfural, benzaldehyde not reported across the pH series."
+    },
+    {
+      "file": "dagostina1998.pdf",
+      "lab_id": "milano_arnoldi",
+      "lab_is_new": true,
+      "authors_affiliation": "D'Agostina A, Negroni M, Arnoldi A* (Universita di Milano, DiSMA)",
+      "initial_ph_levels": "pH-stat at 3, 4, 5, 6, 7 (Table 2); additive sub-study at 4 and 6 (Tables 3-4)",
+      "run_midpoint_band": "4.5-6 (3-7 midpoint 5; 4-6 midpoint 5)",
+      "held_conditions": "equimolar glucose-lysine 0.5 M, 70 mL, reflux 100 C, 2 h; set to pH 8 before continuous CH2Cl2 extraction",
+      "buffer": "adjusted_unbuffered",
+      "buffer_quote": "pH was monitored and kept constant at the desired value by the addition of diluted sodium hydroxide (NaOH)",
+      "final_ph_printed": "yes in effect - pH-stat; text states values are 'the actual pH read at 100 C'",
+      "target_odorants_reported_at_levels": [
+        "furfural (2-furaldehyde): quantified at pH 3 and 4 only in Table 2; not detected at 5, 6, 7; absent from the pH-6 additive table",
+        "phenylacetaldehyde, 2-furfurylthiol: not reported",
+        "pyrazine, 2-methylpyrazine, 2,5-DMP, TMP listed (not band-4.5-6 cells)"
+      ],
+      "qualifying_cells": [6],
+      "decision": "take",
+      "reason": "pH-stat series (pH held through heating, not merely set initially) of 5 levels, all else held; run midpoint 5 -> band 4.5-6; furfural quantified at 2 levels; Milan lab new. FLAG for owner: furfural is quantified only at pH 3 and 4; if the contrast is restricted to levels where the odorant is quantified, midpoint 3.5 -> band <4.5 and no cell. Also flag pH-stat vs initial-pH-only design."
+    },
+    {
+      "file": "ito2004.pdf",
+      "lab_id": "jt_ito",
+      "lab_is_new": true,
+      "authors_affiliation": "Ito K*, Mori M (Japan Tobacco, Tobacco Science Research Center, Yokohama)",
+      "initial_ph_levels": "pH-stat at 3, 4, 5, 6, 7 (Fig. 1; methods list 3-8)",
+      "run_midpoint_band": "4.5-6",
+      "held_conditions": "2 M maltose + 2 M glutamine, 90 C, 4 h, pH-stat titrator; SPE-GC/MS",
+      "buffer": "adjusted_unbuffered",
+      "buffer_quote": "initially adjusted to 3, 4, 5, 6, 7 or 8 with HClaq or NaOHaq ... performed at the constant pH by using a pH-stat",
+      "final_ph_printed": "pH-stat (constant); Table 3 prints reaction-mixture pH only for the separate initial-pH-7 sugar comparison",
+      "target_odorants_reported_at_levels": [
+        "2-methylpyrazine, 2,3-dimethylpyrazine, acetylpyrazines: at the pH levels in Fig. 1a",
+        "furfural, phenylacetaldehyde, 2-furfurylthiol: not in the pH series (Fig. 1 shows 2-furanmethanol, maltol, 2-HAF instead)"
+      ],
+      "qualifying_cells": [],
+      "decision": "drop",
+      "reason": "Valid pH-stat series, band 4.5-6, but none of the band's target odorants (FFT, furfural, phenylacetaldehyde) is reported; methylpyrazine at 4.5-6 is not a target cell."
+    },
+    {
+      "file": "chen2006.pdf",
+      "lab_id": "zhengzhou_tobacco_hu",
+      "lab_is_new": true,
+      "authors_affiliation": "Hu J, Li GD, Zong YL (Zhengzhou Tobacco Research Institute of CNTC; Henan Xinzheng Tobacco)",
+      "initial_ph_levels": [3.50, 6.35, 9.20, 13.00],
+      "run_midpoint_band": ">7.5 (3.5-13, midpoint 8.25)",
+      "held_conditions": "2 g valine + 3 g glucose in 40 mL PG:water 1:1, microwave high, 3-30 min (runs 11-14)",
+      "buffer": "unstated",
+      "buffer_quote": "Table 1 lists 'pH 值' 3.50/6.35/9.20/13.00 per run; no adjusting agent or buffer described",
+      "final_ph_printed": "no",
+      "target_odorants_reported_at_levels": [
+        "none per pH level: pH runs analysed only by A420, UV spectra and cigarette sensory (Figs. 3-4, Table 7); volatile Table 4 (methyl-, 2,5-dimethyl-, trimethylpyrazine) is by heating time and mode, not pH"
+      ],
+      "qualifying_cells": [],
+      "decision": "drop",
+      "reason": "pH series exists but no odorant is quantified at any pH level."
+    },
+    {
+      "file": "sen2023.pdf",
+      "lab_id": "nevsehir_sen",
+      "lab_is_new": true,
+      "authors_affiliation": "Sen K, Can F, Asi I, Demirel N* (Nevsehir Haci Bektas Veli University)",
+      "initial_ph_levels": "brewing-water pH 6.5, 7.5, 8.5, 9.5",
+      "run_midpoint_band": "n/a",
+      "held_conditions": "5 g ground roasted coffee, 65 mL, traditional/machine brew to 93 C or cold brew 20 C",
+      "buffer": "buffered (authors' term; dilute citric acid/NaOH in water)",
+      "buffer_quote": "adjusted to 6.5, 7.5, 8.5, and 9.5 by using 0.01 N citric acid and 0.01 N NaOH buffer solutions",
+      "final_ph_printed": "no",
+      "target_odorants_reported_at_levels": ["pyrazines reported per brew (Table 2); not assessed further - design excluded"],
+      "qualifying_cells": [],
+      "decision": "drop",
+      "reason": "pH of the brewing water of an already-roasted product; pH does not act on Maillard formation. Excluded by rule."
+    },
+    {
+      "file": "luo2023.pdf",
+      "lab_id": "ho_network",
+      "lab_is_new": false,
+      "authors_affiliation": "Luo Y ... Xu BJ* (BNU-HKBU UIC Zhuhai), Ho CT* (Rutgers)",
+      "initial_ph_levels": "3.0, 5.0, 7.0, 9.0 for ARP/amino-compound stability and dicarbonyls only; volatiles at pH 7.0 only",
+      "run_midpoint_band": "n/a for volatiles",
+      "held_conditions": "ARP or Gly/diGly/triGly + glucose 0.02 M, 100/130/160 C, 60/120 min (volatile runs)",
+      "buffer": "adjusted_unbuffered",
+      "buffer_quote": "pH value was adjusted to 7.0 by the addition of 6 N NaOH solution",
+      "final_ph_printed": "no",
+      "target_odorants_reported_at_levels": ["pyrazines and furfural (Tables 1-2) at pH 7.0 only; no pH contrast"],
+      "qualifying_cells": [],
+      "decision": "drop",
+      "reason": "Volatile odorants measured at a single initial pH; the pH series covers only LC-MS/MS stability and alpha-dicarbonyls. Lab also already in most candidate cells."
+    },
+    {
+      "file": "pripis-nicolau2000.pdf",
+      "lab_id": "bordeaux_de_revel",
+      "lab_is_new": true,
+      "authors_affiliation": "Pripis-Nicolau L, de Revel G*, Bertrand A (Bordeaux 2 Oenology/INRA); Maujean A (Reims)",
+      "initial_ph_levels": [3.5, 8],
+      "run_midpoint_band": "4.5-6 (midpoint 5.75)",
+      "held_conditions": "cysteine + diacetyl/methylglyoxal/acetoin, 20 mM, 12% hydro-alcoholic, 25 C dark storage",
+      "buffer": "adjusted_unbuffered",
+      "buffer_quote": "adjusted to pH 3.5 with H3PO4 (1/3) and 1 M NaOH (pH 8 adjustment not separately described)",
+      "final_ph_printed": "no",
+      "target_odorants_reported_at_levels": [
+        "pH contrast reports cysteine degradation (Fig. 4) and GC-FID chromatograms of cysteine-methylglyoxal (Fig. 5); no furfural, 2-furfurylthiol or phenylacetaldehyde in the pH comparison",
+        "phenylacetaldehyde appears only in the phenylalanine-glyoxal screen at pH 3.5 (Table 1), not across pH"
+      ],
+      "qualifying_cells": [],
+      "decision": "drop",
+      "reason": "Two-level pH contrast at band 4.5-6, but none of that band's target odorants is reported at both levels; mild 25 C wine-model conditions."
+    }
+  ]
+}
