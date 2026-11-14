@@ -195,7 +195,9 @@ contrasts fail to add up; the design already avoids most of it, and four points 
 - **The isolate's composition.** The engine cannot run a pot whose matrix composition is not on file (148 of step
   5a's 396 held-out contrasts), and no dossier on disk gives free sugars or free amino acids for a pea isolate. One
   laboratory measures them (and total cysteine and methionine, and fat) once on the shipped lot; without them the
-  study still serves the lever table, but the engine cannot be judged on it.
+  study still serves the lever table, but the engine cannot be judged on it. The same analysis adds the fat's
+  fatty-acid profile and peroxide value (2026-11-14): the lipid lane's carrier for pea isolate carries both as
+  declared assumptions (`parameters_lipid.LIPID_CARRIERS`), and the peroxide band [2, 40] meq/kg is its widest.
 
 ## Changes after steps 13 - 15 (2026-11-14; STATUS_AND_PLAN step 16)
 

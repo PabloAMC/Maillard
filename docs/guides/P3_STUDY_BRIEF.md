@@ -36,7 +36,7 @@ later, as an independent replication.
     We found no published laboratory that tested this in one study at matched pH.
 - **44 vials in all.** Measure pH before heating and after cooling in every vial.
 - **Composition:** one analysis of the shipped lot (free sugars, free amino acids, total cysteine and methionine,
-  fat). We can arrange it with a contract laboratory if you prefer.
+  fat with its fatty-acid profile and peroxide value). We can arrange it with a contract laboratory if you prefer.
 - **Analytes:**
   - **Core panel:** 2-methyl-3-furanthiol and 2-furfurylthiol (stable isotope dilution, or a recovery shown in this
     matrix; we can supply labelled standards), methional, 2- and 3-methylbutanal, phenylacetaldehyde,
