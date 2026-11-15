@@ -78,6 +78,45 @@ test that finding; the lever table would need its contrasts keyed as a cell firs
 threshold or base level can make a "crosses threshold" call; methional's would need threshold and base level known
 to within 0.4 dex together.
 
+**7.1 result (2026-11-15).** Keyed in [`data/perception/thresholds.yml`](../../../data/perception/thresholds.yml)
+(schema `data/schemas/perception_thresholds.schema.json`, checked by `scripts/ci/schema_gate.py` and
+`tests/unit/test_perception_thresholds.py`); Czerny 2008 read in
+[czerny2008_extraction.md](../../../data/lit/extraction_dossiers/czerny2008_extraction.md). Nothing wired into the
+engine.
+
+- **Czerny 2008 verified: tap water, ug/L, orthonasal, 21 C,** one panel (13-22 assessors), descending triangle
+  series, recognition and detection threshold per compound. Keyed: the detection threshold
+  (`detection_triangle_series_geometric_mean`); recognition is quoted in the notes, not keyed. No air values.
+- **The odorant list is now 48, not 42.** Read from `results/validation/lever_table.json` as the scoping pass did;
+  steps 9-15 added 2,3-butanedione, acetaldehyde, dimethyl trisulfide, furan, HMF and 2-pentylpyridine (so DMTS now
+  enters a cell, closing the "known gap" above as far as keying goes). All 48 are covered.
+- **Coverage: 25 of 48 have a cited threshold, 23 read "no measured threshold"** (of the original 42: 22 and 20,
+  up from 5 measured).
+  - **15 primary, water** (Czerny Table 1): acetaldehyde, 2,3-butanedione, (E,E)-2,4-decadienal, DMTS, FFT,
+    hexanal, DMHF, 2-methylbutanal, 3-methylbutanal, bis(2-methyl-3-furyl) disulfide, 2-methylpropanal, methional,
+    nonanal, (E)-2-nonenal, octanal.
+  - **5 primary, 3 % gelatin** (Vega 1994, 75 % uncorrected, 4 temperatures): pentanal, hexanal, heptanal,
+    (E)-2-octenal, (E,E)-2,4-decadienal. For pentanal, heptanal and (E)-2-octenal the water value is Guadagni's,
+    quoted by Vega.
+  - **7 secondary only** (water, the primary named but criterion and route not stated in the quoting source): MFT,
+    phenylacetaldehyde, HEMF, norfuraneol, H2S, 2-ethyl-3,5-dimethylpyrazine (Kerler 2010 Tables 3.2-3.3), and
+    2-ethyl-3,6-dimethylpyrazine (8.6 ug/L, Guadagni's purified re-measurement quoted in Czerny's text; Kerler's
+    0.4 is the pre-purification value).
+  - Criteria: 15 detection-triangle, 5 75 %-uncorrected (gelatin), 10 not stated (every secondary water record).
+    Routes: orthonasal for all primaries; not stated for the secondaries. One criterion per odorant per medium.
+- **Gaps (23):** every alkylpyrazine except the two ethyl-dimethyl ones (unsubstituted, methyl-, 2,3-, 2,5-, 2,6-
+  dimethyl-, ethyl-, trimethyl-, tetramethylpyrazine; "Pyrazines" is a class total and has none by construction),
+  the furans (furan, furfural, 5-methylfurfural, HMF, 2-furanmethanol, 2-acetylfuran, 2-pentylfuran), the two
+  furfuryl disulfides other than bis(2-methyl-3-furyl), 2-acetylthiazole, benzaldehyde, 1-hexanol, 1-octen-3-ol,
+  2-pentylpyridine. Thong 2024 Table 4 prints no primary and no medium, so it is not used.
+- **Bis(2-methyl-3-furyl) disulfide, the 30 000x: resolved, with moderate confidence (about 80 %).** Czerny's
+  recognition threshold is 0.00076 ug/L; Thong's "0.0007 ppt" is that value with ppb misprinted as ppt (1000x).
+  The rest is ordinary spread: the uncited 0.02 ug/kg is 63x Czerny's detection value; measured values span
+  2e-5 to 7.6e-4 ug/L (1.6 dex).
+- **For the parked 7.0 arithmetic:** methional's water threshold is 0.43 ug/L here (detection, Czerny), 2.2x the
+  0.2 used in DECIDABILITY_7_0.md, and FFT's is 0.036, 3.6x Kerler's 0.01. Neither moves a 7.0 verdict: the thiol
+  verdicts do not depend on thresholds, and methional's turns on the 0.41-dex lever floor.
+
 ## 5. To read (owner's download list)
 
 - Czerny, M. et al. (2008). Re-investigation on odour thresholds of key food aroma compounds and development of an

@@ -10,7 +10,7 @@ code comes from `src/data_paths.py`; every load goes through `src/data_access.py
 Names resolve through `data/keys/` (`src/compound_keys.py`, `src/paper_keys.py`). Benchmarks validate
 against `data/schemas/` (`scripts/ci/schema_gate.py`). The restructure record is `tasks/data_restructure_plan.md`.
 
-Tracked files: **888**. Local-only (gitignored): `data/articles/` (primary-source PDFs, ~160 MB).
+Tracked files: **891**. Local-only (gitignored): `data/articles/` (primary-source PDFs, ~160 MB).
 
 ## `data (top level)`
 
@@ -67,6 +67,14 @@ Literature-derived constants, priors, reference payloads and the intake registri
 
 1 files covered by the directory description above: `source_verification.yml`
 
+## `data/perception`
+
+The perception layer's curated inputs (STATUS_AND_PLAN step 7; `docs/reference/perception/`). Reference inputs only; the engine does not read them.
+
+| file | what it is |
+|---|---|
+| `thresholds.yml` | Cited odour thresholds for every lever-table odorant (step 7.1): Czerny 2008 water detection thresholds first, Vega 1994 gelatin, quoted primaries where Czerny has none, or an explicit `no_measured_threshold`. `src/data_access.load_perception_thresholds`; `tests/unit/test_perception_thresholds.py`. |
+
 ## `data/protocols`
 
 Wet-lab contracts and intake specifications.
@@ -92,6 +100,7 @@ JSON Schemas enforced by `scripts/ci/schema_gate.py`.
 | file | what it is |
 |---|---|
 | `benchmark.schema.json` | Schema every benchmark payload validates against (core fields, closed enums, measured XOR reference volatiles). |
+| `perception_thresholds.schema.json` | Schema of `data/perception/thresholds.yml`: one entry per lever-table odorant, each threshold with medium, units, criterion, route and source required. |
 | `spec.schema.json` | The front door's spec contract: what compare, predict, score, calibrate, the Python API and the page validate a formulation against (`src/comparative_cli.validate_spec`). |
 
 ## `data/species`
@@ -132,7 +141,7 @@ Verified rows the network cannot execute (see README there); kept off the panel 
 
 Per-paper extraction records (verbatim quotes, digitised tables, unit reconciliations) cited as provenance strings by `src/kinetic_core/`. `k*_` and `research_round*` files are cross-paper syntheses.
 
-618 files covered by the directory description above: `Cai2024_extraction.md`, `Meynier2002_extraction.md`, `Xin2026b_extraction.md`, `Zhang2024_extraction.md`, `Zhou2025_extraction.md`, `adams2001_extraction.md`, `adams2008_extraction.md`, `agcam2022_extraction.md`, `ajandouz2008_extraction.md`, `aliani2013_extraction.md`, `alim2018_extraction.md`, `alim2019_extraction.md` …
+619 files covered by the directory description above: `Cai2024_extraction.md`, `Meynier2002_extraction.md`, `Xin2026b_extraction.md`, `Zhang2024_extraction.md`, `Zhou2025_extraction.md`, `adams2001_extraction.md`, `adams2008_extraction.md`, `agcam2022_extraction.md`, `ajandouz2008_extraction.md`, `aliani2013_extraction.md`, `alim2018_extraction.md`, `alim2019_extraction.md` …
 
 ## `data/lit/fit_rows`
 

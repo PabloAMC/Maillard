@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""Benchmark schema gate.
+"""Benchmark schema gate (and the curated files registered in ``CURATED_FILES``).
 
 Every JSON under ``data/benchmarks/`` (all tiers, recursively) must:
 
@@ -34,6 +34,35 @@ from src import compound_keys, data_paths  # noqa: E402
 from src.quantification import quantification_family  # noqa: E402 (stdlib-only; no numpy in this job)
 
 
+#: Curated single files with a schema of their own: (file, schema). 2026-11-15: the perception thresholds
+#: (step 7.1). YAML files are parsed with PyYAML's safe loader, as src/data_access.py does.
+CURATED_FILES = (
+    (data_paths.PERCEPTION_THRESHOLDS, data_paths.PERCEPTION_THRESHOLDS_SCHEMA),
+)
+
+
+def curated_file_violations() -> list[str]:
+    import yaml
+
+    out: list[str] = []
+    for path, schema_path in CURATED_FILES:
+        rel = data_paths.rel(path)
+        if not path.is_file():
+            out.append(f"{rel}: missing (registered in schema_gate.CURATED_FILES)")
+            continue
+        try:
+            text = path.read_text(encoding="utf-8")
+            payload = yaml.safe_load(text) if path.suffix in {".yml", ".yaml"} else json.loads(text)
+        except (ValueError, yaml.YAMLError) as exc:
+            out.append(f"{rel}: does not parse: {exc}")
+            continue
+        validator = jsonschema.Draft202012Validator(json.loads(schema_path.read_text(encoding="utf-8")))
+        for err in sorted(validator.iter_errors(payload), key=lambda e: list(e.path)):
+            where = "/".join(str(p) for p in err.path) or "<root>"
+            out.append(f"{rel}: {where}: {err.message[:160]}")
+    return out
+
+
 def main() -> int:
     schema = json.loads(data_paths.BENCHMARK_SCHEMA.read_text(encoding="utf-8"))
     validator = jsonschema.Draft202012Validator(schema)
@@ -64,12 +93,15 @@ def main() -> int:
             family, _why = quantification_family(payload)
             if family == "undeclared" and payload.get("quantification_class") != "undeclared":
                 violations.append(f"{rel}: panel bundle whose quantification class resolves to no family (declare it, or set quantification_class: 'undeclared' with a quantification_note)")
+    violations.extend(curated_file_violations())
     if violations:
-        print(f"schema_gate: FAIL -- {len(violations)} violation(s) across {len(files)} benchmark files", file=sys.stderr)
+        print(f"schema_gate: FAIL -- {len(violations)} violation(s) across {len(files)} benchmark files "
+              f"and {len(CURATED_FILES)} curated file(s)", file=sys.stderr)
         for v in violations:
             print(f"  {v}", file=sys.stderr)
         return 1
-    print(f"schema_gate: PASS ({len(files)} benchmark files validate against {data_paths.rel(data_paths.BENCHMARK_SCHEMA)})")
+    print(f"schema_gate: PASS ({len(files)} benchmark files validate against {data_paths.rel(data_paths.BENCHMARK_SCHEMA)}; "
+          f"{len(CURATED_FILES)} curated file(s) against their own schema)")
     return 0
 
 
