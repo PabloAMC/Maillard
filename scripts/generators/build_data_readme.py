@@ -44,6 +44,10 @@ DESCRIPTIONS: Dict[str, str] = {
     "data/schemas": "JSON Schemas enforced by `scripts/ci/schema_gate.py`.",
     "data/schemas/spec.schema.json": "The front door's spec contract: what compare, predict, score, calibrate, the Python API and the page validate a formulation against (`src/comparative_cli.validate_spec`).",
     "data/schemas/benchmark.schema.json": "Schema every benchmark payload validates against (core fields, closed enums, measured XOR reference volatiles).",
+    "data/schemas/perception_thresholds.schema.json": "Schema of `data/perception/thresholds.yml`: one entry per lever-table odorant, each threshold with medium, units, criterion, route and source required.",
+    # ---- perception
+    "data/perception": "The perception layer's curated inputs (STATUS_AND_PLAN step 7; `docs/reference/perception/`). Reference inputs only; the engine does not read them.",
+    "data/perception/thresholds.yml": "Cited odour thresholds for every lever-table odorant (step 7.1): Czerny 2008 water detection thresholds first, Vega 1994 gelatin, quoted primaries where Czerny has none, or an explicit `no_measured_threshold`. `src/data_access.load_perception_thresholds`; `tests/unit/test_perception_thresholds.py`.",
     # ---- species
     "data/species": "Compound and precursor definitions (SMILES, CAS, InChI, odour thresholds). The source of chemical identity for `compounds.yml`.",
     "data/species/desirable_targets.yml": "20 meat-relevant target odorants with odour thresholds; read by `sensory`, `experiment_value`, `recommend`.",

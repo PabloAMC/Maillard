@@ -108,6 +108,8 @@ SCAN_GLOBS = (
     "data/benchmarks/**/*.json",
     "data/species/*.yml",
     "data/species/*.yaml",
+    # 2026-11-15: perception step 7.1, the cited odour thresholds.
+    "data/perception/*.yml",
 )
 
 

@@ -82,6 +82,8 @@ PDF_DOSSIER_ALIASES: Path = KEYS_DIR / "pdf_dossier_aliases.yml"
 SPEC_SCHEMA: Path = DATA_ROOT / "schemas" / "spec.schema.json"
 SCHEMAS_DIR: Path = DATA_ROOT / "schemas"
 BENCHMARK_SCHEMA: Path = SCHEMAS_DIR / "benchmark.schema.json"
+#: 2026-11-15: the perception thresholds file's contract (scripts/ci/schema_gate.py).
+PERCEPTION_THRESHOLDS_SCHEMA: Path = SCHEMAS_DIR / "perception_thresholds.schema.json"
 
 # --------------------------------------------------------------------------- data/lit
 ARRHENIUS_PARAMS: Path = LIT_DIR / "arrhenius_params.yml"
@@ -111,6 +113,12 @@ DESIRABLE_TARGETS: Path = SPECIES_DIR / "desirable_targets.yml"
 OFF_FLAVOUR_TARGETS: Path = SPECIES_DIR / "off_flavour_targets.yml"
 TOXIC_MARKERS: Path = SPECIES_DIR / "toxic_markers.yml"
 PRECURSORS: Path = SPECIES_DIR / "precursors.yml"
+
+# --------------------------------------------------------------------------- data/perception
+#: 2026-11-15 (perception step 7.1, docs/reference/perception/SCOPING_2026-11.md): cited odour thresholds,
+#: one entry per lever-table odorant. A reference input; the engine does not read it.
+PERCEPTION_DIR: Path = DATA_ROOT / "perception"
+PERCEPTION_THRESHOLDS: Path = PERCEPTION_DIR / "thresholds.yml"
 
 # --------------------------------------------------------------------------- data/ (loose)
 INTERVENTIONS: Path = DATA_ROOT / "interventions.yml"

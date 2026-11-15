@@ -163,6 +163,7 @@ def gather() -> Dict[str, Any]:
     files += [Path(p) for p in sorted(glob.glob(str(data_paths.TIMESERIES_DIR / "*.yml")))]
     files += [Path(p) for p in sorted(glob.glob(str(data_paths.BENCHMARKS_DIR / "**" / "*.json"), recursive=True))]
     files += [Path(p) for p in sorted(glob.glob(str(data_paths.SPECIES_DIR / "*.yml")))]
+    files += [Path(p) for p in sorted(glob.glob(str(data_paths.PERCEPTION_DIR / "*.yml")))]
     files += [Path(p) for p in sorted(glob.glob(str(data_paths.PROTOCOLS_DIR / "**" / "*.json"), recursive=True))]
     files += [Path(p) for p in sorted(glob.glob(str(data_paths.PROTOCOLS_DIR / "**" / "*.yaml"), recursive=True))]
     files = [f for f in files if f != data_paths.PAPER_REGISTRY and f != data_paths.COMPOUND_REGISTRY]

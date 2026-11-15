@@ -104,6 +104,18 @@ def load_mapping(path: Path | str, *, missing_ok: bool = False) -> Optional[Dict
     return payload
 
 
+def load_perception_thresholds() -> Dict[str, Any]:
+    """``data/perception/thresholds.yml`` (perception step 7.1): one entry per lever-table odorant.
+
+    Raises :class:`DataFileMissing` when the file is absent. Plain mapping out; the schema
+    (``data/schemas/perception_thresholds.schema.json``) is enforced by ``scripts/ci/schema_gate.py``.
+    Not read by the engine.
+    """
+    payload = load_mapping(data_paths.PERCEPTION_THRESHOLDS)
+    assert payload is not None  # missing_ok is False: absence raised above
+    return payload
+
+
 def clear_cache() -> None:
     """Forget every cached parse (for tests that rewrite a data file in place)."""
     _CACHE.clear()

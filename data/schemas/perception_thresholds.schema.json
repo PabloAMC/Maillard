@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "maillard/perception_thresholds.schema.json",
+  "title": "Cited odour thresholds for the lever-table odorants (perception step 7.1)",
+  "description": "data/perception/thresholds.yml. One entry per lever-table odorant: a cited threshold or an explicit no_measured_threshold with its reason. Each threshold record carries the ThresholdRecord fields of src/kinetic_core/matrix_oav.py plus medium, units, criterion, route and source as required keys. Validated by scripts/ci/schema_gate.py.",
+  "type": "object",
+  "required": ["schema_version", "description", "rules", "excluded_sources", "odorants"],
+  "additionalProperties": true,
+  "properties": {
+    "schema_version": {"const": 1},
+    "description": {"type": "string", "minLength": 1},
+    "rules": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+    "excluded_sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["source", "reason"],
+        "properties": {"source": {"type": "string"}, "reason": {"type": "string"}}
+      }
+    },
+    "odorants": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/odorant"}
+    }
+  },
+  "$defs": {
+    "odorant": {
+      "type": "object",
+      "required": ["compound", "compound_id", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "compound": {"type": "string", "minLength": 1, "description": "The lever table's spelling (results/validation/lever_table.json cells[].compound)."},
+        "compound_id": {"type": "string", "minLength": 1, "description": "The data/keys/compounds.yml id the spelling resolves to."},
+        "status": {"enum": ["cited_threshold", "no_measured_threshold"]},
+        "thresholds": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/threshold"}},
+        "reason": {"type": "string", "minLength": 1}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"status": {"const": "cited_threshold"}}},
+          "then": {"required": ["thresholds"], "not": {"required": ["reason"]}}
+        },
+        {
+          "if": {"properties": {"status": {"const": "no_measured_threshold"}}},
+          "then": {"required": ["reason"], "not": {"required": ["thresholds"]}}
+        }
+      ]
+    },
+    "threshold": {
+      "type": "object",
+      "required": [
+        "id", "compound_as_printed", "medium", "matrix", "value", "units", "value_ug_per_l", "temperature_c",
+        "criterion", "method", "route", "source", "source_paper_id", "doi", "table", "row", "quoted",
+        "source_kind", "role"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {"type": "string", "pattern": "^[a-z0-9_]+$"},
+        "compound_as_printed": {"type": "string", "minLength": 1},
+        "name_mapping": {"type": "string", "minLength": 1, "description": "Required (by the unit test) when compound_as_printed does not resolve to compound_id."},
+        "medium": {"enum": ["water", "air", "gelatin_3pct"], "description": "Where the threshold was measured. Media are matched before any comparison (SCOPING sec. 4, row 7.3)."},
+        "matrix": {"type": "string", "minLength": 1, "description": "ThresholdRecord.matrix (the select_threshold key)."},
+        "value": {"type": "number", "exclusiveMinimum": 0, "description": "As printed."},
+        "units": {"enum": ["ug/L of water", "ug/kg in water", "ppb"], "description": "As printed."},
+        "value_ug_per_l": {"type": "number", "exclusiveMinimum": 0},
+        "unit_conversion": {"type": "string", "minLength": 1},
+        "temperature_c": {"type": ["number", "null"]},
+        "criterion": {
+          "enum": [
+            "detection_triangle_series_geometric_mean",
+            "50%_forced_choice",
+            "75%_uncorrected",
+            "BET_3AFC_ASTM_E679",
+            "triangle_ASTM_E1432",
+            "not_stated"
+          ]
+        },
+        "method": {"type": "string", "minLength": 1},
+        "route": {"enum": ["orthonasal", "retronasal", "not_stated"]},
+        "source": {"type": "string", "minLength": 1},
+        "source_paper_id": {"type": "string", "minLength": 1, "description": "A paper_id of data/keys/papers.yml."},
+        "doi": {"type": ["string", "null"]},
+        "table": {"type": "string", "minLength": 1},
+        "row": {"type": "string", "minLength": 1},
+        "quoted": {"type": "string", "minLength": 1},
+        "source_kind": {"enum": ["primary_measurement", "secondary_quotation"]},
+        "primary_citation": {"type": "string", "minLength": 1},
+        "role": {"const": "reference_input"},
+        "thermal_step_after_dosing": {"type": ["boolean", "null"]},
+        "concentration_verified": {"type": ["boolean", "null"]},
+        "cross_study_cross_method": {"type": ["boolean", "null"]},
+        "aqueous_reference_source": {"type": ["string", "null"]},
+        "dispersion_scale": {"type": "string"},
+        "provenance_flag": {"type": "string"},
+        "notes": {"type": "string"}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"source_kind": {"const": "secondary_quotation"}}},
+          "then": {"required": ["primary_citation"]}
+        },
+        {
+          "if": {"properties": {"units": {"enum": ["ug/kg in water", "ppb"]}}},
+          "then": {"required": ["unit_conversion"]}
+        }
+      ]
+    }
+  }
+}

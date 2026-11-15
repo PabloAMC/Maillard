@@ -1,0 +1,1106 @@
+schema_version: 1
+schema: data/schemas/perception_thresholds.schema.json
+step: perception 7.1 (docs/reference/perception/SCOPING_2026-11.md sec. 4, row 7.1 and its result block)
+curated: 2026-11-15
+description: >-
+  Odour thresholds for the odorants of the lever table (results/validation/lever_table.json, every compound that
+  enters a cell), one entry per odorant: a cited threshold with its medium, units, criterion and route, or an
+  explicit no_measured_threshold with the reason. Hand-curated; every record quotes its table and row. A reference
+  INPUT for a perception reading, never a scored prediction, and not read by the engine (src/kinetic_core/).
+rules:
+  - One panel and one method first. Czerny et al. 2008 Table 1 (water, orthonasal, detection threshold) is keyed
+    for every lever-table odorant it lists; the recognition threshold of the same row is quoted in the notes, not
+    keyed as a second criterion.
+  - Other sources only where Czerny 2008 has no value for that odorant in that medium. A secondary source counts
+    only when it names the primary for that row; it is then keyed with source_kind secondary_quotation and the
+    primary in primary_citation.
+  - One criterion per odorant per medium. A gelatin record (75 % uncorrected) next to a water record (triangle
+    series) is a different medium, not a conversion; the two are never compared without matching media.
+  - The value is keyed as printed with the printed units. value_ug_per_l is the same number in ug/L; any
+    conversion behind it is stated in unit_conversion.
+excluded_sources:
+  - source: data/species/desirable_targets.yml, data/species/off_flavour_targets.yml
+    reason: uncited; their declared source (pathways.md) exists nowhere (the files say so).
+  - source: Zhou 2023 SI Table S2 (WATER_THRESHOLDS in src/kinetic_core/matrix_oav.py)
+    reason: provenance unknown; the SI prints no reference for any value.
+  - source: Thong et al. 2024 (Food Res Int 177:113848) Table 4, Threshold column
+    reason: no primary citation and no medium for any row, so it fails the secondary-source rule. Its values are
+      quoted in the notes of the odorants it lists, for comparison only.
+  - source: matrix_oav.py water values back-solved from published OAVs (Xin 2026 / 2026b) or printed there without
+      a citation (1-octen-3-ol, nonanal, 2-pentylfuran, 2-heptanone)
+    reason: no measured threshold behind them; back-solving recovers the unnamed value another paper used.
+odorants:
+- compound: (E)-2-Nonenal
+  compound_id: e_2_nonenal
+  status: cited_threshold
+  thresholds:
+  - id: czerny2008_table1_no71_e_2_nonenal
+    compound_as_printed: (E)-2-Nonenal
+    medium: water
+    matrix: water
+    value: 0.19
+    units: ug/L of water
+    value_ug_per_l: 0.19
+    temperature_c: 21.0
+    criterion: detection_triangle_series_geometric_mean
+    method: Czerny 2008 procedure A (ethanolic stock, 0.1 mL per L tap water, 1:3 dilution series); triangle
+      series in decreasing concentration; panel threshold = geometric mean of individual thresholds; 13-22
+      assessors
+    route: orthonasal
+    source: Czerny et al. 2008, Eur Food Res Technol 228:265-273, Table 1 row 71
+    source_paper_id: czerny2008
+    doi: 10.1007/s00217-008-0931-x
+    table: Table 1
+    row: '71'
+    quoted: 71 (E)-2-Nonenal(a) | Fatty, green | recognition 0.69 | detection 0.19 | literature range 0.08-0.4 | [7, 48]
+    source_kind: primary_measurement
+    role: reference_input
+    notes: Recognition threshold 0.69 ug/L (same row), not keyed.
+- compound: (E)-2-Octenal
+  compound_id: e_2_octenal
+  status: cited_threshold
+  thresholds:
+  - id: vega1994_table1_ref_t_2_octenal_water
+    compound_as_printed: t-2-Octenal
+    name_mapping: t-2-Octenal is (E)-2-octenal (t = trans = E); the printed spelling does not resolve in
+      data/keys/compounds.yml.
+    medium: water
+    matrix: water
+    value: 3.0
+    units: ppb
+    value_ug_per_l: 3.0
+    unit_conversion: ppb in water taken as ug/L (density 1 kg/L).
+    temperature_c: null
+    criterion: not_stated
+    method: not stated in the quoting source
+    route: not_stated
+    source: Vega & Brewer 1994, J Food Lipids 1:229-245, Table 1, t-2-Octenal, 22 C row, Ref. ppb column (footnote
+      w), quoting Guadagni et al. 1972
+    source_paper_id: vega1994
+    doi: 10.1111/j.1745-4522.1994.tb00249.x
+    table: Table 1
+    row: t-2-Octenal, 22 C, Ref. ppb
+    quoted: 't-2-Octenal | 22 C | DOT 109 ppb | Ref. 3 ppb (w = Guadagni et al. 1972)'
+    source_kind: secondary_quotation
+    primary_citation: Guadagni et al. 1972 (as footnoted by Vega & Brewer 1994; matrix_oav.py notes that Vega
+      mis-cites the 1972 venue)
+    cross_study_cross_method: true
+    role: reference_input
+    notes: Czerny 2008 has no (E)-2-octenal row. Dossier data/lit/extraction_dossiers/vega1994_extraction.md sec. 3.
+  - &vega_t_2_octenal_4
+    id: vega1994_table1_t_2_octenal_gelatin_4c
+    compound_as_printed: t-2-Octenal
+    name_mapping: t-2-Octenal is (E)-2-octenal (t = trans = E); the printed spelling does not resolve in
+      data/keys/compounds.yml.
+    medium: gelatin_3pct
+    matrix: gelatin_3pct
+    value: 140.0
+    units: ppb
+    value_ug_per_l: 140.0
+    unit_conversion: ppb in a 3 % w/v gelatin gel taken as ug/L, as src/kinetic_core/matrix_oav.py does (nominal
+      dose, never verified).
+    temperature_c: 4.0
+    criterion: 75%_uncorrected
+    method: single sample vs a gelatin control, ascending series, linear least-squares fit of percent correct,
+      75 % detecting a difference, no chance correction; 16 panellists, 3 replicates; dosed at 22 C after the
+      only heat step
+    route: orthonasal
+    source: Vega & Brewer 1994, J Food Lipids 1:229-245, Table 1, t-2-Octenal, 4 C row, DOT ppb column
+    source_paper_id: vega1994
+    doi: 10.1111/j.1745-4522.1994.tb00249.x
+    table: Table 1
+    row: t-2-Octenal, 4 C
+    quoted: t-2-Octenal | 4 C | CD 0.96 | DOT 140 ppb
+    source_kind: primary_measurement
+    thermal_step_after_dosing: false
+    concentration_verified: false
+    cross_study_cross_method: false
+    role: reference_input
+    notes: Sniffed through a squeeze-bulb sniff tube (orthonasal). Dossier vega1994_extraction.md sec. 2-3.
+  - <<: *vega_t_2_octenal_4
+    id: vega1994_table1_t_2_octenal_gelatin_22c
+    value: 109.0
+    value_ug_per_l: 109.0
+    temperature_c: 22.0
+    source: Vega & Brewer 1994, J Food Lipids 1:229-245, Table 1, t-2-Octenal, 22 C row, DOT ppb column
+    row: t-2-Octenal, 22 C
+    quoted: t-2-Octenal | 22 C | CD 0.85 | DOT 109 ppb
+  - <<: *vega_t_2_octenal_4
+    id: vega1994_table1_t_2_octenal_gelatin_37c
+    value: 105.0
+    value_ug_per_l: 105.0
+    temperature_c: 37.0
+    source: Vega & Brewer 1994, J Food Lipids 1:229-245, Table 1, t-2-Octenal, 37 C row, DOT ppb column
+    row: t-2-Octenal, 37 C
+    quoted: t-2-Octenal | 37 C | CD 0.89 | DOT 105 ppb
+  - <<: *vega_t_2_octenal_4
+    id: vega1994_table1_t_2_octenal_gelatin_60c
+    value: 81.0
+    value_ug_per_l: 81.0
+    temperature_c: 60.0
+    source: Vega & Brewer 1994, J Food Lipids 1:229-245, Table 1, t-2-Octenal, 60 C row, DOT ppb column
+    row: t-2-Octenal, 60 C
+    quoted: t-2-Octenal | 60 C | CD 0.86 | DOT 81 ppb
+- compound: (E,E)-2,4-Decadienal
+  compound_id: e_e_2_4_decadienal
+  status: cited_threshold
+  thresholds:
+  - id: czerny2008_table1_no13_e_e_2_4_decadienal
+    compound_as_printed: (E,E)-2,4-Decadienal
+    medium: water
+    matrix: water
+    value: 0.027
+    units: ug/L of water
+    value_ug_per_l: 0.027
+    temperature_c: 21.0
+    criterion: detection_triangle_series_geometric_mean
+    method: Czerny 2008 procedure A (ethanolic stock, 0.1 mL per L tap water, 1:3 dilution series); triangle
+      series in decreasing concentration; panel threshold = geometric mean of individual thresholds; 13-22
+      assessors
+    route: orthonasal
+    source: Czerny et al. 2008, Eur Food Res Technol 228:265-273, Table 1 row 13
+    source_paper_id: czerny2008
+    doi: 10.1007/s00217-008-0931-x
+    table: Table 1
+    row: '13'
+    quoted: 13 (E,E)-2,4-Decadienal(a) | Fatty, deep-fried | recognition 0.077 | detection 0.027 | literature range
+      0.07-0.2 | [36, 37]
+    source_kind: primary_measurement
+    role: reference_input
+    notes: Recognition threshold 0.077 ug/L, not keyed. Thong 2024 Table 4 prints 0.07 ppb, uncited (not used).
+  - &vega_decadienal_4
+    id: vega1994_table1_tt_2_4_decadienal_gelatin_4c
+    compound_as_printed: t,t-2,4-Decadienal
+    name_mapping: t,t-2,4-Decadienal is (E,E)-2,4-decadienal; the printed spelling does not resolve in
+      data/keys/compounds.yml.
+    medium: gelatin_3pct
+    matrix: gelatin_3pct
+    value: 112.0
+    units: ppb
+    value_ug_per_l: 112.0
+    unit_conversion: ppb in a 3 % w/v gelatin gel taken as ug/L, as src/kinetic_core/matrix_oav.py does (nominal
+      dose, never verified).
+    temperature_c: 4.0
+    criterion: 75%_uncorrected
+    method: single sample vs a gelatin control, ascending series, linear least-squares fit of percent correct,
+      75 % detecting a difference, no chance correction; 16 panellists, 3 replicates; dosed at 22 C after the
+      only heat step
+    route: orthonasal
+    source: Vega & Brewer 1994, J Food Lipids 1:229-245, Table 1, t,t-2,4-Decadienal, 4 C row, DOT ppb column
+    source_paper_id: vega1994
+    doi: 10.1111/j.1745-4522.1994.tb00249.x
+    table: Table 1
+    row: t,t-2,4-Decadienal, 4 C
+    quoted: t,t-2,4-Decadienal | 4 C | CD 0.82 | DOT 112 ppb
+    source_kind: primary_measurement
+    thermal_step_after_dosing: false
+    concentration_verified: false
+    cross_study_cross_method: false
+    role: reference_input
+    notes: Gelatin, not water; a different medium from the Czerny record above, not a second criterion for it.
+  - <<: *vega_decadienal_4
+    id: vega1994_table1_tt_2_4_decadienal_gelatin_22c
+    value: 64.0
+    value_ug_per_l: 64.0
+    temperature_c: 22.0
+    source: Vega & Brewer 1994, J Food Lipids 1:229-245, Table 1, t,t-2,4-Decadienal, 22 C row, DOT ppb column
+    row: t,t-2,4-Decadienal, 22 C
+    quoted: t,t-2,4-Decadienal | 22 C | CD 0.67 | DOT 64 ppb
+  - <<: *vega_decadienal_4
+    id: vega1994_table1_tt_2_4_decadienal_gelatin_37c
+    value: 89.0
+    value_ug_per_l: 89.0
+    temperature_c: 37.0
+    source: Vega & Brewer 1994, J Food Lipids 1:229-245, Table 1, t,t-2,4-Decadienal, 37 C row, DOT ppb column
+    row: t,t-2,4-Decadienal, 37 C
+    quoted: t,t-2,4-Decadienal | 37 C | CD 0.72 | DOT 89 ppb
+  - <<: *vega_decadienal_4
+    id: vega1994_table1_tt_2_4_decadienal_gelatin_60c
+    value: 64.0
+    value_ug_per_l: 64.0
+    temperature_c: 60.0
+    source: Vega & Brewer 1994, J Food Lipids 1:229-245, Table 1, t,t-2,4-Decadienal, 60 C row, DOT ppb column
+    row: t,t-2,4-Decadienal, 60 C
+    quoted: t,t-2,4-Decadienal | 60 C | CD 0.99 | DOT 64 ppb
+- compound: 1-Hexanol
+  compound_id: 1_hexanol
+  status: no_measured_threshold
+  reason: Not in Czerny 2008 Table 1, Kerler 2010 Tables 3.2-3.3 or Vega & Brewer 1994; no other measured source on
+    disk.
+- compound: 1-Octen-3-ol
+  compound_id: 1_octen_3_ol
+  status: no_measured_threshold
+  reason: Czerny 2008 lists 1-octen-3-one (row 75), not the alcohol. The 1.5 ug/L in matrix_oav.py is printed in
+    Xin 2026b without a citation and back-solved from its OAVs; not a measured threshold.
+- compound: 2,3-Butanedione
+  compound_id: 2_3_butanedione
+  status: cited_threshold
+  thresholds:
+  - id: czerny2008_table1_no8_2_3_butanedione
+    compound_as_printed: 2,3-Butanedione
+    medium: water
+    matrix: water
+    value: 1.0
+    units: ug/L of water
+    value_ug_per_l: 1.0
+    temperature_c: 21.0
+    criterion: detection_triangle_series_geometric_mean
+    method: Czerny 2008 procedure A (ethanolic stock, 0.1 mL per L tap water, 1:3 dilution series; dichloromethane
+      stock for the purity check only); triangle series in decreasing concentration; panel threshold = geometric
+      mean of individual thresholds; 13-22 assessors
+    route: orthonasal
+    source: Czerny et al. 2008, Eur Food Res Technol 228:265-273, Table 1 row 8
+    source_paper_id: czerny2008
+    doi: 10.1007/s00217-008-0931-x
+    table: Table 1
+    row: '8'
+    quoted: 8 2,3-Butanedione(a) | Buttery | recognition 2.9 | detection 1.0 | literature range 3-6.5 | [11, 27]
+    source_kind: primary_measurement
+    role: reference_input
+    notes: Recognition threshold 2.9 ug/L, not keyed. Kerler 2010 Table 3.2 row 23 quotes 15 ug/kg (Blank et al.
+      1992); not used, Czerny has a value.
+- compound: 2,3-Dimethylpyrazine
+  compound_id: 2_3_dimethylpyrazine
+  status: no_measured_threshold
+  reason: Not in Czerny 2008, Kerler 2010 or Vega 1994. Only uncited values exist in the repository.
+- compound: 2,5-Dimethylpyrazine
+  compound_id: 2_5_dimethylpyrazine
+  status: no_measured_threshold
+  reason: Not in Czerny 2008, Kerler 2010 or Vega 1994. Thong 2024 Table 4 prints 800 ppb and Zhou 2023 SI 80 ug/L,
+    both uncited (a 10x disagreement); not used.
+- compound: 2,6-Dimethylpyrazine
+  compound_id: 2_6_dimethylpyrazine
+  status: no_measured_threshold
+  reason: Not in Czerny 2008, Kerler 2010 or Vega 1994. Zhou 2023 SI value (400 ug/L) is provenance-unknown; not
+    used.
+- compound: 2-Acetylfuran
+  compound_id: 2_acetylfuran
+  status: no_measured_threshold
+  reason: Not in Czerny 2008, Kerler 2010 or Vega 1994. Zhou 2023 SI value is provenance-unknown; not used.
+- compound: 2-Acetylthiazole
+  compound_id: 2_acetylthiazole
+  status: no_measured_threshold
+  reason: Not in Czerny 2008 or Vega 1994; Kerler 2010 lists 2-acetyl-2-thiazoline (a different compound), not
+    2-acetylthiazole. Zhou 2023 SI value is provenance-unknown; not used.
+- compound: 2-Ethyl-3,5-dimethylpyrazine
+  compound_id: 2_ethyl_3_5_dimethylpyrazine
+  status: cited_threshold
+  thresholds:
+  - id: kerler2010_table3_2_no27_2_ethyl_3_5_dimethylpyrazine
+    compound_as_printed: 2-Ethyl-3,5-dimethylpyrazine
+    medium: water
+    matrix: water
+    value: 0.16
+    units: ug/kg in water
+    value_ug_per_l: 0.16
+    unit_conversion: ug/kg of water taken as ug/L (density 1 kg/L).
+    temperature_c: null
+    criterion: not_stated
+    method: not stated in the quoting source
+    route: not_stated
+    source: Kerler, Winkel, Davidek & Blank 2010, Food Flavour Technology 2nd ed. ch. 3, Table 3.2 row 27, quoting
+      Grosch 2001
+    source_paper_id: kerler2010
+    doi: 10.1002/9781444317770.ch3
+    table: Table 3.2
+    row: '27'
+    quoted: 27 2-Ethyl-3,5-dimethylpyrazine | Earthy, roasty | 0.16 (7) | ref. 7 = Grosch (2001)
+    source_kind: secondary_quotation
+    primary_citation: Grosch (2001), as cited by Kerler et al. 2010 Table 3.2 footnote b, ref. 7
+    cross_study_cross_method: true
+    role: reference_input
+    notes: Czerny 2008 has no row for it (it names it only as the contaminant behind Guadagni's early
+      2-ethyl-3,6-dimethylpyrazine value, p. 270).
+- compound: 2-Ethyl-3,6-dimethylpyrazine
+  compound_id: 2_ethyl_3_6_dimethylpyrazine
+  status: cited_threshold
+  thresholds:
+  - id: czerny2008_p270_text_2_ethyl_3_6_dimethylpyrazine
+    compound_as_printed: 2-ethyl-3,6-dimethylpyrazine
+    medium: water
+    matrix: water
+    value: 8.6
+    units: ug/L of water
+    value_ug_per_l: 8.6
+    temperature_c: null
+    criterion: not_stated
+    method: not stated in the quoting source; re-determined by Guadagni et al. on a sample purified of
+      2-ethyl-3,5-dimethylpyrazine
+    route: not_stated
+    source: Czerny et al. 2008, Eur Food Res Technol 228:265-273, p. 270, Results, 'Purity check of reference
+      substances', quoting Guadagni et al.'s re-examination
+    source_paper_id: czerny2008
+    doi: 10.1007/s00217-008-0931-x
+    table: text, p. 270
+    row: Purity check of reference substances, paragraph 1
+    quoted: Guadagni et al. [22] determined 0.8 ug/L of water; after purification of 2-ethyl-3,5-dimethylpyrazine
+      traces 'a ten-fold higher threshold (8.6 ug/L) was reported'
+    source_kind: secondary_quotation
+    primary_citation: Guadagni et al., the re-examination after purification (Czerny 2008 gives no reference
+      number for it; [22] is the earlier Guadagni, Buttery & Teranishi 1972, J Sci Food Agric 23:1435)
+    cross_study_cross_method: true
+    role: reference_input
+    notes: Kerler 2010 Table 3.2 row 28 quotes 0.4 ug/kg (Guadagni et al. 1972), the pre-purification era; not
+      keyed, because Czerny states the purified sample gave the higher value. Kerler's 0.4 and Czerny's quoted 0.8
+      are both earlier Guadagni values on a contaminated sample.
+- compound: 2-Ethylpyrazine
+  compound_id: 2_ethylpyrazine
+  status: no_measured_threshold
+  reason: Not in Czerny 2008, Kerler 2010 or Vega 1994.
+- compound: 2-Furanmethanol
+  compound_id: 2_furanmethanol
+  status: no_measured_threshold
+  reason: Not in Czerny 2008, Kerler 2010 or Vega 1994.
+- compound: 2-Furfurylthiol (FFT)
+  compound_id: 2_furfurylthiol
+  status: cited_threshold
+  thresholds:
+  - id: czerny2008_table1_no34_2_furfurylthiol
+    compound_as_printed: 2-Furfurylthiol
+    medium: water
+    matrix: water
+    value: 0.036
+    units: ug/L of water
+    value_ug_per_l: 0.036
+    temperature_c: 21.0
+    criterion: detection_triangle_series_geometric_mean
+    method: Czerny 2008 procedure A (ethanolic stock, 0.1 mL per L tap water, 1:3 dilution series); triangle
+      series in decreasing concentration; panel threshold = geometric mean of individual thresholds; 13-22
+      assessors
+    route: orthonasal
+    source: Czerny et al. 2008, Eur Food Res Technol 228:265-273, Table 1 row 34
+    source_paper_id: czerny2008
+    doi: 10.1007/s00217-008-0931-x
+    table: Table 1
+    row: '34'
+    quoted: 34 2-Furfurylthiol(a) | Sulphury, burnt | recognition 0.080 | detection 0.036 | literature range
+      0.006-0.047 | [46, 47]
+    source_kind: primary_measurement
+    role: reference_input
+    notes: Recognition threshold 0.080 ug/L, not keyed. 3.6x above Kerler 2010's 0.01 ug/kg (Hofmann 1995) and
+      7x above Thong 2024's uncited 0.005 ppb.
+- compound: 2-Methyl-3-(2-furfuryldithio)furan
+  compound_id: 2_methyl_3_furfuryldithio_furan
+  status: no_measured_threshold
+  reason: Not in Czerny 2008, Kerler 2010 or Vega 1994 (Kerler lists 2-methyl-3-(methyldithio)furan, a different
+    compound).
+- compound: 2-Methyl-3-furanthiol (MFT)
+  compound_id: 2_methyl_3_furanthiol
+  status: cited_threshold
+  thresholds:
+  - id: kerler2010_table3_2_no1_2_methyl_3_furanthiol
+    compound_as_printed: 2-Methyl-3-furanthiol
+    medium: water
+    matrix: water
+    value: 0.007
+    units: ug/kg in water
+    value_ug_per_l: 0.007
+    unit_conversion: ug/kg of water taken as ug/L (density 1 kg/L).
+    temperature_c: null
+    criterion: not_stated
+    method: not stated in the quoting source
+    route: not_stated
+    source: Kerler, Winkel, Davidek & Blank 2010, Food Flavour Technology 2nd ed. ch. 3, Table 3.2 row 1 (repeated
+      in Table 3.3 row 1), quoting Hofmann 1995
+    source_paper_id: kerler2010
+    doi: 10.1002/9781444317770.ch3
+    table: Table 3.2
+    row: '1'
+    quoted: 1 2-Methyl-3-furanthiol | Meaty, sweet, sulfury | 0.007 (1) | ref. 1 = Hofmann (1995)
+    source_kind: secondary_quotation
+    primary_citation: Hofmann (1995), as cited by Kerler et al. 2010 Table 3.2 footnote b, ref. 1
+    cross_study_cross_method: true
+    role: reference_input
+    notes: Czerny 2008 has no MFT row. A meatiness driver (Thong 2024) with only a second-hand threshold here;
+      Hofmann 1995 is the primary to read.
+- compound: 2-Methylbutanal
+  compound_id: 2_methylbutanal
+  status: cited_threshold
+  thresholds:
+  - id: czerny2008_table1_no50_2_methylbutanal
+    compound_as_printed: (R/S)-2-Methylbutanal
+    name_mapping: (R/S)-2-Methylbutanal is the racemate of 2-methylbutanal; the stereo-prefixed spelling does not
+      resolve in data/keys/compounds.yml.
+    medium: water
+    matrix: water
+    value: 1.5
+    units: ug/L of water
+    value_ug_per_l: 1.5
+    temperature_c: 21.0
+    criterion: detection_triangle_series_geometric_mean
+    method: Czerny 2008 procedure A (ethanolic stock, 0.1 mL per L tap water, 1:3 dilution series; dichloromethane
+      stock for the purity check only); triangle series in decreasing concentration; panel threshold = geometric
+      mean of individual thresholds; 13-22 assessors
+    route: orthonasal
+    source: Czerny et al. 2008, Eur Food Res Technol 228:265-273, Table 1 row 50
+    source_paper_id: czerny2008
+    doi: 10.1007/s00217-008-0931-x
+    table: Table 1
+    row: '50'
+    quoted: 50 (R/S)-2-Methylbutanal(a) | Malty | recognition 4.4 | detection 1.5 | literature range 3-13 | [31, 58]
+    source_kind: primary_measurement
+    role: reference_input
+    notes: Recognition threshold 4.4 ug/L, not keyed.
+- compound: 2-Methylpropanal (isobutyraldehyde)
+  compound_id: 2_methylpropanal
+  status: cited_threshold
+  thresholds:
+  - id: czerny2008_table1_no61_methylpropanal
+    compound_as_printed: Methylpropanal
+    name_mapping: Methylpropanal is 2-methylpropanal (the only methylpropanal); the bare spelling does not resolve
+      in data/keys/compounds.yml.
+    medium: water
+    matrix: water
+    value: 0.49
+    units: ug/L of water
+    value_ug_per_l: 0.49
+    temperature_c: 21.0
+    criterion: detection_triangle_series_geometric_mean
+    method: Czerny 2008 procedure A (ethanolic stock, 0.1 mL per L tap water, 1:3 dilution series; dichloromethane
+      stock for the purity check only); triangle series in decreasing concentration; panel threshold = geometric
+      mean of individual thresholds; 13-22 assessors
+    route: orthonasal
+    source: Czerny et al. 2008, Eur Food Res Technol 228:265-273, Table 1 row 61
+    source_paper_id: czerny2008
+    doi: 10.1007/s00217-008-0931-x
+    table: Table 1
+    row: '61'
+    quoted: 61 Methylpropanal(a) | Malty | recognition 1.9 | detection 0.49 | literature range 1-10 | [22, 27]
+    source_kind: primary_measurement
+    role: reference_input
+    notes: Recognition threshold 1.9 ug/L, not keyed.
+- compound: 2-Methylpyrazine
+  compound_id: methylpyrazine
+  status: no_measured_threshold
+  reason: Not in Czerny 2008, Kerler 2010 or Vega 1994. Thong 2024 Table 4 prints 60,000 ppb and Zhou 2023 SI
+    60 ug/L, both uncited (a 1000x disagreement); not used.
+- compound: 2-Pentylfuran
+  compound_id: 2_pentylfuran
+  status: no_measured_threshold
+  reason: Not in Czerny 2008, Kerler 2010 or Vega 1994. The 5.8 ug/L in matrix_oav.py is back-solved from Xin 2026
+    / 2026b OAVs; not a measured threshold.
+- compound: 2-Pentylpyridine
+  compound_id: 2_pentylpyridine
+  status: no_measured_threshold
+  reason: Not in Czerny 2008, Kerler 2010 or Vega 1994.
+- compound: 3-Methylbutanal
+  compound_id: 3_methylbutanal
+  status: cited_threshold
+  thresholds:
+  - id: czerny2008_table1_no51_3_methylbutanal
+    compound_as_printed: 3-Methylbutanal
+    medium: water
+    matrix: water
+    value: 0.5
+    units: ug/L of water
+    value_ug_per_l: 0.5
+    temperature_c: 21.0
+    criterion: detection_triangle_series_geometric_mean
+    method: Czerny 2008 procedure A (ethanolic stock, 0.1 mL per L tap water, 1:3 dilution series; dichloromethane
+      stock for the purity check only); triangle series in decreasing concentration; panel threshold = geometric
+      mean of individual thresholds; 13-22 assessors
+    route: orthonasal
+    source: Czerny et al. 2008, Eur Food Res Technol 228:265-273, Table 1 row 51
+    source_paper_id: czerny2008
+    doi: 10.1007/s00217-008-0931-x
+    table: Table 1
+    row: '51'
+    quoted: 51 3-Methylbutanal(a) | Malty | recognition 1.2 | detection 0.50 | literature range 0.2-170 | [8, 22]
+    source_kind: primary_measurement
+    role: reference_input
+    notes: Recognition threshold 1.2 ug/L, not keyed.
+- compound: 5-Hydroxymethylfurfural (HMF)
+  compound_id: hmf
+  status: no_measured_threshold
+  reason: Not in Czerny 2008, Kerler 2010 or Vega 1994.
+- compound: 5-Methylfurfural
+  compound_id: 5_methylfurfural
+  status: no_measured_threshold
+  reason: Not in Czerny 2008, Kerler 2010 or Vega 1994.
+- compound: Acetaldehyde
+  compound_id: acetaldehyde
+  status: cited_threshold
+  thresholds:
+  - id: czerny2008_table1_no1_acetaldehyde
+    compound_as_printed: Acetaldehyde
+    medium: water
+    matrix: water
+    value: 25.0
+    units: ug/L of water
+    value_ug_per_l: 25.0
+    temperature_c: 21.0
+    criterion: detection_triangle_series_geometric_mean
+    method: Czerny 2008 procedure A (ethanolic stock, 0.1 mL per L tap water, 1:3 dilution series); triangle
+      series in decreasing concentration; panel threshold = geometric mean of individual thresholds; 13-22
+      assessors
+    route: orthonasal
+    source: Czerny et al. 2008, Eur Food Res Technol 228:265-273, Table 1 row 1
+    source_paper_id: czerny2008
+    doi: 10.1007/s00217-008-0931-x
+    table: Table 1
+    row: '1'
+    quoted: 1 Acetaldehyde(a) | Fresh, green | recognition 63 | detection 25 | literature range 15-120 | [26, 27]
+    source_kind: primary_measurement
+    role: reference_input
+    notes: Recognition threshold 63 ug/L, not keyed.
+- compound: Benzaldehyde
+  compound_id: benzaldehyde
+  status: no_measured_threshold
+  reason: Not in Czerny 2008 (p-anisaldehyde only), Kerler 2010 or Vega 1994.
+- compound: Bis(2-furfuryl) disulfide
+  compound_id: bis_2_furfuryl_disulfide
+  status: no_measured_threshold
+  reason: Not in Czerny 2008, Kerler 2010 or Vega 1994.
+- compound: Bis(2-methyl-3-furyl) disulfide
+  compound_id: bis_2_methyl_3_furyl_disulfide
+  status: cited_threshold
+  thresholds:
+  - id: czerny2008_table1_no56_bis_2_methyl_3_furyl_disulfide
+    compound_as_printed: Bis-(2-methyl-3-furyl) disulphide
+    medium: water
+    matrix: water
+    value: 0.00032
+    units: ug/L of water
+    value_ug_per_l: 0.00032
+    temperature_c: 21.0
+    criterion: detection_triangle_series_geometric_mean
+    method: Czerny 2008 procedure A (ethanolic stock, 0.1 mL per L tap water, 1:3 dilution series); triangle
+      series in decreasing concentration; panel threshold = geometric mean of individual thresholds; 13-22
+      assessors
+    route: orthonasal
+    source: Czerny et al. 2008, Eur Food Res Technol 228:265-273, Table 1 row 56
+    source_paper_id: czerny2008
+    doi: 10.1007/s00217-008-0931-x
+    table: Table 1
+    row: '56'
+    quoted: 56 Bis-(2-methyl-3-furyl) disulphide(a) | Meaty | recognition 0.00076 | detection 0.00032 | literature
+      range 0.00002-0.00008 | [61, 62]
+    source_kind: primary_measurement
+    role: reference_input
+    notes: Recognition 0.00076 ug/L, not keyed; the lowest recognition threshold of the 84 (p. 270). The 30 000x
+      discrepancy of SCOPING sec. 2 (desirable_targets.yml 0.02 ug/kg vs Thong 2024 0.0007 ppt) is a unit slip,
+      not a spread - see the 7.1 result block of SCOPING_2026-11.md sec. 4 and data/lit/extraction_dossiers/czerny2008_extraction.md sec. 3.
+- compound: DMHF
+  compound_id: hdmf
+  status: cited_threshold
+  thresholds:
+  - id: czerny2008_table1_no43_hdmf
+    compound_as_printed: 4-Hydroxy-2,5-dimethyl-3(2H)-furanone
+    medium: water
+    matrix: water
+    value: 40.0
+    units: ug/L of water
+    value_ug_per_l: 40.0
+    temperature_c: 21.0
+    criterion: detection_triangle_series_geometric_mean
+    method: Czerny 2008 procedure A (ethanolic stock, 0.1 mL per L tap water, 1:3 dilution series); triangle
+      series in decreasing concentration; panel threshold = geometric mean of individual thresholds; 13-22
+      assessors
+    route: orthonasal
+    source: Czerny et al. 2008, Eur Food Res Technol 228:265-273, Table 1 row 43
+    source_paper_id: czerny2008
+    doi: 10.1007/s00217-008-0931-x
+    table: Table 1
+    row: '43'
+    quoted: 43 4-Hydroxy-2,5-dimethyl-3(2H)-furanone(a) | Caramel-like | recognition 160 | detection 40 | literature
+      range 3.2-1,700 | [9, 53]
+    source_kind: primary_measurement
+    role: reference_input
+    notes: Recognition 160 ug/L, not keyed. The printed name resolves to hdmf (DMHF, Furaneol) in
+      data/keys/compounds.yml. Kerler 2010 quotes 10 ug/kg (Semmelroch 1995); Thong 2024 4 ppb, uncited.
+- compound: Dimethyl trisulfide
+  compound_id: dimethyl_trisulfide
+  status: cited_threshold
+  thresholds:
+  - id: czerny2008_table1_no19_dimethyl_trisulfide
+    compound_as_printed: Dimethyl trisulphide
+    name_mapping: '"trisulphide" is the British spelling of trisulfide; it does not resolve in
+      data/keys/compounds.yml as printed.'
+    medium: water
+    matrix: water
+    value: 0.0099
+    units: ug/L of water
+    value_ug_per_l: 0.0099
+    temperature_c: 21.0
+    criterion: detection_triangle_series_geometric_mean
+    method: Czerny 2008 procedure A (ethanolic stock, 0.1 mL per L tap water, 1:3 dilution series); triangle
+      series in decreasing concentration; panel threshold = geometric mean of individual thresholds; 13-22
+      assessors
+    route: orthonasal
+    source: Czerny et al. 2008, Eur Food Res Technol 228:265-273, Table 1 row 19
+    source_paper_id: czerny2008
+    doi: 10.1007/s00217-008-0931-x
+    table: Table 1
+    row: '19'
+    quoted: 19 Dimethyl trisulphide(a) | Cabbage-like | recognition 0.016 | detection 0.0099 | literature range 0.01
+      | [40]
+    source_kind: primary_measurement
+    role: reference_input
+    notes: Recognition 0.016 ug/L, not keyed. Agrees with Thong 2024's uncited 0.01 ppb.
+- compound: Furan
+  compound_id: furan
+  status: no_measured_threshold
+  reason: Not in Czerny 2008, Kerler 2010 or Vega 1994. Zhou 2023 SI value is provenance-unknown; not used.
+- compound: Furfural
+  compound_id: furfural
+  status: no_measured_threshold
+  reason: Not in Czerny 2008, Kerler 2010 or Vega 1994. Zhou 2023 SI value (3000 ug/L) is provenance-unknown; not
+    used.
+- compound: HEMF
+  compound_id: hemf
+  status: cited_threshold
+  thresholds:
+  - id: kerler2010_table3_2_no17_hemf
+    compound_as_printed: 2-Ethyl-4-hydroxy-5-methyl-3(2H)-furanone
+    name_mapping: Mapped by structure, not by spelling. The printed name (homofuraneol in Kerler Table 3.3 row 27)
+      is the hemf entry of data/keys/compounds.yml (SMILES CCC1OC(C)=C(O)C1=O, 2-ethyl-4-hydroxy-5-methyl-3(2H)-
+      furanone; HEMF is the tautomeric pair with 5-ethyl-4-hydroxy-2-methyl-3(2H)-furanone). The entry carries no
+      alias for it.
+    medium: water
+    matrix: water
+    value: 1.15
+    units: ug/kg in water
+    value_ug_per_l: 1.15
+    unit_conversion: ug/kg of water taken as ug/L (density 1 kg/L).
+    temperature_c: null
+    criterion: not_stated
+    method: not stated in the quoting source
+    route: not_stated
+    source: Kerler, Winkel, Davidek & Blank 2010, Food Flavour Technology 2nd ed. ch. 3, Table 3.2 row 17 (repeated
+      in Table 3.3 row 27), quoting Semmelroch et al. 1995
+    source_paper_id: kerler2010
+    doi: 10.1002/9781444317770.ch3
+    table: Table 3.2
+    row: '17'
+    quoted: 17 2-Ethyl-4-hydroxy-5-methyl-3(2H)-furanone | Caramel-like, sweet | 1.15 (26) | ref. 26 = Semmelroch
+      et al. (1995)
+    source_kind: secondary_quotation
+    primary_citation: Semmelroch et al. (1995), as cited by Kerler et al. 2010 Table 3.2 footnote b, ref. 26
+    cross_study_cross_method: true
+    role: reference_input
+    notes: Czerny 2008 has no HEMF row.
+- compound: Heptanal
+  compound_id: heptanal
+  status: cited_threshold
+  thresholds:
+  - id: vega1994_table1_ref_heptanal_water
+    compound_as_printed: Heptanal
+    medium: water
+    matrix: water
+    value: 3.0
+    units: ppb
+    value_ug_per_l: 3.0
+    unit_conversion: ppb in water taken as ug/L (density 1 kg/L).
+    temperature_c: null
+    criterion: not_stated
+    method: not stated in the quoting source
+    route: not_stated
+    source: Vega & Brewer 1994, J Food Lipids 1:229-245, Table 1, Heptanal, 22 C row, Ref. ppb column (footnote w),
+      quoting Guadagni et al. 1972
+    source_paper_id: vega1994
+    doi: 10.1111/j.1745-4522.1994.tb00249.x
+    table: Table 1
+    row: Heptanal, 22 C, Ref. ppb
+    quoted: 'Heptanal (printed "Heptenal") | 22 C | DOT 79 ppb | Ref. 3 ppb (w = Guadagni et al. 1972)'
+    source_kind: secondary_quotation
+    primary_citation: Guadagni et al. 1972 (as footnoted by Vega & Brewer 1994)
+    cross_study_cross_method: true
+    role: reference_input
+    notes: Czerny 2008 has no heptanal row. The OCR prints "Heptenal"; BP 153 C identifies heptanal (dossier).
+  - &vega_heptanal_4
+    id: vega1994_table1_heptanal_gelatin_4c
+    compound_as_printed: Heptanal
+    medium: gelatin_3pct
+    matrix: gelatin_3pct
+    value: 108.0
+    units: ppb
+    value_ug_per_l: 108.0
+    unit_conversion: ppb in a 3 % w/v gelatin gel taken as ug/L, as src/kinetic_core/matrix_oav.py does (nominal
+      dose, never verified).
+    temperature_c: 4.0
+    criterion: 75%_uncorrected
+    method: single sample vs a gelatin control, ascending series, linear least-squares fit of percent correct,
+      75 % detecting a difference, no chance correction; 16 panellists, 3 replicates; dosed at 22 C after the
+      only heat step
+    route: orthonasal
+    source: Vega & Brewer 1994, J Food Lipids 1:229-245, Table 1, Heptanal, 4 C row, DOT ppb column
+    source_paper_id: vega1994
+    doi: 10.1111/j.1745-4522.1994.tb00249.x
+    table: Table 1
+    row: Heptanal, 4 C
+    quoted: Heptanal | 4 C | CD 0.89 | DOT 108 ppb
+    source_kind: primary_measurement
+    thermal_step_after_dosing: false
+    concentration_verified: false
+    cross_study_cross_method: false
+    role: reference_input
+    notes: Dossier vega1994_extraction.md sec. 3.
+  - <<: *vega_heptanal_4
+    id: vega1994_table1_heptanal_gelatin_22c
+    value: 79.0
+    value_ug_per_l: 79.0
+    temperature_c: 22.0
+    source: Vega & Brewer 1994, J Food Lipids 1:229-245, Table 1, Heptanal, 22 C row, DOT ppb column
+    row: Heptanal, 22 C
+    quoted: Heptanal | 22 C | CD 0.57 | DOT 79 ppb
+  - <<: *vega_heptanal_4
+    id: vega1994_table1_heptanal_gelatin_37c
+    value: 62.0
+    value_ug_per_l: 62.0
+    temperature_c: 37.0
+    source: Vega & Brewer 1994, J Food Lipids 1:229-245, Table 1, Heptanal, 37 C row, DOT ppb column
+    row: Heptanal, 37 C
+    quoted: Heptanal | 37 C | CD 0.77 | DOT 62 ppb
+  - <<: *vega_heptanal_4
+    id: vega1994_table1_heptanal_gelatin_60c
+    value: 50.0
+    value_ug_per_l: 50.0
+    temperature_c: 60.0
+    source: Vega & Brewer 1994, J Food Lipids 1:229-245, Table 1, Heptanal, 60 C row, DOT ppb column
+    row: Heptanal, 60 C
+    quoted: Heptanal | 60 C | CD 0.76 | DOT 50 ppb
+- compound: Hexanal
+  compound_id: hexanal
+  status: cited_threshold
+  thresholds:
+  - id: czerny2008_table1_no37_hexanal
+    compound_as_printed: Hexanal
+    medium: water
+    matrix: water
+    value: 2.4
+    units: ug/L of water
+    value_ug_per_l: 2.4
+    temperature_c: 21.0
+    criterion: detection_triangle_series_geometric_mean
+    method: Czerny 2008 procedure A (ethanolic stock, 0.1 mL per L tap water, 1:3 dilution series; dichloromethane
+      stock for the purity check only); triangle series in decreasing concentration; panel threshold = geometric
+      mean of individual thresholds; 13-22 assessors
+    route: orthonasal
+    source: Czerny et al. 2008, Eur Food Res Technol 228:265-273, Table 1 row 37
+    source_paper_id: czerny2008
+    doi: 10.1007/s00217-008-0931-x
+    table: Table 1
+    row: '37'
+    quoted: 37 Hexanal(a) | Green, grassy | recognition 10 | detection 2.4 | literature range 4.5-479 | [10, 37]
+    source_kind: primary_measurement
+    role: reference_input
+    notes: Recognition 10 ug/L, not keyed. Guadagni 1972's 4.5 ppb (quoted by Vega 1994) not keyed; Czerny has a
+      water value.
+  - &vega_hexanal_4
+    id: vega1994_table1_hexanal_gelatin_4c
+    compound_as_printed: Hexanal
+    medium: gelatin_3pct
+    matrix: gelatin_3pct
+    value: 90.0
+    units: ppb
+    value_ug_per_l: 90.0
+    unit_conversion: ppb in a 3 % w/v gelatin gel taken as ug/L, as src/kinetic_core/matrix_oav.py does (nominal
+      dose, never verified).
+    temperature_c: 4.0
+    criterion: 75%_uncorrected
+    method: single sample vs a gelatin control, ascending series, linear least-squares fit of percent correct,
+      75 % detecting a difference, no chance correction; 16 panellists, 3 replicates; dosed at 22 C after the
+      only heat step
+    route: orthonasal
+    source: Vega & Brewer 1994, J Food Lipids 1:229-245, Table 1, Hexanal, 4 C row, DOT ppb column
+    source_paper_id: vega1994
+    doi: 10.1111/j.1745-4522.1994.tb00249.x
+    table: Table 1
+    row: Hexanal, 4 C
+    quoted: Hexanal (printed "Heranal") | 4 C | CD 0.79 | DOT 90 ppb
+    source_kind: primary_measurement
+    thermal_step_after_dosing: false
+    concentration_verified: false
+    cross_study_cross_method: false
+    role: reference_input
+    notes: Gelatin, not water; a different medium from the Czerny record above, not a second criterion for it.
+  - <<: *vega_hexanal_4
+    id: vega1994_table1_hexanal_gelatin_22c
+    value: 58.0
+    value_ug_per_l: 58.0
+    temperature_c: 22.0
+    source: Vega & Brewer 1994, J Food Lipids 1:229-245, Table 1, Hexanal, 22 C row, DOT ppb column
+    row: Hexanal, 22 C
+    quoted: Hexanal | 22 C | CD 0.51 | DOT 58 ppb
+  - <<: *vega_hexanal_4
+    id: vega1994_table1_hexanal_gelatin_37c
+    value: 34.0
+    value_ug_per_l: 34.0
+    temperature_c: 37.0
+    source: Vega & Brewer 1994, J Food Lipids 1:229-245, Table 1, Hexanal, 37 C row, DOT ppb column
+    row: Hexanal, 37 C
+    quoted: Hexanal | 37 C | CD 0.49 | DOT 34 ppb
+  - <<: *vega_hexanal_4
+    id: vega1994_table1_hexanal_gelatin_60c
+    value: 38.0
+    value_ug_per_l: 38.0
+    temperature_c: 60.0
+    source: Vega & Brewer 1994, J Food Lipids 1:229-245, Table 1, Hexanal, 60 C row, DOT ppb column
+    row: Hexanal, 60 C
+    quoted: Hexanal | 60 C | CD 0.87 | DOT 38 ppb
+- compound: Hydrogen Sulfide
+  compound_id: hydrogen_sulfide
+  status: cited_threshold
+  thresholds:
+  - id: kerler2010_table3_3_no19_hydrogen_sulfide
+    compound_as_printed: Hydrogen sulfide
+    medium: water
+    matrix: water
+    value: 10.0
+    units: ug/kg in water
+    value_ug_per_l: 10.0
+    unit_conversion: ug/kg of water taken as ug/L (density 1 kg/L).
+    temperature_c: null
+    criterion: not_stated
+    method: not stated in the quoting source
+    route: not_stated
+    source: Kerler, Winkel, Davidek & Blank 2010, Food Flavour Technology 2nd ed. ch. 3, Table 3.3 row 19, quoting
+      Pippen & Mecchi 1969
+    source_paper_id: kerler2010
+    doi: 10.1002/9781444317770.ch3
+    table: Table 3.3
+    row: '19'
+    quoted: 19 Hydrogen sulfide | Sulfury, egg-like | 10 (11) | ref. 11 = Pippen and Mecchi (1969)
+    source_kind: secondary_quotation
+    primary_citation: Pippen and Mecchi (1969), as cited by Kerler et al. 2010 Table 3.3 footnote b, ref. 11
+    cross_study_cross_method: true
+    role: reference_input
+    notes: Czerny 2008 has no H2S row. A gas; a water threshold for it says little about a product headspace.
+- compound: Methional (3-(methylthio)propanal)
+  compound_id: methional
+  status: cited_threshold
+  thresholds:
+  - id: czerny2008_table1_no64_methional
+    compound_as_printed: 3-(Methylthio)-propanal
+    medium: water
+    matrix: water
+    value: 0.43
+    units: ug/L of water
+    value_ug_per_l: 0.43
+    temperature_c: 21.0
+    criterion: detection_triangle_series_geometric_mean
+    method: Czerny 2008 procedure A (ethanolic stock, 0.1 mL per L tap water, 1:3 dilution series); triangle
+      series in decreasing concentration; panel threshold = geometric mean of individual thresholds; 13-22
+      assessors
+    route: orthonasal
+    source: Czerny et al. 2008, Eur Food Res Technol 228:265-273, Table 1 row 64
+    source_paper_id: czerny2008
+    doi: 10.1007/s00217-008-0931-x
+    table: Table 1
+    row: '64'
+    quoted: 64 3-(Methylthio)-propanal(a) | Cooked potato-like | recognition 1.4 | detection 0.43 | literature range
+      0.2-1.8 | [7, 39]
+    source_kind: primary_measurement
+    role: reference_input
+    notes: Recognition 1.4 ug/L, not keyed. 2.2x above the 0.2 ug/kg (Guadagni 1972, via Kerler 2010) used in
+      DECIDABILITY_7_0.md.
+- compound: Nonanal
+  compound_id: nonanal
+  status: cited_threshold
+  thresholds:
+  - id: czerny2008_table1_no70_nonanal
+    compound_as_printed: Nonanal
+    medium: water
+    matrix: water
+    value: 2.8
+    units: ug/L of water
+    value_ug_per_l: 2.8
+    temperature_c: 21.0
+    criterion: detection_triangle_series_geometric_mean
+    method: Czerny 2008 procedure A (ethanolic stock, 0.1 mL per L tap water, 1:3 dilution series); triangle
+      series in decreasing concentration; panel threshold = geometric mean of individual thresholds; 13-22
+      assessors
+    route: orthonasal
+    source: Czerny et al. 2008, Eur Food Res Technol 228:265-273, Table 1 row 70
+    source_paper_id: czerny2008
+    doi: 10.1007/s00217-008-0931-x
+    table: Table 1
+    row: '70'
+    quoted: 70 Nonanal(a) | Citrus-like, soapy | recognition 8.0 | detection 2.8 | literature range 1-98 | [22, 66]
+    source_kind: primary_measurement
+    role: reference_input
+    notes: Recognition 8.0 ug/L, not keyed.
+- compound: Norfuraneol (NF)
+  compound_id: norfuraneol
+  status: cited_threshold
+  thresholds:
+  - id: kerler2010_table3_3_no26_norfuraneol
+    compound_as_printed: 4-Hydroxy-5-methyl-3(2H)-furanone
+    medium: water
+    matrix: water
+    value: 8500.0
+    units: ug/kg in water
+    value_ug_per_l: 8500.0
+    unit_conversion: ug/kg of water taken as ug/L (density 1 kg/L).
+    temperature_c: null
+    criterion: not_stated
+    method: not stated in the quoting source
+    route: not_stated
+    source: Kerler, Winkel, Davidek & Blank 2010, Food Flavour Technology 2nd ed. ch. 3, Table 3.3 row 26, quoting
+      Hofmann 1995
+    source_paper_id: kerler2010
+    doi: 10.1002/9781444317770.ch3
+    table: Table 3.3
+    row: '26'
+    quoted: 26 4-Hydroxy-5-methyl-3(2H)-furanone (norfuraneol) | Caramel-like, burnt chicory | 8500 (1) | ref. 1 =
+      Hofmann (1995)
+    source_kind: secondary_quotation
+    primary_citation: Hofmann (1995), as cited by Kerler et al. 2010 Table 3.3 footnote b, ref. 1
+    cross_study_cross_method: true
+    role: reference_input
+    notes: Czerny 2008 has no norfuraneol row.
+- compound: Octanal
+  compound_id: octanal
+  status: cited_threshold
+  thresholds:
+  - id: czerny2008_table1_no74_octanal
+    compound_as_printed: Octanal
+    medium: water
+    matrix: water
+    value: 3.4
+    units: ug/L of water
+    value_ug_per_l: 3.4
+    temperature_c: 21.0
+    criterion: detection_triangle_series_geometric_mean
+    method: Czerny 2008 procedure A (ethanolic stock, 0.1 mL per L tap water, 1:3 dilution series); triangle
+      series in decreasing concentration; panel threshold = geometric mean of individual thresholds; 13-22
+      assessors
+    route: orthonasal
+    source: Czerny et al. 2008, Eur Food Res Technol 228:265-273, Table 1 row 74
+    source_paper_id: czerny2008
+    doi: 10.1007/s00217-008-0931-x
+    table: Table 1
+    row: '74'
+    quoted: 74 Octanal(a) | Citrus-like, green | recognition 6.9 | detection 3.4 | literature range 0.58-6.4 | [33,
+      65]
+    source_kind: primary_measurement
+    role: reference_input
+    notes: Recognition 6.9 ug/L, not keyed. Czerny report octanal degrading in storage (28 % left after 15 months)
+      and re-ordering it (p. 270).
+- compound: Pentanal
+  compound_id: pentanal
+  status: cited_threshold
+  thresholds:
+  - id: vega1994_table1_ref_pentanal_water
+    compound_as_printed: Pentanal
+    medium: water
+    matrix: water
+    value: 12.0
+    units: ppb
+    value_ug_per_l: 12.0
+    unit_conversion: ppb in water taken as ug/L (density 1 kg/L).
+    temperature_c: null
+    criterion: not_stated
+    method: not stated in the quoting source
+    route: not_stated
+    source: Vega & Brewer 1994, J Food Lipids 1:229-245, Table 1, Pentanal, 22 C row, Ref. ppb column (footnote v),
+      quoting Guadagni et al. 1963
+    source_paper_id: vega1994
+    doi: 10.1111/j.1745-4522.1994.tb00249.x
+    table: Table 1
+    row: Pentanal, 22 C, Ref. ppb
+    quoted: 'Pentanal | 22 C | DOT 41 ppb | Ref. 12 ppb (v = Guadagni et al. 1963)'
+    source_kind: secondary_quotation
+    primary_citation: Guadagni et al. 1963 (as footnoted by Vega & Brewer 1994)
+    cross_study_cross_method: true
+    role: reference_input
+    notes: Czerny 2008 has no pentanal row.
+  - &vega_pentanal_4
+    id: vega1994_table1_pentanal_gelatin_4c
+    compound_as_printed: Pentanal
+    medium: gelatin_3pct
+    matrix: gelatin_3pct
+    value: 47.0
+    units: ppb
+    value_ug_per_l: 47.0
+    unit_conversion: ppb in a 3 % w/v gelatin gel taken as ug/L, as src/kinetic_core/matrix_oav.py does (nominal
+      dose, never verified).
+    temperature_c: 4.0
+    criterion: 75%_uncorrected
+    method: single sample vs a gelatin control, ascending series, linear least-squares fit of percent correct,
+      75 % detecting a difference, no chance correction; 16 panellists, 3 replicates; dosed at 22 C after the
+      only heat step
+    route: orthonasal
+    source: Vega & Brewer 1994, J Food Lipids 1:229-245, Table 1, Pentanal, 4 C row, DOT ppb column
+    source_paper_id: vega1994
+    doi: 10.1111/j.1745-4522.1994.tb00249.x
+    table: Table 1
+    row: Pentanal, 4 C
+    quoted: Pentanal | 4 C | CD 0.80 | DOT 47 ppb
+    source_kind: primary_measurement
+    thermal_step_after_dosing: false
+    concentration_verified: false
+    cross_study_cross_method: false
+    role: reference_input
+    notes: Dossier vega1994_extraction.md sec. 3.
+  - <<: *vega_pentanal_4
+    id: vega1994_table1_pentanal_gelatin_22c
+    value: 41.0
+    value_ug_per_l: 41.0
+    temperature_c: 22.0
+    source: Vega & Brewer 1994, J Food Lipids 1:229-245, Table 1, Pentanal, 22 C row, DOT ppb column
+    row: Pentanal, 22 C
+    quoted: Pentanal | 22 C | CD 0.72 | DOT 41 ppb
+  - <<: *vega_pentanal_4
+    id: vega1994_table1_pentanal_gelatin_37c
+    value: 34.0
+    value_ug_per_l: 34.0
+    temperature_c: 37.0
+    source: Vega & Brewer 1994, J Food Lipids 1:229-245, Table 1, Pentanal, 37 C row, DOT ppb column
+    row: Pentanal, 37 C
+    quoted: Pentanal | 37 C | CD 0.64 | DOT 34 ppb
+  - <<: *vega_pentanal_4
+    id: vega1994_table1_pentanal_gelatin_60c
+    value: 22.0
+    value_ug_per_l: 22.0
+    temperature_c: 60.0
+    source: Vega & Brewer 1994, J Food Lipids 1:229-245, Table 1, Pentanal, 60 C row, DOT ppb column
+    row: Pentanal, 60 C
+    quoted: Pentanal | 60 C | CD 0.67 | DOT 22 ppb
+- compound: Phenylacetaldehyde
+  compound_id: phenylacetaldehyde
+  status: cited_threshold
+  thresholds:
+  - id: kerler2010_table3_2_no21_phenylacetaldehyde
+    compound_as_printed: Phenylacetaldehyde
+    medium: water
+    matrix: water
+    value: 4.0
+    units: ug/kg in water
+    value_ug_per_l: 4.0
+    unit_conversion: ug/kg of water taken as ug/L (density 1 kg/L).
+    temperature_c: null
+    criterion: not_stated
+    method: not stated in the quoting source
+    route: not_stated
+    source: Kerler, Winkel, Davidek & Blank 2010, Food Flavour Technology 2nd ed. ch. 3, Table 3.2 row 21, quoting
+      Guadagni et al. 1972
+    source_paper_id: kerler2010
+    doi: 10.1002/9781444317770.ch3
+    table: Table 3.2
+    row: '21'
+    quoted: 21 Phenylacetaldehyde | Honey-like, sweet, flowery | 4 (18) | ref. 18 = Guadagni et al. (1972)
+    source_kind: secondary_quotation
+    primary_citation: Guadagni et al. (1972), as cited by Kerler et al. 2010 Table 3.2 footnote b, ref. 18
+    cross_study_cross_method: true
+    role: reference_input
+    notes: Czerny 2008 has no phenylacetaldehyde row (phenylacetic acid and 2-phenylethanol only).
+- compound: Pyrazines
+  compound_id: pyrazines
+  status: no_measured_threshold
+  reason: A class total, not one odorant. Thresholds are per molecule and differ by orders of magnitude between
+    pyrazines (Kerler 2010 Table 3.2 rows 27-32 quote 0.09 to 62 ug/kg for four of them); a summed concentration
+    has no threshold.
+- compound: Tetramethylpyrazine
+  compound_id: tetramethylpyrazine
+  status: no_measured_threshold
+  reason: Not in Czerny 2008, Kerler 2010 or Vega 1994.
+- compound: Trimethylpyrazine
+  compound_id: trimethylpyrazine
+  status: no_measured_threshold
+  reason: Not in Czerny 2008, Kerler 2010 or Vega 1994.
+- compound: Unsubstituted pyrazine
+  compound_id: pyrazine_unsubstituted
+  status: no_measured_threshold
+  reason: Not in Czerny 2008, Kerler 2010 or Vega 1994. Zhou 2023 SI value (75 000 ug/L) is provenance-unknown;
+    not used.

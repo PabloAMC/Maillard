@@ -66,6 +66,9 @@ data/*
 !data/research_corpus/**
 !data/formulation_grid.yml
 !data/interventions.yml
+# 2026-11-15: perception step 7.1, cited odour thresholds (data/perception/thresholds.yml)
+!data/perception/
+!data/perception/**
 
 # Bulky & auto-generated data exclusions
 data/lit/*.pdf
