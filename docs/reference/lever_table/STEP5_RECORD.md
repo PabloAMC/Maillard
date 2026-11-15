@@ -67,6 +67,13 @@ registered before reading and keyed blind, giving a cell two TEST laboratories t
 these, the input gaps of point 1 are worth closing BEFORE the data are read, so that the engine is frozen when it
 meets them.
 
+**Amendment (2026-11-14).** For a designed study, the trigger is the laboratory's commitment (an agreed protocol
+and lot), not the arrival of its data. Closing the input gaps takes engine work of the order of 100 h (STATUS_AND_PLAN
+W3, A2 + H3); a laboratory's method work and runs take weeks; starting on commitment lets the engine be frozen, and
+its freeze recorded, before any value of that study is read, which is what this section asks. The gaps are judged
+against the study's own design (the P3 dry run, `results/validation/p3_engine_dry_run.md`), never against contrasts
+already read. Literature-only work (scoping, keying blind, the perception layer) was never paused.
+
 ## Bookkeeping
 
 5a and 5c are two of the step-5 scoring looks at TEST contrasts that sec. 0 allows (at most three before

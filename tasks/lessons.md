@@ -681,3 +681,10 @@ have no null answer): counting it as a difference of 0 pulls the mean to zero an
   failed in CI 20 minutes later.
 - **Rule:** any new UPPERCASE global in `src/kinetic_core/` goes into `tests/engine_constants.py` (or becomes a
   ConfigKey) in the same commit; add `tests/unit/test_engine_config.py` to the targeted run.
+
+## Check the plan's standing pauses before proposing work (2026-11-14)
+- **What happened:** after the P3 dry run I proposed engine structure and constant work (lane composition,
+  trimethylpyrazine, a Strecker arm) and the owner approved it, but STATUS_AND_PLAN row 6 / STEP5_RECORD pause every
+  engine constant and structure until outside data exist. Caught before any code was written.
+- **Rule:** before proposing a next step, grep STATUS_AND_PLAN for 'pause' / 'frozen' / 'waits' on the area, and say in
+  the proposal which rule it sits under (or which amendment it needs).
