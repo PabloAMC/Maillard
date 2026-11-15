@@ -691,3 +691,5 @@ have no null answer): counting it as a difference of 0 pulls the mean to zero an
   engine constant and structure until outside data exist. Caught before any code was written.
 - **Rule:** before proposing a next step, grep STATUS_AND_PLAN for 'pause' / 'frozen' / 'waits' on the area, and say in
   the proposal which rule it sits under (or which amendment it needs).
+
+- **Never run a map generator inside an unresolved merge** (2026-11-15, #154). `git checkout --theirs` leaves the index conflicted, so `git ls-files` lists each conflicted file once per stage and data/README.md counts it three times; `--check` passes locally against the same broken index. Resolve first (`git add` the file), then regenerate and `--check`.
