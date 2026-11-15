@@ -26,13 +26,23 @@ cysteine, H2S or pH.
 | zhang1989 | 2,4-decadienal + cysteine, 180 C | cysteine | cysteine also FORMS hexanal (278.6 mg/mol vs 45.4 with glutathione) | |
 | zhang2021, du2023, du2024 | aldehyde + cysteine or H2S | thiol sink | thiazolidines, 2-alkylthiophenes (figures only) | |
 | fischer2021 | pea isolate, unheated | pH (release) | the isolate carries ~5 ug/g hexanal; release +59 % at pH 4.5 vs 6.5 | |
+| elmore1999 | beef, linseed / fish-oil feeding, 140 C 30 min | fatty-acid profile | +0.37 to +0.40 (not tracking linoleic share) | nonanal, decadienal, 2-pentylfuran n.s. |
+| morales2001 | 0.1 M sugar + amino acid, 100 C 3 - 24 h | sugar, amino acid (radical scavenging) | not measured | glucose vs lactose <= 0.15 dex; lysine fastest |
+| hidalgo2006 | bulk olive oil, Rancimat 110 C | PE, lysine (antioxidant) | not measured | induction period +0.07 to +0.17 dex |
+| whitfield1992, zamora2005 | reviews (secondary) | mechanisms | | cysteine vs glycine 2-pentylfuran -0.31 dex (whitfield1988, cited); glutathione diverts decadienal from hexanal |
 
-Nothing on disk measures Maillard reaction products acting as antioxidants on lipid oxidation in a heated pot.
+**Added 2026-11-15** (the last five rows; dossiers in `data/lit/extraction_dossiers/`). None supports a declared band:
+- Maillard products act both ways on lipid oxidation: some studies find them pro-oxidant (glycated phospholipid,
+  Amadori compounds), others antioxidant (browned protein). No heated-pot measurement on disk settles which.
+- pH is almost unstudied (Whitfield names it a gap).
+- No paper on disk tests thiamine against cysteine in a lipid pot.
+- elmore1999 and whitfield1992's numbers come from the Reading laboratory and pot design of the two hold-outs, so a
+  leave-one-laboratory-out split puts them in the same fold.
 
 ## Reading (calibrated; the probability that the lever moves hexanal by more than 0.3 dex in the P3 pot)
 
 - **Sulfur source (cysteine vs thiamine): P ~ 0.30, cysteine lower.** Thiazolidines and H2S trapping are specific to
-  the thiol. Nonanal P ~ 0.45, cysteine lower; 2-pentylfuran P ~ 0.3, sign leaning cysteine-higher. A zero is not
+  the thiol. Nonanal P ~ 0.45, cysteine lower; 2-pentylfuran P ~ 0.3, sign unclear (up with cysteine + ribose in farmer1992 and elmore2002, down for cysteine vs glycine in whitfield1988). A zero is not
   defensible here.
 - **Sugar (glucose vs ribose): P ~ 0.15, sign unknown.** Xin 2026 bounds the spread across carbohydrates at 0.38 dex.
 - **pH (6 vs 7): P ~ 0.12, sign unknown.** The two on-disk pH series disagree in sign.
