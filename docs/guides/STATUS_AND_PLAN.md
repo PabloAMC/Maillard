@@ -28,12 +28,15 @@ active at a time. Reasons and evidence are in sec. 4.1. Premortem: adopted with 
 **Goal (owner, 2026-11-10).** The most useful tool for alternative-protein scientists; where the tool cannot answer,
 it says explicitly which experiment would.
 
-**Where we are (2026-11-14): steps 0 - 15 are done; the engine is PAUSED, WAITING FOR DATA, and the perception
+**Where we are (2026-11-15): steps 0 - 15 are done; the engine is PAUSED, WAITING FOR DATA, and the perception
 layer is PARKED. The lever table holds 99 sources and 560 cells; the experiment map reads **8 of 75 answered**. A6 is
 deprioritised (no qualifying pH paper; its decisive measurement is recorded). The literature route for cells one
 laboratory short works for time and temperature series (step 15: 7 qualifying, 2 cells answered) and failed for pH
 (step 13) and cysteine (step 14); most cells it reached now read "direction unclear", that is, laboratories disagree.
-Next: step 16, designed data as the main line (owner, 2026-11-14): sizing, design update, premortem, outreach package.**
+Step 16, designed data as the main line (owner, 2026-11-14): sizing, design update, premortem, A7 coded, the
+outreach package, all done (16a - 16f, 16h). Next: the owner's first contact with a laboratory; then 16g (sizing
+on its confirmed panel). A laboratory's commitment also ends the engine pause for P3 (STEP5_RECORD amendment
+2026-11-14: lane structure, trimethylpyrazine, Strecker arm, the L1 lipid sink), frozen before any P3 value.**
 Steps 5a - 5c found that the engine can be run on none of the held-out contrasts on disk, nor on the conflicts
 between laboratories; what blocks it is inputs and coverage (hydrolysate compositions, targets for the aldehydes the
 literature reports, the falsified pH balance), and none of that can be judged without new data. Record:
