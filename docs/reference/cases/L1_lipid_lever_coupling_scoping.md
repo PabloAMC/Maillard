@@ -30,6 +30,11 @@ cysteine, H2S or pH.
 | morales2001 | 0.1 M sugar + amino acid, 100 C 3 - 24 h | sugar, amino acid (radical scavenging) | not measured | glucose vs lactose <= 0.15 dex; lysine fastest |
 | hidalgo2006 | bulk olive oil, Rancimat 110 C | PE, lysine (antioxidant) | not measured | induction period +0.07 to +0.17 dex |
 | whitfield1992, zamora2005 | reviews (secondary) | mechanisms | | cysteine vs glycine 2-pentylfuran -0.31 dex (whitfield1988, cited); glutathione diverts decadienal from hexanal |
+| alaiz1999 | ribose-browned BSA, 100 ppm in soybean oil, 60 C 264 h | browning pH (buffer-confounded) | not measured | TBARS vs control protein -0.07 / -0.20 / -0.08 dex at pH 4 / 7 / 10 (derived from figures); antioxidant, tracks lysine loss |
+| hidalgo1999 | BSA + oxidised-linoleate products, 80 C | pH | not measured | lysine consumed +0.33 dex at pH 7 vs 4: the amine sink peaks near neutral |
+| ohnishi1984 | dry beef fat +/- glycine, 200 C 4 h (area %, single runs) | amino acid (NH3 sink) | -0.38 | nonanal -1.14; heptanal, decanal <= -1.9; 2-alkylpyridines form |
+| mottram1989 | cysteine + ribose +/- lipid, pH 5.7, 140 C 1 h (review, relative values) | lipid on the sulfur lane | not measured | lipid lowers H2S-derived thiols -0.14 to -1.52 dex; cysteine >= +1.0 dex 2-pentylpyridine vs glycine |
+| farag1982 | MRPs of 16 amino acids x 5 sugars on linoleate emulsion, 50 C | amino acid; sugar (induction period) | not measured | cysteine-HCl products the weakest antioxidant (-0.05 to -0.14 dex vs median; pH 2-confounded); glucose vs pentose median +0.03 dex |
 
 **Added 2026-11-15** (the last five rows; dossiers in `data/lit/extraction_dossiers/`). None supports a declared band:
 - Maillard products act both ways on lipid oxidation: some studies find them pro-oxidant (glycated phospholipid,
@@ -38,6 +43,12 @@ cysteine, H2S or pH.
 - No paper on disk tests thiamine against cysteine in a lipid pot.
 - elmore1999 and whitfield1992's numbers come from the Reading laboratory and pot design of the two hold-outs, so a
   leave-one-laboratory-out split puts them in the same fold.
+
+**Added 2026-11-15, second batch** (alaiz1999, hidalgo1999, ohnishi1984, mottram1989, farag1982). No probability in the Reading changes; none measures hexanal with and without a P3 lever:
+- Sulfur: ohnishi1984 and mottram1989 support an amine / H2S carbonyl sink, strongest on dienals and long aldehydes. farag1982 adds a small opposite channel (cysteine products the weakest antioxidant, <= 0.14 dex and pH-confounded), so the sign is a little less certain; the magnitude is unchanged.
+- pH: alaiz1999 and hidalgo1999 lean weakly to hexanal lower at pH 7 than pH 4 (more antioxidant browning, a stronger amine sink); no pH 6 arm, and pH is confounded with buffer.
+- Sugar: farag1982's glucose-vs-pentose median is about 0 with +/- 0.1 dex scatter.
+- Folds: alaiz1999 and hidalgo1999 join zamora2005 and hidalgo2006 in the Seville laboratory; mottram1989 joins the Reading fold of the hold-outs.
 
 ## Reading (calibrated; the probability that the lever moves hexanal by more than 0.3 dex in the P3 pot)
 
