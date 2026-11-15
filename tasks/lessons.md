@@ -674,6 +674,9 @@ have no null answer): counting it as a difference of 0 pulls the mean to zero an
 - **What happened:** `build_results_readme.py` maps tracked files only; run before `git add` of a new record, it
   writes a map without that record, and `test_results_readme` fails in CI ten minutes later.
 - **Rule:** `git add` every new results file first, then rebuild the map and run it with `--check`.
+- **Third occurrence (2026-11-15), `data/README.md` with five new dossiers.** The rule is general: any new tracked
+  file under `data/` or `results/` -> `git add` it, then rebuild BOTH maps (`build_data_readme.py`,
+  `build_results_readme.py`) and run each with `--check` before pushing.
 
 ## A new module-level constant in src/kinetic_core needs a home (2026-11-14)
 - **What happened:** `matrix_oav.RESOLUTION_FLOOR_UG_PER_L` was added and read at call time; targeted tests passed,
