@@ -120,7 +120,9 @@ comes with the data.
   presentation rule and a wiring bug, not a constant or a structure; these are structure and constants, so they
   start when a laboratory commits to P3 (STEP5_RECORD 'When the pause ends', amendment 2026-11-14), in this order:
   the lane structure (A2, at parity on the sulfur panel), trimethylpyrazine, the Strecker arm (after the lot's
-  composition is known); all frozen before any P3 value is read. 1-octen-3-ol stays out of scope. | the updated design (one laboratory), its premortem, A7, the outreach package; ready for the owner (16h done) | 6 h (16a - 16d done); 16e 3 h, 16f 3 h, 16h 3 h |
+  composition is known); all frozen before any P3 value is read. 1-octen-3-ol stays out of scope. The lipid zeros: scoped 11-14/15 in
+  [L1_lipid_lever_coupling_scoping.md](../reference/cases/L1_lipid_lever_coupling_scoping.md) (a thiol / H2S carbonyl sink for the
+  sulfur lever; waits with the rest). | the updated design (one laboratory), its premortem, A7, the outreach package; ready for the owner (16h done) | 6 h (16a - 16d done); 16e 3 h, 16f 3 h, 16h 3 h |
 | later | **Without a laboratory, optional:** requests to authors for supplementary tables of the discordant cells (drafted here, sent by the owner) | -- | -- |
 
 **The record of steps 0 - 5 follows.**
