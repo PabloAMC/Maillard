@@ -813,6 +813,36 @@ def thiamine_h2s_share(ph: float) -> float:
     return 10.0 ** (math.log10(f0) + (x - p0) / (p1 - p0) * (math.log10(f1) - math.log10(f0)))
 
 
+@dataclass(frozen=True)
+class ThiamineH2sUnmeasuredRival:
+    """2026-11-17 (STEP5_RECORD amendment, owner): the CARRIED RIVAL to the share's zero where that zero is not measured.
+
+    ``thiamine_h2s_share`` is 0 below pH 6.25 at every temperature; the zero is measured only near 100 C (Dwivedi &
+    Arnold 1971, ~96-100 C bath). At 120 C the literature disagrees: Dwivedi & Arnold 1971 (methylene blue; Fig. 4
+    22.5 mmol H2S / mol thiamine over Fig. 2's 6.3 % loss, pH 6.0, 30 min) read ~0.36 of the degraded thiamine as H2S;
+    Dwivedi & Arnold 1972 (35S, 121 C) bound it at <= 0.014. Nothing is measured above 121 C. This rival is 1971's
+    upper reading, applied where the share is evaluated (the label-scale pH table, as the share) when the pH is below
+    the floor and the temperature is above ``above_c``. It is never shipped: ``thiamine_h2s_refusal`` integrates it
+    beside the shipped zero and refuses the outputs it moves. Off: the engine is bit-identical.
+    """
+
+    enabled: bool = False
+    share: float = 0.36
+    #: the measured zero is a ~96-100 C bath (arnold1971_extraction.md sec. 2); the rival starts 5 K above it
+    above_c: float = 105.0
+    source: str = ("Dwivedi & Arnold 1971, J. Agric. Food Chem. 19:923 (doi 10.1021/jf60177a033), Fig. 4 / Fig. 2 at "
+                   "pH 6.0, 120 C, 30 min: ~0.36 of degraded thiamine as H2S (arnold1971_extraction.md; "
+                   "dwivedi1972_extraction.md sec. 4 item 4); rival to the shipped zero, against Dwivedi & Arnold "
+                   "1972's 35S bound <= 0.014 at 121 C")
+
+    def covers(self, ph: float, temperature_k: float) -> bool:
+        """Whether (pH, T) is in the unmeasured region the rival replaces: below the floor, above ``above_c``."""
+        return float(ph) < THIAMINE_H2S_SHARE_FLOOR_PH and float(temperature_k) - 273.15 > float(self.above_c)
+
+
+THIAMINE_H2S_UNMEASURED_RIVAL = ThiamineH2sUnmeasuredRival()
+
+
 def glutathione_thermolysis_k(ph: float, temperature_k: float) -> float:
     """k for glutathione -> H2S, 1/min. The pH treatment is cysteine's (cysteine_thermolysis_arrhenius):
     the pH-3.0 pair as measured below the mechanism boundary, ln A and Ea linear in pH over 5-9,

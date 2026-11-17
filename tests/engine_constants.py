@@ -245,6 +245,7 @@ CONSTANTS = {
     },
     'provenance': {
         'ph_balance_refusal': 'LIFT_TEXT BAND_LIMIT_TEXT BAND_LIMIT_SHORT',
+        'thiamine_h2s_refusal': 'LIFT_TEXT',
         'acrylamide_conditions': 'AW_SOURCE EA_INT1_SOURCE PH_SOURCE',
         'engine': 'BUFFER_ABSENT_WARNING',
         'matrix_oav': 'COVALENT_CEILING_RETIREMENT',
@@ -281,6 +282,7 @@ CONSTANTS = {
             'VALUE_LEVELS'
         ),
         'ph_balance_refusal': 'BALANCE_REFUSED_TAG FAILED',
+        'thiamine_h2s_refusal': 'THIAMINE_KEY THIAMINE_REFUSED_TAG',
         'thiol_relative_only': 'ABSOLUTE_REFUSED_TAG CALIBRATE_GENERATOR',
         'trunk_conditions': 'ATMOSPHERE_REFERENCE',
         'uncertainty': (

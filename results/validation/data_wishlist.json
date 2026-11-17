@@ -4,16 +4,16 @@
     "artifact": "data_wishlist",
     "generated_on": "2026-11-17",
     "git": {
-      "commit": "ef46d6d73d455a7b1edcb353346a5d3c6410a883",
-      "short": "ef46d6d7",
-      "branch": "share-scrub",
+      "commit": "50a224ab99c4fccb04894bc96551a7a73d816e1b",
+      "short": "50a224ab",
+      "branch": "engine-gaps-thiamine-h2s",
       "dirty": true
     },
     "generated_by": "src/data_wishlist.py",
     "inputs": [
       {
         "path": "results/validation/core_panel_scores.json",
-        "sha256": "8db2a5a7be824f6ee2b63498bf7e1749a48446c6a122a115c5972161afbbf1d3"
+        "sha256": "815768e1c32da92b9deef0e82a28020472560e0a3255552fe903f22de28c94df"
       },
       {
         "path": "results/validation/kinetic_core_b60_profile.json",
@@ -25,7 +25,7 @@
       },
       {
         "path": "results/validation/core_directional_scores.json",
-        "sha256": "2bff5e085927aec1de08a4b71779e71f9aaec0626551079697bab8c0ab489c46"
+        "sha256": "6d6bfe0bbb69a0fb5e9cf53515bcc8687110b67199477f9ced61484bad4aa25d"
       },
       {
         "path": "results/validation/experiment_value_ranking.json",
@@ -37,7 +37,7 @@
       },
       {
         "path": "src/kinetic_core/sulfur.py",
-        "sha256": "31d5d49b849f02444c47f78c0fbd0085e86c41eaa7cb4cdd46ccc9c9b333161e"
+        "sha256": "5ba0388889ef70e085e2a8adbcd82a091a9b469cca4a236a6ae3d2f603a2a98c"
       },
       {
         "path": "docs/reference/decisive_measurements.yml",

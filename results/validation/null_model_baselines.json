@@ -2,18 +2,18 @@
   "artifact": "null_model_baselines",
   "provenance": {
     "artifact": "null_model_baselines",
-    "generated_on": "2026-11-07",
+    "generated_on": "2026-11-17",
     "git": {
-      "commit": "b8ba234edfc17900ca3c60f4afa5abb5844ce9db",
-      "short": "b8ba234e",
-      "branch": "s3-ph-balance-refusal",
+      "commit": "50a224ab99c4fccb04894bc96551a7a73d816e1b",
+      "short": "50a224ab",
+      "branch": "engine-gaps-thiamine-h2s",
       "dirty": true
     },
     "generated_by": "scripts/generators/build_null_model_baselines.py",
     "inputs": [
       {
         "path": "results/validation/core_panel_scores.json",
-        "sha256": "8db2a5a7be824f6ee2b63498bf7e1749a48446c6a122a115c5972161afbbf1d3"
+        "sha256": "815768e1c32da92b9deef0e82a28020472560e0a3255552fe903f22de28c94df"
       }
     ]
   },

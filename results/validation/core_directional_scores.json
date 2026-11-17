@@ -41,11 +41,11 @@
   },
   "provenance": {
     "artifact": "core_directional_scores",
-    "generated_on": "2026-11-11",
+    "generated_on": "2026-11-17",
     "git": {
-      "commit": "9c3c96f27dc7b26e3c22e670edfe3f188b8236c6",
-      "short": "9c3c96f2",
-      "branch": "rival-bdf-retry",
+      "commit": "50a224ab99c4fccb04894bc96551a7a73d816e1b",
+      "short": "50a224ab",
+      "branch": "engine-gaps-thiamine-h2s",
       "dirty": true
     },
     "generated_by": "src/kinetic_core/directional.py",
@@ -453,10 +453,10 @@
       "step 'pH 4.5' -> 'pH 6.5' refused": 2,
       "step 'cysteine + D-ribose, 110 C 90 min' -> 'cysteine + D-glucose, 110 C 90 min'": 2,
       "step 'cysteine + ribose, phosphate buffer pH 4.2, 140 C 30 min' -> 'cysteine + r": 2,
-      "step 'pH 4' -> 'pH 5' refused": 2,
+      "arm 'pH 5' refused": 2,
       "step 'pH 4.2' -> 'pH 5.6' refused": 2,
       "step 'initial pH 5.6' -> 'initial pH 7.0' refused": 2,
-      "step 'pH 4.0' -> 'pH 5.5' refused": 1,
+      "arm 'pH 5.5' refused": 1,
       "the measured contrast (glycine + D-glucose, 165 C 8 min 333, glycine + D-fructos": 1,
       "arm 'hydrolysate + xylose (no cysteine), 120 C' refused": 1,
       "the measured contrast (cysteine + D-fructose, 145 C 20 min pH 5.0 2.5, cysteine ": 1,
@@ -482,7 +482,7 @@
       "arm 'egg PC alone' refused": 1,
       "arm 'methionine alone' refused": 1
     },
-    "wall_seconds": 2716.1
+    "wall_seconds": 997.9
   },
   "claims": [
     {
@@ -999,7 +999,7 @@
       "statement": "Raising pH from 4 to 7 in a cysteine/xylose/thiamine system SUPPRESSES 2-furanmethanethiol (FFT) formation - FFT is favoured with decreasing pH.",
       "source": "cerny2015",
       "status": "not_evaluable",
-      "reason": "step 'pH 4.0' -> 'pH 5.5' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the spread of this log ratio over B0 and the carried rivals (1.77 dex) exceeds omega. REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause). Band bounded by the carried rivals' screen-passing extremes, pending the full-draw re-run (prereg sec. 21.10, R3d).",
+      "reason": "arm 'pH 5.5' refused: REFUSED, THIAMINE H2S SHARE UNMEASURED (pH < 6.25 above 105 C; Dwivedi & Arnold 1971 vs 1972): FFT (spread 2.31 dex): this output depends on thiamine's H2S share in a region where the shipped share is zero (below pH 6.25, above 105 C) and that zero is not measured: it is measured only near 100 C (Dwivedi & Arnold 1971); at 120 C, pH 6.0, Dwivedi & Arnold 1971 (methylene blue) read ~0.36 of the deg",
       "arms": [
         {
           "label": "pH 4.0",
@@ -1046,12 +1046,14 @@
               "source": "Cerny & Briffod 2007: 1 mL 0.5 M potassium phosphate"
             }
           },
-          "answered": true,
+          "answered": false,
           "lane": "sulfur",
-          "state": "in_envelope",
-          "reasons": [],
+          "state": "out_of_envelope",
+          "reasons": [
+            "REFUSED, THIAMINE H2S SHARE UNMEASURED (pH < 6.25 above 105 C; Dwivedi & Arnold 1971 vs 1972): FFT (spread 2.31 dex): this output depends on thiamine's H2S share in a region where the shipped share is zero (below pH 6.25, above 105 C) and that zero is not measured: it is measured only near 100 C (Dwivedi & Arnold 1971); at 120 C, pH 6.0, Dwivedi & Arnold 1971 (methylene blue) read ~0.36 of the degraded thiamine as H2S and Dwivedi & Arnold 1972 (35S, 121 C) at most 0.014; nothing is measured above 121 C. With the share set to 1971's reading there, the output moves by more than 0.21 dex (omega / 2, so that no ratio it enters can move beyond omega), so it is not shown at the zero. WHAT WOULD LIFT IT: a measurement of thiamine's H2S (or 2-furfurylthiol) above 100 C below pH 6.25 -- the P3 factorial study's thiamine arms, or a partner laboratory's thiamine series -- that decides between Dwivedi & Arnold 1971's ~0.36 and Dwivedi & Arnold 1972's <= 0.014, or replaces both (STEP5_RECORD.md, amendment 2026-11-17)."
+          ],
           "warnings": [],
-          "value_ug_per_l": 12.148558851512409
+          "value_ug_per_l": null
         },
         {
           "label": "pH 7.0",
@@ -5081,7 +5083,7 @@
       "statement": "In xylose 150 mM + cysteine 50 mM + thiamine 50 mM (0.5 M phosphate, 145 C, 20 min) FFT FALLS monotonically from pH 4 to pH 7 (peak areas 431 / 368 / 185 / 0 at pH 4 / 5 / 6 / 7).",
       "source": "cerny2007",
       "status": "not_evaluable",
-      "reason": "step 'pH 4' -> 'pH 5' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the spread of this log ratio over B0 and the carried rivals (2.45 dex) exceeds omega. REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause). Band bounded by the carried rivals' screen-passing extremes, pending the full-draw re-run (prereg sec. 21.10, R3d).",
+      "reason": "arm 'pH 5' refused: REFUSED, THIAMINE H2S SHARE UNMEASURED (pH < 6.25 above 105 C; Dwivedi & Arnold 1971 vs 1972): FFT (spread 0.53 dex): this output depends on thiamine's H2S share in a region where the shipped share is zero (below pH 6.25, above 105 C) and that zero is not measured: it is measured only near 100 C (Dwivedi & Arnold 1971); at 120 C, pH 6.0, Dwivedi & Arnold 1971 (methylene blue) read ~0.36 of the deg",
       "arms": [
         {
           "label": "pH 4",
@@ -5128,12 +5130,14 @@
               "source": "Cerny & Briffod 2007: 1 mL 0.5 M potassium phosphate"
             }
           },
-          "answered": true,
+          "answered": false,
           "lane": "sulfur",
-          "state": "in_envelope",
-          "reasons": [],
+          "state": "out_of_envelope",
+          "reasons": [
+            "REFUSED, THIAMINE H2S SHARE UNMEASURED (pH < 6.25 above 105 C; Dwivedi & Arnold 1971 vs 1972): FFT (spread 0.53 dex): this output depends on thiamine's H2S share in a region where the shipped share is zero (below pH 6.25, above 105 C) and that zero is not measured: it is measured only near 100 C (Dwivedi & Arnold 1971); at 120 C, pH 6.0, Dwivedi & Arnold 1971 (methylene blue) read ~0.36 of the degraded thiamine as H2S and Dwivedi & Arnold 1972 (35S, 121 C) at most 0.014; nothing is measured above 121 C. With the share set to 1971's reading there, the output moves by more than 0.21 dex (omega / 2, so that no ratio it enters can move beyond omega), so it is not shown at the zero. WHAT WOULD LIFT IT: a measurement of thiamine's H2S (or 2-furfurylthiol) above 100 C below pH 6.25 -- the P3 factorial study's thiamine arms, or a partner laboratory's thiamine series -- that decides between Dwivedi & Arnold 1971's ~0.36 and Dwivedi & Arnold 1972's <= 0.014, or replaces both (STEP5_RECORD.md, amendment 2026-11-17)."
+          ],
           "warnings": [],
-          "value_ug_per_l": 1178.4438613985187
+          "value_ug_per_l": null
         },
         {
           "label": "pH 6",
@@ -5154,12 +5158,14 @@
               "source": "Cerny & Briffod 2007: 1 mL 0.5 M potassium phosphate"
             }
           },
-          "answered": true,
+          "answered": false,
           "lane": "sulfur",
-          "state": "in_envelope",
-          "reasons": [],
+          "state": "out_of_envelope",
+          "reasons": [
+            "REFUSED, THIAMINE H2S SHARE UNMEASURED (pH < 6.25 above 105 C; Dwivedi & Arnold 1971 vs 1972): FFT (spread 2.55 dex): this output depends on thiamine's H2S share in a region where the shipped share is zero (below pH 6.25, above 105 C) and that zero is not measured: it is measured only near 100 C (Dwivedi & Arnold 1971); at 120 C, pH 6.0, Dwivedi & Arnold 1971 (methylene blue) read ~0.36 of the degraded thiamine as H2S and Dwivedi & Arnold 1972 (35S, 121 C) at most 0.014; nothing is measured above 121 C. With the share set to 1971's reading there, the output moves by more than 0.21 dex (omega / 2, so that no ratio it enters can move beyond omega), so it is not shown at the zero. WHAT WOULD LIFT IT: a measurement of thiamine's H2S (or 2-furfurylthiol) above 100 C below pH 6.25 -- the P3 factorial study's thiamine arms, or a partner laboratory's thiamine series -- that decides between Dwivedi & Arnold 1971's ~0.36 and Dwivedi & Arnold 1972's <= 0.014, or replaces both (STEP5_RECORD.md, amendment 2026-11-17)."
+          ],
           "warnings": [],
-          "value_ug_per_l": 1.1019069954259357
+          "value_ug_per_l": null
         },
         {
           "label": "pH 7",
@@ -5201,7 +5207,7 @@
       "statement": "In the same pot furfural FALLS from pH 4 to pH 6 (208 / 158 / 0 at pH 4 / 5 / 6): the furfural -> FFT branch is shut by neutral pH.",
       "source": "cerny2007",
       "status": "not_evaluable",
-      "reason": "step 'pH 4' -> 'pH 5' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the DIRECTION of this ratio is refused: B0 and the carried rivals disagree in its sign (S3). REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1b prereg sec. 21); the output moves with the carried rivals B1 / B13 beyond the term it is shipped with (a level: tau = 0.964 dex; a ratio or direction: omega = 0.419 dex or a sign; the pH: 0.478 pH; prereg sec. 21.10). Lifted by an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls (sec. 7, S3's lift clause). Band bounded by the carried rivals' screen-passing extremes, pending the full-draw re-run (prereg sec. 21.10, R3d).",
+      "reason": "arm 'pH 5' refused: REFUSED, THIAMINE H2S SHARE UNMEASURED (pH < 6.25 above 105 C; Dwivedi & Arnold 1971 vs 1972): furfural (spread 0.26 dex): this output depends on thiamine's H2S share in a region where the shipped share is zero (below pH 6.25, above 105 C) and that zero is not measured: it is measured only near 100 C (Dwivedi & Arnold 1971); at 120 C, pH 6.0, Dwivedi & Arnold 1971 (methylene blue) read ~0.36 of th",
       "arms": [
         {
           "label": "pH 4",
@@ -5248,12 +5254,14 @@
               "source": "Cerny & Briffod 2007: 1 mL 0.5 M potassium phosphate"
             }
           },
-          "answered": true,
+          "answered": false,
           "lane": "sulfur",
-          "state": "in_envelope",
-          "reasons": [],
+          "state": "out_of_envelope",
+          "reasons": [
+            "REFUSED, THIAMINE H2S SHARE UNMEASURED (pH < 6.25 above 105 C; Dwivedi & Arnold 1971 vs 1972): furfural (spread 0.26 dex): this output depends on thiamine's H2S share in a region where the shipped share is zero (below pH 6.25, above 105 C) and that zero is not measured: it is measured only near 100 C (Dwivedi & Arnold 1971); at 120 C, pH 6.0, Dwivedi & Arnold 1971 (methylene blue) read ~0.36 of the degraded thiamine as H2S and Dwivedi & Arnold 1972 (35S, 121 C) at most 0.014; nothing is measured above 121 C. With the share set to 1971's reading there, the output moves by more than 0.21 dex (omega / 2, so that no ratio it enters can move beyond omega), so it is not shown at the zero. WHAT WOULD LIFT IT: a measurement of thiamine's H2S (or 2-furfurylthiol) above 100 C below pH 6.25 -- the P3 factorial study's thiamine arms, or a partner laboratory's thiamine series -- that decides between Dwivedi & Arnold 1971's ~0.36 and Dwivedi & Arnold 1972's <= 0.014, or replaces both (STEP5_RECORD.md, amendment 2026-11-17)."
+          ],
           "warnings": [],
-          "value_ug_per_l": 2069.213605054368
+          "value_ug_per_l": null
         },
         {
           "label": "pH 6",
@@ -5274,12 +5282,14 @@
               "source": "Cerny & Briffod 2007: 1 mL 0.5 M potassium phosphate"
             }
           },
-          "answered": true,
+          "answered": false,
           "lane": "sulfur",
-          "state": "in_envelope",
-          "reasons": [],
+          "state": "out_of_envelope",
+          "reasons": [
+            "REFUSED, THIAMINE H2S SHARE UNMEASURED (pH < 6.25 above 105 C; Dwivedi & Arnold 1971 vs 1972): furfural (spread 1.16 dex): this output depends on thiamine's H2S share in a region where the shipped share is zero (below pH 6.25, above 105 C) and that zero is not measured: it is measured only near 100 C (Dwivedi & Arnold 1971); at 120 C, pH 6.0, Dwivedi & Arnold 1971 (methylene blue) read ~0.36 of the degraded thiamine as H2S and Dwivedi & Arnold 1972 (35S, 121 C) at most 0.014; nothing is measured above 121 C. With the share set to 1971's reading there, the output moves by more than 0.21 dex (omega / 2, so that no ratio it enters can move beyond omega), so it is not shown at the zero. WHAT WOULD LIFT IT: a measurement of thiamine's H2S (or 2-furfurylthiol) above 100 C below pH 6.25 -- the P3 factorial study's thiamine arms, or a partner laboratory's thiamine series -- that decides between Dwivedi & Arnold 1971's ~0.36 and Dwivedi & Arnold 1972's <= 0.014, or replaces both (STEP5_RECORD.md, amendment 2026-11-17)."
+          ],
           "warnings": [],
-          "value_ug_per_l": 339.5379597344533
+          "value_ug_per_l": null
         }
       ]
     },

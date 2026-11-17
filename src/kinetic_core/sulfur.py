@@ -1416,11 +1416,16 @@ def sulfur_rate_constants_at(
     # thing Stack measures: heating pushes the equilibrium back toward FREE
     # thiol.
     # DERIVED RATE 0 (B50): thiamine's sulfide branch, the measured share of its total thermal loss.
+    from . import parameters_sulfur as _ps
+
     _share = thiamine_h2s_share(ph_table)
+    # 2026-11-17: the carried rival to the share's unmeasured zero (thiamine_h2s_refusal); off when shipped
+    _thi_rival = _ps.THIAMINE_H2S_UNMEASURED_RIVAL
+    if _thi_rival.enabled and _thi_rival.covers(ph_table, temperature_k):
+        _share = float(_thi_rival.share)
     out["r_thi_h2s"] = (_share / (1.0 - _share)) * (out["r_thi_hmp"] + out["r_thi_mesh"]) if _share > 0.0 else 0.0
 
     # DERIVED RATE 0b (B58): TTCA formation by detailed balance with its measured equilibrium constant.
-    from . import parameters_sulfur as _ps
 
     _ttca = _ps.TTCA_FORMATION
     out["r_ttca_form"] = float(_ttca.k_l_per_mmol) * out["r_ttca_cys"] if _ttca.enabled else 0.0

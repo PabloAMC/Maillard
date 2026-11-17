@@ -1,0 +1,100 @@
+{
+ "data/benchmarks/external_validation/maillard_path/mp_holdout_arp_glutathione_120C_120min_pH75_Zhou2023c.json": {
+  "2-Furfurylthiol (FFT)": "0x1.03148e5827cd9p+7",
+  "2-Methyl-3-furanthiol (MFT)": "0x1.467d22c4d3f57p+10",
+  "Furfural": "0x1.82339899ff2a7p+4"
+ },
+ "data/benchmarks/external_validation/maillard_path/mp_holdout_arp_glutathione_120C_30min_pH75_Zhou2023c.json": {
+  "2-Furfurylthiol (FFT)": "0x1.9abb743daec65p+4",
+  "2-Methyl-3-furanthiol (MFT)": "0x1.a66e47687e710p+9",
+  "Furfural": "0x1.2613e3dbfa389p+2"
+ },
+ "data/benchmarks/external_validation/maillard_path/mp_holdout_arp_glutathione_120C_60min_pH75_Zhou2023c.json": {
+  "2-Furfurylthiol (FFT)": "0x1.25f3c4e0d6145p+6",
+  "2-Methyl-3-furanthiol (MFT)": "0x1.b53477c5bdc74p+10",
+  "Furfural": "0x1.1abbc8126c553p+3"
+ },
+ "data/benchmarks/external_validation/maillard_path/mp_holdout_arp_glutathione_120C_90min_pH75_Zhou2023c.json": {
+  "2-Furfurylthiol (FFT)": "0x1.bb58cd82f2c39p+6",
+  "2-Methyl-3-furanthiol (MFT)": "0x1.9b48174725883p+10",
+  "Furfural": "0x1.02be8b4af66d6p+4"
+ },
+ "data/benchmarks/external_validation/maillard_path/mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH3.json": {
+  "2-Furfurylthiol (FFT)": "0x1.4fedf25e719f6p+10",
+  "2-Methyl-3-furanthiol (MFT)": "0x1.663176b250507p-30"
+ },
+ "data/benchmarks/external_validation/maillard_path/mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH7.json": {
+  "2-Furfurylthiol (FFT)": "0x1.d35b9162f44e4p-2",
+  "2-Methyl-3-furanthiol (MFT)": "0x1.c5cc7a4a924cap-31"
+ },
+ "data/benchmarks/external_validation/maillard_path/mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3.json": {
+  "2-Furfurylthiol (FFT)": "0x1.7cd153d5c4322p+10",
+  "2-Methyl-3-furanthiol (MFT)": "0x1.8b50d85384b9ep+4"
+ },
+ "data/benchmarks/external_validation/maillard_path/mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7.json": {
+  "2-Furfurylthiol (FFT)": "0x1.5b5616cd71a21p-3",
+  "2-Methyl-3-furanthiol (MFT)": "0x1.4dfc57c3c4bcbp-8"
+ },
+ "data/benchmarks/external_validation/maillard_path/mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5.json": {
+  "2-Furfurylthiol (FFT)": "0x1.5a9de6d32483ap+8",
+  "2-Methyl-3-furanthiol (MFT)": "0x1.76889f3e09dc3p+6"
+ },
+ "data/benchmarks/external_validation/maillard_path/mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026.json": {
+  "2-Furfurylthiol (FFT)": "0x1.2b7fa990210e2p+8",
+  "2-Methyl-3-furanthiol (MFT)": "0x1.4ab3ca45ce260p+3"
+ },
+ "data/benchmarks/external_validation/maillard_path/mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026.json": {
+  "2-Furfurylthiol (FFT)": "0x1.ed15a9b1d513dp+7",
+  "2-Methyl-3-furanthiol (MFT)": "0x1.807c69e17b4bfp+3"
+ },
+ "data/benchmarks/external_validation/maillard_path/mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026.json": {
+  "2-Furfurylthiol (FFT)": "0x1.4e885e9a7f8e5p+7",
+  "2-Methyl-3-furanthiol (MFT)": "0x1.9b80b4f8912f6p+3"
+ },
+ "data/benchmarks/external_validation/maillard_path/mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026.json": {
+  "2-Furfurylthiol (FFT)": "0x1.80643946a3096p+6",
+  "2-Methyl-3-furanthiol (MFT)": "0x1.95cd24e914e72p+3"
+ },
+ "data/benchmarks/external_validation/maillard_path/mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b.json": {
+  "2-Acetylthiazole": "0x1.0a0ef8dc8d4d3p-4",
+  "2-Furfurylthiol (FFT)": "0x1.350bd78c8c138p+1",
+  "2-Methyl-3-furanthiol (MFT)": "0x1.050123137d1a3p-1",
+  "Bis(2-methyl-3-furyl) disulfide": "0x1.4d9c01bde7fb4p-11"
+ },
+ "data/benchmarks/hofmann1998_c2c3_recombination_145C_20min_pH3.json": {
+  "2-Methyl-3-furanthiol (MFT)": "0x1.f7c6852e29095p+11"
+ },
+ "data/benchmarks/hofmann1998_c2c3_recombination_145C_20min_pH5.json": {
+  "2-Methyl-3-furanthiol (MFT)": "0x1.6cf4d47bfaf53p+11"
+ },
+ "data/benchmarks/hofmann1998_c2c3_recombination_145C_20min_pH7.json": {
+  "2-Methyl-3-furanthiol (MFT)": "0x1.1e9e757816d25p+10"
+ },
+ "data/benchmarks/hofmann1998_fructose_cysteine_145C_20min_pH5.json": {
+  "2-Furfurylthiol (FFT)": "0x1.0f4cfd72b4f5bp+9",
+  "2-Methyl-3-furanthiol (MFT)": "0x1.3dbd28e6d571fp-32"
+ },
+ "data/benchmarks/hofmann1998_furan2aldehyde_h2s_145C_20min_pH5.json": {
+  "2-Furfurylthiol (FFT)": "0x1.09d86c88dd41ap+14"
+ },
+ "data/benchmarks/hofmann1998_glucose_cysteine_145C_20min_pH5.json": {
+  "2-Furfurylthiol (FFT)": "0x1.752db325b000fp+9",
+  "2-Methyl-3-furanthiol (MFT)": "0x1.6808afe7c4f2bp-30"
+ },
+ "data/benchmarks/hofmann1998_norfuraneol_cysteine_145C_20min_pH5.json": {
+  "2-Methyl-3-furanthiol (MFT)": "0x1.0c88b09f62e83p+10"
+ },
+ "data/benchmarks/hofmann1998_norfuraneol_h2s_145C_20min_pH5.json": {
+  "2-Methyl-3-furanthiol (MFT)": "0x1.026b331ae5ee9p+13"
+ },
+ "data/benchmarks/hofmann1998_ribose_cysteine_145C_20min_pH5.json": {
+  "2-Furfurylthiol (FFT)": "0x1.5a9de6d32483ap+8",
+  "2-Methyl-3-furanthiol (MFT)": "0x1.76889f3e09dc3p+6"
+ },
+ "data/benchmarks/resconi_2023_pbma_beef_identity_benchmark.json": {
+  "furfural": "0x1.739f19be54a1ap+5"
+ },
+ "data/benchmarks/thiamine_cys_glucose_120C_Bolton1994.json": {
+  "2-Methyl-3-furanthiol (MFT)": "0x1.d1d4d85dee9bcp+7"
+ }
+}

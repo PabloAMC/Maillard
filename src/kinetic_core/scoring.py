@@ -48,7 +48,7 @@ from src.benchmark_metadata import (
 )
 from src.validation_contract import DEFAULT_VALIDATION_CONTRACT
 
-from . import ph_balance_refusal, thiol_relative_only
+from . import ph_balance_refusal, thiamine_h2s_refusal, thiol_relative_only
 from .engine import declared_unidentified, engine_metadata, fit_report_paths, predict
 from .fit_targets import core_evidence_role, core_fit_targets, fit_target_of, in_core_fit
 from .vessel import format_o2_to_thiol, oxygen_record
@@ -252,6 +252,9 @@ def score_benchmark(
                     "absolute_refused": absolute_refused,
                     "balance_refused": balance_refused,
                     "data_refused": data_refused is not None,
+                    # 2026-11-17 (thiamine_h2s_refusal): flagged only where it applies, so other rows are unchanged
+                    **({"thiamine_h2s_refused": True}
+                       if reason.startswith(thiamine_h2s_refusal.THIAMINE_REFUSED_TAG) else {}),
                     # ... but what the lane DOES ship, a ratio between two pots of one study, still needs both
                     # numbers: the within-study contrast diagnostic (build_contrast_scores.py) reads them, and
                     # nothing that counts an absolute does.
