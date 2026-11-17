@@ -167,7 +167,7 @@ documents or the corpus already hold appear here only as cross-references.
 - I found no aqueous measurement of the temperature dependence of furfural + H2S (or HS⁻) → FFT. I am about 75 % confident
   none exists at 90-150 °C in the open literature. The wine literature (Tominaga 2000, Blanchard 2001) is yeast-mediated and
   at cellar temperature. The biorefinery literature measures furfural *formation* at pH < 2 and above 150 °C.
-- Two cheap measurements would close the gap, in a SIDA lab such as the WUR contact:
+- Two cheap measurements would close the gap, in a SIDA lab:
   - Hofmann 1998 Table 3's own protocol (furfural + Na2S or cysteine, 0.5 M phosphate pH 5, sealed) at 100, 120 and 145 °C.
   - FFT alone, heated at the same temperatures, for its loss.
   - Together these give k(T) for formation and for the FFT-specific sink, a few runs each.
@@ -182,34 +182,5 @@ documents or the corpus already hold appear here only as cross-references.
 
 ## Ranked download list (new papers only; at most 10)
 
-File names follow round 3: lowercase `<firstauthor><year>.pdf`. I checked them against `data/articles/`; there are no
-clashes (`poisson2019.pdf` is a different paper).
+10 candidates; the list is kept privately.
 
-| # | paper | DOI | gap | access | why |
-|---|---|---|---|---|---|
-| 1 | Larralde, Robertson & Miller 1995, PNAS | [10.1073/pnas.92.18.8158](https://doi.org/10.1073/pnas.92.18.8158) | 2 | open (PMC41115) | the only measured phosphate-catalysis law for pentose loss, with a pH 4-8 × 40-120 °C profile; decides whether 0.5 M phosphate moves Hofmann's pots (`larralde1995.pdf`) |
-| 2 | Kobayasi & Fujimaki 1965, Agric. Biol. Chem. 29:698 | [10.1271/bbb1961.29.698](https://doi.org/10.1271/bbb1961.29.698) | 1 | free (J-STAGE) | the only primary H2S + mercaptoacetaldehyde + acetaldehyde yield from cysteine + carbonyl; two pages (`kobayasi1965.pdf`) |
-| 3 | Mikami et al. 2017, Food Sci. Technol. Res. 23:283 | [10.3136/fstr.23.283](https://doi.org/10.3136/fstr.23.283) | 2 | open | norfuraneol formation and decay vs pH 5.5-8 in 0.2 M phosphate at 100 °C; a shape check on `k_dpo_nf` against NF loss (`mikami2017.pdf`) |
-| 4 | Garrett & Dvorchik 1969, J. Pharm. Sci. 58:813 | [10.1002/jps.2600580703](https://doi.org/10.1002/jps.2600580703) | 2, 3 | Wiley | the acid term and Ea of pentose → furfural; tests the acid factor and `r_tdp_fur` (`garrett1969.pdf`) |
-| 5 | Poisson et al. 2009, JAFC 57:9923 | [10.1021/jf901683v](https://doi.org/10.1021/jf901683v) | 3 | ACS | labelling evidence against furfural + H2S as the FFT route in a real matrix; a path-level check on the FFT branch (`poisson2009.pdf`) |
-| 6 | Li, Ko & Hsieh, Da-Yeh Univ., pentoses/glucose + Cys kinetics, 95 °C, pH 5/7/8-9 | none found | 2 | open PDF (server down at search time) | sugar-loss rate constants vs pH with cysteine at a sub-Hofmann temperature (`li_dyu.pdf`; year unresolved) |
-| 7 | Severin & Seilmeier 1968, Z. Lebensm. Unters. Forsch. 137:4 (with the 1967 part, 134:230) | [10.1007/bf01842036](https://doi.org/10.1007/bf01842036) | 2 | Springer | the likely primary reports of norfuraneol from pentoses with amine salts in acidic media, i.e. a low-pH NF route (`severin1968.pdf`) |
-| 8 | Hicks & Feather 1975, JAFC 23:957 | [10.1021/jf60201a005](https://doi.org/10.1021/jf60201a005) | 2 | ACS | the route from Amadori compound to norfuraneol (for B59's Cys-Amadori 2,3-enolisation) (`hicks1975.pdf`) |
-| 9 | Tonsbeek et al. 1969, JAFC 17:397 | [10.1021/jf60162a022](https://doi.org/10.1021/jf60162a022) | 2 | ACS | ribose 5-phosphate as the NF precursor: phosphate as a leaving group, relevant to IMP matrices (`tonsbeek1969.pdf`) |
-
-**Not a downloadable paper, but worth a lookup:** Y. Lu (Purdue, Mosier lab) PhD thesis, about 2009-2011, for the full xylose
-pH 0.5-7 rate and product data behind the 2008 abstract.
-
-**Already on the round-3 list and directly relevant here; fetch them in the same batch:**
-
-- Edwards & Wedzicha 1992 and Wedzicha 1991: cysteine + 3-deoxyhexosulose, fast capture then slow Strecker release
-  (gap 1).
-- Mizutani 1960: H2S from cysteine-aldehyde thiazolidines at 120 °C; the furfural adduct releases the most (gaps 1 and 3).
-- de Roos 1992: reactivity scales with the neutral thiazolidine, i.e. the pH law of the TTCA step (gap 2).
-
-**The most decisive item per gap:**
-
-- Gap 1: Kobayasi & Fujimaki 1965 (new). Edwards & Wedzicha 1992 is the best kinetic partner.
-- Gap 2: Larralde 1995.
-- Gap 3: no paper settles it. The best new item is Poisson 2009, at path level only. The decisive move is the
-  three-temperature Hofmann-T3 experiment above, plus the within-corpus FFT/furfural check on the Kang 2026 SI.

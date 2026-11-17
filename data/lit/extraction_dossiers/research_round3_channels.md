@@ -633,55 +633,7 @@ alternative is a 25 °C hand-fitted constant (§D.1) plus its authors' Q10 = 2�
 
 # §E. RANKED DOWNLOAD LIST
 
-**Every DOI and exact title below was resolved through `api.crossref.org/works/<doi>` in this
-session unless the row says otherwise.** Titles are as Crossref returns them.
-
-## TIER 1 — order these
-
-| # | DOI | exact title | why, in one line |
-|---|---|---|---|
-| **1** | `10.1021/acs.jafc.6b01862` | **Effect of Sodium Chloride on α-Dicarbonyl Compound and 5-Hydroxymethyl-2-furfural Formations from Glucose under Caramelization Conditions: A Multiresponse Kinetic Modeling Approach** — Kocadağlı T, Gökmen V, *J. Agric. Food Chem.* **64**(32):6333–6342, 2016 | **THE HMF PICK. Glucose alone, no amine** ⇒ the fitted HMF constants are pure sugar chemistry and cannot be confounded by the amino-acid lane. Its abstract already states the fructose-route dominance and a 4× sensitivity — the constants themselves are in the tables |
-| **2** | `10.1021/jf8012025` | **Formation of 2,5-Dimethyl-4-hydroxy-3(2H)-furanone through Methylglyoxal: A Maillard Reaction Intermediate** — Wang Y, Ho C-T, *J. Agric. Food Chem.* **56**:7405–7409, 2008 | **THE DMHF PICK, and the only quantitative one.** HPLC+GC-MS quantification, a **sign-reversing pH ladder** (MG+Cys rises with pH, MG+Gly falls), **cysteine in the system**, and the ¹³C₆ intact-skeleton test |
-| **3** | `10.1016/j.foodchem.2020.126620` | **Multiresponse kinetic modelling of α-dicarbonyl compounds formation in fruit juices during storage** — Gürsul Aktağ I, Gökmen V, *Food Chemistry* **320**:126620, 2020 | **The only Gökmen network at FOOD pH and LOW temperature.** Three matrices; the fructose-vs-3-DG partition for HMF is the one place it was tested for statistical significance (p < 0.05) |
-| **4** | `10.1016/j.foodchem.2016.05.150` | **Multiresponse kinetic modelling of Maillard reaction and caramelisation in a heated glucose/wheat flour system** — Kocadağlı T, Gökmen V, *Food Chemistry* **211**:892–902, 2016 | Ten simultaneous responses incl. glucosone/1-DG/3-DG/3,4-DGE/HMF/GO/MGO/diacetyl. **The most complete single α-dicarbonyl + furanic network published**, and the paper Lee 2022/2024 benchmark against |
-
-## TIER 2 — order if the HMF node needs more, or the sulfur/furfural lane is being extended
-
-| # | DOI | exact title | why |
-|---|---|---|---|
-| 5 | `10.1002/jsfa.2740610416` | **Xylose-lysine model systems: The effect of pH on the volatile reaction products** — Apriyantono A, Ames J, *J. Sci. Food Agric.* **61**:477–484, 1993 | Pentose + amine, **no cysteine**; a **held-pH-5.0 vs drifting-to-2.6 pair in one lab**. RATIO-ONLY — the 522/999 g·kg⁻¹ are shares of the volatile fraction |
-| 6 | `10.1016/j.foodchem.2016.11.159` | **Maillard reaction and caramelization during hazelnut roasting: A multiresponse kinetic study** — Göncüoğlu Taş N, Gökmen V, *Food Chemistry* **221**:1911–1922, 2017 | The clearest statement of HMF-via-fructofuranosyl-cation. ⚠️ **its own abstract warns the temperature dependence "could not be explained by the Arrhenius equation"** — order for structure, not for Ea |
-| 7 | `10.1016/j.foodchem.2022.133583` | **Kinetic modeling of Maillard and caramelization reactions in sucrose-rich and low moisture foods applied for roasted nuts and seeds** — Şen D, Gökmen V, *Food Chemistry* **395**:133583, 2022 | **The dissent** — the one member of the set where HMF-from-3-DG is quantitatively important. Order it to bound the matrix-dependence of the branch fraction, not to settle it |
-| 8 | `10.1021/acs.jafc.9b00770` | **Generation of α-Diketones and 4-Hydroxy-2,5-dimethyl-3(2H)-furanone upon Coffee Roasting—Impact of Roast Degree on Reaction Pathways** — Poisson L, Schaerer A, Spreng S, Mestdagh F, *J. Agric. Food Chem.* **67**:13829–13839, 2019 | CAMOLA corroboration of B.2.1's intact-skeleton result, with a **built-in positive control** (the diketones *do* show recombination) |
-| 9 | `10.1016/j.foodchem.2020.126467` | **5-Hydroxymethylfurfural accumulation plays a critical role on acrylamide formation in coffee during roasting as confirmed by multiresponse kinetic modelling** — Hamzalıoğlu A, Gökmen V, *Food Chemistry* **318**:126467, 2020 | Only if the **acrylamide** lane wants the HMF→acrylamide edge; 200–240 °C is out of the repo's window |
-| 10 | `10.1007/s00217-020-03583-z` | **Multiresponse kinetic modelling of 5-hydroxymethylfurfural and acrylamide formation in sesame (Sesamum indicum L.) seeds during roasting** — Berk E, Hamzalıoğlu A, Gökmen V, *Eur. Food Res. Technol.* **246**:2399–2410, 2020 | Same architecture as #9 in a simpler matrix; lowest marginal value of the Gökmen set |
-
-## TIER 3 — leads, NOT verified enough to order blind
-
-| # | identifier | what I know | what must happen first |
-|---|---|---|---|
-| L1 | *"Investigation and kinetic evaluation of the reactions of hydroxymethylfurfural with amino and thiol groups of amino acids"*, *Food Chemistry*, ScienceDirect PII **S0308814617312852** | **The only dedicated HMF-SINK kinetics paper I found**, and the repo has no HMF sink at all. Kocadağlı/Gökmen group | ⚠️ **I could not resolve a DOI for it.** Resolve the DOI and read the abstract before ordering. Do not cite it until then |
-| L2 | `10.1007/s12161-021-02214-x` — **A Kinetic Approach to Explain Hydroxymethylfurfural and Furfural Formations Induced by Maillard, Caramelization, and Ascorbic Acid Degradation Reactions in Fruit Juice-Based Mediums** — Agcam E, *Food Analytical Methods* **15**:1286–1299, 2022 | Metadata Crossref-verified. Title promises **HMF and furfural kinetics in an acidic food medium with three source reactions separated** — potentially the best pH match in this dossier | ⚠️ **I read NOTHING of its content** — no PMC record, no Crossref abstract, Springer 303-redirects. Order on the title alone, knowing that |
-
-## ALREADY ON DISK — dossier these instead of downloading anything
-
-| file | what it is | status |
-|---|---|---|
-| `data/articles/blank1996.pdf` | **Blank & Fay 1996, JAFC 44(2):531–536** = `10.1021/jf950439o` | **★ Already in the repo, NO dossier exists.** §B.1 is the extraction. Quantifies nothing; supplies the HEMF/alanine on-off switch and the 70/30 branch fraction |
-| `data/articles/shu1988.pdf` | **Shu & Ho 1988, JAFC 36:801–803** — fed-DMHF + cysteine at pH 2.2 / 5.1 / 7.1 | **Already in the repo, no dossier.** The DMHF analogue of the Whitfield fed-norfuraneol runs |
-| `scratchpad/lee2022.pdf` | **Lee et al. 2022, Food Chem. 376:131917** (HAL OA, downloaded this session) | **★ HOLD-OUT candidate.** 12 markers, absolute µmol·gDM⁻¹, 140/170/200 °C, amine on/off, raw data at `doi.org/10.15454/{IICJV3,HV3UTK,GUXKYQ,QYCBIW}` |
-| `scratchpad/lee2024.pdf` | **Lee et al. 2024, Food Res. Int. 183:114183** (HAL OA, downloaded this session) | ⚠️ **PROHIBITED-DERIVATION source.** Its Arrhenius ka/kd are matrix→vapour transport and oven-wall deposition, not chemistry (§A.3.4). Keep only the scheme sentence |
-| `scratchpad/schroen2022.txt` | **Schroën & Berton-Carabin 2022, Food Res. Int. 160:111621** (WUR OA, downloaded this session) | **★ The channel-4 answer.** `k_hexanal = 6·10⁻⁵ h⁻¹`, 25 °C, pH 6.7, three protein emulsifiers, hand-fitted, no SD |
-| `data/articles/{martins2005,martins2005b,martins2003b,brands2001,knol2005,knol2009,knol2010}.pdf` | the van Boekel school | **[NEG] — verified this session to contain NO HMF constants.** Do not re-open for HMF |
-
-## DO NOT ORDER — verified negatives
-
-| item | why |
-|---|---|
-| `10.1111/j.1365-2621.1991.tb05389.x` — Koelsch, Downes & Labuza 1991 | One temperature (23 °C) ⇒ no Ea; dry cracker matrix at 23 % RH ⇒ not aqueous/protein; cubic-model constants in concentration/(time)³ (§D.2) |
-| `10.3389/fnut.2022.940202` — Ma et al. 2022 | Already fully read (§A.3.2). Its Ea(5-HMF)=14.85 is plateau-artefact, proven by Ea(MGO)=1.84 in the same table. Only Ea(3-DG)=84.55 survives, as a weak prior |
-| `10.3390/foods14122136` — Han et al. 2025 | Already fully read (§A.3.1). k8/k15 unidentifiable (SD ≈ estimate, non-monotonic in T, 10⁶× stiff). Keep only the ODE form and the lumped Ea(5-HMF)=18.836 ± 5.755 |
-| any xylose→furfural biorefinery kinetics (acetic/formic/sulfuric/pTSA/zeolite) | pH 0.9–1.7, explicit first-order-in-[H⁺] rate law, 150–200 °C. 4–6 orders of magnitude off the repo's proton concentration (§C.5) |
+16 candidates; the list is kept privately.
 
 ---
 

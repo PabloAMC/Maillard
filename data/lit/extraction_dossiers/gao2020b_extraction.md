@@ -18,7 +18,7 @@ they are graphs of the printed model equations and carry no extra data.
 
 | field | value as printed |
 |---|---|
-| Authors | Pei Gao, Wenshui Xia, Xinzhi Li, **Shaoquan Liu*** (fstlsq@nus.edu.sg) |
+| Authors | Pei Gao, Wenshui Xia, Xinzhi Li, **Shaoquan Liu*** |
 | Affiliations | Jiangnan University (State Key Lab of Food Science and Technology), Wuxi; Department of Food Science and Technology, National University of Singapore; NUS (Suzhou) Research Institute |
 | Venue | *Food Chemistry* **331** (2020) **127353** |
 | DOI as printed | **10.1016/j.foodchem.2020.127353** ✔ matches the brief |

@@ -15,7 +15,7 @@ tagged **[D]** with its read error. The Supporting Information (TIC and MS/MS of
 | field | value |
 |---|---|
 | Title | "Interaction of Added L-Cysteine with 2-Threityl-thiazolidine-4-carboxylic Acid Derived from the Xylose−Cysteine System Affecting Its Maillard Browning" |
-| Authors | Yun Zhai, Heping Cui, Khizar Hayat, Shahzad Hussain, Muhammad Usman Tahir, Jingyang Yu, Chengsheng Jia, **Xiaoming Zhang** (corresponding, xmzhang@jiangnan.edu.cn), **Chi-Tang Ho** (corresponding, ho@aesop.rutgers.edu) |
+| Authors | Yun Zhai, Heping Cui, Khizar Hayat, Shahzad Hussain, Muhammad Usman Tahir, Jingyang Yu, Chengsheng Jia, **Xiaoming Zhang** (corresponding), **Chi-Tang Ho** (corresponding) |
 | Affiliations | State Key Laboratory of Food Science and Technology, Jiangnan University (Wuxi); King Saud University (Riyadh); Rutgers University |
 | Venue | J. Agric. Food Chem. **2019, 67 (31), 8632-8640**. Received 12 Jul 2019, revised 15 Jul 2019, accepted 16 Jul 2019, published 16 Jul 2019 |
 | DOI as printed | **10.1021/acs.jafc.9b04374** ✔ matches the brief |

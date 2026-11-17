@@ -235,6 +235,5 @@ experiment.
   endpoint 30 min — sulfur ledger, semi-quantitative, not simulable (no ascorbic-acid lane).
 - Table 1 pyrazines (5) and pyrroles (2) × 5 pH × 2 T — aroma_other ledger, semi-quantitative, not simulable.
 - Not keyable: any rate constant, Ea, H2S, cysteine or ASA loss, pH trajectory (none measured).
-- Lead for the download queue: Feng et al. 2023 Front. Nutr. 10.3389/fnut.2022.1022254 (ASA degradation kinetics in
-  HCW, same lab; the repo's "Feng et al. (2023)" anchor), and Feng et al. 2022 Food Chem 371:131155 (ASA
-  self-degradation volatiles in HCW, the method reference).
+- The repo's "Feng et al. (2023)" anchor is Feng et al. 2023 Front. Nutr. 10.3389/fnut.2022.1022254 (ASA degradation
+  kinetics in HCW, same lab; not on disk).

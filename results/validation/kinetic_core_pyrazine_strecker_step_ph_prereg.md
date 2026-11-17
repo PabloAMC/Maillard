@@ -22,8 +22,8 @@ and they are disclosed as such. No probe searched over a value.*
   its transfer probability: **~0.2** (sec. 4.3).
 - **Incumbent-constant scoring (sec. 6):** no row of the core panel moves (66 / 66 rows, max |delta| 0.000 dex). The
   only predictions that move are trunk-lane pyrazine answers below pH 7: x3.9 at pH 6 and x16 at pH 5 for slope 0;
-  x2.8 and x7.8 at the 0.15 edge (with the Zhou pH-8 re-anchoring, sec. 2). No shipped blind prediction (WUR) carries
-  a pyrazine.
+  x2.8 and x7.8 at the 0.15 edge (with the Zhou pH-8 re-anchoring, sec. 2). No number already sent outside the
+  repository carries a pyrazine.
 - **Expected verdict: REFUSE the point change (P 0.85).** The placement of the below-7 slope (step vs supply) is
   unidentified. The two fed-dicarbonyl laboratories (DFA, Ghent) favour "not on the step". Leahy's cascade favours a
   steep cascade that the engine's supply alone cannot produce. No held-out laboratory decides between them. Rule (f)
@@ -169,7 +169,6 @@ Glucose 100 + glycine 100 mM, clamped pH, 2 h. Values are engine (7)/(5) ratios;
 The same three pyrazines move within 0.05 dex of each other at 95 and 120 C (85 C: up to +0.15 more for DMP).
 
 **Core panel:** 66 / 66 rows identical under N, E4-0 and E4-15 (max |delta| 0.000 dex; 21 / 66 within 3x in all).
-**WUR blind predictions:** no pyrazine (checked `scratch/wur_blind_test/BLIND_PREDICTIONS.md`).
 
 ## 7. Expectations (mine, before the decision)
 

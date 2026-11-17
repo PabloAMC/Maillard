@@ -16,7 +16,7 @@ groups:
     evidence: "Davidek 2002 (Blank, Nestle Research Center); US 10,076,126 (Kraehenbuehl, Davidek, Viton, Oertling, Belrhlid; Nestec, Lausanne): Davidek in both, same Nestle Research Center flavour group -- merged as one laboratory, the conservative choice for leave-one-out (thiol adjudicator, 2026-10-29)"
   btbu_xie:
     strings: ["BTBU (Xie J)", "Beijing Technology and Business University (Xie)"]
-    evidence: "Cao 2017, Zhao 2017b, Hou 2017, Zhao 2019: Jianchun Xie corresponding (xjchun@th.btbu.edu.cn); 'BTBU (Cao Y)' is a different group"
+    evidence: "Cao 2017, Zhao 2017b, Hou 2017, Zhao 2019: Jianchun Xie corresponding; 'BTBU (Cao Y)' is a different group"
   jiangnan_zhang_x:
     strings: ["Jiangnan (Zhang X / Cui H / Ho)", "Jiangnan (Zhang X. / Ho)", "Zhejiang Gongshang / Jiangnan (Fu Y / Zhang X / Ho)"]
     evidence: "Zhang Xiaoming's group at Jiangnan (Cui, Hayat, Zhai, Zhou, Deng, Feng); Ho (Rutgers) co-authors many. Zhai 2023 JAFC (Zhai Y, Cui, Hayat, Fu, Zhang X*, Ho*) belongs here"

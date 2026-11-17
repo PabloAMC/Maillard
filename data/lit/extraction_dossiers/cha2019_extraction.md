@@ -16,7 +16,7 @@ material.
 
 | field | value as printed |
 |---|---|
-| Authors | Jiyoon Cha, Trishna Debnath, Kwang-Geun Lee\* (kwglee@dongguk.edu) |
+| Authors | Jiyoon Cha, Trishna Debnath, Kwang-Geun Lee\* |
 | Affiliation | Department of Food Science and Biotechnology, Dongguk University-Seoul, Goyang-si, Gyeonggi-do, Republic of Korea |
 | Title | "Analysis of α-dicarbonyl compounds and volatiles formed in Maillard reaction model systems" |
 | Venue | *Scientific Reports* (2019) **9**:5325; received 4 July 2018, accepted 18 March 2019; open access CC BY 4.0 |

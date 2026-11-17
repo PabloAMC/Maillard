@@ -23,7 +23,7 @@ acrylamide).
 | Authors | Francisco J. Hidalgo, Rosario Zamora* |
 | Venue | *Critical Reviews in Food Science and Nutrition*; AM online 6 Mar 2015; VoR **2016, 56(8):1242–1252** (PubMed 25748518) |
 | DOI | 10.1080/10408398.2012.761173 |
-| Affiliation | Instituto de la Grasa, CSIC, Avda. Padre García Tejero 4, Seville; corresponding rzamora@ig.csic.es |
+| Affiliation | Instituto de la Grasa, CSIC, Avda. Padre García Tejero 4, Seville; corresponding R. Zamora |
 | Funding | FEDER + Plan Nacional I+D, AGL2009-07638, AGL2012-35627 |
 | PDF character | AM, 39 numbered pages: text pp. 1–19, references pp. 19–26, Table 1 pp. 27–28, Figures 1–11 pp. 29–39. Page citations below use the manuscript's page numbers |
 | Registry | DOI not in `data/keys/papers.yml` at time of reading |

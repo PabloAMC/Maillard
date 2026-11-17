@@ -19,8 +19,7 @@ spider plots, PLSR loadings) not digitised (no model-relevant numbers). Unit con
 printed · **[!]** flag.
 
 **Laboratory.** Beijing Advanced Innovation Center for Food Nutrition and Human Health, Laboratory of Molecular
-Sensory Science, **Beijing Technology and Business University**; corresponding author **Huanlu Song**
-(songhl@th.btbu.edu.cn). **Existing id `btbu_song`** ("BTBU (Song H)") **fits** (P ~0.97): same corresponding author,
+Sensory Science, **Beijing Technology and Business University**; corresponding author **Huanlu Song**. **Existing id `btbu_song`** ("BTBU (Song H)") **fits** (P ~0.97): same corresponding author,
 e-mail, laboratory, Parr-reactor + foil-sealed vial + 2-methyl-3-heptanone IS design, and the **same YE paste LA00
 (Hubei Angel Yeast)** as `alim2019`. Same-lab dossiers: `alim2019_extraction.md`, `wang2012_extraction.md`,
 `xu2013_extraction.md`, `raza2020_extraction.md`. Not independent of them for leave-one-lab-out.

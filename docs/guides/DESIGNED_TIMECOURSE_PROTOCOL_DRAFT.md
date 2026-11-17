@@ -112,4 +112,4 @@ Ranked by (mechanisms discriminated) × P(it changes a structural choice) ÷ cos
 
 **If one experiment only:** E3 on the core recipe. It decides the likeliest missing thiol element (the MFT loss law) and the route mix over time in one run. It needs a [2H3]-MFT standard and [13C5]-ribose, both standard reagents for the groups that run SIDA. **If two:** add E1. The pentose hub is the most upstream open question, and its in-situ OPD arm tests a method artefact that otherwise confounds every published deoxyosone level. P(E1 + E3 together resolve at least two of the hub / thiol questions) ~0.7; P(the literature alone does) ~0.3.
 
-Candidate partners have the methods: the Wageningen group (Fogliano), whose multiresponse kinetics come from van Boekel's tradition; Granvogl / Hofmann (Munich: SIDA, CAMOLA, Strecker); Reading (Parker / Mottram: thiols, pyrazine isotopomers); Nestlé / Davidek (deoxyosone feeding).
+Candidate partners have the methods: Granvogl / Hofmann (Munich: SIDA, CAMOLA, Strecker); Reading (Parker / Mottram: thiols, pyrazine isotopomers); Nestlé / Davidek (deoxyosone feeding).

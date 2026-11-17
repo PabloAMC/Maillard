@@ -18,7 +18,7 @@ dossier needs. There is no supplementary material.
 | field | value |
 |---|---|
 | Title | "Browning Indicators in Bread" |
-| Authors | A. Ramírez-Jiménez, **E. Guerra-Hernández** (corresponding, ejguerra@platon.ugr.es), B. García-Villanova — Departamento de Nutrición y Bromatología, Facultad de Farmacia, Universidad de Granada, Campus Universitario de Cartuja, 18012 Granada, Spain |
+| Authors | A. Ramírez-Jiménez, **E. Guerra-Hernández** (corresponding), B. García-Villanova — Departamento de Nutrición y Bromatología, Facultad de Farmacia, Universidad de Granada, Campus Universitario de Cartuja, 18012 Granada, Spain |
 | Venue | **J. Agric. Food Chem. 2000, 48 (9), 4176-4181**; published on the Web 2 August 2000 |
 | DOI / article ID | `10.1021/jf9907687` (printed as `JF9907687`) |
 | Naming | "browning indicators" = **furosine**, **HMF** and **colour**; colour index = **100 − L\*** (CIE L\*a\*b\*, reflectance, on **lyophilised** samples); furosine = ε-N-(furoylmethyl)-L-lysine, "formed during acid hydrolysis of the Amadori compounds fructosyl-lysine, lactulosyl-lysine, and maltulosyl-lysine" |

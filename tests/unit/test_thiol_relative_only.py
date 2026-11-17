@@ -102,7 +102,7 @@ def test_the_refusal_names_ex059_what_would_lift_it_and_the_transfer():
     assert "0.964" in text and "U >= 1.60" in text and "one laboratory" in text
     # RE-PINNED 2026-11-06 (register pass): was "second independent laboratory". H0's prereg sec. 9 triggers the
     # re-score (H0') on the first batch that keys >= 2 NEW laboratories; the one-laboratory wording promised it early.
-    assert "at least two new independent laboratories" in text and "WUR" in text and "H0's rule" in text
+    assert "at least two new independent laboratories" in text and "outside blind test" in text and "H0's rule" in text
     assert "at least two new independent laboratories" in h0.short_reason()
     assert "R3En" in text and "B60" in text and "conservative transfer" in text
     assert "EX-059" in h0.short_reason() and "EX-059" in h0.relative_caveat()

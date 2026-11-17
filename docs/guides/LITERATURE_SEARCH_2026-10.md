@@ -1,6 +1,6 @@
 # Literature search 2026-10: citation chaining for sulfur / meat-flavour formation
 
-Run 2026-10-27. Purpose: measure and close the coverage gap exposed when a Wageningen expert's 24-paper list on meat-flavour
+Run 2026-10-27. Purpose: measure and close the coverage gap exposed when an expert's 24-paper list on meat-flavour
 volatiles from amino acids, sugars, thiamine and glutathione overlapped our corpus in only 8 of 24. Our original search came
 from LLM deep-research digests and keyword queries, which favour well-cited kinetics papers; the misses were mostly mechanism,
 intermediate and labelling papers. This note is the search record only; nothing was added to `data/`.
@@ -16,8 +16,7 @@ intermediate and labelling papers. This note is the search record only; nothing 
   (10.1021/acs.jafc.2c08360), Yiltirak 2026 (10.1016/j.foodres.2026.118600), Meynier & Mottram 1995
   (10.1016/0308-8146(95)93282-V), Mottram & Nobrega 2002 (10.1021/jf0200826). OpenAlex has **no reference list and no citers for
   Kang 2026**, and one citer for Yiltirak 2026, so in practice the A set has 8 working seeds.
-- **Seeds B (expert list, 24 DOIs)**: the references in `scratch/wur_blind_test/paper for MeatCODE.docx` (Wang 2012 appears twice in
-  that list; 24 unique DOIs). All 24 resolved in OpenAlex.
+- **Seeds B (expert list, 24 DOIs)**: an expert-supplied reference list (24 DOIs; Wang 2012 appears twice in that list). All 24 resolved in OpenAlex.
 - **Score** = number of distinct seeds a candidate is directly linked to (cites the seed, or is cited by it).
   Ties are broken by **coupling** (number of seed references the candidate also cites; only works with a reference list)
   and then by citation count. Table columns show `score/coupling`.

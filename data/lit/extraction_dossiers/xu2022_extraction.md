@@ -27,7 +27,7 @@ exists and is a different paper.
 |---|---|
 | Title (English, as printed) | "Effect of Heat Treatment on the Binding of Pea Protein Isolate to Typical Beef Aroma Substances and Their Interaction Mechanism" |
 | Title (Chinese) | 热处理对豌豆分离蛋白结合典型牛肉香气物质的影响及相互作用机制 |
-| Authors | **XU Sijia** (徐思佳)^1, **BI Shuang** (毕爽)^2, **ZHANG Wentao** (张文涛)^1, **PAN Xin** (潘鑫)^1, **LAO Fei** (劳菲)^1, **SHEN Qun** (沈群)^1, **WU Jihong** (吴继红)^1,* — ^1 National Engineering Research Center for Fruit and Vegetable Processing, Key Laboratory of Fruit and Vegetable Processing of Ministry of Agricultural and Rural Affairs, Key Laboratory of Non-thermal Food Processing, College of Food Science & Nutritional Engineering, China Agricultural University, Beijing 100083; ^2 College of Food and Health, Beijing Technology and Business University, Beijing 100048. Corresponding: WU Jihong, wjhcau@hotmail.com (ORCID 0000-0001-7895-8305). First author ORCID 0000-0003-1992-2817 |
+| Authors | **XU Sijia** (徐思佳)^1, **BI Shuang** (毕爽)^2, **ZHANG Wentao** (张文涛)^1, **PAN Xin** (潘鑫)^1, **LAO Fei** (劳菲)^1, **SHEN Qun** (沈群)^1, **WU Jihong** (吴继红)^1,* — ^1 National Engineering Research Center for Fruit and Vegetable Processing, Key Laboratory of Fruit and Vegetable Processing of Ministry of Agricultural and Rural Affairs, Key Laboratory of Non-thermal Food Processing, College of Food Science & Nutritional Engineering, China Agricultural University, Beijing 100083; ^2 College of Food and Health, Beijing Technology and Business University, Beijing 100048. Corresponding: WU Jihong (ORCID 0000-0001-7895-8305). First author ORCID 0000-0003-1992-2817 |
 | Venue | 食品科学 *Food Science* (China), **2022, Vol. 43, No. 19, pp. 28-35**. Article number 1002-6630(2022)19-0028-08; CLC TS214.9; document code A. **"(in Chinese with English abstract)"**, as the paper's own citation block states |
 | DOI | **`10.7506/spkx1002-6630-20220613-128`** — printed at the end of the English abstract and repeated twice in the bilingual citation block on p. 29, exactly as given here. Journal site printed as `http://www.spkx.net.cn` |
 | Dates | 收稿日期 (received) **2022-06-13** |
@@ -674,7 +674,7 @@ here** — it may be reversible partition rather than adduction, since a >98 % h
     any adduct identification; any reversibility control; any binding constant for three of its four compounds;
     any pH other than 7.6; any ionic-strength series; any protein-free heated blank described as such; any
     sensory measurement or odour threshold; any supplementary material.
-17. **What to request from the authors** (Wu Jihong, wjhcau@hotmail.com — the same corresponding author as
+17. **What to request from the authors** (Wu Jihong — the same corresponding author as
     Bi 2022, so one message could resolve both papers): (i) **whether the protein-free blank was heat-treated
     alongside the sample**, which decides how much of the temperature series is real binding; (ii) **a 2-methylpyrazine
     mass balance for the 120 °C arm**, since the compound is a Maillard product; (iii) **the pea protein molar

@@ -19,7 +19,7 @@ on disk from the same first author; this 2020 paper had no dossier and is cited 
 | field | value |
 |---|---|
 | Title | "Characterization of Key Aroma Compounds in Raw and Roasted Peas (*Pisum sativum* L.) by Application of Instrumental and Sensory Techniques" |
-| Authors | Shuang Bi, Xinxing Xu, Dongsheng Luo, Fei Lao, Xueli Pang, Qun Shen, Xiaosong Hu, Jihong Wu (corresponding, wjhcau@hotmail.com) — College of Food Science and Nutritional Engineering, China Agricultural University, Beijing; National Engineering Research Center for Fruit & Vegetable Processing |
+| Authors | Shuang Bi, Xinxing Xu, Dongsheng Luo, Fei Lao, Xueli Pang, Qun Shen, Xiaosong Hu, Jihong Wu (corresponding) — College of Food Science and Nutritional Engineering, China Agricultural University, Beijing; National Engineering Research Center for Fruit & Vegetable Processing |
 | Venue | J. Agric. Food Chem. 2020, 68 (10), 2718-2727. Received 5 Dec 2019, revised 2 Feb 2020, accepted 4 Feb 2020, published 4 Feb 2020 |
 | DOI | 10.1021/acs.jafc.9b07711 |
 | Material | Peas, **Zhongwan variety**, grown at Datong, Shanxi Province, China (40 deg 08' N, 113 deg 24' E), harvested 2017, stored 4 C. Experiment run 2018-2019. |

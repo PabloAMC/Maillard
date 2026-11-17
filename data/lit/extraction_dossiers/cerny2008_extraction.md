@@ -23,7 +23,7 @@ constants carries a literature note.
 | field | value |
 |---|---|
 | Title | "Identification of 5-Hydroxy-3-mercapto-2-pentanone in the Maillard Reaction of Thiamine, Cysteine, and Xylose" |
-| Authors | Christoph Cerny (corresponding; phone +41 22 780 22 11, christoph.cerny@firmenich.com) and Renée Guntz-Dubini — Firmenich SA, Corporate R&D Division, P.O. Box 148, CH-1217 Meyrin, Geneva 2, Switzerland |
+| Authors | Christoph Cerny (corresponding) and Renée Guntz-Dubini — Firmenich SA, Corporate R&D Division, P.O. Box 148, CH-1217 Meyrin, Geneva 2, Switzerland |
 | Venue | J. Agric. Food Chem. 2008, 56 (22), 10679-10682. Received for review 9 June 2008, revised 2 October 2008, accepted 5 October 2008, web 5 November 2008 |
 | DOI / article ID | 10.1021/jf801762c (printed as `JF801762C`) |
 | Paper type | **Identification / structure elucidation.** Not a kinetic paper, not a quantification paper, not a comparative-yield paper. The abstract states the whole scope: "We have identified the compound in a thermally treated mixture of thiamine, cysteine, and xylose and characterized it by MS and NMR." |

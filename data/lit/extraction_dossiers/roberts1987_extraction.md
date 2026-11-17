@@ -52,19 +52,7 @@ releases, and (b) buffer catalysis of the slower *hydrolysis* step (carbinolamin
 ring opening. It cannot rank these. The rival R-P (general-acid buffer catalysis) remains untested by any paper in
 the corpus; this one does not move it.
 
-**Leads it points to (for the owner's download list; none on disk):**
-- Nagasawa, Goon & Shirota 1981, *J. Heterocycl. Chem.* 18:1047-1051, "Epimerization at C-2 of 2-substituted
-  thiazolidine-4-carboxylic acids" — DOI 10.1002/jhet.5570180538 (Crossref match on title / authors / year,
-  2026-10-31). The mechanism paper behind the mutarotation remark; the most likely place for a ring-chain rate.
-- Nagasawa, Goon, Muldoon & Zera 1984, *J. Med. Chem.* 27:591 — DOI 10.1021/jm00371a006 (as recorded in
-  `docs/guides/LITERATURE_SEARCH_2026-10-29_phosphate_thiazolidine.md`); 2-alkyl TCA prodrugs, possibly
-  hydrolysis kinetics.
-- Schubert 1939, *J. Biol. Chem.* 130:601-603, "The combination of cysteine with sugars" — DOI
-  10.1016/s0021-9258(18)73532-1 (Crossref match, 2026-10-31); Schubert 1936 *J. Biol. Chem.* 114:341 (thiol acids +
-  aldehydes; the pH-shifts-equilibrium claim is cited to it). Possible source of sugar-Cys dissociation constants.
-- Bognar, Somogyi & Györgydeák 1970, *Justus Liebigs Ann. Chem.* 738:68 (the RibCys synthesis followed here; sugar-
-  cysteine ring-chain tautomerism in solution). DOI not verified.
-- Pesek 1978, *Anal. Chem.* 50:787 (NMR of thiazolidines). DOI not verified.
+**Leads it points to (none on disk):** 5 candidates; the list is kept privately.
 - Kallen 1971, *J. Am. Chem. Soc.* 93:6227 — already read (`kallen1971_extraction.md`).
 
 ## 0. Identity

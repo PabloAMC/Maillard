@@ -12,7 +12,7 @@ Read from the `pdftotext -layout` text layer, which came through clean apart fro
 | field | value |
 |---|---|
 | Title | "Methylglyoxal Forms Diverse Mercaptomethylimidazole Crosslinks with Thiol and Guanidine Pairs in Endogenous Metabolites and Proteins" |
-| Authors | John S. Coukos, Raymond E. Moellering (corresponding, rmoellering@uchicago.edu, ORCID 0000-0002-2043-7838) — Department of Chemistry, The University of Chicago, Chicago, Illinois 60637, USA |
+| Authors | John S. Coukos, Raymond E. Moellering (corresponding, ORCID 0000-0002-2043-7838) — Department of Chemistry, The University of Chicago, Chicago, Illinois 60637, USA |
 | Venue | **ACS Chemical Biology 2021, 16, 2453−2461.** Received 15 July 2021; accepted 16 September 2021; published 28 September 2021 |
 | DOI | **10.1021/acschembio.1c00553** — printed in the page footer of every page as `https://doi.org/10.1021/acschembio.1c00553`, and again in the "Complete contact information" block as `https://pubs.acs.org/10.1021/acschembio.1c00553` |
 | Funding / interest | NIH MSTP training grant T32GM007281 (J.S.C.); NSF-CAREER CHE-1945442 (R.E.M.); Alfred P. Sloan Foundation FG-2020-12839 (R.E.M.). "The authors declare no competing financial interest." |

@@ -17,7 +17,7 @@ material (Figs. S-1 to S-10, Tables S-1 to S-3; file `bork2022b_supplementary.do
 
 | field | value as printed |
 |---|---|
-| Authors | Leon V. Bork, Paul T. Haase, Sascha Rohn, **Clemens Kanzler** (corresponding, clemens.kanzler@tu-berlin.de) |
+| Authors | Leon V. Bork, Paul T. Haase, Sascha Rohn, **Clemens Kanzler** (corresponding) |
 | Affiliation | Technische Universität Berlin, Institute of Food Technology and Food Chemistry, Dept. of Food Chemistry and Analysis, Gustav-Meyer-Allee 25, 13355 Berlin |
 | Venue | *Food Chemistry* **380** (2022) 131852 |
 | DOI | **10.1016/j.foodchem.2021.131852** (printed p. 1) — matches the brief |

@@ -15,7 +15,7 @@ TTCA/ARP yields during vacuum dehydration, **Fig. S3** TTCA/ARP distribution aft
 | field | value |
 |---|---|
 | Title | "Intrinsic Molecular Mechanisms of Transformation between Isomeric Intermediates Formed at Different Stages of Cysteine−Xylose Maillard Reaction Model through Dehydration" |
-| Authors | Yun Zhai, Khizar Hayat, Teng Li, **Yuying Fu** (corresponding, webfu@126.com), **Chi-Tang Ho** (corresponding, ctho@sebs.rutgers.edu) |
+| Authors | Yun Zhai, Khizar Hayat, Teng Li, **Yuying Fu** (corresponding), **Chi-Tang Ho** (corresponding) |
 | Affiliations | Zhejiang Gongshang University (Hangzhou); Miami University (Ohio); Rutgers University |
 | Venue | J. Agric. Food Chem. **2023, 71 (43), 16260-16269**. Received 11 Sep 2023, revised 2 Oct 2023, accepted 9 Oct 2023, published 19 Oct 2023 |
 | DOI as printed | **10.1021/acs.jafc.3c06506** ✔ matches the brief |

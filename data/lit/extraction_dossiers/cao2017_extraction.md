@@ -15,7 +15,7 @@ digitised number is tagged **[D]** with its read error. Supporting Information (
 | field | value |
 |---|---|
 | Title | "Effect of glycine on reaction of cysteine-xylose: Insights on initial Maillard stage intermediates to develop meat flavor" |
-| Authors | Changchun Cao, **Jianchun Xie** (corresponding, xjchun@th.btbu.edu.cn), Li Hou, Jian Zhao, Feng Chen, Qunfei Xiao, Mengyao Zhao, Mengdie Fan |
+| Authors | Changchun Cao, **Jianchun Xie** (corresponding), Li Hou, Jian Zhao, Feng Chen, Qunfei Xiao, Mengyao Zhao, Mengdie Fan |
 | Affiliations | Beijing Advanced Innovation Center for Food Nutrition and Human Health / Beijing Laboratory for Food Quality and Safety, Beijing Technology and Business University (BTBU); Feng Chen at Clemson University |
 | Venue | Food Research International (2017) **99**, 444-453 (page range as cited by Zhao 2019; the accepted manuscript carries no pagination). Received 10 Feb 2017, revised 2 Jun 2017, accepted 2 Jun 2017 |
 | DOI as printed | **10.1016/j.foodres.2017.06.012** ✔ matches the brief |

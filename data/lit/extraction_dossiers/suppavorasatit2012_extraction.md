@@ -20,7 +20,7 @@ of today**; `vanillin` is also keyed.
 | field | value |
 |---|---|
 | Title | "Effect of Enzymatic Protein Deamidation on Protein Solubility and Flavor Binding Properties of Soymilk" |
-| Authors | Inthawoot Suppavorasatit (Dept. of Food Technology, Faculty of Science, Chulalongkorn Univ., Phayatai Rd., Wangmai, Pathumwan, Bangkok 10330, Thailand); Soo-Yeun Lee and Keith R. Cadwallader (corresponding, cadwlldr@illinois.edu) — Dept. of Food Science and Human Nutrition, Univ. of Illinois at Urbana-Champaign, 1302 West Pennsylvania Ave., Urbana, IL 61801 |
+| Authors | Inthawoot Suppavorasatit (Dept. of Food Technology, Faculty of Science, Chulalongkorn Univ., Phayatai Rd., Wangmai, Pathumwan, Bangkok 10330, Thailand); Soo-Yeun Lee and Keith R. Cadwallader (corresponding) — Dept. of Food Science and Human Nutrition, Univ. of Illinois at Urbana-Champaign, 1302 West Pennsylvania Ave., Urbana, IL 61801 |
 | Venue | **Journal of Food Science, Vol. 78, Nr. 1, 2013, pp. C1-C7**, section "C: Food Chemistry". MS 20120601, **submitted 28 April 2012, accepted 21 October 2012**; copyright line "© 2012 Institute of Food Technologists". **The file is named `suppavorasatit2012.pdf` and the copyright is 2012, but the issue is 78(1) 2013** (Flags 12) |
 | DOI | **`doi: 10.1111/j.1750-3841.2012.03012.x`** — printed exactly so at the foot of p. C1 |
 | Funding | USDA National Inst. of Food and Agriculture, **Hatch project ILLU-698-366**; Royal Thai Government Scholarship (I. Suppavorasatit) |

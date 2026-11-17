@@ -1,6 +1,6 @@
 # A designed experiment for a partner laboratory: brief (2026-11)
 
-*Draft for Pablo to review. Nothing has been sent. Written for a food-chemistry PI (Wageningen FQD, or TUM /
+*Draft for Pablo to review. Nothing has been sent. Written for a food-chemistry PI (for example TUM /
 Leibniz-LSB). It merges protocol experiments E3 and E1 of
 [DESIGNED_TIMECOURSE_PROTOCOL_DRAFT.md](DESIGNED_TIMECOURSE_PROTOCOL_DRAFT.md) with the rows of
 [ENGINE_VS_LITERATURE.md](../reference/pathway_atlas/ENGINE_VS_LITERATURE.md) sec. 3.1 that can share their pots.

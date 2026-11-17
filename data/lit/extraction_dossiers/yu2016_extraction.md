@@ -12,7 +12,7 @@
 | field | value |
 |---|---|
 | Title | "Kinetics of Non-Enzymatic Browning Reaction from the L-Ascorbic Acid/L-Cysteine Model System" |
-| Authors | **Ai-Nong Yu** (corresponding, anyufoodchem@hotmail.com) and Le-Pan Tang — Hubei University for Nationalities, Enshi, China |
+| Authors | **Ai-Nong Yu** (corresponding) and Le-Pan Tang — Hubei University for Nationalities, Enshi, China |
 | Venue | Czech J. Food Sci. **34** (6), 503-510, 2016. Received 12 Mar 2016, accepted 16 Nov 2016 |
 | DOI as printed | **10.17221/86/2016-CJFS** ✔ matches the brief. **Identity verified.** |
 | Funding | NSFC 31360408; Hubei discipline group 2015-5 |

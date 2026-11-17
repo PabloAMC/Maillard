@@ -1528,7 +1528,7 @@ probed), not a wall clock; a pot whose rival exceeds it is refused with that rea
 Under fix 1 SUG-04 comes back (its step stands under the ratio rule); Z23C-GSH-01 stays refused (its step's spread is 1.07 dex, beyond omega).
 
 **Not refused.** A clamped (held, measured) pH: the balance is not solved (the measured-trajectory path); the trunk,
-acrylamide and lipid lanes. The WUR blind-test predictions of 2026-10-20 ran with `BufferSpec(kind="clamped")` (pH 6.4
-held, their assumption A4): they did not depend on the balance and are not re-scored.
+acrylamide and lipid lanes. Numbers already sent outside the repository ran with a clamped pH: they did not depend on the balance and are not
+re-scored.
 
 **Cost.** One recipe at all 25 points timed at 11.9 s projected 0.67 h for the 809 recipes at 4 workers; the run took 2.03 h (directional arms with long programmes run 70 - 900 s of rivals each). The live rule costs a median 9.6 s of rival integrations per balance-solved pot (23 points, ~0.4 s each; max 910 s, a Wang 2012 sweep arm), the directional generator about an hour at 4 workers.

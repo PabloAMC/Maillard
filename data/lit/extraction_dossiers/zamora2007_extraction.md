@@ -17,7 +17,7 @@ including 2,4-decadienal + Phe 27.6 kJ/mol in air), `hidalgo2004_extraction.md` 
 | Authors | Rosario Zamora, Emerenciana Gallardo, Francisco J. Hidalgo* |
 | Venue | *J. Agric. Food Chem.* 2007, 55 (4), 1308–1314 |
 | DOI | 10.1021/jf062838x (PMID 17300152) |
-| Affiliation | Instituto de la Grasa, CSIC, Seville; corresponding fhidalgo@ig.csic.es |
+| Affiliation | Instituto de la Grasa, CSIC, Seville; corresponding F. J. Hidalgo |
 | PDF character | 7 pages; Table 1 (retention indices), Schemes 1–2, Figures 1–6 |
 
 ---

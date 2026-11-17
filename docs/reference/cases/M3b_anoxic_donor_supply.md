@@ -274,7 +274,7 @@ Notable exclusions:
 **None of these can be decisive.** They are other laboratories or other systems, and the decisive data are fixed in
 sec. 4. They can only move bands, by an amendment registered before any M3b result exists. The chance that at least
 one gives a band that narrows a confound of sec. 4.3 (k_tr, the split, Ra's rate) is **~0.6**. The download list was handed to
-the coordinator for the private `data/articles/DOWNLOAD_QUEUE.md` (gitignored, main checkout). It is not committed.
+the coordinator for the private download queue. It is not committed.
 The sweep did not seed Deng 2021, Voigt 2009 / 2010 or Davidek 2005 / 2006a / 2006b. Their forward sweeps overlap the
 M4 sweep of 2026-11-05 (Voigt 2009, Davidek 2006a and Deng 2021 were seeds there).
 

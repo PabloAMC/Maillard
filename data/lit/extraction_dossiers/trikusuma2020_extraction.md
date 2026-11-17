@@ -17,7 +17,7 @@ its `content_verification` block quotes it, but this paper had **no extraction d
 | field | value |
 |---|---|
 | Title | "Identification of aroma compounds in pea protein UHT beverages" |
-| Authors | Mariana Trikusuma, Laurianne Paravisini, Devin G. Peterson (corresponding, peterson.892@osu.edu) — Department of Food Science and Technology, The Ohio State University, Columbus, OH |
+| Authors | Mariana Trikusuma, Laurianne Paravisini, Devin G. Peterson (corresponding) — Department of Food Science and Technology, The Ohio State University, Columbus, OH |
 | Venue | **Food Chemistry 312 (2020) 126082**. Received 8 Sep 2019, revised 13 Dec 2019, accepted 17 Dec 2019, online 26 Dec 2019 |
 | DOI | **10.1016/j.foodchem.2019.126082** |
 | Ethics | OSU IRB #2017H0072 |

@@ -161,7 +161,7 @@ def _refusal_text() -> str:
         "ratios, ranks and time-course shapes from `compare` are answered, with the within-laboratory shape error "
         f"omega = {r.omega_dex:.2f} dex per arm (borrowed from R3En's scoring) in their interval. WHAT WOULD LIFT "
         "IT: absolute measurements of these compounds from at least two new independent laboratories (H0's "
-        "pre-registered trigger; the pending WUR blind-test samples would be one), re-scored under H0's rule (H0', "
+        "pre-registered trigger; a pending outside blind test would be one), re-scored under H0's rule (H0', "
         "results/validation/kinetic_core_between_lab_tau_h0_prereg.md sec. 9). A calibration made by `calibrate` from "
         "your own measured levels of the compound is answered: its level is then your laboratory's."
     )

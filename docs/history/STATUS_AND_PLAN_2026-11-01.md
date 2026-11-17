@@ -10,7 +10,7 @@ Given a formulation (amino acids incl. cysteine, sugars, thiamine, buffer, fat) 
 pH, vessel), predict the key odorants of alternative-protein flavours -- MFT, FFT, H2S, Strecker aldehydes,
 pyrazines, lipid aldehydes -- with honest uncertainty that holds in a laboratory the model never saw, built on the
 RIGHT MECHANISMS rather than tuned numbers (owner, 2026-10-30). Measures: leave-one-laboratory-out error per lane,
-90 % interval coverage, evidence grounding, blind tests (WUR); judged per STRATEGY sec. 9 (mechanism signatures
+90 % interval coverage, evidence grounding, blind tests; judged per STRATEGY sec. 9 (mechanism signatures
 lead, calibrated out-of-sample prediction decides adequacy, scores diagnose).
 
 ## 2. Where the shipped model stands (B60 calibration; nothing on the branch is shipped)
@@ -242,7 +242,7 @@ scratchpad and ONE writer applies them in order.
 - in-situ pH: the probes clamp pH while the literature pots drift (CF-084);
 - observation operators;
 - intermediate water activity and protein-bound amine, which is where alt-protein recipes actually sit;
-- the WUR scoring hook.
+- the outside blind test's scoring hook.
 
 **Checkpoint 2026-11-07:**
 - (a) the benchmark with its frozen split exists, and the shipped engine is scored;
@@ -330,7 +330,7 @@ classes, donor-generic Strecker. Prerequisite for C, so new lanes do not copy th
 
 **D. Usefulness (in parallel, owner-facing).**
 13. Designed data beats more literature: the between-lab spread (10 - 1000x) is the binding limit, so one controlled
-    experiment per open mechanism (chosen by the experiment ranking) is worth more than any fit; the WUR blind test
+    experiment per open mechanism (chosen by the experiment ranking) is worth more than any fit; the outside blind test
     is scored the day its data arrive.
 14. The deliverable for formulators: RELATIVE predictions (rank formulations / process changes by odorant profile,
     with intervals) before absolutes -- within-study contrasts are where a mechanistic model can be trusted first.
@@ -372,7 +372,7 @@ brief ([EXPERIMENTS_BRIEF.md](EXPERIMENTS_BRIEF.md): "stop scraping literature")
    scorer reads; V2 for CF entries that name a TEST cell; V3 (citation chains) only for an error that rule 1 blocks
    for lack of labs. Default: adopt.
 5. **Owner actions with the largest effect:** send the designed-experiment brief and the 5 author data requests
-   (`data/articles/OUTREACH_DRAFTS.md`, laptop only). The between-lab spread (x10 - x1000) is the binding limit; no
+   (kept privately). The between-lab spread (x10 - x1000) is the binding limit; no
    step above removes it.
 6. **Profile before the next long refit:** 2 h on one joint-fit evaluation (finite-difference Jacobian, pH solve,
    integrator) before E6 + E11's ~1 day queue; exact Jacobians cut a 16-constant fit ~3 - 8x (H3's first step).

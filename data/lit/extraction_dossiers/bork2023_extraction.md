@@ -17,7 +17,7 @@ time points beyond 120 min's, no vessel / O2 / final-pH detail; Fig. S4 gives th
 
 | field | value as printed |
 |---|---|
-| Authors | **Leon Valentin Bork** (co-corresponding, l.bork@tu-berlin.de), Maximilian Baumann, Tobias Stobernack (BfR Berlin), Sascha Rohn, **Clemens Kanzler** (co-corresponding) |
+| Authors | **Leon Valentin Bork** (co-corresponding), Maximilian Baumann, Tobias Stobernack (BfR Berlin), Sascha Rohn, **Clemens Kanzler** (co-corresponding) |
 | Affiliation | TU Berlin, Institute of Food Technology and Food Chemistry, Dept. of Food Chemistry and Analysis; BfR, Dept. of Chemical and Product Safety |
 | Venue | *Antioxidants* **2023**, 12(9), 1788 |
 | DOI | **10.3390/antiox12091788** (printed) — matches the brief |

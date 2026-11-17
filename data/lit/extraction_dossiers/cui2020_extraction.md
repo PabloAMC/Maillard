@@ -26,7 +26,7 @@ and Table 3 (p. 7) read by eye from the 200 dpi renders**; **Fig. 4B heat map (p
 derived by me, never printed · **[!]** flag.
 
 **Laboratory.** Department of Plant Sciences, **North Dakota State University**, Fargo (Cui, Rao, Chen) with **Roquette
-America Inc.**, Geneva IL (Kimmel, Zhou). **Corresponding author Bingcan Chen** (bingcan.chen@ndsu.edu); Jiajia Rao
+America Inc.**, Geneva IL (Kimmel, Zhou). **Corresponding author Bingcan Chen**; Jiajia Rao
 co-senior (conceptualisation, supervision, funding). Funded by Roquette [M, acknowledgement]; two Roquette co-authors
 [!] (supplier interest in a commercial pea-protein process). **Not in `data/keys/laboratories.yml`: NEW.** The group
 already appears in the ledgers under **three free-text spellings** — "North Dakota State Univ. / USDA-ARS Fargo (Rao)"

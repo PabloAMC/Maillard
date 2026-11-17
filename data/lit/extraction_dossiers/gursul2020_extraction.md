@@ -30,7 +30,7 @@ and its job is to record what the paper is and, for that list, what it is not.
 | field | value |
 |---|---|
 | Title | "Multiresponse kinetic modelling of alpha-dicarbonyl compounds formation in fruit juices during storage" |
-| Authors | Isil Gursul Aktag, Vural Gokmen (corresponding, vgokmen@hacettepe.edu.tr) — Food Quality and Safety (FoQuS) Research Group, Food Engineering Department, Hacettepe University, 06800 Beytepe, Ankara, Turkey |
+| Authors | Isil Gursul Aktag, Vural Gokmen (corresponding) — Food Quality and Safety (FoQuS) Research Group, Food Engineering Department, Hacettepe University, 06800 Beytepe, Ankara, Turkey |
 | Venue | **Food Chemistry 320 (2020) 126620**. Received 26 Oct 2019, revised 17 Feb 2020, accepted 15 Mar 2020, online 17 Mar 2020 |
 | DOI | **10.1016/j.foodchem.2020.126620** |
 | Materials | **Apple juice** (Golden Delicious, clear), **orange juice** (Washington, cloudy), **peach nectar** (Bursa, added-sugar), all made in the laboratory from fruit bought at local markets |

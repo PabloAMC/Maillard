@@ -19,7 +19,7 @@ caption. **Every numeric cell below was read from the raster, not the text layer
 | SHA-256 | `e80432a54178a9964f2fb6a210d504e3b8f2e9a19fb11885674a05c9dc4201e5` | `shasum -a 256` |
 | **title** | ***"Simplified Kinetic Scheme of Flavor Formation by the Maillard Reaction"*** | p.2534 raster ✔; PDF metadata title identical |
 | **authors** | **F. Jousse, T. Jongen, W. Agterof, S. Russell, and P. Braat** | p.2534 ✔ |
-| **affiliation** | **Unilever Research Vlaardingen, Olivier van Noortlaan 120, 3133AT Vlaardingen, The Netherlands** (all five); inquiries to Jousse, `fabien.jousse@unilever.com` | p.2542 |
+| **affiliation** | **Unilever Research Vlaardingen, Olivier van Noortlaan 120, 3133AT Vlaardingen, The Netherlands** (all five); inquiries to Jousse | p.2542 |
 | **venue** | *Journal of Food Science* **Vol. 67, Nr. 7, 2002, pp. 2534–2542**, section "Food Chemistry and Toxicology" | running headers |
 | **DOI** | **10.1111/j.1365-2621.2002.tb08772.x** (given in the brief; **[NEG] no DOI is printed anywhere in the PDF** — 2002 JFS issues carried none) | whole-document sweep |
 | manuscript history | **MS 20010573 Submitted 10/11/01, Accepted 12/18/01, Received 12/21/01** | p.2542 |

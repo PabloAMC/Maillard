@@ -22,7 +22,7 @@ nowhere in `src/`, `data/` or `results/`.
 | field | value |
 |---|---|
 | Title | "Generation of Maillard reaction-derived flavour compounds in coffee analogues by an extrusion-based solid model system" |
-| Authors | Bei Wang, Marjanne J. Verhoeven, Vincenzo Fogliano (corresponding, vincenzo.fogliano@wur.nl), Teresa Oliviero — **Food Quality and Design Group, Wageningen University & Research, The Netherlands** |
+| Authors | Bei Wang, Marjanne J. Verhoeven, Vincenzo Fogliano (corresponding), Teresa Oliviero — **Food Quality and Design Group, Wageningen University & Research, The Netherlands** |
 | Venue | **Food Chemistry 492 (2025) 145552**. Received 29 Jan 2025, revised 11 Jul 2025, accepted 12 Jul 2025, online 14 Jul 2025 |
 | DOI | **10.1016/j.foodchem.2025.145552** |
 | Licence | Open access, CC BY |

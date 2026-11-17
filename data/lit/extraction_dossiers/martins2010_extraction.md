@@ -18,7 +18,7 @@ by me · **[Q]** qualitative text · **[Z]** derived by me · **[!]** flag.
 
 | field | value as printed |
 |---|---|
-| Authors | **S. I. F. S. Martins**\* (sara.martins@unilever.com), A. Leussink, E. A. E. Rosing, G. A. Desclaux, C. Boucon |
+| Authors | **S. I. F. S. Martins**\*, A. Leussink, E. A. E. Rosing, G. A. Desclaux, C. Boucon |
 | Affiliation | Unilever R&D Vlaardingen, Olivier van Noortlaan 120, P.O. Box 114, 3130 AC Vlaardingen, The Netherlands |
 | Title | "Meat Flavor Generation in Complex Maillard Model Systems: Reactants Synergetic and/or Competition Effect?" |
 | Venue | Chapter 8 (pp. **71–83**) in *Controlling Maillard Pathways To Generate Flavors*; Mottram, D., et al., Eds.; **ACS Symposium Series 1042**; American Chemical Society: Washington, DC, **2010** |

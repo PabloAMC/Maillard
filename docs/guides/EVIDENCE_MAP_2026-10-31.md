@@ -95,9 +95,9 @@ Also checked (amine or peptide rows outside the hub and odorant responses):
   - That is at least 2 labs, so a FITTED coordinate is allowed for the glycine order of the early steps (hexose).
   - Pentose: Ho network only (deng2021, zhou2024). Declared band.
 - **Peptide vs free amine on the hub:** xia2022 only (one lab). Declared band.
-  - cui2022 (glycylglycine, 10.1021/acs.jafc.2c03427) is in the private download queue, tier 2.
+  - cui2022 (glycylglycine) is not on disk.
 - **Peptide vs free amine on pyrazines:**
-  - De Kimpe (vanlancker2012, peak areas) only on disk; scalone2015 and vanlancker2010 are in the queue.
+  - De Kimpe (vanlancker2012, peak areas) only on disk; scalone2015 and vanlancker2010 are not.
   - That leaves one lab, so a declared band.
 - **Protein-bound lysine vs free amine** (same sugar, same pot design):
   - Wageningen (brands2001) and Marseille (ajandouz2008) give sugar loss / acids only. Nothing on disk measures DO or odorants.
@@ -794,32 +794,9 @@ not to the bench.
 
 ---
 
-# 4. Papers the dossiers cite that would fill a gap, NOT on disk and NOT in the private download queue
+# 4. Papers the dossiers cite that would fill a gap, not on disk
 
-Each candidate's absence from the main repo's `data/articles` (492 files) was checked by name. DOIs were verified
-against Crossref today (title, authors, journal, pages matched); "lead" means not verified. Already queued and so left
-out: Smuda 2010 group tier 1 (on disk), and tier 2 / 3 (pesek1975, schubert1936, zhou2024b, cui2022, voigt2010, hou2026,
-thornalley1999, guan2012, pripisnicolau2000, hidalgo2005, zamora2006, scalone2015, vanlancker2010, lu2005, adams2001,
-lo1994, shibamoto1977, vandenouweland1975, huber1990, and others).
-
-| paper | DOI | verified | gap it fills | dossier line relied on |
-|---|---|---|---|---|
-| Voigt & Glomb 2009, J. Agric. Food Chem. 57:4765-4770, "Reactivity of 1-deoxy-D-erythro-hexo-2,3-diulose: a key intermediate..." | 10.1021/jf900459x | Crossref | Amine-free vs amine 1-DG cleavage: the amine-acceleration (B7a) question, 2.1 | "The lead that could answer acceleration is Voigt & Glomb 2009" smuda2010:55-56 (the queue lists it as "DOI to verify"; now verified) |
-| Beck, Ledl & Severin 1988, Carbohydr. Res. 177:240-243, "Formation of 1-deoxy-D-erythro-2,3-hexodiulose from Amadori compounds" | 10.1016/0008-6215(88)85058-4 | Crossref | 1-DG : 3-DG split at pH 7 (hub, 2.1) | martins2003b:462-464; "It has not been read." blank1997:744 |
-| Huyghues-Despointes & Yaylayan 1996, J. Agric. Food Chem. 44:672-681, "Retro-aldol and redox reactions of Amadori compounds: mechanistic studies with variously labeled D-[13C]glucose" | 10.1021/jf9502921 | Crossref | K1 labelling for the REDOX mechanism (2.9) and ARP retro-aldol (2.1) | docs/history/mechanism_reviews_2026-10-31/hub.md:81 ("Unverified content"); ARP rates cited at jousse2002:271 |
-| Kallen 1971, J. Am. Chem. Soc. 93:6236-6248, "Mechanism of reactions involving Schiff base intermediates. Thiazolidine formation from L-cysteine and formaldehyde" | 10.1021/ja00752a040 | Crossref | Forward / reverse thiazolidine RATE constants (2.5). The on-disk kallen1971 is the equilibria paper, 93:6227, 10.1021/ja00752a039. (Corrected 2026-11-01: now on disk as `kallen1971b_extraction.md`; it gives TC k_r ~1e-6 s⁻¹ at 25 C, and shows the kallen1971 arithmetic-3 "k_r" was the relaxation) | "Not on disk; this is the paper that would carry forward/reverse rate constants." kallen1971:19 |
-| Charles-Bernard, Kraehenbuehl, Rytz & Roberts 2005, J. Agric. Food Chem. 53:4417-4425, "Interactions between volatile and nonvolatile coffee components. 1. Screening..." | 10.1021/jf048021q | Crossref | Which matrix fraction binds thiols (MFT loss, 2.4). The on-disk charles-bernard2005.pdf is Part 2 | "Part 1 of the pair ... -- not on disk" charlesbernard2005:28 |
-| Ghiron, Quack, Mawhinney & Feather 1988, J. Agric. Food Chem. 36:677-680, "Studies on the role of 3-deoxy-D-erythro-glucosulose (3-deoxyglucosone) in nonenzymic browning..." | 10.1021/jf00082a002 | Crossref (title) | 3-DG as a Strecker donor (2.6, 3-DG sink 2.2) | docs/history/mechanism_reviews_2026-10-31/strecker.md:113 |
-| Grosch & Zeiler-Hilgart 1992, ACS Symp. Ser. 490, ch. 14, 183-192, "Formation of meatlike flavor compounds" | 10.1021/bk-1992-0490.ch014 | Crossref | The 4-5x SDE vs direct-extraction MFT effect (operator, 2.11); thiamine / Cys as MFT source | "a 4-5 fold increase in recovered MFT by Likens-Nickerson distillation-extraction over direct extraction" bolton1993:203 |
-| Weenen & Tjan 1992, ACS Symp. Ser. 490, ch. 17, 217-231, "Analysis, structure, and reactivity of 3-deoxyglucosone" | 10.1021/bk-1992-0490.ch017 | Crossref | ~~Cysteamine trapping of 3-DG (K3, 2.2). The dossier cites it as "Weenen & Tjan 1994"~~ (corrected 2026-11-01: this 1992 chapter has NO cysteamine trapping and no Strecker measurement -- 3-DG purification, (hemi)acetal structure by 13C NMR, methylpyrazines from 3-DG + Asn; `weenen1992_extraction.md`. The trapping weenen1998:114 cites is a different, 1994 paper, not on disk) | "(Weenen & Tjan 1994 with cysteamine trapping; NMR)" weenen1998:114 |
-| Kim, Hartman & Ho 1996, J. Agric. Food Chem. 44:3906-3908, "Formation of 2-pentylpyridine from the thermal interaction of amino acids and 2,4-decadienal" | 10.1021/jf950623+ | Crossref (title) | Companion to kim1998 (lipid carbonyl + amine, 2.10). The on-disk kim1996 is a different paper | "The oil-medium companion to Kim, Hartman & Ho 1996 (aqueous)" kim1998:2 |
-| Low, Koutsidis, Parker, Elmore, Dodson & Mottram 2006, J. Agric. Food Chem. 54:5976-5983 | 10.1021/jf060328x | Crossref | Concentrations behind low2007's label shares (2.7); queued as "optional, DOI to verify", now verified | "Low 2006 (not on disk)" low2007:162 |
-| Mottram, Nobrega & Dodson 1996, Flavour Science, 413-418, "Changes in thiol and disulfide flavour compounds resulting from the interaction with proteins" | 10.1533/9781845698232.7.413 | Crossref (title) | Thiol / disulfide exchange with protein (2.4). Lead that it is the "Mottram et al., 1998" whitfield1999 cites: the years differ | "thiols are not converted to disulfides during the analysis procedures ... (Mottram et al., 1998)" whitfield1999:60 |
-| Weenen & Apeldoorn 1996, Flavour Science (RSC) 211-216 | -- | lead | Primary data behind weenen1998 (hub / 3-DG / glyoxal) | weenen1998:21 |
-| de Roos 1992, ACS Symp. Ser. 490:203-216 | -- | lead (Crossref search failed) | Thiazolidine -> Cys-Amadori kinetics (2.5) | deroos2005:20 |
-| Mottram & Leseigneur 1990 (chapter) | -- | lead | Norfuraneol consumption vs pH in ribose-Cys (2.3 / 2.4) | "(Mottram & Leseigneur 1990, norfuraneol decreasing with pH in ribose-cysteine)" apriyantono1993:461 |
-| Desclaux 2006 PhD thesis | -- | lead | The full pentose network parameters, to adjudicate its 50 : 1 split (2.1) | desclaux2006:208 |
-| Cerny & Davidek follow-up CAMOLA with norfuraneol + cysteine | -- | lead (may never have been published) | The NF share of MFT at 95 C, directly (2.3) | "'CAMOLA experiments with 4-hydroxy-5-methyl-3(2H)-furanone/cysteine ... Further experiments are currently under way'" cerny2003:357 |
+27 candidates; the list is kept privately.
 
 **Data to ask authors or SI for (not papers):**
 - Zhai 2021: the 13C5-xylose label fraction in TTCA (MECHANISM_REVIEWS sec. 4).

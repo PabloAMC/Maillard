@@ -12,7 +12,7 @@ Read from the `pdftotext -layout` text layer. The PDF carries a **doubled text l
 | field | value |
 |---|---|
 | Title | "The Influence of Intracellular Glutathione Levels on the Induction of Nrf2-Mediated Gene Expression by α-Dicarbonyl Precursors of Advanced Glycation End Products" |
-| Authors | Liang Zheng (corresponding, liang.zheng@wur.nl), Katja C. W. van Dongen, Wouter Bakker, Ignacio Miro Estruch, Ivonne M. C. M. Rietjens — Division of Toxicology, Wageningen University and Research, Stippeneng 4, 6708 WE Wageningen, The Netherlands |
+| Authors | Liang Zheng (corresponding), Katja C. W. van Dongen, Wouter Bakker, Ignacio Miro Estruch, Ivonne M. C. M. Rietjens — Division of Toxicology, Wageningen University and Research, Stippeneng 4, 6708 WE Wageningen, The Netherlands |
 | Venue | **Nutrients 2022, 14, 1364.** Academic Editor Leni Rose Rivera. Received 1 March 2022; accepted 21 March 2022; published 24 March 2022 |
 | DOI | **10.3390/nu14071364** — printed on the title page in two places (the Citation block and the footer line) exactly as `https://doi.org/10.3390/nu14071364` |
 | Funding / interest | China Scholarship Council scholarship No. 202008510115 (L. Zheng). "The authors declare no conflict of interest." |

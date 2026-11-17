@@ -16,7 +16,7 @@ spacing, which are recorded qualitatively in section 3 and contribute no number.
 | field | value |
 |---|---|
 | Title | "Model studies on the role of 5-hydroxymethyl-2-furfural in acrylamide formation from asparagine" |
-| Authors | **Vural Gökmen** (corresponding, vgokmen@hacettepe.edu.tr), **Tolgahan Kocadağlı**, **Neslihan Göncüoğlu**, **Burçe Ataç Mogol** — Department of Food Engineering and Food Research Center, Hacettepe University, 06800 Beytepe, Ankara, Turkey |
+| Authors | **Vural Gökmen** (corresponding), **Tolgahan Kocadağlı**, **Neslihan Göncüoğlu**, **Burçe Ataç Mogol** — Department of Food Engineering and Food Research Center, Hacettepe University, 06800 Beytepe, Ankara, Turkey |
 | Venue | *Food Chemistry* **132** (2012) 168-174. Received 20 June 2011; revised 28 July 2011; accepted 12 October 2011; available online 19 October 2011 |
 | **DOI, exactly as printed in the PDF** | **`doi:10.1016/j.foodchem.2011.10.048`** (printed at the foot of page 168, in that lower-case `doi:` form) |
 | Abbreviations as the paper uses them | **ASN** = L-asparagine; **GLC** = D-glucose; **HMF** = 5-hydroxymethyl-2-furfural; **3-APA** = 3-aminopropionamide |

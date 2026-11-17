@@ -11,7 +11,7 @@ Fig. 3 digitised [D] from the 130-dpi render (read ±150 area/g). Arithmetic: `s
 | field | value |
 |---|---|
 | Title | "Kinetics of chemical marker formation in whey protein gels for studying microwave sterilization" |
-| Authors | M. H. Lau, **J. Tang** (corresponding, jtang@mail.wsu.edu), I. A. Taub, T. C. S. Yang, C. G. Edwards, R. Mao — Washington State University; US Army Natick Soldier Center |
+| Authors | M. H. Lau, **J. Tang** (corresponding), I. A. Taub, T. C. S. Yang, C. G. Edwards, R. Mao — Washington State University; US Army Natick Soldier Center |
 | Venue | Journal of Food Engineering **60** (2003) 397-405. Received 14 Oct 2002, accepted 8 Feb 2003 |
 | DOI as printed | **10.1016/S0260-8774(03)00063-3** ✔ matches the brief. **Identity verified.** |
 | Naming | M-2 = 4-hydroxy-5-methyl-3(2H)-furanone = norfuraneol = engine `NF`. M-1 (cited) = DDMP; M-3 = HMF |

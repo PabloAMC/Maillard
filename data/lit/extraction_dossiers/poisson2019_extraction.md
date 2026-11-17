@@ -10,7 +10,7 @@
 > † Nestlé Product Technology Centre Orbe, Nestec Ltd., CH-1350 Orbe, Switzerland.
 > ‡ Nestlé Nespresso S.A., CH-1680 Romont. § Nestlé Research Centre, P.O. Box 44, CH-1000
 > Lausanne 26.
-> Corresponding author: T. Davidek, +41 24 442 7342, tomas.davidek@rdor.nestle.com.
+> Corresponding author: T. Davidek.
 > ORCID Tomas Davidek 0000-0002-4555-8492. Received January 31, 2019; Revised March 29, 2019;
 > Accepted March 30, 2019.
 

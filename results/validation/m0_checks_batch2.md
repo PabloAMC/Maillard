@@ -18,7 +18,7 @@
 > one core, niced, threads pinned to 1.
 >
 > **Blinding.** Not read: the B59b hold-outs (the US 10,076,126 MFT shape is not used; see CK-23), van Seeventer 2001
-> Table 1 (a declared FIT_HOLDOUT hold-out), hofmann2000b Figs. 2-3, the E7 / E13 / E14 TEST sets, the WUR samples.
+> Table 1 (a declared FIT_HOLDOUT hold-out), hofmann2000b Figs. 2-3, the E7 / E13 / E14 TEST sets, the outside blind test's samples.
 > Not computed under any variant: the pots that open cases name as decisive (listed per check).
 
 ## Outcomes

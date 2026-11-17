@@ -24,7 +24,7 @@ risk**"*). **⇒ THAT GAP IS NOW CLOSED. §2.**
 | Venue | ***J. Dairy Sci.* 102 (11), 2019** — running head *"Journal of Dairy Science Vol. 102 No. 11, 2019"*; the PDF carries an **"ARTICLE IN PRESS"** banner and prints `J. Dairy Sci. 102` **without page numbers** |
 | DOI | **https://doi.org/10.3168/jds.2019-16796** ✔ **exactly the expected DOI** |
 | Affiliation | **Department of Food Science and Technology, Shanghai Institute of Technology, Shanghai 201418, China** |
-| Corresponding | hyyu@sit.edu.cn |
+| Corresponding | H. Yu (contact details printed on the paper) |
 | PDF character | **12 pages**, clean text layer for the body, **Table 1 is a rotated landscape table spanning 2 pages** ⚠️ (§0a), Figures 1–5, Tables 1–4 |
 
 ### 0a. ⚠️ **[!] TABLE 1 IS ROTATED AND ITS TEXT LAYER IS PARTLY COLUMN-SHIFTED**

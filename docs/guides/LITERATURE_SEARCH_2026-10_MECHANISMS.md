@@ -265,34 +265,7 @@ physical-organic constants. The fourth has only Yaghmur's 40-70 °C data.
 
 ## Ranked download list (new papers only; at most 12)
 
-File names follow the earlier rounds (`<firstauthor><year>.pdf`). None clashes with `data/articles/`.
-
-| # | paper | DOI | item | access | would give | likely numbers? |
-|---|---|---|---|---|---|---|
-| 1 | Lau et al. 2003, J. Food Eng. 60:397 | [10.1016/s0260-8774(03)00063-3](https://doi.org/10.1016/s0260-8774(03)00063-3) | M3 (finding 2/3) | paywalled; WSU repository record | Ea and k(T) for ribose + amine → norfuraneol; a band on the NF branch's Ea, separate from the furfural branch | yes (0.7) |
-| 2 | Schirle-Keller & Reineccius 1992, ACS Symp. Ser. 490:244 | [10.1021/bk-1992-0490.ch019](https://doi.org/10.1021/bk-1992-0490.ch019) | M1, finding 2 | paywalled | zero-order rates at 80-150 °C for furfural, FA and HMF in glucose + Cys water; Ea 117-138 kJ/mol as a hold-out against the 64 kJ/mol trunk | yes (0.9 for Ea, in abstract) |
-| 3 | Szajewski & Whitesides 1980, JACS 102:2011 | [10.1021/ja00526a042](https://doi.org/10.1021/ja00526a042) | M2/M6 | paywalled | Brønsted law for thiolate + GSSG exchange, to parameterise MFT/FFT + GSSG (the Zhou sink) | yes at 25 °C (0.9); transfer to 120 °C is an assumption |
-| 4 | Pandit et al. 2006, J. Food Eng. 76:353 | [10.1016/j.jfoodeng.2005.05.032](https://doi.org/10.1016/j.jfoodeng.2005.05.032) | M3 | paywalled | a second, independent NF-formation Ea (ribose in potato, amino acid limiting) | yes (0.7) |
-| 5 | Kim, Taub, Choi & Prakash 1996, ACS Symp. Ser. 631:54 | [10.1021/bk-1996-0631.ch006](https://doi.org/10.1021/bk-1996-0631.ch006) | M3/M7 | paywalled | M-2 from ribose / ribose-5-P via 2,3-enolisation, pH window; the M-1 (glucose) constants for the trunk | probably (0.55) |
-| 6 | Lienhard & Jencks 1966, JACS 88:3982 | [10.1021/ja00969a017](https://doi.org/10.1021/ja00969a017) | M8 / R14 | paywalled | hemithioacetal K and rates: is R14 sequestration of MFT/FFT/H2S by FUR/MGO material? | yes at 25 °C (0.85) |
-| 7 | Parliment & Stahl 1995, Dev. Food Sci. 37:805 | [10.1016/s0167-4501(06)80197-4](https://doi.org/10.1016/s0167-4501(06)80197-4) | M1 | paywalled chapter | FFT yields by precursor (furfural vs FA, Cys vs H2S) in aqueous coffee models | maybe (0.4) |
-| 8 | Rizzi 1995, Dev. Food Sci. 37:289 (with Rizzi 2000, [10.1021/bk-2000-0754.ch022](https://doi.org/10.1021/bk-2000-0754.ch022)) | [10.1016/s0167-4501(06)80162-7](https://doi.org/10.1016/s0167-4501(06)80162-7) | M1 | paywalled chapters | the acid-catalysed SN1 route from FA/allylic alcohols + S nucleophiles to thiols: a route with an acid dependence furfural + H2S lacks | route mainly (0.3 for yields) |
-| 9 | Chen & Morris 1972, ES&T 6:529 | [10.1021/es60065a008](https://doi.org/10.1021/es60065a008) | M8 | paywalled | H2S autoxidation rate law (pH, T, metals): an H2S sink and a claimant on the oxygen pool | yes (0.9); at 25-35 °C |
-| 10 | Rizzi, Amba & Heineman 2010, JAFC 58:9739 | [10.1021/jf102433u](https://doi.org/10.1021/jf102433u) | M7/M1 | paywalled | time course of reductones from phosphate-catalysed sugar degradation, 0.1 M phosphate, 100 °C | partly (0.5) |
-| 11 | Kjellstrand et al. 2001, Perit. Dial. Int. 21:338 | [10.1177/089686080102100402](https://doi.org/10.1177/089686080102100402) | M7 | paywalled | pH 1-8 profile of glucose degradation at 121 °C, minimum at pH ≈ 3.5; a shape check on the acid term (hexose) | shape (0.6) |
-| 12 | Dworkin & Miller 2000, Carbohydr. Res. 329:359 | [10.1016/s0008-6215(00)00204-4](https://doi.org/10.1016/s0008-6215(00)00204-4) | finding 2 (TTCA/Schiff) | paywalled | open-chain aldehyde fraction of ribose, xylose and others, the free-carbonyl factor in the TTCA/Schiff rate law | yes (0.7) |
-
-**Also-rans (M-class; fetch only if the item is opened):**
-
-- Huang, Su & Ho 1998 ([10.1021/jf9705633](https://doi.org/10.1021/jf9705633)): phosphate and the cysteamine thiazolidine.
-- Hauck 2003 ([10.1016/j.bbagen.2003.08.002](https://doi.org/10.1016/j.bbagen.2003.08.002)): the ribulose-5-P → NF route.
-- Zhang & Serianni 2012 ([10.1021/ja3020296](https://doi.org/10.1021/ja3020296)): phosphate catalysis of osones.
-- Kaufmann 2018 ([10.1016/j.foodchem.2018.05.101](https://doi.org/10.1016/j.foodchem.2018.05.101)): general-catalysis rate
-  law.
-- Novotny 2019 ([10.1021/acs.jafc.8b07100](https://doi.org/10.1021/acs.jafc.8b07100)): 2-acetylthiazole yields.
-- Li 2022 ([10.1016/j.fochms.2022.100120](https://doi.org/10.1016/j.fochms.2022.100120), open): β-elimination H2S from protein.
-- Lees & Whitesides 1993 ([10.1021/jo00055a016](https://doi.org/10.1021/jo00055a016)): exchange equilibria.
-- Gupta 2011 ([10.1016/j.lwt.2011.05.007](https://doi.org/10.1016/j.lwt.2011.05.007)): M-2 vs pH at 105 °C.
+20 candidates; the list is kept privately.
 
 **Where nothing exists (after six rounds):**
 

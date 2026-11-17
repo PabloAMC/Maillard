@@ -16,7 +16,7 @@ are in the text and Table I). A short review-style chapter: most mechanism state
 
 | field | value as printed |
 |---|---|
-| Authors | **M. A. Glomb** (corresponding, marcus.glomb@chemie.uni-halle.de), J. Gobert, M. Voigt |
+| Authors | **M. A. Glomb** (corresponding), J. Gobert, M. Voigt |
 | Affiliation | Martin-Luther-University Halle-Wittenberg, Institute of Chemistry, Food Chemistry and Environmental Chemistry, Kurt-Mothes-Str. 2, 06120 Halle |
 | Venue | *Controlling Maillard Pathways To Generate Flavors*, ACS Symposium Series **1042**, ch. 4, pp. 35-44 (2010) |
 | DOI | 10.1021/bk-2010-1042.ch004 |

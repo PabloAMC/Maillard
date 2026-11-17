@@ -5487,7 +5487,7 @@ entries:
     simulable: false
     condition_quote: "volatiles by HS-SPME GC-MS against one internal standard"
     flags: [matrix_food]
-    note: "Matrix entry. Endpoint ppb (single IS, no authentic standards) for amino-acid, sugar and formulation series; pyrazine-vs-furan partition. Supplement (S3 OAVs, S4 16-amino-acid pyrazines, S2 pH) missing. Same lab as the WUR blind test."
+    note: "Matrix entry. Endpoint ppb (single IS, no authentic standards) for amino-acid, sugar and formulation series; pyrazine-vs-furan partition. Supplement (S3 OAVs, S4 16-amino-acid pyrazines, S2 pH) missing."
   - id: utz2022_pea_protein_isolate_odorants
     dossier: utz2022_extraction.md
     paper: "Utz, Spaccasassi, Kreissl, Stark, Dawid & Steinhaus 2022 Foods 11:412"

@@ -22,7 +22,7 @@ figure-only.** Repo status before this dossier: Utz 2022 is cited nowhere in
 | field | value |
 |---|---|
 | Title | "Sensomics-Assisted Aroma Decoding of Pea Protein Isolates (*Pisum sativum* L.)" |
-| Authors | Florian Utz, Andrea Spaccasassi, Johanna Kreissl, Timo D. Stark, Caren Tanger, Ulrich Kulozik, Thomas Hofmann, Corinna Dawid (corresponding, corinna.dawid@tum.de, Tel. +49-81-6171-2901) |
+| Authors | Florian Utz, Andrea Spaccasassi, Johanna Kreissl, Timo D. Stark, Caren Tanger, Ulrich Kulozik, Thomas Hofmann, Corinna Dawid (corresponding) |
 | Affiliations | 1 Chair of Food Chemistry and Molecular Sensory Science, TUM School of Life Sciences, Technical University of Munich, Lise-Meitner-Str. 34, 85354 Freising; 2 Leibniz-Institute for Food Systems Biology at TUM, same street; 3 Chair of Food and Bioprocess Engineering, TUM School of Life Sciences, Weihenstephaner Berg 1, 85354 Freising |
 | Venue | **Foods 2022, 11, 412**. Received 10 January 2022; accepted 27 January 2022; published 30 January 2022. Academic Editors: Antonella Verzera and Federico Marini. Open access, CC BY |
 | DOI | **`https://doi.org/10.3390/foods11030412`** — printed exactly so in the Citation block on p. 1 and again in the running footer of p. 1 |

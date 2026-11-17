@@ -24,7 +24,7 @@ these pots until M4's design is frozen** (**[RESERVED M4]**). The role is not me
 | field | value as printed (p. 131) |
 |---|---|
 | Authors | **Ahmed H El-Ghorab**¹*, **Iram F Ashraf**², **Anjum F Mohamed**², **Hamdy A Shaaban**¹, **Khaled F El-massry**¹, **Amr Farouk**¹ |
-| Affiliations | ¹Flavor and Aromatic Dept., National Research Center, Egypt; ²National Institute of Food Science and Technology, Agric. Uni. Faisal Abad, Pakistan; corresponding e-mail aghorab2@yahoo.com |
+| Affiliations | ¹Flavor and Aromatic Dept., National Research Center, Egypt; ²National Institute of Food Science and Technology, Agric. Uni. Faisal Abad, Pakistan; corresponding author contact printed |
 | Venue | *JASMR* (Journal of the Arab Society for Medical Research) **5** (2): **131-139** (2010) |
 | DOI | **none printed** |
 

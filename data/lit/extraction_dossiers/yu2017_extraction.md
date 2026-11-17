@@ -21,7 +21,7 @@ scratchpad `m4tools/m4_arith.py`. Page numbers below are those of the Accepted A
 
 | field | value as printed |
 |---|---|
-| Authors | Pei Yu, Xian-Bing Xu, **Shu-Juan Yu** (corresponding, shujuanyu8@gmail.com) |
+| Authors | Pei Yu, Xian-Bing Xu, **Shu-Juan Yu** (corresponding) |
 | Affiliation | College of Light Industry and Food Sciences, South China University of Technology, Guangzhou; National Engineering Research Center of Seafood, Dalian Polytechnic University (Xu); Guangdong Province Key Laboratory for Green Processing of Natural Products and Product Safety |
 | Venue | *J. Sci. Food Agric.* **97**(10) (2017) 3159-3165 (Crossref; the Accepted Article prints none of these) |
 | DOI | 10.1002/jsfa.8158 |

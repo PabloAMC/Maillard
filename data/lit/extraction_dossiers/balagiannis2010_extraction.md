@@ -12,7 +12,7 @@ Read method: **both** — full text layer read directly, **plus** 200 dpi raster
 | field | value | how verified |
 |---|---|---|
 | Authors | Dimitrios P. Balagiannis¹, Jack Howard¹, Jane K. Parker¹, Neil Desforges², Donald S. Mottram\*¹ | p.13 raster + text |
-| Affiliations | ¹ Dept. of Food and Nutritional Sciences, University of Reading, Whiteknights, Reading RG6 6AP, UK; ² Waltham Centre for Pet Nutrition, Waltham-on-the-Wold, Melton Mowbray, Leicestershire LE14 4RS, UK; \*d.s.mottram@reading.ac.uk | p.13 |
+| Affiliations | ¹ Dept. of Food and Nutritional Sciences, University of Reading, Whiteknights, Reading RG6 6AP, UK; ² Waltham Centre for Pet Nutrition, Waltham-on-the-Wold, Melton Mowbray, Leicestershire LE14 4RS, UK; \* corresponding D. S. Mottram | p.13 |
 | Title | **"Kinetic Modeling of the Formation of Volatile Compounds in Heated Beef Muscle Extracts Containing Added Ribose"** | p.13 |
 | Venue | *Controlling Maillard Pathways To Generate Flavors*; Mottram, D. S., Taylor, A. J., Eds.; **ACS Symposium Series 1042**, **Chapter 2, pp. 13–25** (13 pp.); American Chemical Society, Washington DC, 2010 | running footer every page |
 | DOI | **10.1021/bk-2010-1042.ch002** | page-footer stamp every page |

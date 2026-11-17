@@ -14,7 +14,7 @@ matrix), Fig. 5 (class % and heatmap) and Fig. 6 (sensory) not transcribed (not 
 printed · **[!]** flag.
 
 **Laboratory.** School of Food Science and Technology, Henan University of Technology, Zhengzhou (corresponding
-author Wen-ting Yin, yin.wenting@haut.edu.cn; Hu B.-b. first co-writer). The same group's sesame-oil / lipid x Maillard
+author Wen-ting Yin; Hu B.-b. first co-writer). The same group's sesame-oil / lipid x Maillard
 series (Hu et al. 2024 FRI 186:114397, lysine-glucose + sesame oil; Hu et al. 2025 Food Chem 492:144985; Yin et al.
 2021, 2023, 2024 [C]) are cited but **none is keyed in `data/lit/extraction_dossiers/`** (grep "sesame", "Henan
 University of Technology", 2026-11-01). **Not in `data/keys/laboratories.yml`: NEW**, proposed id `haut_yin_w`

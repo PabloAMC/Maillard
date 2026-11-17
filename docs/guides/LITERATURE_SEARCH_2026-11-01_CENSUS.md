@@ -7,7 +7,7 @@ Method. Three channels.
 - **Patents.** Google Patents and USPTO pages, reached through web search and two fetched patent pages.
 - **Chinese literature.** Web search on spkx.net.cn, spgykj.com, sciengine and CNKI, plus OpenAlex hits from Chinese journals.
 
-Known-paper check. Each hit was compared with 1,507 DOIs gathered from docs/guides/LITERATURE_SEARCH_*.md, scratchpad/heldout_search.md, crossdomain/h2s searches, DOWNLOAD_QUEUE.md, data/keys/papers.yml, all of data/ and docs/reference/. Dossier stems in data/articles were checked too.
+Known-paper check. Each hit was compared with 1,507 DOIs gathered from docs/guides/LITERATURE_SEARCH_*.md, scratchpad/heldout_search.md, crossdomain/h2s searches, the private download queue, data/keys/papers.yml, all of data/ and docs/reference/. Dossier stems in data/articles were checked too.
 
 Raw files are in `scratchpad/census/` (the `oa/` and `cr/` JSON, plus `G*.tsv`, which flags each hit KNOWN or new).
 

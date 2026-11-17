@@ -14,7 +14,7 @@ column) are not on disk.**
 printed · **[!]** flag.
 
 **Laboratory.** Universidade Federal da Paraíba (UFPB), Department of Food Engineering, Technology Center, João Pessoa
-(Madruga corresponding, msmadruga@uol.com.br; Bezerra, Galvão, de Carvalho, Guedes), with dos Santos Lima (IF Sertão
+(Madruga corresponding; Bezerra, Galvão, de Carvalho, Guedes), with dos Santos Lima (IF Sertão
 Pernambucano, Petrolina; amino-acid HPLC). **Not a group in `data/keys/laboratories.yml`: NEW**, proposed id
 `ufpb_madruga`, ledger string "UFPB Joao Pessoa (Madruga)" — the string the sulfur ledger already uses for
 `madruga1997` (Madruga sole author, DTQA/UFPB). [!] Do **not** map it to `reading_mottram`: `madruga1995` is Madruga's

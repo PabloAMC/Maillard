@@ -17,7 +17,7 @@ render of p. 3 (Fig. 1): marker centres located with a dark-pixel run finder (sc
 
 | field | value as printed |
 |---|---|
-| Authors | Yvonne V. Pfeifer, **Paul T. Haase** (corresponding, paul.haase@tu-berlin.de), Lothar W. Kroh |
+| Authors | Yvonne V. Pfeifer, **Paul T. Haase** (corresponding), Lothar W. Kroh |
 | Affiliation | Institute of Food Technology and Food Chemistry, Technical University of Berlin, **Gustav-Meyer-Allee 25, 13355 Berlin** |
 | Venue | *J. Agric. Food Chem.* **61** (2013) 3090-3096 |
 | DOI | 10.1021/jf302959k |

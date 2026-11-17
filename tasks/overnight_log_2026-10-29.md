@@ -146,7 +146,7 @@ identical but for the download-date watermark).
 
 **Against the north star** (leave-one-lab-out error, interval coverage, evidence grounding, blind tests): nothing
 has shipped and no lane has a passing leave-one-lab-out; coverage is a Phase 3 number; grounding improved (Desclaux's
-measured enolisations, Davidek's isotope-dilution acids, the frozen-factor tests); WUR still has no data. The gains
+measured enolisations, Davidek's isotope-dilution acids, the frozen-factor tests); the outside blind test still has no data. The gains
 of the last day are diagnostic and structural, not scored accuracy.
 
 **What moved:** the measurement model (scales per figure; residuals read after the scale) took the joint fit from

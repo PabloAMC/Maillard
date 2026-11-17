@@ -19,7 +19,7 @@ supplementary material. Repo status before this dossier: this paper is **not cit
 | field | value |
 |---|---|
 | Title | "Some Novel Meatlike Aroma Compounds from the Reactions of Alkanediones with Hydrogen Sulfide and Furanthiols" |
-| Authors | Donald S. Mottram (corresponding; fax +44 734 310080) and Marta S. Madruga — Department of Food Science and Technology, The University of Reading, Whiteknights, Reading RG6 2AP, United Kingdom; **Frank B. Whitfield** — CSIRO Food Research Laboratory, P.O. Box 52, North Ryde, New South Wales 2113, Australia |
+| Authors | Donald S. Mottram (corresponding) and Marta S. Madruga — Department of Food Science and Technology, The University of Reading, Whiteknights, Reading RG6 2AP, United Kingdom; **Frank B. Whitfield** — CSIRO Food Research Laboratory, P.O. Box 52, North Ryde, New South Wales 2113, Australia |
 | Venue | J. Agric. Food Chem. 1995, 43 (1), 189-193. Received for review 28 June 1994, accepted 11 October 1994; abstract published in Advance ACS Abstracts, 15 November 1994 |
 | DOI | 10.1021/jf00049a035 (not printed in the PDF; Crossref match on title, first author, year and journal, 2026-10-27) |
 | Article ID | `JF940343E` (no DOI printed on the page) |

@@ -200,30 +200,8 @@ Nothing.
 
 ## Ranked download list (new papers only; at most 12)
 
-The confidence column gives my probability that the paper holds the number in a form the engine can use. File names
-follow round 3.
+12 candidates; the list is kept privately.
 
-| # | paper | DOI | year | gap | access | the number it would give | confidence |
-|---|---|---|---|---|---|---|---|
-| 1 | Danon, van der Aa & de Jong, *Carbohydr. Res.* 375:145 | [10.1016/j.carres.2013.04.030](https://doi.org/10.1016/j.carres.2013.04.030) | 2013 | e | paywalled | Arrhenius parameters for furfural decay, including a furfural + sugar second-order term: a measured decay barrier to set against formation (`danon2013.pdf`) | 0.7 (acid only) |
-| 2 | Danon, Marcotullio & de Jong, *Green Chem.* 16:39 | [10.1039/c3gc41351a](https://doi.org/10.1039/c3gc41351a) | 2014 | e, c | **open** | Tabulated literature Ea and pre-factors for pentose → furfural and furfural loss, on one footing: tests whether decay Ea > formation Ea (`danon2014.pdf`) | 0.8 for a table; 0.2 for anything above pH 3 |
-| 3 | Yu & Tang, *Czech J. Food Sci.* 34:503 | [10.17221/86/2016-cjfs](https://doi.org/10.17221/86/2016-cjfs) | 2016 | a, b | **open** | Cysteine and ascorbic acid loss rate constants at 125-155 °C and a browning Ea of 114 kJ/mol: a neighbouring-system Ea for cysteine destruction (`yu2016cjfs.pdf`) | 0.6 |
-| 4 | Ershova, Kanervo, Hellsten et al., *RSC Adv.* 5:66727 | [10.1039/c5ra10855a](https://doi.org/10.1039/c5ra10855a) | 2015 | e | **open** | Uncatalysed xylose → furfural and furfural loss rate constants in water at 180-220 °C (`ershova2015.pdf`) | 0.7 (needs extrapolation) |
-| 5 | Kim, Lee, Park & Lee, *React. Kinet. Mech. Catal.* 103:267 | [10.1007/s11144-011-0320-5](https://doi.org/10.1007/s11144-011-0320-5) | 2011 | e, c | paywalled | Ea for xylose dehydration in hot water without added acid (`kim2011.pdf`) | 0.6 [inferred] |
-| 6 | Cerny, Schlichtherle-Cerny, Gibe et al., *Food Chem.* 337:128008 | [10.1016/j.foodchem.2020.128008](https://doi.org/10.1016/j.foodchem.2020.128008) | 2021 | e (path) | paywalled | Labelled FFA → FFT yield and the absence of furfural involvement: a path-level check on the 95-99 % furfural + H2S FFT branch (`cerny2021.pdf`) | 0.9 route; 0.05 kinetics |
-| 7 | Deng, Cui, Hayat et al., JAFC 69:5167 | [10.1021/acs.jafc.1c02023](https://doi.org/10.1021/acs.jafc.1c02023) | 2021 | b (analogue) | paywalled | Degradation rate vs T of an S-amino-acid Amadori compound (Met-Glc ARP) and its dicarbonyl yields: a template for the Cys-ARP step (`deng2021.pdf`) | 0.5 |
-| 8 | Nitta, Furukawa & Kakegawa, *Orig. Life Evol. Biosph.* 46:189 | [10.1007/s11084-015-9472-z](https://doi.org/10.1007/s11084-015-9472-z) | 2015 | c | **open** | Pentose degradation rate constants ± phosphate (alkaline): whether phosphate accelerates pentose loss at all (`nitta2015.pdf`) | 0.6 (wrong pH) |
-| 9 | Haleva-Toledo, Naim, Zehavi & Rouseff, JAFC 47:4140 | [10.1021/jf9813788](https://doi.org/10.1021/jf9813788) | 1999 | d (analogue) | paywalled | Furaneol formation and loss with vs without cysteine in buffer: the size of a cysteine sink on a furanone (`halevatoledo1999.pdf`) | 0.4 |
-| 10 | Cannon, Rutgers PhD thesis (Ho lab) | [10.7282/t3-nbkr-a666](https://doi.org/10.7282/t3-nbkr-a666) | 2019 | a, b | probably open [inferred] | SIDA levels of thiols and H2S-derived odorants in cysteine + glucose, possibly vs time or pH (`cannon2019.pdf`) | 0.3 |
-| 11 | Furukawa, Horiuchi & Kakegawa, *Orig. Life Evol. Biosph.* 43:353 | [10.1007/s11084-013-9350-5](https://doi.org/10.1007/s11084-013-9350-5) | 2013 | c | paywalled | Relative degradation rates of ribose, arabinose, xylose and lyxose: a ribose : xylose reactivity ratio for the Hofmann arms (`furukawa2013.pdf`) | 0.5 |
-| 12 | Bains, Xiao & Yu, *Life* 5:1054 | [10.3390/life5021054](https://doi.org/10.3390/life5021054) | 2015 | c | **open** | Compiled first-order decomposition constants vs T: a cross-check of the pentose-loss Ea (`bains2015.pdf`) | 0.3 |
-
-**The most decisive item per gap:**
-
-- (e): Danon 2013 + Danon 2014, then the three-temperature furfural + Na2S experiment from the PATHS document.
-- (a)/(b): Yu & Tang 2016 is a neighbouring system only. Cao 2017, Zhang 2025b and Kang 2026, already in the corpus, remain
-  the best timescale data.
-- (c): no new partition data. Nitta 2015 tests the phosphate claim at the wrong pH.
 - (d), (f), (g), (h): nothing found by forward chaining. These need the experiment or a different search route:
   Chinese-language journals (CNKI), theses, and the wine-chemistry thiol-oxidation literature searched by keyword
   instead of by citation.

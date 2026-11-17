@@ -13,7 +13,7 @@ sensory scores of the six pots) is in the Supporting Information, **not on disk*
 | field | value |
 |---|---|
 | Title | "Meat flavor generation from different composition patterns of initial Maillard stage intermediates formed in heated cysteine-xylose-glycine reaction systems" |
-| Authors | Jian Zhao, Tianze Wang (equal contribution), **Jianchun Xie** (corresponding, xjchun@th.btbu.edu.cn), Qunfei Xiao, Wenbin Du, Yaxin Wang, Jie Cheng, Shi Wang |
+| Authors | Jian Zhao, Tianze Wang (equal contribution), **Jianchun Xie** (corresponding), Qunfei Xiao, Wenbin Du, Yaxin Wang, Jie Cheng, Shi Wang |
 | Affiliations | BTBU Beijing (Xie group); Institute of Quality Standard and Testing Technology for Agro-products, CAAS |
 | Venue | Food Chemistry (2019) — accepted manuscript; received 2 Apr 2018, revised 20 Aug 2018, accepted 21 Aug 2018 |
 | DOI as printed | **10.1016/j.foodchem.2018.08.096** ✔ matches the brief |

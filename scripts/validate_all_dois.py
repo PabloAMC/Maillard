@@ -43,7 +43,7 @@ def query_crossref(doi):
     """
     url = f"https://api.crossref.org/works/{doi}"
     headers = {
-        "User-Agent": "MaillardDOIVerifier/1.0 (mailto:pablo@maillard.org; pairing as Antigravity)"
+        "User-Agent": "MaillardDOIVerifier/1.0"
     }
     req = urllib.request.Request(url, headers=headers)
     try:

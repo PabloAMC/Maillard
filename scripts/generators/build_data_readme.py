@@ -96,7 +96,7 @@ DESCRIPTIONS: Dict[str, str] = {
     "data/protocols/soy_iso_protocol_pilot_intake.yaml": "Protocol-pilot intake for soy isolate; same status.",
     # ---- research corpus
     "data/research_corpus": "LLM research dumps and literature syntheses (renamed from Gemini_Deep_Research on 2026-09-02). NOT provenance: kept so `scripts/ci/citation_gate.py` can detect laundered citations, and mined by `deep_research_tracker.py`.",
-    "data/research_corpus/raw": "The raw deep-research dumps, unedited.",
+    "data/research_corpus/raw": "The raw deep-research dumps, unedited. `Gemini_deep_research_*.md` are unverified LLM outputs, not used at runtime.",
 }
 
 SKIP_BASENAMES = {".DS_Store"}

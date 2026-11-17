@@ -24,7 +24,7 @@ carries.
 | field | value |
 |---|---|
 | Title | "Reactivity of furfural-cysteine model reaction in food-grade five-component nonionic O/W microemulsions" |
-| Authors | Anan Yaghmur (present address given as Institute of Chemistry, Physical Chemistry, University of Graz, Austria), Abraham Aserin, Atallah Abbas, **Nissim Garti** (corresponding; tel. +972 2 6586574/5, fax +972 2 6520262, garti@vms.huji.ac.il) — Casali Institute of Applied Chemistry, Givat Ram Campus, The Hebrew University of Jerusalem, 91904 Jerusalem, Israel |
+| Authors | Anan Yaghmur (present address given as Institute of Chemistry, Physical Chemistry, University of Graz, Austria), Abraham Aserin, Atallah Abbas, **Nissim Garti** (corresponding) — Casali Institute of Applied Chemistry, Givat Ram Campus, The Hebrew University of Jerusalem, 91904 Jerusalem, Israel |
 | Venue | Colloids and Surfaces A: Physicochem. Eng. Aspects 253 (2005) 223-234. Received 13 July 2004, accepted 22 October 2004, available online 22 December 2004 |
 | DOI | 10.1016/j.colsurfa.2004.10.114 |
 | Paper type | **Physical chemistry of a reaction medium.** The chemistry is a vehicle: the subject is microemulsion catalysis. The kinetics is real (section 3.7, Table 1, Figs. 13-15) but the reaction is followed **only through the disappearance of furfural**, and the products are quantified only as figure traces. |

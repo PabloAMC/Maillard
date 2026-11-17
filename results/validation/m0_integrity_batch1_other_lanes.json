@@ -5,7 +5,7 @@
   "inventory": "docs/reference/misfit_inventory.md on branch misfit-inventory at 12d88121 (draft PR #82)",
   "checks": ["CK-03", "CK-04", "CK-05", "CK-08 (Pan and Leahy halves)"],
   "method": "PDF re-read against keyed rows; corrected residuals by arithmetic on the recorded prediction; no refit, no forward run, no data/ edit",
-  "not_read": ["Deng 2022 (M3 phase 2 reserved)", "E13/E14 TEST studies", "Lee 2024", "hofmann2000b Figs. 2-3", "B59b hold-outs", "WUR samples"],
+  "not_read": ["Deng 2022 (M3 phase 2 reserved)", "E13/E14 TEST studies", "Lee 2024", "hofmann2000b Figs. 2-3", "B59b hold-outs", "outside blind-test samples"],
   "criteria_disclosure": "criteria fixed in working notes before each PDF was opened (from the inventory's CK pass rules plus the generic list); this file written after the reads",
   "misfits": [
     {

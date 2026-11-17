@@ -96,3 +96,6 @@ results/*
 !results/validation/**/*.yaml
 .cache/
 results/user/
+
+# macOS Finder metadata: re-ignored after the data/ whitelists above (last match wins)
+**/.DS_Store

@@ -6,7 +6,7 @@
   "base": "origin/main 4174ed8d",
   "inventory": "docs/reference/misfit_inventory.md on PR #82 (branch misfit-inventory), batch 0 rows CK-01, CK-02, CK-06, CK-07, CK-10 (via MF-15), CK-50 and sec. 6",
   "procedure": "OPERATING_PROCEDURE.md sec. 4, step 1 (integrity). Each check's pass rule was written before the check was run; every outcome is recorded, including 'integrity holds'.",
-  "blinding": "Not read: hofmann2000b Figs. 2-3 and the Results text discussing them (the Methods paragraph for the 85 C trapped experiment was read as text only); B59b hold-outs; E7 / E13 / E14 TEST sets; WUR samples.",
+  "blinding": "Not read: hofmann2000b Figs. 2-3 and the Results text discussing them (the Methods paragraph for the 85 C trapped experiment was read as text only); B59b hold-outs; E7 / E13 / E14 TEST sets; outside blind-test samples.",
   "engine_calls": "Read-only predict() calls on the shipped engine (native maillard env, 1 core, nice 15): the two Schibilsky bundles at their own pH and at pH 3 / 7 / 10, the same pot with glycine in place of alanine (lane diagnostic), and the Grosch 1992 Table II pots as score_contrast_benchmark.pot_spec builds them. Nothing fitted, nothing written under data/ or src/.",
   "checks": [
     {

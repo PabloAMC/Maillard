@@ -38,7 +38,7 @@ DEFECT note in §3).
 | received / revised / accepted | Received 2 January 2003; received in revised form 28 April 2003; accepted 28 April 2003 |
 | affiliation | Product Design and Quality Management Group, Dept. of Agrotechnology and Food Science, Wageningen University, PO Box 8129, 6700 EV Wageningen, The Netherlands |
 | PDF character | born-digital (Elsevier / Acrobat Distiller 4.05 for Windows); text layer present but **systematically drops the minus sign and the "±" glyph** — Table 1 is unusable from the text layer alone and was re-read from the page raster |
-| corresponding author | tiny.vanboekel@wur.nl |
+| corresponding author | M. A. J. S. (Tiny) van Boekel |
 | funding / collaboration | European Commission Short-Term Scientific Mission (STSM) of **COST Action 919, "Melanoidins in Food and Health"**; Portuguese FCT. Work partly done at the Procter Department, University of Leeds, UK, with **Prof. B.L. Wedzicha**. Microanalysis by Hennie Halm, Wageningen. |
 
 ### PRE-EXISTING-COVERAGE FLAG — DOUBLE-COUNTING HAZARD

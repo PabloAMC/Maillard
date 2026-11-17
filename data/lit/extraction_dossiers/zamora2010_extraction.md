@@ -24,7 +24,7 @@ elimination reaction of the Michael adduct'"*. **§3 below supplies the numbers.
 | DOI | **10.1021/jf903378x** ✔ **exactly the expected DOI** |
 | Affiliation | **Instituto de la Grasa, CSIC, Avenida García Tejero 4, 41012 Seville, Spain** |
 | Published on Web | **01/15/2010**; received Sep 25 2009, revised Dec 16 2009, accepted Dec 19 2009 |
-| Corresponding | fhidalgo@ig.csic.es · fax +34 954 616 790 |
+| Corresponding | F. J. Hidalgo |
 | Keywords | *Acrylamide; 3-(alkylamino)propionamides; amines; amino acids; **carbonyl-amine reactions**; **Hoffman elimination**; Maillard reaction; **Michael addition*** |
 | Funding | EU FEDER · **Junta de Andalucía P07-AGR-2846** · Plan Nacional I+D **AGL2006-01092, AGL2009-07638**; José L. Navarro thanked |
 | PDF character | **6 pages**, clean text layer, **Tables 1–2**, Figures 1–8 |

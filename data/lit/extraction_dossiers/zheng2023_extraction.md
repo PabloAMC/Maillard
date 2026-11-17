@@ -12,7 +12,7 @@ Read from the `pdftotext -layout` text layer, which came through clean (single l
 | field | value |
 |---|---|
 | Title | "Comparison of the methylglyoxal scavenging effects of kaempferol and glutathione and the consequences for the toxicity of methylglyoxal in SH-SY5Y cells" |
-| Authors | Liang Zheng (corresponding, liang.zheng@wur.nl), Wouter Bakker, Ignacio Miro Estruch, Frances Widjaja, Ivonne M.C.M. Rietjens — Division of Toxicology, Wageningen University and Research, Stippeneng 4, 6708 WE Wageningen, The Netherlands |
+| Authors | Liang Zheng (corresponding), Wouter Bakker, Ignacio Miro Estruch, Frances Widjaja, Ivonne M.C.M. Rietjens — Division of Toxicology, Wageningen University and Research, Stippeneng 4, 6708 WE Wageningen, The Netherlands |
 | Venue | **Food Chemistry: X 20 (2023) 100920.** Received 10 May 2023; revised 27 September 2023; accepted 2 October 2023; online 6 October 2023. 2590-1575 / © 2023 The Author(s), Elsevier Ltd, CC BY |
 | DOI | **10.1016/j.fochx.2023.100920** — printed twice, in the front-matter block on p. 1 (`https://doi.org/10.1016/j.fochx.2023.100920`) and in the Appendix A supplementary-data line on p. 7 |
 | Funding / interest | China Scholarship Council, Grant Number 202008510115 (L. Zheng), declared as a competing-interest disclosure |

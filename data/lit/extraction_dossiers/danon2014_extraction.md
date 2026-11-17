@@ -13,7 +13,7 @@ Garrett & Dvorchik 1969 (`garrett1969_extraction.md`).
 | field | value |
 |---|---|
 | Title | "Mechanistic and kinetic aspects of pentose dehydration towards furfural in aqueous media employing homogeneous catalysis" |
-| Authors | Bart Danon, Gianluca Marcotullio, **Wiebren de Jong** (corresponding, wiebren.dejong@tudelft.nl) — TU Delft Energy Technology; Marcotullio at SEA Servizi Energia Ambiente, L'Aquila |
+| Authors | Bart Danon, Gianluca Marcotullio, **Wiebren de Jong** (corresponding) — TU Delft Energy Technology; Marcotullio at SEA Servizi Energia Ambiente, L'Aquila |
 | Venue | Green Chemistry **16**, 39-54 (2014), Critical Review. Received 9 Jul 2013, accepted 15 Oct 2013, published online 15 Oct 2013 |
 | DOI as printed | **10.1039/c3gc41351a** ✔ matches the brief. **Identity verified.** |
 | Related primaries named in the brief | Danon, van der Aa & de Jong 2013, Carbohydr. Res. 375:145 (ref. 56: furfural degradation ± **glucose**, 50 mM HCl + 500 mM NaCl, 160-200 °C); Marcotullio & de Jong 2010 Green Chem. 12:1739 (ref. 39); Marcotullio 2011 PhD thesis (ref. 47) |

@@ -28,7 +28,7 @@ Nothing here contradicts either sibling; where a number is also in them, it is t
 | field | value |
 |---|---|
 | Title | "Maillard Reaction and Caramelization during Hazelnut Roasting: A multiresponse kinetic study" |
-| Authors | Neslihan Göncüoğlu Taş, Vural Gökmen (corresponding, vgokmen@hacettepe.edu.tr) — Food Quality and Safety (FoQuS) Research Group, Department of Food Engineering, Hacettepe University, Beytepe Campus, 06800 Ankara, Turkey |
+| Authors | Neslihan Göncüoğlu Taş, Vural Gökmen (corresponding) — Food Quality and Safety (FoQuS) Research Group, Department of Food Engineering, Hacettepe University, Beytepe Campus, 06800 Ankara, Turkey |
 | Venue | Food Chemistry, accepted manuscript, reference FOCH 20292. Received 30 August 2016, revised 27 November 2016, accepted 30 November 2016 |
 | DOI as printed | `http://dx.doi.org/10.1016/j.foodchem.2016.11.159` |
 | Funding | TÜBİTAK IntenC (German-Turkish) project 113O178 |

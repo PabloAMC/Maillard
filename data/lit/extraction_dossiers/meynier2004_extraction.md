@@ -26,7 +26,7 @@ figure with a real calibrated axis · **[Z]** derived by this wave · **[!]** in
 | Venue | ***International Dairy Journal* 14 (2004) 681–690** — running head on every page |
 | DOI | **10.1016/j.idairyj.2004.01.003** (printed on p. 681 under the copyright line) |
 | Affiliation | **INRA, LEIMA, BP71627, Nantes Cedex 3 44316, France** |
-| Corresponding | Tel. +33-2-40-67-52-45 · fax +33-2-40-67-50-84 · meynier@nantes.inra.fr |
+| Corresponding | A. Meynier (contact details printed on the paper) |
 | Dates | **Received 22 April 2003; accepted 14 January 2004** |
 | Keywords as printed | *Caseins; Whey proteins; Aldehyde; Fluorescence* |
 | Funding | **Région des Pays de la Loire, VANAM programme "Interfaces, Emulsions et Mousses Liquides"**; Dr Eric Dransfield acknowledged for advice |

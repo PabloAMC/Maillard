@@ -12,7 +12,7 @@ layer). Prose, Table 1 and Table 2 from `pdftotext -layout`. **Figs. 1, 2, 4 and
 | field | value |
 |---|---|
 | Title | "Effects of L-Cysteine and N-Acetyl-L-cysteine on 4-Hydroxy-2,5-dimethyl-3(2H)-furanone (Furaneol), 5-(Hydroxymethyl)furfural, and 5-Methylfurfural Formation and Browning in Buffer Solutions Containing either Rhamnose or Glucose and Arginine" |
-| Authors | Einat Haleva-Toledo, **Michael Naim** (corresponding, naim@agri.huji.ac.il), Uri Zehavi (Hebrew University of Jerusalem, Rehovot); Russell L. Rouseff (Citrus REC, Univ. of Florida, Lake Alfred) |
+| Authors | Einat Haleva-Toledo, **Michael Naim** (corresponding), Uri Zehavi (Hebrew University of Jerusalem, Rehovot); Russell L. Rouseff (Citrus REC, Univ. of Florida, Lake Alfred) |
 | Venue | J. Agric. Food Chem. **47** (10), 4140-4145, 1999. Received 23 Dec 1998, revised/accepted 20 Jul 1999, web 18 Sep 1999 |
 | DOI as printed | **10.1021/jf9813788** ✔ matches the brief. **Identity verified.** |
 | Funding | BARD I-1967-91, US-2914-97 |
