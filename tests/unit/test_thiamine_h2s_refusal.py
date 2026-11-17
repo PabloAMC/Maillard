@@ -141,7 +141,9 @@ def test_s3_rival_points_never_decide_or_read_a_thiamine_verdict():
 REFERENCE = json.loads((ROOT / "tests" / "fixtures" / "thiamine_refusal_origin_main_sulfur_panel.json").read_text())
 
 
-def test_switch_off_is_bit_identical_to_origin_main_on_the_sulfur_panel_pots():
+def test_switch_off_matches_origin_main_on_the_sulfur_panel_pots():
+    """Bit-identical on the machine that wrote the fixture (macOS); the CI runner (Linux) differs in the last ~30 bits
+    (rel. ~5e-9, 2026-11-18), so the comparison is to rtol 1e-7, far below the 0.21 dex any refusal moves."""
     from src.kinetic_core.panel import bundle_targets, core_spec, load_bundle
 
     assert len(REFERENCE) >= 20
@@ -150,5 +152,7 @@ def test_switch_off_is_bit_identical_to_origin_main_on_the_sulfur_panel_pots():
             bench = load_bundle(ROOT / bundle)
             run = engine.predict(core_spec(bench, use_buffer=True), list(bundle_targets(bench)),
                                  balance_refusal=False)
-            got = {c: float(v).hex() for c, v in run.concentrations_ug_per_l.items()}
-            assert got == expected, bundle
+            got = dict(run.concentrations_ug_per_l)
+            assert set(got) == set(expected), bundle
+            for c, hx in expected.items():
+                assert float(got[c]) == pytest.approx(float.fromhex(hx), rel=1e-7, abs=0.0), (bundle, c)

@@ -21,30 +21,30 @@
 
 | solver | tolerance | pots | max dex, all species | worst (pot, species) | max dex, named products | steps (all pots) | wall s after JIT | max abs below floor / max y0 | element drift |
 |---|---|---|---|---|---|---|---|---|---|
-| Kvaerno4 | tight_1e-10 | panel (3) | 5.3e-11 | mp_holdout_glucose_only_autoclave_121C_Steinhagen2021:upper G | 5.3e-11 | 2456 | 0.420 | 3.0e-21 | 1.6e-15 |
-| Kvaerno4 | tight_1e-10 | synthetic isothermal (4) | 9.3e-11 | synthetic_fed_glyoxal_methylglyoxal_glycine_120C:point AKG | 5.6e-11 | 4602 | 0.848 | 1.3e-20 | 1.7e-15 |
-| Kvaerno4 | tight_1e-10 | profile (2) | 3.5e-10 | synthetic_profile_trunk_lane_all_blocks_25_160_100:switches_on DMHF | 3.5e-10 | 19919 | 3.403 | 1.8e-18 | 7.7e-15 |
-| Kvaerno4 | fit_tol_1e-8 | panel (3) | 4.5e-09 | mp_holdout_glucose_only_autoclave_121C_Steinhagen2021:lower ODG | 4.4e-09 | 785 | 0.128 | 2.5e-19 | 2.2e-15 |
-| Kvaerno4 | fit_tol_1e-8 | synthetic isothermal (4) | 6.5e-09 | synthetic_glucose_methionine_proline_140C_switches_on:point MSH | 6.5e-09 | 1746 | 0.306 | 1.3e-18 | 8.9e-16 |
-| Kvaerno4 | fit_tol_1e-8 | profile (2) | 3.1e-08 | synthetic_profile_trunk_lane_all_blocks_25_160_100:switches_on DMHF | 3.1e-08 | 6468 | 1.287 | 1.4e-16 | 2.5e-15 |
-| Kvaerno4 | fit_tol_1e-8_atol_1e-10 | panel (3) | 4.5e-06 | mp_holdout_glucose_only_autoclave_121C_Steinhagen2021:lower ODG | 3.3e-08 | 335 | 0.066 | 1.2e-16 | 5.5e-16 |
-| Kvaerno4 | fit_tol_1e-8_atol_1e-10 | synthetic isothermal (4) | 2.5e-06 | synthetic_glucose_bound_lysine_120C:point ODG | 9.8e-08 | 903 | 0.179 | 7.1e-16 | 1.2e-15 |
-| Kvaerno4 | fit_tol_1e-8_atol_1e-10 | profile (2) | 4.3e-06 | synthetic_profile_trunk_lane_all_blocks_25_160_100:point GO | 4.3e-06 | 2762 | 0.602 | 1.1e-13 | 1.5e-15 |
-| Kvaerno4 | loose_1e-6 | panel (3) | 3.9e-07 | mp_holdout_glucose_only_autoclave_121C_Steinhagen2021:lower ODG | 3.3e-07 | 260 | 0.065 | 2.2e-17 | 1.2e-15 |
-| Kvaerno4 | loose_1e-6 | synthetic isothermal (4) | 5.0e-07 | synthetic_glucose_methionine_proline_140C_switches_on:point MSH | 5.0e-07 | 681 | 0.145 | 1.2e-16 | 6.3e-16 |
-| Kvaerno4 | loose_1e-6 | profile (2) | 2.0e-06 | synthetic_profile_trunk_lane_all_blocks_25_160_100:point ODG | 1.8e-06 | 2320 | 0.413 | 8.1e-15 | 1.0e-15 |
-| Kvaerno5 | tight_1e-10 | panel (3) | 2.0e-10 | mp_holdout_glucose_only_autoclave_121C_Steinhagen2021:point G | 2.0e-10 | 367 | 0.082 | 4.7e-20 | 8.2e-16 |
-| Kvaerno5 | tight_1e-10 | synthetic isothermal (4) | 2.1e-10 | synthetic_fed_3deoxyglucosone_120C:point DDG | 2.1e-10 | 6636 | 1.461 | 2.3e-20 | 2.7e-15 |
-| Kvaerno5 | tight_1e-10 | profile (2) | 1.2e-09 | synthetic_profile_trunk_lane_all_blocks_25_160_100:switches_on DMHF | 1.2e-09 | 16594 | 3.361 | 4.3e-18 | 4.3e-15 |
-| Kvaerno5 | fit_tol_1e-8 | panel (3) | 1.5e-08 | mp_holdout_glucose_only_autoclave_121C_Steinhagen2021:lower G | 1.5e-08 | 165 | 0.040 | 2.8e-18 | 2.7e-16 |
-| Kvaerno5 | fit_tol_1e-8 | synthetic isothermal (4) | 1.6e-08 | synthetic_fed_3deoxyglucosone_120C:point DDG | 1.6e-08 | 2500 | 0.500 | 1.8e-18 | 1.4e-15 |
-| Kvaerno5 | fit_tol_1e-8 | profile (2) | 8.0e-08 | synthetic_profile_trunk_lane_all_blocks_25_160_100:switches_on DMHF | 8.0e-08 | 6325 | 1.302 | 2.3e-16 | 2.2e-15 |
-| Kvaerno5 | fit_tol_1e-8_atol_1e-10 | panel (3) | 6.3e-06 | mp_holdout_glucose_only_autoclave_121C_Steinhagen2021:lower ODG | 1.0e-07 | 87 | 0.024 | 1.8e-16 | 2.7e-16 |
-| Kvaerno5 | fit_tol_1e-8_atol_1e-10 | synthetic isothermal (4) | 5.3e-06 | synthetic_glucose_bound_lysine_120C:point ODG | 4.9e-07 | 535 | 0.127 | 2.3e-16 | 3.9e-16 |
-| Kvaerno5 | fit_tol_1e-8_atol_1e-10 | profile (2) | 2.0e-05 | synthetic_profile_trunk_lane_all_blocks_25_160_100:switches_on DMHF | 2.0e-05 | 2296 | 0.507 | 3.2e-13 | 1.1e-15 |
-| Kvaerno5 | loose_1e-6 | panel (3) | 5.4e-07 | mp_holdout_glucose_only_autoclave_121C_Steinhagen2021:upper G | 5.4e-07 | 79 | 0.044 | 7.9e-17 | 5.5e-16 |
-| Kvaerno5 | loose_1e-6 | synthetic isothermal (4) | 9.6e-07 | synthetic_fed_3deoxyglucosone_120C:point DDG | 9.6e-07 | 879 | 0.235 | 1.2e-16 | 5.3e-16 |
-| Kvaerno5 | loose_1e-6 | profile (2) | 3.5e-06 | synthetic_profile_trunk_lane_all_blocks_25_160_100:switches_on DMHF | 3.5e-06 | 2268 | 0.552 | 1.2e-14 | 2.1e-15 |
+| Kvaerno4 | tight_1e-10 | panel (3) | 5.3e-11 | mp_holdout_glucose_only_autoclave_121C_Steinhagen2021:upper G | 5.3e-11 | 2459 | 0.138 | 2.9e-21 | 9.6e-16 |
+| Kvaerno4 | tight_1e-10 | synthetic isothermal (4) | 9.3e-11 | synthetic_fed_glyoxal_methylglyoxal_glycine_120C:point AKG | 5.6e-11 | 4602 | 0.259 | 1.3e-20 | 1.7e-15 |
+| Kvaerno4 | tight_1e-10 | profile (2) | 3.5e-10 | synthetic_profile_trunk_lane_all_blocks_25_160_100:switches_on DMHF | 3.5e-10 | 19919 | 1.132 | 1.8e-18 | 7.7e-15 |
+| Kvaerno4 | fit_tol_1e-8 | panel (3) | 4.5e-09 | mp_holdout_glucose_only_autoclave_121C_Steinhagen2021:lower ODG | 4.5e-09 | 787 | 0.049 | 2.5e-19 | 1.2e-15 |
+| Kvaerno4 | fit_tol_1e-8 | synthetic isothermal (4) | 6.5e-09 | synthetic_glucose_methionine_proline_140C_switches_on:point MSH | 6.5e-09 | 1746 | 0.106 | 1.3e-18 | 8.9e-16 |
+| Kvaerno4 | fit_tol_1e-8 | profile (2) | 3.1e-08 | synthetic_profile_trunk_lane_all_blocks_25_160_100:switches_on DMHF | 3.1e-08 | 6468 | 0.397 | 1.4e-16 | 2.5e-15 |
+| Kvaerno4 | fit_tol_1e-8_atol_1e-10 | panel (3) | 4.5e-06 | mp_holdout_glucose_only_autoclave_121C_Steinhagen2021:lower ODG | 3.3e-08 | 335 | 0.022 | 1.2e-16 | 4.1e-16 |
+| Kvaerno4 | fit_tol_1e-8_atol_1e-10 | synthetic isothermal (4) | 2.5e-06 | synthetic_glucose_bound_lysine_120C:point ODG | 9.8e-08 | 903 | 0.055 | 7.1e-16 | 1.2e-15 |
+| Kvaerno4 | fit_tol_1e-8_atol_1e-10 | profile (2) | 4.3e-06 | synthetic_profile_trunk_lane_all_blocks_25_160_100:point GO | 4.3e-06 | 2762 | 0.170 | 1.1e-13 | 1.5e-15 |
+| Kvaerno4 | loose_1e-6 | panel (3) | 3.9e-07 | mp_holdout_glucose_only_autoclave_121C_Steinhagen2021:lower ODG | 3.3e-07 | 260 | 0.016 | 2.2e-17 | 8.2e-16 |
+| Kvaerno4 | loose_1e-6 | synthetic isothermal (4) | 5.0e-07 | synthetic_glucose_methionine_proline_140C_switches_on:point MSH | 5.0e-07 | 681 | 0.044 | 1.2e-16 | 6.3e-16 |
+| Kvaerno4 | loose_1e-6 | profile (2) | 2.0e-06 | synthetic_profile_trunk_lane_all_blocks_25_160_100:point ODG | 1.8e-06 | 2320 | 0.144 | 8.1e-15 | 1.0e-15 |
+| Kvaerno5 | tight_1e-10 | panel (3) | 2.0e-10 | mp_holdout_glucose_only_autoclave_121C_Steinhagen2021:point G | 2.0e-10 | 368 | 0.028 | 4.7e-20 | 4.1e-16 |
+| Kvaerno5 | tight_1e-10 | synthetic isothermal (4) | 2.1e-10 | synthetic_fed_3deoxyglucosone_120C:point DDG | 2.1e-10 | 6636 | 0.478 | 2.3e-20 | 2.7e-15 |
+| Kvaerno5 | tight_1e-10 | profile (2) | 1.2e-09 | synthetic_profile_trunk_lane_all_blocks_25_160_100:switches_on DMHF | 1.2e-09 | 16594 | 1.212 | 4.3e-18 | 4.3e-15 |
+| Kvaerno5 | fit_tol_1e-8 | panel (3) | 1.5e-08 | mp_holdout_glucose_only_autoclave_121C_Steinhagen2021:point G | 1.5e-08 | 165 | 0.012 | 2.8e-18 | 4.1e-16 |
+| Kvaerno5 | fit_tol_1e-8 | synthetic isothermal (4) | 1.6e-08 | synthetic_fed_3deoxyglucosone_120C:point DDG | 1.6e-08 | 2500 | 0.186 | 1.8e-18 | 1.4e-15 |
+| Kvaerno5 | fit_tol_1e-8 | profile (2) | 8.0e-08 | synthetic_profile_trunk_lane_all_blocks_25_160_100:switches_on DMHF | 8.0e-08 | 6325 | 0.466 | 2.3e-16 | 2.2e-15 |
+| Kvaerno5 | fit_tol_1e-8_atol_1e-10 | panel (3) | 6.3e-06 | mp_holdout_glucose_only_autoclave_121C_Steinhagen2021:lower ODG | 1.0e-07 | 87 | 0.007 | 1.8e-16 | 2.7e-16 |
+| Kvaerno5 | fit_tol_1e-8_atol_1e-10 | synthetic isothermal (4) | 5.3e-06 | synthetic_glucose_bound_lysine_120C:point ODG | 4.9e-07 | 535 | 0.042 | 2.3e-16 | 3.9e-16 |
+| Kvaerno5 | fit_tol_1e-8_atol_1e-10 | profile (2) | 2.0e-05 | synthetic_profile_trunk_lane_all_blocks_25_160_100:switches_on DMHF | 2.0e-05 | 2296 | 0.173 | 3.2e-13 | 1.1e-15 |
+| Kvaerno5 | loose_1e-6 | panel (3) | 5.4e-07 | mp_holdout_glucose_only_autoclave_121C_Steinhagen2021:upper G | 5.4e-07 | 79 | 0.006 | 7.9e-17 | 5.5e-16 |
+| Kvaerno5 | loose_1e-6 | synthetic isothermal (4) | 9.6e-07 | synthetic_fed_3deoxyglucosone_120C:point DDG | 9.6e-07 | 879 | 0.066 | 1.2e-16 | 5.3e-16 |
+| Kvaerno5 | loose_1e-6 | profile (2) | 3.5e-06 | synthetic_profile_trunk_lane_all_blocks_25_160_100:switches_on DMHF | 3.5e-06 | 2268 | 0.170 | 1.2e-14 | 2.1e-15 |
 
 Pots: the one panel bundle the engine routes to the trunk lane (Steinhagen 2021, glucose only, 18 min at 121 C, pH 4.36) at its point and both band corners (a_w scale, Amadori pH exponent, 3-DG exit exponent, the disputed and HPD sinks, all at one end); four synthetic isothermal pots, one per block the panel pot leaves idle (fed dicarbonyls + glycine; glucose + bound lysine; fed 3-DG; glucose + methionine + proline with B22 / B24 on and the exit term off); and a synthetic staircase profile (25 -> 160 -> 100 C, 2 K steps, pH 5.5, a_w 0.80, every block charged) at the shipped point and with the switches on. Named products: HMF, TDG, DDG, G, GO, MGO, DMHF, PZ, DMP, MPZ, CML, CEL, MTAL, MSH, DMDS, AP, ATHP, DGAL.
 
@@ -54,7 +54,7 @@ Worst column error = max over observables of |difference| / max |reference| in t
 
 | pot | observables x coordinates (engine / all; relative columns) | vs engine central FD: rel (worst coordinate) / abs | vs JAX central FD: rel (worst) / abs | JAX FD vs engine FD: rel / abs | rtol 1e-8 vs tight | rtol 1e-8 atol 1e-10 vs tight | rtol 1e-6 vs tight |
 |---|---|---|---|---|---|---|---|
-| mp_holdout_glucose_only_autoclave_121C_Steinhagen2021 | 24 x 98 / 109 (31) | 5.2e-05 (ea:k_fru_glc) / 1.7e-08 | 3.2e-07 (ea:k_dgal_ddg) / 6.8e-10 | 5.2e-05 / 1.7e-08 | 4.6e-08 | 7.8e-07 | 2.1e-06 |
+| mp_holdout_glucose_only_autoclave_121C_Steinhagen2021 | 24 x 98 / 109 (32) | 3.2e-05 (ea:k_fru_glc) / 1.3e-08 | 3.5e-07 (ea:k_tdg_fa) / 6.6e-10 | 3.2e-05 / 1.3e-08 | 4.5e-08 | 7.7e-07 | 2.1e-06 |
 | synthetic_fed_glyoxal_methylglyoxal_glycine_120C | 16 x 98 / 109 (12) | 1.5e-06 (ea:k_cond) / 1.2e-08 | 7.6e-08 (ea:k_cond) / 6.3e-10 | 1.5e-06 / 1.2e-08 | 4.7e-08 | 1.3e-06 | 1.6e-06 |
 | synthetic_profile_trunk_lane_all_blocks_25_160_100 | 21 x 98 / 109 (64) | 4.7e-05 (ea:k_fru_int) / 3.2e-06 | 3.3e-06 (log10_k:k_schiff) / 2.8e-03 | 4.7e-05 / 3.2e-07 | 1.5e-05 | 1.5e-05 | 1.5e-05 |
 
@@ -62,12 +62,12 @@ Worst column error = max over observables of |difference| / max |reference| in t
 
 | solver | tolerance | rows | max abs difference, dex |
 |---|---|---|---|
-| Kvaerno4 | fit_tol_1e-8 | 6 | 1.3e-08 |
-| Kvaerno4 | fit_tol_1e-8_atol_1e-10 | 6 | 1.8e-08 |
-| Kvaerno4 | loose_1e-6 | 6 | 3.1e-07 |
-| Kvaerno5 | fit_tol_1e-8 | 6 | 6.4e-09 |
-| Kvaerno5 | fit_tol_1e-8_atol_1e-10 | 6 | 5.2e-08 |
-| Kvaerno5 | loose_1e-6 | 6 | 5.3e-07 |
+| Kvaerno4 | fit_tol_1e-8 | 6 | 7.0e-09 |
+| Kvaerno4 | fit_tol_1e-8_atol_1e-10 | 6 | 9.8e-09 |
+| Kvaerno4 | loose_1e-6 | 6 | 1.7e-07 |
+| Kvaerno5 | fit_tol_1e-8 | 6 | 3.4e-09 |
+| Kvaerno5 | fit_tol_1e-8_atol_1e-10 | 6 | 2.8e-08 |
+| Kvaerno5 | loose_1e-6 | 6 | 2.9e-07 |
 
 ## Timing (CPU, one core, niced; shared machine: load beside each row; provisional)
 
@@ -75,11 +75,11 @@ The engine's forward-difference Jacobian is (1 + 109) lane runs, from the median
 
 | pot class | segments | engine run s | engine FD Jacobian s | K5 rtol 1e-8 atol 1e-14: solve s / steps / Jacobian s | K5 rtol 1e-8 atol 1e-10: solve s / steps / Jacobian s | K4 rtol 1e-8 atol 1e-14: solve s / steps / Jacobian s | K4 rtol 1e-8 atol 1e-10: solve s / steps / Jacobian s | K4 rtol 1e-6 atol 1e-10: solve s / steps / Jacobian s | compile s (solve / Jacobian, first setting) | load |
 |---|---|---|---|---|---|---|---|---|---|---|
-| isothermal hold, glucose only (18 min at 121 C) | 1 | 4.3e-02 | 4.7e+00 | 1.6e-02 / 56 / 1.6e-01 | 7.0e-03 / 27 / 7.7e-02 | 5.8e-02 / 263 / 4.6e-01 | 2.0e-02 / 111 / 2.6e-01 | 2.5e-02 / 63 / 1.2e-01 | 6.7 / 5.3 | 64.68 59.00 49.40 |
-| fed dicarbonyls + glycine (pyrazine; 60 min at 120 C) | 1 | 8.2e-02 | 9.0e+00 | 3.8e-01 / 1270 / 3.6e+00 | 1.1e-01 / 333 / 9.1e-01 | 1.3e-01 / 568 / 1.2e+00 | 7.1e-02 / 359 / 1.2e+00 | 4.9e-02 / 195 / 6.0e-01 | 8.4 / 14.3 | 37.30 50.40 47.16 |
-| glucose + bound lysine (glycation; 40 min at 120 C) | 1 | 1.1e-01 | 1.2e+01 | 2.5e-02 / 96 / 2.9e-01 | 1.8e-02 / 71 / 2.8e-01 | 7.0e-02 / 352 / 1.1e+00 | 6.3e-02 / 207 / 6.6e-01 | 1.8e-02 / 91 / 1.7e-01 | 9.3 / 13.5 | 28.96 43.75 44.92 |
-| fed 3-deoxyglucosone (B39 triangle; 60 min at 120 C) | 1 | 1.3e-02 | 1.4e+00 | 1.8e-02 / 38 / 1.4e-01 | 7.1e-03 / 29 / 1.0e-01 | 5.0e-02 / 195 / 3.7e-01 | 2.7e-02 / 134 / 3.2e-01 | 4.5e-02 / 58 / 1.1e-01 | 5.1 / 9.8 | 37.58 41.40 43.80 |
-| staircase profile, every block | 99 | 1.1e+00 | 1.2e+02 | 7.6e-01 / 2122 / 9.9e+00 | 2.4e-01 / 917 / 3.0e+00 | 6.1e-01 / 3027 / 6.9e+00 | 2.7e-01 / 1297 / 4.1e+00 | 2.3e-01 / 752 / 2.5e+00 | 8.0 / 22.8 | 31.69 40.88 43.50 |
+| isothermal hold, glucose only (18 min at 121 C) | 1 | 1.9e-02 | 2.0e+00 | 7.0e-03 / 56 / 1.1e-01 | 4.8e-03 / 27 / 4.5e-02 | 3.0e-02 / 263 / 3.2e-01 | 1.3e-02 / 111 / 1.4e-01 | 7.5e-03 / 63 / 7.7e-02 | 1.5 / 2.4 | 9.32 6.37 5.21 |
+| fed dicarbonyls + glycine (pyrazine; 60 min at 120 C) | 1 | 2.9e-02 | 3.2e+00 | 1.8e-01 / 1270 / 2.7e+00 | 8.2e-02 / 333 / 6.7e-01 | 5.9e-02 / 568 / 7.0e-01 | 3.8e-02 / 359 / 4.5e-01 | 2.0e-02 / 195 / 2.0e-01 | 1.6 / 5.7 | 8.21 6.47 5.30 |
+| glucose + bound lysine (glycation; 40 min at 120 C) | 1 | 3.1e-02 | 3.5e+00 | 1.2e-02 / 96 / 1.7e-01 | 9.0e-03 / 71 / 1.3e-01 | 4.8e-02 / 352 / 4.4e-01 | 2.5e-02 / 207 / 2.6e-01 | 1.1e-02 / 91 / 1.1e-01 | 1.1 / 2.1 | 7.91 6.53 5.35 |
+| fed 3-deoxyglucosone (B39 triangle; 60 min at 120 C) | 1 | 4.9e-03 | 5.4e-01 | 5.5e-03 / 38 / 6.5e-02 | 3.7e-03 / 29 / 4.8e-02 | 2.0e-02 / 195 / 2.4e-01 | 1.4e-02 / 134 / 1.6e-01 | 7.4e-03 / 58 / 6.5e-02 | 1.3 / 2.4 | 9.91 7.12 5.60 |
+| staircase profile, every block | 99 | 3.9e-01 | 4.3e+01 | 3.4e-01 / 2122 / 3.9e+00 | 1.1e-01 / 917 / 1.8e+00 | 3.7e-01 / 3027 / 3.8e+00 | 1.6e-01 / 1297 / 1.6e+00 | 8.6e-02 / 752 / 9.4e-01 | 2.0 / 9.7 | 10.22 7.68 5.94 |
 
 ## Findings
 
