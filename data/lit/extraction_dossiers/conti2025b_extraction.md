@@ -21,7 +21,7 @@ Repo status before this dossier: neither Conti paper had a dossier; see the comp
 | field | value |
 |---|---|
 | Title | "Oral processing of meat-flavour textured soy proteins — **Part II: Influence on taste compounds release and sensory perception**" |
-| Authors | Ana Carolina Conti (corresponding, ac.conti@unesp.br), Chantal Septier, **Karine Gourrat**, Helene Laboure, Christian Salles |
+| Authors | Ana Carolina Conti (corresponding), Chantal Septier, **Karine Gourrat**, Helene Laboure, Christian Salles |
 | Affiliations | (a) Sao Paulo State University (Unesp), Ibilce, Sao Jose do Rio Preto, Brazil; (b) Centre des Sciences du Gout et de l'Alimentation, CNRS / INRAE / Institut Agro / Universite Bourgogne Europe, Dijon; (c) **CNRS, INRAE PROBE Research Infrastructure, Chemosens Facility, Dijon** — the analytical platform, and the reason Part II has a GC and Part I does not |
 | Venue | **Food Research International 218 (2025) 116938**. Received 18 Sep 2024, revised 13 Jun 2025, accepted 20 Jun 2025, online 21 Jun 2025 |
 | DOI | **10.1016/j.foodres.2025.116938** |

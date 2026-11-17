@@ -36,7 +36,7 @@ read with the Read tool for all eight figures, which carry the bulk of the quant
 | received / accepted | Received 11 December 2002; accepted 11 April 2003 |
 | affiliation | ᵃ Product Design and Quality Management Group, Dept. of Agrotechnology and Food Sciences, Wageningen University, P.O. Box 8129, 6700 EV Wageningen, The Netherlands; ᵇ Organic Chemistry Group, same department and address |
 | PDF character | born-digital (Elsevier / Acrobat Distiller 4.05 for Windows); clean text layer, but "±" renders as `9/` and "−"/"–" as `/`; **all eight figures are image objects with no extractable data** |
-| corresponding author | tiny.vanboekel@wur.nl |
+| corresponding author | M. A. J. S. (Tiny) van Boekel |
 | funding | Fundação para a Ciência e Tecnologia (Portugal) |
 | notable acknowledgement | DFG material "kindly offered by Drs. Blank and Davidek, from Nestlé Research Center Lausanne" |
 

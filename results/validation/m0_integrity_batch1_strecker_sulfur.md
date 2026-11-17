@@ -12,7 +12,7 @@
 >
 > **Blinding.** Not read: hofmann2000b Figs. 2-3 and the Results text that discusses them (the Methods paragraph of
 > the 85 C trapped experiment was read as text only, for its atmosphere wording); the B59b hold-outs; the E7 / E13 /
-> E14 TEST sets; the WUR samples.
+> E14 TEST sets; the outside blind test's samples.
 
 ## Outcomes
 

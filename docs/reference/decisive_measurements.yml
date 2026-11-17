@@ -594,7 +594,7 @@ entries:
         means: "branch (i) stands: relative within-laboratory predictions only"
     unlocks:
       - "absolute thiol levels for a new laboratory: the panel rows section 2 lists as refused for their absolute level (H0 / EX-059)"
-    existing_data_route: "W6 author replies and the pending WUR blind-test samples (plan W1.2; the engine's refusal text in thiol_relative_only)"
+    existing_data_route: "W6 author replies and a pending outside blind test (plan W1.2; the engine's refusal text in thiol_relative_only)"
     status: open
     disagreements:
       - about: "how many new laboratories lift the refusal"

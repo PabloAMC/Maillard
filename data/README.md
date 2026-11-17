@@ -163,7 +163,7 @@ Digitised concentration-vs-time trajectories (Martins 2003/2005, Brands 2002) us
 
 ## `data/research_corpus/raw`
 
-The raw deep-research dumps, unedited.
+The raw deep-research dumps, unedited. `Gemini_deep_research_*.md` are unverified LLM outputs, not used at runtime.
 
 26 files covered by the directory description above: `00_priority_runtime_bound.md`, `Gemini_deep_research_01.md`, `Gemini_deep_research_02.md`, `Gemini_deep_research_03.md`, `Gemini_deep_research_04.md`, `Gemini_deep_research_05.md`, `Gemini_deep_research_06.md`, `Gemini_deep_research_07.md`, `Gemini_deep_research_08.md`, `Gemini_deep_research_09.md`, `Gemini_deep_research_10.md`, `Gemini_deep_research_11.md` …
 

@@ -21,7 +21,7 @@ addition, whose adduct **is** reversible) and `research_round4_nulls.md` §A.1.
 | DOI | **10.1016/j.foodchem.2010.03.016** ✔ **exactly the expected DOI** |
 | Affiliation | **Instituto de la Grasa, CSIC, Avenida Padre García Tejero 4, 41012-Seville, Spain** |
 | Dates | Received 13 Nov 2009 · Revised 7 Jan 2010 · Accepted 3 Mar 2010 |
-| Corresponding | rzamora@ig.csic.es · +34 954 611 550 |
+| Corresponding | R. Zamora |
 | Keywords | *Acrylamide; 3-(Alkylthio)propanamides; Antioxidants; Mercaptans; Mercaptan oxidation; Michael-type addition* |
 | Funding | EU FEDER · **Junta de Andalucía P07-AGR-2846** · Plan Nacional I+D **AGL2006-01092, AGL2009-07638**; José L. Navarro thanked |
 | PDF character | **6 pages**, clean text layer, **ZERO TABLES**, Figures 1–6 |

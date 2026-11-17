@@ -13,7 +13,7 @@ kinetic content). No Supporting Information is referenced.
 | field | value |
 |---|---|
 | Title | "Formation mechanism of volatile and non-volatile compounds in peptide–xylose Maillard reaction" |
-| Authors | Qianqian Xu, Jianbin Liu, **Huanlu Song** (corresponding, songhl@th.btbu.edu.cn), Tingting Zou, Ye Liu, Songpei Zhang |
+| Authors | Qianqian Xu, Jianbin Liu, **Huanlu Song** (corresponding), Tingting Zou, Ye Liu, Songpei Zhang |
 | Affiliation | Laboratory of Molecular Sensory Science, Beijing Technology and Business University (BTBU) — the Song group, not the Xie group of Cao 2017 / Zhao 2019 |
 | Venue | Food Research International **54 (2013) 683-690**. Received 30 Apr 2013, accepted 28 Jul 2013 |
 | DOI as printed | **10.1016/j.foodres.2013.07.066** ✔ matches the brief |

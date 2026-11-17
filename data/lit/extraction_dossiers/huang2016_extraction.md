@@ -213,7 +213,7 @@ so. A second reading of the whole file adds no charge, no molarity, no mass and 
    written as a second-order constant.
 3. **To request from the authors:** the sugar and amino-acid concentrations of the model solutions, the
    glass-tube volume and headspace, and the concentration unit of Figures 5 and 6. The corresponding
-   author's address is printed (huangyarong@hotmail.de); the thesis-level detail may sit with the
+   author's address is printed; the thesis-level detail may sit with the
    FEI/AiF project 16968N report.
 4. **Tables 1 and 2 disagree for the glucose systems** (GL k1 is 5.2x its own Arrhenius line, GI k2 is
    6.7x below its own line, while ML and MI agree within 30 %). The paper never says how the two tables

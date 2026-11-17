@@ -64,7 +64,7 @@ about 2 dex, a threshold spread of about 2 dex and a lever interval of up to 2.5
 | 7.1 | **Thresholds, one panel and one method first.** Verify Czerny et al. 2008's medium and units before keying (air or water). Key into a curated `data/perception/thresholds.yml` with the `ThresholdRecord` fields plus **medium, units, criterion and route (orthonasal or retronasal) as required keys**; one criterion per odorant unless a conversion is cited. Other measured sources only where Czerny has no value. The uncited target files are not used | each of the 42 odorants has a cited threshold with medium, units, criterion and route, or reads "no measured threshold" | 4 |
 | 7.2 | **Base levels.** Starts with a 1-hour feasibility search; **kill rule:** fewer than 2 quantified plant-based-meat sources (isotope dilution or stated calibration) per thiol stops the literature route for that thiol. The **primary input is the user's own measured level** (`calibrate`); published ranges are shown as "illustrative, product-dependent" | per odorant: sources and ranges, or "none quantified" | 6 |
 | 7.3 | **A perception column in the lever table**, for the cells whose lever a formulator can set (not "none vs cysteine": protein always brings sulfur). Four calls: **crosses threshold**, **stays far above (intensity shifts)**, **stays below**, **undecidable**. A call other than undecidable is made only when the whole propagated interval lies on one side of OAV = 1, or more than 1 dex above it. **Media are matched** (a water threshold against a water-phase level) or the cell refuses, as `select_threshold` does; an air threshold is never compared with a product level without a cited partition coefficient. **"Stays below" is forbidden** from a water or air threshold in a fat- or protein-rich product (matrix suppression of 1 - 2 dex is the wrong way round for that call). Furfural is stated as probably below threshold whatever the lever does | generated with the table; each call carries its medium and route | 6 |
-| 7.4 | **Optional, with WUR or a partner:** GC-O or sensory on the factorial corners (P3 already lists it) | -- | -- |
+| 7.4 | **Optional, with a partner laboratory:** GC-O or sensory on the factorial corners (P3 already lists it) | -- | -- |
 
 **Out of scope:** intensity functions (power laws), masking and mixture models, release and retronasal transfer
 models. **Cap:** 17 h for 7.0 - 7.3.
@@ -117,12 +117,6 @@ engine.
   0.2 used in DECIDABILITY_7_0.md, and FFT's is 0.036, 3.6x Kerler's 0.01. Neither moves a 7.0 verdict: the thiol
   verdicts do not depend on thresholds, and methional's turns on the 0.41-dex lever floor.
 
-## 5. To read (owner's download list)
+## 5. To read
 
-- Czerny, M. et al. (2008). Re-investigation on odour thresholds of key food aroma compounds and development of an
-  aroma language based on odour qualities of defined aqueous odorant solutions. *Eur. Food Res. Technol.* 228,
-  265-273. doi:10.1007/s00217-008-0931-x
-- The Wageningen sensory and GC-O study of commercial plant-based meat analogues against beef, *Food Research
-  International* 177 (2024) 113848 (verify the DOI when downloading).
-- For 7.2, papers quantifying the meaty thiols and Strecker aldehydes in plant-based meats by isotope dilution: to
-  be searched at the start of 7.2.
+3 candidates; the list is kept privately.

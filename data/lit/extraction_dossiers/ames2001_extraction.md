@@ -16,7 +16,7 @@
 | **authors** | ★ **Jennifer M. Ames**,\*,† **Robin C. E. Guy**,‡ **Gary J. Kipping**† | p.1885, raster |
 | affiliation † | School of Food Biosciences, The University of Reading, Whiteknights, Reading **RG6 6AP**, United Kingdom | p.1885, raster |
 | affiliation ‡ | Campden and Chorleywood Food Research Association, Chipping Campden, Gloucestershire **GL55 6LD**, United Kingdom | p.1885, raster |
-| corresponding | J. M. Ames, tel +44 118 931 8730, fax +44 118 931 0080, `j.m.ames@afnovell.reading.ac.uk` | p.1885 footnote |
+| corresponding | J. M. Ames | p.1885 footnote |
 | **DOI** | ★ **`10.1021/jf0012547`** — ✔ **PRESENT**, printed in the p.1885 footer as `10.1021/jf0012547 CCC: $20.00`; article ID `JF0012547` repeated at the very end of p.1894 | raster-verified, both places |
 | journal | ***J. Agric. Food Chem.* 2001, 49 (4), 1885–1894** (10 pages) | running heads on all 10 pages |
 | dates | **Received for review October 18, 2000 · Revised manuscript received January 16, 2001 · Accepted January 16, 2001** · **Published on Web 03/07/2001** | p.1894 / p.1885 footer |

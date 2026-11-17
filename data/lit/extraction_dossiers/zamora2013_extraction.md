@@ -22,7 +22,7 @@ recorded `Ea = 55–64 · 58–67 · 28–38 [ABS]` — **§3 below corrects and
 | Affiliation | **Instituto de la Grasa, CSIC, Avenida Padre García Tejero 4, 41012 Seville, Spain** |
 | Special issue | ***ISMR11 — 100 Years of the Maillard Reaction*** |
 | Dates | Received Nov 22 2012 · Revised Jan 15 2013 · Accepted/Published Jan 29 2013 |
-| Corresponding | fhidalgo@ig.csic.es · +34 954 611 550 |
+| Corresponding | F. J. Hidalgo |
 | Funding | EU FEDER + Plan Nacional de I+D, MINECO Spain, **AGL2009-07638, AGL2012-35627**; José L. Navarro thanked |
 | PDF character | 7 pages, clean text layer, **Tables 1–2**, Figures 1–7 (Fig. 4 = three Arrhenius plots) |
 

@@ -86,8 +86,8 @@ table below is the record of how each step went.
   - a phosphate no-isolate pair;
   - the buffered pair re-scoped, with an equivalence rule;
   - 24 vials per laboratory.
-- *16d.* [P3_STUDY_BRIEF.md](P3_STUDY_BRIEF.md), [P3_CANDIDATE_LABS.md](P3_CANDIDATE_LABS.md) and
-  [P3_OUTREACH_EMAIL.md](P3_OUTREACH_EMAIL.md) are written.
+- *16d.* [P3_STUDY_BRIEF.md](P3_STUDY_BRIEF.md) is written; the candidate-laboratory shortlist and the outreach
+  email are kept privately (moved out of the public repository 2026-11-17).
 
 **Gates before sending, done the same day:**
 - **16e, the engine dry run** (`p3_engine_dry_run`). The shipped engine predicted 3 of the 57 cells in pea isolate
@@ -466,7 +466,7 @@ validated on a plant-based product.
 **Moved earlier for ONE item (redirect, sec. 4.1 P3, 2026-11-10):** the designed factorial lever study, drafted and
 sized now; sending it stays the owner's action. Before it, the owner asks the blind-test partner for any data they can share (sec. 0). Everything else in W6 keeps its place.
 
-- Send the 5 drafted author data requests (`data/articles/OUTREACH_DRAFTS.md`, laptop only).
+- Send the 5 drafted author data requests (kept privately).
 - Add requests for existing data that would test a W2 step (ENGINE_VS_LITERATURE sec. 3.1, the "Or" alternatives):
   Cerny's raw 145 C isotopologue data (M2); DFA's raw Table 4 and Quest's recovery (M3, CF-073); Zhou 2024's
   supplementary ion data (M6); the BTBU / CAAS MFT yields per glucose consumed (M4).
@@ -491,7 +491,7 @@ does not already hold.
 M1c most likely ends "supply not identifiable on disk" (P ~0.6 that no unseen decisive data exist) and the thiol lane
 stays relative-only under H0 with the R0 / C1 supply envelope carried as uncertainty; M2 most likely reads "conflict:
 errors stack"; absolute thiol levels for a new laboratory stay refused until second-laboratory absolute data arrive
-(WUR blind test or a reply); M1b(ii)'s split and removal rivals stay unseparated. The odds that M1c + M2 noticeably
+(an outside blind test or a reply); M1b(ii)'s split and removal rivals stay unseparated. The odds that M1c + M2 noticeably
 improve the sulfur lane fall from ~0.25 to ~0.15. A reply that arrives later re-opens the step it names.
 
 ## 6. Timeline: what runs in parallel
@@ -766,7 +766,7 @@ Odds after step 0 and its independent read: ranked relative predictions with hon
 the end of January, ~0.1 from the engine (was ~0.35); from the literature table, for the cells with at least
 three laboratories, ~0.5. sigma_r <= 0.42 dex on sealed contrasts by 01-23, ~0.07 (reported, no longer the
 target). P3's data arriving by early January, unconditionally,
-~0.05 (the WUR blind test has no data after three weeks); the hybrid route delivering most levers within one matrix
+~0.05 (the outside blind test has no data yet); the hybrid route delivering most levers within one matrix
 and laboratory by 01-23, unconditionally, ~0.02. The plan improving the tool's usefulness to a formulator by the end
 of January, ~0.5 (from the literature table, the ingredient inputs and the experiment map; was ~0.35).
 

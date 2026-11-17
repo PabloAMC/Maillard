@@ -206,8 +206,8 @@ labs:
     text_aliases: ["Wageningen", "Martins", "Brands", "van Boekel"]
     merge_note: >-
       One chair group (FQD). Fogliano succeeded van Boekel as chair; Hettinga is FQD staff. Merging them is
-      conservative (rule 2): it costs the TEST set the Troise 2015 and Tang 2019 cells, and keeps the WUR blind-test
-      laboratory (Fogliano) out of the held-out lab count, which it should be anyway as a declared blind test.
+      conservative (rule 2): it costs the TEST set the Troise 2015 and Tang 2019 cells, and keeps the whole chair group
+      on one side of the split.
   - id: ghent_de_kimpe
     name: "Ghent University (De Kimpe; De Meulenaer)"
     strings:

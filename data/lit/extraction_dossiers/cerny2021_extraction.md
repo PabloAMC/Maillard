@@ -11,7 +11,7 @@ and tagged **[D]**; Figs. 1 (mass spectra) and 3 (scheme) qualitative. No SI.
 | field | value |
 |---|---|
 | Title | "Furfuryl alcohol is a precursor for furfurylthiol in coffee" |
-| Authors | **Christoph Cerny** (corresponding, christoph.cerny@firmenich.com), Hedwig Schlichtherle-Cerny, Romelo Gibe, Yuan Yuan — Corporate Research, Firmenich Aromatics China, Shanghai |
+| Authors | **Christoph Cerny** (corresponding), Hedwig Schlichtherle-Cerny, Romelo Gibe, Yuan Yuan — Corporate Research, Firmenich Aromatics China, Shanghai |
 | Venue | Food Chemistry **337** (2021) 128008. Received 8 May 2020, revised 1 Sep 2020, accepted 1 Sep 2020, online 6 Sep 2020 |
 | DOI as printed | **10.1016/j.foodchem.2020.128008** ✔ matches the brief. **Identity verified.** |
 | Same author, in corpus | `cerny2013_extraction.md` (S-furfuryl-L-cysteine and S-(2-methyl-3-furyl)-L-cysteine from Cys + Xyl and from FFA + Cys, 100 °C reflux, identification only); `cerny2015_extraction.md` (review chapter); `cerny2003`, `cerny2004`, `cerny2007`, `cerny2007b`, `cerny2008` |

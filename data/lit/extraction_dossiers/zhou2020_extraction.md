@@ -23,7 +23,7 @@ stated read error · **[Q]** qualitative claim by the authors · **[C]** cited �
 derived by me, never printed · **[!]** flag.
 
 **Laboratory.** Corresponding author **Zheng Ruan** (State Key Laboratory of Food Science and Technology, Institute of
-Nutrition and School of Food Science, **Nanchang University**, Jiangxi; ruanzheng@ncu.edu.cn); first author
+Nutrition and School of Food Science, **Nanchang University**, Jiangxi); first author
 **Quancheng Zhou** holds both affiliations (Nanchang and **School of Agricultural Engineering and Food Science, Shandong
 University of Technology, Zibo**); the other six authors are Shandong Univ. of Technology only. Funding: Open Project
 Program SKLF-KF201817 of the Nanchang State Key Lab. The bench work is most likely Zhou QC's SDUT group (their own
@@ -185,7 +185,7 @@ solution whose solids rise with the xylose dose.
 `grep -rIn` (2026-11-02) over `data/`, `docs/`, `src/`, `scripts/`, `tasks/` and `results/` for `10327`,
 `jsfa.10327`, `zhou2020`, `Quancheng`, `xMRP`, `pea protein enzymatic`, `xylose.pea`, `3D.print`: **no record cites
 this paper** (the only `10327` hits are digits inside floating-point numbers in `results/`). `data/keys/papers.yml`
-has no row for the DOI. The main checkout's `data/articles/DOWNLOAD_QUEUE.md` (gitignored) does not mention it either. **No
+has no row for the DOI. The private download queue does not mention it either. **No
 existing dossier cites it**, and no dossier on disk describes a pea-protein-hydrolysate + xylose Maillard pot
 (the corpus's hydrolysate + xylose systems are goat viscera, `desousafontes2024`; corn peptide; tilapia head; sesame
 meal without added xylose, `ruan2025`; and wheat-protein hydrolysate in `nedvidek1992`). Nothing to check field by

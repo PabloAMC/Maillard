@@ -401,36 +401,5 @@ Meng 2025 only.**
 
 ## DOWNLOAD list (ranked across gaps)
 
-File names: lowercase `<firstauthor><year>.pdf`, with b/c/d added where that name is already in `data/articles`.
+29 candidates; the list is kept privately.
 
-| # | paper | DOI | gap | class | why | file |
-|---|---|---|---|---|---|---|
-| 1 | Hofmann & Schieberle 1995, JAFC 43:2946, formation and stability of 2-acetyl-2-thiazoline | [10.1021/jf00059a032](https://doi.org/10.1021/jf00059a032) | G7 (G1) | Q | cysteamine + 2-oxopropanal route and 2-acetyl-2-thiazoline stability (96 % lost after 60 min at 100 C, per citers); not the corpus `hofmann1995.pdf` | `hofmann1995b.pdf` |
-| 2 | Edwards & Wedzicha 1992, Food Addit. Contam., 3-deoxyhexosulose + thiols | [10.1080/02652039209374098](https://doi.org/10.1080/02652039209374098) | G3, G6, G2 | Qa | kinetics and stoichiometry of thiols with 3-DH; cysteine: fast thiazolidine then slow (Strecker) release | `edwards1992.pdf` |
-| 3 | Lo et al. 1994, J. Biol. Chem., MGO with N-acetyl amino acids | [10.1016/s0021-9258(18)31635-1](https://doi.org/10.1016/s0021-9258(18)31635-1) | G3 | Q | forward and reverse rate constants of thiol + MGO hemithioacetal (pH 7.4, 37 C); 7 corpus citers | `lo1994.pdf` |
-| 4 | Grosch & Zeiler-Hilgart 1992, ACS Symp. Ser. 490 ch. 14 | [10.1021/bk-1992-0490.ch014](https://doi.org/10.1021/bk-1992-0490.ch014) | G1, G5 | Qa | MFT, MFT disulfide and FFT amounts from thiamine vs ribose + cysteine at meat-level concentrations; cysteine/H2S effects | `grosch1992.pdf` |
-| 5 | Hofmann, Czerny, Calligaris & Schieberle 2001, JAFC, coffee melanoidins and volatiles | [10.1021/jf0012042](https://doi.org/10.1021/jf0012042) | G1, G9 | Q | FFT loss time course with melanoidins (50 % at 20 min, about 100 % at 30 min) | `hofmann2001b.pdf` |
-| 6 | Mizutani 1960, Bull. Agric. Chem. Soc. Japan, cysteine-aldehyde compounds | [10.1080/03758397.1960.10857681](https://doi.org/10.1080/03758397.1960.10857681) | G6, G2 | Qa | measured H2S and NH3 from cysteine-aldehyde thiazolidines heated at 120 C (furfural adduct highest) | `mizutani1960.pdf` |
-| 7 | de Roos 1992, ACS Symp. Ser. 490 ch. 16 | [10.1021/bk-1992-0490.ch016](https://doi.org/10.1021/bk-1992-0490.ch016) | G2 | Qa | reactivity vs neutral thiazolidinecarboxylic-acid concentration (pH dependence of the TCA step); precursor of de Roos 2005 | `deroos1992.pdf` |
-| 8 | Engel & Schieberle 2002, JAFC, fructose + cysteamine / isothiaproline | [10.1021/jf0203186](https://doi.org/10.1021/jf0203186) | G7 | Qa | SIDA yields of 2-acetyl-2-thiazoline and acetyl-thiazines from cysteamine + fructose, 145 C, pH 7 | `engel2002.pdf` |
-| 9 | Shaoul & Sporns 1987, J. Food Sci., hydrolytic stability of IMP/GMP/AMP | [10.1111/j.1365-2621.1987.tb06733.x](https://doi.org/10.1111/j.1365-2621.1987.tb06733.x) | G8 | Q | half-lives at 121 C, pH 3-8, plus Arrhenius data; complements Matoba 1988 (in corpus) | `shaoul1987.pdf` |
-| 10 | Kreitman et al. 2017, JAFC, Cu(II)-mediated H2S and thiol oxidation | [10.1021/acs.jafc.6b05418](https://doi.org/10.1021/acs.jafc.6b05418) | G10 | Q | third paper of the Kreitman series (2016a/b in corpus): disulfide/polysulfane formation and H2S recovery | `kreitman2017.pdf` |
-| 11 | Kachur et al. 1999, Free Radic. Res., Cu-catalysed cysteine autoxidation | [10.1080/10715769900300571](https://doi.org/10.1080/10715769900300571) | G10 | Q | two-phase kinetics of Cu-catalysed cysteine/NAC/GSH oxidation | `kachur1999.pdf` |
-| 12 | Lee 1979, J. Food Sci., kinetics of IMP instability | [10.1111/j.1365-2621.1979.tb08550.x](https://doi.org/10.1111/j.1365-2621.1979.tb08550.x) | G8 | Qa | pseudo-first-order IMP loss at 100 C, pH 5.5-6.9 | `lee1979.pdf` |
-| 13 | Lee 1988, Iowa State thesis, thermal thiamin breakdown | [10.31274/rtd-180813-12233](https://doi.org/10.31274/rtd-180813-12233) | G5 | Qa | first-order thiamin loss at 75/85/95 C vs pH, a_w, reducing sugars, buffer and pork (open repository) | `lee1988.pdf` |
-| 14 | Fox 1982, J. Food Qual., a_w/pH/heat and thiamine breakdown | [10.1111/j.1745-4557.1982.tb00742.x](https://doi.org/10.1111/j.1745-4557.1982.tb00742.x) | G5 | Qa | k at 85 and 95 C x pH 3/5/7 x a_w 0.90-1.0 | `fox1982.pdf` |
-| 15 | Müller & Hofmann 2007, JAFC, phenol/FFT conjugates in coffee | [10.1021/jf070095p](https://doi.org/10.1021/jf070095p) | G1 | Qa | 60 % of FFT conjugated within 10 min; SIDA time course (coffee) | `muller2007.pdf` |
-| 16 | Sun et al. 2024, LWT, coffee-matrix aroma binding factors | [10.1016/j.lwt.2024.116930](https://doi.org/10.1016/j.lwt.2024.116930) | G1, G9 | Qa | MFT to 34 %, FFT to 3 % in 30 min; loss apportioned to lipids, HHQ, melanoidin fractions | `sun2024.pdf` |
-
-Ranking logic: first the two items the sulfur lane can use directly as a mechanism step with a rate or yield (1, 2), then the
-G3/G1 rate data (3-5), then G6/G2/G7 yield data (6-8), then G8/G10 kinetics (9-12), then G5 loss kinetics the corpus partly
-covers (13-14), then coffee-only thiol-sink numbers (15-16).
-
-**MAYBE, in order:** Wedzicha & Edwards 1991 ([10.1016/0308-8146(91)90020-o](https://doi.org/10.1016/0308-8146(91)90020-o),
-`wedzicha1991.pdf`, fetch together with #2). Fan 2011, glucose/L-cysteine kinetics (Chinese, no DOI). Rae 1990 (`rae1990.pdf`).
-Kraehenbuehl 2005 (ASIC, no DOI). Meng 2025, leghemoglobin/myoglobin in plant-based meat (`meng2025.pdf`). Farmer 1996, Weurman,
-sugars vs IMP (`farmer1996.pdf`). Liu 2020, GSH degradation
-(`liu2020.pdf`). Kuchiba 1990 (`kuchiba1990.pdf`). Martin 1959, thiazoline hydrolysis (`martin1959.pdf`). Lee 2010, GSH + sugars
-(`lee2010.pdf`). Hou 2025, polysulfides (`hou2025.pdf`). Morfee 1972 (`morfee1972.pdf`). Cerny & Grosch 1993 (`cerny1993.pdf`).
-Sandwick 2005 (`sandwick2005.pdf`). The trunk/acrylamide MAYBEs from Part 1 are Ajandouz 2001, Leong 2000, Brands 2003,
-Hofmann 1999, Laroque 2008, Thornalley 1999 and Mottram 2002 Nature.

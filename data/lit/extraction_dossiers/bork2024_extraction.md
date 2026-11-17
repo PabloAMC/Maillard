@@ -16,7 +16,7 @@ Prose from `pdftotext -raw`; figures from 130 dpi page renders and **300 dpi cro
 
 | field | value as printed |
 |---|---|
-| Authors | **Leon V. Bork** (corresponding, l.bork@tu-berlin.de), Tobias Stobernack (BfR), Sascha Rohn, Clemens Kanzler |
+| Authors | **Leon V. Bork** (corresponding), Tobias Stobernack (BfR), Sascha Rohn, Clemens Kanzler |
 | Affiliation | TU Berlin, Institute of Food Technology and Food Chemistry, Dept. of Food Chemistry and Analysis; BfR Berlin, Dept. of Chemical and Product Safety |
 | Venue | *Food Chemistry* **449** (2024) 139189 |
 | DOI | **10.1016/j.foodchem.2024.139189** (printed p. 1 and in the SI note) — matches the brief and the PDF's title metadata |

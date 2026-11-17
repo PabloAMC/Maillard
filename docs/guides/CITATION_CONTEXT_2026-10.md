@@ -58,23 +58,7 @@ Counts over the 81 remaining: Q 13, M 26, B 30, ? 12.
 
 ## Download list (ranked)
 
-1. **Xu 2011** JSFA, lard x cysteine-xylose, [10.1002/jsfa.4445](https://doi.org/10.1002/jsfa.4445), `xu2011.pdf`: citers quote
-   measured drops of MFT, FFT and the methylthiophenes with lard; a direct lipid x sulfur-lane test in the core pot.
-2. **de Roos 2005** ACS Symp. Ser. 905, cysteine Amadori compounds, [10.1021/bk-2005-0905.ch009](https://doi.org/10.1021/bk-2005-0905.ch009),
-   `deroos2005.pdf`: cited for quantified thiols from cysteine + carbonyls and for dilute- vs concentrated-medium routes
-   (the cysteine-ARP step the sulfur lane lacks). Book chapter: may need library access.
-3. **Yaghmur 2002** JAFC, furfural-cysteine in microemulsions, [10.1021/jf011158l](https://doi.org/10.1021/jf011158l),
-   `yaghmur2002.pdf`: FFT yield vs a water reference; the earlier paper of the group whose 2005 paper sets
-   `YAGHMUR_FFT_SHARE_CEILING`.
-4. **Mandin 1999** JAFC, potato-like models, [10.1021/jf981277+](https://doi.org/10.1021/jf981277+), `mandin1999.pdf`:
-   linoleic acid raising DMDS/DMTS 13-19x and methional formation; a methionine-lane check.
-5. **Gao 2020** Food Chem, tilapia hydrolysate + xylose + cysteine RSM, [10.1016/j.foodchem.2020.127353](https://doi.org/10.1016/j.foodchem.2020.127353),
-   `gao2020b.pdf`: FFT rising with temperature 150-190 °C; a directional matrix point, weakest of the five.
-
-MAYBE, in order: Yang 2015 (`yang2015.pdf`, hexose twin of Xu 2011), Cannon 2023 (`cannon2023.pdf`, no contexts but an
-abstract that says quantified), Zou 2019 (`zou2019.pdf`, free vs peptide-bound cysteine as H2S donor), Fanun 2001
-(`fanun2001.pdf`, microemulsion rate), Gasior 2021 (`gasior2021.pdf`, FFT by SIDA in roasted goose), Du 2024 LWT
-(`du2024b.pdf`, 3 contexts only), Qi 2022 (replace the wrong `qi2022.pdf`).
+12 candidates; the list is kept privately.
 
 ## Q: cited for a quantitative result (13)
 

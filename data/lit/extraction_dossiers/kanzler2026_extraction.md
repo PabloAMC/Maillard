@@ -18,7 +18,7 @@ renders (±3 %). Arithmetic: scratchpad `tools/sweep_fits.py` (maillard env, `-I
 
 | field | value as printed |
 |---|---|
-| Authors | **Clemens Kanzler** (corresponding, clemens.kanzler@tu-berlin.de), Johann Falkenhagen, Tatjana Rüger, Leon Valentin Mier, Sascha Rohn |
+| Authors | **Clemens Kanzler** (corresponding), Johann Falkenhagen, Tatjana Rüger, Leon Valentin Mier, Sascha Rohn |
 | Affiliation | TU Berlin, Institute of Food Technology and Food Chemistry, Dept. of Food Chemistry and Analysis, Kaiserin-Augusta-Allee 14, 10553 Berlin |
 | Venue | *Food Chemistry* **529** (2026) 151175 |
 | DOI | **10.1016/j.foodchem.2026.151175** (printed p. 1) — matches the brief |

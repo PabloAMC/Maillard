@@ -22,7 +22,7 @@ exists and is a *different* paper by the same group (Bi 2022 cites "Guo et al. 2
 | field | value |
 |---|---|
 | Title | "Binding of aroma compounds with soy protein isolate in aqueous model: Effect of preheat treatment of soy protein isolate" |
-| Authors | **Jun Guo** (a,b,c), **Zhiyong He** (a,c), **Shengfang Wu** (a,c), **Maomao Zeng** (a,c, corresponding, mmzeng@jiangnan.edu.cn), **Jie Chen** (a,c, corresponding, chenjie@jiangnan.edu.cn). (a) State Key Laboratory of Food Science and Technology, and School of Food Science and Technology, Jiangnan University, Wuxi 214122, Jiangsu, PR China; (b) Department of Chemistry and Material Engineering, Chizhou University, Chizhou 247100, PR China; (c) International Joint Laboratory on Food Safety, Jiangnan University |
+| Authors | **Jun Guo** (a,b,c), **Zhiyong He** (a,c), **Shengfang Wu** (a,c), **Maomao Zeng** (a,c, corresponding), **Jie Chen** (a,c, corresponding). (a) State Key Laboratory of Food Science and Technology, and School of Food Science and Technology, Jiangnan University, Wuxi 214122, Jiangsu, PR China; (b) Department of Chemistry and Material Engineering, Chizhou University, Chizhou 247100, PR China; (c) International Joint Laboratory on Food Safety, Jiangnan University |
 | Venue | Food Chemistry **290** (2019) **16-23** |
 | DOI | **`https://doi.org/10.1016/j.foodchem.2019.03.126`** — printed at the foot of p. 16, exactly as given here |
 | Dates | Received 22 October 2018; received in revised form 22 March 2019; accepted 24 March 2019; available online 25 March 2019. 0308-8146 / © 2019 Elsevier Ltd |

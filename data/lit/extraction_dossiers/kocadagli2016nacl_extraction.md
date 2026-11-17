@@ -14,7 +14,7 @@ ACS cover page and the first page of the manuscript body, both of which are clea
 |---|---|---|
 | file on disk | `data/articles/Kocada2016.pdf` | **the same file** `kocadagli2016jafc_extraction.md` §0 names as its source |
 | Title | "Effect of sodium chloride on α-dicarbonyl compounds and 5-hydroxymethyl-2-furfural formations from glucose under caramelization conditions – A multiresponse kinetic modelling approach" | **identical** to the title in `kocadagli2016jafc_extraction.md` §0 |
-| Authors | Tolgahan Kocadağlı, Vural Gökmen (corresponding, vgokmen@hacettepe.edu.tr) — Food Quality and Safety (FoQuS) Research Group, Department of Food Engineering, Hacettepe University, 06800 Beytepe Campus, Ankara, Turkey | identical |
+| Authors | Tolgahan Kocadağlı, Vural Gökmen (corresponding) — Food Quality and Safety (FoQuS) Research Group, Department of Food Engineering, Hacettepe University, 06800 Beytepe Campus, Ankara, Turkey | identical |
 | Venue | J. Agric. Food Chem., **Just Accepted Manuscript**, web publication date 30 July 2016 | identical |
 | DOI as printed | `10.1021/acs.jafc.6b01862` | **identical** |
 | **Is this a third Kocadağlı 2016 paper?** | **NO.** | **It is `kocadagli2016jafc_extraction.md` under the file name the brief gave it.** |

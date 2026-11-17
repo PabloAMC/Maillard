@@ -146,7 +146,7 @@ item carries the per-treatment hexanal values.
 So the retrieval is worth doing but is **not sufficient on its own**: S2 and Fig. S1 are both needed
 for a fit and neither is on disk, while the eleven numbers behind Fig. 4 most likely exist only in the
 authors' own records. **The reliable route is a request to the corresponding author**
-(Marianne N. Lund, mnl@food.ku.dk), asking for the numeric means and standard deviations behind
+(Marianne N. Lund), asking for the numeric means and standard deviations behind
 Fig. 4 together with an unheated control. Anyone pursuing this should fetch the supplementary file
 too, but should not expect it to close the gap by itself. Even with them, reasons 2–6 above mean any
 resulting barrier must carry a wide band and be treated as a weak-dependence data point, not as an

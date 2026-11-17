@@ -1,6 +1,6 @@
-# The papers the model rests on, and the overlap with the WUR reading list
+# The papers the model rests on, and the overlap with an expert reading list
 
-*Written 2026-10-27 after Bei Wang (Wageningen University) shared a reading list of 24 papers on volatile
+*Written 2026-10-27 after an outside expert shared a reading list of 24 papers on volatile
 formation from amino acids, sugars, thiamine and glutathione. Counts are the repository's own: rate
 constants taken from a paper, fit rows a calibration was tuned on, benchmark pots the model is scored
 against, and directional claims it is scored on (`build_thiol_sink_figures.paper_usage_counts`; every
@@ -8,7 +8,7 @@ paper and what is taken from it: [SOURCES.md](SOURCES.md)).*
 
 ## 1. The fifteen papers the model rests on most
 
-| # | paper | records | what the model takes | on the WUR list |
+| # | paper | records | what the model takes | on the expert list |
 | ---: | --- | ---: | --- | :---: |
 | 1 | Hofmann & Schieberle 1998 (cysteine + sugars, isotope dilution) | 77 | 41 fit rows, 23 benchmark pots, 13 claims | |
 | 2 | Kang et al. 2026 (cysteine–xylose, TTCA) | 14 | fit rows | |
@@ -26,12 +26,12 @@ paper and what is taken from it: [SOURCES.md](SOURCES.md)).*
 | 14 | Zhang et al. 2024 | 6 | fit rows, claims | |
 | 15 | Ni et al. 2021 | 6 | claims | |
 
-Further down the same ranking, also on the WUR list: **Cerny 2007 (LWT, origin of carbons)** — a fit row (the
+Further down the same ranking, also on the expert list: **Cerny 2007 (LWT, origin of carbons)** — a fit row (the
 54:46 thiamine:xylose carbon split of MFT) and two hold-outs since wave B2; **Cerny & Briffod 2007 (JAFC,
 pH)** — a claim and fit-system conditions; **Meynier & Mottram 1995** — the conditions of the two pH claims
 PH-01/02.
 
-## 2. The WUR list against the corpus
+## 2. The expert list against the corpus
 
 24 unique papers. **8 were already known to the corpus (33 %); 5 had been read.** Two of the eight were on
 disk without an extraction record and were read on 2026-10-27 (Wang, Yang & Song 2012; Cerny 2007 LWT).

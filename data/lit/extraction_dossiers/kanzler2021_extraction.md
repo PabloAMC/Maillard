@@ -18,7 +18,7 @@ HRMS tables S-1 to S-3, Kendrick plots) not on disk.
 
 | field | value as printed |
 |---|---|
-| Authors | **Clemens Kanzler** (corresponding, clemens.kanzler@tu-berlin.de), Felix Wustrack, Sascha Rohn |
+| Authors | **Clemens Kanzler** (corresponding), Felix Wustrack, Sascha Rohn |
 | Affiliation | Technische Universität Berlin, Institute of Food Technology and Food Chemistry, Dept. of Food Chemistry and Analysis, 13355 Berlin |
 | Venue | *J. Agric. Food Chem.* **69** (2021) 11960-11970 |
 | DOI | 10.1021/acs.jafc.1c04594 |

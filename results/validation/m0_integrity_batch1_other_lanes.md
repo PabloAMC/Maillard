@@ -13,7 +13,7 @@
 > `src/`, the registers, the inventory, cases or preregs was edited. Built on `origin/main` at `4174ed8d`.
 >
 > **Blinding.** No blind or reserved dataset was read. Excluded: the Deng 2022 half of MF-31 (M3 phase 2 reserved);
-> the E13 / E14 TEST studies and Lee 2024 (MF-34); hofmann2000b Figs. 2-3; B59b hold-outs; WUR. Five of the misfit
+> the E13 / E14 TEST studies and Lee 2024 (MF-34); hofmann2000b Figs. 2-3; B59b hold-outs; the outside blind test. Five of the misfit
 > rows (Leitzen "Steinhagen", Lin 2021 "Chang", Ye 2024, Lin 2022, Schibilsky) live in `maillard_path` hold-out bundles.
 > Those bundles are scored on the public panel and their values are printed in `core_panel_scores.md`, so they are SEEN.
 > Following the inventory's Batch 0 rule, only their methods and the scored cells (plus the control or unheated

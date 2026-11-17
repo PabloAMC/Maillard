@@ -22,7 +22,7 @@ lives in S3 and S4, **the entire aroma dataset is off disk**, and Figure 1 (acry
 | field | value |
 |---|---|
 | Title | "Effect of extrusion parameters and feed composition on physical characteristics, aroma profile and acrylamide content in pea protein-enriched corn extrudates" |
-| Authors | Neslihan Göncüoğlu Taş ᵃ, Dimitris P. Balagiannis ᵇ, Sameer Khalil Ghawi ᵇ, Vural Gökmen ᵃ, **Jane K. Parker ᵇ (corresponding, j.k.parker@reading.ac.uk)**. ᵃ Food Quality and Safety (FoQuS) Research Group, Department of Food Engineering, Hacettepe University, 06800 Beytepe, Ankara, Türkiye. ᵇ Department of Food and Nutritional Sciences, University of Reading, Whiteknights, Reading RG6 6DZ, UK |
+| Authors | Neslihan Göncüoğlu Taş ᵃ, Dimitris P. Balagiannis ᵇ, Sameer Khalil Ghawi ᵇ, Vural Gökmen ᵃ, **Jane K. Parker ᵇ (corresponding)**. ᵃ Food Quality and Safety (FoQuS) Research Group, Department of Food Engineering, Hacettepe University, 06800 Beytepe, Ankara, Türkiye. ᵇ Department of Food and Nutritional Sciences, University of Reading, Whiteknights, Reading RG6 6DZ, UK |
 | Venue | **Food Chemistry: X 36 (2026) 104019**, part of the special issue "Acrylamide Research". Received 10 February 2026, revised 1 May 2026, accepted 21 May 2026, online 22 May 2026 |
 | DOI | `10.1016/j.fochx.2026.104019` |
 | Licence | CC BY 4.0, open access |

@@ -199,37 +199,13 @@ Not found: any measured air/water partition (at any temperature) for 2-methyl-3-
 
 ## Ranked DOWNLOAD list (15)
 
-Ranked by how directly the paper fills a declared gap in the model (a constant that is now estimated or assumed, a wave that
-names the need) and by how certain I am that the number is in it. Suggested file names follow the `data/articles/` convention;
-none collides with an existing file.
-
-| rank | var | paper | DOI | file name | why |
-|---|---|---|---|---|---|
-| 1 | V7 | Fernández-Prini 2003 | [10.1063/1.1564818](https://doi.org/10.1063/1.1564818) | `fernandezprini2003.pdf` | evaluated H2S kH(T) from 0 °C to near the critical point; tests the constant-ΔH extrapolation in `henry_constants.yml` at 100-150 °C |
-| 2 | V3 | Morales 1997 | [10.1021/bp9700519](https://doi.org/10.1021/bp9700519) | `morales1997.pdf` | soy 7S/11S Tg vs moisture: B54's glass gate for soy |
-| 3 | V3 | Bengoechea 2007 | [10.1016/j.jcs.2006.08.011](https://doi.org/10.1016/j.jcs.2006.08.011) | `bengoechea2007.pdf` | soy and gluten Tg vs moisture by one method |
-| 4 | V3 | Kalichevsky 1992 | [10.1016/s0141-8130(05)80038-8](https://doi.org/10.1016/s0141-8130(05)80038-8) | `kalichevsky1992.pdf` | gluten Tg vs water (Gordon-Taylor) |
-| 5 | V4 | Cuevasanta 2012 | [10.1371/journal.pone.0034562](https://doi.org/10.1371/journal.pone.0034562) | `cuevasanta2012.pdf` | measured H2S oil/water partition (2.1) replaces the assumed `Kfat: 1.0`; open access |
-| 6 | V7 | Suleimenov 1994 | [10.1016/0016-7037(94)90022-1](https://doi.org/10.1016/0016-7037(94)90022-1) | `suleimenov1994.pdf` | primary H2S solubility 20-320 °C behind rank 1 |
-| 7 | V4 | O'Keefe 1991 | [10.1111/j.1365-2621.1991.tb05386.x](https://doi.org/10.1111/j.1365-2621.1991.tb05386.x) | `okeefe1991.pdf` | protein-binding constants at several temperatures (soy glycinin, β-conglycinin) |
-| 8 | V4 | Guo 2023 | [10.1016/j.foodhyd.2023.109314](https://doi.org/10.1016/j.foodhyd.2023.109314) | `guo2023.pdf` | alkylpyrazine binding to pea protein (a model target on the target matrix) |
-| 9 | V4 | Buttery 1973 | [10.1021/jf60186a029](https://doi.org/10.1021/jf60186a029) | `buttery1973.pdf` | measured oil/water partition for a sourced `Kfat` (aldehydes and others) |
-| 10 | V6 | Saunders 1966 | [10.1002/jsfa.2740170604](https://doi.org/10.1002/jsfa.2740170604) | `saunders1966.pdf` | citrate vs phosphate at 121 °C and ~100 °C: the only two-temperature buffer comparison found (corrected 2026-11-01: the ~100 °C reflux has phosphate vs none only, no citrate arm; saunders1966 dossier sec. 6) |
-| 11 | V6 | Huang 2011 | [10.1016/j.lwt.2011.03.016](https://doi.org/10.1016/j.lwt.2011.03.016) | `huang2011.pdf` | phosphate-buffered sugar degradation at 80/100/120 °C, acetic/formic yields (B53 sugar-side term, B57) |
-| 12 | V1 | van der Sman 2007 | [10.1016/j.meatsci.2007.02.014](https://doi.org/10.1016/j.meatsci.2007.02.014) | `vandersman2007.pdf` | the reference water-transport model of cooking meat (Flory-Rehner); measured T and weight loss |
-| 13 | V1/V2 | Feyissa 2013 | [10.1016/j.meatsci.2012.12.003](https://doi.org/10.1016/j.meatsci.2012.12.003) | `feyissa2013.pdf` | validated surface/core T and moisture vs time in roasting: a ready heating-and-drying programme |
-| 14 | V2 | Pan 2000 | [10.1016/s0260-8774(00)00063-7](https://doi.org/10.1016/s0260-8774(00)00063-7) | `pan2000.pdf` | measured contact heat flux and surface/centre T of grilled patties: the pan/grill programme proxy |
-| 15 | V5 | Bredie 2002 | [10.1021/jf0111662](https://doi.org/10.1021/jf0111662) | `bredie2002.pdf` | extrusion volatiles vs barrel T and pH (the pH state carried into extrusion) |
-
-Next in line (MAYBE, in order): Kondjoyan 2016 (crust + HAA), Hermansson 1977 (SPI isotherms), Ayranci 2005 (legume protein
-isolate GAB, pea proxy), Kyomugasho 2020 (bean state diagrams), Rausch 2009 (open-access extrusion thesis), Lipinski 2025
-(acrylamide in extrusion), Kutsuna 2021 (hexanal Kaw and hydration vs T), Bredie 1998, Moon 2007, Reynolds 1959 (registry gap).
+25 candidates; the list is kept privately.
 
 ## What the search says about the programme
 
 - **B54 (water activity)** can proceed for soy and gluten matrices with measured Tg-vs-moisture curves (ranks 2-4) and an SPI
   isotherm (Hermansson 1977); for pea it needs either a declared proxy (cowpea isolate, bean fractions) or a measurement. That
-  missing pea curve is a cheap DSC + DVS experiment and is worth asking WUR for.
+  missing pea curve is a cheap DSC + DVS experiment and is worth asking a partner laboratory for.
 - **Volatile stripping (backlog)** is limited by MFT/FFT volatility, which no one has measured. H2S is fully covered (ranks 1, 5, 6).
   An open-pot model would combine Kaw(T) with a gas-liquid mass-transfer coefficient (Marin 1999 class), and its predictions for
   the thiols would inherit the estimated `Kaw_25c` bands.

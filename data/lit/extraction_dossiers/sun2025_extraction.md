@@ -22,7 +22,7 @@ dossier.
 | field | value |
 |---|---|
 | Title | "Interactions of pea protein with three sulfur-containing flavor compounds: Insights into molecule structural, non-covalent, and binding mechanisms" |
-| Authors | Hailan Sun, Jingyi Liang, Yirong Qian, Xiao Chen, Liyan Zhao (corresponding, zhlychen@njau.edu.cn) — College of Food Science and Technology, Nanjing Agricultural University, Nanjing 210095, China |
+| Authors | Hailan Sun, Jingyi Liang, Yirong Qian, Xiao Chen, Liyan Zhao (corresponding) — College of Food Science and Technology, Nanjing Agricultural University, Nanjing 210095, China |
 | Venue | Food Hydrocolloids **166** (2025), Article **111326**. Received 21 January 2025; revised 5 March 2025; accepted 5 March 2025; online 7 March 2025 |
 | DOI | **`https://doi.org/10.1016/j.foodhyd.2025.111326`** — printed exactly so in the footer of p. 1 and again under "Appendix A. Supplementary data" on p. 12 |
 | Funding | NSFC Youth Program 32402279; NSFC 32472477; PAPD (Priority Academic Program Development of Jiangsu Higher Education Institutions) |

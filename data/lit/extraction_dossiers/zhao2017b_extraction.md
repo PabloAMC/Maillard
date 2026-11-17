@@ -14,7 +14,7 @@ digitised from 400-dpi crops** (scratchpad `img/zhA4-3.png` = 2a, `zhB-4.png` = 
 |---|---|
 | Title (Chinese) | 脂肪醛对"半胱氨酸-木糖"美拉德反应进程及肉香物质形成的影响 |
 | Title (English, as printed) | "Effect of Aliphatic Aldehydes on Maillard Reaction between Cysteine and Xylose and Meaty Flavor Formation" ✔ |
-| Authors | ZHAO Jian, ZHAO Mengyao, CAO Changchun, ZHEN Dawei, WANG Jiaxin, LI Li, **XIE Jianchun*** (corresponding, xjchun@th.btbu.edu.cn) |
+| Authors | ZHAO Jian, ZHAO Mengyao, CAO Changchun, ZHEN Dawei, WANG Jiaxin, LI Li, **XIE Jianchun*** (corresponding) |
 | Affiliations | Beijing Advanced Innovation Center for Food Nutrition and Human Health / Beijing Laboratory for Food Quality and Safety / Beijing Key Laboratory of Flavor Chemistry, BTBU; Zhen: Taiyuan University of Technology |
 | Venue | 食品科学 Food Science **38**(20), 63-69 (2017) ✔; received 2017-03-23 |
 | DOI as printed | **10.7506/spkx1002-6630-201720010** in the citation block (p. 64) ✔ matches the brief. The line under the keywords on the same page prints **"DOI:10.7506/spkx1002-6630-2017200010"** (one extra 0) — a typesetting slip; the citation-block form is the one consistent with the article number 1002-6630(2017)20-0063-07. |

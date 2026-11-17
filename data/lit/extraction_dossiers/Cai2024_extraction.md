@@ -19,7 +19,7 @@ verification render of Table 1.
 | received/accepted | "Received 12 December 2023; Received in revised form 27 May 2024; Accepted 1 June 2024; Available online 13 June 2024" |
 | copyright | "0963-9969/© 2024 Published by Elsevier Ltd." |
 | affiliation | College of Food Science and Nutritional Engineering, China Agricultural University; National Engineering Research Center for Fruit & Vegetable Processing; Key Laboratory of Fruit & Vegetable Processing, Ministry of Agricultural and Rural Affairs; Beijing Key Laboratory for Food Non-thermal Processing, Beijing 100083, PR China |
-| corresponding | Jihong Wu, wjh7268@cau.edu.cn, No.17 Qinghua East Road, Haidian District, 100083, Beijing |
+| corresponding | Jihong Wu, No.17 Qinghua East Road, Haidian District, 100083, Beijing |
 | funding | National Key Research and Development Program of China, No. 2021YFD2100101 |
 | PDF character | born-digital (Creator: Elsevier; Producer: Acrobat Distiller 8.1.0). Clean embedded text layer; no OCR. |
 

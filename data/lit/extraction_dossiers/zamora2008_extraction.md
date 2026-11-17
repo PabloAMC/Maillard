@@ -17,7 +17,7 @@
 | Authors | Rosario Zamora, Emerenciana Gallardo, Francisco J. Hidalgo* |
 | Venue | *J. Agric. Food Chem.* 2008, 56 (17), 7970–7975 |
 | DOI | 10.1021/jf801409w (PMID 18707112) |
-| Affiliation | Instituto de la Grasa, CSIC, Seville; corresponding fhidalgo@ig.csic.es |
+| Affiliation | Instituto de la Grasa, CSIC, Seville; corresponding F. J. Hidalgo |
 | PDF character | 6 pages; Table 1 (retention indices), Figures 1–5 |
 
 ---

@@ -173,7 +173,7 @@
   repository files.
 
 - **A headline number is only as good as its definition; read the test before repeating it.** On
-  2026-10-27 the owner was told, for a meeting with WUR, that "63 unsourced records are used when the model
+  2026-10-27 the owner was told, for a meeting with an outside laboratory, that "63 unsourced records are used when the model
   runs", repeated from README. The test behind it counted any record under `data/lit/` as "reaching runtime";
   a trace showed the front door opens none of those files. Rule: before quoting a repository statistic to
   anyone outside, open the test or generator that pins it and check that its definition measures what the

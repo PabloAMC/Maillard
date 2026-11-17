@@ -15,7 +15,7 @@ Tables S-1 to S-12) read the same day into **sec. 8**.
 
 | field | value as printed |
 |---|---|
-| Authors | **Leon Valentin Bork** (corresponding, l.bork@tu-berlin.de), Nicolas Proksch, Sascha Rohn, Clemens Kanzler |
+| Authors | **Leon Valentin Bork** (corresponding), Nicolas Proksch, Sascha Rohn, Clemens Kanzler |
 | Affiliation | TU Berlin, Institute of Food Technology and Food Chemistry, Dept. of Food Chemistry and Analysis |
 | Venue | *J. Agric. Food Chem.* **2024**, 72(3), 1708-1720 (virtual special issue ICP2023) |
 | DOI | **10.1021/acs.jafc.3c07168** (printed on every page) — matches the brief |

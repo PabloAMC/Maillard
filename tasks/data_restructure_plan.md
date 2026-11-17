@@ -905,7 +905,7 @@ literature rounds on 2026-10-28 found that the missing rate data mostly do not e
    trunk error survived.
 5. **Our own designed data where the literature is silent.** A SIDA time-course study chosen by the
    value-of-information ranking: ribose + cysteine in phosphate at 3 T x 3 pH, tracking Cys, TTCA, NF, furfural,
-   H2S, MFT and FFT. With the WUR collaboration this is reachable, and it should outrank further literature mining.
+   H2S, MFT and FFT. With a partner laboratory this is reachable, and it should outrank further literature mining.
 6. **Beats the baseline, or says so.** On the same rows the engine must beat a compound's TYPICAL YIELD (the
    median yield per limiting precursor in the other studies, leave-one-study-out). If it does not, the mechanism
    is not paying for itself, and the headline says so.
@@ -926,7 +926,7 @@ them"), after an independent first-time review of the repository:**
   ships.
 - **Order:** (1) corrections from the review: leakage audit, asserted pH convergence, a point prediction
   coherent with its interval, directional noise thresholds, stale model card and Makefile; (2) B61 and B62
-  finish; (3) the WUR protocol draft (C8); (4) B59 and every other new mechanism on hold until (3) exists;
+  finish; (3) the designed-experiment protocol draft (C8); (4) B59 and every other new mechanism on hold until (3) exists;
   (5) a slower cadence: fewer, larger commits, README updates only when a wave ships.
 
 **Corrections from the independent review (2026-10-28), status:**
@@ -946,7 +946,7 @@ them"), after an independent first-time review of the repository:**
   the POINT uses the unidentified lumped 64 kJ/mol, while the envelope draws the measured carbohydrate or sulfur
   class (median ~101-104). Off 145 °C the point sits in the prior's lower tail (Yiltirak and Zhou FFT points
   1-1.4 dex above their envelope medians). The evidence favours the class. Moving the point there is a refit of
-  every off-145 °C prediction, so it is a wave (candidate B63), held with B59 until the WUR protocol exists. The
+  every off-145 °C prediction, so it is a wave (candidate B63), held with B59 until the designed-experiment protocol exists. The
   README states the incoherence until then.
 
 **Decisions revised after the second review (owner, 2026-10-28 afternoon: "Plan thoughtfully and execute").**
@@ -958,7 +958,7 @@ trajectory in B60, the thermal history now). Agreed, with the owner's amendments
   from 20 to 145 °C"; the 1998 paper behind the fit's 145 °C rows writes "20 min at 145 °C". At the B60 constants
   the reading moves the anchor fit rows by up to 1.9 dex (furfural + H2S → FFT). Kind 1 data correction + kind 2
   refit, before B63. Prereg `results/validation/kinetic_core_b64_prereg.md`.
-- **D2 B59 straight after B64, on the literature alone.** Owner: operate as if the WUR protocol did not exist.
+- **D2 B59 straight after B64, on the literature alone.** Owner: operate as if the designed-experiment protocol did not exist.
   B59's fit rows are Cao 2017's time courses; nothing waits for designed data.
 - **D3 B59's trunk is the shared trunk** (pentoses and hexoses, any amine including cysteine, asparagine and bound
   lysine), so the next rebuild is the last one. Lane composition stays off until it is verified.
@@ -1118,7 +1118,7 @@ prioritized appropriately"). Priority = flux the change grounds × how sure the 
   Boekel 2001/2002c (sugars at 90-130 °C, pH 6.8); Cao's, Kang's and Zhou's pH trajectories as rows. (d) Zhai 2019
   Fig. 3B dicarbonyls and Zhao 2017's cysteine pool as rows (they bear directly on `k_dpo_ddp`). (e) Accuracy by
   leave-one-laboratory-out (one Gauss-Newton step from the optimum, verified exactly on 2-3 labs); confirmation only
-  by blind prospective tests (WUR). (f) Posterior at the final optimum by importance sampling from the Laplace fit
+  by blind prospective tests. (f) Posterior at the final optimum by importance sampling from the Laplace fit
   (2-5 thousand runs), effective sample size reported, adaptive MCMC on misbehaving directions as the fallback; the
   priors listed in the choices register. First step: a data inventory of the sulfur lane (every measurement with its
   conditions, method class, lab, series; simulable or not).
@@ -1188,7 +1188,7 @@ is accepted by its evidence audit (`WAVES.md`, "Evidence decides, scores diagnos
   engine, replacing `ph_state.B51`, `PH_NODE_GRID`, `PH_FIXED_POINT`, `FLUX_BUDGET`, `TTCA_FORMATION`,
   `NF_HYDROXIDE_DECAY` and `FURFURAL_BARRIERS` as globals. Frozen waves become configs, not monkeypatches.
 - [ ] **C8 Designed experiment (targets 4, 5).** A one-page protocol from the value-of-information ranking, for
-  the WUR conversation (draft only; Pablo sends). *Drafted 2026-10-28:
+  a partner laboratory (draft only; Pablo sends). *Drafted 2026-10-28:
   `docs/guides/DESIGNED_TIMECOURSE_PROTOCOL_DRAFT.md`. Ribose + Cys, 3 T x 3 pH time courses with TTCA,
   Cys-Amadori, norfuraneol, furfural, H2S and SIDA thiols, plus two fed arms (furfural + Na2S at 3 T;
   norfuraneol alone at pH 6/7). Awaiting Pablo's review.*
@@ -2912,7 +2912,7 @@ PDFs read by eye into dossiers. Brief: [docs/guides/EXPERIMENTS_BRIEF.md](../doc
 
 ### The last 84 unsourced records (2026-10-27, owner: "Do them all")
 
-Question from the WUR meeting: how reliable are the data? The README answered "84 records
+Question from an outside reader: how reliable are the data? The README answered "84 records
 `no_verifiable_source`, 63 consumed at runtime". The "runtime" figure was a location proxy (any
 record under `data/lit/` or `results/literature/`), never a trace.
 
@@ -3088,7 +3088,7 @@ each wave's pre-registration). Order and status:
   only rate constants, which a reading agent has already compared at step level (mixed: the slope wins
   on DFG → 3-DG); Davidek's water series is seen; Davidek's phosphate series is B53's fit source, and
   B53's hold-out (Mottram & Nobrega 2002) is a sulfur-lane pot whose fit pots all sit in 0.5 M phosphate,
-  so the buffer term means a sulfur refit. Each needs a new measurement: the WUR dough data (with pH), or
+  so the buffer term means a sulfur refit. Each needs a new measurement: a partner laboratory's data (with pH), or
   a Davidek-style DFG degradation in water vs phosphate at 120–145 °C.
   Original entry (prereg `results/validation/kinetic_core_b51_prereg.md`):
   Six switches in `ph_state.B51`: GKL 2002 ionisation heat capacities; GKL cysteine constants (the B2
@@ -3227,7 +3227,7 @@ each wave's pre-registration). Order and status:
   in the corpus); protein-thiol binding as a candidate identity of the thiol sink in matrices; a helper
   that builds heat-up ramps from a process description.
 
-### Reading list from the WUR collaboration (Bei Wang, 2026-10-27): overlap with the corpus
+### An expert reading list (2026-10-27): overlap with the corpus
 
 24 unique papers (26 entries, two duplicated), on volatile formation from amino acids, sugars, thiamine and
 glutathione. Matched by DOI, then by first author + year with each candidate PDF's first-page DOI checked.
@@ -3238,7 +3238,7 @@ glutathione. Matched by DOI, then by first author + year with each candidate PDF
 | read (dossier) | Cerny & Briffod 2007 JAFC (`cerny2007`); Meynier & Mottram 1995 (`meynier1995`); Hou 2017 (`hou2017`); Liu 2023 LWT (`liu2023b`); Wang 2026 FRI (`wang2026`) |
 | PDF on disk, unread | Wang, Yang & Song 2012 (`wang2012.pdf`, glutathione–xylose); Cerny 2007 LWT (`cerny2007b.pdf`, carbon origin) — dossiers being written 2026-10-27 |
 | cited, not on disk | Cerny 2015 (book chapter; quoted by claims PH-01/PH-02) |
-| not in the corpus | priority A (quantitative, could anchor or test a step): Zheng et al. 1997 (furaneol + cysteine / glutathione / H2S, 10.1021/jf960624h); Cerny & Guntz-Dubini 2013 (cysteine-S-conjugates, 10.1016/j.foodchem.2013.04.043; read 2026-10-27: identification only, formed from furfuryl alcohol not from free thiols, so it neither identifies nor bounds the thiol sink); Modi, Linforth & Taylor 2008 (pH AND water activity on meaty aroma, the a_w axis the sulfur lane refuses, 10.3923/ajft.2008.68.78); Farmer, Mottram & Whitfield 1989 (cysteine–ribose–phospholipid, 10.1002/jsfa.2740490311); Martins et al. 2010 (precursor synergy/competition, 10.1021/bk-2010-1042.ch008); Cha, Debnath & Lee 2019 (α-dicarbonyls and volatiles, 10.1038/s41598-019-41824-8). Priority B (Xie / Ho labs, ARP and TTCA intermediates): Cao 2017 (10.1016/j.foodres.2017.06.012); Zhao 2019 (10.1016/j.foodchem.2018.08.096); Zhai 2019 (10.1021/acs.jafc.9b04374); Zhai 2023 (10.1021/acs.jafc.3c06506); Zhang 2025 lysine (10.1016/j.foodchem.2024.142529); Du 2025 (10.1016/j.foodres.2024.115645); Xu 2013 peptide–xylose (10.1016/j.foodres.2013.07.066). Priority C (reviews / identification only): Sun 2022, Sohail 2022, Garbusov 1976, Cerny 2015 |
+| not in the corpus at the time | 16 candidates (priority A: quantitative; B: Xie / Ho-lab intermediates; C: reviews); the list is kept privately. Most were read later the same day (below) |
 - **2026-10-27, read:** `wang2012` (glutathione–xylose; directional tests only, no rates; MFT essentially all
   thiamine-derived) and `cerny2007b` (Cerny 2007 LWT, carbon origin). `cerny2007b` had been USED since wave
   B2 (the 54:46 MFT carbon split is a fit row; two hold-outs) with no dossier: `k3_final_parameter_inventory.md`
@@ -3273,14 +3273,10 @@ one dossier (a small alias table for the renamed ones) or to a triage line that 
   glutathione, xylose and ribose added to `compounds.yml`. Open: the 34 `pending` PDFs (33 downloaded
   2026-10-27 late, plus `Liu2023.pdf`, the pea-protein Food Chem paper never read).
 - **2026-10-27, from `sohail2022` (review) — candidate primary papers quantifying meaty thiols in cooked
-  meats, not in the corpus:** Fan et al. 2018 JAFC 10.1021/acs.jafc.8b03297 (stewed chicken broth; top);
-  Guth & Grosch 1994 JAFC 10.1021/jf00048a039 (stewed beef juice; quantities unverified); Liu et al. 2019 JAFC
-  10.1021/acs.jafc.9b01564; Du et al. 2020 FFJ 10.1002/ffj.3621; Gąsior et al. 2021 JAFC
-  10.1021/acs.jafc.1c01475; Qi et al. 2022 Food Chem 10.1016/j.foodchem.2021.131111; Zhao et al. 2017 Food Chem
-  10.1016/j.foodchem.2017.01.011. Sohail's thresholds are all copied from van Gemert 2011 and six disagree
+  meats, not in the corpus:** 7 candidates; the list is kept privately. Sohail's thresholds are all copied from van Gemert 2011 and six disagree
   with the model's by 10–1000x (flagged in the dossier, not acted on). Merge into the citation-chaining
   search's ranked list (`docs/guides/LITERATURE_SEARCH_2026-10.md`).
-- **2026-10-27, network gaps found by reading Bei Wang's list (each a candidate kind-3 wave, pre-registered):**
+- **2026-10-27, network gaps found by reading the expert list (each a candidate kind-3 wave, pre-registered):**
   (a) **no forward Cys + pentose → TTCA step** (`sulfur.py` has only `r_ttca_cys` and `r_ttca_deg`): Zhang
   2025b (`zhang2025b`, cysteine–xylose 40/40 mM, 0.2 M phosphate pH 6.5, 120 °C) puts ~45 % of the cysteine
   in TTCA (Fig. 2, digitised), so the model treats all cysteine in a cysteine–pentose pot as free;
@@ -3289,7 +3285,7 @@ one dossier (a small alias table for the renamed ones) or to a triage line that 
   (c) the three Cerny 2007 LWT gaps above (sugar route to 3-mercapto-2-pentanone, methylthio carbon,
   thiamine sulfur to FFT at pH 5). Sun 2022's candidate list independently names four of the citation
   search's top class-A picks (Zhao 2018, Zhang 2020, Sun 2019, Wang 2019).
-- **2026-10-27, the rest of Bei Wang's list read** (`zheng1997`, `cerny2013`, `cerny2015`, `modi2008`,
+- **2026-10-27, the rest of the expert list read** (`zheng1997`, `cerny2013`, `cerny2015`, `modi2008`,
   `farmer1989`, `martins2010`, `cha2019`, plus the Xie/Ho-lab and review dossiers). Acted on: directional
   claims **PH-04 and PH-05 RETIRED** (kind-1 source corrections: the Cerny 2015 chapter, now on disk, does
   not say either; PH-05 had counted as an agree); the "bound-thiol sink" label on Cerny & Guntz-Dubini 2013

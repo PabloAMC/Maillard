@@ -14,7 +14,7 @@ layer; tables in English). All numbers from `pdftotext -raw`, Tables 2 and 5 che
 
 | field | value as printed |
 |---|---|
-| Authors | **HU Bin*** (binhu74@hotmail.com), WANG Sheng, XIE Fuwei, LIU Huimin — Zhengzhou Tobacco Research Institute of China National Tobacco Corporation |
+| Authors | **HU Bin***, WANG Sheng, XIE Fuwei, LIU Huimin — Zhengzhou Tobacco Research Institute of China National Tobacco Corporation |
 | Venue | *Chinese Journal of Chromatography* (色谱) **30**(3), 298-303, March 2012 |
 | DOI | **10.3724/SP.J.1123.2011.11014** (printed) — matches the brief |
 | Received | 8 Nov 2011 |

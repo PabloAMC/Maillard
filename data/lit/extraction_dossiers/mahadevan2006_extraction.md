@@ -16,7 +16,7 @@ printed · **[!]** flag.
 
 **Laboratory.** Department of Food Science, Queen's University Belfast (Mahadevan, PhD student) and Agriculture, Food
 and Environmental Science Division, **Agri-Food and Biosciences Institute (AFBI)**, Newforge Lane, Belfast;
-corresponding author **Linda Farmer** (linda.farmer@afbini.gov.uk). **Existing id `afbi_belfast_farmer`** ("AFBI
+corresponding author **Linda Farmer**. **Existing id `afbi_belfast_farmer`** ("AFBI
 Belfast (Farmer)") **fits** (P ~0.95): same corresponding author, institution and address as the key's evidence
 (Aliani 2013); the nucleotide and sugar HPLC methods are Aliani & Farmer 2002 / 2005 (refs 19, 20) [C]. Same-lab
 dossier: `aliani2013_extraction.md`. `farmer1989/1990/1992_extraction.md` are Farmer's AFRC Bristol (Mottram-era)

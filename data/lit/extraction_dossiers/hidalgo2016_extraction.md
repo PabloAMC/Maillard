@@ -22,7 +22,7 @@ table), `zamora2013_extraction.md` (Ea ladder; 2,4-decadienal under nitrogen 78.
 | Venue | *Food Chemistry* 209 (2016) 256–261 |
 | DOI | 10.1016/j.foodchem.2016.04.032 (PMID 27173560) |
 | Dates | received 10 Dec 2015; revised 8 Apr 2016; accepted 12 Apr 2016; online 13 Apr 2016 |
-| Affiliation | Instituto de la Grasa, CSIC, Seville; corresponding rzamora@ig.csic.es |
+| Affiliation | Instituto de la Grasa, CSIC, Seville; corresponding R. Zamora |
 | Funding | FEDER + Plan Nacional I+D, AGL2012-35627, AGL2015-68186-R |
 | PDF character | 6 pages; Tables 1–2; Figures 1–4 (Fig. 4 = Arrhenius plots); Supplementary Figs S-1 to S-5 not on disk |
 | Registry | DOI not in `data/keys/papers.yml` at time of reading |

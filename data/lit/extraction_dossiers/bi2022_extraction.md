@@ -23,7 +23,7 @@ dossier.
 | field | value |
 |---|---|
 | Title | "Non-covalent interactions of selected flavors with pea protein: Role of molecular structure of flavor compounds" |
-| Authors | Shuang Bi (BTBU), Xin Pan, Wentao Zhang, Zhuo Ma, Fei Lao, Qun Shen, Jihong Wu (corresponding, wjhcau@hotmail.com) — College of Food Science and Nutritional Engineering, China Agricultural University, Beijing 100083 |
+| Authors | Shuang Bi (BTBU), Xin Pan, Wentao Zhang, Zhuo Ma, Fei Lao, Qun Shen, Jihong Wu (corresponding) — College of Food Science and Nutritional Engineering, China Agricultural University, Beijing 100083 |
 | Venue | Food Chemistry 389 (2022) 133044. Received 20 January 2022, revised 27 March 2022, accepted 20 April 2022, online 22 April 2022 |
 | DOI | 10.1016/j.foodchem.2022.133044 |
 | Funding | National Key R&D Plan, 13th Five-Year Plan of China (2017YFD0401202) |

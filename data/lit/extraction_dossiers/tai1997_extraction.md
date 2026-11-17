@@ -14,7 +14,7 @@ text layer gives it). There are no figures. No Supporting Information exists for
 | field | value |
 |---|---|
 | Title | "Influence of Cysteine Oxidation on Thermal Formation of Maillard Aromas" |
-| Authors | Chao-Ying Tai, **Chi-Tang Ho** (corresponding, ho@aesop.rutgers.edu) |
+| Authors | Chao-Ying Tai, **Chi-Tang Ho** (corresponding) |
 | Affiliation | Department of Food Science, Cook College, New Jersey Agricultural Experiment Station, Rutgers, The State University of New Jersey, New Brunswick NJ |
 | Venue | J. Agric. Food Chem. **1997, 45 (9), 3586-3589**. Received 10 Apr 1997, revised and accepted 16 Jun 1997; ASAP abstract 1 Aug 1997 |
 | DOI as printed | **10.1021/jf970297t** — the PDF prints no "DOI" line (1997 ACS style); it prints the manuscript code **S0021-8561(97)00297-5** and the article id **JF970297T** (p. 3589), and the publisher stamp names `jf970297t.pdf`. ✔ matches the brief |

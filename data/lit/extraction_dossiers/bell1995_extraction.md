@@ -18,7 +18,7 @@ Acrobat-Capture OCR text layer was used only for prose and was **not** trusted f
 | Received / accepted | **Received 18 May 1995; accepted 24 June 1995** (p. 597) |
 | DOI | **10.1016/0963-9969(95)00052-6** ✔ matches the brief |
 | PII / ISSN line | `0963-9969(95)00052-6`; `0963-9969/96 $15.00 + 0.00` |
-| Affiliation | Nutrition and Food Science, **Auburn University, AL 36849, USA**; e-mail lbell@humsci.auburn.edu |
+| Affiliation | Nutrition and Food Science, **Auburn University, AL 36849, USA** |
 | Funding | Alabama Agricultural Experiment Station (**AAES Journal No. 10-955008**) + Auburn University Grant-in-Aid |
 | PDF | 7 pages, Acrobat 3.0 Capture (OCR over a clean scan); text layer usable for prose, unreliable for tabular digits |
 

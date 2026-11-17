@@ -19,7 +19,7 @@
 | **title** | **"NMR-Based Studies on Odorant−Melanoidin Interactions in Coffee Beverages"** | p. 15334, raster |
 | **authors** | **Michael Gigl, Thomas Hofmann, and Oliver Frank\*** (\* = corresponding) | p. 15334, raster |
 | affiliation | **all three: Chair of Food Chemistry and Molecular Sensory Science, Technische Universität München, Freising D-85354, Germany** | p. 15343 |
-| corresponding | **Oliver Frank**, `oliver.frank@tum.de`, Phone 49-8161/71-2910, Fax 49-8161/71-2949, ORCID `0000-0003-0437-5005`. Hofmann ORCID `0000-0003-4057-7165`. **Gigl has no ORCID printed.** | p. 15343 |
+| corresponding | **Oliver Frank**, ORCID `0000-0003-0437-5005`. Hofmann ORCID `0000-0003-4057-7165`. **Gigl has no ORCID printed.** | p. 15343 |
 | **DOI** | ★ **`10.1021/acs.jafc.1c06163`** — **raster-verified glyph-by-glyph on the p. 15334 footer.** Matches the brief exactly. | p. 15334 footer, raster |
 | journal | ***J. Agric. Food Chem.* 2021, 69, 15334−15344** (11 pages) — raster-verified in the "Cite This" box | p. 15334, raster |
 | **dates** | **Received: October 1, 2021 · Revised: November 22, 2021 · Accepted: November 23, 2021 · Published: December 7, 2021** | p. 15334 footer, raster |

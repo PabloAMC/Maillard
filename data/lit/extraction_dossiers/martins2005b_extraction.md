@@ -45,7 +45,7 @@ layer silently drops (see the DEFECT note in §4).
 | received / accepted | Received 17 May 2004; accepted 2 August 2004 |
 | affiliation | Product Design and Quality Management, Dept. of Agrotechnology and Food Sciences, Wageningen University, P.O. Box 8129, 6700 EV Wageningen, The Netherlands |
 | PDF character | born-digital (Elsevier / Acrobat Distiller 5.0.5 for Windows); text layer present but **systematically drops the minus sign in exponents and in negative numbers** — e.g. "1.1 × 10⁻⁵ ± 4 × 10⁻⁶" renders as "1.1 · 105 ± 4 · 106", and "−8.43 ± 0.91" renders as "8.43 ± 0.91". **Every sign in Tables 1–4 was re-verified against the page raster.** |
-| corresponding author | tiny.vanboekel@wur.nl |
+| corresponding author | M. A. J. S. (Tiny) van Boekel |
 | funding / acknowledgement | Fundação para a Ciência e Tecnologia (Portugal); "The authors also thank **Ruud van Gorp** for performing the heating experiment at constant pH." |
 
 ### PRE-EXISTING-COVERAGE FLAG — DOUBLE-COUNTING HAZARD

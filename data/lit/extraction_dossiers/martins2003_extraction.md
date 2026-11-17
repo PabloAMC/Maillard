@@ -37,7 +37,7 @@ cannot render.
 | received / accepted | Received 11 December 2002; accepted 11 April 2003 |
 | affiliation | Department of Agrotechnology and Food Sciences, Product Design and Quality Management Group, Wageningen University, P.O. Box 8129, 6700 EV Wageningen, The Netherlands |
 | PDF character | born-digital (Elsevier / Acrobat Distiller 4.05 for Windows); clean embedded text layer; the minus sign and the "±" glyph both degrade to `/` or `9/` in `pdftotext` output — every number below was re-verified against the page raster |
-| corresponding author | tiny.vanboekel@wur.nl |
+| corresponding author | M. A. J. S. (Tiny) van Boekel |
 | funding | Fundação para a Ciência e Tecnologia (Portugal) |
 
 ### PRE-EXISTING-COVERAGE FLAG — DOUBLE-COUNTING HAZARD

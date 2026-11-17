@@ -17,7 +17,7 @@ diagram) and 2 (GC-FID trace) not digitised (no kinetic content).
 
 | field | value as printed |
 |---|---|
-| Authors | Anan Yaghmur (doctoral thesis work), Abraham Aserin, **Nissim Garti*** (garti@vms.huji.ac.il) |
+| Authors | Anan Yaghmur (doctoral thesis work), Abraham Aserin, **Nissim Garti*** |
 | Affiliation | Casali Institute of Applied Chemistry, The Hebrew University of Jerusalem, 91904 Jerusalem, Israel |
 | Title (as printed) | "Furfural−Cysteine Model Reaction in Food Grade Nonionic Oil/Water Microemulsions for Selective Flavor Formation" [!: the brief's "nanostructured liquids vs water" describes the 2005 paper better; this paper has no quantitative water comparison] |
 | Venue | *J. Agric. Food Chem.* **2002**, **50** (10), **2878-2883** |

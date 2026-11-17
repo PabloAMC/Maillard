@@ -13,7 +13,7 @@ qualitative. No SI.
 | field | value |
 |---|---|
 | Title | "4-Hydroxy-5-Methyl-3(2H)-Furanone (HMFO) Contributes to Browning in the Xylose-Lysine Maillard Reaction System" |
-| Authors | Yoko Mikami, Miki Nakamura, Shinji Yamada, **Masatsune Murata** (corresponding, murata.masatsune@ocha.ac.jp) — Ochanomizu University, Tokyo |
+| Authors | Yoko Mikami, Miki Nakamura, Shinji Yamada, **Masatsune Murata** (corresponding) — Ochanomizu University, Tokyo |
 | Venue | Food Science and Technology Research **23** (2), 283-289, 2017. Received 17 Oct 2016, accepted 17 Nov 2016 |
 | DOI as printed | **10.3136/fstr.23.283** ✔ matches the brief. **Identity verified.** |
 | Naming | HMFO = 4-hydroxy-5-methyl-3(2H)-furanone = norfuraneol = the engine's `NF` (C5H6O3, M 114.1; structure by X-ray, CCDC 1500343) |

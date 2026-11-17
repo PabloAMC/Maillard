@@ -389,8 +389,8 @@ def build(*, scorecard_path: Path = data_paths.CORE_PANEL_SCORES, profile_path: 
         compounds = sorted({r["compound"].lower(): r["compound"] for r in abs_refused}.values(), key=str.lower)
         unlocked.insert(0, {
             "if_measured": ("absolute levels of the thiol lane's observables from at least two new independent "
-                            "laboratories (H0's pre-registered trigger, prereg sec. 9; the pending WUR blind-test "
-                            "samples would be one), re-scored under H0's rule (H0')"),
+                            "laboratories (H0's pre-registered trigger, prereg sec. 9; a pending outside blind test "
+                            "would be one), re-scored under H0's rule (H0')"),
             "you_could_predict": (
                 f"absolute {', '.join(compounds)} for a new laboratory, if H0' leaves tau_ABS at or below 0.8 dex "
                 f"(today {ruling().tau_abs_dex:.3f}, {ruling().upper_bound_text}; D2's branches (ii) / (iii)); "

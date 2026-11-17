@@ -7,7 +7,7 @@
 > Intermediate**"
 > *J. Agric. Food Chem.* **2008**, 56 (16), 7405−7409.
 > Department of Food Science, Rutgers University, New Brunswick, New Jersey 08901-8520.
-> Corresponding author: C.-T. Ho, 65 Dudley Rd., New Brunswick, NJ; ho@aesop.rutgers.edu.
+> Corresponding author: C.-T. Ho, 65 Dudley Rd., New Brunswick, NJ.
 > Received for review April 16, 2008. Revised May 29, 2008. Accepted June 1, 2008.
 > Published on Web **July 2, 2008**. Article ID `JF8012025`.
 

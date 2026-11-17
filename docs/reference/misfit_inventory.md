@@ -411,7 +411,7 @@ Entry fields:
   - (c) DFA reads high (P ≥ 0.5 dex: open).
 - **Shared:** G9 (a vessel / headspace operator), G3.
 - **Checks:** CK-37, CK-38.
-- **Blind:** the WUR blind-test samples are BLIND; never read them for this.
+- **Blind:** an outside blind test's samples are BLIND; never read them for this.
 - **W5.4:** Th × every lever (absolute levels are refused; only ratios ship).
 - **Decisive:** DM:thiol_absolute_second_lab.
 
@@ -1054,7 +1054,7 @@ Total ≈ 7 h work, ~0.5 h cpu.
 | CK-34 | 13 (a) | Forward the B2.3 fed-sulfide rows with an H2S vessel partition (Kaw(T) from `henry_constants.yml`; Vg/Vl per pot, a declared band when unstated). Report the bias on `k_fur_fft_hs` / `k_nf_mft` and the Munch cysteine / H2S contrast | 2.0 + 0.5 cpu | Hofmann 1998 T3 / T4 / T10; Munch 1997 T5 (SEEN) | contrast ratio · σ ≥ 0.1 · the B2.3 fed-sulfide rows |
 | CK-35 | 13 (b) | Search the dossiers for a measured furfural thermal loss in phosphate (CF-126's Bork 2024 recovery is a lead). If found, forward with `k_fur_decay` at it | 2.0 | that source if found | as CK-34 |
 | CK-36 | 13 (c) | No seen data (direct FFT stability is CF-065 decider iii) | — | — | NOT RUNNABLE on seen data |
-| CK-37 | 14 (a) | Engine-free: extend CF-068's O2 : (Cys + pentose) residual regression to every isotope-quantified pot with a printed headspace (US 8,920,862 level; Mottram 2002 if quantified) | 1.5 | Yiltirak 2026 (a hold-out, "not unseen"); US 8,920,862 (a B59b hold-out level: **owned by B59b**, so exclude it unless B59b releases it) | log level gap · τ_ABS-scale · none. The WUR blind samples are NOT RUNNABLE |
+| CK-37 | 14 (a) | Engine-free: extend CF-068's O2 : (Cys + pentose) residual regression to every isotope-quantified pot with a printed headspace (US 8,920,862 level; Mottram 2002 if quantified) | 1.5 | Yiltirak 2026 (a hold-out, "not unseen"); US 8,920,862 (a B59b hold-out level: **owned by B59b**, so exclude it unless B59b releases it) | log level gap · τ_ABS-scale · none. An outside blind test's samples are NOT RUNNABLE |
 | CK-38 | 14 (b) | No seen data; an author question (aliquot and work-up) | — | — | — |
 | CK-39 | 07 (a) | Forward B60 with `k_nf_decay` at Bork's measured 4.9e-3 /min (130 C, pH 5) on the in-sample rows, to show the side effects | 1.5 | Bork 2022 / 2023 — **owned by M1b(ii)** (carried as a band) | k /min · ±0.03 dex (two-reader, weighted fit) · the B60 NF / MFT rows |
 
@@ -1126,7 +1126,7 @@ Total ≈ 3 h work.
 | reason | checks | dataset |
 |---|---|---|
 | BLIND | CK-49 beyond the text; any decisive use for MF-29 / MF-32 | hofmann2000b Figs. 2–3 (M3 V-blind) |
-| BLIND | CK-37 (WUR part) | the WUR blind-test samples |
+| BLIND | CK-37 (outside blind-test part) | an outside blind test's samples |
 | reserved / TEST | CK-08 (Deng half), CK-48 (Deng half) | Deng 2022 (M3 phase 2) |
 | reserved / TEST | CK-29 (E7 part) | E7 TEST F30#11, #15, #16; Xu 2011 (E12 TEST) |
 | reserved / TEST | CK-51, CK-52 (TEST part) | E13 / E14 TEST studies (owed, unscored) |

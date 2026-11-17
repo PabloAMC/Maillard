@@ -32,52 +32,9 @@ in `STATUS_AND_PLAN.md` sec. 5. Probabilities are the reviewers', kept where the
    (CF-073). Corrected by the forced-input design review: an aldehyde-loss term CANNOT explain it (k_loss ~4e-4 /min
    removes <= 5 % in 2 h); donor concentration or a reversible aldehyde-amine pool drained by steam stripping can.
 
-## 3. Papers to download (deduplicated across the six reviews; DOIs verified against Crossref or PubMed)
+## 3. Papers to download
 
-"Abstract" = the reviewer read the abstract; "title only" = only the bibliographic record was verified, so the
-content is NOT described. Already on disk and therefore left out: Kallen 1971 (dossier exists), Zamora 2015's
-supplementary data, Koutsidis 2008a / b, Zhou 2024 (the pyrazine paper, 10.1021/acs.jafc.4c03706 -- the alanine / ARP
-paper below is a different one).
-
-**Tier 1 -- each decides a pending design choice**
-
-| paper | DOI | verified | why |
-|---|---|---|---|
-| Smuda, Voigt & Glomb 2010, J. Agric. Food Chem. 58:6458 | 10.1021/jf100334r | abstract | amine-INDUCED beta-dicarbonyl cleavage of 1-DG (acetyl / formyl lysine amides): the amine-acceleration question the Davidek papers leave open |
-| Wei, Cui, Hayat, Zhang & Ho 2022, J. Agric. Food Chem. 70:12164 | 10.1021/acs.jafc.2c04961 | abstract | cysteine traps the deoxyosones of a Gly-Xyl ARP as TTCA: the 3-DX trap behind signature (vii) |
-| Zyzak, Richardson, Thorpe & Baynes 1995, Arch. Biochem. Biophys. 316:547 | 10.1006/abbi.1995.1073 | abstract | the Amadori compound decomposes faster in phosphate than HEPES, faster in air and at high pH (37 C): phosphate catalysis |
-| Fife, Natarajan, Shen & Bembi 1991, J. Am. Chem. Soc. 113:3071 | 10.1021/ja00008a041 | title only | ring opening AND hydrolysis of thiazolidines as separate steps -- the two steps the engine lumps |
-| Granvogl, Bugan & Schieberle 2006, J. Agric. Food Chem. 54:1730 | 10.1021/jf0525939 | abstract | Ile / Leu / Met / Phe + MGO (Val only in cocoa; corrected from the dossier): Strecker aldehydes vs amines, for the donor-generic layer |
-| Low, Parker & Mottram 2007, J. Agric. Food Chem. 55:4087 | 10.1021/jf070044s | abstract | [2-13C]glycine into alkylpyrazines, two pathways with their shares |
-| Hayashi & Namiki 1980, Agric. Biol. Chem. 44:2575 | 10.1271/bbb1961.44.2575 | abstract | the early C2 (Namiki) fragment from sugar + amine: the pre-Amadori nitrogen / dicarbonyl route |
-| Warmbier, Schnickels & Labuza 1976, J. Food Sci. 41:528 | 10.1111/j.1365-2621.1976.tb00663.x | abstract | casein-glucose-glycerol: first-order available-lysine loss vs water activity (browning maximum a_w 0.4 - 0.5) |
-
-**Tier 2 -- useful constants or rivals**
-
-| paper | DOI | verified | why |
-|---|---|---|---|
-| Pesek & Frost 1975, Tetrahedron 31:907 | 10.1016/0040-4020(75)80099-8 | title only | thiazolidine decomposition in acid and base (a rate / pH profile, if any) |
-| Schubert 1936, J. Biol. Chem. 114:341 | 10.1016/S0021-9258(20)65226-7 | title only | thiol-acid + aldehyde compounds; Schubert 1939 cites it as the companion with constants |
-| Zhou, Huang, ..., Ho 2024, J. Agric. Food Chem. 72:5878 | 10.1021/acs.jafc.4c00021 | abstract | exogenous alanine speeds the ARP's reaction with 3-deoxyxylosone and lowers furfural: a 3-DX sink |
-| Cui, Ma, ..., Ho 2022, J. Agric. Food Chem. 70:8409 | 10.1021/acs.jafc.2c03427 | abstract | glycylglycine catalyses its Amadori compound's degradation to deoxyosone (an amine factor on the split) |
-| Voigt, Smuda, Pfahler & Glomb 2010, J. Agric. Food Chem. 58:5685 | 10.1021/jf100140h | abstract | O2-dependent lactic / glyceric acid from 1-DG + alanine |
-| Hou, Zhou, Li, ..., Ho 2026, Food Chem. 499:147363 | 10.1016/j.foodchem.2025.147363 | abstract | cystine speeds ARP degradation and the retro-aldol of deoxyosones to GO / MGO |
-| Thornalley, Langborg & Minhas 1999, Biochem. J. 344:109 | 10.1042/bj3440109 | abstract | GO / MGO / 3-DG from glucose and fructosyl-lysine depend on phosphate and trace metals (37 C) |
-| Guan, Wang, Yu, Yu & Zhao 2012, J. Dairy Sci. 95:590 | 10.3168/jds.2011-4860 | abstract | phosphate speeds the reversible breakdown of early glucose + proline intermediates (bifunctional proton transfer) |
-| Pripis-Nicolau et al. 2000, J. Agric. Food Chem. 48:3761 | 10.1021/jf991024w | abstract | ~~six dicarbonyls x wine amino acids at pH 3.5: donor-generic Strecker~~ (corrected 2026-11-01 from the PDF: four alpha-dicarbonyls + two alpha-hydroxyketones x 14 amino acids, pH 3.5, 25 C, 12 % ethanol; Strecker aldehydes IDENTIFIED, never quantified, so not a second laboratory for donor-generic Strecker magnitudes; `pripisnicolau2000_extraction.md`) |
-| Hidalgo, Gallardo & Zamora 2005, J. Agric. Food Chem. 53:10254 | 10.1021/jf052240+ | abstract | 4-hydroxynonenal + Phe -> phenylacetaldehyde (17 %): the lipid-carbonyl Strecker donor |
-| Zamora, Navarro, Gallardo & Hidalgo 2006, J. Agric. Food Chem. 54:6101 | 10.1021/jf061239n | abstract | epoxyalkenals -> alpha-keto acids (the acid route) |
-| Scalone, Cucu, De Kimpe & De Meulenaer 2015, J. Agric. Food Chem. 63:5364 | 10.1021/acs.jafc.5b01129 | abstract | oligopeptides vs free amino acids in pyrazine formation, a_w 0.33, > 120 C |
-| Van Lancker, Adams & De Kimpe 2010, J. Agric. Food Chem. 58:2470 | 10.1021/jf903898t | abstract | lysine dipeptides vs free amino acids in pyrazines (the 2012 follow-up is on disk) |
-| Lu, Hao, Payne & Ho 2005, J. Agric. Food Chem. 53:6443 | 10.1021/jf050534p | abstract | glucose + glycine / di- / triglycine at 160 C, 0 - 100 % water in glycerol |
-| Adams, Mottram, Parker & Brown 2001, J. Agric. Food Chem. 49:4333 | 10.1021/jf0100797 | abstract | volatile disulfides lost to ovalbumin, more after denaturation (registry cites it; no PDF) |
-| Lo, Westwood, McLellan, Selwood & Thornalley 1994, J. Biol. Chem. 269:32299 | 10.1016/S0021-9258(18)31635-1 | search snippet only | MGO with lysine, cysteine and arginine (37 C): the dicarbonyl traps of protein amines |
-| Shibamoto & Bernhard 1977, Agric. Biol. Chem. 41:143 | 10.1271/bbb1961.41.143 | abstract | pyrazine pathways in glucose-ammonia (O2, metals, ring closure by water loss) |
-
-**Tier 3 -- title only, older, lower expected value:** van den Ouweland & Peer 1975 (10.1021/jf60199a045,
-norfuraneol + H2S volatiles; in the registry, no PDF); Huber & Ledl 1990 (10.1016/0008-6215(90)84037-U, amine-bound
-1,4-dideoxyhexodiuloses); Koehler & Odell 1970 (10.1021/jf60171a041); Shibamoto & Bernhard 1976 (10.1021/jf60206a045);
-Eichner & Karel 1972 (10.1021/jf60180a025); Piloty & Baltes 1979 (10.1007/BF01186494).
+32 candidates; the list is kept privately.
 
 ## 4. Gaps no search filled (designed data or authors)
 

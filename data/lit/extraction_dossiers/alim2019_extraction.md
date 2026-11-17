@@ -22,7 +22,7 @@ printed · **[!]** flag.
 
 **Laboratory.** Beijing Advanced Innovation Center for Food Nutrition and Human Health / Beijing Engineering and
 Technology Center of Food Additives, **Beijing Technology and Business University**; corresponding author **Huanlu
-Song** (songhl@th.btbu.edu.cn). **Not in `data/keys/laboratories.yml`** (only `btbu_xie`, Xie Jianchun, whose
+Song**. **Not in `data/keys/laboratories.yml`** (only `btbu_xie`, Xie Jianchun, whose
 evidence line already says other BTBU groups are distinct). The ledgers already carry the free string
 **"BTBU (Song H)"** / "BTBU (Song H.)" for `wang2012`, `xu2013` (sulfur.yml) and `raza2020` (aroma_other.yml), and
 `xu2013_extraction.md` identifies Song's "Laboratory of Molecular Sensory Science" as distinct from the Xie group.

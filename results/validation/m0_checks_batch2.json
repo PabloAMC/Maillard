@@ -7,7 +7,7 @@
   "base": "origin/main fdea5cf0",
   "inventory": "docs/reference/misfit_inventory.md on PR #82 (branch misfit-inventory), secs. 3 and 5",
   "procedure": "OPERATING_PROCEDURE.md sec. 4. Selection and every pass rule committed before any number was computed (commit 4113901d). Constants from cited measurements or declared assumptions with bands; no constant tuned; nothing shipped.",
-  "blinding": "Not read: B59b hold-outs (US 10,076,126 MFT shape), van Seeventer 2001 Table 1 (FIT_HOLDOUT hold-out), hofmann2000b Figs. 2-3, E7 / E13 / E14 TEST, WUR. Not computed under any variant: fed_nf_cys and the 145 C ribose + Cys pot (M2 Rt-H), Cerny pot D (M2 Rt-D), Zhai 2023 JAFC 140 C pots (M2 T-140), Whitfield 1999 (M1 D6), Zhou 2023 / Zhang 2024 pots (M1 D3 - D5), the US 10,076,126 pot.",
+  "blinding": "Not read: B59b hold-outs (US 10,076,126 MFT shape), van Seeventer 2001 Table 1 (FIT_HOLDOUT hold-out), hofmann2000b Figs. 2-3, E7 / E13 / E14 TEST, the outside blind test. Not computed under any variant: fed_nf_cys and the 145 C ribose + Cys pot (M2 Rt-H), Cerny pot D (M2 Rt-D), Zhai 2023 JAFC 140 C pots (M2 T-140), Whitfield 1999 (M1 D6), Zhou 2023 / Zhang 2024 pots (M1 D3 - D5), the US 10,076,126 pot.",
   "excluded": [
     {"check": "CK-06, CK-01 + CK-50, CK-02", "reason": "done (batch 1, PR #86)"},
     {"check": "CK-12", "reason": "spends M1b part (i)'s controls (Hou 2026 Fig. 3, Zhou 2023 Fig. 2, the Meynier pH statement; CF-084)"},

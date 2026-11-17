@@ -2,11 +2,11 @@
   "artifact": "sulfur_reaction_evidence",
   "provenance": {
     "artifact": "sulfur_reaction_evidence",
-    "generated_on": "2026-11-07",
+    "generated_on": "2026-11-17",
     "git": {
-      "commit": "b8ba234edfc17900ca3c60f4afa5abb5844ce9db",
-      "short": "b8ba234e",
-      "branch": "s3-ph-balance-refusal",
+      "commit": "ef46d6d73d455a7b1edcb353346a5d3c6410a883",
+      "short": "ef46d6d7",
+      "branch": "share-scrub",
       "dirty": true
     },
     "generated_by": "scripts/generators/build_sulfur_reaction_evidence.py",
@@ -69,7 +69,7 @@
       },
       {
         "path": "data/lit/measurement_ledger/trunk.yml",
-        "sha256": "af7f53518aa45385404af43fb6907437ef0a37c361812675bdabc60988d70b60"
+        "sha256": "41e82937fb9e03560e9160ec106b99f6a7bd7cb142c1e39620b8582748c7381f"
       }
     ]
   },

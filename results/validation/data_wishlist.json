@@ -2,11 +2,11 @@
   "artifact": "data_wishlist",
   "provenance": {
     "artifact": "data_wishlist",
-    "generated_on": "2026-11-13",
+    "generated_on": "2026-11-17",
     "git": {
-      "commit": "63783d3b23a5888482c46b5752a5dfb6434cae45",
-      "short": "63783d3b",
-      "branch": "a6-batch3",
+      "commit": "ef46d6d73d455a7b1edcb353346a5d3c6410a883",
+      "short": "ef46d6d7",
+      "branch": "share-scrub",
       "dirty": true
     },
     "generated_by": "src/data_wishlist.py",
@@ -41,7 +41,7 @@
       },
       {
         "path": "docs/reference/decisive_measurements.yml",
-        "sha256": "eca0acba9eedc993b7a0f328580aaf0f02223a4c92428eb311e279ffb21a8305"
+        "sha256": "e66c080e75aabf6b19c0d16e3d4e3e9b6f2ccb406863661e56e371d58929f512"
       }
     ]
   },
@@ -951,7 +951,7 @@
   ],
   "what_you_could_predict": [
     {
-      "if_measured": "absolute levels of the thiol lane's observables from at least two new independent laboratories (H0's pre-registered trigger, prereg sec. 9; the pending WUR blind-test samples would be one), re-scored under H0's rule (H0')",
+      "if_measured": "absolute levels of the thiol lane's observables from at least two new independent laboratories (H0's pre-registered trigger, prereg sec. 9; a pending outside blind test would be one), re-scored under H0's rule (H0')",
       "you_could_predict": "absolute 2-Furfurylthiol (FFT), 2-Methyl-3-furanthiol (MFT), furfural for a new laboratory, if H0' leaves tau_ABS at or below 0.8 dex (today 0.964, U >= 1.60; D2's branches (ii) / (iii)); 27 panel rows now refused for their absolute level would return to the scorecard"
     },
     {
@@ -1402,7 +1402,7 @@
       "unlocks": [
         "absolute thiol levels for a new laboratory: the panel rows section 2 lists as refused for their absolute level (H0 / EX-059)"
       ],
-      "existing_data_route": "W6 author replies and the pending WUR blind-test samples (plan W1.2; the engine's refusal text in thiol_relative_only)",
+      "existing_data_route": "W6 author replies and a pending outside blind test (plan W1.2; the engine's refusal text in thiol_relative_only)",
       "status": "open",
       "status_note": null,
       "disagreements": [

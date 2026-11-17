@@ -112,7 +112,7 @@ replaces:
   identification list of 48 compounds, S2 is the calibration curves, and Fig. S1 is the thermal
   profile. The supplementary file is still worth fetching, because S2 and Fig. S1 are both needed for
   a fit and neither is on disk, but the decisive numbers most likely require an author request
-  (Marianne N. Lund, mnl@food.ku.dk). Recorded here rather than edited away, because the claim was
+  (Marianne N. Lund). Recorded here rather than edited away, because the claim was
   made in this file before it was checked.
 
 ## 6. Outcome (written 2026-09-11, after the probes)

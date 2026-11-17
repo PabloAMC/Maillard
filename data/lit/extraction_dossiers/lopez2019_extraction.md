@@ -17,13 +17,13 @@ material on disk (none is announced in the paper).
 
 | field | value as printed |
 |---|---|
-| Authors | Jordan Lopez, Trent Kerley, Lindsay Jenkinson, Curtis R. Luckett, **John P. Munafo, Jr.** (corresponding, jmunafo@utk.edu) |
+| Authors | Jordan Lopez, Trent Kerley, Lindsay Jenkinson, Curtis R. Luckett, **John P. Munafo, Jr.** (corresponding) |
 | Affiliation | Department of Food Science, University of Tennessee, Knoxville, TN 37996, USA |
 | Venue | *J. Agric. Food Chem.* **2019**, 67(41), 11444-11453 |
 | DOI | **10.1021/acs.jafc.9b04153** (printed on every page) — matches the brief |
 | Dates | received 3 Jul 2019; revised 12 Sep 2019; accepted 13 Sep 2019; published 8 Oct 2019 |
 
-**File name.** The PDF is on disk as `lopez2019.pdf`, and the local download queue (`data/articles/DOWNLOAD_QUEUE.md`,
+**File name.** The PDF is on disk as `lopez2019.pdf`, and the local download queue (private,
 untracked) already lists it as `lopez2019.pdf` with the first-author correction; no rename or alias is needed (the stem
 matches this dossier). **Laboratory:** Munafo group, U. Tennessee Knoxville — **not in `data/keys/laboratories.yml`**;
 proposed id `utk_munafo`. A laboratory new to the repo.

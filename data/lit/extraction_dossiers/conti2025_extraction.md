@@ -18,7 +18,7 @@ in `src/`, `data/` or `results/`.
 | field | value |
 |---|---|
 | Title | "Oral processing of meat-flavour textured soy proteins — **Part I: Bolus properties and relationships with the texture profile analysis of the products**" |
-| Authors | Ana Carolina Conti (corresponding, ac.conti@unesp.br), Chantal Septier, Emmanuel Denimal, Helene Laboure, Christian Salles |
+| Authors | Ana Carolina Conti (corresponding), Chantal Septier, Emmanuel Denimal, Helene Laboure, Christian Salles |
 | Affiliations | (a) Sao Paulo State University (Unesp), Ibilce, Department of Food Engineering and Technology, Sao Jose do Rio Preto, Brazil; (b) Centre des Sciences du Gout et de l'Alimentation, CNRS / INRAE / Institut Agro / Universite Bourgogne Europe, Dijon, France; (c) Institut Agro, Dijon |
 | Venue | **Food Research International 208 (2025) 116169**. Received 18 Sep 2024, revised 17 Jan 2025, accepted 9 Mar 2025, online 11 Mar 2025 |
 | DOI | **10.1016/j.foodres.2025.116169** |

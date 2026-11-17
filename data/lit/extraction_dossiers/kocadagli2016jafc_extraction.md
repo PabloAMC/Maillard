@@ -13,7 +13,7 @@
 | title | *"Effect of sodium chloride on α-dicarbonyl compounds and 5-hydroxymethyl-2-furfural formations from glucose under caramelization conditions – A multiresponse kinetic modelling approach"* | PDF p.1 (cover) and p.1 of the manuscript body |
 | authors | Tolgahan Kocadağlı, Vural Gökmen | manuscript p.1 |
 | journal | *J. Agric. Food Chem.*, **Just Accepted Manuscript**, Publication Date (Web): **30 Jul 2016** | ACS cover page |
-| corresponding | Prof. Dr. Vural Gökmen, `vgokmen@hacettepe.edu.tr` | manuscript lines 8–10 |
+| corresponding | Prof. Dr. Vural Gökmen | manuscript lines 8–10 |
 | pages of PDF | 38 (ACS "Page N of 38" running head) | throughout |
 
 **⚠️ WRONG-FILE WARNING, REPORT UPSTREAM.** The task brief and the round-3 dossier both implied

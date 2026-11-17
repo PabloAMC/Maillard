@@ -62,7 +62,7 @@ negative · **[!]** integrity flag.
 | **title** | ***"Contribution of 2-methyl-3-furanthiol to the cooked meat-like aroma of fermented soy sauce"*** | p. 1 title block, raster-verified; matches PDF `Title` metadata exactly |
 | **authors** | **Qi Meng¹, Riho Kitagawa², Miho Imamura³, Hiroshi Katayama³, Akio Obata³, Etsuko Sugawara¹\*** | p. 1, raster-verified |
 | affiliations | ¹ **Faculty of Education, Iwate University, Morioka, Japan** · ² **Graduate School of Agriculture, Iwate University, Morioka, Japan** · ³ **Research and Development Division, Kikkoman Corporation, Noda, Japan** | p. 1 |
-| corresponding author | **Etsuko Sugawara**, `etsukos@iwate-u.ac.jp` | p. 1 footnote |
+| corresponding author | **Etsuko Sugawara** | p. 1 footnote |
 | **DOI** | **`10.1080/09168451.2016.1238295`** | p. 1 and the T&F cover page |
 | **journal** | ***Bioscience, Biotechnology, and Biochemistry***; ISSN 0916-8451 (print) / 1347-6947 (online) | cover page, running heads |
 | **dates** | **Received April 28, 2016 · Accepted September 7, 2016 · Published online 3 October 2016** | p. 1, raster-verified; cover page |

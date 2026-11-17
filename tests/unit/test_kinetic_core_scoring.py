@@ -197,7 +197,7 @@ def test_predicted_point_is_the_deterministic_prediction(small):
 def test_refusals_use_the_engine_vocabulary_and_a_fully_refused_bundle_is_refused(small):
     # 2026-10-27: hydrogen sulfide became a nameable precursor, so the fed norfuraneol + H2S bundle that
     # used to be this test's fully refused example is now SCORED. The unmapped-precursor vocabulary is
-    # exercised directly instead, on a precursor no lane carries (thioacetamide, a WUR sample).
+    # exercised directly instead, on a precursor no lane carries (thioacetamide).
     by_id = {b["benchmark_id"]: b for b in small["benchmarks"]}
     h2s = by_id["hofmann1998_norfuraneol_h2s_145C_20min_pH5"]
     # 2026-11-05 (H0 / EX-059): its MFT is answered by the engine and refused for its absolute level, with the

@@ -15,7 +15,7 @@ There are no figures. No Supporting Information exists for this article.
 | field | value |
 |---|---|
 | Title | "Influence of Glutathione Oxidation and pH on Thermal Formation of Maillard-Type Volatile Compounds" |
-| Authors | Chao-Ying Tai, **Chi-Tang Ho** (corresponding, ho@aesop.rutgers.edu) |
+| Authors | Chao-Ying Tai, **Chi-Tang Ho** (corresponding) |
 | Affiliation | Department of Food Science, Cook College, Rutgers, The State University, New Brunswick NJ |
 | Venue | J. Agric. Food Chem. **1998, 46 (6), 2260-2265**. Received 30 Dec 1997, revised 2 Apr 1998, accepted 3 Apr 1998, published on the Web 15 May 1998 |
 | DOI as printed | **10.1021/jf971111t** — no "DOI" line printed (1998 ACS style); manuscript code **S0021-8561(97)01111-4**, article id **JF971111T** (p. 2265), publisher stamp `jf971111t.pdf`. ✔ matches the brief |

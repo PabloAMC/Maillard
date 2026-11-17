@@ -20,7 +20,7 @@ see §8 for the double-counting verdict. **No separate `brands2002` dossier is c
 | DOI / article id | 10.1021/jf010789c — printed as `10.1021/jf010789c CCC: $22.00` on p. 1178 and as manuscript id `JF010789C` on p. 1183 |
 | received/revised/accepted | *"Received for review June 20, 2001. Revised manuscript received November 6, 2001. Accepted November 20, 2001."* Published on Web 01/25/2002 |
 | affiliation | † Department of Agrotechnology and Food Sciences, Product Design and Quality Management Group, Wageningen University, P.O. Box 8129, 6700 EV Wageningen, The Netherlands; ‡ Procter Department of Food Science, University of Leeds, Leeds LS2 9JT, United Kingdom |
-| corresponding | *"telephone +31 317 484281; fax +31 317 483669; e-mail Tiny.vanBoekel@ift.fdsci.wau.nl"* |
+| corresponding | M. A. J. S. (Tiny) van Boekel (contact details printed on the paper) |
 | funding | *"research carried out with financial support from the European Commission, within the framework of a short-term scientific mission for COST … Action 919, "Melanoidins in Food and Health""* |
 | acknowledgment | *"We thank Elbert van der Klift of the Organic Chemistry group, Wageningen University, for the microanalysis measurements."* |
 | PDF character | born-digital (Creator: Parlance Publisher 5.0 / Xyvision PostScript Formatter; Producer: Acrobat Distiller Command 3.01 for Solaris). Text layer clean; figures are embedded bitmaps (typical of 2002 ACS PDFs) but legible at 600 dpi. |
@@ -587,7 +587,7 @@ of radiolabelled sugar to estimate the extinction coefficient of melanoidins for
 sugar-casein systems", *International Congress Series* 1245 (2002) 249–253** (5 pp.; PII
 S0531-5131(02)01033-6; Elsevier Science B.V.; Creator: 3B2 Total Publishing; born-digital). Same three
 authors, same two affiliations, same COST Action 919 work. Corresponding author is given there as
-Carline Brands (carline.brands@ift.fdsci.wau.nl), not van Boekel.
+Carline Brands, not van Boekel.
 
 **VERDICT: `brands2002` is a strict SUBSET of `brands2002b`. It is a DOUBLE-COUNTING HAZARD and must
 never be ingested as an independent source.** Every quantitative result it contains is republished

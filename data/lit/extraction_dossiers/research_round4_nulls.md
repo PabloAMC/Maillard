@@ -605,57 +605,7 @@ this is a LEAD, not a pair.** I am flagging it rather than counting it.
 
 # §E. RANKED DOWNLOAD LIST
 
-**Every DOI, title and author list below was resolved through `api.crossref.org/works/<doi>` in this
-session.** Nothing here is reconstructed from memory.
-
-## TIER 1 — order these; each one decides a null
-
-| # | DOI | exact citation | why, in one line |
-|---|---|---|---|
-| **1** | `10.1016/j.foodchem.2017.07.131` | **Hamzalıoğlu, A. & Gökmen, V.**, *"Investigation and kinetic evaluation of the reactions of hydroxymethylfurfural with amino and thiol groups of amino acids"*, **Food Chemistry 240:354–360 (2018)** | **★ FALSIFIES NULL 1 AND CLOSES ROUND-3 LEAD L1 IN ONE PAPER.** Aldehyde + Cys/Arg/Lys, **5/25/50 °C**, Michael adduct **and** Schiff base confirmed by HRMS, pseudo-first-order k, Arrhenius obeyed, high- **and** low-moisture arms. **Also the only published HMF-sink kinetics, a node the repo has none of.** Closed access |
-| **2** | `10.1016/j.lwt.2025.117469` | **Zhou, X.; Diao, Y.; Zhang, J.; Yu, X.; Wang, G.; Gu, Y.; Ren, D.; Li, S.; Dong, W.; Yi, L.**, *"Sulfury/roasty fading indicators in roasted coffees…"*, **LWT 218:117469 (2025)** | **★ THE ONLY LIVE FALSIFIER OF NULL 2.** First-order + **Arrhenius** on **2-furfurylthiol** across storage temperatures. **GOLD OPEN ACCESS — open it in a browser.** ⚠️ Expect a *storage* Ea; `k3` §C.17 says that is a different channel from the processing sink |
-| **3** | `10.1021/bk-1994-0564.ch010` | **Chan, F. & Reineccius, G. A.**, *"Kinetics of the Formation of Methional, Dimethyl Disulfide, and 2-Acetylthiophene via the Maillard Reaction"*, **ACS Symp. Ser. 564 (*Sulfur Compounds in Foods*), pp. 127–137 (1994)** | **★ THE ONLY CANDIDATE SULFUR TEMPERATURE LADDER.** Aqueous, **75–115 °C**, **pH 6/7/8**, 5 min–7.5 h. ⚠️ **Verify absolute quantification and the number of temperatures BEFORE recording it as a ladder** |
-| **4** | `10.3390/foods5020035` | **Perry, D. M. & Hayes, J. E.**, *"Effects of Matrix Composition on Detection Threshold Estimates for Methyl Anthranilate and 2-Aminoacetophenone"*, ***Foods* 5(2):35 (2016)** | **★ FALSIFIES NULL 4. ALREADY READ IN FULL — §D.1 IS THE EXTRACTION.** Order only to hold the PDF; no new information will come from it |
-| **5** | `10.3168/jds.2019-17495` | **Tian, H.; Yu, B.; Yu, H.; Chen, C.**, *"Evaluation of the synergistic olfactory effects of diacetyl, acetaldehyde, and acetoin in a yogurt matrix…"*, ***J. Dairy Sci.* 103(9):7957–7967 (2020)** | Yogurt thresholds **+** possibly a same-study water arm, **and** — the real prize — **the same lab, journal and submission year as the Tian 2019 paper `k3` §C.18 needs to settle the milk `?/kg` factor-of-1000 basis risk** |
-
-## TIER 2 — order to put numbers on the Ea ladder of §A.1
-
-| # | DOI | exact citation | why |
-|---|---|---|---|
-| 6 | `10.1021/jf305007y` | **Zamora, R.; Alcón, E.; Hidalgo, F. J.**, *JAFC* **61**(43):10231–10237 (2013) | **The Ea LADDER across four lipid-carbonyl classes: 55–64 / 58–67 / 28–38 kJ/mol.** The single most informative row for whether the covalent aldehyde sink can matter at process temperature. Closed |
-| 7 | `10.1111/j.1365-2621.1993.tb04352.x` | **Hidalgo, F. J. & Zamora, R.**, *J. Food Sci.* **58**(3):667–670 (1993) | **The only true ALDEHYDE + LYSINE Arrhenius study found.** Ea **66.5** (colour) / **50** (fluorescence). ⚠️ measures browning and fluorescence, not adduct concentration. Closed |
-| 8 | `10.1016/j.foodchem.2010.03.016` | **Hidalgo, F. J.; Delgado, R. M.; Zamora, R.**, *Food Chem.* **122**(3):596–601 (2010) | **Ea = 28–30 kJ/mol for a THIOL + Michael-acceptor addition** (benzyl mercaptan / N-acetylcysteine + acrylamide). The nearest measured analogue in existence to `k3` §A.4's thiol sink. Closed |
-| 9 | `10.1021/jf903378x` | **Zamora, R.; Delgado, R. M.; Hidalgo, F. J.**, *JAFC* **58**(3):1708–1713 (2010) | The **forward-vs-reverse** Ea comparison for a Michael adduct — the reversibility datum `meynier2004_extraction.md` X-5 says the corpus has **ZERO** of. Closed |
-| 10 | `10.1016/j.foodchem.2019.05.175` | **Sun, Z.; Yang, N.; Liu, C.; Linforth, R. S. T.; Zhang, X.; Fisk, I. D.**, *Food Chem.* **295**:449–455 (2019) | *"investigated at different pH and temperatures"* for **2-FFT in real coffee brew**. **Green OA at Repository@Nottingham but Cloudflare-blocked from this session.** Unknown whether ≥3 temperatures |
-
-## TIER 3 — leads, NOT verified enough to order blind
-
-| # | identifier | what I know | what must happen first |
-|---|---|---|---|
-| L1 | `10.1016/j.foodres.2022.112187` — **Liu, J.; Poojary, M. M.; Thygesen, M. B.; Andersen, M. L.; Lund, M. N.**, *Food Res. Int.* **163**:112187 (2023) | Stopped-flow Arrhenius, **15–45 °C**, quinone + Lys/Nᵅ-Ac-Lys/Nᵋ-Ac-Lys. Ea **ordering** published, **values not in the abstract** | ⚠️ **A quinone is not an aldehyde.** Order only as an analogue bound, and label it as one |
-| L2 | `10.1038/s41538-026-00874-9` — *npj Sci. Food* (2026), aldehydes + myofibrillar protein under stage heating | Proteomics shows saturated aldehydes → **lysine ε-NH₂ Schiff bases**; unsaturated → **both** Schiff base and Michael addition on Cys/His/Trp | ⚠️ its *"thermodynamic parameters"* are **binding** ΔH/ΔS, **not an Ea**. Order for topology only |
-| L3 | Chinese-language thesis by **Zhenchun Sun** (Jiangnan Univ., supervisor Xiaoming Zhang) on FFT stability | Inferred from his two FFT-stability papers. **CNKI unreachable this session** | ⚠️ **I verified NOTHING about it.** Do not cite until the record is in hand |
-| L4 | A **University of Minnesota** thesis by **F. Chan** underlying download #3 | conservancy.umn.edu hosts UMN theses; a thesis would carry the tables an 11-page chapter compresses | ⚠️ **I did not find the record.** Search the Conservancy before assuming it exists |
-| L5 | `10.1111/j.1745-459x.2010.00320.x` — Senthil & Bhat, *J. Sensory Studies* **26**(1):48–53 | *"Best estimated taste detection threshold for cardamom aroma **in different media**"*. Metadata verified | ⚠️ **content unread**; a spice oleoresin, probably low value |
-
-## ALREADY ON DISK OR ALREADY SETTLED — do not re-open
-
-| item | status |
-|---|---|
-| `scratchpad/zamora2015.pdf` — **Zamora, Navarro, Aguilar & Hidalgo 2015**, *Food Chem.* **174**:89–96 | **★ DOWNLOADED AND READ THIS SESSION. §A.3 is the extraction.** Two new hexanal routes (2-octenal 18 %, 2,4-decadienal 11.5 %) with Ea ≈ 21–30 kJ/mol at **120/160/200 °C**, aqueous, internal standard |
-| `data/articles/blank2002.pdf` | **[REPO] [NEG]** — the 22/37 °C FFT pair is already dossiered **and already refused** for a concentration confound. Round 4 adds nothing |
-| `data/articles/hofmann1998.pdf` | **[REPO] [NEG]** — the "temperature series" its abstract promises **does not exist**; already verified by `hofmann1998_reconciliation.md`. ⚠️ **The abstract is a snare for keyword search** |
-| `Kang2026.pdf` | **[REPO]** — a 100/120/140 °C sulfur ladder **exists as an experiment** but its numeric table is not in the PDF. **The SI is the retrieval, not a new paper** |
-
-## DO NOT ORDER — verified negatives from this round
-
-| item | why |
-|---|---|
-| `10.1016/j.freeradbiomed.2021.03.040` (Davies group), `10.1021/tx025590o` (Doorn & Petersen), `10.1021/bi060535q` (HNE + HSA) | **The entire biomedical alkenal–protein kinetics literature is single-temperature.** Excellent k₂ sets, **zero** activation energies. §A.2 |
-| `10.1021/ac501354y` (Kennedy-Darling & Smith 2014) | Ea = 47 kJ/mol is for formaldehyde crosslink **REVERSAL**, on protein–**DNA**, 4–47 °C. The authors state **no formation constant**. Filing it as an adduct-formation barrier would invert the paper |
-| `10.1016/j.jfda.2015.02.001` (Weerawatanakorn/Ho 2015 review) | **[FT-web] [NEG]** — the standard review of flavour-compound stability contains **no rate constant, no half-life and no Ea for any thiol.** Its only number is Blank 2002's 20 %/90 % contrast |
-| `10.3389/fnut.2023.1196816` (Ye et al. 2023 FFT review) | **[FT-web] [NEG]** — a dedicated OA review of FFT with a staling-pathway section and **zero kinetic parameters** |
-| `10.1016/j.foodchem.2023.137473` (4MBQ + β-lactoglobulin) | k₂ at **25 °C only** — no temperature axis. Order L1 instead if the quinone analogue is wanted |
+20 candidates; the list is kept privately.
 
 ---
 

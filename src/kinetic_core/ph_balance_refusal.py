@@ -34,7 +34,7 @@ every output of that pot is refused with that reason. The rivals run only in the
 WHAT IS NOT REFUSED. A pot whose pH is stated and held (``BufferSpec(kind="clamped")``: a pH-stat, or a measured pH
 supplied as the held value; the measured-trajectory path) does not solve the balance and is unchanged. Nothing on the
 trunk, acrylamide or lipid lanes reads the sulfur lane's pH. Numbers already sent outside the repository are not
-re-scored (the WUR blind-test predictions of 2026-10-20 ran with a clamped pH).
+re-scored (they ran with a clamped pH).
 """
 from __future__ import annotations
 

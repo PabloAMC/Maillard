@@ -27,7 +27,7 @@ dossier.**
 | field | value |
 |---|---|
 | Title | "Drivers of the In-Mouth Interaction between Lupin Protein Isolate and Selected Aroma Compounds: A Proton Transfer Reaction−Mass Spectrometry and Dynamic Time Intensity Analysis" |
-| Authors | Cristina Barallat-Pérez (corresponding, cristina1.barallatperez@wur.nl, ORCID 0000-0003-0963-2242), Michele Pedrotti (Fondazione Edmund Mach, San Michele all'Adige), Teresa Oliviero, Sara Martins (also AFB International EU, Oss), Vincenzo Fogliano, Catrienus de Jong (Wageningen Food and Biobased Research) — Department of Agrotechnology and Food Science, Wageningen University & Research |
+| Authors | Cristina Barallat-Pérez (corresponding, ORCID 0000-0003-0963-2242), Michele Pedrotti (Fondazione Edmund Mach, San Michele all'Adige), Teresa Oliviero, Sara Martins (also AFB International EU, Oss), Vincenzo Fogliano, Catrienus de Jong (Wageningen Food and Biobased Research) — Department of Agrotechnology and Food Science, Wageningen University & Research |
 | Venue | J. Agric. Food Chem. 2024, 72 (16), 8731-8741. Received 24 November 2023, revised 15 March 2024, accepted 22 March 2024, published 5 April 2024. Part of the virtual special issue "13th Wartburg Symposium on Flavor Chemistry and Biology" |
 | DOI | 10.1021/acs.jafc.3c08819 |
 | Licence | **CC-BY 4.0** ("This article is licensed under CC-BY 4.0"), © 2024 The Authors, published by the American Chemical Society |

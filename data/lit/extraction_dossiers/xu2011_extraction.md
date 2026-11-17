@@ -15,7 +15,7 @@ No figures in the paper.
 
 | field | value as printed |
 |---|---|
-| Authors | Yongxia Xu, Qingchan Chen, Shengjiao Lei, Peng Wu, Gang Fan, Xiaoyun Xu, **Siyi Pan*** (pansiyi@mail.hzau.edu.cn) |
+| Authors | Yongxia Xu, Qingchan Chen, Shengjiao Lei, Peng Wu, Gang Fan, Xiaoyun Xu, **Siyi Pan*** |
 | Affiliation | College of Food Science and Technology, Huazhong Agricultural University, Wuhan 430070, China |
 | Title | "Effects of lard on the formation of volatiles from the Maillard reaction of cysteine with xylose" |
 | Venue | *J. Sci. Food Agric.* **2011**, **91**, 2241-2246 |
