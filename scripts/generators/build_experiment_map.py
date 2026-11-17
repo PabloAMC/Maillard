@@ -204,9 +204,9 @@ def render(p: Mapping[str, Any]) -> str:
          "seed meal, two mushrooms), none a pea or soy isolate, so every design below names a pea-isolate "
          "matrix: that, and laboratories, are the binding gaps, not replicates.", "",
          "**One study covers most of the meaty-thiol column.** A single factorial in a 15 % pea-isolate matrix "
-         "(sugar ribose vs glucose x sulfur source cysteine vs thiamine x pH 5.5 vs 6.5, 36 pots with checks, "
-         "MFT / FFT / H2S / disulfides by SIDA), run in two laboratories from one shipped lot (one is acceptable), "
-         "adds a laboratory or two to the sugar, sulfur-source and pH cells of every family at once, and is the "
+         "(sugar ribose vs glucose x sulfur source cysteine vs thiamine x pH 6.0 vs 7.0, 44 vials with checks, "
+         "MFT / FFT / H2S / disulfides by SIDA), run in one laboratory, "
+         "adds a laboratory to the sugar, sulfur-source and pH cells of every family at once, and is the "
          "matrix the keyed record lacks. That is the plan's P3 study (docs/guides/FACTORIAL_LEVER_STUDY.md, sized "
          "by results/validation/lever_design_preposterior.md); yeast extract is not in it, because the lever "
          "table has no yeast-extract class to receive it.", ""]

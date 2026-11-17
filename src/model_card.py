@@ -407,7 +407,7 @@ def _anchor_tally(sulfur: Mapping[str, Any]) -> str:
     if not rows:
         # 2026-11-05 (H0 / EX-059): the thiol lane's absolute levels are refused, so no anchor row is scored
         return ("no scored anchor rows within 3x to report: since 2026-11-05 the thiol lane ships relative "
-                "within-laboratory predictions only (H0 / EX-059, D2 branch (i)), so every anchor row is refused for "
+                "within-laboratory predictions only (the 2026-11-05 test of absolute levels on new laboratories), so every anchor row is refused for "
                 "its level, kept only for the within-study contrasts, and the branch has no scored absolute anchor")
     return (f"{hit} of its {len(rows)} scored anchor rows within 3x ({hit_oos} of the {len(oos)} that "
             f"no core fit read; the rest are fed-intermediate rows the sulfur fit read, which are not "
@@ -679,22 +679,21 @@ def _validity_domain(card: Mapping[str, Any]) -> List[Dict[str, str]]:
             f"REFUSED by name: out-of-sample tau_ABS {r.tau_abs_dex:.3f} dex, {r.upper_bound_text} "
             "(leave-two-laboratories-out); absolute thiol evidence from one laboratory",
             VERDICT_DO_NOT_USE,
-            f"{data_paths.rel(h0.H0_RECORD)} (D2 branch (i)); lifted only by absolute measurements from at least "
-            "two new independent laboratories re-scored under H0's rule (H0')",
+            f"{data_paths.rel(h0.H0_RECORD)}; lifted only by absolute measurements from at least "
+            "two new independent laboratories, re-scored under the same rule",
         )
     )
     cells.append(
         DomainCell(
             "Within-study ratio, rank or shape of one thiol-lane compound",
             "two conditions of one study (one laboratory)",
-            "H0's relative branch, engine minus a chemistry-free null: "
+            "log score per row, engine minus a guess with no chemistry in it: "
             + "; ".join(f"{s} {m:+.2f} nats/row ({label})" for s, m, label in r.relative_branch)
-            + " -- in the reset set THE NULL IS BETTER (D3: below -2 SE, sign-flip p <= 2/32)"
-            + f"; omega {r.omega_dex:.2f} + noise {r.class_noise_dex:.2f} dex per arm in the interval",
+            + " -- on the newer test set THE NO-CHEMISTRY GUESS IS BETTER (by more than 2 standard errors, sign-flip p <= 2/32)"
+            + f"; between-laboratory spread {r.omega_dex:.2f} + measurement noise {r.class_noise_dex:.2f} dex per sample in the interval",
             # owner, 2026-11-05: CAUTION -> DO-NOT-USE
             VERDICT_DO_NOT_USE,
-            "the worse of H0's two sets governs (as for omega): in the reset set the null is shown better (D3: below "
-            "−2 SE); shipped by D2 branch (i) with this label until evidence (M1c / M2, H1) earns better",
+            "the worse of the two test sets governs; shipped with this label until new laboratories' data earn better",
         )
     )
     # --- 2026-11-07: S3 refuses what moves with the falsified pH balance (M1b part (i); prereg sec. 21.10) ----------
@@ -709,13 +708,13 @@ def _validity_domain(card: Mapping[str, Any]) -> List[Dict[str, str]]:
             DomainCell(
                 "Any output on a pot whose pH the sulfur lane solves from the charge balance",
                 "sulfur lane, any buffer but a clamped (held, measured) pH [sulfur lane]",
-                f"REFUSED where it moves with the carried rivals B1 / B13 beyond the term it ships with: "
+                f"REFUSED where the answer moves beyond its interval when the pH calculation is swapped for either of two rival versions: "
                 f"{lev.get('n_dependent')}/{lev.get('n_decided')} levels beyond tau {th['tau_dex']:.3f} dex, "
                 f"{ph.get('n_dependent')}/{ph.get('n_decided')} pH levels beyond {th['ph_level']:.3f} pH; ratios beyond "
-                f"omega {th['omega_dex']:.3f} dex or in sign. Refused and kept outputs alike: {s3.BAND_LIMIT_TEXT}",
+                f"the between-laboratory spread {th['omega_dex']:.3f} dex or in sign. Refused and kept outputs alike: {s3.BAND_LIMIT_TEXT}",
                 VERDICT_DO_NOT_USE,
-                f"{data_paths.rel(s3.SENSITIVITY_RECORD)}; S3 (STATUS_AND_PLAN sec. 7) on CF-084 / CF-134; lifted by "
-                "an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test",
+                f"{data_paths.rel(s3.SENSITIVITY_RECORD)}; lifted when each rival pH calculation has passed its test and "
+                "the shipped interval covers all of them",
             )
         )
     if env.get("available"):
