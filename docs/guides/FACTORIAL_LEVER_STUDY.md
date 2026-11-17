@@ -1,10 +1,148 @@
-# One factorial lever study in a plant-protein matrix, run in one or two laboratories (plan P3, STATUS_AND_PLAN sec. 4.1 and sec. 0)
+# A designed lever study in pea protein isolate: one laboratory, 44 vials (plan P3)
 
-*Draft, 2026-11-11. Design and sizing only; nothing has been sent. Sending a request to any laboratory is the
-owner's action (STATUS_AND_PLAN sec. 0, owner row). Written for food-chemistry groups with SIDA GC-MS; redesigned the same day after the preposterior
-and predictive checks.*
+*Final design, 2026-11-14; this page reorganised 2026-11-17. Nothing has been sent; contacting a laboratory is the
+owner's action. Written for food-chemistry groups with quantitative GC-MS. The one-page version for a partner is
+[P3_STUDY_BRIEF.md](P3_STUDY_BRIEF.md). Earlier drafts, their checks and the reasons for each change are in
+[History of the design](#history-of-the-design) at the end.*
 
-## Why this study, and why now
+**Words used here.**
+- **dex**: log10 units. 0.30 dex is a factor of 2; 1 dex is a factor of 10.
+- **TEST laboratory**: a laboratory held out of every fit, so its data can judge the model. **DEVELOPMENT
+  laboratory**: one whose data the model may be fitted to.
+- **PREREG amendments**: rule changes to the lever table's pre-registration
+  ([PREREG.md](../reference/lever_table/PREREG.md)), frozen before any data they govern are read.
+- **A4**: a designed factorial enters the lever table as one contrast per laboratory per lever (the mean over the
+  other factors), not as many separate pairs.
+- **A7**: the rules for this study's data: censored vials, the pH band and holding rule, a sign check across the
+  corners, laboratories sharing one protocol counted as one, and the buffered pair.
+
+## Why this study
+
+The lever table ([lever_table.md](../../results/validation/lever_table.md)) keys the literature's within-study
+contrasts: 99 sources, 2,581 contrasts, 44 laboratories, each paper read by two blind readers. The experiment map
+([experiment_map.md](../../results/validation/experiment_map.md)) sorts formulator questions into 75 cells (15 levers
+x 5 odorant families). The literature answers **8 of the 75** at a three-laboratory standard. Two gaps bind in every
+family:
+
+1. **Laboratories, not replicates.** Most cells have one or two laboratories. A third turns a listed contrast into
+   an answer.
+2. **Matrix.** No keyed study heats a pea or soy isolate. The only heated plant- or fungal-protein contrasts come
+   from four hydrolysates (flaxseed, goji seed meal, two mushrooms).
+
+Fixed, pre-registered literature searches did not fill the three levers this study varies: sugar, sulfur source and
+pH. Only time and temperature series were fillable that way. So none of these vials repeats what a search could find.
+
+## The design
+
+**Base.** 15 % w/w pea protein isolate in water, one product and one lot, shipped by us (product, lot and protein %
+stated). Heated in pressure-rated crimp vials with a stated fill, 140 C for 20 min, timed from a thermocouple dummy
+vial reaching 138 C. One heating medium, stated. Every heating batch holds all 8 cells. Ice quench. pH read at 25 C
+before heating and after cooling in every vial.
+
+| factor | low | high |
+|---|---|---|
+| A. sugar | glucose 30 mM | ribose 30 mM |
+| B. sulfur source | cysteine 10 mM | thiamine 10 mM |
+| C. pH, set before heating with HCl or NaOH after a stated hydration time | 6.0 | 7.0 |
+
+pH 6.0 / 7.0 keeps clear of the isolate's isoelectric region (about 4.5 - 5), where the pH factor would also change
+protein state and binding, and stays inside one pH band of the lever table (6 - 7.5).
+
+**Vials, one laboratory, randomised run order:**
+
+| | vials |
+|---|---|
+| factorial, 8 cells x 4 | 32 |
+| matrix background (isolate, no sugar, no sulfur source; pH 6.0) | 2 |
+| no isolate (glucose + cysteine in 0.1 M phosphate, pH 6.0): the matrix contrast | 2 |
+| buffered pair (glucose + cysteine corner in 0.1 M phosphate, pH 6.0 and 7.0, 4 each; its unbuffered side is the factorial's own corner) | 8 |
+| **total** | **44** |
+
+The buffered pair asks whether a buffer salt changes the pH effect seen in the matrix alone. No published
+laboratory has tested this in one study at matched pH. It measures "phosphate-buffered against matrix-buffered pH
+slope", catalysis and control state together; it does not separate the two. With one laboratory it can show a large
+difference (probability about 0.64 at 0.4 dex per pH unit) but is not expected to show sameness (about 0.28 when
+there is no difference).
+
+**Handling.** The labelled internal standard goes in through the septum straight after the ice quench. The time
+from quench to extraction is fixed, and so is homogenisation. All vials are analysed in one stated window, or all
+frozen at -80 C the same way. A pooled QC injection runs every 6 samples. A compound not detected is reported with
+that run's detection limit, never as zero or blank.
+
+**Analytes.**
+- **Core panel:** 2-methyl-3-furanthiol (MFT) and 2-furfurylthiol (FFT), by stable isotope dilution or with a
+  recovery shown in this matrix (we can supply labelled standards); methional; 2- and 3-methylbutanal;
+  phenylacetaldehyde; 2,5-dimethylpyrazine; hexanal; furfural; DMHF.
+- **Optional, declared in advance:** bis(2-methyl-3-furyl) disulfide, H2S, other alkylpyrazines and the pyrazine
+  total, nonanal, 2-pentylfuran, 1-octen-3-ol, norfuraneol. GC-O on the corner vials if available.
+- The laboratory's own method is welcome within these points; that is part of what a new laboratory contributes.
+
+**Composition of the shipped lot**, measured once: free sugars, free amino acids, total cysteine and methionine,
+fat with its fatty-acid profile and peroxide value. Without it the study still serves the lever table, but the
+kinetic model cannot be judged on it.
+
+**Reading the data.** Each lever gives one contrast per odorant (A4): the mean log10 level of the 16 vials at its
+high level against the 16 at its low level. Interactions are estimated and reported, but do not enter the table.
+A7 adds: a censored vial enters at its limit, and an arm with more than half its vials censored enters no cell; a pH
+contrast whose two levels end less than 0.3 pH units apart is read "pH not held"; a lever whose four corner
+contrasts disagree in sign is flagged "interaction-dominated"; laboratories sharing this protocol and lot count as
+one; the buffered pair reads "same" if the difference of slopes is within 0.2 dex per pH unit, "different" if its
+90 % interval lies wholly outside that margin, else "unresolved". A7 is coded and tested on synthetic data
+(`scripts/generators/lever_designed_study.py`); the shipped lever table is unchanged until real data arrive.
+
+## What it buys
+
+From the sizing rerun of 2026-11-14 ([lever_design_preposterior.md](../../results/validation/lever_design_preposterior.md);
+400 simulated outcomes, a pea-matrix shift of 0.3 dex). The study touches **57 lever-table cells**: its three levers
+x the 19 odorants it can measure. These are finer than the experiment map's 75 cells (one named odorant per cell,
+not one family).
+
+| over the 57 cells | literature alone | with this study | floor: the pea-matrix mean known exactly |
+|---|---|---|---|
+| chance the sign is wrong for a new kitchen, all 57 | 0.38 | 0.28 | 0.17 |
+| the same, 28 cells with no literature estimate | 0.50 | 0.32 | 0.17 |
+| the same, 29 cells with one | 0.26 | 0.25 | 0.18 |
+| 90 % interval coverage, cells with no estimate (nominal 0.90) | 0.88 | 0.79 | - |
+
+- The gain is pea-matrix data where the literature has none: a coin flip becomes about one in three.
+- It newly answers about 4 cells at the three-laboratory standard: those already two laboratories short.
+- No design removes the floor. Laboratories scatter enough that even the true pea-matrix mean gets the sign wrong
+  for about one new kitchen in six.
+- A second laboratory under the same protocol adds little (A7 counts it with the first). A later, independent
+  replication under its own protocol is worth more; it is also what A7 needs before any interval is shown as a pea
+  answer.
+
+**The kinetic model on this design today.** Run on the 8 corners in pea isolate before any data
+([p3_engine_dry_run.md](../../results/validation/p3_engine_dry_run.md)), it predicts **9 of the 57** cells in full
+and 11 in part. Seven analytes have no model target, the lipid cells read exactly zero because the lipid lane has
+no coupling to these levers, and the thiol lane refuses most ratios. The model is paused until a laboratory commits;
+its planned fixes (the lane structure, trimethylpyrazine, a Strecker arm for Phe/Leu/Ile, the lipid sink) are then
+frozen before any value from this study is read.
+
+## What the partner gets
+
+Co-authorship on the data and on the validation; the open tool and the lever table run on their own recipes; the
+analysis and the pre-registration done by us; every prediction frozen and published before their data exist. They
+keep their data: keyed on a private branch, public only when they publish.
+
+## Open points
+
+- Which laboratory. It must be new to the keyed record (absent from
+  `docs/reference/contrast_benchmark/split.yml` and `docs/reference/lever_table/new_labs.yml`), so it is a TEST
+  laboratory and adds a laboratory to every cell. Independence: its own method lead, instrument and standards
+  source, and no co-author from a laboratory already in the record.
+- Rerun the sizing on the laboratory's confirmed analyte panel once it is known (not every candidate has thiol
+  isotope dilution; H2S is optional).
+- Optional additions, not in the 44: a time pair (10 vs 40 min at the glucose + cysteine corner, 2 vials each); a
+  pan-fried arm (180 C surface) at the sugar x sulfur corners; a water model pair (glucose + cysteine, unbuffered vs
+  phosphate, 4 vials); yeast extract (needs a PREREG amendment adding the lever class first).
+
+## History of the design
+
+*Kept as written at the time, headings dated. Where it disagrees with the sections above, the sections above hold.
+Figures here use the table of their date (54 sources and 20 laboratories on 2026-11-11; 99 and 44 from 2026-11-14).*
+
+### 2026-11-11: why this study (first draft)
 
 The lever table (`results/validation/lever_table.md`) keyed the literature's within-study contrasts: 54 sources,
 946 usable contrasts, 20 laboratories. It answers **one** formulator question at the three-laboratory standard
@@ -23,7 +161,7 @@ engine can earn a cell: step 5 needs held-out contrasts from two new laboratorie
 temperature cell has two on disk. One laboratory alone would not open step 5 (preposterior check below), though for the prediction itself one
 laboratory does about as well as two or three (predictive check below).
 
-## The design: one 2^3 factorial, 36 pots, in two laboratories (or one)
+### 2026-11-11: the second draft, one 2^3 factorial, 36 pots, in two laboratories (or one); superseded
 
 *Redesigned 2026-11-11 after the preposterior check below. The 2^4 single-laboratory draft is kept in git history.
 What the study must buy is laboratories, not replicates.*
@@ -71,7 +209,7 @@ the factorial pots at the lever's high level against those at its low level (4 a
 per cell). Interactions are estimated within each laboratory and reported with the
 study; they do not enter the table.
 
-## Sizing
+#### Sizing (2026-11-11)
 
 Per-pot reproducibility of a log value is taken as 0.10 - 0.15 dex (PREREG sec. 5 uses 20 % CV, n = 2). One
 laboratory's main effect is a difference of two means of 4 pots (three-laboratory arm) or 8 pots (two-laboratory
@@ -81,7 +219,7 @@ varies between laboratories, and only more laboratories measure that. With one p
 error estimate rests on the duplicated checks and the three-factor interaction; the table does not need it (sec. 5
 uses the declared measurement variance).
 
-## What each result does to the tool
+#### What each result does to the tool (two-laboratory draft, on the 2026-11-14 table)
 
 From the preposterior check, rerun on the 2026-11-14 table (99 sources, 44 laboratories; matrix shift 0.3 dex, A4
 keying; means of 400 simulated outcomes; the 2026-11-12 numbers are in the sections below):
@@ -96,7 +234,7 @@ keying; means of 400 simulated outcomes; the 2026-11-12 numbers are in the secti
 Every prediction (the lever table's and the engine's) is frozen and sent before the data exist, with its pass rule.
 A cell is "answered" only by the PREREG sec. 5 rule.
 
-## Preposterior check: does the study unblock anything? (2026-11-11, rerun on the fixed table 2026-11-12)
+### Preposterior check: does the study unblock anything? (2026-11-11, rerun on the fixed table 2026-11-12)
 
 Before anything is sent, `scripts/generators/build_lever_design_preposterior.py` simulated each candidate design 200
 times. Each run draws true effects from the lever table's own posterior predictive (cells with no keyed estimate draw
@@ -139,7 +277,7 @@ What it shows:
 with checks, keyed by PREREG amendment A4. The laboratory count was then revised by the predictive check below: two by
 default, one acceptable, three not worth it.
 
-## Predictive check: does the number of laboratories matter? (2026-11-11, rerun 2026-11-12)
+### Predictive check: does the number of laboratories matter? (2026-11-11, rerun 2026-11-12)
 
 The 'answered' count above is partly circular: it counts how often new laboratories clear our own three-laboratory
 rule. The non-circular question is how much better the table predicts **a new kitchen cooking in pea isolate**. The
@@ -177,7 +315,7 @@ because step 5 (the engine judged on held-out contrasts from two TEST laboratori
 section keeps two as the default for that reason; if step 5 is not wanted from this round, one laboratory is the
 better and cheaper design.
 
-## Changes after steps 5a - 5b (2026-11-13)
+### Changes after steps 5a - 5b (2026-11-13)
 
 The disagreement audit ([DISAGREEMENT_READING.md](../reference/lever_table/DISAGREEMENT_READING.md)) and the step-5a
 coverage check ([step5a_display_check.md](../../results/validation/step5a_display_check.md)) found why published
@@ -199,7 +337,7 @@ contrasts fail to add up; the design already avoids most of it, and four points 
   fatty-acid profile and peroxide value (2026-11-14): the lipid lane's carrier for pea isolate carries both as
   declared assumptions (`parameters_lipid.LIPID_CARRIERS`), and the peroxide band [2, 40] meq/kg is its widest.
 
-## Changes after steps 13 - 15 (2026-11-14; STATUS_AND_PLAN step 16)
+### Changes after steps 13 - 15 (2026-11-14; STATUS_AND_PLAN step 16)
 
 Three literature steps tried to fill the map's cells one laboratory short before asking anyone to cook. They settle
 what this study must carry:
@@ -224,7 +362,7 @@ what this study must carry:
   absent from `docs/reference/contrast_benchmark/split.yml` and from `docs/reference/lever_table/new_labs.yml`, or it
   adds no laboratory to any cell.
 
-### Sizing rerun on the 2026-11-14 table (step 16a)
+#### Sizing rerun on the 2026-11-14 table (step 16a)
 
 `build_lever_design_preposterior.py` was rerun unchanged on the table after steps 13 - 15 (99 sources, 2,581
 contrasts, 44 laboratories), with 400 simulated worlds per setting instead of 200
@@ -265,7 +403,7 @@ What changed and what did not:
 5. The buffered pair (4 pots per laboratory) is outside the simulation: it serves A6-R1 and the buffer cells, not
    the counts above.
 
-## Premortem (2026-11-14; step 16c)
+### Premortem (2026-11-14; step 16c)
 
 An independent reviewer imagined the study had failed by 2027-12 and listed twelve causes, ranked by likelihood
 times impact. Everything below is decided before anything is sent; the rest of this document is history wherever it
@@ -338,8 +476,7 @@ disagrees.
   - its own method lead, instrument and standards source;
   - no co-author from a laboratory already in the record;
   - (`new_labs.yml`'s collaboration rule).
-  The ZHAW (Steinhaus co-authorship) and Ohio State (shared university) candidates are confirmed against this, and
-  a third laboratory is kept as backup.
+  Each candidate laboratory is checked against these before the protocol goes out, and a backup is kept.
 
 **The brief, made honest:**
 - the effort is weeks of method work, not "a few days of instrument time";
@@ -351,12 +488,12 @@ disagrees.
 Pot count (two laboratories): 2^3 x 2 = 16, matrix background 2, no-isolate 2, buffered pair 4: **24 per laboratory
 (18 before), 48 in all.**
 
-## Gates 16e and 16f (2026-11-14): one laboratory, A7 frozen
+### Gates 16e and 16f (2026-11-14): one laboratory, A7 frozen
 
 **16e, the engine dry run** ([p3_engine_dry_run.md](../../results/validation/p3_engine_dry_run.md),
 `scripts/generators/build_p3_engine_dry_run.py`). The shipped engine was run on the 8 corners through its own front
 door, with A4 main effects. In 15 % pea isolate (protein sites only, since no dossier gives its free sugars or amino
-acids) it predicts **3 of the 57** lever x odorant cells in full and 10 in part. With the pH held it predicts 6 in
+acids) it predicted **3 of the 57** lever x odorant cells in full and 10 in part (the first run; superseded the same day by **9 of 57** after the engine follow-up below). With the pH held it predicts 6 in
 full; with the added precursors in water, none. Why:
 - 7 of the 19 analytes have no engine target: 2- and 3-methylbutanal, phenylacetaldehyde, 1-octen-3-ol, two
   alkylpyrazines and the pyrazine total.
@@ -417,16 +554,16 @@ before freezing, after an independent review of its first draft. Its rules:
 R5's power is stated now. With one laboratory, the pair can show a large difference (P about 0.64 at 0.4 dex per pH
 unit) but is not expected to show sameness (P about 0.28 at D = 0).
 
-**Still open:**
+**Still open** (at the time; the R1 - R5 code was done the same day, `scripts/generators/lever_designed_study.py`):
 - the R1 - R5 code in `build_lever_table.py`, written and tested on synthetic data before any P3 value is read;
 - 16g, the sizing rerun on the laboratory's confirmed analyte panel, with R4 in the simulation.
 
-## What the partner gets
+### What the partner gets (2026-11-11 text)
 
 Co-authorship on the data and on the validation; the open tool and the lever table run on their own recipes; the
 analysis and the pre-registration done by us. They keep their data and decide when to publish.
 
-## Open points for the owner
+### Open points for the owner (2026-11-11 text, two-laboratory draft)
 
 - Which one or two groups. Each must be a separate laboratory (not two groups sharing one instrument or one method
   lead). Preferably each is absent from `docs/reference/contrast_benchmark/split.yml`: PREREG sec. 2 makes an absent

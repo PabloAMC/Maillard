@@ -1,6 +1,6 @@
 # A designed Maillard flavour study in pea protein: one-page brief for partner laboratories
 
-*Draft, 2026-11-14 (STATUS_AND_PLAN sec. 0, step 16). For a food-chemistry group with quantitative GC-MS. The full
+*Draft, 2026-11-14. For a food-chemistry group with quantitative GC-MS. The full
 design, its sizing and its checks are in [FACTORIAL_LEVER_STUDY.md](FACTORIAL_LEVER_STUDY.md). Nothing has been sent.*
 
 ## The problem
@@ -9,7 +9,8 @@ Formulators of plant-based meat ask simple questions: if I switch glucose for ri
 the pH by one unit, what happens to the meaty thiols, the Strecker aldehydes, the pyrazines and the off-notes? We
 keyed the published literature as a table of such levers. Two blind readers read every paper: 99 sources, 2,581
 within-study contrasts, 44 laboratories ([lever table](../../results/validation/lever_table.md)). It answers only
-**8 of 75** of these questions ([experiment map](../../results/validation/experiment_map.md)), for three reasons:
+**8 of 75** of these questions at a three-laboratory standard (15 levers x 5 odorant families;
+[experiment map](../../results/validation/experiment_map.md)), for three reasons:
 - almost every question has been studied by one or two laboratories;
 - no keyed study cooks in a pea or soy isolate;
 - laboratories disagree by more than most levers move.
@@ -62,6 +63,9 @@ In our simulations (`results/validation/lever_design_preposterior.md`, rerun 202
 that the table gets an effect's direction wrong for a new kitchen:
 - from one in two to about one in three, on the 28 questions where the literature has nothing in any matrix;
 - from 0.38 to 0.28, over all 57 questions the study touches.
+
+The 57 are finer than the 75 above: each is one named odorant (19, core and optional) against one of the three levers.
+The 28 are those of the 57 where the literature gives no estimate in any matrix.
 
 They are the first data on any of these questions in a plant-protein isolate.
 

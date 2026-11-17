@@ -1,5 +1,18 @@
 # Modelling the Maillard reaction: an introduction
 
+> **Where things stand, 2026-11-17.** Most sections below were written in September 2026. Four things
+> have changed since.
+> - **The literature, keyed as a table of levers** (99 sources, 2,581 within-study contrasts, 44 laboratories),
+>   answers 8 of 75 formulator questions (15 levers x 5 odorant families) at a three-laboratory standard
+>   ([experiment map](../../results/validation/experiment_map.md)).
+> - **The kinetic model is paused** until a laboratory commits to a designed study. It cannot yet be run on any published
+>   contrast held out from its fit: it lacks the inputs (hydrolysate compositions, printed pH) and targets for many
+>   reported odorants, and only new data can settle which gaps matter.
+> - **The main ask is one factorial in pea protein isolate** (sugar x sulfur source x pH, 44 vials, one laboratory):
+>   [P3_STUDY_BRIEF.md](P3_STUDY_BRIEF.md). It supersedes section 8's single experiment as the first thing to fund.
+> - **Absolute meaty-thiol levels for a new laboratory are refused.** Laboratories differ by about tenfold on them;
+>   the model gives only ratios between two conditions in one laboratory, with an interval.
+
 *For a reader who knows what the Maillard reaction is and nothing else. Each section is one or two
 figures and a few sentences. The figures are made from the repository's own records, so they change
 when the evidence changes. Updated 2026-09-09. Step-by-step reaction trees: [appendix](REACTION_TREES.md).
@@ -250,16 +263,20 @@ percent of the oxidant those pots already carry, so no supply of oxidant, from t
 air, can raise the disulfide share to what is measured. What those measurements want is a faster step
 itself, and its rate already sits at the top of its measured band.
 
-**Why the earlier refusals do not settle it (audit, 2026-11-04; CF-107).** Four of the refused waves
+**Why the earlier refusals do not settle it (audit, 2026-11-04).** Four of the refused waves
 ended at the same fit, stuck in the same place: the thiol removal step was frozen at one fast value
 for every pot, the sugar chemistry fed the thiols in seconds, and most of the fit's error came from
 rows no free constant could fit. Against that pair, any added removal or reservoir is switched off,
 whether it is right or not. Several errors stack here, and fixing one at a time hides each fix. So the
-plan (STATUS_AND_PLAN, step M1) compares them in combination: a supply that runs over hours, plus a
+plan compares them in combination: a supply that runs over hours, plus a
 removal that free cysteine slows, plus the disulfide side, judged on the measurements nearest each
 mechanism rather than on the whole fit.
 
 ## 8. What is needed next
+
+*Background, written in September 2026. Since November the first ask is the pea-protein factorial in
+[P3_STUDY_BRIEF.md](P3_STUDY_BRIEF.md) (see the note at the top). The experiment below is still the one that would
+decide the thiol question, and comes after it.*
 
 **One experiment.** The reference pot (ribose 100 mmol/L, cysteine 33 mmol/L, 0.5 mol/L phosphate,
 pH 5) in 20 mL vials with 5 mL of liquid, volumes written down. Two temperatures, 100 °C for 0.5 to
