@@ -55,12 +55,18 @@ WHAT GOES IN A SPEC FILE (YAML or JSON; the two are read by the same loader)
                  cool-down are NOT modelled; if they matter, split them into a
                  multi-segment program in your own script.
   ph:            pH of the mix. Read the reliability tag before you act on it:
-                 the TRUNK and ACRYLAMIDE lanes carry NO pH term at all, so pH
-                 there is recorded and ignored, and the panel scores pH claims
-                 at or below chance.
-  aw:            water activity, 0-1. NO lane has an a_w term; nothing in the
-                 fit corpus varies it. It is metadata. It is asked for so that
-                 it is on the record, not so that it changes an answer.
+                 the panel scores pH claims at or below chance. The SULFUR
+                 lane solves a pH trajectory; the TRUNK carries a declared
+                 Amadori-decay pH term; the ACRYLAMIDE lane a declared pH
+                 factor inside pH 4-8 (held at the edge outside it); the
+                 LIPID lane has NO pH term. A comparison that moves pH on the
+                 lipid lane, or outside the acrylamide window, is refused.
+  aw:            water activity, 0-1. The TRUNK carries a declared a_w
+                 multiplier inside a_w 0.33-1.00; the ACRYLAMIDE lane a
+                 declared a_w term inside a_w 0.34-0.99 (flat for formation).
+                 The SULFUR and LIPID lanes have NO a_w term. A comparison
+                 that moves a_w on a lane without a term, or outside a lane's
+                 window, is refused rather than answered with two equal arms.
   protein_type / matrix:
                  the medium. 'free' or 'water' means an aqueous model system
                  and selects the aqueous odour thresholds. A named food matrix

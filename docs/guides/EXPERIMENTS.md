@@ -1,5 +1,11 @@
 # What to measure next, and why it would matter
 
+> **2026-11-17: the first ask is now the pea-protein factorial (P3)**, not the experiments below: sugar x sulfur
+> source x pH 6.0 vs 7.0 in 15 % pea isolate, 44 vials in one laboratory
+> ([one-page brief](P3_STUDY_BRIEF.md); [full design](FACTORIAL_LEVER_STUDY.md)). The kinetic model is paused until
+> a laboratory commits to a designed study. This page keeps the protocols for the model's own structural
+> questions (where the meaty thiols go, fed intermediates, thresholds and binding in pea protein), which come after.
+
 *Written for someone deciding where to spend bench time. Every number in it comes from the model's
 own records; nothing here is a guess about what would be interesting. The history of how each entry
 came to say what it says lives in the pre-registrations under `results/validation/`, not here.*
@@ -14,9 +20,10 @@ own evidence cannot locate: the fit can slide them a long way without the cost c
 values are artefacts of where the search happened to stop. The command `maillard wishlist` lists
 them. A measurement here converts a band artefact into a fitted value.
 
-**2. It lifts a refusal.** The model refuses to answer eighteen questions it is asked. Every refusal
-names what is missing. Some are missing a number; some are missing a route; one is missing neither
-and is refused because the lane that would carry it does not drive that row. Read the refusal before
+**2. It lifts a refusal.** The model refuses many of the questions it is asked (the current count is in the
+[README](../../README.md#how-well-calibrated-is-it)). Every refusal names what is missing. Some are
+missing a number; some are missing a route; one is missing neither and is refused because the lane
+that would carry it does not drive that row. Read the refusal before
 designing the experiment, because two of them cannot be lifted by measuring the thing they appear to
 be about.
 

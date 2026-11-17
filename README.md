@@ -1,10 +1,10 @@
 # Maillard
 
 [![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/)
-[![Docker](https://img.shields.io/badge/docker-recommended-blue.svg)](https://www.docker.com/)
+[![Runtime: native conda (default), Docker optional](https://img.shields.io/badge/runtime-conda%20%28default%29%2C%20docker%20optional-blue.svg)](environment.yml)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Out of sample: 10/23 rows within 3x](https://img.shields.io/badge/out--of--sample-10%2F23%20rows%20within%203x-red.svg)](results/validation/core_panel_scores.md)
-[![Strict-ready: 0/37 benchmarks](https://img.shields.io/badge/strict--ready-0%2F37-red.svg)](results/validation/core_panel_scores.md)
+[![Strict-ready: 0/42 benchmarks](https://img.shields.io/badge/strict--ready-0%2F42-red.svg)](results/validation/core_panel_scores.md)
 
 **Maillard** is an open attempt to predict the aroma of a cooked plant-based food from its recipe and
 its cooking programme, for alternative-protein scientists who want meat aroma without the animal.
@@ -19,7 +19,7 @@ and say which experiment would answer it.
 
 | | milestone | today |
 |---|---|---|
-| 1 | Know the direction and rough size of each big lever (sugar, sulfur source, pH, temperature, ...) per odorant | **4 of 75** lever × odorant cells are answered by the literature at a three-laboratory standard ([lever table](results/validation/lever_table.md)) |
+| 1 | Know the direction and rough size of each big lever (sugar, sulfur source, pH, temperature, ...) per odorant | **8 of 75** lever × odorant-family cells (15 levers × 5 families) are answered by the literature at a three-laboratory standard ([experiment map](results/validation/experiment_map.md), from the [lever table](results/validation/lever_table.md)) |
 | 2 | The kinetic model beats that table on contrasts it has never seen | **not testable yet**: the model can be run on none of the held-out contrasts on disk, and is paused until new data arrive ([record](docs/reference/lever_table/STEP5_RECORD.md)); on what can be scored it loses to "no change" ([contrast scores](results/validation/contrast_scores.md)) |
 | 3 | Ratios within threefold in a new laboratory after a few calibration pots | one stand-in case; no real partner yet |
 | 4 | Absolute levels within threefold in a new plant matrix | **10 of 23** rows outside the meaty thiols; absolute thiol levels are refused ([scorecard](results/validation/core_panel_scores.md)) |
@@ -32,7 +32,7 @@ sections below say which data.
 ## What we found
 
 - **The published record answers very little about levers.** 99 sources and 2,581 within-study
-  contrasts from 44 laboratories, each read by two blind readers, answer eight of 75 formulator questions:
+  contrasts from 44 laboratories, each read by two blind readers, answer 8 of 75 formulator questions:
   leaving out cysteine lowers 2-methyl-3-furanthiol about sixfold; xylose gives about three times
   the methional of glucose (and more phenylacetaldehyde); raising the pH lowers 2-furfurylthiol and
   furfural (pH 6 - 7.5) and raises pyrazines and 2-acetylthiazole; lysine gives more pyrazines than
@@ -57,15 +57,16 @@ sections below say which data.
 laboratories add up, are one page: [EXPERIMENTS_BRIEF.md](docs/guides/EXPERIMENTS_BRIEF.md).** In
 short:
 
-1. **The big levers in pea protein** (sugar × sulfur source × pH, 36 pots, ideally two laboratories):
-   the first plant-protein data for the choices every formulation makes first, and the first fair
-   test of the model ([design](docs/guides/FACTORIAL_LEVER_STUDY.md)).
+1. **The big levers in pea protein** (sugar × sulfur source × pH 6.0 vs 7.0, 44 vials, one laboratory):
+   the first plant-protein data for the choices every formulation makes first, and the first plant-isolate
+   data the model can be run on. This is the first ask ([one-page brief](docs/guides/P3_STUDY_BRIEF.md);
+   [full design](docs/guides/FACTORIAL_LEVER_STUDY.md)).
 2. **Where the meaty thiols go** (ribose + cysteine against time at two temperatures): settles the
    model's central structural question and gives it its first activation energies.
 3. **Odour thresholds and hot binding in pea protein**: worth doing with or without any model; nobody
    has published either.
 
-Protocols are in [EXPERIMENTS.md](docs/guides/EXPERIMENTS.md). If you have data, `maillard score`
+Protocols for the other experiments are in [EXPERIMENTS.md](docs/guides/EXPERIMENTS.md). If you have data, `maillard score`
 and `maillard calibrate` take it as it is.
 
 > **New to the chemistry?** [**Modelling the Maillard reaction: an introduction**](docs/guides/INTRODUCTION.md):
@@ -177,96 +178,28 @@ produces, modulo date and git head, and every recorded input still hashes the sa
 
 ## How well calibrated is it?
 
-Badly, and measurably. The numbers below are what the core scores on the union panel — the 16
-trust-loop bundles that hold a measurement, the 17 `maillard_path` hold-outs and the 4 external
-matrix bundles, 37 in all, 39 evaluable rows (8 more are answered but declared not evaluable, 17
-refused) — read from
+Badly, and measurably. The numbers below are what the core scores on the union panel (the trust-loop
+bundles that hold a measurement, the `maillard_path` hold-outs and the external matrix bundles; the row counts
+are in the table), read from
 [`core_panel_scores.md`](results/validation/core_panel_scores.md) and
 [`core_prediction_uncertainty.md`](results/validation/core_prediction_uncertainty.md), and
 pinned by `tests/scientific/test_core_headline_guards.py`. A moved number has to move this page
 in the same change.
 
-**Read the denominator, 2026-09-10.** It moved twice this week, in opposite directions, and the
-rate below is worthless without both halves.
-
-It first went from 39 rows to 46, because seven questions stopped being refused: a branch fraction
-measured in 1978 and 1981 was read into the model, and a missing unit conversion was found. The
-numerator did not move, so **the pass rate FELL on changes that made the model strictly more
-capable.** That is what happens when a model answers more questions, and it is why a bare rate is a
-poor headline.
-
-It then went from 46 back to **39**, and this direction deserves more suspicion, because it flatters
-the rate. Seven rows were refused on the finding that **four of the panel's pots were never cooked**:
-their "40 °C for 10 minutes" is the headspace incubation of the measurement itself, and each
-bundle's own vessel record says so. Asking a model of what heat FORMS to reproduce what a raw flour
-ARRIVED WITH is not a test of its chemistry, and the misses were 3357x to 42301x. Refusing them
-raises within-3x from 7/46 to 7/39 **with no prediction improving at all**. Three things are offered
-against the obvious objection, and the full argument is in
-[`kinetic_core_b31_prereg.md`](results/validation/kinetic_core_b31_prereg.md): the criterion looks
-only at the pot's conditions and never at an error; it needs two independent declarations to agree;
-and **every lipid miss in a pot that WAS cooked still stands**, including this panel's largest, an
-alkylfuran at 366x. The control is Bi 2020, one laboratory measuring one compound in raw and in
-roasted pea: raw missed by 3717x and is refused, roasted misses by 3.7x and is scored.
-
-**A fourth, the same day, and it came from asking whether the third was a one-off.** It was not.
-Cross-referencing all 48 benchmark bundles against the 245 PDFs on disk found **two more** whose
-papers print compounds the bundle never scored — and, in passing, one bundle that contradicted itself
-about whether its own source was on disk, and one stale note left behind by the fix a few hours
-earlier. Eight more measurements went on the panel.
-
-Five of the eight came back as **refusals**, not misses, and that is the useful part. Three are
-compounds whose waves were refused and whose steps ship inert, so the model says so by name instead of
-returning a number. Two more exposed something worse: a pot that charges only a protein isolate was
-**answering 0.0** for any Maillard compound — an absence of a prediction reported as one — because the
-isolate is a lipid carrier and charges nothing on the other networks. This model's own record had
-named that failure two waves earlier and the code kept doing it. It now refuses, and a test asserts
-that **no scored row anywhere has a prediction of exactly zero**.
-
-**A third move, 2026-09-11, and it is the one worth reading.** Five rows were added to the panel —
-not measured, not modelled, just *noticed*. A hold-out bundle scored **one** of the six species its
-own paper measures, and the paper has been on this disk since 7 September under a different author's
-name than the bundle gives it. Scoring the other five moves the rate to **9 of 44** and makes the
-median fold error **worse**, 9.3x to 10.6x, because three of the five are 32x, 35x and 63x. Nothing
-about the model changed; the panel simply stopped ignoring measurements it already had.
-
-What those five say is the sharpest result on this page. In an amine-free pot the model's
-3-deoxyglucosone is right to **11 %** and its methylglyoxal to **28 %** — and then the very next
-species, 3,4-dideoxyglucosone, is **32x low**. The hydroxymethylfurfural deficit is not the entry to
-the sugar chemistry; it is one step, `k_tdg_ddg` — and that is one of four constants whose interval
-this model declined to widen *because two laboratories agree on it*. Both of them measured it dry.
-Agreement is not accuracy when both laboratories share a matrix.
-
-The numerator did move, once: **three rows entered the 3x band together** when a beverage's own
-unheated column was declared as what the pot started with. Between 36 % and 42 % of every level that
-paper prints was in the beverage before any heat, and the model had been charged for the raw
-material. None of the three is a fit row.
-
-**Do not read those three as chemistry.** A declared starting level is a measurement handed to the
-model, so the fold error on the total grades the model partly on the number it was given. Split the
-declaration out of both sides and the picture changes:
-
-| compound | fold on the total | the declared part is | fold on what the cook FORMED |
-|---|---:|---:|---:|
-| hexanal | 2.2x | **93.5 %** of the prediction | **19.7x** |
-| 2-pentylfuran | 2.5x | **92.2 %** | **20.6x** |
-| nonanal | 1.5x | 52.8 % | **2.1x** |
-
-Two of the three are inside the band on about six per cent of their own answer, and on the part the
-chemistry is responsible for the lipid lane still under-predicts by about twentyfold — which is where
-it already was. What improved is the scoring, not the model. Only nonanal is a chemistry result.
-Every scored row now carries this split (`declared_share_of_prediction`, `fold_error_formed_only`)
-so the total can never be quoted without it. The median fold error falls from 31x to 9.3x across all
-of this, and most of that fall is the refusals, not the fix.
+Read the rate with its denominator: refusing a row (for instance one of the pots that were never cooked, whose
+"40 °C for 10 minutes" is the headspace incubation) raises the rate with no prediction improving. How the
+denominator moved in September 2026 is recorded in
+[docs/history/README_calibration_log.md](docs/history/README_calibration_log.md).
 
 | | kinetic core |
 | --- | --- |
-| rows within 3x of the measurement | **10 of 23** (median fold error 4.4x, geometric mean 7.6x). Until 2026-11-07 this read 10 of 24 (4.6x): the S3 application of 2026-11-07 refuses every output the falsified pH balance (M1b part (i); CF-084, CF-134) moves beyond its within-laboratory term (`results/validation/ph_balance_s3_sensitivity.md`), and the one scored sulfur row, Zhang 2025b's 2-acetylthiazole (1757x, a miss), left with it. Until 2026-11-06 this read 11 of 27 (6.2x): the M0 data corrections (batch 1) refused three rows the DATA cannot support -- Ma 2024's extruded-SPI acrylamide (the charge it was integrated at is not in the paper; 9632x low, the panel's worst row), Lin 2022's HMF (its prose and its Fig. 4A disagree) and Bi 2020's roasted-pea hexanal (a net loss of a level the raw peas carried, which no lane can represent; it was a hit, 2.96x). That too **raises the rate on arithmetic alone**, and the median falls mostly because the worst row left. Until 2026-11-05 this read 21 of 66: since then the thiol lane ships relative within-laboratory predictions only (H0 / EX-059, D2 branch (i): out-of-sample tau_ABS 0.964 dex, U >= 1.60), so its 39 absolute rows (MFT, FFT, the MFT disulfide, furfural) leave this count; 29 of the 39 removed rows were misses (26 of the 29 out of sample). **That raises the rate on arithmetic alone; nothing got better.** The rows keep their numbers for the within-study contrast diagnostic. Within-study contrasts, out of sample, now LOSE to predicting no change: 19 pairs in 4 studies, median error 0.30 dex against 0.15 for no change, the sign right on 2 of the 10 resolved pairs (2026-11-07, after the S3 refusal of the falsified pH balance took the pairs whose ratio moves with it; 37 pairs at 0.31 against 0.28, 12 of 25 signs, before; `results/validation/contrast_scores.md`). |
-| **out of sample** — every row a core fit read removed | **10 of 23** (median 4.4x; 10 of 24 before the S3 refusal of 2026-11-07; 11 of 27 before the three data refusals of 2026-11-06; 14 of 56 before the H0 refusal of 2026-11-05, which took all ten rows a fit read with it). Since the 2026-10-28 review a row the fit reads at the POT level (an intermediate of the same pot: Hofmann's in-situ furfural and norfuraneol) also leaves this count, which took the Hofmann ribose/xylose pH 5 MFT and FFT rows out of it (17/60 -> 14/56). B60 (2026-10-28) converged the pH trajectory and refitted: the Hofmann ribose/xylose pH 5 pots went from ~100x low to 1.5-3.6x, so B51's "thiolate sink" diagnosis was a numerical artefact and is withdrawn. The 16 new rows are Amendment 45's blind hold-outs (Zhou 2023c, Zhang 2025b), scored for the first time on B60: **2 of 16 within 3x**. Ten scored rows are read by a fit, directly or at the pot level (7 of 10 within 3x, which is not evidence). **Against a no-chemistry baseline** (a compound's typical yield in the other studies, `results/validation/null_model_baselines.md`), the engine trailed out of sample before the H0 refusal (8 vs 15 of 40; median fold 11.5x vs 8.1x) and still trails on the 8 ppb rows left (4 vs 5; 3.5x vs 2.4x; 5 vs 7 of 12 before the data refusals of 2026-11-06) |
-| by lane, within 3x | acrylamide 4/10 · sulfur 0/0 (its one row, 2-acetylthiazole, refused by S3 on 2026-11-07; the thiol lane's absolute levels are refused) · lipid 4/7 · trunk 2/6 (Leitzen's glyoxal 35x -> 4.8x low once its unheated level is declared) |
-| rows refused rather than answered | **70**: 3 refused by the data itself (2026-11-06: a charge not printed, a source that contradicts itself, a carried level's net loss; CF-127 / 129 / 131), 13 whose level moves with the falsified pH balance beyond tau (S3, 2026-11-07, prereg sec. 21.10; 12 of them are thiol-lane levels H0 refuses too; cure: an S3 change shipping the union of the carried rivals' envelopes once each has passed S3's test on CF-084's controls), 27 thiol-lane absolute levels (H0 / EX-059; cure: a second independent laboratory's absolute measurements, re-scored under H0's rule), 8 in pots nobody heated, 8 that need the unidentified hexose entry, 2 lane conflicts, 2 compounds a pot has no precursor for, 7 targets a lane does not carry — every refusal names its cure |
-| strict-ready (passes its own contract; PRIMARY; free precursor) | **0 of 42**. The one that passed, `hofmann1998_norfuraneol_cysteine_145C_20min_pH5` (1.06x), was a row the sulfur fit read and is an absolute thiol level, refused since 2026-11-05 (H0 / EX-059). `thiamine_cys_glucose_120C_Bolton1994` passed at 1.34x on ASSUMED loadings; read in full on 2026-09-04 (Table I: glucose 51.5 mM, thiamine 13.7 mM, pH 5.65) the core overpredicts its MFT 20x |
-| literature rows inside the 90% Monte-Carlo interval | **12 of 22** (median width 0.99 dex); **12 of 22** out of sample; 1 row not evaluable. 12 of 23 (1.00 dex) until the S3 refusal of 2026-11-07 (its one sulfur row was outside its interval). 13 of 26 (1.01 dex) until the three data refusals of 2026-11-06 (one of them, Bi 2020's hexanal, was inside its interval). Until 2026-11-05 this read 36 of 65 and 29 of 55; the 39 thiol-lane rows (Resconi's furfural, then the widest at 11.8 dex, among them) left the envelope with the H0 refusal, so the coverage and the median width (1.87 -> 1.01 dex) moved over a changed row set, not because any interval narrowed or any prediction improved |
-| direction / ranking skill (119-claim literature panel) | **10 of 19** strictly independent evaluable claims (53 %, not distinguishable from chance); **9 of 15** with pH and water activity set aside, **1 of 4** on pH and water activity; 56 independent claims not evaluable, 13 more since the S3 application of 2026-11-07 refuses every output the falsified pH balance (M1b part (i); CF-084, CF-134) moves beyond its within-laboratory term (`results/validation/ph_balance_s3_sensitivity.md`) (19 of 32, 14 of 22, 5 of 10 before), five of them since the noise-aware rule (a claim whose measured contrast is within the source's noise cannot be scored) and one (AW-03) since the trunk's water-activity window (a_w 0.33 to 1.00, 2026-11-05); 27 claims added blind by Amendment 45; 17 retired against their papers on 2026-10-27 |
+| rows within 3x of the measurement | **10 of 23** (median fold error 4.4x, geometric mean 7.6x). Until 2026-11-07 this read 10 of 24 (4.6x): since then the model refuses every output that moves beyond its within-laboratory error with the sulfur lane's pH balance, which measurements have falsified (`results/validation/ph_balance_s3_sensitivity.md`), and the one scored sulfur row, Zhang 2025b's 2-acetylthiazole (1757x, a miss), left with it. Until 2026-11-06 this read 11 of 27 (6.2x): the first batch of data corrections refused three rows the DATA cannot support -- Ma 2024's extruded-SPI acrylamide (the charge it was integrated at is not in the paper; 9632x low, the panel's worst row), Lin 2022's HMF (its prose and its Fig. 4A disagree) and Bi 2020's roasted-pea hexanal (a net loss of a level the raw peas carried, which no lane can represent; it was a hit, 2.96x). That too **raises the rate on arithmetic alone**, and the median falls mostly because the worst row left. Until 2026-11-05 this read 21 of 66: since then the thiol lane ships relative within-laboratory predictions only (the thiol-level refusal: absolute thiol levels scatter between laboratories by 0.964 dex out of sample), so its 39 absolute rows (MFT, FFT, the MFT disulfide, furfural) leave this count; 29 of the 39 removed rows were misses (26 of the 29 out of sample). **That raises the rate on arithmetic alone; nothing got better.** The rows keep their numbers for the within-study contrast diagnostic. Within-study contrasts, out of sample, now LOSE to predicting no change: 19 pairs in 4 studies, median error 0.30 dex against 0.15 for no change, the sign right on 2 of the 10 resolved pairs (2026-11-07, after the pH-balance refusal took the pairs whose ratio moves with it; 37 pairs at 0.31 against 0.28, 12 of 25 signs, before; `results/validation/contrast_scores.md`). |
+| **out of sample** — every row a core fit read removed | **10 of 23** (median 4.4x; 10 of 24 before the pH-balance refusal of 2026-11-07; 11 of 27 before the three data refusals of 2026-11-06; 14 of 56 before the thiol-level refusal of 2026-11-05, which took all ten rows a fit read with it). Since the 2026-10-28 review a row the fit reads at the POT level (an intermediate of the same pot: Hofmann's in-situ furfural and norfuraneol) also leaves this count, which took the Hofmann ribose/xylose pH 5 MFT and FFT rows out of it (17/60 -> 14/56). The refit of 2026-10-28 converged the pH trajectory: the Hofmann ribose/xylose pH 5 pots went from ~100x low to 1.5-3.6x, so an earlier "thiolate sink" diagnosis was a numerical artefact and is withdrawn. The 16 new rows are blind hold-outs added that day (Zhou 2023c, Zhang 2025b), scored for the first time on that refit: **2 of 16 within 3x**. Ten scored rows are read by a fit, directly or at the pot level (7 of 10 within 3x, which is not evidence). **Against a no-chemistry baseline** (a compound's typical yield in the other studies, `results/validation/null_model_baselines.md`), the engine trailed out of sample before the thiol-level refusal (8 vs 15 of 40; median fold 11.5x vs 8.1x) and still trails on the 8 ppb rows left (4 vs 5; 3.5x vs 2.4x; 5 vs 7 of 12 before the data refusals of 2026-11-06) |
+| by lane, within 3x | acrylamide 4/10 · sulfur 0/0 (its one row, 2-acetylthiazole, refused by the pH-balance rule on 2026-11-07; the thiol lane's absolute levels are refused) · lipid 4/7 · trunk 2/6 (Leitzen's glyoxal 35x -> 4.8x low once its unheated level is declared) |
+| rows refused rather than answered | **70**: 3 refused by the data itself (2026-11-06: a charge not printed, a source that contradicts itself, a carried level's net loss), 13 whose level moves with the falsified pH balance beyond its within-laboratory error (2026-11-07; 12 of them are thiol levels refused on the next ground too; cure: a pH model whose rival versions each pass a test on measured pH controls), 27 thiol-lane absolute levels (cure: absolute measurements from a second independent laboratory), 8 in pots nobody heated, 8 that need the unidentified hexose entry, 2 lane conflicts, 2 compounds a pot has no precursor for, 7 targets a lane does not carry — every refusal names its cure |
+| strict-ready (passes its own contract; PRIMARY; free precursor) | **0 of 42**. The one that passed, `hofmann1998_norfuraneol_cysteine_145C_20min_pH5` (1.06x), was a row the sulfur fit read and is an absolute thiol level, refused since 2026-11-05. `thiamine_cys_glucose_120C_Bolton1994` passed at 1.34x on ASSUMED loadings; read in full on 2026-09-04 (Table I: glucose 51.5 mM, thiamine 13.7 mM, pH 5.65) the core overpredicts its MFT 20x |
+| literature rows inside the 90% Monte-Carlo interval | **12 of 22** (median width 0.99 dex); **12 of 22** out of sample; 1 row not evaluable. 12 of 23 (1.00 dex) until the pH-balance refusal of 2026-11-07 (its one sulfur row was outside its interval). 13 of 26 (1.01 dex) until the three data refusals of 2026-11-06 (one of them, Bi 2020's hexanal, was inside its interval). Until 2026-11-05 this read 36 of 65 and 29 of 55; the 39 thiol-lane rows (Resconi's furfural, then the widest at 11.8 dex, among them) left the envelope with the thiol-level refusal, so the coverage and the median width (1.87 -> 1.01 dex) moved over a changed row set, not because any interval narrowed or any prediction improved |
+| direction / ranking skill (119-claim literature panel) | **10 of 19** strictly independent evaluable claims (53 %, not distinguishable from chance); **9 of 15** with pH and water activity set aside, **1 of 4** on pH and water activity; 56 independent claims not evaluable, 13 more since 2026-11-07, when the model began refusing every output that moves beyond its within-laboratory error with the falsified pH balance (`results/validation/ph_balance_s3_sensitivity.md`) (19 of 32, 14 of 22, 5 of 10 before), five of them since the noise-aware rule (a claim whose measured contrast is within the source's noise cannot be scored) and one water-activity claim since the trunk's water-activity window (a_w 0.33 to 1.00, 2026-11-05); 27 claims added blind on 2026-10-28; 17 retired against their papers on 2026-10-27 |
 
 Three things a reader must know, all declared in code and printed on every row they touch:
 
@@ -306,9 +239,9 @@ Three things a reader must know, all declared in code and printed on every row t
   `undeclared` with the reason in a `quantification_note`, get the bands by default, and say so.
 
 **Directional and ranking claims are the product, and the core scores 10 of 19 on them** (53 %, which is not
-distinguishable from chance; 19 of 32 until the S3 refusal of 2026-11-07 took the claims whose arms or steps move
+distinguishable from chance; 19 of 32 until the pH-balance refusal of 2026-11-07 took the claims whose arms or steps move
 with the falsified pH balance; 25 of 43 before the 2026-10-27 audit checked every claim against its paper: 15 retired,
-4 not independent, several arms reset to the paper's pot. Amendment 45 then added 27 claims blind on 2026-10-28).
+4 not independent, several arms reset to the paper's pot; 27 claims were then added blind on 2026-10-28).
 [`core_directional_scores.md`](results/validation/core_directional_scores.md) runs every claim of
 the 119-claim literature panel ([`directional_claims_panel.yml`](docs/validation/directional_claims_panel.yml))
 through the same front door a user calls. Of the 75 independent claims, 43 are not evaluable on the core:
@@ -494,14 +427,13 @@ Two generated artifacts answer this, and the CLI prints both:
 Both are regenerated and compared by the artifact-freshness gate, so they cannot drift from the
 scorecard they are derived from. Both are machine-generated and terse.
 
-**If you are deciding where to spend bench time, read
-[EXPERIMENTS.md](docs/guides/EXPERIMENTS.md) instead.** It is the same evidence written for a
-person: five experiments in the order they are worth funding, each with the question, the protocol,
-what this model predicts today, and what each possible outcome would decide. It also says what NOT
-to measure and why -- three things that look like gaps and are not, including one compound whose
-branch fraction was measured in 1981, entered the model this week, and is still refused for a
-different reason. The one experiment that would decide the thiol problem is first in that list, and
-also section 8 of the [introduction](docs/guides/INTRODUCTION.md#8-what-is-needed-next). The wet-lab
+**If you are deciding where to spend bench time, start with the first ask:** a sugar × sulfur source × pH
+factorial in pea protein isolate, 44 vials in one laboratory ([one-page brief](docs/guides/P3_STUDY_BRIEF.md);
+[full design](docs/guides/FACTORIAL_LEVER_STUDY.md)). The ranked list around it is
+[EXPERIMENTS_BRIEF.md](docs/guides/EXPERIMENTS_BRIEF.md). The protocols for the model's own questions are in
+[EXPERIMENTS.md](docs/guides/EXPERIMENTS.md): each with the question, the protocol, what this model predicts
+today, and what each outcome would decide, and what NOT to measure and why. Its first ranked experiment, where the meaty
+thiols go, would decide the model's thiol problem. The wet-lab
 protocol for the matrix gap, a quantitative PPI/SPI meaty-positive benchmark with the thiols and
 the off-flavour aldehydes in one run, is
 [PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md](docs/protocols/PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md).
@@ -537,14 +469,14 @@ and its headline numbers were deleted; everything above is the kinetic core, sco
 The retired lane's README, its artifacts and the August 2026 adversarial audit that preceded the
 retirement are kept verbatim under [`docs/history/`](docs/history/) and
 [`results/legacy_lane/`](results/legacy_lane/). File names and artifacts have short tags for
-their provenance (B1 to B18 for the fits and declared terms, lettered waves for the old audit,
+their provenance (B1 to B64 for the fits and declared terms, lettered waves for the old audit,
 "Amendment n" for the fit/hold-out declaration); the
 [glossary](docs/guides/GLOSSARY.md#part-3--identifiers-you-will-meet-in-the-code-and-the-artifacts)
 has the key.
 
 ## Citation
 
-If you use Maillard in your research, please cite:
+If you use Maillard in your research, please cite (machine-readable: [CITATION.cff](CITATION.cff)):
 
 ```
 Moreno Casares, P. A. (2026). Maillard: a kinetic model of the Maillard reaction for
