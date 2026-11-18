@@ -693,3 +693,5 @@ have no null answer): counting it as a difference of 0 pulls the mean to zero an
   the proposal which rule it sits under (or which amendment it needs).
 
 - **Never run a map generator inside an unresolved merge** (2026-11-15, #154). `git checkout --theirs` leaves the index conflicted, so `git ls-files` lists each conflicted file once per stage and data/README.md counts it three times; `--check` passes locally against the same broken index. Resolve first (`git add` the file), then regenerate and `--check`.
+
+- **A new Config key re-pins every stored Config digest; engine numbers are not bit-identical across OSes** (2026-11-18, #158). Adding two `sulfur.*` keys broke the JAX trunk references' `config_digest` checks (regenerate `build_jax_trunk_{lane,acrylamide}_reference.py`, then the module builders in the `maillard-jax` env). A fixture of hex floats written on macOS failed on the Linux runner (stiff solves differ up to 3.3e-7 rel.). Rule: when adding a config key, grep `results/validation` for `config_digest` and regenerate before pushing; compare cross-platform engine numbers with rtol ~1e-5, never bit-for-bit.
