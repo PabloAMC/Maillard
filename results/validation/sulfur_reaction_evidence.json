@@ -4,16 +4,16 @@
     "artifact": "sulfur_reaction_evidence",
     "generated_on": "2026-11-17",
     "git": {
-      "commit": "ef46d6d73d455a7b1edcb353346a5d3c6410a883",
-      "short": "ef46d6d7",
-      "branch": "share-scrub",
+      "commit": "50a224ab99c4fccb04894bc96551a7a73d816e1b",
+      "short": "50a224ab",
+      "branch": "engine-gaps-thiamine-h2s",
       "dirty": true
     },
     "generated_by": "scripts/generators/build_sulfur_reaction_evidence.py",
     "inputs": [
       {
         "path": "results/validation/sulfur_flux_attribution.json",
-        "sha256": "57474c7993e9c3d9492bc5d7008782af64546f850bfe25219b471382cdf55c5f"
+        "sha256": "8427e29489f41b3524c6dd3914675f7da600ad16fc51584c3162841e8546e054"
       },
       {
         "path": "results/validation/kinetic_core_b60_laplace_covariance.json",
@@ -33,11 +33,11 @@
       },
       {
         "path": "src/kinetic_core/sulfur.py",
-        "sha256": "31d5d49b849f02444c47f78c0fbd0085e86c41eaa7cb4cdd46ccc9c9b333161e"
+        "sha256": "5ba0388889ef70e085e2a8adbcd82a091a9b469cca4a236a6ae3d2f603a2a98c"
       },
       {
         "path": "src/kinetic_core/parameters_sulfur.py",
-        "sha256": "2fe25cb8cc06632336fbecb7d8caef8a9a824bd68e7e7fe5be0d3450a9f8a5f5"
+        "sha256": "2d50a1333e62ed833fb8d87d1eaa51e2d99faa8b6b986c96651362e13c8d27ea"
       },
       {
         "path": "src/kinetic_core/parameters.py",

@@ -82,6 +82,8 @@ FLIPPED = {
     "sulfur.strecker_sulfur": dataclasses.replace(ps.StreckerSulfur(), enabled=True, h2s_share=0.08),
     "sulfur.cys_amadori_route": dataclasses.replace(ps.CysAmadoriRoute(), enabled=True, split_law="base_saturating"),
     "sulfur.tdp_own_decay": ps.TdpOwnDecay(enabled=True),
+    "sulfur.thiamine_h2s_unmeasured_rival": ps.ThiamineH2sUnmeasuredRival(enabled=True),   # 2026-11-17
+    "sulfur.thiamine_h2s_refusal": False,   # 2026-11-17: the refusal where thiamine's H2S share is unmeasured
     "sulfur.furfural_barriers": ps.FurfuralBarriers(enabled=True),
     "sulfur.single_temperature_barriers": ps.SingleTemperatureBarriers(enabled=True),
     "fit.dimer_encounter_ceiling": dataclasses.replace(ps.DimerEncounterCeiling(), enabled=True, mft_cap_mmol_l=2.0),

@@ -4,9 +4,9 @@
   "artifact": "incumbent_evidence_tiers",
   "generated_on": "2026-11-17",
   "git": {
-   "commit": "ef46d6d73d455a7b1edcb353346a5d3c6410a883",
-   "short": "ef46d6d7",
-   "branch": "share-scrub",
+   "commit": "50a224ab99c4fccb04894bc96551a7a73d816e1b",
+   "short": "50a224ab",
+   "branch": "engine-gaps-thiamine-h2s",
    "dirty": true
   },
   "generated_by": "scripts/generators/build_evidence_tiers.py",
@@ -73,11 +73,11 @@
    },
    {
     "path": "results/validation/sulfur_reaction_evidence.json",
-    "sha256": "87c8f2dfddb31b7db3ca7ad76e08bae79533db35c928942d60b1795fecae5300"
+    "sha256": "1da7fa8bf7ab80c1c0b154b922bf1e2875ff33a86f1ba8ae436441a1b7500ba0"
    },
    {
     "path": "results/validation/data_wishlist.json",
-    "sha256": "e786df175e14044f40b084013752619e91d05194434655bc5c6bb88a3205fba3"
+    "sha256": "87d81faf895c6f97e01ad7b5e6d919e978a71b89b8122b23f2fedbd4f7e7905e"
    },
    {
     "path": "docs/reference/unpinned_constants.yml",
@@ -145,7 +145,7 @@
    },
    {
     "path": "src/kinetic_core/parameters_sulfur.py",
-    "sha256": "2fe25cb8cc06632336fbecb7d8caef8a9a824bd68e7e7fe5be0d3450a9f8a5f5"
+    "sha256": "2d50a1333e62ed833fb8d87d1eaa51e2d99faa8b6b986c96651362e13c8d27ea"
    },
    {
     "path": "src/evidence_tiers.py",

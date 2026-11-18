@@ -6998,16 +6998,16 @@
   "artifact": "frozen_fit_reproducibility",
   "generated_on": "2026-11-17",
   "git": {
-   "commit": "ef46d6d73d455a7b1edcb353346a5d3c6410a883",
-   "short": "ef46d6d7",
-   "branch": "share-scrub",
+   "commit": "50a224ab99c4fccb04894bc96551a7a73d816e1b",
+   "short": "50a224ab",
+   "branch": "engine-gaps-thiamine-h2s",
    "dirty": true
   },
   "generated_by": "scripts/generators/build_frozen_fit_reproducibility.py",
   "inputs": [
    {
     "path": "results/validation/incumbent_evidence_tiers.json",
-    "sha256": "130510686da9aa2fd9a51dc4c3cdccd452ef0bf61e87ff92e5568ae99258b319"
+    "sha256": "a7bf71cd08eec0bbda6fefee1f34cba46845c091010f995e0423c20b02a9d144"
    },
    {
     "path": "results/validation/kinetic_core_b1_fit_report.json",

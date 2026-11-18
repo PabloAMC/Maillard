@@ -41,11 +41,11 @@
   },
   "provenance": {
     "artifact": "core_panel_scores",
-    "generated_on": "2026-11-07",
+    "generated_on": "2026-11-17",
     "git": {
-      "commit": "5e61fed0344b8b1cb5f8312085ed42ad63ad3b0b",
-      "short": "5e61fed0",
-      "branch": "s3-ph-balance-refusal",
+      "commit": "50a224ab99c4fccb04894bc96551a7a73d816e1b",
+      "short": "50a224ab",
+      "branch": "engine-gaps-thiamine-h2s",
       "dirty": true
     },
     "generated_by": "src/kinetic_core/scoring.py",
@@ -475,7 +475,7 @@
       "total": 16
     },
     "shared_with_holdout_panel": 0,
-    "wall_seconds": 1052.3
+    "wall_seconds": 147.1
   },
   "benchmarks": [
     {

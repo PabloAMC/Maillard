@@ -74,6 +74,27 @@ its freeze recorded, before any value of that study is read, which is what this 
 against the study's own design (the P3 dry run, `results/validation/p3_engine_dry_run.md`), never against contrasts
 already read. Literature-only work (scoping, keying blind, the perception layer) was never paused.
 
+**Amendment (2026-11-17, owner).** The owner lifts the pause for one named change: **thiamine's H2S release outside
+its measured range is refused, not set to zero.** Today `THIAMINE_H2S_SHARE_FLOOR_PH` = 6.25 sets the share to 0 below
+pH 6.25 at every temperature. That zero is measured only near 100 C. At 120 C the two assays of one laboratory
+disagree by more than 25x at pH 6 (Dwivedi & Arnold 1971, methylene blue, about 0.36 of the thiamine degraded;
+Dwivedi & Arnold 1972, 35S, at most 0.014), and nothing is measured above 121 C. Outputs that depend on that share
+there are refused, as the pH-balance refusal (S3) does for its rivals. No constant is fitted and no TEST contrast is
+read, so the step-5 looks are untouched.
+
+A premortem (2026-11-17) ruled out the two fits first scoped:
+
+- a fitted share(pH, T): not identifiable (the 120 C profile is not monotone in pH, the share drifts with time, and
+  the two assays disagree in both numerator and denominator); its hold-outs were seen at design, and three of the four
+  E18 TEST contrasts cannot run through the front door. A declared band (about 40 - 50 h) waits for P3 or the
+  partner's thiamine series, which measure this cell directly;
+- 3-mercapto-2-pentanone's sugar route (Cerny & Briffod 2007): no shipped output (not a P3 analyte), its concentration
+  pair is circular with the fit row, and its constant is confounded with the parked M1/M2 routes. It waits for M1/M2.
+
+Everything else stays paused: water activity for the sulfur lane, methional and the Strecker arm, trimethylpyrazine
+and the L1 lipid sink lack the evidence. The forecasts already sent outside the repository are frozen and are scored
+as written.
+
 ## Bookkeeping
 
 5a and 5c are two of the step-5 scoring looks at TEST contrasts that sec. 0 allows (at most three before

@@ -2,11 +2,11 @@
   "artifact": "sulfur_flux_attribution",
   "provenance": {
     "artifact": "sulfur_flux_attribution",
-    "generated_on": "2026-11-06",
+    "generated_on": "2026-11-17",
     "git": {
-      "commit": "cb7a888ea9269d1668c1687af64d19f122b2a0c0",
-      "short": "cb7a888e",
-      "branch": "m1b-part-i-build",
+      "commit": "50a224ab99c4fccb04894bc96551a7a73d816e1b",
+      "short": "50a224ab",
+      "branch": "engine-gaps-thiamine-h2s",
       "dirty": true
     },
     "generated_by": "scripts/generators/build_sulfur_flux_attribution.py",
@@ -17,7 +17,7 @@
       },
       {
         "path": "src/kinetic_core/sulfur.py",
-        "sha256": "31d5d49b849f02444c47f78c0fbd0085e86c41eaa7cb4cdd46ccc9c9b333161e"
+        "sha256": "5ba0388889ef70e085e2a8adbcd82a091a9b469cca4a236a6ae3d2f603a2a98c"
       }
     ]
   },

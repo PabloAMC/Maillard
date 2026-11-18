@@ -18,18 +18,18 @@
 
 | solver | tolerance | pots | max dex, all species | worst (pot, species) | max dex, ACR and HMF | steps (all pots) | wall s after JIT | max abs below floor / max y0 | element drift |
 |---|---|---|---|---|---|---|---|---|---|
-| Kvaerno4 | tight_1e-10 | panel (18) | 1.4e-09 | mp_holdout_fructose_asparagine_180C_Lin2022:upper Glc | 1.6e-11 | 65076 | 7.774 | 4.9e-18 | 5.5e-15 |
-| Kvaerno4 | tight_1e-10 | profile (1) | 1.4e-09 | synthetic_profile_acrylamide_all_steps_25_180_100:point Cys | 1.1e-12 | 8325 | 0.966 | 3.5e-18 | 3.2e-15 |
-| Kvaerno4 | fit_tol_1e-8 | panel (18) | 1.3e-07 | mp_holdout_fructose_asparagine_180C_Lin2022:upper Glc | 1.6e-09 | 20030 | 2.294 | 4.5e-16 | 3.6e-15 |
-| Kvaerno4 | fit_tol_1e-8 | profile (1) | 1.3e-07 | synthetic_profile_acrylamide_all_steps_25_180_100:point Cys | 4.5e-11 | 2763 | 0.311 | 3.0e-16 | 2.4e-15 |
-| Kvaerno4 | loose_1e-6 | panel (18) | 1.4e-05 | mp_holdout_fructose_asparagine_180C_Lin2022:upper Glc | 1.5e-07 | 6086 | 0.678 | 3.6e-14 | 1.7e-15 |
-| Kvaerno4 | loose_1e-6 | profile (1) | 1.2e-05 | synthetic_profile_acrylamide_all_steps_25_180_100:point Cys | 5.1e-09 | 1030 | 0.127 | 2.7e-14 | 9.9e-16 |
-| Kvaerno5 | tight_1e-10 | panel (18) | 2.2e-09 | mp_holdout_fructose_asparagine_180C_Lin2022:upper Glc | 1.9e-11 | 89448 | 11.655 | 1.3e-17 | 3.0e-15 |
-| Kvaerno5 | tight_1e-10 | profile (1) | 3.3e-09 | synthetic_profile_acrylamide_all_steps_25_180_100:point Cys | 3.9e-13 | 5463 | 0.730 | 8.0e-18 | 2.6e-15 |
-| Kvaerno5 | fit_tol_1e-8 | panel (18) | 2.4e-07 | mp_holdout_fructose_asparagine_180C_Lin2022:upper Glc | 1.5e-09 | 33368 | 4.530 | 9.4e-16 | 2.1e-15 |
-| Kvaerno5 | fit_tol_1e-8 | profile (1) | 2.9e-07 | synthetic_profile_acrylamide_all_steps_25_180_100:point Cys | 2.4e-11 | 2299 | 0.315 | 6.8e-16 | 3.3e-16 |
-| Kvaerno5 | loose_1e-6 | panel (18) | 2.2e-05 | mp_holdout_fructose_asparagine_180C_Lin2022:upper Glc | 9.9e-08 | 11554 | 1.559 | 5.4e-14 | 1.3e-15 |
-| Kvaerno5 | loose_1e-6 | profile (1) | 2.1e-05 | synthetic_profile_acrylamide_all_steps_25_180_100:point Cys | 8.7e-10 | 1085 | 0.145 | 4.9e-14 | 2.2e-16 |
+| Kvaerno4 | tight_1e-10 | panel (18) | 1.4e-09 | mp_holdout_fructose_asparagine_180C_Lin2022:upper Glc | 1.6e-11 | 65076 | 4.710 | 4.9e-18 | 5.5e-15 |
+| Kvaerno4 | tight_1e-10 | profile (1) | 1.4e-09 | synthetic_profile_acrylamide_all_steps_25_180_100:point Cys | 1.1e-12 | 8325 | 0.581 | 3.5e-18 | 3.2e-15 |
+| Kvaerno4 | fit_tol_1e-8 | panel (18) | 1.3e-07 | mp_holdout_fructose_asparagine_180C_Lin2022:upper Glc | 1.6e-09 | 20030 | 1.729 | 4.5e-16 | 3.6e-15 |
+| Kvaerno4 | fit_tol_1e-8 | profile (1) | 1.3e-07 | synthetic_profile_acrylamide_all_steps_25_180_100:point Cys | 4.5e-11 | 2763 | 0.232 | 3.0e-16 | 2.4e-15 |
+| Kvaerno4 | loose_1e-6 | panel (18) | 1.4e-05 | mp_holdout_fructose_asparagine_180C_Lin2022:upper Glc | 1.5e-07 | 6086 | 0.513 | 3.6e-14 | 1.7e-15 |
+| Kvaerno4 | loose_1e-6 | profile (1) | 1.2e-05 | synthetic_profile_acrylamide_all_steps_25_180_100:point Cys | 5.1e-09 | 1030 | 0.081 | 2.7e-14 | 9.9e-16 |
+| Kvaerno5 | tight_1e-10 | panel (18) | 2.2e-09 | mp_holdout_fructose_asparagine_180C_Lin2022:upper Glc | 1.9e-11 | 89448 | 8.854 | 1.3e-17 | 3.0e-15 |
+| Kvaerno5 | tight_1e-10 | profile (1) | 3.3e-09 | synthetic_profile_acrylamide_all_steps_25_180_100:point Cys | 3.9e-13 | 5463 | 0.522 | 8.0e-18 | 2.6e-15 |
+| Kvaerno5 | fit_tol_1e-8 | panel (18) | 2.4e-07 | mp_holdout_fructose_asparagine_180C_Lin2022:upper Glc | 1.5e-09 | 33368 | 3.231 | 9.4e-16 | 2.1e-15 |
+| Kvaerno5 | fit_tol_1e-8 | profile (1) | 2.9e-07 | synthetic_profile_acrylamide_all_steps_25_180_100:point Cys | 2.4e-11 | 2299 | 0.244 | 6.8e-16 | 3.3e-16 |
+| Kvaerno5 | loose_1e-6 | panel (18) | 2.2e-05 | mp_holdout_fructose_asparagine_180C_Lin2022:upper Glc | 9.9e-08 | 11554 | 1.054 | 5.4e-14 | 1.3e-15 |
+| Kvaerno5 | loose_1e-6 | profile (1) | 2.1e-05 | synthetic_profile_acrylamide_all_steps_25_180_100:point Cys | 8.7e-10 | 1085 | 0.091 | 4.9e-14 | 2.2e-16 |
 
 Panel pots: the 6 bundles the engine routes to the acrylamide lane and answers, each at its point and at the low and high ends of every sampled condition band (18 records, one compile). Profile: a synthetic staircase (25 -> 180 -> 100 C, 2 K steps) with every competitor charged, at pH 5.0 and a_w 0.80, so all 42 steps and every condition term carry flux.
 
@@ -58,10 +58,10 @@ The engine's forward-difference Jacobian is (1 + 84) lane runs, from the median 
 
 | pot class | segments | engine run s | engine FD Jacobian s | JAX solve s (rtol 1e-8) | steps | compile s | JAX Jacobian s (rtol 1e-8) | compile s | JAX solve s (1e-6) | JAX Jacobian s (1e-6) | load |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| short isothermal (synthetic, 0.42 min at 130 C) | 1 | 4.5e-03 | 3.8e-01 | 2.8e-03 | 19 | 1.7 | 2.9e-02 | 3.5 | 1.6e-03 | 1.6e-02 | 16.56 20.67 17.36 |
-| isothermal hold (30 min at 180 C) | 1 | 1.1e-01 | 9.6e+00 | 3.0e-01 | 2248 | 1.9 | 3.3e+00 | 6.9 | 1.1e-01 | 1.1e+00 | 17.73 20.53 17.42 |
-| dense isothermal (200 mM, 30 min at 180 C) | 1 | 1.4e-01 | 1.2e+01 | 4.1e-01 | 3125 | 2.2 | 4.4e+00 | 7.2 | 1.5e-01 | 1.6e+00 | 15.83 19.67 17.24 |
-| staircase profile (all 42 steps) | 119 | 4.0e-01 | 3.4e+01 | 2.9e-01 | 2299 | 2.3 | 3.3e+00 | 5.9 | 1.5e-01 | 1.6e+00 | 15.33 18.90 17.06 |
+| short isothermal (synthetic, 0.42 min at 130 C) | 1 | 2.9e-03 | 2.5e-01 | 2.5e-03 | 19 | 1.3 | 3.5e-02 | 3.0 | 1.4e-03 | 2.1e-02 | 7.41 7.10 6.54 |
+| isothermal hold (30 min at 180 C) | 1 | 7.6e-02 | 6.4e+00 | 1.9e-01 | 2248 | 2.3 | 3.4e+00 | 5.6 | 6.6e-02 | 1.2e+00 | 7.69 7.21 6.60 |
+| dense isothermal (200 mM, 30 min at 180 C) | 1 | 8.3e-02 | 7.1e+00 | 2.6e-01 | 3125 | 1.3 | 4.6e+00 | 7.4 | 1.1e-01 | 1.7e+00 | 7.92 7.33 6.67 |
+| staircase profile (all 42 steps) | 119 | 2.5e-01 | 2.1e+01 | 1.9e-01 | 2299 | 1.5 | 3.5e+00 | 6.6 | 9.0e-02 | 1.6e+00 | 8.18 7.46 6.74 |
 
 ## Findings
 

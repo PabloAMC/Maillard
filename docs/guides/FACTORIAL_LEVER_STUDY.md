@@ -511,7 +511,7 @@ This is an engine follow-up, not a design input.
 - *The lipid carrier.* Ingredient-built isolate pots carry the matrix key `pea_isolate`, which the lipid lane did not
   map to its `pea_protein_isolate` carrier, so it refused the arm. `engine.LIPID_CARRIER_ALIASES` now maps it.
 
-The dry run now predicts **9 of 57** cells in full and 11 in part (12 with the pH held), and DMHF sugar identity is an
+The dry run now predicts **9 of 57** cells in full and 10 in part (9 with the pH held, since 2026-11-17: the thiamine-H2S refusal takes the pH-6 thiamine pairs of furfural), and DMHF sugar identity is an
 ordering only. The lipid cells (hexanal, nonanal, 2-pentylfuran) read exactly +0.00: the lipid lane has no coupling
 to sugar, sulfur source or pH, so the zero is structural, not evidence of no effect. The remaining gaps are scoped:
 the trunk targets (methional, 2,5-DMP, Strecker aldehydes, pyrazines) are refused because every P3 corner resolves to

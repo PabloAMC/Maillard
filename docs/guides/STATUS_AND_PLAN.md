@@ -119,8 +119,12 @@ comes with the data.
   1-octen-3-ol (a 10-hydroperoxide pool). **These wait for the pause to end (row 6):** the two 11-14 fixes were a
   presentation rule and a wiring bug, not a constant or a structure; these are structure and constants, so they
   start when a laboratory commits to P3 (STEP5_RECORD 'When the pause ends', amendment 2026-11-14), in this order:
-  the lane structure (A2, at parity on the sulfur panel), trimethylpyrazine, the Strecker arm (after the lot's
-  composition is known); all frozen before any P3 value is read. 1-octen-3-ol stays out of scope. The lipid zeros: scoped 11-14/15 in
+  the lane structure (A2, at parity on the sulfur panel); all frozen before any P3 value is read. **Corrected
+  2026-11-17:** the Strecker arm is not a feasible literature step (M3 closed it on 2026-11-05 as undecidable on disk:
+  0/4000 joint reach) and trimethylpyrazine's only rate source is a TEST laboratory (Yu 2018), so both wait for a
+  measurement. **Lifted 2026-11-17 by the owner for one change** (STEP5_RECORD amendment 2026-11-17): thiamine's H2S
+  release above 100 C and below pH 6.25 is refused instead of set to zero; the fitted band and 3-mercapto-2-pentanone's
+  sugar route wait for data (premortem 2026-11-17). 1-octen-3-ol stays out of scope. The lipid zeros: scoped 11-14/15 in
   [L1_lipid_lever_coupling_scoping.md](../reference/cases/L1_lipid_lever_coupling_scoping.md) (a thiol / H2S carbonyl sink for the
   sulfur lever; waits with the rest). | the updated design (one laboratory), its premortem, A7, the outreach package; ready for the owner (16h done) | 6 h (16a - 16d done); 16e 3 h, 16f 3 h, 16h 3 h |
 | later | **Without a laboratory, optional:** requests to authors for supplementary tables of the discordant cells (drafted here, sent by the owner) | -- | -- |

@@ -2712,6 +2712,22 @@ labelling artefact: Kang 100/120, Feng 100/120, Zhai folds, Yiltirak's ladder, M
 (2) "Kang 2026 has 8-point MFT/FFT time courses" (first pass, this date) is wrong: the SI dossier
 states every volatile number is a 120-min endpoint; only the free-Cys curves are time-resolved.
 
+### Thiamine's H2S share refused where its zero is unmeasured (2026-11-17, owner amendment in STEP5_RECORD.md)
+
+- [x] **2026-11-17.** `src/kinetic_core/thiamine_h2s_refusal.py`: on a sulfur-lane pot with thiamine above 105 C the
+  engine integrates a carried rival (Dwivedi & Arnold 1971's ~0.36 share below pH 6.25 above 105 C, config key
+  `sulfur.thiamine_h2s_unmeasured_rival`, held in the JAX port) and refuses each output moving > omega / 2 (0.21 dex,
+  per arm, so no ratio moves > omega); reason names 1971 vs 1972 (<= 0.014) and the lift (P3 or a thiamine series).
+  No share value changed, nothing fitted, no TEST contrast read. Result: core panel bit-identical (only provenance
+  moved; Bolton 1994's MFT moves 0.007 dex, answered); P3 dry run still **9 of 57** (partial 11 -> 10; held-pH
+  reading 12 -> 9: furfural's three cells lose their thiamine pH-6 pairs); the H2S thiamine-vs-cysteine cell, 1/4
+  pairs (-3.19) before, is now refused in all four pairs. Directional panel: verdicts unchanged (headline 10/19, all
+  15/31); PH-03, CER07-PH-01 / -02 were not evaluable under S3 and now name the thiamine refusal first. Frozen-fit drift
+  gate (all eleven fits, incl. B2.3 / B60) unchanged. Known cost: levels moving between omega / 2 and tau (furfural
+  0.26 dex in Cerny 2007's pH-5 arm, 0.52 - 0.81 dex in the P3 pH-6 thiamine pots) are refused, though S3's R1 would
+  show them. Found and fixed on the way: S3's own rival integrations must run with `thiamine_refusal=False`, and the
+  verdict cache is keyed by the Config, else a verdict decided at an S3 rival point stood for the shipped one.
+
 ## 6. Risks and guardrails
 
 | Risk | Guardrail |
