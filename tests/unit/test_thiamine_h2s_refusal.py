@@ -142,8 +142,8 @@ REFERENCE = json.loads((ROOT / "tests" / "fixtures" / "thiamine_refusal_origin_m
 
 
 def test_switch_off_matches_origin_main_on_the_sulfur_panel_pots():
-    """Bit-identical on the machine that wrote the fixture (macOS); the CI runner (Linux) differs in the last ~30 bits
-    (rel. ~5e-9, 2026-11-18), so the comparison is to rtol 1e-7, far below the 0.21 dex any refusal moves."""
+    """Bit-identical on the machine that wrote the fixture (macOS); the CI runner (Linux) differs in the solver's last digits
+    (up to rel. 3.3e-7 in the stiff solves, 2026-11-18), so the comparison is to rtol 1e-5, far below the 0.21 dex any refusal moves."""
     from src.kinetic_core.panel import bundle_targets, core_spec, load_bundle
 
     assert len(REFERENCE) >= 20
@@ -155,4 +155,4 @@ def test_switch_off_matches_origin_main_on_the_sulfur_panel_pots():
             got = dict(run.concentrations_ug_per_l)
             assert set(got) == set(expected), bundle
             for c, hx in expected.items():
-                assert float(got[c]) == pytest.approx(float.fromhex(hx), rel=1e-7, abs=0.0), (bundle, c)
+                assert float(got[c]) == pytest.approx(float.fromhex(hx), rel=1e-5, abs=0.0), (bundle, c)
