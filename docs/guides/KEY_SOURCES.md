@@ -1,6 +1,6 @@
 # The papers the model rests on
 
-*2026-11-24. The repository has read about 350 papers, but most give nothing quantitative (the full list, and
+*2026-11-24. The repository has read about 600 papers, but most give nothing quantitative (the full list, and
 what is taken from each: [SOURCES.md](SOURCES.md)). This page lists the few that carry the model. Counts are the
 repository's own: rate constants taken from a paper, fit rows a calibration was tuned on, benchmark pots the model
 is scored against, and directional claims it is scored on (`build_thiol_sink_figures.paper_usage_counts`).*
