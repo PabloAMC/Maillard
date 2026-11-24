@@ -329,7 +329,7 @@ def test_template_flag_prints_a_spec_and_exits_zero():
 
 
 def test_readme_carries_the_model_card_markers():
-    readme = (ROOT / "README.md").read_text(encoding="utf-8")
+    readme = (ROOT / "docs" / "reference" / "TECHNICAL_OVERVIEW.md").read_text(encoding="utf-8")
     assert model_card.README_BEGIN in readme
     assert model_card.README_END in readme
     assert readme.index(model_card.README_BEGIN) < readme.index(model_card.README_END)
@@ -348,9 +348,9 @@ def test_the_readme_model_card_is_not_stale():
     # this test red -- which is the right outcome, since the published card would be wrong.
     card = model_card.build_model_card(run_gate_checks=True)
     markdown = model_card.render_model_card_markdown(card)
-    _, changed = model_card.splice_into_readme(markdown, ROOT / "README.md")
+    _, changed = model_card.splice_into_readme(markdown, ROOT / "docs" / "reference" / "TECHNICAL_OVERVIEW.md")
     assert not changed, (
-        "README.md's model card does not match the artifacts. Regenerate it:\n"
+        "The technical overview's model card does not match the artifacts. Regenerate it:\n"
         "  python scripts/generators/generate_model_card.py"
     )
 

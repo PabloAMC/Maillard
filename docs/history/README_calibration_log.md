@@ -2,7 +2,7 @@
 
 *Moved verbatim from the README's "How well calibrated is it?" section on 2026-11-17; only the relative link
 paths were changed so they resolve from here. It is the dated record of how the panel's denominator moved in
-September 2026. The current numbers are in the [README](../../README.md#how-well-calibrated-is-it).*
+September 2026. The current numbers are in the [technical overview](../reference/TECHNICAL_OVERVIEW.md#how-well-calibrated-is-it).*
 
 **Read the denominator, 2026-09-10.** It moved twice this week, in opposite directions, and the
 rate below is worthless without both halves.

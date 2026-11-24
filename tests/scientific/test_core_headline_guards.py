@@ -24,6 +24,8 @@ from src.kinetic_core import scoring
 
 ROOT = Path(__file__).resolve().parents[2]
 README = ROOT / "README.md"
+#: the README's detail moved here on 2026-11-24 (the README keeps the badge and a short table)
+OVERVIEW = ROOT / "docs" / "reference" / "TECHNICAL_OVERVIEW.md"
 AUDIT = ROOT / "docs" / "history" / "AUDIT_legacy_lane_2026-08.md"
 SCORES = data_paths.VALIDATION_DIR / "core_panel_scores.json"
 ENVELOPE = data_paths.VALIDATION_DIR / "core_prediction_uncertainty.json"
@@ -259,15 +261,16 @@ def test_within_3x_and_out_of_sample_counts(tracked_scores):
     # RE-PINNED 2026-11-06 (M0 data corrections, batch 1): 6/18 -> 6/17 (Lin 2022 HMF, a miss, demoted).
     # RE-PINNED 2026-11-07 (S3 application of M1b part (i), ph_balance_refusal): 6/17 -> 6/16 (the 2-acetylthiazole miss).
     assert s["holdout_within_band"] == {"hits": 6, "total": 16}
-    readme = _doc_text(README)
-    _assert_quoted(readme, "10 of 23", "README.md", "the core's within-3x and out-of-sample count")
-    _assert_quoted(readme, "raises the rate on arithmetic alone", "README.md", "why the denominator fell (H0)")
+    readme = _doc_text(OVERVIEW)
+    _assert_quoted(readme, "10 of 23", "TECHNICAL_OVERVIEW.md", "the core's within-3x and out-of-sample count")
+    _assert_quoted(readme, "raises the rate on arithmetic alone", "TECHNICAL_OVERVIEW.md", "why the denominator fell (H0)")
     # 2026-09-11 (review of PR #16): the BADGE on line 6 had said 3/38 through three re-pins of the
     # body text below it, because nothing asserted it. The most visible number on the page is now
     # pinned to the same artifact as the table.
-    _assert_quoted(readme, "out--of--sample-10%2F23%20rows%20within%203x", "README.md", "the out-of-sample badge")
+    _assert_quoted(_doc_text(README), "out--of--sample-10%2F23%20rows%20within%203x", "README.md", "the out-of-sample badge")
+    _assert_quoted(_doc_text(README), "**10 of 23**", "README.md", "the short table's out-of-sample count")
     # The subtraction has to be VISIBLE on the page that carries the rate, not only in the wave.
-    _assert_quoted(readme, "never cooked", "README.md", "why the denominator fell")
+    _assert_quoted(readme, "never cooked", "TECHNICAL_OVERVIEW.md", "why the denominator fell")
 
 
 def test_no_core_benchmark_is_strict_ready_since_bolton_1994_was_read(tracked_scores):
@@ -290,9 +293,9 @@ def test_no_core_benchmark_is_strict_ready_since_bolton_1994_was_read(tracked_sc
     bolton = next(b for b in tracked_scores["benchmarks"] if b["benchmark_id"] == "thiamine_cys_glucose_120C_Bolton1994")
     assert bolton["scale_thresholds"]["max_ratio"] == pytest.approx(3.0)
     assert not any(r["in_core_fit"] for r in bolton["compounds"])
-    readme = _doc_text(README)
-    _assert_quoted(readme, "0 of 42", "README.md", "the core strict-ready count")
-    _assert_quoted(readme, "thiamine_cys_glucose_120C_Bolton1994", "README.md", "the benchmark that lost its pass")
+    readme = _doc_text(OVERVIEW)
+    _assert_quoted(readme, "0 of 42", "TECHNICAL_OVERVIEW.md", "the core strict-ready count")
+    _assert_quoted(readme, "thiamine_cys_glucose_120C_Bolton1994", "TECHNICAL_OVERVIEW.md", "the benchmark that lost its pass")
     _assert_quoted(_doc_text(AUDIT), "strict-ready 0/37", "AUDIT.md", "the core strict-ready count")
 
 
@@ -448,9 +451,9 @@ def test_core_envelope_coverage_and_widths():
         # 2026-11-07 (S3): headspace 8 -> 7 (Zhang 2025b's 2-acetylthiazole).
         "headspace": 7, "extraction": 16, "undeclared": 0,
     }
-    readme = _doc_text(README)
-    _assert_quoted(readme, "12 of 22", "README.md", "the core envelope's literature and out-of-sample coverage")
-    _assert_quoted(readme, "16 of 23", "README.md", "the identified sulfur coordinates")
+    readme = _doc_text(OVERVIEW)
+    _assert_quoted(readme, "12 of 22", "TECHNICAL_OVERVIEW.md", "the core envelope's literature and out-of-sample coverage")
+    _assert_quoted(readme, "16 of 23", "TECHNICAL_OVERVIEW.md", "the identified sulfur coordinates")
 
 
 # --------------------------------------------------------------------------------------
@@ -469,11 +472,11 @@ def test_cutover_exam_is_34_answered_3_within_band_paired_24_78x_vs_10_86x():
     assert s["paired_subset"]["core"]["median_fold_error"] == pytest.approx(24.78, abs=0.01)
     assert s["paired_subset"]["old"]["median_fold_error"] == pytest.approx(10.86, abs=0.01)
     assert s["core"]["median_fold_error"] == pytest.approx(19.08, abs=0.01)
-    readme = _doc_text(README)
-    _assert_quoted(readme, "**3 / 34**", "README.md", "the exam's within-band count")
-    _assert_quoted(readme, "**24.78x**", "README.md", "the exam's paired core median")
-    _assert_quoted(readme, "**10.86x**", "README.md", "the exam's paired old-lane median")
-    _assert_quoted(readme, "**19.08x**", "README.md", "the exam's all-answered core median")
+    readme = _doc_text(OVERVIEW)
+    _assert_quoted(readme, "**3 / 34**", "TECHNICAL_OVERVIEW.md", "the exam's within-band count")
+    _assert_quoted(readme, "**24.78x**", "TECHNICAL_OVERVIEW.md", "the exam's paired core median")
+    _assert_quoted(readme, "**10.86x**", "TECHNICAL_OVERVIEW.md", "the exam's paired old-lane median")
+    _assert_quoted(readme, "**19.08x**", "TECHNICAL_OVERVIEW.md", "the exam's all-answered core median")
 
 
 # --------------------------------------------------------------------------------------
@@ -558,10 +561,11 @@ def test_core_scores_17_of_26_independent_directional_claims():
     assert cats["moisture_aw"] == (0, 0)      # 2026-11-05: AW-03 refused (trunk a_w window); 2026-10-27 audit: AW-01 retired (source mismatch)
     assert cats["additive_cysteine"] == (1, 1)  # 2026-11-07 (S3, after the review's fix 1): unchanged  # 2026-10-27 audit: CYS-01 tautology, CYS-02 retired
     assert cats["time"] == (1, 1)  # 2026-11-07 (S3): was (2, 3)             # 2026-10-27 audit: TIME-01 and the WANG22 time shapes retired; B51 +1
-    readme = _doc_text(README)
-    _assert_quoted(readme, "10 of 19", "README.md", "the core's directional headline")
-    _assert_quoted(readme, "9 of 15", "README.md", "the directional count excluding pH and water activity")
-    _assert_quoted(readme, "1 of 4", "README.md", "the directional count on pH and water activity")
+    readme = _doc_text(OVERVIEW)
+    _assert_quoted(readme, "10 of 19", "TECHNICAL_OVERVIEW.md", "the core's directional headline")
+    _assert_quoted(_doc_text(README), "**10 of 19**", "README.md", "the short table's directional count")
+    _assert_quoted(readme, "9 of 15", "TECHNICAL_OVERVIEW.md", "the directional count excluding pH and water activity")
+    _assert_quoted(readme, "1 of 4", "TECHNICAL_OVERVIEW.md", "the directional count on pH and water activity")
 
 
 @pytest.mark.artifact_rebuild

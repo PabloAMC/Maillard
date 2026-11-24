@@ -11,7 +11,7 @@ from pathlib import Path
 import pytest
 
 ROOT = Path(__file__).resolve().parents[2]
-README = ROOT / "README.md"
+README = ROOT / "docs" / "reference" / "TECHNICAL_OVERVIEW.md"  # the README's detail, moved 2026-11-24
 
 
 def _doc_text(path: Path) -> str:
@@ -174,7 +174,7 @@ def test_no_record_carries_no_verifiable_source():
 
     readme = _doc_text(README)
     _assert_quoted(readme, "No record in the repository is flagged `no_verifiable_source`",
-                   "README.md", "the zero census")
+                   "TECHNICAL_OVERVIEW.md", "the zero census")
 
 
 #: Every curated file the front door opens, traced (scripts/trace_runtime_data_reads.py).
@@ -203,5 +203,5 @@ def test_the_front_door_reads_only_the_pinned_data_files():
 
     readme = _doc_text(README)
     for path in FRONT_DOOR_DATA_READS:
-        _assert_quoted(readme, path, "README.md", "the traced front-door data reads")
+        _assert_quoted(readme, path, "TECHNICAL_OVERVIEW.md", "the traced front-door data reads")
 
