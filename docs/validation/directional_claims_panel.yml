@@ -100,6 +100,7 @@ sources:
   mottram2002:
     citation: "Mottram, D. S. & Nobrega, I. C. C. (2002). Formation of Sulfur Aroma Compounds in Reaction Mixtures Containing Cysteine and Three Different Forms of Ribose. J. Agric. Food Chem. 50(14), 4080-4086."
     doi: "10.1021/jf0200826"
+    audit_2026_11_24: "Duplicate key removed: a second mottram2002 entry (added 2026-09-07) carried DOI 10.1021/jf0116112 and, as the later key, overrode this one. The DOI printed on data/articles/mottram2002.pdf is 10.1021/jf0200826. No claim or score changes: scoring does not read this map."
     access: full_text
     retrieved_from: >-
       data/articles/mottram2002.pdf (full text, obtained by the owner via interlibrary loan
@@ -269,11 +270,6 @@ sources:
     audit_2026_10_27: "DOI corrected from 10.1021/jf062874u to 10.1021/jf062874w, the DOI printed on data/articles/cerny2007.pdf."
     access: full_text
     retrieved_from: "data/articles/cerny2007.pdf; data/lit/extraction_dossiers/cerny2007_extraction.md"
-  mottram2002:
-    citation: "Mottram, D. S., Nobrega, I. C. C. (2002). Formation of sulfur aroma compounds in reaction mixtures containing cysteine and three different forms of ribose. J. Agric. Food Chem. 50, 4080-4086."
-    doi: "10.1021/jf0116112"
-    access: full_text
-    retrieved_from: "data/articles/mottram2002.pdf; data/lit/extraction_dossiers/mottram2002_extraction.md"
   zhang2025b:
     citation: "Zhang, C., Tan, J., He, J., Hu, Q., Li, J., Xie, J. (2025). Effect of lysine on the cysteine-xylose Maillard reaction to form flavor compounds. Food Chem. 469, 142529."
     doi: "10.1016/j.foodchem.2024.142529"
