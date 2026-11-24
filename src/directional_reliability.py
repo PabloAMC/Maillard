@@ -13,7 +13,7 @@ So this module does exactly one thing: it turns ``results/validation/core_direct
 (the artifact ``kinetic_core.directional.score_panel`` writes; step B7, 2026-09-03) into
 ``(agree, evaluable, verdict)`` triples per axis, and works out which axes a given pair of
 formulation specs actually exercises. No count is typed here: when the panel is re-scored the
-artifact moves and every tag in the CLI and in the README model card moves with it.
+artifact moves and every tag in the CLI and in the model card (technical overview) moves with it.
 
 **Nothing here is a measurement.** It reads one and applies a threshold.
 

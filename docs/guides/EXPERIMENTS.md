@@ -21,7 +21,7 @@ values are artefacts of where the search happened to stop. The command `maillard
 them. A measurement here converts a band artefact into a fitted value.
 
 **2. It lifts a refusal.** The model refuses many of the questions it is asked (the current count is in the
-[README](../../README.md#how-well-calibrated-is-it)). Every refusal names what is missing. Some are
+[technical overview](../reference/TECHNICAL_OVERVIEW.md#how-well-calibrated-is-it)). Every refusal names what is missing. Some are
 missing a number; some are missing a route; one is missing neither and is refused because the lane
 that would carry it does not drive that row. Read the refusal before
 designing the experiment, because two of them cannot be lifted by measuring the thing they appear to

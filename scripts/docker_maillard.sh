@@ -109,8 +109,8 @@ are gone with it. The front door is scripts/maillard.py.)
   wishlist-build                     results/validation/data_wishlist.{json,md}: what to measure next (`wishlist` READS it)
   core-directional                   results/validation/core_directional_scores.*     (~90 s)
   core-envelope [args...]            results/validation/core_prediction_uncertainty.* (~40 min at n=200)
-  model-card                         Re-splice the README model card from the artifacts.
-  model-card-check                   Fail if the README model card is stale.
+  model-card                         Re-splice the model card (technical overview) from the artifacts.
+  model-card-check                   Fail if the model card (technical overview) is stale.
   gates                              Run the seven CI gates (incl. artifact_freshness_gate, ~1 min).
   data-readme                        Regenerate data/README.md (fails on undescribed files).
   keys                               Rebuild data/keys/compounds.yml and papers.yml.

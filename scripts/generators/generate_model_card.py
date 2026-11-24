@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""Generate the model card and splice it into README.md between its markers.
+"""Generate the model card and splice it into docs/reference/TECHNICAL_OVERVIEW.md between its markers.
 
     python scripts/generators/generate_model_card.py
     python scripts/generators/generate_model_card.py --check      # CI: fail if stale
@@ -8,9 +8,9 @@
 The card is a validity domain -- claim type x system class -> measured reliability and a
 trust / caution / do-not-use verdict -- computed from live artifacts by ``src.model_card``.
 It replaces the block between ``<!-- BEGIN GENERATED: model-card -->`` and its END marker in
-README.md; nothing outside those markers is touched, and no standalone document is created.
+docs/reference/TECHNICAL_OVERVIEW.md (the README until 2026-11-24); nothing outside those markers is touched, and no standalone document is created.
 
-``--check`` is the useful mode for a wave: it regenerates and diffs, so "the README's honest
+``--check`` is the useful mode for a wave: it regenerates and diffs, so "the published honest
 numbers drifted from the artifacts again" becomes a failing command instead of a discovery
 three waves later.
 """
@@ -36,7 +36,7 @@ from src.model_card import (  # noqa: E402
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--readme", default=str(ROOT / "README.md"))
+    parser.add_argument("--readme", default=str(ROOT / "docs" / "reference" / "TECHNICAL_OVERVIEW.md"))
     parser.add_argument(
         "--output-dir",
         default=str(data_paths.VALIDATION_DIR),
@@ -46,7 +46,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--check",
         action="store_true",
-        help="exit non-zero if README.md is not what this generator would write",
+        help="exit non-zero if the technical overview is not what this generator would write",
     )
     parser.add_argument(
         "--skip-gates",
@@ -71,7 +71,7 @@ def main() -> int:
     if args.check:
         if changed:
             print(
-                "model card is STALE: README.md does not match what the artifacts say.\n"
+                "model card is STALE: docs/reference/TECHNICAL_OVERVIEW.md does not match what the artifacts say.\n"
                 "  Regenerate with: python scripts/generators/generate_model_card.py",
                 file=sys.stderr,
             )

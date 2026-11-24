@@ -107,7 +107,7 @@ python scripts/maillard.py predict my_comparison.yml --system a
 Absolute µg/L (= ppb in water) per compound, **always with its reliability interval** and, where
 an odour threshold exists, the odour-activity ratio. Read the interval before the point: an
 absolute out of sample lands within 3x of the measurement on a small minority of panel rows (the
-current count is the first line of `python scripts/maillard.py --help` and of the README model card).
+current count is the first line of `python scripts/maillard.py --help` and of the model card (technical overview)).
 
 ## What does the model know about a compound? `maillard explain`
 
@@ -202,7 +202,7 @@ own measurement, it goes in the spec and the answer names it. Pre-registered in
 
 ## Before you trust a result
 
-1. Read the **model card** in [README.md](../../README.md#how-well-calibrated-is-it): every
+1. Read the **model card** in the [technical overview](../reference/TECHNICAL_OVERVIEW.md#how-well-calibrated-is-it): every
    absolute is *do-not-use* by rule; directional skill is measured per axis on the core's own
    claims panel and printed as the reliability column of every `compare`.
 2. Read the **envelope declaration** the verb printed: `IN_ENVELOPE` with declared
@@ -217,7 +217,7 @@ own measurement, it goes in the spec and the answer names it. Pre-registered in
 ```bash
 ./scripts/docker_maillard.sh core-scores      # results/validation/core_panel_scores.*   (~15 s)
 ./scripts/docker_maillard.sh core-envelope    # results/validation/core_prediction_uncertainty.* (~5-7 min natively)
-./scripts/docker_maillard.sh model-card       # re-splices the README model card
+./scripts/docker_maillard.sh model-card       # re-splices the model card (technical overview)
 ./scripts/docker_maillard.sh gates            # the seven CI gates
 ./scripts/docker_maillard.sh pytest tests/unit
 ./scripts/docker_maillard.sh pytest tests/scientific
@@ -232,7 +232,7 @@ own measurement, it goes in the spec and the answer names it. Pre-registered in
 | `./scripts/docker_maillard.sh pytest [args]` | pytest inside the environment |
 | `./scripts/docker_maillard.sh core-scores` | The core's panel scorecard |
 | `./scripts/docker_maillard.sh core-envelope [--n-samples N --workers W]` | The core's Monte-Carlo envelope |
-| `./scripts/docker_maillard.sh model-card` | Regenerate the README model card |
+| `./scripts/docker_maillard.sh model-card` | Regenerate the model card (technical overview) |
 | `./scripts/docker_maillard.sh gates` | Run the seven CI gates (incl. artifact freshness) |
 | `./scripts/docker_maillard.sh data-readme` | Regenerate `data/README.md` |
 | `./scripts/docker_maillard.sh experiment-value-ranking` | Rank experiments by value of information |

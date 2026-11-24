@@ -143,7 +143,7 @@ potency-weighted value, because it is far more potent than its own monomer: mass
 dimerisation is not aroma lost. Methanethiol has no measured threshold in water anywhere in the
 corpus, so it is reported as having none rather than being given a borrowed one.
 
-Before you believe any of these absolutes, read the model card in the README: out of sample, a
+Before you believe any of these absolutes, read the model card in the [technical overview](reference/TECHNICAL_OVERVIEW.md#how-well-calibrated-is-it): out of sample, a
 small minority of panel rows land within threefold. The card is generated from the artifacts, so
 this page does not repeat its numbers.
 
@@ -333,7 +333,7 @@ wrong, a response factor moves the level and the card will show the trend still 
 
 - **Choosing between two formulations.** Ratios cancel the shared systematic error. The
   directional panel's current score on strictly independent claims is the first line of
-  `python scripts/maillard.py --help` and of the README model card; this page does not repeat it.
+  `python scripts/maillard.py --help` and of the model card (technical overview); this page does not repeat it.
 - **Sugar swaps and cysteine present against absent**, read with the per-axis grade the `compare`
   verb prints beside every ratio. That column comes from the same panel; read it rather than a
   number quoted here.
@@ -374,5 +374,5 @@ located, quantified way, and that is worth more than a confident number.
 ---
 
 *Authoritative accuracy figures live in the generated model card in the
-[README](../README.md#how-well-calibrated-is-it), which is regenerated from the artifacts. If this
+[technical overview](reference/TECHNICAL_OVERVIEW.md#how-well-calibrated-is-it), which is regenerated from the artifacts. If this
 page and the model card ever disagree, the model card is right and this page has drifted.*
