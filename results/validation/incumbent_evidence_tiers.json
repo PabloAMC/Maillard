@@ -2,11 +2,11 @@
  "artifact": "incumbent_evidence_tiers",
  "provenance": {
   "artifact": "incumbent_evidence_tiers",
-  "generated_on": "2026-11-17",
+  "generated_on": "2026-11-24",
   "git": {
-   "commit": "50a224ab99c4fccb04894bc96551a7a73d816e1b",
-   "short": "50a224ab",
-   "branch": "engine-gaps-thiamine-h2s",
+   "commit": "f7892780557588eeed028ce23fb046650985f8bd",
+   "short": "f7892780",
+   "branch": "mottram2002-source-fix",
    "dirty": true
   },
   "generated_by": "scripts/generators/build_evidence_tiers.py",
@@ -77,7 +77,7 @@
    },
    {
     "path": "results/validation/data_wishlist.json",
-    "sha256": "87d81faf895c6f97e01ad7b5e6d919e978a71b89b8122b23f2fedbd4f7e7905e"
+    "sha256": "e2ccb3e19be7568bcaa522537da3e4f1bbda39d3dbc7b382620f667a386cf5aa"
    },
    {
     "path": "docs/reference/unpinned_constants.yml",

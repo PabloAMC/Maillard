@@ -2,12 +2,12 @@
   "artifact": "data_wishlist",
   "provenance": {
     "artifact": "data_wishlist",
-    "generated_on": "2026-11-17",
+    "generated_on": "2026-11-24",
     "git": {
-      "commit": "50a224ab99c4fccb04894bc96551a7a73d816e1b",
-      "short": "50a224ab",
-      "branch": "engine-gaps-thiamine-h2s",
-      "dirty": true
+      "commit": "f7892780557588eeed028ce23fb046650985f8bd",
+      "short": "f7892780",
+      "branch": "mottram2002-source-fix",
+      "dirty": false
     },
     "generated_by": "src/data_wishlist.py",
     "inputs": [
@@ -25,7 +25,7 @@
       },
       {
         "path": "results/validation/core_directional_scores.json",
-        "sha256": "6d6bfe0bbb69a0fb5e9cf53515bcc8687110b67199477f9ced61484bad4aa25d"
+        "sha256": "e1af35f67ed68a8ebebe86d4f29bff5bca56ef1ea0f4750264801e874f2370a9"
       },
       {
         "path": "results/validation/experiment_value_ranking.json",
