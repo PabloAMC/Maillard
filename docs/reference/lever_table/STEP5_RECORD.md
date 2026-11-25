@@ -95,6 +95,14 @@ Everything else stays paused: water activity for the sulfur lane, methional and 
 and the L1 lipid sink lack the evidence. The forecasts already sent outside the repository are frozen and are scored
 as written.
 
+**Record (2026-11-25): partner blind test, scoring and fit plan frozen before any data.** The scoring rules, the
+scoring script with its synthetic tests, and the plan for what the partner's data may later fit (at most the
+thiamine H2S share above and glutathione's H2S release, each with fixed priors and acceptance tests) were frozen
+before any measured value was seen, after an independent premortem. The files describe an unpublished design and
+stay private; the SHA-256 of their manifest is
+`34df69a9a15a2380a5cddfa90c7a67af3fda844edd8f2ead1c0c04d085145307`. Data and any fitted value stay private until
+the partner publishes or agrees in writing; this record will say whether a fit was accepted, without numbers.
+
 ## Bookkeeping
 
 5a and 5c are two of the step-5 scoring looks at TEST contrasts that sec. 0 allows (at most three before
