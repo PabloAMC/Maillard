@@ -163,7 +163,7 @@
       },
       {
         "path": "docs/validation/directional_claims_panel.yml",
-        "sha256": "d30ddd05c14554e7ba873b08375cea260b31b63c667e45bf6510a046bfbe08e8"
+        "sha256": "fdc7bf28bf73f2545aee423b67308bbd8c569bb3303456f5464e369339ebee63"
       },
       {
         "path": "results/validation/core_directional_scores.json",

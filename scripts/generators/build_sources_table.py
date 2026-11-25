@@ -71,6 +71,23 @@ def author_year(stem: str):
     return (m.group(1).capitalize(), m.group(2)) if m else None
 
 
+def claim_key(ref: str) -> str:
+    """The author-year key ``paper_usage_counts`` files a claim under (its ref, e.g. 'mottram2002' -> 'Mottram 2002')."""
+    m = re.match(r"([a-z\-]+)(\d{4})", ref)
+    return f"{m.group(1).capitalize()} {m.group(2)}"
+
+
+def claims_by_ref() -> dict:
+    """Directional claims per panel source ref, for the refs ``paper_usage_counts`` counts."""
+    panel = yaml.safe_load((ROOT / "docs" / "validation" / "directional_claims_panel.yml").read_text(encoding="utf-8"))
+    out: dict = {}
+    for c in panel["panel"]:
+        ref = (c.get("source") or {}).get("ref") or ""
+        if re.match(r"[a-z\-]+\d{4}", ref):
+            out[ref] = out.get(ref, 0) + 1
+    return out
+
+
 def main() -> int:
     raw = paper_usage_counts()
     counts = {}
@@ -126,18 +143,29 @@ def main() -> int:
             m[1] = m[1] if len(m[1]) <= len(citation) else citation
         else:
             merged[k] = [key, citation, doi, take, names]
-    # counts are keyed by author and year; a second paper by the same author in the same year cannot be told apart, so
-    # the counts go to the first row of each author-year group and the others say so
+    # a claim names its paper exactly (the panel's source ref is a dossier stem): credit it to that row and take it out
+    # of the author-year count, so a second paper by the same author in the same year does not receive it
+    exact_claims = claims_by_ref()
+    stem_of = lambda n: n.removesuffix("_extraction.md")
+    dossier_stems = {stem_of(n) for r in merged.values() for n in r[4]}
+    for ref, n in exact_claims.items():
+        if ref in dossier_stems:
+            k = norm_key(claim_key(ref))
+            counts["claims"][k] = counts["claims"].get(k, 0) - n
+    # the other counts are keyed by author and year; a second paper by the same author in the same year cannot be told
+    # apart, so they go to the first row of each author-year group and the others say so
     seen_keys = set()
     out_rows = []
     import unicodedata
 
     for key, citation, doi, take, names in sorted(merged.values(), key=lambda r: unicodedata.normalize("NFKD", r[1]).encode("ascii", "ignore").decode().lower()):
+        exact = sum(exact_claims.get(stem_of(n), 0) for n in names)
         if key in seen_keys:
             used = {k: 0 for k in counts}
             take = take or "(same author and year as the row above; any counts are listed there)"
         else:
             used = {k: c.get(key, 0) for k, c in counts.items()}
+        used["claims"] += exact
         seen_keys.add(key)
         out_rows.append((key, citation, doi, used, take, names))
     rows = out_rows
