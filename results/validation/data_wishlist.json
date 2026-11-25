@@ -2,12 +2,12 @@
   "artifact": "data_wishlist",
   "provenance": {
     "artifact": "data_wishlist",
-    "generated_on": "2026-11-24",
+    "generated_on": "2026-11-25",
     "git": {
-      "commit": "f7892780557588eeed028ce23fb046650985f8bd",
-      "short": "f7892780",
-      "branch": "mottram2002-source-fix",
-      "dirty": false
+      "commit": "e3f5bb0509ed22e9483c0116df3cfe3c3eb786b6",
+      "short": "e3f5bb05",
+      "branch": "cys-redox-prereg",
+      "dirty": true
     },
     "generated_by": "src/data_wishlist.py",
     "inputs": [
@@ -41,7 +41,7 @@
       },
       {
         "path": "docs/reference/decisive_measurements.yml",
-        "sha256": "e66c080e75aabf6b19c0d16e3d4e3e9b6f2ccb406863661e56e371d58929f512"
+        "sha256": "20aaa14ab044ed5ee7353e852804522278d118fb1f58b0fc6da3e2788d95dfd2"
       }
     ]
   },
@@ -1741,6 +1741,75 @@
       "status_note": null,
       "disagreements": [],
       "added": "2026-11-13"
+    },
+    {
+      "id": "thiol_dimer_in_pot_vs_sampling",
+      "plan_step": "B65 (STEP5_RECORD amendment 2026-11-26)",
+      "question": "Is the measured share of bis(2-methyl-3-furyl) disulfide (MFTD) relative to free 2-methyl-3-furanthiol (MFT) set in the heated pot (oxidation, and cysteine reversing it by thiol-disulfide exchange) or during sampling (oxidation in the headspace vial or on the SPME fibre, with cysteine scavenging there)?",
+      "rivals": [
+        "A0: in-pot oxidative dimerisation with cysteine scavenging oxidant (k_cys_ox on its B11 band; needs an oxidant charge near 10 mM)",
+        "A1: in-pot fast thiol-disulfide exchange with cysteine at equilibrium (refuted by the plug-in screen: it drives the dimer to ~1e-9 of MFT)",
+        "M: the dimer forms after the pot, in the sampling vial or on the fibre"
+      ],
+      "measurement": "The same heated samples analysed with and without a reducing agent (or under inert headspace) before extraction, and with labelled MFT spiked after heating; design not yet written.",
+      "measurement_source": "kinetic_core_b65_plugin_screen.md (measurement-model section); no record writes a design",
+      "arms": [
+        "reductant / inert headspace before analysis, labelled MFT spiked after heating: design not yet written: one cysteine-free and one cysteine pot, each analysed both ways, dimer and free MFT reported"
+      ],
+      "design_written": false,
+      "decides": [
+        {
+          "outcome": "the dimer share is unchanged by the analysis treatment and the post-heating spike stays free",
+          "means": "the dimer is formed in the pot; A0 is the candidate"
+        },
+        {
+          "outcome": "the reductant or inert headspace collapses the dimer share, or the post-heating spike dimerises",
+          "means": "M: dimer shares are a measurement artefact and must not be fitted as pot chemistry"
+        }
+      ],
+      "unlocks": [
+        "the B2.3 / B60 dimer-share fit rows (Zhang 2024 Fig. 1) and any free/dimer split the engine reports"
+      ],
+      "existing_data_route": "A partner laboratory was asked (2026-11-25) whether stored samples can be re-analysed with a reducing agent; any answer is development data and is recorded privately.",
+      "status": "open",
+      "status_note": null,
+      "disagreements": [],
+      "added": "2026-11-26"
+    },
+    {
+      "id": "cysteine_boost_thiol_yield_concentrated",
+      "plan_step": "B65 (STEP5_RECORD amendment 2026-11-26)",
+      "question": "What makes cysteine raise MFT about 20-fold in concentrated thiamine + pentose systems (Zhang 2024 Fig. 1-2, a monotone rise up to ~500 mM cysteine) while in Grosch's dilute system the effect peaks near 0.5 mM and falls below the cysteine-free value by ~5 mM (CF-089)?",
+      "rivals": [
+        "the CF-089 total-thiol concentration law on the thiamine route (screened: at most x1.27 of the x27 rise)",
+        "a pentose route stronger than its fitted band (needs ~+1.9 dex, outside the B60 band)",
+        "a cysteine-slowed MFT loss (CK-23's C2 form; ceiling ~x8.6 at 115 C, 60 min)",
+        "a concentration-regime or temperature term with no measurement"
+      ],
+      "measurement": "One medium, one temperature, a cysteine series spanning 0.1 - 500 mM at fixed thiamine, with and without pentose, thiamine and free cysteine measured over time; design not yet written.",
+      "measurement_source": "CF-089 remedy (a designed series with thiamine measured and a non-amine thiol arm); extended here",
+      "arms": [
+        "cysteine series with and without pentose, thiamine and cysteine measured: design not yet written: separates the thiamine route from the pentose route and the yield gain from slowed loss"
+      ],
+      "design_written": false,
+      "decides": [
+        {
+          "outcome": "the gain appears without pentose and tracks thiamine loss",
+          "means": "a cysteine term on the thiamine route; its law (concentration vs regime) read from the series"
+        },
+        {
+          "outcome": "the gain needs pentose",
+          "means": "the pentose route is under-strength in concentrated pots; re-examine its band"
+        }
+      ],
+      "unlocks": [
+        "any cysteine x thiamine forecast (the partner blind test's main miss) and P3's thiamine arms"
+      ],
+      "existing_data_route": "Zhang 2024 Fig. 2 is now seen by the B65 screen and cannot be decisive; a new laboratory's series is needed.",
+      "status": "open",
+      "status_note": null,
+      "disagreements": [],
+      "added": "2026-11-26"
     }
   ],
   "summary": {
@@ -1751,8 +1820,8 @@
     "data_refused_rows": 3,
     "axes_below_trust": 13,
     "lanes_that_cannot_support_a_trend": 3,
-    "structural_questions": 14,
-    "structural_questions_open": 14,
+    "structural_questions": 16,
+    "structural_questions_open": 16,
     "trust_rule": "rate >= 0.8 on >= 3 claims and Wilson lower bound > 0.5"
   }
 }

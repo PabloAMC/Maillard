@@ -2,11 +2,11 @@
  "artifact": "incumbent_evidence_tiers",
  "provenance": {
   "artifact": "incumbent_evidence_tiers",
-  "generated_on": "2026-11-24",
+  "generated_on": "2026-11-25",
   "git": {
-   "commit": "f7892780557588eeed028ce23fb046650985f8bd",
-   "short": "f7892780",
-   "branch": "mottram2002-source-fix",
+   "commit": "e3f5bb0509ed22e9483c0116df3cfe3c3eb786b6",
+   "short": "e3f5bb05",
+   "branch": "cys-redox-prereg",
    "dirty": true
   },
   "generated_by": "scripts/generators/build_evidence_tiers.py",
@@ -77,7 +77,7 @@
    },
    {
     "path": "results/validation/data_wishlist.json",
-    "sha256": "e2ccb3e19be7568bcaa522537da3e4f1bbda39d3dbc7b382620f667a386cf5aa"
+    "sha256": "92af9cbac42bfb41c321f8efd63ef012434a3d9fcccd799c21acb25d01caea57"
    },
    {
     "path": "docs/reference/unpinned_constants.yml",
