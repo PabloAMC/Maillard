@@ -103,6 +103,21 @@ stay private; the SHA-256 of their manifest is
 `34df69a9a15a2380a5cddfa90c7a67af3fda844edd8f2ead1c0c04d085145307`. Data and any fitted value stay private until
 the partner publishes or agrees in writing; this record will say whether a fit was accepted, without numbers.
 
+**Amendment (2026-11-26, owner).** The owner lifts the pause for two named changes in the sulfur lane: **cysteine
+reducing thiol disulfides back to the free thiol (thiol-disulfide exchange), and cysteine raising the yield of
+2-methyl-3-furanthiol on thiamine's route.** A partner's development data (private) showed both effects in a
+low-water dough; the published record already holds both (CF-089; Zhang 2024 Fig. 1-2; Grosch & Zeiler-Hilgart 1992,
+spent). Both are built from the literature, not fitted to the partner's data, and go through a pre-registered,
+engine-free feasibility test on mechanism signatures before any engine change
+([kinetic_core_b65_cysteine_redox_prereg.md](../../../results/validation/kinetic_core_b65_cysteine_redox_prereg.md)).
+An implementation needs a second owner approval after the feasibility verdict. No TEST contrast is read. Everything
+else stays paused.
+
+*Outcome (2026-11-26).* The screen found no admissible step. Exchange held at equilibrium is refuted. Zhang 2024's
+cysteine boost needs either a structure not on the list or a pentose route outside its band. The dimer share may form
+during sampling. No engine change was made, and the pause is back in force for these changes until one of the two
+measurements now in `decisive_measurements.yml` exists.
+
 ## Bookkeeping
 
 5a and 5c are two of the step-5 scoring looks at TEST contrasts that sec. 0 allows (at most three before
