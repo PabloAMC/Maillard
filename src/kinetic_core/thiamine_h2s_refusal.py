@@ -152,12 +152,14 @@ def assess(spec: Any, targets: Sequence[str], shipped_run: Any = None) -> Verdic
     if key in _CACHE:
         return _CACHE[key]
     if shipped_run is None:
-        shipped_run = engine.predict(spec, list(targets), balance_refusal=False, thiamine_refusal=False)
+        shipped_run = engine.predict(spec, list(targets), balance_refusal=False, thiamine_refusal=False,
+                                     cysteine_thiamine_refusal=False)
     shipped = {c: float(v) for c, v in shipped_run.concentrations_ug_per_l.items()}
     verdict = Verdict()
     try:
         with config.applied(_rival_config()):
-            rival_run = engine.predict(spec, list(targets), balance_refusal=False, thiamine_refusal=False)
+            rival_run = engine.predict(spec, list(targets), balance_refusal=False, thiamine_refusal=False,
+                                       cysteine_thiamine_refusal=False)
         rival = {c: float(v) for c, v in rival_run.concentrations_ug_per_l.items()}
     except Exception as exc:  # noqa: BLE001 - a rival that cannot be run cannot show independence: refuse
         verdict.failure = f"{type(exc).__name__}: {exc}"[:300]

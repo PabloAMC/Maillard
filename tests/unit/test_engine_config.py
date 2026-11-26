@@ -84,6 +84,8 @@ FLIPPED = {
     "sulfur.tdp_own_decay": ps.TdpOwnDecay(enabled=True),
     "sulfur.thiamine_h2s_unmeasured_rival": ps.ThiamineH2sUnmeasuredRival(enabled=True),   # 2026-11-17
     "sulfur.thiamine_h2s_refusal": False,   # 2026-11-17: the refusal where thiamine's H2S share is unmeasured
+    "sulfur.cysteine_thiamine_mft_rival": ps.CysteineThiamineMftRival(enabled=True),   # 2026-11-26 (B66)
+    "sulfur.cysteine_thiamine_mft_refusal": False,   # 2026-11-26 (B66): cysteine on thiamine's MFT route, undecided
     "sulfur.furfural_barriers": ps.FurfuralBarriers(enabled=True),
     "sulfur.single_temperature_barriers": ps.SingleTemperatureBarriers(enabled=True),
     "fit.dimer_encounter_ceiling": dataclasses.replace(ps.DimerEncounterCeiling(), enabled=True, mft_cap_mmol_l=2.0),

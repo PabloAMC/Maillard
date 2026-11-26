@@ -2,11 +2,11 @@
  "artifact": "incumbent_evidence_tiers",
  "provenance": {
   "artifact": "incumbent_evidence_tiers",
-  "generated_on": "2026-11-25",
+  "generated_on": "2026-11-26",
   "git": {
-   "commit": "e3f5bb0509ed22e9483c0116df3cfe3c3eb786b6",
-   "short": "e3f5bb05",
-   "branch": "cys-redox-prereg",
+   "commit": "b89f97ce2ee345920345b191aa2d2aba0f3c7d73",
+   "short": "b89f97ce",
+   "branch": "cys-thiamine-boost",
    "dirty": true
   },
   "generated_by": "scripts/generators/build_evidence_tiers.py",
@@ -73,11 +73,11 @@
    },
    {
     "path": "results/validation/sulfur_reaction_evidence.json",
-    "sha256": "1da7fa8bf7ab80c1c0b154b922bf1e2875ff33a86f1ba8ae436441a1b7500ba0"
+    "sha256": "a1d6e220291b44e2bf3be1400eac72f7bfec4d2f57e37ee786e4bc589b5b3cec"
    },
    {
     "path": "results/validation/data_wishlist.json",
-    "sha256": "92af9cbac42bfb41c321f8efd63ef012434a3d9fcccd799c21acb25d01caea57"
+    "sha256": "830d343ecc60ff5c7193b677383c0a45023781dd656c9d8da62656964e0e771e"
    },
    {
     "path": "docs/reference/unpinned_constants.yml",
@@ -145,7 +145,7 @@
    },
    {
     "path": "src/kinetic_core/parameters_sulfur.py",
-    "sha256": "2d50a1333e62ed833fb8d87d1eaa51e2d99faa8b6b986c96651362e13c8d27ea"
+    "sha256": "1e4a45dae5a3fa2112076fea7669683238aaac632ec9fca3762c6abb3b86aaac"
    },
    {
     "path": "src/evidence_tiers.py",

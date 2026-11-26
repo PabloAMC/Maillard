@@ -1424,6 +1424,11 @@ def sulfur_rate_constants_at(
     if _thi_rival.enabled and _thi_rival.covers(ph_table, temperature_k):
         _share = float(_thi_rival.share)
     out["r_thi_h2s"] = (_share / (1.0 - _share)) * (out["r_thi_hmp"] + out["r_thi_mesh"]) if _share > 0.0 else 0.0
+    # 2026-11-26 (B66): the sensitivity rival to "a thiol donor leaves thiamine's MFT unchanged"
+    # (cysteine_thiamine_mft_refusal); off when shipped
+    _ct_rival = _ps.CYSTEINE_THIAMINE_MFT_RIVAL
+    if _ct_rival.enabled:
+        out["r_hmp_mft"] = float(_ct_rival.factor) * out["r_hmp_mft"]
 
     # DERIVED RATE 0b (B58): TTCA formation by detailed balance with its measured equilibrium constant.
 

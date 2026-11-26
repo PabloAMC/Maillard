@@ -2,18 +2,18 @@
   "artifact": "data_wishlist",
   "provenance": {
     "artifact": "data_wishlist",
-    "generated_on": "2026-11-25",
+    "generated_on": "2026-11-26",
     "git": {
-      "commit": "e3f5bb0509ed22e9483c0116df3cfe3c3eb786b6",
-      "short": "e3f5bb05",
-      "branch": "cys-redox-prereg",
+      "commit": "1d16bcdb2255c95916dc19286d1e3e7ca7783a84",
+      "short": "1d16bcdb",
+      "branch": "cys-thiamine-boost",
       "dirty": true
     },
     "generated_by": "src/data_wishlist.py",
     "inputs": [
       {
         "path": "results/validation/core_panel_scores.json",
-        "sha256": "815768e1c32da92b9deef0e82a28020472560e0a3255552fe903f22de28c94df"
+        "sha256": "a4e5b308a84d494acdad56857595b4ce078f73b47280157b474b67dd6196858e"
       },
       {
         "path": "results/validation/kinetic_core_b60_profile.json",
@@ -25,7 +25,7 @@
       },
       {
         "path": "results/validation/core_directional_scores.json",
-        "sha256": "e1af35f67ed68a8ebebe86d4f29bff5bca56ef1ea0f4750264801e874f2370a9"
+        "sha256": "5f934b6186bfc8f07e892b74efd4efcb27292f3c89584285af0a242cbc3f4859"
       },
       {
         "path": "results/validation/experiment_value_ranking.json",
@@ -37,7 +37,7 @@
       },
       {
         "path": "src/kinetic_core/sulfur.py",
-        "sha256": "5ba0388889ef70e085e2a8adbcd82a091a9b469cca4a236a6ae3d2f603a2a98c"
+        "sha256": "f91b339516b898afabeb5f69a371931d558edbececc7629eb44489eb5a03e772"
       },
       {
         "path": "docs/reference/decisive_measurements.yml",
@@ -407,11 +407,6 @@
       "panel": "trust_loop"
     },
     {
-      "benchmark_id": "thiamine_cys_glucose_120C_Bolton1994",
-      "compound": "2-Methyl-3-furanthiol (MFT)",
-      "panel": "trust_loop"
-    },
-    {
       "benchmark_id": "mp_holdout_arp_glutathione_120C_120min_pH75_Zhou2023c",
       "compound": "2-Methyl-3-furanthiol (MFT)",
       "panel": "maillard_path_holdout"
@@ -689,6 +684,18 @@
       "hypothesis_layer": "no cited rule reaches it from any reference charge"
     },
     {
+      "what": "REFUSED, A THIOL DONOR'S EFFECT ON THIAMINE'S MFT ROUTE UNDECIDED (Grosch & Zeiler-Hilgart 1992 and Zhang 2024 vs the en",
+      "reason": "REFUSED, A THIOL DONOR'S EFFECT ON THIAMINE'S MFT ROUTE UNDECIDED (Grosch & Zeiler-Hilgart 1992 and Zhang 2024 vs the engine): 2-Methyl-3-furanthiol (MFT) (spread 0.79 dex): this pot is charged with thiamine and a thiol donor (cysteine, glutathione or TTCA), and this output depends on thiamine's step to 2-methyl-3-furanthiol (MFT), which the engine runs as if no donor were present (a donor moves i",
+      "rows": [
+        {
+          "benchmark_id": "thiamine_cys_glucose_120C_Bolton1994",
+          "compound": "2-Methyl-3-furanthiol (MFT)"
+        }
+      ],
+      "row_count": 1,
+      "hypothesis_layer": "no cited rule reaches it from any reference charge"
+    },
+    {
       "what": "THIS POT CHARGES NO PRECURSOR THAT COULD MAKE 'furaneol'. The charge declares only a matrix/lipid carrier, which is not ",
       "reason": "THIS POT CHARGES NO PRECURSOR THAT COULD MAKE 'furaneol'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declar",
       "rows": [
@@ -817,17 +824,17 @@
       "structural_block": null
     },
     {
-      "axis": "additive_cysteine",
-      "agree": 1,
-      "evaluable": 1,
-      "not_evaluable": 4,
-      "verdict": "caution",
-      "wilson_lower_bound": 0.207,
-      "additional_agreeing_claims_to_trust": 3,
+      "axis": "sulfur_donor",
+      "agree": 0,
+      "evaluable": 0,
+      "not_evaluable": 5,
+      "verdict": "no evaluable claim",
+      "wilson_lower_bound": null,
+      "additional_agreeing_claims_to_trust": 4,
       "structural_block": null
     },
     {
-      "axis": "sulfur_donor",
+      "axis": "additive_cysteine",
       "agree": 1,
       "evaluable": 1,
       "not_evaluable": 4,
@@ -849,11 +856,11 @@
     {
       "axis": "ph",
       "agree": 1,
-      "evaluable": 4,
-      "not_evaluable": 11,
+      "evaluable": 3,
+      "not_evaluable": 12,
       "verdict": "do-not-use",
-      "wilson_lower_bound": 0.046,
-      "additional_agreeing_claims_to_trust": 11,
+      "wilson_lower_bound": 0.061,
+      "additional_agreeing_claims_to_trust": 8,
       "structural_block": null
     },
     {
@@ -952,7 +959,7 @@
   "what_you_could_predict": [
     {
       "if_measured": "absolute levels of the thiol lane's observables from at least two new independent laboratories (H0's pre-registered trigger, prereg sec. 9; a pending outside blind test would be one), re-scored under H0's rule (H0')",
-      "you_could_predict": "absolute 2-Furfurylthiol (FFT), 2-Methyl-3-furanthiol (MFT), furfural for a new laboratory, if H0' leaves tau_ABS at or below 0.8 dex (today 0.964, U >= 1.60; D2's branches (ii) / (iii)); 27 panel rows now refused for their absolute level would return to the scorecard"
+      "you_could_predict": "absolute 2-Furfurylthiol (FFT), 2-Methyl-3-furanthiol (MFT), furfural for a new laboratory, if H0' leaves tau_ABS at or below 0.8 dex (today 0.964, U >= 1.60; D2's branches (ii) / (iii)); 26 panel rows now refused for their absolute level would return to the scorecard"
     },
     {
       "if_measured": "Ea_decay_thiol_sink",
@@ -1003,19 +1010,19 @@
       "you_could_predict": "the direction of a change along scope with a 'trust' tag instead of 'no evaluable claim'"
     },
     {
-      "if_measured": "3 more independent ordering claims on additive_cysteine (all agreeing)",
-      "you_could_predict": "the direction of a change along additive_cysteine with a 'trust' tag instead of 'caution'"
+      "if_measured": "4 more independent ordering claims on sulfur_donor (all agreeing)",
+      "you_could_predict": "the direction of a change along sulfur_donor with a 'trust' tag instead of 'no evaluable claim'"
     },
     {
-      "if_measured": "3 more independent ordering claims on sulfur_donor (all agreeing)",
-      "you_could_predict": "the direction of a change along sulfur_donor with a 'trust' tag instead of 'caution'"
+      "if_measured": "3 more independent ordering claims on additive_cysteine (all agreeing)",
+      "you_could_predict": "the direction of a change along additive_cysteine with a 'trust' tag instead of 'caution'"
     },
     {
       "if_measured": "3 more independent ordering claims on time (all agreeing)",
       "you_could_predict": "the direction of a change along time with a 'trust' tag instead of 'caution'"
     },
     {
-      "if_measured": "11 more independent ordering claims on ph (all agreeing)",
+      "if_measured": "8 more independent ordering claims on ph (all agreeing)",
       "you_could_predict": "the direction of a change along ph with a 'trust' tag instead of 'do-not-use'"
     },
     {
@@ -1815,8 +1822,8 @@
   "summary": {
     "unidentified_coordinates": 10,
     "not_evaluable_rows": 8,
-    "absolute_refused_rows": 27,
-    "refused_row_count": 32,
+    "absolute_refused_rows": 26,
+    "refused_row_count": 33,
     "data_refused_rows": 3,
     "axes_below_trust": 13,
     "lanes_that_cannot_support_a_trend": 3,

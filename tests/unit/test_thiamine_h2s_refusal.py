@@ -147,7 +147,9 @@ def test_switch_off_matches_origin_main_on_the_sulfur_panel_pots():
     from src.kinetic_core.panel import bundle_targets, core_spec, load_bundle
 
     assert len(REFERENCE) >= 20
-    with config.applied(config.Config.from_globals().replace({"sulfur.thiamine_h2s_refusal": False})):
+    # 2026-11-26 (B66): the cysteine x thiamine MFT rule is switched off too; the reference is the model's own numbers
+    off = {"sulfur.thiamine_h2s_refusal": False, "sulfur.cysteine_thiamine_mft_refusal": False}
+    with config.applied(config.Config.from_globals().replace(off)):
         for bundle, expected in REFERENCE.items():
             bench = load_bundle(ROOT / bundle)
             run = engine.predict(core_spec(bench, use_buffer=True), list(bundle_targets(bench)),

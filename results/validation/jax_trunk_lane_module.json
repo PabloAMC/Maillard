@@ -299,9 +299,9 @@
  },
  "ph_mode": "prescribed",
  "config_digests": {
-  "trunk": "a41f1967ce92482469db9b693f42f5504cdb72ede1b4f04d2e20f6e37c9fc7d2",
-  "trunk_lane": "a41f1967ce92482469db9b693f42f5504cdb72ede1b4f04d2e20f6e37c9fc7d2",
-  "fed_3deoxy": "a41f1967ce92482469db9b693f42f5504cdb72ede1b4f04d2e20f6e37c9fc7d2"
+  "trunk": "89f004bfbe150672f548c6d56f68d42bfe16af2e637235a3eb82e557f6330cc5",
+  "trunk_lane": "89f004bfbe150672f548c6d56f68d42bfe16af2e637235a3eb82e557f6330cc5",
+  "fed_3deoxy": "89f004bfbe150672f548c6d56f68d42bfe16af2e637235a3eb82e557f6330cc5"
  },
  "rates": {
   "n_rate_values": 160380,
@@ -391,7 +391,7 @@
     "max_dex_named_products": 5.2655657611921924e-11,
     "max_rel_element_drift": 9.559253622237985e-16,
     "max_abs_below_floor_share_of_y0": 2.939624027982323e-21,
-    "wall_s_all_pots_after_jit": 0.1381352489697747
+    "wall_s_all_pots_after_jit": 0.20990895899012685
    },
    {
     "solver": "Kvaerno4",
@@ -411,7 +411,7 @@
     "max_dex_named_products": 5.6002313897351996e-11,
     "max_rel_element_drift": 1.684249447727645e-15,
     "max_abs_below_floor_share_of_y0": 1.2939398827894833e-20,
-    "wall_s_all_pots_after_jit": 0.25941108394181356
+    "wall_s_all_pots_after_jit": 0.5705916650040308
    },
    {
     "solver": "Kvaerno4",
@@ -431,7 +431,7 @@
     "max_dex_named_products": 3.4649438873657346e-10,
     "max_rel_element_drift": 7.714463988252516e-15,
     "max_abs_below_floor_share_of_y0": 1.764189833152763e-18,
-    "wall_s_all_pots_after_jit": 1.1323319989605807
+    "wall_s_all_pots_after_jit": 1.7986796249897452
    },
    {
     "solver": "Kvaerno4",
@@ -451,7 +451,7 @@
     "max_dex_named_products": 4.455709579076483e-09,
     "max_rel_element_drift": 1.229046894287741e-15,
     "max_abs_below_floor_share_of_y0": 2.546264979648407e-19,
-    "wall_s_all_pots_after_jit": 0.0485704590100795
+    "wall_s_all_pots_after_jit": 0.06556983299378771
    },
    {
     "solver": "Kvaerno4",
@@ -471,7 +471,7 @@
     "max_dex_named_products": 6.548534159378505e-09,
     "max_rel_element_drift": 8.881784197001252e-16,
     "max_abs_below_floor_share_of_y0": 1.2625319011052939e-18,
-    "wall_s_all_pots_after_jit": 0.10552587499842048
+    "wall_s_all_pots_after_jit": 0.14389458298683167
    },
    {
     "solver": "Kvaerno4",
@@ -491,7 +491,7 @@
     "max_dex_named_products": 3.0679963458624115e-08,
     "max_rel_element_drift": 2.4986118180574954e-15,
     "max_abs_below_floor_share_of_y0": 1.4000636715158782e-16,
-    "wall_s_all_pots_after_jit": 0.39725887501845136
+    "wall_s_all_pots_after_jit": 0.6933468330098549
    },
    {
     "solver": "Kvaerno4",
@@ -511,7 +511,7 @@
     "max_dex_named_products": 3.2819888140522835e-08,
     "max_rel_element_drift": 4.0968229809591363e-16,
     "max_abs_below_floor_share_of_y0": 1.1561671233796597e-16,
-    "wall_s_all_pots_after_jit": 0.021573458972852677
+    "wall_s_all_pots_after_jit": 0.0248584170039976
    },
    {
     "solver": "Kvaerno4",
@@ -531,7 +531,7 @@
     "max_dex_named_products": 9.763694475140028e-08,
     "max_rel_element_drift": 1.2434497875801752e-15,
     "max_abs_below_floor_share_of_y0": 7.070979258202086e-16,
-    "wall_s_all_pots_after_jit": 0.054896499030292034
+    "wall_s_all_pots_after_jit": 0.06085716700181365
    },
    {
     "solver": "Kvaerno4",
@@ -551,7 +551,7 @@
     "max_dex_named_products": 4.314095569668552e-06,
     "max_rel_element_drift": 1.499167090834497e-15,
     "max_abs_below_floor_share_of_y0": 1.0524213259721531e-13,
-    "wall_s_all_pots_after_jit": 0.17029879201436415
+    "wall_s_all_pots_after_jit": 0.19387254198954906
    },
    {
     "solver": "Kvaerno4",
@@ -571,7 +571,7 @@
     "max_dex_named_products": 3.293888952704549e-07,
     "max_rel_element_drift": 8.193645961918273e-16,
     "max_abs_below_floor_share_of_y0": 2.2184917210363694e-17,
-    "wall_s_all_pots_after_jit": 0.015596874931361526
+    "wall_s_all_pots_after_jit": 0.022842292019049637
    },
    {
     "solver": "Kvaerno4",
@@ -591,7 +591,7 @@
     "max_dex_named_products": 4.9576866612e-07,
     "max_rel_element_drift": 6.315935428978669e-16,
     "max_abs_below_floor_share_of_y0": 1.221564789093033e-16,
-    "wall_s_all_pots_after_jit": 0.043902749952394515
+    "wall_s_all_pots_after_jit": 0.060588748994632624
    },
    {
     "solver": "Kvaerno4",
@@ -611,7 +611,7 @@
     "max_dex_named_products": 1.7690356655108985e-06,
     "max_rel_element_drift": 1.0150610510858574e-15,
     "max_abs_below_floor_share_of_y0": 8.057033218452515e-15,
-    "wall_s_all_pots_after_jit": 0.1441572070471011
+    "wall_s_all_pots_after_jit": 0.1822997499984922
    },
    {
     "solver": "Kvaerno5",
@@ -631,7 +631,7 @@
     "max_dex_named_products": 2.0249846244269065e-10,
     "max_rel_element_drift": 4.0968229809591363e-16,
     "max_abs_below_floor_share_of_y0": 4.676518502819435e-20,
-    "wall_s_all_pots_after_jit": 0.02751104300841689
+    "wall_s_all_pots_after_jit": 0.03499149999697693
    },
    {
     "solver": "Kvaerno5",
@@ -651,7 +651,7 @@
     "max_dex_named_products": 2.1312662745742728e-10,
     "max_rel_element_drift": 2.6645352591003757e-15,
     "max_abs_below_floor_share_of_y0": 2.2528037800682964e-20,
-    "wall_s_all_pots_after_jit": 0.47815703990636393
+    "wall_s_all_pots_after_jit": 0.5214647510001669
    },
    {
     "solver": "Kvaerno5",
@@ -671,7 +671,7 @@
     "max_dex_named_products": 1.229953916492832e-09,
     "max_rel_element_drift": 4.263256414560601e-15,
     "max_abs_below_floor_share_of_y0": 4.33830244577939e-18,
-    "wall_s_all_pots_after_jit": 1.2121915000025183
+    "wall_s_all_pots_after_jit": 1.9334682080079801
    },
    {
     "solver": "Kvaerno5",
@@ -691,7 +691,7 @@
     "max_dex_named_products": 1.5063140068605207e-08,
     "max_rel_element_drift": 4.0968229809591363e-16,
     "max_abs_below_floor_share_of_y0": 2.793164018928229e-18,
-    "wall_s_all_pots_after_jit": 0.012000582995824516
+    "wall_s_all_pots_after_jit": 0.014494623988866806
    },
    {
     "solver": "Kvaerno5",
@@ -711,7 +711,7 @@
     "max_dex_named_products": 1.5513386797394446e-08,
     "max_rel_element_drift": 1.4210854715202005e-15,
     "max_abs_below_floor_share_of_y0": 1.808120368489025e-18,
-    "wall_s_all_pots_after_jit": 0.18599699897458777
+    "wall_s_all_pots_after_jit": 0.24872141701052897
    },
    {
     "solver": "Kvaerno5",
@@ -731,7 +731,7 @@
     "max_dex_named_products": 7.996465711812561e-08,
     "max_rel_element_drift": 2.2331343123888863e-15,
     "max_abs_below_floor_share_of_y0": 2.340031836280724e-16,
-    "wall_s_all_pots_after_jit": 0.4664442500215955
+    "wall_s_all_pots_after_jit": 0.5788122079975437
    },
    {
     "solver": "Kvaerno5",
@@ -751,7 +751,7 @@
     "max_dex_named_products": 1.0332525679501714e-07,
     "max_rel_element_drift": 2.731215320639424e-16,
     "max_abs_below_floor_share_of_y0": 1.7936620937751613e-16,
-    "wall_s_all_pots_after_jit": 0.007010499946773052
+    "wall_s_all_pots_after_jit": 0.007356249989243224
    },
    {
     "solver": "Kvaerno5",
@@ -771,7 +771,7 @@
     "max_dex_named_products": 4.886642237522665e-07,
     "max_rel_element_drift": 3.8756876496005463e-16,
     "max_abs_below_floor_share_of_y0": 2.2531719058535564e-16,
-    "wall_s_all_pots_after_jit": 0.04169108299538493
+    "wall_s_all_pots_after_jit": 0.045945290999952704
    },
    {
     "solver": "Kvaerno5",
@@ -791,7 +791,7 @@
     "max_dex_named_products": 1.971612514672927e-05,
     "max_rel_element_drift": 1.1243753181258728e-15,
     "max_abs_below_floor_share_of_y0": 3.1815373516066285e-13,
-    "wall_s_all_pots_after_jit": 0.17273237503832206
+    "wall_s_all_pots_after_jit": 0.21446420800930355
    },
    {
     "solver": "Kvaerno5",
@@ -811,7 +811,7 @@
     "max_dex_named_products": 5.435845058521238e-07,
     "max_rel_element_drift": 5.462430641278848e-16,
     "max_abs_below_floor_share_of_y0": 7.904913709040484e-17,
-    "wall_s_all_pots_after_jit": 0.006379041005857289
+    "wall_s_all_pots_after_jit": 0.007989416000782512
    },
    {
     "solver": "Kvaerno5",
@@ -831,7 +831,7 @@
     "max_dex_named_products": 9.6280943417959e-07,
     "max_rel_element_drift": 5.329070518200751e-16,
     "max_abs_below_floor_share_of_y0": 1.1767593682816297e-16,
-    "wall_s_all_pots_after_jit": 0.06642725097481161
+    "wall_s_all_pots_after_jit": 0.07872720799059607
    },
    {
     "solver": "Kvaerno5",
@@ -851,7 +851,7 @@
     "max_dex_named_products": 3.5476806594658683e-06,
     "max_rel_element_drift": 2.1316282072803005e-15,
     "max_abs_below_floor_share_of_y0": 1.1945239555428924e-14,
-    "wall_s_all_pots_after_jit": 0.17001416598213837
+    "wall_s_all_pots_after_jit": 0.27566104198922403
    }
   ]
  },
@@ -2024,10 +2024,10 @@
     "n_relative_columns": 32
    },
    "jacobian_wall_s_including_compile": {
-    "tight_1e-10": 1.942728125024587,
-    "fit_tol_1e-8": 1.522567167005036,
-    "fit_tol_1e-8_atol_1e-10": 1.7804131250013597,
-    "loose_1e-6": 1.3885376249672845
+    "tight_1e-10": 2.08342624999932,
+    "fit_tol_1e-8": 1.6011312500049826,
+    "fit_tol_1e-8_atol_1e-10": 2.456492541008629,
+    "loose_1e-6": 2.9658835000009276
    }
   },
   "synthetic_fed_glyoxal_methylglyoxal_glycine_120C": {
@@ -3316,10 +3316,10 @@
     "n_relative_columns": 12
    },
    "jacobian_wall_s_including_compile": {
-    "tight_1e-10": 4.409827791037969,
-    "fit_tol_1e-8": 2.788309791998472,
-    "fit_tol_1e-8_atol_1e-10": 1.475257457990665,
-    "loose_1e-6": 1.6196554580237716
+    "tight_1e-10": 6.1893112499965355,
+    "fit_tol_1e-8": 3.8128703340044012,
+    "fit_tol_1e-8_atol_1e-10": 1.9473568749963306,
+    "loose_1e-6": 1.9839062910032226
    }
   },
   "synthetic_profile_trunk_lane_all_blocks_25_160_100": {
@@ -4542,10 +4542,10 @@
     "n_relative_columns": 3
    },
    "jacobian_wall_s_including_compile": {
-    "tight_1e-10": 12.423836291010957,
-    "fit_tol_1e-8": 6.0289700829889625,
-    "fit_tol_1e-8_atol_1e-10": 4.58578712499002,
-    "loose_1e-6": 3.816383917001076
+    "tight_1e-10": 7.524815291995765,
+    "fit_tol_1e-8": 4.324983333994169,
+    "fit_tol_1e-8_atol_1e-10": 2.9164505840017227,
+    "loose_1e-6": 2.5634490419906797
    }
   }
  },
@@ -4932,265 +4932,265 @@
     "pot": "mp_holdout_glucose_only_autoclave_121C_Steinhagen2021",
     "n_segments": 1,
     "engine": {
-     "lane_run_median_s": 0.018633687985129654,
-     "forward_fd_jacobian_s": 2.049705678364262,
+     "lane_run_median_s": 0.011399061993870419,
+     "forward_fd_jacobian_s": 1.253896819325746,
      "fd_runs": 110
     },
     "jax": {
      "K5 rtol 1e-8 atol 1e-14": {
-      "solve_median_s": 0.007024709018878639,
-      "solve_compile_s": 1.5293329170090146,
+      "solve_median_s": 0.005358874986995943,
+      "solve_compile_s": 0.743481540994253,
       "steps": 56,
-      "jacobian_median_s": 0.10742170899175107,
-      "jacobian_compile_s": 2.426731666957494,
+      "jacobian_median_s": 0.07843987499654759,
+      "jacobian_compile_s": 1.6006569169985596,
       "n_coordinates": 109
      },
      "K5 rtol 1e-8 atol 1e-10": {
-      "solve_median_s": 0.004770666011609137,
-      "solve_compile_s": 1.3222195419948548,
+      "solve_median_s": 0.002649625006597489,
+      "solve_compile_s": 0.8297840000013821,
       "steps": 27,
-      "jacobian_median_s": 0.04471420799382031,
-      "jacobian_compile_s": 3.787888374994509,
+      "jacobian_median_s": 0.029167874992708676,
+      "jacobian_compile_s": 1.8474851250066422,
       "n_coordinates": 109
      },
      "K4 rtol 1e-8 atol 1e-14": {
-      "solve_median_s": 0.030090875050518662,
-      "solve_compile_s": 1.3169051670120098,
+      "solve_median_s": 0.016920958005357534,
+      "solve_compile_s": 0.7020511669979896,
       "steps": 263,
-      "jacobian_median_s": 0.3184714579838328,
-      "jacobian_compile_s": 2.51863800000865,
+      "jacobian_median_s": 0.20335291599621996,
+      "jacobian_compile_s": 1.3882083749922458,
       "n_coordinates": 109
      },
      "K4 rtol 1e-8 atol 1e-10": {
-      "solve_median_s": 0.013371707987971604,
-      "solve_compile_s": 1.3270202500279993,
+      "solve_median_s": 0.008560957998270169,
+      "solve_compile_s": 0.7621571670024423,
       "steps": 111,
-      "jacobian_median_s": 0.1389799999888055,
-      "jacobian_compile_s": 2.379171292006504,
+      "jacobian_median_s": 0.08412400000088383,
+      "jacobian_compile_s": 1.3592691250087228,
       "n_coordinates": 109
      },
      "K4 rtol 1e-6 atol 1e-10": {
-      "solve_median_s": 0.007531374983955175,
-      "solve_compile_s": 1.3121363749960437,
+      "solve_median_s": 0.005056832989794202,
+      "solve_compile_s": 0.8173935410013655,
       "steps": 63,
-      "jacobian_median_s": 0.07707554200896993,
-      "jacobian_compile_s": 3.60545362503035,
+      "jacobian_median_s": 0.05179241599398665,
+      "jacobian_compile_s": 2.0095699169905856,
       "n_coordinates": 109
      }
     },
-    "uptime": "0:21  up 4 days, 13:26, 1 user, load averages: 9.32 6.37 5.21"
+    "uptime": "15:07  up 1 day, 11:40, 1 user, load averages: 6.30 5.96 7.71"
    },
    {
     "class": "fed dicarbonyls + glycine (pyrazine; 60 min at 120 C)",
     "pot": "synthetic_fed_glyoxal_methylglyoxal_glycine_120C",
     "n_segments": 1,
     "engine": {
-     "lane_run_median_s": 0.028790000040316954,
-     "forward_fd_jacobian_s": 3.166900004434865,
+     "lane_run_median_s": 0.025357354497828055,
+     "forward_fd_jacobian_s": 2.789308994761086,
      "fd_runs": 110
     },
     "jax": {
      "K5 rtol 1e-8 atol 1e-14": {
-      "solve_median_s": 0.17610383301507682,
-      "solve_compile_s": 1.5797838340513408,
+      "solve_median_s": 0.1110132499889005,
+      "solve_compile_s": 0.9918859579920536,
       "steps": 1270,
-      "jacobian_median_s": 2.6557540830108337,
-      "jacobian_compile_s": 5.747242208046373,
+      "jacobian_median_s": 1.2946360830101185,
+      "jacobian_compile_s": 2.9894697920099134,
       "n_coordinates": 109
      },
      "K5 rtol 1e-8 atol 1e-10": {
-      "solve_median_s": 0.08237916702637449,
-      "solve_compile_s": 1.622432874981314,
+      "solve_median_s": 0.02482879201124888,
+      "solve_compile_s": 0.6940391669922974,
       "steps": 333,
-      "jacobian_median_s": 0.6728427089983597,
-      "jacobian_compile_s": 3.006194833025802,
+      "jacobian_median_s": 0.4448277089977637,
+      "jacobian_compile_s": 1.884372083004564,
       "n_coordinates": 109
      },
      "K4 rtol 1e-8 atol 1e-14": {
-      "solve_median_s": 0.05872745794476941,
-      "solve_compile_s": 1.2703622920089401,
+      "solve_median_s": 0.03623962499841582,
+      "solve_compile_s": 0.7395323750097305,
       "steps": 568,
-      "jacobian_median_s": 0.7002736660069786,
-      "jacobian_compile_s": 2.8704258329817094,
+      "jacobian_median_s": 0.4070901670056628,
+      "jacobian_compile_s": 1.731901833001757,
       "n_coordinates": 109
      },
      "K4 rtol 1e-8 atol 1e-10": {
-      "solve_median_s": 0.03789183299522847,
-      "solve_compile_s": 2.7016626670374535,
+      "solve_median_s": 0.02272175000689458,
+      "solve_compile_s": 1.6292657500016503,
       "steps": 359,
-      "jacobian_median_s": 0.45084041700465605,
-      "jacobian_compile_s": 2.570035834040027,
+      "jacobian_median_s": 0.26889362499059644,
+      "jacobian_compile_s": 1.494457708002301,
       "n_coordinates": 109
      },
      "K4 rtol 1e-6 atol 1e-10": {
-      "solve_median_s": 0.020234916009940207,
-      "solve_compile_s": 1.111279624979943,
+      "solve_median_s": 0.014364333008415997,
+      "solve_compile_s": 0.7825029999949038,
       "steps": 195,
-      "jacobian_median_s": 0.20261170802405104,
-      "jacobian_compile_s": 2.1338650420075282,
+      "jacobian_median_s": 0.1382835830008844,
+      "jacobian_compile_s": 1.500714624999091,
       "n_coordinates": 109
      }
     },
-    "uptime": "0:22  up 4 days, 13:27, 1 user, load averages: 8.21 6.47 5.30"
+    "uptime": "15:07  up 1 day, 11:40, 1 user, load averages: 8.14 6.46 7.84"
    },
    {
     "class": "glucose + bound lysine (glycation; 40 min at 120 C)",
     "pot": "synthetic_glucose_bound_lysine_120C",
     "n_segments": 1,
     "engine": {
-     "lane_run_median_s": 0.03138647900777869,
-     "forward_fd_jacobian_s": 3.452512690855656,
+     "lane_run_median_s": 0.018470916998921894,
+     "forward_fd_jacobian_s": 2.0318008698814083,
      "fd_runs": 110
     },
     "jax": {
      "K5 rtol 1e-8 atol 1e-14": {
-      "solve_median_s": 0.011908666987437755,
-      "solve_compile_s": 1.1198981250054203,
+      "solve_median_s": 0.007569749999674968,
+      "solve_compile_s": 0.6927633340092143,
       "steps": 96,
-      "jacobian_median_s": 0.16732183296699077,
-      "jacobian_compile_s": 2.0581279160105623,
+      "jacobian_median_s": 0.10099829199316446,
+      "jacobian_compile_s": 1.2795369590021437,
       "n_coordinates": 109
      },
      "K5 rtol 1e-8 atol 1e-10": {
-      "solve_median_s": 0.009000458987429738,
-      "solve_compile_s": 1.1358002499910071,
+      "solve_median_s": 0.0068864589993609115,
+      "solve_compile_s": 0.8232677909982158,
       "steps": 71,
-      "jacobian_median_s": 0.13300829200306907,
-      "jacobian_compile_s": 3.82799158396665,
+      "jacobian_median_s": 0.07531170900620054,
+      "jacobian_compile_s": 2.466586583002936,
       "n_coordinates": 109
      },
      "K4 rtol 1e-8 atol 1e-14": {
-      "solve_median_s": 0.048157709010411054,
-      "solve_compile_s": 1.35210229200311,
+      "solve_median_s": 0.02712062500359025,
+      "solve_compile_s": 0.7672483329952229,
       "steps": 352,
-      "jacobian_median_s": 0.43518054200103506,
-      "jacobian_compile_s": 2.815790291002486,
+      "jacobian_median_s": 0.2755878330062842,
+      "jacobian_compile_s": 1.68932037500781,
       "n_coordinates": 109
      },
      "K4 rtol 1e-8 atol 1e-10": {
-      "solve_median_s": 0.024668833997566253,
-      "solve_compile_s": 1.3639551249798387,
+      "solve_median_s": 0.015102334000403062,
+      "solve_compile_s": 0.7212074160051998,
       "steps": 207,
-      "jacobian_median_s": 0.2554090420017019,
-      "jacobian_compile_s": 2.453749499982223,
+      "jacobian_median_s": 0.18483887500769924,
+      "jacobian_compile_s": 1.4930290420015808,
       "n_coordinates": 109
      },
      "K4 rtol 1e-6 atol 1e-10": {
-      "solve_median_s": 0.011231624986976385,
-      "solve_compile_s": 1.3402949169976637,
+      "solve_median_s": 0.008549667007173412,
+      "solve_compile_s": 0.7939701249997597,
       "steps": 91,
-      "jacobian_median_s": 0.10825250000925735,
-      "jacobian_compile_s": 2.5664935830282047,
+      "jacobian_median_s": 0.06648504099575803,
+      "jacobian_compile_s": 1.5939488750009332,
       "n_coordinates": 109
      }
     },
-    "uptime": "0:23  up 4 days, 13:27, 1 user, load averages: 7.91 6.53 5.35"
+    "uptime": "15:07  up 1 day, 11:40, 1 user, load averages: 7.96 6.49 7.83"
    },
    {
     "class": "fed 3-deoxyglucosone (B39 triangle; 60 min at 120 C)",
     "pot": "synthetic_fed_3deoxyglucosone_120C",
     "n_segments": 1,
     "engine": {
-     "lane_run_median_s": 0.004904978995909914,
-     "forward_fd_jacobian_s": 0.5395476895500906,
+     "lane_run_median_s": 0.002937874996860046,
+     "forward_fd_jacobian_s": 0.32316624965460505,
      "fd_runs": 110
     },
     "jax": {
      "K5 rtol 1e-8 atol 1e-14": {
-      "solve_median_s": 0.005520832957699895,
-      "solve_compile_s": 1.3455842499970458,
+      "solve_median_s": 0.0034151250001741573,
+      "solve_compile_s": 0.7668415830121376,
       "steps": 38,
-      "jacobian_median_s": 0.06494379101786762,
-      "jacobian_compile_s": 2.39044162502978,
+      "jacobian_median_s": 0.05021308398863766,
+      "jacobian_compile_s": 1.3259148749930318,
       "n_coordinates": 109
      },
      "K5 rtol 1e-8 atol 1e-10": {
-      "solve_median_s": 0.003736291953828186,
-      "solve_compile_s": 3.94450137502281,
+      "solve_median_s": 0.0021977500000502914,
+      "solve_compile_s": 1.8839378749980824,
       "steps": 29,
-      "jacobian_median_s": 0.047990125021897256,
-      "jacobian_compile_s": 2.3545119170448743,
+      "jacobian_median_s": 0.03496554199955426,
+      "jacobian_compile_s": 1.2597942920110654,
       "n_coordinates": 109
      },
      "K4 rtol 1e-8 atol 1e-14": {
-      "solve_median_s": 0.020233332994394004,
-      "solve_compile_s": 1.432689292007126,
+      "solve_median_s": 0.015051082998979837,
+      "solve_compile_s": 0.8064524170040386,
       "steps": 195,
-      "jacobian_median_s": 0.2375668750028126,
-      "jacobian_compile_s": 2.499265833001118,
+      "jacobian_median_s": 0.15098012499220204,
+      "jacobian_compile_s": 1.3972394169977633,
       "n_coordinates": 109
      },
      "K4 rtol 1e-8 atol 1e-10": {
-      "solve_median_s": 0.014239082986023277,
-      "solve_compile_s": 1.3421223749755882,
+      "solve_median_s": 0.011133292005979456,
+      "solve_compile_s": 0.7304666670097504,
       "steps": 134,
-      "jacobian_median_s": 0.1641025409917347,
-      "jacobian_compile_s": 2.4816562079940923,
+      "jacobian_median_s": 0.11015462499926798,
+      "jacobian_compile_s": 1.648729041000479,
       "n_coordinates": 109
      },
      "K4 rtol 1e-6 atol 1e-10": {
-      "solve_median_s": 0.007400791975669563,
-      "solve_compile_s": 1.5921263750060461,
+      "solve_median_s": 0.005836832991917618,
+      "solve_compile_s": 0.8402822919888422,
       "steps": 58,
-      "jacobian_median_s": 0.0654644169844687,
-      "jacobian_compile_s": 2.4083561670267954,
+      "jacobian_median_s": 0.05855124999652617,
+      "jacobian_compile_s": 1.7560739170003217,
       "n_coordinates": 109
      }
     },
-    "uptime": "0:23  up 4 days, 13:27, 1 user, load averages: 9.91 7.12 5.60"
+    "uptime": "15:08  up 1 day, 11:41, 1 user, load averages: 8.44 6.64 7.86"
    },
    {
     "class": "staircase profile, every block",
     "pot": "synthetic_profile_trunk_lane_all_blocks_25_160_100",
     "n_segments": 99,
     "engine": {
-     "lane_run_median_s": 0.3909570000250824,
-     "forward_fd_jacobian_s": 43.00527000275906,
+     "lane_run_median_s": 0.24698016699403524,
+     "forward_fd_jacobian_s": 27.167818369343877,
      "fd_runs": 110
     },
     "jax": {
      "K5 rtol 1e-8 atol 1e-14": {
-      "solve_median_s": 0.34172174998093396,
-      "solve_compile_s": 2.0324732500012033,
+      "solve_median_s": 0.17681983301008586,
+      "solve_compile_s": 0.9452567910047946,
       "steps": 2122,
-      "jacobian_median_s": 3.9307621670304798,
-      "jacobian_compile_s": 9.6633451670059,
+      "jacobian_median_s": 2.3184294999955455,
+      "jacobian_compile_s": 5.140733292006189,
       "n_coordinates": 109
      },
      "K5 rtol 1e-8 atol 1e-10": {
-      "solve_median_s": 0.11226566700497642,
-      "solve_compile_s": 1.4803536249673925,
+      "solve_median_s": 0.07063724999898113,
+      "solve_compile_s": 0.9634349159896374,
       "steps": 917,
-      "jacobian_median_s": 1.8047314999857917,
-      "jacobian_compile_s": 4.182892750017345,
+      "jacobian_median_s": 1.0073462500004098,
+      "jacobian_compile_s": 2.3242541250074282,
       "n_coordinates": 109
      },
      "K4 rtol 1e-8 atol 1e-14": {
-      "solve_median_s": 0.3703609580406919,
-      "solve_compile_s": 1.97034108301159,
+      "solve_median_s": 0.18137220799690112,
+      "solve_compile_s": 1.072327875008341,
       "steps": 3027,
-      "jacobian_median_s": 3.759445583971683,
-      "jacobian_compile_s": 6.444354334031232,
+      "jacobian_median_s": 2.221993500003009,
+      "jacobian_compile_s": 3.541498999999021,
       "n_coordinates": 109
      },
      "K4 rtol 1e-8 atol 1e-10": {
-      "solve_median_s": 0.15696116699837148,
-      "solve_compile_s": 1.7824101659934968,
+      "solve_median_s": 0.10138754200306721,
+      "solve_compile_s": 0.9199894170014886,
       "steps": 1297,
-      "jacobian_median_s": 1.612028207979165,
-      "jacobian_compile_s": 4.2301333749783225,
+      "jacobian_median_s": 0.8979696250025881,
+      "jacobian_compile_s": 2.3101359589927597,
       "n_coordinates": 109
      },
      "K4 rtol 1e-6 atol 1e-10": {
-      "solve_median_s": 0.08598329097731039,
-      "solve_compile_s": 1.6184147919993848,
+      "solve_median_s": 0.05509370799700264,
+      "solve_compile_s": 0.9020218750083586,
       "steps": 752,
-      "jacobian_median_s": 0.9359966670162976,
-      "jacobian_compile_s": 3.6257293329690583,
+      "jacobian_median_s": 0.5976310419937363,
+      "jacobian_compile_s": 2.602422124997247,
       "n_coordinates": 109
      }
     },
-    "uptime": "0:24  up 4 days, 13:29, 1 user, load averages: 10.22 7.68 5.94"
+    "uptime": "15:08  up 1 day, 11:41, 1 user, load averages: 8.61 6.94 7.90"
    }
   ],
   "settings": [

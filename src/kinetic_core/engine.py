@@ -2753,6 +2753,7 @@ def predict(
     size_declared_bands: bool = True,
     balance_refusal: Optional[bool] = None,
     thiamine_refusal: Optional[bool] = None,
+    cysteine_thiamine_refusal: Optional[bool] = None,
 ) -> CorePrediction:
     """
     THE ENTRY POINT. Map ``spec`` onto a lane, integrate, emit B4 objects.
@@ -2782,6 +2783,12 @@ def predict(
     its carried rival where the shipped zero is unmeasured (below pH 6.25) are refused: dropped by name, or the whole
     request ``out_of_envelope`` when none is left. ``None`` reads the switch ``thiamine_h2s_refusal.ENABLED`` (config
     key ``sulfur.thiamine_h2s_refusal``, shipped True); ``False`` is for the rule's own integrations.
+
+    ``cysteine_thiamine_refusal`` (2026-11-26, STEP5_RECORD second amendment; B66,
+    ``cysteine_thiamine_mft_refusal``): on a sulfur-lane pot charged with thiamine and a thiol donor (cysteine,
+    glutathione, TTCA), the outputs that move beyond omega / 2 when thiamine's MFT step takes its sensitivity rival
+    (x7.0, Grosch & Zeiler-Hilgart 1992) are refused the same way. ``None`` reads the switch ``cysteine_thiamine_mft_refusal.ENABLED`` (config key
+    ``sulfur.cysteine_thiamine_mft_refusal``, shipped True); ``False`` is for a rule's own integrations.
     """
     if parameters is not None and draw is not None and draw.maillard is not None:
         raise ValueError(
@@ -2797,6 +2804,10 @@ def predict(
         from . import thiamine_h2s_refusal as _thi_switch
 
         thiamine_refusal = bool(_thi_switch.ENABLED)
+    if cysteine_thiamine_refusal is None:
+        from . import cysteine_thiamine_mft_refusal as _ct_switch
+
+        cysteine_thiamine_refusal = bool(_ct_switch.ENABLED)
     declaration = declare_envelope(spec, targets)
     if not declaration.is_answerable:
         return CorePrediction(spec=spec, declaration=declaration)
@@ -3020,6 +3031,11 @@ def predict(
         out = _apply_balance_refusal(shipped, targets, centre=centre)
     if thiamine_refusal and maillard_lane == SULFUR:
         out = _apply_thiamine_refusal(out, targets, centre_run=shipped if centre else None)
+    if cysteine_thiamine_refusal and maillard_lane == SULFUR and out.concentrations_ug_per_l:
+        from . import cysteine_thiamine_mft_refusal as _ct
+
+        out = _apply_rival_refusal(out, targets, _ct, "cysteine_thiamine_mft_refusal",
+                                   centre_run=shipped if centre else None)
     return out
 
 
@@ -3029,9 +3045,19 @@ def _apply_thiamine_refusal(run: CorePrediction, targets: Sequence[str], *,
     thiamine's H2S share takes its carried rival where the shipped zero is unmeasured are dropped by name (with the
     reason in ``run_metadata["refused_targets"]``), or the whole request is refused when none is left. A pot the rule
     does not apply to, or on which nothing moves, is returned unchanged (the same object)."""
-    from dataclasses import replace
-
     from . import thiamine_h2s_refusal as thr
+
+    return _apply_rival_refusal(run, targets, thr, "thiamine_h2s_refusal", centre_run=centre_run)
+
+
+def _apply_rival_refusal(run: CorePrediction, targets: Sequence[str], thr: Any, metadata_key: str, *,
+                         centre_run: Optional[CorePrediction]) -> CorePrediction:
+    """One carried-rival refusal rule applied to a run. ``thr`` is the rule's module (``thiamine_h2s_refusal``,
+    ``cysteine_thiamine_mft_refusal``): ``applies``, ``assess`` and ``refusal_text``. The outputs its verdict refuses
+    are dropped by name (reason in ``run_metadata["refused_targets"]``, the verdict's summary under ``metadata_key``),
+    or the whole request is refused when none is left. A pot the rule does not apply to, or on which nothing moves, is
+    returned unchanged (the same object)."""
+    from dataclasses import replace
 
     if not thr.applies(run.spec, run.declaration):
         return run
@@ -3046,7 +3072,7 @@ def _apply_thiamine_refusal(run: CorePrediction, targets: Sequence[str], *,
                               reasons=(thr.refusal_text(refused, verdict),) + tuple(declaration.reasons))
         return CorePrediction(spec=run.spec, declaration=declaration)
     metadata = dict(run.run_metadata)
-    metadata["thiamine_h2s_refusal"] = verdict.summary()
+    metadata[metadata_key] = verdict.summary()
     metadata["refused_targets"] = {**dict(metadata.get("refused_targets") or {}),
                                    **{c: thr.refusal_text([c], verdict) for c in refused}}
     keys = {declaration.mapped_targets.get(c) for c in refused} - {None}
@@ -3235,10 +3261,12 @@ def compare(
     if not (run_a.answered and run_b.answered):
         reason = "at least one arm is out of envelope; a ratio against a refusal is not a ratio."
         # 2026-11-17 (thiamine_h2s_refusal): an arm refused after integration says why, by name
+        # 2026-11-26 (cysteine_thiamine_mft_refusal, B66): likewise
+        from .cysteine_thiamine_mft_refusal import CYSTEINE_THIAMINE_REFUSED_TAG as _ct_tag
         from .thiamine_h2s_refusal import THIAMINE_REFUSED_TAG as _thi_tag
 
         thi = next((r for run in (run_a, run_b) if not run.answered for r in run.declaration.reasons
-                    if str(r).startswith(_thi_tag)), None)
+                    if str(r).startswith((_thi_tag, _ct_tag))), None)
         return {
             "comparable": False,
             "declaration_a": run_a.declaration.as_dict(),

@@ -183,6 +183,7 @@ _BANDS: Mapping[str, Mapping[str, Tuple[float, float]]] = {
     "sulfur.ttca_formation": {"k_l_per_mmol": (0.019, 0.6)},
     "sulfur.tdp_own_decay": {"k_ref_per_min": (0.0, 0.1), "ea_kj_mol": (30.0, 200.0)},
     "sulfur.thiamine_h2s_unmeasured_rival": {"share": (0.0, 0.99)},   # a share; < 1, as r_thi_h2s divides by 1 - share
+    "sulfur.cysteine_thiamine_mft_rival": {"factor": (0.1, 30.0)},   # Grosch's x0.38 fall .. beyond Zhang's x19
     "lipid.q10_assumption": {"default": (1.6, 3.3)},
     # M1b part (i) (kinetic_core_m1b_ph_balance_pentose_steps_prereg.md sec. 3.1): fractions [0, 1]; k_lag from Zhai
     # 2023's 0.0097 /min to the band's 10 /min, widened to 1e6 for V2's fast-end reproduction; Ea the carbohydrate
@@ -276,6 +277,15 @@ KEYS: Tuple[ConfigKey, ...] = (
        "STEP5_RECORD amendment 2026-11-17: engine.predict refuses the outputs that move when thiamine's H2S share is "
        "set to its carried rival where the shipped zero is unmeasured. Off only where the model's own numbers are "
        "computed, not shipped"),
+    _k("sulfur.cysteine_thiamine_mft_rival", "parameters_sulfur", "CYSTEINE_THIAMINE_MFT_RIVAL",
+       _ps.CysteineThiamineMftRival(), "rate",
+       "B66 (STEP5_RECORD second amendment 2026-11-26): r_hmp_mft x7.0 (Grosch & Zeiler-Hilgart 1992, Table II), the "
+       "sensitivity rival to the thiamine route reading no thiol donor; on only inside "
+       "cysteine_thiamine_mft_refusal's own integration"),
+    _k("sulfur.cysteine_thiamine_mft_refusal", "cysteine_thiamine_mft_refusal", "ENABLED", True, "rate",
+       "B66 (STEP5_RECORD second amendment 2026-11-26): engine.predict refuses the outputs that move when thiamine's "
+       "MFT step takes its sensitivity rival in a pot charged with thiamine and a thiol donor (cysteine, glutathione, "
+       "TTCA). Off only where the model's own numbers are computed, not shipped"),
     # --- fit-side declarations of plan step M1 (parameters_sulfur.py): read by fit code only, never by the kinetics
     _k("fit.dimer_encounter_ceiling", "parameters_sulfur", "DIMER_ENCOUNTER_CEILING", _ps.DimerEncounterCeiling(),
        "rate", "M1 prereg sec. 2.5: the encounter-limit ceiling on k_dimer_* replaces the numerical bound in a fit"),

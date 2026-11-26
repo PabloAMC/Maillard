@@ -41,11 +41,11 @@
   },
   "provenance": {
     "artifact": "core_directional_scores",
-    "generated_on": "2026-11-17",
+    "generated_on": "2026-11-26",
     "git": {
-      "commit": "50a224ab99c4fccb04894bc96551a7a73d816e1b",
-      "short": "50a224ab",
-      "branch": "engine-gaps-thiamine-h2s",
+      "commit": "1d16bcdb2255c95916dc19286d1e3e7ca7783a84",
+      "short": "1d16bcdb",
+      "branch": "cys-thiamine-boost",
       "dirty": true
     },
     "generated_by": "src/kinetic_core/directional.py",
@@ -86,8 +86,8 @@
   },
   "summary": {
     "headline": [
-      10,
-      19
+      9,
+      17
     ],
     "headline_definition": "strictly independent claims (fit_status == independent) the core could evaluate; refused arms and unrepresented observables are NOT EVALUABLE, identical predictions across a moved axis are MISSES",
     "independent": {
@@ -134,15 +134,14 @@
         },
         "ph": {
           "agree": 1,
-          "evaluable": 4,
-          "not_evaluable": 11,
+          "evaluable": 3,
+          "not_evaluable": 12,
           "misses": [
             "PH-07",
-            "HOX-03",
-            "MOD08-PH-01"
+            "HOX-03"
           ],
           "mechanism_absent": 0,
-          "rate": 0.25
+          "rate": 0.3333333333333333
         },
         "process_heating": {
           "agree": 0,
@@ -181,12 +180,12 @@
           "rate": 0.4
         },
         "sulfur_donor": {
-          "agree": 1,
-          "evaluable": 1,
-          "not_evaluable": 4,
+          "agree": 0,
+          "evaluable": 0,
+          "not_evaluable": 5,
           "misses": [],
           "mechanism_absent": 0,
-          "rate": 1.0
+          "rate": null
         },
         "temperature": {
           "agree": 4,
@@ -210,9 +209,9 @@
         }
       },
       "total": {
-        "agree": 10,
-        "evaluable": 19,
-        "not_evaluable": 56,
+        "agree": 9,
+        "evaluable": 17,
+        "not_evaluable": 58,
         "misses": [
           "SUG-03",
           "TEMP-01",
@@ -221,28 +220,26 @@
           "TEMP-05",
           "HOX-03",
           "YIL-01",
-          "DIC-01",
-          "MOD08-PH-01"
+          "DIC-01"
         ],
         "mechanism_absent": 0,
-        "rate": 0.5263157894736842
+        "rate": 0.5294117647058824
       },
       "ph_aw": {
         "agree": 1,
-        "evaluable": 4,
-        "not_evaluable": 15,
+        "evaluable": 3,
+        "not_evaluable": 16,
         "misses": [
           "PH-07",
-          "HOX-03",
-          "MOD08-PH-01"
+          "HOX-03"
         ],
         "mechanism_absent": 0,
-        "rate": 0.25
+        "rate": 0.3333333333333333
       },
       "excluding_ph_aw": {
-        "agree": 9,
-        "evaluable": 15,
-        "not_evaluable": 41,
+        "agree": 8,
+        "evaluable": 14,
+        "not_evaluable": 42,
         "misses": [
           "SUG-03",
           "TEMP-01",
@@ -252,7 +249,7 @@
           "DIC-01"
         ],
         "mechanism_absent": 0,
-        "rate": 0.6
+        "rate": 0.5714285714285714
       }
     },
     "all_claims": {
@@ -304,16 +301,15 @@
         },
         "ph": {
           "agree": 2,
-          "evaluable": 6,
-          "not_evaluable": 19,
+          "evaluable": 5,
+          "not_evaluable": 20,
           "misses": [
             "PH-07",
             "HOX-03",
-            "WHI-PH-01",
-            "MOD08-PH-01"
+            "WHI-PH-01"
           ],
           "mechanism_absent": 0,
-          "rate": 0.3333333333333333
+          "rate": 0.4
         },
         "process_heating": {
           "agree": 0,
@@ -356,12 +352,12 @@
           "rate": 0.42857142857142855
         },
         "sulfur_donor": {
-          "agree": 1,
-          "evaluable": 1,
-          "not_evaluable": 5,
+          "agree": 0,
+          "evaluable": 0,
+          "not_evaluable": 6,
           "misses": [],
           "mechanism_absent": 0,
-          "rate": 1.0
+          "rate": null
         },
         "temperature": {
           "agree": 4,
@@ -385,9 +381,9 @@
         }
       },
       "total": {
-        "agree": 15,
-        "evaluable": 31,
-        "not_evaluable": 88,
+        "agree": 14,
+        "evaluable": 29,
+        "not_evaluable": 90,
         "misses": [
           "SUG-03",
           "SUG-04",
@@ -403,29 +399,27 @@
           "HOX-03",
           "YIL-01",
           "DIC-01",
-          "WHI-PH-01",
-          "MOD08-PH-01"
+          "WHI-PH-01"
         ],
         "mechanism_absent": 3,
-        "rate": 0.4838709677419355
+        "rate": 0.4827586206896552
       },
       "ph_aw": {
         "agree": 2,
-        "evaluable": 6,
-        "not_evaluable": 26,
+        "evaluable": 5,
+        "not_evaluable": 27,
         "misses": [
           "PH-07",
           "HOX-03",
-          "WHI-PH-01",
-          "MOD08-PH-01"
+          "WHI-PH-01"
         ],
         "mechanism_absent": 0,
-        "rate": 0.3333333333333333
+        "rate": 0.4
       },
       "excluding_ph_aw": {
-        "agree": 13,
-        "evaluable": 25,
-        "not_evaluable": 62,
+        "agree": 12,
+        "evaluable": 24,
+        "not_evaluable": 63,
         "misses": [
           "SUG-03",
           "SUG-04",
@@ -441,7 +435,7 @@
           "DIC-01"
         ],
         "mechanism_absent": 3,
-        "rate": 0.52
+        "rate": 0.5
       }
     },
     "not_evaluable_reasons": {
@@ -475,14 +469,16 @@
       "step 'ARP + cysteine 20 mM' -> 'ARP + glutathione 20 mM' refused": 1,
       "step '60 min' -> '90 min' refused": 1,
       "a predicted concentration is zero; no ranking is defined": 1,
+      "arm 'pot C": 1,
       "step 'pot C": 1,
       "arm 'glucose + glutathione' refused": 1,
       "arm 'cysteine alone' refused": 1,
       "arm 'beef triglyceride alone' refused": 1,
       "arm 'egg PC alone' refused": 1,
-      "arm 'methionine alone' refused": 1
+      "arm 'methionine alone' refused": 1,
+      "arm 'pH 6.5' refused": 1
     },
-    "wall_seconds": 997.9
+    "wall_seconds": 1001.3
   },
   "claims": [
     {
@@ -6424,16 +6420,8 @@
       "fit_status": "independent",
       "statement": "In unbuffered xylose (26.2 mM) + thiamine (1.19 mM) pots at 132 C / 90 min (pH 4.8), free cysteine + glycine (pot C, Cys 12.15 mM) gives ~5.6x MORE MFT than glutathione (pot A, GSH 7.42 mM): 0.118 vs 0.021.",
       "source": "wang2012",
-      "status": "agree",
-      "reason": null,
-      "identical_predictions": false,
-      "mechanism_absent": false,
-      "lane": "sulfur",
-      "values_ug_per_l": [
-        72.42046014271031,
-        42.33532235953236
-      ],
-      "log10_ratio_B_over_A": -0.23315840886850975,
+      "status": "not_evaluable",
+      "reason": "arm 'pot C: xylose + thiamine + cysteine + glycine' refused: REFUSED, A THIOL DONOR'S EFFECT ON THIAMINE'S MFT ROUTE UNDECIDED (Grosch & Zeiler-Hilgart 1992 and Zhang 2024 vs the engine): MFT (spread 0.49 dex): this pot is charged with thiamine and a thiol donor (cysteine, glutathione or TTCA), and this output depends on thiamine's step to 2-methyl-3-furanthiol (MFT), which the engine runs as if no donor were present (a donor moves its MFT by x1.0 - x1.3). ",
       "arms": [
         {
           "label": "pot C: xylose + thiamine + cysteine + glycine",
@@ -6454,12 +6442,14 @@
               "source": "Wang 2012: 25 mL distilled water, pH 4.8, no buffer"
             }
           },
-          "answered": true,
+          "answered": false,
           "lane": "sulfur",
-          "state": "in_envelope",
-          "reasons": [],
+          "state": "out_of_envelope",
+          "reasons": [
+            "REFUSED, A THIOL DONOR'S EFFECT ON THIAMINE'S MFT ROUTE UNDECIDED (Grosch & Zeiler-Hilgart 1992 and Zhang 2024 vs the engine): MFT (spread 0.49 dex): this pot is charged with thiamine and a thiol donor (cysteine, glutathione or TTCA), and this output depends on thiamine's step to 2-methyl-3-furanthiol (MFT), which the engine runs as if no donor were present (a donor moves its MFT by x1.0 - x1.3). Measured, from thiamine at 100 C and pH 5.7 (Grosch & Zeiler-Hilgart 1992): x7.0 with cysteine and no sugar, x3.7 with cysteine and ribose, x4.4 with glutathione and ribose, x2.7 at the lowest cysteine dose (0.17 mM) and x0.38 at a 91-fold cysteine excess; in a concentrated thiamine + xylose pot at 115 C and pH 4.9 (Zhang et al. 2024): x19 with cysteine and x15 with glutathione. No step inside cited bands reproduces these ratios, so the mechanism is undecided and neither the size nor, at a large excess, the sign of the engine's error is known. With the step's rate multiplied by 7 (the largest ratio measured where thiamine is the only MFT source) the output moves by more than 0.21 dex (omega / 2, so that no ratio it enters can move beyond omega), so it is not shown at the shipped value. WHAT WOULD LIFT IT: a cysteine series at fixed thiamine in one medium, with thiamine and cysteine followed over time, with and without a pentose (docs/reference/decisive_measurements.yml: cysteine_boost_thiol_yield_concentrated), or a step that reproduces Grosch's and Zhang's dose curves inside cited bands (STEP5_RECORD.md, second amendment of 2026-11-26)."
+          ],
           "warnings": [],
-          "value_ug_per_l": 72.42046014271031
+          "value_ug_per_l": null
         },
         {
           "label": "pot A: xylose + thiamine + glutathione",
@@ -6479,12 +6469,14 @@
               "source": "Wang 2012: 25 mL distilled water, pH 4.8, no buffer"
             }
           },
-          "answered": true,
+          "answered": false,
           "lane": "sulfur",
-          "state": "in_envelope",
-          "reasons": [],
+          "state": "out_of_envelope",
+          "reasons": [
+            "REFUSED, A THIOL DONOR'S EFFECT ON THIAMINE'S MFT ROUTE UNDECIDED (Grosch & Zeiler-Hilgart 1992 and Zhang 2024 vs the engine): MFT (spread 0.65 dex): this pot is charged with thiamine and a thiol donor (cysteine, glutathione or TTCA), and this output depends on thiamine's step to 2-methyl-3-furanthiol (MFT), which the engine runs as if no donor were present (a donor moves its MFT by x1.0 - x1.3). Measured, from thiamine at 100 C and pH 5.7 (Grosch & Zeiler-Hilgart 1992): x7.0 with cysteine and no sugar, x3.7 with cysteine and ribose, x4.4 with glutathione and ribose, x2.7 at the lowest cysteine dose (0.17 mM) and x0.38 at a 91-fold cysteine excess; in a concentrated thiamine + xylose pot at 115 C and pH 4.9 (Zhang et al. 2024): x19 with cysteine and x15 with glutathione. No step inside cited bands reproduces these ratios, so the mechanism is undecided and neither the size nor, at a large excess, the sign of the engine's error is known. With the step's rate multiplied by 7 (the largest ratio measured where thiamine is the only MFT source) the output moves by more than 0.21 dex (omega / 2, so that no ratio it enters can move beyond omega), so it is not shown at the shipped value. WHAT WOULD LIFT IT: a cysteine series at fixed thiamine in one medium, with thiamine and cysteine followed over time, with and without a pentose (docs/reference/decisive_measurements.yml: cysteine_boost_thiol_yield_concentrated), or a step that reproduces Grosch's and Zhang's dose curves inside cited bands (STEP5_RECORD.md, second amendment of 2026-11-26)."
+          ],
           "warnings": [],
-          "value_ug_per_l": 42.33532235953236
+          "value_ug_per_l": null
         }
       ]
     },
@@ -7076,16 +7068,8 @@
       "fit_status": "independent",
       "statement": "Aqueous cysteine + thiamine + ribose (41 / 15 / 30 mM) in 0.2 M pyrophosphate, N2-flushed, 130 C for 1 h: MFT is ~5x HIGHER at pH 6.5 than at pH 4.0 (peak areas 193.1 vs 37.4 x10^3, Duncan b vs a) -- the opposite sign to the thiamine-free Meynier pot.",
       "source": "modi2008",
-      "status": "disagree",
-      "reason": null,
-      "identical_predictions": false,
-      "mechanism_absent": false,
-      "lane": "sulfur",
-      "values_ug_per_l": [
-        209.0924567964726,
-        344.6253112028723
-      ],
-      "log10_ratio_B_over_A": 0.21700880576409468,
+      "status": "not_evaluable",
+      "reason": "arm 'pH 6.5' refused: REFUSED, A THIOL DONOR'S EFFECT ON THIAMINE'S MFT ROUTE UNDECIDED (Grosch & Zeiler-Hilgart 1992 and Zhang 2024 vs the engine): MFT (spread 0.64 dex): this pot is charged with thiamine and a thiol donor (cysteine, glutathione or TTCA), and this output depends on thiamine's step to 2-methyl-3-furanthiol (MFT), which the engine runs as if no donor were present (a donor moves its MFT by x1.0 - x1.3). ",
       "arms": [
         {
           "label": "pH 6.5",
@@ -7106,12 +7090,14 @@
               "source": "Modi, Linforth & Taylor 2008: 0.2 M pyrophosphate"
             }
           },
-          "answered": true,
+          "answered": false,
           "lane": "sulfur",
-          "state": "in_envelope",
-          "reasons": [],
+          "state": "out_of_envelope",
+          "reasons": [
+            "REFUSED, A THIOL DONOR'S EFFECT ON THIAMINE'S MFT ROUTE UNDECIDED (Grosch & Zeiler-Hilgart 1992 and Zhang 2024 vs the engine): MFT (spread 0.64 dex): this pot is charged with thiamine and a thiol donor (cysteine, glutathione or TTCA), and this output depends on thiamine's step to 2-methyl-3-furanthiol (MFT), which the engine runs as if no donor were present (a donor moves its MFT by x1.0 - x1.3). Measured, from thiamine at 100 C and pH 5.7 (Grosch & Zeiler-Hilgart 1992): x7.0 with cysteine and no sugar, x3.7 with cysteine and ribose, x4.4 with glutathione and ribose, x2.7 at the lowest cysteine dose (0.17 mM) and x0.38 at a 91-fold cysteine excess; in a concentrated thiamine + xylose pot at 115 C and pH 4.9 (Zhang et al. 2024): x19 with cysteine and x15 with glutathione. No step inside cited bands reproduces these ratios, so the mechanism is undecided and neither the size nor, at a large excess, the sign of the engine's error is known. With the step's rate multiplied by 7 (the largest ratio measured where thiamine is the only MFT source) the output moves by more than 0.21 dex (omega / 2, so that no ratio it enters can move beyond omega), so it is not shown at the shipped value. WHAT WOULD LIFT IT: a cysteine series at fixed thiamine in one medium, with thiamine and cysteine followed over time, with and without a pentose (docs/reference/decisive_measurements.yml: cysteine_boost_thiol_yield_concentrated), or a step that reproduces Grosch's and Zhang's dose curves inside cited bands (STEP5_RECORD.md, second amendment of 2026-11-26)."
+          ],
           "warnings": [],
-          "value_ug_per_l": 209.0924567964726
+          "value_ug_per_l": null
         },
         {
           "label": "pH 4.0",
@@ -7132,12 +7118,14 @@
               "source": "Modi, Linforth & Taylor 2008: 0.2 M pyrophosphate"
             }
           },
-          "answered": true,
+          "answered": false,
           "lane": "sulfur",
-          "state": "in_envelope",
-          "reasons": [],
+          "state": "out_of_envelope",
+          "reasons": [
+            "REFUSED, A THIOL DONOR'S EFFECT ON THIAMINE'S MFT ROUTE UNDECIDED (Grosch & Zeiler-Hilgart 1992 and Zhang 2024 vs the engine): MFT (spread 0.72 dex): this pot is charged with thiamine and a thiol donor (cysteine, glutathione or TTCA), and this output depends on thiamine's step to 2-methyl-3-furanthiol (MFT), which the engine runs as if no donor were present (a donor moves its MFT by x1.0 - x1.3). Measured, from thiamine at 100 C and pH 5.7 (Grosch & Zeiler-Hilgart 1992): x7.0 with cysteine and no sugar, x3.7 with cysteine and ribose, x4.4 with glutathione and ribose, x2.7 at the lowest cysteine dose (0.17 mM) and x0.38 at a 91-fold cysteine excess; in a concentrated thiamine + xylose pot at 115 C and pH 4.9 (Zhang et al. 2024): x19 with cysteine and x15 with glutathione. No step inside cited bands reproduces these ratios, so the mechanism is undecided and neither the size nor, at a large excess, the sign of the engine's error is known. With the step's rate multiplied by 7 (the largest ratio measured where thiamine is the only MFT source) the output moves by more than 0.21 dex (omega / 2, so that no ratio it enters can move beyond omega), so it is not shown at the shipped value. WHAT WOULD LIFT IT: a cysteine series at fixed thiamine in one medium, with thiamine and cysteine followed over time, with and without a pentose (docs/reference/decisive_measurements.yml: cysteine_boost_thiol_yield_concentrated), or a step that reproduces Grosch's and Zhang's dose curves inside cited bands (STEP5_RECORD.md, second amendment of 2026-11-26)."
+          ],
           "warnings": [],
-          "value_ug_per_l": 344.6253112028723
+          "value_ug_per_l": null
         }
       ]
     },

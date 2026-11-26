@@ -2,11 +2,11 @@
 
 Panel `docs/validation/directional_claims_panel.yml` (119 claims, flat tolerance 5 %). Nothing in the core was tuned to this panel.
 
-* **headline (strictly independent, evaluable): 10/19 (53%)**; 56 independent claims not evaluable
-* independent, excluding pH and water activity: 9/15 (60%); pH and water activity alone: 1/4 (25%)
-* all claims (independent + fit-adjacent + fit-system overlap): 15/31 (48%); 88 not evaluable
+* **headline (strictly independent, evaluable): 9/17 (53%)**; 58 independent claims not evaluable
+* independent, excluding pH and water activity: 8/14 (57%); pH and water activity alone: 1/3 (33%)
+* all claims (independent + fit-adjacent + fit-system overlap): 14/29 (48%); 90 not evaluable
 * misses where the lane carries no term for the moved axis (identical predictions): 3
-* not evaluable, by reason: the claim carries no runnable conditions (prose-only) (39); refused by the engine (4); a predicted concentration is zero; no direction is defined (3); step 'initial pH 5.0' -> 'initial pH 8.5' refused (3); step 'cysteine + D-ribose' -> 'cysteine + D-glucose' refused (2); step 'pH 4.5' -> 'pH 6.5' refused (2); step 'cysteine + D-ribose, 110 C 90 min' -> 'cysteine + D-glucose, 110 C 90 min' (2); step 'cysteine + ribose, phosphate buffer pH 4.2, 140 C 30 min' -> 'cysteine + r (2); arm 'pH 5' refused (2); step 'pH 4.2' -> 'pH 5.6' refused (2); step 'initial pH 5.6' -> 'initial pH 7.0' refused (2); arm 'pH 5.5' refused (1); the measured contrast (glycine + D-glucose, 165 C 8 min 333, glycine + D-fructos (1); arm 'hydrolysate + xylose (no cysteine), 120 C' refused (1); the measured contrast (cysteine + D-fructose, 145 C 20 min pH 5.0 2.5, cysteine  (1); the measured contrast (cysteine + D-fructose, 145 C 20 min pH 5.0 3.2, cysteine  (1); step 'cysteine + D-ribose, dry-heated 180 C 6 min' -> 'cysteine + D-glucose, dry (1); the measured contrast (MFT, cysteine + ribose, phosphate pH 5.6 2230, FFT, cyste (1); the measured contrast (120 C / 1 h 1.68, 100 C / 4 h 1.28) is within measurement (1); the verdict depends on the unstated input ph (disagree at ph 5, not_evaluable at (1); the verdict depends on the unstated input ph (not_evaluable at ph 5, not_evaluab (1); the measured contrast (3-deoxyglucosone 52.2, glucosone 7.5, glyoxal 5.6, methyl (1); step '20 min' -> '40 min' refused (1); step '60 min' -> '360 min' refused (1); arm 'lysine 1x (40 mM)' refused (1); step '90 min' -> '120 min' refused (1); step 'ARP alone, 120 min' -> 'ARP + cysteine, 120 min' refused (1); step 'ARP + cysteine 20 mM' -> 'ARP + glutathione 20 mM' refused (1); step '60 min' -> '90 min' refused (1); a predicted concentration is zero; no ranking is defined (1); step 'pot C (1); arm 'glucose + glutathione' refused (1); arm 'cysteine alone' refused (1); arm 'beef triglyceride alone' refused (1); arm 'egg PC alone' refused (1); arm 'methionine alone' refused (1)
+* not evaluable, by reason: the claim carries no runnable conditions (prose-only) (39); refused by the engine (4); a predicted concentration is zero; no direction is defined (3); step 'initial pH 5.0' -> 'initial pH 8.5' refused (3); step 'cysteine + D-ribose' -> 'cysteine + D-glucose' refused (2); step 'pH 4.5' -> 'pH 6.5' refused (2); step 'cysteine + D-ribose, 110 C 90 min' -> 'cysteine + D-glucose, 110 C 90 min' (2); step 'cysteine + ribose, phosphate buffer pH 4.2, 140 C 30 min' -> 'cysteine + r (2); arm 'pH 5' refused (2); step 'pH 4.2' -> 'pH 5.6' refused (2); step 'initial pH 5.6' -> 'initial pH 7.0' refused (2); arm 'pH 5.5' refused (1); the measured contrast (glycine + D-glucose, 165 C 8 min 333, glycine + D-fructos (1); arm 'hydrolysate + xylose (no cysteine), 120 C' refused (1); the measured contrast (cysteine + D-fructose, 145 C 20 min pH 5.0 2.5, cysteine  (1); the measured contrast (cysteine + D-fructose, 145 C 20 min pH 5.0 3.2, cysteine  (1); step 'cysteine + D-ribose, dry-heated 180 C 6 min' -> 'cysteine + D-glucose, dry (1); the measured contrast (MFT, cysteine + ribose, phosphate pH 5.6 2230, FFT, cyste (1); the measured contrast (120 C / 1 h 1.68, 100 C / 4 h 1.28) is within measurement (1); the verdict depends on the unstated input ph (disagree at ph 5, not_evaluable at (1); the verdict depends on the unstated input ph (not_evaluable at ph 5, not_evaluab (1); the measured contrast (3-deoxyglucosone 52.2, glucosone 7.5, glyoxal 5.6, methyl (1); step '20 min' -> '40 min' refused (1); step '60 min' -> '360 min' refused (1); arm 'lysine 1x (40 mM)' refused (1); step '90 min' -> '120 min' refused (1); step 'ARP alone, 120 min' -> 'ARP + cysteine, 120 min' refused (1); step 'ARP + cysteine 20 mM' -> 'ARP + glutathione 20 mM' refused (1); step '60 min' -> '90 min' refused (1); a predicted concentration is zero; no ranking is defined (1); arm 'pot C (1); step 'pot C (1); arm 'glucose + glutathione' refused (1); arm 'cysteine alone' refused (1); arm 'beef triglyceride alone' refused (1); arm 'egg PC alone' refused (1); arm 'methionine alone' refused (1); arm 'pH 6.5' refused (1)
 
 ## Per category (strictly independent claims)
 
@@ -17,12 +17,12 @@ Panel `docs/validation/directional_claims_panel.yml` (119 claims, flat tolerance
 | lipid_lane | 0 | 0 | - | 3 | - |
 | matrix_identity | 0 | 0 | - | 1 | - |
 | moisture_aw | 0 | 0 | - | 4 | - |
-| ph | 1 | 4 | 0.25 | 11 | PH-07, HOX-03, MOD08-PH-01 |
+| ph | 1 | 3 | 0.33 | 12 | PH-07, HOX-03 |
 | process_heating | 0 | 0 | - | 1 | - |
 | ranking | 0 | 0 | - | 4 | - |
 | scope | 0 | 0 | - | 3 | - |
 | sugar_identity | 2 | 5 | 0.40 | 11 | SUG-03, SUG-12, DIC-01 |
-| sulfur_donor | 1 | 1 | 1.00 | 4 | - |
+| sulfur_donor | 0 | 0 | - | 5 | - |
 | temperature | 4 | 7 | 0.57 | 4 | TEMP-01, TEMP-05, YIL-01 |
 | time | 1 | 1 | 1.00 | 4 | - |
 
@@ -35,12 +35,12 @@ Panel `docs/validation/directional_claims_panel.yml` (119 claims, flat tolerance
 | lipid_lane | 0 | 1 | 0.00 | 5 |
 | matrix_identity | 0 | 2 | 0.00 | 1 |
 | moisture_aw | 0 | 0 | - | 7 |
-| ph | 2 | 6 | 0.33 | 19 |
+| ph | 2 | 5 | 0.40 | 20 |
 | process_heating | 0 | 0 | - | 4 |
 | ranking | 1 | 3 | 0.33 | 4 |
 | scope | 0 | 0 | - | 3 |
 | sugar_identity | 3 | 7 | 0.43 | 15 |
-| sulfur_donor | 1 | 1 | 1.00 | 5 |
+| sulfur_donor | 0 | 0 | - | 6 |
 | temperature | 4 | 7 | 0.57 | 6 |
 | time | 2 | 2 | 1.00 | 11 |
 
@@ -152,7 +152,7 @@ Panel `docs/validation/directional_claims_panel.yml` (119 claims, flat tolerance
 | CHEN00-PH-01 | ph | not_independent | FFT | A>B | **not_evaluable** | - | - | step 'initial pH 5.0' -> 'initial pH 8.5' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): an arm's carried rivals could not be run, s |
 | XU07-PH-01 | ph | independent | MFT | decreasing | **not_evaluable** | - | - | step 'initial pH 5.6' -> 'initial pH 7.0' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the spread of this log ratio over B0 and th |
 | XU07-PH-02 | ph | independent | FFT | A>B | **not_evaluable** | - | - | step 'initial pH 5.6' -> 'initial pH 7.0' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): the spread of this log ratio over B0 and th |
-| WANG12-01 | sulfur_donor | independent | MFT | A>B | **agree** | sulfur | 72.4, 42.3 |  |
+| WANG12-01 | sulfur_donor | independent | MFT | A>B | **not_evaluable** | - | - | arm 'pot C: xylose + thiamine + cysteine + glycine' refused: REFUSED, A THIOL DONOR'S EFFECT ON THIAMINE'S MFT ROUTE UNDECIDED (Grosch & Zeiler-Hilgart 1992 and |
 | WANG12-02 | sulfur_donor | independent | FFT | A>B | **not_evaluable** | - | - | step 'pot C: xylose + thiamine + cysteine + glycine' -> 'pot A: xylose + thiamine + glutathione' refused: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-08 |
 | HIN92-01 | sugar_identity | independent | MFT | A>B | **agree** | sulfur | 1.21e+03, 682 |  |
 | ZHG91-01 | sulfur_donor | independent | 2-acetylthiazole | A>B | **not_evaluable** | - | - | arm 'glucose + glutathione' refused: THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2-acetylthiazole': in the sulfur lane's network no chain of reactions leads  |
@@ -161,7 +161,7 @@ Panel `docs/validation/directional_claims_panel.yml` (119 claims, flat tolerance
 | FAR92-01 | lipid_lane | independent | hexanal | A>B | **not_evaluable** | - | - | arm 'beef triglyceride alone' refused: UNMAPPED PRECURSORS 'Beef triglyceride': not a species in any core lane. The core is a named small-molecule network; an i |
 | FAR92-02 | lipid_lane | independent | 2,4-decadienal | A>B | **not_evaluable** | - | - | arm 'egg PC alone' refused: UNMAPPED PRECURSORS 'Egg phosphatidylcholine': not a species in any core lane. The core is a named small-molecule network; an intact |
 | ZHG23B-01 | additive_cysteine | independent | dimethyl disulfide | A>B | **not_evaluable** | - | - | arm 'methionine alone' refused: METHIONINE CHAIN TARGETS 'dimethyl disulfide': the methionine chain (wave B22) did not ship: fitted on Pan 2025's rates, the ide |
-| MOD08-PH-01 | ph | independent | MFT | A>B | **disagree** | sulfur | 209, 345 |  |
+| MOD08-PH-01 | ph | independent | MFT | A>B | **not_evaluable** | - | - | arm 'pH 6.5' refused: REFUSED, A THIOL DONOR'S EFFECT ON THIAMINE'S MFT ROUTE UNDECIDED (Grosch & Zeiler-Hilgart 1992 and Zhang 2024 vs the engine): MFT (spread |
 | MOD08-AW-01 | moisture_aw | independent | MFT | increasing | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
 | HAR84B-AW-01 | moisture_aw | independent | MFT | peak | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
 | MAD95-01 | ph | independent | MFT | increasing | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |

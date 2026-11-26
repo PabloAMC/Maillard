@@ -41,11 +41,11 @@
   },
   "provenance": {
     "artifact": "core_panel_scores",
-    "generated_on": "2026-11-17",
+    "generated_on": "2026-11-26",
     "git": {
-      "commit": "50a224ab99c4fccb04894bc96551a7a73d816e1b",
-      "short": "50a224ab",
-      "branch": "engine-gaps-thiamine-h2s",
+      "commit": "1d16bcdb2255c95916dc19286d1e3e7ca7783a84",
+      "short": "1d16bcdb",
+      "branch": "cys-thiamine-boost",
       "dirty": true
     },
     "generated_by": "src/kinetic_core/scoring.py",
@@ -475,7 +475,7 @@
       "total": 16
     },
     "shared_with_holdout_panel": 0,
-    "wall_seconds": 147.1
+    "wall_seconds": 127.5
   },
   "benchmarks": [
     {
@@ -2293,46 +2293,14 @@
           "panel": "trust_loop",
           "compound": "2-Methyl-3-furanthiol (MFT)",
           "target_unit": "ppb",
-          "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0').",
-          "envelope_state": "in_envelope_extrapolated",
+          "reason": "REFUSED, A THIOL DONOR'S EFFECT ON THIAMINE'S MFT ROUTE UNDECIDED (Grosch & Zeiler-Hilgart 1992 and Zhang 2024 vs the engine): 2-Methyl-3-furanthiol (MFT) (spread 0.79 dex): this pot is charged with thiamine and a thiol donor (cysteine, glutathione or TTCA), and this output depends on thiamine's step to 2-methyl-3-furanthiol (MFT), which the engine runs as if no donor were present (a donor moves its MFT by x1.0 - x1.3). Measured, from thiamine at 100 C and pH 5.7 (Grosch & Zeiler-Hilgart 1992): x7.0 with cysteine and no sugar, x3.7 with cysteine and ribose, x4.4 with glutathione and ribose, x2.7 at the lowest cysteine dose (0.17 mM) and x0.38 at a 91-fold cysteine excess; in a concentrated thiamine + xylose pot at 115 C and pH 4.9 (Zhang et al. 2024): x19 with cysteine and x15 with glutathione. No step inside cited bands reproduces these ratios, so the mechanism is undecided and neither the size nor, at a large excess, the sign of the engine's error is known. With the step's rate multiplied by 7 (the largest ratio measured where thiamine is the only MFT source) the output moves by more than 0.21 dex (omega / 2, so that no ratio it enters can move beyond omega), so it is not shown at the shipped value. WHAT WOULD LIFT IT: a cysteine series at fixed thiamine in one medium, with thiamine and cysteine followed over time, with and without a pentose (docs/reference/decisive_measurements.yml: cysteine_boost_thiol_yield_concentrated), or a step that reproduces Grosch's and Zhang's dose curves inside cited bands (STEP5_RECORD.md, second amendment of 2026-11-26).",
+          "envelope_state": "out_of_envelope",
           "lane": "sulfur",
           "unidentified_route": false,
-          "absolute_refused": true,
+          "absolute_refused": false,
           "balance_refused": false,
           "data_refused": false,
-          "relative_use_only": {
-            "measured": 11.7,
-            "study": "hofmann_schieberle_grosch_1996",
-            "in_core_fit": false,
-            "shared_with": null,
-            "balance_s3_offsets_dex": {
-              "B0": 0.0,
-              "B1_d345": -0.002275990039522256,
-              "B1_d446": -0.0011595522370140524,
-              "B1_d460": -0.001763869420993489,
-              "B1_d506": -0.003138846307364016,
-              "B1_d544": -0.003524122183753258,
-              "B1_d594": -0.0012107874082767339,
-              "B1_d618": -0.0009121681727889812,
-              "B1_d638": -0.00045730330214514223,
-              "B13_d40": -0.003513597525511599,
-              "B13_d66": -0.0005317192382881718,
-              "B13_d100": -0.0029825305373548617,
-              "B13_d115": -0.0008194327812734179,
-              "B13_d161": -0.00033082694673207354,
-              "B13_d218": -0.0008311206649137141,
-              "B13_d246": -0.00034973235003197195,
-              "B13_d313": -0.0006711514481467418,
-              "B13_d319": -0.0009103157390710468,
-              "B13_d356": -0.00030845729484902924,
-              "B13_d362": -0.0029044488992555273,
-              "B13_d388": -0.0005974063779647612,
-              "B13_d413": -0.0024148865405639766,
-              "B13_d440": -0.0017868572814491496,
-              "B13_d628": -0.001936764940901416
-            },
-            "log10_predicted_minus_study_mean": 0.0
-          }
+          "cysteine_thiamine_mft_refused": true
         }
       ],
       "matched_compounds": 0,
@@ -2347,7 +2315,7 @@
       "strict_gate_eligible": true,
       "strict_ready": false,
       "blocking_issues": [
-        "every target refused: NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0').",
+        "every target refused: REFUSED, A THIOL DONOR'S EFFECT ON THIAMINE'S MFT ROUTE UNDECIDED (Grosch & Zeiler-Hilgart 1992 and Zhang 2024 vs the engine): 2-Methyl-3-furanthiol (MFT) (spread 0.79 dex): this pot is charged with thiamine and a thiol donor (cysteine, glutathione or TTCA), and this output depends on thiamine's step to 2-methyl-3-furanthiol (MFT), which the engine runs as if no donor were present (a donor moves its MFT by x1.0 - x1.3). Measured, from thiamine at 100 C and pH 5.7 (Grosch & Zeiler-Hilgart 1992): x7.0 with cysteine and no sugar, x3.7 with cysteine and ribose, x4.4 with glutathione and ribose, x2.7 at the lowest cysteine dose (0.17 mM) and x0.38 at a 91-fold cysteine excess; in a concentrated thiamine + xylose pot at 115 C and pH 4.9 (Zhang et al. 2024): x19 with cysteine and x15 with glutathione. No step inside cited bands reproduces these ratios, so the mechanism is undecided and neither the size nor, at a large excess, the sign of the engine's error is known. With the step's rate multiplied by 7 (the largest ratio measured where thiamine is the only MFT source) the output moves by more than 0.21 dex (omega / 2, so that no ratio it enters can move beyond omega), so it is not shown at the shipped value. WHAT WOULD LIFT IT: a cysteine series at fixed thiamine in one medium, with thiamine and cysteine followed over time, with and without a pentose (docs/reference/decisive_measurements.yml: cysteine_boost_thiol_yield_concentrated), or a step that reproduces Grosch's and Zhang's dose curves inside cited bands (STEP5_RECORD.md, second amendment of 2026-11-26).",
         "ranking n/a < 0.85"
       ],
       "within_band_count": 0,
@@ -6737,46 +6705,14 @@
       "panel": "trust_loop",
       "compound": "2-Methyl-3-furanthiol (MFT)",
       "target_unit": "ppb",
-      "reason": "NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measurements from at least two new independent laboratories re-scored under H0's rule (H0').",
-      "envelope_state": "in_envelope_extrapolated",
+      "reason": "REFUSED, A THIOL DONOR'S EFFECT ON THIAMINE'S MFT ROUTE UNDECIDED (Grosch & Zeiler-Hilgart 1992 and Zhang 2024 vs the engine): 2-Methyl-3-furanthiol (MFT) (spread 0.79 dex): this pot is charged with thiamine and a thiol donor (cysteine, glutathione or TTCA), and this output depends on thiamine's step to 2-methyl-3-furanthiol (MFT), which the engine runs as if no donor were present (a donor moves its MFT by x1.0 - x1.3). Measured, from thiamine at 100 C and pH 5.7 (Grosch & Zeiler-Hilgart 1992): x7.0 with cysteine and no sugar, x3.7 with cysteine and ribose, x4.4 with glutathione and ribose, x2.7 at the lowest cysteine dose (0.17 mM) and x0.38 at a 91-fold cysteine excess; in a concentrated thiamine + xylose pot at 115 C and pH 4.9 (Zhang et al. 2024): x19 with cysteine and x15 with glutathione. No step inside cited bands reproduces these ratios, so the mechanism is undecided and neither the size nor, at a large excess, the sign of the engine's error is known. With the step's rate multiplied by 7 (the largest ratio measured where thiamine is the only MFT source) the output moves by more than 0.21 dex (omega / 2, so that no ratio it enters can move beyond omega), so it is not shown at the shipped value. WHAT WOULD LIFT IT: a cysteine series at fixed thiamine in one medium, with thiamine and cysteine followed over time, with and without a pentose (docs/reference/decisive_measurements.yml: cysteine_boost_thiol_yield_concentrated), or a step that reproduces Grosch's and Zhang's dose curves inside cited bands (STEP5_RECORD.md, second amendment of 2026-11-26).",
+      "envelope_state": "out_of_envelope",
       "lane": "sulfur",
       "unidentified_route": false,
-      "absolute_refused": true,
+      "absolute_refused": false,
       "balance_refused": false,
       "data_refused": false,
-      "relative_use_only": {
-        "measured": 11.7,
-        "study": "hofmann_schieberle_grosch_1996",
-        "in_core_fit": false,
-        "shared_with": null,
-        "balance_s3_offsets_dex": {
-          "B0": 0.0,
-          "B1_d345": -0.002275990039522256,
-          "B1_d446": -0.0011595522370140524,
-          "B1_d460": -0.001763869420993489,
-          "B1_d506": -0.003138846307364016,
-          "B1_d544": -0.003524122183753258,
-          "B1_d594": -0.0012107874082767339,
-          "B1_d618": -0.0009121681727889812,
-          "B1_d638": -0.00045730330214514223,
-          "B13_d40": -0.003513597525511599,
-          "B13_d66": -0.0005317192382881718,
-          "B13_d100": -0.0029825305373548617,
-          "B13_d115": -0.0008194327812734179,
-          "B13_d161": -0.00033082694673207354,
-          "B13_d218": -0.0008311206649137141,
-          "B13_d246": -0.00034973235003197195,
-          "B13_d313": -0.0006711514481467418,
-          "B13_d319": -0.0009103157390710468,
-          "B13_d356": -0.00030845729484902924,
-          "B13_d362": -0.0029044488992555273,
-          "B13_d388": -0.0005974063779647612,
-          "B13_d413": -0.0024148865405639766,
-          "B13_d440": -0.0017868572814491496,
-          "B13_d628": -0.001936764940901416
-        },
-        "log10_predicted_minus_study_mean": 0.0
-      }
+      "cysteine_thiamine_mft_refused": true
     },
     {
       "benchmark_id": "mp_holdout_arp_glutathione_120C_120min_pH75_Zhou2023c",

@@ -435,7 +435,8 @@ def evaluate_recipe(recipe: Recipe, points: Optional[Mapping[str, Tuple[Dict[str
                 with config.applied(config.Config.shipped().replace(changes)):
                     run = engine.predict(recipe.spec, targets,
                                          draw=engine.CoreDraw(ph_drift=drift) if drift is not None else None,
-                                         balance_refusal=False, thiamine_refusal=False)   # 2026-11-17
+                                         balance_refusal=False, thiamine_refusal=False,   # 2026-11-17
+                                         cysteine_thiamine_refusal=False)   # 2026-11-26 (B66)
                 seg = (run.run_metadata.get("segments") or [{}])[-1]
                 result = {"answered": bool(run.answered),
                           "concentrations_ug_per_l": {k: float(v) for k, v in run.concentrations_ug_per_l.items()},
@@ -832,7 +833,8 @@ def _extremes_task(item) -> Dict[str, Any]:
         try:
             with config.applied(base.replace(changes)):
                 run = engine.predict(recipe.spec, targets, draw=engine.CoreDraw(ph_drift=drift), balance_refusal=False,
-                                     thiamine_refusal=False)   # 2026-11-17: the model's own numbers
+                                     thiamine_refusal=False,   # 2026-11-17: the model's own numbers
+                                     cysteine_thiamine_refusal=False)   # 2026-11-26 (B66): likewise
             seg = (run.run_metadata.get("segments") or [{}])[-1]
             out[name] = {"concentrations_ug_per_l": dict(run.concentrations_ug_per_l),
                          "ph_cooled_end": seg.get("ph_cooled_end")}

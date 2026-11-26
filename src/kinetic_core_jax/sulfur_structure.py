@@ -113,6 +113,8 @@ CONFIG_HANDLING: Mapping[str, Tuple[str, str]] = {
     "sulfur.single_temperature_barriers": ("held", "disabled (B63); moves parameter values through core_parameters"),
     "sulfur.thiamine_h2s_unmeasured_rival": ("held", "disabled: the thiamine H2S refusal's rival (2026-11-17), "
                                                       "integrated by the NumPy engine only"),
+    "sulfur.cysteine_thiamine_mft_rival": ("held", "disabled: the cysteine x thiamine MFT refusal's rival (2026-11-26, "
+                                                    "B66), integrated by the NumPy engine only"),
     "ph.ionic_strength.sweeps": ("not_read", "the engine's I fixed-point iteration count: the port solves (pH, I) "
                                              "jointly by Newton to machine precision, the limit those sweeps approach"),
     "ph.ionic_strength.tol_m": ("not_read", "the engine's I fixed-point tolerance (as above)"),
@@ -125,13 +127,16 @@ LANE_MODULES = ("sulfur", "parameters_sulfur", "ph_state")
 
 #: sha256 (16 hex) of the shipped defaults of the HELD keys, as the port was written against them (2026-11-05)
 #: 2026-11-17: + sulfur.thiamine_h2s_unmeasured_rival (held, disabled): the shipped values the port reads are unchanged
-SHIPPED_HELD_DIGEST = "85792ac06005021b"
+#: 2026-11-26 (B66): + sulfur.cysteine_thiamine_mft_rival (held, disabled): the shipped values the port reads are unchanged
+SHIPPED_HELD_DIGEST = "e75519f4dc832cfa"
 
 #: (file, qualified name) -> sha256 (16 hex) of the AST without docstrings: the engine logic the port re-implements
 SOURCE_PINS: Mapping[Tuple[str, str], str] = {
     # 2026-11-17 (thiamine_h2s_refusal): a branch for the share's carried rival, entered only with the held key
     # sulfur.thiamine_h2s_unmeasured_rival enabled (the port refuses it); the shipped path the port mirrors is unchanged
-    ('src/kinetic_core/sulfur.py', 'sulfur_rate_constants_at'): 'faba7415757e55c0',
+    # 2026-11-26 (cysteine_thiamine_mft_refusal, B66): a second such branch (r_hmp_mft x the rival's factor), entered only
+    # with the held key sulfur.cysteine_thiamine_mft_rival enabled; the shipped path the port mirrors is unchanged
+    ('src/kinetic_core/sulfur.py', 'sulfur_rate_constants_at'): '1bf9cde69a76749d',
     # 2026-11-06 (M1b part (i), PR #94): integrate_sulfur gains the switched-off rival branch (ph_balance_rivals:
     # never entered with every rival off) and titratable_inventory reads the rivals' NH4 / RET_AA pools, which no
     # network species carries. The shipped path the port re-implements is unchanged; parity re-run in maillard-jax.

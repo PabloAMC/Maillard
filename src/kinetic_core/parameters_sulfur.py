@@ -843,6 +843,38 @@ class ThiamineH2sUnmeasuredRival:
 THIAMINE_H2S_UNMEASURED_RIVAL = ThiamineH2sUnmeasuredRival()
 
 
+@dataclass(frozen=True)
+class CysteineThiamineMftRival:
+    """2026-11-26 (STEP5_RECORD second amendment, owner; B66): the SENSITIVITY RIVAL to "a thiol donor leaves thiamine's
+    MFT unchanged".
+
+    The engine's thiamine route (``r_thi_hmp``, ``r_hmp_mft``) does not read cysteine or glutathione, so adding either
+    to a thiamine pot moves 2-methyl-3-furanthiol by x1.0 - x1.3. Measured in one pot series (Grosch & Zeiler-Hilgart
+    1992, 100 C, pH 5.7, thiamine 60 uM): x7.0 with cysteine and no sugar (Table II, no. 4 / no. 1), x3.7 with cysteine
+    and ribose (no. 6 / no. 3), x4.4 with glutathione and ribose (no. 7 / no. 3), and x0.38 at a 91-fold cysteine
+    excess (Table III); and x19 / x15 with cysteine / glutathione in a concentrated thiamine + xylose pot (Zhang et al.
+    2024, Fig. 1, where the sugar route also makes MFT). No step inside cited bands reproduces these (B65's plug-in
+    screen), so the incumbent is falsified with no rival credited (STATUS_AND_PLAN, S3) and the outputs sensitive to it
+    are refused. This multiplies the rate of ``r_hmp_mft`` by ``factor``: 7.0, the largest ratio measured where
+    thiamine is the pot's only MFT source. It is not a model of the effect and is never shipped:
+    ``cysteine_thiamine_mft_refusal`` integrates it beside the shipped point and refuses the outputs it moves. Off:
+    the engine is bit-identical.
+    """
+
+    enabled: bool = False
+    factor: float = 7.0
+    source: str = ("Grosch & Zeiler-Hilgart 1992, ACS Symp. Ser. 490:183 (doi 10.1021/bk-1992-0490.ch014), Table II: "
+                   "MFT 4.7 -> 33 ug with cysteine (thiamine 60 uM, no sugar, 100 C, pH 5.7, 2 h), x7.0; with ribose "
+                   "5.2 -> 19 ug (cysteine, x3.7) and 23 ug (glutathione, x4.4); Table III: x0.38 at a 91-fold "
+                   "cysteine excess; Zhang et al. 2024, Food Res. Int. 182:114149 "
+                   "(doi 10.1016/j.foodres.2024.114149), Fig. 1: x19 (cysteine), x15 (glutathione) in thiamine + "
+                   "xylose at 115 C, pH 4.9; sensitivity rival to the shipped thiamine route, which reads neither "
+                   "(kinetic_core_b66_cysteine_thiamine_refusal_prereg.md)")
+
+
+CYSTEINE_THIAMINE_MFT_RIVAL = CysteineThiamineMftRival()
+
+
 def glutathione_thermolysis_k(ph: float, temperature_k: float) -> float:
     """k for glutathione -> H2S, 1/min. The pH treatment is cysteine's (cysteine_thermolysis_arrhenius):
     the pH-3.0 pair as measured below the mechanism boundary, ln A and Ea linear in pH over 5-9,
