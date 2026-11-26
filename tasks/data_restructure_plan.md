@@ -2746,6 +2746,28 @@ states every volatile number is a 120-min endpoint; only the free-Cys curves are
   - **No engine change; the pause is back in force for these two changes.**
   - Two open questions were added to `docs/reference/decisive_measurements.yml`.
 
+### MFT refused in thiamine + cysteine pots, B66 (2026-11-26, second owner amendment in STEP5_RECORD.md)
+
+"No admissible step" left the incumbent shipped, and the incumbent (cysteine moves thiamine's MFT by x1.1 - x1.3) is
+contradicted by Grosch 1992 (x2.7 - x3.7) and Zhang 2024 (x19). The rule takes the thiamine-H2S refusal's form.
+
+- [x] **2026-11-26.** Read-only probe: `r_hmp_mft` x3.7 moves MFT by about +0.5 dex and its dimer by about +0.9
+  in thiamine + cysteine pots; 2-furfurylthiol, H2S and 3-mercapto-2-pentanone do not move.
+- [x] **2026-11-26.** Pre-registration `results/validation/kinetic_core_b66_cysteine_thiamine_refusal_prereg.md`
+  (rule, declared choices, expected outcomes), written before any engine edit.
+- [x] **2026-11-26.** Independent premortem (`kinetic_core_b66_premortem.md`), its fixes folded in: private partner
+  numbers removed; donors widened to glutathione and TTCA; factor 7.0 (Grosch Table II); no direction claimed; the
+  right S3 clause cited; no second rule for the dimer split.
+- [x] **2026-11-26.** Rule (`src/kinetic_core/cysteine_thiamine_mft_refusal.py`), config keys, switch threaded through
+  the other rules' own integrations, JAX held key and pins, tests.
+- [x] **2026-11-26.** Tracked artifacts regenerated (provenance only, except the two scorecards). Outcome:
+  - No scored level row changes; Bolton 1994's MFT changes its refusal reason.
+  - Directional headline 10 of 19 -> 9 of 17: WANG12-01 (an agree) and MOD08-PH-01 (a miss) are not evaluable.
+  - My forecast of 4 - 20 newly refused rows missed (prereg, outcome table).
+  - No second rule for the dimer split (premortem; prereg amendment).
+  - Open, unrelated: `kinetic_core_mechanism_signatures_chance_r3en` no longer reproduces one pass rate on origin/main
+    (0.195 stored, 0.19 re-run); to be looked at separately.
+
 ## 6. Risks and guardrails
 
 | Risk | Guardrail |

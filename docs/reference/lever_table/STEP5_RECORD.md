@@ -118,6 +118,18 @@ cysteine boost needs either a structure not on the list or a pentose route outsi
 during sampling. No engine change was made, and the pause is back in force for these changes until one of the two
 measurements now in `decisive_measurements.yml` exists.
 
+**Second amendment (2026-11-26, owner).** The outcome above kept the incumbent because no step was admissible. The
+owner's correction: the engine should be the best one for the evidence available, and the incumbent is not privileged
+(symmetric sec. 7). The engine's own claim, that cysteine leaves thiamine's 2-methyl-3-furanthiol about unchanged
+(x1.1 - x1.3), is contradicted by Grosch & Zeiler-Hilgart 1992 (x2.7 - x3.7; x0.38 at a large excess) and Zhang 2024
+(x19). The owner approves one change: **in a pot charged with thiamine and a thiol donor (cysteine, glutathione,
+TTCA), the outputs that move when thiamine's MFT step takes a sensitivity rival (x7.0, Grosch's ratio without sugar)
+are refused**, in the form of the 2026-11-17 thiamine rule
+([B66 pre-registration](../../../results/validation/kinetic_core_b66_cysteine_thiamine_refusal_prereg.md);
+`src/kinetic_core/cysteine_thiamine_mft_refusal.py`). Nothing is fitted, no shipped constant changes, no new TEST
+contrast is read. The free-thiol / dimer split outside such pots is not changed here (prereg sec. 5). Everything else stays
+paused.
+
 ## Bookkeeping
 
 5a and 5c are two of the step-5 scoring looks at TEST contrasts that sec. 0 allows (at most three before

@@ -266,7 +266,9 @@ def test_the_shipped_config_is_unchanged_with_every_new_key_at_its_default(M):
     # the M1 digest covers) are left out with M1's own
     # (and 2026-11-17: the thiamine H2S rival, off, and its refusal switch, which changes no number the M1 digest covers)
     later = ("ph.amine_survival", "ph.acid_lag", "ph.acid_supply", "ph.arp_forcing", "ph.balance_refusal",
-             "sulfur.thiamine_h2s_unmeasured_rival", "sulfur.thiamine_h2s_refusal")
+             "sulfur.thiamine_h2s_unmeasured_rival", "sulfur.thiamine_h2s_refusal",
+             # 2026-11-26 (B66): the cysteine x thiamine MFT rival, off, and its refusal switch, likewise
+             "sulfur.cysteine_thiamine_mft_rival", "sulfur.cysteine_thiamine_mft_refusal")
     blob = json.dumps([[n, config._canonical(v)] for n, v in shipped.items if n not in NEW_KEYS + later],
                       sort_keys=True, separators=(",", ":"))
     assert hashlib.sha256(blob.encode("utf-8")).hexdigest().startswith("40b746476905786c")

@@ -2,18 +2,18 @@
   "artifact": "null_model_baselines",
   "provenance": {
     "artifact": "null_model_baselines",
-    "generated_on": "2026-11-17",
+    "generated_on": "2026-11-26",
     "git": {
-      "commit": "50a224ab99c4fccb04894bc96551a7a73d816e1b",
-      "short": "50a224ab",
-      "branch": "engine-gaps-thiamine-h2s",
+      "commit": "8ab6e6775ec07a0ddda31d77d0b9ddad39e04fb9",
+      "short": "8ab6e677",
+      "branch": "cys-thiamine-boost",
       "dirty": true
     },
     "generated_by": "scripts/generators/build_null_model_baselines.py",
     "inputs": [
       {
         "path": "results/validation/core_panel_scores.json",
-        "sha256": "815768e1c32da92b9deef0e82a28020472560e0a3255552fe903f22de28c94df"
+        "sha256": "a4e5b308a84d494acdad56857595b4ce078f73b47280157b474b67dd6196858e"
       }
     ]
   },

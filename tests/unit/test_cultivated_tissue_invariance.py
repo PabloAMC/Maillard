@@ -189,9 +189,13 @@ def test_a_spec_from_the_box_validates_and_the_sulfur_arm_answers():
     # 2026-11-05 (H0 / EX-059, D2 branch (i)): the metric is a summed OAV of three thiol-lane observables, whose
     # absolute levels are now refused by name, so the arm answers with no metric and says why
     assert arm.metric is None and arm.oav == {}
-    for compound in ("2-methyl-3-furanthiol", "2-furfurylthiol", "furfural"):
+    for compound in ("2-furfurylthiol", "furfural"):
         assert f"absolute level refused (H0 / EX-059): {compound}" in arm.refusals
         assert compound not in arm.ug_per_l
+    # 2026-11-26 (B66, cysteine_thiamine_mft_refusal): the box charges thiamine and cysteine, so MFT is refused outright
+    # (a thiol donor's effect on thiamine's MFT route is undecided), not only its absolute level
+    assert "refused target: 2-methyl-3-furanthiol" in arm.refusals
+    assert "2-methyl-3-furanthiol" not in arm.ug_per_l
 
 
 def test_write_targets_only_the_results_directory(tmp_path, monkeypatch):

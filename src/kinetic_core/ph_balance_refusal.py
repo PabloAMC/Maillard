@@ -220,7 +220,7 @@ def _rival_values(job: Tuple[Any, Tuple[str, ...], Any]) -> Tuple[Dict[str, floa
     spec, targets, drift = job
     # thiamine_refusal=False (2026-11-17): a rival point is the model's own number; thiamine_h2s_refusal judges B0 only
     run = engine.predict(spec, list(targets), draw=engine.CoreDraw(ph_drift=drift), balance_refusal=False,
-                         thiamine_refusal=False)
+                         thiamine_refusal=False, cysteine_thiamine_refusal=False)
     return {c: float(v) for c, v in run.concentrations_ug_per_l.items()}, _ph_of(run)
 
 
@@ -234,7 +234,8 @@ def assess(spec: Any, targets: Sequence[str], b0_run: Any = None) -> Verdict:
 
     verdict = Verdict()
     if b0_run is None:
-        b0_run = engine.predict(spec, list(targets), balance_refusal=False, thiamine_refusal=False)
+        b0_run = engine.predict(spec, list(targets), balance_refusal=False, thiamine_refusal=False,
+                                cysteine_thiamine_refusal=False)
     names = [c for c in b0_run.concentrations_ug_per_l]
     verdict.values["B0"] = {c: float(v) for c, v in b0_run.concentrations_ug_per_l.items()}
     verdict.ph["B0"] = _ph_of(b0_run)

@@ -697,3 +697,12 @@ have no null answer): counting it as a difference of 0 pulls the mean to zero an
 - **A new Config key re-pins every stored Config digest; engine numbers are not bit-identical across OSes** (2026-11-18, #158). Adding two `sulfur.*` keys broke the JAX trunk references' `config_digest` checks (regenerate `build_jax_trunk_{lane,acrylamide}_reference.py`, then the module builders in the `maillard-jax` env). A fixture of hex floats written on macOS failed on the Linux runner (stiff solves differ up to 3.3e-7 rel.). Rule: when adding a config key, grep `results/validation` for `config_digest` and regenerate before pushing; compare cross-platform engine numbers with rtol ~1e-5, never bit-for-bit.
 
 - **Material a partner shares privately stays out of the public repository, comparisons included** (2026-11-24, owner). `docs/guides/READING_LIST_OVERLAP.md` compared the model's sources with a reading list a partner laboratory sent privately; even unnamed, the list and the overlap were theirs. Replaced by `KEY_SOURCES.md` (the model's own sources only); the overlap lives in the private scratch folder. Rule: before publishing anything derived from a partner's message, attachment or list, ask whether it would read differently if the partner saw it on GitHub; if so, keep it private.
+
+## "No admissible step" is not "no engine change" (2026-11-26, owner)
+- **What happened:** B65 found no mechanistic step inside cited bands for cysteine's effect on thiamine's MFT, and I
+  closed it as "no engine change". The engine's own claim (cysteine changes nothing) was contradicted by two published
+  laboratories, and I had left it shipped. The owner: "ideally, we'd always use the best engine for the evidence
+  available".
+- **Rule:** when a wave ends without an admissible step, ask separately whether the incumbent's claim survives the same
+  evidence. If measurements contradict it and the mechanism is undecided, carry a rival and refuse the outputs it
+  moves (the thiamine-H2S form). The incumbent is a rival like the others (symmetric sec. 7).

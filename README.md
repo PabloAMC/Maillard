@@ -73,7 +73,7 @@ much of the error cancels in a ratio. Absolute amounts are much less reliable.
 | question | today |
 | --- | --- |
 | Amounts within 3× of a published measurement it has never seen | **10 of 23** |
-| Direction of an effect ("more or less?") against published claims | **10 of 19**, no better than a coin |
+| Direction of an effect ("more or less?") against published claims | **9 of 17**, no better than a coin |
 | Meaty-compound amounts for a new laboratory | refused: laboratories differ too much |
 | Which experiment to run next | its most trustworthy output |
 

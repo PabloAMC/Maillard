@@ -4,7 +4,7 @@ pass band = 3.0x; contracts from each bundle's `validation_contract.scale_thresh
 
 * panel: **42** benchmarks, 10 scored, 32 fully refused; rows **23**, refused rows 70
 * within 3x: 10/23 (0.435); median fold 4.423, geometric mean 7.600, worst 365.609
-* **the denominator fell by refusal, not by any prediction improving**: since 2026-11-05 the 27 rows whose absolute level the thiol lane does not ship (H0 / EX-059, D2 branch (i)) are refused and out of every count here
+* **the denominator fell by refusal, not by any prediction improving**: since 2026-11-05 the 26 rows whose absolute level the thiol lane does not ship (H0 / EX-059, D2 branch (i)) are refused and out of every count here
 * evidence roles (core): {'external_holdout': 26, 'predictive': 16}
 * predictive benchmarks passing their contract: NONE; strict-ready: NONE
 * **honest literature: 10/23 within band** (0.435), 10 benchmarks, median fold 4.423, geometric mean 7.600
@@ -126,7 +126,7 @@ pass band = 3.0x; contracts from each bundle's `validation_contract.scale_thresh
 | resconi_2023_pbma_beef_identity_benchmark | trust_loop | furfural | NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measureme |
 | soy_isolate_40C_PratapSingh2021 | trust_loop | hexanal | THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's source says so, recorded as closure = 'never heated' (its timed block is the headspace in |
 | soy_isolate_40C_PratapSingh2021 | trust_loop | 2-pentylfuran | THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's source says so, recorded as closure = 'never heated' (its timed block is the headspace in |
-| thiamine_cys_glucose_120C_Bolton1994 | trust_loop | 2-Methyl-3-furanthiol (MFT) | NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measureme |
+| thiamine_cys_glucose_120C_Bolton1994 | trust_loop | 2-Methyl-3-furanthiol (MFT) | REFUSED, A THIOL DONOR'S EFFECT ON THIAMINE'S MFT ROUTE UNDECIDED (Grosch & Zeiler-Hilgart 1992 and Zhang 2024 vs the engine): 2-Methyl-3-furanthiol (MFT) (spread 0.79 dex): this pot is charged with thiamine and a thiol  |
 | mp_holdout_arp_glutathione_120C_120min_pH75_Zhou2023c | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measureme |
 | mp_holdout_arp_glutathione_120C_120min_pH75_Zhou2023c | maillard_path_holdout | 2-Furfurylthiol (FFT) | NOT EVALUABLE: ABSOLUTE LEVEL REFUSED (H0 / EX-059): the thiol lane ships relative predictions only (D2 branch (i): tau_ABS 0.964 dex, U >= 1.60; absolute thiol evidence from one laboratory). Lifted by absolute measureme |
 | mp_holdout_arp_glutathione_120C_120min_pH75_Zhou2023c | maillard_path_holdout | Furfural | NOT EVALUABLE: REFUSED, FALSIFIED pH BALANCE (S3; M1b part (i), CF-084, CF-134): computed on the sulfur lane's pH solved from the shipped charge balance, which S3 falsified on CF-084's controls with no rival credited (M1 |

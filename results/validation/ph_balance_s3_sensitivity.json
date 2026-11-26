@@ -2,12 +2,12 @@
   "artifact": "ph_balance_s3_sensitivity",
   "provenance": {
     "artifact": "ph_balance_s3_sensitivity",
-    "generated_on": "2026-11-17",
+    "generated_on": "2026-11-26",
     "git": {
-      "commit": "50a224ab99c4fccb04894bc96551a7a73d816e1b",
-      "short": "50a224ab",
-      "branch": "engine-gaps-thiamine-h2s",
-      "dirty": true
+      "commit": "b89f97ce2ee345920345b191aa2d2aba0f3c7d73",
+      "short": "b89f97ce",
+      "branch": "cys-thiamine-boost",
+      "dirty": false
     },
     "generated_by": "scripts/generators/build_ph_balance_s3_sensitivity.py",
     "wave": "S3 application: the pH balance (M1b part (i))",
@@ -42,7 +42,7 @@
       },
       {
         "path": "src/kinetic_core/ph_balance_refusal.py",
-        "sha256": "437dcedf8c18020a8f4934e3d9c319475c2d20ae374c1a92468919c06d2ec581"
+        "sha256": "b95dfd1315536173ef979904e028e3473c0d3de8c29284cca7c8fc82a4893205"
       },
       {
         "path": "results/validation/kinetic_core_thiol_lolo_nested_tau.json",
@@ -50,11 +50,11 @@
       },
       {
         "path": "src/kinetic_core/sulfur.py",
-        "sha256": "5ba0388889ef70e085e2a8adbcd82a091a9b469cca4a236a6ae3d2f603a2a98c"
+        "sha256": "f91b339516b898afabeb5f69a371931d558edbececc7629eb44489eb5a03e772"
       },
       {
         "path": "src/kinetic_core/parameters_sulfur.py",
-        "sha256": "2d50a1333e62ed833fb8d87d1eaa51e2d99faa8b6b986c96651362e13c8d27ea"
+        "sha256": "1e4a45dae5a3fa2112076fea7669683238aaac632ec9fca3762c6abb3b86aaac"
       },
       {
         "path": "results/validation/kinetic_core_b60_fit_report.json",

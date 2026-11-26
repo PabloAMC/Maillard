@@ -547,25 +547,28 @@ def test_core_scores_17_of_26_independent_directional_claims():
     # RE-PINNED 2026-11-07 (S3 application of M1b part (i), ph_balance_refusal): 19/32 -> 9/19; 13 independent claims whose arms or
     # steps move with the falsified pH balance (beyond omega, or in sign) are not evaluable. Not a skill change.
     # RE-PINNED AGAIN 2026-11-07 (review of #108: fix 1, the ratio rule decides every step): 9/19 -> 10/19 (SUG-04 back).
-    assert s["headline"] == [10, 19]
+    # RE-PINNED 2026-11-26 (B66, cysteine_thiamine_mft_refusal): 10/19 -> 9/17. Two independent MFT claims have an arm
+    # charged with thiamine and a thiol donor, where the engine's thiamine route is falsified with no rival credited:
+    # WANG12-01 (was an agree) and MOD08-PH-01 (was a miss) are not evaluable. Not a skill change.
+    assert s["headline"] == [9, 17]
     ind = s["independent"]
-    assert (ind["excluding_ph_aw"]["agree"], ind["excluding_ph_aw"]["evaluable"]) == (9, 15)   # was (14, 22) before S3
-    assert (ind["ph_aw"]["agree"], ind["ph_aw"]["evaluable"]) == (1, 4)   # was (5, 10) before S3
-    assert ind["total"]["not_evaluable"] == 56   # was 43 before S3
+    assert (ind["excluding_ph_aw"]["agree"], ind["excluding_ph_aw"]["evaluable"]) == (8, 14)   # B66: was (9, 15); (14, 22) before S3
+    assert (ind["ph_aw"]["agree"], ind["ph_aw"]["evaluable"]) == (1, 3)   # B66: was (1, 4); (5, 10) before S3
+    assert ind["total"]["not_evaluable"] == 58   # B66: was 56; 43 before S3
     assert ind["total"]["mechanism_absent"] == 0
     assert s["not_evaluable_reasons"]["refused by the engine"] >= 2
     cats = {k: (v["agree"], v["evaluable"]) for k, v in ind["by_category"].items()}
     assert cats["sugar_identity"] == (2, 5)  # 2026-11-07 (S3): was (4, 8)  # 2026-10-29: noise-aware rule (DIC-03 and two more not evaluable)  # was (5, 11):  # 2026-10-28: B60 + Amendment 45  # B15/B16: DIC-01 and DIC-03 miss; B51: SUG-09 flips (the hexose entry)
     assert cats["temperature"] == (4, 7)  # 2026-11-07 (S3): was (5, 8)  # 2026-10-29: noise-aware rule (was (5, 9))     # 2026-10-27 audit: TEMP-03 retired; WANG22 shapes retired; B51 +1
-    assert cats["ph"] == (1, 4)  # 2026-11-07 (S3): was (5, 10)               # B51 + PH-04/PH-05 retired (Cerny 2015 read in full); MOT-01 agrees with its pyrophosphate: MOT02-PH-01/02 and PH-03 not independent; arms of PH-01/02 set to Meynier & Mottram 1995
+    assert cats["ph"] == (1, 3)  # 2026-11-26 (B66): MOD08-PH-01 not evaluable, was (1, 4)  # 2026-11-07 (S3): was (5, 10)               # B51 + PH-04/PH-05 retired (Cerny 2015 read in full); MOT-01 agrees with its pyrophosphate: MOT02-PH-01/02 and PH-03 not independent; arms of PH-01/02 set to Meynier & Mottram 1995
     assert cats["moisture_aw"] == (0, 0)      # 2026-11-05: AW-03 refused (trunk a_w window); 2026-10-27 audit: AW-01 retired (source mismatch)
     assert cats["additive_cysteine"] == (1, 1)  # 2026-11-07 (S3, after the review's fix 1): unchanged  # 2026-10-27 audit: CYS-01 tautology, CYS-02 retired
     assert cats["time"] == (1, 1)  # 2026-11-07 (S3): was (2, 3)             # 2026-10-27 audit: TIME-01 and the WANG22 time shapes retired; B51 +1
     readme = _doc_text(OVERVIEW)
-    _assert_quoted(readme, "10 of 19", "TECHNICAL_OVERVIEW.md", "the core's directional headline")
-    _assert_quoted(_doc_text(README), "**10 of 19**", "README.md", "the short table's directional count")
-    _assert_quoted(readme, "9 of 15", "TECHNICAL_OVERVIEW.md", "the directional count excluding pH and water activity")
-    _assert_quoted(readme, "1 of 4", "TECHNICAL_OVERVIEW.md", "the directional count on pH and water activity")
+    _assert_quoted(readme, "9 of 17", "TECHNICAL_OVERVIEW.md", "the core's directional headline")
+    _assert_quoted(_doc_text(README), "**9 of 17**", "README.md", "the short table's directional count")
+    _assert_quoted(readme, "8 of 14", "TECHNICAL_OVERVIEW.md", "the directional count excluding pH and water activity")
+    _assert_quoted(readme, "1 of 3", "TECHNICAL_OVERVIEW.md", "the directional count on pH and water activity")
 
 
 @pytest.mark.artifact_rebuild
