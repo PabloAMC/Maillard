@@ -11,7 +11,7 @@ regenerates (`core-scores`, `core-directional`, `core-envelope`, `model-card`, .
 (`scripts/generators/WAVES.md`: not re-run, a change is a new wave). Every live artifact carries a
 `provenance` block (git head, date, input hashes: `src/provenance.py`).
 
-Tracked files: **1077**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
+Tracked files: **1081**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
 
 ## `results`
 
@@ -179,6 +179,7 @@ Tracked files: **1077**. Local-only (gitignored): scratch runs under `results/qu
 | `kinetic_core_b64_ramp_plus_hold_members/` (2 files) | B64 refits under the ramp + hold reading of the 145 C pots (two starts); no reading was chosen. |
 | `kinetic_core_b64_shape_sensitivity.json` | B64: the ramp's shape moved without refit (the reason Newtonian readings were refitted). |
 | `kinetic_core_b64_verification.*` (1): `kinetic_core_b64_verification.json` | B64's verification before its fit (prereg sec. 3-4): the quick setting against the careful one under each thermal reading on the inline pH coupling (V5), and B60's vector's cost under each reading (candidate C) (`generate_kinetic_core_b64_verification.py`). |
+| `kinetic_core_b65_*` (4): `kinetic_core_b65_cysteine_redox_prereg.md`, `kinetic_core_b65_plugin_screen.json`, `kinetic_core_b65_plugin_screen.md`, `kinetic_core_b65_premortem.md` | B65 (2026-11-26, owner amendment in STEP5_RECORD): cysteine as a thiol redox partner in the sulfur lane (thiol-disulfide exchange; cysteine on thiamine's MFT route). `_cysteine_redox_prereg.md` the draft pre-registration with its outcome amendment; `_premortem.md` the independent premortem; `_plugin_screen.{md,json}` the engine plug-in screen (shipped values and band corners, no fit), written by `scripts/generators/screen_b65_cysteine_redox.py`. Outcome: no admissible step; two open questions in docs/reference/decisive_measurements.yml. |
 | `kinetic_core_b8_members/` (2 files) | B8 optimiser members (two starts); read back by the B8 generator's consolidation. |
 | `kinetic_core_b9_members/` (2 files) | B9 optimiser members (two starts); read back by the B9 generator's consolidation. |
 | `kinetic_core_between_lab_tau_h0_prereg.md` | Inference track H, stage H0: the out-of-sample between-laboratory tau of the thiol lane from EX-056's leave-one-lab-out; strict nesting (leave-two-labs-out refits) primary, lab-weighted, scored by log density and interval score against both nulls; controls that can fail; PROVISIONAL until a second split. Frozen before any pair fit (v3, 2026-11-01). |

@@ -2728,6 +2728,24 @@ states every volatile number is a 120-min endpoint; only the free-Cys curves are
   show them. Found and fixed on the way: S3's own rival integrations must run with `thiamine_refusal=False`, and the
   verdict cache is keyed by the Config, else a verdict decided at an S3 rival point stood for the shipped one.
 
+### Cysteine as a thiol redox partner, B65 (2026-11-26, owner amendment in STEP5_RECORD.md)
+
+- [x] **2026-11-26.** Pre-registration `results/validation/kinetic_core_b65_cysteine_redox_prereg.md`: rivals A0-A2
+  (free/dimer split: engine, fast exchange with a cystine species, negative control) and B0-B4 (cysteine on the
+  thiamine route: engine, CF-089 concentration law, its temperature variant, oxidant scavenging, plus inhibition,
+  negative control); signatures S1-S8 (Zhang 2024 Fig. 1-2, Grosch 1992 directional, Bolton 1993, US 6,358,549);
+  decision rule and outcome probabilities written before any run.
+- [x] **2026-11-26.** Independent premortem (`kinetic_core_b65_premortem.md`): the draft was not fit to freeze
+  (`k_cys_ox` ships at zero, so A0 could not win; B1 is capped at x1.75 on S3; the pentose route confounds S1 and S3;
+  the dimer share may form during sampling).
+- [x] **2026-11-26.** Plug-in screen instead of a frozen sampler (lesson 2026-11-05): `kinetic_core_b65_plugin_screen.md`,
+  `scripts/generators/screen_b65_cysteine_redox.py`. Result:
+  - Exchange at equilibrium is refuted.
+  - The dimer share is met only by cysteine scavenging at a high oxidant charge, or by sampling-stage oxidation.
+  - No structure in cited bands reproduces Zhang 2024's x19 cysteine boost and monotone dose rise.
+  - **No engine change; the pause is back in force for these two changes.**
+  - Two open questions were added to `docs/reference/decisive_measurements.yml`.
+
 ## 6. Risks and guardrails
 
 | Risk | Guardrail |

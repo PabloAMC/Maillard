@@ -124,7 +124,7 @@ comes with the data.
   0/4000 joint reach) and trimethylpyrazine's only rate source is a TEST laboratory (Yu 2018), so both wait for a
   measurement. **Lifted 2026-11-17 by the owner for one change** (STEP5_RECORD amendment 2026-11-17): thiamine's H2S
   release above 100 C and below pH 6.25 is refused instead of set to zero; the fitted band and 3-mercapto-2-pentanone's
-  sugar route wait for data (premortem 2026-11-17). 1-octen-3-ol stays out of scope. The lipid zeros: scoped 11-14/15 in
+  sugar route wait for data (premortem 2026-11-17). **Lifted 2026-11-26 by the owner for two named changes** (STEP5_RECORD amendment 2026-11-26): cysteine's thiol-disulfide exchange and its effect on thiamine's MFT route, built from the literature and gated by an engine-free feasibility test ([B65 prereg](../../results/validation/kinetic_core_b65_cysteine_redox_prereg.md)); implementation needs a second owner approval. 1-octen-3-ol stays out of scope. The lipid zeros: scoped 11-14/15 in
   [L1_lipid_lever_coupling_scoping.md](../reference/cases/L1_lipid_lever_coupling_scoping.md) (a thiol / H2S carbonyl sink for the
   sulfur lever; waits with the rest). | the updated design (one laboratory), its premortem, A7, the outreach package; ready for the owner (16h done) | 6 h (16a - 16d done); 16e 3 h, 16f 3 h, 16h 3 h |
 | later | **Without a laboratory, optional:** requests to authors for supplementary tables of the discordant cells (drafted here, sent by the owner) | -- | -- |
